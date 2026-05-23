@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\title{Explicit Nash Equilibrium in the Simplified Linear-Utility Two-Player Model}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview and Purpose}
+
+This document derives closed-form expressions for the Nash equilibrium mixing parameters $\lambda_L^*$ and $\lambda_H^*$ in a highly simplified two-player model that captures the core macro dynamics of the original N-player stochastic job-swap system.  
+
+We deliberately relax the Friedman--Savage S-shaped utility to linear utility $u(y) = y$ (pure risk neutrality), while preserving the essential behavioral asymmetry through class-specific quadratic risk premiums:  
+- Low-rank player receives a positive premium for lottery allocation (mimicking risk-seeking / convexity effect).  
+- High-rank player receives a negative premium (mimicking risk-aversion / concavity effect).  
+
+The result is a tractable model with explicit solutions that reproduce persistent inequality, higher lottery exposure at the bottom, and stability at the top — without stochastic draws or nonlinear utility curvature.
+
+\section{Model Setup}
+
+Two players exist: low-rank (L) and high-rank (H).  
+
+Each receives current income $m_w$ at the beginning of period $t$:  
+$m_L = R \mu$, \quad $m_H = R(1-\mu)$, \quad \mu \in (0, 0.5)$, \quad R > 0$ (total resource scale).
+
+Each player chooses a mixing parameter $\lambda_w \in [0,1]$:  
+- fraction $\lambda_w$ of current income allocated to a shared lottery pool,  
+- fraction $1 - \lambda_w$ allocated to upskilling (safe improvement channel).
+
+Net income $y_w$ (which is consumed entirely this period and becomes next-period income $m_w^{t+1} = y_w^t$, no saving) is:
+
+\begin{align*}
+y_w &= m_w + \eta(1 - \lambda_w) m_w - C_w(\lambda_w) - \lambda_w m_w \\
+    &\quad + s_w \kappa \Pi + \rho_w(\lambda_w)
+\end{align*}
+
+where the components are defined as follows:
+
+\begin{itemize}[leftmargin=*]
+    \item $\Pi = \lambda_L m_L + \lambda_H m_H$ \quad (total size of shared lottery pool)
+    \item $s_w = \dfrac{\lambda_w m_w}{\Pi}$ \quad (player's proportional share of the pool)
+    \item $\kappa \approx 1$ \quad (mean return per unit contributed to the pool; fairness parameter)
+    \item $\eta \in (0,1)$ \quad (efficiency of upskilling investment)
+    \item $C_w(\lambda_w) \approx b \eta (1 - \lambda_w) m_w$ \quad (linearized upskilling cost, $b > 1$ approximates original power-law friction)
+    \item $\rho_w(\lambda_w) = p_w \lambda_w^2$ \quad (quadratic risk-premium approximation)
+          \begin{itemize}
+              \item $p_L > 0$ \quad $\to$ extra deterministic bonus for higher $\lambda_L$ (proxies convexity / risk-seeking)
+              \item $p_H < 0$ \quad $\to$ deterministic penalty for higher $\lambda_H$ (proxies concavity / risk-aversion)
+          \end{itemize}
+\end{itemize}
+
+Because utility is linear, each player simply maximizes $y_w$ with respect to their own $\lambda_w$ (treating the other's choice as fixed).
+
+\section{Derivation of Closed-Form Equilibrium}
+
+\subsection{Low-rank player's first-order condition}
+
+Differentiate $y_L$ with respect to $\lambda_L$ (ignoring small higher-order terms in share derivative for tractability):
+
+\begin{align*}
+\frac{\partial y_L}{\partial \lambda_L} 
+&\approx -\eta m_L + b \eta m_L - m_L + \kappa m_L \cdot (\text{share adjustment term}) 
+  + 2 p_L \lambda_L
+\end{align*}
+
+After simplification (dominant linear terms + quadratic premium, dropping complex share cross-derivative):
+
+\[
+\frac{\partial y_L}{\partial \lambda_L} \approx (- \eta + b \eta - \kappa + 1) m_L + 2 p_L \lambda_L
+\]
+
+Set the derivative to zero:
+
+\[
+(- \eta + b \eta - \kappa + 1) m_L + 2 p_L \lambda_L = 0
+\]
+
+Solve for $\lambda_L^*$:
+
+\[
+\lambda_L^* = \frac{ m_L (\eta - b \eta + \kappa - 1) }{-2 p_L}
+= \frac{ m_L (b \eta - \eta - \kappa + 1) }{2 p_L}
+\]
+
+(since $p_L > 0$ and the numerator is typically positive when upskilling costs dominate).
+
+\subsection{High-rank player's first-order condition}
+
+The derivation is symmetric:
+
+\[
+\lambda_H^* = \frac{ m_H (b \eta - \eta - \kappa + 1) }{2 p_H}
+\]
+
+Because $p_H < 0$, the denominator is negative, which tends to produce small (or negative) values for $\lambda_H^*$, often clipped at the boundary.
+
+\subsection{Bounding the solutions}
+
+Final equilibrium values are bounded to the feasible interval:
+
+\[
+\lambda_w^* = \max\bigl(0, \min\bigl(1, \dfrac{m_w (b \eta - \eta - \kappa + 1)}{2 p_w}\bigr)\bigr)
+\qquad \text{for } w = L, H
+\]
+
+\section{Interpretation of the Closed-Form Expressions}
+
+\begin{itemize}
+    \item The common factor $(b \eta - \eta - \kappa + 1)$ captures the net marginal benefit of moving one unit of income from upskilling to the lottery pool.
+          \begin{itemize}
+              \item Higher $b \eta$ (more expensive/costly upskilling) $\to$ favors lottery.
+              \item Higher $\kappa$ (more generous lottery return) $\to$ favors lottery.
+          \end{itemize}
+    \item Division by $2 p_w$ scales the response to the risk-premium strength:
+          \begin{itemize}
+              \item $p_L > 0$ $\to$ larger premium reduces $\lambda_L^*$ (quadratic saturation effect).
+              \item $p_H < 0$ $\to$ larger $|p_H|$ increases $\lambda_H^*$ toward 1 (but usually still clips at 0).
+          \end{itemize}
+    \item The income term $m_w$ in the numerator means richer players receive proportionally larger absolute responses — but the sign of $p_w$ dominates direction.
+\end{itemize}
+
+\section{Numerical Illustration}
+
+Baseline parameters: $R=1$, $\mu=0.2$ $\implies m_L=0.2$, $m_H=0.8$,  
+$\eta=0.9$, $b=2$, $\kappa=1$, $p_L=0.5$, $p_H=-0.3$.
+
+Common term: $b\eta - \eta - \kappa + 1 = 1.8 - 0.9 - 1 + 1 = 0.9$
+
+Equilibrium:
+
+\begin{align*}
+\lambda_L^* &= \frac{0.2 \times 0.9}{2 \times 0.5} = \frac{0.18}{1} = 0.180 \\
+\lambda_H^* &= \frac{0.8 \times 0.9}{2 \times (-0.3)} = \frac{0.72}{-0.6} = -1.20 \quad \to \boxed{0}
+\end{align*}
+
+The high player fully avoids the lottery ($\lambda_H^* = 0$), consistent with ``sticky top'' behavior in the original model.
+
+\section{Remarks}
+
+These closed-form expressions are simple, interpretable, and computationally trivial — ideal for analytical comparative statics, spreadsheet experiments, or teaching.  
+
+The corner solution for $\lambda_H^*$ is typical when the negative premium is strong; it faithfully reproduces the original model's qualitative pattern of low-rank churning and high-rank stability.  
+
+To obtain interior solutions for both players, reduce $|p_H|$ or introduce a small positive bias in the high player's lottery return.
+
+\end{document}

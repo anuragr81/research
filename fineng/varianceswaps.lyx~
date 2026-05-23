@@ -1,0 +1,795 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\rightmargin 3cm
+\footskip 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Replication Algorithm for Variance Swap Pricing
+\end_layout
+
+\begin_layout Author
+Anurag Srivastava (anurag.srivastava@riskcare.com)
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The document describes the details of pricing a swap based on a replication-port
+folio comprising of a log-contract and a stock or future position.
+ The replication determines the price based on the volatilities across the
+ skew while maintaining a constant dollar gamma for the portfolio.
+ The main inputs to the model are 
+\end_layout
+
+\begin_layout Enumerate
+Stock prices or Futures Prices
+\end_layout
+
+\begin_layout Enumerate
+Call options with strikes above and below a certain threshold close to the
+ initial stock price 
+\begin_inset Formula $S_{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Put options with strikes above and below a certain threshold close to the
+ initial futures price 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The stochastic volatility models are currently out of scope for the current
+ document.
+ 
+\end_layout
+
+\begin_layout Section
+Black Scholes Model
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The basic idea for pricing is to construct a portfolio of European options
+ weighted as the inverse strike squared gives a constant exposure to volatility.
+ Notice that at each hedging interval, the PNL is given as follows for gamma
+ 
+\begin_inset Formula $\Gamma_{i}$
+\end_inset
+
+, the return 
+\begin_inset Formula $R_{i}$
+\end_inset
+
+ of the underlying, the variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+and the time-step size 
+\begin_inset Formula $\delta t$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{2}\sum_{i}\Gamma_{i}S_{i}^{2}(R_{i}^{2}-\sigma^{2}\delta t)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice also that 
+\begin_inset Formula $\theta=-\frac{1}{2}\Gamma S^{2}\sigma^{2}$
+\end_inset
+
+.
+ A portfolio proportional to 
+\begin_inset Formula $\frac{1}{S_{i}}$
+\end_inset
+
+ would evidently keep a constant second-derivative i.e.
+ gamma 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+ (
+\begin_inset Formula $\propto\frac{1}{S_{i}^{2}}$
+\end_inset
+
+) .
+ More generally, we can say that the payoff 
+\begin_inset Formula $alnS+bS+c$
+\end_inset
+
+ would have a constant 
+\begin_inset Formula $\Gamma$
+\end_inset
+
+.
+ A variance swap can thus be replicated with a log contract with options
+ which are then delta-hedged.
+ The following expression summarise how a combination of puts and calls
+ approximates the payoff 
+\begin_inset Formula $alnS+bS+c$
+\end_inset
+
+ (with price of underlying
+\begin_inset Formula $S_{T}$
+\end_inset
+
+at time 
+\begin_inset Formula $T$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+\int_{0}^{S_{0}}\frac{(K-S_{T})^{+}}{K^{2}}dK+\int_{S_{0}}^{\infty}\frac{(S_{T}-K)^{+}}{K^{2}}dK & =\frac{S_{T}}{S_{0}}-ln(\frac{S_{T}}{S_{0}})\label{eq:main_replication}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The replication can also be derived in terms of Stock prices using Black-Scholes
+ assumptions (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Stocks-based-replication"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Futures-based replication
+\end_layout
+
+\begin_layout Standard
+We now discuss how the replication summarised with Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:main_replication"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ can be performed using futures prices 
+\begin_inset Formula $F_{t}$
+\end_inset
+
+ (at time 
+\begin_inset Formula $t$
+\end_inset
+
+) and 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+.
+ As discussed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "allenJPMvarianceswaps2006,carrmadanvoltrading1998"
+literal "false"
+
+\end_inset
+
+, the average variance over time 
+\begin_inset Formula $\frac{1}{T}\int_{0}^{T}\sigma_{t}dt$
+\end_inset
+
+ can be written as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}\label{eq:replication_with_futures_main}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first-term can be replicated by taking a static position in a contract
+ that pays 
+\begin_inset Formula $\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)$
+\end_inset
+
+ and the second-term can be replicated by a continuously rebalanced futures
+ position.
+ As detailed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "carrmadanvoltrading1998"
+literal "false"
+
+\end_inset
+
+, this can be performed using calls and puts with a position 
+\begin_inset Formula $\frac{1}{K^{2}}$
+\end_inset
+
+ using the following expression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+log(\frac{F_{0}}{F_{T}})+\frac{F_{T}}{F_{0}}-1) & =\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plugging this in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:replication_with_futures_main"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we have 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Black-Scholes assumptions allow us to replicate a variance swap by holding
+ 
+\begin_inset Formula $\frac{1}{F_{t}}-\frac{1}{F_{0}}$
+\end_inset
+
+ unites of futures at 
+\begin_inset Formula $t$
+\end_inset
+
+ and a set of calls and puts spread across futures price 
+\begin_inset Formula $F_{0}$
+\end_inset
+
+.
+ The forward cost of this portfolio is can be written as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming a set of equally spaced strikes 
+\begin_inset Formula $K_{0},...,K_{r},K_{r+1},...,K_{n}$
+\end_inset
+
+ where 
+\begin_inset Formula $K_{0},K_{1},..,K_{r}$
+\end_inset
+
+ are strikes for puts and 
+\begin_inset Formula $K_{r+1},K_{r+2},...,K_{n}$
+\end_inset
+
+ are strikes for calls.
+ Since the options are equally-spaced we have 
+\begin_inset Formula $\Delta_{K}=K_{i+1}-K_{i}\text{ for all }i\in[1,n-1]$
+\end_inset
+
+.
+ The replication portfolio that approximates 
+\begin_inset Formula $\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK$
+\end_inset
+
+ is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=0}^{r} & \frac{\Delta_{K}P(K_{i})}{K_{i}^{2}}+\sum_{i=r+1}^{n}\frac{\Delta_{K}C(K_{i})}{K_{i}^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For a given variance notional exposure 
+\begin_inset Formula $N_{var}$
+\end_inset
+
+, one must hold 
+\begin_inset Formula $\frac{2\Delta_{K}N_{var}}{TK^{2}}$
+\end_inset
+
+ of each of option.
+ 
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Stocks-based-replication"
+
+\end_inset
+
+Stocks-based replication
+\end_layout
+
+\begin_layout Standard
+The Black-Scholes assumptions readily lead to a replciation algorithm that
+ is now described (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "demeterfidermanvolswaps1999"
+literal "false"
+
+\end_inset
+
+).
+ Notice first that 
+\begin_inset Formula $d(log\ S_{t})=(\mu-\frac{\sigma^{2}}{2})dt+\sigma dZ_{t}$
+\end_inset
+
+ (for normal variable 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+) leads to 
+\begin_inset Formula $\frac{1}{2}\sigma^{2}dt=\frac{dS_{t}}{S_{t}}-d(log\ S_{t})$
+\end_inset
+
+.
+ This in turn implies that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{1}{T}\int_{0}^{T}\sigma^{2}dt & =\frac{2}{T}(\int_{0}^{T}\frac{dS_{t}}{S_{t}}-log(\frac{S_{T}}{S_{0}}))\label{eq:BlackScholesVariance}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using 
+\begin_inset Formula $E(\int_{0}^{T}\frac{dS_{t}}{S_{t}})=rT$
+\end_inset
+
+ and a boundary 
+\begin_inset Formula $S_{*}$
+\end_inset
+
+ between calls and puts, we make use of the following identity (see Derman)
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+log(\frac{S_{T}}{S_{0}})=log(\frac{S_{*}}{S_{0}})+log(\frac{S_{T}}{S_{*}})\\
+=log(\frac{S_{*}}{S_{0}})-(\int_{0}^{S_{*}}\frac{(K-S_{T})^{+}}{K^{2}}+\int_{S_{*}}^{\infty}\frac{(S_{T}-K)^{+}}{K^{2}}-\frac{S_{T}-S_{*}}{S_{*}})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:BlackScholesVariance"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ becomes 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E(\int_{0}^{T}\sigma_{t}^{2}dt) & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}})+e^{rT}\int_{0}^{S*}\frac{1}{K^{2}}P(K)dK+e^{rT}\int_{S_{*}}^{\infty}\frac{1}{K^{2}}C(K)dK
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $K_{Var}\equiv E(\int_{0}^{T}\sigma_{t}^{2}dt)$
+\end_inset
+
+ is called the strike of the variance swap..
+\end_layout
+
+\begin_layout Standard
+We can rewrite 
+\begin_inset Formula $K_{var}$
+\end_inset
+
+ as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+K_{var} & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The term 
+\begin_inset Formula $\Pi_{CP}$
+\end_inset
+
+ is the following value of the portfolio of puts and calls where the weights
+ of the portfolio are calculated using a recursive algorithm described in
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Algorithm-to-replicate-logcontract"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\Pi_{CP} & =\sum_{i}w(K_{ip})P(S,K_{ip})+\sum_{i}w(K_{ic})C(S,K_{ic})\label{eq:portfolio_derman_cp}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Algorithm-to-replicate-logcontract"
+
+\end_inset
+
+Algorithm to replicate Log-contract
+\end_layout
+
+\begin_layout Standard
+With the portfolio in Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:portfolio_derman_cp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, let's consider calls with strikes 
+\begin_inset Formula $K_{1c,}K_{2c}$
+\end_inset
+
+ etc.
+ such that 
+\begin_inset Formula $S_{*}<K_{1c}<K_{2c}<...$
+\end_inset
+
+ and puts 
+\begin_inset Formula $K_{1p},K_{2p}$
+\end_inset
+
+etc.
+ such that 
+\begin_inset Formula $S_{*}>K_{1c}>K_{2c}...$
+\end_inset
+
+ - where 
+\begin_inset Formula $S^{*}$
+\end_inset
+
+ is the boundary between calls and puts.
+ We can set this to initial value of the stock i.e.
+ 
+\begin_inset Formula $S_{*}=S_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's consider the strike 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ at the boundary (reference) stock-price 
+\begin_inset Formula $S_{*}$
+\end_inset
+
+.
+ The weight associated with the option struck at 
+\begin_inset Formula $K_{0}$
+\end_inset
+
+ would be set to 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{c}(K_{0}) & =\frac{f(K_{1c})-f(K_{0})}{K_{1c}-K_{0}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $f(S_{T})$
+\end_inset
+
+ is defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(S_{T}) & =\frac{2}{T}(\frac{S_{T}-S_{*}}{S_{*}}-log(\frac{S_{T}}{S_{*}}))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The (units) weights for calls in the portfolio are given by 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{c}(K_{n,c}) & =\frac{f(K_{n+1,c})-f(K_{n,c})}{K_{n,c}-K_{n+1,c}}-\sum_{i=0}^{n-1}w_{c}(K_{i,c})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, we can obtain the weights associated with puts by first setting
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{p}(K_{0}) & =\frac{f(K_{1p})-f(K_{0})}{K_{1p}-K_{0}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and then holding other weights of puts determined by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+w_{p}(K_{n,p}) & =\frac{f(K_{n+1,p})-f(K_{n,p})}{K_{n,p}-K_{n+1,p}}-\sum_{i=0}^{n-1}w_{p}(K_{i,p})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Greeks
+\end_layout
+
+\begin_layout Standard
+The greeks relevant for variance swaps can also be calculated using the
+ dynamics of Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:main_replication"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "fineng"
+options "ieeetr"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

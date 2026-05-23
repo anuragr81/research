@@ -1,0 +1,107 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\title{Convexity-Based Approximation and Weighted Two-Class Reduced-Form Model}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Core Idea: Convexity Approximation in the Non-Stochastic Model}
+
+In the original N-worker model, the lottery delivers a stochastic prize drawn from a Pareto distribution with heavy right tail. Low-position workers favor it because the utility function is convex below the reference point $r$ ($\gamma_\text{low} > 1$), implying
+\[
+\mathbb{E}[u(y)] > u(\mathbb{E}[y])
+\]
+for random $y$ with positive variance. Convexity amplifies rare large upside outcomes, creating effective risk-loving behavior despite a roughly mean-preserving lottery.
+
+In the simplified non-stochastic two-class model, we avoid repeated random draws. Instead, we replace stochastic lottery prizes with a deterministic equivalent that includes a linearized risk premium capturing the second-order welfare effect of variance via utility curvature.
+
+The effective lottery benefit for a representative agent in class $w$ is
+\[
+s_w \cdot \kappa \Pi + \rho_w,
+\]
+where $s_w \cdot \kappa \Pi$ is the mean pool return share and
+\[
+\rho_w = \frac{1}{2} u''(m_w) \cdot \widehat{\sigma}_w^2
+\]
+is the risk-adjustment term. A simple proxy for virtual variance is
+\[
+\widehat{\sigma}_w^2 = c \cdot ((1 - \lambda_w) m_w)^2 \qquad (c > 0 \text{ calibration constant}).
+\]
+With
+\[
+u''(y) = 
+\begin{cases} 
+\gamma_\text{low}(\gamma_\text{low}-1) y^{\gamma_\text{low}-2} & y \leq r \\
+\gamma_\text{high}(\gamma_\text{high}-1) y^{\gamma_\text{high}-2} & y > r
+\end{cases},
+\]
+we obtain $u'' > 0$ below $r$ ($\rho_w > 0$, bonus) and $u'' < 0$ above $r$ ($\rho_w < 0$, penalty).
+
+Advantages include deterministic dynamics, faster computation, and preservation of qualitative asymmetry. Limitations include loss of higher-order tail effects and dependence on calibration of $c$.
+
+\section{Weighted Two-Class Reduced-Form Model}
+
+We consider a reduced-form model with unequal population masses: large mass $f_L$ of lower-ranked workers (typically $f_L \approx 0.8$--$0.95$) and small mass $f_H = 1 - f_L$ of higher-ranked workers. Aggregate income shares remain $R\mu$ for the low class and $R(1-\mu)$ for the high class ($\mu < 0.5$), so per-capita incomes are
+\[
+m_L = \frac{R \mu}{f_L}, \qquad m_H = \frac{R (1-\mu)}{f_H}.
+\]
+Each representative agent in class $w$ chooses $\lambda_w \in [0,1]$, the **fraction of per-capita income allocated to upskilling** (safe improvement channel). The fraction allocated to the shared lottery pool is therefore $1 - \lambda_w$.
+
+Aggregate lottery pool:
+\[
+\Pi = f_L (1 - \lambda_L) m_L + f_H (1 - \lambda_H) m_H.
+\]
+Lottery return to a representative agent in class $w$:
+\[
+\kappa f_w (1 - \lambda_w) m_w.
+\]
+
+Net income per representative lower-ranked worker:
+\begin{align*}
+y_L &= m_L + \eta \lambda_L m_L - C_L(\lambda_L) - (1 - \lambda_L) m_L \\
+    &\quad + \kappa f_L (1 - \lambda_L) m_L + \rho_L(1 - \lambda_L),
+\end{align*}
+with $C_L(\lambda_L) \approx b \eta \lambda_L m_L$ and $\rho_L(1 - \lambda_L) = p_L (1 - \lambda_L)^2$ ($p_L > 0$).
+
+Net income per representative higher-ranked worker:
+\begin{align*}
+y_H &= m_H + \eta \lambda_H m_H - C_H(\lambda_H) - (1 - \lambda_H) m_H \\
+    &\quad + \kappa f_H (1 - \lambda_H) m_H + \rho_H(1 - \lambda_H),
+\end{align*}
+with $C_H(\lambda_H) \approx b \eta \lambda_H m_H$ and $\rho_H(1 - \lambda_H) = p_H (1 - \lambda_H)^2$ ($p_H < 0$).
+
+With linear utility $u(y) = y$, each class maximizes own net income (Nash, treating other's $\lambda$ fixed).
+
+\subsection{Low-class first-order condition}
+\[
+\frac{\partial y_L}{\partial \lambda_L} \approx (\eta - b\eta - \kappa f_L + 1) m_L - 2 p_L (1 - \lambda_L) = 0
+\]
+Solving gives:
+\[
+\lambda_L^* = 1 - \frac{m_L (\kappa f_L - \eta + b\eta - 1)}{2 p_L},
+\]
+bounded as $\lambda_L^* = \max\!\bigl(0, \min\!\bigl(1, \text{above}\bigr)\bigr)$.
+
+\subsection{High-class first-order condition}
+\[
+\frac{\partial y_H}{\partial \lambda_H} \approx (\eta - b\eta - \kappa f_H + 1) m_H - 2 p_H (1 - \lambda_H) = 0
+\]
+Solving gives:
+\[
+\lambda_H^* = 1 - \frac{m_H (\kappa f_H - \eta + b\eta - 1)}{2 p_H},
+\]
+bounded as $\lambda_H^* = \max\!\bigl(0, \min\!\bigl(1, \text{above}\bigr)\bigr)$.
+
+\subsection{Interpretation with higher mass at bottom}
+When $f_L \gg f_H$, the aggregate lottery pool is dominated by lower-ranked contributions. The lottery becomes a ``mass institution'' primarily funded and used by the poor, while the small elite can safely allocate almost all to upskilling ($\lambda_H^* \approx 1$) without collapsing the pool. The model preserves churning at the bottom and stickiness at the top, now with realistic population asymmetry.
+
+\end{document}

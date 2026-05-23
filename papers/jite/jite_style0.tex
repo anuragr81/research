@@ -1,0 +1,131 @@
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    tmargin=4.2cm,bmargin=7.1cm,
+    lmargin=4.4cm,rmargin=4.5cm,
+    headsep=0.35cm
+    }
+
+\pagestyle{myheadings}\markboth{}{}
+
+\usepackage{lscape}
+
+\renewcommand{\normalsize}{\fontsize{10}{11.6}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{8}{9}\selectfont}
+
+\parskip=0pt
+\parindent=0.35cm
+\frenchspacing
+
+\makeatletter
+\renewenvironment{quote}
+               {\list{}{\footnotesize
+                        \leftmargin=0.4cm
+                        \rightmargin=0.4cm
+                        \parsep=6pt}
+                \item\relax}
+               {\endlist}
+\makeatother
+
+\renewenvironment{abstract}{\begin{quote}}{\end{quote}}
+\newcommand{\Keywords}[1]{\textit{Keywords:} #1}
+\newcommand{\JEL}[1]{\textit{JEL classification code:} #1}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\centering\normalsize\itshape}
+\titlespacing*{\section}{0pt}{20pt}{6pt}
+\titleformat*{\subsection}{\normalsize\itshape}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titleformat*{\subsubsection}{\normalsize\rmfamily}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titleformat*{\paragraph}{\normalsize\itshape}
+\titlespacing*{\paragraph}{0pt}{8pt}{10pt}
+
+%\usepackage{appendix}
+\renewcommand{\appendix}{\par
+  \pdfbookmark[1]{Appendix}{appendix}
+  \setcounter{subsection}{0}
+  \renewcommand{\thesubsection}{A.\arabic{subsection}}
+  \setcounter{subsubsection}{0}
+  \renewcommand{\thesubsubsection}{A.\arabic{subsection}.\arabic{subsubsection}}
+  \setcounter{equation}{0} \renewcommand{\theequation}{A\arabic{equation}}
+  \setcounter{table}{0}
+  \renewcommand{\thetable}{A\arabic{table}}
+  \setcounter{figure}{0}
+  \renewcommand{\thefigure}{A\arabic{figure}}}
+
+%\usepackage{enumitem}
+
+\setlist[itemize]{label=$-$,topsep=6pt,
+parsep=0pt,itemsep=1pt,leftmargin=*,align=left}
+%{label=$-$,$\ast$,$\cdot$,$\circ$,
+%$\diamond$,$\triangleleft$,$\triangleright$,$\star$, $\bullet$}
+
+\setlist[enumerate]{topsep=6pt,parsep=0pt,itemsep=1pt,
+    leftmargin=*,align=left,widest=l)}
+%{label=\arabic*,\alph*,\roman*,\Alph*,\Roman*,widest=...}
+%label=(\roman*),widest=m; \Roman*,widest=III
+%label=Stage~\arabic*:,Step~\arabic*:
+
+\usepackage[breaklinks,hidelinks]{hyperref}
+\urlstyle{same}
+
+\usepackage{hyphenat}
+\hyphenation{Muehl-heu-sser Span-iard infra-structure de-fend-ant}
+
+
+%\usepackage{amsmath}
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{8pt}
+  \setlength\belowdisplayskip{8pt}
+  \setlength\abovedisplayshortskip{4pt}
+  \setlength\belowdisplayshortskip{4pt}
+}
+\makeatother
+
+%\usepackage{amsfonts,amssymb,amsthm}
+\newtheoremstyle{JITEth}
+{8pt}{8pt}{\itshape}{ }{\scshape}{ }{ }
+{\thmname{#1} \thmnumber{\textsc{#2}}\thmnote{\ (#3)}}
+\theoremstyle{JITEth}
+
+\renewenvironment{proof}
+{\noindent\textsc{Proof}\enskip}{\hfil\penalty50\parfillskip=0pt\break}
+\renewcommand{\qed}
+{\hspace*{\fill}\textit{Q.E.D.}}
+
+\renewcommand{\cdots}{{\cdot\!\cdot\!\cdot}}
+\renewcommand{\ldots}{...}
+
+\allowdisplaybreaks[3]
+
+\usepackage{array}
+\setlength{\extrarowheight}{2pt}
+
+\usepackage[font=footnotesize,labelfont=it,labelsep=newline,justification=centering]{caption}
+\addtolength{\abovecaptionskip}{-0.2cm}
+
+\usepackage[para]{threeparttable}
+\usepackage{multicol,multirow}
+\usepackage{footnote}\makesavenoteenv{tabular}
+
+\usepackage[center,footnotesize]{subfigure}
+\usepackage[figuresright]{rotating}
+
+%\usepackage{natbib}
+%\bibliographystyle{jite2022}
+\let\bibfont=\small
+\setlength{\bibsep}{0pt}
+
+\newcommand{\Address}[1]{\bigbreak\noindent\small #1}
+
+\newenvironment{2Addresses}
+{\bigbreak\parindent=0pt\setlength{\tabcolsep}{0pt}\small
+\begin{tabular}{p{5.5cm}@{\hspace{1cm}} p{5.5cm}}}
+{\end{tabular}}
+
+%************************************************************
+\newcommand{\Red}[1]{\textcolor{red}{#1}}
+\newcommand{\Margin}[1]{\marginpar{\raggedright
+$\leftarrow$ \footnotesize\Red{#1}}}

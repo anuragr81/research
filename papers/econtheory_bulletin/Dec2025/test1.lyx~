@@ -1,0 +1,713 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{graphicx}% If figures needed
+
+\title{Signaling and Inequality: A Tournament Model of Endogenized Status Investments}
+\author{Your Name}
+\date{December 14, 2025}
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+maketitle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+The effects of income inequality on motivation remain debated amid stagnant mobility.
+ Although status is central to inequality discussions,
+ it is rarely endogenized in models,
+ limiting insights into dynamic interactions.
+ This paper presents a game-theoretic model combining innate ability and social capital in small-scale status tournaments,
+ where investments signal traits while enhancing productivity.
+ In a dynamic hierarchy of high- and low-status positions,
+ relative income and participation costs drive outcomes.
+ Moderate inequality stimulates investments,
+ but excess renders tournaments unsustainable;
+ costs rise endogenously with competition;
+ and only two stable equilibria emerge—
+universal or elite-only participation.
+ These results highlight how signaling sustains inequality traps,
+ extending static status models to probabilistic settings.
+ 
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+The mechanisms through which relative income shapes participation are contested.
+ Some view inequality as an incentive rewarding effort and mobility 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Baron2017"
+literal "false"
+
+\end_inset
+
+,
+ while others see it discouraging long-term productivity 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gesiarz2020"
+literal "false"
+
+\end_inset
+
+.
+ Static treatments of status obscure these dynamics:
+ investments respond to both subjective (perceived rank) and objective (structural) positions 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegener1992"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This paper endogenizes status in a model of social capital investments,
+ incorporating signaling via networks and affiliations.
+ Agents compete in probabilistic tournaments for high-status positions (income 
+\begin_inset Formula $y_{2}>y_{1}$
+\end_inset
+
+),
+ blending raw talent (
+\begin_inset Formula $r\sim U[0,1]$
+\end_inset
+
+) and acquired capital (
+\begin_inset Formula $s\sim U[0,1]$
+\end_inset
+
+,
+ weighted by 
+\begin_inset Formula $\mu<1/2$
+\end_inset
+
+ for signaling dominance).
+ Success depends on income gaps (
+\begin_inset Formula $\Delta y=y_{2}-y_{1}$
+\end_inset
+
+) and participation costs (
+\begin_inset Formula $\nu$
+\end_inset
+
+),
+ with reference-dependent utility capturing local contentment.
+\end_layout
+
+\begin_layout Standard
+Three results emerge:
+ (1) Moderate 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+ boosts investments,
+ but high 
+\begin_inset Formula $\Delta y/\nu$
+\end_inset
+
+ makes tournaments unsustainable;
+ (2) Competition endogenously raises 
+\begin_inset Formula $\nu$
+\end_inset
+
+,
+ limiting mobility;
+ (3) Two stable Nash equilibria:
+ universal (low 
+\begin_inset Formula $\nu/\Delta y$
+\end_inset
+
+) or elite-only (high 
+\begin_inset Formula $\nu/\Delta y$
+\end_inset
+
+).
+ These clarify opportunity-outcome tensions,
+ with welfare favoring universal under low costs.
+\end_layout
+
+\begin_layout Standard
+The model extends signaling 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Spence1973"
+literal "false"
+
+\end_inset
+
+ and status theory 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BenabouTirole2003"
+literal "false"
+
+\end_inset
+
+ by dynamizing hierarchies,
+ where status indirectly affects outcomes via participation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Postlewaite1998"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Literature Survey
+\end_layout
+
+\begin_layout Standard
+Inequality's motivational role spans economics and sociology.
+ Early views emphasize incentives for effort 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BeckerTomes1979,Baron2017"
+literal "false"
+
+\end_inset
+
+,
+ but recent work shows thresholds where it erodes trust and participation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AlesinaPerotti1996,Stiglitz2012,Chetty2014"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Status complicates this:
+ as a motivator 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Frank1993,BenabouTirole2003"
+literal "false"
+
+\end_inset
+
+,
+ it contrasts social vs.
+ economic goals,
+ hindering endogenization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Goode1978"
+literal "false"
+
+\end_inset
+
+.
+ Yet status is intertwined with rewards 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MoldovanuSelaShi2007"
+literal "false"
+
+\end_inset
+
+,
+ shaping behavior via objective/subjective rank 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wegener1992,Postlewaite1998"
+literal "false"
+
+\end_inset
+
+.
+ Tournament models capture this indirectly through relative ranking.
+\end_layout
+
+\begin_layout Standard
+Signaling theory 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Spence1973"
+literal "false"
+
+\end_inset
+
+ and job competition 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thurow1975"
+literal "false"
+
+\end_inset
+
+ view investments as positional signals,
+ not just productivity enhancers.
+ This paper integrates these into dynamic tournaments,
+ endogenizing status to reveal when inequality motivates vs.
+ entrenches exclusion—
+addressing gaps in static frameworks.
+\end_layout
+
+\begin_layout Section
+Model
+\end_layout
+
+\begin_layout Subsection
+Basic Setup and Intuition
+\end_layout
+
+\begin_layout Standard
+The model is a symmetric-information game with 
+\begin_inset Formula $N=2$
+\end_inset
+
+ agents (extendable) competing for high-status (
+\begin_inset Formula $y_{2}$
+\end_inset
+
+) vs.
+ low-status (
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+) positions.
+ Scores are 
+\begin_inset Formula $\mu r+(1-\mu)s$
+\end_inset
+
+,
+ with 
+\begin_inset Formula $r\sim U[0,1]$
+\end_inset
+
+ (innate,
+ fixed),
+ 
+\begin_inset Formula $s\sim U[0,1]$
+\end_inset
+
+ (acquired via investment 
+\begin_inset Formula $\nu$
+\end_inset
+
+),
+ 
+\begin_inset Formula $\mu<1/2$
+\end_inset
+
+ (Assumption 1:
+ signaling 
+\begin_inset Formula $>$
+\end_inset
+
+ talent).
+ Agents draw 
+\begin_inset Formula $r,s$
+\end_inset
+
+ privately post-investment but pre-competition;
+ winner maximizes score.
+\end_layout
+
+\begin_layout Standard
+Intuition:
+ Uniform distributions yield convolution 
+\begin_inset Formula $F_{X}(x)=$
+\end_inset
+
+ piecewise linear/cubic (Appendix A),
+ so 
+\begin_inset Formula $P(\mathrm{win}|s)$
+\end_inset
+
+ increases in 
+\begin_inset Formula $s$
+\end_inset
+
+ but concave due to talent noise.
+ Endogenous 
+\begin_inset Formula $\nu$
+\end_inset
+
+ arises as competition intensity (from 
+\begin_inset Formula $\Delta y$
+\end_inset
+
+) raises effective barriers,
+ tipping equilibria.
+ For 
+\begin_inset Formula $\mu=0$
+\end_inset
+
+ (pure signaling),
+ universal participation holds if 
+\begin_inset Formula $\nu<\Delta y/2$
+\end_inset
+
+;
+ elite-only otherwise.
+\end_layout
+
+\begin_layout Standard
+We consider a game where the winner strives to maintain a rich position solely to achieve higher economic gains.
+ The two characteristics that matter in the competition where a poorer participant can be promoted to a rich position are i) skill - subject to the social capital investment from the participant and ii) raw-talent - that is unaffected by higher expenditures.
+ Without loss of generality,
+ both skill 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ (enhanced with expenditure) and the raw talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ (which cannot be changed with higher expenditure) are assumed to be uniformly distributed in the population.
+ With a given weight 
+\begin_inset Formula $\mu$
+\end_inset
+
+ of raw-talent in the maximum total score considered for the win in a competition,
+ the competitions are won with a highest score 
+\begin_inset Formula $\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ (where 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is raw-talent and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are skills that are available with higher expenditure) which has a certain probability due to distribution of 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+ We assume that the population remains constant over time (there are the same number of rich and poor in total) and that the participants are not aware of their 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ before participating in the competitions.
+\end_layout
+
+\begin_layout Standard
+It is worth highlighting that in the above mechanism,
+ a rich or a poor status by itself only has an indirect effect (through higher expenditure or budget) on the chance to be promoted (or maintaining one's rich position) - a probability that depends on the individual ability 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and social-capital 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+ All rich participants and all poor participants have the same preferences so that the individual attributes 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ -which are not known to the participant- are not used to decide upon the expenditure (effort) towards the status game.
+ With 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ uniformly distributed,
+ the likelihood of any participant 
+\begin_inset Formula $i\in[1,N]$
+\end_inset
+
+ can be formulated as the probability for their total score 
+\begin_inset Formula $\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ being higher than any other participant - where 
+\begin_inset Formula $\mu\in(0,1)$
+\end_inset
+
+ is a parameter that combines social-capital 
+\begin_inset Formula $s$
+\end_inset
+
+ and raw-talent 
+\begin_inset Formula $r$
+\end_inset
+
+ so that the participant with maximum score 
+\begin_inset Formula $\mu r+(1-\mu)s$
+\end_inset
+
+ wins the competition.
+ The winner of the competition acquires a rich position with economic gains so that she obtains the disposable income 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ while the loser acquires the poor position receive 
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To start with a simpler case,
+ consider that in a competition with raw-talents alone,
+ the winning participant is one who has the maximum 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ drawn from the sample 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ In other words,
+ the winner in a competition of raw-talents is a player 
+\begin_inset Formula $j$
+\end_inset
+
+ such that 
+\begin_inset Formula $\{r_{i}<r_{j}\forall i\in[1,N]\}$
+\end_inset
+
+ and the probability that a given participant 
+\begin_inset Formula $i$
+\end_inset
+
+ of raw-skill 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is the winner is essentially that of all other players 
+\begin_inset Formula $j\neq i$
+\end_inset
+
+ having ability 
+\begin_inset Formula $r_{j\neq i}$
+\end_inset
+
+ less than 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+.
+ This is the probability
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{0}^{1}P(r_{i}>r_{1})\times P(r_{i}>r_{2})\times\dots P(r_{i}>r_{i-1})\times P(r_{i}>r_{i+1})\dots P(r>r_{N})dr_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With a uniform distribution of skills 
+\begin_inset Formula $r\in[0,1]$
+\end_inset
+
+,
+ we have 
+\begin_inset Formula $P(r_{i}\geq r)=r_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in[1,N]$
+\end_inset
+
+ and therefore,
+ the probability evaluates to 
+\begin_inset Formula $\int_{0}^{1}(r_{i})^{N-1}dr_{i}=1/N$
+\end_inset
+
+.
+ With more players,
+ the chances of a particular participant winning evidently declines.
+\end_layout
+
+\begin_layout Standard
+Now introducing the skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+,
+ consider a threshold investment 
+\begin_inset Formula $\nu$
+\end_inset
+
+ which is necessary to be spent for the social capital to be available to a participant.
+ While this is an arrangement that evidently favours the rich participant,
+ there are also diminishing returns to investing 
+\begin_inset Formula $\nu$
+\end_inset
+
+ towards the richer position if naturally occurring raw talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is also significant in the competition.
+ Focusing on cases where signaling value is significant,
+ we assume that social capital is more important than raw-talent.
+ The foregoing analysis thus assumes that 
+\begin_inset Formula $1-\mu>\mu$
+\end_inset
+
+ – a condition that has been used in solutions of the model.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Assumption 1.
+
+\series default
+ 
+\begin_inset Formula $\mu<1/2$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Insert full model derivations,
+ equilibria (Cases I-IV),
+ results,
+ and extensions here from your original (e.g.,
+ Eqs.
+ 7-10,
+ figures as 
+\backslash
+includegraphics).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,408 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection
+Normal Distribution
+\end_layout
+
+\begin_layout Standard
+With normal distribution we know that the combined distribution would 
+\begin_inset Formula $N(m_{1}+m_{2},\sigma_{1}^{2}+\sigma_{2}^{2})$
+\end_inset
+
+.
+ This assumes that 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are distributed around means 
+\begin_inset Formula $m_{1},m_{2}$
+\end_inset
+
+ with variances 
+\begin_inset Formula $\sigma_{1}^{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma_{2}^{2}$
+\end_inset
+
+ respectively.
+ For the probability of winning poorer participanet we need 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{1})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The distribution for 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi)<x_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $N(\mu m_{1}+(1-\mu)c_{1}m_{2},\mu^{2}\sigma_{1}^{2}+c_{1}^{2}(1-\mu)^{2}\sigma_{2}^{2})$
+\end_inset
+
+ while for 
+\begin_inset Formula $P(r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi)<x_{1})$
+\end_inset
+
+ it is 
+\begin_inset Formula $N(\mu m_{1}+(1-\mu)c_{2}m_{2},\mu^{2}\sigma_{1}^{2}+(1-\mu)^{2}c_{2}^{2}\sigma_{2}^{2})$
+\end_inset
+
+.
+ We could simplify further but a closed-form solution escapes us because
+ of the multiplication of CDF (power).
+\end_layout
+
+\begin_layout Subsection
+Poission distribution
+\end_layout
+
+\begin_layout Standard
+Another option is to view tournament winners as poisson distributed.
+ The sum of Possion variables is Binomial distributed so multiplying them
+ may still provide deterministic results.
+ 
+\end_layout
+
+\begin_layout Standard
+The possion pmf is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(X & =x)=\frac{e^{-\lambda}\lambda^{x}}{x!}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The CDF would be a simple sum and multiplying them does take d Itoes not
+ have an obvious way to a closed-form solution either.
+\end_layout
+
+\begin_layout Standard
+===
+\end_layout
+
+\begin_layout Standard
+We evaluate the integral 
+\begin_inset Formula $\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1})dr_{1}$
+\end_inset
+
+using 
+\begin_inset Formula $dr_{1}=dx_{1}$
+\end_inset
+
+ (for integrating with a given 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+).
+ Notice that 
+\begin_inset Formula $r_{1}=0\Rightarrow x_{1}=(1-\mu)s_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{1}=1\Rightarrow x_{1}=\mu+(1-\mu)s_{1}$
+\end_inset
+
+.
+ Varying 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+ does bring 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in the interval 
+\begin_inset Formula $(\mu,1-\mu)$
+\end_inset
+
+ and 
+\begin_inset Formula $(1-\mu,\mu+(1-\mu)s_{1})$
+\end_inset
+
+.
+ Notice that for 
+\begin_inset Formula $s_{1}<\frac{\mu}{1-\mu}$
+\end_inset
+
+, we have 
+\begin_inset Formula $(1-\mu)s_{1}<\mu$
+\end_inset
+
+ .
+ When 
+\begin_inset Formula $(1-\mu)s_{1}>\mu$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $s_{1}>\frac{\mu}{1-\mu}$
+\end_inset
+
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is possible only when 
+\begin_inset Formula $s_{1}>\mu$
+\end_inset
+
+ (
+\begin_inset Formula $\because(1-\mu)<1$
+\end_inset
+
+, 
+\begin_inset Formula $\therefore(1-\mu)s_{1}>\mu\Rightarrow s_{1}>\mu$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+).
+ For 
+\begin_inset Formula $s_{1}>\frac{\mu}{1-\mu}$
+\end_inset
+
+ (possible only when 
+\begin_inset Formula $s_{1}>\mu$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{0}^{1}{\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})}ds_{1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=\begin{cases}
+\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & 0<\mu r_{1}+(1-\mu)s_{1}<\mu\\
+\frac{r_{1}-\mu/2}{1-\mu} & \mu<\mu r_{1}+(1-\mu)s_{1}<1-\mu\\
+1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<\mu r_{1}+(1-\mu)s_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=\begin{cases}
+\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)} & -\frac{(1-\mu)s_{1}}{\mu}<r_{1}<1-\frac{(1-\mu)s_{1}}{\mu}\\
+\frac{r_{1}-\mu/2}{1-\mu} & 1-\frac{(1-\mu)s_{1}}{\mu}<r_{1}<\frac{(1-\mu)(1-s_{1})}{\mu}\\
+1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)} & \frac{(1-\mu)(1-s_{1})}{\mu}<r_{1}<\frac{1-(1-\mu)s_{1}}{\mu}\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{0}^{1}{(P(\text{win}|r_{1},s_{1})dr_{1})}=\int_{0}^{1-\frac{(1-\mu)s_{1}}{\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)}dr_{1}\\
++\int_{1-\frac{(1-\mu)s_{1}}{\mu}}^{\frac{(1-\mu)(1-s_{1})}{\mu}}\frac{r_{1}-\mu/2}{1-\mu}dr_{1}\\
++\int_{\frac{(1-\mu)(1-s_{1})}{\mu}}^{\frac{1-(1-\mu)s_{1}}{\mu}}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+https://www.ikea.com/gb/en/p/abygda-foam-mattress-firm-white-00481508/
+\end_layout
+
+\begin_layout Standard
+https://www.ikea.com/gb/en/p/vesteroey-pocket-sprung-mattress-firm-light-blue-9045
+0630/
+\end_layout
+
+\begin_layout Standard
+https://www.mattressonline.co.uk/Product/Rest-Assured-Adleborough-1400-Pocket-Ortho
+-Mattress-P1306
+\end_layout
+
+\begin_layout Standard
+https://www.sleep-hero.co.uk/best-mattresses-uk
+\end_layout
+
+\begin_layout Standard
+https://www.happybeds.co.uk/catalogsearch/result/index/?combined_size=11056&q=extra
++firm
+\end_layout
+
+\begin_layout Standard
+https://www.mattressonline.co.uk/Product/Silentnight-Vilana-Limited-Edition-Miracoi
+l-Mattress-P1048#size=Double
+\end_layout
+
+\begin_layout Standard
+https://www.mattressonline.co.uk/Product/SleepSoul-Super-Support-800-Pocket-Mattres
+s-P1761 - foam
+\end_layout
+
+\begin_layout Standard
+https://www.mattressonline.co.uk/Product/Silentnight-Ortho-Dream-Star-Miracoil-Matt
+ress-P81 - spring
+\end_layout
+
+\begin_layout Standard
+CONGA DRUMS
+\end_layout
+
+\begin_layout Standard
+https://ehomerecordingstudio.com/best-congas/
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+Call physio - 0800 2061808 
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+https://localtennisleagues.com/questionnaire
+\end_layout
+
+\begin_layout Standard
+https://www.lta.org.uk/play/find-a-local-tennis-league/?fltr=y&location=Wantage%20O
+X12,%20UK&latitude=51.5691146&longitude=-1.4553534&distance=20&sport=Tennis&sport=
+Padel
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,6617 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{mathtools}
+\usepackage{amsmath}
+
+\usepackage{xparse}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\usepackage{soul}
+\usepackage{natbib}
+\usepackage{color, colortbl}
+\usepackage[first=0,last=9]{lcg}
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\newcommand{\ra}{\rand0.\arabic{rand}}
+\usepackage[section]{placeins}
+\usepackage[left,modulo]{lineno}
+\usepackage{sectsty}
+
+\usepackage{bbm}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "tgschola" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2cm
+\rightmargin 3cm
+\bottommargin 2cm
+\headsep 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Notes
+\end_layout
+
+\begin_layout Plain Layout
+
+% https://mathstat.slu.edu/~speegle/_book_spring_2020/transformationsofrandomvaria
+bles.html
+\end_layout
+
+\begin_layout Plain Layout
+
+% https://pages.cs.wisc.edu/~shao/stat609/stat609-12.pdf
+\end_layout
+
+\begin_layout Plain Layout
+
+% 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Income differences and consumer expenditure towards economic status
+\end_layout
+
+\begin_layout Author
+Anurag Srivastava (a.srivastava@pgr.reading.ac.uk)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% BayeKavenockdeVries1993LobbyingTwoPlayer explain how politicians preclude
+ the agents that value the prize highest.
+ They consider a case where a sure-shot winner might not pay the politician
+ enough as her probability to win may already be higher.
+ This is not so relevant to us except that increasing participants does
+ reduce the value of skills.
+\end_layout
+
+\begin_layout Plain Layout
+
+% One could extend the utility in parcorepoportamaldossTwoStageBudget2005
+ by employing a non-linear probability weighting utility
+\end_layout
+
+\begin_layout Plain Layout
+
+% We ignore the **Network relations perspective** - a view that considers
+ social positions as a place in networks.
+\end_layout
+
+\begin_layout Plain Layout
+
+% One of the classic views towards status in sociology is that of the multifacto
+rial perspective - arguing that social positions directly influence the
+ individual's decision making (see [#blauSocialStructure1974]).
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+% Model dissensus:With regard to prestige, what we see is that, according
+ to end- anchoring theory, prestige consensus is possible only when high-
+ and low- status groups in a society differ in their preferences for the
+ anchor jobs.
+ But it is difficult to imagine a society in which some prefer high status
+ over low status and some prefer low status over high status.
+\end_layout
+
+\begin_layout Plain Layout
+
+% Class conflict theories are not gone - The class conflict theories are
+ also used (albeit not our preferred mode of analysis - see dahrendorfclassconfl
+ict2019.
+ The centre-and-periphery notions (used by cattaniInsidersPeriphery2014
+ etc.) are also related concepts.
+ This is not too different from Pareto's classic view of elites vs non-elites
+ (see paretomindsociety1935)
+\end_layout
+
+\begin_layout Plain Layout
+
+%There are a few perspectives towards status that are left out in this overview
+ - such as the social-network view (see [#degenneintroducingsocialnetworks1999]).
+ or the fully rationalist (individualist) perspective (see [#elsterrationalchoic
+e1986] ) - that are not discussed in the chapter.
+ Due to the limitations of data captured in a typical consumer survey that
+ focus primarily on consumption and family-level characteristics, the conception
+s based on social-proximity or individualist perspectives are less relevant
+ in our discussion.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While the predominant view of status in both sociology and economics has
+ been one that is based on hierarchy of ranks, attempts have also been made
+ to view status in a Weberian framework (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webereconomysociety1925"
+literal "false"
+
+\end_inset
+
+ ) with some dynamism in the social-aggregates (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+).
+ The presented chapter considers an indirect (instrumental) treatment of
+ rank concerns to banks on a specific link between economics goals relevant
+ for status consumption 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "postlewaite1998socialbasisinterdeppreferences"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The debate on the economic vs non-economic treatment of status appears in
+ form of a need to reconcile the subjective and objective aspects of status
+ in sociological literature.
+ The literature in economics has also taken both hierachy-based 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ColemanSocialTheory1990"
+literal "false"
+
+\end_inset
+
+ and conflict-based 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode1978celebrationheroes"
+literal "false"
+
+\end_inset
+
+ approaches to status.
+ The current focuses on the view of status provided by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode2022celebrationheroes"
+literal "false"
+
+\end_inset
+
+ where it is shaped by the institutional nurturing of skills (or social
+ capital) which contribute to status along side with a natural distribution
+ of abilities.
+ 
+\end_layout
+
+\begin_layout Standard
+Unlike the typical attribution of status to exogenous factors such as race
+ or caste, the goal of the chapter is to explain how variation in urban
+ institutions could influence expenditures such as education that contribute
+ to income mobility while carrying some status value by themselves.This endogenis
+ation of status is of key signifiance in comparison of expenditures towards
+ status between economies such as Tanzania that are disparate in terms of
+ development indicators and access to institutions such as secondary or
+ tertiary education.
+ In our attempt to answer how expenditures towards status may be influenced
+ by levels of inequality, we rely on the distinction between 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Geschellschaft}
+\end_layout
+
+\end_inset
+
+ and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Gemeinschaft}
+\end_layout
+
+\end_inset
+
+ that is known in both sociology and economics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webereconomysociety1925,goode2022celebrationheroes"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To use a structural basis for the relation between economic and social goals,
+ the current chapter relies on the argument from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "postlewaite1998socialbasisinterdeppreferences"
+literal "false"
+
+\end_inset
+
+ that economy for status should considered separately from that where the
+ consumer utility is maximised.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "postlewaite1998socialbasisinterdeppreferences"
+literal "false"
+
+\end_inset
+
+ also argue, the degree of uncertainty is an important motivation for the
+ signaling in context of conspicuous consumption.
+ The current chapter views status competitions as tournaments where individuals
+ compete with both raw-talent and acquired-skills (social capital) in form
+ of a probabilistic game where the individual with maximum total score comprisin
+g both of raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ (uniformly distributed in a population) and social capital 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ that are enhanced with expenditure.
+ The social-capital 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ that is enhanced through expenditure is also subject to budget constraints
+ imposed on the consumer
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We do not leisure as separate from budget constraints in the model.
+ In other words, leisure - that is relevant for higher stauts - is interpretd
+ as a higher cost for the poorer participant.
+ Thus, so long as once can view leisure as the amount of money a participant
+ must forgo in order to participate in status competition, the leisure differenc
+es can be view of differences in disposable incomes.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In this tournament view of status, the only two types of participants are
+ the poor and rich classes so that investments towards (such as like club-member
+ship fees, or higher-education) simply increase the chances to be promoted.
+ Those who don't participate in the tournament certainly suffer, but those
+ who do spend only benefit probabilistically.
+ A useful analogy to understand to these tournaments are tennis championships
+ - where rewards are risky but are not like lotteries where more expenditure
+ does not linearly increase the chance to win.
+ The preferences for all poor participants are the same as are the preferences
+ of all the rich participants.
+ Having a rich or a poor status has no effect on the chance to be promoted
+ (or maintaining one's rich position) except through the privately known
+ ability 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and social-capital 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+ All rich participants and all poor particiapnts have the same behaviour
+ also means that the privately known attributes 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ do not have any influence on the expenditure or effort in the status game.
+\end_layout
+
+\begin_layout Standard
+As with the game of tennis, participants with appropriate raw-talent and
+ skills may exist naturally in a population but they get better at the game
+ with the help of a community of sportsmen.
+ There are certain biological characateristics such as strength, height
+ or psychological abilities (resilience, conscientiousness etc.) that all
+ help one's game, but there are several characteristics such as technique,
+ rankings, knowledge of conventions, racket-customisations that are only
+ available at a significant cost.
+ Further, as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode2022celebrationheroes"
+literal "false"
+
+\end_inset
+
+ argues, the characteristics of such games are often made to reward curated
+ abilities rather than naturally occurring raw-strengths.
+ For the sake of argument, we can say that a society where only tennis-winners
+ acquire rich-positions, a significant number of participants may never
+ realise their true potential unless they spend enough to hone their skills.
+ 
+\end_layout
+
+\begin_layout Standard
+Using a simple model of uncertainty, we consider a society where only one
+ specialisation (equivalent to tennis abilities) is valued apart from the
+ raw-talent.
+ The focus on one specialisation where a combination of raw-talent and skill
+ lets us define a winner as the participant with the highest combined score
+ consisting of raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ (the latter enhanced with expenditure).
+ Further, the participants are meant to keep the total population constant
+ over time and therefore the number of rich positions in the population
+ remain fixed.
+ Thus the rich participants are replaced by either a rich or poor participant
+ only through a tournament that selects the participant with the highest
+ combined score - regardless of rich or poor background.
+ All participants participate in every such tournament so it is possible
+ for a rich participant to lose her rich-position and let another participant
+ acquire her position.
+\end_layout
+
+\begin_layout Standard
+If we let rich and poor participants have disparate incomes 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ (so that 
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+), then the above setup evidently puts the poor participants at disadvantage
+ as they may not afford to pay the costs to enhance their skills (or know
+ the true worth of their skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ due to high participation costs).
+ However, since both raw-talent and skills potentially enhanced by costly
+ institutional support are randomly distributed in the population, the competiti
+on may never rule out the chance for a poor participant to win.
+ For the same reason, the returns from investments to enhance one's skills
+ may also be diminishing since one cannot beat raw-talent and non enhanced-skill
+s after a certain point.
+ Considering the weight of raw-talent in the total score as 
+\begin_inset Formula $\mu$
+\end_inset
+
+ we interpret the winning probability of poor and rich participants as the
+ probability for a participant having the score 
+\begin_inset Formula $\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ as the maximum score among participants in a tournament (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for details).
+\end_layout
+
+\begin_layout Standard
+It is worth remarking that the above view of status does not accommodate
+ a social network based view of status.
+ One could argue against the random distribution of attributes, given that
+ many attributes are governed by parental upbringing (The literature does
+ often consider a uniform distribution of skills to answer questions related
+ to status-related consumption 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hopkinsWhichInequality2010"
+literal "false"
+
+\end_inset
+
+.) .
+ However, the above set up focuses on role of expenditure in the specific
+ context of a society where 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{Gesellelschaft}
+\end_layout
+
+\end_inset
+
+ is of an increasing importance.
+ The assumption that skills-relevant to such a competition are randomly
+ distributed may thus be hardly restrictive for such a growing economy.
+\end_layout
+
+\begin_layout Standard
+It is important also to highlight that status competitions are hardly wide-scale
+ tournament that involve all participants in a population.
+ Instead, the competitions tend to be at a small-scale with varied locally
+ defined criteria and at multiple stages (see stage-contests literature
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode2022celebrationheroes"
+literal "false"
+
+\end_inset
+
+).
+ Multiple-stages are independent using the model where only the threshold
+ participation cost and range of distribution of 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ may change.
+ However, as we focus on the effect of income differences on consumption,
+ we have discussed only a particular competition with known distribution
+ of 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ among a relatively small number of participants.
+ The role which the number of participants 
+\begin_inset Formula $N$
+\end_inset
+
+ in the competition is discussed further in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To summarise, the few important properties of above set up are as follows
+\end_layout
+
+\begin_layout Enumerate
+Mutual exclusivity - Only one player can win the competition.
+\end_layout
+
+\begin_layout Enumerate
+Rank-independent Utility - The rank only matters indirectly to the participants.
+\end_layout
+
+\begin_layout Enumerate
+Same preferences - The participants behave differently solely on the basis
+ of their rich or poor status.
+ The privately known raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ are of no significance to expenditure decisions - which are made solely
+ on the basis of rich or poor status.
+ In other words, all rich (poor) participants make the same expenditure
+ decisions with no role of 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ or 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In what follows, Seciton 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Literature-Survey"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ surveys the issues with definition of status in sociology and economics,
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ discusses the model and its solution while Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Conclusion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ draws some conclusions about expenditure towards status in the growing
+ economies.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Literature-Survey"
+
+\end_inset
+
+Literature Survey
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Unsolved Problem - Weber]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is commonly argued status is a social rather than ab economic goal of
+ the individual.
+ Yet the difference between social and economic goals of the individual
+ is hardly well-defined in either sociology or economics.
+ The idea that status is orthogonal to economic goals - i.e.
+ a 
+\begin_inset Quotes eld
+\end_inset
+
+pure status
+\begin_inset Quotes erd
+\end_inset
+
+ view 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "moldovanuselacontestsstatus2007"
+literal "false"
+
+\end_inset
+
+ - seldom fit with the real-world where status contributes to income while
+ also improving with rise in income.
+ Indeed the other extreme view that the economic goals alone motivate status
+ competition - so that status is derived purely from economic goals is also
+ unrealistic.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "moldovanuselacontestsstatus2007"
+literal "false"
+
+\end_inset
+
+ argue, the reality is often somewhere in between the two extremes.
+\end_layout
+
+\begin_layout Standard
+A structural model for this interplay between economic and social goals
+ is not however specified in either sociology or economics.
+ The dominant view for status in both sociology and economics has been one
+ based that is based on hierarchy and social deference 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ColemanSocialTheory1990,goldthorpesociology2000"
+literal "false"
+
+\end_inset
+
+.
+ This view of status in inherent in occupational status surveys widely used
+ in empirical studies (e.g.
+ the EGP classes or the Goldthorpe class scheme 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goldthorpesociology2000"
+literal "false"
+
+\end_inset
+
+) .
+ The issue with the lack of a structural model and the specific concern
+ to reconcile the difference between the objective aspects of status (the
+ observed reality of status differences) and its subjective aspects (the
+ effect of status differences on individual behaviour) have been more widely
+ discussed in sociology 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+.
+ The evident issue with addressing only the objective aspect of status with
+ a utilitarian model while leaving the subjective aspect exogenous is that
+ status cannot be explained in economic terms when an economy for status
+ is ruled out.
+\end_layout
+
+\begin_layout Standard
+The view of status as observed order or hierarchy is hardly an all-encompasssing
+ view of status in sociology.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode1978celebrationheroes"
+literal "false"
+
+\end_inset
+
+, for example, discusses an economy of status while arguing that it is created
+ as part of the economic processes.
+ The structural issue of whether a certain social structure determines status
+ judgments or the judgments themselves determine status may still remain
+ unresolved in both sociology and economics 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+, but several limitations with the dominant hierarchy-based view of status
+ have since been remarked.
+\end_layout
+
+\begin_layout Standard
+The foremost contention with the hierarchy-based view of status is that
+ idea of social closure often gets conflated with that of hierarchy.
+ The idea of social-closure (aggregate or stände first discussed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webereconomysociety1925"
+literal "false"
+
+\end_inset
+
+) is hardly the same as social ranks that they are commonly approximated
+ with in the literature (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+).
+ The problem is not merely a theoretical issue.
+ The subjective evaluations of status - which one is supposed to reconcile
+ with the objective view - are observed to measure an overall desirability
+ of occupations instead of status (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goldthorpeOccupationalGrading1975"
+literal "false"
+
+\end_inset
+
+).
+ Skills or knowledge of individuals may seem to better predict the individual
+ judgments of status (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "adlerstatuscomponents1985"
+literal "false"
+
+\end_inset
+
+).
+ More importantly, the scales of status that one employs in empirical studies
+ are observed to vary significantly across the sections of society (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ackerwomenstratification1980"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% [Parsons Normative conflict - and our use of Probabilty functions]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A different perspective from the hierarchy-based view of status is one that
+ relies on an interaction or a conflict at rational or normative levels.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode1978celebrationheroes"
+literal "false"
+
+\end_inset
+
+ , for example, argues that social institutions nurture or discourage certain
+ naturally characteristics in a society.
+ Thus, instead of interpreting status items as those that signal prevalent
+ status norms, the dynamic view of status allows 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode1978celebrationheroes"
+literal "false"
+
+\end_inset
+
+ to suggest that investments towards status may increase the likelihood
+ of associating with higher-status members of society.
+ A certain dynamism in social-groups - termed as conflict in the sociology
+ literature 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webereconomysociety1925,wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+- is inherent in his view of prestige.
+ While a structural model that reconciles the subjective and objective aspects
+ of status are still missing from his thesis, the normative theories for
+ competition among social-groups has gathered much attention in sociology
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "parsonsInfluence1963,parsonssystemsocieties1971"
+literal "false"
+
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "parsonssystemsocieties1971"
+literal "false"
+
+\end_inset
+
+ address this issue by simply arguing the subjective and objective aspects
+ to the same.
+ The basic categories in terms of which we describe a system of hierarchies
+ as a structure according to 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "parsonssystemsocieties1971"
+literal "false"
+
+\end_inset
+
+ is the same as those in terms of which individual behavior or performance
+ is defined.
+ Thus, while culture places a premium on equality, the distribution rules
+ in different social subsystems is often not aimed at generating equality.
+ Much like with 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode1978celebrationheroes"
+literal "false"
+
+\end_inset
+
+, prestige acts to assert basic importance of equality of membership status
+ while making allowances for the inequalities resulting from equality of
+ opportunity 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+.
+ The bottom line of the view is that societies must institutionalize some
+ balance between equality and inequality at all times 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "parsonsInfluence1963,parsonssystemsocieties1971"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Rational Conflict]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Other attempts to reconcile the subjective and objective aspects of status
+ (and therefore of social-closure and hierarchy) use a rational conflict
+ to specify a structural basis.
+ One such attempt has been through use of power as a commodity to be exchanged
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ColemanSocialTheory1990"
+literal "false"
+
+\end_inset
+
+ - an approach that has drawn much criticism due to the zero-sum characteristics
+ it imposes on status while treating the total status on a status society
+ as fixed 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wrongpower1979"
+literal "false"
+
+\end_inset
+
+.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode1978celebrationheroes"
+literal "false"
+
+\end_inset
+
+ argues, prestige is available in ample supply in society at least as a
+ product of exchange processes.
+ 
+\end_layout
+
+\begin_layout Standard
+In the current chapter, we specify a structural basis while banking on the
+ Weberian framework for social-groups 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "webereconomysociety1925"
+literal "false"
+
+\end_inset
+
+.
+ The order Weber considers in the conflict is not a hierarchy but instead
+ an order of closure 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wegener1992prestigeconcepts"
+literal "false"
+
+\end_inset
+
+.
+ A certain dynamism in creation of closed positions of status is inherent
+ in the Weberian view - one that we attempt to model with probability functions
+ arising out of a priori distribution of personal attributes.
+ Instead of using status as a wealth-determined goal, we follow 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "postlewaite1998socialbasisinterdeppreferences"
+literal "false"
+
+\end_inset
+
+ in considering an indirect role that status can play in maximisation of
+ consumer utility from wealth.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%[Moldovanu]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+An important result from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "moldovanuselacontestsstatus2007"
+literal "false"
+
+\end_inset
+
+ is that a partition with only two status classes (where all individuals
+ except one belong to the lower class) is optimal if the distribution of
+ abilities is sufficiently concave.
+ 
+\end_layout
+
+\begin_layout Standard
+==
+\end_layout
+
+\begin_layout Standard
+Inspired by Postlewaite, we assume that individuals have a concern for relative
+ standing because their standing is instrumental in determining ultimate
+ consumption levels rather than being directly contributing to their utility.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ColeMaliathSocialNorms1992"
+literal "false"
+
+\end_inset
+
+ use a matching-game for wealth-optimising consumers to suggest how the
+ concern for relative standing need not be in the deep preferences, but
+ induced in reduced form preferences with relative standing indirectly affecting
+ consumption.
+ The fundamental argument in following the approach is that standard economic
+ markets determine much that people care about, but they might not determine
+ all.
+ Instead of assuming exogenously given social classes (as is often assumed
+ in empirical studies relating to social classes), the approach taken by
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ColeMaliathSocialNorms1992,postlewaite1998socialbasisinterdeppreferences"
+literal "false"
+
+\end_inset
+
+ assumes a certain interaction between social arrangements and economic
+ behavior.
+ The foremost reason for the instrumental approach is is that it allows
+ us to move forward with answer status concerns as an economic problem rather
+ than relying on attribute status to non-economic concerns.
+ 
+\end_layout
+
+\begin_layout Standard
+It's only the first-stage of our game when the expenditure can be less than
+ the total budget.
+ The conditions under which the full-expenditure of the budget would take
+ place can be derived much the way they were derived with the logistic probabili
+ty function (SteinRapoportsymmetrictwostagecontests2005 also perform a Kuhn-Tuck
+er based analysis).
+ The major difference in our model is because ours is not a case of homogeneous
+ players.
+ The equilibrium is long-term and the consumers are in equilibrium in their
+ unequal states.
+ At any point of time, the competition is between the rich and the poor.
+ We pair up only those with the same age.
+ The results are to interpreted for every age of the consumer.
+ In other words, we assume that number of consumers in every age-decile
+ are stable in the equilibrium - so that there are number of poor to rich
+ is not significantly different across ages.
+\end_layout
+
+\begin_layout Standard
+It is common for the first-stage to limit the number of participants 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BayeKavenockdeVries1993LobbyingTwoPlayer,AmegashieDesignofRentSeekingCompetitions1999"
+literal "false"
+
+\end_inset
+
+.
+ Typically, the first stage is one where players are selected to participate
+ in the second phase.
+ Unlike the multi-stage competition, the rich and poor dichotomy does not
+ change in the competitions we have considered.
+ 
+\end_layout
+
+\begin_layout Standard
+The role of budget-constraints has been explored in great detail in the
+ contest theory literature 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "chegaleallpayauctionconstrained1997,chestandardauctions1998,parcorepoportamaldossTwoStageBudget2005,bruscoBidAuctionbudget2008"
+literal "false"
+
+\end_inset
+
+.
+ In a treatment similar to the total-score comparisons of the model presented
+ in the chapter where mixed-strategies are ruled out (i.e.
+ it is not possible for participants to participate for a few turns and
+ then skip participation for a later turn), 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "parcorepoportamaldossTwoStageBudget2005"
+literal "false"
+
+\end_inset
+
+ explain how the exponent 
+\begin_inset Formula $\alpha=1$
+\end_inset
+
+ for the Tullock function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tullock1967"
+literal "false"
+
+\end_inset
+
+ corresponds to success being determined by the expenditure.
+ Considering the distribution of participant-budget between first and second-sta
+ge in a two-stage contest, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SteinRapoportsymmetrictwostagecontests2005"
+literal "false"
+
+\end_inset
+
+ argue more generally, the exponent 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in the Tullock function and the number of players 
+\begin_inset Formula $N$
+\end_inset
+
+ must satisfy 
+\begin_inset Formula $\alpha\le\frac{N}{N-1}$
+\end_inset
+
+ for participation to be feasible i.e.
+ for both participants to have a positive expected payoff from the contest.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SteinRapoportsymmetrictwostagecontests2005"
+literal "false"
+
+\end_inset
+
+ also find that binding budgets increase the first-stage spending for the
+ participants but while ratio of first-stage spending to second-stage spending
+ remains constant for non-binding budgets while decreasing non-linearly
+ with prize.
+\end_layout
+
+\begin_layout Standard
+While the contest for positions we use in the chapter to study effect of
+ income differences does consider budget-constraints, the first-stage in
+ the contest is not that of selection.
+ Instead, the selection to the winner's position occurs only once in the
+ two-stages of the game.
+ The second-stage of the game arises only out of the finite-time horizon
+ (lifetime) of the participant.
+ At the end of the second-stage, all savings of the participant must disappear.
+ Therefore, with zero expected assets at the end of the life-cycle, all
+ expenditure in the second-stage is contributed to the indirect advantage
+ through higher rank.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Model"
+
+\end_inset
+
+Model
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's consider the likelihood of a participant 
+\begin_inset Formula $i\in[1,N]$
+\end_inset
+
+ winning in a competition that rewards a privately known raw talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and a set of skills that are curated in social institutions.
+ A similar all-pay auction approach is discussed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hopkinsWhichInequality2010"
+literal "false"
+
+\end_inset
+
+.
+ When competing with raw-talents alone, we assume that the set 
+\begin_inset Formula $\{r_{i}\}_{i\in[1,N]}$
+\end_inset
+
+ is a total order so that the maximum 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ would win the raw-talent competition.
+ In other words, the winner would be a player 
+\begin_inset Formula $j$
+\end_inset
+
+ such that 
+\begin_inset Formula $\{r_{i}<r_{j}\forall i\in[1,N]\}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+Based only on raw-talent, the probability that a given participant 
+\begin_inset Formula $i$
+\end_inset
+
+ of raw-skill 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ is the winner is essentially that of all other players 
+\begin_inset Formula $j\ne i$
+\end_inset
+
+ having ability 
+\begin_inset Formula $r_{j\ne i}$
+\end_inset
+
+ less than 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+.
+ This is the probability that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{0}^{1}{P(r_{i}>r_{1})\times P(r_{i}>r_{2})\times...P(r_{i}>r_{i-1})\times P(r_{i}>r_{i+1})...P(r>r_{N})}dr_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With a uniform distribution of skills 
+\begin_inset Formula $r\in[0,1]$
+\end_inset
+
+, we have 
+\begin_inset Formula $P(r_{i}\ge r)=r_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i\in[1,N]$
+\end_inset
+
+ and therefore, the above integral becomes 
+\begin_inset Formula $\int_{0}^{1}{(r_{i})^{N-1}}dr_{i}=\frac{1}{N}$
+\end_inset
+
+.
+ With more players, the chances of a particular participant winning declines.
+\end_layout
+
+\begin_layout Standard
+In the fixed-population, the elite are replaced only with a status competition
+ that relies both on raw-talent and skills 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ that are curated in social institutions.
+ The true rewards from the skills (which too vary according to a uniform
+ distribution) are based on the investment 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ - an arrangement that favours a rich participant.
+ To consider the score comprising both of raw-talent and skills, we consider
+ a parameter 
+\begin_inset Formula $\mu\in(0,1)$
+\end_inset
+
+ that combines skills 
+\begin_inset Formula $s$
+\end_inset
+
+ and raw-talent 
+\begin_inset Formula $r$
+\end_inset
+
+ so that the participant with maximum score 
+\begin_inset Formula $\mu r+(1-\mu)s$
+\end_inset
+
+ wins the competition.
+ It's worth emphasising that the skills 
+\begin_inset Formula $s$
+\end_inset
+
+ are rewarded only for a cost.
+ Unlike 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hopkinsWhichInequality2010"
+literal "false"
+
+\end_inset
+
+, we also the institutional bias in the model - an approach that we base
+ on the arguments from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goode2022celebrationheroes"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+An imporant assumption in the analysis that follows is that raw-talent would
+ still be less valued than skills cultivated by institutions even if skills-enha
+ncements multiplier 
+\begin_inset Formula $(1-\mu)$
+\end_inset
+
+ were the same for all participants.
+ As as result, the condition 
+\begin_inset Formula $1-\mu>\mu$
+\end_inset
+
+ is assumed in the rest of the discussion.
+\end_layout
+
+\begin_layout Assumption
+\begin_inset CommandInset label
+LatexCommand label
+name "assu:mu_less_than_half"
+
+\end_inset
+
+
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Worth highlighting that this is needed 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We use a discrete response to costs of participation to arrive at a closed-form
+ solution of the equilibrium.
+ The participants in the model face different probabilities if their investment
+ is above or below a threshold.
+ More specifically, the participant takes advantage of the skills with weight
+ 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+ only when she spends an amount 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ In the all-or-nothing payment scheme, the participant might avoid the investmen
+t altogether and keep the investment towards savings instead.
+ The behaviour of all participants depends only on 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ - as they are unaware of 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ before they participate.
+ 
+\end_layout
+
+\begin_layout Standard
+The result we use depends on the distribution of 
+\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ under the Assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:mu_less_than_half"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ which leads to 
+\begin_inset Formula $\mu<1-\mu$
+\end_inset
+
+ (see Appendix A).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F_{X}(x) & =P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
+1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the game where a participant 
+\begin_inset Formula $i$
+\end_inset
+
+ with the maximum score 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is the winner, the number of rich positions is fixed to 
+\begin_inset Formula $N-P$
+\end_inset
+
+ so that only the top-scorer gets to occupy the only rich position in every
+ competition.
+ The solution considers the expected behaviour of the rich and the poor
+ participants in the long-term.
+\end_layout
+
+\begin_layout Standard
+As such there are four different cases that arise in the equilibrium.
+\end_layout
+
+\begin_layout Itemize
+Case I - The poor participant does not participate due to insufficient investmen
+t 
+\begin_inset Formula $\nu_{1}=0$
+\end_inset
+
+ while the rich participant does with 
+\begin_inset Formula $\nu_{2}=\overline{\nu}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Itemize
+Case II - The rich participant does not participate with 
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+ but the poor participant does i.e.
+ 
+\begin_inset Formula $\nu_{1}=\overline{\nu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Case III - Both poor and rich participants do not participate and 
+\begin_inset Formula $\nu_{1}=\nu_{2}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Case IV - Both poor rich and participant participate with 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With Case I, the poor participant can win when her raw-talent (weighted
+ with 
+\begin_inset Formula $\mu$
+\end_inset
+
+) is higher than that of all other poor participants as well as the total
+ score of the rich participants (who compete with acquired skills).
+ In this scenario, the poor are priced out of accessing any skills 
+\begin_inset Formula $s$
+\end_inset
+
+ in their score so that only the rich participants with investment 
+\begin_inset Formula $\nu_{2}=$
+\end_inset
+
+ 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ have skills 
+\begin_inset Formula $s>0$
+\end_inset
+
+.
+ Thus, a given poor participant must be ahead both of all of the poor participan
+ts and the rich participants.
+ In other words, a participant 
+\begin_inset Formula $i$
+\end_inset
+
+ can win if 
+\begin_inset Formula $\mu r_{i}$
+\end_inset
+
+ is higher than than raw-talent 
+\begin_inset Formula $\mu r_{k}$
+\end_inset
+
+ in all poor participants and also exceeds the score 
+\begin_inset Formula $\mu r_{k}+(1-\mu)s_{k}$
+\end_inset
+
+ involving skills among the rich participants
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\text{win}|r_{i}) & =\prod_{k=1,k\ne i}^{P}P(\mu r_{k}<\mu r_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i})=r_{i}^{P-1}F_{X}(\mu r_{i})^{N-P}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\text{win}|r_{i}) & =\begin{cases}
+\frac{\mu^{N-P}r_{i}^{2N-P-1}}{2\mu(1-\mu)} & 0<r_{i}<\mu\\
+r_{i}^{P-1}(\frac{\mu r_{i}-\mu/2}{1-\mu})^{N-P} & \mu<r_{i}<1-\mu\\
+r_{i}^{P-1}(1-\frac{(\mu r_{i}-1)^{2}}{2\mu(1-\mu)})^{N-P} & 1-\mu<r_{i}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the uniform density for 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $f(r_{i})=1$
+\end_inset
+
+ ), total probability to win can be calculated as
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}$
+\end_inset
+
+.
+ For the purposes of our discussion we discuss the solution with 
+\begin_inset Formula $N=3,P=2$
+\end_inset
+
+ in Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Three-player-Discrete-Model"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This three-player model represents a situation where rich participants
+ are outnumbered by poor participant in a fixed-population game.
+\end_layout
+
+\begin_layout Standard
+Notice that since only one player can win the skills-game, the probability
+ 
+\begin_inset Formula $\int_{0}^{1}\int_{0}^{1}P_{2}(\text{win}|r_{i},s_{i})ds_{i}dr_{i}$
+\end_inset
+
+ for a rich participant to win is simply 
+\begin_inset Formula $\frac{1}{N-P}-\frac{P}{N-P}\int_{0}^{1}\int_{0}^{1}P_{1}(\text{win}|r_{i},s_{i})ds_{i}dr_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Case II, when the rich person does not participate (i.e.
+ all rich participants have 
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+), the poor participant has the skills-advantage in the game.
+ and 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}<\mu r_{i}+(1-\mu)s_{i})\\
+=F_{X}(x_{i})^{P-1}\prod_{k=P+1}^{N}P(\mu r_{k}<\mu r_{i}+(1-\mu)s_{i})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Case III, when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and all participants have the
+ same probability 
+\begin_inset Formula $\frac{1}{N}$
+\end_inset
+
+ to win the game.
+ Notice also that 
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{N}}{N}|_{0}^{1}=\frac{1}{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(r_{k}<r_{i})\prod_{k=P+1}^{N}P(r_{k}<r_{i})=r_{i}{}^{N-1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Case IV, when both rich and poor participants set 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+, then the poor participant can win only if her score 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is above all other participants - rich or poor.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\prod_{k=P+1}^{N}P(\mu r_{k}+(1-\mu)s_{k}<\mu r_{i}+(1-\mu)s_{i})\\
+=F_{X}(x_{i})^{N-1}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using symmetry arguments, this also turns out to be 
+\begin_inset Formula $1/N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Effect of 
+\begin_inset Formula $N$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The more 
+\begin_inset Formula $N$
+\end_inset
+
+ increases the more likely is that the poor participant gets less utility
+ from 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+.
+ Higher 
+\begin_inset Formula $N$
+\end_inset
+
+ for the same 
+\begin_inset Formula $P/N$
+\end_inset
+
+ has the effect that utility from 
+\begin_inset Formula $\nu_{1}$
+\end_inset
+
+ has no concavity.
+ More players thus make the competition uncompetitive - if all characteristics
+ are uniformly distributed.
+ The rich participant also faces the same effect of high 
+\begin_inset Formula $N$
+\end_inset
+
+ .
+ Having more players dominates the effect of uniform characteristics and
+ makes the effect of skills redundant.
+ Having a two-player or a three-player game is hardly of any effect since
+ large numbers significantly change the probability.
+ It needs to be better explained why the game between two-players is relevant
+ when being played among 
+\begin_inset Formula $N$
+\end_inset
+
+ consumers.
+ One possible way to see is that competitions are not conducted over high
+ 
+\begin_inset Formula $N$
+\end_inset
+
+ and they're always conducted over few people.
+ This could be clarified up-front.
+ Instead of the population being replaced - we're concerned with how winners
+ get a result and move on to the next-stage (which are infinite for our
+ purposes).
+\end_layout
+
+\begin_layout Standard
+One needs to see how probability itself changes with respect to higher 
+\begin_inset Formula $N$
+\end_inset
+
+ values as a function of expenditure.
+ The probability for the same expenditure ought to have a weak effect on
+ probability when 
+\begin_inset Formula $N$
+\end_inset
+
+ is higher.
+ It may make sense therefore to stick to a 2-player model - which explains
+ everything without the issues we're having with higher 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+To handle high 
+\begin_inset Formula $N$
+\end_inset
+
+, one idea may be have consider the competition between the entire rich
+ and entire poor class.
+ Again, a two-player model makes more sense here.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Three-player-Discrete-Model"
+
+\end_inset
+
+A three-player model
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now consider the solution of the above game where the total number of
+ participants 
+\begin_inset Formula $N=3$
+\end_inset
+
+ and the number of poor participants 
+\begin_inset Formula $P=2$
+\end_inset
+
+.
+ As before, the participant takes advantage of the skills with weight 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+ only by spending an amount 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ In the all-or-nothing payment scheme, the participant might avoid the investmen
+t altogether and keep the investment towards savings instead.
+ The behaviour of both participants depends only on 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ - as they are unaware of 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ before they participate.
+ 
+\end_layout
+
+\begin_layout Standard
+The following result for the distribution of 
+\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ under assumption 
+\begin_inset Formula $\mu<1-\mu$
+\end_inset
+
+ that we repeatedly use is detailed in Appendix A.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F_{X}(x) & =P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
+1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We now evaluate above probabilities under Case I, II, III and IV discussed
+ above.
+\end_layout
+
+\begin_layout Subsubsection*
+Case I
+\end_layout
+
+\begin_layout Standard
+With Case I, the poor participant can win when her raw-talent 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ is higher than of the total score of rich participant (who competes with
+ acquired skills) as well as the raw-talent (let's say 
+\begin_inset Formula $r_{1}'$
+\end_inset
+
+ ) of the only other poor participant in the three-player game.
+ Both the poor participants are priced out of accessing any skills 
+\begin_inset Formula $s$
+\end_inset
+
+ in their score so that the skills 
+\begin_inset Formula $s>0$
+\end_inset
+
+ is only true for the rich participant having 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ 
+\begin_inset Formula $=\overline{\nu}$
+\end_inset
+
+.
+ Thus, the poor participant with raw-talent 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ can win with the following probability
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(\text{win}|r_{1}) & =P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1})P(r_{1}'<r_{1})=F_{X}(\mu r_{1})r_{1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $\mu r_{1}<\mu<1-\mu<1$
+\end_inset
+
+ is implied due to 
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+ (and 
+\begin_inset Formula $r_{1}\in(0,1)$
+\end_inset
+
+ ).
+ The probability that the total score 
+\begin_inset Formula $\mu r_{2}+(1-\mu)s_{2}$
+\end_inset
+
+ does not exceed 
+\begin_inset Formula $\mu r_{1}$
+\end_inset
+
+ implies that only the first part of the piecewise function for 
+\begin_inset Formula $F_{X}(x)$
+\end_inset
+
+ needs to be considered.
+ Therefore, using 
+\begin_inset Formula $P(\text{win}|r_{1})=\frac{\mu^{2}r_{1}^{3}}{2\mu(1-\mu)}$
+\end_inset
+
+, we evaluate 
+\begin_inset Formula $P_{1}(\text{win})$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\begin{align*}
+P_{1}(\text{win})=\int_{0}^{1}P(\text{win}|r_{1})dr_{1} & =\frac{\mu}{8(1-\mu)}
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%integrate (mu^2*r^3,r,0,1)/(2*mu*(1-mu)) gives 
+\backslash
+frac{
+\backslash
+mu}{8(1-
+\backslash
+mu)}
+\end_layout
+
+\begin_layout Plain Layout
+
+% for .2, the probability is .03125.
+ The MC gives .03126 .
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, only one of the participants can win, the probability 
+\begin_inset Formula $P_{2}(\text{win})$
+\end_inset
+
+ for the rich participant to win is simply 
+\begin_inset Formula $1-2P_{1}(\text{win})$
+\end_inset
+
+.
+ The following thus applies to all other cases (i.e.
+ Cases II, III and IV).
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{align}
+P_{2}(\text{win}) & =1-2P_{1}(\text{win})\label{eq:three_player_rich_probability}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Case II
+\end_layout
+
+\begin_layout Standard
+In Case II, the rich person does not participate (
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+) and both the poor participants have the skills-advantage in the game.
+ A poor participant wins by having the total score higher than the other
+ poor participant as well as the raw-talent of the rich participant (who
+ does not acquire skills with investment).
+ Representing 
+\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+, we have the following probability for the poor participant to win
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% the simulation can check whether P(
+\backslash
+mur_2<
+\backslash
+mu r_1+(1-
+\backslash
+mu)s_1 is really (
+\backslash
+mu r_1+(1-
+\backslash
+mu)s_1)/
+\backslash
+mu 
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})\cdot P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
+=P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})F_{X}(x_{1})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that the density associated with 
+\begin_inset Formula $P(\mu r_{2}<\mu r_{1}+(1-\mu)s_{1})$
+\end_inset
+
+ or 
+\begin_inset Formula $P(r_{2}<r_{1}+(\frac{1}{\mu}-1)s_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $1$
+\end_inset
+
+ after 
+\begin_inset Formula $r_{1}+(\frac{1}{\mu}-1)s_{1}>1$
+\end_inset
+
+ ( or 
+\begin_inset Formula $\mu r_{1}+(1-\mu)s_{1}>\mu)$
+\end_inset
+
+ and 
+\begin_inset Formula $\frac{1}{\mu}$
+\end_inset
+
+ in the interval 
+\begin_inset Formula $(0,\mu)$
+\end_inset
+
+ (this is because 
+\begin_inset Formula $r_{2}\in(0,1)$
+\end_inset
+
+ ).
+ In other words, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(r_{2}<r_{1}+(1/\mu-1)s_{1}) & =\begin{cases}
+\frac{x_{1}}{\mu} & 0<x_{1}<\mu\\
+1 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% To check the pdf we run a montecarlo-sim of just s1 and r2 for a fixed
+ r1.
+ The theoretical results can be obtained with
+\end_layout
+
+\begin_layout Plain Layout
+
+% integrate( r + (1/mu-1)s , s,0,mu(1-r)/(1-mu)) + integrate( 1, s,mu(1-r)/(1-mu
+),1) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The probability to win for the poor participant can be written as (see Appendix
+ A)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(\text{win}|r_{1},s_{1}) & =\begin{cases}
+\frac{x_{1}^{3}}{2\mu^{2}(1-\mu)} & 0<x<\mu\\
+\frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
+1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using double-integral properties (see Appendix B), the total probability
+ to win 
+\begin_inset Formula $P_{1}(\text{win})$
+\end_inset
+
+ for a poor participant is evaluated as follows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P_{1}(\text{win})=\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}\ \frac{(\mu r_{1}+(1-\mu)s_{1})^{3}}{2\mu^{2}(1-\mu)}ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r_{1})}{1-\mu}}^{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1}-\mu/2)}{1-\mu}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r_{1}}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
+=\frac{\mu^{2}}{10(1-\mu)^{2}}+\frac{1-2\mu}{2(1-\mu)}+\frac{(4-5\mu)\mu}{8(1-\mu)^{2}}\\
+=\frac{4\mu^{2}+20(1-2\mu)(1-\mu)+5(4-5\mu)\mu}{40(1-\mu)^{2}}=\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The probability 
+\begin_inset Formula $P_{2}(\text{win})$
+\end_inset
+
+ for the rich participant to win follows from Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:three_player_rich_probability"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%For part A, integrate(integrate(((mu*r+(1-mu)*s)^3)/( 2 *mu^2*(1-mu)),s,0,mu*(1
+-r)/(1-mu)),r,0,1) gives 
+\backslash
+frac{
+\backslash
+mu^2}{10(1-
+\backslash
+mu)^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part B,  integrate(integrate(((mu*r+(1-mu)*s)-mu/2)/(1-mu),s,mu*(1-r)/(1-m
+u),1-mu*(r)/(1-mu)),r,0,1) gives 
+\backslash
+frac{1-2
+\backslash
+mu}{2(1-
+\backslash
+mu)}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part C, integrate(integrate((1-((mu*r+(1-mu)*s-1)^2)/(2*mu*(1-mu))),s,1-mu
+*r/(1-mu),1),r,0,1)  gives 
+\backslash
+frac{(4-5
+\backslash
+mu)
+\backslash
+mu}{8(1-
+\backslash
+mu)^2} 
+\end_layout
+
+\begin_layout Plain Layout
+
+% with denomiator 40(1-
+\backslash
+mu)^2 numerator simplified using 4x^2+20(1-2x)(1-x)+5(4-5x)x
+\end_layout
+
+\begin_layout Plain Layout
+
+% verified shaped with plot (19mu^2 - 40mu + 20)/(40*(1-mu)^2) for mu from
+ 0 to .5 - which indicates that probability falls sharply with 
+\backslash
+mu
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Case III 
+\end_layout
+
+\begin_layout Standard
+In Case III, when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and all participants have the
+ same probability 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ to win the game.
+ This is because 
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{3}}{3}|_{0}^{1}=\frac{1}{3}$
+\end_inset
+
+.
+ For three players, both the poor and rich participants have the same total
+ probability 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ to win.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Case IV
+\end_layout
+
+\begin_layout Standard
+In Case IV, when both rich and poor participants set 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+, then the poor participant can win only if her score 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is above that of the rich participant as well as that of the only other
+ poor participant.
+ Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})P(\mu r_{1}'+(1-\mu)s_{1}'<\mu r_{1}+(1-\mu)s_{1})\\
+=F_{X}(x_{1})^{2}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+P(\text{win}|r_{1}) & =\begin{cases}
+\frac{x_{1}^{4}}{4\mu^{2}(1-\mu)^{2}} & 0<x_{1}<\mu\\
+(\frac{x_{1}-\mu/2}{1-\mu})^{2} & \mu<x_{1}<1-\mu\\
+(1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)})^{2} & 1-\mu<x_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While this integral can be evaluated based on symmetry arguments ( since
+ 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is also randomly distributed), the integral 
+\begin_inset Formula $\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
+\end_inset
+
+ also evaluates to 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ (see Appendix B)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{s=0}^{s=1}\int_{r=0}^{r=1}F_{X}(x_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{4}}{4\mu^{2}(1-\mu)^{2}}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r)}{1-\mu}}^{s_{1}=1-\frac{\mu r}{1-\mu}}(\frac{\mu r_{1}+(1-\mu)s_{1}-\mu/2}{1-\mu})^{2}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})^{2}\ ds_{1}dr_{1}}\\
+=\frac{\mu^{3}}{24(1-\mu)^{3}}+\frac{2(1-2\mu)(\mu(7\mu-10)+4)}{24(1-\mu)^{3}}+\frac{\mu(19\mu^{2}-30\mu+12)}{24(1-\mu)^{3}}=\frac{1-\mu^{3}+3\mu^{2}-3\mu}{3(1-\mu)^{3}}=\frac{1}{3}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/winprob_with_mu.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Probability-of-winning"
+
+\end_inset
+
+Probability of winning 
+\begin_inset Formula $P_{1}(\text{win})$
+\end_inset
+
+, 
+\begin_inset Formula $P_{2}(\text{win})$
+\end_inset
+
+ for poor and rich participants with varying 
+\begin_inset Formula $\mu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As is clear from Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Probability-of-winning"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and above results (see summaries in Tables 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Results_summary_poor"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Results_summary_rich"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), the condition 
+\begin_inset Formula $\mu<1/2$
+\end_inset
+
+ - indicating that curated skills are given more importance that raw-talent
+ in the competitions - means that the poor participant is strictly better
+ off (than facing probability 
+\begin_inset Formula $1/3$
+\end_inset
+
+) if she participates while the rich participant doesn't participate (Case
+ II).
+ Also, the poor participant is better off participating for 
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+ when the rich participant does participate as it raise the probability
+ to 
+\begin_inset Formula $1/3$
+\end_inset
+
+.
+ That the competition becomes uncompetitive both when threshold 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ falls too much (letting both participants participate) or rises too much
+ (letting both both participants withdraw) follows from the properties of
+ the winning probability.
+\end_layout
+
+\begin_layout Standard
+The rich participant could withdraw and face either 
+\begin_inset Formula $1/3$
+\end_inset
+
+ or lower probability (when the poor participant participates).
+ By participating, the rich participant would either face probability 
+\begin_inset Formula $1/3$
+\end_inset
+
+ (when poor participant also participates) or better (if the poor participant
+ withdraws).
+ Considering the probabilities alone, the rich participant would always
+ participate.
+ If the rich participant always participates, then with enough money, the
+ poor participant is always better off participating as well because not
+ participating would bring her probability to win below 
+\begin_inset Formula $1/3$
+\end_inset
+
+.
+ If the utility was from probability alone, then both participants would
+ participate and face 
+\begin_inset Formula $1/3$
+\end_inset
+
+ probability.
+ 
+\end_layout
+
+\begin_layout Standard
+Faced with a finite life-time and utility from accumulated assets, the participa
+nts do not however optimise the probability to win in the game.
+ Instead, the participants optimise an intertemporally additive utility
+ over the life-time.
+ The equilibrium based on utility from accumulated assets is discussed in
+ Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Utility-maximising-participants"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% For part A,  integrate( integrate((mu *r + (1-mu)*s)^4/(2*mu*(1-mu))^2,s,0,mu*
+(1-r)/(1-mu)) , r, 0,1) gives 
+\backslash
+frac{
+\backslash
+mu^3}{24*(1-
+\backslash
+mu)^3}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part B, integrate (integrate( ((mu * r + (1-mu) *s - mu /2 )/(1-mu)
+ )^2,s,mu*(1-r)/(1-mu),1-mu*r/( 1-mu)) , r, 0, 1)  gives 
+\backslash
+frac{(2 
+\backslash
+mu -1) (
+\backslash
+mu  (7 
+\backslash
+mu -10)+4)}{12 (
+\backslash
+mu -1)^3}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part C, integrate(integrate( (1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu))
+)^2, s, 1-mu *r /(1-mu),1),r,0,1) gives 
+\backslash
+frac{
+\backslash
+mu(19
+\backslash
+mu^{2}-30
+\backslash
+mu+12)}{24(1-
+\backslash
+mu)^{3}}
+\end_layout
+
+\begin_layout Plain Layout
+
+% simplified with x^3 + 2(1-2x)(x ( 7x-10) + 4) + x ( 19x^2 - 30x + 12)
+ which gives 8(1-x)^3
+\end_layout
+
+\begin_layout Plain Layout
+
+% plot (3
+\backslash
+mu^{2}-
+\backslash
+mu^{3}+
+\backslash
+mu-1)/(3*(1-
+\backslash
+mu)^3) from 0 to 1 shows that the probability rises with mu
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="left" valignment="top" width="7cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probability of poor participant to win
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Summary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Only rich invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\mu}{8(1-\mu)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+With higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the participants with raw-talent get rewarded.
+ Therefore, higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+ favours the poorer participant.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+II
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Only poor invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+With higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the poor participants with access to skills get rewarded.
+ Therefore, a lower 
+\begin_inset Formula $\mu$
+\end_inset
+
+ favours the poorer participants.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+III,IV
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Neither or Both invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Results_summary_poor"
+
+\end_inset
+
+The probability of winning for the poor participant in the 3-player model
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Poor participant
+\end_layout
+
+\begin_layout Plain Layout
+
+% require(latex2exp)
+\end_layout
+
+\begin_layout Plain Layout
+
+% x = seq(0,.499,.01); plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
+\backslash
+
+\backslash
+mu$"),ylab=TeX("P(win)")); 
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,(x*(x^2-2*x-3)+4)/(12*(1-x)),type='l',lty=1) # only rich
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,(-16*x**3 + 65*x**2 - 90*x + 40 )/( 120 * (1-x)**2),lty=2) # only
+ poor
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,rep(1/3,length(x)),lty=3) # neither or both
+\end_layout
+
+\begin_layout Plain Layout
+
+% legend(0.3, .7,legend=TeX(paste("Case",c(
+\begin_inset Quotes eld
+\end_inset
+
+I
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+II
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+III,IV
+\begin_inset Quotes erd
+\end_inset
+
+))),lty=c(1,2,3),cex=.7) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="left" valignment="top" width="7cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probability of rich participant to win
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Summary
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Only rich invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1-\frac{\mu}{4(1-\mu)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+With higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the participants with raw-talent get rewarded.
+ Therefore, higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+ does not favour the rich participant.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+II
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Only poor invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1-\frac{19\mu^{2}-40\mu+20}{20(1-\mu)^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+With higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the poor participants with access to skills get rewarded.
+ Therefore, a higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+ favours the rich participant.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+III,IV
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Neither or Both invest in skills
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Results_summary_rich"
+
+\end_inset
+
+The probability of winning for the rich participant in the 3-player model
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Rich participant
+\end_layout
+
+\begin_layout Plain Layout
+
+% require(latex2exp)
+\end_layout
+
+\begin_layout Plain Layout
+
+% x = seq(0,.499,.01); plot(0,0,type='l',xlim=c(0,.5),ylim=c(0,1),xlab=TeX("$
+\backslash
+
+\backslash
+mu$"),ylab=TeX("P(win)")); 
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,1-(x*(x^2-2*x-3)+4)/(6*(1-x)),type='l',lty=1) # only rich
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,1-(-16*x**3 + 65*x**2 - 90*x + 40 )/( 60 * (1-x)**2),lty=2) #
+ only poor
+\end_layout
+
+\begin_layout Plain Layout
+
+% lines(x,rep(1/3,length(x)),lty=3) # neither or both
+\end_layout
+
+\begin_layout Plain Layout
+
+% legend(0.3, .7,legend=TeX(paste("Case",c(
+\begin_inset Quotes eld
+\end_inset
+
+I
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+II
+\begin_inset Quotes erd
+\end_inset
+
+,
+\begin_inset Quotes erd
+\end_inset
+
+III,IV
+\begin_inset Quotes erd
+\end_inset
+
+))),lty=c(1,2,3),cex=.7) 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Utility-maximising-participants"
+
+\end_inset
+
+Utility maximising participants
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="center" valignment="top" width="0.7in">
+<column alignment="left" valignment="middle" width="1.5in">
+<column alignment="left" valignment="middle" width="1.5in">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Poor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+participant
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+withdraws
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+participates
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rich
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+withdraws
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case III
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case II
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+participates
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case I
+\end_layout
+
+\end_inset
+</cell>
+<cell mroffset="0.5in" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Case IV
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:prisoners_dilemma_cases"
+
+\end_inset
+
+Cases I,II, III, IV as participant strategies
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top" width="0.7in">
+<column alignment="left" valignment="top" width="0.7in">
+<column alignment="left" valignment="middle" width="2in">
+<column alignment="center" valignment="middle" width="2in">
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+utilities 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+for 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Poor 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+participant 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+(rich,
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+poor) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+withdraws
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+participates
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rich
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+withdraws
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell mroffset="0.2cm" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{2})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}$
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $u(y_{1})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{2})+\frac{u(y_{2})p_{2}'+(1-p_{2}')u(y_{1})}{\delta}$
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $u(y_{1}-\overline{\nu})+\frac{u(y_{2})p_{1}'+(1-p_{1}')u(y_{1})}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Participant
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+participates
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell mroffset="0.5in" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{p_{2}u(y_{2})+(1-p_{2})u(y_{1})}{\delta}$
+\end_inset
+
+,
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $u(y_{1})+\frac{p_{1}u(y_{2})+(1-p_{1})u(y_{1})}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}$
+\end_inset
+
+, 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $u(y_{1}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:prisoners_dilemma"
+
+\end_inset
+
+Utility from two periods for (rich,poor) participants
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Our discussion of the effect of the threshold 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ and the income differences 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ on participation assumes that the exogenous parameter 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is stable with respect to short-term changes in threshold investment 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ as well as disposable incomes 
+\begin_inset Formula $y_{1},y_{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The choices with a general intertemporally additive function 
+\begin_inset Formula $u(A)$
+\end_inset
+
+ (with assets 
+\begin_inset Formula $A$
+\end_inset
+
+) for the poor and rich participants are shown in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:prisoners_dilemma"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ where we define 
+\begin_inset Formula $p_{1}=\frac{\mu}{8(1-\mu)}$
+\end_inset
+
+ , 
+\begin_inset Formula $p_{2}=1-2p_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $p_{1}'=\frac{19\mu^{2}-40\mu+20}{40(1-\mu)^{2}}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{2}'=1-2p_{1}'$
+\end_inset
+
+ for the three-player model discussed above.
+ It's easy to see verify from Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Probability-of-winning"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ that for all values of 
+\begin_inset Formula $\mu<1/2$
+\end_inset
+
+, we have 
+\begin_inset Formula $p_{1}<1/3<p_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{1}'>1/3>p_{2}'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\text{Given }\mu<1/2,\text{we have}\label{eq:probability_inequality}\\
+p_{1}<1/3<p_{2}\nonumber \\
+p_{1}'>1/3>p_{2}'\nonumber 
+\end{gather}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Notice the Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:prisoners_dilemma"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ represents the condition when the budget is non-binding i.e.
+ the poor participant is able to spend 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ i.e.
+ 
+\begin_inset Formula $\overline{\nu}<y_{1}<y_{2}$
+\end_inset
+
+.
+ When the poor participant faces a binding constraint i.e.
+ 
+\begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
+\end_inset
+
+ , then the rich participant knows that the best case probability to win
+ for the poor participant is 
+\begin_inset Formula $1/3$
+\end_inset
+
+.
+ The rich participant's decision to participate would depend only on utility
+ from savings and the relative advantage from gain in probability.
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Binding-constraint"
+
+\end_inset
+
+Binding constraint
+\end_layout
+
+\begin_layout Standard
+Assuming the EUT participants we first consider the simpler case of binding
+ constraint 
+\begin_inset Formula $y_{1}<\overline{\nu}<y_{2}$
+\end_inset
+
+.
+ Since we assume a stability in long-term participant behaviour (which itself
+ is a result of observed probability of success), mixed-strategies are not
+ relevant in the current set up.
+ Considering pure strategies for partcipation, the rich participant would
+ thus participate only when the utility from participating would be higher
+ than from not participating i.e.
+ 
+\begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{p_{2}u(y_{2})+(1-p_{2})u(y_{1})}{\delta}>u(y_{2})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}$
+\end_inset
+
+ .
+ This results in the following condition
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{(p_{2}-1/3)(u(y_{2})-u(y_{1}))}{\delta} & >u(y_{2})-u(y_{2}-\overline{\nu})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With income differences being the same an increase in participation cost
+ 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ discourages participation since RHS increases with 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ (
+\begin_inset Formula $\because u(y_{2}-\overline{\nu})$
+\end_inset
+
+ is decreasing in 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+).
+ Similarly, with participation cost 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ being the same, an increase in income-difference 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ is in the rich participant's interest to participate whereas a narrowing
+ of income differences reduces incentive to participate.
+ All else being the same, higher impatience (lower time-discounted value
+ of money or higher 
+\begin_inset Formula $\delta$
+\end_inset
+
+) would also discourage participation.
+ Therefore, when budget is binding for the poor participant i.e.
+ if the poor participant cannot participate due to 
+\begin_inset Formula $y_{1}<\overline{\nu}$
+\end_inset
+
+, then narrow income differences, higher participation costs and patience
+ for savings (common for both rich and poor participants) all encourage
+ the rich participant to withdraw from the game.
+ This also means that wider income differences (
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+) combined with lower participation costs (
+\begin_inset Formula $\overline{\mu}$
+\end_inset
+
+) may together help maintain the equilibrium where only the rich participates.
+ Similarly, wider income differences ( higher
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ ) and more patience for savings (higher 
+\begin_inset Formula $\delta$
+\end_inset
+
+ ) would together maintain the incentive for the rich participant to participate.
+ These conclusions very much fit with the sociological observations made
+ in the literature (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HirschSocialLimits,GalbraithEssential"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Non-Binding constraint
+\end_layout
+
+\begin_layout Standard
+When budget is non-binding, then participation of the rich participant is
+ her dominant strategy if the condition is also 
+\begin_inset Formula $u(y_{2})+\frac{u(y_{2})p_{2}'+(1-p_{2}')u(y_{1})}{\delta}<u(y_{2}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta})$
+\end_inset
+
+ i.e.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{(1/3-p_{2}')(u(y_{2})-u(y_{1}))}{\delta} & >u(y_{2})-u(y_{2}-\overline{\nu})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inferences on how 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta$
+\end_inset
+
+ influence the participation (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Binding-constraint"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) remain the same for the above condition.
+ We now consider the conditions for all possible Nash equilibria in the
+ current set up.
+ For ease of notation we define the following for a given 
+\begin_inset Formula $\overline{\nu},y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+U_{1} & \equiv u(y_{1})-u(y_{1}-\overline{\nu})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+U_{2} & \equiv u(y_{2})-u(y_{2}-\overline{\nu})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ could be loosely referred to has the immediate utility gain from withdrawing.
+ If 
+\begin_inset Formula $u(\cdot)$
+\end_inset
+
+ represents a diminishing utliity, then it is necessary for 
+\begin_inset Formula $y_{1}<y_{2}$
+\end_inset
+
+ that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+U_{1} & >U_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider now if Case I were be a Nash Equilibrium, then for rich's decision
+ to participate, the poor participant must get more utility from withdrawing
+ than from participating and for poor participant's decision to withdraw,
+ the rich must get more utility from participating than from withdrawing.
+ The following conditions 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{1})+\frac{p_{1}u(y_{2})+(1-p_{1})u(y_{1})}{\delta}>u(y_{1}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}\Rightarrow u(y_{1})-u(y_{1}-\overline{\nu})>\frac{(\frac{1}{3}-p_{1})(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ and 
+\begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{p_{2}u(y_{2})+(1-p_{2})u(y_{1})}{\delta}>u(y_{2})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}\Rightarrow u(y_{2})-u(y_{2}-\overline{\nu})<\frac{(p_{2}-1/3)(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ must therefore hold simultaneously
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather}
+\frac{(\frac{1}{3}-p_{1})(u(y_{2})-u(y_{1}))}{\delta}<U_{1}\nonumber \\
+U_{2}<\frac{(p_{2}-1/3)(u(y_{2})-u(y_{1}))}{\delta}\label{eq:caseI_inequalities}
+\end{gather}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% (
+\backslash
+frac{(
+\backslash
+frac{1}{3}-p_{1})(u(y_{2})-u(y_{1}))}{
+\backslash
+delta},
+\backslash
+frac{(p_{2}-1/3)(u(y_{2})-u(y_{1}))}{
+\backslash
+delta})
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A utility that is not diminishing (e.g.
+ with a reference-dependent utility) could also fulfil the above conditions
+ except for 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ not necessarily being less than 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+.
+ If, 
+\begin_inset Formula $u(\cdot)$
+\end_inset
+
+ is indeed a diminishing utility, however, then the condition 
+\begin_inset Formula $1/3-p_{1}<p_{2}-1/3$
+\end_inset
+
+ (for a fixed 
+\begin_inset Formula $\mu$
+\end_inset
+
+) along with 
+\begin_inset Formula $U_{2}<U_{1}$
+\end_inset
+
+ allows ...
+ 
+\end_layout
+
+\begin_layout Standard
+An increase in 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ due to higher 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ does not change the equilbrium so long as the corresponding rise 
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ (due to higher 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ ) does not affect the second inequality.
+ In other words, a higher 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ favours Case I as the equilibrium so long as there is an incentive for
+ the rich to participate.
+ Likewise, a decrease in 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ would is favourable for Case I as an equilibrium so long as the poor participan
+ts does not also have an incentive to pariticpate.
+ 
+\end_layout
+
+\begin_layout Standard
+Similar effects can be seen with income differences 
+\begin_inset Formula $y_{2}-y_{1}$
+\end_inset
+
+ (which increase 
+\begin_inset Formula $u(y_{2})-u(y_{1})$
+\end_inset
+
+ as well as 
+\begin_inset Formula $\frac{U_{2}}{U_{1}}$
+\end_inset
+
+) if we rewrite Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:caseI_inequalities"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{(\frac{1}{3}-p_{1})}{\delta}<\frac{U_{1}}{u(y_{2})-u(y_{1})}\\
+\frac{U_{2}}{(u(y_{2})-u(y_{1}))}<\frac{(p_{2}-1/3)}{\delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Limiting our attention to cases when 
+\begin_inset Formula $\overline{\nu}<y_{1}$
+\end_inset
+
+, higher 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ decreases both 
+\begin_inset Formula $\frac{U_{2}}{u(y_{2})-u(y_{1})}$
+\end_inset
+
+and encourages the rich to participate but it also decreases
+\begin_inset Formula $\frac{U_{1}}{u(y_{2})-u(y_{1})}$
+\end_inset
+
+ by raising the stakes enough for the poor to participate.
+ It is easy to see that higher impatience 
+\begin_inset Formula $\delta$
+\end_inset
+
+ encourages both poor and rich to withdraw.
+ As we shall see, this is a relatively easier equilibrium to be achieved.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% For nu=1, y1= 2 and y2=y - the plot (y**.5 - (y-1)**.5) / (y**.5 - 2**.5)
+ for y from 3 to 50 is decreasing in y (i.e.
+ y2).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If Case II is a Nash Equilibrium, then for rich's decision to withdraw,
+ the poor participant should get more utility from participating than from
+ withdrawing and for poor participant's decision to participate, the rich
+ participant should get more utility from withdrawing than from participating.
+ This means that the following hold 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{1}-\overline{\nu})+\frac{p_{1}'u(y_{2})+(1-p_{1}')u(y_{1})}{\delta}>u(y_{1})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}\Rightarrow u(y_{1})-u(y_{1}-\overline{\nu})<\frac{(p_{1}'-1/3)(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ and 
+\begin_inset Formula $u(y_{2})+\frac{p_{2}'u(y_{2})+(1-p_{2}')u(y_{1})}{\delta}>u(y_{2}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}\Rightarrow u(y_{2})-u(y_{2}-\overline{\nu})>\frac{(1/3-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ simultaneously, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+U_{1}<\frac{(p_{1}'-1/3)(u(y_{2})-u(y_{1}))}{\delta}\\
+U_{2}>\frac{(1/3-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $\frac{(p_{1}'-1/3)(u(y_{2})-u(y_{1}))}{\delta}<\frac{(1/3-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ , the above cannot be satisified so long as we have a diminishing utility
+ which necessitates
+\begin_inset Formula $U_{2}<U_{1}$
+\end_inset
+
+.
+ Thus an equilibrium with Case II which incentivises the poor to participate
+ but not the rich is possible only with a reference dependent utility with
+ 
+\begin_inset Formula $U_{1}<U_{2}$
+\end_inset
+
+.
+ With 
+\begin_inset Formula $U_{1}<U_{2}$
+\end_inset
+
+, we can write above as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{U_{1}}{u(y_{2})-u(y_{1})}<\frac{(p_{1}'-1/3)}{\delta}<\frac{(1/3-p_{2}')}{\delta}<\frac{U_{2}}{u(y_{2})-u(y_{1})}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice that despite a reference-dependent utility, a higher 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ or more impatience (
+\begin_inset Formula $\delta$
+\end_inset
+
+) may disincentivise the poor from participation just the same.
+ Similarly, higher income differencers (an increase in 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+) could enourage the rich to pariticpate by decreasing 
+\begin_inset Formula $\frac{U_{2}}{u(y_{2})-u(y_{1})}$
+\end_inset
+
+ .
+ Despite the reference dependent utility, the equilibrium with Case II is
+ indeed a fragile one.
+\end_layout
+
+\begin_layout Standard
+If Case III were to be a Nash-Equilibrium, then for rich participant's decision
+ to withdraw, poor should get more utility from withdrawing than from participat
+ing and for poor participant's decision to withdraw, the rich participant
+ should get more from withdrawing than from participating.
+ The following should thus hold
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{1})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}>u(y_{1}-\overline{\nu})+\frac{p_{1}'u(y_{2})+(1-p_{1}')u(y_{1})}{\delta}\Rightarrow u(y_{1})-u(y_{1}-\overline{\nu})>\frac{(p_{1}'-\frac{1}{3})(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ and 
+\begin_inset Formula $u(y_{2})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}>u(y_{2}-\overline{\nu})+\frac{p_{2}u(y_{2})+(1-p_{2})u(y_{1})}{\delta}\Rightarrow u(y_{2})-u(y_{2}-\overline{\nu})>\frac{(p_{2}-\frac{1}{3})(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+U_{1}>\frac{(p_{1}'-\frac{1}{3})(u(y_{2})-u(y_{1}))}{\delta}\\
+U_{2}>\frac{(p_{2}-\frac{1}{3})(u(y_{2})-u(y_{1}))}{\delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $p_{1}'-\frac{1}{3}<p_{2}-\frac{1}{3}$
+\end_inset
+
+, we have 
+\begin_inset Formula $\frac{(p_{1}'-\frac{1}{3})(u(y_{2})-u(y_{1}))}{\delta}<\frac{(p_{2}-\frac{1}{3})(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}<U_{1}$
+\end_inset
+
+ .
+ A higher 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ makes pushes both
+\begin_inset Formula $U_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{1}$
+\end_inset
+
+ further away from participation but a fall in 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, incentivises the rich participant to participate (leading to Case I).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\frac{U_{1}}{u(y_{2})-u(y_{1})}>\frac{(p_{1}'-\frac{1}{3})}{\delta}\\
+\frac{U_{2}}{u(y_{2})-u(y_{1})}>\frac{(p_{2}-\frac{1}{3})}{\delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Higher income differences i.e.
+ higher 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ for fixed 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ also decrease 
+\begin_inset Formula $\frac{U_{2}}{u(y_{2})-u(y_{1})}$
+\end_inset
+
+ and incentivise the rich participant to participate (leading to Case I).
+ Conversely, if the game is not lucrative for the rich it would be automatically
+ be not feasible for the poor i.e.
+ if rich withdraws then poor automatically withdraws.
+\end_layout
+
+\begin_layout Standard
+If Case IV were to be a Nash Equilibrium, then for rich's decision to participat
+e, the poor participant should get more from participating than from withdrawing
+ and for poor's decision to participate, the rich participant should get
+ more from participating than from withdrawing.
+ Therefore, the following
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $u(y_{1}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}>u(y_{1})+\frac{p_{1}u(y_{2})+(1-p_{1})u(y_{1})}{\delta}\Rightarrow u(y_{1})-u(y_{1}-\overline{\nu})<\frac{(\frac{1}{3}-p_{1})(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ and 
+\begin_inset Formula $u(y_{2}-\overline{\nu})+\frac{\frac{1}{3}u(y_{2})+\frac{2}{3}u(y_{1})}{\delta}>u(y_{2})+\frac{p_{2}'u(y_{2})+(1-p_{2}')u(y_{1})}{\delta}\Rightarrow u(y_{2})-u(y_{2}-\overline{\nu})<\frac{(\frac{1}{3}-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ must hold
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+U_{1}<\frac{(\frac{1}{3}-p_{1})(u(y_{2})-u(y_{1}))}{\delta}\\
+U_{2}<\frac{(\frac{1}{3}-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With 
+\begin_inset Formula $\frac{(\frac{1}{3}-p_{2}')(u(y_{2})-u(y_{1}))}{\delta}<\frac{(\frac{1}{3}-p_{1})(u(y_{2})-u(y_{1}))}{\delta}$
+\end_inset
+
+ and 
+\begin_inset Formula $U_{2}<U_{1}$
+\end_inset
+
+ , this equilibrium rests upon the incentive for the poor participant to
+ participate.
+ So long as the poorer participant finds the competition worthwhile, the
+ rich would also participate.
+ 
+\end_layout
+
+\begin_layout Standard
+The above results outline how participation costs influence the investments
+ towards status.
+ For very low 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, rich and poor would both participate and for very high 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, both would withdraw.
+ For everything in between, the rich would participate while poor don't.
+ The only exception to this is when the utility is a reference-dependent
+ one.
+ 
+\end_layout
+
+\begin_layout Standard
+More general cost-functions also confirm this effect of 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% For part A,  integrate( integrate((mu *r + (1-mu)*s)^2/(2*mu*(1-mu)),s,0,mu*(1
+-r)/(1-mu)) , r, 0,1)gives 
+\backslash
+frac{
+\backslash
+mu^2}{8*(1-
+\backslash
+mu)^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part B, integrate (integrate( (mu * r + (1-mu) *s - mu /2 )/(1-mu),s,mu*(1
+-r)/(1-mu),1-mu*r/( 1-mu)) , r, 0, 1) gives 
+\backslash
+frac{1-2
+\backslash
+mu}{2(1-
+\backslash
+mu)}
+\end_layout
+
+\begin_layout Plain Layout
+
+% For part C, integrate(integrate( 1- ((mu *r  + (1-mu) * s)-1)^2/(2*mu*(1-mu)),
+ s, 1-mu *r /(1-mu),1),r,0,1) gives 
+\backslash
+frac{(4-5
+\backslash
+mu)
+\backslash
+mu)}{8(1-
+\backslash
+mu)^2}
+\end_layout
+
+\begin_layout Plain Layout
+
+% simplify (mu^2)/(8*(1-mu)) + (1-2*mu)/(2*(1-mu)) + (4-5*mu)*mu/(8*(1-mu)^2)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can also discuss implications of inequality for the same total wealth
+ in the economy.
+ More particularly, a segregation where the poor never participate in the
+ economy is less favourable than one where both participate in the status
+ competitions.
+ This is possible only if ...
+ 
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Conclusion"
+
+\end_inset
+
+Conclusion
+\end_layout
+
+\begin_layout Standard
+We have considered a model where status amounts to a position that cements
+ the participant's economic position but only temporarily.
+ The dynamics of promotion and demotion depend on an economy which can only
+ be partly influenced with a superior economic position.
+ The results indicate that a stable is equilibrium is that of rich .
+ The more equitable equilibrium could be one where both equilibrium.
+ The differences in reference provide an important caveat to these results
+ because diminishing utility rules out cases where ...
+ 
+\end_layout
+
+\begin_layout Standard
+The combined utility of the two participants ...
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix A
+\end_layout
+
+\begin_layout Standard
+The distribution of a convex combination 
+\begin_inset Formula $w=\mu r+(1-\mu)s$
+\end_inset
+
+ of two random variables 
+\begin_inset Formula $r,s$
+\end_inset
+
+ - which are distributed according to densities 
+\begin_inset Formula $f_{R}(r)$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{S}(s)$
+\end_inset
+
+ - can be derived using the convolution of two derived variables 
+\begin_inset Formula $x=\mu r$
+\end_inset
+
+ and 
+\begin_inset Formula $y=(1-\mu)s$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $r$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+ are uniformly distributed variables ranging from 0 to 1, then 
+\begin_inset Formula $x$
+\end_inset
+
+ ranges from 0 to 
+\begin_inset Formula $\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ ranges from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $(1-\mu)$
+\end_inset
+
+.
+ The CDF for 
+\begin_inset Formula $F_{X}(x)$
+\end_inset
+
+ and 
+\begin_inset Formula $F_{Y}(y)$
+\end_inset
+
+ are simply 
+\begin_inset Formula $F_{X}(x)=\frac{x}{\mu}$
+\end_inset
+
+ , 
+\begin_inset Formula $F_{Y}(y)=\frac{y}{1-\mu}$
+\end_inset
+
+ (respectively).
+ Therefore, the densities for 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+ are 
+\begin_inset Formula $f_{X}(x)=\frac{1}{\mu}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{Y}(y)=\frac{1}{1-\mu}$
+\end_inset
+
+.
+ The density of 
+\begin_inset Formula $w$
+\end_inset
+
+ is simple 
+\begin_inset Formula $f(w)=\int_{-\infty}^{\infty}f_{Y}(w-x)f_{X}(x)dx$
+\end_inset
+
+.
+ Since , 
+\begin_inset Formula $f_{X}(x)$
+\end_inset
+
+ is 
+\begin_inset Formula $1/\mu$
+\end_inset
+
+ only between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ We have the following integral to evaluate for the convolution
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w) & =\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since 
+\begin_inset Formula $f_{Y}(y)$
+\end_inset
+
+ is 1 only between 0 and 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+, we have the condition 
+\begin_inset Formula $0<w-x<1-\mu\Rightarrow w-(1-\mu)<x<w$
+\end_inset
+
+.
+ Further, 
+\begin_inset Formula $x$
+\end_inset
+
+ is distributed only between 0 and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ As shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:convex_combo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the integral would evaluate to the following
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice that as a convex combination, 
+\begin_inset Formula $w$
+\end_inset
+
+ is distributed only between 0 and 1.
+\end_layout
+
+\end_inset
+
+ under the assumption 
+\begin_inset Formula $\mu<\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w)=\frac{1}{\mu}\int_{0}^{\mu}f_{Y}(w-x)dx & =\begin{cases}
+\frac{1}{\mu}\int_{0}^{w}\frac{1}{1-\mu}dx & 0<w<\mu\\
+\frac{1}{\mu}\int_{0}^{\mu}\frac{1}{1-\mu}dx & \mu<w<1-\mu\\
+\frac{1}{\mu}\int_{w-(1-\mu)}^{\mu}\frac{1}{1-\mu}dx & 1-\mu<w<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be simplified as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(w) & =\begin{cases}
+\frac{w}{\mu(1-\mu)} & 0<w<\mu\\
+\frac{1}{1-\mu} & \mu<w<1-\mu\\
+\frac{1-w}{\mu(1-\mu)} & 1-\mu<w<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:convex_combo_plot"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows this trapezoidal density with 
+\begin_inset Formula $\mu$
+\end_inset
+
+ set to 
+\begin_inset Formula $\frac{1}{5}$
+\end_inset
+
+.
+ The CDF 
+\begin_inset Formula $F_{X}(x)$
+\end_inset
+
+ can be evaluated by integrating the above density as 
+\begin_inset Formula $P(X<x)=\int_{-\infty}^{x}f(t)dt$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F_{X}(x) & =\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{\mu}{2(1-\mu)}+\frac{x-\mu}{1-\mu} & \mu<x<1-\mu\\
+\frac{\mu^{2}}{2\mu(1-\mu)}+\frac{2\mu(1-2\mu)}{2\mu(1-\mu)}+\frac{\mu^{2}-x^{2}+2x-1}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Simplifying above, we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F_{X}(x) & =\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
+1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% Last part (C) - integrate((1-w)/(mu*(1-mu)),w,1-mu,x)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% The main idea is to calculate the total probability over r_{i}.
+ One objection that can be raised is that the total probability must be
+ calculated in one big integration rather than first calculating probability
+ for given r_{i},s_{i} and then letting r_{i} and s_{i} vary independently.
+ But this objection can be addressed by considering the sample space of
+ r_{i}.
+ It seems valid to consider the conditional probability of winning by considerin
+g all the possibilities for other player(s).
+ As long as r_{i} , s_{i} are being varied for one participant alone, the
+ integration seems the right thing to do.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%Plot[Piecewise[{{0, x <0 },{x/(.2*(1-.2)), 0 < x <.2}, {1/(1-.2),  0.2 < x <
+ .8}, {(1-x)/(.2*(1-.2)),  0.8 < x < 1}}], {x, -.02, 1.02}]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/combined_density.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:convex_combo"
+
+\end_inset
+
+Ranges of 
+\begin_inset Formula $w$
+\end_inset
+
+ and 
+\begin_inset Formula $w-x$
+\end_inset
+
+ for convolution of two scaled random variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/combined_density_plot.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:convex_combo_plot"
+
+\end_inset
+
+Combined density of 
+\begin_inset Formula $w$
+\end_inset
+
+ as the convex combination of two random variables with 
+\begin_inset Formula $\mu=\frac{1}{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix B
+\end_layout
+
+\begin_layout Standard
+To calculate 
+\begin_inset Formula $\int_{s=0}^{s=1}\int_{r=0}^{r=1}P(\text{win}|r,s)drds$
+\end_inset
+
+ over the variable 
+\begin_inset Formula $x$
+\end_inset
+
+ (where 
+\begin_inset Formula $0<r<1$
+\end_inset
+
+ and 
+\begin_inset Formula $0<s<1$
+\end_inset
+
+), we evaluate the sum of three parts split by the boundaries of the piecewise
+ function.
+ The three parts are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:integral_boundaries"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ If 
+\begin_inset Formula $x=\mu r+(1-\mu)s$
+\end_inset
+
+ and 
+\begin_inset Formula $F(x)$
+\end_inset
+
+ is of the following piece-wise form
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F(x) & =\begin{cases}
+A & 0<x<\mu\\
+B & \mu<x<1-\mu\\
+C & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then the integral 
+\begin_inset Formula $\int_{s=0}^{s=1}\int_{r=0}^{r=1}F(x)drds$
+\end_inset
+
+ can be written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{s=0}^{s=1}\int_{r=0}^{r=1}F(x)dsdr & =\int_{r=0}^{r=1}{\int_{s=0}^{s=\frac{\mu(1-r)}{1-\mu}}A\ dsdr}+\int_{r=0}^{r=1}{\int_{s=\frac{\mu(1-r)}{1-\mu}}^{s=1-\frac{\mu r}{1-\mu}}B\ dsdr}+\int_{r=0}^{r=1}{\int_{s=1-\frac{\mu r}{1-\mu}}^{s=1}C\ dsdr}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename figures/integral_calculation.png
+	width 4in
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:integral_boundaries"
+
+\end_inset
+
+Integration over 
+\begin_inset Formula $r,s$
+\end_inset
+
+ split by boundaries 
+\begin_inset Formula $\mu r+(1-\mu)s=\mu$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu r+(1-\mu)s=1-\mu$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "C:/local_files/research/africa_attitudes"
+options "authordate3"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Appendix C
+\end_layout
+
+\begin_layout Standard
+The combination of uniform-variables provides a triangular distribution.
+ Thus high combined scores - including both skills and raw-talent - are
+ not uniformly distributed in the population even though raw-talent and
+ skills may be distributed uniformly.
+ An important result we used is that of PDF of a sum of uniformly distributed
+ random variables 
+\begin_inset Formula $z=ax+by$
+\end_inset
+
+ being the following convolution 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f(z) & =\begin{cases}
+\frac{z}{ab} & 0<z<a\\
+\frac{1}{b} & a<z<b\\
+\frac{a+b-z}{ab} & b<z<a+b\\
+0 & otherwise
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The CDF corresponding to the above density is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+F(z) & =\begin{cases}
+\frac{z^{2}}{2ab} & 0<z<a\\
+\frac{z-a/2}{b} & a<z<b\\
+-\frac{a}{2b}+\frac{(a+b)z-z^{2}/2}{ab}-\frac{b}{2a} & b<z<a+b
+\end{cases}\label{eq:triangular_pdf_plain}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% with wolfram integrate ((a+b-z)/(a*b),z,b,xi) gives 
+\end_layout
+
+\begin_layout Plain Layout
+
+% -(b-xi)*(2*a+b-xi)/(2*a*b)
+\end_layout
+
+\begin_layout Plain Layout
+
+% the indefinite integral is (a*z+b*z-z^2/2)/(a*b)
+\end_layout
+
+\begin_layout Plain Layout
+
+% evaluating the indefinite integral at z=b give b/(2*a)+1
+\end_layout
+
+\begin_layout Plain Layout
+
+% we can verify that -a/(2*b)+((a+b)*z-z^2/2)/(a*b)-b/(2*a) -1 + ((z-(a+b))^2)/(
+2*a*b)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since, 
+\begin_inset Formula $\int_{0}^{a}\frac{z}{ab}dz=\frac{a}{2b}$
+\end_inset
+
+ and 
+\begin_inset Formula $\int_{a}^{b}\frac{1}{b}dz=1-\frac{a}{b}$
+\end_inset
+
+, we can write above as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+F(z) & =\begin{cases}
+\frac{z^{2}}{2ab} & 0<z<a\\
+\frac{z-a/2}{b} & a<z<b\\
+1-\frac{(z-(a+b))^{2}}{2ab} & b<z<a+b
+\end{cases}\label{eq:triangular_pdf}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Asset-Maximising participants
+\end_layout
+
+\begin_layout Standard
+Recall that the assets maximised by the poor participant with a given probabilit
+y 
+\begin_inset Formula $p_{1}$
+\end_inset
+
+ to win the game are given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+(y_{1}-\nu)+\frac{(1-p_{1})y_{1}+p_{1}y_{2}}{\delta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here, 
+\begin_inset Formula $\nu$
+\end_inset
+
+ is the expenditure towards the game.
+ Similarly, the rich participant optimises the following function for the
+ probability 
+\begin_inset Formula $p_{2}$
+\end_inset
+
+ to win the game
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+(y_{2}-\nu)+\frac{(1-p_{2})y_{1}+p_{2}y_{2}}{\delta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+THIS IS RECURSIVE AND NEEDS TO BE CLARIFIED -because the choice to invest
+ in skills depends on whether other person has invested or not.
+ 
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $\overline{\nu}>y_{1}$
+\end_inset
+
+ , then the poor participant would set 
+\begin_inset Formula $\nu=0$
+\end_inset
+
+ and face the probability 
+\begin_inset Formula $\frac{1}{3}$
+\end_inset
+
+ to win if the rich participant also withdraws but face a lower probability
+ if rich participant also participates (and spends 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The rich participant, on the other hand, faces a probability 
+\begin_inset Formula $1/3$
+\end_inset
+
+ to win while not participating would choose to spend 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+ so long as the rich participant gets 
+\begin_inset Formula $(y_{2}-\overline{\nu})+\frac{(1-p_{2})y_{1}+p_{2}y_{2}}{\delta}>y_{2}+\frac{2y_{1}+y_{2}}{3\delta}$
+\end_inset
+
+ or 
+\begin_inset Formula $\overline{\nu}<\frac{((1-p_{2})y_{1}+p_{2}y_{2})-(2/3y_{1}+1/3y_{2})}{\delta}$
+\end_inset
+
+ i.e.
+ if the threshold investment is less than discounted value of difference
+ in expected gain from participating.
+ A threshold above this investment is not interesting for the rich participant.
+ 
+\end_layout
+
+\begin_layout Standard
+.
+ Since the poor participant cannot spend on 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, the rich participant assumes that the poor participant does not spend
+ on skills and might choose to forgo skills-game if the probability is less
+ than 
+\begin_inset Formula $1/3$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Since the participants would lose all their savings after the last period,
+ they all respective incomes of the last period in the skills-game.
+ This is simply, 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Before we consider the cases III and IV above where neither or both of the
+ participants expend 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, let's consider simply, 
+\end_layout
+
+\begin_layout Subsubsection*
+Differences with a Cost function approach
+\end_layout
+
+\begin_layout Standard
+A cost-function may not address the issue that the participants are priced
+ out of the skills game.
+ A simulation-based approach can be used to explore the solutions based
+ on a cost-function - while keeping the basic set-up the same.
+\end_layout
+
+\begin_layout Subsection
+Two-player Discrete Model with Choice under Uniform Distribution
+\end_layout
+
+\begin_layout Standard
+The participant faces different probabilities if her investment is above
+ or below a threshold.
+ When the participant spends an amount 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+, she takes advantage of the skills with weight 
+\begin_inset Formula $1-\mu$
+\end_inset
+
+.
+ In this all-or-nothing payment scheme, the participant might avoid the
+ investment altogether and keep the investment towards savings instead.
+ The behaviour of both participants depends only on 
+\begin_inset Formula $\nu_{1},\nu_{2}$
+\end_inset
+
+ - as they are unaware of 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ before they participate.
+ 
+\end_layout
+
+\begin_layout Standard
+The result we use depends on the distribution of 
+\begin_inset Formula $x_{i}\equiv\mu r_{i}+(1-\mu)s_{i}$
+\end_inset
+
+ under the assumption that 
+\begin_inset Formula $\mu<1-\mu$
+\end_inset
+
+ (see Appendix A)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+F_{X}(x)=P(x_{k}<x)=P(r_{k}\mu+s_{k}(1-\mu)<x)=\begin{cases}
+\frac{x^{2}}{2\mu(1-\mu)} & 0<x<\mu\\
+\frac{x-\mu/2}{1-\mu} & \mu<x<1-\mu\\
+1-\frac{(x-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is also worth clarifying that the poor participant is not fully removed
+ from the game if she competes on the basis of raw-talent alone.
+ There are four differenct cases that arise.
+\end_layout
+
+\begin_layout Standard
+Case I - The poor participant does not particpate due to insufficient investment
+ 
+\begin_inset Formula $\nu_{1}=0$
+\end_inset
+
+ while the rich participant does with 
+\begin_inset Formula $\nu_{2}=\overline{\nu}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+Case II - The rich participant does not participate 
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+ but the poor participant does i.e.
+ 
+\begin_inset Formula $\nu_{1}=\overline{\nu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Case III - Both poor and rich participants do not participate and 
+\begin_inset Formula $\nu_{1}=\nu_{2}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Case IV - Both poor rich and participant participate i.e.
+ 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+With Case I, the poor participant can win when her raw-talent is higher
+ than of the rich participant (who competes with acquired skills).
+ In this sceanrio, the poor is priced out of accessing any skills 
+\begin_inset Formula $s$
+\end_inset
+
+ in her score so that the skills 
+\begin_inset Formula $s>0$
+\end_inset
+
+ can only be true for the rich participant with an investment 
+\begin_inset Formula $\nu_{2}$
+\end_inset
+
+ higher than the threshold 
+\begin_inset Formula $\overline{\nu}$
+\end_inset
+
+.
+ The poor participant can win if 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ is higher than the score involving skills of the rich participants.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1})=P(\mu r_{2}+(1-\mu)s_{2}<r_{1})\\
+=F_{X}(r_{1})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1})=\begin{cases}
+\frac{r_{1}^{2}}{2\mu(1-\mu)} & 0<r_{1}<\mu\\
+\frac{r_{1}-\mu/2}{1-\mu} & \mu<r_{1}<1-\mu\\
+1-\frac{(r_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<r_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the uniform density for 
+\begin_inset Formula $r_{1}$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $f(r_{1})=1$
+\end_inset
+
+ ), total probability to win is 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+ (since 
+\begin_inset Formula $\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\frac{\mu^{2}}{6(1-\mu)}+\frac{1}{2}-\mu+\mu-\frac{\mu^{2}}{6(1-\mu)}=\frac{1}{2}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%integrate (x^2,x,0,m)/(2*m*(1-m))
+\end_layout
+
+\begin_layout Plain Layout
+
+%integrate ((x-m/2)/(1-m),x,m,1-m)
+\end_layout
+
+\begin_layout Plain Layout
+
+%integrate (1-(x-1)^2/(2*m*(1-m)),x,1-m,1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Case II, when the rich person does not participate (
+\begin_inset Formula $\nu_{2}=0$
+\end_inset
+
+), the poor participant has the skills-advantage in the game.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1},s_{1})=P(r_{2}<\mu r_{1}+(1-\mu)s_{1})\\
+=\mu r_{1}+(1-\mu)s_{1}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\int_{0}^{1}P(\text{win}|r_{1})dr_{1}=\frac{\mu r_{1}^{2}}{2}+(1-\mu)s_{1}r_{1}|_{r_{1}=0}^{r_{1}=1}=\mu(\frac{1}{2}-s_{1})+s_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\int_{0}^{1}(\int_{0}^{1}P(\text{win}|r_{1})dr_{1})ds_{1}=\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+% verified with integrate(m*x+(1-m)*s,x,0,1) 
+\end_layout
+
+\begin_layout Plain Layout
+
+% and then
+\end_layout
+
+\begin_layout Plain Layout
+
+% integrate(m*(1/2-s)+s,s,0,1)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The total probability to win is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%integrate(
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Case III, when neither the rich nor the poor participate in the game,
+ then the game depends only on raw-talents and all participants have the
+ same probabilty 
+\begin_inset Formula $\frac{1}{N}$
+\end_inset
+
+ to win the game.
+ This is because 
+\begin_inset Formula $\int_{r_{i}=0}^{r_{i}=1}P(\text{win}|r_{i})dr_{i}=\frac{r_{i}^{N}}{N}|_{0}^{1}=\frac{1}{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $P(\text{win}|r_{i})=\prod_{k=1,k\ne i}^{P}P(r_{k}<r_{i})\prod_{k=P+1}^{N}P(r_{k}<r_{i})=r_{i}{}^{N-1}$
+\end_inset
+
+.
+ For two players, the poor participant still has the total probability 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Case IV, when both rich and poor participants set 
+\begin_inset Formula $\nu_{1}=\nu_{2}=\overline{\nu}$
+\end_inset
+
+, then the poor participant can win only if her score 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is above that of the rich participant.
+ Therefore, 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{i})=P(\mu r_{2}+(1-\mu)s_{2}<\mu r_{1}+(1-\mu)s_{1})\\
+=F_{X}(x_{1})
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(\text{win}|r_{1})=\begin{cases}
+\frac{x_{1}^{2}}{2\mu(1-\mu)} & 0<x_{1}<\mu\\
+\frac{x_{1}-\mu/2}{1-\mu} & \mu<x_{1}<1-\mu\\
+1-\frac{(x_{1}-1)^{2}}{2\mu(1-\mu)} & 1-\mu<x_{1}<1\\
+0 & \text{otherwise}
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integral 
+\begin_inset Formula $\int_{s_{1}=0}^{s_{1}=1}\int_{r_{1}=0}^{r_{1}=1}P(\text{win}|r_{1},s_{1})dr_{1}ds_{1}$
+\end_inset
+
+ also evaluates to 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+(see Appendix B).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+\int_{s=0}^{s=1}\int_{r=0}^{r=1}F_{X}(x_{1})ds_{1}dr_{1}=\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=0}^{s_{1}=\frac{\mu(1-r)}{1-\mu}}\frac{(\mu r_{1}+(1-\mu)s_{1})^{2}}{2\mu(1-\mu)}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=\frac{\mu(1-r)}{1-\mu}}^{s_{1}=1-\frac{\mu r}{1-\mu}}\frac{\mu r_{1}+(1-\mu)s_{1}-\mu/2}{1-\mu}\ ds_{1}dr_{1}}\\
++\int_{r_{1}=0}^{r_{1}=1}{\int_{s_{1}=1-\frac{\mu r}{1-\mu}}^{s_{1}=1}(1-\frac{(\mu r_{1}+(1-\mu)s_{1}-1)^{2}}{2\mu(1-\mu)})\ ds_{1}dr_{1}}\\
+=\frac{\mu^{2}}{8(1-\mu)^{2}}+\frac{1-2\mu}{2(1-\mu)}+\frac{(4-5\mu)\mu)}{8(1-\mu)^{2}}=\frac{1}{2}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Continuous model with choice
+\end_layout
+
+\begin_layout Standard
+Hopkins do talk about a similar model.
+ Our model differs primarily due to consideration of budget constraints
+ for choice.
+ Consider distribution of raw-talent 
+\begin_inset Formula $r\in(0,1)$
+\end_inset
+
+ as before.
+ But consider also the price of skills 
+\begin_inset Formula $\pi$
+\end_inset
+
+ so that a budget 
+\begin_inset Formula $y$
+\end_inset
+
+ can be used to obtain the mutlitplier 
+\begin_inset Formula $c(\nu,\pi)>1$
+\end_inset
+
+ and therefore skills 
+\begin_inset Formula $s\times c(\nu,\pi)$
+\end_inset
+
+.
+ The multiplier 
+\begin_inset Formula $c(\nu,\pi)\in(0,1)$
+\end_inset
+
+ is an increasing function of 
+\begin_inset Formula $\nu$
+\end_inset
+
+ where 
+\begin_inset Formula $c(\nu,\pi)=0$
+\end_inset
+
+ when 
+\begin_inset Formula $\nu=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\lim_{\nu\rightarrow\infty}c(\nu,\pi)=1$
+\end_inset
+
+.
+ This account for costs implied for enhanced skills.
+ The continuous model has the participants save towards assets 
+\begin_inset Formula $A$
+\end_inset
+
+ or expend on skills to improve their chances.
+\end_layout
+
+\begin_layout Standard
+Now consider 
+\begin_inset Formula $N$
+\end_inset
+
+ participants in the game, out of which 
+\begin_inset Formula $P$
+\end_inset
+
+ are poor and obtained disposable income 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ in two periods.
+ No income is saved towards end of life and thus the poor and rich participants
+ spend 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{2}$
+\end_inset
+
+ towards the culturally-curated skills respectively.
+ The first-period is the only one where participants choose between savings
+ and enhancing skills.
+ In this first-period, the poor participant realises that she may be ahead
+ of others in the competitions with a certain probability.
+ 
+\end_layout
+
+\begin_layout Standard
+To win, a poor participant must have her raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ ahead of all every one else - both rich and poor.
+ Similarly, the rich participant also participates while realising a probability
+ of being ahead of both rich and poor.
+ The difference between skills and raw-talent - is only that the former
+ can be enhanced with more investment whereas raw-talent does not change
+ with institutional advantages (or is too easy for the participant to develop
+ on her own when needed).
+ 
+\end_layout
+
+\begin_layout Standard
+When considering the poor participant, the conditional probability that
+ she wins the competitions for a given 
+\begin_inset Formula $\{r_{i},s_{i}\}$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P_{1}(\text{win}|r_{i},s_{i})=\prod_{k=1,k\ne i}^{k=P-1}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{1},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi))}\\
+\prod_{k=P+1}^{k=N}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{1},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi))}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, the conditional probability that a rich participant wins the
+ competition for a given 
+\begin_inset Formula $\{r_{i},s_{i}\}$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P_{2}(\text{win}|r_{i},s_{i})=\prod_{k=1}^{k=P-1}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{2},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi))}\\
+\prod_{k=P+1,k\ne i}^{k=N}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{2},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi))}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We assume that the participant do not use the skill level 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ or the raw-talent 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ to make the investment decision and that both skills and raw-talent are
+ revealed to the participants upon participation in the competition.
+ Therefore, all poor participants and all rich participants have the same
+ behaviour regardless of their private 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ or 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+ Further, 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+are independent since raw-talents are not enhanced by skills-granting institutio
+ns by their very definition.
+ The total probability of a win either for poor or rich participants is
+ simply 
+\begin_inset Formula $\int_{s_{i}}P(\text{win}|s_{i})P(s_{i})$
+\end_inset
+
+ where 
+\begin_inset Formula $P(\text{win}|s_{i})=\int_{r_{i}}P(win|(s_{i},r_{i}))P(r_{i})$
+\end_inset
+
+.
+ If we represent densities of conditional probability of winning for given
+ 
+\begin_inset Formula $r_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ as 
+\begin_inset Formula $f(\text{win}|r_{i},s_{i})$
+\end_inset
+
+ then the above probability of winning for the poor participant is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{s_{i}}{(\int_{r_{i}}{P_{1}(\text{win}|s_{i},r_{i})P_{1}(r_{i})})P_{1}(s_{i})} & =\int_{0}^{1}\int_{0}^{1}P_{1}(\text{win}|s_{i},r_{i})ds_{i}dr_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, the probability of winning for a rich participant is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\int_{s_{i}}{(\int_{r_{i}}{P_{2}(\text{win}|s_{i},r_{i})P_{2}(r_{i})})P_{2}(s_{i})} & =\int_{0}^{1}\int_{0}^{1}P_{2}(\text{win}|s_{i},r_{i})ds_{i}dr_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The probability of a poor participant winning for a given 
+\begin_inset Formula $r_{i},s_{i}$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P_{1}(\text{win}|r_{i},s_{i})=\prod_{k=1,k\ne i}^{k=P-1}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{1},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{1},\pi))}\\
+\prod_{k=P+1}^{k=N}{P(r_{i}\mu+s_{i}(1-\mu)c(\nu_{1},\pi)>r_{k}\mu+s_{k}(1-\mu)c(\nu_{2},\pi))}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For ease of notation we define 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c_{1} & \equiv c(\nu_{1},\pi)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c_{2} & \equiv c(\nu_{2},\pi)
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Notice that 
+\begin_inset Formula $c_{1}<c_{2}\iff\nu_{1}<\nu_{2}$
+\end_inset
+
+.
+ Further, we define
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula 
+\begin{align*}
+x_{1} & \equiv r_{i}\mu+s_{i}(1-\mu)c_{1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+x_{2} & \equiv r_{i}\mu+s_{i}(1-\mu)c_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With the assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:mu_less_than_half"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we obtained the following (see Appendix A)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(r_{k}\mu+s_{k}(1-\mu)c_{1}<x_{1})=\begin{cases}
+\frac{x_{1}^{2}}{2c_{1}\mu(1-\mu)} & 0<x_{1}<\mu\\
+\frac{x_{1}-\mu/2}{c_{1}(1-\mu)} & \mu<x_{1}<c_{1}(1-\mu)\\
+1-\frac{\mu/2}{c_{1}(1-\mu)}\\
++\frac{(\mu+c_{1}(1-\mu))x_{1}-x_{1}^{2}/2-(\mu c_{1}(1-\mu)+(c_{1}(1-\mu))^{2}/2)}{\mu c_{1}(1-\mu)} & c_{1}(1-\mu)<x_{1}<\mu+c_{1}(1-\mu)
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, the assumption 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "assu:mu_less_than_half"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ also leads to the following (see Appendix A)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+P(r_{k}\mu+s_{k}(1-\mu)c_{2}<x_{2})=\begin{cases}
+\frac{x_{2}^{2}}{2c_{2}\mu(1-\mu)} & 0<x_{2}<\mu\\
+\frac{x_{2}-\mu/2}{c_{2}(1-\mu)} & \mu<x_{2}<c_{2}(1-\mu)\\
+1-\frac{\mu/2}{c_{2}(1-\mu)}\\
++\frac{(\mu+c_{2}(1-\mu))x_{2}-x_{2}^{2}/2-(\mu c_{2}(1-\mu)+(c_{2}(1-\mu))^{2}/2)}{\mu c_{2}(1-\mu)} & c_{2}(1-\mu)<x_{2}<\mu+c_{2}(1-\mu)
+\end{cases}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,215 @@
+%% LyX 2.3.7 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,lmargin=3cm,rmargin=3cm,footskip=2cm}
+\usepackage{amsmath}
+\usepackage{babel}
+\begin{document}
+\title{Replication Algorithm for Variance Swap Pricing}
+\author{Anurag Srivastava (anurag.srivastava@riskcare.com)}
+\maketitle
+
+\section{Summary}
+
+\noindent
+
+The document describes the details of pricing a swap based on a replication-portfolio
+comprising of a log-contract and a stock or future position. The replication
+determines the price based on the volatilities across the skew while
+maintaining a constant dollar gamma for the portfolio. The main inputs
+to the model are 
+\begin{enumerate}
+\item Stock prices or Futures Prices
+\item Call options with strikes above and below a certain threshold close
+to the initial stock price $S_{0}$
+\item Put options with strikes above and below a certain threshold close
+to the initial futures price $F_{0}$
+\end{enumerate}
+The stochastic volatility models are currently out of scope for the
+current document. 
+
+\section{Black Scholes Model}
+
+\noindent
+
+The basic idea for pricing is to construct a portfolio of European
+options weighted as the inverse strike squared gives a constant exposure
+to volatility. Notice that at each hedging interval, the PNL is given
+as follows for gamma $\Gamma_{i}$, the return $R_{i}$ of the underlying,
+the variance $\sigma^{2}$and the time-step size $\delta t$ 
+\begin{align*}
+\frac{1}{2}\sum_{i}\Gamma_{i}S_{i}^{2}(R_{i}^{2}-\sigma^{2}\delta t)
+\end{align*}
+
+Notice also that $\theta=-\frac{1}{2}\Gamma S^{2}\sigma^{2}$. A portfolio
+proportional to $\frac{1}{S_{i}}$ would evidently keep a constant
+second-derivative i.e. gamma $\Gamma$ ($\propto\frac{1}{S_{i}^{2}}$)
+. More generally, we can say that the payoff $alnS+bS+c$ would have
+a constant $\Gamma$. A variance swap can thus be replicated with
+a log contract with options which are then delta-hedged. The following
+expression summarise how a combination of puts and calls approximates
+the payoff $alnS+bS+c$ (with price of underlying$S_{T}$at time $T$).
+
+\begin{alignat}{1}
+\int_{0}^{S_{0}}\frac{(K-S_{T})^{+}}{K^{2}}dK+\int_{S_{0}}^{\infty}\frac{(S_{T}-K)^{+}}{K^{2}}dK & =\frac{S_{T}}{S_{0}}-ln(\frac{S_{T}}{S_{0}})\label{eq:main_replication}
+\end{alignat}
+
+The replication can also be derived in terms of Stock prices using
+Black-Scholes assumptions (see Section \ref{subsec:Stocks-based-replication}).
+
+\subsection{Futures-based replication}
+
+We now discuss how the replication summarised with Equation \ref{eq:main_replication}
+can be performed using futures prices $F_{t}$ (at time $t$) and
+$F_{0}$. As discussed in \cite{allenJPMvarianceswaps2006,carrmadanvoltrading1998},
+the average variance over time $\frac{1}{T}\int_{0}^{T}\sigma_{t}dt$
+can be written as 
+
+\begin{align}
+\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}\label{eq:replication_with_futures_main}
+\end{align}
+
+The first-term can be replicated by taking a static position in a
+contract that pays $\frac{2}{T}(log(\frac{F_{0}}{F_{t}})+\frac{F_{t}}{F_{0}}-1)$
+and the second-term can be replicated by a continuously rebalanced
+futures position. As detailed in \cite{carrmadanvoltrading1998},
+this can be performed using calls and puts with a position $\frac{1}{K^{2}}$
+using the following expression
+
+\begin{align*}
+log(\frac{F_{0}}{F_{T}})+\frac{F_{T}}{F_{0}}-1) & =\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK
+\end{align*}
+
+Plugging this in Equation \ref{eq:replication_with_futures_main},
+we have 
+
+\begin{align*}
+\frac{1}{T}\int_{0}^{T}\sigma_{t}dt & =\frac{2}{T}(\int_{0}^{F_{0}}\frac{(K-F_{T})^{+}}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{(F_{T}-K)^{+}}{K^{2}}dK)-\frac{2}{T}\int_{0}^{T}(\frac{1}{F_{0}}-\frac{1}{F_{t}})dF_{t}
+\end{align*}
+
+The Black-Scholes assumptions allow us to replicate a variance swap
+by holding $\frac{1}{F_{t}}-\frac{1}{F_{0}}$ unites of futures at
+$t$ and a set of calls and puts spread across futures price $F_{0}$.
+The forward cost of this portfolio is can be written as follows
+
+\begin{align*}
+K_{VAR}^{2} & =\frac{2e^{rT}}{T}(\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK)
+\end{align*}
+
+Assuming a set of equally spaced strikes $K_{0},...,K_{r},K_{r+1},...,K_{n}$
+where $K_{0},K_{1},..,K_{r}$ are strikes for puts and $K_{r+1},K_{r+2},...,K_{n}$
+are strikes for calls. Since the options are equally-spaced we have
+$\Delta_{K}=K_{i+1}-K_{i}\text{ for all }i\in[1,n-1]$. The replication
+portfolio that approximates $\int_{0}^{F_{0}}\frac{P_{0}(K)}{K^{2}}dK+\int_{F_{0}}^{\infty}\frac{C_{0}(K)}{K^{2}}dK$
+is 
+
+\begin{align*}
+\sum_{i=0}^{r} & \frac{\Delta_{K}P(K_{i})}{K_{i}^{2}}+\sum_{i=r+1}^{n}\frac{\Delta_{K}C(K_{i})}{K_{i}^{2}}
+\end{align*}
+
+For a given variance notional exposure $N_{var}$, one must hold $\frac{2\Delta_{K}N_{var}}{TK^{2}}$
+of each of option. 
+
+\subsection{\label{subsec:Stocks-based-replication}Stocks-based replication}
+
+The Black-Scholes assumptions readily lead to a replciation algorithm
+that is now described (see \cite{demeterfidermanvolswaps1999}). Notice
+first that $d(log\ S_{t})=(\mu-\frac{\sigma^{2}}{2})dt+\sigma dZ_{t}$
+(for normal variable $Z_{t}$) leads to $\frac{1}{2}\sigma^{2}dt=\frac{dS_{t}}{S_{t}}-d(log\ S_{t})$.
+This in turn implies that 
+
+\begin{align}
+\frac{1}{T}\int_{0}^{T}\sigma^{2}dt & =\frac{2}{T}(\int_{0}^{T}\frac{dS_{t}}{S_{t}}-log(\frac{S_{T}}{S_{0}}))\label{eq:BlackScholesVariance}
+\end{align}
+
+Using $E(\int_{0}^{T}\frac{dS_{t}}{S_{t}})=rT$ and a boundary $S_{*}$
+between calls and puts, we make use of the following identity (see
+Derman) 
+
+\begin{multline*}
+log(\frac{S_{T}}{S_{0}})=log(\frac{S_{*}}{S_{0}})+log(\frac{S_{T}}{S_{*}})\\
+=log(\frac{S_{*}}{S_{0}})-(\int_{0}^{S_{*}}\frac{(K-S_{T})^{+}}{K^{2}}+\int_{S_{*}}^{\infty}\frac{(S_{T}-K)^{+}}{K^{2}}-\frac{S_{T}-S_{*}}{S_{*}})
+\end{multline*}
+
+The Equation \ref{eq:BlackScholesVariance} becomes 
+
+\begin{align*}
+E(\int_{0}^{T}\sigma_{t}^{2}dt) & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}})+e^{rT}\int_{0}^{S*}\frac{1}{K^{2}}P(K)dK+e^{rT}\int_{S_{*}}^{\infty}\frac{1}{K^{2}}C(K)dK
+\end{align*}
+
+Notice that $K_{Var}\equiv E(\int_{0}^{T}\sigma_{t}^{2}dt)$ is called
+the strike of the variance swap..
+
+We can rewrite $K_{var}$ as 
+
+\begin{align*}
+K_{var} & =\frac{2}{T}(rT-(\frac{S_{0}}{S_{*}}e^{rT}-1)-log(\frac{S_{*}}{S_{0}}))+e^{rT}\Pi_{CP}
+\end{align*}
+ 
+
+The term $\Pi_{CP}$ is the following value of the portfolio of puts
+and calls where the weights of the portfolio are calculated using
+a recursive algorithm described in Section \ref{subsec:Algorithm-to-replicate-logcontract}
+
+\begin{align}
+\Pi_{CP} & =\sum_{i}w(K_{ip})P(S,K_{ip})+\sum_{i}w(K_{ic})C(S,K_{ic})\label{eq:portfolio_derman_cp}
+\end{align}
+
+
+\subsubsection{\label{subsec:Algorithm-to-replicate-logcontract}Algorithm to replicate
+Log-contract}
+
+With the portfolio in Equation \ref{eq:portfolio_derman_cp}, let's
+consider calls with strikes $K_{1c,}K_{2c}$ etc. such that $S_{*}<K_{1c}<K_{2c}<...$
+and puts $K_{1p},K_{2p}$etc. such that $S_{*}>K_{1c}>K_{2c}...$
+- where $S^{*}$ is the boundary between calls and puts. We can set
+this to initial value of the stock i.e. $S_{*}=S_{0}$.
+
+Let's consider the strike $K_{0}$ at the boundary (reference) stock-price
+$S_{*}$. The weight associated with the option struck at $K_{0}$
+would be set to 
+
+\begin{align*}
+w_{c}(K_{0}) & =\frac{f(K_{1c})-f(K_{0})}{K_{1c}-K_{0}}
+\end{align*}
+
+Here, $f(S_{T})$ is defined as
+
+\begin{align*}
+f(S_{T}) & =\frac{2}{T}(\frac{S_{T}-S_{*}}{S_{*}}-log(\frac{S_{T}}{S_{*}}))
+\end{align*}
+
+The (units) weights for calls in the portfolio are given by 
+
+\begin{align*}
+w_{c}(K_{n,c}) & =\frac{f(K_{n+1,c})-f(K_{n,c})}{K_{n,c}-K_{n+1,c}}-\sum_{i=0}^{n-1}w_{c}(K_{i,c})
+\end{align*}
+
+Similarly, we can obtain the weights associated with puts by first
+setting
+
+\begin{align*}
+w_{p}(K_{0}) & =\frac{f(K_{1p})-f(K_{0})}{K_{1p}-K_{0}}
+\end{align*}
+
+and then holding other weights of puts determined by
+
+\begin{align*}
+w_{p}(K_{n,p}) & =\frac{f(K_{n+1,p})-f(K_{n,p})}{K_{n,p}-K_{n+1,p}}-\sum_{i=0}^{n-1}w_{p}(K_{i,p})
+\end{align*}
+
+
+\subsection{Greeks}
+
+\noindent
+
+The greeks relevant for variance swaps can also be calculated using
+the dynamics of Equation \ref{eq:main_replication}.
+
+\bibliographystyle{ieeetr}
+\bibliography{fineng}
+
+\end{document}
