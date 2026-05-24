@@ -341,56 +341,114 @@ privately informed counterparties
 dominates --- high-yield credit, small-cap equities, structured products
 --- are outside the model's direct scope.
 
-Three agents trade a single risky asset in a Stackelberg market operating
-over discrete periods $t = 0, 1, 2, \ldots$\,: a market maker (MM),
-a speculator (S), and a continuum of liquidity-motivated traders.
-The MM posts a price impact schedule before observing order flow
-(Stackelberg leader); the speculator observes a signal and chooses a
-position (follower). Liquidity-motivated traders --- hedgers, index
-rebalancers, and participants with exogenous liquidity needs --- submit
-random order flow $u_t \sim \mathcal{N}(0, \sigma^2_u)$, independent
-across periods. Their presence provides the MM with income from
-liquidity provision ($\lambda_p\sigma^2_u$ per period) and reflects
-the empirical reality that in exchange-traded markets, total order flow
-is observable but its decomposition into individual participant
-positions is not.
+\noindent\textbf{Agents and timing.}
+Three agents trade a single risky asset over discrete periods
+$t = 0, 1, 2, \ldots$\,: a market maker (MM), a speculator (S), and a
+continuum of liquidity-motivated traders. The market operates as a
+Stackelberg game. At the start of each period, the MM --- the
+Stackelberg leader --- commits to a \emph{price impact schedule} before
+observing any order flow. A price impact schedule is a rule mapping the
+total quantity demanded in the market to the transaction price: it
+specifies, for each possible net order size, the price at which the MM
+will clear the market. By committing to this schedule before trading
+begins, the MM acts as a price-setter. The speculator --- the follower
+--- then observes a public signal and chooses how large a position to
+take, knowing the price impact schedule in advance.
 
-Under the approximately symmetric information assumed for these markets,
-the return innovation $\mu_t \sim \mathcal{N}(0, \sigma^2_\mu)$ is a
-publicly observable signal --- a macro announcement, earnings release, or
-economic data point --- observed by both the MM and the speculator
-simultaneously. The speculator has no informational advantage over the
-MM; its role in the model is as a capacity-constrained position-taker
-responding to public signals, not as a Kyle-style informed trader.
+\noindent\textbf{The public signal and the speculator's information.}
+In the liquid, transparent markets this model targets, macro-relevant
+information --- interest rate decisions, employment releases, earnings
+announcements --- becomes simultaneously public to all participants. The
+model captures this through a publicly observable return innovation
+$\mu_t \sim \mathcal{N}(0, \sigma^2_\mu)$, where $\sigma^2_\mu > 0$ is
+the variance of the signal. Both the MM and the speculator observe
+$\mu_t$ at the same time; the speculator has no private information
+advantage. Its role is as a capacity-constrained position-taker
+responding to common knowledge signals, not as a Kyle-style informed
+trader exploiting private information.
 
-The pricing rule takes the linear form
-$p_t = p_{t-1} + \lambda_p(m_t + u_t)$, where $m_t$ is the
-speculator's position and the price impact coefficient $\lambda_p > 0$
-reflects the market maker's balance sheet capacity --- the rate at which
-prices move in response to order flow as the dealer manages inventory
-risk against its VaR limits. This linear price impact structure is
-consistent with the inventory-based market making literature
-\citep{stoll1978,grossman1988} and takes a form similar to
-\citet{kyle1985}, though in our setting $\lambda_p$ reflects capacity
-constraints rather than adverse selection against privately informed
-traders. The price impact coefficient $\lambda_p$ (not to be confused
-with the loss aversion parameter $\lambda$) is the MM's strategic
-variable. The noise trader variance $\sigma^2_u$ determines the
-benchmark price impact level $\lambda^0_p = \sigma_\mu/(2\sigma_u)$ but
-does not affect the variance ratio, the asymmetry mechanism, or the
-separation property: the paper's structural results are invariant to
-$\sigma^2_u$.
-The return innovation
-$\varepsilon^r_t = \mu_t/2 + \varepsilon_t$ (where
-$\varepsilon_t \sim \mathcal{N}(0, \sigma^2_\varepsilon)$ is
-idiosyncratic noise) is publicly observable after each period.
-Within-period position closing ensures agents enter each period with
-zero inventory; all asymmetric effects operate through wealth, not
-positions.
+\noindent\textbf{Order flow and liquidity-motivated traders.}
+Order flow is the net signed quantity submitted to the market in a
+given period: a positive quantity means net buying pressure, a negative
+quantity means net selling pressure. It is measured in asset units, not
+in value terms. Liquidity-motivated traders --- hedgers, index
+rebalancers, and participants with exogenous needs to buy or sell ---
+submit random order flow $u_t \sim \mathcal{N}(0, \sigma^2_u)$,
+independently across periods, where $\sigma^2_u > 0$ is the variance
+of their aggregate demand. These traders have no strategic motive: they
+trade for reasons unrelated to the signal $\mu_t$. Their presence
+reflects the empirical reality that in exchange-traded markets, the MM
+observes total order flow but cannot decompose it into its speculator
+and liquidity-trader components.
+
+\noindent\textbf{The pricing rule and price impact.}
+The MM sets prices according to the linear rule:
+\begin{equation}
+  p_t = p_{t-1} + \lambda_p(m_t + u_t)
+  \label{eq:pricing_rule}
+\end{equation}
+where $m_t$ is the speculator's signed position (quantity, in asset
+units), $u_t$ is liquidity-trader order flow, and $\lambda_p > 0$ is
+the \emph{price impact coefficient}. The sum $m_t + u_t$ is total order
+flow --- the aggregate net quantity the MM must absorb. The coefficient
+$\lambda_p$ is the rate at which the price moves per unit of net order
+flow absorbed: if $\lambda_p = 0.5$ and total order flow is $+10$
+units, the price rises by 5. A higher $\lambda_p$ means the MM moves
+prices more aggressively for a given quantity, reflecting tighter
+balance sheet capacity; a lower $\lambda_p$ means the MM accommodates
+larger quantities with less price movement, reflecting ample capacity.
+In this sense, $\lambda_p$ is the MM's strategic variable: by choosing
+it before trading begins, the MM determines the terms on which it will
+intermediate between buyers and sellers.
+
+This linear price impact structure is consistent with the
+inventory-based market making literature \citep{stoll1978,grossman1988}
+and takes a form similar to \citet{kyle1985}, though in our setting
+$\lambda_p$ reflects balance sheet capacity constraints rather than
+adverse selection against privately informed traders. Note that
+$\lambda_p$ (the price impact coefficient) is distinct from $\lambda$
+(the loss aversion parameter); we use $\lambda_p$ throughout for the
+former to avoid ambiguity.
+
+The liquidity-motivated traders generate a steady source of
+intermediation income for the MM. Since the MM absorbs their random
+order flow $u_t$ and prices move by $\lambda_p u_t$ per unit, the
+expected revenue from this flow per period is $\lambda_p \sigma^2_u$
+--- the product of the price impact coefficient and the variance of
+liquidity demand, which measures how much uninformed order flow the MM
+expects to turn over. The noise trader variance $\sigma^2_u$ also
+determines the benchmark price impact level
+$\lambda^0_p = \sigma_\mu/(2\sigma_u)$ --- the value of $\lambda_p$
+at which the MM's unconstrained profit is maximised (derived in
+Section~\ref{sec:equilibrium}). The paper's structural results ---
+the variance ratio, the asymmetry mechanism, and the separation
+property --- are invariant to $\sigma^2_u$: scaling liquidity demand
+up or down rescales $\lambda^0_p$ but leaves the ratios that identify
+$\lambda$ and $g$ unchanged.
+
+\noindent\textbf{Return innovation and position closing.}
+After the speculator takes position $m_t$ and liquidity traders submit
+$u_t$, the asset's fundamental value is realised. The observed return
+innovation is:
+\begin{equation}
+  \varepsilon^r_t = \tfrac{1}{2}\mu_t + \varepsilon_t
+  \label{eq:return_innovation}
+\end{equation}
+where $\varepsilon_t \sim \mathcal{N}(0, \sigma^2_\varepsilon)$ is
+idiosyncratic noise with variance $\sigma^2_\varepsilon > 0$,
+independent of $\mu_t$. The factor of $\tfrac{1}{2}$ arises because
+the speculator's optimal position (derived in
+Section~\ref{sec:equilibrium}) passes half the signal through to
+prices. All agents observe $\varepsilon^r_t$ at the end of each
+period. Within-period position closing then ensures that both the MM
+and the speculator enter each new period with zero inventory: all
+asymmetric effects operate through accumulated wealth, not through
+carried positions.
 
 The MM evaluates wealth against a publicly observed reference point
-$\bar{r}_t = \bar{W}_0(1+g)^t$, growing at a constant trend growth
-rate $g > 0$. This benchmark requires no individual wealth histories,
+$\bar{W}_t = \bar{W}_0(1+g)^t$, the economy-wide trend wealth benchmark
+growing at constant rate $g > 0$, where $\bar{W}_0 > 0$ is the initial
+benchmark level. This benchmark requires no individual wealth histories,
 no rational-expectations fixed point, and no peer-group comparison. It
 connects to the social comparison literature \citep{festinger1954} and
 the catching-up-with-the-Joneses tradition \citep{abel1990,campbell1999}.
@@ -402,14 +460,23 @@ longer than the business cycle.
 
 \noindent\textbf{State variable and detrending.}
 Define the detrended wealth deviation for each agent $i \in \{S, MM\}$
-as:
+as the agent's actual wealth deflated by the trend benchmark, minus the
+initial benchmark level:
 \begin{equation}
   \tilde{\Delta}^i_t = \frac{W^i_t}{(1+g)^t} - \bar{W}_0
   \label{eq:deviation_def}
 \end{equation}
 and let $D_t = \tilde{\Delta}^S_t$ denote the speculator's deviation.
-The speculator's wealth under within-period position closing is
-$W^S_t = W^S_{t-1} + \lambda_p m^2_t + m_t\varepsilon_t$.
+The speculator's per-period profit is the gain from its position $m_t$
+against the realised return innovation $\varepsilon^r_t$, net of the
+price impact cost it pays the MM. Under the pricing rule
+\eqref{eq:pricing_rule} and within-period position closing, this yields
+the wealth recursion $W^S_t = W^S_{t-1} + \lambda^{\rm eff}_p m^2_t +
+m_t\varepsilon_t$, where $\lambda^{\rm eff}_p m^2_t$ is the price
+impact cost (quadratic in position size, paid to the MM as the price
+moves against the speculator's trade) and $m_t\varepsilon_t$ is the
+speculator's revenue from the idiosyncratic component of the return
+innovation.
 
 \begin{assumption}[Bilateral zero-sum subsystem]
 \label{ass:zerosum}
@@ -455,8 +522,18 @@ is in its gain region and posts high price impact to protect accumulated
 wealth.
 
 \noindent\textbf{The MM's problem.}
-The MM's per-period profit from intermediation is
-$\pi^{MM}(\lambda_p) = \lambda_p\sigma^2_u - \sigma^2_\mu/(4\lambda_p)$.
+The MM earns profit from two sources: revenue from absorbing
+liquidity-trader order flow (which generates $\lambda_p\sigma^2_u$ in
+expectation, since it absorbs random quantity $u_t$ at price impact
+$\lambda_p$), and bears a cost from the speculator's informed trading
+against it (which costs $\sigma^2_\mu/(4\lambda_p)$ in expectation,
+since the speculator exploits the signal $\mu_t$ optimally given the
+price impact it faces). The MM's per-period profit from intermediation
+is therefore:
+\begin{equation}
+  \pi^{MM}(\lambda_p) = \lambda_p\sigma^2_u - \frac{\sigma^2_\mu}{4\lambda_p}
+  \label{eq:mm_profit}
+\end{equation}
 The unconstrained maximum coincides with the Kyle zero-profit benchmark
 $\lambda^0_p = \sigma_\mu/(2\sigma_u)$ regardless of regime: the loss
 aversion scalar $\lambda$ cancels in the first-order condition.%
@@ -509,9 +586,22 @@ internal VaR limits, precisely the contraction regime of the model.
 
 \noindent\textbf{The speculator's position.}
 Taking the price impact schedule $\lambda^{\rm eff}_p$ as given, the
-speculator maximises $\mathbb{E}[m_t(\mu_t - 2\lambda^{\rm eff}_p m_t)
-\mid \mu_t]$, yielding the optimal position
-$m^*_t = \mu_t / (4\lambda^{\rm eff}_p)$.
+speculator chooses position size $m_t$ to maximise expected profit. Its
+profit from position $m_t$ given signal $\mu_t$ is $m_t(\mu_t -
+2\lambda^{\rm eff}_p m_t)$: the first term $m_t\mu_t$ is the gross
+revenue from trading in the direction of the signal (buying when $\mu_t
+> 0$, selling when $\mu_t < 0$), and the second term $-2\lambda^{\rm
+eff}_p m^2_t$ is the price impact cost, which is quadratic in position
+size because a larger position moves the price further against the
+speculator. The speculator therefore maximises:
+\[
+  \mathbb{E}[m_t(\mu_t - 2\lambda^{\rm eff}_p m_t) \mid \mu_t]
+\]
+yielding the optimal position $m^*_t = \mu_t / (4\lambda^{\rm eff}_p)$.
+The speculator trades in the direction of the signal and scales its
+position down as price impact rises: a higher $\lambda^{\rm eff}_p$
+(tighter MM capacity) means the speculator takes a smaller position to
+avoid paying excessive price impact.
 
 \begin{remark}[MM assignment of loss aversion]
 \label{rem:mm_assignment}
@@ -574,8 +664,9 @@ the wealth process is:
 
 The deviation recursion~\eqref{eq:deviation_recursion} implies a
 regime-dependent conditional variance for $D_t$. Linearising the regime
-probability around the stationary point (Proposition A.5 in the
-appendix, with approximation error bounded below 6\%) yields:
+probability around the stationary point
+(Proposition~\ref{prop:linearisation}, with approximation error bounded
+below 6\%) yields:
 
 \begin{theorem}[Threshold-GARCH for Detrended Dealer Wealth Deviations]
 \label{thm:tgarch}
@@ -609,15 +700,16 @@ where $\Phi = 2\sigma^4_\varepsilon\sigma^2_\mu /
 
 \begin{proof}
 The exact identifications for the ARCH coefficient $\alpha$ and
-asymmetry coefficient $\gamma$ follow from Proposition A.3 in the
-appendix: for each regime $r$,
+asymmetry coefficient $\gamma$ follow from Proposition~\ref{prop:var_asym}
+in the appendix: for each regime $r$,
 $V^r_t = (B^r)^2\Sigma[H_0 + H_2(\varepsilon^r_t)^2]$, where
 $\Sigma$, $H_0$, $H_2$ are functions of the signal and noise variances.
 Setting $\alpha = c_2^+$, $\gamma = c_2^- - c_2^+$, $\omega = c_0^+$
 gives \eqref{eq:alpha}--\eqref{eq:omega} exactly. The leading-order
 identification $\beta \approx 1/(1+g)^2$ arises from linearising
 $\Phi(z_{t-1})$ around the stationary point; the approximation error
-is bounded below 6\% for moderate deviations (Proposition A.5).
+is bounded below 6\% for moderate deviations
+(Proposition~\ref{prop:linearisation}).
 Signs and the $\beta$ limit follow from direct differentiation.
 \end{proof}
 
@@ -1052,7 +1144,7 @@ result that the two policy choices are orthogonal by construction.
 
 Four limitations should be stated clearly. First, the persistence
 identification is a leading-order approximation with error bounded below
-6\% for moderate deviations (Proposition A.5); all qualitative results
+6\% for moderate deviations (Proposition~\ref{prop:linearisation}); all qualitative results
 and the separation property hold exactly. Second, the paper derives a
 recursion for the conditional variance of detrended \emph{wealth
 deviations}, not equity return variance; the cancellation result
