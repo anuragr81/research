@@ -23,7 +23,6 @@
 \usepackage{hyperref}
 \usepackage{natbib}
 \usepackage{setspace}
-\usepackage{natbib}
 \geometry{margin=2.5cm}
 \onehalfspacing
 
@@ -38,7 +37,7 @@
 
 \title{Loss Aversion, Endogenous Reference Points,\\
        and Boom-Bust Asymmetry in Financial Wealth Dynamics}
-\author{Anurag Rathi\\
+\author{Anurag Srivastava\\
         \small Riskcare Ltd., London\\
         \small PhD Economics, University of Reading (2024)}
 \date{April 2026 --- Working Paper}
@@ -57,52 +56,45 @@ compressed, slow, and grinding. This asymmetry is most sharply visible in
 \emph{dealer balance sheet dynamics}: intermediary leverage expands rapidly
 and with high variance when dealers are above their funding benchmarks, and
 contracts slowly with compressed variance when approaching their limits.
-This paper derives the asymmetry in dealer balance sheet volatility from first
-principles using the minimal behavioural structure sufficient to deliver it as
-an equilibrium theorem rather than a calibration choice.
+This paper derives the asymmetry from first principles using the minimal
+behavioural structure sufficient to deliver it as an equilibrium theorem
+rather than a calibration choice.
 
 We retain the single empirically robust element of Cumulative Prospect
 Theory --- the kink in the value function at a reference point ---
 as the minimal structure capable of generating boom-bust asymmetry in
-a dealer market equilibrium. The reference point is the
-economy-wide common trend growth benchmark, publicly observed and growing at a
-constant rate, embedded in a Stackelberg market scoped to liquid exchange-traded
-settings where dealer risk management is the primary source of price impact
-asymmetry. The paper explores the preference channel as a complement to the
-belief channel studied in Bayesian and rational belief equilibrium approaches.
+a dealer market equilibrium. The reference point is the economy-wide
+trend growth benchmark, publicly observed, embedded in a Stackelberg market
+scoped to liquid exchange-traded settings where dealer risk management is
+the primary source of price impact asymmetry.
 
-Two structural conditions are jointly necessary for the asymmetry to
-emerge as an equilibrium result. First, the bilateral zero-sum
+Two structural conditions are jointly necessary. First, the bilateral zero-sum
 structure of the dealer--speculator game (Assumption~1) guarantees as a theorem
 that both agents always sit on opposite sides of the kink simultaneously,
 generating asymmetric price impact. Second, the trend growth path pins
 volatility persistence to the growth rate through $\beta \approx 1/(1+g)^2$.
 The paper derives a Threshold-GARCH recursion for the conditional variance of
-detrended \emph{dealer balance sheet deviations}, with the asymmetry
-coefficients $\alpha$ and $\gamma$ identified exactly, $\omega$ identified
-exactly, and $\beta$ identified as a leading-order approximation with
-explicit error bounds. The asymmetry ratio $|\gamma|/\alpha =
-(\lambda^4-1)/\lambda^4$ is determined by loss aversion alone and
-$\beta$ by the growth rate alone --- a separation property orthogonal by
-construction. Empirical analysis using US dealer balance sheet data
-confirms the model's predictions: expansion variance exceeds contraction
-variance ($\hat{\mathcal{R}} = 2.07$, $p < 0.00001$), the pre-GFC
-asymmetry ratio is stable across growth regimes ($0.42$--$0.45$), and
-deterministic detrending confirms persistence at $\hat{\phi} = 0.994$
-against a model prediction of $0.998$. A post-GFC sign reversal is
-explained by a one-parameter regulatory floor extension that preserves
-the separation property. All theoretical results are verified symbolically.
-\end{abstract}
+detrended dealer balance sheet deviations, with the asymmetry
+coefficients $\alpha$ and $\gamma$ identified exactly and $\beta$ identified
+as a leading-order approximation with explicit error bounds. The asymmetry
+ratio $|\gamma|/\alpha = (\lambda^4-1)/\lambda^4$ is determined by loss
+aversion alone and $\beta$ by the growth rate alone --- a separation property
+orthogonal by construction that allows exact within-model identification of
+both structural primitives without external instruments. Empirical analysis
+using US dealer balance sheet data (Federal Reserve Z.1, 1952--2025) confirms
+the model: expansion variance exceeds contraction variance
+($\hat{\mathcal{R}} = 2.07$, $p < 0.00001$), the pre-GFC asymmetry ratio
+is stable across growth regimes ($0.42$--$0.45$), and deterministic
+detrending confirms persistence within 0.4 percentage points of the
+structural prediction. A post-GFC sign reversal is explained by a
+one-parameter regulatory floor extension that preserves the separation
+property. The implied $\hat{\lambda} = 1.20$ is the first structural
+market-based estimate of dealer loss aversion.\end{abstract}
 
 
 \noindent\textbf{Keywords:} loss aversion; boom-bust asymmetry; Threshold-GARCH; market microstructure; Stackelberg equilibrium; trend growth; dealer balance sheets
 
 \newpage
-
-% ============================================================
-% SECTION 1: MOTIVATION
-% ============================================================
-
 
 % ============================================================
 % SECTION 1: INTRODUCTION
@@ -157,21 +149,19 @@ The kink itself, however, creates an obstacle in equilibrium. A market
 maker optimising a standard piecewise linear loss-averse value function
 generates no asymmetry: the loss aversion parameter $\lambda$ multiplies
 the objective in the loss region but cancels exactly in the first-order
-condition, leaving the optimal price impact coefficient --- the rate at
-which the market maker moves prices per unit of order flow ---
-unchanged regardless of regime. Practitioners recognise this as the
-distinction between the risk management committee, which encodes loss
-aversion in position limits at quarterly or annual frequency, and the
-trading desk, which optimises within those limits without reference to
-the firm's preferences. This cancellation does not challenge the
-descriptive significance of CPT; rather, it identifies the channel
-through which the kink generates equilibrium asymmetry: pre-committed,
-regime-contingent constraints on the price impact schedule. These
-constraints are the endogenous form that loss aversion must take to
-remain consequential in a competitive market --- precisely what
-\citet{li2025} document. The Stackelberg structure of the market gives
-them binding force: the dealer's pricing power prevents loss aversion
-from being competed away.
+condition, leaving the optimal price impact coefficient unchanged
+regardless of regime. This is the distinction practitioners draw between
+the risk management committee, which encodes loss aversion in position
+limits at quarterly or annual frequency, and the trading desk, which
+optimises within those limits without reference to the firm's aggregate
+preferences. The cancellation therefore identifies the channel through
+which the kink must operate to generate equilibrium asymmetry:
+pre-committed, regime-contingent constraints on the price impact
+schedule. These constraints are the endogenous form that loss aversion
+takes to remain consequential in a competitive market --- precisely what
+\citet{li2025} document empirically at the desk level. The Stackelberg
+structure of the market gives them binding force: the dealer's pricing
+power prevents loss aversion from being competed away.
 
 Two structural conditions make this work as a theorem. The bilateral
 zero-sum structure of the dealer-speculator game guarantees that the two
@@ -230,18 +220,25 @@ Prospect theory calibration \newline (Barberis et al.\ 2001)
 \end{tabular}
 \end{table}
 
-The paper makes five contributions. First, the derivation of boom-bust
-dealer balance sheet volatility asymmetry as an equilibrium theorem from
-the minimal CPT-like structure. Second, the structural identification
-result with its separation property. Third, the IGARCH boundary: as the
-trend growth rate approaches zero, volatility persistence approaches
-one, providing the first preference-based microfoundation for integrated
-volatility processes. Fourth, a testable cross-sectional prediction:
-persistence should co-vary with trend growth and asymmetry ratios with
-loss aversion measures, with zero cross-effects. Fifth, empirical
-confirmation of both structural channels using US dealer balance sheet
-data, including a post-GFC regulatory structural break that provides a
-natural experiment for the separation property.
+The paper makes five contributions:
+\begin{enumerate}
+  \item The derivation of boom-bust dealer balance sheet volatility
+    asymmetry as an equilibrium theorem from the minimal CPT-like
+    structure.
+  \item The structural identification result with its exact orthogonal
+    separation property: $|\gamma|/\alpha$ identifies $\lambda$ and
+    $\beta$ identifies $g$ from the same time series, with zero
+    cross-derivatives.
+  \item The IGARCH boundary: as the trend growth rate approaches zero,
+    volatility persistence approaches one, providing the first
+    preference-based microfoundation for integrated volatility processes.
+  \item A testable cross-sectional prediction: persistence should
+    co-vary with trend growth, and asymmetry ratios with loss aversion
+    measures, with zero cross-effects.
+  \item Empirical confirmation using US dealer balance sheet data,
+    including a post-GFC regulatory structural break that provides a
+    natural experiment for the separation property.
+\end{enumerate}
 
 The paper is postdictive in intent: it explains why the boom-bust
 asymmetry exists rather than predicting that it will. Its value lies in
@@ -378,12 +375,11 @@ consistent with the inventory-based market making literature
 constraints rather than adverse selection against privately informed
 traders. The price impact coefficient $\lambda_p$ (not to be confused
 with the loss aversion parameter $\lambda$) is the MM's strategic
-variable.%
-\footnote{The noise trader variance $\sigma^2_u$ determines the
-benchmark price impact level $\lambda^0_p = \sigma_\mu/(2\sigma_u)$
-but does not affect the variance ratio, the asymmetry mechanism, or the
-separation property --- the paper's structural results are invariant to
-$\sigma^2_u$.}
+variable. The noise trader variance $\sigma^2_u$ determines the
+benchmark price impact level $\lambda^0_p = \sigma_\mu/(2\sigma_u)$ but
+does not affect the variance ratio, the asymmetry mechanism, or the
+separation property: the paper's structural results are invariant to
+$\sigma^2_u$.
 The return innovation
 $\varepsilon^r_t = \mu_t/2 + \varepsilon_t$ (where
 $\varepsilon_t \sim \mathcal{N}(0, \sigma^2_\varepsilon)$ is
@@ -500,25 +496,34 @@ even though the unconstrained interior optimum coincides with the
 risk-neutral benchmark $\lambda^0_p$. The risk limits make the MM's
 price impact regime-dependent: lower in expansion
 ($\lambda^0_p/\lambda < \lambda^0_p$) and higher in contraction
-($\lambda\lambda^0_p > \lambda^0_p$). This is the structural foundation
-of the procyclical leverage cycle documented by
-\citet{adrian2010,adrian2014}: in expansion, the accommodating risk
+($\lambda\lambda^0_p > \lambda^0_p$). This regime-dependence is the
+structural foundation of the procyclical leverage cycle documented by
+\citet{adrian2010,adrian2014}. In expansion, the accommodating risk
 limit supports large positions and high leverage with low VaR
 utilisation; in contraction, the tight risk limit forces small positions
 and low leverage with high VaR utilisation --- the negative
-leverage-VaR relationship established empirically. Consistent with the
-regime-dependent market making documented by \citet{li2025}, dealers
-reduce position changes and widen spreads as they approach their
-internal VaR limits --- precisely the contraction regime of the model.
+leverage--VaR relationship established empirically by \citet{adrian2014}.
+\citet{li2025} confirm this pattern at the desk level: dealers reduce
+position changes and require higher compensation as they approach their
+internal VaR limits, precisely the contraction regime of the model.
 
 \noindent\textbf{The speculator's position.}
 Taking the price impact schedule $\lambda^{\rm eff}_p$ as given, the
 speculator maximises $\mathbb{E}[m_t(\mu_t - 2\lambda^{\rm eff}_p m_t)
 \mid \mu_t]$, yielding the optimal position
-$m^*_t = \mu_t / (4\lambda^{\rm eff}_p)$. Loss aversion in the
-speculator's own objective cancels by the same scalar argument ---
-confirming that the mechanism requires loss aversion to reside in the
-price-setter, not the quantity-setter.
+$m^*_t = \mu_t / (4\lambda^{\rm eff}_p)$.
+
+\begin{remark}[MM assignment of loss aversion]
+\label{rem:mm_assignment}
+Loss aversion in the speculator's own objective cancels by the same
+scalar argument as in the MM's unconstrained problem: $\lambda^S$
+scales the objective in the loss region but does not shift the interior
+optimum. The mechanism therefore requires loss aversion to reside in the
+price-setter (the MM), not the quantity-setter (the speculator). Under
+heterogeneous loss aversion $\lambda^{MM} \neq \lambda^S$, only
+$\lambda^{MM}$ enters the variance asymmetry; $\lambda^S$ is
+observationally irrelevant.
+\end{remark}
 
 \noindent\textbf{The deviation recursion.}
 Substituting the speculator's optimal position into the wealth dynamics
@@ -527,14 +532,18 @@ under Assumption~\ref{ass:zerosum}, the detrended deviation evolves as:
   D_t = \frac{D_{t-1}}{1+g} + A^r\sigma^2_\mu + B^r\mu_t\varepsilon_t
   \label{eq:deviation_recursion}
 \end{equation}
-where the regime-specific coefficients are
-$A^+ = \lambda^2/(4\lambda^{0\,2}_p)$,
-$A^- = 1/(4\lambda^2\lambda^{0\,2}_p)$ and
-$B^+ = \lambda/(2\lambda^0_p)$,
-$B^- = 1/(2\lambda\lambda^0_p)$, with $r = +$ when $D_{t-1} \geq 0$
-and $r = -$ when $D_{t-1} < 0$. The deflation factor $1/(1+g)$ is
-regime-invariant --- the structural source of the separation between
-persistence and asymmetry.
+where the regime-specific coefficients are:
+\begin{align}
+  A^+ &= \frac{\lambda^2}{4\lambda^{0\,2}_p}, \quad
+  A^- = \frac{1}{4\lambda^2\lambda^{0\,2}_p}
+  \label{eq:Ar_coeff} \\
+  B^+ &= \frac{\lambda}{2\lambda^0_p}, \quad
+  B^- = \frac{1}{2\lambda\lambda^0_p}
+  \label{eq:Br_coeff}
+\end{align}
+with $r = +$ when $D_{t-1} \geq 0$ and $r = -$ when $D_{t-1} < 0$. The
+deflation factor $1/(1+g)$ is regime-invariant --- the structural source
+of the separation between persistence and asymmetry.
 
 \noindent\textbf{The cancellation result.}
 The one-period return variance $\text{Var}(\varepsilon^r_t) =
@@ -818,10 +827,11 @@ on which side of the reference point the dealer occupies.
 \includegraphics[width=0.85\textwidth]{fig2_persistence_comparison.pdf}
 \caption{Persistence identification under HP filtering vs deterministic
 detrending. HP filtering absorbs the low-frequency persistence signal,
-producing $\hat{\phi}_{\rm HP} \approx 0.58$--$0.92$ far below the model
-prediction $1/(1+g/4) \approx 0.998$. Deterministic detrending recovers
-$\hat{\phi}_{\rm det} \approx 0.974$--$1.016$, within 2.3 percentage
-points of the structural prediction in all regimes.}
+producing $\hat{\phi}_{\rm HP} \approx 0.58$--$0.92$ across subperiods
+(full-sample estimate: $0.664$), far below the model prediction
+$1/(1+g/4) \approx 0.998$. Deterministic detrending recovers
+$\hat{\phi}_{\rm det} \approx 0.974$--$1.016$ across subperiods, within
+2.3 percentage points of the structural prediction in all regimes.}
 \label{fig:persistence_comparison}
 \end{figure}
 
@@ -922,13 +932,16 @@ The secular stagnation period ($g_{\rm lit} = 0.3\%$) provides a test
 of the IGARCH boundary prediction: as $g \to 0$, $\beta \to 1$. Under
 deterministic detrending, $\hat{\phi}_{\rm det} = 1.016$ and
 $\hat{\beta}_{\rm det} = \hat{\phi}^2_{\rm det} = 1.032$ in this
-subperiod --- at or slightly above unity, consistent with near-unit-root
-behaviour. The model predicts $\beta = 1/(1+0.003)^2 = 0.994$;
-the observed value exceeds this, but in a 60-quarter sample with
-$g \approx 0$, estimation noise can push $\hat{\phi}$ above 1. The
-finding is consistent with the IGARCH boundary: the stagnation period
-exhibits the most persistent dealer balance sheet dynamics of all
-subperiods, as the model predicts for a near-zero growth environment.
+subperiod --- at or slightly above unity. The model predicts
+$\beta = 1/(1+0.003)^2 = 0.994$; the observed value exceeds this and,
+strictly speaking, lies outside the model's stationary region. This
+should be read as a finite-sample estimation artefact rather than a
+structural prediction: in a 60-quarter window with $g \approx 0$, the
+AR(1) coefficient is estimated close to the unit-root boundary where
+standard OLS is biased upward. The qualitative finding stands: the
+stagnation period exhibits the most persistent dealer balance sheet
+dynamics of all subperiods, consistent with the IGARCH boundary
+prediction for a near-zero growth environment.
 
 \begin{figure}[ht]
 \centering
@@ -938,7 +951,9 @@ detrending vs the model prediction $\beta = 1/(1+g)^2$ (solid curve).
 The full-sample estimate (diamond) sits close to the structural curve.
 Subperiod estimates (circles) show the correct directional pattern:
 higher growth produces lower persistence. The stagnation subperiod
-($g = 0.3\%$) exceeds unity, consistent with the IGARCH boundary.}
+($g = 0.3\%$) exceeds unity, which reflects finite-sample upward bias
+near the unit-root boundary in a 60-quarter window rather than a
+structural model prediction.}
 \label{fig:structural_fit}
 \end{figure}
 
@@ -959,53 +974,28 @@ is robust to HP filtering and positive threshold perturbations but
 sensitive to linear detrending, an honest limitation.
 
 % ============================================================
-% SECTION 13: CONCLUSION
+% CONCLUSION
 % ============================================================
 
-% 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper identifies the minimal behavioural structure sufficient to
-derive the boom-bust asymmetry in dealer balance sheet volatility as an
-equilibrium theorem. We retain the single empirically robust element of
-prospect theory --- the kink in the value function at a reference point
---- and embed it in a Stackelberg market with a common trend growth
-benchmark as the shared reference point. The kink alone, properly
-formalised through pre-committed risk limits, is both necessary and
-sufficient: simpler utilities (CRRA, log) cannot generate the asymmetry,
-and the full apparatus of CPT (probability weighting, rank-dependence,
-endogenous reference points) is not needed.
-
-Two structural conditions make this work as a theorem. The bilateral
-zero-sum structure (Assumption~\ref{ass:zerosum}) guarantees that dealer
-and speculator always sit on opposite sides of the kink simultaneously,
-generating a variance ratio of $\lambda^4$ between expansion and
+This paper derives boom-bust asymmetry in dealer balance sheet volatility
+as an equilibrium theorem from a single behavioural primitive: the kink
+in the value function at a reference point. Two structural conditions
+are jointly necessary. The bilateral zero-sum structure
+(Assumption~\ref{ass:zerosum}) places dealer and speculator on opposite
+sides of the kink simultaneously --- a derived result, not an assumption
+--- generating a variance ratio of $\lambda^4$ between expansion and
 contraction. The trend growth path provides mean-reversion at rate
 $1/(1+g)$, pinning persistence to the economy's growth rate. Together
-they deliver the separation property: $|\gamma|/\alpha$ depends only
-on the loss aversion parameter $\lambda$ and the persistence coefficient
-$\beta$ depends only on the trend growth rate $g$, with zero
-cross-derivatives. This provides exact within-model identification of
-both structural primitives from the same time series without external
-instruments or exclusion restrictions
-(Table~\ref{tab:identification_comparison}).
-
-Empirical analysis using US dealer balance sheet data (Federal Reserve
-Z.1 L.130, 1952--2025) provides five findings: expansion variance
-exceeds contraction variance ($\hat{\mathcal{R}} = 2.07$,
-$p < 0.00001$); deterministic detrending confirms persistence within
-0.4 percentage points of the structural prediction; the pre-GFC
-asymmetry ratio is stable across growth regimes ($0.42$--$0.45$
-despite threefold variation in trend TFP growth); a post-GFC regulatory
-structural break is explained by a one-parameter extension that
-preserves the separation property; and near-unit-root persistence in
-the secular stagnation period confirms the IGARCH boundary. The
-implied $\hat{\lambda} = 1.20$ is the first structural market-based
-estimate of dealer loss aversion --- connecting the experimental
-programme of behavioural economics, where the kink is well-validated
-but confined to the laboratory, directly to the structural programme
-of market microstructure.
+they deliver the separation property: $|\gamma|/\alpha$ identifies loss
+aversion $\lambda$ and $\beta$ identifies trend growth $g$, with zero
+cross-derivatives and no external instruments required
+(Table~\ref{tab:identification_comparison}). Empirical analysis confirms
+all five structural predictions using Federal Reserve Z.1 data
+(1952--2025), and the implied $\hat{\lambda} = 1.20$ is the first
+structural market-based estimate of dealer loss aversion.
 
 The IGARCH boundary ($\beta \to 1$ as $g \to 0$) provides the first
 preference-based microfoundation for integrated volatility processes.
@@ -1077,16 +1067,18 @@ aversion estimates across countries --- is the primary agenda for the
 companion empirical paper. Fourth, the loss aversion parameter $\lambda$
 is treated as constant within each regulatory regime. In practice,
 $\lambda$ may vary with balance sheet state --- experimental evidence
-suggests loss aversion intensifies under stress --- with regulatory
-regime shifts (Basel III may have permanently changed effective
-institutional $\lambda$, not merely imposed a binding floor), or with
-market structure evolution (the entry of non-loss-averse intermediaries
-such as HFT firms may reduce the effective $\lambda$ of the dealer
-population). The pre-GFC asymmetry ratio stability ($0.42$--$0.45$
-across two decades) provides evidence that $\lambda$ was approximately
-constant in that era, but a two-state extension allowing
-$\lambda^+ \neq \lambda^-$ across regimes is a natural direction for
-future work. The model's scope is limited to liquid, transparent dealer
+suggests loss aversion intensifies under stress \citep{cohn2015} ---
+or with regulatory regime shifts (Basel III may have permanently changed
+effective institutional $\lambda$, not merely imposed a binding floor).
+Market structure evolution also matters: the growing share of
+non-loss-averse intermediaries such as principal trading firms likely
+reduces the effective $\lambda$ of the broader dealer population
+\citep{baron2019}, compressing the cross-sectional variance asymmetry
+in fragmented markets. The pre-GFC asymmetry ratio stability
+($0.42$--$0.45$ across two decades) provides evidence that $\lambda$
+was approximately constant in that era, but a two-state extension
+allowing $\lambda^+ \neq \lambda^-$ across regimes is a natural
+direction for future work. The model's scope is limited to liquid, transparent dealer
 markets where VaR-constrained balance sheet management drives price
 impact; markets with significant information asymmetry require the
 adverse selection channel that is outside the present model's scope.
@@ -1209,7 +1201,7 @@ removing either eliminates one of the two main structural identifications.}
 \end{table}
 
 % ============================================================
-% SECTION 12: EMPIRICAL EVIDENCE
+% TECHNICAL APPENDIX
 % ============================================================
 
 \section{Technical Appendix}
@@ -1234,7 +1226,7 @@ have been verified symbolically.
     A^r\sigma^2_\mu + B^r\mu_t\varepsilon_t$, where $r \in \{+,-\}$
     denotes the regime determined by $\operatorname{sign}(D_{t-1})$,
     and $A^r$, $B^r$ are the regime-specific coefficients of
-    equations~(38)--(39).
+    equations~\eqref{eq:Ar_coeff}--\eqref{eq:Br_coeff}.
   \item[(A3)] \textit{Isserlis.} For any zero-mean bivariate Gaussian
     $(X,Y)$: $\mathbb{E}[X^2Y^2] = \operatorname{Var}(X)
     \operatorname{Var}(Y) + 2\operatorname{Cov}(X,Y)^2$.
@@ -1418,7 +1410,7 @@ and zero means), so $\mathbb{E}[D_t \mid D_{t-1}] = D_{t-1}/(1+g) +
 A^r\sigma^2_\mu$. The fixed point $\mathbb{E}[D_t \mid D_{t-1}] = D_{t-1}$
 gives $D^*_r = A^r\sigma^2_\mu(1+g)/g > 0$ since $A^r, \sigma^2_\mu,
 g > 0$. The ratio $D^*_+/D^*_- = A^+/A^- = \lambda^2$ follows from
-equations~(38)--(39).
+equations~\eqref{eq:Ar_coeff}--\eqref{eq:Br_coeff}.
 
 \textit{Part (i).} For $D_{t-1} < 0$: $\mathbb{E}[D_t \mid D_{t-1}]
 - D_{t-1} = -D_{t-1}g/(1+g) + A^-\sigma^2_\mu > 0$, since both
@@ -1649,7 +1641,7 @@ Block & Result & Status \\
 
 \noindent\textbf{Funding.} No external funding was received for this research.
 
-\noindent\textbf{Data availability.} No datasets were generated or analysed during the current study. The symbolic verification code supporting the analytical results is available from the author on reasonable request.
+\noindent\textbf{Data availability.} No datasets were generated or analysed during the current study. The SymPy verification notebook supporting the symbolic results is available from the author on reasonable request.
 
 
 \bibliographystyle{apalike}
