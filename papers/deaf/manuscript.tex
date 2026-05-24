@@ -436,10 +436,27 @@ innovation is:
 \end{equation}
 where $\varepsilon_t \sim \mathcal{N}(0, \sigma^2_\varepsilon)$ is
 idiosyncratic noise with variance $\sigma^2_\varepsilon > 0$,
-independent of $\mu_t$. The factor of $\tfrac{1}{2}$ arises because
-the speculator's optimal position (derived in
-Section~\ref{sec:equilibrium}) passes half the signal through to
-prices. All agents observe $\varepsilon^r_t$ at the end of each
+independent of $\mu_t$. The factor of $\tfrac{1}{2}$ is derived, not
+assumed: substituting the speculator's equilibrium position
+$m^*_t = \mu_t/(4\lambda^{\rm eff}_p)$ into the pricing rule gives a
+signal contribution to the price change of
+$\lambda^{\rm eff}_p \cdot m^*_t = \mu_t/4$; the return innovation,
+defined as the asset's realised value net of its pre-trading expectation,
+receives this $\mu_t/4$ term twice (once from the price move, once from
+the payoff), yielding $\tfrac{1}{2}\mu_t$, plus the idiosyncratic
+component $\varepsilon_t$.%
+\footnote{Formally: the asset payoff is $\mu_t + \varepsilon_t$; the
+pre-trade price already reflects $\lambda^{\rm eff}_p u_t$ from
+liquidity flow. After substituting $m^*_t$, the price change due to the
+speculator is $\lambda^{\rm eff}_p \cdot \mu_t/(4\lambda^{\rm eff}_p)
+= \mu_t/4$. The net return innovation --- payoff minus price change
+attributable to the speculator --- is
+$(\mu_t + \varepsilon_t) - \mu_t/4 - \mu_t/4 = \tfrac{1}{2}\mu_t +
+\varepsilon_t$. This ``half the signal in prices'' result is a standard
+feature of linear Stackelberg equilibria with a single strategic trader
+\citep{kyle1985} and holds here because the speculator is the only
+agent exploiting $\mu_t$.}
+All agents observe $\varepsilon^r_t$ at the end of each
 period. Within-period position closing then ensures that both the MM
 and the speculator enter each new period with zero inventory: all
 asymmetric effects operate through accumulated wealth, not through
