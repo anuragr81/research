@@ -153,14 +153,14 @@ $\{g_1, \ldots, g_K\}$ (group memberships) without receiving a
 definitive signal about which partition element is true. The revision
 is driven by the evidential weight of a soft marker, not by a
 likelihood ratio. Crucially, the conditional probabilities
-$F_{g_k}$---the group-level class distributions---are
+$\pi_0(c \mid g_k)$---the group-level priors over economic class---are
 held fixed during the revision. Only the weights $P'(g_k)$ change.
 
 This rigidity condition is the formal expression of the
 ``exception to the rule'' phenomenon: an individual counter-example
 (a high-class member of a stigmatised group) shifts $P'(g_k)$---the
 observer attributes the individual to a different group---but does
-\emph{not} update $F_{g_k}$ for the group as a whole. The
+\emph{not} update $\pi_0(c \mid g_k)$ for the group as a whole. The
 stereotype persists. This emerges as a theorem of the updating rule,
 not as an assumption about preferences or cognitive bias.
 
@@ -199,8 +199,9 @@ of conspicuous consumption and Spence's signalling framework.
 The paper is structured as follows. Section~\ref{sec:lit} positions
 the model relative to existing theories of discrimination.
 Section~\ref{sec:model} develops the base model: primitives, Jeffrey
-conditioning, bilateral updating, the closure equilibrium and
-intergenerational dynamics, and comparative statics.
+conditioning, bilateral updating, and comparative statics.
+Section~\ref{sec:closure} establishes the closure equilibrium,
+intergenerational dynamics, and the mobility threshold.
 Section~\ref{sec:platform} develops the platform extension: experience
 utility, atmosphere vectors, shadow information markets, platform
 exclusion, and tokenism. Section~\ref{sec:discussion} provides
@@ -259,6 +260,42 @@ equilibrium, after which the policy is no longer needed
 (Proposition~\ref{prop:class-closure}). The policy works by
 equilibrium selection, not by compensating for disadvantage.
 
+\subsection{The Akerlof--Spence limit and the hard/soft signal distinction}
+\label{subsec:akerlof-spence}
+
+The most natural information-economics response to discrimination
+is Spencian signalling: if marginalised individuals credibly signal
+their type, the pooling equilibrium breaks down and discrimination
+erodes. This logic rests on Bayesian updating over hard signals---a
+university degree, a certification, a warranty---where the signal
+partitions the type space and the observer's posterior moves with
+each observation. Applied to social discrimination, it implies that
+marginalised communities should be able to erode group priors by
+signalling their true economic quality more assertively. This is the
+implicit logic of respectability politics and of the self-confirming
+equilibria in \citet{CoateLoury1993}: the signalling equilibrium is
+self-fulfilling, so policy intervention that shifts beliefs unlocks
+the good equilibrium.
+
+The present model identifies precisely why this does not transfer.
+In \citet{Akerlof1970} and \citet{Spence1973}, the signal is hard:
+it determines a definite evidential relationship with the type,
+and Bayesian updating on hard signals aggregates cleanly from
+individuals to the group prior. In social interaction, the operative
+signals are soft---accent, dress, consumption patterns---and the
+theoretically appropriate rule for soft signals is Jeffrey
+conditioning, not Bayesian updating. The rigidity condition
+(Proposition~\ref{prop:graded}) decouples individual
+reclassification from group prior revision: the compliant individual
+is reclassified, the group prior $\pi_0(c_H \mid g)$ does not move.
+No volume of individual signalling can drive $\pi_0$ across the
+mobility threshold $\pi_0^{\mathrm{mid}}$, because the Jeffrey
+architecture holds conditional probabilities fixed by construction.
+The Spence fix fails here not because of irrationality, prejudice,
+or coordination failure, but because the inference rule governing
+soft-signal environments is categorically different from the one
+governing hard-signal markets.
+
 \subsection{Loury's programme and the Jeffrey formalisation}
 
 \citet{Loury2002} distinguishes \emph{discrimination in contract}
@@ -283,7 +320,7 @@ compute explicitly.
 Jeffrey conditioning is not merely a modelling choice. It is the
 theoretically natural updating rule when signals are soft: it is the
 unique rule that revises the marginal distribution over groups while
-holding the conditional distributions $F_{g_k}$ fixed ---
+holding the conditional distributions $\pi_0(c \mid g_k)$ fixed ---
 precisely the rigidity condition the model requires. Standard
 Bayesian updating requires a likelihood function
 $P(\text{signal} \mid \text{state})$, which presupposes that the
@@ -299,7 +336,7 @@ cannot generate the closure trap as an equilibrium outcome.
 human face''---an updating rule that respects the genuine uncertainty
 of soft evidence.
 
-The model takes the initial group-level distributions $F_{g_k}$
+The model takes the initial group-level priors $\pi_0(c_H \mid g_k)$
 as historically given. It is silent on whether those priors were
 generated by class structures that preceded racial categorisation or
 by racial exploitation that created class stratification---a question
@@ -366,13 +403,13 @@ extension.
 power on the other side of the market: as a stigmatised group's
 aggregate purchasing power grows, corporate interests partially align
 with their inclusion. In the model this corresponds to the exclusion
-threshold $\bar{c}_g^{\text{excl}}$ (Proposition~\ref{prop:exclusion}):
+threshold $\pi_0^{\text{excl}}$ (Proposition~\ref{prop:exclusion}):
 as the group's prior rises, the platform's profit motive eventually
 generates voluntary partial integration. But countervailing power
 deposits the group in the tokenism zone
 (Proposition~\ref{prop:tokenism}) --- platform access without social
 integration. Market forces alone cannot push the group past the social
-tipping point $\bar{c}_g^{\text{mid}}$. This simultaneously vindicates
+tipping point $\pi_0^{\text{mid}}$. This simultaneously vindicates
 and limits Galbraith's optimism: the market does generate partial
 inclusion, but inclusion falls structurally short of integration.
 
@@ -444,10 +481,7 @@ Each agent is characterised by:
   or latent and inferred from markers (class, ethnicity, religion).
   In either case what matters for the model is not group membership
   itself but the economic class distribution conditional on group
-  membership, which is always a soft inference. Conditional on group
-  $g$, class is distributed with mean
-  $\bar{c}_g = \E[c \mid g]$ and variance
-  $\sigma_g^2 = \mathrm{Var}(c \mid g)$.
+  membership, which is always a soft inference.
   \item Self-belief $Q_i(c)$, agent $i$'s belief over their own
   socially relevant economic position.
 \end{itemize}
@@ -463,19 +497,17 @@ the comparative statics of Section~\ref{subsec:interaction}.
 \subsection{The prior and its endogenous formation}
 \label{subsec:prior}
 
-Agent $j$'s prior over the economic class of a member of group $g$
-is the group's conditional class distribution, summarised by its
-mean:
+Agent $j$'s prior over the economic class of a member of group $g$:
 \begin{equation}
-  \bar{c}_g = \frac{1}{T} \sum_{t=1}^{T} c_{g,t}
+  \pi_0(c_H \mid g) = \frac{1}{T} \sum_{t=1}^{T}
+  \mathbf{1}[c_{g,t} \geq \bar{c}]
   \label{eq:prior}
 \end{equation}
-where $c_{g,t} \in [0,1]$ is the class outcome of the $t$-th
-historical member of group $g$ and $T$ is the historical window.
-The group mean $\bar{c}_g$ is a \textbf{sufficient statistic of the
-group's economic history}. Groups with histories of
+where $\bar{c}$ is the threshold above which class is ``high'' and
+$T$ is the historical window. The prior is a \textbf{sufficient
+statistic of the group's economic history}. Groups with histories of
 marginalisation---slavery, colonial extraction, persistent
-poverty---have low $\bar{c}_g$.
+poverty---have low $\pi_0(c_H \mid g)$.
 
 \begin{remark}[Beta--De~Finetti structure]
 \label{rem:bernoulli}
@@ -483,17 +515,18 @@ If individual class outcomes within a group are modelled as
 exchangeable $[0,1]$-valued random variables, the De~Finetti
 representation theorem \citep{DeFinetti1964} guarantees a mixing
 measure over possible group means. The natural parametric family
-is the Beta distribution $\mathrm{Beta}(\bar{c}_g \nu,\,
-(1 - \bar{c}_g)\nu)$ with mean $\bar{c}_g$ and variance
+is the Beta distribution $\mathrm{Beta}(\pi_0 \nu,\,
+(1 - \pi_0)\nu)$ with mean $\pi_0$ and variance
 \begin{equation}
-  \sigma_g^2 = \frac{\bar{c}_g(1 - \bar{c}_g)}{1 + \nu}
+  \sigma_g^2 = \frac{\pi_0(1 - \pi_0)}{1 + \nu}
   \label{eq:beta-var}
 \end{equation}
 where $\nu > 0$ is a concentration parameter governing within-group
 heterogeneity. As $\nu \to 0$, the Beta distribution concentrates
 on $\{0,1\}$ and the model reduces to the Bernoulli special case
-with variance $\bar{c}_g(1-\bar{c}_g)$. This variance plays a
-central role in the intergenerational dynamics
+with variance $\pi_0(1-\pi_0)$, which is the parametrisation
+adopted throughout the remainder of the paper. This variance plays
+a central role in the intergenerational dynamics
 (Section~\ref{subsec:intergenerational}).
 \end{remark}
 
@@ -502,32 +535,23 @@ central role in the intergenerational dynamics
 
 Agent $j$ observes soft marker $m_i$. This shifts $j$'s distribution
 over group membership from $P(g_k)$ to $P'(g_k)$ without determining
-which group $i$ belongs to. Under \textbf{Jeffrey conditioning}, the
-posterior distribution over $c_i$ is:
+which group $i$ belongs to. Under \textbf{Jeffrey conditioning}:
 \begin{equation}
-  F'(c) = \sum_{k=1}^{K} F_{g_k}(c) \cdot P'(g_k)
+  P'(c) = \sum_{k=1}^{K} \pi_0(c \mid g_k) \cdot P'(g_k)
   \label{eq:jeffrey}
-\end{equation}
-where $F_{g_k}$ is the conditional class distribution for group $g_k$.
-Taking expectations, the posterior mean of $c_i$ is:
-\begin{equation}
-  \E'[c_i] = \sum_{k=1}^{K} \bar{c}_{g_k} \cdot P'(g_k)
-  \label{eq:jeffrey-mean}
 \end{equation}
 
 The revision $P \to P'$ is driven by the evidential weight of the
 marker, not a likelihood ratio.
 
-\textbf{Rigidity condition.} The conditional distributions
-$F_{g_k}$---and therefore the group means $\bar{c}_{g_k}$ and
-variances $\sigma_{g_k}^2$---are held fixed during the Jeffrey
-revision. Only the weights $P'(g_k)$ change. Consequence: an
-individual counter-example shifts $P'(g_k)$---the individual is
-attributed to a different group---but does \emph{not} update the
-group-level distribution $F_{g_k}$. This is the formal expression of
-the ``exception to the rule'' phenomenon and stereotype persistence.
-It emerges as a theorem of Jeffrey conditioning, not as an
-assumption.
+\textbf{Rigidity condition.} The conditional probabilities
+$\pi_0(c \mid g_k)$ are held fixed during the Jeffrey revision. Only
+$P'(g_k)$ changes. Consequence: an individual counter-example shifts
+$P'(g_k)$---the individual is attributed to a different group---but
+does \emph{not} update $\pi_0(c \mid g)$. This is the formal
+expression of the ``exception to the rule'' phenomenon and stereotype
+persistence. It emerges as a theorem of Jeffrey conditioning, not as
+an assumption.
 
 \subsection{Bilateral updating and the reflexive information structure}
 \label{subsec:bilateral}
@@ -536,63 +560,49 @@ The information structure is bilateral and reflexive. Both agents
 update simultaneously. Agent $i$'s self-belief is revised through
 observing $j$'s consumption signals:
 \begin{equation}
-  Q_i'(c_i) = \int_0^1 Q_i(c_i \mid c_j = c) \, \mathrm{d}R_i'(c)
+  Q_i'(c_i) = \sum_{k} Q_i(c_i \mid c_j = c_k) \cdot R_i'(c_k)
   \label{eq:bilateral}
 \end{equation}
-where $R_i'$ is $i$'s Jeffrey-revised distribution over $j$'s class
+where $R_i'(c_k)$ is $i$'s Jeffrey-revised belief about $j$'s class
 after observing $j$'s consumption bundle.
+
+Three consequences follow. First, exclusion suppresses aspirations
+and self-perception, not just economic opportunities
+(\emph{self-signalling and aspiration formation}). Second, agent $i$
+has incentive to manipulate markers to shift $P'(g_k)$ in $j$'s
+Jeffrey revision---the social analogue of \citet{Spence1973}'s
+signalling model (\emph{endogenous signal production};
+Appendix~\ref{app:veblen}). Third, excluded agents have worse
+information about available economic opportunities; the closure trap
+is also an information trap (\emph{closure as epistemic trap}).
 
 \subsection{The interaction decision}
 \label{subsec:interaction}
 
-Agents make engagement decisions based on expected economic
-compatibility under the Jeffrey-updated posterior. Social engagement
-utility for agent $j$ encountering agent $i$:
+Social engagement utility:
 \begin{equation}
-  U(c_i, c_j) = v - \kappa \cdot (c_i - c_j)^2
+  U(c_i, c_j) = v - \kappa \cdot d(c_i, c_j)
   \label{eq:utility}
 \end{equation}
-where $v > 0$ is baseline interaction value and $\kappa > 0$ is
-incompatibility sensitivity.
-Outside option: $\bar{u}$. Agent $j$ does not observe $c_i$ directly;
-they observe marker $m_i$ and compute expected utility under the
-Jeffrey-updated posterior over $c_i$:
+where $v > 0$ is baseline interaction value, $\kappa > 0$ is
+incompatibility sensitivity, and $d(\cdot)$ is the class distance.
+Outside option: $\bar{u}$.
+
+Expected utility under Jeffrey-updated posterior:
 \begin{equation}
-  \E[U \mid m_i] = v - \kappa \cdot \E[(c_i - c_j)^2 \mid m_i]
+  \E[U \mid m_i] = v - \kappa \cdot \E[d(c_i, c_j) \mid m_i]
   \label{eq:exp-utility}
 \end{equation}
 
-Under the Jeffrey posterior, the expected squared distance decomposes
-as:
+Agent $j$ engages iff:
 \begin{equation}
-  \E[(c_i - c_j)^2 \mid m_i]
-  = \bigl(\E'[c_i] - c_j\bigr)^2 + \mathrm{Var}'(c_i)
-  \label{eq:bias-var}
-\end{equation}
-where $\E'[c_i] = \sum_k \bar{c}_{g_k} P'(g_k)$ is the posterior
-mean (equation~\ref{eq:jeffrey-mean}) and
-$\mathrm{Var}'(c_i) = \sum_k [\sigma_{g_k}^2 +
-\bar{c}_{g_k}^2] P'(g_k) - (\E'[c_i])^2$
-is the posterior variance. The first term is the \textbf{bias}: the
-squared distance between the observer's class and the posterior mean
-class of the observed. The second is the \textbf{uncertainty}: the
-within-group class dispersion that cannot be resolved by markers
-alone.
-
-Agent $j$ engages iff the expected squared distance does not exceed
-the engagement threshold:
-\begin{equation}
-  \E[(c_i - c_j)^2 \mid m_i] \leq
+  \E[d(c_i, c_j) \mid m_i] \leq
   \frac{v - \bar{u}}{\kappa} \equiv \Delta^*(c_j)
   \label{eq:threshold}
 \end{equation}
 
-Under the bilateral structure, engagement requires
-condition~(\ref{eq:threshold}) to hold for both agents
-simultaneously: $j$ must find $i$ compatible given $i$'s markers,
-and $i$ must find $j$ compatible given $j$'s markers. The engagement
-decision is therefore a joint product of two independent Jeffrey
-revisions, each anchored to independently formed group priors.
+Under bilateral structure, engagement requires condition
+(\ref{eq:threshold}) to hold for both agents simultaneously.
 
 \textbf{Two-group simplification.} For the remainder of the
 analysis, we work with two groups $\G = \{g_1, g_2\}$ and condition
@@ -603,7 +613,7 @@ distance for an agent $j$ with class $c_j$ encountering a member of
 group $g$ is:
 \begin{equation}
   \E[(c_i - c_j)^2 \mid g]
-  = (\bar{c}_g - c_j)^2 + \sigma_g^2
+  = (\pi_0 - c_j)^2 + \pi_0(1-\pi_0)
   \label{eq:Ed-group}
 \end{equation}
 
@@ -612,203 +622,163 @@ threshold is violated when either the bias (class distance between
 observer and group mean) or the uncertainty (within-group dispersion)
 is too large.
 
-\subsection{The closure equilibrium}
-\label{subsec:closure-eq}
-
-\subsubsection{The dynamic system}
-
-If fraction $\phi^t$ of agents discriminate against group $g$ in
-generation $t$, the next generation's group mean evolves as:
-\begin{equation}
-  \bar{c}_g^{t+1} =
-  \underbrace{\bar{c}_g^t(1 - \delta \phi^t)}_{\text{exclusion erodes mean}}
-  + \underbrace{\mu(1 - \bar{c}_g^t)}_{\text{natural convergence}}
-  + \underbrace{\gamma \cdot \sigma_g^2}_{\text{mobility from within-group dispersion}}
-  \label{eq:dynamic}
-\end{equation}
-where $\delta > 0$ is the economic cost of social exclusion per unit
-of discrimination, $\mu \in (0,1)$ is the exogenous intergenerational
-convergence rate, and $\gamma \in (0,1)$ is the intergenerational
-mobility parameter. Under the Beta--De~Finetti structure
-(Remark~\ref{rem:bernoulli}), the within-group variance is
-$\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, so the mobility term
-becomes $\gamma \bar{c}_g(1-\bar{c}_g)/(1+\nu)$.
-
-The mobility term is maximised at
-$\bar{c}_g = 1/2$ (maximum heterogeneity) and vanishes at
-$\bar{c}_g = 0$ and $\bar{c}_g = 1$ (homogeneous group). It captures
-intergenerational regression to the group mean: children of
-high-class families face some probability of downward mobility, and
-children of low-class families have some chance of upward mobility.
-The concentration parameter $\nu$ governs the strength of this
-channel: higher $\nu$ (more concentrated distribution, less
-within-group dispersion) reduces the mobility term, while $\nu \to 0$
-recovers the Bernoulli limit $\gamma \bar{c}_g(1-\bar{c}_g)$.
-
-Writing $\tilde{\gamma} = \gamma/(1+\nu)$ for the effective mobility
-parameter (we write $\gamma^*$ for the critical threshold
-$\tilde{\gamma}^*$ where no ambiguity arises), the discrimination
-rate $\phi^t = F(\bar{c}_g^t)$ is determined by the engagement
-threshold (\ref{eq:threshold}).
-The composed map is:
-\begin{equation}
-  H(\bar{c}_g) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}
-  - \delta F(\bar{c}_g)) - \tilde{\gamma}\,\bar{c}_g^2
-  \label{eq:composed}
-\end{equation}
-
-The dynamic system connects the interaction decision of
-Section~\ref{subsec:interaction} to the group mean through three
-channels that operate simultaneously.
-First, exclusion suppresses aspirations and self-perception through
-the bilateral updating of equation~(\ref{eq:bilateral}): an agent
-who is repeatedly excluded from high-class social spaces revises
-their self-belief $Q_i(c_i)$ downward, which reduces the range of
-interactions they attempt (\emph{self-signalling and aspiration
-formation}). Second, agent $i$ has incentive to invest in markers
-that shift $P'(g_k)$ in $j$'s Jeffrey revision---the social analogue
-of \citet{Spence1973}'s signalling model---because better markers
-raise the probability of passing the engagement threshold
-(\emph{endogenous signal production}; Appendix~\ref{app:veblen}).
-Third, excluded agents have worse information about available
-economic opportunities because the engagement threshold blocks the
-social interactions through which such information flows; the closure
-trap is therefore also an information trap (\emph{closure as
-epistemic trap}). All three operate through the $\delta\phi^t$ term
-in equation~(\ref{eq:dynamic}): each reinforces the mechanism by
-which discrimination erodes the group mean across generations.
-
-\begin{definition}[Closure Equilibrium]
-\label{def:closure}
-A closure equilibrium is a fixed point $(\phi^*, \bar{c}_g^*)$ of the
-composed map such that beliefs are consistent with outcomes and
-outcomes with beliefs.
-\end{definition}
-
-\subsubsection{Fixed point existence and multiplicity}
-
-\begin{proposition}[Class closure in a homogeneous society]
-\label{prop:class-closure}
-In the single-group model ($\G = \{g_1\}$), markers signal class
-position directly. For sufficiently small $\tilde{\gamma}$ and
-sufficiently large $\delta$, the map $H$ has at least two stable
-fixed points $\bar{c}_g^L < \bar{c}_g^H = 1$, separated by an
-unstable tipping point $\bar{c}_g^{\mathrm{mid}}$. The low fixed
-point constitutes a within-group class closure trap: a segment of the
-population is permanently excluded from high-class social spaces
-across generations, without any inter-group dynamic.
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-Define $\Psi(\bar{c}_g) = H(\bar{c}_g) - \bar{c}_g$. Then
-$\Psi(0) = \mu > 0$ and $\Psi(1) = 0$ (since $F(1) = 0$ and the
-$\tilde{\gamma}$ terms cancel). By continuity and the Intermediate
-Value Theorem, $\Psi$ has a root in $[0,1]$. The multiplicity
-condition (the S-shape of $H$) ensures $\Psi$ dips below zero on
-$(0,1)$, producing two interior roots: a stable low fixed point and
-an unstable tipping point. Local stability follows from
-$|H'(\bar{c}_g^L)| < 1$ and
-$|H'(\bar{c}_g^{\mathrm{mid}})| > 1$. Path dependence follows from
-the monotonicity of orbits on each side of
-$\bar{c}_g^{\mathrm{mid}}$. \qed
-\end{proof}
-
-\subsubsection{The intergenerational mobility threshold}
-\label{subsec:intergenerational}
-
-\begin{proposition}[Mobility threshold and bifurcation]
-\label{prop:bifurcation}
-There exists $\tilde{\gamma}^* > 0$ such that:
-\begin{enumerate}[noitemsep]
-  \item If $\tilde{\gamma} < \tilde{\gamma}^*$: the closure trap
-  persists (two stable fixed points).
-  \item If $\tilde{\gamma} > \tilde{\gamma}^*$: the closure trap is
-  eliminated (unique stable fixed point at $\bar{c}_g = 1$).
-  \item At $\tilde{\gamma} = \tilde{\gamma}^*$: a saddle-node
-  bifurcation---the low fixed point and the tipping point collide and
-  annihilate.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-At $\tilde{\gamma} = 0$, the closure trap exists
-(Proposition~\ref{prop:class-closure}). As $\tilde{\gamma}$ increases,
-the mobility term raises $H(\bar{c}_g)$ in the interior, shrinking
-the region where $\Psi < 0$. At
-$\tilde{\gamma} = \tilde{\gamma}^*$, the region vanishes: the low
-fixed point and the tipping point merge,
-$H'(\bar{c}_g^*) = 1$, and the system undergoes a saddle-node
-bifurcation. For $\tilde{\gamma} > \tilde{\gamma}^*$, $\Psi > 0$ on
-all of $(0,1)$ and the only fixed point is $\bar{c}_g = 1$. The
-exact $\tilde{\gamma}^*$ is found numerically by solving the
-bifurcation system
-$\{H(\bar{c}_g) = \bar{c}_g,\; H'(\bar{c}_g) = 1\}$ jointly.
-\qed
-\end{proof}
-
-The intergenerational persistence of class position near the
-bifurcation is characterised in Appendix~\ref{app:Tstar}.
-
-\subsubsection{The enemy group perturbation}
-
-\begin{definition}[Enemy group]
-Group $g_2$ is an enemy group relative to host group $g_1$ if
-$\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$---their mean starts
-in the high-discrimination basin.
-\end{definition}
-
-\begin{proposition}[Enemy group trap]
-\label{prop:enemy}
-If $g_2$ enters with
-$\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$
-and agents interact only through direct social engagement (not through
-a platform), then $g_2$ converges to the high-discrimination
-equilibrium $\bar{c}_{g_2}^L$ independently of $g_1$'s trajectory,
-and $g_1$'s equilibrium is unaffected.
-\end{proposition}
-
-The formal nesting of the model within Loury's framework is developed
-in Appendix~\ref{app:loury}.
-
 \subsection{Comparative statics}
-
-The comparative statics are derived from the expected squared
-distance $\E[(c_i - c_j)^2 \mid g] = (\bar{c}_g - c_j)^2 +
-\sigma_g^2$ (equation~\ref{eq:Ed-group}).
 
 \begin{proposition}[Income effect]
 \label{prop:income}
-Higher own economic class reduces the bias component of expected
-incompatibility with high-mean groups, expanding the engagement set:
-$\partial \E[(c_i - c_j)^2 \mid g]/\partial c_j =
--2(\bar{c}_g - c_j) < 0$ when $c_j < \bar{c}_g$.
+Higher own economic class increases the expected class proximity to
+other high-class agents, expanding the engagement set:
+$\partial \E[d]/\partial c_j = 1 - 2\pi_0 < 0$ when $\pi_0 > 1/2$.
 \end{proposition}
 
 \begin{proposition}[Education effect]
 \label{prop:education}
 Higher own education increases precision of marker-to-group mapping,
 increasing responsiveness of $P'(g_k)$ to individual information and
-reducing weight on the group distribution $F_{g_k}$.
+reducing weight on group prior $\pi_0(c \mid g)$.
 \end{proposition}
 
 \begin{proposition}[Economic history effect]
 \label{prop:history}
-Lower $\bar{c}_g$ generates higher posterior expected
+Lower $\pi_0(c_H \mid g)$ generates higher posterior expected
 incompatibility for any given marker, pushing more potential partners
 below the engagement threshold:
-$\partial \E[(c_i - c_j)^2 \mid g]/\partial \bar{c}_g =
-2(\bar{c}_g - c_j) < 0$ when $c_j > \bar{c}_g$.
+$\partial \E[d]/\partial \pi_0 = c_H + c_L - 2c_j < 0$ when
+$c_j > (c_H + c_L)/2$.
 \end{proposition}
 
 \begin{proposition}[Graded discrimination]
 \label{prop:graded}
 The Jeffrey framework predicts continuous variation in avoidance with
 marker ambiguity. A faint accent produces less avoidance than a
-strong one. The bias component $(\bar{c}_g - c_j)^2$ is quadratic in
-$\bar{c}_g$, and the variance component $\sigma_g^2$ varies smoothly
-with the group distribution, distinguishing the model from
-Phelps--Arrow's binary response to hard group membership.
+strong one. $\E[d]$ is linear in $\pi_0$
+($\partial^2 \E[d]/\partial \pi_0^2 = 0$), distinguishing the model
+from Phelps--Arrow's binary response to hard group membership.
 \end{proposition}
+
+% =============================================================================
+\section{The Closure Equilibrium}
+\label{sec:closure}
+% =============================================================================
+
+\subsection{The dynamic system}
+
+If fraction $\phi^t$ of agents discriminate against group $g$ in
+generation $t$, the next generation's prior evolves as:
+\begin{equation}
+  \pi_0^{t+1}(c_H \mid g) =
+  \underbrace{\pi_0^t(1 - \delta \phi^t)}_{\text{exclusion erodes prior}}
+  + \underbrace{\mu(1 - \pi_0^t)}_{\text{natural convergence}}
+  + \underbrace{\gamma \cdot \pi_0^t(1-\pi_0^t)}_{\text{Bernoulli mobility}}
+  \label{eq:dynamic}
+\end{equation}
+where $\delta > 0$ is the economic cost of social exclusion per unit
+of discrimination, $\mu \in (0,1)$ is the exogenous intergenerational
+convergence rate, and $\gamma \in (0,1)$ is the intergenerational
+mobility parameter governing regression to the group mean.
+
+The Bernoulli mobility term $\gamma \cdot \pi_0^t(1-\pi_0^t)$ is
+the within-group variance of class outcomes under the exchangeable
+Bernoulli model (Remark~\ref{rem:bernoulli}). It is maximised at
+$\pi_0 = 1/2$ (maximum heterogeneity) and vanishes at $\pi_0 = 0$
+and $\pi_0 = 1$ (homogeneous group). This term captures
+intergenerational regression to the group mean: children of
+high-class families face some probability of downward mobility, and
+children of low-class families have some chance of upward mobility.
+
+The discrimination rate $\phi^t = F(\pi_0^t)$ is determined by the
+engagement threshold (\ref{eq:threshold}). The composed map is:
+\begin{equation}
+  H(\pi_0) = \mu + \pi_0(1 - \mu + \gamma - \delta F(\pi_0))
+  - \gamma \pi_0^2
+  \label{eq:composed}
+\end{equation}
+
+\begin{definition}[Closure Equilibrium]
+\label{def:closure}
+A closure equilibrium is a fixed point $(\phi^*, \pi_0^*)$ of the
+composed map such that beliefs are consistent with outcomes and
+outcomes with beliefs.
+\end{definition}
+
+\subsection{Fixed point existence and multiplicity}
+
+\begin{proposition}[Class closure in a homogeneous society]
+\label{prop:class-closure}
+In the single-group model ($\G = \{g_1\}$), markers signal class
+position directly. For sufficiently small $\gamma$ and sufficiently
+large $\delta$, the map $H$ has at least two stable fixed points
+$\pi_0^L < \pi_0^H = 1$, separated by an unstable tipping point
+$\pi_0^{\mathrm{mid}}$. The low fixed point constitutes a
+within-group class closure trap: a segment of the population is
+permanently excluded from high-class social spaces across
+generations, without any inter-group dynamic.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Define $\Psi(\pi_0) = H(\pi_0) - \pi_0$. Then $\Psi(0) = \mu > 0$
+and $\Psi(1) = 0$ (since $F(1) = 0$ and the $\gamma$ terms cancel).
+By continuity and the Intermediate Value Theorem, $\Psi$ has a root
+in $[0,1]$. The multiplicity condition (the S-shape of $H$) ensures
+$\Psi$ dips below zero on $(0,1)$, producing two interior roots: a
+stable low fixed point and an unstable tipping point. Local stability
+follows from $|H'(\pi_0^L)| < 1$ and $|H'(\pi_0^{\mathrm{mid}})| > 1$.
+Path dependence follows from the monotonicity of orbits on each side
+of $\pi_0^{\mathrm{mid}}$. \qed
+\end{proof}
+
+\subsection{The intergenerational mobility threshold}
+\label{subsec:intergenerational}
+
+\begin{proposition}[Mobility threshold and bifurcation]
+\label{prop:bifurcation}
+There exists $\gamma^* > 0$ such that:
+\begin{enumerate}[noitemsep]
+  \item If $\gamma < \gamma^*$: the closure trap persists (two stable
+  fixed points).
+  \item If $\gamma > \gamma^*$: the closure trap is eliminated
+  (unique stable fixed point at $\pi_0 = 1$).
+  \item At $\gamma = \gamma^*$: a saddle-node bifurcation---the low
+  fixed point and the tipping point collide and annihilate.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+At $\gamma = 0$, the closure trap exists
+(Proposition~\ref{prop:class-closure}). As $\gamma$ increases, the
+Bernoulli mobility term raises $H(\pi_0)$ in the interior, shrinking
+the region where $\Psi < 0$. At $\gamma = \gamma^*$, the region
+vanishes: the low fixed point and the tipping point merge,
+$H'(\pi_0^*) = 1$, and the system undergoes a saddle-node
+bifurcation. For $\gamma > \gamma^*$, $\Psi > 0$ on all of $(0,1)$
+and the only fixed point is $\pi_0 = 1$. The exact $\gamma^*$ is
+found numerically by solving the bifurcation system
+$\{H(\pi_0) = \pi_0,\; H'(\pi_0) = 1\}$ jointly.
+\qed
+\end{proof}
+
+The intergenerational persistence of class position near the
+bifurcation is characterised in Appendix~\ref{app:Tstar}.
+
+\subsection{The enemy group perturbation}
+
+\begin{definition}[Enemy group]
+Group $g_2$ is an enemy group relative to host group $g_1$ if
+$\pi_0^0(c_H \mid g_2) < \pi_0^{\mathrm{mid}}$---their prior starts
+in the high-discrimination basin.
+\end{definition}
+
+\begin{proposition}[Enemy group trap]
+\label{prop:enemy}
+If $g_2$ enters with $\pi_0^0(c_H \mid g_2) < \pi_0^{\mathrm{mid}}$
+and agents interact only through direct social engagement (not through
+a platform), then $g_2$ converges to the high-discrimination
+equilibrium $\pi_0^L(g_2)$ independently of $g_1$'s trajectory, and
+$g_1$'s equilibrium is unaffected.
+\end{proposition}
+
+The formal nesting of the model within Loury's framework is developed
+in Appendix~\ref{app:loury}.
 
 % =============================================================================
 \section{The Platform Extension}
@@ -872,7 +842,7 @@ legally invisible discrimination}.
 \label{prop:shadow}
 The shadow information value $\Omega_j$ satisfies:
 \begin{enumerate}[noitemsep]
-  \item $\Omega_j$ is decreasing in $\bar{c}_g$ for $\bar{c}_g < 1/2$:
+  \item $\Omega_j$ is decreasing in $\pi_0$ for $\pi_0 < 1/2$:
   groups with worse economic histories generate higher shadow market
   intensity.
   \item $\partial \Omega_j / \partial (1-\alpha) > 0$: clients who
@@ -889,18 +859,18 @@ The shadow information value $\Omega_j$ satisfies:
 
 \begin{proposition}[Platform exclusion of enemy group]
 \label{prop:exclusion}
-At the enemy group's entry mean $\bar{c}_{g_2}^0$, the platform
+At the enemy group's entry prior $\pi_0^0(g_2)$, the platform
 optimally excludes $g_2$ entirely:
 $\sigma^*(m) = 0$ for all $m \in \M_{g_2}$.
 \end{proposition}
 
 \begin{proposition}[Partial inclusion equilibrium]
 \label{prop:tokenism}
-The platform exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ satisfies
-$\bar{c}_g^{\mathrm{excl}} < \bar{c}_g^{\mathrm{mid}}$: the platform begins
+The platform exclusion threshold $\pi_0^{\mathrm{excl}}$ satisfies
+$\pi_0^{\mathrm{excl}} < \pi_0^{\mathrm{mid}}$: the platform begins
 admitting $g_2$ members \emph{before} they have escaped the
 high-discrimination basin, creating a partial inclusion zone
-$[\bar{c}_g^{\mathrm{excl}}, \bar{c}_g^{\mathrm{mid}}]$ in which $g_2$ has
+$[\pi_0^{\mathrm{excl}}, \pi_0^{\mathrm{mid}}]$ in which $g_2$ has
 platform access but not social integration.
 \end{proposition}
 
@@ -915,9 +885,9 @@ platform's profit incentives, not a claim about platform intent.
 
 \begin{proposition}[Host destabilisation]
 \label{prop:spillover}
-If $g_1$'s equilibrium mean $\bar{c}_{g_1}^*$ is close to
-$\bar{c}_g^{\mathrm{mid}}$, the platform's admission of $g_2$ members
-at $\bar{c}_g^{\mathrm{excl}}$ can push $g_1$ below its own tipping
+If $g_1$'s equilibrium prior $\pi_0^*(g_1)$ is close to
+$\pi_0^{\mathrm{mid}}$, the platform's admission of $g_2$ members
+at $\pi_0^{\mathrm{excl}}$ can push $g_1$ below its own tipping
 point, triggering a class-closure episode within the host group. The
 critical $g_2$ fraction $\rho_{\mathrm{crit}}$ is decreasing in the
 spillover sensitivity parameter $\varepsilon$.
@@ -948,7 +918,7 @@ foregoes a compatible interaction. This component is present in
 
 $\mathcal{L}_{\text{info}}$ is the novel contribution of this
 framework. The rigidity condition means individual counter-examples
-fail to update $F_g$; the belief system never corrects
+fail to update $\pi_0(c \mid g)$; the belief system never corrects
 itself even when the evidence is available. This loss falls on the
 whole society because stale priors persist in all interactions, not
 just those involving the excluded group.
@@ -987,21 +957,18 @@ signals. Then for all $\phi \in \Phi$:
   \mathcal{L}_{\mathrm{info}}(\phi) \geq \mathcal{L}_{\mathrm{info}}^* > 0
 \]
 where $\mathcal{L}_{\mathrm{info}}^*$ is determined by the Jeffrey
-rigidity parameter $\rho > \rho^*$ and the initial group
-distribution $F_g$.
+rigidity parameter $\rho > \rho^*$ and the initial group prior
+$\pi_0$.
 \end{corollary}
 
 \begin{proof}[Proof sketch]
 $\mathcal{L}_{\text{info}}$ arises from the gap between the
-Jeffrey posterior and the Bayesian posterior. Under the Jeffrey
-revision, the group-conditional distribution $F_{g_k}$ is held
-fixed; under Bayesian updating, individual evidence would shift
-$F_{g_k}$ itself. The resulting belief error is a function of the
-rigidity parameter $\rho$ and the group distribution, and is
-strictly positive whenever $\rho > \rho^*$. Policies in $\Phi$
+Jeffrey posterior and the Bayesian posterior, which is
+$\pi_0(1-\rho)(c_H - c_L)$---the component of belief error that
+the rigidity condition prevents from updating. Policies in $\Phi$
 alter $\gamma$, $\sigma$, or $\delta$ but not $\rho$ (the weight
 on the group prior in the revision rule) or the group-level
-conditional distributions $F_{g_k}$. The gap is therefore
+conditional probabilities $\pi_0(c \mid g)$. The gap is therefore
 invariant to all $\phi \in \Phi$, and $\mathcal{L}_{\text{info}} >
 0$ whenever $\rho > \rho^*$ (Appendix~\ref{app:loury}). \qed
 \end{proof}
@@ -1048,17 +1015,112 @@ $\gamma^*$.}
 \textbf{Case 3: Beliefs accurate and self-reinforcing.}
 Policy instruments are complements, not substitutes. Forced
 integration achieves equilibrium selection (shifts a cohort above
-$\bar{c}_g^{\text{mid}}$) but does not alter the trap's structure.
+$\pi_0^{\text{mid}}$) but does not alter the trap's structure.
 Mobility programmes raising $\gamma > \gamma^*$ eliminate the trap
 permanently through the saddle-node bifurcation
 (Proposition~\ref{prop:bifurcation}). Platform regulation reduces
 $\mathcal{L}_{\text{platform}}$ but has no effect on the
 informational loss floor.
 
+\subsection{Immigration, attachment tier, and closure sustainability}
+\label{subsec:migration}
+
+The platform framework extends naturally to immigration, where the
+incoming foreigner's assimilation trajectory is determined by the
+economic tier at which initial social attachment occurs. An immigrant
+whose soft markers are immediately legible to the host society as
+high-class---educational credentials in the host language,
+professional dress codes, consumption patterns associated with
+high-$\pi_0$ groups---is assigned a high initial prior by the
+host population's Jeffrey revision. Such an immigrant accesses
+high-class platforms from the outset, acquires host-group high-class
+markers through the endogenous marker investment mechanism
+(Appendix~\ref{app:veblen}), and exits the closure trap within a
+generation. An immigrant whose markers are not legible---different
+cultural codes, non-transferable credentials, consumption patterns
+associated with low-$\pi_0$ groups in the host's prior
+structure---enters the closure trap from below, regardless of actual
+economic class at origin.
+
+\begin{proposition}[Marker legibility and tier assignment]
+\label{prop:legibility}
+Let $m_i^{\text{foreign}}$ denote a foreign immigrant's marker
+bundle. The immigrant's initial prior assignment $\pi_0^{\text{init}}$
+is determined by the host population's Jeffrey revision
+$P'(g_k \mid m_i^{\text{foreign}})$, which depends on the legibility
+of $m_i^{\text{foreign}}$ within the host marker space $\M$. If
+$m_i^{\text{foreign}}$ is illegible (maps to no established group
+in $\G$), the observer defaults to a low-$\pi_0$ prior. Actual
+economic class at origin does not enter the observer's revision.
+\end{proposition}
+
+This generates two distinct channels through which the high-income
+host group's preferences over immigration composition operate.
+
+The \emph{closure-sustainability channel}: high-income hosts have
+an instrumental motive to accept immigrants pre-sorted into the
+high-income tier. Such immigrants expand the high-income social
+network---increasing the value of high-class platform access---while
+leaving the mobility barrier for low-income groups (domestic and
+foreign) intact. The group boundary shifts to absorb new arrivals
+at the appropriate tier without disrupting the stratification that
+sustains the closure equilibrium. Immigration of pre-sorted
+high-class foreigners is closure-preserving by construction.
+
+The \emph{competition channel}: high-income immigrants who attach
+to the high-income tier compete with existing high-income hosts in
+labour markets and social spaces. Whether the high-income host group
+welcomes or resists same-tier arrivals depends on complementarity
+versus substitutability of the immigrant's economic contribution---a
+channel that is analytically independent of the closure-sustainability
+motive and may cut against it.
+
+\begin{remark}[Points-based immigration systems]
+Bureaucratic immigration systems that assign points for educational
+credentials, language proficiency, and professional qualifications
+are formally attempts to certify high-class marker legibility in
+advance of social contact. The points system converts what would
+otherwise be soft, illegible foreign markers into a hard
+administrative signal, enabling the host population's Jeffrey
+revision to assign a high initial $\pi_0^{\text{init}}$ without
+direct social interaction. The empirical skilled-migration literature
+documents that such systems produce faster assimilation
+trajectories---consistent with the model's prediction that initial
+tier assignment, not actual origin class, determines the
+assimilation path.
+\end{remark}
+
+The interaction between the two channels predicts a specific
+political economy of immigration preferences: high-income hosts
+favour immigrants whose markers are pre-legible as high-class
+(closure-sustainability dominates), are ambivalent toward immigrants
+with high actual class but illegible markers (legibility friction),
+and are indifferent to low-class immigrants who enter the closure
+trap without disturbing high-income equilibria. Low-income hosts
+resist same-tier immigration through the competition channel but
+lack platform control to enforce exclusion.
+
 % =============================================================================
 \section{Discussion and Worked Examples}
 \label{sec:discussion}
 % =============================================================================
+
+The model's normative stance requires brief clarification. In the
+Weberian tradition of value-free social science, the analysis
+identifies structural constraints on formal policy instruments
+without prescribing which normative commitments should guide
+political actors---the choice between competing ultimate values is
+not a question social science can resolve. More fundamentally, every
+agent in the model---discriminating and discriminated-against
+alike---acts from within a historically constituted belief structure
+that the model describes but does not rank; the Hegelian point that
+reason is always socially embedded, never abstract and universal,
+applies to the investigator as much as to the agents. What the model
+does claim---in the tradition of Popperian piecemeal analysis---is
+that well-intentioned formal interventions generate structural
+unintended consequences whose identification is a precondition for
+any effective political programme, whatever its normative starting
+point.
 
 \subsection{The restaurant: platform-mediated belief architecture}
 
@@ -1098,7 +1160,7 @@ conflict or historical episode associates a foreign group with
 economic defeat or contamination---material damage to the host
 society---then appearing as someone from that group becomes an
 informationally costly marker to carry, because it shifts $P'(g_k)$
-in observers' Jeffrey revisions toward a low-$\bar{c}_g$ group.
+in observers' Jeffrey revisions toward a low-$\pi_0$ group prior.
 Conversely, symbols of foreign cultures that encode military or
 economic dominance over the host---the Veblen trophy dynamic---raise
 the value of those symbols as status markers. Whether a foreign
@@ -1107,6 +1169,147 @@ industries is thus ultimately a function of the economic implications
 that influence carries for those who signal with it, not of
 intrinsic aesthetic merit. The model provides a unified account of
 both the attraction and the repulsion.
+
+\subsection{Cultural objects and the sign-value prior: a food example}
+\label{subsec:food}
+
+The Jeffrey mechanism extends from persons to objects without
+additional formal apparatus, because both occupy positions in the
+same sign system grounded in economic history: the observer's
+Jeffrey revision operates over sign value rather than over persons
+and objects as distinct categories
+\citep{Baudrillard1968,Baudrillard1972}.\footnote{This paper draws
+only on Baudrillard's early work, which is compatible with a model
+that grounds sign value in economic history. The later hyperreality
+framework \citep[Baudrillard 1981]{Baudrillard1972}, in which signs
+lose connection to any underlying referent, is not invoked and would
+be in tension with the model's foundation in $\pi_0$ as a sufficient
+statistic of real economic history.}
+
+A cultural object---hilsa curry, chicken feet, fermented
+soybean---carries a low $\pi_0$ in the host culture's prior that is
+rigid to individual positive encounters by the same mechanism that
+sustains person-level stereotypes. The observer's prior
+$\pi_0(c_H \mid g)$ is reinterpreted as the probability that a
+cultural object from group $g$'s cuisine is of high compatibility
+with the observer's consumption preferences. The bilateral updating
+structure of Section~\ref{subsec:bilateral} applies with $c_j$
+denoting the object's sign position rather than a person's economic
+class. The rigidity condition holds identically: a positive encounter
+shifts $P'(g_k)$ for \emph{this dish} without updating
+$\pi_0(c_H \mid g)$ for the cuisine as a category.
+
+\begin{remark}[Object rigidity exceeds person rigidity]
+The outside option $\bar{u}$ for engaging with a food is typically
+higher than for engaging with a person---familiar alternatives are
+readily available---which means the engagement threshold $\Delta^*$
+is tighter for cultural objects than for persons. The model therefore
+predicts that cultural priors should be more rigid than personal
+priors without any additional assumption.
+\end{remark}
+
+\subsubsection{Heterogeneous rigidity across economic class}
+
+Elites are more likely to cross the engagement threshold for foreign
+cultural objects than the commons---not because of intrinsically
+different preferences, but through two budget-constraint mechanisms.
+The first is the Veblen channel: elites face diminishing
+distinctiveness returns on familiar markers (their existing Veblen
+signals are at risk of adoption by the class below), which
+endogenously lowers their effective $\bar{u}$ for novel cultural
+objects and widens $\Delta^*$. This is a consequence of
+Proposition~\ref{prop:veblen} and requires no new assumption. The
+second is the exposure channel, which requires one maintained
+assumption.
+
+\begin{quote}
+\textbf{Assumption~E} (Exposure). Encounter frequency with foreign
+cultural objects is increasing in own economic class:
+$\lambda(c_i)$ is increasing in $c_i$, where $\lambda(c_i)$ is the
+rate at which agent $i$ encounters cultural objects from foreign
+groups. Empirical grounding: income is positively correlated with
+international travel, specialist restaurant patronage, and cultural
+consumption breadth.
+\end{quote}
+
+\begin{remark}[Universalised exposure does not revise the group prior]
+If the budget constraint on exposure were relaxed for the entire
+population---universal travel, income security, health support
+abroad---exposure frequency would equalise across class. Individual
+reclassification would increase uniformly (more individuals thinking
+``this particular dish was surprisingly good''), but the group prior
+$\pi_0(c_H \mid g)$ would remain rigid for the entire population.
+This is the Jeffrey condition: universalising exposure universalises
+individual reclassification without driving the group prior across
+$\pi_0^{\mathrm{mid}}$.
+\end{remark}
+
+\subsubsection{Elite adoption through the Veblen mechanism}
+
+Once elites cross the engagement threshold and discover
+compatibility, the foreign cultural object becomes a Veblen marker:
+its foreignness guarantees the commons will not follow (their
+$\Delta^*$ is too narrow given lower exposure and higher $\kappa$),
+and the marker's value to the elite is precisely its inaccessibility
+to the class below. This is fully derived from
+Proposition~\ref{prop:veblen}: marker investment is individually
+rational when the marker separates the investor from the class
+below.
+
+\subsubsection{Democratisation and elite abandonment}
+
+When the barrier falls---the exotic food becomes mass-market---the
+commons' $\Delta^*$ widens sufficiently for them to cross the
+engagement threshold. The marker loses its distinctiveness value and
+the elite abandon it, moving to the next barrier-protected cultural
+object.
+
+\begin{remark}[Congestion externality]
+A full dynamic treatment requires marker value at time $t$ to
+decrease in the fraction of the population that has adopted the
+marker by $t$---the congestion externality formalised by
+\citet{Leibenstein1950} and \citet{CorneoJeanne1997}. This mechanism
+is standard in the Veblen goods literature and does not require
+novel theory; its interaction with the Jeffrey architecture is
+noted here without further formalisation.
+\end{remark}
+
+\subsubsection{The population-level equilibrium}
+
+The model generates a steady-state in which a positive fraction
+$\phi$ of the population privately enjoy the foreign food (their
+individual $P'(g_k)$ has been updated by direct experience) while
+the ambient group prior $\pi_0(c_H \mid g)$ for the cuisine remains
+low and codes it as disgusting. The Jeffrey rigidity condition
+establishes that $\pi_0^t$ is invariant to $\phi^t$: the group prior
+does not move regardless of how many individuals have positive
+encounters.
+
+The steady-state is characterised by two independent fixed points:
+one for $\phi$ (determined by the exposure rate $\lambda$ and the
+population income distribution) and one for $\pi_0$ (determined by
+the initial prior and the rigidity parameter $\rho$). These are
+decoupled by the Jeffrey mechanism. Crucially, $\phi$ can approach 1
+(everyone has privately enjoyed the food) while $\pi_0$ remains at
+its initial low value.
+
+This explains a well-documented empirical pattern: foods that are
+widely enjoyed by individuals from the host culture continue to be
+coded as ``ethnic'' or ``exotic'' or even ``disgusting'' in ambient
+cultural discourse long after individual consumption has normalised.
+The model predicts this as a structural equilibrium outcome, not as
+hypocrisy or inconsistency.
+
+The Veblen mechanism introduces a second dynamic that interacts with
+this population equilibrium. The elite's incentive to adopt the
+marker as a Veblen signal is highest when $\phi$ is low (the marker
+is distinctive) and falls as $\phi$ rises. If $\phi$ rises fast
+enough through broad exposure, the elite abandon the marker before
+any conceivable aggregation mechanism could shift $\pi_0$. The food
+cycles through three zones---disgusting, elite marker,
+mass-market---without the ambient prior completing a full revision.
+This is a trap that operates on cultural objects by the same
+mechanism that operates on group priors for persons.
 
 \subsection{Gender norms: inferential persistence regardless of origin}
 
@@ -1122,7 +1325,7 @@ An individual who departs from prevailing gender norms is attributed
 by observers to individual variation, not to a revision of the group
 prior for their gender. This is precisely the rigidity condition of
 Proposition~\ref{prop:graded}: the exception is absorbed without
-updating $F_g$. Gender norms are therefore sticky even
+updating $\pi_0(c \mid g)$. Gender norms are therefore sticky even
 when individual deviations are common and widely tolerated, because
 the social inference process cannot propagate individual deviations
 into group prior revision. The mechanism is consistent with any
@@ -1147,7 +1350,7 @@ or self-selection dynamics.
 
 A delivery driver in a more segregated city encounters discordant
 signals: a package addressed to a culturally high-class, white-sounding
-name is received by a person whose appearance suggests a low-$\bar{c}_g$
+name is received by a person whose appearance suggests a low-$\pi_0$
 group. The driver's Jeffrey revision cannot resolve the discordance
 from the available markers alone, so the driver seeks additional
 markers---a credential question about the addressee's identity or
@@ -1170,7 +1373,7 @@ consistent with that prior is non-consensual interaction, and the
 staff intervene to ``protect'' the woman. The couple sitting together
 is an individual counter-example; under Jeffrey conditioning, it
 shifts $P'(g_k)$ for this specific man, but it does not update
-$F_g$ for the group as a whole. The next cross-group
+$\pi_0(c_H \mid g)$ for the group as a whole. The next cross-group
 pair will be assessed from the same prior.
 
 Both examples illustrate the model's general claim: discrimination
@@ -1204,25 +1407,25 @@ is over the accuser's credibility, using soft markers correlated
 with the accuser's group membership and social position. Both
 revisions are governed by the rigidity condition of
 Proposition~\ref{prop:graded}: individual counter-examples shift
-$P'(g_k)$ without updating $F_g$ for the group.
+$P'(g_k)$ without updating $\pi_0(c \mid g)$ for the group.
 
 The compounding effect arises because the two revisions interact.
-Let $\bar{c}_g^A$ denote the prior assessment of the accused's
-character and $\bar{c}_g^C$ denote the prior assessment of
+Let $\pi_0^A$ denote the prior over the accused's character
+(probability of innocence, say) and $\pi_0^C$ denote the prior over
 the accuser's credibility (probability of truthful report). The
 observer's posterior assessment of the accusation's validity depends
 on both simultaneously. Under Jeffrey conditioning, both priors are
 held rigid against individual case-specific evidence:
-$\bar{c}_g^A$ is anchored by the accused's group markers,
-$\bar{c}_g^C$ is anchored by the accuser's group markers, and the joint
+$\pi_0^A$ is anchored by the accused's group markers,
+$\pi_0^C$ is anchored by the accuser's group markers, and the joint
 posterior is the product of two independently rigid revisions.
 
 The non-additivity follows directly. If the accused carries a
-race-correlated low $\bar{c}_g^A$ and the accuser carries a
-gender-and-race-correlated high $\bar{c}_g^C$, the compounded
+race-correlated low $\pi_0^A$ and the accuser carries a
+gender-and-race-correlated high $\pi_0^C$, the compounded
 distortion of the joint posterior exceeds what either marker
 dimension would produce alone. The two rigidities reinforce each
-other: a downward-biased $\bar{c}_g^A$ and an upward-biased $\bar{c}_g^C$
+other: a downward-biased $\pi_0^A$ and an upward-biased $\pi_0^C$
 jointly push the institutional assessment toward crediting the
 accusation independently of its evidentiary content. This is not
 reducible to racial discrimination alone, nor to gender bias alone;
@@ -1233,11 +1436,11 @@ two marker dimensions simultaneously.
 
 The specific case that makes the non-additivity concrete is a
 harassment accusation in which the accused is a Black man and the
-accuser is a white woman. The observer's $\bar{c}_g^A$ is shaped by
+accuser is a white woman. The observer's $\pi_0^A$ is shaped by
 the historical prior over Black male criminality---itself a sufficient
 statistic of the group's racialised economic and legal history
 (equation~\ref{eq:prior})---which is low in the host society's
-inference architecture. The observer's $\bar{c}_g^C$ is shaped by the
+inference architecture. The observer's $\pi_0^C$ is shaped by the
 historical construction of white female testimony as inherently
 credible in this institutional context, a prior that also reflects
 economic and social history rather than case-specific evidence.
@@ -1256,10 +1459,10 @@ The rigidity condition explains the pattern that makes this
 institutionally persistent. A case that ends in exoneration shifts
 $P'(g_k)$ for this accused individual---the decision-maker may
 conclude that this particular man was wrongly accused---but does
-not update $\bar{c}_g^A$ for the group. The next accused Black man is
+not update $\pi_0^A$ for the group. The next accused Black man is
 assessed from the same group prior. Similarly, a credibility
 assessment that finds the accuser unreliable shifts $P'(g_k)$ for
-this particular accuser but does not update $\bar{c}_g^C$ for white
+this particular accuser but does not update $\pi_0^C$ for white
 female testimony as a category. The institutional prior reproduces
 itself across cases by the same mechanism that sustains class and
 racial stereotypes in social interaction.
@@ -1270,8 +1473,8 @@ The same mechanism operates symmetrically across different marker
 configurations, and the direction of compounding depends on the
 specific combination of group priors in play. A Black woman
 reporting harassment by a white man faces a different compounding:
-her race-correlated $\bar{c}_g^C$ is lower than a white woman's in the
-same institutional context, while her gender-correlated $\bar{c}_g^C$
+her race-correlated $\pi_0^C$ is lower than a white woman's in the
+same institutional context, while her gender-correlated $\pi_0^C$
 pushes in the opposite direction. The net effect on institutional
 credibility assessment is not the sum of the racial and gender
 components but a non-additive interaction between them---precisely
@@ -1287,7 +1490,7 @@ welfare implication is that compounding discrimination is
 irreducible to its component dimensions: anti-discrimination
 policy targeted at the racial dimension alone, or the gender
 dimension alone, leaves the interaction term untouched. Reducing
-$\bar{c}_g^A$ through racial equity programmes and reducing $\bar{c}_g^C$
+$\pi_0^A$ through racial equity programmes and reducing $\pi_0^C$
 bias through gender equity programmes does not eliminate the
 compounding distortion if each reform addresses only one dimension
 of a jointly rigid inference architecture. This is a direct
@@ -1311,7 +1514,7 @@ explanation of \emph{why} the prior is rigid to individual
 counter-examples. A taxi driver who does stop and finds a
 law-abiding passenger updates $P'(g_k)$ for that individual---he
 may think ``this person seemed respectable''---but he does not update
-$F_g$ for the group. The next passenger is assessed
+$\pi_0(c_H \mid g)$ for the group. The next passenger is assessed
 from the same group prior. The rigidity condition is not an
 assumption about taxi driver psychology; it is a theorem of the
 updating rule that operates whenever signals are soft.
@@ -1327,23 +1530,18 @@ The \textit{\'{e}volu\'{e}} in colonial Africa was the most formally
 codified instance: Africans who attained a prescribed threshold of
 French or Belgian education, linguistic fluency, and cultural
 assimilation were granted a quasi-civil status distinguishing them
-from the colonised mass. Similar architectures appear across the
-historical record---the \textit{converso} in Iberian Christendom,
-the anglicised colonial subject across the British Empire, the
-\textit{Gastarbeiter} who fully satisfied German economic and
-behavioural expectations without receiving civic membership. In each
-case the implicit contract was the same: invest in our markers, and
-we will revise your group prior upward. Enough compliance, enough
-time, and full integration follows.
+from the colonised mass. The implicit contract was: invest in our
+markers, and we will revise your group prior upward. Enough
+compliance, enough time, and full integration follows.
 
 Translated into the language of this model, the colonial promise
 is a claim that the operative updating rule is Bayesian, not
 Jeffrey. Under standard Bayes ($\rho = 0$, Proposition~\ref{prop:loury-nesting}),
-individual compliance does update the group distribution $F_g$:
+individual compliance does update $\pi_0(c_H \mid g)$ for the group:
 each successful \'{e}volu\'{e} is evidence that the group's class
 distribution is higher than the prior implies, and the prior moves
-toward the truth. Enough counter-examples, and $\bar{c}_g$ crosses the
-tipping point $\bar{c}_g^{\mathrm{mid}}$; the closure trap dissolves.
+toward the truth. Enough counter-examples, and $\pi_0$ crosses the
+tipping point $\pi_0^{\mathrm{mid}}$; the closure trap dissolves.
 This is the Loury regime: the compliance route is coherent, and
 the colonial promise is structurally redeemable.
 
@@ -1353,12 +1551,12 @@ investment produces personal reclassification---the observer shifts
 $P'(g_k)$ for this individual, attributing them to the high-class
 group or to individual exceptionalism---but the rigidity condition
 prevents individual compliance from aggregating into group prior
-revision. The group mean $\bar{c}_g$ remains in the
+revision. The group prior $\pi_0(c_H \mid g)$ remains in the
 high-discrimination basin regardless of how many individuals comply.
 The colonial promise is structurally false in the Jeffrey regime:
 not false in intention, but false as a description of how the
 inference architecture actually operates. No volume of individual
-compliance can drive the group mean across $\bar{c}_g^{\mathrm{mid}}$,
+compliance can drive the group prior across $\pi_0^{\mathrm{mid}}$,
 because the updating rule holds conditional probabilities fixed
 precisely by construction.
 
@@ -1367,8 +1565,7 @@ difficult to reconcile follow as equilibrium outcomes of the same
 mechanism operating at different levels. The first is that
 individual compliance often did produce genuine personal mobility:
 the \'{e}volu\'{e} did achieve a different social position from
-the colonised mass, and the converso did in many periods access
-economic and institutional roles unavailable to practising Jews.
+the colonised mass.
 The second is that this personal mobility did not translate into
 group-level liberation: the group prior moved negligibly, the
 closure trap persisted, and subsequent generations of the group
@@ -1385,7 +1582,7 @@ high-discrimination basin. Zone two is compliant admission---the
 \'{e}volu\'{e}, individually reclassified but collectively
 disconnected from group prior revision. Zone three is full
 integration---which requires the group prior itself to cross
-$\bar{c}_g^{\mathrm{mid}}$ through the mobility mechanism
+$\pi_0^{\mathrm{mid}}$ through the mobility mechanism
 ($\gamma > \gamma^*$), not through individual compliance. The
 colonial administration, modelled as a profit-maximising platform,
 admits compliant individuals into zone two because their
@@ -1439,17 +1636,20 @@ ensures that its aggregate effect leaves the group prior
 unchanged. The route to permanent trap escape runs through
 $\gamma > \gamma^*$---through structural mobility and collective
 prior revision---not through individual marker investment, however
-extensive. In the Weberian tradition of value-free social science,
-the model identifies this structural constraint without prescribing
-which response any agent should choose; in the Hegelian sense,
-every agent acts from within a historically constituted position
-whose architecture the model describes but does not adjudicate.
-What the model does insist, in the tradition of Popperian
-piecemeal analysis, is that identifying the structural mechanism
-is a precondition for any political programme, whatever its
-normative starting point: well-intentioned compliance strategies
-produce unintended structural consequences whose form the model
-makes precise.
+extensive.
+
+This is not a normative verdict on those who chose the compliance
+route under conditions not of their making. Individual compliance
+was rational given the payoff structure of the closure equilibrium;
+Proposition~\ref{prop:veblen} shows that it is the individually
+optimal response to trap severity. The model's claim is only
+positive: the individually rational compliance strategy is
+collectively self-defeating, because the Jeffrey architecture
+ensures that its aggregate effect leaves the group prior
+unchanged. The route to permanent trap escape runs through
+$\gamma > \gamma^*$---through structural mobility and collective
+prior revision---not through individual marker investment, however
+extensive.
 
 % =============================================================================
 \section{Empirical Strategy}
@@ -1507,7 +1707,7 @@ law is feasible using harmonised OECD mobility data.
 
 For Prediction 2, the European Social Survey \citep{ESS2020}
 provides harmonised measures of stated beliefs about economic impact
-of immigrants and minorities (proxies for $\bar{c}_g$), own income,
+of immigrants and minorities (proxies for $\pi_0$), own income,
 education, and cross-national variation in economic history.
 Proposition~\ref{prop:income} predicts that own income moderates
 discriminatory attitudes; Proposition~\ref{prop:education} predicts
@@ -1540,7 +1740,7 @@ Instrument: Bartik shift-share constructed from local industry
 composition and national industry employment growth
 \citep{Bartik1991}.
 
-\textit{Prior measurement}: $\bar{c}_g$ is latent. Use
+\textit{Prior measurement}: $\pi_0(c_H \mid g)$ is latent. Use
 multiple proxy measures (stated beliefs about immigrant economic
 contribution, neighbourhood satisfaction, social network diversity)
 and exploit variation in social desirability pressure across survey
@@ -1571,7 +1771,7 @@ even in the absence of racial heterogeneity. The trap is
 path-dependent, intergenerationally persistent, and resistant to
 individual counter-examples by construction of the updating rule.
 Racial discrimination enters as a perturbation of this already-operating
-equilibrium --- a second group whose mean $\bar{c}_{g_2}$
+equilibrium --- a second group whose prior $\pi_0(c_H \mid g_2)$
 starts in the high-discrimination basin --- not as a separate
 phenomenon requiring separate explanation. The closure trap requires
 a minimum level of Jeffrey rigidity $\rho > \rho^*$; below this
@@ -1626,12 +1826,12 @@ leaving the informational and dynamic losses untouched.
 
 We introduce $\rho \in [0,1]$, the \emph{rigidity parameter}, into
 the dynamic system. At $\rho = 0$, individual counter-examples fully
-update the group distribution $F_g$---standard Bayesian updating.
+update the group prior $\pi_0(c \mid g)$---standard Bayesian updating.
 At $\rho = 1$, the group prior is completely rigid---full Jeffrey
 conditioning. The amended dynamic system is:
 \begin{equation}
-  G_\rho(\bar{c}_g, \phi) = \mu + \bar{c}_g(1 - \mu - \rho \delta \phi)
-  + \tilde{\gamma}\, \bar{c}_g(1-\bar{c}_g)
+  G_\rho(\pi_0, \phi) = \mu + \pi_0(1 - \mu - \rho \delta \phi)
+  + \gamma \pi_0(1-\pi_0)
   \label{eq:loury-rho}
 \end{equation}
 
@@ -1640,7 +1840,7 @@ conditioning. The amended dynamic system is:
 There exists $\rho^* \in (0,1)$ such that:
 \begin{enumerate}[noitemsep]
   \item For $\rho < \rho^*$ (Loury regime): unique stable fixed
-  point at $\bar{c}_g = 1$. Individual counter-examples erode
+  point at $\pi_0 = 1$. Individual counter-examples erode
   stereotypes. $\mathcal{L}_{\mathrm{info}} = 0$.
   \item For $\rho > \rho^*$ (Jeffrey regime): two stable fixed
   points. The closure trap exists. $\mathcal{L}_{\mathrm{info}} > 0$.
@@ -1662,32 +1862,32 @@ transition occurs (IVT). Under base parameters, $\rho^* \approx 0.31$.
 
 Agents choose marker investment $e_i \geq 0$ at cost
 $c(e_i) = \frac{1}{2}\kappa_e e_i^2$. Investment shifts markers
-toward high-class signals, effectively raising the $\bar{c}_g$ perceived
+toward high-class signals, effectively raising the $\pi_0$ perceived
 by others. The marginal benefit of investment is:
 \begin{equation}
-  \mathrm{MB}(e) = 2(c_j - \bar{c}_g) \cdot \theta \cdot
+  \mathrm{MB}(e) = -(c_H + c_L - 2c_j) \cdot \theta \cdot
   (v - \bar{u}) \cdot (1 + \xi \phi^*)
   \label{eq:MB}
 \end{equation}
 where $\theta > 0$ is marker sensitivity and $\xi > 0$ captures the
-amplification from trap severity $\phi^* = F(\bar{c}_g^L)$.
+amplification from trap severity $\phi^* = F(\pi_0^L)$.
 
 \begin{proposition}[Endogenous marker investment]
 \label{prop:veblen}
 The equilibrium marker investment is:
 \begin{equation}
-  e^* = \frac{2(c_j - \bar{c}_g) \cdot \theta(v-\bar{u})(1+\xi\phi^*)}
+  e^* = \frac{(2c_j - c_H - c_L) \cdot \theta(v-\bar{u})(1+\xi\phi^*)}
   {\kappa_e}
   \label{eq:estar}
 \end{equation}
 with the following properties:
 \begin{enumerate}[noitemsep]
-  \item $e^* > 0$ iff $c_j > \bar{c}_g$: only agents above
-  the group mean invest in markers.
+  \item $e^* > 0$ iff $c_j > (c_H + c_L)/2$: only agents above
+  the class midpoint invest in markers.
   \item $\partial e^*/\partial \phi^* > 0$: more severe closure trap
   generates more marker investment.
   \item The non-negativity constraint $e^* \geq 0$ binds for agents
-  with $c_j < \bar{c}_g$, producing a separating equilibrium:
+  with $c_j < (c_H + c_L)/2$, producing a separating equilibrium:
   high-class agents invest in markers, low-class agents pool at
   zero.
 \end{enumerate}
@@ -1705,7 +1905,7 @@ optimisation problem within the Jeffrey framework.
 \begin{corollary}[Critical slowing near the bifurcation]
 \label{cor:Tstar}
 Near $\gamma = \gamma^*$, the number of generations required to
-escape the closure trap from initial position $\bar{c}_g^0$ scales as:
+escape the closure trap from initial position $\pi_0^0$ scales as:
 \begin{equation}
   T^*(\gamma) \sim C \cdot (\gamma - \gamma^*)^{-1/2}
   \quad \text{as } \gamma \to \gamma^{*+}
@@ -1713,12 +1913,12 @@ escape the closure trap from initial position $\bar{c}_g^0$ scales as:
 \end{equation}
 where $C = \pi / \sqrt{|a \cdot b|}$, with $a = \partial \Psi /
 \partial \gamma$ and $b = \frac{1}{2}\partial^2 \Psi / \partial
-\bar{c}_g^2$ evaluated at the bifurcation point.
+\pi_0^2$ evaluated at the bifurcation point.
 \end{corollary}
 
 The $-1/2$ exponent is the universal scaling of saddle-node ghost
 passage times. It follows from the normal form of the bifurcation:
-$\Psi \approx a(\tilde{\gamma} - \tilde{\gamma}^*) + b(\bar{c}_g - \bar{c}_g^*)^2$ near the
+$\Psi \approx a(\gamma - \gamma^*) + b(\pi_0 - \pi_0^*)^2$ near the
 collision point. The map spends $O((\gamma - \gamma^*)^{-1/2})$
 iterations in the ghost region where $|\Psi|$ is $O(\gamma - \gamma^*)$.
 
@@ -1734,6 +1934,12 @@ could test this at the country level.
 % =============================================================================
 
 \begin{thebibliography}{99}
+
+\bibitem[Akerlof(1970)]{Akerlof1970}
+Akerlof, G.~A. (1970).
+\newblock The market for ``lemons'': Quality uncertainty and the market
+mechanism.
+\newblock \textit{Quarterly Journal of Economics}, 84(3):488--500.
 
 \bibitem[Akerlof and Kranton(2000)]{AkerlofKranton2000}
 Akerlof, G.~A. and R.~E. Kranton (2000).
@@ -1751,6 +1957,19 @@ Bartik, T.~J. (1991).
 \newblock \textit{Who Benefits from State and Local Economic Development
 Policies?}
 \newblock W.E.~Upjohn Institute.
+
+\bibitem[Baudrillard(1968)]{Baudrillard1968}
+Baudrillard, J. (1968).
+\newblock \textit{Le Syst\`{e}me des objets}.
+\newblock Gallimard, Paris.
+(Translated as \textit{The System of Objects}, Verso, 1996.)
+
+\bibitem[Baudrillard(1972)]{Baudrillard1972}
+Baudrillard, J. (1972).
+\newblock \textit{Pour une critique de l'\'{e}conomie politique du signe}.
+\newblock Gallimard, Paris.
+(Translated as \textit{For a Critique of the Political Economy of the Sign},
+Telos Press, 1981.)
 
 \bibitem[Becker(1957)]{Becker1957}
 Becker, G.~S. (1957).
@@ -1793,6 +2012,11 @@ Crenshaw, K. (1991).
 \newblock Mapping the margins: Intersectionality, identity politics, and
 violence against women of color.
 \newblock \textit{Stanford Law Review}, 43(6):1241--1299.
+
+\bibitem[Corneo and Jeanne(1997)]{CorneoJeanne1997}
+Corneo, G. and O.~Jeanne (1997).
+\newblock Conspicuous consumption, snobbism and conformism.
+\newblock \textit{Journal of Public Economics}, 66(1):55--71.
 
 \bibitem[De~Finetti(1964)]{DeFinetti1964}
 De~Finetti, B. (1964).
@@ -1845,6 +2069,12 @@ Kendall, D. (2002).
 Reproduction of the Upper Class}.
 \newblock Rowman \& Littlefield.
 
+\bibitem[Leibenstein(1950)]{Leibenstein1950}
+Leibenstein, H. (1950).
+\newblock Bandwagon, snob, and Veblen effects in the theory of consumers'
+demand.
+\newblock \textit{Quarterly Journal of Economics}, 64(2):183--207.
+
 \bibitem[Loury(2002)]{Loury2002}
 Loury, G.~C. (2002).
 \newblock \textit{The Anatomy of Racial Inequality}.
@@ -1892,25 +2122,6 @@ Weber, M. (1922).
 \newblock Mohr, T\"{u}bingen.
 (Translated as \textit{Economy and Society}, University of California
 Press, 1978.)
-
-\bibitem[Fanon(1952)]{Fanon1952}
-Fanon, F. (1952).
-\newblock \textit{Peau noire, masques blancs}.
-\newblock \'{E}ditions du Seuil, Paris.
-(Translated as \textit{Black Skin, White Masks}, Grove Press, 1967.)
-
-\bibitem[Fanon(1961)]{Fanon1961}
-Fanon, F. (1961).
-\newblock \textit{Les damn\'{e}s de la terre}.
-\newblock Maspero, Paris.
-(Translated as \textit{The Wretched of the Earth}, Grove Press, 1963.)
-
-\bibitem[Memmi(1957)]{Memmi1957}
-Memmi, A. (1957).
-\newblock \textit{Portrait du colon\'{e} pr\'{e}c\'{e}d\'{e} du portrait du
-colonisateur}.
-\newblock Buchet-Chastel, Paris.
-(Translated as \textit{The Colonizer and the Colonized}, Beacon Press, 1965.)
 
 \end{thebibliography}
 
