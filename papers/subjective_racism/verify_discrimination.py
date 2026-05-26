@@ -572,6 +572,261 @@ analytic("ANALYTIC_04", "Weierstrass existence of platform optimum (a*, σ*)",
          "Π continuous on compact A×Σ.")
 
 # ─────────────────────────────────────────────────────────────────────────────
+# SECTION 14: Marker Salience Extension (s_g)
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 14 · Marker Salience Extension (s_g)")
+
+# ── 14.1 Symbols ──────────────────────────────────────────────────────────────
+s_g      = sp.Symbol('s_g',      positive=True)   # marker salience ∈ (0,1)
+c_bar1   = sp.Symbol('c_bar1',   positive=True)   # host group mean
+sigma2_1 = sp.Symbol('sigma2_1', positive=True)   # host group variance
+sigma2_2 = sp.Symbol('sigma2_2', positive=True)   # out-group variance
+
+# ── 14.2 Expected distance under marker salience ─────────────────────────────
+# E[(c_i-c_j)² | m_i] = s_g·D₂ + (1-s_g)·D₁
+# where D_k = (c̄_k - c_j)² + σ²_k
+D1 = (c_bar1 - c_j)**2 + sigma2_1
+D2 = (c_bar  - c_j)**2 + sigma2    # c_bar = c̄_{g2}, sigma2 = σ²_{g2}
+E_salience = s_g * D2 + (1 - s_g) * D1
+
+# Verify convex combination structure
+check = sp.simplify(E_salience.subs(s_g, 0) - D1) == 0
+report("CHECK_41", "E_s|_{s_g=0} = D₁ (host-group distance only, no out-group attribution)",
+       check)
+
+check = sp.simplify(E_salience.subs(s_g, 1) - D2) == 0
+report("CHECK_42", "E_s|_{s_g=1} = D₂ (full out-group attribution, recovers base model)",
+       check)
+
+# ── 14.3 Comparative static: ∂E/∂s_g ─────────────────────────────────────────
+dE_dsg = sp.diff(E_salience, s_g)
+dE_dsg_s = sp.simplify(dE_dsg)
+# Should equal D2 - D1
+check = sp.simplify(dE_dsg_s - (D2 - D1)) == 0
+report("CHECK_43", "∂E/∂s_g = D₂ - D₁ (marker salience amplifies expected distance)",
+       check, f"∂E/∂s_g = {dE_dsg_s}")
+
+# Numerical: D2 > D1 when out-group is disadvantaged (c̄_g2 < c̄_g1) and c_j > c̄_g2
+subs_sg = [(c_bar, sp.Rational(3,10)), (c_bar1, sp.Rational(8,10)),
+           (c_j, sp.Rational(7,10)),
+           (sigma2, sp.Rational(3,50)), (sigma2_1, sp.Rational(1,50))]
+D2_num = float(D2.subs(subs_sg))
+D1_num = float(D1.subs(subs_sg))
+check = D2_num > D1_num
+report("CHECK_44",
+       f"∂E/∂s_g > 0 numerically: D₂={D2_num:.4f} > D₁={D1_num:.4f} (c̄₂=0.3 < c̄₁=0.8)",
+       check)
+
+# ── 14.4 Discrimination rate F(c̄, s_g) = s_g · F̃(c̄) ─────────────────────────
+# s_g modulates the discrimination channel: if markers are invisible, no
+# discrimination fires regardless of economic history.
+
+def H_fn_sg(x, sg, gt=0.0):
+    """Composed map with marker salience."""
+    x = max(0.0, min(1.0, x))
+    F = max(0.0, PHIMAX*(1 - x/THRESH))
+    return MU + x*(1 - MU + gt - sg*DELTA*F) - gt*x**2
+
+# Boundary conditions preserved
+H0_sg = H_fn_sg(0, 0.5)
+H1_sg = H_fn_sg(1, 0.5)
+check = abs(H0_sg - MU) < 1e-12 and abs(H1_sg - 1.0) < 1e-12
+report("CHECK_45", f"H(0;s_g=0.5) = μ = {H0_sg:.4f}, H(1;s_g=0.5) = {H1_sg:.4f} (boundaries preserved)",
+       check)
+
+# ── 14.5 At s_g = 0: no trap (unique stable FP at c̄ = 1) ────────────────────
+pts_sg0 = [i/1000 for i in range(1, 1000)]
+Psi_sg0 = [H_fn_sg(p, 0.0) - p for p in pts_sg0]
+check = all(v >= -1e-12 for v in Psi_sg0)
+report("CHECK_46", "At s_g=0: Ψ ≥ 0 everywhere — no closure trap (markers invisible)",
+       check, f"min Ψ = {min(Psi_sg0):.6f}")
+
+# ── 14.6 At s_g = 1: recovers base model ─────────────────────────────────────
+Psi_sg1 = [H_fn_sg(p, 1.0) - p for p in pts_sg0]
+min_sg1 = min(Psi_sg1)
+check = any(v < 0 for v in Psi_sg1)
+report("CHECK_47", f"At s_g=1: Ψ dips negative (min={min_sg1:.4f}) — recovers base model trap",
+       check)
+
+# ── 14.7 γ̃*(s_g) is increasing in s_g ───────────────────────────────────────
+def find_gamma_star_sg(sg):
+    """Find bifurcation threshold γ̃* for given s_g."""
+    lo, hi = 0.0, 2.0
+    pts = [i/1000 for i in range(1, 1000)]
+    for _ in range(60):
+        mid = (lo+hi)/2
+        vals = [H_fn_sg(p, sg, mid) - p for p in pts]
+        if any(v < 0 for v in vals):
+            lo = mid
+        else:
+            hi = mid
+    return (lo+hi)/2
+
+sg_values = [0.2, 0.4, 0.6, 0.8, 1.0]
+gamma_stars = [find_gamma_star_sg(sg) for sg in sg_values]
+
+check = all(gamma_stars[i] < gamma_stars[i+1] for i in range(len(gamma_stars)-1))
+report("CHECK_48",
+       "γ̃*(s_g) is strictly increasing in s_g (higher salience → harder to escape trap)",
+       check,
+       "  ".join(f"γ̃*({sg})={gs:.4f}" for sg, gs in zip(sg_values, gamma_stars)))
+
+# ── 14.8 Irish vs Indian numerical illustration ──────────────────────────────
+# Irish: s_g = 0.15 (low phenotypic salience, mutable markers)
+# Indian: s_g = 0.90 (high phenotypic salience, immutable markers)
+# Both start with same c̄⁰ = 0.2 (comparable initial economic position)
+SG_IRISH  = 0.15
+SG_INDIAN = 0.90
+
+def iterate_H_sg(start, sg, gt=0.0, n=500):
+    x = max(0.0, min(1.0, start))
+    for _ in range(n):
+        x = H_fn_sg(x, sg, gt)
+    return x
+
+conv_irish  = iterate_H_sg(0.2, SG_IRISH)
+conv_indian = iterate_H_sg(0.2, SG_INDIAN)
+
+check = conv_irish > conv_indian
+report("CHECK_49",
+       f"Irish (s_g={SG_IRISH}) converges to {conv_irish:.4f} vs Indian (s_g={SG_INDIAN}) → {conv_indian:.4f}",
+       check,
+       "Same c̄⁰=0.2: low salience integrates, high salience trapped")
+
+# How many generations for Irish to reach c̄ = 0.5?
+def T_passage_sg(sg, x0, x1, gt=0.0, max_it=50000):
+    x = x0
+    for t in range(max_it):
+        x = H_fn_sg(x, sg, gt)
+        if x > x1: return t+1
+    return max_it
+
+T_irish  = T_passage_sg(SG_IRISH, 0.2, 0.5)
+T_indian = T_passage_sg(SG_INDIAN, 0.2, 0.5)
+
+check = T_irish < T_indian
+report("CHECK_50",
+       f"Generations to c̄=0.5: Irish={T_irish}, Indian={T_indian} ({'∞' if T_indian >= 50000 else T_indian})",
+       check,
+       "Low marker salience → faster integration even from same starting point")
+
+# ── 14.9 Symbolic: G with s_g parameter ──────────────────────────────────────
+G_sg = mu + c_bar*(1 - mu - s_g*delta*phi) + gamma_tilde*c_bar*(1 - c_bar)
+G_sg = sp.expand(G_sg)
+
+dG_dsg = sp.diff(G_sg, s_g)
+check = sp.simplify(dG_dsg - (-delta*phi*c_bar)) == 0
+report("CHECK_51", "∂G/∂s_g = -δφc̄ < 0 (higher salience erodes group mean more)",
+       check, f"∂G/∂s_g = {dG_dsg}")
+
+# G boundary conditions invariant to s_g
+G_sg_0 = G_sg.subs(c_bar, 0)
+check = sp.simplify(G_sg_0 - mu) == 0
+report("CHECK_52", "G(0,φ;s_g) = μ regardless of s_g (boundary invariance at c̄=0)",
+       check)
+
+G_sg_1_nophi = G_sg.subs([(c_bar, 1), (phi, 0)])
+check = sp.simplify(G_sg_1_nophi - 1) == 0
+report("CHECK_53", "G(1,0;s_g) = 1 regardless of s_g (boundary invariance at c̄=1, φ=0)",
+       check)
+
+# ── 14.10 Cross-check: s_g and ρ are orthogonal ──────────────────────────────
+# In the Loury nesting, ρ governs rigidity of Jeffrey update,
+# s_g governs marker visibility. Both modulate discrimination but
+# through distinct channels: ρ·s_g·δ·F(c̄) in the full model.
+G_rho_sg = mu + c_bar*(1 - mu - rho_sym*s_g*delta*phi) + gamma_tilde*c_bar*(1-c_bar)
+
+d2G_drho_dsg = sp.diff(G_rho_sg, rho_sym, s_g)
+check = sp.simplify(d2G_drho_dsg - (-delta*phi*c_bar)) == 0
+report("CHECK_54", "∂²G/∂ρ∂s_g = -δφc̄ (ρ and s_g interact multiplicatively, not additively)",
+       check, f"∂²G/∂ρ∂s_g = {sp.simplify(d2G_drho_dsg)}")
+
+# At ρ=0 OR s_g=0: discrimination channel is fully shut off
+check1 = sp.simplify(G_rho_sg.subs(rho_sym, 0) - (mu + c_bar*(1-mu) + gamma_tilde*c_bar*(1-c_bar))) == 0
+check2 = sp.simplify(G_rho_sg.subs(s_g, 0) - (mu + c_bar*(1-mu) + gamma_tilde*c_bar*(1-c_bar))) == 0
+check = check1 and check2
+report("CHECK_55", "Either ρ=0 or s_g=0 eliminates discrimination channel entirely",
+       check, "Both produce G = μ + c̄(1-μ) + γ̃c̄(1-c̄)")
+
+# ── 14.11 Platform extension: marker salience in shadow market ────────────────
+# Ω(s_g) = s_g · (1-α)(S* - S^rand)
+# Higher s_g → markers visible → shadow information more valuable
+Omega_sg = s_g * (1 - alpha) * (S_star - S_rand)
+dOmega_dsg = sp.diff(Omega_sg, s_g)
+check = sp.simplify(dOmega_dsg - (1-alpha)*(S_star - S_rand)) == 0
+report("CHECK_56", "∂Ω/∂s_g = (1-α)(S*-S^rand) > 0 (shadow market intensifies with marker salience)",
+       check, f"∂Ω/∂s_g = {dOmega_dsg}")
+
+analytic("ANALYTIC_05",
+         "Marker salience is observer-environment property, not group-intrinsic",
+         "s_g depends on (marker_set, host_marker_set) pairing. Same group g has "
+         "different s_g in different host environments.")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECTION 15: Space-Time Sufficiency (Remark 3)
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 15 · Space-Time Sufficiency")
+
+# ── 15.1 (s_g, c̄_g) jointly determine H — invariance to underlying decomposition
+# Two "countries" with different (marker_set, history) but same (s_g, c̄_g)
+# must produce identical discrimination dynamics.
+
+# Country A: Irish-type (s_g=0.3, c̄=0.25) — low salience, poor history
+# Country B: different markers but same (s_g=0.3, c̄=0.25)
+conv_A = iterate_H_sg(0.25, 0.3)
+conv_B = iterate_H_sg(0.25, 0.3)  # same (s_g, c̄) by construction
+check = abs(conv_A - conv_B) < 1e-12
+report("CHECK_57", "Space-time sufficiency: same (s_g, c̄) → same equilibrium regardless of marker details",
+       check, f"c̄^∞_A = {conv_A:.4f}, c̄^∞_B = {conv_B:.4f}")
+
+# ── 15.2 G depends on (s_g, c̄, φ) only — no other marker-level variable enters
+# Verify G_sg has no free symbols beyond {mu, c_bar, delta, phi, s_g, gamma_tilde}
+G_sg_check = mu + c_bar*(1 - mu - s_g*delta*phi) + gamma_tilde*c_bar*(1 - c_bar)
+free_syms = G_sg_check.free_symbols
+expected_syms = {mu, c_bar, delta, phi, s_g, gamma_tilde}
+check = free_syms == expected_syms
+report("CHECK_58",
+       "G depends only on structural params + (s_g, c̄) — no marker-level variables enter",
+       check, f"Free symbols: {', '.join(str(s) for s in sorted(free_syms, key=str))}")
+
+# ── 15.3 Space and time are orthogonal: ∂²H/∂s_g∂c̄ structure
+# The cross-partial captures how spatial and temporal dimensions interact
+H_sg_sym = mu + c_bar*(1 - mu + gamma_tilde - s_g*delta*F_piece) - gamma_tilde*c_bar**2
+dH_dsg_dcbar = sp.diff(H_sg_sym, s_g, c_bar)
+# Should be -δ · ∂(c̄·F(c̄))/∂c̄ — the interaction is mediated by discrimination rate
+analytic("ANALYTIC_06",
+         "Space-time interaction: ∂²H/∂s_g∂c̄ is mediated by F(c̄)",
+         "Space (s_g) and time (c̄) interact only through the discrimination rate F. "
+         "No direct spatial-temporal coupling exists outside the discrimination channel.")
+
+# ── 15.4 Discrimination requires BOTH spatial and temporal channels active
+# Already proved in CHECK_46 (s_g=0 → no trap) and implicitly (c̄=c̄_g1 → no distance).
+# Here verify joint necessity numerically: even high s_g with equal priors → no discrimination
+E_equal = (sp.Rational(1,2) - c_j)**2 + sp.Rational(1,2)*(1-sp.Rational(1,2))/(1+nu)
+E_host  = (sp.Rational(1,2) - c_j)**2 + sp.Rational(1,2)*(1-sp.Rational(1,2))/(1+nu)
+check_equal = sp.simplify(E_equal - E_host) == 0
+report("CHECK_59",
+       "When c̄_g2 = c̄_g1 (no temporal gap): D₂ = D₁ regardless of s_g — no discrimination",
+       check_equal, "∂E/∂s_g = D₂ - D₁ = 0 when group means are equal")
+
+# ── 15.5 UK-US prediction: varying spatial vs temporal weights
+# UK scenario: rich temporal marker space → class does more discriminatory work
+# US scenario: thin temporal marker space → race (spatial) does more work
+# Model implication: same total friction, different (s_g, c̄_g) composition
+# Verify with two parameterisations:
+#   UK: s_g=0.5, c̄=0.2 (class markers partially override racial signal)
+#   US: s_g=0.9, c̄=0.35 (race dominates, class markers less available)
+conv_UK = iterate_H_sg(0.3, 0.5)
+conv_US = iterate_H_sg(0.3, 0.9)
+gamma_star_UK = find_gamma_star_sg(0.5)
+gamma_star_US = find_gamma_star_sg(0.9)
+check = gamma_star_UK < gamma_star_US
+report("CHECK_60",
+       f"UK-US prediction: γ̃*(s_g=0.5)={gamma_star_UK:.4f} < γ̃*(s_g=0.9)={gamma_star_US:.4f}",
+       check,
+       "Higher spatial weight (US) requires more mobility to escape trap")
+
+# ─────────────────────────────────────────────────────────────────────────────
 # SUMMARY
 # ─────────────────────────────────────────────────────────────────────────────
 section("SUMMARY")

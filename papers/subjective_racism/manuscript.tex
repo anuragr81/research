@@ -1,6 +1,5 @@
 % =============================================================================
-% MANUSCRIPT: Social Discrimination as Informationally Mediated Closure:
-% A Jeffrey Conditioning Approach
+% MANUSCRIPT: Discrimination from Soft Signals: Dilemmas of Mimic Men
 % =============================================================================
 % Author: Anurag Srivastava (Riskcare Ltd., London; University of Reading)
 % ORCiD:  0000-0002-6477-4430
@@ -61,9 +60,8 @@
 \begin{document}
 
 \begin{center}
-{\LARGE\bfseries Social Discrimination as Informationally\\[0.4em]
-Mediated Closure: A Jeffrey Conditioning\\[0.4em]
-Approach}\\[1.5em]
+{\LARGE\bfseries Discrimination from Soft Signals:\\[0.4em]
+Dilemmas of Mimic Men}\\[1.5em]
 
 {\large Anurag Srivastava}\\[0.3em]
 {\normalsize Riskcare Ltd., London $\cdot$ University of Reading}\\[0.2em]
@@ -73,23 +71,34 @@ Approach}\\[1.5em]
 
 \begin{minipage}{0.85\textwidth}
 \small\noindent\textbf{Abstract.}
-We develop a formal economic model in which social discrimination
-emerges as the outcome of bilateral Jeffrey conditioning on soft
-social markers correlated with economic class. Departing from the
-canonical statistical discrimination literature, which treats group
-membership as a hard signal and updating as standard Bayesian, we
-argue that the relevant signals in social interaction are soft:
-accents, dress, consumption patterns, and mannerisms that
-probabilistically suggest group membership without determining it.
+Post-colonial literature has repeatedly identified a structural
+feature of discrimination that economics has not formalised:
+individual assimilation is individually rewarded and collectively
+futile. We provide the mechanism. When the operative signals in
+social interaction are soft---accents, dress, consumption patterns,
+phenotype---the theoretically appropriate updating rule is Jeffrey
+conditioning, which revises beliefs about group membership while
+holding group-level class distributions fixed. The consequence is
+a rigidity condition under which individual counter-examples are
+absorbed without revising the group prior: the mimic man is an
+equilibrium outcome, not a literary conceit.
+A marker salience parameter governs the strength of the Jeffrey
+revision, distinguishing mutable markers (accent, dress) from
+immutable ones (phenotype, skin colour); together with the group
+prior, these two sufficient statistics---one spatial, one
+temporal---exhaust the observational inputs to the discrimination
+mechanism and explain why phenotypic proximity to the host group
+dominates conflict history in determining integration speed.
 The model generates endogenous closure equilibria that are
-path-dependent on economic history and sustained by platform agents
-that produce informationally laundered admission policies. We show
-that class-based social closure exists in a racially homogeneous
-society as a structural feature of the model, that racial
-discrimination is a perturbation of this underlying mechanism, and
-that there exists a threshold level of intergenerational mobility
-below which the closure trap persists permanently and above which it
-is eliminated through a saddle-node bifurcation. The platform
+path-dependent on economic history and marker salience, and
+sustained by platform agents that produce informationally laundered
+admission policies. We show that class-based social closure exists
+in a racially homogeneous society as a structural feature of the
+model, that racial discrimination is a perturbation of this
+underlying mechanism, and that there exists a threshold level of
+intergenerational mobility---increasing in marker salience---below
+which the closure trap persists permanently and above which it is
+eliminated through a saddle-node bifurcation. The platform
 extension shows that profit-maximising firms produce tokenism as a
 structural outcome and that stricter anti-discrimination law raises
 the return to informal discrimination networks. We position the
@@ -99,9 +108,9 @@ corresponding to the standard-Bayesian limit of the Jeffrey
 conditioning mechanism.\\[0.5em]
 
 \noindent\textbf{JEL codes:} D83, J15, J71, D62, Z13.\\
-\textbf{Keywords:} Jeffrey conditioning, social discrimination,
-closure equilibrium, intergenerational mobility, platform economics,
-belief architecture.
+\textbf{Keywords:} Jeffrey conditioning, soft signals,
+closure equilibrium, marker salience, intergenerational mobility,
+platform economics, mimic men.
 \end{minipage}
 \end{center}
 
@@ -111,7 +120,26 @@ belief architecture.
 \label{sec:intro}
 % =============================================================================
 
-Three observations motivate this paper.
+Three observations motivate this paper---but they are preceded by a
+recognition. The post-colonial literary tradition has repeatedly
+identified a structural feature of discrimination that economics
+has not formalised. Naipaul's Ralph Singh, in \emph{The Mimic Men}
+(1967), invests everything in the markers of the colonial metropole
+and achieves personal admission to its institutions. He is
+reclassified. His group is not. Fanon's colonised subject discovers
+that the white mask does not revise the white gaze. Coetzee's
+post-apartheid figures navigate a world whose legal structure has
+changed overnight while its inferential architecture has not. The
+dilemma these writers identify is precise: individual assimilation
+is individually rewarded and collectively futile. The exception is
+absorbed without revising the rule. This paper provides the formal
+mechanism. When the operative signals are soft and the theoretically
+appropriate updating rule is Jeffrey conditioning rather than
+standard Bayes, the compliance route fails by construction. The rule
+does not revise. The mimic man is not a literary conceit but an
+equilibrium outcome.
+
+Three observations motivate the formal model.
 
 The first is economic. Friends of lower economic background cannot
 share the same restaurants, leisure activities, schools, or holiday
@@ -605,22 +633,79 @@ Under bilateral structure, engagement requires condition
 (\ref{eq:threshold}) to hold for both agents simultaneously.
 
 \textbf{Two-group simplification.} For the remainder of the
-analysis, we work with two groups $\G = \{g_1, g_2\}$ and condition
-on the case where the marker $m_i$ is sufficiently informative that
-$P'(g_k) \approx 1$ for one group. In this limit, the posterior
-reduces to the group distribution itself, and the expected squared
-distance for an agent $j$ with class $c_j$ encountering a member of
-group $g$ is:
+analysis, we work with two groups $\G = \{g_1, g_2\}$ (host and
+immigrant/out-group respectively).
+
+\textbf{Marker salience.} Not all markers are equally informative
+about group membership. A parameter $s_g \in [0,1]$, which we call
+\emph{marker salience}, governs the strength of the Jeffrey
+revision---the probability that the observer attributes the
+encountered individual to the out-group upon observing their
+markers:
 \begin{equation}
-  \E[(c_i - c_j)^2 \mid g]
-  = (\bar{c}_g - c_j)^2 + \sigma_g^2
+  P'(g_2 \mid m_i) = s_g
+  \label{eq:salience}
+\end{equation}
+Marker salience is a property of the \emph{marker--observer
+interaction}, not an intrinsic property of the group. A South Asian
+individual in England has high $s_g$ (phenotypic markers strongly
+identify out-group membership); the same individual in South Asia
+has $s_g \approx 0$. Mutable markers (accent, dress, consumption)
+can be modified, reducing $s_g$ over time; immutable markers (skin
+colour, facial structure) produce permanently high $s_g$.
+
+Under this parametrisation, the expected squared distance for an
+agent $j$ with class $c_j$ encountering an individual whose markers
+trigger salience $s_g$ is:
+\begin{equation}
+  \E[(c_i - c_j)^2 \mid m_i]
+  = s_g \underbrace{\left[(\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2\right]}_{D_2}
+  + (1 - s_g) \underbrace{\left[(\bar{c}_{g_1} - c_j)^2 + \sigma_{g_1}^2\right]}_{D_1}
+  \label{eq:Ed-salience}
+\end{equation}
+where $D_k = (\bar{c}_{g_k} - c_j)^2 + \sigma_{g_k}^2$ is the
+expected squared distance under certain attribution to group $g_k$.
+When $s_g = 1$, the observer attributes the individual to the
+out-group with certainty and the expression reduces to:
+\begin{equation}
+  \E[(c_i - c_j)^2 \mid g_2]
+  = (\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2
   \label{eq:Ed-group}
 \end{equation}
+which is the workhorse expression of the model. When $s_g = 0$,
+the markers are invisible and the observer treats the individual
+as a member of the host group: no discrimination occurs regardless
+of economic history.
 
-This expression is the workhorse of the model: the engagement
-threshold is violated when either the bias (class distance between
-observer and group mean) or the uncertainty (within-group dispersion)
-is too large.
+The engagement threshold is violated when either the bias (class
+distance between observer and group mean) or the uncertainty
+(within-group dispersion), weighted by marker salience, is too
+large.
+
+\begin{remark}[Space-time sufficiency]
+\label{rem:spacetime}
+The two sufficient statistics of the discrimination mechanism
+correspond to the spatial and temporal dimensions of social
+observation. Marker salience $s_g$ is a \emph{spatial} property:
+it is determined by what the observer perceives at the point of
+encounter---phenotype, dress, accent, body language---and governs
+\emph{whether} the Jeffrey revision fires and how strongly.
+The group prior $\bar{c}_g$ is a \emph{temporal} property: it is
+the sediment of the group's economic history across generations
+and governs \emph{what} the Jeffrey revision maps to once it
+fires. Every soft signal that enters the model is either a spatial
+property of the individual observable at the encounter or encodes
+temporal information accumulated across the group's economic
+history. The model's central result---that sustained discrimination
+requires both channels to be active---can therefore be restated:
+sustained discrimination requires both spatial identifiability
+($s_g > 0$) and temporal disadvantage ($\bar{c}_g <
+\bar{c}_g^{\mathrm{mid}}$). Spatial interventions (reducing
+marker visibility through assimilation or ``passing'') and temporal
+interventions (raising $\gamma$ above $\gamma^*$ through mobility
+programmes) are categorically different and cannot substitute for
+each other.
+\end{remark}
 
 \subsection{Comparative statics}
 
@@ -656,6 +741,23 @@ strong one. $\E[(c_i-c_j)^2]$ is quadratic in $\bar{c}_g$
 from Phelps--Arrow's binary response to hard group membership.
 \end{proposition}
 
+\begin{proposition}[Marker salience effect]
+\label{prop:salience}
+Higher marker salience amplifies expected incompatibility when the
+out-group is economically disadvantaged:
+\[
+  \frac{\partial \E[(c_i-c_j)^2 \mid m_i]}{\partial s_g}
+  = D_2 - D_1 > 0
+  \quad \text{when } \bar{c}_{g_2} < \bar{c}_{g_1}.
+\]
+Two groups with identical economic histories $\bar{c}_g$ face
+different closure dynamics if their marker salience differs. Marker
+salience and economic history are jointly necessary for sustained
+discrimination: $s_g = 0$ eliminates discrimination regardless of
+$\bar{c}_g$, and $\bar{c}_{g_2} = \bar{c}_{g_1}$ eliminates
+discrimination regardless of $s_g$.
+\end{proposition}
+
 % =============================================================================
 \section{The Closure Equilibrium}
 \label{sec:closure}
@@ -689,13 +791,21 @@ intergenerational regression to the group mean: children of
 high-class families face some probability of downward mobility, and
 children of low-class families have some chance of upward mobility.
 
-The discrimination rate $\phi^t = F(\bar{c}_g^t)$ is determined by the
-engagement threshold (\ref{eq:threshold}). The composed map is:
+The discrimination rate $\phi^t = s_g \cdot F(\bar{c}_g^t)$ is
+determined by the engagement threshold (\ref{eq:threshold}),
+modulated by marker salience $s_g$
+(Proposition~\ref{prop:salience}): when $s_g = 0$, markers are
+invisible and no discrimination fires. The composed map is:
 \begin{equation}
-  H(\bar{c}_g) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma} - \delta F(\bar{c}_g))
+  H(\bar{c}_g;\, s_g) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}
+  - s_g\,\delta\, F(\bar{c}_g))
   - \tilde{\gamma}\,\bar{c}_g^2
   \label{eq:composed}
 \end{equation}
+
+The boundary conditions $H(0; s_g) = \mu > 0$ and
+$H(1; s_g) = 1$ hold for all $s_g$, since $F(1) = 0$ and the
+$\tilde{\gamma}$ terms cancel at $\bar{c}_g = 1$.
 
 \begin{definition}[Closure Equilibrium]
 \label{def:closure}
@@ -763,6 +873,33 @@ $\{H(\bar{c}_g) = \bar{c}_g,\; H'(\bar{c}_g) = 1\}$ jointly.
 The intergenerational persistence of class position near the
 bifurcation is characterised in Appendix~\ref{app:Tstar}.
 
+\begin{corollary}[Marker salience raises the mobility threshold]
+\label{cor:salience-threshold}
+The critical mobility threshold $\tilde{\gamma}^*$ is strictly
+increasing in marker salience:
+$\partial \tilde{\gamma}^* / \partial s_g > 0$. At $s_g = 0$,
+$\tilde{\gamma}^* = 0$ and no closure trap exists for any positive
+mobility rate. At $s_g = 1$, $\tilde{\gamma}^*$ attains its maximum,
+recovering the base-model threshold. Consequently, groups with
+immutable markers (high $s_g$) require strictly higher
+intergenerational mobility to escape the closure trap than groups
+with mutable markers (low $s_g$), even when starting from identical
+economic positions.
+\end{corollary}
+
+\begin{proof}[Proof sketch]
+The composed map $H(\bar{c}_g;\, s_g)$ is decreasing in $s_g$ on the
+interior of $[0,1]$ (since $\partial G/\partial s_g = -\delta\phi
+\bar{c}_g < 0$). A higher $s_g$ lowers $H$ in the interior, deepening
+the region where $\Psi < 0$ and requiring higher $\tilde{\gamma}$ to
+restore $\Psi \geq 0$ everywhere. At $s_g = 0$, the discrimination
+channel is fully shut off ($\phi^t = 0$ for all $t$), so
+$H(\bar{c}_g;\, 0) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}) -
+\tilde{\gamma}\bar{c}_g^2$, which satisfies $\Psi \geq 0$ for all
+$\tilde{\gamma} \geq 0$. Numerical verification confirms strict
+monotonicity across the full range of $s_g$. \qed
+\end{proof}
+
 \subsection{The enemy group perturbation}
 
 \begin{definition}[Enemy group]
@@ -771,13 +908,33 @@ $\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$---their prior starts
 in the high-discrimination basin.
 \end{definition}
 
+The enemy group's integration trajectory depends on two dimensions:
+economic history ($\bar{c}_{g_2}^0$) and marker salience ($s_g$).
+A group with low $\bar{c}_{g_2}^0$ but also low $s_g$---phenotypically
+similar to the host, with mutable cultural markers---may escape
+the trap rapidly because the discrimination channel fires weakly.
+A group with comparable $\bar{c}_{g_2}^0$ but high $s_g$---visibly
+distinct, with immutable phenotypic markers---faces a structurally
+harder path. The Irish in England illustrate the former: despite a
+history of famine, colonial extraction, and armed conflict,
+phenotypic similarity ($s_g \approx 0.15$) meant the Jeffrey
+revision fired weakly, and integration occurred within two
+generations. Indian and Kenyan immigrants illustrate the latter:
+comparable or better initial economic positions but high phenotypic
+salience ($s_g \approx 0.9$) sustains the closure trap
+indefinitely under the same mobility parameters.
+
 \begin{proposition}[Enemy group trap]
 \label{prop:enemy}
 If $g_2$ enters with $\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$
-and agents interact only through direct social engagement (not through
-a platform), then $g_2$ converges to the high-discrimination
-equilibrium $\bar{c}_g^L(g_2)$ independently of $g_1$'s trajectory, and
-$g_1$'s equilibrium is unaffected.
+and $s_g$ sufficiently high that $\tilde{\gamma} <
+\tilde{\gamma}^*(s_g)$, then $g_2$ converges to the
+high-discrimination equilibrium $\bar{c}_g^L(g_2)$ independently
+of $g_1$'s trajectory, and $g_1$'s equilibrium is unaffected.
+If $s_g$ is sufficiently low that $\tilde{\gamma} >
+\tilde{\gamma}^*(s_g)$, the trap does not exist and $g_2$
+converges to the integration equilibrium regardless of initial
+economic position.
 \end{proposition}
 
 The formal nesting of the model within Loury's framework is developed
@@ -855,6 +1012,10 @@ The shadow information value $\Omega_j$ satisfies:
   the return to shadow information. The mechanism: the law constrains
   formal screening but leaves shadow cues unconstrained, degrading
   the uninformed fallback while preserving the informed outcome.
+  \item $\partial \Omega_j / \partial s_g > 0$: higher marker
+  salience raises shadow market intensity, because visible markers
+  make group attribution easier and therefore the informational
+  advantage of knowing the ``right'' venues more valuable.
 \end{enumerate}
 \end{proposition}
 
@@ -1641,18 +1802,66 @@ $\gamma > \gamma^*$---through structural mobility and collective
 prior revision---not through individual marker investment, however
 extensive.
 
-This is not a normative verdict on those who chose the compliance
-route under conditions not of their making. Individual compliance
-was rational given the payoff structure of the closure equilibrium;
-Proposition~\ref{prop:veblen} shows that it is the individually
-optimal response to trap severity. The model's claim is only
-positive: the individually rational compliance strategy is
-collectively self-defeating, because the Jeffrey architecture
-ensures that its aggregate effect leaves the group prior
-unchanged. The route to permanent trap escape runs through
-$\gamma > \gamma^*$---through structural mobility and collective
-prior revision---not through individual marker investment, however
-extensive.
+The marker salience extension
+(Corollary~\ref{cor:salience-threshold}) sharpens this analysis.
+The compliance route can in principle reduce $s_g$ for markers
+that are mutable: accent, dress, linguistic register, consumption
+patterns. For groups with low phenotypic salience---the Irish in
+England, Eastern Europeans in Western Europe---compliance
+simultaneously reduces the individual's $s_g$ toward zero and the
+observer's Jeffrey revision toward non-firing. In such cases, the
+compliance route \emph{does} produce integration, not because it
+revises the group prior, but because it renders the group marker
+invisible: the individual ceases to be identified as out-group.
+For groups with high phenotypic salience---racially marked
+colonial subjects---compliance can modify mutable markers while
+leaving the immutable phenotypic component of $s_g$ unchanged.
+The Jeffrey revision continues to fire on phenotype even when
+accent, dress, and cultural practice have fully converged.
+The \'{e}volu\'{e}'s position is therefore doubly constrained:
+the rigidity condition prevents group prior revision, and
+immutable marker salience prevents individual escape from
+out-group attribution. The compliance promise was structurally
+false on both counts.
+
+\subsection{Sudden legal change and the space-time mismatch}
+\label{subsec:sudden-law}
+
+The model predicts specific friction when anti-discrimination law
+changes suddenly while the belief architecture remains fixed. Law
+operates on the admission policy $\sigma$---a formal instrument
+that is neither a spatial observation nor a temporal prior
+(Remark~\ref{rem:spacetime}). It changes overnight. The Jeffrey
+prior ($\bar{c}_g$, $F_g$, $\rho$) and marker salience ($s_g$)
+are untouched.
+
+Three consequences follow immediately from the existing
+propositions. First, the shadow information value rises on impact:
+$\partial \Omega_j / \partial \lambda > 0$
+(Proposition~\ref{prop:shadow}). Discrimination moves from formal
+to informal channels. Second, experience utility falls for the
+host group, because social quality $S_j(\mathcal{A})$ depends on
+Jeffrey-updated beliefs about new entrants, and $\bar{c}_g$ has
+not moved---the host group's resistance has an
+economic-inferential foundation, not just an ideological one.
+Third, the result is the tokenism equilibrium of
+Proposition~\ref{prop:tokenism}: visible inclusion without belief
+revision.
+
+Without simultaneous investment in $\gamma$, sudden legal change
+produces an outcome that erodes political support for both
+instruments: the host group experiences disutility from forced
+integration that it perceives as economically costly (because the
+prior has not moved), the stigmatised group experiences tokenism
+rather than genuine integration, and the intensified shadow market
+provides the institutional infrastructure for backlash. The
+historical pattern---post-Civil Rights Act sorting in the American
+South, post-Race Relations Act class-mediated exclusion in the
+UK---is consistent with the model's prediction that legal change
+targeting $\sigma$ without raising $\gamma$ above $\gamma^*$
+redirects rather than eliminates discrimination, because the law
+addresses neither the spatial observations nor the temporal priors
+on which the mechanism operates.
 
 % =============================================================================
 \section{Empirical Strategy}
@@ -1662,7 +1871,7 @@ extensive.
 \subsection{Distinctive empirical predictions}
 
 The model generates predictions that are observationally
-distinguishable from existing discrimination models. Three are
+distinguishable from existing discrimination models. Five are
 particularly distinctive.
 
 \textbf{Prediction 1: Non-linear convergence dynamics near
@@ -1696,6 +1905,40 @@ rental platforms), the model predicts that informal proxies for
 composition---review scores, response rates, stated amenity
 preferences---should increase in their discriminatory content in
 compensation, rather than falling.
+
+\textbf{Prediction 4: Marker salience dominates conflict history.}
+Corollary~\ref{cor:salience-threshold} predicts that integration
+speed depends more strongly on phenotypic distance from the host
+group than on the severity of historical conflict. Groups with
+low $s_g$ and high conflict history should integrate faster than
+groups with high $s_g$ and low conflict history. This is directly
+testable by comparing integration trajectories---intermarriage
+rates, residential segregation indices, occupational
+convergence---across immigrant groups in the same host country,
+controlling for initial economic position and holding the
+institutional environment fixed.
+
+\textbf{Prediction 5: UK--US composition of discrimination.}
+The space-time sufficiency structure
+(Remark~\ref{rem:spacetime}) generates a cross-country prediction.
+The UK has a deep pre-existing class closure trap with a rich
+temporal marker space: accent, school, dress, and linguistic
+register encode class history with high precision, so the temporal
+dimension $\bar{c}_g$ does more of the discriminatory work. A
+high-class foreigner whose temporal markers read correctly within
+the British system receives a high initial prior regardless of
+race---race is a second-order modifier. The US has a shallower
+class marker space: fewer independent temporal markers are available
+to override the spatial (racial) signal, so the spatial dimension
+$s_g$ carries more of the informational load. The prediction is
+that a high-class foreigner from a racially stigmatised group
+should experience more racial friction in the US than in the UK,
+but more class friction in the UK than in the US. Total
+discrimination may be similar in magnitude but differs in
+composition. The shadow information market
+(Proposition~\ref{prop:shadow}) is organised around temporal
+signals in the UK (the ``old boy network'') and spatial signals
+in the US.
 
 \subsection{Data sources}
 
@@ -1819,6 +2062,41 @@ are complements, not substitutes. Anti-discrimination law, applied
 alone, reduces allocative loss but amplifies the shadow market,
 leaving the informational and dynamic losses untouched.
 
+The marker salience extension shows that racial discrimination
+cannot be reduced to economic history alone. Two groups with
+identical economic histories face different closure dynamics if
+their marker salience differs: a group with mutable markers (low
+$s_g$) may integrate rapidly while a group with immutable phenotypic
+markers (high $s_g$) remains trapped indefinitely under the same
+mobility parameters. The critical mobility threshold
+$\tilde{\gamma}^*$ is strictly increasing in $s_g$
+(Corollary~\ref{cor:salience-threshold}), so groups with high
+phenotypic salience require strictly more intergenerational
+mobility to escape the closure trap. This resolves the puzzle of
+why phenotypic proximity to the host group dominates severity of
+historical conflict in determining integration speed, and
+strengthens the compliance analysis: for high-$s_g$ groups, the
+compliance route fails not only because the group prior is rigid
+but because the individual cannot escape out-group attribution
+regardless of how fully they adopt host-group markers.
+
+The model identifies one further structural feature that merits
+explicit statement. The individually rational response to the
+closure trap---marker investment, compliance, personal
+reclassification---is collectively self-defeating, because the
+Jeffrey architecture ensures that individual exceptions do not
+aggregate into group prior revision. The route to permanent trap
+escape runs through $\gamma > \gamma^*$, not through $e^*$. The
+two compete for the same scarce resources, and the Jeffrey
+mechanism ensures that resources invested in individual compliance
+are wasted from the group's perspective even though they are
+individually rewarded. How a dispersed and disadvantaged group
+coordinates on collective mobility investment in the presence of
+this private incentive to defect into compliance is a coordination
+problem the model identifies but does not resolve---and one that
+connects naturally to the collective action literature as a
+direction for future work.
+
 % =============================================================================
 % APPENDICES
 % =============================================================================
@@ -1831,12 +2109,18 @@ We introduce $\rho \in [0,1]$, the \emph{rigidity parameter}, into
 the dynamic system. At $\rho = 0$, individual counter-examples fully
 update the group prior $F_g$---standard Bayesian updating.
 At $\rho = 1$, the group prior is completely rigid---full Jeffrey
-conditioning. The amended dynamic system is:
+conditioning. Combined with marker salience $s_g$, the amended
+dynamic system is:
 \begin{equation}
-  G_\rho(\bar{c}_g, \phi) = \mu + \bar{c}_g(1 - \mu - \rho \delta \phi)
+  G_{\rho,s}(\bar{c}_g, \phi) = \mu + \bar{c}_g(1 - \mu - \rho\, s_g\, \delta \phi)
   + \tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)
   \label{eq:loury-rho}
 \end{equation}
+The discrimination channel requires both $\rho > 0$ (Jeffrey
+rigidity) and $s_g > 0$ (visible markers). Either $\rho = 0$ or
+$s_g = 0$ eliminates the discrimination channel entirely, producing
+$G = \mu + \bar{c}_g(1-\mu) + \tilde{\gamma}\bar{c}_g(1-\bar{c}_g)$
+with a unique stable fixed point at $\bar{c}_g = 1$.
 
 \begin{proposition}[Loury nesting]
 \label{prop:loury-nesting}
