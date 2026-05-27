@@ -124,12 +124,13 @@ Three observations motivate this paper---but they are preceded by a
 recognition. The post-colonial literary tradition has repeatedly
 identified a structural feature of discrimination that economics
 has not formalised. Naipaul's Ralph Singh, in \emph{The Mimic Men}
-(1967), invests everything in the markers of the colonial metropole
-and achieves personal admission to its institutions. He is
-reclassified. His group is not. Fanon's colonised subject discovers
-that the white mask does not revise the white gaze. Coetzee's
-post-apartheid figures navigate a world whose legal structure has
-changed overnight while its inferential architecture has not. The
+\citep{Naipaul1967}, invests everything in the markers of the
+colonial metropole and achieves personal admission to its
+institutions. He is reclassified. His group is not. Fanon's
+colonised subject discovers that the white mask does not revise the
+white gaze \citep{Fanon1952}. Coetzee's post-apartheid figures
+navigate a world whose legal structure has changed overnight while
+its inferential architecture has not \citep{Coetzee1999}. The
 dilemma these writers identify is precise: individual assimilation
 is individually rewarded and collectively futile. The exception is
 absorbed without revising the rule. This paper provides the formal
@@ -758,6 +759,37 @@ $\bar{c}_g$, and $\bar{c}_{g_2} = \bar{c}_{g_1}$ eliminates
 discrimination regardless of $s_g$.
 \end{proposition}
 
+\begin{proposition}[Forced marker suppression]
+\label{prop:suppression}
+Let $\lambda_s \in [0,1]$ be a policy instrument that caps effective
+marker salience: $s_g^{\mathrm{eff}} = \min(s_g,\, \lambda_s)$.
+When the cap binds ($\lambda_s < s_g$):
+\begin{enumerate}[noitemsep]
+  \item The discrimination rate falls:
+  $F(\bar{c}_g,\, \lambda_s) < F(\bar{c}_g,\, s_g)$.
+  \item The mobility threshold falls:
+  $\tilde{\gamma}^*(\lambda_s) < \tilde{\gamma}^*(s_g)$.
+  \item The shadow information value of the remaining unsuppressed
+  markers rises: $\partial \Omega_j / \partial \lambda_s < 0$
+  conditional on $\lambda_s < s_g$. Suppressing one class of markers
+  raises the discriminatory return to those that remain.\footnote{The
+  model uses a single aggregate $s_g$. The substitution claim is a
+  structural argument: if the model were extended to a vector
+  $\mathbf{s} = (s_1, \ldots, s_K)$ with channel-specific
+  suppression, partial suppression on channel $k$ would raise
+  the shadow return to unsuppressed channels. A formal
+  multi-channel extension is left for future work.} Partial
+  suppression produces marker reallocation, not elimination.
+  \item When suppression is lifted ($\lambda_s \to s_g$), the
+  equilibrium snaps to the state the unsuppressed system would
+  have converged to. If $\bar{c}_g$ has not crossed
+  $\bar{c}_g^{\mathrm{mid}}$ during the suppression period, the
+  closure trap re-emerges immediately. The speed of
+  re-stratification is proportional to the gap
+  $s_g - \lambda_s$.
+\end{enumerate}
+\end{proposition}
+
 % =============================================================================
 \section{The Closure Equilibrium}
 \label{sec:closure}
@@ -935,6 +967,25 @@ If $s_g$ is sufficiently low that $\tilde{\gamma} >
 \tilde{\gamma}^*(s_g)$, the trap does not exist and $g_2$
 converges to the integration equilibrium regardless of initial
 economic position.
+\end{proposition}
+
+\begin{proposition}[Adverse selection through passing]
+\label{prop:passing}
+When individuals can reduce their personal marker salience $s_{g,i}$
+at cost $\kappa(c_i)$ decreasing in class (higher-class individuals
+find it easier to ``pass''), selective exit from the visible
+out-group worsens the remaining group's prior:
+\[
+  \frac{\partial \bar{c}_g^{\mathrm{visible}}}
+  {\partial (\mathrm{passing\ rate})} < 0.
+\]
+The individuals most able to pass---those with highest $c_i$ and
+lowest natural $s_{g,i}$---are positively selected. Their departure
+lowers the mean class of the visible group, which in turn raises
+the discrimination rate $F(\bar{c}_g)$ against those who remain.
+Individual compliance does not merely fail to improve the group
+prior (the rigidity condition); it actively worsens it through
+composition. The mimic man's escape harms those he leaves behind.
 \end{proposition}
 
 The formal nesting of the model within Loury's framework is developed
@@ -1863,18 +1914,212 @@ redirects rather than eliminates discrimination, because the law
 addresses neither the spatial observations nor the temporal priors
 on which the mechanism operates.
 
+\subsection{Digital de-anonymisation: a natural experiment on $s_g$}
+\label{subsec:digital}
+
+Anonymous digital environments---text-only forums, pseudonymous
+platforms, early internet chat---are settings where $s_g \approx 0$
+by design. The model predicts zero discrimination in this regime
+regardless of $\bar{c}_g$: when markers are invisible, the Jeffrey
+revision does not fire (Proposition~\ref{prop:salience}). The
+analytically interesting transition occurs when platforms introduce
+identity-revealing features: real names, profile photographs,
+video. This produces a discontinuous jump in $s_g$ from near-zero
+to whatever the natural marker environment supports. The model
+predicts discrimination should emerge \emph{immediately} upon
+marker revelation, with intensity proportional to the gap between
+the revealed group's $\bar{c}_g$ and the host mean. The empirical
+literature on platform discrimination is consistent with this
+prediction: discrimination on rental and rideshare platforms
+correlates with the introduction of photographs and real names, not
+with any change in the underlying population. The mechanism is
+pure spatial shock---the temporal dimension is unchanged, but the
+spatial channel is switched on.
+
+\subsection{The ``model minority'' configuration}
+\label{subsec:modelminority}
+
+East Asian immigrant communities in the US and UK occupy a region
+of the $(s_g,\, \bar{c}_g)$ parameter space that the base model's
+worked examples do not cover: high marker salience (phenotypically
+distinct from the host group) combined with high or above-host
+group mean class ($\bar{c}_{g_2} \geq \bar{c}_{g_1}$). The
+expected distance gradient $\partial \E / \partial s_g = D_2 - D_1$
+has a subtle observer-dependent structure in this configuration.
+Since $D_2 - D_1 = (\bar{c}_{g_2} - \bar{c}_{g_1})
+(\bar{c}_{g_2} + \bar{c}_{g_1} - 2c_j)$ when variances are equal,
+the sign depends on the observer's class relative to the midpoint
+$(\bar{c}_{g_1} + \bar{c}_{g_2})/2$. For the median host-group
+observer ($c_j \approx \bar{c}_{g_1}$), $\partial \E / \partial
+s_g > 0$---higher salience still increases expected incompatibility,
+but the magnitude is small because $\bar{c}_{g_2}$ is close to
+$\bar{c}_{g_1}$. For high-class host observers ($c_j$ above the
+midpoint), the sign reverses: these observers are closer to the
+out-group mean than to their own, and higher salience makes the
+model minority \emph{more} attractive as an engagement partner.
+
+The result is a split pattern: economic integration with elite
+gatekeepers (who are above the midpoint and actively seek
+engagement) combined with mild but persistent social friction
+from the median host population (who remain below the midpoint).
+This is the ``bamboo ceiling'' pattern: access to economic spaces
+where high-class gatekeepers select, but exclusion from broader
+social spaces where median-class members dominate. The model
+predicts this is a structural equilibrium, not a transitional
+state, because the spatial markers are immutable and the
+observer-position structure of $D_2 - D_1$ is fixed by the
+group means.
+
+\subsection{Language revival as voluntary $s_g$ increase}
+\label{subsec:language}
+
+Language revival movements---Welsh, Hebrew, M\={a}ori---present an
+apparent paradox within the model: a suppressed group deliberately
+increases its own marker salience. The model predicts that higher
+$s_g$ raises the mobility threshold
+$\tilde{\gamma}^*(s_g)$
+(Corollary~\ref{cor:salience-threshold}), so voluntary $s_g$
+increase should intensify discrimination. When is this rational?
+The model identifies a necessary condition: $\bar{c}_g >
+\bar{c}_g^{\mathrm{mid}}$. If the group's economic position is
+already above the tipping point, the closure trap does not bind
+and increasing $s_g$ carries an identity value without triggering
+the trap. The model predicts that successful language revival
+movements should emerge \emph{after} economic convergence, not
+before. Hebrew is the confirming case: revival accompanied
+state-building and economic development. Indigenous language
+revival in contexts of persistent economic disadvantage is the
+hard case---the model predicts it is collectively costly even if
+individually identity-affirming, because it raises the threshold
+the group has not yet crossed. The forced marker suppression
+framework (Proposition~\ref{prop:suppression}) provides the
+converse: when an authority suppresses a group's linguistic
+markers ($\lambda_s < s_g$), discrimination on that channel
+falls but substitutes to remaining markers, and the group's
+cultural identity is eroded without the group prior changing.
+
+\subsection{Gentrification as platform optimisation}
+\label{subsec:gentrification}
+
+A gentrifying neighbourhood is a platform whose atmosphere vector
+$\mathbf{a}$ is being optimised by landlords, developers, and new
+businesses to attract higher-$c_j$ residents. The model's platform
+extension applies directly. New amenities (coffee shops, yoga
+studios, curated retail) constitute atmosphere instruments that
+raise social quality $S_j(\A)$ for high-$c_j$ arrivals while
+making the existing composition uncomfortable
+(Proposition~\ref{prop:exclusion}). The existing residents face the
+tokenism equilibrium (Proposition~\ref{prop:tokenism}): some are
+retained for visible diversity while the composition shifts. The
+welfare decomposition applies: amenity improvements may reduce the
+allocative loss $\mathcal{L}_{\mathrm{alloc}}$, but the
+informational and dynamic losses remain because $\bar{c}_g$ for the
+displaced group is unchanged---they have been spatially relocated
+to a lower-quality platform. When anti-displacement policies are
+imposed (rent controls, affordable housing mandates), the
+sudden-legal-change result (Section~\ref{subsec:sudden-law})
+applies: $\sigma$ is constrained, the shadow market
+(informal buyouts, service deterioration, selective maintenance)
+intensifies, and discrimination redirects rather than disappears.
+
+\subsection{Anti-colonial movements as collective action on
+$\gamma$}
+\label{subsec:anticolonial}
+
+The conclusion identifies an unresolved coordination problem: how
+does a dispersed and disadvantaged group coordinate on collective
+mobility investment ($\gamma$) rather than individual marker
+investment ($e^*$), given that the latter is individually rewarded
+and the former is a public good? Anti-colonial movements are the
+most important large-scale historical examples of attempted
+solutions to this coordination problem, and the model can
+distinguish their outcomes based on whether the movement succeeded
+in raising $\gamma$ above $\gamma^*$.
+
+\textbf{Symbiotic post-colonial relationships.} Some movements
+achieved political independence---changed $\sigma$---while
+maintaining the compliance channel at the cultural and economic
+level. Pakistan retained British legal, military, and
+administrative structures, English as the elite language, and
+cricket as the national sport. Martinique remained a French
+d\'{e}partement. Francophone West African states retained the CFA
+franc, French military bases, and French as the official language.
+In model terms, these countries changed the formal admission
+instrument but continued investing collectively in $e^*$:
+metropolitan marker alignment. The model predicts the tokenism
+equilibrium at the national scale---formal sovereignty without
+revision of the economic prior. The relationship is ``symbiotic''
+precisely because the compliance channel remains open: elites from
+these countries can access the metropole through individual marker
+investment. The mimic man dilemma operates in full force.
+Immigrants from these states face the standard model prediction:
+the compliance route is available, individual reclassification is
+achievable for those who invest in metropolitan markers, but the
+group prior is unrevised.
+
+\textbf{Antagonistic post-colonial relationships.} Other movements
+explicitly rejected the compliance route as a national strategy.
+Nehru's import substitution, promotion of Hindi, and non-alignment
+constituted a deliberate attempt to build $\gamma$ independently of
+the metropole while reducing dependency on metropolitan markers.
+Nyerere's ujamaa was the most explicit: reject metropolitan markers
+entirely, invest collectively in economic self-sufficiency.
+Algeria's FLN ideology was anti-assimilation by design. The model
+identifies this as the correct strategy for escaping the trap:
+invest in $\gamma$, not $e^*$. But it comes at a short-term cost
+---the metropole withdraws the returns to compliance, and the
+transition is painful precisely because the group is attempting to
+cross $\gamma^*$ without the individual safety valve of the
+compliance route. Immigrants from these countries who nonetheless
+pursue the individual compliance route occupy a structurally
+unusual position: they are pursuing the strategy their country's
+national project rejected.
+
+\textbf{Perpetual anti-colonial narrative.} Iran after 1979
+rejected the compliance route comprehensively, but $\gamma$ did not
+cross $\gamma^*$ before the relationship was severed. The model
+predicts that the anti-colonial narrative should persist precisely
+as long as $\bar{c}_g < \bar{c}_g^{\mathrm{mid}}$: the narrative
+functions as a coordination device preventing individually rational
+defection back into compliance. If individuals defected into the
+compliance route (cultural westernisation, emigration), an adverse
+selection dynamic would operate: the most capable individuals
+exit, the remaining group's $\bar{c}_g$ falls, and the trap
+deepens. The perpetual
+narrative makes compliance ideologically costly, keeping resources
+directed toward $\gamma$ rather than $e^*$. The model predicts this
+narrative will dissolve endogenously if and when $\bar{c}_g$
+crosses the tipping point, at which point the trap no longer binds
+and compliance becomes individually harmless.
+
+A further prediction concerns the host country's treatment of
+immigrants from each type. The group prior $\bar{c}_g$ as perceived
+by the host country's observers is not purely a function of
+economic history---it can be contaminated by geopolitical
+antagonism. Knowledge that an individual is ``from Iran'' activates
+a compound prior encoding both economic position and political
+hostility. This is a case where a temporal property (ongoing
+political conflict) feeds into the spatial marker (the national
+label activates a prior that would not fire for an economically
+identical individual from a politically neutral state). The model
+predicts that immigrants from politically antagonistic states
+should face more discrimination than immigrants from economically
+equivalent but politically neutral states, and that this excess
+discrimination should track political relations over
+time---thawing relations should shift the perceived $\bar{c}_g$
+toward economic fundamentals.
+
 % =============================================================================
 \section{Empirical Strategy}
 \label{sec:empirical}
 % =============================================================================
 
-\subsection{Distinctive empirical predictions}
+\subsection{Distinctive empirical prediction}
 
-The model generates predictions that are observationally
-distinguishable from existing discrimination models. Five are
-particularly distinctive.
+The model generates a prediction that is observationally
+distinguishable from existing discrimination models.
 
-\textbf{Prediction 1: Non-linear convergence dynamics near
+\textbf{Non-linear convergence dynamics near
 $\gamma^*$.} Standard linear mobility models predict monotone
 convergence of group economic position toward the population mean.
 The present model predicts non-linear dynamics: escape time from
@@ -1886,92 +2131,20 @@ $\gamma^*$ should converge quickly. This power-law pattern is
 observationally distinguishable from the exponential convergence
 predicted by linear models.
 
-\textbf{Prediction 2: Soft-marker sensitivity gradient.}
-Proposition~\ref{prop:graded} predicts continuous variation in
-social avoidance as a function of marker ambiguity. Faint accent
-generates less avoidance than strong accent; ambiguous appearance
-generates less avoidance than unambiguous appearance. This is
-testable through information provision experiments:
-\citet{BertrandMullainathan2004}-style audit studies with
-marker-strength variation (systematically varying CV cues from
-weakly to strongly group-coded) can identify the gradient.
-
-\textbf{Prediction 3: Shadow market amplification under legal
-tightening.} Proposition~\ref{prop:shadow} predicts that stricter
-anti-discrimination law raises the return to informal discrimination
-networks. This is testable using platform data: if formal admission
-restrictions are tightened (anti-discrimination law extended to
-rental platforms), the model predicts that informal proxies for
-composition---review scores, response rates, stated amenity
-preferences---should increase in their discriminatory content in
-compensation, rather than falling.
-
-\textbf{Prediction 4: Marker salience dominates conflict history.}
-Corollary~\ref{cor:salience-threshold} predicts that integration
-speed depends more strongly on phenotypic distance from the host
-group than on the severity of historical conflict. Groups with
-low $s_g$ and high conflict history should integrate faster than
-groups with high $s_g$ and low conflict history. This is directly
-testable by comparing integration trajectories---intermarriage
-rates, residential segregation indices, occupational
-convergence---across immigrant groups in the same host country,
-controlling for initial economic position and holding the
-institutional environment fixed.
-
-\textbf{Prediction 5: UK--US composition of discrimination.}
-The space-time sufficiency structure
-(Remark~\ref{rem:spacetime}) generates a cross-country prediction.
-The UK has a deep pre-existing class closure trap with a rich
-temporal marker space: accent, school, dress, and linguistic
-register encode class history with high precision, so the temporal
-dimension $\bar{c}_g$ does more of the discriminatory work. A
-high-class foreigner whose temporal markers read correctly within
-the British system receives a high initial prior regardless of
-race---race is a second-order modifier. The US has a shallower
-class marker space: fewer independent temporal markers are available
-to override the spatial (racial) signal, so the spatial dimension
-$s_g$ carries more of the informational load. The prediction is
-that a high-class foreigner from a racially stigmatised group
-should experience more racial friction in the US than in the UK,
-but more class friction in the UK than in the US. Total
-discrimination may be similar in magnitude but differs in
-composition. The shadow information market
-(Proposition~\ref{prop:shadow}) is organised around temporal
-signals in the UK (the ``old boy network'') and spatial signals
-in the US.
-
 \subsection{Data sources}
 
-For Prediction 1, intergenerational mobility and social network
-composition data: the British Cohort Study (BCS70) and
-\textit{Understanding Society} (UKHLS) provide multigenerational
-tracking with detailed neighbourhood composition data for the UK.
-The Panel Study of Income Dynamics (PSID) provides equivalent
-coverage for the US. Cross-national comparison of group-level
-convergence rates against the $(\gamma - \gamma^*)^{-1/2}$ scaling
-law is feasible using harmonised OECD mobility data.
-
-For Prediction 2, the European Social Survey \citep{ESS2020}
-provides harmonised measures of stated beliefs about economic impact
-of immigrants and minorities (proxies for $\bar{c}_g$), own income,
-education, and cross-national variation in economic history.
-Proposition~\ref{prop:income} predicts that own income moderates
-discriminatory attitudes; Proposition~\ref{prop:education} predicts
-education operates through precision rather than level. Cross-country
-variation in economic histories (instrumented by historical shocks
-following \citealt{NunnWantchekon2011}) identifies
-Proposition~\ref{prop:history}.
-
-For Prediction 3, platform data with a natural experiment in
-anti-discrimination law application. Airbnb data with the extension
-of the Fair Housing Act to short-term rentals in the US provides
-a candidate setting; \citet{EdelmanetalAirbnb} document the
-pre-law racial gradient in acceptance rates using audit study
-methodology.
+Intergenerational mobility and social network composition data: the
+British Cohort Study (BCS70) and \textit{Understanding Society}
+(UKHLS) provide multigenerational tracking with detailed
+neighbourhood composition data for the UK. The Panel Study of
+Income Dynamics (PSID) provides equivalent coverage for the US.
+Cross-national comparison of group-level convergence rates against
+the $(\gamma - \gamma^*)^{-1/2}$ scaling law is feasible using
+harmonised OECD mobility data.
 
 \subsection{Identification challenges}
 
-Four endogeneity problems require attention.
+Two endogeneity problems require attention.
 
 \textit{Closure feedback}: discrimination in period $t$ affects
 group economic position in period $t+1$, which affects the prior,
@@ -1980,23 +2153,11 @@ that affected group composition before the sample period
 (\citealt{NunnWantchekon2011} for Africa; colonial-era occupational
 restrictions in the UK context).
 
-\textit{Own income endogeneity}: own income predicts discriminatory
-attitudes but is also determined by the discrimination equilibrium.
-Instrument: Bartik shift-share constructed from local industry
-composition and national industry employment growth
-\citep{Bartik1991}.
-
 \textit{Prior measurement}: $\bar{c}_g$ is latent. Use
 multiple proxy measures (stated beliefs about immigrant economic
 contribution, neighbourhood satisfaction, social network diversity)
 and exploit variation in social desirability pressure across survey
 modes as an IV for the measurement error.
-
-\textit{Selection into interaction}: agents who report discriminatory
-attitudes may self-select out of cross-group interactions, making
-the composition of observed interactions non-random. Heckman
-selection correction with instruments for encounter probability
-(proximity of group residential clusters, commuting patterns).
 
 % =============================================================================
 \section{Conclusion}
@@ -2239,12 +2400,6 @@ Arrow, K.~J. (1973).
 \newblock In O.~Ashenfelter and A.~Rees (eds.), \textit{Discrimination in
 Labor Markets}. Princeton University Press.
 
-\bibitem[Bartik(1991)]{Bartik1991}
-Bartik, T.~J. (1991).
-\newblock \textit{Who Benefits from State and Local Economic Development
-Policies?}
-\newblock W.E.~Upjohn Institute.
-
 \bibitem[Baudrillard(1968)]{Baudrillard1968}
 Baudrillard, J. (1968).
 \newblock \textit{Le Syst\`{e}me des objets}.
@@ -2273,11 +2428,6 @@ Bonilla-Silva, E. (1997).
 \newblock Rethinking racism: Toward a structural interpretation.
 \newblock \textit{American Sociological Review}, 62(3):465--480.
 
-\bibitem[Bertrand and Mullainathan(2004)]{BertrandMullainathan2004}
-Bertrand, M. and S.~Mullainathan (2004).
-\newblock Are Emily and Greg more employable than Lakisha and Jamal?
-\newblock \textit{American Economic Review}, 94(4):991--1013.
-
 \bibitem[Bordalo et al.(2016)]{BordaloEtal2016}
 Bordalo, P., K.~Coffman, N.~Gennaioli, and A.~Shleifer (2016).
 \newblock Stereotypes.
@@ -2287,6 +2437,11 @@ Bordalo, P., K.~Coffman, N.~Gennaioli, and A.~Shleifer (2016).
 Coate, S. and G.~C. Loury (1993).
 \newblock Will affirmative-action policies eliminate negative stereotypes?
 \newblock \textit{American Economic Review}, 83(5):1220--1240.
+
+\bibitem[Coetzee(1999)]{Coetzee1999}
+Coetzee, J.~M. (1999).
+\newblock \textit{Disgrace}.
+\newblock Secker \& Warburg.
 
 \bibitem[Currarini et al.(2009)]{CurrariniEtal2009}
 Currarini, S., M.~O. Jackson, and P.~Pin (2009).
@@ -2313,11 +2468,10 @@ De~Finetti, B. (1964).
 \newblock (Original: La pr\'{e}vision: ses lois logiques, ses sources
 subjectives, \textit{Annales de l'Institut Henri Poincar\'{e}}, 1937.)
 
-\bibitem[ESS(2020)]{ESS2020}
-European Social Survey (2020).
-\newblock \textit{ESS Round 9 Data}.
-\newblock Data file edition 3.1. NSD -- Norwegian Centre for Research Data,
-Norway.
+\bibitem[Fanon(1952)]{Fanon1952}
+Fanon, F. (1952).
+\newblock \textit{Peau noire, masques blancs} [Black Skin, White Masks].
+\newblock \'{E}ditions du Seuil, Paris. English translation: Grove Press, 1967.
 
 \bibitem[Galbraith(1952)]{Galbraith1952}
 Galbraith, J.~K. (1952).
@@ -2367,6 +2521,11 @@ Loury, G.~C. (2002).
 \newblock \textit{The Anatomy of Racial Inequality}.
 \newblock Harvard University Press.
 
+\bibitem[Naipaul(1967)]{Naipaul1967}
+Naipaul, V.~S. (1967).
+\newblock \textit{The Mimic Men}.
+\newblock Andr\'{e} Deutsch.
+
 \bibitem[Nunn and Wantchekon(2011)]{NunnWantchekon2011}
 Nunn, N. and L.~Wantchekon (2011).
 \newblock The slave trade and the origins of mistrust in Africa.
@@ -2391,12 +2550,6 @@ Veblen, T. (1899).
 Du~Bois, W.~E.~B. (1935).
 \newblock \textit{Black Reconstruction in America}.
 \newblock Harcourt, Brace and Company, New York.
-
-\bibitem[Edelman et al.(2017)]{EdelmanetalAirbnb}
-Edelman, B., M.~Luca, and D.~Svirsky (2017).
-\newblock Racial discrimination in the sharing economy: Evidence from a field
-experiment.
-\newblock \textit{American Economic Journal: Applied Economics}, 9(2):1--22.
 
 \bibitem[Walley(1991)]{Walley1991}
 Walley, P. (1991).

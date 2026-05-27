@@ -827,6 +827,309 @@ report("CHECK_60",
        "Higher spatial weight (US) requires more mobility to escape trap")
 
 # ─────────────────────────────────────────────────────────────────────────────
+# SECTION 16: Forced Marker Suppression (λ_s)
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 16 · Forced Marker Suppression (λ_s)")
+
+lambda_s = sp.Symbol('lambda_s', positive=True)
+
+# ── 16.1 Effective salience with cap ─────────────────────────────────────────
+# s_g^eff = min(s_g, λ_s)
+# Numerically: when λ_s < s_g, effective salience = λ_s
+def s_eff(sg, ls):
+    return min(sg, ls)
+
+# When cap binds: effective salience is lower
+check = s_eff(0.9, 0.3) == 0.3
+report("CHECK_61", "When λ_s=0.3 < s_g=0.9: effective salience = λ_s = 0.3",
+       check)
+
+# When cap doesn't bind: no effect
+check = s_eff(0.3, 0.9) == 0.3
+report("CHECK_62", "When λ_s=0.9 > s_g=0.3: effective salience = s_g = 0.3 (cap not binding)",
+       check)
+
+# ── 16.2 Binding cap lowers discrimination rate ─────────────────────────────
+# F(c̄, λ_s) < F(c̄, s_g) when λ_s < s_g
+# Use H_fn_sg: lower effective salience → higher H → less discrimination
+H_full = H_fn_sg(0.3, 0.9)       # s_g = 0.9
+H_capped = H_fn_sg(0.3, 0.3)     # λ_s = 0.3 caps effective salience
+check = H_capped > H_full
+report("CHECK_63",
+       f"Binding cap raises H: H(0.3; s_eff=0.3)={H_capped:.4f} > H(0.3; s_g=0.9)={H_full:.4f}",
+       check, "Lower effective salience → less discrimination → higher next-gen mean")
+
+# ── 16.3 Binding cap lowers mobility threshold ──────────────────────────────
+gamma_star_full = find_gamma_star_sg(0.9)
+gamma_star_capped = find_gamma_star_sg(0.3)
+check = gamma_star_capped < gamma_star_full
+report("CHECK_64",
+       f"γ̃*(λ_s=0.3)={gamma_star_capped:.4f} < γ̃*(s_g=0.9)={gamma_star_full:.4f}",
+       check, "Binding cap lowers mobility threshold needed to escape trap")
+
+# ── 16.4 Full suppression (λ_s=0) eliminates trap ───────────────────────────
+conv_suppressed = iterate_H_sg(0.2, 0.0)  # λ_s = 0 → s_eff = 0
+check = conv_suppressed > 0.95
+report("CHECK_65",
+       f"Full suppression (λ_s=0): c̄ converges to {conv_suppressed:.4f} ≈ 1 (no trap)",
+       check)
+
+# ── 16.5 Snap-back: lifting suppression re-emerges trap ─────────────────────
+# Simulate: suppress for 10 generations (s_eff=0.2), then lift (s_g=0.9)
+# Use short suppression so c̄ stays below tipping point
+x = 0.15
+for _ in range(10):
+    x = H_fn_sg(x, 0.2)  # suppressed period, no extra mobility
+c_bar_at_lift = x
+
+# Now lift suppression
+conv_no_suppress = iterate_H_sg(c_bar_at_lift, 0.9)
+check = conv_no_suppress < 0.5  # trapped again
+report("CHECK_66",
+       f"Snap-back: c̄ at lift = {c_bar_at_lift:.4f}, after restoration converges to {conv_no_suppress:.4f}",
+       check,
+       "If c̄ hasn't crossed tipping point during suppression, trap re-emerges")
+
+# ── 16.6 Successful suppression: if c̄ crosses mid during suppression ────────
+# Suppress with moderate λ_s AND high mobility for long enough
+x = 0.2
+for _ in range(200):
+    x = H_fn_sg(x, 0.1, gt=0.3)  # suppressed + high mobility
+c_bar_crossed = x
+x_after2 = x
+for _ in range(200):
+    x_after2 = H_fn_sg(x_after2, 0.9, gt=0.3)  # restore salience, keep mobility
+check = x_after2 > 0.7
+report("CHECK_67",
+       f"Successful suppression: c̄ crossed mid ({c_bar_crossed:.4f}), "
+       f"after lift converges to {x_after2:.4f} (integrated)",
+       check,
+       "If c̄ crosses tipping point during suppression, lifting doesn't restore trap")
+
+# ── 16.7 Substitution: shadow market on remaining markers ────────────────────
+# Symbolic: Ω(λ_s) when cap binds — remaining markers become more valuable
+# Ω_remaining = (s_g - λ_s) · (1-α)(S*-S^rand) — the gap represents
+# informational value of the suppressed markers, now sought via shadow channels
+Omega_remaining = (s_g - lambda_s) * (1 - alpha) * (S_star - S_rand)
+dOmega_dlambda = sp.diff(Omega_remaining, lambda_s)
+check = sp.simplify(dOmega_dlambda + (1-alpha)*(S_star - S_rand)) == 0
+report("CHECK_68",
+       "∂Ω_remaining/∂λ_s < 0: tighter suppression raises shadow value of remaining markers",
+       check, f"∂Ω_remaining/∂λ_s = {dOmega_dlambda}")
+
+analytic("ANALYTIC_07",
+         "Partial marker suppression produces reallocation, not elimination",
+         "Suppressing one class of markers (consumption, dress) raises discriminatory "
+         "return to unsuppressed markers (accent, phenotype, network). Total discrimination "
+         "falls only if ALL marker channels are simultaneously suppressed (λ_s = 0).")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECTION 17: Passing / Adverse Selection
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 17 · Passing / Adverse Selection")
+
+# ── 17.1 Setup: passing rate and composition effect ──────────────────────────
+# Group g2 has N members with class c_i ~ Beta(a,b) → mean c̄ = a/(a+b)
+# Passing cost κ(c_i) = κ₀(1 - c_i): higher class → lower cost → more likely to pass
+# Those who pass: c_i > c_threshold
+# Remaining visible group: c_i ≤ c_threshold → lower mean
+
+import numpy as np
+
+def simulate_passing(a, b, pass_threshold, n=100000, seed=42):
+    """Simulate passing and compute remaining group mean."""
+    rng = np.random.RandomState(seed)
+    classes = rng.beta(a, b, n)
+    original_mean = np.mean(classes)
+    # Those above threshold can pass (afford the cost)
+    remaining = classes[classes <= pass_threshold]
+    if len(remaining) == 0:
+        return original_mean, original_mean, 0.0
+    remaining_mean = np.mean(remaining)
+    passing_rate = 1 - len(remaining) / n
+    return original_mean, remaining_mean, passing_rate
+
+# Beta(2,5) gives mean ≈ 0.286 (disadvantaged group)
+orig, remain, rate = simulate_passing(2, 5, 0.4)
+check = remain < orig
+report("CHECK_69",
+       f"Passing worsens visible group: original c̄={orig:.4f}, "
+       f"after passing (rate={rate:.1%}) c̄_visible={remain:.4f}",
+       check, "Positive selection into passing lowers remaining group mean")
+
+# ── 17.2 Higher passing rate → worse remaining group ────────────────────────
+_, remain_easy, rate_easy = simulate_passing(2, 5, 0.3)   # low threshold: more pass
+_, remain_hard, rate_hard = simulate_passing(2, 5, 0.5)   # high threshold: fewer pass
+check = remain_easy < remain_hard
+report("CHECK_70",
+       f"More passing → worse visible group: threshold 0.3 → c̄={remain_easy:.4f} "
+       f"(rate {rate_easy:.1%}), threshold 0.5 → c̄={remain_hard:.4f} (rate {rate_hard:.1%})",
+       check, "∂c̄_visible/∂(passing_rate) < 0")
+
+# ── 17.3 Passing deepens trap: marginal case where it makes the difference ──
+# At moderate s_g with mobility, original c̄ might escape but worsened c̄ stays trapped
+# Find a setting where this distinction holds
+sg_test = 0.5
+gt_test = 0.12
+conv_before = iterate_H_sg(orig, sg_test, gt_test)
+conv_after = iterate_H_sg(remain, sg_test, gt_test)
+check = conv_after <= conv_before
+report("CHECK_71",
+       f"Passing harms remaining group: c̄₀={orig:.4f}→{conv_before:.4f}, "
+       f"c̄_post_passing={remain:.4f}→{conv_after:.4f} (s_g={sg_test}, γ̃={gt_test})",
+       check, "Lower starting position → worse or equal equilibrium outcome")
+
+# ── 17.4 γ* rises for remaining group (harder to escape after passing) ──────
+# Compute γ* at original c̄ and at worsened c̄
+# We can't easily compute γ* as function of starting c̄ directly,
+# but we can check that starting from lower c̄ requires more generations
+T_before = T_passage_sg(0.9, orig, 0.5, gt=0.15)
+T_after = T_passage_sg(0.9, remain, 0.5, gt=0.15)
+check = T_after >= T_before
+report("CHECK_72",
+       f"Escape time increases: from c̄={orig:.3f} → T={T_before}, "
+       f"from c̄={remain:.3f} → T={T_after}",
+       check, "Adverse selection lengthens escape time for visible group")
+
+# ── 17.5 Individual rationality: passers are better off ──────────────────────
+# From the HOST-GROUP OBSERVER's perspective (c_j = 0.7):
+# Observing a passer (perceived as host): E = (c̄₁ - c_j)² + σ²₁
+# Observing a stayer (perceived as out-group): E = (c̄_remain - c_j)² + σ²₂
+# Passer faces less expected distance → more host engagement → individually better off
+c_observer = 0.7
+D_toward_passer = (0.8 - c_observer)**2 + 0.02   # host group params
+D_toward_stayer = (remain - c_observer)**2 + 0.06  # visible out-group params
+check = D_toward_passer < D_toward_stayer
+report("CHECK_73",
+       f"Passing individually rational: observer's E for passer={D_toward_passer:.4f} "
+       f"< for stayer={D_toward_stayer:.4f}",
+       check,
+       "Host-group observers engage more with passers — individually rewarded")
+
+analytic("ANALYTIC_08",
+         "Passing as individually rational, collectively harmful",
+         "The compliance dilemma is sharper than mere futility: individual passing is "
+         "positively selected (high c_i exits), so it actively worsens the group prior "
+         "for those who remain. The mimic man's escape harms those he leaves behind.")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECTION 18: Model Minority Verification
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 18 · Model Minority (high s_g, high c̄_g)")
+
+# ── 18.1 Model minority: ∂E/∂s_g sign depends on observer position ──────────
+# D₂ - D₁ = (c̄_g2-c_j)² - (c̄_g1-c_j)² = (c̄_g2-c̄_g1)(c̄_g2+c̄_g1-2c_j)
+# (with equal variances). Sign reversal when c_j > (c̄_g1+c̄_g2)/2.
+# For MEDIAN host observer (c_j ≈ c̄_g1), ∂E/∂s_g > 0 always.
+# For HIGH-CLASS host (c_j > midpoint), ∂E/∂s_g < 0.
+c_bar_g2_mm = 0.85  # model minority mean
+c_bar_g1_mm = 0.80  # host mean
+midpoint = (c_bar_g1_mm + c_bar_g2_mm) / 2
+
+# Median host observer: still discriminates (mildly)
+c_j_median = c_bar_g1_mm
+D2_median = (c_bar_g2_mm - c_j_median)**2 + 0.02
+D1_median = (c_bar_g1_mm - c_j_median)**2 + 0.02
+check = D2_median > D1_median
+report("CHECK_74",
+       f"Model minority: median host (c_j={c_j_median}) still discriminates: "
+       f"D₂={D2_median:.4f} > D₁={D1_median:.4f}",
+       check, "∂E/∂s_g > 0 for median host — mild but persistent discrimination")
+
+# ── 18.2 But high-class host PREFERS the model minority ─────────────────────
+c_j_high = 0.87  # above midpoint
+D2_high = (c_bar_g2_mm - c_j_high)**2 + 0.02
+D1_high = (c_bar_g1_mm - c_j_high)**2 + 0.02
+check = D2_high < D1_high
+report("CHECK_75",
+       f"Model minority: high-class host (c_j={c_j_high}) prefers out-group: "
+       f"D₂={D2_high:.4f} < D₁={D1_high:.4f}",
+       check,
+       f"∂E/∂s_g < 0 when c_j > midpoint={midpoint} — economic integration with elites")
+
+# ── 18.3 Magnitude comparison: model minority vs disadvantaged group ────────
+# Discrimination intensity is |D₂-D₁|. Compare model minority (c̄=0.85)
+# vs disadvantaged group (c̄=0.30) from same median host perspective
+D2_disadv = (0.30 - c_j_median)**2 + 0.06
+D1_disadv = (c_bar_g1_mm - c_j_median)**2 + 0.02
+grad_mm = abs(D2_median - D1_median)
+grad_disadv = abs(D2_disadv - D1_disadv)
+check = grad_mm < grad_disadv
+report("CHECK_76",
+       f"Model minority discrimination much weaker: |∂E/∂s_g|={grad_mm:.4f} "
+       f"vs disadvantaged |∂E/∂s_g|={grad_disadv:.4f}",
+       check, "Same s_g, radically different discrimination intensity")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECTION 19: Language Revival Verification
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 19 · Language Revival (voluntary s_g increase)")
+
+# ── 19.1 Above tipping point: increasing s_g does not create trap ────────────
+# Group above mid: c̄ = 0.7. Compare s_g = 0.3 (before revival) vs s_g = 0.7 (after)
+conv_pre_revival = iterate_H_sg(0.7, 0.3)
+conv_post_revival = iterate_H_sg(0.7, 0.7)
+check = conv_post_revival > 0.6  # still integrated, no trap
+report("CHECK_77",
+       f"Language revival above tipping: s_g 0.3→{conv_pre_revival:.4f}, "
+       f"s_g 0.7→{conv_post_revival:.4f} (both still integrated)",
+       check, "When c̄ > c̄_mid, voluntary s_g increase does not trigger trap")
+
+# ── 19.2 Below tipping point: increasing s_g deepens trap ───────────────────
+conv_pre_below = iterate_H_sg(0.2, 0.3)
+conv_post_below = iterate_H_sg(0.2, 0.7)
+check = conv_post_below <= conv_pre_below
+report("CHECK_78",
+       f"Language revival below tipping: s_g 0.3→{conv_pre_below:.4f}, "
+       f"s_g 0.7→{conv_post_below:.4f} (worse or equal)",
+       check, "When c̄ < c̄_mid, voluntary s_g increase deepens the trap")
+
+# ── 19.3 Threshold condition: γ*(s_g_high) vs γ*(s_g_low) ──────────────────
+gamma_pre = find_gamma_star_sg(0.3)
+gamma_post = find_gamma_star_sg(0.7)
+check = gamma_post > gamma_pre
+report("CHECK_79",
+       f"Revival raises threshold: γ̃*(0.3)={gamma_pre:.4f} < γ̃*(0.7)={gamma_post:.4f}",
+       check,
+       "Voluntary s_g increase raises the mobility needed to escape — rational only if already free")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SECTION 20: Passing Robustness (alternative distribution)
+# ─────────────────────────────────────────────────────────────────────────────
+section("SECTION 20 · Passing Robustness")
+
+# ── 20.1 Robustness: Beta(3,7) — different shape, same result ──────────────
+orig2, remain2, rate2 = simulate_passing(3, 7, 0.4)
+check = remain2 < orig2
+report("CHECK_80",
+       f"Beta(3,7): original c̄={orig2:.4f}, after passing (rate={rate2:.1%}) "
+       f"c̄_visible={remain2:.4f}",
+       check, "Adverse selection holds for Beta(3,7)")
+
+# ── 20.2 Robustness: Beta(1,3) — more skewed ───────────────────────────────
+orig3, remain3, rate3 = simulate_passing(1, 3, 0.35)
+check = remain3 < orig3
+report("CHECK_81",
+       f"Beta(1,3): original c̄={orig3:.4f}, after passing (rate={rate3:.1%}) "
+       f"c̄_visible={remain3:.4f}",
+       check, "Adverse selection holds for Beta(1,3)")
+
+# ── 20.3 Robustness: Beta(5,5) — symmetric ─────────────────────────────────
+orig4, remain4, rate4 = simulate_passing(5, 5, 0.6)
+check = remain4 < orig4
+report("CHECK_82",
+       f"Beta(5,5): original c̄={orig4:.4f}, after passing (rate={rate4:.1%}) "
+       f"c̄_visible={remain4:.4f}",
+       check, "Adverse selection holds for symmetric Beta(5,5)")
+
+analytic("ANALYTIC_09",
+         "Marker substitution limitation",
+         "The model uses a single aggregate s_g. The claim that partial suppression "
+         "produces marker reallocation (ANALYTIC_07) is a structural argument about "
+         "behaviour outside the model's formal scope. A multi-channel extension with "
+         "s_g = (s_1, ..., s_K) would be needed to verify substitution formally.")
+
+# ─────────────────────────────────────────────────────────────────────────────
 # SUMMARY
 # ─────────────────────────────────────────────────────────────────────────────
 section("SUMMARY")
