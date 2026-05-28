@@ -202,17 +202,24 @@ an agent revises their probability distribution over a partition
 $\{g_1, \ldots, g_K\}$ (group memberships) without receiving a
 definitive signal about which partition element is true. The revision
 is driven by a direct reassignment of the partition weights
-$P'(g_k)$, not by a likelihood ratio. Crucially, the conditional probabilities
+$P'(g_k)$, not by a likelihood ratio---because a soft signal
+carries no likelihood function $P(m \mid g_k)$ to condition on.
+Crucially, the conditional probabilities
 $F_{g_k}$---the group-level priors over economic class---are
-held fixed during the revision. Only the weights $P'(g_k)$ change.
+held fixed during the revision, not by stipulation but because the
+soft signal provides no information capable of revising them. Only
+the weights $P'(g_k)$ change.
 
 This rigidity condition is the formal expression of the
 ``exception to the rule'' phenomenon: an individual counter-example
 (a high-class member of a stigmatised group) shifts $P'(g_k)$---the
 observer attributes the individual to a different group---but does
 \emph{not} update $F_{g_k}$ for the group as a whole. The
-stereotype persists. This emerges as a theorem of the updating rule,
-not as an assumption about preferences or cognitive bias.
+stereotype persists. This emerges as a theorem of the updating rule
+under soft signals, not as an assumption about preferences or
+cognitive bias, and not as a free choice to leave priors
+unrevised---where signals are hard enough to carry a likelihood,
+Bayesian updating applies and the prior does move.
 
 The paper makes five contributions. First, we provide a formal
 probability-theoretic microfoundation for Loury's
@@ -407,7 +414,7 @@ extension. \citet{Galbraith1952} argues that market power generates
 countervailing power on the other side of the market: as a
 stigmatised group's aggregate purchasing power grows, corporate
 interests partially align with their inclusion. In the model this
-corresponds to the exclusion threshold
+corresponds to the exclusion threshold on the group prior,
 $\bar{c}_g^{\text{excl}}$ (Proposition~\ref{prop:exclusion}): as the
 group's prior rises, the platform's profit motive eventually
 generates voluntary partial integration. But countervailing power
@@ -526,7 +533,7 @@ exchangeable $[0,1]$-valued random variables, the De~Finetti
 representation theorem \citep{DeFinetti1964} guarantees a mixing
 measure over possible group means. The natural parametric family
 is the Beta distribution $\mathrm{Beta}(\bar{c}_g \nu,\,
-(1 - \bar{c}_g)\nu)$ with mean $\bar{c}_g$ and variance
+(1 - \bar{c}_g)\nu)$ with mean equal to the group prior $\bar{c}_g$ and variance
 \begin{equation}
   \sigma_g^2 = \frac{\bar{c}_g(1 - \bar{c}_g)}{1 + \nu}
   \label{eq:beta-var}
@@ -562,7 +569,9 @@ Standard Bayesian updating requires such a likelihood function;
 Jeffrey conditioning does not.
 
 \textbf{Rigidity condition.} The conditional probabilities
-$F_{g_k}$ are held fixed during the Jeffrey revision. Only
+$F_{g_k}$ remain fixed during the Jeffrey revision---not because the
+model assumes them constant, but because a soft marker carries no
+likelihood $P(m \mid g_k)$ through which they could be revised. Only
 $P'(g_k)$ changes. Consequence: an individual counter-example shifts
 $P'(g_k)$---the individual is attributed to a different group---but
 does \emph{not} update $F_g$. This is the formal
@@ -670,7 +679,8 @@ that enters the model is either a spatial property of the individual
 observable at the encounter or encodes temporal information
 accumulated across the group's economic history. Consequently,
 spatial interventions (reducing marker visibility through assimilation
-or ``passing'') and temporal interventions (raising $\gamma$ above
+or ``passing'') and temporal interventions (raising the mobility
+parameter $\gamma$ above its bifurcation threshold
 $\gamma^*$ through mobility programmes) are categorically different
 and cannot substitute for each other.} Marker salience $s_g$ is a
 \emph{spatial} property: it is determined by what the observer
@@ -686,8 +696,9 @@ sustained discrimination requires both spatial identifiability
 \bar{c}_g^{\mathrm{mid}}$).
 
 The engagement decisions aggregate into an intergenerational dynamic
-system. If fraction $\phi^t$ of agents discriminate against group
-$g$ in generation $t$, the next generation's prior evolves as:
+system. If a fraction $\phi^t$ of agents (the discrimination rate)
+discriminate against group
+$g$ in generation $t$, the group prior evolves as:
 \begin{equation}
   \bar{c}_g^{t+1} =
   \underbrace{\bar{c}_g^t(1 - \delta \phi^t)}_{\text{exclusion erodes prior}}
@@ -706,7 +717,7 @@ $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, so the mobility term
 becomes $\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ where
 $\tilde{\gamma} = \gamma/(1+\nu)$ is the effective mobility
 parameter. This term is maximised at
-$\bar{c}_g = 1/2$ (maximum heterogeneity) and vanishes at $\bar{c}_g = 0$
+group prior $\bar{c}_g = 1/2$ (maximum heterogeneity) and vanishes at $\bar{c}_g = 0$
 and $\bar{c}_g = 1$ (homogeneous group). It captures
 intergenerational regression to the group mean: children of
 high-class families face some probability of downward mobility, and
@@ -725,7 +736,7 @@ invisible and no discrimination fires. The composed map is:
 \end{equation}
 
 The boundary conditions $H(0; s_g) = \mu > 0$ and
-$H(1; s_g) = 1$ hold for all $s_g$, since $F(1) = 0$ and the
+$H(1; s_g) = 1$ hold for all marker salience $s_g$, since $F(1) = 0$ and the
 $\tilde{\gamma}$ terms cancel at $\bar{c}_g = 1$.
 
 \begin{definition}[Closure Equilibrium]
@@ -872,7 +883,7 @@ There exists $\gamma^* > 0$ such that:
 
 \begin{proof}[Proof sketch]
 At $\gamma = 0$, the closure trap exists
-(Proposition~\ref{prop:class-closure}). As $\gamma$ increases, the
+(Proposition~\ref{prop:class-closure}). As the mobility parameter $\gamma$ increases, the
 mobility term raises $H(\bar{c}_g)$ in the interior, shrinking
 the region where $\Psi < 0$. At $\gamma = \gamma^*$, the region
 vanishes: the low fixed point and the tipping point merge,
@@ -902,7 +913,7 @@ economic positions.
 \end{corollary}
 
 \begin{proof}[Proof sketch]
-The composed map $H(\bar{c}_g;\, s_g)$ is decreasing in $s_g$ on the
+The composed map $H(\bar{c}_g;\, s_g)$ is decreasing in marker salience $s_g$ on the
 interior of $[0,1]$ (since $\partial G/\partial s_g = -\delta\phi
 \bar{c}_g < 0$). A higher $s_g$ lowers $H$ in the interior, deepening
 the region where $\Psi < 0$ and requiring higher $\tilde{\gamma}$ to
@@ -925,7 +936,7 @@ economic history ($\bar{c}_{g_2}^0$) and marker salience ($s_g$).
 A group with low $\bar{c}_{g_2}^0$ but also low $s_g$---phenotypically
 similar to the host, with mutable cultural markers---may escape
 the trap rapidly because the discrimination channel fires weakly.
-A group with comparable $\bar{c}_{g_2}^0$ but high $s_g$---visibly
+A group with comparable $\bar{c}_{g_2}^0$ but high marker salience $s_g$---visibly
 distinct, with immutable phenotypic markers---faces a structurally
 harder path. The Irish in England illustrate the former: despite a
 history of famine, colonial extraction, and armed conflict,
@@ -989,7 +1000,8 @@ genuine integration is achieved
 destabilisation channel through which inclusion of the out-group can
 trigger closure dynamics within the host group
 (Proposition~\ref{prop:spillover}); and a welfare decomposition
-showing that the informational loss from rigid priors is irreducible
+showing that the informational loss from rigid group priors
+$\bar{c}_g$ is irreducible
 by any policy that leaves the soft-signal structure intact
 (Corollary~\ref{cor:irreducibility}).
 
@@ -1129,7 +1141,7 @@ platform---of which the informational component is structurally
 irreducible by any policy that operates within the soft-signal
 environment. Anti-discrimination law reduces allocative loss but
 amplifies the shadow market; only mobility programmes that push
-$\gamma$ above $\gamma^*$ simultaneously eliminate allocative and
+the mobility parameter $\gamma$ above the bifurcation threshold $\gamma^*$ simultaneously eliminate allocative and
 dynamic loss.
 
 \textbf{Case 1: Beliefs accurate.} Welfare loss arises from
@@ -1162,10 +1174,12 @@ just those involving the excluded group.
 
 $\mathcal{L}_{\text{dyn}}$ is the intergenerational compounding
 of exclusion. Suppressed mobility lowers the group's prior across
-generations (the $\delta\phi^t$ term in equation~\ref{eq:dynamic}),
+generations (the $\delta\phi^t$ term in equation~\ref{eq:dynamic},
+the product of the exclusion cost $\delta$ and the discrimination
+rate $\phi$),
 which sustains exclusion, which compounds the loss. This component
 grows with the distance below the critical mobility threshold
-$\gamma^*$ and falls primarily on future generations of the
+(bifurcation point) $\gamma^*$ and falls primarily on future generations of the
 stigmatised group.
 
 $\mathcal{L}_{\text{platform}}$ is the cost of the shadow
@@ -1203,7 +1217,7 @@ $\mathcal{L}_{\text{info}}$ arises from the gap between the
 Jeffrey posterior and the Bayesian posterior, which is
 the distributional gap $\rho \cdot \mathrm{dKL}(F_g \| F_g^{\mathrm{Bayes}})$---the component of belief error that
 the rigidity condition prevents from updating. Policies in $\Phi$
-alter $\gamma$, $\sigma$, or $\delta$ but not $\rho$ (the weight
+alter $\gamma$, $\sigma$, or $\delta$ but not the rigidity parameter $\rho$ (the weight
 on the group prior in the revision rule) or the group-level
 conditional probabilities $F_g$. The gap is therefore
 invariant to all $\phi \in \Phi$, and $\mathcal{L}_{\text{info}} >
@@ -1290,8 +1304,10 @@ parameters themselves (\S\ref{subsec:cluster-parameters}).
 
 The mechanism's boundary is sharp: it requires marker visibility.
 Anonymous digital environments---text-only forums, pseudonymous
-platforms---are settings where $s_g \approx 0$ by design, and the
-model predicts zero discrimination regardless of $\bar{c}_g$
+platforms---are settings where marker salience $s_g \approx 0$ by
+design, and the
+model predicts zero discrimination regardless of the group prior
+$\bar{c}_g$
 (Proposition~\ref{prop:salience}). When platforms introduce
 identity-revealing features---real names, profile photographs,
 video---$s_g$ jumps discontinuously and discrimination emerges
@@ -1318,11 +1334,46 @@ normative starting point.
 \label{subsec:cluster-produce}
 
 This cluster traces the active production of the belief architecture
-by economic actors pursuing private returns. Restaurants, urban
-developers, and institutional gatekeepers do not encounter a
-pre-existing social order; they construct one. The conflict they
-generate is not a market failure but an equilibrium outcome of their
-incentives.
+by economic actors pursuing private returns. Cultural markets,
+restaurants, urban developers, and institutional gatekeepers do not
+encounter a pre-existing social order; they construct one. The
+conflict they generate is not a market failure but an equilibrium
+outcome of their incentives.
+
+The mechanism extends from persons to objects without additional
+formal apparatus, because both occupy positions in the same sign
+system grounded in economic history. \citet{Douglas1966} establishes
+that pollution and disgust are not reactions to intrinsic properties
+but to categorical position: dirt is ``matter out of place'' in a
+classification system, and the disgust response functions to police
+categorical boundaries. A cultural object---hilsa curry, chicken
+feet, fermented soybean---carries a low $\bar{c}_g$ in the host
+culture's prior; it is ``out of place'' when it appears in a
+high-$\bar{c}_g$ context, and the disgust label attaches to its
+categorical position, not to any intrinsic quality. What the Jeffrey
+framework adds to Douglas is the persistence mechanism: under
+Jeffrey conditioning, a positive individual encounter shifts
+$P'(g_k)$ for \emph{this dish} but does not update the group prior $\bar{c}_g$ for
+the cuisine as a category. Douglas describes the classification
+system; the rigidity condition provides the information-theoretic
+microfoundation for why individual reclassification fails to revise
+it. A steady-state emerges in which a positive
+fraction of the population privately enjoy the food while the ambient
+group prior $\bar{c}_g$ remains at its initial low value---explaining
+why foods widely consumed by individuals from the host culture
+continue to be coded as ``ethnic'' or ``exotic'' long after
+individual consumption has normalised. Elites are more likely to
+cross the engagement threshold, through both a Veblen channel
+(diminishing distinctiveness returns on familiar markers) and an
+exposure channel (income is positively correlated with international
+travel and specialist restaurant patronage). The food cycles through
+three zones---disgusting, elite marker, mass-market---without the
+ambient prior completing a full revision. The platform extension
+sharpens this: restaurant platforms and food delivery apps curate
+exposure through atmosphere instruments that encode the cuisine's
+$\bar{c}_g$ into pricing, presentation, and neighbourhood placement,
+so the three-zone cycle is not spontaneous but actively managed by
+profit-maximising intermediaries.
 
 An elite restaurant imposes no official racial bar and is formally
 open to all who can pay. But its clients associate eliteness with
@@ -1373,7 +1424,13 @@ without adverse selection, driven by the rigidity of the Jeffrey
 prior in the face of discordant signals. Adverse selection requires
 a specific dynamic structure---repeated interaction, pool selection.
 Jeffrey conditioning requires only a prior and a soft signal. The
-model is strictly more general.
+model is strictly more general. In the platform setting, these
+bilateral encounters are mediated at scale: rideshare and delivery
+platforms assign drivers to recipients through algorithms that strip
+context, producing exactly the discordant-signal encounters the
+model describes, while the platform's rating system creates a new
+atmosphere instrument through which the shadow market operates
+(Proposition~\ref{prop:shadow}).
 
 Gentrification extends this logic to the neighbourhood as platform.
 A gentrifying neighbourhood is a platform whose atmosphere vector
@@ -1389,7 +1446,7 @@ reduce the allocative loss $\mathcal{L}_{\mathrm{alloc}}$, but the
 informational and dynamic losses remain because $\bar{c}_g$ for the
 displaced group is unchanged---they have been spatially relocated to
 a lower-quality platform. When anti-displacement policies are imposed,
-$\sigma$ is constrained, the shadow market intensifies
+the admission policy $\sigma$ is constrained, the shadow market intensifies
 (Proposition~\ref{prop:shadow}), and discrimination redirects rather
 than disappears.
 
@@ -1409,7 +1466,8 @@ adverse selection: non-robbers (more sensitive to the cost of
 waiting) exit the pool first, leaving a pool enriched in robbers,
 which confirms the prior. In our framework it is a special case. The
 Loury mechanism operates through the $\delta \phi^t$ term in
-equation~(\ref{eq:dynamic}): repeated discrimination erodes the
+equation~(\ref{eq:dynamic})---the exclusion cost $\delta$ times the
+discrimination rate $\phi$: repeated discrimination erodes the
 group's economic position, which reinforces the prior. What the
 Jeffrey framework adds is the explanation of \emph{why} the prior is
 rigid to individual counter-examples. A taxi driver who does stop
@@ -1417,7 +1475,13 @@ and finds a law-abiding passenger updates $P'(g_k)$ for that
 individual---``this person seemed respectable''---but does not update
 $\bar{c}_g$ for the group. The rigidity condition is not an
 assumption about taxi driver psychology; it is a theorem of the
-updating rule that operates whenever signals are soft.
+updating rule that operates whenever signals are soft. The platform
+extension transforms this bilateral encounter into a systemic
+pattern: modern rideshare platforms mediate millions of such
+encounters daily, and the platform's atmosphere instruments---driver
+ratings, neighbourhood-based pricing, photograph display---create
+the conditions under which the shadow information market operates
+at scale.
 
 The compliance route generalises this. Every historical closure
 system has offered a compliance route---the promise that individuals
@@ -1432,12 +1496,12 @@ upward.
 
 Translated into the language of this model, the colonial promise is
 a claim that the operative updating rule is Bayesian, not Jeffrey.
-Under standard Bayes ($\rho = 0$,
+Under standard Bayes (rigidity parameter $\rho = 0$,
 Proposition~\ref{prop:loury-nesting}), individual compliance does
 update $\bar{c}_g$: each successful \'{e}volu\'{e} is evidence that
 the group's class distribution is higher than the prior implies, and
 the prior moves toward the truth. The model says the world does not
-operate at $\rho = 0$. Under Jeffrey conditioning at
+operate at $\rho = 0$. Under Jeffrey conditioning at rigidity
 $\rho > \rho^*$, individual marker investment produces personal
 reclassification but the rigidity condition prevents individual
 compliance from aggregating into group prior revision. No volume of
@@ -1475,8 +1539,9 @@ channels individual effort into personal reclassification at the
 cost of collective prior revision. Colonial assimilation policy is,
 on this account, a mechanism that simultaneously produces the
 appearance of openness while structurally preserving the closure
-trap by diverting the energies that might otherwise raise $\gamma$
-above $\gamma^*$. This is not a normative verdict on those who chose
+trap by diverting the energies that might otherwise raise the
+mobility parameter $\gamma$
+above its bifurcation threshold $\gamma^*$. This is not a normative verdict on those who chose
 the compliance route under conditions not of their making. The
 model's claim is only positive: the individually rational compliance
 strategy is collectively self-defeating.
@@ -1485,7 +1550,7 @@ The marker salience extension
 (Corollary~\ref{cor:salience-threshold}) sharpens this. For groups
 with low phenotypic salience---the Irish in England, Eastern
 Europeans in Western Europe---compliance simultaneously reduces the
-individual's $s_g$ toward zero and the observer's Jeffrey revision
+individual's marker salience $s_g$ toward zero and the observer's Jeffrey revision
 toward non-firing. In such cases, the compliance route \emph{does}
 produce integration, not because it revises the group prior, but
 because it renders the group marker invisible. For groups with high
@@ -1495,7 +1560,14 @@ component of $s_g$ unchanged. The \'{e}volu\'{e}'s position is
 therefore doubly constrained: the rigidity condition prevents group
 prior revision, and immutable marker salience prevents individual
 escape from out-group attribution. The compliance promise was
-structurally false on both counts.
+structurally false on both counts. The platform extension captures
+the institutional dimension: colonial administrations, schools, and
+civil services function as platforms whose atmosphere vectors
+(language of instruction, dress codes, examination systems) were
+calibrated to produce tokenism at institutional scale
+(Proposition~\ref{prop:tokenism})---visible inclusion of compliant
+individuals without revision of the group prior that governed
+collective exclusion.
 
 \subsection{Strategic action over the parameters}
 \label{subsec:cluster-parameters}
@@ -1503,8 +1575,8 @@ structurally false on both counts.
 The examples above illustrate the mechanism operating on agents who
 act within the inference architecture. A different class of cases
 involves actors who attempt to change the parameters themselves.
-Language revival moves on $s_g$; anti-colonial movements attempt
-collective action on $\gamma$. Each illustrates the conflict between
+Language revival moves on marker salience $s_g$; anti-colonial movements attempt
+collective action on the mobility parameter $\gamma$. Each illustrates the conflict between
 parameters that can be changed quickly and parameters that move only
 on intergenerational timescales.
 
@@ -1514,10 +1586,10 @@ marker salience. The model predicts that higher $s_g$ raises the
 mobility threshold $\tilde{\gamma}^*(s_g)$
 (Corollary~\ref{cor:salience-threshold}), so voluntary $s_g$ increase
 should intensify discrimination. When is this rational? The model
-identifies a necessary condition: $\bar{c}_g >
+identifies a necessary condition: group prior $\bar{c}_g >
 \bar{c}_g^{\mathrm{mid}}$. If the group's economic position is
 already above the tipping point, the closure trap does not bind and
-increasing $s_g$ carries an identity value without triggering the
+increasing marker salience $s_g$ carries an identity value without triggering the
 trap. The model predicts that successful language revival movements
 should emerge \emph{after} economic convergence, not before. Hebrew
 is the confirming case: revival accompanied state-building and
@@ -1583,7 +1655,7 @@ even in the absence of racial heterogeneity. The trap is
 path-dependent, intergenerationally persistent, and resistant to
 individual counter-examples by construction of the updating rule.
 Racial discrimination enters as a perturbation of this already-operating
-equilibrium --- a second group whose mean $\bar{c}_{g_2}$
+equilibrium --- a second group whose group prior $\bar{c}_{g_2}$
 starts in the high-discrimination basin --- not as a separate
 phenomenon requiring separate explanation. The closure trap requires
 a minimum level of Jeffrey rigidity $\rho > \rho^*$; below this
@@ -1664,7 +1736,9 @@ closure trap---marker investment, compliance, personal
 reclassification---is collectively self-defeating, because the
 Jeffrey architecture ensures that individual exceptions do not
 aggregate into group prior revision. The route to permanent trap
-escape runs through $\gamma > \gamma^*$, not through $e^*$. The
+escape runs through raising the mobility parameter above its
+threshold ($\gamma > \gamma^*$), not through individual marker
+investment $e^*$. The
 two compete for the same scarce resources, and the Jeffrey
 mechanism ensures that resources invested in individual compliance
 are wasted from the group's perspective even though they are
@@ -1709,8 +1783,8 @@ dynamic system is:
   \label{eq:loury-rho}
 \end{equation}
 The discrimination channel requires both $\rho > 0$ (Jeffrey
-rigidity) and $s_g > 0$ (visible markers). Either $\rho = 0$ or
-$s_g = 0$ eliminates the discrimination channel entirely, producing
+rigidity) and $s_g > 0$ (visible markers). Either rigidity parameter $\rho = 0$ or
+marker salience $s_g = 0$ eliminates the discrimination channel entirely, producing
 $G = \mu + \bar{c}_g(1-\mu) + \tilde{\gamma}\bar{c}_g(1-\bar{c}_g)$
 with a unique stable fixed point at $\bar{c}_g = 1$.
 
@@ -1761,7 +1835,7 @@ The equilibrium marker investment is:
 \end{equation}
 with the following properties:
 \begin{enumerate}[noitemsep]
-  \item $e^* > 0$ iff $c_j > \bar{c}_g$: only agents above
+  \item Optimal marker investment $e^* > 0$ iff $c_j > \bar{c}_g$: only agents above
   the class midpoint invest in markers.
   \item $\partial e^*/\partial \phi^* > 0$: more severe closure trap
   generates more marker investment.
