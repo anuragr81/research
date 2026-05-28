@@ -300,6 +300,46 @@ counts: Jeffrey conditioning is a coherent probability revision, not
 a bias, and the rigidity condition is a theorem of the updating rule,
 not a cognitive limitation or a preference parameter.
 
+Our updating rule belongs to a tradition of categorical reasoning in
+economics that has, to date, lacked a probability-theoretic foundation
+grounded in the structure of evidence rather than the structure of the
+agent. \citet{FryerJackson2008}, in this journal, develop a
+bounded-memory model in which a fixed number of categorical bins forces
+variance-minimizing lumping, producing coarse sorting of minority
+groups and discrimination without a taste for it; their model has no
+probability revision and proceeds by prototype matching against bin
+means. \citet{Mullainathan2002} develops a complementary
+coarse-Bayesian model in which agents are constrained to hold beliefs
+at a finite set of posteriors and update by selecting the category
+most consistent with the data, generating under-reaction within
+categories and over-reaction at category switches, with convergence to
+standard Bayesian updating as the number of categories grows.
+\citet{BordaloEtal2016} develop a related representativeness-based
+account of stereotypes. These models locate the deviation from full
+Bayesian updating in features of the agent: bounded memory, coarsened
+belief space, or representativeness heuristics. Our model takes a
+different route. The agent retains a full prior over the joint space
+and full Bayesian capacity, but the soft signals characteristic of
+social interaction do not admit a likelihood over the within-group
+partition, so the Jeffrey conditioning rule applies and within-group
+conditional distributions are invariant under the revision. This is
+not a stipulation about preferences or cognitive limits but a theorem
+of probability kinematics \citep{Jeffrey1965,Jeffrey2004} under the
+structural feature of evidence softness. Categorical discrimination
+thus emerges in our framework as a property of rational probability
+revision under soft evidence, rather than as a consequence of
+agent-level deviations from full rationality. The contribution is
+also distinct from frameworks in which the departure from full
+Bayesian rationality arises through preferences over multiple priors
+with maxmin evaluation \citep{GilboaSchmeidler1989}, subjective
+second-order uncertainty over priors with separable ambiguity attitude
+\citep{KlibanoffMarinacciMukerji2005}, or convergence of Bayesian
+updating within a misspecified subjective model
+\citep{EspondaPouzo2016}: in each of these the agent's preferences or
+model is the locus of departure, while in our model preferences and
+model are standard and the evidence carries the structural feature
+that necessitates Jeffrey rather than Bayes.
+
 The most natural information-economics response to discrimination is
 Spencian signalling: if marginalised individuals credibly signal
 their type, the pooling equilibrium breaks down and discrimination
@@ -472,6 +512,29 @@ Loury (2002)            & Social  & Social markers & Biased (informal) & Partial
 \label{sec:model}
 % =============================================================================
 
+Before specifying the model we state its architecture, since the
+load-bearing commitment is easily missed in the formal development.
+The model has three layers. The first defines the primitives: a
+continuum of agents characterised by economic class, observable soft
+markers, group membership, and self-beliefs over class. The second
+introduces the engagement decision, which is governed by a utility
+depending only on the class distance between two agents, with
+engagement decided bilaterally on Jeffrey-updated beliefs about the
+other agent's class. The third develops the equilibrium dynamics: a
+closure trap as a stable fixed point, a mobility threshold
+$\gamma^*$ above which the trap is eliminated through a saddle-node
+bifurcation, and the comparative statics of the closure rate.
+
+The architectural commitment that does the work is the form of the
+utility. It depends on class distance alone; group membership does
+not enter as an argument. The agent has no preference over groups,
+no taste-based or statistical-discrimination component, and no
+deviation from full Bayesian rationality. Categorical discrimination
+emerges nevertheless, because soft markers carry information about
+group membership and the Jeffrey-revised belief over class reflects
+that information. The asymmetry between groups is carried by the
+evidence, not by the preferences.
+
 \subsection{Primitives}
 
 Consider a continuum of agents indexed by $i$ and $j$. When two
@@ -525,27 +588,6 @@ The group mean $\bar{c}_g$ is a \textbf{sufficient
 statistic of the group's economic history}. Groups with histories of
 marginalisation---slavery, colonial extraction, persistent
 poverty---have low $\bar{c}_g$.
-
-\begin{remark}[Beta--De~Finetti structure]
-\label{rem:bernoulli}
-If individual class outcomes within a group are modelled as
-exchangeable $[0,1]$-valued random variables, the De~Finetti
-representation theorem \citep{DeFinetti1964} guarantees a mixing
-measure over possible group means. The natural parametric family
-is the Beta distribution $\mathrm{Beta}(\bar{c}_g \nu,\,
-(1 - \bar{c}_g)\nu)$ with mean equal to the group prior $\bar{c}_g$ and variance
-\begin{equation}
-  \sigma_g^2 = \frac{\bar{c}_g(1 - \bar{c}_g)}{1 + \nu}
-  \label{eq:beta-var}
-\end{equation}
-where $\nu > 0$ is a concentration parameter governing within-group
-heterogeneity. As $\nu \to 0$, the Beta distribution concentrates
-on $\{0,1\}$ and the model reduces to the Bernoulli special case
-with variance $\bar{c}_g(1-\bar{c}_g)$, which is the parametrisation
-adopted throughout the remainder of the paper. This variance plays
-a central role in the intergenerational dynamics
-(Section~\ref{subsec:intergenerational}).
-\end{remark}
 
 \subsection{Social engagement and the closure equilibrium}
 \label{subsec:jeffrey}
@@ -621,15 +663,23 @@ observing $j$'s consumption signals:
 where $R_i'(c_k)$ is $i$'s Jeffrey-revised belief about $j$'s class
 after observing $j$'s consumption bundle.
 
-Three consequences follow. First, exclusion suppresses aspirations
-and self-perception, not just economic opportunities
-(\emph{self-signalling and aspiration formation}). Second, agent $i$
-has incentive to manipulate markers to shift $P'(g_k)$ in $j$'s
-Jeffrey revision---the social analogue of \citet{Spence1973}'s
-signalling model (\emph{endogenous signal production};
-Appendix~\ref{app:veblen}). Third, excluded agents have worse
-information about available economic opportunities; the closure trap
-is also an information trap (\emph{closure as epistemic trap}).
+Three consequences follow from the bilateral Jeffrey structure.
+First, exclusion suppresses aspirations and self-perception, not
+just economic opportunities: the self-belief revision
+(\ref{eq:bilateral}) downweights $i$'s own class assessment when
+encountered agents signal exclusion (\emph{self-signalling and
+aspiration formation}). Second, because the Jeffrey revision
+(\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ and
+these are produced by observed markers, agent $i$ has incentive to
+manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
+analogue of \citet{Spence1973}'s signalling model
+(\emph{endogenous signal production}; Appendix~\ref{app:veblen}).
+Third, the rigidity condition prevents the within-group
+distributions $F_g$ from updating in response to individual
+encounters, so excluded agents accumulate worse information about
+economic opportunities than they otherwise would; the closure trap,
+derived formally in Section~\ref{subsec:intergenerational}, is also
+an information trap (\emph{closure as epistemic trap}).
 
 Social engagement utility:
 \begin{equation}
@@ -638,7 +688,11 @@ Social engagement utility:
 \end{equation}
 where $v > 0$ is baseline interaction value, $\kappa > 0$ is
 incompatibility sensitivity, and $d(\cdot)$ is the class distance.
-Outside option: $\bar{u}$.
+Outside option: $\bar{u}$. The utility depends on class distance
+alone; group membership $g$ does not enter as an argument of $U$.
+The dependence on group, when it appears in the model, arises
+entirely through the agent's belief about $c_i$, which is
+Jeffrey-updated from the observed marker as in (\ref{eq:jeffrey}).
 
 Expected utility under Jeffrey-updated posterior:
 \begin{equation}
@@ -656,14 +710,21 @@ Agent $j$ engages iff:
 Under bilateral structure, engagement requires condition
 (\ref{eq:threshold}) to hold for both agents simultaneously.
 
+The framework above applies to any number of groups $K$ and any
+soft marker space. To develop closed-form equilibrium dynamics and
+connect markers to the engagement decision, we now specialise on
+two dimensions.
+
 \textbf{Two-group simplification.} For the remainder of the
 analysis, we work with two groups $\G = \{g_1, g_2\}$ (host and
-immigrant/out-group respectively).
+immigrant/out-group respectively). This is the simplest
+non-trivial setting for the asymmetry that drives the model; the
+analysis generalises to $K$ groups at the cost of notation.
 
-\textbf{Marker salience.} Not all markers are equally informative
-about group membership. A parameter $s_g \in [0,1]$, which we call
-\emph{marker salience}, governs the strength of the Jeffrey
-revision---the probability that the observer attributes the
+\textbf{Marker salience.} The Jeffrey revision (\ref{eq:jeffrey})
+reassigns probability mass across the partition $\{g_1, g_2\}$; we
+parametrise the strength of that reassignment by a scalar
+$s_g \in [0,1]$, the probability the observer attributes the
 encountered individual to the out-group upon observing their
 markers:
 \begin{equation}
@@ -678,11 +739,14 @@ has $s_g \approx 0$. Mutable markers (accent, dress, consumption)
 can be modified, reducing $s_g$ over time; immutable markers (skin
 colour, facial structure) produce permanently high $s_g$.
 
-Under this parametrisation, the expected squared distance for an
+Under this parametrisation, the expected class distance for an
 agent $j$ with class $c_j$ encountering an individual whose markers
-trigger salience $s_g$ is:
+trigger salience $s_g$ decomposes into bias and variance
+components. Writing $\sigma_{g_k}^2$ for the within-group variance
+of class outcomes in group $g_k$ (defined in
+Appendix~\ref{app:bernoulli}):
 \begin{equation}
-  \E[(c_i - c_j)^2 \mid m_i]
+  \E[d(c_i, c_j) \mid m_i]
   = s_g \underbrace{\left[(\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2\right]}_{D_2}
   + (1 - s_g) \underbrace{\left[(\bar{c}_{g_1} - c_j)^2 + \sigma_{g_1}^2\right]}_{D_1}
   \label{eq:Ed-salience}
@@ -692,7 +756,7 @@ expected squared distance under certain attribution to group $g_k$.
 When $s_g = 1$, the observer attributes the individual to the
 out-group with certainty and the expression reduces to:
 \begin{equation}
-  \E[(c_i - c_j)^2 \mid g_2]
+  \E[d(c_i, c_j) \mid g_2]
   = (\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2
   \label{eq:Ed-group}
 \end{equation}
@@ -704,7 +768,9 @@ of economic history.
 The engagement threshold is violated when either the bias (class
 distance between observer and group mean) or the uncertainty
 (within-group dispersion), weighted by marker salience, is too
-large. The discrimination mechanism therefore has two sufficient
+large. When the threshold (\ref{eq:threshold}) is violated, agent
+$j$ declines to engage with $i$: this is the model's discrimination
+event. The discrimination mechanism therefore has two sufficient
 statistics corresponding to the spatial and temporal dimensions of
 social observation.\footnote{\label{rem:spacetime}Every soft signal
 that enters the model is either a spatial property of the individual
@@ -744,7 +810,7 @@ convergence rate, and $\gamma \in (0,1)$ is the intergenerational
 mobility parameter governing regression to the group mean.
 
 Under the Beta--De~Finetti structure
-(Remark~\ref{rem:bernoulli}), the within-group variance is
+(Appendix~\ref{app:bernoulli}), the within-group variance is
 $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, so the mobility term
 becomes $\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ where
 $\tilde{\gamma} = \gamma/(1+\nu)$ is the effective mobility
@@ -770,6 +836,25 @@ invisible and no discrimination fires. The composed map is:
 The boundary conditions $H(0; s_g) = \mu > 0$ and
 $H(1; s_g) = 1$ hold for all marker salience $s_g$, since $F(1) = 0$ and the
 $\tilde{\gamma}$ terms cancel at $\bar{c}_g = 1$.
+
+The map $H$ governs the intergenerational evolution of the group
+prior: $\bar{c}_g^{t+1} = H(\bar{c}_g^t; s_g)$, so iterating $H$
+traces the group's class trajectory across generations. Fixed
+points $\bar{c}_g^* = H(\bar{c}_g^*; s_g)$ are self-reproducing
+states---generations whose class profile replicates itself across
+the intergenerational map. Whether such a state is desirable
+depends on where it sits in $[0,1]$: a fixed point near
+$\bar{c}_g = 1$ is integration, a fixed point near $\bar{c}_g = 0$
+is exclusion. The three terms in $H$ compete to determine which
+arise as steady states. Mean-reversion ($\mu$) pulls upward from
+low priors; the exclusion drag $-s_g \delta F(\bar{c}_g)$
+generated by the engagement threshold pulls downward when
+discrimination fires; and mobility, contained in the
+$\tilde{\gamma}\,\bar{c}_g(1 - \bar{c}_g)$ term, generates
+regression to the group mean. When exclusion dominates at low
+$\bar{c}_g$, $H$ dips below the 45-degree line and a second stable
+fixed point appears at the low end. This is the closure trap,
+which we now formalise.
 
 \begin{definition}[Closure Equilibrium]
 \label{def:closure}
@@ -809,7 +894,7 @@ of $\bar{c}_g^{\mathrm{mid}}$. \qed
 \label{prop:income}
 Higher own economic class increases the expected class proximity to
 other high-class agents, expanding the engagement set:
-$\partial \E[(c_i-c_j)^2\mid g]/\partial c_j = -2(\bar{c}_g - c_j) < 0$ when $c_j < \bar{c}_g$.
+$\partial \E[d(c_i, c_j)\mid g]/\partial c_j = -2(\bar{c}_g - c_j) < 0$ when $c_j < \bar{c}_g$.
 \end{proposition}
 
 \begin{proposition}[Education effect]
@@ -824,7 +909,7 @@ reducing weight on group prior $F_g$.
 Lower $\bar{c}_g$ generates higher posterior expected
 incompatibility for any given marker, pushing more potential partners
 below the engagement threshold:
-$\partial \E[(c_i-c_j)^2\mid g]/\partial \bar{c}_g = 2(\bar{c}_g - c_j) < 0$ when
+$\partial \E[d(c_i, c_j)\mid g]/\partial \bar{c}_g = 2(\bar{c}_g - c_j) < 0$ when
 $c_j > \bar{c}_g$.
 \end{proposition}
 
@@ -832,7 +917,7 @@ $c_j > \bar{c}_g$.
 \label{prop:graded}
 The Jeffrey framework predicts continuous variation in avoidance with
 marker ambiguity. A faint accent produces less avoidance than a
-strong one. $\E[(c_i-c_j)^2]$ is quadratic in $\bar{c}_g$
+strong one. $\E[d(c_i, c_j)]$ is quadratic in $\bar{c}_g$
 ($\partial^2 \E/\partial \bar{c}_g^2 = 2 > 0$), distinguishing the model
 from Phelps--Arrow's binary response to hard group membership.
 \end{proposition}
@@ -851,7 +936,7 @@ or extinguished.
 Higher marker salience amplifies expected incompatibility when the
 out-group is economically disadvantaged:
 \[
-  \frac{\partial \E[(c_i-c_j)^2 \mid m_i]}{\partial s_g}
+  \frac{\partial \E[d(c_i, c_j) \mid m_i]}{\partial s_g}
   = D_2 - D_1 > 0
   \quad \text{when } \bar{c}_{g_2} < \bar{c}_{g_1}.
 \]
@@ -1913,6 +1998,31 @@ integration---multiple human lifetimes. The distribution of
 convergence times across groups should follow a power law with
 exponent $-1/2$ near the bifurcation. ESS repeated cross-sections
 could test this at the country level.
+
+\section{Beta--De~Finetti Structure of Within-Group Heterogeneity}
+\label{app:bernoulli}
+
+The group prior $\bar{c}_g$ defined in (\ref{eq:prior}) is the mean
+of within-group class outcomes; the dynamic system
+(\ref{eq:dynamic}) also requires a structural form for the
+within-group variance. We obtain that form by treating individual
+class outcomes within a group as exchangeable $[0,1]$-valued random
+variables. The De~Finetti representation theorem
+\citep{DeFinetti1964} then guarantees a mixing measure over possible
+group means. The natural parametric family is the Beta distribution
+$\mathrm{Beta}(\bar{c}_g \nu,\,(1 - \bar{c}_g)\nu)$ with mean equal
+to the group prior $\bar{c}_g$ and variance
+\begin{equation}
+  \sigma_g^2 = \frac{\bar{c}_g(1 - \bar{c}_g)}{1 + \nu}
+  \label{eq:beta-var}
+\end{equation}
+where $\nu > 0$ is a concentration parameter governing within-group
+heterogeneity. As $\nu \to 0$, the Beta distribution concentrates
+on $\{0,1\}$ and the model reduces to the Bernoulli special case
+with variance $\bar{c}_g(1-\bar{c}_g)$, which is the parametrisation
+adopted throughout the paper. This variance plays a central role in
+the intergenerational dynamics
+(Section~\ref{subsec:intergenerational}).
 
 % =============================================================================
 % BIBLIOGRAPHY
