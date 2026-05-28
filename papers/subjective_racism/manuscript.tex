@@ -688,7 +688,15 @@ Social engagement utility:
 \end{equation}
 where $v > 0$ is baseline interaction value, $\kappa > 0$ is
 incompatibility sensitivity, and $d(\cdot)$ is the class distance.
-Outside option: $\bar{u}$. The utility depends on class distance
+The baseline value $v$ is the payoff from engaging with an agent of
+identical class ($d(c_i, c_j) = 0$): it represents the intrinsic
+benefit of social contact when the interaction partner is perfectly
+compatible, and is reduced linearly by class distance through the
+sensitivity parameter $\kappa$.
+The agent's outside option $\bar{u}$ is the reservation payoff from
+declining to engage---the utility available from remaining within an
+existing social network rather than interacting with the encountered
+individual. The utility depends on class distance
 alone; group membership $g$ does not enter as an argument of $U$.
 The dependence on group, when it appears in the model, arises
 entirely through the agent's belief about $c_i$, which is
@@ -753,6 +761,19 @@ Appendix~\ref{app:bernoulli}):
 \end{equation}
 where $D_k = (\bar{c}_{g_k} - c_j)^2 + \sigma_{g_k}^2$ is the
 expected squared distance under certain attribution to group $g_k$.
+This is the standard bias--variance decomposition of expected
+squared loss: both the squared gap between $c_j$ and the group mean
+(bias) and the within-group dispersion (variance) enter the agent's
+expected utility. Variance enters mechanically rather than as a
+separate risk-aversion parameter---the agent maximises expected
+utility under a quadratic distance metric, and
+$\E[(c_i - c_j)^2 \mid g_k]
+= (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$
+by definition. Intuitively, $\sigma_{g_k}^2$ is an uncertainty
+premium: even when the group mean is close to the agent's class,
+within-group dispersion raises expected class distance and the
+probability that the engagement threshold (\ref{eq:threshold}) is
+violated.
 When $s_g = 1$, the observer attributes the individual to the
 out-group with certainty and the expression reduces to:
 \begin{equation}
@@ -793,10 +814,20 @@ sustained discrimination requires both spatial identifiability
 ($s_g > 0$) and temporal disadvantage ($\bar{c}_g <
 \bar{c}_g^{\mathrm{mid}}$).
 
-The engagement decisions aggregate into an intergenerational dynamic
-system. If a fraction $\phi^t$ of agents (the discrimination rate)
-discriminate against group
-$g$ in generation $t$, the group prior evolves as:
+Bilateral engagement decisions aggregate into a population-level
+dynamic through two steps. First, within generation $t$, each
+encounter between an in-group agent and a group-$g$ individual
+produces engagement or refusal according to (\ref{eq:threshold});
+the discrimination rate $\phi^t$ is the population fraction of
+such encounters in which the threshold is violated. Second,
+$\phi^t$ feeds back into the next generation's group prior
+$\bar{c}_g^{t+1}$ through three economic channels: exclusion
+(refused engagements deprive group $g$ of class-improving social
+contact and erode the prior), natural convergence (an exogenous
+intergenerational tendency toward the population mean), and
+intergenerational mobility (within-group regression to the mean,
+which depends on the current dispersion of group outcomes).
+Combining these channels, the group prior evolves as:
 \begin{equation}
   \bar{c}_g^{t+1} =
   \underbrace{\bar{c}_g^t(1 - \delta \phi^t)}_{\text{exclusion erodes prior}}
