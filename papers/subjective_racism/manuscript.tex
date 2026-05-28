@@ -553,9 +553,41 @@ a central role in the intergenerational dynamics
 \label{subsec:interaction}
 \label{sec:closure}
 
-Agent $j$ observes soft marker $m_i$. This shifts $j$'s distribution
-over group membership from $P(g_k)$ to $P'(g_k)$ without determining
-which group $i$ belongs to. Under \textbf{Jeffrey conditioning}:
+Jeffrey conditioning generalises Bayesian conditionalisation to evidence
+that does not admit a likelihood function over the partition of interest
+\citep{Jeffrey1965,Jeffrey2004}. The standard Bayesian update presupposes
+a sharp evidence event $E$ with conditional probabilities $P(E \mid g_k)$
+defined for each cell of the partition, yielding
+$P(g_k \mid E) \propto P(E \mid g_k) P(g_k)$. When the agent's evidence is
+a passage of experience that cannot be reduced to a proposition believed
+with certainty---Jeffrey's founding example is observation of a coloured
+cloth under poor light, leaving the observer with revised degrees of
+belief over its possible colours but no proposition $E$ they have come
+to believe with certainty \citep[\S 11.1]{Jeffrey1965}---the appropriate
+revision is probability kinematics:
+\begin{equation}
+  P'(H) = \sum_{k=1}^{K} P(H \mid g_k) \cdot P'(g_k)
+  \label{eq:kinematics}
+\end{equation}
+for any hypothesis $H$ outside the partition $\{g_1, \ldots, g_K\}$,
+where the post-experience partition weights $P'(g_k)$ are produced
+directly by the uncertain experience. The formula derives from the law
+of total probability applied to the posterior, under the
+\emph{invariance condition} $P'(H \mid g_k) = P(H \mid g_k)$ for all $k$
+and $H$ \citep[\S\S 11.3, 11.6]{Jeffrey1965}: conditional probabilities
+given each partition cell are preserved across the revision. Standard
+Bayesian conditionalisation is the limiting case in which the partition
+weights concentrate on a single cell \citep[\S 11.5]{Jeffrey1965}. The
+rule has an axiomatic foundation in \citet{DiaconisZabell1982}.
+
+In our setting the hypothesis of interest is class $c$ and the partition
+is group membership $\{g_1, \ldots, g_K\}$, so the within-group
+conditional distributions $F_{g_k} = P(c \mid g_k)$ play the role of the
+invariant conditionals, and the kinematics formula specialises as
+follows. Agent $j$ observes soft marker $m_i$. This shifts $j$'s
+distribution over group membership from $P(g_k)$ to $P'(g_k)$ without
+determining which group $i$ belongs to. Under
+\textbf{Jeffrey conditioning}:
 \begin{equation}
   P'(c) = \sum_{k=1}^{K} F_{g_k} \cdot P'(g_k)
   \label{eq:jeffrey}
@@ -568,7 +600,7 @@ $P(m \mid g_k)$ for how markers are produced by group membership.
 Standard Bayesian updating requires such a likelihood function;
 Jeffrey conditioning does not.
 
-\textbf{Rigidity condition.} The conditional probabilities
+\textbf{Rigidity condition} (Jeffrey's invariance, applied to within-group conditionals)\textbf{.} The conditional probabilities
 $F_{g_k}$ remain fixed during the Jeffrey revision---not because the
 model assumes them constant, but because a soft marker carries no
 likelihood $P(m \mid g_k)$ through which they could be revised. Only
