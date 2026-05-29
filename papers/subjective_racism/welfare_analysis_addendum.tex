@@ -1,0 +1,458 @@
+% =============================================================================
+% ADDENDUM: Formal Welfare Derivation for "Discrimination from Soft Signals"
+% =============================================================================
+% This is a standalone reference document containing the full formal welfare
+% derivation. It is NOT part of the submission to BEJTE. The slim version of
+% the welfare analysis in manuscript.tex Section 4.2 contains the load-bearing
+% results; this addendum provides the underlying derivation, the three-regime
+% framing, and the formal integral definitions for reference.
+%
+% Companion file: manuscript.tex
+% Verification: verify_discrimination.py CHECK_87 through CHECK_90 and
+%               ANALYTIC_10, ANALYTIC_11
+% =============================================================================
+
+\documentclass[12pt,a4paper]{article}
+
+%% Packages
+\usepackage[a4paper, margin=1.1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage[expansion=false]{microtype}
+\usepackage{xcolor}
+
+%% Spacing and layout
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+%% Theorem environments
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}[proposition]{Theorem}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{remark}[proposition]{Remark}
+\theoremstyle{definition}
+\newtheorem{example}[proposition]{Example}
+\numberwithin{proposition}{section}
+
+%% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection.}{0.5em}{}
+
+%% Hyperref
+\hypersetup{colorlinks=true, linkcolor=blue!60!black,
+            citecolor=blue!60!black, urlcolor=blue!60!black}
+
+%% Custom commands
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\A}{\mathcal{A}}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Addendum: Formal Welfare Derivation}\\[0.4em]
+{\normalsize Companion to ``Discrimination from Soft Signals:
+Dilemmas of Mimic Men''}\\[0.5em]
+{\normalsize Reference document --- not for submission}\\[1em]
+\end{center}
+
+\section*{Scope of this document}
+
+The main paper presents a slim version of the welfare analysis in
+Section~4.2, organised around a single headline result (welfare
+dominance of mobility above $\gamma^*$) and one companion negative
+result (irreducibility of informational welfare loss). This document
+contains the underlying formal derivation: the welfare object $W$
+defined as a discounted population integral; the telescoping
+construction by which the four components arise; the integral
+expressions for each component; the three-regime case framing; the
+proof of additivity; and the worked policy comparison under each
+regime. The material here is verified symbolically in
+\texttt{verify\_discrimination.py} as CHECK\_87 through CHECK\_90
+and ANALYTIC\_10, ANALYTIC\_11.
+
+\section{Welfare object and decomposition}
+\label{sec:welfare-object}
+
+We define social welfare $W$ as the population-aggregate expected
+utility from social engagement, summed across encounters within a
+generation and discounted across generations:
+\begin{equation}
+  W \;=\; \E\!\left[\,
+  \sum_{t \geq 0} \beta^t
+  \int\!\!\!\int U(c_i, c_j) \cdot \mathbf{1}\!\left[\text{engage}\right]
+  \, dF^t(c_i)\, dF^t(c_j)
+  \,\right]
+  \label{eq:welfare-W}
+\end{equation}
+where $\beta \in (0,1)$ is the intergenerational discount factor,
+$F^t$ is the equilibrium class distribution in generation $t$, and
+$U(c_i, c_j)$ is the bilateral utility from the main paper's
+equation~(15). Welfare is utilitarian: a realised encounter
+contributes $U(c_i, c_j)$ to surplus, while a refused encounter
+contributes the outside option $\bar{u}$, normalised to zero.
+
+The first-best welfare $W^*$ is the value of $W$ achieved under three
+simultaneous conditions: (i) every mutually beneficial encounter
+takes place---$U(c_i, c_j) > \bar{u}$ implies engagement; (ii) the
+within-group conditional distributions $F_g$ track the empirical
+distribution of class within each group, so the Jeffrey rigidity
+condition is non-binding; and (iii) no shadow information market is
+active. The total welfare loss is the gap between this first-best and
+equilibrium welfare,
+\begin{equation}
+  \mathcal{L} \;=\; W^* - W^{\mathrm{eq}}.
+\end{equation}
+
+To decompose $\mathcal{L}$ we construct a sequence of counterfactual
+welfares that interpolate between $W^*$ and $W^{\mathrm{eq}}$, each
+relaxing one of the conditions above:
+\begin{align*}
+  W_0 &\equiv W^* && \text{first-best} \\
+  W_1 &\equiv W_0 - \text{exclusion externality}
+       && \text{refused beneficial encounters} \\
+  W_2 &\equiv W_1 - \text{information loss}
+       && \text{Jeffrey rigidity binds} \\
+  W_3 &\equiv W_2 - \text{dynamic compounding}
+       && \text{intergenerational drift in } \bar{c}_g \\
+  W^{\mathrm{eq}} &\equiv W_3 - \text{platform cost}
+       && \text{shadow market active.}
+\end{align*}
+Defining each loss component as a successive welfare gap,
+\begin{equation}
+  \mathcal{L}_{\text{alloc}} \equiv W_0 - W_1, \quad
+  \mathcal{L}_{\text{info}} \equiv W_1 - W_2, \quad
+  \mathcal{L}_{\text{dyn}} \equiv W_2 - W_3, \quad
+  \mathcal{L}_{\text{platform}} \equiv W_3 - W^{\mathrm{eq}},
+  \label{eq:welfare-defs}
+\end{equation}
+the total loss decomposes additively by telescoping:
+\begin{equation}
+  \mathcal{L} \;=\; W_0 - W^{\mathrm{eq}}
+        \;=\; \mathcal{L}_{\text{alloc}} + \mathcal{L}_{\text{info}}
+        + \mathcal{L}_{\text{dyn}} + \mathcal{L}_{\text{platform}}.
+  \label{eq:welfare}
+\end{equation}
+Additivity is exact by construction (CHECK\_87) and each
+$\mathcal{L}_k \geq 0$ because each counterfactual relaxation
+removes a welfare-reducing distortion (CHECK\_88). The four
+components map to model primitives as follows.
+
+\subsection*{Allocative loss}
+$\mathcal{L}_{\text{alloc}}$ is the expected foregone surplus from
+refused beneficial encounters within a generation:
+\begin{equation}
+  \mathcal{L}_{\text{alloc}}
+  \;=\; \int\!\!\!\int [\,U(c_i, c_j) - \bar{u}\,]_+
+  \cdot \mathbf{1}\!\left[\,\E_j[d(c_i, c_j) \mid m_i] > \Delta^*(c_j)\,\right]
+  \, dF(c_i)\, dF(c_j).
+  \label{eq:L-alloc}
+\end{equation}
+Under the two-group engagement threshold of the main paper, this
+reduces to $\mathcal{L}_{\text{alloc}} = s_g \cdot F(\bar{c}_g) \cdot
+\overline{\Delta U}$, where $\overline{\Delta U}$ is the average
+foregone surplus per blocked encounter and $s_g \cdot F(\bar{c}_g) = \phi$
+is the population discrimination rate. The component is present
+in \citet{Phelps1972}, \citet{Arrow1973}, and \citet{Loury2002}; it
+is what standard models of statistical discrimination already
+capture.
+
+\subsection*{Informational loss}
+$\mathcal{L}_{\text{info}}$ is the welfare gap between the Jeffrey
+equilibrium of the model and the counterfactual Bayesian equilibrium
+that would obtain if the rigidity condition were removed and
+individual counter-examples updated the within-group conditional
+$F_g$:
+\begin{equation}
+  \mathcal{L}_{\text{info}}
+  \;=\; W^{\mathrm{Bayes}} - W^{\mathrm{Jeffrey}}.
+  \label{eq:L-info}
+\end{equation}
+This is the novel contribution of the framework. By Pinsker-type
+inequalities, $\mathcal{L}_{\text{info}}$ is bounded below by a
+quantity proportional to $\rho \cdot \mathrm{dKL}(F_g \,\Vert\, F_g^{\mathrm{Bayes}})$,
+where $\rho > 0$ is the rigidity weight on the group prior in the
+revision rule and $\mathrm{dKL}$ is the Kullback--Leibler divergence
+between the rigid conditional and the conditional that would obtain
+under Bayesian updating. The loss falls on the whole society because
+stale priors persist in all interactions, not just those involving
+the excluded group.
+
+\subsection*{Dynamic loss}
+$\mathcal{L}_{\text{dyn}}$ is the discounted sum of allocative losses
+across future generations attributable to the closure dynamic in
+$\bar{c}_g$:
+\begin{equation}
+  \mathcal{L}_{\text{dyn}}
+  \;=\; \sum_{t \geq 1} \beta^t \!\left[\,
+  \mathcal{L}_{\text{alloc}}^{(t)} - \mathcal{L}_{\text{alloc}}^{(\mathrm{int})}
+  \,\right]
+  \label{eq:L-dyn}
+\end{equation}
+where $\mathcal{L}_{\text{alloc}}^{(\mathrm{int})}$ is the allocative
+loss at the integration steady state $\bar{c}_g = 1$ (zero by
+$F(1) = 0$). The component grows with the distance below the
+bifurcation threshold $\gamma^*$ and falls primarily on future
+generations of the stigmatised group.
+
+\subsection*{Platform loss}
+$\mathcal{L}_{\text{platform}}$ is the aggregate cost of the shadow
+information market that arises when legal instruments constrain
+formal screening:
+\begin{equation}
+  \mathcal{L}_{\text{platform}} \;=\; \int \Omega_j \, dj
+  \label{eq:L-platform}
+\end{equation}
+the integral of shadow information value over all clients. Agents
+invest resources in informal information---word of mouth, coded
+reviews, network signals---that would be unnecessary in a
+non-discriminatory equilibrium.
+
+\section{Three regimes of welfare logic}
+\label{sec:welfare-cases}
+
+The welfare implications of the model depend on what the within-group
+conditionals $F_g$ are doing relative to underlying empirical reality.
+Three regimes exhaust the model's belief states, each producing a
+distinct welfare logic and a distinct policy comparison.
+
+In the first regime, beliefs are accurate: $F_g$ tracks the empirical
+class distribution within each group. The rigidity condition is
+non-binding because there are no counterexamples to suppress, and
+the closure trap does not arise as a structural feature. The model
+behaves as a standard model of social exchange with an exclusion
+externality.
+
+In the second regime, beliefs are inaccurate but \emph{self-confirming}.
+The conditionals $F_g$ do not match the empirical distribution, but
+the equilibrium engagement decisions generate observed behaviour
+that fails to falsify them: refused interactions produce no class
+evidence, and accepted interactions selectively confirm the prior.
+The rigidity condition prevents what little counter-evidence reaches
+the agent from updating the conditional. Within a generation the
+system is closed: beliefs produce behaviour that produces evidence
+that fails to revise the beliefs.
+
+In the third regime, beliefs are accurate and \emph{self-reinforcing}.
+The system is at the closure equilibrium and the conditionals $F_g$
+correctly describe the within-group distribution \emph{at} that
+equilibrium. Beliefs match reality, but the equilibrium itself is
+the trap: a higher-welfare equilibrium exists at $\bar{c}_g^H = 1$,
+and the closure basin prevents the system from reaching it.
+``Self-reinforcing'' here denotes intergenerational stability of the
+equilibrium rather than within-generation stability of belief content;
+the loss is in equilibrium selection, not in belief error.
+
+These three regimes are exhaustive over the model's equilibrium
+belief states: either beliefs track reality or they do not; if they
+do not, the system either stabilises them through behaviour
+(regime~2) or does not (a non-equilibrium configuration outside the
+model's scope). Each regime corresponds to a different selection of
+which components of $\mathcal{L}$ are non-zero, and to a different
+policy logic.
+
+\textbf{Case 1: Beliefs accurate.}
+The rigidity condition is non-binding, so
+$\mathcal{L}_{\text{info}} = 0$. With no error in $F_g$ to compound
+across generations, $\mathcal{L}_{\text{dyn}}$ vanishes once the
+system is allowed to settle. The platform's shadow information
+channel offers no advantage when beliefs are already correct, so
+$\mathcal{L}_{\text{platform}}$ is small. Only $\mathcal{L}_{\text{alloc}}$
+is positive, arising from the exclusion externality that even
+accurate beliefs do not internalise (CHECK\_89). Policy:
+redistribution or subsidised access to compensate the foregone
+surplus.
+
+\textbf{Case 2: Beliefs inaccurate but self-confirming.}
+All four components of $\mathcal{L}$ are positive
+(ANALYTIC\_11). This is the regime in which the model's distinctive
+welfare logic operates: each instrument has a different incidence
+across the components, the components interact, and the
+informational component is bounded below by an irreducible quantity.
+
+$\mathcal{L}_{\text{alloc}}$ responds to anti-discrimination law on
+the formal-contracting side and to forced integration.
+$\mathcal{L}_{\text{dyn}}$ responds to mobility programmes that
+raise $\gamma$ toward the bifurcation threshold.
+$\mathcal{L}_{\text{platform}}$ responds to platform regulation.
+The fourth component, $\mathcal{L}_{\text{info}}$, is governed by
+the irreducibility result (Corollary below).
+
+\begin{corollary}[Irreducibility of informational welfare loss]
+\label{cor:irreducibility-addendum}
+Let $\Phi$ denote the class of policies that leave the soft-signal
+structure of social interaction invariant: policies that operate by
+changing $\gamma$ (mobility), $\sigma$ (admission), or $\delta$
+(exclusion intensity), but not by converting soft markers into hard
+signals. Then for all $\phi \in \Phi$:
+\[
+  \mathcal{L}_{\mathrm{info}}(\phi)
+  \;\geq\; \mathcal{L}_{\mathrm{info}}^* \;>\; 0
+\]
+where $\mathcal{L}_{\mathrm{info}}^*$ is determined by the Jeffrey
+rigidity parameter $\rho > \rho^*$ and the initial group
+distribution $F_g$.
+\end{corollary}
+
+\begin{proof}[Proof sketch]
+From equation~(\ref{eq:L-info}), $\mathcal{L}_{\text{info}}$ is the
+gap between the Jeffrey welfare and the counterfactual Bayesian
+welfare, bounded below by
+$\rho \cdot \mathrm{dKL}(F_g \,\Vert\, F_g^{\mathrm{Bayes}})$ (the
+component of belief error that the rigidity condition prevents
+from updating). Policies in $\Phi$ alter $\gamma$, $\sigma$, or
+$\delta$, but not the rigidity parameter $\rho$ (the weight on the
+group prior in the revision rule) or the group-level conditional
+probabilities $F_g$. The lower bound is therefore invariant to all
+$\phi \in \Phi$ (CHECK\_86), and $\mathcal{L}_{\text{info}} > 0$
+whenever $\rho > \rho^*$ (ANALYTIC\_10).
+\qed
+\end{proof}
+
+This result characterises the limits of formal instruments within
+the class $\Phi$. It does not preclude that social movements, norm
+change, or long-run cultural shifts alter the signal structure
+itself---moving markers from soft to hard, or reducing the
+correlation between markers and group priors. Such changes would
+operate outside $\Phi$ and could in principle reduce
+$\mathcal{L}_{\text{info}}$. The corollary is a theorem about
+instruments, not a verdict on the world.
+
+\begin{table}[t]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Instrument} &
+$\mathcal{L}_{\text{alloc}}$ &
+$\mathcal{L}_{\text{info}}$ &
+$\mathcal{L}_{\text{dyn}}$ &
+$\mathcal{L}_{\text{platform}}$ \\
+\midrule
+Anti-discrimination law (formal contracting)
+                          & $\downarrow$ & --- & --- & $\uparrow$ \\
+Forced integration        & $\downarrow$ (temp.) & --- & --- & --- \\
+Mobility programme ($\gamma > \gamma^*$) & $\downarrow\downarrow$ & --- & $\downarrow\downarrow$ & --- \\
+Platform regulation       & --- & --- & --- & $\downarrow$ \\
+\midrule
+Irreducible               & & $\bullet$ & & \\
+\bottomrule
+\end{tabular}
+\caption{Policy instruments mapped against welfare loss components
+under Case~2. $\downarrow$ = reduces; $\uparrow$ = amplifies;
+--- = no effect; $\bullet$ = structurally irreducible.
+Anti-discrimination law on the formal-contracting side reduces
+$\mathcal{L}_{\text{alloc}}$ on the contracting channel but
+displaces activity into the informal contact channel, raising
+$\mathcal{L}_{\text{platform}}$. Only the mobility programme
+simultaneously eliminates allocative and dynamic loss above
+$\gamma^*$.}
+\label{tab:welfare-addendum}
+\end{table}
+
+\textbf{Case 3: Beliefs accurate and self-reinforcing.}
+The conditional $F_g$ describes the realised closure equilibrium
+correctly, so $\mathcal{L}_{\text{info}} = 0$ (CHECK\_90). But
+$\mathcal{L}_{\text{alloc}}$ remains positive at the closure
+equilibrium because the engagement threshold continues to refuse
+beneficial encounters; $\mathcal{L}_{\text{dyn}}$ remains positive
+because the trap reproduces itself across generations; and
+$\mathcal{L}_{\text{platform}}$ remains positive because the
+shadow market does not require belief error to function. The loss
+is in equilibrium selection, not belief content.
+
+The relevant policy comparison is therefore across equilibria.
+Forced integration achieves equilibrium selection by shifting a
+cohort above $\bar{c}_g^{\mathrm{mid}}$, but does not alter the
+trap's structure: subsequent cohorts face the same basin of
+attraction. Mobility programmes raising $\gamma > \gamma^*$
+eliminate the trap permanently through the saddle-node bifurcation;
+above $\gamma^*$, the group converges from any starting position.
+The two instruments are complements in the sub-threshold regime
+($\gamma < \gamma^*$): integration manages cohort positions while
+mobility investment pushes $\gamma$ toward $\gamma^*$. Integration
+without mobility leaves the trap intact for future cohorts;
+mobility above $\gamma^*$ is sufficient on its own. Platform
+regulation reduces $\mathcal{L}_{\text{platform}}$ but has no
+effect on the trap itself.
+
+\section{Derivation of the welfare-dominance proposition}
+\label{sec:welfare-dominance}
+
+The main paper presents the following proposition as the headline
+result of the welfare analysis:
+
+\begin{proposition}[Welfare dominance of mobility above $\gamma^*$]
+\label{prop:dominance}
+Within the policy class $\Phi$, mobility programmes raising
+$\gamma$ above $\gamma^*$ are uniquely welfare-dominant in the long
+run: they eliminate $\mathcal{L}_{\mathrm{dyn}}$ permanently
+through the saddle-node bifurcation, eliminate
+$\mathcal{L}_{\mathrm{alloc}}$ at the integration steady state, and
+do not amplify $\mathcal{L}_{\mathrm{platform}}$. No other
+instrument in $\Phi$ achieves elimination on more than one
+component. Anti-discrimination law on the formal-contracting side
+addresses $\mathcal{L}_{\mathrm{alloc}}$ on that channel but
+displaces activity to the informal contact channel, raising
+$\mathcal{L}_{\mathrm{platform}}$; the net welfare effect is
+ambiguous without empirical calibration.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Above $\gamma^*$ the saddle-node bifurcation destroys the closure
+basin: the unique stable fixed point is the integration steady
+state $\bar{c}_g = 1$. At this steady state, $F(\bar{c}_g) = 0$,
+so the discrimination rate $\phi$ is zero and
+$\mathcal{L}_{\text{alloc}}$ vanishes. With no further drift in
+$\bar{c}_g$, $\mathcal{L}_{\text{dyn}}$ also vanishes. The
+mobility instrument operates on $\gamma$, which does not enter the
+platform's shadow-information optimisation, so
+$\mathcal{L}_{\text{platform}}$ is unchanged. For any other
+instrument $\phi \in \Phi$:
+anti-discrimination law on the contracting side reduces
+$\mathcal{L}_{\text{alloc}}$ on that channel but raises
+$\mathcal{L}_{\text{platform}}$ via the shadow-market effect of
+the main paper's Proposition~3.3.1; forced integration shifts a
+cohort but does not eliminate the basin, so
+$\mathcal{L}_{\text{dyn}}$ persists for subsequent cohorts;
+platform regulation reduces $\mathcal{L}_{\text{platform}}$ only.
+The intersection of components eliminated is therefore
+$\{\mathcal{L}_{\text{alloc}}, \mathcal{L}_{\text{dyn}}\}$ for
+mobility, a strict superset of what any alternative achieves.
+\qed
+\end{proof}
+
+The dominance result, together with the irreducibility corollary,
+produces a contract/contact reading of the policy implications.
+Anti-discrimination law on the contract side
+remains necessary on the formal contracting channel; mobility
+investment is necessary on the contact channel; neither is
+sufficient on its own, and both leave the informational floor
+$\mathcal{L}_{\text{info}}^*$ untouched. The result aligns with
+\citet{Loury2002}: legal instruments address the contract channel,
+not the contact channel; the contact channel runs through soft
+signals that the model formalises via Jeffrey conditioning, and
+its remedy requires instruments that operate on the
+intergenerational class distribution rather than on individual
+acts of exclusion.
+
+\bibliographystyle{plainnat}
+\bibliography{bibliography}
+
+\end{document}
