@@ -164,42 +164,44 @@ operate on the contact channel of \citet{Loury2002}---the soft-signal
 environment of informal social exchange---which lies outside the
 reach of legal prohibitions on the contracting channel. 
 
-The model uses a the framework of probability
-kinematics developed by \citet{Jeffrey1965} to connect the three observations. More particularly, an agent revises their probability distribution over a partition
-$\{g_1, \ldots, g_K\}$ (group memberships) without receiving a
-definitive signal about which partition element is true. The conditional probabilities
-$F_{g_k}$---the group-level priors over economic class---are
-held fixed during the revision, not by stipulation but because the
-soft signal provides no information capable of revising them. Only
-the weights $P'(g_k)$ change.
+The model uses the framework of probability
+kinematics developed by \citet{Jeffrey1965} to connect the three
+observations. The agent revises their probability distribution over
+possible group memberships without receiving a definitive signal
+about which group is the true one. The conditional probabilities
+---the group-level priors over economic class---are held fixed
+during the revision, not by stipulation but because the soft signal
+provides no information capable of revising them. Only the weights
+on the different group memberships change.
 
 This rigidity condition is the formal expression of the
 ``exception to the rule'' phenomenon: an individual counter-example
-(a high-class member of a stigmatised group) shifts $P'(g_k)$---the
-observer attributes the individual to a different group---but does
-\emph{not} update $F_{g_k}$ for the group as a whole. The
-stereotype thus persists. 
+(a high-class member of a stigmatised group) shifts the observer's
+attribution---they reclassify the individual as belonging to a
+different group---but does \emph{not} update the conditional class
+distribution for the group as a whole. The stereotype thus persists. 
 
-The paper makes third contributions. First, we prove that the Jeffrey
-updating rule generates a self-sustaining class closure trap as a
-stable equilibrium outcome even in a racially homogeneous society
-(Proposition~\ref{prop:class-closure}): the trap is path-dependent,
-intergenerationally persistent, and resistant to individual
-counter-examples by construction. If we can assume that economic class generates social clustering, then a structurally
-stable trap follows. Third, we derive a threshold level of intergenerational
-mobility $\gamma^*$ above which the closure trap is eliminated
-through a saddle-node bifurcation
+The paper makes four contributions. First, we prove that the
+Jeffrey updating rule generates a self-sustaining class closure
+trap as a stable equilibrium outcome even in a racially homogeneous
+society (Proposition~\ref{prop:class-closure}): the trap is
+path-dependent, intergenerationally persistent, and resistant to
+individual counter-examples by construction. Second, we show that
+under the assumption that economic class generates social
+clustering, a structurally stable trap follows. Third, we derive a
+threshold level of intergenerational mobility above which the
+closure trap is eliminated through a saddle-node bifurcation
 (Proposition~\ref{prop:bifurcation}), providing a formal
-equilibrium-selection justification for mobility programmes. Fourth,
-we show that profit-maximising platforms create tokenism as a
-structural outcome (Proposition~\ref{prop:tokenism}), that
+equilibrium-selection justification for mobility programmes.
+Fourth, we show that profit-maximising platforms create tokenism as
+a structural outcome (Proposition~\ref{prop:tokenism}), that
 anti-discrimination law on the formal contracting channel operates
 on a different channel from the soft-signal contact mechanism
 identified by the model (Proposition~\ref{prop:shadow} characterises
 the resulting shadow-information market), and that the welfare loss
 decomposes into four components of which one is structurally
 irreducible under any policy preserving soft social signals
-(equation~\ref{eq:welfare}, Table~\ref{tab:welfare}). 
+(Table~\ref{tab:welfare}). 
 
 The paper is structured as follows. Section~\ref{sec:lit} positions
 the model relative to existing theories of discrimination.
@@ -521,7 +523,11 @@ Each agent is characterised by:
   is the latent variable underlying the engagement decision.
   \item Social marker $m_i \in \M$, an observable characteristic
   (accent, dress, name, consumption choice). Correlated with $c_i$
-  but does not determine it. This is a \emph{soft signal}.
+  but does not determine it. This is a \emph{soft signal}. Markers
+  are environment-specific in their acquisition: the same agent in
+  different host contexts absorbs different marker portfolios, which
+  is the empirical content of treating markers as the inferential
+  primitive rather than as derived from group membership.
   \item Group membership $g_i \in \G = \{g_1, \ldots, g_K\}$.
   Group membership may be directly observable (race, visible gender)
   or latent and inferred from markers (class, ethnicity, religion).
@@ -859,7 +865,11 @@ $\tilde{\gamma}$ terms cancel at $\bar{c}_g = 1$.
 
 The map $\mathcal{H}$ governs the intergenerational evolution of the group
 prior: $\bar{c}_g^{t+1} = \mathcal{H}(\bar{c}_g^t; s_g)$, so iterating $\mathcal{H}$
-traces the group's class trajectory across generations. Fixed
+traces the group's class trajectory across generations. The closure
+equilibrium is therefore a fixed point of $\mathcal{H}$: a steady state of
+the aggregate dynamic rather than a Nash equilibrium of strategic
+choices. Once attained, the aggregate effect of individually
+rational engagement decisions is to reproduce the prior. Fixed
 points $\bar{c}_g^* = \mathcal{H}(\bar{c}_g^*; s_g)$ are self-reproducing
 states---generations whose class profile replicates itself across
 the intergenerational map. Whether such a state is desirable
@@ -920,6 +930,17 @@ Illustrative functional form $F(\bar{c}_g) = (1 - \bar{c}_g)^2$ and
 parameters $\mu = 0.05$, $\delta = 0.5$, $s_g = 1$.}
 \label{fig:closure-map}
 \end{figure}
+
+The location of the trap reflects a balance: the discrimination drag
+$s_g \delta F(\bar{c}_g)$ pulls the equilibrium downward, while
+exogenous convergence $\mu$ and the mobility term
+$\tilde{\gamma}\bar{c}_g(1-\bar{c}_g)$ pull it upward. Because $F$
+is large at low $\bar{c}_g$---where discrimination is intense---the
+upward forces cannot push the equilibrium beyond the point where
+the drag matches them. The tipping point marks where the slope of
+$\mathcal{H}$ crosses unity, separating the trap's basin from that of
+full inclusion at $\bar{c}_g = 1$. Comparative statics across these
+parameters are developed in \S\ref{subsec:intergenerational}.
 
 \subsection{Comparative statics and the mobility threshold}
 \label{subsec:intergenerational}
@@ -1393,7 +1414,13 @@ against the first motive). Points-based immigration systems are
 formally attempts to certify marker legibility in advance of social
 contact, converting soft foreign markers into a hard administrative
 signal---consistent with the empirical finding that such systems
-produce faster assimilation trajectories.
+produce faster assimilation trajectories. The same framework
+predicts that within-ethnic differential treatment by class markers
+---software engineers and taxi drivers of shared national origin
+receiving categorically different host treatment
+\citep{LeeZhou2015, Waters1999}---is a direct consequence of the
+bilateral model, with the platform extension supplying the
+institutional channel through which it is reinforced.
 
 \subsection{Welfare analysis}
 \label{subsec:welfare}
@@ -1550,6 +1577,12 @@ sufficient on its own. Both leave the informational floor
 $\mathcal{L}_{\text{info}}^*$ untouched, and reducing that floor
 requires instruments operating outside $\Phi$---instruments that
 change the signal structure itself, which the model does not study.
+
+Hard segregation reduces individual-level friction events at the
+cost of catastrophic and permanent aggregate loss. The
+compliance-route logic of \S\ref{subsec:cluster-reproduce} is its
+structural mirror within the soft-signal regime: individually
+rational, collectively self-defeating.
 
 % =============================================================================
 \section{Discussion and Worked Examples}
