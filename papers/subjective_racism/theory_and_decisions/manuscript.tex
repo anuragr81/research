@@ -21,6 +21,8 @@
 \usepackage{parskip}
 \usepackage[expansion=false]{microtype}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds}
 
 %% Spacing and layout
 \onehalfspacing
@@ -508,6 +510,59 @@ statistic of the group's economic history}. Groups with histories of
 marginalisation---slavery, colonial extraction, persistent
 poverty---have low $\bar{c}_g$.
 
+Figure~\ref{fig:loop} previews how the two systems couple across a
+generation. The economic system sets the group prior; the social
+system produces markers correlated with that prior; Jeffrey
+conditioning reads the markers and generates a discrimination rate;
+the economic cost of exclusion, $\delta$, feeds this back into the
+group's economic position; and the resulting prior is what the next
+generation's markers are read against. The two systems interact at
+two points: the economic system fixes the \emph{meaning} of markers,
+and the social system erodes the \emph{position} of the group.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  node distance=7mm,
+  box/.style={rectangle, draw, rounded corners=2pt, align=center, inner sep=5pt, minimum height=9mm, font=\small, text width=62mm},
+  econ/.style={box, fill=black!16},
+  soc/.style={box, fill=black!6},
+  infer/.style={box, fill=white},
+  arr/.style={-{Latex[length=2.2mm]}, thick},
+  feedback/.style={-{Latex[length=2.2mm]}, thick, dashed},
+  ilabel/.style={font=\footnotesize\itshape}
+]
+\node[econ] (prior) {Group prior $\bar{c}_g^{t}$\\[1pt]{\footnotesize economic class distribution}};
+\node[soc, below=of prior] (markers) {Markers correlated with class\\through group history};
+\node[infer, below=of markers] (jeffrey) {Jeffrey conditioning\\[1pt]{\footnotesize soft markers $\to$ group credence}};
+\node[infer, below=of jeffrey] (phi) {Discrimination rate $\phi$};
+\node[soc, below=of phi] (delta) {$\delta$: networks, matching, cultural capital};
+\node[econ, below=of delta] (dynamic) {Intergenerational dynamic\\[1pt]{\footnotesize $-\delta\phi$ \quad $+\mu$ \quad $+\tilde{\gamma}$}};
+\node[econ, below=of dynamic] (newprior) {New group prior $\bar{c}_g^{t+1}$};
+
+\draw[arr] (prior) -- (markers);
+\draw[arr] (markers) -- (jeffrey);
+\draw[arr] (jeffrey) -- (phi);
+\draw[arr] (phi) -- (delta);
+\draw[arr] (delta) -- (dynamic);
+\draw[arr] (dynamic) -- (newprior);
+
+\node[ilabel, right=3mm of markers] {Economic $\rightarrow$ Social};
+\node[ilabel, right=3mm of delta] {Social $\rightarrow$ Economic};
+
+\draw[feedback] (newprior.west) -- ++(-2.6,0) |- (prior.west)
+  node[pos=0.25, left, ilabel, align=center] {next\\generation};
+\end{tikzpicture}
+\caption{The coupled two-system loop across one generation.
+Mid-grey nodes are economic-system states, light-grey nodes are
+social-system states, white nodes are the inference mechanism. The
+economic system sets the meaning of markers (top interaction); the
+social system erodes the group's economic position (bottom
+interaction). The dashed arrow closes the loop: the new group prior
+is what the next generation's markers are read against.}
+\label{fig:loop}
+\end{figure}
+
 \subsection{Social engagement and the closure equilibrium}
 \label{subsec:jeffrey}
 \label{subsec:bilateral}
@@ -864,6 +919,24 @@ a moving target that recedes as discrimination intensifies. The
 results that follow therefore hold a fortiori under endogenous
 mobility, but the policy implication is sharper than stated: the
 required intervention is larger than the exogenous model suggests.
+
+\subsection{Intergenerational dynamics and the closure equilibrium}
+\label{subsec:dynamics}
+
+We now reduce the intergenerational dynamic (\ref{eq:dynamic}) to a
+one-dimensional discrete dynamical system in the group prior
+$\bar{c}_g$ and characterise its steady states. The analysis uses
+only elementary properties of such systems---fixed points, the
+slope condition for local stability, and the saddle-node
+bifurcation; a reader unfamiliar with these may consult
+\citet{Galor2007} for fixed points and stability and
+\citet{MedioLines2001} for bifurcation analysis. A fixed point is a
+group prior that reproduces itself from one generation to the next;
+it is locally stable when the map's slope there is less than one in
+absolute value, so that nearby trajectories are drawn toward it. The
+substantive content is that the system admits more than one stable
+fixed point, and that which one a group reaches depends on its
+history.
 
 The discrimination rate $\phi^t = s_g \cdot F(\bar{c}_g^t)$ is
 determined by the engagement threshold (\ref{eq:threshold}),
