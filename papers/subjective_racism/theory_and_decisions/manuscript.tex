@@ -142,10 +142,14 @@ When the operative signals in social interaction are
 soft---accents, dress, consumption patterns, phenotype---the
 theoretically appropriate updating rule is Jeffrey conditioning
 rather than standard Bayes. Jeffrey conditioning revises beliefs
-about group membership while holding group-level economic class
-distributions fixed. The consequence is a rigidity condition under
+about group membership while leaving group-level economic class
+distributions intact, since beliefs about the latter are held far
+more firmly than beliefs about any individual's group membership. The consequence is a rigidity condition under
 which individual counter-examples are absorbed without revising
-the group prior. The boundary re-asserts itself as a theorem. The
+the group prior. The boundary re-asserts itself as a theorem.
+Iterated across generations through the drag soft markers impose
+on subsequent economic position, the same rigidity yields a
+self-reproducing closure trap. The
 phenomenon is recognised outside economics: Naipaul's Ralph Singh
 \citep{Naipaul1967} invests everything in metropolitan markers and
 is personally reclassified while his group is not. What he
@@ -215,28 +219,31 @@ Table~\ref{tab:welfare}). This irreducibility is what
 distinguishes the contact channel from the contracting channel
 normatively, not merely descriptively.
 
-Supporting results develop the institutional channel:
-profit-maximising platforms create tokenism as a structural outcome
-(Proposition~\ref{prop:tokenism}); anti-discrimination law
-constrains the contracting channel but leaves the contact channel
-unconstrained, generating a shadow-information market whose
-intensity rises with legal strictness
-(Proposition~\ref{prop:shadow}); and an endogenous marker
+Supporting results develop the platform channel---``platform'' here
+denoting any venue, neighbourhood, school, or institution that
+mediates encounters. Profit-maximising platforms create tokenism as
+a structural outcome (Proposition~\ref{prop:tokenism});
+anti-discrimination law constrains the contracting channel but
+leaves the contact channel unconstrained, generating a
+shadow-information market whose intensity rises with legal
+strictness (Proposition~\ref{prop:shadow}); and an endogenous marker
 investment result (Appendix~\ref{app:veblen}) connects the model
 to Veblen's conspicuous consumption and Spence's signalling
 framework.
 
 The paper is structured as follows. Section~\ref{sec:lit} positions
 the model relative to existing theories of discrimination.
-Section~\ref{sec:model} develops the base model: primitives, Jeffrey
-conditioning, bilateral updating, the closure equilibrium,
-comparative statics, and the mobility threshold.
-Section~\ref{sec:platform} develops the institutional channel:
-experience utility, atmosphere vectors, shadow information markets,
-platform exclusion, and tokenism. Section~\ref{sec:discussion}
-provides worked examples including the restaurant case, the
-colonial compliance mechanism, and strategic action over the
-model's parameters. Section~\ref{sec:conclusion} concludes.
+Section~\ref{sec:model} develops the model in full: primitives,
+Jeffrey conditioning, bilateral updating, the closure equilibrium,
+comparative statics, the mobility threshold, and the platform
+channel (Section~\ref{sec:platform}) through which profit-maximising
+institutions reproduce the trap at scale.
+Section~\ref{sec:welfare} presents the welfare decomposition,
+the policy-dominance result, and the irreducibility corollary.
+Section~\ref{sec:discussion} provides worked examples including the
+restaurant case, the colonial compliance mechanism, and strategic
+action over the model's parameters.
+Section~\ref{sec:conclusion} concludes.
 
 % =============================================================================
 \section{Related Literature}
@@ -419,7 +426,7 @@ standard-Bayesian benchmark as a limiting case. Section~\ref{sec:platform} furth
 
 Before specifying the model we state its architecture, since the
 load-bearing commitment is easily missed in the formal development.
-The model has three layers. The first defines the primitives: a
+The model has four layers. The first defines the primitives: a
 continuum of agents characterised by economic class, observable soft
 markers, group membership, and self-beliefs over class. The second
 introduces the engagement decision, which is governed by a utility
@@ -428,7 +435,11 @@ engagement decided bilaterally on Jeffrey-updated beliefs about the
 other agent's class. The third develops the equilibrium dynamics: a
 closure trap as a stable fixed point, a mobility threshold
 $\gamma^*$ above which the trap is eliminated through a saddle-node
-bifurcation, and the comparative statics of the closure rate.
+bifurcation, and the comparative statics of the closure rate. The
+fourth embeds the bilateral mechanism within a platform---a venue,
+neighbourhood, or institution that mediates encounters---and shows
+how profit-maximising institutional actors reproduce the trap at
+scale.
 
 The architectural commitment that does the work is the form of the
 utility. It depends on class distance alone; group membership does
@@ -479,16 +490,20 @@ two-system structure introduced in Section~\ref{sec:intro}. Economic
 class $c_i$ lives in the economic system: it is mobile within a
 generation and in principle responsive to individual effort, investment,
 and opportunity. Social markers $m_i$ are outputs of the social
-system: they are inherited at the group level through cultural
-transmission, residential geography, and accumulated historical
-experience \citep[population-level persistence:][]{BisinVerdier2001},
-and they do not update when an individual's economic class changes
-\citep[individual-level durability:][]{Bourdieu1984}. An agent who achieves $c_i = 1$ from a group with
-$\bar{c}_{g_k}$ near zero retains the markers of that group---the
+system: they are generated by group membership $g_i$ via a likelihood
+$P(m \mid g_k)$---that is, by the social system's slow-moving
+inheritance through cultural transmission, residential geography,
+and accumulated historical experience
+\citep[population-level persistence:][]{BisinVerdier2001}---and they
+do not update when an individual's economic class changes
+\citep[individual-level durability:][]{Bourdieu1984}. An agent who achieves $c_i = 1$ from a group whose historical mean class
+$\bar{c}_{g_k}$ is near zero retains the markers of that group---the
 ``mimic man'' of the title. It is this decoupling that makes the
-marker a soft signal rather than a hard one: because $m_i$ is not
-generated by $c_i$, there is no likelihood $P(m \mid c)$ to condition
-on, and Jeffrey conditioning over the group partition is forced.
+marker a soft signal rather than a hard one: because $m_i$ is
+generated by $g_i$ and not by $c_i$, no likelihood $P(m \mid c)$
+exists to condition on, and Jeffrey conditioning over the group
+partition is the appropriate inferential rule
+(Section~\ref{subsec:jeffrey}).
 
 Two agents are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
@@ -614,18 +629,18 @@ weights $P'(g_k)$: the observer's experience of the marker shifts
 probability mass across groups without specifying a generative model
 $P(m \mid g_k)$ for how markers are produced by group membership.
 Standard Bayesian updating requires such a likelihood function;
-Jeffrey conditioning does not.
-
-\textbf{Rigidity condition} (Jeffrey's invariance, applied to within-group conditionals)\textbf{.} The conditional probabilities
-$F_{g_k}$ remain fixed during the Jeffrey revision---not because the
-model assumes them constant, but because a soft marker carries no
-likelihood $P(m \mid g_k)$ through which they could be revised. Only
-$P'(g_k)$ changes. Consequence: an individual counter-example shifts
-$P'(g_k)$---the individual is attributed to a different group---but
-does \emph{not} update $F_g$. This is the formal
-expression of the ``exception to the rule'' phenomenon and stereotype
-persistence. It emerges as a theorem of Jeffrey conditioning, not as
-an assumption.
+Jeffrey conditioning does not. This is not merely a technical
+absence. The kinematics formula is the natural form updating takes
+when evidence bears directly on a belief held with less
+certainty---here, the partition weights $P(g_k)$ governing which
+group a particular stranger belongs to---without bearing directly on
+a belief held with more certainty: the within-group economic
+distributions $F_{g_k}$, which the agent infers from aggregate
+historical and statistical knowledge over many individuals.
+\citet{Jeffrey2004} develops this picture explicitly: an agent's
+beliefs form a chain held at varying strengths, and incoming
+evidence redistributes probability across that chain in proportion
+to where it bears.
 
 \begin{example}[Jeffrey versus Bayes on a single counter-example]
 \label{ex:jeffrey-bayes}
@@ -658,6 +673,31 @@ mechanism: the same counter-example that a Bayesian absorbs into the
 group \emph{belief}, the Jeffrey updater absorbs into the group
 \emph{assignment}, leaving the belief intact.
 \end{example}
+
+\textbf{Rigidity condition} (Jeffrey's invariance, applied to
+within-group conditionals)\textbf{.} What
+Example~\ref{ex:jeffrey-bayes} illustrated is a general property of
+the kinematics: the conditional probabilities $F_{g_k}$ are held
+fixed during the Jeffrey revision. The substantive content of this
+condition is epistemic: the agent's beliefs about the within-group
+economic distribution $F_{g_k}$, built up over many observations and
+statistical regularities, are held far more firmly than her beliefs
+about an individual stranger's group membership, which a single
+soft marker observation directly informs. The marker moves the
+weaker belief without disturbing the stronger one. The kinematics
+formula~(\ref{eq:jeffrey}) is the appropriate limiting form in this
+regime---partition weights $P(g_k)$ far less certain than
+within-group conditionals $F_{g_k}$---so updating concentrates on
+the former. Consequence: an individual counter-example shifts
+$P'(g_k)$---the individual is attributed to a different group---but
+does \emph{not} update $F_g$. This is the formal expression of the
+``exception to the rule'' phenomenon and stereotype persistence.
+The condition is epistemic, not motivational: it concerns how
+soft-marker evidence flows through the agent's hierarchy of beliefs,
+not what the agent prefers. Whether agents additionally hold direct
+preferences over group membership---taste-based discrimination in
+the sense of \citet{Becker1957}---is a separate question that the
+model does not turn on; the inference channel operates either way.
 
 The information structure is bilateral and reflexive. Both agents
 update simultaneously. Agent $i$'s self-belief is revised through
@@ -882,7 +922,9 @@ decomposition's analytical power is what it implies for two groups
 in the same economy: identical $\mu$, identical heterogeneity,
 identical mobility parameter $\tilde{\gamma}$---yet if only one of
 them faces $s_g > 0$, the trajectories diverge from generation $t$
-onward through the discrimination rate $\phi^t$.
+onward through the discrimination rate $\phi^t$. These three
+channels are precisely the components labelled in the
+intergenerational-dynamic node of Figure~\ref{fig:loop}.
 
 To express (\ref{eq:dynamic}) as a one-dimensional dynamic in
 $\bar{c}_g^t$, two further specifications are required: the closed
@@ -1134,7 +1176,7 @@ these in sequence: the saddle-node bifurcation
 (Proposition~\ref{prop:bifurcation}) characterises the mobility
 threshold above which the trap is eliminated; the salience-threshold
 corollary (Corollary~\ref{cor:salience-threshold}) shows how
-immutable markers raise the threshold; the enemy-group result
+immutable markers raise the threshold; the outsider-group result
 (Proposition~\ref{prop:enemy}) traces the integration trajectory of
 a low-prior out-group; and the passing result
 (Proposition~\ref{prop:passing}) shows that individual exit from
@@ -1212,13 +1254,13 @@ $\tilde{\gamma} \geq 0$. Numerical verification confirms strict
 monotonicity across the full range of $s_g$. \qed
 \end{proof}
 
-\begin{definition}[Enemy group]
-Group $g_2$ is an enemy group relative to host group $g_1$ if
+\begin{definition}[Outsider group]
+Group $g_2$ is an outsider group relative to host group $g_1$ if
 $\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$---their prior starts
 in the high-discrimination basin.
 \end{definition}
 
-The enemy group's integration trajectory depends on two dimensions:
+The outsider group's integration trajectory depends on two dimensions:
 economic history ($\bar{c}_{g_2}^0$) and marker salience ($s_g$).
 A group with low $\bar{c}_{g_2}^0$ but also low $s_g$---phenotypically
 similar to the host, with mutable cultural markers---may escape
@@ -1234,7 +1276,7 @@ comparable or better initial economic positions but high phenotypic
 salience ($s_g \approx 0.9$) sustains the closure trap
 indefinitely under the same mobility parameters.
 
-\begin{proposition}[Enemy group trap]
+\begin{proposition}[Outsider trap]
 \label{prop:enemy}
 If $g_2$ enters with $\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$
 and $s_g$ sufficiently high that $\tilde{\gamma} <
@@ -1271,47 +1313,40 @@ standard-Bayesian benchmark recovered as $\rho \to 0$, is developed
 in Appendix~\ref{app:loury}.
 
 % =============================================================================
-\section{Institutional Aggregation: The Second Source of Persistence}
+\subsection{Institutional aggregation: the platform channel}
 \label{sec:platform}
 % =============================================================================
 
-The base model establishes the closure trap as a stable equilibrium
-of bilateral Jeffrey updating, identifies marker salience $s_g$ and
-group prior $\bar{c}_g$ as the two governing parameters of
-its behaviour, and characterises the saddle-node bifurcation through
-which intergenerational mobility above a critical threshold
-$\gamma^*$ eliminates the trap. The base model locates the first
-source of persistence at the individual level: the rigidity condition
-ensures that compliance does not aggregate into group prior revision.
-This section identifies the second source, which operates at the
-institutional level. Encounters have so far been treated as bilateral,
-but in many real settings the environment in which they occur is
-itself produced by a market actor: a restaurant calibrates its
-atmosphere to attract preferred compositions, a school sets admission
-criteria, a neighbourhood configures itself through pricing and
-zoning. The two sources are independent: even if bilateral encounters
-did not generate persistence, profit-maximising institutions acting
-on soft signals would produce discriminatory compositions as an
-emergent outcome.
+The bilateral analysis has so far treated encounters as occurring
+between individuals. In many real settings the environment in which
+they occur is itself produced by a market actor: a restaurant
+calibrates its atmosphere to attract preferred compositions, a
+school sets admission criteria, a neighbourhood configures itself
+through pricing and zoning. We use ``platform'' to denote any such
+venue, neighbourhood, school, or institution that mediates
+encounters through an atmosphere vector and an admission policy.
 
-This section embeds bilateral Jeffrey updating within such a
-platform---a venue, neighbourhood, or institution that mediates
-encounters through an atmosphere vector and an admission policy. The
-extension produces four results absent from the bilateral setting: a
-shadow information market whose intensity rises with legal strictness
+The bilateral mechanism locates the first source of persistence at
+the individual level: the rigidity condition ensures that compliance
+does not aggregate into group prior revision. The platform identifies
+a second source, which operates at the institutional level and is
+independent of the first: even if bilateral encounters did not
+generate persistence, profit-maximising platforms acting on soft
+signals would produce discriminatory compositions as an emergent
+outcome.
+
+Embedding bilateral Jeffrey updating within a platform produces
+three results absent from the bilateral setting: a shadow
+information market whose intensity rises with legal strictness
 (Proposition~\ref{prop:shadow}); optimal platform exclusion of
 stigmatised groups that relaxes into a tokenism equilibrium before
 genuine integration is achieved
-(Propositions~\ref{prop:exclusion}--\ref{prop:tokenism}); a host
-destabilisation channel through which inclusion of the out-group can
-trigger closure dynamics within the host group
-(Proposition~\ref{prop:spillover}); and a welfare decomposition
-showing that the informational loss from rigid group priors
-$\bar{c}_g$ is irreducible
-by any policy that leaves the soft-signal structure intact
-(Corollary~\ref{cor:irreducibility}).
-
-\subsection{Platform model}
+(Propositions~\ref{prop:exclusion}--\ref{prop:tokenism}); and a host
+destabilisation channel through which inclusion of the out-group
+can trigger closure dynamics within the host group
+(Proposition~\ref{prop:spillover}). The welfare implications of
+these platform results, together with those of the bilateral
+mechanism, are analysed in Section~\ref{sec:welfare}.
 
 For a $g_1$ client $j$, experience utility at a venue with attendee
 set $\A$ is:
@@ -1381,9 +1416,9 @@ The shadow information value $\Omega_j$ satisfies:
 \end{enumerate}
 \end{proposition}
 
-\begin{proposition}[Platform exclusion of enemy group]
+\begin{proposition}[Platform exclusion of outsider group]
 \label{prop:exclusion}
-At the enemy group's entry prior $\bar{c}_{g_2}^0$, the platform
+At the outsider group's entry prior $\bar{c}_{g_2}^0$, the platform
 optimally excludes $g_2$ entirely:
 $\sigma^*(m) = 0$ for all $m \in \M_{g_2}$.
 \end{proposition}
@@ -1516,10 +1551,18 @@ predicts that within-ethnic differential treatment by class
 markers---software engineers and taxi drivers of shared national
 origin receiving categorically different host treatment
 \citep{LeeZhou2015, Waters1999}---is a direct consequence of the
-bilateral model, with the institutional channel reinforcing it.
+bilateral model, with the platform channel reinforcing it.
 
-\subsection{Welfare analysis}
-\label{subsec:welfare}
+% =============================================================================
+\section{Welfare analysis}
+\label{sec:welfare}
+% =============================================================================
+
+This section synthesises the welfare implications of the bilateral
+mechanism and the platform channel developed in
+Section~\ref{sec:model}. The decomposition that follows distinguishes
+four loss components; three of them are properties of the bilateral
+closure trap, and one is specific to the platform extension.
 
 We define social welfare $W$ as the population-aggregate expected
 utility from social engagement, summed across encounters within a
@@ -2118,6 +2161,23 @@ rigidity) and $s_g > 0$ (visible markers). Either rigidity parameter $\rho = 0$ 
 marker salience $s_g = 0$ eliminates the discrimination channel entirely, producing
 $G = \mu + \bar{c}_g(1-\mu) + \tilde{\gamma}\bar{c}_g(1-\bar{c}_g)$
 with a unique stable fixed point at $\bar{c}_g = 1$.
+
+For the fixed-point analysis below, define
+\begin{equation}
+  \Psi_\rho(\bar{c}_g) \;=\; G_{\rho,s}(\bar{c}_g,\, F(\bar{c}_g)) - \bar{c}_g,
+  \label{eq:psi-rho}
+\end{equation}
+the analogue, for the rigidity-augmented map, of the residual
+$\Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g) - \bar{c}_g$ used in the
+main text (\S\ref{sec:model}); the closed-form expressions for the
+discrimination rate $F(\bar{c}_g)$ and the marker-drag coefficient
+$\delta$ are as defined there. At $\rho = 1$ and $\phi = F(\bar{c}_g)$,
+$G_{\rho,s}$ coincides with $\mathcal{H}$ and $\Psi_\rho$ coincides
+with $\Psi$. The informational welfare loss $\mathcal{L}_{\mathrm{info}}$
+referred to below is the component of the welfare decomposition
+(\ref{eq:welfare}) measuring the welfare gap between the Jeffrey
+equilibrium and the counterfactual Bayesian equilibrium that would
+obtain if the rigidity condition were removed.
 
 \begin{proposition}[Bayesian nesting]
 \label{prop:loury-nesting}
