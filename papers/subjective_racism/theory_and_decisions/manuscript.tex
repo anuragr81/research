@@ -420,50 +420,29 @@ model that follows develops this claim formally, proving that the resulting clos
 standard-Bayesian benchmark as a limiting case. Section~\ref{sec:platform} further elaborates how profit-maximising platforms may reproduce and institutionalise the trap at scale.
 
 % =============================================================================
-\section{The Base Model}
+\section{Model}
 \label{sec:model}
 % =============================================================================
 
-Before specifying the model we state its architecture, since the
-load-bearing commitment is easily missed in the formal development.
-The model has four layers. The first defines the primitives: a
+We first define the model primitives in Section \ref{sec:model_primitives}. This includes a
 continuum of agents characterised by economic class, observable soft
-markers, group membership, and self-beliefs over class. The second
-introduces the engagement decision, which is governed by a utility
-depending only on the economic class distance between two agents, with
-engagement decided bilaterally on Jeffrey-updated beliefs about the
-other agent's class. The third develops the equilibrium dynamics: a
-closure trap as a stable fixed point, a mobility threshold
-$\gamma^*$ above which the trap is eliminated through a saddle-node
-bifurcation, and the comparative statics of the closure rate. The
-fourth embeds the bilateral mechanism within a platform---a venue,
-neighbourhood, or institution that mediates encounters---and shows
-how profit-maximising institutional actors reproduce the trap at
+markers, group membership, and self-beliefs over class. The engagement decision governed by a utility that in turn depends on economic class distance then follows in Section \ref{subsec:bilateral}. The equilibrium dynamics and implications for intergenerational mobility are discussed in Section \ref{subsec:dynamics}. Finally, Section \ref{sec:platform} discusses how platforms ---a venue,
+neighbourhood, or institutions that mediate encounters---can reproduce the trap at
 scale.
 
-The architectural commitment that does the work is the form of the
-utility. It depends on class distance alone; group membership does
-not enter as an argument. The agent has no preference over groups,
-no taste-based or statistical-discrimination component, and no
-deviation from full Bayesian rationality. Categorical discrimination
-emerges nevertheless, because soft markers carry information about
-group membership and the Jeffrey-revised belief over class reflects
-that information. The asymmetry between groups is carried by the
-evidence, not by the preferences.
 
 \subsection{Primitives}
-
+\label{sec:model_primitives}
 Consider a continuum of agents indexed by $i$ and $j$. When two
 agents encounter each other, agent $j$ observes agent $i$'s soft
 markers and forms a belief about $i$'s economic class; simultaneously,
 agent $i$ observes agent $j$'s soft markers and forms a belief about
 $j$'s economic class. Engagement is decided bilaterally on the basis
-of these beliefs. The model's engagement decisions are grounded
-throughout in economic compatibility: racial markers, gender signals,
-cultural indicators, and other soft cues enter the engagement decision
+of these beliefs. What drives this engagement is economic compatibility: gender signals,
+cultural indicators, racial markers, and other soft cues enter the engagement decision
 only insofar as they are informative about economic class through the
-group prior. This is not a claim that agents consciously reason about
-income; it is a claim that the latent variable mediating social
+group prior. This does not claim that agents consciously reason about
+income - only that the latent variable mediating social
 engagement is economic class, and soft markers are its observable
 correlates.
 
@@ -472,15 +451,18 @@ Each agent is characterised by:
   \item Economic class $c_i \in \C = [0,1]$, where $c = 0$ is the
   minimum and $c = 1$ the maximum. Determines consumption bundle and
   is the latent variable underlying the engagement decision.
+  
   \item Social marker $m_i \in \M$, an observable characteristic
   (accent, dress, name, consumption choice). Correlated with $c_i$
   but does not determine it. This is a \emph{soft signal}.
+  
   \item Group membership $g_i \in \G = \{g_1, \ldots, g_K\}$.
   Group membership may be directly observable (race, visible gender)
   or latent and inferred from markers (class, ethnicity, religion).
   In either case what matters for the model is not group membership
   itself but the economic class distribution conditional on group
   membership, which is always a soft inference.
+  
   \item Self-belief $Q_i(c)$, agent $i$'s belief over their own
   socially relevant economic position.
 \end{itemize}
@@ -499,19 +481,18 @@ do not update when an individual's economic class changes
 \citep[individual-level durability:][]{Bourdieu1984}. An agent who achieves $c_i = 1$ from a group whose historical mean class
 $\bar{c}_{g_k}$ is near zero retains the markers of that group---the
 ``mimic man'' of the title. It is this decoupling that makes the
-marker a soft signal rather than a hard one: because $m_i$ is
-generated by $g_i$ and not by $c_i$, no likelihood $P(m \mid c)$
-exists to condition on, and Jeffrey conditioning over the group
-partition is the appropriate inferential rule
+marker a soft signal rather than a hard one. For markers where $m_i$ is
+driven a lot more by $g_i$ than by $c_i$, there is no likelihood $P(m \mid c)$
+exists to condition on. The soft marker inferences makes Jeffrey conditioning over the group
+partition the appropriate inferential rule
 (Section~\ref{subsec:jeffrey}).
 
-Two agents are \textbf{economically compatible} if
+We consider how economic distances constrain social engagement. A poor man may walk into a bar or club and engage socially but may struggle to develop those relationship is she cannot afford such visits frequently enough. Two agents in the model are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
 squared economic class distance and $\bar{d}$ is the compatibility threshold.
-Squared distance is adopted throughout; it decomposes expected
+Squared distance decomposes expected
 incompatibility into a bias term (distance between group means) and
-a variance term (within-group heterogeneity), a separation that drives
-the comparative statics of Section~\ref{subsec:interaction}.
+a variance term (within-group heterogeneity).
 
 Agent $j$'s prior over the economic class of a member of group $g$:
 \begin{equation}
@@ -694,10 +675,10 @@ does \emph{not} update $F_g$. This is the formal expression of the
 ``exception to the rule'' phenomenon and stereotype persistence.
 The condition is epistemic, not motivational: it concerns how
 soft-marker evidence flows through the agent's hierarchy of beliefs,
-not what the agent prefers. Whether agents additionally hold direct
+not what the agent prefers.\footnote{Whether agents additionally hold direct
 preferences over group membership---taste-based discrimination in
 the sense of \citet{Becker1957}---is a separate question that the
-model does not turn on; the inference channel operates either way.
+model does not turn on; the inference channel operates either way.} 
 
 The information structure is bilateral and reflexive. Both agents
 update simultaneously. Agent $i$'s self-belief is revised through
@@ -771,7 +752,7 @@ connect markers to the engagement decision, we now specialise on
 two dimensions.
 
 \textbf{Two-group simplification.} For the remainder of the
-analysis, we work with two groups $\G = \{g_1, g_2\}$ (host and
+analysis in this section, we work with two groups $\G = \{g_1, g_2\}$ (host and
 immigrant/out-group respectively). This is the simplest
 non-trivial setting for the asymmetry that drives the model; the
 analysis generalises to $K$ groups at the cost of notation.
@@ -904,17 +885,16 @@ a drag on intergenerational economic position; $\delta$ captures
 their aggregate effect without requiring the model to specify which
 dominates.
 
-To anchor the decomposition: think of a group's economic position
-passing across generations. Three channels operate. The
+Consider as an example how the three channels operate for a group's economic position across generations. First, the
 exclusion-erosion term $\bar{c}_g^t(1 - \delta \phi^t)$ carries
 forward the parents' position but discounts it by the discrimination
 rate---every economic interaction prevented by discrimination
-reduces the group's economic position over time. The
+reduces the group's economic position over time. Second, the
 natural-convergence term $\mu(1 - \bar{c}_g^t)$ is a rising tide
 that lifts the group regardless of its current position---productivity
 gains, public-good expansion, baseline improvement independent of
-group status. The mobility term $\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)$
-captures intergenerational regression to the group mean---children
+group status. Third is the mobility term $\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)$
+ which captures intergenerational regression to the group mean---children
 of high-class parents within the group may fall, children of
 low-class parents may rise---and is largest at intermediate $\bar{c}_g$
 where the within-group population is most heterogeneous. The
@@ -944,7 +924,7 @@ intergenerational regression to the group mean: children of
 high-class families face some probability of downward mobility, and
 children of low-class families have some chance of upward mobility.
 
-The mobility parameter $\gamma$ is taken as exogenous: it captures
+The mobility parameter $\gamma$ is exogenous in the model : it captures
 within-group variance arising from talent, effort, and wealth shocks,
 independent of the group's social position. This is a significant
 simplifying assumption. If $\gamma$ were endogenous---decreasing in
@@ -959,25 +939,17 @@ the required mobility intervention, because in the trap basin
 $\gamma$ would itself be endogenously depressed, making the threshold
 a moving target that recedes as discrimination intensifies. The
 results that follow therefore hold a fortiori under endogenous
-mobility, but the policy implication is sharper than stated: the
-required intervention is larger than the exogenous model suggests.
+mobility, but the policy implication is sharper than stated since the
+required intervention has to be larger than what is stated by exogenous model assumption.
 
 \subsection{Intergenerational dynamics and the closure equilibrium}
 \label{subsec:dynamics}
 
 We now reduce the intergenerational dynamic (\ref{eq:dynamic}) to a
 one-dimensional discrete dynamical system in the group prior
-$\bar{c}_g$ and characterise its steady states. The analysis uses
-only elementary properties of such systems---fixed points, the
-slope condition for local stability, and the saddle-node
-bifurcation; a reader unfamiliar with these may consult
-\citet{Galor2007} for fixed points and stability and
-\citet{MedioLines2001} for bifurcation analysis. A fixed point is a
-group prior that reproduces itself from one generation to the next;
-it is locally stable when the map's slope there is less than one in
-absolute value, so that nearby trajectories are drawn toward it. The
-substantive content is that the system admits more than one stable
-fixed point, and that which one a group reaches depends on its
+$\bar{c}_g$ and characterise its steady states (see \citep{Galor2007,MedioLines2001}). Recall that a fixed point is a
+group prior that reproduces itself from one generation to the next. It is locally stable when the map's slope there is less than one in
+absolute value, so that nearby trajectories are drawn toward it. The system admits more than one stable fixed point -- which one a group reaches depends on its
 history.
 
 The discrimination rate $\phi^t = s_g \cdot F(\bar{c}_g^t)$ is
@@ -986,7 +958,7 @@ modulated by marker salience $s_g$
 (Proposition~\ref{prop:salience}), where $F: [0,1] \to [0,1]$ is
 the group-level discrimination rate function induced by the
 threshold: when $s_g = 0$, markers are
-invisible and no discrimination fires. The composed map is:
+invisible and no discrimination fires. Therefore, the composed map is:
 \begin{equation}
   \mathcal{H}(\bar{c}_g;\, s_g) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}
   - s_g\,\delta\, F(\bar{c}_g))
@@ -1267,14 +1239,7 @@ similar to the host, with mutable cultural markers---may escape
 the trap rapidly because the discrimination channel fires weakly.
 A group with comparable $\bar{c}_{g_2}^0$ but high marker salience $s_g$---visibly
 distinct, with immutable phenotypic markers---faces a structurally
-harder path. The Irish in England illustrate the former: despite a
-history of famine, colonial extraction, and armed conflict,
-phenotypic similarity ($s_g \approx 0.15$) meant the Jeffrey
-revision fired weakly, and integration occurred within two
-generations. Indian and Kenyan immigrants illustrate the latter:
-comparable or better initial economic positions but high phenotypic
-salience ($s_g \approx 0.9$) sustains the closure trap
-indefinitely under the same mobility parameters.
+harder path.
 
 \begin{proposition}[Outsider trap]
 \label{prop:enemy}
