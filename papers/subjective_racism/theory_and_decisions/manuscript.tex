@@ -94,7 +94,11 @@ discrimination a perturbation; there is a mobility threshold,
 increasing in marker salience, above which the trap is eliminated
 through a saddle-node bifurcation. A second source operates
 institutionally, where profit-maximising platforms reproduce
-discriminatory compositions through the same mechanism. The welfare
+discriminatory compositions through the same mechanism. The
+apparatus generalises beyond classical discrimination: the same
+comparative statics apply to contemporary algorithmic environments
+where platform-minted markers (verification, visibility, content
+classification) replace cultural ones. The welfare
 loss contains an informational component that no policy can remove
 without altering the soft-signal character of social interaction.
 At the standard-Bayesian limit the model recovers the
@@ -644,7 +648,7 @@ priors $\bar{c}_{g_k}$ fixed and revises only the group weights, giving
 an updated class expectation of $0.2 \times 0.7 + 0.8 \times 0.3 = 0.38$.
 The stranger's inferred standing falls from $0.50$ to $0.38$---not
 because the accent revealed anything about this individual's income, but
-because it reweighted the groups whose priors the observer already held.
+because it reweighted the groups whose priors the observer already held -- a better representative of how soft signals change opinions in the complex world of markers.
 
 Now suppose the stranger is in fact high-class. Under Jeffrey
 conditioning the observer reclassifies the individual---attributing them
@@ -715,19 +719,16 @@ an information trap (\emph{closure as epistemic trap}).
 The rigidity condition operates at the inference moment, not across
 time. The within-group distributions $F_g$ are held fixed at the
 encounter---the timescale on which a soft marker is read and
-processed---but they are not eternal. They evolve over generations
+processed---but they are not eternal. Since we consider the interactions between economic class and social hierarchy, the within-group distributions are set to evolve over generations
 through the intergenerational dynamic of
 Section~\ref{subsec:dynamics}, where mobility, the discrimination
 externality, and marker decay shift $\bar{c}_g^t$ over time. The
 closure trap arises precisely when these slower forces balance to
 keep $\bar{c}_g$ below a tipping point; above that point the same
 forces drive the system to a high attractor and the marker-borne
-stereotype dissolves. Prejudice in the model is therefore not
+stereotype dissolves. Prejudice in this more general sense is therefore not
 permanent: it persists when slow-moving structural conditions sustain
-it and dissolves when they shift---tracking the observation that
-stereotypes typically change over generations and through
-structural-economic change rather than through accumulating
-individual counter-examples at the encounter level.
+it and dissolves when they shift.
 
 Beliefs about class translate into an engagement decision through a
 utility function in which class distance acts as a friction:
@@ -927,15 +928,16 @@ onward through the discrimination rate $\phi^t$. These three
 channels are precisely the components labelled in the
 intergenerational-dynamic node of Figure~\ref{fig:loop}.
 
+
 To express (\ref{eq:dynamic}) as a one-dimensional dynamic in
 $\bar{c}_g^t$, two further specifications are required: the closed
 form of the mobility term, and the closed form of the discrimination
 rate $\phi^t$.
 
-Under the Beta--De~Finetti structure
+For the mobility term, consider that under the Beta--De~Finetti structure
 (Appendix~\ref{app:bernoulli}), the within-group variance is
 $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, where $\nu > 0$ is
-the within-group concentration parameter, so the mobility term
+the within-group concentration parameter. Therefore the mobility term
 becomes $\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ where
 $\tilde{\gamma} = \gamma/(1+\nu)$ is the effective mobility
 parameter. This term is maximised at
@@ -945,41 +947,42 @@ intergenerational regression to the group mean: children of
 high-class families face some probability of downward mobility, and
 children of low-class families have some chance of upward mobility.
 
-The mobility parameter $\gamma$ is exogenous in the model: it captures
+The discrimination rate $\phi^t$ is determined by the engagement threshold (\ref{eq:threshold}),
+modulated by marker salience $s_g$
+(Proposition~\ref{prop:salience}) as $\phi^t = s_g \cdot F(\bar{c}_g^t)$ , where $F: [0,1] \to [0,1]$ is
+the group-level discrimination rate function induced by the
+threshold: when $s_g = 0$, markers are
+invisible and no discrimination fires.
+
+It is worth highlighting that the mobility parameter $\gamma$ is exogenous in the model: it captures
 within-group variance arising from talent, effort, and wealth shocks,
-independent of the group's social position. This is a significant
-simplifying assumption. If $\gamma$ were endogenous---decreasing in
+independent of the group's social position. If $\gamma$ were endogenous---decreasing in
 the discrimination rate $\phi$ through reduced access to education,
 mentorship, and opportunity networks---the closure trap would be more
-severe and the bifurcation threshold $\gamma^*$ harder to reach. The
-assumption does not affect the rigidity condition, the tokenism or
-shadow-market results, or the irreducibility of informational welfare
-loss, all of which are independent of $\gamma$. It does affect the
-bifurcation result quantitatively: the stated $\gamma^*$ understates
-the required mobility intervention, because in the trap basin
-$\gamma$ would itself be endogenously depressed, making the threshold
-a moving target that recedes as discrimination intensifies. The
-results that follow therefore hold a fortiori under endogenous
-mobility, but the policy implication is sharper than stated since the
-required intervention has to be larger than what is stated by exogenous model assumption.
+severe and the bifurcation threshold $\gamma^*$ harder to reach. The stated $\gamma^*$ understates the required mobility intervention, because in the trap basin
+$\gamma$ would be endogenously depressed, making the threshold
+a moving target that recedes as discrimination intensifies. The policy implication is thus sharper than stated -- as the
+required intervention must be larger than stated by the exogenous model assumption.
 
 \subsection{Intergenerational dynamics and the closure equilibrium}
 \label{subsec:dynamics}
+
 
 We now reduce the intergenerational dynamic (\ref{eq:dynamic}) to a
 one-dimensional discrete dynamical system in the group prior
 $\bar{c}_g$ and characterise its steady states (see \citealp{Galor2007,MedioLines2001}). Recall that a fixed point is a
 group prior that reproduces itself from one generation to the next. It is locally stable when the map's slope there is less than one in
 absolute value, so that nearby trajectories are drawn toward it. The system admits more than one stable fixed point -- which one a group reaches depends on its
-history.
-
-The discrimination rate $\phi^t = s_g \cdot F(\bar{c}_g^t)$ is
-determined by the engagement threshold (\ref{eq:threshold}),
-modulated by marker salience $s_g$
-(Proposition~\ref{prop:salience}), where $F: [0,1] \to [0,1]$ is
-the group-level discrimination rate function induced by the
-threshold: when $s_g = 0$, markers are
-invisible and no discrimination fires. Therefore, the composed map is:
+history. The map combines three forces. The baseline drift $\mu$ pulls
+upward toward integration; the mobility term
+$\tilde{\gamma}\,\bar{c}_g(1 - \bar{c}_g)$ acts as intergenerational
+regression to the group mean; the discrimination rate
+$\phi^t = s_g\,F(\bar{c}_g^t)$ enters with a negative sign, transmitting
+to the group prior the downward pressure that the Jeffrey-updating
+mechanism generates at the encounter level. The closure trap arises
+when this third term dominates the first two across a basin of priors,
+holding successive generations in a low-attractor steady state. The
+composed map is:
 \begin{equation}
   \mathcal{H}(\bar{c}_g;\, s_g) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}
   - s_g\,\delta\, F(\bar{c}_g))
@@ -1049,10 +1052,9 @@ $\bar{c}_g^{\mathrm{mid}}$ \citep[see][ch.~1]{Galor2007}. \qed
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_composed_map}
+\includegraphics[width=0.9\textwidth]{figures/fig_composed_map}
 \caption{Composed map $\mathcal{H}(\bar{c}_g;\, s_g)$ plotted against
-the 45-degree line. Stable fixed points are shown as filled circles,
-the unstable tipping point as an open square. Panel (a): trap regime,
+the 45-degree line. Panel (a): trap regime,
 three fixed points $\bar{c}_g^{\mathrm{low}}$,
 $\bar{c}_g^{\mathrm{mid}}$, $\bar{c}_g^{\mathrm{high}} = 1$. Panel (b):
 post-bifurcation, the unique stable fixed point is $\bar{c}_g = 1$.
@@ -1554,7 +1556,12 @@ This section synthesises the welfare implications of the bilateral
 mechanism and the platform channel developed in
 Section~\ref{sec:model}. The decomposition that follows distinguishes
 four loss components; three of them are properties of the bilateral
-closure trap, and one is specific to the platform extension.
+closure trap, and one is specific to the platform extension. The
+losses identified below are attributable solely to the soft-marker
+Jeffrey-conditioning architecture: the model contains no taste-based
+discriminatory preferences and no statistical discrimination in
+contracting, so the welfare results are not driven by either
+mechanism.
 
 We define social welfare $W$ as the population-aggregate expected
 utility from social engagement, summed across encounters within a
@@ -1676,8 +1683,7 @@ change, or long-run cultural shifts alter the signal structure
 itself---moving markers from soft to hard, or reducing the
 correlation between markers and group priors. Such changes operate
 outside $\Phi$ and could in principle reduce
-$\mathcal{L}_{\text{info}}$. The corollary is a theorem about
-instruments, not a verdict on the world.
+$\mathcal{L}_{\text{info}}$. 
 
 \begin{table}[t]
 \centering
@@ -1762,6 +1768,26 @@ literature on platform discrimination is consistent: discrimination
 on rental and rideshare platforms correlates with the introduction
 of photographs and real names, not with any change in the underlying
 population.
+
+The marker landscape itself is not historically fixed. When media
+standardisation collapses---when the cultural codes that lock markers
+to economic class are no longer guarded by elite institutions---marker
+porosity rises across class lines, $F_{g_1}$ and $F_{g_2}$ become less
+distinguishable, and the effective discrimination intensity $\delta$
+falls. Once $\delta$ drops below $\delta^*$ the closure trap dissolves
+through the saddle-node bifurcation of Section~\ref{sec:closure}. But
+platforms do not merely erode old markers; they mint new ones---verification
+status, algorithmic visibility, follower counts, content-moderation
+classifications---that are themselves highly legible and tightly
+coupled to platform-specific reward structures. The model predicts
+that closure dynamics re-emerge around these platform-minted
+dimensions, often with higher $\delta$ because algorithmic markers are
+sharper than the cultural markers they replace. The marker-politics
+question---who is empowered to set markers---lies upstream of the
+model, but the comparative statics of porosity, salience, and $\delta$
+are precisely what governs the dynamics once markers shift. The
+platform channel is, in this sense, the contemporary frontier on which
+the soft-marker apparatus operates.
 
 The model's normative stance requires brief clarification. In the
 Weberian tradition of value-free social science, the analysis
@@ -2036,7 +2062,7 @@ soft-signal character of social interaction
 (Corollary~\ref{cor:irreducibility}): it arises from the updating
 rule itself, not from any parameter that formal instruments can
 reach. This characterises the limits of instruments, not a verdict
-on the world: social movements, norm change, or long-run cultural
+on the world. Social movements, norm change, or long-run cultural
 shifts that alter the signal structure itself could reduce this
 floor.
 

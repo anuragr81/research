@@ -80,13 +80,23 @@ ax = axes[0]
 ax.plot(c, H_a, 'k-', linewidth=1.6, label=r'$\mathcal{H}(\bar{c}_g)$')
 ax.plot(c, c, 'k--', linewidth=0.9, alpha=0.6, label='45-degree line')
 fps_a = fixed_points(gamma_a)
+stable_labeled = False
+unstable_labeled = False
 for fp in fps_a:
     stab = stability(fp, gamma_a)
     marker = 'o' if stab else 's'
     facecolor = 'black' if stab else 'white'
+    if stab and not stable_labeled:
+        label = 'Stable fixed point'
+        stable_labeled = True
+    elif (not stab) and not unstable_labeled:
+        label = 'Unstable tipping point'
+        unstable_labeled = True
+    else:
+        label = None
     ax.plot(fp, fp, marker=marker, markersize=8,
             markerfacecolor=facecolor, markeredgecolor='black',
-            markeredgewidth=1.3, zorder=5)
+            markeredgewidth=1.3, linestyle='None', zorder=5, label=label)
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 ax.set_xlabel(r'$\bar{c}_g^t$')
