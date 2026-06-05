@@ -293,7 +293,7 @@ agents with misspecified models can sustain persistent discrimination
 through biased learning.
 
 On the cognitive-architecture side, \citet{FryerJackson2008} develop a
-bounded-memory model where a fixed number of categorical bins forces
+model in which a fixed number of categories forces
 variance-minimising lumping, producing coarse sorting of minority
 groups and discrimination without a taste for it.
 \citet{Mullainathan2002} develops a complementary coarse-Bayesian
@@ -481,13 +481,13 @@ do not update when an individual's economic class changes
 \citep[individual-level durability:][]{Bourdieu1984}. An agent who achieves $c_i = 1$ from a group whose historical mean class
 $\bar{c}_{g_k}$ is near zero retains the markers of that group---the
 ``mimic man'' of the title. It is this decoupling that makes the
-marker a soft signal rather than a hard one. For markers where $m_i$ is
-driven a lot more by $g_i$ than by $c_i$, there is no likelihood $P(m \mid c)$
-exists to condition on. The soft marker inferences makes Jeffrey conditioning over the group
-partition the appropriate inferential rule
-(Section~\ref{subsec:jeffrey}).
+marker a soft signal rather than a hard one. Where $m_i$ is driven
+far more by $g_i$ than by $c_i$, even a marker-to-class likelihood
+that exists is dominated by the marker-to-group channel; Jeffrey
+conditioning over the group partition is the rule that respects this
+relative strength (Section~\ref{subsec:jeffrey}).
 
-We consider how economic distances constrain social engagement. A poor man may walk into a bar or club and engage socially but may struggle to develop those relationship is she cannot afford such visits frequently enough. Two agents in the model are \textbf{economically compatible} if
+We consider how economic distances constrain social engagement. A poor man may walk into a bar or club and engage socially, but he may struggle to sustain those relationships if he cannot afford such visits frequently enough. Two agents in the model are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
 squared economic class distance and $\bar{d}$ is the compatibility threshold.
 Squared distance decomposes expected
@@ -635,7 +635,11 @@ $0.5 \times 0.7 + 0.5 \times 0.3 = 0.50$.
 The stranger speaks, and a soft marker (accent) shifts the observer's
 group credence to $P'(g_A) = 0.2$, $P'(g_B) = 0.8$. The marker carries
 no likelihood $P(m \mid \text{class})$: it is informative about group,
-not directly about class. Jeffrey conditioning therefore holds the group
+not directly about class.\footnote{Markers do correlate with class in
+aggregate; as established in Section~\ref{sec:model_primitives}, that
+correlation runs through group membership (the chain $P(m \mid g)\cdot
+P(c \mid g)$) rather than a primitive $P(m \mid c)$ channel, the mimic
+man being the limiting case in which the two come apart.} Jeffrey conditioning therefore holds the group
 priors $\bar{c}_{g_k}$ fixed and revises only the group weights, giving
 an updated class expectation of $0.2 \times 0.7 + 0.8 \times 0.3 = 0.38$.
 The stranger's inferred standing falls from $0.50$ to $0.38$---not
@@ -707,6 +711,23 @@ encounters, so excluded agents accumulate worse information about
 economic opportunities than they otherwise would; the closure trap,
 derived formally in Section~\ref{subsec:intergenerational}, is also
 an information trap (\emph{closure as epistemic trap}).
+
+The rigidity condition operates at the inference moment, not across
+time. The within-group distributions $F_g$ are held fixed at the
+encounter---the timescale on which a soft marker is read and
+processed---but they are not eternal. They evolve over generations
+through the intergenerational dynamic of
+Section~\ref{subsec:dynamics}, where mobility, the discrimination
+externality, and marker decay shift $\bar{c}_g^t$ over time. The
+closure trap arises precisely when these slower forces balance to
+keep $\bar{c}_g$ below a tipping point; above that point the same
+forces drive the system to a high attractor and the marker-borne
+stereotype dissolves. Prejudice in the model is therefore not
+permanent: it persists when slow-moving structural conditions sustain
+it and dissolves when they shift---tracking the observation that
+stereotypes typically change over generations and through
+structural-economic change rather than through accumulating
+individual counter-examples at the encounter level.
 
 Beliefs about class translate into an engagement decision through a
 utility function in which class distance acts as a friction:
@@ -924,7 +945,7 @@ intergenerational regression to the group mean: children of
 high-class families face some probability of downward mobility, and
 children of low-class families have some chance of upward mobility.
 
-The mobility parameter $\gamma$ is exogenous in the model : it captures
+The mobility parameter $\gamma$ is exogenous in the model: it captures
 within-group variance arising from talent, effort, and wealth shocks,
 independent of the group's social position. This is a significant
 simplifying assumption. If $\gamma$ were endogenous---decreasing in
@@ -947,7 +968,7 @@ required intervention has to be larger than what is stated by exogenous model as
 
 We now reduce the intergenerational dynamic (\ref{eq:dynamic}) to a
 one-dimensional discrete dynamical system in the group prior
-$\bar{c}_g$ and characterise its steady states (see \citep{Galor2007,MedioLines2001}). Recall that a fixed point is a
+$\bar{c}_g$ and characterise its steady states (see \citealp{Galor2007,MedioLines2001}). Recall that a fixed point is a
 group prior that reproduces itself from one generation to the next. It is locally stable when the map's slope there is less than one in
 absolute value, so that nearby trajectories are drawn toward it. The system admits more than one stable fixed point -- which one a group reaches depends on its
 history.
@@ -1028,7 +1049,7 @@ $\bar{c}_g^{\mathrm{mid}}$ \citep[see][ch.~1]{Galor2007}. \qed
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{figures/Fig1}
+\includegraphics[width=\textwidth]{figures/fig_composed_map}
 \caption{Composed map $\mathcal{H}(\bar{c}_g;\, s_g)$ plotted against
 the 45-degree line. Stable fixed points are shown as filled circles,
 the unstable tipping point as an open square. Panel (a): trap regime,
@@ -1038,6 +1059,32 @@ post-bifurcation, the unique stable fixed point is $\bar{c}_g = 1$.
 Illustrative functional form $F(\bar{c}_g) = (1 - \bar{c}_g)^2$ and
 parameters $\mu = 0.05$, $\delta = 0.5$, $s_g = 1$.}
 \label{fig:closure-map}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/fig_cobweb}
+\caption{Cobweb iteration of the composed map in the trap regime
+($\tilde{\gamma} = 0.05$). Trajectories from initial conditions below
+the tipping point $\bar{c}_g^{\mathrm{mid}}$ are drawn down to the low
+attractor $\bar{c}_g^{\mathrm{low}}$ (the closure trap); those above
+climb to $\bar{c}_g = 1$. Filled circles mark stable fixed points, the
+open square the unstable tipping point. Parameters as in
+Figure~\ref{fig:closure-map}.}
+\label{fig:cobweb}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig_trajectory_timeseries}
+\caption{Group-prior trajectories $\bar{c}_g^t$ across generations in
+the trap regime ($\tilde{\gamma} = 0.05$), for four initial
+conditions. Trajectories beginning below the tipping point
+$\bar{c}_g^{\mathrm{mid}}$ are absorbed into the low attractor---the
+closure trap as a path that remains low indefinitely---while those
+beginning above climb toward full integration. Parameters as in
+Figure~\ref{fig:closure-map}.}
+\label{fig:trajectory}
 \end{figure}
 
 \subsection{Comparative statics and the mobility threshold}
@@ -1184,7 +1231,7 @@ $\{\mathcal{H}(\bar{c}_g) = \bar{c}_g,\; \mathcal{H}'(\bar{c}_g) = 1\}$ jointly.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.7\textwidth]{figures/Fig2}
+\includegraphics[width=0.7\textwidth]{figures/fig_bifurcation_gamma}
 \caption{Bifurcation diagram of fixed points $\bar{c}_g^*$ against the
 effective mobility parameter $\tilde{\gamma}$. Solid lines: stable fixed
 points; dashed line: unstable tipping point. At
@@ -1194,6 +1241,21 @@ closure trap is eliminated. Illustrative functional form
 $F(\bar{c}_g) = (1 - \bar{c}_g)^2$ and parameters $\mu = 0.05$,
 $\delta = 0.5$, $s_g = 1$.}
 \label{fig:bifurcation}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/fig_bifurcation_delta}
+\caption{Bifurcation diagram of fixed points $\bar{c}_g^*$ against the
+discrimination intensity $\delta$ (with $\tilde{\gamma} = 0.05$).
+Below the critical value $\delta^* \approx 0.29$ the integrated state
+$\bar{c}_g = 1$ is the only stable fixed point; above it a saddle-node
+bifurcation creates a stable low attractor (the closure trap) and an
+unstable tipping point, with the trap deepening as discrimination
+intensifies. Companion to the mobility bifurcation of
+Figure~\ref{fig:bifurcation}; same functional form and remaining
+parameters.}
+\label{fig:bifurcation-delta}
 \end{figure}
 
 The intergenerational persistence of class position near the
@@ -1430,34 +1492,25 @@ Proposition~\ref{prop:exclusion}) just balances:
   W(g_2) \;=\; n_{g_1} (1 - \alpha)
   \cdot \frac{\bar{c}_{g_1} - \bar{c}_g^{\mathrm{excl}}}{|\mathcal{A}|}
 \]
-which is continuous in $\bar{c}_{g_2}$ through both $W(g_2)$ (rising
-with $g_2$'s class) and the externality (shrinking as the gap
-$\bar{c}_{g_1} - \bar{c}_{g_2}$ closes). The social tipping point
-$\bar{c}_g^{\mathrm{mid}}$, by contrast, is determined by the
-aggregate discrimination rate $F(\bar{c}_g)$ crossing the level at
-which the closure basin disappears
-(Proposition~\ref{prop:class-closure}); it is a property of the
-system-wide intergenerational dynamic
-in equation~(\ref{eq:dynamic}), not of the platform's marginal
-calculation. Because the platform optimises against the local
-average class signal inside the platform while
-$\bar{c}_g^{\mathrm{mid}}$ depends on the global discrimination
-rate, the two thresholds are determined by structurally different
-objects, and the platform's FOC balances at a $\bar{c}_g$ strictly
-below the social tipping point. \qed
+This is set by the platform's local marginal calculation---the
+average class signal inside the platform. The social tipping point
+$\bar{c}_g^{\mathrm{mid}}$, by contrast, is fixed by the global
+discrimination rate $F(\bar{c}_g)$ crossing the level at which the
+closure basin disappears (Proposition~\ref{prop:class-closure}), a
+property of the system-wide dynamic in
+equation~(\ref{eq:dynamic}). The two thresholds answer to
+structurally different objects, and the platform's FOC balances at a
+$\bar{c}_g$ strictly below the social tipping point. \qed
 \end{proof}
 
-This equilibrium is the structural counterpart of what is
-colloquially called tokenism: the platform admits members of the
-stigmatised group before social integration is achieved, producing
-visible inclusion without the underlying belief revision that
-integration would require. The result emerges from the Jeffrey
-mechanism and the platform's profit incentives, not from any
-imputed intent on the platform's part. The admissions are not
-cosmetic in their effect on the host group's social environment,
-however: they alter the marginal composition of the platform and
-can in turn destabilise the host equilibrium when the host group
-itself is near its tipping point.
+This equilibrium is the structural counterpart of tokenism: the
+platform admits members of the stigmatised group before social
+integration is achieved, producing visible inclusion without the
+underlying belief revision integration would require---an emergent
+outcome of the Jeffrey mechanism and profit incentives, not of any
+imputed intent. These admissions are not cosmetic, however: they
+alter the platform's marginal composition and can destabilise the
+host equilibrium when the host group is near its own tipping point.
 
 \begin{proposition}[Host destabilisation]
 \label{prop:spillover}
@@ -1494,34 +1547,36 @@ and $\bar{c}_{g_2}^{\mathrm{excl}}$, the configuration of interest.
 
 The platform framework extends naturally to immigration. An
 immigrant's assimilation trajectory is determined by the economic
-tier at which initial social attachment occurs: the host population's
-Jeffrey revision maps the immigrant's foreign marker bundle
-$m_i^{\text{foreign}}$ onto an initial prior
-$\bar{c}_g^{\text{init}}$ that depends on marker legibility within
-the host's marker space $\M$, not on actual economic class at origin.
-Immigrants with legible high-class markers access high-class
-platforms from the outset; those with illegible markers enter the
-closure trap from below regardless of origin class. This generates
-two channels in host preferences over immigration composition: a
-\emph{closure-sustainability channel} (high-income hosts accept
-pre-sorted high-class immigrants who expand the high-income network
-without disrupting stratification) and a \emph{competition channel}
-(same-tier arrivals compete in labour and social spaces, cutting
-against the first motive). Points-based immigration systems are
-formally attempts to certify marker legibility in advance of social
-contact, converting soft foreign markers into a hard administrative
-signal---consistent with the empirical finding that such systems
-produce faster assimilation trajectories. The same framework
-predicts that within-ethnic differential treatment by class
-markers---software engineers and taxi drivers of shared national
-origin receiving categorically different host treatment
-\citep{LeeZhou2015, Waters1999}---is a direct consequence of the
-bilateral model, with the platform channel reinforcing it.
+tier at which initial social attachment occurs: the host's Jeffrey
+revision maps the foreign marker bundle $m_i^{\text{foreign}}$ onto
+an initial prior $\bar{c}_g^{\text{init}}$ that depends on marker
+legibility within the host's marker space $\M$, not on actual
+economic class at origin. Immigrants with legible high-class markers
+access high-class platforms from the outset; those with illegible
+markers enter the closure trap from below regardless of origin
+class.\footnote{This generates two channels in host preferences over
+immigration composition: a \emph{closure-sustainability channel}
+(high-income hosts accept pre-sorted high-class immigrants who expand
+the high-income network without disrupting stratification) and a
+\emph{competition channel} (same-tier arrivals compete in labour and
+social spaces, cutting against the first motive).} Points-based
+immigration systems are formally attempts to certify marker
+legibility in advance of social contact, converting soft foreign
+markers into a hard administrative signal---consistent with the
+empirical finding that such systems produce faster
+assimilation.\footnote{The same framework predicts within-ethnic
+differential treatment by class markers---software engineers and taxi
+drivers of shared national origin receiving categorically different
+host treatment \citep{LeeZhou2015, Waters1999}---as a direct
+consequence of the bilateral model, with the platform channel
+reinforcing it.}
 
 % =============================================================================
 \section{Welfare analysis}
 \label{sec:welfare}
 % =============================================================================
+
+\subsection{Welfare loss decomposition}
 
 This section synthesises the welfare implications of the bilateral
 mechanism and the platform channel developed in
@@ -1572,6 +1627,8 @@ contracting-channel remedy can achieve.
 The welfare implications follow from comparing how each policy
 instrument in the class $\Phi$ (instruments that leave the
 soft-signal structure invariant) acts across these components.
+
+\subsection{Policy implications}
 
 \begin{proposition}[Welfare dominance of mobility above $\gamma^*$]
 \label{prop:dominance}
@@ -1701,22 +1758,17 @@ The worked examples below are organised around a single thesis: the
 phenomena that this paper began with as ``racial discrimination''
 are special cases of a more general pattern in which economic
 incentives and social conflict jointly produce a contested belief
-architecture. This generality is afforded by working at the
-granularity of markers rather than of hard group categories:
-standard models of statistical discrimination take observable group
-membership as the inference input, whereas the soft-signal framework
-takes the markers themselves as primitive---not a critique of
-Bayesian inference over known categories, but a claim that in the
-domain of soft-signal economic interactions, the categorical input
+architecture. The generality comes from working at the granularity
+of markers rather than hard group categories---the categorical input
 is itself inferred from marker observation rather than given
 exogenously. Economic incentives---firms managing room composition,
 landlords reshaping neighbourhoods, individuals investing in
 class-signalling markers, institutions allocating credibility---do
-not merely respond to a pre-existing social order. They actively
+not merely respond to a pre-existing social order; they actively
 produce the soft-signal environment in which Jeffrey conditioning
 operates. Social conflict, in turn, is not an exogenous shock to
-otherwise smoothly functioning markets. It is the equilibrium
-expression of the inferential rigidities that the model formalises.
+otherwise smoothly functioning markets but the equilibrium
+expression of the inferential rigidities the model formalises.
 The examples below illustrate three faces of this interaction:
 incentives that produce conflict (\S\ref{subsec:cluster-produce}),
 conflict that reproduces the economic structure
