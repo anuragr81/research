@@ -1,4 +1,4 @@
-# Discrimination and Soft Signals: The "Mimic Men" Dilemma
+# Stereotype Rigidity in Social Inferences: A "Mimic Men" Dilemma
 
 **Executive Summary**
 

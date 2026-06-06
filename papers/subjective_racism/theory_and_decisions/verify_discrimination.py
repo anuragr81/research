@@ -719,6 +719,21 @@ check = sp.simplify(dG_dsg - (-delta*phi*c_bar)) == 0
 report("CHECK_51", "∂G/∂s_g = -δφc̄ < 0 (higher salience erodes group mean more)",
        check, f"∂G/∂s_g = {dG_dsg}")
 
+# ── 14.9b IFT companion: ∂Ψ/∂γ̃ > 0 on the interior ──────────────────────────
+# Companion to CHECK_51 (∂Ψ/∂s_g < 0). Together these establish
+# strict monotonicity of γ̃*(s_g) via the implicit function theorem
+# applied to the saddle-node conditions {Ψ = 0, ∂Ψ/∂c̄ = 0}:
+#   dγ̃*/ds_g = -(∂Ψ/∂s_g) / (∂Ψ/∂γ̃)
+# With ∂Ψ/∂s_g < 0 (CHECK_51) and ∂Ψ/∂γ̃ > 0 (here), dγ̃*/ds_g > 0
+# on c̄_g ∈ (0,1). This is the analytical backing for CHECK_48's
+# numerical confirmation.
+Psi_sg = G_sg - c_bar  # Ψ = H - c̄ as a function of s_g and γ̃
+dPsi_dgt = sp.diff(Psi_sg, gamma_tilde)
+check = sp.simplify(dPsi_dgt - c_bar*(1 - c_bar)) == 0
+report("CHECK_51b",
+       "∂Ψ/∂γ̃ = c̄(1-c̄) > 0 on c̄∈(0,1) (IFT companion to CHECK_51)",
+       check, f"∂Ψ/∂γ̃ = {sp.simplify(dPsi_dgt)}")
+
 # G boundary conditions invariant to s_g
 G_sg_0 = G_sg.subs(c_bar, 0)
 check = sp.simplify(G_sg_0 - mu) == 0

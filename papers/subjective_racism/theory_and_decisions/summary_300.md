@@ -1,4 +1,4 @@
-# Discrimination from Soft Markers: Dilemmas of Mimic Men
+# Stereotype Rigidity in Social Inferences: A "Mimic Men" Dilemma
 
 **Summary**
 
