@@ -120,7 +120,7 @@ intergenerational mobility.
 \label{sec:intro}
 % =============================================================================
 
-Social boundaries seem to have persisted despite legal equality for generations. Even though the members of
+Recent debates on the limits of affirmative action and the gaps in immigrant integration leave little doubt that social boundaries have outlived the laws meant to dissolve them. Even though the members of
 marginalised groups continue to achieve economic success, they are more likely to be personally reclassified while the group boundary continues to 
 re-assert itself
 \citep{Barth1969,Tilly1998}. A prominent framework for understanding this persistence is from \citet{Loury2002}
@@ -613,6 +613,21 @@ determining which group $i$ belongs to. Under
   \label{eq:jeffrey}
 \end{equation}
 
+To see the contrast with Bayes concretely: given an observation of
+marker $m$, standard Bayesian conditioning would compute
+$P'(g_k) = P(m \mid g_k) P(g_k) / P(m)$, drawing on a likelihood
+$P(m \mid g_k)$ that specifies how the marker is generated given
+group membership. Jeffrey conditioning starts later in the
+inferential process. It takes the revised partition weights
+$P'(g_k)$ as the primary effect of the experience itself and
+propagates them through the partition via~(\ref{eq:kinematics}). The
+two rules apply to different kinds of evidence: Bayes asks for
+evidence that arrives as a proposition the observer comes to
+believe with certainty (or with a definite probability conditional
+on each partition cell); Jeffrey accommodates evidence that arrives
+as a shift in credences across the partition without certifying any
+single proposition.
+
 The revision $P \to P'$ is driven by the reassigned partition
 weights $P'(g_k)$: the observer's experience of the marker shifts
 probability mass across groups without specifying a generative model
@@ -674,23 +689,86 @@ group \emph{belief}, the Jeffrey updater absorbs into the group
 within-group conditionals)\textbf{.} What
 Example~\ref{ex:jeffrey-bayes} illustrated is a general property of
 the kinematics: the conditional probabilities $F_{g_k}$ are held
-fixed during the Jeffrey revision. The substantive content of this
-condition is epistemic: the agent's beliefs about the within-group
-economic distribution $F_{g_k}$, built up over many observations and
-statistical regularities, are held far more firmly than her beliefs
-about an individual stranger's group membership, which a single
-soft marker observation directly informs. The marker moves the
-weaker belief without disturbing the stronger one. The kinematics
-formula~(\ref{eq:jeffrey}) is the appropriate limiting form in this
-regime---partition weights $P(g_k)$ far less certain than
-within-group conditionals $F_{g_k}$---so updating concentrates on
-the former. Consequence: an individual counter-example shifts
-$P'(g_k)$---the individual is attributed to a different group---but
-does \emph{not} update $F_g$. This is the formal expression of the
-``exception to the rule'' phenomenon and stereotype persistence.
-The condition is epistemic, not motivational: it concerns how
-soft-marker evidence flows through the agent's hierarchy of beliefs,
-not what the agent prefers.\footnote{Whether agents additionally hold direct
+fixed during the Jeffrey revision. The condition is structural: the kinematics
+formula~(\ref{eq:jeffrey}) holds $F_{g_k}$ fixed during revision
+because a soft marker is not evidence about $F_{g_k}$ in the first
+place. To see what this means, it helps to spell out what each
+object represents in the observer's inferential structure.
+
+$P(g_k)$ is the observer's credence that the encountered individual
+belongs to group $g_k$. Before a marker is observed, this credence
+may be vague---no group attribution yet formed---or may already be
+tilted by context such as the setting or prior information. Upon
+observation, the marker reweights this credence: an accent
+identified with $g_k$ raises $P'(g_k)$ and lowers the others; a
+phenotype associated with $g_j$ does the opposite. The shift from
+$P(g_k)$ to $P'(g_k)$ is the immediate inferential act of placing
+the individual into a group. It is fast, it is discrete, and it can
+move sharply on a single observation, because the marker is
+precisely the kind of evidence that carries direct information
+about group assignment.
+
+$F_{g_k}$ is the analyst's formal representation of the within-group
+economic distribution that governs how the observer, upon
+classifying the individual to $g_k$, forms expectations about their
+economic position. The observer does not reason about $F_{g_k}$
+explicitly; the object represents---from the analyst's
+perspective---the structure that turns group attribution into class
+inference. Substantively, $F_{g_k}$ is the operative stereotype: it
+encodes the typical member of $g_k$, the spread around the typical,
+and the tails.
+
+This is why $F_{g_k}$ matters for the fairness of social inference.
+When $F_{g_k}$ tracks the true within-group distribution---that is,
+when the observer's expectations about a typical member of $g_k$
+match the actual distribution of economic positions within the
+group---the inferences drawn from it are correct on average. Across
+many encounters with members of $g_k$, the observer's class
+predictions will match the empirical mean, variance, and shape of
+within-group outcomes. The inference can still go wrong on any
+particular individual. Someone whose actual economic position lies
+in the tails of $F_{g_k}$---a high-class member of a low-mean group,
+or a low-class member of a high-mean group---is judged by an
+expectation drawn from $F_{g_k}$'s centre, which their own position
+does not fit. The structural limit is that any inference running
+from group to individual is correct on average and incorrect for
+atypical members: even when $F_{g_k}$ is perfectly calibrated to
+the group, it cannot tell the observer where on $F_{g_k}$ this
+particular person falls. When $F_{g_k}$ is also systematically
+biased---understating the mean, narrowing the variance, ignoring
+upward mobility within the group---the inference is unfair in a
+stronger sense: members of the group are judged through a distorted
+lens that does not represent who they are, and the rigidity
+condition says that under Jeffrey conditioning this distortion does
+not repair itself from individual counter-examples. A high-class
+member of a low-stereotyped group is reassigned---$P'(g_k)$ shifts:
+they are placed mentally into a different group, or treated as an
+exception---but $F_{g_k}$ itself is not corrected. The group
+continues to be judged through the same lens after the encounter as
+before.
+
+The two channels through which evidence flows operate at different
+speeds. A marker is read in seconds and shifts $P(g_k)$ immediately;
+$F_{g_k}$ updates through a different channel---the accumulated
+statistical experience and social knowledge that does not arrive
+with any single marker observation. The inferential asymmetry has a
+particular shape: the slow-moving cultural substrate, whose stable
+outputs are legible at speed, is quickly inferred from at the
+encounter, while the fast-moving economic position is processed
+through slower, indirect channels. What is slow-moving is inferred
+quickly; what is fast-moving is processed slowly. Jeffrey
+conditioning is the formal expression of this evidential structure.
+
+Consequence: an individual counter-example shifts $P'(g_k)$ but does
+not move $F_g$, because the marker carries no information about
+$F_g$ to revise. The encounter performs a reclassification, not a
+revision of the stereotype. Whether persistent group-level
+stereotypes obtain depends on how $F_g$ evolves between encounters
+under the intergenerational dynamics of
+Section~\ref{subsec:dynamics}---through mobility, the discrimination
+externality, and marker decay. The condition is not motivational:
+it concerns the channel through which information flows, not what
+the agent prefers.\footnote{Whether agents additionally hold direct
 preferences over group membership---taste-based discrimination in
 the sense of \citet{Becker1957}---is a separate question that the
 model does not turn on; the inference channel operates either way.} 
