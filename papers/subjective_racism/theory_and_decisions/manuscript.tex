@@ -92,7 +92,9 @@ different points and cannot substitute for one another. Class-based
 closure exists even in a racially homogeneous society, with racial
 discrimination a perturbation; there is a mobility threshold,
 increasing in marker salience, above which the trap is eliminated
-through a saddle-node bifurcation. A second source operates
+through a saddle-node bifurcation---an instance of equilibrium
+selection in a one-dimensional discrete dynamical system
+\citep{Galor2007, MedioLines2001}. A second source operates
 institutionally, where profit-maximising platforms reproduce
 discriminatory compositions through the same mechanism. The
 apparatus generalises beyond classical discrimination: the same
@@ -857,7 +859,7 @@ the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
 s_g$ to express the same expectation in the marker-salience
 shorthand used in the remainder of the paper.
 $D_k = (\bar{c}_{g_k} - c_j)^2 + \sigma_{g_k}^2$ is the
-expected squared distance under certain attribution to group $g_k$.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition.}
+expected squared distance under certain attribution to group $g_k$.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below. Risk aversion or other distance metrics would replace this decomposition with a more general functional dependence on the within-group distribution. The threshold structure of the engagement decision and the qualitative bistability of the intergenerational dynamics are robust to a range of such generalisations; the closed-form composed map and the explicit bifurcation threshold are not.}
 The within-group variance term $\sigma_{g_k}^2$ matters in its own
 right: even when the group mean is close to the agent's class,
 within-group heterogeneity raises expected class distance and the
@@ -1006,13 +1008,12 @@ required intervention must be larger than stated by the exogenous model assumpti
 \subsection{Intergenerational dynamics and the closure equilibrium}
 \label{subsec:dynamics}
 
+The mechanism in words, before the formal analysis: the closure trap is a low-level equilibrium in which discrimination keeps a group economically depressed, and that depressed position in turn sustains the discrimination, so beliefs and outcomes reproduce one another across generations. Raising intergenerational mobility above a threshold breaks this loop, leaving the integration equilibrium as the only stable outcome.
 
 We now reduce the intergenerational dynamic (\ref{eq:dynamic}) to the
 composed map---a one-dimensional discrete dynamical system in the
-group prior $\bar{c}_g$---and characterise its steady states (see \citealp{Galor2007,MedioLines2001}). Recall that a fixed point is a
-group prior that reproduces itself from one generation to the next. It is locally stable when the map's slope there is less than one in
-absolute value, so that nearby trajectories are drawn toward it. The system admits more than one stable fixed point -- which one a group reaches depends on its
-history. The map combines three forces. The baseline drift $\mu$ pulls
+group prior $\bar{c}_g$---and study its equilibrium structure (see \citealp{Galor2007,MedioLines2001}). The fixed points of the map are the equilibria of the intergenerational system: group priors that reproduce themselves from one generation to the next. An equilibrium is locally stable when the map's slope there is less than one in
+absolute value, so that nearby trajectories are drawn toward it. When the system admits more than one stable equilibrium, which one a group reaches is selected by its history rather than by parameters alone---a history-dependent equilibrium selection. The map combines three forces. The baseline drift $\mu$ pulls
 upward toward integration; the mobility term
 $\tilde{\gamma}\,\bar{c}_g(1 - \bar{c}_g)$ acts as intergenerational
 regression to the group mean; the discrimination rate
@@ -1020,8 +1021,14 @@ $\phi^t = s_g\,F(\bar{c}_g^t)$ enters with a negative sign, transmitting
 to the group prior the downward pressure that the Jeffrey-updating
 mechanism generates at the encounter level. The closure trap arises
 when this third term dominates the first two across a basin of priors,
-holding successive generations in a low-attractor steady state. The
-composed map is:
+holding successive generations in a low-attractor steady state.
+Substituting the discrimination rate $\phi^t = s_g\,F(\bar c_g^t)$ and
+the Beta--De~Finetti mobility term $\tilde\gamma\,\bar c_g^t(1-\bar c_g^t)$
+into the dynamic (\ref{eq:dynamic}) gives
+\begin{equation*}
+\bar c_g^{t+1} = \bar c_g^t(1 - \delta s_g F(\bar c_g^t)) + \mu(1 - \bar c_g^t) + \tilde\gamma\,\bar c_g^t(1 - \bar c_g^t),
+\end{equation*}
+and collecting by powers of $\bar c_g^t$ yields the composed map:
 \begin{equation}
   \mathcal{H}(\bar{c}_g;\, s_g) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}
   - s_g\,\delta\, F(\bar{c}_g))
@@ -1042,7 +1049,7 @@ the composed map. Whether such a state is desirable
 depends on where it sits in $[0,1]$: a fixed point near
 $\bar{c}_g = 1$ is integration, a fixed point near $\bar{c}_g = 0$
 is exclusion. The three terms in $\mathcal{H}$ compete to determine which
-arise as steady states. Mean-reversion ($\mu$) pulls upward from
+arise as stable equilibria. Mean-reversion ($\mu$) pulls upward from
 low priors; the exclusion drag $-s_g \delta F(\bar{c}_g)$
 generated by the engagement threshold pulls downward when
 discrimination fires; and mobility, contained in the
