@@ -356,43 +356,22 @@ patronising equilibrium of \citet{CoateLoury1993}, generated here by
 Jeffrey rigidity in the updating rule rather than by the
 belief--investment feedback of their model.
 
-A complementary line of dissent comes from stratification economics,
-which argues that the canonical discrimination models---taste-based,
-statistical, and self-confirming alike---miss the structural and
-persistent character of intergroup inequality, and proposes
-group-level competition for relative position as the more apt
-analytical frame \citep{DarityHamiltonStewart2015}.
-\citet{AustenSmithFryer2005} formalise a related puzzle on the
-persistence-of-compliance side: when stigmatised individuals invest
-in host-group signals, they may face peer-group rejection,
-generating a two-audience signalling problem in which the rational
-pursuit of integration is itself socially costly. Empirical work on
-Muslim integration in Christian-heritage societies
-\citep{AdidaLaitinValfort2016} documents an analogous self-perpetuating
-cycle in which discrimination and compliance reproduce each other.
-The present paper sits alongside this work in motivation, supplying
-a mechanism---soft-marker Jeffrey conditioning over a
-partition---that these literatures have pointed toward without
-formalising in those terms.
-
-It is worth highlighting that Jeffrey conditioning is implied by the
+The Jeffrey conditioning follows from the
 two-system structure of the social environment
 (Section~\ref{sec:model}): markers are outputs of a slow-moving
 social system and carry no likelihood function linking them to
 current economic class, so the standard Bayesian presupposition of a
-sharp evidence event fails. The paper approaches discrimination from a consumption and
+sharp evidence event fails. This approach allows the paper to approach discrimination in a more general setting from a consumption and
 industrial organisation perspective, rather than from the identity
-and self-perception channel that dominates the sociological and
-behavioural-economics literatures. The question we ask is not only how
+and self-perception channel. The question we ask is not only how
 discrimination affects the self-image, aspiration, or social identity
 of those discriminated against, but how business incentives interact with discrimination as a
-market equilibrium phenomenon. We find that while market power does generate countervailing power on the other side, this power may deposit the group in a tokenism zone. More particularly, the corporate interests partially do align with the inclusion of marginalised communities if the stigmatised group's aggregate purchasing power grows \citep{Galbraith1952}. However, the exclusion threshold on the group prior,
+market equilibrium phenomenon in an environment of soft market inferences. We find that while market power does generate countervailing power on the other side, the risk that this power deposits the group in a tokenism zone is real. More particularly, while corporate interests partially do align with the inclusion of marginalised communities when the stigmatised group's aggregate purchasing power grows \citep{Galbraith1952}, the exclusion threshold on the group prior,
 $\bar{c}_g^{\text{excl}}$ (Proposition~\ref{prop:exclusion}) means that the platform's profit motive eventually generates voluntary partial integration.
 
-The key contribution of the paper is to show that none of the contracting-channel machinery---employers,
+The key insight from the model is that none of the contracting-channel machinery---employers,
 human capital investment, strategic signalling---may be necessary to generate
-persistent social boundaries. The
-model develops this claim formally, proving that the resulting closure trap is a stable equilibrium governed by a rigidity parameter~$\rho$ that nests the
+persistent social boundaries -- an implication that may explain the reasons for their ubiquity. The model develops this claim formally, proving that the resulting closure trap is a stable equilibrium governed by a rigidity parameter~$\rho$ that nests the
 standard-Bayesian benchmark as a limiting case. Section~\ref{sec:platform} further elaborates how profit-maximising platforms may reproduce and institutionalise the trap at scale.
 
 % =============================================================================
@@ -463,7 +442,7 @@ that exists is dominated by the marker-to-group channel; Jeffrey
 conditioning over the group partition is the rule that respects this
 relative strength (Section~\ref{subsec:jeffrey}).
 
-We consider how economic distances constrain social engagement. A poor man may walk into a bar or club and engage socially, but he may struggle to sustain those relationships if he cannot afford such visits frequently enough. Two agents in the model are \textbf{economically compatible} if
+The framework of statistical discrimination in an economic system is interpreted in the model by admitting the constraints on social engagement through economic distance. The simple illustration of this problem is that while a poor man may walk into a bar or club and engage socially with richer members, he may struggle to sustain those relationships if he cannot afford such visits frequently enough. More formally, two agents in the model are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
 squared economic class distance and $\bar{d}$ is the compatibility threshold.
 Squared distance decomposes expected
@@ -482,13 +461,10 @@ statistic of the group's economic history}. Groups with histories of
 marginalisation---slavery, colonial extraction, persistent
 poverty---have low $\bar{c}_g$.
 
-Figure~\ref{fig:loop} previews how the two systems couple across a
-generation. The economic system sets the group prior; the social
-system produces markers correlated with that prior; Jeffrey
-conditioning reads the markers and generates a discrimination rate;
-the economic cost of exclusion, $\delta$, feeds this back into the
-group's economic position; and the resulting prior is what the next
-generation's markers are read against. The two systems interact at
+As we ultimately wish to explore implications of the above exclusion mechanism on intergenerational mobility, we consider how the two systems couple across a
+generation. As shown in Figure~\ref{fig:loop} , the economic system sets the group prior while the social system produces markers correlated with that prior. A discrimination rate follows from the soft maker environment -- and is determined  Jeffrey conditioning. The economic cost of exclusion, $\delta$, feeds this back into the
+group's economic position and the resulting prior is what the next
+generation's markers are read against. Therefore, the two systems interact at
 two points: the economic system fixes the \emph{meaning} of markers,
 and the social system erodes the \emph{position} of the group.
 
@@ -525,13 +501,7 @@ and the social system erodes the \emph{position} of the group.
 \draw[feedback] (newprior.west) -- ++(-2.6,0) |- (prior.west)
   node[pos=0.25, left, ilabel, align=center] {next\\generation};
 \end{tikzpicture}
-\caption{The coupled two-system loop across one generation.
-Mid-grey nodes are economic-system states, light-grey nodes are
-social-system states, white nodes are the inference mechanism. The
-economic system sets the meaning of markers (top interaction); the
-social system erodes the group's economic position (bottom
-interaction). The dashed arrow closes the loop: the new group prior
-is what the next generation's markers are read against.}
+\caption{The coupled two-system loop across one generation}
 \label{fig:loop}
 \end{figure}
 
@@ -581,37 +551,38 @@ determining which group $i$ belongs to. Under
   \label{eq:jeffrey}
 \end{equation}
 
-To see the contrast with Bayes concretely: given an observation of
-marker $m$, standard Bayesian conditioning would compute
-$P'(g_k) = P(m \mid g_k) P(g_k) / P(m)$, drawing on a likelihood
-$P(m \mid g_k)$ that specifies how the marker is generated given
-group membership. Jeffrey conditioning starts later in the
-inferential process. It takes the revised partition weights
-$P'(g_k)$ as the primary effect of the experience itself and
-propagates them through the partition via~(\ref{eq:kinematics}). The
-two rules apply to different kinds of evidence: Bayes asks for
-evidence that arrives as a proposition the observer comes to
-believe with certainty (or with a definite probability conditional
-on each partition cell); Jeffrey accommodates evidence that arrives
-as a shift in credences across the partition without certifying any
-single proposition.
+What the engagement decision needs is the partner's class, not their
+group: engagement turns on class distance (Section~\ref{sec:model_primitives}),
+so the marker must be converted into a posterior over class, $P'(c)$.
+Both rules reach $P'(c)$ by the same two-step route---marker $\to$
+group weights $P'(g_k) \to$ class $P'(c)$---and they share the second
+step, equation~(\ref{eq:jeffrey}), which carries the group weights into
+a class distribution through the conditionals $F_{g_k}$ (it takes this
+form because, conditional on group, the marker says nothing further
+about class). They differ only at the \emph{first} step. Bayes
+\emph{computes} the group weights from a likelihood,
+$P'(g_k) = P(m \mid g_k)\,P(g_k)/P(m)$, so its full path to the class
+posterior is $P'(c) = \sum_k F_{g_k}\,P(m \mid g_k)P(g_k)/P(m)$ -- depending on the likelihood $P(m \mid g_k)$. On the other hand, Jeffrey computes
+nothing at the first step: it \emph{takes $P'(g_k)$ as given}---the
+revised group credence is the experience's direct deliverance received as input, entering the model as the salience
+parameter $s_g$~(\ref{eq:salience})---and then applies the same second
+step. The deeper divergence
+appears only when evidence bears on class directly: a counter-example
+leads Bayes to revise the conditionals $F_{g_k}$, whereas Jeffrey, by
+the invariance condition, holds them fixed. An accent, an item of dress, a phenotype gives
+Bayes nothing to compute $P'(g_k)$ from whereas Jeffrey's acceptance of
+a directly given shift lets the inference proceed.\footnote{Notice that $F_{g_k}$
+is a formal representation of the observer's expectations
+about a typical member of group $g_k$, not a distribution an observer
+must reason about as such.}
 
-The revision $P \to P'$ is driven by the reassigned partition
-weights $P'(g_k)$: the observer's experience of the marker shifts
-probability mass across groups without specifying a generative model
-$P(m \mid g_k)$ for how markers are produced by group membership.
-Standard Bayesian updating requires such a likelihood function whereas 
-Jeffrey conditioning does not. This is simply because soft markers do not supply a certifiable proposition: an
-accent, an item of dress, or a phenotype does not, of itself,
-certify any sentence on which Bayesian conditioning could operate.
-What such evidence does instead is shift credence over the group
-partition $\{g_1, \ldots, g_K\}$ while leaving the conditional
-class distributions $F_{g_k}$ untouched \footnote{$F_{g_k}$ is the analyst's formal
-representation of the observer's expectations about a typical
-member of group $g_k$, not a distribution the observer reasons
-about as such.}. 
+The two thus rules differ in the channel through which
+information reaches belief. Bayes routes evidence through a likelihood ratio
+whereas Jeffrey routes evidence through belief structure implied by partition weights. Regardless of the experience, $F_{g_k}$ does not move under Jeffrey conditioning while $P'(g_k)$ can. Bayes revises the stereotype, whereas Jeffrey, holding the
+conditionals fixed, processes the same fact as a reclassification -- so the incoming information in a soft marker dominated environment only changes which group a person is
+assigned to, rather than what the group's attributes are. In a more empirical setting, Bayes conditioning sticks with estimating the frequency of class given a marker while Jeffrey conditioning focuses on a belief about class given a particular marker that is assembled through the group and frozen at the group-stereotype level. We use Jeffrey conditioning for the soft marker environment because $F_{g_k}$, the long-term substrate from the social system, is more fixed than the belief-adjustments that follow from markers through the faster moving economic system. A more concrete illustration is provided in Example \ref{ex:jeffrey-bayes}.
 
-\begin{example}[Jeffrey versus Bayes on a single counter-example]
+\begin{example}[Jeffrey versus Bayes example]
 \label{ex:jeffrey-bayes}
 An observer meets a stranger at a professional gathering, with prior
 credence split evenly between two groups, $P(g_A) = P(g_B) = 0.5$. The
@@ -631,31 +602,20 @@ priors $\bar{c}_{g_k}$ fixed and revises only the group weights, giving
 an updated class expectation of $0.2 \times 0.7 + 0.8 \times 0.3 = 0.38$.
 The stranger's inferred standing falls from $0.50$ to $0.38$---not
 because the accent revealed anything about this individual's income, but
-because it reweighted the groups whose priors the observer already held -- a better representative of how soft signals change opinions in the complex world of markers.
+because it reweighted the groups whose priors the observer already held.
 
-Now suppose the stranger is in fact high-class. Under Jeffrey
-conditioning the observer reclassifies the individual---attributing them
-to $g_A$, or treating them as an exception within $g_B$---while
-$\bar{c}_{g_B}$ is untouched: the next member of $g_B$ is met with the
-same prior $0.3$. Under standard Bayesian updating on the same encounter,
+Now suppose the stranger is in fact high-class. Under standard Bayesian updating,
 observing a high-class member of $g_B$ raises the posterior
 $\bar{c}_{g_B}$ above $0.3$; repeated such encounters drive it toward its
-true value and the stereotype erodes. This divergence is the entire
-mechanism: the same counter-example that a Bayesian absorbs into the
-group \emph{belief}, the Jeffrey updater absorbs into the group
-\emph{assignment}, leaving the belief intact.
+true value and the stereotype erodes.  Under Jeffrey
+conditioning, however, the observer just reclassifies the individual---attributing them
+to $g_A$ and treating them as an exception within $g_B$---while
+$\bar{c}_{g_B}$ remain unchanged. The next member of $g_B$ is met with the
+same prior $0.3$ -- presumably set over a much longer time.
 \end{example}
 
-\textbf{Rigidity condition} (Jeffrey's invariance, applied to
-within-group conditionals)\textbf{.} What
-Example~\ref{ex:jeffrey-bayes} illustrated is a general property of
-the kinematics: the conditional probabilities $F_{g_k}$ are held
-fixed during the Jeffrey revision. The condition is structural: the kinematics
-formula~(\ref{eq:jeffrey}) holds $F_{g_k}$ fixed during revision
-because a soft marker is not evidence about $F_{g_k}$ in the first
-place. 
 
-More particularly, $P(g_k)$ is the observer's credence that the encountered individual
+As the Example \ref{ex:jeffrey-bayes} illustrates, $P(g_k)$ is the observer's credence that the encountered individual
 belongs to group $g_k$. Before a marker is observed, this credence
 may be vague---no group attribution yet formed---or may already be
 tilted by context such as the setting or prior information. Upon
@@ -668,40 +628,23 @@ move sharply on a single observation, because the marker is
 precisely the kind of evidence that carries direct information
 about group assignment.
 
-$F_{g_k}$ is the formal representation of the within-group
-economic distribution that governs how the observer, upon
-classifying the individual to $g_k$, forms expectations about their
-economic position. The observer does not reason about $F_{g_k}$
-explicitly; the object represents the structure that turns group attribution into class
-inference. Substantively, $F_{g_k}$ is the operative stereotype: it
-encodes the typical member of $g_k$, the spread around the typical,
-and the tails.
-
 When $F_{g_k}$ tracks the true within-group distribution---that is,
 when the observer's expectations about a typical member of $g_k$
 match the actual distribution of economic positions within the
 group---the inferences drawn from it are correct on average. Across
 many encounters with members of $g_k$, the observer's class
 predictions will match the empirical mean, variance, and shape of
-within-group outcomes. The inference can still go wrong on any
-particular individual. Someone whose actual economic position lies
-in the tails of $F_{g_k}$---a high-class member of a low-mean group,
-or a low-class member of a high-mean group---is judged by an
-expectation drawn from $F_{g_k}$'s centre, which their own position
-does not fit. When $F_{g_k}$ is systematically
+within-group outcomes. When $F_{g_k}$ is systematically
 biased---understating the mean, narrowing the variance, ignoring
 upward mobility within the group---the inference is unfair in a
-stronger sense: members of the group are judged through a distorted
-lens that does not represent who they are. What the rigidity
-condition means is that under Jeffrey conditioning, this distortion does
+stronger sense: members of the group may be judged through a distorted
+lens. Under Jeffrey conditioning, this distortion does
 not repair itself from individual counter-examples. A high-class
 member of a low-stereotyped group is reassigned---$P'(g_k)$ shifts:
 they are placed mentally into a different group, or treated as an
-exception---but $F_{g_k}$ itself is not corrected. The group
-continues to be judged through the same lens after the encounter as
-before.
+exception---but $F_{g_k}$ itself is not corrected. This feature -- a consequence of a slower-speed of social systems compared to the economic system -- is what appears as discrimination in the soft marker environment. 
 
-The two channels through which evidence flows are justified by the two systems operating at different
+In other words, the two channels through which evidence flows are justified by the two systems operating at different
 speeds. A marker is read in seconds and shifts $P(g_k)$ immediately;
 $F_{g_k}$ updates through a different channel---the accumulated
 statistical experience and social knowledge that does not arrive
@@ -715,6 +658,8 @@ stereotypes obtain depends on how $F_g$ evolves between encounters
 under the intergenerational dynamics of
 Section~\ref{subsec:dynamics}---through mobility, the discrimination
 externality, and marker decay.
+
+---------------------
 
 The information structure is bilateral and reflexive. Both agents
 update simultaneously. Observing $j$'s consumption signals revises $i$'s self-assessment:
