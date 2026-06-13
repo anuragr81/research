@@ -201,7 +201,9 @@ Jeffrey conditioning, bilateral updating, the closure equilibrium,
 comparative statics, the mobility threshold, and the platform
 channel (Section~\ref{sec:platform}) through which profit-maximising
 institutions reproduce the trap at scale.
-Section~\ref{sec:discussion} then discusses a few instances where Jeffrey conditioning framework offers a richer analytical vocabulary for stereotype rigidity. Section~\ref{sec:conclusion} summarises the conclusion of the paper. 
+Section~\ref{sec:discussion} then discusses a few instances where Jeffrey conditioning framework offers a richer analytical vocabulary for stereotype rigidity. Section~\ref{sec:conclusion} summarises the conclusion of the paper. All
+proofs are collected in Appendix~\ref{app:proofs}; the platform extension
+is developed in Appendix~\ref{app:platform}. 
 
 % =============================================================================
 \section{Related Literature}
@@ -303,7 +305,7 @@ cleanly from individuals to the group prior. In social interaction,
 the operative signals are soft---accent, dress, consumption
 patterns---and the theoretically appropriate rule for soft signals is
 Jeffrey conditioning rather than Bayesian updating. Here, the rigidity condition
-(Proposition~\ref{prop:graded}) decouples individual reclassification
+(Remark~\ref{rem:graded}) decouples individual reclassification
 from group prior revision: the compliant individual is reclassified,
 the group prior $\bar{c}_g$ does not move. Further, no volume of individual
 signalling can drive $\bar{c}_g$ across the tipping point
@@ -897,7 +899,7 @@ children of low-class families have some chance of upward mobility.
 
 The discrimination rate $\phi^t$ is determined by the engagement threshold (\ref{eq:threshold}),
 modulated by marker salience $s_g$
-(Proposition~\ref{prop:salience}) as $\phi^t = s_g \cdot F(\bar{c}_g^t)$ , where $F: [0,1] \to [0,1]$ is
+(Remark~\ref{rem:salience}) as $\phi^t = s_g \cdot F(\bar{c}_g^t)$ , where $F: [0,1] \to [0,1]$ is
 the group-level discrimination rate function induced by the
 threshold: when $s_g = 0$, markers are
 invisible and no discrimination fires.
@@ -984,23 +986,11 @@ permanently excluded from high-class social spaces across
 generations, without any inter-group dynamic.
 \end{proposition}
 
-\begin{proof}[Proof sketch]
-Define $\Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g) - \bar{c}_g$. Then $\Psi(0) = \mu > 0$
-and $\Psi(1) = 0$ (since $F(1) = 0$ and the $\tilde{\gamma}$ terms cancel).
-For sufficiently large $\delta$ and small $\gamma$, the exclusion
-drag dominates at low $\bar{c}_g$, producing an S-shape in
-$\mathcal{H}$ that forces $\Psi$ below zero on an interval in
-$(0,1)$. By continuity and the Intermediate Value Theorem, $\Psi$
-therefore has two interior roots: one where $\Psi$ crosses from
-positive to negative ($\bar{c}_g^{\mathrm{low}}$, stable) and one
-where it crosses back ($\bar{c}_g^{\mathrm{mid}}$, unstable), in
-addition to the boundary root at $\bar{c}_g = 1$. Local stability
-follows from $|\mathcal{H}'(\bar{c}_g^{\mathrm{low}})| < 1$ and
-instability from $\mathcal{H}'(\bar{c}_g^{\mathrm{mid}}) > 1$.
-Path dependence follows from $\mathcal{H}' > 0$ on the relevant
-intervals, which ensures monotonicity of orbits on each side of
-$\bar{c}_g^{\mathrm{mid}}$ \citep[see][ch.~1]{Galor2007}. \qed
-\end{proof}
+\noindent\emph{Sketch.} For large $\delta$ the exclusion drag dominates at
+low $\bar{c}_g$, bending the composed map below the $45^\circ$ line so that,
+alongside the integrated fixed point at $\bar{c}_g = 1$, a stable low fixed
+point and an unstable tipping point appear. The full argument is in
+Appendix~\ref{app:proofs}.
 
 \begin{figure}[ht]
 \centering
@@ -1029,22 +1019,22 @@ partners below the engagement threshold; higher individual education
 sharpens marker-to-group inference and reduces the weight placed on
 the group prior.
 
-\begin{proposition}[Graded discrimination]
-\label{prop:graded}
+\begin{remark}[Graded discrimination]
+\label{rem:graded}
 The Jeffrey framework predicts continuous variation in avoidance with
 marker ambiguity. A faint accent produces less avoidance than a
 strong one. $\E[d(c_i, c_j)]$ is quadratic in $\bar{c}_g$
 ($\partial^2 \E/\partial \bar{c}_g^2 = 2 > 0$), distinguishing the model
 from Phelps--Arrow's binary response to hard group membership.
-\end{proposition}
+\end{remark}
 
 We now turn to the role of marker salience---the spatial dimension
 of the model. The result that follows establishes how salience
 interacts with economic history to determine whether discrimination
 is sustained or extinguished.
 
-\begin{proposition}[Marker salience effect]
-\label{prop:salience}
+\begin{remark}[Marker salience effect]
+\label{rem:salience}
 Higher marker salience amplifies expected incompatibility when the
 out-group is economically disadvantaged:
 \[
@@ -1058,7 +1048,7 @@ salience and economic history are jointly necessary for sustained
 discrimination: $s_g = 0$ eliminates discrimination regardless of
 $\bar{c}_g$, and $\bar{c}_{g_2} = \bar{c}_{g_1}$ eliminates
 discrimination regardless of $s_g$.
-\end{proposition}
+\end{remark}
 
 The preceding comparative statics describe how individual-level
 parameters and marker salience shape the discrimination rate within
@@ -1067,17 +1057,16 @@ questions. First, can the closure trap be eliminated permanently, or
 is it a structural feature of the system for any positive marker
 salience? Second, what happens when a second group enters the model
 with its own economic history and marker salience profile, and what
-trajectories do its members follow? The next four results answer
+trajectories do its members follow? The next three results answer
 these in sequence: the saddle-node bifurcation
 (Proposition~\ref{prop:bifurcation}) characterises the mobility
 threshold above which the trap is eliminated; the salience-threshold
 corollary (Corollary~\ref{cor:salience-threshold}) shows how
-immutable markers raise the threshold; the outsider-group result
+immutable markers raise the threshold; and the outsider-group result
 (Proposition~\ref{prop:enemy}) traces the integration trajectory of
-a low-prior out-group; and the passing result
-(Proposition~\ref{prop:passing}) shows that individual exit from
-the visible group through marker suppression worsens the position
-of those who remain.
+a low-prior out-group. A further extension---adverse selection through
+individual marker suppression, which worsens the position of those who
+remain visible---is developed in Appendix~\ref{app:passing}.
 
 \begin{proposition}[Mobility threshold and bifurcation]
 \label{prop:bifurcation}
@@ -1092,19 +1081,11 @@ There exists $\gamma^* > 0$ such that:
 \end{enumerate}
 \end{proposition}
 
-\begin{proof}[Proof sketch]
-At $\gamma = 0$, the closure trap exists
-(Proposition~\ref{prop:class-closure}). As the mobility parameter $\gamma$ increases, the
-mobility term raises $\mathcal{H}(\bar{c}_g)$ in the interior, shrinking
-the region where $\Psi < 0$. At $\gamma = \gamma^*$, the region
-vanishes: the low fixed point and the tipping point merge,
-$\mathcal{H}'(\bar{c}_g^*) = 1$, and the system undergoes a saddle-node
-bifurcation. For $\gamma > \gamma^*$, $\Psi > 0$ on all of $(0,1)$
-and the only fixed point is $\bar{c}_g = 1$. The exact $\tilde{\gamma}^*$ is
-found numerically by solving the bifurcation system
-$\{\mathcal{H}(\bar{c}_g) = \bar{c}_g,\; \mathcal{H}'(\bar{c}_g) = 1\}$ jointly.
-\qed
-\end{proof}
+\noindent\emph{Sketch.} Raising $\gamma$ lifts $\mathcal{H}$ in the interior
+until, at $\gamma^*$, the low fixed point and the tipping point merge
+($\mathcal{H}' = 1$) and annihilate in a saddle-node bifurcation; above
+$\gamma^*$ only the integrated fixed point survives. See
+Appendix~\ref{app:proofs}.
 
 \begin{figure}[ht]
 \centering
@@ -1137,29 +1118,10 @@ with mutable markers (low $s_g$), even when starting from identical
 economic positions.
 \end{corollary}
 
-\begin{proof}[Proof sketch]
-The composed map $\mathcal{H}(\bar{c}_g;\, s_g)$ is decreasing in marker salience $s_g$ on the
-interior of $[0,1]$ (since $\partial G/\partial s_g = -\delta\phi
-\bar{c}_g < 0$). A higher $s_g$ lowers $\mathcal{H}$ in the interior, deepening
-the region where $\Psi < 0$ and requiring higher $\tilde{\gamma}$ to
-restore $\Psi \geq 0$ everywhere. At $s_g = 0$, the discrimination
-channel is fully shut off ($\phi^t = 0$ for all $t$), so
-$\mathcal{H}(\bar{c}_g;\, 0) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}) -
-\tilde{\gamma}\bar{c}_g^2$, which satisfies $\Psi \geq 0$ for all
-$\tilde{\gamma} \geq 0$. To establish strict monotonicity on
-$(0,1]$, apply the implicit function theorem to the saddle-node
-conditions $\Psi = 0$ and $\Psi_{\bar{c}_g} = 0$ that define
-$(\bar{c}_g^*, \tilde{\gamma}^*)$ as functions of $s_g$.
-Differentiating $\Psi = 0$ totally in $s_g$ and using the degeneracy
-condition $\Psi_{\bar{c}_g} = 0$ at the bifurcation gives
-\[
-\frac{d\tilde{\gamma}^*}{ds_g} = -\frac{\Psi_{s_g}}{\Psi_{\tilde{\gamma}}}.
-\]
-Direct computation yields
-$\Psi_{s_g} = -\delta\,\bar{c}_g F(\bar{c}_g) < 0$ and
-$\Psi_{\tilde{\gamma}} = \bar{c}_g(1 - \bar{c}_g) > 0$ on $\bar{c}_g \in
-(0,1)$, so $d\tilde{\gamma}^*/ds_g > 0$. \qed
-\end{proof}
+\noindent\emph{Sketch.} Higher $s_g$ lowers $\mathcal{H}$ in the interior,
+deepening the trap and requiring a larger $\tilde{\gamma}$ to remove it;
+implicit differentiation of the saddle-node conditions yields
+$d\tilde{\gamma}^*/ds_g > 0$. See Appendix~\ref{app:proofs}.
 
 \begin{definition}[Outsider group]
 Group $g_2$ is an outsider group relative to host group $g_1$ if
@@ -1189,25 +1151,6 @@ converges to the integration equilibrium regardless of initial
 economic position.
 \end{proposition}
 
-\begin{proposition}[Adverse selection through passing]
-\label{prop:passing}
-When individuals can reduce their personal marker salience $s_{g,i}$
-at cost $\kappa(c_i)$ decreasing in class (higher-class individuals
-find it easier to ``pass''), selective exit from the visible
-out-group worsens the remaining group's prior:
-\[
-  \frac{\partial \bar{c}_g^{\mathrm{visible}}}
-  {\partial (\mathrm{passing\ rate})} < 0.
-\]
-The individuals most able to pass---those with highest $c_i$ and
-lowest natural $s_{g,i}$---are positively selected. Their departure
-lowers the mean class of the visible group, which in turn raises
-the discrimination rate $F(\bar{c}_g)$ against those who remain.
-Individual compliance does not merely fail to improve the group
-prior (the rigidity condition); it actively worsens it through
-composition. The mimic man's escape harms those he leaves behind.
-\end{proposition}
-
 The embedding of the model in a one-parameter family, with the
 standard-Bayesian benchmark recovered as $\rho \to 0$, is developed
 in Appendix~\ref{app:loury}.
@@ -1232,188 +1175,22 @@ generate persistence, profit-maximising platforms acting on soft
 signals would produce discriminatory compositions as an emergent
 outcome.
 
-Embedding bilateral Jeffrey updating within a platform produces
-three results absent from the bilateral setting: a shadow
-information market whose intensity rises with legal strictness
-(Proposition~\ref{prop:shadow}); optimal platform exclusion of
-stigmatised groups that relaxes into a tokenism equilibrium before
-genuine integration is achieved
+The formal platform model---experience utility, the
+profit-maximisation problem, and its equilibrium
+characterisation---is developed in Appendix~\ref{app:platform}.
+Embedding bilateral Jeffrey updating within a profit-maximising
+platform produces three results absent from the bilateral setting: a
+shadow information market whose intensity rises with legal strictness
+(Proposition~\ref{prop:shadow}); optimal exclusion of the outsider
+group that relaxes into a tokenism equilibrium before genuine
+integration is achieved
 (Propositions~\ref{prop:exclusion}--\ref{prop:tokenism}); and a host
-destabilisation channel through which inclusion of the out-group
-can trigger closure dynamics within the host group
-(Proposition~\ref{prop:spillover}).
-
-For a $g_1$ client $j$, experience utility at a venue with attendee
-set $\A$ is:
-\begin{equation}
-  V_j(\A) = \alpha \cdot q + (1 - \alpha) \cdot S_j(\A)
-  \label{eq:experience}
-\end{equation}
-where $q$ is objective quality, $\alpha \in (0,1)$ is the weight on
-objective vs.\ social quality, and:
-\begin{equation}
-  S_j(\A) = \frac{1}{|\A|} \sum_{i \in \A,\, i \neq j}
-  \E_j[c_i \mid m_i]
-  \label{eq:social-quality}
-\end{equation}
-
-$S_j(\A)$ is a function of \emph{beliefs}, not facts.
-
-
-The platform produces atmosphere vector
-$\mathbf{a}$ (pricing, location, d\'{e}cor, dress code,
-marketing language, music, staff manner) serving two functions.
-\begin{enumerate}
-
-\item \textbf{Client self-selection.}
-$\Pr(\text{visit} \mid c_j, \mathbf{a}) = h(c_j, \mathbf{a})$,
-increasing in the match between $c_j$ and the class $\mathbf{a}$
-signals.
-
-\item \textbf{Contextual modulation of Jeffrey updating.}
-$P'(g_k \mid m_i, \mathbf{a}) \neq P'(g_k \mid m_i)$. A strong
-high-class atmosphere acts as a contextual prior, resolving marker
-ambiguity against the stigmatised group.
-
-\begin{equation}
-  \max_{\mathbf{a},\, \sigma} \quad
-  \Pi(\mathbf{a}, \sigma) = \sum_{j \in \mathcal{D}(\mathbf{a})}
-  \sigma(m_j) \cdot W_j(\mathbf{a}, \sigma) - C(\mathbf{a})
-  \label{eq:platform-opt}
-\end{equation}
-where $\Pi$ is platform profit, $\mathcal{D}(\mathbf{a})$ is the
-self-selecting set,
-$\sigma: \M \to [0,1]$ is the admission policy, $W_j$ is willingness
-to pay, and $C(\mathbf{a})$ is cost.
-\end{enumerate}
-
-\textbf{Legal constraint:} $\sigma$ cannot be an explicit function of
-group membership $g$. But $\sigma$ may depend on markers $m$, which
-are correlated with $g$. Result: \emph{informationally mediated,
-legally invisible discrimination}.
-
-\begin{proposition}[Shadow market intensity]
-\label{prop:shadow}
-The shadow information value $\Omega_j$ satisfies:
-\begin{enumerate}[noitemsep]
-  \item $\Omega_j$ is decreasing in $\bar{c}_g$ for $\bar{c}_g < 1/2$:
-  groups with worse economic histories generate higher shadow market
-  intensity.
-  \item $\partial \Omega_j / \partial (1-\alpha) > 0$: clients who
-  weight social quality more invest more in shadow information.
-  \item $\partial \Omega_j / \partial \lambda > 0$ where $\lambda$
-  indexes legal strictness: tighter anti-discrimination law raises
-  the return to shadow information. The mechanism: the law constrains
-  formal screening but leaves shadow cues unconstrained, degrading
-  the uninformed fallback while preserving the informed outcome.
-  \item $\partial \Omega_j / \partial s_g > 0$: higher marker
-  salience raises shadow market intensity, because visible markers
-  make group attribution easier and therefore the informational
-  advantage of knowing the ``right'' venues more valuable.
-\end{enumerate}
-\end{proposition}
-
-\begin{proposition}[Platform exclusion of outsider group]
-\label{prop:exclusion}
-At the outsider group's entry prior $\bar{c}_{g_2}^0$, the platform
-optimally excludes $g_2$ entirely:
-$\sigma^*(m) = 0$ for all $m \in \M_{g_2}$.
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-The platform's first-order condition with respect to
-$\sigma(m)$ for $m \in \M_{g_2}$ decomposes into two terms. The
-direct revenue effect is the marginal willingness-to-pay $W(g_2)$ of
-an admitted $g_2$ member. The composition externality is the
-aggregated drop in social-quality perception across the $n_{g_1}$
-host clients on the platform, weighted by $(1 - \alpha)$ from
-equation~(\ref{eq:experience}): admitting one additional $g_2$
-member shifts each host's $S_j(\mathcal{A})$ by
-$(\bar{c}_{g_2} - \bar{c}_{g_1})/|\mathcal{A}| < 0$. The net
-marginal profit is therefore
-\[
-  \frac{\partial \Pi}{\partial \sigma(m)} \;=\;
-  W(g_2) \;+\; n_{g_1} (1 - \alpha)
-  \cdot \frac{\bar{c}_{g_2} - \bar{c}_{g_1}}{|\mathcal{A}|}.
-\]
-At the entry prior $\bar{c}_{g_2}^0$, the gap
-$\bar{c}_{g_1} - \bar{c}_{g_2}^0$ is large and $W(g_2)$ is bounded
-above by the willingness-to-pay of a low-class admittee. The
-externality term dominates and the derivative is negative, so the
-platform's optimum is the corner $\sigma^*(m) = 0$.
-\qed
-\end{proof}
-
-\begin{proposition}[Partial inclusion equilibrium]
-\label{prop:tokenism}
-The platform exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ satisfies
-$\bar{c}_g^{\mathrm{excl}} < \bar{c}_g^{\mathrm{mid}}$: the platform begins
-admitting $g_2$ members \emph{before} they have escaped the
-high-discrimination basin, creating a partial inclusion zone
-$[\bar{c}_g^{\mathrm{excl}}, \bar{c}_g^{\mathrm{mid}}]$ in which $g_2$ has
-platform access but not social integration.
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-The exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ is the value of
-$\bar{c}_{g_2}$ at which the platform's FOC (proof of
-Proposition~\ref{prop:exclusion}) just balances:
-\[
-  W(g_2) \;=\; n_{g_1} (1 - \alpha)
-  \cdot \frac{\bar{c}_{g_1} - \bar{c}_g^{\mathrm{excl}}}{|\mathcal{A}|}
-\]
-This is set by the platform's local marginal calculation---the
-average class signal inside the platform. The social tipping point
-$\bar{c}_g^{\mathrm{mid}}$, by contrast, is fixed by the global
-discrimination rate $F(\bar{c}_g)$ crossing the level at which the
-closure basin disappears (Proposition~\ref{prop:class-closure}), a
-property of the system-wide dynamic in
-equation~(\ref{eq:dynamic}). The two thresholds answer to
-structurally different objects, and the platform's FOC balances at a
-$\bar{c}_g$ strictly below the social tipping point. \qed
-\end{proof}
-
-This equilibrium is the structural counterpart of tokenism: the
-platform admits members of the stigmatised group before social
-integration is achieved, producing visible inclusion without the
-underlying belief revision integration would require---an emergent
-outcome of the Jeffrey mechanism and profit incentives, not of any
-imputed intent. These admissions are not cosmetic, however: they
-alter the platform's marginal composition and can destabilise the
-host equilibrium when the host group is near its own tipping point.
-
-\begin{proposition}[Host destabilisation]
-\label{prop:spillover}
-If $g_1$'s equilibrium prior $\bar{c}_{g_1}^*$ is close to
-$\bar{c}_g^{\mathrm{mid}}$, the platform's admission of $g_2$ members
-at $\bar{c}_g^{\mathrm{excl}}$ can push $g_1$ below its own tipping
-point, triggering a class-closure episode within the host group. The
-critical $g_2$ fraction $\rho_{\mathrm{crit}}$ is decreasing in the
-spillover sensitivity parameter $\varepsilon$.
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-Admitting $g_2$ members at fraction $\rho$ on the platform lowers
-the local average class signal observed by $g_1$ clients by
-$\rho \cdot (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})$. The
-spillover sensitivity $\varepsilon \in (0, 1]$ measures the fraction
-of this local shift that transmits to $g_1$'s effective system-wide
-prior through repeated platform encounters:
-$\bar{c}_{g_1}^{\mathrm{eff}} = \bar{c}_{g_1}^*
-- \varepsilon \rho (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})$.
-The host group crosses its tipping point when
-$\bar{c}_{g_1}^{\mathrm{eff}} = \bar{c}_g^{\mathrm{mid}}$, giving
-\[
-  \rho_{\mathrm{crit}}
-  \;=\; \frac{\bar{c}_{g_1}^* - \bar{c}_g^{\mathrm{mid}}}
-  {\varepsilon \cdot (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})}
-\]
-whose derivative
-$\partial \rho_{\mathrm{crit}} / \partial \varepsilon$ is strictly
-negative when $\bar{c}_{g_1}^*$ exceeds both $\bar{c}_g^{\mathrm{mid}}$
-and $\bar{c}_{g_2}^{\mathrm{excl}}$, the configuration of interest.
-\qed
-\end{proof}
+destabilisation channel through which including the out-group can
+trigger closure dynamics within the host group
+(Proposition~\ref{prop:spillover}). The structural counterpart is
+tokenism: visible inclusion without the belief revision that
+integration would require---an emergent outcome of the Jeffrey
+mechanism and profit incentives, not of any imputed intent.
 
 It is illustrative how the above platform framework applies to issues of immigration. An
 immigrant's assimilation trajectory is determined by the economic
@@ -1446,7 +1223,7 @@ platforms---are settings where marker salience $s_g \approx 0$ by
 design, and the
 model predicts zero discrimination regardless of the group prior
 $\bar{c}_g$
-(Proposition~\ref{prop:salience}). But when platforms introduce
+(Remark~\ref{rem:salience}). But when platforms introduce
 identity-revealing features---real names, profile photographs,
 video---$s_g$ jumps discontinuously and discrimination emerges
 immediately, with intensity proportional to the gap between the
@@ -1669,6 +1446,361 @@ bifurcation threshold.
 % =============================================================================
 \numberwithin{proposition}{section}
 \appendix
+
+\section{Proofs}
+\label{app:proofs}
+
+This appendix collects the proofs of the results stated in the main
+text. Notation is as in the body: the group prior $\bar{c}_g \in [0,1]$
+is the within-group mean of class outcomes; $F:[0,1]\to[0,1]$ is the
+decreasing discrimination-rate function with $F(1)=0$; the per-period
+rate is $\phi^t = s_g F(\bar{c}_g^t)$; $\mathcal{H}(\bar{c}_g; s_g)$ is the
+composed intergenerational map of equation~(\ref{eq:composed}); and
+$\Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g; s_g) - \bar{c}_g$ is the residual
+whose zeros are the fixed points.
+
+\begin{proof}[Proof of Proposition~\ref{prop:class-closure}]
+Define $\Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g) - \bar{c}_g$. Then $\Psi(0) = \mu > 0$
+and $\Psi(1) = 0$ (since $F(1) = 0$ and the $\tilde{\gamma}$ terms cancel).
+For sufficiently large $\delta$ and small $\gamma$, the exclusion
+drag dominates at low $\bar{c}_g$, producing an S-shape in
+$\mathcal{H}$ that forces $\Psi$ below zero on an interval in
+$(0,1)$. By continuity and the Intermediate Value Theorem, $\Psi$
+therefore has two interior roots: one where $\Psi$ crosses from
+positive to negative ($\bar{c}_g^{\mathrm{low}}$, stable) and one
+where it crosses back ($\bar{c}_g^{\mathrm{mid}}$, unstable), in
+addition to the boundary root at $\bar{c}_g = 1$. Local stability
+follows from $|\mathcal{H}'(\bar{c}_g^{\mathrm{low}})| < 1$ and
+instability from $\mathcal{H}'(\bar{c}_g^{\mathrm{mid}}) > 1$.
+Path dependence follows from $\mathcal{H}' > 0$ on the relevant
+intervals, which ensures monotonicity of orbits on each side of
+$\bar{c}_g^{\mathrm{mid}}$ \citep[see][ch.~1]{Galor2007}. \qed
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:bifurcation}]
+At $\gamma = 0$, the closure trap exists
+(Proposition~\ref{prop:class-closure}). As the mobility parameter $\gamma$ increases, the
+mobility term raises $\mathcal{H}(\bar{c}_g)$ in the interior, shrinking
+the region where $\Psi < 0$. At $\gamma = \gamma^*$, the region
+vanishes: the low fixed point and the tipping point merge,
+$\mathcal{H}'(\bar{c}_g^*) = 1$, and the system undergoes a saddle-node
+bifurcation. For $\gamma > \gamma^*$, $\Psi > 0$ on all of $(0,1)$
+and the only fixed point is $\bar{c}_g = 1$. The exact $\tilde{\gamma}^*$ is
+found numerically by solving the bifurcation system
+$\{\mathcal{H}(\bar{c}_g) = \bar{c}_g,\; \mathcal{H}'(\bar{c}_g) = 1\}$ jointly.
+\qed
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:salience-threshold}]
+The composed map $\mathcal{H}(\bar{c}_g;\, s_g)$ is decreasing in marker salience $s_g$ on the
+interior of $[0,1]$ (since $\partial G/\partial s_g = -\delta\phi
+\bar{c}_g < 0$). A higher $s_g$ lowers $\mathcal{H}$ in the interior, deepening
+the region where $\Psi < 0$ and requiring higher $\tilde{\gamma}$ to
+restore $\Psi \geq 0$ everywhere. At $s_g = 0$, the discrimination
+channel is fully shut off ($\phi^t = 0$ for all $t$), so
+$\mathcal{H}(\bar{c}_g;\, 0) = \mu + \bar{c}_g(1 - \mu + \tilde{\gamma}) -
+\tilde{\gamma}\bar{c}_g^2$, which satisfies $\Psi \geq 0$ for all
+$\tilde{\gamma} \geq 0$. To establish strict monotonicity on
+$(0,1]$, apply the implicit function theorem to the saddle-node
+conditions $\Psi = 0$ and $\Psi_{\bar{c}_g} = 0$ that define
+$(\bar{c}_g^*, \tilde{\gamma}^*)$ as functions of $s_g$.
+Differentiating $\Psi = 0$ totally in $s_g$ and using the degeneracy
+condition $\Psi_{\bar{c}_g} = 0$ at the bifurcation gives
+\[
+\frac{d\tilde{\gamma}^*}{ds_g} = -\frac{\Psi_{s_g}}{\Psi_{\tilde{\gamma}}}.
+\]
+Direct computation yields
+$\Psi_{s_g} = -\delta\,\bar{c}_g F(\bar{c}_g) < 0$ and
+$\Psi_{\tilde{\gamma}} = \bar{c}_g(1 - \bar{c}_g) > 0$ on $\bar{c}_g \in
+(0,1)$, so $d\tilde{\gamma}^*/ds_g > 0$. \qed
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:enemy}]
+In the bilateral model the map governing a group's intergenerational
+prior depends only on that group's own state and marker salience,
+$\bar{c}_{g_2}^{t+1} = \mathcal{H}(\bar{c}_{g_2}^t; s_g)$, with no argument
+drawn from $g_1$'s prior. The dynamics of $g_2$ are therefore
+autonomous, and the fixed-point structure of
+Proposition~\ref{prop:class-closure} together with the bifurcation of
+Proposition~\ref{prop:bifurcation} applies to $g_2$ at its own
+$(\bar{c}_{g_2}, s_g)$. When $s_g$ is high enough that
+$\tilde{\gamma} < \tilde{\gamma}^*(s_g)$
+(Corollary~\ref{cor:salience-threshold}), the trap persists for $g_2$:
+its map retains the stable low fixed point
+$\bar{c}_g^{\mathrm{low}}(g_2)$ and the unstable tipping point
+$\bar{c}_g^{\mathrm{mid}}$. An outsider group entering with
+$\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$ lies in the low basin, and
+monotonicity of $\mathcal{H}$ on $(0, \bar{c}_g^{\mathrm{mid}})$ carries its
+orbit to $\bar{c}_g^{\mathrm{low}}(g_2)$. Since $g_1$'s map is likewise
+autonomous, $g_1$'s equilibrium is unaffected. When instead $s_g$ is
+low enough that $\tilde{\gamma} > \tilde{\gamma}^*(s_g)$, the saddle-node
+has already eliminated the low basin
+(Proposition~\ref{prop:bifurcation}), so the unique fixed point is
+$\bar{c}_g = 1$ and $g_2$ converges to integration from any initial
+economic position. \qed
+\end{proof}
+
+\section{Adverse Selection through Passing}
+\label{app:passing}
+
+This appendix develops the marker-suppression extension referenced in
+Section~\ref{subsec:intergenerational}. Individuals in the visible
+out-group may reduce their personal marker salience $s_{g,i}$ at a cost
+$\kappa(c_i)$ that is decreasing in own class $c_i$, so higher-class
+members find it cheaper to ``pass.'' Let within-group class be
+distributed with c.d.f.\ $F_c$ on $[0,1]$ and mean $\bar{c}_g$; under the
+Beta--De~Finetti structure of Appendix~\ref{app:bernoulli}, $F_c$ is the
+$\mathrm{Beta}$ mixing distribution with mean $\bar{c}_g$.
+
+\begin{proposition}[Adverse selection through passing]
+\label{prop:passing}
+When individuals can reduce their personal marker salience $s_{g,i}$
+at cost $\kappa(c_i)$ decreasing in class, selective exit from the
+visible out-group worsens the remaining group's prior:
+\[
+  \frac{\partial \bar{c}_g^{\mathrm{visible}}}
+  {\partial (\mathrm{passing\ rate})} < 0.
+\]
+The individuals most able to pass---those with highest $c_i$ and
+lowest natural $s_{g,i}$---are positively selected. Their departure
+lowers the mean class of the visible group, which in turn raises the
+discrimination rate $F(\bar{c}_g)$ against those who remain. Individual
+compliance does not merely fail to improve the group prior (the
+rigidity condition); it actively worsens it through composition. The
+mimic man's escape harms those he leaves behind.
+\end{proposition}
+
+\begin{proof}
+An individual passes when the net private benefit of suppressing
+markers exceeds the cost $\kappa(c_i)$. Because $\kappa$ is decreasing in
+$c_i$ while the benefit is non-decreasing, the passing decision is
+monotone in class: there is a threshold $c^\dagger$ such that exactly
+the members with $c_i > c^\dagger$ exit the visible group. The visible
+group is therefore the upper-truncated population $\{c_i \le c^\dagger\}$,
+with mean
+\[
+  \bar{c}_g^{\mathrm{visible}}(c^\dagger)
+  = \E\!\left[c_i \mid c_i \le c^\dagger\right],
+\]
+which is strictly increasing in $c^\dagger$. The passing rate is
+$1 - F_c(c^\dagger)$, decreasing in $c^\dagger$; hence
+$\bar{c}_g^{\mathrm{visible}}$ is strictly decreasing in the passing rate,
+giving $\partial \bar{c}_g^{\mathrm{visible}}/\partial(\text{passing rate}) < 0$.
+Since the discrimination-rate function $F$ is decreasing in the group
+prior, the induced fall in $\bar{c}_g^{\mathrm{visible}}$ raises
+$F(\bar{c}_g^{\mathrm{visible}})$ against those who remain. The effect
+operates entirely through the group prior that the rigidity condition
+holds fixed under individual counter-examples, so exit does not revise
+that prior upward---it lowers it. \qed
+\end{proof}
+
+\section{The Platform Channel}
+\label{app:platform}
+
+This appendix develops the platform extension summarised in
+Section~\ref{sec:platform}: a profit-maximising institution that
+mediates social encounters through an atmosphere vector and an
+admission policy. Notation is as in the body. The bilateral mechanism
+locates a first source of persistence at the individual level; the
+platform identifies a second, operating at the institutional level and
+independent of the first, even when bilateral encounters generate no
+persistence.
+
+For a $g_1$ client $j$, experience utility at a venue with attendee
+set $\A$ is:
+\begin{equation}
+  V_j(\A) = \alpha \cdot q + (1 - \alpha) \cdot S_j(\A)
+  \label{eq:experience}
+\end{equation}
+where $q$ is objective quality, $\alpha \in (0,1)$ is the weight on
+objective vs.\ social quality, and:
+\begin{equation}
+  S_j(\A) = \frac{1}{|\A|} \sum_{i \in \A,\, i \neq j}
+  \E_j[c_i \mid m_i]
+  \label{eq:social-quality}
+\end{equation}
+$S_j(\A)$ is a function of \emph{beliefs}, not facts.
+
+The platform produces atmosphere vector
+$\mathbf{a}$ (pricing, location, d\'{e}cor, dress code,
+marketing language, music, staff manner) serving two functions.
+\begin{enumerate}
+
+\item \textbf{Client self-selection.}
+$\Pr(\text{visit} \mid c_j, \mathbf{a}) = h(c_j, \mathbf{a})$,
+increasing in the match between $c_j$ and the class $\mathbf{a}$
+signals.
+
+\item \textbf{Contextual modulation of Jeffrey updating.}
+$P'(g_k \mid m_i, \mathbf{a}) \neq P'(g_k \mid m_i)$. A strong
+high-class atmosphere acts as a contextual prior, resolving marker
+ambiguity against the stigmatised group.
+
+\begin{equation}
+  \max_{\mathbf{a},\, \sigma} \quad
+  \Pi(\mathbf{a}, \sigma) = \sum_{j \in \mathcal{D}(\mathbf{a})}
+  \sigma(m_j) \cdot W_j(\mathbf{a}, \sigma) - C(\mathbf{a})
+  \label{eq:platform-opt}
+\end{equation}
+where $\Pi$ is platform profit, $\mathcal{D}(\mathbf{a})$ is the
+self-selecting set,
+$\sigma: \M \to [0,1]$ is the admission policy, $W_j$ is willingness
+to pay, and $C(\mathbf{a})$ is cost.
+\end{enumerate}
+
+\textbf{Legal constraint:} $\sigma$ cannot be an explicit function of
+group membership $g$. But $\sigma$ may depend on markers $m$, which
+are correlated with $g$. Result: \emph{informationally mediated,
+legally invisible discrimination}.
+
+We define the \emph{shadow information value}
+$\Omega_j = (1-\alpha)\,(S_j^{*} - S_j^{\mathrm{rand}})$, the gain in
+perceived social quality~(\ref{eq:social-quality}) a client secures by
+using informal cues to sort into the venue whose composition matches
+its preference, relative to uninformed (random) selection.
+
+\begin{proposition}[Shadow market intensity]
+\label{prop:shadow}
+The shadow information value $\Omega_j$ satisfies:
+\begin{enumerate}[noitemsep]
+  \item $\Omega_j$ is decreasing in $\bar{c}_g$ for $\bar{c}_g < 1/2$:
+  groups with worse economic histories generate higher shadow market
+  intensity.
+  \item $\partial \Omega_j / \partial (1-\alpha) > 0$: clients who
+  weight social quality more invest more in shadow information.
+  \item $\partial \Omega_j / \partial \lambda > 0$ where $\lambda$
+  indexes legal strictness: tighter anti-discrimination law raises
+  the return to shadow information. The mechanism: the law constrains
+  formal screening but leaves shadow cues unconstrained, degrading
+  the uninformed fallback while preserving the informed outcome.
+  \item $\partial \Omega_j / \partial s_g > 0$: higher marker
+  salience raises shadow market intensity, because visible markers
+  make group attribution easier and therefore the informational
+  advantage of knowing the ``right'' venues more valuable.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write $\Omega_j = (1-\alpha)(S_j^{*} - S_j^{\mathrm{rand}})$ with $S_j^*$
+the social-quality term~(\ref{eq:social-quality}) under informed venue
+choice and $S_j^{\mathrm{rand}}$ under uninformed choice; objective
+quality $q$ cancels. (i) The gap $S_j^{*} - S_j^{\mathrm{rand}}$ measures
+the dispersion in venue composition that sorting exploits; for
+$\bar{c}_g < 1/2$ this gap widens as $\bar{c}_g$ falls, so
+$\partial \Omega_j / \partial \bar{c}_g < 0$. (ii) $\Omega_j$ is
+proportional to $(1-\alpha)$, so
+$\partial \Omega_j / \partial (1-\alpha) > 0$. (iii) Let $\lambda$ index
+legal strictness, which lowers the uninformed payoff
+$S_j^{\mathrm{rand}}$ by $\gamma\lambda$---formal screening is
+constrained while shadow cues are not---without altering the informed
+payoff; then $\Omega_j = V_1 - (V_0 - \gamma\lambda)$ and
+$\partial \Omega_j / \partial \lambda = \gamma > 0$. (iv) Higher marker
+salience $s_g$ sharpens group attribution from cues, raising
+$S_j^{*} - S_j^{\mathrm{rand}}$ and hence
+$\partial \Omega_j / \partial s_g > 0$. \qed
+\end{proof}
+
+\begin{proposition}[Platform exclusion of outsider group]
+\label{prop:exclusion}
+At the outsider group's entry prior $\bar{c}_{g_2}^0$, the platform
+optimally excludes $g_2$ entirely:
+$\sigma^*(m) = 0$ for all $m \in \M_{g_2}$.
+\end{proposition}
+
+\begin{proof}
+The platform's first-order condition with respect to
+$\sigma(m)$ for $m \in \M_{g_2}$ decomposes into two terms. The
+direct revenue effect is the marginal willingness-to-pay $W(g_2)$ of
+an admitted $g_2$ member. The composition externality is the
+aggregated drop in social-quality perception across the $n_{g_1}$
+host clients on the platform, weighted by $(1 - \alpha)$ from
+equation~(\ref{eq:experience}): admitting one additional $g_2$
+member shifts each host's $S_j(\mathcal{A})$ by
+$(\bar{c}_{g_2} - \bar{c}_{g_1})/|\mathcal{A}| < 0$. The net
+marginal profit is therefore
+\[
+  \frac{\partial \Pi}{\partial \sigma(m)} \;=\;
+  W(g_2) \;+\; n_{g_1} (1 - \alpha)
+  \cdot \frac{\bar{c}_{g_2} - \bar{c}_{g_1}}{|\mathcal{A}|}.
+\]
+At the entry prior $\bar{c}_{g_2}^0$, the gap
+$\bar{c}_{g_1} - \bar{c}_{g_2}^0$ is large and $W(g_2)$ is bounded
+above by the willingness-to-pay of a low-class admittee. The
+externality term dominates and the derivative is negative, so the
+platform's optimum is the corner $\sigma^*(m) = 0$.
+\qed
+\end{proof}
+
+\begin{proposition}[Partial inclusion equilibrium]
+\label{prop:tokenism}
+The platform exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ satisfies
+$\bar{c}_g^{\mathrm{excl}} < \bar{c}_g^{\mathrm{mid}}$: the platform begins
+admitting $g_2$ members \emph{before} they have escaped the
+high-discrimination basin, creating a partial inclusion zone
+$[\bar{c}_g^{\mathrm{excl}}, \bar{c}_g^{\mathrm{mid}}]$ in which $g_2$ has
+platform access but not social integration.
+\end{proposition}
+
+\begin{proof}
+The exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ is the value of
+$\bar{c}_{g_2}$ at which the platform's FOC (proof of
+Proposition~\ref{prop:exclusion}) just balances:
+\[
+  W(g_2) \;=\; n_{g_1} (1 - \alpha)
+  \cdot \frac{\bar{c}_{g_1} - \bar{c}_g^{\mathrm{excl}}}{|\mathcal{A}|}
+\]
+This is set by the platform's local marginal calculation---the
+average class signal inside the platform. The social tipping point
+$\bar{c}_g^{\mathrm{mid}}$, by contrast, is fixed by the global
+discrimination rate $F(\bar{c}_g)$ crossing the level at which the
+closure basin disappears (Proposition~\ref{prop:class-closure}), a
+property of the system-wide dynamic in
+equation~(\ref{eq:dynamic}). The two thresholds answer to
+structurally different objects, and the platform's FOC balances at a
+$\bar{c}_g$ strictly below the social tipping point. \qed
+\end{proof}
+
+This equilibrium is the structural counterpart of tokenism: the
+platform admits members of the stigmatised group before social
+integration is achieved, producing visible inclusion without the
+underlying belief revision integration would require---an emergent
+outcome of the Jeffrey mechanism and profit incentives, not of any
+imputed intent. These admissions are not cosmetic, however: they
+alter the platform's marginal composition and can destabilise the
+host equilibrium when the host group is near its own tipping point.
+
+\begin{proposition}[Host destabilisation]
+\label{prop:spillover}
+If $g_1$'s equilibrium prior $\bar{c}_{g_1}^*$ is close to
+$\bar{c}_g^{\mathrm{mid}}$, the platform's admission of $g_2$ members
+at $\bar{c}_g^{\mathrm{excl}}$ can push $g_1$ below its own tipping
+point, triggering a class-closure episode within the host group. The
+critical $g_2$ fraction $\rho_{\mathrm{crit}}$ is decreasing in the
+spillover sensitivity parameter $\varepsilon$.
+\end{proposition}
+
+\begin{proof}
+Admitting $g_2$ members at fraction $\rho$ on the platform lowers
+the local average class signal observed by $g_1$ clients by
+$\rho \cdot (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})$. The
+spillover sensitivity $\varepsilon \in (0, 1]$ measures the fraction
+of this local shift that transmits to $g_1$'s effective system-wide
+prior through repeated platform encounters:
+$\bar{c}_{g_1}^{\mathrm{eff}} = \bar{c}_{g_1}^*
+- \varepsilon \rho (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})$.
+The host group crosses its tipping point when
+$\bar{c}_{g_1}^{\mathrm{eff}} = \bar{c}_g^{\mathrm{mid}}$, giving
+\[
+  \rho_{\mathrm{crit}}
+  \;=\; \frac{\bar{c}_{g_1}^* - \bar{c}_g^{\mathrm{mid}}}
+  {\varepsilon \cdot (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})}
+\]
+whose derivative
+$\partial \rho_{\mathrm{crit}} / \partial \varepsilon$ is strictly
+negative when $\bar{c}_{g_1}^*$ exceeds both $\bar{c}_g^{\mathrm{mid}}$
+and $\bar{c}_{g_2}^{\mathrm{excl}}$, the configuration of interest.
+\qed
+\end{proof}
 
 \section{The Rigidity Parameter and the Bayesian Limit}
 \label{app:loury}
