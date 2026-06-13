@@ -902,7 +902,10 @@ modulated by marker salience $s_g$
 (Remark~\ref{rem:salience}) as $\phi^t = s_g \cdot F(\bar{c}_g^t)$ , where $F: [0,1] \to [0,1]$ is
 the group-level discrimination rate function induced by the
 threshold: when $s_g = 0$, markers are
-invisible and no discrimination fires.
+invisible and no discrimination fires. We maintain throughout the mild
+regularity condition that $F$ is $C^1$, strictly decreasing, and convex
+on $[0,1]$ with $F(1) = F'(1) = 0$; the canonical form
+$F(\bar{c}_g) = (1-\bar{c}_g)^2$ satisfies it.
 
 It is worth highlighting that the mobility parameter $\gamma$ is exogenous in the model: it captures
 within-group variance arising from talent, effort, and wealth shocks,
@@ -1453,28 +1456,70 @@ bifurcation threshold.
 This appendix collects the proofs of the results stated in the main
 text. Notation is as in the body: the group prior $\bar{c}_g \in [0,1]$
 is the within-group mean of class outcomes; $F:[0,1]\to[0,1]$ is the
-decreasing discrimination-rate function with $F(1)=0$; the per-period
+discrimination-rate function, maintained $C^1$, strictly decreasing and
+convex with $F(1)=F'(1)=0$; the per-period
 rate is $\phi^t = s_g F(\bar{c}_g^t)$; $\mathcal{H}(\bar{c}_g; s_g)$ is the
 composed intergenerational map of equation~(\ref{eq:composed}); and
 $\Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g; s_g) - \bar{c}_g$ is the residual
 whose zeros are the fixed points.
 
 \begin{proof}[Proof of Proposition~\ref{prop:class-closure}]
-Define $\Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g) - \bar{c}_g$. Then $\Psi(0) = \mu > 0$
-and $\Psi(1) = 0$ (since $F(1) = 0$ and the $\tilde{\gamma}$ terms cancel).
-For sufficiently large $\delta$ and small $\gamma$, the exclusion
-drag dominates at low $\bar{c}_g$, producing an S-shape in
-$\mathcal{H}$ that forces $\Psi$ below zero on an interval in
-$(0,1)$. By continuity and the Intermediate Value Theorem, $\Psi$
-therefore has two interior roots: one where $\Psi$ crosses from
-positive to negative ($\bar{c}_g^{\mathrm{low}}$, stable) and one
-where it crosses back ($\bar{c}_g^{\mathrm{mid}}$, unstable), in
-addition to the boundary root at $\bar{c}_g = 1$. Local stability
-follows from $|\mathcal{H}'(\bar{c}_g^{\mathrm{low}})| < 1$ and
-instability from $\mathcal{H}'(\bar{c}_g^{\mathrm{mid}}) > 1$.
-Path dependence follows from $\mathcal{H}' > 0$ on the relevant
-intervals, which ensures monotonicity of orbits on each side of
-$\bar{c}_g^{\mathrm{mid}}$ \citep[see][ch.~1]{Galor2007}. \qed
+Substituting the composed map~(\ref{eq:composed}) and factoring,
+\[
+  \Psi(\bar{c}_g) = \mathcal{H}(\bar{c}_g; s_g) - \bar{c}_g
+  = (1-\bar{c}_g)(\mu + \tilde{\gamma}\bar{c}_g)
+    - s_g\delta\,\bar{c}_g F(\bar{c}_g),
+\]
+so $\Psi(0) = \mu > 0$ and $\Psi(1) = 0$ (as $F(1)=0$).
+
+\emph{The integration state is stable.} Differentiating and using
+$F(1)=F'(1)=0$ gives
+$\Psi'(1) = -(\mu+\tilde{\gamma}) - s_g\delta F'(1) = -(\mu+\tilde{\gamma}) < 0$,
+hence $\mathcal{H}'(1) = 1+\Psi'(1) = 1-(\mu+\tilde{\gamma}) \in (-1,1)$ for
+$\mu+\tilde{\gamma}<2$: the boundary fixed point $\bar{c}_g = 1$ is locally
+stable and $\Psi > 0$ on a left-neighbourhood of $1$. (Were $F$ to reach
+zero with nonzero slope, $\Psi'(1)$ would turn positive for large $\delta$
+and destabilise integration; $F'(1)=0$ is exactly what excludes this.)
+
+\emph{An interior dip for large $\delta$.} Fix any interior
+$\bar{c}_0 \in (0,1)$. As $F$ is decreasing with $F(0)>0$, the quantity
+$b := s_g \bar{c}_0 F(\bar{c}_0)$ is positive while
+$a := (1-\bar{c}_0)(\mu+\tilde{\gamma}\bar{c}_0) > 0$ is independent of
+$\delta$; thus $\Psi(\bar{c}_0) = a - \delta b < 0$ once $\delta > a/b$
+(small $\tilde{\gamma}$ enters symmetrically through $a$). Fix such a
+$\delta$.
+
+\emph{Two interior roots.} For $\bar{c}_g \in (0,1)$, $\Psi=0$ iff
+$L(\bar{c}_g)=R(\bar{c}_g)$, with $\Psi \gtrless 0 \iff R \gtrless L$, where
+\[
+  L(\bar{c}_g) := s_g\delta F(\bar{c}_g),
+  \qquad
+  R(\bar{c}_g) := \frac{(1-\bar{c}_g)(\mu+\tilde{\gamma}\bar{c}_g)}{\bar{c}_g}
+   = \frac{\mu}{\bar{c}_g} + (\tilde{\gamma}-\mu) - \tilde{\gamma}\bar{c}_g .
+\]
+$R$ is strictly decreasing and convex with $R(0^{+})=+\infty$, $R(1)=0$;
+$L$ is strictly decreasing and convex with $L(0)$ finite, $L(1)=0$, and
+$L = O\!\big((1-\bar{c}_g)^2\big)$ near $1$ (since $F(1)=F'(1)=0$). Hence
+$R>L$ near both endpoints---so $\Psi>0$ there---while the dip
+$\Psi(\bar{c}_0)<0$ places $L>R$ between, so $L$ and $R$ meet at an interior
+$+\!\to\!-$ crossing $\bar{c}_g^{\mathrm{low}}$
+($\mathcal{H}'(\bar{c}_g^{\mathrm{low}})<1$, stable) and a $-\!\to\!+$
+crossing $\bar{c}_g^{\mathrm{mid}}$
+($\mathcal{H}'(\bar{c}_g^{\mathrm{mid}})>1$, unstable), alongside the
+boundary root $\bar{c}_g=1$. For the canonical $F=(1-\bar{c}_g)^2$ the count
+is explicit:
+$\Psi = (1-\bar{c}_g)\big[s_g\delta\,\bar{c}_g^{2}
+ + (\tilde{\gamma}-s_g\delta)\bar{c}_g + \mu\big]$,
+whose bracketed quadratic is positive at $\bar{c}_g\in\{0,1\}$ and, once
+$\delta$ is large (positive discriminant, vertex interior), has exactly two
+roots in $(0,1)$---giving precisely the three fixed points above.
+
+\emph{Path dependence.} Since $\mathcal{H}'>0$ on
+$(0,\bar{c}_g^{\mathrm{mid}})$ and on $(\bar{c}_g^{\mathrm{mid}},1)$, orbits
+are monotone on each side of the tipping point and converge to
+$\bar{c}_g^{\mathrm{low}}$ or to $\bar{c}_g=1$ according as
+$\bar{c}_g^{0}\lessgtr\bar{c}_g^{\mathrm{mid}}$ \citep[ch.~1]{Galor2007}.
+The low fixed point is the within-group closure trap. \qed
 \end{proof}
 
 \begin{proof}[Proof of Proposition~\ref{prop:bifurcation}]
