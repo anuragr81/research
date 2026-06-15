@@ -2,13 +2,14 @@
 % ADDENDUM: Formal Welfare Derivation for "Discrimination from Soft Signals"
 % =============================================================================
 % This is a standalone reference document containing the full formal welfare
-% derivation. It is NOT part of the submission to BEJTE. The slim version of
-% the welfare analysis in manuscript.tex Section 4.2 contains the load-bearing
-% results; this addendum provides the underlying derivation, the three-regime
-% framing, and the formal integral definitions for reference.
+% derivation. It is NOT part of the submission to Theory and Decision. The main
+% paper carries welfare only as a future-work note in the Conclusion; this
+% addendum develops that direction in full — the welfare object, the telescoping
+% decomposition, the within-group coarseness floor, the three-regime framing,
+% and the worked policy comparison — for reference.
 %
 % Companion file: manuscript.tex
-% Verification: verify_discrimination.py CHECK_87 through CHECK_90 and
+% Verification: verify_discrimination.py CHECK_86 through CHECK_90 and
 %               ANALYTIC_10, ANALYTIC_11
 % =============================================================================
 
@@ -66,25 +67,31 @@
 
 \begin{center}
 {\Large\bfseries Addendum: Formal Welfare Derivation}\\[0.4em]
-{\normalsize Companion to ``Discrimination from Soft Signals:
-Dilemmas of Mimic Men''}\\[0.5em]
+{\normalsize Companion to ``Stereotype Rigidity in Social Inferences:
+A `Mimic Men' Dilemma''}\\[0.5em]
 {\normalsize Reference document --- not for submission}\\[1em]
 \end{center}
 
 \section*{Scope of this document}
 
-The main paper presents a slim version of the welfare analysis in
-Section~4.2, organised around a single headline result (welfare
-dominance of mobility above $\gamma^*$) and one companion negative
-result (irreducibility of informational welfare loss). This document
-contains the underlying formal derivation: the welfare object $W$
+The main paper carries the welfare analysis only as a brief future-work
+note in the Conclusion: the natural benchmark is a first-best in which
+social engagement conditions on an individual's true class rather than
+on a group marker, and relative to it the loss the trap generates
+separates into a component driven by the group's standing and a
+component that survives even when that standing is accurate. This
+document develops that direction in full: the welfare object $W$
 defined as a discounted population integral; the telescoping
 construction by which the four components arise; the integral
-expressions for each component; the three-regime case framing; the
-proof of additivity; and the worked policy comparison under each
-regime. The material here is verified symbolically in
-\texttt{verify\_discrimination.py} as CHECK\_87 through CHECK\_90
-and ANALYTIC\_10, ANALYTIC\_11.
+expressions for each component, including the within-group coarseness
+floor that is the load-bearing object here; the three-regime case
+framing; the proof of additivity; and the worked policy comparison
+under each regime. The material is verified symbolically in
+\texttt{verify\_discrimination.py} as CHECK\_86 through CHECK\_90
+and ANALYTIC\_10, ANALYTIC\_11. It is a reference document, organised
+around a single headline result (welfare dominance of mobility above
+$\gamma^*$) and one companion negative result (irreducibility of the
+within-group informational loss); it is not part of the submission.
 
 \section{Welfare object and decomposition}
 \label{sec:welfare-object}
@@ -109,12 +116,15 @@ contributes the outside option $\bar{u}$, normalised to zero.
 
 The first-best welfare $W^*$ is the value of $W$ achieved under three
 simultaneous conditions: (i) every mutually beneficial encounter
-takes place---$U(c_i, c_j) > \bar{u}$ implies engagement; (ii) the
-within-group conditional distributions $F_g$ track the empirical
-distribution of class within each group, so the Jeffrey rigidity
-condition is non-binding; and (iii) no shadow information market is
-active. The total welfare loss is the gap between this first-best and
-equilibrium welfare,
+takes place---$U(c_i, c_j) > \bar{u}$ implies engagement; (ii) social
+engagement conditions on each individual's \emph{true} class $c_i$
+rather than on the group marker $m_i$, so that no surplus is foregone
+to the coarseness of group-level information; and (iii) no shadow
+information market is active. Condition~(ii) is the substantive
+benchmark: it does not ask that beliefs about the group be accurate,
+but that engagement need not run through the group at all. The total
+welfare loss is the gap between this first-best and equilibrium
+welfare,
 \begin{equation}
   \mathcal{L} \;=\; W^* - W^{\mathrm{eq}}.
 \end{equation}
@@ -123,11 +133,11 @@ To decompose $\mathcal{L}$ we construct a sequence of counterfactual
 welfares that interpolate between $W^*$ and $W^{\mathrm{eq}}$, each
 relaxing one of the conditions above:
 \begin{align*}
-  W_0 &\equiv W^* && \text{first-best} \\
+  W_0 &\equiv W^* && \text{first-best (engagement on true class)} \\
   W_1 &\equiv W_0 - \text{exclusion externality}
        && \text{refused beneficial encounters} \\
-  W_2 &\equiv W_1 - \text{information loss}
-       && \text{Jeffrey rigidity binds} \\
+  W_2 &\equiv W_1 - \text{coarseness loss}
+       && \text{engagement on group standing, not class} \\
   W_3 &\equiv W_2 - \text{dynamic compounding}
        && \text{intergenerational drift in } \bar{c}_g \\
   W^{\mathrm{eq}} &\equiv W_3 - \text{platform cost}
@@ -173,25 +183,39 @@ is what standard models of statistical discrimination already
 capture.
 
 \subsection*{Informational loss}
-$\mathcal{L}_{\text{info}}$ is the welfare gap between the Jeffrey
-equilibrium of the model and the counterfactual Bayesian equilibrium
-that would obtain if the rigidity condition were removed and
-individual counter-examples updated the within-group conditional
-$F_g$:
+$\mathcal{L}_{\text{info}}$ is the within-group foregone surplus that
+arises because engagement conditions on the group standing
+$\bar{c}_g$---all the marker conveys---rather than on the individual's
+true class $c_i$. Writing $W^{\mathrm{class}}$ for the welfare under
+true-class engagement and $W^{\mathrm{marker}}$ for the welfare under
+group-standing engagement, both holding the engagement set fixed,
 \begin{equation}
   \mathcal{L}_{\text{info}}
-  \;=\; W^{\mathrm{Bayes}} - W^{\mathrm{Jeffrey}}.
+  \;=\; W^{\mathrm{class}} - W^{\mathrm{marker}}.
   \label{eq:L-info}
 \end{equation}
-This is the novel contribution of the framework. By Pinsker-type
-inequalities, $\mathcal{L}_{\text{info}}$ is bounded below by a
-quantity proportional to $\rho \cdot \mathrm{dKL}(F_g \,\Vert\, F_g^{\mathrm{Bayes}})$,
-where $\rho > 0$ is the rigidity weight on the group prior in the
-revision rule and $\mathrm{dKL}$ is the Kullback--Leibler divergence
-between the rigid conditional and the conditional that would obtain
-under Bayesian updating. The loss falls on the whole society because
-stale priors persist in all interactions, not just those involving
-the excluded group.
+This is the load-bearing object of the framework. A second-order
+expansion of the bilateral surplus about the group mean gives a lower
+bound proportional to the within-group class variance,
+\begin{equation}
+  \mathcal{L}_{\text{info}}
+  \;\geq\; \tfrac{1}{2}\,\kappa\,\sigma^2_g \;>\; 0
+  \qquad (\sigma^2_g > 0),
+  \label{eq:L-info-bound}
+\end{equation}
+where $\sigma^2_g = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$ is the within-group
+class variance (with $\nu$ the concentration of the within-group class
+distribution) and $\kappa = -\,\partial^2 U/\partial c_i^2 > 0$
+measures the curvature of bilateral surplus in the partner's class. The
+bound is \emph{independent of whether the standing $\bar{c}_g$ is
+accurate}: it is generated by the coarseness of group-level
+information, not by error in it. The loss falls on the whole society,
+since group-standing engagement coarsens every interaction, not only
+those involving the stigmatised group. There is no appeal here to a
+Bayesian counterfactual: $\mathcal{L}_{\text{info}}$ is measured
+against the true-class first-best $W^*$, and the model's
+Jeffrey-versus-Bayes contrast governs belief \emph{dynamics}, not this
+static floor.
 
 \subsection*{Dynamic loss}
 $\mathcal{L}_{\text{dyn}}$ is the discounted sum of allocative losses
@@ -226,10 +250,12 @@ non-discriminatory equilibrium.
 \section{Three regimes of welfare logic}
 \label{sec:welfare-cases}
 
-The welfare implications of the model depend on what the within-group
-conditionals $F_g$ are doing relative to underlying empirical reality.
-Three regimes exhaust the model's belief states, each producing a
-distinct welfare logic and a distinct policy comparison.
+The reducible part of the welfare loss depends on what the group
+standing $\bar{c}_g$ is doing relative to underlying empirical reality;
+the within-group informational floor $\mathcal{L}_{\text{info}}$ is
+present regardless. Three regimes exhaust the model's belief states,
+each producing a distinct welfare logic and a distinct policy
+comparison.
 
 In the first regime, beliefs are accurate: $F_g$ tracks the empirical
 class distribution within each group. The rigidity condition is
@@ -256,34 +282,43 @@ the trap: a higher-welfare equilibrium exists at $\bar{c}_g^H = 1$,
 and the closure basin prevents the system from reaching it.
 ``Self-reinforcing'' here denotes intergenerational stability of the
 equilibrium rather than within-generation stability of belief content;
-the loss is in equilibrium selection, not in belief error.
+the \emph{reducible} loss is in equilibrium selection, not in belief
+error, while the within-group coarseness floor remains in force even at
+the accurate standing.
 
 These three regimes are exhaustive over the model's equilibrium
 belief states: either beliefs track reality or they do not; if they
 do not, the system either stabilises them through behaviour
 (regime~2) or does not (a non-equilibrium configuration outside the
 model's scope). Each regime corresponds to a different selection of
-which components of $\mathcal{L}$ are non-zero, and to a different
-policy logic.
+which \emph{reducible} components of $\mathcal{L}$ are non-zero---the
+informational floor $\mathcal{L}_{\text{info}}$ is non-zero in all
+three---and to a different policy logic.
 
 \textbf{Case 1: Beliefs accurate.}
-The rigidity condition is non-binding, so
-$\mathcal{L}_{\text{info}} = 0$. With no error in $F_g$ to compound
-across generations, $\mathcal{L}_{\text{dyn}}$ vanishes once the
-system is allowed to settle. The platform's shadow information
-channel offers no advantage when beliefs are already correct, so
-$\mathcal{L}_{\text{platform}}$ is small. Only $\mathcal{L}_{\text{alloc}}$
-is positive, arising from the exclusion externality that even
-accurate beliefs do not internalise (CHECK\_89). Policy:
-redistribution or subsidised access to compensate the foregone
-surplus.
+The standing $\bar{c}_g$ is correct, so there is no belief error to
+compound: $\mathcal{L}_{\text{dyn}}$ vanishes once the system settles,
+and the platform's shadow channel offers little advantage when beliefs
+are already correct, so $\mathcal{L}_{\text{platform}}$ is small. Two
+components remain. $\mathcal{L}_{\text{alloc}}$ is positive from the
+exclusion externality that even accurate beliefs do not internalise,
+and $\mathcal{L}_{\text{info}}$ is positive from the within-group
+coarseness floor~(\ref{eq:L-info-bound})---engagement still runs on the
+group standing, not the individual's class, so surplus is foregone even
+though the standing is right (CHECK\_89). Policy: redistribution or
+subsidised access compensates $\mathcal{L}_{\text{alloc}}$, but the
+coarseness floor is untouched by any instrument that leaves markers
+soft.
 
 \textbf{Case 2: Beliefs inaccurate but self-confirming.}
-All four components of $\mathcal{L}$ are positive
-(ANALYTIC\_11). This is the regime in which the model's distinctive
-welfare logic operates: each instrument has a different incidence
-across the components, the components interact, and the
-informational component is bounded below by an irreducible quantity.
+All four components of $\mathcal{L}$ are positive (ANALYTIC\_11), and
+the belief error in $\bar{c}_g$ inflates $\mathcal{L}_{\text{alloc}}$
+and $\mathcal{L}_{\text{dyn}}$ above their accurate-standing levels.
+This is the regime in which every instrument has a distinct incidence
+across the components and the components interact most strongly. The
+informational floor $\mathcal{L}_{\text{info}}$ is present here as in
+every regime; what is special to Case~2 is the \emph{additional},
+reducible loss that the inaccurate standing layers on top of it.
 
 $\mathcal{L}_{\text{alloc}}$ responds to anti-discrimination law on
 the formal-contracting side and to forced integration.
@@ -299,28 +334,30 @@ Let $\Phi$ denote the class of policies that leave the soft-signal
 structure of social interaction invariant: policies that operate by
 changing $\gamma$ (mobility), $\sigma$ (admission), or $\delta$
 (exclusion intensity), but not by converting soft markers into hard
-signals. Then for all $\phi \in \Phi$:
+signals. Then for all $\phi \in \Phi$, holding the group's internal
+class dispersion fixed,
 \[
   \mathcal{L}_{\mathrm{info}}(\phi)
-  \;\geq\; \mathcal{L}_{\mathrm{info}}^* \;>\; 0
+  \;\geq\; \mathcal{L}_{\mathrm{info}}^*
+  \;=\; \tfrac{1}{2}\,\kappa\,\sigma^2_g \;>\; 0
 \]
-where $\mathcal{L}_{\mathrm{info}}^*$ is determined by the Jeffrey
-rigidity parameter $\rho > \rho^*$ and the initial group
-distribution $F_g$.
+whenever $\sigma^2_g > 0$. The floor is independent of whether the
+standing $\bar{c}_g$ is accurate.
 \end{corollary}
 
 \begin{proof}[Proof sketch]
-From equation~(\ref{eq:L-info}), $\mathcal{L}_{\text{info}}$ is the
-gap between the Jeffrey welfare and the counterfactual Bayesian
-welfare, bounded below by
-$\rho \cdot \mathrm{dKL}(F_g \,\Vert\, F_g^{\mathrm{Bayes}})$ (the
-component of belief error that the rigidity condition prevents
-from updating). Policies in $\Phi$ alter $\gamma$, $\sigma$, or
-$\delta$, but not the rigidity parameter $\rho$ (the weight on the
-group prior in the revision rule) or the group-level conditional
-probabilities $F_g$. The lower bound is therefore invariant to all
+From~(\ref{eq:L-info-bound}), $\mathcal{L}_{\text{info}}$ is bounded
+below by $\tfrac{1}{2}\kappa\,\sigma^2_g$, the second-order surplus
+foregone when engagement conditions on the group mean rather than the
+class realisation. Policies in $\Phi$ alter $\gamma$, $\sigma$, or
+$\delta$; none of these enters the curvature $\kappa$ of bilateral
+surplus or resolves the within-group class variance $\sigma^2_g$,
+because each leaves the marker soft---informative about the group, not
+the individual. The lower bound is therefore invariant to all
 $\phi \in \Phi$ (CHECK\_86), and $\mathcal{L}_{\text{info}} > 0$
-whenever $\rho > \rho^*$ (ANALYTIC\_10).
+whenever the group carries internal class dispersion, $\sigma^2_g > 0$
+(ANALYTIC\_10)---in particular at the accurate closure standing of
+Case~3.
 \qed
 \end{proof}
 
@@ -367,15 +404,21 @@ $\gamma^*$.}
 \end{table}
 
 \textbf{Case 3: Beliefs accurate and self-reinforcing.}
-The conditional $F_g$ describes the realised closure equilibrium
-correctly, so $\mathcal{L}_{\text{info}} = 0$ (CHECK\_90). But
-$\mathcal{L}_{\text{alloc}}$ remains positive at the closure
-equilibrium because the engagement threshold continues to refuse
+The standing $\bar{c}_g$ describes the realised closure equilibrium
+correctly, yet $\mathcal{L}_{\text{info}} > 0$: even with an accurate
+standing, engagement conditions on the group rather than the
+individual, and the within-group coarseness
+floor~(\ref{eq:L-info-bound}) is strictly positive whenever
+$\sigma^2_g > 0$ (CHECK\_90). $\mathcal{L}_{\text{alloc}}$ remains
+positive because the engagement threshold continues to refuse
 beneficial encounters; $\mathcal{L}_{\text{dyn}}$ remains positive
 because the trap reproduces itself across generations; and
-$\mathcal{L}_{\text{platform}}$ remains positive because the
-shadow market does not require belief error to function. The loss
-is in equilibrium selection, not belief content.
+$\mathcal{L}_{\text{platform}}$ remains positive because the shadow
+market does not require belief error to function. This is the regime
+the paper is built on---a homogeneous society at an accurate closure
+standing---and it is precisely here that the irreducibility result has
+force: the loss is structural, not a matter of belief content, and no
+instrument in $\Phi$ removes it.
 
 The relevant policy comparison is therefore across equilibria.
 Forced integration achieves equilibrium selection by shifting a
@@ -443,8 +486,10 @@ produces a contract/contact reading of the policy implications.
 Anti-discrimination law on the contract side
 remains necessary on the formal contracting channel; mobility
 investment is necessary on the contact channel; neither is
-sufficient on its own, and both leave the informational floor
-$\mathcal{L}_{\text{info}}^*$ untouched. The result aligns with
+sufficient on its own, and at any interior standing both leave the
+within-group informational floor $\mathcal{L}_{\text{info}}^*$
+untouched, since neither converts the soft marker into a signal of
+individual class. The result aligns with
 \citet{Loury2002}: legal instruments address the contract channel,
 not the contact channel; the contact channel runs through soft
 signals that the model formalises via Jeffrey conditioning, and
