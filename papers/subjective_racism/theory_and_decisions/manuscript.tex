@@ -340,7 +340,7 @@ standard-Bayesian benchmark as a limiting case. Section~\ref{sec:platform} furth
 
 We first define the model primitives in Section \ref{sec:model_primitives}. This includes a
 continuum of agents characterised by economic class, observable soft
-markers, group membership, and self-assessments of class. The engagement decision governed by a utility that in turn depends on economic class distance then follows in Section \ref{subsec:bilateral}. The equilibrium dynamics and implications for intergenerational mobility are discussed in Section \ref{subsec:dynamics}. Finally, Section \ref{sec:platform} discusses how platforms ---a venue,
+markers, and group membership. The engagement decision governed by a utility that in turn depends on economic class distance then follows in Section \ref{subsec:bilateral}. The equilibrium dynamics and implications for intergenerational mobility are discussed in Section \ref{subsec:dynamics}. Finally, Section \ref{sec:platform} discusses how platforms ---a venue,
 neighbourhood, or institutions that mediate encounters---can reproduce the trap at
 scale.
 
@@ -376,9 +376,6 @@ Each agent is characterised by:
   In either case what matters for the model is not group membership
   itself but the economic class distribution conditional on group
   membership, which is always a soft inference.
-  
-  \item Self-assessment $Q_i(c)$, agent $i$'s probability assessment of their
-  own socially relevant economic position.
 \end{itemize}
 
 The formal distinction between these primitives reflects the
@@ -393,15 +390,14 @@ and accumulated historical experience
 \citep[population-level persistence:][]{BisinVerdier2001}---and they
 do not update when an individual's economic class changes
 \citep[individual-level durability:][]{Bourdieu1984}. An agent who achieves $c_i = 1$ from a group whose historical mean class
-$\bar{c}_{g_k}$ is near zero retains the markers of that group---the
-``mimic man'' of the title. It is this decoupling that makes the
+$\bar{c}_{g_k}$ is near zero retains the markers of that group. It is this decoupling that makes the
 marker a soft signal rather than a hard one. Where $m_i$ is driven
 far more by $g_i$ than by $c_i$, even a marker-to-class likelihood
-that exists is dominated by the marker-to-group channel; Jeffrey
-conditioning over the group partition is the rule that respects this
+that exists is dominated by the marker-to-group channel. Jeffrey
+conditioning over the group partition becomes the appropriate rule as it respects this
 relative strength (Section~\ref{subsec:jeffrey}).
 
-The framework of statistical discrimination in an economic system is interpreted in the model by admitting the constraints on social engagement through economic distance. The simple illustration of this problem is that while a poor man may walk into a bar or club and engage socially with richer members, he may struggle to sustain those relationships if he cannot afford such visits frequently enough. More formally, two agents in the model are \textbf{economically compatible} if
+The framework of statistical discrimination in an economic system is interpreted in the model by admitting the constraints on social engagement through economic distance. The simple illustration of this problem is that while a poor man may walk into a bar or club and engage socially with richer members, he would struggle to sustain those relationships if he cannot afford such visits frequently enough. More formally, two agents in the model are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
 squared economic class distance and $\bar{d}$ is the compatibility threshold.
 Squared distance decomposes expected
@@ -420,11 +416,11 @@ statistic of the group's economic history}. Groups with histories of
 marginalisation---slavery, colonial extraction, persistent
 poverty---have low $\bar{c}_g$.
 
-As we ultimately wish to explore implications of the above exclusion mechanism on intergenerational mobility, we consider how the two systems couple across a
+As we ultimately wish to explore implications of the above exclusion mechanism on intergenerational mobility, we consider how the two systems co-evolve over a
 generation. As shown in Figure~\ref{fig:loop} , the economic system sets the group prior while the social system produces markers correlated with that prior. A discrimination rate follows from the soft maker environment -- and is determined  Jeffrey conditioning. The economic cost of exclusion, $\delta$, feeds this back into the
 group's economic position and the resulting prior is what the next
-generation's markers are read against. Therefore, the two systems interact at
-two points: the economic system fixes the \emph{meaning} of markers,
+generation's markers are read against. In effect, the two systems interact at
+two points -- the economic system fixes the \emph{meaning} of markers,
 and the social system erodes the \emph{position} of the group.
 
 \begin{figure}[ht]
@@ -691,28 +687,17 @@ real rather than an error of belief.
 
 
 
-\textbf{Social Distance and Utility} Two agents update simultaneously in the above bilateral, reflexive information structure. Observing $j$'s consumption signals revises $i$'s self-assessment:
-\begin{equation}
-  Q_i'(c_i) = \sum_{k} Q_i(c_i \mid c_j = c_k) \cdot R_i'(c_k)
-  \label{eq:bilateral}
-\end{equation}
-where $R_i'(c_k)$ is $i$'s Jeffrey-revised assessment of $j$'s class
-after observing $j$'s consumption bundle. The bilateral Jeffrey structure offer leads to three consequences immediately. First, exclusion suppresses aspirations and self-perception, not
-just economic opportunities: the self-assessment revision
-(\ref{eq:bilateral}) downweights $i$'s own class assessment when
-encountered agents signal exclusion (\emph{self-signalling and
-aspiration formation}). Second, because the Jeffrey revision
+\textbf{Social Distance and Utility} Two agents update simultaneously in the above bilateral, reflexive information structure, each forming a Jeffrey-revised assessment of the other's class from the observed consumption signals. The bilateral Jeffrey structure leads to two consequences immediately. First, because the Jeffrey revision
 (\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ and
 these are produced by observed markers, agent $i$ has incentive to
 manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
 analogue of \citet{Spence1973}'s signalling model
-(\emph{endogenous signal production}).
-Third, because the rigidity holds the group standing $\bar{c}_g$ fixed
+(\emph{endogenous signal production}). Second, because the rigidity holds the group standing $\bar{c}_g$ fixed
 against any single encounter---no encounter delivering class evidence
 independent of the marker---excluded agents accumulate worse information about
 economic opportunities than they otherwise would; the closure trap,
 derived formally in Section~\ref{subsec:intergenerational}, is also
-an information trap (\emph{closure as epistemic trap}).
+an information trap (\emph{closure as epistemic trap}). The same structure carries a self-directed reading---encounters signalling exclusion can also depress an agent's own aspirations---though the model does not track this as a separate channel.
 
 The rigidity condition operates at the inference moment, not across
 time. The within-group distributions $F_g$ are held fixed at the
