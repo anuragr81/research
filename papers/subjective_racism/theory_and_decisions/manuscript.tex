@@ -751,8 +751,7 @@ against. Equation~(\ref{eq:utility}) is therefore a consequence
 function, not a decision rule: the world realises the distance
 $d(c_i,c_j)$ from true compatibility---the poor man cannot sustain the
 club's relationships however he is read---while the agent, never
-observing $c_i$, only acts on the inference from markers. The gap between the two is widest for the mimic man, engaged
-or declined on a forecast his position does not bear out. Were the marker hard---revealing $c_i$ rather than merely correlating with it---the forecast would coincide with the realised distance: engagement would track true class and upward mobility would be recognised at the encounter. This would lead to sorting but not a closure trap -- a consequence of the soft signal environment.
+observing $c_i$, only acts on the inference from markers.
 
 The expected utility under the Jeffrey-updated forecast can be stated as :
 \begin{equation}
@@ -767,22 +766,26 @@ Agent $j$ engages iff:
   \label{eq:threshold}
 \end{equation}
 
+Notice that only the net surplus $v - \bar{u}$ enters the decision, through the
+cutoff $\Delta^*$. Together with $\kappa$, it is absorbed into the
+discrimination-rate function $F$ this threshold induces below.
+
 Under bilateral structure, engagement requires condition
 (\ref{eq:threshold}) to hold for both agents simultaneously. The above applies to any number of groups $K$ and any soft marker space.
 
-\begin{assumption}[Preferences and functional form]
-\label{ass:functional}
-For the closed-form results we adopt: (i) a squared-distance metric
-$d(c_i,c_j)=(c_i-c_j)^2$; (ii) utility linear in distance,
-$U=v-\kappa\,d$, so agents are risk-neutral in class distance and
-within-group variance enters expected utility mechanically rather than
-through a separate risk parameter; and (iii) Beta--de~Finetti
-exchangeable within-group beliefs (Appendix~\ref{app:bernoulli}),
-giving $\sigma_g^2=\bar{c}_g(1-\bar{c}_g)/(1+\nu)$. The threshold
-structure of the engagement decision and the qualitative bistability
-of the intergenerational dynamics survive a range of generalisations
-of (i)--(ii); the closed-form composed map and the explicit
-bifurcation threshold do not.
+\begin{assumption}[Preferences]
+\label{ass:preferences}
+Agents are risk neutral in class distance, with utility
+$U = v - \kappa\,d$ and $d(c_i,c_j) = (c_i-c_j)^2$. Variance within a
+group therefore enters expected utility at the same weight $\kappa$ as
+the squared mean gap, with no separate risk parameter.
+\end{assumption}
+
+\begin{assumption}[Within-group beliefs]
+\label{ass:beliefs}
+Beliefs about class within a group are Beta--de~Finetti exchangeable
+(Appendix~\ref{app:bernoulli}). This gives
+$\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$.
 \end{assumption}
 
 To develop the closed-form equilibrium dynamics, we consider two groups $\G = \{g_1, g_2\}$ (host and out-group respectively) -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
