@@ -38,6 +38,7 @@
 \newtheorem{remark}[proposition]{Remark}
 \theoremstyle{definition}
 \newtheorem{example}[proposition]{Example}
+\newtheorem{assumption}{Assumption}
 \numberwithin{proposition}{subsection}
 
 %% Title formatting
@@ -272,8 +273,7 @@ domain. In \citet{Spence1973} (as well as in \citet{Akerlof1970}),
 the signal is hard: it determines a definite evidential relationship
 with the type, and Bayesian updating on hard signals aggregates
 cleanly from individuals to the group prior. In social interaction,
-the operative signals are soft---accent, dress, consumption
-patterns---and the theoretically appropriate rule for soft signals is
+the operative signals are soft---accent, dress, phenotype---and the theoretically appropriate rule for soft signals is
 Jeffrey conditioning rather than Bayesian updating. Here, the rigidity condition
 (Remark~\ref{rem:graded}) decouples individual reclassification
 from group prior revision: the compliant individual is reclassified,
@@ -367,7 +367,7 @@ Each agent is characterised by:
   is the latent variable underlying the engagement decision.
   
   \item Social marker $m_i \in \M$, an observable characteristic
-  (accent, dress, name, consumption choice). Correlated with $c_i$
+  (accent, dress, name). Correlated with $c_i$
   but does not determine it. This is a \emph{soft signal}.
   
   \item Group membership $g_i \in \G = \{g_1, \ldots, g_K\}$.
@@ -390,14 +390,29 @@ and accumulated historical experience
 \citep[population-level persistence:][]{BisinVerdier2001}---and they
 do not update when an individual's economic class changes
 \citep[individual-level durability:][]{Bourdieu1984}. An agent who achieves $c_i = 1$ from a group whose historical mean class
-$\bar{c}_{g_k}$ is near zero retains the markers of that group. It is this decoupling that makes the
+$\bar{c}_{g_k}$ is near zero retains the markers of that group---the
+``mimic man'' of the title. It is this decoupling that makes the
 marker a soft signal rather than a hard one. Where $m_i$ is driven
 far more by $g_i$ than by $c_i$, even a marker-to-class likelihood
-that exists is dominated by the marker-to-group channel. Jeffrey
-conditioning over the group partition becomes the appropriate rule as it respects this
+that exists is dominated by the marker-to-group channel; Jeffrey
+conditioning over the group partition is the rule that respects this
 relative strength (Section~\ref{subsec:jeffrey}).
 
-The framework of statistical discrimination in an economic system is interpreted in the model by admitting the constraints on social engagement through economic distance. The simple illustration of this problem is that while a poor man may walk into a bar or club and engage socially with richer members, he would struggle to sustain those relationships if he cannot afford such visits frequently enough. More formally, two agents in the model are \textbf{economically compatible} if
+\begin{assumption}[Timescale separation]
+\label{ass:timescale}
+The two systems evolve on separated timescales. Within an
+encounter---the interval over which a soft marker is read and a single
+engagement is decided---the group standing $\bar{c}_g$ and the
+within-group conditionals $F_g$ are fixed; they evolve only across
+generations, through the law of motion of
+Section~\ref{subsec:dynamics}. Economic class is mobile within a
+generation at rate $\gamma$; the social substrate is not. The closure
+trap is a property of this mismatch---the standing updating too
+slowly, through high $s_g$ and $\rho$, for mobility $\gamma$ to close
+the gap.
+\end{assumption}
+
+The framework of statistical discrimination in an economic system is interpreted in the model by admitting the constraints on social engagement through economic distance. The simple illustration of this problem is that while a poor man may walk into a bar or club and engage socially with richer members, he may struggle to sustain those relationships if he cannot afford such visits frequently enough. More formally, two agents in the model are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
 squared economic class distance and $\bar{d}$ is the compatibility threshold.
 Squared distance decomposes expected
@@ -416,11 +431,11 @@ statistic of the group's economic history}. Groups with histories of
 marginalisation---slavery, colonial extraction, persistent
 poverty---have low $\bar{c}_g$.
 
-As we ultimately wish to explore implications of the above exclusion mechanism on intergenerational mobility, we consider how the two systems co-evolve over a
+As we ultimately wish to explore implications of the above exclusion mechanism on intergenerational mobility, we consider how the two systems couple across a
 generation. As shown in Figure~\ref{fig:loop} , the economic system sets the group prior while the social system produces markers correlated with that prior. A discrimination rate follows from the soft maker environment -- and is determined  Jeffrey conditioning. The economic cost of exclusion, $\delta$, feeds this back into the
 group's economic position and the resulting prior is what the next
-generation's markers are read against. In effect, the two systems interact at
-two points -- the economic system fixes the \emph{meaning} of markers,
+generation's markers are read against. Therefore, the two systems interact at
+two points: the economic system fixes the \emph{meaning} of markers,
 and the social system erodes the \emph{position} of the group.
 
 \begin{figure}[ht]
@@ -494,7 +509,20 @@ conditional distributions $F_{g_k} = P(c \mid g_k)$ play the role of the
 invariant conditionals, and the kinematics formula specialises as
 follows. Agent $j$ observes soft marker $m_i$. This shifts $j$'s
 distribution over group membership from $P(g_k)$ to $P'(g_k)$ without
-determining which group $i$ belongs to. Under
+determining which group $i$ belongs to.
+
+\begin{assumption}[Group sufficiency]
+\label{ass:sufficiency}
+Conditional on group, the soft marker is uninformative about class:
+$c \perp m \mid g$, equivalently $P(c \mid m, g_k) = P(c \mid g_k) =
+F_{g_k}$ for every $k$. The marker's entire bearing on class runs
+through the group partition; it carries no likelihood $P(m \mid c)$ of
+its own. A marker that did---one whose realisation shifts the class
+posterior \emph{within} a group---is to that extent a hard signal, and
+falls outside the soft-marker regime treated here.
+\end{assumption}
+
+\noindent Under
 \textbf{Jeffrey conditioning} we have:
 \begin{equation}
   P'(c) = \sum_{k=1}^{K} F_{g_k} \cdot P'(g_k)
@@ -506,45 +534,39 @@ so the marker must be converted into a posterior over class, $P'(c)$.
 Constrasting Bayes and Jeffrey again, consider that both rules reach $P'(c)$ by the same two-step route---marker $\to$ group weights $P'(g_k) \to$ class $P'(c)$---and they share the second
 step, equation~(\ref{eq:jeffrey}), which carries the group weights into
 a class distribution through the conditionals $F_{g_k}$ (it takes this
-form because, conditional on group, the marker says nothing further
-about class). They differ only at the \emph{first} step. Bayes
+form because of Assumption~\ref{ass:sufficiency}: conditional on group,
+the marker says nothing further about class). They differ only at the \emph{first} step. Bayes
 \emph{computes} the group weights from a likelihood,
 $P'(g_k) = P(m \mid g_k)\,P(g_k)/P(m)$, so its full path to the class
 posterior is $P'(c) = \sum_k F_{g_k}\,P(m \mid g_k)P(g_k)/P(m)$ -- depending on the likelihood $P(m \mid g_k)$. On the other hand, Jeffrey computes
 nothing at the first step: it \emph{takes $P'(g_k)$ as given}---the
 revised group credence is the experience's direct deliverance received as input, entering the model as the salience
-parameter $s_g$~(\ref{eq:salience})---and then applies the same second
-step. The Jeffrey rule essentially shifts focus to the inferences from markers instead of on the economic distributions for groups -- which are far more difficult and far less relevant than inference from observable markers such as accent, clothing styles or skin-colour.
+parameter $s_g$ -- and then feeds those weights through the second step it shares with Bayes in order to obtain the class posterior $P'(c)$. The Jeffrey rule essentially shifts focus to the inferences from markers instead of on the economic distributions for groups -- which are far more difficult to observe and less relevant than social inference from observable markers (such as accent, clothing styles or skin-colour).
 
 
 Put differently, the divergence between Bayes and Jeffrey appears only when evidence bears on class directly: a counter-example leads Bayes to revise the conditionals $F_{g_k}$, whereas Jeffrey, by
 the invariance condition, holds them fixed. An accent, an item of dress, a phenotype gives
 Bayes nothing to compute $P'(g_k)$ from -- whereas Jeffrey's acceptance of
-a directly given shift lets the inference proceed.\footnote{Notice that $F_{g_k}$
-is a formal representation of the observer's expectations
-about a typical member of group $g_k$, not a distribution an observer
-must reason about as such.} The two rules thus differ in the channel through which
+a directly given shift lets the inference proceed.\footnote{$F_{g_k}$
+is only a formal representation of the observer's expectations
+about a typical member of group $g_k$ -- not something the observer
+must reason about in making a decision as such.} The two rules thus differ in the channel through which
 information reaches belief. Bayes routes evidence through a likelihood ratio
 whereas Jeffrey routes evidence through belief structure implied by partition weights. Regardless of the experience, $F_{g_k}$ does not move under Jeffrey conditioning while $P'(g_k)$ can. Bayes revises the stereotype, whereas Jeffrey, holding the
 conditionals fixed, processes the same fact as a reclassification -- so the incoming information in a soft marker dominated environment only changes which group a person is
-assigned to, rather than the standing imputed to the group. While Bayes conditioning might estimate the frequency of class given a marker, Jeffrey conditioning focuses on a belief about class given a particular marker that is assembled through the group and frozen at the group-stereotype level. Simply put, Bayes relies on $P'(m|g)$ but Jeffrey must use $P'(g|m)$ (with fixed $F_{g_k}$)  Jeffrey conditioning becomes more appropriate for the soft marker environment because $F_{g_k}$, the long-term substrate from the social system, is fixed relative to the belief-adjustments that follow from markers that appear in much shorter-term and are a result of a faster moving economic system. A numerical illustration is provided in Example \ref{ex:jeffrey-bayes}.
+assigned to, rather than the standing imputed to the group. Simply put, Bayes relies on $P'(m|g)$ but Jeffrey must use $P'(g|m)$ (with fixed $F_{g_k}$)  Jeffrey conditioning becomes more appropriate for the soft marker environment because $F_{g_k}$, the long-term substrate from the social system, is fixed relative to the belief-adjustments that follow from markers in shorter-term. A numerical illustration is provided in Example \ref{ex:jeffrey-bayes}. A more real-world instance is discussed in Example \ref{ex:misaddressed}.
 
-This fixes the model's domain. Three conditions must hold jointly for
-marker-judgment to govern rather than stereotype-adjustment: the
-partner's class is forecast from the marker rather than certified; group
-membership is itself a soft, re-attributable inference, so that a
-surprising individual can be reassigned; and the conditional $F_{g_k}$ is
-anchored as the slow-moving social substrate. The second is easily
-overlooked but indispensable---were membership certified rather than
-inferred, a high-class member could not be reassigned out of the group,
-and the counter-example would bear on $F_{g_k}$ after all. Where any of
-the three fails---class is certified, membership is fixed, or the marker
+Above fixes the model's domain. Three conditions must hold jointly for
+marker-judgment to govern rather than stereotype-adjustment. First, the
+partner's class must be forecast from the marker rather than certified. Second, the group
+membership must be a soft, re-attributable inference, so that a
+surprising or unconventional individual can be reassigned. If group membership were certified rather than inferred, a high-class member could not be reassigned out of the group,
+and the counter-example would bear on $F_{g_k}$ after all.  Third, the conditional $F_{g_k}$ should be allowed to be anchored as the slow-moving social substrate. Where any of
+the three fails---class is certified (Assumption~\ref{ass:sufficiency}
+breaks), membership is fixed, or the marker
 moves as fast as class itself---the counter-example has nowhere to land
 but the conditional, and belief reverts to the Bayesian branch in which
-stereotypes adjust. The threshold $\rho > \rho^*$ derived in
-Appendix~\ref{app:loury} is the formal counterpart of this condition; its
-substantive content is that marker-mediated, re-attributable,
-slow-moving group inference is what places a setting above it.
+stereotypes adjust.
 
 \rule{15cm}{0.4pt}   
 
@@ -616,12 +638,10 @@ exactly as it was. The next such parcel is met with the same $F_{g_B}$ as
 the last.
 \end{example}
 
-The parcel case is that difficulty in miniature: we do not claim to
-identify the mechanism behind any given decision---which of inference,
-rigidity, or taste produced it is just what choice does not reveal
-\citep{Sen1973}.
-
-The same example also fixes the scope of the mechanism. Stripped to
+The parcel case is the difficulty of social inferences in a miniature form -- in that we do not claim to
+identify the mechanism behind any given decision i.e. which one of inference,
+rigidity, or taste produced it -- something that choice does not often reveal
+\citep{Sen1973}. The example also fixes the scope of the mechanism. Stripped to
 inference alone---one encounter, no institution and no antagonism---the
 trap still forms, in a single rational inference. Institutions enter
 later, through aggregation: the platform of Section~\ref{sec:platform}
@@ -650,7 +670,7 @@ precisely the kind of evidence that carries direct information
 about group assignment. 
 
 
-To reiterate, the reason why the paper argues for separation of marker inference from group assignment as different channel is that social system and economic system operate at different
+To reiterate, the reason why the paper argues for separation of marker inference from group assignment as different channels is that the social system and the economic system operate at different
 speeds. A marker is read in seconds and shifts $P(g_k)$ immediately;
 $F_{g_k}$ updates through a different channel---the accumulated
 statistical experience and social knowledge that does not arrive
@@ -675,43 +695,35 @@ and the contact channel supplies no independently observed class outcome
 that could. A high-class member of a low-standing group is therefore
 reassigned---$P'(g_k)$ shifts: they are mentally placed in a different
 group, or treated as an exception---while $\bar{c}_{g_k}$ is left
-untouched. This is not a distortion that fails to self-correct; holding
-the standing fixed is the coherent response to evidence that speaks to
-group membership and not to group standing. Nor does the harm require the
-standing to be mistaken: a group is internally heterogeneous, so treating
-each member by the group statistic forgoes engagement with its
-above-standing members even when $\bar{c}_{g_k}$ is exactly right---and it
-is the within-group variance the engagement decision already prices,
-through its bias--variance terms, that makes those forgone encounters
-real rather than an error of belief. 
+untouched. This is not a distortion that fails to self-correct. Instead, it is holding
+the standing fixed that is a coherent response to evidence that speaks to
+group membership and not to group standing.
 
 
 
-\textbf{Social Distance and Utility} Two agents update simultaneously in the above bilateral, reflexive information structure, each forming a Jeffrey-revised assessment of the other's class from the observed consumption signals. The bilateral Jeffrey structure leads to two consequences immediately. First, because the Jeffrey revision
+\textbf{ Social Distance-based Utility} The above bilateral, reflexive information structure is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The bilateral Jeffrey structure leads to two consequences immediately. First, because the Jeffrey revision
 (\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ and
 these are produced by observed markers, agent $i$ has incentive to
 manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
 analogue of \citet{Spence1973}'s signalling model
-(\emph{endogenous signal production}). Second, because the rigidity holds the group standing $\bar{c}_g$ fixed
-against any single encounter---no encounter delivering class evidence
-independent of the marker---excluded agents accumulate worse information about
-economic opportunities than they otherwise would; the closure trap,
-derived formally in Section~\ref{subsec:intergenerational}, is also
-an information trap (\emph{closure as epistemic trap}). The same structure carries a self-directed reading---encounters signalling exclusion can also depress an agent's own aspirations---though the model does not track this as a separate channel.
+(\emph{endogenous signal production}). Second, the rigidity keeps the group standing $\bar{c}_g$ fixed
+whatever a single encounter shows. Since no encounter delivers class
+evidence independent of the marker, excluded agents learn less about
+economic opportunities than they otherwise would. The closure trap
+(Section~\ref{subsec:intergenerational}) is therefore also an
+information trap \footnote{The same structure carries a self-directed reading---encounters signalling exclusion can also depress an agent's own aspirations---though the model does not track this as a separate channel.}. 
 
 The rigidity condition operates at the inference moment, not across
-time. The within-group distributions $F_g$ are held fixed at the
+time (Assumption~\ref{ass:timescale}). The within-group distributions $F_g$ are held fixed at the
 encounter---the timescale on which a soft marker is read and
 processed---but they are not eternal. The within-group distributions are set to evolve over generations
 through the intergenerational dynamic of
 Section~\ref{subsec:dynamics}, where mobility, the discrimination
 externality, and marker decay shift $\bar{c}_g^t$ over time. The
 closure trap arises precisely when these slower forces balance to
-keep $\bar{c}_g$ below a tipping point; above that point the same
+keep $\bar{c}_g$ below a tipping point. Above that point, the same
 forces drive the system to a high attractor and the marker-borne
-stereotype dissolves. Prejudice of this inferential kind is therefore not
-permanent: it persists when slow-moving structural conditions sustain
-it and dissolves when they shift.
+stereotype dissolves.
 
 We now define the 
 utility function that defines the engagement decision where class distance acts as a friction:
@@ -722,7 +734,7 @@ utility function that defines the engagement decision where class distance acts 
 where $v > 0$ is baseline interaction value, $\kappa > 0$ is
 incompatibility sensitivity, and $d(\cdot)$ is the class distance.
 The baseline value $v$ is the payoff from engaging with an agent of
-identical class ($d(c_i, c_j) = 0$): it represents the intrinsic
+identical class ($d(c_i, c_j) = 0$) . The baseline represents the intrinsic
 benefit of social contact when the interaction partner is perfectly
 compatible, and is reduced linearly by class distance through the
 sensitivity parameter $\kappa$.
@@ -756,7 +768,24 @@ Agent $j$ engages iff:
 \end{equation}
 
 Under bilateral structure, engagement requires condition
-(\ref{eq:threshold}) to hold for both agents simultaneously. The above applies to any number of groups $K$ and any soft marker space. To develop the closed-form equilibrium dynamics, we consider two groups $\G = \{g_1, g_2\}$ (host and out-group respectively) -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
+(\ref{eq:threshold}) to hold for both agents simultaneously. The above applies to any number of groups $K$ and any soft marker space.
+
+\begin{assumption}[Preferences and functional form]
+\label{ass:functional}
+For the closed-form results we adopt: (i) a squared-distance metric
+$d(c_i,c_j)=(c_i-c_j)^2$; (ii) utility linear in distance,
+$U=v-\kappa\,d$, so agents are risk-neutral in class distance and
+within-group variance enters expected utility mechanically rather than
+through a separate risk parameter; and (iii) Beta--de~Finetti
+exchangeable within-group beliefs (Appendix~\ref{app:bernoulli}),
+giving $\sigma_g^2=\bar{c}_g(1-\bar{c}_g)/(1+\nu)$. The threshold
+structure of the engagement decision and the qualitative bistability
+of the intergenerational dynamics survive a range of generalisations
+of (i)--(ii); the closed-form composed map and the explicit
+bifurcation threshold do not.
+\end{assumption}
+
+To develop the closed-form equilibrium dynamics, we consider two groups $\G = \{g_1, g_2\}$ (host and out-group respectively) -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
 encountered individual to the out-group upon observing their
 markers:
 \begin{equation}
@@ -767,7 +796,7 @@ markers:
 interaction}, not an intrinsic property of the group. A South Asian
 individual in Norway has high $s_g$ (phenotypic markers strongly
 identify out-group membership) -- but indeed the same individual in South Asia itself
-has $s_g \approx 0$. Mutable markers (accent, dress, consumption)
+has $s_g \approx 0$. Mutable markers (accent, dress)
 can be modified, reducing $s_g$ over time; immutable markers (skin
 colour, facial structure) produce permanently high $s_g$. 
 
@@ -794,7 +823,7 @@ the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
 s_g$ to express the same expectation in the marker-salience
 shorthand used in the remainder of the paper.
 $D_k = (\bar{c}_{g_k} - c_j)^2 + \sigma_{g_k}^2$ is the
-expected squared distance under certain attribution to group $g_k$.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below. Risk aversion or other distance metrics would replace this decomposition with a more general functional dependence on the within-group distribution. The threshold structure of the engagement decision and the qualitative bistability of the intergenerational dynamics are robust to a range of such generalisations; the closed-form composed map and the explicit bifurcation threshold are not.}
+expected squared distance under certain attribution to group $g_k$.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:functional} for the scope of these functional-form choices).}
 The within-group variance term $\sigma_{g_k}^2$ matters in its own
 right: even when the group mean is close to the agent's class,
 within-group heterogeneity raises expected class distance and the
@@ -884,7 +913,9 @@ such as job referrals, mentorship, and business formation
 \citep{Granovetter1973}. Each channel converts social exclusion into
 a drag on intergenerational economic position; $\delta$ captures
 their aggregate effect without requiring the model to specify which
-dominates.
+dominates. We take $\delta$ as constant across groups and
+generations---a single reduced-form intensity, not a group- or
+state-dependent one.
 
 Consider as an example how the three channels operate for a group's economic position across generations. First, the
 exclusion-erosion term $\bar{c}_g^t(1 - \delta \phi^t)$ carries
@@ -932,14 +963,24 @@ modulated by marker salience $s_g$
 (Remark~\ref{rem:salience}) as $\phi^t = s_g \cdot F(\bar{c}_g^t)$ , where $F: [0,1] \to [0,1]$ is
 the group-level discrimination rate function induced by the
 threshold: when $s_g = 0$, markers are
-invisible and no discrimination fires. We maintain throughout the mild
-regularity condition that $F$ is $C^1$, strictly decreasing, and convex
-on $[0,1]$ with $F(1) = F'(1) = 0$; the canonical form
-$F(\bar{c}_g) = (1-\bar{c}_g)^2$ satisfies it.
+invisible and no discrimination fires.
+\begin{assumption}[Discrimination-rate regularity]
+\label{ass:Freg}
+$F$ is $C^1$, strictly decreasing, and convex on $[0,1]$ with
+$F(1)=F'(1)=0$; the canonical form $F(\bar{c}_g)=(1-\bar{c}_g)^2$
+satisfies it.
+\end{assumption}
 
-It is worth highlighting that the mobility parameter $\gamma$ is exogenous in the model: it captures
-within-group variance arising from talent, effort, and wealth shocks,
-independent of the group's social position. If $\gamma$ were endogenous---decreasing in
+\begin{assumption}[Exogenous mobility and convergence]
+\label{ass:exog}
+The mobility rate $\gamma$ and the convergence rate $\mu$ are
+exogenous---independent of the discrimination rate $\phi^t$ and of
+salience $s_g$. Mobility captures within-group variance arising from
+talent, effort, and wealth shocks, independent of the group's social
+position.
+\end{assumption}
+
+This is a conservative choice. If $\gamma$ were endogenous---decreasing in
 the discrimination rate $\phi$ through reduced access to education,
 mentorship, and opportunity networks---the closure trap would be more
 severe and the bifurcation threshold $\gamma^*$ harder to reach. The stated $\gamma^*$ understates the required mobility intervention, because in the trap basin
