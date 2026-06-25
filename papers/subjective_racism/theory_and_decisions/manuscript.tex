@@ -806,10 +806,19 @@ class, through a discrimination rate that we later discuss.
 
 Under this parametrisation, the expected class distance for an
 agent $j$ with class $c_j$ encountering an individual whose markers
-trigger salience $s_g$ decomposes into bias and variance
-components. Writing $\sigma_{g_k}^2$ for the within-group variance
-of class outcomes in group $g_k$ (defined in
-Appendix~\ref{app:bernoulli}):
+trigger salience $s_g$ is a salience-weighted blend of two conditional
+costs, each splitting into bias and variance. Let
+$D_k = (\bar{c}_{g_k} - c_j)^2 + \sigma_{g_k}^2$ denote the expected
+squared class distance agent $j$ would bear \emph{if} the encountered
+individual were known with certainty to belong to group $g_k$---the
+anticipated mismatch cost under certain attribution to $g_k$. It splits
+into a \emph{bias} term, the squared gap between $j$'s class $c_j$ and
+the group mean $\bar{c}_{g_k}$, and a \emph{variance} term
+$\sigma_{g_k}^2$, the within-group dispersion of class (defined in
+Appendix~\ref{app:bernoulli}). Thus $D_1$ is the cost $j$ anticipates
+against a host-group member and $D_2$ the cost against an out-group
+member, and the observed expected distance is the salience-weighted
+average of the two:
 \begin{equation}
   \begin{aligned}
   \E[d(c_i, c_j) \mid m_i]
@@ -825,9 +834,7 @@ conditional expected distances weighted by posterior probabilities;
 the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
 (\ref{eq:salience}) and the binary partition $P'(g_1 \mid m_i) = 1 -
 s_g$ to express the same expectation in the marker-salience
-shorthand used in the remainder of the paper.
-$D_k = (\bar{c}_{g_k} - c_j)^2 + \sigma_{g_k}^2$ is the
-expected squared distance under certain attribution to group $g_k$.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:functional} for the scope of these functional-form choices).}
+shorthand used in the remainder of the paper.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:preferences} for the scope of these functional-form choices).}
 The within-group variance term $\sigma_{g_k}^2$ matters in its own
 right: even when the group mean is close to the agent's class,
 within-group heterogeneity raises expected class distance and the
@@ -850,7 +857,7 @@ distance between observer and group mean) or the within-group
 heterogeneity, weighted by marker salience, is too
 large. When the threshold (\ref{eq:threshold}) is violated, agent
 $j$ declines to engage with $i$: this is the model's discrimination
-event. The discrimination mechanism therefore has two governing
+event. Roughly speaking, the discrimination mechanism has two governing
 parameters corresponding to the spatial and temporal dimensions of
 social observation.\footnote{\label{rem:spacetime}Every soft signal
 that enters the model is either a spatial property of the individual
@@ -867,18 +874,17 @@ language---and governs \emph{whether} the Jeffrey revision fires and
 how strongly. The group prior $\bar{c}_g$ is a \emph{temporal}
 property: it is the sediment of the group's economic history across
 generations and governs \emph{what} the Jeffrey revision maps to
-once it fires. The model's central result---that sustained
-discrimination requires both channels to be active---can be restated:
-sustained discrimination requires both spatial identifiability
+once it fires. The model's central result that is elaborated in further sections is that sustained
+discrimination -- the solidification of social boundaries -- requires both spatial identifiability
 ($s_g > 0$) and temporal disadvantage ($\bar{c}_g <
-\bar{c}_g^{\mathrm{mid}}$).
+\bar{c}_g^{\mathrm{mid}}$) to be activated.
 
 
 \subsection{Intergenerational dynamics and the closure equilibrium}
 \label{subsec:dynamics}
 
-Bilateral engagement decisions aggregate into a population-level
-dynamic through two steps. First, within generation $t$, each
+We now consider two steps through which bilateral engagement decisions aggregate into a population-level
+dynamic.  First, within generation $t$, each
 encounter between an in-group agent and a group-$g$ individual
 produces engagement or refusal according to (\ref{eq:threshold});
 the discrimination rate $\phi^t$ is the population fraction of
@@ -899,27 +905,13 @@ Combining these channels, the group prior evolves as:
   \label{eq:dynamic}
 \end{equation}
 where $\delta > 0$ is the economic cost of social exclusion per unit
-of discrimination, $\mu \in (0,1)$ is the exogenous intergenerational
+of discrimination \footnote{The parameter $\delta$ is essentially a reduced form that represents several channels of social exclusion noted in the literature. For example, the matching market channel noted by \citet{ColeMailathPostlewaite1992} that highlights the mechanism of pairing with higher-class partners. Another predominant notion is that of cultural capital \citep{Bourdieu1984} -- where
+participation in social environments builds dispositions with direct economic
+returns. The information networks also carry advantage through job referrals, mentorship, or business formation \citep{Granovetter1973}. What matters in the reduced form is that each channel converts social exclusion into a drag on intergenerational economic position.}, $\mu \in (0,1)$ is the exogenous intergenerational
 convergence rate, and $\gamma \in (0,1)$ is the intergenerational
 mobility parameter governing regression to the group mean.
 
-The parameter $\delta$ is a reduced form. Social exclusion translates
-into economic erosion through at least three channels that the model
-does not separately distinguish: the matching market, where exclusion
-from elite social spaces reduces the probability of assortative
-pairing with higher-class partners
-\citep{ColeMailathPostlewaite1992}; cultural capital, where
-participation in social environments builds dispositions---accent,
-self-presentation, institutional fluency---with direct economic
-returns \citep{Bourdieu1984}; and information networks, where
-informal social contact mediates access to economic opportunities
-such as job referrals, mentorship, and business formation
-\citep{Granovetter1973}. Each channel converts social exclusion into
-a drag on intergenerational economic position; $\delta$ captures
-their aggregate effect without requiring the model to specify which
-dominates. We take $\delta$ as constant across groups and
-generations---a single reduced-form intensity, not a group- or
-state-dependent one.
+
 
 Consider as an example how the three channels operate for a group's economic position across generations. First, the
 exclusion-erosion term $\bar{c}_g^t(1 - \delta \phi^t)$ carries
@@ -933,14 +925,7 @@ group status. Third is the mobility term $\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_
  which captures intergenerational regression to the group mean---children
 of high-class parents within the group may fall, children of
 low-class parents may rise---and is largest at intermediate $\bar{c}_g$
-where the within-group population is most heterogeneous. The
-decomposition's analytical power is what it implies for two groups
-in the same economy: identical $\mu$, identical heterogeneity,
-identical mobility parameter $\tilde{\gamma}$---yet if only one of
-them faces $s_g > 0$, the trajectories diverge from generation $t$
-onward through the discrimination rate $\phi^t$. These three
-channels are precisely the components labelled in the
-intergenerational-dynamic node of Figure~\ref{fig:loop}.
+where the within-group population is most heterogeneous.
 
 
 To express (\ref{eq:dynamic}) as the composed map governing the
