@@ -689,8 +689,9 @@ the standing fixed that is a coherent response to evidence that speaks to
 group membership and not to group standing. We now turn to how social distance and the agent utility  relate with the pure economic distance defined in Section \ref{sec:model_primitives}.
 
 
-\subsection{Social Distance and Utility} 
-The bilateral, reflexive information structure defined in Section \ref{subsec:jeffrey} is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The bilateral Jeffrey structure leads to two consequences immediately. First, because the Jeffrey revision
+\subsection{Social Engagement Decision} 
+
+We now return to the notion of social distance that influences social engagement in a population. The bilateral, reflexive information structure defined in Section \ref{subsec:jeffrey} is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The structure leads to two consequences immediately. First, because the Jeffrey revision
 (\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ produced by observed markers, agent $i$ has incentive to
 manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
 analogue of \citet{Spence1973}'s signalling model
@@ -700,7 +701,7 @@ evidence independent of the marker, excluded agents learn less about
 economic opportunities than they otherwise would. The closure trap (Section~\ref{subsec:intergenerational}) is therefore also an
 information trap \footnote{The same structure carries a self-directed reading---encounters signalling exclusion can also depress an agent's own aspirations---though the model does not track this as a separate channel.}. 
 
-The social engagement decision where class distance acts as a friction is based on the follow utility function
+The social engagement decision where class distance acts as a friction implies the follow payoff function for the agent 
 \begin{equation}
   U(c_i, c_j) = v - \kappa \cdot d(c_i, c_j)
   \label{eq:utility}
@@ -717,29 +718,46 @@ declining to engage---the utility available from remaining within an
 existing social network rather than interacting with the encountered
 individual. 
 
-Notice that the utility depends on class distance
-alone -- group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior it activates fixes the expected $c_i$ the distance is computed
-against. Equation~(\ref{eq:utility}) is therefore a consequence
-function in the sense that the world realises the distance
+The payoff thus defined is a consequence function in the sense that the world realises the distance
 $d(c_i,c_j)$ from true budgetary incompatibility. The agent never
-observing $c_i$ and acts only on the inference from markers. The expected utility under the Jeffrey-updated forecast can be stated as :
+observes $c_i$ and acts only on the inference from markers - without choosing an optimal response from the utility. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against.
+
+The expected payoff under the Jeffrey-updated forecast can now be stated as :
 \begin{equation}
   \E[U \mid m_i] = v - \kappa \cdot \E[d(c_i, c_j) \mid m_i]
   \label{eq:exp-utility}
 \end{equation}
 
-Agent $j$ engages iff:
+The social engagement criterion is satisfied for an agent $j$ iff:
 \begin{equation}
   \E[d(c_i, c_j) \mid m_i] \leq
   \frac{v - \bar{u}}{\kappa} \equiv \Delta^*(c_j)
   \label{eq:threshold}
 \end{equation}
 
-Only the net surplus $v - \bar{u}$ enters the decision, and only through
+Notice that only the net surplus $v - \bar{u}$ enters the decision, and only through
 the threshold $\Delta^*$. In the long-term equilibrium that we consider, the surplus and the scale $\kappa$ therefore never
 reappear as separate parameters --  they are absorbed into the
-discrimination-rate induced by this threshold. Two assumptions \ref{ass:preferences} and \ref{ass:beliefs} specify this equilibrium.
+discrimination-rate induced by this threshold. 
 
+
+To demonstrate the social distance across two groups, consider $\G = \{g_1, g_2\}$ -- host and out-group respectively -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
+encountered individual to the out-group upon observing their
+markers:
+\begin{equation}
+  P'(g_2 \mid m_i) \equiv s_g
+  \label{eq:salience}
+\end{equation}
+\emph{Marker salience} is a property of the \emph{marker--observer
+interaction}, not an intrinsic property of the group. A South Asian
+individual in Norway has high $s_g$ (phenotypic markers strongly
+identify out-group membership) -- but indeed the same individual in South Asia itself
+has $s_g \approx 0$. Mutable markers (accent, dress)
+can be modified, reducing $s_g$ over time; immutable markers (skin
+colour, facial structure) produce permanently high $s_g$. It is worth highlighting that high salience defined as such is just visibility -- it may become disadvantage only where attribution to the out-group lowers expected
+class, through a discrimination rate that we later discuss.
+
+Two simplifying assumptions provide us the closed-form equilibrium.
 
 \begin{assumption}[Preferences]
 \label{ass:preferences}
@@ -756,23 +774,8 @@ Beliefs about class within a group are Beta--de~Finetti exchangeable
 $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$.
 \end{assumption}
 
-To develop the closed-form equilibrium dynamics, we consider two groups $\G = \{g_1, g_2\}$ (host and out-group respectively) -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
-encountered individual to the out-group upon observing their
-markers:
-\begin{equation}
-  P'(g_2 \mid m_i) \equiv s_g
-  \label{eq:salience}
-\end{equation}
-\emph{Marker salience} is a property of the \emph{marker--observer
-interaction}, not an intrinsic property of the group. A South Asian
-individual in Norway has high $s_g$ (phenotypic markers strongly
-identify out-group membership) -- but indeed the same individual in South Asia itself
-has $s_g \approx 0$. Mutable markers (accent, dress)
-can be modified, reducing $s_g$ over time; immutable markers (skin
-colour, facial structure) produce permanently high $s_g$. It is worth highlighting hat high salience is just visibility -- it may become disadvantage only where attribution to the out-group lowers expected
-class, through a discrimination rate that we later discuss.
 
-Under this parametrisation, the expected class distance for an
+Under the assumptions \ref{ass:preferences} and \ref{ass:beliefs}, the expected class distance for an
 agent $j$ with class $c_j$ encountering an individual whose markers
 trigger salience $s_g$ is a salience-weighted blend of two conditional
 costs, each splitting into bias and variance. Let
