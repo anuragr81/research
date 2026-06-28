@@ -338,6 +338,11 @@ standard-Bayesian benchmark as a limiting case. Section~\ref{sec:platform} furth
 \label{sec:model}
 % =============================================================================
 
+This is not a Nash equilibrium analysis; agents make individual
+expected-utility decisions against their beliefs, and the model's
+equilibria are fixed points of an intergenerational law of motion
+rather than outcomes of mutual best response.
+
 We first define the model primitives in Section \ref{sec:model_primitives}. This includes a
 continuum of agents characterised by economic class, observable soft
 markers, and group membership. The engagement decision governed by a utility that in turn depends on economic class distance then follows in Section \ref{subsec:bilateral}. The equilibrium dynamics and implications for intergenerational mobility are discussed in Section \ref{subsec:dynamics}. Finally, Section \ref{sec:platform} discusses how platforms ---a venue,
@@ -397,6 +402,12 @@ far more by $g_i$ than by $c_i$, even a marker-to-class likelihood
 that exists is dominated by the marker-to-group channel; Jeffrey
 conditioning over the group partition is the rule that respects this
 relative strength (Section~\ref{subsec:jeffrey}).
+
+The two systems are coupled. Within-group variance is the one quantity
+that enters both the engagement decision and the intergenerational law
+of motion for the group prior $\bar{c}_g$, raising social distance in
+the one and scaling the upward mobility force $\gamma\,\sigma_g^2$ in the
+other (Section~\ref{subsec:dynamics}).
 
 \begin{assumption}[Timescale separation]
 \label{ass:timescale}
@@ -834,12 +845,15 @@ conditional expected distances weighted by posterior probabilities;
 the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
 (\ref{eq:salience}) and the binary partition $P'(g_1 \mid m_i) = 1 -
 s_g$ to express the same expectation in the marker-salience
-shorthand used in the remainder of the paper.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:preferences} for the scope of these functional-form choices).}
-The within-group variance term $\sigma_{g_k}^2$ matters in its own
-right: even when the group mean is close to the agent's class,
-within-group heterogeneity raises expected class distance and the
-probability that the engagement threshold (\ref{eq:threshold}) is
-violated.
+shorthand used in the remainder of the paper.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter, in contrast to \citet{AignerCain1977}, where within-group variance generates discrimination only when the observer is risk-averse---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:preferences} for the scope of these functional-form choices).}
+The within-group variance term $\sigma_{g_k}^2$ measures how far the
+group label falls short of fixing the individual. When it is low the
+group is legible and knowing the group is nearly knowing the class;
+when it is high the label underdetermines the member and any individual
+is an uncertain draw. This matters on its own. Even when the group mean
+is close to the agent's class, within-group heterogeneity raises
+expected class distance and the probability that the engagement
+threshold~(\ref{eq:threshold}) is violated.
 When $s_g = 1$, the observer attributes the individual to the
 out-group with certainty and the expression reduces to:
 \begin{equation}
@@ -894,8 +908,20 @@ $\bar{c}_g^{t+1}$ through three economic channels: exclusion
 (refused engagements deprive group $g$ of class-improving social
 contact and erode the prior), natural convergence (an exogenous
 intergenerational tendency toward the population mean), and
-intergenerational mobility (within-group regression to the mean,
-which depends on the current heterogeneity of group outcomes).
+intergenerational mobility (an upward push from within-group
+heterogeneity, largest where group outcomes are most dispersed).
+Before specifying the law of motion, one principle organises the
+mobility channel. A group's mean standing can move across generations
+only in proportion to its within-group variance. A homogeneous group
+has no internal dispersion to act on, so its mean is inert; movement
+requires that the group hold members above and below its current mean.
+This is the social counterpart of a principle from quantitative
+genetics, the one behind Fisher's fundamental theorem and the breeder's
+equation \citep{Fisher1930}, that a population mean changes at a rate
+proportional to its variance. We therefore take the intergenerational
+mobility term proportional to the within-group variance $\sigma_g^2$,
+with $\gamma$ setting the rate.
+
 Combining these channels, the group prior evolves as:
 \begin{equation}
   \bar{c}_g^{t+1} =
@@ -909,7 +935,7 @@ of discrimination \footnote{The parameter $\delta$ is essentially a reduced form
 participation in social environments builds dispositions with direct economic
 returns. The information networks also carry advantage through job referrals, mentorship, or business formation \citep{Granovetter1973}. What matters in the reduced form is that each channel converts social exclusion into a drag on intergenerational economic position.}, $\mu \in (0,1)$ is the exogenous intergenerational
 convergence rate, and $\gamma \in (0,1)$ is the intergenerational
-mobility parameter governing regression to the group mean.
+mobility parameter scaling the heterogeneity-driven mobility term.
 
 
 
@@ -921,11 +947,11 @@ reduces the group's economic position over time. Second, the
 natural-convergence term $\mu(1 - \bar{c}_g^t)$ is a rising tide
 that lifts the group regardless of its current position---productivity
 gains, public-good expansion, baseline improvement independent of
-group status. Third is the mobility term $\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)$
- which captures intergenerational regression to the group mean---children
-of high-class parents within the group may fall, children of
-low-class parents may rise---and is largest at intermediate $\bar{c}_g$
-where the within-group population is most heterogeneous.
+group status. Third is the mobility term $\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)$,
+the heterogeneity-driven mobility channel that gives a dispersed group
+the scope to move its standing that a uniform group lacks, and is
+largest at intermediate $\bar{c}_g$ where the within-group population is
+most heterogeneous.
 
 
 To express (\ref{eq:dynamic}) as the composed map governing the
@@ -942,10 +968,26 @@ becomes $\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ where
 $\tilde{\gamma} = \gamma/(1+\nu)$ is the effective mobility
 parameter. This term is maximised at
 group prior $\bar{c}_g = 1/2$ (maximum heterogeneity) and vanishes at $\bar{c}_g = 0$
-and $\bar{c}_g = 1$ (homogeneous group). It captures
-intergenerational regression to the group mean: children of
-high-class families face some probability of downward mobility, and
-children of low-class families have some chance of upward mobility.
+and $\bar{c}_g = 1$ (homogeneous group). It is the
+heterogeneity-driven mobility channel, scaling the group's scope to
+move its standing by its internal dispersion and vanishing when the
+group is uniform.
+
+Within-group dispersion therefore does two things at once. In the
+engagement decision it is the inference penalty that widens expected
+social distance and raises exclusion. In the law of motion it scales
+the upward mobility term $\gamma\,\sigma_g^2$, which raises the group
+prior. The two pull in opposite directions on the group, one excluding
+and one lifting, and whether a group's standing actually rises is the
+contest between this upward push, together with the convergence $\mu$,
+and the downward exclusion drag $\delta\phi$. The variance is on the
+upward side of that contest, not neutral between the sides.
+
+Because $\sigma_g^2$ vanishes as $\bar{c}_g \to 0$, a severely depressed
+group has almost no within-group variance for mobility to act on. Its
+mean is close to frozen regardless of $\gamma$, leaving only the
+exogenous convergence $\mu$ against exclusion, which is part of why the
+low fixed point is absorbing.
 
 The discrimination rate $\phi^t$ is determined by the engagement threshold (\ref{eq:threshold}),
 modulated by marker salience $s_g$
@@ -979,11 +1021,16 @@ required intervention must be larger than stated by the exogenous model assumpti
 
 \textbf{Composed Map} The above mechanism implies closure trap as a low-level equilibrium in which discrimination keeps a group economically depressed, and that depressed position in turn sustains the discrimination, so beliefs and outcomes reproduce one another across generations. Raising intergenerational mobility above a threshold breaks this loop, leaving the integration equilibrium as the only stable outcome.
 
-The intergenerational dynamic (\ref{eq:dynamic}) can thus be reduced to a 
-composed map---a one-dimensional discrete dynamical system in the
+Because a group's standing is carried forward one generation at a time,
+the evolution runs in discrete rather than continuous time, and its
+natural object is an iterated map (a difference equation) rather than a
+differential equation \citep[\S1.2]{Strogatz2015}. The intergenerational
+dynamic (\ref{eq:dynamic}) accordingly reduces to a composed map, a
+one-dimensional discrete dynamical system in the
 group prior $\bar{c}_g$ (see \citealp{Galor2007,MedioLines2001}). The fixed points of the map are the values of the group prior that reproduce themselves from one generation to the next. Each is a standing $\bar{c}_g^*$ with $\bar{c}_g^* = \mathcal{H}(\bar{c}_g^*)$, and these stationary values are the equilibria of the intergenerational system. The map essentially combines three forces. First, the baseline drift $\mu$ pulls upward toward integration. Second, the mobility term
-$\tilde{\gamma}\,\bar{c}_g(1 - \bar{c}_g)$ acts as intergenerational
-regression to the group mean. Third, the discrimination rate
+$\tilde{\gamma}\,\bar{c}_g(1 - \bar{c}_g) = \gamma\,\sigma_g^2$ contributes
+an upward push proportional to within-group variance, raising the map
+in the interior. Third, the discrimination rate
 $\phi^t = s_g\,F(\bar{c}_g^t)$ enters with a negative sign, transmitting
 to the group prior the downward pressure that the Jeffrey-updating
 mechanism generates at the encounter level. The closure trap arises
@@ -1028,33 +1075,69 @@ $\bar{c}_g^* = \mathcal{H}(\bar{c}_g^*; s_g)$, and the discrimination rate is
 the one that standing induces, $\phi^* = s_g F(\bar{c}_g^*)$.
 \end{definition}
 
+This is a self-confirming equilibrium in the sense of
+\citet{CoateLoury1993}, with the standing and the discrimination rate it
+induces mutually consistent.
+
 \begin{proposition}[Class closure in a homogeneous society]
 \label{prop:class-closure}
 In the single-group model ($\G = \{g_1\}$), markers signal class
 position directly. For sufficiently small $\gamma$ and sufficiently
-large $\delta$, the map $\mathcal{H}$ has at least two stable fixed points
-$\bar{c}_g^{\mathrm{low}} < \bar{c}_g^{\mathrm{high}} = 1$, separated by an unstable tipping point
-$\bar{c}_g^{\mathrm{mid}}$. The low fixed point constitutes a
-within-group class closure trap: a segment of the population is
+large $\delta$, the map $\mathcal{H}$ has at least three self-confirming
+equilibria, a low standing $\bar{c}_g^{\mathrm{low}}$ and the integrated
+standing $\bar{c}_g^{\mathrm{high}} = 1$ with an intermediate standing
+$\bar{c}_g^{\mathrm{mid}}$ between them. The low equilibrium constitutes a
+within-group class closure trap, in which a segment of the population is
 permanently excluded from high-class social spaces across
 generations, without any inter-group dynamic.
 \end{proposition}
 
 \noindent\emph{Sketch.} For large $\delta$ the exclusion drag dominates at
 low $\bar{c}_g$, bending the composed map below the $45^\circ$ line so that,
-alongside the integrated fixed point at $\bar{c}_g = 1$, a stable low fixed
-point and an unstable tipping point appear. The full argument is in
+alongside the integrated equilibrium at $\bar{c}_g = 1$, a low equilibrium
+and an intermediate equilibrium appear. The full argument is in
 Appendix~\ref{app:proofs}.
+
+A static account of self-confirming beliefs stops at the first clause of
+Proposition~\ref{prop:class-closure}. Equilibria exist and there is more
+than one, which is the Coate--Loury multiplicity. On its own that is not
+yet a trap. Multiplicity says more than one stationary state is possible;
+it does not say which one a group occupies, whether it can leave, or how
+long leaving takes. The trap is the answer to those questions, and each
+lies beyond what the static view can express.
+
+Three properties carry it, all visible in Figure~\ref{fig:closure-map}.
+The first is stability. Of the three equilibria, two are attractors and
+the middle is a repeller; equilibrium analysis does not distinguish them,
+but the dynamics does, and a group is driven away from the tipping point
+$\bar{c}_g^{\mathrm{mid}}$ toward one attractor or the other rather than
+resting between them. The second is selection by history. The tipping
+point is the boundary between the two basins, so a group's initial
+standing $\bar{c}_g^0$ alone decides which attractor it reaches, and two
+groups with identical parameters but different histories settle in
+different equilibria. Static multiplicity cannot choose among its own
+equilibria; the basin does, and stuck-ness is precisely this---a group
+whose history leaves it below $\bar{c}_g^{\mathrm{mid}}$ converges to the
+low attractor and cannot leave under its own dynamics. The third is
+escape and its timing. The low attractor is not permanent. At the
+threshold $\gamma^*$ it collides with the tipping point and is
+annihilated (Proposition~\ref{prop:bifurcation}), so the trap does not
+merely coexist with integration but ceases to exist above $\gamma^*$, and
+near that threshold escape is slow (Corollary~\ref{cor:Tstar}).
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/fig_composed_map}
 \caption{Composed map $\mathcal{H}(\bar{c}_g;\, s_g)$ plotted against
-the 45-degree line. Panel (a): trap regime,
-three fixed points $\bar{c}_g^{\mathrm{low}}$,
-$\bar{c}_g^{\mathrm{mid}}$, $\bar{c}_g^{\mathrm{high}} = 1$. Panel (b):
-post-bifurcation, the unique stable fixed point is $\bar{c}_g = 1$.
-Illustrative functional form $F(\bar{c}_g) = (1 - \bar{c}_g)^2$ and
+the 45-degree line, with shaded basins of attraction and a cobweb
+trajectory from a common starting standing $\bar{c}_g^0 = 0.55$. In
+panel (a), the trap regime, the map has three fixed points---the
+attractors $\bar{c}_g^{\mathrm{low}}$ and $\bar{c}_g^{\mathrm{high}} = 1$
+and the repeller $\bar{c}_g^{\mathrm{mid}}$ that separates their basins;
+a group starting at $0.55$ lies in the low basin and converges to the
+trap. In panel (b), post-bifurcation, the only fixed point is
+$\bar{c}_g = 1$ and the same starting standing converges to
+integration. Illustrative functional form $F(\bar{c}_g) = (1 - \bar{c}_g)^2$ and
 parameters $\mu = 0.05$, $\delta = 0.5$, $s_g = 1$.}
 \label{fig:closure-map}
 \end{figure}
@@ -1124,21 +1207,21 @@ remain visible---is developed in Appendix~\ref{app:passing}.
 
 \begin{proposition}[Mobility threshold and bifurcation]
 \label{prop:bifurcation}
-There exists $\gamma^* > 0$ such that:
+There exists $\gamma^* > 0$ such that
 \begin{enumerate}[noitemsep]
-  \item If $\gamma < \gamma^*$: the closure trap persists (two stable
-  fixed points).
-  \item If $\gamma > \gamma^*$: the closure trap is eliminated
-  (unique stable fixed point at $\bar{c}_g = 1$).
-  \item At $\gamma = \gamma^*$: a saddle-node bifurcation \citep[see][ch.~5]{MedioLines2001}---the low
-  fixed point and the tipping point collide and annihilate.
+  \item If $\gamma < \gamma^*$, the low equilibrium exists alongside the
+  integrated one at $\bar{c}_g = 1$ (the closure trap).
+  \item If $\gamma > \gamma^*$, the integrated standing is the only
+  equilibrium.
+  \item At $\gamma = \gamma^*$, the low and intermediate equilibria merge
+  and vanish in a saddle-node bifurcation \citep[see][ch.~5]{MedioLines2001}.
 \end{enumerate}
 \end{proposition}
 
 \noindent\emph{Sketch.} Raising $\gamma$ lifts $\mathcal{H}$ in the interior
-until, at $\gamma^*$, the low fixed point and the tipping point merge
-($\mathcal{H}' = 1$) and annihilate in a saddle-node bifurcation; above
-$\gamma^*$ only the integrated fixed point survives. See
+until, at $\gamma^*$, the low and intermediate equilibria merge
+($\mathcal{H}' = 1$) and vanish in a saddle-node bifurcation; above
+$\gamma^*$ only the integrated equilibrium remains. See
 Appendix~\ref{app:proofs}.
 
 \begin{figure}[ht]
@@ -1299,7 +1382,10 @@ across cases, sustaining the economic structure that produced them.
 for black passengers in high-crime areas. In his framework, this is
 adverse selection: non-robbers (more sensitive to the cost of
 waiting) exit the pool first, leaving a pool enriched in robbers,
-which confirms the prior. In our framework it is in fact a special case. The
+which confirms the prior. Selective exit also lowers the pool's
+within-group variance as it lowers the mean, leaving a more homogeneous
+and more legibly low group against which the marker reads all the more
+confidently. In our framework it is in fact a special case. The
 Loury mechanism operates through the $\delta \phi^t$ term in
 equation~(\ref{eq:dynamic})---the exclusion cost $\delta$ times the
 discrimination rate $\phi$. Therefore, repeated discrimination erodes the
@@ -1350,19 +1436,35 @@ collective action on the mobility parameter $\gamma$ with a
 coordinated refusal to suppress the stigmatised marker---adopting
 dress, food, language, naming practices, or grooming conventions
 that the host classification system codes as low-status. Joining
-high-$c_i$ behaviour to the stigmatised marker raises within-group
-$\sigma_g^2$, which structures a trade-off the model makes
-explicit. On one side, expected class distance widens and
-engagement contracts, foregoing economic benefits from cross-group
-interaction. On the other, the marker becomes a less reliable
-signal of class and the inference from marker to group weakens,
-reducing discrimination on the contact channel. 
+high-$c_i$ behaviour to the stigmatised marker makes the marked group
+less legible, raising within-group $\sigma_g^2$, which structures a
+trade-off the model makes explicit. On one side, expected class
+distance widens and engagement contracts, foregoing economic benefits
+from cross-group interaction. And because the same movement also acts
+on $\gamma$, this raised $\sigma_g^2$ feeds the mobility term
+$\gamma\,\sigma_g^2$, so the very dispersion that widens social distance
+is also the dispersion the group needs for its standing to move. A
+second effect runs through a different parameter. As high-status
+members come to bear the marker, it attributes less reliably to the
+low-standing group, lowering $s_g$ and weakening the marker-to-group
+inference, which is what reduces contact-channel discrimination. 
 
 What arises as a consequence of the model is the clarification that when social encounters in a soft-marker environment do not alter the group prior, the compliance behaviour can remain persistent since individual
 investment in host markers does deliver personal reclassification. In other words, while the local incentive to comply is positive
 at every encounter, the closure trap is invisible from inside the
 basin -- since agents cannot observe that the tipping point is
 unreachable. The Mimic-Men dilemma is the separation of this persistence of group prior from individual gains through marker adoption.
+
+The results admit standard equilibrium and welfare readings that we have
+not pursued. Proposition~\ref{prop:passing} is a signalling result in the
+manner of \citet{Spence1973}, with adverse selection as its separating
+outcome. On welfare, the bistability of Proposition~\ref{prop:class-closure}
+is a coordination failure, the closure equilibrium being Pareto-dominated
+by integration; the passing result is a negative externality, since the
+mimic man's exit lowers the standing of those who remain; and the platform
+results are private-optimum-against-social-optimum market failures. Each
+would require the welfare apparatus the paper sets aside, and we leave them
+as observations.
 
 % =============================================================================
 \section{Conclusion}
