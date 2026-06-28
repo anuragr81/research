@@ -619,7 +619,7 @@ group membership and not to group standing. We now turn to how social distance a
 
 
 \subsection{Social Engagement Decision} 
-
+\label{subsec:social_engagement}
 We now return to the notion of social distance that influences social engagement in a population. The bilateral, reflexive information structure defined in Section \ref{subsec:jeffrey} is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The structure leads to two consequences immediately. First, because the Jeffrey revision
 (\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ produced by observed markers, agent $i$ has incentive to
 manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
@@ -647,27 +647,25 @@ declining to engage---the payoff available from remaining within an
 existing social network rather than interacting with the encountered
 individual. 
 
-The payoff thus defined is a consequence function in the sense that the world realises the distance
-$d(c_i,c_j)$ from true budgetary incompatibility. The agent never
-observes $c_i$ and acts only on the inference from markers - without choosing an optimal response from the payoff. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against.
-
-The expected payoff under the Jeffrey-updated forecast can now be stated as :
+The payoff thus defined is a consequence function in the sense that the distance
+$d(c_i,c_j)$ is maintained through budgetary incompatibility -- so that the agent never
+observes $c_i$. The agent acts on the inference from markers but without choosing an optimal response for the payoff. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against. With the Jeffrey-updated forecast, the expected payoff for the agent be stated as :
 \begin{equation}
   \E[U \mid m_i] = v - \kappa \cdot \E[d(c_i, c_j) \mid m_i]
   \label{eq:exp-utility}
 \end{equation}
 
-The social engagement criterion is satisfied for an agent $j$ iff:
+The social engagement occurs only iff the following criterion\footnote{Notice that only the net surplus $v - \bar{u}$ enters the decision, and only through
+the threshold $\Delta^*$. In the long-term equilibrium that we consider, the surplus and the scale $\kappa$ therefore never
+reappear as separate parameters --  they are absorbed into the
+discrimination-rate induced by this threshold. } is satisfied for an agent $j$ :
 \begin{equation}
   \E[d(c_i, c_j) \mid m_i] \leq
   \frac{v - \bar{u}}{\kappa} \equiv \Delta^*(c_j)
   \label{eq:threshold}
 \end{equation}
 
-Notice that only the net surplus $v - \bar{u}$ enters the decision, and only through
-the threshold $\Delta^*$. In the long-term equilibrium that we consider, the surplus and the scale $\kappa$ therefore never
-reappear as separate parameters --  they are absorbed into the
-discrimination-rate induced by this threshold. 
+
 
 
 To demonstrate the social distance across two groups, consider $\G = \{g_1, g_2\}$ -- host and out-group respectively -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
@@ -704,7 +702,7 @@ $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$.
 \end{assumption}
 
 
-Under the assumptions \ref{ass:preferences} and \ref{ass:beliefs}, the expected class distance for an
+With the assumptions \ref{ass:preferences} and \ref{ass:beliefs}, the expected class distance for an
 agent $j$ with class $c_j$ encountering an individual whose markers
 trigger salience $s_g$ is a salience-weighted blend of two conditional
 costs, each splitting into bias and variance. Let
@@ -734,33 +732,27 @@ conditional expected distances weighted by posterior probabilities;
 the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
 (\ref{eq:salience}) and the binary partition $P'(g_1 \mid m_i) = 1 -
 s_g$ to express the same expectation in the marker-salience
-shorthand used in the remainder of the paper.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected payoff. Variance enters mechanically rather than as a separate risk-aversion parameter, in contrast to \citet{AignerCain1977}, where within-group variance generates discrimination only when the observer is risk-averse---the agent maximises expected payoff under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance payoff and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:preferences} for the scope of these functional-form choices).}
-The within-group variance term $\sigma_{g_k}^2$ measures how far the
+shorthand used in the remainder of the paper. This is the standard bias--variance decomposition of expected squared loss -- where both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected payoff. Simply put, the within-group variance term $\sigma_{g_k}^2$ measures how far the
 group label falls short of fixing the individual. When it is low the
-group is legible and knowing the group is nearly knowing the class;
-when it is high the label underdetermines the member and any individual
-is an uncertain draw. This matters on its own. Even when the group mean
+group is legible and knowing the group is nearly knowing the class. On the other hand, when it is high, the label underdetermines the member and any individual
+is an uncertain draw. Thus even when the group mean
 is close to the agent's class, within-group heterogeneity raises
-expected class distance and the probability that the engagement
-threshold~(\ref{eq:threshold}) is violated.
-When $s_g = 1$, the observer attributes the individual to the
-out-group with certainty and the expression reduces to:
+expected class distance as well as the probability that the engagement
+threshold~(\ref{eq:threshold}) is violated. When $s_g = 1$, the observer attributes the individual to the out-group with certainty and the expression reduces to the following
 \begin{equation}
   \E[d(c_i, c_j) \mid g_2]
   = (\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2
   \label{eq:Ed-group}
 \end{equation}
-which is the workhorse expression of the model. When $s_g = 0$,
+which is the workhorse expression of the model. Similarly, when $s_g = 0$,
 the markers are invisible and the observer treats the individual
-as a member of the host group: no discrimination occurs regardless
-of economic history.
+as a member of the host group.
 
-The engagement threshold is violated when either the bias (class
+In term of the bias and variance decomposition, the engagement threshold is violated when either the bias (class
 distance between observer and group mean) or the within-group
 heterogeneity, weighted by marker salience, is too
 large. When the threshold (\ref{eq:threshold}) is violated, agent
-$j$ declines to engage with $i$: this is the model's discrimination
-event. Roughly speaking, the discrimination mechanism has two governing
+$j$ declines to engage with $i$. Roughly speaking, the discrimination mechanism has two governing
 parameters corresponding to the spatial and temporal dimensions of
 social observation.\footnote{\label{rem:spacetime}Every soft signal
 that enters the model is either a spatial property of the individual
@@ -771,11 +763,11 @@ or ``passing'') and temporal interventions (raising the mobility
 parameter $\gamma$ above its bifurcation threshold
 $\gamma^*$ through mobility programmes) are categorically different
 and cannot substitute for each other.} Marker salience $s_g$ is a
-\emph{spatial} property: it is determined by what the observer
+\emph{spatial} property -- given that it is determined by what the observer
 perceives at the point of encounter---phenotype, dress, accent, body
 language---and governs \emph{whether} the Jeffrey revision fires and
-how strongly. The group prior $\bar{c}_g$ is a \emph{temporal}
-property: it is the sediment of the group's economic history across
+how strongly. On other hand, the group prior $\bar{c}_g$ is a \emph{temporal}
+property and is the sediment of the group's economic history across
 generations and governs \emph{what} the Jeffrey revision maps to
 once it fires. The model's central result that is elaborated in further sections is that sustained
 discrimination -- the solidification of social boundaries -- requires both spatial identifiability
@@ -786,24 +778,25 @@ discrimination -- the solidification of social boundaries -- requires both spati
 \subsection{Intergenerational dynamics and the closure equilibrium}
 \label{subsec:dynamics}
 
-We now consider two steps through which bilateral engagement decisions aggregate into a population-level
-dynamic.  First, within generation $t$, each
-encounter between an in-group agent and a group-$g$ individual
-produces engagement or refusal according to (\ref{eq:threshold});
-the discrimination rate $\phi^t$ is the population fraction of
-such encounters in which the threshold is violated. Second,
+We now specify how the group-prior $\bar{c}_g^{t+1}$ evolves over time in the model. 
+
+The encounter between an in-group agent and a group-$g$ individual
+produces engagement or refusal according to (\ref{eq:threshold}) defines a discrimination rate $\phi^t$ as the population fraction of
+such encounters in which the threshold is violated. This rate 
 $\phi^t$ feeds back into the next generation's group prior
-$\bar{c}_g^{t+1}$ through three economic channels: exclusion
-(refused engagements deprive group $g$ of class-improving social
-contact and erode the prior), natural convergence (an exogenous
-intergenerational tendency toward the population mean), and
-intergenerational mobility (an upward push from within-group
-heterogeneity, largest where group outcomes are most dispersed).
-Before specifying the law of motion, one principle organises the
-mobility channel. A group's mean standing can move across generations
-only in proportion to its within-group variance. A homogeneous group
-has no internal dispersion to act on, so its mean is inert; movement
+$\bar{c}_g^{t+1}$ through three economic channels
+
+\begin{enumerate} 
+\item \emph{exclusion} -- refused engagements deprive group $g$ of class-improving social contact and erode the prior
+\item \emph{natural convergence}  -- an exogenous intergenerational tendency toward the population mean
+\item \emph{intergenerational mobility } -- an upward push from within-group
+heterogeneity, largest where group outcomes are most dispersed
+
+\end{enumerate}
+
+It is worth highlighting how within-group invariance holds the dynamics together. A group's mean standing can move across generations only in proportion to its within-group variance. A homogeneous group has no internal dispersion to act on, so its mean is inert; movement
 requires that the group hold members above and below its current mean.
+
 This is the social counterpart of a principle from quantitative
 genetics, the one behind Fisher's fundamental theorem and the breeder's
 equation \citep{Fisher1930}, that a population mean changes at a rate
