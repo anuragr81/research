@@ -1,56 +1,12 @@
-% =============================================================================
-% MANUSCRIPT: Stereotype Rigidity in Social Inferences: A "Mimic Men" Dilemma
-% =============================================================================
-% [Author information removed for review]
-%
-% =============================================================================
+\documentclass[pdflatex,sn-basic]{sn-jnl}
 
-\documentclass[12pt,a4paper]{article}
-
-%% Packages
-\usepackage[a4paper, margin=1.1in]{geometry}
-\usepackage{amsmath, amssymb, amsthm}
-\usepackage{setspace}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{hyperref}
-\usepackage{natbib}
-\usepackage{graphicx}
-\usepackage{enumitem}
-\usepackage{titlesec}
-\usepackage{parskip}
-\usepackage[expansion=false]{microtype}
-\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows.meta, fit, backgrounds}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{array}
 
-%% Spacing and layout
-\onehalfspacing
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{8pt}
-
-%% Theorem environments (shared counter, numbered within subsection)
-\newtheorem{proposition}{Proposition}
-\newtheorem{theorem}[proposition]{Theorem}
-\newtheorem{lemma}[proposition]{Lemma}
-\newtheorem{corollary}[proposition]{Corollary}
-\newtheorem{definition}[proposition]{Definition}
-\newtheorem{remark}[proposition]{Remark}
-\theoremstyle{definition}
-\newtheorem{example}[proposition]{Example}
-\newtheorem{assumption}{Assumption}
-\numberwithin{proposition}{subsection}
-
-%% Title formatting
-\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
-\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
-\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection.}{0.5em}{}
-
-%% Hyperref
-\hypersetup{colorlinks=true, linkcolor=blue!60!black,
-            citecolor=blue!60!black, urlcolor=blue!60!black}
-
-%% Custom commands
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\G}{\mathcal{G}}
@@ -58,60 +14,34 @@
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\A}{\mathcal{A}}
 
+\theoremstyle{thmstyleone}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}[proposition]{Theorem}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{remark}[proposition]{Remark}
+\newtheorem{example}[proposition]{Example}
+\newtheorem{assumption}{Assumption}
+\numberwithin{proposition}{subsection}
 
 \begin{document}
 
-\begin{center}
-{\LARGE\bfseries Stereotype Rigidity in Social Inferences:\\[0.4em]
-A ``Mimic Men'' Dilemma}\\[1.5em]
+\title[Stereotype Rigidity in Social Inferences]{Stereotype Rigidity in Social Inferences: A ``Mimic Men'' Dilemma}
 
-{\large [Author removed for review]}\\[0.3em]
-{\normalsize [Affiliation removed for review]}\\[1em]
+\author[1]{\fnm{}\sur{[Author removed for review]}}
 
-{\normalsize \today}\\[1.5em]
+\affil[1]{\orgname{[Affiliation removed for review]}}
 
-\begin{minipage}{0.85\textwidth}
-\small\noindent\textbf{Abstract.}
-Social boundaries persist despite counter-examples, legal
-equality, and anti-discrimination instruments. Existing models of
-persistent discrimination, notably \citet{CoateLoury1993}, derive
-self-confirming stereotypes from strategic feedback on the
-labour-market contracting channel. This paper shows that none of
-that machinery is needed: without discriminatory preferences or
-strategic interaction through the labour market, soft-signal
-processing in everyday social contact alone generates a
-self-sustaining closure trap. When people read soft
-markers---accent, dress, phenotype---the
-marker shifts credence across groups while leaving group-level
-class priors fixed; this is the evidential structure for which
-Jeffrey conditioning, not Bayes, is the unique coherent updating
-rule. Under it, counter-examples are absorbed as exceptions and the
-stereotype is untouched, whereas Bayes would erode it. The
-mechanism turns on two governing parameters---marker salience and
-the group prior (the sediment of economic history)---which enter at
-different points and cannot substitute for one another. Class-based
-closure exists even in a racially homogeneous society, with racial
-discrimination a perturbation; there is a mobility threshold,
-increasing in marker salience, above which the trap is eliminated
-through a saddle-node bifurcation. A second source operates
-institutionally, where profit-maximising platforms reproduce
-discriminatory compositions through the same mechanism. The
-apparatus generalises beyond classical discrimination: the same
-comparative statics apply to contemporary algorithmic environments
-where platform-minted markers (verification, visibility, content
-classification) replace cultural ones.
-At the standard-Bayesian limit the model recovers the
-statistical-discrimination benchmark \citep{Phelps1972, Arrow1973};
-the closure trap is the contact-channel counterpart of Coate and
-Loury's patronising equilibrium, generated by Jeffrey rigidity
-rather than strategic feedback.\\[0.5em]
+\abstract{Social boundaries persist despite counter-examples, legal equality, and anti-discrimination instruments. Existing models of persistent discrimination, notably \citet{CoateLoury1993}, derive self-confirming stereotypes from strategic feedback on the labour-market contracting channel. This paper shows that none of that machinery is needed: without discriminatory preferences or strategic interaction through the labour market, soft-signal processing in everyday social contact alone generates a self-sustaining closure trap. When people read soft markers---accent, dress, phenotype---the marker shifts credence across groups while leaving group-level class priors fixed; this is the evidential structure for which Jeffrey conditioning, not Bayes, is the unique coherent updating rule. Under it, counter-examples are absorbed as exceptions and the stereotype is untouched, whereas Bayes would erode it. The mechanism turns on two governing parameters---marker salience and the group prior (the sediment of economic history)---which enter at different points and cannot substitute for one another. Class-based closure exists even in a racially homogeneous society, with racial discrimination a perturbation; there is a mobility threshold, increasing in marker salience, above which the trap is eliminated through a saddle-node bifurcation. A second source operates institutionally, where profit-maximising platforms reproduce discriminatory compositions through the same mechanism. The apparatus generalises beyond classical discrimination: the same comparative statics apply to contemporary algorithmic environments where platform-minted markers (verification, visibility, content classification) replace cultural ones. At the standard-Bayesian limit the model recovers the statistical-discrimination benchmark \citep{Phelps1972, Arrow1973}; the closure trap is the contact-channel counterpart of Coate and Loury's patronising equilibrium, generated by Jeffrey rigidity rather than strategic feedback.}
 
-\noindent\textbf{JEL codes:} D83, J15, J71, D62, Z13.\\
-\textbf{Keywords:} Jeffrey conditioning, soft markers,
-discrimination in contact, closure equilibrium, marker salience,
-intergenerational mobility.
-\end{minipage}
-\end{center}
+\keywords{Jeffrey conditioning, soft markers, discrimination in contact, closure equilibrium, marker salience, intergenerational mobility}
+
+\pacs[JEL Classification]{D83, J15, J71, D62, Z13}
+
+\maketitle
+
+
 
 
 % =============================================================================
@@ -246,7 +176,7 @@ discrimination emerges in our framework as a property of rational
 probability revision under soft evidence\footnote{A complementary
 distinction can be drawn against cumulative prospect theory
 \citep{TverskyKahneman1992}. In the taxonomy of
-\citet{Schoemaker1982}, our agents are expected-utility maximisers
+\citet{Schoemaker1982}, our agents are expected-payoff maximisers
 with Jeffrey-revised probabilities, not prospect-theoretic agents who
 apply decision weights to outcomes. The Jeffrey revision produces
 \emph{new} probabilities $P'(g_k)$ that continue to satisfy the
@@ -341,7 +271,7 @@ standard-Bayesian benchmark as a limiting case. Section~\ref{sec:platform} furth
 
 We first define the model primitives in Section \ref{sec:model_primitives}. This includes a
 continuum of agents characterised by economic class, observable soft
-markers, and group membership. The engagement decision governed by a utility that in turn depends on economic class distance then follows in Section \ref{subsec:bilateral}. The equilibrium dynamics and implications for intergenerational mobility are discussed in Section \ref{subsec:dynamics}. While many of conclusions of the model can be derived using a Nash equilibrium analysis of agents acting given their beliefs, we also consider fixed points of an intergenerational law of motion for results pertaining to closure trap. Section \ref{sec:platform} discusses how platforms ---a venue, neighbourhood, or institutions that mediate encounters---can reproduce the trap at
+markers, and group membership. The engagement decision governed by a payoff that depends on economic class distance, then follows in Section \ref{subsec:bilateral}. The equilibrium dynamics and implications for intergenerational mobility are discussed in Section \ref{subsec:dynamics}. While many of the conclusions of the model can be derived from the agents' individual decisions given their beliefs, we also consider fixed points of an intergenerational law of motion for results pertaining to the closure trap. Section \ref{sec:platform} discusses how platforms ---a venue, neighbourhood, or institutions that mediate encounters---can reproduce the trap at
 scale.
 
 
@@ -411,10 +341,9 @@ within-group conditionals $F_g$ are fixed and they evolve only across
 generations through.
 \end{assumption}
 
-The interaction of the two systems is reflected in the individual agent's decision only through the notion of social distance -- which exists only due to unobservability of the economic distance. While economic class is not directly observed by the agents, their budgetary incompatibility pulls them closer or apart. Quite simply, a poor man may walk into a bar or club and engage socially with richer members, he would struggle to sustain those relationships if he cannot afford such visits frequently enough. Therefore, two agents in the model are \textbf{economically compatible} if
+The interaction of the two systems is reflected in the individual agent's decision only through the notion of social distance -- which exists only due to unobservability of the economic distance. While economic class is not directly observed by the agents, their budgetary incompatibility pulls them closer or apart. Quite simply, a poor man may walk into a bar or club and engage socially with richer members, but he would struggle to sustain those relationships if he cannot afford such visits frequently enough. Therefore, two agents in the model are \textbf{economically compatible} if
 $d(c_i, c_j) \leq \bar{d}$, where $d(c_i, c_j) = (c_i - c_j)^2$ is
-squared economic class distance and $\bar{d}$ is the compatibility threshold. Social distance is a mere interpretation of this distance by the agent using group means and within-group invariance. In other words, squared distance is decomposed as expected
-incompatibility into a bias term (distance between group means) and
+squared economic class distance and $\bar{d}$ is the compatibility threshold. Social distance is a mere interpretation of this distance by the agent using group means and within-group variance. In other words, the agent's expected squared distance decomposes into a bias term (distance between group means) and
 a variance term (within-group heterogeneity). 
 
 Within each group, a member's economic class $c_i$ is Beta-distributed (see Assumption \ref{ass:beliefs}) so the observer's prior over $c_i$ given only the group is fixed entirely by the mean $\bar{c}_g$.  serving as a sufficient statisti for group's economic history.  More specifically, agent $j$'s prior over the economic class of a member of group $g$ is
@@ -686,7 +615,7 @@ reassigned---$P'(g_k)$ shifts. In other words, they are mentally placed in a dif
 group, or treated as an exception---while $\bar{c}_{g_k}$ is left
 untouched. This is not a distortion that fails to self-correct. Instead, because of the soft marker environment, it is holding
 the standing fixed that is a coherent response to evidence that speaks to
-group membership and not to group standing. We now turn to how social distance and the agent utility  relate with the pure economic distance defined in Section \ref{sec:model_primitives}.
+group membership and not to group standing. We now turn to how social distance and the agent payoff relate with the pure economic distance defined in Section \ref{sec:model_primitives}.
 
 
 \subsection{Social Engagement Decision} 
@@ -714,13 +643,13 @@ benefit of social contact when the interaction partner is perfectly
 compatible, and is reduced linearly by class distance through the
 sensitivity parameter $\kappa$.
 The agent's outside option $\bar{u}$ is the reservation payoff from
-declining to engage---the utility available from remaining within an
+declining to engage---the payoff available from remaining within an
 existing social network rather than interacting with the encountered
 individual. 
 
 The payoff thus defined is a consequence function in the sense that the world realises the distance
 $d(c_i,c_j)$ from true budgetary incompatibility. The agent never
-observes $c_i$ and acts only on the inference from markers - without choosing an optimal response from the utility. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against.
+observes $c_i$ and acts only on the inference from markers - without choosing an optimal response from the payoff. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against.
 
 The expected payoff under the Jeffrey-updated forecast can now be stated as :
 \begin{equation}
@@ -761,9 +690,9 @@ Two simplifying assumptions provide us the closed-form equilibrium.
 
 \begin{assumption}[Preferences]
 \label{ass:preferences}
-Agents are risk neutral in class distance, with utility
+Agents are risk neutral in class distance, with payoff
 $U = v - \kappa\,d$ and $d(c_i,c_j) = (c_i-c_j)^2$. Variance within a
-group therefore enters expected utility at the same weight $\kappa$ as
+group therefore enters expected payoff at the same weight $\kappa$ as
 the squared mean gap, with no separate risk parameter.
 \end{assumption}
 
@@ -800,12 +729,12 @@ average of the two:
   \label{eq:Ed-salience}
 \end{equation}
 
-The first line is the standard expected-utility form---a sum of
+The first line is the standard expected-payoff form---a sum of
 conditional expected distances weighted by posterior probabilities;
 the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
 (\ref{eq:salience}) and the binary partition $P'(g_1 \mid m_i) = 1 -
 s_g$ to express the same expectation in the marker-salience
-shorthand used in the remainder of the paper.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected utility. Variance enters mechanically rather than as a separate risk-aversion parameter, in contrast to \citet{AignerCain1977}, where within-group variance generates discrimination only when the observer is risk-averse---the agent maximises expected utility under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance utility and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:preferences} for the scope of these functional-form choices).}
+shorthand used in the remainder of the paper.\footnote{This is the standard bias--variance decomposition of expected squared loss: both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected payoff. Variance enters mechanically rather than as a separate risk-aversion parameter, in contrast to \citet{AignerCain1977}, where within-group variance generates discrimination only when the observer is risk-averse---the agent maximises expected payoff under a quadratic distance metric, and $\E[(c_i - c_j)^2 \mid g_k] = (\E[c_i \mid g_k] - c_j)^2 + \mathrm{Var}(c_i \mid g_k)$ by definition. The linear-in-distance payoff and quadratic distance metric used in (\ref{eq:Ed-salience}) yield the bias--variance decomposition that supports the closed-form analysis below (see Assumption~\ref{ass:preferences} for the scope of these functional-form choices).}
 The within-group variance term $\sigma_{g_k}^2$ measures how far the
 group label falls short of fixing the individual. When it is low the
 group is legible and knowing the group is nearly knowing the class;
@@ -920,9 +849,8 @@ are required: the closed
 form of the mobility term, and the closed form of the discrimination
 rate $\phi^t$.
 
-For the mobility term, consider that under the Beta--De~Finetti structure
-(Appendix~\ref{app:bernoulli}), the within-group variance is
-$\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, where $\nu > 0$ is
+For the mobility term, Assumption~\ref{ass:beliefs} gives the within-group
+variance $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, where $\nu > 0$ is
 the within-group concentration parameter. Therefore the mobility term
 becomes $\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ where
 $\tilde{\gamma} = \gamma/(1+\nu)$ is the effective mobility
@@ -1272,7 +1200,7 @@ generate persistence, profit-maximising platforms acting on soft
 signals would produce discriminatory compositions as an emergent
 outcome.
 
-The formal platform model---experience utility, the
+The formal platform model---experience payoff, the
 profit-maximisation problem, and its equilibrium
 characterisation---is developed in Appendix~\ref{app:platform}.
 Embedding bilateral Jeffrey updating within a profit-maximising
@@ -1326,7 +1254,7 @@ immediately, with intensity proportional to the gap between the
 revealed group's $\bar{c}_g$ and the host mean. The empirical
 literature on platform discrimination is consistent with this prediction. More specifically, discrimination on rental and rideshare platforms correlates with the introduction
 of photographs and real names, not with any change in the underlying
-population. When we consider the market with soft markers, the platforms reproducing discrimination are mere economic actors pursuing private returns. A top restaurant that is formally open to all who can pay, cannot rule out that its clients may associate eliteness with distance from lower economic backgrounds. Experience utility therefore depends on room
+population. When we consider the market with soft markers, the platforms reproducing discrimination are mere economic actors pursuing private returns. A top restaurant that is formally open to all who can pay, cannot rule out that its clients may associate eliteness with distance from lower economic backgrounds. Experience payoff therefore depends on room
 composition through Jeffrey updating as well. The restaurant,
 to maximise perceived quality, manages room composition through
 informationally mediated instruments such as dress codes. Similarly, reservation systems may filter by social network, location systems may create transport barriers and so on. While racial correlation is no longer an input consideration, it ends up being an indirect consequence of markers-driven platforms nevertheless. These instruments operate on the contact channel rather than
@@ -1734,7 +1662,7 @@ platform identifies a second, operating at the institutional level and
 independent of the first, even when bilateral encounters generate no
 persistence.
 
-For a $g_1$ client $j$, experience utility at a venue with attendee
+For a $g_1$ client $j$, experience payoff at a venue with attendee
 set $\A$ is:
 \begin{equation}
   V_j(\A) = \alpha \cdot q + (1 - \alpha) \cdot S_j(\A)
@@ -2141,7 +2069,6 @@ available from the author on reasonable request.
 % BIBLIOGRAPHY
 % =============================================================================
 
-\bibliographystyle{plainnat}
 \bibliography{bibliography}
 
 \end{document}
