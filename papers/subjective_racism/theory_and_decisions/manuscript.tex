@@ -427,9 +427,8 @@ historical member of group $g$ and $T$ is the historical window. Groups with his
 marginalisation---slavery, colonial extraction, persistent
 poverty---have low $\bar{c}_g$.
 
-The intergenerational mobility is affected by this social distance inferences as the economic system sets the group prior across generations while the social system produces markers correlated with that prior (see Figure~\ref{fig:loop}). As we later elaborate, a discrimination rate follows from the soft maker environment and the economic cost of exclusion, $\delta$, feeds this back into the
-group's economic position. The resulting prior is what the next
-generation's markers are read against. Before we describe these dynamics in more detail, it's worth demonstrating how Jeffrey conditioning based formulation of social inferences differs from a Bayesian one.
+The notion of social distance as social inference of an economic distance is what determines closure and intergenerational mobility across generations in the model. In the dynamic system that we later elaborate, the economic system sets the group prior while the social system produces markers correlated with that prior (see Figure~\ref{fig:loop}). A discrimination rate follows from the soft maker environment and the economic cost of exclusion, $\delta$, feeds this back into the group's economic position. 
+How these  ``soft'' markers from a generation are read against this resulting prior is described in Section \ref{subsec:jeffrey}.
 
 \begin{figure}[ht]
 \centering
@@ -468,7 +467,7 @@ generation's markers are read against. Before we describe these dynamics in more
 \label{fig:loop}
 \end{figure}
 
-\subsection{Social engagement and the closure equilibrium}
+\subsection{Social engagement and Jeffrey Conditioning}
 \label{subsec:jeffrey}
 \label{subsec:bilateral}
 \label{subsec:interaction}
@@ -494,7 +493,7 @@ where the post-experience partition weights $P'(g_k)$ are produced
 directly by the uncertain experience. The formula derives from the law
 of total probability applied to the posterior, under the
 \emph{invariance condition} $P'(H \mid g_k) = P(H \mid g_k)$ for all $k$
-and $H$ \citep[\S\S 11.3, 11.6]{Jeffrey1965}.  The rule has an axiomatic foundation in \citet{DiaconisZabell1982}: holding the within-group conditionals fixed under soft evidence is not an approximation but what coherence requires, since revising them on a class reading that was itself forecast from those same conditionals would double-count the evidence. We use the property of conditional probabilities being preserved  given each partition cell across the revision -- to contrast the difference between group-identification and marker-inference. The standard Bayesian conditionalisation then becomes the limiting case in which the partition weights concentrate on a single cell \citep[\S 11.5]{Jeffrey1965}. 
+and $H$ \citep[\S\S 11.3, 11.6]{Jeffrey1965} and has an axiomatic foundation in \citet{DiaconisZabell1982}. More particularly, holding the within-group conditionals fixed under soft evidence is not an approximation but what coherence requires, since revising them on a class reading that was itself forecast from those same conditionals would double-count the evidence. The property of conditional probabilities being preserved  given each partition cell across the revision allows us to contrast the difference between group-identification and marker-inference in the model. The standard Bayesian conditionalisation then becomes the limiting case in which the partition weights concentrate on a single cell \citep[\S 11.5]{Jeffrey1965}.
 
 The hypothesis of interest in our setting is class $c$ and the partition
 is group membership $\{g_1, \ldots, g_K\}$. The within-group
@@ -502,7 +501,7 @@ conditional distributions $F_{g_k} = P(c \mid g_k)$ play the role of the
 invariant conditionals, and the kinematics formula specialises as
 follows. Agent $j$ observes soft marker $m_i$. This shifts $j$'s
 distribution over group membership from $P(g_k)$ to $P'(g_k)$ without
-determining which group $i$ belongs to.
+determining which group $i$ belongs to. The scope of soft markers is made precise with the Assumption \ref{ass:sufficiency}.
 
 \begin{assumption}[Group sufficiency]
 \label{ass:sufficiency}
@@ -524,7 +523,7 @@ falls outside the soft-marker regime treated here.
 
 Given that we consider the incompatibility of economic classes, what the engagement decision needs is the partner's class, not their group \emph{per se}: engagement turns on class distance (Section~\ref{sec:model_primitives}),
 so the marker must be converted into a posterior over class, $P'(c)$.
-Constrasting Bayes and Jeffrey again, consider that both rules reach $P'(c)$ by the same two-step route---marker $\to$ group weights $P'(g_k) \to$ class $P'(c)$---and they share the second
+Contrasting Bayes and Jeffrey again, consider that both rules reach $P'(c)$ by the same two-step route---marker $\to$ group weights $P'(g_k) \to$ class $P'(c)$---and they share the second
 step, equation~(\ref{eq:jeffrey}), which carries the group weights into
 a class distribution through the conditionals $F_{g_k}$ (it takes this
 form because of Assumption~\ref{ass:sufficiency}: conditional on group,
@@ -547,7 +546,7 @@ must reason about in making a decision as such.} The two rules thus differ in th
 information reaches belief. Bayes routes evidence through a likelihood ratio
 whereas Jeffrey routes evidence through belief structure implied by partition weights. Regardless of the experience, $F_{g_k}$ does not move under Jeffrey conditioning while $P'(g_k)$ can. Bayes revises the stereotype, whereas Jeffrey, holding the
 conditionals fixed, processes the same fact as a reclassification -- so the incoming information in a soft marker dominated environment only changes which group a person is
-assigned to, rather than the standing imputed to the group. Simply put, Bayes relies on $P'(m|g)$ but Jeffrey must use $P'(g|m)$ (with fixed $F_{g_k}$)  Jeffrey conditioning becomes more appropriate for the soft marker environment because $F_{g_k}$, the long-term substrate from the social system, is fixed relative to the belief-adjustments that follow from markers in shorter-term. A numerical illustration is provided in Example \ref{ex:jeffrey-bayes}. A more real-world instance is discussed in Example \ref{ex:misaddressed}.
+assigned to, rather than the standing imputed to the group. Simply put, Bayes relies on $P'(m|g)$ but Jeffrey must use $P'(g|m)$ (with fixed $F_{g_k}$). Jeffrey conditioning becomes the more appropriate for the soft marker environment because $F_{g_k}$, the long-term substrate from the social system, is fixed relative to the belief-adjustments that follow from markers in shorter-term. A numerical illustration of Jeffrey condition is provided in Example \ref{ex:jeffrey-bayes}. Example \ref{ex:misaddressed} provides a more real-world instance of a Jeffrey updater differs from the Bayesian counterpart.
 
 Above fixes the model's domain. Three conditions must hold jointly for
 marker-judgment to govern rather than stereotype-adjustment. First, the
@@ -599,33 +598,33 @@ same prior $0.3$ -- presumably set over a much longer time.
 \label{ex:misaddressed}
 A delivery agent calls at a house in a predominantly majority
 neighbourhood. The resident's appearance reads, unambiguously, as
-minority ($g_B$); the name on the parcel reads as majority ($g_A$). The
+minority ($g_B$) but the name on the parcel reads as majority ($g_A$). The
 agent must settle one thing: does the name belong to this
 resident---deliver---or is the parcel misaddressed? On a rushed round the
 call is made at the doorstep in seconds, with only the label and the face
-to go on: no document to check, no recourse.
+to go on. There is no document to check and there is no recourse.
 
-Two soft signals point in opposite directions. The appearance fixes the
-group attribution; the name is anomalous under the group-level
+Two soft signals point in opposite directions in this example. The appearance fixes the
+group attribution -- since the name is anomalous under the group-level
 association $F_{g_B}$, which places almost no weight on majority names
 within $g_B$. The surprise must be absorbed somewhere---but the
-appearance marker is \emph{hard}: it cannot be re-read, so the agent
+appearance marker is \emph{hard} and it cannot be re-read. Therefore, the agent
 cannot resolve the tension by attributing the resident to $g_A$.
 
-A Bayesian agent treats the anomalous name as evidence bearing on the
-association itself. Unable to move the group attribution, she revises
+Consider that a Bayesian agent treats the anomalous name as evidence bearing on the
+association itself. Unable to move the group attribution, she must revise
 $F_{g_B}$---minority residents carry majority names more often than she
-had assumed, through marriage, conversion, or naturalisation---judges
+had assumed, through marriage, conversion, or naturalisation etc. ---judges
 that the name plausibly belongs, and delivers.\footnote{The comparison
 turns on $P(\text{majority name}\mid g_B)$: frozen near zero it sends all
 weight to ``misaddressed''; revised upward it lets ``belongs'' compete.}
 
-A Jeffrey agent holds $F_{g_B}$ fixed by construction. With the group
+On the other hand, a Jeffrey agent holds $F_{g_B}$ fixed by construction. With the group
 attribution pinned by the hard marker and the association frozen, a
 majority name on a $g_B$ resident is all but impossible \emph{if the name
-belongs}---so the coherent reading is that it does not: the parcel is
-misaddressed, or the resident is filed as a lone exception. This is not a
-reassignment of the resident to $g_A$, which the hard marker forbids; it
+belongs}---so the coherent reading is that it does not. Therefore, either the parcel is
+considered misaddressed, or the resident is filed as a lone exception. This is not a
+reassignment of the resident to $g_A$, which the hard marker forbids. Instead, it
 is the individual set aside as atypical, with the group association left
 exactly as it was. The next such parcel is met with the same $F_{g_B}$ as
 the last.
@@ -643,8 +642,8 @@ rests on the rigidity the parcel isolates
 (Remark~\ref{rem:platform-bayes}). The history institutions carry is
 present too, but as the value of the group prior $\bar{c}_g$---the
 sediment of past economic position---not as a force acting within the
-encounter. What lies outside the model is the case where an outsider's
-success provokes resentment or coalitional threat: there the response is
+encounter. Indeed what lies outside the model's scope thus stated is the case where an outsider's
+success provokes resentment or coalitional threat -- where the response is
 a contest over standing rather than an inference from it.
 
 \rule{15cm}{0.4pt}   
@@ -653,8 +652,8 @@ As the Example \ref{ex:jeffrey-bayes} illustrates, $P(g_k)$ is the observer's cr
 belongs to group $g_k$. Before a marker is observed, this credence
 may be vague---no group attribution yet formed---or may already be
 tilted by context such as the setting or prior information. Upon
-observation, the marker reweights this credence: an accent
-identified with $g_k$ raises $P'(g_k)$ and lowers the others; a
+observation, the marker reweights this credence. For example, an accent
+identified with $g_k$ raises $P'(g_k)$ and lowers the others, or a
 phenotype associated with $g_j$ does the opposite. The shift from
 $P(g_k)$ to $P'(g_k)$ is the immediate inferential act of placing
 the individual into a group. It is fast, it is discrete, and it can
@@ -663,14 +662,14 @@ precisely the kind of evidence that carries direct information
 about group assignment. 
 
 
-To reiterate, the reason why the paper argues for separation of marker inference from group assignment as different channels is that the social system and the economic system operate at different
-speeds. A marker is read in seconds and shifts $P(g_k)$ immediately;
+The separation of marker inference from group assignment -- which Jeffrey conditioning permits -- is ultimately a consequence of Assumption \ref{ass:timescale} -- wherein the social system and the economic system operate at different
+speeds. More specifically, a marker is read in seconds and shifts $P(g_k)$ immediately whereas 
 $F_{g_k}$ updates through a different channel---the accumulated
 statistical experience and social knowledge that does not arrive
 with any single marker observation. The inferential asymmetry has a
-particular shape: the slow-moving cultural substrate, whose stable
-outputs are legible at speed, is quickly inferred from at the
-encounter, while the fast-moving economic position is processed
+particular shape that comprises of i) a slow-moving cultural substrate, whose stable
+outputs are legible at speed -- quickly inferred from at the
+encounter and ii) the fast-moving economic position --- processed
 through slower, indirect channels. The end-result is that the social encounter performs a reclassification, not a
 revision of the stereotype. Whether persistent group-level
 stereotypes obtain depends on how $F_g$ evolves between encounters
@@ -681,45 +680,27 @@ externality, and marker decay.
 The discrimination arises from this asymmetry of processing, and it does
 so whether or not the group's standing is accurate. The only thing an
 encounter could revise is $\bar{c}_{g_k}$, the standing imputed to the
-group; but the evidence it delivers is a marker, from which the
-individual's class is forecast through that very standing. A forecast
-drawn from the standing cannot then revise it without double-counting,
-and the contact channel supplies no independently observed class outcome
-that could. A high-class member of a low-standing group is therefore
-reassigned---$P'(g_k)$ shifts: they are mentally placed in a different
+group -- but the evidence it delivers is a marker, from which the
+individual's class is forecast through that very standing. A high-class member of a low-standing group is therefore
+reassigned---$P'(g_k)$ shifts. In other words, they are mentally placed in a different
 group, or treated as an exception---while $\bar{c}_{g_k}$ is left
-untouched. This is not a distortion that fails to self-correct. Instead, it is holding
+untouched. This is not a distortion that fails to self-correct. Instead, because of the soft marker environment, it is holding
 the standing fixed that is a coherent response to evidence that speaks to
-group membership and not to group standing.
+group membership and not to group standing. We now turn to how social distance and the agent utility  relate with the pure economic distance defined in Section \ref{sec:model_primitives}.
 
 
-
-\textbf{ Social Distance-based Utility} The above bilateral, reflexive information structure is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The bilateral Jeffrey structure leads to two consequences immediately. First, because the Jeffrey revision
-(\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ and
-these are produced by observed markers, agent $i$ has incentive to
+\subsection{Social Distance and Utility} 
+The bilateral, reflexive information structure defined in Section \ref{subsec:jeffrey} is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The bilateral Jeffrey structure leads to two consequences immediately. First, because the Jeffrey revision
+(\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ produced by observed markers, agent $i$ has incentive to
 manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
 analogue of \citet{Spence1973}'s signalling model
 (\emph{endogenous signal production}). Second, the rigidity keeps the group standing $\bar{c}_g$ fixed
 whatever a single encounter shows. Since no encounter delivers class
 evidence independent of the marker, excluded agents learn less about
-economic opportunities than they otherwise would. The closure trap
-(Section~\ref{subsec:intergenerational}) is therefore also an
+economic opportunities than they otherwise would. The closure trap (Section~\ref{subsec:intergenerational}) is therefore also an
 information trap \footnote{The same structure carries a self-directed reading---encounters signalling exclusion can also depress an agent's own aspirations---though the model does not track this as a separate channel.}. 
 
-The rigidity condition operates at the inference moment, not across
-time (Assumption~\ref{ass:timescale}). The within-group distributions $F_g$ are held fixed at the
-encounter---the timescale on which a soft marker is read and
-processed---but they are not eternal. The within-group distributions are set to evolve over generations
-through the intergenerational dynamic of
-Section~\ref{subsec:dynamics}, where mobility, the discrimination
-externality, and marker decay shift $\bar{c}_g^t$ over time. The
-closure trap arises precisely when these slower forces balance to
-keep $\bar{c}_g$ below a tipping point. Above that point, the same
-forces drive the system to a high attractor and the marker-borne
-stereotype dissolves.
-
-We now define the 
-utility function that defines the engagement decision where class distance acts as a friction:
+The social engagement decision where class distance acts as a friction is based on the follow utility function
 \begin{equation}
   U(c_i, c_j) = v - \kappa \cdot d(c_i, c_j)
   \label{eq:utility}
@@ -737,16 +718,11 @@ existing social network rather than interacting with the encountered
 individual. 
 
 Notice that the utility depends on class distance
-alone -- group membership $g$ does not enter as an argument of $U$. In other words, group enters only indirectly through the marker: the observed marker reweights
-the group partition (Jeffrey-updated as in~(\ref{eq:jeffrey})), and the
-prior it activates fixes the expected $c_i$ the distance is computed
+alone -- group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior it activates fixes the expected $c_i$ the distance is computed
 against. Equation~(\ref{eq:utility}) is therefore a consequence
-function, not a decision rule: the world realises the distance
-$d(c_i,c_j)$ from true compatibility---the poor man cannot sustain the
-club's relationships however he is read---while the agent, never
-observing $c_i$, only acts on the inference from markers.
-
-The expected utility under the Jeffrey-updated forecast can be stated as :
+function in the sense that the world realises the distance
+$d(c_i,c_j)$ from true budgetary incompatibility. The agent never
+observing $c_i$ and acts only on the inference from markers. The expected utility under the Jeffrey-updated forecast can be stated as :
 \begin{equation}
   \E[U \mid m_i] = v - \kappa \cdot \E[d(c_i, c_j) \mid m_i]
   \label{eq:exp-utility}
@@ -759,12 +735,11 @@ Agent $j$ engages iff:
   \label{eq:threshold}
 \end{equation}
 
-Notice that only the net surplus $v - \bar{u}$ enters the decision, through the
-cutoff $\Delta^*$. Together with $\kappa$, it is absorbed into the
-discrimination-rate function $F$ this threshold induces below.
+Only the net surplus $v - \bar{u}$ enters the decision, and only through
+the threshold $\Delta^*$. In the long-term equilibrium that we consider, the surplus and the scale $\kappa$ therefore never
+reappear as separate parameters --  they are absorbed into the
+discrimination-rate induced by this threshold. Two assumptions \ref{ass:preferences} and \ref{ass:beliefs} specify this equilibrium.
 
-Under bilateral structure, engagement requires condition
-(\ref{eq:threshold}) to hold for both agents simultaneously. The above applies to any number of groups $K$ and any soft marker space.
 
 \begin{assumption}[Preferences]
 \label{ass:preferences}
