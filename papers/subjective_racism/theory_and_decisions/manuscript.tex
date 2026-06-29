@@ -529,11 +529,8 @@ their way out of it. But instead, where the marker is genuinely soft in
 the sense of Assumption~\ref{ass:sufficiency}, a Bayesian observer has no
 class signal to update on and behaves exactly as the Jeffrey observer
 does. The trap belongs to the information structure rather than to the
-updating rule. Where the two rules do diverge, Bayesian accuracy does not
-lift the trap and can deepen it, because an observer who tracks a group's
-depressed standing reads it as confirming evidence and excludes further.
-We make this precise after putting an intergenerational dynamics in place
-(Propositions~\ref{prop:coincidence} and~\ref{prop:divergence}).
+updating rule. We make this precise once the intergenerational dynamics
+are in place (Proposition~\ref{prop:coincidence}).
 
 \begin{example}[The misaddressed parcel]
 \label{ex:misaddressed}
@@ -944,63 +941,46 @@ parameters $\mu = 0.05$, $\delta = 0.5$, $s_g = 1$.}
 We can now make precise the claim previewed above, that the closure trap
 of Proposition~\ref{prop:class-closure} is a property of the soft-marker
 information structure rather than of the Jeffrey rule used to derive it.
-Distinguish the group's true mean standing $\bar{c}_g$ from the
-observer's believed conditional $\beta_g$, on which discrimination acts
-through $\phi = s_g F(\beta_g)$, and let the marker carry within-group
-class information of strength $\xi \ge 0$, with $\xi = 0$
-the soft-marker benchmark of Assumption~\ref{ass:sufficiency}. Under
-Jeffrey conditioning the invariance condition holds $\beta_g$ fixed; under
-Bayesian updating $\beta_g$ tracks $\bar{c}_g$ at a gain increasing in
-$\xi$.
+The trap was obtained under Jeffrey conditioning, which holds the
+group-level class conditional fixed across individual encounters. A
+Bayesian observer faced with the same soft marker, one that meets the
+group-sufficiency benchmark of Assumption~\ref{ass:sufficiency}, has no
+within-group class signal to revise on, and the two rules coincide
+exactly.
 
 \begin{proposition}[Structural trap]
 \label{prop:coincidence}
-Under Assumption~\ref{ass:sufficiency}, that is at $\xi = 0$, the
-soft marker carries no within-group class information, so the Bayesian
+Under Assumption~\ref{ass:sufficiency} the marker likelihood is
+independent of class within a group, so for any prior the Bayesian
 posterior on class equals the prior, $P(c \mid m, g) = P(c \mid g)$ for
-every group. A Bayesian observer therefore leaves the conditional
-unrevised after observing the marker, exactly as the Jeffrey invariance
-condition prescribes. The two updating rules induce the identical law of
-motion, and the closure trap of Proposition~\ref{prop:class-closure}
-obtains under both. The trap is a property of the soft-marker information
-structure, not of the updating rule.
+every group. A Bayesian observer therefore leaves the within-group
+conditional unrevised after observing the marker, which is exactly the
+Jeffrey invariance condition. The two updating rules carry the identical
+conditional in every period, drive the identical discrimination rate
+$\phi = s_g F(\bar{c}_g)$, and induce the identical law of
+motion~(\ref{eq:dynamic}); the closure trap of
+Proposition~\ref{prop:class-closure} obtains under both. The trap is a
+property of the soft-marker information structure, not of the updating
+rule.
 \end{proposition}
 
-\begin{proof}[Proof sketch]
-At $\xi = 0$ the likelihood $P(m \mid c, g)$ does not depend on
-$c$, so $P(c \mid m, g) = P(c \mid g)$ by Bayes' rule, and the Bayesian
-leaves $\beta_g$ at its prior, which is the Jeffrey invariance condition.
-Both rules then drive the same $\phi = s_g F(\beta_g)$ and the same
-map~(\ref{eq:dynamic}), whose low fixed point is absorbing by
-Proposition~\ref{prop:class-closure}. \qed
-\end{proof}
-
-\begin{proposition}[Divergence and self-fulfilling tracking]
-\label{prop:divergence}
-For $\xi > 0$ the two rules diverge. The Jeffrey law of motion and
-its absorbing low fixed point are invariant to $\xi$. The Bayesian
-path depends on $\xi$ and on initial conditions, coinciding with
-Jeffrey only at $\xi = 0$. Where the Bayesian observer tracks a
-depressed group, the lowered belief $\beta_g$ raises the discrimination
-$s_g F(\beta_g)$ it faces, so the Bayesian self-consistent low fixed point
-lies below the Jeffrey one. Bayesian accuracy does not relieve, and may
-deepen, the trap; whether it relieves it is history-dependent, whereas
-Jeffrey rigidity is unconditional.
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-Under Jeffrey $\beta_g$ is frozen and $\xi$ does not enter the
-map, so its fixed points are independent of $\xi$. Under Bayesian
-updating a positive gain forces $\beta_g = \bar{c}_g$ at any fixed point;
-the resulting self-consistent map is bistable, with low and high stable
-fixed points separated by an interior threshold, so the long-run outcome
-depends on the initial $(\bar{c}_g, \beta_g)$. At $\xi = 0$ the
-gain vanishes and the system reduces to the frozen map of
-Proposition~\ref{prop:coincidence}. Since $F$ is decreasing, tracking a
-depressed group downward raises $F(\beta_g)$, placing the self-consistent
-low fixed point below the Jeffrey fixed point, at which $\beta_g$ is held
-at the more generous prior; the comparison and the bistability are
-verified numerically under base parameters. \qed
+\begin{proof}
+By Assumption~\ref{ass:sufficiency} the marker likelihood is independent
+of class within a group, $P(m \mid c, g) = P(m \mid g)$. For any prior
+$P(c \mid g)$, Bayes' rule gives
+\[
+  P(c \mid m, g)
+  = \frac{P(m \mid c, g)\,P(c \mid g)}{P(m \mid g)}
+  = \frac{P(m \mid g)\,P(c \mid g)}{P(m \mid g)}
+  = P(c \mid g),
+\]
+so observing the marker leaves the within-group conditional unchanged.
+This is precisely the Jeffrey invariance condition, under which the
+conditional is held fixed by construction; the two rules therefore carry
+the identical conditional each period and induce the identical
+map~(\ref{eq:dynamic}) through $\phi = s_g F(\bar{c}_g)$. Its low fixed
+point is absorbing by Proposition~\ref{prop:class-closure}, so the closure
+trap obtains under both rules. \qed
 \end{proof}
 
 \subsection{Comparative statics and the mobility threshold}
@@ -1267,12 +1247,7 @@ the group's distribution under either updating rule
 (Proposition~\ref{prop:coincidence}). The hopeful Bayesian who expects
 enough good encounters to revise how a group is seen is therefore counting
 on the wrong kind of evidence, not because Jeffrey forbids the revision but
-because the environment supplies no group-level signal to revise on. Where
-the marker does leak such a signal, a Bayesian who conditions on the
-group's visible standing closes Loury's loop rather than stepping outside
-it, since that standing is itself the residue of past refusals, and whether
-the resulting accuracy shelters a group or seals it in turns on which side
-of the truth the prior sits (Proposition~\ref{prop:divergence}). When a
+because the environment supplies no group-level signal to revise on. When a
 group's standing does shift, it shifts through the group's actual mobility
 across generations, not through the accumulation of individual examples.
 
@@ -1893,9 +1868,9 @@ The self-confirming, persistent stereotype, the concern of
 \citet{CoateLoury1993}, corresponds to the closure trap at
 $\rho > \rho^*$. This is a comparative static in the intensity of the
 frozen-stereotype channel, not a contrast between updating rules; the
-latter is established separately in Propositions~\ref{prop:coincidence}
-and~\ref{prop:divergence}, where genuine Bayesian updating does not
-escape the trap.
+latter is established separately in Proposition~\ref{prop:coincidence},
+where at exact softness genuine Bayesian updating coincides with the
+Jeffrey rule and does not escape the trap.
 \end{proposition}
 
 \begin{proof}[Proof sketch]
