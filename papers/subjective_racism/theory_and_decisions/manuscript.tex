@@ -494,14 +494,14 @@ stereotypes adjust.
 \begin{example}[Jeffrey versus Bayes example]
 \label{ex:jeffrey-bayes}
 An observer meets a stranger at a professional gathering, with prior
-credence split evenly between two groups, $P(g_A) = P(g_B) = 0.5$. The
+credence split evenly between two groups, $P(g_I) = P(g_O) = 0.5$. The
 observer's group priors---the group-level probabilities of high economic
-class---are $\bar{c}_{g_A} = 0.7$ and $\bar{c}_{g_B} = 0.3$. Before any
+class---are $\bar{c}_{g_I} = 0.7$ and $\bar{c}_{g_O} = 0.3$. Before any
 signal, the expected probability that the stranger is high-class is
 $0.5 \times 0.7 + 0.5 \times 0.3 = 0.50$.
 
 The stranger speaks, and a soft marker (accent) shifts the observer's
-group credence to $P'(g_A) = 0.2$, $P'(g_B) = 0.8$. The marker carries
+group credence to $P'(g_I) = 0.2$, $P'(g_O) = 0.8$. The marker carries
 no likelihood $P(m \mid \text{class})$: it is informative about group,
 not directly about class.\footnote{Markers do correlate with class in
 aggregate; as established in Section~\ref{sec:model_primitives}, that
@@ -514,12 +514,12 @@ because the accent revealed anything about this individual's income, but
 because it reweighted the groups whose priors the observer already held.
 
 Now suppose the stranger is in fact high-class. Under standard Bayesian updating,
-observing a high-class member of $g_B$ raises the posterior
-$\bar{c}_{g_B}$ above $0.3$; repeated such encounters drive it toward its
+observing a high-class member of $g_O$ raises the posterior
+$\bar{c}_{g_O}$ above $0.3$; repeated such encounters drive it toward its
 true value and the stereotype erodes.  Under Jeffrey
 conditioning, however, the observer just reclassifies the individual---attributing them
-to $g_A$ and treating them as an exception within $g_B$---while
-$\bar{c}_{g_B}$ remain unchanged. The next member of $g_B$ is met with the
+to $g_I$ and treating them as an exception within $g_O$---while
+$\bar{c}_{g_O}$ remain unchanged. The next member of $g_O$ is met with the
 same prior $0.3$ -- presumably set over a much longer time.
 \end{example}
 
@@ -527,7 +527,7 @@ same prior $0.3$ -- presumably set over a much longer time.
 \label{ex:misaddressed}
 A delivery agent calls at a house in a predominantly majority
 neighbourhood. The resident's appearance reads, unambiguously, as
-minority ($g_B$) but the name on the parcel reads as majority ($g_A$). The
+minority ($g_O$) but the name on the parcel reads as majority ($g_I$). The
 agent must settle one thing: does the name belong to this
 resident---deliver---or is the parcel misaddressed? On a rushed round the
 call is made at the doorstep in seconds, with only the label and the face
@@ -535,27 +535,27 @@ to go on. There is no document to check and there is no recourse.
 
 Two soft signals point in opposite directions in this example. The appearance fixes the
 group attribution -- since the name is anomalous under the group-level
-association $F_{g_B}$, which places almost no weight on majority names
-within $g_B$. The surprise must be absorbed somewhere---but the
+association $F_{g_O}$, which places almost no weight on majority names
+within $g_O$. The surprise must be absorbed somewhere---but the
 appearance marker is \emph{hard} and it cannot be re-read. Therefore, the agent
-cannot resolve the tension by attributing the resident to $g_A$.
+cannot resolve the tension by attributing the resident to $g_I$.
 
 Consider that a Bayesian agent treats the anomalous name as evidence bearing on the
 association itself. Unable to move the group attribution, she must revise
-$F_{g_B}$---minority residents carry majority names more often than she
+$F_{g_O}$---minority residents carry majority names more often than she
 had assumed, through marriage, conversion, or naturalisation etc. ---judges
 that the name plausibly belongs, and delivers.\footnote{The comparison
-turns on $P(\text{majority name}\mid g_B)$: frozen near zero it sends all
+turns on $P(\text{majority name}\mid g_O)$: frozen near zero it sends all
 weight to ``misaddressed''; revised upward it lets ``belongs'' compete.}
 
-On the other hand, a Jeffrey agent holds $F_{g_B}$ fixed by construction. With the group
+On the other hand, a Jeffrey agent holds $F_{g_O}$ fixed by construction. With the group
 attribution pinned by the hard marker and the association frozen, a
-majority name on a $g_B$ resident is all but impossible \emph{if the name
+majority name on a $g_O$ resident is all but impossible \emph{if the name
 belongs}---so the coherent reading is that it does not. Therefore, either the parcel is
 considered misaddressed, or the resident is filed as a lone exception. This is not a
-reassignment of the resident to $g_A$, which the hard marker forbids. Instead, it
+reassignment of the resident to $g_I$, which the hard marker forbids. Instead, it
 is the individual set aside as atypical, with the group association left
-exactly as it was. The next such parcel is met with the same $F_{g_B}$ as
+exactly as it was. The next such parcel is met with the same $F_{g_O}$ as
 the last.
 \end{example}
 
@@ -620,11 +620,9 @@ group membership and not to group standing. We now turn to how social distance a
 
 \subsection{Social Engagement Decision} 
 \label{subsec:social_engagement}
-We now return to the notion of social distance that influences social engagement in a population. The bilateral, reflexive information structure defined in Section \ref{subsec:jeffrey} is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The structure leads to two consequences immediately. First, because the Jeffrey revision
-(\ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ produced by observed markers, agent $i$ has incentive to
-manipulate markers to shift $P'(g_k)$ in $j$'s revision---the social
-analogue of \citet{Spence1973}'s signalling model
-(\emph{endogenous signal production}). Second, the rigidity keeps the group standing $\bar{c}_g$ fixed
+We now return to the notion of social distance that influences social engagement in a population. The bilateral, reflexive information structure defined in Section \ref{subsec:jeffrey} is updated simultaneously by two interacting agents -- each forming a Jeffrey-revised assessment of the other's class from the observed markers. The structure leads to two consequences immediately. First, is that of an endogenous signal production which is the social analogue of \citet{Spence1973}'s signalling model. Since Jeffrey revision
+(Equation \ref{eq:jeffrey}) is driven by the partition weights $P'(g_k)$ that are produced by observed markers, agent $i$ has incentive to
+manipulate markers to shift $P'(g_k)$ in $j$'s revision. Second, the rigidity keeps the group standing $\bar{c}_g$ fixed
 whatever a single encounter shows. Since no encounter delivers class
 evidence independent of the marker, excluded agents learn less about
 economic opportunities than they otherwise would. The closure trap (Section~\ref{subsec:intergenerational}) is therefore also an
@@ -649,16 +647,16 @@ individual.
 
 The payoff thus defined is a consequence function in the sense that the distance
 $d(c_i,c_j)$ is maintained through budgetary incompatibility -- so that the agent never
-observes $c_i$. The agent acts on the inference from markers but without choosing an optimal response for the payoff. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against. With the Jeffrey-updated forecast, the expected payoff for the agent be stated as :
+observes $c_i$. The agent acts on the inference from markers but without choosing an optimal response for the payoff. Notice also that group membership $g$ does not enter as an argument of $U$. It enters only indirectly through the marker and the prior activated by group fixed the expected $c_i$ which the distance is computed against. With the Jeffrey-updated forecast, the expected payoff for the agent can be stated as :
 \begin{equation}
   \E[U \mid m_i] = v - \kappa \cdot \E[d(c_i, c_j) \mid m_i]
   \label{eq:exp-utility}
 \end{equation}
 
-The social engagement occurs only iff the following criterion\footnote{Notice that only the net surplus $v - \bar{u}$ enters the decision, and only through
-the threshold $\Delta^*$. In the long-term equilibrium that we consider, the surplus and the scale $\kappa$ therefore never
+The social engagement occurs only iff the following criterion is satisfied for an agent $j$\footnote{Notice that only the net surplus $v - \bar{u}$ enters the decision, and only through
+the threshold $\Delta^*$. In the long-term equilibrium, the surplus and the scale $\kappa$ therefore never
 reappear as separate parameters --  they are absorbed into the
-discrimination-rate induced by this threshold. } is satisfied for an agent $j$ :
+discrimination-rate induced by this threshold. }  :
 \begin{equation}
   \E[d(c_i, c_j) \mid m_i] \leq
   \frac{v - \bar{u}}{\kappa} \equiv \Delta^*(c_j)
@@ -666,13 +664,11 @@ discrimination-rate induced by this threshold. } is satisfied for an agent $j$ :
 \end{equation}
 
 
-
-
-To demonstrate the social distance across two groups, consider $\G = \{g_1, g_2\}$ -- host and out-group respectively -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
+To demonstrate the social distance across two groups, consider $\G = \{g_I, g_O\}$ -- host and out-group respectively -- across which the probability mass gets reassigned through Jeffrey revision (\ref{eq:jeffrey}). We parametrise the strength of that reassignment by a scalar $s_g \in [0,1]$, the probability the observer attributes the
 encountered individual to the out-group upon observing their
 markers:
 \begin{equation}
-  P'(g_2 \mid m_i) \equiv s_g
+  P'(g_O \mid m_i) \equiv s_g
   \label{eq:salience}
 \end{equation}
 \emph{Marker salience} is a property of the \emph{marker--observer
@@ -713,24 +709,24 @@ anticipated mismatch cost under certain attribution to $g_k$. It splits
 into a \emph{bias} term, the squared gap between $j$'s class $c_j$ and
 the group mean $\bar{c}_{g_k}$, and a \emph{variance} term
 $\sigma_{g_k}^2$, the within-group dispersion of class (defined in
-Appendix~\ref{app:bernoulli}). Thus $D_1$ is the cost $j$ anticipates
-against a host-group member and $D_2$ the cost against an out-group
+Appendix~\ref{app:bernoulli}). Thus $D_I$ is the cost $j$ anticipates
+against a host-group member and $D_O$ the cost against an out-group
 member, and the observed expected distance is the salience-weighted
 average of the two:
 \begin{equation}
   \begin{aligned}
   \E[d(c_i, c_j) \mid m_i]
-  &= P'(g_2 \mid m_i) \cdot D_2 + P'(g_1 \mid m_i) \cdot D_1 \\
-  &= s_g \underbrace{\left[(\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2\right]}_{D_2}
-  + (1 - s_g) \underbrace{\left[(\bar{c}_{g_1} - c_j)^2 + \sigma_{g_1}^2\right]}_{D_1}
+  &= P'(g_O \mid m_i) \cdot D_O + P'(g_I \mid m_i) \cdot D_I \\
+  &= s_g \underbrace{\left[(\bar{c}_{g_O} - c_j)^2 + \sigma_{g_O}^2\right]}_{D_O}
+  + (1 - s_g) \underbrace{\left[(\bar{c}_{g_I} - c_j)^2 + \sigma_{g_I}^2\right]}_{D_I}
   \end{aligned}
   \label{eq:Ed-salience}
 \end{equation}
 
 The first line is the standard expected-payoff form---a sum of
 conditional expected distances weighted by posterior probabilities;
-the second uses the definition $s_g \equiv P'(g_2 \mid m_i)$ from
-(\ref{eq:salience}) and the binary partition $P'(g_1 \mid m_i) = 1 -
+the second uses the definition $s_g \equiv P'(g_O \mid m_i)$ from
+(\ref{eq:salience}) and the binary partition $P'(g_I \mid m_i) = 1 -
 s_g$ to express the same expectation in the marker-salience
 shorthand used in the remainder of the paper. This is the standard bias--variance decomposition of expected squared loss -- where both the squared gap between $c_j$ and the group mean (bias) and the within-group dispersion (variance) enter the agent's expected payoff. Simply put, the within-group variance term $\sigma_{g_k}^2$ measures how far the
 group label falls short of fixing the individual. When it is low the
@@ -740,8 +736,8 @@ is close to the agent's class, within-group heterogeneity raises
 expected class distance as well as the probability that the engagement
 threshold~(\ref{eq:threshold}) is violated. When $s_g = 1$, the observer attributes the individual to the out-group with certainty and the expression reduces to the following
 \begin{equation}
-  \E[d(c_i, c_j) \mid g_2]
-  = (\bar{c}_{g_2} - c_j)^2 + \sigma_{g_2}^2
+  \E[d(c_i, c_j) \mid g_O]
+  = (\bar{c}_{g_O} - c_j)^2 + \sigma_{g_O}^2
   \label{eq:Ed-group}
 \end{equation}
 which is the workhorse expression of the model. Similarly, when $s_g = 0$,
@@ -752,130 +748,98 @@ In term of the bias and variance decomposition, the engagement threshold is viol
 distance between observer and group mean) or the within-group
 heterogeneity, weighted by marker salience, is too
 large. When the threshold (\ref{eq:threshold}) is violated, agent
-$j$ declines to engage with $i$. Roughly speaking, the discrimination mechanism has two governing
+$j$ declines to engage with $i$. Roughly speaking, this boils down to the discrimination mechanism having two governing
 parameters corresponding to the spatial and temporal dimensions of
-social observation.\footnote{\label{rem:spacetime}Every soft signal
-that enters the model is either a spatial property of the individual
-observable at the encounter or encodes temporal information
-accumulated across the group's economic history. Consequently,
-spatial interventions (reducing marker visibility through assimilation
-or ``passing'') and temporal interventions (raising the mobility
-parameter $\gamma$ above its bifurcation threshold
-$\gamma^*$ through mobility programmes) are categorically different
-and cannot substitute for each other.} Marker salience $s_g$ is a
+social observation. Marker salience $s_g$ is a
 \emph{spatial} property -- given that it is determined by what the observer
 perceives at the point of encounter---phenotype, dress, accent, body
 language---and governs \emph{whether} the Jeffrey revision fires and
 how strongly. On other hand, the group prior $\bar{c}_g$ is a \emph{temporal}
 property and is the sediment of the group's economic history across
 generations and governs \emph{what} the Jeffrey revision maps to
-once it fires. The model's central result that is elaborated in further sections is that sustained
-discrimination -- the solidification of social boundaries -- requires both spatial identifiability
-($s_g > 0$) and temporal disadvantage ($\bar{c}_g <
-\bar{c}_g^{\mathrm{mid}}$) to be activated.
+once it fires. The closure trap require both to be activated.
 
 
 \subsection{Intergenerational dynamics and the closure equilibrium}
 \label{subsec:dynamics}
 
-We now specify how the group-prior $\bar{c}_g^{t+1}$ evolves over time in the model. 
-
-The encounter between an in-group agent and a group-$g$ individual
-produces engagement or refusal according to (\ref{eq:threshold}) defines a discrimination rate $\phi^t$ as the population fraction of
-such encounters in which the threshold is violated. This rate 
-$\phi^t$ feeds back into the next generation's group prior
-$\bar{c}_g^{t+1}$ through three economic channels
-
-\begin{enumerate} 
-\item \emph{exclusion} -- refused engagements deprive group $g$ of class-improving social contact and erode the prior
-\item \emph{natural convergence}  -- an exogenous intergenerational tendency toward the population mean
-\item \emph{intergenerational mobility } -- an upward push from within-group
-heterogeneity, largest where group outcomes are most dispersed
-
+As Jeffrey conditioning assumption shifts the focus from realised frequencies to beliefs of the observer, it also allows us to look more closely at how a trap is readily generated under Jeffrey conditioning rather than Bayesian. We assume a simple model for how the group prior $\bar{c}_g^{t+1}$ evolves across
+generations. Within a generation, each encounter between an in-group
+agent and a group member ends in engagement or refusal by
+(\ref{eq:threshold}), and the discrimination rate $\phi^t$ is the
+population fraction of refusals. By the timescale separation of
+Assumption~\ref{ass:timescale} this rate settles before standing moves,
+so it enters as $\phi^t = s_g\,F(\bar{c}_g^t)$, a function of the current
+state alone, and the map is autonomous. The rate feeds the next
+generation's prior through three channels that act additively on the
+inherited standing:
+\begin{enumerate}
+\item \emph{exclusion} -- refused engagements deprive the group of
+class-improving social contact and erode the prior;
+\item \emph{natural convergence} -- an exogenous intergenerational drift
+toward the ceiling of standing;
+\item \emph{intergenerational mobility} -- an upward push from
+within-group heterogeneity, largest where the group is most internally
+dispersed.
 \end{enumerate}
 
-It is worth highlighting how within-group invariance holds the dynamics together. A group's mean standing can move across generations only in proportion to its within-group variance. A homogeneous group has no internal dispersion to act on, so its mean is inert; movement
-requires that the group hold members above and below its current mean.
-
-This is the social counterpart of a principle from quantitative
-genetics, the one behind Fisher's fundamental theorem and the breeder's
-equation \citep{Fisher1930}, that a population mean changes at a rate
-proportional to its variance. We therefore take the intergenerational
-mobility term proportional to the within-group variance $\sigma_g^2$,
-with $\gamma$ setting the rate.
-
-Combining these channels, the group prior evolves as:
+The mobility channel rests on one principle: a group's mean standing can
+move across generations only in proportion to its within-group variance.
+A homogeneous group has no internal dispersion to act on and its mean is
+inert. In other words, the movement requires members above and below the current mean. This
+is the social counterpart of the principle behind Fisher's fundamental
+theorem and the breeder's equation \citep{Fisher1930}, that a population
+mean changes at a rate proportional to its variance. Assumption~\ref{ass:beliefs}
+expresses that variance as a function of the same state,
+$\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$ (with $\nu > 0$ the
+within-group concentration parameter), so the push is
+$\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ with $\tilde{\gamma} = \gamma/(1+\nu)$.
+Summing the three channels gives a discrete-time selection--mutation
+dynamic, the exclusion drag and the variance-proportional push forming
+the selection component and convergence a baseline drift:
 \begin{equation}
   \bar{c}_g^{t+1} =
-  \underbrace{\bar{c}_g^t(1 - \delta \phi^t)}_{\text{exclusion erodes prior}}
-  + \underbrace{\mu(1 - \bar{c}_g^t)}_{\text{natural convergence}}
-  + \underbrace{\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)}_{\text{mobility from within-group heterogeneity}}
+  \underbrace{\bar{c}_g^t(1 - \delta \phi^t)}_{\text{exclusion}}
+  + \underbrace{\mu(1 - \bar{c}_g^t)}_{\text{convergence}}
+  + \underbrace{\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)}_{\text{mobility}}
   \label{eq:dynamic}
 \end{equation}
-where $\delta > 0$ is the economic cost of social exclusion per unit
-of discrimination \footnote{The parameter $\delta$ is essentially a reduced form that represents several channels of social exclusion noted in the literature. For example, the matching market channel noted by \citet{ColeMailathPostlewaite1992} that highlights the mechanism of pairing with higher-class partners. Another predominant notion is that of cultural capital \citep{Bourdieu1984} -- where
-participation in social environments builds dispositions with direct economic
-returns. The information networks also carry advantage through job referrals, mentorship, or business formation \citep{Granovetter1973}. What matters in the reduced form is that each channel converts social exclusion into a drag on intergenerational economic position.}, $\mu \in (0,1)$ is the exogenous intergenerational
-convergence rate, and $\gamma \in (0,1)$ is the intergenerational
-mobility parameter scaling the heterogeneity-driven mobility term.
-
-
-
-Consider as an example how the three channels operate for a group's economic position across generations. First, the
-exclusion-erosion term $\bar{c}_g^t(1 - \delta \phi^t)$ carries
-forward the parents' position but discounts it by the discrimination
-rate---every economic interaction prevented by discrimination
-reduces the group's economic position over time. Second, the
-natural-convergence term $\mu(1 - \bar{c}_g^t)$ is a rising tide
-that lifts the group regardless of its current position---productivity
-gains, public-good expansion, baseline improvement independent of
-group status. Third is the mobility term $\tilde{\gamma}\,\bar{c}_g^t(1-\bar{c}_g^t)$,
-the heterogeneity-driven mobility channel that gives a dispersed group
-the scope to move its standing that a uniform group lacks, and is
-largest at intermediate $\bar{c}_g$ where the within-group population is
-most heterogeneous.
-
-
-To express (\ref{eq:dynamic}) as the composed map governing the
-one-dimensional dynamics of $\bar{c}_g^t$, two further specifications
-are required: the closed
-form of the mobility term, and the closed form of the discrimination
-rate $\phi^t$.
-
-For the mobility term, Assumption~\ref{ass:beliefs} gives the within-group
-variance $\sigma_g^2 = \bar{c}_g(1-\bar{c}_g)/(1+\nu)$, where $\nu > 0$ is
-the within-group concentration parameter. Therefore the mobility term
-becomes $\tilde{\gamma}\,\bar{c}_g(1-\bar{c}_g)$ where
-$\tilde{\gamma} = \gamma/(1+\nu)$ is the effective mobility
-parameter. This term is maximised at
-group prior $\bar{c}_g = 1/2$ (maximum heterogeneity) and vanishes at $\bar{c}_g = 0$
-and $\bar{c}_g = 1$ (homogeneous group). It is the
-heterogeneity-driven mobility channel, scaling the group's scope to
-move its standing by its internal dispersion and vanishing when the
-group is uniform.
+where $\delta > 0$ is the economic cost of social exclusion per unit of
+discrimination\footnote{The parameter $\delta$ is essentially a reduced
+form that represents several channels of social exclusion noted in the
+literature. For example, the matching market channel noted by
+\citet{ColeMailathPostlewaite1992} that highlights the mechanism of
+pairing with higher-class partners. Another predominant notion is that of
+cultural capital \citep{Bourdieu1984} -- where participation in social
+environments builds dispositions with direct economic returns. The
+information networks also carry advantage through job referrals,
+mentorship, or business formation \citep{Granovetter1973}. What matters in
+the reduced form is that each channel converts social exclusion into a
+drag on intergenerational economic position.}, $\mu \in (0,1)$ is the
+exogenous convergence rate, and an exogenous\footnote{If $\gamma$ were endogenous---decreasing in
+the discrimination rate $\phi$ through reduced access to education,
+mentorship, and opportunity networks---the closure trap would be more
+severe and the bifurcation threshold $\gamma^*$ harder to reach. The stated $\gamma^*$ understates the required mobility intervention, because in the trap basin
+$\gamma$ would be endogenously depressed, making the threshold
+a moving target that recedes as discrimination intensifies. The policy implication is thus sharper than stated -- as the
+required intervention must be larger than stated by the exogenous model assumption.} $\gamma \in (0,1)$ scales the
+heterogeneity-driven mobility term.
 
 Within-group dispersion therefore does two things at once. In the
 engagement decision it is the inference penalty that widens expected
-social distance and raises exclusion. In the law of motion it scales
-the upward mobility term $\gamma\,\sigma_g^2$, which raises the group
-prior. The two pull in opposite directions on the group, one excluding
-and one lifting, and whether a group's standing actually rises is the
-contest between this upward push, together with the convergence $\mu$,
-and the downward exclusion drag $\delta\phi$. The variance is on the
-upward side of that contest, not neutral between the sides.
+social distance and raises exclusion; in the law of motion it scales the
+upward mobility term $\gamma\,\sigma_g^2$, which raises the prior. Whether
+a group's standing rises is the contest between this upward push together
+with convergence $\mu$, and the downward exclusion drag $\delta\phi$ --
+the variance sits on the upward side, not neutral between them. Because
+$\sigma_g^2$ vanishes as $\bar{c}_g \to 0$, a severely depressed group has
+almost no variance for mobility to act on. This is because its mean is close to frozen
+regardless of $\gamma$, leaving only convergence $\mu$ against exclusion.
 
-Because $\sigma_g^2$ vanishes as $\bar{c}_g \to 0$, a severely depressed
-group has almost no within-group variance for mobility to act on. Its
-mean is close to frozen regardless of $\gamma$, leaving only the
-exogenous convergence $\mu$ against exclusion, which is part of why the
-low fixed point is absorbing.
-
-The discrimination rate $\phi^t$ is determined by the engagement threshold (\ref{eq:threshold}),
-modulated by marker salience $s_g$
-(Remark~\ref{rem:salience}) as $\phi^t = s_g \cdot F(\bar{c}_g^t)$ , where $F: [0,1] \to [0,1]$ is
-the group-level discrimination rate function induced by the
-threshold: when $s_g = 0$, markers are
-invisible and no discrimination fires.
+The discrimination rate is $\phi^t = s_g\,F(\bar{c}_g^t)$
+(Remark~\ref{rem:salience}), where $F:[0,1] \to [0,1]$ is the group-level
+discrimination-rate function induced by the threshold; when $s_g = 0$
+markers are invisible and no discrimination fires.
 \begin{assumption}[Discrimination-rate regularity]
 \label{ass:Freg}
 $F$ is $C^1$, strictly decreasing, and convex on $[0,1]$ with
@@ -883,22 +847,7 @@ $F(1)=F'(1)=0$; the canonical form $F(\bar{c}_g)=(1-\bar{c}_g)^2$
 satisfies it.
 \end{assumption}
 
-\begin{assumption}[Exogenous mobility and convergence]
-\label{ass:exog}
-The mobility rate $\gamma$ and the convergence rate $\mu$ are
-exogenous---independent of the discrimination rate $\phi^t$ and of
-salience $s_g$. Mobility captures within-group variance arising from
-talent, effort, and wealth shocks, independent of the group's social
-position.
-\end{assumption}
 
-This is a conservative choice. If $\gamma$ were endogenous---decreasing in
-the discrimination rate $\phi$ through reduced access to education,
-mentorship, and opportunity networks---the closure trap would be more
-severe and the bifurcation threshold $\gamma^*$ harder to reach. The stated $\gamma^*$ understates the required mobility intervention, because in the trap basin
-$\gamma$ would be endogenously depressed, making the threshold
-a moving target that recedes as discrimination intensifies. The policy implication is thus sharper than stated -- as the
-required intervention must be larger than stated by the exogenous model assumption.
 
 \textbf{Composed Map} The above mechanism implies closure trap as a low-level equilibrium in which discrimination keeps a group economically depressed, and that depressed position in turn sustains the discrimination, so beliefs and outcomes reproduce one another across generations. Raising intergenerational mobility above a threshold breaks this loop, leaving the integration equilibrium as the only stable outcome.
 
@@ -962,7 +911,7 @@ induces mutually consistent.
 
 \begin{proposition}[Class closure in a homogeneous society]
 \label{prop:class-closure}
-In the single-group model ($\G = \{g_1\}$), markers signal class
+In the single-group model ($\G = \{g\}$), markers signal class
 position directly. For sufficiently small $\gamma$ and sufficiently
 large $\delta$, the map $\mathcal{H}$ has at least three self-confirming
 equilibria, a low standing $\bar{c}_g^{\mathrm{low}}$ and the integrated
@@ -1057,14 +1006,14 @@ Higher marker salience amplifies expected incompatibility when the
 out-group is economically disadvantaged:
 \[
   \frac{\partial \E[d(c_i, c_j) \mid m_i]}{\partial s_g}
-  = D_2 - D_1 > 0
-  \quad \text{when } \bar{c}_{g_2} < \bar{c}_{g_1}.
+  = D_O - D_I > 0
+  \quad \text{when } \bar{c}_{g_O} < \bar{c}_{g_I}.
 \]
 Two groups with identical economic histories $\bar{c}_g$ face
 different closure dynamics if their marker salience differs. Marker
 salience and economic history are jointly necessary for sustained
 discrimination: $s_g = 0$ eliminates discrimination regardless of
-$\bar{c}_g$, and $\bar{c}_{g_2} = \bar{c}_{g_1}$ eliminates
+$\bar{c}_g$, and $\bar{c}_{g_O} = \bar{c}_{g_I}$ eliminates
 discrimination regardless of $s_g$.
 \end{remark}
 
@@ -1142,29 +1091,29 @@ implicit differentiation of the saddle-node conditions yields
 $d\tilde{\gamma}^*/ds_g > 0$. See Appendix~\ref{app:proofs}.
 
 \begin{definition}[Outsider group]
-Group $g_2$ is an outsider group relative to host group $g_1$ if
-$\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$---their prior starts
+Group $g_O$ is an outsider group relative to host group $g_I$ if
+$\bar{c}_{g_O}^0 < \bar{c}_g^{\mathrm{mid}}$---their prior starts
 in the high-discrimination basin.
 \end{definition}
 
 The outsider group's integration trajectory depends on two dimensions:
-economic history ($\bar{c}_{g_2}^0$) and marker salience ($s_g$).
-A group with low $\bar{c}_{g_2}^0$ but also low $s_g$---phenotypically
+economic history ($\bar{c}_{g_O}^0$) and marker salience ($s_g$).
+A group with low $\bar{c}_{g_O}^0$ but also low $s_g$---phenotypically
 similar to the host, with mutable cultural markers---may escape
 the trap rapidly because the discrimination channel fires weakly.
-A group with comparable $\bar{c}_{g_2}^0$ but high marker salience $s_g$---visibly
+A group with comparable $\bar{c}_{g_O}^0$ but high marker salience $s_g$---visibly
 distinct, with immutable phenotypic markers---faces a structurally
 harder path.
 
 \begin{proposition}[Outsider trap]
 \label{prop:enemy}
-If $g_2$ enters with $\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$
+If $g_O$ enters with $\bar{c}_{g_O}^0 < \bar{c}_g^{\mathrm{mid}}$
 and $s_g$ sufficiently high that $\tilde{\gamma} <
-\tilde{\gamma}^*(s_g)$, then $g_2$ converges to the
-high-discrimination equilibrium $\bar{c}_g^{\mathrm{low}}(g_2)$ independently
-of $g_1$'s trajectory, and $g_1$'s equilibrium is unaffected.
+\tilde{\gamma}^*(s_g)$, then $g_O$ converges to the
+high-discrimination equilibrium $\bar{c}_g^{\mathrm{low}}(g_O)$ independently
+of $g_I$'s trajectory, and $g_I$'s equilibrium is unaffected.
 If $s_g$ is sufficiently low that $\tilde{\gamma} >
-\tilde{\gamma}^*(s_g)$, the trap does not exist and $g_2$
+\tilde{\gamma}^*(s_g)$, the trap does not exist and $g_O$
 converges to the integration equilibrium regardless of initial
 economic position.
 \end{proposition}
@@ -1373,7 +1322,7 @@ being not a refusal to learn but the absence of anything coherent to learn
 from---though not across generations, where mobility above $\gamma^*$
 dissolves it.
 Racial discrimination enters as a perturbation of this already-operating
-equilibrium --- a second group whose group prior $\bar{c}_{g_2}$
+equilibrium --- a second group whose group prior $\bar{c}_{g_O}$
 starts in the high-discrimination basin --- not, within this regime, a separate
 phenomenon requiring separate explanation. This holds only where
 soft-marker inference leaves the stereotype unchanged; where an
@@ -1567,25 +1516,25 @@ $\Psi_{\tilde{\gamma}} = \bar{c}_g(1 - \bar{c}_g) > 0$ on $\bar{c}_g \in
 \begin{proof}[Proof of Proposition~\ref{prop:enemy}]
 In the bilateral model the map governing a group's intergenerational
 prior depends only on that group's own state and marker salience,
-$\bar{c}_{g_2}^{t+1} = \mathcal{H}(\bar{c}_{g_2}^t; s_g)$, with no argument
-drawn from $g_1$'s prior. The dynamics of $g_2$ are therefore
+$\bar{c}_{g_O}^{t+1} = \mathcal{H}(\bar{c}_{g_O}^t; s_g)$, with no argument
+drawn from $g_I$'s prior. The dynamics of $g_O$ are therefore
 autonomous, and the fixed-point structure of
 Proposition~\ref{prop:class-closure} together with the bifurcation of
-Proposition~\ref{prop:bifurcation} applies to $g_2$ at its own
-$(\bar{c}_{g_2}, s_g)$. When $s_g$ is high enough that
+Proposition~\ref{prop:bifurcation} applies to $g_O$ at its own
+$(\bar{c}_{g_O}, s_g)$. When $s_g$ is high enough that
 $\tilde{\gamma} < \tilde{\gamma}^*(s_g)$
-(Corollary~\ref{cor:salience-threshold}), the trap persists for $g_2$:
+(Corollary~\ref{cor:salience-threshold}), the trap persists for $g_O$:
 its map retains the stable low fixed point
-$\bar{c}_g^{\mathrm{low}}(g_2)$ and the unstable tipping point
+$\bar{c}_g^{\mathrm{low}}(g_O)$ and the unstable tipping point
 $\bar{c}_g^{\mathrm{mid}}$. An outsider group entering with
-$\bar{c}_{g_2}^0 < \bar{c}_g^{\mathrm{mid}}$ lies in the low basin, and
+$\bar{c}_{g_O}^0 < \bar{c}_g^{\mathrm{mid}}$ lies in the low basin, and
 monotonicity of $\mathcal{H}$ on $(0, \bar{c}_g^{\mathrm{mid}})$ carries its
-orbit to $\bar{c}_g^{\mathrm{low}}(g_2)$. Since $g_1$'s map is likewise
-autonomous, $g_1$'s equilibrium is unaffected. When instead $s_g$ is
+orbit to $\bar{c}_g^{\mathrm{low}}(g_O)$. Since $g_I$'s map is likewise
+autonomous, $g_I$'s equilibrium is unaffected. When instead $s_g$ is
 low enough that $\tilde{\gamma} > \tilde{\gamma}^*(s_g)$, the saddle-node
 has already eliminated the low basin
 (Proposition~\ref{prop:bifurcation}), so the unique fixed point is
-$\bar{c}_g = 1$ and $g_2$ converges to integration from any initial
+$\bar{c}_g = 1$ and $g_O$ converges to integration from any initial
 economic position. \qed
 \end{proof}
 
@@ -1655,7 +1604,7 @@ platform identifies a second, operating at the institutional level and
 independent of the first, even when bilateral encounters generate no
 persistence.
 
-For a $g_1$ client $j$, experience payoff at a venue with attendee
+For a $g_I$ client $j$, experience payoff at a venue with attendee
 set $\A$ is:
 \begin{equation}
   V_j(\A) = \alpha \cdot q + (1 - \alpha) \cdot S_j(\A)
@@ -1751,29 +1700,29 @@ $\partial \Omega_j / \partial s_g > 0$. \qed
 
 \begin{proposition}[Platform exclusion of outsider group]
 \label{prop:exclusion}
-At the outsider group's entry prior $\bar{c}_{g_2}^0$, the platform
-optimally excludes $g_2$ entirely:
-$\sigma^*(m) = 0$ for all $m \in \M_{g_2}$.
+At the outsider group's entry prior $\bar{c}_{g_O}^0$, the platform
+optimally excludes $g_O$ entirely:
+$\sigma^*(m) = 0$ for all $m \in \M_{g_O}$.
 \end{proposition}
 
 \begin{proof}
 The platform's first-order condition with respect to
-$\sigma(m)$ for $m \in \M_{g_2}$ decomposes into two terms. The
-direct revenue effect is the marginal willingness-to-pay $W(g_2)$ of
-an admitted $g_2$ member. The composition externality is the
-aggregated drop in social-quality perception across the $n_{g_1}$
+$\sigma(m)$ for $m \in \M_{g_O}$ decomposes into two terms. The
+direct revenue effect is the marginal willingness-to-pay $W(g_O)$ of
+an admitted $g_O$ member. The composition externality is the
+aggregated drop in social-quality perception across the $n_{g_I}$
 host clients on the platform, weighted by $(1 - \alpha)$ from
-equation~(\ref{eq:experience}): admitting one additional $g_2$
+equation~(\ref{eq:experience}): admitting one additional $g_O$
 member shifts each host's $S_j(\mathcal{A})$ by
-$(\bar{c}_{g_2} - \bar{c}_{g_1})/|\mathcal{A}| < 0$. The net
+$(\bar{c}_{g_O} - \bar{c}_{g_I})/|\mathcal{A}| < 0$. The net
 marginal profit is therefore
 \[
   \frac{\partial \Pi}{\partial \sigma(m)} \;=\;
-  W(g_2) \;+\; n_{g_1} (1 - \alpha)
-  \cdot \frac{\bar{c}_{g_2} - \bar{c}_{g_1}}{|\mathcal{A}|}.
+  W(g_O) \;+\; n_{g_I} (1 - \alpha)
+  \cdot \frac{\bar{c}_{g_O} - \bar{c}_{g_I}}{|\mathcal{A}|}.
 \]
-At the entry prior $\bar{c}_{g_2}^0$, the gap
-$\bar{c}_{g_1} - \bar{c}_{g_2}^0$ is large and $W(g_2)$ is bounded
+At the entry prior $\bar{c}_{g_O}^0$, the gap
+$\bar{c}_{g_I} - \bar{c}_{g_O}^0$ is large and $W(g_O)$ is bounded
 above by the willingness-to-pay of a low-class admittee. The
 externality term dominates and the derivative is negative, so the
 platform's optimum is the corner $\sigma^*(m) = 0$.
@@ -1784,19 +1733,19 @@ platform's optimum is the corner $\sigma^*(m) = 0$.
 \label{prop:tokenism}
 The platform exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ satisfies
 $\bar{c}_g^{\mathrm{excl}} < \bar{c}_g^{\mathrm{mid}}$: the platform begins
-admitting $g_2$ members \emph{before} they have escaped the
+admitting $g_O$ members \emph{before} they have escaped the
 high-discrimination basin, creating a partial inclusion zone
-$[\bar{c}_g^{\mathrm{excl}}, \bar{c}_g^{\mathrm{mid}}]$ in which $g_2$ has
+$[\bar{c}_g^{\mathrm{excl}}, \bar{c}_g^{\mathrm{mid}}]$ in which $g_O$ has
 platform access but not social integration.
 \end{proposition}
 
 \begin{proof}
 The exclusion threshold $\bar{c}_g^{\mathrm{excl}}$ is the value of
-$\bar{c}_{g_2}$ at which the platform's FOC (proof of
+$\bar{c}_{g_O}$ at which the platform's FOC (proof of
 Proposition~\ref{prop:exclusion}) just balances:
 \[
-  W(g_2) \;=\; n_{g_1} (1 - \alpha)
-  \cdot \frac{\bar{c}_{g_1} - \bar{c}_g^{\mathrm{excl}}}{|\mathcal{A}|}
+  W(g_O) \;=\; n_{g_I} (1 - \alpha)
+  \cdot \frac{\bar{c}_{g_I} - \bar{c}_g^{\mathrm{excl}}}{|\mathcal{A}|}
 \]
 This is set by the platform's local marginal calculation---the
 average class signal inside the platform. The social tipping point
@@ -1820,34 +1769,34 @@ host equilibrium when the host group is near its own tipping point.
 
 \begin{proposition}[Host destabilisation]
 \label{prop:spillover}
-If $g_1$'s equilibrium prior $\bar{c}_{g_1}^*$ is close to
-$\bar{c}_g^{\mathrm{mid}}$, the platform's admission of $g_2$ members
-at $\bar{c}_g^{\mathrm{excl}}$ can push $g_1$ below its own tipping
+If $g_I$'s equilibrium prior $\bar{c}_{g_I}^*$ is close to
+$\bar{c}_g^{\mathrm{mid}}$, the platform's admission of $g_O$ members
+at $\bar{c}_g^{\mathrm{excl}}$ can push $g_I$ below its own tipping
 point, triggering a class-closure episode within the host group. The
-critical $g_2$ fraction $\eta_{\mathrm{crit}}$ is decreasing in the
+critical $g_O$ fraction $\eta_{\mathrm{crit}}$ is decreasing in the
 spillover sensitivity parameter $\varepsilon$.
 \end{proposition}
 
 \begin{proof}
-Admitting $g_2$ members at fraction $\eta$ on the platform lowers
-the local average class signal observed by $g_1$ clients by
-$\eta \cdot (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})$. The
+Admitting $g_O$ members at fraction $\eta$ on the platform lowers
+the local average class signal observed by $g_I$ clients by
+$\eta \cdot (\bar{c}_{g_I}^* - \bar{c}_{g_O}^{\mathrm{excl}})$. The
 spillover sensitivity $\varepsilon \in (0, 1]$ measures the fraction
-of this local shift that transmits to $g_1$'s effective system-wide
+of this local shift that transmits to $g_I$'s effective system-wide
 prior through repeated platform encounters:
-$\bar{c}_{g_1}^{\mathrm{eff}} = \bar{c}_{g_1}^*
-- \varepsilon \eta (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})$.
+$\bar{c}_{g_I}^{\mathrm{eff}} = \bar{c}_{g_I}^*
+- \varepsilon \eta (\bar{c}_{g_I}^* - \bar{c}_{g_O}^{\mathrm{excl}})$.
 The host group crosses its tipping point when
-$\bar{c}_{g_1}^{\mathrm{eff}} = \bar{c}_g^{\mathrm{mid}}$, giving
+$\bar{c}_{g_I}^{\mathrm{eff}} = \bar{c}_g^{\mathrm{mid}}$, giving
 \[
   \eta_{\mathrm{crit}}
-  \;=\; \frac{\bar{c}_{g_1}^* - \bar{c}_g^{\mathrm{mid}}}
-  {\varepsilon \cdot (\bar{c}_{g_1}^* - \bar{c}_{g_2}^{\mathrm{excl}})}
+  \;=\; \frac{\bar{c}_{g_I}^* - \bar{c}_g^{\mathrm{mid}}}
+  {\varepsilon \cdot (\bar{c}_{g_I}^* - \bar{c}_{g_O}^{\mathrm{excl}})}
 \]
 whose derivative
 $\partial \eta_{\mathrm{crit}} / \partial \varepsilon$ is strictly
-negative when $\bar{c}_{g_1}^*$ exceeds both $\bar{c}_g^{\mathrm{mid}}$
-and $\bar{c}_{g_2}^{\mathrm{excl}}$, the configuration of interest.
+negative when $\bar{c}_{g_I}^*$ exceeds both $\bar{c}_g^{\mathrm{mid}}$
+and $\bar{c}_{g_O}^{\mathrm{excl}}$, the configuration of interest.
 \qed
 \end{proof}
 
