@@ -111,16 +111,20 @@ The headcount of sequence-affected individuals remains $\bigO(c)$, so an aggrega
 benchmark does not license the inference that its members are Bayesian.
 \end{abstract}
 
-\begin{highlights}
-\item Sequential Jeffrey updating on correlated soft cues is $O(c)$ order-dependent.
-\item Mean believed association and surplus-weighted welfare loss are $O(c^2)$; the headcount is $O(c)$.
-\item The believed association is the unique smooth statistic protected to second order.
-\item Protection is structural (separability), not statistical (noise cancellation).
-\item Aggregate Bayes-conformity does not certify member-level Bayesian rationality.
-\end{highlights}
+%% Highlights removed per author (2026-07-11): JME's own guide could not be fetched to
+%% confirm whether Highlights are requested; block commented out rather than deleted so it
+%% is recoverable if the guide turns out to require them. If restored, bullet 2 is already
+%% trimmed to <=85 chars, and Highlights must ship as a separate editable file at submission.
+%\begin{highlights}
+%\item Sequential Jeffrey updating on correlated soft cues is $O(c)$ order-dependent.
+%\item Mean association and surplus-weighted welfare loss are $O(c^2)$; headcount is $O(c)$.
+%\item The believed association is the unique smooth statistic protected to second order.
+%\item Protection is structural (separability), not statistical (noise cancellation).
+%\item Aggregate Bayes-conformity does not certify member-level Bayesian rationality.
+%\end{highlights}
 
 \begin{keyword}
-Jeffrey conditioning \sep probability kinematics \sep belief aggregation \sep separation of scales \sep order effects \sep welfare measurement
+Jeffrey conditioning \sep probability kinematics \sep belief aggregation \sep scale separation \sep order effects \sep welfare measurement
 \JEL C11 \sep D81 \sep D83 \sep D63
 \end{keyword}
 
@@ -202,7 +206,9 @@ mean is genuinely first order, and the headcount of sequence-affected individual
 as well (Proposition~\ref{prop:C2}). The instrumental consequence is immediate: an instrument
 built from the protected aggregates has one order less resolution than the phenomenon it would
 detect, and what an audit registers is settled by which statistic it aggregates, not by how much
-data it collects.
+data it collects. Put in terms of rationality rather than measurement: a population can look
+aggregate-Bayesian---benchmark-conforming on every protected statistic---while no member is
+Bayesian, each diverging at first order.
 
 The scope is deliberately minimal. The model has two binary attributes, two attribute-local soft
 cues, and works at leading order in the feasibility-bounded prior covariance $c$; two cues is
@@ -230,9 +236,14 @@ short and given in the text.
 \label{sec:decision}
 
 Two binary attributes $(A,B)\in\{0,1\}^{2}$---competence and trustworthiness, say---are each
-present or absent, so beliefs live on the joint four-cell state space: a point in the
-probability simplex $\Delta^{3}$ \anchor{Setup}. The joint space is the load-bearing choice; a
-cross-attribute association exists only on the joint law, never on its two marginals separately.
+present or absent, so a belief assigns probability to the four configurations at once: it is a
+\emph{joint law}, a single distribution over the pairs $(i,j)$---a point in the probability
+simplex $\Delta^{3}$---rather than a pair of one-attribute distributions \anchor{Setup}. The
+distinction motivates the term and is the load-bearing choice. The two marginal laws record only
+how likely each attribute is on its own, and fixed marginals leave a whole family of joint laws
+open, its members differing precisely in how the attributes are believed to co-move; a
+cross-attribute association therefore exists only on the joint law, never on its two marginals
+separately.
 The prior $P$ is the evaluator's subjective credence, before any cue arrives, over the joint
 attributes of a randomly drawn candidate. We coordinatize $\Delta^{3}$ by the marginals
 $P(A{=}0)=\alpha$, $P(B{=}0)=\beta$ and the covariance $c$---a change of coordinates on the
@@ -252,12 +263,12 @@ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition, and no cue bears on a
 Each impression is a delivered credence, not a likelihood. The independent product of the two
 impressions is written $q\otimes r$, with $(q\otimes r)_{ij}=q_{i}r_{j}$ \anchor{Setup}.
 
-A desirability vector $\vv=(v_{ij})$ gives the score
+A desirability vector $\vv=(v_{ij})_{i,j\in\{0,1\}}$---one entry per state-space cell, the same shape as $P$---gives the score
 $s(P)=\langle\vv,P\rangle=\sum_{ij}v_{ij}P(i,j)$; the evaluator engages if and only if
 $s(P)\ge\tau$ \anchor{Setup}. Thresholding the score is expected-utility maximization at a given
 belief: $s(P)$ is the expected desirability of engaging and $\tau$ the value of the outside
-option. We take the posterior $\PB$ constructed in Section~\ref{sec:jeffrey} as the welfare
-benchmark. Its status is declared, not asserted: it conditions once on the impressions'
+option. We take the posterior $\PB$---the Bayes-factor benchmark, constructed in
+Section~\ref{sec:jeffrey}---as the welfare benchmark. Its status is declared, not asserted: it conditions once on the impressions'
 likelihood content matched from the prior marginals \citep{Wagner2002}, it coincides with the
 single-impression Jeffrey update (established below as Proposition~\ref{prop:A1}), and it is order-free by
 construction; the \emph{welfare-optimal} action is \emph{defined} as engaging exactly when
@@ -268,7 +279,10 @@ $|u|$.
 
 The welfare object of the paper is the population aggregate of these stakes:
 $L(c)$, the expected foregone surplus, across evaluators and the sequence distribution, of the
-Jeffrey decision relative to the benchmark decision \anchor{Thm.~B2}. It is the evaluators' own
+Jeffrey decision relative to the benchmark decision \anchor{Thm.~B2}---that is, the expectation
+of $|u|$ over those whose decision the sequence actually changes, and zero for everyone else. As
+the band picture following Theorem~\ref{thm:B2} shows, that restriction is what turns an
+$\bigO(c)$ individual effect into an $\bigO(c^{2})$ aggregate. It is the evaluators' own
 criterion (expected desirability) evaluated at the declared benchmark law---a single-agent
 regret quantity, not a Pareto, total-surplus, or social-welfare-function object: no allocation
 is traded across agents and no first-best efficiency is claimed. The weight $|u|$ is a surplus
@@ -424,7 +438,6 @@ $Z:=\alpha\beta(1-\alpha)(1-\beta)>0$, the leading individual gap has the rank-o
    =\kappa\; q\otimes(1,-1),
   \qquad
   \kappa=\frac{(\alpha-q_0)\,r_0(1-r_0)}{Z}.
-  \tag{A2}
 \]
 \anchor{Prop.~A2}
 \end{proposition}
@@ -456,9 +469,49 @@ covary, the earlier cue's influence is not erased by the later one, and the resi
 $\bigO(c)$. \anchor{Prop.~A2}
 \end{remark}
 
+\begin{remark}[economic reading at the individual level]\label{rem:econmicro}
+Read Proposition~\ref{prop:A2} through the hiring vignette of the introduction: two otherwise
+identical panels work the same file---a credential bearing on competence, a reference letter
+bearing on trustworthiness---in opposite orders. If the panels take the attributes to be
+independent, the two orders agree with each other and with the benchmark exactly
+(Proposition~\ref{prop:A1}); everything below is proportional to $c$, the strength with which
+competence and trustworthiness are believed to go together before the file is opened
+\anchor{Prop.~A2}. The scalar $\kappa$ then prices the configuration. The panels depart from
+the benchmark at first order only when the credential genuinely surprises---$q_{0}\neq\alpha$,
+the impression departing from the prior base rate---and only when the letter leaves a genuinely
+soft impression---$r_{0}(1-r_{0})>0$, neither glowing nor damning enough to be decisive
+\anchor{Prop.~A2}; a credential that merely confirms what the panel already assumed, or a
+letter read as dispositive, kills the leading term. Where the departure lives is equally
+specific (Remark~\ref{rem:structure}): to first order the credential-first panel holds the
+benchmark view of \emph{how likely} competence is and departs only in what competence is taken
+to \emph{imply about} trustworthiness---the conditional reading of the file, not its headline
+rate. The sequence effect is the two panels' disagreement with each other: whichever evidence a
+panel happens to read first leaves a residue the later evidence does not erase, and even in the
+fully symmetric configuration ($\alpha=\beta$, $q_{0}=r_{0}$) the residue survives in the
+antisymmetric cells, moving the score whenever $v_{01}\neq v_{10}$
+(Remark~\ref{rem:structure}). Its direction reverses when the reading order flips
+\anchor{Prop.~A2}---set by the encounter and the cue--prior geometry, not by any attribute of
+the candidate, as the introduction's clarification already fixed. What that moving score costs
+when it crosses a threshold is the subject of Section~\ref{sec:aggregation}.
+\end{remark}
+
 
 \section{Aggregation and the separation of scales}
 \label{sec:aggregation}
+
+Every individual leaves Section~\ref{sec:individual} at first order from the benchmark
+(Proposition~\ref{prop:A2}); this section asks what of that divergence a population shows. The
+naive expectation is inheritance: the score perturbation entering each threshold decision is
+linear in the individual gap (Lemma~\ref{lem:B1} below), so a first-order cause should leave a
+first-order aggregate trace. The results of the section are that it does not, and that the
+suppression is selective. The surplus-weighted welfare loss is second order
+(Theorem~\ref{thm:B2}), and so is the mean believed association (Proposition~\ref{prop:C1});
+the protection is then shown to be a characterization rather than a pair of coincidences---to
+first order, the association is the only statistic aggregation protects
+(Proposition~\ref{prop:C3})---and the boundary is drawn by the headcount of sequence-affected
+individuals, which remains first order (Proposition~\ref{prop:C2}). The ascent runs from
+welfare through belief to the characterization, and closes on the split the characterization
+explains.
 
 \subsection{Welfare}
 \label{sec:welfare}
@@ -528,8 +581,19 @@ association is $c$ (Section~\ref{sec:decision}). A \emph{stereotype}, in the sen
 paper, is a believed association absent from---or in excess of---the benchmark: a nonzero
 $\assoc(\Pbar)-\assoc(\PB)$ \anchor{Prop.~C1}.
 
-The engine of this section's results is a structural fact that is worth stating once, at full
-generality, because nothing in it is specific to Jeffrey conditioning or to two cues.
+The engine of the dependence-side protection is a structural fact worth stating once, at full
+generality, because nothing in it is specific to Jeffrey conditioning or to two cues. It
+carries three loads in what follows. It is the operative step in the proof of
+Proposition~\ref{prop:C1}: every updating route in the model composes to a separable
+reweighting, and a separable reweighting can only rescale an association, never shift it. It is
+the source of the result's two morals---that the suppression is structural rather than a
+cancellation of terms, and that it is not Jeffrey's property but attribute-locality's, holding
+for any updating rule whose steps read one attribute at a time
+(Remark~\ref{rem:mechanism})---and, because it holds at every $N$, of the general-$N$ reach
+claimed in Section~\ref{sec:conclusion}. And it is what makes Assumption~\ref{as:local}
+load-bearing rather than decorative (Section~\ref{sec:scope}). The welfare law rests on a
+different mechanism entirely---the band picture of Theorem~\ref{thm:B2}---so the lemma is the
+engine of the belief-level results, not of the section wholesale.
 
 \begin{lemma}[separability of attribute-local composites]\label{lem:sep}
 Fix any number $N$ of binary attributes and a joint prior $P$ over $\{0,1\}^{N}$. Any finite
@@ -544,14 +608,50 @@ term of any order. \anchor{Lem.~SEP}
 \end{lemma}
 
 \begin{proof}
-A Jeffrey update on attribute $a$ to impression $q$ multiplies each cell mass by
-$q_{x_a}/P(A_a{=}x_a)$, a factor depending on the configuration $x$ only through the single
-coordinate $x_{a}$. Reweightings of the form $\prod_{a}g_{a}(x_{a})$ are closed under
-multiplication by any such single-coordinate factor: the new factor folds into the $a$-th
-function and leaves every other function untouched. Induction on the length of the update
-sequence, starting from the trivial reweighting, completes the proof. No step ever couples two
-coordinates, so no interaction term arises---at any $N$, and for any updating rule whose steps
-reweight through a single attribute's partition.\footnote{The lemma is additionally
+Write the update sequence as $P_{0}=P$ and, for $t=1,\dots,T$,
+\[
+  P_{t}(x)=P_{t-1}(x)\,h_{t}(x_{a_{t}}),
+\]
+where $a_{t}$ is the attribute the $t$-th update reads and $h_{t}$ is a nonnegative function
+of that single coordinate. Jeffrey updates have exactly this form: the step on attribute $a$
+to impression $q$ multiplies each cell mass by $h(x_{a})=q_{x_{a}}/P_{t-1}(A_{a}{=}x_{a})$,
+and although this factor is state-dependent---its normalizer reads the \emph{current} law's
+marginal---it depends on the configuration $x$ only through the coordinate $x_{a}$, which is
+all the argument uses.
+
+We claim, by induction on $t$, that
+$P_{t}(x)=P(x)\prod_{a=1}^{N}g^{(t)}_{a}(x_{a})$ for some single-attribute functions
+$g^{(t)}_{a}$. The base case $t=0$ holds with $g^{(0)}_{a}\equiv1$. For the inductive step,
+suppose the claim at $t-1$; then
+\[
+  P_{t}(x)
+  =P(x)\Big[\prod_{a}g^{(t-1)}_{a}(x_{a})\Big]h_{t}(x_{a_{t}})
+  =P(x)\prod_{a}g^{(t)}_{a}(x_{a}),
+  \qquad
+  g^{(t)}_{a}:=
+  \begin{cases}
+    g^{(t-1)}_{a}\cdot h_{t}, & a=a_{t},\\[2pt]
+    g^{(t-1)}_{a}, & a\neq a_{t}:
+  \end{cases}
+\]
+the new factor folds into the $a_{t}$-th function and every other function is untouched. No
+step ever couples two coordinates, so the separable form survives each step; taking
+$g_{a}:=g^{(T)}_{a}$ gives the displayed form.
+
+For the equivalent formulation, on the common support (cells with $P(x)>0$ and every
+accumulated factor positive) take logarithms:
+\[
+  \log\frac{P'(x)}{P(x)}=\sum_{a=1}^{N}\log g_{a}(x_{a}),
+\]
+an additive function of the individual coordinates. In the log-linear expansion of a function
+on $\{0,1\}^{N}$---the unique decomposition
+$\varphi(x)=\lambda_{\emptyset}+\sum_{a}\lambda_{a}(x_{a})
++\sum_{a<b}\lambda_{ab}(x_{a},x_{b})+\cdots$ under the usual identifiability
+conventions---a sum of single-coordinate functions has every term of order two and higher
+identically zero, and conversely. ``Separable reweighting'' and ``no interaction term of any
+order in $\log(P'/P)$'' are therefore the same condition. Nothing in the argument is specific
+to Jeffrey updating, to $N=2$, or to the length of the update
+sequence.\footnote{The lemma is additionally
 machine-verified at general $N$ in Lean~4/Mathlib (the universal quantification over $N$ and
 over the update sequence is kernel-checked); the proof script forms part of the paper's
 verification materials.}
@@ -629,16 +729,41 @@ because both updates reweight separably, and a separable reweighting only rescal
 association already present. What ordering shifts at first order is the level: the pool's
 average perceived competence drifts at $\bigO(c)$, with sign $\sgn(r_0-\beta)$---sign-indefinite
 across cue--base-rate configurations, and outside the protected class
-(Proposition~\ref{prop:C3}). A survey of the panels' joint beliefs would thus find the
-association at its benchmark value while the base rates sit off at first order---the footprint
-of sequencing lives in levels, not in the believed relationship.
+(Proposition~\ref{prop:C3}). Picture, then, what an outside observer would find who surveyed
+these panels' joint beliefs and compared them against the benchmark. Along the association
+axis, the two would agree to first order: the average believed relationship between competence
+and trustworthiness would sit at essentially its benchmark value, with any discrepancy of order
+$c^{2}$. Along the base-rate axis they would not: the average perceived level of either
+attribute would be displaced from the benchmark already at order $c$. The two coordinates of
+the belief thus behave differently under the same sequencing noise---the relationship is held,
+the levels are moved---and it is only in the levels that the observer could read off any trace
+of the ordering at all. The footprint of sequencing lives in levels, not in the believed
+relationship.
 \end{remark}
 
 \subsection{The protected class}
 \label{sec:protected}
 
-The protection just established is not one property of one statistic but a
-characterisation: to first order, the association is the only thing aggregation protects.
+The economic reading exhibited one protected statistic and one unprotected one. Protected: the
+mean believed association, whose distortion is second order. \emph{Protection}, throughout,
+means exactly this---the aggregate's first-order coefficient vanishes identically, so the
+statistic sits within $\bigO(c^{2})$ of its benchmark value even though every member of the
+population is $\bigO(c)$ away (Propositions~\ref{prop:A2} and~\ref{prop:C1}). The association
+is protected because every updating route in the model is a separable reweighting, and a
+separable reweighting can only rescale an association, never shift it
+(Lemma~\ref{lem:sep}, Remark~\ref{rem:mechanism}). Unprotected: the mean perceived base rate,
+displaced already at $\bigO(c)$ with sign $\sgn(r_{0}-\beta)$
+(Proposition~\ref{prop:C1})---separability constrains the association coordinate and leaves the
+levels free to move. The split raises the question whether it is a coincidence of these two
+particular summaries or a structural feature of aggregation. The answer, established next, is
+the latter, and it is exhaustive: to first order, the association---and, at independence, any
+smooth function of it---is the \emph{only} statistic aggregation protects; every other smooth
+statistic is generically displaced at first order, exactly as the base rate was
+(Proposition~\ref{prop:C3}). The base-rate drift seen above is therefore not an exception to
+protection but an instance of the generic behaviour outside the protected class, and the
+implication is operational: whether an aggregate registers the phenomenon at first or second
+order is decided by which statistic it computes, not by anything about the population behind
+it.
 
 \begin{proposition}[C3: uniqueness of the protected statistic]\label{prop:C3}
 Fix $(q_0,r_0)\in(0,1)^2$ and let $F$ be $C^1$ in a neighbourhood of $q\otimes r$ in the
@@ -683,14 +808,29 @@ encounter orders. \anchor{Prop.~C3}
 
 \begin{proposition}[C2: criterion split]\label{prop:C2}
 Under the foregone-surplus criterion (cost $|u|$) the aggregate loss is $\bigO(c^{2})$
-(Theorem~\ref{thm:B2}). Under a $0$--$1$ criterion---the \emph{incidence} of sequence-affected
-individuals---it is $\bigO(c)$. \anchor{Prop.~C2}
+(Theorem~\ref{thm:B2}). If moreover the $u$-marginal is bounded and continuous at $u=0$ with
+$f(0)>0$ (the same density hypothesis as Theorem~\ref{thm:B2}), then under a $0$--$1$
+criterion---the \emph{incidence} of sequence-affected individuals---the aggregate is genuinely
+$\bigO(c)$, not merely $o(1)$: the band mass itself scales as $f(0)\cdot\bigO(c)$. \anchor{Prop.~C2}
 \end{proposition}
 
 \begin{proof}
-Both count the same flip set---the $\bigO(c)$-wide band at the threshold. The incidence
-criterion weights each flip by $1$, giving $f(0)\cdot\bigO(c)=\bigO(c)$; the surplus criterion
-weights by $|u|=\bigO(c)$ on the band, giving $\bigO(c)\cdot\bigO(c)=\bigO(c^{2})$.
+Throughout, fix the density hypothesis of the second part of Theorem~\ref{thm:B2}: the
+$u$-marginal bounded and continuous at $u=0$ with $f(0)>0$. An individual is
+sequence-affected exactly when the Jeffrey and benchmark actions differ, and by
+Lemma~\ref{lem:B1} the Jeffrey score is the benchmark score perturbed by
+$c\delta_{\sigma}+\bigO(c^{2})$, so the actions differ exactly when that perturbation flips
+the sign of the surplus: the flip set is confined to a band of width $\bigO(c)$ at the
+threshold, $\{|u|\le|c\,\delta_{\sigma}|+\bigO(c^{2})\}$, whose mass is
+$f(0)\cdot\bigO(c)$---genuinely first order, not merely bounded by it, since $f(0)>0$ and
+$\delta_{\sigma}$ is generically nonzero (Lemma~\ref{lem:B1}). Both criteria now integrate
+over this same set and differ only in the weight they attach to its members. The incidence
+weights each member by $1$ and therefore returns the band's mass: $\bigO(c)$. The surplus
+criterion weights each member by its stake $|u|$, and on the band
+$|u|\le|c\,\delta_{\sigma}|=\bigO(c)$ by construction: an $\bigO(c)$ mass of individuals,
+each costing $\bigO(c)$, gives $\bigO(c)\cdot\bigO(c)=\bigO(c^{2})$
+(Theorem~\ref{thm:B2}). The one-order gap is thus criterion arithmetic on a common set: the
+extra factor of $c$ is exactly the weight $|u|$, which the band forces to first order.
 \end{proof}
 
 This is the crux for interpretation: a first-order \emph{number} of individuals are
@@ -730,7 +870,17 @@ per-error cost the aggregate loss \emph{is} the incidence and is first order
 (Proposition~\ref{prop:C2})---the criterion-dependence is the content of the paper, not a
 weakness of it, and Proposition~\ref{prop:C3} delimits precisely which criteria are protected. A
 prior covariance outside the leading-order regime voids the separation
-(Assumption~\ref{as:localc}): the results are local in $c$, and no claim is made globally. And a
+(Assumption~\ref{as:localc}): the results are local in $c$, and no claim is made globally. The
+regime is a posture about the evaluator pool's prior, and it separates aggregation scenarios
+cleanly. Where the two attributes are believed close to independent---the prior association weak
+relative to its feasibility bound---the leading term is the story and the separation of scales
+is informative. Where the association is entrenched---$c$ a sizable fraction of its bound, the
+attributes believed to travel together almost always---the expansion's ordering of magnitudes
+carries no quantitative force, and the theorems are silent: they neither protect the aggregates
+there nor expose them, and silence, not failure, is the correct reading of that boundary. The
+aggregation is local in a second sense as well: the population varies the encounter order (and,
+for the welfare law, the stakes $u$) at a common prior, so a pool dispersed in the prior
+covariance itself lies outside the stated results. And a
 single decisive cue gives no effect at all (Assumption~\ref{as:soft}): the phenomenon requires
 the bundle (Proposition~\ref{prop:A1}).
 
@@ -779,8 +929,8 @@ extends without fracture at three and four cues---individual divergence first or
 dependence and surplus-weighted aggregates second order, the incidence first order, with the
 higher-way central moments, objects with no two-cue analogue, themselves protected---and what
 is specific to two cues is only the one-dimensional marginal-zero perturbation space. A
-general-$N$ characterization theorem, a treatment of heterogeneous and non-exchangeable cue
-sequences, and learning dynamics in which the prior covariance itself evolves are open.
+general-$N$ characterization theorem and a treatment of heterogeneous and non-exchangeable cue
+sequences are open.
 
 \appendix
 
@@ -915,6 +1065,12 @@ positioning against neighbouring literatures; and structure the manuscript to co
 target journal's house style. After using this tool, the author reviewed and edited the
 content as needed, independently verified the mathematical statements, and takes full
 responsibility for the content of the published article.
+
+\section*{Declaration of competing interest}
+
+%% DRAFT — Anurag to confirm wording against the current Elsevier/JME author guide at submission.
+The author declares that he has no known competing financial interests or personal relationships
+that could have appeared to influence the work reported in this paper.
 
 \section*{Acknowledgements}
 
