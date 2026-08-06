@@ -518,7 +518,7 @@ whenever both do. It turns out that linear aggregation can preserve or cancel fi
 
 Protection in the sense just defined is not special to the two second-order aggregates. What drives it is that aggregation confines the average posterior to a two-dimensional plane,
 spanned by the leading directions $R_1$ and $R_2$ of the two reading orders, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane\footnote{Since the tangent space of the
-simplex is three-dimensional, the annihilator is a single line, which is why the protected class is unique rather than merely non-empty.}. The dimension-counting alone guarantees a one-dimensional annihilator. The attribute-locality assumption (and Lemma~\ref{lem:sep}) ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$.
+simplex is three-dimensional, the annihilator is a single line.}. The dimension-counting alone guarantees a one-dimensional annihilator. The attribute-locality assumption (and Lemma~\ref{lem:sep}) ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$.
 
 The average believed cross-attribute association
 (Proposition~\ref{prop:C1}) and the surplus-weighted loss $L(c)$ (Theorem~\ref{thm:B2}) are
@@ -759,14 +759,22 @@ The aggregate \emph{marginal-probability} distortion is first order, with
 \]
 so for $\lambda<1$ its sign equals $\sgn(r_0-\beta)$, sign-indefinite across
 cue--marginal-probability configurations. At $\lambda=1$ this drift vanishes at first order and
-the mirror statement takes over, and the $B$-marginal drifts with coefficient
-$\lambda\,r_0(1-r_0)(q_0-\alpha)/\big(\alpha\beta(1-\alpha)(1-\beta)\big)$ and sign
-$\sgn(q_0-\alpha)$, so for every $\lambda\in[0,1]$ at least one marginal drifts at first order.
+the the $B$-marginal drifts with coefficient
+$\lambda\,r_0(1-r_0)(q_0-\alpha)/\big(\alpha\beta(1-\alpha)(1-\beta)\big)$ with sign
+$\sgn(q_0-\alpha)$. For every $\lambda\in[0,1]$, therefore, at least one marginal drifts at first order.
 \anchor{Prop.~C1$'$}
 \end{proposition}
 
 \begin{proof}
-Write $K:=\dfrac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}$. The two routes give
+In the $BA$ order the $A$-cue is processed last, and a Jeffrey step pins its own marginal ($\PJ_{BA}(A{=}1)=q_{1}$ identically
+in $c$). Similarly, in the $AB$ order the later $B$-step pulls the $A$-marginal off the delivered value
+through the covariance so that we have
+\[
+  \PJ_{AB}(A{=}1)=q_{1}-c\,\frac{q_{0}(1-q_{0})(r_{0}-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}
+  +\bigO(c^{2}),
+\]
+
+Writing $K:=\dfrac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}$, the two routes give
 \[
   \PJ_{BA}(A{=}1)=q_1,
   \qquad
@@ -774,8 +782,7 @@ Write $K:=\dfrac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}$. The tw
   \qquad
   \PB(A{=}1)=q_1-cK+\bigO(c^2),
 \]
-the last equality since the benchmark inherits the same $B$-content in one shot as the later
-$B$-step of route $AB$. Hence
+Hence,
 \[
   \PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2),
   \qquad
@@ -793,30 +800,13 @@ Since $q_0(1-q_0)>0$ and $\alpha\beta(1-\alpha)(1-\beta)>0$ on the open cube, $\
   \lambda<1
   \ \Longrightarrow\
   \sgn\bigl[\Pbar(A{=}1)-\PB(A{=}1)\bigr]=\sgn(r_0-\beta),
-  \qquad
+  \]
+  When $\lambda = 1$, we have
+ \[
   \lambda=1
   \ \Longrightarrow\
   \Pbar(A{=}1)-\PB(A{=}1)=\bigO(c^2).
 \]
-\end{proof}
-
-\begin{proof}
-In the $BA$ order the $A$-cue is
-processed last, and a Jeffrey step pins its own marginal ($\PJ_{BA}(A{=}1)=q_{1}$ identically
-in $c$). In the $AB$ order the later $B$-step pulls the $A$-marginal off the delivered value
-through the covariance,
-\[
-  \PJ_{AB}(A{=}1)=q_{1}-c\,\frac{q_{0}(1-q_{0})(r_{0}-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}
-  +\bigO(c^{2}),
-\]
-and the benchmark, incorporating the same $B$-content in one shot, moves by exactly the same
-first-order amount, $\partial_{c}\PB(A{=}1)\big|_{c=0}=\partial_{c}\PJ_{AB}(A{=}1)\big|_{c=0}$.
-Decomposing the mean about the benchmark,
-\begin{align*}
-  \Pbar(A{=}1)-\PB(A{=}1)
-  &=\lambda\underbrace{\bigl[\PJ_{AB}(A{=}1)-\PB(A{=}1)\bigr]}_{\textstyle\bigO(c^{2})\ \text{(moves with the benchmark)}}\\
-  &\quad+(1-\lambda)\underbrace{\bigl[\PJ_{BA}(A{=}1)-\PB(A{=}1)\bigr]}_{\textstyle\bigO(c)\ \text{(pinned at }q_{1}\text{)}}.
-\end{align*}
 
 \begin{figure}[t]
 \centering
@@ -854,30 +844,16 @@ the $BA$ order the $A$-cue is processed last and pins the $A$-marginal at $q_1$ 
 the $AB$ order the later $B$-step pulls the $A$-marginal off $q_1$ by the same first-order
 amount as the benchmark, so $\PJ_{AB}$ and $\PB$ move together. The mean $\Pbar$ weights the
 moving route by $\lambda$ and the pinned route by $1-\lambda$; its drift from the benchmark is
-therefore $(1-\lambda)$ of the common coefficient $-c\,\kappa'$, vanishing at $\lambda=1$
-($\kappa'$ is the coefficient of the $B$-first gap, Section~\ref{sec:individual}).}
+therefore $(1-\lambda)$ of the common coefficient $-c\,\kappa'$.}
 \label{fig:routes}
 \end{figure}
 
-The drift of the mean is therefore the pinned route's refusal to move (Figure~\ref{fig:routes}), i.e.\ weighting the
-moving marginal by $\lambda$ and the pinned by $1-\lambda$ and subtracting the moving benchmark
-leaves $(1-\lambda)$ of the common coefficient,
-\[
-  \Pbar(A{=}1)-\PB(A{=}1)
-  =c\cdot(1-\lambda)\,\frac{q_{0}(1-q_{0})\,(r_{0}-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^{2}).
-\]
-The factor $(r_{0}-\beta)$ is the surprise of the $B$-impression relative to its prior
-marginal---it is what does the pulling---and it alone governs the sign, the remaining factors
-being positive on the open cube; hence for $\lambda<1$ the sign is $\sgn(r_{0}-\beta)$,
-sign-indefinite across cue--marginal-probability configurations (at $\lambda=1$ every panel
-reads the cues $A$-first, the $A$-marginal agrees with the benchmark at first order, and the
-drift vanishes).
+
 \end{proof}
 
-Let's revisit the vignette to see how the ordering shifts marginal probability at first order. The pool's average perceived
-competence drifts at $\bigO(c)$, with sign $\sgn(r_0-\beta)$. That sign is indefinite across
-cue--marginal-probability configurations, so the direction of the drift is not fixed by the
-model. In terms of the terminology we've used, the marginal probability lies outside the protected class (Proposition~\ref{prop:C3}). As a result, what an outside observer surveying the panels' joint beliefs and comparing them against the benchmark would find is that along the association axis, the average believed relationship between competence
+
+It's worth highlighting key result that follows from the order shifting marginal probability at first order. The pool's average perceived
+competence drifts at $\bigO(c)$. In terms of the terminology we've used, the marginal probability lies outside the protected class. As a result, what an outside observer surveying the panels' joint beliefs and comparing them against the benchmark would find is that along the association axis, the average believed relationship between competence
 and trustworthiness would sit at essentially its benchmark value (order
 $c^{2}$). On the other hand, along the marginal-probability axis the average perceived marginal probability of either
 attribute would depart from the benchmark already at order $c$. It is only in the marginal probabilities that the observer could read off any trace of the ordering at all. The footprint of \textbf{sequencing} thus \textbf{resides in} the \textbf{marginal probabilities}, \textbf{not in} the \textbf{believed association}.
