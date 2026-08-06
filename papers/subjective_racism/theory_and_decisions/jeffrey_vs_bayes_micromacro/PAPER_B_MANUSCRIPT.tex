@@ -759,7 +759,7 @@ The aggregate \emph{marginal-probability} distortion is first order, with
 \]
 so for $\lambda<1$ its sign equals $\sgn(r_0-\beta)$, sign-indefinite across
 cue--marginal-probability configurations. At $\lambda=1$ this drift vanishes at first order and
-the the $B$-marginal drifts with coefficient
+the $B$-marginal drifts with coefficient
 $\lambda\,r_0(1-r_0)(q_0-\alpha)/\big(\alpha\beta(1-\alpha)(1-\beta)\big)$ with sign
 $\sgn(q_0-\alpha)$. For every $\lambda\in[0,1]$, therefore, at least one marginal drifts at first order.
 \anchor{Prop.~C1$'$}
@@ -852,7 +852,7 @@ therefore $(1-\lambda)$ of the common coefficient $-c\,\kappa'$.}
 \end{proof}
 
 
-It's worth highlighting key result that follows from the order shifting marginal probability at first order. The pool's average perceived
+It's worth highlighting a key result that follows from the order shifting marginal probability at first order. The pool's average perceived
 competence drifts at $\bigO(c)$. In terms of the terminology we've used, the marginal probability lies outside the protected class. As a result, what an outside observer surveying the panels' joint beliefs and comparing them against the benchmark would find is that along the association axis, the average believed relationship between competence
 and trustworthiness would sit at essentially its benchmark value (order
 $c^{2}$). On the other hand, along the marginal-probability axis the average perceived marginal probability of either
@@ -919,11 +919,11 @@ much probability when $f$ is continuous at $u=0$. The foregone surplus $|u|$ on 
        \;=\;\bigO(c^{2}).
 \]
 
-This second-order behaviour may however sound rather unremarkable. This is because a behavioural deviation confined to a neighbourhood of an optimum that carries vanishing stakes at the margin is likely to be second order. As we further elaborate, the average believed cross-attribute association becomes second-order without carrying any surplus weighting. How the average believed cross-attribute association becomes second-order is explained in Proposition~\ref{prop:C1}.
+While the mechanism through which surplus-weighted loss becomes second-order seems rather unremarkable, the mechanism itself is not what always makes a statistic the second-order. For example, the believed cross-attribute association -- which we explore in the next subsection -- becomes second order through in a completely different mechanism. The necessary and sufficient conditions for protection (second-order) are the discussed with Proposition~\ref{prop:C1}.
 
-A few other candidate explanations for the second-order behaviour are worth ruling out. First, the second-order rate of the expected surplus loss is not an
-artefact of the \textbf{threshold density}. We consider three examples of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
-or iii) a \emph{vanishing} density, with no mass at the threshold. The \emph{atom at the threshold} results in $|u|=0$, so the integrand vanishes. The \emph{integrable singularity}
+At this point, a few other candidate explanations for why the surplus-weighted loss becomes may become second-order are worth ruling out. First, the second-order rate of the expected surplus loss is not an
+artefact of the \textbf{threshold density} itself. Considering three instances of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
+or iii) a \emph{vanishing} density, with no mass at the threshold, we argue that none would result into the exact second-order. The \emph{atom at the threshold} results in $|u|=0$, so the integrand vanishes. The \emph{integrable singularity}
 $f(u)\sim|u|^{-\gamma}$ with $0<\gamma<1$ degrades the rate but not the conclusion---the density
 is $\bigO(c^{-\gamma})$ and the cost $|u|$ is $\bigO(c)$, so the loss is
 $\bigO(c)\cdot\bigO(c)\cdot\bigO(c^{-\gamma})=\bigO(c^{2-\gamma})$, which is still $o(c)$ since
@@ -1194,38 +1194,67 @@ on the protected statistics---even when no member's belief is.
 
 \subsection{Proof of Theorem~\ref{thm:B2}}
 
-\emph{Decoupling---$L(c)=o(c)$.} The two actions differ iff
-$\sgn(u)\neq\sgn(u+c\delta_\sigma)$. The coefficient is bounded. At the fixed prior and impressions the two matrices
-$\partial_c(\PJ_\sigma-\PB)|_{0}$, $\sigma\in\{AB,BA\}$, are finite, and the population's
-desirability vectors are uniformly bounded (Assumption~\ref{as:surplus}), so
-$|\delta_\sigma|=\bigl|\langle\vv,\partial_c(\PJ_\sigma-\PB)|_{0}\rangle\bigr|\le M<\infty$
-across the population. For fixed $\delta$ the flip set in $u$ is the open
-interval strictly between $0$ and $-c\delta$, so it is contained in the \emph{punctured} band
+\emph{Step 1: bounded coefficient.} The two actions differ iff
+$\sgn(u)\neq\sgn(u+c\delta_\sigma)$. At the fixed prior and impressions
+$\|\partial_c(\PJ_\sigma-\PB)|_{0}\|<\infty$, and $\|\vv\|\le V<\infty$ across the population
+(Assumption~\ref{as:surplus}), so
 \[
-  B_c:=\{\,u:\ 0<|u|\le cM\,\},
+  |\delta_\sigma|
+   =\bigl|\langle\vv,\partial_c(\PJ_\sigma-\PB)|_{0}\rangle\bigr|
+   \le M<\infty,
+  \qquad \sigma\in\{AB,BA\}.
 \]
-on which the cost obeys $|u|\le cM$. With $\mu$ the marginal law of $u$, Tonelli's theorem \citep[Corollary~1.7.23]{tao2011measure} gives
+
+\emph{Step 2: the flip set lies in a thin band.} For fixed $\delta$ the flip set in $u$ is the
+open interval strictly between $0$ and $-c\delta$, whence
+\[
+  \{\mathrm{flip}\}\ \subseteq\ B_c:=\{\,u:\ 0<|u|\le cM\,\},
+  \qquad
+  u\in B_c\ \Longrightarrow\ |u|\le cM.
+\]
+That the band excludes $u=0$ does matter in the later Step~4.
+
+\emph{Step 3: the bound.} With $\mu$ the marginal law of $u$, Tonelli's theorem
+\citep[Corollary~1.7.23]{tao2011measure} gives
 \[
   L(c)=\iint_{\mathrm{flip}}|u|\,g(u,\delta)\,du\,d\delta
    \;\le\; cM\!\iint_{u\in B_c}\! g(u,\delta)\,du\,d\delta
    \;=\; cM\,\mu(B_c).
 \]
-The bands are nested and decrease as $c\downarrow0$ to $\bigcap_{c>0}B_c=\varnothing$. Any
-$u\neq0$ leaves the band once $cM<|u|$, and $u=0$ is excluded from every $B_c$. As $\mu$ is a
-probability measure (finite), continuity from above \citep[\S1.4]{tao2011measure} gives $\mu(B_c)\to\mu(\varnothing)=0$, i.e.\
-$\mu(B_c)=o(1)$. Hence
-\[
-  \frac{L(c)}{c}\le M\,\mu(B_c)\longrightarrow0,\qquad L(c)=o(c),
-\]
-for \emph{any} integrable density, and irrespective of an atom at the threshold---the atom sits
-at the excised point $u=0$, where the cost $|u|$ vanishes, so it never enters $B_c$.
 
-\emph{Named constant under continuity.} If in addition the $u$-marginal is continuous at $0$
-with $f(0)>0$, the flip-set integral for fixed $\delta$ is
-$\int_0^{|c\delta|}t\,g(0,\delta)\,dt=g(0,\delta)\,\delta^{2}c^{2}/2+\bigO(c^3)$; integrating
-over $\delta$ with $f(0)=\int g(0,\delta)\,d\delta$ and
-$\E[\delta^2\mid u=0]=\int\delta^2 g(0,\delta)\,d\delta/f(0)$ gives
-$L(c)=\tfrac{f(0)}{2}\E[\delta_\sigma^2\mid u=0]\,c^{2}+\bigO(c^3)$. \qed
+\emph{Step 4: the band is null in the limit.} The bands nest and exhaust,
+\[
+  c'<c\ \Longrightarrow\ B_{c'}\subseteq B_c,
+  \qquad
+  \bigcap_{c>0}B_c=\varnothing,
+\]
+since $u\neq0$ exits once $cM<|u|$ and $u=0$ lies in no $B_c$. As $\mu$ is finite, continuity
+from above \citep[\S1.4]{tao2011measure} yields
+\[
+  \mu(B_c)\downarrow\mu(\varnothing)=0,
+  \qquad
+  \frac{L(c)}{c}\le M\,\mu(B_c)\longrightarrow0,
+  \qquad
+  L(c)=o(c),
+\]
+for \emph{any} integrable density, and irrespective of an atom at $u=0$, where $|u|=0$.
+
+\emph{Step 5: named constant available under continuity.} Let the $u$-marginal be continuous at $0$ with
+$f(0)>0$. For fixed $\delta$,
+\[
+  \int_0^{|c\delta|}t\,g(0,\delta)\,dt=\tfrac{1}{2}\,g(0,\delta)\,\delta^{2}c^{2}+\bigO(c^3),
+\]
+and with
+\[
+  f(0)=\int g(0,\delta)\,d\delta,
+  \qquad
+  \E[\delta^2\mid u=0]=\frac{1}{f(0)}\int\delta^2 g(0,\delta)\,d\delta,
+\]
+integration over $\delta$ gives
+\[
+  L(c)=\frac{f(0)}{2}\,\E[\delta_\sigma^2\mid u=0]\,c^{2}+\bigO(c^3).
+\]
+\qed
 
 \subsection{Proof of Proposition~\ref{prop:C3}}
 
