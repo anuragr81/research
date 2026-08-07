@@ -919,11 +919,11 @@ much probability when $f$ is continuous at $u=0$. The foregone surplus $|u|$ on 
        \;=\;\bigO(c^{2}).
 \]
 
-While the mechanism through which surplus-weighted loss becomes second-order seems rather unremarkable, the mechanism itself is not what always makes a statistic the second-order. For example, the believed cross-attribute association -- which we explore in the next subsection -- becomes second order through in a completely different mechanism. The necessary and sufficient conditions for protection (second-order) are the discussed with Proposition~\ref{prop:C1}.
+While the mechanism through which the surplus-weighted loss becomes second order may seem unremarkable, it is not the only mechanism by which a statistic can be second order. The believed cross-attribute association---which we explore in the next subsection---reaches second order by a completely different route. The necessary and sufficient condition for protection is given in Proposition~\ref{prop:C3}.
 
-At this point, a few other candidate explanations for why the surplus-weighted loss becomes may become second-order are worth ruling out. First, the second-order rate of the expected surplus loss is not an
-artefact of the \textbf{threshold density} itself. Considering three instances of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
-or iii) a \emph{vanishing} density, with no mass at the threshold, we argue that none would result into the exact second-order. The \emph{atom at the threshold} results in $|u|=0$, so the integrand vanishes. The \emph{integrable singularity}
+At this point, a few other candidate explanations for why the surplus-weighted loss may become second order are worth ruling out. First, the rate is not an
+artefact of the \textbf{threshold density} itself. Consider three instances of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
+or iii) a \emph{vanishing} density, with no mass at the threshold. None of the three destroys the separation of scales, though two of them shift the exponent away from exactly $2$. The \emph{atom at the threshold} results in $|u|=0$, so the integrand vanishes. The \emph{integrable singularity}
 $f(u)\sim|u|^{-\gamma}$ with $0<\gamma<1$ degrades the rate but not the conclusion---the density
 is $\bigO(c^{-\gamma})$ and the cost $|u|$ is $\bigO(c)$, so the loss is
 $\bigO(c)\cdot\bigO(c)\cdot\bigO(c^{-\gamma})=\bigO(c^{2-\gamma})$, which is still $o(c)$ since
@@ -931,9 +931,9 @@ $\gamma<1$. A \emph{vanishing} density $f(0)=0$ takes the loss below $\bigO(c^{2
 
 
 
-Second, the second-order is not affected by the \textbf{sequence distribution} either. This is because $\delta_\sigma$ enters \emph{squared} and so cannot average away even when sequencing is one-directional. The order is $c^{2}$ whether the cue sequence is random ($\E\delta_\sigma=0$) or systematic ($\E\delta_\sigma\neq0$).
+Second, within that same regime, the exponent is not affected by the \textbf{sequence distribution} either. This is because $\delta_\sigma$ enters \emph{squared} and so cannot average away even when sequencing is one-directional. The rate is $c^{2}$ whether the cue sequence is random ($\E\delta_\sigma=0$) or systematic ($\E\delta_\sigma\neq0$).
 
-Third, the \textbf{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a requirement for the second-order of loss. The smoothness of density is used above only to name the constant in the exact second-order expression of the expected surplus loss. The decoupling of scales---i.e.\ the aggregate scale being strictly above the individual scale---relies in fact only on the integrability of $f$.
+Third, the \textbf{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a requirement for the separation of scales. Smoothness is used above only to name the constant in the exact $c^{2}$ expression for the expected surplus loss. The decoupling of scales---i.e.\ the aggregate scale being strictly above the individual scale---relies in fact only on the integrability of $f$.
 
 
 \subsection{Sequence-affected share---incidence versus intensity}
@@ -943,6 +943,15 @@ Third, the \textbf{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a re
 The mechanism for the sequence-affected share is largely the same as that for surplus-weighted loss. Both
 integrate over the same set---the band of evaluators whose decisions the perturbation flips, of
 width $\bigO(c)$ at the threshold---and differ only in what they weight each member by. The surplus criterion weights by the stake $|u|$, which the band itself holds to $\bigO(c)$ whereas the $0$--$1$ criterion weights by $1$ and returns the band's mass alone.
+
+Membership in that band is forced by a comparison of two lengths. An evaluator's distance from
+the threshold is $|u|$, and the reading order moves their score by $c\delta_\sigma$; a flip
+requires the second to be at least the first, so $|u|>|c\delta_\sigma|$ leaves the action
+unchanged however the cues are ordered. As $\delta_\sigma$ is bounded across the population,
+only evaluators within $\bigO(c)$ of the threshold can be affected at all. The condition is
+necessary but not sufficient---the perturbation must also point towards the threshold rather
+than away from it---so the affected form a subset of the band, and it is the band's mass,
+$f(0)\cdot\bigO(c)$, that sets the first-order rate.
 
 
 \renewcommand{\theproposition}{C2}%
@@ -955,37 +964,39 @@ population---the aggregate is genuinely $\bigO(c)$, not merely $o(1)$, since the
 itself scales as $f(0)\cdot\bigO(c)$. \anchor{Prop.~C2}
 \end{proposition}
 \begin{proof}
-The two criteria that follow integrate over the same set of individuals and differ only in the
-weight each attaches to a member, so the proof first identifies that set and its mass, then
-reads off both criteria from it.
+Both criteria integrate over the same set, differing only in the weight attached to a member.
 
-Assume, as in the second part of Theorem~\ref{thm:B2}, that the density $f$ of $u=s(\PB)-\tau$
-is bounded, continuous at the threshold $u=0$, and satisfies $f(0)>0$---the population has a
-positive, non-degenerate spread of evaluators at the margin. Recall that $u$
-is the benchmark's net surplus, so an individual's benchmark action is fixed by $\sgn(u)$ and
-the threshold $u=0$ is the margin at which that action turns over.
+\emph{Step 1: the affected set.} By Lemma~\ref{lem:B1} the Jeffrey score perturbs the benchmark
+score by $c\delta_\sigma+\bigO(c^{2})$, so
+\[
+  \text{affected}
+  \iff
+  \sgn(u)\neq\sgn\bigl(u+c\delta_\sigma+\bigO(c^{2})\bigr)
+  \ \Longrightarrow\
+  u\in S_c:=\bigl\{\,|u|\le|c\,\delta_\sigma|+\bigO(c^{2})\,\bigr\},
+\]
+a band of width $\bigO(c)$ about the threshold $u=0$, where $\sgn(u)$ turns over.
 
-An individual is \emph{sequence-affected} when the Jeffrey and benchmark actions differ. By
-Lemma~\ref{lem:B1} the Jeffrey score is the benchmark score perturbed by
-$c\delta_{\sigma}+\bigO(c^{2})$, so the two actions differ exactly when this perturbation
-carries the surplus across the threshold, $\sgn(u)\neq\sgn(u+c\delta_{\sigma}+\bigO(c^{2}))$.
-That requires $u$ to lie within $|c\delta_{\sigma}|+\bigO(c^{2})$ of the threshold, so the
-sequence-affected individuals form a band $\{|u|\le|c\,\delta_{\sigma}|+\bigO(c^{2})\}$ of width
-$\bigO(c)$ at $u=0$. Its mass is
-$\int_{|u|\le|c\delta_{\sigma}|}f(u)\,du=f(0)\cdot\bigO(c)$---genuinely first order, not merely
-bounded by it, since $f(0)>0$ (here the density condition enters) and $\delta_{\sigma}$ is
-generically nonzero (Lemma~\ref{lem:B1}).
+\emph{Step 2: the band mass.} With $f$ bounded, continuous at $0$, and $f(0)>0$,
+\[
+  \mu(S_c)=\int_{|u|\le|c\delta_\sigma|}\!\! f(u)\,du=f(0)\cdot\bigO(c),
+\]
+first order rather than merely bounded by it, since $f(0)>0$ and $\delta_\sigma\neq0$
+generically (Lemma~\ref{lem:B1}).
 
-Both criteria now integrate over this same set and differ only in the weight they attach to its
-members. The incidence weights each member by $1$ and therefore returns the band's mass,
-$\bigO(c)$. The surplus criterion weights each member by its stake $|u|$, and on the band
-$|u|\le|c\,\delta_{\sigma}|=\bigO(c)$ by construction, so an $\bigO(c)$ mass of individuals,
-each costing $\bigO(c)$, gives $\bigO(c)\cdot\bigO(c)=\bigO(c^{2})$ (Theorem~\ref{thm:B2}). The
-one-order gap is thus criterion arithmetic on a common set---the extra factor of $c$ is exactly
-the weight $|u|$, which the band forces to first order.
+\emph{Step 3: the two criteria.} On $S_c$ the stake obeys $|u|\le|c\delta_\sigma|=\bigO(c)$,
+whence
+\[
+  \underbrace{\textstyle\int_{S_c} 1\,d\mu}_{\text{incidence}}=\mu(S_c)=\bigO(c),
+  \qquad
+  \underbrace{\textstyle\int_{S_c} |u|\,d\mu}_{\text{surplus}}
+   \le \bigO(c)\cdot\mu(S_c)=\bigO(c^{2})
+  \quad (\text{Theorem~\ref{thm:B2}}).
+\]
+The extra factor of $c$ is the weight $|u|$, which the band forces to first order.
 \end{proof}
 
-What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~C2}. Whatever significance attaches to those individuals---their decisions turned on the order in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. In other words, the separation of scales is not a reassurance that little is at stake but a statement that the aggregate an observer computes is not a sufficient statistic for what is at stake. That the arbitrarily-decided are individually real yet aggregately invisible is a fact about the resolution of the measuring statistic, carrying whatever normative weight the affected decisions do, and it is exactly the incidence---the unprotected criterion---that carries it. That the arbitrarily-decided are individually real yet invisible in aggregate is a fact about the resolution of the measuring statistic. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. The criterion, not the phenomenon, selects which answer an aggregate instrument returns
+What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~C2}. Whatever significance attaches to those individuals---their decisions turned on the order in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. In other words, the separation of scales is not a reassurance that little is at stake but a statement that the aggregate an observer computes is not a sufficient statistic for what is at stake. That the arbitrarily-decided are individually real yet aggregately invisible is a fact about the resolution of the measuring statistic, carrying whatever normative weight the affected decisions do, and it is exactly the incidence---the unprotected criterion---that carries it. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. The criterion, not the phenomenon, selects which answer an aggregate instrument returns
 (Propositions~\ref{prop:C2} and~\ref{prop:C3}).
 
 
@@ -1258,45 +1269,66 @@ integration over $\delta$ gives
 
 \subsection{Proof of Proposition~\ref{prop:C3}}
 
-\emph{Route purity.} By Proposition~\ref{prop:A2}, $\PJ_{AB}-\PB=c\,\kappa R_1+\bigO(c^2)$ with
-$R_1=q\otimes(1,-1)$ and $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$; exchanging the roles of the cues,
-$\PJ_{BA}-\PB=c\,\kappa' R_2+\bigO(c^2)$ with $R_2=(1,-1)\otimes r$ and
-$\kappa'=(\beta-r_0)q_0(1-q_0)/Z$. Hence $\Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^2)$ with
-$M_\lambda=\lambda\kappa R_1+(1-\lambda)\kappa' R_2$, and by the chain rule
+\emph{Step 1: the aggregate moves in a plane.} By Proposition~\ref{prop:A2} and its mirror,
 \[
-  F(\Pbar_\lambda)-F(\PB)\;=\;c\,\bigl\langle \nabla F(q\otimes r),\,M_\lambda\bigr\rangle+\bigO(c^2).
+  \PJ_{AB}-\PB=c\,\kappa R_1+\bigO(c^2),
+  \qquad
+  \PJ_{BA}-\PB=c\,\kappa' R_2+\bigO(c^2),
+\]
+\[
+  R_1=q\otimes(1,-1),\quad \kappa=\frac{(\alpha-q_0)r_0(1-r_0)}{Z},
+  \qquad
+  R_2=(1,-1)\otimes r,\quad \kappa'=\frac{(\beta-r_0)q_0(1-q_0)}{Z},
+\]
+so with $M_\lambda:=\lambda\kappa R_1+(1-\lambda)\kappa' R_2$ the chain rule gives
+\[
+  \Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^2),
+  \qquad
+  F(\Pbar_\lambda)-F(\PB)=c\,\bigl\langle\nabla F(q\otimes r),M_\lambda\bigr\rangle+\bigO(c^2).
 \]
 
-\emph{The annihilator.} The system $\langle V,R_1\rangle=\langle V,R_2\rangle=0$ in
-$V\in\mathbb{R}^{2\times2}$ consists of two linearly independent conditions---in $aR_1+bR_2=0$, adding the two top-row
-entries gives $b(r_0+r_1)=b=0$ and then $aq_0=0$ forces $a=0$---so its solution space in
-$\mathbb{R}^{2\times2}\cong\mathbb{R}^{4}$ is two-dimensional. The constant matrix $J$ (all
-entries $1$) solves it because the rows of $R_1$ and the columns of $R_2$ sum to zero; the
-gradient of the association at the independent posterior,
+\emph{Step 2: the annihilator is $\mathrm{span}\{J,\nabla\assoc\}$.} The directions are
+independent---$aR_1+bR_2=0$ gives $b(r_0+r_1)=b=0$ on adding the top-row entries, then $aq_0=0$
+and $a=0$---so
 \[
-  \nabla\assoc(q\otimes r)=
-  \begin{pmatrix} q_1r_1 & -q_1r_0\\ -q_0r_1 & q_0r_0\end{pmatrix},
+  \dim\bigl\{V\in\mathbb{R}^{2\times2}:\ \langle V,R_1\rangle=\langle V,R_2\rangle=0\bigr\}=4-2=2 .
 \]
-solves it by direct computation
-($\langle\nabla\assoc,R_1\rangle=q_0q_1r_1-q_0q_1r_0-q_1q_0r_1+q_1q_0r_0=0$, and symmetrically
-for $R_2$). Since $J$ and $\nabla\assoc(q\otimes r)$ are linearly independent, they span the
-annihilator.
+Both $J$ (all entries $1$) and $\nabla\assoc(q\otimes r)$ lie in this space,
+\[
+  \langle J,R_1\rangle=\langle J,R_2\rangle=0,
+  \qquad
+  \langle\nabla\assoc,R_1\rangle=\langle\nabla\assoc,R_2\rangle=0
+  \quad(\text{Lemma~\ref{lem:A3}}),
+\]
+and are linearly independent, hence span it.
 
-\emph{(i)} If $dF|_{q\otimes r}$ restricted to the simplex is a multiple of $d\,\assoc$, then
-$\nabla F(q\otimes r)=xJ+y\,\nabla\assoc(q\otimes r)$ for scalars $x,y$, so
-$\langle\nabla F,M_\lambda\rangle=0$ identically in $(\alpha,\beta,\lambda)$.
+\emph{Step 3: part (i).} If $dF|_{q\otimes r}$ restricted to the simplex is a multiple of
+$d\,\assoc$, then
+\[
+  \nabla F(q\otimes r)=xJ+y\,\nabla\assoc(q\otimes r)
+  \ \Longrightarrow\
+  \bigl\langle\nabla F,M_\lambda\bigr\rangle=0
+  \quad\text{identically in }(\alpha,\beta,\lambda).
+\]
 
-\emph{(ii)} Write $x=\langle\nabla F,R_1\rangle$ and $y=\langle\nabla F,R_2\rangle$, so the
-first-order coefficient is $\lambda\kappa\,x+(1-\lambda)\kappa'\,y$, vanishing on an open set
-$U$ of priors. If $y\neq0$, then on $U\setminus\{\beta=r_0\}$ the ratio $\kappa/\kappa'$ would
-equal the constant $-(1-\lambda)y/(\lambda x)$ (with $x\neq0$; if $x=0$ then $\kappa'y\equiv0$
-forces $y=0$ at once, since $\kappa'$ vanishes only on $\{\beta=r_0\}$). But
-$\kappa/\kappa'=\dfrac{(\alpha-q_0)\,r_0(1-r_0)}{(\beta-r_0)\,q_0(1-q_0)}$ has nonvanishing
-$\alpha$-derivative wherever $\beta\neq r_0$, so it is nonconstant on any open set, a
-contradiction. Hence $y=0$, and then $\kappa x\equiv0$ on $U$ forces $x=0$. So
-$\nabla F(q\otimes r)$ lies in the annihilator $\mathrm{span}\{J,\nabla\assoc\}$; restricted to
-the tangent space of the simplex---whose vectors have coordinates summing to zero, so the
-constant functional $J$ acts as zero on all of them---$dF$ is a multiple of $d\,\assoc$.
+\emph{Step 4: part (ii).} Put $x=\langle\nabla F,R_1\rangle$ and $y=\langle\nabla F,R_2\rangle$,
+so the first-order coefficient $\lambda\kappa\,x+(1-\lambda)\kappa'\,y$ vanishes on an open set
+$U$ of priors. Suppose $y\neq0$. If $x=0$ then $\kappa'y\equiv0$ on $U$, and $\kappa'$ vanishes
+only on $\{\beta=r_0\}$, forcing $y=0$; so $x\neq0$ and, on $U\setminus\{\beta=r_0\}$,
+\[
+  \frac{\kappa}{\kappa'}=-\frac{(1-\lambda)y}{\lambda x}=\text{const},
+  \qquad\text{while}\qquad
+  \frac{\kappa}{\kappa'}=\frac{(\alpha-q_0)\,r_0(1-r_0)}{(\beta-r_0)\,q_0(1-q_0)},
+\]
+\[
+  \frac{\partial}{\partial\alpha}\frac{\kappa}{\kappa'}
+   =\frac{r_0(1-r_0)}{(\beta-r_0)\,q_0(1-q_0)}\neq0
+  \quad\text{wherever }\beta\neq r_0,
+\]
+a contradiction. Hence $y=0$, then $\kappa x\equiv0$ on $U$ forces $x=0$, so
+$\nabla F(q\otimes r)\in\mathrm{span}\{J,\nabla\assoc\}$. On the tangent space of the simplex,
+whose vectors have coordinates summing to zero, $J$ acts as zero, so $dF$ is a multiple of
+$d\,\assoc$.
 \qed
 
 The interior-$\lambda$ hypothesis in \emph{(ii)} is essential rather than technical. At
