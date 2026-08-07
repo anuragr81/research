@@ -125,17 +125,19 @@ yields an impression (a target marginal) $q=(q_{0},q_{1})$ on $A$'s partition an
 yields an impression $r=(r_{0},r_{1})$ on $B$'s partition---with no cue bearing on a joint event. There is no cue that bears on both attributes jointly and the two cues in the model are never fused into one joint event (see Assumption~\ref{as:local}). Each impression then is a delivered credence, not a likelihood, and the product of the two impressions can be written $q\otimes r$, with $(q\otimes r)_{ij}=q_{i}r_{j}$ \anchor{Setup}.
 
 The engagement decision for the evaluator is defined in terms of a desirability vector $\vv=(v_{ij})_{i,j\in\{0,1\}}$---one entry per state-space cell (the same shape as $P$). With the score $s(P)=\langle\vv,P\rangle=\sum_{ij}v_{ij}P(i,j)$, the evaluator engages if and only if
-$s(P)\ge\tau$ \anchor{Setup}. This is expected-utility maximisation at the belief $P$---so that $s(P)$ is the expected desirability of engaging, and $\tau$ is the value of the outside option one forgoes by not engaging. Whether order-dependence changes what evaluators do or not is driven by the expected desirability an evaluator forgoes when their order-dependent belief leads them to a different action than a benchmark belief. Here, the Bayes-factor benchmark $\PB$ is used as the order-free reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
+$s(P)\ge\tau$ \anchor{Setup}. This is expected-utility maximisation at the belief $P$---so that $s(P)$ is the expected desirability of engaging, and $\tau$ is the value of the outside option one forgoes by not engaging. Whether order-dependence changes what evaluators do or not is driven by the expected desirability an evaluator forgoes when their order-dependent belief leads them to a different action than a benchmark belief. 
+
+As we further detail in Section \ref{sec:jeffrey}, the Bayes-factor benchmark $\PB$ is used as an order-free reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
 $\tau$ entering the results only through $u=s(\PB)-\tau$ and never appearing on its own.
 
-The surplus thus defined is what is of interest as the population aggregate. Write $\delta_\sigma$ for the first-order coefficient with which an evaluator's own score departs from the benchmark's under reading order $\sigma$, $s(\PJ_\sigma)-s(\PB)=c\,\delta_\sigma+\bigO(c^{2})$---the \emph{score gap}, defined in full in Section~\ref{sec:individual} \anchor{Lem.~B1}. More particularly, with $g$ as the joint density of $(u,\delta_\sigma)$ across the population and the sequence distribution, the expected foregone surplus is
+The surplus thus defined is what is of interest as the notion of loss in the population aggregate. With $\delta_\sigma$ as the first-order coefficient with which an evaluator's own score departs from the benchmark's under reading order $\sigma$ (see Section~\ref{sec:individual}), $g$ as the joint density of $(u,\delta_\sigma)$ across the population and the sequence distribution, the expected foregone surplus is defined as 
 \[
   L(c)=\iint_{\{\sgn(u)\neq\sgn(u+c\delta)\}}|u|\,g(u,\delta)\,\mathrm{d}u\,\mathrm{d}\delta,
 \]
-the cost $|u|$ borne by exactly those evaluators whose decision the sequence changes, the integration variable $\delta$ ranging over the values taken by $\delta_\sigma$. As Theorem~\ref{thm:B2} shows, this restriction of non-zero $|u|$ to those whose decision the sequence changes (along with the loss being weighted by $|u|$)---is effectively what turns an $\bigO(c)$ individual effect into an $\bigO(c^{2})$ aggregate. The aggregate marginal-probability distortion---an aggregate statistic's own departure from the benchmark, formalised in Definition~\ref{def:protection}---is by contrast first order (Proposition~\ref{prop:C1m}). Unlike the loss, it needs no evaluator's decision to flip from $u<0$ to $u>0$ or vice versa; unlike the association, its leading-order term carries no cancellation between the two orders of cue arrival. The $\bigO(c)$ individual divergence of Proposition~\ref{prop:A2} therefore passes through averaging intact.
+the cost $|u|$ borne by exactly those evaluators whose decision the sequence changes, the integration variable $\delta$ ranging over the values taken by $\delta_\sigma$.
 
 
-\subsection{Jeffrey conditioning and the Bayes-factor benchmark}
+\subsection{The Bayes-factor benchmark}
 \label{sec:jeffrey}
 
 Jeffrey's rule updates on an impression by resetting the cue's marginal to the delivered
@@ -147,9 +149,9 @@ credence and holding the conditionals fixed---the invariance condition
 and symmetrically for an impression $r$ on $B$ \anchor{Setup}. The axiomatic grounding is
 twofold. The partition satisfying the invariance condition is the minimal sufficient statistic
 for revising the prior to any candidate posterior on that partition
-\citep[Thm.~2.2]{DiaconisZabell1982}, and the rule is the minimal revision of the prior
+\citep{DiaconisZabell1982}, and the rule is the minimal revision of the prior
 consistent with the delivered marginal, in the $I$-divergence sense
-\citep[Thm.~5.1]{DiaconisZabell1982}. The
+\citep{DiaconisZabell1982}. The
 two-cue Jeffrey posteriors are the two sequences
 \[
   \PJ_{AB}=\PJ_{B}\!\circ\PJ_{A}\,P,\qquad \PJ_{BA}=\PJ_{A}\!\circ\PJ_{B}\,P .
@@ -178,13 +180,13 @@ order-invariant \citep{Wagner2002}, and $\PB$ is the single update on that combi
 \[
   \PB(i,j)\propto P(i,j)\,\ell^{A}_{i}\,\ell^{B}_{j},
 \]
-well-defined regardless of which cue arrived first \anchor{Setup}. On any one cue it coincides
-with the matched Jeffrey step (Proposition~\ref{prop:A1}). We thus compare sequential updating on delivered credences (which does not commute) against the one-shot updating on Bayes-factor content (which does). Built from $P$, the benchmark inherits its standing. It records what this evaluator would believe on these cues in Bayes-factor currency, so every comparison that follows is internal to a single credence. The model represent does not represent how the two attributes actually co-occur among candidates.
+well-defined regardless of which cue arrived first \anchor{Setup}. As we later show, it coincides
+on any one cue with the matched Jeffrey step (Proposition~\ref{prop:A1}). We compare sequential updating on delivered credences (which does not commute) against the one-shot updating on Bayes-factor content (which does). 
 
 \subsection{Assumptions}
 \label{sec:assumptions}
 
-With the above primitives, we now state four key assumptions that limit the scope of our discussion---fixing which reading orders, which cues, and which criterion the results below are stated for. The assumptions are revisited again in Section~\ref{sec:scope} to discuss how relaxing one or more of these assumptions would affect our key conclusions.
+With the above primitives, we now state four key assumptions that limit the scope of our discussion---fixing which reading orders, which cues, and which criterion the results apply to. The assumptions are revisited again in Section~\ref{sec:scope} to discuss how relaxing one or more of these assumptions would affect our key conclusions.
 
 \begin{assumption}[Locality in $c$]\label{as:localc}
 The prior covariance $c$ between the two correlated attributes is treated as small, and results
@@ -243,7 +245,10 @@ steady state of best responses, the current paper merely characterises the chann
 any group-marker, are individually first order, and yet remain invisible in the protected dependence statistics. It is worth highlighting that, instead of stereotypes as representativeness-distortion or selective recall \citep{BCGS2016}, the sense of stereotype in the current paper is that of a believed association produced by coherent updating on impoverished input, not by a distortion of memory or sampling. The lineage distinction the
 concluding section trades on---protection intrinsic to the arithmetic of aggregation, rather than imposed by an enforced constraint on behaviour---goes back at least as far as \citet{Becker1962}.
 
-It is worth contrasting the phenomenon explored in the current paper against the amalgamation paradox \citep{GoodMittal1987}, where a real effect present in every subpopulation is erased or reversed by a confound in how the subpopulations are weighted together. Whereas the amalgamation paradox shows aggregation can erase a real effect through confounded weighting, our decision-space result shows aggregation can manufacture a real population-level effect out of individuals who are, each and separately, entirely unaffected.
+It is worth contrasting the phenomenon explored in the current paper against the amalgamation paradox \citep{GoodMittal1987}, where a real effect present in every subpopulation is erased or
+reversed by a confound in how the subpopulations are weighted together. Whereas the amalgamation paradox erases a real effect by combining subpopulations under confounded weights,
+our decision-space result shows the same kind of erasure can occur within a single population -- where a first-order share of individuals who are individually affected contributes only a second-order loss in aggregate
+(Theorem~\ref{thm:B2}).
 
 \section{Order effects at the individual level}
 \label{sec:individual}
@@ -271,75 +276,101 @@ In other words, a decision turning on \emph{one} cue is immune. Next we specify 
 
 \renewcommand{\theproposition}{A2}%
 \begin{proposition}[micro divergence]\label{prop:A2}
-For $c\neq0$ the individual gap (Definition~\ref{def:indgap}) and the sequence effect (Definition~\ref{def:seqeffect}) are first order and vanish at $c=0$:
+Let $Z:=\alpha\beta(1-\alpha)(1-\beta)>0$. At $c=0$ both reading orders coincide with the
+benchmark, $\PJ_{AB}=\PJ_{BA}=\PB=q\otimes r$.
+\begin{enumerate}
+\item[(i)] \textup{(Individual gap.)} For $c\neq0$,
 \[
-  \PJ_{AB}-\PB=c\,D+\bigO(c^{2}),\quad D\not\equiv 0;\qquad
-  \PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2}),\quad \Delta_{\mathrm{seq}}\not\equiv 0,
-\]
-with $\PJ_{AB}-\PJ_{BA}\big|_{c=0}=0$. With $Z:=\alpha\beta(1-\alpha)(1-\beta)>0$, the leading individual gap has the rank-one form
-\[
-  D=\partial_c\!\left(\PJ_{AB}-\PB\right)\big|_{c=0}
-   =\kappa\; q\otimes(1,-1),
+  \PJ_{AB}-\PB=c\,\kappa R_1+\bigO(c^{2}),
   \qquad
-  \kappa=\frac{(\alpha-q_0)\,r_0(1-r_0)}{Z}.
+  R_1=q\otimes(1,-1),
+  \qquad
+  \kappa=\frac{(\alpha-q_0)\,r_0(1-r_0)}{Z},
 \]
+\[
+  \PJ_{BA}-\PB=c\,\kappa' R_2+\bigO(c^{2}),
+  \qquad
+  R_2=(1,-1)\otimes r,
+  \qquad
+  \kappa'=\frac{(\beta-r_0)\,q_0(1-q_0)}{Z},
+\]
+with $\kappa=0\iff q_0=\alpha$ or $r_0\in\{0,1\}$, and symmetrically for $\kappa'$; hence
+$D\not\equiv0$.
+\item[(ii)] \textup{(Sequence effect.)} $\PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2})$
+with $\Delta_{\mathrm{seq}}=\kappa R_1-\kappa' R_2$. Since $R_1,R_2$ are linearly independent,
+$\Delta_{\mathrm{seq}}\equiv0$ if and only if $\kappa=\kappa'=0$; hence
+$\Delta_{\mathrm{seq}}\not\equiv0$.
+\end{enumerate}
 \anchor{Prop.~A2}
 \end{proposition}
 
 \begin{proof}
-\emph{Coincidence at $c=0$.} At $c=0$ the prior factorises, $P(i,j)=P(A{=}i)\,P(B{=}j)$. Each
-Jeffrey step then resets one coordinate's marginal to its impression while leaving the other
-coordinate untouched, and the matched Bayesian update does likewise; hence
-$\PJ_{AB}=\PJ_{BA}=\PB=q\otimes r$ at $c=0$. Both gaps therefore vanish at $c=0$. Each posterior
-is a rational function of $c$ with denominator nonvanishing in a neighbourhood of $0$, so Taylor
-expansion yields $\PJ_{AB}-\PB=cD+\bigO(c^{2})$ and
-$\PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2})$; the sequence effect carries no
-constant term precisely because both sequences coincide at $c=0$.
+\emph{Step 1: coincidence at $c=0$.} The prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$, and each
+Jeffrey step resets one coordinate's marginal while leaving the other untouched, as does the
+matched Bayesian update. Hence
+\[
+  \PJ_{AB}\big|_{c=0}=\PJ_{BA}\big|_{c=0}=\PB\big|_{c=0}=q\otimes r,
+  \qquad
+  \bigl(\PJ_{AB}-\PB\bigr)\big|_{c=0}
+   =\bigl(\PJ_{AB}-\PJ_{BA}\bigr)\big|_{c=0}=0 .
+\]
 
-\emph{The leading coefficients are not identically zero.} With
-$Z=\alpha\beta(1-\alpha)(1-\beta)>0$, differentiating at $c=0$,
+\emph{Step 2: Taylor expansion.} Each posterior is a rational function of $c$ whose denominator
+is nonvanishing near $0$, so both differences are analytic there and, having no constant term by
+Step 1,
+\[
+  \PJ_{AB}-\PB=c\,D+\bigO(c^{2}),
+  \qquad
+  \PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2}) .
+\]
+
+\emph{Step 3: the leading gap.} Differentiating at $c=0$, with
+$Z=\alpha\beta(1-\alpha)(1-\beta)>0$,
 \[
   D_{00}=-D_{01}=\frac{q_0 r_0\,(q_0-\alpha)(r_0-1)}{Z},
-  \]
-  \[
+  \qquad
   D_{10}=-D_{11}=\frac{-\,r_0\,(q_0-\alpha)(q_0-1)(r_0-1)}{Z},
 \]
-equivalently, in the compact rank-one form of the statement,
-$D=\kappa\,q\otimes(1,-1)$ with $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$. The $(1,-1)$ contrast makes
-the $A$-marginal preservation manifest ($D_{i0}=-D_{i1}$), and the scalar exhibits the two ways
-the gap can vanish at first order---$\kappa\propto(\alpha-q_0)$, the surprise in the
-$A$-impression relative to the prior, and $\kappa\propto r_0(1-r_0)$, the spread of the
-$B$-impression. Thus the leading individual gap vanishes only when the $A$-impression coincides
-with the prior $A$-marginal, or the $B$-impression is degenerate ($r_0\in\{0,1\}$). For any $q_0\neq\alpha$ in $(0,1)$ and $r_0\in(0,1)$ we have $D\not\equiv0$.
-For the sequence effect,
+\[
+  \text{equivalently}\qquad
+  D=\kappa\,q\otimes(1,-1),
+  \qquad
+  \kappa=\frac{(\alpha-q_0)\,r_0(1-r_0)}{Z} .
+\]
+The $(1,-1)$ contrast makes the $A$-marginal preservation manifest, $D_{i0}=-D_{i1}$.
+
+\emph{Step 4: $D\not\equiv0$.} The scalar $\kappa$ factors into the surprise in the
+$A$-impression and the spread of the $B$-impression,
+\[
+  \kappa\propto(\alpha-q_0),
+  \qquad
+  \kappa\propto r_0(1-r_0),
+  \qquad\text{so}\qquad
+  \kappa=0
+  \iff
+  q_0=\alpha \ \ \text{or}\ \ r_0\in\{0,1\},
+\]
+and hence $D\not\equiv0$ for any $q_0\neq\alpha$ in $(0,1)$ and $r_0\in(0,1)$.
+
+\emph{Step 5: the sequence effect.} For the diagonal,
 \[
   \Delta_{\mathrm{seq},\,00}
-   =\frac{q_0 r_0\big[(\alpha-\beta)+r_0(1-\alpha)-q_0(1-\beta)\big]}{Z},
+   =\frac{q_0 r_0\bigl[(\alpha-\beta)+r_0(1-\alpha)-q_0(1-\beta)\bigr]}{Z},
 \]
-whose bracket vanishes only on a single hypersurface, so $\Delta_{\mathrm{seq},\,00}$ is
-nonzero generically. Under full symmetry $\alpha=\beta,\ q_0=r_0$
-the bracket vanishes, so the diagonal components are zero; the sequence effect itself does not
-vanish there but is confined to the antisymmetric off-diagonal part,
+whose bracket vanishes only on a single hypersurface, so $\Delta_{\mathrm{seq},\,00}$ is nonzero
+generically. On the symmetry locus $\{\alpha=\beta,\ q_0=r_0\}$ the bracket vanishes and the
+effect is confined to the antisymmetric off-diagonal part,
 \[
   \Delta_{\mathrm{seq},\,01}=-\Delta_{\mathrm{seq},\,10}
-   =\frac{q_0(1-q_0)\,(q_0-\alpha)}{\alpha^{2}(1-\alpha)^{2}},
+   =\frac{q_0(1-q_0)\,(q_0-\alpha)}{\alpha^{2}(1-\alpha)^{2}}
+  \ \neq 0
+  \quad\text{unless } q_0=\alpha .
 \]
-which is zero only when additionally $q_0=\alpha$ (an uninformative impression). Both
-coefficients satisfy $\sum_k D_k=\sum_k\Delta_{\mathrm{seq},\,k}=0$, as a difference of
+Both coefficients satisfy $\sum_k D_k=\sum_k\Delta_{\mathrm{seq},\,k}=0$, as a difference of
 probability distributions must.
 \end{proof}
 
 The mechanism behind the proof is rather straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two orders trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). On the other hand, when $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two orders no longer agree at first order in $c$. 
-
-It is worth visiting how these mechanics  for individual gap materialise in the panel example. The panel and the benchmark differ to first order in every cell of the joint distribution, but the two cells making up the competence marginal probability differ by equal and opposite amounts and so add to nothing, while the two making up the trustworthiness marginal probability differ in the same direction and add to  $c\kappa$. More specifically, the individual gap, to first order, is
-\[
-  \PJ_{AB}-\PB = c\,\kappa\,q\otimes(1,-1) + \bigO(c^2), \qquad q\otimes(1,-1) =
-  \begin{pmatrix} q_0 & -q_0 \\ q_1 & -q_1 \end{pmatrix},
-\]
-where $\kappa$ depends only on $(\alpha,\beta,q_0,r_0)$, not on $c$. Row $i$ of the leading term
-is $(c\kappa q_i,\,-c\kappa q_i)$---equal and opposite---so it sums to zero, and the two cells
-making up the \emph{competence} marginal probability add to nothing. First column is
-$(c\kappa q_0,\,c\kappa q_1)$---same sign in both cells---so it sums to $c\kappa(q_0+q_1)=c\kappa$.
 
 The scalar $\kappa$ in Proposition~\ref{prop:A2} shows the two ways in which the \textbf{individual gap} $P^J_{AB}-P^B$---the difference between the credential-then-letter Jeffrey posterior and the Bayesian benchmark in our example---can vanish. Since $\kappa\propto(\alpha-q_0)$, the gap can vanish when the $A$-impression coincides with the prior $A$-marginal. Similarly, since $\kappa\propto r_0(1-r_0)$, the gap can also vanish when the $B$-impression is degenerate. In other words, the individual gap has a nonzero leading coefficient only when the credential's impression genuinely surprises ($q_{0}\neq\alpha$, the impression departing from the prior marginal probability) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$, neither glowing nor damning enough to be decisive).  So long as the first cue surprises ($q_0 \ne \alpha$) and the second cue remains soft evidence ($0 < r_0 < 1$), $\kappa$ remains non-zero. While the individual gap $\PJ_{AB}-\PB$ trivially vanishes when  $c=0$,  the gap remains at least first order in $c$ when $c\ne0$ since $\kappa\,q\otimes(1,-1)$ does not vanish. 
 
@@ -427,7 +458,7 @@ $\bigO(c^{2})$ exactly, and of whichever is read last is $\Theta(c)$ generically
 Indeed the two panels can not only differ in what they believe but also in what they decide.
 The fifth quantity measures this deviation as the panel's \textbf{flip indicator},
 $\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$, recording whether the first-order
-perturbation $c\delta_\sigma$ of the score carries the net surplus across the threshold. A flip requires two things together---the perturbation
+perturbation $c\delta_\sigma$ of the score carries the net surplus across the threshold. This quantity is what becomes the share of population affected by the sequence effect in the aggregate. At the individual level, a flip requires two things together---the perturbation
 $c\delta_\sigma$ must point toward the threshold, in the opposite direction from $u$ itself,
 and it must be large enough to actually reach it. Formally, $\sgn(u)\neq\sgn(u+c\delta_\sigma)$
 holds exactly when $\sgn(c\delta_\sigma)=-\sgn(u)$ and $|c\delta_\sigma|>|u|$---equivalently,
@@ -491,7 +522,7 @@ so neither is smooth in $c$ at the individual level, and neither carries a first
 coefficient of its own into the aggregate \anchor{Thm.~B2; Prop.~C2}. 
 
 
-How each of the six quantities behaves once averaged across the population---for the belief quantities, whether the individual first order survives; for the two decision quantities, what order the aggregate acquires at all---is the topic of the next section.
+How each of the six quantities behaves once averaged across the population is the topic of the next section.
 
 
 \section{Order Effect in the Population Aggregate}
