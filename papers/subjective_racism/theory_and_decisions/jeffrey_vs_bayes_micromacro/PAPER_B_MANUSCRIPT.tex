@@ -1,7 +1,11 @@
+\documentclass[a4paper,fleqn]{cas-sc}
 
-\documentclass[review,12pt,authoryear]{elsarticle}
+% --- Citation processing (CAS convention, author-year to match \citep/\citet/\citealp) ---
+\usepackage[authoryear,longnamesfirst]{natbib}
 
-\usepackage{amsmath,amssymb,amsthm}
+% --- Packages used by the manuscript body ---
+% amsmath/amsfonts/amssymb are already loaded by cas-sc.cls; only add the rest.
+\usepackage{amsthm}
 \usepackage{dsfont}
 \usepackage{booktabs}
 \usepackage{rotating}
@@ -9,6 +13,7 @@
 \usepackage{tikz}
 \usepackage[export]{adjustbox}
 
+% --- Theorem environments (unchanged from the original manuscript) ---
 \newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -18,6 +23,7 @@
 \newtheorem{assumption}{Assumption}
 \newtheorem{definition}{Definition}
 
+% --- Author macros (unchanged from the original manuscript) ---
 \newcommand{\PB}{P^{\mathrm{B}}}
 \newcommand{\PJ}{P^{\mathrm{J}}}
 \newcommand{\Pbar}{\overline{P}}
@@ -28,24 +34,28 @@
 \newcommand{\vv}{v}
 \newcommand{\anchor}[1]{}
 
-\journal{Journal of Mathematical Economics}
-
 \emergencystretch=3em
+
 \begin{document}
+\let\WriteBookmarks\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
 
-\begin{frontmatter}
+\shorttitle{Multi-scale decoupling of Jeffrey updating}
+\shortauthors{A. Srivastava}
 
-\title{Multi-scale decoupling of Jeffrey updating on correlated soft cues}
+\title[mode=title]{Multi-scale decoupling of Jeffrey updating on correlated soft cues}
 
-\author[rvt]{Anurag Srivastava\corref{cor1}}
+\author[1]{Anurag Srivastava}[orcid=0000-0002-6477-4430]
+\cormark[1]
 \ead{[author email to insert]}
 
-\cortext[cor1]{Corresponding author.}
+\affiliation[1]{organization={Riskcare Ltd.},
+                addressline={[affiliation address to insert]},
+                city={London},
+                country={United Kingdom}}
 
-\affiliation[rvt]{organization={Riskcare Ltd.},
-                  addressline={[affiliation address to insert]},
-                  city={London},
-                  country={United Kingdom}}
+\cortext[1]{Corresponding author.}
 
 \begin{abstract}
 The effect on individual judgment of the order in which evidence arrives has been of interest in many experimental studies. The current paper studies evaluators who read two correlated soft
@@ -53,17 +63,11 @@ cues in either order, updating coherently by Jeffrey conditioning, and compares 
 beliefs and decisions register the resulting order effects in the population aggregate. We argue that since the two orders displace a belief only within a two-dimensional plane, an arbitrary statistic is an order of magnitude closer to the benchmark in aggregate exactly when its sensitivity with respect to belief is flat along the plane. Thus while measures of the believed association and the average value lost through decisions differing from the benchmark stay close, two quantities---the average marginal probability and the share of the population whose decision the reading order changes---differ from the benchmark both for the individual and in the aggregate. The implication of these findings for audits is that an aggregate conforming to the benchmark is no evidence that reading order did not affect the decisions taken.
 \end{abstract}
 
- 
+\begin{keywords}
+Jeffrey conditioning \sep probability kinematics \sep belief aggregation \sep scale separation \sep order effects \sep normative measurement \sep \textit{JEL:} C11, D81, D83, D63
+\end{keywords}
 
-
-
-
-\begin{keyword}
-Jeffrey conditioning \sep probability kinematics \sep belief aggregation \sep scale separation \sep order effects \sep normative measurement
-\JEL C11 \sep D81 \sep D83 \sep D63
-\end{keyword}
-
-\end{frontmatter}
+\maketitle
 
 \section{Introduction}
 \label{sec:intro}
@@ -305,7 +309,8 @@ constant term precisely because both sequences coincide at $c=0$.
 $Z=\alpha\beta(1-\alpha)(1-\beta)>0$, differentiating at $c=0$,
 \[
   D_{00}=-D_{01}=\frac{q_0 r_0\,(q_0-\alpha)(r_0-1)}{Z},
-  \qquad
+  \]
+  \[
   D_{10}=-D_{11}=\frac{-\,r_0\,(q_0-\alpha)(q_0-1)(r_0-1)}{Z},
 \]
 equivalently, in the compact rank-one form of the statement,
@@ -439,23 +444,26 @@ when $u$ lies strictly between $0$ and $-c\delta_\sigma$. A perturbation $c\delt
 
 Writing $c^{*}:=|u/\delta_\sigma|$ for the crossing point, a panel with $u\neq0$ and
 $\delta_\sigma\neq0$ satisfies
-\[
-  \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}=
+\begin{align*}
+  \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}= \\
   \begin{cases}
     1, & |c|>c^{*} \ \wedge\ \sgn(c\delta_\sigma)=-\sgn(u),\\[2pt]
     0, & \text{otherwise},
   \end{cases}
   \qquad
   \equiv 0 \ \text{ on } (-c^{*},c^{*}),
-\]
+\end{align*}
+
 and therefore
-\[
+\begin{align*}
   \frac{\mathrm{d}^{k}}{\mathrm{d}c^{k}}
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\bigg|_{c=0}=0
   \quad \forall\, k\ge 0,
+  \\
   \qquad\text{while}\qquad
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\not\equiv 0.
-\]
+\end{align*}
+
 Every Taylor coefficient at the origin vanishes even though the quantity itself does not, so it is a step function of $c$, not a power of $c$, and it leaves no leading coefficient for
 aggregation to preserve or cancel. As we describe in the next subsection, what the
 population acquires comes instead from the measure of the flip set,
@@ -919,21 +927,15 @@ much probability when $f$ is continuous at $u=0$. The foregone surplus $|u|$ on 
        \;=\;\bigO(c^{2}).
 \]
 
-While the mechanism through which the surplus-weighted loss becomes second order may seem unremarkable, it is not the only mechanism by which a statistic can be second order. The believed cross-attribute association---which we explore in the next subsection---reaches second order by a completely different route. The necessary and sufficient condition for protection is given in Proposition~\ref{prop:C3}.
-
-At this point, a few other candidate explanations for why the surplus-weighted loss may become second order are worth ruling out. First, the rate is not an
-artefact of the \textbf{threshold density} itself. Consider three instances of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
+While the mechanism through which the surplus-weighted loss becomes second order may seem unremarkable \footnote{A few other candidate explanations for why the surplus-weighted loss may become second order are worth ruling out. First, the rate is not an
+artefact of the \emph{threshold density} itself. Consider three instances of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
 or iii) a \emph{vanishing} density, with no mass at the threshold. None of the three destroys the separation of scales, though two of them shift the exponent away from exactly $2$. The \emph{atom at the threshold} results in $|u|=0$, so the integrand vanishes. The \emph{integrable singularity}
 $f(u)\sim|u|^{-\gamma}$ with $0<\gamma<1$ degrades the rate but not the conclusion---the density
 is $\bigO(c^{-\gamma})$ and the cost $|u|$ is $\bigO(c)$, so the loss is
 $\bigO(c)\cdot\bigO(c)\cdot\bigO(c^{-\gamma})=\bigO(c^{2-\gamma})$, which is still $o(c)$ since
-$\gamma<1$. A \emph{vanishing} density $f(0)=0$ takes the loss below $\bigO(c^{2})$---continuity carries $f(0)=0$ onto the shrinking band, so $f=o(1)$ there while the band still contributes $\bigO(c^{2})$, giving $L(c)=o(c^{2})$.
+$\gamma<1$. A \emph{vanishing} density $f(0)=0$ takes the loss below $\bigO(c^{2})$---continuity carries $f(0)=0$ onto the shrinking band, so $f=o(1)$ there while the band still contributes $\bigO(c^{2})$, giving $L(c)=o(c^{2})$. Second, within that same regime, the exponent is not affected by the \emph{sequence distribution} either. This is because $\delta_\sigma$ enters \emph{squared} and so cannot average away even when sequencing is one-directional. Third, the \emph{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a requirement for the separation of scales. Smoothness is used above only to name the constant in the exact $c^{2}$ expression for the expected surplus loss. The decoupling of scales---i.e.\ the aggregate scale being strictly above the individual scale---relies in fact only on the integrability of $f$.}, it is not the only mechanism by which a statistic can be second order. The believed cross-attribute association---which we explore in the next subsection---reaches second order by a completely different route. The necessary and sufficient condition for protection is given in Proposition~\ref{prop:C3}.
 
 
-
-Second, within that same regime, the exponent is not affected by the \textbf{sequence distribution} either. This is because $\delta_\sigma$ enters \emph{squared} and so cannot average away even when sequencing is one-directional. The rate is $c^{2}$ whether the cue sequence is random ($\E\delta_\sigma=0$) or systematic ($\E\delta_\sigma\neq0$).
-
-Third, the \textbf{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a requirement for the separation of scales. Smoothness is used above only to name the constant in the exact $c^{2}$ expression for the expected surplus loss. The decoupling of scales---i.e.\ the aggregate scale being strictly above the individual scale---relies in fact only on the integrability of $f$.
 
 
 \subsection{Sequence-affected share---incidence versus intensity}
@@ -1355,8 +1357,7 @@ that could have appeared to influence the work reported in this paper.
 
 \section*{Acknowledgements}
 
-
-\bibliographystyle{elsarticle-harv}
+\bibliographystyle{cas-model2-names}
 \bibliography{bibliography}
 
 \end{document}
