@@ -507,7 +507,7 @@ vanishes identically in $\alpha$, $\beta$, $q_{0}$, $r_{0}$ and $\lambda$, while
 \label{tab:order-summary}
 \end{sidewaystable}
 
-\subsection{Primitives in Aggregate}
+\subsection{Aggregate Primitive Statistics}
 That both individual gap and score-gap remain $\Theta(c)$ in the population aggregate is somewhat trivial. This is because the aggregate simply mixes the two routes' own shifts together in proportion to 
 $\lambda$ and generically retains the sequence effects that were applicable at the individual level.
 
@@ -535,10 +535,10 @@ $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 \end{proof}
 
 
-\subsection{Belief Statistics in Aggregate}
+\subsection{Aggregate Belief Statistics}
 The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads first has its marginal pinned exactly to the impression, so that route's shift in that marginal is zero whereas the shift due the other route reading the attribute last is generically nonzero. Mixing the two does simply zero out the first-order effect. Once again, it's not the averaging that changes the sequence, but the nature of statistic itself determines the order.
 
-\subsubsection{Average believed cross-attribute association}
+\subsubsection{Aggregate cross-attribute association}
 \label{sec:association}
 
 Recall that the sense of stereotype in the paper depends on the cross-attribute association. With $\assoc(D)=D_{00}D_{11}-D_{01}D_{10}$ as the association of a joint law $D$, the \emph{stereotype} is the believed association absent from---or in excess of---the benchmark, a
@@ -552,10 +552,8 @@ conditioning in particular). The lemma is stated and proved for arbitrary $N$.
 
 \renewcommand{\thelemma}{SEP}%
 \begin{lemma}[separability of attribute-local composites]\label{lem:sep}
-Fix any number $N$ of binary attributes and a joint prior $P$ over $\{0,1\}^{N}$. Any finite
-sequence of attribute-local updates---each multiplying the law by a factor that reads the
-configuration through a single attribute's coordinate, as every Jeffrey update on one
-attribute's partition does---produces a \emph{separable} reweighting
+For any number $N$ of binary attributes and a joint prior $P$ over $\{0,1\}^{N}$, any finite
+sequence of attribute-local updates produces a \emph{separable} reweighting
 \[
   P'(x)=P(x)\prod_{a=1}^{N}g_{a}(x_{a})
 \]
@@ -699,7 +697,7 @@ association already present. Thus, sequence effects, in this model, do not creat
 order. In fact, no route and no mixture of routes moves the believed association. What the
 reading sequence does move is the subject of the next subsection.
 
-\subsubsection{Marginal-probability}
+\subsubsection{Aggregate Marginal-probability}
 \label{sec:marginal}
 
 The current section shows that the reading sequence does move the marginal probability in the aggregate. In other words, marginal probability does not behave like a protected statistic. Proposition \ref{prop:C1m} formalises this.
@@ -812,7 +810,7 @@ and trustworthiness would sit at essentially its benchmark value (order
 $c^{2}$). On the other hand, along the marginal-probability axis the average perceived marginal probability of either
 attribute would depart from the benchmark already at order $c$. It is only in the marginal probabilities that the observer could read off any trace of the sequence at all. The footprint of \textbf{sequencing} thus \textbf{resides in} the \textbf{marginal probabilities}, \textbf{not in} the \textbf{believed association}.
 
-\subsection{Decision Statistics in Aggregate}
+\subsection{Aggregate Decision Statistics}
 \subsubsection{Surplus-weighted loss}
 \label{sec:welfare}
 
@@ -883,8 +881,6 @@ $\bigO(c)\cdot\bigO(c)\cdot\bigO(c^{-\gamma})=\bigO(c^{2-\gamma})$, which is sti
 $\gamma<1$. A \emph{vanishing} density $f(0)=0$ takes the loss below $\bigO(c^{2})$---continuity carries $f(0)=0$ onto the shrinking band, so $f=o(1)$ there while the band still contributes $\bigO(c^{2})$, giving $L(c)=o(c^{2})$. Second, within that same regime, the exponent is not affected by the \emph{sequence distribution} either. This is because $\delta_\sigma$ enters \emph{squared} and so cannot average away even when sequencing is one-directional. Third, the \emph{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a requirement for the separation of scales. Smoothness is used above only to name the constant in the exact $c^{2}$ expression for the expected surplus loss. The decoupling of scales---i.e.\ the aggregate scale being strictly above the individual scale---relies in fact only on the integrability of $f$.}, it is not the only mechanism by which a statistic can be second order. The believed cross-attribute association---which we explore in the next subsection---reaches second order by a completely different route. The necessary and sufficient condition for protection is given in Proposition~\ref{prop:C3}.
 
 
-
-
 \subsubsection{Sequence-affected share---incidence versus intensity}
 \label{sec:criterion}
 
@@ -901,7 +897,6 @@ only evaluators within $\bigO(c)$ of the threshold can be affected at all. The c
 necessary but not sufficient---the perturbation must also point towards the threshold rather
 than away from it---so the affected form a subset of the band, and it is the band's mass,
 $f(0)\cdot\bigO(c)$, that sets the first-order rate.
-
 
 \renewcommand{\theproposition}{C2}%
 \begin{proposition}[sequence-affected share]\label{prop:C2}
