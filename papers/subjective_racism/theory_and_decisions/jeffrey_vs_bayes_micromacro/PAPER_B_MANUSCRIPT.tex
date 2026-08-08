@@ -127,7 +127,7 @@ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition---with no cue bearing 
 The engagement decision for the evaluator is defined in terms of a desirability vector $\vv=(v_{ij})_{i,j\in\{0,1\}}$---one entry per state-space cell (the same shape as $P$). With the score $s(P)=\langle\vv,P\rangle=\sum_{ij}v_{ij}P(i,j)$, the evaluator engages if and only if
 $s(P)\ge\tau$ \anchor{Setup}. This is expected-utility maximisation at the belief $P$---so that $s(P)$ is the expected desirability of engaging, and $\tau$ is the value of the outside option one forgoes by not engaging. Whether sequence-dependence changes what evaluators do or not is driven by the expected desirability an evaluator forgoes when their sequence-dependent belief leads them to a different action than a benchmark belief. 
 
-As we further detail in Section \ref{sec:jeffrey}, the Bayes-factor benchmark $\PB$ is used as an sequence-free reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
+As we further detail in Section \ref{sec:jeffrey}, the Bayes-factor benchmark $\PB$ is used as a sequence-free reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
 $\tau$ entering the results only through $u=s(\PB)-\tau$ and never appearing on its own.
 
 The surplus thus defined is what is of interest as the notion of loss in the population aggregate. With $\delta_\sigma$ as the first-order coefficient with which an evaluator's own score departs from the benchmark's under reading sequence $\sigma$ (see Section~\ref{sec:individual}), $g$ as the joint density of $(u,\delta_\sigma)$ across the population and the sequence distribution, the expected foregone surplus is defined as 
@@ -309,7 +309,7 @@ The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is r
 The scalar $\kappa$ in Proposition~\ref{prop:A2} shows the two ways in which the \emph{individual gap} $P^J_{AB}-P^B$ can vanish. Since $\kappa\propto(\alpha-q_0)$, the gap can vanish when the $A$-impression coincides with the prior $A$-marginal. Similarly, since $\kappa\propto r_0(1-r_0)$, the gap can also vanish when the $B$-impression is degenerate. In other words, the individual gap has a nonzero leading coefficient only when the credential's impression genuinely surprises ($q_{0}\neq\alpha$, the impression departing from the prior marginal probability) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$, neither glowing nor damning enough to be decisive).
 
 
-The sequence effect (Definition~\ref{def:seqeffect})---the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading sequences---is also first order for the individual, and it is worth pausing on why before turning to the next quantity. The sequence effect is irreducible to either single-order gap. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
+The sequence effect (Definition~\ref{def:seqeffect})---the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading sequences---is also first order for the individual, and it is worth pausing on why before turning to the next quantity. The sequence effect is irreducible to either single-route gap. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
 which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal
 fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates how ``first impressions stick''---once the attributes covary, the earlier cue leaves a residue in a direction the later cue does not reach. 
 
@@ -561,78 +561,11 @@ for some single-attribute functions $g_{a}$. Equivalently, $\log(P'/P)$ contains
 term of any order. \anchor{Lem.~SEP}
 \end{lemma}
 
-\begin{proof}
-Write the update sequence as $P_{0}=P$ and, for $t=1,\dots,T$,
-\[
-  P_{t}(x)=P_{t-1}(x)\,h_{t}(x_{a_{t}}),
-\]
-where $a_{t}$ is the attribute the $t$-th update reads and $h_{t}$ is a nonnegative function
-of that single coordinate. Jeffrey updates take exactly this form:
-\[
-  h(x_{a})=\frac{q_{x_{a}}}{P_{t-1}(A_{a}{=}x_{a})},
-\]
-state-dependent only through its normaliser $P_{t-1}(A_a{=}x_a)$---a function of $x_{a}$ alone,
-which is all the induction below uses.
-
-We claim, by induction on $t$, that
-$P_{t}(x)=P(x)\prod_{a=1}^{N}g^{(t)}_{a}(x_{a})$ for some single-attribute functions
-$g^{(t)}_{a}$. The base case $t=0$ holds with $g^{(0)}_{a}\equiv1$. For the inductive step,
-suppose the claim at $t-1$; then
-\[
-\begin{gathered}
-  P_{t}(x)
-  =P(x)\Big[\prod_{a}g^{(t-1)}_{a}(x_{a})\Big]h_{t}(x_{a_{t}})
-  =P(x)\prod_{a}g^{(t)}_{a}(x_{a}),
-  \\[4pt]
-  g^{(t)}_{a}:=
-  \begin{cases}
-    g^{(t-1)}_{a}\cdot h_{t}, & a=a_{t},\\[2pt]
-    g^{(t-1)}_{a}, & a\neq a_{t}
-  \end{cases}
-\end{gathered}
-\]
-the new factor folds into $g^{(t)}_{a_t}$ alone; no step couples two coordinates. Taking
-$g_{a}:=g^{(T)}_{a}$ gives the displayed form.
-
-For the equivalent formulation, on the common support (cells with $P(x)>0$ and every
-accumulated factor positive) take logarithms:
-\[
-  \log\frac{P'(x)}{P(x)}=\sum_{a=1}^{N}\log g_{a}(x_{a}),
-\]
-an additive function of the individual coordinates; write $\varphi:=\log(P'/P)$. For any pair
-$a<b$, define the pairwise contrast
-\[
-  \Delta_{ab}\varphi(x)\;:=\;\varphi(x)\big|_{x_{a}=1,x_{b}=1}-\varphi(x)\big|_{x_{a}=1,x_{b}=0}
-  -\varphi(x)\big|_{x_{a}=0,x_{b}=1}+\varphi(x)\big|_{x_{a}=0,x_{b}=0},
-\]
-holding every coordinate other than $a,b$ fixed. Writing $R:=\sum_{c\neq a,b}\log g_{c}(x_{c})$
-for the (fixed) contribution of the remaining coordinates,
-\begin{align*}
-  \Delta_{ab}\varphi
-  &=\bigl[\log g_{a}(1)+\log g_{b}(1)+R\bigr]-\bigl[\log g_{a}(1)+\log g_{b}(0)+R\bigr]\\
-  &\quad-\bigl[\log g_{a}(0)+\log g_{b}(1)+R\bigr]+\bigl[\log g_{a}(0)+\log g_{b}(0)+R\bigr]
-  \;=\;0,
-\end{align*}
-valid for every pair $a<b$ and every fixing of the other $N-2$ coordinates. Higher-order
-contrasts telescope into this one: for any three coordinates $a,b,c$, and any $\varphi$
-whatsoever (additive or not),
-\[
-  \Delta_{abc}\varphi \;=\; \Delta_{ab}\varphi\big|_{x_{c}=1}-\Delta_{ab}\varphi\big|_{x_{c}=0},
-\]
-and analogously at every order above three, so $\Delta_{ab}\varphi\equiv0$ for all pairs forces
-every $\Delta_{S}\varphi\equiv0$, $|S|\ge2$---exactly the interaction coefficients $\lambda_{S}$
-of the log-linear (M\"obius) decomposition
-$\varphi=\lambda_{\emptyset}+\sum_{a}\lambda_{a}(x_{a})+\sum_{a<b}\lambda_{ab}(x_{a},x_{b})
-+\cdots$. Conversely,
-\[
-  \lambda_{\emptyset}:=\varphi(0),\qquad
-  \lambda_{a}(1):=\varphi(x_{a}{=}1,x_{-a}{=}0)-\varphi(0),\qquad \lambda_{a}(0):=0
-\]
-reproduces $\varphi(x)$ exactly at every $x$ once every pairwise contrast vanishes, by the same
-telescope run backward. Separability of $P'/P$ and vanishing interaction of order $\ge2$ are
-thus the same condition both ways. Nothing above is specific to Jeffrey updating, $N=2$, or
-sequence length.
-\end{proof}
+The proof is provided in Appendix~\ref{app:proofs}. It proceeds by induction on the update
+sequence: each attribute-local step folds into that attribute's own multiplicative factor
+without ever coupling two coordinates, so the product form survives any finite sequence of such
+steps; an equivalent log-linear characterisation---no interaction term of any order---follows
+from the same argument.
 
 The Jeffrey-specific content is therefore confined to the \emph{sequence effect}
 itself (Proposition~\ref{prop:A2})---as a property of probability kinematics. The first-order
@@ -719,7 +652,7 @@ $\sgn(q_0-\alpha)$. For every $\lambda\in[0,1]$, therefore, at least one margina
 
 \begin{proof}
 In the $BA$ sequence, the $A$-cue is processed last, and a Jeffrey step pins its own marginal ($\PJ_{BA}(A{=}1)=q_{1}$ identically
-in $c$). Similarly, in the $AB$ order the later $B$-step pulls the $A$-marginal off the delivered value
+in $c$). Similarly, in the $AB$ sequence the later $B$-step pulls the $A$-marginal off the delivered value
 through the covariance so that we have
 \[
   \PJ_{AB}(A{=}1)=q_{1}-c\,\frac{q_{0}(1-q_{0})(r_{0}-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}
@@ -1053,12 +986,12 @@ per-error cost the aggregate loss \emph{is} the incidence and is first order
 (Proposition~\ref{prop:C2})---the criterion-dependence is the content of the paper, not a
 weakness of it, and Proposition~\ref{prop:C3} delimits precisely which criteria are protected.
 
-A prior covariance outside the leading-sequence regime voids the separation
+A prior covariance outside the leading-order regime voids the separation
 (Assumption~\ref{as:localc}). Assumption~\ref{as:localc} states the results as $c\to0$: they
 compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior
 covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then
 genuinely smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two
-sequences are no longer numerically distinguishable, and the local-in-$c$ results do not apply.
+orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply.
 This is not a claim that the aggregates' distortion changes character at large $c$; it is that
 the hypothesis under which $\bigO(c)$ was compared to $\bigO(c^{2})$---$c$ small---no longer
 holds, so the theorems make no claim, favourable or unfavourable, about the aggregates'
@@ -1081,7 +1014,7 @@ which an arbitrary smooth statistic of the average belief is protected, at first
 non-commutativity of coherent sequential updating. This characterisation is built up
 from the fundamental observation that the individual gap is not an arbitrary perturbation. Each
 reading sequence contributes one route direction ($R_1$ and $R_2$ of
-Section~\ref{sec:protected}), so the leading-sequence departures of the average posterior from the
+Section~\ref{sec:protected}), so the leading-order departures of the average posterior from the
 benchmark are confined to the plane those two directions span. A smooth statistic responds to
 that departure only through its differential at independence. Whether a statistic is protected
 therefore turns on one geometric question---whether its differential annihilates the route
@@ -1109,10 +1042,10 @@ evidence that the individual distortions are absent.
 \midrule
 \multicolumn{3}{@{}l}{\emph{Belief statistics}}\\
 \midrule
-How far does the population's believed association sit from an sequence-free reading?
+How far does the population's believed association sit from a sequence-free reading?
   & $\assoc(\Pbar)-\assoc(\PB)$
   & $\bigO(c^{2})$ exactly (Lemma~A3; Prop.~C1)\\
-How far does the population's believed marginal probability sit from an sequence-free reading?
+How far does the population's believed marginal probability sit from a sequence-free reading?
   & $\Pbar(A{=}1)-\PB(A{=}1)$
   & $\Theta(c)$ generically, at least one attribute (Prop.~C1$'$)\\
 \midrule
@@ -1156,7 +1089,7 @@ as well as sufficient (Proposition~\ref{prop:C3}) for smooth statistics of the a
 at any interior mixture of reading sequences and across an open set of priors. This establishes
 that, for the two-cue setting studied here, there are no protected statistics beyond the local
 dependence measures and, for the threshold decision, the surplus-weighted loss. The observational consequence that connects to
-the belief-aggregation criterion of Section~\ref{sec:literature} is that at leading sequence, a
+the belief-aggregation criterion of Section~\ref{sec:literature} is that at leading order, a
 population's aggregate beliefs can look externally Bayesian---sequence-free, benchmark-conforming
 on the protected statistics---even when no member's belief is.
 
@@ -1231,6 +1164,80 @@ effect is confined to the antisymmetric off-diagonal part,
 \]
 Both coefficients satisfy $\sum_k D_k=\sum_k\Delta_{\mathrm{seq},\,k}=0$, as a difference of
 probability distributions must.
+\qed
+
+\subsection{Proof of Lemma~\ref{lem:sep}}
+
+Write the update sequence as $P_{0}=P$ and, for $t=1,\dots,T$,
+\[
+  P_{t}(x)=P_{t-1}(x)\,h_{t}(x_{a_{t}}),
+\]
+where $a_{t}$ is the attribute the $t$-th update reads and $h_{t}$ is a nonnegative function
+of that single coordinate. Jeffrey updates take exactly this form:
+\[
+  h(x_{a})=\frac{q_{x_{a}}}{P_{t-1}(A_{a}{=}x_{a})},
+\]
+state-dependent only through its normaliser $P_{t-1}(A_a{=}x_a)$---a function of $x_{a}$ alone,
+which is all the induction below uses.
+
+We claim, by induction on $t$, that
+$P_{t}(x)=P(x)\prod_{a=1}^{N}g^{(t)}_{a}(x_{a})$ for some single-attribute functions
+$g^{(t)}_{a}$. The base case $t=0$ holds with $g^{(0)}_{a}\equiv1$. For the inductive step,
+suppose the claim at $t-1$; then
+\[
+\begin{gathered}
+  P_{t}(x)
+  =P(x)\Big[\prod_{a}g^{(t-1)}_{a}(x_{a})\Big]h_{t}(x_{a_{t}})
+  =P(x)\prod_{a}g^{(t)}_{a}(x_{a}),
+  \\[4pt]
+  g^{(t)}_{a}:=
+  \begin{cases}
+    g^{(t-1)}_{a}\cdot h_{t}, & a=a_{t},\\[2pt]
+    g^{(t-1)}_{a}, & a\neq a_{t}
+  \end{cases}
+\end{gathered}
+\]
+the new factor folds into $g^{(t)}_{a_t}$ alone; no step couples two coordinates. Taking
+$g_{a}:=g^{(T)}_{a}$ gives the displayed form.
+
+For the equivalent formulation, on the common support (cells with $P(x)>0$ and every
+accumulated factor positive) take logarithms:
+\[
+  \log\frac{P'(x)}{P(x)}=\sum_{a=1}^{N}\log g_{a}(x_{a}),
+\]
+an additive function of the individual coordinates; write $\varphi:=\log(P'/P)$. For any pair
+$a<b$, define the pairwise contrast
+\[
+  \Delta_{ab}\varphi(x)\;:=\;\varphi(x)\big|_{x_{a}=1,x_{b}=1}-\varphi(x)\big|_{x_{a}=1,x_{b}=0}
+  -\varphi(x)\big|_{x_{a}=0,x_{b}=1}+\varphi(x)\big|_{x_{a}=0,x_{b}=0},
+\]
+holding every coordinate other than $a,b$ fixed. Writing $R:=\sum_{c\neq a,b}\log g_{c}(x_{c})$
+for the (fixed) contribution of the remaining coordinates,
+\begin{align*}
+  \Delta_{ab}\varphi
+  &=\bigl[\log g_{a}(1)+\log g_{b}(1)+R\bigr]-\bigl[\log g_{a}(1)+\log g_{b}(0)+R\bigr]\\
+  &\quad-\bigl[\log g_{a}(0)+\log g_{b}(1)+R\bigr]+\bigl[\log g_{a}(0)+\log g_{b}(0)+R\bigr]
+  \;=\;0,
+\end{align*}
+valid for every pair $a<b$ and every fixing of the other $N-2$ coordinates. Higher-order
+contrasts telescope into this one: for any three coordinates $a,b,c$, and any $\varphi$
+whatsoever (additive or not),
+\[
+  \Delta_{abc}\varphi \;=\; \Delta_{ab}\varphi\big|_{x_{c}=1}-\Delta_{ab}\varphi\big|_{x_{c}=0},
+\]
+and analogously at every order above three, so $\Delta_{ab}\varphi\equiv0$ for all pairs forces
+every $\Delta_{S}\varphi\equiv0$, $|S|\ge2$---exactly the interaction coefficients $\lambda_{S}$
+of the log-linear (M\"obius) decomposition
+$\varphi=\lambda_{\emptyset}+\sum_{a}\lambda_{a}(x_{a})+\sum_{a<b}\lambda_{ab}(x_{a},x_{b})
++\cdots$. Conversely,
+\[
+  \lambda_{\emptyset}:=\varphi(0),\qquad
+  \lambda_{a}(1):=\varphi(x_{a}{=}1,x_{-a}{=}0)-\varphi(0),\qquad \lambda_{a}(0):=0
+\]
+reproduces $\varphi(x)$ exactly at every $x$ once every pairwise contrast vanishes, by the same
+telescope run backward. Separability of $P'/P$ and vanishing interaction of order $\ge2$ are
+thus the same condition both ways. Nothing above is specific to Jeffrey updating, $N=2$, or
+sequence length.
 \qed
 
 \subsection{Proof of Theorem~\ref{thm:B2}}
