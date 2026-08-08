@@ -88,7 +88,7 @@ The answer provided by the paper to the question of how individual order-depende
 (Proposition~\ref{prop:C1}) and the surplus-weighted loss of the population's decisions
 (Theorem~\ref{thm:B2}) are second order. Second, it characterises exactly which
 aggregate statistics can register the phenomenon at its own order. For every interior mixture of reading orders and across an open set of priors, a smooth statistic of the average belief is
-second order if and only if its differential at independence is proportional to the differential of the believed cross-attribute association(Proposition~\ref{prop:C3}). The condition is necessary as well as sufficient, so the protected
+second order if and only if its differential at independence is proportional to the differential of the believed cross-attribute association (Proposition~\ref{prop:C3}). The condition is necessary as well as sufficient, so the protected
 statistics (i.e.\ those that become second order) are the local dependence measures and surplus-weighted loss (for the threshold decision). The clear implication of the finding is that what an audit can answer depends on which statistic is aggregated rather than on how many evaluators are averaged over \footnote{What we consider as association in the paper is one that is held by an evaluator rather than one that is exhibited by the world. In other words, the
 prior covariance $c$ is a feature of a panel's belief about a single candidate, not a frequency among candidates that the panels are estimating.}.
 
@@ -307,71 +307,8 @@ $\Delta_{\mathrm{seq}}\not\equiv0$.
 \anchor{Prop.~A2}
 \end{proposition}
 
-\begin{proof}
-\emph{Step 1: coincidence at $c=0$.} The prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$, and each
-Jeffrey step resets one coordinate's marginal while leaving the other untouched, as does the
-matched Bayesian update. Hence
-\[
-  \PJ_{AB}\big|_{c=0}=\PJ_{BA}\big|_{c=0}=\PB\big|_{c=0}=q\otimes r,
-  \qquad
-  \bigl(\PJ_{AB}-\PB\bigr)\big|_{c=0}
-   =\bigl(\PJ_{AB}-\PJ_{BA}\bigr)\big|_{c=0}=0 .
-\]
+The proof is in \ref{app:proofs}.
 
-\emph{Step 2: Taylor expansion.} Each posterior is a rational function of $c$ whose denominator
-is nonvanishing near $0$, so both differences are analytic there and, having no constant term by
-Step 1,
-\[
-  \PJ_{AB}-\PB=c\,D+\bigO(c^{2}),
-  \qquad
-  \PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2}) .
-\]
-
-\emph{Step 3: the leading gap.} Differentiating at $c=0$, with
-$Z=\alpha\beta(1-\alpha)(1-\beta)>0$,
-\[
-  D_{00}=-D_{01}=\frac{q_0 r_0\,(q_0-\alpha)(r_0-1)}{Z},
-  \qquad
-  D_{10}=-D_{11}=\frac{-\,r_0\,(q_0-\alpha)(q_0-1)(r_0-1)}{Z},
-\]
-\[
-  \text{equivalently}\qquad
-  D=\kappa\,q\otimes(1,-1),
-  \qquad
-  \kappa=\frac{(\alpha-q_0)\,r_0(1-r_0)}{Z} .
-\]
-The $(1,-1)$ contrast makes the $A$-marginal preservation manifest, $D_{i0}=-D_{i1}$.
-
-\emph{Step 4: $D\not\equiv0$.} The scalar $\kappa$ factors into the surprise in the
-$A$-impression and the spread of the $B$-impression,
-\[
-  \kappa\propto(\alpha-q_0),
-  \qquad
-  \kappa\propto r_0(1-r_0),
-  \qquad\text{so}\qquad
-  \kappa=0
-  \iff
-  q_0=\alpha \ \ \text{or}\ \ r_0\in\{0,1\},
-\]
-and hence $D\not\equiv0$ for any $q_0\neq\alpha$ in $(0,1)$ and $r_0\in(0,1)$.
-
-\emph{Step 5: the sequence effect.} For the diagonal,
-\[
-  \Delta_{\mathrm{seq},\,00}
-   =\frac{q_0 r_0\bigl[(\alpha-\beta)+r_0(1-\alpha)-q_0(1-\beta)\bigr]}{Z},
-\]
-whose bracket vanishes only on a single hypersurface, so $\Delta_{\mathrm{seq},\,00}$ is nonzero
-generically. On the symmetry locus $\{\alpha=\beta,\ q_0=r_0\}$ the bracket vanishes and the
-effect is confined to the antisymmetric off-diagonal part,
-\[
-  \Delta_{\mathrm{seq},\,01}=-\Delta_{\mathrm{seq},\,10}
-   =\frac{q_0(1-q_0)\,(q_0-\alpha)}{\alpha^{2}(1-\alpha)^{2}}
-  \ \neq 0
-  \quad\text{unless } q_0=\alpha .
-\]
-Both coefficients satisfy $\sum_k D_k=\sum_k\Delta_{\mathrm{seq},\,k}=0$, as a difference of
-probability distributions must.
-\end{proof}
 
 The mechanism behind the proof is rather straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two orders trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). On the other hand, when $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two orders no longer agree at first order in $c$. 
 
@@ -382,7 +319,7 @@ Notice that the sequence effect (Definition~\ref{def:seqeffect})---the differenc
 which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal
 fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates how ``first impressions stick''---once the attributes covary, the earlier cue leaves a residue in a direction the later cue does not reach. This is also evident at the symmetry locus $\{\alpha=\beta,\ q_0=r_0\}$---where the sequence effect remains in the antisymmetric off-diagonal part, $\Delta_{\mathrm{seq},01}=-\Delta_{\mathrm{seq},10}=q_0(1-q_0)(q_0-\alpha)/(\alpha^{2}(1-\alpha)^{2})$, moving the score whenever $v_{01}\neq v_{10}$ and vanishing only at the uninformative point $q_0=\alpha$. As a result, the panel that reads the credential first and the letter second lets the letter's impression stand as its whole verdict on trustworthiness, discarding what a strong credential should have suggested about trustworthiness. Relative to the benchmark it is therefore too harsh after a good credential and too generous after a bad one---and it flips if the panel reads in the other order. 
 
-That $R_1$ and $R_2$ are two distinct directions is exactly why no single scalar captures how the two reading orders move a general read-out of the belief. This motivates the second primitive : score. For a fixed weight $\vv$, a panel's \textbf{score gap} is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's,
+That $R_1$ and $R_2$ are two distinct directions is exactly why no single scalar captures how the two reading orders move a general read-out of the belief. This motivates the second primitive statistic, the score. For a fixed weight $\vv$, a panel's \textbf{score gap} is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's,
 \[
   s(\PJ_\sigma)-s(\PB)=c\,\delta_\sigma+\bigO(c^{2}), \qquad \delta_\sigma:=\big\langle\vv,\ \partial_c(\PJ_\sigma-\PB)|_{c=0}\big\rangle.
 \]
@@ -504,7 +441,7 @@ which is why the sequence-affected share is $\Theta(c)$ under a density hypothes
 exactly or generically so (Proposition~\ref{prop:C2}).
 
 
-The second decision-statistics is the panel's \textbf{foregone surplus} which measures costs of a flip $|u|$ i.e. in the event that the decision flips. It weights the flip indicator by the stake at issue, so that panels barely
+The second decision statistic is the panel's \textbf{foregone surplus} which measures costs of a flip $|u|$ i.e. in the event that the decision flips. It weights the flip indicator by the stake at issue, so that panels barely
 past the threshold contribute little and panels far from it contribute much. Writing
 $\ell_\sigma(c):=|u|\cdot\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ for the foregone
 surplus, both decision quantities inherit the same threshold structure established above for
@@ -533,9 +470,9 @@ How each of the quantities behaves once averaged across the population is the to
 \section{Order Effect in the Population Aggregate}
 \label{sec:aggregation}
 
-We now describe how the order-effect on the statistics discussed int he previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter orders: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
+We now describe how the order-effect on the statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter orders: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
 rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
-$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. As it turns what makes a statistic second-order or first-order is largely the nature of statistic itself rather than the mechanism of aggregation.
+$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. As it turns out, what makes a statistic second order or first order is largely the nature of the statistic itself rather than the mechanism of aggregation.
 
 Two definitions are worth pinning down at this stage. First, any smooth scalar statistic $F$ of the belief experiences a \emph{distortion} of $F$ as the aggregate departure from the benchmark, $F(\Pbar)-F(\PB)$. This is the aggregate counterpart of the individual gap and is always a population-average object by definition. Second, we define the notion of a \emph{protection}, which classifies that distortion by its order in $c$.
 
@@ -569,8 +506,13 @@ posterior but some statistic $F$, and the class $F$ thus decides whether the fir
 \toprule
 \textbf{Individual Quantity} & \textbf{Aggregate Quantity} & \textbf{Individual} & \textbf{Aggregate} & \textbf{Reference}\\
 \midrule
+\multicolumn{5}{@{}l}{\emph{Primitive statistics}}\\
+\midrule
 \textbf{Gap}---individual gap & aggregate departure from benchmark & $\Theta(c)$ generically & $\Theta(c)$ generically & Prop.~A2; proof of Prop.~C3\\
 \textbf{Score gap}---score gap on an unprotected weight, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & unprotected-weight mean, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & $\Theta(c)$ generically & $\Theta(c)$ generically & Lemma~B1\\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Belief statistics}}\\
+\midrule
 \textbf{Association}---believed association (odds ratio, Yule's $Q$) & average believed association; more generally any $F$ with $dF\propto d\,\assoc$ & $\bigO(c^{2})$ exactly & $\bigO(c^{2})$ exactly & Lemma~A3; Prop.~C1; \S\ref{sec:protected}\\
 \textbf{Marginal}---marginal probability & marginal-probability drift & $\Theta(c)$ generically on the cue read last, $\bigO(c^{2})$ exactly on the cue read first & $\Theta(c)$ generically for at least one attribute, every $\lambda$ & Prop.~A2; Prop.~C1$'$\\
 \midrule
@@ -582,7 +524,7 @@ posterior but some statistic $F$, and the class $F$ thus decides whether the fir
 \end{tabular}
 \caption{Order in the prior covariance $c$, individual versus aggregate. $\Theta(c)$ marks a
 nonzero leading coefficient (genuinely first order) and $\bigO(c^{2})$ a leading coefficient
-that vanishes (protected). Among the belief statistics, \emph{exactly} marks a coefficient that
+that vanishes (protected). Among the primitive and belief statistics, \emph{exactly} marks a coefficient that
 vanishes identically in $\alpha$, $\beta$, $q_{0}$, $r_{0}$ and $\lambda$, while
 \emph{generically} marks one that vanishes only on a lower-dimensional set of those.}
 \label{tab:order-summary}
@@ -1186,16 +1128,35 @@ evidence that the individual distortions are absent.
 \begin{table}[htbp]
 \centering
 \small
-\begin{tabular}{@{}p{5.6cm}p{5.6cm}@{}}
+\begin{tabular}{@{}p{5.0cm}p{4.6cm}p{4.4cm}@{}}
 \toprule
-\textbf{First order (unprotected)} & \textbf{Second order (protected)}\\
+\textbf{Question} & \textbf{Quantity} & \textbf{Answer}\\
 \midrule
-Each member's belief and decision & The population's mean believed association\\
-The marginal probability of at least one attribute, in aggregate & Any local dependence measure (odds ratio, log odds ratio, Yule's $Q$)\\
-The share of the population whose decision the order changes & The surplus-weighted loss\\
+\multicolumn{3}{@{}l}{\emph{Belief statistics}}\\
+\midrule
+How far does the population's believed association sit from an order-free reading?
+  & $\assoc(\Pbar)-\assoc(\PB)$
+  & $\bigO(c^{2})$ exactly (Lemma~A3; Prop.~C1)\\
+How far does the population's believed marginal probability sit from an order-free reading?
+  & $\Pbar(A{=}1)-\PB(A{=}1)$
+  & $\Theta(c)$ generically, at least one attribute (Prop.~C1$'$)\\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Decision statistics}}\\
+\midrule
+How large is the share of candidates whose decision the reading order changed?
+  & $\Pr\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$
+  & $\Theta(c)$ (Prop.~C2)\\
+How large is the surplus the population forgoes on those changed decisions?
+  & $L(c)=\E\bigl[|u|\,\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\bigr]$
+  & $\bigO(c^{2})$ (Theorem~B2)\\
 \bottomrule
 \end{tabular}
-\caption{First order versus second order, in plain terms.}
+\caption{What four aggregate audits of the same population would find. Two return a
+second-order answer and see nothing; two return a first-order answer and see the effect, and
+the split does not follow the belief/decision division. The surplus-weighted loss is
+$\bigO(c^{2})$ under the density hypothesis of Theorem~\ref{thm:B2}; without it only
+$L(c)=o(c)$ survives.}
+\label{tab:audit-questions}
 \end{table}
 
 The instrumental reading also follows from the characterisation. More particularly, detection
@@ -1229,6 +1190,73 @@ on the protected statistics---even when no member's belief is.
 
 \section{Deferred proofs}
 \label{app:proofs}
+
+\subsection{Proof of Proposition~\ref{prop:A2}}
+
+\emph{Step 1: coincidence at $c=0$.} The prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$, and each
+Jeffrey step resets one coordinate's marginal while leaving the other untouched, as does the
+matched Bayesian update. Hence
+\[
+  \PJ_{AB}\big|_{c=0}=\PJ_{BA}\big|_{c=0}=\PB\big|_{c=0}=q\otimes r,
+  \qquad
+  \bigl(\PJ_{AB}-\PB\bigr)\big|_{c=0}
+   =\bigl(\PJ_{AB}-\PJ_{BA}\bigr)\big|_{c=0}=0 .
+\]
+
+\emph{Step 2: Taylor expansion.} Each posterior is a rational function of $c$ whose denominator
+is nonvanishing near $0$, so both differences are analytic there and, having no constant term by
+Step 1,
+\[
+  \PJ_{AB}-\PB=c\,D+\bigO(c^{2}),
+  \qquad
+  \PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2}) .
+\]
+
+\emph{Step 3: the leading gap.} Differentiating at $c=0$, with
+$Z=\alpha\beta(1-\alpha)(1-\beta)>0$,
+\[
+  D_{00}=-D_{01}=\frac{q_0 r_0\,(q_0-\alpha)(r_0-1)}{Z},
+  \qquad
+  D_{10}=-D_{11}=\frac{-\,r_0\,(q_0-\alpha)(q_0-1)(r_0-1)}{Z},
+\]
+\[
+  \text{equivalently}\qquad
+  D=\kappa\,q\otimes(1,-1),
+  \qquad
+  \kappa=\frac{(\alpha-q_0)\,r_0(1-r_0)}{Z} .
+\]
+The $(1,-1)$ contrast makes the $A$-marginal preservation manifest, $D_{i0}=-D_{i1}$.
+
+\emph{Step 4: $D\not\equiv0$.} The scalar $\kappa$ factors into the surprise in the
+$A$-impression and the spread of the $B$-impression,
+\[
+  \kappa\propto(\alpha-q_0),
+  \qquad
+  \kappa\propto r_0(1-r_0),
+  \qquad\text{so}\qquad
+  \kappa=0
+  \iff
+  q_0=\alpha \ \ \text{or}\ \ r_0\in\{0,1\},
+\]
+and hence $D\not\equiv0$ for any $q_0\neq\alpha$ in $(0,1)$ and $r_0\in(0,1)$.
+
+\emph{Step 5: the sequence effect.} For the diagonal,
+\[
+  \Delta_{\mathrm{seq},\,00}
+   =\frac{q_0 r_0\bigl[(\alpha-\beta)+r_0(1-\alpha)-q_0(1-\beta)\bigr]}{Z},
+\]
+whose bracket vanishes only on a single hypersurface, so $\Delta_{\mathrm{seq},\,00}$ is nonzero
+generically. On the symmetry locus $\{\alpha=\beta,\ q_0=r_0\}$ the bracket vanishes and the
+effect is confined to the antisymmetric off-diagonal part,
+\[
+  \Delta_{\mathrm{seq},\,01}=-\Delta_{\mathrm{seq},\,10}
+   =\frac{q_0(1-q_0)\,(q_0-\alpha)}{\alpha^{2}(1-\alpha)^{2}}
+  \ \neq 0
+  \quad\text{unless } q_0=\alpha .
+\]
+Both coefficients satisfy $\sum_k D_k=\sum_k\Delta_{\mathrm{seq},\,k}=0$, as a difference of
+probability distributions must.
+\qed
 
 \subsection{Proof of Theorem~\ref{thm:B2}}
 
