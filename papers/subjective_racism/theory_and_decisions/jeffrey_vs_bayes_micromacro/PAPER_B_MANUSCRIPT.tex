@@ -186,7 +186,7 @@ on any one cue with the matched Jeffrey step (Proposition~\ref{prop:A1}). We com
 \subsection{Assumptions}
 \label{sec:assumptions}
 
-With the above primitives, we now state four key assumptions that limit the scope of our discussion---fixing which reading orders, which cues, and which criterion the results apply to. The assumptions are revisited again in Section~\ref{sec:scope} to discuss how relaxing one or more of these assumptions would affect our key conclusions.
+With the above setup, we now state four key assumptions that limit the scope of our discussion---fixing which reading orders, which cues, and which criterion the results apply to. The assumptions are revisited again in Section~\ref{sec:scope} to discuss how relaxing one or more of these assumptions would affect our key conclusions.
 
 \begin{assumption}[Locality in $c$]\label{as:localc}
 The prior covariance $c$ between the two correlated attributes is treated as small, and results
@@ -253,11 +253,11 @@ our decision-space result shows the same kind of erasure can occur within a sing
 \section{Order effects at the individual level}
 \label{sec:individual}
 
-Since Bayesian conditioning is order-independent by definition, we measure order effects primarily in terms of two \textbf{primitive-statistics} -- that we refer to as gap and score. The \emph{individual gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive statistic is a \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the order-free reference $\PB$ alongside with a threshold $\tau$. The rest of the belief-statistics and decision-statistics rely on these two primitive statistics. Recall Section~\ref{sec:setup} that $\Pbar$ is the mean posterior, $u:=s(\PB)-\tau$ the net surplus, and $|u|$ the cost of taking the action that differs from the benchmark action. 
+Since Bayesian conditioning is order-independent by definition, we measure order effects primarily in terms of two \textbf{primitive} statistics -- that we refer to as gap and score. The \emph{individual gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive is a \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the order-free reference $\PB$ alongside with a threshold $\tau$. The rest of the belief-statistics and decision-statistics rely on these two primitives. Recall Section~\ref{sec:setup} that $\Pbar$ is the mean posterior, $u:=s(\PB)-\tau$ the net surplus, and $|u|$ the cost of taking the action that differs from the benchmark action. 
 
 With these, the two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How all these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}. 
 
-\subsection{Primitive Statistics for the evaluator}
+\subsection{Primitives for the evaluator}
 Starting with the \emph{individual gap}, we first state the rather trivial assertion that the difference between Jeffrey and Bayes is absent on a single cue or on two cues on independent attributes. It is worth highlighting here that since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (Assumption~\ref{as:soft}).
 
 \renewcommand{\theproposition}{A1}%
@@ -307,26 +307,20 @@ $\Delta_{\mathrm{seq}}\not\equiv0$.
 \anchor{Prop.~A2}
 \end{proposition}
 
-The proof is in \ref{app:proofs}.
+The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is rather straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two orders trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). On the other hand, when $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two orders no longer agree at first order in $c$. 
+
+The scalar $\kappa$ in Proposition~\ref{prop:A2} shows the two ways in which the \emph{individual gap} $P^J_{AB}-P^B$ can vanish. Since $\kappa\propto(\alpha-q_0)$, the gap can vanish when the $A$-impression coincides with the prior $A$-marginal. Similarly, since $\kappa\propto r_0(1-r_0)$, the gap can also vanish when the $B$-impression is degenerate. In other words, the individual gap has a nonzero leading coefficient only when the credential's impression genuinely surprises ($q_{0}\neq\alpha$, the impression departing from the prior marginal probability) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$, neither glowing nor damning enough to be decisive).
 
 
-The mechanism behind the proof is rather straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two orders trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). On the other hand, when $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two orders no longer agree at first order in $c$. 
-
-The scalar $\kappa$ in Proposition~\ref{prop:A2} shows the two ways in which the \emph{individual gap} $P^J_{AB}-P^B$ can vanish. Since $\kappa\propto(\alpha-q_0)$, the gap can vanish when the $A$-impression coincides with the prior $A$-marginal. Similarly, since $\kappa\propto r_0(1-r_0)$, the gap can also vanish when the $B$-impression is degenerate. In other words, the individual gap has a nonzero leading coefficient only when the credential's impression genuinely surprises ($q_{0}\neq\alpha$, the impression departing from the prior marginal probability) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$, neither glowing nor damning enough to be decisive).  So long as the first cue surprises ($q_0 \ne \alpha$) and the second cue remains soft evidence ($0 < r_0 < 1$), $\kappa$ remains non-zero. While the individual gap $\PJ_{AB}-\PB$ trivially vanishes when  $c=0$,  the gap remains at least first order in $c$ when $c\ne0$ since $\kappa\,q\otimes(1,-1)$ does not vanish. 
-
-
-Notice that the sequence effect (Definition~\ref{def:seqeffect})---the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading orders---is also first order for the individual, and it is worth pausing on why before turning to the next quantity. The sequence effect is irreducible to either single-order gap. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
+The sequence effect (Definition~\ref{def:seqeffect})---the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading orders---is also first order for the individual, and it is worth pausing on why before turning to the next quantity. The sequence effect is irreducible to either single-order gap. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
 which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal
-fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates how ``first impressions stick''---once the attributes covary, the earlier cue leaves a residue in a direction the later cue does not reach. This is also evident at the symmetry locus $\{\alpha=\beta,\ q_0=r_0\}$---where the sequence effect remains in the antisymmetric off-diagonal part, $\Delta_{\mathrm{seq},01}=-\Delta_{\mathrm{seq},10}=q_0(1-q_0)(q_0-\alpha)/(\alpha^{2}(1-\alpha)^{2})$, moving the score whenever $v_{01}\neq v_{10}$ and vanishing only at the uninformative point $q_0=\alpha$. As a result, the panel that reads the credential first and the letter second lets the letter's impression stand as its whole verdict on trustworthiness, discarding what a strong credential should have suggested about trustworthiness. Relative to the benchmark it is therefore too harsh after a good credential and too generous after a bad one---and it flips if the panel reads in the other order. 
+fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates how ``first impressions stick''---once the attributes covary, the earlier cue leaves a residue in a direction the later cue does not reach. 
 
-That $R_1$ and $R_2$ are two distinct directions is exactly why no single scalar captures how the two reading orders move a general read-out of the belief. This motivates the second primitive statistic, the score. For a fixed weight $\vv$, a panel's \textbf{score gap} is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's,
+The second primitive, \textbf{score gap}  of a panel (given a fixed weight $\vv$) is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's. Given a particular route $\sigma$, we have
 \[
   s(\PJ_\sigma)-s(\PB)=c\,\delta_\sigma+\bigO(c^{2}), \qquad \delta_\sigma:=\big\langle\vv,\ \partial_c(\PJ_\sigma-\PB)|_{c=0}\big\rangle.
 \]
-Reading $\delta_\sigma$ off Proposition~\ref{prop:A2} for the $A$-first route, and its mirror
-proven within Proposition~\ref{prop:C3}'s proof for the $B$-first route, gives
-$\delta_{AB}=\langle\vv,\kappa R_1\rangle$ and $\delta_{BA}=\langle\vv,\kappa'R_2\rangle$. The
-score gap is therefore the sequence effect seen through the lens of $\vv$. Whether a given weight registers the order at all, and how the answer depends on $\vv$, is the subject of Lemma~\ref{lem:B1} and Section~\ref{sec:aggregation}.
+Given that $\delta_{AB}=\langle\vv,\kappa R_1\rangle$ and $\delta_{BA}=\langle\vv,\kappa'R_2\rangle$, the score gap is essentially the sequence effect seen through the lens of $\vv$.
 
 \subsection{Belief Statistics}
 
@@ -397,9 +391,9 @@ $\bigO(c^{2})$ exactly, and of whichever is read last is $\Theta(c)$ generically
 
 \subsection{Decision Statistics}
 
-Indeed the two panels can not only differ in what they believe but also in what they decide. The two decision statistics we're concerned with are the flip (which becomes sequence-affected-share in the aggregate) and sequence-affected-loss.
+Panels differ not only in what they believe but also in the effects of how they act on their beliefs. The two decision statistics we're concerned with in this regard are the decision-\emph{flip} (which becomes sequence-affected-share in the aggregate) and sequence-affected \emph{loss}.
 
-The panel's \emph{flip indicator}, $\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$, records whether the first-order
+The panel's \emph{flip} indicator, $\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$, records whether the first-order
 perturbation $c\delta_\sigma$ of the score carries the net surplus across the threshold. At the individual level, a flip requires two things together---the perturbation
 $c\delta_\sigma$ must point toward the threshold, in the opposite direction from $u$ itself,
 and it must be large enough to actually reach it. Formally, $\sgn(u)\neq\sgn(u+c\delta_\sigma)$
@@ -409,7 +403,7 @@ when $u$ lies strictly between $0$ and $-c\delta_\sigma$. A perturbation $c\delt
 Writing $c^{*}:=|u/\delta_\sigma|$ for the crossing point, a panel with $u\neq0$ and
 $\delta_\sigma\neq0$ satisfies
 \begin{align*}
-  \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}= \\
+  \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}= 
   \begin{cases}
     1, & |c|>c^{*} \ \wedge\ \sgn(c\delta_\sigma)=-\sgn(u),\\[2pt]
     0, & \text{otherwise},
@@ -423,7 +417,6 @@ and therefore
   \frac{\mathrm{d}^{k}}{\mathrm{d}c^{k}}
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\bigg|_{c=0}=0
   \quad \forall\, k\ge 0,
-  \\
   \qquad\text{while}\qquad
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\not\equiv 0.
 \end{align*}
@@ -441,8 +434,7 @@ which is why the sequence-affected share is $\Theta(c)$ under a density hypothes
 exactly or generically so (Proposition~\ref{prop:C2}).
 
 
-The second decision statistic is the panel's \textbf{foregone surplus} which measures costs of a flip $|u|$ i.e. in the event that the decision flips. It weights the flip indicator by the stake at issue, so that panels barely
-past the threshold contribute little and panels far from it contribute much. Writing
+The second decision statistic is the panel's \textbf{foregone surplus} which measures costs of a flip $|u|$ i.e. in the event that the decision flips. It weights the flip indicator by the stake at issue, so that panels barely past the threshold contribute little and panels far from it contribute much. Writing
 $\ell_\sigma(c):=|u|\cdot\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ for the foregone
 surplus, both decision quantities inherit the same threshold structure established above for
 $u\neq0,\ \delta_\sigma\neq0$:
@@ -474,26 +466,19 @@ We now describe how the order-effect on the statistics discussed in the previous
 rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
 $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. As it turns out, what makes a statistic second order or first order is largely the nature of the statistic itself rather than the mechanism of aggregation.
 
-Two definitions are worth pinning down at this stage. First, any smooth scalar statistic $F$ of the belief experiences a \emph{distortion} of $F$ as the aggregate departure from the benchmark, $F(\Pbar)-F(\PB)$. This is the aggregate counterpart of the individual gap and is always a population-average object by definition. Second, we define the notion of a \emph{protection}, which classifies that distortion by its order in $c$.
+Two definitions are worth pinning down before we move further. First, we define a \emph{distortion} of an arbitrary smooth scalar statistic $F$ as the aggregate departure from the benchmark, $F(\Pbar)-F(\PB)$. This is the aggregate counterpart of the individual \emph{gap} and is always a population-average object by definition. Second, we define the notion of a \emph{protection}, which classifies that distortion by its order in $c$.
 
 \begin{definition}[protection]\label{def:protection}
 $F$ is \emph{protected} if its distortion is second order in the prior covariance,
 $F(\Pbar)-F(\PB)=\bigO(c^{2})$, and \emph{unprotected} if that distortion is first order, $\bigO(c)$.
 \end{definition}
 
-A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging takes place. More specifically, the proof of
-Proposition~\ref{prop:C3} gives
-$F(\Pbar_\lambda)-F(\PB)=c\,\langle\nabla F(q\otimes r),M_\lambda\rangle+\bigO(c^{2})$ with
-$M_\lambda=\lambda\kappa R_1+(1-\lambda)\kappa' R_2$, so the aggregate first-order coefficient is
-the $\lambda$-weighted average of the coefficients along the two reading orders and vanishes
-whenever both do. It turns out that linear aggregation can preserve or cancel first order in a smooth belief statistic but never create it. Protection in the sense just defined is not special to the two second-order aggregates. What drives it is that aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading orders, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane\footnote{Since the tangent space of the simplex is three-dimensional, the annihilator is a single line.}. The dimension-counting alone guarantees a one-dimensional annihilator. The attribute-locality assumption (and Lemma~\ref{lem:sep}) ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$.
-
-As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
+A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging takes place. The aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading orders, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane. The attribute-locality assumption and Lemma~\ref{lem:sep} ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$. As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
 (Proposition~\ref{prop:C1}) and the surplus-weighted loss $L(c)$ (Theorem~\ref{thm:B2}) are
 second order, whereas the aggregate gap, score gaps on unprotected weights, the marginal
 probabilities, and the sequence-affected share remain first order.
 
-The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. In the vignette the phenomenon is fixed---two panels reading the same file in opposite orders differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they
+The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. In the panel example, two panels reading the same file in opposite orders differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they
 hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:A3}, Proposition~\ref{prop:C1}). A reviewer who computes the share of files whose decision the reading order changes instead finds a departure at
 $\bigO(c)$, as does one who computes an average believed marginal probability. What an aggregate observer computes is never an individual panel's
 posterior but some statistic $F$, and the class $F$ thus decides whether the first-order individual effect is visible or hidden. In other words, finding a second-order aggregate benchmark-conforming therefore licenses no conclusion about the population.
@@ -506,7 +491,7 @@ posterior but some statistic $F$, and the class $F$ thus decides whether the fir
 \toprule
 \textbf{Individual Quantity} & \textbf{Aggregate Quantity} & \textbf{Individual} & \textbf{Aggregate} & \textbf{Reference}\\
 \midrule
-\multicolumn{5}{@{}l}{\emph{Primitive statistics}}\\
+\multicolumn{5}{@{}l}{\emph{Primitives}}\\
 \midrule
 \textbf{Gap}---individual gap & aggregate departure from benchmark & $\Theta(c)$ generically & $\Theta(c)$ generically & Prop.~A2; proof of Prop.~C3\\
 \textbf{Score gap}---score gap on an unprotected weight, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & unprotected-weight mean, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & $\Theta(c)$ generically & $\Theta(c)$ generically & Lemma~B1\\
@@ -524,13 +509,13 @@ posterior but some statistic $F$, and the class $F$ thus decides whether the fir
 \end{tabular}
 \caption{Order in the prior covariance $c$, individual versus aggregate. $\Theta(c)$ marks a
 nonzero leading coefficient (genuinely first order) and $\bigO(c^{2})$ a leading coefficient
-that vanishes (protected). Among the primitive and belief statistics, \emph{exactly} marks a coefficient that
+that vanishes (protected). Among the primitives and belief statistics, \emph{exactly} marks a coefficient that
 vanishes identically in $\alpha$, $\beta$, $q_{0}$, $r_{0}$ and $\lambda$, while
 \emph{generically} marks one that vanishes only on a lower-dimensional set of those.}
 \label{tab:order-summary}
 \end{sidewaystable}
 
-\subsection{Primitive Statistics in Aggregate}
+\subsection{Primitives in Aggregate}
 \subsubsection{Gap distortion}
 \label{sec:distortion}
 
