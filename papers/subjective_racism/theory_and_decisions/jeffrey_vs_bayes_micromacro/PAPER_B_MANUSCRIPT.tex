@@ -453,11 +453,7 @@ $u\neq0,\ \delta_\sigma\neq0$:
   \quad \forall\, k\ge 0,
 \]
 so neither is smooth in $c$ at the individual level, and neither carries a first-order
-coefficient of its own into the aggregate \anchor{Thm.~B2; Prop.~C2}. 
-
-
-How each of the quantities behaves once averaged across the population is the topic of the next section.
-
+coefficient of its own into the aggregate \anchor{Thm.~B2; Prop.~C2}.
 
 \section{Order Effect in the Population Aggregate}
 \label{sec:aggregation}
@@ -479,9 +475,8 @@ second order, whereas the aggregate gap, score gaps on unprotected weights, the 
 probabilities, and the sequence-affected share remain first order.
 
 The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. In the panel example, two panels reading the same file in opposite orders differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they
-hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:A3}, Proposition~\ref{prop:C1}). A reviewer who computes the share of files whose decision the reading order changes instead finds a departure at
-$\bigO(c)$, as does one who computes an average believed marginal probability. What an aggregate observer computes is never an individual panel's
-posterior but some statistic $F$, and the class $F$ thus decides whether the first-order individual effect is visible or hidden. In other words, finding a second-order aggregate benchmark-conforming therefore licenses no conclusion about the population.
+hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:A3}, Proposition~\ref{prop:C1}) -- whereas a reviewer computing the share of files whose decision the reading order changes finds a departure at
+$\bigO(c)$ instead. The rest of the section discusses these  findings that are summarised in Table~\ref{tab:order-summary}.
 
 
 \begin{sidewaystable}[p]
@@ -516,10 +511,13 @@ vanishes identically in $\alpha$, $\beta$, $q_{0}$, $r_{0}$ and $\lambda$, while
 \end{sidewaystable}
 
 \subsection{Primitives in Aggregate}
+That both individual gap and score-gap remain $\Theta(c)$ in the population aggregate is somewhat trivial. This is because the aggregate simply mixes the two routes' own shifts together in proportion to 
+$\lambda$ and generically retains the sequence effects that were applicable at the individual level.
+
 \subsubsection{Gap distortion}
 \label{sec:distortion}
 
-The \emph{gap} is the one case where no statistic intervenes, since it is the vector $\Pbar-\PB$ rather than a scalar read-out of it. The proof of Proposition~\ref{prop:C3} gives $\Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^{2})$ directly, and because $R_1$ and $R_2$ are linearly independent, $M_\lambda$ vanishes at interior $\lambda$ only where the coefficients of both reading orders vanish. The aggregate gap is therefore first order on the same generic set as the individual gap of Proposition~\ref{prop:A2}: averaging over reading orders reweights the leading coefficient without removing it. \anchor{Prop.~C3}
+The proof of Proposition~\ref{prop:C3} gives $\Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^{2})$ directly, and because $R_1$ and $R_2$ are linearly independent, $M_\lambda$ vanishes at interior $\lambda$ only where the coefficients of both reading orders vanish. The aggregate gap is therefore first order on the same generic set as the individual gap of Proposition~\ref{prop:A2}. In other words, averaging over reading orders reweights the leading coefficient without removing it. \anchor{Prop.~C3}
 
 \subsubsection{Score gap}
 \label{sec:scoregap}
@@ -539,10 +537,10 @@ $\PJ_\sigma-\PB=cD_\sigma+\bigO(c^2)$ from Proposition~\ref{prop:A2}. Constancy 
 $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 \end{proof}
 
-Section~\ref{sec:protected} provides the details of how the weights $\delta_\sigma$ remain nonzero---and hence which scores register the reading order
-at all.
 
 \subsection{Belief Statistics in Aggregate}
+The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads first has its marginal pinned exactly to the impression, so that route's shift in that marginal is zero whereas the shift due the other route reading the attribute last is generically nonzero. Mixing the two does simply zero out the first-order effect. Once again, it's not the averaging that changes the order, but the nature of statistic itself determines the order.
+
 \subsubsection{Average believed cross-attribute association}
 \label{sec:association}
 
