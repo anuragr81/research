@@ -363,7 +363,7 @@ $c\kappa$. Similarly, on route $BA$ we have the opposite split, rows summing to 
 
 \subsection{Decision Statistics}
 
-Panels differ not only in what they believe but also in the effects of how they act on their beliefs. The two decision statistics we're concerned with in this regard are the decision-\emph{flip} (which becomes sequence-affected-share in the aggregate) and sequence-affected \emph{loss}.
+Panels differ not only in what they believe but also in the effects of how they act on their beliefs. The two decision statistics we're concerned with are the decision-\emph{flip} (which becomes sequence-affected-share in the aggregate) and sequence-affected \emph{loss}.
 
 The panel's \emph{flip} indicator, $\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$, records whether the first-order
 perturbation $c\delta_\sigma$ of the score carries the net surplus across the threshold. At the individual level, a flip requires two things together---the perturbation
@@ -432,7 +432,7 @@ $F$ is \emph{protected} if its distortion is second order in the prior covarianc
 $F(\Pbar)-F(\PB)=\bigO(c^{2})$, and \emph{unprotected} if that distortion is first order, $\bigO(c)$.
 \end{definition}
 
-A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging takes place. The aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading sequences, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane. The attribute-locality assumption and Lemma~\ref{lem:A3} ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$. As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
+A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place. The aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading sequences, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane. The attribute-locality assumption and Lemma~\ref{lem:A3} ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$. As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
 (Proposition~\ref{prop:C1}) and the surplus-weighted loss $L(c)$ (Theorem~\ref{thm:B2}) are
 second order, whereas the aggregate gap, score gaps on unprotected weights, the marginal
 probabilities, and the sequence-affected share remain first order.
@@ -500,7 +500,7 @@ $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 
 
 \subsection{Aggregate Belief Statistics}
-The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads first has its marginal pinned exactly to the impression, so that route's shift in that marginal is zero whereas the shift due the other route reading the attribute last is generically nonzero. Mixing the two does simply zero out the first-order effect. Once again, it's not the averaging that changes the sequence, but the nature of statistic itself determines the order.
+The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads first has its marginal pinned exactly to the impression, so that route's shift in that marginal is zero whereas the shift due the other route reading the attribute last is generically nonzero. Mixing the two does simply zero out the first-order effect. Once again, it's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
 
 \subsubsection{Aggregate cross-attribute association}
 \label{sec:association}
@@ -528,14 +528,7 @@ term of any order. \anchor{Lem.~SEP}
 The proof is provided in Appendix~\ref{app:proofs}. It proceeds by induction on the update
 sequence: each attribute-local step folds into that attribute's own multiplicative factor
 without ever coupling two coordinates, so the product form survives any finite sequence of such
-steps; an equivalent log-linear characterisation---no interaction term of any order---follows
-from the same argument.
-
-The Jeffrey-specific content is therefore confined to the \emph{sequence effect}
-itself (Proposition~\ref{prop:A2})---as a property of probability kinematics. The first-order
-protection established below thus rests only on separability---possessed by any attribute-local
-multiplicative update.
-
+steps. 
 
 Proposition~\ref{prop:C1} now shows how the second-order behaviour of the distortion of the average believed association depends on the separability lemma. More specifically, Lemma~\ref{lem:sep} forces every updating route to act
 on the association by the pure multiplier $\assoc(D')=(g_0g_1h_0h_1/Z^{2})\,\assoc(D)$, so all of them share the same leading factor at independence and the $\bigO(c)$ terms in $\assoc(\Pbar)-\assoc(\PB)$ cancel identically. On the other hand, a non-separable updating route obeys no such
@@ -591,13 +584,12 @@ collectively take the two attributes to go together more or less than the benchm
 warrants---carries no first-order trace of the sequence (Proposition~\ref{prop:C1}). In other words, reading sequence cannot, to first order, build or erode the perceived relationship between the attributes,
 because both updates reweight separably, and a separable reweighting only rescales the
 association already present. Thus, sequence effects, in this model, do not create stereotypes to first
-order. In fact, no route and no mixture of routes moves the believed association. What the
-reading sequence does move is the subject of the next subsection.
+order.
 
 \subsubsection{Aggregate Marginal-probability}
 \label{sec:marginal}
 
-The current section shows that the reading sequence does move the marginal probability in the aggregate. In other words, marginal probability does not behave like a protected statistic. Proposition \ref{prop:C1m} formalises this.
+The current section shows that the reading sequence does move the marginal probability in the aggregate. Proposition \ref{prop:C1m} formalises this.
 
 \renewcommand{\theproposition}{C1$'$}%
 \begin{proposition}[marginal-probability drift]\label{prop:C1m}
@@ -692,8 +684,7 @@ Since $q_0(1-q_0)>0$ and $\alpha\beta(1-\alpha)(1-\beta)>0$ on the open cube, $\
 the $BA$ sequence the $A$-cue is processed last and pins the $A$-marginal at $q_1$ identically. In
 the $AB$ sequence the later $B$-step pulls the $A$-marginal off $q_1$ by the same first-order
 amount as the benchmark, so $\PJ_{AB}$ and $\PB$ move together. The mean $\Pbar$ weights the
-moving route by $\lambda$ and the pinned route by $1-\lambda$; its drift from the benchmark is
-therefore $(1-\lambda)$ of the common coefficient $-c\,\kappa'$.}
+moving route by $\lambda$ and the pinned route by $1-\lambda$.}
 \label{fig:routes}
 \end{figure}
 
@@ -755,7 +746,7 @@ $\bigO(c)$ (Proposition~\ref{prop:C2}).}
 \label{fig:band}
 \end{figure}
 
-The proof, given in full in \ref{app:proofs}, can be viewed as a band picture shown in Figure~\ref{fig:band}. The Jeffrey and benchmark
+The proof -- provided in Appendix \ref{app:proofs} -- can be viewed as a band picture shown in Figure~\ref{fig:band}. The Jeffrey and benchmark
 actions differ only when the perturbation $c\delta_\sigma$ flips the sign of the surplus $u$, so
 the flip set is confined to a band of width $\bigO(c)$ at the threshold. On that band the cost
 $|u|$ is itself $\bigO(c)$. An $\bigO(c)$ mass of individuals, each costing $\bigO(c)$, yields an
@@ -768,15 +759,6 @@ much probability when $f$ is continuous at $u=0$. The foregone surplus $|u|$ on 
   L(c)\;\le\;\underbrace{\bigO(c)}_{\text{cost }|u|}\cdot\underbrace{\bigO(c)}_{\text{band mass}}
        \;=\;\bigO(c^{2}).
 \]
-
-While the mechanism through which the surplus-weighted loss becomes second order may seem unremarkable \footnote{A few other candidate explanations for why the surplus-weighted loss may become second order are worth ruling out. First, the rate is not an
-artefact of the \emph{threshold density} itself. Consider three instances of when the population's threshold density is not well-behaved at the margin: i) an \emph{atom at threshold} situation, where a spike of ``mass'' sits exactly at the threshold; ii) an \emph{integrable singularity} at the threshold;
-or iii) a \emph{vanishing} density, with no mass at the threshold. None of the three destroys the separation of scales, though two of them shift the exponent away from exactly $2$. The \emph{atom at the threshold} results in $|u|=0$, so the integrand vanishes. The \emph{integrable singularity}
-$f(u)\sim|u|^{-\gamma}$ with $0<\gamma<1$ degrades the rate but not the conclusion---the density
-is $\bigO(c^{-\gamma})$ and the cost $|u|$ is $\bigO(c)$, so the loss is
-$\bigO(c)\cdot\bigO(c)\cdot\bigO(c^{-\gamma})=\bigO(c^{2-\gamma})$, which is still $o(c)$ since
-$\gamma<1$. A \emph{vanishing} density $f(0)=0$ takes the loss below $\bigO(c^{2})$---continuity carries $f(0)=0$ onto the shrinking band, so $f=o(1)$ there while the band still contributes $\bigO(c^{2})$, giving $L(c)=o(c^{2})$. Second, within that same regime, the exponent is not affected by the \emph{sequence distribution} either. This is because $\delta_\sigma$ enters \emph{squared} and so cannot average away even when sequencing is one-directional. Third, the \emph{smoothness of the density} $f$ of $u=s(\PB)-\tau$ is not a requirement for the separation of scales. Smoothness is used above only to name the constant in the exact $c^{2}$ expression for the expected surplus loss. The decoupling of scales---i.e.\ the aggregate scale being strictly above the individual scale---relies in fact only on the integrability of $f$.}, it is not the only mechanism by which a statistic can be second order. The believed cross-attribute association---which we explore in the next subsection---reaches second order by a completely different route. The necessary and sufficient condition for protection is given in Proposition~\ref{prop:C3}.
-
 
 \subsubsection{Sequence-affected share---incidence versus intensity}
 \label{sec:criterion}
@@ -793,7 +775,7 @@ unchanged whichever sequence the cues may be in. As $\delta_\sigma$ is bounded a
 only evaluators within $\bigO(c)$ of the threshold can be affected at all. The condition is
 necessary but not sufficient---the perturbation must also point towards the threshold rather
 than away from it---so the affected form a subset of the band, and it is the band's mass,
-$f(0)\cdot\bigO(c)$, that sets the first-order rate.
+$f(0)\cdot\bigO(c)$, that sets the first-order rate. The following proposition formalises this.
 
 \renewcommand{\theproposition}{C2}%
 \begin{proposition}[sequence-affected share]\label{prop:C2}
@@ -837,15 +819,14 @@ whence
 The extra factor of $c$ is the weight $|u|$, which the band forces to first order.
 \end{proof}
 
-What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~C2}. Whatever significance attaches to those individuals---their decisions turned on the sequence in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. In other words, the separation of scales is not a reassurance that little is at stake but a statement that the aggregate an observer computes is not a sufficient statistic for what is at stake. That the arbitrarily-decided are individually real yet aggregately invisible is a fact about the resolution of the measuring statistic, carrying whatever normative weight the affected decisions do, and it is exactly the incidence---the unprotected criterion---that carries it. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. The criterion, not the phenomenon, selects which answer an aggregate instrument returns
-(Propositions~\ref{prop:C2} and~\ref{prop:C3}).
+What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~C2}. Whatever significance attaches to those individuals---their decisions turned on the sequence in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. Propositions~\ref{prop:C2} and~\ref{prop:C3} show that the criterion, not the phenomenon, selects which answer an aggregate instrument returns.
 
 
 
 \subsection{The protected class of aggregate statistics}
 \label{sec:protected}
 
-We now arrive at the essence of the findings of sequence relevance in aggregate -- the necessary and sufficient conditions under which an arbitrary smooth statistic becomes second order. We define a differential condition for a smooth statistic of the average belief---a condition whose fulfilment leaves no first-order trace of the sequence effects. More specifically, this differential condition on $F$ is $\nabla F(q\otimes r)\in\mathrm{span}\{J,\ \nabla\assoc(q\otimes r)\}$ (where $J$ is
+We now describe the necessary and sufficient conditions under which an arbitrary smooth statistic becomes second order. We define a differential condition for a smooth statistic of the average belief---a condition whose fulfilment leaves no first-order trace of the sequence effects. More specifically, this differential condition on $F$ is $\nabla F(q\otimes r)\in\mathrm{span}\{J,\ \nabla\assoc(q\otimes r)\}$ (where $J$ is
 the all-ones matrix and $R_1=q\otimes(1,-1)$, $R_2=(1,-1)\otimes r$ are the two route
 directions).
 
@@ -877,20 +858,13 @@ the other (Proposition~\ref{prop:A2} and its mirror)---so the annihilator of the
 is two-dimensional and spanned by the constants and $\nabla\assoc$, and the converse follows
 from the nonconstancy of $\kappa/\kappa'$ on any open set of priors.
 
-The smooth statistics protected to second order are exactly the \emph{local dependence
+\textbf{The smooth statistics protected to second order are exactly} the \emph{local dependence
 measures}, those that, to first order at independence, depend on the posterior only through its
 association. This includes the association itself (Proposition~\ref{prop:C1} is the case
 $F=\assoc$), the odds ratio, its logarithm, and Yule's $Q$; among expectations
 $\langle v,P\rangle$ it admits exactly those whose $v$ lies in the two-dimensional span of the
-constants and $\nabla\assoc$ (Lemma~\ref{lem:B1}). At interior $\lambda$ it excludes every
-marginal (the marginal-probability drift of Proposition~\ref{prop:C1m}) except at the priors
-where that drift's coefficient vanishes, $\beta=r_{0}$ for the $A$-marginal and $\alpha=q_{0}$
-for the $B$-marginal; more generally, no statistic outside the class is second order on an open
-set of priors. Together with Theorem~\ref{thm:B2} and Proposition~\ref{prop:C2}, which settle
-the two threshold criteria on a common set---counting each sequence-affected individual once
-returns the band's $\bigO(c)$ mass, while adding up what each forgoes brings a second factor of
-$c$, since everyone in the band is within $\bigO(c)$ of the threshold---this yields a complete
-answer for the aggregates at issue.
+constants and $\nabla\assoc$ (Lemma~\ref{lem:B1}). No statistic outside the class is second order on an open
+set of priors.
 
 The quantification over $\lambda$ in part~(i) is what makes the class a classification of
 statistics rather than of populations. The aggregate first-order coefficient is
