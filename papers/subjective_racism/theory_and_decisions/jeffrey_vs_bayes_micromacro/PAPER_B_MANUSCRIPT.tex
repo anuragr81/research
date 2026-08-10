@@ -252,10 +252,10 @@ Since Bayesian conditioning is sequence-independent by definition, we measure se
 
 The rest of the belief-statistics and decision-statistics rely on these two primitives. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
 
-Before we detail each of the statistics, it is worth mentioning why only two each for the belief and decision statistics have been considered.  Since belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$, it only three degrees of freedom in the two-cue setting. This only requires us to consider the marginal probability for each attribute together with a single association parameter. At $N$ attributes the joint law carries $2^{N}-1$ parameters, with $\binom{N}{2}$ pairwise associations and higher interactions above them. The decision statistics simply measure \emph{how many} are affected by the see arrival sequence (flip indicator) and \emph{how much} are they affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are the first two members of a single parametrised family of indices\citep{FosterGreerThorbecke1984}.
+Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggest three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considred for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the see arrival sequence (flip indicator) and \emph{how much} are they affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices\citep{FosterGreerThorbecke1984}.
 
 
-\subsection{Primitives for the evaluator}\label{sec:individual_primitives}
+\subsection{Primitives for evaluator}\label{sec:individual_primitives}
 Starting with the \emph{individual gap}, we first state the rather trivial assertion that the difference between Jeffrey and Bayes is absent on a single cue or on two cues on independent attributes\footnote{Since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (see Assumption~\ref{as:soft})}.
 
 \renewcommand{\theproposition}{A1}%
@@ -266,11 +266,7 @@ $\PJ_{AB}=\PJ_{BA}=\PB$ exactly. \anchor{Prop.~A1}
 \end{proposition}
 
 \begin{proof}
-The single cue on $A$ means the matched likelihood $\ell^A_i=q_i Z/P(A{=}i)$, with $Z$ the normaliser
-fixing the posterior $A$-marginal to $q$---which gives
-$\PB(i,j)=P(i,j)\ell^A_i/Z=q_i\,P(i,j)/P(A{=}i)=(\PJ_A P)(i,j)$. For $c=0$ the prior factorises,
-$P(i,j)=P(A{=}i)P(B{=}j)$. Each Jeffrey step and the Bayesian update then act on independent
-coordinates, so both sequences and the Bayesian posterior equal the product $q\otimes r$.
+The single cue on $A$ means the matched likelihood $\ell^A_i=q_i Z/P(A{=}i)$, with $Z$ the normaliser fixing the posterior $A$-marginal to $q$---which gives $\PB(i,j)=P(i,j)\ell^A_i/Z=q_i\,P(i,j)/P(A{=}i)=(\PJ_A P)(i,j)$. For $c=0$ the prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$. Each Jeffrey step and the Bayesian update then act on independent coordinates, so both sequences and the Bayesian posterior equal the product $q\otimes r$.
 \end{proof}
 
 In other words, a decision turning on \emph{one} cue is immune. Next we specify the sequence effect at the individual level---which is first order in our setup and serves as a building block for the rest of the propositions. 
@@ -309,9 +305,8 @@ The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is r
 
 The conditions under which the first-order follows are not stringent. More particularly, since $\kappa\propto(\alpha-q_0)$, the gap $P^J_{AB}-P^B$ can vanish when the $A$-impression coincides with the prior $A$-marginal or when $B$-impression is degenerate ($\kappa\propto r_0(1-r_0)$ ). In terms of the panel example, the individual gap has a nonzero leading coefficient when the credential's impression genuinely surprises ($q_{0}\neq\alpha$) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$). These are conditions that are easily met.
 
-What we call the sequence effect (Definition~\ref{def:seqeffect})---i.e. the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading sequences---is also first order for the individual. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
-which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal
-fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates the very mechanism of how  ``first impressions stick''--- the phenomenon that generalises to believed association.
+What we call the sequence effect (Definition~\ref{def:seqeffect})---i.e. the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading sequences---is also first order for the individual evaluator. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
+which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates the very mechanism of how  ``first impressions stick''--- the phenomenon that generalises to believed association.
 
 The second primitive, \emph{scope-gap} of a panel (given a fixed weight $\vv$) is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's. This is because for a particular route $\sigma$ ($AB$ or $BA$ for two-cues) , we have
 \[
@@ -321,7 +316,7 @@ The second primitive, \emph{scope-gap} of a panel (given a fixed weight $\vv$) i
 
 \subsection{Belief Statistics}
 
-The two belief-statistics we're concerned with are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by its the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:A2}. As Lemma \ref{lem:A3} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
+The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by its the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:A2}. As Lemma \ref{lem:A3} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
 averaging takes place).
 
 
@@ -377,8 +372,7 @@ and it must be large enough to actually reach it. Formally, $\sgn(u)\neq\sgn(u+c
 holds exactly when $\sgn(c\delta_\sigma)=-\sgn(u)$ and $|c\delta_\sigma|>|u|$---equivalently,
 when $u$ lies strictly between $0$ and $-c\delta_\sigma$. A perturbation $c\delta_\sigma$ pushing $u$ further from the threshold never flips it, however large $c$ grows.
 
-Writing $c^{*}:=|u/\delta_\sigma|$ for the crossing point, a panel with $u\neq0$ and
-$\delta_\sigma\neq0$ satisfies
+More formally, with $c^{*}:=|u/\delta_\sigma|$ for the crossing point, a panel with $u\neq0$ and $\delta_\sigma\neq0$ satisfies
 \begin{align*}
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}= 
   \begin{cases}
@@ -398,23 +392,16 @@ and therefore
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\not\equiv 0.
 \end{align*}
 
-Every Taylor coefficient at the origin vanishes even though the quantity itself does not, so it is a step function of $c$, not a power of $c$, and it leaves no leading coefficient for
-aggregation to preserve or cancel. As we describe in the next subsection, what the
-population acquires comes instead from the measure of the flip set,
+Every Taylor coefficient at the origin vanishes even though the quantity itself does not, so it is a step function of $c$. As we describe in the next subsection, what the
+population acquires comes instead from the measure of the flip set -- a band of width $\bigO(c)$ at the threshold rather than an average of individual coefficients.
 \[
   \Pr\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}
    =\int_{\{|u|<|c\delta_\sigma|,\ \sgn(u)=-\sgn(c\delta_\sigma)\}} f(u)\,\mathrm{d}u
    =f(0)\cdot\bigO(c),
 \]
-a band of width $\bigO(c)$ at the threshold rather than an average of individual coefficients,
-which is why the sequence-affected share is $\Theta(c)$ under a density hypothesis rather than
-exactly or generically so (Proposition~\ref{prop:C2}).
 
 
-The second decision statistic is the panel's \textbf{foregone surplus} which measures costs of a flip $|u|$ i.e. in the event that the decision flips. It weights the flip indicator by the stake at issue, so that panels barely past the threshold contribute little and panels far from it contribute much. Writing
-$\ell_\sigma(c):=|u|\cdot\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ for the foregone
-surplus, both decision quantities inherit the same threshold structure established above for
-$u\neq0,\ \delta_\sigma\neq0$:
+The second decision statistic is the panel's \textbf{foregone surplus}, the cost $|u|$ borne when the decision flips. It weights the flip indicator by the stake at issue, so that panels barely past the threshold contribute little and panels far from it contribute much. Writing $\ell_\sigma(c):=|u|\cdot\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ for the foregone surplus, both decision quantities share the threshold structure established above for $u\neq0,\ \delta_\sigma\neq0$. As the following shows, each vanishes identically until $|c|$ reaches the crossing point, and every derivative at the origin vanishes with it. Neither of the two is analytic in $c$ and there is no expansion at the level of a single evaluator from which a leading coefficient could be read.
 \[
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\equiv 0,
   \qquad
@@ -429,13 +416,12 @@ $u\neq0,\ \delta_\sigma\neq0$:
   =0
   \quad \forall\, k\ge 0,
 \]
-so neither is smooth in $c$ at the individual level, and neither carries a first-order
-coefficient of its own into the aggregate \anchor{Thm.~B2; Prop.~C2}.
+
 
 \section{Aggregated Effects of Cue-Sequence}
 \label{sec:aggregation}
 
-We now describe how the sequence-effect on the statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
+We now describe how the effect arrivel order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
 rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
 $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. As it turns out, what makes a statistic second order or first order is largely the nature of the statistic itself rather than the mechanism of aggregation.
 
@@ -451,8 +437,7 @@ A particularly surprising finding is that for a smooth statistic of the belief, 
 second order, whereas the aggregate gap, score gaps on unprotected weights, the marginal
 probabilities, and the sequence-affected share remain first order.
 
-The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:A3}, Proposition~\ref{prop:C1}) -- whereas a reviewer computing the share of files whose decision the reading sequence changes finds a departure at
-$\bigO(c)$ instead. The rest of the section discusses these findings summarised in Table~\ref{tab:order-summary}.
+The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:A3}, Proposition~\ref{prop:C1}) -- whereas a reviewer computing the share of files whose decision the reading sequence changes finds a departure at $\bigO(c)$ instead. We detail the findings in the rest of the current section.
 
 
 \begin{sidewaystable}[p]
@@ -498,7 +483,7 @@ The proof of Proposition~\ref{prop:C3} gives $\Pbar_\lambda-\PB=c\,M_\lambda+\bi
 \subsubsection{Score gap}
 \label{sec:scoregap}
 
-The average \emph{score gap} is a straightforward measure of the weighted score of the belief and its first-order in aggregate follows from Proposition~\ref{prop:A2}.
+The average \emph{score gap} is also a straightforward measure of the weighted score of the belief and its first-order in aggregate follows from Proposition~\ref{prop:A2}.
 
 \renewcommand{\thelemma}{B1}%
 \begin{lemma}[first-order score gap]\label{lem:B1}
