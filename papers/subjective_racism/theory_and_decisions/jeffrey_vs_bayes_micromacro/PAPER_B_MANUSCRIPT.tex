@@ -88,7 +88,7 @@ The paper provides a two-fold answer to the question of how sequence-dependence 
 aggregate statistics can register the phenomenon at its own order. For every interior mixture of reading sequences and across an open set of priors, a smooth statistic of the average belief is
 second order if and only if its differential at independence is proportional to the differential of the believed cross-attribute association (Proposition~\ref{prop:C3}). The condition is necessary as well as sufficient, so the protected
 statistics (i.e.\ those that become second order) are the local dependence measures and surplus-weighted loss (for the threshold decision). The clear implication of the finding is that what an audit can answer depends on which statistic is aggregated rather than on how many evaluators are averaged over \footnote{What we consider as association in the paper is one that is held by an evaluator rather than one that is exhibited by the world. In other words, the
-prior covariance $c$ is a feature of a panel's belief about a single candidate, not a frequency among candidates that the panels are estimating.}.
+prior covariance $c$ is a feature of a panel's belief about a single candidate, not a frequency among candidates that the panels are estimating.}. One consequence, taken up speculatively at the close, is that the instruments most naturally trusted for detecting stereotype---belief audits asking how attributes are thought to go together---may be structurally the least sensitive ones available, with the footprint of sequence-dependence living in outcomes instead.
 
 In what follows, Section~\ref{sec:setup} sets up the model and the benchmark.
 Section~\ref{sec:literature} relates the paper to the literature.
@@ -559,7 +559,7 @@ $g_0g_1h_0h_1$. Explicitly,
   &=\frac{(g_0h_0Q_{00})(g_1h_1Q_{11})-(g_0h_1Q_{01})(g_1h_0Q_{10})}{Z^{2}}\\
   &=\frac{g_0g_1h_0h_1}{Z^{2}}\bigl(Q_{00}Q_{11}-Q_{01}Q_{10}\bigr).
 \end{align*}
-By Lemma~\ref{lem:sep}, every Jeffrey route composes to exactly such a
+Applying this with $Q=P$: by Lemma~\ref{lem:sep}, every Jeffrey route composes to exactly such a
 separable reweighting (at $N=2$, a rank-one form $g_ih_j$), and the Bayes update is one
 directly ($g_i=q_i/\alpha_i,\ h_j=r_j/\beta_j$, writing $\alpha_0=\alpha,\ \alpha_1=1-\alpha$ and
 similarly for $\beta$). Every route therefore
@@ -888,7 +888,7 @@ this difference in the protected class. Stereotypes do persist, but not as trivi
 \section{Scope and robustness}
 \label{sec:scope}
 
-We now revisit how assumptions~\ref{as:localc}--\ref{as:surplus}  in Section~\ref{sec:assumptions} define scope for any conclusions made from the model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$.  Second, a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:A1} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise  when Assumption~\ref{as:soft} is not met. Third, the attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:sep}) and is the engine of Proposition~\ref{prop:C1}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}) -- since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:C2}).  When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply.
+We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} define scope for any conclusions made from the model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply. Second, a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:A1} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise when Assumption~\ref{as:soft} is not met. Third, attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:sep}) and is the engine of Proposition~\ref{prop:C1}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}), since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:C2}). Fifth, the population modelled throughout is homogeneous in one further respect: every evaluator shares the same prior $(\alpha,\beta,c)$, and only the encounter sequence---and, for the surplus-weighted loss, the stakes $u$---varies across the pool. A population whose members differ in the prior covariance $c$ itself is a different aggregation problem, outside the stated results.
 
 \section{Concluding remarks}
 \label{sec:conclusion}
@@ -952,7 +952,9 @@ estimation error, not the quantity estimated. Enlarging the sample sharpens the 
 protected aggregate but leaves it at $\bigO(c^{2})$, and a subgroup is a subpopulation with its
 own mixture of reading sequences. Subgroups move the coefficient, not the order, and it is the order
 that decides what sits above the observer's precision. The aggregate results are, in this
-sense, reassuring exactly insofar as they are cautionary.
+sense, reassuring exactly insofar as they are cautionary. For the two-cue setting studied here,
+the classification is complete: there are no protected statistics beyond the local dependence
+measures and, for the threshold decision, the surplus-weighted loss.
 
 Third, the instrumental point bears on how a stereotype is looked for
 outside the model. The instruments a society most naturally trusts for detecting stereotype are
