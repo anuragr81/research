@@ -832,14 +832,13 @@ the all-ones matrix and $R_1=q\otimes(1,-1)$, $R_2=(1,-1)\otimes r$ are the two 
 directions).
 
 Recall that \emph{protection} means that the aggregate's first-order coefficient vanishes identically, so the statistic sits within $\bigO(c^{2})$ of its benchmark value (even
-though every member of the population is $\bigO(c)$ away). What we now prove is that a smooth statistic is \emph{protected} exactly when its differential at the independent posterior $q\otimes r$ points along $d\,\assoc$, the differential of the association there, so that to first order the statistic moves only as the association moves; every other smooth statistic
-departs at first order at all but exceptional priors. The following proposition formalises this.
+though every member of the population is $\bigO(c)$ away). What we now prove is that a smooth statistic is \emph{protected} exactly when its differential at the independent posterior $q\otimes r$ points along $d\,\assoc$ (the differential of the association) so that to first order the statistic moves only as the association moves. Every other smooth statistic departs at first order generically (i.e. on all but a lower-dimensional set of priors). The following proposition formalises this.
 
 
 \renewcommand{\theproposition}{C3}%
 \begin{proposition}[uniqueness of the protected statistic]\label{prop:C3}
-Fix $(q_0,r_0)\in(0,1)^2$ and let $F$ be $C^1$ in a neighbourhood of $q\otimes r$ in the
-probability simplex, and recall the mean belief $\Pbar_\lambda$ of
+For $(q_0,r_0)\in(0,1)^2$, $F$ as $C^1$ in a neighbourhood of $q\otimes r$ in the
+probability simplex, and with the mean belief $\Pbar_\lambda$ of
 Section~\ref{sec:aggregation}.
 \begin{enumerate}
 \item[(i)] \textup{(Protection.)} If the differential of $F$ at $q\otimes r$, restricted to the
@@ -868,21 +867,14 @@ constants and $\nabla\assoc$ (Lemma~\ref{lem:B1}). No statistic outside the clas
 set of priors.
 
 The quantification over $\lambda$ in part~(i) is what makes the class a classification of
-statistics rather than of populations. The aggregate first-order coefficient is
-$\lambda\langle\nabla F,\kappa R_1\rangle+(1-\lambda)\langle\nabla F,\kappa' R_2\rangle$, so it
-can vanish in two quite different ways. Either both inner products vanish, in which case $F$ does
-not respond to either reading sequence and is second order whatever the composition of the
-population; or both are nonzero and of opposite sign, in which case the single mixture
-$\lambda=\langle\nabla F,\kappa' R_2\rangle/(\langle\nabla F,\kappa' R_2\rangle-\langle\nabla
-F,\kappa R_1\rangle)$, when it lies in $(0,1)$, cancels them against each other. A statistic of
-the second kind is first order along each reading sequence separately and first order in every other
-population, yet indistinguishable from a protected one in the population that happens to cancel
-it. Requiring $\bigO(c^2)$ at every $\lambda$ admits only the first kind. Protection in the sense
-of Definition~\ref{def:protection} is thus annihilation of the route directions, not cancellation
-between them, and the converse holding at every interior $\lambda$ confirms the classification is
-not an artefact of any particular composition of encounter sequences. \anchor{Prop.~C3}
+statistics rather than of populations: the aggregate first-order coefficient is
+$\lambda\langle\nabla F,\kappa R_1\rangle+(1-\lambda)\langle\nabla F,\kappa' R_2\rangle$, and
+requiring it to vanish at every interior $\lambda$ forces both inner products to vanish
+separately rather than merely cancel against each other at some particular composition of the
+population. Protection in the sense of Definition~\ref{def:protection} is thus annihilation of
+the route directions, not cancellation between them. \anchor{Prop.~C3}
 
-In the vignette the classification says which audit questions can register the sequencing, and
+In the panel example, the classification says which audit questions can register the sequencing, and
 the boundary falls in an instructive place. Ask how likely the panels believe a
 competent-seeming candidate to be trustworthy, $\Pbar(B{=}1\mid A{=}1)$, and the distortion is
 first order, since this conditional probability carries a component along the marginal
@@ -891,37 +883,16 @@ Ask how much \emph{likelier} they believe a competent-seeming candidate to be tr
 an incompetent-seeming one, $\Pbar(B{=}1\mid A{=}1)-\Pbar(B{=}1\mid A{=}0)$, and the distortion
 is second order, since the subtraction removes the component along the marginal probabilities
 and leaves a differential at independence that is a positive multiple of $d\,\assoc$, placing
-this difference in the protected class. A single subtraction, within one family of summaries,
-crosses the boundary. Nor is it the subtracting that does the work---the gap between the two
-marginal probabilities, $\Pbar(A{=}1)-\Pbar(B{=}1)$, departs at first order all the same,
-because differencing two drifting marginal probabilities removes neither drift. What decides
-the sequence of an audit question is the differential test of Proposition~\ref{prop:C3}, not the
-family, the units, or the arithmetic shape of the summary that asks it.
-\anchor{Prop.~C3; Prop.~C1}
-
+this difference in the protected class. Stereotypes do persist, but not as trivially as is often presumed.
 
 \section{Scope and robustness}
 \label{sec:scope}
 
-The domain fixed in Section~\ref{sec:assumptions} by Assumptions~\ref{as:localc}--\ref{as:surplus}
-is deliberately narrow, and its boundary is part of the content. Each assumption is load-bearing,
-and dropping it reopens a specific failure mode, located exactly below.
+We now revisit the assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} and discuss how our conclusions depend on the scope defined by the assumptions. 
 
-The binary two-attribute structure is not an analytical convenience but the canonical object of
-the evaluation setting the paper addresses---a threshold decision over latent present-or-absent
-attributes is the architecture of the statistical-discrimination models this framework engages
-\citep{Phelps1972, Arrow1973, CoateLoury1993}.
+The Attribute-locality (Assumption~\ref{as:local})  makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:sep}) and is the engine of Proposition~\ref{prop:C1}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would not apply.
 
-Attribute-locality (Assumption~\ref{as:local}) is load-bearing rather than decorative---it is exactly what makes every
-Jeffrey update a separable reweighting (Lemma~\ref{lem:sep})---the engine of
-Proposition~\ref{prop:C1}. A gestalt cue
-bearing jointly on both attributes is out of scope, and, being non-separable, could itself
-manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would
-not apply.
-
-Stated affirmatively, three things would break the results, and each is located exactly. A
-non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}). Under a fixed
-per-error cost the aggregate loss \emph{is} the incidence and is first order
+A non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}). Under a fixed per-error cost the aggregate loss \emph{is} the incidence and is first order
 (Proposition~\ref{prop:C2})---the criterion-dependence is the content of the paper, not a
 weakness of it, and Proposition~\ref{prop:C3} delimits precisely which criteria are protected.
 
