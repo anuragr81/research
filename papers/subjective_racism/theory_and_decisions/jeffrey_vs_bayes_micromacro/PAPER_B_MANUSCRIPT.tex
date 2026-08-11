@@ -888,60 +888,10 @@ this difference in the protected class. Stereotypes do persist, but not as trivi
 \section{Scope and robustness}
 \label{sec:scope}
 
-We now revisit the assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} and discuss how our conclusions depend on the scope defined by the assumptions. 
-
-The Attribute-locality (Assumption~\ref{as:local})  makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:sep}) and is the engine of Proposition~\ref{prop:C1}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would not apply.
-
-A non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}). Under a fixed per-error cost the aggregate loss \emph{is} the incidence and is first order
-(Proposition~\ref{prop:C2})---the criterion-dependence is the content of the paper, not a
-weakness of it, and Proposition~\ref{prop:C3} delimits precisely which criteria are protected.
-
-A prior covariance outside the leading-order regime voids the separation
-(Assumption~\ref{as:localc}). Assumption~\ref{as:localc} states the results as $c\to0$: they
-compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior
-covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then
-genuinely smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two
-orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply.
-This is not a claim that the aggregates' distortion changes character at large $c$; it is that
-the hypothesis under which $\bigO(c)$ was compared to $\bigO(c^{2})$---$c$ small---no longer
-holds, so the theorems make no claim, favourable or unfavourable, about the aggregates'
-distortion in that regime.
-
-The population modelled throughout is homogeneous in one further respect---every evaluator
-shares the same prior $(\alpha,\beta,c)$, and only the encounter sequence ---and, for the surplus-weighted loss, the stakes $u$---varies across the pool. A population whose members differ in the prior
-covariance $c$ itself is a different aggregation problem, outside the stated results.
-
-And a single cue, taken alone, produces no phenomenon at all---on one cue the Jeffrey and
-benchmark posteriors coincide exactly (Proposition~\ref{prop:A1}), so sequence-dependence needs a
-second, independently arriving cue to act on---exactly the two-cue bundle
-Assumption~\ref{as:soft} requires.
+We now revisit how assumptions~\ref{as:localc}--\ref{as:surplus}  in Section~\ref{sec:assumptions} define scope for any conclusions made from the model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$.  Second, a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:A1} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise  when Assumption~\ref{as:soft} is not met. Third, the attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:sep}) and is the engine of Proposition~\ref{prop:C1}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}) -- since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:C2}).  When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply.
 
 \section{Concluding remarks}
 \label{sec:conclusion}
-
-The paper's central contribution is a characterisation that delineates the conditions under
-which an arbitrary smooth statistic of the average belief is protected, at first order, from the
-non-commutativity of coherent sequential updating. This characterisation is built up
-from the fundamental observation that the individual gap is not an arbitrary perturbation. Each
-reading sequence contributes one route direction ($R_1$ and $R_2$ of
-Section~\ref{sec:protected}), so the leading-order departures of the average posterior from the
-benchmark are confined to the plane those two directions span. A smooth statistic responds to
-that departure only through its differential at independence. Whether a statistic is protected
-therefore turns on one geometric question---whether its differential annihilates the route
-plane---and Proposition~\ref{prop:C3} shows the annihilating statistics are exactly those whose
-differential is a multiple of $d\,\assoc$.
-
-This answer has definite implications for soft-cue updating, which is non-commutative. An aggregate matching the Bayesian
-benchmark does not license the inference that its members are Bayesian---the population's mean
-believed association and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark
-while every member's individual gap diverges at $\bigO(c)$. The characterisation clarifies that this is not because of a
-cancellation across the population. Instead, the differential condition annihilates each route direction
-separately, so each panel's own believed association is already $\bigO(c^{2})$ from the
-benchmark (proof of Proposition~\ref{prop:C1}) and averaging adds nothing. The protected
-statistics are, by construction, insensitive at first order to the directions in which coherent
-sequential updating moves
-beliefs, and aggregate conformity is a property of the statistic doing the measuring, not
-evidence that the individual distortions are absent.
 
 \begin{table}[htbp]
 \centering
@@ -977,33 +927,43 @@ $L(c)=o(c)$ survives.}
 \label{tab:audit-questions}
 \end{table}
 
-The instrumental reading also follows from the characterisation. More particularly, detection
-turns on the criterion an instrument aggregates relative to the phenomenon's scale rather than
-on the size of the sample. Enlarging the sample sharpens the estimate of an aggregate but leaves
-the aggregate itself at $\bigO(c^{2})$, and disaggregating a protected aggregate does not change
-its order either. What changes the answer is a change of criterion, from the surplus-weighted
-loss or a dependence measure to a statistic outside the protected class such as the incidence.
-A null reading on an aggregate-built
-instrument is therefore not evidence that the underlying phenomenon is null; the instrument has
-one order less resolution than the thing it would detect.
 
-The aggregate results are, in this sense, reassuring exactly insofar as they are cautionary.
-The same separability that keeps the surplus-weighted loss second order and the mean believed
-association first-order immune is what leaves the protected statistics silent about a
-first-order incidence of sequence-decided outcomes---the dilution and the concealment are one fact,
-and which face an observer meets is set by the criterion, not by the phenomenon.
 
-There are two interpretive limits worth highlighting. First, the model exhibits a configuration in which coherent updating produces sequence-dependent decisions---but it asserts nothing about how often that configuration is realised in actual evaluation settings. Second, the result is
-essentially one-directional: it refutes the inference from a null aggregate to a null phenomenon, without validating anything in the other direction. In other words, a null audit is uninformative both ways.
+The paper's central contribution is a characterisation that delineates the conditions under which an arbitrary smooth statistic of the average belief is protected, at first order, from the non-commutativity of coherent sequential updating. This characterisation is built up from the fundamental observation that the individual gap is not an arbitrary perturbation. Each reading sequence contributes one route direction ($R_1$ and $R_2$ of
+Proposition~\ref{prop:A2}), so the leading-order departures of the average posterior from the benchmark are confined to the plane those two directions span. A smooth statistic responds to
+that departure only through its differential at independence. Whether a statistic is protected therefore turns on whether its differential annihilates the route plane or not.
 
-In summary, the main contribution of the paper is that the differential condition is necessary
-as well as sufficient (Proposition~\ref{prop:C3}) for smooth statistics of the average belief,
-at any interior mixture of reading sequences and across an open set of priors. This establishes
-that, for the two-cue setting studied here, there are no protected statistics beyond the local
-dependence measures and, for the threshold decision, the surplus-weighted loss. The observational consequence that connects to
-the belief-aggregation criterion of Section~\ref{sec:literature} is that at leading order, a
-population's aggregate beliefs can look externally Bayesian---sequence-free, benchmark-conforming
-on the protected statistics---even when no member's belief is.
+This answer carries three implications for audits where soft-cue updating can be assumed. First, an aggregate matching the Bayesian benchmark does not
+license the inference that its members are Bayesian. The population's mean believed association
+and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark while every member's
+individual gap diverges at $\bigO(c)$. At leading order, a population's aggregate beliefs can
+look externally Bayesian---sequence-free, benchmark-conforming on the protected
+statistics---even when no member's belief is, which is the observational consequence that
+connects to the belief-aggregation criterion of Section~\ref{sec:literature}.
+
+Second, what an audit can detect is decided by the statistic it computes. The protections of
+the two layers have separate sources---separability keeps the mean believed association
+first-order immune (Proposition~\ref{prop:C1}), while the stake-weighting of the flip band
+keeps the surplus-weighted loss second order (Theorem~\ref{thm:B2})---and both leave the
+protected statistics silent about a first-order incidence of sequence-decided outcomes. A null
+on a protected statistic is therefore evidence about the instrument rather than about the
+population. Collecting more observations and disaggregating into subgroups address the
+estimation error, not the quantity estimated. Enlarging the sample sharpens the estimate of a
+protected aggregate but leaves it at $\bigO(c^{2})$, and a subgroup is a subpopulation with its
+own mixture of reading sequences. Subgroups move the coefficient, not the order, and it is the order
+that decides what sits above the observer's precision. The aggregate results are, in this
+sense, reassuring exactly insofar as they are cautionary.
+
+Third, the instrumental point bears on how a stereotype is looked for
+outside the model. The instruments a society most naturally trusts for detecting stereotype are
+of the belief-auditing kind---asking what a population believes, in aggregate, about how
+attributes go together---and the association they measure is protected
+(Table~\ref{tab:audit-questions}). If the mechanism studied here operates in field settings,
+such instruments are structurally the least sensitive available. A population could pass every
+belief-level audit sincerely while the footprint of sequence-dependence lives entirely in
+outcomes, in who was decided differently than the benchmark warranted. Debates that set
+improving attitudes against persistent outcome disparities may, on this reading, be comparing
+instruments of different asymptotic order rather than disagreeing about the same quantity.
 
 
 \appendix
