@@ -58,7 +58,7 @@
 \cortext[1]{Corresponding author.}
 
 \begin{abstract}
-The effect on individual judgment of the order in which evidence arrives has been of interest in many experimental studies. The current paper studies evaluators who read two correlated soft cues in either sequence, updating coherently by Jeffrey conditioning, and compares their beliefs and decisions against the sequence-free Bayesian benchmark. It then asks which of those beliefs and decision statistics register the resulting order effects in the population aggregate. We argue that since the two cue-sequences displace a belief only within a two-dimensional plane, an arbitrary statistic is an order of magnitude closer to the benchmark in aggregate exactly when its sensitivity with respect to belief is flat along the plane. Thus while measures of the believed association and the average value lost through decisions differing from benchmark stay close, the average marginal probability as well as the share of the population affeted by the reading sequence differs from the benchmark. There are two major implications of these findings for audits. First, an aggregate conforming to the benchmark is no evidence that reading sequence did not affect what evaluators believed. Second, whether the effect or order is detectable or not depends on the question being asked.
+The effect on individual judgment of the order in which evidence arrives has been of interest in many experimental studies. The current paper studies evaluators who read two correlated soft cues in either sequence, updating coherently by Jeffrey conditioning, and compares their beliefs and decisions against the sequence-free Bayesian benchmark. It then asks which of those beliefs and decision statistics register the resulting order effects in the population aggregate. We argue that since the two cue-sequences displace a belief only within a two-dimensional plane, an arbitrary statistic is an order of magnitude closer to the benchmark in aggregate exactly when its sensitivity with respect to belief is flat along the plane. Thus while measures of the believed association and the average value lost through decisions differing from benchmark stay close, the average marginal probability as well as the share of the population affected by the reading sequence differs from the benchmark. There are two major implications of these findings for audits. First, an aggregate conforming to the benchmark is no evidence that reading sequence did not affect what evaluators believed. Second, whether the effect of order is detectable or not depends on the question being asked.
 \end{abstract}
 
 \begin{keywords}
@@ -109,7 +109,7 @@ present or absent, so a belief assigns probability to the four configurations at
 \emph{joint law}, a single distribution over the pairs $(i,j)$---a point in the probability
 simplex $\Delta^{3}$---rather than a pair of one-attribute distributions \anchor{Setup}. The two marginal distributions of the joint law record only how likely each attribute is on its own. The fixed marginals---$P(A{=}0)=\alpha$ and $P(B{=}0)=\beta$---then leave a whole family of joint laws
 open---with its members differing precisely in how the attributes are believed to co-move. A 
-\textbf{cross-attribute association} in the sense of this paper---for a joint law $D$, $\assoc(D):=D_{00}D_{11}-D_{01}D_{10}$---therefore exists only on the joint law, never on its two marginals separately and is evaluated at the prior, $\assoc(P)=c$. The prior $P$ is the evaluator's subjective credence, before any cue arrives, over the joint attributes of a randomly drawn candidate. The $\Delta^{3}$ is specified using the marginals
+\textbf{cross-attribute association} in the sense of this paper---for a joint law $Q$, $\assoc(Q):=Q_{00}Q_{11}-Q_{01}Q_{10}$---therefore exists only on the joint law, never on its two marginals separately and is evaluated at the prior, $\assoc(P)=c$. The prior $P$ is the evaluator's subjective credence, before any cue arrives, over the joint attributes of a randomly drawn candidate. The $\Delta^{3}$ is specified using the marginals
 $P(A{=}0)=\alpha$, $P(B{=}0)=\beta$ and the prior covariance $c$ between the attributes as follows:
 \[
   P=\begin{pmatrix}\alpha\beta+c & \alpha(1-\beta)-c\\[2pt](1-\alpha)\beta-c & (1-\alpha)(1-\beta)+c\end{pmatrix},
@@ -252,7 +252,7 @@ Since Bayesian conditioning is sequence-independent by definition, we measure se
 
 The rest of the belief-statistics and decision-statistics rely on these two primitives. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
 
-Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggest three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considred for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the see arrival sequence (flip indicator) and \emph{how much} are they affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices\citep{FosterGreerThorbecke1984}.
+Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggests three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considered for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the arrival sequence (flip indicator) and \emph{how much} they are affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices \citep{FosterGreerThorbecke1984}.
 
 
 \subsection{Primitives for evaluator}\label{sec:individual_primitives}
@@ -291,8 +291,10 @@ benchmark, $\PJ_{AB}=\PJ_{BA}=\PB=q\otimes r$.
   \qquad
   \kappa'=\frac{(\beta-r_0)\,q_0(1-q_0)}{Z},
 \]
-with $\kappa=0\iff q_0=\alpha$ or $r_0\in\{0,1\}$, and symmetrically for $\kappa'$; hence
-$D\not\equiv0$.
+with $\kappa=0\iff q_0=\alpha$ or $r_0\in\{0,1\}$, and symmetrically for $\kappa'$. Writing
+$\PJ_\sigma-\PB=c\,D_\sigma+\bigO(c^{2})$ for the leading gap direction on route $\sigma$, so
+that $D_{AB}=\kappa R_1$ and $D_{BA}=\kappa'R_2$, we have hence
+$D_\sigma\not\equiv0$.
 \item[(ii)] \textup{(Sequence effect.)} $\PJ_{AB}-\PJ_{BA}=c\,\Delta_{\mathrm{seq}}+\bigO(c^{2})$
 with $\Delta_{\mathrm{seq}}=\kappa R_1-\kappa' R_2$. Since $R_1,R_2$ are linearly independent,
 $\Delta_{\mathrm{seq}}\equiv0$ if and only if $\kappa=\kappa'=0$; hence
@@ -308,7 +310,7 @@ The conditions under which the first-order follows are not stringent. More parti
 What we call the sequence effect (Definition~\ref{def:seqeffect})---i.e. the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading sequences---is also first order for the individual evaluator. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
 which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates the very mechanism of how  ``first impressions stick''--- the phenomenon that generalises to believed association.
 
-The second primitive, \emph{scope-gap} of a panel (given a fixed weight $\vv$) is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's. This is because for a particular route $\sigma$ ($AB$ or $BA$ for two-cues) , we have
+The second primitive, \emph{score-gap} of a panel (given a fixed weight $\vv$) is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's. This is because for a particular route $\sigma$ ($AB$ or $BA$ for two cues), we have
 \[
   s(\PJ_\sigma)-s(\PB)=c\,\delta_\sigma+\bigO(c^{2}), \qquad \delta_\sigma:=\big\langle\vv,\ \partial_c(\PJ_\sigma-\PB)|_{c=0}\big\rangle.
 \]
@@ -421,7 +423,7 @@ The second decision statistic is the panel's \textbf{foregone surplus}, the cost
 \section{Aggregated Effects of Cue-Sequence}
 \label{sec:aggregation}
 
-We now describe how the effect arrivel order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
+We now describe how the effect of arrival order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
 rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
 $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. As it turns out, what makes a statistic second order or first order is largely the nature of the statistic itself rather than the mechanism of aggregation.
 
@@ -500,12 +502,12 @@ $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 
 
 \subsection{Aggregate Belief Statistics}
-The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads first has its marginal pinned exactly to the impression, so that route's shift in that marginal is zero whereas the shift due the other route reading the attribute last is generically nonzero. Mixing the two does simply zero out the first-order effect. Once again, it's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
+The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads last has its marginal pinned exactly to the impression and so departs from the benchmark at first order, whereas the route reading that attribute first moves with the benchmark and its shift is zero to first order. Mixing the two does not zero out the first-order effect: the mixture retains the pinned route's coefficient in proportion to that route's weight, and the drift vanishes only in the limit where every evaluator reads the attribute first---at which point it passes to the other attribute instead. Once again, it's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
 
 \subsubsection{Aggregate cross-attribute association}
 \label{sec:association}
 
-Recall that the sense of stereotype in the paper depends on the cross-attribute association. With $\assoc(D)=D_{00}D_{11}-D_{01}D_{10}$ as the association of a joint law $D$, the \emph{stereotype} is the believed association absent from---or in excess of---the benchmark, a
+Recall that the sense of stereotype in the paper depends on the cross-attribute association. With $\assoc(Q)=Q_{00}Q_{11}-Q_{01}Q_{10}$ as the association of a joint law $Q$, the \emph{stereotype} is the believed association absent from---or in excess of---the benchmark, a
 nonzero $\assoc(\Pbar)-\assoc(\PB)$. By definition, stereotype is absent when the belief matches the Bayesian benchmark.
 
 We now explain how the average believed cross-attribute association is second order because of a separable reweighting
@@ -522,7 +524,7 @@ sequence of attribute-local updates produces a \emph{separable} reweighting
   P'(x)=P(x)\prod_{a=1}^{N}g_{a}(x_{a})
 \]
 for some single-attribute functions $g_{a}$. Equivalently, $\log(P'/P)$ contains no interaction
-term of any order. \anchor{Lem.~SEP}
+terms at any level. \anchor{Lem.~SEP}
 \end{lemma}
 
 The proof is provided in Appendix~\ref{app:proofs}. It proceeds by induction on the update
@@ -531,7 +533,7 @@ without ever coupling two coordinates, so the product form survives any finite s
 steps. 
 
 Proposition~\ref{prop:C1} now shows how the second-order behaviour of the distortion of the average believed association depends on the separability lemma. More specifically, Lemma~\ref{lem:sep} forces every updating route to act
-on the association by the pure multiplier $\assoc(D')=(g_0g_1h_0h_1/Z^{2})\,\assoc(D)$, so all of them share the same leading factor at independence and the $\bigO(c)$ terms in $\assoc(\Pbar)-\assoc(\PB)$ cancel identically. On the other hand, a non-separable updating route obeys no such
+on the association by the pure multiplier $\assoc(Q')=(g_0g_1h_0h_1/Z^{2})\,\assoc(Q)$, so all of them share the same leading factor at independence and the $\bigO(c)$ terms in $\assoc(\Pbar)-\assoc(\PB)$ cancel identically. On the other hand, a non-separable updating route obeys no such
 identity and can shift $\assoc$ additively rather than merely rescale it, leaving a first-order distortion.
 
 \renewcommand{\theproposition}{C1}%
@@ -546,16 +548,16 @@ identically zero:
 
 \begin{proof}
 \emph{Association---the $\bigO(c)$ terms coincide by separable covariance.} For any rank-one
-(separable) reweighting $D'_{ij}=g_i h_j D_{ij}/Z$ with $Z=\sum_{ij}g_i h_j D_{ij}$,
+(separable) reweighting $Q'_{ij}=g_i h_j Q_{ij}/Z$ of a joint law $Q$, with $Z=\sum_{ij}g_i h_j Q_{ij}$,
 \[
-  \assoc(D')=\frac{g_0 g_1 h_0 h_1}{Z^{2}}\,\assoc(D),
+  \assoc(Q')=\frac{g_0 g_1 h_0 h_1}{Z^{2}}\,\assoc(Q),
 \]
-since the cross terms in $D'_{00}D'_{11}-D'_{01}D'_{10}$ carry the identical factor
+since the cross terms in $Q'_{00}Q'_{11}-Q'_{01}Q'_{10}$ carry the identical factor
 $g_0g_1h_0h_1$. Explicitly,
 \begin{align*}
-  D'_{00}D'_{11}-D'_{01}D'_{10}
-  &=\frac{(g_0h_0D_{00})(g_1h_1D_{11})-(g_0h_1D_{01})(g_1h_0D_{10})}{Z^{2}}\\
-  &=\frac{g_0g_1h_0h_1}{Z^{2}}\bigl(D_{00}D_{11}-D_{01}D_{10}\bigr).
+  Q'_{00}Q'_{11}-Q'_{01}Q'_{10}
+  &=\frac{(g_0h_0Q_{00})(g_1h_1Q_{11})-(g_0h_1Q_{01})(g_1h_0Q_{10})}{Z^{2}}\\
+  &=\frac{g_0g_1h_0h_1}{Z^{2}}\bigl(Q_{00}Q_{11}-Q_{01}Q_{10}\bigr).
 \end{align*}
 By Lemma~\ref{lem:sep}, every Jeffrey route composes to exactly such a
 separable reweighting (at $N=2$, a rank-one form $g_ih_j$), and the Bayes update is one
@@ -696,8 +698,7 @@ It's worth highlighting a key result that follows from the sequence affecting ma
 
 \subsection{Aggregate Decision Statistics}
 
-Both decision-statistics look at evaluators inside the threshold band who may flip their decision when the sequence changes their score. However, \textbf{Share} depends on only on the band's mass, $f(0)\cdot\bigO(c)$ -- thus leaving it first order. On the other hand , \textbf{Loss} weights each one by their stake $|u|$, and is itself bounded by $\bigO(c)$ from the threshold inside the
-band $|u|$ -- leaving it second-order.
+Both decision-statistics look at evaluators inside the threshold band who may flip their decision when the sequence changes their score. However, \textbf{Share} depends only on the band's mass, $f(0)\cdot\bigO(c)$ -- thus leaving it first order. On the other hand, \textbf{Loss} weights each evaluator in that band by their stake $|u|$, and inside the band $|u|$ is itself bounded by $\bigO(c)$ from the threshold. A band of width $\bigO(c)$ weighted by a quantity of size $\bigO(c)$ leaves it second-order.
 
 \subsubsection{Surplus-weighted loss}
 \label{sec:welfare}
