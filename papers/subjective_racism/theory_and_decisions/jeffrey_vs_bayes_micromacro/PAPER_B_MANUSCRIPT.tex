@@ -70,14 +70,14 @@ Jeffrey conditioning \sep probability kinematics \sep belief aggregation \sep sc
 \section{Introduction}
 \label{sec:intro}
 
-That the sequence in which evidence arrives can move the final judgment is among the oldest findings in the study of impression formation \citep{Asch1946} yet there seems no general account of how such order dependence carries over in aggregate statistics. The current paper builds upon the belief-updating literature \citep{Asch1946,HogarthEinhorn1992} to explore how the order in which two cues arrive matters for average beliefs about correlated attributes in the population. Using Jeffrey conditioning as a coherent updating mechanism for impression-formation, the paper finds that while believed marginal probabilities deviate from the order-invariant benchmark at first order, the believed association between attributes stays close to the benchmark at both individual and aggregate scales. The paper then pins down what really makes an arbitrary smooth statistic remain first-order and what makes it remain closer to the order-independent Bayesian updating mechanism. While the paper uses a two-cue setting to explain the underlying mechanism behind order effects, the central mechanism of how an attribute-local updating leaves the interactions among attributes untouched holds for any number of attributes and cues.
+That the sequence in which evidence arrives can move the final judgment is among the oldest findings in the study of impression formation \citep{Asch1946} yet there seems no general account of how such order dependence carries over in aggregate statistics. The current paper builds upon the belief-updating literature \citep{Asch1946,HogarthEinhorn1992} to explore how the order in which two cues arrive matters for average beliefs about correlated attributes in the population. Using Jeffrey conditioning as a coherent updating mechanism for impression-formation, the paper finds that while the share of population for whom the arrival order of evidence matters deviates from the order-invariant benchmark at first order, the believed association between attributes stays close to the benchmark at both individual and aggregate scales. The paper then pins down what really makes an arbitrary smooth statistic remain first-order and what makes it remain closer to the order-independent Bayesian updating mechanism. While the paper uses a two-cue setting to explain the underlying mechanism behind order effects, the central mechanism of how an attribute-local updating leaves the interactions among attributes untouched holds for any number of attributes and cues.
 
 The paper uses the Jeffrey updating mechanism as a coherent mechanism with sequence-dependence properties that is pertinent for situations where evidence is soft \citep{Jeffrey1983}. A typical scenario that we use to explain the aggregation problem is that of a hiring panel working through a candidate's file on the basis of two pieces of evidence that bear on the decision---i) a credential that speaks to competence, and ii) the tone of a reference letter that speaks
 to trustworthiness. Both are soft evidence in the sense of \citet{Jeffrey1983} so that neither is decisive but each leaves an impression. While the mechanism can extend to higher number of cues, we focus on the sequence dependence in a situation where one panel may read
 the credential first and the letter second and an otherwise identical panel may read them in reverse. If the two attributes are believed to go together at all, the two panels finish with different beliefs about the same candidate. In the context of soft evidence the stake is real for the individual in the sense that identical evidence can license
-different decisions, with the difference set by arrival sequence rather than by anything the evidence contains. Whether arrival sequence matters or not in the aggregate is the question that the current paper attempts to answer. What it finds is that the answer depends on a specific property of a given statistic rather than the means of aggregation. More specifically, the arrival order effect lands in the perceived levels and decisions close to threshold but not in believed association.
+different decisions, with the difference set by arrival sequence rather than by anything the evidence contains. Whether arrival sequence matters or not in the aggregate is the question that the current paper attempts to answer. What it finds is that the answer depends on a specific property of a given statistic rather than the means of aggregation. 
 
-Our conclusions for arrival order do not apply when evidence is hard or updating is Bayesian. The sequence-relevance arises when the evidence is soft and when it can be assumed that impressions arrive as revised credences, not as likelihoods. The panelist comes to feel the candidate competent, without that feeling arising from any known
+Our conclusions for arrival order do not apply when evidence is hard or updating is Bayesian. The sequence-relevance arises when the evidence is soft and when it can be assumed that impressions arrive as revised credences, not as likelihoods. The panelist in the example comes to feel the candidate competent, without that feeling arising from any known
 likelihood ratio---indicating how many more times the credential is more probable under competence than in its absence. For input of that kind, strict conditionalisation is simply not available, i.e., there is no certifiable proposition to condition on. As a mechanism that holds conditionals fixed, Jeffrey updating is the unique coherent revision for credence delivered on cue's partition and is equivalent to making the minimal change of the prior consistent with the delivered marginal \citep{DiaconisZabell1982}. If the strength with which the two traits are believed to go together were represented with a prior covariance $c$, then reversal or sequence shifts the posterior as well as any threshold decision it drives before any cue arrives in proportion to $c$\footnote{See  \citet{Field1978} for how Jeffrey updates are asymmetric in the delivered-credence parametrisation and \citet{Wagner2002} for how they commute when their inputs are held fixed in Bayes-factor form.}. Notice that the sequence effect is the sequential, myopic structure that makes Jeffrey conditioning the coherent response to a delivered credence in the first place. Holding one attribute's conditional fixed while resetting the other's marginal is what the delivered credence licenses \citep{Domotor1980}. 
 
 The paper provides a two-fold answer to the question of how sequence-dependence for an individual evaluator passes over to the population. First, it establishes that while the individual diverges from the benchmark at first order in $c$
@@ -86,7 +86,7 @@ The paper provides a two-fold answer to the question of how sequence-dependence 
 (Theorem~\ref{thm:B2}) are second order. Second, it characterises exactly which statistics can register the phenomenon at its own order. For every interior mixture of reading sequences and across an open set of priors, a smooth statistic of the average belief is
 second order if and only if its differential at independence is proportional to the differential of the believed cross-attribute association (Proposition~\ref{prop:C3}). The condition is necessary as well as sufficient, so the protected
 statistics (i.e.\ those that become second order) are the local dependence measures and surplus-weighted loss (for the threshold decision). The clear implication of the finding is that what an audit can answer depends on which statistic is aggregated rather than on how many evaluators are averaged over \footnote{What we consider as association in the paper is one that is held by an evaluator rather than one that is exhibited by the world. In other words, the
-prior covariance $c$ is a feature of a panel's belief about a single candidate, not a frequency among candidates that the panels are estimating.}. One consequence, is that the instruments most naturally trusted for detecting stereotype---belief audits asking how attributes are thought to go together---may be structurally the least sensitive ones available while the footprint of sequence-dependence still residing in outcomes.
+prior covariance $c$ is a feature of a panel's belief about a single candidate, not a frequency among candidates that the panels are estimating.}. One consequence, is that the instruments most naturally trusted for detecting stereotype---belief audits asking how attributes are thought to go together---may not even be detectable.
 
 In what follows, Section~\ref{sec:setup} sets up the model and the benchmark.
 Section~\ref{sec:literature} relates the paper to the literature.
@@ -94,7 +94,7 @@ Section~\ref{sec:individual} establishes the individual-level results, exact imm
 single cue and first-order divergence on two. Section~\ref{sec:aggregation} asks which of these carry over into the population, namely the
 second-order surplus-weighted loss, the decoupling of the believed cross-attribute association, the
 characterisation of the protected class, and the criterion split.
-Section~\ref{sec:scope} states the scope of results and limitations that would break the results. Section~\ref{sec:conclusion} discusses the key takeaways from the results. Proofs not discussed in the main text are provided in \ref{app:proofs}.
+Section~\ref{sec:scope} states the scope of results and limitations that would break the results. Section~\ref{sec:conclusion} discusses the key takeaways from the results. Proofs not discussed in the main text are provided in Appendix \ref{app:proofs}.
 
 \section{Setup}
 \label{sec:setup}
@@ -257,7 +257,7 @@ our decision-space result shows the same kind of erasure can occur within a sing
 
 Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects primarily in terms of two \textbf{primitive} statistics -- that we refer to as gap and score. The \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive is a \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator.
 
-The rest of the belief-statistics and decision-statistics rely on these two primitives. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
+The belief-statistics and decision-statistics rely on these two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
 
 Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggests three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considered for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the arrival sequence (flip indicator) and \emph{how much} they are affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices \citep{FosterGreerThorbecke1984}.
 
@@ -592,7 +592,7 @@ The proposition's implications for the example vignette are quite revealing. In 
 collectively take the two attributes to go together more or less than the benchmark
 warrants---carries no first-order trace of the sequence (Proposition~\ref{prop:C1}). In other words, reading sequence cannot, to first order, build or erode the perceived relationship between the attributes,
 because both updates reweight separably, and a separable reweighting only rescales the
-association already present. Sequence effects therefore create no excess association or a stereotype in the sense stipulated above.
+association already present. Sequence effects therefore create no excess association or a stereotype in the above sense.
 
 \subsubsection{Aggregate Marginal-probability}
 \label{sec:marginal}
@@ -700,7 +700,7 @@ moving route by $\lambda$ and the pinned route by $1-\lambda$.}
 \end{proof}
 
 
-It's worth highlighting a key result that follows from the sequence affecting marginal probability at first order. The pool's average perceived competence drifts at $\bigO(c)$. In terms of the terminology we've used, the marginal probability lies outside the protected class. As a result, what an outside observer surveying the panels' joint beliefs and comparing them against the benchmark would find is that along the association axis, the average believed relationship between competence and trustworthiness would sit at essentially its benchmark value (order $c^{2}$). On the other hand, along the marginal-probability axis the average perceived marginal probability of either attribute would depart from the benchmark already at order $c$. It is only in the marginal probabilities that the observer could read off any trace of the sequence at all. The \emph{footprint of sequencing thus resides in marginal probabilities, not believed association}.
+It's worth highlighting a key result that follows from the sequence affecting marginal probability at first order. The pool's average perceived competence drifts at $\bigO(c)$. In terms of the terminology we've used, the marginal probability lies outside the protected class. As a result, what an outside observer surveying the panels' joint beliefs and comparing them against the benchmark would find is that along the association axis, the average believed relationship between competence and trustworthiness would sit at essentially its benchmark value (order $c^{2}$). On the other hand, along the marginal-probability axis the average perceived marginal probability of either attribute would depart from the benchmark already at order $c$. It is only in the marginal probabilities that the observer could read off any trace of the sequence at all. The footprint of sequencing thus resides in marginal probabilities, not believed association. 
 
 \subsection{Aggregate Decision Statistics}
 
@@ -911,7 +911,7 @@ We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref
 How much stereotype does the population's average belief carry?
   & $\assoc(\Pbar)-\assoc(\PB)$
   & $\bigO(c^{2})$ exactly (Lemma~A3; Prop.~C1)\\
-How far does the population's believed prevalence of each attribute sit from the benchmark?
+How far does the population's believed prevalence of an attribute sit from the benchmark?
   & $\Pbar(A{=}1)-\PB(A{=}1)$
   & $\Theta(c)$ generically, at least one attribute (Prop.~C1$'$)\\
 \midrule
@@ -920,16 +920,12 @@ How far does the population's believed prevalence of each attribute sit from the
 How large is the share of candidates whose decision the reading sequence changed?
   & $\Pr\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$
   & $\Theta(c)$ (Prop.~C2)\\
-How large is the surplus the population forgoes on those changed decisions?
+How large is the loss incurred through decisions affected by sequence?
   & $L(c)=\E\bigl[|u|\,\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\bigr]$
   & $\bigO(c^{2})$ (Theorem~B2)\\
 \bottomrule
 \end{tabular}
-\caption{What four aggregate audits of the same population would find. Two return a
-second-order answer and see nothing; two return a first-order answer and see the effect, and
-the split does not follow the belief/decision division. The surplus-weighted loss is
-$\bigO(c^{2})$ under the density hypothesis of Theorem~\ref{thm:B2}; without it only
-$L(c)=o(c)$ survives.}
+\caption{What four aggregate audits of the same population find}
 \label{tab:audit-questions}
 \end{table}
 
@@ -944,8 +940,7 @@ license the inference that its members are Bayesian. The population's mean belie
 and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark while every member's
 gap diverges at $\bigO(c)$. At leading order, a population's aggregate beliefs can
 look externally Bayesian---sequence-free, benchmark-conforming on the protected
-statistics---even when no member's belief is, which is the observational consequence that
-connects to the belief-aggregation criterion of Section~\ref{sec:literature}.
+statistics---even when no member's belief is.
 
 Second, what an audit can detect is decided by the statistic it computes. The protections of
 the two layers have separate sources---separability keeps the mean believed association
@@ -956,19 +951,18 @@ on a protected statistic is therefore evidence about the instrument rather than 
 population. Collecting more observations and disaggregating into subgroups address the
 estimation error, not the quantity estimated. Enlarging the sample sharpens the estimate of a
 protected aggregate but leaves it at $\bigO(c^{2})$, and a subgroup is a subpopulation with its
-own mixture of reading sequences. Subgroups move the coefficient, not the order, and it is the order
-that decides what sits above the observer's precision. The aggregate results are, in this
-sense, reassuring exactly insofar as they are cautionary. For the two-cue setting studied here,
-the classification is complete: there are no protected statistics beyond the local dependence
+own mixture of reading sequences. The aggregate results are, in this
+sense, reassuring exactly insofar as they are cautionary. For the two-cue setting,
+the classification is complete -- there are no protected statistics beyond the local dependence
 measures and, for the threshold decision, the surplus-weighted loss.
 
 Third, the instrumental point bears on how a stereotype is looked for
 outside the model. The instruments a society most naturally trusts for detecting stereotype are
 of the belief-auditing kind---asking what a population believes, in aggregate, about how
 attributes go together---and the association they measure is protected
-(Table~\ref{tab:audit-questions}).A population could pass every
+(Table~\ref{tab:audit-questions}). What the paper finds is that a population could pass every
 belief-level audit sincerely while the footprint of sequence-dependence lives entirely in
-outcomes, in who was decided differently than the benchmark warranted. Debates that set
+outcomes. Debates that set
 improving attitudes against persistent outcome disparities may, on this reading, be comparing
 instruments of different asymptotic order rather than disagreeing about the same quantity.
 
