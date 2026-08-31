@@ -253,14 +253,14 @@ our decision-space result shows the same kind of erasure can occur within a sing
 \section{Sequence effects at the individual level}
 \label{sec:individual}
 
-Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects primarily in terms of two \textbf{primitive} statistics -- that we refer to as gap and score. The \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive is a \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator.
+Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects with respect the Bayesian benchmark using two \textbf{primitive} statistics -- gap and score. As discussed in Section  \ref{sec:jeffrey}, the \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive, \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator.
 
-The belief-statistics and decision-statistics rely on these two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
+The belief-statistics and decision-statistics follow from the two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
 
 Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggests three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considered for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the arrival sequence (flip indicator) and \emph{how much} they are affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices \citep{FosterGreerThorbecke1984}.
 
 
-\subsection{Primitives for evaluator}\label{sec:individual_primitives}
+\subsection{Primitives for single evaluator}\label{sec:individual_primitives}
 Starting with the \emph{gap}, we first state the rather trivial assertion that the difference between Jeffrey and Bayes is absent on a single cue or on two cues on independent attributes\footnote{Since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (see Assumption~\ref{as:soft})}.
 
 \renewcommand{\theproposition}{A1}%
@@ -308,12 +308,12 @@ $\Delta_{\mathrm{seq}}\not\equiv0$.
 \anchor{Prop.~A2}
 \end{proposition}
 
-The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is rather straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two sequences trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). When $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two sequences no longer agree at first order in $c$.  
+The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two sequences trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). When $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two sequences no longer agree at first order in $c$.  
 
-The conditions under which the first-order follows are not particularly stringent. More particularly, since $\kappa\propto(\alpha-q_0)$, the gap $P^J_{AB}-P^B$ can vanish when the $A$-impression coincides with the prior $A$-marginal or when $B$-impression is degenerate ($\kappa\propto r_0(1-r_0)$ ). In terms of the panel example, the gap has a nonzero leading coefficient when the credential's impression genuinely surprises ($q_{0}\neq\alpha$) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$).
+The conditions for the first-order are not particularly stringent. Since $\kappa\propto(\alpha-q_0)$, the gap $P^J_{AB}-P^B$ vanishes when $A$-impression coincides with the prior $A$-marginal or when $B$-impression is degenerate ($\kappa\propto r_0(1-r_0)$ ). In terms of the panel example, therefore, the gap has a nonzero leading coefficient when the credential's impression genuinely surprises ($q_{0}\neq\alpha$) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$).
 
 The sequence effect (Definition~\ref{def:seqeffect})---i.e. the difference $\PJ_{AB}-\PJ_{BA}$ between the two reading sequences---is also first order for the individual evaluator. The $A$-first gap $\PJ_{AB}-\PB$ has leading coefficient $\kappa\,R_1$ with $R_1=q\otimes(1,-1)$ (
-which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them. This demonstrates the very mechanism of how  ``first impressions stick''.
+which holds the $A$-marginal fixed and moves only the $B$-conditional) and the $B$-first gap $\PJ_{BA}-\PB$ has $\kappa'\,R_2$ with $R_2=(1,-1)\otimes r$ (holding the $B$-marginal fixed). The sequence effect, being their difference, has the form $\PJ_{AB}-\PJ_{BA}=c\,(\kappa R_1-\kappa' R_2)+\bigO(c^2)$. Because $R_1$ and $R_2$ preserve different marginals, the sequence effect is two-dimensional and does not collapse to either gap or reduce to a rescaling of one of them.
 
 The second primitive, \emph{score-gap} of a panel (given a fixed weight $\vv$) is the first-order coefficient with which its own score $s(P)=\langle\vv,P\rangle$ departs from the benchmark's. This is because for a particular route $\sigma$ ($AB$ or $BA$ for two cues), we have
 \[
@@ -321,7 +321,7 @@ The second primitive, \emph{score-gap} of a panel (given a fixed weight $\vv$) i
 \]
 
 
-\subsection{Belief Statistics}
+\subsection{Belief Statistics for single evaluator}
 
 The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:A2}. As Lemma \ref{lem:A3} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
 averaging takes place).
@@ -368,7 +368,7 @@ The second belief-statistic of interest is the panel's \emph{marginal probabilit
 is a linear read-out of the gap, the relevant row or column sum of $\PJ_\sigma-\PB$. In audit terms, the marginal is the levels question, asking how competent evaluators take a given candidate from the pool to be and what share of evaluators would rate that candidate above a given bar. As can be seen in Proposition~\ref{prop:A2}, its rows sum to zero and its columns to $\pm\kappa$. On route $AB$ the competence marginal---the attribute read \emph{first}---therefore carries no first-order term at all, while the trustworthiness marginal---read \emph{last}---moves at
 $c\kappa$. Similarly, on route $BA$ we have the opposite split, rows summing to $\pm\kappa'$ and columns to zero. The marginal probability of whichever attribute is read first is thus $\bigO(c^{2})$ exactly, and of whichever is read last is $\Theta(c)$ generically.
 
-\subsection{Decision Statistics}
+\subsection{Decision Statistics for single evaluator}
 
 Panels differ not only in what they believe but also in the effects of how they act on their beliefs. The two decision statistics we're concerned with are the decision-\emph{flip} (which becomes sequence-affected-share in the aggregate) and sequence-affected \emph{loss}.
 
@@ -507,7 +507,7 @@ $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 
 
 \subsection{Aggregate Belief Statistics}
-The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads last has its marginal pinned exactly to the impression and so departs from the benchmark at first order, whereas the route reading that attribute first moves with the benchmark and its shift is zero to first order. Mixing the two does not zero out the first-order effect: the mixture retains the pinned route's coefficient in proportion to that route's weight, and the drift vanishes only in the limit where every evaluator reads the attribute first---at which point it passes to the other attribute instead. Once again, it's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
+The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads last has its marginal pinned exactly to the impression and so departs from the benchmark at first order, whereas the route reading that attribute first moves with the benchmark and its shift is zero to first order. Mixing the two does not zero out the first-order effect. It's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
 
 \subsubsection{Aggregate cross-attribute association}
 \label{sec:association}
@@ -640,7 +640,7 @@ Hence,
   \qquad
   \PJ_{BA}(A{=}1)-\PB(A{=}1)=cK+\bigO(c^2).
 \]
-Averaging over routes (Figure~\ref{fig:routes}),
+Averaging over routes,
 \begin{align*}
   \Pbar(A{=}1)-\PB(A{=}1)
    &=\lambda\bigl[\PJ_{AB}(A{=}1)-\PB(A{=}1)\bigr]+(1-\lambda)\bigl[\PJ_{BA}(A{=}1)-\PB(A{=}1)\bigr]\\
@@ -659,45 +659,6 @@ Since $q_0(1-q_0)>0$ and $\alpha\beta(1-\alpha)(1-\beta)>0$ on the open cube, $\
   \ \Longrightarrow\
   \Pbar(A{=}1)-\PB(A{=}1)=\bigO(c^2).
 \]
-
-\begin{figure}[t]
-\centering
-\begin{adjustbox}{max width=\linewidth,max height=0.42\textheight,center}
-\begin{tikzpicture}[scale=1.0, font=\small]
-\draw[->] (0,0.00) -- (11.5,0.00) node[below right] {$c$};
-\draw[->] (0,0.00) -- (0,10.55) node[above left] {$\Pr(A{=}1)$};
-
-\draw[dashed] (0,8.27) -- (8.5,8.27);
-\node[left] at (0,8.27) {$q_1$};
-\node[right] at (8.7,8.27) {$\PJ_{BA}$};
-\node[right,align=left] at (8.7,7.30) {\footnotesize $A$-marginal\\[-2pt]\footnotesize pinned at $q_1$};
-
-\draw[thick] (0,8.27) -- (8.5,2.28);
-\node[right] at (8.7,2.28) {$\PJ_{AB},\ \PB$};
-\node[right,align=left] at (8.7,1.30) {\footnotesize coincide\\[-2pt]\footnotesize to first order};
-
-\draw[thick,densely dotted] (0,8.27) -- (8.5,5.16);
-\node[right] at (8.7,5.16) {$\Pbar$};
-
-\draw[densely dotted,gray] (10.0,8.27) -- (13.6,8.27);
-\draw[densely dotted,gray] (10.0,5.16) -- (11.6,5.16);
-\draw[densely dotted,gray] (11.2,2.28) -- (13.6,2.28);
-
-\draw[<->] (11.6,2.28) -- (11.6,5.16);
-\node[above] at (11.6,5.35) {\footnotesize drift $=-(1-\lambda)\,c\,\kappa'$};
-
-\draw[<->] (13.6,2.28) -- (13.6,8.27);
-\node[above] at (13.6,8.65) {\footnotesize common coefficient $-c\,\kappa'$};
-
-\end{tikzpicture}
-\end{adjustbox}
-\caption{The pinned and the moving route (Proposition~\ref{prop:C1m}, drawn for $r_0>\beta$). In
-the $BA$ sequence the $A$-cue is processed last and pins the $A$-marginal at $q_1$ identically. In
-the $AB$ sequence the later $B$-step pulls the $A$-marginal off $q_1$ by the same first-order
-amount as the benchmark, so $\PJ_{AB}$ and $\PB$ move together. The mean $\Pbar$ weights the
-moving route by $\lambda$ and the pinned route by $1-\lambda$.}
-\label{fig:routes}
-\end{figure}
 
 
 \end{proof}
@@ -881,7 +842,7 @@ $\lambda\langle\nabla F,\kappa R_1\rangle+(1-\lambda)\langle\nabla F,\kappa' R_2
 requiring it to vanish at every interior $\lambda$ forces both inner products to vanish
 separately rather than merely cancel against each other at some particular composition of the
 population. Protection in the sense of Definition~\ref{def:protection} is thus annihilation of
-the route directions, not cancellation between them. \anchor{Prop.~C3}
+the route directions, not cancellation between them.
 
 In the panel example, the classification says which audit questions can register the sequencing, and
 the boundary falls in an instructive place. Ask how likely the panels believe a
@@ -934,9 +895,7 @@ How large is the loss incurred through decisions affected by sequence?
 
 
 
-The paper's central contribution is a characterisation that delineates the conditions under which an arbitrary smooth statistic of the average belief is protected, at first order, from the non-commutativity of coherent sequential updating. This characterisation is built up from the fundamental observation that the gap is not an arbitrary perturbation. Each reading sequence contributes one route direction ($R_1$ and $R_2$ of
-Proposition~\ref{prop:A2}), so the leading-order departures of the average posterior from the benchmark are confined to the plane those two directions span. A smooth statistic responds to
-that departure only through its differential at independence. Whether a statistic is protected therefore turns on whether its differential annihilates the route plane or not.
+The paper's central contribution is a characterisation that delineates the conditions under which an arbitrary smooth statistic of the average belief is protected, at first order, from the non-commutativity of coherent sequential updating. This characterisation is built up from the fundamental observation that the gap is not an arbitrary perturbation. Each reading sequence contributes one route direction ($R_1$ and $R_2$), so the leading-order departures of the average posterior from the benchmark are confined to the plane those two directions span. Whether a statistic is protected therefore turns on whether its differential annihilates the route plane or not.
 
 This answer carries three implications for audits where soft-cue updating can be assumed. First, an aggregate matching the Bayesian benchmark does not
 license the inference that its members are Bayesian. The population's mean believed association
@@ -955,9 +914,7 @@ population. Collecting more observations and disaggregating into subgroups addre
 estimation error, not the quantity estimated. Enlarging the sample sharpens the estimate of a
 protected aggregate but leaves it at $\bigO(c^{2})$, and a subgroup is a subpopulation with its
 own mixture of reading sequences. The aggregate results are, in this
-sense, reassuring exactly insofar as they are cautionary. For the two-cue setting,
-the classification is complete -- there are no protected statistics beyond the local dependence
-measures and, for the threshold decision, the surplus-weighted loss.
+sense, reassuring exactly insofar as they are cautionary. For the two-cue setting, there are no protected statistics beyond the local dependence measures and, for the threshold decision, the surplus-weighted loss.
 
 Third, the instrumental point bears on how a stereotype is looked for
 outside the model. The instruments a society most naturally trusts for detecting stereotype are
