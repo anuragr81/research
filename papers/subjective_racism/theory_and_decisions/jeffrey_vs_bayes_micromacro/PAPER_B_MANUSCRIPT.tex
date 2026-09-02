@@ -80,10 +80,10 @@ different decisions, with the difference set by arrival sequence. Whether arriva
 Our conclusions for arrival sequence do not apply when evidence is hard or updating is Bayesian. The sequence-relevance arises when the evidence is soft and when it can be assumed that impressions arrive as revised credences, not as likelihoods. The panelist in the example comes to feel the candidate competent, without that feeling arising from any known
 likelihood ratio---indicating how many more times the credential is more probable under competence than in its absence. For input of that kind, strict conditionalisation is simply not available, i.e., there is no certifiable proposition to condition on. As a mechanism that holds conditionals fixed, Jeffrey updating is the unique coherent revision for credence delivered on cue's partition and is equivalent to making the minimal change of the prior consistent with the delivered marginal \citep{DiaconisZabell1982} \footnote{See  \citet{Field1978} for how Jeffrey updates are asymmetric in the delivered-credence parametrisation and \citet{Wagner2002} for how they commute when their inputs are held fixed in Bayes-factor form.}. 
 
-To avoid a clash in terminology we use ``order'' to describe proximity with a sequence-free Bayesian bechmark and ``sequence`` to denote the sequence in which evidence is read. Thus sequence effect is a sequential, myopic structure that makes Jeffrey conditioning the coherent response to a delivered credence. The distinction between first and second order on the other hand, is what an observer can or cannot see. More specifically, if the strength with which the two traits are believed to go together were represented with a prior covariance $c$, a departure from sequence-free benchmark is resolvable only when its size exceeds the observer's measurement precision $\varepsilon$. For small enough $c$ the two sequences separate, since $\varepsilon$ can sit between them, $c^{2}\ll\varepsilon\ll c$. A first-order departure is then resolvable and a second-order one is not, so the same population can present a visible effect on one statistic and none on another. The sequence-dependence of marginals follows easily -- since the likelihood a delivered credence implies must be read against the marginal in force when the cue arrives \citep{Domotor1980}. What is less obvious is the finding some statistics of the aggregate are structurally blind to arrival order. 
+To avoid a clash in terminology we use ``order'' to describe proximity with a sequence-free Bayesian bechmark and ``sequence`` to denote the sequence in which evidence is read. Thus sequence effect is a sequential, myopic structure that makes Jeffrey conditioning the coherent response to a delivered credence. The distinction between first and second order on the other hand, is what an observer can or cannot see. More specifically, if the strength with which the two traits are believed to go together were represented with a prior covariance $c$, a departure from sequence-free benchmark is resolvable only when its size exceeds the observer's measurement precision $\varepsilon$. For small enough $c$ the two sequences separate, since $\varepsilon$ can sit between them, $c^{2}\ll\varepsilon\ll c$. A first-order departure is then resolvable and a second-order one is not, so the same population can present a visible effect on one statistic and none on another. The sequence-dependence of marginals follows easily -- since the likelihood a delivered credence implies must be read against the marginal in force when the cue arrives \citep{Domotor1980}. What is less obvious is the finding that some aggregate statistics are structurally blind to arrival order. 
 
-We elaborate the finding in two steps. First, we establish that while the individual diverges from the benchmark at first order in $c$ (Proposition~\ref{prop:A2}), the average believed association between attributes (Proposition~\ref{prop:C1}) and the surplus-weighted loss of the population's decisions
-(Theorem~\ref{thm:B2}) are second order. Second, we characterise exactly which statistics can register the phenomenon at its own order. For every interior mixture of reading sequences and across an open set of priors, a smooth statistic of the average belief is second order if and only if its differential at independence is proportional to the differential of the believed cross-attribute association (Proposition~\ref{prop:C3}). The condition is necessary as well as sufficient, so the protected
+We elaborate the finding in two steps. First, we establish that while evaluator diverges from the benchmark at first order in $c$ (Proposition~\ref{prop:DIV}), the average believed association between attributes (Proposition~\ref{prop:DEC}) and the surplus-weighted loss of the population's decisions
+(Theorem~\ref{thm:LOS}) are second order. Second, we characterise exactly which statistics can register the phenomenon at its own order. For every interior mixture of reading sequences and across an open set of priors, a smooth statistic of the average belief is second order if and only if its differential at independence is proportional to the differential of the believed cross-attribute association (Proposition~\ref{prop:PRO}). The condition is necessary as well as sufficient, so the protected
 statistics (i.e.\ those that become second order) are the local dependence measures and surplus-weighted loss (for the threshold decision). The clear implication of the finding is that what an audit can answer depends on which statistic is aggregated rather than on how many evaluators are averaged over \footnote{What we consider as association in the paper is one that is held by an evaluator rather than one that is exhibited by the world. In other words, the
 prior covariance $c$ is a feature of a panel's belief about a single candidate, not a frequency among candidates that the panels are estimating.}. One consequence, is that the instruments most naturally trusted for detecting stereotype---belief audits asking how attributes are thought to go together---may not even be detectable.
 
@@ -182,7 +182,7 @@ sequence-invariant \citep{Wagner2002}, and $\PB$ is the single update on that co
   \PB(i,j)\propto P(i,j)\,\ell^{A}_{i}\,\ell^{B}_{j},
 \]
 well-defined regardless of which cue arrived first \anchor{Setup}. As we later show, it coincides
-on any one cue with the matched Jeffrey step (Proposition~\ref{prop:A1}). We compare sequential updating on delivered credences (which does not commute) against the one-shot updating on Bayes-factor content (which does). 
+on any one cue with the matched Jeffrey step (Proposition~\ref{prop:IMM}). We compare sequential updating on delivered credences (which does not commute) against the one-shot updating on Bayes-factor content (which does). 
 
 \subsection{Assumptions}
 \label{sec:assumptions}
@@ -234,10 +234,10 @@ The purview of the current paper is positive rather than normative. The paper me
 statistics conceal the members' sequence-dependence. A related normative literature evaluates group belief formation by whether aggregation
 commutes with updating---a design criterion for the pooling rule \citep{Dietrich2021}.
 While geometric pooling \citep[Def.~1]{Dietrich2021} satisfies the criterion, the population mean studied in the
-current paper (i.e.\ the average posterior across evaluators who differ only in the sequence they meet the two cues) is the outcome of linear pooling and generically fails the criterion. As further sections elaborate, this is consistent with the first-order divergence of every statistic outside the protected class of Proposition~\ref{prop:C3}.
+current paper (i.e.\ the average posterior across evaluators who differ only in the sequence they meet the two cues) is the outcome of linear pooling and generically fails the criterion. As further sections elaborate, this is consistent with the first-order divergence of every statistic outside the protected class of Proposition~\ref{prop:PRO}.
 
 Several alternatives to Bayesian updating have been used in the decision theory literature to explain whether sequential conditioning is sequence-independent or not. For example, \citet{Epstein2006} makes the updating rule subjective, and \citet{Ortoleva2012} axiomatises departures triggered by unexpected news. \citet{Cripps2021} shows that symmetry and divisibility jointly force sequence-independence,
-so the correlated two-cue composite of Proposition~\ref{prop:A2} fails divisibility---and, of the four axioms, only divisibility.\footnote{Cripps's axioms govern rules on fixed-likelihood experiments; the statement here is behavioural---the map from prior and delivered credences to final belief, held against the sequence-invariance that his Symmetry and Divisibility axioms jointly force.} While the literature restores sequence-invariance for sequential Jeffrey updating by changing how successive inputs are pooled \citep{PettigrewWeisberg2025}, the current paper instead accepts the non-commutativity and characterises what remains of it in aggregate. The characterisation discussed in the paper offers some clarity to the observations noted by \citet{HogarthEinhorn1992}. While Bayes-factor updating predicts no sequence effect anywhere \citep{Wagner2002}, the belief-adjustment accounts of order effects \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper highlights is that such experimental analyses must also factor in the cross-attribute associaton -- thus requiring the elicitation of a full posterior table rather than a single rating produced by step-by-step or end-of-sequnce response modes. 
+so the correlated two-cue composite of Proposition~\ref{prop:DIV} fails divisibility---and, of the four axioms, only divisibility.\footnote{Cripps's axioms govern rules on fixed-likelihood experiments; the statement here is behavioural---the map from prior and delivered credences to final belief, held against the sequence-invariance that his Symmetry and Divisibility axioms jointly force.} While the literature restores sequence-invariance for sequential Jeffrey updating by changing how successive inputs are pooled \citep{PettigrewWeisberg2025}, the current paper instead accepts the non-commutativity and characterises what remains of it in aggregate. The characterisation discussed in the paper offers some clarity to the observations noted by \citet{HogarthEinhorn1992}. While Bayes-factor updating predicts no sequence effect anywhere \citep{Wagner2002}, the belief-adjustment accounts of order effects \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper highlights is that such experimental analyses must also factor in the cross-attribute associaton -- thus requiring the elicitation of a full posterior table rather than a single rating produced by step-by-step or end-of-sequnce response modes. 
 
 The paper borrows the evaluator-with-binary-attributes frame from the statistical-discrimination lineage \citep{Phelps1972, Arrow1973}. However, the object of interest for the current paper remains
 kinematic rather than an equilibrium fixed point. Unlike \citet{CoateLoury1993}, for example, in which the stereotype is a self-confirming
@@ -248,7 +248,7 @@ concluding section trades on---protection intrinsic to the arithmetic of aggrega
 It is worth contrasting the phenomenon explored in the current paper against the amalgamation paradox \citep{GoodMittal1987}, where a real effect present in every subpopulation is erased or
 reversed by a confound in how the subpopulations are weighted together. Whereas the amalgamation paradox erases a real effect by combining subpopulations under confounded weights,
 our decision-space result shows the same kind of erasure can occur within a single population -- where a first-order share of individuals who are individually affected contributes only a second-order loss in aggregate
-(Theorem~\ref{thm:B2}).
+(Theorem~\ref{thm:LOS}).
 
 \section{Sequence effects at the individual level}
 \label{sec:individual}
@@ -263,11 +263,11 @@ Before these are detailed, it is worth stating why the respective statistics wer
 \subsection{Primitives for single evaluator}\label{sec:individual_primitives}
 Starting with the \emph{gap}, we first state the rather trivial assertion that the difference between Jeffrey and Bayes is absent on a single cue or on two cues on independent attributes\footnote{Since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (see Assumption~\ref{as:soft})}.
 
-\renewcommand{\theproposition}{A1}%
-\begin{proposition}[exact immunity]\label{prop:A1}
+\renewcommand{\theproposition}{IMM}%
+\begin{proposition}[exact immunity]\label{prop:IMM}
 On a single cue, the Jeffrey posterior equals the matched Bayesian posterior identically, for
 every prior and every impression. With two cues but $c=0$ (independent attributes),
-$\PJ_{AB}=\PJ_{BA}=\PB$ exactly. \anchor{Prop.~A1}
+$\PJ_{AB}=\PJ_{BA}=\PB$ exactly. \anchor{Prop.~IMM}
 \end{proposition}
 
 \begin{proof}
@@ -276,8 +276,8 @@ The single cue on $A$ means the matched likelihood $\ell^A_i=q_i Z/P(A{=}i)$, wi
 
 In other words, a decision turning on \emph{one} cue is immune. Next we specify the sequence effect at the individual level---which is first order in our setup and serves as a building block for the rest of the propositions. 
 
-\renewcommand{\theproposition}{A2}%
-\begin{proposition}[micro divergence]\label{prop:A2}
+\renewcommand{\theproposition}{DIV}%
+\begin{proposition}[micro divergence]\label{prop:DIV}
 Let $Z:=\alpha\beta(1-\alpha)(1-\beta)>0$. At $c=0$ both reading sequences coincide with the
 benchmark, $\PJ_{AB}=\PJ_{BA}=\PB=q\otimes r$.
 \begin{enumerate}
@@ -305,10 +305,10 @@ with $\Delta_{\mathrm{seq}}=\kappa R_1-\kappa' R_2$. Since $R_1,R_2$ are linearl
 $\Delta_{\mathrm{seq}}\equiv0$ if and only if $\kappa=\kappa'=0$; hence
 $\Delta_{\mathrm{seq}}\not\equiv0$.
 \end{enumerate}
-\anchor{Prop.~A2}
+\anchor{Prop.~DIV}
 \end{proposition}
 
-The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two sequences trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:A1}). When $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two sequences no longer agree at first order in $c$.  
+The proof is provided in Appendix \ref{app:proofs}. The mechanism behind it is straightforward. Since prior covariance $c$ is the panel's belief about how strongly competence and trustworthiness go together, learning about one attribute is informative about the other (in the panel's own prior). A Jeffrey update on the $A$-cue rescales the joint distribution row by row, preserving the conditional distribution of $B$ given $A$. Thus when the attributes are independent, preserving that conditional leaves $B$'s marginal untouched, so the two sequences trivially commute and coincide with the benchmark exactly (Proposition~\ref{prop:IMM}). When $c\neq0$, rescaling rows changes $B$'s marginal and the update reaches the second attribute through the covariance, so the two sequences no longer agree at first order in $c$.  
 
 The conditions for the first-order are not particularly stringent. Since $\kappa\propto(\alpha-q_0)$, the gap $P^J_{AB}-P^B$ vanishes when $A$-impression coincides with the prior $A$-marginal or when $B$-impression is degenerate ($\kappa\propto r_0(1-r_0)$ ). In terms of the panel example, therefore, the gap has a nonzero leading coefficient when the credential's impression genuinely surprises ($q_{0}\neq\alpha$) and the letter leaves a genuinely soft impression ($r_{0}(1-r_{0})>0$).
 
@@ -323,12 +323,12 @@ The second primitive, \emph{score-gap} of a panel (given a fixed weight $\vv$) i
 
 \subsection{Belief Statistics for single evaluator}
 
-The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:A2}. As Lemma \ref{lem:A3} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
+The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:DIV}. As Lemma \ref{lem:ASC} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
 averaging takes place).
 
 
-\renewcommand{\thelemma}{A3}%
-\begin{lemma}[individual-level association immunity]\label{lem:A3}
+\renewcommand{\thelemma}{ASC}%
+\begin{lemma}[individual-level association immunity]\label{lem:ASC}
 For each reading sequence $\sigma\in\{AB,BA\}$ the believed association departs from the
 benchmark's only at second order,
 \[
@@ -339,7 +339,7 @@ identically in $(\alpha,\beta,q_{0},r_{0})$.
 
 \begin{proof}
 Since $\assoc$ (see Definition \ref{def:assoc}) is a polynomial in the cells and hence smooth, and
-$\PJ_\sigma-\PB=c\,D_\sigma+\bigO(c^{2})$ (Proposition~\ref{prop:A2}), the chain rule gives
+$\PJ_\sigma-\PB=c\,D_\sigma+\bigO(c^{2})$ (Proposition~\ref{prop:DIV}), the chain rule gives
 \[
   \assoc(\PJ_\sigma)-\assoc(\PB)
    =c\,\big\langle\nabla\assoc(q\otimes r),\,D_\sigma\big\rangle+\bigO(c^{2}),
@@ -348,7 +348,7 @@ $\PJ_\sigma-\PB=c\,D_\sigma+\bigO(c^{2})$ (Proposition~\ref{prop:A2}), the chain
   \nabla\assoc\big|_{q\otimes r}
    =\begin{pmatrix}q_{1}r_{1} & -q_{1}r_{0}\\ -q_{0}r_{1} & q_{0}r_{0}\end{pmatrix}.
 \]
-With $D_{AB}=\kappa R_1$ and $D_{BA}=\kappa'R_2$ (Proposition~\ref{prop:A2}), both inner
+With $D_{AB}=\kappa R_1$ and $D_{BA}=\kappa'R_2$ (Proposition~\ref{prop:DIV}), both inner
 products vanish termwise:
 \[
   \big\langle\nabla\assoc(q\otimes r),\,R_1\big\rangle
@@ -365,7 +365,7 @@ so the first-order term is zero on each route.
 
 
 The second belief-statistic of interest is the panel's \emph{marginal probability} for an attribute i.e. the belief about that attribute alone, $\PJ_\sigma(A{=}1)$. This
-is a linear read-out of the gap, the relevant row or column sum of $\PJ_\sigma-\PB$. In audit terms, the marginal is the levels question, asking how competent evaluators take a given candidate from the pool to be and what share of evaluators would rate that candidate above a given bar. As can be seen in Proposition~\ref{prop:A2}, its rows sum to zero and its columns to $\pm\kappa$. On route $AB$ the competence marginal---the attribute read \emph{first}---therefore carries no first-order term at all, while the trustworthiness marginal---read \emph{last}---moves at
+is a linear read-out of the gap, the relevant row or column sum of $\PJ_\sigma-\PB$. In audit terms, the marginal is the levels question, asking how competent evaluators take a given candidate from the pool to be and what share of evaluators would rate that candidate above a given bar. As can be seen in Proposition~\ref{prop:DIV}, its rows sum to zero and its columns to $\pm\kappa$. On route $AB$ the competence marginal---the attribute read \emph{first}---therefore carries no first-order term at all, while the trustworthiness marginal---read \emph{last}---moves at
 $c\kappa$. Similarly, on route $BA$ we have the opposite split, rows summing to $\pm\kappa'$ and columns to zero. The marginal probability of whichever attribute is read first is thus $\bigO(c^{2})$ exactly, and of whichever is read last is $\Theta(c)$ generically.
 
 \subsection{Decision Statistics for single evaluator}
@@ -439,12 +439,12 @@ $F$ is \emph{protected} if its distortion is second order in the prior covarianc
 $F(\Pbar)-F(\PB)=\bigO(c^{2})$, and \emph{unprotected} if that distortion is first order, $\bigO(c)$.
 \end{definition}
 
-A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place. The aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading sequences, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane. The attribute-locality assumption and Lemma~\ref{lem:A3} ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$. As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
-(Proposition~\ref{prop:C1}) and the surplus-weighted loss $L(c)$ (Theorem~\ref{thm:B2}) are
+A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place. The aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading sequences, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane. The attribute-locality assumption and Lemma~\ref{lem:ASC} ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$. As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
+(Proposition~\ref{prop:DEC}) and the surplus-weighted loss $L(c)$ (Theorem~\ref{thm:LOS}) are
 second order, whereas the aggregate gap, score gaps on unprotected weights, the marginal
 probabilities, and the sequence-affected share remain first order.
 
-The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:A3}, Proposition~\ref{prop:C1}) -- whereas a reviewer computing the share of files whose decision the reading sequence changes finds a departure at $\bigO(c)$ instead. We detail the findings in the rest of the current section.
+The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:ASC}, Proposition~\ref{prop:DEC}) -- whereas a reviewer computing the share of files whose decision the reading sequence changes finds a departure at $\bigO(c)$ instead. We detail the findings in the rest of the current section.
 
 
 \begin{sidewaystable}[p]
@@ -456,18 +456,18 @@ The obvious consequence of this property is that detectability is a property of 
 \midrule
 \multicolumn{5}{@{}l}{\emph{Primitives}}\\
 \midrule
-\textbf{Gap}---gap & aggregate departure from benchmark & $\Theta(c)$ generically & $\Theta(c)$ generically & Prop.~A2; proof of Prop.~C3\\
-\textbf{Score gap}---score gap on an unprotected weight, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & unprotected-weight mean, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & $\Theta(c)$ generically & $\Theta(c)$ generically & Lemma~B1\\
+\textbf{Gap}---gap & aggregate departure from benchmark & $\Theta(c)$ generically & $\Theta(c)$ generically & Prop.~DIV; proof of Prop.~PRO\\
+\textbf{Score gap}---score gap on an unprotected weight, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & unprotected-weight mean, $v\notin\mathrm{span}\{\mathbf{1},\nabla\assoc\}$ & $\Theta(c)$ generically & $\Theta(c)$ generically & Lemma~SCR\\
 \midrule
 \multicolumn{5}{@{}l}{\emph{Belief statistics}}\\
 \midrule
-\textbf{Association}---believed association (odds ratio, Yule's $Q$) & average believed association; more generally any $F$ with $dF\propto d\,\assoc$ & $\bigO(c^{2})$ exactly & $\bigO(c^{2})$ exactly & Lemma~A3; Prop.~C1; \S\ref{sec:protected}\\
-\textbf{Marginal}---marginal probability & marginal-probability drift & $\Theta(c)$ generically on the cue read last, $\bigO(c^{2})$ exactly on the cue read first & $\Theta(c)$ generically for at least one attribute, every $\lambda$ & Prop.~A2; Prop.~C1$'$\\
+\textbf{Association}---believed association (odds ratio, Yule's $Q$) & average believed association; more generally any $F$ with $dF\propto d\,\assoc$ & $\bigO(c^{2})$ exactly & $\bigO(c^{2})$ exactly & Lemma~ASC; Prop.~DEC; \S\ref{sec:protected}\\
+\textbf{Marginal}---marginal probability & marginal-probability drift & $\Theta(c)$ generically on the cue read last, $\bigO(c^{2})$ exactly on the cue read first & $\Theta(c)$ generically for at least one attribute, every $\lambda$ & Prop.~DIV; Prop.~DRF\\
 \midrule
 \multicolumn{5}{@{}l}{\emph{Decision statistics}}\\
 \midrule
-\textbf{Loss}---foregone surplus & surplus-weighted loss & foregone surplus of one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$ & $\bigO(c^{2})$ & Theorem~B2\\
-\textbf{Share}---flip indicator & sequence-affected share & flip indicator for one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$, then $1$ & $\Theta(c)$ & Prop.~C2\\
+\textbf{Loss}---foregone surplus & surplus-weighted loss & foregone surplus of one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$ & $\bigO(c^{2})$ & Theorem~LOS\\
+\textbf{Share}---flip indicator & sequence-affected share & flip indicator for one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$, then $1$ & $\Theta(c)$ & Prop.~SHR\\
 \bottomrule
 \end{tabular}
 \caption{Order in the prior covariance $c$, individual versus aggregate. $\Theta(c)$ marks a
@@ -485,29 +485,29 @@ $\lambda$ and generically retains the sequence effects that were applicable at t
 \subsubsection{Gap distortion}
 \label{sec:distortion}
 
-The proof of Proposition~\ref{prop:C3} gives $\Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^{2})$ directly, and because $R_1$ and $R_2$ are linearly independent, $M_\lambda$ vanishes at interior $\lambda$ only where the coefficients of both reading sequences vanish. The aggregate gap is therefore first order on the same generic set as the gap of Proposition~\ref{prop:A2}. In other words, averaging over reading sequences reweights the leading coefficient without removing it. \anchor{Prop.~C3}
+The proof of Proposition~\ref{prop:PRO} gives $\Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^{2})$ directly, and because $R_1$ and $R_2$ are linearly independent, $M_\lambda$ vanishes at interior $\lambda$ only where the coefficients of both reading sequences vanish. The aggregate gap is therefore first order on the same generic set as the gap of Proposition~\ref{prop:DIV}. In other words, averaging over reading sequences reweights the leading coefficient without removing it. \anchor{Prop.~PRO}
 
 \subsubsection{Score gap}
 \label{sec:scoregap}
 
-The average \emph{score gap} is also a straightforward measure of the weighted score of the belief and its first-order in aggregate follows from Proposition~\ref{prop:A2}.
+The average \emph{score gap} is also a straightforward measure of the weighted score of the belief and its first-order in aggregate follows from Proposition~\ref{prop:DIV}.
 
-\renewcommand{\thelemma}{B1}%
-\begin{lemma}[first-order score gap]\label{lem:B1}
+\renewcommand{\thelemma}{SCR}%
+\begin{lemma}[first-order score gap]\label{lem:SCR}
 $s(\PJ_\sigma)-s(\PB)=c\,\delta_\sigma+\bigO(c^{2})$, with $\delta_\sigma$ as defined in
 Section~\ref{sec:individual}; generically
-$\delta_{AB}\neq\delta_{BA}$, and $\delta_\sigma=0$ if $\vv$ is constant. \anchor{Lem.~B1}
+$\delta_{AB}\neq\delta_{BA}$, and $\delta_\sigma=0$ if $\vv$ is constant. \anchor{Lem.~SCR}
 \end{lemma}
 
 \begin{proof}
 Apply the linear functional $s=\langle\vv,\cdot\rangle$ to
-$\PJ_\sigma-\PB=cD_\sigma+\bigO(c^2)$ from Proposition~\ref{prop:A2}. Constancy of $\vv$ makes
+$\PJ_\sigma-\PB=cD_\sigma+\bigO(c^2)$ from Proposition~\ref{prop:DIV}. Constancy of $\vv$ makes
 $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 \end{proof}
 
 
 \subsection{Aggregate Belief Statistics}
-The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:A3} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads last has its marginal pinned exactly to the impression and so departs from the benchmark at first order, whereas the route reading that attribute first moves with the benchmark and its shift is zero to first order. Mixing the two does not zero out the first-order effect. It's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
+The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:ASC} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads last has its marginal pinned exactly to the impression and so departs from the benchmark at first order, whereas the route reading that attribute first moves with the benchmark and its shift is zero to first order. Mixing the two does not zero out the first-order effect. It's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
 
 \subsubsection{Aggregate cross-attribute association}
 \label{sec:association}
@@ -516,13 +516,13 @@ Recall that the sense of stereotype in the paper depends on the cross-attribute 
 nonzero $\assoc(\Pbar)-\assoc(\PB)$. By definition, stereotype is absent when the belief matches the Bayesian benchmark.
 
 We now explain how the average believed cross-attribute association is second order because of a separable reweighting
-(Lemma~\ref{lem:sep})---rather than the Jeffrey conditioning or the presence of two cues. More particularly, every updating route in the model composes to a separable
+(Lemma~\ref{lem:SEP})---rather than the Jeffrey conditioning or the presence of two cues. More particularly, every updating route in the model composes to a separable
 reweighting---which can only rescale an association, never shift it---so the average posterior
 moves along a single fixed direction. Since separability holds at every $N$ and for any rule whose steps read one attribute at a time, the protection is structural rather than a cancellation of terms and shows up as a property of attribute-locality (holding for any such rule, not Jeffrey
 conditioning in particular). The lemma is stated and proved for arbitrary $N$.
 
 \renewcommand{\thelemma}{SEP}%
-\begin{lemma}[separability of attribute-local composites]\label{lem:sep}
+\begin{lemma}[separability of attribute-local composites]\label{lem:SEP}
 For any number $N$ of binary attributes and a joint prior $P$ over $\{0,1\}^{N}$, any finite
 sequence of attribute-local updates produces a \emph{separable} reweighting
 \[
@@ -537,18 +537,18 @@ sequence: each attribute-local step folds into that attribute's own multiplicati
 without ever coupling two coordinates, so the product form survives any finite sequence of such
 steps. 
 
-Proposition~\ref{prop:C1} now shows how the second-order behaviour of the distortion of the average believed association depends on the separability lemma. More specifically, Lemma~\ref{lem:sep} forces every updating route to act
+Proposition~\ref{prop:DEC} now shows how the second-order behaviour of the distortion of the average believed association depends on the separability lemma. More specifically, Lemma~\ref{lem:SEP} forces every updating route to act
 on the association by the pure multiplier $\assoc(Q')=(g_0g_1h_0h_1/Z^{2})\,\assoc(Q)$, so all of them share the same leading factor at independence and the $\bigO(c)$ terms in $\assoc(\Pbar)-\assoc(\PB)$ cancel identically. On the other hand, a non-separable updating route obeys no such
 identity and can shift $\assoc$ additively rather than merely rescale it, leaving a first-order distortion.
 
-\renewcommand{\theproposition}{C1}%
-\begin{proposition}[belief-level decoupling]\label{prop:C1}
+\renewcommand{\theproposition}{DEC}%
+\begin{proposition}[belief-level decoupling]\label{prop:DEC}
 The distortion of the average believed association is second order---its first-order coefficient is
 identically zero:
 \[
   \assoc(\Pbar)-\assoc(\PB)=\bigO(c^{2}).
 \]
-\anchor{Prop.~C1}
+\anchor{Prop.~DEC}
 \end{proposition}
 
 \begin{proof}
@@ -564,7 +564,7 @@ $g_0g_1h_0h_1$. Explicitly,
   &=\frac{(g_0h_0Q_{00})(g_1h_1Q_{11})-(g_0h_1Q_{01})(g_1h_0Q_{10})}{Z^{2}}\\
   &=\frac{g_0g_1h_0h_1}{Z^{2}}\bigl(Q_{00}Q_{11}-Q_{01}Q_{10}\bigr).
 \end{align*}
-Applying this with $Q=P$: by Lemma~\ref{lem:sep}, every Jeffrey route composes to exactly such a
+Applying this with $Q=P$: by Lemma~\ref{lem:SEP}, every Jeffrey route composes to exactly such a
 separable reweighting (at $N=2$, a rank-one form $g_ih_j$), and the Bayes update is one
 directly ($g_i=q_i/\alpha_i,\ h_j=r_j/\beta_j$, writing $\alpha_0=\alpha,\ \alpha_1=1-\alpha$ and
 similarly for $\beta$). Every route therefore
@@ -591,19 +591,19 @@ identically in $c$. For believed association in odds-ratio form the departure fr
 association.
 
 The proposition's implications for the example vignette are also quite revealing. In a population of panels evaluating a common pool---where each receives the same two impressions, one bearing on competence and one on trustworthiness---each panel's posterior differs from the benchmark at $\bigO(c)$
-(Proposition~\ref{prop:A2}). Yet the average believed association---whether the evaluators
+(Proposition~\ref{prop:DIV}). Yet the average believed association---whether the evaluators
 collectively take the two attributes to go together more or less than the benchmark
-warrants---carries no first-order trace of the sequence (Proposition~\ref{prop:C1}). In other words, reading sequence cannot, to first order, build or erode the perceived relationship between the attributes,
+warrants---carries no first-order trace of the sequence (Proposition~\ref{prop:DEC}). In other words, reading sequence cannot, to first order, build or erode the perceived relationship between the attributes,
 because both updates reweight separably, and a separable reweighting only rescales the
 association already present. Sequence effects therefore create no excess association or a stereotype in the above sense.
 
 \subsubsection{Aggregate Marginal-probability}
 \label{sec:marginal}
 
-The current section shows that the reading sequence does move the marginal probability in the aggregate. Proposition \ref{prop:C1m} formalises this.
+The current section shows that the reading sequence does move the marginal probability in the aggregate. Proposition \ref{prop:DRF} formalises this.
 
-\renewcommand{\theproposition}{C1$'$}%
-\begin{proposition}[marginal-probability drift]\label{prop:C1m}
+\renewcommand{\theproposition}{DRF}%
+\begin{proposition}[marginal-probability drift]\label{prop:DRF}
 The aggregate \emph{marginal-probability} distortion is first order, with
 \[
   \big[\Pbar(A{=}1)-\PB(A{=}1)\big]
@@ -614,7 +614,7 @@ cue--marginal-probability configurations. At $\lambda=1$ this drift vanishes at 
 the $B$-marginal drifts with coefficient
 $\lambda\,r_0(1-r_0)(q_0-\alpha)/\big(\alpha\beta(1-\alpha)(1-\beta)\big)$ with sign
 $\sgn(q_0-\alpha)$. For every $\lambda\in[0,1]$, therefore, at least one marginal drifts at first order.
-\anchor{Prop.~C1$'$}
+\anchor{Prop.~DRF}
 \end{proposition}
 
 \begin{proof}
@@ -676,11 +676,11 @@ Both decision-statistics look at evaluators inside the threshold band who may fl
 We now show that a fixed evaluator with net surplus $u\neq0$ is  unaffected by the reading sequence until $|c\delta_\sigma|$ reaches $|u|$, so their foregone surplus
 is identically zero for small $c$ rather than second order in it. Whatever sequence the population
 aggregate has is therefore not inherited from any member. Taking the score gap of
-Lemma~\ref{lem:B1} as given, the higher-order behaviour of the expected surplus loss $L(c)$ is
+Lemma~\ref{lem:SCR} as given, the higher-order behaviour of the expected surplus loss $L(c)$ is
 now stated as a theorem.
 
-\renewcommand{\thetheorem}{B2}%
-\begin{theorem}[surplus-weighted loss]\label{thm:B2}
+\renewcommand{\thetheorem}{LOS}%
+\begin{theorem}[surplus-weighted loss]\label{thm:LOS}
 Let $u=s(\PB)-\tau$ have, across the population and the sequence distribution, a joint density
 whose $u$-marginal is integrable (Assumption~\ref{as:surplus}). Then the expected surplus loss $L(c)$ of the Jeffrey
 population relative to the benchmark is $o(c)$---strictly higher order than the individual
@@ -689,7 +689,7 @@ $f(0)>0$, the loss is exactly second order, with constant named:
 \[
   L(c)=\frac{f(0)}{2}\,\E\!\big[\delta_\sigma^{2}\mid u=0\big]\,c^{2}+\bigO(c^{3}).
 \]
-\anchor{Thm.~B2}
+\anchor{Thm.~LOS}
 \end{theorem}
 
 
@@ -709,11 +709,11 @@ $f(0)>0$, the loss is exactly second order, with constant named:
 \draw[<-] (0.42,1.0) -- (1.9,1.0) node[right] {mass $f(0)\cdot\bigO(c)$};
 \draw[<-] (-0.35,0.35) -- (-2.6,0.35) node[left] {cost $|u|\le cM=\bigO(c)$};
 \end{tikzpicture}
-\caption{The band picture of Theorem~\ref{thm:B2}. Sequence-affected individuals lie in a band
+\caption{The band picture of Theorem~\ref{thm:LOS}. Sequence-affected individuals lie in a band
 of width $\bigO(c)$ at the threshold; the band's mass is $f(0)\cdot\bigO(c)$, and the foregone
 surplus of each member is at most $cM=\bigO(c)$. The surplus-weighted loss is the product of the
 two factors, $\bigO(c^{2})$, while the sequence-affected share returns the band's mass alone,
-$\bigO(c)$ (Proposition~\ref{prop:C2}).}
+$\bigO(c)$ (Proposition~\ref{prop:SHR}).}
 \label{fig:band}
 \end{figure}
 
@@ -748,19 +748,19 @@ necessary but not sufficient---the perturbation must also point towards the thre
 than away from it---so the affected form a subset of the band, and it is the band's mass,
 $f(0)\cdot\bigO(c)$, that sets the first-order rate. The following proposition formalises this.
 
-\renewcommand{\theproposition}{C2}%
-\begin{proposition}[sequence-affected share]\label{prop:C2}
+\renewcommand{\theproposition}{SHR}%
+\begin{proposition}[sequence-affected share]\label{prop:SHR}
 Suppose the $u$-marginal is bounded and continuous at $u=0$ with $f(0)>0$ (the same density
-hypothesis as Theorem~\ref{thm:B2}). Then under the $0$--$1$ criterion---weight $1$ for each
+hypothesis as Theorem~\ref{thm:LOS}). Then under the $0$--$1$ criterion---weight $1$ for each
 individual whose Jeffrey and benchmark actions differ, $0$ for everyone else, so that the
 aggregate is the \emph{incidence} of sequence-affected individuals, their share of the
 population---the aggregate is genuinely $\bigO(c)$, not merely $o(1)$, since the band mass
-itself scales as $f(0)\cdot\bigO(c)$. \anchor{Prop.~C2}
+itself scales as $f(0)\cdot\bigO(c)$. \anchor{Prop.~SHR}
 \end{proposition}
 \begin{proof}
 Both criteria integrate over the same set, differing only in the weight attached to a member.
 
-\emph{Step 1: the affected set.} By Lemma~\ref{lem:B1} the Jeffrey score perturbs the benchmark
+\emph{Step 1: the affected set.} By Lemma~\ref{lem:SCR} the Jeffrey score perturbs the benchmark
 score by $c\delta_\sigma+\bigO(c^{2})$, so
 \[
   \text{affected}
@@ -776,7 +776,7 @@ a band of width $\bigO(c)$ about the threshold $u=0$, where $\sgn(u)$ turns over
   \mu(S_c)=\int_{|u|\le|c\delta_\sigma|}\!\! f(u)\,du=f(0)\cdot\bigO(c),
 \]
 first order rather than merely bounded by it, since $f(0)>0$ and $\delta_\sigma\neq0$
-generically (Lemma~\ref{lem:B1}).
+generically (Lemma~\ref{lem:SCR}).
 
 \emph{Step 3: the two criteria.} On $S_c$ the stake obeys $|u|\le|c\delta_\sigma|=\bigO(c)$,
 whence
@@ -785,12 +785,12 @@ whence
   \qquad
   \underbrace{\textstyle\int_{S_c} |u|\,d\mu}_{\text{surplus}}
    \le \bigO(c)\cdot\mu(S_c)=\bigO(c^{2})
-  \quad (\text{Theorem~\ref{thm:B2}}).
+  \quad (\text{Theorem~\ref{thm:LOS}}).
 \]
 The extra factor of $c$ is the weight $|u|$, which the band forces to first order.
 \end{proof}
 
-What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~C2}. Whatever significance attaches to those individuals---their decisions turned on the sequence in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. Propositions~\ref{prop:C2} and~\ref{prop:C3} show that the criterion, not the phenomenon, selects which answer an aggregate instrument returns.
+What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~SHR}. Whatever significance attaches to those individuals---their decisions turned on the sequence in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. Propositions~\ref{prop:SHR} and~\ref{prop:PRO} show that the criterion, not the phenomenon, selects which answer an aggregate instrument returns.
 
 
 
@@ -805,8 +805,8 @@ Recall that \emph{protection} means that the aggregate's first-order coefficient
 though every member of the population is $\bigO(c)$ away). What we now prove is that a smooth statistic is \emph{protected} exactly when its differential at the independent posterior $q\otimes r$ points along $d\,\assoc$ (the differential of the association) so that to first order the statistic moves only as the association moves. Every other smooth statistic departs at first order generically (i.e. on all but a lower-dimensional set of priors). The following proposition formalises this.
 
 
-\renewcommand{\theproposition}{C3}%
-\begin{proposition}[uniqueness of the protected statistic]\label{prop:C3}
+\renewcommand{\theproposition}{PRO}%
+\begin{proposition}[uniqueness of the protected statistic]\label{prop:PRO}
 For $(q_0,r_0)\in(0,1)^2$, $F$ as $C^1$ in a neighbourhood of $q\otimes r$ in the
 probability simplex, and with the mean belief $\Pbar_\lambda$ of
 Section~\ref{sec:aggregation}.
@@ -818,22 +818,22 @@ $F(\Pbar_\lambda)-F(\PB)=\bigO(c^2)$ for every prior $(\alpha,\beta)$ and every 
 $F(\Pbar_\lambda)-F(\PB)=o(c)$ for all $(\alpha,\beta)$ in some open set, then $dF$ at
 $q\otimes r$, restricted to the simplex, is a multiple of $d\,\assoc$.
 \end{enumerate}
-\anchor{Prop.~C3}
+\anchor{Prop.~PRO}
 \end{proposition}
 
 The proof is provided in Appendix \ref{app:proofs}. What drives it is that each sequence's leading gap is a scalar
 multiple of a single rank-one direction---$\kappa\,q\otimes(1,-1)$ for one sequence and, exchanging
 the roles of the cues, $\kappa'\,(1,-1)\otimes r$ with $\kappa'=(\beta-r_0)\,q_0(1-q_0)/Z$ for
-the other (Proposition~\ref{prop:A2} and its mirror)---so the annihilator of the two directions
+the other (Proposition~\ref{prop:DIV} and its mirror)---so the annihilator of the two directions
 is two-dimensional and spanned by the constants and $\nabla\assoc$, and the converse follows
 from the nonconstancy of $\kappa/\kappa'$ on any open set of priors.
 
 \textbf{The smooth statistics protected to second order are exactly} the \emph{local dependence
 measures}, those that, to first order at independence, depend on the posterior only through its
-association. This includes the association itself (Proposition~\ref{prop:C1} is the case
+association. This includes the association itself (Proposition~\ref{prop:DEC} is the case
 $F=\assoc$), the odds ratio, its logarithm, and Yule's $Q$; among expectations
 $\langle v,P\rangle$ it admits exactly those whose $v$ lies in the two-dimensional span of the
-constants and $\nabla\assoc$ (Lemma~\ref{lem:B1}). No statistic outside the class is second order on an open
+constants and $\nabla\assoc$ (Lemma~\ref{lem:SCR}). No statistic outside the class is second order on an open
 set of priors.
 
 The quantification over $\lambda$ in part~(i) is what makes the class a classification of
@@ -848,7 +848,7 @@ In the panel example, the classification says which audit questions can register
 the boundary falls in an instructive place. Ask how likely the panels believe a
 competent-seeming candidate to be trustworthy, $\Pbar(B{=}1\mid A{=}1)$, and the distortion is
 first order, since this conditional probability carries a component along the marginal
-probabilities and the marginal probabilities drift at $\bigO(c)$ (Proposition~\ref{prop:C1m}).
+probabilities and the marginal probabilities drift at $\bigO(c)$ (Proposition~\ref{prop:DRF}).
 Ask how much \emph{likelier} they believe a competent-seeming candidate to be trustworthy than
 an incompetent-seeming one, $\Pbar(B{=}1\mid A{=}1)-\Pbar(B{=}1\mid A{=}0)$, and the distortion
 is second order, since the subtraction removes the component along the marginal probabilities
@@ -858,7 +858,7 @@ this difference in the protected class. Stereotypes do persist, but not as trivi
 \section{Scope and robustness}
 \label{sec:scope}
 
-We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} define scope for any conclusions made from the model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply. Second, Assumption~\ref{as:soft} states that a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:A1} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise when Assumption~\ref{as:soft} is not met. Third, attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:sep}) and is the engine of Proposition~\ref{prop:C1}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:A1} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}), since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:C2}). Fifth, the population modelled throughout is homogeneous in one further respect: every evaluator shares the same prior $(\alpha,\beta,c)$, and only the encounter sequence---and, for the surplus-weighted loss, the stakes $u$---varies across the pool. A population whose members differ in the prior covariance $c$ itself is a different aggregation problem, outside the stated results.
+We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} define scope for any conclusions made from the model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply. Second, Assumption~\ref{as:soft} states that a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:IMM} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise when Assumption~\ref{as:soft} is not met. Third, attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:SEP}) and is the engine of Proposition~\ref{prop:DEC}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:IMM} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}), since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:SHR}). Fifth, the population modelled throughout is homogeneous in one further respect: every evaluator shares the same prior $(\alpha,\beta,c)$, and only the encounter sequence---and, for the surplus-weighted loss, the stakes $u$---varies across the pool. A population whose members differ in the prior covariance $c$ itself is a different aggregation problem, outside the stated results.
 
 \section{Concluding remarks}
 \label{sec:conclusion}
@@ -874,19 +874,19 @@ We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref
 \midrule
 How much stereotype does the population's average belief carry?
   & $\assoc(\Pbar)-\assoc(\PB)$
-  & $\bigO(c^{2})$ exactly (Lemma~A3; Prop.~C1)\\
+  & $\bigO(c^{2})$ exactly (Lemma~ASC; Prop.~DEC)\\
 How far does the population's believed prevalence of an attribute sit from the benchmark?
   & $\Pbar(A{=}1)-\PB(A{=}1)$
-  & $\Theta(c)$ generically, at least one attribute (Prop.~C1$'$)\\
+  & $\Theta(c)$ generically, at least one attribute (Prop.~DRF)\\
 \midrule
 \multicolumn{3}{@{}l}{\emph{Decision statistics}}\\
 \midrule
 How large is the share of candidates whose decision the reading sequence changed?
   & $\Pr\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$
-  & $\Theta(c)$ (Prop.~C2)\\
+  & $\Theta(c)$ (Prop.~SHR)\\
 How large is the loss incurred through decisions affected by sequence?
   & $L(c)=\E\bigl[|u|\,\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\bigr]$
-  & $\bigO(c^{2})$ (Theorem~B2)\\
+  & $\bigO(c^{2})$ (Theorem~LOS)\\
 \bottomrule
 \end{tabular}
 \caption{What four aggregate audits of the same population find}
@@ -906,8 +906,8 @@ statistics---even when no member's belief is.
 
 Second, what an audit can detect is decided by the statistic it computes. The protections of
 the two layers have separate sources---separability keeps the mean believed association
-first-order immune (Proposition~\ref{prop:C1}), while the stake-weighting of the flip band
-keeps the surplus-weighted loss second order (Theorem~\ref{thm:B2})---and both leave the
+first-order immune (Proposition~\ref{prop:DEC}), while the stake-weighting of the flip band
+keeps the surplus-weighted loss second order (Theorem~\ref{thm:LOS})---and both leave the
 protected statistics silent about a first-order incidence of sequence-decided outcomes. A null
 on a protected statistic is therefore evidence about the instrument rather than about the
 population. Collecting more observations and disaggregating into subgroups address the
@@ -932,7 +932,7 @@ instruments of different asymptotic order rather than disagreeing about the same
 \section{Deferred proofs}
 \label{app:proofs}
 
-\subsection{Proof of Proposition~\ref{prop:A2}}
+\subsection{Proof of Proposition~\ref{prop:DIV}}
 
 \emph{Step 1: coincidence at $c=0$.} The prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$, and each
 Jeffrey step resets one coordinate's marginal while leaving the other untouched, as does the
@@ -999,7 +999,7 @@ Both coefficients satisfy $\sum_k D_k=\sum_k\Delta_{\mathrm{seq},\,k}=0$, as a d
 probability distributions must.
 \qed
 
-\subsection{Proof of Lemma~\ref{lem:sep}}
+\subsection{Proof of Lemma~\ref{lem:SEP}}
 
 Write the update sequence as $P_{0}=P$ and, for $t=1,\dots,T$,
 \[
@@ -1073,7 +1073,7 @@ thus the same condition both ways. Nothing above is specific to Jeffrey updating
 sequence length.
 \qed
 
-\subsection{Proof of Theorem~\ref{thm:B2}}
+\subsection{Proof of Theorem~\ref{thm:LOS}}
 
 \emph{Step 1: bounded coefficient.} The two actions differ iff
 $\sgn(u)\neq\sgn(u+c\delta_\sigma)$. At the fixed prior and impressions
@@ -1137,9 +1137,9 @@ integration over $\delta$ gives
 \]
 \qed
 
-\subsection{Proof of Proposition~\ref{prop:C3}}
+\subsection{Proof of Proposition~\ref{prop:PRO}}
 
-\emph{Step 1: the aggregate moves in a plane.} By Proposition~\ref{prop:A2} and its mirror,
+\emph{Step 1: the aggregate moves in a plane.} By Proposition~\ref{prop:DIV} and its mirror,
 \[
   \PJ_{AB}-\PB=c\,\kappa R_1+\bigO(c^2),
   \qquad
@@ -1168,7 +1168,7 @@ Both $J$ (all entries $1$) and $\nabla\assoc(q\otimes r)$ lie in this space,
   \langle J,R_1\rangle=\langle J,R_2\rangle=0,
   \qquad
   \langle\nabla\assoc,R_1\rangle=\langle\nabla\assoc,R_2\rangle=0
-  \quad(\text{Lemma~\ref{lem:A3}}),
+  \quad(\text{Lemma~\ref{lem:ASC}}),
 \]
 and are linearly independent, hence span it.
 
@@ -1211,7 +1211,7 @@ constants and $\nabla\assoc$.
 
 During the preparation of this work the author used Anthropic's Claude (large language model)
 in order to draft and refine manuscript prose; propose, prove, and cross-verify
-Proposition~\ref{prop:C3} (uniqueness of the protected statistic), which was then independently
+Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently
 re-derived and machine-verified by the author; propose bibliographic sources for
 positioning against neighbouring literatures; and structure the manuscript to conform to the
 target journal's house style. After using this tool, the author reviewed and edited the
