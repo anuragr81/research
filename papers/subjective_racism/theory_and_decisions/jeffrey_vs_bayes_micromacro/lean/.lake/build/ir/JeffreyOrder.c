@@ -1,0 +1,65 @@
+// Lean compiler output
+// Module: JeffreyOrder
+// Imports: public import Init public meta import Init public import JeffreyOrder.Basic public import JeffreyOrder.PropIMM public import JeffreyOrder.PropDEC public import JeffreyOrder.LemmaSEP public import JeffreyOrder.PropPRO public import JeffreyOrder.Decision public import JeffreyOrder.PropDIV public import JeffreyOrder.Aggregate
+#include <lean/lean.h>
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wunused-label"
+#elif defined(__GNUC__) && !defined(__CLANG__)
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wunused-label"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#endif
+#ifdef __cplusplus
+extern "C" {
+#endif
+lean_object* initialize_Init(uint8_t builtin);
+lean_object* initialize_Init(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_Basic(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_PropIMM(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_PropDEC(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_LemmaSEP(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_PropPRO(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_Decision(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_PropDIV(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_Aggregate(uint8_t builtin);
+static bool _G_initialized = false;
+LEAN_EXPORT lean_object* initialize_jeffreyorder_JeffreyOrder(uint8_t builtin) {
+lean_object * res;
+if (_G_initialized) return lean_io_result_mk_ok(lean_box(0));
+_G_initialized = true;
+res = initialize_Init(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_Init(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_Basic(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_PropIMM(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_PropDEC(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_LemmaSEP(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_PropPRO(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_Decision(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_PropDIV(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_Aggregate(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+return lean_io_result_mk_ok(lean_box(0));
+}
+#ifdef __cplusplus
+}
+#endif
