@@ -1,0 +1,97 @@
+% Draft: research question (with literature motivation) + answer. REFRAMED.
+% For review -- NOT inserted into the manuscript.
+%
+% Reframing (v2): the identification claim is NOT an aggregation argument. The
+% classification of which statistics reveal the sequence effect is settled by
+% the two reading sequences themselves, before any averaging (manuscript's
+% "settled before averaging", Prop PRO), and is benchmark-free (Prop ORD). So
+% this version centres the between-sequence contrast on a single statistic and
+% explicitly DEMOTES both aggregation and the benchmark to non-load-bearing.
+%
+% Terminology is the manuscript's: sequence / sequence effect (def:seqeffect),
+% protected/unprotected (def:protection), cross-attribute association
+% (def:assoc), first/second order in c, benchmark PB. Proposed additions:
+% "sequence effect on a statistic" (F(PJ_AB)-F(PJ_BA)) and Prop ORD.
+
+% ---------- QUESTION (with literature motivation) ----------
+
+That coherent updating on two uncertain impressions depends on the sequence in
+which they arrive is not in question. Jeffrey conditioning is sequence-dependent,
+and the condition under which the two sequences agree---that neither cue disturb
+the other's partition---has been known since \citet{DiaconisZabell1982} and was
+recast by \citet{HawthorneAND2004} as the commutation condition for standard
+sequential updating. That literature settled \emph{whether} the two sequences
+coincide, reasoning throughout about the evaluator's whole joint belief. It
+leaves untouched a prior question about measurement: when the two sequences
+differ, does the difference survive into the quantities one would actually read
+off an evaluator---a level of belief in one attribute, a decision, the believed
+cross-attribute association (Definition~\ref{def:assoc})---or does it vanish from
+some of them? The sequence effect (Definition~\ref{def:seqeffect}) is a
+difference between two whole joint beliefs; whether it persists into a given
+summary of those beliefs is a separate matter, and it is the matter that decides
+whether the effect can be seen at all.
+
+This is not a question about pooling many evaluators together. It is a question
+about the summary itself. Fix any statistic $F$ of the belief and compare its
+value for an evaluator who read the cues in one sequence with its value for one
+who read them in the other. For some statistics this difference is of the same
+order in the prior covariance $c$ as the sequence effect itself---large enough
+to clear any fixed measurement precision---while for others it is of strictly
+higher order, below resolution however precisely one measures
+(Definition~\ref{def:protection}). This paper asks which statistics fall on
+which side of that line and, because the line turns out to be sharp, what an
+observer who reads only a statistic on the wrong side of it can and cannot infer.
+
+% ---------- ANSWER (triangular: plain finding first, mechanism after) ----------
+
+The answer is that the sequence survives into some statistics and vanishes from
+others, and which is which is fully determined. The believed cross-attribute
+association---the statistic most naturally read as the signature of a
+stereotype---does not carry it: two evaluators who met the same impressions in
+opposite sequences report essentially the same association, differing only at
+second order in $c$. The marginal probabilities and the decision do carry it,
+differing already at first order. So one evaluator's beliefs can show a plain
+sequence effect in their marginals and their decision while their believed
+association looks sequence-free.
+
+This is cautionary for measurement, and it is exactly the loop the question left
+open. A test that asks only whether an evaluator's believed association matches
+its sequence-free value will report conformity even when the sequence effect is
+plainly present in the same beliefs; a null on the association is then evidence
+about the choice of instrument, not about the evaluator. The statistics that do
+carry the effect are the marginals and the decision. This sharpens what the
+documented order effects of impression formation
+\citep{HogarthEinhorn1992,Asch1946} can establish: those studies elicit a single
+evaluative level, which is a carrying statistic and will show the effect, but a
+level on its own cannot separate a sequence-dependent evaluator from a
+sequence-free one---that separation needs the association read alongside it. The
+experimental work that does elicit the association elicits it one conditional at
+a time \citep{ZhaoOsherson2010}, never contrasting it between reading sequences.
+The instrument the effect calls for is precisely that missing contrast: a
+carrying statistic---a marginal, or the decision---compared between the two
+sequences.
+
+The classification is this sharp because it is decided by the two sequences
+alone. Each sequence pushes the belief in one characteristic direction; a
+statistic carries the sequence effect exactly when it varies along the span of
+those two directions, and loses it when its sensitivity at the independent belief
+points instead along the believed association. That condition is necessary as
+well as sufficient (Proposition~\ref{prop:PRO}), so the statistics that lose the
+effect are precisely the local dependence measures---the association, the odds
+ratio, Yule's $Q$---together with the surplus-weighted loss for the threshold
+decision (Theorem~\ref{thm:LOS}); every other smooth statistic carries it at
+first order (Propositions~\ref{prop:DIV},~\ref{prop:DRF}; Lemma~\ref{lem:SCR}).
+
+Two things this classification does not rest on. It does not rest on pooling. The
+line is drawn before any averaging over a population of evaluators takes place,
+so gathering individual rather than aggregate data neither reveals a lost effect
+nor hides a carried one---a statistic on the wrong side of the line stays there
+at every level of aggregation, which is why a poorly chosen statistic cannot be
+rescued by finer data. And it does not rest on the benchmark. A statistic loses
+the sequence effect exactly when the effect on it,
+$F(\PJ_{AB})-F(\PJ_{BA})$, is of second order (Proposition~\ref{prop:ORD})---a
+comparison of the two sequences to each other that names neither the
+sequence-free benchmark $\PB$ nor any mixture of the sequences. The benchmark
+re-enters only as a bridge to the prior literature: the sequence-free value the
+losing statistics conform to is precisely the Bayes-factor rule of
+\citet{Field1978} and \citet{Wagner2002}.
