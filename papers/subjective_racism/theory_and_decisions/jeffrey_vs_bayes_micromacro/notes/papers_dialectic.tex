@@ -1,0 +1,206 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[authoryear,round]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!45!black]{hyperref}
+
+\newcommand{\PB}{P^{\mathrm{B}}}
+\newcommand{\PJ}{P^{\mathrm{J}}}
+\newcommand{\assoc}{\operatorname{assoc}}
+\newcommand{\bigO}{O}
+
+\title{The Paper's Dialectic\\
+\large A positioning document for \emph{Order-Sensitivity of Belief and Decision
+Statistics under Jeffrey Conditioning}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.4em}
+
+\begin{center}\small\itshape
+Standalone working document, not manuscript content. Every quotation below was
+read in the primary source, and each carries its page. The one result cited
+without direct reading is Jeffrey (1988), whose status is stated in the
+references.
+\end{center}
+
+\section*{The standoff}
+
+The case against sequential Jeffrey updating is a psychological claim made by
+people who are not psychologists. Its sharpest statement is the title of
+\citet{Doring1999}: \emph{Why Bayesian Psychology Is Incomplete}. His abstract
+carries the whole indictment:
+
+\begin{quote}
+``Jeffrey conditionalization is sensitive to the order in which the evidence
+arrives. This order effect can be so pronounced as to call for a belief
+adjustment that cannot be understood as an assimilation of incoming evidence by
+Jeffrey's rule.'' (S379)
+\end{quote}
+
+\citet{Hawthorne2004}, who named the model, agrees with the verdict while
+disclaiming the competence to deliver it, in the same breath:
+
+\begin{quote}
+``Which extension of Basic Jeffrey Updating is the more plausible model of human
+agents? I'm a logician, not a psychologist. But Amnestic Updating seems
+psychologically less plausible than the more Bayesian approaches, not because it
+is un-Bayesian, but because it seems unlikely that we dismiss previous
+experiences so completely.'' (p.~115)
+\end{quote}
+
+That is the standoff. The attack says the model is unrealistic. The attack is
+about psychology. Nobody in the exchange measures anything. The paper's
+contribution is to say what measurement could and could not settle here.
+
+\section*{The dialectic in four steps}
+
+\paragraph{1. For soft evidence, the order effect is the price of coherence.}
+An impression leaves no certifiable proposition, so strict conditionalisation is
+unavailable. If the impression delivers a level, a revised credence on the
+attribute's partition, then Jeffrey updating is the unique coherent revision and
+the minimal change of the prior consistent with it \citep{DiaconisZabell1982}.
+Applied to a second cue it holds the last-read marginal exactly, and
+sequence-dependence follows. The order effect is not a defect bolted onto the
+rule. It is what coherence costs when inputs arrive as levels.
+
+\paragraph{2. The escape re-describes the input, and even Jeffrey took it.}
+\citet{Field1978} reparametrised the update so that the input is a portable
+factor rather than a delivered credence, and sequential revisions then commute.
+\citet{Jeffrey1988} proved a commutativity result of the same kind for
+probability factors. \citet{Wagner2002} completed the line: the
+non-commutativity ``has caused much unjustified concern,'' because ``when
+identical learning is properly represented, namely, by identical Bayes factors
+rather than identical posterior probabilities, then sequential
+probability-kinematical revisions behave just as they should'' (abstract). The escape is
+blocked twice over. Phenomenologically, a Bayes factor requires the probability
+of the same credential for a candidate who is not competent, and an impression
+supplies no such counterfactual; the panelist feels a level, not a ratio.
+Internally, \citet{Garber1980} showed Field's portable parameter compounds
+absurdly under repetition, and even the attacker rejects the escape:
+``Field has neither shown that Jeffrey conditionalization is inapplicable nor
+that his own scheme is a viable alternative'' \citep[S388]{Doring1999}.
+
+\paragraph{3. The attack has two prongs, and they are different in kind.}
+Hawthorne's first prong is that the amnesia is implausible in itself: ``The
+Amnestic Model treats the agent as subject to a strange sort of amnesia\dots
+when I next see my car in dim light, its appearance at that moment completely
+overwrites my beliefs regarding its true color. This seems highly implausible''
+(p.~97). The second prong is about consequences: ``the order in which states or
+experiences are acquired will almost always have a very significant influence on
+an agent's belief strengths. This order effect is very troubling'' (p.~99), a note
+pointing to \citet{DiaconisZabell1982} for how ubiquitous the effect is and to
+\citet{Doring1999} for its implausibility (note~15).
+The first prong is introspective and stays a matter of taste. The second is a
+claim about effects in the world, and claims about effects are claims about what
+an observer would find.
+
+\paragraph{4. The paper answers the second prong, which is the answerable one.}
+``Very troubling'' presupposes that the trouble shows up somewhere. The paper
+computes where. If a population updates amnestically on level inputs, the
+sequence effect has an exact observational signature, and it is lopsided: it
+reaches some statistics at first order in the prior covariance $c$ and is
+confined to second order in others. The debate over whether amnestic updating is
+realistic thereby acquires empirical content that neither side had supplied. The
+logician need not become a psychologist; he need only say which column of a
+table an auditor should read.
+
+\section*{What population statistics imply}
+
+The classification is complete and it is settled by the two reading sequences
+alone. A smooth statistic of the belief registers the sequence effect at first
+order if and only if its differential at independence moves along the plane the
+two sequences span; the only statistics that do not are the local dependence
+measures, the believed cross-attribute association and its monotone transforms,
+together with the surplus-weighted loss of the threshold decision (Propositions
+PRO, ORD; Theorem LOS of the manuscript). Marginal probabilities and the
+decision rate register the effect at $\Theta(c)$. The believed association
+conceals it at $\bigO(c^2)$. The contrast between the two reading sequences,
+$F(\PJ_{AB})-F(\PJ_{BA})$, involves neither the benchmark $\PB$ nor the mix of
+sequences in the population, so any observer who records which cue an evaluator
+met first can compute it. Four consequences follow for the standoff.
+
+\paragraph{Amnesticity cannot be dismissed from dependence data.}
+The statistic most naturally read as the signature of a stereotype is blind to
+the sequence effect at first order. A population of amnestic updaters presents a
+believed association within $\bigO(c^2)$ of the sequence-free value. Well-behaved
+dependence statistics are therefore no evidence against the amnestic model, and
+no amount of them settles Hawthorne's question.
+
+\paragraph{The trouble is real but bounded.}
+The same classification disciplines the attack. Amnestic updating never
+manufactures cross-attribute association; the stereotype axis is untouched, and
+the population's average surplus loss is second order. What is first order is
+the drift of the marginals and the share of decisions that the reading sequence
+decides. So the ``very troubling'' order effect has a precise shape: it lives in
+levels and in the incidence of sequence-decided outcomes, not in believed
+dependence and not in average welfare.
+
+\paragraph{The model is falsifiable, cheaply.}
+Amnestic updating predicts that evaluators who met the cues in opposite orders
+differ at first order in levels and decisions while agreeing to second order in
+association. Recording reading order and reading a level or decision statistic
+is enough to test this. Conversely, while order is unrecorded or only dependence
+statistics are read, no data discriminates, and Doring's demonstration cannot be
+carried from his tables to any population claim. His own worked example displays
+the order effect in the cells of a $2\times2$ joint over two attributes; cells
+are exactly what an observer of a population does not get to read, and the step
+from his tables to observable statistics is the step this paper supplies.
+
+\paragraph{The blindness is not a matter of sample size.}
+One clarification forestalls the obvious reply. The protected statistics are not
+merely noisy: their first-order signal is zero in the population itself. The
+failure is one of identification rather than estimation, and no quantity of data
+overcomes it. The corresponding literature in economics, where the
+informativeness of an audit is likewise settled by the structure of the
+instrument rather than the size of the sample, is taken up separately in the
+companion note on positioning.
+
+\paragraph{The standoff dissolves into an instrument choice.}
+Hawthorne's question, which model is the more plausible model of human agents,
+was left to a psychology that was never brought to bear. The paper does not
+answer it and does not need to. It replaces the question's premise: plausibility
+arguments were the only currency because nobody had said what the models imply
+for observation. Now the implication is a table. Which statistics one trusts,
+and whether reading order is recorded, decides whether the question can be
+answered at all; introspection about amnesia decides nothing.
+
+\bigskip
+\bibliographystyle{plainnat}
+\begin{thebibliography}{9}
+\bibitem[Diaconis \& Zabell(1982)]{DiaconisZabell1982}Diaconis, P. \& Zabell,
+  S.~L. (1982). Updating subjective probability. \emph{Journal of the American
+  Statistical Association} 77(380), 822--830. Read in full; formalized in
+  \texttt{literature/diaconis\_zabell1982/}.
+\bibitem[D\"oring(1999)]{Doring1999}D\"oring, F. (1999). Why Bayesian psychology
+  is incomplete. \emph{Philosophy of Science} 66 (Proceedings), S379--S389.
+  Read in full from the scanned original (Drive: \texttt{doring.pdf}); quotations
+  from S379 and S388.
+\bibitem[Field(1978)]{Field1978}Field, H. (1978). A note on Jeffrey
+  conditionalization. \emph{Philosophy of Science} 45(3), 361--367. Read in
+  full; formalized in \texttt{literature/field1978/}.
+\bibitem[Garber(1980)]{Garber1980}Garber, D. (1980). Field and Jeffrey
+  conditionalization (discussion). \emph{Philosophy of Science} 47(1), 142--145.
+  Read in full; both numeric counterexamples reproduced exactly in
+  \texttt{literature/garber1980/}.
+\bibitem[Hawthorne(2004)]{Hawthorne2004}Hawthorne, J. (2004). Three models of
+  sequential belief updating on uncertain evidence. \emph{Journal of
+  Philosophical Logic} 33(1), 89--123. Read in full; quotations from pp.~97, 99,
+  115 and note 15; both worked examples and the Update Reordering Theorem
+  verified in \texttt{literature/hawthorne2004/}.
+\bibitem[Jeffrey(1988)]{Jeffrey1988}Jeffrey, R.~C. (1988). Conditioning,
+  kinematics, and exchangeability. In B.~Skyrms \& W.~L. Harper (eds.),
+  \emph{Causation, Chance, and Credence}, vol.~1, 221--255. Dordrecht: Kluwer.
+  Not read directly; its commutativity result is stated and derived as a
+  corollary in Wagner (2002, Remark~3.3), and the work appears in D\"oring's
+  own reference list. Cited here only for that result.
+\bibitem[Wagner(2002)]{Wagner2002}Wagner, C.~G. (2002). Probability kinematics
+  and commutativity. \emph{Philosophy of Science} 69(2), 266--278. Read in full
+  (Drive copy is the preprint, hence quotations are located by section);
+  Theorems 3.1 and 4.1 verified in \texttt{literature/wagner2002/}.
+\end{thebibliography}
+
+\end{document}

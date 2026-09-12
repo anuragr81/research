@@ -19,3 +19,5 @@ this paper positions itself against), not manuscript content.
 | [pettigrew_weisberg2025](pettigrew_weisberg2025/README.md) | done |
 | [hawthorne2004](hawthorne2004/README.md) | done |
 | [garber1980](garber1980/README.md) | done |
+| [augenblick_rabin2021](augenblick_rabin2021/README.md) | done |
+| [shmaya_yariv2016](shmaya_yariv2016/README.md) | done |

@@ -1,0 +1,291 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newcommand{\PB}{P^{\mathrm{B}}}
+\newcommand{\PJ}{P^{\mathrm{J}}}
+\newcommand{\assoc}{\operatorname{assoc}}
+\newcommand{\OR}{\operatorname{OR}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\input{example_values}
+
+\title{How a posterior is formed, and what ``pinning'' means\\
+\large A worked example for \emph{Order-Sensitivity of Belief and Decision
+Statistics under Jeffrey Conditioning}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.2em}
+
+\section{From prior to posterior}
+
+The prior is a joint law on $\{0,1\}^{2}$, written in the coordinates
+$(\alpha,\beta,c)$ --- the two marginals $P(A{=}0)=\alpha$, $P(B{=}0)=\beta$ and
+the covariance $c$:
+\begin{equation}
+  P=\begin{pmatrix}\alpha\beta+c & \alpha(1-\beta)-c\\[2pt]
+                   (1-\alpha)\beta-c & (1-\alpha)(1-\beta)+c\end{pmatrix},
+  \qquad \assoc(P)=P_{00}P_{11}-P_{01}P_{10}=c .
+  \label{eq:prior}
+\end{equation}
+Write $\alpha_{0}=\alpha,\ \alpha_{1}=1-\alpha$ and $\beta_{0}=\beta,\
+\beta_{1}=1-\beta$.
+
+A cue does not arrive as a likelihood. It arrives as a \emph{delivered
+credence}: a target marginal $q=(q_{0},q_{1})$ on $A$'s partition, or
+$r=(r_{0},r_{1})$ on $B$'s. A Jeffrey step installs that marginal and leaves
+the conditionals alone:
+\begin{equation}
+  (J_{A}Q)(i,j)=q_{i}\,\frac{Q(i,j)}{Q(A{=}i)},
+  \qquad
+  (J_{B}Q)(i,j)=r_{j}\,\frac{Q(i,j)}{Q(B{=}j)} .
+  \label{eq:step}
+\end{equation}
+
+\paragraph{The two reading orders.}
+Composing two steps gives the two posteriors. Reading $A$ first and then $B$,
+\begin{equation}
+  \PJ_{AB}(i,j)
+  \;=\;\bigl(J_{B}J_{A}P\bigr)(i,j)
+  \;=\;r_{j}\,
+    \frac{\dfrac{q_{i}P(i,j)}{\alpha_{i}}}
+         {\displaystyle\sum_{k}\frac{q_{k}P(k,j)}{\alpha_{k}}},
+  \label{eq:ab}
+\end{equation}
+and symmetrically, reading $B$ first,
+\begin{equation}
+  \PJ_{BA}(i,j)
+  \;=\;\bigl(J_{A}J_{B}P\bigr)(i,j)
+  \;=\;q_{i}\,
+    \frac{\dfrac{r_{j}P(i,j)}{\beta_{j}}}
+         {\displaystyle\sum_{l}\frac{r_{l}P(i,l)}{\beta_{l}}} .
+  \label{eq:ba}
+\end{equation}
+\emph{The denominator is where the order lives.} The second step divides by the
+marginal \emph{in force when it arrives}, and the first step has already moved
+that marginal --- unless $c=0$, in which case the rows rescale proportionally
+and nothing is disturbed.
+
+\paragraph{The sequence-free benchmark.}
+Re-express each delivered credence as a Bayes factor against the \emph{prior}
+marginal, $\ell^{A}_{i}\propto q_{i}/\alpha_{i}$ and
+$\ell^{B}_{j}\propto r_{j}/\beta_{j}$, and apply both at once:
+\begin{equation}
+  \PB(i,j)
+  =\frac{P(i,j)\,\dfrac{q_{i}}{\alpha_{i}}\dfrac{r_{j}}{\beta_{j}}}
+        {\displaystyle\sum_{k,l}P(k,l)\,\frac{q_{k}}{\alpha_{k}}\frac{r_{l}}{\beta_{l}}} .
+  \label{eq:bench}
+\end{equation}
+A Bayes factor carries the same content whatever belief it meets, so
+\eqref{eq:bench} does not care which cue came first. This is the reference
+against which both routes are measured; it is not a rival updating rule, but
+the same two impressions in an order-insensitive parametrisation.
+
+\section{What ``pinning'' means}
+
+\begin{definition}[pinned marginal]\label{def:pin}
+A posterior's marginal on an attribute is \emph{pinned} by a cue if it equals
+that cue's delivered credence \emph{exactly} --- as an identity in
+$(\alpha,\beta,c,q_{0},r_{0})$, not merely to leading order in $c$.
+\end{definition}
+
+\begin{proposition}\label{prop:pin}
+A Jeffrey step pins the marginal of the attribute it reads:
+$(J_{A}Q)(A{=}i)=q_{i}$ for every $Q$. Hence the marginal of the cue read
+\emph{last} is pinned, while the marginal of the cue read \emph{first} is not:
+\[
+  \PJ_{AB}(B{=}j)=r_{j},
+  \qquad
+  \PJ_{BA}(A{=}i)=q_{i},
+  \qquad\text{identically in } c .
+\]
+\end{proposition}
+
+\begin{proof}
+Summing \eqref{eq:step} over $j$ gives
+$\sum_{j}q_{i}Q(i,j)/Q(A{=}i)=q_{i}Q(A{=}i)/Q(A{=}i)=q_{i}$. The composite
+claims follow because the final step of each route is the one that installs
+that attribute's marginal.
+\end{proof}
+
+\begin{remark}[a plainer gloss: last writer wins]
+Pinning is not an approximation or a coincidence --- it is the defining
+property of the rule. What is at stake is which cue's credence \emph{survives}.
+The second step rescales the other axis, and when $c\neq0$ the rows are not
+proportional across columns, so it drags the first cue's marginal off the value
+that cue delivered. The evaluator cannot honour both impressions at once:
+whichever cue speaks last is taken at face value, and the earlier one has been
+quietly overwritten through the covariance.
+\end{remark}
+
+\begin{remark}[what pinning is \emph{not}]
+Pinning is a statement about \emph{marginals} only. It says nothing about the
+association, which no attribute-local step can shift --- only rescale. The
+next section makes both halves visible at once.
+\end{remark}
+
+\section{A worked example}
+
+Take a prior with $\alpha=\tfrac13$, $\beta=\tfrac14$, $c=\tfrac1{10}$, and two
+soft cues delivering $q=(\tfrac25,\tfrac35)$ on $A$ and $r=(\tfrac57,\tfrac27)$
+on $B$. Substituting the three parameters into~\eqref{eq:prior} gives the prior;
+feeding that prior and the two delivered credences through~\eqref{eq:ab},
+\eqref{eq:ba} and~\eqref{eq:bench} gives the three posteriors:
+\begin{alignat*}{2}
+  P &= \begin{pmatrix}\PriorCells\end{pmatrix}
+    &&\qquad\text{\small [prior parametrisation \eqref{eq:prior}]}\\[6pt]
+  \PJ_{AB} &= \begin{pmatrix}\AbCells\end{pmatrix}
+    &&\qquad\text{\small [$A$ read first, then $B$: \eqref{eq:ab}]}\\[6pt]
+  \PJ_{BA} &= \begin{pmatrix}\BaCells\end{pmatrix}
+    &&\qquad\text{\small [$B$ read first, then $A$: \eqref{eq:ba}]}\\[6pt]
+  \PB &= \begin{pmatrix}\BmCells\end{pmatrix}
+    &&\qquad\text{\small [Bayes-factor benchmark \eqref{eq:bench}]}
+\end{alignat*}
+
+\paragraph{One cell in full.}
+To see~\eqref{eq:ab} at work, take the $(0,0)$ entry of the $A$-first route. The
+inner Jeffrey step on $A$ rescales each row by $q_{i}/\alpha_{i}$, giving the
+two entries of column $0$,
+\[
+  (J_{A}P)(0,0)=\frac{q_{0}P_{00}}{\alpha_{0}}
+    =\frac{\tfrac25\cdot\Pzz}{\tfrac13}=\JAPzz,
+  \qquad
+  (J_{A}P)(1,0)=\frac{q_{1}P_{10}}{\alpha_{1}}
+    =\frac{\tfrac35\cdot\Poz}{\tfrac23}=\JAPoz ,
+\]
+whose sum is the column mass $(J_{A}P)(B{=}0)=\JAPcol$ --- the denominator
+of~\eqref{eq:ab}, and the quantity that already differs from $\beta=\tfrac14$
+because the $A$-step has moved it. The outer step on $B$ then divides by that
+column mass and multiplies by $r_{0}$:
+\[
+  \PJ_{AB}(0,0)
+   = r_{0}\,\frac{(J_{A}P)(0,0)}{(J_{A}P)(B{=}0)}
+   = \frac57\cdot\frac{\JAPzz}{\JAPcol}
+   = \ABzz .
+\]
+Had $B$ been read first, that divisor would have been the \emph{prior} column
+mass $\beta=\tfrac14$ instead, and the arithmetic would have landed elsewhere.
+That single substitution is the whole of the order effect.
+
+\paragraph{The geometry.}
+All four beliefs live in the same simplex, so read each one off in the prior's
+own coordinates --- two marginals and an association:
+
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+belief & $P(A{=}0)$ & $P(B{=}0)$ & $\assoc$ & odds ratio \\
+\midrule
+\GeomRows
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Two things stand out.
+
+\begin{enumerate}
+\item \textbf{The pinned entries.} On route $AB$ the $B$-marginal is exactly
+$r_{0}=\tfrac57$; on route $BA$ the $A$-marginal is exactly $q_{0}=\tfrac25$.
+The \emph{other} marginal has been dragged off in each case, and the benchmark
+pins neither.
+\item \textbf{The odds ratio never moves.} It is $11$ in the prior and $11$ in
+all three posteriors. Every route composes to a separable reweighting
+$P(i,j)\mapsto g_{i}h_{j}P(i,j)/Z$, and such a reweighting multiplies
+$\assoc$ by $g_{0}g_{1}h_{0}h_{1}/Z^{2}$ --- rescaling it, never shifting it.
+The factor cancels in the ratio $P_{00}P_{11}/(P_{01}P_{10})$.
+\end{enumerate}
+
+\noindent So the order effect lives \emph{entirely in the marginals}. It cannot
+build or erode the believed association at all.
+
+\paragraph{The decision.}
+Score the posterior against a threshold. Take a desirability vector $v$ paying
+off only when both attributes are present, $s(Q)=\langle v,Q\rangle=Q_{11}$,
+and a threshold $\tau=\tfrac14$:
+\[
+  s(\PJ_{AB})=\sAB\approx\sABn,\qquad
+  s(\PJ_{BA})=\sBA\approx\sBAn,\qquad
+  s(\PB)=\sB\approx\sBn .
+\]
+\begin{center}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+evaluator & score & action at $\tau=\tfrac14$ \\
+\midrule
+benchmark        & \sBn  & decline \\
+reads $A$ first  & \sABn & decline \\
+reads $B$ first  & \sBAn & \textbf{engage} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Same prior, same two impressions, opposite hiring decision --- set
+purely by reading order.
+
+\paragraph{Who pays.}
+The net surplus at the benchmark belief is
+$u=s(\PB)-\tau=\uval\approx\uvaln$. The $B$-first reader flipped the action and
+so bears the cost $|u|\approx\lvert\uvaln\rvert$. The $A$-first reader's
+\emph{belief} also diverged from the benchmark --- but the action did not
+change, so that evaluator costs nothing. Deviating in belief is not what is
+expensive; flipping a decision is. This is why the loss concentrates in a thin
+band at the threshold, and why it comes out an order smaller than the share of
+evaluators affected.
+
+\section{The drag is first order in \texorpdfstring{$c$}{c}}
+
+The un-pinned marginal leaves its delivered credence at a rate given by
+Proposition~C1$'$ of the manuscript,
+\[
+  K=\frac{q_{0}(1-q_{0})(r_{0}-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}
+   =\Kval\approx\Kvaln ,
+\]
+and the numerical drift converges to exactly that slope:
+
+\begin{center}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$c$ & $\PJ_{AB}(A{=}0)$ & drift from $q_{0}=\tfrac25$ & drift$/c$ \\
+\midrule
+\DriftRows
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent At $c=0$ the drag vanishes entirely and both credences survive
+intact: the two routes then coincide with each other and with the benchmark,
+exactly.
+
+\begin{remark}[a caution about the illustration]
+The feasible range for $c$ at these marginals is
+$[\FHlo,\FHhi]$ --- the Fr\'echet--Hoeffding bounds, forced by nonnegativity of
+the four cells. The value $c=\tfrac1{10}$ used above is about \FHfrac\% of the
+upper bound, and the first row of the table shows the consequence: a $0.23$
+drift on a credence of $0.40$ is not a small correction. The figures are chosen
+to make the mechanism visible, not to sit inside the regime where the
+manuscript's expansions apply. Assumption~1 asks for $c$ small \emph{relative
+to that bound}, and the lower rows of the table are where the paper's
+first-order/second-order distinction becomes meaningful.
+\end{remark}
+
+\vfill
+\noindent\rule{\linewidth}{0.4pt}\\
+{\footnotesize Every number in this note was computed symbolically (exact
+rationals, no floating point) with the verification suite in
+\texttt{../sympy/}; the update formulas and Proposition~\ref{prop:pin} are
+formalised in Lean in \texttt{../lean/}.}
+
+\end{document}
