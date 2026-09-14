@@ -36,15 +36,9 @@ state. Its participants argue about realism, and none of them measures anything.
 The paper answers the answerable half of that debate by computing where a
 sequence effect shows up in a population's statistics and where it cannot. That
 is a claim about what an instrument can detect, and questions of that form have
-a settled home in economics, where three literatures have independently arrived
-at the same discipline.
+a settled home in economics, where this discipline is long established.
 
 \paragraph{Non-identification is a recognised result, not an excuse.}
-\citet{ShmayaYariv2016} show that absent restrictions on subjects' conjectures
-about the experimental design, \emph{every} mapping from signal sequences to
-chosen alternatives can be rationalised by Bayesian updating---their Theorem~2,
-the ``anything goes'' result---while a restriction on the design restores
-testable implications through a no-reversal condition (their Theorem~1).
 \citet{Heckman1998} showed that audit-pair estimates of discrimination rest on an
 assumption about unobserved productivity that ``nothing guarantees,'' and that
 under threshold hiring the audit ``can find discrimination when in fact none
@@ -61,51 +55,12 @@ $\Theta(c)$. The first-order signal in the protected statistics is zero in the
 population itself, so the failure is one of identification and not of estimation.
 An audit that reads believed association and finds conformity has learned
 nothing about whether its evaluators update sequentially, and would learn nothing
-from a hundred times as many evaluators. What differs from the three results
-above is the source of the obstruction. Heckman's turns on unobserved
-heterogeneity meeting a threshold, and is repaired by assumptions;
-Shmaya--Yariv's turns on unobserved conjectures about the design, and is repaired
-by restricting the protocol. The obstruction here is geometric---the statistic's
-differential annihilates the plane the two reading sequences span---and no
-auxiliary assumption repairs it. It is removed only by changing the statistic.
-
-\section*{Instrument choice as a genre}
-
-\citet{AugenblickRabin2021} test Bayesian updating through the martingale
-property, which for a belief stream gives $E[f(\theta_0,\dots,\theta_t)(\theta_t
--\theta_{t+1})]=0$ \emph{for any instrument} $f$. Different tests arise from
-different instruments; theirs amounts to the choice $f=2\theta_t-1$, from which
-the equality of expected movement and expected uncertainty reduction follows
-(their Proposition~1). They are explicit that they do not claim their instrument
-is universally more powerful, and they do not attempt to say which instruments
-have power against which deviations.
-
-That is precisely the question the present paper closes for its own deviation.
-Proposition~PRO characterises the smooth statistics that fail to register the
-sequence effect at first order: exactly those whose differential at independence
-points along the differential of the believed association. The condition is
-necessary as well as sufficient, so the classification is complete rather than
-selective. Two further contrasts are worth stating. First, the test here is
-cross-sectional: it needs one measurement per evaluator, with reading order
-varying across evaluators, where Augenblick--Rabin need a belief stream over time
-for each agent. Second, benchmark-freeness is \emph{not} a distinguishing
-feature---their driving assumption, held throughout, is that the
-normatively-correct beliefs are unobserved---but it is evidently a property this
-literature values, and Proposition~ORD has it.
-
-Augenblick--Rabin also supply the closest published analogue to the protected
-class. For streams of \emph{expectations} rather than binary beliefs they prove
-that any observed stream is arbitrarily likely under some data-generating
-process, so an expectations stream carries no testable content; their diagnosis
-is that without a scale for movements there is nothing to test. That is the same
-shape of finding as the one here---one summary of a belief retains testable
-content about the updating process and another does not---with one instructive
-difference. Their negative result is absolute, since no scale exists. The result
-here is graded: the association does carry the effect, at an order of magnitude
-below the levels, and the prior covariance $c$ supplies exactly the scale their
-expectations lack. It is that scale which makes the comparison
-$c^{2}\ll\varepsilon\ll c$ meaningful, and which lets every statistic be placed
-at an order rather than merely inside or outside the testable class.
+from a hundred times as many evaluators. What differs from the results above is
+the source of the obstruction. Heckman's turns on unobserved heterogeneity
+meeting a threshold, and is repaired by assumptions. The obstruction here is
+geometric---the statistic's differential annihilates the plane the two reading
+sequences span---and no auxiliary assumption repairs it. It is removed only by
+changing the statistic.
 
 \section*{The identifying design, and its precedent}
 
@@ -125,38 +80,9 @@ in both cases it is a variable that pooled data discards. The practical
 implication is correspondingly cheap: reading order must be recorded, or
 randomised, for the question to be answerable at all.
 
-\section*{A rival mechanism, and why the signature survives it}
-
-Order effects in belief updating need not come from the input type. In
-\citet{Wilson2014} an agent with finitely many memory states updates optimally,
-the extreme states become nearly absorbing, and order effects follow: a block of
-identical signals moves final beliefs more when it comes first in short
-sequences, and more when it comes last in long ones (her Theorem~4). Since a
-Bayesian with unbounded memory treats exchangeable evidence symmetrically, this
-is a genuine competing explanation for the observable this paper points at, and
-it is rational rather than a bias.
-
-It does not, however, mimic the signature. Wilson's agent carries a single belief
-about one state of the world, so her model makes no prediction about the
-association between two attributes; the quantity that does the identifying work
-here does not exist in it. The prediction under test is a \emph{pair} of orders:
-$\Theta(c)$ between reading orders in levels and decisions, together with
-$\bigO(c^{2})$ in the believed association. A one-dimensional account of order
-effects cannot produce the second half, and an account extended to two attributes
-would have to protect the association for its own reasons. The two-part signature
-is therefore not decoration; it is what separates this mechanism from its
-rivals, and it is the reason the elicitation must include the association even
-though the association is the statistic that shows nothing.
-
 \bigskip
 \bibliographystyle{plainnat}
 \begin{thebibliography}{9}
-\bibitem[Augenblick \& Rabin(2021)]{AugenblickRabin2021}Augenblick, N. \& Rabin,
-  M. (2021). Belief movement, uncertainty reduction, and rational updating.
-  \emph{Quarterly Journal of Economics} 136(2), 933--985. Read: abstract,
-  introduction, definitions, and the instrument discussion of \S4; Proposition~1,
-  Corollary~1 and Table~1 formalized and reproduced in
-  \texttt{literature/augenblick\_rabin2021/}.
 \bibitem[Bohren, Imas \& Rosenberg(2019)]{Bohren2019}Bohren, J.~A., Imas, A. \&
   Rosenberg, M. (2019). The dynamics of discrimination: theory and evidence.
   \emph{American Economic Review} 109(10), 3395--3436. Read: abstract and
@@ -166,15 +92,6 @@ though the association is the statistic that shows nothing.
   discrimination. \emph{Journal of Economic Perspectives} 12(2), 101--116. Read:
   introduction, the definition and measurement section, and the audit-pair
   critique; quotation from p.~102.
-\bibitem[Shmaya \& Yariv(2016)]{ShmayaYariv2016}Shmaya, E. \& Yariv, L. (2016).
-  Experiments on decisions under uncertainty: a theoretical framework.
-  \emph{American Economic Review} 106(7), 1775--1801. Read: abstract, overview,
-  model, and Theorems~1--2; both theorems' cores formalized in
-  \texttt{literature/shmaya\_yariv2016/}.
-\bibitem[Wilson(2014)]{Wilson2014}Wilson, A. (2014). Bounded memory and biases in
-  information processing. \emph{Econometrica} 82(6), 2257--2294. Read: abstract,
-  introduction, and the order-effect results of \S4 (Theorem~4); the
-  working-paper version in the project folder is dated 2003.
 \end{thebibliography}
 
 \end{document}

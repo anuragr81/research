@@ -7,3 +7,4 @@ import JeffreyOrder.Decision
 import JeffreyOrder.PropDIV
 import JeffreyOrder.Aggregate
 import JeffreyOrder.PropORD
+import JeffreyOrder.Anchoring
