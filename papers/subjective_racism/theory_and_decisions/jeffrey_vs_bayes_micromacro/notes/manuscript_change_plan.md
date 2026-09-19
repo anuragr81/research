@@ -379,6 +379,78 @@ separately machine-checked is the equivalence-with-protection sentence, which
 is Proposition PRO's already-verified annihilator argument with weights
 $(1,-1)$.
 
+
+**Second INSERT (adoption weight), directly after the ORD proof above.** The
+weight is written $\omega$ because $\delta_\sigma$ is already the score
+coefficient (manuscript line 357); if you prefer $\delta$, rename here and in
+Change 11.
+
+```latex
+The two sequences so far adopt each delivered credence in full. Suppose instead
+that the second cue is adopted only in part: after the first Jeffrey step, the
+response to the second cue is a Jeffrey step on its partition to the target
+$(1-\omega)\,m+\omega\,r_1$, where $m$ is the marginal the first step left and
+$0\le\omega\le1$ is the adoption weight. This is the averaging form of the
+belief-adjustment model, $S_k=(1-w_k)S_{k-1}+w_k s(x_k)$
+\citep[Eq.~4]{HogarthEinhorn1992}, applied to a marginal and embedded in the
+joint law by a Jeffrey step. Write $P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ for
+the two sequences under this rule; $\omega=1$ recovers $\PJ_{AB}$ and
+$\PJ_{BA}$, and $\omega=0$ ignores the second cue. Let $P^{A}$ and $P^{B}$
+denote the belief after the $A$-cue alone and after the $B$-cue alone.
+
+\renewcommand{\theproposition}{ADJ}%
+\begin{proposition}[adoption weight]\label{prop:ADJ}
+For every $c$ and every $\omega$, in sequence $AB$,
+\begin{align*}
+P^{\omega}_{AB}(B{=}1)-r_1 &=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\\
+P^{\omega}_{AB}(A{=}1)-q_1 &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr],\\
+P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)
+  &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr]+(1-\omega)\bigl[q_1-P^{B}(A{=}1)\bigr].
+\end{align*}
+Hence the last-read marginal equals its delivered credence identically in $c$
+exactly when $\omega=1$, the first-read marginal does so exactly when
+$\omega=0$, and for $0<\omega<1$ neither does. The first-order coefficient in
+$c$ of the first-read marginal is $\omega$ times the benchmark's coefficient
+for the same marginal. At $c=0$ the third line equals $(1-\omega)(\alpha-q_0)$:
+a partially adopting evaluator shows a sequence effect at independence, where
+the fully adopting evaluator (Proposition~\ref{prop:IMM}) and the benchmark
+show none.
+\end{proposition}
+
+\begin{proof}
+A Jeffrey step on $B$'s partition to target $t=(t_0,t_1)$ multiplies column
+$j$ by $t_j/P(B{=}j)$, so it sets $P(B{=}1)$ to $t_1$ and sends $P(A{=}1)$ to
+$\sum_j P(A{=}1,B{=}j)\,t_j/P(B{=}j)$. With $t_1=(1-\omega)m+\omega r_1$ and
+$t_0=(1-\omega)(1-m)+\omega r_0$, this sum is
+$(1-\omega)P(A{=}1)+\omega\sum_j P(A{=}1,B{=}j)\,r_j/P(B{=}j)$: the step moves
+the other attribute's marginal by the same convex combination that defines its
+target. The first line is $t_1-r_1$. In the second, the current $P(A{=}1)$ is
+$q_1$ because the first step set it there, and the full-step sum is
+$\PJ_{AB}(A{=}1)$. For the third, sequence $BA$ gives
+$P^{\omega}_{BA}(A{=}1)=(1-\omega)P^{B}(A{=}1)+\omega q_1$ by the same
+argument with the roles exchanged; subtract. The coefficient claim follows
+from the second line and Proposition~\ref{prop:DRF}, under which $\PJ_{AB}$
+and $\PB$ agree on the first-read marginal at first order. At $c=0$ a step on
+one partition leaves the other marginal unchanged, so
+$\PJ_{AB}(A{=}1)=q_1$ and $P^{B}(A{=}1)=1-\alpha$.
+\end{proof}
+```
+
+**Verification status (ADJ).** Every line is machine-checked in
+`lean/JeffreyOrder/Anchoring.lean`: line 1 is `dampedB_deviation`, line 2 is
+`routeDamped_mA1_deviation`, line 3 is `orderEffect_damped_mA1`, the $c=0$
+value is `orderEffect_damped_at_indep`, the endpoints are `dampedB_at_one`,
+`dampedB_at_zero`, `routeDamped_at_zero_pins_A`; all nine Anchoring theorems
+are in `check_axioms.lean` with standard axioms only. The coefficient claim
+and the "neither at interior $\omega$" claim are in
+`sympy/check_zero_slope_identification.py` (20/20; suite 13/13), cases (3)
+and (6). The Hogarth--Einhorn attributions were checked against their text
+(Drive: `hogarth_einhorn_1992.pdf`): Eq.~(4) is theirs; "memory is limited to
+the location of one's current anchor and not how this was reached" is their
+General Discussion; primacy in their model comes from weights decaying over a
+long series, so the $\omega=0$ endpoint is ours, not theirs; "attention
+decrement" is Anderson (1981), reported by them as a rival.
+
 ---
 
 ## Change 7 -- bibliography.bib
@@ -542,8 +614,10 @@ cannot identify its source.
 ## Change 11 -- Scope section: rival mechanisms, and what identifies the mechanism
 
 **Purpose.** Order effects have a competing rational explanation, and the
-conflict is stark: partial-adjustment and memory-constrained accounts protect
-the FIRST impression, amnestic updating protects the LAST. The section also
+conflict is stark: at its $\omega=0$ endpoint the adjustment family protects
+the FIRST impression, amnestic updating protects the LAST. The literature holds
+only the second view (Diaconis--Zabell) and an objection to it (Hawthorne); the
+first is our endpoint, not a cited position. The section also
 discharges Hawthorne's plausibility objection, which the paper **inherits rather
 than escapes**: full adoption of the latest impression does disregard what an
 earlier cue implied about that attribute. The reply is not that the objection
@@ -568,41 +642,40 @@ adjustment, later cues move belief only part of the way to their targets
 \citep{HogarthEinhorn1992}, and in the limiting case a first impression is one
 that later evidence cannot move. Such accounts and the amnestic model point in
 opposite directions: the protected impression is the first one there, and the
-last one here. An observable separates them. Embed the adjustment equation
-coherently in the joint law, so that the response to the second cue is a
-Jeffrey step to the damped target $(1-\delta)m+\delta r$. At $\delta=1$ the
-rule is the amnestic one and the last-read marginal equals its delivered
-credence identically in $c$. At $\delta=0$ the second cue is ignored and the
-first-read marginal has that property instead. For interior $\delta$ neither
-does, because the deviation of the last-read marginal from its target is
-exactly $(1-\delta)$ times its undamped value. The location of the
-$c$-invariant marginal therefore identifies the mechanism, and no interior
-adjustment weight imitates either endpoint. Three cautions bound the claim. The
+last one here. An observable separates them. Under partial adoption of the second cue with
+weight $\omega$ (Proposition~\ref{prop:ADJ}), the marginal that ignores the
+prior association is the last-read one at $\omega=1$, the first-read one at
+$\omega=0$, and neither in between. A reading on which neither marginal ignores
+the association is consistent with an interior weight and with the benchmark
+alike; the two are separated by the sequence comparison, which the benchmark
+passes at every $c$ and an interior weight fails already at $c=0$, by
+$(1-\omega)(\alpha-q_0)$. Since every rule here is a separable reweighting, all
+of them carry the prior's odds ratio (Lemma~\ref{lem:SEP}); the two marginals
+are the only place a mechanism can show. Three cautions bound the claim. The
 classification covers this one-parameter adjustment family, not every
-conceivable mechanism. On single-attribute data, where one impression is
-updated repeatedly, overwriting predicts recency while the classic finding is
-primacy \citep{Asch1946}; the two-attribute setting with one cue per attribute
-is therefore essential, and \citet{Asch1946} is evidence of order effects, not
-of this mechanism. And full adoption is a substantive commitment rather than a
+conceivable mechanism. \citet{Asch1946} is evidence that order moves marginals, one cue per trait
+across eighteen traits, and not evidence for either endpoint: his own account is
+that early terms set a direction for the reading of later ones, so that what a
+later cue delivers depends on its position, a mechanism outside the family
+here, in which each cue delivers the same credence in either position. And full adoption is a substantive commitment rather than a
 consequence of the level reading. \citet{Hawthorne2004} objects that it ``seems
 implausible that the most recent experience or non-propositional state should
 completely dictate belief strengths for basis sentences, with no regard for the
 import of previous experiences or states''. The objection applies here: the
 credential's implication for trustworthiness is erased once the letter fixes
-that attribute. What does not apply is the illustration he and
-\citet{Garber1980} use to press it, in which one basis is cued repeatedly so
-that successive impressions compound or overwrite each other; attribute
+that attribute. What does not apply is the illustration he uses to press it, in which one
+basis is cued repeatedly so that successive impressions overwrite each other; attribute
 locality (Assumption~\ref{as:local}) gives each cue a basis of its own. The
 adjustment weight is the precise form of his objection, and locating it is the
 reply offered here.
 ```
 
-**Verification status.** The endpoint and factorisation claims are
-machine-checked in `lean/JeffreyOrder/Anchoring.lean` (`dampedB_deviation`,
-`dampedB_at_one`, `dampedB_at_zero`, `routeDamped_at_zero_pins_A`; no `sorry`,
-standard axioms only) and reproduced in
-`sympy/check_zero_slope_identification.py` (13/13), which also covers the rows
-not in Lean (interior `delta`, the benchmark, the both-margin fit). Citations
+**Verification status.** Every claim in the paragraph is Proposition ADJ
+(Change 6), whose verification note lists the Lean theorems and sympy cases;
+the odds-ratio sentence is the manuscript's own remark after Lemma SEP (lines
+625--627), extended to the damped routes because they are Jeffrey steps.
+Garber removed from the illustration clause: his repeated-glances example
+targets Field's portable factors and never discusses order. Citations
 already in the bibliography; no Change 7 impact. A bounded-memory citation
 (Wilson 2014, Econometrica) is available if a referee asks for one, but the
 family is stated through Hogarth-Einhorn's own equation, which is already cited.

@@ -96,3 +96,14 @@ open JeffreyOrder
 -- Structural version: the Jeffrey updates are DEFINED and the association
 -- order-gap is DERIVED (not supplied) to equal c^2*gapQuot/(D1 D2 D3 D4).
 #print axioms PaperB.assoc_order_gap_structural
+
+-- Anchoring family (adoption weight δ): endpoints, factorisation, order effect
+#print axioms dampedB_deviation
+#print axioms dampedB_deviation_c_scaled
+#print axioms dampedB_at_one
+#print axioms dampedB_at_zero
+#print axioms routeDamped_at_zero_pins_A
+#print axioms dampedB_mA1_mix
+#print axioms routeDamped_mA1_deviation
+#print axioms orderEffect_damped_mA1
+#print axioms orderEffect_damped_at_indep
