@@ -66,6 +66,10 @@ sequence show it. Two implications follow for audits. A population whose
 believed association matches the benchmark may still hold sequence-dependent
 beliefs. And whether the effect is detectable depends on which statistic is
 read, not on how many evaluators are averaged.
+The results take each impression to be adopted in full; the weight actually
+placed on the later impression is itself identified, by which marginal ignores
+the prior association and by whether a sequence effect survives when the
+attributes are independent.
 ```
 
 ---
@@ -221,22 +225,37 @@ are held fixed in Bayes-factor form.}. The paper is motivated by the
 observation that order effects are a documented regularity in impression
 formation \citep{Asch1946,HogarthEinhorn1992}, while Bayes-factor updating
 predicts none.
+Updating on levels rests on a second premise, which the paper states rather
+than assumes: the latest impression sets its attribute's marginal outright,
+with no weight left on what an earlier cue implied about that attribute.
+\citet{DiaconisZabell1982} hold that premise. \citet{Hawthorne2004} objects
+that it is implausible, and his objection names a direction, a weight below
+one on the later cue. That weight has two endpoints, the later impression
+overwriting the earlier one and the earlier impression never being moved, and
+the belief-adjustment model of \citet{HogarthEinhorn1992} lies between them
+with a memory that, in their words, ``is limited to the location of one's
+current anchor and not how this was reached''. The results of
+Sections~\ref{sec:individual} and~\ref{sec:aggregation} hold at the overwrite
+endpoint. Proposition~\ref{prop:ADJ} shows that the weight is not a matter of
+taste: it shows in which marginal ignores the prior association, and in
+whether a sequence effect survives when the attributes are independent.
 ```
 
 ---
 
-**Known gap, deliberate.** This paragraph argues that impressions arrive as
-*levels* rather than as Bayes factors. Sequential updating on levels rests on a
-second premise it does not argue: that the level is adopted *fully*, so the
-latest impression sets its attribute's marginal outright. In Hawthorne's terms
-that is the Amnestic Update-Factor Thesis, and it is what licenses using the same
-`q` and `r` on both reading orders -- without it the two routes would differ in
-their inputs as well as their order, and the comparison would not isolate
-sequence. His plausibility objection targets this second premise, not the input
-type, so this paragraph does not answer him and should not appear to. Change 11
-carries the answer: full adoption is `delta = 1`, an endpoint of the adjustment
-family, and `delta` is identified by the location of the `c`-invariant marginal.
-No edit to this paragraph is proposed; the division of labour is intentional.
+**Second premise, now stated here.** The paragraph's first part argues that
+impressions arrive as *levels* rather than as Bayes factors. Sequential
+updating on levels rests on a second premise, full adoption (Hawthorne's
+Amnestic Update-Factor Thesis, p.~96), which licenses using the same `q` and
+`r` on both reading orders. The appended paragraph states it, attributes it
+(Diaconis--Zabell hold it; Hawthorne objects, pp.~98--99), names the weight
+$\omega$ with its two endpoints, and points to Proposition ADJ (Change 6) for
+the identification. The $\omega=0$ endpoint is the paper's own construction:
+no source states "first impressions stick" as full protection of the first
+cue (Hogarth--Einhorn's primacy comes from decaying weights over long series).
+The Hogarth--Einhorn quotation is from their General Discussion, checked
+against the text (Drive: `hogarth_einhorn_1992.pdf`). Change 11 carries the
+rival-mechanism discussion.
 
 ---
 
@@ -418,21 +437,34 @@ show none.
 \end{proposition}
 
 \begin{proof}
-A Jeffrey step on $B$'s partition to target $t=(t_0,t_1)$ multiplies column
-$j$ by $t_j/P(B{=}j)$, so it sets $P(B{=}1)$ to $t_1$ and sends $P(A{=}1)$ to
-$\sum_j P(A{=}1,B{=}j)\,t_j/P(B{=}j)$. With $t_1=(1-\omega)m+\omega r_1$ and
-$t_0=(1-\omega)(1-m)+\omega r_0$, this sum is
-$(1-\omega)P(A{=}1)+\omega\sum_j P(A{=}1,B{=}j)\,r_j/P(B{=}j)$: the step moves
-the other attribute's marginal by the same convex combination that defines its
-target. The first line is $t_1-r_1$. In the second, the current $P(A{=}1)$ is
-$q_1$ because the first step set it there, and the full-step sum is
-$\PJ_{AB}(A{=}1)$. For the third, sequence $BA$ gives
-$P^{\omega}_{BA}(A{=}1)=(1-\omega)P^{B}(A{=}1)+\omega q_1$ by the same
-argument with the roles exchanged; subtract. The coefficient claim follows
-from the second line and Proposition~\ref{prop:DRF}, under which $\PJ_{AB}$
-and $\PB$ agree on the first-read marginal at first order. At $c=0$ a step on
-one partition leaves the other marginal unchanged, so
-$\PJ_{AB}(A{=}1)=q_1$ and $P^{B}(A{=}1)=1-\alpha$.
+With $Q$ the belief after the first step and $t=(t_0,t_1)$,
+$t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
+is multiplied by $t_j/Q(B{=}j)$:
+\[
+  P(B{=}1)=t_1,\qquad
+  P(A{=}1)=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}
+  =(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
+\]
+In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
+$\PJ_{AB}(A{=}1)$:
+\[
+  P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad
+  P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr].
+\]
+In sequence $BA$, by symmetry,
+$P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting
+gives the third line. Neither bracket vanishes identically:
+\[
+  P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad
+  \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2),
+\]
+the second by Proposition~\ref{prop:DRF}, whose proof also gives
+$\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At
+$c=0$ a step leaves the other marginal unchanged:
+\[
+  \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
+  P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
+\]
 \end{proof}
 ```
 
@@ -444,7 +476,12 @@ value is `orderEffect_damped_at_indep`, the endpoints are `dampedB_at_one`,
 are in `check_axioms.lean` with standard axioms only. The coefficient claim
 and the "neither at interior $\omega$" claim are in
 `sympy/check_zero_slope_identification.py` (20/20; suite 13/13), cases (3)
-and (6). The Hogarth--Einhorn attributions were checked against their text
+and (6); the "only if" half of "exactly when" uses `dampedB_at_zero` with
+`prior_mB1` (value $r_0-\beta$) and `propDRF_route_AB` (the DRF coefficient).
+Case (6d) there, that no single $\omega$ reproduces both benchmark slopes,
+is verified but not claimed in the manuscript. The proof is 30\% prose by
+character count (characters inside `$..$` and `\[..\]` counted as
+expressions). The Hogarth--Einhorn attributions were checked against their text
 (Drive: `hogarth_einhorn_1992.pdf`): Eq.~(4) is theirs; "memory is limited to
 the location of one's current anchor and not how this was reached" is their
 General Discussion; primacy in their model comes from weights decaying over a
