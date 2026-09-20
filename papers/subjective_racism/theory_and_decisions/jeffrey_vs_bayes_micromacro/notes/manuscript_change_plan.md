@@ -72,9 +72,8 @@ beliefs. And whether the effect is detectable depends on which statistic is
 read, not on how many evaluators are averaged.
 The results take each impression to be adopted in full rather than in part;
 the weight placed on the later impression is recovered from the two marginals
-read in both sequences rather than assumed: which marginal ignores the prior
-association fixes the endpoints, and the size of the sequence effect at
-independence fixes the weight between them.
+read in both sequences rather than assumed, from which marginal ignores the
+prior association and from the size of the sequence effect at independence.
 ```
 
 ---
@@ -245,13 +244,12 @@ current anchor and not how this was reached''. The results of
 Sections~\ref{sec:individual} and~\ref{sec:aggregation} hold at the overwrite
 endpoint. Proposition~\ref{prop:ADJ} shows that the weight is recovered rather than
 assumed. What is observed is each marginal in both reading sequences, across
-priors of differing association; what is recovered is the sequence effect on
-any statistic, without the benchmark or the sequence mix
-(Proposition~\ref{prop:ORD}), and the weight itself: the marginal that ignores
-the prior association is the last-read one at $\omega=1$ and the first-read
-one at $\omega=0$, and the sequence effect on the $A$-marginal at independence
-equals $(1-\omega)(\alpha-q_0)$, which fixes $\omega$ given the prior and the
-delivered credence.
+values of the prior covariance $c$; what is recovered is the sequence effect
+on any statistic, without the benchmark or the sequence mix
+(Proposition~\ref{prop:ORD}), and the weight: the marginal that ignores the
+prior association is the last-read one at $\omega=1$ and the first-read one
+at $\omega=0$, and the sequence effect on the $A$-marginal at $c=0$ equals
+$(1-\omega)(\alpha-q_0)$.
 ```
 
 ---
@@ -663,8 +661,9 @@ moves from 64 to 9 per cent and \emph{good-looking} from 74 to 35, while
 \emph{serious} moves from 97 to 100, \emph{persistent} from 82 to 87 and
 \emph{reliable} from 84 to 91. Some statistics swing enormously and others
 scarcely move, with no account offered of the difference. Yet eighteen marginals
-separate the mechanisms no better than one. Separating them reads a marginal
-against the prior association (Proposition~\ref{prop:ADJ}), and the check-list
+separate amnestic updating from partial adjustment no better than one.
+Separating them reads a marginal across values of the prior covariance
+(Proposition~\ref{prop:ADJ}), and the check-list
 asks whether a trait fits and never whether two traits go together, so the
 believed association cannot be formed from such data at all. What the paper
 adds is therefore not that more ratings are needed but that a second object
