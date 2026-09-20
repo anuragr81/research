@@ -560,16 +560,17 @@ currently ends:
 **INSERT after that sentence:**
 
 ```latex
-The audit perspective also has a precedent in this lineage. The economics of
-discrimination already accepts that an audit's informativeness is an
-identification question settled by the instrument's structure rather than its
-sample size: \citet{Heckman1998} showed that audit-pair estimates of
+The audit perspective has a precedent in the economics of discrimination,
+which already accepts that an audit's informativeness is an identification
+question settled by the instrument's structure rather than its sample size:
+\citet{Heckman1998} showed that audit-pair estimates of
 discrimination rest on assumptions about unobserved productivity that no sample
 size repairs. The current paper brings that discipline to the belief-measurement
 side of the audit, where the failure is geometric rather than distributional and
 no auxiliary assumption rescues the association statistic, and shows that the
-decision side---the target of Heckman's caution---is where the sequence effect
-remains detectable.
+sequence effect remains detectable in the marginal probabilities and in the
+share of decisions changed, the decision side being the target of Heckman's
+caution.
 ```
 
 **Optional companion sentence** (fits either here or beside the protected-class
@@ -625,18 +626,22 @@ While Bayes-factor updating predicts no sequence effect anywhere
 entirely in marginals. \citet{HogarthEinhorn1992} track a single evaluative
 anchor. \citet{Asch1946} is more generous and more instructive: his Experiment~VI
 reports, for each of eighteen traits, the proportion of subjects judging it to fit
-the person described, separately for the two reading orders. The unevenness this
-paper explains is already visible there. Between the orders, \emph{restrained}
+the person described, separately for the two reading orders. That the sequence effect
+differs in size across statistics is already visible there, although the
+differences Asch reports are all among marginals, which the paper treats
+alike. Between the orders, \emph{restrained}
 moves from 64 to 9 per cent and \emph{good-looking} from 74 to 35, while
 \emph{serious} moves from 97 to 100, \emph{persistent} from 82 to 87 and
 \emph{reliable} from 84 to 91. Some statistics swing enormously and others
 scarcely move, with no account offered of the difference. Yet eighteen marginals
-identify the mechanism no better than one, because the check-list asks whether a
-trait fits and never whether two traits go together: the believed association
-cannot be formed from such data at all. What the paper adds is therefore not that
-more ratings are needed, but that the wrong object is being elicited. Separating a
-sequence-dependent evaluator from a sequence-free one requires the joint rather
-than its margins.
+identify the mechanism no better than one. Identification reads a marginal
+against the prior association (Proposition~\ref{prop:ADJ}), and the check-list
+asks whether a trait fits and never whether two traits go together, so the
+believed association cannot be formed from such data at all. What the paper
+adds is therefore not that more ratings are needed but that a second object
+must be elicited. Seeing the sequence effect requires only a marginal read in
+both orders, which Asch has; locating the mechanism behind it requires the
+association as well, which he does not.
 ```
 
 **Note.** This supersedes the de-duplication entry recording that the
