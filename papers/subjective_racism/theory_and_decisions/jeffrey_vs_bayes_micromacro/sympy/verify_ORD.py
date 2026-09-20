@@ -157,6 +157,21 @@ def main():
     ck.ne("(8) kappa, kappa' vary independently: det d(kappa,kappa')/d(alpha,beta) != 0",
           sp.cancel(Jac.det()))
 
+    # ---- (9) two populations differing only in the sequence mix ------------
+    # Pbar_lam - Pbar_lam' = (lam - lam')(P^J_AB - P^J_BA), exactly in c: a
+    # group gap produced by sequence alone is the between-order gap scaled by
+    # the difference in shares, so it inherits rows (3)-(5).
+    lam2 = sp.Symbol('lambda_prime')
+    Pbar = lambda l: l * PJ_AB + (1 - l) * PJ_BA
+    ck.mat_eq("(9) Pbar_lam - Pbar_lam' = (lam - lam')(P^J_AB - P^J_BA), all orders in c",
+              (Pbar(lam) - Pbar(lam2) - (lam - lam2) * (PJ_AB - PJ_BA)).applyfunc(sp.cancel),
+              sp.zeros(2, 2))
+    ck.eq("(9) first-order group gap on the A-marginal = (lam - lam') kappa'",
+          sp.cancel(taylor_coeff(frob(vA, Pbar(lam) - Pbar(lam2)), 1) - (lam - lam2) * kappa_p), 0)
+    kgap, _ = order_in_c_at_generic(assoc(Pbar(sp.Rational(2, 5))) - assoc(Pbar(sp.Rational(3, 4))))
+    ck("(9) group gap on the association is second order (lam = 2/5 vs 3/4)",
+       kgap >= 2, f"leading order in c = {kgap}")
+
     return ck.done()
 
 

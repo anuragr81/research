@@ -32,8 +32,10 @@ edited further; anything destined for the manuscript belongs in a Change here. N
    statement.
 
 Changes 14--15 retitle Sections 4 and 5 and re-open them on the statistic
-rather than the level of aggregation (cap of thirteen lifted 2026-09-20). The
-Table 1 redesign remains parked.
+rather than the level of aggregation (cap of thirteen lifted 2026-09-20).
+Change 16 adds one motivating paragraph to the introduction: a sequence that
+is assigned systematically by group produces a group gap from sequence alone.
+The Table 1 redesign remains parked.
 
 ---
 
@@ -421,7 +423,7 @@ the answer is settled before any averaging over the aggregate takes place
 **Verification status.** The display, both marginal coefficients, the exact
 association annihilation, the lambda-freeness and the generic non-vanishing are
 machine-checked in `lean/JeffreyOrder/PropORD.lean` (builds, no sorry) and
-`sympy/verify_ORD.py` (22/22; registered in `run_all.py`, full suite 13/13).
+`sympy/verify_ORD.py` (25/25; registered in `run_all.py`, full suite 13/13).
 The proof is 29\% prose by character count.
 The manuscript's conventions match the Lean definitions exactly:
 $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$ and $\kappa'=(\beta-r_0)q_0(1-q_0)/Z$ (lines
@@ -1077,3 +1079,72 @@ the protection definition are unchanged; Change 6 inserts ORD after that
 definition.
 
 ---
+
+## Change 16 -- Introduction: why the sequence matters beyond one judgment (insert after line 113)
+
+**Purpose.** Motivation only; no new assumption, no new result, no new source.
+The panel example shows that sequence moves one judgment. This paragraph says
+why that matters in general: the sequence need not be assigned by chance, and
+if the share $\lambda$ of evaluators reading the credential first differs by
+group, the groups receive different mean beliefs with priors, preferences and
+evidence held the same. The paragraph is direction-neutral on first versus
+last (at $\omega=1$ the later impression prevails, at $\omega=0$ the earlier),
+hands that question to Proposition ADJ, and ends on the paper's existing
+classification.
+
+**Location.** New paragraph after the panel paragraph ending "...rather than
+the means of aggregation." (line 113; that sentence is itself edited by
+Change 3), before "Our conclusions for arrival sequence do not apply...".
+
+**INSERT:**
+
+```latex
+Which impression prevails matters beyond the single judgment. The
+impression-formation literature disagrees on the direction: \citet{Asch1946}
+reports that early terms dominate, and \citet{HogarthEinhorn1992} find primacy,
+recency or no order effect, depending on the characteristics of the task.
+Under either direction the sequence in which cues arrive is not neutral, and it
+need not be assigned by chance. A candidate who comes through a referral is met
+first through the letter and then through the credential, while a candidate
+who applies unsolicited is met first through the credential. If referral is
+more common in one group than in another, the two groups differ in the share
+$\lambda$ of evaluators who read the credential first. Two groups presenting
+the same evidence to evaluators with the same priors and the same preferences
+then receive different mean beliefs, and the difference is the sequence effect
+multiplied by the difference in their shares. A gap of that kind is not
+statistical discrimination in the sense of \citet{Phelps1972} and
+\citet{Arrow1973}, which rests on a difference in beliefs about the groups, and
+it has none of the sources that \citet{Bohren2019} distinguish, since
+preferences do not differ either; it arises from a difference in sequence
+alone. Which group it favours depends on whether the later or the earlier
+impression prevails, which Proposition~\ref{prop:ADJ} reads from the
+marginals. The gap also inherits the classification of this paper: it appears
+in the marginal probabilities and in the share of decisions changed, and an
+audit of the believed association does not register it.
+```
+
+**Verification status.** "The difference is the sequence effect multiplied by
+the difference in their shares" is the exact identity
+$\Pbar_\lambda-\Pbar_{\lambda'}=(\lambda-\lambda')(\PJ_{AB}-\PJ_{BA})$, checked
+entrywise at all orders in $c$ in `sympy/verify_ORD.py` step (9) (25/25),
+together with the first-order group gap on the $A$-marginal,
+$(\lambda-\lambda')\kappa'$, and the second-order group gap on the association.
+No proposition is stated, so no informal proof is owed; if the identity is ever
+displayed it belongs in a remark after Proposition ORD. The last two sentences
+are Propositions ADJ and ORD. The Hogarth--Einhorn clause is their abstract
+("under what conditions do primacy, recency, or no order effects occur ...
+interaction of information-processing strategies and task characteristics"),
+checked against the text (Drive: `hogarth_einhorn_1992.pdf`); the Asch clause
+is his "direction" account, as recorded under Change 10. The referral example
+is a conditional built from the paper's own two cues, not an empirical claim.
+`Bohren2019` enters the bibliography through Change 13, so this change must not
+be applied without it. Empirical anchors (Bertrand--Mullainathan 2004;
+Barto\v{s} et al. 2016) were considered and deliberately left out: neither has
+been read, and the paragraph does not need them.
+
+**Relation to the existing intro.** Manuscript line 102 already says that an
+evaluator who reads the quality cue last shows no gap between groups while
+remaining partial. That sentence and this paragraph are the two halves of one
+point -- sequence can silence a group gap and sequence can create one -- and
+could be brought together when lines 93--107 are next revised.
+
