@@ -750,8 +750,9 @@ has been of interest to empirical psychology...".
 ```latex
 The closest literature concerns the commutativity of probability kinematics
 itself. \citet{DiaconisZabell1982} give the condition under which two successive
-Jeffrey revisions lead to the same belief, and \citet{Hawthorne2004} names the
-updating scheme the present paper adopts, crediting that criterion to them. His
+Jeffrey revisions lead to the same belief, and \citet{Hawthorne2004} names its
+full-adoption premise, which the present paper adopts, the Amnestic
+Update-Factor Thesis, crediting that criterion to them. His
 survey also fixes the vocabulary. Extensions of Jeffrey updating to sequences
 differ in what an experience is taken to deliver: new probabilities for its own
 basis directly, a multiplicative factor applied to the belief it meets, or a
@@ -761,7 +762,8 @@ recent one fixes its attribute outright; the benchmark $\PB$ of
 Section~\ref{sec:jeffrey} has the form of the extended update formula built on
 the second. The comparison drawn throughout is therefore between the two ends of
 his taxonomy, and the identification questions this paper raises are the ones
-that the first end brings with it. (What Section~\ref{sec:jeffrey} calls a Bayes
+that the first end brings with it and the second end does not, since revisions
+at the second end commute. (What Section~\ref{sec:jeffrey} calls a Bayes
 factor is his normed-likelihood factor; on a two-element basis the two induce the
 same revision.) Two responses to the resulting order-dependence have been made. One treats it as a
 defect of the framework: \citet{Doring1999} argues that the order effect can be
@@ -775,8 +777,9 @@ implausibly under repetition. The present paper takes neither route. It accepts
 the order-dependence that the delivered-credence reading entails, and asks a
 question that has received little attention, namely how far the two sequences
 disagree in each statistic of the resulting belief. That the disagreement is uneven
-across statistics---first order in the marginals and the decision, second order
-in the believed association---is what makes the debate answerable by
+across statistics---first order in the marginals and the share of decisions
+changed, second order in the believed association and the surplus-weighted
+loss---is what makes the debate answerable by
 measurement rather than by introspection about how completely an evaluator
 dismisses an earlier impression.
 
@@ -789,7 +792,7 @@ never shifted. What separates the extensions is whether there is any sequence
 effect for that statistic to conceal. An observer reading the believed
 association alone can accordingly no more tell which extension a population
 uses than detect the sequence effect itself, while the marginals and the
-decision do both.
+share of decisions changed do both.
 ```
 
 **Then adjust the following sentence** so the section reads as a descent from
@@ -902,8 +905,9 @@ objective. Under the reading adopted here that map does not hold. A Jeffrey step
 sets the marginal of the attribute it addresses to the delivered credence, so an
 evaluator who takes the impression of quality last evaluates two workers alike
 whatever her prior beliefs about their groups, and the belief gap is silenced
-without any gain in objectivity. Partial adoption of the impression attenuates
-it in proportion. What credence-input updating does is therefore not to add a
+without any gain in objectivity. Under partial adoption with weight $\omega$ on
+the impression, a fraction $1-\omega$ of the belief gap survives
+(Proposition~\ref{prop:ADJ}). What credence-input updating does is therefore not to add a
 further source of discrimination to their three, but to relocate where
 partiality must sit in order to act: lodged in the prior it is silenced, lodged
 in the impression it passes through untouched, and their framework has no
