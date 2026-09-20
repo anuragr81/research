@@ -66,10 +66,10 @@ sequence show it. Two implications follow for audits. A population whose
 believed association matches the benchmark may still hold sequence-dependent
 beliefs. And whether the effect is detectable depends on which statistic is
 read, not on how many evaluators are averaged.
-The results take each impression to be adopted in full; the weight actually
-placed on the later impression is itself identified, by which marginal ignores
-the prior association and by whether a sequence effect survives when the
-attributes are independent.
+The results take each impression to be adopted in full rather than in part;
+the weight placed on the later impression is identified rather than assumed,
+by which of the two marginals ignores the prior association and by whether a
+sequence effect survives at independence.
 ```
 
 ---
@@ -229,16 +229,17 @@ Updating on levels rests on a second premise, which the paper states rather
 than assumes: the latest impression sets its attribute's marginal outright,
 with no weight left on what an earlier cue implied about that attribute.
 \citet{DiaconisZabell1982} hold that premise. \citet{Hawthorne2004} objects
-that it is implausible, and his objection names a direction, a weight below
-one on the later cue. That weight has two endpoints, the later impression
+that full adoption is implausible; the alternative to a weight of one on the
+later cue is a weight below one. That weight has two endpoints, the later impression
 overwriting the earlier one and the earlier impression never being moved, and
 the belief-adjustment model of \citet{HogarthEinhorn1992} lies between them
 with a memory that, in their words, ``is limited to the location of one's
 current anchor and not how this was reached''. The results of
 Sections~\ref{sec:individual} and~\ref{sec:aggregation} hold at the overwrite
-endpoint. Proposition~\ref{prop:ADJ} shows that the weight is not a matter of
-taste: it shows in which marginal ignores the prior association, and in
-whether a sequence effect survives when the attributes are independent.
+endpoint. Proposition~\ref{prop:ADJ} shows that the weight is identified rather than
+assumed: the marginal that ignores the prior association is the last-read one
+at $\omega=1$ and the first-read one at $\omega=0$, and a sequence effect at
+independence is present for $\omega<1$ and absent at $\omega=1$.
 ```
 
 ---
@@ -409,7 +410,7 @@ The two sequences so far adopt each delivered credence in full. Suppose instead
 that the second cue is adopted only in part: after the first Jeffrey step, the
 response to the second cue is a Jeffrey step on its partition to the target
 $(1-\omega)\,m+\omega\,r_1$, where $m$ is the marginal the first step left and
-$0\le\omega\le1$ is the adoption weight. This is the averaging form of the
+$0\le\omega\le1$ is the adoption weight. The rule is the averaging form of the
 belief-adjustment model, $S_k=(1-w_k)S_{k-1}+w_k s(x_k)$
 \citep[Eq.~4]{HogarthEinhorn1992}, applied to a marginal and embedded in the
 joint law by a Jeffrey step. Write $P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ for
