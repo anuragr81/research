@@ -342,7 +342,7 @@ corollary. Insert directly after
 The distortion compares the population average with the benchmark. The same
 classification can be reached without either ingredient, by reading the
 sequence effect of Definition~\ref{def:seqeffect} through the statistic
-itself. For a smooth statistic $F$ this is the quantity
+itself. For a smooth statistic $F$ the sequence effect read through it is
 $F(\PJ_{AB})-F(\PJ_{BA})$, and it involves neither the benchmark $\PB$ nor
 the mixing weight $\lambda$.
 
@@ -367,13 +367,30 @@ reading sequences, and every mixture $\Pbar_\lambda$ inherits it.
 \end{proposition}
 
 \begin{proof}
-The display applies $\langle v,\cdot\rangle$ to Proposition~\ref{prop:DIV}(ii).
-The marginal cases are the row and column sums of
-$\Delta_{\mathrm{seq}}=\kappa R_1-\kappa' R_2$. The association case follows
-because $d\,\assoc$ at $q\otimes r$ annihilates $\mathrm{span}\{R_1,R_2\}$, as
-in the proof of Proposition~\ref{prop:PRO}. The equivalence with protection
-repeats that proof with the weights $(\lambda,1-\lambda)$ replaced by $(1,-1)$,
-both nonzero.
+By Proposition~\ref{prop:DIV}(ii), $\PJ_{AB}-\PJ_{BA}=c(\kappa R_1-\kappa'R_2)+\bigO(c^{2})$;
+applying $\langle v,\cdot\rangle$ gives the display. With $R_1=q\otimes(1,-1)$
+and $R_2=(1,-1)\otimes r$,
+\[
+  \langle\mathbf 1_{A=1},R_1\rangle=0,\quad
+  \langle\mathbf 1_{A=1},R_2\rangle=-1,\qquad
+  \langle\mathbf 1_{B=1},R_1\rangle=-1,\quad
+  \langle\mathbf 1_{B=1},R_2\rangle=0,
+\]
+giving $c\,\kappa'$ and $-c\,\kappa$. For the association,
+$\langle\nabla\assoc(q\otimes r),R_1\rangle=\langle\nabla\assoc(q\otimes r),R_2\rangle=0$
+(proof of Proposition~\ref{prop:PRO}), so its sequence effect is
+$\bigO(c^{2})$. For the equivalence, with
+$M_\lambda=\lambda\kappa R_1+(1-\lambda)\kappa'R_2$ from
+Proposition~\ref{prop:DIV}(i) and $\nabla F:=\nabla F(q\otimes r)$,
+\[
+  \langle\nabla F,\Delta_{\mathrm{seq}}\rangle
+    =\kappa\,\langle\nabla F,R_1\rangle-\kappa'\,\langle\nabla F,R_2\rangle,\qquad
+  \langle\nabla F,M_\lambda\rangle
+    =\lambda\kappa\,\langle\nabla F,R_1\rangle+(1-\lambda)\kappa'\,\langle\nabla F,R_2\rangle;
+\]
+across an open set of priors $\kappa$ and $\kappa'$ vary independently, so
+either vanishes identically exactly when
+$\langle\nabla F,R_1\rangle=\langle\nabla F,R_2\rangle=0$.
 \end{proof}
 ```
 
@@ -396,7 +413,8 @@ the answer is settled before any averaging over the aggregate takes place
 **Verification status.** The display, both marginal coefficients, the exact
 association annihilation, the lambda-freeness and the generic non-vanishing are
 machine-checked in `lean/JeffreyOrder/PropORD.lean` (builds, no sorry) and
-`sympy/verify_ORD.py` (17/17; registered in `run_all.py`, full suite 12/12).
+`sympy/verify_ORD.py` (17/17; registered in `run_all.py`, full suite 13/13).
+The proof is 29\% prose by character count.
 The manuscript's conventions match the Lean definitions exactly:
 $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$ and $\kappa'=(\beta-r_0)q_0(1-q_0)/Z$ (lines
 290, 297), and $\kappa'=-K$ for the $K$ of Proposition DRF. The one step not
@@ -534,7 +552,8 @@ The declaration names Proposition PRO as proposed and cross-verified with
 Claude. Proposition ORD has the same provenance. If the declaration is meant to
 be exhaustive, extend "Proposition~\ref{prop:PRO} (uniqueness of the protected
 statistic)" to "Propositions~\ref{prop:PRO} (uniqueness of the protected
-statistic) and~\ref{prop:ORD} (between-sequence contrast)".
+statistic), \ref{prop:ORD} (between-sequence contrast)
+and~\ref{prop:ADJ} (adoption weight)".
 
 ---
 
