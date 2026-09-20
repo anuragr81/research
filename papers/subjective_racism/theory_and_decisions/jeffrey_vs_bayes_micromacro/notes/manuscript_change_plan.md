@@ -243,10 +243,10 @@ with a memory that, in their words, ``is limited to the location of one's
 current anchor and not how this was reached''. The results of
 Sections~\ref{sec:individual} and~\ref{sec:aggregation} hold at the overwrite
 endpoint. Proposition~\ref{prop:ADJ} shows that the weight is recovered rather than
-assumed. What is observed is each marginal in both reading sequences, across
+assumed. What is observed is the belief in both reading sequences, across
 values of the prior covariance $c$; what is recovered is the sequence effect
-on any statistic, without the benchmark or the sequence mix
-(Proposition~\ref{prop:ORD}), and the weight: the marginal that ignores the
+on any statistic of it, without the benchmark or the sequence mix
+(Proposition~\ref{prop:ORD}), and, from the two marginals, the weight: the marginal that ignores the
 prior association is the last-read one at $\omega=1$ and the first-read one
 at $\omega=0$, and the sequence effect on the $A$-marginal at $c=0$ equals
 $(1-\omega)(\alpha-q_0)$.
@@ -666,11 +666,11 @@ separate amnestic updating from partial adjustment no better than one.
 Separating them reads a marginal across values of the prior covariance
 (Proposition~\ref{prop:ADJ}), and the check-list
 asks whether a trait fits and never whether two traits go together, so the
-believed association cannot be formed from such data at all. What the paper
+prior association cannot be formed from such data at all. What the paper
 adds is therefore not that more ratings are needed but that a second object
 must be elicited. Seeing the sequence effect requires only a marginal read in
 both orders, which Asch has; locating the mechanism behind it requires the
-association as well, which he does not.
+prior association as well, which he does not.
 ```
 
 **Note.** This supersedes the de-duplication entry recording that the
@@ -1030,8 +1030,8 @@ statistics are the surplus-weighted loss $L(c)$ and the decision \emph{flip},
 the indicator that the sequence changes the evaluator's decision. Whether a
 statistic registers the sequence is settled here, for one evaluator;
 Section~\ref{sec:aggregation} shows that averaging over evaluators who met the
-cues in either sequence changes neither the order of any statistic nor the
-classification.
+cues in either sequence leaves the classification unchanged across an open set
+of priors and every interior mixture.
 ```
 
 *Removed:* "How these quantities are carried over in aggregate are detailed in
@@ -1064,7 +1064,7 @@ shows that the classification survives averaging over a population in which a
 fraction $\lambda\in[0,1]$ of evaluators meet the $A$-cue first (the
 credential in the example) and the rest the $B$-cue first (the letter), so
 that the mean belief under Jeffrey conditioning is
-$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. What makes a
+$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. Across an open set of priors, what makes a
 statistic first order or second order is the statistic itself, not the mixture
 $\lambda$: the mean belief lies in the plane through $\PB$ spanned by the
 leading directions of the two sequences, and a statistic's order is fixed by
