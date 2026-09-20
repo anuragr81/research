@@ -421,14 +421,15 @@ the answer is settled before any averaging over the aggregate takes place
 **Verification status.** The display, both marginal coefficients, the exact
 association annihilation, the lambda-freeness and the generic non-vanishing are
 machine-checked in `lean/JeffreyOrder/PropORD.lean` (builds, no sorry) and
-`sympy/verify_ORD.py` (17/17; registered in `run_all.py`, full suite 13/13).
+`sympy/verify_ORD.py` (22/22; registered in `run_all.py`, full suite 13/13).
 The proof is 29\% prose by character count.
 The manuscript's conventions match the Lean definitions exactly:
 $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$ and $\kappa'=(\beta-r_0)q_0(1-q_0)/Z$ (lines
-290, 297), and $\kappa'=-K$ for the $K$ of Proposition DRF. The one step not
-separately machine-checked is the equivalence-with-protection sentence, which
-is Proposition PRO's already-verified annihilator argument with weights
-$(1,-1)$.
+290, 297), and $\kappa'=-K$ for the $K$ of Proposition DRF. The equivalence-with-protection sentence is checked in step (8) of
+`verify_ORD.py`: vanishing of the between-sequence coefficient over four
+independent priors leaves exactly $\mathrm{span}\{J,\nabla\assoc\}$, and
+$\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)\neq0$, so $\kappa,\kappa'$
+vary independently (added 2026-09-20).
 
 
 **Second INSERT (adoption weight), directly after the ORD proof above.** The
