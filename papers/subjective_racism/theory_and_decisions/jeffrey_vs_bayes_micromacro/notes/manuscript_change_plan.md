@@ -21,15 +21,19 @@ edited further; anything destined for the manuscript belongs in a Change here. N
    factor needs a counterfactual likelihood an impression does not supply. So
    impressions deliver levels, Jeffrey updating is how a level is coherently
    adopted, and the benchmark is the same cue under the other reading. The
-   order effect is the difference between the two readings.
+   order effect is the difference between the two readings. Change 4 also
+   states the second premise, full adoption, and names the adoption weight
+   $\omega$ whose endpoints Proposition ADJ identifies.
 3. **Changes 5-6 state the answer together with its instrument.** Marginals and
-   decisions show the sequence effect at first order. The association does not.
+   the share of decisions changed show the sequence effect at first order. The
+   association and the surplus-weighted loss do not.
    The test is a comparison of the two reading groups with each other. It needs
    neither the benchmark nor the sequence mix. Proposition ORD is that
    statement.
 
-Not in this plan: the Section 4/5 restructure, retitle, and Table 1 redesign
-(parked as a later exercise).
+Changes 14--15 retitle Sections 4 and 5 and re-open them on the statistic
+rather than the level of aggregation (cap of thirteen lifted 2026-09-20). The
+Table 1 redesign remains parked.
 
 ---
 
@@ -424,9 +428,9 @@ $(1,-1)$.
 
 
 **Second INSERT (adoption weight), directly after the ORD proof above.** The
-weight is written $\omega$ because $\delta_\sigma$ is already the score
-coefficient (manuscript line 357); if you prefer $\delta$, rename here and in
-Change 11.
+weight is written $\omega$ throughout the manuscript (decided 2026-09-20),
+because $\delta_\sigma$ is already the score coefficient (manuscript line
+357). The Lean and sympy files keep `δ`/`delta` for the same quantity.
 
 ```latex
 The two sequences so far adopt each delivered credence in full. Suppose instead
@@ -977,3 +981,92 @@ driven by evaluator heterogeneity and beliefs about other evaluators' beliefs
 - The Hogarth-Einhorn instrument discussion is reduced to one clause (Change
   2). The Zhao papers are not referred to at all (review log Entry 15); the
   reads remain on record in `literature/measurement_susceptibility_survey.md`.
+
+## Change 14 -- Section 4: title and first two paragraphs (lines 290-295)
+
+**Purpose.** Sections 4 and 5 are organised on the individual-versus-aggregate
+axis, which the paper's own results (ORD, PRO) show to be inert: the
+classification is decided before any averaging. The section titles and
+openers should be organised on the statistic instead. This change retitles
+Section 4 and rewrites its first two paragraphs; the third paragraph (why
+these statistics; FGT remark) is unchanged. No new proof: "both are first
+order" is DIV and SCR; the closing sentence is ORD and PRO.
+
+**Title BEFORE:** `\section{Sequence effects at the individual level}`
+
+**Title AFTER:** `\section{Which statistics register the sequence}`
+
+**BEFORE** (paragraphs 1-2):
+
+> \section{Sequence effects at the individual level}
+> \label{sec:individual}
+> Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects with respect the Bayesian benchmark using two \textbf{primitive} statistics -- gap and score. As discussed in Section  \ref{sec:jeffrey}, the \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive, \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator.
+> The belief-statistics and decision-statistics follow from the two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
+
+**AFTER**:
+
+```latex
+This section asks, of each statistic of a single evaluator's belief, whether
+the two reading sequences move it at first order in the prior covariance $c$
+or only at second order. Two primitive statistics carry the comparison with
+the sequence-free benchmark $\PB$ of Section~\ref{sec:jeffrey}: the
+\emph{gap}, the distance of the evaluator's belief from $\PB$
+(Definition~\ref{def:indgap}), and the \emph{score-gap}
+$s(P)=\langle\vv,P\rangle$, the same distance read through the decision
+weights and set against a threshold $\tau$.
+Section~\ref{sec:individual_primitives} shows that both are first order.
+
+The belief statistics and the decision statistics are read from the same
+belief. The belief statistics are the \emph{marginal probability} of each
+attribute and the \emph{believed cross-attribute association}; the decision
+statistics are the surplus-weighted loss $L(c)$ and the decision \emph{flip},
+the indicator that the sequence changes the evaluator's decision. Whether a
+statistic registers the sequence is settled here, for one evaluator;
+Section~\ref{sec:aggregation} shows that averaging over evaluators who met the
+cues in either sequence changes neither the order of any statistic nor the
+classification.
+```
+
+*Removed:* "How these quantities are carried over in aggregate are detailed in
+Section 5", which promised that the aggregate adds something.
+
+---
+
+## Change 15 -- Section 5: title and first paragraph (lines 465-469)
+
+**Purpose.** Same as Change 14, for the aggregate section. "Largely the nature
+of the statistic itself" hedged an exact result. No new proof: the plane and
+the differential condition are PRO; the sequence-side statement is ORD.
+
+**Title BEFORE:** `\section{Aggregated Effects of Cue-Sequence}`
+
+**Title AFTER:** `\section{Averaging over sequences does not change the classification}`
+
+**BEFORE** (paragraph 1):
+
+> \section{Aggregated Effects of Cue-Sequence}
+> \label{sec:aggregation}
+> We now describe how the effect of arrival order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
+> rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
+
+**AFTER**:
+
+```latex
+The previous section classified statistics for one evaluator. This section
+shows that the classification survives averaging over a population in which a
+fraction $\lambda\in[0,1]$ of evaluators meet the $A$-cue first (the
+credential in the example) and the rest the $B$-cue first (the letter), so
+that the mean belief under Jeffrey conditioning is
+$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. What makes a
+statistic first order or second order is the statistic itself, not the mixture
+$\lambda$: the mean belief lies in the plane through $\PB$ spanned by the
+leading directions of the two sequences, and a statistic's order is fixed by
+its differential on that plane (Propositions~\ref{prop:ORD}
+and~\ref{prop:PRO}).
+```
+
+The paragraph that follows ("Two definitions are worth pinning down ...") and
+the protection definition are unchanged; Change 6 inserts ORD after that
+definition.
+
+---
