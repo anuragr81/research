@@ -123,8 +123,9 @@ among the oldest findings in the study of impression formation
 \citep{Asch1946,HogarthEinhorn1992}. The formal counterpart is also settled.
 Jeffrey conditioning on successive uncertain impressions depends on their
 sequence, \citet{DiaconisZabell1982} characterised exactly when the two
-sequences lead to the same belief, and \citet{Hawthorne2004} named the updating
-scheme, crediting that commutation criterion to them. The criterion decides an
+sequences lead to the same belief, and \citet{Hawthorne2004} named its full-adoption
+premise the Amnestic Update-Factor Thesis, crediting the commutation criterion
+to them. The criterion decides an
 all-or-nothing question. Two sequences commute when the updated beliefs agree
 on every statistic at once. When the two beliefs differ, the difference has a size in each
 statistic, and the sizes need not be alike. In the two-attribute setting of
@@ -133,9 +134,10 @@ the cross-attribute association, and an observation reads one of them, or a
 decision derived from them, at some finite precision. The question that matters
 for observation is therefore not whether the two sequences agree but by how
 much they disagree in each statistic. That question has received little
-attention. The answer of this paper is that the marginal probabilities and the
-decisions carry the difference at first order in the prior covariance, while
-the believed association carries it only at second order. The paper
+attention. The answer of this paper is that the marginal probabilities and the share of
+decisions changed by sequence carry the difference at first order in the prior
+covariance, while the believed association and the surplus-weighted loss carry
+it only at second order. The paper
 characterises exactly which smooth statistics fall on each side. The two-cue
 setting serves to exhibit the mechanism; the underlying fact that
 attribute-local updating leaves the interactions among attributes untouched
@@ -161,7 +163,7 @@ the sequence stays visible, not whether it matters "in the aggregate".
 ```latex
 Whether the arrival sequence remains visible, and in which statistics, is the
 question the current paper answers. The answer turns on a geometric property of
-the statistic being read. Aggregation neither creates nor removes it, and the
+the statistic being read. Aggregation neither creates nor removes the effect, and the
 population average inherits whatever the two sequences already fixed.
 ```
 
@@ -310,13 +312,16 @@ quantity names neither $\PB$ nor the sequence mix, so any observer who records
 which cue each evaluator met first can compute it. What an audit can answer
 therefore depends on which statistic is read, not on how many evaluators are
 averaged over\footnote{...}. One consequence is that belief audits asking how
-attributes are thought to go together, the instrument most naturally trusted
-for detecting stereotype, are blind to the sequence effect at first order. The
-same comparison identifies the mechanism as well as the effect: the marginal
-that stays fixed as the prior association varies sits on the attribute read
-last under overwriting, and on the attribute read first under a rule that
-protects the earlier impression (Section~\ref{sec:scope}).
+attributes are thought to go together are blind to the sequence effect at
+first order, while audits asking about one attribute's probability register
+it.
 ```
+
+*Cut in counterfactual pass 3:* the closing sentence on mechanism
+identification ("the marginal that stays fixed ... sits on the attribute read
+last under overwriting, and on the attribute read first under a rule that
+protects the earlier impression") now lives in Change 4's appended paragraph,
+one paragraph earlier, with the reference to Proposition ADJ.
 
 ---
 
