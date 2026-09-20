@@ -675,21 +675,21 @@ the observable that separates the mechanisms, and records the Asch caution.
 
 ```latex
 A separate scope question concerns rival mechanisms rather than broken
-assumptions. Order effects have a competing rational explanation. Under partial
-adjustment, later cues move belief only part of the way to their targets
-\citep{HogarthEinhorn1992}, and in the limiting case a first impression is one
-that later evidence cannot move. Such accounts and the amnestic model point in
+assumptions. Order effects have an explanation that competes with amnestic updating. Under
+partial adjustment, later cues move belief only part of the way to their
+targets \citep{HogarthEinhorn1992}, and at the limit of no adjustment the first
+impression is never moved by later evidence. Such accounts and the amnestic model point in
 opposite directions: the protected impression is the first one there, and the
 last one here. An observable separates them. Under partial adoption of the second cue with
 weight $\omega$ (Proposition~\ref{prop:ADJ}), the marginal that ignores the
 prior association is the last-read one at $\omega=1$, the first-read one at
 $\omega=0$, and neither in between. A reading on which neither marginal ignores
 the association is consistent with an interior weight and with the benchmark
-alike; the two are separated by the sequence comparison, which the benchmark
-passes at every $c$ and an interior weight fails already at $c=0$, by
-$(1-\omega)(\alpha-q_0)$. Since every rule here is a separable reweighting, all
-of them carry the prior's odds ratio (Lemma~\ref{lem:SEP}); the two marginals
-are the only place a mechanism can show. Three cautions bound the claim. The
+alike; the two are separated by the sequence comparison, under which the benchmark
+shows no sequence effect at any $c$ and an interior weight shows one already
+at $c=0$, equal to $(1-\omega)(\alpha-q_0)$. Since every rule here is a separable reweighting, all
+of them carry the prior's odds ratio (Lemma~\ref{lem:SEP}), so the odds ratio
+separates none of them and the two marginals are the only statistics that do. Three cautions bound the claim. The
 classification covers this one-parameter adjustment family, not every
 conceivable mechanism. \citet{Asch1946} is evidence that order moves marginals, one cue per trait
 across eighteen traits, and not evidence for either endpoint: his own account is
@@ -704,8 +704,8 @@ credential's implication for trustworthiness is erased once the letter fixes
 that attribute. What does not apply is the illustration he uses to press it, in which one
 basis is cued repeatedly so that successive impressions overwrite each other; attribute
 locality (Assumption~\ref{as:local}) gives each cue a basis of its own. The
-adjustment weight is the precise form of his objection, and locating it is the
-reply offered here.
+adoption weight is his objection stated as a parameter; the reply offered here
+is not that the objection misses but that the weight is identified.
 ```
 
 **Verification status.** Every claim in the paragraph is Proposition ADJ
