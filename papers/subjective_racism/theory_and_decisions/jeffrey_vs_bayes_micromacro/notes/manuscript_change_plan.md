@@ -23,7 +23,7 @@ edited further; anything destined for the manuscript belongs in a Change here. N
    adopted, and the benchmark is the same cue under the other reading. The
    order effect is the difference between the two readings. Change 4 also
    states the second premise, full adoption, and names the adoption weight
-   $\omega$ whose endpoints Proposition ADJ identifies.
+   $\omega$, which Proposition ADJ recovers from the marginals.
 3. **Changes 5-6 state the answer together with its instrument.** Marginals and
    the share of decisions changed show the sequence effect at first order. The
    association and the surplus-weighted loss do not.
@@ -71,9 +71,10 @@ believed association matches the benchmark may still hold sequence-dependent
 beliefs. And whether the effect is detectable depends on which statistic is
 read, not on how many evaluators are averaged.
 The results take each impression to be adopted in full rather than in part;
-the weight placed on the later impression is identified rather than assumed,
-by which of the two marginals ignores the prior association and by whether a
-sequence effect survives at independence.
+the weight placed on the later impression is recovered from the two marginals
+read in both sequences rather than assumed: which marginal ignores the prior
+association fixes the endpoints, and the size of the sequence effect at
+independence fixes the weight between them.
 ```
 
 ---
@@ -242,10 +243,15 @@ the belief-adjustment model of \citet{HogarthEinhorn1992} lies between them
 with a memory that, in their words, ``is limited to the location of one's
 current anchor and not how this was reached''. The results of
 Sections~\ref{sec:individual} and~\ref{sec:aggregation} hold at the overwrite
-endpoint. Proposition~\ref{prop:ADJ} shows that the weight is identified rather than
-assumed: the marginal that ignores the prior association is the last-read one
-at $\omega=1$ and the first-read one at $\omega=0$, and a sequence effect at
-independence is present for $\omega<1$ and absent at $\omega=1$.
+endpoint. Proposition~\ref{prop:ADJ} shows that the weight is recovered rather than
+assumed. What is observed is each marginal in both reading sequences, across
+priors of differing association; what is recovered is the sequence effect on
+any statistic, without the benchmark or the sequence mix
+(Proposition~\ref{prop:ORD}), and the weight itself: the marginal that ignores
+the prior association is the last-read one at $\omega=1$ and the first-read
+one at $\omega=0$, and the sequence effect on the $A$-marginal at independence
+equals $(1-\omega)(\alpha-q_0)$, which fixes $\omega$ given the prior and the
+delivered credence.
 ```
 
 ---
@@ -657,7 +663,7 @@ moves from 64 to 9 per cent and \emph{good-looking} from 74 to 35, while
 \emph{serious} moves from 97 to 100, \emph{persistent} from 82 to 87 and
 \emph{reliable} from 84 to 91. Some statistics swing enormously and others
 scarcely move, with no account offered of the difference. Yet eighteen marginals
-identify the mechanism no better than one. Identification reads a marginal
+separate the mechanisms no better than one. Separating them reads a marginal
 against the prior association (Proposition~\ref{prop:ADJ}), and the check-list
 asks whether a trait fits and never whether two traits go together, so the
 believed association cannot be formed from such data at all. What the paper
@@ -682,7 +688,7 @@ cannot identify its source.
 
 ---
 
-## Change 11 -- Scope section: rival mechanisms, and what identifies the mechanism
+## Change 11 -- Scope section: rival mechanisms, and what separates the mechanisms
 
 **Purpose.** Order effects have a competing rational explanation, and the
 conflict is stark: at its $\omega=0$ endpoint the adjustment family protects
@@ -738,7 +744,8 @@ that attribute. What does not apply is the illustration he uses to press it, in 
 basis is cued repeatedly so that successive impressions overwrite each other; attribute
 locality (Assumption~\ref{as:local}) gives each cue a basis of its own. The
 adoption weight is his objection stated as a parameter; the reply offered here
-is not that the objection misses but that the weight is identified.
+is not that the objection misses but that the weight is recovered from the two
+marginals rather than assumed.
 ```
 
 **Verification status.** Every claim in the paragraph is Proposition ADJ
