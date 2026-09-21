@@ -37,7 +37,8 @@ Change 16 adds one motivating paragraph to the introduction: a sequence that
 is assigned systematically by group produces a group gap from sequence alone.
 Change 17 adds two tables mapping every input and output of the model to its
 mathematical type, what it represents, and how it would be obtained; Change 18
-states what an impression is mathematically. The Table 1 redesign remains parked.
+states what an impression is mathematically; Change 19 adds a worked numeric
+example to Setup. The Table 1 redesign remains parked.
 
 ---
 
@@ -470,7 +471,11 @@ $c$ of the first-read marginal is $\omega$ times the benchmark's coefficient
 for the same marginal. At $c=0$ the third line equals $(1-\omega)(\alpha-q_0)$:
 a partially adopting evaluator shows a sequence effect at independence, where
 the fully adopting evaluator (Proposition~\ref{prop:IMM}) and the benchmark
-show none.
+show none. Whenever $P^{A}(B{=}1)\neq r_1$, the first line gives the weight from
+three marginals of one reading group, for every $c$:
+\[
+  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
+\]
 \end{proposition}
 
 \begin{proof}
@@ -502,6 +507,11 @@ $c=0$ a step leaves the other marginal unchanged:
   \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
   P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
 \]
+For $P^{A}(B{=}1)\neq r_1$ the first line gives
+\[
+  1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad
+  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
+\]
 \end{proof}
 ```
 
@@ -516,7 +526,13 @@ and the "neither at interior $\omega$" claim are in
 and (6); the "only if" half of "exactly when" uses `dampedB_at_zero` with
 `prior_mB1` (value $r_0-\beta$) and `propDRF_route_AB` (the DRF coefficient).
 Case (6d) there, that no single $\omega$ reproduces both benchmark slopes,
-is verified but not claimed in the manuscript. The proof is 30\% prose by
+is verified but not claimed in the manuscript. The closing formula for
+$\omega$ (added 2026-09-21) is the first line solved for $\omega$; it and its
+$BA$ mirror, exact in $c$, and the generic non-vanishing of the denominator
+($r_0-\beta$ at $c=0$) are case (7) of the same script (25/25). The algebra is
+one division; what it adds is that an interior weight is given by a formula
+at every $c$ from one reading group, where the proposition otherwise fixes
+only the endpoints and the $c=0$ value. The proof is 28\% prose by
 character count (characters inside `$..$` and `\[..\]` counted as
 expressions). The Hogarth--Einhorn attributions were checked against their text
 (Drive: `hogarth_einhorn_1992.pdf`): Eq.~(4) is theirs; "memory is limited to
@@ -1270,8 +1286,8 @@ the "Represents" column is the manuscript's own wording (Setup, Section 2.2,
 Section 5 opener, Table 1). Test-compiled against the manuscript preamble: no
 errors, each table fits one page. The formula needs an intermediate rating (a
 step-by-step design); from end ratings alone the $c=0$ form is the one
-available. Not yet claimed in Proposition ADJ itself; a closing corollary
-sentence there is a possible later change.
+available. The formula is claimed in Proposition ADJ (Change 6, closing
+sentence, added 2026-09-21), so the $\omega$ row cites a stated result.
 
 **Two inconsistencies noticed while building the tables (author to decide).**
 Table 1 says "share of *candidates* whose decision the reading sequence
@@ -1321,3 +1337,69 @@ attribute's partition, not a decisive cue: $0<q_0<1$ and $0<r_0<1$.
 
 **Verification status.** Notation only; nothing to verify. Every sympy script
 and Lean file already uses $q_1=1-q_0$, $r_1=1-r_0$ with $q_0,r_0\in(0,1)$.
+
+---
+
+## Change 19 -- Setup: a worked numeric example (insert in Section 2.2, after the definition of the gap)
+
+**Purpose.** The manuscript has no numeric illustration. One example shows, in
+numbers a reader can recompute by hand, the three facts the paper rests on: a
+cue about one attribute moves the other attribute's marginal when $c\neq0$; the
+marginal read last ends at its delivered credence while the marginal read
+first drifts; and the sequence effect is large on the marginals and negligible
+on the believed association. The parameters avoid $r_0=\beta$ and $q_0=\alpha$,
+at which the first-order drift coefficients $K$ and $\kappa$ vanish and the
+example would illustrate the wrong order.
+
+**Location.** Section 2.2 (label sec:jeffrey), after Definition (gap) and
+before the paragraph "The benchmark $\PB$ is not a rival updating rule...".
+The last sentence uses $\PB$, which that paragraph defines; if the forward use
+reads badly, move the example to the end of Section 2.2.
+
+**INSERT:**
+
+```latex
+\paragraph{A worked example.} Let $\alpha=\beta=\tfrac12$ and $c=\tfrac1{20}$,
+so the prior table is
+$P=\bigl(\begin{smallmatrix}.30&.20\\.20&.30\end{smallmatrix}\bigr)$: each
+trait is judged as likely absent as present, and the two are believed to go
+together. The credential delivers $q_0=\tfrac15$ and the letter
+$r_0=\tfrac7{10}$. After the credential alone the table is
+$\bigl(\begin{smallmatrix}.12&.08\\.32&.48\end{smallmatrix}\bigr)$. The
+$A$-marginal is $(.20,.80)$, as delivered, and the $B$-marginal has moved from
+$(.50,.50)$ to $(.44,.56)$ although no cue about $B$ has been read. Reading the
+letter next resets the $B$-marginal to $(.70,.30)$ and moves the $A$-marginal
+from $.20$ to $\PJ_{AB}(A{=}0)=.234$. In the reverse sequence the $A$-marginal
+ends at $.20$, as delivered, and the $B$-marginal at $\PJ_{BA}(B{=}0)=.643$ in
+place of $.70$. The benchmark gives $\PB(A{=}0)=.227$ and $\PB(B{=}0)=.647$.
+The sequence effect is therefore $.034$ on the $A$-marginal and $.057$ on the
+$B$-marginal. On the believed association it is $.0002$, since
+$\assoc(\PJ_{AB})=.0273$ and $\assoc(\PJ_{BA})=.0271$, smaller than either
+marginal effect by a factor above $150$. The odds ratio equals $9/4$ for the
+prior, for both sequences and for the benchmark. Against the benchmark,
+sequence $AB$ departs by $.053$ on the marginal read last, by $.007$ on the
+marginal read first, and by $.002$ on the association.
+```
+
+**Optional sentence, after Proposition ADJ (requires Change 6):**
+
+```latex
+In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the
+credential first rates trustworthiness at $.56$ before the letter, the letter
+alone delivers $.30$, and a final rating of $.43$ gives
+$\omega=(.56-.43)/(.56-.30)=\tfrac12$.
+```
+
+**Verification status.** Every number in both blocks is a line of
+sympy/verify_example.py (18/18; registered in run_all.py), computed in exact
+rationals and compared with the rounded value printed: the two tables, the
+moved $B$-marginal $11/25$, $\PJ_{AB}(A{=}0)=18/77$, $\PJ_{BA}(B{=}0)=133/207$,
+$\PB(A{=}0)=27/119$, $\PB(B{=}0)=11/17$, the three associations $3/110$,
+$28/1035$, $60/2023$, the three sequence effects, the three gaps from the
+benchmark, the ratio above 150, the common odds ratio $9/4$, and the
+$\omega=\tfrac12$ read-back. The gaps agree with the propositions: first order
+on the last-read marginal (DRF), second order on the first-read marginal (DRF)
+and on the association (ASC). No proposition is stated, so no informal proof is
+owed. With $c=\tfrac1{20}$ against a maximum of $\tfrac14$ the example is not
+in the small-$c$ limit; it illustrates the ordering of magnitudes, not the
+asymptotic rates.
