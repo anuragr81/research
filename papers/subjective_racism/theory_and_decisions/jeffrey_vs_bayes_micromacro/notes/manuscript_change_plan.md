@@ -157,6 +157,27 @@ holds for any number of attributes and cues.
 
 ## Change 3 -- Intro paragraph 2 (lines 76-79): final two sentences only
 
+**SUPERSEDED (author, 2026-09-21).** While compacting the introduction the
+author replaced the same two sentences ("Whether arrival sequence matters or
+not in the aggregate ... rather than the means of aggregation.", end of the
+hiring-panel paragraph) with a statement of the conclusion on the adoption
+weight, since the question is already posed earlier in the introduction. The
+approved sentence is:
+
+```latex
+How fully a panel adopts the later impression, a weight $\omega$ between zero
+and one, can be read from the ratings and need not be assumed: at $\omega=1$
+the trait read last ends exactly where its document put it, at $\omega=0$ the
+trait read first does, and for $\omega<1$ the two panels differ even when the
+traits are believed unrelated.
+```
+
+All three claims are Proposition ADJ (the two endpoints; the value
+$(1-\omega)(\alpha-q_0)$ at $c=0$), so the sentence presupposes Change 6. The
+last clause holds generically and fails only at $q_0=\alpha$, where the
+credential delivers the base rate already held. The BEFORE/AFTER below is kept
+for the record and is not to be applied.
+
 **Purpose.** The paragraph's closing question should ask in which statistics
 the sequence stays visible, not whether it matters "in the aggregate".
 
@@ -179,6 +200,15 @@ population average inherits whatever the two sequences already fixed.
 ---
 
 ## Change 4 -- Intro paragraph 3 (line 81): full replacement (compacted two-horn)
+
+**Overlap to resolve when applying (2026-09-21).** The sentence that now closes
+the hiring-panel paragraph (see Change 3) already introduces the weight
+$\omega$ and its two endpoints. The appended paragraph below repeats the
+endpoints in its final sentence. When this change is applied, either drop that
+final sentence's endpoint clause or open the appended paragraph with "Call that
+degree of adoption the weight $\omega$", keeping the statement of the premise
+and its attribution (Diaconis--Zabell hold it; Hawthorne objects) and the
+observed/recovered sentence. No text below has been cut.
 
 **Purpose.** State the modelling assumption (impressions arrive as revised
 credences), then defend it. A cue admits two readings, level and Bayes factor;
