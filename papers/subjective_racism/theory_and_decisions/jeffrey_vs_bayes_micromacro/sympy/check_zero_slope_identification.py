@@ -166,6 +166,24 @@ def main():
        and at_generic(solB[0] - 1) != 0,
        f"delta_B = {sp.factor(solB[0]) if solB else None}")
 
+    # ---------- (7) the weight recovered from observed marginals -------------
+    # delta = [P^A(B=1) - P^d_AB(B=1)] / [P^A(B=1) - r1], exactly in c: the
+    # share of the distance from where the A-cue left B's marginal to the
+    # delivered credence that the evaluator actually travels.  By symmetry the
+    # same ratio on A's marginal in sequence BA.
+    PA, PBonly = jeffrey_A(prior()), jeffrey_B(prior())
+    mPA, mAB = marg_B(PA)[1], marg_B(QAB)[1]
+    ck.eq("(7a) delta = [P^A(B=1) - P^d_AB(B=1)] / [P^A(B=1) - r1], all orders in c",
+          sp.cancel((mPA - mAB) / (mPA - r1) - delta), 0)
+    mPB, mBA = marg_A(PBonly)[1], marg_A(QBA)[1]
+    ck.eq("(7a) delta = [P^B(A=1) - P^d_BA(A=1)] / [P^B(A=1) - q1], all orders in c",
+          sp.cancel((mPB - mBA) / (mPB - q1) - delta), 0)
+    ck.ne("(7b) the denominator P^A(B=1) - r1 is nonzero generically "
+          "(it is r0 - beta at c = 0)", at_generic(mPA - r1))
+    ck.eq("(7b) ...and equals r0 - beta at c = 0", sp.cancel((mPA - r1).subs(c, 0) - (r0 - beta)), 0)
+    ck.eq("(7c) at c = 0: delta = 1 - [order effect on A] / (alpha - q0)",
+          sp.cancel(1 - oe.subs(c, 0) / (alpha - q0) - delta), 0)
+
     return ck.done()
 
 
