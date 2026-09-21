@@ -1,0 +1,130 @@
+% =====================================================================
+% empirical_analytics.tex
+%
+% Measurement map for Paper B (Jeffrey-order manuscript): every mathematical
+% input and output of the model, its type, the real-world property it
+% represents, and how an observer would obtain it.  The paper uses no data;
+% this document records what an empirical study would have to observe.
+%
+% Maintained separately from PAPER_B_MANUSCRIPT.tex.  Rows or whole tables
+% can be pasted into the manuscript later.  When pasting:
+%   - the macros below (\PB, \PJ, \Pbar, \assoc, \sgn, \bigO, \vv) are the
+%     manuscript's own, so the table bodies need no change;
+%   - results are named in words here ("Proposition ADJ", "Sections 4 and
+%     5"); replace with \ref{prop:ADJ}, \ref{prop:ORD}, \ref{sec:individual},
+%     \ref{sec:aggregation} in the manuscript;
+%   - the omega row and the ORD/ADJ mentions presuppose plan Change 6.
+%
+% Verification: the only mathematics asserted is the omega row, checked in
+% sympy/check_zero_slope_identification.py case (7) and claimed in
+% Proposition ADJ (plan Change 6).  Every "Represents" entry is the
+% manuscript's own wording.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{dsfont}
+\usepackage{booktabs}
+\usepackage{array}
+
+\newcommand{\PB}{P^{\mathrm{B}}}
+\newcommand{\PJ}{P^{\mathrm{J}}}
+\newcommand{\Pbar}{\overline{P}}
+\newcommand{\assoc}{\operatorname{assoc}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\vv}{v}
+
+\title{Empirical analytics: inputs and outputs of the model}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent The model is a belief over two binary attributes of a candidate,
+competence ($A$) and trustworthiness ($B$), updated by two soft cues, a
+credential and a reference letter. The attributes are discrete. Every belief
+about them is described by continuous parameters, and the results are
+expansions in one of those parameters, the prior covariance $c$. The decision
+is discrete again, and becomes smooth in $c$ only through the population
+density $f$ of the net surplus $u$. Table~\ref{tab:inputs} lists the inputs and
+Table~\ref{tab:outputs} the outputs. The last column separates what is
+elicited from an evaluator, what is recorded by the observer, and what can only
+be computed.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Inputs of the model, their mathematical type, and what each represents.
+The attributes are discrete; every belief about them is described by continuous
+parameters.}\label{tab:inputs}
+\begin{tabular}{@{}p{2.4cm}p{3.0cm}p{4.6cm}p{4.6cm}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how}\\
+\midrule
+$A,B\in\{0,1\}$ & discrete variables & whether the candidate is competent ($A{=}1$) and trustworthy ($B{=}1$) & never observed; the objects of belief\\
+\addlinespace
+$P=(P_{ij})$ & probability mass function on the four pairs $(i,j)$ & the evaluator's belief, before any cue, about which traits a randomly drawn candidate has; no outcome is involved & elicited before the file is opened\\
+\addlinespace
+$\alpha$, $\beta$ & probabilities in $(0,1)$; $(\alpha,1-\alpha)$ is the $A$-marginal of $P$, $(\beta,1-\beta)$ its $B$-marginal & the believed base rate of candidates who \emph{lack} competence, $\alpha=P(A{=}0)$, and who lack trustworthiness, $\beta=P(B{=}0)$ & one base-rate question per trait\\
+\addlinespace
+$c=\assoc(P)$ & real number within the Fr\'echet--Hoeffding bounds; $c=0$ is independence & how strongly the evaluator believes, before any cue, that the two traits go together & a joint question before the cues\\
+\addlinespace
+$q=(q_0,q_1)$ & probabilities, $q_0+q_1=1$, $0<q_0<1$; replaces the $A$-marginal $(\alpha,1-\alpha)$ & the credence that the candidate is not competent ($q_0$) or competent ($q_1$) after the credential alone & a rating of competence, on a probability scale, after the credential alone\\
+\addlinespace
+$r=(r_0,r_1)$ & probabilities, $r_0+r_1=1$, $0<r_0<1$; replaces the $B$-marginal $(\beta,1-\beta)$ & the credence that the candidate is not trustworthy ($r_0$) or trustworthy ($r_1$) after the letter alone & a rating of trustworthiness after the letter alone\\
+\addlinespace
+$\sigma\in\{AB,BA\}$ & discrete label & which of the two documents the evaluator read first & recorded, or assigned by the experimenter\\
+\addlinespace
+$\lambda$ & fraction in $[0,1]$ & the share of evaluators who read the credential first & counted where $\sigma$ is recorded; unknown in a pooled audit\\
+\addlinespace
+$\vv=(v_{ij})$ & four real numbers, not probabilities & what a candidate of each trait combination is worth to the evaluator; known to the evaluator and never updated by a cue. It may embed the chance that such a candidate succeeds, which the model does not separate out & stated payoffs, or inferred from choices\\
+\addlinespace
+$\tau$ & real number & the value of the outside option forgone by engaging & as for $\vv$; enters only through $u$\\
+\addlinespace
+$u=s(\PB)-\tau$, density $f$ & real number for each evaluator; the one input that enters as a distribution across evaluators & how far an evaluator is from indifference at the benchmark belief; $f(0)$ is the density of evaluators at the margin & not observed directly, since it depends on $\PB$\\
+\addlinespace
+$\varepsilon$ & positive real number & the resolution of the observer's instrument & set by the study design and the sample\\
+\addlinespace
+$\omega$ & weight in $[0,1]$ & how far the later impression displaces what the earlier cue implied about its attribute; $\omega=1$ in Sections 4 and 5 & $\omega=\dfrac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}$,\newline of the distance between the trustworthiness rating after the credential alone and the rating the letter delivers, the share that the final rating travels; requires $P^{A}(B{=}1)\neq r_1$ (Proposition ADJ)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Outputs of the model, their mathematical type, and what each represents.}\label{tab:outputs}
+\begin{tabular}{@{}p{2.9cm}p{3.0cm}p{4.9cm}p{3.4cm}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how}\\
+\midrule
+$\PJ_{AB}$, $\PJ_{BA}$ & probability mass functions on the four pairs & the evaluator's belief about the candidate after both documents, in the given reading sequence & elicited after both cues, by reading group\\
+\addlinespace
+$\PJ_\sigma(A{=}1)$, $\PJ_\sigma(B{=}1)$ & probabilities & the final rating of competence and of trustworthiness & one single-trait question after the cues\\
+\addlinespace
+$\assoc(\PJ_\sigma)$; odds ratio, Yule's $Q$ & real numbers & how strongly the traits are believed to go together after the cues, which is what a belief audit about traits going together measures & a joint question after the cues\\
+\addlinespace
+$\PJ_{AB}-\PJ_{BA}$ & signed $2\times2$ array summing to zero & the difference between two otherwise identical panels who read the file in opposite sequences & the two reading groups compared; needs neither $\PB$ nor $\lambda$ (Proposition ORD)\\
+\addlinespace
+$\PB$ & probability mass function & the belief the same evaluator would hold had the same two impressions been combined as Bayes factors & never observed; computed from $P$, $q$, $r$\\
+\addlinespace
+$\PJ_\sigma-\PB$ & signed $2\times2$ array & the evaluator's departure from the sequence-free belief & computed; needs $\PB$\\
+\addlinespace
+$\Pbar_\lambda$ & probability mass function & the average belief in a population that pools both reading sequences & a pooled survey\\
+\addlinespace
+$F(\Pbar_\lambda)-F(\PB)$ & real number; protected if $\bigO(c^{2})$, unprotected if first order & what a pooled audit reading the statistic $F$ reports, relative to the benchmark & a pooled survey together with the computed $\PB$\\
+\addlinespace
+$s(P)=\langle\vv,P\rangle$; engage iff $s(P)\ge\tau$ & real number; binary decision & the expected value of engaging, and the decision to engage or not & the decision is observed, the score is not\\
+\addlinespace
+$\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ and its population mean & binary indicator, a step function of $c$; its mean is a share in $[0,1]$ & whether the reading sequence changed an evaluator's decision, and the share of evaluators for whom it did & decisions compared across reading groups\\
+\addlinespace
+$L(c)$ & nonnegative real number & the value forgone through decisions that the reading sequence changed & computed; needs $u$ and hence $\PB$\\
+\addlinespace
+$\kappa$, $\kappa'$, $K$, $R_1$, $R_2$, $\delta_\sigma$, $M_\lambda$ & real coefficients and $2\times2$ directions & none of their own: functions of $\alpha,\beta,q,r,\vv$ that fix the size and direction of the first-order effects above & computed\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

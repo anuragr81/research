@@ -35,8 +35,8 @@ Changes 14--15 retitle Sections 4 and 5 and re-open them on the statistic
 rather than the level of aggregation (cap of thirteen lifted 2026-09-20).
 Change 16 adds one motivating paragraph to the introduction: a sequence that
 is assigned systematically by group produces a group gap from sequence alone.
-Change 17 adds two tables mapping every input and output of the model to its
-mathematical type, what it represents, and how it would be obtained; Change 18
+Change 17 is withdrawn as a manuscript change: the input/output tables are kept
+in the separate document `notes/empirical_analytics.tex`; Change 18
 states what an impression is mathematically; Change 19 adds a worked numeric
 example to Setup. The Table 1 redesign remains parked.
 
@@ -1166,134 +1166,45 @@ remaining partial. That sentence and this paragraph are the two halves of one
 point -- sequence can silence a group gap and sequence can create one -- and
 could be brought together when lines 93--107 are next revised.
 
-## Change 17 -- Setup: tables of inputs and outputs (insert at end of Section 2, after Assumption 4)
+## Change 17 -- WITHDRAWN as a manuscript change: the input/output tables live in `notes/empirical_analytics.tex`
 
-**Purpose.** The paper uses no data, but an empirical reader needs to know what
-each symbol stands for and whether it can be observed. Two tables list every
-mathematical input and output with its type (discrete variable, probability,
-real number), the real-world property it represents, and how it would be
-obtained. Three clarifications are built in: the prior $P$ is a belief about
-traits and involves no outcome; an impression $q$ is a probability distribution
-on one attribute that replaces the prior marginal, not a likelihood or a score;
-and the desirability vector is a payoff, not a probability, which may embed the
+**Decision (author, 2026-09-21).** The manuscript does not need the whole
+table. The two tables (inputs; outputs), each row giving the symbol, its
+mathematical type, the real-world property it represents and how an observer
+would obtain it, are maintained as a separate standalone document,
+`notes/empirical_analytics.tex`. The author will paste rows or whole tables
+into the manuscript later if wanted. Nothing in this change is to be applied to
+`PAPER_B_MANUSCRIPT.tex` as it stands.
+
+**What the file contains.** A self-contained `article` document (compiles with
+`pdflatex`, no errors, no overfull boxes, three pages) that defines the
+manuscript's own macros (`\PB`, `\PJ`, `\Pbar`, `\assoc`, `\sgn`, `\bigO`,
+`\vv`), so the table bodies paste into the manuscript unchanged. Results are
+named in words there ("Proposition ADJ", "Sections 4 and 5"); the file's header
+comment lists the `\ref` replacements to make when pasting. Three
+clarifications are built into the rows: the prior $P$ is a belief about traits
+and involves no outcome; an impression $q$ is a probability distribution on one
+attribute that replaces the prior marginal, not a likelihood or a score; and
+the desirability vector is a payoff, not a probability, which may embed the
 chance that a candidate of given traits succeeds but is never updated by a cue.
-The last column separates what is elicited, what is recorded, and what is only
-computed ($\PB$, the gap, $u$, $L(c)$), which is the paper's own point about
-what an observer can read.
 
-**Location.** End of Section 2 (label sec:assumptions), after the last
-assumption and before the Related literature section. Introduce with one
-sentence:
+**Dependencies if rows are pasted.** The $\omega$ row and the mentions of
+Propositions ORD and ADJ presuppose Change 6.
 
-```latex
-Tables~\ref{tab:inputs} and~\ref{tab:outputs} list every input and output of
-the model with its mathematical type, what it represents, and how an observer
-would obtain it.
-```
-
-**INSERT:**
-
-```latex
-\begin{table}[htbp]
-\centering
-\footnotesize
-\caption{Inputs of the model, their mathematical type, and what each represents.
-The attributes are discrete; every belief about them is described by continuous
-parameters.}\label{tab:inputs}
-\begin{tabular}{@{}p{2.5cm}p{3.3cm}p{5.0cm}p{3.4cm}@{}}
-\toprule
-\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how}\\
-\midrule
-$A,B\in\{0,1\}$ & discrete variables & whether the candidate is competent ($A{=}1$) and trustworthy ($B{=}1$) & never observed; the objects of belief\\
-\addlinespace
-$P=(P_{ij})$ & probability mass function on the four pairs $(i,j)$ & the evaluator's belief, before any cue, about which traits a randomly drawn candidate has; no outcome is involved & elicited before the file is opened\\
-\addlinespace
-$\alpha$, $\beta$ & probabilities in $(0,1)$; $(\alpha,1-\alpha)$ is the $A$-marginal of $P$, $(\beta,1-\beta)$ its $B$-marginal & the believed base rate of candidates who \emph{lack} competence, $\alpha=P(A{=}0)$, and who lack trustworthiness, $\beta=P(B{=}0)$ & one base-rate question per trait\\
-\addlinespace
-$c=\assoc(P)$ & real number within the Fr\'echet--Hoeffding bounds; $c=0$ is independence & how strongly the evaluator believes, before any cue, that the two traits go together & a joint question before the cues\\
-\addlinespace
-$q=(q_0,q_1)$ & probabilities, $q_0+q_1=1$, $0<q_0<1$; replaces the $A$-marginal $(\alpha,1-\alpha)$ & the credence that the candidate is not competent ($q_0$) or competent ($q_1$) after the credential alone & a rating of competence, on a probability scale, after the credential alone\\
-\addlinespace
-$r=(r_0,r_1)$ & probabilities, $r_0+r_1=1$, $0<r_0<1$; replaces the $B$-marginal $(\beta,1-\beta)$ & the credence that the candidate is not trustworthy ($r_0$) or trustworthy ($r_1$) after the letter alone & a rating of trustworthiness after the letter alone\\
-\addlinespace
-$\sigma\in\{AB,BA\}$ & discrete label & which of the two documents the evaluator read first & recorded, or assigned by the experimenter\\
-\addlinespace
-$\lambda$ & fraction in $[0,1]$ & the share of evaluators who read the credential first & counted where $\sigma$ is recorded; unknown in a pooled audit\\
-\addlinespace
-$\vv=(v_{ij})$ & four real numbers, not probabilities & what a candidate of each trait combination is worth to the evaluator; known to the evaluator and never updated by a cue. It may embed the chance that such a candidate succeeds, which the model does not separate out & stated payoffs, or inferred from choices\\
-\addlinespace
-$\tau$ & real number & the value of the outside option forgone by engaging & as for $\vv$; enters only through $u$\\
-\addlinespace
-$u=s(\PB)-\tau$, density $f$ & real number for each evaluator; the one input that enters as a distribution across evaluators & how far an evaluator is from indifference at the benchmark belief; $f(0)$ is the density of evaluators at the margin & not observed directly, since it depends on $\PB$\\
-\addlinespace
-$\varepsilon$ & positive real number & the resolution of the observer's instrument & set by the study design and the sample\\
-\addlinespace
-$\omega$ & weight in $[0,1]$ & how far the later impression displaces what the earlier cue implied about its attribute; $\omega=1$ in Sections~\ref{sec:individual} and~\ref{sec:aggregation} & $\omega=\dfrac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}$: of the distance between the trustworthiness rating after the credential alone and the rating the letter delivers, the share that the final rating travels; requires $P^{A}(B{=}1)\neq r_1$ (Proposition~\ref{prop:ADJ})\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[htbp]
-\centering
-\footnotesize
-\caption{Outputs of the model, their mathematical type, and what each represents.}\label{tab:outputs}
-\begin{tabular}{@{}p{2.9cm}p{3.0cm}p{4.9cm}p{3.4cm}@{}}
-\toprule
-\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how}\\
-\midrule
-$\PJ_{AB}$, $\PJ_{BA}$ & probability mass functions on the four pairs & the evaluator's belief about the candidate after both documents, in the given reading sequence & elicited after both cues, by reading group\\
-\addlinespace
-$\PJ_\sigma(A{=}1)$, $\PJ_\sigma(B{=}1)$ & probabilities & the final rating of competence and of trustworthiness & one single-trait question after the cues\\
-\addlinespace
-$\assoc(\PJ_\sigma)$; odds ratio, Yule's $Q$ & real numbers & how strongly the traits are believed to go together after the cues, which is what a belief audit about traits going together measures & a joint question after the cues\\
-\addlinespace
-$\PJ_{AB}-\PJ_{BA}$ & signed $2\times2$ array summing to zero & the difference between two otherwise identical panels who read the file in opposite sequences & the two reading groups compared; needs neither $\PB$ nor $\lambda$ (Proposition~\ref{prop:ORD})\\
-\addlinespace
-$\PB$ & probability mass function & the belief the same evaluator would hold had the same two impressions been combined as Bayes factors & never observed; computed from $P$, $q$, $r$\\
-\addlinespace
-$\PJ_\sigma-\PB$ & signed $2\times2$ array & the evaluator's departure from the sequence-free belief & computed; needs $\PB$\\
-\addlinespace
-$\Pbar_\lambda$ & probability mass function & the average belief in a population that pools both reading sequences & a pooled survey\\
-\addlinespace
-$F(\Pbar_\lambda)-F(\PB)$ & real number; protected if $\bigO(c^{2})$, unprotected if first order & what a pooled audit reading the statistic $F$ reports, relative to the benchmark & a pooled survey together with the computed $\PB$\\
-\addlinespace
-$s(P)=\langle\vv,P\rangle$; engage iff $s(P)\ge\tau$ & real number; binary decision & the expected value of engaging, and the decision to engage or not & the decision is observed, the score is not\\
-\addlinespace
-$\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ and its population mean & binary indicator, a step function of $c$; its mean is a share in $[0,1]$ & whether the reading sequence changed an evaluator's decision, and the share of evaluators for whom it did & decisions compared across reading groups\\
-\addlinespace
-$L(c)$ & nonnegative real number & the value forgone through decisions that the reading sequence changed & computed; needs $u$ and hence $\PB$\\
-\addlinespace
-$\kappa$, $\kappa'$, $K$, $R_1$, $R_2$, $\delta_\sigma$, $M_\lambda$ & real coefficients and $2\times2$ directions & none of their own: functions of $\alpha,\beta,q,r,\vv$ that fix the size and direction of the first-order effects above & computed\\
-\bottomrule
-\end{tabular}
-\end{table}
-```
-
-**Dependencies.** The $\omega$ row and the references to
-Propositions~\ref{prop:ORD} and~\ref{prop:ADJ} require Change 6. If Change 17 is
-applied before Change 6, drop the $\omega$ row and the ORD reference. The new
-tables are numbered before the existing summary table, whose number shifts.
-
-**Verification status.** The tables assert no new mathematics except the
-$\omega$ row, which solves the first display of Proposition ADJ for $\omega$:
-$\omega=[P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)]/[P^{A}(B{=}1)-r_1]$, exact in
-$c$. Checked in sympy/check_zero_slope_identification.py case (7) (25/25):
-both the $AB$ form and its $BA$ mirror, the denominator equal to $r_0-\beta$ at
-$c=0$ and nonzero generically, and the $c=0$ alternative
-$\omega=1-[\text{sequence effect on }A]/(\alpha-q_0)$. The identity solved is
-dampedB_deviation in lean/JeffreyOrder/Anchoring.lean. Every interpretation in
-the "Represents" column is the manuscript's own wording (Setup, Section 2.2,
-Section 5 opener, Table 1). Test-compiled against the manuscript preamble: no
-errors, each table fits one page. The formula needs an intermediate rating (a
-step-by-step design); from end ratings alone the $c=0$ form is the one
-available. The formula is claimed in Proposition ADJ (Change 6, closing
-sentence, added 2026-09-21), so the $\omega$ row cites a stated result.
+**Verification status.** The only mathematics the tables assert is the $\omega$
+row, $\omega=[P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)]/[P^{A}(B{=}1)-r_1]$, exact
+in $c$: `sympy/check_zero_slope_identification.py` case (7) (25/25), the
+identity solved being `dampedB_deviation` in
+`lean/JeffreyOrder/Anchoring.lean`. The formula is claimed in Proposition ADJ
+(Change 6, closing sentence, added 2026-09-21), so the row cites a stated
+result. Every "Represents" entry is the manuscript's own wording (Setup,
+Section 2.2, Section 5 opener, Table 1).
 
 **Two inconsistencies noticed while building the tables (author to decide).**
 Table 1 says "share of *candidates* whose decision the reading sequence
-changed" while the text and Proposition SHR say *evaluators*; the new tables
-use evaluators. The model holds $P$, $q$ and $r$ common across evaluators,
-with heterogeneity only through $u$ and $\delta_\sigma$; Section 6 names
+changed" while the text and Proposition SHR say *evaluators*; the tables use
+evaluators. The model holds $P$, $q$ and $r$ common across evaluators, with
+heterogeneity only through $u$ and $\delta_\sigma$; Section 6 names
 heterogeneous $c$ as out of scope and could name heterogeneous impressions
 with it.
 
