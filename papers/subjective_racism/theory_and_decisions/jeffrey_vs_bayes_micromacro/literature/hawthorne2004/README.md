@@ -115,3 +115,30 @@ without any single global consistency ratio -- only block-by-block consistency. 
 Paper B's discussion of scope (Section on relaxing assumptions) ever extends to $N>2$
 attributes, this is the relevant reference for what replaces the single prior-covariance
 condition $c=0$.
+
+## The scope disclaimer (p. 115, Section 10 "Conclusion") -- read 2026-09-22
+
+Verbatim, from the PDF (Drive: `Three_Models_of_Sequential_Belief_Updating_on_Unce.pdf`):
+
+> Which extension of Basic Jeffrey Updating is the more plausible model of human
+> agents? I'm a logician, not a psychologist. But Amnestic Updating seems
+> psychologically less plausible than the more Bayesian approaches, not because it
+> is un-Bayesian, but because it seems unlikely that we dismiss previous
+> experiences so completely. However, I am mainly interested in whether these
+> models capture useful normative conceptions of belief updating, and whether they
+> might find useful employment in automated reasoning systems.
+
+Four moves in three sentences: he poses the descriptive question, disclaims the
+standing to answer it, answers it anyway by intuition, and then rules it out of
+scope in favour of normative properties. This is the passage Paper B uses in
+Section 3 (plan Change 12, added paragraph) to say that the full-adoption
+premise is contested on psychological grounds and left unsettled, which is why
+the paper carries the degree of adoption as a weight rather than taking a side.
+
+Related passages already on record here: the objection proper at pp. 98--99
+("it seems implausible that the most recent experience ... should completely
+dictate belief strengths for basis sentences, with no regard for the import of
+previous experiences or states"); the car-in-dim-light version at p. 97 ("This
+seems highly implausible"); and the concession at p. 99 that "there may be some
+specialized systems for which this model is appropriate" -- so the premise is
+contested for human agents, not refuted.

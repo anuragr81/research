@@ -845,7 +845,25 @@ his taxonomy, and the identification questions this paper raises are the ones
 that the first end brings with it and the second end does not, since revisions
 at the second end commute. (What Section~\ref{sec:jeffrey} calls a Bayes
 factor is his normed-likelihood factor; on a two-element basis the two induce the
-same revision.) Two responses to the resulting order-dependence have been made. One treats it as a
+same revision.)
+
+The premise the paper adopts is disputed on psychological grounds, while the
+ground on which the paper adopts it is information-theoretic: Jeffrey's rule
+enters as the revision that moves the prior least in $I$-divergence while
+taking on the delivered credence \citep{DiaconisZabell1982}. The dispute is
+left open by the author who raises it. \citet[p.~115]{Hawthorne2004} puts the
+question and declines it: ``Which extension of Basic Jeffrey Updating is the
+more plausible model of human agents? I'm a logician, not a psychologist.'' He
+judges amnestic updating less plausible than the factor-based extensions,
+``because it seems unlikely that we dismiss previous experiences so
+completely'', and turns to the normative properties of the competing models,
+where his interest lies. An objection of that form is a reason to measure the
+degree of adoption, not a reason to discard amnestic updating. With two cues
+that degree has exactly two ends, the impression read last prevailing and the
+impression read first prevailing, and Proposition~\ref{prop:ADJ} reads it
+between them from the two marginals.
+
+Two responses to the resulting order-dependence have been made. One treats it as a
 defect of the framework: \citet{Doring1999} argues that the order effect can be
 pronounced enough to call for an adjustment that Jeffrey's rule cannot supply.
 The other re-describes the input so that the effect disappears.
@@ -949,6 +967,26 @@ parenthetical terminological note is needed because the manuscript's "Bayes
 factor" is his normed-likelihood factor, while his likelihood-ratio factor is the
 ratio of two of those; the distinction does not affect any result here, since on
 a two-element basis both give posterior `q` on a single cue (Proposition IMM).
+
+**Verification status (added paragraph, 2026-09-22).** The three quotations are
+verbatim from the PDF (Drive: `Three_Models_of_Sequential_Belief_Updating_on_Unce.pdf`,
+read 2026-09-22): ``Which extension of Basic Jeffrey Updating is the more
+plausible model of human agents? I'm a logician, not a psychologist.'' and
+``because it seems unlikely that we dismiss previous experiences so
+completely'' are both p.~115, in his Section 10 (Conclusion); the sentence that
+follows there states his own interest as the normative properties of the models
+and their use in automated reasoning systems. The second quotation drops ``not
+because it is un-Bayesian, but'' before ``because'', which removes a contrast
+with a different objection and leaves his stated reason unchanged. His
+objection proper is pp.~98--99, and he allows at p.~99 that ``there may be some
+specialized systems for which this model is appropriate'', so he contests the
+premise for human agents rather than refuting it. The $I$-divergence clause is
+Diaconis--Zabell, already cited at manuscript line 194. The closing sentence is
+Proposition ADJ (Change 6), whose own note lists the Lean theorems and sympy
+cases; ``exactly two ends'' is the two-cue setting of Assumption~\ref{as:local}
+and is not claimed for longer sequences, where Hogarth--Einhorn's primacy comes
+from weights decaying across many cues. The paragraph is self-standing: it
+presupposes Change 6 for the reference to Proposition ADJ, and nothing else.
 
 **Verification status.** All five papers read in full and formalized in
 `literature/`; the characterisations above (D\"oring's "cannot be understood as
