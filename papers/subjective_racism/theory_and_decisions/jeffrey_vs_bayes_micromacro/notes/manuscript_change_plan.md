@@ -7,7 +7,7 @@ to the current manuscript (1231 lines).
 This plan supersedes `notes/two_horn_motivation_body.tex` and
 `notes/question_and_answer.tex` (two-horn -> Change 4; question/answer ->
 Changes 1, 2, 3, 5, 6). Those two files are drafting history and should not be
-edited further; anything destined for the manuscript belongs in a Change here. New citation key: `Hawthorne2004` (entry in Change 7).
+edited further; anything destined for the manuscript belongs in a Change here. All new bibliography entries are collected in Change 7 and nowhere else.
 
 ## What the edits achieve
 
@@ -573,12 +573,23 @@ decrement" is Anderson (1981), reported by them as a rival.
 
 ---
 
-## Change 7 -- bibliography.bib
+## Change 7 -- bibliography.bib (the only bibliography change)
 
-Required: `Hawthorne2004` (Change 2), `Heckman1998` (Change 9), `Doring1999`
-and `Garber1980` (Change 12), and `Bohren2019` (Change 13) -- the last three
-carry their bibtex in their own sections. Zhao-Osherson is not cited anywhere in the change set (author's
-decision; review log Entry 15).
+All five new entries are here. No other change adds a bibliography entry; the
+others state only which key they need.
+
+| Key | Needed by |
+| --- | --- |
+| `Hawthorne2004` | Changes 2, 4, 11, 12 |
+| `Heckman1998` | Change 9 |
+| `Doring1999` | Change 12 |
+| `Garber1980` | Change 12 |
+| `Bohren2019` | Changes 13, 16 |
+
+Already present in `bibliography.bib`, so nothing to add: `DiaconisZabell1982`,
+`Field1978`, `Wagner2002`, `Asch1946`, `HogarthEinhorn1992`, `Phelps1972`,
+`Arrow1973`, `Jeffrey1983`, `Domotor1980`. Zhao-Osherson is not cited anywhere
+in the change set (author's decision; review log Entry 15).
 
 ```bibtex
 @article{Heckman1998,
@@ -601,6 +612,35 @@ decision; review log Entry 15).
   pages   = {89--123}
 }
 
+@article{Doring1999,
+  author  = {D\"oring, Frank},
+  title   = {Why {B}ayesian Psychology Is Incomplete},
+  journal = {Philosophy of Science},
+  year    = {1999},
+  volume  = {66},
+  number  = {Supplement},
+  pages   = {S379--S389}
+}
+
+@article{Garber1980,
+  author  = {Garber, Daniel},
+  title   = {Field and {J}effrey Conditionalization},
+  journal = {Philosophy of Science},
+  year    = {1980},
+  volume  = {47},
+  number  = {1},
+  pages   = {142--145}
+}
+
+@article{Bohren2019,
+  author  = {Bohren, J. Aislinn and Imas, Alex and Rosenberg, Michael},
+  title   = {The Dynamics of Discrimination: Theory and Evidence},
+  journal = {American Economic Review},
+  year    = {2019},
+  volume  = {109},
+  number  = {10},
+  pages   = {3395--3436}
+}
 ```
 
 ---
@@ -725,8 +765,7 @@ prior association as well, which he does not.
 
 **Note.** This supersedes the de-duplication entry recording that the
 Hogarth-Einhorn discussion was reduced to one clause; the passage now carries
-Asch as evidence rather than as a bare citation. `Asch1946` and
-`HogarthEinhorn1992` are already in the bibliography, so Change 7 is unaffected.
+Asch as evidence rather than as a bare citation. `Asch1946` and `HogarthEinhorn1992` are already in the bibliography.
 
 **Verification status.** Experiment VI, Table 7 and Table 8 read directly from the
 scan; the percentages above are transcribed from Table 7. Asch's own explanation
@@ -803,8 +842,7 @@ marginals rather than assumed.
 the odds-ratio sentence is the manuscript's own remark after Lemma SEP (lines
 625--627), extended to the damped routes because they are Jeffrey steps.
 Garber removed from the illustration clause: his repeated-glances example
-targets Field's portable factors and never discusses order. Citations
-already in the bibliography; no Change 7 impact. A bounded-memory citation
+targets Field's portable factors and never discusses order. A bounded-memory citation
 (Wilson 2014, Econometrica) is available if a referee asks for one, but the
 family is stated through Hogarth-Einhorn's own equation, which is already cited.
 
@@ -911,31 +949,7 @@ at least since \citet{Asch1946}, and in economics has been taken up chiefly
 through the observational learning literature.
 ```
 
-**Bibliography.** `Doring1999` and `Garber1980` are **not** currently in
-`bibliography.bib` and must be added (Change 7 already adds `Hawthorne2004`;
-`DiaconisZabell1982`, `Field1978` and `Wagner2002` are present):
-
-```bibtex
-@article{Doring1999,
-  author  = {D\"oring, Frank},
-  title   = {Why {B}ayesian Psychology Is Incomplete},
-  journal = {Philosophy of Science},
-  year    = {1999},
-  volume  = {66},
-  number  = {Supplement},
-  pages   = {S379--S389}
-}
-
-@article{Garber1980,
-  author  = {Garber, Daniel},
-  title   = {Field and {J}effrey Conditionalization},
-  journal = {Philosophy of Science},
-  year    = {1980},
-  volume  = {47},
-  number  = {1},
-  pages   = {142--145}
-}
-```
+**Bibliography.** Needs `Doring1999` and `Garber1980` (both in Change 7).
 
 **Note on overlap with Change 2.** Both mention Diaconis-Zabell and Hawthorne.
 This is deliberate and not duplication: the introduction states the *question*
@@ -1038,19 +1052,7 @@ in the impression it passes through untouched, and their framework has no
 parameter for the latter.
 ```
 
-**Bibliography.** `Bohren2019` must be added:
-
-```bibtex
-@article{Bohren2019,
-  author  = {Bohren, J. Aislinn and Imas, Alex and Rosenberg, Michael},
-  title   = {The Dynamics of Discrimination: Theory and Evidence},
-  journal = {American Economic Review},
-  year    = {2019},
-  volume  = {109},
-  number  = {10},
-  pages   = {3395--3436}
-}
-```
+**Bibliography.** Needs `Bohren2019` (in Change 7).
 
 **Also adjust**, in the same section, the claim that economics took up
 sequence-dependence "chiefly through the observational learning literature"
