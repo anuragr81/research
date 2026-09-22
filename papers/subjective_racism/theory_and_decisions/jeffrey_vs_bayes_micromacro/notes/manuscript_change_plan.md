@@ -860,8 +860,9 @@ completely'', and turns to the normative properties of the competing models,
 where his interest lies. An objection of that form is a reason to measure the
 degree of adoption, not a reason to discard amnestic updating. With two cues
 that degree has exactly two ends, the impression read last prevailing and the
-impression read first prevailing, and Proposition~\ref{prop:ADJ} reads it
-between them from the two marginals.
+impression read first prevailing, and Proposition~\ref{prop:ADJ} recovers
+where between those ends an evaluator sits, from the rating of one trait read
+before and after the second cue and against what that cue delivers.
 
 Two responses to the resulting order-dependence have been made. One treats it as a
 defect of the framework: \citet{Doring1999} argues that the order effect can be
@@ -983,7 +984,12 @@ specialized systems for which this model is appropriate'', so he contests the
 premise for human agents rather than refuting it. The $I$-divergence clause is
 Diaconis--Zabell, already cited at manuscript line 194. The closing sentence is
 Proposition ADJ (Change 6), whose own note lists the Lean theorems and sympy
-cases; ``exactly two ends'' is the two-cue setting of Assumption~\ref{as:local}
+cases. The closing clause states what the recovery formula uses: three
+readings of one marginal (after the first cue, after both, and as the second
+cue delivers it), not the two marginals, which identify the endpoints only --
+corrected 2026-09-22 after an audit; the looser phrase ``from the two
+marginals'' in Changes 4 and 11 is followed there by the detail that makes it
+exact. ``Exactly two ends'' is the two-cue setting of Assumption~\ref{as:local}
 and is not claimed for longer sequences, where Hogarth--Einhorn's primacy comes
 from weights decaying across many cues. The paragraph is self-standing: it
 presupposes Change 6 for the reference to Proposition ADJ, and nothing else.
