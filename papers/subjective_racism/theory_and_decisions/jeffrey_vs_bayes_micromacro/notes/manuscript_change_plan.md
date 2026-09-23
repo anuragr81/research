@@ -1,48 +1,84 @@
 # Manuscript change plan (v2): two-horn motivation + question/answer, compacted
 
 Before -> after report for `PAPER_B_MANUSCRIPT.tex`. **No changes have been made
-to the manuscript.** Every AFTER block is paste-ready LaTeX. Line numbers refer
-to the current manuscript (1231 lines).
+to the manuscript.** Every AFTER block is paste-ready LaTeX. Line numbers in the headings are
+from the original plan and are stale; locate each edit by its BEFORE text.
 
 This plan supersedes `notes/two_horn_motivation_body.tex` and
-`notes/question_and_answer.tex` (two-horn -> Change 4; question/answer ->
-Changes 1, 2, 3, 5, 6). Those two files are drafting history and should not be
-edited further; anything destined for the manuscript belongs in a Change here. All new bibliography entries are collected in Change 7 and nowhere else.
+`notes/question_and_answer.tex` (two-horn -> 1.D; question/answer ->
+0.A, 1.A, 1.B, 1.E, 5.B). Those two files are drafting history and should not be
+edited further; anything destined for the manuscript belongs in a Change here. All new bibliography entries are collected in B.A and nowhere else.
+
+**Numbering.** Changes are labelled by manuscript section and listed in the
+order they appear in the manuscript: 0 is the abstract, 1--6 are the numbered
+sections, B is the back matter (bibliography, declaration), W is withdrawn.
+Within a section the letters run in order of appearance. The former change
+number is kept in each heading for reference to earlier commits and notes.
+
+**Order of application.** 5.B (Propositions ORD and ADJ) must be applied
+before anything that cites them: 0.A, 1.C, 1.D, 1.E, 3.A, 3.B, 3.D, 5.A, 6.A.
+B.A (bibliography) must be applied before 1.A, 1.C, 1.D, 3.A, 3.B, 3.C, 3.D,
+6.A. Everything else is independent.
+
+## Contents
+
+- 0.A -- Abstract
+- 1.A -- Introduction, paragraph 1
+- 1.B -- Introduction, end of the hiring-panel paragraph (superseded)
+- 1.C -- Introduction, new paragraph after the hiring-panel paragraph
+- 1.D -- Introduction, the limits paragraph
+- 1.E -- Introduction, the two-steps paragraph
+- 2.A -- Setup 2.1, what an impression is
+- 2.B -- Setup 2.2, worked example
+- 2.C -- Setup 2.3, Assumption 2
+- 3.A -- Related literature, opening paragraph
+- 3.B -- Related literature, Asch
+- 3.C -- Related literature, Heckman
+- 3.D -- Related literature, Bohren--Imas--Rosenberg
+- 4.A -- Section 4, title and opening
+- 5.A -- Section 5, title and opening
+- 5.B -- Section 5, Propositions ORD and ADJ
+- 6.A -- Scope, rival mechanisms
+- B.A -- Bibliography
+- B.B -- AI declaration
+- W.A -- Withdrawn: input/output tables
+
+---
 
 ## What the edits achieve
 
-1. **Changes 1-3 put the right question at the front.** The literature answered
+1. **0.A, 1.A and 1.B put the right question at the front.** The literature answered
    when two Jeffrey updates commute. The paper answers which measurable
    summaries of the belief show the difference when they do not. The intro
    currently frames the gap as one about aggregation, which the paper itself
    proves is inert. These changes replace that framing.
-2. **Change 4 justifies the modelling premise in one place.** A cue can be read
+2. **1.D justifies the modelling premise in one place.** A cue can be read
    as a level or as a Bayes factor. An evaluator can report a level. A Bayes
    factor needs a counterfactual likelihood an impression does not supply. So
    impressions deliver levels, Jeffrey updating is how a level is coherently
    adopted, and the benchmark is the same cue under the other reading. The
-   order effect is the difference between the two readings. Change 4 also
+   order effect is the difference between the two readings. 1.D also
    states the second premise, full adoption, and names the adoption weight
    $\omega$, which Proposition ADJ recovers from the marginals.
-3. **Changes 5-6 state the answer together with its instrument.** Marginals and
+3. **1.E and 5.B state the answer together with its instrument.** Marginals and
    the share of decisions changed show the sequence effect at first order. The
    association and the surplus-weighted loss do not.
    The test is a comparison of the two reading groups with each other. It needs
    neither the benchmark nor the sequence mix. Proposition ORD is that
    statement.
 
-Changes 14--15 retitle Sections 4 and 5 and re-open them on the statistic
+4.A and 5.A retitle Sections 4 and 5 and re-open them on the statistic
 rather than the level of aggregation (cap of thirteen lifted 2026-09-20).
-Change 16 adds one motivating paragraph to the introduction: a sequence that
+1.C adds one motivating paragraph to the introduction: a sequence that
 is assigned systematically by group produces a group gap from sequence alone.
-Change 17 is withdrawn as a manuscript change: the input/output tables are kept
-in the separate document `notes/empirical_analytics.tex`; Change 18
-states what an impression is mathematically; Change 19 adds a worked numeric
+W.A is withdrawn as a manuscript change: the input/output tables are kept
+in the separate document `notes/empirical_analytics.tex`; 2.A/2.C
+states what an impression is mathematically; 2.B adds a worked numeric
 example to Setup. The Table 1 redesign remains parked.
 
 ---
 
-## Change 1 -- Abstract (line 61): middle sentences
+## 0.A -- Abstract (line 61): middle sentences (formerly Change 1)
 
 **Purpose.** The current sentence "an arbitrary statistic is an order of
 magnitude closer to the benchmark" is false as stated. Only protected
@@ -83,7 +119,7 @@ prior association and from the size of the sequence effect at independence.
 
 ---
 
-## Change 2 -- Intro paragraph 1 (line 74): full replacement
+## 1.A -- Intro paragraph 1 (line 74): full replacement (formerly Change 2)
 
 **Purpose.** Replace the aggregation framing of the gap with the correct
 contrast. The commutation literature answers a binary question, equality of the
@@ -155,7 +191,7 @@ holds for any number of attributes and cues.
 
 ---
 
-## Change 3 -- Intro paragraph 2 (lines 76-79): final two sentences only
+## 1.B -- Intro paragraph 2 (lines 76-79): final two sentences only (formerly Change 3)
 
 **SUPERSEDED (author, 2026-09-21).** While compacting the introduction the
 author replaced the same two sentences ("Whether arrival sequence matters or
@@ -173,7 +209,7 @@ traits are believed unrelated.
 ```
 
 All three claims are Proposition ADJ (the two endpoints; the value
-$(1-\omega)(\alpha-q_0)$ at $c=0$), so the sentence presupposes Change 6. The
+$(1-\omega)(\alpha-q_0)$ at $c=0$), so the sentence presupposes 5.B. The
 last clause holds generically and fails only at $q_0=\alpha$, where the
 credential delivers the base rate already held. The BEFORE/AFTER below is kept
 for the record and is not to be applied.
@@ -199,10 +235,78 @@ population average inherits whatever the two sequences already fixed.
 
 ---
 
-## Change 4 -- Intro paragraph 3 (line 81): full replacement (compacted two-horn)
+## 1.C -- Introduction: why the sequence matters beyond one judgment (insert after line 113) (formerly Change 16)
+
+**Purpose.** Motivation only; no new assumption, no new result, no new source.
+The panel example shows that sequence moves one judgment. This paragraph says
+why that matters in general: the sequence need not be assigned by chance, and
+if the share $\lambda$ of evaluators reading the credential first differs by
+group, the groups receive different mean beliefs with priors, preferences and
+evidence held the same. The paragraph is direction-neutral on first versus
+last (at $\omega=1$ the later impression prevails, at $\omega=0$ the earlier),
+hands that question to Proposition ADJ, and ends on the paper's existing
+classification.
+
+**Location.** New paragraph after the panel paragraph ending "...rather than
+the means of aggregation." (line 113; that sentence is itself edited by
+1.B), before "Our conclusions for arrival sequence do not apply...".
+
+**INSERT:**
+
+```latex
+Which impression prevails matters beyond the single judgment. The
+impression-formation literature disagrees on the direction: \citet{Asch1946}
+reports that early terms dominate, and \citet{HogarthEinhorn1992} find primacy,
+recency or no order effect, depending on the characteristics of the task.
+Under either direction the sequence in which cues arrive is not neutral, and it
+need not be assigned by chance. A candidate who comes through a referral is met
+first through the letter and then through the credential, while a candidate
+who applies unsolicited is met first through the credential. If referral is
+more common in one group than in another, the two groups differ in the share
+$\lambda$ of evaluators who read the credential first. Two groups presenting
+the same evidence to evaluators with the same priors and the same preferences
+then receive different mean beliefs, and the difference is the sequence effect
+multiplied by the difference in their shares. A gap of that kind is not
+statistical discrimination in the sense of \citet{Phelps1972} and
+\citet{Arrow1973}, which rests on a difference in beliefs about the groups, and
+it has none of the sources that \citet{Bohren2019} distinguish, since
+preferences do not differ either; it arises from a difference in sequence
+alone. Which group it favours depends on whether the later or the earlier
+impression prevails, which Proposition~\ref{prop:ADJ} reads from the
+marginals. The gap also inherits the classification of this paper: it appears
+in the marginal probabilities and in the share of decisions changed, and an
+audit of the believed association does not register it.
+```
+
+**Verification status.** "The difference is the sequence effect multiplied by
+the difference in their shares" is the exact identity
+$\Pbar_\lambda-\Pbar_{\lambda'}=(\lambda-\lambda')(\PJ_{AB}-\PJ_{BA})$, checked
+entrywise at all orders in $c$ in `sympy/verify_ORD.py` step (9) (25/25),
+together with the first-order group gap on the $A$-marginal,
+$(\lambda-\lambda')\kappa'$, and the second-order group gap on the association.
+No proposition is stated, so no informal proof is owed; if the identity is ever
+displayed it belongs in a remark after Proposition ORD. The last two sentences
+are Propositions ADJ and ORD. The Hogarth--Einhorn clause is their abstract
+("under what conditions do primacy, recency, or no order effects occur ...
+interaction of information-processing strategies and task characteristics"),
+checked against the text (Drive: `hogarth_einhorn_1992.pdf`); the Asch clause
+is his "direction" account, as recorded under 3.B. The referral example
+is a conditional built from the paper's own two cues, not an empirical claim.
+`Bohren2019` enters the bibliography through 3.D, so this change must not
+be applied without it. Empirical anchors (Bertrand--Mullainathan 2004;
+Barto\v{s} et al. 2016) were considered and deliberately left out: neither has
+been read, and the paragraph does not need them.
+
+**Relation to the existing intro.** Manuscript line 102 already says that an
+evaluator who reads the quality cue last shows no gap between groups while
+remaining partial. That sentence and this paragraph are the two halves of one
+point -- sequence can silence a group gap and sequence can create one -- and
+could be brought together when lines 93--107 are next revised.
+
+## 1.D -- Intro paragraph 3 (line 81): full replacement (compacted two-horn) (formerly Change 4)
 
 **Overlap to resolve when applying (2026-09-21).** The sentence that now closes
-the hiring-panel paragraph (see Change 3) already introduces the weight
+the hiring-panel paragraph (see 1.B) already introduces the weight
 $\omega$ and its two endpoints. The appended paragraph below repeats the
 endpoints in its final sentence. When this change is applied, either drop that
 final sentence's endpoint clause or open the appended paragraph with "Call that
@@ -295,17 +399,17 @@ updating on levels rests on a second premise, full adoption (Hawthorne's
 Amnestic Update-Factor Thesis, p.~96), which licenses using the same `q` and
 `r` on both reading orders. The appended paragraph states it, attributes it
 (Diaconis--Zabell hold it; Hawthorne objects, pp.~98--99), names the weight
-$\omega$ with its two endpoints, and points to Proposition ADJ (Change 6) for
+$\omega$ with its two endpoints, and points to Proposition ADJ (5.B) for
 the identification. The $\omega=0$ endpoint is the paper's own construction:
 no source states "first impressions stick" as full protection of the first
 cue (Hogarth--Einhorn's primacy comes from decaying weights over long series).
 The Hogarth--Einhorn quotation is from their General Discussion, checked
-against the text (Drive: `hogarth_einhorn_1992.pdf`). Change 11 carries the
+against the text (Drive: `hogarth_einhorn_1992.pdf`). 6.A carries the
 rival-mechanism discussion.
 
 ---
 
-## Change 5 -- Intro "two steps" paragraph (line 86): full replacement
+## 1.E -- Intro "two steps" paragraph (line 86): full replacement (formerly Change 5)
 
 **Purpose.** Add the third element of the summary. The classification can be
 measured by comparing the two reading groups directly, with no benchmark and no
@@ -363,12 +467,561 @@ it.
 *Cut in counterfactual pass 3:* the closing sentence on mechanism
 identification ("the marginal that stays fixed ... sits on the attribute read
 last under overwriting, and on the attribute read first under a rule that
-protects the earlier impression") now lives in Change 4's appended paragraph,
+protects the earlier impression") now lives in 1.D's appended paragraph,
 one paragraph earlier, with the reference to Proposition ADJ.
 
 ---
 
-## Change 6 -- Section 5: new definition + Proposition ORD (insert after line 440)
+## 2.A -- Setup 2.1 (line 163): what an impression is (formerly Change 18)
+
+**Purpose.** The manuscript never says in one place that $q_0$ belongs to
+$A{=}0$, that $q_0+q_1=1$, or that an impression sits on the same scale as the
+prior marginal it replaces. The companion edit to Assumption 2 is 2.C.
+
+**BEFORE** (line 163, first sentence, middle):
+
+> a cue on $A$ yields an impression (a target marginal) $q=(q_{0},q_{1})$ on
+> $A$'s partition and a cue on $B$ yields an impression $r=(r_{0},r_{1})$ on
+> $B$'s partition---with no cue bearing on a joint event.
+
+**AFTER**:
+
+```latex
+a cue on $A$ yields an impression (a target marginal) $q=(q_{0},q_{1})$ on
+$A$'s partition, with $q_i$ the credence that $A=i$ and $q_0+q_1=1$, and a cue
+on $B$ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition, with $r_j$
+the credence that $B=j$ and $r_0+r_1=1$---with no cue bearing on a joint event.
+An impression is thus a probability distribution on one attribute, on the same
+scale as the prior marginal it replaces, $(\alpha,1-\alpha)$ for $q$ and
+$(\beta,1-\beta)$ for $r$.
+```
+
+**Verification status.** Notation only; nothing to verify.
+
+---
+
+## 2.B -- Setup: a worked numeric example (insert in Section 2.2, after the definition of the gap) (formerly Change 19)
+
+**Purpose.** The manuscript has no numeric illustration. One example shows, in
+numbers a reader can recompute by hand, the three facts the paper rests on: a
+cue about one attribute moves the other attribute's marginal when $c\neq0$; the
+marginal read last ends at its delivered credence while the marginal read
+first drifts; and the sequence effect is large on the marginals and negligible
+on the believed association. The parameters avoid $r_0=\beta$ and $q_0=\alpha$,
+at which the first-order drift coefficients $K$ and $\kappa$ vanish and the
+example would illustrate the wrong order.
+
+**Location.** Section 2.2 (label sec:jeffrey), after Definition (gap) and
+before the paragraph "The benchmark $\PB$ is not a rival updating rule...".
+The last sentence uses $\PB$, which that paragraph defines; if the forward use
+reads badly, move the example to the end of Section 2.2.
+
+**INSERT:**
+
+```latex
+\paragraph{A worked example.} Let $\alpha=\beta=\tfrac12$ and $c=\tfrac1{20}$,
+so the prior table is
+$P=\bigl(\begin{smallmatrix}.30&.20\\.20&.30\end{smallmatrix}\bigr)$: each
+trait is judged as likely absent as present, and the two are believed to go
+together. The credential delivers $q_0=\tfrac15$ and the letter
+$r_0=\tfrac7{10}$. After the credential alone the table is
+$\bigl(\begin{smallmatrix}.12&.08\\.32&.48\end{smallmatrix}\bigr)$. The
+$A$-marginal is $(.20,.80)$, as delivered, and the $B$-marginal has moved from
+$(.50,.50)$ to $(.44,.56)$ although no cue about $B$ has been read. Reading the
+letter next resets the $B$-marginal to $(.70,.30)$ and moves the $A$-marginal
+from $.20$ to $\PJ_{AB}(A{=}0)=.234$. In the reverse sequence the $A$-marginal
+ends at $.20$, as delivered, and the $B$-marginal at $\PJ_{BA}(B{=}0)=.643$ in
+place of $.70$. The benchmark gives $\PB(A{=}0)=.227$ and $\PB(B{=}0)=.647$.
+The sequence effect is therefore $.034$ on the $A$-marginal and $.057$ on the
+$B$-marginal. On the believed association it is $.0002$, since
+$\assoc(\PJ_{AB})=.0273$ and $\assoc(\PJ_{BA})=.0271$, smaller than either
+marginal effect by a factor above $150$. The odds ratio equals $9/4$ for the
+prior, for both sequences and for the benchmark. Against the benchmark,
+sequence $AB$ departs by $.053$ on the marginal read last, by $.007$ on the
+marginal read first, and by $.002$ on the association.
+```
+
+**Optional sentence, after Proposition ADJ (requires 5.B):**
+
+```latex
+In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the
+credential first rates trustworthiness at $.56$ before the letter, the letter
+alone delivers $.30$, and a final rating of $.43$ gives
+$\omega=(.56-.43)/(.56-.30)=\tfrac12$.
+```
+
+**Verification status.** Every number in both blocks is a line of
+sympy/verify_example.py (18/18; registered in run_all.py), computed in exact
+rationals and compared with the rounded value printed: the two tables, the
+moved $B$-marginal $11/25$, $\PJ_{AB}(A{=}0)=18/77$, $\PJ_{BA}(B{=}0)=133/207$,
+$\PB(A{=}0)=27/119$, $\PB(B{=}0)=11/17$, the three associations $3/110$,
+$28/1035$, $60/2023$, the three sequence effects, the three gaps from the
+benchmark, the ratio above 150, the common odds ratio $9/4$, and the
+$\omega=\tfrac12$ read-back. The gaps agree with the propositions: first order
+on the last-read marginal (DRF), second order on the first-read marginal (DRF)
+and on the association (ASC). No proposition is stated, so no informal proof is
+owed. With $c=\tfrac1{20}$ against a maximum of $\tfrac14$ the example is not
+in the small-$c$ limit; it illustrates the ordering of magnitudes, not the
+asymptotic rates.
+## 2.C -- Assumption 2 (line 235): soft means strictly between zero and one (formerly Change 18b)
+
+**Purpose.** State that ``soft'' means $0<q_0<1$ and $0<r_0<1$. Companion to the
+line-163 edit in 2.A.
+
+**BEFORE** (Assumption 2):
+
+> The cues are bundled, correlated, and soft, each delivering a credence on an
+> attribute's partition, not a decisive cue.
+
+**AFTER**:
+
+```latex
+The cues are bundled, correlated, and soft, each delivering a credence on an
+attribute's partition, not a decisive cue: $0<q_0<1$ and $0<r_0<1$.
+```
+
+**Verification status.** Notation only; nothing to verify. Every sympy script
+and Lean file already uses $q_1=1-q_0$, $r_1=1-r_0$ with $q_0,r_0\in(0,1)$.
+
+---
+
+## 3.A -- Related literature: open with the Jeffrey commutativity literature (formerly Change 12)
+
+**Purpose.** Section 3 currently opens on empirical psychology and observational
+learning, and never discusses the paper's closest neighbours -- the literature
+on whether, and when, probability kinematics commutes. That material sits in the
+introduction instead, and 1.A adds more of it there. A reader looking under
+"Related literature" for where the paper stands in the Jeffrey debate does not
+find it. This inserts a first paragraph covering that literature, so the section
+moves from nearest to most distant, and the introduction can state the question
+without also having to survey.
+
+**Location.** Section 3 (`sec:literature`), as a new opening paragraph
+immediately after `\label{sec:literature}` and before "While sequence-dependence
+has been of interest to empirical psychology...".
+
+**INSERT:**
+
+```latex
+The closest literature concerns the commutativity of probability kinematics
+itself. \citet{DiaconisZabell1982} give the condition under which two successive
+Jeffrey revisions lead to the same belief, and \citet{Hawthorne2004} names its
+full-adoption premise, which the present paper adopts, the Amnestic
+Update-Factor Thesis, crediting that criterion to them. His
+survey also fixes the vocabulary. Extensions of Jeffrey updating to sequences
+differ in what an experience is taken to deliver: new probabilities for its own
+basis directly, a multiplicative factor applied to the belief it meets, or a
+ratio between basis sentences that the prior does not constrain. The model used
+here sits at the first, where the impression delivers a credence and the most
+recent one fixes its attribute outright; the benchmark $\PB$ of
+Section~\ref{sec:jeffrey} has the form of the extended update formula built on
+the second. The comparison drawn throughout is therefore between the two ends of
+his taxonomy, and the identification questions this paper raises are the ones
+that the first end brings with it and the second end does not, since revisions
+at the second end commute. (What Section~\ref{sec:jeffrey} calls a Bayes
+factor is his normed-likelihood factor; on a two-element basis the two induce the
+same revision.)
+
+The premise the paper adopts is disputed on psychological grounds, while the
+ground on which the paper adopts it is information-theoretic: Jeffrey's rule
+enters as the revision that moves the prior least in $I$-divergence while
+taking on the delivered credence \citep{DiaconisZabell1982}. The dispute is
+left open by the author who raises it. \citet[p.~115]{Hawthorne2004} puts the
+question and declines it: ``Which extension of Basic Jeffrey Updating is the
+more plausible model of human agents? I'm a logician, not a psychologist.'' He
+judges amnestic updating less plausible than the factor-based extensions,
+``because it seems unlikely that we dismiss previous experiences so
+completely'', and turns to the normative properties of the competing models,
+where his interest lies. An objection of that form is a reason to measure the
+degree of adoption, not a reason to discard amnestic updating. With two cues
+that degree has exactly two ends, the impression read last prevailing and the
+impression read first prevailing, and Proposition~\ref{prop:ADJ} recovers
+where between those ends an evaluator sits, from the rating of one trait read
+before and after the second cue and against what that cue delivers.
+
+Two responses to the resulting order-dependence have been made. One treats it as a
+defect of the framework: \citet{Doring1999} argues that the order effect can be
+pronounced enough to call for an adjustment that Jeffrey's rule cannot supply.
+The other re-describes the input so that the effect disappears.
+\citet{Field1978} reparametrises the update so that its input is a portable
+factor rather than a delivered credence, and \citet{Wagner2002} shows that when
+identical learning is represented by identical Bayes factors, sequential
+revisions commute; \citet{Garber1980} objects that a portable factor compounds
+implausibly under repetition. The present paper takes neither route. It accepts
+the order-dependence that the delivered-credence reading entails, and asks a
+question that has received little attention, namely how far the two sequences
+disagree in each statistic of the resulting belief. That the disagreement is uneven
+across statistics---first order in the marginals and the share of decisions
+changed, second order in the believed association and the surplus-weighted
+loss---is what makes the debate answerable by
+measurement rather than by introspection about how completely an evaluator
+dismisses an earlier impression.
+
+The insensitivity of the association is moreover not peculiar to the extension
+adopted here. Each of the three extensions revises a basis by multiplying its
+cells by a factor that depends on that basis alone; they differ in what fixes
+the factor, not in the form of the revision. Lemma~\ref{lem:SEP} therefore
+covers all of them, and under each the believed association is rescaled but
+never shifted. What separates the extensions is whether there is any sequence
+effect for that statistic to conceal. An observer reading the believed
+association alone can accordingly no more tell which extension a population
+uses than detect the sequence effect itself, while the marginals and the
+share of decisions changed do both.
+```
+
+**Then adjust the following sentence** so the section reads as a descent from
+nearest to most distant neighbours.
+
+BEFORE:
+
+> While sequence-dependence has been of interest to empirical psychology at
+> least since \citet{Asch1946}, the problem seems to have received interest in
+> economics primarily through the observational learning literature.
+
+AFTER:
+
+```latex
+Further afield, sequence-dependence has been of interest to empirical psychology
+at least since \citet{Asch1946}, and in economics has been taken up chiefly
+through the observational learning literature.
+```
+
+**Bibliography.** Needs `Doring1999` and `Garber1980` (both in B.A).
+
+**Note on overlap with 1.A.** Both mention Diaconis-Zabell and Hawthorne.
+This is deliberate and not duplication: the introduction states the *question*
+against what is settled, while this paragraph places the paper among the
+*responses* to order-dependence. If the overlap still reads as repetitive when
+both are applied, the fix is to shorten the introduction's version, since the
+survey belongs here.
+
+**Note on the closing paragraph.** The claim that Lemma~SEP covers all three
+extensions is exact, not a gesture. In the Lean development a step is a pair
+(attribute, `factor : Bool -> R`) -- a multiplicative factor depending on that
+attribute's value alone, with **no constraint on where the factor comes from** --
+and `isSeparable_applySteps` proves that any finite list of such steps composes
+to a separable reweighting, for arbitrary `N`. A delivered-credence ratio
+(amnestic), a normed likelihood, and a factor derived from a likelihood ratio are
+all instances. `sep_rescales_association` then gives the rescaling. This answers
+the obvious objection to leaning on Hawthorne's taxonomy -- that his
+order-independent extensions already dispose of the problem, making this paper
+redundant. They dispose of the order effect, not of the identification issue: the
+association is uninformative under every extension, and what the order-free ones
+remove is the thing it would otherwise be concealing.
+
+**Note on the taxonomy sentences.** These place the paper's own model and its
+benchmark within Hawthorne's classification of extensions (his Sections 5-7):
+the model is the absolute-credence (Amnestic) end, the benchmark the factor end.
+The identification of `P^B` with his extended update formula is by inspection of
+the two formulas -- `P^B(i,j) = P(i,j) * l^A_i * l^B_j` with
+`l^A_i = q_i / P(A=i)`, which is his `NL[Q,e,E_i] = Q_e[E_i]/Q[E_i]`. The
+parenthetical terminological note is needed because the manuscript's "Bayes
+factor" is his normed-likelihood factor, while his likelihood-ratio factor is the
+ratio of two of those; the distinction does not affect any result here, since on
+a two-element basis both give posterior `q` on a single cue (Proposition IMM).
+
+**Verification status (added paragraph, 2026-09-22).** The three quotations are
+verbatim from the PDF (Drive: `Three_Models_of_Sequential_Belief_Updating_on_Unce.pdf`,
+read 2026-09-22): ``Which extension of Basic Jeffrey Updating is the more
+plausible model of human agents? I'm a logician, not a psychologist.'' and
+``because it seems unlikely that we dismiss previous experiences so
+completely'' are both p.~115, in his Section 10 (Conclusion); the sentence that
+follows there states his own interest as the normative properties of the models
+and their use in automated reasoning systems. The second quotation drops ``not
+because it is un-Bayesian, but'' before ``because'', which removes a contrast
+with a different objection and leaves his stated reason unchanged. His
+objection proper is pp.~98--99, and he allows at p.~99 that ``there may be some
+specialized systems for which this model is appropriate'', so he contests the
+premise for human agents rather than refuting it. The $I$-divergence clause is
+Diaconis--Zabell, already cited at manuscript line 194. The closing sentence is
+Proposition ADJ (5.B), whose own note lists the Lean theorems and sympy
+cases. The closing clause states what the recovery formula uses: three
+readings of one marginal (after the first cue, after both, and as the second
+cue delivers it), not the two marginals, which identify the endpoints only --
+corrected 2026-09-22 after an audit; the looser phrase ``from the two
+marginals'' in 1.D and 6.A is followed there by the detail that makes it
+exact. ``Exactly two ends'' is the two-cue setting of Assumption~\ref{as:local}
+and is not claimed for longer sequences, where Hogarth--Einhorn's primacy comes
+from weights decaying across many cues. The paragraph is self-standing: it
+presupposes 5.B for the reference to Proposition ADJ, and nothing else.
+
+**Verification status.** All five papers read in full and formalized in
+`literature/`; the characterisations above (D\"oring's "cannot be understood as
+an assimilation", Wagner's "identical Bayes factors", Garber's compounding
+counterexample, Hawthorne's attribution of the criterion to Diaconis-Zabell in
+his note 12) are quoted or paraphrased from the primary texts.
+
+---
+
+## 3.B -- Related literature (line 242): Asch as evidence, not decoration (formerly Change 10)
+
+**Purpose.** The manuscript's claim against the belief-adjustment tradition is
+currently that it reads "a single evaluative anchor" and so needs "a full
+posterior table rather than a single rating". Asch's own data shows the framing
+is slightly off and the underlying point is stronger than stated. In
+Experiment VI he did **not** collect a single rating: his Table 7 reports, for
+each of eighteen traits, the percentage of subjects judging it to fit, separately
+for the orders `intelligent->envious` and `envious->intelligent`. Eighteen
+marginals under two reading orders, in 1946. He still could not identify the
+mechanism, because they are all *marginals* -- the check-list asks whether a trait
+fits, never whether two traits go together, so the association cannot be formed
+from his data. The requirement is therefore not "many ratings rather than one" but
+**the joint rather than the margins**, and marginals are precisely the statistics
+this paper shows are guaranteed to register the effect.
+
+His numbers also supply evidence that the unevenness is real and was visible at
+the outset: across the two orders, `restrained` moves 64 to 9 and `good-looking`
+74 to 35, while `serious` moves 97 to 100, `persistent` 82 to 87 and `reliable`
+84 to 91. Some statistics swing enormously, others barely move, in one table, with
+no account given of why.
+
+**BEFORE** (final two sentences of the paragraph at line 242):
+
+> While Bayes-factor updating predicts no sequence effect anywhere
+> \citep{Wagner2002}, the belief-adjustment accounts of order effects
+> \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper
+> highlights is that such experimental analyses must also factor in the
+> cross-attribute associaton -- thus requiring the elicitation of a full posterior
+> table rather than a single rating produced by step-by-step or end-of-sequnce
+> response modes.
+
+**AFTER**:
+
+```latex
+While Bayes-factor updating predicts no sequence effect anywhere
+\citep{Wagner2002}, the experimental tradition has measured the phenomenon
+entirely in marginals. \citet{HogarthEinhorn1992} track a single evaluative
+anchor. \citet{Asch1946} is more generous and more instructive: his Experiment~VI
+reports, for each of eighteen traits, the proportion of subjects judging it to fit
+the person described, separately for the two reading orders. That the sequence effect
+differs in size across statistics is already visible there, although the
+differences Asch reports are all among marginals, which the paper treats
+alike. Between the orders, \emph{restrained}
+moves from 64 to 9 per cent and \emph{good-looking} from 74 to 35, while
+\emph{serious} moves from 97 to 100, \emph{persistent} from 82 to 87 and
+\emph{reliable} from 84 to 91. Some statistics swing enormously and others
+scarcely move, with no account offered of the difference. Yet eighteen marginals
+separate amnestic updating from partial adjustment no better than one.
+Separating them reads a marginal across values of the prior covariance
+(Proposition~\ref{prop:ADJ}), and the check-list
+asks whether a trait fits and never whether two traits go together, so the
+prior association cannot be formed from such data at all. What the paper
+adds is therefore not that more ratings are needed but that a second object
+must be elicited. Seeing the sequence effect requires only a marginal read in
+both orders, which Asch has; locating the mechanism behind it requires the
+prior association as well, which he does not.
+```
+
+**Note.** This supersedes the de-duplication entry recording that the
+Hogarth-Einhorn discussion was reduced to one clause; the passage now carries
+Asch as evidence rather than as a bare citation. `Asch1946` and `HogarthEinhorn1992` are already in the bibliography.
+
+**Verification status.** Experiment VI, Table 7 and Table 8 read directly from the
+scan; the percentages above are transcribed from Table 7. Asch's own explanation
+of the order effect is a "direction" set by the first term, with his footnote 5
+naming *centrality* -- not softness -- as what abolishes or reverses primacy. No
+claim is made here that his data supports the amnestic mechanism; the claim is
+only that the unevenness is present and unexplained, and that his instrument
+cannot identify its source.
+
+---
+
+## 3.C -- Related literature (Section 3): the audit-identification precedent (formerly Change 9)
+
+**Purpose.** The manuscript's opening now claims an identification gap, and its
+headline implication is about what audits can detect. The economics of
+discrimination has its own audit-identification critique, and the manuscript
+cites that lineage (Phelps, Arrow, Coate-Loury, Becker) without it. One
+insertion connects the two and marks the complementarity: Heckman attacks the
+decision-rate audit on distributional grounds; this paper attacks the
+belief-association audit on geometric grounds and shows the decision side is
+where the sequence effect stays visible.
+
+**Location.** End of the statistical-discrimination paragraph in Section 3
+(the paragraph citing Phelps1972, Arrow1973, CoateLoury1993, BCGS2016), which
+currently ends:
+
+> ...protection intrinsic to the arithmetic of aggregation, rather than imposed
+> by an enforced constraint on behaviour---goes back at least as far as
+> \citet{Becker1962}.
+
+**INSERT after that sentence:**
+
+```latex
+The audit perspective has a precedent in the economics of discrimination,
+which already accepts that an audit's informativeness is an identification
+question settled by the instrument's structure rather than its sample size:
+\citet{Heckman1998} showed that audit-pair estimates of
+discrimination rest on assumptions about unobserved productivity that no sample
+size repairs. The current paper brings that discipline to the belief-measurement
+side of the audit, where the failure is geometric rather than distributional and
+no auxiliary assumption rescues the association statistic, and shows that the
+sequence effect remains detectable in the marginal probabilities and in the
+share of decisions changed, the decision side being the target of Heckman's
+caution.
+```
+
+**Optional companion sentence** (fits either here or beside the protected-class
+discussion in Section 5), making the identification language of the new
+opening precise:
+
+```latex
+The blindness of the protected statistics is not a small-sample limitation: the
+first-order signal is zero in the population itself, so it is an identification
+failure rather than an estimation difficulty, and no quantity of data overcomes
+it.
+```
+
+---
+
+## 3.D -- Related literature: the identification of discrimination (formerly Change 13)
+
+**Purpose.** The paper's headline implication is that an audit's instrument
+decides what it can detect. Economics has a current formulation of that problem
+which the manuscript does not engage: \citet{Bohren2019} give a taxonomy of
+sources of discrimination, a parameter-to-behaviour map, and an identification
+strategy built on it. Their framework presupposes Bayesian updating, and under
+credence-input updating the presupposition fails in a specific way. This is the
+compressed manuscript form of `notes/the_discrimination_problem.tex`.
+
+**Location.** Section 3, at the end of the statistical-discrimination paragraph
+-- immediately after the Heckman sentences inserted by 3.C, so the two
+audit-identification points sit together.
+
+**INSERT:**
+
+```latex
+A current formulation of the same problem is given by \citet{Bohren2019}, who
+distinguish discrimination arising from correct beliefs, from biased beliefs,
+and from preferences, and identify the source from how discrimination evolves
+along a history of evaluations. Their map from partiality to behaviour is
+Bayesian: a belief gap between groups is transmitted to evaluations, attenuated
+by the precision of the signal, and vanishes only as judgment becomes perfectly
+objective. Under the reading adopted here that map does not hold. A Jeffrey step
+sets the marginal of the attribute it addresses to the delivered credence, so an
+evaluator who takes the impression of quality last evaluates two workers alike
+whatever her prior beliefs about their groups, and the belief gap is silenced
+without any gain in objectivity. Under partial adoption with weight $\omega$ on
+the impression, a fraction $1-\omega$ of the belief gap survives
+(Proposition~\ref{prop:ADJ}). What credence-input updating does is therefore not to add a
+further source of discrimination to their three, but to relocate where
+partiality must sit in order to act: lodged in the prior it is silenced, lodged
+in the impression it passes through untouched, and their framework has no
+parameter for the latter.
+```
+
+**Bibliography.** Needs `Bohren2019` (in B.A).
+
+**Also adjust**, in the same section, the claim that economics took up
+sequence-dependence "chiefly through the observational learning literature"
+(3.A's wording): \citet{Bohren2019} is an economics treatment in which
+sequence is central, so the clause should read "chiefly through the
+observational learning literature, though it also arises in the dynamics of
+discrimination".
+
+**Verification status.** The silencing result is machine-checked:
+`literature/bohren_imas_rosenberg2019/sympy/check_pinning_kills_partiality.py`
+(7/7; the gap is zero for arbitrary group priors, arbitrary and even unequal
+covariances, and arbitrary delivered credences), and the proportional
+attenuation under partial adoption is `dampedB_deviation` in
+`lean/JeffreyOrder/Anchoring.lean`. Deliberately **omitted** from the manuscript
+paragraph: the sign-inversion result (verified at only twelve configurations),
+and any suggestion that this bears on their discrimination reversal, which is
+driven by evaluator heterogeneity and beliefs about other evaluators' beliefs
+(their Proposition 3) and is untouched by anything here.
+
+---
+
+## 4.A -- Section 4: title and first two paragraphs (lines 290-295) (formerly Change 14)
+
+**Purpose.** Sections 4 and 5 are organised on the individual-versus-aggregate
+axis, which the paper's own results (ORD, PRO) show to be inert: the
+classification is decided before any averaging. The section titles and
+openers should be organised on the statistic instead. This change retitles
+Section 4 and rewrites its first two paragraphs; the third paragraph (why
+these statistics; FGT remark) is unchanged. No new proof: "both are first
+order" is DIV and SCR; the closing sentence is ORD and PRO.
+
+**Title BEFORE:** `\section{Sequence effects at the individual level}`
+
+**Title AFTER:** `\section{Which statistics register the sequence}`
+
+**BEFORE** (paragraphs 1-2):
+
+> \section{Sequence effects at the individual level}
+> \label{sec:individual}
+> Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects with respect the Bayesian benchmark using two \textbf{primitive} statistics -- gap and score. As discussed in Section  \ref{sec:jeffrey}, the \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive, \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator.
+> The belief-statistics and decision-statistics follow from the two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
+
+**AFTER**:
+
+```latex
+This section asks, of each statistic of a single evaluator's belief, whether
+the two reading sequences move it at first order in the prior covariance $c$
+or only at second order. Two primitive statistics carry the comparison with
+the sequence-free benchmark $\PB$ of Section~\ref{sec:jeffrey}: the
+\emph{gap}, the distance of the evaluator's belief from $\PB$
+(Definition~\ref{def:indgap}), and the \emph{score-gap}
+$s(P)=\langle\vv,P\rangle$, the same distance read through the decision
+weights and set against a threshold $\tau$.
+Section~\ref{sec:individual_primitives} shows that both are first order.
+
+The belief statistics and the decision statistics are read from the same
+belief. The belief statistics are the \emph{marginal probability} of each
+attribute and the \emph{believed cross-attribute association}; the decision
+statistics are the surplus-weighted loss $L(c)$ and the decision \emph{flip},
+the indicator that the sequence changes the evaluator's decision. Whether a
+statistic registers the sequence is settled here, for one evaluator;
+Section~\ref{sec:aggregation} shows that averaging over evaluators who met the
+cues in either sequence leaves the classification unchanged across an open set
+of priors and every interior mixture.
+```
+
+*Removed:* "How these quantities are carried over in aggregate are detailed in
+Section 5", which promised that the aggregate adds something.
+
+---
+
+## 5.A -- Section 5: title and first paragraph (lines 465-469) (formerly Change 15)
+
+**Purpose.** Same as 4.A, for the aggregate section. "Largely the nature
+of the statistic itself" hedged an exact result. No new proof: the plane and
+the differential condition are PRO; the sequence-side statement is ORD.
+
+**Title BEFORE:** `\section{Aggregated Effects of Cue-Sequence}`
+
+**Title AFTER:** `\section{Averaging over sequences does not change the classification}`
+
+**BEFORE** (paragraph 1):
+
+> \section{Aggregated Effects of Cue-Sequence}
+> \label{sec:aggregation}
+> We now describe how the effect of arrival order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
+> rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
+
+**AFTER**:
+
+```latex
+The previous section classified statistics for one evaluator. This section
+shows that the classification survives averaging over a population in which a
+fraction $\lambda\in[0,1]$ of evaluators meet the $A$-cue first (the
+credential in the example) and the rest the $B$-cue first (the letter), so
+that the mean belief under Jeffrey conditioning is
+$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. Across an open set of priors, what makes a
+statistic first order or second order is the statistic itself, not the mixture
+$\lambda$: the mean belief lies in the plane through $\PB$ spanned by the
+leading directions of the two sequences, and a statistic's order is fixed by
+its differential on that plane (Propositions~\ref{prop:ORD}
+and~\ref{prop:PRO}).
+```
+
+The paragraph that follows ("Two definitions are worth pinning down ...") and
+the protection definition are unchanged; 5.B inserts ORD after that
+definition.
+
+---
+
+## 5.B -- Section 5: new definition + Proposition ORD (insert after line 440) (formerly Change 6)
 
 **Purpose.** State how the sequence effect, already defined on the joint
 belief, behaves when read through a statistic. No new definition is introduced;
@@ -573,211 +1226,7 @@ decrement" is Anderson (1981), reported by them as a rival.
 
 ---
 
-## Change 7 -- bibliography.bib (the only bibliography change)
-
-All five new entries are here. No other change adds a bibliography entry; the
-others state only which key they need.
-
-| Key | Needed by |
-| --- | --- |
-| `Hawthorne2004` | Changes 2, 4, 11, 12 |
-| `Heckman1998` | Change 9 |
-| `Doring1999` | Change 12 |
-| `Garber1980` | Change 12 |
-| `Bohren2019` | Changes 13, 16 |
-
-Already present in `bibliography.bib`, so nothing to add: `DiaconisZabell1982`,
-`Field1978`, `Wagner2002`, `Asch1946`, `HogarthEinhorn1992`, `Phelps1972`,
-`Arrow1973`, `Jeffrey1983`, `Domotor1980`. Zhao-Osherson is not cited anywhere
-in the change set (author's decision; review log Entry 15).
-
-```bibtex
-@article{Heckman1998,
-  author  = {Heckman, James J.},
-  title   = {Detecting Discrimination},
-  journal = {Journal of Economic Perspectives},
-  year    = {1998},
-  volume  = {12},
-  number  = {2},
-  pages   = {101--116}
-}
-
-@article{Hawthorne2004,
-  author  = {Hawthorne, James},
-  title   = {Three Models of Sequential Belief Updating on Uncertain Evidence},
-  journal = {Journal of Philosophical Logic},
-  year    = {2004},
-  volume  = {33},
-  number  = {1},
-  pages   = {89--123}
-}
-
-@article{Doring1999,
-  author  = {D\"oring, Frank},
-  title   = {Why {B}ayesian Psychology Is Incomplete},
-  journal = {Philosophy of Science},
-  year    = {1999},
-  volume  = {66},
-  number  = {Supplement},
-  pages   = {S379--S389}
-}
-
-@article{Garber1980,
-  author  = {Garber, Daniel},
-  title   = {Field and {J}effrey Conditionalization},
-  journal = {Philosophy of Science},
-  year    = {1980},
-  volume  = {47},
-  number  = {1},
-  pages   = {142--145}
-}
-
-@article{Bohren2019,
-  author  = {Bohren, J. Aislinn and Imas, Alex and Rosenberg, Michael},
-  title   = {The Dynamics of Discrimination: Theory and Evidence},
-  journal = {American Economic Review},
-  year    = {2019},
-  volume  = {109},
-  number  = {10},
-  pages   = {3395--3436}
-}
-```
-
----
-
-## Change 8 (optional) -- AI declaration (line 1212)
-
-The declaration names Proposition PRO as proposed and cross-verified with
-Claude. Proposition ORD has the same provenance. If the declaration is meant to
-be exhaustive, extend "Proposition~\ref{prop:PRO} (uniqueness of the protected
-statistic)" to "Propositions~\ref{prop:PRO} (uniqueness of the protected
-statistic), \ref{prop:ORD} (between-sequence contrast)
-and~\ref{prop:ADJ} (adoption weight)".
-
----
-
-## Change 9 -- Related literature (Section 3): the audit-identification precedent
-
-**Purpose.** The manuscript's opening now claims an identification gap, and its
-headline implication is about what audits can detect. The economics of
-discrimination has its own audit-identification critique, and the manuscript
-cites that lineage (Phelps, Arrow, Coate-Loury, Becker) without it. One
-insertion connects the two and marks the complementarity: Heckman attacks the
-decision-rate audit on distributional grounds; this paper attacks the
-belief-association audit on geometric grounds and shows the decision side is
-where the sequence effect stays visible.
-
-**Location.** End of the statistical-discrimination paragraph in Section 3
-(the paragraph citing Phelps1972, Arrow1973, CoateLoury1993, BCGS2016), which
-currently ends:
-
-> ...protection intrinsic to the arithmetic of aggregation, rather than imposed
-> by an enforced constraint on behaviour---goes back at least as far as
-> \citet{Becker1962}.
-
-**INSERT after that sentence:**
-
-```latex
-The audit perspective has a precedent in the economics of discrimination,
-which already accepts that an audit's informativeness is an identification
-question settled by the instrument's structure rather than its sample size:
-\citet{Heckman1998} showed that audit-pair estimates of
-discrimination rest on assumptions about unobserved productivity that no sample
-size repairs. The current paper brings that discipline to the belief-measurement
-side of the audit, where the failure is geometric rather than distributional and
-no auxiliary assumption rescues the association statistic, and shows that the
-sequence effect remains detectable in the marginal probabilities and in the
-share of decisions changed, the decision side being the target of Heckman's
-caution.
-```
-
-**Optional companion sentence** (fits either here or beside the protected-class
-discussion in Section 5), making the identification language of the new
-opening precise:
-
-```latex
-The blindness of the protected statistics is not a small-sample limitation: the
-first-order signal is zero in the population itself, so it is an identification
-failure rather than an estimation difficulty, and no quantity of data overcomes
-it.
-```
-
----
-
-## Change 10 -- Related literature (line 242): Asch as evidence, not decoration
-
-**Purpose.** The manuscript's claim against the belief-adjustment tradition is
-currently that it reads "a single evaluative anchor" and so needs "a full
-posterior table rather than a single rating". Asch's own data shows the framing
-is slightly off and the underlying point is stronger than stated. In
-Experiment VI he did **not** collect a single rating: his Table 7 reports, for
-each of eighteen traits, the percentage of subjects judging it to fit, separately
-for the orders `intelligent->envious` and `envious->intelligent`. Eighteen
-marginals under two reading orders, in 1946. He still could not identify the
-mechanism, because they are all *marginals* -- the check-list asks whether a trait
-fits, never whether two traits go together, so the association cannot be formed
-from his data. The requirement is therefore not "many ratings rather than one" but
-**the joint rather than the margins**, and marginals are precisely the statistics
-this paper shows are guaranteed to register the effect.
-
-His numbers also supply evidence that the unevenness is real and was visible at
-the outset: across the two orders, `restrained` moves 64 to 9 and `good-looking`
-74 to 35, while `serious` moves 97 to 100, `persistent` 82 to 87 and `reliable`
-84 to 91. Some statistics swing enormously, others barely move, in one table, with
-no account given of why.
-
-**BEFORE** (final two sentences of the paragraph at line 242):
-
-> While Bayes-factor updating predicts no sequence effect anywhere
-> \citep{Wagner2002}, the belief-adjustment accounts of order effects
-> \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper
-> highlights is that such experimental analyses must also factor in the
-> cross-attribute associaton -- thus requiring the elicitation of a full posterior
-> table rather than a single rating produced by step-by-step or end-of-sequnce
-> response modes.
-
-**AFTER**:
-
-```latex
-While Bayes-factor updating predicts no sequence effect anywhere
-\citep{Wagner2002}, the experimental tradition has measured the phenomenon
-entirely in marginals. \citet{HogarthEinhorn1992} track a single evaluative
-anchor. \citet{Asch1946} is more generous and more instructive: his Experiment~VI
-reports, for each of eighteen traits, the proportion of subjects judging it to fit
-the person described, separately for the two reading orders. That the sequence effect
-differs in size across statistics is already visible there, although the
-differences Asch reports are all among marginals, which the paper treats
-alike. Between the orders, \emph{restrained}
-moves from 64 to 9 per cent and \emph{good-looking} from 74 to 35, while
-\emph{serious} moves from 97 to 100, \emph{persistent} from 82 to 87 and
-\emph{reliable} from 84 to 91. Some statistics swing enormously and others
-scarcely move, with no account offered of the difference. Yet eighteen marginals
-separate amnestic updating from partial adjustment no better than one.
-Separating them reads a marginal across values of the prior covariance
-(Proposition~\ref{prop:ADJ}), and the check-list
-asks whether a trait fits and never whether two traits go together, so the
-prior association cannot be formed from such data at all. What the paper
-adds is therefore not that more ratings are needed but that a second object
-must be elicited. Seeing the sequence effect requires only a marginal read in
-both orders, which Asch has; locating the mechanism behind it requires the
-prior association as well, which he does not.
-```
-
-**Note.** This supersedes the de-duplication entry recording that the
-Hogarth-Einhorn discussion was reduced to one clause; the passage now carries
-Asch as evidence rather than as a bare citation. `Asch1946` and `HogarthEinhorn1992` are already in the bibliography.
-
-**Verification status.** Experiment VI, Table 7 and Table 8 read directly from the
-scan; the percentages above are transcribed from Table 7. Asch's own explanation
-of the order effect is a "direction" set by the first term, with his footnote 5
-naming *centrality* -- not softness -- as what abolishes or reverses primacy. No
-claim is made here that his data supports the amnestic mechanism; the claim is
-only that the unevenness is present and unexplained, and that his instrument
-cannot identify its source.
-
----
-
-## Change 11 -- Scope section: rival mechanisms, and what separates the mechanisms
+## 6.A -- Scope section: rival mechanisms, and what separates the mechanisms (formerly Change 11)
 
 **Purpose.** Order effects have a competing rational explanation, and the
 conflict is stark: at its $\omega=0$ endpoint the adjustment family protects
@@ -838,7 +1287,7 @@ marginals rather than assumed.
 ```
 
 **Verification status.** Every claim in the paragraph is Proposition ADJ
-(Change 6), whose verification note lists the Lean theorems and sympy cases;
+(5.B), whose verification note lists the Lean theorems and sympy cases;
 the odds-ratio sentence is the manuscript's own remark after Lemma SEP (lines
 625--627), extended to the damped routes because they are Jeffrey steps.
 Garber removed from the illustration clause: his repeated-glances example
@@ -848,401 +1297,90 @@ family is stated through Hogarth-Einhorn's own equation, which is already cited.
 
 ---
 
-## Change 12 -- Related literature: open with the Jeffrey commutativity literature
+## B.A -- bibliography.bib (the only bibliography change) (formerly Change 7)
 
-**Purpose.** Section 3 currently opens on empirical psychology and observational
-learning, and never discusses the paper's closest neighbours -- the literature
-on whether, and when, probability kinematics commutes. That material sits in the
-introduction instead, and Change 2 adds more of it there. A reader looking under
-"Related literature" for where the paper stands in the Jeffrey debate does not
-find it. This inserts a first paragraph covering that literature, so the section
-moves from nearest to most distant, and the introduction can state the question
-without also having to survey.
+All five new entries are here. No other change adds a bibliography entry; the
+others state only which key they need.
 
-**Location.** Section 3 (`sec:literature`), as a new opening paragraph
-immediately after `\label{sec:literature}` and before "While sequence-dependence
-has been of interest to empirical psychology...".
+| Key | Needed by |
+| --- | --- |
+| `Hawthorne2004` | 1.A, 1.D, 6.A, 3.A |
+| `Heckman1998` | 3.C |
+| `Doring1999` | 3.A |
+| `Garber1980` | 3.A |
+| `Bohren2019` | 3.D, 1.C |
 
-**INSERT:**
+Already present in `bibliography.bib`, so nothing to add: `DiaconisZabell1982`,
+`Field1978`, `Wagner2002`, `Asch1946`, `HogarthEinhorn1992`, `Phelps1972`,
+`Arrow1973`, `Jeffrey1983`, `Domotor1980`. Zhao-Osherson is not cited anywhere
+in the change set (author's decision; review log Entry 15).
 
-```latex
-The closest literature concerns the commutativity of probability kinematics
-itself. \citet{DiaconisZabell1982} give the condition under which two successive
-Jeffrey revisions lead to the same belief, and \citet{Hawthorne2004} names its
-full-adoption premise, which the present paper adopts, the Amnestic
-Update-Factor Thesis, crediting that criterion to them. His
-survey also fixes the vocabulary. Extensions of Jeffrey updating to sequences
-differ in what an experience is taken to deliver: new probabilities for its own
-basis directly, a multiplicative factor applied to the belief it meets, or a
-ratio between basis sentences that the prior does not constrain. The model used
-here sits at the first, where the impression delivers a credence and the most
-recent one fixes its attribute outright; the benchmark $\PB$ of
-Section~\ref{sec:jeffrey} has the form of the extended update formula built on
-the second. The comparison drawn throughout is therefore between the two ends of
-his taxonomy, and the identification questions this paper raises are the ones
-that the first end brings with it and the second end does not, since revisions
-at the second end commute. (What Section~\ref{sec:jeffrey} calls a Bayes
-factor is his normed-likelihood factor; on a two-element basis the two induce the
-same revision.)
+```bibtex
+@article{Heckman1998,
+  author  = {Heckman, James J.},
+  title   = {Detecting Discrimination},
+  journal = {Journal of Economic Perspectives},
+  year    = {1998},
+  volume  = {12},
+  number  = {2},
+  pages   = {101--116}
+}
 
-The premise the paper adopts is disputed on psychological grounds, while the
-ground on which the paper adopts it is information-theoretic: Jeffrey's rule
-enters as the revision that moves the prior least in $I$-divergence while
-taking on the delivered credence \citep{DiaconisZabell1982}. The dispute is
-left open by the author who raises it. \citet[p.~115]{Hawthorne2004} puts the
-question and declines it: ``Which extension of Basic Jeffrey Updating is the
-more plausible model of human agents? I'm a logician, not a psychologist.'' He
-judges amnestic updating less plausible than the factor-based extensions,
-``because it seems unlikely that we dismiss previous experiences so
-completely'', and turns to the normative properties of the competing models,
-where his interest lies. An objection of that form is a reason to measure the
-degree of adoption, not a reason to discard amnestic updating. With two cues
-that degree has exactly two ends, the impression read last prevailing and the
-impression read first prevailing, and Proposition~\ref{prop:ADJ} recovers
-where between those ends an evaluator sits, from the rating of one trait read
-before and after the second cue and against what that cue delivers.
+@article{Hawthorne2004,
+  author  = {Hawthorne, James},
+  title   = {Three Models of Sequential Belief Updating on Uncertain Evidence},
+  journal = {Journal of Philosophical Logic},
+  year    = {2004},
+  volume  = {33},
+  number  = {1},
+  pages   = {89--123}
+}
 
-Two responses to the resulting order-dependence have been made. One treats it as a
-defect of the framework: \citet{Doring1999} argues that the order effect can be
-pronounced enough to call for an adjustment that Jeffrey's rule cannot supply.
-The other re-describes the input so that the effect disappears.
-\citet{Field1978} reparametrises the update so that its input is a portable
-factor rather than a delivered credence, and \citet{Wagner2002} shows that when
-identical learning is represented by identical Bayes factors, sequential
-revisions commute; \citet{Garber1980} objects that a portable factor compounds
-implausibly under repetition. The present paper takes neither route. It accepts
-the order-dependence that the delivered-credence reading entails, and asks a
-question that has received little attention, namely how far the two sequences
-disagree in each statistic of the resulting belief. That the disagreement is uneven
-across statistics---first order in the marginals and the share of decisions
-changed, second order in the believed association and the surplus-weighted
-loss---is what makes the debate answerable by
-measurement rather than by introspection about how completely an evaluator
-dismisses an earlier impression.
+@article{Doring1999,
+  author  = {D\"oring, Frank},
+  title   = {Why {B}ayesian Psychology Is Incomplete},
+  journal = {Philosophy of Science},
+  year    = {1999},
+  volume  = {66},
+  number  = {Supplement},
+  pages   = {S379--S389}
+}
 
-The insensitivity of the association is moreover not peculiar to the extension
-adopted here. Each of the three extensions revises a basis by multiplying its
-cells by a factor that depends on that basis alone; they differ in what fixes
-the factor, not in the form of the revision. Lemma~\ref{lem:SEP} therefore
-covers all of them, and under each the believed association is rescaled but
-never shifted. What separates the extensions is whether there is any sequence
-effect for that statistic to conceal. An observer reading the believed
-association alone can accordingly no more tell which extension a population
-uses than detect the sequence effect itself, while the marginals and the
-share of decisions changed do both.
+@article{Garber1980,
+  author  = {Garber, Daniel},
+  title   = {Field and {J}effrey Conditionalization},
+  journal = {Philosophy of Science},
+  year    = {1980},
+  volume  = {47},
+  number  = {1},
+  pages   = {142--145}
+}
+
+@article{Bohren2019,
+  author  = {Bohren, J. Aislinn and Imas, Alex and Rosenberg, Michael},
+  title   = {The Dynamics of Discrimination: Theory and Evidence},
+  journal = {American Economic Review},
+  year    = {2019},
+  volume  = {109},
+  number  = {10},
+  pages   = {3395--3436}
+}
 ```
-
-**Then adjust the following sentence** so the section reads as a descent from
-nearest to most distant neighbours.
-
-BEFORE:
-
-> While sequence-dependence has been of interest to empirical psychology at
-> least since \citet{Asch1946}, the problem seems to have received interest in
-> economics primarily through the observational learning literature.
-
-AFTER:
-
-```latex
-Further afield, sequence-dependence has been of interest to empirical psychology
-at least since \citet{Asch1946}, and in economics has been taken up chiefly
-through the observational learning literature.
-```
-
-**Bibliography.** Needs `Doring1999` and `Garber1980` (both in Change 7).
-
-**Note on overlap with Change 2.** Both mention Diaconis-Zabell and Hawthorne.
-This is deliberate and not duplication: the introduction states the *question*
-against what is settled, while this paragraph places the paper among the
-*responses* to order-dependence. If the overlap still reads as repetitive when
-both are applied, the fix is to shorten the introduction's version, since the
-survey belongs here.
-
-**Note on the closing paragraph.** The claim that Lemma~SEP covers all three
-extensions is exact, not a gesture. In the Lean development a step is a pair
-(attribute, `factor : Bool -> R`) -- a multiplicative factor depending on that
-attribute's value alone, with **no constraint on where the factor comes from** --
-and `isSeparable_applySteps` proves that any finite list of such steps composes
-to a separable reweighting, for arbitrary `N`. A delivered-credence ratio
-(amnestic), a normed likelihood, and a factor derived from a likelihood ratio are
-all instances. `sep_rescales_association` then gives the rescaling. This answers
-the obvious objection to leaning on Hawthorne's taxonomy -- that his
-order-independent extensions already dispose of the problem, making this paper
-redundant. They dispose of the order effect, not of the identification issue: the
-association is uninformative under every extension, and what the order-free ones
-remove is the thing it would otherwise be concealing.
-
-**Note on the taxonomy sentences.** These place the paper's own model and its
-benchmark within Hawthorne's classification of extensions (his Sections 5-7):
-the model is the absolute-credence (Amnestic) end, the benchmark the factor end.
-The identification of `P^B` with his extended update formula is by inspection of
-the two formulas -- `P^B(i,j) = P(i,j) * l^A_i * l^B_j` with
-`l^A_i = q_i / P(A=i)`, which is his `NL[Q,e,E_i] = Q_e[E_i]/Q[E_i]`. The
-parenthetical terminological note is needed because the manuscript's "Bayes
-factor" is his normed-likelihood factor, while his likelihood-ratio factor is the
-ratio of two of those; the distinction does not affect any result here, since on
-a two-element basis both give posterior `q` on a single cue (Proposition IMM).
-
-**Verification status (added paragraph, 2026-09-22).** The three quotations are
-verbatim from the PDF (Drive: `Three_Models_of_Sequential_Belief_Updating_on_Unce.pdf`,
-read 2026-09-22): ``Which extension of Basic Jeffrey Updating is the more
-plausible model of human agents? I'm a logician, not a psychologist.'' and
-``because it seems unlikely that we dismiss previous experiences so
-completely'' are both p.~115, in his Section 10 (Conclusion); the sentence that
-follows there states his own interest as the normative properties of the models
-and their use in automated reasoning systems. The second quotation drops ``not
-because it is un-Bayesian, but'' before ``because'', which removes a contrast
-with a different objection and leaves his stated reason unchanged. His
-objection proper is pp.~98--99, and he allows at p.~99 that ``there may be some
-specialized systems for which this model is appropriate'', so he contests the
-premise for human agents rather than refuting it. The $I$-divergence clause is
-Diaconis--Zabell, already cited at manuscript line 194. The closing sentence is
-Proposition ADJ (Change 6), whose own note lists the Lean theorems and sympy
-cases. The closing clause states what the recovery formula uses: three
-readings of one marginal (after the first cue, after both, and as the second
-cue delivers it), not the two marginals, which identify the endpoints only --
-corrected 2026-09-22 after an audit; the looser phrase ``from the two
-marginals'' in Changes 4 and 11 is followed there by the detail that makes it
-exact. ``Exactly two ends'' is the two-cue setting of Assumption~\ref{as:local}
-and is not claimed for longer sequences, where Hogarth--Einhorn's primacy comes
-from weights decaying across many cues. The paragraph is self-standing: it
-presupposes Change 6 for the reference to Proposition ADJ, and nothing else.
-
-**Verification status.** All five papers read in full and formalized in
-`literature/`; the characterisations above (D\"oring's "cannot be understood as
-an assimilation", Wagner's "identical Bayes factors", Garber's compounding
-counterexample, Hawthorne's attribution of the criterion to Diaconis-Zabell in
-his note 12) are quoted or paraphrased from the primary texts.
 
 ---
 
-## Change 13 -- Related literature: the identification of discrimination
+## B.B (optional) -- AI declaration (line 1212) (formerly Change 8)
 
-**Purpose.** The paper's headline implication is that an audit's instrument
-decides what it can detect. Economics has a current formulation of that problem
-which the manuscript does not engage: \citet{Bohren2019} give a taxonomy of
-sources of discrimination, a parameter-to-behaviour map, and an identification
-strategy built on it. Their framework presupposes Bayesian updating, and under
-credence-input updating the presupposition fails in a specific way. This is the
-compressed manuscript form of `notes/the_discrimination_problem.tex`.
-
-**Location.** Section 3, at the end of the statistical-discrimination paragraph
--- immediately after the Heckman sentences inserted by Change 9, so the two
-audit-identification points sit together.
-
-**INSERT:**
-
-```latex
-A current formulation of the same problem is given by \citet{Bohren2019}, who
-distinguish discrimination arising from correct beliefs, from biased beliefs,
-and from preferences, and identify the source from how discrimination evolves
-along a history of evaluations. Their map from partiality to behaviour is
-Bayesian: a belief gap between groups is transmitted to evaluations, attenuated
-by the precision of the signal, and vanishes only as judgment becomes perfectly
-objective. Under the reading adopted here that map does not hold. A Jeffrey step
-sets the marginal of the attribute it addresses to the delivered credence, so an
-evaluator who takes the impression of quality last evaluates two workers alike
-whatever her prior beliefs about their groups, and the belief gap is silenced
-without any gain in objectivity. Under partial adoption with weight $\omega$ on
-the impression, a fraction $1-\omega$ of the belief gap survives
-(Proposition~\ref{prop:ADJ}). What credence-input updating does is therefore not to add a
-further source of discrimination to their three, but to relocate where
-partiality must sit in order to act: lodged in the prior it is silenced, lodged
-in the impression it passes through untouched, and their framework has no
-parameter for the latter.
-```
-
-**Bibliography.** Needs `Bohren2019` (in Change 7).
-
-**Also adjust**, in the same section, the claim that economics took up
-sequence-dependence "chiefly through the observational learning literature"
-(Change 12's wording): \citet{Bohren2019} is an economics treatment in which
-sequence is central, so the clause should read "chiefly through the
-observational learning literature, though it also arises in the dynamics of
-discrimination".
-
-**Verification status.** The silencing result is machine-checked:
-`literature/bohren_imas_rosenberg2019/sympy/check_pinning_kills_partiality.py`
-(7/7; the gap is zero for arbitrary group priors, arbitrary and even unequal
-covariances, and arbitrary delivered credences), and the proportional
-attenuation under partial adoption is `dampedB_deviation` in
-`lean/JeffreyOrder/Anchoring.lean`. Deliberately **omitted** from the manuscript
-paragraph: the sign-inversion result (verified at only twelve configurations),
-and any suggestion that this bears on their discrimination reversal, which is
-driven by evaluator heterogeneity and beliefs about other evaluators' beliefs
-(their Proposition 3) and is untouched by anything here.
+The declaration names Proposition PRO as proposed and cross-verified with
+Claude. Proposition ORD has the same provenance. If the declaration is meant to
+be exhaustive, extend "Proposition~\ref{prop:PRO} (uniqueness of the protected
+statistic)" to "Propositions~\ref{prop:PRO} (uniqueness of the protected
+statistic), \ref{prop:ORD} (between-sequence contrast)
+and~\ref{prop:ADJ} (adoption weight)".
 
 ---
 
-## De-duplication notes (what was cut in compaction)
-
-- The question/answer draft's resolution passage ($c^2 \ll \varepsilon \ll c$)
-  is dropped. The manuscript's terminology paragraph (line 83) already carries
-  it and stays unchanged.
-- The two-horn draft's second paragraph is folded into the single Change 4
-  paragraph.
-- The Hogarth-Einhorn instrument discussion is reduced to one clause (Change
-  2). The Zhao papers are not referred to at all (review log Entry 15); the
-  reads remain on record in `literature/measurement_susceptibility_survey.md`.
-
-## Change 14 -- Section 4: title and first two paragraphs (lines 290-295)
-
-**Purpose.** Sections 4 and 5 are organised on the individual-versus-aggregate
-axis, which the paper's own results (ORD, PRO) show to be inert: the
-classification is decided before any averaging. The section titles and
-openers should be organised on the statistic instead. This change retitles
-Section 4 and rewrites its first two paragraphs; the third paragraph (why
-these statistics; FGT remark) is unchanged. No new proof: "both are first
-order" is DIV and SCR; the closing sentence is ORD and PRO.
-
-**Title BEFORE:** `\section{Sequence effects at the individual level}`
-
-**Title AFTER:** `\section{Which statistics register the sequence}`
-
-**BEFORE** (paragraphs 1-2):
-
-> \section{Sequence effects at the individual level}
-> \label{sec:individual}
-> Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects with respect the Bayesian benchmark using two \textbf{primitive} statistics -- gap and score. As discussed in Section  \ref{sec:jeffrey}, the \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive, \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator.
-> The belief-statistics and decision-statistics follow from the two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}.
-
-**AFTER**:
-
-```latex
-This section asks, of each statistic of a single evaluator's belief, whether
-the two reading sequences move it at first order in the prior covariance $c$
-or only at second order. Two primitive statistics carry the comparison with
-the sequence-free benchmark $\PB$ of Section~\ref{sec:jeffrey}: the
-\emph{gap}, the distance of the evaluator's belief from $\PB$
-(Definition~\ref{def:indgap}), and the \emph{score-gap}
-$s(P)=\langle\vv,P\rangle$, the same distance read through the decision
-weights and set against a threshold $\tau$.
-Section~\ref{sec:individual_primitives} shows that both are first order.
-
-The belief statistics and the decision statistics are read from the same
-belief. The belief statistics are the \emph{marginal probability} of each
-attribute and the \emph{believed cross-attribute association}; the decision
-statistics are the surplus-weighted loss $L(c)$ and the decision \emph{flip},
-the indicator that the sequence changes the evaluator's decision. Whether a
-statistic registers the sequence is settled here, for one evaluator;
-Section~\ref{sec:aggregation} shows that averaging over evaluators who met the
-cues in either sequence leaves the classification unchanged across an open set
-of priors and every interior mixture.
-```
-
-*Removed:* "How these quantities are carried over in aggregate are detailed in
-Section 5", which promised that the aggregate adds something.
-
----
-
-## Change 15 -- Section 5: title and first paragraph (lines 465-469)
-
-**Purpose.** Same as Change 14, for the aggregate section. "Largely the nature
-of the statistic itself" hedged an exact result. No new proof: the plane and
-the differential condition are PRO; the sequence-side statement is ORD.
-
-**Title BEFORE:** `\section{Aggregated Effects of Cue-Sequence}`
-
-**Title AFTER:** `\section{Averaging over sequences does not change the classification}`
-
-**BEFORE** (paragraph 1):
-
-> \section{Aggregated Effects of Cue-Sequence}
-> \label{sec:aggregation}
-> We now describe how the effect of arrival order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the
-> rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is
-
-**AFTER**:
-
-```latex
-The previous section classified statistics for one evaluator. This section
-shows that the classification survives averaging over a population in which a
-fraction $\lambda\in[0,1]$ of evaluators meet the $A$-cue first (the
-credential in the example) and the rest the $B$-cue first (the letter), so
-that the mean belief under Jeffrey conditioning is
-$\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. Across an open set of priors, what makes a
-statistic first order or second order is the statistic itself, not the mixture
-$\lambda$: the mean belief lies in the plane through $\PB$ spanned by the
-leading directions of the two sequences, and a statistic's order is fixed by
-its differential on that plane (Propositions~\ref{prop:ORD}
-and~\ref{prop:PRO}).
-```
-
-The paragraph that follows ("Two definitions are worth pinning down ...") and
-the protection definition are unchanged; Change 6 inserts ORD after that
-definition.
-
----
-
-## Change 16 -- Introduction: why the sequence matters beyond one judgment (insert after line 113)
-
-**Purpose.** Motivation only; no new assumption, no new result, no new source.
-The panel example shows that sequence moves one judgment. This paragraph says
-why that matters in general: the sequence need not be assigned by chance, and
-if the share $\lambda$ of evaluators reading the credential first differs by
-group, the groups receive different mean beliefs with priors, preferences and
-evidence held the same. The paragraph is direction-neutral on first versus
-last (at $\omega=1$ the later impression prevails, at $\omega=0$ the earlier),
-hands that question to Proposition ADJ, and ends on the paper's existing
-classification.
-
-**Location.** New paragraph after the panel paragraph ending "...rather than
-the means of aggregation." (line 113; that sentence is itself edited by
-Change 3), before "Our conclusions for arrival sequence do not apply...".
-
-**INSERT:**
-
-```latex
-Which impression prevails matters beyond the single judgment. The
-impression-formation literature disagrees on the direction: \citet{Asch1946}
-reports that early terms dominate, and \citet{HogarthEinhorn1992} find primacy,
-recency or no order effect, depending on the characteristics of the task.
-Under either direction the sequence in which cues arrive is not neutral, and it
-need not be assigned by chance. A candidate who comes through a referral is met
-first through the letter and then through the credential, while a candidate
-who applies unsolicited is met first through the credential. If referral is
-more common in one group than in another, the two groups differ in the share
-$\lambda$ of evaluators who read the credential first. Two groups presenting
-the same evidence to evaluators with the same priors and the same preferences
-then receive different mean beliefs, and the difference is the sequence effect
-multiplied by the difference in their shares. A gap of that kind is not
-statistical discrimination in the sense of \citet{Phelps1972} and
-\citet{Arrow1973}, which rests on a difference in beliefs about the groups, and
-it has none of the sources that \citet{Bohren2019} distinguish, since
-preferences do not differ either; it arises from a difference in sequence
-alone. Which group it favours depends on whether the later or the earlier
-impression prevails, which Proposition~\ref{prop:ADJ} reads from the
-marginals. The gap also inherits the classification of this paper: it appears
-in the marginal probabilities and in the share of decisions changed, and an
-audit of the believed association does not register it.
-```
-
-**Verification status.** "The difference is the sequence effect multiplied by
-the difference in their shares" is the exact identity
-$\Pbar_\lambda-\Pbar_{\lambda'}=(\lambda-\lambda')(\PJ_{AB}-\PJ_{BA})$, checked
-entrywise at all orders in $c$ in `sympy/verify_ORD.py` step (9) (25/25),
-together with the first-order group gap on the $A$-marginal,
-$(\lambda-\lambda')\kappa'$, and the second-order group gap on the association.
-No proposition is stated, so no informal proof is owed; if the identity is ever
-displayed it belongs in a remark after Proposition ORD. The last two sentences
-are Propositions ADJ and ORD. The Hogarth--Einhorn clause is their abstract
-("under what conditions do primacy, recency, or no order effects occur ...
-interaction of information-processing strategies and task characteristics"),
-checked against the text (Drive: `hogarth_einhorn_1992.pdf`); the Asch clause
-is his "direction" account, as recorded under Change 10. The referral example
-is a conditional built from the paper's own two cues, not an empirical claim.
-`Bohren2019` enters the bibliography through Change 13, so this change must not
-be applied without it. Empirical anchors (Bertrand--Mullainathan 2004;
-Barto\v{s} et al. 2016) were considered and deliberately left out: neither has
-been read, and the paragraph does not need them.
-
-**Relation to the existing intro.** Manuscript line 102 already says that an
-evaluator who reads the quality cue last shows no gap between groups while
-remaining partial. That sentence and this paragraph are the two halves of one
-point -- sequence can silence a group gap and sequence can create one -- and
-could be brought together when lines 93--107 are next revised.
-
-## Change 17 -- WITHDRAWN as a manuscript change: the input/output tables live in `notes/empirical_analytics.tex`
+## W.A -- WITHDRAWN as a manuscript change: the input/output tables live in `notes/empirical_analytics.tex` (formerly Change 17)
 
 **Decision (author, 2026-09-21).** The manuscript does not need the whole
 table. The two tables (inputs; outputs), each row giving the symbol, its
@@ -1265,14 +1403,14 @@ the desirability vector is a payoff, not a probability, which may embed the
 chance that a candidate of given traits succeeds but is never updated by a cue.
 
 **Dependencies if rows are pasted.** The $\omega$ row and the mentions of
-Propositions ORD and ADJ presuppose Change 6.
+Propositions ORD and ADJ presuppose 5.B.
 
 **Verification status.** The only mathematics the tables assert is the $\omega$
 row, $\omega=[P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)]/[P^{A}(B{=}1)-r_1]$, exact
 in $c$: `sympy/check_zero_slope_identification.py` case (7) (25/25), the
 identity solved being `dampedB_deviation` in
 `lean/JeffreyOrder/Anchoring.lean`. The formula is claimed in Proposition ADJ
-(Change 6, closing sentence, added 2026-09-21), so the row cites a stated
+(5.B, closing sentence, added 2026-09-21), so the row cites a stated
 result. Every "Represents" entry is the manuscript's own wording (Setup,
 Section 2.2, Section 5 opener, Table 1).
 
@@ -1286,107 +1424,14 @@ with it.
 
 ---
 
-## Change 18 -- Setup (line 163) and Assumption 2 (line 235): what an impression is
+## De-duplication notes (what was cut in compaction)
 
-**Purpose.** The manuscript never says in one place that $q_0$ belongs to
-$A{=}0$, that $q_0+q_1=1$, that an impression sits on the same scale as the
-prior marginal it replaces, or that "soft" means strictly between zero and one.
+- The question/answer draft's resolution passage ($c^2 \ll \varepsilon \ll c$)
+  is dropped. The manuscript's terminology paragraph (line 83) already carries
+  it and stays unchanged.
+- The two-horn draft's second paragraph is folded into the single 1.D
+  paragraph.
+- The Hogarth-Einhorn instrument discussion is reduced to one clause (Change
+  2). The Zhao papers are not referred to at all (review log Entry 15); the
+  reads remain on record in `literature/measurement_susceptibility_survey.md`.
 
-**BEFORE** (line 163, first sentence, middle):
-
-> a cue on $A$ yields an impression (a target marginal) $q=(q_{0},q_{1})$ on
-> $A$'s partition and a cue on $B$ yields an impression $r=(r_{0},r_{1})$ on
-> $B$'s partition---with no cue bearing on a joint event.
-
-**AFTER**:
-
-```latex
-a cue on $A$ yields an impression (a target marginal) $q=(q_{0},q_{1})$ on
-$A$'s partition, with $q_i$ the credence that $A=i$ and $q_0+q_1=1$, and a cue
-on $B$ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition, with $r_j$
-the credence that $B=j$ and $r_0+r_1=1$---with no cue bearing on a joint event.
-An impression is thus a probability distribution on one attribute, on the same
-scale as the prior marginal it replaces, $(\alpha,1-\alpha)$ for $q$ and
-$(\beta,1-\beta)$ for $r$.
-```
-
-**BEFORE** (Assumption 2):
-
-> The cues are bundled, correlated, and soft, each delivering a credence on an
-> attribute's partition, not a decisive cue.
-
-**AFTER**:
-
-```latex
-The cues are bundled, correlated, and soft, each delivering a credence on an
-attribute's partition, not a decisive cue: $0<q_0<1$ and $0<r_0<1$.
-```
-
-**Verification status.** Notation only; nothing to verify. Every sympy script
-and Lean file already uses $q_1=1-q_0$, $r_1=1-r_0$ with $q_0,r_0\in(0,1)$.
-
----
-
-## Change 19 -- Setup: a worked numeric example (insert in Section 2.2, after the definition of the gap)
-
-**Purpose.** The manuscript has no numeric illustration. One example shows, in
-numbers a reader can recompute by hand, the three facts the paper rests on: a
-cue about one attribute moves the other attribute's marginal when $c\neq0$; the
-marginal read last ends at its delivered credence while the marginal read
-first drifts; and the sequence effect is large on the marginals and negligible
-on the believed association. The parameters avoid $r_0=\beta$ and $q_0=\alpha$,
-at which the first-order drift coefficients $K$ and $\kappa$ vanish and the
-example would illustrate the wrong order.
-
-**Location.** Section 2.2 (label sec:jeffrey), after Definition (gap) and
-before the paragraph "The benchmark $\PB$ is not a rival updating rule...".
-The last sentence uses $\PB$, which that paragraph defines; if the forward use
-reads badly, move the example to the end of Section 2.2.
-
-**INSERT:**
-
-```latex
-\paragraph{A worked example.} Let $\alpha=\beta=\tfrac12$ and $c=\tfrac1{20}$,
-so the prior table is
-$P=\bigl(\begin{smallmatrix}.30&.20\\.20&.30\end{smallmatrix}\bigr)$: each
-trait is judged as likely absent as present, and the two are believed to go
-together. The credential delivers $q_0=\tfrac15$ and the letter
-$r_0=\tfrac7{10}$. After the credential alone the table is
-$\bigl(\begin{smallmatrix}.12&.08\\.32&.48\end{smallmatrix}\bigr)$. The
-$A$-marginal is $(.20,.80)$, as delivered, and the $B$-marginal has moved from
-$(.50,.50)$ to $(.44,.56)$ although no cue about $B$ has been read. Reading the
-letter next resets the $B$-marginal to $(.70,.30)$ and moves the $A$-marginal
-from $.20$ to $\PJ_{AB}(A{=}0)=.234$. In the reverse sequence the $A$-marginal
-ends at $.20$, as delivered, and the $B$-marginal at $\PJ_{BA}(B{=}0)=.643$ in
-place of $.70$. The benchmark gives $\PB(A{=}0)=.227$ and $\PB(B{=}0)=.647$.
-The sequence effect is therefore $.034$ on the $A$-marginal and $.057$ on the
-$B$-marginal. On the believed association it is $.0002$, since
-$\assoc(\PJ_{AB})=.0273$ and $\assoc(\PJ_{BA})=.0271$, smaller than either
-marginal effect by a factor above $150$. The odds ratio equals $9/4$ for the
-prior, for both sequences and for the benchmark. Against the benchmark,
-sequence $AB$ departs by $.053$ on the marginal read last, by $.007$ on the
-marginal read first, and by $.002$ on the association.
-```
-
-**Optional sentence, after Proposition ADJ (requires Change 6):**
-
-```latex
-In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the
-credential first rates trustworthiness at $.56$ before the letter, the letter
-alone delivers $.30$, and a final rating of $.43$ gives
-$\omega=(.56-.43)/(.56-.30)=\tfrac12$.
-```
-
-**Verification status.** Every number in both blocks is a line of
-sympy/verify_example.py (18/18; registered in run_all.py), computed in exact
-rationals and compared with the rounded value printed: the two tables, the
-moved $B$-marginal $11/25$, $\PJ_{AB}(A{=}0)=18/77$, $\PJ_{BA}(B{=}0)=133/207$,
-$\PB(A{=}0)=27/119$, $\PB(B{=}0)=11/17$, the three associations $3/110$,
-$28/1035$, $60/2023$, the three sequence effects, the three gaps from the
-benchmark, the ratio above 150, the common odds ratio $9/4$, and the
-$\omega=\tfrac12$ read-back. The gaps agree with the propositions: first order
-on the last-read marginal (DRF), second order on the first-read marginal (DRF)
-and on the association (ASC). No proposition is stated, so no informal proof is
-owed. With $c=\tfrac1{20}$ against a maximum of $\tfrac14$ the example is not
-in the small-$c$ limit; it illustrates the ordering of magnitudes, not the
-asymptotic rates.
