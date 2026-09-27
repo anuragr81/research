@@ -119,6 +119,14 @@ def main():
           gap0.subs(GENERIC).subs(delta, sp.Rational(1, 2)))
     ck.eq("(5) ...and agrees at delta=1 (Wagner: same factor in either position commutes)",
           sp.simplify(gap0.subs(delta, 1)), 0)
+    # ---- (6) at delta=0 the two readings coincide: only the first cue is ever
+    #      applied, and on one cue Jeffrey and Bayes factor agree (IMM) --------
+    ck.mat_eq("(6) no adoption, Bayes-factor reading, sequence AB = single Jeffrey step on A, all c",
+              SAB.subs(delta, 0).applyfunc(sp.cancel), jeffrey_A(P0).applyfunc(sp.cancel))
+    ck.mat_eq("(6) no adoption, delivered-credence reading, sequence AB = the same table, all c",
+              damped_route_AB(0).applyfunc(sp.cancel), jeffrey_A(P0).applyfunc(sp.cancel))
+    ck.mat_eq("(6) ...and likewise BA under both readings = single Jeffrey step on B",
+              SBA.subs(delta, 0).applyfunc(sp.cancel), damped_route_BA(0).applyfunc(sp.cancel))
     return ck.done()
 
 
