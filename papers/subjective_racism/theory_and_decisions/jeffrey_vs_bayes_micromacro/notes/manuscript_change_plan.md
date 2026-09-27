@@ -205,10 +205,13 @@ in which the observer weights the later cue less, present whatever the
 attributes are), says which the paper studies, and why: full adoption removes
 the position channel and leaves the association channel as the only one.
 
-**Source text.** `notes/interior_omega.tex`, section "Where the prelude is
-expanded in the manuscript", quoted there in full (approved 2026-09-27).
-That section also maps each clause of the prelude to the proposition or
-paragraph that expands it quantitatively.
+**Source text.** `notes/interior_omega.tex`, section 1, which opens the
+document (approved 2026-09-27; settings made explicit and the table
+reference added the same day). Section 3 there maps each clause of the
+prelude to the proposition or paragraph that expands it. The prelude ends by
+citing Table `tab:settings`, which is section 2 of the document and goes
+into Section 6 of the manuscript beside 6.B; it depends on 5.B like the
+prelude does.
 
 **Citations.** `HogarthEinhorn1992`, `Asch1946` (both in the bibliography),
 `DiaconisZabell1982`. Hogarth--Einhorn Eq.~(4) and the definition of the
@@ -1350,8 +1353,10 @@ when they are." The second turns the scope
 condition into opposite predictions about rubric scoring, with the
 observation that decides between them.
 
-**Source text.** `notes/interior_omega.tex`, section "Two paragraphs for
-Section 6" (approved 2026-09-27). Proposition references are written in
+**Source text.** `notes/interior_omega.tex`, section 6 (the two paragraphs
+and the scope sentences) and section 2 (Table `tab:settings`, ten rows,
+which the prelude cites and which sits beside these paragraphs), both
+approved 2026-09-27. Proposition references are written in
 words there; replace with `\ref{prop:IMM}`, `\ref{prop:DRF}`,
 `\ref{prop:ADJ}` when pasting.
 

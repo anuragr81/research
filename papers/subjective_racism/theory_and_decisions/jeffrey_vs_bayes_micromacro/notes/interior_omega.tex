@@ -1,23 +1,29 @@
 % =====================================================================
 % interior_omega.tex
 %
-% What can be said about sequence effects at c = 0 when the adoption weight
-% omega is strictly between 0 and 1, i.e. where the paper's own channel
-% (sequence dependence carried through the prior association) is switched
-% off and the position channel (weakening of whichever cue is read second) is
-% at full strength.
+% The two channels of sequence dependence, the association channel and the
+% position channel, and the two settings they define, full adoption
+% (omega = 1, association channel only) and partial or no adoption
+% (omega < 1, position channel operates).  The document opens with the
+% introduction's prelude and everything after it expands a clause of the
+% prelude.
 %
 % Terminology (agreed 2026-09-27): omega = 1 is FULL ADOPTION of the later
-% cue, omega = 0 is NO ADOPTION, 0 < omega < 1 is PARTIAL ADOPTION.
+% cue, omega = 0 is NO ADOPTION, 0 < omega < 1 is PARTIAL ADOPTION.  The
+% channels are the ASSOCIATION channel (exists only at c != 0) and the
+% POSITION channel (present at c = 0).  Never "interaction" or "bias" as
+% names.
 %
-% Verification: rows 1, 2, 3, 5, 6 are sympy/verify_interior_omega.py
-% (20/20, symbolic in alpha, beta, q0, r0, omega, lambda); the odds-ratio
-% part of row 2 is Lemma SEP / Lean isSeparable_applySteps; row 3 is
-% Proposition ADJ (plan 5.B) and sympy case (6a),(7c) of
-% check_zero_slope_identification.py. Row 4 is inferred from the linearity
-% of the score and is NOT separately verified.
+% Verification: the rows of the independence table are
+% sympy/verify_interior_omega.py (23/23, symbolic in alpha, beta, q0, r0,
+% omega, lambda), Lemma SEP / Lean isSeparable_applySteps for the odds
+% ratio, Proposition ADJ (plan 5.B) and sympy check_zero_slope_identification
+% cases (6a),(7c) for the weight.  The decision row is inferred from the
+% linearity of the score and is NOT separately verified.
 %
-% Macros are the manuscript's own, so rows paste unchanged.
+% Macros are the manuscript's own, so text pastes unchanged.  Proposition
+% references are written in words here; replace with \ref{prop:...} when
+% pasting.  \citep/\citet are stubbed so the file compiles alone.
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=2cm]{geometry}
@@ -36,29 +42,212 @@
 \providecommand{\citep}[1]{(#1)}
 \providecommand{\citet}[1]{#1}
 
-\title{Sequence effects at independence under partial adoption}
+\title{The two channels of sequence dependence\\ \large the prelude and what expands it}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
+\renewcommand{\arraystretch}{1.3}
 
-\noindent Setting. The prior covariance is $c=0$, so the two attributes are
-believed unrelated, and the adoption weight satisfies $0<\omega<1$, so the cue
-read second is adopted in part. At $c=0$ the association channel, sequence
-dependence carried through the prior association, is switched off. What
-remains is the position channel, the weakening of whichever cue is read second,
-which is at full strength here. Full adoption ($\omega=1$) is the setting of
-Sections~4 and~5, where the position channel is absent and the association
-channel vanishes at
-$c=0$ (Proposition IMM). All quantities below are exact at $c=0$; the
-$\bigO(c)$ corrections are in the script and are not the point.
+\section*{1. The prelude}
 
-\renewcommand{\arraystretch}{1.35}
-\medskip
+\noindent For the introduction, immediately after the opening sentence saying
+that how sequence dependence registers in observed statistics has received
+little attention, and before the paper's own contribution is stated (plan
+1.A2). Approved 2026-09-27, with the settings made explicit the same day.
+
+\begin{quote}
+More specifically, arrival-sequence dependence can enter through two
+channels, an \textbf{association} channel, in which one cue changes what the
+other implies and which exists only when the attributes are believed related,
+and a \textbf{position} channel, in which the observer weights the later cue
+less whatever the attributes are \citep{HogarthEinhorn1992,Asch1946}. Which
+channels operate is fixed by how fully the later cue is adopted. When it is
+adopted only in part, the position channel operates and every marginal
+registers the sequence even when the attributes are believed unrelated. When
+each impression is adopted in full \citep{DiaconisZabell1982}, the position
+channel is absent, the association channel is the only one, and the sequence
+registers unevenly across statistics. The current paper explores the
+full-adoption setting. Table~\ref{tab:settings} in Section~6 sets the two
+settings side by side.
+\end{quote}
+
+\noindent The prelude does four things, and each section below expands one
+of them. It names the two channels (Sections~4 and~5 below give their
+mechanics). It says that the adoption weight decides which channels operate
+(Section~3). It says what each setting does to the statistics (the table it
+cites, Section~2). And it says which setting the paper studies (Section~6,
+the two paragraphs for the scope section).
+
+\section*{2. The two settings, the table the prelude cites}
+
+\noindent For Section~6 of the manuscript, beside the two paragraphs of
+plan 6.B, labelled \texttt{tab:settings}. Every cell is a proposition already
+in the manuscript or a row of the independence table (Section~4 below). The
+rows of the full comparison (Section~5) that are placements onto Weisberg's
+vocabulary, and the decision row, which is inferred, are not in it. The
+distinction in the first row, order dependence arising in the rule or in the
+inputs, is Weisberg's; his name is kept out of the cells because the preprint
+carries no bibliographic line, and can be added to the caption once the entry
+is confirmed.
+
+\small
+\begin{longtable}{@{}L{3.0cm}L{6.5cm}L{6.5cm}@{}}
+\caption{The two settings. Under full adoption only the association channel
+operates; under partial or no adoption the position channel operates as
+well, and the association channel with it when the attributes are believed
+related.}\label{tab:settings}\\
+\toprule
+& \textbf{Full adoption, $\omega=1$} \newline (association channel only)
+& \textbf{Partial or no adoption, $\omega<1$} \newline (position channel operates) \\
+\midrule
+\endfirsthead
+\toprule
+& \textbf{Full adoption, $\omega=1$} & \textbf{Partial or no adoption, $\omega<1$} \\
+\midrule
+\endhead
+Where the order dependence arises &
+In the rule. The inputs $q,r$ are the same in either position; order matters
+because two rigid steps on correlated partitions do not commute
+(Diaconis--Zabell). &
+In the inputs. What the second cue delivers depends on its position; the
+rule adds nothing new at $c=0$. \\
+\addlinespace[3pt]
+Source in the model &
+Association only. Zero at $c=0$ (Proposition IMM). &
+Position, present at $c=0$, plus association when $c\neq0$. \\
+\addlinespace[3pt]
+Status of the inputs &
+Order-independent. The credential delivers $q$ whether or not the letter
+was read. &
+Order-dependent. The later cue is adopted only in part, so what it delivers
+depends on being second. \\
+\addlinespace[3pt]
+Size of the effect &
+Small, first order in $c$, spread unevenly across statistics. &
+Blunt. $(1-\omega)(\alpha-q_0)$ on a marginal whatever $c$ is
+(Proposition ADJ). \\
+\addlinespace[3pt]
+Marginals &
+Last-read exact, first-read drifts at first order (Proposition DRF). &
+Both differ at zeroth order between sequences. \\
+\addlinespace[3pt]
+Believed association &
+Second order, between sequences and pooled (Propositions DEC, PRO). &
+Zero between sequences at $c=0$, first order in $c$. Pooled, nonzero at
+$c=0$, $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$. \\
+\addlinespace[3pt]
+Odds ratio &
+Identical across sequences, every $c$ (Lemma SEP). &
+Identical across sequences, every $c$ (Lemma SEP). The one statistic that
+does not move. \\
+\addlinespace[3pt]
+Classification by order in $c$ &
+Is the contribution. Which statistics are protected, and why. &
+Is moot. Marginal-based statistics see the effect at zeroth order, the odds
+ratio never; there is no fine structure to classify. \\
+\addlinespace[3pt]
+Audit implication &
+False negative. An association audit passes a sequence-dependent
+population. &
+False positive as well. A pooled association audit returns a stereotype no
+member holds, from mixing alone. \\
+\addlinespace[3pt]
+Identification &
+The reading, from which marginal ignores the prior association
+(Propositions ORD, DRF). &
+The weight, from three ratings (Proposition ADJ). At its strongest here,
+since the position channel is what ADJ reads. \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section*{3. Where each clause of the prelude gets its numbers}
+
+\noindent The prelude's clauses, in order, and the proposition or paragraph
+that expands each.
+
+\small
+\begin{longtable}{@{}L{3.3cm}L{4.2cm}L{4.0cm}L{4.4cm}@{}}
+\caption{The prelude clause by clause.}\label{tab:map}\\
+\toprule
+\textbf{Prelude clause} & \textbf{Quantitative form} & \textbf{Where it lives} & \textbf{Still to add} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Prelude clause} & \textbf{Quantitative form} & \textbf{Where it lives} & \textbf{Still to add} \\
+\midrule
+\endhead
+an association channel that exists only when the attributes are believed
+related &
+$\PJ_{AB}-\PJ_{BA}=c(\kappa R_1-\kappa'R_2)+\bigO(c^2)$; zero at $c=0$; zero
+only when each delivered credence equals the prior marginal it resets &
+DIV and IMM, Section~4 of the manuscript &
+Optionally the forcing sentence: with impressions read as delivered
+credences, the effect is nonzero at first order whenever either cue moves
+its marginal (at 3.B's spot, or a remark after DIV) \\
+\addlinespace[3pt]
+a position channel that weights the later cue less &
+the three lines of ADJ; $\omega$ from three ratings &
+5.B, Proposition ADJ &
+Nothing \\
+\addlinespace[3pt]
+which channels operate is fixed by how fully the later cue is adopted &
+last-read marginal pinned at $\omega=1$ (ADJ endpoint); the association's
+sequence-effect $c^1$ coefficient carries $(1-\omega)$; the pooled
+association distortion carries $(1-\omega)^2$; a position-scaled
+Bayes-factor update commutes only at $\omega=1$ &
+rows 3--5 of the interior script; Table~\ref{tab:indep}; the two-channel
+paragraph (Section~6 below) &
+The two-channel paragraph. It is the only place this clause is expanded in
+prose. \\
+\addlinespace[3pt]
+every marginal registers the sequence even when the attributes are believed
+unrelated &
+$(1-\omega)(\alpha-q_0)$ on competence, $-(1-\omega)(\beta-r_0)$ on
+trustworthiness, at $c=0$ &
+ADJ gives the first; the second is row~1 of Table~\ref{tab:indep} and
+appears in the two-channel paragraph &
+Nothing. Decided 2026-09-27: the trustworthiness value lives in the Section~6
+paragraph, not in ADJ. \\
+\addlinespace[3pt]
+registers unevenly across statistics &
+ORD's row table, $c\kappa'$, $-c\kappa$, $\bigO(c^2)$ on the association;
+PRO's criterion; the manuscript's summary table &
+5.B and the summary table, Section~5 of the manuscript &
+Nothing \\
+\addlinespace[3pt]
+the current paper explores the full-adoption setting &
+the scope sentences, the two channels named, the rubric prediction &
+Section~6 of the manuscript, the two paragraphs of 6.B, plus the
+Assumption~3 scope sentence &
+The Assumption~3 sentence, if the one-cue-per-attribute principle is to be
+stated where the assumption is \\
+\addlinespace[3pt]
+Table~\ref{tab:settings} sets the two settings side by side &
+the ten rows of Table~\ref{tab:settings} &
+Section~6 of the manuscript, beside 6.B &
+The table itself (Section~2 above) \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section*{4. The position channel at independence, the verified basis}
+
+\noindent This section is behind the right-hand column of
+Table~\ref{tab:settings} and behind the prelude's clause that under partial
+adoption every marginal registers the sequence even when the attributes are
+believed unrelated. Setting: the prior covariance is $c=0$, so the two
+attributes are believed unrelated, and $\omega<1$, so the cue read second is
+adopted in part or not at all. At $c=0$ the association channel is switched
+off; what remains is the position channel at full strength. All quantities
+are exact at $c=0$; the $\bigO(c)$ corrections are in the script and are not
+the point.
+
 \small
 \begin{longtable}{@{}L{0.5cm}L{2.6cm}L{6.6cm}L{6.2cm}@{}}
-\caption{What can be said at $c=0$ and $0<\omega<1$.}\\
+\caption{What can be said at $c=0$ and $\omega<1$.}\label{tab:indep}\\
 \toprule
 & \textbf{Statistic} & \textbf{Value at $c=0$} & \textbf{What it says} \\
 \midrule
@@ -98,7 +287,8 @@ score gap $=\langle v,\PJ_{AB}-\PJ_{BA}\rangle$, a fixed multiple of row~1,
 independent of $c$ &
 The share of evaluators whose decision flips is the mass of a band of fixed
 width, not $\bigO(c)$, and the surplus-weighted loss is not second order.
-\emph{Inferred from linearity of the score; not separately verified.} \\
+\emph{Inferred from linearity of the score; not separately verified. Not in
+Table~\ref{tab:settings}.} \\
 \addlinespace[6pt]
 \multicolumn{4}{@{}l}{\emph{Pooled over a population, against the benchmark, $0<\lambda<1$}}\\
 \addlinespace[2pt]
@@ -127,26 +317,30 @@ which is one more reason to prefer Proposition ORD's form of the test. \\
 \end{longtable}
 \normalsize
 
-\medskip
-\noindent\textbf{The two settings compared.} The primacy regime is taken for
-the interior, since with $\omega$ on the second cue every interior value
-weakens the later impression. Weisberg (\emph{Commutativity or Holism?}, read
-in full 2026-09-27; see \texttt{literature/weisberg2009}) supplies the
-vocabulary. He separates the \emph{rule} that propagates a change on a
-partition from the \emph{inputs problem} of how an experience fixes the values
-on that partition; Lange's point is that reversing two experiences does not
-reverse their input values; Wagner's theorem, read as a dilemma, says that
+\section*{5. The full comparison, with Weisberg's placements (record)}
+
+\noindent This is Table~\ref{tab:settings} before pruning, kept as the record
+of what was set aside and why. The primacy regime is taken for the interior,
+since with $\omega$ on the second cue every interior value weakens the later
+impression. Weisberg (\emph{Commutativity or Holism?}, read in full
+2026-09-27; see \texttt{literature/weisberg2009}) supplies the vocabulary. He
+separates the \emph{rule} that propagates a change on a partition from the
+\emph{inputs problem} of how an experience fixes the values on that
+partition; Lange's point is that reversing two experiences does not reverse
+their input values; Wagner's theorem, read as a dilemma, says that
 commutativity on experiences forces each experience to carry the same Bayes
 factor whatever background it meets, which is anti-holism; and rigidity, the
 holding of conditionals fixed, prevents a later discovery from ever
 \emph{undercutting} earlier support, leaving only rebutting. Marks: $\dagger$
-a row of Table~1 or of \texttt{verify\_interior\_omega.py}; $\ddagger$
-inferred from those rows, not separately checked; $\diamond$ a mapping onto
-Weisberg's terms, not a computation.
+a row of Table~\ref{tab:indep} or of \texttt{verify\_interior\_omega.py},
+in Table~\ref{tab:settings}; $\ddagger$ inferred, not separately checked, not
+in Table~\ref{tab:settings}; $\diamond$ a mapping onto Weisberg's terms, not
+a computation, not in Table~\ref{tab:settings} except for the first and
+third rows, which enter without his name.
 
 \small
 \begin{longtable}{@{}L{3.1cm}L{6.4cm}L{6.4cm}@{}}
-\caption{Full adoption against partial adoption (primacy regime).}\\
+\caption{Full adoption against partial or no adoption, all rows.}\label{tab:full}\\
 \toprule
 & \textbf{Full adoption, $\omega=1$} & \textbf{Partial or no adoption, $\omega<1$} \\
 \midrule
@@ -238,7 +432,7 @@ The weight, from three ratings (ADJ). At its strongest here, since the
 position channel is what ADJ reads. \\
 \addlinespace[3pt]
 Literature stance $\diamond$ &
-Diaconis--Zabell's premise; Hawthorne's objection inherited; Lange's point
+Diaconis--Zabell's setting; Hawthorne's objection inherited; Lange's point
 declined. &
 Hawthorne answered by measurement; Hogarth--Einhorn's anchoring is the model;
 Lange's point conceded by one parameter; commutativity given up on principle,
@@ -247,7 +441,6 @@ not only through the reading. \\
 \end{longtable}
 \normalsize
 
-\medskip
 \noindent What the comparison says about scope. The paper's contribution lives
 in the regime where the sequence effect is subtle, arising in the rule rather
 than in the inputs, existing only because the traits are believed related, and
@@ -260,30 +453,16 @@ else. The two regimes are two different questions. Under full adoption the
 association audit fails by silence; under partial adoption it fails by
 fabrication as well.
 
-\medskip
-\noindent Two sentences for the scope statement (approved 2026-09-27).
+\section*{6. Two paragraphs for Section 6, and the scope sentences}
 
-\noindent The position channel is a temporal bias of the observer, present
-whether or not the attributes are believed related, while the association
-channel runs through what one cue implies about the other and exists only
-when they are.
-
-\noindent Full adoption is the setting in which the only source of sequence
-dependence is the association channel, which vanishes at $c=0$; partial
-adoption adds the position channel, the weakening of whichever cue is read
-second, which is present at $c=0$ and so lies outside the expansion in $c$
-on which the results rest.
-
-\medskip
-\section*{Two paragraphs for Section 6}
-
-\noindent Both drafted 2026-09-27 and approved in discussion. The first names
-the two channels; the second turns the scope condition into opposite
-predictions about one procedure. They follow 6.A in the plan. Every quantity
-is a row of Table~1 or a proposition already in the manuscript; the decision
-row of Table~1, which is inferred, is not used. Rubric scoring is a new
-element, an extension of the hiring-panel example, and no empirical claim is
-made about whether rubrics work.
+\noindent These expand the prelude's last clauses, that the paper explores
+the full-adoption setting and that the adoption weight decides which channels
+operate. They follow 6.A in the plan (6.B), with Table~\ref{tab:settings}
+beside them. Every quantity is a row of Table~\ref{tab:indep} or a
+proposition already in the manuscript; the decision row of
+Table~\ref{tab:indep}, which is inferred, is not used. Rubric scoring is a
+new element, an extension of the hiring-panel example, and no empirical claim
+is made about whether rubrics work.
 
 \paragraph{The two channels.}
 Sequence dependence has two channels in this setting, and the results of
@@ -336,101 +515,35 @@ and the difference is observable. In the rubric setting $r_1$ is on the
 record, so Proposition ADJ needs only the belief about trustworthiness after
 the credential alone and after both documents to say which prediction holds.
 
-\medskip
-\section*{Where the prelude is expanded in the manuscript}
+\paragraph{Two sentences for the scope statement (approved 2026-09-27).}
+The position channel is a temporal bias of the observer, present whether or
+not the attributes are believed related, while the association channel runs
+through what one cue implies about the other and exists only when they are.
+Full adoption is the setting in which the only source of sequence dependence
+is the association channel, which vanishes at $c=0$; partial adoption adds
+the position channel, the weakening of whichever cue is read second, which is
+present at $c=0$ and so lies outside the expansion in $c$ on which the
+results rest.
 
-\noindent The introduction's prelude (approved 2026-09-27) names the two
-channels and says which one the paper studies:
-
-\begin{quote}\small
-More specifically, arrival-sequence dependence can enter through two
-channels, an \textbf{association} channel, in which one cue changes what the
-other implies and which exists only when the attributes are believed related,
-and a \textbf{position} channel, in which the observer weights the later cue
-less whatever the attributes are \citep{HogarthEinhorn1992,Asch1946}. Unlike
-the position channel, under which the later cue is adopted only in part and
-every marginal registers the sequence even when the attributes are believed
-unrelated, the association channel is one under which the sequence registers
-unevenly across statistics, because each impression is adopted in full
-\citep{DiaconisZabell1982} and the position channel is absent. The current
-paper explores this setting.
-\end{quote}
-
-\noindent Each clause has a quantitative home. Most already exist.
-
-\small
-\begin{longtable}{@{}L{3.3cm}L{4.2cm}L{4.0cm}L{4.4cm}@{}}
-\caption{Where each clause of the prelude gets its numbers.}\\
-\toprule
-\textbf{Prelude clause} & \textbf{Quantitative form} & \textbf{Where it lives} & \textbf{Still to add} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Prelude clause} & \textbf{Quantitative form} & \textbf{Where it lives} & \textbf{Still to add} \\
-\midrule
-\endhead
-an association channel that exists only when the attributes are believed
-related &
-$\PJ_{AB}-\PJ_{BA}=c(\kappa R_1-\kappa'R_2)+\bigO(c^2)$; zero at $c=0$; zero
-only when each delivered credence equals the prior marginal it resets &
-DIV and IMM, Section~4 &
-Optionally the forcing sentence: with impressions read as delivered
-credences, the effect is nonzero at first order whenever either cue moves
-its marginal (at 3.B's spot, or a remark after DIV) \\
-\addlinespace[3pt]
-a position channel that weights the later cue less &
-the three lines of ADJ; $\omega$ from three ratings &
-5.B, Proposition ADJ &
-Nothing \\
-\addlinespace[3pt]
-every marginal registers the sequence even when the attributes are believed
-unrelated &
-$(1-\omega)(\alpha-q_0)$ on competence, $-(1-\omega)(\beta-r_0)$ on
-trustworthiness, at $c=0$ &
-ADJ gives the first; the second is row~1 of the interior script and appears
-in the two-channel paragraph &
-Nothing. Decided 2026-09-27: it lives in the Section~6 two-channel
-paragraph, not in ADJ. \\
-\addlinespace[3pt]
-registers unevenly across statistics &
-ORD's row table, $c\kappa'$, $-c\kappa$, $\bigO(c^2)$ on the association;
-PRO's criterion; the summary table &
-5.B and the summary table, Section~5 &
-Nothing \\
-\addlinespace[3pt]
-adopted in full, and the position channel is absent &
-last-read marginal pinned at $\omega=1$ (ADJ endpoint); the association's
-sequence-effect $c^1$ coefficient carries $(1-\omega)$; the pooled
-association distortion carries $(1-\omega)^2$; a position-scaled
-Bayes-factor update commutes only at $\omega=1$ &
-rows 3--5 of the interior script; Table~1 and the two Section~6 paragraphs
-above &
-The two Section~6 paragraphs. They are the only place this clause is
-expanded. \\
-\addlinespace[3pt]
-the current paper explores this setting &
-the scope sentence, the two channels named, the rubric prediction &
-Section~6, the same two paragraphs, plus the Assumption~3 scope sentence &
-The Assumption~3 sentence, if the one-cue-per-attribute principle is to be
-stated where the assumption is \\
-\bottomrule
-\end{longtable}
-\normalsize
+\section*{7. Notes for applying}
 
 \paragraph{Duplication to watch.} Once everything is applied,
-$(1-\omega)(\alpha-q_0)$ would appear in three places: the statement of ADJ,
-6.A's rival-mechanisms paragraph, and the two-channel paragraph. ADJ is the
-proposition and carries it; the other two cite ADJ and do not repeat the
-expression. The pooled association distortion is stated only in the
-two-channel paragraph and is fine.
+$(1-\omega)(\alpha-q_0)$ would appear in ADJ, in Table~\ref{tab:settings},
+and in the two-channel paragraph. ADJ is the proposition and carries it; the
+table and the paragraph cite ADJ. 6.A already cites ADJ and does not repeat
+the expression. The pooled association distortion appears in
+Table~\ref{tab:settings} and the two-channel paragraph, both citing the
+verification, and nowhere else.
 
-\paragraph{What must not go in.} The decision row of Table~1 (share of flips
-and loss at interior $\omega$) is inferred from linearity and not checked; it
-stays out of the manuscript. Nothing at interior $\omega$ enters as a
-proposition; the interior numbers appear inside Section~6 prose, as scope
-justification, each traceable to a row of the interior script.
+\paragraph{What must not go in.} The decision row of Table~\ref{tab:indep}
+(share of flips and loss at interior $\omega$) is inferred from linearity and
+not checked; it stays out of the manuscript. Nothing at interior $\omega$
+enters as a proposition; the interior numbers appear inside Section~6 prose
+and Table~\ref{tab:settings}, as scope justification, each traceable to a row
+of the interior script.
 
-\paragraph{Order of application.} 5.B before the two Section~6 paragraphs,
-since both cite ADJ; B.A before either, for \texttt{Hawthorne2004}.
+\paragraph{Order of application.} 5.B before Table~\ref{tab:settings}, the
+two Section~6 paragraphs and the prelude, since all cite ADJ; B.A before any
+of them, for the bibliography.
 
 \end{document}
