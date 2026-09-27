@@ -16,7 +16,7 @@ Within a section the letters run in order of appearance. The former change
 number is kept in each heading for reference to earlier commits and notes.
 
 **Order of application.** 5.B (Propositions ORD and ADJ) must be applied
-before anything that cites them: 0.A, 1.C, 1.D, 1.E, 3.A, 3.B, 3.D, 5.A, 6.A.
+before anything that cites them: 0.A, 1.A2, 1.C, 1.D, 1.E, 3.A, 3.B, 3.D, 5.A, 6.A, 6.B.
 B.A (bibliography) must be applied before 1.A, 1.C, 1.D, 3.A, 3.B, 3.C, 3.D,
 6.A. Everything else is independent.
 
@@ -24,6 +24,7 @@ B.A (bibliography) must be applied before 1.A, 1.C, 1.D, 3.A, 3.B, 3.C, 3.D,
 
 - 0.A -- Abstract
 - 1.A -- Introduction, paragraph 1
+- 1.A2 -- Introduction, paragraph 1, the two-channel prelude, association and position (pointer to interior_omega.tex)
 - 1.B -- Introduction, end of the hiring-panel paragraph (superseded)
 - 1.C -- Introduction, new paragraph after the hiring-panel paragraph
 - 1.D -- Introduction, the limits paragraph
@@ -39,6 +40,7 @@ B.A (bibliography) must be applied before 1.A, 1.C, 1.D, 3.A, 3.B, 3.C, 3.D,
 - 5.A -- Section 5, title and opening
 - 5.B -- Section 5, Propositions ORD and ADJ
 - 6.A -- Scope, rival mechanisms
+- 6.B -- Scope, the two channels and the rubric prediction (pointer to interior_omega.tex)
 - B.A -- Bibliography
 - B.B -- AI declaration
 - W.A -- Withdrawn: input/output tables
@@ -191,6 +193,41 @@ holds for any number of attributes and cues.
 
 ---
 
+## 1.A2 -- Introduction, paragraph 1: the two-channel prelude (pointer)
+
+**Purpose.** Immediately after the opening sentence(s) saying that how
+sequence dependence registers in observed statistics has received little
+attention, and before the paper's own contribution is stated. Names the two
+channels through which arrival-sequence dependence can enter (the
+association channel, in which one cue changes what the other implies,
+present only when the attributes are believed related; the position channel,
+in which the observer weights the later cue less, present whatever the
+attributes are), says which the paper studies, and why: full adoption removes
+the position channel and leaves the association channel as the only one.
+
+**Source text.** `notes/interior_omega.tex`, section "Where the prelude is
+expanded in the manuscript", quoted there in full (approved 2026-09-27).
+That section also maps each clause of the prelude to the proposition or
+paragraph that expands it quantitatively.
+
+**Citations.** `HogarthEinhorn1992`, `Asch1946` (both in the bibliography),
+`DiaconisZabell1982`. Hogarth--Einhorn Eq.~(4) and the definition of the
+adjustment weight verified against their text 2026-09-27.
+
+**Interaction with 1.A.** Sits inside the paragraph 1.A rewrites, so apply
+with 1.A or against the author's current paragraph 1. Labelled 1.A2 rather
+than renumbering 1.B--1.E.
+
+**Terminology (decided 2026-09-27).** The channels are the **association
+channel** and the **position channel**. "Interaction" was rejected because
+the manuscript already uses "interactions among attributes" (line 74) for
+the preserved association, and because in a $2\times2$ table the interaction
+term is the log odds ratio; "bias" was rejected because 3.D cites
+Bohren--Imas--Rosenberg's "biased beliefs" and the discrimination literature
+uses bias for prejudice. Neither word is used as a channel name anywhere.
+
+---
+
 ## 1.B -- Intro paragraph 2 (lines 76-79): final two sentences only (formerly Change 3)
 
 **SUPERSEDED (author, 2026-09-21).** While compacting the introduction the
@@ -311,7 +348,8 @@ $\omega$ and its two endpoints. The appended paragraph below repeats the
 endpoints in its final sentence. When this change is applied, either drop that
 final sentence's endpoint clause or open the appended paragraph with "Call that
 degree of adoption the weight $\omega$", keeping the statement of the premise
-and its attribution (Diaconis--Zabell hold it; Hawthorne objects) and the
+and its attribution (Diaconis--Zabell's setting, acceptability left to
+psychology by their own \S3.2; Hawthorne names and objects) and the
 observed/recovered sentence. No text below has been cut.
 
 **Purpose.** State the modelling assumption (impressions arrive as revised
@@ -373,9 +411,10 @@ predicts none.
 Updating on levels rests on a second premise, which the paper states rather
 than assumes: the latest impression sets its attribute's marginal outright,
 with no weight left on what an earlier cue implied about that attribute.
-\citet{DiaconisZabell1982} hold that premise. \citet{Hawthorne2004} objects
-that full adoption is implausible; the alternative to a weight of one on the
-later cue is a weight below one. That weight has two endpoints, the later impression
+\citet{DiaconisZabell1982} state their commutation criterion in that setting
+and leave the acceptability of each step to psychology; \citet{Hawthorne2004}
+names the premise and objects that full adoption is implausible, so that the
+alternative to a weight of one on the later cue is a weight below one. That weight has two endpoints, the later impression
 overwriting the earlier one and the earlier impression never being moved, and
 the belief-adjustment model of \citet{HogarthEinhorn1992} lies between them
 with a memory that, in their words, ``is limited to the location of one's
@@ -398,7 +437,8 @@ impressions arrive as *levels* rather than as Bayes factors. Sequential
 updating on levels rests on a second premise, full adoption (Hawthorne's
 Amnestic Update-Factor Thesis, p.~96), which licenses using the same `q` and
 `r` on both reading orders. The appended paragraph states it, attributes it
-(Diaconis--Zabell hold it; Hawthorne objects, pp.~98--99), names the weight
+(Diaconis--Zabell's setting, not their premise, see
+`literature/diaconis_zabell1982`; Hawthorne names it and objects, pp.~98--99), names the weight
 $\omega$ with its two endpoints, and points to Proposition ADJ (5.B) for
 the identification. The $\omega=0$ endpoint is the paper's own construction:
 no source states "first impressions stick" as full protection of the first
@@ -1264,7 +1304,7 @@ $\omega=0$, and neither in between. A reading on which neither marginal ignores
 the association is consistent with an interior weight and with the benchmark
 alike; the two are separated by the sequence comparison, under which the benchmark
 shows no sequence effect at any $c$ and an interior weight shows one already
-at $c=0$, equal to $(1-\omega)(\alpha-q_0)$. Since every rule here is a separable reweighting, all
+at $c=0$ (Proposition~\ref{prop:ADJ}). Since every rule here is a separable reweighting, all
 of them carry the prior's odds ratio (Lemma~\ref{lem:SEP}), so the odds ratio
 separates none of them and the two marginals are the only statistics that do. Three cautions bound the claim. The
 classification covers this one-parameter adjustment family, not every
@@ -1294,6 +1334,40 @@ Garber removed from the illustration clause: his repeated-glances example
 targets Field's portable factors and never discusses order. A bounded-memory citation
 (Wilson 2014, Econometrica) is available if a referee asks for one, but the
 family is stated through Hogarth-Einhorn's own equation, which is already cited.
+
+---
+
+## 6.B -- Scope: the two channels, and opposite predictions about one procedure (pointer)
+
+**Purpose.** Two paragraphs following 6.A. The first names the two channels
+with their closed forms and states the scope condition: full adoption is the
+setting in which the association channel is the only one; partial adoption
+adds the position channel, present at $c=0$. It ends on the approved
+sentence, "the position channel is a temporal bias of the observer, present
+whether or not the attributes are believed related, while the association
+channel runs through what one cue implies about the other and exists only
+when they are." The second turns the scope
+condition into opposite predictions about rubric scoring, with the
+observation that decides between them.
+
+**Source text.** `notes/interior_omega.tex`, section "Two paragraphs for
+Section 6" (approved 2026-09-27). Proposition references are written in
+words there; replace with `\ref{prop:IMM}`, `\ref{prop:DRF}`,
+`\ref{prop:ADJ}` when pasting.
+
+**Decision (2026-09-27).** The trustworthiness marginal's value at $c=0$,
+$-(1-\omega)(\beta-r_0)$, lives here and not in Proposition ADJ. ADJ keeps
+its verified statement and 28\% proof. The competence marginal's value,
+$(1-\omega)(\alpha-q_0)$, is stated in ADJ and only cited here and in 6.A.
+
+**Verification.** Every quantity is a row of `sympy/verify_interior_omega.py`
+(23/23) or a proposition already in the manuscript; the decision row of that
+document's Table~1 is inferred, not verified, and is not used. Rubric scoring
+is a new element, an extension of the hiring-panel example; no empirical
+claim is made about whether rubrics work.
+
+**Dependencies.** 5.B (ADJ), B.A (`Hawthorne2004` is not cited here, but
+`Wagner2002` is, already present).
 
 ---
 

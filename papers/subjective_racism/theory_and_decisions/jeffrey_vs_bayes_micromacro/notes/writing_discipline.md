@@ -79,6 +79,13 @@ that world out. A claim that cannot name its falsifier does not enter.
   weight** ($\omega$). "Amnestic" only where Hawthorne is quoted; "primacy"
   and "recency" only where Hogarth--Einhorn are cited; "overwrite" only as a
   gloss on first use.
+- The two channels of sequence dependence are the **association channel**
+  (through what one cue implies about the other; exists only at $c\neq0$) and
+  the **position channel** (the observer weights the later cue less; present
+  at $c=0$). Agreed 2026-09-27. Not "interaction" (collides with the
+  manuscript's "interactions among attributes" and with the log-linear
+  interaction term) and not "bias" (collides with "biased beliefs" in 3.D and
+  with the discrimination literature's sense).
 - "Marginal", not "base rate". "Sequence" for reading order, "order" for
   first/second order in $c$ (the manuscript's own terminology paragraph).
 - No new terms. If a term is not defined in the manuscript, use the
