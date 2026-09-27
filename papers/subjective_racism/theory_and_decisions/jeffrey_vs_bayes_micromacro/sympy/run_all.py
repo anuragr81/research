@@ -26,6 +26,7 @@ SCRIPTS = [
      "Anchoring family -- zero-slope mechanism identification"),
     ("verify_tables", "Tables 1 and 2  -- the order summary, end to end"),
     ("verify_example", "Worked example  -- every number printed in Setup"),
+    ("verify_interior_omega", "Interior weight -- orders in c away from full adoption"),
 ]
 
 
