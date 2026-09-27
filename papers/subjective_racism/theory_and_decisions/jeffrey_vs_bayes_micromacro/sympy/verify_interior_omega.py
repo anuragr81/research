@@ -105,6 +105,20 @@ def main():
        at_generic(dS0).subs({lam: sp.Rational(2, 5), delta: sp.Rational(1, 2)}) != 0,
        f"value = {at_generic(dS0).subs({lam: sp.Rational(2,5), delta: sp.Rational(1,2)})}")
     ck.eq("(4) ...which vanishes at delta=1 (the setting of Sections 4-5)", dS0.subs(delta, 1), 0)
+    # ---- (5) the Bayes-factor reading is not sequence-free under partial
+    #      adoption either: scale the SECOND cue's factor by delta ----------
+    P0 = prior()
+    mA = [sp.cancel(x) for x in marg_A(P0)]; mB = [sp.cancel(x) for x in marg_B(P0)]
+    lA = [q[i] / mA[i] for i in range(2)]; lB = [r[j] / mB[j] for j in range(2)]
+    def scaled(first_A):
+        W = sp.Matrix(2, 2, lambda i, j: P0[i, j] * (lA[i] * lB[j]**delta if first_A else lA[i]**delta * lB[j]))
+        return W / sum(W)
+    SAB, SBA = scaled(True), scaled(False)
+    gap0 = sp.simplify((marg_A(SAB)[1] - marg_A(SBA)[1]).subs(c, 0))
+    ck.ne("(5) scaled Bayes-factor update: A-marginal differs between sequences at c=0, generic prior, delta=1/2",
+          gap0.subs(GENERIC).subs(delta, sp.Rational(1, 2)))
+    ck.eq("(5) ...and agrees at delta=1 (Wagner: same factor in either position commutes)",
+          sp.simplify(gap0.subs(delta, 1)), 0)
     return ck.done()
 
 

@@ -1,0 +1,135 @@
+% =====================================================================
+% interior_omega.tex
+%
+% What can be said about sequence effects at c = 0 when the adoption weight
+% omega is strictly between 0 and 1, i.e. where the paper's own channel
+% (sequence dependence carried through the prior association) is switched
+% off and the second channel (weakening of whichever cue is read second) is
+% at full strength.
+%
+% Terminology (agreed 2026-09-27): omega = 1 is FULL ADOPTION of the later
+% cue, omega = 0 is NO ADOPTION, 0 < omega < 1 is PARTIAL ADOPTION.
+%
+% Verification: rows 1, 2, 3, 5, 6 are sympy/verify_interior_omega.py
+% (20/20, symbolic in alpha, beta, q0, r0, omega, lambda); the odds-ratio
+% part of row 2 is Lemma SEP / Lean isSeparable_applySteps; row 3 is
+% Proposition ADJ (plan 5.B) and sympy case (6a),(7c) of
+% check_zero_slope_identification.py. Row 4 is inferred from the linearity
+% of the score and is NOT separately verified.
+%
+% Macros are the manuscript's own, so rows paste unchanged.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{ragged2e}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\newcommand{\PB}{P^{\mathrm{B}}}
+\newcommand{\PJ}{P^{\mathrm{J}}}
+\newcommand{\Pbar}{\overline{P}}
+\newcommand{\assoc}{\operatorname{assoc}}
+\newcommand{\bigO}{\mathcal{O}}
+
+\title{Sequence effects at independence under partial adoption}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent Setting. The prior covariance is $c=0$, so the two attributes are
+believed unrelated, and the adoption weight satisfies $0<\omega<1$, so the cue
+read second is adopted in part. At $c=0$ the paper's channel, sequence
+dependence carried through the prior association, is switched off. What
+remains is a second channel, the weakening of whichever cue is read second,
+which is at full strength here. Full adoption ($\omega=1$) is the setting of
+Sections~4 and~5, where the second channel is absent and the first vanishes at
+$c=0$ (Proposition IMM). All quantities below are exact at $c=0$; the
+$\bigO(c)$ corrections are in the script and are not the point.
+
+\renewcommand{\arraystretch}{1.35}
+\medskip
+\small
+\begin{longtable}{@{}L{0.5cm}L{2.6cm}L{6.6cm}L{6.2cm}@{}}
+\caption{What can be said at $c=0$ and $0<\omega<1$.}\\
+\toprule
+& \textbf{Statistic} & \textbf{Value at $c=0$} & \textbf{What it says} \\
+\midrule
+\endfirsthead
+\toprule
+& \textbf{Statistic} & \textbf{Value at $c=0$} & \textbf{What it says} \\
+\midrule
+\endhead
+\multicolumn{4}{@{}l}{\emph{Between the two sequences, one evaluator}}\\
+\addlinespace[2pt]
+1 & marginal probabilities &
+$\PJ_{AB}(A{=}1)-\PJ_{BA}(A{=}1)=(1-\omega)(\alpha-q_0)$ \newline
+$\PJ_{AB}(B{=}1)-\PJ_{BA}(B{=}1)=-(1-\omega)(\beta-r_0)$ &
+The marginals carry the whole effect. Each is the distance the cue would have
+moved its marginal, scaled by how much of it was not adopted. Zero only at
+$\omega=1$ or when the cue delivers the prior marginal. The mechanism is
+position, not association: in $AB$ the letter is the weakened cue, in $BA$ the
+credential is. \\
+\addlinespace[4pt]
+2 & believed association (cross-product; odds ratio, Yule's $Q$) &
+$\assoc(\PJ_{AB})-\assoc(\PJ_{BA})=0$ \newline
+odds ratio identical, for every $c$ &
+Both sequences leave a product table at $c=0$, so the cross-product is zero in
+each; the odds ratio equals the prior's because every damped step is a row or
+column rescaling (Lemma SEP). The paper's qualitative verdict survives: the
+marginals see the sequence, the association does not. What changes is the
+order, zeroth instead of first, and with it the relevance of small $c$. \\
+\addlinespace[4pt]
+3 & the adoption weight &
+$\omega=1-\dfrac{\PJ_{AB}(A{=}1)-\PJ_{BA}(A{=}1)}{\alpha-q_0}$ &
+Row~1 read backwards. The channel the paper does not study is the channel
+Proposition ADJ reads; the identification device lives entirely at this
+point. Requires $q_0\neq\alpha$. \\
+\addlinespace[4pt]
+4 & decision flip and loss &
+score gap $=\langle v,\PJ_{AB}-\PJ_{BA}\rangle$, a fixed multiple of row~1,
+independent of $c$ &
+The share of evaluators whose decision flips is the mass of a band of fixed
+width, not $\bigO(c)$, and the surplus-weighted loss is not second order.
+\emph{Inferred from linearity of the score; not separately verified.} \\
+\addlinespace[6pt]
+\multicolumn{4}{@{}l}{\emph{Pooled over a population, against the benchmark, $0<\lambda<1$}}\\
+\addlinespace[2pt]
+5 & association of the mean belief &
+$\assoc(\Pbar_\lambda)-\assoc(\PB)=$ \newline
+$-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ &
+The mean belief acquires an association nobody holds. Every evaluator's table
+is independent and so is the benchmark's, but the mixture of two product
+tables with different marginals is not a product table. A pooled audit of
+whether the traits go together returns a nonzero value in a population where
+no one believes they do. The sign is fixed by whether the two cues move their
+marginals in the same direction relative to the prior. No counterpart at
+$\omega=1$, where the mixture at $c=0$ is $q\otimes r$. \\
+\addlinespace[4pt]
+6 & marginals of the mean belief &
+$\Pbar_\lambda(A{=}1)-\PB(A{=}1)=(1-\lambda)(1-\omega)(q_0-\alpha)$ &
+Zeroth order. $\PB$ sets both marginals to their delivered credences, so it is
+a full-adoption object under the other reading, and the gap from it mixes two
+differences, the reading and the adoption weight. No sequence-free reference
+exists at interior $\omega$ under either reading: a Bayes-factor update that
+scales the second cue's factor by $\omega$ is itself order-dependent at $c=0$
+(script, row 5), because Wagner's commutation needs the same factor in either
+position. The between-sequence comparison of rows 1--2 needs no reference,
+which is one more reason to prefer Proposition ORD's form of the test. \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\medskip
+\noindent One sentence for the paper. Full adoption is the setting in which the
+only source of sequence dependence is the one the paper studies, the
+cross-attribute effect carried through the prior association, which vanishes
+at $c=0$; partial adoption adds a second source, the weakening of whichever
+cue is read second, which is present at $c=0$ and so lies outside the
+expansion in $c$ on which the results rest.
+
+\end{document}
