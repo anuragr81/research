@@ -45,8 +45,9 @@ uncertain foundations"; either give up holism or give up conditionalization.
 | inputs problem vs the rule | the position channel (inputs) vs the paper's channel (rule, rigid propagation across correlated partitions) |
 | commutativity on input distributions | the full-adoption premise: same q, r in either position |
 | Lange's point | Hawthorne's objection and Asch's "direction" account, in one sentence; the adoption weight is the one-parameter relaxation |
-| Field's alpha; Wagner's theorem | the benchmark P^B; Change 12's Field/Wagner sentence |
-| the holistic horn (import depends on background) | a position-dependent Bayes factor, verify_interior_omega row (5) |
+| the commutative horn (Field's alpha, Wagner) | the benchmark P^B |
+| non-commutativity on input distributions (p. 9), the case Lange declines | the paper's own model, delivered credences at omega=1: on neither horn |
+| the non-commutative side, short of holism | a position-dependent Bayes factor, verify_interior_omega row (5): history-dependent inputs, no defeater belief |
 | Rigidity Preserves Independence | Proposition IMM at c=0, at every omega; both channels are rigid; defeat only by rebutting through c |
 
 ## Not read
