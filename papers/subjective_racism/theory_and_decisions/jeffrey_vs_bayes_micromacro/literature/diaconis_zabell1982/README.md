@@ -51,3 +51,29 @@ with a concrete counterexample forty-plus years before Paper B; Paper B's Propos
 DRF is the general (all $\alpha,\beta,c,q,r$) form of the same phenomenon their Example
 3.4 witnesses at one point. Worth citing directly for "pinning" and for the $c=0$
 commutation condition, rather than only via Hawthorne's secondhand restatement.
+
+## Read again in full, 2026-09-27 (Drive: `diaconis and zabell updating subjective probability.pdf`)
+
+Three things the earlier note did not record, all bearing on how the paper
+should attribute full adoption:
+
+- **Full adoption is their setting, not their premise.** Section 3.1 sets up
+  successive updating with each step a Jeffrey step to its target, and notes
+  that the opinion at the second stage dominates. Section 4.2 attributes the
+  successive route to Jeffrey (1957, Ch. 4) and asks, as an open question,
+  "when is successive updating reasonable?". Remark 2 there: non-commutativity
+  "is not a real problem", because two sequences that end in different beliefs
+  cannot both be acceptable incorporations of the same pair of targets.
+- **Their own scope disclaimer.** Section 3.2, on the rigidity condition at
+  each stage: "The J condition is an internal or psychological condition that
+  must be checked or accepted at each stage. Mathematics has nothing to offer
+  here." Pairs with Hawthorne p. 115.
+- **They present the both-margin alternative.** Section 4 (simultaneous
+  adoption of both targets, existence by Strassen) and Section 5.2 (the
+  I-projection, computed by IPFP). Example 5.1 notes that "I projections
+  preserve the association factor" of a 2x2 table, citing Mosteller (1968) --
+  the odds-ratio invariance of Lemma SEP, stated for the both-margin fit.
+
+Consequence for the plan: 1.D's "Diaconis and Zabell hold that premise"
+overstates; the prelude now says "the successive updating of Diaconis and
+Zabell", which is what the paper cites them for.
