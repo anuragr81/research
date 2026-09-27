@@ -110,6 +110,31 @@ ready.
 - Rewrites stay within 80--120% of the author's draft.
 - Line numbers go stale; anchor every edit by its BEFORE text.
 
+## 10. Placement and bridging (S, from the intro-prelude exchange, 2026-09-27)
+
+- Material goes where the reader first asks its question. The two-channel
+  sentence belongs where the intro first says sequence dependence is
+  unclear, because that is where a reader asks "which mechanism, and why".
+- State the bridge. When a new sentence sits next to one on a different
+  subject (source of the effect next to how it registers), the sentence that
+  joins them must be written, not assumed. Here: the registering question
+  has a hard answer for only one of the channels.
+- A choice the paper makes is justified by reasons a reader can check, never
+  by preference. "The channel for which the question is non-trivial", "the
+  only one present under the premise", "the one that survives a procedure"
+  are reasons. "The one we study" is not.
+- Name what the paper does *not* do in the same breath as what it does
+  ("measures it rather than studies it"). The scope is a contrast, so it
+  obeys rule 3.
+- Both sides of a contrast in parallel grammar ("an interaction between the
+  cues ... a temporal bias of the observer"), so the reader sees they are
+  the two answers to one question.
+- Count how many times a theme is touched in a section and name each
+  touch's distinct job. If two touches share a job, one loses a clause.
+  Flag it; the author decides.
+- When asked "what do you think", answer in that order: the verdict, the
+  conditions under which it holds, then the draft. Never the draft first.
+
 ## Pre-send checklist
 
 1. Is every claim in the sentence a verified row, a read page, or the
@@ -121,3 +146,8 @@ ready.
 5. Is this already said elsewhere in the document?
 6. Is every term the manuscript's own?
 7. Can the point be said in one line? If not, stop and find the mechanism.
+8. Is it placed where the reader first asks its question, and is the bridge
+   to the neighbouring sentence written?
+9. Is every choice given as a reason the reader can check?
+10. How many times does this section touch the theme, and does each touch
+    have its own job?
