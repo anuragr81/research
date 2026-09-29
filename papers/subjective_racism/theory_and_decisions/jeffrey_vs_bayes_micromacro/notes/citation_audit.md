@@ -54,6 +54,14 @@ says otherwise), NOT-CHECKABLE (source not available).
   lean to the manuscript's. Closest passage is the Field-to-Jeffrey embedding
   on p. 397. **Do:** either cite Domotor only for non-commutativity, or drop
   the citation and let the mechanism sentence stand on Prop. DIV.
+  **Confirmed formally (lean/Literature/Domotor.lean):** the Field-to-Jeffrey
+  embedding makes the Jeffrey input depend on the current state
+  (`field_eq_jeffrey_embed`, `embed_depends_on_state`); Domotor never frames
+  it as a likelihood read against a marginal. Also: two sequential Jeffrey
+  steps always are one Jeffrey step on the meet (`jeffrey_seq_on_meet`), so
+  his p. 395-396 claim needs reading as "the joint input depends on P"; his
+  p. 397 clause (ii) is false as stated (`field_not_convex`, corrected
+  coefficient in `field_mix`). Do not cite clause (ii).
 
 - [ ] **M22. MS:117 (also papers_dialectic.tex:64, two_horn_motivation_body.tex
   :24, PLAN :381, :404), Diaconis-Zabell. UNSUPPORTED, load-bearing.**
@@ -118,6 +126,16 @@ says otherwise), NOT-CHECKABLE (source not available).
   gives the sufficient-statistic failure as the cause of herding and
   inefficiency, not of "the sequence persists". **Do:** reword as one
   mechanism described twice.
+  **Settled formally (lean/Literature/BHW.lean, Banerjee.lean):** "coarse" is
+  on the wrong paper. Banerjee's actions live in the continuum [0,1]; his
+  non-invertibility comes from the equilibrium rule under a discontinuous
+  payoff. BHW's binary action is the coarse one, and it loses information
+  even before a cascade (`lik_ratio`: at d = 2 the public ratio is
+  p(1+p)/((1-p)(2-p)), below (p/(1-p))^2). The shared mechanism is "the
+  equilibrium action is not a sufficient statistic". "Persists" is defensible
+  for the herd: joining is uninformative, so a wrong herd is absorbing and
+  P(no one correct) >= Pi for every N (`no_one_correct_ge_Pi`). Wording in
+  literature/bhw1992/README.md and banerjee1992/README.md.
 - [ ] **M4. MS:273, Dietrich "Def. 1". WRONG-LOCATION.** Def. 1 (p. 7) is
   linear-geometric *preference* aggregation. Geometric belief pooling is
   App. A (p. 16), characterised by Thm 2 (p. 11, section 4). Drive copy is
@@ -134,6 +152,18 @@ says otherwise), NOT-CHECKABLE (source not available).
   updating. **Do:** either restrict the sentence to what Dietrich proves
   and say the Jeffrey case is outside it, or cut the paragraph. Hayashi
   (2024, JME, in Drive, uncited) bears on this paragraph.
+  **Settled formally (lean/Literature/Dietrich.lean):** geometric pooling is
+  dynamically rational and externally Bayesian (`geoPool_dynRational`,
+  `geoPool_externallyBayesian`); linear pooling commutes only under
+  dictatorship, equal p(E) or equal conditionals (`linPool_comm_iff`). The
+  manuscript's application is worse than unevaluable: with a common prior,
+  whenever the criterion's premise holds every member ends with the same
+  posterior, so linear pooling *passes*
+  (`linPool_dynRational_on_common_prior`). Against P^B, linear and geometric
+  pooling of (PJ_AB, PJ_BA) miss at order c with the same coefficient and
+  differ only at O(c^2), so the linear-versus-geometric contrast plays no role
+  in the first-order results. **Do:** cut the "generically fails the
+  criterion" clause. Wording in literature/dietrich2021/README.md.
 - [ ] **M6. MS:276, Epstein 2006. NOT-CHECKABLE / doubtful.** "Epstein2006
   makes the updating rule subjective". Primary not in Drive. Ortoleva's 2024
   review (p. 558) describes it as a temptation/self-control model
@@ -169,6 +199,21 @@ says otherwise), NOT-CHECKABLE (source not available).
   translation and the derivation (verify in sympy first), or reduce to
   "Cripps remarks that Symmetry and Divisibility together make the order of
   revelation irrelevant; the present composite is outside his domain".
+  **Settled formally (lean/Literature/Cripps.lean):** (a) is true and now a
+  theorem, `order_invariance`, from Symmetry and Divisibility alone, for any
+  two conditionally independent experiments (so it does cover an A- and a
+  B-measurable experiment, qualifying the audit's "nested revelation only").
+  (b)-(c) are **false**: under the matched-likelihood reading (the paper's
+  own Prop. IMM) the composite is a Bayes rule satisfying all four axioms,
+  and the order effect comes from the second likelihood being re-matched to
+  the intermediate belief (`composite_AB_eq_bayes`; the B-marginal shifts by
+  c(q_0 - alpha)/(alpha(1 - alpha)) after the first step); under the
+  rigid-credence reading Axioms 1 and 4 fail for every choice of evidence map
+  (`rigid_not_uninformative`, `rigid_not_nonDogmatic`). No reading makes it
+  fail Divisibility alone. The honest sentence is that Cripps's
+  order-invariance needs the *same* experiments in both orders, and
+  delivered credences re-matched to the current belief are not the same
+  experiments. Wording in literature/cripps2021/README.md.
 - [ ] **M10. MS:279, Phelps. UNSUPPORTED for Phelps; CAVEAT for Arrow.**
   "borrows the evaluator-with-binary-attributes frame from ... Phelps1972,
   Arrow1973". Phelps's qualification is continuous with a normal test error;
@@ -179,6 +224,22 @@ says otherwise), NOT-CHECKABLE (source not available).
   (p. 1224) is closer to the frame than Phelps. **Do:** cite Arrow section 4
   and Coate-Loury for the frame; cite Phelps for statistical discrimination
   in general only.
+  **Settled formally (lean/Literature/Phelps.lean, Arrow.lean,
+  CoateLoury.lean):** no binary unknown appears anywhere in Phelps. Phelps's
+  Case 2 is a difference in the *variance of qualification* (eq. 6); the
+  test-reliability case is the Further Case (eq. 7); both keep a mean
+  difference, and the point that dispersion or reliability alone suffices is
+  ours (`no_mean_gap_still_differential`). Arrow section 4 sketches the
+  self-confirming idea but says it "does not prove" discriminatory equilibria
+  exist (WP p. 30), and his employer receives no individual signal;
+  Coate-Loury prove existence (`prop1_two_equilibria`) and add the signal and
+  Bayes step. CL's stereotype is literally a believed positive covariance
+  between group and qualification (`negativeStereotype_iff_cov_pos`), so the
+  contrast with the paper is mechanism (correct-in-equilibrium best responses
+  versus coherent updating), not concept. For P4, every Phelps/Arrow case is a
+  difference in the employer's prior model of the groups, so the wording
+  should be "different *prior* beliefs about the groups". Wording in the three
+  READMEs.
 - [ ] **M11. MS:280-281, Coate-Loury. CAVEAT.** Contrast "kinematic rather
   than an equilibrium fixed point" holds, but CL also have adjustment
   dynamics (p. 1226), and CL define a stereotype as a believed correlation
@@ -193,6 +254,13 @@ says otherwise), NOT-CHECKABLE (source not available).
   manuscript is in mechanism, not in the object. Drive copy is the May 2015
   working paper; QJE 131(4):1753-1794 confirmed externally. **Do:** reword
   to one mechanism; drop "sampling"; say the contrast is mechanism.
+  **Settled formally (lean/Literature/BCGS.lean):** in the section 4.3
+  instance the education-welfare correlation is exaggerated only in the
+  population pooled across groups; within each group the stereotype has zero
+  association against a true -6/125 (`welfare_correlation_*`,
+  `welfare_within_group`). For a 2x2 law their covariance is exactly the
+  paper's `assoc`. So the contrast is mechanism *and* location: BCGS's
+  association sits across groups, the paper's within one evaluator's belief.
 - [ ] **M13. MS:282-283, Becker 1962. UNSUPPORTED cross-reference + CAVEAT.**
   "The lineage distinction the concluding section trades on ... goes back at
   least as far as Becker1962": the Concluding remarks (MS:900-967) never draw
@@ -218,6 +286,22 @@ says otherwise), NOT-CHECKABLE (source not available).
   subpopulations (Defs 2.1-2.2, Thms 4.1-4.3). **Do:** restate the paradox in
   their terms; the manuscript's contrast (erasure within one population)
   survives but the description of theirs must change.
+  **Settled formally (lean/Literature/GoodMittal.lean):** `piR_amalg_general`
+  shows the aggregate difference is a treated-row average minus an
+  untreated-row average under *different* subpopulation weights, so it is a
+  weighting effect, but not by population shares N_i/N (`equalSize_reversal`:
+  N_1 = N_2, reversal from treatment imbalance). Row-uniform designs rule the
+  paradox out for pi_R, Yule's Q and the pi_C analogue (`no_paradox_*`), but
+  not for the odds ratio (`note_p702_kappa_paradox`, their p. 702 tables: both
+  27, aggregate 26.991, a dilution, neither erased nor reversed). Yule's case
+  (`yule_case_paradox`) creates an effect from none. Proposed wording
+  ("treatment unevenly allocated across subpopulations") is in
+  literature/goodmittal1987/README.md. For M15, FGT.lean shows alpha = 0 and
+  alpha = 1 are exactly where monotonicity and the transfer axiom switch on
+  (`P0_not_monotone`, `P1_transfer_neutral`), which gives a principled reason
+  to single out the first two members, and that the mean gap among the poor
+  is not decomposable (`I_not_decomposable`); wording in
+  literature/fgt1984/README.md.
 
 ### Section 4
 
@@ -311,6 +395,20 @@ says otherwise), NOT-CHECKABLE (source not available).
   "realism complaint" paragraph and interior_omega's position channel so the
   rival is "the one-sided damped family" with HE cited only for the averaging
   equation; do not attribute first-impression protection to HE.
+  **Settled formally (2026-09-29, lean/Literature/HogarthEinhorn.lean, 43
+  theorems):** HE's Step-by-Step rule damping every cue gives recency on
+  mixed evidence under Anderson-Hovland weights (`appB_recency`, Eq. B.3) and
+  under HE's own contrast weights (`contrast_mixed_recency`); consistent
+  evidence can give primacy under their weights (`contrast_consistent_primacy_*`,
+  about 5% of an exact sweep), a gap HE admit (T-p.35). The paper's one-sided
+  construction (first cue in full, second damped by w) *is* HE's
+  End-of-Sequence Eq. 8 (`oneSided_eq_eq8`), which on a single scalar gives
+  primacy only for w < 1/2 (`oneSided_primacy_iff`). So (i) the one-sided form
+  is theirs, not new; the two-attribute Jeffrey embedding is what is new
+  (revises P11); (ii) "interior omega is the primacy regime" is false in HE's
+  sense; (iii) in the two-attribute model the first-read attribute is
+  "protected" because it is adopted in full, not because anything is damped.
+  Proposed rewordings are in literature/hogarth_einhorn1992/README.md.
 - [ ] **P11. omega = 0 "is ours, not theirs". CONTRADICTED.** (Anchoring.lean
   :20-21; PLAN :446-448, 1267, 1277-1278.) HE define 0 <= w_k <= 1, name the
   insensitive corner (Fig. 7, the "advocate"), and say evidence can be
@@ -397,14 +495,30 @@ says otherwise), NOT-CHECKABLE (source not available).
   or observer statistic, not a move off the cells. His cues are disjunctive
   (raise P(A or B), then P(not-A or B), to .99), not attribute-local.
   **Do:** reword to "what he lacks is the population statistic".
+  **Refined formally (lean/Literature/Doring.lean):** "1/6 versus 5/6" and
+  "one fifth" are his roundings of 19/118 versus 99/118 and 19/99. With his
+  own numbers the third step gives P(A) = 97/590 versus 493/590 (.164 versus
+  .836), not "near 0 and 1"; that needs his "playing with the numbers"
+  limit (`gap_tends_to_one`). The A-marginal already differs after two steps
+  (91/190 versus 99/190), so the D2 conclusion stands. His remedy is one
+  Jeffrey update on the original prior (`fig2`), confirming P2. Paper slips:
+  the Dempster gap is 1/10100 per cell (about 1/100 of a point, not 1/1000),
+  and Figure 3's 42.2 should be 42.3.
 - [ ] **D3. verification_coverage.md is out of date.** Counts 13 sympy
   scripts; run_all.py has 15 (verify_example, verify_interior_omega added).
   Line 61-62 points to literature/ for Doring (see P1). **Do:** refresh.
 - [ ] **D4. literature/bohren_imas_rosenberg2019/sympy/check_reversal.py**
   still asserts a discrimination reversal that review log Entry 10 says was
-  blocked; kept deliberately "with its failures intact". Group D report will
-  say whether its docstring claims about BIR hold. **Do:** add a header line
-  saying the script is a record of a blocked derivation.
+  blocked; kept deliberately "with its failures intact". **Confirmed
+  2026-09-29:** it exits 1 at 4/8, because it uses the paper's P^B as "BIR's
+  Bayesian" and P^B matches likelihoods to each group's prior, so even the
+  novice comparison comes out negative (the D12 point, in code). The correct
+  BIR evaluator is now `literature/bohren_imas_rosenberg2019/sympy/
+  check_normal_model.py` (37/37) and `lean/Literature/BohrenImasRosenberg.lean`,
+  which proves Proposition 2 in full along any history (`prop2_no_reversal`,
+  `prop2_decreasing`, the latter supplying a step BIR's own proof on p. 51
+  leaves out). **Do:** add a header line saying the script is a record of a
+  blocked derivation and exits 1 by design, and exclude it from any runner.
 
 - [ ] **D5. papers_dialectic.tex:91, 213. WRONG-LOCATION.** "it seems
   implausible that the most recent experience ..." starts on p. 98, not
@@ -604,8 +718,11 @@ says otherwise), NOT-CHECKABLE (source not available).
   (README with page-cited claims, Lean file in `lean/Literature/`, SymPy
   check where numeric): Doring, Domotor, Good-Mittal, FGT, Hogarth-Einhorn,
   Asch, Cripps, Dietrich, BHW, Banerjee, Phelps, Arrow, Coate-Loury, BIR
-  (README missing), Heckman, BCGS; Weisberg (README only). In progress
-  2026-09-29.
+  (README missing), Heckman, BCGS; Weisberg (README only). **Done
+  2026-09-29:** 16 new Lean files in `lean/Literature/`, 443 literature
+  theorems in all, full `lake build` clean, every theorem on the standard
+  axioms or a subset (in `check_axioms.lean`); `literature/run_all.py` 29/29.
+  Asch has sympy only (no formal claim).
 - [ ] **R2. Sympy-only records with empty `lean/` directories:**
   Diaconis-Zabell, Field, Garber, Hawthorne, Pettigrew-Weisberg, Wagner 2002,
   Wagner 2003. Add Lean for the closed-form identities (Field eq. 7
@@ -614,8 +731,11 @@ says otherwise), NOT-CHECKABLE (source not available).
 - [ ] **R3. Not in Drive, no record possible yet:** Jeffrey 1983 and 2004
   (books folder not link-shared), Epstein 2006, Ortoleva 2012, Becker 1962,
   Jeffrey 1988.
-- [ ] **R4. Literature scripts are in no runner.** Add a
-  `literature/run_all.py` so the records are rerun with the main suite.
+- [x] **R4. Literature scripts are in no runner.** `literature/run_all.py`
+  added 2026-09-29 (29/29). Remaining gap: the seven sympy-only scripts print
+  but do not assert, so their exit status says nothing; convert them to
+  assert (with L1's Field fix) when R2 is done. Consider a `make literature`
+  target.
 
 ## 6. Cross-document consistency (to do after the pass)
 
