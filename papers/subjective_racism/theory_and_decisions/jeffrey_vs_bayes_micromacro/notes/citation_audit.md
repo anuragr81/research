@@ -1,0 +1,631 @@
+# Citation audit: gaps, overclaims and mistakes, with a todo list
+
+Opened 2026-09-29. Every claim the manuscript, the notes, the change plan, the
+literature READMEs and the Lean/SymPy comments make about a cited paper is
+being checked against the full text of that paper, read from the Drive folder
+`temp` (id `14Jw8TW7gJ7kKSVuPSTvhRh1rW-z1FXTC`). One agent per group of
+papers; each wrote a per-claim table with page-cited evidence, now in
+`notes/citation_audit/verify_*.md` (file:line locations there are as of
+commit cf7f70e2). Paths written "Drive:temp/<file>" are the local names the
+Drive files were downloaded under.
+
+Result of the pass (2026-09-29): about 400 claims checked across 32 papers.
+No quotation in the manuscript is misquoted; every number (Asch Table 7,
+Garber, Hawthorne, Diaconis-Zabell, Augenblick-Rabin, Zhao) reproduces. The
+failures are attribution and characterisation: the load-bearing ones are
+M22-M24 (Diaconis-Zabell), M9 (Cripps), M5 (Dietrich), P10-P12
+(Hogarth-Einhorn primacy/recency and the position channel), D1 (Doring is
+normative), D13 (BIR trichotomy) and M17 (missing Hawthorne bib entry). The
+paper's own mathematics is unaffected: SymPy 15/15, Lean builds with no
+`sorry` and standard axioms only.
+
+**Nothing here has been applied.** Each entry names the location, the
+verdict, the evidence, and what to do. Status: `[ ]` open, `[x]` done,
+`[~]` decided not to act. "MS" is `PAPER_B_MANUSCRIPT.tex`, "PLAN" is
+`notes/manuscript_change_plan.md`, line numbers as of commit cf7f70e2.
+
+Verdicts: VERIFIED, VERIFIED-WITH-CAVEAT, MISQUOTED, WRONG-LOCATION,
+WRONG-NUMBER, UNSUPPORTED (not found in the paper), CONTRADICTED (the paper
+says otherwise), NOT-CHECKABLE (source not available).
+
+## Groups and status
+
+| Group | Papers | Report | Status |
+|---|---|---|---|
+| A | Hawthorne 2004, Weisberg 2009 | verify_hawthorne_weisberg.md | done, logged below |
+| B | Hogarth-Einhorn 1992, Asch 1946 | verify_hogarth_asch.md | done, logged below |
+| C | Diaconis-Zabell, Field, Garber, Wagner 2002/2003, Pettigrew-Weisberg | verify_kinematics.md | done, logged below |
+| D | Bohren-Imas-Rosenberg 2019, Heckman 1998 | verify_bir_heckman.md | done, logged below |
+| E | Doring 1999, Domotor 1980, Good-Mittal 1987 | verify_scanned.md | done, logged below |
+| F | Phelps, Arrow, Coate-Loury, BCGS, Becker, FGT | verify_discrimination_econ.md | done, logged below |
+| G | Cripps, Dietrich, BHW, Banerjee, Ortoleva, Epstein | verify_updating_theory.md | done, logged below |
+| H | Augenblick-Rabin, Shmaya-Yariv, Zhao 2010/2012, Wilson, Cassell | verify_record_papers.md | done, logged below |
+| -- | Jeffrey 1983, Tao 2011 | checked by hand | Tao done; Jeffrey blocked (see S3) |
+
+## 1. Manuscript text (PAPER_B_MANUSCRIPT.tex)
+
+### Section 1, Introduction
+
+- [ ] **M1. MS:120, Domotor citation. UNSUPPORTED.** "the likelihood a
+  delivered credence implies must be read against the marginal in force when
+  the cue arrives \citep{Domotor1980}". Domotor never mentions likelihoods or
+  marginals; he supports only bare non-commutativity (pp. 386, 395, 399) and
+  treats it as making Jeffrey machines "inadequate" (p. 395), the opposite
+  lean to the manuscript's. Closest passage is the Field-to-Jeffrey embedding
+  on p. 397. **Do:** either cite Domotor only for non-commutativity, or drop
+  the citation and let the mechanism sentence stand on Prop. DIV.
+
+- [ ] **M22. MS:117 (also papers_dialectic.tex:64, two_horn_motivation_body.tex
+  :24, PLAN :381, :404), Diaconis-Zabell. UNSUPPORTED, load-bearing.**
+  "Jeffrey updating is the unique coherent revision for credence delivered on
+  cue's partition". Not in D-Z: they list four legitimate routes, and their
+  only uniqueness results concern distance measures (Thms 5.1, 6.1).
+  "equivalent to making the minimal change of the prior consistent with the
+  delivered marginal" holds for Hellinger and Kullback-Leibler; the
+  variation-distance minimiser is not unique (Remark a, p. 828). **Do:** drop
+  "unique coherent"; say "minimises Kullback-Leibler (and Hellinger) distance
+  to the prior among distributions with the delivered marginal (D-Z,
+  section 6)". This sentence carries the modelling premise, so it matters.
+- [ ] **M23. MS:190-195, Diaconis-Zabell. MISQUOTED.** "The partition
+  satisfying the invariance condition is the minimal sufficient statistic for
+  revising the prior to any candidate posterior on that partition". D-Z
+  (p. 824, Thm 2.2) say such a partition is *sufficient*; the minimal one is
+  the likelihood-ratio partition, every refinement also satisfies the
+  condition, and sufficiency is relative to one pair {P, P*}. "The axiomatic
+  grounding is twofold" mislabels what D-Z call "mechanical updating". **Do:**
+  restate as Thm 2.2 states it.
+- [ ] **M24. MS:78-79, Diaconis-Zabell. CONTRADICTED.** The sentence has D-Z
+  (with Hawthorne) "treating order dependence as a defect to repair". D-Z
+  Remarks 1-2 (p. 827): "There is no reason to require P_EF = P_FE";
+  "noncommutativity is not a real problem". **Do:** attribute the defect view
+  to Hawthorne (and Doring) only; D-Z are on the paper's side here.
+- [ ] **M25. MS:277, Pettigrew-Weisberg. CAVEAT.** "changing how successive
+  inputs are pooled": P-W pool the prior with each source's opinion by upco,
+  not successive inputs with each other. P_B equals Field/upco only when each
+  factor is computed against the prior marginal. **Do:** "by pooling the prior
+  with each new input multiplicatively (upco)".
+- [ ] **M19. MS:80 footnote, Hawthorne. CAVEAT.** "Hawthorne2004 repairs
+  this by letting a cue multiply the old belief instead of replacing it, and
+  under his order-free variants the sequence effect disappears". Order-freedom
+  holds only across distinct bases, and full order-freedom only in his
+  Basis-Commuting Version (Section 8); "repairs" overstates, he offers
+  alternatives and prefers them. **Do:** "offers factor-based alternatives
+  under which updates on distinct bases commute".
+- [ ] **M20. MS:97, Hawthorne. NOT-CHECKABLE (project's own inference).**
+  "Hawthorne's variants leave the association just as uninformative": he
+  says nothing about association. It follows from Lemma SEP (every
+  factor-based variant is separable), which is the paper's result, not his.
+  **Do:** attribute to Lemma SEP explicitly.
+- [ ] **M21. Terminology, "Bayes factor".** Hawthorne's note 20 gives the
+  name "Bayes factor" to his likelihood-ratio factors; the manuscript uses it
+  for his normed-likelihood (NL) factor. His taxonomy has three models with NL
+  the middle one, so PLAN 3.A's "the two ends of his taxonomy" is wrong
+  (amnestic is one end, LR the other). The identification of P^B with his
+  extended update formula omits his normalising denominator. **Do:** fix the
+  3.A parenthetical and the "two ends" phrase.
+
+### Section 3, Related literature
+
+- [ ] **M2. MS:266-267, BHW and Banerjee. UNSUPPORTED.** "the sequence effect
+  in \citep{BHW1992, Banerjee1992} lives on the analogue of the marginals".
+  Both models have a single-variable state, so there is no marginal-versus-
+  association distinction to map onto. This is the paper's own analogy.
+  **Do:** state it as an analogy or remove.
+- [ ] **M3. MS:257-259, Banerjee versus BHW contrast. CAVEAT.** "In BHW, on
+  the other hand, a cascade is an action that conveys no private signal": the
+  "on the other hand" is misleading, BHW rest on the same coarse-action
+  mechanism (their fn 17 and the Banerjee remark, p. 1002). Banerjee p. 809
+  gives the sufficient-statistic failure as the cause of herding and
+  inefficiency, not of "the sequence persists". **Do:** reword as one
+  mechanism described twice.
+- [ ] **M4. MS:273, Dietrich "Def. 1". WRONG-LOCATION.** Def. 1 (p. 7) is
+  linear-geometric *preference* aggregation. Geometric belief pooling is
+  App. A (p. 16), characterised by Thm 2 (p. 11, section 4). Drive copy is
+  the HAL January 2021 extended version, not the JET typeset article; check
+  numbering there too. **Do:** cite Thm 2 or section 4.
+- [ ] **M5. MS:273-274, Dietrich criterion applied to the population mean.
+  UNSUPPORTED.** Dietrich's criterion (pool then condition on E, versus
+  condition each member on the same E then pool; p. 8, External Bayesianity
+  p. 15) is defined for Bayesian conditioning on events or likelihoods. The
+  paper's members share a prior and differ only in the order of Jeffrey
+  steps, so no event conditioning produces the profile, and "generically
+  fails the criterion" is not a statement his framework makes. Geometric
+  pooling "satisfies the criterion" is true only for event/likelihood
+  updating. **Do:** either restrict the sentence to what Dietrich proves
+  and say the Jeffrey case is outside it, or cut the paragraph. Hayashi
+  (2024, JME, in Drive, uncited) bears on this paragraph.
+- [ ] **M6. MS:276, Epstein 2006. NOT-CHECKABLE / doubtful.** "Epstein2006
+  makes the updating rule subjective". Primary not in Drive. Ortoleva's 2024
+  review (p. 558) describes it as a temptation/self-control model
+  (Gul-Pesendorfer menus, tempted to deviate from Bayes), not as a subjective
+  updating rule. **Do:** obtain the RES paper; reword to what its
+  representation says.
+- [ ] **M7. MS:276, Ortoleva 2012. CAVEAT.** "axiomatises departures
+  triggered by unexpected news" is supported only via the 2024 review
+  (pp. 558-560, HT model, Theorem 2). Primary not in Drive. **Do:** obtain
+  the AER paper.
+- [ ] **M8. MS:276, framing of Epstein and Ortoleva. UNSUPPORTED.** The
+  sentence presents them as alternatives used "to explain whether sequential
+  conditioning is sequence-independent or not". The review presents both as
+  single-step updating on events, and its fn 2 (p. 546) leaves Jeffrey's rule
+  out of scope. Neither is about order. The framing fits Cripps only.
+  **Do:** reframe as "non-Bayesian updating rules" and separate Cripps.
+- [ ] **M9. MS:276-277, Cripps. CAVEAT + UNSUPPORTED x2.** (a) "shows that
+  symmetry and divisibility jointly force sequence-independence" rests on a
+  one-sentence remark after Axiom 3 (p. 9) about reversing the nested
+  revelation of one experiment's signals, not a proposition, and not two cues
+  on different attributes. (b) "the correlated two-cue composite fails
+  divisibility": nothing in Cripps or the repo shows it; by contraposition an
+  order-dependent rule fails Divisibility *or* Symmetry, and only if it is in
+  his domain at all (rules on a prior plus an experiment with signal
+  probabilities; the Jeffrey composite takes credences). (c) "of the four
+  axioms, only divisibility": no derivation anywhere that the composite
+  satisfies Uninformativeness, Symmetry and Non-Dogmatic; Non-Dogmatic is
+  doubtful for an attribute-marginal step. The footnote calling the statement
+  "behavioural" concedes the domain mismatch and contradicts the main text.
+  Cripps's four axioms: 1 Uninformativeness, 2 Symmetry, 3 Divisibility,
+  4 Non-Dogmatic; Prop. 1 (p. 11) characterises rules satisfying all four as
+  "divisible" (shadow prior, Bayes, map back). **Do:** either supply the
+  translation and the derivation (verify in sympy first), or reduce to
+  "Cripps remarks that Symmetry and Divisibility together make the order of
+  revelation irrelevant; the present composite is outside his domain".
+- [ ] **M10. MS:279, Phelps. UNSUPPORTED for Phelps; CAVEAT for Arrow.**
+  "borrows the evaluator-with-binary-attributes frame from ... Phelps1972,
+  Arrow1973". Phelps's qualification is continuous with a normal test error;
+  his only binary variable is the race dummy (pp. 659-660). Arrow section 4
+  (p. 26) has binary qualification x binary group, but the group is observed,
+  not a second uncertain attribute; and Arrow 1973 is taste-based in
+  sections 1-3, statistical only in section 4 (pp. 25-31). Coate-Loury
+  (p. 1224) is closer to the frame than Phelps. **Do:** cite Arrow section 4
+  and Coate-Loury for the frame; cite Phelps for statistical discrimination
+  in general only.
+- [ ] **M11. MS:280-281, Coate-Loury. CAVEAT.** Contrast "kinematic rather
+  than an equilibrium fixed point" holds, but CL also have adjustment
+  dynamics (p. 1226), and CL define a stereotype as a believed correlation
+  between group identity and productivity (p. 1221), close to the
+  manuscript's own definition. **Do:** acknowledge the CL definition when the
+  paper defines its own sense of stereotype.
+- [ ] **M12. MS:282, BCGS. CAVEAT x2.** "representativeness-distortion or
+  selective recall": one mechanism, not two ("Selective recall is driven by
+  representativeness", WP p. 12). "distortion of memory or sampling":
+  sampling is not a BCGS mechanism. BCGS section 4.3 (p. 27) also produces an
+  exaggerated cross-attribute correlation, so the contrast with the
+  manuscript is in mechanism, not in the object. Drive copy is the May 2015
+  working paper; QJE 131(4):1753-1794 confirmed externally. **Do:** reword
+  to one mechanism; drop "sampling"; say the contrast is mechanism.
+- [ ] **M13. MS:282-283, Becker 1962. UNSUPPORTED cross-reference + CAVEAT.**
+  "The lineage distinction the concluding section trades on ... goes back at
+  least as far as Becker1962": the Concluding remarks (MS:900-967) never draw
+  an aggregation-versus-constraint distinction and never mention Becker.
+  Becker's own mechanism is averaging *plus* "a resource constraint on
+  behavior" (p. 10; irrational units "forced by a change in opportunities to
+  respond rationally", p. 12), so "rather than imposed by an enforced
+  constraint on behaviour" nearly inverts him unless "enforced" means
+  regulatory. Becker 1962 is not in Drive (agent used a JSTOR copy). PLAN:877
+  lists Becker in the "discrimination lineage", conflating Becker 1962 with
+  *The Economics of Discrimination* (the Becker that Phelps, Arrow and CL
+  cite). **Do:** either write the distinction into the conclusion and fix
+  the Becker gloss, or drop the sentence; fix PLAN:877.
+- [ ] **M14. MS:285-288, Good-Mittal amalgamation paradox. CAVEAT x2.**
+  (a) "a real effect present in every subpopulation is erased or reversed" is
+  narrower than their Def. 1.1 (p. 695): the aggregate lies outside the
+  interval of the subpopulation measures, which includes amplification and
+  the Yule case where no subpopulation shows an effect but the aggregate does
+  (the case the name "amalgamation" was chosen for). (b) "a confound in how
+  the subpopulations are weighted together": they never use "confound" and
+  say the paradox "can happen even though N_i is proportional to p_i"
+  (p. 696); the cause is non-uniform row or column ratios across
+  subpopulations (Defs 2.1-2.2, Thms 4.1-4.3). **Do:** restate the paradox in
+  their terms; the manuscript's contrast (erasure within one population)
+  survives but the description of theirs must change.
+
+### Section 4
+
+- [ ] **M15. MS:297, Foster-Greer-Thorbecke. MISQUOTED + CAVEAT x3.**
+  "a headcount (a count of those past a threshold) and a mean shortfall
+  (average of their distances from it) are first two members of a single
+  parametrised family". P_0 is the headcount *ratio* q/n, a share. P_1 =
+  H*I = (1/n) sum g_i / z (p. 763) is normalised by the poverty line and
+  averaged over the whole population; "average of their distances" is
+  (1/q) sum g_i, the income-gap measure, which is *not* in the family.
+  alpha ranges over all reals >= 0, so 0 and 1 are the first two integer
+  members, and FGT's headline measure is alpha = 2. FGT never say
+  "incidence versus intensity". The manuscript's L(c) does have the P_1
+  shape; only the wording is wrong. **Do:** "the headcount ratio and the
+  population-average normalised shortfall, the non-poor contributing zero";
+  drop "first two members"; attribute the incidence/intensity pairing to the
+  later literature or to nobody.
+
+### Appendix, Theorem LOS proof
+
+- [ ] **M16. MS:1136 and 1150, Tao 2011. VERIFIED-WITH-CAVEAT.** Corollary
+  1.7.23 is the Fubini-Tonelli theorem; for the nonnegative integrand the
+  exact reference is Tonelli, Theorem 1.7.15 (incomplete) or 1.7.18
+  (complete version). "Continuity from above, section 1.4" is Exercise
+  1.4.23(iii), downward monotone convergence, whose finite-measure hypothesis
+  the proof satisfies. Tao is not in Drive; checked against the author's
+  online preprint. **Do:** cite Theorem 1.7.18 and Exercise 1.4.23(iii).
+
+### Bibliography
+
+- [ ] **M17. Hawthorne2004 is cited twice in the manuscript (MS:78, 80) but
+  is not in bibliography.bib.** Undefined citation in the committed
+  manuscript. PLAN B.A supplies the entry. **Do:** apply B.A's Hawthorne
+  entry now.
+- [ ] **M18. DOIs.** BHW, Ortoleva 2012, Epstein 2006 DOIs are not
+  verifiable from Drive (not printed on the copies). Good-Mittal volume,
+  number, year not printed on the scan. Arrow chapter pages 3-33 confirmed
+  only via the CL and BCGS reference lists (Drive copy is the 1971 Princeton
+  working paper 30A, own pagination; never cite Arrow by page from it).
+  **Do:** confirm from publisher pages before submission.
+
+## 2. Change plan (notes/manuscript_change_plan.md)
+
+- [ ] **P1. PLAN:791 (3.A verification note). UNSUPPORTED.** "All five papers
+  read in full and formalized in literature/": there is no Doring directory
+  in `literature/`. `notes/verification_coverage.md:61-62` also points to
+  `literature/` for Doring. **Do:** correct the note; add a Doring README if
+  the read is to be on record.
+- [ ] **P2. PLAN:686-687 (3.A text on Doring). CAVEAT.** "an adjustment that
+  Jeffrey's rule cannot supply": Doring's own remedy is a single Jeffrey
+  update from the original prior on the merged partition (S384-S385); what
+  Jeffrey's rule cannot do is the *incremental* version. **Do:** say
+  "cannot be reached by successive Jeffrey steps".
+- [ ] **P3. PLAN:668-669 (3.A text). CAVEAT, see D1.** "The premise the paper
+  adopts is disputed on psychological grounds": true of Hawthorne, not of
+  Doring, whose objection is normative. **Do:** attribute the psychological
+  objection to Hawthorne alone.
+- [ ] **P4. PLAN:310-311 (1.C). CAVEAT.** "statistical discrimination in the
+  sense of Phelps and Arrow, which rests on a difference in beliefs about the
+  groups" clashes with the paragraph's own "receive different mean beliefs";
+  Phelps's Case 2 and Further Case rest on variance and test reliability,
+  not mean. **Do:** "prior beliefs about the groups".
+- [ ] **P5. PLAN:877 (3.C). CAVEAT.** Lists Becker in the discrimination
+  lineage; see M13.
+- [ ] **P8. PLAN:418-420 (1.D). UNSUPPORTED.** "Hawthorne names the premise
+  and objects ... so that the alternative to a weight of one on the later cue
+  is a weight below one": his alternatives are factor models, not a partial
+  weight. The weight is the paper's own construction. **Do:** say so.
+- [ ] **P9. PLAN 6.A (~1283, ~1324) and papers_dialectic.tex:91-95.
+  CONTRADICTED in part.** Hawthorne's illustration is said to be "one basis
+  cued twice" and so to miss a one-cue-per-attribute model. The car example
+  is single-basis, but his pp. 98-99 objection follows directly on the
+  two-basis medical example, where the overwrite is explicit
+  (Q_e[E] = Q_fe[E] = .90). The objection therefore reaches the paper's model
+  through his own two-basis example. **Do:** drop the claim that his
+  illustration misses; the 6.A reply (the weight is measured) stands without
+  it.
+- [ ] **P10. Hogarth-Einhorn, primacy versus recency. CONTRADICTED, the most
+  consequential finding so far.** PLAN 6.A (~1300-1303), papers_dialectic.tex
+  :164-166 and review log :802-803 say partial adjustment "in the manner of
+  Hogarth and Einhorn" protects the *first* impression. HE's Appendix B shows
+  the opposite: with R = S_{k-1} under Step-by-Step processing, "recency
+  always obtains". Their primacy comes mainly from the End-of-Sequence
+  "force toward primacy" (Eq. 8, Table 2 row 1, 19 of 27 studies), not from
+  weights decaying over a long series (the claim in Anchoring.lean:18-20 and
+  PLAN :447-448, 787-788, 1266). The paper's damped family damps only the
+  second cue, so protecting the first impression is a property of that
+  one-sided construction, not of HE's model, which damps every cue with a
+  state-dependent weight (their 6a/6b, called "critical"); the constant-weight
+  version is Anderson-Hovland's. **Do:** restate 6.A, the dialectic's
+  "realism complaint" paragraph and interior_omega's position channel so the
+  rival is "the one-sided damped family" with HE cited only for the averaging
+  equation; do not attribute first-impression protection to HE.
+- [ ] **P11. omega = 0 "is ours, not theirs". CONTRADICTED.** (Anchoring.lean
+  :20-21; PLAN :446-448, 1267, 1277-1278.) HE define 0 <= w_k <= 1, name the
+  insensitive corner (Fig. 7, the "advocate"), and say evidence can be
+  "completely ignored"; Asch p. 273 has subjects who "completely excluded" the
+  late trait. Only the one-sided construction is new. **Do:** say "the
+  one-sided construction is ours; the zero weight is in HE's range".
+- [ ] **P12. interior_omega.tex:62-65 (prelude, approved 2026-09-27), carried
+  into PLAN 1.A2 :203-205 and writing_discipline.md:84. CONTRADICTED as
+  cited.** "a position channel, in which the observer weights the later cue
+  less ... \citep{HogarthEinhorn1992,Asch1946}". HE's Step-by-Step partial
+  adjustment gives recency; Asch p. 272 says "It is not the sheer temporal
+  position of the item ...". Neither source supports "weights the later cue
+  less". interior_omega :323, 448 also calls interior omega "the primacy
+  regime" in HE's vocabulary (UNSUPPORTED; the one-sided scheme gives primacy
+  on one attribute only for omega < 1/2). **Do:** cite neither for the
+  direction; define the position channel by the model, not by the sources.
+- [ ] **P13. Asch, "the joint is never elicited". CONTRADICTED.** (review log
+  :539-540; PLAN 3.B :810-811.) Each subject's check-list is an 18-item joint
+  response; Asch conditions on the warm/cold item in Experiment II (p. 265)
+  and notes individual consistency (pp. 264-265). What he never collected is
+  a *prior* association (that part holds). **Do:** 3.B should say "no prior
+  association is elicited", not "the joint is never elicited".
+- [ ] **P14. Asch Experiment VI, "one cue per trait across eighteen traits".
+  CONTRADICTED.** (PLAN 6.A :1314-1315.) Experiment VI has six stimulus terms;
+  the eighteen traits are check-list response items, none of them a
+  stimulus. **Do:** "six stimulus terms, eighteen response traits".
+- [ ] **P15. Asch caveats.** "A broad, uncrystallized ..." is on p. 272 (the
+  sentence begins p. 271), not pp. 272-273. Footnote 5 gives two conditions,
+  not only centrality. "envious 6th versus 1st" are modal ranks (39% and 29%
+  of subjects). "early terms dominate": 10 of 24 subjects reported no change.
+  "no account offered" of uneven effects: Asch gives a content-based account
+  in Experiment I (p. 264). Asch's own mechanism is the relation of content,
+  not position. All Table 7 numbers quoted in PLAN 3.B are correct and in the
+  right columns.
+- [ ] **P16. Hogarth-Einhorn caveats.** "HE find primacy, recency or no
+  effect": their own five experiments found only recency or no effect (the
+  76 data points are other authors' studies, 5 of them no-effect). "their
+  eq. (1) with R = S_{k-1}" is their Eq. 3 with a constant weight. "memory is
+  limited to ... current anchor" means only the anchor is remembered, not
+  full adoption. HE's Limitations section does raise dependencies among
+  evidence. **Source caveat:** `hogarth_einhorn_1992.pdf` in Drive is a
+  compiled LaTeX transcription with reconstructed equations, not the journal
+  article; journal page numbers, issue and DOI are unverifiable from it, and
+  PLAN's "checked against hogarth_einhorn_1992.pdf" means the transcription.
+  **Do:** obtain the Cognitive Psychology PDF.
+- [ ] **P17. BIR and Heckman in PLAN 3.C/3.D.** (a) "no sample size repairs"
+  (PLAN :894-899, the_discrimination_problem.tex:242-244, review log :688-690)
+  is the project's gloss; Heckman never discusses sample size. Keep only as
+  the author's inference, not attributed. (b) BIR's "map ... vanishes only as
+  judgment becomes perfectly objective" (PLAN :940-943) ignores that
+  Proposition 2 attenuates discrimination along histories and that the
+  coefficient also vanishes as tau_q -> 0. (c) Every BIR page reference in
+  the notes is to the January 2019 working paper (printed page = PDF page
+  - 1), not the AER pages the bibliography entry gives. **Do:** cite AER
+  pages or say "working paper".
+- [ ] **P6. PLAN 1.A and 1.D are stale.** Their BEFORE blocks quote intro
+  paragraphs that the manuscript commits of 2026-09-12 and 09-15 already
+  rewrote; much of both edits is already in. **Do:** merge by hand against
+  the current paragraphs 1 and 3.
+- [ ] **P7. PLAN 1.B records an approved sentence (2026-09-21) that is not in
+  the committed manuscript.** MS:113 still reads "Whether arrival sequence
+  matters or not in the aggregate...". **Do:** confirm whether a newer
+  working copy exists; the Drive copy of the manuscript is from July.
+
+## 3. Notes (notes/*.tex, *.md)
+
+- [ ] **D1. papers_dialectic.tex:32-34, 54-56. CONTRADICTED for Doring.**
+  "The attack says the model is unrealistic. The attack is about psychology.
+  Nobody in the exchange measures anything." Doring's claim is normative:
+  "an exercise in Bayesian *rational* psychology ... cannot be a complete
+  account of *rational* belief change" (S379); the order dependence "seems
+  wholly unjustified" (S383); "Jeffrey conditionalization alone cannot be all
+  there is to rational belief change" (S386). Hawthorne's objection is the
+  psychological one. **Do:** split the standoff into a normative prong
+  (Doring) and a psychological prong (Hawthorne); the dialectic's step 3
+  already separates Hawthorne's two prongs, so the structure can absorb it.
+  Same correction in PLAN 3.A (P3).
+- [ ] **D2. papers_dialectic.tex:155-158. CAVEAT, borderline CONTRADICTED.**
+  "cells are exactly what an observer of a population does not get to read,
+  and the step from his tables to observable statistics is the step this
+  paper supplies". Doring himself reads the effect off P(A given not-B)
+  (1/6 versus 5/6) and argues a third update pushes the *unconditional* P(A)
+  near 0 versus 1 in the two sequences (S383). What he lacks is a population
+  or observer statistic, not a move off the cells. His cues are disjunctive
+  (raise P(A or B), then P(not-A or B), to .99), not attribute-local.
+  **Do:** reword to "what he lacks is the population statistic".
+- [ ] **D3. verification_coverage.md is out of date.** Counts 13 sympy
+  scripts; run_all.py has 15 (verify_example, verify_interior_omega added).
+  Line 61-62 points to literature/ for Doring (see P1). **Do:** refresh.
+- [ ] **D4. literature/bohren_imas_rosenberg2019/sympy/check_reversal.py**
+  still asserts a discrimination reversal that review log Entry 10 says was
+  blocked; kept deliberately "with its failures intact". Group D report will
+  say whether its docstring claims about BIR hold. **Do:** add a header line
+  saying the script is a record of a blocked derivation.
+
+- [ ] **D5. papers_dialectic.tex:91, 213. WRONG-LOCATION.** "it seems
+  implausible that the most recent experience ..." starts on p. 98, not
+  p. 99.
+- [ ] **D6. paper_review_log.md:804. MISQUOTED.** "how completely we dismiss
+  previous experiences"; the text is "dismiss previous experiences so
+  completely" (p. 115).
+- [ ] **D7. papers_dialectic.tex, Hawthorne. CAVEAT x3.** (a) Note 15 cites
+  Lange as well as Diaconis-Zabell and Doring; the dialectic drops Lange.
+  (b) "Hawthorne ... agrees with the verdict" of Doring, but his notes 2 and
+  10 list Doring as a defender of standard sequential updating. (c) The
+  bibliography says the Update Reordering Theorem was "verified"; only one
+  instance was checked.
+- [ ] **D8. literature/hawthorne2004/README.md. CONTRADICTED + WRONG-LOCATION
+  + CAVEAT.** (a) :101-106 says the likelihood-ratio example uses "exactly the
+  same likelihoods and reports" read as Bayes factors; Hawthorne changes the
+  reports to LR .50 and 2 (the Bayes-factor reading of the .90 reports would
+  be 1/9 and 9). (b) :83 puts Extended Rigidity in Section 8; it is Sections
+  6-7 (only Basis-Overwrite and Basis-Commuting are Section 8). (c) The
+  Reordering Theorem description treats r as free; the theorem fixes
+  r = NL[Q_alpha-epsilon,d,D_i] / NL[Q_alpha,d,D_i], and
+  `sympy/check_reordering_theorem.py` prints t_j/w_j, which is not his r.
+  **Do:** correct the README and the script's printed quantity.
+- [ ] **D9. interior_omega.tex:381-384 and literature/weisberg2009/README.md:49.
+  CAVEAT, substantive.** Weisberg is said to "set aside" non-commutativity on
+  input distributions (p. 9), with the omega = 1 model placed there. He calls
+  that non-commutativity a *desirable feature* (Lange's point: the same
+  experiences in reverse order should yield different inputs). The omega = 1
+  model fixes the same inputs in either order, so its non-commutativity is a
+  failure of commutativity on *experiences*, which Weisberg keeps as a
+  desideratum. **Do:** re-place the model in the Weisberg table; this changes
+  the "on neither horn" cell.
+- [ ] **D10. interior_omega.tex:89-91. CAVEAT.** The "order dependence in the
+  rule versus in the inputs" distinction is credited to Weisberg; he never
+  frames it that way, and the correlated-partitions mechanism in that row is
+  Diaconis-Zabell's. The undercut/rebut vocabulary is analogy (his F is a
+  defeater proposition, not a second attribute's cue). Lange claims are all
+  second-hand through Weisberg. Weisberg's Bayes factor is an odds ratio, not
+  the NL form. **Do:** reword the attributions in Table 1 and Section 5.
+
+- [ ] **D11. BIR "unstated scope condition". CONTRADICTED.** review log
+  :358, 387-391 (Entry 9) calls Bayesian updating an unstated scope
+  condition of Proposition 2; BIR state Bayes' rule explicitly as a model
+  assumption (p. 11). **Do:** annotate Entry 9 ("stated assumption, not
+  unstated").
+- [ ] **D12. check_pinning_kills_partiality.py:17-20, 28, 123. CONTRADICTED.**
+  Docstring says a Bayesian evaluator with exogenous likelihoods "is the
+  object their Proposition 2 is about"; Proposition 2 concerns histories
+  whose informativeness is endogenous, and their fn 10 (p. 19) calls the
+  exogenous case immediate. **Do:** fix the docstring (the check itself
+  stands).
+- [ ] **D13. the_discrimination_problem.tex:150-156, 279-285. CONTRADICTED x2.**
+  (a) "exhaustive trichotomy": BIR "allow for three potential sources" (p. 2),
+  say other misspecifications can also produce reversals (p. 19), and discuss
+  attrition, variance differences and self-fulfilling beliefs (pp. 24-25).
+  (b) All three sources are "a defect of the evaluator" and "set the belief
+  gap and the preference gap to zero and nothing remains": BIR's impartial
+  type has correct beliefs, no animus and Bayesian updating, yet
+  "discriminates against males in the second period" (p. 20). This undercuts
+  the note's "person-based versus process-based" framing. **Do:** rewrite
+  both paragraphs; drop the trichotomy-is-exhaustive framing.
+- [ ] **D14. review log Entry 5 :186-188. CONTRADICTED, never corrected.**
+  "reversal comes from biased priors overshooting": Proposition 2 says a
+  single biased type never reverses; the reversal comes from the impartial
+  type's inference about the heuristic type (pp. 19-21). Entry 10 has the
+  right account. **Do:** annotate Entry 5.
+- [ ] **D15. BIR/Heckman page errors.** Aggregate Proposition 1 formula is on
+  p. 17, not p. 16 (the_discrimination_problem.tex:114, review log :469).
+  "posterior mean is increasing in the prior mean" is on p. 19, not p. 18.
+  Heckman's "nothing guarantees" is on p. 109, but positioning_economics.tex
+  :42-45, 93-94 gives only p. 102. BIR's appendix does impose conditional
+  independence (shocks independent pp. 9-10; signal given ability
+  independent of the prior mean, p. 47), which closes review log Entry 7's
+  open question. Reading order of reputation versus content is never
+  discussed; closest is p. 3, "Both the username and the level of reputation
+  are prominently displayed adjacent to any post."
+- [ ] **D16. question_and_answer.tex:63-65.** Still says the studies of
+  Hogarth-Einhorn and Asch "elicit a single evaluative level"; the review log
+  (:522) already calls this wrong for Asch. **Do:** fix (the file is drafting
+  history per PLAN, but it is still wrong).
+
+### Literature READMEs and scripts, kinematics papers (group C)
+
+- [ ] **L1. literature/field1978/sympy/check_commutativity.py. BUG.**
+  `tilt_step1` ignores its input argument, so the commutativity check prints
+  non-zero differences; the README (:18-20) says eq. (7) was verified to
+  commute. The theorem is true (checked independently). **Do:** fix the
+  function to reweight its argument, rerun, and add the script to a runner.
+- [ ] **L2. literature/field1978/README.md:33-36. CONTRADICTED.** "e^{2 alpha}
+  is a squared likelihood ratio": by eq. (4), e^{2 alpha} *is* the likelihood
+  ratio; e^{alpha} is its square root, and alpha is half the log-odds shift.
+- [ ] **L3. literature/diaconis_zabell1982/README.md.** (a) :39-41 says Thm 3.2
+  is proved via Csiszar; it is proved by direct algebra (pp. 825-826); Csiszar
+  is the omitted proof of Thm 3.1. CONTRADICTED. (b) Example 5.1 is in
+  section 5.3, not 5.2. (c) "When is successive updating reasonable?" is
+  followed by D-Z's own proposal, not left open. (d) The c = 0 equals
+  Jeffrey-independence claim is supported by the p. 826 Remark, which the
+  README should cite. (e) "footnote at line ~81" is stale.
+- [ ] **L4. literature/garber1980/README.md.** "far more interesting (and far
+  more difficult)" loses its parentheses (p. 145; MISQUOTED). "neither
+  correct nor necessary" is his opening thesis (p. 142), not his conclusion.
+  The text layer garbles eqs. (3)-(4). Garber's prose says ".5019", a typo
+  in the paper; his table and the computation give .5091.
+- [ ] **L5. literature/wagner2002/README.md.** (a) :68-72 says Thm 4.1 makes
+  P^B "the" benchmark; Thm 4.1 does not single P^B out, and the README's own
+  check found a one-parameter family of commuting schemas (UNSUPPORTED).
+  (b) :62-64 calls matching-target routes "Field's simpler special case";
+  Field's case is the general finite schema, matched targets are the D-Z case
+  (Remark 3.4) (CONTRADICTED). (c) Full support also needs qualitative
+  independence of the partitions for (4.3)-(4.4) (Remark 4.1); D-Z already
+  had the matched-case necessity (Remark 4.3). Wagner Remark 5.1 is the
+  explicit answer to Garber.
+- [ ] **L6. literature/wagner2003/README.md.** (a) :3-4 "considered experiences
+  ... Lange/Cassell exchange": the phrase is Wagner 2002 note 9; Wagner 2003
+  mentions neither Lange nor Cassell (WRONG-LOCATION). (b) Three indices
+  (d, D, pi), not two; criterion II is "on the same partition" (MISQUOTED).
+  (c) :40-42 says the d-index failure of criterion II is not checkable; note
+  4 (p. 363) gives a numeric counterexample, q'(H|E) = .6286 versus
+  p'(H|E) = .5 (CONTRADICTED). (d) Thm 2.1 is for purely atomic algebras;
+  the generalisation of the 2002 result is Thm 3.2 in section 3, which the
+  README files under old evidence.
+- [ ] **L7. literature/pettigrew_weisberg2025/README.md:45-47. WRONG-LOCATION.**
+  The "no prior opinion" gloss on beta/(beta+1) is P-W's own main text (p. 7),
+  not "Field's own gloss (footnote 9)"; P-W fn 9 only says Field's alpha is a
+  log-scaled beta; Field never writes beta/(beta+1). Thm 2 as stated omits
+  "regular P". question_and_answer_doc.tex:52-53 lists P-W as "preprint /
+  forthcoming"; published Phil. Imprint 25(8), July 2025.
+
+### Literature READMEs and Lean, record papers (group H)
+
+- [ ] **L8. Augenblick-Rabin record. CONTRADICTED x2.** (a) review log
+  :86-91 and README "What formalizing revealed": that `excess_step` is a pure
+  algebraic identity is stated by AR themselves (p. 3 "can be simplified as
+  (2 pi_t - 1)(pi_t - pi_{t+1})", fn 21, p. 11), not revealed by
+  formalizing. (b) review log :106-111 "No alternative rule is proposed": AR
+  section 3.1 (p. 24) gives LR[pi_{t+1}] = LR[pi_t]^alpha LR[s]^beta.
+  UNSUPPORTED: Prop 4 "measure-theoretic" (its proof is a finite
+  construction); a belief stream "could not express" permutation
+  non-commutativity; PRO "completes a classification AR decline to attempt"
+  (AR only disclaim optimality). Lean header says definitions are "verbatim"
+  but the paper writes pi, not theta. Drive copy is the Nov 2020 working
+  paper; all numbering is working-paper numbering.
+- [ ] **L9. Shmaya-Yariv record.** (a) README:8 "Definitions 1-3 formalized":
+  Definition 2 (restricted) is not encoded in the Lean (CONTRADICTED).
+  (b) `no_reversal_of_restricted` is described as the necessity direction; it
+  assumes the convex-combination step and concludes only equal scores, not
+  sigma(s) = a (UNSUPPORTED). (c) Def 1 notation: the paper has
+  (alpha, tau, zeta) valued in A, bold N = {0..N}, S^N (MISQUOTED).
+  (d) "events don't overlap when nu is a function of history": they are
+  disjoint in every conjectured experiment (UNSUPPORTED). `alpha_depends_on_nu`
+  does not prove non-independence. Drive copy is the 2008 working paper.
+  **Do:** encode Definition 2 and prove the necessity direction properly, or
+  narrow the README.
+- [ ] **L10. measurement_susceptibility_survey.md.** (a) :67 says Jeffrey's
+  term is "rigidity": ZO attribute "invariance" to Jeffrey (2004, section 3.2);
+  "rigidity" is Oaksford-Chater's and Over-Hadjichristidis's (ZO fn 1)
+  (CONTRADICTED). (b) :101-102 rewrites the ineffability parenthetical, which
+  reads "(as stressed by Jeffrey, 1983, section 11.1)" (MISQUOTED). (c) :126
+  "single judgment per subject" in Zhao 2012: each gave five (WRONG-NUMBER).
+  (d) :152-153 the swing-state result is "per-subject, not an aggregate
+  audit": it is a between-group comparison against a control mean
+  (CONTRADICTED). (e) ZO "stability": 22 of 40 changed Pr(G|B).
+- [ ] **L11. Wilson and Cassell identities.** `AndreaWilson.pdf` is the
+  April 29, 2003 draft, not the 2014 Econometrica paper. `lisa_cassell.pdf` is
+  Cassell, "Commutativity, Normativity, and Holism: Lange Revisited", Can. J.
+  Phil. 50(2) 159-173 (online 2019, volume year 2020). All Lange claims in the
+  notes are second-hand via Weisberg and Cassell.
+
+## 4. Drive folder and sources
+
+- [ ] **S1. `goodmittal1987.pdf` is not Good-Mittal.** It is I. J. Good
+  (1960), "Weight of Evidence, Corroboration, Explanatory Power, Information
+  and the Utility of Experiments", JRSS B 22(2), 319-331. The real paper is
+  `goodmittal1987_1.pdf` (Ann. Statist. 694-711, complete). **Do:** rename
+  or remove the mislabelled file.
+- [ ] **S2. `domotor1980.pdf`:** journal p. 387 scanned twice; PDF pp. 22-27
+  blank; journal pp. 384-403 complete. `phelps1972.pdf`: paper on 3 pages,
+  4 blank. `BCGS_stereotypes_june_6.pdf` is the May 2015 working paper.
+  `heckman` file is named 2011 (group D will say what it is).
+  `Arrow_1973` is the 1971 Princeton working paper 30A.
+- [ ] **S3. Not in the `temp` folder:** Becker 1962, Epstein 2006, Ortoleva
+  2012 (only the 2024 Annual Review is there), Tao 2011, Jeffrey 1988,
+  Doring is there but has no `literature/` record. Jeffrey 1983 *The Logic
+  of Decision* and *Subjective Probability* are in the books folder
+  (`1-REBD20dZB84hLl0udakW1EImR1xiMAn`), which is not link-shared, so they
+  cannot be downloaded from this session. **Do:** copy the two Jeffrey books
+  (or at least ch. 11 of The Logic of Decision) into `temp`; add Epstein,
+  Ortoleva 2012, Becker 1962.
+- [ ] **S4. `phelps_slides.pdf`, `hayashi.pdf`, `thoma_mistakes.pdf`,
+  `quantum_nature_of_human_perception`, `sen_poverty.pdf`, `lisa_cassell.pdf`,
+  `AndreaWilson.pdf`** are in Drive but cited nowhere in the manuscript.
+  Wilson and Cassell appear in the notes (group H will report).
+
+## 5. Formal records (literature/ and lean/Literature/)
+
+- [ ] **R1. Papers with no record at all** get a `literature/<paper>/` record
+  (README with page-cited claims, Lean file in `lean/Literature/`, SymPy
+  check where numeric): Doring, Domotor, Good-Mittal, FGT, Hogarth-Einhorn,
+  Asch, Cripps, Dietrich, BHW, Banerjee, Phelps, Arrow, Coate-Loury, BIR
+  (README missing), Heckman, BCGS; Weisberg (README only). In progress
+  2026-09-29.
+- [ ] **R2. Sympy-only records with empty `lean/` directories:**
+  Diaconis-Zabell, Field, Garber, Hawthorne, Pettigrew-Weisberg, Wagner 2002,
+  Wagner 2003. Add Lean for the closed-form identities (Field eq. 7
+  commutativity, Wagner Thm 3.1, P-W's upco/Field identity, Garber's
+  recurrence, Hawthorne's LR-model commutation).
+- [ ] **R3. Not in Drive, no record possible yet:** Jeffrey 1983 and 2004
+  (books folder not link-shared), Epstein 2006, Ortoleva 2012, Becker 1962,
+  Jeffrey 1988.
+- [ ] **R4. Literature scripts are in no runner.** Add a
+  `literature/run_all.py` so the records are rerun with the main suite.
+
+## 6. Cross-document consistency (to do after the pass)
+
+- [ ] **X1.** Check that the literature edits in PLAN 3.A-3.D carry what
+  `papers_dialectic.tex` argues, and that both agree with the sources once
+  the corrections above are made. Known already: D1/P3 (Doring's objection
+  is normative, not psychological) affects both.
+- [ ] **X2.** Table 2 says "share of candidates"; the text and Prop. SHR say
+  evaluators (noted in PLAN W.A).
+- [ ] **X3.** Whether to retire `positioning_economics.tex` (review log
+  Entry 16 recommendation).
+- [ ] **X4.** Weisberg 2009 citation unconfirmed from the preprint (group A
+  will report).
