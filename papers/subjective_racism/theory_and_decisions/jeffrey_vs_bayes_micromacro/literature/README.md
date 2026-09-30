@@ -16,17 +16,16 @@ drove the 2026-09-29 records is `../notes/citation_audit.md`.
     cd ../lean && lake build           # every Lean file, incl. Literature/*
     cd ../lean && lake env lean check_axioms.lean
 
-Caveat: the sympy-only records (first seven rows) print their results but do
-not assert, so they exit 0 whatever they print; `field1978`'s script has a
-known bug (audit item L1). Adding Lean to them is audit item R2.
+Every record now has a Lean file (except Jeffrey 1988, not available) and
+asserting sympy checks; coverage is tracked in the audit, item R5.
 
 | Paper | Formalization | Status |
 |---|---|---|
 | [field1978](field1978/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [diaconis_zabell1982](diaconis_zabell1982/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
-| [wagner2002](wagner2002/README.md) | sympy only | done |
-| [wagner2003](wagner2003/README.md) | sympy only | done |
-| [pettigrew_weisberg2025](pettigrew_weisberg2025/README.md) | sympy only | done |
+| [wagner2002](wagner2002/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
+| [wagner2003](wagner2003/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
+| [pettigrew_weisberg2025](pettigrew_weisberg2025/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [hawthorne2004](hawthorne2004/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [garber1980](garber1980/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [augenblick_rabin2021](augenblick_rabin2021/README.md) | Lean + sympy | done (dropped from write-ups) |

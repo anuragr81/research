@@ -23,9 +23,12 @@ import Literature.Heckman
 import Literature.HogarthEinhorn
 import Literature.Jeffrey
 import Literature.Ortoleva
+import Literature.PettigrewWeisberg
 import Literature.Phelps
 import Literature.ShmayaYariv
 import Literature.Tao
+import Literature.Wagner2002
+import Literature.Wagner2003
 import Literature.Weisberg
 import Literature.Zhao2012
 import Literature.ZhaoOsherson

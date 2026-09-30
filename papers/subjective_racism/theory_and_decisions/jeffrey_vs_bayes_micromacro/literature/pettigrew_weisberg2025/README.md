@@ -1,71 +1,129 @@
 # Pettigrew, R. and Weisberg, J. (2025), "Jeffrey Pooling"
 
-*Philosophers' Imprint* 25(8), 1-16.
+*Philosophers' Imprint* 25(8), July 2025, pp. 1-16, doi 10.3998/phimp.3806. It is published;
+it is not a preprint or "forthcoming". The manuscript cites it once, at MS:277.
 
-The cleanest, most recent statement of the state-of-the-art commuting rule. This pass
-specifically re-checks the memo's claim "$\PB$ is Field's update, hence upco, hence the
-rule Pettigrew-Weisberg endorse" -- flagged as likely wrong in the very first alignment
-assessment, before any primary source had been read.
+## What the paper proves
 
-## Claims formalized
+- **Equation (1)** (p. 3), upco: $P'(E)=P(E)Q(E)/[P(E)Q(E)+P(\bar E)Q(\bar E)]$. *Jeffrey
+  pooling* pools the prior $P(E)$ with a source's opinion $Q(E)$ (Step 1), then Jeffrey
+  conditionalizes on the result (Step 2).
+- **Theorem 1** (Field; p. 3): "Upco ensures that Jeffrey pooling commutes for any **regular**
+  P, and any Q and R." Regular means that $EF$, $E\bar F$, $\bar EF$ and $\bar E\bar F$ all
+  have positive probability. Theorem 5 in the appendix is the countable-partition version,
+  "whenever defined".
+- **Theorem 2** (p. 6): "Among the monotonic, continuous, uniformity preserving, and
+  symmetric pooling rules, only upco ensures that Jeffrey pooling commutes for any
+  **regular** P, and any Q and R." P-W call extensionality "a tacit fifth assumption"
+  (p. 6). The appendix version, Theorem 8 (p. 15), adds extensionality and is stated for
+  finite partitions. The proof goes through Lemma 7 and Theorem 6, which is Wagner's
+  necessity theorem.
+- **Equations (2)-(3)** (p. 7). Field updating on $(E,\beta)$ is
+  $P'(E)=\beta P(E)/(\beta P(E)+P(\bar E))$, and it equals upco with $Q(E)=\beta/(\beta+1)$.
+  P-W's gloss, in their main text on p. 7: "when $P(E)=P(\bar E)$, Equation (3) delivers
+  $P'(E)=\beta/(\beta+1)$. So if you have no prior opinion about E, you will defer to your
+  sensory system's proposal." This gloss is **P-W's own**. P-W's footnote 9 says only that
+  Field uses a log-scaled $\beta$, which he labels $\alpha$. Field never writes
+  $\beta/(\beta+1)$.
+- p. 9: "$\beta$ just is the Bayes factor". Theorems 3 and 4 are Wagner (2002)'s, restated
+  for regular P.
+- P-W restore commutativity by choosing the pooling rule that combines the **prior** with
+  each source's opinion. Successive inputs are never pooled with each other. They also stress
+  that upco is not claimed to be always best (p. 6).
 
-- **Theorem 1** (attributed to Field): "upco" pooling,
-  $P'(E)=P(E)Q(E)/[P(E)Q(E)+P(\neg E)Q(\neg E)]$, followed by Jeffrey conditionalizing on
-  the pooled value, ensures Jeffrey pooling commutes for any regular $P$.
-- **Theorem 2**: among monotonic, continuous, uniformity-preserving, symmetric pooling
-  rules, only upco ensures commutativity for arbitrary $Q,R$ (an axiomatic uniqueness
-  result -- not attempted here, see below).
-- **The Field/upco identification** (their eq. 2 vs eq. 1/3): "Field updating on
-  $(E,\beta)$" -- $P'(E)=\beta P(E)/(\beta P(E)+P(\neg E))$, where $\beta\ge0$ is the
-  *odds-scale* strength of a sensory experience -- is algebraically the same formula as
-  upco, with $Q(E):=\beta/(\beta+1)$.
-- **Theorem 3/4** (attributed to Wagner 2002): restated without new content beyond what
-  `literature/wagner2002/` already verifies directly from the primary source.
+## Lean
 
-## The precise resolution of the $\PB$-vs-upco question
+`lean/PettigrewWeisberg.lean` is a symlink to `lean/Literature/PettigrewWeisberg.lean`. The
+file builds with no `sorry`. Every theorem, 54 in all, uses only
+`[propext, Classical.choice, Quot.sound]`.
 
-The key subtlety, verified in `sympy/check_upco_vs_PB.py`:
+| Lean | Paper |
+|---|---|
+| `upco`, `linPool`, `opening_example` | Eq. (1); linear pooling; .4 and .8 give .6 linearly and $8/11\approx .73$ by upco |
+| `field`, `eq3`, `no_prior_opinion`, `beta_is_bf` | Eq. (2); Eq. (3); P-W's p. 7 gloss; "β just is the Bayes factor" (p. 9) |
+| `upcoV`, `upcoV_binary`, `jpool` | Definitions 2-3 (upco on a partition; Jeffrey pooling), finite partitions |
+| `thm1` | **Theorem 1**, for regular P and any Q, R, on finite partitions (the paper states the binary case) |
+| `thm5`, `route` | Theorem 5, "whenever defined"; both orders give $P(\omega)Q(E_i)R(F_j)$ renormalized |
+| `example_P1`, `example_P2`, `example_other_order` | the p. 4 worked example, exactly: $8/11$; $(6,2,1,2)/11$; $7/11$; $21/29$; $(18,4,3,4)/29$; the other order via $(9,2,6,8)/25$ to the same $P''$ |
+| `wagner_grid` | Theorem 6, the Wagner necessity step, $E$-half, as used in the proof |
+| `lemma7` | **Lemma 7**, uniform distributions are neutral |
+| `thm8_regular` | **Theorem 2 / Theorem 8, regular part** |
+| `upco_regPres`, `upco_UP`, `upco_mono`, `upco_symm`, `upco_cont`, `upco_commutes` | upco satisfies every hypothesis of `thm8_regular`, so the theorem is not vacuous |
 
-1. **Plugging Paper B's delivered credence $q$ directly into upco's two-argument
-   formula as $Q(E)$ does *not* reproduce $\PB$.** $\mathrm{upco}(p,q) - q$ is a nonzero
-   rational function of $(p,q)$, vanishing only at $p=\tfrac12$. This is exactly what
-   the original assessment found, and it stands: the memo's "$\PB=\mathrm{upco}$" is
-   **false** if read as "compute upco of the prior and the delivered credence."
-2. **Field's own $\beta$-parametrized construction is a different object.** $\beta$ is
-   not the delivered credence -- it is $\beta:=\ell_1/\ell_0$, the *ratio* of Paper B's
-   own per-outcome Bayes factors $\ell_i=q_i/P(A{=}i)$. Plugging this $\beta$, *derived
-   jointly from $q$ and the current prior $p$*, into Field's formula (2) reproduces $q$
-   exactly -- a tautology confirming Proposition IMM (Paper B's own single-cue
-   full-deference result), not a substantive new claim.
-3. **PW's own identity holds exactly**: Field's eq. (2) with this $\beta$ literally
-   equals $\mathrm{upco}(p,\,Q(E))$ for $Q(E):=\beta/(\beta+1)$ -- confirmed
-   algebraically, residual 0.
-4. **But $Q(E):=\beta/(\beta+1)$ is *not* $q$.** Simplified: $Q(E)=q(p-1)/(2pq-p-q)$,
-   equal to $q$ only at $p=\tfrac12$. It is a different, derived number representing
-   "what a neutral ($p=\tfrac12$) agent would conclude from the same evidence" -- Field's
-   own gloss (footnote 9 in the paper): $\beta/(\beta+1)$ is what you'd defer to "if you
-   have no prior opinion."
+**Theorem 2 exactly as formalized.** A pooling operator on $n$-cell partitions has the type
+`PoolOp n`. Because the type sees only the two vectors of cell probabilities, extensionality
+(Def. 10) is built in. `thm8_regular` assumes that the operator is uniformity preserving,
+monotonic, symmetric and continuous (Defs. 6-9), and that it makes Jeffrey pooling commute.
+It concludes that the operator agrees with upco on regular inputs. The main-text Theorem 2
+is the case $n=2$. The formalization differs from the paper in three ways.
+1. It adds a hypothesis, `RegularityPreserving`: pooling regular distributions gives a
+   regular distribution. P-W's proof divides by pooled values in (6) and (8) and uses the
+   pooled result as a probability function, so it relies on this assumption without
+   stating it. Upco satisfies it (`upco_regPres`).
+2. The axioms are required only on regular inputs, and commutativity only on two $n$-cell
+   partitions forming a grid, with regular P, Q, R. These are weaker hypotheses than the
+   paper's.
+3. **Not formalized:** the last paragraph of Theorem 8's proof, which extends agreement from
+   regular inputs to all inputs by continuity.
 
-So: $\PB$ genuinely **is** Field's 1978 procedure (independently verified cell-by-cell
-in the memo's `checks/c5_benchmark_is_field.py`, and via the eq.(7) commutativity check
-in `literature/field1978/`), and Field's procedure **is**, by PW's own algebra, the
-same construction as upco -- but only once translated through $\beta$. Calling $\PB$
-"upco" without that translation is misleading: a reader who computes
-$\mathrm{upco}(\text{prior}, \text{delivered credence})$ literally, as the memo's phrasing
-invites, gets the wrong number except at a uniform prior. The manuscript itself does not
-make this claim (it correctly describes $\PB$ via the Bayes-factor formula
-$\PB(i,j)\propto P(i,j)\ell^A_i\ell^B_j$, not via upco); the imprecision is specific to
-the alignment memo's gloss.
+## The project's question, not P-W's (labelled separately in the Lean file)
 
-Not attempted: Theorem 2's axiomatic uniqueness (a characterization over the space of
-*all* monotonic/continuous/uniformity-preserving/symmetric pooling rules) -- this is a
-general impossibility-style theorem, not a single identity to check computationally.
+| Lean | Content |
+|---|---|
+| `upco_eq_self_iff` | $\mathrm{upco}(p,q)=q$ iff $p=\tfrac12$ |
+| `naive_opinion` | the opinion upco needs to return a delivered credence $q$ is $\beta/(\beta+1)=q(1-p)/(p+q-2pq)$, which equals $q$ only at $p=\tfrac12$ |
+| `PB_is_upco_pooling` | $\PB$ **is** Jeffrey pooling with upco, in either order, when each cue's pooled opinion is its likelihood matched against the **prior** marginal (`matchedOpinion`), not its delivered credence |
+| `PB_vs_example` | on P-W's p. 4 numbers read as two delivered credences, pooling the credences themselves gives $18/29$ at $EF$, and $\PB$ gives $27/40$ |
 
-## Bearing on Paper B
+So "$\PB$ = upco" is true only with the translation spelled out. Each cue's pooled opinion is
+$\beta/(\beta+1)$, with $\beta$ the cue's Bayes factor against the prior. Read literally as
+"upco of the prior and the delivered credence", it is false, except at a uniform prior.
 
-Confirms and sharpens the earlier finding (problem #1 in the standalone problems
-memo): the manuscript's own wording ("Bayes-factor benchmark," "sequence-invariant
-\citep{Wagner2002}") is accurate and should be kept exactly as is; any future addition
-identifying $\PB$ with "upco" for a reader unfamiliar with the $\beta$-translation
-should either state the translation explicitly or avoid the word "upco" and just say
-"Field/Wagner's Bayes-factor combination."
+## SymPy
+
+`sympy/check_upco_vs_PB.py` runs 33 exact checks, prints PASS/FAIL for each, and exits 0 iff
+all pass (33/33). It covers:
+
+- the opening example;
+- the full p. 4 example in both orders;
+- that linear pooling does not commute on the same numbers;
+- Theorem 1 symbolically for a regular 2x2 prior and any Q(E), R(F);
+- Eqs. (2)-(3), the p. 7 gloss, and "β is the Bayes factor";
+- the $\mathrm{upco}(p,q)\neq q$ algebra;
+- that $\PB$ is upco-pooling with matched opinions, in both orders, and $27/40$ vs $18/29$;
+- spot checks that upco satisfies the Theorem 2 hypotheses.
+
+## Corrections to the earlier version of this README
+
+- It attributed the "no prior opinion" gloss on $\beta/(\beta+1)$ to "Field's own gloss
+  (footnote 9 in the paper)". The gloss is P-W's own main text (p. 7). P-W's footnote 9 only
+  says that Field's $\alpha$ is a log-scaled $\beta$. Field has two footnotes and never writes
+  $\beta/(\beta+1)$.
+- It stated Theorem 2 without "for any **regular** P". The appendix version (Theorem 8) also
+  needs extensionality.
+
+## What the manuscript may and may not attribute
+
+**MS:277 now reads:** "the literature restores sequence-invariance for sequential Jeffrey
+updating by changing how successive inputs are pooled \citep{PettigrewWeisberg2025}".
+P-W never pool successive inputs with each other. They pool the prior with each input.
+
+**Suggested wording:** "Pettigrew and Weisberg restore sequence-invariance by pooling the
+prior with each new input multiplicatively (upco) before the Jeffrey step
+\citep{PettigrewWeisberg2025}."
+
+**May attribute to P-W:**
+- Upco-then-Jeffrey commutes for regular priors (Theorem 1, which they attribute to Field).
+- Among monotonic, continuous, uniformity-preserving and symmetric pooling rules (with the
+  tacit fifth assumption, extensionality), only upco does so for every regular prior
+  (Theorem 2).
+- Field updating on $(E,\beta)$ is Jeffrey pooling with upco, with $Q(E)=\beta/(\beta+1)$.
+
+**Must not attribute to P-W:**
+- Pooling of successive inputs with each other.
+- That $\PB$ equals upco of the prior with the delivered credence. That is false unless the
+  prior marginal is $\tfrac12$. If the manuscript wants to connect $\PB$ to upco, it must say
+  that each cue's pooled opinion is its likelihood matched against the prior
+  (`PB_is_upco_pooling`).
+- The "no prior opinion" reading as Field's.
+- Theorem 2 without "regular P" and without its list of axioms.

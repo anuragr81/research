@@ -785,6 +785,29 @@ says otherwise), NOT-CHECKABLE (source not available).
   independence of the partitions for (4.3)-(4.4) (Remark 4.1); D-Z already
   had the matched-case necessity (Remark 4.3). Wagner Remark 5.1 is the
   explicit answer to Garber.
+- [ ] **L5 settled formally (2026-09-30, lean/Literature/Wagner2002.lean,
+  75 theorems).** Theorem 3.1 makes P^B the common endpoint of Wagner's
+  two-route schema when each cue's first-position update is its delivered
+  credence against the prior and each second-position update carries the same
+  Bayes factor (`PB_endpoint`), so "combining Bayes-factor content is
+  sequence-invariant (Wagner 2002)" is accurate. Theorem 4.1 (conditions hold
+  on the paper's full-support grid, `grid_43_44`) makes P^B unique *given that
+  anchoring* (`PB_unique`). Not licensed: P^B as *the* benchmark; every route
+  has a Bayes-factor-consistent partner ending elsewhere (`completion`; the
+  B-first Jeffrey sequence gives 36/55 at cell EF against P^B's 27/40,
+  `wagner_does_not_single_out_PB`). What picks out P^B is the paper's choice
+  to read each cue's factor against the prior; the README's old
+  "one-parameter family" evidence changed the cue itself. Corrected wording
+  for MS:171, 216-217, 277 in the README. Pettigrew-Weisberg
+  (PettigrewWeisberg.lean, 54): Theorem 1 for regular P on finite partitions;
+  Theorem 2 needs an unstated hypothesis (pooling regular distributions gives
+  a regular one) that their proof uses in (6) and (8)
+  (`RegularityPreserving`; upco satisfies it, `upco_*`); P^B is upco-then-
+  Jeffrey pooling only when the pooled opinion is the likelihood matched
+  against the prior, not the delivered credence (`PB_is_upco_pooling`; on
+  their p. 4 numbers the delivered credences give 18/29 at EF against 27/40).
+  Wagner 2003 (Wagner2003.lean, 31): note 5's "unless Q = p there is no r"
+  also needs q != p (`absurdity_needs_learning`); d fails criteria II and III.
 - [ ] **L6. literature/wagner2003/README.md.** (a) :3-4 "considered experiences
   ... Lange/Cassell exchange": the phrase is Wagner 2002 note 9; Wagner 2003
   mentions neither Lange nor Cassell (WRONG-LOCATION). (b) Three indices
@@ -948,7 +971,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   theorems in all, full `lake build` clean, every theorem on the standard
   axioms or a subset (in `check_axioms.lean`); `literature/run_all.py` 29/29.
   Asch has sympy only (no formal claim).
-- [ ] **R2. Sympy-only records with empty `lean/` directories:**
+- [x] **R2 (done 2026-09-30: all seven now have Lean and asserting scripts). Sympy-only records with empty `lean/` directories:**
   Diaconis-Zabell, Field, Garber, Hawthorne, Pettigrew-Weisberg, Wagner 2002,
   Wagner 2003. Add Lean for the closed-form identities (Field eq. 7
   commutativity, Wagner Thm 3.1, P-W's upco/Field identity, Garber's
@@ -976,7 +999,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Bohren-Imas-Rosenberg, Heckman, BCGS | yes | 1 |
   | Jeffrey 1983/2004, Benjamin-Bodoh-Creed-Rabin 2019 | yes | 2 |
   | Hawthorne, Diaconis-Zabell, Field, Garber | yes | A |
-  | Wagner 2002, Wagner 2003, Pettigrew-Weisberg | in progress (sympy only before) | A |
+  | Wagner 2002, Wagner 2003, Pettigrew-Weisberg | yes | A |
   | Epstein 2006, Ortoleva 2012 (via 2024 survey), Tao 2011, Becker 1962 (web copy) | yes | 2/B |
   | Asch (data), Zhao-Osherson 2010, Zhao et al. 2012 | yes | B/C |
   | Wilson 2014, Cassell 2020 | in progress | C |
