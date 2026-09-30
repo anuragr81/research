@@ -1017,3 +1017,23 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   Entry 16 recommendation).
 - [ ] **X4.** Weisberg 2009 citation unconfirmed from the preprint (group A
   will report).
+- [ ] **X5. Incorporate the exploration documents (author, 2026-09-30; after
+  R5 is complete).** Every underlying point in the exploration documents must
+  be covered by the manuscript or by a change in
+  `notes/manuscript_change_plan.md`, or be recorded as deliberately left out
+  with the reason. Documents: `papers_dialectic.tex`, `interior_omega.tex`,
+  `the_discrimination_problem.tex`, `positioning_economics.tex`,
+  `question_and_answer.tex`, `two_horn_motivation_body.tex`,
+  `empirical_analytics.tex`, `worked_example.tex`, and the substantive
+  entries of `paper_review_log.md` (e.g. Entry 17, the zero-slope test).
+  Method: (1) extract each document's points, one line each; (2) map each to
+  a manuscript line or plan item, marking covered / partly covered / missing;
+  (3) before any point is carried over, apply this audit's corrections to it
+  (e.g. D1 Doring normative, P10-P12 Hogarth-Einhorn and the position
+  channel, D13 BIR trichotomy, J2 the counterfactual-likelihood argument), so
+  no corrected claim re-enters; (4) for missing points, draft new plan
+  entries in the plan's BEFORE/AFTER format under
+  `notes/writing_discipline.md`; (5) record points left out and why. X1 (do
+  the plan's literature edits carry the dialectic?) is the first case.
+  Output: a coverage matrix in the plan's front matter, plus new plan
+  entries.
