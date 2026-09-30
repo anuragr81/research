@@ -93,6 +93,23 @@ says otherwise), NOT-CHECKABLE (source not available).
   not successive inputs with each other. P_B equals Field/upco only when each
   factor is computed against the prior marginal. **Do:** "by pooling the prior
   with each new input multiplicatively (upco)".
+- [ ] **M26. Commutation criterion needs positive cells (2026-09-30,
+  lean/Literature/Hawthorne.lean).** The "only if" half of the criterion
+  Hawthorne states (p. 97) and credits to D-Z Thm 3.2 (two Jeffrey updates
+  commute only if neither moves the other's basis marginal) needs every joint
+  cell positive: D-Z's step "choose A = E_i0 F_j0" divides by that cell.
+  Counterexample `criterion_needs_positive_cells`: block-diagonal support,
+  the updates commute, yet each moves the other's marginal. Paper B's
+  interior 2x2 prior satisfies the condition, so no result is affected; any
+  "iff" statement of the criterion (MS, PLAN 1.A/3.A, D-Z README) should say
+  "for a prior with all cells positive". Hawthorne's own Section 9 covers
+  the zero-cell case. Also (M21 refined): the manuscript's
+  l proportional to q_i/P(A=i) are NL factors against the prior; since only
+  ratios matter they are equally his LR factors, which he (after Jeffrey and
+  Good, note 20) calls Bayes factors, so PLAN 3.A's parenthetical can be
+  reworded rather than retracted. The p. 115 quotation runs onto p. 116.
+  Corrected wording for M19, M20, P8, P9, 3.A, D5, D7(c) is in
+  literature/hawthorne2004/README.md.
 - [ ] **M19. MS:80 footnote, Hawthorne. CAVEAT.** "Hawthorne2004 repairs
   this by letting a cue multiply the old belief instead of replacing it, and
   under his order-free variants the sequence effect disappears". Order-freedom
@@ -900,7 +917,8 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Bohren-Imas-Rosenberg, Heckman, BCGS | yes | 1 |
   | Jeffrey 1983/2004, Benjamin-Bodoh-Creed-Rabin 2019 | yes | 2 |
   | Epstein 2006 | in progress | 2 |
-  | Diaconis-Zabell, Field, Garber, Wagner 2002, Wagner 2003, Hawthorne, Pettigrew-Weisberg | in progress (sympy only before) | A |
+  | Hawthorne | yes | A |
+  | Diaconis-Zabell, Field, Garber, Wagner 2002, Wagner 2003, Pettigrew-Weisberg | in progress (sympy only before) | A |
   | Asch (data), Zhao-Osherson 2010, Zhao et al. 2012 | yes | B/C |
   | Ortoleva 2012 (via Ortoleva 2024), Tao 2011 (Mathlib bridge), Becker 1962 | in progress | B |
   | Wilson 2014, Cassell 2020 | in progress | C |

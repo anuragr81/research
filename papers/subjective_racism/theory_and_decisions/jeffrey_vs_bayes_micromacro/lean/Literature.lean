@@ -13,6 +13,7 @@ import Literature.Domotor
 import Literature.Doring
 import Literature.FGT
 import Literature.GoodMittal
+import Literature.Hawthorne
 import Literature.Heckman
 import Literature.HogarthEinhorn
 import Literature.Jeffrey

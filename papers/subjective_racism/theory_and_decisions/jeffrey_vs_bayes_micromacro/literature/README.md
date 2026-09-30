@@ -27,7 +27,7 @@ known bug (audit item L1). Adding Lean to them is audit item R2.
 | [wagner2002](wagner2002/README.md) | sympy only | done |
 | [wagner2003](wagner2003/README.md) | sympy only | done |
 | [pettigrew_weisberg2025](pettigrew_weisberg2025/README.md) | sympy only | done |
-| [hawthorne2004](hawthorne2004/README.md) | sympy only | done |
+| [hawthorne2004](hawthorne2004/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [garber1980](garber1980/README.md) | sympy only | done |
 | [augenblick_rabin2021](augenblick_rabin2021/README.md) | Lean + sympy | done (dropped from write-ups) |
 | [shmaya_yariv2016](shmaya_yariv2016/README.md) | Lean + sympy | done (dropped from write-ups) |
