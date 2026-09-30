@@ -49,6 +49,38 @@ def latex_cell(t):
     return t
 
 
+import glob, importlib.util
+
+def load_grounds():
+    g = {}
+    for f in sorted(glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), "grounds", "grounds_*.py"))):
+        spec = importlib.util.spec_from_file_location(os.path.basename(f)[:-3], f)
+        m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+        for k, v in m.GROUNDS.items():
+            g.setdefault(k, []).extend(v)
+    return g
+
+GROUNDS = load_grounds()
+KIND = {"quote": "Quote", "theorem": "Theorem", "computation": "Computation"}
+
+
+def grounds_rows(eid):
+    """One table row per item, so the table can break between items."""
+    items = GROUNDS.get(eid, [])
+    rows = []
+    for n, it in enumerate(items):
+        src = re.sub(r"(?<!\\)_", r"\\_", it['source'])
+        head = f"\\textbf{{{KIND.get(it['kind'], it['kind'])}.}} \\textit{{{src}}}"
+        line = f"{head} \\newline {it['text']}"
+        if it.get("note"):
+            line += f" \\newline \\textit{{{it['note']}}}"
+        label = "\\textbf{Grounds.}\\par " if n == 0 else ""
+        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{{label}{line}}} \\\\")
+    if rows:
+        rows[-1] = rows[-1] + " \\hline"
+    return rows
+
+
 def rows_for(entries):
     rows = []
     for eid, title, pairs, purpose, verif in entries:
@@ -63,7 +95,9 @@ def rows_for(entries):
         if not pairs:
             rows.append(f" & \\multicolumn{{2}}{{p{{24.6cm}}|}}{{\\textit{{No manuscript text; see Why.}}}} \\\\ \\hline")
         rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Why.}} {prose(purpose)}}} \\\\")
-        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Evidence.}} {prose(verif)}}} \\\\ \\hline\\hline")
+        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Evidence.}} {prose(verif)}}} \\\\ \\hline")
+        rows.extend(grounds_rows(eid))
+        rows.append("\\multicolumn{3}{|l|}{} \\\\ \\hline")
     return rows
 
 

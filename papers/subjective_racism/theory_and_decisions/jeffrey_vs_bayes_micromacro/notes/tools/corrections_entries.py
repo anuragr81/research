@@ -75,12 +75,12 @@ association between attributes and the surplus-weighted loss depart from it only
 second order.""")],
     "Zhao-Osherson do not say the mechanism \"remains unclear\"; they say doubts about order "
     "dependence \"disappear on closer inspection of the evidential weight of probability "
-    "judgements\" (p. 291). Cited for the debate, as the author agreed. Jeffrey himself says "
+    "judgements\" (p. 290). Cited for the debate, as the author agreed. Jeffrey himself says "
     "non-commutativity \"is as it should be\" (1983, pp. 182-183; audit J1) and Diaconis-Zabell "
     "that it \"is not a real problem\" (Remark 2, p. 827; M24); Hawthorne calls the order effect "
     "\"very troubling\" (p. 99). Sentence 4: the loss is not free of the sequence effect, it "
     "carries it at second order (LOS), and \"-- but\" is a dash doing a sentence's work.",
-    "verify_jeffrey.md J1; verify_kinematics.md; verify_hawthorne_weisberg.md; ZO p. 291 read "
+    "verify_jeffrey.md J1; verify_kinematics.md; verify_hawthorne_weisberg.md; ZO p. 290 read "
     "2026-09-30; Theorem LOS, Proposition SHR."))
 
 E.append(("C.3", "Introduction, paragraph 2 (the literature paragraph) and its footnote", [(
