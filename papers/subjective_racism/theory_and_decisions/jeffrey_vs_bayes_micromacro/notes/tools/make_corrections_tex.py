@@ -5,6 +5,7 @@ import re, sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import corrections_entries as C
+C.discipline_check()
 
 
 def esc(t):
@@ -101,9 +102,9 @@ tex = r"""%% manuscript_corrections.tex -- master plan of corrections to PAPER_B
 both typeset as they would appear. BEFORE text is cut from the committed manuscript by script, so it
 matches the manuscript exactly. Under each entry, \textbf{Why} gives the error and \textbf{Evidence} the
 Lean or sympy record or page that settles it (audit items refer to \texttt{notes/citation\_audit.md}).
-Cross-references print as their label (e.g.\ \textsc{prop:IMM}); footnotes print inline. \textbf{Nothing
+Entry C.15 (inside C.11.9) reconciles Section 3 with \texttt{notes/positioning\_economics.tex}; the abstract (C.1) leads with the identification point for the same reason. Cross-references print as their label (e.g.\ \textsc{prop:IMM}); footnotes print inline. \textbf{Nothing
 here is applied.} The author approves entries by number; approved entries are applied to the
-manuscript, compiled and committed. Rewrites follow \texttt{notes/writing\_discipline.md}.
+manuscript, compiled and committed. Every AFTER text passes the mechanical checks of \texttt{notes/writing\_discipline.md} (no colons, no dashes doing a sentence's work, ``sequence'' for reading order, the fixed adoption terminology, length within 80--120\% of the draft except for deletions, citation fixes and the removed duplicate); the generator refuses to build otherwise.
 
 \section*{Section C: corrections to the current draft}
 {\small
@@ -117,7 +118,7 @@ manuscript, compiled and committed. Rewrites follow \texttt{notes/writing\_disci
 
 \section*{C.12: bibliography entries the AFTER texts need}
 \texttt{Hawthorne2004} and \texttt{ZhaoOsherson2010} are already in \texttt{bibliography.bib}.
-If C.4's optional sentence, C.6 or C.10 are approved, two more are needed; they are in
+If C.4's optional sentence, C.6, C.10 or C.15 are approved, four more are needed (Jeffrey 2004, Benjamin et al.\ 2019, Heckman 1998, Bohren et al.\ 2019); they are in
 \texttt{notes/manuscript\_corrections\_extra.bib} so that this document renders them, and move to
 \texttt{bibliography.bib} on approval. The Drive copy of Jeffrey (2004) is the November 2002 draft,
 so C.6 and C.10 cite the chapter only.

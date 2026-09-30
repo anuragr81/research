@@ -36,15 +36,21 @@ E.append(("C.1", "Abstract, sentences 2-4", [(
     "Considering a case where evaluators", "the share of the population affected by the sequence differing from the benchmark.",
     r"""Considering evaluators who read two correlated soft cues and comparing their
 beliefs and decisions with a sequence-free Bayesian benchmark, the paper asks which
-statistics of those beliefs and decisions register the resulting order effect. The
-two reading sequences displace a belief only within a two-dimensional plane, so
-whether a statistic registers the effect is decided by the statistic alone. The
-believed association between the attributes and the average value lost through
-decisions that differ from the benchmark stay within second order of the
-benchmark, while the marginal probabilities and the share of the population whose
-decision the sequence changes depart from it at first order.""")],
+statistics of those beliefs and decisions register the resulting sequence effect.
+Whether a statistic registers it is a question of identification rather than of
+estimation, since the two reading sequences move a belief in only two directions,
+and a statistic insensitive to both carries no first-order signal in the population
+itself, however many evaluators are sampled. The believed association between the
+attributes and the average value lost through decisions that differ from the
+benchmark are of that kind, while the marginal probabilities and the share of the
+population whose decision the sequence changes depart from the benchmark at first
+order.""")],
     "\"An arbitrary statistic is an order of magnitude closer to the benchmark\" is false as "
     "stated; only the protected statistics are (Proposition PRO; plan 0.A made the same point). "
+    "The two-dimensional plane is the mechanism, not the finding; for the Journal of "
+    "Mathematical Economics the abstract leads with the economic content, that a null on a "
+    "belief audit is an identification failure and not an estimation one (the point of "
+    "notes/positioning_economics.tex, already in the conclusion at MS ~950). "
     "Also \"the current papers asks\", and \"This results in measures ... staying ... while the "
     "share ... differing\" has no main verb. \"Considering the empirical limitations in addition "
     "to theoretical underpinnings\" is cut because no empirical limitation is named.",
@@ -107,23 +113,24 @@ E.append(("C.4", "Introduction, the two-channel paragraphs (appear twice)", [(
 In the \textbf{association} channel one cue changes what the other implies, and the
 channel exists only when the attributes are believed related. In the
 \textbf{position} channel the weight a cue receives depends on where in the sequence
-it arrives, whatever the attributes are. Anchoring on the first cue can favour the
-earlier impression and step-by-step partial adjustment favours the later one
-\citep{HogarthEinhorn1992}. In the model studied here, which channels operate is
-fixed by how fully the later cue is adopted. When it is adopted only in part, the
-position channel operates and every marginal registers the sequence even when the
-attributes are believed unrelated. When each impression is adopted in full, as in
-the successive updating of \citet{DiaconisZabell1982}, the position channel is
-absent and the association channel is the only one, so the sequence registers
-unevenly across statistics. That full-adoption setting is the one the current paper
-explores. A belief in the two-attribute setting has three coordinates, the two
-marginal probabilities and the cross-attribute association, and a departure from
-the sequence-free benchmark smaller than the observer's precision is invisible in
-the statistic read. The question the paper addresses is therefore not only whether
-the two sequences agree but by how much they disagree in a given statistic. Its
-answer is that the marginal probabilities and the decisions made from them carry
-the difference at first order in the prior covariance, while the believed
-association and the statistics that move with it carry it only at second order.""")],
+it arrives, whatever the attributes are. When the first cue is adopted in full and
+later cues only in part the earlier impression is favoured, and when every cue is
+adopted only in part the later one is \citep{HogarthEinhorn1992}. In the model
+studied here, which channels operate is fixed by how fully the later cue is
+adopted. When it is adopted only in part, the position channel operates and every
+marginal registers the sequence even when the attributes are believed unrelated.
+When each impression is adopted in full, as in the successive updating of
+\citet{DiaconisZabell1982}, the position channel is absent and the association
+channel is the only one, so the sequence registers unevenly across statistics.
+That full-adoption setting is the one the current paper explores. A belief in the
+two-attribute setting has three coordinates, the two marginal probabilities and
+the cross-attribute association, and a departure from the sequence-free benchmark
+smaller than the observer's precision is invisible in the statistic read. The
+question is therefore not only whether the two sequences agree but by how much
+they disagree in a given statistic. The marginal probabilities and the decisions
+made from them carry the difference at first order in the prior covariance, while
+the believed association and the statistics that move with it carry it only at
+second order.""")],
     "(i) The paragraph appears twice; the first copy is an earlier version and lacks its final "
     "period. The AFTER replaces both copies. (ii) \"the observer weights the later cue less\" is "
     "cited to Hogarth-Einhorn and Asch, but Hogarth-Einhorn's step-by-step partial adjustment "
@@ -224,11 +231,11 @@ and the prior covariance $c=\assoc(P)$ denotes how strongly the panelist believe
 the"""),
     ("To address the issues in amnestic updating debate, we also consider an adoption weight",
      "the credential's implication is never moved.",
-     r"""To address the debate over whether a later impression should overwrite what an
-earlier one implied \citep{Hawthorne2004}, we also consider an adoption weight
-$\omega\in[0,1]$, which denotes how far the letter displaces what the credential
-had already implied about trustworthiness. At $\omega=1$ the letter sets the rating
-outright, and at $\omega=0$ the credential's implication is never moved.""")],
+     r"""To address the debate over whether a later impression should be adopted in full
+\citep{Hawthorne2004}, we also consider an adoption weight $\omega\in[0,1]$, which
+denotes how far the letter displaces what the credential had already implied about
+trustworthiness. At $\omega=1$ the letter sets the rating outright, and at
+$\omega=0$ the credential's implication is never moved.""")],
     "Grammar (\"described as $\\Delta^3$ --\", \"denotes\" for two subjects). \"Amnestic\" is "
     "used only where Hawthorne is quoted (writing_discipline.md 6). **Dependency:** omega is "
     "defined here but used nowhere else in the manuscript until plan 5.B (Proposition ADJ) is "
@@ -283,9 +290,9 @@ linear pooling."""),
      r"""Decision theory has axiomatised several alternatives to Bayesian updating, each
 for a single piece of news. \citet{Epstein2006} makes the updating rule, and not only
 the prior, subjective, and \citet{Ortoleva2012} axiomatises departures triggered by
-unexpected news. \citet{Cripps2021} treats order, and his Symmetry and Divisibility
-axioms imply that two conditionally independent signals give the same posterior in
-either order. Read with each cue as its likelihood matched to the prior
+unexpected news. \citet{Cripps2021} treats the sequence of signals, and his
+Symmetry and Divisibility axioms imply that two conditionally independent signals
+give the same posterior in either sequence. Read with each cue as its likelihood matched to the prior
 (Proposition~\ref{prop:IMM}), the composite of Proposition~\ref{prop:DIV} is a
 sequence of Bayes updates satisfying all four of his axioms, and it depends on the
 sequence because the second likelihood is matched to the intermediate belief, so
@@ -294,9 +301,8 @@ the two sequences process different experiments."""),
      r"""While \citet{PettigrewWeisberg2025} restore sequence-invariance by pooling the
 prior with each new input multiplicatively before the Jeffrey step,"""),
     ("The paper borrows the evaluator-with-binary-attributes frame", "\\citep{Phelps1972, Arrow1973}.",
-     r"""The paper borrows its evaluator of an uncertain binary attribute from the
-statistical-discrimination lineage \citep{Arrow1973,CoateLoury1993}, in which
-\citet{Phelps1972} treats the attribute as continuous."""),
+     r"""The paper borrows the evaluator-with-binary-attribute frame from the
+statistical-discrimination lineage \citep{Arrow1973,CoateLoury1993}."""),
     ("instead of stereotypes as representativeness-distortion or selective recall", "not by a distortion of memory or sampling.",
      r"""instead of stereotypes as the selective recall of representative types
 \citep{BCGS2016}, whose exaggerated associations arise across groups, the
@@ -313,7 +319,20 @@ allocated unevenly across the subpopulations, even when they are equally large.
 That paradox arises from combining subpopulations. The decision-space result here
 shows a comparable loss of visibility within a single population, where a
 first-order share of individuals who are individually affected contributes only a
-second-order loss in aggregate (Theorem~\ref{thm:LOS}).""")],
+second-order loss in aggregate (Theorem~\ref{thm:LOS}).
+
+The audit perspective has a precedent in the economics of discrimination.
+\citet{Heckman1998} showed that audit-pair estimates of discrimination rest on an
+assumption about unobserved productivity that ``nothing guarantees'' (p.~109), so
+that such an audit ``can find discrimination when in fact none exists; it can also
+disguise discrimination when it is present'' (p.~102), and \citet{Bohren2019}
+identify the source of discrimination by conditioning on the history of
+evaluations, since in static data, as they note, different sources generate the
+same patterns of observable behaviour. The obstruction here is of the same kind
+and arises on the belief side of an audit. The first-order signal in a protected
+statistic is zero in the population itself, so its silence is a failure of
+identification and not of estimation, which no sample size repairs, and the
+identifying variable is the reading sequence, which pooled data discard.""")],
     "One entry per sentence group, in manuscript order. BHW/Banerjee: \"coarse\" belongs to BHW's "
     "binary action, not Banerjee's continuum; the two share one mechanism, so \"on the other hand\" "
     "goes; the marginals point is the paper's analogy (M2, M3). Dietrich: Def. 1 is preference "
@@ -322,7 +341,8 @@ second-order loss in aggregate (Theorem~\ref{thm:LOS}).""")],
     "and Ortoleva; the Cripps claim is false, since under Proposition IMM's reading the "
     "composite satisfies all four axioms, and the footnote goes with it (M6-M9). "
     "Pettigrew-Weisberg pool the prior with each input, not successive inputs (M25). Phelps has "
-    "no binary attribute (M10). BCGS name one mechanism, not two, and \"sampling\" is not theirs "
+    "no binary attribute, so he is dropped from this sentence and can be re-cited in plan 1.C for "
+    "statistical discrimination in general (M10). BCGS name one mechanism, not two, and \"sampling\" is not theirs "
     "(M12). Becker: the concluding section never draws the distinction, and Becker's own "
     "mechanism is averaging plus a budget constraint, the opposite side of it (\"Our statement "
     "goes beyond arithmetic\", p. 7; M13); the AFTER deletes the sentence, and an alternative "
@@ -332,7 +352,7 @@ second-order loss in aggregate (Theorem~\ref{thm:LOS}).""")],
     "BHW.lean, Banerjee.lean, Dietrich.lean, Epstein.lean, Ortoleva.lean (via the 2024 survey), "
     "Cripps.lean (`order_invariance`, `composite_AB_eq_bayes`), PettigrewWeisberg.lean, "
     "Phelps.lean, Arrow.lean, CoateLoury.lean, BCGS.lean, Becker.lean, GoodMittal.lean "
-    "(`piR_amalg_general`, `equalSize_reversal`)."))
+    "(`piR_amalg_general`, `equalSize_reversal`). The appended paragraph (C.15) carries the identification point of notes/positioning_economics.tex and plan 3.C/3.D into Section 3, with audit P17a (no sample-size claim attributed to Heckman; that clause is the paper's own consequence of Proposition PRO), H2 (\"nothing guarantees\" is p. 109), H3 (\"can find discrimination\" is p. 102) and B37 (BIR credit \"different sources\" to Fang-Moro, so it is paraphrased) applied. Needs Heckman1998 and Bohren2019 in bibliography.bib (plan B.A)."))
 
 E.append(("C.13", "Section 4, the Foster-Greer-Thorbecke sentence", [(
     "This is the standard incidence-versus-intensity pairing of the measurement literature",
@@ -375,7 +395,8 @@ the audit item in `notes/citation_audit.md` and the Lean or sympy record that
 justifies it. **None is applied.** The author approves each entry, and approved
 entries are then applied and committed.
 
-Entries C.1-C.14 are in manuscript order. C.12 lists the bibliography entries
+Entries C.1-C.14 are in manuscript order; C.15, the identification paragraph from
+notes/positioning_economics.tex, is appended inside C.11.9. C.12 lists the bibliography entries
 the AFTER texts need. Section D lists what these corrections change in the
 existing plan entries 0.A-6.B.
 """)
@@ -462,11 +483,52 @@ draft and the audit, to be settled entry by entry before any is applied:
 MD = "\n".join(out)
 
 
+DISCIPLINE_EXEMPT_LENGTH = {"C.4.1": "removes a duplicated paragraph",
+                            "C.10.1": "citation fix", "C.11.8": "deletion",
+                            "C.14.1": "citation fix", "C.14.2": "citation fix",
+                            "C.11.9": "appends the identification paragraph (C.15)"}
+
+
+def discipline_check():
+    """Mechanical rules of notes/writing_discipline.md applied to every AFTER text:
+    no colons in prose (9), no dashes doing a sentence's work (9), "sequence" for
+    reading order and "order" only for order in c (6), primacy/recency/amnestic/
+    anchoring/overwrite/base rate only where the discipline allows (6), rewrites
+    within 80-120% of the draft (9) unless exempted above. Exits on a breach."""
+    def prose(t):
+        t = re.sub(r"\\cite[pt]?(\[[^\]]*\])*\{[^}]*\}", "", t)
+        t = re.sub(r"\$[^$]*\$", "", t)
+        t = re.sub(r"\\(ref|label)\{[^}]*\}", "", t)
+        return " ".join(t.split())
+    bad = []
+    for eid, _, pairs, _, _ in E:
+        for k, (st, en, after) in enumerate(pairs, 1):
+            tag = f"{eid}.{k}"
+            if after.lstrip().startswith("%"):
+                continue
+            a = prose(after)
+            if ":" in a:
+                bad.append(f"{tag}: colon in prose")
+            if "---" in after or " -- " in after:
+                bad.append(f"{tag}: dash doing a sentence's work")
+            for m in re.finditer(r"\b(?:in (?:either|any|the same|reverse|both) order|order in which|order of (?:arrival|reading)|treats order|arrival order|reading order|order effect)\b", a):
+                bad.append(f"{tag}: 'order' used for reading sequence ({m.group(0)!r})")
+            for w in ("primacy", "recency", "amnestic", "anchoring", "overwrit", "base rate", "base-rate"):
+                if w in a.lower():
+                    bad.append(f"{tag}: term {w!r} outside its allowed use")
+            bw, aw = len(cut(st, en).split()), len(after.split())
+            if not 0.8 <= aw / bw <= 1.2 and tag not in DISCIPLINE_EXEMPT_LENGTH:
+                bad.append(f"{tag}: length {bw}->{aw} words outside 80-120%")
+    if bad:
+        sys.exit("writing_discipline breaches:\n  " + "\n  ".join(bad))
+
+
 def write_md(path):
     open(path, "w").write(MD)
 
 
 
 if __name__ == "__main__":
+    discipline_check()
     write_md(sys.argv[1])
     print("entries:", len(E), "pairs:", sum(len(p) for _, _, p, _, _ in E))
