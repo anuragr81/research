@@ -22,13 +22,13 @@ known bug (audit item L1). Adding Lean to them is audit item R2.
 
 | Paper | Formalization | Status |
 |---|---|---|
-| [field1978](field1978/README.md) | sympy only | done |
-| [diaconis_zabell1982](diaconis_zabell1982/README.md) | sympy only | done |
+| [field1978](field1978/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
+| [diaconis_zabell1982](diaconis_zabell1982/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [wagner2002](wagner2002/README.md) | sympy only | done |
 | [wagner2003](wagner2003/README.md) | sympy only | done |
 | [pettigrew_weisberg2025](pettigrew_weisberg2025/README.md) | sympy only | done |
 | [hawthorne2004](hawthorne2004/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
-| [garber1980](garber1980/README.md) | sympy only | done |
+| [garber1980](garber1980/README.md) | Lean + sympy (asserting) | done 2026-09-30 |
 | [augenblick_rabin2021](augenblick_rabin2021/README.md) | Lean + sympy | done (dropped from write-ups) |
 | [shmaya_yariv2016](shmaya_yariv2016/README.md) | Lean + sympy | done (dropped from write-ups) |
 | [weisberg2009](weisberg2009/README.md) | Lean + sympy | done 2026-09-29 |
@@ -53,3 +53,7 @@ known bug (audit item L1). Adding Lean to them is audit item R2.
 | [benjamin2019](benjamin2019/README.md) | Lean + sympy | done 2026-09-30 |
 | [zhao_osherson2010](zhao_osherson2010/README.md) | Lean + sympy | done 2026-09-30 |
 | [zhao2012](zhao2012/README.md) | Lean + sympy | done 2026-09-30 |
+| [epstein2006](epstein2006/README.md) | Lean + sympy | done 2026-09-30 |
+| [ortoleva2012](ortoleva2012/README.md) | Lean + sympy (from Ortoleva 2024 survey) | done 2026-09-30 |
+| [tao2011](tao2011/README.md) | Lean (Mathlib bridge) + sympy | done 2026-09-30 |
+| [becker1962](becker1962/README.md) | Lean + sympy (web copy, not Drive) | done 2026-09-30 |

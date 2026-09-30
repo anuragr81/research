@@ -75,6 +75,25 @@ says otherwise), NOT-CHECKABLE (source not available).
   "unique coherent"; say "minimises Kullback-Leibler (and Hellinger) distance
   to the prior among distributions with the delivered marginal (D-Z,
   section 6)". This sentence carries the modelling premise, so it matters.
+- [ ] **M22-M23 settled formally (2026-09-30,
+  lean/Literature/DiaconisZabell.lean).** D-Z prove: (i) given (J), the
+  delivered marginal determines the posterior (`jcond_iff_jeffrey`);
+  (ii) Jeffrey's posterior uniquely minimizes I(Q,P) = sum Q log(Q/P), i.e.
+  KL(Q||P) with the candidate first, among Q with the delivered marginal
+  (`thm51_KL_le`, `thm51_KL_eq_iff`), likewise Hellinger, and every
+  f-divergence for convex f with uniqueness for strictly convex f
+  (`thm61_le`, `thm61_unique`); for variation distance it is a minimizer but
+  not unique (`remark_a_tv_not_unique`). No coherence or Dutch-book
+  uniqueness result exists in D-Z, and no axioms (section 5 is "mechanical
+  updating"). Sufficiency: (J) iff P*/P constant on cells
+  (`jcond_iff_ratio_const`); the likelihood-ratio partition is the minimal
+  (J)-partition and every refinement also satisfies (J)
+  (`thm22_lr_minimal`, `jcond_of_refines`). Replacement wording for MS ~117
+  and ~190-195 is in literature/diaconis_zabell1982/README.md. **Gap in D-Z
+  Theorem 3.2 as printed** (same issue as M26): "commute => Jeffrey
+  independent" needs every E_i F_j nonempty (`thm32_needs_qualitative_independence`);
+  holds for Paper B's full-support prior. Exact 2x2 condition: J-independence
+  iff (p = alpha or c = 0) and (q = beta or c = 0) (`remark826`).
 - [ ] **M23. MS:190-195, Diaconis-Zabell. MISQUOTED.** "The partition
   satisfying the invariance condition is the minimal sufficient statistic for
   revising the prior to any candidate posterior on that partition". D-Z
@@ -216,6 +235,22 @@ says otherwise), NOT-CHECKABLE (source not available).
   is standard ... if p is a product measure" (p. 429) is the case where the
   signal carries no information about S_2, not an analogue of Proposition IMM
   at c = 0.
+  **Corrected by the Lean record (lean/Literature/Epstein.lean, 50
+  theorems):** lambda = 1 - omega only for the *tempting* posterior q in
+  (23) (`priorBias_eq_damped`). The posterior the agent acts on is the
+  compromise (12), which is the damped target with
+  omega = 1 - alpha lambda/(1 + alpha) (`compromise_eq_damped`); that omega
+  is never 0, lies in [1/(1+alpha), 1) under Positive Prior-Bias and exceeds
+  1 under Negative Prior-Bias. Epstein's mixing target is the time-0 prior
+  marginal p_2, not the marginal in force, his "delivered" belief is a Bayes
+  update, and he has one signal. "Base-rate neglect" is not in the paper
+  (Ortoleva's survey lists it; section 2.3 covers under/overreaction,
+  confirmatory bias, representativeness, sample bias), so strike it from the
+  entry below and from verify_updating_theory.md section 5. Epstein's own
+  law-of-iterated-expectations remark (pp. 429-430) is too broad: under
+  Prior-Bias no act reverses at every signal (`priorBias_no_uniform_reversal`).
+  Unstated constraint: Reg2 with (23) and lambda != 0 forces p(.|s_1) to
+  charge every state p_2 charges (`priorBias_absCont`).
 - [ ] **M6-M8 re-read 2026-09-30 against Ortoleva (2024), "Alternatives to
   Bayesian Updating", Annu. Rev. Econ. 16:545-570 (Drive:
   ortoleva_2024_annurev-economics-100223-050352.pdf).** (a) Ortoleva 2012:
@@ -242,6 +277,30 @@ says otherwise), NOT-CHECKABLE (source not available).
   stronger inferences from signals observed recently") or p. 3. Now in Drive
   and formalized, see P12. **Do:** keep M7's sentence; reword M6; drop
   or rewrite the M8 framing; consider Benjamin et al. (2019).
+- [ ] **M7-M8, M13, M16 formal records (2026-09-30).** Ortoleva
+  (lean/Literature/Ortoleva.lean, 49 theorems, from the 2024 survey; Theorem
+  1 is on p. 550): the "if" half of Theorem 2 for every HT model and the
+  epsilon = 0 case; the "only if" half needs the 2012 construction, not in
+  the survey. HT is one-step updating from the original prior, and Dynamic
+  Coherence's "sequence of events" is a cycle of alternative events, not
+  successive updates, confirming M8 for Ortoleva. The model needs an
+  unstated support condition for the prior-over-priors update. Becker
+  (lean/Literature/Becker.lean, 20 theorems, web copy): impulsive demand
+  averages to I/(2 p_1) and slopes down (`impulsive_mean`,
+  `impulsive_market_average` via the strong law); each ingredient alone
+  fails (`constraint_without_averaging`, `averaging_without_constraint`).
+  M13 is stronger than logged: Becker says "Our statement goes beyond
+  arithmetic" (p. 7), so on the manuscript's own dichotomy he sits on the
+  constraint side; the 1962 paper mentions discrimination only in a cited
+  book title (fn 21). His fn 14 example does not meet his own sufficient
+  condition for a "necessary decline". Tao (lean/Literature/Tao.lean, 14
+  theorems): Exercise 1.4.23(iii) and Theorems 1.7.15/1.7.18 proved from
+  Mathlib; `measure_band_tendsto_zero` and `los_step4` give the manuscript's
+  Step 4 (mu(B_c) -> 0, L(c) = o(c)); Tao states the exercise for sequences,
+  the manuscript takes c down to 0 over a continuum (standard, not literally
+  Tao's statement); Step 3 needs only Tonelli. JeffreyOrder/Decision.lean
+  itself uses neither Tonelli nor continuity from above. The Tao copy is the
+  author's preliminary version, so printed numbering is unverified.
 - [ ] **M9. MS:276-277, Cripps. CAVEAT + UNSUPPORTED x2.** (a) "shows that
   symmetry and divisibility jointly force sequence-independence" rests on a
   one-sentence remark after Axiom 3 (p. 9) about reversing the nested
@@ -697,7 +756,7 @@ says otherwise), NOT-CHECKABLE (source not available).
 
 ### Literature READMEs and scripts, kinematics papers (group C)
 
-- [ ] **L1. literature/field1978/sympy/check_commutativity.py. BUG.**
+- [x] **L1. literature/field1978/sympy/check_commutativity.py. BUG.** (Fixed 2026-09-30; eq. (7) commutation now passes, with a regression check.)
   `tilt_step1` ignores its input argument, so the commutativity check prints
   non-zero differences; the README (:18-20) says eq. (7) was verified to
   commute. The theorem is true (checked independently). **Do:** fix the
@@ -916,11 +975,10 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Cripps, Dietrich, BHW, Banerjee, Phelps, Arrow, Coate-Loury | yes | 1 |
   | Bohren-Imas-Rosenberg, Heckman, BCGS | yes | 1 |
   | Jeffrey 1983/2004, Benjamin-Bodoh-Creed-Rabin 2019 | yes | 2 |
-  | Epstein 2006 | in progress | 2 |
-  | Hawthorne | yes | A |
-  | Diaconis-Zabell, Field, Garber, Wagner 2002, Wagner 2003, Pettigrew-Weisberg | in progress (sympy only before) | A |
+  | Hawthorne, Diaconis-Zabell, Field, Garber | yes | A |
+  | Wagner 2002, Wagner 2003, Pettigrew-Weisberg | in progress (sympy only before) | A |
+  | Epstein 2006, Ortoleva 2012 (via 2024 survey), Tao 2011, Becker 1962 (web copy) | yes | 2/B |
   | Asch (data), Zhao-Osherson 2010, Zhao et al. 2012 | yes | B/C |
-  | Ortoleva 2012 (via Ortoleva 2024), Tao 2011 (Mathlib bridge), Becker 1962 | in progress | B |
   | Wilson 2014, Cassell 2020 | in progress | C |
   | Jeffrey 1988 | blocked, not in Drive | -- |
 
