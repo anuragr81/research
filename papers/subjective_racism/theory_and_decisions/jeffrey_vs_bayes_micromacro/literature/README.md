@@ -48,3 +48,5 @@ known bug (audit item L1). Adding Lean to them is audit item R2.
 | [bohren_imas_rosenberg2019](bohren_imas_rosenberg2019/README.md) | Lean + sympy | done 2026-09-29 |
 | [heckman1998](heckman1998/README.md) | Lean + sympy | done 2026-09-29 |
 | [bcgs2016](bcgs2016/README.md) | Lean + sympy | done 2026-09-29 |
+| [jeffrey1983](jeffrey1983/README.md) | Lean (shared Jeffrey.lean) | done 2026-09-30 |
+| [jeffrey2004](jeffrey2004/README.md) | Lean (shared Jeffrey.lean); Drive copy is the 2002 draft | done 2026-09-30 |

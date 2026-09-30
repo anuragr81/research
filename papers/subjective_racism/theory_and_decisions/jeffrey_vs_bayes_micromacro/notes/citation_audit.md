@@ -40,7 +40,8 @@ says otherwise), NOT-CHECKABLE (source not available).
 | F | Phelps, Arrow, Coate-Loury, BCGS, Becker, FGT | verify_discrimination_econ.md | done, logged below |
 | G | Cripps, Dietrich, BHW, Banerjee, Ortoleva, Epstein | verify_updating_theory.md | done, logged below |
 | H | Augenblick-Rabin, Shmaya-Yariv, Zhao 2010/2012, Wilson, Cassell | verify_record_papers.md | done, logged below |
-| -- | Jeffrey 1983, Tao 2011 | checked by hand | Tao done; Jeffrey blocked (see S3) |
+| -- | Tao 2011 | checked by hand | done |
+| J | Jeffrey 1983, Jeffrey 2004 (2002 draft) | verify_jeffrey.md | done 2026-09-30, logged below |
 
 ## 1. Manuscript text (PAPER_B_MANUSCRIPT.tex)
 
@@ -180,6 +181,24 @@ says otherwise), NOT-CHECKABLE (source not available).
   single-step updating on events, and its fn 2 (p. 546) leaves Jeffrey's rule
   out of scope. Neither is about order. The framing fits Cripps only.
   **Do:** reframe as "non-Bayesian updating rules" and separate Cripps.
+- [ ] **M6 and M8 against the primary, 2026-09-30.** Epstein, "An Axiomatic
+  Model of Non-Bayesian Updating", Rev. Econ. Stud. 73 (2006) 413-436 (Drive:
+  Epstein-Updating-RESTUD-2006.pdf, published version, 24 pp.). (a) M6 is
+  **VERIFIED, overturning the survey-based verdict below**: the abstract
+  (p. 413) says the main result generalizes Anscombe-Aumann "so that both the
+  prior and the way in which it is updated are subjective"; the introduction
+  (p. 413) repeats it. Keep "makes the updating rule subjective". (b) M8
+  stays **UNSUPPORTED** for Epstein: the model has three periods and a single
+  interim signal s_1 (p. 414); nothing concerns the order of several
+  signals. (c) Worth citing for the adoption weight: under Prior-Bias,
+  Corollary 3, eq. (23) (p. 429), the temptation posterior is
+  q(.|s_1) = (1 - lambda(s_1)) p(.|s_1) + lambda(s_1) p_2(.), a mixture of
+  the Bayesian update and the prior marginal, the same averaging form as the
+  paper's partial adoption (weight 1 - omega on what was held before), here
+  axiomatized from preferences over contingent menus. Caution: his "updating
+  is standard ... if p is a product measure" (p. 429) is the case where the
+  signal carries no information about S_2, not an analogue of Proposition IMM
+  at c = 0.
 - [ ] **M6-M8 re-read 2026-09-30 against Ortoleva (2024), "Alternatives to
   Bayesian Updating", Annu. Rev. Econ. 16:545-570 (Drive:
   ortoleva_2024_annurev-economics-100223-050352.pdf).** (a) Ortoleva 2012:
@@ -449,6 +468,20 @@ says otherwise), NOT-CHECKABLE (source not available).
   regime" in HE's vocabulary (UNSUPPORTED; the one-sided scheme gives primacy
   on one attribute only for omega < 1/2). **Do:** cite neither for the
   direction; define the position channel by the model, not by the sources.
+  **Candidate source for the position channel (2026-09-30):** Benjamin,
+  Bodoh-Creed & Rabin, "Base-Rate Neglect: Foundations and Implications",
+  working paper, 19 July 2019 (Drive: baserateneglect-2019-07.pdf). Their
+  rule p_a(theta|s) proportional to p(s|theta) p(theta)^a, a in [0,1), is
+  applied at every step, so earlier signals are progressively down-weighted:
+  a recency effect (Section 3; abstract: "beliefs will reflect the most
+  recent signals"). In the paper's 2x2 model with attribute-local likelihoods
+  (scratch sympy, to be formalized): the A-marginal differs between orders
+  already at c = 0 (the position channel, with Bayes-factor inputs); the log
+  odds ratio is identical across orders and equals a^2 times the prior's, so
+  the association is order-blind but shrunk against P^B at every c. It
+  supports interior_omega's claim that the position channel is not specific
+  to delivered credences. Direction caveat: BRN down-weights the *earlier*
+  evidence, so it is recency, not "the later cue weighted less".
 - [ ] **P13. Asch, "the joint is never elicited". CONTRADICTED.** (review log
   :539-540; PLAN 3.B :810-811.) Each subject's check-list is an 18-item joint
   response; Asch conditions on the warm/cold item in Experiment II (p. 265)
@@ -736,6 +769,65 @@ says otherwise), NOT-CHECKABLE (source not available).
   `AndreaWilson.pdf`** are in Drive but cited nowhere in the manuscript.
   Wilson and Cassell appear in the notes (group H will report).
 
+### Jeffrey 1983 and 2004 (group J, 2026-09-30; verify_jeffrey.md)
+
+Sources: *The Logic of Decision*, 2nd ed., 1983 (Drive scan; Chapter 11,
+pp. 164-183, read in full); *Subjective Probability: The Real Thing*, 2002
+draft of the 2004 CUP book (Chapter 3, pp. 55-65). Draft section and page
+numbers may differ from the published book. 19 claims: 7 VERIFIED, 7
+CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
+
+- [ ] **J1. Framing, the strongest anchor is Jeffrey himself.** 1983,
+  pp. 182-183: non-commutativity "is as it should be"; the demand for
+  commutativity "stems from a conflation", and he names Domotor (1980,
+  p. 395) as its source. **Do:** cite Jeffrey (1983, pp. 182-183) for "the
+  order effect is not a defect", beside D-Z Remark 2 (M24); this also
+  settles how to cite Domotor (M1): as the source of the commutativity
+  demand Jeffrey rejects.
+- [ ] **J2. MS:115-117, the two-horn argument, papers_dialectic.tex,
+  two_horn_motivation_body.tex. CONTRADICTED.** "A Bayes factor requires the
+  probability of the same credential for a candidate who is not competent"
+  (a counterfactual likelihood). Jeffrey's Bayes factor (2002 draft, p. 61)
+  is new odds over old odds and needs no likelihood; the likelihood-ratio
+  reading holds only for conditioning on a certainty "assuming rigidity"
+  (p. 42). In one step the credence and Bayes-factor readings are the same
+  update; they differ in what stays fixed when the input meets a different
+  prior. Jeffrey draws the line by provenance: one's own experience yields
+  credences that are "data" (p. 59); another's report should be converted to
+  factors because it is mixed with that person's prior. **Do:** rebuild the
+  premise paragraph on the provenance argument (own impression = credence),
+  which supports modelling a panelist's impression as a credence, and drop
+  the counterfactual-likelihood argument.
+- [ ] **J3. MS:190-191. CONTRADICTED (with M23).** "The partition satisfying
+  the invariance condition": Jeffrey p. 174 allows "a certain latitude in the
+  choice" of that partition.
+- [ ] **J4. MS:184-186. CAVEAT.** Chapter 11 never uses "invariance"; it says
+  the change "originates in" the partition (pp. 168, 174). "Invariance" is
+  the 2004 book's term (section 3.1-3.2, pp. 56-58). MS:111: Jeffrey says
+  "uncertain evidence", not "soft evidence" (pp. xii, 167); "impression" is
+  his word (p. 165). **Do:** cite the 2004 book for "invariance" (add it to
+  bibliography.bib) or use "originates in".
+- [ ] **J5. papers_dialectic.tex:70. CAVEAT.** "even Jeffrey took [the
+  factor escape]": in 1983 he rejected Field's parameters as "epistemological
+  geegaws that do no work. I prefer to make do with the a_i and b_j"
+  (p. 183); the 2002 draft adopts factors only for other people's reports
+  (p. 59). **Do:** date and scope the claim.
+- [ ] **J6. Survey and audit terminology.** survey :67 "Jeffrey's is
+  'rigidity'" is CONTRADICTED: his kinematics term is "invariance" (2002) or
+  "originates" (1983); but Jeffrey himself uses "rigidity condition" in
+  Ch. 2 of the 2002 draft (pp. 40, 42, 49), which qualifies L10(a). ZO's
+  "(Jeffrey, 1983, section 11.1)": exact quotation, but the fullest statement
+  is section 11.2 (p. 166) and he never says "ineffable". Jeffrey p. 181
+  derives Chapter 11 from Ch. 3 of his 1957 dissertation (D-Z cite Ch. 4).
+- [ ] **J7. Draft slips.** 2002 draft Example 5 (p. 60) prints factors that
+  do not normalise (correct 8/7, 4/7, 12/7; new(H) = 3/7, not 1/2), and
+  formula (2) prints pi-prime for pi. Do not quote those numbers.
+- Lean: `lean/Literature/Jeffrey.lean` (18 theorems): kinematic updates on
+  independent finite partitions commute; factor updates compose to one
+  update on the product partition and commute; one factor update equals one
+  Jeffrey update written two ways; kinematics as conditioning on a richer
+  space; the relevance identity (11-5); the book's worked numbers.
+
 ## 5. Formal records (literature/ and lean/Literature/)
 
 - [ ] **R1. Papers with no record at all** get a `literature/<paper>/` record
@@ -752,14 +844,33 @@ says otherwise), NOT-CHECKABLE (source not available).
   Wagner 2003. Add Lean for the closed-form identities (Field eq. 7
   commutativity, Wagner Thm 3.1, P-W's upco/Field identity, Garber's
   recurrence, Hawthorne's LR-model commutation).
-- [ ] **R3. Not in Drive, no record possible yet:** Jeffrey 1983 and 2004
-  (books folder not link-shared), Epstein 2006, Ortoleva 2012, Becker 1962,
+- [ ] **R3. Not in Drive, no record possible yet:** (Jeffrey 1983, the 2002
+  draft of Jeffrey 2004, and Epstein 2006 were added to Drive 2026-09-30 and
+  are now checked) Ortoleva 2012 (via the 2024 survey only), Becker 1962 (web copy),
   Jeffrey 1988.
 - [x] **R4. Literature scripts are in no runner.** `literature/run_all.py`
   added 2026-09-29 (29/29). Remaining gap: the seven sympy-only scripts print
   but do not assert, so their exit status says nothing; convert them to
   assert (with L1's Field fix) when R2 is done. Consider a `make literature`
   target.
+
+- [ ] **R5. Standing requirement (author, 2026-09-30): every cited paper has
+  a Lean formalization of the mathematics the project relies on, built clean
+  with standard axioms, so the paper stands on verified foundations.**
+  Coverage, updated as passes land:
+
+  | Paper | Lean | Pass |
+  |---|---|---|
+  | Augenblick-Rabin, Shmaya-Yariv | yes (SY needs Def. 2, L9) | 0 / D |
+  | Weisberg, Doring, Domotor, Good-Mittal, FGT, Hogarth-Einhorn | yes | 1 |
+  | Cripps, Dietrich, BHW, Banerjee, Phelps, Arrow, Coate-Loury | yes | 1 |
+  | Bohren-Imas-Rosenberg, Heckman, BCGS | yes | 1 |
+  | Jeffrey 1983/2004 | yes | 2 |
+  | Benjamin-Bodoh-Creed-Rabin 2019, Epstein 2006 | in progress | 2 |
+  | Diaconis-Zabell, Field, Garber, Wagner 2002, Wagner 2003, Hawthorne, Pettigrew-Weisberg | in progress (sympy only before) | A |
+  | Ortoleva 2012 (via Ortoleva 2024), Tao 2011 (Mathlib bridge), Becker 1962, Asch (data) | not started | B |
+  | Zhao-Osherson 2010, Zhao et al. 2012, Wilson 2014, Cassell 2020 | not started | C |
+  | Jeffrey 1988 | blocked, not in Drive | -- |
 
 ## 6. Cross-document consistency (to do after the pass)
 

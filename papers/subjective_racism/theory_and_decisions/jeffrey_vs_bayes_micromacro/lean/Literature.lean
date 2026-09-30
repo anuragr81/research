@@ -1,8 +1,8 @@
 import Literature.Arrow
 import Literature.AugenblickRabin
-import Literature.Banerjee
 import Literature.BCGS
 import Literature.BHW
+import Literature.Banerjee
 import Literature.BohrenImasRosenberg
 import Literature.CoateLoury
 import Literature.Cripps
@@ -13,6 +13,7 @@ import Literature.FGT
 import Literature.GoodMittal
 import Literature.Heckman
 import Literature.HogarthEinhorn
+import Literature.Jeffrey
 import Literature.Phelps
 import Literature.ShmayaYariv
 import Literature.Weisberg

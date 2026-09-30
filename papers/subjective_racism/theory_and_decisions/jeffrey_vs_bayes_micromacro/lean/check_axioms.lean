@@ -555,3 +555,24 @@ open JeffreyOrder
 #print axioms Literature.Weisberg.appendix27F
 #print axioms Literature.Weisberg.wagner_F
 #print axioms Literature.Weisberg.jellybean_wagner
+
+-- BEGIN Literature.Jeffrey
+#print axioms Literature.Jeffrey.relevance_identity
+#print axioms Literature.Jeffrey.mudrunner
+#print axioms Literature.Jeffrey.sum_fiber
+#print axioms Literature.Jeffrey.cellMass_kin
+#print axioms Literature.Jeffrey.total_kin
+#print axioms Literature.Jeffrey.Indep.symm
+#print axioms Literature.Jeffrey.cellMass_kin_of_indep
+#print axioms Literature.Jeffrey.kin_comm_of_indep
+#print axioms Literature.Jeffrey.fac_fac_eq_product
+#print axioms Literature.Jeffrey.fac_comm
+#print axioms Literature.Jeffrey.fac_smul
+#print axioms Literature.Jeffrey.fac_eq_kin
+#print axioms Literature.Jeffrey.kin_eq_fac
+#print axioms Literature.Jeffrey.skyrms_three
+#print axioms Literature.Jeffrey.expansion
+#print axioms Literature.Jeffrey.example4
+#print axioms Literature.Jeffrey.example5_printed
+#print axioms Literature.Jeffrey.example5_normalized
+-- END Literature.Jeffrey
