@@ -2,7 +2,7 @@
 
 Repo: `research/papers/subjective_racism/theory_and_decisions/jeffrey_vs_bayes_micromacro` (read-only; nothing was edited).
 Files searched: `PAPER_B_MANUSCRIPT.tex`, `bibliography.bib`, `notes/*.md`, `notes/*.tex`, `literature/**/README.md`, `literature/measurement_susceptibility_survey.md`, `lean/JeffreyOrder/Anchoring.lean`, `sympy/*.py`.
-Abbreviations: CP = `notes/manuscript_change_plan.md`, RL = `notes/paper_review_log.md`, SV = `literature/measurement_susceptibility_survey.md`, AL = `lean/JeffreyOrder/Anchoring.lean`, ZS = `sympy/check_zero_slope_identification.py`, IO = `notes/interior_omega.tex`, PD = `notes/papers_dialectic.tex`, DP = `notes/the_discrimination_problem.tex`, QA = `notes/question_and_answer.tex`, MS = `PAPER_B_MANUSCRIPT.tex`, VWC = VERIFIED-WITH-CAVEAT.
+Abbreviations: CP = `notes/manuscript_change_plan_asof_2026-09-30.md`, RL = `notes/paper_review_log.md`, SV = `literature/measurement_susceptibility_survey.md`, AL = `lean/JeffreyOrder/Anchoring.lean`, ZS = `sympy/check_zero_slope_identification.py`, IO = `notes/interior_omega.tex`, PD = `notes/papers_dialectic.tex`, DP = `notes/the_discrimination_problem.tex`, QA = `notes/question_and_answer.tex`, MS = `PAPER_B_MANUSCRIPT.tex`, VWC = VERIFIED-WITH-CAVEAT.
 
 ---
 

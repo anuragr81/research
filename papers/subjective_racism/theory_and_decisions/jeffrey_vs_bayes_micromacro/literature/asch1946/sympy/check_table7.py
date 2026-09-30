@@ -14,7 +14,7 @@ evasive->intelligent (N=53).
 
 Checks:
   (1) every Table 7 number quoted in the project (notes/paper_review_log.md
-      530-533, notes/manuscript_change_plan.md 816-818, 842-845) against the
+      530-533, notes/manuscript_change_plan_asof_2026-09-30.md 816-818, 842-845) against the
       transcription, in the right column;
   (2) Table 8 counts sum to N, and the printed percentages against the counts;
   (3) summary statistics of the Exp VI order effect across the 18 traits,

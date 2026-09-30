@@ -1,7 +1,7 @@
 # Verification of claims about the probability-kinematics papers
 
 Repo: `/home/anuragr/development/git/research/papers/subjective_racism/theory_and_decisions/jeffrey_vs_bayes_micromacro` (read-only; nothing edited).
-Abbreviations for locations: `MS` = PAPER_B_MANUSCRIPT.tex, `bib` = bibliography.bib, `DZ-R`, `F-R`, `G-R`, `W2-R`, `W3-R`, `PW-R` = literature/<paper>/README.md, `dial` = notes/papers_dialectic.tex, `2h` = notes/two_horn_motivation_body.tex, `plan` = notes/manuscript_change_plan.md, `QA` = notes/question_and_answer.tex, `QAd` = notes/question_and_answer_doc.tex, `IO` = notes/interior_omega.tex, `rev` = notes/paper_review_log.md.
+Abbreviations for locations: `MS` = PAPER_B_MANUSCRIPT.tex, `bib` = bibliography.bib, `DZ-R`, `F-R`, `G-R`, `W2-R`, `W3-R`, `PW-R` = literature/<paper>/README.md, `dial` = notes/papers_dialectic.tex, `2h` = notes/two_horn_motivation_body.tex, `plan` = notes/manuscript_change_plan_asof_2026-09-30.md, `QA` = notes/question_and_answer.tex, `QAd` = notes/question_and_answer_doc.tex, `IO` = notes/interior_omega.tex, `rev` = notes/paper_review_log.md.
 Independent recomputation script: `scratchpad/indep.py` (my own implementation, not the repo's). I also ran all six repo scripts under `literature/*/sympy/` (`python3 -B`, nothing written to the repo).
 Sources with no claims about these six papers: `literature/measurement_susceptibility_survey.md`, every `lean/**/*.lean` (the only "field" hits are the `field_simp` tactic), `lean/README.md`.
 

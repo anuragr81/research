@@ -1,7 +1,7 @@
 # Verification: Bohren–Imas–Rosenberg (2019) and Heckman (1998)
 
 Repo: `/home/anuragr/development/git/research/papers/subjective_racism/theory_and_decisions/jeffrey_vs_bayes_micromacro` (read-only; nothing edited).
-Paths below are relative to the repo. "log" means `notes/paper_review_log.md`, "TDP" means `notes/the_discrimination_problem.tex`, "PE" means `notes/positioning_economics.tex`, and "plan" means `notes/manuscript_change_plan.md`.
+Paths below are relative to the repo. "log" means `notes/paper_review_log.md`, "TDP" means `notes/the_discrimination_problem.tex`, "PE" means `notes/positioning_economics.tex`, and "plan" means `notes/manuscript_change_plan_asof_2026-09-30.md`.
 
 **Scope finding:** `PAPER_B_MANUSCRIPT.tex` and `bibliography.bib` contain **no** citation of either paper. The only hits for "audit" in the manuscript are the paper's own generic use of the word (lines 61, 73, 124-125, 405, 830, 884, 929-961). `literature/measurement_susceptibility_survey.md`, `literature/README.md` and the Lean files (outside the check script's generic "Axiom audit" comment) make no claims about either paper. Every claim listed below sits in the notes, in the change plan (proposed manuscript text) or in the two BIR sympy scripts.
 

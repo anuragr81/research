@@ -5,6 +5,7 @@ import re, sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import corrections_entries as C
+from plan_entries_E import E2
 C.discipline_check()
 
 
@@ -37,34 +38,52 @@ def latex_cell(t):
     t = " ".join(t.split())
     if t.startswith("%"):
         return "\\textit{(sentence deleted)}"
+    # a floating table cannot sit inside a longtable cell: unwrap it
+    t = re.sub(r"\\begin\{table\}(\[[^\]]*\])?\s*\\centering\s*", "", t)
+    t = re.sub(r"\\caption\{(.*?)\}\s*\\label\{[^}]*\}\s*\\end\{table\}", r" \\par\\textit{Table caption: \1}", t)
+    t = t.replace("p{2.6cm}p{5.4cm}p{5.4cm}", "p{2.2cm}p{4.6cm}p{4.6cm}")
+    t = re.sub(r"\\paragraph\{([^}]*)\}", r"\\textbf{\1} ", t)
+    t = re.sub(r"\\section\{([^}]*)\}", r"\\textit{Section title:} \\textbf{\1}", t)
+    t = t.replace("}%", "}")
+    t = t.replace("\\begin{align*}", "\\[\\begin{aligned}").replace("\\end{align*}", "\\end{aligned}\\]")
     return t
 
 
-rows = []
-for eid, title, pairs, purpose, verif in C.E:
-    rows.append(f"\\entryhead{{{eid}}}{{{prose(title)}}}")
-    for k, (s, e, after) in enumerate(pairs, 1):
-        before = C.cut(s, e)
-        n = f"{k}/{len(pairs)}" if len(pairs) > 1 else ""
-        rows.append(f"{n} & {latex_cell(before)} & {latex_cell(after)} \\\\ \\hline")
-    rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Why.}} {prose(purpose)}}} \\\\")
-    rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Evidence.}} {prose(verif)}}} \\\\ \\hline\\hline")
+def rows_for(entries):
+    rows = []
+    for eid, title, pairs, purpose, verif in entries:
+        rows.append(f"\\entryhead{{{eid}}}{{{prose(title)}}}")
+        for k, part in enumerate(pairs, 1):
+            kind, s, e, after = C.norm_part(part)
+            before = C.cut(s, e)
+            n = f"{k}/{len(pairs)}" if len(pairs) > 1 else ""
+            if kind == "insert_para":
+                before = "\\textit{New paragraph(s) after the paragraph containing} ``" + before + "''"
+            rows.append(f"{n} & {latex_cell(before)} & {latex_cell(after)} \\\\ \\hline")
+        if not pairs:
+            rows.append(f" & \\multicolumn{{2}}{{p{{24.6cm}}|}}{{\\textit{{No manuscript text; see Why.}}}} \\\\ \\hline")
+        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Why.}} {prose(purpose)}}} \\\\")
+        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Evidence.}} {prose(verif)}}} \\\\ \\hline\\hline")
+    return rows
+
+
+rows = rows_for(C.E)
+rows_e = rows_for(E2)
 
 D = [
     ("0.A", "Abstract", "Superseded by the author's rewrite and C.1."),
-    ("1.A, 1.B, 1.D, 1.E", "Introduction", "Superseded by the author's rewrite; what survives is corrected in C.2-C.8. The ORD sentence of 1.E is still unapplied and presupposes 5.B."),
+    ("1.A, 1.B, 1.D, 1.E", "Introduction", "Superseded by the author's rewrite; what survives is corrected in C.2-C.8. The ORD sentence of 1.E is still unapplied and presupposes E.10."),
     ("1.A2", "Two-channel prelude", "Applied by the author; corrected by C.4."),
-    ("1.C", "Why sequence matters beyond one judgement", "Needs audit P4 (\"prior beliefs about the groups\") and D13 (BIR's impartial type) before applying."),
-    ("2.A, 2.C", "What an impression is; soft means 0<q<1", "Still applicable as written."),
-    ("2.B", "Worked example", "Still applicable; every number is in verify\\_example.py."),
-    ("3.A", "Jeffrey-commutativity literature", "Needs D1/P3 (Doring normative, Hawthorne psychological), P2 (Doring's remedy is one Jeffrey update), M21 (\"two ends of his taxonomy\"; NL denominator), M24 (D-Z on the paper's side)."),
-    ("3.B", "Asch", "Needs P13 (\"no prior association is elicited\", not \"the joint is never elicited\"); Table 7 numbers all correct."),
-    ("3.C", "Heckman", "Needs P17a (\"no sample size repairs\" is the paper's inference); \"nothing guarantees\" is p. 109."),
-    ("3.D", "Bohren-Imas-Rosenberg", "Needs P17b (attenuation along histories; tau\\_q $\\to$ 0); pages are working-paper pages."),
-    ("5.B", "Propositions ORD and ADJ", "Mathematics verified. Prose needs P10/P11: the one-sided construction is Hogarth-Einhorn's Eq. 8; what is new is its two-attribute Jeffrey embedding. Needed for the omega defined in Setup (C.9). Optional Epstein (2006, eq. 12) citation."),
-    ("6.A", "Rival mechanisms", "Needs P10 (Hogarth-Einhorn direction), P14 (six stimulus terms, eighteen response traits), P9 (Hawthorne's objection reaches the two-basis case)."),
-    ("6.B", "Two channels; rubric prediction", "Carries the interior-omega numbers C.5 points to; position-channel wording needs the C.4 change."),
-    ("B.A", "Bibliography", "Hawthorne2004 added; Heckman1998, Doring1999, Garber1980, Bohren2019 still to add when 3.A-3.D land; Jeffrey2004 and BenjaminBodohCreedRabin2019 if C.4/C.6/C.10 are approved."),
+    ("1.C", "Why sequence matters beyond one judgement", "Re-issued as E.1."),
+    ("2.A, 2.B, 2.C", "Impression; worked example; soft cues", "Re-issued as E.2, E.3 (extended with the soft-versus-hard passage), E.4."),
+    ("3.A, 3.B", "Commutativity literature; Asch", "Re-issued as E.5, E.6."),
+    ("3.C", "Heckman", "Superseded by C.15, which carries the identification precedent with P17a applied."),
+    ("3.D", "Bohren-Imas-Rosenberg", "Re-issued as E.7."),
+    ("4.A, 5.A", "Section titles and openings", "Re-issued as E.8, E.9."),
+    ("5.B", "Propositions ORD and ADJ", "Re-issued as E.10 (mathematics unchanged; prose corrected per P10/P11)."),
+    ("6.A, 6.B", "Rival mechanisms; two channels", "Re-issued as E.11, E.12 (6.B's text pulled in from interior\\_omega.tex)."),
+    ("B.A, B.B", "Bibliography; AI declaration", "Re-issued as E.14, E.13."),
+    ("W.A", "Input/output tables", "Withdrawn by the author 2026-09-21; kept in notes/empirical\\_analytics.tex."),
 ]
 drows = "\n".join(f"{a} & {b} & {prose(c) if '$' not in c and chr(92) not in c else c} \\\\ \\hline" for a, b, c in D)
 
@@ -75,7 +94,13 @@ tex = r"""%% manuscript_corrections.tex -- master plan of corrections to PAPER_B
 \documentclass[10pt]{article}
 \usepackage[a4paper,landscape,margin=1.4cm]{geometry}
 \usepackage{amsmath,amssymb,dsfont}
-\usepackage{longtable,array}
+\usepackage{amsthm}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\usepackage{longtable,array,booktabs}
 \usepackage[authoryear,round]{natbib}
 \usepackage[T1]{fontenc}
 \newcommand{\PB}{P^{\mathrm{B}}}
@@ -87,7 +112,7 @@ tex = r"""%% manuscript_corrections.tex -- master plan of corrections to PAPER_B
 \newcommand{\bigO}{\mathcal{O}}
 \newcommand{\vv}{v}
 \newcommand{\anchor}[1]{}
-\renewcommand{\ref}[1]{\textsc{#1}}
+\renewcommand{\ref}[1]{\textsc{\detokenize{#1}}}
 \renewcommand{\footnote}[1]{ \textit{[Footnote: #1]}}
 \newlength{\fullw}\setlength{\fullw}{25.9cm}
 \newcommand{\entryhead}[2]{\multicolumn{3}{|l|}{\rule{0pt}{2.6ex}\large\textbf{#1}\quad #2} \\ \hline}
@@ -116,14 +141,28 @@ manuscript, compiled and committed. Every AFTER text passes the mechanical check
 \end{longtable}
 }
 
-\section*{C.12: bibliography entries the AFTER texts need}
+\section*{Section E: the archived plan's entries, re-issued and corrected}
+The entries of \texttt{notes/manuscript\_change\_plan\_asof\_2026-09-30.md} that the author's draft did
+not already apply, each corrected against the audit and passed through the discipline gate.
+Order of application: E.10 (Propositions ORD and ADJ) before anything that cites them; E.14
+(bibliography) before E.1, E.5, E.7 and C.15; E.11 before E.12.
+{\small
+\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
+\hline
+\textbf{Part} & \textbf{BEFORE (current manuscript, or the anchor for an insert)} & \textbf{AFTER (proposed)} \\ \hline\hline
+\endhead
+""" + "\n".join(rows_e) + r"""
+\end{longtable}
+}
+
+\section*{C.12 and E.14: bibliography entries the AFTER texts need}
 \texttt{Hawthorne2004} and \texttt{ZhaoOsherson2010} are already in \texttt{bibliography.bib}.
-If C.4's optional sentence, C.6, C.10 or C.15 are approved, four more are needed (Jeffrey 2004, Benjamin et al.\ 2019, Heckman 1998, Bohren et al.\ 2019); they are in
+Six more are needed by C.4's optional sentence, C.6, C.10, C.15, E.1, E.5 and E.7 (Jeffrey 2004, Benjamin et al.\ 2019, Heckman 1998, Bohren et al.\ 2019, D\"oring 1999, Garber 1980); they are in
 \texttt{notes/manuscript\_corrections\_extra.bib} so that this document renders them, and move to
 \texttt{bibliography.bib} on approval. The Drive copy of Jeffrey (2004) is the November 2002 draft,
 so C.6 and C.10 cite the chapter only.
 
-\section*{Section D: status of the older plan entries (notes/manuscript\_change\_plan.md)}
+\section*{Section D: where each entry of the archived plan (notes/manuscript\_change\_plan\_asof\_2026-09-30.md) now lives}
 {\small
 \begin{longtable}{|p{2.6cm}|p{5.2cm}|p{17.4cm}|}
 \hline

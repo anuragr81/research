@@ -1,7 +1,7 @@
 # Verification: discrimination-economics and poverty-measurement sources
 
 Repo: `/home/anuragr/development/git/research/papers/subjective_racism/theory_and_decisions/jeffrey_vs_bayes_micromacro` (read-only; nothing edited).
-Abbreviations: MS = `PAPER_B_MANUSCRIPT.tex`, BIB = `bibliography.bib`, PLAN = `notes/manuscript_change_plan.md`, LOG = `notes/paper_review_log.md`, BIR = Bohren, Imas & Rosenberg (2019), `papers/bohren3.pdf`.
+Abbreviations: MS = `PAPER_B_MANUSCRIPT.tex`, BIB = `bibliography.bib`, PLAN = `notes/manuscript_change_plan_asof_2026-09-30.md`, LOG = `notes/paper_review_log.md`, BIR = Bohren, Imas & Rosenberg (2019), `papers/bohren3.pdf`.
 
 How I collected the claims: I grepped every file named in the task. Nothing about these papers turned up in `notes/*.tex` apart from uncited uses of the word "stereotype", and nothing in `literature/**/README.md`. No file mentions `phelps_slides.pdf` or any slides, so the project does not rely on them.
 

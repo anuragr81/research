@@ -22,6 +22,11 @@ def cut(start, end):
     return NORM[i:j + len(end)]
 
 
+def norm_part(part):
+    """(kind, start, end, after); a 3-tuple is a replace."""
+    return ("replace",) + tuple(part) if len(part) == 3 else tuple(part)
+
+
 def quote(s):
     return "\n".join("> " + l for l in textwrap.wrap(s, 78, break_long_words=False, break_on_hyphens=False))
 
@@ -87,8 +92,8 @@ belief-adjustment literature models an impression as a single score
 \citep{HogarthEinhorn1992}, and the founding multi-trait study reports its results
 trait by trait \citep{Asch1946}, so both read marginals only. The characterisation
 of when two sequences lead to the same belief does consider a joint belief over
-attributes \citep{DiaconisZabell1982}, but where order dependence has been treated
-as a problem it has been treated as a defect to repair\footnote{\citet{Hawthorne2004}
+attributes \citep{DiaconisZabell1982}, but where sequence dependence has been
+treated as a problem it has been treated as a defect to repair\footnote{\citet{Hawthorne2004}
 offers factor-based alternatives in which a cue supplies a normed-likelihood or
 likelihood-ratio factor instead of a new probability. Under these, updates on
 distinct attributes commute, and in his Basis-Commuting Version all updates do.}
@@ -400,10 +405,12 @@ notes/positioning_economics.tex, is appended inside C.11.9. C.12 lists the bibli
 the AFTER texts need. Section D lists what these corrections change in the
 existing plan entries 0.A-6.B.
 """)
-for eid, title, pairs, purpose, verif in E:
+from plan_entries_E import E2
+for eid, title, pairs, purpose, verif in E + E2:
     out.append(f"### {eid} -- {title}\n")
     out.append(f"**Why.** {purpose}\n")
-    for k, (s, e, after) in enumerate(pairs, 1):
+    for k, part in enumerate(pairs, 1):
+        kind, s, e, after = norm_part(part)
         before = cut(s, e)
         tag = f" ({k} of {len(pairs)})" if len(pairs) > 1 else ""
         out.append(f"**BEFORE{tag}:**\n\n{quote(before)}\n")
@@ -486,23 +493,39 @@ MD = "\n".join(out)
 DISCIPLINE_EXEMPT_LENGTH = {"C.4.1": "removes a duplicated paragraph",
                             "C.10.1": "citation fix", "C.11.8": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",
-                            "C.11.9": "appends the identification paragraph (C.15)"}
+                            "C.11.9": "appends the identification paragraph (C.15)",
+                            "E.2.1": "adds the definition of an impression",
+                            "E.4.1": "adds the bounds on the credences",
+                            "E.5.1": "inserts four paragraphs before the existing sentence",
+                            "E.6.1": "carries Asch's data",
+                            "E.8.1": "title", "E.8.2": "rewrite of two paragraphs, same jobs",
+                            "E.9.1": "title", "E.9.2": "rewrite, same job",
+                            "E.10.2": "adds a reference", "E.13.1": "adds two references"}
 
 
-def discipline_check():
+def discipline_check(entries=None):
     """Mechanical rules of notes/writing_discipline.md applied to every AFTER text:
-    no colons in prose (9), no dashes doing a sentence's work (9), "sequence" for
-    reading order and "order" only for order in c (6), primacy/recency/amnestic/
-    anchoring/overwrite/base rate only where the discipline allows (6), rewrites
-    within 80-120% of the draft (9) unless exempted above. Exits on a breach."""
+    no colons in prose (9; a colon that introduces a display is allowed), no
+    dashes doing a sentence's work (9), "sequence" for reading order and "order"
+    only for order in c (6), primacy/recency/anchor only where Hogarth-Einhorn is
+    cited and amnestic/overwrite only where Hawthorne is cited (6), rewrites
+    within 80-120% of the draft (9) for replacements unless exempted. Exits on a
+    breach."""
+    if entries is None:
+        from plan_entries_E import E2
+        entries = E + E2
     def prose(t):
+        t = re.sub(r"\\\[.*?\\\]", " ", t, flags=re.S)
+        t = re.sub(r"\\begin\{(align\*?|tabular|table)\}.*?\\end\{\1\}", " ", t, flags=re.S)
         t = re.sub(r"\\cite[pt]?(\[[^\]]*\])*\{[^}]*\}", "", t)
         t = re.sub(r"\$[^$]*\$", "", t)
-        t = re.sub(r"\\(ref|label)\{[^}]*\}", "", t)
+        t = re.sub(r"\\(ref|label|paragraph|caption)\{[^}]*\}", "", t)
+        t = re.sub(r"\\(par|renewcommand\{[^}]*\}\{[^}]*\}%?|begin\{[^}]*\}(\[[^\]]*\])?|end\{[^}]*\}|centering|small|toprule|midrule|bottomrule|addlinespace(\[[^\]]*\])?)", " ", t)
         return " ".join(t.split())
     bad = []
-    for eid, _, pairs, _, _ in E:
-        for k, (st, en, after) in enumerate(pairs, 1):
+    for eid, _, parts, _, _ in entries:
+        for k, part in enumerate(parts, 1):
+            kind, st, en, after = norm_part(part)
             tag = f"{eid}.{k}"
             if after.lstrip().startswith("%"):
                 continue
@@ -511,17 +534,27 @@ def discipline_check():
                 bad.append(f"{tag}: colon in prose")
             if "---" in after or " -- " in after:
                 bad.append(f"{tag}: dash doing a sentence's work")
-            for m in re.finditer(r"\b(?:in (?:either|any|the same|reverse|both) order|order in which|order of (?:arrival|reading)|treats order|arrival order|reading order|order effect)\b", a):
+            for m in re.finditer(r"\b(?:in (?:either|any|the same|reverse|both) order|order in which|order of (?:arrival|reading)|treats order|arrival order|reading order|order effect|order dependence|order-free|order-dependen\w*)\b", a):
                 bad.append(f"{tag}: 'order' used for reading sequence ({m.group(0)!r})")
-            for w in ("primacy", "recency", "amnestic", "anchoring", "overwrit", "base rate", "base-rate"):
+            he = "HogarthEinhorn1992" in after
+            hw = "Hawthorne2004" in after
+            for w in ("primacy", "recency", "anchor"):
+                if w in a.lower() and not he:
+                    bad.append(f"{tag}: term {w!r} without a Hogarth-Einhorn citation")
+            for w in ("amnestic", "overwrit"):
+                if w in a.lower() and not hw:
+                    bad.append(f"{tag}: term {w!r} without a Hawthorne citation")
+            for w in ("base rate", "base-rate"):
                 if w in a.lower():
-                    bad.append(f"{tag}: term {w!r} outside its allowed use")
-            bw, aw = len(cut(st, en).split()), len(after.split())
-            if not 0.8 <= aw / bw <= 1.2 and tag not in DISCIPLINE_EXEMPT_LENGTH:
-                bad.append(f"{tag}: length {bw}->{aw} words outside 80-120%")
+                    bad.append(f"{tag}: term {w!r} (use 'marginal')")
+            if kind == "replace":
+                bw, aw = len(cut(st, en).split()), len(after.split())
+                if not 0.8 <= aw / bw <= 1.2 and tag not in DISCIPLINE_EXEMPT_LENGTH:
+                    bad.append(f"{tag}: length {bw}->{aw} words outside 80-120%")
+            else:
+                cut(st, en)   # the anchor must exist, once
     if bad:
         sys.exit("writing_discipline breaches:\n  " + "\n  ".join(bad))
-
 
 def write_md(path):
     open(path, "w").write(MD)

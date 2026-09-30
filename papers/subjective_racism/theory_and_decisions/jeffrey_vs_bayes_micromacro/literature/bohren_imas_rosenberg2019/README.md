@@ -161,7 +161,7 @@ The two pre-existing scripts, as found (not modified):
 
 These are from `verify_bir_heckman.md` §1 and concern the project's notes (`notes/paper_review_log.md`,
 `notes/the_discrimination_problem.tex`, `notes/positioning_economics.tex`,
-`notes/manuscript_change_plan.md`), not the manuscript itself: `PAPER_B_MANUSCRIPT.tex`
+`notes/manuscript_change_plan_asof_2026-09-30.md`), not the manuscript itself: `PAPER_B_MANUSCRIPT.tex`
 does not cite BIR. Proposed wording is text only; nothing has been edited.
 
 **Five CONTRADICTED items.**

@@ -1,7 +1,7 @@
 # Verification: Hawthorne (2004) and Weisberg ("Commutativity or Holism?")
 
 Repo: `/home/anuragr/development/git/research/papers/subjective_racism/theory_and_decisions/jeffrey_vs_bayes_micromacro` (read-only; nothing edited).
-Paths below are relative to the repo root. `plan` = `notes/manuscript_change_plan.md`, `dialectic` = `notes/papers_dialectic.tex`, `H-README` = `literature/hawthorne2004/README.md`, `W-README` = `literature/weisberg2009/README.md`, `io` = `notes/interior_omega.tex`.
+Paths below are relative to the repo root. `plan` = `notes/manuscript_change_plan_asof_2026-09-30.md`, `dialectic` = `notes/papers_dialectic.tex`, `H-README` = `literature/hawthorne2004/README.md`, `W-README` = `literature/weisberg2009/README.md`, `io` = `notes/interior_omega.tex`.
 
 Method: pass 1, both papers read in full from the `.txt`. Pass 2, grep over every file class in the brief. Pass 3, each claim re-checked against the text. Rendered PDF pages were checked for every quotation and for symbol-bearing statements: Hawthorne pp. 96–99, 112, 115–116, 120–121; Weisberg pp. 1, 16–17. The OCR drops Hawthorne's ε. For example, the Reordering Theorem's r is NL[Q_αε, d, D_i]/NL[Q_α, d, D_i] on the rendered page, but the `.txt` shows NL[Q_α, d, D_i]/NL[Q_α, d, D_i].
 

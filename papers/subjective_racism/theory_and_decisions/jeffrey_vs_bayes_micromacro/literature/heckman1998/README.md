@@ -113,7 +113,7 @@ single file, has no `sorry`, and uses only `[propext, Classical.choice, Quot.sou
 ## Audit findings (2026-09-29)
 
 These are from `verify_bir_heckman.md` §2 (`notes/positioning_economics.tex`,
-`notes/the_discrimination_problem.tex`, `notes/manuscript_change_plan.md`,
+`notes/the_discrimination_problem.tex`, `notes/manuscript_change_plan_asof_2026-09-30.md`,
 `notes/paper_review_log.md`). Proposed wording is text only.
 
 1. **"No sample size repairs" is the project's gloss, not Heckman's** (UNSUPPORTED as

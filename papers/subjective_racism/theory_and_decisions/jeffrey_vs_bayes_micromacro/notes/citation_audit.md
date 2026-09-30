@@ -22,7 +22,7 @@ paper's own mathematics is unaffected: SymPy 15/15, Lean builds with no
 **Nothing here has been applied.** Each entry names the location, the
 verdict, the evidence, and what to do. Status: `[ ]` open, `[x]` done,
 `[~]` decided not to act. "MS" is `PAPER_B_MANUSCRIPT.tex`, "PLAN" is
-`notes/manuscript_change_plan.md`, line numbers as of commit cf7f70e2.
+`notes/manuscript_change_plan_asof_2026-09-30.md`, line numbers as of commit cf7f70e2.
 
 Verdicts: VERIFIED, VERIFIED-WITH-CAVEAT, MISQUOTED, WRONG-LOCATION,
 WRONG-NUMBER, UNSUPPORTED (not found in the paper), CONTRADICTED (the paper
@@ -464,7 +464,7 @@ says otherwise), NOT-CHECKABLE (source not available).
   working paper 30A, own pagination; never cite Arrow by page from it).
   **Do:** confirm from publisher pages before submission.
 
-## 2. Change plan (notes/manuscript_change_plan.md)
+## 2. Change plan (notes/manuscript_change_plan_asof_2026-09-30.md)
 
 - [ ] **P1. PLAN:791 (3.A verification note). UNSUPPORTED.** "All five papers
   read in full and formalized in literature/": there is no Doring directory
@@ -1042,7 +1042,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
 - [ ] **X5. Incorporate the exploration documents (author, 2026-09-30; after
   R5 is complete).** Every underlying point in the exploration documents must
   be covered by the manuscript or by a change in
-  `notes/manuscript_change_plan.md`, or be recorded as deliberately left out
+  `notes/manuscript_change_plan_asof_2026-09-30.md`, or be recorded as deliberately left out
   with the reason. Documents: `papers_dialectic.tex`, `interior_omega.tex`,
   `the_discrimination_problem.tex`, `positioning_economics.tex`,
   `question_and_answer.tex`, `two_horn_motivation_body.tex`,

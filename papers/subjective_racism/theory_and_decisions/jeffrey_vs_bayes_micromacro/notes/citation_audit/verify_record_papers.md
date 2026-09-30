@@ -2,7 +2,7 @@
 
 Repo: `/home/anuragr/development/git/research/papers/subjective_racism/theory_and_decisions/jeffrey_vs_bayes_micromacro` (read-only; nothing edited).
 Papers: `scratchpad/papers/*.pdf` (+ `.txt`). Rendered pages were checked where tables, formulas or notation mattered (AR pp. 6, 9-11, 20-21; SY pp. 11-14 of the PDF).
-Scope of claims: every hit of `Augenblick|Rabin|Shmaya|Yariv|Zhao|Osherson|Crupi|Wilson|Cassell|Lange` in the files you listed, plus the Lean and SymPy sources. I confirmed that PAPER_B_MANUSCRIPT.tex, bibliography.bib, notes/positioning_economics.tex and notes/question_and_answer*.tex contain **0** hits, so all the claims are in notes/paper_review_log.md, notes/manuscript_change_plan.md, notes/interior_omega.tex, literature/*/README.md, literature/measurement_susceptibility_survey.md, and the Lean and SymPy files.
+Scope of claims: every hit of `Augenblick|Rabin|Shmaya|Yariv|Zhao|Osherson|Crupi|Wilson|Cassell|Lange` in the files you listed, plus the Lean and SymPy sources. I confirmed that PAPER_B_MANUSCRIPT.tex, bibliography.bib, notes/positioning_economics.tex and notes/question_and_answer*.tex contain **0** hits, so all the claims are in notes/paper_review_log.md, notes/manuscript_change_plan_asof_2026-09-30.md, notes/interior_omega.tex, literature/*/README.md, literature/measurement_susceptibility_survey.md, and the Lean and SymPy files.
 
 I also ran:
 - `check_prop1.py`: all checks pass.
@@ -19,7 +19,7 @@ Abbreviations used in the "where" column:
 - `SYL` = lean/Literature/ShmayaYariv.lean
 - `SYpy` = literature/shmaya_yariv2016/sympy/check_theorems.py
 - `LOG` = notes/paper_review_log.md
-- `PLAN` = notes/manuscript_change_plan.md
+- `PLAN` = notes/manuscript_change_plan_asof_2026-09-30.md
 - `SURV` = literature/measurement_susceptibility_survey.md
 - `IO` = notes/interior_omega.tex
 - `W03R` = literature/wagner2003/README.md
