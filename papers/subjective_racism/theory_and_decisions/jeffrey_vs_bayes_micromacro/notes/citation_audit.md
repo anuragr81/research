@@ -219,9 +219,11 @@ says otherwise), NOT-CHECKABLE (source not available).
   neither is a theory of order effects, and fn 2 (p. 546) puts Jeffrey's rule
   out of scope, citing Diaconis & Zabell (1986), a different paper from the
   1982 one. (d) Possible citation for an order effect in a non-Bayesian
-  model: Benjamin, Bodoh-Creed & Rabin (2019) on base-rate neglect, where
-  "more recent messages are given more weight" (p. 557), relevant to the
-  position channel; not in Drive. **Do:** keep M7's sentence; reword M6; drop
+  model: Benjamin, Bodoh-Creed & Rabin (2019) on base-rate neglect;
+  "more recent messages are given more weight" (p. 557) is *Ortoleva's
+  paraphrase*, not their text. Quote their p. 21 ("recency bias ... she draws
+  stronger inferences from signals observed recently") or p. 3. Now in Drive
+  and formalized, see P12. **Do:** keep M7's sentence; reword M6; drop
   or rewrite the M8 framing; consider Benjamin et al. (2019).
 - [ ] **M9. MS:276-277, Cripps. CAVEAT + UNSUPPORTED x2.** (a) "shows that
   symmetry and divisibility jointly force sequence-independence" rests on a
@@ -482,6 +484,25 @@ says otherwise), NOT-CHECKABLE (source not available).
   supports interior_omega's claim that the position channel is not specific
   to delivered credences. Direction caveat: BRN down-weights the *earlier*
   evidence, so it is recency, not "the later cue weighted less".
+  **Formalized (lean/Literature/BenjaminBodohCreedRabin.lean, 41 theorems;
+  sympy 55/55):** closed form after n signals, eq. 5 (p. 21); weight
+  alpha^{n-1-k} on signal k in log odds, eq. 6 (p. 21); reversing two
+  signals shifts the log odds by (1-alpha)(l_2 - l_1) (`twoSignal_logOdds_order`).
+  On the 2x2 joint: log OR = alpha^2 assoc(P) in either order and =
+  alpha^2 assoc(P^B)-relative (`assoc_brn_orders_eq`, `assoc_brnAB_vs_bayes`),
+  a gap at every c (first order in c against P^B); A-marginal differs by
+  orders at independence (`margOddsA_orders_ne`; exact witness 7/8 versus
+  49/50). **Qualifications:** (i) the c = 0 effect needs BRN on the joint
+  cells with posterior-becomes-prior (their "major modeling gambit", p. 19,
+  untested); applied per attribute, or with both cues pooled in one update
+  (pp. 20-21), there is no c = 0 effect. (ii) The prelude's next sentence,
+  "which channels operate is fixed by how fully the later cue is adopted",
+  fails as a general claim: under BRN the later cue is adopted in full and
+  the position channel still operates; keep it only as a statement about
+  the paper's model. (iii) Their fn 7 (p. 13) says the model predicts that
+  whatever comes first is down-weighted (recency). Proposed prelude wording
+  in literature/benjamin2019/README.md. Not yet in bibliography.bib
+  (working paper; @unpublished entry proposed there).
 - [ ] **P13. Asch, "the joint is never elicited". CONTRADICTED.** (review log
   :539-540; PLAN 3.B :810-811.) Each subject's check-list is an 18-item joint
   response; Asch conditions on the warm/cold item in Experiment II (p. 265)
@@ -865,8 +886,8 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Weisberg, Doring, Domotor, Good-Mittal, FGT, Hogarth-Einhorn | yes | 1 |
   | Cripps, Dietrich, BHW, Banerjee, Phelps, Arrow, Coate-Loury | yes | 1 |
   | Bohren-Imas-Rosenberg, Heckman, BCGS | yes | 1 |
-  | Jeffrey 1983/2004 | yes | 2 |
-  | Benjamin-Bodoh-Creed-Rabin 2019, Epstein 2006 | in progress | 2 |
+  | Jeffrey 1983/2004, Benjamin-Bodoh-Creed-Rabin 2019 | yes | 2 |
+  | Epstein 2006 | in progress | 2 |
   | Diaconis-Zabell, Field, Garber, Wagner 2002, Wagner 2003, Hawthorne, Pettigrew-Weisberg | in progress (sympy only before) | A |
   | Ortoleva 2012 (via Ortoleva 2024), Tao 2011 (Mathlib bridge), Becker 1962, Asch (data) | not started | B |
   | Zhao-Osherson 2010, Zhao et al. 2012, Wilson 2014, Cassell 2020 | not started | C |

@@ -3,6 +3,7 @@ import Literature.AugenblickRabin
 import Literature.BCGS
 import Literature.BHW
 import Literature.Banerjee
+import Literature.BenjaminBodohCreedRabin
 import Literature.BohrenImasRosenberg
 import Literature.CoateLoury
 import Literature.Cripps
