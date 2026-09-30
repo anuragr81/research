@@ -759,6 +759,18 @@ says otherwise), NOT-CHECKABLE (source not available).
   (d) :152-153 the swing-state result is "per-subject, not an aggregate
   audit": it is a between-group comparison against a control mean
   (CONTRADICTED). (e) ZO "stability": 22 of 40 changed Pr(G|B).
+- [ ] **L10 confirmed formally (2026-09-30; lean/Literature/ZhaoOsherson.lean,
+  Zhao2012.lean).** (a)-(e) hold. Qualifications: (a) Jeffrey himself uses
+  "rigidity condition" in the 2002 draft, ch. 2 (J6), so report what ZO say
+  rather than calling the word foreign to Jeffrey; (e) what holds is
+  relative: Pr(G|B) moved less than its converse (33.0% versus 73.0%; 22
+  versus 32 of 40 changed), against a normative baseline of zero versus a
+  positive amount (`converse_invariant_iff`); (d) Zhao 2012's groups are
+  yoked triples with paired tests t(19), so "between-group (yoked)" is exact
+  and "per-subject" wrong. P15: Asch's I->E modal share is 13/34 = 38%,
+  printed 39% only by forcing the column to 100 (`table8_ie_rounding`).
+  Paper slips not used by the project: ZO p. 304 "18.45%" should be 18.05%;
+  Zhao 2012's 17-of-20 binomial p is .0026, printed .01.
 - [ ] **L11. Wilson and Cassell identities.** `AndreaWilson.pdf` is the
   April 29, 2003 draft, not the 2014 Econometrica paper. `lisa_cassell.pdf` is
   Cassell, "Commutativity, Normativity, and Holism: Lange Revisited", Can. J.
@@ -889,8 +901,9 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Jeffrey 1983/2004, Benjamin-Bodoh-Creed-Rabin 2019 | yes | 2 |
   | Epstein 2006 | in progress | 2 |
   | Diaconis-Zabell, Field, Garber, Wagner 2002, Wagner 2003, Hawthorne, Pettigrew-Weisberg | in progress (sympy only before) | A |
-  | Ortoleva 2012 (via Ortoleva 2024), Tao 2011 (Mathlib bridge), Becker 1962, Asch (data) | not started | B |
-  | Zhao-Osherson 2010, Zhao et al. 2012, Wilson 2014, Cassell 2020 | not started | C |
+  | Asch (data), Zhao-Osherson 2010, Zhao et al. 2012 | yes | B/C |
+  | Ortoleva 2012 (via Ortoleva 2024), Tao 2011 (Mathlib bridge), Becker 1962 | in progress | B |
+  | Wilson 2014, Cassell 2020 | in progress | C |
   | Jeffrey 1988 | blocked, not in Drive | -- |
 
 ## 6. Cross-document consistency (to do after the pass)

@@ -37,7 +37,7 @@ known bug (audit item L1). Adding Lean to them is audit item R2.
 | [goodmittal1987](goodmittal1987/README.md) | Lean + sympy | done 2026-09-29 |
 | [fgt1984](fgt1984/README.md) | Lean + sympy | done 2026-09-29 |
 | [hogarth_einhorn1992](hogarth_einhorn1992/README.md) | Lean + sympy | done 2026-09-29 |
-| [asch1946](asch1946/README.md) | sympy (Table 7/8 transcription; no formal claim) | done 2026-09-29 |
+| [asch1946](asch1946/README.md) | Lean (Tables 7/8 as data) + sympy | done 2026-09-30 |
 | [cripps2021](cripps2021/README.md) | Lean + sympy | done 2026-09-29 |
 | [dietrich2021](dietrich2021/README.md) | Lean + sympy | done 2026-09-29 |
 | [bhw1992](bhw1992/README.md) | Lean + sympy | done 2026-09-29 |
@@ -51,3 +51,5 @@ known bug (audit item L1). Adding Lean to them is audit item R2.
 | [jeffrey1983](jeffrey1983/README.md) | Lean (shared Jeffrey.lean) | done 2026-09-30 |
 | [jeffrey2004](jeffrey2004/README.md) | Lean (shared Jeffrey.lean); Drive copy is the 2002 draft | done 2026-09-30 |
 | [benjamin2019](benjamin2019/README.md) | Lean + sympy | done 2026-09-30 |
+| [zhao_osherson2010](zhao_osherson2010/README.md) | Lean + sympy | done 2026-09-30 |
+| [zhao2012](zhao2012/README.md) | Lean + sympy | done 2026-09-30 |

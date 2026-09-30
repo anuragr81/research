@@ -240,3 +240,40 @@ were not transcribed:
 * The free sketches.
 * The Experiment VIII combination question (32 of 52 reported difficulty,
   p.274).
+
+## Lean (added 2026-09-30)
+
+This supersedes the "No Lean file is written" remarks above. Asch still states
+no formal claim; what the Lean file checks is the data the project quotes and
+the structure of Experiment VI that the audit relies on.
+
+`lean/Asch.lean` is a symlink to `lean/Literature/Asch.lean`. It is standalone
+on Mathlib and checks with `lake env lean`, with no `sorry`. Its 49 theorems are
+proved by `decide` or `rfl`; 37 use no axioms at all and 12 use only
+`propext`. Table 7 (all 72 cells) and Table 8 were transcribed again from a
+220 dpi rendering of PDF pp. 14-15 (journal pp. 271-272). The transcription
+agrees cell for cell with `sympy/check_table7.py`.
+
+| Lean theorem | Content |
+|---|---|
+| `seriesB_eq_reverse`, `seriesB_perm`, `seriesA_length`, `seriesA_nodup` | Experiment VI (p.270): six distinct stimulus terms, with Series B the reverse of Series A |
+| `checkListI_length`, `table7_rows_are_checklist_pairs` | Check List I (Table 1, p.262) has 18 pairs, and Table 7's 18 rows are those pairs in order |
+| `stimulus_disjoint_checklist`, `stimulus_disjoint_checklist_B` | **no stimulus term occurs in any check-list pair**: 6 cues and 18 response items, with no overlap (P14 / A27) |
+| `quoted_all` and eight per-trait theorems (`restrained_64_9`, …, `important_85_90`) | every Table 7 number the project quotes is correct and in the right column |
+| `d_pos_count`, `d_neg_count`, `d_ne_zero` | `d = I→E − E→I`: 14 positive, 4 negative, none zero |
+| `d_neg_exactly`, `d_neg_values` | the negative ones are exactly reliable −7, important −5, persistent −5 and serious −3 |
+| `d_sum`, `d_abs_sum`, `d_le_restrained`, `d_ge_reliable` | `Σd = 265` (mean 14.7), `Σ\|d\| = 305` (mean 16.9), range −7 (reliable) to +55 (restrained) |
+| `large_swings`, `small_moves`, `small_moves_lt_two_subjects` | the four large swings are ≥ 18 points; the four "barely move" traits are ≤ 7 points, which is less than two E→I subjects |
+| `exp7_pos_count`, `exp7_neg_count`, `exp7_zero`, `exp7_sum`, `exp7_serious` | Experiment VII: 12 positive, 5 negative, 1 zero (restrained), `Σd = 13`, and serious 44 vs 100 |
+| `table8_ie_sum`, `table8_ei_sum` | Table 8 counts sum to 34 and 24, and the printed percentages to 100 |
+| `envious_modal_rank_ie`, `envious_modal_rank_ei`, `envious_modal_share` | "envious" is modally 6th under I→E (13 of 34) and 1st under E→I (7 of 24), each a strict mode held by a minority |
+| `table8_ie_rounding`, `table8_ei_rounding` | the rounded I→E counts are `[15,12,15,9,12,38]` (total 101), not the printed `[15,11,15,9,11,39]`; the E→I column is exactly the rounded counts |
+| `ei_unattainable_count`, `ie_unattainable_count`, `ei_unattainable_examples` | 12 of 18 E→I cells and 5 of 18 I→E cells are not `round(100k/N)` for the nominal `N` |
+| `within_no_change` | the within-subject group (p.271): 14 of 24 changed, 10 did not |
+
+**What this changes in the audit.** Nothing is overturned. P13-P15 and A1-A28
+stand as summarised above. One correction to the wording of P15 in
+`notes/citation_audit.md`: it says the modal ranks are held by "39% and 29% of
+subjects". The share under I→E is 13/34 = 38%, and 39% is Asch's
+forced-rounding figure (`table8_ie_rounding`). Write "38% (printed 39%) and
+29%".

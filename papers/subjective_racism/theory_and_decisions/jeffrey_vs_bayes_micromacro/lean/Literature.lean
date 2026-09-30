@@ -1,4 +1,5 @@
 import Literature.Arrow
+import Literature.Asch
 import Literature.AugenblickRabin
 import Literature.BCGS
 import Literature.BHW
@@ -18,3 +19,5 @@ import Literature.Jeffrey
 import Literature.Phelps
 import Literature.ShmayaYariv
 import Literature.Weisberg
+import Literature.Zhao2012
+import Literature.ZhaoOsherson
