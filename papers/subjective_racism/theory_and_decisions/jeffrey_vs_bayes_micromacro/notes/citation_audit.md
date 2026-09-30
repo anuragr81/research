@@ -180,6 +180,30 @@ says otherwise), NOT-CHECKABLE (source not available).
   single-step updating on events, and its fn 2 (p. 546) leaves Jeffrey's rule
   out of scope. Neither is about order. The framing fits Cripps only.
   **Do:** reframe as "non-Bayesian updating rules" and separate Cripps.
+- [ ] **M6-M8 re-read 2026-09-30 against Ortoleva (2024), "Alternatives to
+  Bayesian Updating", Annu. Rev. Econ. 16:545-570 (Drive:
+  ortoleva_2024_annurev-economics-100223-050352.pdf).** (a) Ortoleva 2012:
+  pp. 558-560 give the Hypothesis Testing model (keep the prior and apply
+  Bayes unless pi(A) <= epsilon, then update a prior over priors and pick the
+  most likely prior) and Theorem 2 ("proved by Ortoleva (2012)"):
+  Consequentialism + Dynamic Coherence iff a minimal HT representation;
+  epsilon = 0 iff Dynamic Consistency also holds. M7's wording is accurate
+  (second-hand, by the paper's own author). (b) Epstein 2006, p. 558: a
+  temptation model in the Gul-Pesendorfer (2001) self-control framework
+  (three periods, preferences over menus, agents tempted to over- or
+  under-react), accommodating under/overreaction, base-rate neglect, sample
+  bias and representativeness. p. 548 cites Epstein (2006) for the weaker
+  normative appeal of Bayes when the *prior* is subjective. "makes the
+  updating rule subjective" is loose; suggested: "models departures from
+  Bayes' rule as temptation (Epstein 2006)". (c) The framing ("to explain
+  whether sequential conditioning is sequence-independent") is unsupported:
+  neither is a theory of order effects, and fn 2 (p. 546) puts Jeffrey's rule
+  out of scope, citing Diaconis & Zabell (1986), a different paper from the
+  1982 one. (d) Possible citation for an order effect in a non-Bayesian
+  model: Benjamin, Bodoh-Creed & Rabin (2019) on base-rate neglect, where
+  "more recent messages are given more weight" (p. 557), relevant to the
+  position channel; not in Drive. **Do:** keep M7's sentence; reword M6; drop
+  or rewrite the M8 framing; consider Benjamin et al. (2019).
 - [ ] **M9. MS:276-277, Cripps. CAVEAT + UNSUPPORTED x2.** (a) "shows that
   symmetry and divisibility jointly force sequence-independence" rests on a
   one-sentence remark after Axiom 3 (p. 9) about reversing the nested
