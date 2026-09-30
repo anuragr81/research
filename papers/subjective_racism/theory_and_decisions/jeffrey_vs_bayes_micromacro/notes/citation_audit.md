@@ -838,7 +838,7 @@ says otherwise), NOT-CHECKABLE (source not available).
   (AR only disclaim optimality). Lean header says definitions are "verbatim"
   but the paper writes pi, not theta. Drive copy is the Nov 2020 working
   paper; all numbering is working-paper numbering.
-- [ ] **L9. Shmaya-Yariv record.** (a) README:8 "Definitions 1-3 formalized":
+- [x] **L9. Shmaya-Yariv record.** (Resolved 2026-09-30: `ConjExp.Restricted` encodes Definition 2; `no_reversal_of_restricted` now concludes sigma(s) = a*, the real necessity direction of Theorem 1; notation is the paper's (alpha, tau, zeta); `alpha_depends_on_nu` proves non-restriction; `reversal_example` added. Sufficiency half and Theorems 3-4 not formalized.) (a) README:8 "Definitions 1-3 formalized":
   Definition 2 (restricted) is not encoded in the Lean (CONTRADICTED).
   (b) `no_reversal_of_restricted` is described as the necessity direction; it
   assumes the convex-combination step and concludes only equal scores, not
@@ -870,6 +870,28 @@ says otherwise), NOT-CHECKABLE (source not available).
   printed 39% only by forcing the column to 100 (`table8_ie_rounding`).
   Paper slips not used by the project: ZO p. 304 "18.45%" should be 18.05%;
   Zhao 2012's 17-of-20 binomial p is .0026, printed .01.
+- [ ] **L11 formal records (2026-09-30).** Wilson (lean/Literature/
+  Wilson.lean, 85 theorems, April 2003 draft numbering): Lemma 1, eq. (4),
+  the N = 3 optimal rule gamma*(eta) = (sqrt(2 eta - eta^2) - eta)/(1 - eta),
+  Corollary (i) lower half and (ii) at N = 3, Lemma 4, Theorem 6 (i), (iii),
+  Theorem 7 (ii) core, Theorem 4 (i) pathwise step. **Draft Theorem 5 (i) is
+  false as stated:** N = 5, j = 2, k = 4, t = 2 meets its hypothesis yet
+  polarization has probability 0 (`thm5_draft_counterexample`; also
+  (7,2,6,2), (7,3,5,4), (9,2,8,2), (9,3,7,4)); exact threshold
+  min(2j - 1, 2(N - k) + 1) (`thm5_i_corrected`). Check against the 2014
+  published version before relying on it. Project question: with one binary
+  state the association's sign is fixed by the kernel
+  (`assoc_sign_fixed`), so Wilson makes no association prediction by
+  construction. Cassell (lean/Literature/Cassell.lean, 33 theorems): later
+  input wins; her raven Figures 1-2; same posterior from different priors
+  needs different Bayes factors; reversal of inputs and of Bayes factors
+  coincide only when nothing moves; Bayes-factor updates commute; ECJC is
+  reorder-invariant. The jellybean example is Weisberg's (pp. 3-4), not
+  Cassell's; the IO:329-330 form of Lange's point is a separate theorem, not
+  the contrapositive of Cassell's; her fn 5 "just in case" fails on a single
+  partition (as Wagner 2002's section 4 example). Proposed wording for
+  IO:329-330, IO:382, WBR:49, LOG:699-701, 771-772, 828 and PLAN:1337-1338 is
+  in the two READMEs.
 - [ ] **L11. Wilson and Cassell identities.** `AndreaWilson.pdf` is the
   April 29, 2003 draft, not the 2014 Econometrica paper. `lisa_cassell.pdf` is
   Cassell, "Commutativity, Normativity, and Holism: Lange Revisited", Can. J.
@@ -993,7 +1015,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
 
   | Paper | Lean | Pass |
   |---|---|---|
-  | Augenblick-Rabin, Shmaya-Yariv | yes (SY needs Def. 2, L9) | 0 / D |
+  | Augenblick-Rabin, Shmaya-Yariv | yes | 0 / C |
   | Weisberg, Doring, Domotor, Good-Mittal, FGT, Hogarth-Einhorn | yes | 1 |
   | Cripps, Dietrich, BHW, Banerjee, Phelps, Arrow, Coate-Loury | yes | 1 |
   | Bohren-Imas-Rosenberg, Heckman, BCGS | yes | 1 |
@@ -1002,7 +1024,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Wagner 2002, Wagner 2003, Pettigrew-Weisberg | yes | A |
   | Epstein 2006, Ortoleva 2012 (via 2024 survey), Tao 2011, Becker 1962 (web copy) | yes | 2/B |
   | Asch (data), Zhao-Osherson 2010, Zhao et al. 2012 | yes | B/C |
-  | Wilson 2014, Cassell 2020 | in progress | C |
+  | Wilson 2014 (2003 draft), Cassell 2020, Shmaya-Yariv Def. 2 | yes | C |
   | Jeffrey 1988 | blocked, not in Drive | -- |
 
 ## 6. Cross-document consistency (to do after the pass)

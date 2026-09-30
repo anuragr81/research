@@ -7,6 +7,7 @@ import Literature.Banerjee
 import Literature.Becker
 import Literature.BenjaminBodohCreedRabin
 import Literature.BohrenImasRosenberg
+import Literature.Cassell
 import Literature.CoateLoury
 import Literature.Cripps
 import Literature.DiaconisZabell
@@ -30,5 +31,6 @@ import Literature.Tao
 import Literature.Wagner2002
 import Literature.Wagner2003
 import Literature.Weisberg
+import Literature.Wilson
 import Literature.Zhao2012
 import Literature.ZhaoOsherson
