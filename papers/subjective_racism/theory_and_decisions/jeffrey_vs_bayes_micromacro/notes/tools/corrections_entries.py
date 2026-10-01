@@ -161,16 +161,12 @@ arrival-sequence dependence can enter through two channels, an \textbf{associati
 channel, in which one cue changes what the other implies and which exists only when
 the attributes are believed related, and a \textbf{position} channel, in which the
 weight a cue receives depends on where in the sequence it arrives, whatever the
-attributes are \citep{HogarthEinhorn1992}. The position channel is a property of the
-evaluator rather than of the evidence. When the later cue is adopted only in part,
-every marginal registers the sequence even when the attributes are believed
-unrelated, and an audit that pools evaluators who read in different sequences records
-an association that none of them holds. The paper therefore sets the position channel
-aside until Section~\ref{sec:robust} and asks whether, when each impression is adopted
-in full, as in the successive updating of \citet{DiaconisZabell1982}, and the
-attributes are believed to go together, an audit detects the sequence dependence that
-the believed link alone produces. In the two-attribute setting with full adoption,
-the paper thus considers three coordinates of a belief,
+attributes are \citep{HogarthEinhorn1992}. In the position channel the later cue is
+adopted only in part and every marginal registers the sequence even when the
+attributes are believed unrelated. On the other hand, when each impression is adopted
+in full, as in the successive updating of \citet{DiaconisZabell1982}, the position
+channel is disabled with only the association channel remaining. In the two-attribute
+setting with full adoption, the paper thus considers three coordinates of a belief,
 the two marginal probabilities and the cross-attribute association, and explains how a
 difference from the sequence-free benchmark below the observer's precision is
 invisible in the statistic read by the observer. The question is therefore not simply
@@ -190,18 +186,12 @@ audit can or cannot measure about sequence dependence.""")],
     "and Asch is dropped (audit P10-P12); the two dashes become commas; \"decisions from them\" "
     "becomes \"the share of decisions they change\", since the loss is a decision statistic and is "
     "second order (LOS); \"and statistics\" becomes \"and the statistics that move with it\". "
-    "Scope defence (author, 2026-10-01): the position channel is a property of the evaluator, not of "
-    "the evidence, and it leaves a signature any marginal audit detects, so the paper sets it aside "
-    "and asks the question that remains when evaluators adopt a cue alike whichever position it "
-    "arrives in. Two sentences are replaced rather than added (discipline rule 4): the position "
-    "channel sentence and the \"On the other hand\" sentence, whose content the new sentences carry; "
-    "the earlier one-line full-adoption sentence is cut, its pointer to Section 6 now in the scope "
-    "sentence. Checked against rule 3: every contrast names both sides (evaluator rather than "
-    "evidence; adopted only in part against adopted in full; the believed link against the position), "
-    "no bare \"it\", no assertion of importance. Evidence for the claims: at $c=0$ the fully adopting "
-    "evaluator shows no sequence effect (IMM) and the partially adopting one shows "
-    "$(1-\\omega)(\\alpha-q_0)$ (ADJ); the pooled association at $c=0$ is "
-    "$-\\lambda(1-\\lambda)(1-\\omega)^2(\\alpha-q_0)(\\beta-r_0)$, nonzero for interior weights.",
+    "Scope defence (author, 2026-10-01): the position channel is a property of the evaluator, so the "
+    "paper sets it aside and studies the measurement problem that remains under the association "
+    "channel. The author placed the one-sentence version of this in the panel paragraph (C.5) and "
+    "the full version with its test in Section 6 (E.15), and asked for less in the introduction; "
+    "this paragraph therefore keeps the author's own two sentences on the two settings and adds "
+    "nothing.",
     "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
@@ -211,14 +201,16 @@ E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
     "(the amnestic updating concern in the literature).",
     r"""Apart from showing how the sequence dependence of some statistics can be invisible
 to an observer, the panel example also shows why that invisibility needs each
-impression to be adopted in full. The letter then fixes the belief about
-trustworthiness whatever the credential implied, so the sequence acts only through
-the believed link between the traits, and the believed association differs between
-the two sequences only at second order, whereas a letter adopted only in part moves
-that belief from wherever the credential left it and the association differs at
-first order. What remains untouched at every degree of adoption is the odds ratio,
-since each impression rescales rows or columns of the belief and never the pairing
-within them (Lemma~\ref{lem:SEP}, Section~\ref{sec:robust}).""")],
+impression to be adopted in full. When each impression is adopted in full, the
+letter fixes the belief about trustworthiness whatever the credential implied, so
+the sequence acts only through the believed link between the traits, and the
+believed association then differs between the two sequences only at second order
+(Proposition~\ref{prop:ORD}). A letter adopted only in part moves that belief from
+wherever the credential left it, and the believed association then differs at first
+order (Proposition~\ref{prop:LAD}). Since a partly adopted letter makes even
+unrelated traits sequence dependent through the position channel, the paper sets
+that channel aside and studies the measurement problem that remains under the
+association channel.""")],
     "The BEFORE sentence is false for the cross-product association, which is the paper's "
     "`assoc`: the invisibility at second order does depend on how far a later impression erases "
     "the earlier one. The author asked (2026-10-01) that C.5 say whether omega touches the main "
@@ -240,15 +232,15 @@ within them (Lemma~\ref{lem:SEP}, Section~\ref{sec:robust}).""")],
     "statistics that move with it, holds under full adoption and not otherwise; what holds at "
     "every omega is the odds ratio. \"Amnestic\" is dropped here since Hawthorne is not cited in "
     "this paragraph (writing discipline 6). The commented-out line below the paragraph states "
-    "the odds-ratio version. Trimmed after the scope defence went into C.4 (2026-10-01): the clauses "
-    "on ratings of unrelated traits and on the pooled association now live there, and rule 5 "
-    "allows each point once; what stays is the mechanism in the vignette's terms, the contrast "
-    "between full and partial adoption, and the odds ratio. Before that, AFTER was the author's "
-    "rephrasing of 2026-10-01 with four changes: "
-    "\"the panel\" to \"the panel example\", \"or not\" dropped after \"whether\", the double hyphen "
-    "before \"since\" replaced by a comma (writing discipline 9), and \"in both full and partial "
-    "adoption\" to \"at every degree of adoption\", since no adoption is a case too; the references "
-    "are added.",
+    "the odds-ratio version. AFTER is the author's paragraph ending of 2026-10-01 with these "
+    "changes: \"this means that\" folded into the previous sentence (rule 3, no bare \"this\"); the "
+    "hyphen before \"see Proposition LAD\" replaced by a clause with the reference (rule 9); \"On the "
+    "other hand\" dropped, the contrast being carried by \"adopted in full\" against \"adopted only "
+    "in part\"; the last sentence repaired (\"sequence dependence\", \"the paper focuses\", \"position "
+    "channel\", \"the association channel\") and made the one place in the introduction that "
+    "states the scope defence. The odds-ratio sentence is dropped at the author's choice (less in "
+    "the introduction); the odds ratio's exact invariance at every weight stays in Section 6. "
+    "Proposition ORD must be applied (E.10) before this reference resolves.",
     "PropIMM.lean; PropORD.lean; PropDEC.lean; Ladder.lean (`ladder_gap`, `ladder_gap_mA1`, "
     "`ladder_assoc_coeff`, `ladder_assoc_coeff_witness`, `oddsRatio_rescale`, "
     "`jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`); LemmaSEP.lean (general N, any "
