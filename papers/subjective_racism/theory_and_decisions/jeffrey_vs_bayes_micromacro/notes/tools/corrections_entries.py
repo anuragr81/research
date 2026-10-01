@@ -174,10 +174,11 @@ whether the two sequences agree but by how much they disagree in an arbitrary
 statistic. The paper finds that the marginal probabilities and the share of decisions
 they change carry the difference at first order in the prior covariance, while the
 believed association and the statistics that move with it carry it only at second
-order. When the later cue is adopted only in part, as in the belief-adjustment
-model, the marginals and the believed association both register the sequence one
-order earlier in the prior covariance, the marginals still ahead of the association,
-and the odds ratio between the attributes is the same whichever cue is read first at
+order. These second-order results require full adoption of the later cue. Whether
+a population adopts in full can be read from its ratings
+(Proposition~\ref{prop:ADJ}), and when it does not, as in the belief-adjustment
+model, the believed association differs between the sequences at first order while
+the odds ratio between the attributes is the same whichever cue is read first at
 every degree of adoption (Proposition~\ref{prop:LAD}). This carries clear implications for what an
 audit can or cannot measure about sequence dependence.""")],
     "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
@@ -190,14 +191,15 @@ audit can or cannot measure about sequence dependence.""")],
     "and Asch is dropped (audit P10-P12); the two dashes become commas; \"decisions from them\" "
     "becomes \"the share of decisions they change\", since the loss is a decision statistic and is "
     "second order (LOS); \"and statistics\" becomes \"and the statistics that move with it\". "
-    "Added sentence (author's decision of 2026-10-01 to keep the adoption weight as the nesting "
-    "of the belief-adjustment model): it answers the objection that full and no adoption are not "
-    "the only options. Under partial adoption the marginals differ between sequences at order zero "
-    "in $c$, protected statistics at first order, statistics whose differential at independence is "
-    "a multiple of that of the log odds ratio at second order, and the odds ratio not at all. "
-    "\"In the belief-adjustment model\" is accurate because the adoption-weight rule is "
-    "Hogarth-Einhorn's averaging form (Eq. 4) applied to the second cue (E.10). The sentence "
-    "needs Proposition LAD (E.10).",
+    "Added sentences (author's decisions of 2026-10-01, to keep the adoption weight as the nesting "
+    "of the belief-adjustment model and to present the results as conditional on full adoption "
+    "rather than robust to its failure): they say that the second-order results require full "
+    "adoption, that Proposition ADJ tests for it from three marginals of one reading group, and "
+    "what Proposition LAD gives otherwise. Under partial adoption the marginals differ between "
+    "sequences at order zero in $c$, the association at first order, and the odds ratio not at "
+    "all. \"In the belief-adjustment model\" is accurate because the adoption-weight rule is "
+    "Hogarth-Einhorn's averaging form (Eq. 4) applied to the second cue (E.15). The sentences need "
+    "Propositions ADJ and LAD (E.15).",
     "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
@@ -573,7 +575,7 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.9.3": "names the belief-adjustment model the weight nests",
                             "E.13.1": "names the two new propositions",
                             "E.15.1": "adds the Scope subsection heading",
-                            "E.15.2": "adds the robustness clause to the roadmap",
+                            "E.15.2": "adds the full-adoption clause to the roadmap",
                             "C.2.5": "repairs a sentence with two verbs",
                             "C.10.1": "citation fix", "C.11.8": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",

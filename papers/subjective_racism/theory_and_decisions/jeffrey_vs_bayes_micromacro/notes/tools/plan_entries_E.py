@@ -441,7 +441,7 @@ E2.append(("E.12", "Folded into E.15 (was 6.B)", [],
     "there. Kept as a number so that earlier references to E.12 resolve.",
     "See E.15."))
 
-E2.append(("E.15", "Section 6, the robustness subsection (new; ADJ and LAD from E.10, E.12 folded in, Proposition FAC added)", [
+E2.append(("E.15", "Section 6, the partial-adoption subsection (new; ADJ and LAD from E.10, E.12 folded in, Proposition FAC added)", [
     ("We now revisit how Assumptions~\\ref{as:localc}--\\ref{as:surplus} in Section~\\ref{sec:assumptions} define scope for any conclusions made from the model.",
      "We now revisit how Assumptions~\\ref{as:localc}--\\ref{as:surplus} in Section~\\ref{sec:assumptions} define scope for any conclusions made from the model.",
      r"""\subsection{Scope}\label{sec:scope-assumptions}
@@ -452,16 +452,21 @@ model."""),
     ("Section~\\ref{sec:scope} states the scope of results and limitations that would break the results.",
      "Section~\\ref{sec:scope} states the scope of results and limitations that would break the results.",
      r"""Section~\ref{sec:scope} states the scope of the results and the limitations that
-would break them, and shows which of them survive partial adoption of the later cue
-and a factor reading of the cues."""),
+would break them, shows that the second-order results require full adoption of the
+later cue, and gives a test of that condition from the ratings."""),
     ("insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
-     r"""\subsection{Robustness to partial adoption and to factor inputs}\label{sec:robust}
+     r"""\subsection{Partial adoption and factor inputs}\label{sec:robust}
 \par
 The results of Sections~\ref{sec:individual} and~\ref{sec:aggregation} rest on two
 premises about a cue. It delivers a credence on its own attribute rather than a
-factor, and the credence is adopted in full. This subsection relaxes each premise
-in turn and asks which statistics still register the sequence only at second order,
-and which never do. Table~\ref{tab:robust} collects the answers.
+factor, and the credence is adopted in full. The second-order results hold only
+under the second premise. Whether a population meets it can be read from its
+ratings, since Proposition~\ref{prop:ADJ} below recovers the adoption weight from
+three marginals of one reading group, and Propositions~\ref{prop:LAD}
+and~\ref{prop:FAC} say what to expect when it is not met, under either reading of
+the cues. What partial adoption leaves in place is the odds ratio, which is the same
+in both sequences at every weight, and a second-order class of statistics that no
+longer contains the association. Table~\ref{tab:robust} collects the answers.
 \par
 \paragraph{The two channels.} Sequence dependence has two channels in this
 setting, and the results of Sections~\ref{sec:individual} and~\ref{sec:aggregation}
@@ -829,25 +834,32 @@ the association channel with it when the attributes are believed related.}
 \end{table}""")],
     "Placement (2026-10-01). The author's Section 6 is already titled \"Scope and robustness\", so the "
     "section is split into two subsections. Scope keeps the assumptions paragraph and the rival "
-    "mechanisms of E.11. Robustness relaxes the two premises the results rest on, that a cue "
-    "delivers a credence and that the credence is adopted in full, and it is where the adoption "
-    "weight does its work; Sections 4 and 5 then state the results under the premises and nothing "
-    "else. Part 1 adds the Scope heading and repairs \"define scope for any conclusions made from "
-    "the model\". Part 2 adds the robustness clause to the roadmap. Parts 3 to 9 are the new subsection, one insertion after E.11 shown as "
-    "consecutive paragraphs so that the plan can break pages between them. What it gathers: the two-channel paragraph of E.12 unchanged; the "
-    "adoption-weight lead-in, Proposition ADJ, its example and Proposition LAD from E.10, with "
-    "\"so far\" replaced by the section references; the rubric prediction and the settings table of "
-    "E.12 unchanged. What is new: the framing paragraph, Proposition FAC and Table tab:robust. "
-    "Proposition FAC is the factor-input counterpart of LAD. Its weighted factor $a^\\omega$ is a "
-    "construction of this paper, log-linear damping of the factor, not one of Hawthorne's variants; "
-    "his variants are the $\\omega=1$ column, where updates on distinct bases commute. The Lean "
-    "record proves FAC for an arbitrary damped factor $a'$ and states the marginal agreement as "
-    "$a_1a_0'=a_0a_1'$; the power form and its witnesses are in the sympy suite. Table tab:robust "
-    "puts the four settings side by side; its decision rows for the partial-adoption columns are "
-    "Theorem LOS read with an order-zero score gap and are the only entries not checked by sympy, "
-    "as the caption says. Two tables now sit in the subsection; the author may drop tab:settings "
-    "if tab:robust carries enough. Order of application: after E.10 (ORD) and E.11; before C.4, "
-    "C.5 and C.9, which cite LAD or sec:robust; E.13 after it.",
+    "mechanisms of E.11. The second subsection states that the second-order results require full "
+    "adoption of the later cue, gives the test of that condition (Proposition ADJ, three marginals "
+    "of one reading group) and says what partial adoption and a factor reading change "
+    "(Propositions LAD and FAC). It is not a robustness result and is not called one (author, "
+    "2026-10-01): under partial adoption the association differs between sequences at first "
+    "order and the pooled association acquires a term of order zero, so the paper's second-order "
+    "conclusions do not survive; what survives is the odds ratio, exact at every weight, and the "
+    "form of the characterisation, with the second-order class moving to the statistics that "
+    "agree with the log odds ratio to first order. The author may want to drop \"and robustness\" "
+    "from the section title. Part 1 adds the Scope heading and repairs \"define scope for any "
+    "conclusions made from the model\". Part 2 adds the clause to the roadmap. Parts 3 to 9 are "
+    "the new subsection, one insertion after E.11 shown as consecutive paragraphs so that the "
+    "plan can break pages between them. What it gathers: the two-channel paragraph of E.12 "
+    "unchanged; the adoption-weight lead-in, Proposition ADJ, its example and Proposition LAD "
+    "from E.10, with \"so far\" replaced by the section references; the rubric prediction and the "
+    "settings table of E.12 unchanged. What is new: the framing paragraph, Proposition FAC and "
+    "Table tab:robust. Proposition FAC is the factor-input counterpart of LAD. Its weighted factor "
+    "$a^\\omega$ is a construction of this paper, log-linear damping of the factor, not one of "
+    "Hawthorne's variants; his variants are the $\\omega=1$ column, where updates on distinct bases "
+    "commute. The Lean record proves FAC for an arbitrary damped factor $a'$ and states the "
+    "marginal agreement as $a_1a_0'=a_0a_1'$; the power form and its witnesses are in the sympy "
+    "suite. Table tab:robust puts the four settings side by side; its decision rows for the "
+    "partial-adoption columns are Theorem LOS read with an order-zero score gap and are the only "
+    "entries not checked by sympy, as the caption says. Two tables now sit in the subsection; the "
+    "author may drop tab:settings if tab:robust carries enough. Order of application: after E.10 "
+    "(ORD) and E.11; before C.4, C.5 and C.9, which cite LAD or sec:robust; E.13 after it.",
     "Ladder.lean: `rescale_rescale`, `rescale_rescale_eq`, `assoc_normalize`, `oddsRatio_normalize`, "
     "`oddsRatio_factorRoute`, `assoc_factorRoute`, `factorRoute_at_zero`, `factorRoute_mA1_zero`, "
     "`factor_mA1_gap_iff`, `mprod_factorRoute_zero`, `oddsShadow_factor_coeff` (FAC); `ladder_gap`, "

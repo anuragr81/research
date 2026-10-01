@@ -12,13 +12,15 @@ earlier in $c$ without changing their ranking,
 the odds ratio is the same in both sequences at every weight, and the share-versus-loss
 separation holds only under full adoption. Entries below that say the classification is
 "moot" or "no longer measures what it was built to measure" under partial adoption are
-refuted; their current versions are E.10 (Proposition ORD), E.15 (the robustness
+refuted; their current versions are E.10 (Proposition ORD), E.15 (the partial-adoption
 subsection of Section 6, holding Propositions ADJ, LAD and the new FAC on factor inputs,
 the two channels, the rubric prediction and the settings table), C.4, C.5 and C.9 of
 `notes/manuscript_corrections.tex`, which supersede 5.B, 6.B, 1.A2 and the $\omega$
 clause of 1.D. Later the same day the adoption-weight material was moved out of
-Section 5 into that robustness subsection, so that Sections 4 and 5 state the results
-under full adoption and Section 6 relaxes it.
+Section 5 into that subsection, so that Sections 4 and 5 state the results under full
+adoption and Section 6 says that they require it, tests for it (ADJ) and says what
+partial adoption changes (LAD, FAC). The author chose this framing over "robustness",
+since the second-order association result fails for every weight below one.
 
 The entries below are kept as an archive until re-issued there. **No change here has been applied to the manuscript.** Every AFTER block is paste-ready LaTeX. Line numbers in the headings are
 from the original plan and are stale; locate each edit by its BEFORE text.
@@ -1108,8 +1110,8 @@ definition.
 ## 5.B -- Section 5: new definition + Proposition ORD (insert after line 440) (formerly Change 6)
 
 *Status 2026-10-01: Proposition ORD is re-issued as E.10 of the tex plan. Proposition
-ADJ, with the new Propositions LAD and FAC, now lives in E.15, the robustness subsection
-of Section 6.*
+ADJ, with the new Propositions LAD and FAC, now lives in E.15, the partial-adoption
+subsection of Section 6.*
 
 **Purpose.** State how the sequence effect, already defined on the joint
 belief, behaves when read through a statistic. No new definition is introduced;
@@ -1387,7 +1389,7 @@ family is stated through Hogarth-Einhorn's own equation, which is already cited.
 
 ## 6.B -- Scope: the two channels, and opposite predictions about one procedure (pointer)
 
-*Status 2026-10-01: re-issued as E.12, then folded into E.15 (the robustness subsection of
+*Status 2026-10-01: re-issued as E.12, then folded into E.15 (the partial-adoption subsection of
 Section 6) the same day. Its claim that the
 classification by order in $c$ "no longer measures what it was built to measure" under
 partial adoption, and the table row calling it "moot", are refuted

@@ -26,19 +26,24 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   share-versus-loss separation holds only under full adoption.
 - [~] **Approve the reworked entries:** C.1 to C.4 (rebased on c2ae782f, residual
   corrections only), C.5, C.9 part 3, E.10 (now Proposition ORD alone), E.15 (the new
-  robustness subsection of Section 6: two channels, ADJ, LAD, the new Proposition FAC on
+  partial-adoption subsection of Section 6: two channels, ADJ, LAD, the new Proposition FAC on
   factor inputs, Table tab:robust, the rubric prediction and the settings table; E.12 is
   folded into it). Order: E.10, E.11, E.15, then C.4, C.5, C.9, E.13.
-- [ ] **Robustness subsection (added 2026-10-01).** Section 6 keeps the author's title
-  "Scope and robustness" and splits into Scope (assumptions paragraph, E.11) and
-  Robustness (E.15). Proposition FAC: under factor inputs, full adoption commutes
-  (the benchmark) and a factor adopted in part, $a^\omega$, re-opens the position
-  channel with the same ranking as under credences. Verified: `verify_ladder.py` section
-  F (53/53 in all), Ladder.lean factor-input theorems (the Lean proves the damped-factor
-  form for an arbitrary $a'$; the power form is sympy). The weighted factor is this
-  paper's construction, not one of Hawthorne's variants; the text says so.
-- [ ] Two tables in the robustness subsection (tab:robust, tab:settings); the author may
-  drop tab:settings.
+- [ ] **Partial-adoption subsection (added 2026-10-01, reframed the same day).** Section 6
+  keeps the author's title "Scope and robustness" and splits into Scope (assumptions
+  paragraph, E.11) and "Partial adoption and factor inputs" (E.15). Framing decided by the
+  author: the second-order results require full adoption; Proposition ADJ tests for it from
+  three marginals of one reading group; Propositions LAD and FAC say what partial adoption
+  and a factor reading change. Not presented as robustness, since the association's
+  second-order result fails for every $\omega<1$. Proposition FAC: under factor inputs, full
+  adoption commutes (the benchmark) and a factor adopted in part, $a^\omega$, re-opens the
+  position channel. Verified: `verify_ladder.py` section F (53/53 in all), Ladder.lean
+  factor-input theorems (the Lean proves the damped-factor form for an arbitrary $a'$; the
+  power form is sympy). The weighted factor is this paper's construction, not one of
+  Hawthorne's variants; the text says so.
+- [ ] The author may drop "and robustness" from the Section 6 title.
+- [ ] Two tables in the partial-adoption subsection (tab:robust, tab:settings); the author
+  may drop tab:settings.
 - [ ] The decision rows of tab:robust and tab:settings and the paragraph after LAD's
   proof (share and loss of order zero under partial adoption) are the LOS integral read
   with an order-zero gap, not a sympy row. Add a check if the author wants it verified
