@@ -210,18 +210,15 @@ E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
     "In demonstrating how the sequence-dependence of certain statistics can be invisible",
     "(the amnestic updating concern in the literature).",
     r"""Apart from showing how the sequence dependence of some statistics can be invisible
-to an observer, the panel example also answers whether this invisibility depends on
-how far the later impression erases the earlier one. When each impression is adopted
-in full, the letter fixes the belief about trustworthiness whatever the credential
-implied, so the sequence acts only through the believed link between the traits, and
-the believed association differs between the two sequences only at second order.
-When the letter is adopted only in part, the sequence directly influences which
-document is discounted. Both ratings then differ even when the traits are believed
-unrelated, the believed association differs at first order, and panels pooled across
-sequences show an association none of them holds. As the paper shows, what remains
-untouched at every degree of adoption is the odds ratio, since each impression
-rescales rows or columns of the belief and never the pairing within them
-(Lemma~\ref{lem:SEP}, Section~\ref{sec:robust}).""")],
+to an observer, the panel example also shows why that invisibility needs each
+impression to be adopted in full. The letter then fixes the belief about
+trustworthiness whatever the credential implied, so the sequence acts only through
+the believed link between the traits, and the believed association differs between
+the two sequences only at second order, whereas a letter adopted only in part moves
+that belief from wherever the credential left it and the association differs at
+first order. What remains untouched at every degree of adoption is the odds ratio,
+since each impression rescales rows or columns of the belief and never the pairing
+within them (Lemma~\ref{lem:SEP}, Section~\ref{sec:robust}).""")],
     "The BEFORE sentence is false for the cross-product association, which is the paper's "
     "`assoc`: the invisibility at second order does depend on how far a later impression erases "
     "the earlier one. The author asked (2026-10-01) that C.5 say whether omega touches the main "
@@ -243,7 +240,11 @@ rescales rows or columns of the belief and never the pairing within them
     "statistics that move with it, holds under full adoption and not otherwise; what holds at "
     "every omega is the odds ratio. \"Amnestic\" is dropped here since Hawthorne is not cited in "
     "this paragraph (writing discipline 6). The commented-out line below the paragraph states "
-    "the odds-ratio version. AFTER is the author's rephrasing of 2026-10-01 with four changes: "
+    "the odds-ratio version. Trimmed after the scope defence went into C.4 (2026-10-01): the clauses "
+    "on ratings of unrelated traits and on the pooled association now live there, and rule 5 "
+    "allows each point once; what stays is the mechanism in the vignette's terms, the contrast "
+    "between full and partial adoption, and the odds ratio. Before that, AFTER was the author's "
+    "rephrasing of 2026-10-01 with four changes: "
     "\"the panel\" to \"the panel example\", \"or not\" dropped after \"whether\", the double hyphen "
     "before \"since\" replaced by a comma (writing discipline 9), and \"in both full and partial "
     "adoption\" to \"at every degree of adoption\", since no adoption is a case too; the references "
