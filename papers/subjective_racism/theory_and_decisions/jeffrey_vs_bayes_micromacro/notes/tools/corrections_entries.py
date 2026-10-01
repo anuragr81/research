@@ -292,7 +292,8 @@ the"""),
      "the credential's implication is never moved.",
      r"""To compare full adoption with the belief-adjustment model of
 \citet{HogarthEinhorn1992}, in which a later impression is adopted only in part, we
-also consider an adoption weight $\omega\in[0,1]$, which denotes how far the letter
+also consider an adoption weight $\omega\in[0,1]$ (Section~\ref{sec:robust}), which
+denotes how far the letter
 displaces what the credential had already implied about trustworthiness. At
 $\omega=1$ the letter sets the rating outright, and at $\omega=0$ the credential's
 implication is never moved.""")],
@@ -473,7 +474,10 @@ for eid, title, pairs, purpose, verif in E + E2:
         kind, s, e, after = norm_part(part)
         before = cut(s, e)
         tag = f" ({k} of {len(pairs)})" if len(pairs) > 1 else ""
-        out.append(f"**BEFORE{tag}:**\n\n{quote(before)}\n")
+        if kind == "insert_cont":
+            out.append(f"**BEFORE{tag}:** continues the insertion of the previous part.\n")
+        else:
+            out.append(f"**BEFORE{tag}:**\n\n{quote(before)}\n")
         out.append(f"**AFTER{tag}:**\n\n{block(after)}\n")
     out.append(f"**Verification.** {verif}\n")
     if eid == "C.11":
@@ -556,6 +560,9 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.4.1": "adds the partial-adoption sentence (Proposition LAD)",
                             "C.5.1": "adds what survives partial adoption (Proposition LAD)",
                             "C.9.3": "names the belief-adjustment model the weight nests",
+                            "E.13.1": "names the two new propositions",
+                            "E.15.1": "adds the Scope subsection heading",
+                            "E.15.2": "adds the robustness clause to the roadmap",
                             "C.2.5": "repairs a sentence with two verbs",
                             "C.10.1": "citation fix", "C.11.8": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",

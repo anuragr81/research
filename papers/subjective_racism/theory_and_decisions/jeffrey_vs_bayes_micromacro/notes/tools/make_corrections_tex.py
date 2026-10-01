@@ -41,6 +41,9 @@ def latex_cell(t):
     # a floating table cannot sit inside a longtable cell: unwrap it
     t = re.sub(r"\\begin\{table\}(\[[^\]]*\])?\s*\\centering\s*", "", t)
     t = re.sub(r"\\caption\{(.*?)\}\s*\\label\{[^}]*\}\s*\\end\{table\}", r" \\par\\textit{Table caption: \1}", t)
+    # a sectioning command cannot sit inside a table cell: show a heading stand-in
+    t = re.sub(r"\\subsection\{([^}]*)\}(\\label\{[^}]*\})?",
+               r"\\textsc{subsection heading}\\par\\textbf{\\large \1}\\par ", t)
     t = t.replace("p{2.6cm}p{5.4cm}p{5.4cm}", "p{2.2cm}p{4.6cm}p{4.6cm}")
     t = re.sub(r"\\paragraph\{([^}]*)\}", r"\\textbf{\1} ", t)
     t = re.sub(r"\\section\{([^}]*)\}", r"\\textit{Section title:} \\textbf{\1}", t)
@@ -91,6 +94,8 @@ def rows_for(entries):
             n = f"{k}/{len(pairs)}" if len(pairs) > 1 else ""
             if kind == "insert_para":
                 before = "\\textit{New paragraph(s) after the paragraph containing} ``" + before + "''"
+            elif kind == "insert_cont":
+                before = "\\textit{Continues the insertion of the previous part.}"
             rows.append(f"{n} & {latex_cell(before)} & {latex_cell(after)} \\\\ \\hline")
         if not pairs:
             rows.append(f" & \\multicolumn{{2}}{{p{{24.6cm}}|}}{{\\textit{{No manuscript text; see Why.}}}} \\\\ \\hline")

@@ -314,7 +314,7 @@ and a statistic's order is fixed by its differential on that plane
     "result. Presupposes E.10.",
     "PropPRO.lean (annihilator_eq_span, propPRO_uniqueness); PropORD.lean."))
 
-E2.append(("E.10", "Section 5, Propositions ORD and ADJ after the definition of protection (was 5.B)", [
+E2.append(("E.10", "Section 5, Proposition ORD after the definition of protection (was 5.B, ADJ moved to E.15)", [
     ("insert_para", r"\emph{unprotected} if that distortion is first order, $\bigO(c)$.", r"\emph{unprotected} if that distortion is first order, $\bigO(c)$.",
      r"""The distortion compares the population average with the benchmark. The same
 classification can be reached without either ingredient, by reading the sequence
@@ -370,8 +370,133 @@ across an open set of priors $\kappa$ and $\kappa'$ vary independently, so
 either vanishes identically exactly when
 $\langle\nabla F,R_1\rangle=\langle\nabla F,R_2\rangle=0$.
 \end{proof}
+"""),
+    ("A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place.",
+     "A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place.",
+     r"""A particularly surprising finding is that for a smooth statistic of the belief,
+the answer is settled before any averaging over the aggregate takes place
+(Proposition~\ref{prop:ORD}).""")],
+    "Plan 5.B, mathematics unchanged, prose corrected. Only Proposition ORD stays in Section 5, "
+    "where it belongs with the classification at full adoption. The adoption-weight material, "
+    "Proposition ADJ with its worked example and Proposition LAD, moves to the robustness "
+    "subsection of Section 6 (E.15, 2026-10-01), so that Sections 4 and 5 state the results "
+    "under the two premises and Section 6 relaxes them. Colons before displays are kept; colons "
+    "in prose are replaced. ORD must go in before E.1, E.5, E.6, E.7, E.9, E.11 and E.15, which "
+    "cite it.",
+    "PropORD.lean (lemmaORD_gap, propORD_Amarg, propORD_Bmarg, propORD_const); "
+    "verify_ORD.py (25/25)."))
+
+E2.append(("E.11", "Scope, rival mechanisms (was 6.A)", [(
+    "insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
+    r"""A separate scope question concerns rival mechanisms rather than broken
+assumptions. Sequence effects have an explanation that competes with full adoption.
+In the belief-adjustment model of \citet{HogarthEinhorn1992}, when the first cue is
+adopted in full and later cues only in part the first impression is protected, and
+at zero adoption of later cues it is never moved, whereas when every cue is adopted
+only in part from a prior anchor the same model predicts recency. That first
+account and full adoption point in opposite directions, since the protected
+impression is the first one there and the last one here. An observable separates
+them. Under partial adoption of the second cue with weight $\omega$
+(Proposition~\ref{prop:ADJ}), the marginal that ignores the prior association is
+the last-read one at $\omega=1$, the first-read one at $\omega=0$, and neither in
+between. A reading on which neither marginal ignores the association is consistent
+with an interior weight and with the benchmark alike; the two are separated by the
+sequence comparison, under which the benchmark shows no sequence effect at any $c$
+and an interior weight shows one already at $c=0$ (Proposition~\ref{prop:ADJ}).
+Since every rule here is a separable reweighting, all of them carry the prior's
+odds ratio (Lemma~\ref{lem:SEP}), so the odds ratio separates none of them and the
+two marginals are the only statistics that do. Three cautions bound the claim. The
+classification covers this one-parameter family, not every conceivable mechanism.
+\citet{Asch1946} is evidence that sequence moves marginals, six stimulus terms read
+in two sequences moving the proportions on eighteen response traits, and not
+evidence for either endpoint, since his own account is that early terms set a
+direction for the reading of later ones, so that what a later cue delivers depends
+on its position, a mechanism outside the family here, in which each cue delivers
+the same credence in either position. And full adoption is a substantive
+commitment rather than a consequence of the level reading. \citet{Hawthorne2004}
+objects that it ``seems implausible that the most recent experience or
+non-propositional state should completely dictate belief strengths for basis
+sentences, with no regard for the import of previous experiences or states''. The
+objection applies here, and his own two-basis example shows the overwriting
+explicitly, so that the credential's implication for trustworthiness is erased
+once the letter fixes that attribute. The adoption weight is his objection stated
+as a parameter, and the reply offered here is not that the objection misses but
+that the weight is recovered from three ratings of one marginal rather than
+assumed.""")],
+    "Plan 6.A with the audit applied. P10, the belief-adjustment model protects the first "
+    "impression only when the first cue is the anchor and later cues are partly adopted; damping "
+    "every cue gives recency, so the rival is stated as that case. P14, Experiment VI has six "
+    "stimulus terms and eighteen response traits. P9, Hawthorne's objection follows his "
+    "two-basis medical example, so the claim that his illustration misses a one-cue-per-attribute "
+    "model is dropped. The recovery uses three ratings of one marginal (plan's own correction). "
+    "Colon removed. Goes after the scope paragraph, inside the Scope subsection that E.15 "
+    "opens, and before E.15.",
+    "HogarthEinhorn.lean (eq8_estimation_first_dominates, appB_recency, twoAttr_oneSided_orderEffect); "
+    "Anchoring.lean; Asch.lean (seriesA_length, checkListI_length); Hawthorne.lean "
+    "(med_overwrite; quotation pp. 98-99 verbatim)."))
+
+E2.append(("E.12", "Folded into E.15 (was 6.B)", [],
+    "The two-channel paragraph, the rubric prediction and the settings table of this entry now "
+    "form part of the robustness subsection in E.15 (2026-10-01), with the corrections recorded "
+    "there. Kept as a number so that earlier references to E.12 resolve.",
+    "See E.15."))
+
+E2.append(("E.15", "Section 6, the robustness subsection (new; ADJ and LAD from E.10, E.12 folded in, Proposition FAC added)", [
+    ("We now revisit how Assumptions~\\ref{as:localc}--\\ref{as:surplus} in Section~\\ref{sec:assumptions} define scope for any conclusions made from the model.",
+     "We now revisit how Assumptions~\\ref{as:localc}--\\ref{as:surplus} in Section~\\ref{sec:assumptions} define scope for any conclusions made from the model.",
+     r"""\subsection{Scope}\label{sec:scope-assumptions}
 \par
-The two sequences so far adopt each delivered credence in full. Suppose instead
+We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in
+Section~\ref{sec:assumptions} define the scope of the conclusions drawn from the
+model."""),
+    ("Section~\\ref{sec:scope} states the scope of results and limitations that would break the results.",
+     "Section~\\ref{sec:scope} states the scope of results and limitations that would break the results.",
+     r"""Section~\ref{sec:scope} states the scope of the results and the limitations that
+would break them, and shows which of them survive partial adoption of the later cue
+and a factor reading of the cues."""),
+    ("insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""\subsection{Robustness to partial adoption and to factor inputs}\label{sec:robust}
+\par
+The results of Sections~\ref{sec:individual} and~\ref{sec:aggregation} rest on two
+premises about a cue. It delivers a credence on its own attribute rather than a
+factor, and the credence is adopted in full. This subsection relaxes each premise
+in turn and asks what remains of the ranking of statistics. Table~\ref{tab:robust}
+collects the answers.
+\par
+\paragraph{The two channels.} Sequence dependence has two channels in this
+setting, and the results of Sections~\ref{sec:individual} and~\ref{sec:aggregation}
+concern one of them. One is the association channel. A cue on one attribute moves
+the belief about the other through the prior association, so the second cue meets
+a belief the first has already changed. The association channel's effect is first
+order in $c$ and vanishes at independence, where each cue sets its own marginal and
+touches nothing else (Proposition~\ref{prop:IMM}). The other is the position
+channel. If the cue read second is adopted only in part, then which cue is weakened
+depends on the sequence, and the two sequences differ even at $c=0$, by
+$(1-\omega)(\alpha-q_0)$ on the competence marginal and $-(1-\omega)(\beta-r_0)$ on
+the trustworthiness marginal. The position channel is not a feature of updating on
+delivered credences. A Bayes-factor update that gives the second cue's factor the
+weight $\omega$ is sequence-dependent in the same way, since commutation requires
+the same factor in either position \citep{Wagner2002}. Under full adoption the
+position channel is absent and the association channel is the only one, which is
+the setting of the results. Under partial adoption the position channel is present
+at $c=0$ and moves every marginal at order zero, while the believed association
+still does not differ between sequences at $c=0$ and differs at first order
+(Proposition~\ref{prop:LAD}). The classification by order in $c$ shifts by one order
+without changing the ranking of statistics, and the odds ratio is the same in both
+sequences at every weight. The mean belief of a population mixing the two sequences
+acquires a cross-product association of
+$-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member holds, and the
+separation between the share of decisions changed and the loss is lost. What the
+paper says about the position channel is confined to Propositions~\ref{prop:ADJ}
+and~\ref{prop:LAD}, the first recovering its strength from the ratings and the
+second stating what it does to the ranking. The
+position channel is a temporal bias of the observer, present whether or not the
+attributes are believed related, while the association channel runs through what
+one cue implies about the other and exists only when they are.
+Table~\ref{tab:settings} sets the two settings side by side."""),
+    ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""\paragraph{Partial adoption.} The two sequences of Sections~\ref{sec:individual} and~\ref{sec:aggregation} adopt
+each delivered credence in full. Suppose instead
 that the second cue is adopted only in part, so that after the first Jeffrey step
 the response to the second cue is a Jeffrey step on its partition to the target
 $(1-\omega)\,m+\omega\,r_1$, where $m$ is the marginal the first step left and
@@ -447,9 +572,9 @@ For $P^{A}(B{=}1)\neq r_1$ the first line gives
 \par
 In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the credential
 first rates trustworthiness at $.56$ before the letter, the letter alone delivers
-$.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$.
-\par
-Proposition~\ref{prop:ADJ} reads the weight from the ratings. The next result says
+$.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$."""),
+    ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""Proposition~\ref{prop:ADJ} reads the weight from the ratings. The next result says
 what the weight does to the ranking of statistics. A statistic is \emph{protected
 for every pair of cues} if its differential at every independent belief is a
 multiple of the differential of the association, the condition of
@@ -521,121 +646,89 @@ adoption an evaluator's score departs from the benchmark's at order zero, and th
 share of decisions the sequence changes and the surplus-weighted loss are then both
 of order zero. The separation of Theorem~\ref{thm:LOS} is a property of full
 adoption."""),
-    ("A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place.",
-     "A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place.",
-     r"""A particularly surprising finding is that for a smooth statistic of the belief,
-the answer is settled before any averaging over the aggregate takes place
-(Proposition~\ref{prop:ORD}).""")],
-    "Plan 5.B, mathematics unchanged, prose corrected. P10/P11, the one-sided damping is "
-    "Hogarth-Einhorn's own end-of-sequence form (their Eq. 8) for two items with a constant "
-    "weight, not a construction of ours; what is new is the two-attribute Jeffrey embedding. "
-    "The adoption weight is now defined in Setup (author's draft; C.9), so the lead-in refers "
-    "there. Colons before displays are kept; colons in prose are replaced. The closing example "
-    "sentence is plan 2.B's optional sentence. Proposition LAD (added 2026-10-01, after the "
-    "author decided to keep omega as the nesting of the belief-adjustment model) states what "
-    "partial adoption does to the ranking of statistics: one order earlier for every belief "
-    "statistic except the odds ratio, ranking unchanged, odds ratio blind at every weight. \"Protected for every pair "
-    "of cues\" is needed because PRO's condition at $q\\otimes r$ alone does not survive the "
-    "move to $q\\otimes t$; a statistic built from the cue values can be protected at one point "
-    "and move at order zero. The decision paragraph after the proof is the LOS integral read "
-    "with an order-zero score gap; it is not in the sympy suite. "
-    "Both propositions must go in before E.1, E.5, "
-    "E.6, E.7, E.9, E.11, E.12 and C.5, which cite them.",
-    "PropORD.lean (lemmaORD_gap, propORD_Amarg, propORD_Bmarg, propORD_const); "
-    "verify_ORD.py (25/25); Anchoring.lean (dampedB_deviation, routeDamped_mA1_deviation, "
-    "orderEffect_damped_mA1, orderEffect_damped_at_indep, dampedB_at_one, dampedB_at_zero, "
-    "routeDamped_at_zero_pins_A); check_zero_slope_identification.py (25/25); "
-    "verify_example.py (the omega = 1/2 read-back); HogarthEinhorn.lean (oneSided_eq_eq8). "
-    "Proposition LAD: Ladder.lean (`jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`, "
-    "`assoc_rescale`, `oddsRatio_rescale`, `assoc_routeDamped`, `routeDamped_at_zero`, "
-    "`ladder_gap`, `ladder_gap_mA1`, `kAB_at_zero`, `ladder_assoc_coeff`, "
-    "`ladder_assoc_coeff_witness`, `ladder_oddsShadow_coeff`, `ladder_oddsShadow_seqEffect`); "
-    "sympy/verify_ladder.py (37/37, including the correlation coefficient and the gradient "
-    "identity with the log odds ratio); PropPRO.lean (`lemmaASC_first_order_vanishes`)."))
-
-E2.append(("E.11", "Scope, rival mechanisms (was 6.A)", [(
-    "insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
-    r"""A separate scope question concerns rival mechanisms rather than broken
-assumptions. Sequence effects have an explanation that competes with full adoption.
-In the belief-adjustment model of \citet{HogarthEinhorn1992}, when the first cue is
-adopted in full and later cues only in part the first impression is protected, and
-at zero adoption of later cues it is never moved, whereas when every cue is adopted
-only in part from a prior anchor the same model predicts recency. That first
-account and full adoption point in opposite directions, since the protected
-impression is the first one there and the last one here. An observable separates
-them. Under partial adoption of the second cue with weight $\omega$
-(Proposition~\ref{prop:ADJ}), the marginal that ignores the prior association is
-the last-read one at $\omega=1$, the first-read one at $\omega=0$, and neither in
-between. A reading on which neither marginal ignores the association is consistent
-with an interior weight and with the benchmark alike; the two are separated by the
-sequence comparison, under which the benchmark shows no sequence effect at any $c$
-and an interior weight shows one already at $c=0$ (Proposition~\ref{prop:ADJ}).
-Since every rule here is a separable reweighting, all of them carry the prior's
-odds ratio (Lemma~\ref{lem:SEP}), so the odds ratio separates none of them and the
-two marginals are the only statistics that do. Three cautions bound the claim. The
-classification covers this one-parameter family, not every conceivable mechanism.
-\citet{Asch1946} is evidence that sequence moves marginals, six stimulus terms read
-in two sequences moving the proportions on eighteen response traits, and not
-evidence for either endpoint, since his own account is that early terms set a
-direction for the reading of later ones, so that what a later cue delivers depends
-on its position, a mechanism outside the family here, in which each cue delivers
-the same credence in either position. And full adoption is a substantive
-commitment rather than a consequence of the level reading. \citet{Hawthorne2004}
-objects that it ``seems implausible that the most recent experience or
-non-propositional state should completely dictate belief strengths for basis
-sentences, with no regard for the import of previous experiences or states''. The
-objection applies here, and his own two-basis example shows the overwriting
-explicitly, so that the credential's implication for trustworthiness is erased
-once the letter fixes that attribute. The adoption weight is his objection stated
-as a parameter, and the reply offered here is not that the objection misses but
-that the weight is recovered from three ratings of one marginal rather than
-assumed.""")],
-    "Plan 6.A with the audit applied. P10, the belief-adjustment model protects the first "
-    "impression only when the first cue is the anchor and later cues are partly adopted; damping "
-    "every cue gives recency, so the rival is stated as that case. P14, Experiment VI has six "
-    "stimulus terms and eighteen response traits. P9, Hawthorne's objection follows his "
-    "two-basis medical example, so the claim that his illustration misses a one-cue-per-attribute "
-    "model is dropped. The recovery uses three ratings of one marginal (plan's own correction). "
-    "Colon removed. Goes after the scope paragraph, before E.12.",
-    "HogarthEinhorn.lean (eq8_estimation_first_dominates, appB_recency, twoAttr_oneSided_orderEffect); "
-    "Anchoring.lean; Asch.lean (seriesA_length, checkListI_length); Hawthorne.lean "
-    "(med_overwrite; quotation pp. 98-99 verbatim)."))
-
-E2.append(("E.12", "Scope, the two channels and the rubric prediction, with the settings table (was 6.B, from interior_omega.tex)", [(
-    "insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
-    r"""\paragraph{The two channels.} Sequence dependence has two channels in this
-setting, and the results of Sections~\ref{sec:individual} and~\ref{sec:aggregation}
-concern one of them. One is the association channel. A cue on one attribute moves
-the belief about the other through the prior association, so the second cue meets
-a belief the first has already changed. The association channel's effect is first
-order in $c$ and vanishes at independence, where each cue sets its own marginal and
-touches nothing else (Proposition~\ref{prop:IMM}). The other is the position
-channel. If the cue read second is adopted only in part, then which cue is weakened
-depends on the sequence, and the two sequences differ even at $c=0$, by
-$(1-\omega)(\alpha-q_0)$ on the competence marginal and $-(1-\omega)(\beta-r_0)$ on
-the trustworthiness marginal. The position channel is not a feature of updating on
-delivered credences. A Bayes-factor update that gives the second cue's factor the
-weight $\omega$ is sequence-dependent in the same way, since commutation requires
-the same factor in either position \citep{Wagner2002}. Under full adoption the
-position channel is absent and the association channel is the only one, which is
-the setting of the results. Under partial adoption the position channel is present
-at $c=0$ and moves every marginal at order zero, while the believed association
-still does not differ between sequences at $c=0$ and differs at first order
-(Proposition~\ref{prop:LAD}). The classification by order in $c$ shifts by one order
-without changing the ranking of statistics, and the odds ratio is the same in both
-sequences at every weight. The mean belief of a population mixing the two sequences
-acquires a cross-product association of
-$-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member holds, and the
-separation between the share of decisions changed and the loss is lost. What the
-paper says about the position channel is confined to Propositions~\ref{prop:ADJ}
-and~\ref{prop:LAD}, the first recovering its strength from the ratings and the
-second stating what it does to the ranking. The
-position channel is a temporal bias of the observer, present whether or not the
-attributes are believed related, while the association channel runs through what
-one cue implies about the other and exists only when they are.
-Table~\ref{tab:settings} sets the two settings side by side.
+    ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""\paragraph{Factor inputs.} Under the benchmark reading each cue supplies a factor
+on its own attribute, $a=(a_0,a_1)$ for the credential and $b=(b_0,b_1)$ for the
+letter, and the belief after both cues is the prior with cell $(i,j)$ multiplied by
+$a_ib_j$ and renormalised. This is the reading of the factor-based variants of
+\citet{Hawthorne2004}, and with both factors applied in full the two sequences give
+the same belief for every $c$, since the same cells are multiplied by the same
+numbers whichever cue comes first \citep{Wagner2002}. Partial adoption has a
+counterpart under this reading. Let the factor read second be adopted only in part,
+so that sequence $AB$ applies $a$ and then $b^{\omega}=(b_0^{\omega},b_1^{\omega})$
+and sequence $BA$ applies $b$ and then $a^{\omega}$, with $\omega=1$ the benchmark
+and $\omega=0$ the second cue ignored.
 \par
-\paragraph{Opposite predictions about one procedure.} Whether a procedure removes
+\renewcommand{\theproposition}{FAC}%
+\begin{proposition}[factor inputs]\label{prop:FAC}
+Let $a$ and $b$ be positive and $0\le\omega\le1$. Write $K_\sigma$ for the product
+of the four factors that sequence $\sigma$ applies and $S_\sigma$ for its
+normalising sum.
+\begin{enumerate}
+\item[(i)] At $\omega=1$ the two sequences give the same belief for every $c$.
+\item[(ii)] At $c=0$ each sequence ends at an independent belief. The $A$-marginals
+are $q_1$ in sequence $AB$ and
+$(1-\alpha)a_1^{\omega}/\bigl(\alpha a_0^{\omega}+(1-\alpha)a_1^{\omega}\bigr)$ in
+sequence $BA$, and they agree if and only if $a_0=a_1$ or $\omega=1$. Every
+marginal therefore differs between the sequences at order zero whenever the cue is
+informative and $\omega<1$, while a statistic protected for every pair of cues
+differs by $\bigO(c)$.
+\item[(iii)] In sequence $\sigma$ the believed association equals
+$c\,K_\sigma/S_\sigma^{2}$ exactly, so it is zero at $c=0$ and first order for
+$\omega<1$ whenever $K_{AB}/S_{AB}^{2}$ and $K_{BA}/S_{BA}^{2}$ differ at $c=0$. A
+statistic whose differential at every independent belief is a multiple of that of
+the log odds ratio differs between the sequences by $\bigO(c^{2})$ for every
+$\omega$, and the odds ratio is the prior's in both sequences for every $c$ and
+$\omega$.
+\end{enumerate}
+\end{proposition}
+\par
+\begin{proof}
+Applying a factor on $A$ and then one on $B$ multiplies cell $(i,j)$ by $a_ib_j$
+whichever is applied first, and renormalisation divides every cell by the same sum,
+which gives (i). Both steps rescale rows or columns, so the odds ratio is the
+prior's, and the association of the rescaled table is $K_\sigma\assoc(P)=cK_\sigma$,
+divided by $S_\sigma^{2}$ after renormalisation. At $c=0$ the prior is
+$\alpha\otimes\beta$ and the rescaled table is
+$(\alpha_0a_0,\alpha_1a_1)\otimes(\beta_0b_0,\beta_1b_1)$ up to the normalising
+sum, an independent belief whose $A$-marginal is
+$(1-\alpha)a_1/(\alpha a_0+(1-\alpha)a_1)$ for the factor applied on $A$. With
+$a_i=q_i/\alpha_i$ this is $q_1$, and with $a^{\omega}$ in its place the two values
+agree exactly when $a_1a_0^{\omega}=a_0a_1^{\omega}$, that is when
+$(a_1/a_0)^{1-\omega}=1$. The claims about protected statistics follow as in
+Proposition~\ref{prop:LAD}, since both sequences end at independent beliefs. For
+the last claim, at $c=0$ the product of the four marginals is
+$ZK_\sigma/S_\sigma^{2}$, so the first-order factor of $\assoc/m$ is $1/Z$ in both
+sequences and the argument of Proposition~\ref{prop:LAD}(iii) applies.
+\end{proof}"""),
+    ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{3.4cm}cccc@{}}
+\toprule
+& \multicolumn{2}{c}{\textbf{Credence delivered}} & \multicolumn{2}{c}{\textbf{Factor delivered}} \\
+\textbf{Sequence effect on} & $\omega=1$ & $\omega<1$ & $\omega=1$ & $\omega<1$ \\
+\midrule
+Marginals & $\Theta(c)$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\
+Believed association & $\bigO(c^{2})$ & $\Theta(c)$ & $0$ & $\Theta(c)$ \\
+Statistics agreeing with the log odds ratio to first order & $\bigO(c^{2})$ & $\bigO(c^{2})$ & $0$ & $\bigO(c^{2})$ \\
+Odds ratio & $0$ & $0$ & $0$ & $0$ \\
+Share of decisions changed & $\Theta(c)$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\
+Surplus-weighted loss & $\bigO(c^{2})$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\
+\bottomrule
+\end{tabular}
+\caption{The between-sequence effect of each statistic, by what a cue delivers and
+how fully the later cue is adopted. Entries are orders in the prior covariance $c$,
+generic in the prior and the cues, and $0$ means no sequence effect at any $c$. The
+decision rows of the partial-adoption columns read Theorem~\ref{thm:LOS} with a
+score gap of order zero and are not separately verified. The columns are, in turn,
+Sections~\ref{sec:individual} and~\ref{sec:aggregation}, Proposition~\ref{prop:LAD},
+the benchmark of Section~\ref{sec:setup}, and Proposition~\ref{prop:FAC}.}
+\label{tab:robust}
+\end{table}"""),
+    ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""\paragraph{Opposite predictions about one procedure.} Whether a procedure removes
 the sequence effect depends on which channel it removes. Consider rubric scoring,
 in which the rating on each attribute is fixed by the document on that attribute
 and a set scale, so that what each document delivers no longer depends on what was
@@ -655,8 +748,9 @@ opposite things about the same procedure, and the difference is observable. In t
 rubric setting $r_1$ is on the record, so Proposition~\ref{prop:ADJ} needs only the
 belief about trustworthiness after the credential alone and after both documents
 to say which prediction holds.
-\par
-\begin{table}[htbp]
+""")
+,    ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
+     r"""\begin{table}[htbp]
 \centering
 \small
 \begin{tabular}{@{}p{2.6cm}p{5.4cm}p{5.4cm}@{}}
@@ -729,34 +823,45 @@ operates; under partial or no adoption the position channel operates as well, an
 the association channel with it when the attributes are believed related.}
 \label{tab:settings}
 \end{table}""")],
-    "Plan 6.B, whose text lived in notes/interior_omega.tex sections 6 and 2 (approved "
-    "2026-09-27), carried into the manuscript with the audit applied. \"Order\" becomes "
-    "\"sequence\" for reading order throughout, including the table's first row; Weisberg's "
-    "name is kept out of the table (his rule-versus-inputs framing is not his, audit D10); "
-    "\"The first is / The second is\" becomes \"One is / The other is\" to avoid colliding "
-    "with the first and second cue; \"This effect\" is given its noun; proposition names "
-    "become references; the table is a booktabs table (the manuscript loads booktabs and array, "
-    "not longtable). Goes after E.11. The decision row of interior_omega's independence table "
-    "(share and loss at interior omega) was left out on 2026-09-27 as inferred, not verified; "
-    "it is now in, as the LOS integral read with the order-zero score gap of Proposition LAD "
-    "(E.10), and is the one row not checked by sympy. The prose and the classification row are "
-    "reworked (2026-10-01): the earlier text said the classification \"no longer measures what it "
-    "was built to measure\" and was \"moot\" under partial adoption, which verify_ladder.py "
-    "refutes; the ranking survives one order earlier. Every other quantity is a verified row.",
-    "sympy/verify_interior_omega.py (23/23: rows 1-6 of the independence table, the "
-    "(1-omega) and (1-omega)^2 factors, the position-scaled Bayes-factor update at row 5); "
-    "Anchoring.lean (orderEffect_damped_at_indep); LemmaSEP.lean; PropDRF; the rubric "
-    "prediction is Propositions DRF, IMM and ADJ read together. Ranking under partial adoption: "
-    "Ladder.lean and sympy/verify_ladder.py (37/37)."))
+    "Placement (2026-10-01). The author's Section 6 is already titled \"Scope and robustness\", so the "
+    "section is split into two subsections. Scope keeps the assumptions paragraph and the rival "
+    "mechanisms of E.11. Robustness relaxes the two premises the results rest on, that a cue "
+    "delivers a credence and that the credence is adopted in full, and it is where the adoption "
+    "weight does its work; Sections 4 and 5 then state the results under the premises and nothing "
+    "else. Part 1 adds the Scope heading and repairs \"define scope for any conclusions made from "
+    "the model\". Part 2 adds the robustness clause to the roadmap. Parts 3 to 9 are the new subsection, one insertion after E.11 shown as "
+    "consecutive paragraphs so that the plan can break pages between them. What it gathers: the two-channel paragraph of E.12 unchanged; the "
+    "adoption-weight lead-in, Proposition ADJ, its example and Proposition LAD from E.10, with "
+    "\"so far\" replaced by the section references; the rubric prediction and the settings table of "
+    "E.12 unchanged. What is new: the framing paragraph, Proposition FAC and Table tab:robust. "
+    "Proposition FAC is the factor-input counterpart of LAD. Its weighted factor $a^\\omega$ is a "
+    "construction of this paper, log-linear damping of the factor, not one of Hawthorne's variants; "
+    "his variants are the $\\omega=1$ column, where updates on distinct bases commute. The Lean "
+    "record proves FAC for an arbitrary damped factor $a'$ and states the marginal agreement as "
+    "$a_1a_0'=a_0a_1'$; the power form and its witnesses are in the sympy suite. Table tab:robust "
+    "puts the four settings side by side; its decision rows for the partial-adoption columns are "
+    "Theorem LOS read with an order-zero score gap and are the only entries not checked by sympy, "
+    "as the caption says. Two tables now sit in the subsection; the author may drop tab:settings "
+    "if tab:robust carries enough. Order of application: after E.10 (ORD) and E.11; before C.4, "
+    "C.5 and C.9, which cite LAD or sec:robust; E.13 after it.",
+    "Ladder.lean: `rescale_rescale`, `rescale_rescale_eq`, `assoc_normalize`, `oddsRatio_normalize`, "
+    "`oddsRatio_factorRoute`, `assoc_factorRoute`, `factorRoute_at_zero`, `factorRoute_mA1_zero`, "
+    "`factor_mA1_gap_iff`, `mprod_factorRoute_zero`, `oddsShadow_factor_coeff` (FAC); `ladder_gap`, "
+    "`ladder_assoc_coeff`, `ladder_oddsShadow_seqEffect` (LAD); Anchoring.lean (ADJ). "
+    "sympy/verify_ladder.py (53/53, section F for the factor routes, including that the "
+    "full-adoption factor table is the manuscript's benchmark); sympy/verify_interior_omega.py "
+    "rows 5 and 6. Hawthorne.lean (`factorUpdate_comm`, `extUpdate_basisCommuting`); Wagner2002.lean "
+    "(thm31); HogarthEinhorn.lean (`oneSided_eq_eq8`)."))
 
 E2.append(("E.13", "Back matter, AI declaration (was B.B)", [(
     r"Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently re-derived",
     r"Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently re-derived",
     r"""Propositions~\ref{prop:PRO} (uniqueness of the protected statistic),
-\ref{prop:ORD} (between-sequence contrast) and~\ref{prop:ADJ} (adoption weight),
-which were then independently re-derived""")],
-    "Plan B.B. Propositions ORD and ADJ have the same provenance as PRO, so the declaration "
-    "names them once E.10 is applied.",
+\ref{prop:ORD} (between-sequence contrast), \ref{prop:ADJ} (adoption weight),
+\ref{prop:LAD} (the ranking under partial adoption) and~\ref{prop:FAC} (factor
+inputs), which were then independently re-derived""")],
+    "Plan B.B. Propositions ORD, ADJ, LAD and FAC have the same provenance as PRO, so the "
+    "declaration names them once E.10 and E.15 are applied.",
     "None needed."))
 
 E2.append(("E.14", "Bibliography entries the Section E texts need (was B.A)", [],
