@@ -460,8 +460,8 @@ and a factor reading of the cues."""),
 The results of Sections~\ref{sec:individual} and~\ref{sec:aggregation} rest on two
 premises about a cue. It delivers a credence on its own attribute rather than a
 factor, and the credence is adopted in full. This subsection relaxes each premise
-in turn and asks what remains of the ranking of statistics. Table~\ref{tab:robust}
-collects the answers.
+in turn and asks which statistics still register the sequence only at second order,
+and which never do. Table~\ref{tab:robust} collects the answers.
 \par
 \paragraph{The two channels.} Sequence dependence has two channels in this
 setting, and the results of Sections~\ref{sec:individual} and~\ref{sec:aggregation}
@@ -481,15 +481,16 @@ position channel is absent and the association channel is the only one, which is
 the setting of the results. Under partial adoption the position channel is present
 at $c=0$ and moves every marginal at order zero, while the believed association
 still does not differ between sequences at $c=0$ and differs at first order
-(Proposition~\ref{prop:LAD}). The classification by order in $c$ shifts by one order
-without changing the ranking of statistics, and the odds ratio is the same in both
-sequences at every weight. The mean belief of a population mixing the two sequences
+(Proposition~\ref{prop:LAD}). The classification by order in $c$ shifts by one order,
+each statistic keeping its place relative to the others, and the odds ratio is the
+same in both sequences at every weight. The mean belief of a population mixing the two sequences
 acquires a cross-product association of
 $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member holds, and the
 separation between the share of decisions changed and the loss is lost. What the
 paper says about the position channel is confined to Propositions~\ref{prop:ADJ}
 and~\ref{prop:LAD}, the first recovering its strength from the ratings and the
-second stating what it does to the ranking. The
+second stating what it does to the order in $c$ at which each statistic registers
+the sequence. The
 position channel is a temporal bias of the observer, present whether or not the
 attributes are believed related, while the association channel runs through what
 one cue implies about the other and exists only when they are.
@@ -575,7 +576,8 @@ first rates trustworthiness at $.56$ before the letter, the letter alone deliver
 $.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$."""),
     ("insert_cont", "is outside the scope of stated results.", "is outside the scope of stated results.",
      r"""Proposition~\ref{prop:ADJ} reads the weight from the ratings. The next result says
-what the weight does to the ranking of statistics. A statistic is \emph{protected
+what the weight does to the order in $c$ at which each statistic first differs between
+the two sequences. A statistic is \emph{protected
 for every pair of cues} if its differential at every independent belief is a
 multiple of the differential of the association, the condition of
 Proposition~\ref{prop:PRO} imposed at every point of the independence surface
@@ -583,7 +585,7 @@ rather than at $q\otimes r$ alone; the association and the correlation coefficie
 are examples.
 \par
 \renewcommand{\theproposition}{LAD}%
-\begin{proposition}[the ranking under partial adoption]\label{prop:LAD}
+\begin{proposition}[partial adoption]\label{prop:LAD}
 Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$, $s_0=(1-\omega)\alpha+\omega q_0$,
 $t=(t_0,1-t_0)$, $s=(s_0,1-s_0)$ and $Z=\alpha\beta(1-\alpha)(1-\beta)$.
 \begin{enumerate}
@@ -640,7 +642,9 @@ differential of the log odds ratio.
 \end{proof}
 \par
 Partial adoption therefore moves the sequence effect on each belief statistic other
-than the odds ratio one order earlier in $c$, without changing their ranking. Decisions do not keep theirs. At $c=0$ the
+than the odds ratio one order earlier in $c$, the marginals staying ahead of the
+association and the association ahead of the odds ratio, which never moves. Decisions
+do not keep their places. At $c=0$ the
 benchmark is $q\otimes r$ while sequence $AB$ ends at $q\otimes t$, so under partial
 adoption an evaluator's score departs from the benchmark's at order zero, and the
 share of decisions the sequence changes and the surplus-weighted loss are then both
@@ -797,7 +801,7 @@ does not move. \\
 \addlinespace[3pt]
 Classification by order in $c$ &
 Is the contribution. Which statistics are protected, and why. &
-Shifts by one order with the ranking unchanged. Marginals at order zero, protected
+Shifts by one order, each statistic keeping its place. Marginals at order zero, protected
 statistics at first order, the odds-ratio shadow at second, the odds ratio never
 (Proposition~\ref{prop:LAD}). \\
 \addlinespace[3pt]
@@ -858,7 +862,7 @@ E2.append(("E.13", "Back matter, AI declaration (was B.B)", [(
     r"Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently re-derived",
     r"""Propositions~\ref{prop:PRO} (uniqueness of the protected statistic),
 \ref{prop:ORD} (between-sequence contrast), \ref{prop:ADJ} (adoption weight),
-\ref{prop:LAD} (the ranking under partial adoption) and~\ref{prop:FAC} (factor
+\ref{prop:LAD} (partial adoption) and~\ref{prop:FAC} (factor
 inputs), which were then independently re-derived""")],
     "Plan B.B. Propositions ORD, ADJ, LAD and FAC have the same provenance as PRO, so the "
     "declaration names them once E.10 and E.15 are applied.",

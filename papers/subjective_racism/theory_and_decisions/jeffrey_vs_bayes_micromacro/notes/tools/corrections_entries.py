@@ -174,10 +174,11 @@ whether the two sequences agree but by how much they disagree in an arbitrary
 statistic. The paper finds that the marginal probabilities and the share of decisions
 they change carry the difference at first order in the prior covariance, while the
 believed association and the statistics that move with it carry it only at second
-order. Partial adoption of the later cue, as in the belief-adjustment model, moves
-the marginals and the association one order earlier without changing the ranking of
-statistics, and the odds ratio between the attributes stays the same in both
-sequences at every degree of adoption (Proposition~\ref{prop:LAD}). This carries clear implications for what an
+order. When the later cue is adopted only in part, as in the belief-adjustment
+model, the marginals and the believed association both register the sequence one
+order earlier in the prior covariance, the marginals still ahead of the association,
+and the odds ratio between the attributes is the same whichever cue is read first at
+every degree of adoption (Proposition~\ref{prop:LAD}). This carries clear implications for what an
 audit can or cannot measure about sequence dependence.""")],
     "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
     "needs correcting and adds one sentence. Corrections: \"adjust\" to \"adjust it\"; \"leave open\" "
@@ -204,19 +205,29 @@ audit can or cannot measure about sequence dependence.""")],
 E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
     "In demonstrating how the sequence-dependence of certain statistics can be invisible",
     "(the amnestic updating concern in the literature).",
-    r"""In the panel example the odds ratio between the two traits is the same in both
-reading sequences however far a later impression erases the earlier one, since each
-update rescales rows or columns of the belief (Lemma~\ref{lem:SEP}). The
-cross-product association is second order only under full adoption, but under
-partial adoption it moves at first order while every marginal moves at order zero,
-so the ranking of statistics survives (Proposition~\ref{prop:LAD}).""")],
+    r"""In the panel example the odds ratio between the two traits is the same whether
+the credential or the letter is read first, however far a later impression erases
+the earlier one, since each update rescales rows or columns of the belief
+(Lemma~\ref{lem:SEP}). The believed association differs between the two reading
+sequences only at second order when each impression is adopted in full. When the
+later impression is adopted only in part, that difference is first order and the
+difference in each marginal is of order zero, and the statistics that still differ
+only at second order are those which agree with the log odds ratio to first order
+(Proposition~\ref{prop:LAD}).""")],
     "False as written for the cross-product association, which is the paper's `assoc`: "
     "invisibility at second order does depend on how far a later impression erases the earlier "
     "one. Under partial adoption the association's sequence effect is first order in $c$, with "
     "coefficient $(1-\\omega)H/Z$, and only the odds ratio is identical across sequences for every "
-    "$\\omega$. What survives every $\\omega$ is the ranking: marginals one order ahead of protected "
-    "statistics, the odds-ratio shadow a further order behind, the odds ratio blind "
-    "(Proposition LAD, E.10). The commented-out line below the paragraph states the odds-ratio "
+    "$\\omega$. What survives every $\\omega$ is the ordering by the power of $c$ at which each "
+    "statistic first differs between the sequences, marginals before protected statistics, these "
+    "before the statistics that agree with the log odds ratio to first order, and the odds ratio "
+    "never (Proposition LAD, E.15). Effect on the paper's two conclusions, asked 2026-10-01: the "
+    "second-order association is a full-adoption result, since under partial adoption the "
+    "association differs between sequences at first order and the pooled association acquires a "
+    "term of order zero, $-\\lambda(1-\\lambda)(1-\\omega)^2(\\alpha-q_0)(\\beta-r_0)$; the "
+    "characterisation of the second-order statistics by their differential at independence "
+    "survives in form, but the class moves from the statistics proportional to the association "
+    "to those proportional to the log odds ratio. The commented-out line below the paragraph states the odds-ratio "
     "version. \"Amnestic\" is dropped here since Hawthorne is not cited in this paragraph "
     "(writing discipline 6).",
     "Ladder.lean (`oddsRatio_rescale`, `jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`, "
