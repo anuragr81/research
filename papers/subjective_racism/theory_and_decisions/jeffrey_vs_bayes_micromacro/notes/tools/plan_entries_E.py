@@ -459,12 +459,16 @@ later cue, and gives a test of that condition from the ratings."""),
 \par
 The results of Sections~\ref{sec:individual} and~\ref{sec:aggregation} rest on two
 premises about a cue. It delivers a credence on its own attribute rather than a
-factor, and the credence is adopted in full. The second-order results hold only
-under the second premise. Whether a population meets it can be read from its
+factor, and the credence is adopted in full. Full adoption is the setting in which
+an evaluator adopts a cue alike whichever position it arrives in, so that the
+sequence can act only through the believed link between the attributes. A weight on
+the later cue that depends on its position is a property of the evaluator rather than
+of the evidence, and it is the subject of the belief-adjustment literature
+\citep{HogarthEinhorn1992}. Whether a population adopts in full can be read from its
 ratings, since Proposition~\ref{prop:ADJ} below recovers the adoption weight from
 three marginals of one reading group, and Propositions~\ref{prop:LAD}
-and~\ref{prop:FAC} say what to expect when it is not met, under either reading of
-the cues. What partial adoption leaves in place is the odds ratio, which is the same
+and~\ref{prop:FAC} say what to expect when it does not, under either reading of the
+cues. What partial adoption leaves in place is the odds ratio, which is the same
 in both sequences at every weight, and a second-order class of statistics that no
 longer contains the association. Table~\ref{tab:robust} collects the answers.
 \par

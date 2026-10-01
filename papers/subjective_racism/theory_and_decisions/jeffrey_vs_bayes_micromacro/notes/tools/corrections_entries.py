@@ -161,12 +161,16 @@ arrival-sequence dependence can enter through two channels, an \textbf{associati
 channel, in which one cue changes what the other implies and which exists only when
 the attributes are believed related, and a \textbf{position} channel, in which the
 weight a cue receives depends on where in the sequence it arrives, whatever the
-attributes are \citep{HogarthEinhorn1992}. In the position channel the later cue is
-adopted only in part and every marginal registers the sequence even when the
-attributes are believed unrelated. On the other hand, when each impression is adopted
-in full, as in the successive updating of \citet{DiaconisZabell1982}, the position
-channel is disabled with only the association channel remaining. In the two-attribute
-setting with full adoption, the paper thus considers three coordinates of a belief,
+attributes are \citep{HogarthEinhorn1992}. The position channel is a property of the
+evaluator rather than of the evidence. When the later cue is adopted only in part,
+every marginal registers the sequence even when the attributes are believed
+unrelated, and an audit that pools evaluators who read in different sequences records
+an association that none of them holds. The paper therefore sets the position channel
+aside until Section~\ref{sec:robust} and asks whether, when each impression is adopted
+in full, as in the successive updating of \citet{DiaconisZabell1982}, and the
+attributes are believed to go together, an audit detects the sequence dependence that
+the believed link alone produces. In the two-attribute setting with full adoption,
+the paper thus considers three coordinates of a belief,
 the two marginal probabilities and the cross-attribute association, and explains how a
 difference from the sequence-free benchmark below the observer's precision is
 invisible in the statistic read by the observer. The question is therefore not simply
@@ -174,8 +178,7 @@ whether the two sequences agree but by how much they disagree in an arbitrary
 statistic. The paper finds that the marginal probabilities and the share of decisions
 they change carry the difference at first order in the prior covariance, while the
 believed association and the statistics that move with it carry it only at second
-order. These second-order results require full adoption of the later cue
-(Section~\ref{sec:robust}). This carries clear implications for what an
+order. This carries clear implications for what an
 audit can or cannot measure about sequence dependence.""")],
     "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
     "needs correcting and adds one sentence. Corrections: \"adjust\" to \"adjust it\"; \"leave open\" "
@@ -187,10 +190,18 @@ audit can or cannot measure about sequence dependence.""")],
     "and Asch is dropped (audit P10-P12); the two dashes become commas; \"decisions from them\" "
     "becomes \"the share of decisions they change\", since the loss is a decision statistic and is "
     "second order (LOS); \"and statistics\" becomes \"and the statistics that move with it\". "
-    "Added sentence (author, 2026-10-01): one line saying that the second-order results require "
-    "full adoption, with a pointer to Section 6. The author declined a longer qualification here "
-    "(the test of adoption from the ratings and what partial adoption changes); that explanation "
-    "belongs to C.5 and to Section 6.",
+    "Scope defence (author, 2026-10-01): the position channel is a property of the evaluator, not of "
+    "the evidence, and it leaves a signature any marginal audit detects, so the paper sets it aside "
+    "and asks the question that remains when evaluators adopt a cue alike whichever position it "
+    "arrives in. Two sentences are replaced rather than added (discipline rule 4): the position "
+    "channel sentence and the \"On the other hand\" sentence, whose content the new sentences carry; "
+    "the earlier one-line full-adoption sentence is cut, its pointer to Section 6 now in the scope "
+    "sentence. Checked against rule 3: every contrast names both sides (evaluator rather than "
+    "evidence; adopted only in part against adopted in full; the believed link against the position), "
+    "no bare \"it\", no assertion of importance. Evidence for the claims: at $c=0$ the fully adopting "
+    "evaluator shows no sequence effect (IMM) and the partially adopting one shows "
+    "$(1-\\omega)(\\alpha-q_0)$ (ADJ); the pooled association at $c=0$ is "
+    "$-\\lambda(1-\\lambda)(1-\\omega)^2(\\alpha-q_0)(\\beta-r_0)$, nonzero for interior weights.",
     "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))

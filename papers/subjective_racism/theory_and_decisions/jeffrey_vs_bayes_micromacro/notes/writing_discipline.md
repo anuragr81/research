@@ -81,8 +81,12 @@ that world out. A claim that cannot name its falsifier does not enter.
   gloss on first use.
 - The two channels of sequence dependence are the **association channel**
   (through what one cue implies about the other; exists only at $c\neq0$) and
-  the **position channel** (the observer weights the later cue less; present
-  at $c=0$). Agreed 2026-09-27. Not "interaction" (collides with the
+  the **position channel** (the weight a cue receives depends on where in
+  the sequence it arrives; present at $c=0$). Corrected 2026-10-01: the
+  earlier gloss "the observer weights the later cue less" was wrong on both
+  its citations (audit P10 to P12), and "observer" is the manuscript's word
+  for the auditor who reads the statistics; the agent who adopts cues is the
+  **evaluator**. Agreed 2026-09-27. Not "interaction" (collides with the
   manuscript's "interactions among attributes" and with the log-linear
   interaction term) and not "bias" (collides with "biased beliefs" in 3.D and
   with the discrimination literature's sense).
