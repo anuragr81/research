@@ -300,4 +300,115 @@ theorem ladder_oddsShadow_seqEffect (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0)
   · obtain ⟨h1, h2⟩ := ladder_oddsShadow_coeff hα hα' hβ hβ' hq ht hr hs
     rw [h1, h2]; ring
 
+/-! ### Factor inputs
+
+Under the benchmark reading each cue supplies a factor on its own attribute and the
+belief after both is the prior with cell `(i,j)` multiplied by `aᵢ bⱼ`, renormalised.
+With both factors applied in full the two sequences coincide for every `c`
+(`rescale_rescale`); this is the paper's benchmark and Hawthorne's factor-based
+variants across distinct bases.  When the factor read second is adopted only in
+part, replaced by some `a'` or `b'`, the two sequences end at `c = 0` at product
+measures (`factorRoute_at_zero`) whose `A`-marginals agree iff the damped factor
+has the same ratio as the full one (`factor_mA1_gap_iff`); the association is `c`
+times an explicit factor (`assoc_factorRoute`); the odds ratio is the prior's
+(`oddsRatio_factorRoute`); and the odds-ratio shadow's first-order factor is again
+`1/Z` on both routes (`mprod_factorRoute_zero`, `oddsShadow_factor_coeff`).
+The instantiation `a' = a^ω` is left to the text and the sympy suite. -/
+
+/-- Both cues read as factors on their own attributes, applied and renormalised. -/
+noncomputable def factorRoute (P : Mat) (a₀ a₁ b₀ b₁ : ℝ) : Mat :=
+  (rescale P a₀ a₁ b₀ b₁).normalize
+
+/-- Two factor updates on distinct attributes commute, whichever is applied first. -/
+theorem rescale_rescale (P : Mat) (a₀ a₁ b₀ b₁ : ℝ) :
+    rescale (rescale P a₀ a₁ 1 1) 1 1 b₀ b₁ = rescale (rescale P 1 1 b₀ b₁) a₀ a₁ 1 1 := by
+  ext <;> simp only [rescale] <;> ring
+
+theorem rescale_rescale_eq (P : Mat) (a₀ a₁ b₀ b₁ : ℝ) :
+    rescale (rescale P a₀ a₁ 1 1) 1 1 b₀ b₁ = rescale P a₀ a₁ b₀ b₁ := by
+  ext <;> simp only [rescale] <;> ring
+
+theorem assoc_normalize (Q : Mat) : assoc Q.normalize = assoc Q / Q.total ^ 2 := by
+  simp only [assoc, Mat.normalize]
+  rw [div_mul_div_comm, div_mul_div_comm, ← sub_div, pow_two]
+
+theorem oddsRatio_normalize (Q : Mat) (h : Q.total ≠ 0) :
+    oddsRatio Q.normalize = oddsRatio Q := by
+  simp only [oddsRatio, Mat.normalize]
+  rw [div_mul_div_comm, div_mul_div_comm]
+  have h2 : Q.total * Q.total ≠ 0 := mul_ne_zero h h
+  rw [div_div_div_cancel_right₀ h2]
+
+theorem oddsRatio_factorRoute (P : Mat) {a₀ a₁ b₀ b₁ : ℝ} (hK : a₀ * a₁ * b₀ * b₁ ≠ 0)
+    (hT : (rescale P a₀ a₁ b₀ b₁).total ≠ 0) :
+    oddsRatio (factorRoute P a₀ a₁ b₀ b₁) = oddsRatio P := by
+  unfold factorRoute
+  rw [oddsRatio_normalize _ hT, oddsRatio_rescale _ hK]
+
+/-- The association of a factor route is `c` times the product of the four factors
+over the square of the normalising sum, exactly. -/
+theorem assoc_factorRoute (a₀ a₁ b₀ b₁ : ℝ) :
+    assoc (factorRoute (prior α β c) a₀ a₁ b₀ b₁)
+      = c * (a₀ * a₁ * b₀ * b₁) / (rescale (prior α β c) a₀ a₁ b₀ b₁).total ^ 2 := by
+  unfold factorRoute
+  rw [assoc_normalize, assoc_rescale, assoc_prior]
+  ring
+
+theorem total_rescale_prior_zero (a₀ a₁ b₀ b₁ : ℝ) :
+    (rescale (prior α β 0) a₀ a₁ b₀ b₁).total
+      = (α * a₀ + (1 - α) * a₁) * (β * b₀ + (1 - β) * b₁) := by
+  simp only [Mat.total, rescale, prior]; ring
+
+/-- At `c = 0` a factor route ends at a product measure. -/
+theorem factorRoute_at_zero (a₀ a₁ b₀ b₁ : ℝ) (hA : α * a₀ + (1 - α) * a₁ ≠ 0)
+    (hB : β * b₀ + (1 - β) * b₁ ≠ 0) :
+    factorRoute (prior α β 0) a₀ a₁ b₀ b₁
+      = indep (α * a₀ / (α * a₀ + (1 - α) * a₁)) (β * b₀ / (β * b₀ + (1 - β) * b₁)) := by
+  unfold factorRoute
+  simp only [Mat.normalize]
+  rw [total_rescale_prior_zero]
+  generalize hSA : α * a₀ + (1 - α) * a₁ = SA at hA ⊢
+  generalize hSB : β * b₀ + (1 - β) * b₁ = SB at hB ⊢
+  ext <;> simp only [rescale, prior, indep] <;> field_simp <;> subst hSA hSB <;> ring
+
+theorem factorRoute_mA1_zero (a₀ a₁ b₀ b₁ : ℝ) (hA : α * a₀ + (1 - α) * a₁ ≠ 0)
+    (hB : β * b₀ + (1 - β) * b₁ ≠ 0) :
+    (factorRoute (prior α β 0) a₀ a₁ b₀ b₁).mA1 = (1 - α) * a₁ / (α * a₀ + (1 - α) * a₁) := by
+  rw [factorRoute_at_zero a₀ a₁ b₀ b₁ hA hB]
+  simp only [indep, Mat.mA1]
+  field_simp
+  ring
+
+/-- The two sequences agree on the `A`-marginal at `c = 0` iff the damped factor
+`a'` has the same ratio as the full factor `a`. -/
+theorem factor_mA1_gap_iff {a₀ a₁ a₀' a₁' : ℝ} (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0)
+    (hA : α * a₀ + (1 - α) * a₁ ≠ 0) (hA' : α * a₀' + (1 - α) * a₁' ≠ 0) :
+    (1 - α) * a₁ / (α * a₀ + (1 - α) * a₁) = (1 - α) * a₁' / (α * a₀' + (1 - α) * a₁')
+      ↔ a₁ * a₀' = a₀ * a₁' := by
+  rw [div_eq_div_iff hA hA']
+  constructor
+  · intro h
+    have h2 : (1 - α) * α * (a₁ * a₀' - a₀ * a₁') = 0 := by linear_combination h
+    rcases mul_eq_zero.1 h2 with h3 | h3
+    · exact absurd h3 (mul_ne_zero hα' hα)
+    · linarith
+  · intro h; linear_combination (1 - α) * α * h
+
+/-- The product of the four marginals of a factor route at `c = 0`. -/
+theorem mprod_factorRoute_zero (a₀ a₁ b₀ b₁ : ℝ) (hA : α * a₀ + (1 - α) * a₁ ≠ 0)
+    (hB : β * b₀ + (1 - β) * b₁ ≠ 0) :
+    mprod (factorRoute (prior α β 0) a₀ a₁ b₀ b₁)
+      = Zpar α β * (a₀ * a₁ * b₀ * b₁) / (rescale (prior α β 0) a₀ a₁ b₀ b₁).total ^ 2 := by
+  rw [factorRoute_at_zero a₀ a₁ b₀ b₁ hA hB, mprod_indep, total_rescale_prior_zero]
+  unfold Zpar
+  field_simp
+  ring
+
+/-- Dividing the association's first-order factor by the marginal product gives `1/Z`
+on every factor route, so the odds-ratio shadow is second order at every weight. -/
+theorem oddsShadow_factor_coeff {K S Z : ℝ} (hK : K ≠ 0) (hS : S ≠ 0) (hZ : Z ≠ 0) :
+    K / S ^ 2 / (Z * K / S ^ 2) = 1 / Z := by
+  have hS2 : S ^ 2 ≠ 0 := pow_ne_zero 2 hS
+  field_simp
+
 end JeffreyOrder

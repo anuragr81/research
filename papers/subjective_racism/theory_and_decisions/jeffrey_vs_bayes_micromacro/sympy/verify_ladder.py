@@ -27,6 +27,17 @@ Rows:
       all-omega protected class is the first-order shadow of the odds ratio.
   (D) a non-protected statistic, P(A=1) + assoc, moves at zeroth order.
   (E) the odds ratio of either route equals the prior's for every delta and c.
+  (F) factor inputs (the benchmark reading).  Each cue supplies a factor on its
+      own attribute, a_i = q_i/P(A=i), b_j = r_j/P(B=j); the belief is the prior
+      with cell (i,j) multiplied by the applied factors and renormalised.  With
+      both applied in full the two sequences coincide for every c.  When the
+      factor read second is adopted in part, replaced by an arbitrary positive
+      a' or b' (instantiated as a^delta, b^delta), the sequences end at c = 0
+      at product measures whose A-marginals agree iff a' has the ratio of a;
+      the association is c K / S^2 exactly (K the product of the applied
+      factors, S the normalising sum), zero at c = 0 and first order
+      generically; assoc/mprod has first-order factor 1/Z on both routes; and
+      the odds ratio is the prior's for every c.
 """
 import sympy as sp
 from jeffrey_core import *
@@ -152,6 +163,64 @@ def main():
           sp.cancel(odds(QAB) - odds(P)), 0)
     ck.eq("(E) odds ratio of route BA equals the prior's, symbolic in delta and c",
           sp.cancel(odds(QBA) - odds(P)), 0)
+
+    # ---- (F) factor inputs --------------------------------------------------
+    mA = [sp.cancel(x) for x in marg_A(P)]
+    mB = [sp.cancel(x) for x in marg_B(P)]
+    lA = [sp.cancel(q[i] / mA[i]) for i in range(2)]
+    lB = [sp.cancel(r[j] / mB[j]) for j in range(2)]
+    ap0, ap1, bp0, bp1 = sp.symbols('ap0 ap1 bp0 bp1', positive=True)
+
+    def factor_route(a, b):
+        W = sp.Matrix(2, 2, lambda i, j: P[i, j] * a[i] * b[j])
+        S = sum(W)
+        return W.applyfunc(lambda e: sp.cancel(e / S)), sp.cancel(S)
+
+    FAB, SAB = factor_route(lA, [bp0, bp1])          # A in full, B damped (abstract)
+    FBA, SBA = factor_route([ap0, ap1], lB)          # B in full, A damped (abstract)
+    FULL, _ = factor_route(lA, lB)
+    FULL2, _ = factor_route(lA, lB)
+    ck.mat_eq("(F) both factors in full: the two sequences give one table for every c (commutation)",
+              FULL, FULL2)
+    _, _, PBm = posteriors()
+    ck.mat_eq("(F) ...and that table is the benchmark P^B of the manuscript",
+              FULL, PBm.applyfunc(sp.cancel))
+    ck.eq("(F) odds ratio of route AB (B damped) equals the prior's, symbolic in c and the damped factor",
+          sp.cancel(odds(FAB) - odds(P)), 0)
+    ck.eq("(F) odds ratio of route BA (A damped) equals the prior's, symbolic in c and the damped factor",
+          sp.cancel(odds(FBA) - odds(P)), 0)
+    KAB = lA[0] * lA[1] * bp0 * bp1
+    KBA = ap0 * ap1 * lB[0] * lB[1]
+    ck.eq("(F) assoc of route AB = c K / S^2 exactly", sp.cancel(assoc(FAB) - c * KAB / SAB**2), 0)
+    ck.eq("(F) assoc of route BA = c K / S^2 exactly", sp.cancel(assoc(FBA) - c * KBA / SBA**2), 0)
+    FAB0 = FAB.applyfunc(lambda e: sp.cancel(e.subs(c, 0)))
+    FBA0 = FBA.applyfunc(lambda e: sp.cancel(e.subs(c, 0)))
+    ck.eq("(F) assoc of route AB is zero at c=0 (product measure)", sp.cancel(assoc(FAB0)), 0)
+    ck.eq("(F) assoc of route BA is zero at c=0 (product measure)", sp.cancel(assoc(FBA0)), 0)
+    mA1_AB = sp.cancel(marg_A(FAB0)[1])
+    mA1_BA = sp.cancel(marg_A(FBA0)[1])
+    ck.eq("(F) A-marginal of route AB at c=0 is q1 (the full factor sets its own marginal)", mA1_AB, q1)
+    ck.eq("(F) A-marginal of route BA at c=0 is (1-alpha) a'_1 / (alpha a'_0 + (1-alpha) a'_1)",
+          mA1_BA, (1 - alpha) * ap1 / (alpha * ap0 + (1 - alpha) * ap1))
+    # the gap vanishes iff a' has the ratio of a: substitute a' = a (delta = 1)
+    ck.eq("(F) ...equal to q1 when a' = a (delta=1)", mA1_BA.subs({ap0: lA[0], ap1: lA[1]}), q1)
+    half = sp.Rational(1, 2)
+    aw = {ap0: sp.sqrt(lA[0]), ap1: sp.sqrt(lA[1])}
+    bw = {bp0: sp.sqrt(lB[0]), bp1: sp.sqrt(lB[1])}
+    gapA = sp.simplify((mA1_AB - mA1_BA).subs(aw).subs(GENERIC))
+    ck("(F) A-marginal gap at c=0 nonzero for a' = a^(1/2), generic point (order zero)",
+       gapA != 0, f"value {gapA}")
+    # first-order factor of assoc: K/S0^2 on each route
+    kAB = sp.cancel(KAB / SAB.subs(c, 0)**2)
+    kBA = sp.cancel(KBA / SBA.subs(c, 0)**2)
+    dk = sp.simplify((kAB.subs(bw) - kBA.subs(aw)).subs(GENERIC))
+    ck("(F) assoc first-order factors differ between routes at delta=1/2, generic point (first order)",
+       dk != 0, f"value {dk}")
+    ck.eq("(F) ...and agree at delta=1", sp.cancel(kAB.subs({bp0: lB[0], bp1: lB[1]}) - kBA.subs({ap0: lA[0], ap1: lA[1]})), 0)
+    ck.eq("(F) assoc/mprod first-order factor on route AB is 1/Z, symbolic in the damped factor",
+          sp.cancel(kAB / mprod(FAB0)), 1 / Z)
+    ck.eq("(F) assoc/mprod first-order factor on route BA is 1/Z, symbolic in the damped factor",
+          sp.cancel(kBA / mprod(FBA0)), 1 / Z)
     return ck.done()
 
 

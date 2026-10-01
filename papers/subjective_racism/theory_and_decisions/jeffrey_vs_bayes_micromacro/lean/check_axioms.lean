@@ -128,6 +128,17 @@ open JeffreyOrder
 #print axioms ladder_assoc_coeff_witness_zero
 #print axioms ladder_oddsShadow_coeff
 #print axioms ladder_oddsShadow_seqEffect
+#print axioms rescale_rescale
+#print axioms rescale_rescale_eq
+#print axioms assoc_normalize
+#print axioms oddsRatio_normalize
+#print axioms oddsRatio_factorRoute
+#print axioms assoc_factorRoute
+#print axioms factorRoute_at_zero
+#print axioms factorRoute_mA1_zero
+#print axioms factor_mA1_gap_iff
+#print axioms mprod_factorRoute_zero
+#print axioms oddsShadow_factor_coeff
 
 -- Literature formalizations (lean/Literature/*.lean): each paper's own claims,
 -- generated from the theorem declarations (one BEGIN/END block per file).
