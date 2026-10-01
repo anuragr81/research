@@ -41,6 +41,13 @@ Gaps found when comparing `manuscript_change_plan_asof_2026-09-30.md` with the t
   sentence-level diff against the author's new intro. Currently taken from the
   Section D status table only.
 
+- [ ] **Identification overclaim (found 2026-10-01).** "A failure of identification,
+  not of estimation, which no sample size repairs" is true only for the odds ratio
+  each evaluator holds (Lemma SEP, exactly the prior's in either sequence). The
+  cross-product association and the loss are second order, visible at a precision
+  finer than $c^2$ (MS line 456). Withdrawn from C.1; still in C.15 (C.11 part 9),
+  `positioning_economics.tex` :49-58 and `papers_dialectic.tex` :175-179.
+
 ## 3. X5: incorporate the exploration documents (after the current state is verified)
 
 Method as set out under X5 in the audit: extract each document's points, map each

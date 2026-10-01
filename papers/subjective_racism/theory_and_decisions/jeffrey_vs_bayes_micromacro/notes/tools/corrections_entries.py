@@ -42,25 +42,30 @@ E.append(("C.1", "Abstract, sentences 2-4", [(
     r"""Considering evaluators who read two correlated soft cues and comparing their
 beliefs and decisions with a sequence-free Bayesian benchmark, the paper asks which
 statistics of those beliefs and decisions register the resulting sequence effect.
-Whether a statistic registers it is a question of identification rather than of
-estimation, since the two reading sequences move a belief in only two directions,
-and a statistic insensitive to both carries no first-order signal in the population
-itself, however many evaluators are sampled. The believed association between the
-attributes and the average value lost through decisions that differ from the
-benchmark are of that kind, while the marginal probabilities and the share of the
-population whose decision the sequence changes depart from the benchmark at first
-order.""")],
-    "\"An arbitrary statistic is an order of magnitude closer to the benchmark\" is false as "
-    "stated; only the protected statistics are (Proposition PRO; plan 0.A made the same point). "
-    "The two-dimensional plane is the mechanism, not the finding; for the Journal of "
-    "Mathematical Economics the abstract leads with the economic content, that a null on a "
-    "belief audit is an identification failure and not an estimation one (the point of "
-    "notes/positioning_economics.tex, already in the conclusion at MS ~950). "
+The paper shows that a smooth statistic of the belief is an order of magnitude
+closer to the benchmark than the marginal probabilities when it is insensitive to
+small shifts in those marginals. The believed association between the attributes
+is such a statistic, and the average value lost through decisions that differ from
+the benchmark also departs only at second order, while the share of the population
+whose decision the sequence changes departs at first order.""")],
+    "Sentence 3 is the author's wording (2026-10-01), with \"smooth\", \"than the marginal "
+    "probabilities\" and \"those marginals\" added. \"An arbitrary statistic is an order of magnitude "
+    "closer to the benchmark\" is false as stated; only the statistics insensitive to the "
+    "marginals are (Proposition PRO), and \"closer\" needs its comparator. The plane is the "
+    "mechanism in the body, not the finding; in plain words both sequences shift only the "
+    "marginals at first order. \"An order of magnitude\" is a factor of $c$, the marginals "
+    "departing in proportion to $c$ and the insensitive statistics to $c^2$. The loss is named "
+    "separately because it is second order for another reason (Theorem LOS, few flips and each "
+    "costing little), not through insensitivity. An earlier draft of this entry claimed an "
+    "identification failure; that holds only for the odds ratio each evaluator holds (Lemma SEP), "
+    "while the cross-product association and the loss are second order and visible at a fine "
+    "enough precision (MS line 456), so the claim was withdrawn. "
     "Also \"the current papers asks\", and \"This results in measures ... staying ... while the "
     "share ... differing\" has no main verb. \"Considering the empirical limitations in addition "
     "to theoretical underpinnings\" is cut because no empirical limitation is named.",
-    "DEC and LOS (second order), DRF and SHR (first order), PRO (the plane and the "
-    "classification). All in the Lean and sympy suites."))
+    "PRO (propPRO_protection, propPRO_uniqueness: insensitive to both marginal shifts iff "
+    "second order); DEC and LOS (second order); DRF and SHR (first order). All in the Lean and "
+    "sympy suites."))
 
 E.append(("C.2", "Introduction, paragraph 1, sentences 1, 2, 4 and 6", [
     ("That the sequence in which evidence arrives can move the final judgment", "\\citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has rarely gathered attention.",
