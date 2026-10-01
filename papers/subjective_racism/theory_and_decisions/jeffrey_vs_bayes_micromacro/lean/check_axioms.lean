@@ -109,6 +109,26 @@ open JeffreyOrder
 #print axioms orderEffect_damped_mA1
 #print axioms orderEffect_damped_at_indep
 
+-- The ladder under partial adoption: rescaling structure, product measures at
+-- c = 0, the gap in span{R1, R2}, and the odds-ratio shadow (Ladder.lean)
+#print axioms assoc_rescale
+#print axioms oddsRatio_rescale
+#print axioms assocSq_div_cellProd_rescale
+#print axioms jeffreyA_eq_rescale
+#print axioms jeffreyB_eq_rescale
+#print axioms assoc_routeDamped
+#print axioms assoc_routeDampedBA
+#print axioms routeDamped_at_zero
+#print axioms routeDampedBA_at_zero
+#print axioms ladder_gap
+#print axioms ladder_gap_mA1
+#print axioms ladder_assoc_coeff
+#print axioms ladder_assoc_coeff_at_one
+#print axioms ladder_assoc_coeff_witness
+#print axioms ladder_assoc_coeff_witness_zero
+#print axioms ladder_oddsShadow_coeff
+#print axioms ladder_oddsShadow_seqEffect
+
 -- Literature formalizations (lean/Literature/*.lean): each paper's own claims,
 -- generated from the theorem declarations (one BEGIN/END block per file).
 -- Some use a strict subset of the standard axioms or none (e.g. decide-based
