@@ -174,12 +174,8 @@ whether the two sequences agree but by how much they disagree in an arbitrary
 statistic. The paper finds that the marginal probabilities and the share of decisions
 they change carry the difference at first order in the prior covariance, while the
 believed association and the statistics that move with it carry it only at second
-order. These second-order results require full adoption of the later cue. Whether
-a population adopts in full can be read from its ratings
-(Proposition~\ref{prop:ADJ}), and when it does not, as in the belief-adjustment
-model, the believed association differs between the sequences at first order while
-the odds ratio between the attributes is the same whichever cue is read first at
-every degree of adoption (Proposition~\ref{prop:LAD}). This carries clear implications for what an
+order. These second-order results require full adoption of the later cue
+(Section~\ref{sec:robust}). This carries clear implications for what an
 audit can or cannot measure about sequence dependence.""")],
     "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
     "needs correcting and adds one sentence. Corrections: \"adjust\" to \"adjust it\"; \"leave open\" "
@@ -191,15 +187,10 @@ audit can or cannot measure about sequence dependence.""")],
     "and Asch is dropped (audit P10-P12); the two dashes become commas; \"decisions from them\" "
     "becomes \"the share of decisions they change\", since the loss is a decision statistic and is "
     "second order (LOS); \"and statistics\" becomes \"and the statistics that move with it\". "
-    "Added sentences (author's decisions of 2026-10-01, to keep the adoption weight as the nesting "
-    "of the belief-adjustment model and to present the results as conditional on full adoption "
-    "rather than robust to its failure): they say that the second-order results require full "
-    "adoption, that Proposition ADJ tests for it from three marginals of one reading group, and "
-    "what Proposition LAD gives otherwise. Under partial adoption the marginals differ between "
-    "sequences at order zero in $c$, the association at first order, and the odds ratio not at "
-    "all. \"In the belief-adjustment model\" is accurate because the adoption-weight rule is "
-    "Hogarth-Einhorn's averaging form (Eq. 4) applied to the second cue (E.15). The sentences need "
-    "Propositions ADJ and LAD (E.15).",
+    "Added sentence (author, 2026-10-01): one line saying that the second-order results require "
+    "full adoption, with a pointer to Section 6. The author declined a longer qualification here "
+    "(the test of adoption from the ratings and what partial adoption changes); that explanation "
+    "belongs to C.5 and to Section 6.",
     "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
@@ -207,34 +198,50 @@ audit can or cannot measure about sequence dependence.""")],
 E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
     "In demonstrating how the sequence-dependence of certain statistics can be invisible",
     "(the amnestic updating concern in the literature).",
-    r"""In the panel example the odds ratio between the two traits is the same whether
-the credential or the letter is read first, however far a later impression erases
-the earlier one, since each update rescales rows or columns of the belief
-(Lemma~\ref{lem:SEP}). The believed association differs between the two reading
-sequences only at second order when each impression is adopted in full. When the
-later impression is adopted only in part, that difference is first order and the
-difference in each marginal is of order zero, and the statistics that still differ
-only at second order are those which agree with the log odds ratio to first order
-(Proposition~\ref{prop:LAD}).""")],
-    "False as written for the cross-product association, which is the paper's `assoc`: "
-    "invisibility at second order does depend on how far a later impression erases the earlier "
-    "one. Under partial adoption the association's sequence effect is first order in $c$, with "
-    "coefficient $(1-\\omega)H/Z$, and only the odds ratio is identical across sequences for every "
-    "$\\omega$. What survives every $\\omega$ is the ordering by the power of $c$ at which each "
-    "statistic first differs between the sequences, marginals before protected statistics, these "
-    "before the statistics that agree with the log odds ratio to first order, and the odds ratio "
-    "never (Proposition LAD, E.15). Effect on the paper's two conclusions, asked 2026-10-01: the "
-    "second-order association is a full-adoption result, since under partial adoption the "
-    "association differs between sequences at first order and the pooled association acquires a "
-    "term of order zero, $-\\lambda(1-\\lambda)(1-\\omega)^2(\\alpha-q_0)(\\beta-r_0)$; the "
-    "characterisation of the second-order statistics by their differential at independence "
-    "survives in form, but the class moves from the statistics proportional to the association "
-    "to those proportional to the log odds ratio. The commented-out line below the paragraph states the odds-ratio "
-    "version. \"Amnestic\" is dropped here since Hawthorne is not cited in this paragraph "
-    "(writing discipline 6).",
-    "Ladder.lean (`oddsRatio_rescale`, `jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`, "
-    "`ladder_gap`, `ladder_assoc_coeff`); sympy/verify_ladder.py (37/37), "
-    "sympy/verify_interior_omega.py; LemmaSEP.lean (general N)."))
+    r"""The panel example also shows how the sequence dependence of certain statistics can
+be invisible to an observer, and whether that invisibility depends on how far the
+later impression erases the earlier one. When each impression is adopted in full,
+the letter sets the belief about trustworthiness regardless of what the credential
+had implied, so the sequence can act only through the believed link between the
+traits, and the believed association itself differs between the two sequences only
+at second order. When the letter is adopted only in part, it moves the belief about
+trustworthiness from wherever the credential left it, so the sequence decides which
+document is discounted. Both ratings then differ between the sequences even when the
+traits are believed unrelated, the believed association differs at first order,
+because the same prior link is now read against different ratings, and the average
+association across panels that read in different sequences is nonzero even when no
+panel believes the traits linked. The second-order invisibility of the association
+is therefore a property of full adoption. Only the odds ratio between the traits is
+untouched at every degree of erasure, since each impression rescales the rows or the
+columns of the belief and never the way the traits are paired within them
+(Lemma~\ref{lem:SEP}, Section~\ref{sec:robust}).""")],
+    "The BEFORE sentence is false for the cross-product association, which is the paper's "
+    "`assoc`: the invisibility at second order does depend on how far a later impression erases "
+    "the earlier one. The author asked (2026-10-01) that C.5 say whether omega touches the main "
+    "result and why, in economic terms. It does. Full adoption: a Jeffrey step sets its own "
+    "marginal to the delivered credence whatever the other cue had implied, so at independence "
+    "the two sequences agree (IMM) and the sequence acts only through the prior association; "
+    "each step rescales rows or columns, so the association is $c$ times a product of factors "
+    "that agree between sequences at $c=0$, and the difference is second order (ORD, DEC). "
+    "Partial adoption: the damped step moves the marginal only part of the way from where the "
+    "first cue left it, so which cue is discounted depends on the sequence; both marginals "
+    "differ at order zero even at $c=0$, by $(1-\\omega)(\\alpha-q_0)$ and $-(1-\\omega)(\\beta-r_0)$; "
+    "the rescaling factors then differ at order zero, so the association, $c$ times those "
+    "factors, differs at first order with coefficient $(1-\\omega)H/Z$ (LAD); and the mean belief of "
+    "a population mixing the sequences acquires a cross-product association "
+    "$-\\lambda(1-\\lambda)(1-\\omega)^2(\\alpha-q_0)(\\beta-r_0)$ at $c=0$ that no member holds (the "
+    "\"average association\" clause). Odds ratio: invariant under row and column rescaling, so "
+    "the same in both sequences for every $c$ and every omega (Lemma SEP, which covers damped "
+    "steps). So the main result, the second-order invisibility of the association and of the "
+    "statistics that move with it, holds under full adoption and not otherwise; what holds at "
+    "every omega is the odds ratio. \"Amnestic\" is dropped here since Hawthorne is not cited in "
+    "this paragraph (writing discipline 6). The commented-out line below the paragraph states "
+    "the odds-ratio version.",
+    "PropIMM.lean; PropORD.lean; PropDEC.lean; Ladder.lean (`ladder_gap`, `ladder_gap_mA1`, "
+    "`ladder_assoc_coeff`, `ladder_assoc_coeff_witness`, `oddsRatio_rescale`, "
+    "`jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`); LemmaSEP.lean (general N, any "
+    "attribute-local rescaling); sympy/verify_ladder.py (53/53); sympy/verify_interior_omega.py "
+    "row 4 (the pooled association at $c=0$)."))
 
 E.append(("C.6", "Introduction, premise paragraph, from \"Read as a Bayes factor\"", [(
     "Read as a Bayes factor, the credential carries a likelihood ratio", "consistent with the delivered marginal \\citep{DiaconisZabell1982}",
