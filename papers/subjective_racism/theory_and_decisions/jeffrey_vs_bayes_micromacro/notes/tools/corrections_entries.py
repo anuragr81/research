@@ -72,10 +72,10 @@ E.append(("C.2", "Introduction, paragraph 1, sentences 1, 2, 4 and 6", [
      r"""That the sequence in which evidence arrives can move the final judgment is among
 the oldest findings in the study of impression formation
 \citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has
-rarely gathered attention. Indeed, if individual judgments did not depend on the
-arrival sequence of cues, then each cue must move belief by a factor fixed before it is
-received, leading to the unlikely situation where experience does not change how later
-cues are read."""),
+rarely gathered attention. That sequence dependence exists is rarely in doubt, since
+if individual judgments did not depend on the arrival sequence of cues, then each cue
+must move belief by a factor fixed before it is received, leading to the unlikely
+situation where experience does not change how later cues are read."""),
     ("The sequence-dependence of Jeffrey conditioning for soft evidence", "remains unclear \\citep{ZhaoOsherson2010}.",
      r"""The sequence dependence of Jeffrey conditioning on soft evidence has attracted
 debate \citep{DiaconisZabell1982,Hawthorne2004,ZhaoOsherson2010}, but how that
@@ -92,7 +92,9 @@ second order."""),
     "added sentence is the modus tollens the author proposed on 2026-09-27. If judgments did "
     "not depend on the sequence, each cue would move belief by a factor fixed in advance, and "
     "then experience could not change how a later cue is read; that is unlikely, so "
-    "sequence independence is unlikely. Changes to the author's draft: \"If\" added, "
+    "sequence independence is unlikely. The opening \"That sequence dependence exists is rarely in doubt, since\" "
+    "is the author's idea; it names the subject so that \"it\" cannot be read as the measurement, and "
+    "it gives the sentence a job as a logical ground beside the citations. Changes to the author's draft: \"If\" added, "
     "\"judgements\" to \"judgment\" as in the manuscript, the double hyphen replaced by a comma. "
     "Caution on \"must\": the theorems run the other way. Fixed factors imply commutation "
     "(Wagner 2003 Theorem 3.2, Hawthorne factorUpdate_comm, Cripps order_invariance). The "
