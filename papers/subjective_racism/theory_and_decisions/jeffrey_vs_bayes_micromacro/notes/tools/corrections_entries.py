@@ -131,17 +131,20 @@ treated as a problem it has been treated as a defect to repair\footnote{\citet{H
 offers factor-based alternatives in which a cue supplies a normed-likelihood or
 likelihood-ratio factor instead of a new probability. Under these, updates on
 distinct attributes commute, and in his Basis-Commuting Version all updates do.}
-rather than as something to measure. Replacing a credence that resets the prior
-marginal by a factor that multiplies it settles whether beliefs depend on
-sequence, but it leaves open the empirical question of whether an impression
-replaces a prior belief or adjusts it.""")],
+rather than as something to measure. While changing the input from a credence that
+replaces the prior to a factor that multiplies it settles whether beliefs depend on
+sequence, it hardly addresses the empirical issue that an observer cannot tell
+whether impressions replace prior belief or adjust it.""")],
     "(i) Asch did not model an impression as a single score; Experiment VI reports eighteen "
     "traits under two orders (audit A28). His published tables give per-trait percentages, "
     "i.e. marginals. (ii) Diaconis-Zabell are grouped with the defect view, but they hold that "
     "non-commutativity \"is not a real problem\" (M24). (iii) The footnote says Hawthorne "
     "\"repairs\" the defect and that the effect disappears; he offers alternatives, and order-"
     "freedom holds across distinct bases, fully only in his Basis-Commuting Version (M19). "
-    "(iv) \\citet inside a sentence where \\citep is meant; \"have focused\" agreement.",
+    "(iv) \\citet inside a sentence where \\citep is meant; \"have focused\" agreement. "
+    "(v) Last sentence in the author's wording (2026-10-01), corrected only by \"changing the input\" "
+    "for \"the changing of input\", relative clauses naming what the credence replaces and the "
+    "factor multiplies, and \"or not\" dropped after \"whether\".",
     "Asch1946 record (Asch.lean, Table 7); DiaconisZabell.lean and README; Hawthorne.lean "
     "(`extUpdate_basisCommuting`, `factorUpdate_comm`), Sections 6-8."))
 
