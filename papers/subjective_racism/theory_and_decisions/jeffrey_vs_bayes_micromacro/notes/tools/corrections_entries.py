@@ -198,22 +198,17 @@ audit can or cannot measure about sequence dependence.""")],
 E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
     "In demonstrating how the sequence-dependence of certain statistics can be invisible",
     "(the amnestic updating concern in the literature).",
-    r"""The panel example also shows how the sequence dependence of certain statistics can
-be invisible to an observer, and whether that invisibility depends on how far the
-later impression erases the earlier one. When each impression is adopted in full,
-the letter sets the belief about trustworthiness regardless of what the credential
-had implied, so the sequence can act only through the believed link between the
-traits, and the believed association itself differs between the two sequences only
-at second order. When the letter is adopted only in part, it moves the belief about
-trustworthiness from wherever the credential left it, so the sequence decides which
-document is discounted. Both ratings then differ between the sequences even when the
-traits are believed unrelated, the believed association differs at first order,
-because the same prior link is now read against different ratings, and the average
-association across panels that read in different sequences is nonzero even when no
-panel believes the traits linked. The second-order invisibility of the association
-is therefore a property of full adoption. Only the odds ratio between the traits is
-untouched at every degree of erasure, since each impression rescales the rows or the
-columns of the belief and never the way the traits are paired within them
+    r"""The panel example also shows how the sequence dependence of some statistics can
+be invisible to an observer, and whether that depends on how far the later impression
+erases the earlier one. When each impression is adopted in full, the letter fixes the
+belief about trustworthiness whatever the credential implied, so the sequence acts
+only through the believed link between the traits, and the believed association
+differs between the two sequences only at second order. When the letter is adopted
+only in part, the sequence decides which document is discounted. Both ratings then
+differ even when the traits are believed unrelated, the believed association differs
+at first order, and panels pooled across sequences show an association none of them
+holds. Only the odds ratio is untouched at every degree of erasure, since each
+impression rescales rows or columns of the belief and never the pairing within them
 (Lemma~\ref{lem:SEP}, Section~\ref{sec:robust}).""")],
     "The BEFORE sentence is false for the cross-product association, which is the paper's "
     "`assoc`: the invisibility at second order does depend on how far a later impression erases "
