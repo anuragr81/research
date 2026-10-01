@@ -300,7 +300,7 @@ sequence effect at first order.""")],
     "audits cannot detect at first order.",
     "Propositions DEC, PRO."))
 
-E.append(("C.9", "Setup 2.1, the prior paragraph and the sequence/weight sentences", [
+E.append(("C.9", "Setup 2.1, the prior paragraph", [
     ("The three numbers that fix $P$ are described as $\\Delta^{3}$ -- specified using the marginals",
      "the prior covariance $c$ between the attributes:",
      r"""The prior is a point of $\Delta^{3}$ fixed by three numbers, the marginals
@@ -311,7 +311,15 @@ attributes,"""),
      r"""Simply put, the marginals $\alpha=P(A{=}0)$ and $\beta=P(B{=}0)$ denote the shares
 of applicants the panelist believes to lack competence and to lack trustworthiness,
 and the prior covariance $c=\assoc(P)$ denotes how strongly the panelist believes
-the"""),
+the""")],
+
+    "Grammar (\"described as $\\Delta^3$ --\", \"denotes\" for two subjects). The "
+    "Frechet-Hoeffding bounds in the new text are correct (checked cell by cell). The "
+    "adoption-weight sentence that ends this paragraph is a separate entry, since a "
+    "Section~2 entry on what an impression is falls between them (C.9w).",
+    "Bounds: nonnegativity of the four cells of P."))
+
+E.append(("C.9w", "Setup 2.1, the adoption-weight sentence", [
     ("To address the issues in amnestic updating debate, we also consider an adoption weight",
      "the credential's implication is never moved.",
      r"""To compare full adoption with the belief-adjustment model of
@@ -322,15 +330,13 @@ displaces what the credential had already implied about trustworthiness. At
 $\omega=1$ the letter sets the rating outright, and at $\omega=0$ the credential's
 implication is never moved.""")],
     "Purpose of omega (author's decision, 2026-10-01): the weight nests Hogarth-Einhorn's "
-    "averaging rule (their Eq. 4, applied to the second cue; E.10), so full adoption is one "
+    "averaging rule (their Eq. 4, applied to the second cue; E.15), so full adoption is one "
     "corner of a descriptive model rather than an assumption taken from the normative "
-    "literature. The Hawthorne debate is now taken up in the introduction (C.4). "
-    "Grammar (\"described as $\\Delta^3$ --\", \"denotes\" for two subjects). \"Amnestic\" is "
-    "used only where Hawthorne is quoted (writing_discipline.md 6). **Dependency:** omega is "
-    "defined here but used nowhere else in the manuscript until plan 5.B (Proposition ADJ) is "
-    "applied; either apply 5.B or move this sentence into 5.B. The Frechet-Hoeffding bounds "
-    "in the new text are correct (checked cell by cell).",
-    "Bounds: nonnegativity of the four cells of P; Hawthorne pp. 98-99."))
+    "literature, and the pointer sends the reader to the subsection where the weight is used. "
+    "The Hawthorne debate is taken up in the introduction (C.4). \"Amnestic\" is used only "
+    "where Hawthorne is quoted (writing_discipline.md 6), so it goes. Omega is used nowhere "
+    "else before Section 6, so this entry needs E.15.",
+    "Hawthorne pp. 98-99; HogarthEinhorn.lean (`oneSided_eq_eq8`); Anchoring.lean."))
 
 E.append(("C.10", "Setup 2.2, the invariance condition and the justification of the rule", [
     ("holding the conditionals fixed---the invariance condition", "\\citep[ch.~11]{Jeffrey1983}.",
@@ -388,7 +394,20 @@ sequence because the second likelihood is matched to the intermediate belief, so
 the two sequences process different experiments."""),
     ("While the literature restores sequence-invariance for sequential Jeffrey updating", "\\citep{PettigrewWeisberg2025},",
      r"""While \citet{PettigrewWeisberg2025} restore sequence-invariance by pooling the
-prior with each new input multiplicatively before the Jeffrey step,"""),
+prior with each new input multiplicatively before the Jeffrey step,""")],
+    "One entry per sentence group, in manuscript order. BHW/Banerjee: \"coarse\" belongs to BHW's "
+    "binary action, not Banerjee's continuum; the two share one mechanism, so \"on the other hand\" "
+    "goes; the marginals point is the paper's analogy (M2, M3). Dietrich: Def. 1 is preference "
+    "aggregation, and with a common prior linear pooling passes the criterion wherever it applies "
+    "(M4, M5). Epstein/Ortoleva/Cripps (bold sentence): the framing is unsupported for Epstein "
+    "and Ortoleva; the Cripps claim is false, since under Proposition IMM's reading the "
+    "composite satisfies all four axioms, and the footnote goes with it (M6-M9). "
+    "Pettigrew-Weisberg pool the prior with each input, not successive inputs (M25). The rest of "
+    "this paragraph is C.11b, since the Asch entry (E.6) falls in between.",
+    "BHW.lean, Banerjee.lean, Dietrich.lean, Epstein.lean, Ortoleva.lean (via the 2024 survey), "
+    "Cripps.lean (`order_invariance`, `composite_AB_eq_bayes`), PettigrewWeisberg.lean."))
+
+E.append(("C.11b", "Related literature, Phelps-Arrow to the amalgamation paragraph, plus the identification paragraph", [
     ("The paper borrows the evaluator-with-binary-attributes frame", "\\citep{Phelps1972, Arrow1973}.",
      r"""The paper borrows the evaluator-with-binary-attribute frame from the
 statistical-discrimination lineage \citep{Arrow1973,CoateLoury1993}."""),
@@ -422,26 +441,17 @@ and arises on the belief side of an audit. The first-order signal in a protected
 statistic is zero in the population itself, so its silence is a failure of
 identification and not of estimation, which no sample size repairs, and the
 identifying variable is the reading sequence, which pooled data discard.""")],
-    "One entry per sentence group, in manuscript order. BHW/Banerjee: \"coarse\" belongs to BHW's "
-    "binary action, not Banerjee's continuum; the two share one mechanism, so \"on the other hand\" "
-    "goes; the marginals point is the paper's analogy (M2, M3). Dietrich: Def. 1 is preference "
-    "aggregation, and with a common prior linear pooling passes the criterion wherever it applies "
-    "(M4, M5). Epstein/Ortoleva/Cripps (bold sentence): the framing is unsupported for Epstein "
-    "and Ortoleva; the Cripps claim is false, since under Proposition IMM's reading the "
-    "composite satisfies all four axioms, and the footnote goes with it (M6-M9). "
-    "Pettigrew-Weisberg pool the prior with each input, not successive inputs (M25). Phelps has "
-    "no binary attribute, so he is dropped from this sentence and can be re-cited in plan 1.C for "
-    "statistical discrimination in general (M10). BCGS name one mechanism, not two, and \"sampling\" is not theirs "
-    "(M12). Becker: the concluding section never draws the distinction, and Becker's own "
-    "mechanism is averaging plus a budget constraint, the opposite side of it (\"Our statement "
-    "goes beyond arithmetic\", p. 7; M13); the AFTER deletes the sentence, and an alternative "
-    "that keeps Becker is in literature/becker1962/README.md. Good-Mittal: their paradox covers "
-    "amplification and effects created from none, and its cause is uneven allocation, not "
-    "weighting by population shares (M14).",
-    "BHW.lean, Banerjee.lean, Dietrich.lean, Epstein.lean, Ortoleva.lean (via the 2024 survey), "
-    "Cripps.lean (`order_invariance`, `composite_AB_eq_bayes`), PettigrewWeisberg.lean, "
+    "Continues C.11 after the Asch entry (E.6). Phelps has no binary attribute, so he is dropped "
+    "from this sentence and can be re-cited in E.1 for statistical discrimination in general "
+    "(M10). BCGS name one mechanism, not two, and \"sampling\" is not theirs (M12). Becker: the "
+    "concluding section never draws the distinction, and Becker's own mechanism is averaging plus "
+    "a budget constraint, the opposite side of it (\"Our statement goes beyond arithmetic\", p. 7; "
+    "M13); the AFTER deletes the sentence, and an alternative that keeps Becker is in "
+    "literature/becker1962/README.md. Good-Mittal: their paradox covers amplification and effects "
+    "created from none, and its cause is uneven allocation, not weighting by population shares "
+    "(M14). The last part also appends the identification paragraph (formerly C.15).",
     "Phelps.lean, Arrow.lean, CoateLoury.lean, BCGS.lean, Becker.lean, GoodMittal.lean "
-    "(`piR_amalg_general`, `equalSize_reversal`). The appended paragraph (C.15) carries the identification point of notes/positioning_economics.tex and plan 3.C/3.D into Section 3, with audit P17a (no sample-size claim attributed to Heckman; that clause is the paper's own consequence of Proposition PRO), H2 (\"nothing guarantees\" is p. 109), H3 (\"can find discrimination\" is p. 102) and B37 (BIR credit \"different sources\" to Fang-Moro, so it is paraphrased) applied. Needs Heckman1998 and Bohren2019 in bibliography.bib (plan B.A)."))
+    "(`piR_amalg_general`, `equalSize_reversal`). The appended paragraph carries the identification point of notes/positioning_economics.tex and plan 3.C/3.D into Section 3, with audit P17a (no sample-size claim attributed to Heckman; that clause is the paper's own consequence of Proposition PRO), H2 (\"nothing guarantees\" is p. 109), H3 (\"can find discrimination\" is p. 102) and B37 (BIR credit \"different sources\" to Fang-Moro, so it is paraphrased) applied. Needs Heckman1998 and Bohren2019 in bibliography.bib (E.14)."))
 
 E.append(("C.13", "Section 4, the Foster-Greer-Thorbecke sentence", [(
     "This is the standard incidence-versus-intensity pairing of the measurement literature",
@@ -583,14 +593,14 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.1.3": "removes the identification overclaim",
                             "C.4.1": "adds the partial-adoption sentence (Proposition LAD)",
                             "C.5.1": "adds what survives partial adoption (Proposition LAD)",
-                            "C.9.3": "names the belief-adjustment model the weight nests",
+                            "C.9w.1": "names the belief-adjustment model the weight nests",
                             "E.13.1": "names the two new propositions",
-                            "E.15.1": "adds the Scope subsection heading",
-                            "E.15.2": "adds the full-adoption clause to the roadmap",
+                            "E.15h.1": "adds the Scope subsection heading",
+                            "E.15r.1": "adds the full-adoption clause to the roadmap",
                             "C.2.5": "repairs a sentence with two verbs",
-                            "C.10.1": "citation fix", "C.11.8": "deletion",
+                            "C.10.1": "citation fix", "C.11b.3": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",
-                            "C.11.9": "appends the identification paragraph (C.15)",
+                            "C.11b.4": "appends the identification paragraph",
                             "E.2.1": "adds the definition of an impression",
                             "E.4.1": "adds the bounds on the credences",
                             "E.5.1": "inserts four paragraphs before the existing sentence",

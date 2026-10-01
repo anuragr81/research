@@ -12,15 +12,17 @@ earlier in $c$ without changing their ranking,
 the odds ratio is the same in both sequences at every weight, and the share-versus-loss
 separation holds only under full adoption. Entries below that say the classification is
 "moot" or "no longer measures what it was built to measure" under partial adoption are
-refuted; their current versions are E.10 (Proposition ORD), E.15 (the partial-adoption
+refuted; their current versions are 5.2 (Proposition ORD), 6.3 (the partial-adoption
 subsection of Section 6, holding Propositions ADJ, LAD and the new FAC on factor inputs,
-the two channels, the rubric prediction and the settings table), C.4, C.5 and C.9 of
+the two channels, the rubric prediction and the settings table), 1.3, 1.4 and 2.3 of
 `notes/manuscript_corrections.tex`, which supersede 5.B, 6.B, 1.A2 and the $\omega$
 clause of 1.D. Later the same day the adoption-weight material was moved out of
 Section 5 into that subsection, so that Sections 4 and 5 state the results under full
 adoption and Section 6 says that they require it, tests for it (ADJ) and says what
 partial adoption changes (LAD, FAC). The author chose this framing over "robustness",
 since the second-order association result fails for every weight below one.
+
+*Entry numbers in the tex plan were changed on 2026-10-01 to section numbers (0.1 abstract, 1.x introduction, ..., B.x back matter), listed in manuscript order; the plan ends with a table of former numbers. Notes above dated before that use the former numbers.*
 
 The entries below are kept as an archive until re-issued there. **No change here has been applied to the manuscript.** Every AFTER block is paste-ready LaTeX. Line numbers in the headings are
 from the original plan and are stale; locate each edit by its BEFORE text.
@@ -85,7 +87,7 @@ B.A (bibliography) must be applied before 1.A, 1.C, 1.D, 3.A, 3.B, 3.C, 3.D,
    states the second premise, full adoption, and names the adoption weight
    $\omega$, which Proposition ADJ recovers from the marginals. *(2026-10-01:
    $\omega$ now nests the belief-adjustment model; Proposition LAD states the
-   ranking under partial adoption. See E.10 and C.9 of the tex plan.)*
+   behaviour under partial adoption. See 6.3 and 2.3 of the tex plan.)*
 3. **1.E and 5.B state the answer together with its instrument.** Marginals and
    the share of decisions changed show the sequence effect at first order. The
    association and the surplus-weighted loss do not.
@@ -234,7 +236,7 @@ holds for any number of attributes and cues.
 ## 1.A2 -- Introduction, paragraph 1: the two-channel prelude (pointer)
 
 *Status 2026-10-01: applied by the author at c2ae782f; residual corrections and the
-partial-adoption sentence are C.4 of the tex plan. The position channel's definition
+partial-adoption sentence are 1.3 of the tex plan. The position channel's definition
 here ("weights the later cue less", cited to Hogarth-Einhorn and Asch) is wrong on
 both citations (audit P10-P12) and is replaced there.*
 
@@ -1109,8 +1111,8 @@ definition.
 
 ## 5.B -- Section 5: new definition + Proposition ORD (insert after line 440) (formerly Change 6)
 
-*Status 2026-10-01: Proposition ORD is re-issued as E.10 of the tex plan. Proposition
-ADJ, with the new Propositions LAD and FAC, now lives in E.15, the partial-adoption
+*Status 2026-10-01: Proposition ORD is re-issued as 5.2 of the tex plan. Proposition
+ADJ, with the new Propositions LAD and FAC, now lives in 6.3, the partial-adoption
 subsection of Section 6.*
 
 **Purpose.** State how the sequence effect, already defined on the joint
@@ -1389,12 +1391,12 @@ family is stated through Hogarth-Einhorn's own equation, which is already cited.
 
 ## 6.B -- Scope: the two channels, and opposite predictions about one procedure (pointer)
 
-*Status 2026-10-01: re-issued as E.12, then folded into E.15 (the partial-adoption subsection of
+*Status 2026-10-01: re-issued, then folded into 6.3 (the partial-adoption subsection of
 Section 6) the same day. Its claim that the
 classification by order in $c$ "no longer measures what it was built to measure" under
 partial adoption, and the table row calling it "moot", are refuted
-(`sympy/verify_ladder.py`); E.12 and `interior_omega.tex` are corrected. The decision row
-left out on 2026-09-27 is now in E.12's table, as the LOS integral read with an
+(`sympy/verify_ladder.py`); 6.3 and `interior_omega.tex` are corrected. The decision row
+left out on 2026-09-27 is now in 6.3's table, as the LOS integral read with an
 order-zero score gap.*
 
 **Purpose.** Two paragraphs following 6.A. The first names the two channels

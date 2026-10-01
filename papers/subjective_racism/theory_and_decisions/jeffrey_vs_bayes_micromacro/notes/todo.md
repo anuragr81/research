@@ -6,13 +6,16 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 
 ## 1. Author decisions, first priority
 
-- [~] **Approve entries of Section C (C.1 to C.15) and Section E (E.1 to E.14),
-  entry by entry.** Approved entries are applied to `PAPER_B_MANUSCRIPT.tex`,
-  compiled and committed. Order constraints:
-  - E.10 (Propositions ORD and ADJ) before any entry that cites ORD or ADJ.
-  - E.14 (bibliography) before E.1, E.5, E.7 and C.15.
-  - E.11 before E.12.
-- [~] **Notation in E.10:** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
+- [~] **Approve the plan's entries, 0.1 to B.2, entry by entry.** Entries are numbered by
+  the manuscript section they change (0 abstract, 1 to 7 sections, A appendix, B back matter
+  and bibliography) and listed in manuscript order; the plan ends with a table of former
+  numbers (renumbered 2026-10-01). Approved entries are applied to `PAPER_B_MANUSCRIPT.tex`,
+  compiled and committed. Order constraints, where they differ from manuscript order:
+  - B.2 (bibliography) before every entry that cites a new reference.
+  - 5.2 (Proposition ORD) and 6.3 (Propositions ADJ, LAD, FAC) before 1.3, 1.4, 2.3 and 1.9,
+    which cite them.
+  - 6.2 before 6.3, which inserts after it. B.1 last.
+- [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.
 - [ ] After each batch of approvals: rebuild `PAPER_B_MANUSCRIPT.pdf` (`make paper`),
@@ -24,14 +27,14 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   `lean/JeffreyOrder/Ladder.lean`. Partial adoption moves every belief statistic except the odds
   ratio one order earlier with the ranking unchanged; the odds ratio is blind at every weight; the
   share-versus-loss separation holds only under full adoption.
-- [~] **Approve the reworked entries:** C.1 to C.4 (rebased on c2ae782f, residual
-  corrections only), C.5, C.9 part 3, E.10 (now Proposition ORD alone), E.15 (the new
-  partial-adoption subsection of Section 6: two channels, ADJ, LAD, the new Proposition FAC on
-  factor inputs, Table tab:robust, the rubric prediction and the settings table; E.12 is
-  folded into it). Order: E.10, E.11, E.15, then C.4, C.5, C.9, E.13.
+- [~] **Approve the reworked entries:** 0.1 to 1.3 (rebased on c2ae782f, residual
+  corrections only), 1.4, 2.3, 5.2 (Proposition ORD alone), 6.3 (the partial-adoption
+  subsection of Section 6: two channels, ADJ, LAD, the new Proposition FAC on factor inputs,
+  Table tab:robust, the rubric prediction and the settings table), with its heading 6.1 and
+  roadmap clause 1.9.
 - [ ] **Partial-adoption subsection (added 2026-10-01, reframed the same day).** Section 6
   keeps the author's title "Scope and robustness" and splits into Scope (assumptions
-  paragraph, E.11) and "Partial adoption and factor inputs" (E.15). Framing decided by the
+  paragraph, 6.2) and "Partial adoption and factor inputs" (6.3). Framing decided by the
   author: the second-order results require full adoption; Proposition ADJ tests for it from
   three marginals of one reading group; Propositions LAD and FAC say what partial adoption
   and a factor reading change. Not presented as robustness, since the association's
@@ -59,7 +62,7 @@ Gaps found when comparing `manuscript_change_plan_asof_2026-09-30.md` with the t
 - [ ] **1.E:** an intro sentence stating Proposition ORD with its instrument
   (marginals and the share of decisions changed show the sequence effect at first
   order; the association and the surplus-weighted loss do not). No AFTER text
-  exists. Must come after E.10 in the application order.
+  exists. Must come after 5.2 in the application order.
 - [ ] **X2 / W.A:** Table 1 (manuscript line 894) says "share of *candidates*
   whose decision the reading sequence changed"; the text and Proposition SHR say
   *evaluators*. Add a correction entry.
@@ -67,7 +70,7 @@ Gaps found when comparing `manuscript_change_plan_asof_2026-09-30.md` with the t
   holds $P$, $q$, $r$ common across evaluators) next to heterogeneous $c$.
 - [ ] Record the parked Table 1 redesign in the tex so it is not lost.
 - [ ] Section D of the tex: confirm that every surviving element of old 1.D
-  (the two premises, $\omega$ named in the intro) is carried by C.1 to C.8, by a
+  (the two premises, $\omega$ named in the intro) is carried by 0.1 to 1.8, by a
   sentence-level diff against the author's new intro. Currently taken from the
   Section D status table only.
 
@@ -75,9 +78,9 @@ Gaps found when comparing `manuscript_change_plan_asof_2026-09-30.md` with the t
   not of estimation, which no sample size repairs" is true only for the odds ratio
   each evaluator holds (Lemma SEP, exactly the prior's in either sequence). The
   cross-product association and the loss are second order, visible at a precision
-  finer than $c^2$ (MS precision passage). Withdrawn from C.1; the abstract's last
-  sentence is fixed by C.1 part 3 and the intro's "identification of sequence effects"
-  sentence is cut by C.2 part 4. Still in C.15 (C.11 part 9),
+  finer than $c^2$ (MS precision passage). Withdrawn from 0.1; the abstract's last
+  sentence is fixed by 0.1 part 3 and the intro's "identification of sequence effects"
+  sentence is cut by 1.1 part 4. Still in 3.4 (identification paragraph),
   `positioning_economics.tex` :49-58 and `papers_dialectic.tex` :175-179.
 
 ## 3. X5: incorporate the exploration documents (after the current state is verified)
@@ -89,15 +92,15 @@ entries for missing points under `notes/writing_discipline.md`, record points le
 out and why. Output: a coverage matrix plus new entries.
 
 - [ ] `papers_dialectic.tex`
-- [ ] `interior_omega.tex` (largely in E.12; check the rest). The "moot" classification
+- [ ] `interior_omega.tex` (largely in 6.3; check the rest). The "moot" classification
   claims were corrected 2026-10-01 against `verify_ladder.py`.
 - [ ] `positioning_economics.tex` (X3: decide whether to retire it)
 - [ ] `question_and_answer.tex`, `two_horn_motivation_body.tex`
 - [ ] `empirical_analytics.tex`, `worked_example.tex`
 - [ ] Substantive entries of `paper_review_log.md` (e.g. Entry 17, the zero-slope test)
 - [ ] `the_discrimination_problem.tex` (never committed; read-only source)
-- [ ] **X1:** check that the plan's literature edits (3.A to 3.D, now E.5 to E.7
-  and C.15) carry what `papers_dialectic.tex` argues, after the corrections.
+- [ ] **X1:** check that the plan's literature edits (3.A to 3.D, now 3.1 to 3.5
+  and 3.4) carry what `papers_dialectic.tex` argues, after the corrections.
 
 ## 4. Corrections to the exploration notes themselves (not the manuscript)
 
@@ -111,7 +114,7 @@ out and why. Output: a coverage matrix plus new entries.
 - [ ] **L2 to L8, L10, L11** corrections to the `literature/*/README.md` records.
 - [ ] **J2** the counterfactual-likelihood argument wherever it still appears
   (`two_horn_motivation_body.tex`, `papers_dialectic.tex`); replaced in the
-  manuscript plan by C.6 and E.3.
+  manuscript plan by 1.6 and 2.5.
 - [ ] **D3** `verification_coverage.md` counts are out of date (file stays
   uncommitted).
 - [ ] **D4** `check_reversal.py` excluded from `run_all.py` by design; document why.

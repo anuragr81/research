@@ -435,25 +435,31 @@ assumed.""")],
     "Anchoring.lean; Asch.lean (seriesA_length, checkListI_length); Hawthorne.lean "
     "(med_overwrite; quotation pp. 98-99 verbatim)."))
 
-E2.append(("E.12", "Folded into E.15 (was 6.B)", [],
-    "The two-channel paragraph, the rubric prediction and the settings table of this entry now "
-    "form part of the robustness subsection in E.15 (2026-10-01), with the corrections recorded "
-    "there. Kept as a number so that earlier references to E.12 resolve.",
-    "See E.15."))
-
-E2.append(("E.15", "Section 6, the partial-adoption subsection (new; ADJ and LAD from E.10, E.12 folded in, Proposition FAC added)", [
+E2.append(("E.15h", "Section 6, the Scope subsection heading and first sentence", [
     ("We now revisit how Assumptions~\\ref{as:localc}--\\ref{as:surplus} in Section~\\ref{sec:assumptions} define scope for any conclusions made from the model.",
      "We now revisit how Assumptions~\\ref{as:localc}--\\ref{as:surplus} in Section~\\ref{sec:assumptions} define scope for any conclusions made from the model.",
      r"""\subsection{Scope}\label{sec:scope-assumptions}
 \par
 We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in
 Section~\ref{sec:assumptions} define the scope of the conclusions drawn from the
-model."""),
+model.""")],
+    "Section 6 splits into two subsections (author's title \"Scope and robustness\" kept; the "
+    "author may drop \"and robustness\"). This adds the Scope heading and repairs \"define scope for "
+    "any conclusions made from the model\". The second subsection is E.15.",
+    "None needed."))
+
+E2.append(("E.15r", "Introduction, roadmap, the Section 6 sentence", [
     ("Section~\\ref{sec:scope} states the scope of results and limitations that would break the results.",
      "Section~\\ref{sec:scope} states the scope of results and limitations that would break the results.",
      r"""Section~\ref{sec:scope} states the scope of the results and the limitations that
 would break them, shows that the second-order results require full adoption of the
-later cue, and gives a test of that condition from the ratings."""),
+later cue, and gives a test of that condition from the ratings.""")],
+    "The roadmap's Section 6 sentence names what that section now does: the scope of the "
+    "results, that the second-order results require full adoption of the later cue, and the "
+    "test of that condition (E.15).",
+    "Proposition ADJ (E.15)."))
+
+E2.append(("E.15", "Section 6, the subsection on partial adoption and factor inputs (Propositions ADJ, LAD and FAC)", [
     ("insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
      r"""\subsection{Partial adoption and factor inputs}\label{sec:robust}
 \par
@@ -847,8 +853,8 @@ the association channel with it when the attributes are believed related.}
     "conclusions do not survive; what survives is the odds ratio, exact at every weight, and the "
     "form of the characterisation, with the second-order class moving to the statistics that "
     "agree with the log odds ratio to first order. The author may want to drop \"and robustness\" "
-    "from the section title. Part 1 adds the Scope heading and repairs \"define scope for any "
-    "conclusions made from the model\". Part 2 adds the clause to the roadmap. Parts 3 to 9 are "
+    "from the section title. The Scope heading, with a repair of \"define scope for any "
+    "conclusions made from the model\" (E.15h). The roadmap clause is E.15r. The parts here are "
     "the new subsection, one insertion after E.11 shown as consecutive paragraphs so that the "
     "plan can break pages between them. What it gathers: the two-channel paragraph of E.12 "
     "unchanged; the adoption-weight lead-in, Proposition ADJ, its example and Proposition LAD "
