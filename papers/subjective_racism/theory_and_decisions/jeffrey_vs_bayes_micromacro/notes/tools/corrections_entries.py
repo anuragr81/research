@@ -72,11 +72,10 @@ E.append(("C.2", "Introduction, paragraph 1, sentences 1, 2, 4 and 6", [
      r"""That the sequence in which evidence arrives can move the final judgment is among
 the oldest findings in the study of impression formation
 \citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has
-rarely gathered attention. Read as Bayes factors, cues would move belief by factors
-fixed before any of them arrives, so nothing an evaluator had already seen could
-change what a later cue implies and the final judgment could not depend on the
-sequence; that finding therefore rules out the Bayes-factor reading as a full account
-of how impressions are adopted."""),
+rarely gathered attention. Indeed, if individual judgments did not depend on the
+arrival sequence of cues, then each cue must move belief by a factor fixed before it is
+received, leading to the unlikely situation where experience does not change how later
+cues are read."""),
     ("The sequence-dependence of Jeffrey conditioning for soft evidence", "remains unclear \\citep{ZhaoOsherson2010}.",
      r"""The sequence dependence of Jeffrey conditioning on soft evidence has attracted
 debate \citep{DiaconisZabell1982,Hawthorne2004,ZhaoOsherson2010}, but how that
@@ -89,14 +88,17 @@ association between attributes and the surplus-weighted loss depart from it only
 second order."""),
     ("Given that a difference from the benchmark below the observer's precision", "the paper discusses the implications for sequence effects identification.",
      r"""% Delete the sentence (see Why).""")],
-    "Sentence 1 (author, 2026-10-01): the added sentence is the modus tollens the author "
-    "proposed on 2026-09-27. A cue read as a Bayes factor multiplies belief by a factor fixed "
-    "in advance, so the final belief cannot depend on the sequence; sequence effects are "
-    "observed; so that reading cannot be the whole account. It is the bridge from the "
-    "impression-formation finding to the Jeffrey-conditioning sentence that follows, and it "
-    "names the rival reading the evidence rules out. It claims only that the Bayes-factor "
-    "reading is not a full account, not that the delivered-credence reading is the only one "
-    "left, since the position channel and Asch's own account also produce sequence effects. "
+    "Sentence 1 (author's wording, 2026-10-01; replaces my earlier Bayes-factor sentence): the "
+    "added sentence is the modus tollens the author proposed on 2026-09-27. If judgments did "
+    "not depend on the sequence, each cue would move belief by a factor fixed in advance, and "
+    "then experience could not change how a later cue is read; that is unlikely, so "
+    "sequence independence is unlikely. Changes to the author's draft: \"If\" added, "
+    "\"judgements\" to \"judgment\" as in the manuscript, the double hyphen replaced by a comma. "
+    "Caution on \"must\": the theorems run the other way. Fixed factors imply commutation "
+    "(Wagner 2003 Theorem 3.2, Hawthorne factorUpdate_comm, Cripps order_invariance). The "
+    "converse is exact in this paper's two-cue model, where the sequence effect vanishes iff "
+    "q0 = alpha and r0 = beta (sympy/verify_soft_vs_hard.py), but it is not a theorem for "
+    "arbitrary updating rules. "
     "No citation, because sentence 1 carries Asch and Hogarth-Einhorn. "
     "Sentence 6 is cut (rule 4 of the writing discipline): C.4 restates it, that a departure "
     "smaller than the observer's precision is invisible in the statistic read, and C.1 now "
