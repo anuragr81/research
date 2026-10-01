@@ -151,28 +151,34 @@ whether impressions replace prior belief or adjust it.""")],
 E.append(("C.4", "Introduction, the two-channel paragraphs (appear twice)", [(
     "More specifically, arrival-sequence dependence can enter through two channels, an \\textbf{association} channel, in which one cue changes what the other implies and which exists only when the attributes are believed related, and a \\textbf{position} channel, in which the observer weights the later cue less whatever the attributes are \\citep{HogarthEinhorn1992,Asch1946}. Unlike",
     "the believed association and related statistics carry it only at second order.",
-    r"""More specifically, arrival-sequence dependence can enter through two channels.
-In the \textbf{association} channel one cue changes what the other implies, and the
-channel exists only when the attributes are believed related. In the
-\textbf{position} channel the weight a cue receives depends on where in the sequence
-it arrives, whatever the attributes are. When the first cue is adopted in full and
-later cues only in part the earlier impression is favoured, and when every cue is
-adopted only in part the later one is \citep{HogarthEinhorn1992}. In the model
-studied here, which channels operate is fixed by how fully the later cue is
-adopted. When it is adopted only in part, the position channel operates and every
-marginal registers the sequence even when the attributes are believed unrelated.
-When each impression is adopted in full, as in the successive updating of
-\citet{DiaconisZabell1982}, the position channel is absent and the association
-channel is the only one, so the sequence registers unevenly across statistics.
-That full-adoption setting is the one the current paper explores. A belief in the
-two-attribute setting has three coordinates, the two marginal probabilities and
-the cross-attribute association, and a departure from the sequence-free benchmark
-smaller than the observer's precision is invisible in the statistic read. The
-question is therefore not only whether the two sequences agree but by how much
-they disagree in a given statistic. The marginal probabilities and the decisions
-made from them carry the difference at first order in the prior covariance, while
-the believed association and the statistics that move with it carry it only at
-second order.""")],
+    r"""Whether impressions replace prior belief or adjust it is a question which
+\citet[pp.~115--116]{Hawthorne2004}, writing as a logician rather than a psychologist,
+leaves open. To set the scope of its conclusions, the paper considers that
+arrival-sequence dependence can enter through two channels, an \textbf{association}
+channel, in which one cue changes what the other implies and which exists only when
+the attributes are believed related, and a \textbf{position} channel, in which the
+weight a cue receives depends on where in the sequence it arrives, whatever the
+attributes are \citep{HogarthEinhorn1992}. In the position channel the later cue is
+adopted only in part and every marginal registers the sequence even when the
+attributes are believed unrelated. On the other hand, when each impression is adopted
+in full, as in the successive updating of \citet{DiaconisZabell1982}, the position
+channel is disabled and only the association channel remains. In the two-attribute
+setting with full adoption, the paper thus considers three coordinates of a belief,
+the two marginal probabilities and the cross-attribute association, and explains how a
+difference from the sequence-free benchmark below the observer's precision is
+invisible in the statistic the observer reads. The question is therefore not simply
+whether the two sequences agree but by how much they disagree in an arbitrary
+statistic. The paper finds that the marginal probabilities and the share of decisions
+they change carry the difference at first order in the prior covariance, while the
+believed association and the statistics that move with it carry it only at second
+order.""")],
+    "AFTER is the author's paragraph of 2026-10-01 with corrections: \"that whether\" to "
+    "\"whether\", \"adjust\" to \"adjust it\", \"leave rather open ended\" to \"leaves open\" "
+    "(Hawthorne gives a tentative view and says he is mainly interested in the normative "
+    "question); \"we consider\" to \"the paper considers\" as elsewhere; the two dashes replaced "
+    "by commas; \"order-free\" to \"sequence-free\"; \"decisions from them\" to \"the share of "
+    "decisions they change\", since the loss is a decision statistic at second order (LOS); "
+    "\"and statistics\" to \"and the statistics that move with it\". "
     "(i) The paragraph appears twice; the first copy is an earlier version and lacks its final "
     "period. The AFTER replaces both copies. (ii) \"the observer weights the later cue less\" is "
     "cited to Hogarth-Einhorn and Asch, but Hogarth-Einhorn's step-by-step partial adjustment "
