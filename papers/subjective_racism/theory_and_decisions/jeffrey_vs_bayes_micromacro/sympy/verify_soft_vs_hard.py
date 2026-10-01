@@ -70,6 +70,31 @@ def main():
     ck("hard A-marginal is 27/119 = .227 in either sequence", sp.simplify(mA(EF)[0] - R(27, 119)) == 0)
     ck("on ONE cue the two readings agree (Proposition IMM): hard credential = soft credential",
        sp.simplify(cond(P, hA, 'A') - PA) == sp.zeros(2, 2))
+
+    # ---- symbolic: the sequence effect is exactly the dependence of the implied factor
+    # on the belief it meets.  Prior P(A=0)=al, P(B=0)=be, association cs; delivered
+    # credences x0 on A=0 and y0 on B=0; all cells, cues and the c-dependent marginals interior.
+    al, be, cs, x0, y0 = sp.symbols('alpha beta c q0 r0')
+    Ps = sp.Matrix([[al * be + cs, al * (1 - be) - cs], [(1 - al) * be - cs, (1 - al) * (1 - be) + cs]])
+    xs = [x0, 1 - x0]; ys = [y0, 1 - y0]
+    sA = jeff(Ps, xs, 'A'); sB = jeff(Ps, ys, 'B')
+    D = (jeff(sA, ys, 'B') - jeff(sB, xs, 'A')).applyfunc(sp.factor)
+    ck("symbolic: an earlier credential moves the B-marginal the letter meets by c(q0-alpha)/(alpha(1-alpha))",
+       sp.simplify(mB(sA)[0] - be - cs * (x0 - al) / (al * (1 - al))) == 0)
+    ck("symbolic: an earlier letter moves the A-marginal the credential meets by c(r0-beta)/(beta(1-beta))",
+       sp.simplify(mA(sB)[0] - al - cs * (y0 - be) / (be * (1 - be))) == 0)
+    # every cell of the sequence effect is c times a factor that vanishes only at q0=alpha, r0=beta
+    cores = []
+    for e in D:
+        keep = [f for f, _ in sp.factor_list(sp.numer(sp.together(e)))[1]
+                if f.free_symbols & {x0, y0} and f not in (x0, y0, x0 - 1, y0 - 1)]
+        cores.append(sp.Mul(*keep))
+    ck("symbolic: every cell of P^J_AB - P^J_BA carries the factor c",
+       all(sp.simplify(e.subs(cs, 0)) == 0 for e in D))
+    ck("symbolic: with c != 0 the sequence effect vanishes iff q0 = alpha and r0 = beta, "
+       "i.e. iff neither cue changes the factor the other implies",
+       sp.solve(cores, [x0, y0], dict=True) == [{x0: al, y0: be}]
+       and all(sp.simplify(e.subs({x0: al, y0: be})) == 0 for e in D))
     return ck.done()
 
 

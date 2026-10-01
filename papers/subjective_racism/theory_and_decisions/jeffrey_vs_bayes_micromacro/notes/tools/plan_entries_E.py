@@ -106,7 +106,7 @@ $B$-marginal where it was and the two implied factors coincide.""")],
     "contradicted by Jeffrey's definition of a Bayes factor (J2). With $c=1/20$ against a bound "
     "of $1/4$ the example illustrates the ordering of magnitudes, not the asymptotic rates.",
     "Every number in both paragraphs is asserted in sympy/verify_example.py (18/18) and "
-    "sympy/verify_soft_vs_hard.py (11/11, added 2026-09-30, registered in run_all.py); the "
+    "sympy/verify_soft_vs_hard.py (15/15, added 2026-09-30, registered in run_all.py; its symbolic checks give the exact condition, c = 0 or each cue delivering its prior marginal); the "
     "mechanism is Cripps.lean composite_AB_eq_bayes and DiaconisZabell.lean thm21."))
 
 E2.append(("E.4", "Setup 2.3, Assumption 2 (was 2.C)", [(

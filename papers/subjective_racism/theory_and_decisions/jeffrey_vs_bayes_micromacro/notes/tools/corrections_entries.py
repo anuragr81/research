@@ -62,7 +62,16 @@ order.""")],
     "DEC and LOS (second order), DRF and SHR (first order), PRO (the plane and the "
     "classification). All in the Lean and sympy suites."))
 
-E.append(("C.2", "Introduction, paragraph 1, sentences 2 and 4", [
+E.append(("C.2", "Introduction, paragraph 1, sentences 1, 2, 4 and 6", [
+    ("That the sequence in which evidence arrives can move the final judgment", "\\citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has rarely gathered attention.",
+     r"""That the sequence in which evidence arrives can move the final judgment is among
+the oldest findings in the study of impression formation
+\citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has
+rarely gathered attention. Read as Bayes factors, cues would move belief by factors
+fixed before any of them arrives, so nothing an evaluator had already seen could
+change what a later cue implies and the final judgment could not depend on the
+sequence; that finding therefore rules out the Bayes-factor reading as a full account
+of how impressions are adopted."""),
     ("The sequence-dependence of Jeffrey conditioning for soft evidence", "remains unclear \\citep{ZhaoOsherson2010}.",
      r"""The sequence dependence of Jeffrey conditioning on soft evidence has attracted
 debate \citep{DiaconisZabell1982,Hawthorne2004,ZhaoOsherson2010}, but how that
@@ -72,7 +81,21 @@ attention."""),
      r"""It finds that the share of the population whose decision the sequence changes
 departs from a sequence-invariant benchmark at first order, while the believed
 association between attributes and the surplus-weighted loss depart from it only at
-second order.""")],
+second order."""),
+    ("Given that a difference from the benchmark below the observer's precision", "the paper discusses the implications for sequence effects identification.",
+     r"""% Delete the sentence (see Why).""")],
+    "Sentence 1 (author, 2026-10-01): the added sentence is the modus tollens the author "
+    "proposed on 2026-09-27. A cue read as a Bayes factor multiplies belief by a factor fixed "
+    "in advance, so the final belief cannot depend on the sequence; sequence effects are "
+    "observed; so that reading cannot be the whole account. It is the bridge from the "
+    "impression-formation finding to the Jeffrey-conditioning sentence that follows, and it "
+    "names the rival reading the evidence rules out. It claims only that the Bayes-factor "
+    "reading is not a full account, not that the delivered-credence reading is the only one "
+    "left, since the position channel and Asch's own account also produce sequence effects. "
+    "No citation, because sentence 1 carries Asch and Hogarth-Einhorn. "
+    "Sentence 6 is cut (rule 4 of the writing discipline): C.4 restates it, that a departure "
+    "smaller than the observer's precision is invisible in the statistic read, and C.1 now "
+    "carries identification in the abstract. "
     "Zhao-Osherson do not say the mechanism \"remains unclear\"; they say doubts about order "
     "dependence \"disappear on closer inspection of the evidential weight of probability "
     "judgements\" (p. 290). Cited for the debate, as the author agreed. Jeffrey himself says "
@@ -81,7 +104,9 @@ second order.""")],
     "\"very troubling\" (p. 99). Sentence 4: the loss is not free of the sequence effect, it "
     "carries it at second order (LOS), and \"-- but\" is a dash doing a sentence's work.",
     "verify_jeffrey.md J1; verify_kinematics.md; verify_hawthorne_weisberg.md; ZO p. 290 read "
-    "2026-09-30; Theorem LOS, Proposition SHR."))
+    "2026-09-30; Theorem LOS, Proposition SHR. Sentence 1: Cripps.lean order_invariance and "
+    "Hawthorne.lean factorUpdate_comm (fixed factors commute); sympy/verify_soft_vs_hard.py "
+    "(hard cues commute; exact condition for the sequence effect)."))
 
 E.append(("C.3", "Introduction, paragraph 2 (the literature paragraph) and its footnote", [(
     "The discussion on Jeffrey\\citep{Jeffrey1983}", "cannot tell whether impressions replace prior belief or adjust it.",
@@ -490,7 +515,9 @@ draft and the audit, to be settled entry by entry before any is applied:
 MD = "\n".join(out)
 
 
-DISCIPLINE_EXEMPT_LENGTH = {"C.4.1": "removes a duplicated paragraph",
+DISCIPLINE_EXEMPT_LENGTH = {
+    "C.2.1": "adds the modus tollens sentence after the author's sentence 1",
+                            "C.4.1": "removes a duplicated paragraph",
                             "C.10.1": "citation fix", "C.11.8": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",
                             "C.11.9": "appends the identification paragraph (C.15)",

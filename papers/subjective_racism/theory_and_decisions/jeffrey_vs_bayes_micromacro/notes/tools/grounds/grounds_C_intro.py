@@ -71,8 +71,7 @@ questioned because successive uses produce distinct distributions depending on
 the order in which events are considered (D\"{o}ring, 1999). In our view, such
 doubts disappear on closer inspection of the evidential weight of probability
 judgements (Osherson, 2002; Wagner, 2002).''""",
-         note=r"""They report the doubt as settled, not the mechanism as ``unclear''
-(the printed page is 290; the entry's Why says 291)."""),
+         note=r"""They report the doubt as settled, not the mechanism as ``unclear''."""),
     dict(kind="quote",
          source=r"Jeffrey 1983, pp. 182-183 (Section 11.11)",
          text=r"""``It is straightforward to verify that the present kinematical
@@ -105,6 +104,29 @@ $\int_{\{u:\mathrm{Flips}(u,c,\delta)\}} |u|\,du \le |c\delta|\cdot|c\delta|$,
 whereas $\mathrm{Leb}\{u:\mathrm{Flips}(u,c,\delta)\} = |c\delta|$.""",
          note=r"""Theorem LOS: the loss carries the sequence effect at second order;
 it is not free of it, and the share (Proposition SHR) is first order."""),
+    dict(kind="theorem",
+         source=r"Hawthorne.lean, factorUpdate\_comm; Cripps.lean, order\_invariance",
+         text=r"""With $\mathrm{factorUpdate}(p,u,w)(x)=w(u(x))\,p(x)/\sum_y w(u(y))\,p(y)$, a
+belief multiplied by fixed factors $w$ on one partition and $z$ on another, both
+normalisers nonzero:
+$\mathrm{factorUpdate}(\mathrm{factorUpdate}(p,u,w),v,z)
+=\mathrm{factorUpdate}(\mathrm{factorUpdate}(p,v,z),u,w)$. Likewise, under Cripps's
+Symmetry and Divisibility, two signals with fixed likelihoods give the same posterior
+in either sequence.""",
+         note=r"""(sentence 1) The first half of the modus tollens. Read as Bayes factors,
+fixed before either cue arrives, the cues cannot leave a trace of the sequence."""),
+    dict(kind="computation",
+         source=r"sympy/verify\_soft\_vs\_hard.py, symbolic checks (15/15)",
+         text=r"""Symbolic in $\alpha,\beta,c,q_0,r_0$: a credential read first moves the
+$B$-marginal the letter meets to $\beta+c(q_0-\alpha)/(\alpha(1-\alpha))$, so the
+factor the letter implies changes unless $c=0$ or $q_0=\alpha$, and symmetrically for
+the credential. Every cell of $\PJ_{AB}-\PJ_{BA}$ carries the factor $c$, and with
+$c\neq0$ the difference vanishes if and only if $q_0=\alpha$ and $r_0=\beta$.""",
+         note=r"""(sentence 1) Under the delivered-credence reading the sequence leaves a
+trace exactly when an earlier cue changes the factor a later one implies, which is
+the lived-experience point in the model's terms. The sentence itself claims only the
+first half; this row shows that the delivered-credence reading, one of the readings it
+leaves open, is one in which what came earlier changes how later cues are read."""),
 ]
 
 # ---------------------------------------------------------------------------

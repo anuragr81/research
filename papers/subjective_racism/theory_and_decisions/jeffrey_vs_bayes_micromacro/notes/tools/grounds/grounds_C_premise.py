@@ -67,7 +67,7 @@ minimizes the variation distance, it does not do so uniquely''.""",
     },
     {
         "kind": "computation",
-        "source": r"sympy/verify\_soft\_vs\_hard.py (11/11 checks pass)",
+        "source": r"sympy/verify\_soft\_vs\_hard.py (15/15 checks pass)",
         "text": r"""Worked example $\alpha=\beta=1/2$, $c=1/20$, $q_0=1/5$, $r_0=7/10$. The letter's
 implied factor (new odds over old odds on $B$) is $\frac{7/3}{1}=7/3$ read first, against
 $\beta=1/2$, and $\frac{7/3}{11/14}=98/33$ read second, against the post-credential

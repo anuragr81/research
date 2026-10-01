@@ -112,7 +112,7 @@ $5382/35>150$); gaps of $AB$ from $\PB$: $9/170\approx.053$, $9/1309\approx.007$
 $531/222530\approx.002$; odds ratio $9/4$ for all four tables.""",
          note=r"""Every number printed in the worked example, in exact rationals."""),
     dict(kind="computation",
-         source=r"sympy/verify\_soft\_vs\_hard.py (11/11 checks)",
+         source=r"sympy/verify\_soft\_vs\_hard.py (15/15 checks)",
          text=r"""The letter's implied factor, the odds it delivers over the odds it meets, is
 $\frac{7/3}{1}=7/3$ when read first (against $\beta=\tfrac12$) and
 $\frac{7/3}{11/14}=98/33$ when read after the credential (against $11/25$); at $c=0$
