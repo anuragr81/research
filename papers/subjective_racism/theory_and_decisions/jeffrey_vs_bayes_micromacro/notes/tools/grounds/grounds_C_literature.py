@@ -6,7 +6,7 @@ Every quote was checked against the local copy of the paper on 2026-09-30:
 text-layer papers by grep on the page's pdftotext output; scans (Phelps 1972,
 Arrow 1973, Good-Mittal 1987, Becker 1962, FGT 1984 eq. (3)) on the rendered
 page.  Pages are as printed on the page.  Arrow is the 1971 Princeton working
-paper (WP p. n = PDF page n+1); BIR is the January 2019 working paper (printed
+paper (WP p. n = PDF page n+2 in the local copy); BIR is the January 2019 working paper (printed
 page = PDF page - 1); Tao is the author's preliminary version ("pre-p. N").
 Theorem statements follow the Lean hypotheses.  C.12 lists bibliography
 entries and has nothing to ground.
@@ -261,8 +261,8 @@ the mechanism, not on the concept."""),
 $\mathrm{cov}(0, \tfrac{9}{11}, 0, \tfrac{2}{11}) = 0$, while the true
 within-group law has $\mathrm{cov}(\tfrac{21}{50}, \tfrac{9}{50},
 \tfrac{9}{25}, \tfrac{1}{25}) = -\tfrac{6}{125}$.""",
-         note=r"""(part 7, BCGS) In the Section 4.3 instance the $d=2$ stereotype of
-a group recalls only welfare types, so the within-group education-welfare
+         note=r"""(part 7, BCGS) In the Lean instance of the Section 4.3 example (BCGS give
+no numbers there) the $d=2$ stereotype of a group recalls only welfare types, so the within-group education-welfare
 association is zero; the exaggerated correlation lives in the population
 pooled across groups."""),
     # ---- part 8: Becker -----------------------------------------------------
@@ -294,9 +294,10 @@ respond rationally.''""",
 market responses are forced by the opportunity set."""),
     dict(kind="theorem",
          source=r"Becker.lean, constraint\_without\_averaging and impulsive\_mean",
-         text=r"""With $I = p_2 = 1$ and $p_1$ rising from $1$ to $11/10$, there are
-$x = \tfrac{1}{10} \in [0, 1]$ and $x' = \tfrac{9}{10} \in [0, 10/11]$ with
-$x < x'$: one impulsive household can buy more after the rise. If $X$ is
+         text=r"""With $I = p_2 = 1$ and $p_1$ rising from $1$ to $11/10$, the theorem
+states that some $x \in [0, 1]$ and $x' \in [0, 10/11]$ have $x < x'$ (the
+proof takes $x = \tfrac{1}{10}$, $x' = \tfrac{9}{10}$): one impulsive household
+can buy more after the rise. If $X$ is
 uniform on $[0, I/p_1]$ then $\mathbb{E}X = I/(2p_1)$.""",
          note=r"""(part 8, Becker) The downward market slope needs both
 ingredients, the budget constraint through the support $[0, I/p_1]$ and

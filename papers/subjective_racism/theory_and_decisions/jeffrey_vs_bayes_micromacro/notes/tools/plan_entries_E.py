@@ -359,10 +359,12 @@ $\bigO(c^{2})$. For the equivalence, with
 $M_\lambda=\lambda\kappa R_1+(1-\lambda)\kappa'R_2$ from
 Proposition~\ref{prop:DIV}(i) and $\nabla F:=\nabla F(q\otimes r)$,
 \[
+\begin{aligned}
   \langle\nabla F,\Delta_{\mathrm{seq}}\rangle
-    =\kappa\,\langle\nabla F,R_1\rangle-\kappa'\,\langle\nabla F,R_2\rangle,\qquad
+    &=\kappa\,\langle\nabla F,R_1\rangle-\kappa'\,\langle\nabla F,R_2\rangle,\\
   \langle\nabla F,M_\lambda\rangle
-    =\lambda\kappa\,\langle\nabla F,R_1\rangle+(1-\lambda)\kappa'\,\langle\nabla F,R_2\rangle;
+    &=\lambda\kappa\,\langle\nabla F,R_1\rangle+(1-\lambda)\kappa'\,\langle\nabla F,R_2\rangle;
+\end{aligned}
 \]
 across an open set of priors $\kappa$ and $\kappa'$ vary independently, so
 either vanishes identically exactly when
@@ -410,9 +412,11 @@ With $Q$ the belief after the first step and $t=(t_0,t_1)$,
 $t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
 is multiplied by $t_j/Q(B{=}j)$, so that
 \[
-  P(B{=}1)=t_1,\qquad
-  P(A{=}1)=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}
-  =(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
+\begin{aligned}
+  P(B{=}1)&=t_1,\\
+  P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\
+  &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
+\end{aligned}
 \]
 In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
 $\PJ_{AB}(A{=}1)$, giving

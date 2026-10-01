@@ -17,7 +17,7 @@ GROUNDS["E.5"] = [
     # Paragraph 1: the commutativity literature and Hawthorne's vocabulary
     {
         "kind": "quote",
-        "source": "Hawthorne 2004, p. 96 (Section 5)",
+        "source": "Hawthorne 2004, p. 96 (Section 4)",
         "text": r"``AMNESTIC UPDATE-FACTOR THESIS. For any state $e$ that directly affects an evidence basis $\{E_i\}$ and for any other state $d$ and sequence of states $\alpha$, $Q_{\alpha de}[E_i] = Q_{\alpha e}[E_i]$.'' And: ``Indeed Amnestic Updating is just Standard Sequential Updating -- Jeffrey's original approach to sequential updating.''",
         "note": "Para 1: the full-adoption premise is named by Hawthorne, and he identifies it with Jeffrey's sequential rule.",
     },

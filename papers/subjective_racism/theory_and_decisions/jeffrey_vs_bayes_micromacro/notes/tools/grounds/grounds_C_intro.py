@@ -65,7 +65,7 @@ the surplus-weighted loss second order."""),
 # ---------------------------------------------------------------------------
 GROUNDS["C.2"] = [
     dict(kind="quote",
-         source=r"Zhao and Osherson 2010, p. 290 (Section 2)",
+         source=r"Zhao and Osherson 2010, p. 290 (opening part, before Experiment 1)",
          text=r"""``The normative status of Jeffrey's rule has nonetheless been
 questioned because successive uses produce distinct distributions depending on
 the order in which events are considered (D\"{o}ring, 1999). In our view, such
@@ -134,7 +134,7 @@ updating to be useful and valid. \ldots Remark 2. \ldots Thus noncommutativity
 is not a real problem for successive Jeffrey updating.''""",
          note=r"""D-Z do not hold the defect view the manuscript groups them with."""),
     dict(kind="quote",
-         source=r"Hawthorne 2004, pp. 96 and 108 (Sections 5 and 8)",
+         source=r"Hawthorne 2004, pp. 96 and 108 (Sections 4 and 8)",
          text=r"""p.~96: ``Indeed, it may turn out that there is no one true theory of
 uncertain updating -- that each theory has its uses, its domain of
 applicability.'' p.~108: ``Let us call this the Basis-Commuting Version of the
@@ -182,11 +182,11 @@ the items following it.''""",
 the later cue less''."""),
     dict(kind="theorem",
          source=r"BenjaminBodohCreedRabin.lean, margOddsA_orders_ne and example_marginal_gap",
-         text=r"""On the $2\times2$ joint with prior $a\otimes b$ (independent, $c=0$),
-$\alpha\neq1$, positive cue likelihoods $u$ on $A$ and $v$ on $B$ and
-$a_0\neq a_1$: the odds $P(A{=}0)/P(A{=}1)$ after base-rate-neglect updating
+         text=r"""On the $2\times2$ joint with prior $u\otimes v$ (independent, $c=0$),
+$\alpha\neq1$, positive cue likelihoods $a$ on $A$ and $b$ on $B$, the $A$
+cue informative ($a_0\neq a_1$): the odds $P(A{=}0)/P(A{=}1)$ after base-rate-neglect updating
 differ between the orders $AB$ and $BA$. Instance: uniform prior,
-$\alpha=1/2$, $u=v=(49/50,1/50)$ gives $P(A{=}0)=7/8$ reading $A$ first and
+$\alpha=1/2$, $a=b=(49/50,1/50)$ gives $P(A{=}0)=7/8$ reading $A$ first and
 $49/50$ reading $A$ last.""",
          note=r"""A position channel operates with likelihood inputs adopted in full,
 so ``which channels operate is fixed by adoption'' holds for this model only."""),
@@ -207,8 +207,8 @@ GROUNDS["C.5"] = [
          text=r"""Between-sequence effect on $\mathrm{assoc}$ with the second cue
 adopted with weight $\delta$ (the manuscript's $\omega$): the $c^0$ term is $0$
 for every $\delta$; the $c^1$ coefficient is $(1-\delta)\,G$ with $G$ affine in
-$\delta$, $G\neq0$ at the generic prior for $\delta=1/2$ and for $\delta=0$; it
-vanishes only at $\delta=1$.""",
+$\delta$, $G\neq0$ at the generic prior for $\delta=1/2$ and for $\delta=0$; at
+$\delta=1$ the factor $(1-\delta)$ makes the effect second order in $c$.""",
          note=r"""Under partial adoption the cross-product association carries the
 sequence at first order in $c$."""),
     dict(kind="computation",

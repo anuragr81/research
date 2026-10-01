@@ -66,11 +66,11 @@ Identities in $c$; $\delta$ is the code's name for $\omega$.""",
     {
         "kind": "theorem",
         "source": r"Anchoring.lean, orderEffect\_damped\_mA1, orderEffect\_damped\_at\_indep",
-        "text": r"""Under the hypotheses above and $P^{B}(A{=}1)\neq0$, where
-$P^{B}=\mathrm{jeffreyB}(\mathrm{prior},r_0)$ is the belief after the $B$-cue alone:
+        "text": r"""Under the hypotheses above and $Q_B(A{=}1)\neq0$, where
+$Q_B=\mathrm{jeffreyB}(\mathrm{prior},r_0)$ is the belief after the $B$-cue alone (not the benchmark $\PB$):
 \[
 P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)
- =\delta\bigl[\PJ_{AB}(A{=}1)-(1-q_0)\bigr]+(1-\delta)\bigl[(1-q_0)-P^{B}(A{=}1)\bigr].
+ =\delta\bigl[\PJ_{AB}(A{=}1)-(1-q_0)\bigr]+(1-\delta)\bigl[(1-q_0)-Q_B(A{=}1)\bigr].
 \]
 At $c=0$, for $\alpha,1-\alpha,\beta,1-\beta\neq0$:
 $P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)=(1-\delta)(\alpha-q_0)$.""",
@@ -349,7 +349,7 @@ its delivered credence. At $c=0$: $\PJ_{AB}=\PJ_{BA}=\PB$.""",
 GROUNDS["E.13"] = [
     {
         "kind": "quote",
-        "source": r"PAPER\_B\_MANUSCRIPT.tex, lines 1220-1229 (author's draft), Declaration of Generative AI",
+        "source": r"PAPER\_B\_MANUSCRIPT.tex, lines 1220-1228 (author's draft), Declaration of Generative AI",
         "text": r"""``During the preparation of this work the author used Anthropic's Claude (large
 language model) in order to draft and refine manuscript prose; propose, prove, and
 cross-verify Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which

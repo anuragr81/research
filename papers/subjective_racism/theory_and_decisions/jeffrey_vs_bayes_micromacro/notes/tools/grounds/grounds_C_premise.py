@@ -108,7 +108,7 @@ input space by the map: $h_P : \mathbf{F}_X \to \mathbf{E}_X$, defined by
 $h_P(U,\alpha) = (U,p)$, where: $p(A) = e^{\alpha_A} P(A) : \alpha_X$.'' \ldots ``So,
 whatever advantage may have been gained in commutativity is lost in probabilistic
 independence.''""",
-        "note": r"The passage nearest a mechanism: a fixed factor $\alpha$ yields a $p$ that depends on the state $P$, used to argue that Field's space is smaller, not to explain non-commutativity. Neither ``likelihood'' nor ``marginal'' occurs in pp.~384--403.",
+        "note": r"The passage nearest a mechanism: a fixed factor $\alpha$ yields a $p$ that depends on the state $P$, used to argue that Field's space is smaller, not to explain non-commutativity. Neither ``likelihood'' nor ``marginal'' occurs on the rendered pp.~394--397, the pages around the quoted passages.",
     },
     {
         "kind": "theorem",
@@ -201,7 +201,7 @@ argument $B$, and the fact that (c) the change from $prob$ to $PROB$ \textit{ori
 in $B$''. p.~174: ``(11-8) $PROB(A/A_i)=prob(A/A_i)$ for each $i=1,2,\ldots,m$ which defines
 what we shall mean by saying that the change from $prob$ to $PROB$ \textit{originated} in
 the set (11-6).''""",
-        "note": r"Chapter 11 never uses ``invariance''; its term for the condition is that the change originated in the partition.",
+        "note": r"On the rendered pp.~168 and 174--175 Jeffrey's term for the condition is that the change originated in the partition, not ``invariance''.",
     },
     {
         "kind": "quote",
@@ -262,8 +262,9 @@ minimum-distance rule.''""",
         "text": r"""Let $P,P^*>0$ on finite $\Omega$ and let $e:\Omega\to I$ satisfy (J):
 $P^*(A\,|\,E_i)=P(A\,|\,E_i)$ for every $A\subseteq\Omega$ and $i$. Then
 $e(\omega)=e(\omega')\Rightarrow P^*(\omega)/P(\omega)=P^*(\omega')/P(\omega')$: every cell
-of a (J)-partition lies inside one level set of $P^*/P$, so the likelihood-ratio partition
-is the coarsest sufficient one, and it depends on the pair $\{P,P^*\}$.""",
+of a (J)-partition lies inside one level set of $P^*/P$; with the converse
+(\texttt{lr\_jeffrey\_iff}) the likelihood-ratio partition is the coarsest sufficient one, and it
+depends on the pair $\{P,P^*\}$.""",
         "note": r"Minimality belongs to the likelihood-ratio partition, not to whichever partition carries the cue.",
     },
     {
