@@ -447,7 +447,80 @@ For $P^{A}(B{=}1)\neq r_1$ the first line gives
 \par
 In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the credential
 first rates trustworthiness at $.56$ before the letter, the letter alone delivers
-$.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$."""),
+$.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$.
+\par
+Proposition~\ref{prop:ADJ} reads the weight from the ratings. The next result says
+what the weight does to the ranking of statistics. A statistic is \emph{protected
+for every pair of cues} if its differential at every independent belief is a
+multiple of the differential of the association, the condition of
+Proposition~\ref{prop:PRO} imposed at every point of the independence surface
+rather than at $q\otimes r$ alone; the association and the correlation coefficient
+are examples.
+\par
+\renewcommand{\theproposition}{LAD}%
+\begin{proposition}[the ranking under partial adoption]\label{prop:LAD}
+Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$, $s_0=(1-\omega)\alpha+\omega q_0$,
+$t=(t_0,1-t_0)$, $s=(s_0,1-s_0)$ and $Z=\alpha\beta(1-\alpha)(1-\beta)$.
+\begin{enumerate}
+\item[(i)] At $c=0$ the two sequences end at the independent beliefs $q\otimes t$
+and $s\otimes r$, and
+\[
+  P^{\omega}_{AB}-P^{\omega}_{BA}\big|_{c=0}
+  =(1-\omega)(\beta-r_0)\,R_1+(1-\omega)(q_0-\alpha)\,R_2 .
+\]
+Every marginal therefore differs between the sequences at order zero in $c$, the
+$A$-marginal by $(1-\omega)(\alpha-q_0)$, while a statistic protected for every pair
+of cues differs between them by $\bigO(c)$.
+\item[(ii)] The believed association differs between the sequences by
+\[
+  \assoc(P^{\omega}_{AB})-\assoc(P^{\omega}_{BA})=c\,\frac{(1-\omega)H}{Z}+\bigO(c^{2}),
+\]
+\[
+  H=q_0q_1\bigl[\beta(1-\beta)+\omega(\beta-r_0)^2\bigr]
+   -r_0r_1\bigl[\alpha(1-\alpha)+\omega(\alpha-q_0)^2\bigr],
+\]
+which is first order whenever $\omega<1$ and $H\neq0$, and second order at $\omega=1$.
+\item[(iii)] A statistic protected for every pair of cues differs between the
+sequences by $\bigO(c^{2})$ for every $\omega$ if and only if its differential at
+every independent belief is a multiple of the differential of the log odds ratio,
+as for $\assoc(P)/\bigl(P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)\bigr)$. The odds ratio
+itself is the same in both sequences for every $c$ and every $\omega$.
+\end{enumerate}
+\end{proposition}
+\par
+\begin{proof}
+Every Jeffrey step, damped or not, multiplies the rows or the columns of the table
+by constants, so after both steps $P^{\omega}_{\sigma}(i,j)=a_i b_j P(i,j)$ for some
+factors $a_0,a_1,b_0,b_1$. Such a rescaling multiplies the association by
+$a_0a_1b_0b_1$ and leaves the odds ratio unchanged, and $\assoc(P)=c$, so
+$\assoc(P^{\omega}_{\sigma})=c\,k_\sigma$ with $k_\sigma=a_0a_1b_0b_1$, and the odds
+ratio claim of (iii) follows. (i) At $c=0$ a step on one attribute leaves the other
+marginal unchanged (Proposition~\ref{prop:IMM}), so sequence $AB$ reaches $q\otimes\beta$
+and then $q\otimes t$, and sequence $BA$ reaches $s\otimes r$; subtracting gives the
+display. A statistic protected for every pair of cues has a differential that
+annihilates both tangent directions of the independence surface at each of its
+points (Lemma~\ref{lem:ASC}), so it is constant on the surface and takes the same
+value at $q\otimes t$ and $s\otimes r$. (ii) At $c=0$ the factors give
+$k_{AB}=q_0q_1t_0t_1/Z$ and $k_{BA}=s_0s_1r_0r_1/Z$, and $k_{AB}-k_{BA}=(1-\omega)H/Z$.
+(iii) Near the independence surface a statistic protected for every pair of cues
+is $F=F_0+\assoc\cdot h$ with $h$ smooth, and writing $h=g/m$ with
+$m=P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)$, the first-order coefficient of
+$F(P^{\omega}_{AB})-F(P^{\omega}_{BA})$ is
+$k_{AB}\,h(q\otimes t)-k_{BA}\,h(s\otimes r)=\bigl[g(q\otimes t)-g(s\otimes r)\bigr]/Z$,
+since $m(q\otimes t)=q_0q_1t_0t_1$ and $m(s\otimes r)=s_0s_1r_0r_1$. It vanishes for
+every pair of cues and every $\omega$ exactly when $g$ is constant on the
+independence surface, that is when the differential of $F$ there is a multiple of
+the differential of $\assoc/m$, which at an independent belief equals the
+differential of the log odds ratio.
+\end{proof}
+\par
+Partial adoption therefore moves the sequence effect on each belief statistic other
+than the odds ratio one order earlier in $c$, without changing their ranking. Decisions do not keep theirs. At $c=0$ the
+benchmark is $q\otimes r$ while sequence $AB$ ends at $q\otimes t$, so under partial
+adoption an evaluator's score departs from the benchmark's at order zero, and the
+share of decisions the sequence changes and the surplus-weighted loss are then both
+of order zero. The separation of Theorem~\ref{thm:LOS} is a property of full
+adoption."""),
     ("A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place.",
      "A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place.",
      r"""A particularly surprising finding is that for a smooth statistic of the belief,
@@ -458,13 +531,27 @@ the answer is settled before any averaging over the aggregate takes place
     "weight, not a construction of ours; what is new is the two-attribute Jeffrey embedding. "
     "The adoption weight is now defined in Setup (author's draft; C.9), so the lead-in refers "
     "there. Colons before displays are kept; colons in prose are replaced. The closing example "
-    "sentence is plan 2.B's optional sentence. Both propositions must go in before E.1, E.5, "
+    "sentence is plan 2.B's optional sentence. Proposition LAD (added 2026-10-01, after the "
+    "author decided to keep omega as the nesting of the belief-adjustment model) states what "
+    "partial adoption does to the ranking of statistics: one order earlier for every belief "
+    "statistic except the odds ratio, ranking unchanged, odds ratio blind at every weight. \"Protected for every pair "
+    "of cues\" is needed because PRO's condition at $q\\otimes r$ alone does not survive the "
+    "move to $q\\otimes t$; a statistic built from the cue values can be protected at one point "
+    "and move at order zero. The decision paragraph after the proof is the LOS integral read "
+    "with an order-zero score gap; it is not in the sympy suite. "
+    "Both propositions must go in before E.1, E.5, "
     "E.6, E.7, E.9, E.11, E.12 and C.5, which cite them.",
     "PropORD.lean (lemmaORD_gap, propORD_Amarg, propORD_Bmarg, propORD_const); "
     "verify_ORD.py (25/25); Anchoring.lean (dampedB_deviation, routeDamped_mA1_deviation, "
     "orderEffect_damped_mA1, orderEffect_damped_at_indep, dampedB_at_one, dampedB_at_zero, "
     "routeDamped_at_zero_pins_A); check_zero_slope_identification.py (25/25); "
-    "verify_example.py (the omega = 1/2 read-back); HogarthEinhorn.lean (oneSided_eq_eq8)."))
+    "verify_example.py (the omega = 1/2 read-back); HogarthEinhorn.lean (oneSided_eq_eq8). "
+    "Proposition LAD: Ladder.lean (`jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`, "
+    "`assoc_rescale`, `oddsRatio_rescale`, `assoc_routeDamped`, `routeDamped_at_zero`, "
+    "`ladder_gap`, `ladder_gap_mA1`, `kAB_at_zero`, `ladder_assoc_coeff`, "
+    "`ladder_assoc_coeff_witness`, `ladder_oddsShadow_coeff`, `ladder_oddsShadow_seqEffect`); "
+    "sympy/verify_ladder.py (37/37, including the correlation coefficient and the gradient "
+    "identity with the log odds ratio); PropPRO.lean (`lemmaASC_first_order_vanishes`)."))
 
 E2.append(("E.11", "Scope, rival mechanisms (was 6.A)", [(
     "insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
@@ -532,13 +619,17 @@ weight $\omega$ is sequence-dependent in the same way, since commutation require
 the same factor in either position \citep{Wagner2002}. Under full adoption the
 position channel is absent and the association channel is the only one, which is
 the setting of the results. Under partial adoption the position channel is present
-at $c=0$ and dominates the association channel near it, so the classification by
-order in $c$ no longer measures what it was built to measure; the marginals differ
-at zeroth order, the believed association still does not differ between sequences
-at $c=0$, and the mean belief of a population mixing the two sequences acquires a
-cross-product association of $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$
-that no member holds. What the paper says about the position channel is confined
-to Proposition~\ref{prop:ADJ}, which recovers its strength from the ratings. The
+at $c=0$ and moves every marginal at order zero, while the believed association
+still does not differ between sequences at $c=0$ and differs at first order
+(Proposition~\ref{prop:LAD}). The classification by order in $c$ shifts by one order
+without changing the ranking of statistics, and the odds ratio is the same in both
+sequences at every weight. The mean belief of a population mixing the two sequences
+acquires a cross-product association of
+$-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member holds, and the
+separation between the share of decisions changed and the loss is lost. What the
+paper says about the position channel is confined to Propositions~\ref{prop:ADJ}
+and~\ref{prop:LAD}, the first recovering its strength from the ratings and the
+second stating what it does to the ranking. The
 position channel is a temporal bias of the observer, present whether or not the
 attributes are believed related, while the association channel runs through what
 one cue implies about the other and exists only when they are.
@@ -612,8 +703,14 @@ does not move. \\
 \addlinespace[3pt]
 Classification by order in $c$ &
 Is the contribution. Which statistics are protected, and why. &
-Is moot. Marginal-based statistics see the effect at zeroth order, the odds ratio
-never; there is no fine structure to classify. \\
+Shifts by one order with the ranking unchanged. Marginals at order zero, protected
+statistics at first order, the odds-ratio shadow at second, the odds ratio never
+(Proposition~\ref{prop:LAD}). \\
+\addlinespace[3pt]
+Share and loss of decisions &
+Share first order, loss second (Proposition~\ref{prop:SHR},
+Theorem~\ref{thm:LOS}). &
+Both of order zero; the separation is lost. \\
 \addlinespace[3pt]
 Audit implication &
 False negative. An association audit passes a sequence-dependent population. &
@@ -640,12 +737,17 @@ the association channel with it when the attributes are believed related.}
     "with the first and second cue; \"This effect\" is given its noun; proposition names "
     "become references; the table is a booktabs table (the manuscript loads booktabs and array, "
     "not longtable). Goes after E.11. The decision row of interior_omega's independence table "
-    "(share and loss at interior omega) is inferred, not verified, and is left out, as decided "
-    "2026-09-27. Every remaining quantity is a verified row.",
+    "(share and loss at interior omega) was left out on 2026-09-27 as inferred, not verified; "
+    "it is now in, as the LOS integral read with the order-zero score gap of Proposition LAD "
+    "(E.10), and is the one row not checked by sympy. The prose and the classification row are "
+    "reworked (2026-10-01): the earlier text said the classification \"no longer measures what it "
+    "was built to measure\" and was \"moot\" under partial adoption, which verify_ladder.py "
+    "refutes; the ranking survives one order earlier. Every other quantity is a verified row.",
     "sympy/verify_interior_omega.py (23/23: rows 1-6 of the independence table, the "
     "(1-omega) and (1-omega)^2 factors, the position-scaled Bayes-factor update at row 5); "
     "Anchoring.lean (orderEffect_damped_at_indep); LemmaSEP.lean; PropDRF; the rubric "
-    "prediction is Propositions DRF, IMM and ADJ read together."))
+    "prediction is Propositions DRF, IMM and ADJ read together. Ranking under partial adoption: "
+    "Ladder.lean and sympy/verify_ladder.py (37/37)."))
 
 E2.append(("E.13", "Back matter, AI declaration (was B.B)", [(
     r"Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently re-derived",

@@ -145,8 +145,10 @@ does not move. \\
 \addlinespace[3pt]
 Classification by order in $c$ &
 Is the contribution. Which statistics are protected, and why. &
-Is moot. Marginal-based statistics see the effect at zeroth order, the odds
-ratio never; there is no fine structure to classify. \\
+Shifts by one order with the ranking unchanged. Marginals at zeroth order,
+protected statistics at first order, the odds-ratio shadow at second, the odds
+ratio never (Proposition LAD; corrected 2026-10-01, the earlier ``is moot'' is
+refuted by \texttt{sympy/verify\_ladder.py}). \\
 \addlinespace[3pt]
 Audit implication &
 False negative. An association audit passes a sequence-dependent
@@ -417,8 +419,10 @@ second order. \\
 \addlinespace[3pt]
 Classification by order in $c$ $\dagger$ &
 Is the contribution. Which statistics are protected, and why. &
-Is moot. Marginal-based statistics see the effect at zeroth order, the odds
-ratio never; there is no fine structure to classify. \\
+Shifts by one order with the ranking unchanged. Marginals at zeroth order,
+protected statistics at first order, the odds-ratio shadow at second, the odds
+ratio never (Proposition LAD; corrected 2026-10-01, the earlier ``is moot'' is
+refuted by \texttt{sympy/verify\_ladder.py}). \\
 \addlinespace[3pt]
 Audit implication $\dagger$ &
 False negative. An association audit passes a sequence-dependent
@@ -481,14 +485,16 @@ order-dependent in the same way, since commutation requires the same factor
 in either position (Wagner 2002). Under full adoption the position channel
 is absent and the association channel is the only one, which is the setting
 of the results. Under partial adoption the position channel is present at
-$c=0$ and dominates the association channel near it, so the classification by order in $c$ no longer measures
-what it was built to measure; the marginals differ at zeroth order, the
-believed association still does not differ between sequences at $c=0$, and
+$c=0$ and moves every marginal at zeroth order, while the believed
+association still does not differ between sequences at $c=0$ and differs at
+first order; the classification by order in $c$ shifts by one order without
+changing the ranking of statistics (Proposition LAD, corrected 2026-10-01), and
 the mean belief of a population mixing the two sequences acquires a
 cross-product association of
 $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member
 holds. What the paper says about the position channel is confined to
-Proposition ADJ, which recovers its strength from the ratings. The position
+Propositions ADJ and LAD, the first recovering its strength from the ratings
+and the second stating what it does to the ranking. The position
 channel is a temporal bias of the observer, present whether or not the
 attributes are believed related, while the association channel runs through
 what one cue implies about the other and exists only when they are.

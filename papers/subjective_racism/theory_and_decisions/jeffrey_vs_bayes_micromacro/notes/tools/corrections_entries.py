@@ -37,120 +37,123 @@ def block(s):
 
 E = []  # (id, title, [(start, end, after)], purpose, verification)
 
-E.append(("C.1", "Abstract, sentences 2-4", [(
-    "Considering a case where evaluators", "the share of the population affected by the sequence differing from the benchmark.",
-    r"""Considering evaluators who read two correlated soft cues and comparing their
-beliefs and decisions with a sequence-free Bayesian benchmark, the paper asks which
-statistics of those beliefs and decisions register the resulting sequence effect.
-The paper shows that a smooth statistic of the belief is an order of magnitude
-closer to the benchmark than the marginal probabilities when it is insensitive to
-small shifts in those marginals. The believed association between the attributes
-is such a statistic, and the average value lost through decisions that differ from
-the benchmark also departs only at second order, while the share of the population
-whose decision the sequence changes departs at first order.""")],
-    "Sentence 3 is the author's wording (2026-10-01), with \"smooth\", \"than the marginal "
-    "probabilities\" and \"those marginals\" added. \"An arbitrary statistic is an order of magnitude "
-    "closer to the benchmark\" is false as stated; only the statistics insensitive to the "
-    "marginals are (Proposition PRO), and \"closer\" needs its comparator. The plane is the "
-    "mechanism in the body, not the finding; in plain words both sequences shift only the "
-    "marginals at first order. \"An order of magnitude\" is a factor of $c$, the marginals "
-    "departing in proportion to $c$ and the insensitive statistics to $c^2$. The loss is named "
-    "separately because it is second order for another reason (Theorem LOS, few flips and each "
-    "costing little), not through insensitivity. An earlier draft of this entry claimed an "
-    "identification failure; that holds only for the odds ratio each evaluator holds (Lemma SEP), "
-    "while the cross-product association and the loss are second order and visible at a fine "
-    "enough precision (MS line 456), so the claim was withdrawn. "
-    "Also \"the current papers asks\", and \"This results in measures ... staying ... while the "
-    "share ... differing\" has no main verb. \"Considering the empirical limitations in addition "
-    "to theoretical underpinnings\" is cut because no empirical limitation is named.",
-    "PRO (propPRO_protection, propPRO_uniqueness: insensitive to both marginal shifts iff "
-    "second order); DEC and LOS (second order); DRF and SHR (first order). All in the Lean and "
-    "sympy suites."))
+E.append(("C.1", "Abstract, sentences 1, 2-4 and 6 (rebased on the author's draft c2ae782f)", [
+    ("The effect of the order in which evidence arrives on an individual judgment", "in both experimental and theoretical studies.",
+     r"""The effect of the sequence in which evidence arrives on an individual judgment has
+sparked much interest in both experimental and theoretical studies."""),
+    ("Considering a case where evaluators make decisions using two correlated soft cues", "whereas the believed association departs only at second order.",
+     r"""Considering a case where evaluators make decisions using two correlated soft cues,
+the current paper asks which statistics of their beliefs and decisions register a
+resulting effect of arrival sequence with respect to a sequence-free benchmark.
+With a view to implications for empirical measurement, the paper shows that a
+smooth statistic of the belief is an order of magnitude closer to the benchmark
+than the marginal probabilities when it is insensitive to small shifts in those
+marginals. The average marginal probabilities and the share of evaluators whose
+decision the sequence changes depart from the sequence-free benchmark at first
+order, whereas the believed association departs only at second order."""),
+    ("Second, whether the effect of order is detectable", "rather than on the number of evaluators considered.",
+     r"""Second, at a given precision of measurement, whether the sequence effect is
+detectable depends on the kind of question being asked.""")],
+    "The author applied C.1 in their own wording at c2ae782f; this entry keeps only what "
+    "still needs correcting. Sentence 1 and the last sentence use \"order\" for reading "
+    "sequence, which the paper reserves for order in $c$ (writing discipline 6). Sentence 2: "
+    "\"the current papers asks\", \"with respective to\", and \"which of their beliefs and decision "
+    "statistics\" (a belief is not a statistic). Sentence 3: \"With a view of\" is \"With a view to\"; "
+    "\"an arbitrary statistic\" is false as stated, since only statistics insensitive to the "
+    "marginals are closer (Proposition PRO), so \"smooth ... of the belief\", the comparator \"than "
+    "the marginal probabilities\" and \"those marginals\" are restored from the approved C.1. "
+    "Sentence 4: two consecutive sentences open \"The paper shows\", and \"shows how\" states a "
+    "result as a method; \"collective\" becomes \"average\" (Proposition DRF reads the mean "
+    "belief). Leaving the loss out of sentence 4 is accurate, since the loss is also second "
+    "order (Theorem LOS). Last sentence: \"rather than on the number of evaluators\" is the "
+    "identification overclaim (todo, 2026-10-01). Only the odds ratio is blind at every sample "
+    "size (Lemma SEP); the association is second order and visible once precision is finer "
+    "than $c^2$ (MS precision passage, $c^2\\ll\\varepsilon\\ll c$), and precision improves with "
+    "the number of evaluators. Fixing the precision makes the claim true.",
+    "PRO (propPRO_protection, propPRO_uniqueness); DEC and LOS (second order); DRF and SHR "
+    "(first order); LemmaSEP.lean (the odds ratio). All in the Lean and sympy suites."))
 
-E.append(("C.2", "Introduction, paragraph 1, sentences 1, 2, 4 and 6", [
-    ("That the sequence in which evidence arrives can move the final judgment", "\\citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has rarely gathered attention.",
-     r"""That the sequence in which evidence arrives can move the final judgment is among
-the oldest findings in the study of impression formation
-\citep{Asch1946,HogarthEinhorn1992} yet the measurement of sequence dependence has
-rarely gathered attention. That sequence dependence exists is rarely in doubt, since
-if individual judgments did not depend on the arrival sequence of cues, then each cue
-must move belief by a factor fixed before it is received, leading to the unlikely
-situation where experience does not change how later cues are read."""),
-    ("The sequence-dependence of Jeffrey conditioning for soft evidence", "remains unclear \\citep{ZhaoOsherson2010}.",
-     r"""The sequence dependence of Jeffrey conditioning on soft evidence has attracted
-debate \citep{DiaconisZabell1982,Hawthorne2004,ZhaoOsherson2010}, but how that
-dependence registers in the statistics an observer reads has received little
-attention."""),
+E.append(("C.2", "Introduction, paragraph 1 (rebased on the author's draft c2ae782f)", [
+    ("That arrival sequence of cues does effect judgment is rarely under doubt", "how later cues are read at all.",
+     r"""That the arrival sequence of cues affects judgment is rarely in doubt, since if
+individual judgments did not depend on the arrival sequence, then each cue must move
+belief by a factor fixed before it is received, leading to the unlikely situation
+where experience does not change how later cues are read at all."""),
+    ("The sequence-dependence of Jeffrey conditioning for soft evidence in particular", "has received little attention.",
+     r"""The sequence dependence of Jeffrey conditioning for soft evidence in particular has
+attracted much debate \citep{DiaconisZabell1982,Hawthorne2004}, but the question of
+how that dependence registers in the statistics an observer reads has received
+little attention."""),
     ("It finds that the share of population affected", "and the total loss due to sequence effects do not.",
      r"""It finds that the share of the population whose decision the sequence changes
 departs from a sequence-invariant benchmark at first order, while the believed
 association between attributes and the surplus-weighted loss depart from it only at
 second order."""),
-    ("Given that a difference from the benchmark below the observer's precision", "the paper discusses the implications for sequence effects identification.",
-     r"""% Delete the sentence (see Why).""")],
-    "Sentence 1 (author's wording, 2026-10-01; replaces my earlier Bayes-factor sentence): the "
-    "added sentence is the modus tollens the author proposed on 2026-09-27. If judgments did "
-    "not depend on the sequence, each cue would move belief by a factor fixed in advance, and "
-    "then experience could not change how a later cue is read; that is unlikely, so "
-    "sequence independence is unlikely. The opening \"That sequence dependence exists is rarely in doubt, since\" "
-    "is the author's idea; it names the subject so that \"it\" cannot be read as the measurement, and "
-    "it gives the sentence a job as a logical ground beside the citations. Changes to the author's draft: \"If\" added, "
-    "\"judgements\" to \"judgment\" as in the manuscript, the double hyphen replaced by a comma. "
-    "Caution on \"must\": the theorems run the other way. Fixed factors imply commutation "
-    "(Wagner 2003 Theorem 3.2, Hawthorne factorUpdate_comm, Cripps order_invariance). The "
-    "converse is exact in this paper's two-cue model, where the sequence effect vanishes iff "
-    "q0 = alpha and r0 = beta (sympy/verify_soft_vs_hard.py), but it is not a theorem for "
-    "arbitrary updating rules. "
-    "No citation, because sentence 1 carries Asch and Hogarth-Einhorn. "
-    "Sentence 6 is cut (rule 4 of the writing discipline): C.4 restates it, that a departure "
-    "smaller than the observer's precision is invisible in the statistic read, and C.1 now "
-    "carries identification in the abstract. "
-    "Zhao-Osherson do not say the mechanism \"remains unclear\"; they say doubts about order "
-    "dependence \"disappear on closer inspection of the evidential weight of probability "
-    "judgements\" (p. 290). Cited for the debate, as the author agreed. Jeffrey himself says "
-    "non-commutativity \"is as it should be\" (1983, pp. 182-183; audit J1) and Diaconis-Zabell "
-    "that it \"is not a real problem\" (Remark 2, p. 827; M24); Hawthorne calls the order effect "
-    "\"very troubling\" (p. 99). Sentence 4: the loss is not free of the sequence effect, it "
-    "carries it at second order (LOS), and \"-- but\" is a dash doing a sentence's work.",
-    "verify_jeffrey.md J1; verify_kinematics.md; verify_hawthorne_weisberg.md; ZO p. 290 read "
-    "2026-09-30; Theorem LOS, Proposition SHR. Sentence 1: Cripps.lean order_invariance and "
-    "Hawthorne.lean factorUpdate_comm (fixed factors commute); sympy/verify_soft_vs_hard.py "
-    "(hard cues commute; exact condition for the sequence effect)."))
+    ("Given that a difference from the benchmark below the observer's precision", "the paper discusses the implications for identification of sequence effects.",
+     r"""% Delete the sentence (see Why)."""),
+    ("Despite its simplicity the two-cue setting", "remains valid for any number of cues and attributes.",
+     r"""Despite its simplicity, the two-cue setting demonstrates the central mechanism,
+that attribute-local updating leaves the interactions among attributes untouched,
+and the mechanism remains valid for any number of cues and attributes
+(Lemma~\ref{lem:SEP}).""")],
+    "The author applied C.2 in their own wording at c2ae782f; this entry keeps what still "
+    "needs correcting. Modus tollens sentence: \"does effect\" is \"affects\", \"under doubt\" is "
+    "\"in doubt\", the double hyphen is a dash doing a sentence's work, and \"and lead to\" breaks "
+    "the parallel with \"move\". Caution kept from the earlier entry: \"must\" is stronger than "
+    "the literature. Fixed factors imply commutation (Wagner 2003 Theorem 3.2, Hawthorne "
+    "factorUpdate_comm, Cripps order_invariance); the converse is exact in this paper's two-cue "
+    "model, where the sequence effect vanishes iff q0 = alpha and r0 = beta, but is not a "
+    "theorem for arbitrary updating rules. Debate sentence: \"However, but\" and the hyphen in "
+    "the noun \"sequence dependence\". ZhaoOsherson2010 is no longer cited anywhere in the "
+    "manuscript, which is the author's choice; its bibliography entry is now unused. "
+    "Sentence \"It finds that\": the loss is not free of the sequence effect, it carries it at "
+    "second order (LOS), and \"-- but\" is a dash doing a sentence's work. "
+    "Sentence \"Given that\": cut (rule 4 of the writing discipline); the precision point is "
+    "made in the C.4 paragraph, and \"identification of sequence effects\" is the identification "
+    "overclaim C.1 removes from the abstract. Last sentence: \"demonstrates the central mechanism "
+    "of how ... remains valid\" has two verbs for one subject; Lemma SEP is the general-N result "
+    "it refers to.",
+    "verify_jeffrey.md J1; verify_kinematics.md; verify_hawthorne_weisberg.md; Theorem LOS, "
+    "Proposition SHR; LemmaSEP.lean (general N). Modus tollens: Cripps.lean order_invariance, "
+    "Hawthorne.lean factorUpdate_comm, Wagner2003.lean thm32; sympy/verify_soft_vs_hard.py "
+    "(exact condition for the sequence effect)."))
 
-E.append(("C.3", "Introduction, paragraph 2 (the literature paragraph) and its footnote", [(
-    "The discussion on Jeffrey\\citep{Jeffrey1983}", "cannot tell whether impressions replace prior belief or adjust it.",
-    r"""Discussion of how Jeffrey conditioning \citep{Jeffrey1983} depends on arrival
-sequence has more often asked whether the commutation criterion is exactly
-satisfied than how measurable a failure of it is in observed data. The
-belief-adjustment literature models an impression as a single score
-\citep{HogarthEinhorn1992}, and the founding multi-trait study reports its results
-trait by trait \citep{Asch1946}, so both read marginals only. The characterisation
-of when two sequences lead to the same belief does consider a joint belief over
-attributes \citep{DiaconisZabell1982}, but where sequence dependence has been
-treated as a problem it has been treated as a defect to repair\footnote{\citet{Hawthorne2004}
-offers factor-based alternatives in which a cue supplies a normed-likelihood or
-likelihood-ratio factor instead of a new probability. Under these, updates on
-distinct attributes commute, and in his Basis-Commuting Version all updates do.}
-rather than as something to measure. While changing the input from a credence that
-replaces the prior to a factor that multiplies it settles whether beliefs depend on
-sequence, it hardly addresses the empirical issue that an observer cannot tell
-whether impressions replace prior belief or adjust it.""")],
-    "(i) Asch did not model an impression as a single score; Experiment VI reports eighteen "
-    "traits under two orders (audit A28). His published tables give per-trait percentages, "
-    "i.e. marginals. (ii) Diaconis-Zabell are grouped with the defect view, but they hold that "
-    "non-commutativity \"is not a real problem\" (M24). (iii) The footnote says Hawthorne "
-    "\"repairs\" the defect and that the effect disappears; he offers alternatives, and order-"
-    "freedom holds across distinct bases, fully only in his Basis-Commuting Version (M19). "
-    "(iv) \\citet inside a sentence where \\citep is meant; \"have focused\" agreement. "
-    "(v) Last sentence in the author's wording (2026-10-01), corrected only by \"changing the input\" "
-    "for \"the changing of input\", relative clauses naming what the credence replaces and the "
-    "factor multiplies, and \"or not\" dropped after \"whether\".",
-    "Asch1946 record (Asch.lean, Table 7); DiaconisZabell.lean and README; Hawthorne.lean "
-    "(`extUpdate_basisCommuting`, `factorUpdate_comm`), Sections 6-8."))
+E.append(("C.3", "Introduction, paragraph 2 and its footnote (rebased on the author's draft c2ae782f)", [(
+    "The discussions on how Jeffrey\\citep{Jeffrey1983} conditioning", "cannot tell whether impressions replace prior belief or adjust it.",
+    r"""The discussions on how Jeffrey conditioning \citep{Jeffrey1983} depends on arrival
+sequence have focused more often on whether the commutation criterion is exactly
+satisfied or not but not enough on how measurable its failure is in observed data.
+The belief-adjustment literature often models an impression as a single score
+\citep{HogarthEinhorn1992}, and the impression-formation literature considers traits
+one attribute at a time \citep{Asch1946}. The characterisation of when two sequences
+lead to the same belief does consider a joint belief over attributes
+\citep{DiaconisZabell1982}, but elsewhere sequence dependence is more often treated
+as a defect to repair\footnote{\citet{Hawthorne2004} offers factor-based alternatives
+in which a cue supplies a normed-likelihood or likelihood-ratio factor instead of a
+new probability. Under these, updates on distinct attributes commute, and in his
+Basis-Commuting Version all updates do.} rather than as something to measure. While
+changing the input from a credence that replaces the prior to a factor that
+multiplies it does settle whether beliefs depend on sequence, it hardly addresses
+the empirical issue that an observer cannot tell whether impressions replace prior
+belief or adjust it.""")],
+    "The author applied C.3 in their own wording at c2ae782f; this entry keeps what still "
+    "needs correcting. (i) \"models an impression as a single score \\citep{Hawthorne2004}\": the "
+    "single-score model is Hogarth-Einhorn's belief-adjustment model, and Hawthorne is not part "
+    "of that literature. (ii) Asch is impression formation, not belief adjustment, and reports "
+    "eighteen traits one by one (audit A28). (iii) \"\\citet{DiaconisZabell1982}\" is glued to "
+    "\"attributes\" and should be \\citep. (iv) \"the order dependence is more more treated as a "
+    "defect\": doubled \"more\", \"order\" for reading sequence, and the clause still groups "
+    "Diaconis-Zabell with the defect view, though they hold that non-commutativity \"is not a "
+    "real problem\" (M24); \"elsewhere\" detaches it from them. (v) The footnote still says "
+    "Hawthorne \"repairs\" the defect and that the effect disappears; he offers alternatives, "
+    "and freedom from sequence holds across distinct bases, fully only in his Basis-Commuting "
+    "Version (M19). (vi) \"Jeffrey\\citep\" lacks a space and the citation sits inside \"Jeffrey "
+    "conditioning\". (vii) The double hyphen before \"does settle\" is a dash doing a comma's work.",
+    "Asch1946 record (Asch.lean, Table 7); HogarthEinhorn.lean; DiaconisZabell.lean and README; "
+    "Hawthorne.lean (`extUpdate_basisCommuting`, `factorUpdate_comm`), Sections 6-8."))
 
-E.append(("C.4", "Introduction, the two-channel paragraphs (appear twice)", [(
-    "More specifically, arrival-sequence dependence can enter through two channels, an \\textbf{association} channel, in which one cue changes what the other implies and which exists only when the attributes are believed related, and a \\textbf{position} channel, in which the observer weights the later cue less whatever the attributes are \\citep{HogarthEinhorn1992,Asch1946}. Unlike",
-    "the believed association and related statistics carry it only at second order.",
+E.append(("C.4", "Introduction, the two-channel paragraph (rebased on the author's draft c2ae782f)", [(
+    "Whether impressions replace prior belief or adjust is a question which", "This carries clear implications for what an audit can or cannot measure about sequence dependence.",
     r"""Whether impressions replace prior belief or adjust it is a question which
 \citet[pp.~115--116]{Hawthorne2004}, writing as a logician rather than a psychologist,
 leaves open. To set the scope of its conclusions, the paper considers that
@@ -162,55 +165,63 @@ attributes are \citep{HogarthEinhorn1992}. In the position channel the later cue
 adopted only in part and every marginal registers the sequence even when the
 attributes are believed unrelated. On the other hand, when each impression is adopted
 in full, as in the successive updating of \citet{DiaconisZabell1982}, the position
-channel is disabled and only the association channel remains. In the two-attribute
+channel is disabled with only the association channel remaining. In the two-attribute
 setting with full adoption, the paper thus considers three coordinates of a belief,
 the two marginal probabilities and the cross-attribute association, and explains how a
 difference from the sequence-free benchmark below the observer's precision is
-invisible in the statistic the observer reads. The question is therefore not simply
+invisible in the statistic read by the observer. The question is therefore not simply
 whether the two sequences agree but by how much they disagree in an arbitrary
 statistic. The paper finds that the marginal probabilities and the share of decisions
 they change carry the difference at first order in the prior covariance, while the
 believed association and the statistics that move with it carry it only at second
-order.""")],
-    "AFTER is the author's paragraph of 2026-10-01 with corrections: \"that whether\" to "
-    "\"whether\", \"adjust\" to \"adjust it\", \"leave rather open ended\" to \"leaves open\" "
-    "(Hawthorne gives a tentative view and says he is mainly interested in the normative "
-    "question); \"we consider\" to \"the paper considers\" as elsewhere; the two dashes replaced "
-    "by commas; \"order-free\" to \"sequence-free\"; \"decisions from them\" to \"the share of "
-    "decisions they change\", since the loss is a decision statistic at second order (LOS); "
-    "\"and statistics\" to \"and the statistics that move with it\". "
-    "(i) The paragraph appears twice; the first copy is an earlier version and lacks its final "
-    "period. The AFTER replaces both copies. (ii) \"the observer weights the later cue less\" is "
-    "cited to Hogarth-Einhorn and Asch, but Hogarth-Einhorn's step-by-step partial adjustment "
-    "predicts recency (Appendix B) and their primacy comes from anchoring on the first item "
-    "(End-of-Sequence, Eq. 8); Asch denies that \"sheer temporal position\" matters (p. 272). "
-    "Asch is dropped (audit P10-P12). (iii) \"Which channels operate is fixed by how fully the "
-    "later cue is adopted\" is true of this model but not in general (under base-rate neglect "
-    "the later cue is adopted in full and a position channel still operates), so it is scoped "
-    "to \"the model studied here\". (iv) Full adoption is Diaconis-Zabell's setting, not their "
-    "premise. Optional, if a published instance of a position channel with likelihood inputs "
-    "is wanted: add after the Hogarth-Einhorn sentence \"Under base-rate neglect, where each "
-    "posterior becomes the prior for the next cue, the earlier cue is discounted "
-    "\\citep{BenjaminBodohCreedRabin2019}.\" (needs the bib entry in C.12).",
-    "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`, "
-    "`oneSided_primacy_iff`); BenjaminBodohCreedRabin.lean; verify_interior_omega.py rows 1-2; "
-    "Proposition ADJ endpoints (Anchoring.lean)."))
+order. Partial adoption of the later cue, as in the belief-adjustment model, moves
+the marginals and the association one order earlier without changing the ranking of
+statistics, and the odds ratio between the attributes stays the same in both
+sequences at every degree of adoption (Proposition~\ref{prop:LAD}). This carries clear implications for what an
+audit can or cannot measure about sequence dependence.""")],
+    "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
+    "needs correcting and adds one sentence. Corrections: \"adjust\" to \"adjust it\"; \"leave open\" "
+    "to \"leaves open\" (Hawthorne is one author; he gives a tentative view and says his interest "
+    "is normative, pp. 115-116); \"an arrival-sequence dependence\" loses its article; the position "
+    "channel was defined as \"the observer weights the later cue less\" and cited to Hogarth-Einhorn "
+    "and Asch, but Hogarth-Einhorn's step-by-step adjustment predicts recency (Appendix B) and Asch "
+    "denies that \"sheer temporal position\" matters (p. 272), so the definition is made neutral "
+    "and Asch is dropped (audit P10-P12); the two dashes become commas; \"decisions from them\" "
+    "becomes \"the share of decisions they change\", since the loss is a decision statistic and is "
+    "second order (LOS); \"and statistics\" becomes \"and the statistics that move with it\". "
+    "Added sentence (author's decision of 2026-10-01 to keep the adoption weight as the nesting "
+    "of the belief-adjustment model): it answers the objection that full and no adoption are not "
+    "the only options. Under partial adoption the marginals differ between sequences at order zero "
+    "in $c$, protected statistics at first order, statistics whose differential at independence is "
+    "a multiple of that of the log odds ratio at second order, and the odds ratio not at all. "
+    "\"In the belief-adjustment model\" is accurate because the adoption-weight rule is "
+    "Hogarth-Einhorn's averaging form (Eq. 4) applied to the second cue (E.10). The sentence "
+    "needs Proposition LAD (E.10).",
+    "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
+    "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
+    "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
 
 E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
     "In demonstrating how the sequence-dependence of certain statistics can be invisible",
     "(the amnestic updating concern in the literature).",
     r"""In the panel example the odds ratio between the two traits is the same in both
 reading sequences however far a later impression erases the earlier one, since each
-update rescales rows or columns of the belief (Lemma~\ref{lem:SEP}), whereas the
-cross-product association is protected in that way only under full adoption
-(Section~\ref{sec:scope}).""")],
-    "False as written for the cross-product association, which is the paper's `assoc`. Under "
-    "partial adoption its sequence effect is first order in c, with coefficient (1-omega) times "
-    "a nonzero term, and the pooled association is nonzero already at c = 0. Only the odds "
-    "ratio is identical across sequences for every omega. The commented-out line below the "
-    "paragraph states the odds-ratio version. The AFTER points to Section 6, where plan 6.B "
-    "carries the interior-omega numbers; apply 6.B with it.",
-    "sympy/verify_interior_omega.py checks (2), (3), (4); Lemma SEP (LemmaSEP.lean, general N)."))
+update rescales rows or columns of the belief (Lemma~\ref{lem:SEP}). The
+cross-product association is second order only under full adoption, but under
+partial adoption it moves at first order while every marginal moves at order zero,
+so the ranking of statistics survives (Proposition~\ref{prop:LAD}).""")],
+    "False as written for the cross-product association, which is the paper's `assoc`: "
+    "invisibility at second order does depend on how far a later impression erases the earlier "
+    "one. Under partial adoption the association's sequence effect is first order in $c$, with "
+    "coefficient $(1-\\omega)H/Z$, and only the odds ratio is identical across sequences for every "
+    "$\\omega$. What survives every $\\omega$ is the ranking: marginals one order ahead of protected "
+    "statistics, the odds-ratio shadow a further order behind, the odds ratio blind "
+    "(Proposition LAD, E.10). The commented-out line below the paragraph states the odds-ratio "
+    "version. \"Amnestic\" is dropped here since Hawthorne is not cited in this paragraph "
+    "(writing discipline 6).",
+    "Ladder.lean (`oddsRatio_rescale`, `jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`, "
+    "`ladder_gap`, `ladder_assoc_coeff`); sympy/verify_ladder.py (37/37), "
+    "sympy/verify_interior_omega.py; LemmaSEP.lean (general N)."))
 
 E.append(("C.6", "Introduction, premise paragraph, from \"Read as a Bayes factor\"", [(
     "Read as a Bayes factor, the credential carries a likelihood ratio", "consistent with the delivered marginal \\citep{DiaconisZabell1982}",
@@ -279,11 +290,16 @@ and the prior covariance $c=\assoc(P)$ denotes how strongly the panelist believe
 the"""),
     ("To address the issues in amnestic updating debate, we also consider an adoption weight",
      "the credential's implication is never moved.",
-     r"""To address the debate over whether a later impression should be adopted in full
-\citep{Hawthorne2004}, we also consider an adoption weight $\omega\in[0,1]$, which
-denotes how far the letter displaces what the credential had already implied about
-trustworthiness. At $\omega=1$ the letter sets the rating outright, and at
-$\omega=0$ the credential's implication is never moved.""")],
+     r"""To compare full adoption with the belief-adjustment model of
+\citet{HogarthEinhorn1992}, in which a later impression is adopted only in part, we
+also consider an adoption weight $\omega\in[0,1]$, which denotes how far the letter
+displaces what the credential had already implied about trustworthiness. At
+$\omega=1$ the letter sets the rating outright, and at $\omega=0$ the credential's
+implication is never moved.""")],
+    "Purpose of omega (author's decision, 2026-10-01): the weight nests Hogarth-Einhorn's "
+    "averaging rule (their Eq. 4, applied to the second cue; E.10), so full adoption is one "
+    "corner of a descriptive model rather than an assumption taken from the normative "
+    "literature. The Hawthorne debate is now taken up in the introduction (C.4). "
     "Grammar (\"described as $\\Delta^3$ --\", \"denotes\" for two subjects). \"Amnestic\" is "
     "used only where Hawthorne is quoted (writing_discipline.md 6). **Dependency:** omega is "
     "defined here but used nowhere else in the manuscript until plan 5.B (Proposition ADJ) is "
@@ -430,14 +446,15 @@ $c_n\downarrow0$, yields""")],
     "Tao.lean (`thm_1_7_15`, `ex_1_4_23_iii`, `measure_band_tendsto_zero`, `los_step4`)."))
 
 out = []
-out.append("""## C -- Corrections to the author's draft of 2026-09-30 (audit-driven)
+out.append("""## C -- Corrections to the author's draft (audit-driven)
 
-These entries correct the manuscript as committed at e7b997e3 (the author's
-revised draft). Each BEFORE block is cut from that file by script, so it matches
+These entries correct the manuscript as committed at c2ae782f (2026-10-01). The
+author applied C.1 to C.4 in their own wording at that commit; those four entries
+are rebased on the applied text and keep only what still needs correcting. Each BEFORE block is cut from that file by script, so it matches
 the manuscript text exactly (whitespace normalised). Each AFTER block is
 paste-ready LaTeX written under `notes/writing_discipline.md` (no colons, both
 sides of each contrast named, rewrites within 80-120% of the draft's length;
-exceptions are deletions, the removal of the duplicated paragraph in C.4, citation
+exceptions are deletions, citation
 fixes on short phrases, and C.6, which replaces a refuted argument). Each entry names
 the audit item in `notes/citation_audit.md` and the Lean or sympy record that
 justifies it. **None is applied.** The author approves each entry, and approved
@@ -535,7 +552,11 @@ MD = "\n".join(out)
 
 DISCIPLINE_EXEMPT_LENGTH = {
     "C.2.1": "adds the modus tollens sentence after the author's sentence 1",
-                            "C.4.1": "removes a duplicated paragraph",
+                            "C.1.3": "removes the identification overclaim",
+                            "C.4.1": "adds the partial-adoption sentence (Proposition LAD)",
+                            "C.5.1": "adds what survives partial adoption (Proposition LAD)",
+                            "C.9.3": "names the belief-adjustment model the weight nests",
+                            "C.2.5": "repairs a sentence with two verbs",
                             "C.10.1": "citation fix", "C.11.8": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",
                             "C.11.9": "appends the identification paragraph (C.15)",

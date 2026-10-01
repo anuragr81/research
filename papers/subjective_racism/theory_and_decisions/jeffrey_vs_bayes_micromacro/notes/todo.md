@@ -17,9 +17,22 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   (roman B). Notation only.
 - [ ] After each batch of approvals: rebuild `PAPER_B_MANUSCRIPT.pdf` (`make paper`),
   check no undefined references, commit on `master`.
-- [ ] **Push.** Local `master` is one commit ahead of origin (6afe9135, the built
-  manuscript PDF). Rebuild the PDF right before pushing, since it goes stale
-  when the tex changes.
+- [ ] **Push** after each batch. Rebuild `PAPER_B_MANUSCRIPT.pdf` right before pushing,
+  since it goes stale when the tex changes.
+- [x] **Adoption weight (decided 2026-10-01).** Keep $\omega$, repurposed as the nesting
+  of Hogarth-Einhorn's belief-adjustment rule. Verified: `sympy/verify_ladder.py` (37/37),
+  `lean/JeffreyOrder/Ladder.lean`. Partial adoption moves every belief statistic except the odds
+  ratio one order earlier with the ranking unchanged; the odds ratio is blind at every weight; the
+  share-versus-loss separation holds only under full adoption.
+- [~] **Approve the reworked entries:** C.1 to C.4 (rebased on c2ae782f, residual
+  corrections only), C.5, C.9 part 3, E.10 (adds Proposition LAD), E.12 (prose, the
+  classification row, the new decision row). C.4 and C.5 cite LAD, so they go in after
+  E.10.
+- [ ] The decision row of E.12 and the paragraph after LAD's proof (share and loss of
+  order zero under partial adoption) are the LOS integral read with an order-zero gap,
+  not a sympy row. Add a check if the author wants it verified like the rest.
+- [ ] `ZhaoOsherson2010` is no longer cited in the manuscript (author's c2ae782f); its
+  bibliography entry is unused. Keep, or cite again, the author's call.
 
 ## 2. Carry the old md plan over more fully (deferred by the author until some
 ## corrections are applied)
@@ -45,7 +58,9 @@ Gaps found when comparing `manuscript_change_plan_asof_2026-09-30.md` with the t
   not of estimation, which no sample size repairs" is true only for the odds ratio
   each evaluator holds (Lemma SEP, exactly the prior's in either sequence). The
   cross-product association and the loss are second order, visible at a precision
-  finer than $c^2$ (MS line 456). Withdrawn from C.1; still in C.15 (C.11 part 9),
+  finer than $c^2$ (MS precision passage). Withdrawn from C.1; the abstract's last
+  sentence is fixed by C.1 part 3 and the intro's "identification of sequence effects"
+  sentence is cut by C.2 part 4. Still in C.15 (C.11 part 9),
   `positioning_economics.tex` :49-58 and `papers_dialectic.tex` :175-179.
 
 ## 3. X5: incorporate the exploration documents (after the current state is verified)
@@ -57,7 +72,8 @@ entries for missing points under `notes/writing_discipline.md`, record points le
 out and why. Output: a coverage matrix plus new entries.
 
 - [ ] `papers_dialectic.tex`
-- [ ] `interior_omega.tex` (largely in E.12; check the rest)
+- [ ] `interior_omega.tex` (largely in E.12; check the rest). The "moot" classification
+  claims were corrected 2026-10-01 against `verify_ladder.py`.
 - [ ] `positioning_economics.tex` (X3: decide whether to retire it)
 - [ ] `question_and_answer.tex`, `two_horn_motivation_body.tex`
 - [ ] `empirical_analytics.tex`, `worked_example.tex`

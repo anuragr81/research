@@ -1,6 +1,21 @@
 # Manuscript change plan (v2): two-horn motivation + question/answer, compacted
 
 **Superseded as the master plan by `notes/manuscript_corrections.tex` (2026-09-30).**
+
+**Adoption-weight decision (2026-10-01).** The author keeps $\omega$, repurposed:
+it nests the belief-adjustment model of Hogarth and Einhorn (their Eq. 4 applied to
+the second cue), so full adoption is one corner of a descriptive rule rather than an
+assumption taken from the normative literature. Verified the same day
+(`sympy/verify_ladder.py`, 37/37; `lean/JeffreyOrder/Ladder.lean`): partial adoption
+moves the sequence effect on every belief statistic except the odds ratio one order
+earlier in $c$ without changing their ranking,
+the odds ratio is the same in both sequences at every weight, and the share-versus-loss
+separation holds only under full adoption. Entries below that say the classification is
+"moot" or "no longer measures what it was built to measure" under partial adoption are
+refuted; their current versions are E.10 (Proposition LAD), E.12, C.4, C.5 and C.9 of
+`notes/manuscript_corrections.tex`, which supersede 5.B, 6.B, 1.A2 and the $\omega$
+clause of 1.D.
+
 The entries below are kept as an archive until re-issued there. **No change here has been applied to the manuscript.** Every AFTER block is paste-ready LaTeX. Line numbers in the headings are
 from the original plan and are stale; locate each edit by its BEFORE text.
 
@@ -62,7 +77,9 @@ B.A (bibliography) must be applied before 1.A, 1.C, 1.D, 3.A, 3.B, 3.C, 3.D,
    adopted, and the benchmark is the same cue under the other reading. The
    order effect is the difference between the two readings. 1.D also
    states the second premise, full adoption, and names the adoption weight
-   $\omega$, which Proposition ADJ recovers from the marginals.
+   $\omega$, which Proposition ADJ recovers from the marginals. *(2026-10-01:
+   $\omega$ now nests the belief-adjustment model; Proposition LAD states the
+   ranking under partial adoption. See E.10 and C.9 of the tex plan.)*
 3. **1.E and 5.B state the answer together with its instrument.** Marginals and
    the share of decisions changed show the sequence effect at first order. The
    association and the surplus-weighted loss do not.
@@ -209,6 +226,11 @@ holds for any number of attributes and cues.
 ---
 
 ## 1.A2 -- Introduction, paragraph 1: the two-channel prelude (pointer)
+
+*Status 2026-10-01: applied by the author at c2ae782f; residual corrections and the
+partial-adoption sentence are C.4 of the tex plan. The position channel's definition
+here ("weights the later cue less", cited to Hogarth-Einhorn and Asch) is wrong on
+both citations (audit P10-P12) and is replaced there.*
 
 **Purpose.** Immediately after the opening sentence(s) saying that how
 sequence dependence registers in observed statistics has received little
@@ -1081,6 +1103,9 @@ definition.
 
 ## 5.B -- Section 5: new definition + Proposition ORD (insert after line 440) (formerly Change 6)
 
+*Status 2026-10-01: re-issued as E.10 of the tex plan, which now also carries
+Proposition LAD (the ranking under partial adoption) after Proposition ADJ.*
+
 **Purpose.** State how the sequence effect, already defined on the joint
 belief, behaves when read through a statistic. No new definition is introduced;
 one lead-in sentence gives the formula and notes that it involves neither the
@@ -1356,6 +1381,13 @@ family is stated through Hogarth-Einhorn's own equation, which is already cited.
 ---
 
 ## 6.B -- Scope: the two channels, and opposite predictions about one procedure (pointer)
+
+*Status 2026-10-01: re-issued as E.12 of the tex plan. Its claim that the
+classification by order in $c$ "no longer measures what it was built to measure" under
+partial adoption, and the table row calling it "moot", are refuted
+(`sympy/verify_ladder.py`); E.12 and `interior_omega.tex` are corrected. The decision row
+left out on 2026-09-27 is now in E.12's table, as the LOS integral read with an
+order-zero score gap.*
 
 **Purpose.** Two paragraphs following 6.A. The first names the two channels
 with their closed forms and states the scope condition: full adoption is the
