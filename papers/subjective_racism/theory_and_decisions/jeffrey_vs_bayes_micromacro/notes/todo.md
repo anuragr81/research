@@ -24,7 +24,10 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 - [~] **7.2 (added 2026-10-02, pending the author's review):** the conclusion's third
   implication names Coffman, Exley and Niederle (2021) as a design that asks a difference
   question (the believed gap between groups) and reads a decision rate (who is hired), and
-  replaces the sentence claiming a population passes "every belief-level audit". Bohren, Haggag,
+  replaces the sentence claiming a population passes "every belief-level audit". Amended the same
+  day: the last sentence now says what the audit cannot rule out (one admissible population of
+  coherent evaluators suffices), and it is a full-adoption claim, since under partial adoption the
+  conditional difference is first order (`sympy/verify_ladder.py` row B, 57/57). Bohren, Haggag,
   Imas and Pope (the level question per group) to be looked at next.
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$

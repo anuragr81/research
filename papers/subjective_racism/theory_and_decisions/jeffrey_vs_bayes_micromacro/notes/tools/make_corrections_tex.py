@@ -206,15 +206,22 @@ def renum(t):
     return re.sub(r"\b[CE]\.\d+[a-z]?\b", lambda m: NEW.get(m.group(0)) or ALIAS.get(m.group(0)) or m.group(0), t)
 
 
-def rows_for(placed):
+def rows_for(placed, keep=None, note=None, why=None):
+    """keep(eid, k): include part k; note(eid, k): status line under the part;
+    why(eid): None for the full Why/Evidence/Grounds, else a line that replaces them."""
     rows, current = [], None
     for pos, seq, (eid, title, pairs, purpose, verif) in placed:
+        ks = [k for k in range(1, len(pairs) + 1) if keep is None or keep(eid, k)]
+        if pairs and not ks:
+            continue
         lab = NEW[eid].split(".")[0]
         if lab != current:
             current = lab
             rows.append(f"\\multicolumn{{3}}{{|l|}}{{\\rule{{0pt}}{{3.2ex}}\\Large\\textbf{{{lab}\\quad {prose(SEC_NAME.get(lab, lab))}}}}} \\\\ \\hline\\hline")
         rows.append(f"\\entryhead{{{NEW[eid]}}}{{{prose(renum(title))}\\quad{{\\footnotesize\\textit{{(formerly {eid})}}}}}}")
         for k, part in enumerate(pairs, 1):
+            if k not in ks:
+                continue
             kind, s, e, after = C.norm_part(part)
             before = C.cut(s, e, eid, k)
             n = f"{k}/{len(pairs)}"
@@ -227,19 +234,118 @@ def rows_for(placed):
             elif kind == "insert_sentence":
                 before = "\\textit{New sentence after} ``" + before + "''"
             rows.append(f"{n} & {latex_cell(before)} & {latex_cell(after)} \\\\ \\hline")
+            line = note(eid, k) if note else None
+            if line:
+                rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textit{{Status.}} {line}}} \\\\ \\hline")
         if not pairs:
             rows.append(f" & \\multicolumn{{2}}{{p{{24.6cm}}|}}{{\\textit{{No manuscript text; see Why.}}}} \\\\ \\hline")
-        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Why.}} {prose(renum(purpose))}}} \\\\")
-        rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Evidence.}} {prose(renum(verif))}}} \\\\ \\hline")
-        rows.extend(renum(r) for r in grounds_rows(eid))
+        w = why(eid) if why else None
+        if w:
+            rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{{w}}} \\\\ \\hline")
+        else:
+            rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Why.}} {prose(renum(purpose))}}} \\\\")
+            rows.append(f"\\multicolumn{{3}}{{|p{{\\fullw}}|}}{{\\textbf{{Evidence.}} {prose(renum(verif))}}} \\\\ \\hline")
+            rows.extend(renum(r) for r in grounds_rows(eid))
         rows.append("\\multicolumn{3}{|l|}{} \\\\ \\hline")
     return rows
 
 
 rows = rows_for(placed)
-applied_placed = sorted(((0, seq, ent) for seq, ent in enumerate(ALL) if ent[0] in APPLIED),
+
+
+# ---------------------------------------------------------------------------
+# Applied parts: still in the manuscript, or history.  A part's AFTER text is
+# split into sentences; the share still present (whitespace-normalised) in the
+# current manuscript decides.  At least half present: in force, with a note of
+# what changed it since.  Less than half: history.  A deletion stands while the
+# deleted text stays out.  The commits at which sentences vanished are named,
+# with the applied entry responsible when its BEFORE text held them.
+# ---------------------------------------------------------------------------
+import subprocess
+
+def _norm(t):
+    return re.sub(r"\s+", " ", t)
+
+
+def _sentences(after):
+    t = _norm("\n".join(l for l in after.splitlines() if not l.lstrip().startswith("%"))).strip()
+    return [x for x in re.split(r"(?<=[.?!])\s+(?=[A-Z\\])", t) if len(x) >= 25]
+
+
+_COMMITS = subprocess.run(["git", "-C", C.REPO, "rev-list", "--reverse", "HEAD", "--", "PAPER_B_MANUSCRIPT.tex"],
+                          capture_output=True, text=True, check=True).stdout.split()
+_TEXT = {}
+
+
+def _text_at(full):
+    if full not in _TEXT:
+        _TEXT[full] = _norm(subprocess.run(["git", "-C", C.REPO, "show", f"{full}:./PAPER_B_MANUSCRIPT.tex"],
+                                           capture_output=True, text=True, check=True).stdout)
+    return _TEXT[full]
+
+
+def _applied_at(eid, k):
+    return APPLIED.get(eid) or C.APPLIED_PARTS.get((eid, k))
+
+
+def _who(commit8, gone):
+    """Name the applied entry whose BEFORE text held the vanished sentences, else the author."""
+    for eid2, title2, parts2, *_ in ALL:
+        for k2, part2 in enumerate(parts2, 1):
+            if _applied_at(eid2, k2) != commit8:
+                continue
+            _, s2, e2, _ = C.norm_part(part2)
+            if any(x in C.cut(s2, e2, eid2, k2) for x in gone):
+                return f"entry {NEW[eid2]} (part {k2}) at {commit8}"
+    subj = subprocess.run(["git", "-C", C.REPO, "log", "-1", "--format=%s", commit8],
+                          capture_output=True, text=True, check=True).stdout.strip()
+    subj = subj if len(subj) <= 70 else subj[:67].rsplit(" ", 1)[0] + "..."
+    return f"the edit at {commit8} (``{esc(subj)}'')"
+
+
+STATUS = {}
+for _eid, _t, _parts, *_ in ALL:
+    for _k, _part in enumerate(_parts, 1):
+        _c8 = _applied_at(_eid, _k)
+        if not _c8:
+            continue
+        _kind, _s, _e, _after = C.norm_part(_part)
+        if _after.lstrip().startswith("%"):
+            STATUS[(_eid, _k)] = ("force", "") if C.cut(_s, _e, _eid, _k) not in C.NORM else \
+                ("history", "The deleted text is back in the manuscript.")
+            continue
+        _ss = _sentences(_after)
+        _full = next(c for c in _COMMITS if c.startswith(_c8))
+        _changes, _prev = [], set(x for x in _ss if x in _text_at(_full))
+        for _cm in _COMMITS[_COMMITS.index(_full) + 1:]:
+            _here = set(x for x in _ss if x in _text_at(_cm))
+            if _here < _prev:
+                _changes.append(_who(_cm[:8], _prev - _here))
+            _prev = _here
+        _n, _m = len([x for x in _ss if x in C.NORM]), len(_ss)
+        _by = "; ".join(_changes)
+        if _n == _m:
+            STATUS[(_eid, _k)] = ("force", "")
+        elif 2 * _n >= _m:
+            STATUS[(_eid, _k)] = ("force", f"In force with changes: {_n} of {_m} sentences stand as applied; changed by {_by}.")
+        else:
+            STATUS[(_eid, _k)] = ("history", (f"Removed by {_by}." if _n == 0 else
+                                             f"Largely superseded: {_n} of {_m} sentences stand as applied; changed by {_by}."))
+
+_in_force = lambda e, k: STATUS.get((e, k), ("", ""))[0] == "force"
+_in_history = lambda e, k: STATUS.get((e, k), ("", ""))[0] == "history"
+_note = lambda e, k: STATUS.get((e, k), ("", ""))[1] or None
+HIST_ENTRIES = {e for (e, k), (cls, _) in STATUS.items() if cls == "history"}
+SPLIT = {e for e in HIST_ENTRIES if any(cls == "force" for (e2, k), (cls, _) in STATUS.items() if e2 == e)}
+
+applied_placed = sorted(((0, seq, ent) for seq, ent in enumerate(ALL)
+                         if ent[0] in APPLIED or any((ent[0], k) in C.APPLIED_PARTS for k in range(1, len(ent[2]) + 1))),
                         key=lambda t: _numkey(NEW[t[2][0]]))
-rows_applied = rows_for(applied_placed)
+rows_applied = rows_for(applied_placed, keep=_in_force, note=_note)
+rows_history = rows_for(applied_placed, keep=_in_history, note=_note,
+                        why=lambda e: ("\\textit{Why, Evidence and Grounds are with this entry under Applied entries in force.}"
+                                       if e in SPLIT else None))
+HIST_NUMS = sorted({NEW[e] for e in HIST_ENTRIES}, key=_numkey)
 
 def _order_note():
     """Only constraints among pending entries; applied ones need no ordering."""
@@ -268,7 +374,7 @@ def _key(k):
 
 MAP_ROWS = "\n".join(
     f"{eid} & {NEW[eid]} & {prose(SEC_NAME.get(NEW[eid].split('.')[0], ''))} & "
-    f"{('applied at ' + APPLIED[eid]) if eid in APPLIED else 'pending'} \\\\ \\hline"
+    f"{('applied at ' + APPLIED[eid] + (', part in History' if eid in SPLIT else (', in History' if eid in HIST_ENTRIES else ''))) if eid in APPLIED else 'pending'} \\\\ \\hline"
     for eid in sorted(NEW, key=_key))
 MAP_ROWS += "\n" + "\n".join(f"{a} & {b} & folded in & \\\\ \\hline" for a, b in sorted(ALIAS.items()))
 
@@ -337,13 +443,16 @@ matches the manuscript exactly. Under each entry, \textbf{Why} gives the error a
 Lean or sympy record or page that settles it (audit items refer to \texttt{notes/citation\_audit.md}).
 The identification paragraph appended in """ + IDENT + r""" reconciles Section 3 with
 \texttt{notes/positioning\_economics.tex}. Cross-references print as their label (e.g.\ \textsc{prop:IMM});
-footnotes print inline. \textbf{Nothing here is applied.} The author approves entries by number;
-approved entries are applied to the manuscript, compiled and committed. Every AFTER text passes the
+footnotes print inline. The document has three parts. \textbf{Pending entries} are proposals, none
+applied; the author approves them by number, and approved entries are applied to the manuscript,
+compiled and committed. \textbf{Applied entries in force} are those whose text is in the manuscript.
+\textbf{History} keeps applied text that a later entry or the author's own edit has since removed or
+largely rewritten, together with the archived plan and the old entry numbers. Every AFTER text passes the
 mechanical checks of \texttt{notes/writing\_discipline.md} (no colons, no dashes doing a sentence's
 work, ``sequence'' for reading order, the fixed adoption terminology, length within 80--120\% of the
 draft except where the entry says why); the generator refuses to build otherwise.
 
-\section*{Entries in manuscript order}
+\section*{Pending entries}
 Entries are numbered by the manuscript section they change and listed in the order in which their
 text would appear. \textbf{0} is the abstract, \textbf{1} to \textbf{7} are the numbered sections,
 \textbf{A} is the appendix and \textbf{B} is the back matter with the bibliography. Each entry also
@@ -351,7 +460,8 @@ shows its former number, which earlier notes and commits use, and the table at t
 numbers to new. """ + ORDER_NOTE + r"""
 
 \paragraph*{Applied to the manuscript} at """ + ", ".join(APPLIED_COMMITS) + r""": """ + ", ".join(APPLIED_NUMS) + APPLIED_PARTS_NOTE + r""".
-These entries have left the table of changes; their full record, with grounds, is in the section ``Applied entries, kept as the record'' after it.
+These entries have left the table of changes. What of them stands in the manuscript is under
+``Applied entries in force''; what has since been removed or largely rewritten (""" + ", ".join(HIST_NUMS) + r""") is under ``History''.
 
 \paragraph*{Pending} (""" + str(len(PENDING_NUMS)) + r""" entries, in manuscript order): """ + ", ".join(PENDING_NUMS) + r""".
 
@@ -361,19 +471,6 @@ These entries have left the table of changes; their full record, with grounds, i
 \textbf{Part} & \textbf{BEFORE (current manuscript, or the anchor for an insert)} & \textbf{AFTER (proposed)} \\ \hline\hline
 \endhead
 """ + "\n".join(rows) + r"""
-\end{longtable}
-}
-
-\section*{Applied entries, kept as the record}
-These entries were applied to the manuscript at """ + ", ".join(APPLIED_COMMITS) + r""". They are kept here with
-their BEFORE text as it stood just before that commit, the AFTER text as applied, and the Why, Evidence
-and Grounds that justified them.
-{\small
-\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
-\hline
-\textbf{Part} & \textbf{BEFORE (manuscript before the applying commit)} & \textbf{AFTER (as applied)} \\ \hline\hline
-\endhead
-""" + "\n".join(rows_applied) + r"""
 \end{longtable}
 }
 
@@ -387,7 +484,36 @@ so """ + CHAPTER_USERS + r""" cite the chapter only.
 \citet{CoffmanExleyNiederle2021}, needed by """ + renum("C.19") + r""", was added on 2 October 2026
 (\emph{Management Science} 67(6), 3551--3569, doi 10.1287/mnsc.2020.3660).
 
-\section*{Where each entry of the archived plan (notes/manuscript\_change\_plan\_asof\_2026-09-30.md) now lives}
+\section*{Applied entries in force}
+These entries were applied to the manuscript at """ + ", ".join(APPLIED_COMMITS) + r""", and their text stands in
+it. Each part shows its BEFORE text as it stood just before the applying commit and the AFTER text as
+applied, with the Why, Evidence and Grounds that justified it. A part at least half of whose sentences
+stand as applied is kept here with a \textit{Status} line naming what has changed it since; a part of
+which less remains is under History.
+{\small
+\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
+\hline
+\textbf{Part} & \textbf{BEFORE (manuscript before the applying commit)} & \textbf{AFTER (as applied)} \\ \hline\hline
+\endhead
+""" + "\n".join(rows_applied) + r"""
+\end{longtable}
+}
+
+\section*{History}
+\subsection*{Applied text since removed or largely rewritten}
+Parts of applied entries whose text no longer stands in the manuscript, each with a \textit{Status} line
+naming the entry or the author's edit that removed it. They are kept as the record of what was
+proposed and applied, not as proposals.
+{\small
+\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
+\hline
+\textbf{Part} & \textbf{BEFORE (manuscript before the applying commit)} & \textbf{AFTER (as applied)} \\ \hline\hline
+\endhead
+""" + "\n".join(rows_history) + r"""
+\end{longtable}
+}
+
+\subsection*{Where each entry of the archived plan (notes/manuscript\_change\_plan\_asof\_2026-09-30.md) now lives}
 {\small
 \begin{longtable}{|p{2.6cm}|p{5.2cm}|p{17.4cm}|}
 \hline
@@ -396,7 +522,7 @@ so """ + CHAPTER_USERS + r""" cite the chapter only.
 \end{longtable}
 }
 
-\section*{Old and new entry numbers}
+\subsection*{Old and new entry numbers}
 {\small
 \begin{longtable}{|p{2.2cm}|p{2.2cm}|p{9cm}|p{4cm}|}
 \hline
