@@ -310,12 +310,19 @@ marginals---which remain so in the current paper as well.
 
 
 The purview of the current paper is positive rather than normative. The paper merely takes the mean belief as the object an observer computes and characterises which of its
-statistics conceal the members' sequence-dependence. A related normative literature evaluates group belief formation by whether aggregation
-commutes with updating---a design criterion for the pooling rule \citep{Dietrich2021}.
-While geometric pooling \citep[Def.~1]{Dietrich2021} satisfies the criterion, the population mean studied in the
-current paper (i.e.\ the average posterior across evaluators who differ only in the sequence they meet the two cues) is the outcome of linear pooling and generically fails the criterion. As further sections elaborate, this is consistent with the first-order divergence of every statistic outside the protected class of Proposition~\ref{prop:PRO}.
+statistics conceal the members' sequence-dependence.
 
-\textbf{Several alternatives to Bayesian updating have been used in the decision theory literature to explain whether sequential conditioning is sequence-independent or not}. For example, \citet{Epstein2006} makes the updating rule subjective, and \citet{Ortoleva2012} axiomatises departures triggered by unexpected news. \citet{Cripps2021} shows that symmetry and divisibility jointly force sequence-independence, so the correlated two-cue composite of Proposition~\ref{prop:DIV} fails divisibility---and, of the four axioms, only divisibility.\footnote{Cripps's axioms govern rules on fixed-likelihood experiments; the statement here is behavioural---the map from prior and delivered credences to final belief, held against the sequence-invariance that his Symmetry and Divisibility axioms jointly force.} While the literature restores sequence-invariance for sequential Jeffrey updating by changing how successive inputs are pooled \citep{PettigrewWeisberg2025}, the current paper instead accepts the non-commutativity and characterises what remains of it in aggregate. The characterisation discussed in the paper offers some clarity to the observations noted by \citet{HogarthEinhorn1992}. While Bayes-factor updating predicts no sequence effect anywhere \citep{Wagner2002}, the belief-adjustment accounts of order effects \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper highlights is that such experimental analyses must also factor in the cross-attribute association -- thus requiring the elicitation of a full posterior table rather than a single rating produced by step-by-step or end-of-sequence response modes. 
+Decision theory has axiomatised several alternatives to Bayesian updating, each
+for a single piece of news. \citet{Epstein2006} makes the updating rule, and not only
+the prior, subjective, and \citet{Ortoleva2012} axiomatises departures triggered by
+unexpected news. \citet{Cripps2021} treats the sequence of signals, and his
+Symmetry and Divisibility axioms imply that two conditionally independent signals
+give the same posterior in either sequence. Read with each cue as its likelihood matched to the prior
+(Proposition~\ref{prop:IMM}), the composite of Proposition~\ref{prop:DIV} is a
+sequence of Bayes updates satisfying all four of his axioms, and it depends on the
+sequence because the second likelihood is matched to the intermediate belief, so
+the two sequences process different experiments. While \citet{PettigrewWeisberg2025} restore sequence-invariance by pooling the
+prior with each new input multiplicatively before the Jeffrey step, the current paper instead accepts the non-commutativity and characterises what remains of it in aggregate. The characterisation discussed in the paper offers some clarity to the observations noted by \citet{HogarthEinhorn1992}. While Bayes-factor updating predicts no sequence effect anywhere \citep{Wagner2002}, the belief-adjustment accounts of order effects \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper highlights is that such experimental analyses must also factor in the cross-attribute association -- thus requiring the elicitation of a full posterior table rather than a single rating produced by step-by-step or end-of-sequence response modes. 
 
 The paper borrows the evaluator-with-binary-attribute frame from the
 statistical-discrimination lineage \citep{Arrow1973,CoateLoury1993}. However, the object of interest for the current paper remains
@@ -546,7 +553,10 @@ The previous section classified statistics for one evaluator. This section shows
 that the classification survives averaging over a population in which a fraction
 $\lambda\in[0,1]$ of evaluators meet the $A$-cue first (the credential in the
 example) and the rest the $B$-cue first (the letter), so that the mean belief under
-Jeffrey conditioning is $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$.
+Jeffrey conditioning is $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. The population mean is a linear pool of the two posteriors, and the choice of
+pooling rule is immaterial at first order, since the two posteriors coincide at
+independence and a geometric pool of them differs from the linear one only at
+second order.
 Across an open set of priors, what makes a statistic first order or second order is
 the statistic itself and not the mixture $\lambda$, since the mean belief lies in
 the plane through $\PB$ spanned by the leading directions of the two sequences,
