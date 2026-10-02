@@ -1414,3 +1414,21 @@ open JeffreyOrder
 #print axioms Literature.Cassell.oddsUpdate_mono
 #print axioms Literature.Cassell.considered_bounded
 -- END Literature.Cassell
+
+-- BEGIN Literature.CoffmanExleyNiederle
+#print axioms Literature.CoffmanExleyNiederle.diffImprovement_zero_iff
+#print axioms Literature.CoffmanExleyNiederle.symmetric_expected_half
+#print axioms Literature.CoffmanExleyNiederle.rates_below_half
+#print axioms Literature.CoffmanExleyNiederle.table1_col1_consistent
+#print axioms Literature.CoffmanExleyNiederle.fig1_fn13_consistent
+#print axioms Literature.CoffmanExleyNiederle.fn13_exaggerate
+#print axioms Literature.CoffmanExleyNiederle.ingroup_smaller_gap
+#print axioms Literature.CoffmanExleyNiederle.ingroup_hiring
+#print axioms Literature.CoffmanExleyNiederle.infostage_rates
+#print axioms Literature.CoffmanExleyNiederle.decisions_54
+#print axioms Literature.CoffmanExleyNiederle.riskLevels_screens
+#print axioms Literature.CoffmanExleyNiederle.info_screens
+#print axioms Literature.CoffmanExleyNiederle.sample_counts
+#print axioms Literature.CoffmanExleyNiederle.meanScore_eq_condHigh
+#print axioms Literature.CoffmanExleyNiederle.gap_is_conditional_difference
+-- END Literature.CoffmanExleyNiederle

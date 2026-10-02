@@ -1025,6 +1025,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Epstein 2006, Ortoleva 2012 (via 2024 survey), Tao 2011, Becker 1962 (web copy) | yes | 2/B |
   | Asch (data), Zhao-Osherson 2010, Zhao et al. 2012 | yes | B/C |
   | Wilson 2014 (2003 draft), Cassell 2020, Shmaya-Yariv Def. 2 | yes | C |
+  | Coffman-Exley-Niederle 2021 (HBS working paper; cited by plan 7.2) | yes | 2026-10-02 |
   | Jeffrey 1988 | blocked, not in Drive | -- |
 
 ## 6. Cross-document consistency (to do after the pass)

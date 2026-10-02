@@ -9,6 +9,7 @@ import Literature.BenjaminBodohCreedRabin
 import Literature.BohrenImasRosenberg
 import Literature.Cassell
 import Literature.CoateLoury
+import Literature.CoffmanExleyNiederle
 import Literature.Cripps
 import Literature.DiaconisZabell
 import Literature.Dietrich
