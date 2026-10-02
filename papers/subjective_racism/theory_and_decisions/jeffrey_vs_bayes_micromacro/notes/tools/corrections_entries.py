@@ -11,15 +11,37 @@ REPO = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 MS = open(f"{REPO}/PAPER_B_MANUSCRIPT.tex").read()
 NORM = re.sub(r"\s+", " ", MS)
 
+# Entries already applied to the manuscript, by former id, with the commit that applied them.
+# Their BEFORE anchors no longer exist in the manuscript, so the anchor checks skip them and
+# the plan lists them above its table instead of in it.
+APPLIED = {k: "db3a2f41" for k in ("C.9", "E.2", "C.9w", "C.10", "E.3", "E.5", "C.11b",
+                                   "E.8", "E.9", "E.10", "E.15h", "E.11", "E.15")}
 
-def cut(start, end):
-    i = NORM.find(start)
-    if i < 0 or NORM.find(start, i + 1) >= 0:
+
+_HIST = {}
+
+
+def _norm_at(commit):
+    """The manuscript as it stood just before `commit`, whitespace-normalised."""
+    if commit not in _HIST:
+        import subprocess
+        raw = subprocess.run(["git", "-C", REPO, "show", f"{commit}^:./PAPER_B_MANUSCRIPT.tex"],
+                             capture_output=True, text=True, check=True).stdout
+        _HIST[commit] = re.sub(r"\s+", " ", raw)
+    return _HIST[commit]
+
+
+def cut(start, end, eid=None):
+    """The BEFORE text, from the current manuscript, or for an applied entry from the
+    manuscript just before the commit that applied it."""
+    src = _norm_at(APPLIED[eid]) if eid in APPLIED else NORM
+    i = src.find(start)
+    if i < 0 or src.find(start, i + 1) >= 0:
         sys.exit(f"start phrase missing or ambiguous: {start!r}")
-    j = NORM.find(end, i)
+    j = src.find(end, i)
     if j < 0:
         sys.exit(f"end phrase missing: {end!r}")
-    return NORM[i:j + len(end)]
+    return src[i:j + len(end)]
 
 
 def norm_part(part):
@@ -36,12 +58,6 @@ def block(s):
 
 
 E = []  # (id, title, [(start, end, after)], purpose, verification)
-
-# Entries already applied to the manuscript, by former id, with the commit that applied them.
-# Their BEFORE anchors no longer exist in the manuscript, so the anchor checks skip them and
-# the plan lists them above its table instead of in it.
-APPLIED = {k: "db3a2f41" for k in ("C.9", "E.2", "C.9w", "C.10", "E.3", "E.5", "C.11b",
-                                   "E.8", "E.9", "E.10", "E.15h", "E.11", "E.15")}
 
 E.append(("C.1", "Abstract, sentences 1, 2-4 and 6 (rebased on the author's draft c2ae782f)", [
     ("The effect of the order in which evidence arrives on an individual judgment", "in both experimental and theoretical studies.",
@@ -493,12 +509,11 @@ from plan_entries_E import E2
 for eid, title, pairs, purpose, verif in E + E2:
     out.append(f"### {eid} -- {title}\n")
     if eid in APPLIED:
-        out.append(f"Applied to the manuscript at {APPLIED[eid]}.\n")
-        continue
+        out.append(f"**Applied to the manuscript at {APPLIED[eid]}.** BEFORE is from the manuscript just before that commit.\n")
     out.append(f"**Why.** {purpose}\n")
     for k, part in enumerate(pairs, 1):
         kind, s, e, after = norm_part(part)
-        before = cut(s, e)
+        before = cut(s, e, eid)
         tag = f" ({k} of {len(pairs)})" if len(pairs) > 1 else ""
         if kind == "insert_cont":
             out.append(f"**BEFORE{tag}:** continues the insertion of the previous part.\n")

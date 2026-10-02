@@ -207,7 +207,7 @@ def rows_for(placed):
         rows.append(f"\\entryhead{{{NEW[eid]}}}{{{prose(renum(title))}\\quad{{\\footnotesize\\textit{{(formerly {eid})}}}}}}")
         for k, part in enumerate(pairs, 1):
             kind, s, e, after = C.norm_part(part)
-            before = C.cut(s, e)
+            before = C.cut(s, e, eid)
             n = f"{k}/{len(pairs)}" if len(pairs) > 1 else ""
             if kind == "insert_para":
                 before = "\\textit{New paragraph(s) after the paragraph containing} ``" + before + "''"
@@ -224,6 +224,9 @@ def rows_for(placed):
 
 
 rows = rows_for(placed)
+applied_placed = sorted(((0, seq, ent) for seq, ent in enumerate(ALL) if ent[0] in APPLIED),
+                        key=lambda t: _numkey(NEW[t[2][0]]))
+rows_applied = rows_for(applied_placed)
 
 def _order_note():
     """Only constraints among pending entries; applied ones need no ordering."""
@@ -335,7 +338,7 @@ shows its former number, which earlier notes and commits use, and the table at t
 numbers to new. """ + ORDER_NOTE + r"""
 
 \paragraph*{Applied to the manuscript} at """ + ", ".join(APPLIED_COMMITS) + r""": """ + ", ".join(APPLIED_NUMS) + r""".
-These entries appear in the table of numbers at the end and no longer in the table of changes.
+These entries have left the table of changes; their full record, with grounds, is in the section ``Applied entries, kept as the record'' after it.
 
 \paragraph*{Pending} (""" + str(len(PENDING_NUMS)) + r""" entries, in manuscript order): """ + ", ".join(PENDING_NUMS) + r""".
 
@@ -345,6 +348,19 @@ These entries appear in the table of numbers at the end and no longer in the tab
 \textbf{Part} & \textbf{BEFORE (current manuscript, or the anchor for an insert)} & \textbf{AFTER (proposed)} \\ \hline\hline
 \endhead
 """ + "\n".join(rows) + r"""
+\end{longtable}
+}
+
+\section*{Applied entries, kept as the record}
+These entries were applied to the manuscript at """ + ", ".join(APPLIED_COMMITS) + r""". They are kept here with
+their BEFORE text as it stood just before that commit, the AFTER text as applied, and the Why, Evidence
+and Grounds that justified them.
+{\small
+\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
+\hline
+\textbf{Part} & \textbf{BEFORE (manuscript before the applying commit)} & \textbf{AFTER (as applied)} \\ \hline\hline
+\endhead
+""" + "\n".join(rows_applied) + r"""
 \end{longtable}
 }
 
