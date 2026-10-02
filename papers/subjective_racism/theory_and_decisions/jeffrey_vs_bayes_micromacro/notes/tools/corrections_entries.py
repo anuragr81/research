@@ -504,6 +504,80 @@ well (Proposition~\ref{prop:LAD}).""")],
     "(`ladder_assoc_coeff`); sympy/verify_tables.py; sympy/verify_ladder.py (53/53); "
     "Doring.lean; Hawthorne.lean (amnestic_thesis; pp. 115-116)."))
 
+E.append(("C.18", "Section 6.2 compacted: Proposition FAC and the settings table go, the rubric paragraph becomes one sentence", [
+    ("Whether a population adopts in full can be read from its",
+     "under either reading of the cues.",
+     r"""Whether a population adopts in full can be read from its ratings, since
+Proposition~\ref{prop:ADJ} below recovers the adoption weight from three marginals
+of one reading group, and Proposition~\ref{prop:LAD} says what to expect when it
+does not."""),
+    ("The position channel is not a feature of updating on delivered credences.",
+     "since commutation requires the same factor in either position \\citep{Wagner2002}.",
+     r"""The position channel is not a feature of updating on delivered credences. A
+Bayes-factor update that gives the second cue's factor the weight $\omega$ is
+sequence-dependent in the same way, the marginals differing at order zero and the
+believed association at first order while the odds ratio is unchanged, since
+commutation requires the same factor in either position \citep{Wagner2002}."""),
+    ("Table~\\ref{tab:settings} sets the two settings side by side.",
+     "Table~\\ref{tab:settings} sets the two settings side by side.",
+     r"""% Deleted (see Why): the settings table goes."""),
+    ("\\paragraph{Factor inputs.} Under the benchmark reading each cue supplies a factor",
+     "and the argument of Proposition~\\ref{prop:LAD}(iii) applies. \\end{proof}",
+     r"""% Deleted (see Why): Proposition FAC and its proof go; the two-channel paragraph carries the point."""),
+    ("\\begin{table}[htbp] \\centering \\small \\begin{tabular}{@{}p{3.4cm}cccc@{}}",
+     "\\label{tab:robust} \\end{table}",
+     r"""\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{5.2cm}cc@{}}
+\toprule
+\textbf{Sequence effect on} & \textbf{Full adoption, $\omega=1$} & \textbf{Partial adoption, $\omega<1$} \\
+\midrule
+Marginals & $\Theta(c)$ & $\Theta(1)$ \\
+Believed association & $\bigO(c^{2})$ & $\Theta(c)$ \\
+Statistics agreeing with the log odds ratio to first order & $\bigO(c^{2})$ & $\bigO(c^{2})$ \\
+Odds ratio & $0$ & $0$ \\
+Share of decisions changed & $\Theta(c)$ & $\Theta(1)$ \\
+Surplus-weighted loss & $\bigO(c^{2})$ & $\Theta(1)$ \\
+\bottomrule
+\end{tabular}
+\caption{The between-sequence effect of each statistic under full and partial
+adoption. Entries are orders in the prior covariance $c$, generic in the prior and
+the cues, and $0$ means no sequence effect at any $c$. The first column is
+Sections~\ref{sec:individual} and~\ref{sec:aggregation}, the second
+Proposition~\ref{prop:LAD}; the decision rows of the second read
+Theorem~\ref{thm:LOS} with a score gap of order zero and are not separately
+verified.}
+\label{tab:robust}
+\end{table}"""),
+    ("\\paragraph{Opposite predictions about one procedure.} Whether a procedure removes",
+     "to say which prediction holds.",
+     r"""Rubric scoring, which fixes what each document delivers, tells the two settings
+apart, since under full adoption it leaves the sequence effect in the belief about
+the attribute read first and invisible in the scores (Proposition~\ref{prop:DRF}),
+while under partial adoption the belief about the attribute read second sits
+$(1-\omega)[P^{A}(B{=}1)-r_1]$ from its score (Proposition~\ref{prop:ADJ}) and the
+two sequences differ even when the attributes are believed unrelated."""),
+    ("\\begin{table}[htbp] \\centering \\small \\begin{tabular}{@{}p{2.6cm}p{5.4cm}p{5.4cm}@{}}",
+     "\\label{tab:settings} \\end{table}",
+     r"""% Deleted (see Why): the ten-row settings table goes.""")],
+    "Author's decision (2026-10-02): Section 6.2 had become the longest subsection in the paper "
+    "and completeness was costing readability. Proposition FAC filled the fourth cell of the "
+    "two-by-two, factors read as inputs and the later one adopted in part, and no result cites "
+    "it; the two-channel paragraph already stated its content with Wagner (2002), so FAC and its "
+    "proof go (part 4) and that sentence gains the verified orders (part 2). The framing sentence "
+    "cites LAD alone (part 1). The four-settings table loses its two factor columns, which the "
+    "amended sentence now carries, and its caption is shortened (part 5). The rubric paragraph, "
+    "an empirical implication rather than a result, becomes one sentence (part 6). The ten-row "
+    "settings table overlapped the four-settings table and the two-channel prose, so it goes "
+    "(part 7), together with the sentence that pointed to it (part 3). Nothing verified is "
+    "lost: the factor-input theorems stay in Ladder.lean and section F of verify_ladder.py as "
+    "the record behind part 2. Entry B.1, the AI declaration, no longer names FAC.",
+    "Ladder.lean (`rescale_rescale`, `oddsRatio_factorRoute`, `assoc_factorRoute`, "
+    "`factorRoute_at_zero`, `factor_mA1_gap_iff`, `mprod_factorRoute_zero`); "
+    "sympy/verify_ladder.py section F (53/53); Wagner2002.lean (thm31); for the rubric "
+    "sentence, Aggregate.lean (propDRF_route_AB) and Anchoring.lean (dampedB_deviation)."))
+
 E.append(("C.13", "Section 4, the Foster-Greer-Thorbecke sentence", [(
     "This is the standard incidence-versus-intensity pairing of the measurement literature",
     "\\citep{FosterGreerThorbecke1984}.",
@@ -652,6 +726,9 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "E.13.1": "names the two new propositions",
                             "E.15h.1": "adds the Scope subsection heading",
                             "E.15r.1": "adds the full-adoption clause to the roadmap",
+                            "C.18.2": "adds the verified orders to the Wagner sentence",
+                            "C.18.5": "drops two columns of the table",
+                            "C.18.6": "a paragraph becomes one sentence",
                             "C.2.5": "repairs a sentence with two verbs",
                             "C.10.1": "citation fix", "C.11b.3": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",

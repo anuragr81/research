@@ -886,11 +886,10 @@ E2.append(("E.13", "Back matter, AI declaration (was B.B)", [(
     r"Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently re-derived",
     r"Proposition~\ref{prop:PRO} (uniqueness of the protected statistic), which was then independently re-derived",
     r"""Propositions~\ref{prop:PRO} (uniqueness of the protected statistic),
-\ref{prop:ORD} (between-sequence contrast), \ref{prop:ADJ} (adoption weight),
-\ref{prop:LAD} (partial adoption) and~\ref{prop:FAC} (factor
-inputs), which were then independently re-derived""")],
-    "Plan B.B. Propositions ORD, ADJ, LAD and FAC have the same provenance as PRO, so the "
-    "declaration names them once E.10 and E.15 are applied.",
+\ref{prop:ORD} (between-sequence contrast), \ref{prop:ADJ} (adoption weight)
+and~\ref{prop:LAD} (partial adoption), which were then independently re-derived""")],
+    "Plan B.B. Propositions ORD, ADJ and LAD have the same provenance as PRO, so the "
+    "declaration names them; FAC is dropped with 6.4.",
     "None needed."))
 
 E2.append(("E.14", "Bibliography entries the Section E texts need (was B.A)", [],

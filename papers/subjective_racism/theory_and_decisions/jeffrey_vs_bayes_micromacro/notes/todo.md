@@ -16,6 +16,10 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   pooling sentence in Section 5 (`sympy/verify_pooling.py`, 10/10).
 - [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2 parts 1 and 2, 3.3,
   3.5, 4.2, A.1, B.1, B.2.
+- [~] **6.4 (added 2026-10-02):** compacts Section 6.2. Proposition FAC and its proof go (its
+  point stays in the two-channel paragraph, with the verified orders), the four-settings table
+  loses its factor columns, the rubric paragraph becomes one sentence, the ten-row settings
+  table goes. The Lean and sympy records for FAC stay in the repository.
 - [~] **7.1 (added 2026-10-02):** closing paragraph of the conclusion returning to the Section 3
   debate; the results locate the sequence dependence rather than answer the objection to it.
   Pending the author's approval of the two framing sentences around the approved one. The plan lists applied and pending entries above its table and keeps the
