@@ -15,8 +15,10 @@ Rows:
   (B) a statistic protected across an open set of priors, F = F0 + assoc*h
       with h smooth, has a sequence effect that is zero at c = 0 for every
       delta and first order for delta < 1, vanishing at delta = 1 (ORD).
-      Tested for h = 1, 1 + P00, (1+P11)/(mA0 mA1), and the correlation
-      coefficient's normaliser 1/sqrt(mA0 mA1 mB0 mB1).
+      Tested for h = 1, 1 + P00, (1+P11)/(mA0 mA1), 1/(mA0 mA1) (the
+      conditional difference P(B=1|A=1) - P(B=1|A=0), which equals
+      assoc/(mA0 mA1) exactly), and the correlation coefficient's normaliser
+      1/sqrt(mA0 mA1 mB0 mB1).
   (C) the c^1 coefficient of each route's association is q0 q1 t0 t1 / Z and
       s0 s1 r0 r1 / Z, Z = alpha(1-alpha)beta(1-beta); so for h = g/mprod,
       mprod = mA0 mA1 mB0 mB1, the c^1 sequence effect is
@@ -110,8 +112,13 @@ def main():
         "h = 1 (the association)": lambda Q: sp.Integer(1),
         "h = 1 + P00": lambda Q: 1 + Q[0, 0],
         "h = (1 + P11)/(mA0 mA1)": lambda Q: (1 + Q[1, 1]) / (marg_A(Q)[0] * marg_A(Q)[1]),
+        "h = 1/(mA0 mA1) (conditional difference)": lambda Q: 1 / (marg_A(Q)[0] * marg_A(Q)[1]),
         "h = 1/sqrt(mprod) (correlation coefficient)": lambda Q: 1 / sp.sqrt(mprod(Q)),
     }
+    P = prior()
+    ck.eq("(B) the conditional difference P(B=1|A=1) - P(B=1|A=0) equals assoc/(mA0 mA1)",
+          P[1, 1] / (P[1, 0] + P[1, 1]) - P[0, 1] / (P[0, 0] + P[0, 1]),
+          assoc(P) / (marg_A(P)[0] * marg_A(P)[1]))
     for name, h in hs.items():
         e1 = aAB1 * h(AB0) - aBA1 * h(BA0)
         ck("(B) " + name + ": c^1 sequence effect vanishes at delta=1",

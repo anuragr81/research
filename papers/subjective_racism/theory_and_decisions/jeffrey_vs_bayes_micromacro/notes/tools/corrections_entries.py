@@ -517,8 +517,9 @@ they believe one group of workers performs than another, and read discrimination
 from the hiring decisions themselves. A believed difference between groups is second
 order under the sequence dependence studied here, while the share of decisions the
 reading sequence changes is first order (Propositions~\ref{prop:PRO}
-and~\ref{prop:SHR}), so a population could pass such a belief audit sincerely while
-its hiring decisions record the sequence.""")],
+and~\ref{prop:SHR}). Such a belief audit therefore cannot rule out a role for the
+reading sequence, since a population of coherent evaluators would pass it while its
+hiring decisions record the sequence.""")],
     "Author's request (2026-10-02): name an existing instrument that sets a difference question "
     "against a decision rate. Coffman, Exley and Niederle (read in full, the February 2020 working "
     "paper the author linked) elicit the believed gap in average scores between two groups of "
@@ -538,9 +539,18 @@ its hiring decisions record the sequence.""")],
     "asking how much likelier one trait makes another are passed. Bohren, Haggag, Imas and Pope "
     "(2025), who ask the level question for each group, are left for the author's review. Page "
     "numbers are the working paper's and are to be checked against Management Science 67(6), "
-    "3551-3569, before applying. Needs the bibliography entry in B.2.",
+    "3551-3569, before applying. Needs the bibliography entry in B.2. Amended at the author's "
+    "request (2026-10-02): the last sentence says what the audit cannot rule out rather than "
+    "that a population passes it, so the claim rests on one admissible population, coherent "
+    "evaluators updating by Jeffrey's rule, and not on how real evaluators update; it has the "
+    "form of Canay, Mogstad and Mountjoy's Theorem 4.1 (an outcome test may find no bias in a "
+    "biased judge). It is a full-adoption claim: under partial adoption the conditional "
+    "difference differs between the sequences at first order, with a coefficient that vanishes "
+    "only at full adoption, so a partly adopting population would not pass the audit.",
     "sympy/verify_PRO.py (37/37: the conditional difference is protected, the conditional "
-    "probability and a cell probability are not); PropPRO.lean; Decision.lean (Proposition SHR); "
+    "probability and a cell probability are not); sympy/verify_ladder.py row (B), 57/57 (the "
+    "conditional difference is first order under partial adoption); PropPRO.lean; "
+    "Decision.lean (Proposition SHR); "
     "literature/coffman_exley_niederle2021 (Lean + sympy)."))
 
 E.append(("C.18", "Section 6.2 compacted: Proposition FAC and the settings table go, the rubric paragraph becomes one sentence", [
