@@ -22,6 +22,7 @@
 \theoremstyle{definition}
 \newtheorem{assumption}{Assumption}
 \newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
 
 % --- Author macros (unchanged from the original manuscript) ---
 \newcommand{\PB}{P^{\mathrm{B}}}
@@ -192,7 +193,21 @@ The \emph{gap} is the difference between either sequence-posterior and the bench
 $\PJ_\sigma-\PB$ for $\sigma\in\{AB,BA\}$ \anchor{Setup}.
 \end{definition}
 
-\paragraph{A worked example.} Let $\alpha=\beta=\tfrac12$ and $c=\tfrac1{20}$,
+The benchmark $\PB$ is not a rival updating rule but the same two impressions
+re-expressed---each read as a multiplicative factor relative to the prior marginal. Each impression's evidential content can be written as a Bayes factor---a likelihood
+matched to the cue given the prior, $\ell^{A}_{i}\propto q_{i}/P(A{=}i)$ and
+$\ell^{B}_{j}\propto r_{j}/P(B{=}j)$---and, unlike a delivered credence, a Bayes factor carries
+the same content whatever prior it meets. Combining the two cues' Bayes-factor content is
+sequence-invariant \citep{Wagner2002}, and $\PB$ is the single update on that combined content,
+\[
+  \PB(i,j)\propto P(i,j)\,\ell^{A}_{i}\,\ell^{B}_{j},
+\]
+well-defined regardless of which cue arrived first \anchor{Setup}. As we later show, it coincides
+on any one cue with the matched Jeffrey step (Proposition~\ref{prop:IMM}). We compare sequential updating on delivered credences (which does not commute) against the one-shot updating on Bayes-factor content (which does). 
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\begin{example}[the hiring panel]\label{ex:panel}
+Let $\alpha=\beta=\tfrac12$ and $c=\tfrac1{20}$,
 so that the prior table is
 $P=\bigl(\begin{smallmatrix}.30&.20\\.20&.30\end{smallmatrix}\bigr)$, each trait
 judged as likely absent as present and the two believed to go together. The
@@ -213,7 +228,7 @@ prior, for both sequences and for the benchmark. Against the benchmark, sequence
 $AB$ departs by $.053$ on the marginal read last, by $.007$ on the marginal read
 first, and by $.002$ on the association.
 \par
-\paragraph{Why a soft cue differs from a hard one.} Suppose instead that the letter
+\emph{Why a soft cue differs from a hard one.} Suppose instead that the letter
 were a hard cue, a proposition $F$ the panel becomes certain of, with a likelihood
 fixed before any belief is formed, say $P(F\mid B{=}0)/P(F\mid B{=}1)=7/3$, and the
 credential likewise a proposition $E$ with ratio $1/4$. Conditioning on $E$ and then
@@ -228,18 +243,8 @@ been at another prior, and so cannot extract a portable factor from it. That
 dependence of the implied factor on the belief it meets is the whole of the
 sequence effect, and it vanishes at $c=0$, where the credential leaves the
 $B$-marginal where it was and the two implied factors coincide.
-
-The benchmark $\PB$ is not a rival updating rule but the same two impressions
-re-expressed---each read as a multiplicative factor relative to the prior marginal. Each impression's evidential content can be written as a Bayes factor---a likelihood
-matched to the cue given the prior, $\ell^{A}_{i}\propto q_{i}/P(A{=}i)$ and
-$\ell^{B}_{j}\propto r_{j}/P(B{=}j)$---and, unlike a delivered credence, a Bayes factor carries
-the same content whatever prior it meets. Combining the two cues' Bayes-factor content is
-sequence-invariant \citep{Wagner2002}, and $\PB$ is the single update on that combined content,
-\[
-  \PB(i,j)\propto P(i,j)\,\ell^{A}_{i}\,\ell^{B}_{j},
-\]
-well-defined regardless of which cue arrived first \anchor{Setup}. As we later show, it coincides
-on any one cue with the matched Jeffrey step (Proposition~\ref{prop:IMM}). We compare sequential updating on delivered credences (which does not commute) against the one-shot updating on Bayes-factor content (which does). 
+\end{example}
+\noindent\rule{\linewidth}{0.4pt}
 
 \subsection{Assumptions}
 \label{sec:assumptions}
@@ -1249,7 +1254,7 @@ For $P^{A}(B{=}1)\neq r_1$ the first line gives
 \]
 \end{proof}
 \par
-In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the credential
+In Example~\ref{ex:panel}, an evaluator who reads the credential
 first rates trustworthiness at $.56$ before the letter, the letter alone delivers
 $.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$.
 
