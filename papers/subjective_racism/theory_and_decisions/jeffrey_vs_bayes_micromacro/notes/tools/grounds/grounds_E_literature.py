@@ -37,7 +37,7 @@ GROUNDS["E.5"] = [
         "kind": "quote",
         "source": "Hawthorne 2004, note 20 (p. 121)",
         "text": r"``In his most recent work Jeffrey favors updating based on Likelihood-Ratio factors as well. He thinks of them as ratios of new to old odds and calls them `Bayes factors', following Good (1950).''",
-        "note": "Para 1: the name Bayes factor is given by Hawthorne to likelihood-ratio factors, which is why the entry identifies the paper's Bayes factor with his LR factor as a ratio of two NL factors.",
+        "note": "Para 1: the name Bayes factor for likelihood-ratio factors is Jeffrey's, following Good (1950), which Hawthorne reports; Hawthorne does not adopt it. Corrected 2026-10-02: the applied sentence attributing the name to Hawthorne (\"which he too calls a Bayes factor\") is false, and the author is removing it.",
     },
     {
         "kind": "theorem",
