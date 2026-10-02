@@ -31,7 +31,7 @@
 \setlength{\parindent}{0pt}
 \title{Paper B: corrections to the manuscript (master plan)}
 \author{}
-\date{Against the author's draft committed at d48dd872, 1 October 2026}
+\date{Against the manuscript at db3a2f41, 2 October 2026}
 \begin{document}
 \maketitle
 \vspace{-1.5em}
@@ -53,6 +53,11 @@ text would appear. \textbf{0} is the abstract, \textbf{1} to \textbf{7} are the 
 \textbf{A} is the appendix and \textbf{B} is the back matter with the bibliography. Each entry also
 shows its former number, which earlier notes and commits use, and the table at the end maps old
 numbers to new. Order of application, where it differs from manuscript order. B.2 (bibliography) goes in before every entry that cites a new reference. 5.2 (Proposition ORD) and 6.3 (Propositions ADJ, LAD and FAC) go in before 1.3, 1.4, 2.3 and 1.9, which cite them. 6.2 goes in before 6.3, which inserts after it. B.1 goes in last.
+
+\paragraph*{Applied to the manuscript} at db3a2f41: 2.1, 2.2, 2.3, 2.4, 2.5, 3.1, 3.4, 4.1, 5.1, 5.2, 6.1, 6.2, 6.3.
+These entries appear in the table of numbers at the end and no longer in the table of changes.
+
+\paragraph*{Pending} (18 entries, in manuscript order): 0.1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.6, 3.2, 3.3, 3.5, 4.2, A.1, B.1, B.2.
 
 {\small
 \begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
@@ -394,151 +399,6 @@ sample; averaging over more evaluators does not change it.}} \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Proposition ADJ (6.3).} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{2\quad Setup}} \\ \hline\hline
-\entryhead{2.1}{Setup 2.1, the prior paragraph\quad{\footnotesize\textit{(formerly C.9)}}}
-1/2 & The three numbers that fix $P$ are described as $\Delta^{3}$ -- specified using the marginals $P(A{=}0)=\alpha$, $P(B{=}0)=\beta$ and the prior covariance $c$ between the attributes: & The prior is a point of $\Delta^{3}$ fixed by three numbers, the marginals $P(A{=}0)=\alpha$ and $P(B{=}0)=\beta$ and the prior covariance $c$ between the attributes, \\ \hline
-2/2 & Simply put, the marginals $\alpha=P(A{=}0)$ and $\beta=P(B{=}0)$ denotes the shares of applicants the panelist believes to lack competence and to lack trustworthiness and the prior covariance $c=\assoc(P)$ denotes how strongly the panelist believes the & Simply put, the marginals $\alpha=P(A{=}0)$ and $\beta=P(B{=}0)$ denote the shares of applicants the panelist believes to lack competence and to lack trustworthiness, and the prior covariance $c=\assoc(P)$ denotes how strongly the panelist believes the \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Grammar ("described as $\Delta^3$ --``, ''denotes" for two subjects). The Frechet-Hoeffding bounds in the new text are correct (checked cell by cell). The adoption-weight sentence that ends this paragraph is a separate entry, since a Section\~{}2 entry on what an impression is falls between them (2.3).} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Bounds: nonnegativity of the four cells of P.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Computation.} \textit{Nonnegativity of the four cells of $P$ (checked cell by cell in sympy)} \newline $\alpha\beta+c\ge0$, $\alpha(1-\beta)-c\ge0$, $(1-\alpha)\beta-c\ge0$,
-$(1-\alpha)(1-\beta)+c\ge0$, hence
-$-\min\{\alpha\beta,\,(1-\alpha)(1-\beta)\}\le c\le\min\{\alpha(1-\beta),\,(1-\alpha)\beta\}$,
-the Fr\'echet--Hoeffding bounds for a $2\times2$ table with marginals $\alpha,\beta$; at
-$\alpha=\beta=1/2$ the range is $[-1/4,1/4]$. \newline \textit{The manuscript's bounds sentence is correct and is kept.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{2.2}{Setup 2.1, what an impression is (was 2.A)\quad{\footnotesize\textit{(formerly E.2)}}}
- & yields an impression (a target marginal) $q=(q_{0},q_{1})$ on $A$'s partition and a cue on $B$ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition---with no cue bearing on a joint event. & yields an impression (a target marginal) $q=(q_{0},q_{1})$ on $A$'s partition, with $q_i$ the credence that $A=i$ and $q_0+q_1=1$, and a cue on $B$ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition, with $r_j$ the credence that $B=j$ and $r_0+r_1=1$, and no cue bears on a joint event. An impression is thus a probability distribution on one attribute, on the same scale as the prior marginal it replaces, $(\alpha,1-\alpha)$ for $q$ and $(\beta,1-\beta)$ for $r$. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 2.A as written; the manuscript never says that $q_0$ belongs to $A=0$, that $q_0+q_1=1$, or that an impression is on the prior marginal's scale. The dash construction is replaced by a clause.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Notation only; every sympy script and Lean file uses $q_1=1-q_0$, $r_1=1-r_0$.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{DiaconisZabell.lean, marg\_jeffrey and jeffrey\_jcond} \newline On a finite $\Omega$ with a partition $\{E_i\}$ given by a surjective labelling
-$e$ and a prior $P>0$, Jeffrey's rule $P^*(\omega)=p_{e(\omega)}\,P(\omega)/P(E_{e(\omega)})$
-satisfies $P^*(E_i)=p_i$ for every cell (marg\_jeffrey) and, provided
-$p_{e(\omega)}\neq0$ for all $\omega$, $P^*(A\mid E_i)=P(A\mid E_i)$ for every event $A$
-and every cell $i$ (jeffrey\_jcond). \newline \textit{An impression is a probability distribution on one attribute's partition; the step
-installs it as the new marginal and leaves every conditional on that partition unchanged.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Aggregate.lean, jeffreyA\_pins\_mA0, jeffreyA\_pins\_mA1, jeffreyB\_pins\_mB1} \newline For the $2\times2$ table $Q$,
-$J_A(Q,q_0)=\bigl(\begin{smallmatrix} q_0Q_{00}/Q(A{=}0) & q_0Q_{01}/Q(A{=}0)\\
-(1-q_0)Q_{10}/Q(A{=}1) & (1-q_0)Q_{11}/Q(A{=}1)\end{smallmatrix}\bigr)$; if $Q(A{=}0)\neq0$
-then $J_A(Q,q_0)(A{=}0)=q_0$, and if $Q(A{=}1)\neq0$ then $J_A(Q,q_0)(A{=}1)=1-q_0$,
-identically in $c$; likewise $J_B(Q,r_0)(B{=}1)=1-r_0$ when $Q(B{=}1)\neq0$. \newline \textit{The impression $(q_0,1-q_0)$ is on the same scale as the prior marginal
-$(\alpha,1-\alpha)$ it replaces, and $q_1=1-q_0$ is built into the step.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{2.3}{Setup 2.1, the adoption-weight sentence\quad{\footnotesize\textit{(formerly C.9w)}}}
- & To address the issues in amnestic updating debate, we also consider an adoption weight $\omega\in[0,1]$ -- which denotes how far the letter displaces what the credential had already implied about trustworthiness. At $\omega=1$ the letter sets the rating outright, and at $\omega=0$ the credential's implication is never moved. & To compare full adoption with the belief-adjustment model of \citet{HogarthEinhorn1992}, in which a later impression is adopted only in part, we also consider an adoption weight $\omega\in[0,1]$ (Section~\ref{sec:robust}), which denotes how far the letter displaces what the credential had already implied about trustworthiness. At $\omega=1$ the letter sets the rating outright, and at $\omega=0$ the credential's implication is never moved. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Purpose of omega (author's decision, 2026-10-01): the weight nests Hogarth-Einhorn's averaging rule (their Eq. 4, applied to the second cue; 6.3), so full adoption is one corner of a descriptive model rather than an assumption taken from the normative literature, and the pointer sends the reader to the subsection where the weight is used. The Hawthorne debate is taken up in the introduction (1.3). ``Amnestic'' is used only where Hawthorne is quoted (writing\_discipline.md 6), so it goes. Omega is used nowhere else before Section 6, so this entry needs 6.3.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Hawthorne pp. 98-99; HogarthEinhorn.lean (\texttt{oneSided\_eq\_eq8}); Anchoring.lean.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Hawthorne (2004), \S5, pp.~98--99} \newline ``The resulting Amnestic Model raises two related concerns. First, it seems
-implausible that the most recent experience or non-propositional state should completely
-dictate belief strengths for basis sentences, with no regard for the import of previous
-experiences or states. There may be some specialized systems for which this model is
-appropriate. But it seems wrong as a model of (idealized) human agents'' \ldots
-``This order effect is very troubling.'' \newline \textit{The source of the debate the corrected sentence names; Hawthorne's alternatives are factor models (\S\S6--8), not a partial weight, so the citation is for the objection only.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hawthorne (2004), \S5, p.~96} \newline ``AMNESTIC UPDATE-FACTOR THESIS. For any state $e$ that directly affects an evidence
-basis $\{E_i\}$ and for any other state $d$ and sequence of states $\alpha$,
-$Q_{\alpha de}[E_i]=Q_{\alpha e}[E_i]$.'' ``Indeed Amnestic Updating is just Standard
-Sequential Updating -- Jeffrey's original approach to sequential updating.'' \newline \textit{Full adoption, $\omega=1$, is this thesis under Hawthorne's name for it.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{2.4}{Setup 2.2, the invariance condition and the justification of the rule\quad{\footnotesize\textit{(formerly C.10)}}}
-1/2 & holding the conditionals fixed---the invariance condition \citep[ch.~11]{Jeffrey1983}. & holding the conditionals given the cue's partition fixed, the invariance condition \citep[ch.~3]{Jeffrey2004}, which \citet[ch.~11]{Jeffrey1983} expresses by saying that the change originates in the partition. \\ \hline
-2/2 & The axiomatic grounding is twofold. The partition satisfying the invariance condition is the minimal sufficient statistic for revising the prior to any candidate posterior on that partition \citep{DiaconisZabell1982}, and the rule is the minimal revision of the prior consistent with the delivered marginal, in the $I$-divergence sense \citep{DiaconisZabell1982}. & Two results of \citet{DiaconisZabell1982} support the rule. The invariance condition makes the cue's partition sufficient for the prior and posterior, and minimal whenever the delivered credence differs from the prior marginal (their Theorem~2.2). The rule is also the unique minimiser of the $I$-divergence from the prior among all beliefs with the delivered marginal (their Theorem~5.1). \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} (i) Chapter 11 of Jeffrey (1983) never uses ``invariance''; it says the change ``originates in'' the partition (pp. 168, 174). ``Invariance'' is the 2004 book's term (audit J4). (ii) ``The partition satisfying the invariance condition is the minimal sufficient statistic for revising the prior to any candidate posterior'' misstates D-Z Theorem 2.2: sufficiency is for one pair \{P, P*\}, every refinement of such a partition also qualifies, and the minimal one is the likelihood-ratio partition (M23; Jeffrey p. 174 also allows ``a certain latitude in the choice'' of partition, J3). (iii) D-Z give no axioms; they call this ``mechanical updating''. The summation index is $x$ because $\omega$ is now the adoption weight.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} DiaconisZabell.lean (\texttt{thm22\_lr\_minimal}, \texttt{jcond\_of\_refines}, \texttt{lr\_jeffrey\_iff}, \texttt{thm51\_KL\_eq\_iff}); verify\_jeffrey.md J3-J4.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Jeffrey (1983), ch.~11, \S11.3 p.~168 and \S11.7 p.~174} \newline p.~168: ``the values of $PROB$ for all arguments ought to be deducible from a
-knowledge of (a) the values of $prob$ for all arguments, (b) the value of $PROB$ for the
-argument $B$, and the fact that (c) the change from $prob$ to $PROB$ \textit{originated}
-in $B$''. p.~174: ``(11-8) $PROB(A/A_i)=prob(A/A_i)$ for each $i=1,2,\ldots,m$ which defines
-what we shall mean by saying that the change from $prob$ to $PROB$ \textit{originated} in
-the set (11-6).'' \newline \textit{On the rendered pp.~168 and 174--175 Jeffrey's term for the condition is that the change originated in the partition, not ``invariance''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Jeffrey (1983), \S11.7, p.~174, and Example 7} \newline ``Note that since distinct sets of propositions can have the same set of atoms, there
-is a certain latitude in the choice of a set (11-6) in which the change from $prob$ to
-$PROB$ is viewed as originating.'' Example 7: the change of Example 6, originating in
-$G,B,V$, ``might equally well be regarded as originating in the set $B_1=G\vee B$,
-$B_2=G$''. \newline \textit{On Jeffrey's own account the originating set is not unique, against ``the partition satisfying the invariance condition''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Jeffrey (2002 draft), ch.~3, \S3.1 p.~56 and \S3.2 pp.~57--58} \newline ``Invariant conditional probabilities: (1) For all $H$, $new(H|D)=old(H|D)$''.
-``As long as invariance holds, updating is valid by a generalization of conditioning to
-which we now turn.'' ``If the invariance condition holds for each answer, $D_i$, we have the
-updating scheme $new(H)=old(H|D_1)\,new(D_1)+old(H|D_2)\,new(D_2)+\ldots$'' ``This is
-equivalent to invariance with respect to every answer: $new(H|D_i)=old(H|D_i)$ for
-$i=1,\ldots,n$.'' \newline \textit{``Invariance'' is the 2004 book's term, introduced in \S3.1 for one proposition and carried to partitions in \S3.2.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Diaconis and Zabell (1982), \S2.2, p.~824} \newline ``To apply Jeffrey's rule, it is required to find a partition $\{E_i\}$ such that
-$P(A\,|\,E_i)=P^*(A\,|\,E_i)$ for all $A$ and $i$. This is simply the problem of finding a
-\textit{sufficient partition} for the two-element family $\mathcal{F}=\{P,P^*\}$''.
-``A coarsest sufficient partition is said to be minimal sufficient. The following
-(well-known) theorem gives an alternative version of Jeffrey's rule and states that there
-is always a coarsest partition for which Jeffrey's rule is valid.'' \newline \textit{Sufficiency is relative to one pair $\{P,P^*\}$, not to ``any candidate posterior''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Diaconis and Zabell (1982), Theorem 2.2, p.~824} \newline ``\textit{Theorem 2.2.} Let $P$, $P^*$ be probability measures with common support on
-the countable set $\Omega$. If $\{E_i\}$ is a partition of $\Omega$ such that $P(E_i)>0$ and
-$P(A\,|\,E_i)=P^*(A\,|\,E_i)$ for all subsets $A$ and elements of the partition $E_i$, then
-for each $\omega\in\Omega$, $P^*(\omega)=\dfrac{P^*(E_i)}{P(E_i)}P(\omega)$, $\omega\in E_i$.
-(2.2) If $R=\{x:P^*(\omega)/P(\omega)=x,\ \omega\in\Omega\}$, and
-$E_x=\{\omega:P^*(\omega)/P(\omega)=x,\ \omega\in\Omega\}$, then $\{E_x:x\in R\}$ is a
-minimal sufficient partition for $\{P,P^*\}$.'' \newline \textit{The minimal sufficient partition is the likelihood-ratio partition, which depends on the pair; the manuscript assigns minimality to the cue's partition.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Diaconis and Zabell (1982), \S5.2 and \S5.3, p.~828} \newline ``Mechanical updating allows the possibility of updating on collections of sets more
-general than partitions.'' ``Theorem 5.1 suggests that Jeffrey's rule is an uncontroversial
-form of mechanical updating in the sense that it agrees with virtually every
-minimum-distance rule.'' \newline \textit{D-Z give no axioms; ``axiomatic grounding'' mislabels what they call mechanical updating.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{DiaconisZabell.lean, thm22\_lr\_minimal} \newline Let $P,P^*>0$ on finite $\Omega$ and let $e:\Omega\to I$ satisfy (J):
-$P^*(A\,|\,E_i)=P(A\,|\,E_i)$ for every $A\subseteq\Omega$ and $i$. Then
-$e(\omega)=e(\omega')\Rightarrow P^*(\omega)/P(\omega)=P^*(\omega')/P(\omega')$: every cell
-of a (J)-partition lies inside one level set of $P^*/P$; with the converse
-(\texttt{lr\_jeffrey\_iff}) the likelihood-ratio partition is the coarsest sufficient one, and it
-depends on the pair $\{P,P^*\}$. \newline \textit{Minimality belongs to the likelihood-ratio partition, not to whichever partition carries the cue.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{DiaconisZabell.lean, jcond\_of\_refines (with jcond\_atoms, jcond\_trivial\_self)} \newline Let $P,P^*>0$ on finite $\Omega$, let $e:\Omega\to I$ satisfy (J), and let
-$e':\Omega\to K$ refine $e$, i.e. $e'(\omega)=e'(\omega')\Rightarrow e(\omega)=e(\omega')$.
-Then $e'$ satisfies (J). In particular the partition into atoms satisfies (J) for every pair,
-and if $P^*=P$ the one-cell partition does. \newline \textit{``The partition satisfying the invariance condition'' is not unique: every refinement qualifies, and the cue's partition is minimal only when the delivered credence differs from the prior marginal.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{DiaconisZabell.lean, thm51\_KL\_eq\_iff; D-Z Theorem 5.1, (5.6)} \newline For finite $\Omega$, $P>0$, $e:\Omega\to I$ surjective and $Q\ge0$ with
-$Q(E_i)=p_i$ for all $i$: $\mathrm{KL}(Q\,\|\,P)=\sum_i p_i\log\frac{p_i}{P(E_i)}$ if and
-only if $Q(\omega)=p_{e(\omega)}P(\omega)/P(E_{e(\omega)})$; with thm51\_KL\_le the
-right-hand side is the minimum over the feasible set. \newline \textit{Supports the corrected second sentence: the rule is the unique $I$-divergence minimiser among beliefs with the delivered marginal.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{2.5}{Setup 2.2, the worked example, and why a soft cue differs from a hard one (was 2.B, extended)\quad{\footnotesize\textit{(formerly E.3)}}}
- & \textit{New paragraph(s) after the paragraph containing} ``The \emph{gap} is the difference between either sequence-posterior and the benchmark,'' & \textbf{A worked example.}  Let $\alpha=\beta=\tfrac12$ and $c=\tfrac1{20}$, so that the prior table is $P=\bigl(\begin{smallmatrix}.30&.20\\.20&.30\end{smallmatrix}\bigr)$, each trait judged as likely absent as present and the two believed to go together. The credential delivers $q_0=\tfrac15$ and the letter $r_0=\tfrac7{10}$. After the credential alone the table is $\bigl(\begin{smallmatrix}.12&.08\\.32&.48\end{smallmatrix}\bigr)$. The $A$-marginal is $(.20,.80)$, as delivered, and the $B$-marginal has moved from $(.50,.50)$ to $(.44,.56)$ although no cue about $B$ has been read. Reading the letter next resets the $B$-marginal to $(.70,.30)$ and moves the $A$-marginal from $.20$ to $\PJ_{AB}(A{=}0)=.234$. In the reverse sequence the $A$-marginal ends at $.20$, as delivered, and the $B$-marginal at $\PJ_{BA}(B{=}0)=.643$ in place of $.70$. The benchmark gives $\PB(A{=}0)=.227$ and $\PB(B{=}0)=.647$. The sequence effect is therefore $.034$ on the $A$-marginal and $.057$ on the $B$-marginal. On the believed association it is $.0002$, since $\assoc(\PJ_{AB})=.0273$ and $\assoc(\PJ_{BA})=.0271$, smaller than either marginal effect by a factor above $150$. The odds ratio equals $9/4$ for the prior, for both sequences and for the benchmark. Against the benchmark, sequence $AB$ departs by $.053$ on the marginal read last, by $.007$ on the marginal read first, and by $.002$ on the association. \par \textbf{Why a soft cue differs from a hard one.}  Suppose instead that the letter were a hard cue, a proposition $F$ the panel becomes certain of, with a likelihood fixed before any belief is formed, say $P(F\mid B{=}0)/P(F\mid B{=}1)=7/3$, and the credential likewise a proposition $E$ with ratio $1/4$. Conditioning on $E$ and then on $F$ is conditioning on $E\cap F$, so the two sequences give the same belief, which is the benchmark $\PB$, with $A$-marginal $.227$ in either sequence. The soft letter delivers the credence $r_0=\tfrac7{10}$ instead. The factor that credence implies is the ratio of the odds it delivers to the odds it meets, $7/3$ when the letter is read first against the prior marginal $\tfrac12$, but $98/33$ when it is read after the credential, against the marginal $.44$ that the credential has already moved. The panel knows the credence the letter left, not what that credence would have been at another prior, and so cannot extract a portable factor from it. That dependence of the implied factor on the belief it meets is the whole of the sequence effect, and it vanishes at $c=0$, where the credential leaves the $B$-marginal where it was and the two implied factors coincide. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 2.B, with the colon removed, plus the passage the author asked for on 2026-09-30, saying exactly what is special about a soft cue. A hard cue is a proposition with a belief-independent likelihood, so conditioning is defined and commutes; a soft cue fixes a credence, and the factor that credence implies is matched to the marginal in force when it arrives (7/3 read first, 98/33 read second). On one cue the two readings agree (Proposition IMM). This replaces the counterfactual-likelihood argument the audit found contradicted by Jeffrey's definition of a Bayes factor (J2). With $c=1/20$ against a bound of $1/4$ the example illustrates the ordering of magnitudes, not the asymptotic rates.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Every number in both paragraphs is asserted in sympy/verify\_example.py (18/18) and sympy/verify\_soft\_vs\_hard.py (15/15, added 2026-09-30, registered in run\_all.py; its symbolic checks give the exact condition, c = 0 or each cue delivering its prior marginal); the mechanism is Cripps.lean composite\_AB\_eq\_bayes and DiaconisZabell.lean thm21.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Computation.} \textit{sympy/verify\_example.py (18/18 checks)} \newline At $\alpha=\beta=\tfrac12$, $c=\tfrac1{20}$, $q_0=\tfrac15$, $r_0=\tfrac7{10}$:
-prior $\bigl(\begin{smallmatrix}3/10&1/5\\1/5&3/10\end{smallmatrix}\bigr)$; after the
-credential $\bigl(\begin{smallmatrix}3/25&2/25\\8/25&12/25\end{smallmatrix}\bigr)$ with
-$B$-marginal $11/25$;
-$\PJ_{AB}=\bigl(\begin{smallmatrix}21/110&3/70\\28/55&9/35\end{smallmatrix}\bigr)$,
-$\PJ_{BA}=\bigl(\begin{smallmatrix}7/45&2/45\\56/115&36/115\end{smallmatrix}\bigr)$,
-$\PB=\bigl(\begin{smallmatrix}3/17&6/119\\8/17&36/119\end{smallmatrix}\bigr)$. Hence
-$\PJ_{AB}(A{=}0)=18/77\approx.234$, $\PJ_{AB}(B{=}0)=7/10$, $\PJ_{BA}(A{=}0)=1/5$,
-$\PJ_{BA}(B{=}0)=133/207\approx.643$, $\PB(A{=}0)=27/119\approx.227$,
-$\PB(B{=}0)=11/17\approx.647$; $\assoc(\PJ_{AB})=3/110\approx.0273$,
-$\assoc(\PJ_{BA})=28/1035\approx.0271$, $\assoc(\PB)=60/2023\approx.0297$; sequence
-effects $13/385\approx.034$, $119/2070\approx.057$, $1/4554\approx.0002$ (ratio
-$5382/35>150$); gaps of $AB$ from $\PB$: $9/170\approx.053$, $9/1309\approx.007$,
-$531/222530\approx.002$; odds ratio $9/4$ for all four tables. \newline \textit{Every number printed in the worked example, in exact rationals.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_soft\_vs\_hard.py (15/15 checks)} \newline The letter's implied factor, the odds it delivers over the odds it meets, is
-$\frac{7/3}{1}=7/3$ when read first (against $\beta=\tfrac12$) and
-$\frac{7/3}{11/14}=98/33$ when read after the credential (against $11/25$); at $c=0$
-both equal $7/3$. Hard cues with fixed likelihood ratios $1/4$ (credential) and $7/3$
-(letter) commute cell by cell, $E$ then $F$ equals $F$ then $E$, and reproduce $\PB$,
-with $A$-marginal $27/119\approx.227$ in either sequence. On one cue the hard and soft
-readings coincide, $\mathrm{cond}(P,\ell_A)=J_A(P,q)$ (Proposition IMM). \newline \textit{Every number printed in the soft-versus-hard paragraph.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{DiaconisZabell.lean, thm21 and thm21\_finite (D-Z Theorem 2.1, p.~824)} \newline For finite $\Omega$ with $\sum_\omega P(\omega)=1$, $P^*\ge0$ and
-$\sum_\omega P^*(\omega)=1$: $P^*$ can be obtained from $P$ by conditioning on an event
-of a finite enlarged space iff there is $B\ge1$ with $P^*(\omega)\le B\,P(\omega)$ for
-all $\omega$; when $P>0$ this always holds. \newline \textit{Any soft posterior, the Jeffrey step included, is a conditioning on some richer
-space; what a soft cue lacks is a proposition with a likelihood fixed before the belief
-is formed, not conditionability.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Cripps.lean, composite\_AB\_eq\_bayes (with jeffreyA\_eq\_bayes\_matched)} \newline For a full-support belief $\mu$ on $A\times B$ and credences $q>0$, $r$ with
-$\sum_a q_a=\sum_b r_b=1$:
-$J_B(J_A(\mu,q),r)=\mathrm{bayes}(\mu,\ell)$ with
-$\ell(a,b)=\dfrac{q_a}{\mu(A{=}a)}\cdot\dfrac{r_b}{J_A(\mu,q)(B{=}b)}$, a single Bayes
-update whose $B$-likelihood is matched to the intermediate belief $J_A(\mu,q)$, not to
-$\mu$. \newline \textit{The factor a soft cue implies is matched to the marginal in force when it arrives;
-the two sequences feed different likelihoods into the same commuting rule, which is the
-whole of the sequence effect.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Jeffrey, \emph{Subjective Probability} (2002 draft), p.~59, Example 4} \newline ``Certainly her $\mathit{new}'(D_i)$'s will have arisen through an interaction of
-features of her prior mental state with her new experiences at the microscope. But the
-results $\mathit{new}'(D_i)$ of that interaction are \emph{data} for the kinematical
-formula for updating $\mathit{old}'(H)$; the formula itself does not compute those
-results.'' \newline \textit{One's own experience yields credences that are data for kinematics, while another's
-report is what Jeffrey converts to factors (Section 3.3, p.~59), so a panelist's own
-impression is modelled as a credence and the counterfactual-likelihood argument is
-dropped (audit J2).}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
 \entryhead{2.6}{Setup 2.3, Assumption 2 (was 2.C)\quad{\footnotesize\textit{(formerly E.4)}}}
  & The cues are bundled, correlated, and soft, each delivering a credence on an attribute's partition, not a decisive cue. & The cues are bundled, correlated, and soft, each delivering a credence on an attribute's partition, not a decisive cue, with $0<q_0<1$ and $0<r_0<1$. \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 2.C, with the colon replaced by a clause.} \\
@@ -555,30 +415,6 @@ coefficient $\lambda(\alpha-q_0)r_0(1-r_0)\,x+(1-\lambda)(\beta-r_0)q_0(1-q_0)\,
 central characterisation.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{3\quad Related literature}} \\ \hline\hline
-\entryhead{3.1}{Related literature, new opening paragraphs on the commutativity literature (was 3.A)\quad{\footnotesize\textit{(formerly E.5)}}}
- & While sequence-dependence has been of interest to empirical psychology at least since \citet{Asch1946}, the problem seems to have received interest in economics primarily through the observational learning literature. & The closest literature concerns the commutativity of probability kinematics itself. \citet{DiaconisZabell1982} give the condition under which two successive Jeffrey revisions lead to the same belief, and \citet{Hawthorne2004} names the full-adoption premise, which the present paper adopts, the Amnestic Update-Factor Thesis, crediting that criterion to them. His survey also fixes the vocabulary. Extensions of Jeffrey updating to sequences differ in what an experience is taken to deliver, new probabilities for its own basis directly, a multiplicative factor applied to the belief it meets, or a ratio between basis sentences that the prior does not constrain. The model used here takes the impression to deliver a credence, with the most recent one fixing its attribute outright, and the benchmark $\PB$ of Section~\ref{sec:jeffrey} has the form of his extended update formula built on multiplicative factors. The comparison drawn throughout is therefore between his amnestic model and his factor models, and the identification questions this paper raises are the ones the amnestic model brings with it and the factor models do not, since factor revisions on distinct attributes commute. What Section~\ref{sec:jeffrey} calls a Bayes factor is, up to normalisation, his normed-likelihood factor, and as a ratio of two such factors it is his likelihood-ratio factor, which he too calls a Bayes factor; on a two-element basis all induce the same revision. \par The premise is disputed on two different grounds. \citet{Doring1999} objects on normative grounds, that a sequence dependence of this size is unjustified in an account of rational belief change. \citet[p.~115]{Hawthorne2004} objects on psychological grounds and declines to settle them, asking ``Which extension of Basic Jeffrey Updating is the more plausible model of human agents? I'm a logician, not a psychologist.'' He judges amnestic updating less plausible than the factor-based extensions, ``because it seems unlikely that we dismiss previous experiences so completely'', and turns to the normative properties of the competing models, where his interest lies. The ground on which the paper adopts the premise is information-theoretic, since Jeffrey's rule is the revision that moves the prior least in $I$-divergence while taking on the delivered credence \citep{DiaconisZabell1982}. An objection of Hawthorne's form is a reason to measure the degree of adoption, not a reason to discard the premise. With two cues that degree has exactly two ends, the impression read last prevailing and the impression read first prevailing, and Proposition~\ref{prop:ADJ} recovers where between those ends an evaluator sits, from the rating of one trait read before and after the second cue and against what that cue delivers. \par Two responses to the resulting sequence dependence have been made. One treats it as a defect of the framework. \citet{Doring1999} argues that the sequence effect can be pronounced enough to call for an adjustment that successive Jeffrey steps cannot supply, though a single Jeffrey step from the original prior can. The other re-describes the input so that the effect disappears. \citet{Field1978} reparametrises the update so that its input is a portable factor rather than a delivered credence, and \citet{Wagner2002} shows that when identical learning is represented by identical Bayes factors, sequential revisions commute; \citet{Garber1980} objects that a portable factor compounds implausibly under repetition. The present paper takes neither route. It accepts the sequence dependence that the delivered-credence reading entails, and asks how far the two sequences disagree in each statistic of the resulting belief. That the disagreement is uneven across statistics, first order in the marginals and the share of decisions changed and second order in the believed association and the surplus-weighted loss, is what makes the debate answerable by measurement rather than by introspection about how completely an evaluator dismisses an earlier impression. \par The insensitivity of the association is moreover not peculiar to the extension adopted here. Each of the three extensions revises a basis by multiplying its cells by a factor that depends on that basis alone; they differ in what fixes the factor, not in the form of the revision. Lemma~\ref{lem:SEP} therefore covers all of them, and under each the believed association is rescaled but never shifted. What separates the extensions is whether there is any sequence effect for that statistic to conceal. An observer reading the believed association alone can accordingly no more tell which extension a population uses than detect the sequence effect itself, while the marginals and the share of decisions changed do both. \par Further afield, sequence dependence has been of interest to empirical psychology at least since \citet{Asch1946}, and in economics has been taken up chiefly through the observational learning literature, though it also arises in the dynamics of discrimination \citep{Bohren2019}. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 3.A with the audit applied. D1/P3, Doring's objection is normative and Hawthorne's psychological, so the two are separated and ``disputed on psychological grounds'' goes. P2, Doring's own remedy is a single Jeffrey update from the original prior. M21, ``the two ends of his taxonomy'' becomes ``his amnestic model and his factor models'' (NL is the middle model), and the Bayes-factor identification names the normalisation and his own use of ``Bayes factor'' for LR factors (his note 20). ``Order'' becomes ``sequence'' throughout (the manuscript's convention). Two colons and one dash removed. The Hawthorne quotations are verbatim from pp. 115-116; the second drops ``not because it is un-Bayesian, but'' before ``because'', which leaves his stated reason unchanged. Needs Doring1999 and Garber1980 in bibliography.bib (B.2).} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Doring.lean (fig2, gap\_tends\_to\_one); Hawthorne.lean (amnestic\_thesis, factorUpdate\_comm, NL\_jeffrey, med\_NL\_denominator); Field.lean (field\_eq7\_comm); Wagner2002.lean (thm31); Garber.lean (garber\_table); DiaconisZabell.lean (thm51\_KL\_eq\_iff); LemmaSEP.lean.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Hawthorne 2004, p. 96 (Section 4)} \newline ``AMNESTIC UPDATE-FACTOR THESIS. For any state $e$ that directly affects an evidence basis $\{E_i\}$ and for any other state $d$ and sequence of states $\alpha$, $Q_{\alpha de}[E_i] = Q_{\alpha e}[E_i]$.'' And: ``Indeed Amnestic Updating is just Standard Sequential Updating -- Jeffrey's original approach to sequential updating.'' \newline \textit{Para 1: the full-adoption premise is named by Hawthorne, and he identifies it with Jeffrey's sequential rule.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hawthorne 2004, p. 97 and note 12 (p. 121)} \newline ``a pair of states $e$ and $f$ will commute for $Q_\beta$ \ldots just in case neither $e$ nor $f$ can, on its own, influence (even indirectly) the basis sentences of the other -- i.e. just in case for each $E_i$, $Q_{\beta f}[E_i] = Q_\beta[E_i]$, and for each $F_j$, $Q_{\beta e}[F_j] = Q_\beta[F_j]$.'' Note 12: ``Theorem 3.2 in (Diaconis and Zabell, 1982).'' \newline \textit{Para 1: he credits the commutation criterion to Diaconis and Zabell.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hawthorne 2004, abstract p. 89 and section headings pp. 96, 99, 103} \newline ``I will explore three models of sequential updating, the usual extension and two alternatives.'' The headings: ``5. The Amnestic Update Model'' (p. 96), ``6. The Normed-Likelihood Factor Model'' (p. 99), ``7. The Likelihood-Ratio Factor Model'' (p. 103). \newline \textit{Para 1: the taxonomy has three members, one amnestic model and two factor models; the normed-likelihood model is the middle one, not an end.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hawthorne 2004, note 20 (p. 121)} \newline ``In his most recent work Jeffrey favors updating based on Likelihood-Ratio factors as well. He thinks of them as ratios of new to old odds and calls them `Bayes factors', following Good (1950).'' \newline \textit{Para 1: the name Bayes factor is given by Hawthorne to likelihood-ratio factors, which is why the entry identifies the paper's Bayes factor with his LR factor as a ratio of two NL factors.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Hawthorne.lean, NL\_jeffrey, factorUpdate\_seq, med\_NL\_denominator} \newline $\mathrm{NL}[Q,e,E_i] = Q_e[E_i]/Q[E_i]$ (p. 95); for a Basic Jeffrey update to targets $q$, $\mathrm{NL}[Q,e,E_i] = q_i/Q[E_i]$ with no side condition. Two factor updates on bases $u,v$ with $\sum_y w(u_y)Q(y) \neq 0$ compose to $Q_{ef}(x) = w(u_x)\,z(v_x)\,Q(x)\big/\sum_y w(u_y)\,z(v_y)\,Q(y)$ (pp. 102, 105). In his medical example the NL factors against the initial prior give $Q[C] = 1/2$ only after dividing by the normaliser $301/625 \neq 1$. \newline \textit{Para 1: $\PB$ has the form of his extended update formula up to normalisation, so the entry says ``up to normalisation''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Doring 1999, S379 (Introduction) and S383} \newline ``The following is an exercise in Bayesian rational psychology. Its contention is that Jeffrey conditionalization, a generalization of classical conditionalization, cannot be a complete account of rational belief change.'' On the reversed conditional probabilities of his example: ``This seems wholly unjustified if there is nothing essential about the order in which experiences were made.'' \newline \textit{Para 2: Doring's objection is normative, about rational belief change, not about how people update (audit D1/P3).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hawthorne 2004, pp. 115-116} \newline ``Which extension of Basic Jeffrey Updating is the more plausible model of human agents? I'm a logician, not a psychologist. But Amnestic Updating seems psychologically less plausible than the more Bayesian approaches, not because it is un-Bayesian, but because it seems unlikely that we dismiss previous experiences so completely. However, I am mainly interested in whether these models capture useful normative conceptions of belief updating'' \newline \textit{Para 2: the entry's second fragment begins at ``because it seems unlikely'', dropping ``not because it is un-Bayesian, but''; the sentence runs onto p. 116 at ``of belief updating''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Diaconis and Zabell 1982, p. 828, Theorem 5.1 and (5.3)} \newline ``Let $Q$ be a probability on $\Omega$ such that $Q(E_i) = P^*(E_i)$. Then \ldots $I(Q,P) \geq \sum P^*(E_i)\log\big(P^*(E_i)/P(E_i)\big)$. (5.6) In (5.5) and (5.6) equality holds if and only if $Q(A) = \sum P(A \mid E_i)\,P^*(E_i)$.'' With (5.3): ``$I(Q,P) = \sum_\omega Q(\omega)\log\big(Q(\omega)/P(\omega)\big)$.'' \newline \textit{Para 2: Jeffrey's rule is the unique minimiser of the $I$-divergence from the prior among revisions that take on the delivered credence; the Lean statement is DiaconisZabell.lean, thm51\_KL\_eq\_iff.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, dampedB\_deviation} \newline Let $\mathrm{dampedB}(Q,r_0,\delta)$ be the Jeffrey step on $B$ to the target $(1-\delta)\,Q(B{=}1) + \delta\,(1-r_0)$. If $Q(B{=}1) \neq 0$ then $\mathrm{dampedB}(Q,r_0,\delta)(B{=}1) - (1-r_0) = (1-\delta)\,\big(Q(B{=}1) - (1-r_0)\big)$, an identity in $Q$, $r_0$ and $\delta$. The paper's $\omega$ is $\delta$. \newline \textit{Para 2: the degree of adoption is recovered from the rating of one marginal before and after the second cue against the delivered credence $1-r_0$, namely $\omega = 1 - (\text{after} - (1-r_0))/(\text{before} - (1-r_0))$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Doring 1999, S379 (abstract)} \newline ``Jeffrey conditionalization is sensitive to the order in which the evidence arrives. This order effect can be so pronounced as to call for a belief adjustment that cannot be understood as an assimilation of incoming evidence by Jeffrey's rule.'' \newline \textit{Para 3: Doring treats the sequence effect as a defect of the framework.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Doring 1999, S384-S385} \newline ``The most straightforward approach would be to revert to the original probabilities and try to assimilate the later evidence all at once.'' (S384) ``Jeffrey conditionalizing in one step on the new assignments yields a posterior distribution in which both pieces of evidence receive equal weight'' (S385). \newline \textit{Para 3: his remedy is a single Jeffrey step from the original prior, which successive steps cannot supply (audit P2).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Field 1978, pp. 365-366 (eq. (7))} \newline ``If we express the combined result of both changes in terms of the Jeffrey parameters $q$ and $q'$ of the individual changes, we get a very complicated law; moreover, it is an asymmetric law \ldots If however we express the combined result in terms of the parameters $\alpha$ and $\alpha'$ of the individual changes, we get a law that is both simple and symmetric'' \newline \textit{Para 3: Field's input is the portable parameter alpha rather than the delivered credence q, and with it successive changes commute.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Wagner 2002, abstract (preprint p. 1)} \newline ``When identical learning is properly represented, namely, by identical Bayes factors rather than identical posterior probabilities, then sequential probability-kinematical revisions behave just as they should.'' \newline \textit{Para 3: identical Bayes factors make sequential revisions commute.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Garber 1980, p. 144} \newline ``after nine repetitions of the same rather uninformative experience, S will become virtually certain that the ball is blue.'' And: ``If stimulation behaves in the way he supposes in (3), then practical certainty in $E$ is much too easily obtained.'' \newline \textit{Para 3: the objection is that a portable factor compounds implausibly under repetition; Garber never discusses order.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Field.lean, field\_eq7\_comm} \newline For $E, E' : \Omega \to \mathrm{Bool}$, $\alpha, \alpha' \in \mathbb{R}$ and $P \geq 0$ with $\sum_\omega P(\omega) = 1$: $\mathrm{tilt}_{E'}(\alpha', \mathrm{tilt}_E(\alpha, P)) = \mathrm{tilt}_E(\alpha, \mathrm{tilt}_{E'}(\alpha', P))$, where $\mathrm{tilt}_E(\alpha,P)(\omega) = e^{\pm\alpha}P(\omega)\big/\sum_{\omega'} e^{\pm\alpha}P(\omega')$, the sign $+$ on $E$ and $-$ off it (Field's eq. (6)). \newline \textit{Para 3: Field's eq. (7) is symmetric, so his two updates commute.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, thm31} \newline Let $p$ be a probability, $q$ come from $p$ by probability kinematics on $\mathcal{E}$ and $r$ from $q$ on $\mathcal{F}$; let $q'$ come from $p$ on $\mathcal{F}$ and $r'$ from $q'$ on $\mathcal{E}$. If $\beta_{r',q'}(E_{i_1}{:}E_{i_2}) = \beta_{q,p}(E_{i_1}{:}E_{i_2})$ for all $i_1, i_2$ and $\beta_{q',p}(F_{j_1}{:}F_{j_2}) = \beta_{r,q}(F_{j_1}{:}F_{j_2})$ for all $j_1, j_2$, then $r' = r$ (finite partitions). \newline \textit{Para 3: Wagner's Theorem 3.1, with the primes as printed on the rendered page.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Garber.lean, garber\_nine} \newline With $\alpha_0$ fixed by the change $.3 \to .4$ (so $e^{2\alpha_0} = 14/9$) and Field's step iterated from $P_0(E) = .3$, $P_n(E) = 3\cdot 14^n/(3\cdot 14^n + 7\cdot 9^n)$; then $P_9(E) > .95$ and $P_8(E) < .95$. \newline \textit{Para 3: Garber's table (p. 144) is reproduced exactly; nine repetitions are the first to pass .95.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Hawthorne.lean, factorUpdate\_smul, NL\_factorUpdate, LR\_factorUpdate} \newline A factor update is $\mathrm{fu}(p,u,w)(x) = w(u_x)\,p(x)\big/\sum_y w(u_y)\,p(y)$. For $c \neq 0$, $\mathrm{fu}(p,u,c\,w) = \mathrm{fu}(p,u,w)$. If $Q[E_i] \neq 0$, $\mathrm{NL}[p,\mathrm{fu}(p,u,w),E_i] = w_i/\sum_y w(u_y)p(y)$; if also $Q[E_j], Q[E_k]$ and the normaliser are nonzero, $\mathrm{LR}[p,\mathrm{fu}(p,u,w),E_j,E_k] = w_j/w_k$, whatever the prior. \newline \textit{Para 4: amnestic, normed-likelihood and likelihood-ratio updates each multiply the basis cells by a factor that depends on that basis alone; they differ only in what fixes the factor.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{LemmaSEP.lean, isSeparable\_applySteps, sep\_rescales\_association} \newline For any $N$, any prior $P$ on $\{0,1\}^N$ and any finite list of attribute-local steps (each multiplying cell $x$ by a factor of the single coordinate $x_a$ it reads), the result is $P(x)\prod_a g_a(x_a)$ for some $g$. For such $F$ and $i \neq j$: $F_{11}F_{00} - F_{10}F_{01} = g_i(1)g_i(0)g_j(1)g_j(0)\,\big(\prod_{a \neq i,j} g_a(x_a)\big)^2\,(P_{11}P_{00} - P_{10}P_{01})$. \newline \textit{Para 4: under every extension the believed association is rescaled by a positive factor and never shifted.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
 \entryhead{3.2}{Related literature, the paragraph from BHW/Banerjee to Becker and Good-Mittal\quad{\footnotesize\textit{(formerly C.11)}}}
 1/5 & In \citet{Banerjee1992}, the sequence persists because a coarse public action fails to be a sufficient statistic for private information. In \citet{BHW1992}, on the other hand, a cascade is an action that conveys no private signal. & In both, the equilibrium action is not a sufficient statistic for private information, being binary in \citet{BHW1992} and a non-invertible choice rule in \citet{Banerjee1992}, so once a cascade or herd forms, later actions convey no private signal. \\ \hline
 2/5 & One similarity with the literature, however, is that the sequence effect in \citep{BHW1992, Banerjee1992} lives on the analogue of the marginals---which remain so in the current paper as well. & One analogy remains. Those models have a single state, so their sequence effect falls on a belief about one variable, the counterpart of a marginal, and here too the marginals carry the sequence effect. \\ \hline
@@ -722,135 +558,6 @@ belongs to the delivered credences.}} \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, dampedB\_deviation} \newline With $\mathrm{dampedB}(Q,r_0,\delta)$ the Jeffrey step on $B$ to $(1-\delta)\,Q(B{=}1) + \delta\,(1-r_0)$ and $Q(B{=}1) \neq 0$: $\mathrm{dampedB}(Q,r_0,\delta)(B{=}1) - (1-r_0) = (1-\delta)\,\big(Q(B{=}1) - (1-r_0)\big)$. Hence $\omega = \delta$ is fixed by three readings of one marginal, before the cue, after it, and the credence it delivers. \newline \textit{Marginals in two sequences, however many, do not fix omega; one marginal read before and after the second cue and against what it delivers does.}} \\
 \multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Asch 1946, p. 262 (Technique) and p. 271 (design of the within-subject group)} \newline ``Following the reading, each subject wrote a brief sketch.'' (p. 262) ``A new group ($N{=}24$) heard Series B, wrote the free sketch, and immediately thereafter wrote the sketch in response to Series A.'' (p. 271) \newline \textit{Nothing is elicited before the series is read, and neither the sketch nor the forced-choice list asks how strongly two traits are believed to go together, so no prior association is collected (audit P13).}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
-\entryhead{3.4}{Related literature, Phelps-Arrow to the amalgamation paragraph, plus the identification paragraph\quad{\footnotesize\textit{(formerly C.11b)}}}
-1/4 & The paper borrows the evaluator-with-binary-attributes frame from the statistical-discrimination lineage \citep{Phelps1972, Arrow1973}. & The paper borrows the evaluator-with-binary-attribute frame from the statistical-discrimination lineage \citep{Arrow1973,CoateLoury1993}. \\ \hline
-2/4 & instead of stereotypes as representativeness-distortion or selective recall \citep{BCGS2016}, the sense of stereotype in the current paper is that of a believed cross-attribute association produced by coherent updating on impoverished input, not by a distortion of memory or sampling. & instead of stereotypes as the selective recall of representative types \citep{BCGS2016}, whose exaggerated associations arise across groups, the stereotype in the current paper is a believed cross-attribute association held by one evaluator and produced by coherent updating on impoverished input, not by a distortion of memory. \\ \hline
-3/4 & The lineage distinction the concluding section trades on---protection intrinsic to the arithmetic of aggregation, rather than imposed by an enforced constraint on behaviour---goes back at least as far as \citet{Becker1962}. & \textit{(sentence deleted)} \\ \hline
-4/4 & It is worth contrasting the phenomenon explored in the current paper against the amalgamation paradox \citep{GoodMittal1987}, where a real effect present in every subpopulation is erased or reversed by a confound in how the subpopulations are weighted together. Whereas the amalgamation paradox erases a real effect by combining subpopulations under confounded weights, our decision-space result shows the same kind of erasure can occur within a single population -- where a first-order share of individuals who are individually affected contributes only a second-order loss in aggregate (Theorem~\ref{thm:LOS}). & It is worth contrasting the phenomenon explored here with the amalgamation paradox \citep{GoodMittal1987}, in which a measure of association on a combined table lies outside the range of the same measure on its subtables, because treatment is allocated unevenly across the subpopulations, even when they are equally large. That paradox arises from combining subpopulations. The decision-space result here shows a comparable loss of visibility within a single population, where a first-order share of individuals who are individually affected contributes only a second-order loss in aggregate (Theorem~\ref{thm:LOS}). The audit perspective has a precedent in the economics of discrimination. \citet{Heckman1998} showed that audit-pair estimates of discrimination rest on an assumption about unobserved productivity that ``nothing guarantees'' (p.~109), so that such an audit ``can find discrimination when in fact none exists; it can also disguise discrimination when it is present'' (p.~102), and \citet{Bohren2019} identify the source of discrimination by conditioning on the history of evaluations, since in static data, as they note, different sources generate the same patterns of observable behaviour. The obstruction here is of the same kind and arises on the belief side of an audit. The first-order signal in a protected statistic is zero in the population itself, so its silence is a failure of identification and not of estimation, which no sample size repairs, and the identifying variable is the reading sequence, which pooled data discard. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Continues 3.2 after the Asch entry (3.3). Phelps has no binary attribute, so he is dropped from this sentence and can be re-cited in 1.5 for statistical discrimination in general (M10). BCGS name one mechanism, not two, and ``sampling'' is not theirs (M12). Becker: the concluding section never draws the distinction, and Becker's own mechanism is averaging plus a budget constraint, the opposite side of it (``Our statement goes beyond arithmetic'', p. 7; M13); the AFTER deletes the sentence, and an alternative that keeps Becker is in literature/becker1962/README.md. Good-Mittal: their paradox covers amplification and effects created from none, and its cause is uneven allocation, not weighting by population shares (M14). The last part also appends the identification paragraph (formerly 3.4).} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Phelps.lean, Arrow.lean, CoateLoury.lean, BCGS.lean, Becker.lean, GoodMittal.lean (\texttt{piR\_amalg\_general}, \texttt{equalSize\_reversal}). The appended paragraph carries the identification point of notes/positioning\_economics.tex and plan 3.C/3.D into Section 3, with audit P17a (no sample-size claim attributed to Heckman; that clause is the paper's own consequence of Proposition PRO), H2 (``nothing guarantees'' is p. 109), H3 (``can find discrimination'' is p. 102) and B37 (BIR credit ``different sources'' to Fang-Moro, so it is paraphrased) applied. Needs Heckman1998 and Bohren2019 in bibliography.bib (B.2).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Phelps 1972, p. 659, Equation (1)} \newline ``The employer is able to measure the performance of each
-applicant in some kind of test, $y_i$, which, after suitable scaling, may be
-said to measure the applicant's promise or degree of qualification, $q_i$,
-plus an error term, $\mu_i$. (1) $y_i = q_i + \mu_i$ where $\mu$ is normally
-distributed with mean zero.'' \newline \textit{(part 6, Phelps) Qualification is a continuous variable read
-through a normal error and a least-squares predictor (pp. 659--660); the only
-binary variable is the race dummy, so Phelps supplies no binary-attribute
-frame.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Arrow 1973, Section 4, working paper p. 26} \newline ``Only some workers, however, are qualified to hold skilled jobs.
-\ldots The employer cannot know of any given worker whether or not he is
-qualified; however, he does believe that the probability that a random W
-worker is qualified is $p_W$ and that a random B worker is qualified is
-$p_B$.'' \newline \textit{(part 6, Arrow) Binary qualification and two groups, with a
-belief $p_W, p_B$ per group; this is the binary-attribute frame, and Arrow
-stays in the AFTER (the local copy is the 1971 working paper, hence its
-pagination).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{CoateLoury.lean, negativeStereotype\_iff\_cov\_pos} \newline For $0 < \lambda < 1$ (the share of W's),
-$\pi_b < \pi_w \iff 0 < \mathrm{Cov}(W, q)$, where
-$\mathrm{Cov}(W,q) = \lambda\pi_w - \lambda\big(\lambda\pi_w + (1-\lambda)\pi_b\big)
-= \lambda(1-\lambda)(\pi_w - \pi_b)$. \newline \textit{(part 6, Coate-Loury) A negative stereotype in the lineage the
-AFTER cites is a believed positive association between group and
-qualification, the binary frame the manuscript borrows.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Bordalo, Coffman, Gennaioli and Shleifer 2016 (May 2015 WP), p. 12} \newline ``The DM has stored in memory the full conditional distribution
-\ldots but he assesses this distribution by recalling only a limited and
-selected set of types. Selective recall is driven by representativeness,
-formalized below following GS (2010).'' \newline \textit{(part 7, BCGS) One mechanism, representativeness-driven selective
-recall, not ``representativeness-distortion or selective recall''; nothing
-in it is a sampling distortion.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Bordalo, Coffman, Gennaioli and Shleifer 2016 (May 2015 WP), Section 4.3, p. 27} \newline ``Again, there is a kernel of truth in these stereotypes, but also
-an exaggeration of the correlation between education and being on welfare:
-people neglect that most elements of the less educated group are not on
-welfare''. \newline \textit{(part 7, BCGS) BCGS also produce an exaggerated cross-attribute
-association, so the contrast rests on where it arises, across groups, and on
-the mechanism, not on the concept.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{BCGS.lean, welfare\_within\_group} \newline With $\mathrm{cov}(p_{00},p_{01},p_{10},p_{11})
-= p_{11} - (p_{10}+p_{11})(p_{01}+p_{11})$:
-$\mathrm{cov}(0, \tfrac{9}{11}, 0, \tfrac{2}{11}) = 0$, while the true
-within-group law has $\mathrm{cov}(\tfrac{21}{50}, \tfrac{9}{50},
-\tfrac{9}{25}, \tfrac{1}{25}) = -\tfrac{6}{125}$. \newline \textit{(part 7, BCGS) In the Lean instance of the Section 4.3 example (BCGS give
-no numbers there) the $d=2$ stereotype of a group recalls only welfare types, so the within-group education-welfare
-association is zero; the exaggerated correlation lives in the population
-pooled across groups.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Becker 1962, p. 7} \newline ``This analytical statement must be distinguished from the
-frequently encountered arithmetical statement that a market would behave
-rationally even if only a few households did \ldots Our statement goes beyond
-arithmetic and stems from an analysis of the responses of rational and
-irrational households.'' \newline \textit{(part 8, Becker) Becker sets his result against the arithmetic
-of aggregation, the opposite of ``protection intrinsic to the arithmetic of
-aggregation''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Becker 1962, p. 10} \newline ``In both cases the word `survive' simply refers to a resource
-constraint on behavior and does not literally distinguish `life' from
-`death,' although some households and firms may actually die from trying to
-`live' beyond their means.'' \newline \textit{(part 8, Becker) His mechanism is a constraint on behaviour, so
-``rather than imposed by an enforced constraint on behaviour'' inverts
-him.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Becker 1962, p. 12} \newline ``Indeed, the most important substantive result of this paper is
-that irrational units would often be `forced' by a change in opportunities to
-respond rationally.'' \newline \textit{(part 8, Becker) Becker's own summary of the paper: rational
-market responses are forced by the opportunity set.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Becker.lean, constraint\_without\_averaging and impulsive\_mean} \newline With $I = p_2 = 1$ and $p_1$ rising from $1$ to $11/10$, the theorem
-states that some $x \in [0, 1]$ and $x' \in [0, 10/11]$ have $x < x'$ (the
-proof takes $x = \tfrac{1}{10}$, $x' = \tfrac{9}{10}$): one impulsive household
-can buy more after the rise. If $X$ is
-uniform on $[0, I/p_1]$ then $\mathbb{E}X = I/(2p_1)$. \newline \textit{(part 8, Becker) The downward market slope needs both
-ingredients, the budget constraint through the support $[0, I/p_1]$ and
-averaging over many households; neither alone delivers it.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{grep on PAPER\_B\_MANUSCRIPT.tex, Concluding remarks (lines 873--939)} \newline Case-insensitive search of the concluding section for ``Becker'',
-``constraint'', ``arithmetic'', ``enforced'', ``imposed'' and ``intrinsic'':
-zero hits. The manuscript's only mention of Becker is line 255, the sentence
-under correction. \newline \textit{(part 8, Becker) The ``lineage distinction the concluding section
-trades on'' is not drawn there, so the forward reference dangles and the
-AFTER deletes the sentence.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Good and Mittal 1987, Definition 1.1, p. 695} \newline ``DEFINITION 1.1. We say that the amalgamation (or aggregation)
-paradox, or simply the paradox, occurs if
-$\max_i \alpha(\mathbf{a}_i) < \alpha(\mathbf{A})$ or
-$\alpha(\mathbf{A}) < \min_i \alpha(\mathbf{a}_i)$.'' \ldots ``in Yule's
-formulation the subpopulations each had zero association in which case there
-is no reversal of sign. Hence we prefer the name `amalgamation paradox.'\,'' \newline \textit{(part 9, Good-Mittal) The paradox covers amplification beyond
-the maximum and association created from none, not only ``erased or
-reversed''.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Good and Mittal 1987, pp. 695--696} \newline ``a drug can be judged to be beneficial, as measured by $\alpha$,
-for both men and women considered separately, but can seem to be harmful for
-the population at large, by looking only at the amalgamated table. This can
-happen even though $N_i \propto p_i$. We claim that such a situation can
-arise only if not enough care is used in the design of the experiment.'' \newline \textit{(part 9, Good-Mittal) Population-share weights do not prevent
-the paradox; its cause is uneven treatment allocation across
-subpopulations.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{GoodMittal.lean, equalSize\_reversal} \newline For $\mathbf{a}_1 = [8, 2; 60, 30]$ and $\mathbf{a}_2 = [20, 70; 1, 9]$,
-$N_1 = N_2 = 100$, $\pi_R(\mathbf{a}_1) = \tfrac{2}{15} > 0$,
-$\pi_R(\mathbf{a}_2) = \tfrac{11}{90} > 0$, but
-$\pi_R(\mathbf{a}_1 + \mathbf{a}_2) = -\tfrac{33}{100} < 0$, where
-$\pi_R = \dfrac{a}{a+b} - \dfrac{c}{c+d}$. \newline \textit{(part 9, Good-Mittal) Two equally large subpopulations, the
-treatment beneficial in each and harmful in the aggregate: the p. 696 remark
-as an instance.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{GoodMittal.lean, piR\_amalg\_general} \newline For positive tables $\mathbf{a}_i$ with $\mathbf{A} = \sum_i \mathbf{a}_i$,
-$\pi_R(\mathbf{A}) = \dfrac{\sum_i (a_i+b_i)\,\frac{a_i}{a_i+b_i}}{\sum_i (a_i+b_i)}
-- \dfrac{\sum_i (c_i+d_i)\,\frac{c_i}{c_i+d_i}}{\sum_i (c_i+d_i)}$. \newline \textit{(part 9, Good-Mittal) Each row averages the subpopulation rates
-with its own row totals, not with $N_i/N$; the paradox is driven by the
-difference between those two weightings, that is, by uneven treatment
-allocation.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Heckman 1998, p. 109} \newline ``Assumption b is a strong one, and it is the key identifying
-assumption of the audit method as currently practiced. Nothing guarantees
-that it will be satisfied.'' \newline \textit{(part 9, 3.4 Heckman) ``nothing guarantees'' is on p. 109, and
-assumption b is equal means of unobserved productivity across groups, as the
-AFTER glosses it.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Heckman 1998, p. 102} \newline ``The audit method can find discrimination when in fact none
-exists; it can also disguise discrimination when it is present.'' \newline \textit{(part 9, 3.4 Heckman) The p. 102 sentence is Heckman's general
-summary; the AFTER attributes no sample-size claim to him.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Bohren, Imas and Rosenberg 2019, working paper p. 1} \newline ``As prior work has noted, it is difficult to identify the
-underlying source of discrimination from such static settings, as different
-sources generate the same patterns of observable behavior (Fang and Moro
-2011).'' \newline \textit{(part 9, 3.4 BIR) BIR credit the sentence to Fang and Moro, so
-the AFTER paraphrases it (``as they note'') rather than quoting it as
-theirs.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropPRO.lean, propPRO\_protection} \newline For all real $x, y$ and all $(\alpha, \beta, \lambda, q_0, r_0)$,
-$\langle xJ + y\,\nabla\assoc(q \otimes r),\; M_\lambda \rangle = 0$, where
-$M_\lambda = \lambda\kappa R_1 + (1-\lambda)\kappa' R_2$,
-$R_1 = q \otimes (1,-1)$ and $R_2 = (1,-1) \otimes r$. \newline \textit{(part 9, 3.4) The first-order coefficient of a protected
-statistic vanishes identically in the prior and in the mix, so it is zero in
-the population itself; its silence is a failure of identification, which no
-sample size repairs.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
 \entryhead{3.5}{Related literature, Bohren-Imas-Rosenberg, after the identification paragraph (was 3.D)\quad{\footnotesize\textit{(formerly E.7)}}}
  & \textit{New paragraph(s) after the paragraph containing} ``contributes only a second-order loss in aggregate (Theorem~\ref{thm:LOS}).'' & A current formulation of the same problem is given by \citet{Bohren2019}, who distinguish discrimination arising from correct beliefs, from biased beliefs, and from preferences, and identify the source from how discrimination evolves along a history of evaluations. Their map from partiality to behaviour is Bayesian. A belief gap between groups is transmitted to evaluations, attenuated by the precision of the signal and along the history, and it vanishes as judgement becomes perfectly objective. Under the reading adopted here that map does not hold. A Jeffrey step sets the marginal of the attribute it addresses to the delivered credence, so an evaluator who takes the impression of quality last evaluates two workers alike whatever her prior beliefs about their groups, and the belief gap is silenced without any gain in objectivity. Under partial adoption with weight $\omega$ on the impression, a fraction $1-\omega$ of the belief gap survives (Proposition~\ref{prop:ADJ}). What credence-input updating does is therefore not to add a further source of discrimination to their three, but to relocate where partiality must sit in order to act. Lodged in the prior it is silenced, lodged in the impression it passes through untouched, and their framework has no parameter for the latter. \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 3.D with the audit applied. P17b, the belief gap is also attenuated along the history (their Proposition 2), so ``vanishes only as'' becomes ``vanishes as''. Colon removed. Goes directly after 3.4's paragraph, which carries the Heckman precedent that plan 3.C proposed (3.C is superseded by 3.4). Presupposes 5.2 and the Bohren2019 entry.} \\
@@ -863,41 +570,7 @@ sample size repairs.}} \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, dampedB\_deviation} \newline For $Q$ with $Q(B{=}1) \neq 0$: $\mathrm{dampedB}(Q,r_0,\delta)(B{=}1) - (1-r_0) = (1-\delta)\,\big(Q(B{=}1) - (1-r_0)\big)$. Applied to two groups meeting the same delivered credence $1-r_0$, the difference of their $B$-marginals after the cue is $(1-\delta)$ times the difference before it. \newline \textit{Under partial adoption with weight $\omega = \delta$ on the impression, a fraction $1-\omega$ of the belief gap survives.}} \\
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{BohrenImasRosenberg.lean, prop1\_decreasing, prop2\_decreasing} \newline With $\mathrm{eval}(\tau_q,\tau_\eta,\mu,c,s) = (\tau_q\mu + \tau_\eta s)/(\tau_q+\tau_\eta) - c$ and $D(\tau_\eta) = \mathrm{eval}(\tau_q,\tau_\eta,\hat\mu_M,0,s) - \mathrm{eval}(\tau_q,\tau_\eta,\hat\mu_F,c_F,s)$: if $\tau_q > 0$, $0 < \tau_{\eta,1} < \tau_{\eta,2}$ and $\hat\mu_F < \hat\mu_M$ then $D(\tau_{\eta,2}) < D(\tau_{\eta,1})$. Along any history $v : \mathbb{N} \to \mathbb{R}$, with $\tau_a,\tau_\varepsilon,\tau_\eta > 0$, $\hat\mu_F < \hat\mu_M$ and $c = 0$: $D_{n+1}(s) < D_n(s)$ for every $n$. \newline \textit{Their map transmits the belief gap attenuated by the signal precision and along the history; the paper's mechanism sits outside this map.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
-\multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{4\quad Sequence effects at the individual level}} \\ \hline\hline
-\entryhead{4.1}{Section 4, title and opening (was 4.A)\quad{\footnotesize\textit{(formerly E.8)}}}
-1/2 & \textit{Section title:} \textbf{Sequence effects at the individual level} & \textit{Section title:} \textbf{Which statistics register the sequence} \\ \hline
-2/2 & Since Bayesian conditioning is sequence-independent by definition, we measure sequence effects with respect the Bayesian benchmark using two \textbf{primitive} statistics -- gap and score. As discussed in Section \ref{sec:jeffrey}, the \emph{gap} is a distance from a Bayes-factor benchmark $\PB$ for the evaluator (see Definition \ref{def:indgap}). The second primitive, \emph{score-gap} $s(P)=\langle\vv,P\rangle$ defined against the sequence-free reference $\PB$ alongside with a threshold $\tau$. As we show in Section \ref{sec:individual_primitives}, both \emph{gap} and \emph{score-gap} are first-order to the evaluator. The belief-statistics and decision-statistics follow from the two primitive statistics. The two \textbf{belief-statistics} that we are interested in are the \emph{marginal probability} and \emph{believed cross-attribute association}. The \textbf{decision-statistics} that we discuss for the individual evaluator and the population aggregate are \emph{surplus-weighted loss} $L(c)$ and a decision-\emph{flip}. The decision-flip is counted in the population to determine the \emph{share} of those evaluators whose decision is changed by the sequence. The loss is then simply an aggregation of $|u|$ over this share. How these quantities are carried over in aggregate are detailed in Section~\ref{sec:aggregation}. & This section asks, of each statistic of a single evaluator's belief, whether the two reading sequences move it at first order in the prior covariance $c$ or only at second order. Two primitive statistics carry the comparison with the sequence-free benchmark $\PB$ of Section~\ref{sec:jeffrey}, the \emph{gap}, the distance of the evaluator's belief from $\PB$ (Definition~\ref{def:indgap}), and the \emph{score-gap} $s(P)=\langle\vv,P\rangle$, the same distance read through the decision weights and set against a threshold $\tau$. Section~\ref{sec:individual_primitives} shows that both are first order. \par The belief statistics and the decision statistics are read from the same belief. The belief statistics are the \emph{marginal probability} of each attribute and the \emph{believed cross-attribute association}; the decision statistics are the surplus-weighted loss $L(c)$ and the decision \emph{flip}, the indicator that the sequence changes the evaluator's decision. Whether a statistic registers the sequence is settled here, for one evaluator; Section~\ref{sec:aggregation} shows that averaging over evaluators who met the cues in either sequence leaves the classification unchanged across an open set of priors and every interior mixture. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 4.A, colon removed. The section is organised on the statistic rather than on the individual-versus-aggregate axis, which ORD and PRO show to be inert. The third paragraph (why these statistics; FGT, corrected by 4.2) is unchanged.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} DIV and SCR (both primitives first order); ORD and PRO (the classification is settled before averaging).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{PropDIV.lean, propDIV\_gap\_AB\_a00..a11, propDIV\_gap\_BA\_a00..a11, propDIV\_seq\_a00..a11} \newline For $\alpha,\beta\notin\{0,1\}$ and each cell $(i,j)$, as derivatives at $c=0$:
-$\frac{d}{dc}\bigl[\PJ_{AB}-\PB\bigr]_{ij}=\kappa\,(R_1)_{ij}$,
-$\frac{d}{dc}\bigl[\PJ_{BA}-\PB\bigr]_{ij}=\kappa'\,(R_2)_{ij}$,
-$\frac{d}{dc}\bigl[\PJ_{AB}-\PJ_{BA}\bigr]_{ij}=\kappa(R_1)_{ij}-\kappa'(R_2)_{ij}$, with
-$R_1=q\otimes(1,-1)$, $R_2=(1,-1)\otimes r$, $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$,
-$\kappa'=(\beta-r_0)q_0(1-q_0)/Z$. Every posterior entry is a ratio of functions affine
-in $c$, so this is the exact first-order term. \newline \textit{Proposition DIV: the gap from the benchmark is first order in $c$ on either
-sequence, with nonzero coefficient off the locus of kappa\_eq\_zero\_iff.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Aggregate.lean, lemmaSCR\_gap\_AB, lemmaSCR\_gap\_BA, lemmaSCR\_protected\_weight} \newline For any weight $v\in\mathbb{R}^{2\times2}$ and $\alpha,\beta\notin\{0,1\}$:
-$\frac{d}{dc}\langle v,\PJ_{AB}-\PB\rangle\big|_{c=0}=\kappa\,\langle v,R_1\rangle$ and
-$\frac{d}{dc}\langle v,\PJ_{BA}-\PB\rangle\big|_{c=0}=\kappa'\,\langle v,R_2\rangle$;
-for $v=xJ+y\,\nabla\!\assoc(q_0,r_0)$ both coefficients are $0$. \newline \textit{Lemma SCR: the score-gap $s(P)=\langle\vv,P\rangle$ is first order for a generic
-desirability vector and second order only for weights in the protected span.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropORD.lean, lemmaORD\_gap, propORD\_Amarg, propORD\_Bmarg, propORD\_const} \newline For any $v$ and $\alpha,\beta\notin\{0,1\}$:
-$\frac{d}{dc}\langle v,\PJ_{AB}-\PJ_{BA}\rangle\big|_{c=0}=\kappa\langle v,R_1\rangle-\kappa'\langle v,R_2\rangle$;
-in particular $\frac{d}{dc}\bigl[\PJ_{AB}(A{=}1)-\PJ_{BA}(A{=}1)\bigr]_{c=0}=\kappa'$,
-$\frac{d}{dc}\bigl[\PJ_{AB}(B{=}1)-\PJ_{BA}(B{=}1)\bigr]_{c=0}=-\kappa$, and the constant
-weight gives $0$. The right-hand side mentions neither $\PB$ nor $\lambda$. \newline \textit{Proposition ORD: whether a statistic separates the two sequences at first order is
-fixed by its differential against $R_1$ and $R_2$, so the classification is settled for
-one evaluator before any averaging.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_ORD.py, steps (5) and (8)} \newline $\assoc(\PJ_{AB})-\assoc(\PJ_{BA})=\Theta(c^2)$ at a generic point and
-$\langle\nabla\!\assoc,\ \kappa R_1-\kappa'R_2\rangle=0$. Requiring
-$\kappa\langle G,R_1\rangle-\kappa'\langle G,R_2\rangle=0$ at four priors $(\alpha,\beta)$
-leaves a two-parameter solution space for $G$, every member of which lies in
-$\mathrm{span}\{J,\nabla\!\assoc\}$ and annihilates $R_1$ and $R_2$;
-$\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)\neq0$. \newline \textit{Marginals and generic scores are first order, the association second order, and the
-dividing line is annihilation of $\mathrm{span}\{R_1,R_2\}$, the same line Proposition PRO
-draws for the aggregate.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
+\multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{4\quad Which statistics register the sequence}} \\ \hline\hline
 \entryhead{4.2}{Section 4, the Foster-Greer-Thorbecke sentence\quad{\footnotesize\textit{(formerly C.13)}}}
  & This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices \citep{FosterGreerThorbecke1984}. & The two decision statistics pair incidence with intensity, as do the first two poverty measures of \citet{FosterGreerThorbecke1984}, the headcount ratio, the share below a threshold, and the average shortfall below it normalised by the threshold, to which those above it contribute zero. \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Why.} P\_0 is the headcount \emph{ratio}, a share, and P\_1 = (1/n) sum g\_i / z is normalised by the threshold and averaged over the whole population; ``average of their distances'' is the income-gap measure, which is not in the family (M15). FGT do not use ``incidence/intensity''; the AFTER does not attribute it to them.} \\
@@ -918,227 +591,6 @@ whole population, $I = 1$ on $\{0\}$ and $I = \tfrac12$ on $\{1, 2\}$, and
 $\tfrac34 \neq \tfrac13 \cdot 1 + \tfrac23 \cdot \tfrac12 = \tfrac23$. \newline \textit{The mean shortfall among the poor (FGT's $I$ times $z$) is not
 additively decomposable with population-share weights, so it is not a member
 of the decomposable family the manuscript cites.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{5\quad Aggregated Effects of Cue-Sequence}} \\ \hline\hline
-\entryhead{5.1}{Section 5, title and opening (was 5.A)\quad{\footnotesize\textit{(formerly E.9)}}}
-1/2 & \textit{Section title:} \textbf{Aggregated Effects of Cue-Sequence} & \textit{Section title:} \textbf{Averaging over sequences does not change the classification} \\ \hline
-2/2 & We now describe how the effect of arrival order on statistics discussed in the previous section fares in the population aggregate. Throughout this section we consider a population mixing the two encounter sequences: a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-first (the credential cue in the example) and the rest $B$-first (the letter), so the mean belief under Jeffrey conditioning is $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. As it turns out, what makes a statistic second order or first order is largely the nature of the statistic itself rather than the mechanism of aggregation. & The previous section classified statistics for one evaluator. This section shows that the classification survives averaging over a population in which a fraction $\lambda\in[0,1]$ of evaluators meet the $A$-cue first (the credential in the example) and the rest the $B$-cue first (the letter), so that the mean belief under Jeffrey conditioning is $\Pbar_\lambda=\lambda\,\PJ_{AB}+(1-\lambda)\,\PJ_{BA}$. Across an open set of priors, what makes a statistic first order or second order is the statistic itself and not the mixture $\lambda$, since the mean belief lies in the plane through $\PB$ spanned by the leading directions of the two sequences, and a statistic's order is fixed by its differential on that plane (Propositions~\ref{prop:ORD} and~\ref{prop:PRO}). \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 5.A, colon removed. ``Largely the nature of the statistic itself'' hedged an exact result. Presupposes 5.2.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} PropPRO.lean (annihilator\_eq\_span, propPRO\_uniqueness); PropORD.lean.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{PropPRO.lean, annihilator\_eq\_span (with propPRO\_protection\_each, R1\_R2\_indep)} \newline If $1-q_0\neq0$ and $\langle V,R_1\rangle=\langle V,R_2\rangle=0$ then
-$V=\bigl(V_{01}+r_0(V_{00}-V_{01})\bigr)\,J+\dfrac{V_{00}-V_{01}}{1-q_0}\,\nabla\!\assoc(q_0,r_0)$,
-where $J$ is the all-ones matrix and
-$\nabla\!\assoc(q_0,r_0)=\bigl(\begin{smallmatrix}(1-q_0)(1-r_0)&-(1-q_0)r_0\\-q_0(1-r_0)&q_0r_0\end{smallmatrix}\bigr)$;
-conversely every $xJ+y\,\nabla\!\assoc$ annihilates $R_1$ and $R_2$. For $q_0\neq0$,
-$R_1$ and $R_2$ are linearly independent. \newline \textit{The annihilator of the plane spanned by the two leading directions is exactly
-$\mathrm{span}\{J,\nabla\assoc\}$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropPRO.lean, propPRO\_protection} \newline With $M_\lambda=\lambda\kappa R_1+(1-\lambda)\kappa' R_2$ the leading direction of
-$\Pbar_\lambda-\PB$: for all $x,y$ and all $\alpha,\beta,\lambda$,
-$\langle xJ+y\,\nabla\!\assoc(q_0,r_0),\ M_\lambda\rangle=0$. \newline \textit{Protection is annihilation of each route direction, identically in the mixture,
-not a cancellation that depends on $\lambda$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropPRO.lean, propPRO\_uniqueness and coeff\_times\_Z (with margA\_not\_in\_span)} \newline Let $x=\langle\nabla F,R_1\rangle$, $y=\langle\nabla F,R_2\rangle$; the aggregate
-first-order coefficient times $Z$ is
-$\lambda(\alpha-q_0)r_0(1-r_0)\,x+(1-\lambda)(\beta-r_0)q_0(1-q_0)\,y$. If $0<\lambda<1$,
-$0<q_0<1$, $0<r_0<1$, $\beta\neq r_0$ and this vanishes at two priors
-$\alpha_1\neq\alpha_2$, then $x=y=0$. At $\lambda=1$ the $A$-marginal read-out
-annihilates $R_1$ but not $R_2$, so an interior $\lambda$ is needed. \newline \textit{Across an open set of priors a statistic is second order for some interior mixture
-iff its differential annihilates $\mathrm{span}\{R_1,R_2\}$, whatever that mixture is.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropORD.lean, lemmaORD\_gap} \newline For any $v$ and $\alpha,\beta\notin\{0,1\}$:
-$\frac{d}{dc}\langle v,\PJ_{AB}-\PJ_{BA}\rangle\big|_{c=0}=\kappa\langle v,R_1\rangle-\kappa'\langle v,R_2\rangle$,
-so the contrast between the two sequences is read from the same two directions as the
-gap from $\PB$, with no reference to $\PB$ or to $\lambda$. \newline \textit{Combined with Proposition DIV, $\Pbar_\lambda-\PB=c\,M_\lambda+\bigO(c^2)$ for every
-$\lambda$, which is the plane through $\PB$ the entry names.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{5.2}{Section 5, Proposition ORD after the definition of protection (was 5.B, ADJ moved to 6.3)\quad{\footnotesize\textit{(formerly E.10)}}}
-1/2 & \textit{New paragraph(s) after the paragraph containing} ``\emph{unprotected} if that distortion is first order, $\bigO(c)$.'' & The distortion compares the population average with the benchmark. The same classification can be reached without either ingredient, by reading the sequence effect of Definition~\ref{def:seqeffect} through the statistic itself. For a smooth statistic $F$ the sequence effect read through it is $F(\PJ_{AB})-F(\PJ_{BA})$, and it involves neither the benchmark $\PB$ nor the mixing weight $\lambda$. \par \renewcommand{\theproposition}{ORD} \begin{proposition}[between-sequence contrast]\label{prop:ORD} For any weight $v$, \[ \langle v,\;\PJ_{AB}-\PJ_{BA}\rangle \;=\; c\,\bigl(\kappa\,\langle v,R_1\rangle-\kappa'\,\langle v,R_2\rangle\bigr) \;+\;\bigO(c^{2}), \] with $\kappa$, $\kappa'$, $R_1$, $R_2$ as in Proposition~\ref{prop:DIV}. The sequence effect on the $A$-marginal is $c\,\kappa'+\bigO(c^{2})$ and on the $B$-marginal $-c\,\kappa+\bigO(c^{2})$; each is $\Theta(c)$ generically. The sequence effect on the believed association is $\bigO(c^{2})$ exactly. Across an open set of priors, a smooth statistic has a second-order sequence effect if and only if it is protected (Definition~\ref{def:protection}); both conditions hold exactly when the differential of the statistic at independence annihilates $\mathrm{span}\{R_1,R_2\}$ (Proposition~\ref{prop:PRO} below). Nothing in the display involves $\PB$ or $\lambda$. The classification is decided by the two reading sequences, and every mixture $\Pbar_\lambda$ inherits it. \end{proposition} \par \begin{proof} By Proposition~\ref{prop:DIV}(ii), $\PJ_{AB}-\PJ_{BA}=c(\kappa R_1-\kappa'R_2)+\bigO(c^{2})$; applying $\langle v,\cdot\rangle$ gives the display. With $R_1=q\otimes(1,-1)$ and $R_2=(1,-1)\otimes r$, \[ \langle\mathbf 1_{A=1},R_1\rangle=0,\quad \langle\mathbf 1_{A=1},R_2\rangle=-1,\qquad \langle\mathbf 1_{B=1},R_1\rangle=-1,\quad \langle\mathbf 1_{B=1},R_2\rangle=0, \] giving $c\,\kappa'$ and $-c\,\kappa$. For the association, $\langle\nabla\assoc(q\otimes r),R_1\rangle=\langle\nabla\assoc(q\otimes r),R_2\rangle=0$ (proof of Proposition~\ref{prop:PRO}), so its sequence effect is $\bigO(c^{2})$. For the equivalence, with $M_\lambda=\lambda\kappa R_1+(1-\lambda)\kappa'R_2$ from Proposition~\ref{prop:DIV}(i) and $\nabla F:=\nabla F(q\otimes r)$, \[ \begin{aligned} \langle\nabla F,\Delta_{\mathrm{seq}}\rangle &=\kappa\,\langle\nabla F,R_1\rangle-\kappa'\,\langle\nabla F,R_2\rangle,\\ \langle\nabla F,M_\lambda\rangle &=\lambda\kappa\,\langle\nabla F,R_1\rangle+(1-\lambda)\kappa'\,\langle\nabla F,R_2\rangle; \end{aligned} \] across an open set of priors $\kappa$ and $\kappa'$ vary independently, so either vanishes identically exactly when $\langle\nabla F,R_1\rangle=\langle\nabla F,R_2\rangle=0$. \end{proof} \\ \hline
-2/2 & A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place. & A particularly surprising finding is that for a smooth statistic of the belief, the answer is settled before any averaging over the aggregate takes place (Proposition~\ref{prop:ORD}). \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 5.B, mathematics unchanged, prose corrected. Only Proposition ORD stays in Section 5, where it belongs with the classification at full adoption. The adoption-weight material, Proposition ADJ with its worked example and Proposition LAD, moves to the robustness subsection of Section 6 (6.3, 2026-10-01), so that Sections 4 and 5 state the results under the two premises and Section 6 relaxes them. Colons before displays are kept; colons in prose are replaced. ORD must go in before 1.5, 3.1, 3.3, 3.5, 5.1, 6.2 and 6.3, which cite it.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} PropORD.lean (lemmaORD\_gap, propORD\_Amarg, propORD\_Bmarg, propORD\_const); verify\_ORD.py (25/25).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{PropORD.lean, lemmaORD\_gap} \newline For $\alpha\neq0$, $1-\alpha\neq0$, $\beta\neq0$, $1-\beta\neq0$ and any
-weight $v\in\mathbb R^{2\times2}$,
-\[
-\frac{d}{dc}\bigl\langle v,\;\PJ_{AB}(c)-\PJ_{BA}(c)\bigr\rangle\Big|_{c=0}
- =\kappa\,\langle v,R_1\rangle-\kappa'\,\langle v,R_2\rangle,
-\]
-with $\kappa=(\alpha-q_0)\,r_0(1-r_0)/Z$, $\kappa'=(\beta-r_0)\,q_0(1-q_0)/Z$,
-$Z=\alpha\beta(1-\alpha)(1-\beta)$, $R_1=q\otimes(1,-1)$, $R_2=(1,-1)\otimes r$.
-Here $\alpha=P(A{=}0)$, $\beta=P(B{=}0)$ and $q_0$, $r_0$ are the delivered
-credences on $A{=}0$, $B{=}0$. \newline \textit{The display of Proposition ORD, assembled cell by cell from Proposition DIV's route derivatives.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropORD.lean, propORD\_Amarg, propORD\_Bmarg, propORD\_const, propORD\_Amarg\_eq\_negKdrift} \newline Same hypotheses. $\frac{d}{dc}\bigl[\PJ_{AB}(A{=}1)-\PJ_{BA}(A{=}1)\bigr]_{c=0}=\kappa'$,
-$\frac{d}{dc}\bigl[\PJ_{AB}(B{=}1)-\PJ_{BA}(B{=}1)\bigr]_{c=0}=-\kappa$, and for the
-constant weight $\mathbf 1$ the coefficient is $0$. With $Z\neq0$,
-$\kappa'=-K$ for $K=q_0(1-q_0)(r_0-\beta)/Z$ of Proposition DRF. \newline \textit{The marginal rows of ORD; no statement mentions $\PB$ or $\lambda$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_ORD.py, steps 5 and 8 (25/25)} \newline Step 8: $\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)\neq0$ at the generic
-point, so $\kappa$, $\kappa'$ vary independently across priors; requiring
-$\kappa\langle G,R_1\rangle-\kappa'\langle G,R_2\rangle=0$ at four priors leaves a
-two-parameter solution space for $G$, every member a combination of $\mathbf 1$ and
-$\nabla\assoc$, and each annihilates $R_1$ and $R_2$. Step 5: the between-sequence
-gap of $\assoc$ is $\Theta(c^2)$, and
-$\langle\nabla\assoc(q\otimes r),\,\kappa R_1-\kappa'R_2\rangle=0$. \newline \textit{Grounds for the ``if and only if'' clause and for the $\bigO(c^2)$ claim on the association.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{6\quad Scope and robustness}} \\ \hline\hline
-\entryhead{6.1}{Section 6, the Scope subsection heading and first sentence\quad{\footnotesize\textit{(formerly E.15h)}}}
- & We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} define scope for any conclusions made from the model. & \textsc{subsection heading}\par\textbf{\large Scope}\par  \par We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in Section~\ref{sec:assumptions} define the scope of the conclusions drawn from the model. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Section 6 splits into two subsections (author's title ``Scope and robustness'' kept; the author may drop ``and robustness''). This adds the Scope heading and repairs ``define scope for any conclusions made from the model''. The second subsection is 6.3.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} None needed.} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{6.2}{Scope, rival mechanisms (was 6.A)\quad{\footnotesize\textit{(formerly E.11)}}}
- & \textit{New paragraph(s) after the paragraph containing} ``is outside the scope of stated results.'' & A separate scope question concerns rival mechanisms rather than broken assumptions. Sequence effects have an explanation that competes with full adoption. In the belief-adjustment model of \citet{HogarthEinhorn1992}, when the first cue is adopted in full and later cues only in part the first impression is protected, and at zero adoption of later cues it is never moved, whereas when every cue is adopted only in part from a prior anchor the same model predicts recency. That first account and full adoption point in opposite directions, since the protected impression is the first one there and the last one here. An observable separates them. Under partial adoption of the second cue with weight $\omega$ (Proposition~\ref{prop:ADJ}), the marginal that ignores the prior association is the last-read one at $\omega=1$, the first-read one at $\omega=0$, and neither in between. A reading on which neither marginal ignores the association is consistent with an interior weight and with the benchmark alike; the two are separated by the sequence comparison, under which the benchmark shows no sequence effect at any $c$ and an interior weight shows one already at $c=0$ (Proposition~\ref{prop:ADJ}). Since every rule here is a separable reweighting, all of them carry the prior's odds ratio (Lemma~\ref{lem:SEP}), so the odds ratio separates none of them and the two marginals are the only statistics that do. Three cautions bound the claim. The classification covers this one-parameter family, not every conceivable mechanism. \citet{Asch1946} is evidence that sequence moves marginals, six stimulus terms read in two sequences moving the proportions on eighteen response traits, and not evidence for either endpoint, since his own account is that early terms set a direction for the reading of later ones, so that what a later cue delivers depends on its position, a mechanism outside the family here, in which each cue delivers the same credence in either position. And full adoption is a substantive commitment rather than a consequence of the level reading. \citet{Hawthorne2004} objects that it ``seems implausible that the most recent experience or non-propositional state should completely dictate belief strengths for basis sentences, with no regard for the import of previous experiences or states''. The objection applies here, and his own two-basis example shows the overwriting explicitly, so that the credential's implication for trustworthiness is erased once the letter fixes that attribute. The adoption weight is his objection stated as a parameter, and the reply offered here is not that the objection misses but that the weight is recovered from three ratings of one marginal rather than assumed. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 6.A with the audit applied. P10, the belief-adjustment model protects the first impression only when the first cue is the anchor and later cues are partly adopted; damping every cue gives recency, so the rival is stated as that case. P14, Experiment VI has six stimulus terms and eighteen response traits. P9, Hawthorne's objection follows his two-basis medical example, so the claim that his illustration misses a one-cue-per-attribute model is dropped. The recovery uses three ratings of one marginal (plan's own correction). Colon removed. Goes after the scope paragraph, inside the Scope subsection that 6.3 opens, and before 6.3.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} HogarthEinhorn.lean (eq8\_estimation\_first\_dominates, appB\_recency, twoAttr\_oneSided\_orderEffect); Anchoring.lean; Asch.lean (seriesA\_length, checkListI\_length); Hawthorne.lean (med\_overwrite; quotation pp. 98-99 verbatim).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{HogarthEinhorn.lean, appB\_recency, appB\_recency\_pos} \newline For all $S_0$, $a$, $b$, $w_a$, $w_b$:
-$\mathrm{estStep}_{w_b}(\mathrm{estStep}_{w_a}(S_0,a),b)
- -\mathrm{estStep}_{w_a}(\mathrm{estStep}_{w_b}(S_0,b),a)=w_a w_b\,(b-a)$,
-and it is $>0$ for $w_a,w_b>0$, $a<b$ (their B.5). Here
-$\mathrm{estStep}_w(S,s)=(1-w)S+ws$ is Eq. 4 applied from a prior anchor $S_0$ to
-every item. \newline \textit{Every cue damped from a prior anchor gives recency, so that case is the rival stated in the entry.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hogarth and Einhorn 1992, T-p.35 (Appendix B) and T-p.11 (transcription)} \newline ``Anderson and Hovland (1957) assume that $w_a = w_{ba}$ and $w_b = w_{ab}$ in
-which case Eq. (B.3) can be reexpressed as \ldots $D = w_a w_b[s(x_b) - s(x_a)]$. (B.5)
-Because $s(x_b) > s(x_a)$, $D > 0$ and recency always obtains.'' And T-p.11:
-``when $R = S_{k-1}$, the SbS process always predicts recency (for
-$\alpha, \beta \ne 0$)\ldots'' \newline \textit{Audit P10 and H15: partial adjustment of every item protects the last impression, not the first.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{HogarthEinhorn.lean, eq8\_estimation\_first\_dominates, oneSided\_primacy\_iff, twoAttr\_oneSided\_orderEffect} \newline For $0\le w<\tfrac12$, $c_j\ge0$, $\sum_j c_j=1$: $w\,c_j<1-w$ for every $j$,
-the first item's effective weight in Eq. 8 (estimation mode) exceeds every other's.
-For $a<b$: $\mathrm{oneSided}(w,S_0,a,b)-\mathrm{oneSided}(w,S_0,b,a)<0\iff w<\tfrac12$.
-With two attributes each moved only by its own cue:
-$\mathrm{estStep}_1(S_A,s_A)-\mathrm{estStep}_w(S_A,s_A)=(1-w)(s_A-S_A)$. \newline \textit{With the first cue as anchor the first impression is protected, and never moved at $w=0$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hogarth and Einhorn 1992, T-p.12 (transcription)} \newline ``In these circumstances, the structure of the EoS strategy contains within it a
-force toward primacy. Moreover, this result holds whether the evidence is all
-positive, all negative, or mixed. This occurs because, in the absence of an explicit
-starting point, we assume that the first piece of evidence, or an amalgamation of the
-first few pieces, serves as the anchor.'' \newline \textit{The first account in the entry: the first cue adopted in full as anchor, later cues in part.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, dampedB\_at\_one, routeDamped\_at\_zero\_pins\_A, orderEffect\_damped\_at\_indep; PropIMM.lean, propIMM\_indep} \newline $Q(B{=}1)\neq0\Rightarrow(\mathrm{dampedB}\,Q\,r_0\,1)(B{=}1)=1-r_0$: at $\omega=1$ the
-last-read marginal is its delivered credence for every $c$. With
-$Q_1=\mathrm{jeffreyA}(\mathrm{prior},q_0)$, $Q_1(B{=}0),Q_1(B{=}1)\neq0$,
-$Q_1(B{=}0)+Q_1(B{=}1)=1$, $\mathrm{prior}(A{=}1)\neq0$: $P^{0}_{AB}(A{=}1)=1-q_0$ for
-every $c$, the first-read one at $\omega=0$. For $\alpha,1-\alpha,\beta,1-\beta\neq0$:
-$P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)\big|_{c=0}=(1-\delta)(\alpha-q_0)$, while
-$\PJ_{AB}(0)=\PJ_{BA}(0)=\PB(0)$. \newline \textit{Which marginal ignores the association at each endpoint, and the sequence effect at $c=0$ that separates an interior weight from the benchmark.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{LemmaSEP.lean, isSeparable\_applySteps; PropDEC.lean, oddsRatio\_gap\_eq\_zero, oddsRatio\_PJba\_eq\_prior} \newline For any $N$, any $P$ on $\{0,1\}^N$ and any finite list $l$ of attribute-local
-steps, $\mathrm{applySteps}\,P\,l=P\cdot\prod_a g_a(x_a)$ for some $g_a$. With
-$\alpha,1-\alpha,\beta,1-\beta,q_0,1-q_0,r_0,1-r_0\neq0$, the first-step $B$-marginals,
-the prior's off-diagonal cells, and the reweighted table's total and off-diagonal
-cells nonzero: $\mathrm{OR}(\PJ_{AB})-\mathrm{OR}(\PB)=0$; likewise
-$\mathrm{OR}(\PJ_{BA})=\mathrm{OR}(\mathrm{prior})$ with the first-step $A$-marginals
-nonzero. \newline \textit{Every rule here is a separable reweighting carrying the prior's odds ratio, so the odds ratio separates none of them; the damped routes are checked in verify\_interior\_omega.py, row 2.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Asch 1946, pp. 271-272 and p. 272} \newline ``the first terms set up in most subjects a direction which then exerts a
-continuous effect on the latter terms. When the subject hears the first term, a
-broad, uncrystallized but directed impression is born. The next characteristic comes
-not as a separate item, but is related to the established direction.'' And p. 272:
-``It is not the sheer temporal position of the item which is important as much as
-the functional relation of its content to the content of the items following it.'' \newline \textit{His account is a direction set by early terms for the reading of later ones, not a weight on position (audit A18, A19, A26).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Asch.lean, seriesA\_length, seriesB\_eq\_reverse, checkListI\_length, stimulus\_disjoint\_checklist} \newline $|\mathrm{seriesA}|=6$ (Experiment VI, p. 270), $\mathrm{seriesB}=\mathrm{seriesA}$
-reversed, $|\mathrm{checkListI}|=18$ (Table 1, p. 262), and no stimulus term occurs in
-either member of any check-list pair. \newline \textit{Six stimulus terms read in two sequences, eighteen response traits (audit P14).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hawthorne 2004, pp. 98-99 and p. 98} \newline ``The resulting Amnestic Model raises two related concerns. First, it seems
-implausible that the most recent experience or non-propositional state should
-completely dictate belief strengths for basis sentences, with no regard for the
-import of previous experiences or states.'' And p. 98, in the two-basis example:
-``When the x-ray report comes in the physician adopts the radiologist's degree of
-confidence that an image of a mass is present, $Q_e[E] = Q_{fe}[E] = .90$.'' \newline \textit{The sentence begins on p. 98 and ends on p. 99 (audit H7); the objection follows his two-basis medical example (audit H33, P9).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Hawthorne.lean, med\_overwrite, med\_crossBasis} \newline With his prior (likelihoods $19/20$, $Q[C]=\tfrac12$): $Q_{fe}[E]=\tfrac{9}{10}$
-and $Q_e[E]=\tfrac{9}{10}$, so the $E$-marginal after $f$ then $e$ equals the one
-after $e$ alone; the $F$-update alone had moved $Q[E]$ from $\tfrac12$ to
-$\tfrac{22}{125}$, which the $e$-update erases. \newline \textit{The overwriting on two distinct bases, explicit in his own example.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\entryhead{6.3}{Section 6, the subsection on partial adoption and factor inputs (Propositions ADJ, LAD and FAC)\quad{\footnotesize\textit{(formerly E.15)}}}
-1/7 & \textit{New paragraph(s) after the paragraph containing} ``is outside the scope of stated results.'' & \textsc{subsection heading}\par\textbf{\large Partial adoption and factor inputs}\par  \par The results of Sections~\ref{sec:individual} and~\ref{sec:aggregation} rest on two premises about a cue. It delivers a credence on its own attribute rather than a factor, and the credence is adopted in full. Full adoption is the setting in which an evaluator adopts a cue alike whichever position it arrives in, so that the sequence can act only through the believed link between the attributes. A weight on the later cue that depends on its position is a property of the evaluator rather than of the evidence, and it is the subject of the belief-adjustment literature \citep{HogarthEinhorn1992}. Whether a population adopts in full can be read from its ratings, since Proposition~\ref{prop:ADJ} below recovers the adoption weight from three marginals of one reading group, and Propositions~\ref{prop:LAD} and~\ref{prop:FAC} say what to expect when it does not, under either reading of the cues. What partial adoption leaves in place is the odds ratio, which is the same in both sequences at every weight, and a second-order class of statistics that no longer contains the association. Table~\ref{tab:robust} collects the answers. \par \textbf{The two channels.}  Sequence dependence has two channels in this setting, and the results of Sections~\ref{sec:individual} and~\ref{sec:aggregation} concern one of them. One is the association channel. A cue on one attribute moves the belief about the other through the prior association, so the second cue meets a belief the first has already changed. The association channel's effect is first order in $c$ and vanishes at independence, where each cue sets its own marginal and touches nothing else (Proposition~\ref{prop:IMM}). The other is the position channel. If the cue read second is adopted only in part, then which cue is weakened depends on the sequence, and the two sequences differ even at $c=0$, by $(1-\omega)(\alpha-q_0)$ on the competence marginal and $-(1-\omega)(\beta-r_0)$ on the trustworthiness marginal. The position channel is not a feature of updating on delivered credences. A Bayes-factor update that gives the second cue's factor the weight $\omega$ is sequence-dependent in the same way, since commutation requires the same factor in either position \citep{Wagner2002}. Under full adoption the position channel is absent and the association channel is the only one, which is the setting of the results. Under partial adoption the position channel is present at $c=0$ and moves every marginal at order zero, while the believed association still does not differ between sequences at $c=0$ and differs at first order (Proposition~\ref{prop:LAD}). The classification by order in $c$ shifts by one order, each statistic keeping its place relative to the others, and the odds ratio is the same in both sequences at every weight. The mean belief of a population mixing the two sequences acquires a cross-product association of $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member holds, and the separation between the share of decisions changed and the loss is lost. What the paper says about the position channel is confined to Propositions~\ref{prop:ADJ} and~\ref{prop:LAD}, the first recovering its strength from the ratings and the second stating what it does to the order in $c$ at which each statistic registers the sequence. The position channel is a temporal bias of the observer, present whether or not the attributes are believed related, while the association channel runs through what one cue implies about the other and exists only when they are. Table~\ref{tab:settings} sets the two settings side by side. \\ \hline
-2/7 & \textit{Continues the insertion of the previous part.} & \textbf{Partial adoption.}  The two sequences of Sections~\ref{sec:individual} and~\ref{sec:aggregation} adopt each delivered credence in full. Suppose instead that the second cue is adopted only in part, so that after the first Jeffrey step the response to the second cue is a Jeffrey step on its partition to the target $(1-\omega)\,m+\omega\,r_1$, where $m$ is the marginal the first step left and $0\le\omega\le1$ is the adoption weight of Section~\ref{sec:setup}. The rule is the averaging form of the belief-adjustment model, $S_k=(1-w_k)S_{k-1}+w_k s(x_k)$ \citep[Eq.~4]{HogarthEinhorn1992}, applied to the second cue only, which is their end-of-sequence form for two items with a constant weight, and embedded in the joint law by a Jeffrey step. Write $P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ for the two sequences under this rule; $\omega=1$ recovers $\PJ_{AB}$ and $\PJ_{BA}$, and $\omega=0$ ignores the second cue. Let $P^{A}$ and $P^{B}$ denote the belief after the $A$-cue alone and after the $B$-cue alone. \par \renewcommand{\theproposition}{ADJ} \begin{proposition}[adoption weight]\label{prop:ADJ} For every $c$ and every $\omega$, in sequence $AB$, \[\begin{aligned} P^{\omega}_{AB}(B{=}1)-r_1 &=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\\ P^{\omega}_{AB}(A{=}1)-q_1 &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr],\\ P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1) &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr]+(1-\omega)\bigl[q_1-P^{B}(A{=}1)\bigr]. \end{aligned}\] Hence the last-read marginal equals its delivered credence identically in $c$ exactly when $\omega=1$, the first-read marginal does so exactly when $\omega=0$, and for $0<\omega<1$ neither does. The first-order coefficient in $c$ of the first-read marginal is $\omega$ times the benchmark's coefficient for the same marginal. At $c=0$ the third line equals $(1-\omega)(\alpha-q_0)$, so a partially adopting evaluator shows a sequence effect at independence, where the fully adopting evaluator (Proposition~\ref{prop:IMM}) and the benchmark show none. Whenever $P^{A}(B{=}1)\neq r_1$, the first line gives the weight from three marginals of one reading group, for every $c$, \[ \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}. \] \end{proposition} \par \begin{proof} With $Q$ the belief after the first step and $t=(t_0,t_1)$, $t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$ is multiplied by $t_j/Q(B{=}j)$, so that \[ \begin{aligned} P(B{=}1)&=t_1,\\ P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\ &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}. \end{aligned} \] In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is $\PJ_{AB}(A{=}1)$, giving \[ P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr]. \] In sequence $BA$, by symmetry, $P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting gives the third line. Neither bracket vanishes identically, since \[ P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2), \] the second by Proposition~\ref{prop:DRF}, whose proof also gives $\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At $c=0$ a step leaves the other marginal unchanged, so \[ \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0). \] For $P^{A}(B{=}1)\neq r_1$ the first line gives \[ 1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}. \] \end{proof} \par In the example of Section~\ref{sec:jeffrey}, an evaluator who reads the credential first rates trustworthiness at $.56$ before the letter, the letter alone delivers $.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$. \\ \hline
-3/7 & \textit{Continues the insertion of the previous part.} & Proposition~\ref{prop:ADJ} reads the weight from the ratings. The next result says what the weight does to the order in $c$ at which each statistic first differs between the two sequences. A statistic is \emph{protected for every pair of cues} if its differential at every independent belief is a multiple of the differential of the association, the condition of Proposition~\ref{prop:PRO} imposed at every point of the independence surface rather than at $q\otimes r$ alone; the association and the correlation coefficient are examples. \par \renewcommand{\theproposition}{LAD} \begin{proposition}[partial adoption]\label{prop:LAD} Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$, $s_0=(1-\omega)\alpha+\omega q_0$, $t=(t_0,1-t_0)$, $s=(s_0,1-s_0)$ and $Z=\alpha\beta(1-\alpha)(1-\beta)$. \begin{enumerate} \item[(i)] At $c=0$ the two sequences end at the independent beliefs $q\otimes t$ and $s\otimes r$, and \[ P^{\omega}_{AB}-P^{\omega}_{BA}\big|_{c=0} =(1-\omega)(\beta-r_0)\,R_1+(1-\omega)(q_0-\alpha)\,R_2 . \] Every marginal therefore differs between the sequences at order zero in $c$, the $A$-marginal by $(1-\omega)(\alpha-q_0)$, while a statistic protected for every pair of cues differs between them by $\bigO(c)$. \item[(ii)] The believed association differs between the sequences by \[ \assoc(P^{\omega}_{AB})-\assoc(P^{\omega}_{BA})=c\,\frac{(1-\omega)H}{Z}+\bigO(c^{2}), \] \[ H=q_0q_1\bigl[\beta(1-\beta)+\omega(\beta-r_0)^2\bigr] -r_0r_1\bigl[\alpha(1-\alpha)+\omega(\alpha-q_0)^2\bigr], \] which is first order whenever $\omega<1$ and $H\neq0$, and second order at $\omega=1$. \item[(iii)] A statistic protected for every pair of cues differs between the sequences by $\bigO(c^{2})$ for every $\omega$ if and only if its differential at every independent belief is a multiple of the differential of the log odds ratio, as for $\assoc(P)/\bigl(P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)\bigr)$. The odds ratio itself is the same in both sequences for every $c$ and every $\omega$. \end{enumerate} \end{proposition} \par \begin{proof} Every Jeffrey step, damped or not, multiplies the rows or the columns of the table by constants, so after both steps $P^{\omega}_{\sigma}(i,j)=a_i b_j P(i,j)$ for some factors $a_0,a_1,b_0,b_1$. Such a rescaling multiplies the association by $a_0a_1b_0b_1$ and leaves the odds ratio unchanged, and $\assoc(P)=c$, so $\assoc(P^{\omega}_{\sigma})=c\,k_\sigma$ with $k_\sigma=a_0a_1b_0b_1$, and the odds ratio claim of (iii) follows. (i) At $c=0$ a step on one attribute leaves the other marginal unchanged (Proposition~\ref{prop:IMM}), so sequence $AB$ reaches $q\otimes\beta$ and then $q\otimes t$, and sequence $BA$ reaches $s\otimes r$; subtracting gives the display. A statistic protected for every pair of cues has a differential that annihilates both tangent directions of the independence surface at each of its points (Lemma~\ref{lem:ASC}), so it is constant on the surface and takes the same value at $q\otimes t$ and $s\otimes r$. (ii) At $c=0$ the factors give $k_{AB}=q_0q_1t_0t_1/Z$ and $k_{BA}=s_0s_1r_0r_1/Z$, and $k_{AB}-k_{BA}=(1-\omega)H/Z$. (iii) Near the independence surface a statistic protected for every pair of cues is $F=F_0+\assoc\cdot h$ with $h$ smooth, and writing $h=g/m$ with $m=P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)$, the first-order coefficient of $F(P^{\omega}_{AB})-F(P^{\omega}_{BA})$ is $k_{AB}\,h(q\otimes t)-k_{BA}\,h(s\otimes r)=\bigl[g(q\otimes t)-g(s\otimes r)\bigr]/Z$, since $m(q\otimes t)=q_0q_1t_0t_1$ and $m(s\otimes r)=s_0s_1r_0r_1$. It vanishes for every pair of cues and every $\omega$ exactly when $g$ is constant on the independence surface, that is when the differential of $F$ there is a multiple of the differential of $\assoc/m$, which at an independent belief equals the differential of the log odds ratio. \end{proof} \par Partial adoption therefore moves the sequence effect on each belief statistic other than the odds ratio one order earlier in $c$, the marginals staying ahead of the association and the association ahead of the odds ratio, which never moves. Decisions do not keep their places. At $c=0$ the benchmark is $q\otimes r$ while sequence $AB$ ends at $q\otimes t$, so under partial adoption an evaluator's score departs from the benchmark's at order zero, and the share of decisions the sequence changes and the surplus-weighted loss are then both of order zero. The separation of Theorem~\ref{thm:LOS} is a property of full adoption. \\ \hline
-4/7 & \textit{Continues the insertion of the previous part.} & \textbf{Factor inputs.}  Under the benchmark reading each cue supplies a factor on its own attribute, $a=(a_0,a_1)$ for the credential and $b=(b_0,b_1)$ for the letter, and the belief after both cues is the prior with cell $(i,j)$ multiplied by $a_ib_j$ and renormalised. This is the reading of the factor-based variants of \citet{Hawthorne2004}, and with both factors applied in full the two sequences give the same belief for every $c$, since the same cells are multiplied by the same numbers whichever cue comes first \citep{Wagner2002}. Partial adoption has a counterpart under this reading. Let the factor read second be adopted only in part, so that sequence $AB$ applies $a$ and then $b^{\omega}=(b_0^{\omega},b_1^{\omega})$ and sequence $BA$ applies $b$ and then $a^{\omega}$, with $\omega=1$ the benchmark and $\omega=0$ the second cue ignored. \par \renewcommand{\theproposition}{FAC} \begin{proposition}[factor inputs]\label{prop:FAC} Let $a$ and $b$ be positive and $0\le\omega\le1$. Write $K_\sigma$ for the product of the four factors that sequence $\sigma$ applies and $S_\sigma$ for its normalising sum. \begin{enumerate} \item[(i)] At $\omega=1$ the two sequences give the same belief for every $c$. \item[(ii)] At $c=0$ each sequence ends at an independent belief. The $A$-marginals are $q_1$ in sequence $AB$ and $(1-\alpha)a_1^{\omega}/\bigl(\alpha a_0^{\omega}+(1-\alpha)a_1^{\omega}\bigr)$ in sequence $BA$, and they agree if and only if $a_0=a_1$ or $\omega=1$. Every marginal therefore differs between the sequences at order zero whenever the cue is informative and $\omega<1$, while a statistic protected for every pair of cues differs by $\bigO(c)$. \item[(iii)] In sequence $\sigma$ the believed association equals $c\,K_\sigma/S_\sigma^{2}$ exactly, so it is zero at $c=0$ and first order for $\omega<1$ whenever $K_{AB}/S_{AB}^{2}$ and $K_{BA}/S_{BA}^{2}$ differ at $c=0$. A statistic whose differential at every independent belief is a multiple of that of the log odds ratio differs between the sequences by $\bigO(c^{2})$ for every $\omega$, and the odds ratio is the prior's in both sequences for every $c$ and $\omega$. \end{enumerate} \end{proposition} \par \begin{proof} Applying a factor on $A$ and then one on $B$ multiplies cell $(i,j)$ by $a_ib_j$ whichever is applied first, and renormalisation divides every cell by the same sum, which gives (i). Both steps rescale rows or columns, so the odds ratio is the prior's, and the association of the rescaled table is $K_\sigma\assoc(P)=cK_\sigma$, divided by $S_\sigma^{2}$ after renormalisation. At $c=0$ the prior is $\alpha\otimes\beta$ and the rescaled table is $(\alpha_0a_0,\alpha_1a_1)\otimes(\beta_0b_0,\beta_1b_1)$ up to the normalising sum, an independent belief whose $A$-marginal is $(1-\alpha)a_1/(\alpha a_0+(1-\alpha)a_1)$ for the factor applied on $A$. With $a_i=q_i/\alpha_i$ this is $q_1$, and with $a^{\omega}$ in its place the two values agree exactly when $a_1a_0^{\omega}=a_0a_1^{\omega}$, that is when $(a_1/a_0)^{1-\omega}=1$. The claims about protected statistics follow as in Proposition~\ref{prop:LAD}, since both sequences end at independent beliefs. For the last claim, at $c=0$ the product of the four marginals is $ZK_\sigma/S_\sigma^{2}$, so the first-order factor of $\assoc/m$ is $1/Z$ in both sequences and the argument of Proposition~\ref{prop:LAD}(iii) applies. \end{proof} \\ \hline
-5/7 & \textit{Continues the insertion of the previous part.} & \small \begin{tabular}{@{}p{3.4cm}cccc@{}} \toprule & \multicolumn{2}{c}{\textbf{Credence delivered}} & \multicolumn{2}{c}{\textbf{Factor delivered}} \\ \textbf{Sequence effect on} & $\omega=1$ & $\omega<1$ & $\omega=1$ & $\omega<1$ \\ \midrule Marginals & $\Theta(c)$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\ Believed association & $\bigO(c^{2})$ & $\Theta(c)$ & $0$ & $\Theta(c)$ \\ Statistics agreeing with the log odds ratio to first order & $\bigO(c^{2})$ & $\bigO(c^{2})$ & $0$ & $\bigO(c^{2})$ \\ Odds ratio & $0$ & $0$ & $0$ & $0$ \\ Share of decisions changed & $\Theta(c)$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\ Surplus-weighted loss & $\bigO(c^{2})$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\ \bottomrule \end{tabular}  \par\textit{Table caption: The between-sequence effect of each statistic, by what a cue delivers and how fully the later cue is adopted. Entries are orders in the prior covariance $c$, generic in the prior and the cues, and $0$ means no sequence effect at any $c$. The decision rows of the partial-adoption columns read Theorem~\ref{thm:LOS} with a score gap of order zero and are not separately verified. The columns are, in turn, Sections~\ref{sec:individual} and~\ref{sec:aggregation}, Proposition~\ref{prop:LAD}, the benchmark of Section~\ref{sec:setup}, and Proposition~\ref{prop:FAC}.} \\ \hline
-6/7 & \textit{Continues the insertion of the previous part.} & \textbf{Opposite predictions about one procedure.}  Whether a procedure removes the sequence effect depends on which channel it removes. Consider rubric scoring, in which the rating on each attribute is fixed by the document on that attribute and a set scale, so that what each document delivers no longer depends on what was read first. Under full adoption the rubric removes the position channel and leaves the association channel untouched. The recorded scores carry the delivered credences in either sequence, the belief about the attribute read second agrees with its score, and the belief about the attribute read first sits at $cK$ from its score (Proposition~\ref{prop:DRF}), so the sequence effect lives in that belief and in the decision made from it, vanishes when the attributes are believed unrelated (Proposition~\ref{prop:IMM}), and is invisible in the scores and in the association between them. Under partial adoption the rubric removes the position channel from the record only. The belief about the attribute read second sits at $(1-\omega)[P^{A}(B{=}1)-r_1]$ from its score (Proposition~\ref{prop:ADJ}), which at independence equals $(1-\omega)(r_0-\beta)$, so the two reading sequences differ even when the attributes are believed unrelated. The two settings therefore predict opposite things about the same procedure, and the difference is observable. In the rubric setting $r_1$ is on the record, so Proposition~\ref{prop:ADJ} needs only the belief about trustworthiness after the credential alone and after both documents to say which prediction holds. \\ \hline
-7/7 & \textit{Continues the insertion of the previous part.} & \small \begin{tabular}{@{}p{2.2cm}p{4.6cm}p{4.6cm}@{}} \toprule & \textbf{Full adoption, $\omega=1$} (association channel only) & \textbf{Partial or no adoption, $\omega<1$} (position channel operates) \\ \midrule Where the sequence dependence arises & In the rule. The inputs $q,r$ are the same in either position; the sequence matters because two rigid steps on correlated partitions do not commute \citep{DiaconisZabell1982}. & In the inputs. What the second cue delivers depends on its position; the rule adds nothing new at $c=0$. \\ \addlinespace[3pt] Source in the model & Association only. Zero at $c=0$ (Proposition~\ref{prop:IMM}). & Position, present at $c=0$, plus association when $c\neq0$. \\ \addlinespace[3pt] Status of the inputs & Independent of the sequence. The credential delivers $q$ whether or not the letter was read. & Dependent on the sequence. The later cue is adopted only in part, so what it delivers depends on being second. \\ \addlinespace[3pt] Size of the effect & Small, first order in $c$, spread unevenly across statistics. & Blunt. $(1-\omega)(\alpha-q_0)$ on a marginal whatever $c$ is (Proposition~\ref{prop:ADJ}). \\ \addlinespace[3pt] Marginals & Last-read exact, first-read drifts at first order (Proposition~\ref{prop:DRF}). & Both differ at zeroth order between sequences. \\ \addlinespace[3pt] Believed association & Second order, between sequences and pooled (Propositions~\ref{prop:DEC} and~\ref{prop:PRO}). & Zero between sequences at $c=0$, first order in $c$. Pooled, nonzero at $c=0$, $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$. \\ \addlinespace[3pt] Odds ratio & Identical across sequences, every $c$ (Lemma~\ref{lem:SEP}). & Identical across sequences, every $c$ (Lemma~\ref{lem:SEP}). The one statistic that does not move. \\ \addlinespace[3pt] Classification by order in $c$ & Is the contribution. Which statistics are protected, and why. & Shifts by one order, each statistic keeping its place. Marginals at order zero, protected statistics at first order, the odds-ratio shadow at second, the odds ratio never (Proposition~\ref{prop:LAD}). \\ \addlinespace[3pt] Share and loss of decisions & Share first order, loss second (Proposition~\ref{prop:SHR}, Theorem~\ref{thm:LOS}). & Both of order zero; the separation is lost. \\ \addlinespace[3pt] Audit implication & False negative. An association audit passes a sequence-dependent population. & False positive as well. A pooled association audit returns a stereotype no member holds, from mixing alone. \\ \addlinespace[3pt] Identification & The reading, from which marginal ignores the prior association (Propositions~\ref{prop:ORD} and~\ref{prop:DRF}). & The weight, from three ratings (Proposition~\ref{prop:ADJ}). At its strongest here, since the position channel is what Proposition~\ref{prop:ADJ} reads. \\ \bottomrule \end{tabular}  \par\textit{Table caption: The two settings. Under full adoption only the association channel operates; under partial or no adoption the position channel operates as well, and the association channel with it when the attributes are believed related.} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Placement (2026-10-01). The author's Section 6 is already titled ``Scope and robustness'', so the section is split into two subsections. Scope keeps the assumptions paragraph and the rival mechanisms of 6.2. The second subsection states that the second-order results require full adoption of the later cue, gives the test of that condition (Proposition ADJ, three marginals of one reading group) and says what partial adoption and a factor reading change (Propositions LAD and FAC). It is not a robustness result and is not called one (author, 2026-10-01): under partial adoption the association differs between sequences at first order and the pooled association acquires a term of order zero, so the paper's second-order conclusions do not survive; what survives is the odds ratio, exact at every weight, and the form of the characterisation, with the second-order class moving to the statistics that agree with the log odds ratio to first order. The author may want to drop ``and robustness'' from the section title. The Scope heading, with a repair of ``define scope for any conclusions made from the model'' (6.1). The roadmap clause is 1.9. The parts here are the new subsection, one insertion after 6.2 shown as consecutive paragraphs so that the plan can break pages between them. What it gathers: the two-channel paragraph of 6.3 unchanged; the adoption-weight lead-in, Proposition ADJ, its example and Proposition LAD from 5.2, with ``so far'' replaced by the section references; the rubric prediction and the settings table of 6.3 unchanged. What is new: the framing paragraph, Proposition FAC and Table tab:robust. Proposition FAC is the factor-input counterpart of LAD. Its weighted factor $a^\omega$ is a construction of this paper, log-linear damping of the factor, not one of Hawthorne's variants; his variants are the $\omega=1$ column, where updates on distinct bases commute. The Lean record proves FAC for an arbitrary damped factor $a'$ and states the marginal agreement as $a_1a_0'=a_0a_1'$; the power form and its witnesses are in the sympy suite. Table tab:robust puts the four settings side by side; its decision rows for the partial-adoption columns are Theorem LOS read with an order-zero score gap and are the only entries not checked by sympy, as the caption says. Two tables now sit in the subsection; the author may drop tab:settings if tab:robust carries enough. Order of application: after 5.2 (ORD) and 6.2; before 1.3, 1.4 and 2.1, which cite LAD or sec:robust; B.1 after it.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Ladder.lean: \texttt{rescale\_rescale}, \texttt{rescale\_rescale\_eq}, \texttt{assoc\_normalize}, \texttt{oddsRatio\_normalize}, \texttt{oddsRatio\_factorRoute}, \texttt{assoc\_factorRoute}, \texttt{factorRoute\_at\_zero}, \texttt{factorRoute\_mA1\_zero}, \texttt{factor\_mA1\_gap\_iff}, \texttt{mprod\_factorRoute\_zero}, \texttt{oddsShadow\_factor\_coeff} (FAC); \texttt{ladder\_gap}, \texttt{ladder\_assoc\_coeff}, \texttt{ladder\_oddsShadow\_seqEffect} (LAD); Anchoring.lean (ADJ). sympy/verify\_ladder.py (53/53, section F for the factor routes, including that the full-adoption factor table is the manuscript's benchmark); sympy/verify\_interior\_omega.py rows 5 and 6. Hawthorne.lean (\texttt{factorUpdate\_comm}, \texttt{extUpdate\_basisCommuting}); Wagner2002.lean (thm31); HogarthEinhorn.lean (\texttt{oneSided\_eq\_eq8}).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{Anchoring.lean, dampedB\_deviation, routeDamped\_mA1\_deviation} \newline For any $Q$ with $Q(B{=}1)\neq0$:
-$(\mathrm{dampedB}\,Q\,r_0\,\delta)(B{=}1)-(1-r_0)=(1-\delta)\bigl[Q(B{=}1)-(1-r_0)\bigr]$.
-For $Q_1=\mathrm{jeffreyA}(\mathrm{prior}(\alpha,\beta,c),q_0)$ with $Q_1(B{=}0)\neq0$,
-$Q_1(B{=}1)\neq0$, $Q_1(B{=}0)+Q_1(B{=}1)=1$ and $\mathrm{prior}(A{=}1)\neq0$:
-$P^{\delta}_{AB}(A{=}1)-(1-q_0)=\delta\bigl[\PJ_{AB}(A{=}1)-(1-q_0)\bigr]$.
-Identities in $c$; $\delta$ is the code's name for $\omega$. \newline \textit{The first two lines of Proposition ADJ, exact in $c$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, orderEffect\_damped\_mA1, orderEffect\_damped\_at\_indep} \newline Under the hypotheses above and $Q_B(A{=}1)\neq0$, where
-$Q_B=\mathrm{jeffreyB}(\mathrm{prior},r_0)$ is the belief after the $B$-cue alone (not the benchmark $\PB$):
-\[
-P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)
- =\delta\bigl[\PJ_{AB}(A{=}1)-(1-q_0)\bigr]+(1-\delta)\bigl[(1-q_0)-Q_B(A{=}1)\bigr].
-\]
-At $c=0$, for $\alpha,1-\alpha,\beta,1-\beta\neq0$:
-$P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)=(1-\delta)(\alpha-q_0)$. \newline \textit{The third line of ADJ and its value at independence.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, dampedB\_at\_one, dampedB\_at\_zero, routeDamped\_at\_zero\_pins\_A; sympy/check\_zero\_slope\_identification.py, case 3} \newline $Q(B{=}1)\neq0\Rightarrow(\mathrm{dampedB}\,Q\,r_0\,1)(B{=}1)=1-r_0$.
-$Q(B{=}0)\neq0$, $Q(B{=}1)\neq0$, $Q(B{=}0)+Q(B{=}1)=1\Rightarrow\mathrm{dampedB}\,Q\,r_0\,0=Q$.
-Hence, with those hypotheses on $\mathrm{jeffreyA}(\mathrm{prior},q_0)$ and
-$\mathrm{prior}(A{=}1)\neq0$: $P^{0}_{AB}(A{=}1)=1-q_0$ for every $c$. Case 3 of the
-script: the last-read $c$-slope carries the factor $(1-\delta)$ with a $\delta$-free
-quotient, and the first-read slope vanishes only at $\delta=0$. \newline \textit{The ``exactly when'' at the endpoints $\omega=1$ and $\omega=0$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/check\_zero\_slope\_identification.py, case 7 (25/25); sympy/verify\_example.py} \newline $\delta=\dfrac{P^{A}(B{=}1)-P^{\delta}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}$ holds
-identically in $c$ (7a); the denominator equals $r_0-\beta$ at $c=0$ and is nonzero
-at the generic point (7b). With the numbers of Section 2 and $\omega=\tfrac12$:
-$P^{A}(B{=}1)=14/25=.56$, $P^{1/2}_{AB}(B{=}1)=43/100$, $r_1=3/10$, and
-$(.56-.43)/(.56-.30)=\tfrac12$. \newline \textit{The recovery formula and the closing example sentence.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hogarth and Einhorn 1992, T-p.7 (transcription), Eqs. 3-4} \newline ``In this case Eq. (1) can be written
-$S_k = S_{k-1} + w_k[\,s(x_k) - S_{k-1}\,]$, (3) which, after rearranging terms,
-leads to the averaging form $S_k = (1 - w_k)S_{k-1} + w_k\,s(x_k)$. (4)'' \newline \textit{Eq. 4 is the estimation-mode ($R=S_{k-1}$) form; the source is a LaTeX transcription and pages are its own.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Hogarth and Einhorn 1992, T-p.12 (transcription), Eq. 8} \newline ``Thus, to illustrate by denoting the first piece of evidence as the anchor,
-Eq. (5) can be rewritten as $S_k = s(x_1) + w_k[\,s(x_2, \ldots, x_k) - R\,]$, (8)
-where for a wide range of functions $s(x_2, \ldots, x_k)$, it follows that the
-effective weight accorded to $s(x_1)$ must be greater than the weight attached to
-any of the other pieces of evidence.'' \newline \textit{Their End-of-Sequence form with the first item as anchor.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{HogarthEinhorn.lean, oneSided\_eq\_eq8, eos2\_est\_orderEffect} \newline For all $w$, $S_0$, $a$, $b$:
-$\mathrm{oneSided}(w,S_0,a,b):=\mathrm{estStep}_w(\mathrm{estStep}_1(S_0,a),b)
- =(1-w)\,a+w\,b=a+w[\,b-a\,]=\mathrm{eq8}(w,R{=}a,s_1{=}a;\,b)$,
-Eq. 8 with $k=2$ and $R=s(x_1)$, where $\mathrm{estStep}_w(S,s)=(1-w)S+ws$ is Eq. 4.
-The two-item sequence effect is $(2w-1)(b-a)$. \newline \textit{The one-sided rule is their Eq. 8 for two items with a constant weight; what is new is the two-attribute Jeffrey embedding.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Epstein.lean, compromise\_eq\_damped, omegaEff\_eq} \newline For $\mathrm{marg}_1p(s_1)\neq0$, $\sum p=1$ and $\alpha(s_1)\ge0$, the
-conditional of Epstein's compromise prior (12) is
-$(1-\omega)\,p_2(s_2)+\omega\,p(s_2\mid s_1)$ with
-$\omega=1-\dfrac{\alpha(s_1)\lambda(s_1)}{1+\alpha(s_1)}
- =\dfrac{1+\alpha(s_1)\bigl(1-\lambda(s_1)\bigr)}{1+\alpha(s_1)}$. \newline \textit{A published axiomatic model whose choice posterior is the damped target, with the Bayesian conditional as delivered credence.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_interior\_omega.py, row 1 (23/23)} \newline At $c=0$, symbolic in $\alpha,\beta,q_0,r_0,\delta$:
-$P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)=(1-\delta)(\alpha-q_0)$ and
-$P^{\delta}_{AB}(B{=}1)-P^{\delta}_{BA}(B{=}1)=-(1-\delta)(\beta-r_0)$. \newline \textit{The position channel on both marginals at independence; $\delta$ is the script's name for $\omega$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_interior\_omega.py, rows 2-3} \newline Row 2: each damped step multiplies the table it meets by a column (row) factor,
-so both routes are separable reweightings of the prior; their odds ratios equal the
-prior's at the generic point with $\delta=\tfrac13$, $c=\tfrac1{40}$. Row 3: the
-between-sequence effect on $\assoc$ is $0$ at $c=0$ for every $\delta$; its $c^1$
-coefficient is $(1-\delta)\,G$ with $G$ affine in $\delta$ and nonzero at the generic
-prior for $\delta=\tfrac12$ and $\delta=0$; at $\delta=1$ the effect is second order. \newline \textit{Odds ratio identical across sequences; association zero between sequences at $c=0$ and first order in $c$.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_interior\_omega.py, row 4} \newline At $c=0$ and interior $\lambda$, the mean belief
-$\lambda P^{\delta}_{AB}+(1-\lambda)P^{\delta}_{BA}$ differs from $\PB$ by
-$(1-\lambda)(1-\delta)(q_0-\alpha)$ on the $A$-marginal and by
-$-\lambda(1-\lambda)(1-\delta)^2(\alpha-q_0)(\beta-r_0)$ on $\assoc$; nonzero at the
-generic point for $\lambda=\tfrac25$, $\delta=\tfrac12$, and zero at $\delta=1$. \newline \textit{The pooled cross-product association that no member holds.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_interior\_omega.py, rows 5-6} \newline Scale the second cue's Bayes factor by $\delta$:
-$W_{ij}=P_{ij}\,\ell^A_i\,(\ell^B_j)^{\delta}$ when $A$ is read first and
-$W_{ij}=P_{ij}\,(\ell^A_i)^{\delta}\,\ell^B_j$ when $B$ is, then normalise. At $c=0$
-the $A$-marginals differ between sequences (generic prior, $\delta=\tfrac12$) and
-agree at $\delta=1$. At $\delta=0$ both readings equal the single Jeffrey step on the
-first cue, for every $c$. \newline \textit{The position channel is not a feature of updating on delivered credences.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, orderEffect\_damped\_at\_indep} \newline For $\alpha\neq0$, $1-\alpha\neq0$, $\beta\neq0$, $1-\beta\neq0$:
-$P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)\big|_{c=0}=(1-\delta)(\alpha-q_0)$; the
-amnestic term vanishes there by Proposition IMM. \newline \textit{Row 1's first identity, machine-checked.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Wagner 2002, preprint p. 4, Theorem 3.1} \newline ``Theorem 3.1. Given the probability revision schema (3.1), if the Bayes factor
-identities (3.2) $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$, for all
-$i_1,i_2$, and (3.3) $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$, for
-all $j_1,j_2$, hold, then $r'=r$.'' Same page: ``where the sequence $(r'(E_i))$ may
-differ from $(q(E_i))$, and the sequence $(q'(F_j))$ from $(r(F_j))$''. \newline \textit{Commutation requires each cue's Bayes factor to be the same in either position; read on the rendered page, since the text layer drops the primes.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, thm31} \newline For $p$ a probability, $q$ from $p$ by kinematics on $E$, $r$ from $q$ on $F$,
-$q'$ from $p$ on $F$, $r'$ from $q'$ on $E$, and
-$\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$,
-$\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$ for all indices:
-$r'=r$. \newline \textit{Field's theorem as Wagner states it, finite partitions.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{BenjaminBodohCreedRabin.lean, example\_marginal\_gap, margOddsA\_orders\_ne} \newline Uniform prior on $\{0,1\}^2$, $\alpha=\tfrac12$, likelihood vectors
-$a=b=(49/50,\,1/50)$: the believed $P(A{=}0)$ is $7/8$ when $A$ is read first and
-$49/50$ when read last (the Bayes value is $49/50$). In general, at independence with
-$\alpha\neq1$ and $a_0\neq a_1$, the $A$-marginal odds differ between the two
-sequences. \newline \textit{A published rule with likelihood inputs and posterior-becomes-prior dynamics shows the position channel at independence.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Aggregate.lean, PJab\_mB1, PJba\_mA1, propDRF\_route\_AB, propDRF\_route\_BA; PropIMM.lean, propIMM\_indep} \newline With the first-step marginal nonzero: $\PJ_{AB}(B{=}1)=1-r_0$ and
-$\PJ_{BA}(A{=}1)=1-q_0$ for every $c$ (last-read exact). For
-$\alpha,1-\alpha,\beta,1-\beta\neq0$:
-$\frac{d}{dc}\bigl[\PJ_{AB}(A{=}1)-\PB(A{=}1)\bigr]_{0}=0$ and, with $Z\neq0$,
-$\frac{d}{dc}\bigl[\PJ_{BA}(A{=}1)-\PB(A{=}1)\bigr]_{0}=K$, $K=q_0(1-q_0)(r_0-\beta)/Z$;
-hence $\PJ_{AB}(A{=}1)-(1-q_0)=-cK+\bigO(c^2)$, the first-read marginal at $cK$ from
-its delivered credence. At $c=0$: $\PJ_{AB}=\PJ_{BA}=\PB$. \newline \textit{The rubric prediction under full adoption: the sequence effect lives in the first-read belief and vanishes at independence.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{A\quad Appendix, Deferred proofs}} \\ \hline\hline
 \entryhead{A.1}{Appendix, proof of Theorem LOS, the two Tao citations\quad{\footnotesize\textit{(formerly C.14)}}}
@@ -1222,43 +674,43 @@ W.A & Input/output tables & Withdrawn by the author 2026-09-21; kept in notes/em
 
 \section*{Old and new entry numbers}
 {\small
-\begin{longtable}{|p{2.2cm}|p{2.2cm}|p{12cm}|}
+\begin{longtable}{|p{2.2cm}|p{2.2cm}|p{9cm}|p{4cm}|}
 \hline
-\textbf{Former} & \textbf{Now} & \textbf{Section} \\ \hline\endhead
-C.1 & 0.1 & Abstract \\ \hline
-C.2 & 1.1 & Introduction \\ \hline
-C.3 & 1.2 & Introduction \\ \hline
-C.4 & 1.3 & Introduction \\ \hline
-C.5 & 1.4 & Introduction \\ \hline
-C.6 & 1.6 & Introduction \\ \hline
-C.7 & 1.7 & Introduction \\ \hline
-C.8 & 1.8 & Introduction \\ \hline
-C.9 & 2.1 & Setup \\ \hline
-C.9w & 2.3 & Setup \\ \hline
-C.10 & 2.4 & Setup \\ \hline
-C.11 & 3.2 & Related literature \\ \hline
-C.11b & 3.4 & Related literature \\ \hline
-C.13 & 4.2 & Sequence effects at the individual level \\ \hline
-C.14 & A.1 & Appendix, Deferred proofs \\ \hline
-E.1 & 1.5 & Introduction \\ \hline
-E.2 & 2.2 & Setup \\ \hline
-E.3 & 2.5 & Setup \\ \hline
-E.4 & 2.6 & Setup \\ \hline
-E.5 & 3.1 & Related literature \\ \hline
-E.6 & 3.3 & Related literature \\ \hline
-E.7 & 3.5 & Related literature \\ \hline
-E.8 & 4.1 & Sequence effects at the individual level \\ \hline
-E.9 & 5.1 & Aggregated Effects of Cue-Sequence \\ \hline
-E.10 & 5.2 & Aggregated Effects of Cue-Sequence \\ \hline
-E.11 & 6.2 & Scope and robustness \\ \hline
-E.13 & B.1 & Back matter and bibliography \\ \hline
-E.14 & B.2 & Back matter and bibliography \\ \hline
-E.15 & 6.3 & Scope and robustness \\ \hline
-E.15h & 6.1 & Scope and robustness \\ \hline
-E.15r & 1.9 & Introduction \\ \hline
-C.12 & B.2 & folded in \\ \hline
-C.15 & 3.4 & folded in \\ \hline
-E.12 & 6.3 & folded in \\ \hline
+\textbf{Former} & \textbf{Now} & \textbf{Section} & \textbf{Status} \\ \hline\endhead
+C.1 & 0.1 & Abstract & pending \\ \hline
+C.2 & 1.1 & Introduction & pending \\ \hline
+C.3 & 1.2 & Introduction & pending \\ \hline
+C.4 & 1.3 & Introduction & pending \\ \hline
+C.5 & 1.4 & Introduction & pending \\ \hline
+C.6 & 1.6 & Introduction & pending \\ \hline
+C.7 & 1.7 & Introduction & pending \\ \hline
+C.8 & 1.8 & Introduction & pending \\ \hline
+C.9 & 2.1 & Setup & applied at db3a2f41 \\ \hline
+C.9w & 2.3 & Setup & applied at db3a2f41 \\ \hline
+C.10 & 2.4 & Setup & applied at db3a2f41 \\ \hline
+C.11 & 3.2 & Related literature & pending \\ \hline
+C.11b & 3.4 & Related literature & applied at db3a2f41 \\ \hline
+C.13 & 4.2 & Which statistics register the sequence & pending \\ \hline
+C.14 & A.1 & Appendix, Deferred proofs & pending \\ \hline
+E.1 & 1.5 & Introduction & pending \\ \hline
+E.2 & 2.2 & Setup & applied at db3a2f41 \\ \hline
+E.3 & 2.5 & Setup & applied at db3a2f41 \\ \hline
+E.4 & 2.6 & Setup & pending \\ \hline
+E.5 & 3.1 & Related literature & applied at db3a2f41 \\ \hline
+E.6 & 3.3 & Related literature & pending \\ \hline
+E.7 & 3.5 & Related literature & pending \\ \hline
+E.8 & 4.1 & Which statistics register the sequence & applied at db3a2f41 \\ \hline
+E.9 & 5.1 & Averaging over sequences does not change the classification & applied at db3a2f41 \\ \hline
+E.10 & 5.2 & Averaging over sequences does not change the classification & applied at db3a2f41 \\ \hline
+E.11 & 6.2 & Scope and robustness & applied at db3a2f41 \\ \hline
+E.13 & B.1 & Back matter and bibliography & pending \\ \hline
+E.14 & B.2 & Back matter and bibliography & pending \\ \hline
+E.15 & 6.3 & Scope and robustness & applied at db3a2f41 \\ \hline
+E.15h & 6.1 & Scope and robustness & applied at db3a2f41 \\ \hline
+E.15r & 1.9 & Introduction & pending \\ \hline
+C.12 & B.2 & folded in & \\ \hline
+C.15 & 3.4 & folded in & \\ \hline
+E.12 & 6.3 & folded in & \\ \hline
 \end{longtable}
 }
 

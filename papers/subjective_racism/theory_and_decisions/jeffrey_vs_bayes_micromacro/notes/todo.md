@@ -6,15 +6,20 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 
 ## 1. Author decisions, first priority
 
-- [~] **Approve the plan's entries, 0.1 to B.2, entry by entry.** Entries are numbered by
-  the manuscript section they change (0 abstract, 1 to 7 sections, A appendix, B back matter
-  and bibliography) and listed in manuscript order; the plan ends with a table of former
-  numbers (renumbered 2026-10-01). Approved entries are applied to `PAPER_B_MANUSCRIPT.tex`,
-  compiled and committed. Order constraints, where they differ from manuscript order:
-  - B.2 (bibliography) before every entry that cites a new reference.
-  - 5.2 (Proposition ORD) and 6.3 (Propositions ADJ, LAD, FAC) before 1.3, 1.4, 2.3 and 1.9,
-    which cite them.
-  - 6.2 before 6.3, which inserts after it. B.1 last.
+- [x] **Applied at db3a2f41 (2026-10-02):** 2.1, 2.2, 2.3, 2.4, 2.5, 3.1, 3.4, 4.1, 5.1, 5.2,
+  6.1, 6.2, 6.3, with the five bibliography entries they cite (Bohren2019, Doring1999,
+  Garber1980, Heckman1998, Jeffrey2004). The manuscript builds with no undefined references
+  or citations; its two overfull boxes (title block, summary table) predate the change.
+- [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2, 3.3, 3.5, 4.2,
+  A.1, B.1, B.2. The plan lists applied and pending entries above its table and keeps the
+  numbering fixed. Among the pending, B.2 is now reduced to Benjamin et al. 2019 for 1.3's
+  optional sentence, since the other five entries are in the .bib; B.1 goes last.
+- [ ] **Follow-ups on applied 3.1 (flagged 2026-10-01, applied as approved):** its second
+  paragraph repeats the intro's Hawthorne point and replies with the old defence (measure the
+  degree of adoption) rather than the scope defence of 1.4 and Section 6; its third
+  paragraph's first-order against second-order sentence needs "under full adoption".
+- [ ] **Follow-up on applied 3.4:** the appended identification paragraph still carries "which
+  no sample size repairs" (true for the odds ratio only; see the identification item below).
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.

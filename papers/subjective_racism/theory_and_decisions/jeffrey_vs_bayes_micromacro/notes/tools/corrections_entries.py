@@ -37,6 +37,12 @@ def block(s):
 
 E = []  # (id, title, [(start, end, after)], purpose, verification)
 
+# Entries already applied to the manuscript, by former id, with the commit that applied them.
+# Their BEFORE anchors no longer exist in the manuscript, so the anchor checks skip them and
+# the plan lists them above its table instead of in it.
+APPLIED = {k: "db3a2f41" for k in ("C.9", "E.2", "C.9w", "C.10", "E.3", "E.5", "C.11b",
+                                   "E.8", "E.9", "E.10", "E.15h", "E.11", "E.15")}
+
 E.append(("C.1", "Abstract, sentences 1, 2-4 and 6 (rebased on the author's draft c2ae782f)", [
     ("The effect of the order in which evidence arrives on an individual judgment", "in both experimental and theoretical studies.",
      r"""The effect of the sequence in which evidence arrives on an individual judgment has
@@ -486,6 +492,9 @@ existing plan entries 0.A-6.B.
 from plan_entries_E import E2
 for eid, title, pairs, purpose, verif in E + E2:
     out.append(f"### {eid} -- {title}\n")
+    if eid in APPLIED:
+        out.append(f"Applied to the manuscript at {APPLIED[eid]}.\n")
+        continue
     out.append(f"**Why.** {purpose}\n")
     for k, part in enumerate(pairs, 1):
         kind, s, e, after = norm_part(part)
@@ -614,6 +623,8 @@ def discipline_check(entries=None):
         return " ".join(t.split())
     bad = []
     for eid, _, parts, _, _ in entries:
+        if eid in APPLIED:
+            continue
         for k, part in enumerate(parts, 1):
             kind, st, en, after = norm_part(part)
             tag = f"{eid}.{k}"

@@ -157,19 +157,38 @@ _ADJ = ("Anchoring.lean", "sympy/check\\_zero", "Hogarth and Einhorn", "HogarthE
 _move("E.10", "E.15", lambda it: it["source"].startswith(_ADJ))
 _move("E.12", "E.15", lambda it: True)
 
+# Entry numbers are frozen here so that applying entries never renumbers the rest.
+NUMBERS = {
+    "C.1": "0.1", "C.2": "1.1", "C.3": "1.2", "C.4": "1.3", "C.5": "1.4", "E.1": "1.5",
+    "C.6": "1.6", "C.7": "1.7", "C.8": "1.8", "E.15r": "1.9",
+    "C.9": "2.1", "E.2": "2.2", "C.9w": "2.3", "C.10": "2.4", "E.3": "2.5", "E.4": "2.6",
+    "E.5": "3.1", "C.11": "3.2", "E.6": "3.3", "C.11b": "3.4", "E.7": "3.5",
+    "E.8": "4.1", "C.13": "4.2", "E.9": "5.1", "E.10": "5.2",
+    "E.15h": "6.1", "E.11": "6.2", "E.15": "6.3",
+    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2",
+}
 ALL = list(C.E) + list(E2)
+assert set(e[0] for e in ALL) == set(NUMBERS), set(e[0] for e in ALL) ^ set(NUMBERS)
+APPLIED = C.APPLIED
 placed = []
 for seq, ent in enumerate(ALL):
+    if ent[0] in APPLIED:
+        continue
     pos = min(landing(p) for p in ent[2]) if ent[2] else len(RAW) + seq
     placed.append((pos, seq, ent))
 placed.sort(key=lambda t: (t[0], t[1]))
-
-NEW, _count = {}, {}
-for pos, seq, ent in placed:
-    lab = sec_of(pos) if ent[2] else "B"
-    _count[lab] = _count.get(lab, 0) + 1
-    NEW[ent[0]] = f"{lab}.{_count[lab]}"
+NEW = dict(NUMBERS)
 ALIAS = {"C.12": NEW["E.14"], "E.12": NEW["E.15"], "C.15": NEW["C.11b"]}
+
+
+def _numkey(n):
+    a, b = n.split(".")
+    return ({"0": 0, "A": 8, "B": 9}.get(a, int(a) if a.isdigit() else 7), int(b))
+
+
+APPLIED_NUMS = sorted((NEW[k] for k in APPLIED), key=_numkey)
+PENDING_NUMS = sorted((NEW[k] for k in NEW if k not in APPLIED), key=_numkey)
+APPLIED_COMMITS = sorted(set(APPLIED.values()))
 
 
 def renum(t):
@@ -219,9 +238,10 @@ def _key(k):
 
 
 MAP_ROWS = "\n".join(
-    f"{eid} & {NEW[eid]} & {prose(SEC_NAME.get(NEW[eid].split('.')[0], ''))} \\\\ \\hline"
+    f"{eid} & {NEW[eid]} & {prose(SEC_NAME.get(NEW[eid].split('.')[0], ''))} & "
+    f"{('applied at ' + APPLIED[eid]) if eid in APPLIED else 'pending'} \\\\ \\hline"
     for eid in sorted(NEW, key=_key))
-MAP_ROWS += "\n" + "\n".join(f"{a} & {b} & folded in \\\\ \\hline" for a, b in sorted(ALIAS.items()))
+MAP_ROWS += "\n" + "\n".join(f"{a} & {b} & folded in & \\\\ \\hline" for a, b in sorted(ALIAS.items()))
 
 D = [
     ("0.A", "Abstract", "Superseded by the author's rewrite and C.1."),
@@ -278,7 +298,7 @@ tex = r"""%% manuscript_corrections.tex -- master plan of corrections to PAPER_B
 \setlength{\parindent}{0pt}
 \title{Paper B: corrections to the manuscript (master plan)}
 \author{}
-\date{Against the author's draft committed at d48dd872, 1 October 2026}
+\date{Against the manuscript at """ + APPLIED_COMMITS[-1] + r""", 2 October 2026}
 \begin{document}
 \maketitle
 \vspace{-1.5em}
@@ -300,6 +320,11 @@ text would appear. \textbf{0} is the abstract, \textbf{1} to \textbf{7} are the 
 \textbf{A} is the appendix and \textbf{B} is the back matter with the bibliography. Each entry also
 shows its former number, which earlier notes and commits use, and the table at the end maps old
 numbers to new. """ + ORDER_NOTE + r"""
+
+\paragraph*{Applied to the manuscript} at """ + ", ".join(APPLIED_COMMITS) + r""": """ + ", ".join(APPLIED_NUMS) + r""".
+These entries appear in the table of numbers at the end and no longer in the table of changes.
+
+\paragraph*{Pending} (""" + str(len(PENDING_NUMS)) + r""" entries, in manuscript order): """ + ", ".join(PENDING_NUMS) + r""".
 
 {\small
 \begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
@@ -329,9 +354,9 @@ so """ + CHAPTER_USERS + r""" cite the chapter only.
 
 \section*{Old and new entry numbers}
 {\small
-\begin{longtable}{|p{2.2cm}|p{2.2cm}|p{12cm}|}
+\begin{longtable}{|p{2.2cm}|p{2.2cm}|p{9cm}|p{4cm}|}
 \hline
-\textbf{Former} & \textbf{Now} & \textbf{Section} \\ \hline\endhead
+\textbf{Former} & \textbf{Now} & \textbf{Section} & \textbf{Status} \\ \hline\endhead
 """ + MAP_ROWS + r"""
 \end{longtable}
 }
