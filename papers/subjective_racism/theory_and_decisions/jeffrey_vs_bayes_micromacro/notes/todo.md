@@ -15,22 +15,12 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   Epstein/Ortoleva/Cripps and Pettigrew-Weisberg sentences corrected) and the new 5.3, the
   pooling sentence in Section 5 (`sympy/verify_pooling.py`, 10/10).
 - [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2 parts 1 and 2, 3.3,
-  3.5, 4.2, A.1, B.1, B.2.
-- [~] **6.4 (added 2026-10-02):** compacts Section 6.2. Proposition FAC and its proof go (its
-  point stays in the two-channel paragraph, with the verified orders), the four-settings table
-  loses its factor columns, the rubric paragraph becomes one sentence, the ten-row settings
-  table goes. The Lean and sympy records for FAC stay in the repository.
-- [~] **7.1 (added 2026-10-02):** closing paragraph of the conclusion returning to the Section 3
-  debate; the results locate the sequence dependence rather than answer the objection to it.
-  Pending the author's approval of the two framing sentences around the approved one. The plan lists applied and pending entries above its table and keeps the
-  numbering fixed. Among the pending, B.2 is now reduced to Benjamin et al. 2019 for 1.3's
-  optional sentence, since the other five entries are in the .bib; B.1 goes last.
-- [ ] **Follow-ups on applied 3.1 (flagged 2026-10-01, applied as approved):** its second
-  paragraph repeats the intro's Hawthorne point and replies with the old defence (measure the
-  degree of adoption) rather than the scope defence of 1.4 and Section 6; its third
-  paragraph's first-order against second-order sentence needs "under full adoption".
-- [ ] **Follow-up on applied 3.4:** the appended identification paragraph still carries "which
-  no sample size repairs" (true for the odds ratio only; see the identification item below).
+  3.5, 4.2, A.1, B.1, B.2. The intro's two-channel paragraph still says "with full-adoption"
+  (hyphenated) and the one-sentence rubric remnant in 6.2 uses a term the paper never defines.
+- [x] **Applied at 6cdf15f3 (2026-10-02):** 6.4 (Section 6.2 compacted: Proposition FAC, the
+  ten-row settings table and the rubric paragraph go; the four-settings table keeps its credence
+  columns) and 7.1 (closing paragraph of the conclusion on the Section 3 debate). The manuscript
+  is 26 pages, no undefined references or citations. The Lean and sympy records for FAC stay.
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.

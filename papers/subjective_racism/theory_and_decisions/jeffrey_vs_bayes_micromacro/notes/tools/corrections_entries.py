@@ -17,6 +17,8 @@ NORM = re.sub(r"\s+", " ", MS)
 APPLIED = {k: "db3a2f41" for k in ("C.9", "E.2", "C.9w", "C.10", "E.3", "E.5", "C.11b",
                                    "E.8", "E.9", "E.10", "E.15h", "E.11", "E.15")}
 APPLIED["C.16"] = "6775f822"
+APPLIED["C.18"] = "6cdf15f3"
+APPLIED["C.17"] = "6cdf15f3"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
