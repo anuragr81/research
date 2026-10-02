@@ -476,6 +476,34 @@ second order.""")],
     "sympy/verify_pooling.py (10/10, at lambda = 1/2 and 2/5 on the generic prior); "
     "PropIMM.lean for the coincidence at c = 0."))
 
+E.append(("C.17", "Concluding remarks, closing paragraph on the debate of Section 3 (new)", [
+    ("insert_para", "instruments of different asymptotic order rather than disagreeing about the same quantity.",
+     "instruments of different asymptotic order rather than disagreeing about the same quantity.",
+     r"""Section~\ref{sec:literature} framed the debate over Jeffrey conditioning as whether its
+sequence dependence is a problem. The results do not answer that objection so much as
+locate it, in the levels rather than in the believed link between the traits, and in
+the number of decisions changed rather than in their cost. The normative question is
+left where \citet{Doring1999} and \citet{Hawthorne2004} leave it. What the paper
+settles is where the dependence sits and what it costs, and both are properties of
+full adoption, since under partial adoption the believed link moves at first order as
+well (Proposition~\ref{prop:LAD}).""")],
+    "Section 3 now opens by saying the debate is whether the sequence dependence is a problem "
+    "and that the paper addresses that question; the conclusion never returns to it, all three "
+    "of its implications being about audits. This paragraph closes that loop (author, "
+    "2026-10-02, the second sentence approved as written). It claims only location, not "
+    "justification: the two sequences disagree at first order in the marginals and the "
+    "decisions made from them, at second order in the believed association (Propositions DRF, "
+    "SHR, DEC, ORD) and never in the odds ratio (Lemma SEP); the surplus-weighted loss is second "
+    "order while the share of decisions changed is first order (Theorem LOS, Proposition SHR). "
+    "Doring's objection is normative and Hawthorne's psychological, and neither is answered by "
+    "what an auditor can or cannot see, so the paragraph says the normative question is left "
+    "where they leave it. The last sentence restates the scope defence of the introduction, "
+    "which a closing paragraph may do (rule 5): under partial adoption the association differs "
+    "at first order (Proposition LAD). Goes last in the conclusion.",
+    "PropDRF, PropSHR, PropDEC, PropORD.lean; LemmaSEP.lean; Decision.lean (LOS); Ladder.lean "
+    "(`ladder_assoc_coeff`); sympy/verify_tables.py; sympy/verify_ladder.py (53/53); "
+    "Doring.lean; Hawthorne.lean (amnestic_thesis; pp. 115-116)."))
+
 E.append(("C.13", "Section 4, the Foster-Greer-Thorbecke sentence", [(
     "This is the standard incidence-versus-intensity pairing of the measurement literature",
     "\\citep{FosterGreerThorbecke1984}.",

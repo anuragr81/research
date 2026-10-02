@@ -15,7 +15,10 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   Epstein/Ortoleva/Cripps and Pettigrew-Weisberg sentences corrected) and the new 5.3, the
   pooling sentence in Section 5 (`sympy/verify_pooling.py`, 10/10).
 - [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2 parts 1 and 2, 3.3,
-  3.5, 4.2, A.1, B.1, B.2. The plan lists applied and pending entries above its table and keeps the
+  3.5, 4.2, A.1, B.1, B.2.
+- [~] **7.1 (added 2026-10-02):** closing paragraph of the conclusion returning to the Section 3
+  debate; the results locate the sequence dependence rather than answer the objection to it.
+  Pending the author's approval of the two framing sentences around the approved one. The plan lists applied and pending entries above its table and keeps the
   numbering fixed. Among the pending, B.2 is now reduced to Benjamin et al. 2019 for 1.3's
   optional sentence, since the other five entries are in the .bib; B.1 goes last.
 - [ ] **Follow-ups on applied 3.1 (flagged 2026-10-01, applied as approved):** its second
