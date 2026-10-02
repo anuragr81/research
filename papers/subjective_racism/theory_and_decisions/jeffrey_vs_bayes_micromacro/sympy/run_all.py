@@ -29,6 +29,7 @@ SCRIPTS = [
     ("verify_interior_omega", "Interior weight -- orders in c away from full adoption"),
     ("verify_soft_vs_hard", "Soft vs hard cues -- implied factor depends on the marginal met"),
     ("verify_ladder", "Ladder          -- orders in c under partial adoption, odds-ratio shadow"),
+    ("verify_pooling", "Pooling rule    -- linear and geometric pools differ at second order"),
 ]
 
 

@@ -99,6 +99,8 @@ def landing(part):
     kind, s, e, after = C.norm_part(part)
     m = _rx(s).search(RAW)
     assert m, s[:60]
+    if kind == "insert_sentence":
+        return m.start()
     if kind in ("insert_para", "insert_cont"):
         end = _rx(e).search(RAW, m.start())
         brk = re.compile(r"\n[ \t]*\n").search(RAW, end.end())
@@ -165,7 +167,7 @@ NUMBERS = {
     "E.5": "3.1", "C.11": "3.2", "E.6": "3.3", "C.11b": "3.4", "E.7": "3.5",
     "E.8": "4.1", "C.13": "4.2", "E.9": "5.1", "E.10": "5.2",
     "E.15h": "6.1", "E.11": "6.2", "E.15": "6.3",
-    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2",
+    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3",
 }
 ALL = list(C.E) + list(E2)
 assert set(e[0] for e in ALL) == set(NUMBERS), set(e[0] for e in ALL) ^ set(NUMBERS)
@@ -174,7 +176,8 @@ placed = []
 for seq, ent in enumerate(ALL):
     if ent[0] in APPLIED:
         continue
-    pos = min(landing(p) for p in ent[2]) if ent[2] else len(RAW) + seq
+    live = [p for k, p in enumerate(ent[2], 1) if (ent[0], k) not in C.APPLIED_PARTS]
+    pos = min(landing(p) for p in live) if live else len(RAW) + seq
     placed.append((pos, seq, ent))
 placed.sort(key=lambda t: (t[0], t[1]))
 NEW = dict(NUMBERS)
@@ -189,6 +192,11 @@ def _numkey(n):
 APPLIED_NUMS = sorted((NEW[k] for k in APPLIED), key=_numkey)
 PENDING_NUMS = sorted((NEW[k] for k in NEW if k not in APPLIED), key=_numkey)
 APPLIED_COMMITS = sorted(set(APPLIED.values()))
+_pp = {}
+for (eid, k), cm in C.APPLIED_PARTS.items():
+    _pp.setdefault(eid, []).append(k)
+APPLIED_PARTS_NOTE = "".join(f"; {NEW[e]} parts {', '.join(str(k) for k in sorted(ks))} at {C.APPLIED_PARTS[(e, ks[0])]}" for e, ks in sorted(_pp.items()))
+APPLIED_COMMITS = sorted(set(APPLIED.values()) | set(C.APPLIED_PARTS.values()))
 
 
 def renum(t):
@@ -207,12 +215,16 @@ def rows_for(placed):
         rows.append(f"\\entryhead{{{NEW[eid]}}}{{{prose(renum(title))}\\quad{{\\footnotesize\\textit{{(formerly {eid})}}}}}}")
         for k, part in enumerate(pairs, 1):
             kind, s, e, after = C.norm_part(part)
-            before = C.cut(s, e, eid)
-            n = f"{k}/{len(pairs)}" if len(pairs) > 1 else ""
+            before = C.cut(s, e, eid, k)
+            n = f"{k}/{len(pairs)}"
+            if (eid, k) in C.APPLIED_PARTS:
+                n += " \\par{\\footnotesize\\textit{applied at " + C.APPLIED_PARTS[(eid, k)] + "}}" if len(pairs) > 1 else ""
             if kind == "insert_para":
                 before = "\\textit{New paragraph(s) after the paragraph containing} ``" + before + "''"
             elif kind == "insert_cont":
                 before = "\\textit{Continues the insertion of the previous part.}"
+            elif kind == "insert_sentence":
+                before = "\\textit{New sentence after} ``" + before + "''"
             rows.append(f"{n} & {latex_cell(before)} & {latex_cell(after)} \\\\ \\hline")
         if not pairs:
             rows.append(f" & \\multicolumn{{2}}{{p{{24.6cm}}|}}{{\\textit{{No manuscript text; see Why.}}}} \\\\ \\hline")
@@ -337,7 +349,7 @@ text would appear. \textbf{0} is the abstract, \textbf{1} to \textbf{7} are the 
 shows its former number, which earlier notes and commits use, and the table at the end maps old
 numbers to new. """ + ORDER_NOTE + r"""
 
-\paragraph*{Applied to the manuscript} at """ + ", ".join(APPLIED_COMMITS) + r""": """ + ", ".join(APPLIED_NUMS) + r""".
+\paragraph*{Applied to the manuscript} at """ + ", ".join(APPLIED_COMMITS) + r""": """ + ", ".join(APPLIED_NUMS) + APPLIED_PARTS_NOTE + r""".
 These entries have left the table of changes; their full record, with grounds, is in the section ``Applied entries, kept as the record'' after it.
 
 \paragraph*{Pending} (""" + str(len(PENDING_NUMS)) + r""" entries, in manuscript order): """ + ", ".join(PENDING_NUMS) + r""".

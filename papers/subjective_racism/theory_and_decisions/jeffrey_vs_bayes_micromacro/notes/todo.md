@@ -10,8 +10,12 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   6.1, 6.2, 6.3, with the five bibliography entries they cite (Bohren2019, Doring1999,
   Garber1980, Heckman1998, Jeffrey2004). The manuscript builds with no undefined references
   or citations; its two overfull boxes (title block, summary table) predate the change.
-- [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2, 3.3, 3.5, 4.2,
-  A.1, B.1, B.2. The plan lists applied and pending entries above its table and keeps the
+- [x] **Applied at 6775f822 (2026-10-02):** 3.2 parts 3 to 5 (the Dietrich sentences deleted
+  rather than rewritten, the author having judged the pooling literature out of scope; the
+  Epstein/Ortoleva/Cripps and Pettigrew-Weisberg sentences corrected) and the new 5.3, the
+  pooling sentence in Section 5 (`sympy/verify_pooling.py`, 10/10).
+- [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2 parts 1 and 2, 3.3,
+  3.5, 4.2, A.1, B.1, B.2. The plan lists applied and pending entries above its table and keeps the
   numbering fixed. Among the pending, B.2 is now reduced to Benjamin et al. 2019 for 1.3's
   optional sentence, since the other five entries are in the .bib; B.1 goes last.
 - [ ] **Follow-ups on applied 3.1 (flagged 2026-10-01, applied as approved):** its second

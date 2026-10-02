@@ -16,6 +16,9 @@ NORM = re.sub(r"\s+", " ", MS)
 # the plan lists them above its table instead of in it.
 APPLIED = {k: "db3a2f41" for k in ("C.9", "E.2", "C.9w", "C.10", "E.3", "E.5", "C.11b",
                                    "E.8", "E.9", "E.10", "E.15h", "E.11", "E.15")}
+APPLIED["C.16"] = "6775f822"
+# Parts applied on their own while the rest of the entry stays pending.
+APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
 
 _HIST = {}
@@ -31,10 +34,11 @@ def _norm_at(commit):
     return _HIST[commit]
 
 
-def cut(start, end, eid=None):
-    """The BEFORE text, from the current manuscript, or for an applied entry from the
-    manuscript just before the commit that applied it."""
-    src = _norm_at(APPLIED[eid]) if eid in APPLIED else NORM
+def cut(start, end, eid=None, k=None):
+    """The BEFORE text, from the current manuscript, or for an applied entry or part from
+    the manuscript just before the commit that applied it."""
+    commit = APPLIED.get(eid) or APPLIED_PARTS.get((eid, k))
+    src = _norm_at(commit) if commit else NORM
     i = src.find(start)
     if i < 0 or src.find(start, i + 1) >= 0:
         sys.exit(f"start phrase missing or ambiguous: {start!r}")
@@ -377,15 +381,7 @@ private signal."""),
 falls on a belief about one variable, the counterpart of a marginal, and here too
 the marginals carry the sequence effect."""),
     ("A related normative literature evaluates group belief formation", "outside the protected class of Proposition~\\ref{prop:PRO}.",
-     r"""A related normative literature evaluates group belief formation by whether
-aggregation commutes with updating, a criterion that geometric pooling meets and
-linear pooling generally does not \citep[Theorem~2]{Dietrich2021}. The criterion
-does not discriminate here. Evaluators who share a prior and differ only in reading
-sequence do not hold conditionalisations of that prior on a common event, and the
-linear and geometric averages of their posteriors differ only at $\bigO(c^{2})$. The
-first-order divergence of every statistic outside the protected class of
-Proposition~\ref{prop:PRO} is therefore a property of Jeffrey updating, not of
-linear pooling."""),
+     r"""% Deleted (see Why): the three Dietrich sentences go; the paragraph keeps its first two sentences."""),
     ("\\textbf{Several alternatives to Bayesian updating", "Divisibility axioms jointly force.}",
      r"""Decision theory has axiomatised several alternatives to Bayesian updating, each
 for a single piece of news. \citet{Epstein2006} makes the updating rule, and not only
@@ -404,7 +400,11 @@ prior with each new input multiplicatively before the Jeffrey step,""")],
     "binary action, not Banerjee's continuum; the two share one mechanism, so \"on the other hand\" "
     "goes; the marginals point is the paper's analogy (M2, M3). Dietrich: Def. 1 is preference "
     "aggregation, and with a common prior linear pooling passes the criterion wherever it applies "
-    "(M4, M5). Epstein/Ortoleva/Cripps (bold sentence): the framing is unsupported for Epstein "
+    "(M4, M5). Decision 2026-10-02: the paper designs and evaluates no pooling rule, its "
+    "aggregation being an auditor's average, so the Dietrich sentences are deleted rather than "
+    "rewritten; the one point they were guarding, that the first-order divergence is not an "
+    "artefact of linear pooling, is now a sentence in Section 5 (entry 5.3). "
+    "Epstein/Ortoleva/Cripps (bold sentence): the framing is unsupported for Epstein "
     "and Ortoleva; the Cripps claim is false, since under Proposition IMM's reading the "
     "composite satisfies all four axioms, and the footnote goes with it (M6-M9). "
     "Pettigrew-Weisberg pool the prior with each input, not successive inputs (M25). The rest of "
@@ -457,6 +457,24 @@ identifying variable is the reading sequence, which pooled data discard.""")],
     "(M14). The last part also appends the identification paragraph (formerly C.15).",
     "Phelps.lean, Arrow.lean, CoateLoury.lean, BCGS.lean, Becker.lean, GoodMittal.lean "
     "(`piR_amalg_general`, `equalSize_reversal`). The appended paragraph carries the identification point of notes/positioning_economics.tex and plan 3.C/3.D into Section 3, with audit P17a (no sample-size claim attributed to Heckman; that clause is the paper's own consequence of Proposition PRO), H2 (\"nothing guarantees\" is p. 109), H3 (\"can find discrimination\" is p. 102) and B37 (BIR credit \"different sources\" to Fang-Moro, so it is paraphrased) applied. Needs Heckman1998 and Bohren2019 in bibliography.bib (E.14)."))
+
+E.append(("C.16", "Section 5, the pooling sentence after the definition of the mean belief (new, applied)", [
+    ("insert_sentence", "Jeffrey conditioning is $\\Pbar_\\lambda=\\lambda\\,\\PJ_{AB}+(1-\\lambda)\\,\\PJ_{BA}$.",
+     "Jeffrey conditioning is $\\Pbar_\\lambda=\\lambda\\,\\PJ_{AB}+(1-\\lambda)\\,\\PJ_{BA}$.",
+     r"""The population mean is a linear pool of the two posteriors, and the choice of
+pooling rule is immaterial at first order, since the two posteriors coincide at
+independence and a geometric pool of them differs from the linear one only at
+second order.""")],
+    "Replaces the Dietrich passage of Section 3 (3.2 part 3, deleted) with the one point that "
+    "matters for the results, placed where the mean belief is defined. The two posteriors "
+    "coincide at $c=0$ (Proposition IMM), so a linear and a geometric pool of them agree at "
+    "orders $c^0$ and $c^1$ and differ at $c^2$; their associations likewise agree to first "
+    "order. Hence the first-order divergence of unprotected statistics is a property of the "
+    "updating, not of averaging linearly. No citation, since the claim is elementary and "
+    "verified; Dietrich (2021) is the source of the commutation criterion if the author wants "
+    "it cited.",
+    "sympy/verify_pooling.py (10/10, at lambda = 1/2 and 2/5 on the generic prior); "
+    "PropIMM.lean for the coincidence at c = 0."))
 
 E.append(("C.13", "Section 4, the Foster-Greer-Thorbecke sentence", [(
     "This is the standard incidence-versus-intensity pairing of the measurement literature",
@@ -513,11 +531,13 @@ for eid, title, pairs, purpose, verif in E + E2:
     out.append(f"**Why.** {purpose}\n")
     for k, part in enumerate(pairs, 1):
         kind, s, e, after = norm_part(part)
-        before = cut(s, e, eid)
+        before = cut(s, e, eid, k)
         tag = f" ({k} of {len(pairs)})" if len(pairs) > 1 else ""
         if kind == "insert_cont":
             out.append(f"**BEFORE{tag}:** continues the insertion of the previous part.\n")
         else:
+            if (eid, k) in APPLIED_PARTS:
+                out.append(f"*Part {k} applied to the manuscript at {APPLIED_PARTS[(eid, k)]}.*\n")
             out.append(f"**BEFORE{tag}:**\n\n{quote(before)}\n")
         out.append(f"**AFTER{tag}:**\n\n{block(after)}\n")
     out.append(f"**Verification.** {verif}\n")
@@ -644,6 +664,9 @@ def discipline_check(entries=None):
             kind, st, en, after = norm_part(part)
             tag = f"{eid}.{k}"
             if after.lstrip().startswith("%"):
+                continue
+            if (eid, k) in APPLIED_PARTS:
+                cut(st, en, eid, k)
                 continue
             a = prose(after)
             if ":" in a:
