@@ -45,6 +45,7 @@ def latex_cell(t):
     t = re.sub(r"\\subsection\{([^}]*)\}(\\label\{[^}]*\})?",
                r"\\textsc{subsection heading}\\par\\textbf{\\large \1}\\par ", t)
     t = t.replace("p{2.6cm}p{5.4cm}p{5.4cm}", "p{2.2cm}p{4.6cm}p{4.6cm}")
+    t = t.replace("p{3.4cm}cccc", "p{2.4cm}cccc").replace("p{5.2cm}cc@", "p{4.6cm}cc@")
     t = re.sub(r"\\paragraph\{([^}]*)\}", r"\\textbf{\1} ", t)
     t = re.sub(r"\\section\{([^}]*)\}", r"\\textit{Section title:} \\textbf{\1}", t)
     t = t.replace("}%", "}")
@@ -355,7 +356,7 @@ These entries have left the table of changes; their full record, with grounds, i
 \paragraph*{Pending} (""" + str(len(PENDING_NUMS)) + r""" entries, in manuscript order): """ + ", ".join(PENDING_NUMS) + r""".
 
 {\small
-\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
+\begin{longtable}{|p{1.5cm}|p{11.9cm}|p{11.9cm}|}
 \hline
 \textbf{Part} & \textbf{BEFORE (current manuscript, or the anchor for an insert)} & \textbf{AFTER (proposed)} \\ \hline\hline
 \endhead
@@ -368,7 +369,7 @@ These entries were applied to the manuscript at """ + ", ".join(APPLIED_COMMITS)
 their BEFORE text as it stood just before that commit, the AFTER text as applied, and the Why, Evidence
 and Grounds that justified them.
 {\small
-\begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
+\begin{longtable}{|p{1.5cm}|p{11.9cm}|p{11.9cm}|}
 \hline
 \textbf{Part} & \textbf{BEFORE (manuscript before the applying commit)} & \textbf{AFTER (as applied)} \\ \hline\hline
 \endhead
