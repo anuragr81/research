@@ -243,7 +243,7 @@ prior association as well, which he does not.""")],
     "(dampedB_deviation, the identification)."))
 
 E2.append(("E.7", "Related literature, Bohren-Imas-Rosenberg, after the identification paragraph (was 3.D)", [(
-    "insert_para", r"contributes only a second-order loss in aggregate (Theorem~\ref{thm:LOS}).", r"contributes only a second-order loss in aggregate (Theorem~\ref{thm:LOS}).",
+    "insert_para", "the identifying variable is the reading sequence, which pooled data discard.", "the identifying variable is the reading sequence, which pooled data discard.",
     r"""A current formulation of the same problem is given by \citet{Bohren2019}, who
 distinguish discrimination arising from correct beliefs, from biased beliefs, and
 from preferences, and identify the source from how discrimination evolves along a
@@ -264,7 +264,12 @@ for the latter.""")],
     "Plan 3.D with the audit applied. P17b, the belief gap is also attenuated along the "
     "history (their Proposition 2), so \"vanishes only as\" becomes \"vanishes as\". Colon "
     "removed. Goes directly after C.15's paragraph, which carries the Heckman precedent that "
-    "plan 3.C proposed (3.C is superseded by C.15). Presupposes E.10 and the Bohren2019 entry.",
+    "plan 3.C proposed (3.C is superseded by C.15). Presupposes E.10 and the Bohren2019 entry. "
+    "Rebased on da5e3cff: the author deleted the amalgamation paragraph that held the old "
+    "insertion point, so the paragraph now goes directly after the Heckman paragraph, as "
+    "intended. That paragraph already names Bohren et al. for identification from the history "
+    "of evaluations, so this paragraph's first sentence repeats it and should be merged or "
+    "shortened when applied (rule 5).",
     "check_pinning_kills_partiality.py (7/7, D = 0 exactly for arbitrary group priors and "
     "covariances); Anchoring.lean dampedB_deviation; BohrenImasRosenberg.lean (prop1_decreasing, "
     "prop2_decreasing, endo_gap)."))
@@ -897,7 +902,7 @@ E2.append(("E.14", "Bibliography entries the Section E texts need (was B.A)", []
     "Bohren2019). Hawthorne2004 is already in bibliography.bib. All six proposed entries are in "
     "notes/manuscript_corrections_extra.bib and move to bibliography.bib on approval. Zhao-"
     "Osherson is cited only in the introduction (author's draft) and is already in the "
-    "bibliography.",
+    "bibliography. Added 2026-10-02: CoffmanExleyNiederle2021, needed by C.19.",
     "Bibliographic details verified against the Drive copies where printed (Doring: Phil. "
     "Sci. 66 (Proceedings) S379-S389; Garber: 47(1) 142-145; Heckman: JEP 12(2) 101-116); "
     "Bohren et al.'s AER pages are from the reference lists of later papers, the Drive copy "

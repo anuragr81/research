@@ -131,8 +131,8 @@ and the mechanism remains valid for any number of cues and attributes
     "the literature. Fixed factors imply commutation (Wagner 2003 Theorem 3.2, Hawthorne "
     "factorUpdate_comm, Cripps order_invariance); the converse is exact in this paper's two-cue "
     "model, where the sequence effect vanishes iff q0 = alpha and r0 = beta, but is not a "
-    "theorem for arbitrary updating rules. Debate sentence: \"However, but\" and the hyphen in "
-    "the noun \"sequence dependence\". ZhaoOsherson2010 is no longer cited anywhere in the "
+    "theorem for arbitrary updating rules. Debate sentence: the hyphen in the noun "
+    "\"sequence dependence\" (the author removed the stray \"but\" at da5e3cff). ZhaoOsherson2010 is no longer cited anywhere in the "
     "manuscript, which is the author's choice; its bibliography entry is now unused. "
     "Sentence \"It finds that\": the loss is not free of the sequence effect, it carries it at "
     "second order (LOS), and \"-- but\" is a dash doing a sentence's work. "
@@ -169,8 +169,8 @@ belief or adjust it.""")],
     "single-score model is Hogarth-Einhorn's belief-adjustment model, and Hawthorne is not part "
     "of that literature. (ii) Asch is impression formation, not belief adjustment, and reports "
     "eighteen traits one by one (audit A28). (iii) \"\\citet{DiaconisZabell1982}\" is glued to "
-    "\"attributes\" and should be \\citep. (iv) \"the order dependence is more more treated as a "
-    "defect\": doubled \"more\", \"order\" for reading sequence, and the clause still groups "
+    "\"attributes\" and should be \\citep. (iv) \"the order dependence is more often treated as a "
+    "defect\" (the doubled \"more\" was fixed by the author at da5e3cff): \"order\" for reading sequence, and the clause still groups "
     "Diaconis-Zabell with the defect view, though they hold that non-commutativity \"is not a "
     "real problem\" (M24); \"elsewhere\" detaches it from them. (v) The footnote still says "
     "Hawthorne \"repairs\" the defect and that the effect disappears; he offers alternatives, "
@@ -180,8 +180,8 @@ belief or adjust it.""")],
     "Asch1946 record (Asch.lean, Table 7); HogarthEinhorn.lean; DiaconisZabell.lean and README; "
     "Hawthorne.lean (`extUpdate_basisCommuting`, `factorUpdate_comm`), Sections 6-8."))
 
-E.append(("C.4", "Introduction, the two-channel paragraph (rebased on the author's draft c2ae782f)", [(
-    "Whether impressions replace prior belief or adjust is a question which", "This carries clear implications for what an audit can or cannot measure about sequence dependence.",
+E.append(("C.4", "Introduction, the two-channel paragraph (rebased on the author's draft da5e3cff)", [(
+    "Whether impressions replace prior belief or adjust is a question which", "the formational mechanisms biases and prejudice.",
     r"""Whether impressions replace prior belief or adjust it is a question which
 \citet[pp.~115--116]{Hawthorne2004}, writing as a logician rather than a psychologist,
 leaves open. To set the scope of its conclusions, the paper considers that
@@ -202,10 +202,16 @@ whether the two sequences agree but by how much they disagree in an arbitrary
 statistic. The paper finds that the marginal probabilities and the share of decisions
 they change carry the difference at first order in the prior covariance, while the
 believed association and the statistics that move with it carry it only at second
-order. This carries clear implications for what an
-audit can or cannot measure about sequence dependence.""")],
+order. This carries clear implications for what an audit can or cannot measure
+about sequence dependence, an observation that may elucidate the mechanisms by which
+biases and prejudice form.""")],
     "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
-    "needs correcting and adds one sentence. Corrections: \"adjust\" to \"adjust it\"; \"leave open\" "
+    "needs correcting and adds one sentence. Rebased on da5e3cff, where the author appended a "
+    "clause to the last sentence: the entry keeps the clause and repairs it, the double hyphen "
+    "becoming a comma (rule 9) and \"the formational mechanisms biases and prejudice\" becoming "
+    "\"the mechanisms by which biases and prejudice form\". The clause is the author's and is "
+    "hedged by \"may\"; the results say where sequence dependence registers, not how prejudice "
+    "forms. Corrections: \"adjust\" to \"adjust it\"; \"leave open\" "
     "to \"leaves open\" (Hawthorne is one author; he gives a tentative view and says his interest "
     "is normative, pp. 115-116); \"an arrival-sequence dependence\" loses its article; the position "
     "channel was defined as \"the observer weights the later cue less\" and cited to Hogarth-Einhorn "
@@ -224,28 +230,25 @@ audit can or cannot measure about sequence dependence.""")],
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
 
-E.append(("C.5", "Introduction, hiring-panel paragraph, last three sentences (rebased on the author's draft d48dd872)", [(
+E.append(("C.5", "Introduction, hiring-panel paragraph, the two sentences before the last (rebased on the author's draft da5e3cff)", [(
     "As the paper shows, this means that the believed association differs between the two sequences only at second order.",
-    "the focuses on the measurement issues under association channel.",
+    "(and the believed association differs at first order - see Proposition LAD).",
     r"""The believed association then differs between the two sequences only at second
 order (Proposition~\ref{prop:ORD}). A letter adopted only in part moves that belief
 from wherever the credential left it, and the believed association then differs at
-first order (Proposition~\ref{prop:LAD}). Since a partly adopted letter makes even
-unrelated traits sequence dependent through the position channel, the paper sets
-that channel aside and studies the measurement problem that remains under the
-association channel.""")],
+first order (Proposition~\ref{prop:LAD}).""")],
     "The author applied the panel paragraph's new ending at d48dd872 in the pre-correction "
     "wording; this entry keeps the corrections that remain. \"As the paper shows, this means that\" "
     "has no noun for \"this\" (rule 3); the sentence now follows on from the previous one, which "
     "ends \"the believed link between the traits\". The hyphen in \"at first order - see Proposition "
     "LAD\" is a dash doing a sentence's work (rule 9), and \"Proposition LAD\" needs the reference. "
     "\"On the other hand\" goes, the contrast being carried by \"adopted in full\" against \"adopted "
-    "only in part\". The last sentence is repaired: \"sequence depends\" to \"sequence dependent\", "
-    "\"the focuses\" to \"the paper sets that channel aside and studies\", \"positional channel\" to "
-    "the agreed \"position channel\", \"under association channel\" to \"under the association "
-    "channel\". It is the one place in the introduction that states the scope defence (author, "
-    "2026-10-01): the position channel is the evaluator's, so the paper sets it aside and studies "
-    "the measurement problem that remains. The odds-ratio sentence is in a comment at the author's "
+    "only in part\". The author applied the corrected last sentence at da5e3cff "
+    "(\"The paper therefore restricts attention to situations in which unrelated traits exhibit "
+    "no sequence dependence through the position channel, and studies the measurement issues "
+    "under the association channel.\"), which supersedes the plan's version of it (rule 5), so "
+    "the entry now ends before it. That sentence is the one place in the introduction that "
+    "states the scope defence (author, 2026-10-01). The odds-ratio sentence is in a comment at the author's "
     "choice (less in the introduction); its claim, exact invariance at every weight, is Lemma SEP "
     "and stays in Section 6. Economics behind the three sentences: under full adoption the letter "
     "fixes its own marginal whatever the credential implied, so the sequence acts only through the "
@@ -506,6 +509,40 @@ well (Proposition~\ref{prop:LAD}).""")],
     "(`ladder_assoc_coeff`); sympy/verify_tables.py; sympy/verify_ladder.py (53/53); "
     "Doring.lean; Hawthorne.lean (amnestic_thesis; pp. 115-116)."))
 
+E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
+    ("What the paper finds is that a population could pass every",
+     "lives entirely in outcomes.",
+     r"""\citet{CoffmanExleyNiederle2021}, for instance, ask employers how much better
+they believe one group of workers performs than another, and read discrimination
+from the hiring decisions themselves. A believed difference between groups is second
+order under the sequence dependence studied here, while the share of decisions the
+reading sequence changes is first order (Propositions~\ref{prop:PRO}
+and~\ref{prop:SHR}), so a population could pass such a belief audit sincerely while
+its hiring decisions record the sequence.""")],
+    "Author's request (2026-10-02): name an existing instrument that sets a difference question "
+    "against a decision rate. Coffman, Exley and Niederle (read in full, the February 2020 working "
+    "paper the author linked) elicit the believed gap in average scores between two groups of "
+    "workers (p. 8) and measure discrimination by how often the worker from one group is hired when "
+    "the two have identical scores (pp. 15-17); the believed gap predicts those decisions (Table 1, "
+    "column 2). A difference between groups has the form of the conditional difference "
+    "P(B=1|A=1) - P(B=1|A=0), which Proposition PRO places in the protected class (second order), "
+    "while the share of decisions changed is first order (Proposition SHR). The match is in the "
+    "form of the question only: in their design group membership is observed and nothing is read "
+    "in sequence, and they set belief formation aside (fn. 5, p. 4), so the sentence says what a "
+    "question of that form records under the sequence dependence studied here, not what their data "
+    "show. The entry replaces the sentence 'a population could pass every belief-level audit "
+    "sincerely while the footprint of sequence-dependence lives entirely in outcomes' rather than "
+    "adding to it, because that sentence contradicts the paper's own classification: a belief "
+    "audit that asks a level question (a marginal, or a conditional probability such as "
+    "P(B=1|A=1)) records the sequence at first order (Propositions DRF and PRO), so only audits "
+    "asking how much likelier one trait makes another are passed. Bohren, Haggag, Imas and Pope "
+    "(2025), who ask the level question for each group, are left for the author's review. Page "
+    "numbers are the working paper's and are to be checked against Management Science 67(6), "
+    "3551-3569, before applying. Needs the bibliography entry in B.2.",
+    "sympy/verify_PRO.py (37/37: the conditional difference is protected, the conditional "
+    "probability and a cell probability are not); PropPRO.lean; Decision.lean (Proposition SHR); "
+    "literature/coffman_exley_niederle2021 (Lean + sympy)."))
+
 E.append(("C.18", "Section 6.2 compacted: Proposition FAC and the settings table go, the rubric paragraph becomes one sentence", [
     ("Whether a population adopts in full can be read from its",
      "under either reading of the cues.",
@@ -731,6 +768,7 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.18.2": "adds the verified orders to the Wagner sentence",
                             "C.18.5": "drops two columns of the table",
                             "C.18.6": "a paragraph becomes one sentence",
+                            "C.19.1": "replaces an overclaiming sentence and names an existing instrument",
                             "C.2.5": "repairs a sentence with two verbs",
                             "C.10.1": "citation fix", "C.11b.3": "deletion",
                             "C.14.1": "citation fix", "C.14.2": "citation fix",

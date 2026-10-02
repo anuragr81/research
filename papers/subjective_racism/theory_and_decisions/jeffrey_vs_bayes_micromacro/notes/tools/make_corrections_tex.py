@@ -168,7 +168,7 @@ NUMBERS = {
     "E.5": "3.1", "C.11": "3.2", "E.6": "3.3", "C.11b": "3.4", "E.7": "3.5",
     "E.8": "4.1", "C.13": "4.2", "E.9": "5.1", "E.10": "5.2",
     "E.15h": "6.1", "E.11": "6.2", "E.15": "6.3",
-    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3", "C.17": "7.1", "C.18": "6.4",
+    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3", "C.17": "7.1", "C.18": "6.4", "C.19": "7.2",
 }
 ALL = list(C.E) + list(E2)
 assert set(e[0] for e in ALL) == set(NUMBERS), set(e[0] for e in ALL) ^ set(NUMBERS)
@@ -384,6 +384,8 @@ Bohren et al.\ 2019, D\"oring 1999, Garber 1980); they are in
 \texttt{notes/manuscript\_corrections\_extra.bib} so that this document renders them, and move to
 \texttt{bibliography.bib} on approval. The Drive copy of Jeffrey (2004) is the November 2002 draft,
 so """ + CHAPTER_USERS + r""" cite the chapter only.
+\citet{CoffmanExleyNiederle2021}, needed by """ + renum("C.19") + r""", was added on 2 October 2026
+(\emph{Management Science} 67(6), 3551--3569, doi 10.1287/mnsc.2020.3660).
 
 \section*{Where each entry of the archived plan (notes/manuscript\_change\_plan\_asof\_2026-09-30.md) now lives}
 {\small

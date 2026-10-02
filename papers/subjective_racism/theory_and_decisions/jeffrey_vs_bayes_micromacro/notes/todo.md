@@ -21,6 +21,11 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   ten-row settings table and the rubric paragraph go; the four-settings table keeps its credence
   columns) and 7.1 (closing paragraph of the conclusion on the Section 3 debate). The manuscript
   is 26 pages, no undefined references or citations. The Lean and sympy records for FAC stay.
+- [~] **7.2 (added 2026-10-02, pending the author's review):** the conclusion's third
+  implication names Coffman, Exley and Niederle (2021) as a design that asks a difference
+  question (the believed gap between groups) and reads a decision rate (who is hired), and
+  replaces the sentence claiming a population passes "every belief-level audit". Bohren, Haggag,
+  Imas and Pope (the level question per group) to be looked at next.
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.
