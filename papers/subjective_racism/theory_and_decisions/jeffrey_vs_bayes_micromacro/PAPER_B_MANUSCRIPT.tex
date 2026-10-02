@@ -81,7 +81,6 @@ The vignette used to discuss this setting consists of a hiring panel working thr
 
 % What remains untouched at every degree of adoption is the odds ratio, since each impression rescales rows or columns of the belief and never the pairing within them (Lemma SEP). Since the odds ratio between the two traits remains the same under Jeffrey conditioning, it is only the size of the differences in panels' ratings where the extent of overwriting of impressions can matter.
 
-
 Notice that our conclusions apply only when evidence is soft and when it can be assumed that impressions arrive as revised credences, not as
 likelihoods. Read as a level, the credential leaves the panelist in the example feeling the candidate competent, and what it delivers is a credence on the attribute's partition into competent and not-competent categories. Read as a Bayes factor, the credential carries a likelihood ratio stating how much more probable it is under competence than in its absence, and that ratio multiplies whatever belief it meets. A Bayes factor, however, requires the probability of the same credential for a candidate who is not competent, and an impression does not supply that counterfactual. As a mechanism that holds conditionals fixed, Jeffrey updating is the unique coherent revision for credence delivered on the cue's partition and is equivalent to making the minimal change of the prior consistent with the delivered marginal \citep{DiaconisZabell1982}\footnote{See \citet{Field1978} for how Jeffrey updates are asymmetric in the delivered-credence parametrisation and \citet{Wagner2002} for how they commute when their inputs are held fixed in Bayes-factor form.}.
 
@@ -160,7 +159,6 @@ The surplus thus defined is what is of interest as the notion of loss in the pop
   L(c)=\iint_{\{\sgn(u)\neq\sgn(u+c\delta)\}}|u|\,g(u,\delta)\,\mathrm{d}u\,\mathrm{d}\delta,
 \]
 the cost $|u|$ borne by exactly those evaluators whose decision the sequence changes, the integration variable $\delta$ ranging over the values taken by $\delta_\sigma$.
-
 
 \subsection{The Bayes-factor benchmark}
 \label{sec:jeffrey}
@@ -308,7 +306,6 @@ informational externality therefore---with agent $n$'s action entering agent $n{
 is that the sequence effect in \citep{BHW1992, Banerjee1992} lives on the analogue of the
 marginals---which remain so in the current paper as well.
 
-
 The purview of the current paper is positive rather than normative. The paper merely takes the mean belief as the object an observer computes and characterises which of its
 statistics conceal the members' sequence-dependence.
 
@@ -380,7 +377,6 @@ mixture.
 
 Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggests three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considered for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the arrival sequence (flip indicator) and \emph{how much} they are affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices \citep{FosterGreerThorbecke1984}.
 
-
 \subsection{Primitives for single evaluator}\label{sec:individual_primitives}
 Starting with the \emph{gap}, we first state the rather trivial assertion that the difference between Jeffrey and Bayes is absent on a single cue or on two cues on independent attributes\footnote{Since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (see Assumption~\ref{as:soft})}.
 
@@ -441,12 +437,10 @@ The second primitive, \emph{score-gap} of a panel (given a fixed weight $\vv$) i
   s(\PJ_\sigma)-s(\PB)=c\,\delta_\sigma+\bigO(c^{2}), \qquad \delta_\sigma:=\big\langle\vv,\ \partial_c(\PJ_\sigma-\PB)|_{c=0}\big\rangle.
 \]
 
-
 \subsection{Belief Statistics for single evaluator}
 
 The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:DIV}. As Lemma \ref{lem:ASC} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
 averaging takes place).
-
 
 \renewcommand{\thelemma}{ASC}%
 \begin{lemma}[individual-level association immunity]\label{lem:ASC}
@@ -483,7 +477,6 @@ products vanish termwise:
 \]
 so the first-order term is zero on each route.
 \end{proof}
-
 
 The second belief-statistic of interest is the panel's \emph{marginal probability} for an attribute i.e. the belief about that attribute alone, $\PJ_\sigma(A{=}1)$. This
 is a linear read-out of the gap, the relevant row or column sum of $\PJ_\sigma-\PB$. In audit terms, the marginal is the levels question, asking how competent evaluators take a given candidate from the pool to be and what share of evaluators would rate that candidate above a given bar. As can be seen in Proposition~\ref{prop:DIV}, its rows sum to zero and its columns to $\pm\kappa$. On route $AB$ the competence marginal---the attribute read \emph{first}---therefore carries no first-order term at all, while the trustworthiness marginal---read \emph{last}---moves at
@@ -528,7 +521,6 @@ population acquires comes instead from the measure of the flip set -- a band of 
    =f(0)\cdot\bigO(c),
 \]
 
-
 The second decision statistic is the panel's \textbf{foregone surplus}, the cost $|u|$ borne when the decision flips. It weights the flip indicator by the stake at issue, so that panels barely past the threshold contribute little and panels far from it contribute much. Writing $L_\sigma(c):=|u|\cdot\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$ for the foregone surplus, both decision quantities share the threshold structure established above for $u\neq0,\ \delta_\sigma\neq0$. As the following shows, each vanishes identically until $|c|$ reaches the crossing point, and every derivative at the origin vanishes with it. Neither of the two is analytic in $c$ and there is no expansion at the level of a single evaluator from which a leading coefficient could be read.
 \[
   \mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\equiv 0,
@@ -544,7 +536,6 @@ The second decision statistic is the panel's \textbf{foregone surplus}, the cost
   =0
   \quad \forall\, k\ge 0,
 \]
-
 
 \section{Averaging over sequences does not change the classification}
 \label{sec:aggregation}
@@ -634,7 +625,6 @@ probabilities, and the sequence-affected share remain first order.
 
 The obvious consequence of this property is that detectability is a property of the instrument, not of the phenomenon. To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:ASC}, Proposition~\ref{prop:DEC}) -- whereas a reviewer computing the share of files whose decision the reading sequence changes finds a departure at $\bigO(c)$ instead. We detail the findings in the rest of the current section.
 
-
 \begin{sidewaystable}[p]
 \centering
 \small
@@ -692,7 +682,6 @@ Apply the linear functional $s=\langle\vv,\cdot\rangle$ to
 $\PJ_\sigma-\PB=cD_\sigma+\bigO(c^2)$ from Proposition~\ref{prop:DIV}. Constancy of $\vv$ makes
 $\delta_\sigma$ telescope to $0$ since both posteriors are normalised.
 \end{proof}
-
 
 \subsection{Aggregate Belief Statistics}
 The aggregation of belief statistics also shows that aggregation doesn't really change the sequence-effects from the individual case. As Lemma~\ref{lem:ASC} shows, a particular route doesn't shift association in first-order. Mixing them does not change that. On the other hand, the case for marginal probability is not symmetrical by definition. Whichever attribute a route reads last has its marginal pinned exactly to the impression and so departs from the benchmark at first order, whereas the route reading that attribute first moves with the benchmark and its shift is zero to first order. Mixing the two does not zero out the first-order effect. It's not the averaging that changes the sequence, but the nature of statistic itself determines whether arrival order matters or not.
@@ -848,9 +837,7 @@ Since $q_0(1-q_0)>0$ and $\alpha\beta(1-\alpha)(1-\beta)>0$ on the open cube, $\
   \Pbar(A{=}1)-\PB(A{=}1)=\bigO(c^2).
 \]
 
-
 \end{proof}
-
 
 It's worth highlighting a key result that follows from the sequence affecting marginal probability at first order. The pool's average perceived competence drifts at $\bigO(c)$. In terms of the terminology we've used, the marginal probability lies outside the protected class. As a result, what an outside observer surveying the panels' joint beliefs and comparing them against the benchmark would find is that along the association axis, the average believed relationship between competence and trustworthiness would sit at essentially its benchmark value (order $c^{2}$). On the other hand, along the marginal-probability axis the average perceived marginal probability of either attribute would depart from the benchmark already at order $c$. It is only in the marginal probabilities that the observer could read off any trace of the sequence at all. The footprint of sequencing thus resides in marginal probabilities, not believed association. 
 
@@ -879,7 +866,6 @@ $f(0)>0$, the loss is exactly second order, with constant named:
 \]
 \anchor{Thm.~LOS}
 \end{theorem}
-
 
 \begin{figure}[t]
 \centering
@@ -921,7 +907,6 @@ much probability when $f$ is continuous at $u=0$. The foregone surplus $|u|$ on 
 
 \subsubsection{Sequence-affected share---incidence versus intensity}
 \label{sec:criterion}
-
 
 The mechanism for the sequence-affected share is largely the same as that for surplus-weighted loss. Both
 integrate over the same set---the band of evaluators whose decisions the perturbation flips, of
@@ -980,8 +965,6 @@ The extra factor of $c$ is the weight $|u|$, which the band forces to first orde
 
 What follows from the above proposition has strong implications for what an audit can measure. A first-order \emph{number} of individuals are genuinely affected, each near-marginal. The second-order quantities are the surplus-weighted loss and the believed association. Therefore, the audit result cannot ever be phrased as ``few are affected,'' because the incidence is first order \anchor{Prop.~SHR}. Whatever significance attaches to those individuals---their decisions turned on the sequence in which two impressions happened to arrive---attaches to this first-order count, not to the second-order aggregates. The two questions ``how many are affected?'' and ``what do the aggregate dependence and surplus statistics show?'' thus decouple by one order in $c$. Propositions~\ref{prop:SHR} and~\ref{prop:PRO} show that the criterion, not the phenomenon, selects which answer an aggregate instrument returns.
 
-
-
 \subsection{The protected class of aggregate statistics}
 \label{sec:protected}
 
@@ -991,7 +974,6 @@ directions).
 
 Recall that \emph{protection} means that the aggregate's first-order coefficient vanishes identically, so the statistic sits within $\bigO(c^{2})$ of its benchmark value (even
 though every member of the population is $\bigO(c)$ away). What we now prove is that a smooth statistic is \emph{protected} exactly when its differential at the independent posterior $q\otimes r$ points along $d\,\assoc$ (the differential of the association) so that to first order the statistic moves only as the association moves. Every other smooth statistic departs at first order generically (i.e. on all but a lower-dimensional set of priors). The following proposition formalises this.
-
 
 \renewcommand{\theproposition}{PRO}%
 \begin{proposition}[uniqueness of the protected statistic]\label{prop:PRO}
@@ -1097,11 +1079,10 @@ an evaluator adopts a cue alike whichever position it arrives in, so that the
 sequence can act only through the believed link between the attributes. A weight on
 the later cue that depends on its position is a property of the evaluator rather than
 of the evidence, and it is the subject of the belief-adjustment literature
-\citep{HogarthEinhorn1992}. Whether a population adopts in full can be read from its
-ratings, since Proposition~\ref{prop:ADJ} below recovers the adoption weight from
-three marginals of one reading group, and Propositions~\ref{prop:LAD}
-and~\ref{prop:FAC} say what to expect when it does not, under either reading of the
-cues. What partial adoption leaves in place is the odds ratio, which is the same
+\citep{HogarthEinhorn1992}. Whether a population adopts in full can be read from its ratings, since
+Proposition~\ref{prop:ADJ} below recovers the adoption weight from three marginals
+of one reading group, and Proposition~\ref{prop:LAD} says what to expect when it
+does not. What partial adoption leaves in place is the odds ratio, which is the same
 in both sequences at every weight, and a second-order class of statistics that no
 longer contains the association. Table~\ref{tab:robust} collects the answers.
 \par
@@ -1115,10 +1096,11 @@ touches nothing else (Proposition~\ref{prop:IMM}). The other is the position
 channel. If the cue read second is adopted only in part, then which cue is weakened
 depends on the sequence, and the two sequences differ even at $c=0$, by
 $(1-\omega)(\alpha-q_0)$ on the competence marginal and $-(1-\omega)(\beta-r_0)$ on
-the trustworthiness marginal. The position channel is not a feature of updating on
-delivered credences. A Bayes-factor update that gives the second cue's factor the
-weight $\omega$ is sequence-dependent in the same way, since commutation requires
-the same factor in either position \citep{Wagner2002}. Under full adoption the
+the trustworthiness marginal. The position channel is not a feature of updating on delivered credences. A
+Bayes-factor update that gives the second cue's factor the weight $\omega$ is
+sequence-dependent in the same way, the marginals differing at order zero and the
+believed association at first order while the odds ratio is unchanged, since
+commutation requires the same factor in either position \citep{Wagner2002}. Under full adoption the
 position channel is absent and the association channel is the only one, which is
 the setting of the results. Under partial adoption the position channel is present
 at $c=0$ and moves every marginal at order zero, while the believed association
@@ -1136,7 +1118,6 @@ the sequence. The
 position channel is a temporal bias of the observer, present whether or not the
 attributes are believed related, while the association channel runs through what
 one cue implies about the other and exists only when they are.
-Table~\ref{tab:settings} sets the two settings side by side.
 
 \paragraph{Partial adoption.} The two sequences of Sections~\ref{sec:individual} and~\ref{sec:aggregation} adopt
 each delivered credence in full. Suppose instead
@@ -1293,182 +1274,37 @@ share of decisions the sequence changes and the surplus-weighted loss are then b
 of order zero. The separation of Theorem~\ref{thm:LOS} is a property of full
 adoption.
 
-\paragraph{Factor inputs.} Under the benchmark reading each cue supplies a factor
-on its own attribute, $a=(a_0,a_1)$ for the credential and $b=(b_0,b_1)$ for the
-letter, and the belief after both cues is the prior with cell $(i,j)$ multiplied by
-$a_ib_j$ and renormalised. This is the reading of the factor-based variants of
-\citet{Hawthorne2004}, and with both factors applied in full the two sequences give
-the same belief for every $c$, since the same cells are multiplied by the same
-numbers whichever cue comes first \citep{Wagner2002}. Partial adoption has a
-counterpart under this reading. Let the factor read second be adopted only in part,
-so that sequence $AB$ applies $a$ and then $b^{\omega}=(b_0^{\omega},b_1^{\omega})$
-and sequence $BA$ applies $b$ and then $a^{\omega}$, with $\omega=1$ the benchmark
-and $\omega=0$ the second cue ignored.
-\par
-\renewcommand{\theproposition}{FAC}%
-\begin{proposition}[factor inputs]\label{prop:FAC}
-Let $a$ and $b$ be positive and $0\le\omega\le1$. Write $K_\sigma$ for the product
-of the four factors that sequence $\sigma$ applies and $S_\sigma$ for its
-normalising sum.
-\begin{enumerate}
-\item[(i)] At $\omega=1$ the two sequences give the same belief for every $c$.
-\item[(ii)] At $c=0$ each sequence ends at an independent belief. The $A$-marginals
-are $q_1$ in sequence $AB$ and
-$(1-\alpha)a_1^{\omega}/\bigl(\alpha a_0^{\omega}+(1-\alpha)a_1^{\omega}\bigr)$ in
-sequence $BA$, and they agree if and only if $a_0=a_1$ or $\omega=1$. Every
-marginal therefore differs between the sequences at order zero whenever the cue is
-informative and $\omega<1$, while a statistic protected for every pair of cues
-differs by $\bigO(c)$.
-\item[(iii)] In sequence $\sigma$ the believed association equals
-$c\,K_\sigma/S_\sigma^{2}$ exactly, so it is zero at $c=0$ and first order for
-$\omega<1$ whenever $K_{AB}/S_{AB}^{2}$ and $K_{BA}/S_{BA}^{2}$ differ at $c=0$. A
-statistic whose differential at every independent belief is a multiple of that of
-the log odds ratio differs between the sequences by $\bigO(c^{2})$ for every
-$\omega$, and the odds ratio is the prior's in both sequences for every $c$ and
-$\omega$.
-\end{enumerate}
-\end{proposition}
-\par
-\begin{proof}
-Applying a factor on $A$ and then one on $B$ multiplies cell $(i,j)$ by $a_ib_j$
-whichever is applied first, and renormalisation divides every cell by the same sum,
-which gives (i). Both steps rescale rows or columns, so the odds ratio is the
-prior's, and the association of the rescaled table is $K_\sigma\assoc(P)=cK_\sigma$,
-divided by $S_\sigma^{2}$ after renormalisation. At $c=0$ the prior is
-$\alpha\otimes\beta$ and the rescaled table is
-$(\alpha_0a_0,\alpha_1a_1)\otimes(\beta_0b_0,\beta_1b_1)$ up to the normalising
-sum, an independent belief whose $A$-marginal is
-$(1-\alpha)a_1/(\alpha a_0+(1-\alpha)a_1)$ for the factor applied on $A$. With
-$a_i=q_i/\alpha_i$ this is $q_1$, and with $a^{\omega}$ in its place the two values
-agree exactly when $a_1a_0^{\omega}=a_0a_1^{\omega}$, that is when
-$(a_1/a_0)^{1-\omega}=1$. The claims about protected statistics follow as in
-Proposition~\ref{prop:LAD}, since both sequences end at independent beliefs. For
-the last claim, at $c=0$ the product of the four marginals is
-$ZK_\sigma/S_\sigma^{2}$, so the first-order factor of $\assoc/m$ is $1/Z$ in both
-sequences and the argument of Proposition~\ref{prop:LAD}(iii) applies.
-\end{proof}
-
 \begin{table}[htbp]
 \centering
 \small
-\begin{tabular}{@{}p{3.4cm}cccc@{}}
+\begin{tabular}{@{}p{5.2cm}cc@{}}
 \toprule
-& \multicolumn{2}{c}{\textbf{Credence delivered}} & \multicolumn{2}{c}{\textbf{Factor delivered}} \\
-\textbf{Sequence effect on} & $\omega=1$ & $\omega<1$ & $\omega=1$ & $\omega<1$ \\
+\textbf{Sequence effect on} & \textbf{Full adoption, $\omega=1$} & \textbf{Partial adoption, $\omega<1$} \\
 \midrule
-Marginals & $\Theta(c)$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\
-Believed association & $\bigO(c^{2})$ & $\Theta(c)$ & $0$ & $\Theta(c)$ \\
-Statistics agreeing with the log odds ratio to first order & $\bigO(c^{2})$ & $\bigO(c^{2})$ & $0$ & $\bigO(c^{2})$ \\
-Odds ratio & $0$ & $0$ & $0$ & $0$ \\
-Share of decisions changed & $\Theta(c)$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\
-Surplus-weighted loss & $\bigO(c^{2})$ & $\Theta(1)$ & $0$ & $\Theta(1)$ \\
+Marginals & $\Theta(c)$ & $\Theta(1)$ \\
+Believed association & $\bigO(c^{2})$ & $\Theta(c)$ \\
+Statistics agreeing with the log odds ratio to first order & $\bigO(c^{2})$ & $\bigO(c^{2})$ \\
+Odds ratio & $0$ & $0$ \\
+Share of decisions changed & $\Theta(c)$ & $\Theta(1)$ \\
+Surplus-weighted loss & $\bigO(c^{2})$ & $\Theta(1)$ \\
 \bottomrule
 \end{tabular}
-\caption{The between-sequence effect of each statistic, by what a cue delivers and
-how fully the later cue is adopted. Entries are orders in the prior covariance $c$,
-generic in the prior and the cues, and $0$ means no sequence effect at any $c$. The
-decision rows of the partial-adoption columns read Theorem~\ref{thm:LOS} with a
-score gap of order zero and are not separately verified. The columns are, in turn,
-Sections~\ref{sec:individual} and~\ref{sec:aggregation}, Proposition~\ref{prop:LAD},
-the benchmark of Section~\ref{sec:setup}, and Proposition~\ref{prop:FAC}.}
+\caption{The between-sequence effect of each statistic under full and partial
+adoption. Entries are orders in the prior covariance $c$, generic in the prior and
+the cues, and $0$ means no sequence effect at any $c$. The first column is
+Sections~\ref{sec:individual} and~\ref{sec:aggregation}, the second
+Proposition~\ref{prop:LAD}; the decision rows of the second read
+Theorem~\ref{thm:LOS} with a score gap of order zero and are not separately
+verified.}
 \label{tab:robust}
 \end{table}
 
-\paragraph{Opposite predictions about one procedure.} Whether a procedure removes
-the sequence effect depends on which channel it removes. Consider rubric scoring,
-in which the rating on each attribute is fixed by the document on that attribute
-and a set scale, so that what each document delivers no longer depends on what was
-read first. Under full adoption the rubric removes the position channel and leaves
-the association channel untouched. The recorded scores carry the delivered
-credences in either sequence, the belief about the attribute read second agrees
-with its score, and the belief about the attribute read first sits at $cK$ from its
-score (Proposition~\ref{prop:DRF}), so the sequence effect lives in that belief and
-in the decision made from it, vanishes when the attributes are believed unrelated
-(Proposition~\ref{prop:IMM}), and is invisible in the scores and in the association
-between them. Under partial adoption the rubric removes the position channel from
-the record only. The belief about the attribute read second sits at
-$(1-\omega)[P^{A}(B{=}1)-r_1]$ from its score (Proposition~\ref{prop:ADJ}), which at
-independence equals $(1-\omega)(r_0-\beta)$, so the two reading sequences differ
-even when the attributes are believed unrelated. The two settings therefore predict
-opposite things about the same procedure, and the difference is observable. In the
-rubric setting $r_1$ is on the record, so Proposition~\ref{prop:ADJ} needs only the
-belief about trustworthiness after the credential alone and after both documents
-to say which prediction holds.
-
-\begin{table}[htbp]
-\centering
-\small
-\begin{tabular}{@{}p{2.6cm}p{5.4cm}p{5.4cm}@{}}
-\toprule
-& \textbf{Full adoption, $\omega=1$} (association channel only)
-& \textbf{Partial or no adoption, $\omega<1$} (position channel operates) \\
-\midrule
-Where the sequence dependence arises &
-In the rule. The inputs $q,r$ are the same in either position; the sequence matters
-because two rigid steps on correlated partitions do not commute
-\citep{DiaconisZabell1982}. &
-In the inputs. What the second cue delivers depends on its position; the rule adds
-nothing new at $c=0$. \\
-\addlinespace[3pt]
-Source in the model &
-Association only. Zero at $c=0$ (Proposition~\ref{prop:IMM}). &
-Position, present at $c=0$, plus association when $c\neq0$. \\
-\addlinespace[3pt]
-Status of the inputs &
-Independent of the sequence. The credential delivers $q$ whether or not the letter
-was read. &
-Dependent on the sequence. The later cue is adopted only in part, so what it
-delivers depends on being second. \\
-\addlinespace[3pt]
-Size of the effect &
-Small, first order in $c$, spread unevenly across statistics. &
-Blunt. $(1-\omega)(\alpha-q_0)$ on a marginal whatever $c$ is
-(Proposition~\ref{prop:ADJ}). \\
-\addlinespace[3pt]
-Marginals &
-Last-read exact, first-read drifts at first order (Proposition~\ref{prop:DRF}). &
-Both differ at zeroth order between sequences. \\
-\addlinespace[3pt]
-Believed association &
-Second order, between sequences and pooled (Propositions~\ref{prop:DEC}
-and~\ref{prop:PRO}). &
-Zero between sequences at $c=0$, first order in $c$. Pooled, nonzero at $c=0$,
-$-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$. \\
-\addlinespace[3pt]
-Odds ratio &
-Identical across sequences, every $c$ (Lemma~\ref{lem:SEP}). &
-Identical across sequences, every $c$ (Lemma~\ref{lem:SEP}). The one statistic that
-does not move. \\
-\addlinespace[3pt]
-Classification by order in $c$ &
-Is the contribution. Which statistics are protected, and why. &
-Shifts by one order, each statistic keeping its place. Marginals at order zero, protected
-statistics at first order, the odds-ratio shadow at second, the odds ratio never
-(Proposition~\ref{prop:LAD}). \\
-\addlinespace[3pt]
-Share and loss of decisions &
-Share first order, loss second (Proposition~\ref{prop:SHR},
-Theorem~\ref{thm:LOS}). &
-Both of order zero; the separation is lost. \\
-\addlinespace[3pt]
-Audit implication &
-False negative. An association audit passes a sequence-dependent population. &
-False positive as well. A pooled association audit returns a stereotype no member
-holds, from mixing alone. \\
-\addlinespace[3pt]
-Identification &
-The reading, from which marginal ignores the prior association
-(Propositions~\ref{prop:ORD} and~\ref{prop:DRF}). &
-The weight, from three ratings (Proposition~\ref{prop:ADJ}). At its strongest here,
-since the position channel is what Proposition~\ref{prop:ADJ} reads. \\
-\bottomrule
-\end{tabular}
-\caption{The two settings. Under full adoption only the association channel
-operates; under partial or no adoption the position channel operates as well, and
-the association channel with it when the attributes are believed related.}
-\label{tab:settings}
-\end{table}
-
+Rubric scoring, which fixes what each document delivers, tells the two settings
+apart, since under full adoption it leaves the sequence effect in the belief about
+the attribute read first and invisible in the scores (Proposition~\ref{prop:DRF}),
+while under partial adoption the belief about the attribute read second sits
+$(1-\omega)[P^{A}(B{=}1)-r_1]$ from its score (Proposition~\ref{prop:ADJ}) and the
+two sequences differ even when the attributes are believed unrelated.
 
 \section{Concluding remarks}
 \label{sec:conclusion}
@@ -1503,8 +1339,6 @@ How large is the loss incurred through decisions affected by sequence?
 \label{tab:audit-questions}
 \end{table}
 
-
-
 The paper's central contribution is a characterisation that delineates the conditions under which an arbitrary smooth statistic of the average belief is protected, at first order, from the non-commutativity of coherent sequential updating. This characterisation is built up from the fundamental observation that the gap is not an arbitrary perturbation. Each reading sequence contributes one route direction ($R_1$ and $R_2$), so the leading-order departures of the average posterior from the benchmark are confined to the plane those two directions span. Whether a statistic is protected therefore turns on whether its differential annihilates the route plane or not.
 
 This answer carries three implications for audits where soft-cue updating can be assumed. First, an aggregate matching the Bayesian benchmark does not
@@ -1536,6 +1370,14 @@ outcomes. Debates that set
 improving attitudes against persistent outcome disparities may, on this reading, be comparing
 instruments of different asymptotic order rather than disagreeing about the same quantity.
 
+Section~\ref{sec:literature} framed the debate over Jeffrey conditioning as whether its
+sequence dependence is a problem. The results do not answer that objection so much as
+locate it, in the levels rather than in the believed link between the traits, and in
+the number of decisions changed rather than in their cost. The normative question is
+left where \citet{Doring1999} and \citet{Hawthorne2004} leave it. What the paper
+settles is where the dependence sits and what it costs, and both are properties of
+full adoption, since under partial adoption the believed link moves at first order as
+well (Proposition~\ref{prop:LAD}).
 
 \appendix
 
