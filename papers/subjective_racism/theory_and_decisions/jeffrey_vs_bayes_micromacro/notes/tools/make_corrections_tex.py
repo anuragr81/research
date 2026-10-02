@@ -225,11 +225,24 @@ def rows_for(placed):
 
 rows = rows_for(placed)
 
-ORDER_NOTE = renum(
-    "Order of application, where it differs from manuscript order. E.14 (bibliography) goes in "
-    "before every entry that cites a new reference. E.10 (Proposition ORD) and E.15 (Propositions "
-    "ADJ, LAD and FAC) go in before C.4, C.5, C.9w and E.15r, which cite them. E.11 goes in before "
-    "E.15, which inserts after it. E.13 goes in last.")
+def _order_note():
+    """Only constraints among pending entries; applied ones need no ordering."""
+    pend = lambda *ks: [renum(k) for k in ks if k not in APPLIED]
+    parts = []
+    if "E.14" not in APPLIED:
+        parts.append(renum("E.14") + " (bibliography) goes in before every pending entry that cites a reference not yet in the .bib")
+    citers = pend("C.4", "C.5", "C.9w", "E.15r")
+    if citers and ("E.10" not in APPLIED or "E.15" not in APPLIED):
+        parts.append(", ".join(pend("E.10", "E.15")) + " go in before " + ", ".join(citers) + ", which cite them")
+    if "E.11" not in APPLIED and "E.15" not in APPLIED:
+        parts.append(renum("E.11") + " goes in before " + renum("E.15") + ", which inserts after it")
+    if "E.13" not in APPLIED:
+        parts.append(renum("E.13") + " goes in last")
+    if not parts:
+        return "The pending entries can be applied in any order."
+    return "Order of application, where it differs from manuscript order. " + ". ".join(p[0].upper() + p[1:] for p in parts) + "."
+
+ORDER_NOTE = _order_note()
 
 
 def _key(k):
