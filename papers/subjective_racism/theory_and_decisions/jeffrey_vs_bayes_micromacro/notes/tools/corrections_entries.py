@@ -196,56 +196,39 @@ audit can or cannot measure about sequence dependence.""")],
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
 
-E.append(("C.5", "Introduction, hiring-panel paragraph, last sentence", [(
-    "In demonstrating how the sequence-dependence of certain statistics can be invisible",
-    "(the amnestic updating concern in the literature).",
-    r"""Apart from showing how the sequence dependence of some statistics can be invisible
-to an observer, the panel example also shows why that invisibility needs each
-impression to be adopted in full. When each impression is adopted in full, the
-letter fixes the belief about trustworthiness whatever the credential implied, so
-the sequence acts only through the believed link between the traits, and the
-believed association then differs between the two sequences only at second order
-(Proposition~\ref{prop:ORD}). A letter adopted only in part moves that belief from
-wherever the credential left it, and the believed association then differs at first
-order (Proposition~\ref{prop:LAD}). Since a partly adopted letter makes even
+E.append(("C.5", "Introduction, hiring-panel paragraph, last three sentences (rebased on the author's draft d48dd872)", [(
+    "As the paper shows, this means that the believed association differs between the two sequences only at second order.",
+    "the focuses on the measurement issues under association channel.",
+    r"""The believed association then differs between the two sequences only at second
+order (Proposition~\ref{prop:ORD}). A letter adopted only in part moves that belief
+from wherever the credential left it, and the believed association then differs at
+first order (Proposition~\ref{prop:LAD}). Since a partly adopted letter makes even
 unrelated traits sequence dependent through the position channel, the paper sets
 that channel aside and studies the measurement problem that remains under the
 association channel.""")],
-    "The BEFORE sentence is false for the cross-product association, which is the paper's "
-    "`assoc`: the invisibility at second order does depend on how far a later impression erases "
-    "the earlier one. The author asked (2026-10-01) that C.5 say whether omega touches the main "
-    "result and why, in economic terms. It does. Full adoption: a Jeffrey step sets its own "
-    "marginal to the delivered credence whatever the other cue had implied, so at independence "
-    "the two sequences agree (IMM) and the sequence acts only through the prior association; "
-    "each step rescales rows or columns, so the association is $c$ times a product of factors "
-    "that agree between sequences at $c=0$, and the difference is second order (ORD, DEC). "
-    "Partial adoption: the damped step moves the marginal only part of the way from where the "
-    "first cue left it, so which cue is discounted depends on the sequence; both marginals "
-    "differ at order zero even at $c=0$, by $(1-\\omega)(\\alpha-q_0)$ and $-(1-\\omega)(\\beta-r_0)$; "
-    "the rescaling factors then differ at order zero, so the association, $c$ times those "
-    "factors, differs at first order with coefficient $(1-\\omega)H/Z$ (LAD); and the mean belief of "
-    "a population mixing the sequences acquires a cross-product association "
-    "$-\\lambda(1-\\lambda)(1-\\omega)^2(\\alpha-q_0)(\\beta-r_0)$ at $c=0$ that no member holds (the "
-    "\"average association\" clause). Odds ratio: invariant under row and column rescaling, so "
-    "the same in both sequences for every $c$ and every omega (Lemma SEP, which covers damped "
-    "steps). So the main result, the second-order invisibility of the association and of the "
-    "statistics that move with it, holds under full adoption and not otherwise; what holds at "
-    "every omega is the odds ratio. \"Amnestic\" is dropped here since Hawthorne is not cited in "
-    "this paragraph (writing discipline 6). The commented-out line below the paragraph states "
-    "the odds-ratio version. AFTER is the author's paragraph ending of 2026-10-01 with these "
-    "changes: \"this means that\" folded into the previous sentence (rule 3, no bare \"this\"); the "
-    "hyphen before \"see Proposition LAD\" replaced by a clause with the reference (rule 9); \"On the "
-    "other hand\" dropped, the contrast being carried by \"adopted in full\" against \"adopted only "
-    "in part\"; the last sentence repaired (\"sequence dependence\", \"the paper focuses\", \"position "
-    "channel\", \"the association channel\") and made the one place in the introduction that "
-    "states the scope defence. The odds-ratio sentence is dropped at the author's choice (less in "
-    "the introduction); the odds ratio's exact invariance at every weight stays in Section 6. "
-    "Proposition ORD must be applied (E.10) before this reference resolves.",
-    "PropIMM.lean; PropORD.lean; PropDEC.lean; Ladder.lean (`ladder_gap`, `ladder_gap_mA1`, "
-    "`ladder_assoc_coeff`, `ladder_assoc_coeff_witness`, `oddsRatio_rescale`, "
-    "`jeffreyA_eq_rescale`, `jeffreyB_eq_rescale`); LemmaSEP.lean (general N, any "
-    "attribute-local rescaling); sympy/verify_ladder.py (53/53); sympy/verify_interior_omega.py "
-    "row 4 (the pooled association at $c=0$)."))
+    "The author applied the panel paragraph's new ending at d48dd872 in the pre-correction "
+    "wording; this entry keeps the corrections that remain. \"As the paper shows, this means that\" "
+    "has no noun for \"this\" (rule 3); the sentence now follows on from the previous one, which "
+    "ends \"the believed link between the traits\". The hyphen in \"at first order - see Proposition "
+    "LAD\" is a dash doing a sentence's work (rule 9), and \"Proposition LAD\" needs the reference. "
+    "\"On the other hand\" goes, the contrast being carried by \"adopted in full\" against \"adopted "
+    "only in part\". The last sentence is repaired: \"sequence depends\" to \"sequence dependent\", "
+    "\"the focuses\" to \"the paper sets that channel aside and studies\", \"positional channel\" to "
+    "the agreed \"position channel\", \"under association channel\" to \"under the association "
+    "channel\". It is the one place in the introduction that states the scope defence (author, "
+    "2026-10-01): the position channel is the evaluator's, so the paper sets it aside and studies "
+    "the measurement problem that remains. The odds-ratio sentence is in a comment at the author's "
+    "choice (less in the introduction); its claim, exact invariance at every weight, is Lemma SEP "
+    "and stays in Section 6. Economics behind the three sentences: under full adoption the letter "
+    "fixes its own marginal whatever the credential implied, so the sequence acts only through the "
+    "believed link and the association differs at second order (IMM, ORD); under partial adoption "
+    "the sequence decides which document is discounted, both ratings differ at order zero even for "
+    "unrelated traits, and the association, $c$ times rescaling factors that now differ at order "
+    "zero, differs at first order with coefficient $(1-\\omega)H/Z$ (LAD). Propositions ORD and LAD "
+    "must be applied (5.2, 6.3) before the references resolve.",
+    "PropIMM.lean; PropORD.lean; Ladder.lean (`ladder_gap`, `ladder_gap_mA1`, `ladder_assoc_coeff`, "
+    "`ladder_assoc_coeff_witness`); LemmaSEP.lean (general N, any attribute-local rescaling); "
+    "sympy/verify_ladder.py (53/53); sympy/verify_interior_omega.py rows 3 and 4."))
 
 E.append(("C.6", "Introduction, premise paragraph, from \"Read as a Bayes factor\"", [(
     "Read as a Bayes factor, the credential carries a likelihood ratio", "consistent with the delivered marginal \\citep{DiaconisZabell1982}",

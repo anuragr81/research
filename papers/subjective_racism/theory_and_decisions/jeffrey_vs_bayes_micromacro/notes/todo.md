@@ -27,8 +27,8 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   `lean/JeffreyOrder/Ladder.lean`. Partial adoption moves every belief statistic except the odds
   ratio one order earlier with the ranking unchanged; the odds ratio is blind at every weight; the
   share-versus-loss separation holds only under full adoption.
-- [~] **Approve the reworked entries:** 0.1 to 1.3 (rebased on c2ae782f, residual
-  corrections only), 1.4, 2.3, 5.2 (Proposition ORD alone), 6.3 (the partial-adoption
+- [~] **Approve the reworked entries:** 0.1 to 1.3 (rebased on c2ae782f) and 1.4 (rebased on
+  d48dd872), residual corrections only; 2.3, 5.2 (Proposition ORD alone), 6.3 (the partial-adoption
   subsection of Section 6: two channels, ADJ, LAD, the new Proposition FAC on factor inputs,
   Table tab:robust, the rubric prediction and the settings table), with its heading 6.1 and
   roadmap clause 1.9.

@@ -278,7 +278,7 @@ tex = r"""%% manuscript_corrections.tex -- master plan of corrections to PAPER_B
 \setlength{\parindent}{0pt}
 \title{Paper B: corrections to the manuscript (master plan)}
 \author{}
-\date{Against the author's draft committed at c2ae782f, 1 October 2026}
+\date{Against the author's draft committed at d48dd872, 1 October 2026}
 \begin{document}
 \maketitle
 \vspace{-1.5em}
