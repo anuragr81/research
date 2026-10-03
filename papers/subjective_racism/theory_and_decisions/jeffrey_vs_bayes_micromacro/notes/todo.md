@@ -32,14 +32,17 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   (`notes/tools/grounds/grounds_C_conclusion.py`: five quotations from the working paper, the
   Lean identity, PRO, the band width, the ladder computation, and Canay et al.'s Theorem 4.1).
   Bohren, Haggag, Imas and Pope (the level question per group) to be looked at next.
-- [ ] **Grounds missing for 5.3, 6.4 and 7.1** (applied 2026-10-02): these entries carry Why and
-  Evidence rows but no Grounds rows (quotations, theorem statements, computations) as the other
-  entries do. To add: 5.3 from `sympy/verify_pooling.py`; 6.4 from `Ladder.lean` and `Wagner2002.lean`;
-  7.1 from `Doring.lean`, `Hawthorne.lean` (pp. 115-116) and the DRF/SHR/DEC/ORD/SEP records.
-- [ ] **Canay, Mogstad and Mountjoy (2024, REStud) is now quoted in the plan** (7.2's Grounds and
-  Why) but not cited in the manuscript and has no Lean record. Under the standing rule a record is
-  needed if the manuscript or plan keeps citing them; a faithful record of Theorem 4.1 needs their
-  extended Roy model. The author to decide.
+- [x] **Grounds for 5.3, 6.4 and 7.1 (2026-10-03):** `notes/tools/grounds/grounds_C_applied.py`.
+  5.3: Proposition IMM and `sympy/verify_pooling.py` (10/10). 6.4: ADJ, LAD (`ladder_gap`,
+  `ladder_assoc_coeff`, `ladder_oddsShadow_seqEffect`), the rescaling invariance, Wagner's Theorem 3.1
+  and its Lean form, the factor-route theorems and `verify_ladder.py` section F, DRF and the damped
+  order effect. 7.1: Doring and Hawthorne (pp. 115-116), ORD, the association at full adoption and the
+  odds ratio, the share against the loss, and LAD. Items already verified elsewhere are loaded from
+  their files rather than retyped.
+- [x] **Canay, Mogstad and Mountjoy (2024): Lean and sympy record added 2026-10-03**
+  (`literature/canay_mogstad_mountjoy2024`): Theorem 4.2 in general, Theorem 4.1 by witnesses in the
+  continuous monotone class for all four cases, `biased_judge_passes`. Still quoted only in the plan
+  (7.2's Grounds); not cited in the manuscript.
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.
