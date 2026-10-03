@@ -139,6 +139,19 @@ open JeffreyOrder
 #print axioms factor_mA1_gap_iff
 #print axioms mprod_factorRoute_zero
 #print axioms oddsShadow_factor_coeff
+-- Exact zero sets (Ladder.lean) and the factor-power gap (LadderFactorPow.lean)
+#print axioms Zpar_ne_zero
+#print axioms Hcof_affine
+#print axioms Hcof_variance_form
+#print axioms Hcof_slice
+#print axioms ladder_assoc_coeff_eq_zero_iff
+#print axioms ladder_assoc_coeff_eq_zero_iff_variance
+#print axioms condDiff_eq
+#print axioms ladder_condDiff_seqEffect
+#print axioms ladder_condDiff_coeff
+#print axioms ladder_condDiff_coeff_eq_zero_iff
+#print axioms pow_factor_ratio_iff
+#print axioms factor_pow_gap_iff
 
 -- Literature formalizations (lean/Literature/*.lean): each paper's own claims,
 -- generated from the theorem declarations (one BEGIN/END block per file).

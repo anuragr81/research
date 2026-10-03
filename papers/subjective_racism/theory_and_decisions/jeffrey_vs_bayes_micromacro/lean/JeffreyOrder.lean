@@ -9,3 +9,4 @@ import JeffreyOrder.Aggregate
 import JeffreyOrder.PropORD
 import JeffreyOrder.Anchoring
 import JeffreyOrder.Ladder
+import JeffreyOrder.LadderFactorPow

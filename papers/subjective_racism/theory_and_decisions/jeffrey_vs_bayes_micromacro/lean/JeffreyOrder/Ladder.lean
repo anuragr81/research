@@ -411,4 +411,134 @@ theorem oddsShadow_factor_coeff {K S Z : ℝ} (hK : K ≠ 0) (hS : S ≠ 0) (hZ 
   have hS2 : S ^ 2 ≠ 0 := pow_ne_zero 2 hS
   field_simp
 
+/-! ### Exact zero sets, symbolic in every parameter
+
+The witnesses above show only that a coefficient is not identically zero.  The
+theorems below say exactly where each coefficient vanishes. -/
+
+theorem Zpar_ne_zero (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0) (hβ : β ≠ 0) (hβ' : (1:ℝ) - β ≠ 0) :
+    Zpar α β ≠ 0 := by
+  unfold Zpar; exact mul_ne_zero (mul_ne_zero (mul_ne_zero hα hβ) hα') hβ'
+
+/-- `H` is affine in the weight. -/
+theorem Hcof_affine (α β q₀ r₀ δ : ℝ) :
+    Hcof α β q₀ r₀ δ
+      = (q₀ * (1 - q₀) * (β * (1 - β)) - r₀ * (1 - r₀) * (α * (1 - α)))
+        + δ * (q₀ * (1 - q₀) * (β - r₀) ^ 2 - r₀ * (1 - r₀) * (α - q₀) ^ 2) := by
+  unfold Hcof; ring
+
+/-- `(1-δ)H` is the difference of the products of marginal variances of the two
+sequences' end beliefs at independence, `q ⊗ t` and `s ⊗ r`. -/
+theorem Hcof_variance_form (α β q₀ r₀ δ : ℝ) :
+    (1 - δ) * Hcof α β q₀ r₀ δ
+      = q₀ * (1 - q₀) * (((1 - δ) * β + δ * r₀) * (1 - ((1 - δ) * β + δ * r₀)))
+        - ((1 - δ) * α + δ * q₀) * (1 - ((1 - δ) * α + δ * q₀)) * (r₀ * (1 - r₀)) := by
+  unfold Hcof; ring
+
+/-- On the slice `q₀ = α` (the first cue delivers the prior marginal), `H`
+factors: `H = α(1-α)(β - r₀)(t₁ - r₀)`, `t₁ = 1 - t₀`.  So `H` is not the zero
+polynomial, by a symbolic factorisation rather than an evaluation. -/
+theorem Hcof_slice (α β r₀ δ : ℝ) :
+    Hcof α β α r₀ δ = α * (1 - α) * (β - r₀) * ((1 - ((1 - δ) * β + δ * r₀)) - r₀) := by
+  unfold Hcof; ring
+
+/-- **Where the association's first-order sequence effect vanishes.**  Exactly at
+full adoption or on the hypersurface `H = 0`. -/
+theorem ladder_assoc_coeff_eq_zero_iff (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0)
+    (hβ : β ≠ 0) (hβ' : (1:ℝ) - β ≠ 0) :
+    kAB α β 0 q₀ r₀ δ - kBA α β 0 q₀ r₀ δ = 0 ↔ δ = 1 ∨ Hcof α β q₀ r₀ δ = 0 := by
+  rw [ladder_assoc_coeff hα hα' hβ hβ', div_eq_zero_iff, mul_eq_zero, sub_eq_zero]
+  have hZ := Zpar_ne_zero hα hα' hβ hβ'
+  constructor
+  · rintro ((h | h) | h)
+    · exact Or.inl h.symm
+    · exact Or.inr h
+    · exact absurd h hZ
+  · rintro (h | h)
+    · exact Or.inl (Or.inl h.symm)
+    · exact Or.inl (Or.inr h)
+
+/-- The same, as equality of the variance products of the two end beliefs. -/
+theorem ladder_assoc_coeff_eq_zero_iff_variance (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0)
+    (hβ : β ≠ 0) (hβ' : (1:ℝ) - β ≠ 0) :
+    kAB α β 0 q₀ r₀ δ - kBA α β 0 q₀ r₀ δ = 0 ↔
+      q₀ * (1 - q₀) * (((1 - δ) * β + δ * r₀) * (1 - ((1 - δ) * β + δ * r₀)))
+        = ((1 - δ) * α + δ * q₀) * (1 - ((1 - δ) * α + δ * q₀)) * (r₀ * (1 - r₀)) := by
+  rw [ladder_assoc_coeff hα hα' hβ hβ', div_eq_zero_iff, ← sub_eq_zero (a := q₀ * (1 - q₀) * _),
+    ← Hcof_variance_form]
+  have hZ := Zpar_ne_zero hα hα' hβ hβ'
+  constructor
+  · rintro (h | h)
+    · exact h
+    · exact absurd h hZ
+  · intro h; exact Or.inl h
+
+/-! ### The conditional difference under partial adoption -/
+
+/-- The conditional difference `P(B=1|A=1) - P(B=1|A=0)`. -/
+noncomputable def condDiff (Q : Mat) : ℝ := Q.a11 / (Q.a10 + Q.a11) - Q.a01 / (Q.a00 + Q.a01)
+
+/-- It is the association divided by the product of the `A`-marginals. -/
+theorem condDiff_eq (Q : Mat) (h0 : Q.mA0 ≠ 0) (h1 : Q.mA1 ≠ 0) :
+    condDiff Q = assoc Q / (Q.mA0 * Q.mA1) := by
+  unfold condDiff assoc
+  simp only [Mat.mA0, Mat.mA1] at h0 h1 ⊢
+  field_simp
+  ring
+
+/-- Each route's conditional difference is `c` times the route's association factor
+over its `A`-marginals, exactly. -/
+theorem ladder_condDiff_seqEffect
+    (h0 : (routeDamped α β c q₀ r₀ δ).mA0 ≠ 0) (h1 : (routeDamped α β c q₀ r₀ δ).mA1 ≠ 0)
+    (g0 : (routeDampedBA α β c q₀ r₀ δ).mA0 ≠ 0) (g1 : (routeDampedBA α β c q₀ r₀ δ).mA1 ≠ 0) :
+    condDiff (routeDamped α β c q₀ r₀ δ) - condDiff (routeDampedBA α β c q₀ r₀ δ)
+      = c * (kAB α β c q₀ r₀ δ / ((routeDamped α β c q₀ r₀ δ).mA0 * (routeDamped α β c q₀ r₀ δ).mA1)
+             - kBA α β c q₀ r₀ δ / ((routeDampedBA α β c q₀ r₀ δ).mA0 * (routeDampedBA α β c q₀ r₀ δ).mA1)) := by
+  rw [condDiff_eq _ h0 h1, condDiff_eq _ g0 g1, assoc_routeDamped, assoc_routeDampedBA]
+  ring
+
+/-- **The first-order coefficient of the conditional difference's sequence effect
+under partial adoption**: `(1-δ)(r₀-β)(t₀-r₁)/Z`, `t₀ = (1-δ)β + δr₀`. -/
+theorem ladder_condDiff_coeff (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0)
+    (hβ : β ≠ 0) (hβ' : (1:ℝ) - β ≠ 0) (hq : q₀ * (1 - q₀) ≠ 0)
+    (hs : ((1 - δ) * α + δ * q₀) * (1 - ((1 - δ) * α + δ * q₀)) ≠ 0) :
+    kAB α β 0 q₀ r₀ δ / ((routeDamped α β 0 q₀ r₀ δ).mA0 * (routeDamped α β 0 q₀ r₀ δ).mA1)
+      - kBA α β 0 q₀ r₀ δ / ((routeDampedBA α β 0 q₀ r₀ δ).mA0 * (routeDampedBA α β 0 q₀ r₀ δ).mA1)
+      = (1 - δ) * (r₀ - β) * (((1 - δ) * β + δ * r₀) - (1 - r₀)) / Zpar α β := by
+  rw [kAB_at_zero hα hα' hβ hβ', kBA_at_zero hα hα' hβ hβ',
+    routeDamped_at_zero hα hα' hβ hβ', routeDampedBA_at_zero hα hα' hβ hβ']
+  simp only [indep, Mat.mA0, Mat.mA1]
+  have hZ := Zpar_ne_zero hα hα' hβ hβ'
+  set t := (1 - δ) * β + δ * r₀ with ht_def
+  set u := (1 - δ) * α + δ * q₀ with hu_def
+  have e1 : q₀ * t + q₀ * (1 - t) = q₀ := by ring
+  have e2 : (1 - q₀) * t + (1 - q₀) * (1 - t) = 1 - q₀ := by ring
+  have e3 : u * r₀ + u * (1 - r₀) = u := by ring
+  have e4 : (1 - u) * r₀ + (1 - u) * (1 - r₀) = 1 - u := by ring
+  rw [e1, e2, e3, e4]
+  have hq0 : q₀ ≠ 0 := left_ne_zero_of_mul hq
+  have hq1 : 1 - q₀ ≠ 0 := right_ne_zero_of_mul hq
+  have hu0 : u ≠ 0 := left_ne_zero_of_mul hs
+  have hu1 : 1 - u ≠ 0 := right_ne_zero_of_mul hs
+  field_simp
+  ring
+
+/-- **Where it vanishes**: exactly at full adoption, when the letter delivers the
+prior marginal (`r₀ = β`), or at the one weight where `t₀ = 1 - r₀`. -/
+theorem ladder_condDiff_coeff_eq_zero_iff (hα : α ≠ 0) (hα' : (1:ℝ) - α ≠ 0)
+    (hβ : β ≠ 0) (hβ' : (1:ℝ) - β ≠ 0) :
+    (1 - δ) * (r₀ - β) * (((1 - δ) * β + δ * r₀) - (1 - r₀)) / Zpar α β = 0 ↔
+      δ = 1 ∨ r₀ = β ∨ (1 - δ) * β + δ * r₀ = 1 - r₀ := by
+  have hZ := Zpar_ne_zero hα hα' hβ hβ'
+  rw [div_eq_zero_iff, or_iff_left hZ, mul_eq_zero, mul_eq_zero, sub_eq_zero, sub_eq_zero, sub_eq_zero]
+  constructor
+  · rintro ((h | h) | h)
+    · exact Or.inl h.symm
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr h)
+  · rintro (h | h | h)
+    · exact Or.inl (Or.inl h.symm)
+    · exact Or.inl (Or.inr h)
+    · exact Or.inr h
+
 end JeffreyOrder
