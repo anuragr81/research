@@ -545,8 +545,10 @@ hiring decisions record the sequence.""")],
     "evaluators updating by Jeffrey's rule, and not on how real evaluators update; it has the "
     "form of Canay, Mogstad and Mountjoy's Theorem 4.1 (an outcome test may find no bias in a "
     "biased judge). It is a full-adoption claim: under partial adoption the conditional "
-    "difference differs between the sequences at first order, with a coefficient that vanishes "
-    "only at full adoption, so a partly adopting population would not pass the audit.",
+    "difference differs between the sequences at first order, with coefficient "
+    "$(1-\\omega)(r_0-\\beta)(t_0-r_1)/Z$, $t_0$ the damped $B$-marginal, which vanishes at full "
+    "adoption, when the letter delivers the prior marginal, and at one further weight fixed by "
+    "the prior and the cue, so a partly adopting population would in general not pass the audit.",
     "sympy/verify_PRO.py (37/37: the conditional difference is protected, the conditional "
     "probability and a cell probability are not); sympy/verify_ladder.py row (B), 57/57 (the "
     "conditional difference is first order under partial adoption); PropPRO.lean; "

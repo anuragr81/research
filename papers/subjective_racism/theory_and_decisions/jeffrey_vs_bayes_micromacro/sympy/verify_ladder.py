@@ -17,8 +17,10 @@ Rows:
       delta and first order for delta < 1, vanishing at delta = 1 (ORD).
       Tested for h = 1, 1 + P00, (1+P11)/(mA0 mA1), 1/(mA0 mA1) (the
       conditional difference P(B=1|A=1) - P(B=1|A=0), which equals
-      assoc/(mA0 mA1) exactly), and the correlation coefficient's normaliser
-      1/sqrt(mA0 mA1 mB0 mB1).
+      assoc/(mA0 mA1) exactly; its c^1 sequence effect is
+      (t0 t1 - r0 r1)/Z = (1-delta)(r0-beta)(t0-r1)/Z, zero at delta = 1, at
+      r0 = beta, and at the one further weight where t0 = r1), and the
+      correlation coefficient's normaliser 1/sqrt(mA0 mA1 mB0 mB1).
   (C) the c^1 coefficient of each route's association is q0 q1 t0 t1 / Z and
       s0 s1 r0 r1 / Z, Z = alpha(1-alpha)beta(1-beta); so for h = g/mprod,
       mprod = mA0 mA1 mB0 mB1, the c^1 sequence effect is
@@ -119,6 +121,11 @@ def main():
     ck.eq("(B) the conditional difference P(B=1|A=1) - P(B=1|A=0) equals assoc/(mA0 mA1)",
           P[1, 1] / (P[1, 0] + P[1, 1]) - P[0, 1] / (P[0, 0] + P[0, 1]),
           assoc(P) / (marg_A(P)[0] * marg_A(P)[1]))
+    e_cd = aAB1 / (q0 * q1) - aBA1 / (s[0] * s[1])
+    ck.eq("(B) c^1 sequence effect of the conditional difference = (t0 t1 - r0 r1)/Z",
+          e_cd, (t[0] * t[1] - r[0] * r[1]) / Z)
+    ck.eq("(B) ... = (1-delta)(r0-beta)(t0-r1)/Z, zero at delta=1, at r0=beta, and at one further weight",
+          e_cd, (1 - delta) * (r0 - beta) * (t[0] - r[1]) / Z)
     for name, h in hs.items():
         e1 = aAB1 * h(AB0) - aBA1 * h(BA0)
         ck("(B) " + name + ": c^1 sequence effect vanishes at delta=1",

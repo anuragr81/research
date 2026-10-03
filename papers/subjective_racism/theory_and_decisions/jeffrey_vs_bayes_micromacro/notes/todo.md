@@ -27,8 +27,19 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replaces the sentence claiming a population passes "every belief-level audit". Amended the same
   day: the last sentence now says what the audit cannot rule out (one admissible population of
   coherent evaluators suffices), and it is a full-adoption claim, since under partial adoption the
-  conditional difference is first order (`sympy/verify_ladder.py` row B, 57/57). Bohren, Haggag,
-  Imas and Pope (the level question per group) to be looked at next.
+  conditional difference is first order with coefficient $(1-\omega)(r_0-\beta)(t_0-r_1)/Z$
+  (`sympy/verify_ladder.py` row B, 59/59). Grounds added 2026-10-03
+  (`notes/tools/grounds/grounds_C_conclusion.py`: five quotations from the working paper, the
+  Lean identity, PRO, the band width, the ladder computation, and Canay et al.'s Theorem 4.1).
+  Bohren, Haggag, Imas and Pope (the level question per group) to be looked at next.
+- [ ] **Grounds missing for 5.3, 6.4 and 7.1** (applied 2026-10-02): these entries carry Why and
+  Evidence rows but no Grounds rows (quotations, theorem statements, computations) as the other
+  entries do. To add: 5.3 from `sympy/verify_pooling.py`; 6.4 from `Ladder.lean` and `Wagner2002.lean`;
+  7.1 from `Doring.lean`, `Hawthorne.lean` (pp. 115-116) and the DRF/SHR/DEC/ORD/SEP records.
+- [ ] **Canay, Mogstad and Mountjoy (2024, REStud) is now quoted in the plan** (7.2's Grounds and
+  Why) but not cited in the manuscript and has no Lean record. Under the standing rule a record is
+  needed if the manuscript or plan keeps citing them; a faithful record of Theorem 4.1 needs their
+  extended Roy model. The author to decide.
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.
