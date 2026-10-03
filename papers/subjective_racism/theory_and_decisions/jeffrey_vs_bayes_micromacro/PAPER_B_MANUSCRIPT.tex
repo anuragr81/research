@@ -1229,7 +1229,7 @@ Sections~\ref{sec:individual} and~\ref{sec:aggregation}, the second
 Proposition~\ref{prop:LAD}; the decision rows of the second read
 Theorem~\ref{thm:LOS} with a score gap of order zero and are not separately
 verified.}
-\label{tab:robust}
+\label{tab:robust}	
 \end{table}
 
 Rubric scoring, which fixes what each document delivers, tells the two settings
@@ -1251,10 +1251,10 @@ two sequences differ even when the attributes are believed unrelated.
 \midrule
 \multicolumn{3}{@{}l}{\emph{Belief statistics}}\\
 \midrule
-How much stereotype does the population's average belief carry?
+How much stereotype is carried by population's average belief?
   & $\assoc(\Pbar)-\assoc(\PB)$
   & $\bigO(c^{2})$ exactly (Lemma~ASC; Prop.~DEC)\\
-How far does the population's believed prevalence of an attribute sit from the benchmark?
+How far does population's believed prevalence of an attribute sit from order-free inference?
   & $\Pbar(A{=}1)-\PB(A{=}1)$
   & $\Theta(c)$ generically, at least one attribute (Prop.~DRF)\\
 \midrule
@@ -1263,7 +1263,7 @@ How far does the population's believed prevalence of an attribute sit from the b
 How large is the share of candidates whose decision the reading sequence changed?
   & $\Pr\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}$
   & $\Theta(c)$ (Prop.~SHR)\\
-How large is the loss incurred through decisions affected by sequence?
+How large is the efficiency loss incurred through sequence-affected decisions?
   & $L(c)=\E\bigl[|u|\,\mathds{1}\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}\bigr]$
   & $\bigO(c^{2})$ (Theorem~LOS)\\
 \bottomrule
@@ -1274,12 +1274,8 @@ How large is the loss incurred through decisions affected by sequence?
 
 The paper's central contribution is a characterisation that delineates the conditions under which an arbitrary smooth statistic of the average belief is protected, at first order, from the non-commutativity of coherent sequential updating. This characterisation is built up from the fundamental observation that the gap is not an arbitrary perturbation. Each reading sequence contributes one route direction ($R_1$ and $R_2$), so the leading-order departures of the average posterior from the benchmark are confined to the plane those two directions span. Whether a statistic is protected therefore turns on whether its differential annihilates the route plane or not.
 
-This answer carries three implications for audits where soft-cue updating can be assumed. First, an aggregate matching the Bayesian benchmark does not
-license the inference that its members are Bayesian. The population's mean believed association
-and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark while every member's
-gap diverges at $\bigO(c)$. At leading order, a population's aggregate beliefs can
-look externally Bayesian---sequence-free, benchmark-conforming on the protected
-statistics---even when no member's belief is.
+This answer carries three implications for audits where soft-cue updating can be assumed. First, an aggregate matching the Bayesian benchmark does not license the inference that its members are Bayesian. The population's mean believed association and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark while every member's
+gap diverges at $\bigO(c)$. At leading order, a population's aggregate beliefs can look externally Bayesian---sequence-free, benchmark-conforming on the protected statistics---even when no member's belief is.
 
 Second, what an audit can detect is decided by the statistic it computes. The protections of
 the two layers have separate sources---separability keeps the mean believed association
@@ -1293,29 +1289,17 @@ protected aggregate but leaves it at $\bigO(c^{2})$, and a subgroup is a subpopu
 own mixture of reading sequences. The aggregate results are, in this
 sense, reassuring exactly insofar as they are cautionary. For the two-cue setting, there are no protected statistics beyond the local dependence measures and, for the threshold decision, the surplus-weighted loss.
 
-Third, the instrumental point bears on how a stereotype is looked for
-outside the model. The instruments a society most naturally trusts for detecting stereotype are
-of the belief-auditing kind---asking what a population believes, in aggregate, about how
-attributes go together---and the association they measure is protected
+Third, the instrumental point bears on how a stereotype is looked for outside the model. The instruments a society most naturally trusts for detecting stereotype are
+of the belief-auditing kind---asking what a population believes, in aggregate, about how attributes go together---and the association they measure is protected
 (Table~\ref{tab:audit-questions}). \citet{CoffmanExleyNiederle2021}, for instance, ask employers how much better
-they believe one group of workers performs than another, and read discrimination
-from the hiring decisions themselves. A believed difference between groups is second
-order under the sequence dependence studied here, while the share of decisions the
-reading sequence changes is first order (Propositions~\ref{prop:PRO}
-and~\ref{prop:SHR}). Such a belief audit therefore cannot rule out a role for the
-reading sequence, since a population of coherent evaluators would pass it while its
-hiring decisions record the sequence. Debates that set
-improving attitudes against persistent outcome disparities may, on this reading, be comparing
+they believe one group of workers performs than another, and read discrimination from the hiring decisions themselves. A believed difference between groups is second
+order under the sequence dependence studied here, while the share of decisions the reading sequence changes is first order (Propositions~\ref{prop:PRO}
+and~\ref{prop:SHR}). Such a belief audit therefore cannot rule out a role for the reading sequence, since a population of coherent evaluators would pass it while its
+hiring decisions record the sequence. Debates that set improving attitudes against persistent outcome disparities may, on this reading, be comparing
 instruments of different asymptotic order rather than disagreeing about the same quantity.
 
-Section~\ref{sec:literature} framed the debate over Jeffrey conditioning as whether its
-sequence dependence is a problem. The results do not answer that objection so much as
-locate it, in the levels rather than in the believed link between the traits, and in
-the number of decisions changed rather than in their cost. The normative question is
-left where \citet{Doring1999} and \citet{Hawthorne2004} leave it. What the paper
-settles is where the dependence sits and what it costs, and both are properties of
-full adoption, since under partial adoption the believed link moves at first order as
-well (Proposition~\ref{prop:LAD}).
+The results discussed above locate the objection raised in the literature on sequence dependence of Jeffrey conditioning -- in the levels rather than in the believed link between the traits -- rather than removing the objection. While the normative question remains where \citet{Doring1999} and \citet{Hawthorne2004} leave it, above results bear on both objections --  whether sequence dependence is pronounced or not, as \citet{Doring1999} argues, depends on the measure, since under full adoption the reading sequence does affect the statistics. When full adoption is relaxed, as Hawthorne's objection suggests, the dependence in fact enlarges the difference, since the marginals differ at order zero and believed link at first order under partial adoption (Proposition~\ref{prop:LAD}).
+
 
 \appendix
 
