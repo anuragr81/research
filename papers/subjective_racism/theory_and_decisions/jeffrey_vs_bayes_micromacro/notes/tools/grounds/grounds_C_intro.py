@@ -247,7 +247,7 @@ later cue is adopted in full."""),
          text=r"""Each damped step multiplies the table it meets by a factor constant
 along rows (resp.\ columns), so both routes are separable reweightings of the
 prior and $\mathrm{OR}(P_{AB}) = \mathrm{OR}(P_{BA}) = \mathrm{OR}(P)$
-for every $\delta$ (witnessed at $\delta=1/3$, $c=1/40$, generic prior).""",
+for every $\delta$, symbolically in the prior, the cues, $\delta$ and $c$ (39/39).""",
          note=r"""Only the odds ratio is identical across sequences for every
 adoption weight."""),
     dict(kind="theorem",

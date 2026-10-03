@@ -47,12 +47,15 @@ $\PJ_{AB}=\PJ_{BA}=\PB$, and $\PJ_{AB}=q\otimes r$.""",
     },
     {
         "kind": "computation",
-        "source": r"sympy/verify\_pooling.py (10/10), at $\lambda=1/2$ and $\lambda=2/5$ on the generic prior",
+        "source": r"sympy/verify\_pooling.py (72/72), symbolic in $\alpha,\beta,q_0,r_0,\lambda$",
         "text": r"""With $L=\lambda\PJ_{AB}+(1-\lambda)\PJ_{BA}$ and $G$ the cell-wise geometric pool
-$(\PJ_{AB})^{\lambda}(\PJ_{BA})^{1-\lambda}$ renormalised: both posteriors equal $q\otimes r$ at
-$c=0$; the $c^0$ and $c^1$ coefficients of $L-G$ vanish in every cell; the $c^2$
-coefficient is nonzero in some cell; $\assoc(L)-\assoc(G)$ has zero $c^0$ and $c^1$
-coefficients.""",
+$(\PJ_{AB})^{\lambda}(\PJ_{BA})^{1-\lambda}$ renormalised: the $c^0$ and $c^1$ coefficients of
+$L-G$ vanish in every cell identically; with $m=q\otimes r$ and $D=\kappa R_1-\kappa'R_2$ the
+first-order sequence gap, $[c^2](L-G)_{ij}=\tfrac{\lambda(1-\lambda)}{2}\bigl[D_{ij}^2/m_{ij}-m_{ij}\chi^2\bigr]$,
+$\chi^2=\kappa^2/(r_0r_1)+\kappa'^2/(q_0q_1)$, and the whole $c^2$ table vanishes on the cube
+only on $\{q_0=\alpha,r_0=\beta\}\cup\{r_0=\beta=\tfrac12\}\cup\{q_0=\alpha=\tfrac12\}$;
+$\assoc(L)-\assoc(G)$ has zero $c^0$ and $c^1$ coefficients and $c^2$ coefficient
+$-\lambda(1-\lambda)\kappa\kappa'$.""",
         "note": r"``A geometric pool of them differs from the linear one only at second order'', and the association of the two pools agrees to first order, so no first-order result depends on pooling linearly.",
     },
 ]
@@ -74,11 +77,14 @@ the $A$-marginal gap at $c=0$ is $(1-\omega)(\alpha-q_0)$.""",
     },
     {
         "kind": "theorem",
-        "source": r"Ladder.lean, assoc\_routeDamped, assoc\_routeDampedBA, ladder\_assoc\_coeff, ladder\_assoc\_coeff\_at\_one, ladder\_assoc\_coeff\_witness",
+        "source": r"Ladder.lean, assoc\_routeDamped, assoc\_routeDampedBA, ladder\_assoc\_coeff, ladder\_assoc\_coeff\_eq\_zero\_iff, ladder\_assoc\_coeff\_eq\_zero\_iff\_variance, Hcof\_slice",
         "text": r"""$\assoc(P^{\omega}_{AB})=c\,k_{AB}$ and $\assoc(P^{\omega}_{BA})=c\,k_{BA}$ exactly, and at
 $c=0$, $k_{AB}-k_{BA}=(1-\omega)H/Z$ with
-$H=q_0(1-q_0)\bigl[\beta(1-\beta)+\omega(\beta-r_0)^2\bigr]-r_0(1-r_0)\bigl[\alpha(1-\alpha)+\omega(\alpha-q_0)^2\bigr]$;
-zero at $\omega=1$, nonzero at $(\alpha,\beta,q_0,r_0,\omega)=(1/3,1/4,2/5,5/7,1/2)$.""",
+$H=q_0(1-q_0)\bigl[\beta(1-\beta)+\omega(\beta-r_0)^2\bigr]-r_0(1-r_0)\bigl[\alpha(1-\alpha)+\omega(\alpha-q_0)^2\bigr]$.
+For $\alpha,1-\alpha,\beta,1-\beta\neq0$ it is zero exactly when $\omega=1$ or $H=0$,
+equivalently when the two sequences' end beliefs at independence have equal products of
+marginal variances, $q_0q_1t_0t_1=s_0s_1r_0r_1$. On the slice $q_0=\alpha$,
+$H=\alpha(1-\alpha)(\beta-r_0)(t_1-r_0)$.""",
         "note": r"Part 5: the believed association differs at first order under partial adoption and at second order under full adoption.",
     },
     {
@@ -114,15 +120,24 @@ normaliser its odds ratio is the prior's.""",
     },
     {
         "kind": "computation",
-        "source": r"sympy/verify\_ladder.py, section (F) (59/59)",
+        "source": r"sympy/verify\_ladder.py, section (F) (99/99)",
         "text": r"""Both factors in full: one table for every $c$, the benchmark $\PB$. With the second
-factor weighted: the association is $cK/S^2$ exactly and zero at $c=0$ on both routes; at
-$c=0$ the $A$-marginal of route $BA$ is $(1-\alpha)a_1'/(\alpha a_0'+(1-\alpha)a_1')$, equal to
-$q_1$ when $a'=a$; for $a'=a^{1/2}$ at the generic point the $A$-marginal gap at $c=0$ is
-nonzero and the two routes' first-order association factors differ, and they agree at
-$\omega=1$; $\assoc/(m_{A0}m_{A1}m_{B0}m_{B1})$ has first-order factor $1/Z$ on both routes,
-symbolically in the weighted factor; the odds ratio equals the prior's for every $c$.""",
+factor weighted, $a'$: the association is $cK/S^2$ exactly, zero at $c=0$; the $A$-marginal gap
+at $c=0$ is $\alpha(1-\alpha)(a_1a_0'-a_0a_1')/(\alpha a_0'+(1-\alpha)a_1')$, and at $a'=a^{\omega}$ it is
+zero exactly when $\omega=1$ or $q_0=\alpha$; the difference of the two routes' first-order
+association factors is $a_0'a_1'b_0'b_1'(M_a^2-M_b^2)/(S_{a'}^2S_{b'}^2)$, zero exactly where
+$M_a=M_b$, which holds on all of $\omega=1$, reduces at $\omega=0$ to $H_0=0$, and for each
+$\omega<1$ is a proper analytic hypersurface; $\assoc/(m_{A0}m_{A1}m_{B0}m_{B1})$ has first-order
+factor $1/Z$ on both routes; the odds ratio equals the prior's for every $c$.""",
         "note": r"Part 2: the orders the amended Wagner sentence states, for the instantiation $a'=a^{\omega}$.",
+    },
+    {
+        "kind": "theorem",
+        "source": r"LadderFactorPow.lean, pow\_factor\_ratio\_iff and factor\_pow\_gap\_iff",
+        "text": r"""For $a_0,a_1>0$: $a_1a_0^{\omega}=a_0a_1^{\omega}$ iff $\omega=1$ or $a_0=a_1$. For
+$0<\alpha<1$, $0<q_0<1$, $a_0=q_0/\alpha$, $a_1=(1-q_0)/(1-\alpha)$: the two sequences'
+$A$-marginals at $c=0$ agree iff $\omega=1$ or $q_0=\alpha$.""",
+        "note": r"Part 2: under the Bayes-factor reading with the second factor weighted as $a^{\omega}$, the marginals differ at order zero except at full adoption or when the cue delivers the prior marginal.",
     },
     _pick("grounds_E_scope.py", "E.12", r"Aggregate.lean, PJab",
           r"Part 6: under full adoption the sequence effect sits in the belief about the attribute read first ($cK$ from its delivered credence) while the attribute read last is pinned to its score, and it vanishes at independence (Proposition DRF)."),
@@ -152,9 +167,10 @@ under the nondegeneracy conditions of Proposition DEC.""",
           r"``In the number of decisions changed rather than in their cost'': the share of changed decisions is first order, the surplus-weighted loss second order (Proposition SHR, Theorem LOS)."),
     {
         "kind": "theorem",
-        "source": r"Ladder.lean, ladder\_assoc\_coeff and ladder\_assoc\_coeff\_witness",
-        "text": r"""At $c=0$, $k_{AB}-k_{BA}=(1-\omega)H/Z$, nonzero at
-$(\alpha,\beta,q_0,r_0,\omega)=(1/3,1/4,2/5,5/7,1/2)$.""",
+        "source": r"Ladder.lean, ladder\_assoc\_coeff and ladder\_assoc\_coeff\_eq\_zero\_iff; sympy/verify\_interior\_omega.py, row 3 (39/39)",
+        "text": r"""At $c=0$, $k_{AB}-k_{BA}=(1-\omega)H/Z$, zero exactly when $\omega=1$ or $H=0$. $H$ is
+irreducible and affine in $\omega$, so for each prior and cue at most one weight
+$\omega=-H_0/H_1$ makes it vanish unless $H_0=H_1=0$ (at the generic prior, $\omega=31/4483$).""",
         "note": r"``Under partial adoption the believed link moves at first order as well'' (Proposition LAD).",
     },
 ]

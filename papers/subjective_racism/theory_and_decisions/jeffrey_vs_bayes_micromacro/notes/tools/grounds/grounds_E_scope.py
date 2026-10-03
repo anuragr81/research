@@ -42,12 +42,13 @@ $\kappa'=-K$ for $K=q_0(1-q_0)(r_0-\beta)/Z$ of Proposition DRF.""",
     },
     {
         "kind": "computation",
-        "source": r"sympy/verify\_ORD.py, steps 5 and 8 (25/25)",
-        "text": r"""Step 8: $\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)\neq0$ at the generic
-point, so $\kappa$, $\kappa'$ vary independently across priors; requiring
-$\kappa\langle G,R_1\rangle-\kappa'\langle G,R_2\rangle=0$ at four priors leaves a
-two-parameter solution space for $G$, every member a combination of $\mathbf 1$ and
-$\nabla\assoc$, and each annihilates $R_1$ and $R_2$. Step 5: the between-sequence
+        "source": r"sympy/verify\_ORD.py, steps 5 and 8 (49/49)",
+        "text": r"""Step 8: $\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)=q_0q_1r_0r_1J_p/Z^3$ with
+$J_p$ irreducible, so $\kappa$, $\kappa'$ vary independently exactly off the hypersurface
+$J_p=0$; requiring $\kappa\langle G,R_1\rangle-\kappa'\langle G,R_2\rangle=0$ across priors,
+symbolically in $(q_0,r_0)$, gives a system with a $2\times2$ minor $-q_0^2q_1r_0r_1$ that
+never vanishes on the cube, so its solutions are exactly $\mathrm{span}\{\mathbf 1,\nabla\assoc\}$,
+each annihilating $R_1$ and $R_2$. Step 5: the between-sequence
 gap of $\assoc$ is $\Theta(c^2)$, and
 $\langle\nabla\assoc(q\otimes r),\,\kappa R_1-\kappa'R_2\rangle=0$.""",
         "note": r"Grounds for the ``if and only if'' clause and for the $\bigO(c^2)$ claim on the association.",
@@ -89,10 +90,10 @@ quotient, and the first-read slope vanishes only at $\delta=0$.""",
     },
     {
         "kind": "computation",
-        "source": r"sympy/check\_zero\_slope\_identification.py, case 7 (25/25); sympy/verify\_example.py",
+        "source": r"sympy/check\_zero\_slope\_identification.py, case 7 (47/47); sympy/verify\_example.py",
         "text": r"""$\delta=\dfrac{P^{A}(B{=}1)-P^{\delta}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}$ holds
-identically in $c$ (7a); the denominator equals $r_0-\beta$ at $c=0$ and is nonzero
-at the generic point (7b). With the numbers of Section 2 and $\omega=\tfrac12$:
+identically in $c$ (7a); the denominator is $(r_0-\beta)+c(\alpha-q_0)/(\alpha(1-\alpha))$,
+zero exactly on that irreducible hypersurface, which at $c=0$ is $r_0=\beta$ (7b). With the numbers of Section 2 and $\omega=\tfrac12$:
 $P^{A}(B{=}1)=14/25=.56$, $P^{1/2}_{AB}(B{=}1)=43/100$, $r_1=3/10$, and
 $(.56-.43)/(.56-.30)=\tfrac12$.""",
         "note": r"The recovery formula and the closing example sentence.",
@@ -253,7 +254,7 @@ $\tfrac{22}{125}$, which the $e$-update erases.""",
 GROUNDS["E.12"] = [
     {
         "kind": "computation",
-        "source": r"sympy/verify\_interior\_omega.py, row 1 (23/23)",
+        "source": r"sympy/verify\_interior\_omega.py, row 1 (39/39)",
         "text": r"""At $c=0$, symbolic in $\alpha,\beta,q_0,r_0,\delta$:
 $P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)=(1-\delta)(\alpha-q_0)$ and
 $P^{\delta}_{AB}(B{=}1)-P^{\delta}_{BA}(B{=}1)=-(1-\delta)(\beta-r_0)$.""",
@@ -264,10 +265,13 @@ $P^{\delta}_{AB}(B{=}1)-P^{\delta}_{BA}(B{=}1)=-(1-\delta)(\beta-r_0)$.""",
         "source": r"sympy/verify\_interior\_omega.py, rows 2-3",
         "text": r"""Row 2: each damped step multiplies the table it meets by a column (row) factor,
 so both routes are separable reweightings of the prior; their odds ratios equal the
-prior's at the generic point with $\delta=\tfrac13$, $c=\tfrac1{40}$. Row 3: the
+prior's, symbolically in the prior, the cues, $\delta$ and $c$. Row 3: the
 between-sequence effect on $\assoc$ is $0$ at $c=0$ for every $\delta$; its $c^1$
-coefficient is $(1-\delta)\,G$ with $G$ affine in $\delta$ and nonzero at the generic
-prior for $\delta=\tfrac12$ and $\delta=0$; at $\delta=1$ the effect is second order.""",
+coefficient is $(1-\delta)\,G$, $G=H/Z$ with
+$H=q_0q_1[\beta(1-\beta)+\delta(\beta-r_0)^2]-r_0r_1[\alpha(1-\alpha)+\delta(\alpha-q_0)^2]$
+irreducible over $\mathbb Q$; it vanishes exactly at $\delta=1$ or on the hypersurface
+$H=0$, which each prior and cue meets at no more than one weight
+$\delta=-H_0/H_1$ unless $H_0=H_1=0$ (at the generic prior, $\delta^*=31/4483$).""",
         "note": r"Odds ratio identical across sequences; association zero between sequences at $c=0$ and first order in $c$.",
     },
     {
@@ -276,8 +280,8 @@ prior for $\delta=\tfrac12$ and $\delta=0$; at $\delta=1$ the effect is second o
         "text": r"""At $c=0$ and interior $\lambda$, the mean belief
 $\lambda P^{\delta}_{AB}+(1-\lambda)P^{\delta}_{BA}$ differs from $\PB$ by
 $(1-\lambda)(1-\delta)(q_0-\alpha)$ on the $A$-marginal and by
-$-\lambda(1-\lambda)(1-\delta)^2(\alpha-q_0)(\beta-r_0)$ on $\assoc$; nonzero at the
-generic point for $\lambda=\tfrac25$, $\delta=\tfrac12$, and zero at $\delta=1$.""",
+$-\lambda(1-\lambda)(1-\delta)^2(\alpha-q_0)(\beta-r_0)$ on $\assoc$; for $\lambda\in(0,1)$
+the latter vanishes exactly at $\delta=1$, $q_0=\alpha$ or $r_0=\beta$.""",
         "note": r"The pooled cross-product association that no member holds.",
     },
     {
@@ -286,8 +290,8 @@ generic point for $\lambda=\tfrac25$, $\delta=\tfrac12$, and zero at $\delta=1$.
         "text": r"""Scale the second cue's Bayes factor by $\delta$:
 $W_{ij}=P_{ij}\,\ell^A_i\,(\ell^B_j)^{\delta}$ when $A$ is read first and
 $W_{ij}=P_{ij}\,(\ell^A_i)^{\delta}\,\ell^B_j$ when $B$ is, then normalise. At $c=0$
-the $A$-marginals differ between sequences (generic prior, $\delta=\tfrac12$) and
-agree at $\delta=1$. At $\delta=0$ both readings equal the single Jeffrey step on the
+the $A$-marginal gap is $\alpha(1-\alpha)(a_1a_0^{\delta}-a_0a_1^{\delta})/(\alpha a_0^{\delta}+(1-\alpha)a_1^{\delta})$,
+$a_i=q_i/P(A{=}i)$, zero exactly at $\delta=1$ or $q_0=\alpha$. At $\delta=0$ both readings equal the single Jeffrey step on the
 first cue, for every $c$.""",
         "note": r"The position channel is not a feature of updating on delivered credences.",
     },

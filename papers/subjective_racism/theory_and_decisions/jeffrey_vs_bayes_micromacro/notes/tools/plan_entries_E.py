@@ -392,7 +392,7 @@ the answer is settled before any averaging over the aggregate takes place
     "in prose are replaced. ORD must go in before E.1, E.5, E.6, E.7, E.9, E.11 and E.15, which "
     "cite it.",
     "PropORD.lean (lemmaORD_gap, propORD_Amarg, propORD_Bmarg, propORD_const); "
-    "verify_ORD.py (25/25)."))
+    "verify_ORD.py (49/49)."))
 
 E2.append(("E.11", "Scope, rival mechanisms (was 6.A)", [(
     "insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",
@@ -872,8 +872,9 @@ the association channel with it when the attributes are believed related.}
     "$a^\\omega$ is a construction of this paper, log-linear damping of the factor, not one of "
     "Hawthorne's variants; his variants are the $\\omega=1$ column, where updates on distinct bases "
     "commute. The Lean record proves FAC for an arbitrary damped factor $a'$ and states the "
-    "marginal agreement as $a_1a_0'=a_0a_1'$; the power form and its witnesses are in the sympy "
-    "suite. Table tab:robust puts the four settings side by side; its decision rows for the "
+    "marginal agreement as $a_1a_0'=a_0a_1'$; the power form is LadderFactorPow.lean "
+    "(`factor_pow_gap_iff`: the marginals agree at c = 0 iff omega = 1 or q0 = alpha), with its "
+    "closed forms in sympy/verify_ladder.py section F. Table tab:robust puts the four settings side by side; its decision rows for the "
     "partial-adoption columns are Theorem LOS read with an order-zero score gap and are the only "
     "entries not checked by sympy, as the caption says. Two tables now sit in the subsection; the "
     "author may drop tab:settings if tab:robust carries enough. Order of application: after E.10 "

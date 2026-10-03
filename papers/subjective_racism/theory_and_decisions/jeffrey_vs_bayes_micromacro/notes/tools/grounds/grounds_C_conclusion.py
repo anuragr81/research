@@ -80,10 +80,12 @@ $\Pbar_\lambda-\PB$; the aggregate first-order coefficient of $F$ is zero.""",
     },
     {
         "kind": "computation",
-        "source": r"sympy/verify\_PRO.py, protected class statistic by statistic (37/37)",
-        "text": r"""$\Pbar(B{=}1\mid A{=}1)-\Pbar(B{=}1\mid A{=}0)$: $dF\in\mathrm{span}\{J,d\,\assoc\}$,
-aggregate $c^1$ coefficient vanishes, actual leading order in $c$ is $2$.
-$\Pbar(B{=}1\mid A{=}1)$ alone: $dF\notin\mathrm{span}\{J,d\,\assoc\}$, leading order $1$.""",
+        "source": r"sympy/verify\_PRO.py, protected class statistic by statistic (59/59)",
+        "text": r"""Symbolic in $\alpha,\beta,q_0,r_0$ and $\lambda$:
+for $\Pbar(B{=}1\mid A{=}1)-\Pbar(B{=}1\mid A{=}0)$, $dF\in\mathrm{span}\{J,d\,\assoc\}$ and the
+$c^0$ and $c^1$ coefficients of $F(\Pbar_\lambda)-F(\PB)$ vanish identically; for
+$\Pbar(B{=}1\mid A{=}1)$ alone the $c^1$ coefficient is $\lambda(q_0-\alpha)r_0r_1/Z$, zero
+only when $\lambda=0$ or $q_0=\alpha$.""",
         "note": r"The difference question is second order; the level question it is built from is first order.",
     },
     {
@@ -95,17 +97,15 @@ exactly $|c\,\delta|$.""",
         "note": r"The band of changed decisions has width $|c\delta|$, which with a density positive at the threshold makes the share first order (Proposition SHR).",
     },
     {
-        "kind": "computation",
-        "source": r"sympy/verify\_ladder.py, row (B), 59/59",
+        "kind": "theorem",
+        "source": r"Ladder.lean, condDiff\_eq, ladder\_condDiff\_seqEffect, ladder\_condDiff\_coeff, ladder\_condDiff\_coeff\_eq\_zero\_iff; sympy/verify\_ladder.py, row (B) (99/99)",
         "text": r"""Under partial adoption of the second cue with weight $\omega$, the conditional
-difference equals $\assoc/(m_{A0}m_{A1})$ exactly, and its sequence effect has $c^1$
-coefficient
+difference equals $\assoc/(m_{A0}m_{A1})$, so each route's is $c$ times its association factor
+over its $A$-marginals, exactly; at $c=0$ the difference of those factors is
 \[
-\frac{t_0t_1-r_0r_1}{Z}=\frac{(1-\omega)(r_0-\beta)(t_0-r_1)}{Z},\qquad
-t_0=(1-\omega)\beta+\omega r_0,
+\frac{(1-\omega)(r_0-\beta)(t_0-r_1)}{Z},\qquad t_0=(1-\omega)\beta+\omega r_0,
 \]
-zero at $\omega=1$, at $r_0=\beta$, and at the one further weight where $t_0=r_1$;
-at the generic point it is $-39(\omega-1)(13\omega-1)/98$.""",
+zero exactly when $\omega=1$, $r_0=\beta$, or $t_0=1-r_0$.""",
         "note": r"The entry's claim is a full-adoption claim: a partly adopting population would in general not pass the difference audit.",
     },
     {

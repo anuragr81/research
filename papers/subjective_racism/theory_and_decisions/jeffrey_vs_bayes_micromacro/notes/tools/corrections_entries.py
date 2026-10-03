@@ -228,7 +228,7 @@ biases and prejudice form.""")],
     "nothing.",
     "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
-    "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (37/37)."))
+    "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (99/99)."))
 
 E.append(("C.5", "Introduction, hiring-panel paragraph, the two sentences before the last (rebased on the author's draft da5e3cff)", [(
     "As the paper shows, this means that the believed association differs between the two sequences only at second order.",
@@ -258,8 +258,8 @@ first order (Proposition~\ref{prop:LAD}).""")],
     "zero, differs at first order with coefficient $(1-\\omega)H/Z$ (LAD). Propositions ORD and LAD "
     "must be applied (5.2, 6.3) before the references resolve.",
     "PropIMM.lean; PropORD.lean; Ladder.lean (`ladder_gap`, `ladder_gap_mA1`, `ladder_assoc_coeff`, "
-    "`ladder_assoc_coeff_witness`); LemmaSEP.lean (general N, any attribute-local rescaling); "
-    "sympy/verify_ladder.py (53/53); sympy/verify_interior_omega.py rows 3 and 4."))
+    "`ladder_assoc_coeff_eq_zero_iff`); LemmaSEP.lean (general N, any attribute-local rescaling); "
+    "sympy/verify_ladder.py (99/99); sympy/verify_interior_omega.py rows 3 and 4 (39/39)."))
 
 E.append(("C.6", "Introduction, premise paragraph, from \"Read as a Bayes factor\"", [(
     "Read as a Bayes factor, the credential carries a likelihood ratio", "consistent with the delivered marginal \\citep{DiaconisZabell1982}",
@@ -506,7 +506,7 @@ well (Proposition~\ref{prop:LAD}).""")],
     "which a closing paragraph may do (rule 5): under partial adoption the association differs "
     "at first order (Proposition LAD). Goes last in the conclusion.",
     "PropDRF, PropSHR, PropDEC, PropORD.lean; LemmaSEP.lean; Decision.lean (LOS); Ladder.lean "
-    "(`ladder_assoc_coeff`); sympy/verify_tables.py; sympy/verify_ladder.py (53/53); "
+    "(`ladder_assoc_coeff`); sympy/verify_tables.py (56/56); sympy/verify_ladder.py (99/99); "
     "Doring.lean; Hawthorne.lean (amnestic_thesis; pp. 115-116)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
@@ -549,8 +549,8 @@ hiring decisions record the sequence.""")],
     "$(1-\\omega)(r_0-\\beta)(t_0-r_1)/Z$, $t_0$ the damped $B$-marginal, which vanishes at full "
     "adoption, when the letter delivers the prior marginal, and at one further weight fixed by "
     "the prior and the cue, so a partly adopting population would in general not pass the audit.",
-    "sympy/verify_PRO.py (37/37: the conditional difference is protected, the conditional "
-    "probability and a cell probability are not); sympy/verify_ladder.py row (B), 57/57 (the "
+    "sympy/verify_PRO.py (59/59: the conditional difference is protected, the conditional "
+    "probability and a cell probability are not); sympy/verify_ladder.py row (B), 99/99 (the "
     "conditional difference is first order under partial adoption); PropPRO.lean; "
     "Decision.lean (Proposition SHR); "
     "literature/coffman_exley_niederle2021 (Lean + sympy)."))
@@ -626,7 +626,7 @@ two sequences differ even when the attributes are believed unrelated."""),
     "the record behind part 2. Entry B.1, the AI declaration, no longer names FAC.",
     "Ladder.lean (`rescale_rescale`, `oddsRatio_factorRoute`, `assoc_factorRoute`, "
     "`factorRoute_at_zero`, `factor_mA1_gap_iff`, `mprod_factorRoute_zero`); "
-    "sympy/verify_ladder.py section F (53/53); Wagner2002.lean (thm31); for the rubric "
+    "sympy/verify_ladder.py section F (99/99); LadderFactorPow.lean; Wagner2002.lean (thm31); for the rubric "
     "sentence, Aggregate.lean (propDRF_route_AB) and Anchoring.lean (dampedB_deviation)."))
 
 E.append(("C.13", "Section 4, the Foster-Greer-Thorbecke sentence", [(

@@ -13,7 +13,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 - [x] **Applied at 6775f822 (2026-10-02):** 3.2 parts 3 to 5 (the Dietrich sentences deleted
   rather than rewritten, the author having judged the pooling literature out of scope; the
   Epstein/Ortoleva/Cripps and Pettigrew-Weisberg sentences corrected) and the new 5.3, the
-  pooling sentence in Section 5 (`sympy/verify_pooling.py`, 10/10).
+  pooling sentence in Section 5 (`sympy/verify_pooling.py`, now 72/72, symbolic in every parameter).
 - [~] **Pending, the author's call entry by entry:** 0.1, 1.1 to 1.9, 2.6, 3.2 parts 1 and 2, 3.3,
   3.5, 4.2, A.1, B.1, B.2. The intro's two-channel paragraph still says "with full-adoption"
   (hyphenated) and the one-sentence rubric remnant in 6.2 uses a term the paper never defines.
@@ -28,12 +28,12 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   day: the last sentence now says what the audit cannot rule out (one admissible population of
   coherent evaluators suffices), and it is a full-adoption claim, since under partial adoption the
   conditional difference is first order with coefficient $(1-\omega)(r_0-\beta)(t_0-r_1)/Z$
-  (`sympy/verify_ladder.py` row B, 59/59). Grounds added 2026-10-03
+  (`sympy/verify_ladder.py` row B, now 99/99; Lean `ladder_condDiff_coeff`). Grounds added 2026-10-03
   (`notes/tools/grounds/grounds_C_conclusion.py`: five quotations from the working paper, the
   Lean identity, PRO, the band width, the ladder computation, and Canay et al.'s Theorem 4.1).
   Bohren, Haggag, Imas and Pope (the level question per group) to be looked at next.
 - [x] **Grounds for 5.3, 6.4 and 7.1 (2026-10-03):** `notes/tools/grounds/grounds_C_applied.py`.
-  5.3: Proposition IMM and `sympy/verify_pooling.py` (10/10). 6.4: ADJ, LAD (`ladder_gap`,
+  5.3: Proposition IMM and `sympy/verify_pooling.py` (72/72). 6.4: ADJ, LAD (`ladder_gap`,
   `ladder_assoc_coeff`, `ladder_oddsShadow_seqEffect`), the rescaling invariance, Wagner's Theorem 3.1
   and its Lean form, the factor-route theorems and `verify_ladder.py` section F, DRF and the damped
   order effect. 7.1: Doring and Hawthorne (pp. 115-116), ORD, the association at full adoption and the
@@ -43,6 +43,23 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   (`literature/canay_mogstad_mountjoy2024`): Theorem 4.2 in general, Theorem 4.1 by witnesses in the
   continuous monotone class for all four cases, `biased_judge_passes`. Still quoted only in the plan
   (7.2's Grounds); not cited in the manuscript.
+- [x] **No claim rests on one point any more (2026-10-03, author's ruling).** Every "nonzero
+  generically" or "order k" check in the twelve sympy scripts now asserts a factored closed form,
+  symbolic in every parameter, with its exact zero set on the open cube; one-point evaluations survive
+  only as rows labelled "(sanity, one point)" (`sympy/README.md`, Method notes). New Lean theorems
+  replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
+  `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
+  6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [~] **Exceptional sets the manuscript may want to state (author to judge; no entry drafted):**
+  (a) Lemma ASC's "exactly second order": the individual association gap on route AB has $c^2$
+  coefficient $\kappa q_0q_1(1-2r_0)/Z$, so it is second order except where $q_0=\alpha$ or the letter
+  delivers exactly $1/2$ ($r_0=1/2$; mirror $q_0=1/2$ on route BA). (b) Under partial adoption the
+  association's first-order sequence effect vanishes on the surface $H=0$ as well as at $\omega=1$; at
+  the generic prior that is the single weight $\omega=31/4483$. (c) The aggregate association gap (DEC)
+  and the between-sequence association gap (ORD) are second order off irreducible surfaces ($F=0$,
+  $H_{\mathrm{ord}}=0$), not only off $\{q_0=\alpha, r_0=\beta\}$. (d) The marginal and decision
+  statistics' first-order coefficients vanish exactly when a cue delivers the prior marginal
+  ($q_0=\alpha$ or $r_0=\beta$) or the population reads in one sequence only ($\lambda\in\{0,1\}$).
 - [~] **Notation in 6.3 (Proposition ADJ):** rename the one-cue beliefs $P^{A}$, $P^{B}$ to
   $P^{(A)}$, $P^{(B)}$ so they cannot be read as the benchmark $P^{\mathrm B}$
   (roman B). Notation only.
@@ -51,7 +68,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 - [ ] **Push** after each batch. Rebuild `PAPER_B_MANUSCRIPT.pdf` right before pushing,
   since it goes stale when the tex changes.
 - [x] **Adoption weight (decided 2026-10-01).** Keep $\omega$, repurposed as the nesting
-  of Hogarth-Einhorn's belief-adjustment rule. Verified: `sympy/verify_ladder.py` (37/37),
+  of Hogarth-Einhorn's belief-adjustment rule. Verified: `sympy/verify_ladder.py` (99/99),
   `lean/JeffreyOrder/Ladder.lean`. Partial adoption moves every belief statistic except the odds
   ratio one order earlier with the ranking unchanged; the odds ratio is blind at every weight; the
   share-versus-loss separation holds only under full adoption.

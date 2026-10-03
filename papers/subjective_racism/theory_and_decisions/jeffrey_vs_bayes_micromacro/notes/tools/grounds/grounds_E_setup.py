@@ -206,13 +206,16 @@ weight gives $0$. The right-hand side mentions neither $\PB$ nor $\lambda$.""",
 fixed by its differential against $R_1$ and $R_2$, so the classification is settled for
 one evaluator before any averaging."""),
     dict(kind="computation",
-         source=r"sympy/verify\_ORD.py, steps (5) and (8)",
-         text=r"""$\assoc(\PJ_{AB})-\assoc(\PJ_{BA})=\Theta(c^2)$ at a generic point and
-$\langle\nabla\!\assoc,\ \kappa R_1-\kappa'R_2\rangle=0$. Requiring
-$\kappa\langle G,R_1\rangle-\kappa'\langle G,R_2\rangle=0$ at four priors $(\alpha,\beta)$
-leaves a two-parameter solution space for $G$, every member of which lies in
-$\mathrm{span}\{J,\nabla\!\assoc\}$ and annihilates $R_1$ and $R_2$;
-$\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)\neq0$.""",
+         source=r"sympy/verify\_ORD.py, steps (5) and (8) (49/49)",
+         text=r"""$\assoc(\PJ_{AB})-\assoc(\PJ_{BA})$ has $c^0$ and $c^1$ coefficients zero identically and
+$c^2$ coefficient $q_0q_1r_0r_1H_{\mathrm{ord}}/Z^2$,
+$H_{\mathrm{ord}}=(q_0-\alpha)(2r_0-1)-(r_0-\beta)(2q_0-1)$ irreducible, so it is second order off
+the hypersurface $H_{\mathrm{ord}}=0$; and $\langle\nabla\!\assoc,\ \kappa R_1-\kappa'R_2\rangle=0$.
+Requiring $\kappa\langle G,R_1\rangle-\kappa'\langle G,R_2\rangle=0$ across priors, symbolically in
+$(q_0,r_0)$, leaves exactly $\mathrm{span}\{J,\nabla\!\assoc\}$ (a $2\times2$ minor $-q_0^2q_1r_0r_1$
+never vanishes on the cube), each member annihilating $R_1$ and $R_2$;
+$\det\,\partial(\kappa,\kappa')/\partial(\alpha,\beta)=q_0q_1r_0r_1J_p/Z^3$, nonzero off the hypersurface
+$J_p=0$.""",
          note=r"""Marginals and generic scores are first order, the association second order, and the
 dividing line is annihilation of $\mathrm{span}\{R_1,R_2\}$, the same line Proposition PRO
 draws for the aggregate."""),
