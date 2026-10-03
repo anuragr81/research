@@ -903,7 +903,8 @@ E2.append(("E.14", "Bibliography entries the Section E texts need (was B.A)", []
     "Bohren2019). Hawthorne2004 is already in bibliography.bib. All six proposed entries are in "
     "notes/manuscript_corrections_extra.bib and move to bibliography.bib on approval. Zhao-"
     "Osherson is cited only in the introduction (author's draft) and is already in the "
-    "bibliography. Added 2026-10-02: CoffmanExleyNiederle2021, needed by C.19.",
+    "bibliography. Added 2026-10-02: CoffmanExleyNiederle2021, needed by C.19. Added "
+    "2026-10-03: TverskyKahneman1992, needed by C.20.",
     "Bibliographic details verified against the Drive copies where printed (Doring: Phil. "
     "Sci. 66 (Proceedings) S379-S389; Garber: 47(1) 142-145; Heckman: JEP 12(2) 101-116); "
     "Bohren et al.'s AER pages are from the reference lists of later papers, the Drive copy "

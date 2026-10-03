@@ -509,6 +509,31 @@ well (Proposition~\ref{prop:LAD}).""")],
     "(`ladder_assoc_coeff`); sympy/verify_tables.py (56/56); sympy/verify_ladder.py (99/99); "
     "Doring.lean; Hawthorne.lean (amnestic_thesis; pp. 115-116)."))
 
+E.append(("C.20", "Related literature: prospect theory's rank dependence set against sequence dependence (new)", [
+    ("insert_sentence", "prior with each new input multiplicatively before the Jeffrey step,",
+     "characterises what remains of it in aggregate.",
+     r"""Cumulative prospect theory assigns each outcome a decision weight that depends on
+its rank among the outcomes of a given prospect \citep{TverskyKahneman1992}, whereas in
+the current paper belief depends on the sequence in which two cues about one candidate
+are read, through the believed link between the traits, and not at all when the traits
+are believed unrelated.""")],
+    "Author's request (2026-10-03): remove a descriptive-models objection a referee may raise, "
+    "that cumulative prospect theory already accounts for sequence. Tversky and Kahneman (1992), "
+    "read in full, take the prospect as given to the valuation (p. 299) and contain no rule for "
+    "revising its probabilities; the one ordering in the representation is the ranking of outcomes "
+    "by value, on which each decision weight depends (pp. 300-301). The paper's sequence is that in "
+    "which two cues about one candidate are read, and under full adoption it moves belief only "
+    "through the believed link between the traits (Propositions IMM and ORD). The sentence names "
+    "both sides in parallel (a decision weight depends on rank; belief depends on the sequence) and "
+    "uses \"sequence\" only for reading, as rule 6 requires. A dynamic application of the theory "
+    "(Barberis 2012, read and formalised) was dropped at the author's call: a casino's bets on "
+    "known odds are not the panel's setting. Placed after the Pettigrew-Weisberg sentence, before "
+    "the Hogarth-Einhorn sentences, so that the two descriptive models sit together; the author "
+    "chose to keep the paragraph unsplit. Needs the bibliography entry in B.2.",
+    "literature/tversky_kahneman1992 (TverskyKahneman.lean, 16 theorems; sympy check); "
+    "PropIMM.lean (propIMM_indep, propIMM_no_sequence_effect); PropORD.lean (propORD_Amarg, "
+    "propORD_Bmarg); sympy/verify_IMM.py, sympy/verify_ORD.py (49/49)."))
+
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
      "lives entirely in outcomes.",

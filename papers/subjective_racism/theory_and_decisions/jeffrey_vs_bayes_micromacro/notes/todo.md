@@ -50,6 +50,10 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [~] **3.6 (added 2026-10-03, pending the author's review):** one sentence in Section 3's
+  decision-theory paragraph setting cumulative prospect theory's rank dependence (Tversky and
+  Kahneman 1992, read in full, Lean record) against the paper's sequence dependence, for a referee
+  who asks whether CPT already covers sequence. Barberis (2012) read and formalised, then dropped.
 - [~] **Exceptional sets the manuscript may want to state (author to judge; no entry drafted):**
   (a) Lemma ASC's "exactly second order": the individual association gap on route AB has $c^2$
   coefficient $\kappa q_0q_1(1-2r_0)/Z$, so it is second order except where $q_0=\alpha$ or the letter
