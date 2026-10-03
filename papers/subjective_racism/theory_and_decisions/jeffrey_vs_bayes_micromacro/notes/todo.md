@@ -50,6 +50,12 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [x] **Applied at 5088448e (2026-10-03), at the author's direct instruction:** 3.7, the two
+  channels named by what each needs (Section 3: position channel assumed against association
+  channel derived; full adoption needs both credences and a believed association. Section 6:
+  the evaluator owns the prior association; the position channel is a weight on a cue's
+  position, not a bias of the observer). Dropped with the replaced sentence: its premise that
+  sequence dependence is observed in practice.
 - [x] **Applied at 46b68558 (2026-10-03), at the author's direct instruction:** 6.6, Section 6
   merged into one Scope section (the overlapping 6.2 opening and rival-mechanisms material cut,
   the Asch and Hawthorne cautions kept); Section 6 is now 1,719 words (from 2,124). One cut

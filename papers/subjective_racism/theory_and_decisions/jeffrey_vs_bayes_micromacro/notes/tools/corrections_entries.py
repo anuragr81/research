@@ -23,6 +23,7 @@ APPLIED["C.21"] = "deddd600"
 APPLIED["C.19"] = "f125368b"
 APPLIED["C.20"] = "f125368b"
 APPLIED["C.22"] = "46b68558"
+APPLIED["C.23"] = "5088448e"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
@@ -677,6 +678,49 @@ assumed."""),
     "No new claim. The manuscript builds with no undefined references; every statement kept rests "
     "on the records already cited for 6.3 and 6.4 (Anchoring.lean, Ladder.lean, verify_ladder.py "
     "99/99, verify_interior_omega.py 39/39, Asch.lean, Hawthorne.lean)."))
+
+E.append(("C.23", "The two channels named by what each needs (applied)", [
+    ("Instead of being the property of the observer (position channel),", "(association channel).",
+     r"""Sequence dependence is not assumed here as a weight on a cue's position (position
+channel) but derived from a believed link between the traits (association channel)."""),
+    ("Since sequence dependence of cues is indeed observed in practice,", "for unrelated attributes as well.",
+     r"""Under full adoption, sequence dependence sits in neither the evidence nor the
+evaluator alone, since it needs both cues that deliver credences rather than Bayes
+factors and an evaluator who believes the traits related."""),
+    ("A cue on one attribute moves the belief about the other", "a belief the first has already changed.",
+     r"""A cue on one attribute moves
+the evaluator's belief about the other through the association in the evaluator's
+prior, so the second cue meets a belief the first has already changed."""),
+    ("The position channel is a temporal bias of the observer", "exists only when they are.",
+     r"""The
+position channel is a weight the evaluator gives a cue for its position, present
+whether or not the attributes are believed related, while the association channel
+needs no such weight and exists only when they are.""")],
+    "Author's request (2026-10-03), applied directly at the author's instruction and recorded "
+    "here afterwards. The author asked whether the Section 6 sentence on the association channel "
+    "made beliefs external to the observer, and then why the position channel needs sequence "
+    "dependence at unrelated traits while the association channel can have none. The text set "
+    "\"the property of the observer\" (position channel) against \"a property of believed "
+    "association\" (association channel), but both belong to the evaluator; what differs is that "
+    "the position channel puts sequence dependence in by a weight on a cue's position, while the "
+    "association channel derives it from cues weighed alike in either position. Part 1 states that "
+    "contrast in Section 3 at the same length (26 words against 24). Part 2 is the author's choice "
+    "of sentence, stating what full adoption needs: remove the believed association and the two "
+    "sequences give one belief (Proposition IMM), and remove the delivered credences, reading "
+    "each cue as a Bayes factor the same in either position, and they give one belief at every "
+    "association (Wagner 2002). It replaces the sentence the author found confusing, that the only "
+    "way for sequence dependence to exist under partial adoption is for it to be there for "
+    "unrelated attributes as well, whose premise that sequence dependence is observed in practice "
+    "goes with it (34 words against 33). \"Needs\" claims only necessity: the dependence can still "
+    "vanish at $c\\neq0$, as when a cue delivers the prior marginal. Part 3 names the evaluator as "
+    "the holder of the association, which \"the prior association\" left open to a reading as a "
+    "correlation among applicants (31 words against 27). Part 4 replaces \"temporal bias of the "
+    "observer\", which writing_discipline.md 6 rules out twice (\"bias\" collides with biased "
+    "beliefs, and the observer is the auditor, not the evaluator), and \"what one cue implies about "
+    "the other\", which left the implication without an owner (37 words against 38).",
+    "PropIMM.lean (propIMM_indep); Wagner 2002, Theorem 3.1, and Wagner2002.lean (thm31); "
+    "PropDIV.lean (jeffreyA_prior_mB0); PropORD.lean (propORD_Amarg); Anchoring.lean "
+    "(orderEffect_damped_at_indep)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
