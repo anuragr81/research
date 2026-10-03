@@ -21,7 +21,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   ten-row settings table and the rubric paragraph go; the four-settings table keeps its credence
   columns) and 7.1 (closing paragraph of the conclusion on the Section 3 debate). The manuscript
   is 26 pages, no undefined references or citations. The Lean and sympy records for FAC stay.
-- [~] **7.2 (added 2026-10-02, pending the author's review):** the conclusion's third
+- [x] **7.2 (added 2026-10-02; applied at f125368b):** the conclusion's third
   implication names Coffman, Exley and Niederle (2021) as a design that asks a difference
   question (the believed gap between groups) and reads a decision rate (who is hired), and
   replaces the sentence claiming a population passes "every belief-level audit". Amended the same
@@ -53,7 +53,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 - [x] **Applied at deddd600 (2026-10-03), at the author's direct instruction:** 6.5, the proofs of
   Propositions ADJ and LAD moved word for word to Appendix A (A.5, A.6). Section 6 is now about 2,120
   words; the author may cut prose further.
-- [~] **3.6 (added 2026-10-03, pending the author's review):** one sentence in Section 3's
+- [x] **3.6 (added 2026-10-03; applied at f125368b):** one sentence in Section 3's
   decision-theory paragraph setting cumulative prospect theory's rank dependence (Tversky and
   Kahneman 1992, read in full, Lean record) against the paper's sequence dependence, for a referee
   who asks whether CPT already covers sequence. Barberis (2012) read and formalised, then dropped.

@@ -481,10 +481,10 @@ Bohren et al.\ 2019, D\"oring 1999, Garber 1980); they are in
 \texttt{notes/manuscript\_corrections\_extra.bib} so that this document renders them, and move to
 \texttt{bibliography.bib} on approval. The Drive copy of Jeffrey (2004) is the November 2002 draft,
 so """ + CHAPTER_USERS + r""" cite the chapter only.
-\citet{CoffmanExleyNiederle2021}, needed by """ + renum("C.19") + r""", was added on 2 October 2026
-(\emph{Management Science} 67(6), 3551--3569, doi 10.1287/mnsc.2020.3660).
-\citet{TverskyKahneman1992}, needed by """ + renum("C.20") + r""", was added on 3 October 2026
-(\emph{Journal of Risk and Uncertainty} 5, 297--323, doi 10.1007/BF00122574).
+\citet{CoffmanExleyNiederle2021} (\emph{Management Science} 67(6), 3551--3569) and
+\citet{TverskyKahneman1992} (\emph{Journal of Risk and Uncertainty} 5, 297--323), needed by
+""" + renum("C.19") + r""" and """ + renum("C.20") + r""", moved into \texttt{bibliography.bib} when those entries were applied
+on 3 October 2026.
 
 \section*{Applied entries in force}
 These entries were applied to the manuscript at """ + ", ".join(APPLIED_COMMITS) + r""", and their text stands in

@@ -31,7 +31,7 @@
 \setlength{\parindent}{0pt}
 \title{Paper B: corrections to the manuscript (master plan)}
 \author{}
-\date{Against the manuscript at deddd600, 2 October 2026}
+\date{Against the manuscript at f125368b, 2 October 2026}
 \begin{document}
 \maketitle
 \vspace{-1.5em}
@@ -57,11 +57,11 @@ text would appear. \textbf{0} is the abstract, \textbf{1} to \textbf{7} are the 
 shows its former number, which earlier notes and commits use, and the table at the end maps old
 numbers to new. Order of application, where it differs from manuscript order. B.2 (bibliography) goes in before every pending entry that cites a reference not yet in the .bib. B.1 goes in last.
 
-\paragraph*{Applied to the manuscript} at 6775f822, 6cdf15f3, db3a2f41, deddd600: 2.1, 2.2, 2.3, 2.4, 2.5, 3.1, 3.4, 4.1, 5.1, 5.2, 5.3, 6.1, 6.2, 6.3, 6.4, 6.5, 7.1; 3.2 parts 3, 4, 5 at 6775f822.
+\paragraph*{Applied to the manuscript} at 6775f822, 6cdf15f3, db3a2f41, deddd600, f125368b: 2.1, 2.2, 2.3, 2.4, 2.5, 3.1, 3.4, 3.6, 4.1, 5.1, 5.2, 5.3, 6.1, 6.2, 6.3, 6.4, 6.5, 7.1, 7.2; 3.2 parts 3, 4, 5 at 6775f822.
 These entries have left the table of changes. What of them stands in the manuscript is under
 ``Applied entries in force''; what has since been removed or largely rewritten (3.1, 5.1, 6.3) is under ``History''.
 
-\paragraph*{Pending} (20 entries, in manuscript order): 0.1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.6, 3.2, 3.3, 3.5, 3.6, 4.2, 7.2, A.1, B.1, B.2.
+\paragraph*{Pending} (18 entries, in manuscript order): 0.1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.6, 3.2, 3.3, 3.5, 4.2, A.1, B.1, B.2.
 
 {\small
 \begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
@@ -550,27 +550,6 @@ $\PB(\omega) \propto P(\omega)\, \dfrac{x_{E(\omega)}}{P(E_{E(\omega)})}\,
 likelihoods matched to the prior, is Paper B's benchmark; sequence dependence
 belongs to the delivered credences.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
-\entryhead{3.6}{Related literature: prospect theory's rank dependence set against sequence dependence (new)\quad{\footnotesize\textit{(formerly C.20)}}}
-1/1 & \textit{New sentence after} ``prior with each new input multiplicatively before the Jeffrey step, the current paper instead accepts the non-commutativity and characterises what remains of it in aggregate.'' & Cumulative prospect theory assigns each outcome a decision weight that depends on its rank among the outcomes of a given prospect \citep{TverskyKahneman1992}, whereas in the current paper belief depends on the sequence in which two cues about one candidate are read, through the believed link between the traits, and not at all when the traits are believed unrelated. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Author's request (2026-10-03): remove a descriptive-models objection a referee may raise, that cumulative prospect theory already accounts for sequence. Tversky and Kahneman (1992), read in full, take the prospect as given to the valuation (p. 299) and contain no rule for revising its probabilities; the one ordering in the representation is the ranking of outcomes by value, on which each decision weight depends (pp. 300-301). The paper's sequence is that in which two cues about one candidate are read, and under full adoption it moves belief only through the believed link between the traits (Propositions IMM and ORD). The sentence names both sides in parallel (a decision weight depends on rank; belief depends on the sequence) and uses ``sequence'' only for reading, as rule 6 requires. A dynamic application of the theory (Barberis 2012, read and formalised) was dropped at the author's call: a casino's bets on known odds are not the panel's setting. Placed after the Pettigrew-Weisberg sentence, before the Hogarth-Einhorn sentences, so that the two descriptive models sit together; the author chose to keep the paragraph unsplit. Needs the bibliography entry in B.2.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} literature/tversky\_kahneman1992 (TverskyKahneman.lean, 16 theorems; sympy check); PropIMM.lean (propIMM\_indep, propIMM\_no\_sequence\_effect); PropORD.lean (propORD\_Amarg, propORD\_Bmarg); sympy/verify\_IMM.py, sympy/verify\_ORD.py (49/49).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Tversky and Kahneman 1992, Section 1, p.~299} \newline ``Prospect theory distinguishes two phases in the choice process: framing and
-valuation. \ldots The valuation process discussed in subsequent sections is applied to
-framed prospects.'' \newline \textit{The prospect is given to the valuation; the theory, read in full, contains no rule for revising its probabilities.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Tversky and Kahneman 1992, Section 1.1, pp.~300--301} \newline ``To define the cumulative functional, we arrange the outcomes of each prospect in
-increasing order.'' \ldots ``The decision weight $\pi_i^+$, associated with a positive outcome,
-is the difference between the capacities of the events `the outcome is at least as good as
-$x_i$' and `the outcome is strictly better than $x_i$.'\,'' \newline \textit{The decision weight of an outcome depends on its rank among the outcomes of the prospect.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{TverskyKahneman.lean, sum\_piPlus, piPlus\_id, rank\_dependence} \newline With $\pi_i^+=w^+(p_i+\dots+p_n)-w^+(p_{i+1}+\dots+p_n)$: for $w^+(0)=0$, $w^+(1)=1$ and
-probabilities summing to one, $\sum_i\pi_i^+=1$; for $w^+$ the identity, $\pi_i^+=p_i$; and with
-$w^+(p)=p^2$ and three equiprobable gains the top gain is weighted $1/9$ and the middle one $1/3$. \newline \textit{Rank dependence, stated and checked: the same probability gets a different weight at a different rank.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropIMM.lean, propIMM\_indep and propIMM\_no\_sequence\_effect} \newline For $\alpha,1-\alpha,\beta,1-\beta\neq0$: at $c=0$, $\PJ_{AB}=\PJ_{BA}=\PB$, so the two
-sequences give one belief. \newline \textit{``Not at all when the traits are believed unrelated.''}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropORD.lean, propORD\_Amarg, propORD\_Bmarg, propORD\_const, propORD\_Amarg\_eq\_negKdrift} \newline Same hypotheses. $\frac{d}{dc}\bigl[\PJ_{AB}(A{=}1)-\PJ_{BA}(A{=}1)\bigr]_{c=0}=\kappa'$,
-$\frac{d}{dc}\bigl[\PJ_{AB}(B{=}1)-\PJ_{BA}(B{=}1)\bigr]_{c=0}=-\kappa$, and for the
-constant weight $\mathbf 1$ the coefficient is $0$. With $Z\neq0$,
-$\kappa'=-K$ for $K=q_0(1-q_0)(r_0-\beta)/Z$ of Proposition DRF. \newline \textit{``Belief depends on the sequence ... through the believed link'': at $c\neq0$ the two sequences' marginals differ at first order in $c$, with coefficients $\kappa'$ and $-\kappa$.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
 \entryhead{3.3}{Related literature, Asch as evidence (was 3.B)\quad{\footnotesize\textit{(formerly E.6)}}}
 1/1 & While Bayes-factor updating predicts no sequence effect anywhere \citep{Wagner2002}, the belief-adjustment accounts of order effects \citep{HogarthEinhorn1992} focus on a single evaluative anchor. What the paper highlights is that such experimental analyses must also factor in the cross-attribute association -- thus requiring the elicitation of a full posterior table rather than a single rating produced by step-by-step or end-of-sequence response modes. & While Bayes-factor updating predicts no sequence effect anywhere \citep{Wagner2002}, the experimental tradition has measured the phenomenon entirely in marginals. \citet{HogarthEinhorn1992} track a single evaluative anchor. \citet{Asch1946} is more generous and more instructive. His Experiment~VI reports, for each of eighteen traits, the proportion of subjects choosing it over its opposite for the person described, separately for the two reading sequences. That the sequence effect differs in size across statistics is already visible there, although the differences Asch reports are all among marginals, which the paper treats alike. Between the sequences, \emph{restrained} moves from 64 to 9 per cent and \emph{good-looking} from 74 to 35, while \emph{serious} moves from 97 to 100, \emph{persistent} from 82 to 87 and \emph{reliable} from 84 to 91. Some statistics swing enormously and others scarcely move, and Asch attributes the difference to the content of the terms rather than to their position. Yet eighteen marginals separate full adoption from partial adoption no better than one. Separating them needs the rating of one trait before and after the second cue and against what that cue delivers (Proposition~\ref{prop:ADJ}), and the check-list asks whether a trait fits and never how strongly two traits are believed to go together beforehand, so the prior association cannot be formed from such data at all. What the paper adds is therefore not that more ratings are needed but that a second object must be elicited. Seeing the sequence effect requires only a marginal read in both sequences, which Asch has; locating the mechanism behind it requires the prior association as well, which he does not. \\ \hline
 \multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Plan 3.B with the audit applied. A11, the check-list is a forced choice between opposite pairs. A15, Asch does give an account of the uneven effects, by content. P13, what is never elicited is the prior association, not the joint. The ADJ clause now states what the recovery formula uses, three ratings of one marginal, not a marginal across values of $c$. ``amnestic updating'' becomes ``full adoption''. Colon removed. All eight percentages are correct and in the right columns.} \\
@@ -616,56 +595,6 @@ whole population, $I = 1$ on $\{0\}$ and $I = \tfrac12$ on $\{1, 2\}$, and
 $\tfrac34 \neq \tfrac13 \cdot 1 + \tfrac23 \cdot \tfrac12 = \tfrac23$. \newline \textit{The mean shortfall among the poor (FGT's $I$ times $z$) is not
 additively decomposable with population-share weights, so it is not a member
 of the decomposable family the manuscript cites.}} \\ \hline
-\multicolumn{3}{|l|}{} \\ \hline
-\multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{7\quad Concluding remarks}} \\ \hline\hline
-\entryhead{7.2}{Concluding remarks, third implication: an existing design that asks a difference question and reads decisions\quad{\footnotesize\textit{(formerly C.19)}}}
-1/1 & What the paper finds is that a population could pass every belief-level audit sincerely while the footprint of sequence-dependence lives entirely in outcomes. & \citet{CoffmanExleyNiederle2021}, for instance, ask employers how much better they believe one group of workers performs than another, and read discrimination from the hiring decisions themselves. A believed difference between groups is second order under the sequence dependence studied here, while the share of decisions the reading sequence changes is first order (Propositions~\ref{prop:PRO} and~\ref{prop:SHR}). Such a belief audit therefore cannot rule out a role for the reading sequence, since a population of coherent evaluators would pass it while its hiring decisions record the sequence. \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Author's request (2026-10-02): name an existing instrument that sets a difference question against a decision rate. Coffman, Exley and Niederle (read in full, the February 2020 working paper the author linked) elicit the believed gap in average scores between two groups of workers (p. 8) and measure discrimination by how often the worker from one group is hired when the two have identical scores (pp. 15-17); the believed gap predicts those decisions (Table 1, column 2). A difference between groups has the form of the conditional difference P(B=1|A=1) - P(B=1|A=0), which Proposition PRO places in the protected class (second order), while the share of decisions changed is first order (Proposition SHR). The match is in the form of the question only: in their design group membership is observed and nothing is read in sequence, and they set belief formation aside (fn. 5, p. 4), so the sentence says what a question of that form records under the sequence dependence studied here, not what their data show. The entry replaces the sentence 'a population could pass every belief-level audit sincerely while the footprint of sequence-dependence lives entirely in outcomes' rather than adding to it, because that sentence contradicts the paper's own classification: a belief audit that asks a level question (a marginal, or a conditional probability such as P(B=1|A=1)) records the sequence at first order (Propositions DRF and PRO), so only audits asking how much likelier one trait makes another are passed. Bohren, Haggag, Imas and Pope (2025), who ask the level question for each group, are left for the author's review. Page numbers are the working paper's and are to be checked against Management Science 67(6), 3551-3569, before applying. Needs the bibliography entry in B.2. Amended at the author's request (2026-10-02): the last sentence says what the audit cannot rule out rather than that a population passes it, so the claim rests on one admissible population, coherent evaluators updating by Jeffrey's rule, and not on how real evaluators update; it has the form of Canay, Mogstad and Mountjoy's Theorem 4.1 (an outcome test may find no bias in a biased judge). It is a full-adoption claim: under partial adoption the conditional difference differs between the sequences at first order, with coefficient $(1-\omega)(r_0-\beta)(t_0-r_1)/Z$, $t_0$ the damped $B$-marginal, which vanishes at full adoption, when the letter delivers the prior marginal, and at one further weight fixed by the prior and the cue, so a partly adopting population would in general not pass the audit.} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} sympy/verify\_PRO.py (59/59: the conditional difference is protected, the conditional probability and a cell probability are not); sympy/verify\_ladder.py row (B), 99/99 (the conditional difference is first order under partial adoption); PropPRO.lean; Decision.lean (Proposition SHR); literature/coffman\_exley\_niederle2021 (Lean + sympy).} \\ \hline
-\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Coffman, Exley and Niederle 2020 (working paper), Section 2.2, p. 8} \newline ``employers predict the difference in average scores between these groups of
-workers on a 10-question easy quiz and a 10-question hard quiz. Employers could indicate
-any feasible average difference (from -10 to 10 problems solved correctly)'' \newline \textit{The belief question is a difference between groups, not a level for either.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, fn 17, p. 16} \newline ``We code the probability of a female-even-month worker being hired as 1 if she
-is hired with certainty, 0.5 if chance determines who is hired, and 0 if a
-male-odd-month worker is instead hired with certainty.'' \newline \textit{The outcome read is a decision rate.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, Section 3.2, p. 16} \newline ``If employers neither engage in belief-based nor taste-based discrimination, we
-expect that they should hire female-even-month workers 50\% of the time. This is not
-the case. Employers in the Gender treatment only hire female workers in 43\% of
-decisions, significantly below the 50\% benchmark.'' \newline \textit{Discrimination is read from the decisions themselves, against a 50\% benchmark.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, Section 3.2, p. 17} \newline ``Column 2 shows that beliefs are highly predictive of decisions: employers who
-believe the performance gap is larger are less likely to hire the worker from the
-lower-performing group.'' \newline \textit{The believed difference and the decision rate are read together, which is the pairing the entry uses.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, fn 5, p. 4} \newline ``This of course limits our ability to test the stereotype formation channel of
-Bordalo et al. (2016). We focus instead on decision-making given a certain set of
-beliefs.'' \newline \textit{Belief formation, where the paper's mechanism sits, is set aside by their design; the match is in the form of the question only.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{CoffmanExleyNiederle.lean, gap\_is\_conditional\_difference} \newline For a belief $Q$ over group $a\in\{0,1\}$ and a $0$--$1$ score $b$, the difference of
-the groups' mean scores equals the conditional difference,
-\[
-\frac{Q_{11}}{Q_{11}+Q_{10}}-\frac{Q_{01}}{Q_{01}+Q_{00}}
- = P_Q(B{=}1\mid A{=}1)-P_Q(B{=}1\mid A{=}0).
-\] \newline \textit{A believed difference between groups has the form of the conditional difference, which Proposition PRO classifies.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropPRO.lean, propPRO\_protection} \newline If $\nabla F=x\,J+y\,\nabla\assoc$ at $q\otimes r$, then
-$\langle\nabla F,\;M_\lambda(\alpha,\beta,q_0,r_0)\rangle=0$ identically in
-$(\alpha,\beta,\lambda)$, where $M_\lambda$ is the first-order direction of
-$\Pbar_\lambda-\PB$; the aggregate first-order coefficient of $F$ is zero. \newline \textit{Proposition PRO (i): a statistic whose differential at independence lies in $\mathrm{span}\{J,\nabla\assoc\}$ is second order.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_PRO.py, protected class statistic by statistic (59/59)} \newline Symbolic in $\alpha,\beta,q_0,r_0$ and $\lambda$:
-for $\Pbar(B{=}1\mid A{=}1)-\Pbar(B{=}1\mid A{=}0)$, $dF\in\mathrm{span}\{J,d\,\assoc\}$ and the
-$c^0$ and $c^1$ coefficients of $F(\Pbar_\lambda)-F(\PB)$ vanish identically; for
-$\Pbar(B{=}1\mid A{=}1)$ alone the $c^1$ coefficient is $\lambda(q_0-\alpha)r_0r_1/Z$, zero
-only when $\lambda=0$ or $q_0=\alpha$. \newline \textit{The difference question is second order; the level question it is built from is first order.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Decision.lean, volume\_flipSet} \newline For every $c,\delta\in\mathbb R$, the set of evaluators whose action the sequence
-changes, $\{u:\ \neg((0\le u)\leftrightarrow(0\le u+c\delta))\}$, has Lebesgue measure
-exactly $|c\,\delta|$. \newline \textit{The band of changed decisions has width $|c\delta|$, which with a density positive at the threshold makes the share first order (Proposition SHR).}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Ladder.lean, condDiff\_eq, ladder\_condDiff\_seqEffect, ladder\_condDiff\_coeff, ladder\_condDiff\_coeff\_eq\_zero\_iff; sympy/verify\_ladder.py, row (B) (99/99)} \newline Under partial adoption of the second cue with weight $\omega$, the conditional
-difference equals $\assoc/(m_{A0}m_{A1})$, so each route's is $c$ times its association factor
-over its $A$-marginals, exactly; at $c=0$ the difference of those factors is
-\[
-\frac{(1-\omega)(r_0-\beta)(t_0-r_1)}{Z},\qquad t_0=(1-\omega)\beta+\omega r_0,
-\]
-zero exactly when $\omega=1$, $r_0=\beta$, or $t_0=1-r_0$. \newline \textit{The entry's claim is a full-adoption claim: a partly adopting population would in general not pass the difference audit.}} \\
-\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Canay, Mogstad and Mountjoy 2023 (NBER WP 27802, rev.), after Theorem 4.1, p. 21} \newline ``First, the marginal outcome test may conclude bias even if the judge is racially
-unbiased. Second, the outcome test may conclude no bias even if the judge is locally
-or globally racially biased.'' \newline \textit{The form of the entry's last sentence, an audit that cannot rule out what it is meant to detect, has this precedent in economics; the paper does not yet cite it.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{A\quad Appendix, Deferred proofs}} \\ \hline\hline
 \entryhead{A.1}{Appendix, proof of Theorem LOS, the two Tao citations\quad{\footnotesize\textit{(formerly C.14)}}}
@@ -725,13 +654,13 @@ Bohren et al.\ 2019, D\"oring 1999, Garber 1980); they are in
 \texttt{notes/manuscript\_corrections\_extra.bib} so that this document renders them, and move to
 \texttt{bibliography.bib} on approval. The Drive copy of Jeffrey (2004) is the November 2002 draft,
 so 1.6 and 2.4 cite the chapter only.
-\citet{CoffmanExleyNiederle2021}, needed by 7.2, was added on 2 October 2026
-(\emph{Management Science} 67(6), 3551--3569, doi 10.1287/mnsc.2020.3660).
-\citet{TverskyKahneman1992}, needed by 3.6, was added on 3 October 2026
-(\emph{Journal of Risk and Uncertainty} 5, 297--323, doi 10.1007/BF00122574).
+\citet{CoffmanExleyNiederle2021} (\emph{Management Science} 67(6), 3551--3569) and
+\citet{TverskyKahneman1992} (\emph{Journal of Risk and Uncertainty} 5, 297--323), needed by
+7.2 and 3.6, moved into \texttt{bibliography.bib} when those entries were applied
+on 3 October 2026.
 
 \section*{Applied entries in force}
-These entries were applied to the manuscript at 6775f822, 6cdf15f3, db3a2f41, deddd600, and their text stands in
+These entries were applied to the manuscript at 6775f822, 6cdf15f3, db3a2f41, deddd600, f125368b, and their text stands in
 it. Each part shows its BEFORE text as it stood just before the applying commit and the AFTER text as
 applied, with the Why, Evidence and Grounds that justified it. A part at least half of whose sentences
 stand as applied is kept here with a \textit{Status} line naming what has changed it since; a part of
@@ -1148,6 +1077,27 @@ statistic vanishes identically in the prior and in the mix, so it is zero in
 the population itself; its silence is a failure of identification, which no
 sample size repairs.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
+\entryhead{3.6}{Related literature: prospect theory's rank dependence set against sequence dependence (new)\quad{\footnotesize\textit{(formerly C.20)}}}
+1/1 & \textit{New sentence after} ``prior with each new input multiplicatively before the Jeffrey step, the current paper instead accepts the non-commutativity and characterises what remains of it in aggregate.'' & Cumulative prospect theory assigns each outcome a decision weight that depends on its rank among the outcomes of a given prospect \citep{TverskyKahneman1992}, whereas in the current paper belief depends on the sequence in which two cues about one candidate are read, through the believed link between the traits, and not at all when the traits are believed unrelated. \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Author's request (2026-10-03): remove a descriptive-models objection a referee may raise, that cumulative prospect theory already accounts for sequence. Tversky and Kahneman (1992), read in full, take the prospect as given to the valuation (p. 299) and contain no rule for revising its probabilities; the one ordering in the representation is the ranking of outcomes by value, on which each decision weight depends (pp. 300-301). The paper's sequence is that in which two cues about one candidate are read, and under full adoption it moves belief only through the believed link between the traits (Propositions IMM and ORD). The sentence names both sides in parallel (a decision weight depends on rank; belief depends on the sequence) and uses ``sequence'' only for reading, as rule 6 requires. A dynamic application of the theory (Barberis 2012, read and formalised) was dropped at the author's call: a casino's bets on known odds are not the panel's setting. Placed after the Pettigrew-Weisberg sentence, before the Hogarth-Einhorn sentences, so that the two descriptive models sit together; the author chose to keep the paragraph unsplit. Needs the bibliography entry in B.2.} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} literature/tversky\_kahneman1992 (TverskyKahneman.lean, 16 theorems; sympy check); PropIMM.lean (propIMM\_indep, propIMM\_no\_sequence\_effect); PropORD.lean (propORD\_Amarg, propORD\_Bmarg); sympy/verify\_IMM.py, sympy/verify\_ORD.py (49/49).} \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Tversky and Kahneman 1992, Section 1, p.~299} \newline ``Prospect theory distinguishes two phases in the choice process: framing and
+valuation. \ldots The valuation process discussed in subsequent sections is applied to
+framed prospects.'' \newline \textit{The prospect is given to the valuation; the theory, read in full, contains no rule for revising its probabilities.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Tversky and Kahneman 1992, Section 1.1, pp.~300--301} \newline ``To define the cumulative functional, we arrange the outcomes of each prospect in
+increasing order.'' \ldots ``The decision weight $\pi_i^+$, associated with a positive outcome,
+is the difference between the capacities of the events `the outcome is at least as good as
+$x_i$' and `the outcome is strictly better than $x_i$.'\,'' \newline \textit{The decision weight of an outcome depends on its rank among the outcomes of the prospect.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{TverskyKahneman.lean, sum\_piPlus, piPlus\_id, rank\_dependence} \newline With $\pi_i^+=w^+(p_i+\dots+p_n)-w^+(p_{i+1}+\dots+p_n)$: for $w^+(0)=0$, $w^+(1)=1$ and
+probabilities summing to one, $\sum_i\pi_i^+=1$; for $w^+$ the identity, $\pi_i^+=p_i$; and with
+$w^+(p)=p^2$ and three equiprobable gains the top gain is weighted $1/9$ and the middle one $1/3$. \newline \textit{Rank dependence, stated and checked: the same probability gets a different weight at a different rank.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropIMM.lean, propIMM\_indep and propIMM\_no\_sequence\_effect} \newline For $\alpha,1-\alpha,\beta,1-\beta\neq0$: at $c=0$, $\PJ_{AB}=\PJ_{BA}=\PB$, so the two
+sequences give one belief. \newline \textit{``Not at all when the traits are believed unrelated.''}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropORD.lean, propORD\_Amarg, propORD\_Bmarg, propORD\_const, propORD\_Amarg\_eq\_negKdrift} \newline Same hypotheses. $\frac{d}{dc}\bigl[\PJ_{AB}(A{=}1)-\PJ_{BA}(A{=}1)\bigr]_{c=0}=\kappa'$,
+$\frac{d}{dc}\bigl[\PJ_{AB}(B{=}1)-\PJ_{BA}(B{=}1)\bigr]_{c=0}=-\kappa$, and for the
+constant weight $\mathbf 1$ the coefficient is $0$. With $Z\neq0$,
+$\kappa'=-K$ for $K=q_0(1-q_0)(r_0-\beta)/Z$ of Proposition DRF. \newline \textit{``Belief depends on the sequence ... through the believed link'': at $c\neq0$ the two sequences' marginals differ at first order in $c$, with coefficients $\kappa'$ and $-\kappa$.}} \\ \hline
+\multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{4\quad Which statistics register the sequence}} \\ \hline\hline
 \entryhead{4.1}{Section 4, title and opening (was 4.A)\quad{\footnotesize\textit{(formerly E.8)}}}
 1/2 & \textit{Section title:} \textbf{Sequence effects at the individual level} & \textit{Section title:} \textbf{Which statistics register the sequence} \\ \hline
@@ -1524,6 +1474,55 @@ $\int_{\{\mathrm{Flips}\}} |u|\,du \le |c\delta|^2$, for all real $c,\delta$. \n
 irreducible and affine in $\omega$, so for each prior and cue at most one weight
 $\omega=-H_0/H_1$ makes it vanish unless $H_0=H_1=0$ (at the generic prior, $\omega=31/4483$). \newline \textit{``Under partial adoption the believed link moves at first order as well'' (Proposition LAD).}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
+\entryhead{7.2}{Concluding remarks, third implication: an existing design that asks a difference question and reads decisions\quad{\footnotesize\textit{(formerly C.19)}}}
+1/1 & What the paper finds is that a population could pass every belief-level audit sincerely while the footprint of sequence-dependence lives entirely in outcomes. & \citet{CoffmanExleyNiederle2021}, for instance, ask employers how much better they believe one group of workers performs than another, and read discrimination from the hiring decisions themselves. A believed difference between groups is second order under the sequence dependence studied here, while the share of decisions the reading sequence changes is first order (Propositions~\ref{prop:PRO} and~\ref{prop:SHR}). Such a belief audit therefore cannot rule out a role for the reading sequence, since a population of coherent evaluators would pass it while its hiring decisions record the sequence. \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Author's request (2026-10-02): name an existing instrument that sets a difference question against a decision rate. Coffman, Exley and Niederle (read in full, the February 2020 working paper the author linked) elicit the believed gap in average scores between two groups of workers (p. 8) and measure discrimination by how often the worker from one group is hired when the two have identical scores (pp. 15-17); the believed gap predicts those decisions (Table 1, column 2). A difference between groups has the form of the conditional difference P(B=1|A=1) - P(B=1|A=0), which Proposition PRO places in the protected class (second order), while the share of decisions changed is first order (Proposition SHR). The match is in the form of the question only: in their design group membership is observed and nothing is read in sequence, and they set belief formation aside (fn. 5, p. 4), so the sentence says what a question of that form records under the sequence dependence studied here, not what their data show. The entry replaces the sentence 'a population could pass every belief-level audit sincerely while the footprint of sequence-dependence lives entirely in outcomes' rather than adding to it, because that sentence contradicts the paper's own classification: a belief audit that asks a level question (a marginal, or a conditional probability such as P(B=1|A=1)) records the sequence at first order (Propositions DRF and PRO), so only audits asking how much likelier one trait makes another are passed. Bohren, Haggag, Imas and Pope (2025), who ask the level question for each group, are left for the author's review. Page numbers are the working paper's and are to be checked against Management Science 67(6), 3551-3569, before applying. Needs the bibliography entry in B.2. Amended at the author's request (2026-10-02): the last sentence says what the audit cannot rule out rather than that a population passes it, so the claim rests on one admissible population, coherent evaluators updating by Jeffrey's rule, and not on how real evaluators update; it has the form of Canay, Mogstad and Mountjoy's Theorem 4.1 (an outcome test may find no bias in a biased judge). It is a full-adoption claim: under partial adoption the conditional difference differs between the sequences at first order, with coefficient $(1-\omega)(r_0-\beta)(t_0-r_1)/Z$, $t_0$ the damped $B$-marginal, which vanishes at full adoption, when the letter delivers the prior marginal, and at one further weight fixed by the prior and the cue, so a partly adopting population would in general not pass the audit.} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} sympy/verify\_PRO.py (59/59: the conditional difference is protected, the conditional probability and a cell probability are not); sympy/verify\_ladder.py row (B), 99/99 (the conditional difference is first order under partial adoption); PropPRO.lean; Decision.lean (Proposition SHR); literature/coffman\_exley\_niederle2021 (Lean + sympy).} \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Quote.} \textit{Coffman, Exley and Niederle 2020 (working paper), Section 2.2, p. 8} \newline ``employers predict the difference in average scores between these groups of
+workers on a 10-question easy quiz and a 10-question hard quiz. Employers could indicate
+any feasible average difference (from -10 to 10 problems solved correctly)'' \newline \textit{The belief question is a difference between groups, not a level for either.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, fn 17, p. 16} \newline ``We code the probability of a female-even-month worker being hired as 1 if she
+is hired with certainty, 0.5 if chance determines who is hired, and 0 if a
+male-odd-month worker is instead hired with certainty.'' \newline \textit{The outcome read is a decision rate.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, Section 3.2, p. 16} \newline ``If employers neither engage in belief-based nor taste-based discrimination, we
+expect that they should hire female-even-month workers 50\% of the time. This is not
+the case. Employers in the Gender treatment only hire female workers in 43\% of
+decisions, significantly below the 50\% benchmark.'' \newline \textit{Discrimination is read from the decisions themselves, against a 50\% benchmark.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, Section 3.2, p. 17} \newline ``Column 2 shows that beliefs are highly predictive of decisions: employers who
+believe the performance gap is larger are less likely to hire the worker from the
+lower-performing group.'' \newline \textit{The believed difference and the decision rate are read together, which is the pairing the entry uses.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Coffman, Exley and Niederle 2020, fn 5, p. 4} \newline ``This of course limits our ability to test the stereotype formation channel of
+Bordalo et al. (2016). We focus instead on decision-making given a certain set of
+beliefs.'' \newline \textit{Belief formation, where the paper's mechanism sits, is set aside by their design; the match is in the form of the question only.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{CoffmanExleyNiederle.lean, gap\_is\_conditional\_difference} \newline For a belief $Q$ over group $a\in\{0,1\}$ and a $0$--$1$ score $b$, the difference of
+the groups' mean scores equals the conditional difference,
+\[
+\frac{Q_{11}}{Q_{11}+Q_{10}}-\frac{Q_{01}}{Q_{01}+Q_{00}}
+ = P_Q(B{=}1\mid A{=}1)-P_Q(B{=}1\mid A{=}0).
+\] \newline \textit{A believed difference between groups has the form of the conditional difference, which Proposition PRO classifies.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{PropPRO.lean, propPRO\_protection} \newline If $\nabla F=x\,J+y\,\nabla\assoc$ at $q\otimes r$, then
+$\langle\nabla F,\;M_\lambda(\alpha,\beta,q_0,r_0)\rangle=0$ identically in
+$(\alpha,\beta,\lambda)$, where $M_\lambda$ is the first-order direction of
+$\Pbar_\lambda-\PB$; the aggregate first-order coefficient of $F$ is zero. \newline \textit{Proposition PRO (i): a statistic whose differential at independence lies in $\mathrm{span}\{J,\nabla\assoc\}$ is second order.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Computation.} \textit{sympy/verify\_PRO.py, protected class statistic by statistic (59/59)} \newline Symbolic in $\alpha,\beta,q_0,r_0$ and $\lambda$:
+for $\Pbar(B{=}1\mid A{=}1)-\Pbar(B{=}1\mid A{=}0)$, $dF\in\mathrm{span}\{J,d\,\assoc\}$ and the
+$c^0$ and $c^1$ coefficients of $F(\Pbar_\lambda)-F(\PB)$ vanish identically; for
+$\Pbar(B{=}1\mid A{=}1)$ alone the $c^1$ coefficient is $\lambda(q_0-\alpha)r_0r_1/Z$, zero
+only when $\lambda=0$ or $q_0=\alpha$. \newline \textit{The difference question is second order; the level question it is built from is first order.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Decision.lean, volume\_flipSet} \newline For every $c,\delta\in\mathbb R$, the set of evaluators whose action the sequence
+changes, $\{u:\ \neg((0\le u)\leftrightarrow(0\le u+c\delta))\}$, has Lebesgue measure
+exactly $|c\,\delta|$. \newline \textit{The band of changed decisions has width $|c\delta|$, which with a density positive at the threshold makes the share first order (Proposition SHR).}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Ladder.lean, condDiff\_eq, ladder\_condDiff\_seqEffect, ladder\_condDiff\_coeff, ladder\_condDiff\_coeff\_eq\_zero\_iff; sympy/verify\_ladder.py, row (B) (99/99)} \newline Under partial adoption of the second cue with weight $\omega$, the conditional
+difference equals $\assoc/(m_{A0}m_{A1})$, so each route's is $c$ times its association factor
+over its $A$-marginals, exactly; at $c=0$ the difference of those factors is
+\[
+\frac{(1-\omega)(r_0-\beta)(t_0-r_1)}{Z},\qquad t_0=(1-\omega)\beta+\omega r_0,
+\]
+zero exactly when $\omega=1$, $r_0=\beta$, or $t_0=1-r_0$. \newline \textit{The entry's claim is a full-adoption claim: a partly adopting population would in general not pass the difference audit.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Quote.} \textit{Canay, Mogstad and Mountjoy 2023 (NBER WP 27802, rev.), after Theorem 4.1, p. 21} \newline ``First, the marginal outcome test may conclude bias even if the judge is racially
+unbiased. Second, the outcome test may conclude no bias even if the judge is locally
+or globally racially biased.'' \newline \textit{The form of the entry's last sentence, an audit that cannot rule out what it is meant to detect, has this precedent in economics; the paper does not yet cite it.}} \\ \hline
+\multicolumn{3}{|l|}{} \\ \hline
 \end{longtable}
 }
 
@@ -1628,8 +1627,8 @@ C.14 & A.1 & Appendix, Deferred proofs & pending \\ \hline
 C.16 & 5.3 & Averaging Effects on statistics & applied at 6775f822 \\ \hline
 C.17 & 7.1 & Concluding remarks & applied at 6cdf15f3 \\ \hline
 C.18 & 6.4 & Scope and robustness & applied at 6cdf15f3 \\ \hline
-C.19 & 7.2 & Concluding remarks & pending \\ \hline
-C.20 & 3.6 & Related literature & pending \\ \hline
+C.19 & 7.2 & Concluding remarks & applied at f125368b \\ \hline
+C.20 & 3.6 & Related literature & applied at f125368b \\ \hline
 C.21 & 6.5 & Scope and robustness & applied at deddd600 \\ \hline
 E.1 & 1.5 & Introduction & pending \\ \hline
 E.2 & 2.2 & Setup & applied at db3a2f41 \\ \hline
