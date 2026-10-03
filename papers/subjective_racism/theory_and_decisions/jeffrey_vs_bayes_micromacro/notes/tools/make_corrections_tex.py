@@ -42,7 +42,7 @@ def latex_cell(t):
     t = re.sub(r"\\begin\{table\}(\[[^\]]*\])?\s*\\centering\s*", "", t)
     t = re.sub(r"\\caption\{(.*?)\}\s*\\label\{[^}]*\}\s*\\end\{table\}", r" \\par\\textit{Table caption: \1}", t)
     # a sectioning command cannot sit inside a table cell: show a heading stand-in
-    t = re.sub(r"\\subsection\{([^}]*)\}(\\label\{[^}]*\})?",
+    t = re.sub(r"\\subsection\{((?:[^{}]|\{[^{}]*\})*)\}(\\label\{[^}]*\})?",
                r"\\textsc{subsection heading}\\par\\textbf{\\large \1}\\par ", t)
     t = t.replace("p{2.6cm}p{5.4cm}p{5.4cm}", "p{2.2cm}p{4.6cm}p{4.6cm}")
     t = t.replace("p{3.4cm}cccc", "p{2.0cm}cccc").replace("p{5.2cm}cc@", "p{4.2cm}cc@")
@@ -168,7 +168,7 @@ NUMBERS = {
     "E.5": "3.1", "C.11": "3.2", "E.6": "3.3", "C.11b": "3.4", "E.7": "3.5",
     "E.8": "4.1", "C.13": "4.2", "E.9": "5.1", "E.10": "5.2",
     "E.15h": "6.1", "E.11": "6.2", "E.15": "6.3",
-    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3", "C.17": "7.1", "C.18": "6.4", "C.19": "7.2", "C.20": "3.6",
+    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3", "C.17": "7.1", "C.18": "6.4", "C.19": "7.2", "C.20": "3.6", "C.21": "6.5",
 }
 ALL = list(C.E) + list(E2)
 assert set(e[0] for e in ALL) == set(NUMBERS), set(e[0] for e in ALL) ^ set(NUMBERS)

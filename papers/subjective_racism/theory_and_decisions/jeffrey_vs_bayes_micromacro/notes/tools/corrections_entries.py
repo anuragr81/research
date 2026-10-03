@@ -19,6 +19,7 @@ APPLIED = {k: "db3a2f41" for k in ("C.9", "E.2", "C.9w", "C.10", "E.3", "E.5", "
 APPLIED["C.16"] = "6775f822"
 APPLIED["C.18"] = "6cdf15f3"
 APPLIED["C.17"] = "6cdf15f3"
+APPLIED["C.21"] = "deddd600"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
@@ -533,6 +534,90 @@ are believed unrelated.""")],
     "literature/tversky_kahneman1992 (TverskyKahneman.lean, 16 theorems; sympy check); "
     "PropIMM.lean (propIMM_indep, propIMM_no_sequence_effect); PropORD.lean (propORD_Amarg, "
     "propORD_Bmarg); sympy/verify_IMM.py, sympy/verify_ORD.py (49/49)."))
+
+E.append(("C.21", "Section 6: the proofs of Propositions ADJ and LAD moved to Appendix A (applied)", [
+    (r"\begin{proof} With $Q$ the belief after the first step", r"\end{proof}",
+     r"""The proof is provided in Appendix~\ref{app:proofs}."""),
+    (r"\begin{proof} Every Jeffrey step, damped or not, multiplies the rows", r"\end{proof}",
+     r"""The proof is provided in Appendix~\ref{app:proofs}."""),
+    ("insert_para", r"the annihilator of a single direction is three-dimensional rather than two",
+     r"constants and $\nabla\assoc$.",
+     r"""\subsection{Proof of Proposition~\ref{prop:ADJ}}
+
+With $Q$ the belief after the first step and $t=(t_0,t_1)$,
+$t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
+is multiplied by $t_j/Q(B{=}j)$, so that
+\[
+\begin{aligned}
+  P(B{=}1)&=t_1,\\
+  P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\
+  &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
+\end{aligned}
+\]
+In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
+$\PJ_{AB}(A{=}1)$, giving
+\[
+  P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad
+  P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr].
+\]
+In sequence $BA$, by symmetry,
+$P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting
+gives the third line. Neither bracket vanishes identically, since
+\[
+  P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad
+  \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2),
+\]
+the second by Proposition~\ref{prop:DRF}, whose proof also gives
+$\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At
+$c=0$ a step leaves the other marginal unchanged, so
+\[
+  \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
+  P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
+\]
+For $P^{A}(B{=}1)\neq r_1$ the first line gives
+\[
+  1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad
+  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
+\]
+\qed
+
+\subsection{Proof of Proposition~\ref{prop:LAD}}
+
+Every Jeffrey step, damped or not, multiplies the rows or the columns of the table
+by constants, so after both steps $P^{\omega}_{\sigma}(i,j)=a_i b_j P(i,j)$ for some
+factors $a_0,a_1,b_0,b_1$. Such a rescaling multiplies the association by
+$a_0a_1b_0b_1$ and leaves the odds ratio unchanged, and $\assoc(P)=c$, so
+$\assoc(P^{\omega}_{\sigma})=c\,k_\sigma$ with $k_\sigma=a_0a_1b_0b_1$, and the odds
+ratio claim of (iii) follows. (i) At $c=0$ a step on one attribute leaves the other
+marginal unchanged (Proposition~\ref{prop:IMM}), so sequence $AB$ reaches $q\otimes\beta$
+and then $q\otimes t$, and sequence $BA$ reaches $s\otimes r$; subtracting gives the
+display. A statistic protected for every pair of cues has a differential that
+annihilates both tangent directions of the independence surface at each of its
+points (Lemma~\ref{lem:ASC}), so it is constant on the surface and takes the same
+value at $q\otimes t$ and $s\otimes r$. (ii) At $c=0$ the factors give
+$k_{AB}=q_0q_1t_0t_1/Z$ and $k_{BA}=s_0s_1r_0r_1/Z$, and $k_{AB}-k_{BA}=(1-\omega)H/Z$.
+(iii) Near the independence surface a statistic protected for every pair of cues
+is $F=F_0+\assoc\cdot h$ with $h$ smooth, and writing $h=g/m$ with
+$m=P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)$, the first-order coefficient of
+$F(P^{\omega}_{AB})-F(P^{\omega}_{BA})$ is
+$k_{AB}\,h(q\otimes t)-k_{BA}\,h(s\otimes r)=\bigl[g(q\otimes t)-g(s\otimes r)\bigr]/Z$,
+since $m(q\otimes t)=q_0q_1t_0t_1$ and $m(s\otimes r)=s_0s_1r_0r_1$. It vanishes for
+every pair of cues and every $\omega$ exactly when $g$ is constant on the
+independence surface, that is when the differential of $F$ there is a multiple of
+the differential of $\assoc/m$, which at an independent belief equals the
+differential of the log odds ratio.
+\qed""")],
+    "Author's request (2026-10-03), applied directly at the author's instruction and recorded "
+    "here afterwards: to keep Section 6 short, the two proofs move word for word to Appendix A, "
+    "which already holds the proofs of DIV, SEP, LOS and PRO, and each proposition ends with the "
+    "pointer the others use. Nothing else in the paper referred into either proof, and the "
+    "introduction's roadmap sentence already sends readers to the appendix for deferred proofs. "
+    "Section 6 falls from about 2,450 to 2,120 words; the manuscript stays at 26 pages.",
+    "A line diff of the manuscript before and after: the only lines removed are the two "
+    "\\begin{proof} and \\end{proof} pairs, and the only lines added are the two pointers, the "
+    "two subsection headings and two \\qed. Anchoring.lean (`dampedB_deviation`, "
+    "`routeDamped_mA1_deviation`) and Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
+    "`ladder_oddsShadow_seqEffect`) record the proofs' content."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",

@@ -50,6 +50,9 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [x] **Applied at deddd600 (2026-10-03), at the author's direct instruction:** 6.5, the proofs of
+  Propositions ADJ and LAD moved word for word to Appendix A (A.5, A.6). Section 6 is now about 2,120
+  words; the author may cut prose further.
 - [~] **3.6 (added 2026-10-03, pending the author's review):** one sentence in Section 3's
   decision-theory paragraph setting cumulative prospect theory's rank dependence (Tversky and
   Kahneman 1992, read in full, Lean record) against the paper's sequence dependence, for a referee
