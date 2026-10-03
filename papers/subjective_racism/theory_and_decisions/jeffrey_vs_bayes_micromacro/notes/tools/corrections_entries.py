@@ -24,6 +24,7 @@ APPLIED["C.19"] = "f125368b"
 APPLIED["C.20"] = "f125368b"
 APPLIED["C.22"] = "46b68558"
 APPLIED["C.23"] = "5088448e"
+APPLIED["C.24"] = "adaa99f6"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
@@ -721,6 +722,47 @@ needs no such weight and exists only when they are.""")],
     "PropIMM.lean (propIMM_indep); Wagner 2002, Theorem 3.1, and Wagner2002.lean (thm31); "
     "PropDIV.lean (jeffreyA_prior_mB0); PropORD.lean (propORD_Amarg); Anchoring.lean "
     "(orderEffect_damped_at_indep)."))
+
+E.append(("C.24", "Section 6: Proposition ADJ dropped, its first identity kept as a sentence, the proposition kept in an addendum (applied)", [
+    ("Let $P^{A}$ and $P^{B}$ denote the belief after the $A$-cue alone", r"The proof is provided in Appendix~\ref{app:proofs}.",
+     r"""Let $P^{A}$
+denote the belief after the $A$-cue alone. The rule sets the rating of the attribute
+read second to $P^{\omega}_{AB}(B{=}1)=(1-\omega)P^{A}(B{=}1)+\omega r_1$, so whenever
+$P^{A}(B{=}1)\neq r_1$ three ratings from one reading group give $\omega$, and full
+adoption is the case in which the final rating equals what the second cue delivers
+alone."""),
+    (r"Proposition~\ref{prop:ADJ} reads the weight from the ratings.", r"Proposition~\ref{prop:ADJ} reads the weight from the ratings.",
+     r"""% Deleted (see Why): the bridge sentence goes with the proposition."""),
+    ("What the paper says about the position channel is confined to", "registers the sequence.",
+     r"""What the
+paper says about the position channel is confined to reading its strength from the
+ratings and to Proposition~\ref{prop:LAD}, which states what it does to the order in
+$c$ at which each statistic registers the sequence."""),
+    (r"from its score (Proposition~\ref{prop:ADJ}) and the", "believed unrelated.",
+     r"""from its score and the two sequences differ even when
+the attributes are believed unrelated (Proposition~\ref{prop:LAD})."""),
+    (r"\subsection{Proof of Proposition~\ref{prop:ADJ}}", r"\qed",
+     r"""% Deleted (see Why): the proof moves to PAPER_B_ADDENDUM.tex with the proposition.""")],
+    "Author's question and decision (2026-10-03): what use is the adoption weight in the main "
+    "conclusions, and is ADJ needed. None of the results of Sections 4 and 5 uses the weight; they "
+    "are all at full adoption, and the weight enters only as the scope condition, through LAD and "
+    "through the reply to Hawthorne (Section 3, \"a reason to measure the degree of adoption\"; "
+    "the cautions, \"recovered from three ratings of one marginal rather than assumed\"). That reply "
+    "needs only that the weight can be read from the ratings, which ADJ's first identity gives, and "
+    "that identity is the partial-adoption rule read backwards: the proof's first line is "
+    "$P(B{=}1)=t_1$, the damped step attaining its target. ADJ's gap at $c=0$ is LAD(i) again. Its "
+    "second identity, for the marginal read first, and the coefficient claim drawn from it are "
+    "used nowhere else in the paper. Part 1 states the first identity as one sentence where the "
+    "rule is introduced, with the case of full adoption, and keeps the worked example; $P^{B}$, "
+    "used only by ADJ, goes. Part 3 keeps the two-channels sentence's length (35 words against "
+    "36). Part 4 sends the rubric sentence's claim about unrelated attributes to LAD(i). The "
+    "proposition, its proof and the example are kept word for word in PAPER_B_ADDENDUM.tex, which "
+    "the numbered copy does not replicate (the copy's script now expects twelve mnemonics). "
+    "Section 6 falls from 1,722 to 1,591 words (text outside the table, commands and comments "
+    "excluded, so the displays dropped are not counted), and the manuscript from 26 pages to 25.",
+    "Anchoring.lean (dampedB_mB1, dampedB_deviation, orderEffect_damped_at_indep); "
+    "sympy/verify_example.py. The manuscript builds with no undefined references and no "
+    "remaining mention of ADJ or $P^{B}$."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",

@@ -465,7 +465,8 @@ later cue, and gives a test of that condition from the ratings.""")],
     "The roadmap's Section 6 sentence names what that section now does: the scope of the "
     "results, that the second-order results require full adoption of the later cue, and the "
     "test of that condition (E.15).",
-    "Proposition ADJ (E.15)."))
+    "The weight from the ratings: the Section 6 sentence of entry C.24 (Anchoring.lean, "
+    "dampedB_mB1); Proposition ADJ itself is now in PAPER_B_ADDENDUM.tex."))
 
 E2.append(("E.15", "Section 6, the subsection on partial adoption and factor inputs (Propositions ADJ, LAD and FAC)", [
     ("insert_para", "is outside the scope of stated results.", "is outside the scope of stated results.",

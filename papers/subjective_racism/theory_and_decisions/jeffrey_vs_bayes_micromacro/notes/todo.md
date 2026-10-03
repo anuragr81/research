@@ -50,6 +50,10 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [x] **Applied at adaa99f6 (2026-10-03), at the author's direct instruction:** 6.7,
+  Proposition ADJ dropped. Its first identity (the rule read backwards) is one Section 6
+  sentence; the proposition, proof and example are in PAPER_B_ADDENDUM.tex, which holds results
+  the paper no longer carries and is not replicated in the numbered copy. Manuscript 25 pages.
 - [x] **Applied at 5088448e (2026-10-03), at the author's direct instruction:** 3.7, the two
   channels named by what each needs (Section 3: position channel assumed against association
   channel derived; full adoption needs both credences and a believed association. Section 6:
