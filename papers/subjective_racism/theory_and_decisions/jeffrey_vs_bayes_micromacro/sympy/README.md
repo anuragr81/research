@@ -37,11 +37,18 @@ directions `R₁`, `R₂`, `κ`, `κ'`, `∇assoc`) and the test harness;
 
 * Every quantity in the belief model is a **rational function** of
   `(α, β, c, q₀, r₀)`, so `cancel(together(·))` decides equality exactly.  No
-  floating point is used anywhere; genericity witnesses are exact rationals.
+  floating point is used anywhere.
 * `exactly` in the paper means a coefficient vanishing identically in the
   parameters — checked by symbolic cancellation.  `generically` means vanishing
-  only on a lower-dimensional set — checked by exhibiting a rational point off
-  that set.
+  only on a lower-dimensional set — checked (since 2026-10-03) by computing the
+  coefficient symbolically in every parameter, asserting its factored closed
+  form, and certifying its exact zero set on the open cube: every irreducible
+  factor of the numerator over Q is either sign-definite there or listed, each
+  listed factor is shown to vanish inside the cube (a rational point, or a sign
+  change, which for an irreducible factor means a codimension-one set), and the
+  denominator is sign-definite.  The exceptional sets are stated in each
+  script's docstring.  A one-point evaluation at the rational point `GENERIC`
+  survives only as a row labelled "(sanity, one point)"; no claim rests on it.
 * Lemma SEP is a statement about **arbitrary** `N`.  The scripts check it at
   `N = 2…6` (fully symbolically for `N = 2`, and for larger `N` with the
   step normalisers carried as opaque symbols, which is exactly the hypothesis
