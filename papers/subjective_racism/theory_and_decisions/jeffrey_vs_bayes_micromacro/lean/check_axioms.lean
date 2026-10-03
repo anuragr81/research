@@ -1432,3 +1432,26 @@ open JeffreyOrder
 #print axioms Literature.CoffmanExleyNiederle.meanScore_eq_condHigh
 #print axioms Literature.CoffmanExleyNiederle.gap_is_conditional_difference
 -- END Literature.CoffmanExleyNiederle
+
+-- BEGIN Literature.CanayMogstadMountjoy
+#print axioms Literature.CanayMogstadMountjoy.thm42
+#print axioms Literature.CanayMogstadMountjoy.thm42_gt_iff
+#print axioms Literature.CanayMogstadMountjoy.thm42_eq_iff
+#print axioms Literature.CanayMogstadMountjoy.continuous_sub_left
+#print axioms Literature.CanayMogstadMountjoy.antitone_sub_left
+#print axioms Literature.CanayMogstadMountjoy.cond5_of_strictMono_cont
+#print axioms Literature.CanayMogstadMountjoy.kink_strictMono
+#print axioms Literature.CanayMogstadMountjoy.kink_continuous
+#print axioms Literature.CanayMogstadMountjoy.kink_ge
+#print axioms Literature.CanayMogstadMountjoy.kink_gt_of_neg
+#print axioms Literature.CanayMogstadMountjoy.kink_zero
+#print axioms Literature.CanayMogstadMountjoy.neg_eq_kink_iff
+#print axioms Literature.CanayMogstadMountjoy.thm41_case_i
+#print axioms Literature.CanayMogstadMountjoy.thm41_case_ii_black
+#print axioms Literature.CanayMogstadMountjoy.thm41_case_ii_white
+#print axioms Literature.CanayMogstadMountjoy.thm41_case_iii_black
+#print axioms Literature.CanayMogstadMountjoy.thm41_case_iii_white
+#print axioms Literature.CanayMogstadMountjoy.thm41_case_iv
+#print axioms Literature.CanayMogstadMountjoy.biased_judge_passes
+#print axioms Literature.CanayMogstadMountjoy.unbiased_judge_fails
+-- END Literature.CanayMogstadMountjoy

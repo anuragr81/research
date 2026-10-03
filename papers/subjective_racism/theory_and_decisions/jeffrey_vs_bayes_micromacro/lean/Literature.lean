@@ -7,6 +7,7 @@ import Literature.Banerjee
 import Literature.Becker
 import Literature.BenjaminBodohCreedRabin
 import Literature.BohrenImasRosenberg
+import Literature.CanayMogstadMountjoy
 import Literature.Cassell
 import Literature.CoateLoury
 import Literature.CoffmanExleyNiederle
