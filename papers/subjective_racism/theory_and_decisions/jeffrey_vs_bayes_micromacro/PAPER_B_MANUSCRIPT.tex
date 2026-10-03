@@ -1145,43 +1145,7 @@ three marginals of one reading group, for every $c$,
 \]
 \end{proposition}
 \par
-\begin{proof}
-With $Q$ the belief after the first step and $t=(t_0,t_1)$,
-$t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
-is multiplied by $t_j/Q(B{=}j)$, so that
-\[
-\begin{aligned}
-  P(B{=}1)&=t_1,\\
-  P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\
-  &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
-\end{aligned}
-\]
-In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
-$\PJ_{AB}(A{=}1)$, giving
-\[
-  P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad
-  P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr].
-\]
-In sequence $BA$, by symmetry,
-$P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting
-gives the third line. Neither bracket vanishes identically, since
-\[
-  P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad
-  \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2),
-\]
-the second by Proposition~\ref{prop:DRF}, whose proof also gives
-$\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At
-$c=0$ a step leaves the other marginal unchanged, so
-\[
-  \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
-  P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
-\]
-For $P^{A}(B{=}1)\neq r_1$ the first line gives
-\[
-  1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad
-  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
-\]
-\end{proof}
+The proof is provided in Appendix~\ref{app:proofs}.
 \par
 In Example~\ref{ex:panel}, an evaluator who reads the credential
 first rates trustworthiness at $.56$ before the letter, the letter alone delivers
@@ -1227,31 +1191,7 @@ itself is the same in both sequences for every $c$ and every $\omega$.
 \end{enumerate}
 \end{proposition}
 \par
-\begin{proof}
-Every Jeffrey step, damped or not, multiplies the rows or the columns of the table
-by constants, so after both steps $P^{\omega}_{\sigma}(i,j)=a_i b_j P(i,j)$ for some
-factors $a_0,a_1,b_0,b_1$. Such a rescaling multiplies the association by
-$a_0a_1b_0b_1$ and leaves the odds ratio unchanged, and $\assoc(P)=c$, so
-$\assoc(P^{\omega}_{\sigma})=c\,k_\sigma$ with $k_\sigma=a_0a_1b_0b_1$, and the odds
-ratio claim of (iii) follows. (i) At $c=0$ a step on one attribute leaves the other
-marginal unchanged (Proposition~\ref{prop:IMM}), so sequence $AB$ reaches $q\otimes\beta$
-and then $q\otimes t$, and sequence $BA$ reaches $s\otimes r$; subtracting gives the
-display. A statistic protected for every pair of cues has a differential that
-annihilates both tangent directions of the independence surface at each of its
-points (Lemma~\ref{lem:ASC}), so it is constant on the surface and takes the same
-value at $q\otimes t$ and $s\otimes r$. (ii) At $c=0$ the factors give
-$k_{AB}=q_0q_1t_0t_1/Z$ and $k_{BA}=s_0s_1r_0r_1/Z$, and $k_{AB}-k_{BA}=(1-\omega)H/Z$.
-(iii) Near the independence surface a statistic protected for every pair of cues
-is $F=F_0+\assoc\cdot h$ with $h$ smooth, and writing $h=g/m$ with
-$m=P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)$, the first-order coefficient of
-$F(P^{\omega}_{AB})-F(P^{\omega}_{BA})$ is
-$k_{AB}\,h(q\otimes t)-k_{BA}\,h(s\otimes r)=\bigl[g(q\otimes t)-g(s\otimes r)\bigr]/Z$,
-since $m(q\otimes t)=q_0q_1t_0t_1$ and $m(s\otimes r)=s_0s_1r_0r_1$. It vanishes for
-every pair of cues and every $\omega$ exactly when $g$ is constant on the
-independence surface, that is when the differential of $F$ there is a multiple of
-the differential of $\assoc/m$, which at an independent belief equals the
-differential of the log odds ratio.
-\end{proof}
+The proof is provided in Appendix~\ref{app:proofs}.
 \par
 Partial adoption therefore moves the sequence effect on each belief statistic other
 than the odds ratio one order earlier in $c$, the marginals staying ahead of the
@@ -1647,6 +1587,72 @@ $\lambda=0$ or $\lambda=1$ only one route direction enters the first-order coeff
 the annihilator of a single direction is three-dimensional rather than two, so vanishing on
 an open set of priors pins $\nabla F$ only to that larger space, not to the span of the
 constants and $\nabla\assoc$.
+
+\subsection{Proof of Proposition~\ref{prop:ADJ}}
+
+With $Q$ the belief after the first step and $t=(t_0,t_1)$,
+$t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
+is multiplied by $t_j/Q(B{=}j)$, so that
+\[
+\begin{aligned}
+  P(B{=}1)&=t_1,\\
+  P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\
+  &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
+\end{aligned}
+\]
+In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
+$\PJ_{AB}(A{=}1)$, giving
+\[
+  P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad
+  P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr].
+\]
+In sequence $BA$, by symmetry,
+$P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting
+gives the third line. Neither bracket vanishes identically, since
+\[
+  P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad
+  \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2),
+\]
+the second by Proposition~\ref{prop:DRF}, whose proof also gives
+$\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At
+$c=0$ a step leaves the other marginal unchanged, so
+\[
+  \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
+  P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
+\]
+For $P^{A}(B{=}1)\neq r_1$ the first line gives
+\[
+  1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad
+  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
+\]
+\qed
+
+\subsection{Proof of Proposition~\ref{prop:LAD}}
+
+Every Jeffrey step, damped or not, multiplies the rows or the columns of the table
+by constants, so after both steps $P^{\omega}_{\sigma}(i,j)=a_i b_j P(i,j)$ for some
+factors $a_0,a_1,b_0,b_1$. Such a rescaling multiplies the association by
+$a_0a_1b_0b_1$ and leaves the odds ratio unchanged, and $\assoc(P)=c$, so
+$\assoc(P^{\omega}_{\sigma})=c\,k_\sigma$ with $k_\sigma=a_0a_1b_0b_1$, and the odds
+ratio claim of (iii) follows. (i) At $c=0$ a step on one attribute leaves the other
+marginal unchanged (Proposition~\ref{prop:IMM}), so sequence $AB$ reaches $q\otimes\beta$
+and then $q\otimes t$, and sequence $BA$ reaches $s\otimes r$; subtracting gives the
+display. A statistic protected for every pair of cues has a differential that
+annihilates both tangent directions of the independence surface at each of its
+points (Lemma~\ref{lem:ASC}), so it is constant on the surface and takes the same
+value at $q\otimes t$ and $s\otimes r$. (ii) At $c=0$ the factors give
+$k_{AB}=q_0q_1t_0t_1/Z$ and $k_{BA}=s_0s_1r_0r_1/Z$, and $k_{AB}-k_{BA}=(1-\omega)H/Z$.
+(iii) Near the independence surface a statistic protected for every pair of cues
+is $F=F_0+\assoc\cdot h$ with $h$ smooth, and writing $h=g/m$ with
+$m=P(A{=}0)P(A{=}1)P(B{=}0)P(B{=}1)$, the first-order coefficient of
+$F(P^{\omega}_{AB})-F(P^{\omega}_{BA})$ is
+$k_{AB}\,h(q\otimes t)-k_{BA}\,h(s\otimes r)=\bigl[g(q\otimes t)-g(s\otimes r)\bigr]/Z$,
+since $m(q\otimes t)=q_0q_1t_0t_1$ and $m(s\otimes r)=s_0s_1r_0r_1$. It vanishes for
+every pair of cues and every $\omega$ exactly when $g$ is constant on the
+independence surface, that is when the differential of $F$ there is a multiple of
+the differential of $\assoc/m$, which at an independent belief equals the
+differential of the log odds ratio.
+\qed
 
 \section*{Declaration of Generative AI and AI-Assisted Technologies in the Manuscript Preparation Process}
 
