@@ -50,13 +50,12 @@ and holds at `T = 26`. All checks pass.
 
 ## Bearing on Paper B
 
-Proposed for citation (plan, pending) as the dynamic application of cumulative
-prospect theory: the gambler's choice at each date depends on the winnings
-accumulated so far and, by the assumption of fn. 13, not on the sequence of wins
-and losses that produced them, whereas in Paper B belief depends on the sequence
-in which two cues are read. Probabilities in the casino are objective and known
-(50:50); they change only as bets resolve, with no evidence about a fixed state
-to revise beliefs on.
+Not cited. Read and formalised for a proposed Section 3 sentence on cumulative
+prospect theory; the author dropped the dynamic half on 2026-10-03, since a
+casino's sequence of bets on known 50:50 odds is not the panel's setting. Kept as
+the record of what the paper says: in its model the gambler's choice depends on
+the winnings accumulated so far and, by the assumption of fn. 13, not on the
+sequence of wins and losses that produced them.
 
 ## Not formalized
 
