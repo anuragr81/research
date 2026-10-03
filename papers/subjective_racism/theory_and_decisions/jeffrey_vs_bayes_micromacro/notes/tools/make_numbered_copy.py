@@ -25,7 +25,7 @@ DST = os.path.join(REPO, NAME + ".tex")
 
 LEMMAS = {"ASC", "SCR", "SEP"}
 THEOREMS = {"LOS"}
-MNEMONICS = "IMM|DIV|ASC|ORD|SCR|SEP|DEC|DRF|LOS|SHR|PRO|ADJ|LAD"
+MNEMONICS = "IMM|DIV|ASC|ORD|SCR|SEP|DEC|DRF|LOS|SHR|PRO|LAD"
 
 
 def label(m):
@@ -41,7 +41,7 @@ def transform(s):
                        "\\newtheorem{lemma}[theorem]{Lemma}\n")
     # 2. drop the mnemonic renaming before each result
     s, n = re.subn(r"^\\renewcommand\{\\the(?:proposition|lemma|theorem)\}\{[A-Z]+\}%?\n", "", s, flags=re.M)
-    assert n == 13, f"expected 13 mnemonic renamings, found {n}"
+    assert n == 12, f"expected 12 mnemonic renamings, found {n}"
     # 3. mnemonics typed as text become references (\anchor{...} prints nothing and is left alone)
     pat = re.compile(r"\b(Proposition|Prop\.|Lemma|Theorem)(~| )(" + MNEMONICS + r")\b")
     out, pos, count = [], 0, 0

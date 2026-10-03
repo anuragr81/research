@@ -1,0 +1,110 @@
+% Addendum to PAPER_B_MANUSCRIPT.tex: results the paper no longer carries, kept with
+% their proofs.  Not replicated in second_order_sequence_stats_numbered_eqs.tex.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{proposition}{Proposition}
+
+\newcommand{\PB}{P^{\mathrm{B}}}
+\newcommand{\PJ}{P^{\mathrm{J}}}
+\newcommand{\assoc}{\operatorname{assoc}}
+\newcommand{\bigO}{\mathcal{O}}
+
+\title{Addendum to ``Order-Sensitivity of Belief and Decision Statistics under Jeffrey Conditioning''}
+\author{Anurag Srivastava}
+\date{}
+
+\begin{document}
+\maketitle
+
+This addendum keeps results that earlier drafts of the paper stated and the paper no
+longer carries, each with its proof, so that they can be cited or restored. The setting
+and the notation are the paper's, and each proposition keeps the name it had there.
+
+\section{The adoption weight read from the ratings}
+
+Proposition ADJ was removed from Section 6 of the paper on 3 October 2026. The paper keeps
+its first identity as a sentence, since that identity is the partial-adoption rule read
+backwards, and Proposition LAD(i) of the paper carries the gap at $c=0$. The second
+identity, for the marginal read first, and the coefficient claim that follows from it are
+stated only here.
+
+Under partial adoption, after the first Jeffrey step the response to the second cue is a
+Jeffrey step on its partition to the target $(1-\omega)\,m+\omega\,r_1$, where $m$ is the
+marginal the first step left and $0\le\omega\le1$ is the adoption weight. Write
+$P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ for the two sequences under this rule; $\omega=1$
+recovers $\PJ_{AB}$ and $\PJ_{BA}$, and $\omega=0$ ignores the second cue. Let $P^{A}$ and
+$P^{B}$ denote the belief after the $A$-cue alone and after the $B$-cue alone.
+
+\renewcommand{\theproposition}{ADJ}%
+\begin{proposition}[adoption weight]\label{prop:ADJ}
+For every $c$ and every $\omega$, in sequence $AB$,
+\begin{align*}
+P^{\omega}_{AB}(B{=}1)-r_1 &=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\\
+P^{\omega}_{AB}(A{=}1)-q_1 &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr],\\
+P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)
+  &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr]+(1-\omega)\bigl[q_1-P^{B}(A{=}1)\bigr].
+\end{align*}
+Hence the last-read marginal equals its delivered credence identically in $c$
+exactly when $\omega=1$, the first-read marginal does so exactly when
+$\omega=0$, and for $0<\omega<1$ neither does. The first-order coefficient in
+$c$ of the first-read marginal is $\omega$ times the benchmark's coefficient
+for the same marginal. At $c=0$ the third line equals $(1-\omega)(\alpha-q_0)$,
+so a partially adopting evaluator shows a sequence effect at independence, where
+the fully adopting evaluator (Proposition IMM of the paper) and the benchmark
+show none. Whenever $P^{A}(B{=}1)\neq r_1$, the first line gives the weight from
+three marginals of one reading group, for every $c$,
+\[
+  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
+\]
+\end{proposition}
+
+\begin{proof}[Proof]
+
+With $Q$ the belief after the first step and $t=(t_0,t_1)$,
+$t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
+is multiplied by $t_j/Q(B{=}j)$, so that
+\[
+\begin{aligned}
+  P(B{=}1)&=t_1,\\
+  P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\
+  &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
+\end{aligned}
+\]
+In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
+$\PJ_{AB}(A{=}1)$, giving
+\[
+  P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad
+  P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr].
+\]
+In sequence $BA$, by symmetry,
+$P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting
+gives the third line. Neither bracket vanishes identically, since
+\[
+  P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad
+  \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2),
+\]
+the second by Proposition DRF of the paper, whose proof also gives
+$\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At
+$c=0$ a step leaves the other marginal unchanged, so
+\[
+  \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
+  P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
+\]
+For $P^{A}(B{=}1)\neq r_1$ the first line gives
+\[
+  1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad
+  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
+\]
+\end{proof}
+
+In Example~1 of the paper, an evaluator who reads the credential
+first rates trustworthiness at $.56$ before the letter, the letter alone delivers
+$.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$.
+
+{\raggedright\paragraph{Records.} \texttt{lean/JeffreyOrder/Anchoring.lean} (\texttt{dampedB\_mB1},
+\texttt{dampedB\_deviation}, \texttt{routeDamped\_mA1\_deviation},
+\texttt{orderEffect\_damped\_at\_indep}); \texttt{sympy/verify\_ladder.py}.\par}
+
+\end{document}

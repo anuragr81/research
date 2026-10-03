@@ -1046,10 +1046,9 @@ same in both sequences at every weight. The mean belief of a population mixing t
 acquires a cross-product association of
 $-\lambda(1-\lambda)(1-\omega)^2(\alpha-q_0)(\beta-r_0)$ that no member holds, and the
 separation between the share of decisions changed and the loss is lost. What the
-paper says about the position channel is confined to Propositions~\ref{prop:ADJ}
-and~\ref{prop:LAD}, the first recovering its strength from the ratings and the
-second stating what it does to the order in $c$ at which each statistic registers
-the sequence. The
+paper says about the position channel is confined to reading its strength from the
+ratings and to Proposition~\ref{prop:LAD}, which states what it does to the order in
+$c$ at which each statistic registers the sequence. The
 position channel is a weight the evaluator gives a cue for its position, present
 whether or not the attributes are believed related, while the association channel
 needs no such weight and exists only when they are.
@@ -1065,38 +1064,16 @@ $S_k=(1-w_k)S_{k-1}+w_k s(x_k)$ \citep[Eq.~4]{HogarthEinhorn1992}, applied to th
 second cue only, which is their end-of-sequence form for two items with a constant
 weight, and embedded in the joint law by a Jeffrey step. Write $P^{\omega}_{AB}$
 and $P^{\omega}_{BA}$ for the two sequences under this rule; $\omega=1$ recovers
-$\PJ_{AB}$ and $\PJ_{BA}$, and $\omega=0$ ignores the second cue. Let $P^{A}$ and
-$P^{B}$ denote the belief after the $A$-cue alone and after the $B$-cue alone.
-\par
-\begin{proposition}[adoption weight]\label{prop:ADJ}
-For every $c$ and every $\omega$, in sequence $AB$,
-\begin{align*}
-P^{\omega}_{AB}(B{=}1)-r_1 &=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\\
-P^{\omega}_{AB}(A{=}1)-q_1 &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr],\\
-P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)
-  &=\omega\,\bigl[\PJ_{AB}(A{=}1)-q_1\bigr]+(1-\omega)\bigl[q_1-P^{B}(A{=}1)\bigr].
-\end{align*}
-Hence the last-read marginal equals its delivered credence identically in $c$
-exactly when $\omega=1$, the first-read marginal does so exactly when
-$\omega=0$, and for $0<\omega<1$ neither does. The first-order coefficient in
-$c$ of the first-read marginal is $\omega$ times the benchmark's coefficient
-for the same marginal. At $c=0$ the third line equals $(1-\omega)(\alpha-q_0)$,
-so a partially adopting evaluator shows a sequence effect at independence, where
-the fully adopting evaluator (Proposition~\ref{prop:IMM}) and the benchmark
-show none. Whenever $P^{A}(B{=}1)\neq r_1$, the first line gives the weight from
-three marginals of one reading group, for every $c$,
-\[
-  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
-\]
-\end{proposition}
-\par
-The proof is provided in Appendix~\ref{app:proofs}.
-\par
-In Example~\ref{ex:panel}, an evaluator who reads the credential
+$\PJ_{AB}$ and $\PJ_{BA}$, and $\omega=0$ ignores the second cue. Let $P^{A}$
+denote the belief after the $A$-cue alone. The rule sets the rating of the attribute
+read second to $P^{\omega}_{AB}(B{=}1)=(1-\omega)P^{A}(B{=}1)+\omega r_1$, so whenever
+$P^{A}(B{=}1)\neq r_1$ three ratings from one reading group give $\omega$, and full
+adoption is the case in which the final rating equals what the second cue delivers
+alone. In Example~\ref{ex:panel}, an evaluator who reads the credential
 first rates trustworthiness at $.56$ before the letter, the letter alone delivers
 $.30$, and a final rating of $.43$ gives $\omega=(.56-.43)/(.56-.30)=\tfrac12$.
 
-Proposition~\ref{prop:ADJ} reads the weight from the ratings. The next result says
+The next result says
 what the weight does to the order in $c$ at which each statistic first differs between
 the two sequences. A statistic is \emph{protected
 for every pair of cues} if its differential at every independent belief is a
@@ -1176,8 +1153,8 @@ Rubric scoring, which fixes what each document delivers, tells the two settings
 apart, since under full adoption it leaves the sequence effect in the belief about
 the attribute read first and invisible in the scores (Proposition~\ref{prop:DRF}),
 while under partial adoption the belief about the attribute read second sits
-$(1-\omega)[P^{A}(B{=}1)-r_1]$ from its score (Proposition~\ref{prop:ADJ}) and the
-two sequences differ even when the attributes are believed unrelated.
+$(1-\omega)[P^{A}(B{=}1)-r_1]$ from its score and the two sequences differ even when
+the attributes are believed unrelated (Proposition~\ref{prop:LAD}).
 
 Three cautions bound these results. The
 classification covers this one-parameter family, not every conceivable mechanism.
@@ -1540,44 +1517,6 @@ the annihilator of a single direction is three-dimensional rather than two, so v
 an open set of priors pins $\nabla F$ only to that larger space, not to the span of the
 constants and $\nabla\assoc$.
 
-\subsection{Proof of Proposition~\ref{prop:ADJ}}
-
-With $Q$ the belief after the first step and $t=(t_0,t_1)$,
-$t_1=(1-\omega)\,Q(B{=}1)+\omega r_1$, the target of the second, column $j$
-is multiplied by $t_j/Q(B{=}j)$, so that
-\[
-\begin{aligned}
-  P(B{=}1)&=t_1,\\
-  P(A{=}1)&=\sum_j Q(A{=}1,B{=}j)\,\frac{t_j}{Q(B{=}j)}\\
-  &=(1-\omega)\,Q(A{=}1)+\omega\sum_j Q(A{=}1,B{=}j)\,\frac{r_j}{Q(B{=}j)}.
-\end{aligned}
-\]
-In sequence $AB$, $Q=P^{A}$, $Q(A{=}1)=q_1$, and the last sum is
-$\PJ_{AB}(A{=}1)$, giving
-\[
-  P^{\omega}_{AB}(B{=}1)-r_1=(1-\omega)\bigl[P^{A}(B{=}1)-r_1\bigr],\qquad
-  P^{\omega}_{AB}(A{=}1)-q_1=\omega\bigl[\PJ_{AB}(A{=}1)-q_1\bigr].
-\]
-In sequence $BA$, by symmetry,
-$P^{\omega}_{BA}(A{=}1)=(1-\omega)\,P^{B}(A{=}1)+\omega q_1$; subtracting
-gives the third line. Neither bracket vanishes identically, since
-\[
-  P^{A}(B{=}1)-r_1\Big|_{c=0}=r_0-\beta,\qquad
-  \PJ_{AB}(A{=}1)-q_1=-c\,\frac{q_0(1-q_0)(r_0-\beta)}{\alpha\beta(1-\alpha)(1-\beta)}+\bigO(c^2),
-\]
-the second by Proposition~\ref{prop:DRF}, whose proof also gives
-$\PJ_{AB}(A{=}1)-\PB(A{=}1)=\bigO(c^2)$, hence the coefficient claim. At
-$c=0$ a step leaves the other marginal unchanged, so
-\[
-  \PJ_{AB}(A{=}1)=q_1,\qquad P^{B}(A{=}1)=1-\alpha,\qquad
-  P^{\omega}_{AB}(A{=}1)-P^{\omega}_{BA}(A{=}1)=(1-\omega)(\alpha-q_0).
-\]
-For $P^{A}(B{=}1)\neq r_1$ the first line gives
-\[
-  1-\omega=\frac{P^{\omega}_{AB}(B{=}1)-r_1}{P^{A}(B{=}1)-r_1},\qquad
-  \omega=\frac{P^{A}(B{=}1)-P^{\omega}_{AB}(B{=}1)}{P^{A}(B{=}1)-r_1}.
-\]
-\qed
 
 \subsection{Proof of Proposition~\ref{prop:LAD}}
 
