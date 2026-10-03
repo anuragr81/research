@@ -2,6 +2,7 @@ import Literature.Arrow
 import Literature.Asch
 import Literature.AugenblickRabin
 import Literature.BCGS
+import Literature.Barberis
 import Literature.BHW
 import Literature.Banerjee
 import Literature.Becker
@@ -30,6 +31,7 @@ import Literature.PettigrewWeisberg
 import Literature.Phelps
 import Literature.ShmayaYariv
 import Literature.Tao
+import Literature.TverskyKahneman
 import Literature.Wagner2002
 import Literature.Wagner2003
 import Literature.Weisberg

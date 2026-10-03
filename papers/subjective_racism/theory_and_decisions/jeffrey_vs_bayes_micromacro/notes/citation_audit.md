@@ -1027,6 +1027,7 @@ CAVEAT, 1 MISQUOTED, 3 CONTRADICTED, 1 NOT-CHECKABLE.
   | Wilson 2014 (2003 draft), Cassell 2020, Shmaya-Yariv Def. 2 | yes | C |
   | Coffman-Exley-Niederle 2021 (HBS working paper; cited by plan 7.2) | yes | 2026-10-02 |
   | Canay-Mogstad-Mountjoy 2024 (NBER WP 27802; quoted in plan 7.2's Grounds) | yes | 2026-10-03 |
+  | Tversky-Kahneman 1992, Barberis 2012 (proposed CPT sentence, Section 3) | yes | 2026-10-03 |
   | Jeffrey 1988 | blocked, not in Drive | -- |
 
 ## 6. Cross-document consistency (to do after the pass)

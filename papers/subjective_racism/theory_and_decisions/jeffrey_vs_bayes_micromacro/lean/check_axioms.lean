@@ -1468,3 +1468,36 @@ open JeffreyOrder
 #print axioms Literature.CanayMogstadMountjoy.biased_judge_passes
 #print axioms Literature.CanayMogstadMountjoy.unbiased_judge_fails
 -- END Literature.CanayMogstadMountjoy
+
+-- BEGIN Literature.TverskyKahneman
+#print axioms Literature.TverskyKahneman.tail_past_end
+#print axioms Literature.TverskyKahneman.tail_step
+#print axioms Literature.TverskyKahneman.piPlus_top
+#print axioms Literature.TverskyKahneman.sum_piPlus
+#print axioms Literature.TverskyKahneman.piPlus_id
+#print axioms Literature.TverskyKahneman.rank_dependence
+#print axioms Literature.TverskyKahneman.mixed_sum_lt_one
+#print axioms Literature.TverskyKahneman.mixed_sum_gt_one
+#print axioms Literature.TverskyKahneman.sq_increasing
+#print axioms Literature.TverskyKahneman.concave_increasing
+#print axioms Literature.TverskyKahneman.die_example
+#print axioms Literature.TverskyKahneman.wTK_zero
+#print axioms Literature.TverskyKahneman.wTK_one
+#print axioms Literature.TverskyKahneman.table6_theta
+#print axioms Literature.TverskyKahneman.table6_printed_sign
+#print axioms Literature.TverskyKahneman.median_gamma_lt_delta
+-- END Literature.TverskyKahneman
+
+-- BEGIN Literature.Barberis
+#print axioms Literature.Barberis.winnings_top
+#print axioms Literature.Barberis.winnings_bottom
+#print axioms Literature.Barberis.count_true_add_count_false
+#print axioms Literature.Barberis.winnings_of_path
+#print axioms Literature.Barberis.plan_path_independent
+#print axioms Literature.Barberis.same_node_reversed
+#print axioms Literature.Barberis.allPaths_five_length
+#print axioms Literature.Barberis.fig2_distribution
+#print axioms Literature.Barberis.w_half_le
+#print axioms Literature.Barberis.cond7_iff_cond8
+#print axioms Literature.Barberis.cond8_holds
+-- END Literature.Barberis
