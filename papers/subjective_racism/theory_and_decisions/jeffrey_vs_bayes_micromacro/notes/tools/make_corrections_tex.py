@@ -168,7 +168,7 @@ NUMBERS = {
     "E.5": "3.1", "C.11": "3.2", "E.6": "3.3", "C.11b": "3.4", "E.7": "3.5",
     "E.8": "4.1", "C.13": "4.2", "E.9": "5.1", "E.10": "5.2",
     "E.15h": "6.1", "E.11": "6.2", "E.15": "6.3",
-    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3", "C.17": "7.1", "C.18": "6.4", "C.19": "7.2", "C.20": "3.6", "C.21": "6.5",
+    "C.14": "A.1", "E.13": "B.1", "E.14": "B.2", "C.16": "5.3", "C.17": "7.1", "C.18": "6.4", "C.19": "7.2", "C.20": "3.6", "C.21": "6.5", "C.22": "6.6",
 }
 ALL = list(C.E) + list(E2)
 assert set(e[0] for e in ALL) == set(NUMBERS), set(e[0] for e in ALL) ^ set(NUMBERS)
@@ -267,9 +267,17 @@ def _norm(t):
     return re.sub(r"\s+", " ", t)
 
 
+_HEADING = re.compile(r"(\\(?:sub)*section\*?\{(?:[^{}]|\{[^{}]*\})*\}(?:\\label\{[^}]*\})?)\s*(?:\\par\b)?\s*")
+
+
 def _sentences(after):
+    """Sentences of an AFTER text; a sectioning heading (with its label) counts as a unit of its own."""
     t = _norm("\n".join(l for l in after.splitlines() if not l.lstrip().startswith("%"))).strip()
-    return [x for x in re.split(r"(?<=[.?!])\s+(?=[A-Z\\])", t) if len(x) >= 25]
+    units = [u.strip() for u in _HEADING.split(t) if u.strip()]
+    out = []
+    for u in units:
+        out += [u] if _HEADING.fullmatch(u + " ") else re.split(r"(?<=[.?!])\s+(?=[A-Z\\])", u)
+    return [x for x in out if len(x) >= 25]
 
 
 _COMMITS = subprocess.run(["git", "-C", C.REPO, "rev-list", "--reverse", "HEAD", "--", "PAPER_B_MANUSCRIPT.tex"],
@@ -289,13 +297,15 @@ def _applied_at(eid, k):
 
 
 def _who(commit8, gone):
-    """Name the applied entry whose BEFORE text held the vanished sentences, else the author."""
+    """Name the applied entry whose BEFORE text held, or sat inside, a vanished sentence; else the commit."""
     for eid2, title2, parts2, *_ in ALL:
         for k2, part2 in enumerate(parts2, 1):
             if _applied_at(eid2, k2) != commit8:
                 continue
             _, s2, e2, _ = C.norm_part(part2)
-            if any(x in C.cut(s2, e2, eid2, k2) for x in gone):
+            before = _norm(C.cut(s2, e2, eid2, k2)).strip()
+            # the BEFORE text held the sentence, or (a short replacement) sat inside it
+            if any(x in before or (len(before) >= 20 and before in x) for x in gone):
                 return f"entry {NEW[eid2]} (part {k2}) at {commit8}"
     subj = subprocess.run(["git", "-C", C.REPO, "log", "-1", "--format=%s", commit8],
                           capture_output=True, text=True, check=True).stdout.strip()

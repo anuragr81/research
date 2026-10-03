@@ -22,6 +22,7 @@ APPLIED["C.17"] = "6cdf15f3"
 APPLIED["C.21"] = "deddd600"
 APPLIED["C.19"] = "f125368b"
 APPLIED["C.20"] = "f125368b"
+APPLIED["C.22"] = "46b68558"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
@@ -620,6 +621,62 @@ differential of the log odds ratio.
     "two subsection headings and two \\qed. Anchoring.lean (`dampedB_deviation`, "
     "`routeDamped_mA1_deviation`) and Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`) record the proofs' content."))
+
+E.append(("C.22", "Section 6 merged into one Scope section (applied)", [
+    (r"\section{Scope and robustness}", r"\section{Scope and robustness}", r"""\section{Scope}"""),
+    (r"\subsection{Scope}\label{sec:scope-assumptions}", r"\subsection{Scope}\label{sec:scope-assumptions}",
+     r"""% Deleted (see Why): the subsection heading goes."""),
+    ("A separate scope question concerns rival mechanisms", r"Table~\ref{tab:robust} collects the answers.",
+     r"""% Deleted (see Why): the rival-mechanisms paragraph, the second subsection heading and its opening paragraph go."""),
+    ("Partial adoption therefore moves the sequence effect on each belief statistic other", "one order earlier in $c$,",
+     r"""Partial adoption therefore moves the sequence effect on each belief statistic other
+than the odds ratio one order earlier in $c$ (Table~\ref{tab:robust}),"""),
+    ("insert_para", "Rubric scoring, which fixes what each document delivers",
+     "two sequences differ even when the attributes are believed unrelated.",
+     r"""Three cautions bound these results. The
+classification covers this one-parameter family, not every conceivable mechanism.
+\citet{Asch1946} is evidence that sequence moves marginals, six stimulus terms read
+in two sequences moving the proportions on eighteen response traits, and not
+evidence for either endpoint of the family, $\omega=0$ or $\omega=1$, since his own account is that early terms set a
+direction for the reading of later ones, so that what a later cue delivers depends
+on its position, a mechanism outside the family here, in which each cue delivers
+the same credence in either position. And full adoption is a substantive
+commitment rather than a consequence of the level reading. \citet{Hawthorne2004}
+objects that it ``seems implausible that the most recent experience or
+non-propositional state should completely dictate belief strengths for basis
+sentences, with no regard for the import of previous experiences or states''. The
+objection applies here, and his own two-basis example shows the overwriting
+explicitly, so that the credential's implication for trustworthiness is erased
+once the letter fixes that attribute. The adoption weight is his objection stated
+as a parameter, and the reply offered here is not that the objection misses but
+that the weight is recovered from three ratings of one marginal rather than
+assumed."""),
+    (r"(Section~\ref{sec:robust})", r"(Section~\ref{sec:robust})", r"""(Section~\ref{sec:scope})""")],
+    "Author's request (2026-10-03), applied directly at the author's instruction and recorded "
+    "here afterwards. Sections 6.1 and 6.2 repeated each other: the adoption weight read from "
+    "three ratings (6.1's last sentence, 6.2's opening, Proposition ADJ), the odds ratio unchanged "
+    "at every weight (6.1, 6.2's opening, the two-channels paragraph, LAD(iii), the table), which "
+    "marginal matches its delivered credence at the two endpoints (6.1 and ADJ), and Hogarth and "
+    "Einhorn's partial adoption (6.1, 6.2's opening, the partial-adoption paragraph). The section "
+    "becomes one, titled Scope, dropping \"and robustness\" as entry 6.1 had left open. Kept "
+    "unchanged: the assumptions paragraph, the two-channels paragraph, the partial-adoption "
+    "paragraph with ADJ, LAD and the table, and the rubric sentence. Cut: 6.2's opening paragraph, "
+    "which said nothing the two-channels paragraph and ADJ do not, and the comparison with Hogarth "
+    "and Einhorn that opened the rival-mechanisms paragraph, which ADJ states (which marginal keeps "
+    "its credence at each endpoint, and the sequence effect at independence that the benchmark "
+    "lacks). One remark of that paragraph goes without being restated, that the belief-adjustment "
+    "model predicts recency when every cue, not only the later one, is adopted in part from an "
+    "anchor; it concerns a rule outside the one-parameter family and can return as a clause in the "
+    "partial-adoption paragraph if the author wants it. The Asch and Hawthorne cautions close the "
+    "section word for word, with \"the claim\" (which pointed to the cut sentences) read as \"these "
+    "results\" and the endpoints glossed as $\\omega=0$ or $\\omega=1$, as Proposition ADJ states "
+    "them. The table's only pointer was in the cut paragraph and moves to the sentence after LAD; "
+    "Section 2's reference to the removed subsection now points to the section. Section 6 falls "
+    "from 2,124 to 1,719 words (text outside the table, commands and comments excluded); the "
+    "manuscript is 26 pages.",
+    "No new claim. The manuscript builds with no undefined references; every statement kept rests "
+    "on the records already cited for 6.3 and 6.4 (Anchoring.lean, Ladder.lean, verify_ladder.py "
+    "99/99, verify_interior_omega.py 39/39, Asch.lean, Hawthorne.lean)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",

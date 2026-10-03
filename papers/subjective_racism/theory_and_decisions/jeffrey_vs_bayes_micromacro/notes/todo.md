@@ -50,6 +50,12 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [x] **Applied at 46b68558 (2026-10-03), at the author's direct instruction:** 6.6, Section 6
+  merged into one Scope section (the overlapping 6.2 opening and rival-mechanisms material cut,
+  the Asch and Hawthorne cautions kept); Section 6 is now 1,719 words (from 2,124). One cut
+  remark is not restated anywhere: Hogarth and Einhorn's model predicts recency when every cue is
+  adopted in part from an anchor. The author may want it back as a clause in the partial-adoption
+  paragraph.
 - [x] **Applied at deddd600 (2026-10-03), at the author's direct instruction:** 6.5, the proofs of
   Propositions ADJ and LAD moved word for word to Appendix A (A.5, A.6). Section 6 is now about 2,120
   words; the author may cut prose further.
