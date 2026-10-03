@@ -144,6 +144,11 @@ all pass (26/26). It covers:
   Paper B.
 - MS:171 ("used as a sequence-free reference \citep{Wagner2002}") is fine as a citation for
   order-invariance.
+- The Section 6 two-channels sentence (2026-10-03), "commutation requires the same factor in
+  either position \citep{Wagner2002}", is the necessity direction: Theorem 4.1, whose
+  conditions hold for the paper's prior when all four cells are positive (`grid_43_44`). The
+  orders the same sentence states (marginals at order zero, association at first order, odds
+  ratio unchanged) are the paper's own, from `verify_ladder.py` (F), not Wagner's.
 
 **Must not attribute to Wagner (2002):**
 - That $\PB$ is *the* or the *unique* sequence-free benchmark, or that Theorem 4.1 singles it

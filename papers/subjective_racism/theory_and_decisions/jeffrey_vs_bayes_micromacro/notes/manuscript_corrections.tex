@@ -1326,12 +1326,17 @@ amnestic term vanishes there by Proposition IMM. \newline \textit{Row 1's first 
 identities (3.2) $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$, for all
 $i_1,i_2$, and (3.3) $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$, for
 all $j_1,j_2$, hold, then $r'=r$.'' Same page: ``where the sequence $(r'(E_i))$ may
-differ from $(q(E_i))$, and the sequence $(q'(F_j))$ from $(r(F_j))$''. \newline \textit{Commutation requires each cue's Bayes factor to be the same in either position; read on the rendered page, since the text layer drops the primes.}} \\
+differ from $(q(E_i))$, and the sequence $(q'(F_j))$ from $(r(F_j))$''. \newline \textit{Sufficiency: with each cue's Bayes factor the same in either position the two routes commute (the necessity direction is Theorem 4.1, below); read on the rendered page, since the text layer drops the primes.}} \\
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, thm31} \newline For $p$ a probability, $q$ from $p$ by kinematics on $E$, $r$ from $q$ on $F$,
 $q'$ from $p$ on $F$, $r'$ from $q'$ on $E$, and
 $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$,
 $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$ for all indices:
 $r'=r$. \newline \textit{Field's theorem as Wagner states it, finite partitions.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, thm41 (Wagner's Theorem 4.1, preprint p. 7)} \newline Same schema, with (4.3) $\forall i_1,i_2\ \exists j:\ p(E_{i_1}F_j)\,p(E_{i_2}F_j)>0$ and
+(4.4) $\forall j_1,j_2\ \exists i:\ p(E_iF_{j_1})\,p(E_iF_{j_2})>0$: if $r'=r$, then (3.2) and (3.3)
+hold. \newline \textit{Necessity, the direction ``commutation requires the same factor in either position'' states: two routes that end at one belief carry each cue's Bayes factor unchanged across positions.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, grid\_43\_44 (through remark41\_qi, Wagner's Remark 4.1)} \newline On a grid $A\times B$ with a prior giving every cell positive probability, (4.3) and
+(4.4) hold. \newline \textit{Theorem 4.1 applies to the paper's prior whenever $c$ lies strictly inside its Fr\'echet--Hoeffding bounds, so that all four cells are positive.}} \\
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{BenjaminBodohCreedRabin.lean, example\_marginal\_gap, margOddsA\_orders\_ne} \newline Uniform prior on $\{0,1\}^2$, $\alpha=\tfrac12$, likelihood vectors
 $a=b=(49/50,\,1/50)$: the believed $P(A{=}0)$ is $7/8$ when $A$ is read first and
 $49/50$ when read last (the Bayes value is $49/50$). In general, at independence with
@@ -1382,12 +1387,17 @@ odds ratio unchanged. \newline \textit{Part 5, the odds-ratio row: no sequence e
 identities (3.2) $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$, for all
 $i_1,i_2$, and (3.3) $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$, for
 all $j_1,j_2$, hold, then $r'=r$.'' Same page: ``where the sequence $(r'(E_i))$ may
-differ from $(q(E_i))$, and the sequence $(q'(F_j))$ from $(r(F_j))$''. \newline \textit{Part 2: commutation requires each cue's Bayes factor to be the same in either position, so giving the second cue's factor the weight $\omega$ breaks it.}} \\
+differ from $(q(E_i))$, and the sequence $(q'(F_j))$ from $(r(F_j))$''. \newline \textit{Part 2, the sufficiency direction: with each cue's Bayes factor the same in either position the two routes commute.}} \\
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, thm31} \newline For $p$ a probability, $q$ from $p$ by kinematics on $E$, $r$ from $q$ on $F$,
 $q'$ from $p$ on $F$, $r'$ from $q'$ on $E$, and
 $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$,
 $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$ for all indices:
-$r'=r$. \newline \textit{Part 2: the Lean form of the theorem the sentence cites.}} \\
+$r'=r$. \newline \textit{Part 2: Theorem 3.1's Lean form.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, thm41 (Wagner's Theorem 4.1, preprint p. 7)} \newline Same schema, with (4.3) $\forall i_1,i_2\ \exists j:\ p(E_{i_1}F_j)\,p(E_{i_2}F_j)>0$ and
+(4.4) $\forall j_1,j_2\ \exists i:\ p(E_iF_{j_1})\,p(E_iF_{j_2})>0$: if $r'=r$, then (3.2) and (3.3)
+hold. \newline \textit{Part 2, ``commutation requires the same factor in either position'': Wagner's Theorem 4.1, the necessity direction. Raising the second cue's factor to the power $\omega$ changes it unless $\omega=1$ or the cue delivers the prior marginal (LadderFactorPow.lean, pow\_factor\_ratio\_iff), so the two sequences then disagree.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Wagner2002.lean, grid\_43\_44 (through remark41\_qi, Wagner's Remark 4.1)} \newline On a grid $A\times B$ with a prior giving every cell positive probability, (4.3) and
+(4.4) hold. \newline \textit{Part 2: Theorem 4.1's conditions hold for the paper's prior whenever all four cells are positive.}} \\
 \multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Ladder.lean, rescale\_rescale, factor\_mA1\_gap\_iff, assoc\_factorRoute, oddsRatio\_factorRoute} \newline Factor updates on distinct attributes applied in full commute. With the second factor
 replaced by $(a_0',a_1')$ and $\alpha,1-\alpha\neq0$, the two sequences' $A$-marginals at $c=0$
 agree iff $a_1a_0'=a_0a_1'$. A factor route's association is

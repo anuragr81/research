@@ -311,7 +311,7 @@ identities (3.2) $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$, 
 $i_1,i_2$, and (3.3) $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$, for
 all $j_1,j_2$, hold, then $r'=r$.'' Same page: ``where the sequence $(r'(E_i))$ may
 differ from $(q(E_i))$, and the sequence $(q'(F_j))$ from $(r(F_j))$''.""",
-        "note": r"Commutation requires each cue's Bayes factor to be the same in either position; read on the rendered page, since the text layer drops the primes.",
+        "note": r"Sufficiency: with each cue's Bayes factor the same in either position the two routes commute (the necessity direction is Theorem 4.1, below); read on the rendered page, since the text layer drops the primes.",
     },
     {
         "kind": "theorem",
@@ -322,6 +322,21 @@ $\beta_{r',q'}(E_{i_1}:E_{i_2})=\beta_{q,p}(E_{i_1}:E_{i_2})$,
 $\beta_{q',p}(F_{j_1}:F_{j_2})=\beta_{r,q}(F_{j_1}:F_{j_2})$ for all indices:
 $r'=r$.""",
         "note": r"Field's theorem as Wagner states it, finite partitions.",
+    },
+    {
+        "kind": "theorem",
+        "source": r"Wagner2002.lean, thm41 (Wagner's Theorem 4.1, preprint p. 7)",
+        "text": r"""Same schema, with (4.3) $\forall i_1,i_2\ \exists j:\ p(E_{i_1}F_j)\,p(E_{i_2}F_j)>0$ and
+(4.4) $\forall j_1,j_2\ \exists i:\ p(E_iF_{j_1})\,p(E_iF_{j_2})>0$: if $r'=r$, then (3.2) and (3.3)
+hold.""",
+        "note": r"Necessity, the direction ``commutation requires the same factor in either position'' states: two routes that end at one belief carry each cue's Bayes factor unchanged across positions.",
+    },
+    {
+        "kind": "theorem",
+        "source": r"Wagner2002.lean, grid\_43\_44 (through remark41\_qi, Wagner's Remark 4.1)",
+        "text": r"""On a grid $A\times B$ with a prior giving every cell positive probability, (4.3) and
+(4.4) hold.""",
+        "note": r"Theorem 4.1 applies to the paper's prior whenever $c$ lies strictly inside its Fr\'echet--Hoeffding bounds, so that all four cells are positive.",
     },
     {
         "kind": "theorem",
