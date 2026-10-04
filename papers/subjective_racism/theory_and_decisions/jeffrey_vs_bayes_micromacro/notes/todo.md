@@ -52,7 +52,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
 - [~] **Pending, for the author to pick (2026-10-04):** 1.3 amended, the introduction's channel
   sentences saying what each channel is (belief content against revision), the position channel
-  in full, the adoption weight as one variety, Asch outside both; part 2 shortens the later
+  in full, the adoption weight as one variety (Asch left out: psychology, not a formal model); part 2 shortens the later
   definition of c. 6.9 new, the varieties of the position channel the weight does not cover,
   placed after the partial-adoption rule. 1.3 needs 6.9.
 - [x] **Applied at 8e45609a and dd5b1311 (2026-10-04), at the author's instruction:** 2.7, Section

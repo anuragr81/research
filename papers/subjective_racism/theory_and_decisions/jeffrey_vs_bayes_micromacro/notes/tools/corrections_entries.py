@@ -204,9 +204,7 @@ believed related. The belief-adjustment model of \citet{HogarthEinhorn1992} give
 general form, a weight on each cue, and its varieties differ in which cues are
 discounted and by how much. The paper represents only one variety, a constant discount
 on the later cue, by an adoption weight $\omega$, and Section~\ref{sec:scope} sets out
-the others, which lie outside its results. A cue whose delivered credence itself
-changes with what was read before it, as \citet{Asch1946} proposes, lies outside both
-channels, since both hold what a cue delivers fixed. When each impression is adopted
+the others, which lie outside its results. When each impression is adopted
 in full, $\omega=1$, as in the successive updating of \citet{DiaconisZabell1982}, the
 position channel is absent and only the association channel remains. In the two-attribute
 setting with full adoption, the paper thus considers three coordinates of a belief,
@@ -250,10 +248,12 @@ biases and prejudice form."""),
     "the position channel in full (any dependence of the share of a delivered credence taken on "
     "on where the cue arrives, whether or not the attributes are believed related), and name the "
     "adoption weight as the one variety the paper represents, with the others set out in Section 6 "
-    "(entry 6.9, which this needs). Asch returns in a different role: not as a source for the "
-    "position channel, which audit P10-P12 ruled out, but to place his mechanism, a delivered "
-    "credence that changes with what was read before, outside both channels (p. 272). The "
-    "channel sentences grow from 118 to 223 words, the length of the content the author "
+    "(entry 6.9, which this needs). Asch is not brought back to place his mechanism, a delivered "
+    "credence that changes with what was read before, outside both channels: the author's call "
+    "(2026-10-04), since the paper draws on philosophy of science and economics, normative and "
+    "positive, and uses a source for a formal model or a normative argument, not for an account "
+    "of how impressions form; the premise his mechanism would break is already Definition 2's "
+    "\"the same two impressions\". The channel sentences grow from 118 to 195 words, the length of the content the author "
     "asked for. Part 2 shortens the terminology paragraph's definition of $c$, which the channel "
     "sentence now gives first; it is shorter than the clause it replaces (7 words against 22) by "
     "design, since what it removes is a repetition.",
@@ -261,7 +261,7 @@ biases and prejudice form."""),
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
     "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (99/99). "
     "Amendment: PropIMM.lean (`propIMM_indep`); Anchoring.lean (`dampedB_at_one`); Hogarth and "
-    "Einhorn 1992, Eqs. 3-4 (T-p.7); Asch 1946, p. 272."))
+    "Einhorn 1992, Eqs. 3-4 (T-p.7)."))
 
 E.append(("C.5", "Introduction, hiring-panel paragraph, the two sentences before the last (rebased on the author's draft da5e3cff)", [(
     "As the paper shows, this means that the believed association differs between the two sequences only at second order.",
