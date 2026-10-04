@@ -858,16 +858,18 @@ one order in $c$ before a question about the believed association.""")],
 
 E.append(("C.27", "Section 6, after the partial-adoption rule: the varieties of the position channel the adoption weight does not cover", [
     ("insert_sentence", "The rule is the averaging form of the belief-adjustment model,", "and embedded in the joint law by a Jeffrey step.",
-     r"""The rule is one variety of the position channel. Both cues may instead be
-discounted from a prior anchor, which in the belief-adjustment model produces recency
-when the two weights are equal \citep[Appendix~B]{HogarthEinhorn1992}; the weight may
-depend on what the cue says, as under their contrast assumption, where evidence below a
-reference point and evidence above it
-carry different weights, each scaled by where the current impression stands; and the
-weight may differ between attributes, as it would for a panel that discounts letters
-more than credentials. The results below concern the rule alone, except that every
-variety, embedded as here by a Jeffrey step to its target, leaves the odds ratio the
-same in both sequences (Lemma~\ref{lem:SEP}).""")],
+     r"""The rule discounts the later cue alone, and by a constant. The position channel
+admits other varieties. Each cue may be discounted, from a prior rather than from the
+first cue, and with the same weight on both cues the belief-adjustment model then
+predicts that the cue read last weighs more \citep[Appendix~B]{HogarthEinhorn1992}.
+The weight may depend on what the cue says rather than on its position alone, as
+under their contrast assumption, which gives evidence above the current impression
+one weight and evidence below it another. And the weight may differ between
+attributes, as it would for a panel that discounts letters more than credentials.
+The results below hold for the rule and are not claimed for these varieties. One
+result holds for all of them. Each step remains a Jeffrey step on one attribute's
+partition and so rescales rows or columns of the belief (Lemma~\ref{lem:SEP}), so
+the odds ratio is the same in both sequences under every variety.""")],
     "Author's decision (2026-10-04): the introduction says in short what the position channel "
     "comprises (entry 1.3), and the varieties the adoption weight does not cover belong in "
     "Section 6. They go right after the sentence giving the rule as Hogarth and Einhorn's averaging "
@@ -880,9 +882,13 @@ same in both sequences (Lemma~\ref{lem:SEP}).""")],
     "credentials case is this paper's illustration and is not attributed to them. The last "
     "sentence states the one result that holds for every variety: each step remains a Jeffrey step "
     "on one attribute's partition, a rescaling of rows or columns, so the odds ratio is unchanged. "
-    "\"Recency\" and \"anchor\" carry the Hogarth-Einhorn citation in the same sentence, as rule 6 "
-    "requires; Appendix B's recency result assumes each item keeps its own weight wherever it "
-    "stands, which equal weights on both cues satisfy.",
+    "Rewritten 2026-10-04 after the author found the first draft unreadable: one sentence per "
+    "variety, each naming what it contrasts with (the later cue alone against each cue; from the "
+    "first cue against from a prior; position alone against what the cue says); \"recency\" and "
+    "\"anchor\" replaced by plain words; and \"concern the rule alone\" replaced by \"not claimed "
+    "for these varieties\", since whether the orders hold for them is unchecked, not false. "
+    "Appendix B's result assumes each item keeps its own weight wherever it stands, which the "
+    "same weight on both cues satisfies.",
     "HogarthEinhorn.lean (`oneSided_eq_eq8`, `twoSided_orderEffect`, `twoSided_recency`, "
     "`contrastWeight`, `contrastWeight_mem_Icc`); Ladder.lean (`jeffreyA_eq_rescale`, "
     "`jeffreyB_eq_rescale`, `oddsRatio_rescale`)."))
