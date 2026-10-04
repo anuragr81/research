@@ -192,16 +192,23 @@ E.append(("C.4", "Introduction, the two-channel paragraph (rebased on the author
     "Whether impressions replace prior belief or adjust is a question which", "the formational mechanisms biases and prejudice.",
     r"""Whether impressions replace prior belief or adjust it is a question which
 \citet[pp.~115--116]{Hawthorne2004}, writing as a logician rather than a psychologist,
-leaves open. To set the scope of its conclusions, the paper considers that
-arrival-sequence dependence can enter through two channels, an \textbf{association}
-channel, in which one cue changes what the other implies and which exists only when
-the attributes are believed related, and a \textbf{position} channel, in which the
-weight a cue receives depends on where in the sequence it arrives, whatever the
-attributes are \citep{HogarthEinhorn1992}. In the position channel the later cue is
-adopted only in part and every marginal registers the sequence even when the
-attributes are believed unrelated. On the other hand, when each impression is adopted
-in full, as in the successive updating of \citet{DiaconisZabell1982}, the position
-channel is disabled with only the association channel remaining. In the two-attribute
+leaves open. To set the scope of its conclusions, the paper distinguishes two channels of
+arrival-sequence dependence that differ in kind. The \textbf{association} channel is
+a property of what the evaluator believes. A cue on one attribute moves the belief
+about the other because the evaluator believes the attributes go together, a belief
+measured by the prior covariance $c$, so the channel exists only when $c\neq0$. The
+\textbf{position} channel is a property of how the evaluator revises. In full, it is
+any way in which the share of a cue's delivered credence that the evaluator takes on
+depends on where in the sequence the cue arrives, whether or not the attributes are
+believed related. The belief-adjustment model of \citet{HogarthEinhorn1992} gives it a
+general form, a weight on each cue, and its varieties differ in which cues are
+discounted and by how much. The paper represents only one variety, a constant discount
+on the later cue, by an adoption weight $\omega$, and Section~\ref{sec:scope} sets out
+the others, which lie outside its results. A cue whose delivered credence itself
+changes with what was read before it, as \citet{Asch1946} proposes, lies outside both
+channels, since both hold what a cue delivers fixed. When each impression is adopted
+in full, $\omega=1$, as in the successive updating of \citet{DiaconisZabell1982}, the
+position channel is absent and only the association channel remains. In the two-attribute
 setting with full adoption, the paper thus considers three coordinates of a belief,
 the two marginal probabilities and the cross-attribute association, and explains how a
 difference from the sequence-free benchmark below the observer's precision is
@@ -212,7 +219,10 @@ they change carry the difference at first order in the prior covariance, while t
 believed association and the statistics that move with it carry it only at second
 order. This carries clear implications for what an audit can or cannot measure
 about sequence dependence, an observation that may elucidate the mechanisms by which
-biases and prejudice form.""")],
+biases and prejudice form."""),
+    ("More specifically, if the strength with which the two traits are believed to go together",
+     "were represented with a prior covariance $c$,",
+     r"""More specifically, with $c$ the prior covariance,""")],
     "The author applied C.4 in their own wording at c2ae782f; this entry keeps what still "
     "needs correcting and adds one sentence. Rebased on da5e3cff, where the author appended a "
     "clause to the last sentence: the entry keeps the clause and repairs it, the double hyphen "
@@ -233,10 +243,25 @@ biases and prejudice form.""")],
     "channel. The author placed the one-sentence version of this in the panel paragraph (C.5) and "
     "the full version with its test in Section 6 (E.15), and asked for less in the introduction; "
     "this paragraph therefore keeps the author's own two sentences on the two settings and adds "
-    "nothing.",
+    "nothing. "
+    "Amended 2026-10-04 at the author's request, after a discussion of what the two channels are: "
+    "the channel sentences now say what each is, the association channel a property of what the "
+    "evaluator believes and the position channel a property of how the evaluator revises, define "
+    "the position channel in full (any dependence of the share of a delivered credence taken on "
+    "on where the cue arrives, whether or not the attributes are believed related), and name the "
+    "adoption weight as the one variety the paper represents, with the others set out in Section 6 "
+    "(entry 6.9, which this needs). Asch returns in a different role: not as a source for the "
+    "position channel, which audit P10-P12 ruled out, but to place his mechanism, a delivered "
+    "credence that changes with what was read before, outside both channels (p. 272). The "
+    "channel sentences grow from 118 to 223 words, the length of the content the author "
+    "asked for. Part 2 shortens the terminology paragraph's definition of $c$, which the channel "
+    "sentence now gives first; it is shorter than the clause it replaces (7 words against 22) by "
+    "design, since what it removes is a repetition.",
     "HogarthEinhorn.lean (`appB_recency`, `eq8_estimation_first_dominates`); Hawthorne 2004 pp. "
     "115-116 (grounds_E_literature); Ladder.lean (`ladder_gap`, `ladder_assoc_coeff`, "
-    "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (99/99)."))
+    "`ladder_oddsShadow_seqEffect`, `oddsRatio_rescale`); sympy/verify_ladder.py (99/99). "
+    "Amendment: PropIMM.lean (`propIMM_indep`); Anchoring.lean (`dampedB_at_one`); Hogarth and "
+    "Einhorn 1992, Eqs. 3-4 (T-p.7); Asch 1946, p. 272."))
 
 E.append(("C.5", "Introduction, hiring-panel paragraph, the two sentences before the last (rebased on the author's draft da5e3cff)", [(
     "As the paper shows, this means that the believed association differs between the two sequences only at second order.",
@@ -831,6 +856,37 @@ one order in $c$ before a question about the believed association.""")],
     "Ladder.lean (ladder_gap, assoc_routeDamped, ladder_assoc_coeff, ladder_assoc_coeff_at_one); "
     "PropORD.lean (propORD_Amarg); Decision.lean (volume_flipSet); Hawthorne 2004, pp. 98-99."))
 
+E.append(("C.27", "Section 6, after the partial-adoption rule: the varieties of the position channel the adoption weight does not cover", [
+    ("insert_sentence", "The rule is the averaging form of the belief-adjustment model,", "and embedded in the joint law by a Jeffrey step.",
+     r"""The rule is one variety of the position channel. Both cues may instead be
+discounted from a prior anchor, which in the belief-adjustment model produces recency
+when the two weights are equal \citep[Appendix~B]{HogarthEinhorn1992}; the weight may
+depend on what the cue says, as under their contrast assumption, where evidence below a
+reference point and evidence above it
+carry different weights, each scaled by where the current impression stands; and the
+weight may differ between attributes, as it would for a panel that discounts letters
+more than credentials. The results below concern the rule alone, except that every
+variety, embedded as here by a Jeffrey step to its target, leaves the odds ratio the
+same in both sequences (Lemma~\ref{lem:SEP}).""")],
+    "Author's decision (2026-10-04): the introduction says in short what the position channel "
+    "comprises (entry 1.3), and the varieties the adoption weight does not cover belong in "
+    "Section 6. They go right after the sentence giving the rule as Hogarth and Einhorn's averaging "
+    "form applied to the second cue only, where a reader asks what else the position channel could "
+    "be. The rule itself is their end-of-sequence form with the first item as anchor (Eq. 8), the "
+    "later cue alone discounted, so it is not listed again. Three other varieties are named: both "
+    "cues discounted from a prior anchor (their step-by-step form, which with equal weights gives "
+    "recency in their single-score model), weights that depend on what the cue says (their "
+    "contrast assumption, Eqs. 6a/6b), and weights that differ by attribute. The letters and "
+    "credentials case is this paper's illustration and is not attributed to them. The last "
+    "sentence states the one result that holds for every variety: each step remains a Jeffrey step "
+    "on one attribute's partition, a rescaling of rows or columns, so the odds ratio is unchanged. "
+    "\"Recency\" and \"anchor\" carry the Hogarth-Einhorn citation in the same sentence, as rule 6 "
+    "requires; Appendix B's recency result assumes each item keeps its own weight wherever it "
+    "stands, which equal weights on both cues satisfy.",
+    "HogarthEinhorn.lean (`oneSided_eq_eq8`, `twoSided_orderEffect`, `twoSided_recency`, "
+    "`contrastWeight`, `contrastWeight_mem_Icc`); Ladder.lean (`jeffreyA_eq_rescale`, "
+    "`jeffreyB_eq_rescale`, `oddsRatio_rescale`)."))
+
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
      "lives entirely in outcomes.",
@@ -1094,6 +1150,7 @@ DISCIPLINE_EXEMPT_LENGTH = {
     "C.2.1": "adds the modus tollens sentence after the author's sentence 1",
                             "C.1.3": "removes the identification overclaim",
                             "C.4.1": "adds the partial-adoption sentence (Proposition LAD)",
+                            "C.4.2": "removes a definition of c that the channel sentence now gives first",
                             "C.5.1": "adds what survives partial adoption (Proposition LAD)",
                             "C.9w.1": "names the belief-adjustment model the weight nests",
                             "E.13.1": "names the two new propositions",
