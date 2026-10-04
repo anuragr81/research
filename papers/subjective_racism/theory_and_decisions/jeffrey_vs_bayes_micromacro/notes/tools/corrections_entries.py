@@ -25,6 +25,8 @@ APPLIED["C.20"] = "f125368b"
 APPLIED["C.22"] = "46b68558"
 APPLIED["C.23"] = "5088448e"
 APPLIED["C.24"] = "adaa99f6"
+APPLIED["C.25"] = "8e45609a"
+APPLIED["C.26"] = "dd5b1311"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 
@@ -763,6 +765,71 @@ the attributes are believed unrelated (Proposition~\ref{prop:LAD})."""),
     "Anchoring.lean (dampedB_mB1, dampedB_deviation, orderEffect_damped_at_indep); "
     "sympy/verify_example.py. The manuscript builds with no undefined references and no "
     "remaining mention of ADJ or $P^{B}$."))
+
+E.append(("C.25", "Setup 2.2: the results are stated at full adoption (applied)", [
+    ("insert_sentence", "The two-cue Jeffrey posteriors are the two sequences", r"\PJ_{BA}=\PJ_{A}\!\circ\PJ_{B}\,P . \]",
+     r"""Resetting the marginal to the delivered credence is adoption in full, $\omega=1$, and
+every result of Sections~\ref{sec:individual} and~\ref{sec:aggregation} is stated at
+that weight; Section~\ref{sec:scope} says what changes at $\omega<1$, down to
+$\omega=0$, where the second cue is ignored.""")],
+    "Author's question (2026-10-04): are the results about $\\omega=0$ or $\\omega=1$, or both. "
+    "They are all at $\\omega=1$, but the manuscript did not say so where a reader needs it. "
+    "Setup 2.1 introduces $\\omega$ with both endpoints; Section 2.2 then defines the Jeffrey "
+    "step as resetting the marginal to the delivered credence, which is the $\\omega=1$ step, "
+    "without naming the weight; Sections 4 and 5 never mention adoption; and the first statement "
+    "that they sit at $\\omega=1$ was in Section 6. The sentence goes right after the two "
+    "sequences are defined, where a reader who has just met $\\omega$ first sees the step, and "
+    "names $\\omega=0$ as the other end of what Section 6 covers (Proposition LAD holds for "
+    "$0\\le\\omega\\le1$). Applied at the author's instruction.",
+    "Anchoring.lean (dampedB_at_one, dampedB_at_zero, routeDamped_at_zero_pins_A)."))
+
+E.append(("C.26", "Section 6 repaired after the author's cuts, and the Hawthorne paragraph given its substance (applied)", [
+    ("the evaluator's belief about the other in the evaluator's prior, so that", "the evaluator's belief about the other in the evaluator's prior, so that",
+     r"""the evaluator's belief about the other through the association in the evaluator's prior, so that"""),
+    ("The position channel is not a feature of updating on delivered credences.", "The position channel is not a feature of updating on delivered credences.",
+     r"""% Deleted (see Why): the claim lost its support when the Wagner sentence was cut."""),
+    ("is that through position channel, present under partial adoption,", "is that through position channel, present under partial adoption,",
+     r"""is that through the position channel, present under partial adoption,"""),
+    ("shifts by one order -- with each statistic keeping its place", "shifts by one order -- with each statistic keeping its place",
+     r"""shifts by one order (Table~\ref{tab:robust}), with each statistic keeping its place"""),
+    ("and the odds being the same in both sequences at every weight.", "and the odds being the same in both sequences at every weight.",
+     r"""and the odds ratio being the same in both sequences at every weight."""),
+    ("What the next result says what the weight does", "What the next result says what the weight does",
+     r"""The next result says what the weight does"""),
+    ("And full adoption is a substantive commitment", "rather than assumed.",
+     r"""Reading a cue as a credence does not oblige the evaluator to adopt it in full, as
+the partial-adoption rule above shows, so full adoption is an assumption of this
+paper, and \citet{Hawthorne2004} objects that it ``seems implausible that the most
+recent experience or non-propositional state should completely dictate belief
+strengths for basis sentences, with no regard for the import of previous
+experiences or states''. The objection applies here, since the letter erases the
+credential's implication for trustworthiness. If it holds, unrelated traits lose
+their immunity (Proposition~\ref{prop:IMM}), and Theorem~\ref{thm:LOS}, which
+needs a first-order score-gap, no longer applies, since the gap is then of order
+zero (Table~\ref{tab:robust}). The ranking survives the objection, so that a
+question about the believed prevalence of an attribute still registers the sequence
+one order in $c$ before a question about the believed association.""")],
+    "The author's cuts of 7e8d546e (\"Cuts.\") shortened Section 6 and left breakages, listed "
+    "for the author as BEFORE/AFTER pairs; the author chose all but one (the backward pointer "
+    "\"As explained with Proposition LAD\" stays). Part 1 restores \"through the association\", "
+    "whose loss made the sentence say the belief lies in the prior. Part 2 cuts a claim whose "
+    "support, the Wagner sentence, the cuts removed. Parts 3, 5 and 6 fix an article, \"odds\" "
+    "for \"odds ratio\" and a garbled bridge sentence. Part 4 replaces a dash with a comma and "
+    "restores the only pointer to the partial-adoption table. Part 7 rewrites the closing "
+    "paragraph. The author judged its reply to Hawthorne no response at all (\"yes $\\omega=1$ "
+    "is problematic but we don't really care\") and asked what \"a substantive commitment rather "
+    "than a consequence of the level reading\" meant; that phrase was this plan's (entry 6.2), "
+    "and Hawthorne neither separates a credence input from full adoption nor proposes a partial "
+    "weight. The new paragraph says the assumption is the paper's, since the partial-adoption "
+    "rule reads cues as credences too; quotes the objection (pp. 98-99); concedes that it "
+    "applies; and states what it costs if it holds (the immunity of Proposition IMM, and Theorem "
+    "LOS, whose hypothesis is a first-order score-gap) and what it leaves (marginals register "
+    "the sequence one order before the believed association at every weight, LAD against ORD and "
+    "DEC). The three ratings are not repeated, since the partial-adoption paragraph states them. "
+    "The paragraph is about 25 words longer than the author's, the cost of the substance.",
+    "PropDIV.lean (jeffreyA_prior_mB0); Anchoring.lean (orderEffect_damped_at_indep); "
+    "Ladder.lean (ladder_gap, assoc_routeDamped, ladder_assoc_coeff, ladder_assoc_coeff_at_one); "
+    "PropORD.lean (propORD_Amarg); Decision.lean (volume_flipSet); Hawthorne 2004, pp. 98-99."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",

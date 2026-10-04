@@ -50,6 +50,11 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [x] **Applied at 8e45609a and dd5b1311 (2026-10-04), at the author's instruction:** 2.7, Section
+  2.2 states that every result of Sections 4-5 is at full adoption; 6.8, Section 6 repaired after
+  the author's cuts (7e8d546e), with the Hawthorne paragraph rewritten to say what the objection
+  costs (IMM's immunity, Theorem LOS) and what it leaves (the ranking). Author kept "As explained
+  with Proposition LAD" (a backward pointer to a later proposition).
 - [x] **Applied at adaa99f6 (2026-10-03), at the author's direct instruction:** 6.7,
   Proposition ADJ dropped. Its first identity (the rule read backwards) is one Section 6
   sentence; the proposition, proof and example are in PAPER_B_ADDENDUM.tex, which holds results
