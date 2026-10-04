@@ -880,7 +880,7 @@ taken up at the end of this section."""),
     ("insert_sentence", "The rule is the averaging form of the belief-adjustment model,", "and embedded in the joint law by a Jeffrey step.",
      r"""The rule adopts the first cue in full and gives the second the weight $\omega$,
 the same whichever cue is read second, whatever it delivers and whatever marginal it
-meets. The position channel admits other weights. The first cue may also be
+meets.\footnote{The position channel admits other weights. The first cue may also be
 discounted, its step moving the marginal only a fraction $\omega_1$ of the way from
 the prior's marginal to the delivered credence; in the belief-adjustment model, where
 both cues bear on one judgment, equal weights on the two cues make the cue read last
@@ -891,7 +891,7 @@ $1-m$. And the weight may differ between attributes, as it would for a panel tha
 adopts a letter read second with one weight and a credential read second with
 another. Proposition~\ref{prop:LAD} below and the second column of
 Table~\ref{tab:cases} are proved for the rule and are not claimed for these
-variants."""),
+variants.}"""),
     ("insert_para", "The ranking survives the objection,", "before a question about the believed association.",
      r"""\begin{table}[htbp]
 \centering
@@ -936,7 +936,10 @@ the position channel.}
     "cases; it sits next to the existing table, which gives each statistic's order under full and "
     "under partial adoption, and does not repeat it. Part 4 relabels that table's second column, "
     "since $\\omega=0$ is no adoption, not partial adoption (writing_discipline.md 6). Hogarth "
-    "and Einhorn's equal-weight result is labelled as theirs for a single judgment.",
+    "and Einhorn's equal-weight result is labelled as theirs for a single judgment. The varieties "
+    "sit in a footnote to the sentence saying what the rule holds fixed, at the author's call "
+    "(2026-10-04): they are not load-bearing for the argument, a detail kept so that it does not "
+    "slip by.",
     "PropIMM.lean (`propIMM_indep`); Ladder.lean (`ladder_gap`, `assoc_routeDamped`, "
     "`ladder_assoc_coeff`, `ladder_assoc_coeff_at_one`, `jeffreyA_eq_rescale`, `oddsRatio_rescale`); "
     "PropORD.lean (`propORD_Amarg`); Decision.lean (`volume_flipSet`); HogarthEinhorn.lean "
