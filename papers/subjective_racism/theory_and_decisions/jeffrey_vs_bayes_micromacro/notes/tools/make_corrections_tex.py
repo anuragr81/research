@@ -45,6 +45,7 @@ def latex_cell(t):
     t = re.sub(r"\\subsection\{((?:[^{}]|\{[^{}]*\})*)\}(\\label\{[^}]*\})?",
                r"\\textsc{subsection heading}\\par\\textbf{\\large \1}\\par ", t)
     t = t.replace("p{2.6cm}p{5.4cm}p{5.4cm}", "p{2.2cm}p{4.6cm}p{4.6cm}")
+    t = t.replace("p{3.0cm}p{5.6cm}p{5.6cm}", "p{2.0cm}p{3.4cm}p{3.4cm}")   # the four-case table (6.9)
     t = t.replace("p{3.4cm}cccc", "p{2.0cm}cccc").replace("p{5.2cm}cc@", "p{4.2cm}cc@")
     t = re.sub(r"\\paragraph\{([^}]*)\}", r"\\textbf{\1} ", t)
     t = re.sub(r"\\section\{([^}]*)\}", r"\\textit{Section title:} \\textbf{\1}", t)

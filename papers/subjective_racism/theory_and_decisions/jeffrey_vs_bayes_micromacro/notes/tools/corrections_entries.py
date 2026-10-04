@@ -856,7 +856,27 @@ one order in $c$ before a question about the believed association.""")],
     "Ladder.lean (ladder_gap, assoc_routeDamped, ladder_assoc_coeff, ladder_assoc_coeff_at_one); "
     "PropORD.lean (propORD_Amarg); Decision.lean (volume_flipSet); Hawthorne 2004, pp. 98-99."))
 
-E.append(("C.27", "Section 6, after the partial-adoption rule: the varieties of the position channel the adoption weight does not cover", [
+E.append(("C.27", "Section 6, the four cases of $c$ and $\\omega$ (with a table) and the position channel's varieties", [
+    ("As discussed in Section \\ref{sec:intro}, the two channels", "at every weight.",
+     r"""The two channels of Section~\ref{sec:intro} differ in kind, and each has its
+parameter. The association channel belongs to what the evaluator believes, and the
+prior covariance $c$ represents it completely, since a belief about two binary
+attributes has three degrees of freedom, the two marginals and $c$. The position
+channel belongs to how the evaluator revises, and the adoption weight $\omega$
+represents one variety of it, a weight on the cue read second, set out with the
+others below. The two parameters give four cases (Table~\ref{tab:cases}). At $c=0$
+the evaluator believes the attributes unrelated, and at $c\neq0$ believes them
+related in either direction. At $\omega=1$ each cue is adopted in full whenever it is
+read, at $0<\omega<1$ the cue read second moves the belief only part of the way, and
+at $\omega=0$ it is ignored. The results of Sections~\ref{sec:individual}
+and~\ref{sec:aggregation} are those of the case $c\neq0$ and $\omega=1$, where the
+association channel is the only one. At $c=0$ and $\omega=1$ no statistic registers
+the sequence, so every effect those sections find needs a believed link, and every
+effect the position channel adds carries the factor $1-\omega$
+(Proposition~\ref{prop:LAD}). In all four cases the odds ratio is the same in both
+sequences, and wherever the sequence registers, the marginals register it at a lower
+order in $c$ than the believed association. What the results keep when $\omega<1$ is
+taken up at the end of this section."""),
     ("insert_sentence", "The rule is the averaging form of the belief-adjustment model,", "and embedded in the joint law by a Jeffrey step.",
      r"""The rule adopts the first cue in full and gives the second the weight $\omega$,
 the same whichever cue is read second, whatever it delivers and whatever marginal it
@@ -869,40 +889,58 @@ cue delivers, as under their contrast assumption, in which a cue delivering $r_1
 gets a weight proportional to $m$ and one delivering $r_1>m$ a weight proportional to
 $1-m$. And the weight may differ between attributes, as it would for a panel that
 adopts a letter read second with one weight and a credential read second with
-another. Proposition~\ref{prop:LAD} below is proved for the rule and is not claimed
-for these variants. One result holds for all of them. Each still answers a cue by a
-Jeffrey step on its own partition, only to a different target, so it rescales rows or
-columns of the belief, and the odds ratio is the same in both sequences under every
-variant (Lemma~\ref{lem:SEP}).""")],
-    "Author's decision (2026-10-04): the introduction says in short what the position channel "
-    "comprises (entry 1.3), and the varieties the adoption weight does not cover belong in "
-    "Section 6. They go right after the sentence giving the rule as Hogarth and Einhorn's averaging "
-    "form applied to the second cue only, where a reader asks what else the position channel could "
-    "be. The rule itself is their end-of-sequence form with the first item as anchor (Eq. 8), the "
-    "later cue alone discounted, so it is not listed again. Three other varieties are named: both "
-    "cues discounted from a prior anchor (their step-by-step form, which with equal weights gives "
-    "recency in their single-score model), weights that depend on what the cue says (their "
-    "contrast assumption, Eqs. 6a/6b), and weights that differ by attribute. The letters and "
-    "credentials case is this paper's illustration and is not attributed to them. The last "
-    "sentence states the one result that holds for every variety: each step remains a Jeffrey step "
-    "on one attribute's partition, a rescaling of rows or columns, so the odds ratio is unchanged. "
-    "Rewritten 2026-10-04 after the author found the first draft unreadable: one sentence per "
-    "variety, each naming what it contrasts with (the later cue alone against each cue; from the "
-    "first cue against from a prior; position alone against what the cue says); \"recency\" and "
-    "\"anchor\" replaced by plain words; and \"concern the rule alone\" replaced by \"not claimed "
-    "for these varieties\", since whether the orders hold for them is unchecked, not false. "
-    "Appendix B's result assumes each item keeps its own weight wherever it stands, which the "
-    "same weight on both cues satisfies. Made concrete the same day, at the author's request, since "
-    "the rule's notation is on the page by this point: \"a constant\" became what the rule holds "
-    "fixed (the first cue in full; one $\\omega$ for the second, whichever cue it is, whatever it "
-    "delivers and whatever marginal it meets), and each variant is stated in that notation (a "
-    "weight $\\omega_1$ on the first step; a weight proportional to $m$ or to $1-m$ as $r_1$ falls "
-    "below or above $m$; separate weights by attribute). Hogarth and Einhorn's equal-weight result "
-    "is qualified as theirs for a single judgment, since here the two cues bear on different "
-    "attributes.",
-    "HogarthEinhorn.lean (`oneSided_eq_eq8`, `twoSided_orderEffect`, `twoSided_recency`, "
-    "`contrastWeight`, `contrastWeight_mem_Icc`); Ladder.lean (`jeffreyA_eq_rescale`, "
-    "`jeffreyB_eq_rescale`, `oddsRatio_rescale`)."))
+another. Proposition~\ref{prop:LAD} below and the second column of
+Table~\ref{tab:cases} are proved for the rule and are not claimed for these
+variants."""),
+    ("insert_para", "The ranking survives the objection,", "before a question about the believed association.",
+     r"""\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{@{}p{3.0cm}p{5.6cm}p{5.6cm}@{}}
+\toprule
+ & \textbf{Full adoption, $\omega=1$} & \textbf{Partial or no adoption, $\omega<1$} \\
+\midrule
+\textbf{Attributes believed unrelated, $c=0$}
+  & Neither channel. No statistic registers the sequence (Proposition~\ref{prop:IMM}).
+  & Position channel only. $P(A{=}1)$ differs between the sequences by $(1-\omega)(\alpha-q_0)$ and $P(B{=}1)$ by $-(1-\omega)(\beta-r_0)$; the believed association is zero in both. \\
+\addlinespace
+\textbf{Attributes believed related, $c\neq0$}
+  & Association channel only. The marginals and the share of decisions changed differ at first order in $c$, the believed association and the surplus-weighted loss at second order (Sections~\ref{sec:individual} and~\ref{sec:aggregation}).
+  & Both channels. The marginals differ at order zero and the believed association at first order, by $c(1-\omega)H/Z$ (Proposition~\ref{prop:LAD}). \\
+\bottomrule
+\end{tabular}
+\caption{What registers the sequence in each of the four cases. In every case the odds
+ratio is the same in both sequences. The second column is for the rule of this section,
+a weight $\omega$ on the cue read second, and is not claimed for the other varieties of
+the position channel.}
+\label{tab:cases}
+\end{table}"""),
+    (r"\textbf{Partial adoption, $\omega<1$}", r"\textbf{Partial adoption, $\omega<1$}",
+     r"""\textbf{Partial or no adoption, $\omega<1$}""")],
+    "Author's request (2026-10-04), after a discussion of what the two channels are: set out how "
+    "they differ, how $c$ and $\\omega$ represent them, what the position channel comprises, how "
+    "the four cases $c=0$, $c\\neq0$, $\\omega=1$ and $\\omega<1$ are to be read, and how sensitive "
+    "the results are to each, with a table. The introduction (entry 1.3) states the difference in "
+    "kind; this entry carries the rest in Section 6. Part 1 replaces the two-channels paragraph, "
+    "which made part of this case and which the author's cuts and edits had left partly garbled: "
+    "it says that $c$ represents its channel completely (a belief about two binary attributes has "
+    "three degrees of freedom, as Section 4 says) and $\\omega$ only one variety of its, reads each "
+    "of the four cases, and states what is sensitive to each parameter (every effect of Sections 4 "
+    "and 5 needs $c\\neq0$; every position effect carries $1-\\omega$; the odds ratio and the "
+    "marginals' lead over the association hold in all four). What each result keeps when "
+    "$\\omega<1$ stays in the Hawthorne paragraph at the end of the section, which already states "
+    "it, so it is pointed to and not repeated. The position channel's numbers at $c=0$ move into "
+    "the table. Part 2 is the earlier 6.9 text without its odds-ratio sentences, which the author "
+    "found made no point on their own; the odds-ratio claim now stands in Part 1 and the table, "
+    "where it says what does not depend on either parameter. Part 3 is the table of the four "
+    "cases; it sits next to the existing table, which gives each statistic's order under full and "
+    "under partial adoption, and does not repeat it. Part 4 relabels that table's second column, "
+    "since $\\omega=0$ is no adoption, not partial adoption (writing_discipline.md 6). Hogarth "
+    "and Einhorn's equal-weight result is labelled as theirs for a single judgment.",
+    "PropIMM.lean (`propIMM_indep`); Ladder.lean (`ladder_gap`, `assoc_routeDamped`, "
+    "`ladder_assoc_coeff`, `ladder_assoc_coeff_at_one`, `jeffreyA_eq_rescale`, `oddsRatio_rescale`); "
+    "PropORD.lean (`propORD_Amarg`); Decision.lean (`volume_flipSet`); HogarthEinhorn.lean "
+    "(`oneSided_eq_eq8`, `twoSided_recency`, `contrastWeight`)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
@@ -1168,6 +1206,7 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.1.3": "removes the identification overclaim",
                             "C.4.1": "adds the partial-adoption sentence (Proposition LAD)",
                             "C.4.2": "removes a definition of c that the channel sentence now gives first",
+                            "C.27.4": "relabels a column to the agreed term, since omega=0 is no adoption",
                             "C.5.1": "adds what survives partial adoption (Proposition LAD)",
                             "C.9w.1": "names the belief-adjustment model the weight nests",
                             "E.13.1": "names the two new propositions",
