@@ -27,6 +27,8 @@ APPLIED["C.23"] = "5088448e"
 APPLIED["C.24"] = "adaa99f6"
 APPLIED["C.25"] = "8e45609a"
 APPLIED["C.26"] = "dd5b1311"
+APPLIED["C.4"] = "7164acd5"
+APPLIED["C.27"] = "7164acd5"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
 

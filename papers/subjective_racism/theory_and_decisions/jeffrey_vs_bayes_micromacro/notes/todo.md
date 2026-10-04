@@ -50,7 +50,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
-- [~] **Pending, for the author to pick (2026-10-04):** 1.3 amended, the introduction's channel
+- [x] **Applied at 7164acd5 (2026-10-04), at the author's instruction:** 1.3 amended, the introduction's channel
   sentences saying what each channel is (belief content against revision), the position channel
   in full, the adoption weight as one variety (Asch left out: psychology, not a formal model); part 2 shortens the later
   definition of c. 6.9 new, the varieties of the position channel the weight does not cover,
