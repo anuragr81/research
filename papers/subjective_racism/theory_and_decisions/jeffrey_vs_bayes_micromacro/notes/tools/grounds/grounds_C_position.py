@@ -35,14 +35,14 @@ GROUNDS["C.4"] = [
 
 GROUNDS["C.27"] = [
     _pick("grounds_E_scope.py", "E.10", r"Hogarth and Einhorn 1992, T-p.12 (transcription), Eq. 8",
-          r"``The rule discounts the later cue alone, and by a constant'': their end-of-sequence form with the first item as anchor (Eq. 8)."),
+          r"``The rule adopts the first cue in full and gives the second the weight $\omega$'': their end-of-sequence form with the first item as anchor (Eq. 8), applied with one $\omega$ whichever cue is second."),
     {
         "kind": "theorem",
         "source": r"HogarthEinhorn.lean, twoSided\_orderEffect and twoSided\_recency",
         "text": r"""With the same weight $w$ on both cues, step-by-step from a prior $S_0$ in estimation
 mode ($R=S_{k-1}$): $S(a\text{ then }b)-S(b\text{ then }a)=w^{2}(s_b-s_a)$, positive for every
 $w>0$ when $s_a<s_b$, so the item read last weighs more.""",
-        "note": r"``Each cue may be discounted, from a prior rather than from the first cue, and with the same weight on both cues the belief-adjustment model then predicts that the cue read last weighs more'', in their single-score model; their Appendix B proves it (Eq. B.5) for weights that stay with each item wherever it stands.",
+        "note": r"``In the belief-adjustment model, where both cues bear on one judgment, equal weights on the two cues make the cue read last weigh more'': their step-by-step form from a prior, each step a fraction $w$ of the way; Appendix B proves it (Eq. B.5) for weights that stay with each item wherever it stands.",
     },
     {
         "kind": "theorem",
@@ -50,8 +50,8 @@ $w>0$ when $s_a<s_b$, so the item read last weighs more.""",
         "text": r"""$w_k=\alpha S_{k-1}$ for evidence at or below the reference point $R$ and
 $w_k=\beta(1-S_{k-1})$ above it, with $0\le\alpha,\beta\le1$; for $0\le S_{k-1}\le1$ these weights
 lie in $[0,1]$, as their model requires (T-p.6).""",
-        "note": r"``The weight may depend on what the cue says rather than on its position alone, as under their contrast assumption, which gives evidence above the current impression one weight and evidence below it another''; in estimation mode the reference point is the current impression, $R=S_{k-1}$.",
+        "note": r"``A cue delivering $r_1<m$ gets a weight proportional to $m$ and one delivering $r_1>m$ a weight proportional to $1-m$'': their $\alpha S_{k-1}$ and $\beta(1-S_{k-1})$ with the current impression $S_{k-1}$ read as the marginal $m$ the cue meets and the evidence $s(x_k)$ as the delivered credence $r_1$; in estimation mode their reference point is $R=S_{k-1}$.",
     },
     _pick("grounds_C_applied.py", "C.18", r"Ladder.lean, jeffreyA\_eq\_rescale",
-          r"``Each step remains a Jeffrey step on one attribute's partition and so rescales rows or columns of the belief, so the odds ratio is the same in both sequences under every variety'': a step on one attribute rescales rows or columns whatever its target."),
+          r"``Each still answers a cue by a Jeffrey step on its own partition, only to a different target, so it rescales rows or columns of the belief, and the odds ratio is the same in both sequences under every variant'': a step on one attribute rescales rows or columns whatever its target."),
 ]

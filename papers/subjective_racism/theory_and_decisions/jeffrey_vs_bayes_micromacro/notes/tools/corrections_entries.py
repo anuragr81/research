@@ -858,18 +858,22 @@ one order in $c$ before a question about the believed association.""")],
 
 E.append(("C.27", "Section 6, after the partial-adoption rule: the varieties of the position channel the adoption weight does not cover", [
     ("insert_sentence", "The rule is the averaging form of the belief-adjustment model,", "and embedded in the joint law by a Jeffrey step.",
-     r"""The rule discounts the later cue alone, and by a constant. The position channel
-admits other varieties. Each cue may be discounted, from a prior rather than from the
-first cue, and with the same weight on both cues the belief-adjustment model then
-predicts that the cue read last weighs more \citep[Appendix~B]{HogarthEinhorn1992}.
-The weight may depend on what the cue says rather than on its position alone, as
-under their contrast assumption, which gives evidence above the current impression
-one weight and evidence below it another. And the weight may differ between
-attributes, as it would for a panel that discounts letters more than credentials.
-The results below hold for the rule and are not claimed for these varieties. One
-result holds for all of them. Each step remains a Jeffrey step on one attribute's
-partition and so rescales rows or columns of the belief (Lemma~\ref{lem:SEP}), so
-the odds ratio is the same in both sequences under every variety.""")],
+     r"""The rule adopts the first cue in full and gives the second the weight $\omega$,
+the same whichever cue is read second, whatever it delivers and whatever marginal it
+meets. The position channel admits other weights. The first cue may also be
+discounted, its step moving the marginal only a fraction $\omega_1$ of the way from
+the prior's marginal to the delivered credence; in the belief-adjustment model, where
+both cues bear on one judgment, equal weights on the two cues make the cue read last
+weigh more \citep[Appendix~B]{HogarthEinhorn1992}. The weight may depend on what the
+cue delivers, as under their contrast assumption, in which a cue delivering $r_1<m$
+gets a weight proportional to $m$ and one delivering $r_1>m$ a weight proportional to
+$1-m$. And the weight may differ between attributes, as it would for a panel that
+adopts a letter read second with one weight and a credential read second with
+another. Proposition~\ref{prop:LAD} below is proved for the rule and is not claimed
+for these variants. One result holds for all of them. Each still answers a cue by a
+Jeffrey step on its own partition, only to a different target, so it rescales rows or
+columns of the belief, and the odds ratio is the same in both sequences under every
+variant (Lemma~\ref{lem:SEP}).""")],
     "Author's decision (2026-10-04): the introduction says in short what the position channel "
     "comprises (entry 1.3), and the varieties the adoption weight does not cover belong in "
     "Section 6. They go right after the sentence giving the rule as Hogarth and Einhorn's averaging "
@@ -888,7 +892,14 @@ the odds ratio is the same in both sequences under every variety.""")],
     "\"anchor\" replaced by plain words; and \"concern the rule alone\" replaced by \"not claimed "
     "for these varieties\", since whether the orders hold for them is unchecked, not false. "
     "Appendix B's result assumes each item keeps its own weight wherever it stands, which the "
-    "same weight on both cues satisfies.",
+    "same weight on both cues satisfies. Made concrete the same day, at the author's request, since "
+    "the rule's notation is on the page by this point: \"a constant\" became what the rule holds "
+    "fixed (the first cue in full; one $\\omega$ for the second, whichever cue it is, whatever it "
+    "delivers and whatever marginal it meets), and each variant is stated in that notation (a "
+    "weight $\\omega_1$ on the first step; a weight proportional to $m$ or to $1-m$ as $r_1$ falls "
+    "below or above $m$; separate weights by attribute). Hogarth and Einhorn's equal-weight result "
+    "is qualified as theirs for a single judgment, since here the two cues bear on different "
+    "attributes.",
     "HogarthEinhorn.lean (`oneSided_eq_eq8`, `twoSided_orderEffect`, `twoSided_recency`, "
     "`contrastWeight`, `contrastWeight_mem_Icc`); Ladder.lean (`jeffreyA_eq_rescale`, "
     "`jeffreyB_eq_rescale`, `oddsRatio_rescale`)."))
