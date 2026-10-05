@@ -947,6 +947,30 @@ the position channel.}
     "PropORD.lean (`propORD_Amarg`); Decision.lean (`volume_flipSet`); HogarthEinhorn.lean "
     "(`oneSided_eq_eq8`, `twoSided_recency`, `contrastWeight`)."))
 
+E.append(("C.28", "Setup 2.1, after the adoption weight: the weight is not part of the belief", [
+    ("insert_sentence", "the letter sets the rating outright", "implication is never moved.",
+     r"""The weight is not part of what the evaluator believes about the applicants, which
+remains the joint law $P$, but describes how the evaluator revises $P$ on a cue. What
+the evaluator believes about a document, such as how far a letter can be trusted,
+enters instead the credence the document delivers, which is the same in either
+position, so the weight captures only the part of revision that depends on when a
+document arrives.""")],
+    "Author's question (2026-10-05): does a belief consist of both channels? It does not. In the "
+    "model a belief is the joint law $P$, the evaluator's credences about a candidate drawn at "
+    "random (Setup 2.1), so it is the evaluator's state and its content is about the world at "
+    "once; it contains $c$, the source of the association channel, and not $\\omega$, which "
+    "belongs to the rule that revises it. The author then asked whether what an evaluator "
+    "believes has nothing to do with how the evaluator updates. It has, in two ways the sentence "
+    "keeps apart: the same rule does different things to different beliefs, which is the "
+    "association channel, and what the evaluator believes about a document enters the credence "
+    "the document delivers, which on Jeffrey's reading is the evaluator's considered response "
+    "to it and which the paper takes to be the same in either position (Definition 2). The "
+    "weight is what is left, the part of revision that depends on position alone, which no "
+    "belief about applicants or documents accounts for. The sentence goes where the weight "
+    "first appears. In the model $P$ and $\\omega$ are independent by assumption; the contrast "
+    "weights in the Section 6 footnote, which depend on the current marginal, relax it.",
+    "Anchoring.lean (`dampedTarget`, `dampedB`); Wagner 2002, note 9 (preprint p. 13)."))
+
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
      "lives entirely in outcomes.",
