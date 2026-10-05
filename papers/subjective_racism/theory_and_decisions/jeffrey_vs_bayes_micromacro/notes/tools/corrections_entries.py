@@ -29,6 +29,7 @@ APPLIED["C.25"] = "8e45609a"
 APPLIED["C.26"] = "dd5b1311"
 APPLIED["C.4"] = "7164acd5"
 APPLIED["C.30"] = "a7628365"
+APPLIED["C.32"] = "67c8e08e"
 APPLIED["C.31"] = "e6512612"
 APPLIED["C.29"] = "444b03c6"
 APPLIED["C.27"] = "7164acd5"
@@ -950,30 +951,6 @@ the position channel.}
     "PropORD.lean (`propORD_Amarg`); Decision.lean (`volume_flipSet`); HogarthEinhorn.lean "
     "(`oneSided_eq_eq8`, `twoSided_recency`, `contrastWeight`)."))
 
-E.append(("C.28", "Setup 2.1, after the adoption weight: the weight is not part of the belief", [
-    ("insert_sentence", "the letter sets the rating outright", "implication is never moved.",
-     r"""The weight is not part of what the evaluator believes about the applicants, which
-remains the joint law $P$, but describes how the evaluator revises $P$ on a cue. What
-the evaluator believes about a document, such as how far a letter can be trusted,
-enters instead the credence the document delivers, which is the same in either
-position, so the weight captures only the part of revision that depends on when a
-document arrives.""")],
-    "Author's question (2026-10-05): does a belief consist of both channels? It does not. In the "
-    "model a belief is the joint law $P$, the evaluator's credences about a candidate drawn at "
-    "random (Setup 2.1), so it is the evaluator's state and its content is about the world at "
-    "once; it contains $c$, the source of the association channel, and not $\\omega$, which "
-    "belongs to the rule that revises it. The author then asked whether what an evaluator "
-    "believes has nothing to do with how the evaluator updates. It has, in two ways the sentence "
-    "keeps apart: the same rule does different things to different beliefs, which is the "
-    "association channel, and what the evaluator believes about a document enters the credence "
-    "the document delivers, which on Jeffrey's reading is the evaluator's considered response "
-    "to it and which the paper takes to be the same in either position (Definition 2). The "
-    "weight is what is left, the part of revision that depends on position alone, which no "
-    "belief about applicants or documents accounts for. The sentence goes where the weight "
-    "first appears. In the model $P$ and $\\omega$ are independent by assumption; the contrast "
-    "weights in the Section 6 footnote, which depend on the current marginal, relax it.",
-    "Anchoring.lean (`dampedTarget`, `dampedB`); Wagner 2002, note 9 (preprint p. 13)."))
-
 E.append(("C.29", "Section 6 after the author's cuts: the Hawthorne reply corrected, mechanical fixes (applied)", [
     ('by an adoption weight $\\omega$, and Section~\\ref{sec:scope} sets out the others', 'which lie outside its results.',
      r"""by an adoption weight $\omega$, and its results are not claimed for the
@@ -1025,6 +1002,30 @@ $t_0=(1-\omega)\beta+\omega r_0$,""")],
     "step; the definition goes into the proposition's opening rather than back into the text. The sentence part was withdrawn "
     "before it was applied: the author rewrote that paragraph in their own words at 35dc1e24.",
     "Anchoring.lean (`dampedTarget`, `dampedB`)."))
+
+E.append(("C.32", "Section 6, the author's rewrite of the second paragraph: typos, dashes and two logic fixes (applied)", [
+    ("It is worth highlighting that reading a cue as a credence", "where Hawthorne's objection still applies.",
+     r"""Reading a cue as a credence, as is the case when evidence is soft, does not oblige the
+evaluator to adopt it in full. The paper focuses on full adoption not to discount partial
+adoption but with the caveat that, when partial adoption is possible, sequence dependence
+follows even when the traits are believed unrelated. The paper narrows its focus to the
+problem of how believed association is reflected in statistics. In other words, the paper
+describes how statistics are affected through the association channel, which comprises the
+prior (the evaluator's probabilities that the candidate is competent or not and trustworthy
+or not), rather than through the position channel, which comprises the rule by which the
+evaluator revises the probabilities and is present only if Hawthorne's objection to full
+adoption is right."""),
+    ("The above proposition shows that if evaluators adopt the later cue only in", "The above proposition shows that if evaluators adopt the later cue only in",
+     r"""It follows from the above proposition that if evaluators adopt the later cue only in""")],
+    "Author's instruction (2026-10-05) after the cleanup of 35dc1e24 and a7628365: fix the typos and "
+    "grammar (\"parial\", \"why paper focuses\", \"comprising of\", \"narrows its focus on\"), the style "
+    "(three dashes, \"It is worth highlighting that\"), and two logic points. The position channel was "
+    "described as where Hawthorne's objection \"still applies\", which inverts it: the objection is to "
+    "full adoption, and a rule that discounts the later cue is the alternative it points to, so the "
+    "channel is present only if the objection is right. And Proposition LAD gives the beliefs at "
+    "$c=0$; the score departure and the decision bounds follow from them with the decision-band results, "
+    "so the proposition does not \"show\" them. The author's wording is kept elsewhere.",
+    "Ladder.lean (`ladder_gap`); Decision.lean (`volume_flipSet`, `lintegral_stake_le`)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",

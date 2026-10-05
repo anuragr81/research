@@ -9,6 +9,11 @@ def _pick(fname, entry, prefix, note):
     item = dict(hits[0]); item["note"] = note; return item
 GROUNDS = {}
 GROUNDS["C.31"] = [
-    _pick("grounds_C_belief.py", "C.28", r"Anchoring.lean, dampedTarget and dampedB",
-          r"The rule the proposition is about, a Jeffrey step on the second cue's partition to $(1-\omega)m+\omega x$."),
+    {
+        "kind": "theorem",
+        "source": r"Anchoring.lean, dampedTarget and dampedB",
+        "text": r"""$\mathrm{dampedTarget}(Q,r_0,\delta)=(1-\delta)\,Q(B{=}1)+\delta(1-r_0)$, and the damped step
+is the Jeffrey step on $B$ to that target.""",
+        "note": r"The rule the proposition is about, a Jeffrey step on the second cue's partition to $(1-\omega)m+\omega x$.",
+    },
 ]
