@@ -999,6 +999,36 @@ sequence one order in $c$ before asking how the traits go together.""")],
     "The author cut Section 6 hard at d5a1f9e5 and asked for a review. Applied at the author's instruction: the introduction no longer promises that Section 6 sets out the other varieties of the position channel (the footnote listing them was cut); the Hawthorne paragraph, which said the objection 'does apply still' under partial adoption, now says the objection is to full adoption and states what follows if it is right; and the mechanical fixes (a typo, articles, a dash, 'i.e.', '(or not)', a contraction, 'It is worth highlighting that'). The sentence 'changed decisions and lost surplus are both sizable' was this plan's own plain-language gloss, written for the author and not checked; the Lean band bounds hold for any score departure, and at c=0 each panel's departure from the benchmark is exactly proportional to 1-omega (sequence AB ends at q(x)t, the benchmark at q(x)r, and t-r carries 1-omega), so the share of decisions changed scales with that departure and the surplus lost is at most the departure times the share. 'More strongly' became 'one order in c before'. Left as the author asked: the channel sentences ('controlled by', 'both of which an evaluator's decision on a candidate bears upon'), the unreferenced robustness table, and the 'as' in the first sentence, which does not give a reason. Open: the partial-adoption rule is no longer defined, though Proposition LAD's statement uses the sequences it produces.",
     "Decision.lean (`volume_flipSet`, `lintegral_stake_le`); PropIMM.lean (`PB_at_zero`); Ladder.lean (`ladder_gap`)."))
 
+E.append(("C.30", "Introduction, the adoption-weight sentence: the protective clause goes", [
+    (r"by an adoption weight $\omega$, and its results are not claimed for the", "others.",
+     r"""by an adoption weight $\omega$.""")],
+    "Author's call (2026-10-05): \"and its results are not claimed for the others\" is protective and "
+    "says nothing the sentence does not already say by naming one variety.",
+    "None needed."))
+
+E.append(("C.31", "Section 6: both channels inside the evaluator; the partial-adoption rule defined in Proposition LAD", [
+    ("The paper clarifies the effect of believed association by separating", "bears upon.",
+     r"""Both channels lie inside the evaluator, whose prior credences about the candidate supply the
+association channel through the believed link between the attributes, and whose way of
+revising those credences supplies the position channel when it gives a document less weight
+for arriving second."""),
+    (r"Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$,", r"Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$,",
+     r"""Let $0\le\omega\le1$, and let $P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ be the two sequences when the
+cue read second is answered by a Jeffrey step to $(1-\omega)m+\omega x$, with $m$ the marginal
+the first step left and $x$ the credence the second cue delivers. Let
+$t_0=(1-\omega)\beta+\omega r_0$,""")],
+    "Part 1, author's request (2026-10-05): the paper rests on subjective probability, yet the "
+    "sentence it replaces (\"both of which an evaluator's decision on a candidate bears upon\") reads as "
+    "though the channels were outside the evaluator. The new sentence puts both inside: the "
+    "association channel comes from the evaluator's own credence that the attributes are linked, "
+    "the position channel from the evaluator's own way of revising when a document arrives second. "
+    "The author accepted the sentence. Part 2, author's decision the same day: the author's cuts of "
+    "d5a1f9e5 removed the only definition of the partial-adoption rule, which Proposition LAD's "
+    "statement needs (it is about the sequences the rule produces) and whose proof calls a damped "
+    "step; the definition goes into the proposition's opening rather than back into the text.",
+    "PropDIV.lean (`jeffreyA_prior_mB0`); Anchoring.lean (`orderEffect_damped_at_indep`, "
+    "`dampedTarget`, `dampedB`)."))
+
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
      "lives entirely in outcomes.",
@@ -1264,6 +1294,9 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.4.1": "adds the partial-adoption sentence (Proposition LAD)",
                             "C.4.2": "removes a definition of c that the channel sentence now gives first",
                             "C.27.4": "relabels a column to the agreed term, since omega=0 is no adoption",
+                            "C.30.1": "drops a protective clause at the author's call",
+                            "C.31.1": "replaces a sentence that placed the channels outside the evaluator",
+                            "C.31.2": "adds the definition of the rule the proposition is about",
                             "C.5.1": "adds what survives partial adoption (Proposition LAD)",
                             "C.9w.1": "names the belief-adjustment model the weight nests",
                             "E.13.1": "names the two new propositions",

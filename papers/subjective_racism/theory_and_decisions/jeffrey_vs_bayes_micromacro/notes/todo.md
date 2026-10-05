@@ -50,6 +50,9 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   replace the two point witnesses (`ladder_assoc_coeff_eq_zero_iff`, `_variance`, `Hcof_slice`,
   `ladder_condDiff_coeff(_eq_zero_iff)`, `LadderFactorPow.lean`). Grounds rows of 1.4, 4.1, 5.2, 5.3,
   6.3, 6.4, 7.1 and 7.2 restated with the exact zero sets.
+- [~] **Pending (2026-10-05), for the author to pick:** 1.10, the introduction drops "and its results are not
+  claimed for the others"; 6.11, Section 6 says both channels lie inside the evaluator, and Proposition LAD's
+  statement defines the partial-adoption rule.
 - [~] **Pending (2026-10-05):** 2.8, Setup 2.1 says the adoption weight is not part of the belief: what the
   evaluator believes about a document enters the credence it delivers, and the weight is only the part of
   revision that depends on position.

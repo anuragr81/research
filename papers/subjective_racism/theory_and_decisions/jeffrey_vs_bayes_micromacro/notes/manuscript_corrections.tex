@@ -61,7 +61,7 @@ numbers to new. Order of application, where it differs from manuscript order. B.
 These entries have left the table of changes. What of them stands in the manuscript is under
 ``Applied entries in force''; what has since been removed or largely rewritten (3.1, 3.7, 5.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.1) is under ``History''.
 
-\paragraph*{Pending} (18 entries, in manuscript order): 0.1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.6, 2.8, 3.2, 3.3, 3.5, 4.2, A.1, B.1, B.2.
+\paragraph*{Pending} (20 entries, in manuscript order): 0.1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 2.6, 2.8, 3.2, 3.3, 3.5, 4.2, 6.11, A.1, B.1, B.2.
 
 {\small
 \begin{longtable}{|p{0.9cm}|p{12.2cm}|p{12.2cm}|}
@@ -191,6 +191,11 @@ factor $\Lambda_k(\gamma)$ of every basis-homogeneous subsequence is invariant
 under permutation of $\gamma$, then $\mathrm{extUpdate}(p,\delta) =
 \mathrm{extUpdate}(p,\delta')$ for every permutation $\delta'$ of $\delta$. \newline \textit{Factor updates commute across distinct bases; commutation within a
 basis, hence full order-freedom, needs the extra Basis-Commuting hypothesis.}} \\ \hline
+\multicolumn{3}{|l|}{} \\ \hline
+\entryhead{1.10}{Introduction, the adoption-weight sentence: the protective clause goes\quad{\footnotesize\textit{(formerly C.30)}}}
+1/1 & by an adoption weight $\omega$, and its results are not claimed for the others. & by an adoption weight $\omega$. \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Author's call (2026-10-05): ``and its results are not claimed for the others'' is protective and says nothing the sentence does not already say by naming one variety.} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} None needed.} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \entryhead{1.4}{Introduction, hiring-panel paragraph, the two sentences before the last (rebased on the author's draft da5e3cff)\quad{\footnotesize\textit{(formerly C.5)}}}
 1/1 & As the paper shows, this means that the believed association differs between the two sequences only at second order. On the other hand, a letter adopted only in part moves that belief from wherever the credential left it (and the believed association differs at first order - see Proposition LAD). & The believed association then differs between the two sequences only at second order (Proposition~\ref{prop:ORD}). A letter adopted only in part moves that belief from wherever the credential left it, and the believed association then differs at first order (Proposition~\ref{prop:LAD}). \\ \hline
@@ -573,6 +578,22 @@ whole population, $I = 1$ on $\{0\}$ and $I = \tfrac12$ on $\{1, 2\}$, and
 $\tfrac34 \neq \tfrac13 \cdot 1 + \tfrac23 \cdot \tfrac12 = \tfrac23$. \newline \textit{The mean shortfall among the poor (FGT's $I$ times $z$) is not
 additively decomposable with population-share weights, so it is not a member
 of the decomposable family the manuscript cites.}} \\ \hline
+\multicolumn{3}{|l|}{} \\ \hline
+\multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{6\quad Scope}} \\ \hline\hline
+\entryhead{6.11}{Section 6: both channels inside the evaluator; the partial-adoption rule defined in Proposition LAD\quad{\footnotesize\textit{(formerly C.31)}}}
+1/2 & The paper clarifies the effect of believed association by separating the association channel from the position channel, both of which an evaluator's decision on a candidate bears upon. & Both channels lie inside the evaluator, whose prior credences about the candidate supply the association channel through the believed link between the attributes, and whose way of revising those credences supplies the position channel when it gives a document less weight for arriving second. \\ \hline
+2/2 & Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$, & Let $0\le\omega\le1$, and let $P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ be the two sequences when the cue read second is answered by a Jeffrey step to $(1-\omega)m+\omega x$, with $m$ the marginal the first step left and $x$ the credence the second cue delivers. Let $t_0=(1-\omega)\beta+\omega r_0$, \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Part 1, author's request (2026-10-05): the paper rests on subjective probability, yet the sentence it replaces (``both of which an evaluator's decision on a candidate bears upon'') reads as though the channels were outside the evaluator. The new sentence puts both inside: the association channel comes from the evaluator's own credence that the attributes are linked, the position channel from the evaluator's own way of revising when a document arrives second. The author accepted the sentence. Part 2, author's decision the same day: the author's cuts of d5a1f9e5 removed the only definition of the partial-adoption rule, which Proposition LAD's statement needs (it is about the sequences the rule produces) and whose proof calls a damped step; the definition goes into the proposition's opening rather than back into the text.} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} PropDIV.lean (\texttt{jeffreyA\_prior\_mB0}); Anchoring.lean (\texttt{orderEffect\_damped\_at\_indep}, \texttt{dampedTarget}, \texttt{dampedB}).} \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{PropDIV.lean, jeffreyA\_prior\_mB0} \newline For $\alpha\neq0$, $1-\alpha\neq0$: after the Jeffrey step on $A$ to $(q_0,q_1)$,
+$Q(B{=}0)=[\alpha\beta(1-\alpha)+c\,(q_0-\alpha)]/[\alpha(1-\alpha)]$, that is
+$\beta+c\,(q_0-\alpha)/(\alpha(1-\alpha))$. \newline \textit{Part 1, ``supply the association channel through the believed link'': a cue on one attribute moves the credence about the other by a multiple of $c$, the link in the evaluator's own prior.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, orderEffect\_damped\_at\_indep} \newline For $\alpha\neq0$, $1-\alpha\neq0$, $\beta\neq0$, $1-\beta\neq0$:
+$P^{\delta}_{AB}(A{=}1)-P^{\delta}_{BA}(A{=}1)\big|_{c=0}=(1-\delta)(\alpha-q_0)$; the
+amnestic term vanishes there by Proposition IMM. \newline \textit{Part 1, ``supplies the position channel when it gives a document less weight for arriving second'': with weight $\omega<1$ on the cue read second the sequences differ at $c=0$ by $(1-\omega)(\alpha-q_0)$.}} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Theorem.} \textit{Anchoring.lean, dampedTarget and dampedB} \newline $\mathrm{dampedTarget}(Q,r_0,\delta)=(1-\delta)\,Q(B{=}1)+\delta(1-r_0)$, and the damped step
+is the Jeffrey step on $B$ to that target. The belief $Q$, the delivered credence $r_0$ and the
+weight $\delta$ are separate arguments of the step. \newline \textit{Part 2: the rule the proposition is about, a Jeffrey step on the second cue's partition to $(1-\omega)m+\omega x$.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{A\quad Appendix, Deferred proofs}} \\ \hline\hline
 \entryhead{A.1}{Appendix, proof of Theorem LOS, the two Tao citations\quad{\footnotesize\textit{(formerly C.14)}}}
@@ -1897,6 +1918,8 @@ C.26 & 6.8 & Scope & applied at dd5b1311, part in History \\ \hline
 C.27 & 6.9 & Scope & applied at 7164acd5, part in History \\ \hline
 C.28 & 2.8 & Setup & pending \\ \hline
 C.29 & 6.10 & Scope & applied at 444b03c6 \\ \hline
+C.30 & 1.10 & Introduction & pending \\ \hline
+C.31 & 6.11 & Scope & pending \\ \hline
 E.1 & 1.5 & Introduction & pending \\ \hline
 E.2 & 2.2 & Setup & applied at db3a2f41 \\ \hline
 E.3 & 2.5 & Setup & applied at db3a2f41 \\ \hline
