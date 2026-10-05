@@ -12,38 +12,34 @@ Paragraph breaks inside an AFTER text are written as \\par.
 
 E2 = []
 
-E2.append(("E.1", "Introduction, new paragraph after the hiring-panel paragraph (was 1.C)", [(
-    "insert_para", "with the difference set by arrival sequence.", "with the difference set by arrival sequence.",
-    r"""Which impression prevails matters beyond the single judgement. The
-impression-formation literature disagrees on the direction. \citet{Asch1946} reports
-that the earlier terms set the direction in which later ones are read, and the
-review of \citet{HogarthEinhorn1992} finds primacy, recency or no effect depending
-on the characteristics of the task. Under either direction the sequence in which
-cues arrive is not neutral, and it need not be assigned by chance. A candidate who
-comes through a referral is met first through the letter and then through the
-credential, while a candidate who applies unsolicited is met first through the
-credential. If referral is more common in one group than in another, the two
-groups differ in the share $\lambda$ of evaluators who read the credential first.
-Two groups presenting the same evidence to evaluators with the same priors and the
-same preferences then receive different mean beliefs, and the difference is the
-sequence effect multiplied by the difference in their shares. A gap of that kind is
-not statistical discrimination in the sense of \citet{Phelps1972} and
-\citet{Arrow1973}, which rests on different prior beliefs about the groups, and it
-is none of the three sources that \citet{Bohren2019} distinguish, correct beliefs,
-biased beliefs and preferences, since none of these differs between the groups
-here. Which group it favours depends on whether the later or the earlier impression
-prevails, which Proposition~\ref{prop:ADJ} reads from the marginals. The gap also
-inherits the classification of this paper. It appears in the marginal
-probabilities and in the share of decisions changed, and an audit of the believed
-association does not register it.""")],
-    "Plan 1.C with audit P4 (\"prior beliefs about the groups\"), D13 (BIR's three sources "
-    "named rather than \"none of the sources\", since their impartial type discriminates with "
-    "correct beliefs and no animus), A24 (Asch's \"early terms dominate\" softened to his own "
-    "\"direction\" account) and H6 (the primacy/recency/no-effect finding is HE's review of "
-    "other studies) applied. Presupposes E.10 (Proposition ADJ) and the Bohren2019 bib entry. "
-    "Goes after C.5's sentence.",
+E2.append(("E.1", "Related literature, the statistical-discrimination paragraph: a group gap from the reading sequence alone (was 1.5, compacted)", [(
+    "insert_sentence", "and yet remain invisible in the protected dependence statistics.", "and yet remain invisible in the protected dependence statistics.",
+    r"""The sequence need not be assigned by chance, however. A candidate who comes
+through a referral is met first through the letter and one who applies unsolicited
+through the credential, so if referral is more common in one group, two groups
+presenting the same evidence to evaluators with the same priors and preferences
+receive mean beliefs that differ by the sequence effect times the difference in the
+share of evaluators who read the credential first. Such a gap is neither statistical
+discrimination in the sense of \citet{Phelps1972} and \citet{Arrow1973}, which rests
+on different prior beliefs about the groups, nor any of the sources
+\citet{Bohren2019} distinguish, correct beliefs, biased beliefs and preferences,
+since none of these differs between the groups, and it registers in the marginal
+probabilities and the share of decisions changed but in the believed association
+only at second order.""")],
+    "Moved and compacted at the author's request (2026-10-05): the introduction is long, and the "
+    "point belongs with the statistical-discrimination lineage. It goes right after the sentence "
+    "saying that in the baseline the differences are keyed to encounter sequence rather than to any "
+    "group-marker, which it turns on: the sequence can itself track a group. Dropped from the 1.5 "
+    "text: the opening on Asch and on Hogarth and Einhorn's review (the psychological framing the "
+    "author has moved away from); the clause on which group the gap favours, which cited "
+    "Proposition ADJ, no longer in the paper; and \"an audit of the believed association does not "
+    "register it\", which overclaimed, since the group difference in mean believed association is "
+    "second order, not zero (Proposition DEC). Audit P4 (\"prior beliefs about the groups\") and D13 "
+    "(the three sources named, not treated as exhaustive) are kept.",
     "The identity mean(lambda) - mean(lambda') = (lambda - lambda')(PJ_AB - PJ_BA) is exact, "
-    "verify_ORD.py step 9; Asch.lean; HogarthEinhorn.lean; BohrenImasRosenberg.lean."))
+    "sympy/verify_ORD.py step 9; PropORD.lean (marginals first order); Ladder.lean "
+    "(ladder_assoc_coeff_at_one: the association second order at full adoption); Phelps 1972, "
+    "Arrow 1973 and Bohren-Imas-Rosenberg 2019 records."))
 
 E2.append(("E.2", "Setup 2.1, what an impression is (was 2.A)", [(
     "yields an impression (a target marginal) $q=(q_{0},q_{1})$ on $A$'s partition and a cue on $B$ yields an impression $r=(r_{0},r_{1})$ on $B$'s partition---with no cue bearing on a joint event.",
@@ -244,19 +240,16 @@ prior association as well, which he does not.""")],
 
 E2.append(("E.7", "Related literature, Bohren-Imas-Rosenberg, after the identification paragraph (was 3.D)", [(
     "insert_para", "the identifying variable is the reading sequence, which pooled data discard.", "the identifying variable is the reading sequence, which pooled data discard.",
-    r"""A current formulation of the same problem is given by \citet{Bohren2019}, who
-distinguish discrimination arising from correct beliefs, from biased beliefs, and
-from preferences, and identify the source from how discrimination evolves along a
-history of evaluations. Their map from partiality to behaviour is Bayesian. A
+    r"""The map from partiality to behaviour in \citet{Bohren2019} is Bayesian. A
 belief gap between groups is transmitted to evaluations, attenuated by the
 precision of the signal and along the history, and it vanishes as judgement becomes
 perfectly objective. Under the reading adopted here that map does not hold. A
 Jeffrey step sets the marginal of the attribute it addresses to the delivered
 credence, so an evaluator who takes the impression of quality last evaluates two
-workers alike whatever her prior beliefs about their groups, and the belief gap is
+workers alike whatever their prior beliefs about the groups, and the belief gap is
 silenced without any gain in objectivity. Under partial adoption with weight
-$\omega$ on the impression, a fraction $1-\omega$ of the belief gap survives
-(Proposition~\ref{prop:ADJ}). What credence-input updating does is therefore not to
+$\omega$ on the impression, the rule of Proposition~\ref{prop:LAD} leaves a fraction
+$1-\omega$ of the belief gap. What credence-input updating does is therefore not to
 add a further source of discrimination to their three, but to relocate where
 partiality must sit in order to act. Lodged in the prior it is silenced, lodged in
 the impression it passes through untouched, and their framework has no parameter
@@ -269,7 +262,11 @@ for the latter.""")],
     "insertion point, so the paragraph now goes directly after the Heckman paragraph, as "
     "intended. That paragraph already names Bohren et al. for identification from the history "
     "of evaluations, so this paragraph's first sentence repeats it and should be merged or "
-    "shortened when applied (rule 5).",
+    "shortened when applied (rule 5). Revised 2026-10-05: that repetition removed (the paragraph "
+    "now opens with the Bayesian map), the three sources not named again since entry 3.8 names them, "
+    "the citation of Proposition ADJ (no longer in the paper) replaced by the rule Proposition LAD now "
+    "defines, whose damped step leaves the fraction $1-\\omega$ (Anchoring.lean dampedB_deviation), and "
+    "\"her\" replaced by \"their\".",
     "check_pinning_kills_partiality.py (7/7, D = 0 exactly for arbitrary group priors and "
     "covariances); Anchoring.lean dampedB_deviation; BohrenImasRosenberg.lean (prop1_decreasing, "
     "prop2_decreasing, endo_gap)."))

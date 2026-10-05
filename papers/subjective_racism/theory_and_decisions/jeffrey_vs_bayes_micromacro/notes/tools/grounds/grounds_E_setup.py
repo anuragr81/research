@@ -26,26 +26,6 @@ $\kappa'=(\beta-r_0)q_0(1-q_0)/Z$, while on the believed association it is $\big
 sequence effect multiplied by the difference in their shares, and the gap inherits
 Proposition ORD's classification (marginals first order, association second order)."""),
     dict(kind="quote",
-         source=r"Asch 1946, pp.~271--272 (Experiment VI)",
-         text=r"""``the first terms set up in most subjects a direction which then exerts a
-continuous effect on the latter terms'' (p.~271); ``a broad, uncrystallized but directed
-impression is born. The next characteristic comes not as a separate item, but is related
-to the established direction. Quickly the view formed acquires a certain stability, so
-that later characteristics are fitted\ldots to the given direction'' (p.~272).""",
-         note=r"""Asch's account is one of direction rather than dominance, and he adds that it is
-``not the sheer temporal position of the item which is important'' (p.~272), which is why
-the entry no longer says that early terms dominate (audit A24)."""),
-    dict(kind="quote",
-         source=r"Hogarth and Einhorn 1992, abstract, T-p.~1 (transcription)",
-         text=r"""``Much literature attests to the existence of order effects in the updating of
-beliefs. However, under what conditions do primacy, recency, or no order effects occur?
-This paper presents a theory of belief updating that explicitly accounts for order-effect
-phenomena as arising from the interaction of information-processing strategies and task
-characteristics.''""",
-         note=r"""The three outcomes are their review's classification of earlier studies (Table 1,
-T-p.~4) and their model's predictions (Table 2); their own five experiments found recency
-or no effect, so the entry attributes the finding to the review (audit H6)."""),
-    dict(kind="quote",
          source=r"Bohren, Imas and Rosenberg, January 2019 working paper, pp.~2, 13--14, 19--20",
          text=r"""``we allow for three potential sources: (i) belief-based with correct beliefs,
 (ii) belief-based with incorrect, biased beliefs, and (iii) preference-based'' (p.~2).

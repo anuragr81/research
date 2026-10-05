@@ -210,7 +210,7 @@ GROUNDS["E.7"] = [
         "kind": "computation",
         "source": r"literature/bohren\_imas\_rosenberg2019/sympy/check\_pinning\_kills\_partiality.py, checks (3)-(5)",
         "text": r"Group $g$ has the $2{\times}2$ joint with $P_g(A{=}1) = a_g$, $P_g(B{=}1) = b_g$ and covariance $c_g$. A Jeffrey step on $A$ to $1-q_0$ followed by a Jeffrey step on $B$ to $1-r_0$ gives $P_M(B{=}1) - P_F(B{=}1) = 0$ identically in $(a_M,b_M,c_M,a_F,b_F,c_F,q_0,r_0)$, so $D = 0$ exactly with $c^i_g = 0$. With the $B$-cue read first and the $A$-cue last, $D \neq 0$. All checks pass.",
-        "note": "An evaluator who takes the impression of quality last evaluates two workers alike whatever her group priors; the silencing is exact and route-dependent.",
+        "note": "An evaluator who takes the impression of quality last evaluates two workers alike whatever their group priors; the silencing is exact and route-dependent.",
     },
     {
         "kind": "theorem",
