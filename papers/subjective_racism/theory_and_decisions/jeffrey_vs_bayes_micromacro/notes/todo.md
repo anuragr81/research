@@ -54,6 +54,7 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
   now defines the partial-adoption rule. 6.11's sentence on the channels was withdrawn: the author rewrote that
   paragraph at 35dc1e24.
 - [x] **Applied at a04c9e74 (2026-10-05):** 1.1 parts 1-3; parts 4 and 5 stay pending.
+- [x] **2026-10-05:** 1.6 (the introduction's premise paragraph) withdrawn; the author deleted that paragraph at fa30d4e4.
 - [x] **Applied at 7bd00ec5 (2026-10-05):** 3.8 (was 1.5), the group gap from the reading sequence, compacted to three
   sentences for the statistical-discrimination paragraph of Section 3; 3.5 revised (no ADJ, no repeated
   sources).

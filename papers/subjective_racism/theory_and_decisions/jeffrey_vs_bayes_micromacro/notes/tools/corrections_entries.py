@@ -305,30 +305,6 @@ first order (Proposition~\ref{prop:LAD}).""")],
     "`ladder_assoc_coeff_eq_zero_iff`); LemmaSEP.lean (general N, any attribute-local rescaling); "
     "sympy/verify_ladder.py (99/99); sympy/verify_interior_omega.py rows 3 and 4 (39/39)."))
 
-E.append(("C.6", "Introduction, premise paragraph, from \"Read as a Bayes factor\"", [(
-    "Read as a Bayes factor, the credential carries a likelihood ratio", "consistent with the delivered marginal \\citep{DiaconisZabell1982}",
-    r"""Read as a Bayes factor, the credential carries the ratio of new to old odds on
-competence, which multiplies whatever belief it meets. The two readings agree on a
-single cue (Proposition~\ref{prop:IMM}) and differ in what stays fixed when the cue
-meets another prior. The panelist's own impression is naturally a credence, whereas
-a factor suits evidence reported by someone else, whose report mixes the evidence
-with that person's prior \citep[ch.~3]{Jeffrey2004}. Jeffrey updating holds fixed
-the conditionals given the cue's partition, and its posterior is the unique belief
-with the delivered marginal closest to the prior in Kullback--Leibler divergence
-\citep[Theorem~5.1]{DiaconisZabell1982}""")],
-    "(i) \"A Bayes factor requires the probability of the same credential for a candidate who "
-    "is not competent\" is contradicted by Jeffrey's own definition, new odds over old odds, "
-    "which needs no likelihood (2002 draft of Jeffrey 2004, ch. 3; audit J2). Jeffrey draws "
-    "the line between the readings by provenance instead (own experience gives credences, "
-    "others' reports should be converted to factors), which supports the paper's modelling "
-    "choice. (ii) \"the unique coherent revision\" is not in Diaconis-Zabell; what they prove is "
-    "the unique Kullback-Leibler (and Hellinger) minimiser (M22). \"equivalent to making the "
-    "minimal change\" without naming the distance is also loose (not unique in variation "
-    "distance). The footnote after the citation is unchanged. Needs the Jeffrey2004 bib entry "
-    "(C.12); the Drive copy is the 2002 draft, so cite the chapter, not a page.",
-    "verify_jeffrey.md J2; DiaconisZabell.lean (`thm51_KL_eq_iff`, `jcond_iff_jeffrey`); "
-    "PropIMM.lean (`propIMM_single_cue`)."))
-
 E.append(("C.7", "Introduction, terminology paragraph, Domotor sentence and two typos", [
     ("The sequence-dependence of marginals follows easily", "\\citep{Domotor1980}.",
      r"""The sequence dependence of the marginals follows directly, since a delivered

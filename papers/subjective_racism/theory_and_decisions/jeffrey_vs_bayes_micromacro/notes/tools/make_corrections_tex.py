@@ -164,7 +164,7 @@ _move("E.12", "E.15", lambda it: True)
 # Entry numbers are frozen here so that applying entries never renumbers the rest.
 NUMBERS = {
     "C.1": "0.1", "C.2": "1.1", "C.3": "1.2", "C.4": "1.3", "C.5": "1.4", "E.1": "3.8",
-    "C.6": "1.6", "C.7": "1.7", "C.8": "1.8", "E.15r": "1.9",
+    "C.7": "1.7", "C.8": "1.8", "E.15r": "1.9",
     "C.9": "2.1", "E.2": "2.2", "C.9w": "2.3", "C.10": "2.4", "E.3": "2.5", "E.4": "2.6",
     "E.5": "3.1", "C.11": "3.2", "E.6": "3.3", "C.11b": "3.4", "E.7": "3.5",
     "E.8": "4.1", "C.13": "4.2", "E.9": "5.1", "E.10": "5.2",
@@ -393,7 +393,7 @@ MAP_ROWS += "\n" + "\n".join(f"{a} & {b} & folded in & \\\\ \\hline" for a, b in
 
 D = [
     ("0.A", "Abstract", "Superseded by the author's rewrite and C.1."),
-    ("1.A, 1.B, 1.D, 1.E", "Introduction", "Superseded by the author's rewrite; what survives is corrected in C.2, C.3, C.4, C.5, C.6, C.7 and C.8. The ORD sentence of 1.E is still unapplied and presupposes E.10."),
+    ("1.A, 1.B, 1.D, 1.E", "Introduction", "Superseded by the author's rewrite; what survives is corrected in C.2, C.3, C.4, C.5, C.7 and C.8 (the premise paragraph's entry was withdrawn on 2026-10-05, after the author deleted that paragraph). The ORD sentence of 1.E is still unapplied and presupposes E.10."),
     ("1.A2", "Two-channel prelude", "Applied by the author; corrected by C.4."),
     ("1.C", "Why sequence matters beyond one judgement", "Re-issued as E.1."),
     ("2.A, 2.B, 2.C", "Impression; worked example; soft cues", "Re-issued as E.2, E.3 (extended with the soft-versus-hard passage), E.4."),
@@ -409,8 +409,8 @@ D = [
 drows = "\n".join(f"{a} & {b} & {prose(renum(c))} \\\\ \\hline" for a, b, c in D)
 
 BIB = NEW["E.14"]
-BIB_USERS = renum("C.6, C.10, C.11b, E.1, E.5 and E.7")
-CHAPTER_USERS = renum("C.6 and C.10")
+BIB_USERS = renum("C.10, C.11b, E.1, E.5 and E.7")
+CHAPTER_USERS = renum("C.10")
 IDENT = NEW["C.11b"]
 
 tex = r"""%% manuscript_corrections.tex -- master plan of corrections to PAPER_B_MANUSCRIPT.tex.
@@ -493,7 +493,7 @@ Six more are needed by """ + BIB_USERS + r""" (Jeffrey 2004, Benjamin et al.\ 20
 Bohren et al.\ 2019, D\"oring 1999, Garber 1980); they are in
 \texttt{notes/manuscript\_corrections\_extra.bib} so that this document renders them, and move to
 \texttt{bibliography.bib} on approval. The Drive copy of Jeffrey (2004) is the November 2002 draft,
-so """ + CHAPTER_USERS + r""" cite the chapter only.
+so """ + CHAPTER_USERS + r""" cites the chapter only.
 \citet{CoffmanExleyNiederle2021} (\emph{Management Science} 67(6), 3551--3569) and
 \citet{TverskyKahneman1992} (\emph{Journal of Risk and Uncertainty} 5, 297--323), needed by
 """ + renum("C.19") + r""" and """ + renum("C.20") + r""", moved into \texttt{bibliography.bib} when those entries were applied
