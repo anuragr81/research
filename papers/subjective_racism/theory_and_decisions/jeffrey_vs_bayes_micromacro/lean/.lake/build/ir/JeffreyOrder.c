@@ -1,6 +1,6 @@
 // Lean compiler output
 // Module: JeffreyOrder
-// Imports: public import Init public meta import Init public import JeffreyOrder.Basic public import JeffreyOrder.PropIMM public import JeffreyOrder.PropDEC public import JeffreyOrder.LemmaSEP public import JeffreyOrder.PropPRO public import JeffreyOrder.Decision public import JeffreyOrder.PropDIV public import JeffreyOrder.Aggregate public import JeffreyOrder.PropORD public import JeffreyOrder.Anchoring
+// Imports: public import Init public meta import Init public import JeffreyOrder.Basic public import JeffreyOrder.PropIMM public import JeffreyOrder.PropDEC public import JeffreyOrder.LemmaSEP public import JeffreyOrder.PropPRO public import JeffreyOrder.Decision public import JeffreyOrder.PropDIV public import JeffreyOrder.Aggregate public import JeffreyOrder.PropORD public import JeffreyOrder.Anchoring public import JeffreyOrder.Ladder public import JeffreyOrder.LadderFactorPow
 #include <lean/lean.h>
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wunused-parameter"
@@ -25,6 +25,8 @@ lean_object* initialize_jeffreyorder_JeffreyOrder_PropDIV(uint8_t builtin);
 lean_object* initialize_jeffreyorder_JeffreyOrder_Aggregate(uint8_t builtin);
 lean_object* initialize_jeffreyorder_JeffreyOrder_PropORD(uint8_t builtin);
 lean_object* initialize_jeffreyorder_JeffreyOrder_Anchoring(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_Ladder(uint8_t builtin);
+lean_object* initialize_jeffreyorder_JeffreyOrder_LadderFactorPow(uint8_t builtin);
 static bool _G_initialized = false;
 LEAN_EXPORT lean_object* initialize_jeffreyorder_JeffreyOrder(uint8_t builtin) {
 lean_object * res;
@@ -64,6 +66,12 @@ res = initialize_jeffreyorder_JeffreyOrder_PropORD(builtin);
 if (lean_io_result_is_error(res)) return res;
 lean_dec_ref(res);
 res = initialize_jeffreyorder_JeffreyOrder_Anchoring(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_Ladder(builtin);
+if (lean_io_result_is_error(res)) return res;
+lean_dec_ref(res);
+res = initialize_jeffreyorder_JeffreyOrder_LadderFactorPow(builtin);
 if (lean_io_result_is_error(res)) return res;
 lean_dec_ref(res);
 return lean_io_result_mk_ok(lean_box(0));
