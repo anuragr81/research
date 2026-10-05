@@ -28,6 +28,8 @@ APPLIED["C.24"] = "adaa99f6"
 APPLIED["C.25"] = "8e45609a"
 APPLIED["C.26"] = "dd5b1311"
 APPLIED["C.4"] = "7164acd5"
+APPLIED["C.30"] = "a7628365"
+APPLIED["C.31"] = "e6512612"
 APPLIED["C.29"] = "444b03c6"
 APPLIED["C.27"] = "7164acd5"
 # Parts applied on their own while the rest of the entry stays pending.
@@ -1006,12 +1008,7 @@ E.append(("C.30", "Introduction, the adoption-weight sentence: the protective cl
     "says nothing the sentence does not already say by naming one variety.",
     "None needed."))
 
-E.append(("C.31", "Section 6: both channels inside the evaluator; the partial-adoption rule defined in Proposition LAD", [
-    ("The paper clarifies the effect of believed association by separating", "bears upon.",
-     r"""Both channels lie inside the evaluator, whose prior credences about the candidate supply the
-association channel through the believed link between the attributes, and whose way of
-revising those credences supplies the position channel when it gives a document less weight
-for arriving second."""),
+E.append(("C.31", "Section 6, Proposition LAD: the partial-adoption rule defined in its statement (applied)", [
     (r"Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$,", r"Let $0\le\omega\le1$, $t_0=(1-\omega)\beta+\omega r_0$,",
      r"""Let $0\le\omega\le1$, and let $P^{\omega}_{AB}$ and $P^{\omega}_{BA}$ be the two sequences when the
 cue read second is answered by a Jeffrey step to $(1-\omega)m+\omega x$, with $m$ the marginal
@@ -1025,9 +1022,9 @@ $t_0=(1-\omega)\beta+\omega r_0$,""")],
     "The author accepted the sentence. Part 2, author's decision the same day: the author's cuts of "
     "d5a1f9e5 removed the only definition of the partial-adoption rule, which Proposition LAD's "
     "statement needs (it is about the sequences the rule produces) and whose proof calls a damped "
-    "step; the definition goes into the proposition's opening rather than back into the text.",
-    "PropDIV.lean (`jeffreyA_prior_mB0`); Anchoring.lean (`orderEffect_damped_at_indep`, "
-    "`dampedTarget`, `dampedB`)."))
+    "step; the definition goes into the proposition's opening rather than back into the text. The sentence part was withdrawn "
+    "before it was applied: the author rewrote that paragraph in their own words at 35dc1e24.",
+    "Anchoring.lean (`dampedTarget`, `dampedB`)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
@@ -1295,8 +1292,7 @@ DISCIPLINE_EXEMPT_LENGTH = {
                             "C.4.2": "removes a definition of c that the channel sentence now gives first",
                             "C.27.4": "relabels a column to the agreed term, since omega=0 is no adoption",
                             "C.30.1": "drops a protective clause at the author's call",
-                            "C.31.1": "replaces a sentence that placed the channels outside the evaluator",
-                            "C.31.2": "adds the definition of the rule the proposition is about",
+                            "C.31.1": "adds the definition of the rule the proposition is about",
                             "C.5.1": "adds what survives partial adoption (Proposition LAD)",
                             "C.9w.1": "names the belief-adjustment model the weight nests",
                             "E.13.1": "names the two new propositions",
