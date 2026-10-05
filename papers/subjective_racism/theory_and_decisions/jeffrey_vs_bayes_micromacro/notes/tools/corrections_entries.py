@@ -28,6 +28,7 @@ APPLIED["C.24"] = "adaa99f6"
 APPLIED["C.25"] = "8e45609a"
 APPLIED["C.26"] = "dd5b1311"
 APPLIED["C.4"] = "7164acd5"
+APPLIED["C.29"] = "444b03c6"
 APPLIED["C.27"] = "7164acd5"
 # Parts applied on their own while the rest of the entry stays pending.
 APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
@@ -970,6 +971,33 @@ document arrives.""")],
     "first appears. In the model $P$ and $\\omega$ are independent by assumption; the contrast "
     "weights in the Section 6 footnote, which depend on the current marginal, relax it.",
     "Anchoring.lean (`dampedTarget`, `dampedB`); Wagner 2002, note 9 (preprint p. 13)."))
+
+E.append(("C.29", "Section 6 after the author's cuts: the Hawthorne reply corrected, mechanical fixes (applied)", [
+    ('by an adoption weight $\\omega$, and Section~\\ref{sec:scope} sets out the others', 'which lie outside its results.',
+     r"""by an adoption weight $\omega$, and its results are not claimed for the
+others."""),
+    ('It is worth highighting that reading a cue as a credence', 'as the partial-adoption causes',
+     r"""Reading a cue as a credence does not oblige the evaluator to adopt it in full, as partial adoption causes"""),
+    ('by separating association channel from position channel - both of which', 'by separating association channel from position channel - both of which',
+     r"""by separating the association channel from the position channel, both of which"""),
+    ('Associational channels is controlled by the prior i.e.', 'and trustworthy (or not) while',
+     r"""The association channel is controlled by the prior, that is, the evaluator's probabilities that the candidate is competent or not and trustworthy or not, while"""),
+    ("In terms of the paper's machinery, association channel is represented", "In terms of the paper's machinery, association channel is represented",
+     r"""In terms of the paper's machinery, the association channel is represented"""),
+    ('four cases showns in', 'four cases showns in',
+     r"""four cases shown in"""),
+    ("Under partial adoption, \\citet{Hawthorne2004}'s objection", 'how the traits go together.',
+     r"""\citet{Hawthorne2004} objects to full adoption that it ``seems implausible that the
+most recent experience or non-propositional state should completely dictate belief
+strengths for basis sentences, with no regard for the import of previous experiences
+or states''. If the objection is right and evaluators adopt the later cue only in
+part, each panel's score departs from the benchmark's by an amount that stays
+proportional to $1-\omega$ as $c$ shrinks, so the share of decisions changed no longer
+vanishes with $c$, while the surplus lost remains at most that amount times the share.
+What does survive is the ranking. Asking how common a trait is still picks up the
+sequence one order in $c$ before asking how the traits go together.""")],
+    "The author cut Section 6 hard at d5a1f9e5 and asked for a review. Applied at the author's instruction: the introduction no longer promises that Section 6 sets out the other varieties of the position channel (the footnote listing them was cut); the Hawthorne paragraph, which said the objection 'does apply still' under partial adoption, now says the objection is to full adoption and states what follows if it is right; and the mechanical fixes (a typo, articles, a dash, 'i.e.', '(or not)', a contraction, 'It is worth highlighting that'). The sentence 'changed decisions and lost surplus are both sizable' was this plan's own plain-language gloss, written for the author and not checked; the Lean band bounds hold for any score departure, and at c=0 each panel's departure from the benchmark is exactly proportional to 1-omega (sequence AB ends at q(x)t, the benchmark at q(x)r, and t-r carries 1-omega), so the share of decisions changed scales with that departure and the surplus lost is at most the departure times the share. 'More strongly' became 'one order in c before'. Left as the author asked: the channel sentences ('controlled by', 'both of which an evaluator's decision on a candidate bears upon'), the unreferenced robustness table, and the 'as' in the first sentence, which does not give a reason. Open: the partial-adoption rule is no longer defined, though Proposition LAD's statement uses the sequences it produces.",
+    "Decision.lean (`volume_flipSet`, `lintegral_stake_le`); PropIMM.lean (`PB_at_zero`); Ladder.lean (`ladder_gap`)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",
