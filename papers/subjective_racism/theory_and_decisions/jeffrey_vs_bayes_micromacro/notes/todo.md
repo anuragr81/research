@@ -53,6 +53,8 @@ the master plan is `notes/manuscript_corrections.tex` / `.pdf`.
 - [x] **Applied (2026-10-05):** 1.10 by the author at a7628365; 6.11 at e6512612, Proposition LAD's statement
   now defines the partial-adoption rule. 6.11's sentence on the channels was withdrawn: the author rewrote that
   paragraph at 35dc1e24.
+- [x] **Applied at 6b78ed7b (2026-10-05):** 5.4, Table 1's individual loss and share entries (a flip needs the shift
+  to carry the surplus across zero). Errors only, at the author's call.
 - [x] **2026-10-05:** 2.8 withdrawn at the author's call (the author's own rewrite of Section 6 covers it).
   6.12 applied at 67c8e08e: typos, dashes and two logic fixes in that rewrite.
 - [x] **Applied at 7164acd5 (2026-10-04), at the author's instruction:** 1.3 amended, the introduction's channel

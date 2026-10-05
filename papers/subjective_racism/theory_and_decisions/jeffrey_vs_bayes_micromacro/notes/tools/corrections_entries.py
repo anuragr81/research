@@ -29,6 +29,7 @@ APPLIED["C.25"] = "8e45609a"
 APPLIED["C.26"] = "dd5b1311"
 APPLIED["C.4"] = "7164acd5"
 APPLIED["C.30"] = "a7628365"
+APPLIED["C.33"] = "6b78ed7b"
 APPLIED["C.32"] = "67c8e08e"
 APPLIED["C.31"] = "e6512612"
 APPLIED["C.29"] = "444b03c6"
@@ -1026,6 +1027,19 @@ adoption is right."""),
     "$c=0$; the score departure and the decision bounds follow from them with the decision-band results, "
     "so the proposition does not \"show\" them. The author's wording is kept elsewhere.",
     "Ladder.lean (`ladder_gap`); Decision.lean (`volume_flipSet`, `lintegral_stake_le`)."))
+
+E.append(("C.33", "Section 5, Table 1: the individual loss and share entries (applied)", [
+    (r"foregone surplus of one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$", r"foregone surplus of one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$",
+     r"""foregone surplus of one evaluator, $|u|$ when $c\delta_\sigma$ carries $u$ across zero and $0$ otherwise"""),
+    (r"flip indicator for one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$, then $1$", r"flip indicator for one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$, then $1$",
+     r"""flip indicator for one evaluator, $1$ when $c\delta_\sigma$ carries $u$ across zero and $0$ otherwise""")],
+    "Found when the author asked whether Table 1 is still accurate (2026-10-05). The two entries said "
+    "a decision flips once $|c\\delta_\\sigma|$ reaches $|u|$; a shift pointing away from the threshold "
+    "never flips it, however large, so the condition is that the shift carries the surplus across "
+    "zero. Fixed at the author's instruction, which was to correct errors only: the table's grouping "
+    "of the odds ratio and Yule's Q under the believed association ($\\bigO(c^2)$, where both are in "
+    "fact 0 at every $c$) and its caption's silence on full adoption are true as written and are left.",
+    "Decision.lean (`flips_iff`, `not_flips_of_pointing_away`)."))
 
 E.append(("C.19", "Concluding remarks, third implication: an existing design that asks a difference question and reads decisions", [
     ("What the paper finds is that a population could pass every",

@@ -57,7 +57,7 @@ text would appear. \textbf{0} is the abstract, \textbf{1} to \textbf{7} are the 
 shows its former number, which earlier notes and commits use, and the table at the end maps old
 numbers to new. Order of application, where it differs from manuscript order. B.2 (bibliography) goes in before every pending entry that cites a reference not yet in the .bib. B.1 goes in last.
 
-\paragraph*{Applied to the manuscript} at 444b03c6, 46b68558, 5088448e, 6775f822, 67c8e08e, 6cdf15f3, 7164acd5, 8e45609a, a7628365, adaa99f6, db3a2f41, dd5b1311, deddd600, e6512612, f125368b: 1.3, 1.10, 2.1, 2.2, 2.3, 2.4, 2.5, 2.7, 3.1, 3.4, 3.6, 3.7, 4.1, 5.1, 5.2, 5.3, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 6.10, 6.11, 6.12, 7.1, 7.2; 3.2 parts 3, 4, 5 at 6775f822.
+\paragraph*{Applied to the manuscript} at 444b03c6, 46b68558, 5088448e, 6775f822, 67c8e08e, 6b78ed7b, 6cdf15f3, 7164acd5, 8e45609a, a7628365, adaa99f6, db3a2f41, dd5b1311, deddd600, e6512612, f125368b: 1.3, 1.10, 2.1, 2.2, 2.3, 2.4, 2.5, 2.7, 3.1, 3.4, 3.6, 3.7, 4.1, 5.1, 5.2, 5.3, 5.4, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 6.10, 6.11, 6.12, 7.1, 7.2; 3.2 parts 3, 4, 5 at 6775f822.
 These entries have left the table of changes. What of them stands in the manuscript is under
 ``Applied entries in force''; what has since been removed or largely rewritten (3.1, 3.7, 5.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 6.10, 7.1) is under ``History''.
 
@@ -628,7 +628,7 @@ so 1.6 and 2.4 cite the chapter only.
 on 3 October 2026.
 
 \section*{Applied entries in force}
-These entries were applied to the manuscript at 444b03c6, 46b68558, 5088448e, 6775f822, 67c8e08e, 6cdf15f3, 7164acd5, 8e45609a, a7628365, adaa99f6, db3a2f41, dd5b1311, deddd600, e6512612, f125368b, and their text stands in
+These entries were applied to the manuscript at 444b03c6, 46b68558, 5088448e, 6775f822, 67c8e08e, 6b78ed7b, 6cdf15f3, 7164acd5, 8e45609a, a7628365, adaa99f6, db3a2f41, dd5b1311, deddd600, e6512612, f125368b, and their text stands in
 it. Each part shows its BEFORE text as it stood just before the applying commit and the AFTER text as
 applied, with the Why, Evidence and Grounds that justified it. A part at least half of whose sentences
 stand as applied is kept here with a \textit{Status} line naming what has changed it since; a part of
@@ -1266,6 +1266,15 @@ $\chi^2=\kappa^2/(r_0r_1)+\kappa'^2/(q_0q_1)$, and the whole $c^2$ table vanishe
 only on $\{q_0=\alpha,r_0=\beta\}\cup\{r_0=\beta=\tfrac12\}\cup\{q_0=\alpha=\tfrac12\}$;
 $\assoc(L)-\assoc(G)$ has zero $c^0$ and $c^1$ coefficients and $c^2$ coefficient
 $-\lambda(1-\lambda)\kappa\kappa'$. \newline \textit{``A geometric pool of them differs from the linear one only at second order'', and the association of the two pools agrees to first order, so no first-order result depends on pooling linearly.}} \\ \hline
+\multicolumn{3}{|l|}{} \\ \hline
+\entryhead{5.4}{Section 5, Table 1: the individual loss and share entries (applied)\quad{\footnotesize\textit{(formerly C.33)}}}
+1/2 & foregone surplus of one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$ & foregone surplus of one evaluator, $|u|$ when $c\delta_\sigma$ carries $u$ across zero and $0$ otherwise \\ \hline
+2/2 & flip indicator for one evaluator, $0$ until $|c\delta_\sigma|$ reaches $|u|$, then $1$ & flip indicator for one evaluator, $1$ when $c\delta_\sigma$ carries $u$ across zero and $0$ otherwise \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Why.} Found when the author asked whether Table 1 is still accurate (2026-10-05). The two entries said a decision flips once $|c\delta_\sigma|$ reaches $|u|$; a shift pointing away from the threshold never flips it, however large, so the condition is that the shift carries the surplus across zero. Fixed at the author's instruction, which was to correct errors only: the table's grouping of the odds ratio and Yule's Q under the believed association ($\bigO(c^2)$, where both are in fact 0 at every $c$) and its caption's silence on full adoption are true as written and are left.} \\
+\multicolumn{3}{|p{\fullw}|}{\textbf{Evidence.} Decision.lean (\texttt{flips\_iff}, \texttt{not\_flips\_of\_pointing\_away}).} \\ \hline
+\multicolumn{3}{|p{\fullw}|}{\textbf{Grounds.}\par \textbf{Theorem.} \textit{Decision.lean, flips\_iff and not\_flips\_of\_pointing\_away} \newline With $\mathrm{Flips}(u,c,\delta)$ the event that the action at $u+c\delta$ differs from the
+action at $u$: it holds iff $u<0\le u+c\delta$ or $u+c\delta<0\le u$; and for $u\ge0$ with
+$c\delta\ge0$ (or $u<0$ with $c\delta\le0$) it never holds, however large $|c\delta|$. \newline \textit{A decision flips exactly when the shift carries the surplus across zero; $|c\delta_\sigma|\ge|u|$ is not enough.}} \\ \hline
 \multicolumn{3}{|l|}{} \\ \hline
 \multicolumn{3}{|l|}{\rule{0pt}{3.2ex}\Large\textbf{6\quad Scope}} \\ \hline\hline
 \entryhead{6.1}{Section 6, the Scope subsection heading and first sentence\quad{\footnotesize\textit{(formerly E.15h)}}}
@@ -1923,6 +1932,7 @@ C.29 & 6.10 & Scope & applied at 444b03c6, part in History \\ \hline
 C.30 & 1.10 & Introduction & applied at a7628365 \\ \hline
 C.31 & 6.11 & Scope & applied at e6512612 \\ \hline
 C.32 & 6.12 & Scope & applied at 67c8e08e \\ \hline
+C.33 & 5.4 & Averaging Effects on statistics & applied at 6b78ed7b \\ \hline
 E.1 & 1.5 & Introduction & pending \\ \hline
 E.2 & 2.2 & Setup & applied at db3a2f41 \\ \hline
 E.3 & 2.5 & Setup & applied at db3a2f41 \\ \hline
