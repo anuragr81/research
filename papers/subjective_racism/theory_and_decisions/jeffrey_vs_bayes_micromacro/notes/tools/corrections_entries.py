@@ -36,7 +36,7 @@ APPLIED["C.31"] = "e6512612"
 APPLIED["C.29"] = "444b03c6"
 APPLIED["C.27"] = "7164acd5"
 # Parts applied on their own while the rest of the entry stays pending.
-APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822"}
+APPLIED_PARTS = {("C.11", 3): "6775f822", ("C.11", 4): "6775f822", ("C.11", 5): "6775f822", ("C.2", 1): "a04c9e74", ("C.2", 2): "a04c9e74", ("C.2", 3): "a04c9e74"}
 
 
 _HIST = {}
