@@ -4,11 +4,8 @@
 % within sections on one counter instead of by mnemonic.
 \documentclass[a4paper,fleqn]{cas-sc}
 
-% --- Citation processing (CAS convention, author-year to match \citep/\citet/\citealp) ---
 \usepackage[authoryear,longnamesfirst]{natbib}
 
-% --- Packages used by the manuscript body ---
-% amsmath/amsfonts/amssymb are already loaded by cas-sc.cls; only add the rest.
 \usepackage{amsthm}
 \usepackage{dsfont}
 \usepackage{booktabs}
@@ -17,7 +14,6 @@
 \usepackage{tikz}
 \usepackage[export]{adjustbox}
 
-% --- Theorem environments (unchanged from the original manuscript) ---
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -28,7 +24,6 @@
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
 
-% --- Author macros (unchanged from the original manuscript) ---
 \newcommand{\PB}{P^{\mathrm{B}}}
 \newcommand{\PJ}{P^{\mathrm{J}}}
 \newcommand{\Pbar}{\overline{P}}
@@ -53,10 +48,10 @@
 
 \author[1]{Anurag Srivastava}[orcid=0000-0002-6477-4430]
 \cormark[1]
-\ead{[author email to insert]}
+\ead{anurag.srivastava@riskcare.com}
 
 \affiliation[1]{organization={Riskcare Ltd.},
-                addressline={[affiliation address to insert]},
+                addressline={51 Moorgate, EC2R 6LL},
                 city={London},
                 country={United Kingdom}}
 
@@ -110,10 +105,6 @@ biases and prejudice form.
 The vignette used to discuss this setting consists of a hiring panel working through a candidate's file on the basis of two pieces of evidence that bear on the decision---i) a credential that speaks to competence, and ii) the tone of a reference letter that speaks to trustworthiness. Both are soft evidence in the sense of \citet{Jeffrey1983} so that neither is decisive but each leaves an impression. While the mechanism can extend to higher number of cues, we focus on the sequence dependence in a situation where one panel may read the credential first (the letter second) and an otherwise identical panel may read them in reverse. If the two attributes are believed to go together at all, the two panels finish with different beliefs about the same candidate. In the context of soft evidence the stake is real for the individual in the sense that identical evidence can license different decisions, with the difference set by arrival sequence.  How much of that difference an observer can see in the panels' believed association depends on
 how fully each panel adopts the document it reads second. When each impression is adopted in full, the letter fixes the belief about trustworthiness whatever the credential implied, so the sequence acts only through the believed link between the traits. As the paper shows, this means that the believed association differs between the two sequences only at second order. On the other hand, a letter adopted only in part moves that belief from wherever the credential left it (and the believed association differs at first order - see Proposition~\ref{prop:LAD}). The paper therefore restricts attention to situations in which unrelated traits exhibit no sequence dependence through the position channel, and studies the measurement issues under the association channel.
 
-% What remains untouched at every degree of adoption is the odds ratio, since each impression rescales rows or columns of the belief and never the pairing within them (Lemma~\ref{lem:SEP}). Since the odds ratio between the two traits remains the same under Jeffrey conditioning, it is only the size of the differences in panels' ratings where the extent of overwriting of impressions can matter.
-
-The conclusions of the paper apply only when evidence is soft and when it can be assumed that impressions arrive as revised credences, not as
-likelihoods. Read as a level, the credential leaves the panelist in the example feeling the candidate competent, and what it delivers is a credence on the attribute's partition into competent and not-competent categories. Read as a Bayes factor, the credential carries a likelihood ratio stating how much more probable it is under competence than in its absence, and that ratio multiplies whatever belief it meets. A Bayes factor, however, requires the probability of the same credential for a candidate who is not competent, and an impression does not supply that counterfactual. As a mechanism that holds conditionals fixed, Jeffrey updating is the unique coherent revision for credence delivered on the cue's partition and is equivalent to making the minimal change of the prior consistent with the delivered marginal \citep{DiaconisZabell1982}\footnote{See \citet{Field1978} for how Jeffrey updates are asymmetric in the delivered-credence parametrisation and \citet{Wagner2002} for how they commute when their inputs are held fixed in Bayes-factor form.}.
 
 To avoid a clash in terminology we use ``order'' to describe proximity with a sequence-free Bayesian bechmark and ``sequence`` to denote the sequence in which evidence is read. Thus sequence effect is a sequential, myopic structure that makes Jeffrey conditioning the coherent response to a delivered credence. The distinction between first and second order on the other hand, is what an observer can or cannot see. More specifically, with $c$ the prior covariance, a departure from sequence-free benchmark is resolvable only when its size exceeds the observer's measurement precision $\varepsilon$. For small enough $c$ the two sequences separate, since $\varepsilon$ can sit between them, $c^{2}\ll\varepsilon\ll c$. A first-order departure is then resolvable and a second-order one is not, so the same population can present a visible effect on one statistic and none on another. The sequence-dependence of marginals follows easily -- since the likelihood a delivered credence implies must be read against the marginal in force when the cue arrives \citep{Domotor1980}. What is less obvious is the finding that some aggregate statistics are structurally blind to arrival order. 
 
