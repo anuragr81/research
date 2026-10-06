@@ -6,11 +6,12 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[round]{natbib}
 \usepackage{parskip}
+\emergencystretch=1.5em
 
 \title{Literature position for the threshold-entry contest\\
 \large Survey and verified bibliography}
 \author{}
-\date{1 September 2026}
+\date{1 September 2026, revised 6 October 2026}
 
 \begin{document}
 \maketitle
@@ -53,8 +54,9 @@ first.
 
 \citet{SchroyenTreich2016} is the nearest occupant of the mechanism, and the
 one against which the contribution has to be stated. It has now been read in
-full \textbf{[F]}. The version read is TSE Working Paper 16-699 dated 11 April
-2016, which the published \emph{Games and Economic Behavior} article replaced;
+full \textbf{[F]}. The version read is TSE Working Paper 16-699, whose cover is
+dated September 2016 and which carries the post-review \emph{Games and Economic
+Behavior} manuscript dated 11 April 2016. The published article replaced it;
 the published text has not been checked line by line against it, so any
 quotation of a theorem number should be confirmed there before submission.
 
@@ -92,8 +94,8 @@ marginal-benefit channel is switched off by construction. This is now verified
 against $U_i = u(w_i - x_i) + \pi_i r$ rather than inferred from the
 taxonomy's name. It also fixes the open design question from the rebuild
 handover: making $V$ money added to the resource would move the model to their
-rent-seeking contest, where the two wealth effects oppose and, under CARA,
-exactly cancel.
+rent-seeking contest, where the two wealth effects oppose and, under CARA or
+quadratic utility, exactly cancel (pp.~15 and~18).
 
 \paragraph{Consequence 3: the P9 overlap, stated honestly.} Their Theorem~3
 gives, for the symmetric privilege contest, that a small mean-preserving spread
@@ -104,7 +106,16 @@ in wealth raises aggregate effort if and only if
 reducing to $m < 2^{-1/2} \approx 0.707$ under CARA, to $m < 1$ under quadratic
 utility, and to $\gamma(\tfrac12 - m^2) > \tfrac12$ under CRRA with coefficient
 $\gamma$. So a mean-preserving spread in the resource distribution, inside a
-privilege contest, is already in print.
+privilege contest, is already in print. The displays here use our notation,
+$\pi_i$ and $\gamma$, where the source writes $\Pi_i$ and $\rho$.
+
+The pair used in \texttt{PROOFS.tex} to show the dependence on $u'''$, CARA
+with $a=1$ against log utility at $w=1$, shares $A=1$ and differs in $P$ ($1$
+against $2$). The condition therefore separates the pair exactly when
+$1 < 2(1-m^2) < 2$, that is for $m \in (0, 2^{-1/2})$, and at $m = 4/5$ both
+members give the same sign (\texttt{lit/schroyen\_treich\_2016}, ST-12). The
+contrast should be stated with that range, or with a pair chosen for the $m$
+at hand.
 
 \paragraph{Consequence 4: what survives, and why it is the contribution.} Their
 result is local and heavily conditioned. It is a second-order effect of a small
@@ -253,7 +264,9 @@ $w_{(k^*)}$. The claim in \texttt{PROOFS.tex} \S11 that the result
 ``reconciles'' the standard result with the motivating pattern is defensible
 only if stated at that level of precision. As drafted it is too loose, because
 it invites the reading that the standard result is uniform in sign, which the
-source does not say.
+source does not say. \S\ref{sec:foundations} records a second limit, found in
+the 1992 source of the standard result itself, which shares the direction of
+the effect with the entry model but not its mechanism.
 
 \paragraph{Genealogy of the dispersive order, corrected.} \citet{HopkinsKornienko2004}
 and \citet{HopkinsKornienko2009} have now been read in full \textbf{[F]}, and
@@ -347,7 +360,8 @@ papers assume identical potential entrants. Every one of them then confronts the
 same difficulty: with identical agents, the pure-strategy count is determined
 but the identity of who enters is not. \citet{LevinSmith1994}, p.~586 (main
 text; footnote~2 is attached to the preceding sentence and concerns
-Engelbrecht-Wiggans), say of the prior literature's deterministic asymmetric
+Engelbrecht-Wiggans (1987), Hausch (1988) and Harstad (1990)), say of the
+prior literature's deterministic asymmetric
 equilibria that the process by which potential bidders divide into entrants and
 non-entrants is not explained. \citet{MorganOrzenSefton2012}, p.~441, say in their own model that
 because all players are identical the identity of those opting in is not
@@ -366,6 +380,14 @@ the \emph{agents}, not of a timing protocol or a randomisation, so the
 pure-strategy count $k^*$ is deterministic under \emph{simultaneous} entry with
 no mixing and no arrival order --- and, by the count-invariance proposition in
 \texttt{PROOFS.tex}, the same in every pure-strategy equilibrium.
+
+The comparison covers the four papers read here and no others.
+\citet{MorganOrzenSefton2012} (p.~442) also cite \citet{FullertonMcAfee1999},
+who ``study contests where agents are heterogeneous and entry is determined by
+an auction''. If that auction selects entrants by type, entrant identity is
+already a property of the agents there, and ``differs in kind'' narrows to a
+comparison with the three devices above. That paper has not been read
+(\S\ref{sec:unread}).
 
 The claim should stop there, and an earlier version of this survey did not.
 Heterogeneous costs do not by themselves pin \emph{which} agents enter: with
@@ -386,15 +408,18 @@ largest integer at which the marginal entrant's expected gain is non-negative
 --- the same object as $k^*$ for identical agents --- and their symmetric
 equilibrium is in mixed strategies with $n \sim \mathrm{Binomial}(N, q^*)$.
 Two results bear on the open welfare item (R2 Comment~3). In common-value
-auctions free entry is \emph{excessive} by a business-stealing argument
-(Proposition~3, citing \citet{MankiwWhinston1986}), and the seller taxes entry;
+auctions free entry is \emph{excessive} (Proposition~3). The proof runs through
+the optimal entry fee $e^* > 0$, and the paper then interprets the result as
+business stealing, citing \citet{MankiwWhinston1986} (p.~590). The seller taxes
+entry;
 in independent-private-value auctions free entry is \emph{optimal} because the
 marginal entrant's private gain equals the social gain, via $V_n - W_n = n(V_n
 - V_{n-1})$ (Proposition~6, equation~18).
 
-Which branch applies is settled by a \emph{criterion}, not by resemblance:
-Proposition~6 holds exactly when equation~(18) holds, and (18) requires the
-marginal entrant's private gain to equal the increment to total value. With a
+Which branch applies is settled by a \emph{criterion}, not by resemblance.
+Equation~(18) is sufficient for Proposition~6, and the paper states no
+converse. Equation~(18) requires the marginal entrant's private gain to equal
+the increment to total value. With a
 prize fixed at $V$ we have $V_n \equiv V$, so $V_n - V_{n-1} = 0$: the social
 gain from any entrant beyond the first is \emph{exactly zero} while the social
 cost is $c>0$. The paper states this directly (p.~596): ``In CV auctions,
@@ -402,8 +427,17 @@ social gains are zero (and therefore smaller than social costs) for all
 $n \geq 2$.'' The entry\_contest model is therefore in the common-value branch
 \emph{by construction} --- $V$ exogenous and fixed \emph{is} $V_n \equiv V$ ---
 and the benchmark is Proposition~3, with the expected verdict of excessive
-entry. Only a prize that grew with participation could reinstate
-Proposition~6.
+entry.
+
+The fixed prize is not enough on its own to deliver that verdict. A fixed prize
+under which an entrant who meets a rival keeps no rent, $W_n = V$ for every
+$n \geq 2$, also makes free entry optimal, because the entry fee that corrects
+entry is then zero. The paper's own condition, footnote~13's ``as long as $W_n$
+varies with $n$'', admits that case when read literally. The excessive-entry
+verdict therefore needs $V - W_n > 0$ for some $n \geq 2$, and the welfare
+section must state that entrants beyond the first keep positive expected rent
+(\texttt{lit/levin\_smith\_1994}, \texttt{cv\_free\_entry\_excessive} and
+\texttt{control\_no\_stealing}).
 
 Their Proposition~9 adds that welfare falls monotonically as the pool $N$ grows
 beyond $n^*$, through the coordination cost of mixed entry; Proposition~8 is
@@ -412,7 +446,10 @@ under an optimal mechanism. That is a different mechanism from P7's cap, which
 is a count bound with no coordination content, but both say that a larger pool
 does not help beyond a point.
 
-Their equation~(9), $(1-q)^{N-1} V = c$, requires care. It is \emph{not} an
+Their equation~(9), $(1-q^*)^{N-1} V = c$, requires care. The page introduces
+it with ``e* must induce entry such that at q*, $\partial S/\partial q$
+vanishes'' (p.~590), so it is the planner's condition imposed on the
+equilibrium that the optimal fee induces. It is \emph{not} an
 entry-equilibrium condition: it is the first-order condition of the welfare
 problem, obtained by differentiating their equation~(8),
 $S = [1-(1-q)^N]V - qNc$, and setting $\partial S/\partial q = 0$. It
@@ -448,10 +485,12 @@ every feasible point of which satisfies $Mq\Delta \leq V$. A referee sent to
 equation~(2) alone will find only the bid chain and conclude the attribution is
 loose.
 That is the same accounting logic as P7. P7's content is therefore not a new
-inequality but the deterministic, heterogeneous, utility-unit version of a
-known one: it bounds a pure-strategy count rather than an expected count, it
-uses $\kappa$ in utility units rather than a nominal cost, and it holds under
-fixed rules with no designer. The paper should say exactly that. What Fu et
+inequality but a version of a known one for heterogeneous agents, with $\kappa$
+in utility units in place of a nominal cost. Against Fu--Jiao--Lu it also
+bounds a pure-strategy count rather than an expected count. Against
+\citet{FuLu2010} neither the pure-strategy count nor the absence of a designer
+separates it, as the next paragraph records. The paper should say which
+distinction applies to which source. What Fu et
 al.\ build on top --- the uniform upper bound on expected overall \emph{bids}
 (Theorem~2), its single-peakedness in $q$, its implementation by Tullock
 contests with entry fees (Theorem~7), and the optimal shortlisting rule
@@ -464,16 +503,30 @@ cousin of P8.
 
 \paragraph{Fu--Lu.} $M \geq 3$ identical, sequential entry with full
 observation of current participants, organiser chooses prize and a per-entrant
-fee or subsidy. Their equation~(7), total effort equals budget minus $N$ times
-the entry cost, is again the P7 accounting identity, and is what drives their
-Theorem~1 that the optimal contest attracts exactly two entrants. Their
+fee or subsidy. Their equation~(7) states that in the optimally designed
+contest total effort equals the budget $\Gamma_0$ minus $N$ times the entry
+cost (p.~10), and it drives their Theorem~1, that the optimal contest attracts
+exactly two entrants. Read as holding at every contest, (7) is false. It holds
+exactly when the contest breaks even and exhausts the budget, their Lemmas~4
+and~5. The inequality $E \leq \Gamma_0 - NC$, and with it $NC \leq \Gamma_0$,
+does hold at every feasible contest in their model, at its Lemma~2 count
+(pp.~6--7), although they never state it. ``Fixed rules with no designer''
+therefore separates P7 from their displayed equation and not from their model.
+Their count is also a pure-strategy, deterministic one (footnote~6, ``pure
+strategies (0 or 1 probability of entry)''; Lemma~2). What separates P7 from
+Fu--Lu is heterogeneous agents against identical ones, and $\kappa$ in utility
+units against a money cost borne by risk-neutral agents
+(\texttt{lit/fu\_lu\_2010}, \texttt{fixed\_rules\_cap}). Their
 conclusion lists different types of contestants as future research. So the
 entire design literature on endogenous entry --- Fu--Lu 2010, Fu--Jiao--Lu 2015
 --- is homogeneous-agent by construction.
 
 \paragraph{Morgan--Orzen--Sefton, and what the experiment did not vary.} The
 theory section gives $n^* = \lfloor \sqrt{P/F} \rfloor$ for identical agents
-with equal endowment $w$, outside option $F$ and prize $P$. The experiment holds
+with equal endowment $w$, outside option $F$ and prize $P$, under
+$P > F > P/N^2$ and with $\sqrt{P/F}$ not an integer (p.~441). The design
+satisfies both conditions, and without them the formula fails (at $P = 40$,
+$F = 10$ two entrant counts are equilibria). The experiment holds
 $w = 100$ for every subject by design. Predicted entry was~2 (small prize)
 and~4 (large prize); observed was 2.5 and 3.7 in the second half (rounds
 26--50; 2.7 and 3.6 in rounds 1--25). The \emph{signs differ}: the small prize
@@ -508,34 +561,47 @@ buyer's entry cost $Z_i$ is an independent draw from $H$ on $[\underline c,
 \bar c]$ and is \emph{privately} observed before entry; the value is learned
 after entry; the seller may set a screening value $v$ and an admission fee
 $\phi$. Their Proposition~2 gives a unique symmetric equilibrium in threshold
-form: enter iff $z < t^*(v,\phi)$, where $t^*$ solves $U(v, H(t)) = t + \phi$
-and is decreasing in both instruments. The number of bidders is
-$\mathrm{Binomial}(N, H(t^*))$. Proposition~3: $v = \phi = 0$ maximises social
-surplus, because the marginal type's private gain equals its social
-contribution. Proposition~4: inframarginal entrants keep information rents, so
+form, enter iff $z < t^*(v,\phi)$. When the equilibrium is interior, $t^*$
+solves $U(v, H(t)) = t + \phi$ and is decreasing in both instruments (p.~320).
+The number of bidders is $\mathrm{Binomial}(N, H(t^*))$. Proposition~3 shows
+that $v = \phi = 0$ attains the \emph{constrained} maximum of social surplus,
+``a constrained maximum in the sense that buyers enter independently according
+to a symmetric entry rule'' (p.~320). The reason given is that the social
+contribution of a marginal increase in the entry threshold ``is proportional to
+a buyer's utility to entering'' (p.~315). The paper's own Table~1 (p.~325)
+beats that maximum with an entry cap, social surplus .13145 against .10714.
+Proposition~4: inframarginal entrants keep information rents, so
 the seller no longer captures the whole surplus. Propositions~5--8: the
 revenue-maximising screening value is positive but below the fixed-$n$ level;
 with an admission fee available, screen by entry cost rather than by value; an
 entry cap plus fee does better still. Proposition~9: heterogeneity is
 irrelevant asymptotically --- only the lower bound $\underline c$ matters.
-Section~6: revenue may rise \emph{or} fall in $N$, unlike Levin--Smith. There
-are no comparative statics in the distribution $H$ anywhere in the paper.
+Section~6: revenue may rise \emph{or} fall in $N$, unlike Levin--Smith. The
+paper signs no effect of a spread of $H$ at finite $N$. It does compare cost
+distributions in three other ways, asymptotic invariance to changes that keep
+the lower bound of the support (p.~326), a two-distribution numerical example
+(p.~325), and homogeneous against heterogeneous costs (p.~333).
 
 The relabelling objection --- is $\kappa \circ \Lambda^{-1}$ substantively
 different from a primitive cost distribution? --- can now be answered on four
 points, and the first exposes a gap in \texttt{PROOFS.tex}.
 
-\emph{Information.} Moreno--Wooders' costs are private, so the equilibrium is
-a symmetric Bayesian threshold and only the \emph{distribution} of the entrant
-count is pinned. \texttt{PROOFS.tex} writes the entry condition as
-$\kappa(w_{(j)}) \leq \Delta(j-1)$ in terms of the order statistics of the
-wealth profile, which presupposes that the profile is common knowledge; that is
-what makes $k^*$ deterministic and pins the identities of the entrants. This
-assumption is nowhere stated in \texttt{PROOFS.tex}. It must be, because it is
-the first structural difference from Moreno--Wooders and the reason P5 delivers
-an exact count where they deliver a binomial.
+\emph{Information.} Moreno--Wooders' costs are private and they study
+symmetric equilibria, in which every buyer compares her own cost with one
+common threshold, so only the \emph{distribution} of the entrant count is
+pinned. The common threshold comes from the symmetry of the equilibrium they
+study, rather than from private information alone (p.~320).
+\texttt{PROOFS.tex} writes the entry condition as
+$\kappa(w_{(j)}) \leq \Delta(j-1)$ on the order statistics of the wealth
+profile, which presupposes that the profile is common knowledge, and it now
+states that assumption (\S Primitives, Information). Common knowledge makes
+$k^*$ deterministic and the same in every pure-strategy equilibrium. It does
+not pin the identities of the entrants, which an earlier version of this survey
+said it did. It is the first structural difference from Moreno--Wooders and the
+reason P5 delivers an exact count where they deliver a binomial.
 
-\emph{Primitive.} Their $H$ is a primitive and they never vary it. Ours is
+\emph{Primitive.} Their $H$ is a primitive and they never spread it at fixed
+$N$. Ours is
 induced from a resource distribution through a known concave map, so a
 mean-preserving spread of $\Lambda$ is a specific, non-arbitrary deformation
 of the induced cost distribution. P9 has no counterpart in Moreno--Wooders
@@ -545,17 +611,20 @@ counterpart to.
 \emph{Designer.} Theirs is mechanism design with three instruments; ours has
 none.
 
-\emph{Objective.} Their Proposition~3 is the independent-private-value logic
-where the marginal entrant's private gain equals the social gain. For a
-fixed-prize winner-take-all contest the common-value logic of
-\citet{LevinSmith1994}'s Proposition~3 applies instead, and free entry is
-excessive. Their Proposition~4 carries over directly: entrants with
-$w > \bar w$ keep surplus.
+\emph{Objective.} Their Proposition~3 is the independent-private-value logic,
+in which the marginal entrant's private gain is proportional to her social
+contribution, and its optimum is constrained to symmetric independent entry
+rules. Under complete information $k^*$ is not restricted to such rules, so the
+welfare section must name the benchmark it compares against. For a fixed-prize
+winner-take-all contest the common-value logic of \citet{LevinSmith1994}'s
+Proposition~3 applies instead, and free entry is excessive provided entrants
+beyond the first keep positive expected rent. Their Proposition~4 carries over
+directly: entrants with $w > \bar w$ keep surplus.
 
 So the threshold-in-cost-space is theirs; the count-pinning under complete
 information, the induced-cost structure, and the distributional comparative
-static are not. The objection is answered --- but only once the information
-assumption is written down.
+static are not. The objection is answered, and the information assumption it
+needed is now written down in \texttt{PROOFS.tex}.
 
 \paragraph{Still at abstract level.} \citet{KaplanSela2010} give a rationale
 for entry fees in an all-pay auction with privately known entry costs.
@@ -681,9 +750,13 @@ is no entry margin. The two objects that drive everything are
 the density of noise at the largest of the other $k-1$ draws, and the hazard
 rate at the second-largest of $k$. Proposition~1 and Corollary~1: a unimodal
 noise density is inherited by individual effort as a function of $k$, by a
-Karlin variation-diminishing argument on $F^{k-1}(1-F)$. Corollary~4: monotone
-density gives monotone effort, constant iff uniform. Proposition~2: symmetric
-unimodal density gives $e^*_2 = e^*_3$ and decreasing thereafter.
+Karlin variation-diminishing argument on $F^{k-1}(1-F)$. Corollary~4 gives
+monotone effort for a monotone density, constant iff uniform, and its parts
+(ii) and (iii) carry the condition $p_1(\theta) = 0$ (p.~1600). For a
+deterministic number of players, $e^*_2 = e^*_3$ with a decrease thereafter
+under a symmetric unimodal density is credited by Ryvkin and Drugov to Gerchak
+and He (2003) (p.~1600), and their Proposition~2 generalises it to a
+stochastic number of players.
 Proposition~3: IFR noise with cost more convex than quadratic gives aggregate
 effort increasing in $K$; DFR noise with cost less convex than quadratic gives
 aggregate effort decreasing. Proposition~5: for a mean-preserving increase in
@@ -700,9 +773,9 @@ on $k$. Proposition~1's inheritance of unimodality is the structural template
 for P-MU's hump-shaped weighting, and the sentence on their p.~1589 --- that no
 prediction about the effect of competitor numbers survives for every noise
 distribution --- is exactly the frame in which R2's $Q$-conjecture should be
-refuted. The next step is mechanical: write $\Delta(0)$ in the form
-$\int \phi \, dF_{(\cdot)}$ and check whether their log-supermodularity
-condition on $-\tilde G_\theta$ is what P-MU's weighting needs. Their footnote~29
+refuted. The comparison of P-MU's weighting with their kernel has since been
+computed, and its result, including a correction to an earlier version of this
+survey, is item~3 of the verdict below. Their footnote~29
 records that \citet{DrugovRyvkin2020a} shows the dispersive order is necessary
 and sufficient for ranking equilibrium effort across noise distributions --- the
 dispersive order again, now in the contest branch as well as the status branch.
@@ -739,10 +812,11 @@ wages. Under a mean-preserving spread on fixed support, they state that the
 effect depends on whether the marginal worker at quantile $\theta$ lies in the
 upper or lower tail: if $\theta$ is high the spread raises $\hat\mu$ and
 narrows the wage distribution, if $\theta$ is low it lowers $\hat\mu$ and
-widens it. That is a single-pivot sign rule located at the marginal agent's
-quantile relative to the spread's crossing point --- the same logic as P9-gen,
-where the sign of $\mathrm{d}k^*$ flips according to whether $w_{(k^*)}$ lies
-above or below $x_0$. Their object is a wage schedule through $\hat\mu$; ours
+widens it. The rule reads which tail the marginal agent's quantile lies in, and
+it allows ``possible multiple crossings in between'' (p.~9). For a
+single-crossing spread that is a single-pivot rule at the crossing point, the
+same logic as P9-gen, where the sign of $\mathrm{d}k^*$ flips according to
+whether $w_{(k^*)}$ lies above or below $x_0$. Their object is a wage schedule through $\hat\mu$; ours
 is an entry count through $w_{(k^*)}$. P9-gen should be presented as the
 entry-count analogue of the Costrell--Loury two-job comparative static. Their
 continuum result (Proposition~6) then shows what governs the direction when
@@ -751,16 +825,21 @@ concave $\beta$ lowers $w(0)$ and widens the span, convex $\beta$ lowers $w(1)$
 and narrows it. The curvature of the payoff map decides. For us that map is
 $\kappa$.
 
-Three further results are tools. Their Lemma~1 (in the proof of
-Proposition~5) shows that $G$ riskier than $F$ on fixed support implies the
-quantile functions reverse the order, $F^{-1}$ riskier than $G^{-1}$; their
+Three further results are tools. In the proof of their Lemma~1, which serves
+Proposition~6 (p.~20), they assert that $G$ riskier than $F$ on fixed support
+implies the quantile functions reverse the order, $F^{-1}$ riskier than
+$G^{-1}$, and refer to the proof of Proposition~5 for it; their
 Proposition~5 signs an aggregate (output) under a general spread with multiple
 crossings by integrating $\Gamma(\rho) = \int_\rho^1 [G^{-1} - F^{-1}]$ against
 $\mathrm{d}\beta$; and their Theorem~1 shows that a Blackwell-more-informative
 signal induces a second-order-riskier distribution of posterior means, so any
 mean-preserving-spread result has an information reading. Their Proposition~10
-(Cobb--Douglas crowding) removes the curvature dependence altogether: a spread
-always narrows the span. The draft is not the published article; the
+(Cobb--Douglas crowding) removes the curvature dependence, since a spread there
+always narrows the span. It therefore reverses Proposition~6 only where
+Proposition~6 widens the span, that is ``for concave $\beta(\cdot)$'' (p.~28),
+and under convex $\beta$ both narrow it. Any statement that re-optimising the
+assignment reverses the inequality effect has to carry that condition. The
+draft is not the published article; the
 published version should be checked for these proposition numbers.
 
 \paragraph{Suen and the general-spread technique.} One-to-one transferable-
@@ -769,7 +848,8 @@ matching function $\mu = G^{-1} \circ F$, which they note can itself be read as
 a distribution function. Proposition~2: if $G_1$ is more dispersed than $G_0$
 (same mean, second-order), then total earnings on the other side fall, under
 concavity of $\theta, \phi$ and log-concavity of $1-F$. The proof handles a
-\emph{general} Rothschild--Stiglitz spread with an arbitrary finite number of
+\emph{general} mean-preserving spread, in Suen's own definition (p.~153,
+following Mas-Colell, Whinston and Green), with an arbitrary finite number of
 crossings $k_0 < k_1 < \cdots < k_{2n}$ of the quantile functions: the
 quantile difference alternates in sign, each partial integral is signed by
 second-order dominance, concavity controls the recombination, and the result
@@ -797,38 +877,24 @@ They then diverge:
   not occur anywhere in that paper. Concavity of $\beta$ belongs to their
   Proposition~6, a different result about wage \emph{inequality}.
 \item \citet{Suen2007}'s Proposition~2 integrates by parts against
-  $\rho = (1-F)/f$ and needs concavity of $\theta,\phi$ \emph{and}
-  log-concavity of $1-F$ --- the latter being exactly equivalent to
-  $\rho' \leq 0$, since $\mathrm{d}^2 \log(1-F)/\mathrm{d}x^2 = \rho'/\rho^2$.
+  $\rho = (1-F)/f$ and assumes concavity of $\theta,\phi$, which Suen calls
+  ``sufficient but not necessary'' (p.~155), \emph{and} log-concavity of
+  $1-F$, the latter being exactly equivalent to $\rho' \leq 0$, since
+  $\mathrm{d}^2 \log(1-F)/\mathrm{d}x^2 = \rho'/\rho^2$. Concavity cannot
+  simply be dropped, since a convex $\phi$ with every other hypothesis holding
+  reverses the conclusion (\texttt{lit/suen\_2007}, SU-7).
 \end{itemize}
 
-The weaker hypothesis is Costrell--Loury's, so the \textbf{monotone-weight
-route should be tried first}, not log-concavity.
-
-Three obstacles stand between this and a result, none of them previously
-recorded here.
-
-\begin{enumerate}
-\item \textbf{Aggregate versus count.} Both sources sign a smooth integral
-  ($Q$, $W$). $k^*$ is an integer count defined by a threshold crossing.
-  Neither source signs a count, and this is the substantive gap.
-\item \textbf{The rescaling trap.} The obvious route writes $k^*$ as a
-  functional of $\kappa \circ \Lambda^{-1}$ --- a rank-space rescaling, which
-  is precisely what Suen's footnote~1 declines to do: ``unless the density
-  function $g$ is increasing, concavity of $\phi$ does not imply concavity of
-  $\hat\phi$''. Curvature does not survive the change of variable. Since the
-  dispersive-order machinery of \S\ref{sec:hk} that motivates
-  $T = \Lambda_\beta^{-1}\circ\Lambda_\alpha$ \emph{is} rank-space machinery,
-  this sits on the main road, not a side path. Either establish curvature in
-  the rescaled variable directly, or accept an increasing-density restriction
-  on $\Lambda$ that the model does not currently make.
-\item \textbf{Cross-side versus same-side.} Suen compares two populations
-  across a market; we compare one population before and after a spread. The
-  map class is identical; the object compared is not.
-\end{enumerate}
-
-This remains a concrete, checkable lead. It has not been tried and should not
-be claimed until it has.
+The route was not needed. \texttt{PROOFS.tex} closes open item~2 through the
+one-sided tail condition (Proposition (tail condition) and its band), rather
+than through this machinery. Both sources sign a smooth aggregate and so must
+control the quantile difference at every rank, whereas $k^*$ is a threshold
+count that reads the quantile function only down to the margin. The three
+obstacles an earlier version of this section recorded (aggregate against count,
+the rescaling trap of Suen's footnote~1, cross-side against same-side)
+therefore do not arise. If an aggregate version is wanted later, the
+Costrell--Loury monotone-weight route is the weaker one and the place to
+start.
 
 \section{Positional competition and education}
 
@@ -853,17 +919,34 @@ device that determines how one fares in the non-market sector. Two social
 norms: wealth-is-status and aristocratic (inherited). Proposition~1: a
 wealth-is-status equilibrium exists (Mas-Colell's continuum-game theorem).
 Property~1: in equilibrium no family's relative rank ever changes, even though
-everyone competes. Property~2: everyone weakly over-saves relative to the
-no-matching benchmark, except the bottom agent, who is undistorted.
-Proposition~2: an aristocratic equilibrium exists if the capital distribution
-is sufficiently spread out at the lower tail. Their footnote~20 says a market
+everyone competes. Property~2 says every family weakly over-saves relative to
+the no-matching benchmark, strictly for all but a set of families of measure
+zero, and the family matched with the zero-endowment woman is undistorted
+(p.~1107). Proposition~2 gives an aristocratic equilibrium when $\gamma > 1$,
+$k_0(0) = 0$, $\beta$ is close enough to one, and capital is sufficiently
+``spread out'' at the lower tail (p.~1111). Their footnote~20 says a market
 in which relative position determines the house one buys \emph{cannot}
 generate the multiplicity they are after --- the prizes must be non-market.
-Their \S IV.A two-period example states that the agent in the economy with the
-more compact income distribution tends to have the higher savings rate, and
-\S V.D that once the distribution is dispersed enough the incentive disappears.
-That is the 1992 origin of the ``standard result'' R2 invoked, on the intensive
-margin.
+
+Their \S IV.A two-period example compares two men ``with the same initial
+income level in two different economies'', and concludes that the one in the
+economy with the more compact income distribution ``will tend to have a higher
+savings rate, all other things being equal'' (p.~1103). The comparison covers
+the top half of the distribution, and it is not mean-preserving, since the
+compact economy sits at the top-half capital level $K + \varepsilon$
+(pp.~1102--1103). \S V.D adds that ``in the wealth-is-status savings model with
+$\gamma < 1$'' the incentive to save disappears once the distribution is
+dispersed enough (p.~1117). That is the 1992 origin of the ``standard result''
+R2 invoked, on the intensive margin.
+
+The channel matters for how the entry model may cite it. In the example a man's
+own income is held fixed and his savings fall because his rivals' wealth is
+more dispersed, through the matching. Proposition (anonymity) in
+\texttt{PROOFS.tex} excludes exactly that channel from the entry model, where a
+challenger's gain from entering depends on the number of rival entrants and not
+on their wealth. The entry model therefore shares the direction of the standard
+result and not its mechanism, and a claim that the sign rule ``reconciles'' the
+two can rest on the direction only.
 
 \paragraph{Cole--Mailath--Postlewaite 1995.} CARESS Working Paper 95-14,
 1 August 1995, marked forthcoming in the Minneapolis Fed \emph{Quarterly
@@ -874,12 +957,13 @@ bib entry carries the working-paper form. The concern for relative standing is
 \emph{instrumental}: rank matters only because a non-market decision depends
 on it. \S 2 is a complete-information effort model with the matching function
 $m(y)$ equal to the distribution function of output, so $m'$ is large when the
-distribution is tight and competition is intense (\S 2.1, \S 2.3). \S 3 is the
+distribution is tight and competition is intense (\S 2, p.~5). \S 3 is the
 incomplete-information version: wealth is unobservable, so the rich signal by
-destroying wealth, and the fraction destroyed rises with rank. Footnote~8:
-it is competition from \emph{below} that distorts effort --- truncate the
-population from the top and nothing changes; truncate from the bottom and the
-new lowest agent becomes undistorted. \S 4: when prizes are allocated by rank
+destroying wealth, and the fraction destroyed rises with rank. In the body of
+\S 2.1 (p.~7), which invokes footnote~8, it is competition from \emph{below}
+that distorts effort. Truncating the population from the top changes nothing,
+and truncating it from the bottom leaves the new lowest agent undistorted.
+Footnote~8 itself (pp.~5--6) concerns the undistorted lowest-ability female. \S 4: when prizes are allocated by rank
 rather than sold, the welfare theorems do not apply.
 
 \paragraph{What these two give the entry\_contest model.} Finding~5 asks why
@@ -944,17 +1028,21 @@ pure-strategy equilibrium exists only when the noise variance is large enough
 --- the ancestor of Ryvkin--Drugov's Proposition~7. \S III adds risk aversion,
 and the subsection titled ``Income Distributions'' contains the result that
 matters here. With a common utility function and different \emph{endowed}
-incomes $y_0$, decreasing absolute risk aversion makes the rich prefer the
-tournament and the poor prefer the piece rate, so agents \emph{self-select into
-the contest by wealth}, and the resulting income distribution is positively
-skewed. That is the first appearance, in 1981, of ``who enters a contest is
+incomes $y_0$, ``persons with more endowed income and smaller absolute risk
+aversion are more likely to prefer contests'', and if the difference is large
+enough ``it can be optimal to pay piece rates to those with small values of
+endowed income and to pay prizes to those with large values'' (p.~855). Their
+Table~1 shows the sorting at one of the three variances it tabulates for both
+endowments, $\sigma^2 = 1$. So agents \emph{can self-select into the contest by
+wealth}, and the resulting income distribution is positively skewed. That is the first appearance, in 1981, of ``who enters a contest is
 determined by wealth''. The channel is risk attitude --- DARA, so the wealthy
 find the gamble cheaper --- not the utility cost of a fixed fee, and it needs
 $u'''$ where $\kappa$ needs only $u''$. But it is a precedent for the
 mechanism and it should be cited as one, with the channel distinction stated.
-\S IV (heterogeneous ability, asymmetric information) gives adverse selection
-into the top league and a competitive handicap $h^* = \Delta\mu/2$; the
-handicap algebra is the tool for R2's open question about an equilibrium in
+\S IV gives adverse selection into the top league when each person's class is
+private (p.~858), and a competitive handicap $h^* = \Delta\mu/2$ when the
+types are ``known to everyone'' (p.~861). The handicap algebra, with its
+public types, is the tool for R2's open question about an equilibrium in
 which the incumbent abstains and a challenger invests.
 
 \paragraph{Moldovanu--Sela and Hoppe--Moldovanu--Sela, read in full.}
@@ -978,9 +1066,11 @@ signals more, because it perceives a more dispersed prize structure. That is
 the perfectly-discriminating, private-ability counterpart of the
 competitor-number comparative static: with no noise, entry always raises
 own-side effort; P-MU says that with noise the sign at the margin is
-distribution-dependent even for symmetric agents. Their IFR/DFR spacings
-machinery and Ryvkin--Drugov's hazard-rate machinery are the same
-Barlow--Proschan lineage.
+distribution-dependent even for symmetric agents. We read their IFR/DFR
+spacings machinery and Ryvkin--Drugov's hazard-rate machinery as one
+Barlow--Proschan lineage. The attribution is ours, since Ryvkin and Drugov do
+not cite Barlow and Proschan and take their orders from
+\citet{ShakedShanthikumar2007}.
 
 \paragraph{Surveys and standard references.} \citet{Konrad2009} and
 \citet{Corchon2007} are the two surveys a referee will expect to see
@@ -1043,8 +1133,8 @@ different derivative, and it is the more robust half of the answer.
 
 And \citet{MorenoWooders2011}
 (\S\ref{sec:entry}) shows that what separates P5 from a private-cost threshold
-is the complete-information assumption on the wealth profile --- which
-\texttt{PROOFS.tex} uses but does not state.
+is the complete-information assumption on the wealth profile, which
+\texttt{PROOFS.tex} now states.
 
 What is not in any source located here is the combination of three results that
 require the $Q$-player binary-entry setting jointly:
@@ -1056,24 +1146,29 @@ require the $Q$-player binary-entry setting jointly:
   equation~(2) \emph{together with their Definition~2} (they never display the
   count bound itself; see \S\ref{sec:entry}), and \citet{FuLu2010},
   equation~(7), for identical agents with mixed or sequential entry. Fu--Lu's
-  is the sharper case, (7) being an equality rather than an inequality --- but
-  their $N$ is the count in an \emph{optimally designed} contest, so ``under
-  fixed rules with no designer'' is doing real work. P7's content is the
-  deterministic heterogeneous version in utility units, bounding a
-  pure-strategy count rather than an expected one, under fixed rules with no
-  designer. It should be presented as that, not as a new inequality.
+  (7) is an equality for total effort in the optimally designed contest, and as
+  a bound on the count it is slack there by $\Gamma_0 - 2C$. Their model also
+  yields $NC \leq \Gamma_0$ at every feasible contest, without a designer, and
+  their count is pure-strategy and deterministic (\S\ref{sec:entry}). P7's
+  content is therefore the version of this accounting for heterogeneous agents
+  in utility units, and against Fu--Jiao--Lu alone also a bound on a
+  pure-strategy count rather than an expected one. It should be presented as
+  that, not as a new inequality, and the novelty ledger in \texttt{TODO.md}
+  records it as not novel.
 \item \textbf{P9 and P9-gen}, the pivot rule locating the sign reversal of the
   inequality effect on aggregate entry at $w_{(k^*)}$ versus $x_0$. The novelty
   is not that a mean-preserving spread is signed --- \citet{SchroyenTreich2016}
   do that --- but that it is signed \emph{globally and without higher-order
   restrictions on $u$}, where the intensive-margin result is local and needs
-  the CSF decisiveness parameter and the third derivative. The literature
-  supplies the stochastic order (dispersive) but not the entry-count
-  application. The closest structural precedent for the pivot rule itself is
+  the CSF decisiveness parameter and the third derivative. The pair that
+  exhibits the third-derivative dependence, CARA against log utility,
+  separates only for $m < 2^{-1/2}$ (\S\ref{sec:st}). The literature supplies
+  the stochastic order (dispersive) but not the entry-count application. The
+  closest structural precedent for the pivot rule itself is
   \citet{CostrellLoury2004}'s two-job model (\S\ref{sec:assignment}), where the
-  sign of a spread's effect flips according to whether the marginal worker's
-  quantile lies above or below the crossing; P9-gen is its entry-count
-  analogue and should cite it as such.
+  sign of a spread's effect depends on whether the marginal worker's quantile
+  lies in the upper or the lower tail; P9-gen is its entry-count analogue and
+  should cite it as such.
 \item \textbf{P-MU}, the exact condition for the sign of the competitor-number
   effect in a binary-entry contest, as the discrete analogue of the
   \citet{RyvkinDrugov2020} \emph{density} result
@@ -1085,24 +1180,90 @@ require the $Q$-player binary-entry setting jointly:
   arbitrary number of players as an extension they did not undertake, so the
   $Q$-dimension is unoccupied on both sides.
 
-  The comparison has now been computed rather than conjectured, and it is
-  exact: P-MU's weight is $W = G^{Q-1}(1-G)F$, whose hump-shaped factor
-  $G^{Q-1}(1-G)$ peaks at $G = (Q-1)/Q$, while Ryvkin and Drugov's
-  log-supermodular kernel $-H_\theta = F^{k-1}(1-F)$ peaks at $F = (k-1)/k$.
-  Under $G \leftrightarrow F$, $Q \leftrightarrow k$ these are the \emph{same
-  function}; our extra factor $F$ is the incumbent's CDF and carries no $Q$.
-  So the hump-shape is not an artefact of our construction but the standard
-  object of this literature. Log-supermodularity transfers (the cross-partial
-  of $\log[z^{n-1}(1-z)]$ is $1/z > 0$), but the second hypothesis does not:
-  Karlin's argument needs the integrand in the role of $u'$ to be single
-  crossing $+-$, whereas ours is $F\cdot(f-g) = -F\varphi'$, which crosses
-  $-+$. \emph{No unimodality claim for $\Delta(0,Q)$ in $Q$ is available};
-  the plausible target of a reworked argument is an interior \emph{minimum},
-  which would sit consistently with R1--R2, and it has not been derived.
+  The comparison has now been computed. P-MU's weight is
+  $W = G^{Q-1}(1-G)F$, and its factor $G^{Q-1}(1-G)$ is Ryvkin and Drugov's
+  log-supermodular kernel $-H_\theta = F^{k-1}(1-F)$ under
+  $G \leftrightarrow F$, $Q \leftrightarrow k$; our extra factor $F$ is the
+  incumbent's CDF and carries no $Q$. The kernel is theirs. Its peak at
+  $(k-1)/k$ is our computation, which they do not state and their argument
+  does not use. Log-supermodularity transfers (the cross-partial of
+  $\log[z^{n-1}(1-z)]$ is $1/z > 0$).
+
+  The single-crossing hypothesis transfers too. An earlier version of this
+  item said it did not, because it dropped the leading minus sign of the P-MU
+  identity. Since $f - g = -\varphi'$, that identity reads
+  $\Delta(0,Q{+}1) - \Delta(0,Q) = V\!\int G^{Q-1}(1-G)\,(F\varphi')\,\mathrm{d}x$,
+  so the function in the role of Karlin's $u'$ is $F\varphi'$, which crosses
+  $+-$ whenever $\varphi$ is single-peaked, the orientation their argument
+  needs. With that premise the difference changes sign at most once in $Q$,
+  from positive to negative, so $\Delta(0,Q)$ is monotone in $Q$ or rises and
+  then falls, and an interior \emph{minimum} is excluded. An exact example
+  with $F = x^4$ and $G = 1-(1-x)^5$ rises and then falls, the difference
+  being $1/9009$ and $106/2909907$ at $Q = 1, 2$ and negative for $Q = 3$ to $6$
+  (\texttt{lit/ryvkin\_drugov\_2020}, RD-8, recomputed independently). Two
+  steps are not established, that $\varphi$ is single-peaked for the model's
+  induced $F$ and $G$, and the continuous variation-diminishing step, which
+  the Lean proves for finite sums only. No unimodality claim is made until both
+  are. \texttt{PROOFS.tex} still carries the reversed-orientation sentence and
+  the interior-minimum target (\texttt{TODO.md} item L1, entry 0).
 \end{enumerate}
 
-The contribution should be stated as those three theorems, not as the mechanism.
-That is a narrower claim than the rebuild handover assumed, and it survives.
+An earlier version of this section concluded that the contribution should be
+stated as those three theorems. The novelty ledger in \texttt{TODO.md} has since
+narrowed it. P9-gen survives, with its endogenous margin and its one-sided tail
+condition, as the claim that the sign of the inequality effect on entry is set
+by the marginal entrant's position against the pivot under burden-monotonicity
+alone, for which $u'' < 0$ suffices.
+P7 does not survive as novel, because its accounting is Fu--Jiao--Lu's and
+Fu--Lu's. P-MU does not survive as such, because its kernel and its message
+that no competitor-number prediction is universal are Ryvkin and Drugov's. Four
+papers that bear on this verdict, one of them on P5 directly, have not been
+read (\S\ref{sec:unread}).
+
+\section{Sources read for the measurement map}
+\label{sec:measurement}
+
+Two sources were read in full \textbf{[F]} for \texttt{MEASUREMENT\_MAP.tex},
+the companion note that says how each object of the model could be observed.
+Neither bears on novelty, and neither is cited in \texttt{PROOFS.tex}.
+
+\citet{Schoemaker1982} is the reference for reading the model's utility as a
+von Neumann--Morgenstern index. Such a utility ``is used to represent
+preferences'' rather than determining them (p.~532), it is unique up to $aU+b$
+with $a>0$ (p.~531), and as a preference theory it ``provides no more than
+ordinal rankings of lotteries'' (p.~533). The entry condition is a comparison of
+expected payoffs (\texttt{checks/verify\_measurement\_map.py}, MM9), so the
+model is of that kind, and $\kappa$ and $V$ carry meaning only through
+$\kappa/V$.
+
+\citet{Sen1973} supplies the distinction between preference as ``the binary
+representation of individual choice'' (p.~253) and preference read as welfare,
+of which ``it is not in general possible to guarantee both simultaneously''
+(p.~259). The distinction bears on the unweighted sum of payoffs by which the
+assortative selection ranks equilibria, and on the welfare section still to be
+written. \citet{Sen1971}, which Sen (1973) cites for the conditions on choice
+functions, has not been read.
+
+\section{Leads not yet read}
+\label{sec:unread}
+
+\citet{MorganOrzenSefton2012} (p.~442) place their model against four papers,
+none of which this survey had cited. Each bears on the novelty verdict and
+should be read before the conclusions are fixed. \textbf{[C]} for all four.
+
+\begin{itemize}
+\item \citet{FullertonMcAfee1999} ``study contests where agents are
+  heterogeneous and entry is determined by an auction''. If the auction selects
+  entrants by type, entrant identity is a property of the agents there, which
+  bears directly on the claim that P5 differs in kind from the other devices
+  (\S\ref{sec:entry}).
+\item \citet{MathewsNamoro2008} ``consider entry decisions when each agent faces
+  multiple possible contests'', in rank-order tournaments with endogenous
+  entry.
+\item \citet{Corcoran1984} and \citet{CorcoranKarels1985} give the long-run
+  rent-seeking model with free entry of which Morgan, Orzen and Sefton call
+  theirs ``a slightly modified version''.
+\end{itemize}
 
 \section{What still needs doing}
 
@@ -1113,26 +1274,33 @@ WP); Fu--Jiao--Lu (published); Fu--Lu (WP); Cornes--Hartley (WP); Treich
 Moreno--Wooders (published); Che--Gale 1997 (published); Suen (published);
 Costrell--Loury (draft); Cole--Mailath--Postlewaite 1992 (published) and
 1995 (WP); Becker--Murphy--Werning (draft); Moldovanu--Sela 2001 (draft);
-Hoppe--Moldovanu--Sela (published); Lazear--Rosen (published). Every
-substantive claim in this document about what a paper does now rests on a full
-read, except where marked [A] or [C]. Where a working paper or draft was read,
-the published version has not been line-checked.
+Hoppe--Moldovanu--Sela (published); Lazear--Rosen (published); Schoemaker
+1982 (published); Sen 1973 (published). Every substantive claim in this
+document about what a paper does now rests on a full read, except where marked
+[A] or [C]. Where a working paper or draft was read, the published version has
+not been line-checked. Each paper cited in \texttt{PROOFS.tex} except
+\citet{Shaked1982} now also has a Lean file and a measuring suite under
+\texttt{lit/}, and \texttt{lit/COVERAGE.md} lists the coverage.
+
+Done since the previous version. \texttt{PROOFS.tex} now states the
+complete-information assumption, cites \citet{LazearRosen1981} as the
+precedent for wealth-based self-selection with the $u''$ against $u'''$
+distinction, and cites
+\citet{ColeMailathPostlewaite1992,ColeMailathPostlewaite1995} where $V$ is
+introduced. The comparison of P-MU with \citet{RyvkinDrugov2020} has been
+computed (verdict item~3), and the general-spread question was closed by the
+tail condition rather than by the Suen and Costrell--Loury technique
+(\S\ref{sec:assignment}).
 
 Outstanding, in descending order of consequence for the current claims:
 
 \begin{enumerate}
-\item State the complete-information assumption on the wealth profile in
-  \texttt{PROOFS.tex} (\S\ref{sec:entry}). Without it P5's deterministic
-  $k^*$ is not distinguished from Moreno--Wooders' binomial count.
-\item Add \citet{LazearRosen1981} to the contribution paragraph as the
-  precedent for wealth-based self-selection, with the $u''$ versus $u'''$
-  distinction.
-\item Cite \citet{ColeMailathPostlewaite1992,ColeMailathPostlewaite1995} at
-  the point where $V$ is introduced (\S\ref{sec:foundations}).
-\item Relate P-MU's weighting $W$ to \citet{RyvkinDrugov2020}'s $b_k$ and
-  their log-supermodularity condition --- a computation.
-\item Try the Suen / Costrell--Loury general-spread technique on P9-gen
-  (\S\ref{sec:assignment}) --- a proof attempt.
+\item Read the four leads of \S\ref{sec:unread}, beginning with
+  \citet{FullertonMcAfee1999}, before the novelty verdict is used to fix the
+  conclusions.
+\item Read \citet{Shaked1982}, cited twice in \texttt{PROOFS.tex} and not yet
+  read, and give the claims made of \citet{HopkinsKornienko2004} and
+  \citet{HopkinsKornienko2009} a Lean file of their own.
 \item Published-version checks: Schroyen--Treich (\emph{GEB}, Theorem~3 and
   the payoff specifications); Fu--Lu (\emph{EI}, the title differs between
   MPRA and Fu--Jiao--Lu's citation); Cole--Mailath--Postlewaite 1995

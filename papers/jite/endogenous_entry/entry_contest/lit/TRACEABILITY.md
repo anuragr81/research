@@ -50,6 +50,22 @@ twelve; the per-paper `CLAIMS.md` files remain the canonical claim inventories.
 | 14 | Suen cross-side vs same-side | SU-A/SU-E confirmed | "Map class identical, object compared differs" | n/a | **ALIGNED** |
 | 15 | S11 provenance | RD-4: S11's hump at (Q−1)/Q **is** RD's kernel at (k−1)/k | Survey names `b_k` as the comparator | §PMU derives the hump with no provenance note | **UNSTATED** (one sentence) |
 
+**Status 6 Oct 2026.** The table records the pass-1 state, and four rows have
+moved since then.
+
+- Row 5 is resolved in `LITERATURE.tex`. The survey says the two sources are
+  not independent, and the route was not needed, since `PROOFS.tex` closes
+  open item 2 through the tail condition.
+- Row 6 changed direction. RD-6's "crossing reversed" dropped the leading minus
+  sign of the P-MU identity, and the orientation matches RD's (pass-2 finding
+  F1 in `ryvkin_drugov_2020/NOTES.md`). `LITERATURE.tex` is corrected, and
+  `PROOFS.tex` is listed for the author in `TODO.md` item L1.
+- Row 9's tightening is applied in `PROOFS.tex`.
+- Row 11's welfare inputs gained two conditions. The Moreno–Wooders optimum is
+  constrained to symmetric independent entry rules, and Levin–Smith's
+  excessive entry needs entrants beyond the first to keep positive expected
+  rent. Both are in `LITERATURE.tex` §sec:entry.
+
 ---
 
 ## Detail on the non-trivial verdicts
@@ -154,7 +170,9 @@ The deferred section's inputs are now staged and mutually consistent:
   motivation.
 - **Heterogeneity objection pre-empted** (MW-5): Moreno–Wooders Prop 3 shows
   heterogeneous private costs leave free entry optimal *in the IPV branch* —
-  the branch is set by `V_n`, not by the cost distribution.
+  the branch is set by `V_n`, not by the cost distribution. The optimum is the
+  constrained one, over symmetric independent entry rules (p.320), and the
+  paper's own Table 1 beats it with an entry cap (added 6 Oct 2026).
 
 Two survey errors must not leak into the drafting:
 
