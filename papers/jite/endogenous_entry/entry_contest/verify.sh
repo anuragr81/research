@@ -234,9 +234,17 @@ echo '```' >> "$OUT"
 
 echo
 echo "======================================================================"
+echo " PROOF CHECKS  (Lean 4 with Mathlib, lean/mathlib/)"
+echo "======================================================================"
+{ echo; echo '## Suite 12 - Lean 4 with Mathlib (`checks/verify_mathlib.py`)'; echo; echo '```'; } >> "$OUT"
+python3 "$HERE/checks/verify_mathlib.py" 2>&1 | tee -a "$OUT" || FAILED=1
+echo '```' >> "$OUT"
+
+echo
+echo "======================================================================"
 echo " DOC CONSISTENCY  (PROOFS.tex prose vs this run's generated evidence)"
 echo "======================================================================"
-{ echo; echo '## Suite 12 - doc consistency (`checks/verify_docs.py`)'; echo; echo '```'; } >> "$OUT"
+{ echo; echo '## Suite 13 - doc consistency (`checks/verify_docs.py`)'; echo; echo '```'; } >> "$OUT"
 python3 "$HERE/checks/verify_docs.py" "$OUT" 2>&1 | tee -a "$OUT" || FAILED=1
 echo '```' >> "$OUT"
 

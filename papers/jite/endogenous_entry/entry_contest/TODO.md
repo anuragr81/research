@@ -132,6 +132,8 @@ paper's claims, and only then write the manuscript.
   English is at most 30% of each proof, checked by script. Passes run in the
   order below. Passes 1 to 4 do not depend on the novelty verdict and can run
   now. Passes 7 to 9 wait for it.
+  Status 6 Oct 2026. Passes 1 and 2 are done (commits eace8d3e and the
+  pass-2 commit). Pass 3 is next.
   1. **Skeleton scaffold.** `MANUSCRIPT.tex` with the four tables empty, the ID
      scheme (K, M, L, C rows), appendix stubs, a link checker (K points to M; C
      points to M or L; every M row names a Lean theorem that exists and is
@@ -739,7 +741,13 @@ be claimed as novel.
 
 ## Now
 
-- [ ] **A2. Compile `lean/mathlib/StepNonpos.lean` and report the result.**
+- [x] **A2. DONE 6 Oct 2026. `StepNonpos.lean` compiles** in the lake
+  project `lean/mathlib/` (Lean v4.24.0-rc1, Mathlib 14871d5), after one fix
+  to the derivative of `φ²/2`. All three theorems depend on `propext`,
+  `Classical.choice` and `Quot.sound` only, audited by suite 12
+  (`checks/verify_mathlib.py`). What remains open is in
+  `lean/mathlib/README.md`. The record below is the 2 Sep entry.
+- [ ] **A2 (2 Sep record). Compile `lean/mathlib/StepNonpos.lean` and report the result.**
   DRAFTED 2 Sep, **NOT COMPILED** — written where the Mathlib cache returns
   HTTP 403 (`cache.mathlib.org` outside that sandbox's egress allowlist) and
   building 8849 modules from source exceeded available disk. Every statement

@@ -1,62 +1,58 @@
-# Mathlib-backed proof of the analytic step
+# Lean with Mathlib, for the analytic steps
 
-`StepNonpos.lean` closes the one link that keeps every count claim from being
-machine-checked from primitives to conclusion: the antitonicity of `Delta`,
-assumed in `../EntryContest.lean` as the hypothesis `step_nonpos` and
-previously discharged only at tier S over stated families (S4 on five concrete
-pairs; S5 the boundary term).
+This lake project holds the parts of the proofs that need real analysis, which
+`../EntryContest.lean` keeps out by design. The core file stays on core Lean, so
+its audit admits only `propext` and `Quot.sound`. Files here import Mathlib, so
+their audit admits the three standard axioms `propext`, `Classical.choice` and
+`Quot.sound` and nothing else (`checks/verify_mathlib.py`, suite 12 of
+`verify.sh`).
 
-Deliberately kept OUT of `../EntryContest.lean` and out of `verify.sh`. The
-core development stays core-only so `#print axioms` can certify every theorem
-at the granularity the paper claims; a Mathlib import brings `Classical.choice`
-into the profile. This file is a separate obligation with a separate,
-declared axiom profile.
+## Setup
 
-## Status
+The project pins Lean `v4.24.0-rc1` (`lean-toolchain`) and Mathlib at commit
+`14871d5175e8011a94c78e54b431080aabeeab00` (`lakefile.toml`, with every
+dependency fixed in `lake-manifest.json`). From this directory run
 
-DRAFTED, NOT COMPILED. Written in an environment where the Mathlib build cache
-returns HTTP 403 (`cache.mathlib.org` is outside that sandbox's egress
-allowlist) and building 8849 modules from source exceeded the disk available.
-So every statement below is a conjecture about Mathlib's API, not a verified
-proof.
+    lake exe cache get
+    lake build
 
-## To run
+`cache get` downloads Mathlib's prebuilt files, about 5 GB unpacked, or unpacks
+them from `~/.cache/mathlib` when they are already there. Without it, `lake
+build` would compile Mathlib from source. `.lake/` is not committed.
 
-    lake env lean lean/mathlib/StepNonpos.lean
+## StepNonpos.lean
 
-then, for the axiom profile:
+Compiled 6 October 2026, first draft written 2 September (item A2 in
+`TODO.md`). It proves the analytic step that `EntryContest.lean` takes as the
+hypothesis `step_nonpos`, the antitonicity of `Delta` that drives P5.
 
-    #print axioms EntryContestAnalytic.step_integral_eq
-    #print axioms EntryContestAnalytic.step_integral_nonpos
-    #print axioms EntryContestAnalytic.step_nonpos_of_representation
+| Theorem | What it proves |
+|---|---|
+| `step_integral_eq` | Integration by parts against `d(φ²/2)`, with the boundary term zero because `φ a = φ b = 0`, gives `∫ K φ φ' = -∫ K' φ²/2` |
+| `step_integral_nonpos` | With `K' ≥ 0` on `[a, b]`, the integral `∫ K φ φ'` is at most zero |
+| `step_nonpos_of_representation` | If `Δ(m+1) - Δ(m) = V ∫ K_m φ φ'` for every `m` with `V ≥ 0`, then `Δ(m+1) ≤ Δ(m)` for every `m` |
 
-## Where it is most likely to break
+No distribution family is assumed. `K` is any differentiable function with
+`K' ≥ 0`, which a product of CDFs with densities satisfies, and `φ` is any
+differentiable function vanishing at both ends.
 
-1. `integral_mul_deriv_eq_deriv_mul` — the integration-by-parts lemma. Name and
-   namespace have moved across Mathlib versions; it may need
-   `intervalIntegral.` explicitly, or the argument order may differ.
-2. The `hv` block deriving `HasDerivAt (fun y => φ y ^ 2 / 2) (φ x * φ' x) x`.
-   `(hφ x hx).pow 2` produces `2 * φ x ^ 1 * φ' x`; the `simpa` normalises that
-   through `div_const 2`. If it fails, `field_simp` then `ring_nf`, or replace
-   with `HasDerivAt.mul` on `φ * φ`.
-3. `integral_nonneg` expects the pointwise bound on `Icc a b`; if the ambient
-   measure or the `uIcc`/`Icc` mismatch bites, add `hab` rewriting first.
-4. `mul_nonpos_of_nonneg_of_nonpos` — name varies; `mul_nonpos_iff` or
-   `mul_nonpos` may be the current spelling.
+Axioms, from the suite on 6 October 2026. Each of the three theorems depends
+on `propext`, `Classical.choice` and `Quot.sound`, and on nothing else.
 
-## What it does and does not close
+## What this closes and what it does not
 
-Closes: the integration by parts and the sign, for arbitrary `K` non-decreasing
-and arbitrary `φ` vanishing at both endpoints. No family assumed.
+It closes the integration by parts and the sign of the step, which had been
+checked only at tier S, on five concrete pairs (S4) and for the boundary term
+(S5).
 
-Does not close: the algebraic identity reducing the step difference to
-`∫ K φ dφ` (S1, already abstract in `F, G, C` but produced by a CAS whose
-correctness is assumed), nor the P1 representation (S7). The differentiability
-and integrability hypotheses above are smoothness assumptions on the model's
-CDFs; they hold for the model's induced `F, G, C` but that implication is
-itself not formalised here.
+It does not close three things, which are the next clusters of pass 3 in
+`TODO.md` item PLAN.
 
-So a successful compile changes the abstract's claim from "no claim is
-machine-checked end to end from primitives" to a narrower and true statement:
-one analytic input remains, and it is an algebraic identity rather than an
-analytic one.
+- The algebraic identity that reduces the step difference to `∫ K φ dφ`
+  (SymPy S1), here the hypothesis `hrep`.
+- The P1 representation (SymPy S7).
+- That the smoothness hypotheses hold for the model's induced `F`, `G` and
+  `C`, which needs the score distributions to have densities.
+
+So the claim that no result is machine-checked from primitives still stands,
+with fewer analytic inputs left than before.
