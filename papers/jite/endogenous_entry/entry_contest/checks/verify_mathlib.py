@@ -55,7 +55,8 @@ lake = shutil.which("lake")
 files = sorted(glob.glob(os.path.join(PROJ, "*.lean")))
 modules = [os.path.splitext(os.path.basename(f))[0] for f in files]
 lakefile = open(os.path.join(PROJ, "lakefile.toml")).read()
-roots = re.findall(r'"([A-Za-z0-9_]+)"', (re.search(r"roots\s*=\s*\[([^\]]*)\]", lakefile) or [None, ""])[1] or "")
+roots = [r for block in re.findall(r"roots\s*=\s*\[([^\]]*)\]", lakefile)
+         for r in re.findall(r'"([A-Za-z0-9_]+)"', block)]
 toolchain = open(os.path.join(PROJ, "lean-toolchain")).read().strip()
 print(f"      toolchain {toolchain}; modules {modules}; build roots {roots}")
 

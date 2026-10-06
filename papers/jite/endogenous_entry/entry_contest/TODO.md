@@ -132,8 +132,30 @@ paper's claims, and only then write the manuscript.
   English is at most 30% of each proof, checked by script. Passes run in the
   order below. Passes 1 to 4 do not depend on the novelty verdict and can run
   now. Passes 7 to 9 wait for it.
-  Status 6 Oct 2026. Passes 1 and 2 are done (commits eace8d3e and the
-  pass-2 commit). Pass 3 is next.
+  Status 6 Oct 2026. Passes 1 and 2 are done (eace8d3e, d369cd86). Pass 3 is
+  next.
+  Revised the same day. Verification depends on Lean alone; SymPy and
+  numerical sampling no longer count as evidence for any claim. The Lean
+  files are for our verification and are not submitted, so Lean names leave
+  the printed manuscript before submission. Every statement in the paper is
+  a Lean theorem, a Lean-checked counterexample, a stated model assumption, or
+  a quoted literature claim. Numbers may appear as illustrations only.
+  Pass 3a done 6 Oct 2026. `lean/mathlib/StepIdentity.lean` proves the step
+  identity for any score laws without atoms, with no densities and no
+  integration by parts, through the fact that exactly one of three
+  independent draws is the largest. `lean/mathlib/EntryContestModel.lean`
+  builds `H_m` and `Delta` from the score laws and discharges the hypothesis
+  `step_nonpos` of `EntryContest.equilibrium_is_threshold`. The P5 threshold
+  structure is therefore machine-checked from the model's assumptions, and the
+  abstract's "no claim is machine-checked end to end" no longer holds for P5.
+  `StepNonpos.lean`, which assumed densities, was removed as superseded.
+  Pass 3 therefore splits into 3a step identity (in full generality, no
+  densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
+  divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
+  concavity, 3g R1, R2 and the anonymity counterexample as exact
+  counterexamples, 3h the measurement-map checks. Pass 6 drops statements
+  that only sampling supports (the theta > 0 support claim, band frequencies,
+  violation counts).
   1. **Skeleton scaffold.** `MANUSCRIPT.tex` with the four tables empty, the ID
      scheme (K, M, L, C rows), appendix stubs, a link checker (K points to M; C
      points to M or L; every M row names a Lean theorem that exists and is
