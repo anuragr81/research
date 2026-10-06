@@ -1,6 +1,13 @@
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+
 import sympy as sp
 
 results = []
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def check(name, ok, detail=""):
@@ -117,13 +124,13 @@ print(f"      f - g = {integrand}: at 1/4 = {integrand.subs(x, lo)} < 0, "
       f"at 3/4 = {integrand.subs(x, hi)} > 0   -> crosses -+")
 opposite = bool(dphi.subs(x, lo) > 0 and dphi.subs(x, hi) < 0
                 and integrand.subs(x, lo) < 0 and integrand.subs(x, hi) > 0)
-check("RD-6 our integrand single-crosses -+, RD's needs +-", opposite,
-      "the orientation is reversed, so Karlin's conclusion does NOT transfer as-is")
+check("RD-6 on F=x^2, G=x: phi' crosses +- and f-g crosses -+", opposite,
+      "arithmetic only; which of the two plays u' is decided in RD-8")
 
 print()
 print("RD-7  Their aggregate-effort object uses the hazard rate")
 print("-" * 72)
-print("      p.1593: with quadratic cost, aggregate effort is E(h(X_(k-1:k))),")
+print("      p.1589 and p.1602 (eq 11): with quadratic cost, aggregate effort is E(h(X_(k-1:k))),")
 print("      where h is the failure (hazard) rate of noise and X_(k-1:k) is the")
 print("      SECOND-highest of k draws -- a different order statistic from the")
 print("      one in b_k.")
@@ -145,12 +152,150 @@ check("RD-7 the two objects are distinct and the survey picks the right one",
       "individual: b_k = E[f(X_(k-1:k-1))]; aggregate: E[h(X_(k-1:k))]")
 
 print()
+print("RD-8  Which function plays u' in the P-MU difference")
+print("-" * 72)
+print("      RD p.1597: gamma_theta = -Int u' H_theta dz = Int u' * (-H_theta) dz,")
+print("      with the kernel -H_theta >= 0 log supermodular and u' required +-.")
+print("      PROOFS.tex prop:PMU: D(Q) = Delta(0,Q+1) - Delta(0,Q)")
+print("        = -Int G^(Q-1)(1-G) F (f-g) dx = Int [G^(Q-1)(1-G)] * [F (g-f)] dx.")
+print("      So the function in the role of u' is F(g-f) = F phi' = -F(f-g),")
+print("      not F(f-g). Witness pair with a sign change in Q:")
+print("      F = x^4, G = 1-(1-x)^5 on [0,1] (F <= G, phi = G-F hump-shaped).")
+xx = sp.symbols("xx", real=True)
+Fw = xx**4
+Gw = 1 - (1 - xx) ** 5
+phiw = sp.expand(Gw - Fw)
+dphiw = sp.diff(phiw, xx)
+u_role = sp.expand(-Fw * (sp.diff(Fw, xx) - sp.diff(Gw, xx)))
+roots = [complex(r) for r in sp.Poly(dphiw, xx).nroots()]
+interior = sorted(r.real for r in roots if abs(r.imag) < 1e-12 and 0 < r.real < 1)
+grid = [sp.Rational(i, 400) for i in range(1, 400)]
+phi_nonneg = all(phiw.subs(xx, t) >= 0 for t in grid)
+r0 = sp.nsimplify(interior[0], rational=True) if len(interior) == 1 else None
+u_pm = (r0 is not None
+        and u_role.subs(xx, r0 / 2) > 0
+        and u_role.subs(xx, (r0 + 1) / 2) < 0)
+D_vals = []
+for Qv in range(1, 13):
+    integrand_w = sp.expand(Gw ** (Qv - 1) * (1 - Gw) * Fw * (sp.diff(Fw, xx) - sp.diff(Gw, xx)))
+    D_vals.append(-sp.integrate(integrand_w, (xx, 0, 1)))
+signs = []
+for v in D_vals:
+    s = "+" if v > 0 else "-"
+    if not signs or signs[-1] != s:
+        signs.append(s)
+pattern = "".join(signs)
+print(f"      u-role = -F(f-g) equals F*phi': {sp.simplify(u_role - Fw * dphiw) == 0}")
+print(f"      phi >= 0 on grid: {phi_nonneg}; interior critical points of phi: "
+      f"{[round(t, 4) for t in interior]}")
+print(f"      u-role crosses +- about that point: {u_pm}")
+print(f"      D(1..4) = {[str(v) for v in D_vals[:4]]}")
+print(f"      sign pattern of D(Q), Q=1..12: {pattern}   (RD's orientation is +-)")
+check("RD-8 the u'-role function crosses +- and D(Q) single-crosses +- in Q",
+      bool(sp.simplify(u_role - Fw * dphiw) == 0 and phi_nonneg and len(interior) == 1
+           and u_pm and pattern == "+-"),
+      "Delta(0,Q) rises then falls here: an interior MAXIMUM, not a minimum")
+
+print()
+print("RD-L  Lean: kernel TP2, peak, single-crossing, discrete Karlin step")
+print("-" * 72)
+ALLOWED_AXIOMS = {"propext", "Quot.sound"}
+lean = shutil.which("lean")
+if lean is None and os.path.exists(os.path.expanduser("~/.elan/bin/lean")):
+    lean = os.path.expanduser("~/.elan/bin/lean")
+src = os.path.join(HERE, "RyvkinDrugov.lean")
+if lean is None:
+    check("RD-L RyvkinDrugov.lean compiles", False, "lean not found on PATH or in ~/.elan/bin")
+elif not os.path.exists(src):
+    check("RD-L RyvkinDrugov.lean compiles", False, "RyvkinDrugov.lean missing")
+else:
+    src_text = open(src).read()
+    hygiene = []
+    if re.search(r"\bsorry\b", src_text):
+        hygiene.append("sorry")
+    if re.search(r"^\s*(?:private\s+)?axiom\b", src_text, re.M):
+        hygiene.append("axiom declaration")
+    if "native_decide" in src_text:
+        hygiene.append("native_decide")
+    if "--" in src_text or "/-" in src_text:
+        hygiene.append("comment")
+    check("RD-L source has no sorry, axiom, native_decide or comment", not hygiene,
+          ", ".join(hygiene))
+    p = subprocess.run([lean, src], capture_output=True, text=True, timeout=900)
+    out = p.stdout + p.stderr
+    check("RD-L RyvkinDrugov.lean compiles with no errors and no sorry",
+          p.returncode == 0 and "sorry" not in out,
+          f"returncode {p.returncode}; " + out.strip()[:300])
+    names = re.findall(r"^\s*(?:theorem|lemma)\s+([A-Za-z0-9_']+)", src_text, re.M)
+    with tempfile.TemporaryDirectory() as td:
+        audit = os.path.join(td, "audit.lean")
+        with open(audit, "w") as fh:
+            fh.write(src_text)
+            fh.write("\n")
+            for nm in names:
+                fh.write(f"#print axioms RyvkinDrugov.{nm}\n")
+        q = subprocess.run([lean, audit], capture_output=True, text=True, timeout=900)
+        aout = q.stdout + q.stderr
+    axioms_of = {}
+    for nm in names:
+        m = re.search(r"'RyvkinDrugov\." + re.escape(nm)
+                      + r"' (does not depend on any axioms|depends on axioms: \[([^\]]*)\])",
+                      aout)
+        if m:
+            axioms_of[nm] = ([] if m.group(2) is None
+                             else [a.strip() for a in m.group(2).split(",") if a.strip()])
+    audited = len(axioms_of)
+    free = sum(1 for v in axioms_of.values() if not v)
+    core_only = sum(1 for v in axioms_of.values() if v and set(v) <= ALLOWED_AXIOMS)
+    other = {nm: v for nm, v in axioms_of.items() if not set(v) <= ALLOWED_AXIOMS}
+    n_sorry = len(re.findall(r"declaration uses .sorry.", out))
+    print(f"      theorems: {len(names)}; audited: {audited}; axiom-free: {free}; "
+          f"propext/Quot.sound only: {core_only}; other axioms: {len(other)}; "
+          f"sorry: {n_sorry}")
+    for nm, v in other.items():
+        print(f"      NON-CORE AXIOMS in {nm}: {v}")
+    check("RD-L axiom audit covers every declared theorem",
+          q.returncode == 0 and audited == len(names) and len(names) > 0,
+          f"{audited} of {len(names)}")
+    check("RD-L no theorem depends on an axiom beyond propext / Quot.sound", not other,
+          "allowed: none, propext, Quot.sound")
+    mutations = [
+        ("peak of z^(k-1)(1-z) moved off (k-1)/k",
+         "theorem peak_k3 : PeakAt 36 3 24", "theorem peak_k3 : PeakAt 36 3 23"),
+        ("logistic b_3 = b_4 at a = 1/6 instead of 1/(k^2-k-1) = 1/5",
+         "bLogNum 1 3 * bLogDen 1 5 4 = bLogNum 1 4 * bLogDen 1 5 3",
+         "bLogNum 1 3 * bLogDen 1 6 4 = bLogNum 1 4 * bLogDen 1 6 3"),
+        ("the correctly signed P-MU difference claimed NOT to cross +-",
+         "theorem plus_sum_not_scpm : ¬ SCpmFrom 1 (fun Q => sumTo 2 (fun i => Kint 4 Gex i Q * wex i))",
+         "theorem plus_sum_not_scpm : ¬ SCpmFrom 1 (Dpmu 2 4 Gex wex)"),
+        ("Gumbel b_k claimed increasing",
+         "fracLt (bGumbelNum (k + 1)) (bGumbelDen (k + 1)) (bGumbelNum k) (bGumbelDen k)",
+         "fracLt (bGumbelNum k) (bGumbelDen k) (bGumbelNum (k + 1)) (bGumbelDen (k + 1))"),
+    ]
+    rejected = 0
+    with tempfile.TemporaryDirectory() as td:
+        for desc, before, after in mutations:
+            if before not in src_text:
+                print(f"      mutation target missing: {desc}")
+                continue
+            mpath = os.path.join(td, "mutant.lean")
+            with open(mpath, "w") as fh:
+                fh.write(src_text.replace(before, after, 1))
+            r = subprocess.run([lean, mpath], capture_output=True, text=True, timeout=900)
+            ok_rej = r.returncode != 0
+            rejected += ok_rej
+            print(f"      mutant [{'rejected' if ok_rej else 'ACCEPTED'}]: {desc}")
+    check("RD-L every mutated statement is rejected by Lean",
+          rejected == len(mutations),
+          f"{rejected} of {len(mutations)} mutants rejected")
+
+print()
 print("=" * 72)
 nf = sum(1 for _, ok in results if not ok)
 print(f"RYVKIN-DRUGOV SUMMARY: {len(results)} checks, {nf} failures")
 print("Scope: our READING of the source is arithmetically consistent, and the")
 print("P-MU correspondence is now computed rather than conjectured.")
-print("This does not reprove any result of the paper, and RD-6 records why")
-print("the correspondence does NOT yet yield a transferable theorem.")
+print("This does not reprove any result of the paper. RD-8 and the Lean block")
+print("record that the u'-role function in P-MU crosses +-, RD's orientation.")
 print("=" * 72)
 raise SystemExit(1 if nf else 0)

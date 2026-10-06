@@ -1,14 +1,20 @@
-# Notes — Levin & Smith (1994), pass 1
+# Notes — Levin & Smith (1994), passes 1 and 2
 
-Run: `python3 verify_ls.py` — **6 checks, 0 failures**.
+Running `python3 verify_ls.py` gives **11 checks, 0 failures** (pass 2,
+2026-10-06), LS-1 to LS-8 in SymPy and three LS-L checks for
+`LevinSmith.lean`.
 
-**Scope.** Our reading is arithmetically consistent **except for LS-H**, which
-is a substantive error and is set out below. Nothing here reproves any result
-of the paper.
+**Scope.** Pass 1 found one substantive error, LS-H, set out below, and
+LITERATURE.tex has since been corrected along the suggested lines. Pass 2
+adds findings F1 to F9 at the end of this file. Our reading is otherwise
+arithmetically consistent with the source. Nothing here reproves any result of
+the paper.
 
 **Source caveat.** The Drive PDF is a JSTOR scan with a text layer only on the
-cover page; pp. 585–599 were read as rendered images. Quotations are
-transcribed by eye and should be re-checked before being quoted in print.
+cover page; pp. 585–599 were read as rendered images. In pass 1 the quotations
+were transcribed by eye. Pass 2 re-checked every one against page images and
+against Drive's OCR text (TODO S2). The verdicts are in the re-check table
+below, and pass-1 quotations should be read through it.
 
 ---
 
@@ -28,7 +34,7 @@ model with `R^s = 0` is eq. (8):
 > `S(q, R^s, e) = [1 - (1-q)^N] V - qNc`
 
 and the paper continues: "with `∂S/∂q = N[(1-q)^{N-1}V − c]`, and
-`∂²S/∂q² < 0`. Thus, `e*` must induce entry such that at `q*`, `∂S/∂q`
+`∂²S/∂q² < 0` [printed `∂S²/∂q²`, pass 2 F2]. Thus, `e*` must induce entry such that at `q*`, `∂S/∂q`
 vanishes: **(9)** `(1-q*)^{N-1}V = c`."
 
 So (9) is the **social planner's first-order condition**, characterising the
@@ -105,6 +111,9 @@ preceding sentence and concerns Engelbrecht-Wiggans. Cite it as p.586, fn. 2.
 | LS-4 | CONSISTENT. `S` is strictly concave in `q`, so "excessive entry" has the precise meaning: equilibrium `q` above the peak, where `dS/dq < 0`. |
 | LS-5 | CONSISTENT. At `c/V = 1/4`: `q^s` falls (0.750 → 0.143) and `P(no entry)` rises (0.063 → 0.214) as `N` goes 2 → 10, matching Prop 8's stated monotonicities. |
 | LS-6 | CONSISTENT. The two equations are algebraically identical; the economic roles are opposite. |
+| LS-7 | CONSISTENT. Under a fixed prize eq. (18) fails by `V - W_n`; in the IPV families it holds. |
+| LS-8 | CONSISTENT (pass 2). At free entry `q·∂S/∂q = -Σ p_n[(V_n - W_n) - n(V_n - V_{n-1})]` for `N = 2..5`, with `V_0 = 0` load-bearing; for a fixed prize the right side is `-Σ_{n≥2} p_n(V - W_n)`. Our derivation, used as hypothesis `hslope` in Lean. |
+| LS-L | PASS (pass 2). `LevinSmith.lean` compiles; no `sorry`, `native_decide` or user axiom; 55 of 55 theorems audited, 5 axiom-free, 50 on `propext`/`Quot.sound` only, 0 other. |
 
 ## Bugs found and fixed during this pass
 
@@ -152,9 +161,344 @@ the argument it makes instead.
 `V − W_n`, while it holds exactly in the IPV families of LS-1. So the two
 branches are separated by a computation, not a judgement.
 
-**Consequence.** The entry_contest model is in the CV branch **by
-construction** — `PROOFS.tex` §Primitives fixes `V` exogenously, which *is*
+**Consequence** (qualified in pass 2, findings F3 and F4). The entry_contest
+model is in the CV branch **by construction** — `PROOFS.tex` §Primitives fixes `V` exogenously, which *is*
 `V_n ≡ V` — and the welfare section can cite p.596 rather than reasoning by
 analogy. It also isolates the single thing that would overturn the verdict: a
 prize that grew with participation would make `V_n` increase in `n` and could
 reinstate the IPV branch. The model does not do that.
+
+---
+
+# Pass 2 (2026-10-06), Lean formalisation and quotation re-check
+
+## Source read
+
+The Drive file is `entry.pdf`, id `1O_ZYYtuS1c5FiM7CJg8yhE0PFafIY1A7`. Its
+title page reads "Equilibrium in Auctions with Entry", Dan Levin and James L.
+Smith, *The American Economic Review*, Vol. 84, No. 3 (Jun., 1994), pp.
+585-599, a JSTOR download of 23 February 2007.
+
+`pdftotext` finds 176 words on PDF page 1, the JSTOR cover sheet, and none on
+PDF pages 2 to 16, which are journal pp. 585 to 599. Drive's text extraction
+returns an OCR of every page, in which the prose is legible and the displayed
+equations are garbled. All 945 lines of that OCR were read. All fifteen content
+pages were also rendered at 220 dpi and read in full as images, and p. 590 was
+re-rendered at 400 dpi for equations (8) and (9). No page was unreadable.
+Every quotation in this pass is taken from the page images, not from the OCR
+and not from pass 1.
+
+## What `LevinSmith.lean` formalises
+
+Core Lean 4, `namespace LevinSmith`, 55 theorems. It compiles with Lean
+4.34.1, the elan default that `verify_ls.py` finds on `PATH`, and with 4.33.1.
+It contains no `sorry`, no `native_decide`, no user axiom and no comments.
+Five theorems use no axiom, fifty use only `propext` and `Quot.sound`, and
+none uses anything else (LS-L).
+
+**Conventions.** Every quantity is an `Int`. Any rational instance of a
+statement here becomes an integer instance after multiplying through by a
+positive common denominator, and that preserves every equality and inequality
+used. Entry probabilities are points of an ordered grid (`Int`). Binomial
+weights such as `C(N−1,n−1) q^{n−1} (1−q)^{N−n} / n` enter as an abstract
+sequence `w n` with a sign hypothesis, and the identities linking those weights
+are proved separately for an explicit `binom`. Expectations, derivatives and
+the binomial distribution are not formalised. A theorem that needs the welfare
+derivative takes it as a hypothesis, `h8` for the paper's derivative of (8)
+and `hslope` for the free-entry slope, and `verify_ls.py` checks each
+hypothesis symbolically (LS-3 for `h8`, LS-8 for `hslope`).
+
+**The role distinction for eq. (9).** Write `alone` for `(1−q)^{N−1}V`. Then
+eq. (9) is the equation `alone = c` (`Eq9`), and the file reads it in two roles.
+
+- *Planner role.* Given the paper's derivative of (8),
+  `∂S/∂q = N[(1−q)^{N−1}V − c]`, the planner's first-order condition holds
+  exactly when (9) holds (`planner_foc_iff_eq9`).
+- *Reservation role.* Fu–Jiao–Lu's payoff from entering and bidding zero, which
+  wins only when no rival enters, is `alone − c`, so its zero is the same
+  equation (`reservation_iff_eq9`). Equilibrium entry lies weakly above that
+  zero (`reservation_bound_below_equilibrium`), which is the lower-bound role.
+
+The bidders' equilibrium condition is a third proposition. With `V_n = V` for
+`n ≥ 1`, `W_1 = 0` and `T_n = 1`, eq. (2) splits into `alone` plus the rent
+`G = Σ_{n≥2} w_n (V − W_n)` kept by entrants who meet a rival
+(`cv_payoff_split`). Free-entry equilibrium (6) at `e = 0` is therefore
+`alone + G − c = 0`, while (9) is `alone − c = 0`. The two hold together only
+if `G = 0` (`free_entry_not_eq9`). With `G > 0` the welfare slope is negative
+at free entry (`free_entry_slope_neg`), the planner's point lies strictly
+below the free-entry point (`free_entry_exceeds_planner`), and the fee that
+reconciles (6) with (9) is exactly `e = G`, which is (11) (`optimal_fee_eq_stealing`).
+Because (9) has one root when `alone` is strictly decreasing, the Fu–Jiao–Lu
+lower bound and the Levin–Smith optimum are the same point
+(`one_root_two_roles`). So the coincidence that LS-6 found in the algebra
+carries content. FJL's lower bound on equilibrium entry is LS's social optimum,
+and Prop 3 says free entry exceeds it.
+
+**The branch criterion of eq. (18).** Write `gap_n = (V_n − W_n) − n(V_n − V_{n−1})`,
+the failure of (18) at `n`. Fn. 16 gives (18) (`fn16_gives_eq18`), and (18)
+is the statement that `n` times the private gain equals `n` times the social
+gain (`eq18_iff_private_eq_social`). Under a fixed prize with `V_0 = 0`,
+(18) holds at `n = 1` (`fixed_prize_eq18_at_one`) and fails by exactly
+`V − W_n` at every `n ≥ 2` (`fixed_prize_eq18_gap`). The weighted failures sum
+to the business-stealing term `G` of Prop 3 (`fixed_prize_wedge_is_stealing`),
+which joins the CV route through (8) and (9) to the (18) route through (16)
+and (17).
+
+## Quotations used (from the page images)
+
+Equations are rendered in plain text, with `C(a,b)` for the printed binomial
+stack and `_` and `^` for sub- and superscripts.
+
+| Q | Page, locator | Verbatim |
+|---|---|---|
+| Q1 | p. 585, intro | "If there is room for only n < N bidders in the auction, the symmetric entry equilibrium involves mixed strategies: each potential bidder enters with probability q and stays out with probability 1 − q." |
+| Q2 | p. 586, intro | "Previous studies (Smith, 1982, 1984; Richard Engelbrecht-Wiggans, 1987, 1991; McAfee and McMillan, 1987b) assume that potential entrants use pure strategies, which produces a deterministic, asymmetric equilibrium in which exactly n bidders enter and N − n stay out.² The process by which potential bidders divide into these two groups is not explained." |
+| Q3 | p. 586, intro | "First, by introducing mixed entry strategies we restore full symmetry to the equilibrium, which seems natural if potential bidders are assumed to be identical." |
+| Q4 | p. 587, §I | "If E[π\|n,m] is decreasing in n, there exists a unique integer, n*, such that E[π\|n*,m] ≥ 0 > E[π\|n* + 1,m]." |
+| Q5 | p. 587, fn. 6 | "Requiring symmetry means that (1) is satisfied by a unique q*. In principle, many asymmetric equilibria may exist (e.g., the one where n* bidders enter with probability 1 and N − n* with probability zero). Similarly, if n* − 1 bidders enter with probability 1, there exists an entry probability 0 < q < 1 for the remaining N − n* + 1 bidders that would constitute equilibrium. However, we cannot have asymmetric equilibria in mixed strategies of the form 0 < q_i < q_j < 1 since (1) is identical for each bidder and strictly decreasing in q." |
+| Q6 | p. 587, after (1) | "The value q* that satisfies (1) characterizes equilibrium in mixed strategies. The number of actual bidders follows a binomial distribution with mean q*N = n̄ and variance (1 − q*)n̄ determined by m, N, and c." |
+| Q7 | p. 588, eq. (3) | "(3) B(q,Ω) = NqB_i(q,Ω) = [Σ_{n=1}^N p_n T_n(R_n)V_n − n̄c] − [Σ_{n=1}^N p_n T_n(R_n)W_n + n̄e] where p_n denotes the binomial probability that exactly n bidders enter in total." |
+| Q8 | p. 588, eq. (6) | "The bidder is content to use q* if and only if (6) B_i(q*,Ω) = 0 which defines the symmetric entry equilibrium, q* = q(Ω)." |
+| Q9 | p. 588, eq. (7) | "By definition, induced entry drives out all expected profit to the bidders. Thus, B(q*,Ω) = 0, and the seller's expected revenue constitutes total social welfare: (7) Π(q*,Ω) = S(q*,Ω)" |
+| Q10 | p. 589, proof of Prop 1 | "The social optimum is defined, for given N, by the set {q^s, R^s, e^s} that maximizes (5)." ... "By continuity we can, given R = 0, then select e* to induce q* = q^s." |
+| Q11 | p. 590, eqs. (8), (9) | "(8) S(q, R^s, e) = (1 − p_0)V − qNc = [1 − (1 − q)^N]V − qNc with ∂S/∂q = N[(1 − q)^{N−1}V − c], and ∂S²/∂q² < 0. Thus, e* must induce entry such that at q*, ∂S/∂q vanishes: (9) (1 − q*)^{N−1}V = c." |
+| Q12 | p. 590, Prop 3 | "PROPOSITION 3: In CV auctions the seller should discourage entry by charging a positive entry fee but no reservation price. Without the entry fee, entry would be excessive from social and private points of view." |
+| Q13 | p. 590, proof of Prop 3 | "We use the fact that q* depends on e through (6) to substitute for c in (9):" ... "We then solve (10) for e*, using the fact that W_1 = 0 to eliminate terms of order n = 1: (11) e* = Σ_{n=2}^N p_n(V − W_n)/n̄ > 0 with the inequality coming from individual rationality, which requires V − W_n ≥ 0 for all n." |
+| Q14 | p. 590, proof of Prop 3 | "Now, since e* > 0, R^s = 0 (which implies ∂q/∂e < 0), and since S(q,Ω) is concave in q and does not depend on e directly, we know that ∂S/∂q < 0 evaluated at R = e = 0." |
+| Q15 | p. 590, fn. 13 | "Since V ≥ W_n for all n, as long as W_n varies with n, e* is strictly positive in (11)." |
+| Q16 | p. 590, after Prop 3 | "That intuition applies here since the CV auction allocates an indivisible item, which makes the business-stealing effect paramount." |
+| Q17 | p. 592, eq. (18), fn. 16 | "(18) V_n − W_n = n(V_n − V_{n−1})." Fn. 16 ends "= nV_{n−1} − (n − 1)V_n which implies (V_n − W_n) = n(V_n − V_{n−1})." |
+| Q18 | pp. 592–593, proof of Prop 6 | "Since R^s = 0 by Proposition 1, we need only show that (16) vanishes at e = 0." ... "where the last equality is due to q(N − n)p_n/(1 − q) = (n + 1)p_{n+1}. We claim that (19) vanishes since V_0 = 0." |
+| Q19 | p. 593 | "When one bidder joins an IPV auction when n − 1 are present, the social gain is simply (V_n − V_{n−1} − c), whereas the individual bidder's gain is (V_n − W_n)/n − c. Due to (18), the two always coincide." |
+| Q20 | p. 595, proof of Prop 8 | "From (9), (1 − q^s_N)^{N−1} = c/V; thus q^s_N declines with N and (1 − q^s_N)^N = (1 − q^s_N)(c/V) must increase with N." |
+| Q21 | p. 596, §II | "In CV auctions, social gains are zero (and therefore smaller than social costs) for all n ≥ 2; thus reductions beyond n* are beneficial." |
+| Q22 | p. 588, eq. (2) | "(2) B_i(q,Ω) = Σ_{n=1}^N [C(N − 1, n − 1) q^{n−1}(1 − q)^{N−n} T_n(R_n)(V_n − W_n)/n] − (c + e)." |
+| Q23 | p. 585, intro; p. 586, Assumptions 1 and 4 | "There are N identical, potential bidders." "ASSUMPTION 1: The seller and all potential bidders are risk-neutral." "ASSUMPTION 4: The auction mechanism (m) and the number of potential bidders (N) are common knowledge, and the number of actual bidders is revealed prior to stage 2." |
+| Q24 | p. 586, §I and fn. 3; p. 587 | "an auction is conducted among n participants who have elected to incur the fixed cost (c) of entry." Fn. 3, "Expenditure c represents the cost of developing and evaluating private information, then preparing and delivering a formal bid." P. 587, "We denote by E[π\|n,m] each potential entrant's ex ante expected gain from entering, paying c, learning n, and bidding according to the symmetric Nash strategy implied by n and m." |
+| Q25 | p. 587, fn. 7 | "Samuelson's (1985) model of "interim" entry costs, which are not incurred until after each bidder learns his value, does screen low valuations." |
+| Q26 | p. 595, Corollary to Prop 9 | "COROLLARY: The expected revenue of any seller who uses his optimal mechanism increases monotonically as the number of potential bidders decreases toward n*." |
+
+## Lean theorems, claims, locators
+
+Kind is *result* for a formalised statement, *helper* for finite-sum or
+combinatorial infrastructure, *control* for a theorem showing a conclusion
+fails when a named hypothesis is dropped, and *witness* for a theorem showing
+the hypotheses of a result are jointly satisfiable.
+
+| Lean theorem | Claim | Locator | Quote | Kind |
+|---|---|---|---|---|
+| `binom_zero_right` | LS-C | p. 588, eq. (3) | Q7 | helper |
+| `binom_row_five` | LS-C | p. 588, eq. (3) | Q7 | witness that `binom` is the binomial coefficient |
+| `binom_zero_of_lt` | LS-C | p. 588, eq. (3) | Q7 | helper |
+| `binom_absorption` | LS-C, LS-E | p. 588, eq. (3); p. 590, (10) to (11) | Q7, Q13 | result. `n·C(N,n) = N·C(N−1,n−1)` turns the rival-count weights of (2) into `p_n/(qN)` |
+| `binom_ratio` | LS-F | p. 593, (19) | Q18 | result. `(N−n)·C(N,n) = (n+1)·C(N,n+1)`, the coefficient form of `q(N−n)p_n/(1−q) = (n+1)p_{n+1}` |
+| `cutoff_unique` | LS-B | p. 587 | Q4 | result |
+| `cutoff_exists` | LS-B | p. 587 | Q4 | result |
+| `pure_count_pinned` | LS-D, LS-J | p. 586 | Q2 | result, needs `E[π\|n*] > 0` |
+| `pure_identity_free` | LS-D, LS-J | p. 586 | Q2 | result |
+| `identities_not_pinned` | LS-D, LS-J | p. 586; p. 587, fn. 6 | Q2, Q5 | witness |
+| `control_knife_edge_count` | LS-J | p. 587 | Q4 | control |
+| `symmetric_root_unique` | LS-C | p. 587, fn. 6 | Q5 | result |
+| `sumTo_split` | LS-E | p. 590, (10) to (11) | Q13 | helper |
+| `sumTo_congr` | LS-F | p. 593 | Q18 | helper |
+| `sumTo_zero` | LS-F | p. 593 | Q19 | helper |
+| `sumFrom2_congr` | LS-E | p. 590, (11) | Q13 | helper |
+| `sumFrom2_nonneg` | LS-E | p. 590, (11) | Q13 | helper |
+| `sumFrom2_pos` | LS-E | p. 590, (11), fn. 13 | Q13, Q15 | helper |
+| `sumFrom2_zero_fn` | LS-E | p. 590, fn. 13 | Q15 | helper |
+| `cv_payoff_split` | LS-E, LS-H | p. 588, eq. (2); p. 590, (10) | Q22, Q13 | result |
+| `stealing_nonneg` | LS-E | p. 590, (11) | Q13 | result |
+| `stealing_pos` | LS-E | p. 590, (11), fn. 13 | Q13, Q15 | result |
+| `stealing_zero_of_full_extraction` | LS-E, LS-I | p. 590, fn. 13 | Q15 | control |
+| `planner_foc_iff_eq9` | LS-H | p. 590, (8), (9) | Q11 | result, planner role |
+| `reservation_iff_eq9` | LS-H | p. 590, (9); FJL Def. 1 | Q11 | result, reservation role |
+| `free_entry_not_eq9` | LS-H, LS-E | p. 588, (6); p. 590, (9) | Q8, Q11 | result |
+| `free_entry_slope_neg` | LS-E | p. 590, proof of Prop 3 | Q14 | result |
+| `optimal_fee_eq_stealing` | LS-E | p. 590, (10), (11) | Q13 | result |
+| `optimal_fee_pos` | LS-E | p. 590, Prop 3 | Q12 | result |
+| `free_entry_exceeds_planner` | LS-E, LS-H | p. 590, Prop 3 | Q12, Q14 | result |
+| `reservation_bound_below_equilibrium` | LS-H | FJL Def. 1, read through p. 590 | Q11 | result, reservation role |
+| `one_root_two_roles` | LS-H | p. 590, (9); p. 595 | Q11, Q20 | result |
+| `control_no_stealing` | LS-H, LS-I | p. 590, fn. 13 | Q15 | control |
+| `control_needs_concavity` | LS-E | p. 590 | Q11 | control |
+| `seller_revenue_is_welfare` | LS-H | p. 588, (7) | Q9 | result |
+| `prop1_fee_attains_planner` | LS-H | p. 589, proof of Prop 1 | Q10 | result |
+| `prop8_no_entry` | LS-G | p. 595, proof of Prop 8 | Q20 | result, the algebraic step only |
+| `fn16_gives_eq18` | LS-F | p. 592, fn. 16 | Q17 | result |
+| `eq18_iff_private_eq_social` | LS-F | p. 593 | Q19 | result |
+| `fixed_prize_eq18_gap` | LS-I | p. 592, (18); p. 596 | Q17, Q21 | result |
+| `fixed_prize_eq18_iff` | LS-I | p. 592, (18) | Q17 | result |
+| `fixed_prize_eq18_fails` | LS-I | p. 592, (18); p. 596 | Q17, Q21 | result |
+| `control_fixed_prize_full_extraction` | LS-I | p. 592, (18) | Q17 | control |
+| `fixed_prize_eq18_at_one` | LS-I | p. 593 | Q18 | result |
+| `fixed_prize_social_gain` | LS-I | p. 596 | Q21 | result |
+| `fixed_prize_private_exceeds_social` | LS-I, LS-K | p. 593; p. 590 | Q19, Q16 | result |
+| `eq18_everywhere_zero_wedge` | LS-F | pp. 592–593 | Q19 | result |
+| `fixed_prize_wedge_is_stealing` | LS-I, LS-E | p. 590, (11); p. 592, (18) | Q13, Q17 | result |
+| `cv_free_entry_excessive` | LS-I, LS-K | p. 590; p. 596 | Q14, Q21 | result |
+| `ipv_free_entry_optimal` | LS-F | p. 592, Prop 6 | Q18 | result |
+| `witness_cv_chain` | LS-I | p. 590, (11) | Q13 | witness |
+| `witness_ordering` | LS-E | p. 590, Prop 3 | Q12 | witness |
+| `control_wedge_zero_without_eq18` | LS-F, LS-I | pp. 592–593 | Q18 | control |
+| `sumTo_shift` | LS-F | p. 593 | Q18 | helper |
+| `eq19_vanishes` | LS-F | p. 593 | Q18 | result |
+
+## Controls and witnesses
+
+Each control names the hypothesis dropped and the conclusion that then fails.
+
+| Control | Drops | Shows |
+|---|---|---|
+| `control_knife_edge_count` | `0 < E nstar` in `pure_count_pinned` | With `E[π\|2] = 0`, pure equilibria with 1 and with 2 entrants coexist, so the count is not pinned at the knife edge that the paper's `≥ 0 >` definition admits. |
+| `control_needs_concavity` | `Anti A` in `free_entry_exceeds_planner` | With `alone` rising in `q`, the free-entry point lies below the planner's. The paper's `∂S²/∂q² < 0` carries the ordering. |
+| `control_no_stealing` | `0 < G` in `free_entry_not_eq9` | With `W_n = V` for all `n ≥ 2`, free-entry (6) and (9) are the same equation under a fixed prize. |
+| `stealing_zero_of_full_extraction` | `W m < V` in `stealing_pos` | The rent term vanishes when entrants who meet a rival keep nothing. |
+| `control_fixed_prize_full_extraction` | `W n < V` in `fixed_prize_eq18_fails` | (18) holds under a fixed prize when `W_n = V`. |
+| `control_wedge_zero_without_eq18` | (18) at every `n` in `ipv_free_entry_optimal` | Weights (1, 2, 1), `V = (0, 4, 6, 7)`, `W = (·, 0, 1, 6)` give a zero weighted sum of failures while (18) fails at `n = 2` and `n = 3`. |
+
+`witness_cv_chain` satisfies every hypothesis of `cv_free_entry_excessive` with
+`N = 3`, `V = 6`, `W = (0, 2, 4)`, unit weights, and gets
+`wedge = stealing = 6`. `witness_ordering` satisfies the hypotheses of
+`free_entry_exceeds_planner` and `reservation_bound_below_equilibrium`.
+`identities_not_pinned` satisfies those of `pure_count_pinned` with `n* = 1`.
+
+LS-8 has its own control. With `V_0` left free, the slope identity leaves the
+residual `N·V_0·q·(1−q)^{N−1}`, so `V_0 = 0`, which is the paper's "(19)
+vanishes since V_0 = 0", is load-bearing.
+
+The wiring can fail too. A scratch copy of the suite with a theorem proved by
+`sorry` and one proved by `Classical.em` reported 2 failures, naming
+`sorryAx` and `Classical.choice`.
+
+## Quotation re-check (TODO S2)
+
+| Quotation in our documents | Where | Verdict against the page image |
+|---|---|---|
+| (8) `S(q, R^s, e) = [1 - (1-q)^N] V - qNc` | NOTES pass 1, verify LS-3 | Correct. The printed display has a middle form `(1 − p_0)V − qNc`, elided without a mark. |
+| "with ∂S/∂q = N[(1-q)^{N-1}V − c], and ∂²S/∂q² < 0. Thus, e* must induce entry such that at q*, ∂S/∂q vanishes: (9) (1-q*)^{N-1}V = c" | NOTES pass 1 | Verbatim except that the page prints `∂S²/∂q²` (F2). |
+| (9) `(1−q)^{N−1}V = c` | LITERATURE.tex line 415; CLAIMS LS-H | The page prints `q*`, not bare `q` (F1). |
+| "From (9), (1-q^s_N)^{N-1} = c/V; thus q^s_N declines with N" and the longer form in LS-5 | NOTES pass 1, LITERATURE.tex line 421, verify LS-5 | Verbatim, p. 595. |
+| "PROPOSITION 9: The level of social welfare generated by optimal auctions decreases monotonically as N increases beyond n*." | NOTES pass 1, RECONSTRUCTION | Verbatim, p. 595. |
+| Propositions 3, 6, 8 and the Corollary to Prop 9 | RECONSTRUCTION | Verbatim, pp. 590, 592, 594, 595. |
+| "The process by which potential bidders divide into these two groups is not explained" | NOTES pass 1; LITERATURE.tex lines 348–352 paraphrase | Verbatim, p. 586 main text. Footnote 2 is attached to the preceding sentence (F6). |
+| "In CV auctions, social gains are zero (and therefore smaller than social costs) for all n ≥ 2" | NOTES pass 1, LITERATURE.tex line 400, verify LS-7 | Verbatim, p. 596, cut before "; thus reductions beyond n* are beneficial." |
+| "the social gain is simply (V_n - V_{n-1} - c), whereas the individual bidder's gain is (V_n - W_n)/n - c. Due to (18), the two always coincide." | verify LS-2 | Verbatim, p. 593. |
+| (1), (2) to (7), (11), (18) and fn. 16 | RECONSTRUCTION | Match the printed displays. |
+| "If E[π\|n,m] is decreasing in n" | RECONSTRUCTION §5 | Verbatim, p. 587. |
+| Fn. 24, "might prefer n*+1 potential bidders to n*, but never more" | RECONSTRUCTION | Verbatim, p. 596. |
+| FJL Definition 1 and its gloss | NOTES pass 1, verify LS-6 | Not this paper. Not re-read in this pass. The reservation role in Lean rests on that reading. |
+
+## Findings
+
+**F1. Eq. (9) is printed in `q*`.** LITERATURE.tex lines 415–422 write (9) as
+`(1−q)^{N−1}V = c` and call it "not an entry-equilibrium condition". The page
+(Q11) prints `(1 − q*)^{N−1}V = c`, introduced by "e* must induce entry such
+that at q*, ∂S/∂q vanishes", and p. 589 (Q10) sets `e*` "to induce q* = q^s".
+So (9) is the planner's first-order condition imposed on the equilibrium that
+the optimal fee induces. The survey's role claim survives, because the
+free-entry equilibrium at `e = 0` is a different `q*`, and (9) fails there
+whenever `G > 0` (`free_entry_not_eq9`). The survey should carry the star, or
+say "at the equilibrium induced by `e*`", so that a reader who opens p. 590
+does not find `q*` in the equation the survey calls non-equilibrium. The
+falsifier would be (6) and (9) holding together at `e = 0` with `G > 0`, and
+`free_entry_not_eq9` rules it out.
+
+**F2. `∂S²/∂q²` is printed.** Pass 1 quotes `∂²S/∂q² < 0` as verbatim, while
+p. 590 prints `∂S²/∂q² < 0`. A quotation in print must reproduce the printed
+form with [sic], or paraphrase.
+
+**F3. "Exactly when" is stronger than the paper.** LITERATURE.tex lines 395–397
+say "Proposition~6 holds exactly when equation~(18) holds". The proof of
+Prop 6 (Q18) uses (18) to make (19) vanish, so the paper establishes (18) as a
+sufficient condition and states no converse. LS-8 verifies for `N = 2..5`
+that at free entry `q·∂S/∂q = −Σ p_n gap_n`. Free entry therefore meets the
+first-order condition when the weighted sum of failures is zero, not only when
+every failure is zero. `control_wedge_zero_without_eq18` gives a zero weighted
+sum with (18) false at `n = 2` and `n = 3`. The fixed-prize verdict survives,
+because under a fixed prize every failure equals `V − W_n ≥ 0`, all of one
+sign, so the weighted sum is zero only if every weighted failure is
+(`cv_free_entry_excessive`). A wording the page supports is "Proposition 6
+follows from equation (18), and a fixed prize violates (18) at every `n ≥ 2`
+at which entrants keep rent." The falsifier would be a converse stated
+somewhere in the paper. No converse appears on pp. 592–596.
+
+**F4. A fixed prize alone does not deliver excessive entry.** LITERATURE.tex
+lines 405–406 say "Only a prize that grew with participation could reinstate
+Proposition~6", and pass 1 (Consequence) and RECONSTRUCTION §6 say the same.
+A fixed prize with `W_n = V` for every `n ≥ 2` also makes free entry optimal.
+Entrants who meet a rival then keep no rent, so `G = 0` and free-entry (6) is
+eq. (9) (`control_no_stealing`, `control_fixed_prize_full_extraction`). The
+excessive-entry verdict needs `V − W_n > 0` at some `n ≥ 2` with positive
+weight, which is hypothesis `hm` of `cv_free_entry_excessive`. The paper's own
+positivity condition, fn. 13 (Q15), is "as long as W_n varies with n". Read
+literally, fn. 13 is met by `W_1 = 0` and `W_n = V` for `n ≥ 2`, where (11)
+gives `e* = 0`. So the operative condition is `W_n < V` for some `n ≥ 2`. As
+an inference not checked in the paper, Assumption 6 does not rule this case
+out, since an entrant's profit `(V − W_n)/n` then falls from `V` at `n = 1` to
+0 thereafter, a negative correlation with rivals. For the welfare section the
+condition to state is that entrants beyond the first keep positive expected
+rent. The prize being fixed is not enough on its own. The falsifier would be a
+result in the paper forcing `W_n < V` in every CV auction, and none appears.
+
+**F5. Business stealing is the paper's intuition, and the proof runs through the
+fee.** LITERATURE.tex lines 389–390 say free entry is excessive "by a
+business-stealing argument (Proposition~3, citing \citet{MankiwWhinston1986})". The
+proof (Q14) runs through `e* > 0`, `∂q/∂e < 0` and concavity of `S`, and the
+business-stealing sentence (Q16) follows the proof as intuition.
+`optimal_fee_eq_stealing` shows the two coincide formally, since `e*` equals
+the rent kept by entrants who meet a rival. This is a matter of precision, not
+an error. The citation stands if it reads "which the paper interprets as
+business stealing".
+
+**F6. Footnote 2 covers three authors.** LITERATURE.tex lines 349–350 say
+footnote 2 "concerns Engelbrecht-Wiggans". On p. 586 it concerns
+Engelbrecht-Wiggans (1987), Hausch (1988) and Harstad (1990).
+
+**F7. The count is pinned for pure strategies only, and only at a strict
+margin.** PROOFS.tex lines 572–575 describe identical-agent entry as the case "where
+the entrant count is pinned but the identities are not". Fn. 6 (Q5) exhibits an
+equilibrium with `n* − 1` sure entrants and the rest mixing, whose count is
+random. Among pure equilibria the count is pinned when `E[π|n*,m] > 0`
+(`pure_count_pinned`), and at `E[π|n*,m] = 0` two pure counts coexist
+(`control_knife_edge_count`). Mixed entry restores symmetry by making the
+count stochastic, and it does not pin identities. LITERATURE.tex lines
+346–356 already say "pure-strategy count" and "the number of entrants becomes
+stochastic", so PROOFS.tex needs the word "pure-strategy".
+
+**F8. Stale rows in CLAIMS.md, now updated.** LS-D still attributed the p. 586
+sentence to footnote 2, and LS-H still recorded the superseded
+reservation-condition reading. Both now carry the current LITERATURE.tex
+text. The source caveat said pp. 586–599 lacked a text layer, while the PDF
+lacks one on pp. 585–599.
+
+**F9. Locators.** Assumptions 1 to 4 are on p. 586, and Assumption 5 and
+fn. 7 on p. 587, so the CLAIMS.md locator "pp. 586–587, Assumptions 1–4" was
+corrected. Eq. (18) and fn. 16 are on p. 592, and the private-equals-social
+sentence on p. 593. Prop 8 is on p. 594 with its proof on p. 595, and Prop 9
+on p. 595. The p. 596 sentence sits in §II, where it supports cutting `N`
+below `n*` in CV auctions. Our use of it, that the marginal entrant's social
+gain is zero for `n ≥ 2`, is its literal content.
+
+## Attributed claims not formalised in Lean
+
+- **LS-A.** Assumptions and the ex ante timing of `c` are interpretation, not
+  mathematics, and are verified by quotation (Q23, Q24, Q25).
+- **LS-G beyond the algebraic step.** That `q^s_N` falls and
+  `(1 − q^s_N)^N` rises in `N` needs real roots of (9), and Prop 9 needs
+  eqs. (20) and (21) and fn. 23. LS-5 checks the monotonicities numerically at
+  `c/V = 1/4`.
+- **LS-L.** The Corollary to Prop 9 (Q26) is a revenue comparison across `N`
+  with the same analytic content as Prop 9. The survey's "unlike Levin–Smith"
+  contrast is verified by quotation only. Q26 says revenue under the optimal
+  mechanism rises as `N` falls toward `n*`, which is a monotone relation, so
+  the contrast with "may rise or fall" holds beyond `n*` and under an optimal
+  mechanism.
+- **The welfare derivatives.** `∂S/∂q` from (8) and the free-entry slope enter
+  Lean as hypotheses and are checked in SymPy (LS-3, LS-8).
+- **The FJL side of LS-H.** Definition 1's text belongs to
+  `lit/fu_jiao_lu_2015/` and was not re-read here.
+- **LS-I as applied to entry_contest.** Whether entrants beyond the first keep
+  positive rent in the entry_contest model (F4) is a question about our model,
+  not about the paper.
+- Lemma 1, Appendices A and B, and Propositions 2, 4, 5 and 7 are not
+  attributed by our documents in a load-bearing way.

@@ -1,3 +1,9 @@
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+
 import sympy as sp
 
 results = []
@@ -8,6 +14,7 @@ def check(name, ok, detail=""):
     print(f"[{'PASS' if ok else 'FAIL'}] {name}" + (f"   {detail}" if detail else ""))
 
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 v = sp.symbols("v", positive=True)
 q = sp.symbols("q", nonnegative=True)
 V, c = sp.symbols("V c", positive=True)
@@ -16,7 +23,8 @@ Nn = sp.symbols("Nn", integer=True, positive=True)
 print("=" * 72)
 print("Levin & Smith (1994), 'Equilibrium in Auctions with Entry'")
 print("American Economic Review 84(3), June 1994, pp. 585-599.")
-print("Checks of OUR READING.  Read from the JSTOR scan (no text layer).")
+print("Checks of OUR READING.  JSTOR scan: the PDF's text layer covers the cover")
+print("sheet only; pp. 585-599 were read as page images and against Drive's OCR.")
 print("=" * 72)
 print()
 
@@ -145,7 +153,8 @@ print()
 print("LS-6  Fu-Jiao-Lu Definition 1 has the same ALGEBRA, different meaning")
 print("-" * 72)
 print("      FJL Def 1 (p.396): q_0 solves (1-q)^{M-1} V - Delta = 0.")
-print("      LS eq (9):         (1-q^s)^{N-1} V = c.")
+print("      LS eq (9), p.590:  (1-q*)^{N-1} V = c, printed with q*, the")
+print("                         equilibrium that e* induces, set to q^s (p.589).")
 Delta = sp.symbols("Delta", positive=True)
 fjl = (1 - q) ** (Nn - 1) * V - Delta
 ls9 = (1 - q) ** (Nn - 1) * V - c
@@ -166,10 +175,11 @@ print("LS-7  The CV/IPV branch criterion: does V_n vary with n?")
 print("-" * 72)
 print("      p.596: 'In CV auctions, social gains are zero (and therefore")
 print("      smaller than social costs) for all n >= 2.'  With a prize fixed")
-print("      at V, V_n = V for every n, so the social gain from the marginal")
-print("      entrant is V_n - V_{n-1} = 0 while the social cost is c > 0.")
-print("      This is what puts entry_contest in the CV branch: by construction")
-print("      (V exogenous and fixed), not by resemblance.")
+print("      at V, V_n = V for every n >= 1 (V_0 = 0, p.593), so the social")
+print("      gain from the marginal entrant is V_n - V_{n-1} = 0 for n >= 2")
+print("      while the social cost is c > 0. The failure V - W_n is strict only")
+print("      where W_n < V; Lean control_fixed_prize_full_extraction shows that")
+print("      W_n = V restores eq (18) under a fixed prize. See NOTES.md pass 2.")
 Wsym = sp.symbols("W", positive=True)
 # Fixed prize: V_n = V for all n.
 social_cv = sp.simplify(V - V)  # V_n - V_{n-1}
@@ -186,6 +196,101 @@ for name, F in fams:
 check("LS-7 eq (18) fails under a fixed prize, holds under IPV",
       bool(social_cv == 0 and wedge == V - Wsym and ipv_holds),
       "so Prop 3 governs a fixed-prize contest and Prop 6 does not")
+
+print()
+print("LS-8  Free-entry welfare slope = minus the weighted failure of eq (18)")
+print("-" * 72)
+print("      From (15)/(16) with c eliminated by (17), the free-entry condition:")
+print("      q * dS/dq = -sum_n p_n [(V_n - W_n) - n(V_n - V_{n-1})], V_0 = 0.")
+print("      This is the hypothesis `hslope` of the Lean theorems")
+print("      cv_free_entry_excessive and ipv_free_entry_optimal. It is our")
+print("      derivation from (16), (17) and the (19) chain, not a display in")
+print("      the paper. Control: with V_0 left free the identity must break.")
+cq = sp.symbols("q", positive=True)
+ls8_ok = True
+ls8_ctrl = True
+ls8_cv = True
+rows = []
+for Nv in range(2, 6):
+    Vs = [sp.Integer(0)] + list(sp.symbols(f"V1:{Nv + 1}"))
+    Ws = [sp.Integer(0)] + list(sp.symbols(f"W1:{Nv + 1}"))
+    pn = [sp.binomial(Nv, n) * cq**n * (1 - cq) ** (Nv - n) for n in range(Nv + 1)]
+    c_eq17 = sum(pn[n] * (Vs[n] - Ws[n]) for n in range(1, Nv + 1)) / (cq * Nv)
+
+    def wedge_of(Vseq):
+        return sum(pn[n] * ((Vseq[n] - Ws[n]) - n * (Vseq[n] - Vseq[n - 1]))
+                   for n in range(1, Nv + 1))
+
+    def slope_of(Vseq):
+        S15 = sum(pn[n] * Vseq[n] for n in range(1, Nv + 1)) - cq * Nv * c
+        return sp.diff(S15, cq).subs(c, c_eq17)
+
+    ok = sp.expand(sp.cancel(cq * slope_of(Vs) + wedge_of(Vs))) == 0
+    V0 = sp.symbols("V0")
+    Vfree = [V0] + Vs[1:]
+    resid = sp.expand(sp.cancel(cq * slope_of(Vfree) + wedge_of(Vfree)))
+    S8 = (1 - (1 - cq) ** Nv) * V - cq * Nv * c
+    c_cv = sum(pn[n] * (V - Ws[n]) for n in range(1, Nv + 1)) / (cq * Nv)
+    lhs = sp.cancel(cq * sp.diff(S8, cq).subs(c, c_cv).subs(Ws[1], 0))
+    rhs = -sum(pn[n] * (V - Ws[n]) for n in range(2, Nv + 1))
+    cv = sp.expand(lhs - rhs) == 0
+    ls8_ok &= ok
+    ls8_ctrl &= resid != 0
+    ls8_cv &= cv
+    rows.append(f"N={Nv}:{'ok' if ok else 'MISMATCH'}/ctrl {'breaks' if resid != 0 else 'HOLDS'}"
+                f"/CV {'ok' if cv else 'MISMATCH'}")
+print("      " + "  ".join(rows))
+check("LS-8 q*dS/dq = -sum p_n gap_n at free entry, V_0 = 0 load-bearing",
+      bool(ls8_ok and ls8_ctrl and ls8_cv),
+      "fixed prize: equals -sum_{n>=2} p_n (V - W_n), the business-stealing term")
+
+print()
+print("LS-L  Lean: LevinSmith.lean (planner vs equilibrium, eq (9) roles, eq (18))")
+print("-" * 72)
+ALLOWED_AXIOMS = {"propext", "Quot.sound"}
+lean = shutil.which("lean")
+if lean is None:
+    check("LS-L LevinSmith.lean compiles", False, "lean not on PATH")
+else:
+    src = os.path.join(HERE, "LevinSmith.lean")
+    text = open(src).read()
+    ver = subprocess.run([lean, "--version"], capture_output=True, text=True).stdout.strip()
+    print(f"      {ver}")
+    p = subprocess.run([lean, src], capture_output=True, text=True)
+    out = (p.stdout + p.stderr).strip()
+    check("LS-L LevinSmith.lean compiles with no errors", p.returncode == 0, out[:200])
+    banned = [tok for tok in ("sorry", "native_decide") if re.search(rf"\b{tok}\b", text)]
+    banned += ["axiom declaration"] if re.search(r"^\s*axiom\s", text, re.M) else []
+    banned += ["sorry warning"] if re.search(r"declaration uses .sorry.", out) else []
+    n_sorry = len(re.findall(r"\bsorry\b", text))
+    check("LS-L no sorry, no native_decide, no user axiom", not banned,
+          ", ".join(banned) if banned else "")
+    names = re.findall(r"^\s*(?:theorem|lemma)\s+([A-Za-z0-9_']+)", text, re.M)
+    with tempfile.TemporaryDirectory() as td:
+        audit = os.path.join(td, "audit.lean")
+        with open(audit, "w") as fh:
+            fh.write(text)
+            fh.write("\n")
+            for n in names:
+                fh.write(f"#print axioms LevinSmith.{n}\n")
+        aout = subprocess.run([lean, audit], capture_output=True, text=True).stdout
+    found = {}
+    for m in re.finditer(r"'LevinSmith\.([A-Za-z0-9_']+)' (does not depend on any axioms|"
+                         r"depends on axioms: \[([^\]]*)\])", aout):
+        axs = set(a.strip() for a in m.group(3).split(",")) if m.group(3) else set()
+        found[m.group(1)] = axs
+    audited = sum(1 for n in names if n in found)
+    none = sum(1 for n in names if n in found and not found[n])
+    bad = {n: sorted(found[n] - ALLOWED_AXIOMS) for n in names
+           if n in found and found[n] - ALLOWED_AXIOMS}
+    print(f"      theorems: {len(names)}; audited: {audited}; sorry: {n_sorry}; "
+          f"axiom-free: {none}; propext/Quot.sound only: {audited - none - len(bad)}; "
+          f"other: {len(bad)}")
+    for n, axs in bad.items():
+        print(f"      UNEXPECTED AXIOMS in {n}: {axs}")
+    check("LS-L axiom audit covers every declared theorem, core axioms only",
+          audited == len(names) and len(names) > 0 and not bad,
+          "allowed: none, propext, Quot.sound")
 
 print()
 print("=" * 72)

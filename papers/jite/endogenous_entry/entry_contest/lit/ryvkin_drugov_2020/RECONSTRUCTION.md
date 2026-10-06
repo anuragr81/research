@@ -63,7 +63,8 @@ which is log supermodular. With `u = f` unimodal, `u' = f'` is single crossing
 **Proposition 1** extends this to stochastic size under log-supermodularity of
 `−G̃_θ`; **Corollary 2** applies it to the PSD family.
 
-**Aggregate effort is a different object.** p.1593: with quadratic cost,
+**Aggregate effort is a different object.** p.1589 and pp.1601–1602, eq. (11)
+(locator corrected in pass 2; pass 1 had p.1593): with quadratic cost,
 aggregate effort is `E(h(X_{(k−1:k)}))` where `h` is the **failure (hazard)
 rate** and `X_{(k−1:k)}` is the **second-highest** of `k` draws.
 
@@ -109,6 +110,10 @@ comparison — is RD's kernel. That is worth stating on its own.
 `∂² log[z^{n−1}(1−z)]/∂z∂n ≥ 0`; the cross-partial is `1/z > 0` on `(0,1)`
 (RD-5). The extra factor `F` does not involve `Q`, so it contributes nothing to
 the cross-partial and the property is inherited.
+
+*[Pass 2: the next paragraph and the Conclusion are superseded by finding F1
+in `NOTES.md`. Keeping the leading minus sign of the P-MU identity puts `F·φ′`
+in the role of `u′`, and `F·φ′` crosses `+−`, RD's orientation.]*
 
 **Hypothesis 2 does not.** RD need the integrand playing the role of `u'` to be
 single crossing **`+−`**. Ours is `F·(f−g) = −F·φ'` with `φ = G−F ≥ 0`

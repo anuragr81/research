@@ -18,11 +18,109 @@ cited in the new propositions audited against the generated evidence and the
 source. Open queue is now N5, W1, R2, R3, M1 and the Later items. **A1 and V1 closed
 2 Sep**, along with open item 3 (the tail-condition band) and the
 burden-monotonicity restatement; see Recently closed. Lean is at 52 theorems,
-0 sorry, 52/52 axiom-audited, 36 axiom-free; `verify.sh` runs 10 suites (suite 10 is doc consistency, added on review).
+0 sorry, 52/52 axiom-audited, 36 axiom-free; `verify.sh` runs 11 suites
+since 6 Oct (suite 9 is the measurement map, suite 11 doc consistency), and
+fails on sorry or on any axiom outside propext and Quot.sound.
+
+Updated 6 October 2026 after the first literature Lean pass (item L1). The
+goal order is fixed by the author. First establish novelty, then verify the
+paper's claims, and only then write the manuscript.
 
 ---
 
 ## Now
+
+- [!] **L1. Literature Lean pass, 6 Oct 2026. Decisions for Anurag.** Ten
+  paper directories gained a core-only Lean file and a measuring audit
+  (`lit/COVERAGE.md` has the counts). Each source was read in full, and each
+  directory's `NOTES.md` carries the quotes, pages and findings. The findings
+  below are against our own documents, which were left unedited. "Checked"
+  means I read the passage in the source myself; "agent" means it rests on the
+  agent's reading and its Lean or SymPy check, without my re-reading.
+  Novelty-bearing, in order of consequence.
+  0. **P-MU's single-crossing orientation is a dropped minus sign** (our own
+     mathematics, not a reading of a source). `PROOFS.tex` l.1545 gives
+     D(Q) = -int G^(Q-1)(1-G) F (f-g). Since f-g = -phi', that is
+     D(Q) = +int G^(Q-1)(1-G) (F phi'), and with phi hump-shaped F phi'
+     crosses +- , the orientation Ryvkin-Drugov's Karlin step uses (their
+     p.1615). The "reversed orientation" sentence (l.1568-1571, l.1825,
+     `LITERATURE.tex` l.1096-1101) is therefore wrong, and the "interior
+     minimum" target of open item 5 and of R2 points the wrong way. Checked
+     independently with F = x^4, G = 1-(1-x)^5 (F <= G, one interior peak of
+     phi). D(Q) is +1/9009, +106/2909907, then negative for Q = 3 to 6, so
+     Delta(0,.) rises then falls. Not proven, and needed before any
+     unimodality claim, is that phi is single-peaked for the model's induced
+     F and G. Lean `pmu_orientation` and SymPy RD-8 in
+     `lit/ryvkin_drugov_2020/`.
+  1. **The reconciliation paragraph** (`PROOFS.tex` §Contribution, and the
+     P9 "Why this matters" paragraph). CMP 1992 §IV.A compares men "with the
+     same initial income level in two different economies", finds savings
+     falling for "men in the top half of the distribution", and states the
+     result as "will tend to" with "all other things being equal" (p.1103).
+     The effect runs through rivals' wealth via matching, which
+     Proposition (anonymity) excludes from our model. What is shared is the
+     direction, not the mechanism, so "recovered as the below-pivot branch"
+     overclaims. Checked.
+  2. **Uncited entry papers found in MOS 2012 p.442.** Fullerton and McAfee
+     (1999), "Auctioning entry into tournaments", JPE 107, 573-605, with
+     heterogeneous agents and entry by auction. Mathews and Namoro (2008),
+     "Participation incentives in rank-order tournaments with endogenous
+     entry". Corcoran (1984) and Corcoran and Karels (1985), the long-run
+     rent-seeking entry model MOS call theirs a version of. None is in
+     `refs.bib`. Any of them may bear on what P5 and the sign rule can claim.
+     PDFs needed. Citation checked.
+  3. **Costrell-Loury Proposition 10 reverses Proposition 6 only for concave
+     beta** (draft p.28, "under concave b(.)", "for concave beta(.)"). Under
+     convex beta both narrow the span. `PROOFS.tex` l.1250-1252 and
+     l.1678-1680 state the reversal without the condition. Checked.
+  4. **What Costrell-Loury sign.** A non-decreasing weight signs output
+     (Proposition 5); the wage span (Proposition 6) needs the curvature of
+     beta. `PROOFS.tex` l.1316-1318 and l.1433-1439 describe them as signing
+     a wage schedule under a general spread. Agent.
+  5. **P7's distinctions from Fu-Lu.** In Fu-Lu's own model N C <= Gamma_0
+     holds at every feasible contest, and their count is pure-strategy and
+     deterministic (pp.6-7, fn.6). Two of the three things `PROOFS.tex` §P7
+     says distinguish P7 therefore separate it from FJL only. The ledger
+     already says P7 does not survive; the prose overclaims. Agent.
+  6. **The Schroyen-Treich separator holds for m in (0, 2^(-1/2)) and fails
+     above it** (at m = 4/5 CARA and log agree). The u'' against u''' contrast
+     should carry the range. Checked by hand from the Theorem 3 condition.
+  7. **Moreno-Wooders.** The common threshold comes from the symmetric
+     equilibrium, not from private information (p.320); `PROOFS.tex`
+     l.557-560 says "because under private information". Their Proposition 3
+     is a constrained optimum (p.320, "W* is a constrained maximum"), which
+     matters for the welfare pre-emption in W1. Both checked. "No comparative
+     statics in H anywhere" in `LITERATURE.tex` is false as worded, though the
+     paper never signs a spread of H at fixed N (agent).
+  8. **Levin-Smith, for W1.** "Proposition 6 holds exactly when (18) holds" is
+     stronger than the paper, which shows sufficiency. A fixed prize where an
+     entrant meeting a rival keeps no rent also makes free entry optimal, so
+     W1 needs V - W_n > 0 for some n >= 2 as a hypothesis. Business stealing
+     is their intuition, not their proof (p.590). `PROOFS.tex` l.572-575
+     should say pure-strategy count, since fn.6 has a hybrid equilibrium with
+     a random count. Agent.
+  Wording and locator fixes, listed in each directory's `NOTES.md`. Suen
+  (`PROOFS.tex` l.1795-1796 names log-concavity and omits concavity; the
+  source has a sign misprint in eq. (6), p.154). CMP (qualifiers and
+  conditions dropped in `LITERATURE.tex`, two wrong locators). Costrell-Loury
+  ("crossing point" where the paper says "tail", Lemma 1's location). MOS
+  (conditions P > F > P/N^2 and sqrt(P/F) non-integer dropped; observability
+  of entry omitted at `PROOFS.tex` l.575). Lazear-Rosen ("makes the rich
+  prefer" where the paper says "more likely"; "asymmetric information"
+  attached to a section with known types; an agent recomputation of Table 1
+  that I have not reproduced). Levin-Smith (eq. (9) carries a star; one eye
+  transcription corrected). Moreno-Wooders ("when interior" dropped;
+  "proportional" where we say "equals"; stale paragraphs in `LITERATURE.tex`
+  l.531-534, l.1044-1047, l.1124-1126). `lit/TRACEABILITY.md` rows 5 and 9
+  are stale.
+  Coverage gaps carried to the next pass. The Hopkins-Kornienko Lean covers
+  HK 2010 Definition 1 only, so HK 2004 and 2009 claims have no Lean.
+  `Shaked1982` is cited twice in `PROOFS.tex` with no source read. The 41
+  works cited only in `LITERATURE.tex` have no directory, and most have no
+  PDF on Drive. Moreno-Wooders checks MW-3 and MW-5 cannot fail (flagged by
+  the agent, left unchanged).
+  - Done when each numbered item has the author's decision recorded and,
+    where accepted, the edit applied and the suites re-run.
 
 - [x] **N0. Identity-pinning claim withdrawn; count-invariance proved.**
   `SOUNDNESS_20260902.md` Finding 1. The claim that complete information pins
