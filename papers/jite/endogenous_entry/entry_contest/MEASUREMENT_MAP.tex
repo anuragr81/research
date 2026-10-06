@@ -1,0 +1,513 @@
+% MEASUREMENT_MAP.tex, a companion to PROOFS.tex (draft of 31 August 2026,
+% as committed 2 September 2026). Written 6 October 2026, revised the same day
+% to follow notes/writing_discipline.md.
+%
+% PURPOSE
+%   A reference note, not part of the paper. For every input and every output
+%   of the model in PROOFS.tex it records what the object is, what it
+%   represents, whose it is, and how an observer could obtain it. It makes no
+%   arguments and claims nothing about identification.
+%
+% PASTING ROWS INTO PROOFS.tex
+%   Rows use only packages already loaded in the PROOFS.tex preamble (amsmath,
+%   booktabs, array, longtable, natbib) and no macros of their own. Results are
+%   named in words. On pasting, replace each name on the left with the
+%   reference on the right.
+%     "the payoff"                         -> \eqref{eq:payoff}
+%     "burden-monotonicity"                -> \eqref{eq:burdenmono}
+%     "the entry condition"                -> \eqref{eq:entry}
+%     "Proposition (anonymity)"            -> Proposition~\ref{prop:anon}
+%     "Proposition (count invariance)"     -> Proposition~\ref{prop:countinv}
+%     "Proposition (when identities are pinned)" -> Proposition~\ref{prop:idunique}
+%     "Proposition (assortative selection)" -> Proposition~\ref{prop:assort}
+%     "Corollary (monotonicity)"           -> Corollary~\ref{cor:monotone}
+%     "P1", "P2", "P6", "P7", "P8", "P-MU" -> \S\ref{prop:P1}, \S\ref{prop:P2},
+%                                             \S\ref{prop:P6}, \S\ref{prop:P7},
+%                                             \S\ref{prop:P8}, \S\ref{prop:PMU}
+%     "Theorem (key result)" (P3)          -> \S\ref{prop:P3}
+%     "Theorem (P9)"                       -> Theorem~\ref{thm:P9}
+%     "Theorem (P9, general form)"         -> Theorem~\ref{thm:P9gen}
+%     "Proposition (endogenous margin)"    -> Proposition~\ref{prop:endogenous}
+%     "Proposition (tail condition)"       -> Proposition~\ref{prop:tailprop}
+%     "the band"                           -> \S\ref{prop:band}
+%     "Proposition (strictness)"           -> Proposition~\ref{prop:strict}
+%     "the R1 subsection", "the R2 subsection" -> \S\ref{sec:R1}, \S\ref{sec:R2}
+%     "the scope paragraph"                -> \S\ref{sec:primitives}
+%   The two citations need Schoemaker1982 and Sen1973 added to refs.bib.
+%
+% VERIFICATION NOTE
+%   Each row that asserts mathematics is listed with the place it was checked.
+%   "Manuscript" means the result is restated from PROOFS.tex and carries that
+%   document's own status and tier (its Table "Verification index"). "MMn" means
+%   the check in checks/verify_measurement_map.py, which is not wired into
+%   verify.sh; run it and read the SUMMARY line for the current count.
+%     Framing and the u, kappa, V rows. The cardinal reading is the manuscript's
+%       own ("cardinal utility index", N4 discussion). The entry condition is the
+%       expected-payoff comparison (MM9). The entry condition is invariant under
+%       (u,V)->(au+b,aV) (MM6a-c), and its invariants are exactly the functions
+%       of kappa/V (MM6d). An expected-utility ranking is invariant under aU+b
+%       and not under a monotone non-affine map (MM10).
+%     Inputs, V. Scale factor of Delta, manuscript P1 (S).
+%     Inputs, mu. sup supp(G)=mu needs r to have upper endpoint 1 (MM8).
+%     Inputs, kappa. Strictly decreasing and divergent at c are manuscript
+%       assumptions (burden-monotonicity; S16).
+%     Inputs, F and G. F<=G is manuscript P2 (L).
+%     Inputs, x0 and lambda. Recovery formulas (MM1, MM2).
+%     Outputs, k*. Count invariance, manuscript (L).
+%     Outputs, w_(k*). The rank-k* challenger can be absent from an equilibrium
+%       (MM7, on the manuscript's own example).
+%     Outputs, Delta. P1 representation, manuscript (S).
+%     Outputs, step. P3, manuscript (S).
+%     Outputs, P6. With the factor V (MM3); manuscript S9 without it.
+%     Outputs, P7. With the factor V (MM4); manuscript S18-S20 and
+%       entry_index_bounded.
+%     Outputs, P8, P9, P9-gen, endogenous margin, tail condition. Manuscript (L).
+%     Outputs, band. Manuscript (L/N).
+%     Outputs, P-MU. With the factor V (MM5); manuscript S10 without it.
+%     Outputs, k*c. Identical across equilibria, manuscript N4 discussion.
+%     Outputs, U_i and the two sums. Dependence on a and b, and the sign of the
+%       difference between two equilibria preserved (MM6e-f).
+%     Recovery 1-2 (MM1, MM2). Recovery 4 restates the equilibrium conditions of
+%       Proposition (count invariance), divided by V>0.
+%
+% SOURCES
+%   Schoemaker (1982), Journal of Economic Literature 20(2), pp. 529-563, read
+%   in full [F] on 6 Oct 2026 from Drive folder 1r7J3xJ2rotpmlRaBANCNhviy2d8a1bx_,
+%   file 1982-Schoemaker_ExpectedUtilityModel-VariantsPurposesLimits_JofEconomicLiterature.pdf.
+%   Quotations with pages.
+%     "unique up to positive linear transformations ... U*(x)=aU(x)+b for
+%     numbers a>0 and b" (p.531)
+%     "utility, in the NM context, is used to represent preferences whereas in
+%     neoclassical theory it determines (or precedes) preference" (p.532)
+%     "from a preference perspective, NM utility theory is ordinal in that it
+%     provides no more than ordinal rankings of lotteries" (p.533)
+%     "NM utility should not be interpreted as measuring strength of
+%     preference under certainty" (p.533)
+%     "a concave u(x) might erroneously be interpreted as implying that equal
+%     increments in money (under certainty) contribute to utility at a
+%     decreasing rate" (p.535)
+%   That this model is of his NM kind rests on MM9, the entry condition being
+%   the expected-payoff comparison, and not on anything the manuscript says.
+%   MM10 instantiates his p.531 claim and its failure under a monotone
+%   non-affine map. The phrase "not quantities in the world" is this note's
+%   stance, and Schoemaker supports it only as far as p.532 goes.
+%   Sen (1973), Economica, New Series, 40(159), pp. 241-259, read in full [F]
+%   on 6 Oct 2026 from the same Drive folder, file "sen73-behaviour and the
+%   concept of preference.pdf" (JSTOR copy). Quotations with pages.
+%     "the underlying relation in terms of which individual choices can be
+%     explained" (p.253)
+%     "will simply be the binary representation of individual choice" (p.253)
+%     "a numerical representation of the as if preference cannot be
+%     interpreted as individual welfare" (p.254)
+%     "information need not be restricted to distant observations of choices
+%     made" (p.257)
+%     "well-known limitations of the questionnaire method" (p.258)
+%     "it is not in general possible to guarantee both simultaneously" (p.259)
+%   Sen (1971), Review of Economic Studies 38(3), pp. 307-317, is not cited,
+%   because no full text was accessible (the Scribd preview shows metadata
+%   only and OUP is paywalled). Sen (1973, p.253 fn.) cites it for the
+%   conditions for binariness and transitivity of revealed preference, and that
+%   content is not used here.
+%
+% DEPENDENCE ON UNAPPLIED CHANGES
+%   No row depends on an unapplied change. Two rows will be needed later. The
+%   welfare section (TODO.md W1) is unwritten, so no welfare objective appears
+%   in the Outputs table. If the incumbent's entry is endogenised (TODO.md M1),
+%   C moves from Inputs to Outputs.
+%   PROOFS.tex writes P6, the P7 proof and P-MU without the factor V. The rows
+%   below carry V explicitly and need no change if the manuscript adds it.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{natbib}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\title{Threshold Entry in a Fixed-Prize Contest: Measurement Map}
+\author{Companion note to the proofs document}
+\date{6 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent The model is a static, one-shot contest for one prize of value $V$
+among $Q$ wealth-heterogeneous challengers and one incumbent. Each challenger
+chooses $e_i\in\{0,1\}$, paying the nominal cost $c$ to invest; scores
+$\sigma_i=\mu r_i+(1-\mu)s_ie_i$ are then drawn, and the highest score takes the
+prize. The realised wealth profile is common knowledge, so the model contains
+no beliefs, priors or posteriors, and no observer-side parameter such as
+measurement precision. The discrete objects are $Q$, the incumbent's label
+$C\in\{F,G\}$, the decisions $e_i$, the entrant set $S$, the count $k^*$, the
+index $m$ and the rank $j$. The continuous objects are wealth, $c$, $V$, $\mu$,
+the draws, the scores and the functions $u$, $\kappa$, $F$, $G$, $\varphi$,
+$H_m$ and $\Delta$; the wealth law $\Lambda$ and the laws of $r$ and $s$ enter
+as distributions. The utility of wealth $u$, the prize value $V$, and every
+object built from them ($\kappa$, $\Delta$ in its own units, $U_i$, and the
+sums of these across agents) are the modeller's constructs, attributed to the
+agents to rationalise recorded choices, rather than quantities in the world.
+The entry decision is a choice between lotteries, because the entry condition
+is exactly the comparison of the expected payoffs of investing and of not
+investing. The model is therefore of the von Neumann--Morgenstern kind in the
+sense of \citet{Schoemaker1982}. In a model of that kind utility ``is used to
+represent preferences'' rather than determining them (p.~532), and it is
+unique up to $aU+b$ with $a>0$ (p.~531). It is cardinal in the measurement
+sense only, since as a preference theory it ``provides no more than ordinal
+rankings of lotteries'' and ``should not be interpreted as measuring strength
+of preference under certainty'' (p.~533). \citet{Sen1973} draws the matching
+line on the side of choice. Preference may be defined ``as the underlying
+relation in terms of which individual choices can be explained'', and it then
+``will simply be the binary representation of individual choice'' (p.~253).
+Reading the same relation also as welfare is a further step, and ``it is not
+in general possible to guarantee both simultaneously'' (p.~259). Accordingly
+the entry condition is unchanged under $(u,V)\mapsto(au+b,\,aV)$ with $a>0$,
+and a statement about these constructs means something only if it survives
+that transformation. The last column separates five kinds of object, namely
+what an observer records, what is computed from records, facts of nature that
+exist but are never observed, constructs together with the recorded choices
+they rationalise, and computed references. Numerical example parameters (the
+CRRA coefficient, the witnesses, the constructions in the claim on
+burden-monotonicity) are not inputs and are omitted, as are the refuted claims
+R1 and R2 except where the manuscript reuses their objects.
+
+\section*{Inputs}
+
+\footnotesize
+\begin{longtable}{@{}P{2.0cm}P{3.1cm}P{5.1cm}P{5.5cm}@{}}
+\caption{Inputs of the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$Q$ & Positive integer. & The number of challengers, ``$Q$ challengers plus
+  one incumbent''. A fact of the contest. & Recorded by the observer as the
+  number of challengers in the contest. \\ \addlinespace
+$C\in\{F,G\}$ & One of two CDFs; a binary label. & The incumbent's score CDF,
+  $F$ if she invests and $G$ if she does not. ``The additional player,
+  entering exogenously; appears only through her score CDF $C$ in $H_m$.'' &
+  Recorded by the observer as whether the incumbent paid $c$. A fixed input of
+  the model rather than a choice made in it. \\ \addlinespace
+$w_i$; $(w_1,\dots,w_Q)$; $w_{(j)}$, $j$ & Real number, $w_i>c$; a vector in
+  $\mathbb R^Q$; its descending order statistics; integer rank, $1$ richest. &
+  ``Challenger $i$'s resource.'' The realised profile is common knowledge
+  among the challengers. A fact about each challenger, known to all of them. &
+  Recorded by the observer before the entry decisions. Order statistics and
+  ranks are computed from the record. The record is the observer's, whereas
+  the challengers' knowledge of the profile is the manuscript's assumption and
+  is not shown by the record. \\ \addlinespace
+$\Lambda$ & A distribution across challengers, support bounded below by
+  $c$. & ``The law from which the profile is drawn.'' A fact of nature. &
+  Never observed as a law; each recorded profile is a draw from it. It enters
+  the results only through the realised order statistics, the mean
+  $\bar\mu$, the value $1-\Lambda(\bar\mu)$ and quantile functions. \\
+  \addlinespace
+$c$ & Real number, $c>0$, identical for all agents. & ``The nominal cost,
+  identical for all agents'', paid ``to acquire social capital''. In
+  resource units, and what society gives up. & Recorded by the observer as the
+  outlay required to invest. \\ \addlinespace
+$u$ & Function of wealth, increasing, satisfying burden-monotonicity; a
+  cardinal index, fixed only up to $u\mapsto au+b$, $a>0$, together with
+  $V\mapsto aV$. & ``The utility of wealth.'' The modeller's construct,
+  attributed to the agent, rather than a quantity in the world. & Not
+  observed, being a construct. It rationalises the recorded entry decisions,
+  and enters the model only through $\kappa$. \\ \addlinespace
+$\kappa(w)=u(w)-u(w-c)$ & Function on $(c,\infty)$; continuous, strictly
+  decreasing, $\kappa\to\infty$ as $w\downarrow c$; scales with $a$ under the
+  transformation above. & ``The burden of $c$ in utility units'', the entry
+  cost (utility). ``The sole route by which the wealth distribution affects
+  behaviour.'' The modeller's construct, attributed to the agent. It is a
+  difference of a utility that represents preferences over lotteries, rather
+  than a measure of how strongly the cost is felt (\citealp{Schoemaker1982},
+  pp.~533,~535). & Not observed, being a construct. It rationalises the
+  recorded entry decisions. Only the ratio $\kappa/V$ survives the
+  transformation, and recorded entry decisions restrict that ratio to a set
+  rather than to a value (Recovery~4). \\ \addlinespace
+$V$ & Real number, $V>0$, in the units of $u$; scales with $a$ under the
+  transformation above. & The prize's value. The prize is ``exogenous and
+  fixed'', rank-allocated, a non-market good, additively separable and
+  ``valued identically by rich and poor''. The modeller's construct,
+  attributed to the agents. & Not observed, being a construct. It enters only
+  as a scale factor of $\Delta$ (P1). The prize itself is recorded. Where two
+  prizes are compared (P8), the recorded datum is the agents' choice between
+  them, or their answer to a question ranking them, made before entry. An
+  ordering of $V$ is what rationalises either record. \citet{Sen1973},
+  pp.~257--258, counts answers to questions as information alongside
+  behaviour, noting ``well-known limitations of the questionnaire
+  method''. \\ \addlinespace
+$\mu$ & Real number; the manuscript works with $\mu\in(0,1)$ and the limit
+  $\mu\to0$. & The weight of $r$ in the score. A fact of the contest. & Never
+  observed; enters only through $F$ and $G$. The R1 subsection states
+  $\sup\operatorname{supp}(G)=\mu$, which holds when the support of $r$ has
+  upper endpoint $1$, a condition the primitives do not state. \\
+  \addlinespace
+$r_i$ & Real-valued draw; independent across players and of wealth;
+  arbitrary distribution. & The score component every player draws, whether
+  or not she invests. A fact of nature. & Never observed separately. For a
+  non-investor the recorded score is $\mu r_i$. \\ \addlinespace
+$s_i$ & Real-valued draw, $s_i\ge0$; independent across players and of
+  wealth; arbitrary distribution. & The component that investing adds, which
+  the scope paragraph calls ability. A fact of nature. & Never observed
+  separately. For an investor the recorded score is
+  $\mu r_i+(1-\mu)s_i$. \\ \addlinespace
+$F$, $G$ & CDFs; continuous, common lower endpoint; $F\le G$ pointwise
+  (P2). & ``Law of $\sigma$ for an entrant ($F$) and an outsider ($G$).'' Facts
+  of nature. ``All results are stated in $F$ and $G$ only.'' & Computed from
+  records as the distributions of recorded scores among investors and among
+  non-investors, pooled across challengers. Pooling across wealth uses the
+  independence of the draws from wealth (Proposition (anonymity)). \\
+  \addlinespace
+$\varphi=G-F$ & Function, $\varphi\ge0$, vanishing at both endpoints of the
+  union of supports. & ``The wedge investment buys.'' & Computed only, from
+  $F$ and $G$. \\ \addlinespace
+$m$ & Integer in $\{0,\dots,Q-1\}$. & The number of other challengers who
+  invest, as faced by a challenger deciding. The rank-$j$ challenger,
+  entering as the $j$-th entrant, faces $m=j-1$. & Computed from the rank. \\
+  \addlinespace
+$\theta$ & Real number; $\theta=0$ is the model. & Tilt of the law of $s$
+  against wealth rank, outside the model's scope, used in the scope paragraph
+  to show where count invariance fails. & Never observed as a parameter. The
+  independence that $\theta$ relaxes is a direct comparison of recorded
+  investor scores across wealth ranks. \\ \addlinespace
+$w\mapsto w'$; $T$ & A map between wealth profiles; $T$ increasing for a
+  pivot-spread. & ``Any map between wealth profiles'', the change in the
+  wealth distribution that a comparative static is about. & Recorded as two
+  wealth profiles, before and after a change, or of two contests. $T$ is seen
+  only at the recorded wealths. \\ \addlinespace
+$x_0$ & Real number, in wealth units. & The pivot, ``the wealth at which the
+  displacement changes sign.'' & Computed from two recorded profiles. In
+  general it is located only between two adjacent ranks; in the linear family
+  it is given by Recovery~1. \\ \addlinespace
+$\lambda$ & Real number, $\lambda>1$ (Theorem (P9)), $\lambda\ge1$ where the
+  manuscript checks the pivot-spread property. & The factor of the linear spread
+  $T_\lambda(w)=x_0+\lambda(w-x_0)$. & Computed from two recorded profiles
+  (Recoveries 1--2). \\ \addlinespace
+$\bar\mu$ & Real number, $\bar\mu=\mathbb E[w]$. & Mean wealth, and the pivot
+  of the linear mean-preserving spread of Theorem (P9). & Computed from
+  recorded wealths (Recovery~2). \\ \addlinespace
+$\Lambda_\alpha$, $\Lambda_\beta$; $r_j$ & Two wealth distributions; quantile
+  levels. & The quantile coupling, which reads the displacement as
+  $\Lambda_\beta^{-1}(r_j)-\Lambda_\alpha^{-1}(r_j)$. & The laws are never
+  observed; the displacement is computed from two recorded sorted profiles.
+  Here $r_j$ is a quantile level rather than the draw $r_i$. \\
+\end{longtable}
+\normalsize
+
+\section*{Outputs}
+
+\footnotesize
+\begin{longtable}{@{}P{2.0cm}P{3.1cm}P{5.1cm}P{5.5cm}@{}}
+\caption{Outputs of the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+$e_i$ & Discrete, $\{0,1\}$. & The challenger's decision to invest (enter). &
+  Recorded by the observer as whether the challenger paid $c$, after the
+  profile is known and before the draws. \\ \addlinespace
+$S$ & Subset of $\{1,\dots,Q\}$. & The entrant set, $S=\{i:e_i=1\}$. &
+  Recorded. One play shows the one equilibrium set played, and not the other
+  sets the game admits. \\ \addlinespace
+$k^*$ & Integer in $\{0,\dots,Q\}$. & The entry count, the largest $k$ with
+  the entry condition holding at every rank $j\le k$. By Proposition (count
+  invariance) it is the size of every pure-strategy equilibrium entrant
+  set. & Recorded as $|S|$. Its definition runs through $\kappa$ and $\Delta$,
+  which are constructs, and the recorded count is what that definition
+  rationalises. \\ \addlinespace
+$w_{(k^*)}$ & Real number. & The marginal entrant, the rank-$k^*$ challenger,
+  and her wealth. & Computed from the recorded profile and recorded $k^*$ as
+  the wealth of the $k^*$-th richest challenger, whether or not she is in the
+  recorded $S$. Under identity multiplicity she can be absent. \\
+  \addlinespace
+$\{(1),\dots,(k^*)\}$ & Subset of size $k^*$. & The assortative set, the
+  $k^*$ richest, equivalently the $k^*$ with the lowest $\kappa$. & Computed
+  from the recorded profile and $k^*$, and compared directly with the recorded
+  $S$. \\ \addlinespace
+$\kappa(w_{(k^*+1)})>\Delta(k^*-1)$ & An inequality. & The condition of
+  Proposition (when identities are pinned), under which the assortative set is
+  the unique equilibrium. & Not observed, being a statement about constructs.
+  In the ratio form $\kappa(w_{(k^*+1)})/V>\Delta(k^*-1)/V$ it survives the
+  transformation of $u$ and $V$. \\ \addlinespace
+$\sigma_i$ & Real number. & The score, ``what the prize is awarded on.'' &
+  Recorded after the draws. \\ \addlinespace
+$\mathbf 1\{i\text{ wins}\}$ & Discrete, $\{0,1\}$. & Who takes the prize, the
+  holder of the highest score. & Recorded. \\ \addlinespace
+$U_i$ & Real number, in the units of $u$. & The payoff,
+  $u(w_i-ce_i)+V\cdot\mathbf 1\{i\text{ wins}\}$. The modeller's construct,
+  attributed to the agent. & Not observed, being a construct. It rationalises
+  the recorded entry decision. Its level is not fixed by the transformation,
+  since $b$ is free. \\ \addlinespace
+$H_m$; $M_m$ & A CDF; a random variable. & The opponent maximum, the ``CDF of
+  the best rival score when $m$ other challengers invest''. $M_m$ is that best
+  rival score. & $H_m=F^mG^{Q-1-m}C$ is computed from $F$, $G$, $C$, $Q$, $m$.
+  Realisations of $M_m$ are recorded as the best rival score in a contest with
+  $m$ other investors. \\ \addlinespace
+$\Delta(m)$ & Real number $\ge0$, in the units of $u$; a non-increasing
+  function of $m$ (Corollary (monotonicity)). & The gain from investing, the
+  right-hand side of the entry condition. A function of the entrant count
+  alone (Proposition (anonymity)). & $\Delta(m)$ itself is a construct, since
+  it carries $V$. The ratio
+  $\Delta(m)/V=\int H_m\,dF-\int H_m\,dG=\mathbb E[\varphi(M_m)]$ (P1) carries
+  no utility and is computed from the recorded $F$, $G$, $C$, $Q$. \\
+  \addlinespace
+$\Delta(m{+}1)-\Delta(m)$; $K$ & Real number $\le0$; $K=F^mG^{Q-2-m}C$, a
+  CDF product. & The step of the gain schedule, equal to
+  $-\tfrac V2\int\varphi^2\,dK$ (Theorem (key result)). & Computed only, as a
+  multiple of $V$, from $F$, $G$, $C$, $Q$. \\ \addlinespace
+$\sum_{i\in S}\kappa(w_i)$; $k^*c$ & Real number, in the units of $u$; real
+  number, resource units. & Total entry cost in utility units, and its
+  resource counterpart, which is identical across equilibria. & The utility
+  total is a construct, and summing it across agents is the interpersonal
+  comparison the manuscript calls a normative commitment. $k^*c$ is computed
+  from the recorded $k^*$ and $c$. \\ \addlinespace
+$\sum_iU_i$ & Real number, in the units of $u$. & The unweighted sum of
+  payoffs by which Proposition (assortative selection) ranks equilibria. & Not
+  observed, being a construct summed across agents by a normative commitment
+  (the manuscript's words). The payoffs summed are those that rationalise the
+  entry choices. Reading their sum as welfare is a second link, which
+  \citet{Sen1973}, pp.~254 and~259, says cannot in general be kept together
+  with the first. \\ \addlinespace
+$\Delta(m)\to V/(m{+}2)$ as $\mu\to0$ & A function of $m$, independent of
+  $Q$. & The P6 benchmark, with the incumbent investing. The manuscript writes
+  $1/(m{+}2)$ without the factor $V$. & A computed reference. It is a limit,
+  not reached at any recorded $\mu>0$. \\ \addlinespace
+$\Delta(m)\le V/(m{+}1)$; $k^*\le V/\kappa$ & Bounds, uniform in $Q$. & P7,
+  saturation. & Statements about constructs. In ratio form,
+  $\Delta(m)/V\le1/(m{+}1)$ is a computed reference from the recorded $F$,
+  $G$, $C$, $Q$, whereas $k^*\kappa/V\le1$ is not observed. \\ \addlinespace
+Direction of $k^*$ in $V$ and $c$ & Sign of a weak change. & P8 states that
+  $k^*$ is non-decreasing in $V$ and non-increasing in $c$. & Direct
+  comparison of recorded $k^*$ across contests that differ only in the
+  recorded $c$, or only in the prize, with the prizes ordered by the agents'
+  recorded choice between them (the $V$ row of the Inputs table). \\
+  \addlinespace
+Direction of $k^*$ under a change of profile & Sign of a weak change, rise
+  or fall. & Theorem (P9), Theorem (P9, general form), Proposition
+  (endogenous margin), Proposition (tail condition). & Direct comparison of
+  recorded $k^*$ under two recorded profiles, with $Q$, $c$, the prize and the
+  score technology unchanged. The hypothesis ($w_{(k^*)}$ against $x_0$, or
+  the tail condition) is computed from the two profiles and the pre-change
+  $k^*$. No computed reference is needed. \\ \addlinespace
+$d_j$; $L$, $M$; the band & Real numbers; integer ranks; the set
+  $L<k^*\le M$. & $d_j=w'_{(j)}-w_{(j)}$, with $L$ the richest rank whose
+  wealth falls and $M$ the poorest rank whose wealth rises. Inside the band
+  the displacement signs determine nothing (the band). & Computed from two
+  recorded sorted profiles and the recorded pre-change $k^*$. \\ \addlinespace
+$1-\Lambda(\bar\mu)$ & Real number in $[0,1]$. & The entry rate at which the
+  sign of Theorem (P9) flips. & Computed from recorded wealths, and compared
+  with the recorded entry rate. \\ \addlinespace
+$k^*(\lambda)$; $\bar\lambda$ & A step function of $\lambda$; a real
+  number. & Proposition (strictness) states that $k^*$ is non-increasing in
+  $\lambda$, and strictly below $k^*(1)$ for $\lambda>\bar\lambda$. &
+  $k^*(\lambda)$ is recorded only at the profiles observed. $\bar\lambda$ is
+  not observed, since the manuscript asserts its existence only, through
+  $\kappa$ and $\Delta(k^*-1)$. \\ \addlinespace
+$\Delta(0,Q{+}1)-\Delta(0,Q)$; $W$ & Real number; $W=G^{Q-1}(1-G)F$, a
+  function. & P-MU states that the difference equals
+  $-V\!\int W\,(dF-dG)$, with the incumbent investing ($C=F$), and that
+  $\Delta(0)$ increases in $Q$ iff $\int W\,dF<\int W\,dG$. & A computed
+  reference, from the recorded $F$, $G$ and $Q$. It is the change in the gain
+  schedule rather than the recorded change in $k^*$ across contests of
+  different $Q$. \\ \addlinespace
+$\mu^*$ & Real number; distribution-dependent. & The value of $\mu$ at which
+  the sign of $d\Delta(0)/dQ$ reverses (the R2 subsection, P-MU). & Computed
+  only; never observed. \\
+\end{longtable}
+\normalsize
+
+\section*{Structure}
+
+\begin{itemize}
+\item \emph{Entering only through others.} $u$ enters only through $\kappa$;
+  wealth enters only through $\kappa(w_{(j)})$ (Proposition (anonymity));
+  $\mu$ and the laws of $r$ and $s$ enter only through $F$ and $G$; $V$
+  enters only as a scale factor of $\Delta$, and the entry condition is
+  unchanged under $(u,V)\mapsto(au+b,aV)$, $a>0$; $\Lambda$ enters only
+  through the realised profile, $\bar\mu$, $1-\Lambda(\bar\mu)$ and quantile
+  functions.
+\item \emph{Distributions.} $\Lambda$ across challengers, and the laws of $r$
+  and $s$, which reach the results only as $F$ and $G$.
+\item \emph{Needing a computed reference.} $\Delta/V$ and its step, the P6
+  benchmark, the first P7 bound in ratio form, the P-MU sign, $\mu^*$, and the
+  flip entry rate $1-\Lambda(\bar\mu)$.
+\item \emph{Given directly by recorded comparisons.} $F\le G$ (recorded
+  scores of investors against non-investors); independence of the draws from
+  wealth (recorded scores across wealth ranks, within one investment status);
+  the recorded $S$ against the assortative set; the direction of $k^*$ across
+  contests differing only in $c$; the direction of $k^*$ across two recorded
+  profiles, with its hypothesis checked on the same records.
+\item \emph{Facts that exist but are never observed.} $\mu$, $r_i$, $s_i$,
+  and $\Lambda$ as a law.
+\item \emph{Constructs, not observed.} $u$, $\kappa$, $V$, $\Delta$ in its
+  own units, $U_i$, $\sum_iU_i$, $\sum_{i\in S}\kappa(w_i)$, the condition of
+  Proposition (when identities are pinned), the second P7 bound, and
+  $\bar\lambda$. Each rationalises recorded entry decisions, or a recorded
+  choice between prizes. Under $(u,V)\mapsto(au+b,aV)$ the quantities that do
+  not change are exactly the functions of $\kappa/V$ (and of $\Delta/V$, which
+  carries no utility). $U_i$ and $\sum_iU_i$ move with $a$ and $b$, whereas
+  $\sum_{i\in S}\kappa(w_i)$ moves with $a$ only. The difference of either sum
+  between two equilibria keeps its sign. Summing across agents is the
+  interpersonal comparison the manuscript calls a normative commitment.
+\end{itemize}
+
+\section*{Recovery formulas}
+
+\begin{enumerate}
+\item \emph{Linear family $T_\lambda(w)=x_0+\lambda(w-x_0)$.} From two recorded
+  sorted profiles, take ranks $a,b$ with $d_a=w'_{(a)}-w_{(a)}$ and
+  $d_b=w'_{(b)}-w_{(b)}$. Then
+  \[
+    \lambda=1+\frac{d_a-d_b}{w_{(a)}-w_{(b)}},\qquad
+    x_0=\frac{d_b\,w_{(a)}-d_a\,w_{(b)}}{d_b-d_a}.
+  \]
+  The formula for $\lambda$ needs $w_{(a)}\ne w_{(b)}$. The formula for $x_0$
+  needs $d_a\ne d_b$, equivalently $\lambda\ne1$ and $w_{(a)}\ne w_{(b)}$. Both
+  use four recorded wealths.
+\item \emph{Linear mean-preserving spread of Theorem (P9).} $\bar\mu$ is the
+  mean of the recorded profile, and the spread about $\bar\mu$ preserves that
+  mean. Then $\lambda=(w'_{(j)}-\bar\mu)/(w_{(j)}-\bar\mu)$ for any rank $j$
+  with $w_{(j)}\ne\bar\mu$. The formula uses one recorded profile and one rank
+  of the other.
+\item \emph{Gain schedule, up to $V$.} $\Delta(m)/V=\int H_m\,dF-\int
+  H_m\,dG=\mathbb E[\varphi(M_m)]$, from the recorded $F$, $G$, $C$ and $Q$
+  (P1). The formula needs the regularity of the primitives ($F$, $G$
+  continuous, common lower endpoint).
+\item \emph{Ratios that rationalise a recorded equilibrium, as a set rather
+  than a value.} For a recorded equilibrium $S$ with $|S|=k$,
+  $\kappa(w_i)/V\le\Delta(k-1)/V$ for $i\in S$ (when $k\ge1$), and
+  $\kappa(w_i)/V>\Delta(k)/V$ for $i\notin S$ (when $k\le Q-1$). These are the
+  equilibrium conditions of Proposition (count invariance) divided by $V>0$,
+  with $\Delta/V$ from Recovery~3.
+\end{enumerate}
+
+\begin{thebibliography}{1}
+\bibitem[Schoemaker(1982)]{Schoemaker1982}
+Paul J.~H. Schoemaker.
+\newblock The expected utility model: its variants, purposes, evidence and
+  limitations.
+\newblock \emph{Journal of Economic Literature}, 20(2), pp.~529--563, 1982.
+\bibitem[Sen(1973)]{Sen1973}
+Amartya Sen.
+\newblock Behaviour and the concept of preference.
+\newblock \emph{Economica}, New Series, 40(159), pp.~241--259, 1973.
+\end{thebibliography}
+
+\end{document}
