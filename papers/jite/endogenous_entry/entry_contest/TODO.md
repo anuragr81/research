@@ -121,6 +121,62 @@ paper's claims, and only then write the manuscript.
   the agent, left unchanged).
   - Done when each numbered item has the author's decision recorded and,
     where accepted, the edit applied and the suites re-run.
+  - Since PROOFS.tex is to be retired (pass plan below), accepted fixes to it
+    are applied in the manuscript skeleton instead.
+
+- [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
+  replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
+  conclusions), and appendices hold every proof and everything else
+  `PROOFS.tex` carries. Each appendix proof names the Lean theorem it
+  corresponds to, and analytic steps move into Lean with Mathlib. Plain
+  English is at most 30% of each proof, checked by script. Passes run in the
+  order below. Passes 1 to 4 do not depend on the novelty verdict and can run
+  now. Passes 7 to 9 wait for it.
+  1. **Skeleton scaffold.** `MANUSCRIPT.tex` with the four tables empty, the ID
+     scheme (K, M, L, C rows), appendix stubs, a link checker (K points to M; C
+     points to M or L; every M row names a Lean theorem that exists and is
+     audited) and the 30% prose checker. Both checkers wired into `verify.sh`.
+     Done when the empty skeleton builds and both checkers run and can fail.
+  2. **Mathlib project.** A lake project under `lean/mathlib/` pinned to a
+     Mathlib that builds here, the drafted `StepNonpos.lean` (item A2)
+     compiled, and an audit rule for Mathlib files that allows the three
+     standard axioms (propext, Quot.sound, Classical.choice) and nothing else,
+     while core files keep propext and Quot.sound only. Done when `verify.sh`
+     builds and audits it.
+  3. **Analytic steps into Lean**, one cluster per pass. `step_nonpos` (P3,
+     the engine of P5); the P1 representation; P2's probability monotonicity;
+     P7's integral monotonicity; P6's limit; the divergence of kappa at the
+     support floor (P9-strict); the P-MU identity. Each SymPy-tier claim moves
+     to tier L, and the abstract's "no claim is machine-checked end to end"
+     is revised only when the chain is closed.
+  4. **Proofs into the appendix**, one result family per pass (P1 to P5 with
+     count invariance and N4; P6 to P8; the P9 family with the band; P-MU; BM
+     and ANON). Each proof names its Lean theorem, carries the L1 corrections
+     the author accepts, and passes the 30% checker. Model-table rows are
+     filled in the same pass, with the mathematics shown.
+  5. **Non-proof content of `PROOFS.tex` into appendices.** Evidence tiers and
+     the verification index, terminology, scope and the anonymity boundary,
+     refuted conjectures R1 and R2, referee responses. Open items go to this
+     file.
+  6. **Retire `PROOFS.tex`.** A completeness check confirms every claim,
+     number and Lean name in `PROOFS.tex` is present in the skeleton.
+     `checks/verify_docs.py` and `verify.sh` then point at the skeleton, and
+     `PROOFS.tex` is removed. Done when `verify.sh` is green without it.
+  7. **Novelty reading.** Fullerton-McAfee (1999), Mathews-Namoro (2008),
+     Corcoran (1984), Corcoran-Karels (1985) and Shaked (1982), each with a
+     `lit/` directory and Lean, then the novelty ledger revised. Blocked on the
+     PDFs.
+  8. **Conclusions, then introduction.** Conclusions carry only the novel
+     claims from the revised ledger, each linked to model or literature rows.
+     The introduction states the headlines and their number, each traced to a
+     model row and assessed for overreach.
+  9. **Literature table.** Only the papers a conclusion or model row depends
+     on, with verbatim quotes and pages from `lit/<paper>/CLAIMS.md`.
+  10. **Readability passes** on the appendix proofs, as many as needed, under
+     the 30% checker.
+  Running alongside, as PDFs arrive. Lean for the remaining cited works,
+  Hopkins-Kornienko 2004 and 2009 claims, published-version checks (S1), and
+  the welfare result W1 if the conclusions are to claim it.
 
 - [x] **N0. Identity-pinning claim withdrawn; count-invariance proved.**
   `SOUNDNESS_20260902.md` Finding 1. The claim that complete information pins
