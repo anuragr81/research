@@ -1,0 +1,168 @@
+% MANUSCRIPT.tex, the manuscript skeleton for the entry-contest paper (JITE).
+% Created 6 October 2026 as pass 1 of the plan in TODO.md (item PLAN).
+%
+% PURPOSE
+%   One document that will replace PROOFS.tex. Four tables carry the body
+%   (introduction, model, literature, conclusions) and the appendices carry
+%   every proof and everything else PROOFS.tex holds. PROOFS.tex stays until
+%   pass 6 confirms that everything in it is present here.
+%
+% STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
+%   Rows are written only through the four row macros below, and proofs only
+%   through the mproof environment. IDs are K1, K2, ... (introduction),
+%   M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
+%     \krow{ID}{headline}{model rows}{scope note}
+%     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
+%     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
+%     \crow{ID}{statement}{model or literature rows}
+%     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
+%   Lists of rows or theorems are comma-separated. Lean theorem names are the
+%   fully qualified names declared in lean/EntryContest.lean or under
+%   lean/mathlib/.
+%
+% RULES THE CHECKER ENFORCES
+%   Introduction rows point to model rows only. Conclusion rows point to model
+%   or literature rows only. Every model row names Lean theorems that exist in
+%   an audited Lean file and has exactly one proof in Appendix A naming the
+%   same theorems. Every literature row's quote appears verbatim in the
+%   paper's lit/ record. In every proof, plain English is at most 30% of the
+%   text, measured as prose words over prose words plus mathematical tokens.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\emergencystretch=1.5em
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\newcommand{\lean}[1]{\texttt{#1}}
+\newcommand{\rowref}[1]{#1}
+
+\newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & \ref{proof:#1} \\ \addlinespace}
+\newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+
+\newenvironment{mproof}[2]
+  {\subsection*{Proof of #1}\label{proof:#1}%
+   \noindent\textit{Lean:} \lean{#2}.\par\smallskip}
+  {\par\hfill$\square$\par\medskip}
+
+\title{Threshold Entry in a Fixed-Prize Contest}
+\author{Anurag Srivastava}
+\date{Manuscript skeleton, 6 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
+\caption{Headline claims, each traced to the model rows it rests on.}\\
+\toprule
+\textbf{ID} & \textbf{Headline} & \textbf{Model rows} & \textbf{Scope note} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Headline} & \textbf{Model rows} & \textbf{Scope note} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+\section{Model}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{3.8cm}P{6.5cm}P{3.5cm}P{1.1cm}@{}}
+\caption{Results of the model, each with its statement and the Lean theorems
+that check it.}\\
+\toprule
+\textbf{ID} & \textbf{Claim} & \textbf{Statement} & \textbf{Lean} & \textbf{Proof} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Claim} & \textbf{Statement} & \textbf{Lean} & \textbf{Proof} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+\section{Literature}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{2.2cm}P{3.5cm}P{5.5cm}P{1.3cm}P{1.9cm}@{}}
+\caption{Papers the model or the conclusions depend on, each with a verbatim
+quote.}\\
+\toprule
+\textbf{ID} & \textbf{Paper} & \textbf{What we rely on} & \textbf{Quote} &
+\textbf{Page} & \textbf{Model rows} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Paper} & \textbf{What we rely on} & \textbf{Quote} &
+\textbf{Page} & \textbf{Model rows} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+\section{Conclusions}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{The novel claims, each linked to the model and literature rows it rests
+on.}\\
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+\appendix
+
+\section{Proofs}
+\label{app:proofs}
+
+\section{Evidence and verification}
+\label{app:evidence}
+
+\section{Terminology}
+\label{app:terminology}
+
+\section{Primitives and scope}
+\label{app:scope}
+
+\section{Refuted conjectures}
+\label{app:refuted}
+
+\section{Responses to the referee reports}
+\label{app:referees}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

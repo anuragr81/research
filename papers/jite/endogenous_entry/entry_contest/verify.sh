@@ -163,9 +163,17 @@ echo '```' >> "$OUT"
 
 echo
 echo "======================================================================"
+echo " MANUSCRIPT SKELETON  (row links, Lean names, quotes, prose share)"
+echo "======================================================================"
+{ echo; echo '## Suite 10 - manuscript skeleton (`checks/verify_manuscript.py`)'; echo; echo '```'; } >> "$OUT"
+python3 "$HERE/checks/verify_manuscript.py" 2>&1 | tee -a "$OUT" || FAILED=1
+echo '```' >> "$OUT"
+
+echo
+echo "======================================================================"
 echo " PROOF CHECKS  (Lean 4, core only)"
 echo "======================================================================"
-{ echo; echo '## Suite 10 - Lean 4 (`lean/EntryContest.lean`)'; echo; echo '```'; } >> "$OUT"
+{ echo; echo '## Suite 11 - Lean 4 (`lean/EntryContest.lean`)'; echo; echo '```'; } >> "$OUT"
 
 if command -v lean >/dev/null 2>&1; then
   cd "$HERE/lean"
@@ -228,7 +236,7 @@ echo
 echo "======================================================================"
 echo " DOC CONSISTENCY  (PROOFS.tex prose vs this run's generated evidence)"
 echo "======================================================================"
-{ echo; echo '## Suite 11 - doc consistency (`checks/verify_docs.py`)'; echo; echo '```'; } >> "$OUT"
+{ echo; echo '## Suite 12 - doc consistency (`checks/verify_docs.py`)'; echo; echo '```'; } >> "$OUT"
 python3 "$HERE/checks/verify_docs.py" "$OUT" 2>&1 | tee -a "$OUT" || FAILED=1
 echo '```' >> "$OUT"
 
