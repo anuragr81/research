@@ -1,0 +1,1834 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+\emergencystretch=1em
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+% Claims are statements about the primitives themselves rather than results
+% derived within the model. Kept in a separate series so the distinction is
+% visible in the numbering.
+\newtheorem{claim}{Claim}
+
+\newcommand{\file}[1]{\href{run:#1}{\texttt{#1}}}
+\newcommand{\obj}[2]{\file{#1}\,\texttt{::#2}}
+\newcommand{\status}[1]{%
+  \ifnum\pdfstrcmp{#1}{PROVED}=0 \textbf{PROVED}%
+  \else\ifnum\pdfstrcmp{#1}{VERIFIED}=0 VERIFIED%
+  \else\ifnum\pdfstrcmp{#1}{REFUTED}=0 \emph{REFUTED}%
+  \else #1\fi\fi\fi}
+% Evidence tier, orthogonal to the status word above.
+%   L = machine-checked in Lean 4 (kernel-verified, axiom-audited)
+%   S = exact symbolic derivation in SymPy (not machine-checked)
+%   N = numerical sampling over finitely many economies
+\newcommand{\tier}[1]{%
+  \ifnum\pdfstrcmp{#1}{L}=0 \textbf{L}%
+  \else\ifnum\pdfstrcmp{#1}{S}=0 S%
+  \else\ifnum\pdfstrcmp{#1}{N}=0 \emph{N}%
+  \else #1\fi\fi\fi}
+
+\title{Threshold Entry in a Fixed-Prize Contest: Proofs}
+\author{Anurag Srivastava}
+\date{31 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent This note collects the proofs underlying a rebuilt model of
+threshold entry in a fixed-prize contest, developed after both referee
+reports on a prior submission identified the equilibrium analysis as
+unsound (Section~\ref{sec:scope}). Distribution-free throughout: no
+distributional family is assumed except where explicitly flagged.
+Every claim is tagged \status{PROVED}, \status{VERIFIED} (numerically,
+not proved), or \status{REFUTED}, and Table~\ref{tab:index} links each
+claim to the file and object that establishes it. Two refuted claims
+are the author's own conjectures; one is a referee's. Table~\ref{tab:index}
+additionally records an \emph{evidence tier} for each claim --- \tier{L}
+machine-checked in Lean~4, \tier{S} exact symbolic derivation, \tier{N}
+numerical sampling --- because these are not equivalent grades of
+assurance and no claim here is machine-checked end to end from
+primitives (Section~\ref{sec:tiers}).
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope and verification methodology}
+\label{sec:scope}
+
+Verification is split across three tools with an explicit division of
+labour. \textbf{SymPy} verifies the analytic content: exact symbolic
+integration and algebraic identities, checked against closed-form
+function families where the integrals evaluate exactly. \textbf{Lean~4
+(core only, no \texttt{sorry})} verifies the discrete and
+order-theoretic content: given the analytic sign of a step difference
+as an explicit hypothesis, the equilibrium structure (existence,
+uniqueness, the prefix property) is machine-checked independently of
+the analytic step. \textbf{SciPy/NumPy} supplies numerical evidence
+where neither symbolic tool applies: adversarial counterexample
+search, sampled comparative statics, and convergence diagnostics.
+
+Mathlib is deliberately not used, so no measure-theoretic content is
+formalised in Lean directly; the analytic step enters the Lean
+development only as an explicit hypothesis, so the \emph{logical
+dependency} of the equilibrium result on the analytic identity is
+still machine-checked, even though the identity itself is verified in
+SymPy rather than Lean. The reason for staying on core Lean is
+auditability, not availability --- \S\ref{sec:tiers} states it, and
+\file{verify.sh} measures Mathlib's presence on every run rather than
+asserting it either way.
+
+All source files are included in the accompanying bundle. Run
+\texttt{./verify.sh} to reproduce every claim in Table~\ref{tab:index}; it
+regenerates \file{VERIFICATION.md} from the actual run, including an
+axiom audit covering every theorem declared in the Lean file, so that
+status file cannot drift from the suites it reports. This document is the
+canonical statement of the results; \file{VERIFICATION.md} records only
+what the checks printed.
+
+A second and separate suite, \texttt{lit/verify\_lit.sh}, covers the
+\emph{positioning} claims --- the assertions this document makes about what
+other papers prove and how their results relate to these. It is deliberately
+not folded into \texttt{./verify.sh}, because a failure there would mean a
+misreading of the literature rather than a defect in a result. Two positioning
+statements below rest on machine-checked artifacts in that suite: the
+dispersive-order bridge of \S\ref{prop:P9gen} and the kernel correspondence of
+\S\ref{prop:PMU}. Those artifacts verify \emph{our reading} of the cited
+sources; they do not reprove anything in those sources.
+
+\section{What the three evidence tiers mean}
+\label{sec:tiers}
+
+The verification suite has three legs and they do not carry equal weight.
+Table~\ref{tab:index} records which apply to each claim.
+
+\paragraph{\tier{L} --- Lean 4.} Kernel-verified. \file{lean/EntryContest.lean}
+compiles with no \texttt{sorry} and no user-declared axioms; \file{verify.sh}
+runs \texttt{\#print axioms} on every declared theorem and fails if any is
+unaudited. Of the 52 theorems, 36 depend on no axioms at all and 16 depend
+only on \texttt{propext} and \texttt{Quot.sound}, both Lean core axioms,
+pulled in by \texttt{omega} on \texttt{Int} arithmetic. These three counts are
+cross-checked against the generated \file{VERIFICATION.md} by
+\file{checks/verify\_docs.py}, so they cannot drift from the audit as the
+development grows. Verified on Lean 4.33.1, most recently on 2~September 2026;
+the file also compiled unchanged on 4.14.0 in an earlier session, which has not
+been retested since.
+
+Two limitations are material and are stated here rather than left implicit.
+First, Mathlib is not used, so the development is deliberately confined to
+the \emph{discrete and order-theoretic} content; every analytic step enters
+as an explicit hypothesis. The word \emph{deliberately} is load-bearing and
+was previously doing work it had not earned: the bundle's generated
+environment note used to record that Mathlib was unreachable, which was false
+on at least one machine the suite is run on. \file{verify.sh} now measures
+this on every run rather than asserting it, and \file{VERIFICATION.md} carries
+the finding. The reason for staying on core Lean is not availability but
+auditability --- it is what allows \texttt{\#print axioms} to certify every
+one of the theorems, which a Mathlib-based development could not do at the
+same granularity. In particular the antitonicity of $\Delta$ --- the
+engine of P5 --- enters as the hypothesis \texttt{step\_nonpos} and is
+discharged not in Lean but at tier \tier{S}. Second, the Lean theorems are
+conditional deductions: they establish that the stated conclusions follow
+from the stated hypotheses, not that the hypotheses hold for the model's
+primitives. Both facts are by design, and together they mean that
+\emph{no claim in this document is machine-checked from primitives to
+conclusion}. What is machine-checked is that the logical skeleton is sound
+given the analytic inputs.
+
+\paragraph{\tier{S} --- SymPy.} Exact symbolic computation, not machine-checked
+proof. \file{checks/verify\_sympy.py} derives the difference identity (S1--S6),
+the P1 representation (S7), the sign of $\int\varphi^2\,dK$ (S8), the
+$\mu\to0$ benchmark (S9), the P-MU difference identity and weight shape
+(S10--S12) and the two algebraic steps of P7 (S18--S20). These are exact
+rational-arithmetic results rather than floating-point samples, but they are
+produced by a computer algebra system whose correctness is assumed, not
+verified. Most are checked over stated families and are therefore
+instantiations of a universally quantified claim, not proofs of it; the
+exceptions are S1, S18 and S20, which are abstract in $F,G,C$ or symbolic
+in $m$.
+
+\paragraph{\tier{N} --- numerical.} Sampling over finitely many economies.
+Strong evidence against a claim (a single violation refutes) and weak
+evidence for one. Where a claim rests on \tier{N} alone this is flagged in
+the table, because such a claim is supported but not established.
+
+\paragraph{The remaining analytic inputs.} Three analytic facts are supplied
+rather than proved. Two enter as explicit hypotheses: the sign of the step
+difference (\texttt{step\_nonpos}, discharged at \tier{S} by S1--S6), and the
+divergence of $\kappa$ at the support floor (discharged at \tier{S} by S16).
+Both are stated as hypotheses in the Lean development and as assumptions in
+Section~\ref{sec:primitives}, so the dependency is explicit rather than
+hidden.
+
+It is worth being precise about what S1--S6 does and does not leave
+family-dependent, because ``discharged at tier \tier{S}'' understates it. The
+links carrying the argument are abstract in $F$, $G$, $C$ and $K$: the
+algebraic step $H_{m+1}-H_m=-K\varphi$ (S1), the chain rule (S2), the sign of
+the integrand (S3), and --- the one that encodes an actual modelling
+assumption --- the vanishing of the boundary term when
+$\varphi(a)=\varphi(b)=0$ (S5). Of the two remaining, S4 is integration by
+parts, a theorem of calculus rather than a fact about this model, checked on
+five concrete pairs because SymPy cannot decide it in abstract-function form;
+and S6 instantiates the assembled identity on four closed-form families. So
+the family-dependence sits in the assembly and in a textbook step, not in the
+links that do the economic work.
+
+The third is P7's uniform bound. Its two algebraic steps are now verified at
+\tier{S}: the factorisation $F^m-H_m=F^m(1-G^{Q-1-m}C)$ holds for abstract
+$F,G,C$ with no family assumed (S18), the bracket is non-negative because
+$G^{e}\le1$ on $[0,1]$ and $C\le1$ (S19), and the base integral
+$\int_0^1u^m\,du=1/(m{+}1)$ is exact \emph{symbolically in $m$} rather than
+over finitely many exponents (S20). What remains assumed is monotonicity of
+the integral functional --- the passage from $H_m\le F^m$ pointwise to
+$\int H_m\,dF\le\int F^m\,dF$, and from $H_m\ge0$ to $\int H_m\,dG\ge0$.
+That is the same functional-monotonicity hypothesis already supplied
+explicitly in the Lean development for P2 (\S\ref{prop:P2}), so P7 introduces
+no new analytic assumption; it reuses one that was already on the books.
+
+\paragraph{Why P7 is not checked end to end.} The conclusion
+$\Delta(m)\le V/(m{+}1)$ could be evaluated exactly over the admissible power
+families and compared against the cap. That test was tried and rejected as
+uninformative: over those families $\max\,(m{+}1)\Delta(m)\approx0.46$, and
+$\approx0.79$ over a widened set, so the strictly tighter caps $1/(m{+}2)$,
+$1/(m{+}3)$ and $1/(m{+}4)$ pass on every case as well. A check that cannot
+separate the true bound from a tighter false one is not evidence for the true
+bound, so the \emph{proof steps} are verified rather than the conclusion. The
+numerical block in \file{checks/verify\_p679.py} is retained as corroboration
+and is subject to the same caveat.
+
+\paragraph{A caveat on P-MU.} S11 establishes that the weight
+$W=G^{Q-1}(1-G)F$ is hump-shaped in $G$, so first-order stochastic dominance
+cannot by itself sign $\int W\,dF-\int W\,dG$. S12 then evaluates that
+integral exactly over the power family $F=x^{k}$, $G=x$ satisfying the
+model's constraint $F\le G$, and finds the \emph{same} sign in all fifteen
+admissible pairs tested. So the hump-shape is a statement about what FOSD
+alone cannot deliver; it is not a demonstration that both signs occur within
+that family. The $\mu$-crossover that refutes R2 is exhibited in
+\file{checks/verify\_p89.py} using the model's induced $F,G$, which are not
+power functions. This distinction was not drawn in earlier versions of this
+document and the earlier phrasing overstated what had been shown.
+
+\paragraph{Why row BM is in the table at all.} Every other row records a
+result derived \emph{within} the model. Row BM does not: it is a statement
+about utility functions, upstream of the model entirely, and assumptions do
+not otherwise earn rows --- there is none for $V>0$, none for independence of
+the draws from wealth, none for common knowledge of the wealth profile, though
+that last is load-bearing. The closest precedent, $\kappa\to\infty$ as
+$w\downarrow c$, is likewise an assumption discharged at tier~\tier{S} (S16)
+and has no row of its own.
+
+BM is listed because it is not the assumption. The assumption is
+\eqref{eq:burdenmono}, which sits in \S\ref{sec:primitives} with the others.
+What is listed is the claim that the assumption is \emph{strictly} weaker than
+the concavity it replaces, and that claim does real work: without it the
+\S\ref{sec:contribution} sentence asserting a weaker hypothesis is a rewording
+rather than a weakening. It also rests on a single knife-edge construction, so
+it is exactly the kind of support the tier column exists to make visible. The
+implication in the other direction, concavity $\Rightarrow$
+\eqref{eq:burdenmono}, is elementary and is left in the prose, matching how
+$\kappa\to\infty$ is handled.
+
+\section{Verification index}
+
+\begin{longtable}{@{}p{1.5cm}p{5.0cm}p{1.5cm}p{0.8cm}p{6.0cm}@{}}
+\toprule
+\textbf{Claim} & \textbf{Statement (short)} & \textbf{Status} & \textbf{Tier} & \textbf{Verified in} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Claim} & \textbf{Statement (short)} & \textbf{Status} & \textbf{Tier} & \textbf{Verified in} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+BM \S\ref{claim:bmweak} & Burden-monotonicity is \emph{strictly} weaker than
+  concavity: a non-concave $u$ satisfies it &
+  \status{PROVED} & \tier{S} &
+  \file{checks/verify\_sympy.py} (S22a oscillation identity, abstract in
+  $k,c,w$; S22b amplitude exactly zero when $p\mid c$; S22c reduced burden
+  strictly decreasing; S22d $u''>0$ exhibited). Control: S23, $p=0.7$ breaks
+  \eqref{eq:burdenmono} at $w=1.3$. The implication concavity
+  $\Rightarrow$ \eqref{eq:burdenmono} is one line and is proved in
+  \S\ref{sec:primitives}; S21 records the identity and instantiates it. This
+  row is about the primitives, not a result derived within the model ---
+  see \S\ref{sec:tiers}. \\[4pt]
+ANON \S\ref{sec:primitives} & Anonymity is delivered by wealth-independent
+  draws, and count invariance does \emph{not} extend beyond it &
+  \status{REFUTED} (own, outside scope) & \tier{N} &
+  \file{checks/verify\_anonymity.py}. A1-2: spread of $\Delta$ within a count
+  class is exactly $0$ at $\theta=0$, so \S\ref{prop:anon} is verified on
+  induced primitives, not assumed; A1-3 control: order $10^{-1}$ once
+  $\theta\ne0$. A1-4c/A1-5: for $\theta<0$ count invariance is false, with a
+  displayed two-size witness whose margin exceeds the quadrature bound of
+  A1-1 by $>10^{3}$. For $\theta>0$: $0$ violations in $20{,}000$ economies,
+  which is support, \emph{not} proof (\S\ref{sec:tiers}, tier \tier{N} for a
+  universal claim). Bounds the scope of every result in
+  \S\ref{sec:proofs}. \\[4pt]
+P1 \S\ref{prop:P1} & $\Delta(m)=V\,\mathbb E[\varphi(M_m)]$ &
+  \status{PROVED} & \tier{S} &
+  \file{checks/verify\_sympy.py} (S7, exact); \file{checks/run\_all.py} (P1, max err $3\times10^{-6}$) \\[4pt]
+P2 \S\ref{prop:P2} & FOSD: $F\le G$ pointwise &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{below\_subset\_of\_pathwise}, \texttt{cdf\_le\_of\_pathwise}); \file{checks/verify\_sympy.py} (S13 pathwise gap, S14 exact CDF ordering); \file{checks/run\_all.py} (P2, 0 violations, 4$\mu\times$3 families) \\[4pt]
+P3 \S\ref{prop:P3} & $\Delta(m{+}1)-\Delta(m)=-\tfrac{V}{2}\!\int\!\varphi^2\,dK$ &
+  \status{PROVED} & \tier{S} &
+  \file{checks/verify\_sympy.py} (S1--S6, exact); \file{checks/run\_all.py} (P3, 4th-order convergence to $8\times10^{-12}$) \\[4pt]
+P3-cor \S\ref{cor:monotone} & $\Delta$ strictly antitone in $m$ &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{antitone\_of\_step}, \texttt{strict\_of\_step}); \file{checks/run\_all.py} (P4, 1500 adversarial pairs, 0 violations) \\[4pt]
+P5 \S\ref{prop:P5} & Existence \& uniqueness of $k^*$ (prefix property) &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (3 theorems, listed in \S\ref{prop:P5}); \file{checks/run\_all.py} (P5) \\[4pt]
+P5-inv \S\ref{prop:count-inv} & Every pure-strategy equilibrium has count $k^*$; identities pinned under a stated condition &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{count\_le\_kstar}, \texttt{count\_ge\_kstar}, \texttt{equilibrium\_count\_unique}, \texttt{members\_below\_kstar}); \file{checks/verify\_equilibria.py} (E1--E6: 20{,}000 instances, exhaustive enumeration, antitonicity control) \\[4pt]
+N4 \S\ref{prop:assort} & Assortative set is always an equilibrium and minimises total $\kappa$; ranking is an unweighted utility sum, not resource efficiency &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{cost\_exchange\_le}, \texttt{totalCost\_cons}, \texttt{surplus\_gap\_is\_cost\_gap}); \file{checks/verify\_equilibria.py} (N4, 6000 economies, 1335 with multiplicity; control 3892; N4-WELFARE, 1344 multiplicity economies) \\[4pt]
+P6 \S\ref{prop:P6} & $\mu\to0\Rightarrow\Delta(m)=1/(m{+}2)$, indep.\ of $Q$ &
+  \status{PROVED} & \tier{S} &
+  \file{checks/verify\_p679.py} (P6 block); \file{checks/verify\_sympy.py} (S9); \file{checks/run\_all.py} (P6) \\[4pt]
+R1 \S\ref{sec:R1} & Collapse threshold $\bar Q$ with $k^*=0$ &
+  \status{REFUTED} (own) & \tier{N} &
+  \file{checks/run\_all.py} (R1) \\[4pt]
+P7 \S\ref{prop:P7} & $\Delta(m)\le V/(m{+}1)$; $k^*\le V/\kappa$, unif.\ in $Q$ &
+  \status{PROVED} & \tier{S}\,/\,\tier{L} &
+  Algebraic steps \tier{S}: \file{checks/verify\_sympy.py} (S18 dominance factorisation, abstract $F,G,C$; S19 $G^{e}\le1$ on $[0,1]$; S20 $\int_0^1u^m\,du=1/(m{+}1)$, symbolic in $m$). Deduction bound~$\Rightarrow$~cap \tier{L}: \file{lean/EntryContest.lean} (\texttt{entry\_index\_bounded}). Integral monotonicity assumed, see \S\ref{sec:tiers}. Corroborated \tier{N}: \file{checks/verify\_p679.py}, \file{checks/run\_all.py}. \\[4pt]
+R2 \S\ref{sec:R2} & $k^*$ decreasing in $Q$ for all $\mu>0$ &
+  \status{REFUTED} (referee) & \tier{N} &
+  \file{checks/run\_all.py} (R2) \\[4pt]
+P8 \S\ref{prop:P8} & $k^*$ nondecr.\ in $V$, nonincr.\ in $c$ &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{entry\_monotone}, \texttt{nonentry\_monotone}); \file{checks/verify\_p89.py} (P8a, P8b) \\[4pt]
+P-UNIQ \S\ref{lem:crossing} & Single crossing $\Rightarrow$ $k^*$ unique; $\Delta$ invariant to wealth &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{single\_crossing}); \file{checks/verify\_p89.py} (P-UNIQ, 300 economies) \\[4pt]
+P9 \S\ref{prop:P9} & MPS sign flips exactly at $\bar w=\bar\mu$ (full effect) &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{linSpread\_isPivotSpread}, reducing P9 to P9-gen; \texttt{linSpread\_monotone}); \file{checks/verify\_sympy.py} (S15a--c); \file{checks/verify\_p679.py} (P9 block); \file{checks/verify\_p89.py} (both branches: 230 + 4000 cases) \\[4pt]
+P9-gen \S\ref{prop:P9gen} & Sign rule for arbitrary pivot-spreads (pivot $x_0$, not the mean) &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{cost\_falls\_above\_pivot}, \texttt{cost\_rises\_below\_pivot}, \texttt{order\_preserved}; composed into \texttt{entry\_preserved\_above\_pivot}, \texttt{nonentry\_preserved\_below\_pivot}, \texttt{entry\_set\_grows\_above\_pivot}); \file{checks/verify\_p9gen.py} (4 families, 0 violations; 729 control violations) \\[4pt]
+R1 \S\ref{prop:tailprop} & One-sided rank condition on two sorted profiles suffices; pivot-spread is a special case &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{entry\_preserved\_of\_up\_to\_margin}, \texttt{nonentry\_preserved\_of\_beyond\_margin}, \texttt{downFromMargin\_imp\_beyondMargin}, \texttt{pivot\_imp\_upToMargin}, \texttt{pivot\_imp\_downFromMargin}); \file{checks/verify\_p9gen.py} (R1: explicit non-pivot witness; 3000 spreads, 977 multi-crossing, 2276 genuine MPS, 0 violations; R1-SCOPE: MPS alone insufficient, 37/4000; R1-WEAK: margin unconstrained, 4000 cases, control 362; R1-FREE: mean-preservation not assumed, 4000 cases) \\[4pt]
+BAND \S\ref{prop:band} & Coverage is exactly $k^*\le L$ or $M<k^*$; every
+  margin is covered iff the spread is dispersive; and inside the band the
+  displacement signs determine nothing &
+  \status{PROVED} & \tier{L}\,/\,\tier{N} &
+  Coverage criterion \tier{L}: \file{lean/EntryContest.lean}
+  (\texttt{band\_empty\_iff}, \texttt{band\_nonempty\_of\_lt}; both
+  axiom-free). Faithfulness of the $L/M$ form and sharpness \tier{N}:
+  \file{checks/verify\_tailband.py} (T1, $20{,}000$, $0$ mismatches; T2
+  equivalence with single crossing; T3 $20{,}889$ covered instances, $0$
+  violations, incl.\ $1982/1982$ where both branches force $k^*$ fixed; T4
+  two opposite-direction witnesses inside the band --- a refutation, hence
+  established; T5 band frequency $47.2\%$ unstructured vs $0.0\%$ dispersive).
+  Resolves open item~\ref{item:tailopen}. \\[4pt]
+P9-str \S\ref{prop:P9strict} & Strong spread $\Rightarrow$ $k^*$ falls strictly &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{linSpread\_strict\_anti\_in\_lam}, \texttt{linSpread\_unbounded\_below}, \texttt{entry\_ceiling\_of\_marginal\_exit}, \texttt{strict\_drop\_of\_marginal\_exit}); \file{checks/verify\_sympy.py} (S16 $\kappa\to\infty$, S17 strict monotonicity); \file{checks/verify\_p9gen.py} (P9-STRICT, 400 economies) \\[4pt]
+P-MU \S\ref{prop:PMU} & Exact condition for sign of $d\Delta(0)/dQ$ &
+  \status{PROVED} & \tier{S} &
+  \file{checks/verify\_sympy.py} (S10 identity exact; S11 weight hump-shaped; S12 sign over the admissible power family, see \S\ref{sec:tiers}); \file{checks/verify\_p89.py} (P-MU, observed sign) \\[4pt]
+Alg & $KF-KG=K(F-G)$ (factorisation used in P3) &
+  \status{PROVED} & \tier{L} &
+  \file{lean/EntryContest.lean} (\texttt{step\_factor}, \texttt{step\_sign}) \\
+\end{longtable}
+\label{tab:index}
+
+\section{Primitives}
+\label{sec:primitives}
+
+One prize of value $V>0$, \emph{exogenous and fixed} --- decoupled from the
+wealth distribution. This decouples the prize from inequality, which
+is the fix for the prize/affordability conflation raised in referee
+comments (Section~\ref{sec:R2-affordability}).
+
+The prize is allocated by rank rather than purchased, and that is a modelled
+feature rather than a convenience. \citet{ColeMailathPostlewaite1992} interpret
+status as ``a ranking device that determines how well he or she fares in the
+nonmarket sector'', and \citet{ColeMailathPostlewaite1995} observe that when
+desirable goods ``are allocated as prizes rather than sold, the standard
+welfare theorems regarding the Pareto optimality of the outcomes no longer
+apply'' --- a remark in their concluding discussion rather than a theorem, but
+the right characterisation of the object. Nothing below inherits their
+machinery: by P1 the gain is proportional to $V$, so $V$ enters this model only
+as a scale factor, and all that is used of it is that it is fixed and
+rank-allocated.
+
+$Q$ challengers plus one incumbent. Each player chooses $e_i\in\{0,1\}$:
+pay nominal cost $c$ to acquire social capital. After the entry
+decision, draws $r_i,s_i$ independent across players \emph{and independent of
+the wealth profile}, from \emph{arbitrary} distributions, $s_i\ge0$. Score
+\[
+  \sigma_i \;=\; \mu r_i + (1-\mu)s_i e_i.
+\]
+Highest score takes the prize. Static, one shot.
+
+Independence of the draws from wealth is a substantive modelling commitment and
+is where Proposition~\ref{prop:anon} bites: it is what makes $F$ and $G$, and
+hence $\Delta$, functions of the entrant \emph{count} alone rather than of
+which wealths entered. Economies in which wealth buys ability --- so that
+$s_i$ is drawn conditionally on $w_i$ --- are outside the scope of everything
+below, and deliberately so: the model isolates the pure affordability channel.
+
+\paragraph{What lies outside that scope, and why it matters.} The exclusion is
+not a formality, and the boundary is demonstrated rather than asserted. Let
+ability be tilted against wealth by a parameter $\theta$: take
+$\Pr(s_i\le x)=x^{a_i}$ on $[0,1]$ with $a_i=e^{\theta z_i}$, where $z_i$ runs
+from $+1$ at the richest rank to $-1$ at the poorest, so that $\theta=0$
+reproduces the assumption above exactly. Then
+(\file{checks/verify\_anonymity.py}, $\Delta$ computed by deterministic
+quadrature with the discretisation error bounded so that every reported
+violation can be compared against it):
+
+\begin{itemize}
+\item At $\theta=0$ the spread of $\Delta$ within a fixed count class is
+  \emph{exactly} zero (A1-2): Proposition~\ref{prop:anon} is verified on the
+  model's induced primitives, not merely assumed. Away from $\theta=0$ that
+  spread is of order $10^{-1}$ (A1-3), so the test is not vacuous.
+\item For $\theta>0$ --- ability rising with wealth --- count invariance held
+  in every economy sampled. This is \emph{support and not proof}: zero
+  violations in a finite sample is tier~\tier{N} evidence for a universal
+  claim, in the sense of \S\ref{sec:tiers}.
+\item For $\theta<0$ --- ability falling with wealth --- count invariance is
+  \textbf{false}. With $Q=4$, $\mu=1/2$, $c=1$, CRRA $\gamma=2$ and
+  $\theta=-3/2$, the profile
+  $w=(4.2197,\,2.9982,\,1.9339,\,1.8760)$, giving
+  $\kappa=(0.0736,\,0.1669,\,0.5537,\,0.6085)$, has exactly two pure-strategy
+  equilibria: the \emph{poorest} challenger entering alone, and the two
+  \emph{richest} entering together --- counts $1$ and $2$. The binding margin
+  exceeds the quadrature error by more than three orders of magnitude, so this
+  is a genuine counterexample and not a numerical artefact.
+\end{itemize}
+
+The mechanism of the failure is worth stating, because it identifies what
+anonymity is really buying. Under a negative tilt the ablest challenger is
+also the one facing the highest entry cost, so the question of \emph{how many}
+enter and the question of \emph{which} of them enter cease to be separable ---
+and it is precisely their separation that Proposition~\ref{prop:count-inv}
+turns into a count that every equilibrium shares. Since every comparative
+static below is a statement about that count, the assumption is load-bearing
+for the whole of Section~\ref{sec:proofs}, not only for
+Proposition~\ref{prop:anon}. Positive correlation between wealth and ability
+appears to be harmless because it reinforces the cost ordering rather than
+opposing it; that direction is not claimed.
+
+\paragraph{Payoffs.} Writing $u$ for the utility of wealth,
+\begin{equation}
+  U_i \;=\; u\big(w_i - c\,e_i\big) \;+\; V\cdot\mathbf{1}\{i \text{ wins}\},
+  \label{eq:payoff}
+\end{equation}
+with $u$ increasing and satisfying the burden condition stated below. Two
+features of \eqref{eq:payoff} do real work and are worth stating rather than
+leaving to be inferred from the entry condition. The cost is paid \emph{inside} $u$, so it is felt in utility
+units and its burden falls with wealth; the prize is \emph{additively
+separable} and enters linearly, so it is valued identically by rich and poor
+and carries no wealth effect of its own. Inequality therefore operates through
+exactly one channel, the cost side.
+
+This is the \emph{privilege} contest of \citet{SchroyenTreich2016} rather than
+their rent-seeking contest, and the difference is not cosmetic: were $V$
+money added to the resource, it would sit inside $u$, the two wealth effects
+would oppose, and under CARA they would exactly cancel. Keeping $V$ outside $u$
+is licensed by what the prize \emph{is} --- a rank-allocated non-market good in
+the sense of \citet{ColeMailathPostlewaite1992}, not a transfer that can be
+spent.
+
+Induced score CDFs: $G$ for a non-investor ($\mu r$), $F$ for an
+investor ($\mu r+(1-\mu)s$). All results are stated in $F$ and $G$
+only. Write
+\[
+  \varphi \;\equiv\; G-F \;\ge\;0.
+\]
+Regularity: $F,G$ continuous, common lower endpoint, $\varphi$
+vanishing at both endpoints of the union of supports.
+
+Wealth heterogeneity among challengers, $w_i\sim\Lambda$, with support
+bounded below by $c$ and $\kappa(w)\to\infty$ as $w\downarrow c$. Utility
+cost of entry $\kappa(w)=u(w)-u(w-c)$, continuous --- the only channel
+through which inequality operates.
+
+\paragraph{Burden-monotonicity.} The assumption on $u$ is
+\begin{equation}
+  w'>w \quad\Longrightarrow\quad u(w')-u(w'-c) \;<\; u(w)-u(w-c),
+  \label{eq:burdenmono}
+\end{equation}
+that is, $\kappa$ is strictly decreasing in $w$. Note the scale at which this
+is stated: it constrains the increments of $u$ over spans of the \emph{fixed}
+length $c$, not the curvature of $u$ at a point.
+
+Strict concavity of $u$ is sufficient, and this is how earlier versions of
+this document stated the primitive. The implication is immediate from
+\[
+  \kappa'(w) \;=\; u'(w)-u'(w-c),
+\]
+which is negative whenever $u'$ is strictly decreasing (S21). It is
+\emph{strictly} sufficient: there are non-concave $u$ satisfying
+\eqref{eq:burdenmono}, and one is exhibited in Claim~\ref{claim:bmweak}
+below. Nothing in this document uses concavity anywhere else. Every proof
+that touches the cost side runs on $\kappa$, and the only other appearance of
+$u$ is $u'(w-c)>0$ in Proposition~\ref{prop:P8}, which is monotonicity rather
+than curvature.
+
+The Lean development was always at this generality: \file{lean/EntryContest.lean}
+takes burden-monotonicity as the hypothesis
+\texttt{hkap}~$:\forall a\,b,\ a\le b\to\kappa(b)\le\kappa(a)$ directly, and
+the symbol $u$ does not occur in the file at all. So the restatement above
+closes a gap between the prose and the formal layer rather than changing what
+was proved --- the same direction as the tail-condition correction, with the
+prose having claimed \emph{less} than had been established.
+
+\begin{claim}[Burden-monotonicity is strictly weaker than concavity]
+\label{claim:bmweak}
+There exists an increasing $u$, non-concave on every neighbourhood of a set of
+points of positive measure, satisfying \eqref{eq:burdenmono} on a non-degenerate
+interval. Hence the class of admissible $u$ is strictly larger than the concave
+class.
+\end{claim}
+
+\begin{proof}
+Take $u(x)=\sqrt{x}+\varepsilon\sin(kx)$ with $c=1$, $\varepsilon=3/50$ and
+$k=2\pi/p$. For any $k$, $c$ and $w$,
+\[
+  \sin(kw)-\sin\!\big(k(w-c)\big)
+  \;=\; 2\sin\!\Big(\tfrac{kc}{2}\Big)\cos\!\Big(k\big(w-\tfrac{c}{2}\big)\Big),
+\]
+verified symbolically in $k,c,w$ with no family assumed (S22a). The burden
+therefore inherits the oscillation only through the amplitude
+$2\varepsilon\sin(kc/2)$, which vanishes exactly when $kc$ is a multiple of
+$2\pi$, i.e.\ when the period $p$ divides $c$. At $p\in\{1,\tfrac12,\tfrac13\}$
+the amplitude is exactly zero (S22b), so
+$\kappa(w)=\sqrt{w}-\sqrt{w-1}$ identically, which is strictly decreasing
+(S22c). Yet $u''(x)=-\tfrac14x^{-3/2}-\varepsilon k^2\sin(kx)>0$ at every
+point with $\sin(kx)=-1$ in the range, and such points are exhibited (S22d).
+\end{proof}
+
+\paragraph{How much room this buys is open, and the example is knife-edge.}
+The amplitude $2\varepsilon\sin(kc/2)$ vanishes only on a measure-zero set of
+periods. At $p=0.7$, which does not divide $c$, \eqref{eq:burdenmono} fails
+outright, and the violation is exhibited at $w=1.3$ (S23). Claim~\ref{claim:bmweak}
+establishes that the containment is \emph{proper}; it does not establish that
+the additional room is economically substantial, and it should not be read as
+evidence that non-concavity is generally harmless. Characterising the
+tolerance --- the conjecture being that it is governed by the width of the
+convex region relative to $c$, since a burden reading only wealth differences
+of size $c$ cannot see a convex stretch much narrower than $c$ --- is open and
+is recorded as such in \file{TODO.md}.
+
+\paragraph{Information.} The realised wealth profile
+$(w_1,\dots,w_Q)$ is \emph{common knowledge} among the challengers, and
+entry decisions are simultaneous. This assumption is load-bearing and was
+left implicit in earlier versions of this document. It is what licenses
+writing the entry condition on the order statistics $w_{(1)}\le\cdots\le
+w_{(Q)}$ as in \eqref{eq:entry}, and hence what makes $k^*$ a
+\emph{deterministic} count --- one that is the same in every pure-strategy
+equilibrium, by Proposition~\ref{prop:count-inv} below.
+
+It does \emph{not} pin the identities of the entrants, and an earlier version
+of this document claimed that it did. It does not: with
+$\Delta=(12,10,1)$ and $\kappa=(2,5,8)$ --- admissible, since $\Delta$ is
+strictly antitone and $\kappa$ increasing in the wealth ranking --- the
+entrant sets $\{1,2\}$, $\{1,3\}$ and $\{2,3\}$ are all equilibria, the last
+of these with the \emph{richest} challenger absent, because joining as a third
+entrant is unprofitable even for her while the two poorer entrants are each
+content facing one rival. What complete information delivers is the count and
+the existence of the assortative equilibrium, not uniqueness of the entrant
+set.
+
+The alternative --- privately known entry costs --- yields a symmetric
+Bayesian threshold in cost space and a \emph{binomial} entrant count, as in
+\citet{MorenoWooders2011}; there the number of entrants and the identity of the
+entering set are both random, being determined by unobserved cost draws. The
+mechanical difference is sharper than the informational one: their equilibrium
+threshold is a single number $t$, against which every buyer compares her own
+cost, because under private information all buyers face the same expected
+utility. Here the comparison value depends on \emph{rank} --- the $j$-th
+richest faces $\Delta(j-1)$ --- because she knows how many richer rivals enter
+ahead of her. A rank-dependent rule collapses to a flat one only if $\Delta$ is
+constant, which Corollary~\ref{cor:monotone} forbids. The two models are genuinely different, and
+the difference is exactly this assumption, not the shape of $\kappa$. The
+complete-information reading is also what the verification artefacts
+implement: both \file{lean/EntryContest.lean} and the Python suites operate
+on an explicitly ordered wealth profile.
+
+Under complete information with heterogeneous $\kappa(w_i)$ there is no
+symmetry to break, so no mixing is required and no tie-breaking rule is
+needed. This is the respect in which the present model differs from the
+endogenous-entry literature with identical agents, where the entrant count
+is pinned but the identities are not --- resolved there by mixed entry
+\citep{LevinSmith1994}, by sequential arrival \citep{FuLu2010}, or by
+private random delays \citep{MorganOrzenSefton2012}.
+
+Opponent maximum when $m$ other challengers invest:
+$H_m = F^m G^{Q-1-m} C$, where $C\in\{F,G\}$ is the incumbent's CDF.
+Gain from investing:
+\[
+  \Delta(m) \;=\; V\Big[\textstyle\int H_m\,dF - \int H_m\,dG\Big].
+\]
+
+\section{Terminology}
+\label{sec:terminology}
+
+Every English term used in a claim or proof below is bound here to a symbol
+built from the primitives of Section~\ref{sec:primitives}. Terms are listed
+only where they carry load in a stated result; where a symbol alone would do,
+no term is introduced. Nothing in the table is a new object --- each entry is
+a name for something already defined --- so the table can be read as a
+translation key rather than as a second set of definitions.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.235\textwidth}>{\raggedright\arraybackslash}p{0.185\textwidth}>{\raggedright\arraybackslash}p{0.52\textwidth}@{}}
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Definition} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Definition} \\
+\midrule
+\endhead
+\multicolumn{3}{@{}l}{\emph{Players and actions}}\\[2pt]
+challenger & $i\in\{1,\dots,Q\}$ & A wealth-heterogeneous player choosing
+  whether to compete. \\
+incumbent & $C\in\{F,G\}$ & The additional player, entering exogenously;
+  appears only through her score CDF $C$ in $H_m$. \\
+invest, enter & $e_i=1$ & Pay $c$ and draw the two-component score. \\
+entrant & $i$ with $e_i=1$ & A challenger who invests. \\
+outsider & $i$ with $e_i=0$ & A challenger who does not. \\
+entrant set & $S\subseteq\{1,\dots,Q\}$ & $S=\{i:e_i=1\}$. \\
+prize & $V>0$ & Fixed, exogenous, rank-allocated; enters
+  \eqref{eq:payoff} additively, outside $u$. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Wealth and cost}}\\[2pt]
+wealth & $w_i$ & Challenger $i$'s resource, with $w_i>c$. \\
+wealth profile & $(w_1,\dots,w_Q)$ & The realised vector; common knowledge. \\
+wealth distribution & $\Lambda$ & The law from which the profile is drawn. \\
+rank & $j$ & Index into the descending order statistics
+  $w_{(1)}\ge\cdots\ge w_{(Q)}$; rank $1$ is richest. \\
+entry cost (utility) & $\kappa(w)=u(w)-u(w-c)$ & The burden of $c$ in
+  utility units. \\
+burden-monotonicity & $\kappa$ strictly decreasing in $w$ & \eqref{eq:burdenmono}:
+  the assumption on $u$, stated at the scale of $c$ rather than pointwise.
+  Implied by strict concavity, strictly weaker than it
+  (Claim~\ref{claim:bmweak}). The hypothesis \texttt{hkap} in the Lean
+  development. \\
+entry cost (resource) & $c$ & The nominal cost, identical for all agents.
+  Distinct from $\kappa$; the two are never interchangeable. \\
+affordability channel & $\kappa$ & The sole route by which the wealth
+  distribution affects behaviour, given \eqref{eq:payoff}. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Scores and gains}}\\[2pt]
+score & $\sigma_i=\mu r_i+(1-\mu)s_ie_i$ & What the prize is awarded on. \\
+score CDFs & $F$, $G$ & Law of $\sigma$ for an entrant ($F$) and an
+  outsider ($G$); $F\le G$ pointwise by P2. \\
+dominance gap & $\varphi=G-F\ge0$ & The wedge investment buys. \\
+opponent maximum & $H_m=F^mG^{Q-1-m}C$ & CDF of the best rival score when
+  $m$ other challengers invest. \\
+gain from investing & $\Delta(m)=V\!\int\! H_m\,dF-V\!\int\! H_m\,dG$ &
+  The right-hand side of the entry condition; antitone in $m$ by
+  Corollary~\ref{cor:monotone}. \\
+anonymity & $\Delta$ a function of $m$ alone & $\Delta$ depends on the
+  \emph{number} of rival entrants, not on which agents they are
+  (Proposition~\ref{prop:anon}); requires draws independent of wealth. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Equilibrium objects}}\\[2pt]
+entry condition & $\kappa(w_{(j)})\le\Delta(j-1)$ & \eqref{eq:entry}: rank
+  $j$ enters when her utility cost is no greater than her gain. \\
+single crossing & $\kappa(w_{(j)})-\Delta(j-1)$ increasing in $j$ &
+  Lemma~\ref{lem:crossing}; what makes the entry set a prefix. \\
+entry count & $k^*$ & The largest $k$ with the entry condition holding at
+  every rank $j\le k$. \\
+count invariance & $|S|=k^*$ for all equilibria & Every pure-strategy
+  equilibrium has the same size
+  (Proposition~\ref{prop:count-inv}). \\
+identity multiplicity & $S\ne S'$, $|S|=|S'|=k^*$ & Distinct entrant sets
+  are equilibria at the same count. \\
+assortative set & $\{(1),\dots,(k^*)\}$ & The $k^*$ ranks with the lowest
+  $\kappa$, i.e.\ the $k^*$ richest. \\
+marginal entrant & rank $k^*$, wealth $w_{(k^*)}$ & The last rank
+  satisfying the entry condition. \\
+inframarginal entrant & rank $j<k^*$ & An entrant richer than the marginal
+  one. \\
+outsider rank & rank $j>k^*$ & A rank at which the entry condition fails. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Comparative statics}}\\[2pt]
+spread & $w\mapsto w'$ & Any map between wealth profiles; results below
+  never assume it preserves the mean unless said. \\
+mean-preserving spread & $\sum_j(w'_{(j)}-w_{(j)})=0$ plus
+  second-order dominance & The economic case of interest, not a hypothesis
+  of Proposition~\ref{prop:tailprop}. \\
+displacement & $w'_{(j)}-w_{(j)}$ & The rank-by-rank difference between the
+  two sorted profiles. \\
+quantile coupling & $\Lambda_\beta^{-1}(r_j)-\Lambda_\alpha^{-1}(r_j)$ &
+  The displacement read as a difference of quantile functions; always
+  available, since both profiles are sorted. \\
+pivot & $x_0$ & The wealth at which the displacement changes sign. \\
+pivot-spread & $T$ with $w\ge x_0\Rightarrow Tw\ge w$ and
+  $w\le x_0\Rightarrow Tw\le w$ & A spread expanding on both sides of a
+  single pivot; the dispersive case. \\
+tail condition & $w'_{(j)}\ge w_{(j)}$ for $j\le k^*$; or
+  $w'_{(j)}\le w_{(j)}$ for $j>k^*$ & The one-sided rank hypothesis of
+  Proposition~\ref{prop:tailprop}; implied by, but weaker than, the pivot
+  hypothesis. \\
+endogenous margin & $k^*$ moving with the profile & The marginal entrant is
+  a different agent before and after; Proposition~\ref{prop:endogenous}. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Aggregates}}\\[2pt]
+total entry cost & $\sum_{i\in S}\kappa(w_i)$ & In utility units. Its
+  resource counterpart is $|S|c=k^*c$, identical across equilibria. \\
+sum of payoffs & $\sum_i U_i$ & Unweighted, hence an interpersonal
+  comparison of the cardinal index $u$; see the discussion after
+  Proposition~\ref{prop:assort} for what it does and does not entail. \\
+selection & a rule picking one equilibrium & Not a refinement: nothing
+  claims players coordinate on it. \\
+\bottomrule
+\end{longtable}
+
+Three pairs are deliberately kept apart because conflating them is what
+earlier drafts did. \emph{Entry cost} in utility ($\kappa$) versus in
+resources ($c$): only the first varies with wealth, and only the second is
+what society gives up. \emph{Count invariance} versus \emph{identity
+multiplicity}: the first holds, the second is real, and every comparative
+static below is about the count for that reason. \emph{Spread} versus
+\emph{tail condition}: the propositions are stated on the second, and the
+first is what they are applied to.
+
+\section{Proofs}
+\label{sec:proofs}
+
+\subsection{P1: representation}
+\label{prop:P1}
+\begin{proposition}
+$\Delta(m) = V\,\mathbb E[\varphi(M_m)]$.
+\end{proposition}
+\begin{proof}
+By parts, $\int H\,dF = 1-\int F\,dH$ and $\int H\,dG=1-\int G\,dH$, the
+boundary terms vanishing since $HF$ and $HG$ run from $0$ to $1$.
+Subtracting, $\int H\,dF-\int H\,dG = \int(G-F)\,dH = \mathbb
+E[\varphi(M_m)]$.
+\end{proof}
+Replaces the entire $p_1<1/(Q{+}1)<p_1'$ apparatus of the prior
+version with one distribution-free object.
+
+\subsection{P2: first-order stochastic dominance}
+\label{prop:P2}
+\begin{proposition}
+$F\le G$ pointwise, strictly on an interval if $s$ has positive mass
+on $(0,\infty)$.
+\end{proposition}
+\begin{proof}
+$X=\mu r+(1-\mu)s\ge \mu r=Y$ pathwise for $s\ge0$, so for every threshold
+$t$ the event $\{X\le t\}$ is contained in $\{Y\le t\}$, and monotonicity of
+probability under inclusion gives $F(t)\le G(t)$.
+\end{proof}
+
+The event inclusion --- the whole probabilistic content of the step --- is
+machine-checked as \texttt{below\_subset\_of\_pathwise}, and its consequence
+for the CDFs as \texttt{cdf\_le\_of\_pathwise}, with monotonicity of the
+probability functional supplied as an explicit hypothesis rather than proved
+(no measure theory is available in the Lean development; see
+\S\ref{sec:tiers}). The pathwise gap $X-Y=(1-\mu)s$ and the resulting CDF
+ordering are checked exactly in \file{checks/verify\_sympy.py} (S13, S14).
+Hence $\varphi\ge0$ and, by P1, $\Delta(m)\ge0$: investing never
+hurts, with no assumption beyond $s\ge0$.
+
+\subsection{P3: the difference identity}
+\label{prop:P3}
+\begin{theorem}[key result]
+For $K\equiv F^m G^{Q-2-m}C$,
+\[
+  \Delta(m{+}1)-\Delta(m) \;=\; -\frac{V}{2}\int\varphi^2\,dK \;\le\;0.
+\]
+\end{theorem}
+\begin{proof}
+\begin{align*}
+\Delta(m{+}1)-\Delta(m)
+  &= \int (H_{m+1}-H_m)(dF-dG) = \int K(F-G)(dF-dG) \\
+  &= \int K\varphi\,(dG-dF) = \int K\varphi\,d\varphi
+   = \int K\,d\!\left(\tfrac{\varphi^2}{2}\right) \\
+  &= \Big[\tfrac{K\varphi^2}{2}\Big] - \tfrac12\int\varphi^2\,dK
+   = -\tfrac12\int\varphi^2\,dK,
+\end{align*}
+the boundary term vanishing because $\varphi=0$ at both endpoints. $K$
+is a product of CDFs, hence non-decreasing, so $dK\ge0$.
+\end{proof}
+
+\subsubsection{Corollary: monotonicity}
+\label{cor:monotone}
+\begin{corollary}
+$\Delta$ is non-increasing in $m$, strictly wherever
+$\varphi\not\equiv0$ on $\operatorname{supp}(dK)$.
+\end{corollary}
+
+\begin{quotation}
+\noindent\textit{This refutes the author's own earlier conjecture.} An
+initial sketch argued that because $\varphi$ is hump-shaped (zero at
+both ends, positive between), $\mathbb E[\varphi(M_m)]$ need not fall
+when $M_m$ rises stochastically, so monotonicity would need a
+hazard-rate or single-crossing condition. That reasoning was wrong:
+the integration by parts shows the hump shape is irrelevant, because
+$\varphi$ enters \emph{squared} against $dK$. Monotonicity is
+\emph{unconditional}, and no auxiliary condition is needed.
+\end{quotation}
+
+\subsection{P5: equilibrium existence and uniqueness}
+\label{prop:P5}
+\begin{proposition}
+Let $\kappa$ be the marginal entrant's utility cost. Since $\Delta$ is
+strictly decreasing (\S\ref{cor:monotone}), the set
+$\{m:\Delta(m)\ge\kappa\}$ is a prefix $\{0,\dots,k^*-1\}$, so
+\[
+  k^* \;=\; \#\{m:\Delta(m)\ge\kappa\}
+\]
+is the unique pure-strategy equilibrium number of investing
+challengers, with $k^*=0$ and $k^*=Q$ as boundary cases.
+\end{proposition}
+Proved in Lean as \texttt{enters\_downward\_closed},
+\texttt{cutoff\_unique}, and \texttt{equilibrium\_is\_threshold}
+(\file{lean/EntryContest.lean}), none depending on any axiom.
+
+This delivers the referees' three-regime structure (full withdrawal /
+interior / full participation) as a \emph{derived} result rather than
+an assumption, and is exactly the asymmetric $k$-of-$Q$ structure
+requested in review (\S\ref{sec:R1-asymmetric}).
+
+\subsubsection{P5-inv: the count is an invariant of the game}
+\label{prop:count-inv}
+
+Proposition~\ref{prop:P5} constructs the assortative equilibrium and shows the
+entry set is a prefix \emph{of that schedule}. Since other equilibria exist
+(\S\ref{sec:primitives}), the question is what survives across all of them.
+The answer is everything this document goes on to use.
+
+\begin{proposition}[count invariance]
+\label{prop:countinv}
+Index challengers in increasing order of $\kappa$, equivalently decreasing
+wealth. Let $S$ be any pure-strategy equilibrium entrant set: every $i\in S$
+satisfies $\kappa_i\le\Delta(|S|-1)$ and every $i\notin S$ satisfies
+$\kappa_i>\Delta(|S|)$. Then $|S| = k^*$.
+\end{proposition}
+\begin{proof}
+Write $k=|S|$. Since $S$ has $k$ distinct indices, some member sits at index
+$k-1$ or higher, and $\kappa$ is increasing, so
+$\kappa_{(k)}\le\Delta(k-1)$; maximality of $k^*$ gives $k\le k^*$.
+Conversely, suppose $k<k^*$. Single crossing propagates the entry condition
+down from $k^*$, so $\kappa_{(k+1)}\le\Delta(k)$. As $|S|=k$, at least one of
+the $k+1$ cheapest agents lies outside $S$, and that agent has
+$\kappa\le\Delta(k)$ --- contradicting the outsider condition. Hence
+$k = k^*$.
+\end{proof}
+
+The two combinatorial steps --- some member at index $\ge k-1$, some index
+$\le k$ omitted --- are pigeonhole facts about a $k$-element set of indices;
+they enter the Lean development as explicit hypotheses and are discharged by
+exhaustive enumeration in \file{checks/verify\_equilibria.py}, which also
+confirms the conclusion directly on $20{,}000$ random instances (every
+equilibrium of every instance has count $k^*$; identity multiplicity occurs in
+$17.3\%$ of them). The order-theoretic core is machine-checked as
+\texttt{count\_le\_kstar}, \texttt{count\_ge\_kstar} and
+\texttt{equilibrium\_count\_unique}.
+
+\emph{This is what licenses the rest of the document.} P7, P8, P9, P9-gen,
+P9-str and P-MU are all statements about $k^*$, and $k^*$ is exactly the
+quantity that does not vary across equilibria.
+
+\begin{proposition}[when identities are pinned]
+\label{prop:idunique}
+If in addition $\kappa_{(k^*+1)}>\Delta(k^*-1)$ --- the first excluded
+challenger would decline even the most favourable slot --- then every member of
+an equilibrium has index below $k^*$, so the assortative set
+$\{1,\dots,k^*\}$ is the unique equilibrium.
+\end{proposition}
+\begin{proof}
+A member satisfies $\kappa_i\le\Delta(k^*-1)$ by
+Proposition~\ref{prop:countinv}; if $i>k^*$ then
+$\kappa_i\ge\kappa_{(k^*+1)}>\Delta(k^*-1)$, a contradiction. With $k^*$
+members all drawn from the first $k^*$ indices, the set is exactly the prefix.
+\end{proof}
+
+Machine-checked as \texttt{members\_below\_kstar}, and confirmed without
+exception on the $11{,}141$ sampled instances satisfying the condition. Where
+it fails, assortativity remains a defensible \emph{selection} --- among
+count-$k^*$ equilibria it is the one that fills the slots with the lowest-cost
+agents, and so minimises total realised entry cost --- but that is an argument
+for a selection rather than a consequence of the primitives, and is treated as
+such here.
+
+\subsubsection{N4: assortative entry as a selection}
+\label{prop:assortative}
+
+Proposition~\ref{prop:count-inv} fixes the entrant count but not the entrant
+set: where $\kappa(w_{(k^*+1)})\le\Delta(k^*-1)$, several distinct sets are
+equilibria. The assortative set --- the $k^*$ agents with the lowest entry
+cost --- is therefore a \emph{selection} and requires an argument rather than
+an assumption. The argument is that it is the cheapest, and that under
+anonymity cheapest means efficient.
+
+\begin{proposition}[assortative selection]
+\label{prop:assort}
+Among the pure-strategy equilibria of the entry game:
+\begin{enumerate}
+\item the assortative set $\{(1),\dots,(k^*)\}$ is always one of them;
+\item it minimises the total entry cost $\sum_{i\in S}\kappa(w_i)$ actually
+  paid; and
+\item since $\Delta$ depends on the entrant count alone
+  (Proposition~\ref{prop:anon}) and that count is the same in every
+  equilibrium (Proposition~\ref{prop:count-inv}), the sum of the agents'
+  payoffs differs across equilibria \emph{only} through that total. The
+  assortative equilibrium therefore maximises the unweighted sum of payoffs.
+\end{enumerate}
+Part (iii) is a statement about one particular aggregate, and the choice of
+that aggregate is a commitment, not a definition; the discussion following
+this proposition records what it does and does not entail.
+\end{proposition}
+
+\begin{proof}
+(i) For $j\le k^*$, single crossing gives $\kappa(w_{(j)})\le
+\kappa(w_{(k^*)})\le\Delta(k^*-1)$, so every member is content; for $j>k^*$,
+$\kappa(w_{(j)})\ge\kappa(w_{(k^*+1)})>\Delta(k^*)$ by the definition of
+$k^*$, so no outsider wishes to join. (ii) All equilibria have $k^*$ members
+by Proposition~\ref{prop:count-inv}, and the $k^*$ smallest values of a
+finite set minimise the sum over subsets of that size; the assortative set is
+exactly the $k^*$ smallest $\kappa$. (iii) Fix two equilibria $S,T$ with
+$|S|=|T|=k^*$. The prize term depends on $|S|$ only, so it cancels, leaving
+the difference in aggregate payoff equal to
+$\sum_{i\in T}\kappa(w_i)-\sum_{i\in S}\kappa(w_i)$.
+\end{proof}
+
+The one-step exchange underlying (ii) --- replacing a member by a cheaper
+non-member never raises the total --- is machine-checked as
+\texttt{cost\_exchange\_le}, with \texttt{totalCost\_cons} for additivity and
+\texttt{surplus\_gap\_is\_cost\_gap} for (iii), whose hypothesis
+$|S|=|T|$ is where anonymity enters. That the hypothesis is load-bearing and
+not decorative is checked directly: across $9022$ pairs of equilibria the
+payoff gap equals the cost gap under a gain schedule that is a function of
+the count alone, and fails to in $3022$ of the same pairs once the schedule
+is allowed to depend on \emph{which} agents entered
+(\file{checks/verify\_equilibria.py}, N4 and its control). The full
+minimisation in (ii)
+follows by iterating exchanges and is the standard sorting fact; it is checked
+numerically rather than proved in Lean. Over $6000$ economies, of which
+$1335$ exhibit genuine identity multiplicity, the assortative set is an
+equilibrium in every case and attains the minimum cost in every case; a
+non-assortative count-$k^*$ set is \emph{strictly} costlier in $3892$ control
+cases, so the selection is not vacuous
+(\file{checks/verify\_equilibria.py}, N4).
+
+\paragraph{What the ranking in (iii) is, and what it is not.}
+Three things have to be said, because (iii) is easy to over-read.
+
+First, it carries no resource-efficiency content. Every equilibrium has
+$k^*$ members and each pays the same access cost $c$, so the resources
+consumed are $k^*c$ in all of them; the equilibria are indistinguishable in
+those terms. The ranking exists only because $\kappa$ is a \emph{utility}
+increment, $u(w)-u(w-c)$, which differs across agents of different wealth.
+Verified directly: over $1344$ economies exhibiting genuine identity
+multiplicity, every equilibrium has the same size in every case, while the
+total $\kappa$ differs strictly in every case
+(\file{checks/verify\_equilibria.py}, N4-WELFARE).
+
+Second, summing $\kappa$ across agents is an interpersonal comparison of the
+model's cardinal utility index. That the index is cardinal is already assumed
+--- the entry condition \eqref{eq:entry} compares a utility increment against
+a prize valued in the same units, which is the privilege-contest form of
+\S\ref{sec:primitives} --- so no new cardinality is imported here. What is
+new is comparability across agents, and it is a normative commitment rather
+than a consequence of the model. Its direction should be stated plainly:
+because $\kappa$ falls in wealth, the unweighted sum is smallest when the
+wealthiest agents are the ones who enter, and the assortative set is exactly
+that set. In all $1344$ multiplicity cases it is the equilibrium whose
+members are the richest, strictly (same check). The earlier reading of this
+as the choice of ``a planner indifferent to identity'' was wrong: a planner
+maximising the unweighted sum is not indifferent to identity, it strictly
+prefers wealthy entrants, and would rank the same allocation differently
+under any inequality-averse weighting.
+
+Third, it does not compete with the welfare question the referee raised, and
+is not an answer to it. This proposition ranks equilibria \emph{at} the
+equilibrium count $k^*$; the welfare question is whether $k^*$ is itself too
+large, since in a fixed-prize contest entry is rent-dissipating and the
+business-stealing logic of \citet{LevinSmith1994} applies. The two operate at
+different margins and are logically independent: (iii) selects among the sets
+the game admits, and says nothing about whether the game admits too many
+entrants. Nothing here is a welfare recommendation.
+
+It remains a selection rather than a strategic refinement in any case:
+nothing says players coordinate on the cheapest equilibrium.
+
+\subsection{P6: the \texorpdfstring{$\mu\to0$}{mu to 0} benchmark}
+\label{prop:P6}
+\begin{proposition}
+As $\mu\to0$, $\Delta(m)=\dfrac{1}{m+2}$, independent of $Q$.
+\end{proposition}
+\begin{proof}
+At $\mu=0$, $Y=\mu r\equiv0$, so $G$ is the point mass at $0$ and
+$G(x)=1$ for all $x\ge0$. Hence $G^{Q-1-m}\equiv1$ and, with the
+incumbent investing, $H_m=F^m\cdot1\cdot F=F^{m+1}$. Then
+\[
+  \int H_m\,dF = \int_0^1 F^{m+1}\,dF = \frac{1}{m+2},
+\]
+while $\int H_m\,dG = H_m(0) = F(0)^{m+1}=0$ provided $s>0$ almost
+surely. Therefore $\Delta(m)=1/(m+2)$, with no dependence on $Q$.
+\end{proof}
+Confirms Referee 2's conjecture exactly. The $Q$-independence is
+structural: $Q$ enters only through $G^{Q-1-m}$, which collapses to
+$1$.
+
+\subsection{R1: no collapse threshold (refuted)}
+\label{sec:R1}
+The author conjectured a finite $\bar Q$ beyond which $k^*=0$, intended
+to replace the old mobility ceiling. \textbf{False.} $\Delta(0)$
+converges to a strictly positive limit (numerical evidence in
+\file{checks/run\_all.py} (R1)), because non-investor scores are capped
+at $\sup\operatorname{supp}(G)=\mu$ while investor scores can exceed
+it: $\Delta(m)\to\Pr(X>\mu)\cdot\Pr(\text{beat incumbent})>0$.
+
+\subsection{P7: saturation, uniformly in \texorpdfstring{$Q$}{Q}}
+\label{prop:P7}
+\begin{theorem}
+$\Delta(m)\le V/(m{+}1)$ for every $m$ and every $Q$; hence
+\[
+  k^* \;\le\; V/\kappa \qquad\text{uniformly in } Q.
+\]
+\end{theorem}
+\begin{proof}
+$H_m=F^mG^{Q-1-m}C\le F^m$, since $G\le1$ and $C\le1$. So
+\[
+  \Delta(m)=\int H_m\,(dF-dG) \;\le\; \int H_m\,dF \;\le\; \int
+  F^m\,dF = \frac{V}{m+1}.
+\]
+Entry at index $m$ requires $\Delta(m)\ge\kappa$, forcing
+$m+1\le V/\kappa$. The bound mentions no $Q$.
+\end{proof}
+Saturation is not asymptotic but a \emph{uniform explicit cap}, which replaces
+the prior version's numerical claim. At $\mu\to0$ the bound is nearly tight
+against P6's $1/(m{+}2)$.
+
+\paragraph{What is and is not new here.} The accounting behind P7 --- entrant
+count times entry cost cannot exceed prize mass --- is not new, and the
+proposition should not be read as claiming a new inequality.
+\citet{FuJiaoLu2015} obtain the same bound for identical agents with mixed
+entry: their rent-accounting inequality~(2) states
+$[1-(1-q)^M]V \geq Mq(\Delta + \mathbb{E}[x^\alpha])$, and every feasible point
+of their Definition~2 accordingly satisfies $Mq\,\Delta \leq V$, a cap on the
+\emph{expected} entrant count. \citet{FuLu2010} reach the same relation as an
+equality, their~(7) giving total effort as budget minus $N$ times the entry
+cost.
+
+Three things distinguish P7, and the contribution is exactly these. It bounds a
+\emph{pure-strategy} count rather than an expected one, so the cap is a genuine
+finite index bound rather than a restriction on a probability. It is stated in
+\emph{utility} units, $\kappa$ rather than a nominal cost, which is what makes
+it interact with the wealth distribution at all. And it holds under
+\emph{fixed rules with no designer}: Fu--Lu's $N$ is the count induced by an
+optimally chosen contest, whereas here the rules are given and the count is
+whatever the wealth ordering produces. Stripped of these, the shared content is
+a single monotonicity-and-transitivity step.
+
+The verification splits along the two halves of the argument. The
+\emph{implication} --- if $(m{+}1)\Delta(m)\le V$ and challenger $m$ enters,
+then $(m{+}1)\kappa\le V$ --- is machine-checked as
+\texttt{entry\_index\_bounded} (depends on no axioms), though it is a single
+composition of monotonicity with transitivity and carries little content. The
+\emph{premise} is where the work is, and its algebraic steps are exact
+(\file{checks/verify\_sympy.py}): the dominance factorisation
+$F^m-H_m=F^m(1-G^{Q-1-m}C)$ for abstract $F,G,C$ (S18), the bound $G^{e}\le1$
+on $[0,1]$ that signs the bracket (S19), and $\int_0^1u^m\,du=1/(m{+}1)$
+symbolically in $m$ (S20). The one step not verified is monotonicity of the
+integral, which is assumed --- see \S\ref{sec:tiers}, where the reason the
+conclusion is \emph{not} tested directly is also recorded. The quadrature
+block in \file{checks/verify\_p679.py} (five values of $\mu$, seven of $Q$ up
+to $128$, twelve of $m$, no violations, implied cap on $k^*$ observed to
+hold) is corroboration rather than the basis of the claim.
+
+\subsection{R2: the \texorpdfstring{$Q$}{Q} comparative static (refuted)}
+\label{sec:R2}
+Referee 2 conjectured that for $\mu>0$, higher $Q$ shrinks the pie
+among investors, so fewer invest. \textbf{Not general}: the sign
+depends on $\mu$, reversing at a distribution-dependent crossover
+$\mu^*\in[0.1,0.7]$ across the families tested
+(\file{checks/run\_all.py} (R2)). Below $\mu^*$, extra non-investors
+mainly damage the non-investing deviator, \emph{strengthening} the
+incentive to invest as $Q$ grows.
+
+\subsection{P8: prize and affordability, separated}
+\label{prop:P8}
+
+Sort challengers by wealth, descending. The $j$-th richest, entering as
+the $j$-th entrant, faces $j-1$ others, so her entry condition is
+\begin{equation}
+  \kappa(w_{(j)}) \;\le\; \Delta(j-1).
+  \label{eq:entry}
+\end{equation}
+
+\begin{lemma}[single crossing]
+\label{lem:crossing}
+The left side of \eqref{eq:entry} is non-decreasing in $j$ ($\kappa$ is
+decreasing in $w$ and $w_{(j)}$ is decreasing in $j$) and the right side
+is non-increasing in $j$ (Corollary~\ref{cor:monotone}). Hence the entry
+set is a prefix and $k^*$ is unique.
+\end{lemma}
+
+This resolves what was previously listed as an open ``fixed point''
+issue: no iteration is required. The reason is structural and worth
+stating separately.
+
+\begin{proposition}[anonymity]
+\label{prop:anon}
+$\Delta(j-1)$ depends on the \emph{number} of entrants only, not on
+their wealth: the contest is anonymous, so $F$ and $G$ do not involve
+$w$. The wealth distribution therefore enters \eqref{eq:entry} only
+through $\kappa(w_{(j)})$.
+\end{proposition}
+
+\begin{theorem}[P8]
+$k^*$ is non-decreasing in $V$ and non-increasing in $c$.
+\end{theorem}
+\begin{proof}
+By P1, $\Delta(m)=V\,\mathbb E[\varphi(M_m)]$ is proportional to $V$, so
+raising $V$ raises the right side of \eqref{eq:entry} pointwise; the
+entry set can only grow. For $c$: $\partial\kappa/\partial c =
+u'(w-c)>0$, so raising $c$ raises the left side pointwise; the entry set
+can only shrink.
+\end{proof}
+
+Both directions are instances of a single monotone comparative-statics
+lemma, formalised in Lean as \texttt{entry\_monotone} and
+\texttt{nonentry\_monotone}; Lemma~\ref{lem:crossing} is
+\texttt{single\_crossing} (\file{lean/EntryContest.lean}). None depends
+on any axiom.
+
+Note the prize effect applies to rich and poor challengers alike, which
+was the referee's objection to the prior version
+(\S\ref{sec:R2-affordability}); it is accommodated here rather than
+assumed away.
+
+\subsection{P9: inequality and aggregate expenditure}
+\label{prop:P9}
+
+\begin{theorem}[P9]
+\label{thm:P9}
+Let $w\mapsto\bar\mu+\lambda(w-\bar\mu)$, $\lambda>1$,
+$\bar\mu=\mathbb E[w]$, be a linear mean-preserving spread. Then:
+\begin{enumerate}
+\item if the marginal entrant is richer than the mean,
+  $w_{(k^*)}>\bar\mu$, then $k^*$ weakly \emph{rises};
+\item if the marginal entrant is poorer than the mean,
+  $w_{(k^*)}<\bar\mu$, then $k^*$ weakly \emph{falls}.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Order statistics map as $w_{(j)}\mapsto\bar\mu+\lambda(w_{(j)}-\bar\mu)$,
+and
+\[
+  \big(\bar\mu+\lambda(w_{(j)}-\bar\mu)\big)-w_{(j)}
+  \;=\;(\lambda-1)(w_{(j)}-\bar\mu),
+\]
+which is positive exactly when $w_{(j)}>\bar\mu$. Since $\kappa$ is
+decreasing in $w$, the left side of \eqref{eq:entry} falls for entrants
+richer than the mean and rises for those poorer. By
+Proposition~\ref{prop:anon} the right side $\Delta(j-1)$ is unchanged.
+Applying the monotone comparative-statics lemma in each direction gives
+the two cases.
+\end{proof}
+
+Formally this is P9-gen (\S\ref{prop:P9gen}) instantiated at the pivot
+$x_0=\bar\mu$: \texttt{linSpread\_isPivotSpread} machine-checks that
+$T w=\bar\mu+\lambda(w-\bar\mu)$ with $\lambda\ge1$ satisfies the
+\texttt{PivotSpread} hypothesis, so the two branches follow from
+\texttt{entry\_preserved\_above\_pivot} and
+\texttt{nonentry\_preserved\_below\_pivot} without a separate argument. The
+displacement identity, its sign on each side of the pivot, and mean
+preservation are checked symbolically in S15a--c.
+
+\emph{This closes what the previous draft listed as an open item.} The
+earlier version proved only the partial effect at fixed $\Delta$ and
+flagged the congestion feedback as unresolved. Proposition~\ref{prop:anon}
+shows there is no feedback to resolve: $\Delta$ is a function of the
+entrant count alone and is invariant to the wealth distribution, so the
+partial effect \emph{is} the full effect.
+
+The sign therefore flips exactly at $w_{(k^*)}=\bar\mu$, i.e.\ at entry
+rate $1-\Lambda(\bar\mu)$ --- a sharp, distribution-specific prediction
+rather than a qualitative ``exclusive versus mass'' statement. Verified on
+$\Lambda=\text{lognormal}(0.6,0.45)$: predicted flip at entry rate
+$0.4110$, confirmed at all seven threshold quantiles tested. Both branches
+are exercised separately in
+\file{checks/verify\_p89.py}: 230 cases for the rise branch, 4000 for the
+fall branch (629 of them strict), with no violations.
+
+\paragraph{Why this matters.} Inequality \emph{raises} status
+expenditure in exclusive competitions and \emph{lowers} it in mass
+ones. Non-tautological, since $V$ is fixed by construction, and it
+reconciles the motivating empirical pattern with the received result ---
+inequality dampens status competition, as in
+\citet{ColeMailathPostlewaite1992} (\S IV.A) and, on the intensive margin,
+\citet{HopkinsKornienko2004,HopkinsKornienko2010} --- rather than
+contradicting it: that finding is recovered as the mass-competition
+(below-pivot) case, while exclusive competitions sit in the regime where the
+sign flips. The full statement, with precedents and scope, is
+\S\ref{sec:contribution}.
+
+\subsection{P9 general: arbitrary pivot-spreads}
+\label{prop:P9gen}
+
+The linear spread is a special case. Call $T$ a \emph{pivot-spread about
+$x_0$} if $T$ is increasing and
+\[
+  T(w)\ge w \ \text{ for } w\ge x_0, \qquad
+  T(w)\le w \ \text{ for } w\le x_0 .
+\]
+
+\begin{theorem}[P9, general form]
+\label{thm:P9gen}
+Let $T$ be a pivot-spread about $x_0$. If the marginal entrant satisfies
+$w_{(k^*)}>x_0$ then $k^*$ weakly rises; if $w_{(k^*)}<x_0$ then $k^*$
+weakly falls.
+\end{theorem}
+\begin{proof}
+$T$ increasing preserves the wealth ordering, so the $j$-th order
+statistic maps as $w_{(j)}\mapsto T(w_{(j)})$. Since $\kappa$ is
+decreasing in $w$, the pivot property gives
+$\kappa(T(w_{(j)}))\le\kappa(w_{(j)})$ for $w_{(j)}\ge x_0$ and the
+reverse for $w_{(j)}\le x_0$. By Proposition~\ref{prop:anon} the gain
+schedule $\Delta(j-1)$ is unchanged. Apply the monotone
+comparative-statics lemma in each direction.
+\end{proof}
+
+\begin{quotation}
+\noindent\textit{Correction to the linear statement.} The relevant
+threshold is the \emph{pivot} $x_0$, not the mean. The two coincide for
+the linear spread $T(w)=\bar\mu+\lambda(w-\bar\mu)$, which is why the mean
+appeared in \S\ref{prop:P9}; a general mean-preserving spread may pivot
+elsewhere, and then the flip is at $x_0$. Tested directly: applying the
+mean-based rule to non-linear pivot-spreads produces 968 counterexamples,
+while the pivot-based rule has none.
+\end{quotation}
+
+\paragraph{The pivot-spread class is not ad hoc.} It is, up to a crossing
+condition, the standard dispersion order of this literature.
+\citet{HopkinsKornienko2009} introduce the \emph{dispersive order} of
+\citet{Shaked1982} precisely to sign comparative statics of a competitive
+equilibrium under a change in the underlying distribution --- the class of
+problem P9-gen belongs to --- and their Definition~1 says $F \leq_d G$ whenever
+$G^{-1}(r) - F^{-1}(r)$ is weakly increasing. Transporting this through
+$T = G^{-1}\circ F$ makes the displacement $T(w) - w$ weakly increasing, and
+then two things follow, both machine-checked in
+\file{lit/hopkins\_kornienko/Dispersive.lean}: monotonicity of $T$ is
+\emph{implied} rather than assumed (\texttt{dispersive\_imp\_monotone}), and a
+zero of the displacement yields the \texttt{PivotSpread} hypothesis about that
+point (\texttt{dispersive\_crossing\_imp\_pivot}). So the two hypotheses of
+Theorem~\ref{thm:P9gen} are delivered together by a standard order plus a
+crossing.
+
+The crossing condition is not decoration. A pure translation $T(w) = w+1$ is
+dispersive and monotone yet is a pivot-spread about \emph{no} point at all
+(\texttt{shiftUp\_not\_pivotSpread}), so the dispersive order alone does not
+suffice.
+
+\paragraph{Precedent.} The closest structural precedent for the pivot rule is
+\citet{CostrellLoury2004}'s two-job model, where the wage schedule is governed
+by the single sufficient statistic $\hat\mu = F^{-1}(\theta)$, the ability of
+the marginal worker between jobs, and they state that the effect of a more
+unequal ability distribution ``depends on whether the worker on the margin
+between jobs, at quantile $\theta$, lies in the upper or lower tail''. P9-gen
+is the entry-count analogue. One difference should be stated rather than
+glossed: their marginal quantile $\theta$ is \emph{fixed by technology}, since
+jobs come in fixed proportions, so only $\hat\mu$ moves when $F$ does; here
+$k^*$ is \emph{endogenous} and is precisely what the comparative static is
+about. The analogy is in the sign logic, not in the status of the margin, and
+their object is a continuum wage schedule where ours is an integer count.
+
+Their Proposition~10 is also a caution worth carrying: under Cobb--Douglas
+crowding, where the assignment re-optimises, the direction of the inequality
+effect \emph{reverses} relative to their fixed-proportions Proposition~6. The
+analogue of fixed assignment here is that $\Delta$ does not move under a wealth
+spread --- and that is not an assumption but Proposition~\ref{prop:anon}. The
+literature's own experience is that this sign flips when the allocation
+re-optimises; P9 is safe because the absence of feedback was proved, not
+assumed.
+
+The hypothesis is not vacuous. Maps that contract near the pivot --- for
+instance $T(w)=x_0+\operatorname{sign}(d)|d|^{p}$ with $d=w-x_0$ and
+$p>1$, for which $|d|^p<|d|$ when $|d|<1$ --- are increasing but are
+\emph{not} pivot-spreads, and they do violate the sign rule (729
+violations in the control run). Four qualifying families (linear,
+quadratic, mixed, exponential) give zero violations across 1500 economies
+each. Verified in \file{checks/verify\_p9gen.py}; the two cost lemmas are
+\texttt{cost\_falls\_above\_pivot} and \texttt{cost\_rises\_below\_pivot},
+with order preservation as \texttt{order\_preserved}
+(\file{lean/EntryContest.lean}, no axioms).
+
+\subsubsection{N1: the margin is endogenous, and the rule survives it}
+\label{prop:endog}
+
+Theorem~\ref{thm:P9gen} is stated at the marginal index. That index is not
+fixed: $k^*$ is determined by \eqref{eq:entry} and moves when the
+distribution moves, so the marginal entrant is in general a different agent
+before and after the spread. The rule nevertheless needs only a single
+comparison at the \emph{pre}-spread margin.
+
+\begin{proposition}[endogenous margin]
+\label{prop:endogenous}
+Let $T$ be a monotone pivot-spread about $x_0$, let challengers be sorted
+descending, and let $k^*$ be the pre-spread entrant count.
+\begin{enumerate}
+\item If $w_{(k^*)}>x_0$ then no pre-spread entrant exits, so the post-spread
+  count satisfies $k^{*\prime}\ge k^*$.
+\item If $w_{(k^*)}<x_0$ then no pre-spread outsider --- that is, no agent at
+  a rank $j>k^*$ --- enters, so $k^{*\prime}\le k^*$.
+\end{enumerate}
+No post-spread margin need be located.
+\end{proposition}
+
+\begin{proof}
+Descending order does the work. For (i), any $j\le k^*$ has $w_{(j)}\ge
+w_{(k^*)}>x_0$, so every inframarginal entrant is also above the pivot; by
+the pivot property $T(w_{(j)})\ge w_{(j)}$, so $\kappa$ falls weakly and
+\eqref{eq:entry} continues to hold at every such $j$. For (ii), any $j>k^*$
+has $w_{(j)}\le w_{(k^*)}<x_0$, so every \emph{outsider} is also below the
+pivot, $T(w_{(j)})\le w_{(j)}$, $\kappa$ rises weakly, and \eqref{eq:entry},
+which failed at those $j$ by the definition of $k^*$, continues to fail. The
+argument is confined to $j>k^*$: at the margin itself \eqref{eq:entry} holds,
+so there is nothing there to preserve. Monotonicity of $T$ preserves the
+descending order, so Lemma~\ref{lem:crossing} applies to the post-spread
+profile and $k^{*\prime}$ is well defined; $\Delta$ is unchanged by
+Proposition~\ref{prop:anon}.
+\end{proof}
+
+This is stronger than the fixed-index reading of the same rule, and it is the
+respect in which the present setting differs from its closest structural
+precedent. In \citet{CostrellLoury2004}'s two-job model the marginal quantile
+$\theta$ is fixed by technology --- jobs come in fixed proportions, so
+$\theta$ does not move when the ability distribution does, and only
+$\hat\mu=F^{-1}(\theta)$ shifts. Here the marginal index is itself the object
+the comparative static is about, and the sign rule holds anyway.
+
+That difference should not be read as this proposition dominating theirs, and
+it is not claimed here. Costrell--Loury sign a smooth aggregate --- a wage
+schedule --- under a general spread, which is a harder object than an integer
+threshold count and is why their argument needs machinery this one does not.
+What is being compared is not two theorems of differing strength but two
+formulations: moving the choice to the extensive margin replaces the
+aggregate with a threshold statistic, and it is that replacement which makes
+an endogenous margin tractable at all. The modelling choice is the
+contribution; the proposition is what the choice buys, and it is
+correspondingly easy once the choice is made.
+
+The hypothesis is not slack: comparing the pivot against the \emph{richest}
+challenger rather than the marginal one produces violations in $154$ of
+$2744$ control cases (\file{checks/verify\_p9gen.py}, N1 CONTROL), so the
+marginal index is the load-bearing comparison point. Machine-checked as
+\texttt{entry\_preserved\_below\_marginal\_index} and
+\texttt{nonentry\_preserved\_beyond\_marginal\_index}, with
+\texttt{descending\_preserved} for well-definedness; checked numerically with
+$k^*$ recomputed on both sides over $20\,000$ economies, $0$ violations, the
+count actually moving in $393$ of them.
+
+\subsubsection{R1: a one-sided tail condition, and the spreads it covers}
+\label{prop:tail}
+
+Theorem~\ref{thm:P9gen} assumes $T$ is a pivot-spread: the displacement
+changes sign exactly once. That is the dispersive case. A general
+mean-preserving spread need not be dispersive --- its quantile difference may
+cross zero arbitrarily often. The pivot hypothesis is nonetheless stronger
+than the argument requires.
+
+Compare the two \emph{sorted} profiles rank by rank. This is always
+available: the rank-wise comparison of two distributions is their quantile
+coupling, $w'_{(j)}-w_{(j)}=\Lambda_\beta^{-1}(r_j)-\Lambda_\alpha^{-1}(r_j)$,
+and it is monotone by construction, so no assumption is needed to obtain it.
+
+\begin{proposition}[tail condition]
+\label{prop:tailprop}
+Let $w$ and $w'$ be any two wealth profiles, each sorted descending, and let
+$k^*$ and $k^{*\prime}$ be the entry counts they induce through
+\eqref{eq:entry}.
+\begin{enumerate}
+\item If $w'_{(j)}\ge w_{(j)}$ for every $j\le k^*$, then $k^{*\prime}\ge k^*$.
+\item If $w'_{(j)}\le w_{(j)}$ for every $j>k^*$, then $k^{*\prime}\le k^*$.
+\end{enumerate}
+Nothing is assumed about the displacement on the other side of the margin,
+which may therefore change sign any number of times. In (ii) nothing is
+assumed at the margin either: rank $k^*$ is the marginal \emph{entrant}, so
+her wealth may move in either direction.
+\end{proposition}
+
+The hypotheses are worth reading for what they omit. Two properties are used
+and no others: $\kappa$ is non-increasing in wealth, which is concavity and
+nothing more (\S\ref{sec:primitives}), and both profiles are sorted, so that
+Lemma~\ref{lem:crossing} defines each count. There is no requirement that
+$w'$ be obtained from $w$ by a spread, by a mean-preserving transformation,
+or by any transformation at all --- in particular
+$\sum_j\bigl(w'_{(j)}-w_{(j)}\bigr)=0$ is nowhere used, and the two profiles
+need bear no relation to each other beyond the rank-wise inequality assumed.
+The Lean development has always been at this generality
+(\texttt{entry\_preserved\_of\_up\_to\_margin} quantifies over arbitrary
+\texttt{w w'}); what is corrected here is the surrounding statement, which
+described the result as being about spreads.
+
+Mean-preserving spreads are the case of economic interest, and everything
+below applies the proposition to them. But they are the application, not the
+hypothesis, and the distinction matters for what may be claimed: the
+proposition is not a comparative-static result about $\Lambda$, it is a
+monotonicity result about a threshold statistic, which is then \emph{used}
+to obtain comparative statics whenever a spread happens to satisfy its
+condition.
+
+\begin{proof}
+(i) For $j\le k^*$, $\kappa$ decreasing gives $\kappa(w'_{(j)})\le
+\kappa(w_{(j)})\le\Delta(j-1)$, so \eqref{eq:entry} still holds at every such
+$j$, and the count cannot fall. (ii) For $j>k^*$ the agent is an outsider, so
+$\kappa(w_{(j)})>\Delta(j-1)$ by the definition of $k^*$; the hypothesis
+gives $\kappa(w'_{(j)})\ge\kappa(w_{(j)})$, so \eqref{eq:entry} still fails
+and the count cannot rise. Note that the argument is available only at
+$j>k^*$: at $j=k^*$ the entry condition \emph{holds}, which is what makes
+that agent the margin, so no conclusion is drawn there and none is needed.
+\end{proof}
+
+The pivot hypothesis implies the tail condition
+(\texttt{pivot\_imp\_upToMargin}, \texttt{pivot\_imp\_downFromMargin}), so
+Theorem~\ref{thm:P9gen} and Proposition~\ref{prop:endogenous} are special
+cases. The converse fails, which is the content: an explicit witness with
+$Q=8$, displacement $(0.02,0.02,0.02,0.30,-0.20,0.15,-0.10,\cdot)$ closed to
+sum zero, is mean-preserving, keeps the profile sorted, changes sign three
+times --- so it is \emph{not} a pivot-spread --- satisfies the tail
+condition, and moves $k^*$ from $3$ to $4$. Randomised: $3000$ spreads, of
+which $977$ change sign at least twice and $2276$ are mean-preserving spreads
+in the second-order-dominance sense rather than merely mean-preserving
+perturbations; no violations (\file{checks/verify\_p9gen.py}, R1).
+Machine-checked as \texttt{entry\_preserved\_of\_up\_to\_margin} and
+\texttt{nonentry\_preserved\_of\_beyond\_margin}, the latter on the
+strict-outsider hypothesis stated above;
+\texttt{downFromMargin\_imp\_beyondMargin} records that the earlier
+formulation, which also signed the displacement at the margin, assumed more
+than the conclusion needs. Checked numerically with the margin and every
+inframarginal rank left free to move either way: $4000$ cases, $0$
+violations, against a control in which no rank is signed and $k^*$ rises in
+$362$ of $4000$ (\file{checks/verify\_p9gen.py}, R1-WEAK).
+
+The condition is a genuine hypothesis and not a restatement of
+mean-preservation, in both directions. It is not implied by it: among $4000$
+sampled spreads that are mean-preserving in the second-order-dominance sense,
+$37$ have a quantile difference that turns negative at some rank at or above
+the margin, and in those cases $k^*$ \emph{falls} --- witness $Q=10$,
+$k^*=8\to7$ (\file{checks/verify\_p9gen.py}, R1-SCOPE). Nor does it imply
+mean-preservation: over $4000$ profile pairs satisfying the condition and
+deliberately \emph{not} mean-preserving, the count never falls
+(\file{checks/verify\_p9gen.py}, R1-FREE), confirming on the checked layer
+what the proof already shows --- that
+$\sum_j\bigl(w'_{(j)}-w_{(j)}\bigr)=0$ is not among the hypotheses. Which
+mean-preserving spreads satisfy the condition is settled in
+\S\ref{prop:band} below, and the witness above is what makes that question
+non-vacuous.
+
+Why this works where the assignment literature needs more machinery: $k^*$ is
+a threshold statistic, not an integral. \citet{Suen2007} and
+\citet{CostrellLoury2004} sign smooth aggregates and must therefore control
+the quantile difference at every rank, which is what forces integration by
+parts and a log-concavity or monotone-weight condition. The entry count reads
+the quantile function only down to the margin, so one-sided information
+suffices and no such condition is needed.
+
+\subsubsection{The band: which margins the tail condition covers, and why it
+cannot be weakened}
+\label{prop:band}
+
+Write the rank-by-rank displacement of the two sorted profiles as
+$d_j=w'_{(j)}-w_{(j)}$, rank $1$ richest, and set
+\[
+  L=\min\{j: d_j<0\},\qquad M=\max\{j: d_j>0\},
+\]
+the richest rank whose wealth falls and the poorest rank whose wealth rises.
+The two hypotheses of Proposition~\ref{prop:tailprop} are then exactly
+$k^*\le L$ (rise branch) and $M<k^*$ (fall branch), an equivalence verified
+over $20\,000$ instances with no mismatch (\file{checks/verify\_tailband.py},
+T1). The proposition is therefore silent precisely on margins with
+$L<k^*\le M$. Call that range the \emph{band}.
+
+Two things follow, and together they close the question.
+
+\paragraph{What dispersiveness buys, exactly.} Every margin is covered if and
+only if $M\le L$ --- that is, if and only if no rank that rises is poorer than
+a rank that falls, which is precisely single crossing of the displacement.
+This is machine-checked: \obj{lean/EntryContest.lean}{band\_empty\_iff},
+axiom-free, together with the contrapositive
+\obj{lean/EntryContest.lean}{band\_nonempty\_of\_lt}. So a pivot-spread is not
+a convenient special case of the tail condition; it is \emph{the} class on
+which the rule holds at every margin, and the band is the exact price of
+leaving it.
+
+\paragraph{The hypothesis is sharp.} Inside the band both directions occur.
+Over $40\,000$ genuine mean-preserving spreads the rule is never violated
+where it applies --- $20\,889$ covered instances, $0$ violations, including
+$1\,982$ in which \emph{both} branches apply and the rule accordingly forces
+$k^*$ to be unchanged, which it is in every one. Inside the band, by contrast,
+$k^*$ rises in $4\,785$ cases and falls in $130$
+(\file{checks/verify\_tailband.py}, T3--T4). Two witnesses with the same
+displacement-sign class and opposite conclusions are displayed there. Since a
+single such pair refutes any purported strengthening, this is established
+rather than sampled: \textbf{no conclusion about the direction of $k^*$ can be
+drawn from the displacement signs alone once the margin lies in the band.}
+The tail condition is not a convenient sufficient condition awaiting
+improvement; it is the whole of what the sign pattern supports.
+
+\paragraph{A caution about how large the band is.} It is tempting to quote a
+frequency, and misleading to do so. Under the unstructured generator that
+produced the R1-SCOPE witness --- displacements drawn independently and then
+balanced --- $47.2\%$ of admissible spreads leave the margin in the band. That
+number describes the generator, not the economics: multi-crossing is typical
+by construction there. Under a linear mean-preserving spread and under a
+mean-preserving increase in the dispersion of a lognormal, the figure is
+$0.0\%$ in $8\,000$ instances each, since both families are dispersive and
+Lemma \obj{lean/EntryContest.lean}{band\_empty\_iff} then applies at every
+margin (T5). The honest statement is the conditional one: the band is empty
+for dispersive spreads and can be substantial for spreads whose quantile
+difference oscillates, and no single frequency should be attached to it.
+
+\paragraph{What remains open.} Only this: whether some statistic of the spread
+\emph{other} than the displacement signs --- its magnitudes, or a weighted
+functional of the quantile difference of the kind
+\citet{CostrellLoury2004} use --- predicts the direction of $k^*$ inside the
+band. The present result says the signs do not, and says nothing about
+whether something else might.
+
+\subsection{P9 strictness}
+\label{prop:P9strict}
+
+\begin{proposition}
+\label{prop:strict}
+Suppose the marginal entrant is strictly below the pivot,
+$w_{(k^*)}<x_0$, and consider the linear family
+$T_\lambda(w)=x_0+\lambda(w-x_0)$. Then $k^*(\lambda)$ is non-increasing
+in $\lambda$, and there exists $\bar\lambda$ such that
+$k^*(\lambda)<k^*(1)$ for all $\lambda>\bar\lambda$.
+\end{proposition}
+\begin{proof}
+Non-increasingness is Theorem~\ref{thm:P9gen} applied at each
+$\lambda$. For strictness: $\kappa$ is continuous and strictly
+decreasing in $w$, with $\kappa(w)\to\infty$ as $w\downarrow c$. Since
+$w_{(k^*)}<x_0$, $T_\lambda(w_{(k^*)})$ decreases without bound in
+$\lambda$, so $\kappa(T_\lambda(w_{(k^*)}))$ eventually exceeds the fixed
+value $\Delta(k^*-1)$ and the marginal entrant exits. Because the entry
+set is a prefix (Lemma~\ref{lem:crossing}), losing the marginal entrant
+strictly reduces the count.
+\end{proof}
+
+The three steps are separated in the verification. That
+$T_\lambda(w_{(k^*)})$ is strictly decreasing in $\lambda$ and unbounded
+below is machine-checked (\texttt{linSpread\_strict\_anti\_in\_lam},
+\texttt{linSpread\_unbounded\_below}). That losing the marginal entrant
+strictly reduces the count --- because the post-spread entry set is a prefix,
+so no index at or above the exiting one can enter --- is machine-checked
+(\texttt{entry\_ceiling\_of\_marginal\_exit},
+\texttt{strict\_drop\_of\_marginal\_exit}). The remaining step is analytic and
+is \emph{not} proved in Lean: that $\kappa$ diverges at the support floor, so
+that a low enough wealth makes the entry cost exceed the fixed gain
+$\Delta(k^*-1)$. It enters as the boundary condition stated in
+Section~\ref{sec:primitives} and is checked symbolically for the log and
+CRRA families in \file{checks/verify\_sympy.py} (S16, S17). Verified in
+addition over 400 qualifying economies: $k^*$ is monotone in $\lambda$ and
+strictly lower at $\lambda=100$ than at $\lambda=1$ in every case.
+
+\subsection{P-MU: the \texorpdfstring{$Q$}{Q} comparative static, characterised}
+\label{prop:PMU}
+
+\begin{proposition}
+$\Delta(0,Q{+}1)-\Delta(0,Q) = -\int G^{Q-1}(1-G)F\,(dF-dG)$, so
+$\Delta(0)$ is increasing in $Q$ if and only if
+\[
+  \int W\,dF \;<\; \int W\,dG, \qquad W \equiv G^{Q-1}(1-G)F .
+\]
+\end{proposition}
+The difference identity is exact (\file{checks/verify\_sympy.py}, S10), and
+$W$ is hump-shaped in $G$ with an interior maximum at $G=(Q-1)/Q$ (S11), so
+first-order stochastic dominance alone cannot sign the comparison: the
+crossover $\mu^*$ of \S\ref{sec:R2} is where the weighting flips. This is an
+exact characterisation, not an asymptotic one, and it is why $\mu^*$ is
+distribution-dependent rather than universal.
+
+\paragraph{Provenance of the weight.} The hump-shaped factor is not an artefact
+of this construction. $G^{Q-1}(1-G)$, peaking at $G=(Q-1)/Q$, is exactly the
+log-supermodular kernel $F^{k-1}(1-F)$, peaking at $F=(k-1)/k$, that
+\citet{RyvkinDrugov2020} use to drive their comparative statics in the number
+of players, under $G \leftrightarrow F$ and $Q \leftrightarrow k$; the extra
+factor $F$ here is the incumbent's CDF and carries no $Q$. Their corresponding
+object is $b_k = \mathbb{E}[f(X_{(k-1:k-1)})]$, the individual marginal benefit
+of effort, which is the right comparator for $\Delta(0)$ --- their hazard-rate
+result concerns \emph{aggregate} effort and a different order statistic. The
+log-supermodularity that drives their argument does carry over to $W$, but
+their single-crossing hypothesis does not: Karlin's variation-diminishing step
+requires the integrand to cross $+-$, whereas $F(f-g) = -F\varphi'$ crosses
+$-+$. Consequently no unimodality of $\Delta(0,Q)$ in $Q$ is claimed here, and
+none follows from the correspondence.
+
+One caveat, recorded because an earlier version of this document overstated
+the point. Hump-shapedness shows that FOSD does not \emph{determine} the
+sign; it does not by itself exhibit both signs. Evaluating the integral
+exactly over the power family $F=x^{k},G=x$ subject to the model constraint
+$F\le G$ gives the same sign in all fifteen admissible pairs tested (S12).
+The sign reversal underlying the refutation of R2 is exhibited in
+\file{checks/verify\_p89.py} on the model's induced $F,G$ --- scores
+$\mu r+(1-\mu)se$ --- which are not power functions. Verified against the
+observed sign at $\mu\in\{0.1,\dots,0.9\}$ and $Q\in\{4,8,16\}$.
+
+\section{Contribution and its precedents}
+\label{sec:contribution}
+
+\paragraph{The claim.} For a fixed prize awarded by rank, the effect of
+resource inequality on \emph{how many people compete} has a determinate sign,
+and the sign is set by a single observable: whether the marginal entrant
+stands above or below the pivot of the spread. A \emph{dispersive} spread of
+the resource distribution --- one whose displacement changes sign exactly
+once, the leading case being the linear mean-preserving spread
+$w\mapsto\bar\mu+\lambda(w-\bar\mu)$ of Theorem~\ref{thm:P9} ---
+\emph{widens} entry when the marginal competitor is richer than the pivot and
+\emph{shrinks} it when poorer (Theorem~\ref{thm:P9gen}), strictly so under the
+boundary condition of Proposition~\ref{prop:strict}. What the proof actually
+uses is weaker still: a one-sided condition on the quantile difference down to
+the margin, with mean-preservation nowhere among the hypotheses
+(Proposition~\ref{prop:tailprop}). Within that class the rule holds globally,
+distribution-free, and under burden-monotonicity of $u$ alone
+(\eqref{eq:burdenmono}; strict concavity is sufficient but not necessary,
+Claim~\ref{claim:bmweak}).
+
+That class is a genuine restriction, and it belongs with the claim rather than
+only with the scope discussion at the end of this section. A
+Rothschild--Stiglitz mean-preserving spread need \emph{not} be dispersive: its
+quantile difference may cross zero any number of times, and $37$ of $4000$
+sampled genuine mean-preserving spreads fail the tail condition with $k^*$
+moving against the rule (\S\ref{prop:tail},
+\file{checks/verify\_p9gen.py}~R1-SCOPE). So the sign rule is a theorem about
+dispersive spreads and about the tail condition, and not about mean-preserving
+spreads as such; it should not be quoted in the latter form. Which spreads
+satisfy the condition is settled in \S\ref{prop:band}: coverage is exactly
+$k^*\le L$ or $M<k^*$ in the notation there, every margin is covered if and
+only if the spread is dispersive, and --- the substantive half --- inside the
+band the displacement signs determine nothing, so the hypothesis is
+\emph{sharp} rather than merely sufficient.
+
+The economic content is a reconciliation. The received result --- inequality
+dampens status competition --- goes back to
+\citet{ColeMailathPostlewaite1992}, whose \S IV.A example has the more
+compact income distribution producing the higher savings rate, and is
+developed on the intensive margin by \citet{HopkinsKornienko2004} and
+\citet{HopkinsKornienko2010}, where less dispersed endowments intensify
+conspicuous consumption. That finding is here recovered as one branch: mass
+competitions, in which the marginal entrant sits low in the distribution.
+Exclusive competitions, in which the marginal entrant is already wealthy,
+sit on the other branch, where inequality \emph{feeds} entry. The received
+result is the below-pivot case of a two-branch rule, not the general case.
+This is non-tautological because $V$ is fixed by construction
+(\S\ref{prop:P8}): nothing about the prize moves when the distribution
+spreads.
+
+The margin is endogenous and the rule survives that
+(Proposition~\ref{prop:endogenous}): the hypothesis is a single comparison at
+the pre-spread margin, and the wealth ordering carries the rest, so no
+post-spread margin need be located. \citet{CostrellLoury2004}, the closest
+structural precedent, work with a marginal quantile fixed by technology. The
+claim here is not that the present result is the stronger one --- they sign a
+smooth aggregate under a general spread, which is the harder object --- but
+that the extensive-margin formulation replaces that aggregate with a
+threshold statistic, and an endogenous margin is tractable in the second
+setting and not the first. The formulation is what is being offered.
+
+Where several entrant sets are equilibria, the assortative one is the
+cheapest, and under an anonymous gain schedule it therefore maximises the
+unweighted sum of payoffs (Proposition~\ref{prop:assort}) --- so using it is
+a stated selection with an argument behind it, not an assumption. That
+argument is not a welfare claim, for the reasons set out with the
+proposition.
+
+Two features make the claim well-posed, and both required proof. The object
+being signed is an invariant of the game: every pure-strategy equilibrium has
+the same entrant count (Proposition~\ref{prop:count-inv}), so ``how many
+compete'' does not depend on which equilibrium is selected --- even though
+\emph{who} competes does (\S\ref{sec:primitives}, Information). And the class
+of spreads for which the rule is proved is not bespoke: a pivot-spread is
+exactly a dispersive-order shift with a crossing point
+(\S\ref{thm:P9gen}), the dispersive order being the inequality order this
+literature already uses \citep{HopkinsKornienko2009,Shaked1982}.
+
+\paragraph{Why the extensive margin is the point.} The intensive-margin
+version of the same question exists and is \emph{not} sign-determinate.
+\citet{SchroyenTreich2016} sign a mean-preserving spread in wealth inside the
+same privilege-contest payoff: their Theorem~3 gives the effect as positive
+iff $2A(1-m^2) > P$, with $A = -u''/u'$ and $P = -u'''/u''$ --- local, two
+players, and conditioned on the contest technology and the \emph{third}
+derivative of utility. The dependence on $u'''$ is not cosmetic: at $m=1/2$,
+CARA with $a=1$ and log utility at $w=1$ share $A=1$ but have $P=1$ and
+$P=2$, and give opposite signs. The extensive-margin rule of
+Theorem~\ref{thm:P9gen} needs only that $\kappa$ is strictly decreasing,
+which is $u''<0$. So the margin is not a modelling convenience; it is what
+makes inequality's effect on competition determinate at all. An anticipated
+objection should be met here rather than left to a referee: the two results
+answer the same economic question --- what does a spread of the resource
+distribution do to competitive expenditure --- in different models, and the
+comparison of hypotheses across margins is legitimate precisely because the
+margin is the object of choice being defended. It is also not robust
+terrain for the intensive side: in the assignment literature the direction
+of the inequality effect reverses when the allocation re-optimises
+(\citet{CostrellLoury2004}, Proposition~10 against their Proposition~6), so
+conditioning results of this kind on the margin is already the literature's
+own practice.
+
+\paragraph{The 1981 precedent.} \citet{LazearRosen1981}, in the ``Income
+Distributions'' subsection of their \S III, already have agents self-selecting
+into a tournament by endowed wealth. This must be acknowledged, with two
+qualifications that bound what it concedes.
+
+First, their claim is offered as an example and they say so: the subsection
+opens ``While it is not possible to make a general argument based on an
+example, table~1 suggests\ldots'', and rests on one utility function, quadratic
+costs, normal errors and two endowment levels. They \emph{suggest} the sorting
+under declining absolute risk aversion; the present model \emph{derives} it,
+distribution-free.
+
+Second, the channel differs, and decisively. Their sorting runs through DARA,
+which is a restriction on $u'''$: $A'(w)<0$ has numerator $(u'')^2 - u'''u'$
+and so requires $u'''>0$. Here the sorting runs through $\kappa(w) =
+u(w)-u(w-c)$ being decreasing, which follows from $u''<0$ alone. Quadratic
+utility separates them: it is concave, has $u'''=0$, and exhibits
+\emph{increasing} absolute risk aversion --- so $\kappa$ still sorts while DARA
+fails outright.
+
+Third, and least often noticed, the object of choice differs. Theirs is a
+choice between two compensation schemes that both pay, so the sorting is
+tolerance for the binomial spread of a lottery against a concentrated
+alternative. Ours is whether to pay a fixed entry cost at all, so the sorting
+is affordability in utility units. That is a difference in the economics, not
+only in a derivative.
+
+\paragraph{What is not claimed.} The mechanism --- wealth sorting entry
+through concavity --- is not novel; the two precedents above own it between
+them, and the sentence claimed here is the two-branch sign rule, not the
+sorting. The remaining results are apparatus in its service and are
+presented as such. The uniform cap of \S\ref{prop:P7} is the deterministic,
+heterogeneous, utility-unit form of an accounting bound already present in
+\citet{FuJiaoLu2015} (equation~(2) with Definition~2) and \citet{FuLu2010}
+(equation~(7)); it is used here to dispose of the ceiling objection, not
+claimed as new. The characterisation of \S\ref{prop:PMU} runs on the
+order-statistic kernel of \citet{RyvkinDrugov2020}, whose message --- that no
+competitor-number prediction is universal across noise distributions --- is
+theirs in print; what is added is the extensive-margin instance that refutes
+the referee's conjecture. And the scope of the central claim is stated with
+it. The rule is proved under a one-sided condition on the quantile difference
+down to the margin (Proposition~\ref{prop:tailprop}); pivot-spreads ---
+equivalently, dispersive shifts with a crossing --- are the special case in
+which that condition holds at every margin. A mean-preserving spread is
+covered when, and only when, its quantile difference is signed down to the
+margin; it may cross freely below. That is a restriction and not a
+formality --- mean-preservation does not imply it, and spreads violating it
+can move $k^*$ the other way (\S\ref{prop:tail}). What is not settled is a
+characterisation of which spreads have the property (\S\ref{sec:open},
+item~\ref{item:tailopen}).
+
+\section{How this addresses the referee reports}
+
+\subsection{Asymmetric \texorpdfstring{$k$}{k}-of-\texorpdfstring{$Q$}{Q} equilibria}
+\label{sec:R1-asymmetric}
+Both referees identified the same defect: the prior version compared
+aggregate participation regimes rather than checking unilateral
+deviations, which is not Nash logic for a finite-player game.
+Proposition~\ref{prop:P5} (\S\ref{prop:P5}) replaces the binary
+all-in/all-out structure with the asymmetric $k$-of-$Q$ equilibrium
+requested, derived from first principles rather than assumed.
+
+\subsection{Prize versus affordability}
+\label{sec:R2-affordability}
+Referee 2 objected that, with $y_2-y_1$ serving simultaneously as
+``inequality'' and the contest prize, the claim that inequality raises
+status expenditure was close to tautological, and that a rise in the
+prize should raise \emph{all} participants' incentives, not only the
+incumbent's. Decoupling $V$ from the wealth distribution
+(\S\ref{sec:primitives}) and separating the two channels in
+Proposition~\ref{prop:P8} (\S\ref{prop:P8}) addresses this directly;
+Theorem~\ref{thm:P9} (\S\ref{prop:P9}) then states the
+inequality result as a genuine theorem rather than a definitional
+artefact.
+
+\subsection{The mobility ceiling}
+\label{sec:ceiling}
+Both referees identified the old ceiling as an artefact: mechanical
+arithmetic under uniform supports, a $Q\to\infty$ limit inconsistent
+with the equilibrium existing, and a fixed prize with unbounded entry
+not corresponding to anything. Proposition~\ref{prop:P7}
+(\S\ref{prop:P7}) replaces it with the saturation bound $k^*\le
+V/\kappa$, uniform in $Q$ and requiring no limit to be taken.
+
+\section{Open items}
+\label{sec:open}
+
+Closed since the previous draft: the P9 fixed-point effect (there is no
+feedback to resolve --- Proposition~\ref{prop:anon}); uniqueness of the
+wealth fixed point (Lemma~\ref{lem:crossing}); the characterisation of
+$\mu^*$ (\S\ref{prop:PMU}); P8, now proved rather than verified;
+non-linear spreads (Theorem~\ref{thm:P9gen}); and P9 strictness
+(Proposition~\ref{prop:strict}). Also closed: the literature position, which
+was previously listed here as gating further proof effort. It is settled in the
+accompanying literature survey and stated in
+Section~\ref{sec:contribution}; the verdict is that the mechanism has
+precedents and the contribution is the combination of P7, P9-gen and P-MU.
+
+What genuinely remains:
+
+\begin{enumerate}
+\item \textbf{The incumbent's own entry decision} is exogenous
+  throughout ($C$ fixed in $H_m=F^mG^{Q-1-m}C$). Endogenising it, and
+  testing whether an equilibrium exists in which the incumbent
+  abstains while a challenger invests, is untouched. This is a
+  modelling extension rather than a gap in what is claimed.
+\item \textbf{Spreads that are not pivot-spreads --- resolved, see
+  Proposition~\ref{prop:tail}.} This item previously read that the sign rule
+  was open for general Rothschild--Stiglitz spreads, and proposed importing
+  the quantile-decomposition machinery of \citet{CostrellLoury2004} and
+  \citet{Suen2007}. That turned out to be unnecessary. Those techniques sign
+  a smooth \emph{aggregate} under a general spread and therefore need
+  integration by parts and, in Suen's case, log-concavity of $1-F$. But
+  $k^*$ is not an aggregate: it is a threshold statistic that reads the
+  quantile function only down to the margin. The recorded ``count versus
+  aggregate'' obstacle was real, and it runs the opposite way --- the count
+  is \emph{easier}. What remains genuinely open is narrower.
+
+\item \textbf{When does the tail condition hold? --- resolved, and the
+  answer is that the hypothesis is sharp.}
+  \label{item:tailopen}
+  This item previously asked for a characterisation of the mean-preserving
+  spreads satisfying Proposition~\ref{prop:tailprop}. That characterisation
+  turns out to be exact but nearly definitional, and the substantive question
+  --- whether the hypothesis could be weakened --- has a negative answer. Both
+  are established in \S\ref{prop:band} and
+  \file{checks/verify\_tailband.py}. What remains open is narrower and is
+  stated there: whether some statistic of the spread \emph{other} than the
+  displacement signs predicts the direction inside the band. That is where the
+  \citet{CostrellLoury2004} monotone-weight technique would belong if an
+  aggregate version were wanted later.
+\item \textbf{Strictness away from the linear family.}
+  Proposition~\ref{prop:strict} is stated for $T_\lambda$ with
+  $\lambda\to\infty$. A characterisation of exactly which spreads move
+  $k^*$ strictly, rather than an asymptotic sufficient condition, is not
+  attempted.
+\item \textbf{The competitor-number effect, sharpened.} P-MU characterises the
+  sign of $\mathrm{d}\Delta(0)/\mathrm{d}Q$ exactly, but says nothing about the
+  \emph{shape} of $\Delta(0,\cdot)$. Its weight coincides with the kernel
+  \citet{RyvkinDrugov2020} use to establish unimodality in the number of
+  players, and the log-supermodularity their argument needs does carry over
+  (\S\ref{prop:PMU}); what fails is the orientation of the single crossing.
+  Reworking the argument for the reversed orientation would plausibly yield an
+  interior \emph{minimum} of $\Delta(0,Q)$ in $Q$, which would sit
+  consistently with the refutations of \S\ref{sec:R1} and \S\ref{sec:R2}. Not
+  attempted, and not claimed.
+\end{enumerate}
+
+\bibliography{refs}
+
+\end{document}
