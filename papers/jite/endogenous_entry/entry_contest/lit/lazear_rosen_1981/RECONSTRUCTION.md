@@ -77,7 +77,12 @@ the spread must satisfy `(29) ΔW = V/g(Δμ − h)`. The gain to an `a` from
 playing a handicapped `b` rather than another `a` is `(30) y_a(h)`, and for
 small `Δμ` this reduces to
 
-> `(32)`  `y_a(h) ≈ V·g·(Δμ/2 − h)`
+> `(32)`  `γa(h) ≐ V · (Δμ/2 − h)`
+
+(Corrected 2026-10-06 against the p.862 page image. Pass 1 wrote
+`V·g·(Δμ/2 − h)` here. The paper's (32) has no factor `g`, because the spread
+`V/g(Δμ − h)` of (29) cancels the density in the linearised win probability.
+The paper names the gain `γa`; this file and the suite write `y_a`.)
 
 with `y_b` the same and sign-reversed, so `y_a(h) + y_b(h) = 0` for all
 admissible `h`. Hence `h* = Δμ/2` is the **competitive handicap**: below it,
@@ -94,8 +99,13 @@ reverse. The competitive handicap is *not* a fair game
 3. Table 1's numbers themselves — these are the authors' computations under
    quadratic costs and normal errors, and were **not** recomputed here. Only
    the internal consistency of the reported `s(y₀)` values and the direction of
-   the reported comparisons was checked.
-4. The approximation step from `(30)` to `(32)`.
+   the reported comparisons was checked. (Pass 2, 2026-10-06, recomputes the
+   table from (16), (17), (24) and (25) in check LR-7. See finding F3 in
+   `NOTES.md`.)
+4. The approximation step from `(30)` to `(32)`. (Pass 2 derives `(32)` from
+   `(30)` exactly once the linearised win probability of p.862 is granted, in
+   LR-6 and in `handicap_gain` of `LazearRosen.lean`. The linearisation itself
+   stays assumed.)
 5. §IV's efficiency claims for mixed leagues beyond the algebra of `(32)`.
 
 Anything leaning on these is **[A]-grade** despite the [F] tag.

@@ -1,6 +1,13 @@
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+
 import sympy as sp
 
 results = []
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def check(name, ok, detail=""):
@@ -127,6 +134,86 @@ allok = allok and bool(mean_ok) and bool(slope_min >= 0) and bool(slope_mid > 0)
 check("CL-6 Lemma 1's direction reproduces on a mean-preserving pair",
       allok and bool(mean_ok),
       "convex up, concave down, as Lemma 1 states")
+
+print()
+print("CL-L  Lean: CostrellLoury.lean (core Lean 4, no Mathlib)")
+print("-" * 72)
+print("      Tail rule at fixed theta, Prop 5 monotone weight by Abel summation,")
+print("      Lemma 1 / Prop 6 span by double Abel summation, Prop 10 skeleton.")
+lean = shutil.which("lean")
+if lean is None:
+    check("CL-L1 CostrellLoury.lean compiles", False, "lean not on PATH")
+else:
+    src_path = os.path.join(HERE, "CostrellLoury.lean")
+    src = open(src_path).read()
+    p = subprocess.run([lean, src_path], capture_output=True, text=True)
+    compile_out = p.stdout + p.stderr
+    n_sorry_out = len(re.findall(r"sorry", compile_out))
+    check("CL-L1 CostrellLoury.lean compiles with no errors and no sorry",
+          p.returncode == 0 and n_sorry_out == 0, compile_out.strip()[:200])
+
+    hygiene = {
+        "sorry": re.search(r"\bsorry\b", src),
+        "axiom declaration": re.search(r"^\s*axiom\b", src, re.M),
+        "native_decide": re.search(r"native_decide", src),
+        "import": re.search(r"^\s*import\b", src, re.M),
+        "comment": re.search(r"--|/-", src),
+    }
+    bad = [k for k, v in hygiene.items() if v]
+    check("CL-L2 source has no sorry, axiom, native_decide, import or comment",
+          not bad, ", ".join(bad))
+
+    names = re.findall(r"^(?:theorem|lemma)\s+([A-Za-z0-9_']+)", src, re.M)
+    with tempfile.TemporaryDirectory() as td:
+        audit = os.path.join(td, "audit.lean")
+        with open(audit, "w") as fh:
+            fh.write(src)
+            fh.write("\n\n")
+            for n in names:
+                fh.write(f"#print axioms CostrellLoury.{n}\n")
+        q = subprocess.run([lean, audit], capture_output=True, text=True)
+    allowed = {"propext", "Quot.sound"}
+    n_free, n_core, other, missing = 0, 0, [], []
+    for n in names:
+        m = re.search(
+            rf"'CostrellLoury\.{re.escape(n)}' "
+            r"(does not depend on any axioms|depends on axioms: \[([^\]]*)\])",
+            q.stdout)
+        if m is None:
+            missing.append(n)
+        elif m.group(2) is None:
+            n_free += 1
+        else:
+            axs = {a.strip() for a in m.group(2).split(",")}
+            if axs <= allowed:
+                n_core += 1
+            else:
+                other.append(f"{n}: {sorted(axs - allowed)}")
+    audited = n_free + n_core + len(other)
+    print(f"      theorems: {len(names)}; audited: {audited}; axiom-free: {n_free}; "
+          f"propext/Quot.sound only: {n_core}; other axioms: {len(other)}; "
+          f"sorry: {n_sorry_out}")
+    for o in other:
+        print(f"      OTHER AXIOM  {o}")
+    check("CL-L3 axiom audit covers every declared theorem; propext/Quot.sound at most",
+          q.returncode == 0 and not missing and not other
+          and audited == len(names) and len(names) > 0,
+          f"unaudited: {missing}" if missing else "")
+
+    print("      CONTROL: the harness must reject a false statement. The negation")
+    print("      of control_prop5_decreasing_weight (a decreasing weight still")
+    print("      raises output) is appended and must fail to compile.")
+    false_stmt = ("\n\nnamespace CostrellLoury\n"
+                  "theorem harness_false : "
+                  "output wDown qFlat 2 ≤ output wDown qWide 2 := by decide\n"
+                  "end CostrellLoury\n")
+    with tempfile.TemporaryDirectory() as td:
+        neg = os.path.join(td, "negated.lean")
+        with open(neg, "w") as fh:
+            fh.write(src + false_stmt)
+        r = subprocess.run([lean, neg], capture_output=True, text=True)
+    check("CL-L4 CONTROL: Lean rejects the negated control statement",
+          r.returncode != 0, "the compile check can fail")
 
 print()
 print("=" * 72)

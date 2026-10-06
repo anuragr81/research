@@ -1,6 +1,13 @@
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+
 import sympy as sp
 
 results = []
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def check(name, ok, detail=""):
@@ -80,7 +87,7 @@ print()
 print("SU-4  Quantile SOSD: int_0^k [G1^-1 - G0^-1] <= 0, equality at k=1")
 print("-" * 72)
 print("      The step Suen imports: 'if G0 second-order stochastically")
-print("      dominates G1 and the two distributions have the same mean, then")
+print("      dominate [sic] G1 and the two distributions have the same mean, then")
 print("      G1^-1 second-order stochastically dominates G0^-1 (see, for")
 print("      example, [2])' -- where [2] is Costrell and Loury.")
 G0inv = t
@@ -130,7 +137,92 @@ expr = -(thp * Hh) * rhp  # integrand of (4) with theta'' = 0
 signed = expr.subs({Hh: -1, thp: 2, rhp: -3})  # H-hat<0, theta'>0, rho'<0
 print(f"      sample integrand with H-hat=-1, theta'=2, rho'=-3: {signed} < 0")
 check("SU-6 the linear case still signs the conclusion", bool(signed < 0),
-      "so concavity is not load-bearing for the direction, only for the bound")
+      "linear theta, phi are weakly concave, so this case stays inside the hypothesis")
+
+print()
+print("SU-7  Concavity of phi cannot be dropped: a convex phi reverses Prop 2")
+print("-" * 72)
+print("      F uniform (1-F log-concave), theta(x) = x, G0^-1(t) = t and")
+print("      G1^-1(t) = 3t^2 - 2t^3 (the SU-4 pair, G1 more dispersed). Then")
+print("      W1 - W0 = int_0^1 (1-t)[phi(G1^-1(t)) - phi(t)] dt.")
+G1q = 3 * t**2 - 2 * t**3
+signs = {}
+for lbl, phi_f in [("phi=y^2 (convex)", lambda v: v**2),
+                   ("phi=2y-y^2 (concave)", lambda v: 2 * v - v**2),
+                   ("phi=y (linear)", lambda v: v)]:
+    gap = sp.nsimplify(sp.integrate((1 - t) * (phi_f(G1q) - phi_f(t)), (t, 0, 1)))
+    signs[lbl] = gap
+    print(f"      {lbl}: W1 - W0 = {gap}")
+mono_ok = bool(sp.minimum(sp.diff(G1q, t), t, sp.Interval(0, 1)) >= 0)
+check("SU-7 convex phi gives W1 > W0, concave and linear phi give W1 < W0",
+      mono_ok and signs["phi=y^2 (convex)"] > 0
+      and signs["phi=2y-y^2 (concave)"] < 0 and signs["phi=y (linear)"] < 0,
+      "every other hypothesis of Prop 2 holds; the Lean control_convex_phi is "
+      "the discrete twin")
+
+print()
+print("SU-L  Lean: discrete skeleton of Prop 2, the Costrell-Loury step, fn. 1")
+print("-" * 72)
+LEAN_NS = "Suen2007"
+REQUIRED = [
+    "eq6_identity", "eq6_printed_not_identity", "eq6_sign", "eq6_inequality",
+    "eq6_hhat_nonpos", "hhat_nonpos_between", "eq5_identity", "eq5_H_nonpos",
+    "eq4_first_equality", "eq4_identity", "eq4_sign", "prop2_skeleton",
+    "cl_quantile_reversal", "prop2_from_sosd", "wsum_nonpos_of_drops",
+    "hhat_nonpos_direct", "cl_at_even_crossings", "fn1_concave_comp", "fn1_iff",
+    "fn1_counterexample",
+    "control_weight_increasing", "control_convex_phi", "control_interior_rank",
+    "control_rho_increasing", "control_cl_unsorted",
+]
+ALLOWED_AXIOMS = {"propext", "Quot.sound"}
+lean = shutil.which("lean")
+if lean is None:
+    check("SU-L lean is on PATH", False, "lean not found; the Lean checks cannot run")
+else:
+    src = os.path.join(HERE, LEAN_NS + ".lean")
+    text = open(src).read()
+    ver = subprocess.run([lean, "--version"], capture_output=True, text=True)
+    print("      " + ver.stdout.strip().splitlines()[-1] if ver.stdout.strip() else "")
+    p = subprocess.run([lean, src], capture_output=True, text=True)
+    out_all = (p.stdout + p.stderr).strip()
+    check("SU-L Suen2007.lean compiles with no errors",
+          p.returncode == 0 and "error" not in out_all, out_all[:300])
+    banned = [w for w in ("sorry", "native_decide", "admit") if re.search(rf"\b{w}\b", text)]
+    user_axioms = re.findall(r"^\s*axiom\s", text, re.M)
+    check("SU-L no sorry, admit, native_decide or user axiom in the source",
+          not banned and not user_axioms and "declaration uses 'sorry'" not in out_all,
+          f"banned tokens: {banned}; axiom declarations: {len(user_axioms)}")
+    names = re.findall(r"^(?:theorem|lemma)\s+([A-Za-z0-9_']+)", text, re.M)
+    missing = [n for n in REQUIRED if n not in names]
+    check("SU-L every claim-mapped theorem is present", not missing,
+          f"{len(REQUIRED)} required; missing: {missing}")
+    with tempfile.TemporaryDirectory() as td:
+        audit = os.path.join(td, "audit.lean")
+        with open(audit, "w") as fh:
+            fh.write(text)
+            fh.write("\n")
+            for n in names:
+                fh.write(f"#print axioms {LEAN_NS}.{n}\n")
+        q = subprocess.run([lean, audit], capture_output=True, text=True)
+    out = q.stdout
+    deps = {}
+    for m in re.finditer(rf"'{LEAN_NS}\.([A-Za-z0-9_']+)' depends on axioms: \[([^\]]*)\]",
+                         out, re.S):
+        deps[m.group(1)] = {a.strip() for a in m.group(2).split(",") if a.strip()}
+    for m in re.finditer(rf"'{LEAN_NS}\.([A-Za-z0-9_']+)' does not depend on any axioms", out):
+        deps[m.group(1)] = set()
+    audited = sum(1 for n in names if n in deps)
+    free = sum(1 for n in names if deps.get(n) == set())
+    core = sum(1 for n in names if deps.get(n) and deps[n] <= ALLOWED_AXIOMS)
+    other = {n: sorted(deps[n] - ALLOWED_AXIOMS) for n in names
+             if n in deps and deps[n] - ALLOWED_AXIOMS}
+    sorried = sum(1 for n in names if "sorryAx" in deps.get(n, set()))
+    print(f"      theorems: {len(names)}; audited: {audited}; axiom-free: {free}; "
+          f"propext/Quot.sound only: {core}; other axioms: {other or 'none'}; "
+          f"sorry: {sorried}")
+    check("SU-L axiom audit covers every declared theorem, core axioms only",
+          q.returncode == 0 and audited == len(names) and len(names) > 0 and not other,
+          f"allowed: none, propext, Quot.sound")
 
 print()
 print("=" * 72)

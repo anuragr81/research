@@ -155,9 +155,17 @@ echo '```' >> "$OUT"
 
 echo
 echo "======================================================================"
+echo " MEASUREMENT MAP  (mathematics the companion note adds of its own)"
+echo "======================================================================"
+{ echo; echo '## Suite 9 - measurement map (`checks/verify_measurement_map.py`)'; echo; echo '```'; } >> "$OUT"
+python3 "$HERE/checks/verify_measurement_map.py" 2>&1 | tee -a "$OUT" || FAILED=1
+echo '```' >> "$OUT"
+
+echo
+echo "======================================================================"
 echo " PROOF CHECKS  (Lean 4, core only)"
 echo "======================================================================"
-{ echo; echo '## Suite 9 - Lean 4 (`lean/EntryContest.lean`)'; echo; echo '```'; } >> "$OUT"
+{ echo; echo '## Suite 10 - Lean 4 (`lean/EntryContest.lean`)'; echo; echo '```'; } >> "$OUT"
 
 if command -v lean >/dev/null 2>&1; then
   cd "$HERE/lean"
@@ -191,6 +199,19 @@ if command -v lean >/dev/null 2>&1; then
     echo "[FAIL] audit does not cover every declared theorem" | tee -a "$OUT"
     FAILED=1
   fi
+  if [ "$NSORRY" -ne 0 ]; then
+    echo "[FAIL] sorry present in EntryContest.lean" | tee -a "$OUT"
+    FAILED=1
+  fi
+  BADAX=$(grep -oE "depends on axioms: \[[^]]*\]" "$TMP/axioms.txt" \
+    | sed 's/.*\[//; s/\]//' | tr ',' '\n' | sed 's/^ *//' \
+    | grep -vxE 'propext|Quot\.sound' | sort -u | tr '\n' ' ')
+  if [ -n "$BADAX" ]; then
+    echo "[FAIL] axioms outside propext/Quot.sound: $BADAX" | tee -a "$OUT"
+    FAILED=1
+  else
+    echo "axioms outside propext/Quot.sound: none" | tee -a "$OUT"
+  fi
 else
   echo "[FAIL] lean not on PATH - the Lean suite did NOT run" | tee -a "$OUT"
   echo "install: elan toolchain install leanprover/lean4:v4.33.1" | tee -a "$OUT"
@@ -207,7 +228,7 @@ echo
 echo "======================================================================"
 echo " DOC CONSISTENCY  (PROOFS.tex prose vs this run's generated evidence)"
 echo "======================================================================"
-{ echo; echo '## Suite 10 - doc consistency (`checks/verify_docs.py`)'; echo; echo '```'; } >> "$OUT"
+{ echo; echo '## Suite 11 - doc consistency (`checks/verify_docs.py`)'; echo; echo '```'; } >> "$OUT"
 python3 "$HERE/checks/verify_docs.py" "$OUT" 2>&1 | tee -a "$OUT" || FAILED=1
 echo '```' >> "$OUT"
 

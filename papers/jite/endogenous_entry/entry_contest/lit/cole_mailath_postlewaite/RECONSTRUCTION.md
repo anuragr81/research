@@ -38,6 +38,40 @@ assignment. §IV extends to capital accumulation and growth trajectories, and
 the multiple equilibria deliver cross-country growth differences without
 differences in preferences, technology, or endowments.
 
+## 1a. CMP92 §IV.A, the two-period example (reconstructed in pass 2)
+
+The derivation chain, in the paper's notation, pp. 1100–1103.
+
+1. Technology `c = Ak − k′` with `A > 1` (eq. (1)). A father with capital `K`
+   consumes the fraction `λ` of first-period output `AK` and bequeaths
+   `k′ = AK(1 − λ)`. The son's pair consumes `A²K(1 − λ)` and gets the
+   endowment `j` of his mate. The father's utility is
+   `u(AKλ) + β[u(A²K(1 − λ)) + j]` with CRRA `u`.
+2. Matching is by rank. The wealthiest son gets the woman of highest
+   endowment, so a son's `j` is his rank in the sons' capital distribution.
+3. One-point economy, every father at `K`. The father whose son gets `j = 0`
+   is undistorted and attains `V(0)`, the maximum of eq. (2), at
+   `λ(0) = [1 + (βA^{1−γ})^{1/γ}]^{−1}`. Because every father can imitate
+   every other, every father attains `V(0)`, so `λ(j)` solves
+   `V(j) = V(0)` with `λ(j) < λ(0)`, and `∂λ/∂j < 0`.
+4. Two-point economy, fathers at `K − ε` on `[0, ½)` and `K + ε` on `[½, 1]`.
+   The lower half repeats step 3 with `K − ε`, which fixes the top bequest of
+   the lower half, `k⁻(½)`. The top-half father whose son gets rank `½`
+   maximises at `K + ε` subject to his son's capital being at least `k⁻(½)`,
+   which gives `V(½)`. Every top-half father then solves `V(j) = V(½)`.
+5. Comparison. Hold the compared fathers' initial capital equal, so the
+   one-point economy sits at `K + ε`. Both fathers then solve the same
+   equation in `λ` with right-hand sides `V(0) − βj` and `V(½) − βj`, so
+   `V(½) ≥ V(0)` gives a weakly higher `λ(j)` at every `j ≥ ½`, and the top half
+   of the two-point economy saves weakly less. The inequality `V(½) ≥ V(0)`
+   holds when the one-point man at rank `½` already satisfies the two-point
+   restriction, `k⁻(½) ≤ k₁(½)`, which the paper does not state.
+
+The result is derived *from* the rank-allocation of mates (step 2) and the
+equal-welfare property of a one-point start (step 3). It is a statement about
+men with equal initial capital in the top half, and it is hedged in the
+source ("will tend to", "all other things being equal").
+
 ## 2. CMP95 — the conceptual statement we actually use
 
 CMP95 §4 (*Concluding Comments*) contains the passage the handover cites. In
@@ -72,16 +106,20 @@ synagogues."
 Most of both papers, and it should be said plainly.
 
 1. **CMP92 §III's equilibrium existence and characterisation**, §III.D's
-   aristocratic equilibrium, and all of §IV (capital accumulation, growth
-   trajectories, multiple equilibria). None of the formal results were checked.
-2. **CMP95's §2 effort model with complete information and §3 incomplete
-   information/signaling** — the models that *generate* the concern for
-   relative rank. Not reconstructed.
+   aristocratic equilibrium, and §IV.B to §IV.D (capital accumulation, growth
+   trajectories, multiple equilibria). §IV.A is reconstructed in §1a above and
+   formalised in `ColeMailathPostlewaite.lean`; Property 1's exchange argument
+   is formalised there too.
+2. **CMP95's §3 incomplete information/signaling** model. Not reconstructed.
+   The §2 effort model is formalised through its §2.1 closed form, in which
+   the matching function `m(y) = gy` is the distribution function of output
+   and `g(1 + g) = 1/α²` (eq. (2.5)).
 3. CMP95's Appendix (§5).
 
 **What we take from these papers is the conceptual foundation in CMP92's
-abstract/§II and CMP95's §4, both of which are prose.** Anything else is
-[A]-grade despite the [F] tags.
+abstract and §II and CMP95's §4, which are prose, and the CMP92 §IV.A
+comparison, which is now formalised.** The remaining formal results are
+unchecked.
 
 ## 4. What this implies for entry_contest
 

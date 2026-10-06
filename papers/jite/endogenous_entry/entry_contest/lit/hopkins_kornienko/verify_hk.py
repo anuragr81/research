@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -152,25 +153,29 @@ else:
     p = subprocess.run([lean, src], capture_output=True, text=True)
     check("HK-L Dispersive.lean compiles with no errors", p.returncode == 0,
           p.stderr.strip()[:200])
-    names = [
-        ln.split()[1]
-        for ln in open(src)
-        if ln.startswith("theorem")
-    ]
+    text = open(src).read()
+    check("HK-L no sorry in the source", re.search(r"\bsorry\b", text) is None)
+    names = re.findall(r"^theorem\s+([A-Za-z0-9_']+)", text, re.M)
     with tempfile.TemporaryDirectory() as td:
         audit = os.path.join(td, "audit.lean")
         with open(audit, "w") as fh:
-            fh.write(open(src).read())
-            fh.write("\n\nopen HopkinsKornienko\n")
+            fh.write(text)
+            fh.write("\n")
             for n in names:
                 fh.write(f"#print axioms HopkinsKornienko.{n}\n")
         q = subprocess.run([lean, audit], capture_output=True, text=True)
-        out = q.stdout
-    audited = sum(1 for n in names if f"'HopkinsKornienko.{n}'" in out)
-    print(f"      theorems: {len(names)}; audited: {audited}; sorry: 0")
-    check("HK-L axiom audit covers every declared theorem",
-          audited == len(names) and len(names) > 0,
-          "core axioms propext/Quot.sound only, via omega on Int")
+    out = q.stdout + q.stderr
+    used = {}
+    for n in names:
+        m = re.search(rf"'HopkinsKornienko\.{re.escape(n)}' (does not depend on any axioms|depends on axioms: \[([^\]]*)\])", out)
+        if m:
+            used[n] = set() if m.group(2) is None else {x.strip() for x in m.group(2).split(",")}
+    free = sum(1 for n in used if not used[n])
+    bad = {n: sorted(x - {"propext", "Quot.sound"}) for n, x in used.items() if x - {"propext", "Quot.sound"}}
+    print(f"      theorems: {len(names)}; audited: {len(used)}; axiom-free: {free}; "
+          f"on propext/Quot.sound only: {len(used) - free - len(bad)}")
+    check("HK-L axiom audit covers every declared theorem", len(names) > 0 and len(used) == len(names))
+    check("HK-L no axiom outside propext and Quot.sound", not bad, str(bad) if bad else "")
 
 print()
 print("=" * 72)

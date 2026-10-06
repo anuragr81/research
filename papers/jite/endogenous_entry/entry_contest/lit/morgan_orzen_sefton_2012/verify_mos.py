@@ -1,3 +1,9 @@
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+
 import sympy as sp
 
 results = []
@@ -8,6 +14,7 @@ def check(name, ok, detail=""):
     print(f"[{'PASS' if ok else 'FAIL'}] {name}" + (f"   {detail}" if detail else ""))
 
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 x, X, P, F, w, n, N = sp.symbols("x X P F w n N", positive=True)
 
 print("=" * 72)
@@ -50,11 +57,11 @@ check("MOS-2 the entry threshold is sqrt(P/F)",
       "so the largest admissible integer is floor(sqrt(P/F))")
 
 print()
-print("MOS-3  Their Table 1 investment predictions, reproduced exactly")
+print("MOS-3  Their Table 2 (p.445) investment predictions, reproduced exactly")
 print("-" * 72)
 print("      Design: w = 100, N = 6, F = 10; P = 50 (small), P = 200 (large).")
 table = {
-    50: [sp.Integer(0), sp.Rational(125, 10), sp.Rational(1111, 100),
+    50: [sp.Integer(0), sp.Rational(125, 10), sp.Rational(111, 10),
          sp.Rational(94, 10), sp.Rational(80, 10), sp.Rational(69, 10)],
     200: [sp.Integer(0), sp.Rational(500, 10), sp.Rational(444, 10),
           sp.Rational(375, 10), sp.Rational(320, 10), sp.Rational(278, 10)],
@@ -84,7 +91,7 @@ for Pv, expect in [(50, 2), (200, 4)]:
           f"   (paper says {expect})")
 check("MOS-4 n* = 2 and 4 as printed",
       bool(preds[50] == 2 and preds[200] == 4),
-      "matches Table 1's 'Entrants (n*)' column")
+      "matches Table 2's 'Entrants (n*)' column (p.445)")
 
 print()
 print("MOS-5  The observed deviations go in OPPOSITE directions")
@@ -114,7 +121,119 @@ for (Nv, nv), cnt in cfg.items():
     print(f"      N={Nv}, n*={nv}: C(N,n*) = {cnt} distinct entrant sets")
 check("MOS-6 the entrant set is genuinely non-unique",
       bool(all(c > 1 for c in cfg.values())),
-      "15 configurations in each treatment; P5 has exactly one")
+      "15 configurations in each treatment (no claim about P5 is checked here)")
+
+print()
+print("MOS-L  Lean: MorganOrzenSefton.lean (core Lean 4, no Mathlib)")
+print("-" * 72)
+print("      Contest stage (p.441), entry count and floor root (p.441), Table 2")
+print("      (p.445), count pinned / identity unpinned (p.441), Proposition 1")
+print("      structure (p.442), and controls.  Claim IDs MOS-L1..MOS-L8.")
+
+LEAN_NS = "MorganOrzenSefton"
+ALLOWED_AXIOMS = {"propext", "Quot.sound"}
+NAME_RE = re.compile(r"^(?:theorem|lemma)\s+([A-Za-z0-9_']+)", re.M)
+DEP_RE = re.compile(r"'([A-Za-z0-9_'.]+)' depends on axioms: \[([^\]]*)\]")
+FREE_RE = re.compile(r"'([A-Za-z0-9_'.]+)' does not depend on any axioms")
+BANNED = [
+    ("sorry", r"\bsorry\b"),
+    ("admit", r"\badmit\b"),
+    ("native_decide", r"\bnative_decide\b"),
+    ("user axiom", r"^\s*(?:private\s+|protected\s+)?axiom\s"),
+    ("comment", r"--|/-"),
+]
+MUTANTS = [
+    ("Table 2 entry 44.4 misread as 44.5",
+     "(200, 3, 444)", "(200, 3, 445)"),
+    ("design value floor(sqrt(200/10)) stated as 5",
+     "theorem design_large : floorRoot (200 / 10) = 4",
+     "theorem design_large : floorRoot (200 / 10) = 5"),
+]
+
+
+def run_lean(lean_bin, path):
+    p = subprocess.run([lean_bin, path], capture_output=True, text=True, timeout=600)
+    return p.returncode, p.stdout + p.stderr
+
+
+def parse_axioms(out):
+    found = {}
+    for m in DEP_RE.finditer(out):
+        if m.group(1).startswith(LEAN_NS + "."):
+            found[m.group(1)[len(LEAN_NS) + 1:]] = {
+                a.strip() for a in m.group(2).split(",") if a.strip()}
+    for m in FREE_RE.finditer(out):
+        if m.group(1).startswith(LEAN_NS + "."):
+            found[m.group(1)[len(LEAN_NS) + 1:]] = set()
+    return found
+
+
+lean = shutil.which("lean")
+src = os.path.join(HERE, "MorganOrzenSefton.lean")
+if lean is None:
+    check("MOS-L lean is on PATH", False, "lean not found, so no Lean check ran")
+else:
+    ver = subprocess.run([lean, "--version"], capture_output=True, text=True)
+    print(f"      {ver.stdout.strip()}")
+    text = open(src).read()
+    hits = [label for label, rx in BANNED if re.search(rx, text, re.M)]
+    hits += [] if (f"namespace {LEAN_NS}" in text and f"end {LEAN_NS}" in text) \
+        else ["namespace"]
+    check("MOS-L source hygiene: namespace, no sorry/admit/native_decide/axiom/comment",
+          not hits, ", ".join(hits))
+
+    rc, out = run_lean(lean, src)
+    check("MOS-L MorganOrzenSefton.lean compiles, return code 0, no sorry",
+          rc == 0 and "sorry" not in out, out.strip()[:300])
+
+    names = NAME_RE.findall(text)
+    with tempfile.TemporaryDirectory() as td:
+        audit = os.path.join(td, "Audit.lean")
+        with open(audit, "w") as fh:
+            fh.write(text + "\n")
+            for nm in names:
+                fh.write(f"#print axioms {LEAN_NS}.{nm}\n")
+        arc, aout = run_lean(lean, audit)
+
+        probe = os.path.join(td, "Probe.lean")
+        with open(probe, "w") as fh:
+            fh.write(f"namespace {LEAN_NS}\n"
+                     "theorem probe_em (p : Prop) : p ∨ ¬ p := Classical.em p\n"
+                     f"end {LEAN_NS}\n"
+                     f"#print axioms {LEAN_NS}.probe_em\n")
+        _, pout = run_lean(lean, probe)
+
+        mutant_results = []
+        for label, before, after in MUTANTS:
+            mpath = os.path.join(td, "Mutant.lean")
+            with open(mpath, "w") as fh:
+                fh.write(text.replace(before, after))
+            mrc, _ = run_lean(lean, mpath)
+            mutant_results.append((label, before in text, mrc != 0))
+
+    audited = parse_axioms(aout)
+    bad = {nm: sorted(ax - ALLOWED_AXIOMS)
+           for nm, ax in audited.items() if ax - ALLOWED_AXIOMS}
+    n_free = sum(1 for ax in audited.values() if not ax)
+    n_core = sum(1 for ax in audited.values() if ax and ax <= ALLOWED_AXIOMS)
+    n_sorry = sum(1 for ax in audited.values() if "sorryAx" in ax)
+    print(f"      theorems: {len(names)}; audited: {len(audited)}; sorry: {n_sorry}; "
+          f"axiom-free: {n_free}; propext/Quot.sound only: {n_core}; other: {len(bad)}")
+    check("MOS-L axiom audit covers every declared theorem",
+          arc == 0 and len(names) > 0 and len(set(names)) == len(names)
+          and set(audited) == set(names),
+          f"declared {len(names)}, audited {len(audited)}")
+    check("MOS-L no theorem depends on an axiom beyond propext / Quot.sound",
+          not bad, "; ".join(f"{k}: {v}" for k, v in bad.items()))
+    probe_ax = parse_axioms(pout).get("probe_em", set())
+    check("MOS-L audit control: a Classical.em probe is flagged as disallowed",
+          "Classical.choice" in probe_ax,
+          "the audit parser can report an axiom outside the allowed set")
+    for label, present, rejected in mutant_results:
+        print(f"      mutant '{label}': target present {present}, rejected by lean {rejected}")
+    check("MOS-L compile control: every mutated false claim is rejected by lean",
+          all(present and rejected for _, present, rejected in mutant_results),
+          f"{len(mutant_results)} mutants")
 
 print()
 print("=" * 72)

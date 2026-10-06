@@ -1,0 +1,14 @@
+# Schoemaker (1982), claims our documents make or rely on
+
+Cited in `MEASUREMENT_MAP.tex` (framing paragraph and the `κ` row). Not cited
+in `PROOFS.tex` or `LITERATURE.tex`, and not in `refs.bib`. Read in full [F].
+
+| ID | Claim | Locator | Verbatim source | Verified by |
+|---|---|---|---|---|
+| SCH-1 | NM utility is unique up to positive linear transformation | p.531 | "Their utility function is unique up to positive linear transformations, meaning that if the function U(x) represents a person's risk preferences then so will U\*(x) if and only if U\*(x) = aU(x) + b for numbers a > 0 and b." (the "=" is restored; the text layer drops it) | Lean `eu_affine`, `affine_preserves_ranking` ("if" half only); SymPy SCH-1 |
+| SCH-2 | Outside the positive affine class the ranking of lotteries is not preserved | p.531, the "only if" | as SCH-1 | Lean controls `control_monotone_nonaffine_reverses_ranking`, `control_stretch_monotone_on_support`, `control_stretch_not_affine_on_support`; SymPy SCH-2 |
+| SCH-3 | In the NM model utility represents preference rather than determining it | p.532 | "Note that utility, in the NM context, is used to represent preferences whereas in neoclassical theory it determines (or precedes) preference." | quotation |
+| SCH-4 | The NM scale is an interval scale, so ratios of utility differences are invariant | p.533 | "Even though NM utility functions are interval scales, implying that the ratios of utility differences are invariant under linear transformations" | Lean `affine_preserves_difference_order`, control `control_monotone_nonaffine_reverses_difference_order`; SymPy SCH-4 |
+| SCH-5 | As a preference theory NM utility is ordinal, and it does not measure strength of preference under certainty | p.533 | "However, from a preference perspective, NM utility theory is ordinal in that it provides no more than ordinal rankings of lotteries."; "Thus NM utility should not be interpreted as measuring strength of preference under certainty" | quotation; Lean `sure_outcomes_ordinal` for the formal part (under certainty any strictly increasing map preserves the ranking) |
+| SCH-6 | Reading a concave u as diminishing pleasure under certainty confuses u with v | p.535 | "a concave u(x) might erroneously be interpreted as implying that equal increments in money (under certainty) contribute to utility at a decreasing rate. Of course, v(x) is confused here with u(x)." | quotation |
+| SCH-7 | The postdictive view treats all observed behaviour as optimal once suitably modelled | p.539 | "The essential premise of the postdictive EU view is that all observed human behavior is optimal (in the EU sense), provided it is modeled in the appropriate manner." | quotation; not used in the map, recorded for the testability question |

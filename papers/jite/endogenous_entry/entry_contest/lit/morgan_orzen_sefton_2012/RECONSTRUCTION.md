@@ -46,10 +46,12 @@ Six sessions, Nottingham, Spring 2008, 102 subjects; 54 in the small-prize
 treatment, 48 in the large. Groups of six, fixed for the session; fifty rounds.
 Nine independent groups (small), eight (large).
 
-**Design (Table 1):** `w = 100`, `N = 6`, `F = 10`; `P = 50` (small) or
+**Design (Table 2, p.445; locator corrected 2026-10-06, Table 1 is the survey
+of previous experiments):** `w = 100`, `N = 6`, `F = 10`; `P = 50` (small) or
 `P = 200` (large). Predicted entrants `n* = 2` and `4`.
 
-**Observed entry (Table 5):**
+**Observed mean entry (text of p.452; Table 5 on that page is the
+distribution of the number of entrants, not the means):**
 
 | treatment | rounds 1–25 | rounds 26–50 | prediction |
 |---|---|---|---|

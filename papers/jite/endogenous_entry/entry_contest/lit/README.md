@@ -19,7 +19,7 @@ mean-preserving spread).
 | `RECONSTRUCTION.md` | **Written first, before reading what the survey says.** The paper rebuilt from its own primitives in our notation: objects, the derivation chain, and what each result is derived *from*. Ends with an explicit list of what could NOT be reconstructed. |
 | `CLAIMS.md` | Every claim `LITERATURE.tex` makes about the paper, given an ID, quoted or tightly paraphrased, each tagged with the source location in the paper. |
 | `verify_<slug>.py` | SymPy suite checking the claims that are checkable. One check per claim ID where possible. |
-| `<Slug>.lean` | Only where the paper's content is genuinely discrete or order-theoretic. Most papers will not have one; absence is the default, not a gap. |
+| `<Slug>.lean` | Required for every cited paper (author's instruction, 6 Oct 2026). Core Lean only, no Mathlib, no comments. It formalises what our documents attribute to the paper, with analytic content entering as named hypotheses, and it carries at least one control that fails when a hypothesis is dropped. A claim about interpretation rather than mathematics is verified by quotation in `CLAIMS.md`, which says so. |
 | `NOTES.md` | What was verified, what could not be, and every discrepancy found against the source. |
 
 ## Why reconstruction comes first
@@ -50,6 +50,13 @@ method.
    so a reader can confirm without re-deriving.
 5. Where the source read was a working paper, say so; proposition numbers may
    not survive to the published version.
+6. The Lean block of every suite measures what it reports. It searches the
+   source for `sorry`, parses the output of `#print axioms` for every declared
+   theorem, and fails on any axiom outside `propext` and `Quot.sound`. A
+   printed count that no check compares is an assertion, not a measurement.
+   The Hopkins-Kornienko and Fu-Jiao-Lu suites printed "sorry: 0" and the
+   allowed axioms without measuring either until 6 Oct 2026, and the parse in
+   the Sen suite caught a `Classical.choice` dependence on its first run.
 
 ## Running
 

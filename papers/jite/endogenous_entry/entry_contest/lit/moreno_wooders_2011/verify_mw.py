@@ -1,6 +1,13 @@
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+
 import sympy as sp
 
 results = []
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def check(name, ok, detail=""):
@@ -120,10 +127,116 @@ check("MW-5 cost heterogeneity does not move the welfare branch",
       "the branch is set by V_n, not by the cost distribution")
 
 print()
+print("MW-Lean  MorenoWooders.lean: cutoff, Proposition 2, collapse, Proposition 3")
+print("-" * 72)
+CLAIM_MAP = {
+    "MW-A": ["mem_entrants", "eq3_gives_eqLit", "eqLit_forces_eq3"],
+    "MW-B": ["count_not_pinned"],
+    "MW-C": ["entrant_set_not_pinned"],
+    "MW-E": ["tstar_strict_anti_phi", "tstar_strict_anti_v", "corner_eqTie",
+             "corner_not_eqLit", "corner_eq3_fails"],
+    "MW-F": ["root_unique", "lemmaA1", "prop3", "prop3_needs_monotone_U"],
+    "MW-G": ["symmetric_common_utility", "symmetric_equilibrium_flat_cutoff",
+             "private_info_without_symmetry"],
+    "MW-H": ["collapse_iff_const", "strict_no_collapse", "Delta3_strict",
+             "Delta3_no_collapse", "Delta3_no_collapse_general",
+             "antitone_constant_collapses", "realised_decisions_flat",
+             "Delta3_realised_flat_fit"],
+    "MW-I": ["inframarginal_rent"],
+}
+CONTROLS = {
+    "corner_eq3_fails": "MW-E: drop 'interior' and (3) fails at the corner",
+    "private_info_without_symmetry": "MW-G: drop the common threshold and "
+                                     "comparison values differ",
+    "antitone_constant_collapses": "MW-H: drop strictness and the schedule "
+                                   "collapses",
+    "prop3_needs_monotone_U": "MW-F: drop U decreasing in p and a root of (3) "
+                              "is not the maximiser",
+}
+ALLOWED_AXIOMS = {"propext", "Quot.sound"}
+NS = "MorenoWooders"
+src_path = os.path.join(HERE, "MorenoWooders.lean")
+lean = shutil.which("lean")
+if lean is None:
+    fallback = os.path.expanduser("~/.elan/bin/lean")
+    lean = fallback if os.path.exists(fallback) else None
+if lean is None:
+    check("MW-Lean lean binary found", False, "lean not on PATH or in ~/.elan/bin")
+else:
+    ver = subprocess.run([lean, "--version"], capture_output=True, text=True)
+    print(f"      {ver.stdout.strip()}")
+    src = open(src_path).read()
+    hygiene = []
+    if re.search(r"\bsorry\b", src):
+        hygiene.append("sorry")
+    if "native_decide" in src:
+        hygiene.append("native_decide")
+    if re.search(r"^\s*(private\s+)?axiom\s", src, re.M):
+        hygiene.append("user axiom")
+    if "--" in src or "/-" in src:
+        hygiene.append("comment")
+    check("MW-Lean source has no sorry, native_decide, user axiom or comment",
+          not hygiene, ", ".join(hygiene))
+
+    p = subprocess.run([lean, src_path], capture_output=True, text=True)
+    out = p.stdout + p.stderr
+    check("MW-Lean MorenoWooders.lean compiles with no errors",
+          p.returncode == 0, out.strip()[:300])
+    check("MW-Lean compiler reports no sorry", "sorry" not in out)
+
+    names = re.findall(r"^\s*(?:theorem|lemma)\s+([A-Za-z0-9_']+)", src, re.M)
+    with tempfile.TemporaryDirectory() as td:
+        audit = os.path.join(td, "audit.lean")
+        with open(audit, "w") as fh:
+            fh.write(src)
+            fh.write("\n")
+            for n in names:
+                fh.write(f"#print axioms {NS}.{n}\n")
+        q = subprocess.run([lean, audit], capture_output=True, text=True)
+    aout = q.stdout + q.stderr
+    deps = {}
+    for m in re.finditer(rf"'{NS}\.([A-Za-z0-9_']+)' depends on axioms: \[([^\]]*)\]",
+                         aout, re.S):
+        deps[m.group(1)] = {a.strip() for a in m.group(2).replace("\n", " ").split(",")
+                            if a.strip()}
+    for m in re.finditer(rf"'{NS}\.([A-Za-z0-9_']+)' does not depend on any axioms",
+                         aout):
+        deps[m.group(1)] = set()
+    audited = [n for n in names if n in deps]
+    free = [n for n in audited if not deps[n]]
+    core = [n for n in audited if deps[n] and deps[n] <= ALLOWED_AXIOMS]
+    other = {n: sorted(deps[n] - ALLOWED_AXIOMS) for n in audited
+             if deps[n] - ALLOWED_AXIOMS}
+    print(f"      theorems: {len(names)}; audited: {len(audited)}; sorry: 0; "
+          f"axiom-free: {len(free)}; propext/Quot.sound only: {len(core)}; "
+          f"other: {len(other)}")
+    for n, ax in other.items():
+        print(f"      UNEXPECTED AXIOMS {n}: {ax}")
+    check("MW-Lean axiom audit covers every declared theorem",
+          q.returncode == 0 and len(audited) == len(names) and len(names) > 0)
+    check("MW-Lean no axiom beyond propext / Quot.sound", not other,
+          "core Lean only; omega/decide/simp on Int and Nat")
+
+    mapped = {n for ns in CLAIM_MAP.values() for n in ns}
+    missing = sorted(mapped - set(names))
+    orphan = sorted(set(names) - mapped)
+    for cid, ns in CLAIM_MAP.items():
+        print(f"      {cid}: {', '.join(ns)}")
+    check("MW-Lean every theorem maps to a claim ID and every mapped theorem exists",
+          not missing and not orphan,
+          f"missing {missing}; unmapped {orphan}" if missing or orphan else "")
+    for n, why in CONTROLS.items():
+        print(f"      control {n}: {why}")
+    check("MW-Lean control theorems present",
+          all(n in names for n in CONTROLS), f"{len(CONTROLS)} controls")
+
+print()
 print("=" * 72)
 nf = sum(1 for _, ok in results if not ok)
 print(f"MORENO-WOODERS SUMMARY: {len(results)} checks, {nf} failures")
-print("Scope: our READING of the source is arithmetically consistent.")
+print("Scope: our READING of the source is arithmetically consistent, and the")
+print("cutoff, collapse and Proposition 3 structure is machine-checked in Lean")
+print("with the analytic content as explicit hypotheses.")
 print("This does not reprove any result of the paper.")
 print("=" * 72)
 raise SystemExit(1 if nf else 0)
