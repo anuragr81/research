@@ -288,6 +288,12 @@ paper's claims, and only then write the manuscript.
      `r` and `s` both Beta(2,2), in `checks/run_all.py`, and has no Lean
      witness. The referee's direction has not been exhibited exactly in the
      model.
+     Decision recorded 7 Oct 2026. The author asked for the passages to be
+     rewritten with verified content. `PROOFS.tex` §R1 now carries the exact
+     family and the general bound and withdraws the product formula, §R2
+     carries the exact strict rise and the uniform monotonicity and marks the
+     crossover as an illustration, and the index rows R1 and R2 cite the Lean.
+     `LITERATURE.tex` §Refuted conjectures was brought into line.
   2. **With a uniform base score the first entrant's gain never falls in
      `Q`.** For any law of `s >= 0`, any `0 < mu <= 1` and any incumbent,
      `Delta(0, .)` is non-decreasing (`pmu_step_nonneg_uniform`,
@@ -301,6 +307,18 @@ paper's claims, and only then write the manuscript.
      The author should decide whether the claim is stated as "rises, and
      never has an interior minimum" with the uniform case monotone, or
      whether a witness with a fall is sought first.
+     Decision recorded 7 Oct 2026. The witness is sought first, in Lean. The
+     fall needs the investment to lift the score by less than `mu`, so that
+     the crossing point sits inside `(0, mu)`, and a density of `mu r` that
+     falls above the crossing point. With `s` two-point, `0` or `t/(1 - mu)`,
+     `dF - dG = (1 - p)(g(x - t) - g(x))`, negative below `t` and positive
+     above `t` when `g` falls, so the single-peaked hypothesis holds at
+     `x0 = t`. A SymPy exploration, which is not evidence, found the gain
+     rising twice and then falling for `r` the smaller of two uniform draws,
+     `s` equal to `0` or `1/2` with probability `1/2` each, `mu = 1/2` and an
+     investing incumbent, with steps `23/960`, `491/86016` and
+     `-1277/2580480`. The same `r` with `s` equal to `0` or `1/4` gave a fall
+     from `Q = 1`, the referee's direction. The Lean proof is the next task.
   3. **The anonymity boundary has an exact witness inside the primitives.**
      Three challengers have wealth `11/4, 9/4, 2`, abilities `1, 2, 3` (the
      largest of `n` uniform draws, so ability falls with wealth), CRRA
@@ -316,6 +334,11 @@ paper's claims, and only then write the manuscript.
      (`Q = 4`, `mu = 1/2`, `theta = -3/2`) remains numerical, and the claim
      that count invariance holds when ability rises with wealth remains
      support from sampling, as `PROOFS.tex` already says.
+     Decision recorded 7 Oct 2026. The primitives paragraph of `PROOFS.tex`
+     now carries the exact witness and `gain_anonymous`, keeps the sampling
+     support for ability rising with wealth as support, and keeps the
+     quadrature witness as an illustration. The index row ANON cites the
+     Lean.
   - Done when each item has the author's decision recorded and, where
     accepted, the edit applied in the manuscript skeleton or in `PROOFS.tex`.
 

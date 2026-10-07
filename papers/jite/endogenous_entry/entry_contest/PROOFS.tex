@@ -261,16 +261,15 @@ BM \S\ref{claim:bmweak} & Burden-monotonicity is \emph{strictly} weaker than
   see \S\ref{sec:tiers}. \\[4pt]
 ANON \S\ref{sec:primitives} & Anonymity is delivered by wealth-independent
   draws, and count invariance does \emph{not} extend beyond it &
-  \status{REFUTED} (own, outside scope) & \tier{N} &
-  \file{checks/verify\_anonymity.py}. A1-2: spread of $\Delta$ within a count
-  class is exactly $0$ at $\theta=0$, so \S\ref{prop:anon} is verified on
-  induced primitives, not assumed; A1-3 control: order $10^{-1}$ once
-  $\theta\ne0$. A1-4c/A1-5: for $\theta<0$ count invariance is false, with a
-  displayed two-size witness whose margin exceeds the quadrature bound of
-  A1-1 by $>10^{3}$. For $\theta>0$: $0$ violations in $20{,}000$ economies,
-  which is support, \emph{not} proof (\S\ref{sec:tiers}, tier \tier{N} for a
-  universal claim). Bounds the scope of every result in
-  \S\ref{sec:proofs}. \\[4pt]
+  \status{REFUTED} (own, outside scope) & \tier{L} &
+  \file{lean/mathlib/Anonymity.lean} (\texttt{gain\_anonymous} proves
+  \S\ref{prop:anon} on the induced primitives; \texttt{anon\_witness\_zero},
+  \texttt{anon\_witness\_positive}, an exact two-size witness with ability
+  falling in wealth, at $\mu=0$ and for every small $\mu>0$). For ability
+  rising with wealth, \file{checks/verify\_anonymity.py} A1-4b reports $0$
+  violations in $20{,}000$ economies, which is support, \emph{not} proof
+  (\S\ref{sec:tiers}, tier \tier{N} for a universal claim). Bounds the scope
+  of every result in \S\ref{sec:proofs}. \\[4pt]
 P1 \S\ref{prop:P1} & $\Delta(m)=V\,\mathbb E[\varphi(M_m)]$ &
   \status{PROVED} & \tier{S} &
   \file{checks/verify\_sympy.py} (S7, exact); \file{checks/run\_all.py} (P1, max err $3\times10^{-6}$) \\[4pt]
@@ -296,14 +295,14 @@ P6 \S\ref{prop:P6} & $\mu\to0\Rightarrow\Delta(m)=1/(m{+}2)$, indep.\ of $Q$ &
   \status{PROVED} & \tier{S} &
   \file{checks/verify\_p679.py} (P6 block); \file{checks/verify\_sympy.py} (S9); \file{checks/run\_all.py} (P6) \\[4pt]
 R1 \S\ref{sec:R1} & Collapse threshold $\bar Q$ with $k^*=0$ &
-  \status{REFUTED} (own) & \tier{N} &
-  \file{checks/run\_all.py} (R1) \\[4pt]
+  \status{REFUTED} (own) & \tier{L} &
+  \file{lean/mathlib/Refutations.lean} (\texttt{bern\_Delta\_lower}, \texttt{bern\_Delta\_limit}, \texttt{r1\_lower\_bound}); \file{checks/run\_all.py} (R1, illustration) \\[4pt]
 P7 \S\ref{prop:P7} & $\Delta(m)\le V/(m{+}1)$; $k^*\le V/\kappa$, unif.\ in $Q$ &
   \status{PROVED} & \tier{S}\,/\,\tier{L} &
   Algebraic steps \tier{S}: \file{checks/verify\_sympy.py} (S18 dominance factorisation, abstract $F,G,C$; S19 $G^{e}\le1$ on $[0,1]$; S20 $\int_0^1u^m\,du=1/(m{+}1)$, symbolic in $m$). Deduction bound~$\Rightarrow$~cap \tier{L}: \file{lean/EntryContest.lean} (\texttt{entry\_index\_bounded}). Integral monotonicity assumed, see \S\ref{sec:tiers}. Corroborated \tier{N}: \file{checks/verify\_p679.py}, \file{checks/run\_all.py}. \\[4pt]
 R2 \S\ref{sec:R2} & $k^*$ decreasing in $Q$ for all $\mu>0$ &
-  \status{REFUTED} (referee) & \tier{N} &
-  \file{checks/run\_all.py} (R2) \\[4pt]
+  \status{REFUTED} (referee) & \tier{L} &
+  \file{lean/mathlib/Refutations.lean} (\texttt{bern\_Delta\_strictMono}, \texttt{Delta\_mono\_uniform}); \file{checks/run\_all.py} (R2, illustration) \\[4pt]
 P8 \S\ref{prop:P8} & $k^*$ nondecr.\ in $V$, nonincr.\ in $c$ &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{entry\_monotone}, \texttt{nonentry\_monotone}); \file{checks/verify\_p89.py} (P8a, P8b) \\[4pt]
@@ -382,33 +381,41 @@ below, and deliberately so: the model isolates the pure affordability channel.
 
 \paragraph{What lies outside that scope, and why it matters.} The exclusion is
 not a formality, and the boundary is demonstrated rather than asserted. Let
-ability be tilted against wealth by a parameter $\theta$: take
-$\Pr(s_i\le x)=x^{a_i}$ on $[0,1]$ with $a_i=e^{\theta z_i}$, where $z_i$ runs
-from $+1$ at the richest rank to $-1$ at the poorest, so that $\theta=0$
-reproduces the assumption above exactly. Then
-(\file{checks/verify\_anonymity.py}, $\Delta$ computed by deterministic
-quadrature with the discretisation error bounded so that every reported
-violation can be compared against it):
+challenger $i$ draw $s_i$ with $\Pr(s_i\le x)=x^{n_i}$ on $[0,1]$, the largest
+of $n_i$ uniform draws, so that $n_i$ is an ability and equal abilities
+reproduce the assumption above. Challenger $i$ wins with probability
+$\int C\prod_{j\ne i}F_j\,dF_i$, where $F_j$ is the score CDF of challenger
+$j$ (\file{lean/mathlib/Anonymity.lean}, \texttt{winProb}). Three facts
+follow.
 
 \begin{itemize}
-\item At $\theta=0$ the spread of $\Delta$ within a fixed count class is
-  \emph{exactly} zero (A1-2): Proposition~\ref{prop:anon} is verified on the
-  model's induced primitives, not merely assumed. Away from $\theta=0$ that
-  spread is of order $10^{-1}$ (A1-3), so the test is not vacuous.
-\item For $\theta>0$ --- ability rising with wealth --- count invariance held
-  in every economy sampled. This is \emph{support and not proof}: zero
-  violations in a finite sample is tier~\tier{N} evidence for a universal
-  claim, in the sense of \S\ref{sec:tiers}.
-\item For $\theta<0$ --- ability falling with wealth --- count invariance is
-  \textbf{false}. With $Q=4$, $\mu=1/2$, $c=1$, CRRA $\gamma=2$ and
-  $\theta=-3/2$, the profile
-  $w=(4.2197,\,2.9982,\,1.9339,\,1.8760)$, giving
-  $\kappa=(0.0736,\,0.1669,\,0.5537,\,0.6085)$, has exactly two pure-strategy
-  equilibria: the \emph{poorest} challenger entering alone, and the two
-  \emph{richest} entering together --- counts $1$ and $2$. The binding margin
-  exceeds the quadrature error by more than three orders of magnitude, so this
-  is a genuine counterexample and not a numerical artefact.
+\item With equal abilities, the gain to challenger $i$ from entering against
+  the set $T$ of other entrants is $\Delta(|T|)$, a function of the number of
+  other entrants alone (\texttt{gain\_anonymous}). This is
+  Proposition~\ref{prop:anon} proved on the model's induced primitives.
+\item For ability falling with wealth, count invariance is \textbf{false}.
+  Take three challengers with wealth $(11/4,\,9/4,\,2)$ and abilities
+  $(1,2,3)$, CRRA $\gamma=2$, $c=1$, $V=1$, and an incumbent of ability $1$ who
+  invests. At $\mu=0$ the gain to challenger $i$ against $T$ is
+  $n_i/(1+n_i+\sum_{j\in T}n_j)$ (\texttt{gain\_zero}), the costs are
+  $\kappa=(16/77,\,16/45,\,1/2)$, and the \emph{poorest} challenger entering
+  alone and the two \emph{richest} entering together are both equilibria,
+  with counts $1$ and $2$ (\texttt{anon\_witness\_zero}). Every equilibrium
+  condition holds strictly and every win probability is continuous in $\mu$
+  (\texttt{winProb\_tendsto}), so both equilibria persist for every small
+  $\mu>0$, where every score law has no atoms and the primitives hold
+  (\texttt{anon\_witness\_positive}).
+\item For ability rising with wealth, count invariance held in every economy
+  sampled, with $\Pr(s_i\le x)=x^{a_i}$ and $a_i=e^{\theta z_i}$, $\theta>0$
+  (\file{checks/verify\_anonymity.py}, A1-4b). This is \emph{support and not
+  proof}. Zero violations in a finite sample is tier~\tier{N} evidence for a
+  universal claim, in the sense of \S\ref{sec:tiers}.
 \end{itemize}
+
+An earlier version of this paragraph rested the second fact on a witness with
+$Q=4$, $\mu=1/2$ and $\theta=-3/2$ computed by quadrature
+(\file{checks/verify\_anonymity.py}, A1-5), which remains there as an
+illustration.
 
 The mechanism of the failure is worth stating, because it identifies what
 anonymity is really buying. Under a negative tilt the ablest challenger is
@@ -979,11 +986,27 @@ $1$.
 \subsection{R1: no collapse threshold (refuted)}
 \label{sec:R1}
 The author conjectured a finite $\bar Q$ beyond which $k^*=0$, intended
-to replace the old mobility ceiling. \textbf{False.} $\Delta(0)$
-converges to a strictly positive limit (numerical evidence in
-\file{checks/run\_all.py} (R1)), because non-investor scores are capped
-at $\sup\operatorname{supp}(G)=\mu$ while investor scores can exceed
-it: $\Delta(m)\to\Pr(X>\mu)\cdot\Pr(\text{beat incumbent})>0$.
+to replace the old mobility ceiling. \textbf{False.} Take $r$ uniform on
+$[0,1]$, an investment that fails ($s=0$) with probability $p$ and succeeds
+($s=1$) otherwise, $0<\mu\le\tfrac12$ and an investing incumbent. Then for
+every $Q\ge1$
+\[
+  \Delta(0,Q) \;=\; V\Big(\frac{1-p^2}{2}-\frac{p(1-p)}{Q+1}\Big)
+  \;\ge\; V\,\frac{1-p}{2},
+\]
+so a challenger whose cost is at most $V(1-p)/2$ enters for every $Q$, and
+$\Delta(0,Q)\to V(1-p^2)/2$ (\file{lean/mathlib/Refutations.lean},
+\texttt{bern\_Delta}, \texttt{bern\_Delta\_lower}, \texttt{bern\_Delta\_limit}).
+The mechanism is general. When non-investor scores never exceed $x_G$,
+\[
+  \Delta(m,Q) \;\ge\; V\Big(\int_{x\ge x_G} C\,F^m\,dF-\frac{1}{Q-m}\Big)
+  \qquad (m<Q),
+\]
+and the first term carries no $Q$ (\texttt{r1\_lower\_bound}). An earlier
+version of this paragraph gave the limit as
+$\Pr(X>\mu)\cdot\Pr(\text{beat incumbent})$ on numerical evidence. That formula
+is withdrawn. In the family above $\Pr(X>\mu)=1-p$
+(\texttt{bern\_investor\_above}) while the limit is $V(1-p)(1+p)/2$.
 
 \subsection{P7: saturation, uniformly in \texorpdfstring{$Q$}{Q}}
 \label{prop:P7}
@@ -1046,12 +1069,19 @@ hold) is corroboration rather than the basis of the claim.
 \subsection{R2: the \texorpdfstring{$Q$}{Q} comparative static (refuted)}
 \label{sec:R2}
 Referee 2 conjectured that for $\mu>0$, higher $Q$ shrinks the pie
-among investors, so fewer invest. \textbf{Not general}: the sign
-depends on $\mu$, reversing at a distribution-dependent crossover
-$\mu^*\in[0.1,0.7]$ across the families tested
-(\file{checks/run\_all.py} (R2)). Below $\mu^*$, extra non-investors
-mainly damage the non-investing deviator, \emph{strengthening} the
-incentive to invest as $Q$ grows.
+among investors, so fewer invest. \textbf{Not general.} In the family of
+\S\ref{sec:R1} with $0<p<1$, $\Delta(0,Q)$ rises strictly at every $Q$
+(\texttt{bern\_Delta\_strictMono}), so a challenger whose cost lies between
+$\Delta(0,Q)$ and $\Delta(0,Q{+}1)$ stays out with $Q$ challengers and enters
+with $Q+1$. With $r$ uniform the gain never falls in $Q$, for any law of
+$s\ge0$, any $0<\mu\le1$ and any incumbent (\texttt{Delta\_mono\_uniform}),
+because the weight of \S\ref{prop:PMU} vanishes above $\mu$, where the
+non-investor's score cannot reach, and below $\mu$ the investor's law lies
+under the non-investor's. The conjectured direction, a gain that falls in
+$Q$, is not exhibited exactly in the model. \file{checks/run\_all.py} (R2)
+reports it by quadrature for $r$ and $s$ both Beta$(2,2)$ at $\mu$ above a
+crossover, which is an illustration and not evidence. An earlier version of
+this paragraph stated the crossover as a result.
 
 \subsection{P8: prize and affordability, separated}
 \label{prop:P8}
@@ -1775,8 +1805,9 @@ V/\kappa$, uniform in $Q$ and requiring no limit to be taken.
 
 Closed since the previous draft: the P9 fixed-point effect (there is no
 feedback to resolve --- Proposition~\ref{prop:anon}); uniqueness of the
-wealth fixed point (Lemma~\ref{lem:crossing}); the characterisation of
-$\mu^*$ (\S\ref{prop:PMU}); P8, now proved rather than verified;
+wealth fixed point (Lemma~\ref{lem:crossing}); the exact sign condition for
+the $Q$ comparative static (\S\ref{prop:PMU}); P8, now proved rather than
+verified;
 non-linear spreads (Theorem~\ref{thm:P9gen}); and P9 strictness
 (Proposition~\ref{prop:strict}). Also closed: the literature position, which
 was previously listed here as gating further proof effort. It is settled in the
