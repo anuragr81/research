@@ -111,6 +111,38 @@ theorem assortative_min_cost (hcost : Monotone cost) (S : Finset ℕ) :
 
 end Selection
 
+section ComparativeStatics
+
+/-! **P8.** `k*` rises with lower costs and higher gains, so it is non-decreasing in the prize
+and non-increasing in the fee. -/
+
+/-- `k*` does not fall when every cost weakly falls and every gain weakly rises. -/
+theorem kstar_mono (cost gain cost' gain' : ℕ → ℝ) (Q k k' : ℕ) (hkQ : k ≤ Q)
+    (hc : ∀ j, cost' j ≤ cost j) (hg : ∀ j, gain j ≤ gain' j)
+    (hprefix : ∀ j, j < k → cost j ≤ gain j) (hfail' : k' < Q → gain' k' < cost' k') :
+    k ≤ k' := by
+  by_contra h
+  push_neg at h
+  have h1 := hfail' (by omega)
+  have h2 := hprefix k' h
+  linarith [hc k', hg k']
+
+/-- The gain is non-decreasing in the prize when it is nonnegative at a unit prize. -/
+theorem Delta_mono_prize (V V' : ℝ) (hVV : V ≤ V') (α β C : Measure ℝ) (Q m : ℕ)
+    (h1 : 0 ≤ Delta 1 α β C Q m) : Delta V α β C Q m ≤ Delta V' α β C Q m := by
+  have e : ∀ W, Delta W α β C Q m = W * Delta 1 α β C Q m := fun W => by
+    rw [← Delta_scale W 1, mul_one]
+  rw [e V, e V']
+  exact mul_le_mul_of_nonneg_right hVV h1
+
+/-- The cost of entry is non-decreasing in the fee when `u` is non-decreasing. -/
+theorem kappa_mono_fee (u : ℝ → ℝ) (hu : Monotone u) (w c c' : ℝ) (h : c ≤ c') :
+    EntryContestKappa.kappa u c w ≤ EntryContestKappa.kappa u c' w := by
+  unfold EntryContestKappa.kappa
+  linarith [hu (show w - c' ≤ w - c by linarith)]
+
+end ComparativeStatics
+
 section Payoffs
 
 /-! **N4 (iii).** With identical score laws, the sum of expected payoffs depends on the entrant

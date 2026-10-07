@@ -479,6 +479,15 @@ paper's claims, and only then write the manuscript.
   `PROOFS_ADDENDUM.tex` is created with eight results more general than the
   manuscript states. `checks/verify_manuscript.py` now accepts theorem names
   with non-ASCII letters. Next is pass 4b, P6 to P8.
+  Pass 4b done 7 Oct 2026. Model rows M9 (P6), M10 (P7) and M11 (P8) with
+  their proofs. M9 states both the value at `mu = 0` and the limit as
+  `mu -> 0`, with the factor `V`, where `PROOFS.tex` states only "as
+  `mu -> 0`, `Delta(m) = 1/(m+2)`". M10 carries `V` correctly, where the P7
+  proof of `PROOFS.tex` writes `int F^m dF = V/(m+1)`. For P8, the step from
+  monotone entry sets to a monotone `k*` was not in Lean and is now
+  (`kstar_mono`), with the prize effect (`Delta_mono_prize`) and the fee
+  effect for any non-decreasing `u` (`kappa_mono_fee`), where `PROOFS.tex`
+  differentiated `u`. Next is pass 4c, the P9 family with the band.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

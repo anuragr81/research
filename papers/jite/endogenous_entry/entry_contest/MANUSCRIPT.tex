@@ -135,6 +135,18 @@ that check it.}\\
   for $|S|=k$; with identical score laws, payoff sums of equal-size equilibria
   differ by their cost sums.}
   {EntryContestEq.assortative_is_equilibrium, EntryContestEq.assortative_min_cost, EntryContestEq.prize_term_anonymous, EntryContestEq.payoff_gap_anonymous}
+\mrow{M9}{Benchmark (P6).}
+  {With the incumbent investing and $s\ge0$ atomless, $\Delta(m)=V/(m+2)$ at $\mu=0$
+  for every $Q$, and $\Delta(m)\to V/(m+2)$ as $\mu\to0$.}
+  {EntryContestP6P7.integral_iid, EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p6_evaluation, EntryContestP6P7.p6_at_zero, EntryContestP6P7.tendsto_cdf_investorLaw, EntryContestP6P7.tendsto_cdf_nonInvestorLaw, EntryContestP6P7.p6_limit}
+\mrow{M10}{Saturation (P7).}
+  {$\Delta(m)\le V/(m+1)$ for every $Q$, and an entrant at index $m$ has
+  $(m+1)\kappa\le V$.}
+  {EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p7_Delta_le, EntryContestP6P7.p7_cap, EntryContestP6P7.p7_count}
+\mrow{M11}{Prize and fee (P8).}
+  {$k^*$ is non-decreasing in $V$ and, for $u$ non-decreasing, non-increasing
+  in $c$.}
+  {EntryContestEq.kstar_mono, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestEq.kappa_mono_fee}
 \end{longtable}
 \normalsize
 
@@ -310,6 +322,53 @@ $EU_i(S)=u(w_i)-\kappa_i\mathbf 1\{i\in S\}+V P_i(S)$,
   +V\big(|S|P^{\mathrm{in}}(|S|)+(Q-|S|)P^{\mathrm{out}}(|S|)\big),
 \]
 and the last term is equal for $|S|=|T|$.
+\end{mproof}
+
+\begin{mproof}{M9}{EntryContestP6P7.integral_iid, EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p6_evaluation, EntryContestP6P7.p6_at_zero, EntryContestP6P7.tendsto_cdf_investorLaw, EntryContestP6P7.tendsto_cdf_nonInvestorLaw, EntryContestP6P7.p6_limit}
+For $X_0,\dots,X_k$ independent with atomless CDF $F$,
+\[
+  \int F^k\,dF=\Pr\Big(X_0=\max_{i\le k}X_i\Big)=\frac1{k+1}.
+\]
+At $\mu=0$ the entrant scores $s$ and the outsider $0$, so
+$G=\mathbf 1_{[0,\infty)}$ and $F(0)=\Pr(s\le0)=0$. With $C=F$,
+\[
+  \int H_m\,dF=\int F^{m+1}\,dF=\frac1{m+2},\qquad \int H_m\,dG=H_m(0)=0 .
+\]
+For $\mu\to0$ let $X_\mu=\mu r+(1-\mu)s$ and $Y_\mu=\mu r$. For $s>0$,
+\[
+  F_\mu(X_\mu)\to F_0(s),\qquad G_\mu(X_\mu)\to1,\qquad F_\mu(Y_\mu)\to F_0(0)=0,
+\]
+with every integrand in $[0,1]$, so by dominated convergence
+\[
+  \int H_m\,dF_\mu\to\int F_0^{m+1}\,dF_0=\frac1{m+2},\qquad
+  0\le\int H_m\,dG_\mu\le\mathbb E\big[F_\mu(Y_\mu)\big]\to0 .
+\]
+\end{mproof}
+
+\begin{mproof}{M10}{EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p7_Delta_le, EntryContestP6P7.p7_cap, EntryContestP6P7.p7_count}
+From $C\le1$, $G\le1$ and $\int H_m\,dG\ge0$,
+\[
+  \Delta(m)\le V\int H_m\,dF\le V\int F^m\,dF=\frac V{m+1}.
+\]
+An entrant at index $m$ has $\kappa\le\Delta(m)$, so
+\[
+  (m+1)\,\kappa\le(m+1)\,\Delta(m)\le V,\qquad m+1\le\frac V\kappa\quad(\kappa>0).
+\]
+\end{mproof}
+
+\begin{mproof}{M11}{EntryContestEq.kstar_mono, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestEq.kappa_mono_fee}
+Let $k^*$ and $k'^*$ be the counts for $(\kappa,\Delta)$ and $(\kappa',\Delta')$, with
+$\kappa'_j\le\kappa_j$ and $\Delta(j)\le\Delta'(j)$ for every $j$. If $k'^*<k^*$,
+then $k'^*<Q$ and
+\[
+  \Delta'(k'^*)<\kappa'_{k'^*}\le\kappa_{k'^*}\le\Delta(k'^*)\le\Delta'(k'^*),
+\]
+so $k^*\le k'^*$. By M1 and M2, $\Delta_V(j)=V\,\Delta_1(j)$ with
+$\Delta_1(j)\ge0$, and for $u$ non-decreasing,
+\[
+  V\le V'\ \Rightarrow\ \Delta_V\le\Delta_{V'},\qquad
+  c\le c'\ \Rightarrow\ u(w)-u(w-c)\le u(w)-u(w-c').
+\]
 \end{mproof}
 
 \section{Evidence and verification}
