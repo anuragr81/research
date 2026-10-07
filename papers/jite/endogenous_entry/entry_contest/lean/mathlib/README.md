@@ -68,6 +68,25 @@ and `V ≥ 0`.
 P2 needs only `μ ≤ 1`. The hypothesis `0 ≤ μ` was in the first draft and the
 compiler reported it unused, since the `μr` term is common to both scores.
 
+## SaturationBenchmark.lean, P7 and P6
+
+| Theorem | Content |
+|---|---|
+| `integral_maxLaw` | `∫ g d(max law) = ∫ g G dF + ∫ g F dG` for bounded measurable `g`, the first law without atoms |
+| `integral_iid`, `integral_cdf_pow` | For the maximum of `n + 1` draws from `F`, `∫ g = (n + 1) ∫ g F^n dF`, and hence `∫ F^m dF = 1/(m + 1)` |
+| `p7_Delta_le` | P7. `Δ(m) ≤ V/(m + 1)` for every `Q`, every `m` and every incumbent law `C` |
+| `p7_cap`, `p7_count` | Entry at index `m` gives `(m + 1) κ ≤ V`, through `EntryContest.entry_index_bounded`, and `m + 1 ≤ V/κ` when `κ > 0` |
+| `p6_evaluation`, `p6_at_zero` | P6 at `μ = 0`. `Δ(m) = V/(m + 2)` for every `Q`, with the incumbent investing |
+| `tendsto_cdf_investorLaw`, `tendsto_cdf_nonInvestorLaw` | As `μ → 0`, `F_μ(y_μ) → F_0(y)` when `y` is not an atom of `s`, and `G_μ(y_μ) → 1` when `y > 0` |
+| `p6_limit` | P6 as stated. `Δ(m) → V/(m + 2)` as `μ → 0`, for every `Q` |
+
+P7 needs no atoms in the investor's law `α` only. P6 assumes `s ≥ 0` almost
+surely and no atoms in the law of `s`. The law of `r` is arbitrary. At
+`μ = 0` the non-investor's score is the point mass at 0, which has an atom, so
+`p6_at_zero` evaluates the formula for `Δ` at a point outside the primitives,
+while `p6_limit` stays inside them for every `μ ≠ 0`. The limit is taken in a
+neighbourhood of 0 and so also holds as `μ` falls to 0 from above.
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;

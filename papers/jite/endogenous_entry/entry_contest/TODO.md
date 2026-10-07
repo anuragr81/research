@@ -155,6 +155,23 @@ paper's claims, and only then write the manuscript.
   part of P2 on an interval `[q, u)`, as `PROOFS.tex` states it; and
   `Delta >= 0` from the primitives. P2 needs only `mu <= 1`, since the
   compiler reported `0 <= mu` unused.
+  Pass 3c done 7 Oct 2026. `lean/mathlib/SaturationBenchmark.lean` proves P7,
+  `Delta(m) <= V/(m+1)` for every `Q`, and the cap `(m+1) kappa <= V` through
+  `EntryContest.entry_index_bounded`. The bound needs no atoms in the
+  investor's law only. The non-investor's law and the incumbent's law can be
+  any probability laws, so P7 holds for every incumbent, not only for
+  `C = F` or `C = G`. `PROOFS.tex` writes `int F^m dF = V/(m+1)` in the P7
+  proof, where the factor `V` belongs to `Delta` and not to the integral.
+  The same file proves P6 twice. `p6_at_zero` evaluates `Delta` at `mu = 0`,
+  which is the argument `PROOFS.tex` gives. `p6_limit` proves
+  `Delta -> V/(m+2)` as `mu -> 0`, which is the statement `PROOFS.tex` makes
+  and does not prove. The limit matters because at `mu = 0` the non-investor's
+  score is the point mass at 0, so `G` has an atom and lies outside the
+  primitives' continuity assumption. For every `mu` near 0, `G` is the law of
+  `mu r`, and the limit holds for any law of `r`. Both theorems assume
+  `s >= 0` almost surely and no atoms in the law of `s`, and the incumbent
+  invests (`C = F`), as in `PROOFS.tex`. The proviso `s > 0` almost surely in
+  `PROOFS.tex` follows from those two assumptions (`Iic_zero_null`).
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
