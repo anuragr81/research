@@ -25,6 +25,9 @@
 \usepackage{longtable}
 
 \newcommand{\none}{\textbf{none}}
+% Drafts below are meant for pasting into the manuscript, so citations print their keys.
+\newcommand{\citep}[1]{\texttt{[#1]}}
+\sloppy
 
 \title{Introduction linkage: what each introduction paragraph promises,\\ and where the paper keeps it}
 \author{}
@@ -134,22 +137,111 @@ App.~A & Proof of LAD & Channels\\
 \end{longtable}
 \normalsize
 
-\section{Findings}\label{sec:findings}
+\section{Report and proposed remedies}\label{sec:findings}
 
-\paragraph{Introduction paragraphs thinly expanded.}
-\begin{itemize}
-\item \textbf{Gap.} ``Remains valid for any number of cues and attributes'' rests on Lemma SEP alone; no other result is shown beyond two cues.
-\item \textbf{Literature.} It previews only the Jeffrey and belief-adjustment strand, while most of Section 3 is about economics.
-\item \textbf{Precision.} Its one body home of substance is the paragraph in Section 5 on detectability as a property of the instrument.
-\end{itemize}
+Each item gives what the mapping shows, a remedy with the paragraph that would host it, and the
+grounds for any claim a draft adds. Drafts follow \texttt{notes/writing\_discipline.md}. Nothing
+here has been applied to the manuscript.
 
-\paragraph{Body content with no introduction home.}
-\begin{itemize}
-\item \textbf{Three strands of Section 3}: observational learning, decision-theory axiomatisations, and statistical discrimination with audits. The introduction never says the paper positions itself against economics.
-\item \textbf{The odds-ratio invariance}, the one statistic that never registers the sequence.
-\item \textbf{The homogeneous-prior scope limit} in Section 6.
-\item \textbf{The three-coordinates rationale} in Section 4's opening. The current introduction carries it in paragraph 3, but the planned 3A and 3B do not, so it loses its home once they go in.
-\item \textbf{The decision model itself} ($v$, $\tau$, the score). The introduction mentions decisions only through their results.
-\end{itemize}
+\subsection*{Introduction paragraphs thinly expanded}
+
+\paragraph{1. Gap: ``any number of cues and attributes''.}
+\emph{Finding.} Paragraph 1 ends ``Despite its simplicity the two-cue setting demonstrates the
+central mechanism of how an attribute-local updating leaves the interactions among attributes
+untouched remains valid for any number of cues and attributes.'' Only Lemma SEP is shown for more
+than two cues; every order result is proved for two.
+\emph{Remedy (Gap).} Narrow the sentence to what Lemma SEP proves:
+\begin{quote}
+The setting has two cues, but its mechanism, that an update on one attribute rescales the
+association rather than creating it, holds for any number of cues and attributes
+(Lemma~SEP).
+\end{quote}
+\emph{Grounds.} LemmaSEP.lean, general $N$: \texttt{applySteps\_no\_pair\_interaction},
+\texttt{sep\_rescales\_association}.
+
+\paragraph{2. Literature: only the Jeffrey and belief-adjustment strand.}
+\emph{Finding.} Paragraph 2 previews the commutation debate, belief adjustment and Hawthorne's
+factor models. Most of Section 3 positions the paper against economics (observational learning,
+decision-theory axiomatisations, statistical discrimination and audits), and the introduction
+never says so.
+\emph{Remedy (Literature).} One sentence at the end of paragraph 2:
+\begin{quote}
+In economics, sequence has been studied across agents, as in observational learning
+\citep{BHW1992,Banerjee1992}, and discrimination through evaluators' beliefs and preferences
+about groups \citep{Phelps1972,Arrow1973,Bohren2019}, while decision theory axiomatises updating
+on a single piece of news \citep{Epstein2006,Ortoleva2012}, and none of these asks how one
+evaluator's reading sequence registers in what an audit measures.
+\end{quote}
+\emph{Grounds.} Each description is Section 3's own; the last clause is the paper's positioning
+claim, as Section 3 states it (a single agent, two cues, a kinematic rather than an equilibrium
+object).
+
+\paragraph{3. Precision: one body home, and two sentences with none.}
+\emph{Finding.} Paragraph 5's precision argument is developed in one Section 5 paragraph (the
+instrument), with mentions in Assumption 1 and the conclusion. That is enough for a framing
+device. But two of its sentences have no body home: ``Thus sequence effect is a sequential,
+myopic structure that makes Jeffrey conditioning the coherent response to a delivered credence''
+is never expanded or explained, and the Domotor sentence cites a source that does not support the
+mechanism (pending plan entry 1.7).
+\emph{Remedy (Precision).} Cut the ``myopic structure'' sentence, and apply entry 1.7 for the
+Domotor sentence.
+
+\subsection*{Body content with no introduction home}
+
+\paragraph{4. Section 3's economics strands.} Covered by remedy 2.
+
+\paragraph{5. The odds-ratio invariance.}
+\emph{Finding.} Section 5.2 shows the odds ratio is unchanged by every separable reweighting, so it
+never registers the sequence. It is the paper's sharpest invariance and the introduction does not
+mention it.
+\emph{Remedy (Results).} A clause in paragraph 6, after ``\ldots are second order'':
+\begin{quote}
+\ldots, and the odds ratio between the attributes does not register the sequence at all
+(Lemma~SEP).
+\end{quote}
+\emph{Grounds.} PropDEC.lean \texttt{oddsRatio\_gap\_eq\_zero}; Ladder.lean
+\texttt{oddsRatio\_rescale}.
+
+\paragraph{6. The homogeneous prior.}
+\emph{Finding.} Section 6 states that every evaluator shares one prior $(\alpha,\beta,c)$ and that a
+population differing in $c$ is outside the results. The introduction's audit claims are claims
+about populations, and they carry this condition silently.
+\emph{Remedy (Results).} A qualifier in paragraph 6's PRO sentence: ``for every interior mixture of
+reading sequences in a population whose members share one prior, and across an open set of
+priors''. The alternative is to leave scope limits to Section 6, which the roadmap points to.
+
+\paragraph{7. The three coordinates of a belief.}
+\emph{Finding.} Section 4 opens by explaining why the belief statistics are the two marginals and
+the association (a belief about two binary attributes has three degrees of freedom) and why the
+decision statistics are how many decisions change and what that costs. The current paragraph 3
+carries the first point, but the planned 3A and 3B do not.
+\emph{Remedy (Results).} Replace paragraph 6's opening ``The key finding is presented in two
+parts.'' with:
+\begin{quote}
+A belief about two binary attributes has three coordinates, the two marginal probabilities and
+the association, and the decisions read from it give two further statistics, the share of
+decisions the sequence changes and the surplus that change costs. The key finding comes in two
+parts.
+\end{quote}
+
+\paragraph{8. The decision model.}
+\emph{Finding.} The introduction mentions decisions only through their results. What the panel
+decides, and how a belief becomes a decision, is never said.
+\emph{Remedy (Vignette).} One sentence in paragraph 4, after ``identical evidence can license
+different decisions'':
+\begin{quote}
+The panel hires when the expected value of the candidate under its belief exceeds the value of
+its outside option, so a change of belief changes the decision only for candidates near that
+threshold.
+\end{quote}
+\emph{Grounds.} Setup 2.1 (engage if and only if $s(P)\ge\tau$); Decision.lean \texttt{flips\_iff},
+\texttt{not\_flips\_of\_pointing\_away}.
+
+\subsection*{An error found along the way}
+
+\paragraph{9. ``Correlated'' cues.} Assumption 2 reads ``The cues are bundled, correlated, and soft'',
+and the abstract ``two correlated soft cues''. In the model the cues are not correlated: each bears
+on one attribute, and the correlation is the evaluator's belief that the attributes go together,
+$c$. Pending plan entry 2.6 rewrites Assumption 2; the abstract needs the same correction.
 
 \end{document}
