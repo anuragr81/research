@@ -594,6 +594,12 @@ paper's claims, and only then write the manuscript.
   the uniform case assumed the uniform law shift-monotone without proof, and
   `MustFall.lean` now proves it (`unif_shiftMono`, `uniform_never_gains`).
   Next is pass 4e, BM and ANON.
+  Pass 4e done 7 Oct 2026. Model rows M23 (burden-monotonicity), M24 (strictly
+  weaker than concavity, the corrected ramp construction), M25 (divergence at
+  the fee), M26 (anonymity) and M27 (the anonymity boundary) with their proofs,
+  on `KappaSpread.lean`, `BurdenWeaker.lean` and `Anonymity.lean`.
+  `Anonymity.lean` gained the ASCII alias `kappa3_values` so the manuscript can
+  cite the costs. Pass 4 is complete. Next is pass 5.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

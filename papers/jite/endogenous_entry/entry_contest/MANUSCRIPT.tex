@@ -209,6 +209,32 @@ that check it.}\\
   $[0,1]$ both have $F\le G$ and no atoms. The first has $D(1)=\frac V{60}$ and
   $D(2)=\frac V{420}$, and the second has $D(Q)=-\frac{VQ}{(Q+2)(Q+3)(Q+4)}$.}
   {EntryContestPMUWitness.pairA_fosd, EntryContestPMUWitness.pairB_fosd, EntryContestPMUWitness.pairA_step_one, EntryContestPMUWitness.pairA_step_two, EntryContestPMUWitness.pairB_step, EntryContestPMUWitness.fosd_does_not_sign}
+\mrow{M23}{Burden-monotonicity.}
+  {$\kappa(w)=u(w)-u(w-c)$ is strictly decreasing on $w>c$ when $u$ is strictly
+  concave on $(0,\infty)$, or when $u'(w)<u'(w-c)$ for every $w>c$. A convex
+  stretch of $u$ longer than $c$ rules it out. Log and CRRA utility ($\gamma>0$,
+  $\gamma\ne1$) satisfy it.}
+  {EntryContestKappa.burden_strictAnti_of_strictConcave, EntryContestBM.burden_strictAnti_of_deriv, EntryContestBM.not_burden_of_convex_stretch, EntryContestKappa.log_burden_strictAnti, EntryContestKappa.crra_strictConcave, EntryContestKappa.crra_burden_strictAnti}
+\mrow{M24}{Weaker than concavity.}
+  {For every $c>0$ some strictly increasing $u$, not concave on $(0,\infty)$, has
+  $\kappa$ strictly decreasing on $(c,\infty)$ and $\kappa(w)\to\infty$ as
+  $w\downarrow c$. The parameters of the construction form an open set, and its
+  convex stretch can have any length below $c$.}
+  {EntryContestBM.rampU_burden, EntryContestBM.rampU_kappa_diverges, EntryContestBM.rampU_strictConvex, EntryContestBM.rampU_not_concave, EntryContestBM.admissibleParams_open, EntryContestBM.rampU_admissible, EntryContestBM.admissible_width, EntryContestBM.bm_strictly_weaker}
+\mrow{M25}{Divergence at the fee.}
+  {For $u$ continuous at $c$, $\kappa(w)\to\infty$ as $w\downarrow c$ exactly when
+  $u(x)\to-\infty$ as $x\downarrow0$. Log utility and CRRA with $\gamma>1$
+  satisfy it, and CRRA with $\gamma<1$ does not.}
+  {EntryContestKappa.kappa_diverges_iff, EntryContestKappa.not_diverges_of_continuousWithinAt_zero, EntryContestKappa.log_kappa_diverges, EntryContestKappa.crra_kappa_diverges, EntryContestKappa.crra_kappa_not_diverges}
+\mrow{M26}{Anonymity.}
+  {If every entrant's score has the law $F$, challenger $i$'s gain from entering
+  against the entrants $T$ is $\Delta(|T|)$, whoever they are.}
+  {EntryContestAnon.profile_mem, EntryContestAnon.profile_not_mem, EntryContestAnon.cdf_profile, EntryContestAnon.gain_anonymous}
+\mrow{M27}{The anonymity boundary.}
+  {If the law of $s_j$ varies with $j$, the gain depends on who the other
+  entrants are. With ability falling in wealth, an equilibrium of one entrant
+  and an equilibrium of two coexist for every small $\mu>0$.}
+  {EntryContestAnon.winProb_zero_entrant, EntryContestAnon.winProb_zero_outsider, EntryContestAnon.gain_zero, EntryContestAnon.kappa3_values, EntryContestAnon.gains3, EntryContestAnon.anon_witness_zero, EntryContestAnon.gain_tendsto, EntryContestAnon.anon_witness_positive, EntryContestAnon.anon_witness_exists}
 \end{longtable}
 \normalsize
 
@@ -649,6 +675,89 @@ Pair two, $W_Q=x^{Q+1}-x^{Q+2}$ and $dF=2x\,dx$:
   \frac{D(Q)}V=-\frac{2(Q+2)-(Q+4)}{(Q+2)(Q+3)(Q+4)} .
 \]
 \end{mproof}
+
+\begin{mproof}{M23}{EntryContestKappa.burden_strictAnti_of_strictConcave, EntryContestBM.burden_strictAnti_of_deriv, EntryContestBM.not_burden_of_convex_stretch, EntryContestKappa.log_burden_strictAnti, EntryContestKappa.crra_strictConcave, EntryContestKappa.crra_burden_strictAnti}
+For $u$ strictly concave and $c<a<b$, secant slopes fall as either end moves
+right, and $a-c<a<b$, $a-c<b-c<b$ give
+\[
+  \frac{u(a)-u(a-c)}{c}>\frac{u(b)-u(a-c)}{b-a+c}>\frac{u(b)-u(b-c)}{c},
+\]
+so $\kappa(a)>\kappa(b)$. With $u$ differentiable,
+\[
+  \kappa'(w)=u'(w)-u'(w-c)<0\quad(w>c).
+\]
+If $u$ is convex on $[a,b]$ with $b-a>c$, then $a<b-c$ and
+\[
+  \kappa(a+c)=u(a+c)-u(a)\le u(b)-u(b-c)=\kappa(b).
+\]
+Log and $x^{1-\gamma}/(1-\gamma)$ have $u''<0$ on $(0,\infty)$.
+\end{mproof}
+
+\begin{mproof}{M24}{EntryContestBM.rampU_burden, EntryContestBM.rampU_kappa_diverges, EntryContestBM.rampU_strictConvex, EntryContestBM.rampU_not_concave, EntryContestBM.admissibleParams_open, EntryContestBM.rampU_admissible, EntryContestBM.admissible_width, EntryContestBM.bm_strictly_weaker}
+Let $\rho$ rise linearly from $0$ at $x_0$ to $1$ at $x_0+\sigma$, and
+\[
+  u(x)=\log x+x+\eta\int_0^x\rho(t)\,dt,\qquad u'(x)=\tfrac1x+1+\eta\rho(x)>0 .
+\]
+On $[x_0,x_0+\sigma]$, $u''=-x^{-2}+\eta/\sigma>0$ when $\sigma<\eta x_0^2$, so $u$
+is strictly convex there and not concave. For $w>c$, $\rho(w)-\rho(w-c)\in[0,1]$
+and vanishes unless $x_0<w<x_0+\sigma+c$, where
+\[
+  \tfrac1{w-c}-\tfrac1w=\tfrac c{w(w-c)}>\tfrac c{(x_0+\sigma+c)(x_0+\sigma)}>\eta ,
+\]
+so $u'(w)<u'(w-c)$ and M23 applies. $u(x)\to-\infty$ as $x\downarrow0$, so M25
+gives the divergence. The conditions
+\[
+  x_0>0,\quad \sigma>0,\quad \sigma<\eta x_0^2,\quad \eta(x_0+\sigma+c)(x_0+\sigma)<c
+\]
+are strict inequalities in continuous functions, so they define an open set,
+and for $\sigma<c$ an $\eta$ between $\sigma/x_0^2$ and
+$c/\big((x_0+\sigma+c)(x_0+\sigma)\big)$ exists once $x_0$ is large, since
+$\sigma(x_0+\sigma+c)(x_0+\sigma)/x_0^2\to\sigma<c$.
+\end{mproof}
+
+\begin{mproof}{M25}{EntryContestKappa.kappa_diverges_iff, EntryContestKappa.not_diverges_of_continuousWithinAt_zero, EntryContestKappa.log_kappa_diverges, EntryContestKappa.crra_kappa_diverges, EntryContestKappa.crra_kappa_not_diverges}
+$u(w)\to u(c)$ as $w\downarrow c$, so
+\[
+  \kappa(w)=u(w)-u(w-c)\to\infty\iff u(w-c)\to-\infty\iff u(x)\to-\infty\ (x\downarrow0).
+\]
+$\log x\to-\infty$, and
+\[
+  \frac{x^{1-\gamma}}{1-\gamma}\to-\infty\quad(\gamma>1),\qquad
+  \frac{x^{1-\gamma}}{1-\gamma}\to0\quad(\gamma<1).
+\]
+\end{mproof}
+
+\begin{mproof}{M26}{EntryContestAnon.profile_mem, EntryContestAnon.profile_not_mem, EntryContestAnon.cdf_profile, EntryContestAnon.gain_anonymous}
+Challenger $i$ wins with probability $\int C\prod_{j\ne i}L_j\,dL_i$, where $L_j$ is
+$F$ for an entrant and $G$ for an outsider. With $|T|=m$ and $i\notin T$,
+\[
+  \frac{\mathrm{gain}_i(T)}V=\int CF^mG^{Q-1-m}\,dF-\int CF^mG^{Q-1-m}\,dG
+  =\int H_m\,dF-\int H_m\,dG=\frac{\Delta(m)}V .
+\]
+\end{mproof}
+
+\begin{mproof}{M27}{EntryContestAnon.winProb_zero_entrant, EntryContestAnon.winProb_zero_outsider, EntryContestAnon.gain_zero, EntryContestAnon.kappa3_values, EntryContestAnon.gains3, EntryContestAnon.anon_witness_zero, EntryContestAnon.gain_tendsto, EntryContestAnon.anon_witness_positive, EntryContestAnon.anon_witness_exists}
+Let entrant $j$'s $s_j$ be the largest of $n_j$ uniform draws, the incumbent's the
+largest of one, and $\mu=0$. An outsider scores $0$, and among the
+$1+\sum_{j\in S}n_j$ draws each is equally likely to be the largest, so
+\[
+  \Pr(i\text{ wins})=\frac{n_i}{1+\sum_{j\in S}n_j},\qquad
+  \mathrm{gain}_i(T)=\frac{V\,n_i}{1+n_i+\sum_{j\in T}n_j}.
+\]
+With $V=1$, $c=1$, $u(x)=-1/x$, $w=(\frac{11}4,\frac94,2)$ and $n=(1,2,3)$,
+\[
+  \kappa=\big(\tfrac{16}{77},\tfrac{16}{45},\tfrac12\big),\qquad
+  \mathrm{gain}_2(\emptyset)=\tfrac34,\ \mathrm{gain}_0(\{2\})=\tfrac15,\
+  \mathrm{gain}_1(\{2\})=\tfrac13,
+\]
+\[
+  \mathrm{gain}_0(\{1\})=\tfrac14,\ \mathrm{gain}_1(\{0\})=\tfrac12,\
+  \mathrm{gain}_2(\{0,1\})=\tfrac37,
+\]
+so $\{2\}$ and $\{0,1\}$ are equilibria. Every inequality is strict and each
+gain is continuous in $\mu$ at $0$, so both remain equilibria for small $\mu>0$.
+\end{mproof}
+
 
 
 \section{Evidence and verification}
