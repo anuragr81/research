@@ -2,10 +2,11 @@
 % Created 6 October 2026 as pass 1 of the plan in TODO.md (item PLAN).
 %
 % PURPOSE
-%   One document that will replace PROOFS.tex. Four tables carry the body
-%   (introduction, model, literature, conclusions) and the appendices carry
-%   every proof and everything else PROOFS.tex holds. PROOFS.tex stays until
-%   pass 6 confirms that everything in it is present here.
+%   The manuscript. Four tables carry the body (introduction, model,
+%   literature, conclusions), and the appendices carry every proof and the
+%   content PROOFS.tex used to hold. PROOFS.tex was retired at pass 6
+%   (7 October 2026). RETIREMENT.md records where each part of it went, and
+%   checks/verify_retirement.py checks that record against the file in git.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
 %   Rows are written only through the four row macros below, and proofs only
@@ -53,6 +54,7 @@
 \newcommand{\lean}[1]{\path{#1}}
 \newcommand{\rowref}[1]{#1}
 \newcommand{\unv}[1]{\textit{Unverified:} #1}
+\newcommand{\pend}[1]{\textit{Pending:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
@@ -354,10 +356,16 @@ Hopkins and Kornienko cite for the dispersive order, \citet{MathewsNamoro2008},
 
 \section{Conclusions}
 
+The conclusions come in two tables. Table~\ref{tab:concl} holds the claims
+that rest on the model rows and on papers read in full. Table~\ref{tab:pending}
+holds the claims that something is new. Each of those waits on a paper not yet
+read in full, or on a comparison not yet done, and says which. The novelty
+reading is pass~7 of \path{TODO.md}.
+
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
-\caption{The novel claims, each linked to the model and literature rows it rests
-on.}\\
+\caption{Conclusions that rest on the model rows and on papers read in full.}
+\label{tab:concl}\\
 \toprule
 \textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
 \midrule
@@ -368,6 +376,74 @@ on.}\\
 \endhead
 \bottomrule
 \endfoot
+\crow{C1}{For a fixed prize awarded by rank, a spread of wealth changes the
+  number of entrants in a direction set by one comparison, the marginal entrant
+  against the pivot of the spread, and the rule needs only that the fee's
+  utility cost falls with wealth. In the privilege contest of Schroyen and
+  Treich the effect of a spread on effort turns on $u'''$, so the entry margin
+  is what frees the sign from the third derivative. Their paper was read in its
+  working-paper version (L12).}
+  {M12, M13, M23, M24, L12}
+\crow{C2}{The rule reads the wealth profile at two ranks only, the marginal
+  entrant and the first outsider, and it holds for any change of profile,
+  mean-preserving or not. Where the marginal entrant becomes poorer and the
+  first outsider richer, the signs of the change settle nothing, even for
+  mean-preserving spreads, and the mean cannot stand in for the pivot. Costrell
+  and Loury sign a spread by one marginal quantile fixed by technology, and
+  here the margin is the count itself, which moves with the profile. Their paper
+  was read as a draft (L9).}
+  {M12, M13, M14, L9}
+\crow{C3}{Every pure-strategy equilibrium has the same number of entrants
+  because the gain depends on that number alone. When the gain depends on who
+  enters, the count is not pinned. This happens in the model when ability
+  falls with wealth, and in the entry stage of Fullerton and McAfee, where
+  profits depend on rivals' costs.}
+  {M6, M26, M27, L5}
+\crow{C4}{Under complete information, heterogeneous entry costs pin the count
+  without the devices that models with identical entrants use (mixed entry,
+  sequential arrival, private random delays), and the $k^*$ richest entering is
+  always an equilibrium. Who enters is pinned only under the further condition
+  of M7.}
+  {M5, M6, M7, M8, L2, L3, L4}
+\end{longtable}
+
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Claims pending verification. Each says what it waits on.}
+\label{tab:pending}\\
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\crow{C5}{The sign rule of C1 is new. None of the entry papers read signs the
+  effect of a spread of wealth, or of entry costs, on the number of entrants
+  at a fixed number of potential entrants. \pend{\citet{MathewsNamoro2008},
+  \citet{Corcoran1984} and \citet{CorcoranKarels1985}, which are entry papers
+  and are not read.}}
+  {M13, L2, L3, L4, L5, L6, L7}
+\crow{C6}{Count invariance across pure-strategy equilibria with heterogeneous
+  entry costs is new. The entry papers read have identical entrants (Levin and
+  Smith, Morgan, Orzen and Sefton, Fu, Jiao and Lu, Fu and Lu), a random count
+  under private costs (Moreno and Wooders), or, in Fullerton and McAfee, a count
+  that differs across equilibria. \pend{the same three papers.}}
+  {M6, L2, L3, L4, L5, L6, L7}
+\crow{C7}{That the first entrant's gain has no interior minimum in the number
+  of challengers when the score gap is single-peaked, never falls with a
+  uniform base score, and must eventually fall for some base scores, is new as
+  a statement about the gain from entry. The kernel and the message that no
+  such prediction is universal are Ryvkin and Drugov's. \pend{a comparison
+  with their unimodality result for individual effort, which may contain this
+  one as an instance.}}
+  {M16, M17, M18, M19, M20, M21, L8}
+\crow{C8}{That two ranks suffice to sign the change in the count is a
+  sharpening that the assignment literature does not have. \pend{the published
+  version of Costrell and Loury, read here as a draft.}}
+  {M12, L9}
 \end{longtable}
 \normalsize
 

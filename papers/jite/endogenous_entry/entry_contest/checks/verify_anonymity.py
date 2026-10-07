@@ -222,7 +222,7 @@ check("A1-4a count invariance holds at theta = 0 (the model's assumption)",
 check("A1-4b count invariance holds for theta > 0 (ability rising in wealth)",
       pos_bad == 0,
       "SUPPORTED, NOT ESTABLISHED: 0 violations is weak evidence FOR a "
-      "universal claim (see PROOFS.tex tiers, tier N)")
+      "universal claim (see MANUSCRIPT.tex, Appendix B)")
 check("A1-4c CONTROL: it FAILS for theta < 0 (ability falling in wealth)",
       neg_bad > 0,
       f"{neg_bad} instances with equilibria of different sizes; a single "
@@ -269,7 +269,7 @@ print("      can establish because one violation refutes.  NOT established:")
 print("      that theta >= 0 is sufficient.  A1-4b is 0 violations in a finite")
 print("      sample, which is tier N evidence for a universal claim and is")
 print("      therefore SUPPORT, not proof.  Nothing currently claimed in")
-print("      PROOFS.tex is threatened: the model assumes wealth-independent")
+print("      MANUSCRIPT.tex is threatened: the model assumes wealth-independent")
 print("      draws and so sits at theta = 0 by construction.  What changes is")
 print("      that the assumption now has a demonstrated boundary rather than a")
 print("      caveat sentence.")

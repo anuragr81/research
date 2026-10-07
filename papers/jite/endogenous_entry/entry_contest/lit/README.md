@@ -64,3 +64,11 @@ method.
 `./verify_lit.sh` runs every paper suite and fails if any suite fails or if a
 paper directory is missing its `verify_*.py`. It is separate from the main
 `verify.sh`, which covers the model's own claims.
+
+## Locators into the retired PROOFS.tex
+
+`PROOFS.tex` was retired at pass 6 (7 October 2026). Locators of the form
+"`PROOFS.tex` l.N" or "`PROOFS.tex` §..." in the `CLAIMS.md` and `NOTES.md`
+files refer to its last version, at commit `7132717f`
+(`git show 7132717f:papers/jite/endogenous_entry/entry_contest/PROOFS.tex`).
+`RETIREMENT.md` at the bundle root says where each part of it now lives.

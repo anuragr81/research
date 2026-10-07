@@ -16,6 +16,15 @@
 \begin{document}
 \maketitle
 
+\noindent\emph{Note on references to \texttt{PROOFS.tex}.} The proofs document
+\texttt{PROOFS.tex} was retired on 7 October 2026 (pass~6 of \texttt{TODO.md}).
+Its results are the model rows M1 to M27 of \texttt{MANUSCRIPT.tex}, its
+non-proof content is in that document's appendices, and its section on the
+contribution is \S\ref{sec:contribution-carried} below. Where this survey says
+what \texttt{PROOFS.tex} states, it records that document as it stood, which can
+be recovered from git at commit \texttt{7132717f}.
+\texttt{RETIREMENT.md} lists where each part of it went.
+
 \section{Purpose and verification standard}
 
 This document settles the literature check flagged as the gating open item in
@@ -994,8 +1003,9 @@ threshold entry into a rank-allocated prize is not already covered. The
 answer to the ``rank-allocated prize'' half is that Cole--Mailath--Postlewaite
 is where that premise is justified and where its consequences (no welfare
 theorems, non-market allocation, instrumental status) are worked out.
-\texttt{PROOFS.tex} should cite them at the point where $V$ is introduced and
-say that $V$ is a prize in their sense --- not sold, allocated by rank. Their
+The manuscript now cites them where $V$ is introduced (\texttt{MANUSCRIPT.tex},
+Appendix~D) and says that $V$ is a prize in their sense, allocated by rank and
+not sold. Their
 ``competition from below'' is the same structural fact as the anonymity
 proposition and the ordering by $\kappa$: only agents who could outrank you
 matter. Their Property~1 is consistent with the model here --- entry does not
@@ -1295,6 +1305,167 @@ still unread.
   theirs ``a slightly modified version''.
 \end{itemize}
 
+\section{Contribution and its precedents, carried from \texttt{PROOFS.tex}}
+\label{sec:contribution-carried}
+
+This section is carried unchanged in substance from \texttt{PROOFS.tex} at its
+retirement (pass~6, 7 October 2026), with its cross-references turned into the
+model rows of \texttt{MANUSCRIPT.tex}. It is input to the conclusions table and
+to the novelty verdict, and it is not itself a statement of conclusions.
+
+\paragraph{The claim.} For a fixed prize awarded by rank, the effect of
+resource inequality on \emph{how many people compete} has a determinate sign,
+and the sign is set by a single observable: whether the marginal entrant
+stands above or below the pivot of the spread. A \emph{dispersive} spread of
+the resource distribution --- one whose displacement changes sign exactly
+once, the leading case being the linear mean-preserving spread
+$w\mapsto\bar\mu+\lambda(w-\bar\mu)$ of M13 ---
+\emph{widens} entry when the marginal competitor is richer than the pivot and
+\emph{shrinks} it when poorer (M13), strictly so under the
+boundary condition of M15. What the proof uses is
+weaker still. The rise branch reads the quantile difference at the marginal
+entrant alone, the fall branch reads the quantile difference at the first
+outsider alone, and mean-preservation is nowhere among the hypotheses
+(M12). Within that class the rule holds globally,
+distribution-free, and under burden-monotonicity of $u$ alone
+(M23; strict concavity is sufficient but not necessary,
+M24).
+
+That class is a genuine restriction, and it belongs with the claim rather than
+only with the scope discussion at the end of this section. A
+Rothschild--Stiglitz mean-preserving spread need \emph{not} be dispersive, since
+its quantile difference may cross zero any number of times. With the marginal
+entrant above the mean, a change that preserves the total and majorizes the
+original profile can lower $k^*$ (M13),
+so the rule stated with the mean in place of the pivot fails for such changes.
+The sign rule is therefore a theorem about dispersive spreads and about the
+margin condition, and not about mean-preserving spreads as such, and the rule
+should not be quoted in the latter form. Which changes the margin condition
+covers is settled in M14. The condition is silent exactly when
+the marginal entrant becomes poorer and the first outsider becomes richer.
+Dispersive changes never reach that band, and inside the band the displacement
+signs determine nothing, for mean-preserving spreads as for other changes.
+
+The economic content is a reconciliation. The received result --- inequality
+dampens status competition --- goes back to
+\citet{ColeMailathPostlewaite1992}, whose \S IV.A example has the more
+compact income distribution producing the higher savings rate, and is
+developed on the intensive margin by \citet{HopkinsKornienko2004} and
+\citet{HopkinsKornienko2010}, where less dispersed endowments intensify
+conspicuous consumption. That finding is here recovered as one branch: mass
+competitions, in which the marginal entrant sits low in the distribution.
+Exclusive competitions, in which the marginal entrant is already wealthy,
+sit on the other branch, where inequality \emph{feeds} entry. The received
+result is the below-pivot case of a two-branch rule, not the general case.
+This is non-tautological because $V$ is fixed by construction
+(M11): nothing about the prize moves when the distribution
+spreads.
+
+The margin is endogenous and the rule survives that
+(M13): the hypothesis is a single comparison at
+the pre-spread margin, and the wealth ordering carries the rest, so no
+post-spread margin need be located. \citet{CostrellLoury2004}, the closest
+structural precedent, work with a marginal quantile fixed by technology. The
+claim here is not that the present result is the stronger one --- they sign a
+smooth aggregate under a general spread, which is the harder object --- but
+that the extensive-margin formulation replaces that aggregate with a
+threshold statistic, and an endogenous margin is tractable in the second
+setting and not the first. The formulation is what is being offered.
+
+Where several entrant sets are equilibria, the assortative one is the
+cheapest, and under an anonymous gain schedule it therefore maximises the
+unweighted sum of payoffs (M8) --- so using it is
+a stated selection with an argument behind it, not an assumption. That
+argument is not a welfare claim, for the reasons set out with the
+proposition.
+
+Two features make the claim well-posed, and both required proof. The object
+being signed is an invariant of the game: every pure-strategy equilibrium has
+the same entrant count (M6), so ``how many
+compete'' does not depend on which equilibrium is selected --- even though
+\emph{who} competes does (Appendix D, Information). And the class
+of spreads for which the rule is proved is not bespoke: a pivot-spread is
+exactly a dispersive-order shift with a crossing point
+(M13), the dispersive order being the inequality order this
+literature already uses \citep{HopkinsKornienko2009,Shaked1982}.
+
+\paragraph{Why the extensive margin is the point.} The intensive-margin
+version of the same question exists and is \emph{not} sign-determinate.
+\citet{SchroyenTreich2016} sign a mean-preserving spread in wealth inside the
+same privilege-contest payoff: their Theorem~3 gives the effect as positive
+iff $2A(1-m^2) > P$, with $A = -u''/u'$ and $P = -u'''/u''$ --- local, two
+players, and conditioned on the contest technology and the \emph{third}
+derivative of utility. The dependence on $u'''$ is not cosmetic: at $m=1/2$,
+CARA with $a=1$ and log utility at $w=1$ share $A=1$ but have $P=1$ and
+$P=2$, and give opposite signs. The extensive-margin rule of
+M13 needs only that $\kappa$ is strictly decreasing,
+which is $u''<0$. So the margin is not a modelling convenience; it is what
+makes inequality's effect on competition determinate at all. An anticipated
+objection should be met here rather than left to a referee: the two results
+answer the same economic question --- what does a spread of the resource
+distribution do to competitive expenditure --- in different models, and the
+comparison of hypotheses across margins is legitimate precisely because the
+margin is the object of choice being defended. It is also not robust
+terrain for the intensive side: in the assignment literature the direction
+of the inequality effect reverses when the allocation re-optimises
+(\citet{CostrellLoury2004}, Proposition~10 against their Proposition~6), so
+conditioning results of this kind on the margin is already the literature's
+own practice.
+
+\paragraph{The 1981 precedent.} \citet{LazearRosen1981}, in the ``Income
+Distributions'' subsection of their \S III, already have agents self-selecting
+into a tournament by endowed wealth. This must be acknowledged, with two
+qualifications that bound what it concedes.
+
+First, their claim is offered as an example and they say so: the subsection
+opens ``While it is not possible to make a general argument based on an
+example, table~1 suggests\ldots'', and rests on one utility function, quadratic
+costs, normal errors and two endowment levels. They \emph{suggest} the sorting
+under declining absolute risk aversion; the present model \emph{derives} it,
+distribution-free.
+
+Second, the channel differs, and decisively. Their sorting runs through DARA,
+which is a restriction on $u'''$: $A'(w)<0$ has numerator $(u'')^2 - u'''u'$
+and so requires $u'''>0$. Here the sorting runs through $\kappa(w) =
+u(w)-u(w-c)$ being decreasing, which follows from $u''<0$ alone. Quadratic
+utility separates them: it is concave, has $u'''=0$, and exhibits
+\emph{increasing} absolute risk aversion --- so $\kappa$ still sorts while DARA
+fails outright.
+
+Third, and least often noticed, the object of choice differs. Theirs is a
+choice between two compensation schemes that both pay, so the sorting is
+tolerance for the binomial spread of a lottery against a concentrated
+alternative. Ours is whether to pay a fixed entry cost at all, so the sorting
+is affordability in utility units. That is a difference in the economics, not
+only in a derivative.
+
+\paragraph{What is not claimed.} The mechanism --- wealth sorting entry
+through concavity --- is not novel; the two precedents above own it between
+them, and the sentence claimed here is the two-branch sign rule, not the
+sorting. The remaining results are apparatus in its service and are
+presented as such. The uniform cap of M10 is the deterministic,
+heterogeneous, utility-unit form of an accounting bound already present in
+\citet{FuJiaoLu2015} (equation~(2) with Definition~2) and \citet{FuLu2010}
+(equation~(7)); it is used here to dispose of the ceiling objection, not
+claimed as new. The characterisation of M16 to M22 runs on the
+order-statistic kernel of \citet{RyvkinDrugov2020}, whose message --- that no
+competitor-number prediction is universal across noise distributions --- is
+theirs in print; what is added is the extensive-margin instance that refutes
+the referee's conjecture. And the scope of the central claim is stated with
+it. The rule is proved under the margin condition of
+M12, which reads the quantile difference at the
+marginal entrant for the rise branch and at the first outsider for the fall
+branch. Pivot-spreads are the special case in which one branch applies at every
+margin. A mean-preserving spread is covered when the displacement is
+non-negative at the marginal entrant or non-positive at the first outsider, and
+the displacement may cross zero freely at the other ranks. The condition is a
+restriction and not a formality, since two mean-preserving spreads with the
+same displacement signs at every rank can put the margin in the band and move
+$k^*$ in opposite directions (M14). What is not settled is
+whether some statistic of the change other than its signs predicts the
+direction inside the band (TODO item O1).
+
+
 \section{What still needs doing}
 
 Read in full as of this version: Hopkins--Kornienko 2004, 2009, 2010;
@@ -1331,7 +1502,7 @@ Outstanding, in descending order of consequence for the current claims:
   \citet{MathewsNamoro2008}, \citet{Corcoran1984} and \citet{CorcoranKarels1985},
   before the novelty verdict is used to fix the conclusions.
   \citet{FullertonMcAfee1999} has been read.
-\item Read \citet{Shaked1982}, cited twice in \texttt{PROOFS.tex} and not yet
+\item Read \citet{Shaked1982}, cited in our documents and not yet
   read, and give the claims made of \citet{HopkinsKornienko2004} and
   \citet{HopkinsKornienko2009} a Lean file of their own.
   \citet{LewisThompson1981}, an earlier source for the same order, has been

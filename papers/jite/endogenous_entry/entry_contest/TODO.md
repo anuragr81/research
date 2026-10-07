@@ -666,6 +666,30 @@ paper's claims, and only then write the manuscript.
   (waits on pass 7), the welfare objective, and a reduced-form contest success
   function. Remaining from the plan are pass 6 (retire `PROOFS.tex`), pass 7
   (four PDFs) and the conclusions table, which waits on pass 7.
+  Pass 6 done 7 Oct 2026. `PROOFS.tex` and `PROOFS.pdf` are removed. Its last
+  version is commit `7132717f`. `RETIREMENT.md` records where each of its 20
+  environments, 31 sections, core Lean names and dropped numbers went, and
+  `checks/verify_retirement.py` (suite 10b of `verify.sh`) re-reads the file
+  from git and fails on anything unaccounted for, with controls. The section
+  "Contribution and its precedents" is carried whole into `LITERATURE.tex`
+  (§sec:contribution-carried) with model-row references, and the survey opens
+  with a note on its references to `PROOFS.tex`. `MEASUREMENT_MAP.tex` names
+  model rows instead of `PROOFS.tex` results, carries the factor `V` as M9 does,
+  and no longer presents the withdrawn crossover `μ*` as an output.
+  `checks/verify_docs.py` D1 now checks any theorem count the manuscript states
+  against the audit, with a control. `lit/coverage.py` counts citations and
+  literature rows of `MANUSCRIPT.tex`. `verify.sh` names the manuscript as the
+  canonical statement, and `lit/README.md` explains locators into the retired
+  file.
+  Conclusions drafted 7 Oct 2026 at the author's request ("is it possible to
+  have any conclusions that don't depend on the missing papers ... a set of
+  unverified (pending verification upon full paper availability) claims").
+  Table 4 holds C1 to C4, which rest on model rows and papers read in full (two
+  read as working paper or draft, and said so). Table 5 holds C5 to C8, the
+  claims that something is new, each naming what it waits on: the three unread
+  entry papers (C5, C6), a comparison with Ryvkin and Drugov's unimodality
+  result (C7), and the published version of Costrell and Loury (C8). The
+  conclusions are revised when pass 7 lands.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
