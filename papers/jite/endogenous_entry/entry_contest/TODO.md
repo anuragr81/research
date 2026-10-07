@@ -52,6 +52,9 @@ paper's claims, and only then write the manuscript.
      unimodality claim, is that phi is single-peaked for the model's induced
      F and G. Lean `pmu_orientation` and SymPy RD-8 in
      `lit/ryvkin_drugov_2020/`.
+     Settled by pass 3e, 7 Oct 2026, in `lean/mathlib/PMU.lean`. With the
+     orientation corrected, the single-crossing step goes through and yields
+     unimodality, as item L3 records.
   1. **The reconciliation paragraph** (`PROOFS.tex` §Contribution, and the
      P9 "Why this matters" paragraph). CMP 1992 §IV.A compares men "with the
      same initial income level in two different economies", finds savings
@@ -200,6 +203,43 @@ paper's claims, and only then write the manuscript.
   - Done when each item has the author's decision recorded and, where
     accepted, the edit applied in the manuscript skeleton.
 
+- [!] **L3. Lean pass 3e, 7 Oct 2026. Decisions for Anurag.** Each item rests
+  on a theorem in `lean/mathlib/PMU.lean`, except where it says otherwise.
+  Write `D(Q) = Delta(0, Q+1) - Delta(0, Q)` and
+  `W = C G^(Q-1) (1 - G)`.
+  0. **The first entrant's gain is quasi-concave in `Q`.** Suppose
+     `dF - dG` is nonpositive up to some `x0` and nonnegative beyond it, the
+     measure form of `phi = G - F` being single-peaked. Then
+     `D(Q2) <= G(x0)^(Q2-Q1) D(Q1)` for `1 <= Q1 <= Q2`
+     (`pmu_single_crossing`). Once `D` is nonpositive it stays nonpositive,
+     so `Delta(0, .)` rises and then falls on `Q >= 1`
+     (`pmu_quasiconcave`). The argument needs no densities, and the factor
+     `G(x0)^(Q2-Q1)` is the likelihood ratio of the two kernels, so the
+     variation-diminishing step of Ryvkin and Drugov reduces here to one
+     comparison at `x0`. `PROOFS.tex` claims no unimodality (l.1570) and
+     conjectures an interior minimum (open item 5, l.1827). Under the
+     hypothesis an interior minimum is impossible.
+  1. **The hypothesis holds for a uniform base score.** With `r` uniform on
+     `[0, 1]`, any law of `s >= 0` and `0 < mu <= 1`, the crossing point is
+     `x0 = mu` (`uniform_left`, `uniform_right`), so `Delta(0, .)` is
+     quasi-concave in `Q` for every incumbent law (`pmu_quasiconcave_uniform`).
+     Whether the hypothesis holds for other laws of `r` is open. A density of
+     `r` that does not fall on `[0, 1]` is a plausible sufficient condition,
+     not proved. The author should decide whether the paper claims the
+     unimodality and for which laws of `r`. Its novelty against Ryvkin and
+     Drugov is a question for pass 7.
+  2. **The identity and the hump are proved as stated, with the factor `V`.**
+     `D(Q) = -V (int W dF - int W dG)` for `Q >= 1` and every incumbent law
+     (`pmu_identity`, `pmu_sign_iff`). `PROOFS.tex` writes it with `V = 1`.
+     The kernel `g^(Q-1) (1 - g)` rises up to `(Q-1)/Q` and falls after it
+     (`kernel_rises`, `kernel_falls`, `kernel_max`).
+  3. **"First-order stochastic dominance alone cannot sign the comparison"
+     is not yet proved.** The hump does not show it. A proof needs two
+     admissible pairs with `F <= G` and opposite signs of `D(Q)` at one `Q`,
+     which pass 3g can supply as exact witnesses.
+  - Done when each item has the author's decision recorded and, where
+    accepted, the edit applied in the manuscript skeleton.
+
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
   conclusions), and appendices hold every proof and everything else
@@ -263,6 +303,11 @@ paper's claims, and only then write the manuscript.
   and bounds the admissible convex width at `c` from both sides. Details are
   in item L2.0. Proofs that go beyond what the manuscript states are to be
   kept in a proofs-addendum document, created with pass 4.
+  Pass 3e done 7 Oct 2026. `lean/mathlib/PMU.lean` proves the P-MU identity
+  and sign condition, the hump of the kernel, the corrected single-crossing
+  step, the quasi-concavity of `Delta(0, .)` in `Q` that follows from it, and
+  the single-crossing hypothesis for a uniform base score. Findings are in
+  item L3.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

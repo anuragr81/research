@@ -125,6 +125,23 @@ below the support floor `c`.
 The example is continuously differentiable. It is not twice differentiable at
 `x0` and `x0 + σ`, where the ramp has corners.
 
+## PMU.lean, the first entrant's gain as `Q` grows
+
+Write `D(Q) = Δ(0, Q + 1) − Δ(0, Q)` and `W = C · G^(Q−1) · (1 − G)`.
+
+| Theorem | Content |
+|---|---|
+| `pmu_identity`, `pmu_sign_iff` | P-MU. `D(Q) = −V (∫ W dF − ∫ W dG)` for `Q ≥ 1` and every incumbent law, so with `V > 0` the gain rises exactly when `∫ W dF < ∫ W dG` |
+| `kernel_rises`, `kernel_falls`, `kernel_max` | `g ↦ g^(Q−1)(1 − g)` rises on `[0, (Q−1)/Q]`, falls on `[(Q−1)/Q, 1]` and peaks at `(Q−1)/Q` |
+| `pmu_single_crossing` | If `dF − dG ≤ 0` on `(−∞, x0]` and `≥ 0` on `(x0, ∞)`, then `D(Q2) ≤ G(x0)^(Q2−Q1) D(Q1)` for `1 ≤ Q1 ≤ Q2` |
+| `pmu_step_nonpos_persists`, `pmu_quasiconcave` | Under that hypothesis, once `D` is nonpositive it stays so, and `Δ(0, ·)` is quasi-concave on `Q ≥ 1` |
+| `unif`, `uniform_left`, `uniform_right` | With `r` uniform on `[0, 1]`, `s ≥ 0` and `0 < μ ≤ 1`, the hypothesis holds at `x0 = μ` |
+| `pmu_quasiconcave_uniform` | For a uniform base score, `Δ(0, ·)` rises and then falls in `Q`, for any law of `s` and any incumbent |
+
+The hypothesis is stated on measures, `α|(−∞, x0] ≤ β|(−∞, x0]` and
+`β|(x0, ∞) ≤ α|(x0, ∞)`, so no densities are assumed. With densities it says
+that `φ = G − F` is single-peaked.
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
