@@ -1,0 +1,155 @@
+% =====================================================================
+% intro_linkage.tex
+%
+% Linkage between the introduction of PAPER_B_MANUSCRIPT.tex and the rest
+% of the paper. Each introduction paragraph gets a one-word name, and every
+% unit of the body is tagged with the introduction paragraph(s) it expands.
+% Two checks follow: an introduction paragraph with no body unit tagged to
+% it is a promise the paper does not keep, and a body unit with no tag is
+% content the introduction never announces.
+%
+% The introduction is mapped in its planned form, in which paragraph 3 is
+% split into 3A (Stance) and 3B (Channels). The manuscript at b3b12e42 still
+% has the single paragraph 3. The roadmap paragraph is excluded, since every
+% section links to it trivially.
+%
+% A unit is a paragraph, or a numbered result together with the prose and
+% proof pointer around it. Appendix proofs are mapped to the result they
+% prove. Declarations and acknowledgements are not mapped.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+\newcommand{\none}{\textbf{none}}
+
+\title{Introduction linkage: what each introduction paragraph promises,\\ and where the paper keeps it}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent Each paragraph of the introduction is named by its job
+(Table~\ref{tab:names}). Every unit of the body is then tagged with the
+introduction paragraphs it expands (Table~\ref{tab:map}). An introduction
+paragraph with few body units behind it is thinly expanded, and a body unit
+tagged \none\ is content the introduction does not announce
+(Section~\ref{sec:findings}). The introduction is taken in its planned form,
+with paragraph 3 split into 3A and 3B, and the roadmap is left out.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{The introduction's paragraphs, named by their job.}\label{tab:names}
+\begin{tabular}{@{}p{0.8cm}p{2.0cm}p{12.4cm}@{}}
+\toprule
+\textbf{\P} & \textbf{Name} & \textbf{Job}\\
+\midrule
+1 & Gap & Sequence effects are long established, but how they register in what an observer measures is little studied; under Jeffrey conditioning the share of decisions changed departs at first order and the believed association and the loss only at second; the mechanism holds for any number of cues and attributes.\\
+\addlinespace
+2 & Literature & Earlier work asks whether Jeffrey updates commute, not how measurable the failure is; switching to factor inputs removes the dependence but does not tell an observer whether impressions replace belief or adjust it.\\
+\addlinespace
+3A & Stance & Hawthorne leaves that open; the paper measures how observations under full adoption differ from the sequence-free factor reading of the same impressions, which is the benchmark; it studies full adoption because an impression supplies no likelihood, and Section 6 covers partial adoption.\\
+\addlinespace
+3B & Channels & The association channel lies in what the evaluator believes ($c$), the position channel in how the evaluator revises ($\omega$); at $\omega=1$ only the association channel remains.\\
+\addlinespace
+4 & Vignette & The hiring panel: two panels reading in opposite sequences end with different beliefs when the traits are believed related, and how visible that is in the association depends on full or partial adoption.\\
+\addlinespace
+5 & Precision & ``Order'' against ``sequence''; first against second order as what an observer with precision $\varepsilon$ can or cannot see.\\
+\addlinespace
+6 & Results & Divergence first order, average association and loss second order; a statistic of the average belief is second order exactly when it moves with the association (PRO); an audit's answer depends on the statistic chosen.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\small
+\begin{longtable}{@{}p{1.7cm}p{9.6cm}p{4.0cm}@{}}
+\caption{The body of the paper mapped to the introduction.}\label{tab:map}\\
+\toprule
+\textbf{Location} & \textbf{Content} & \textbf{Intro home}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Location} & \textbf{Content} & \textbf{Intro home}\\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\S2.1 & Belief as a joint law; the association defined; the prior as the evaluator's credence; $\alpha$, $\beta$, $c$ as beliefs, not frequencies & Channels\\
+\S2.1 & Impressions are attribute-local credences, not likelihoods; the sequence $\sigma$, the share $\lambda$, the adoption weight $\omega$ & Stance, Channels\\
+\S2.1 & The engagement decision (desirability $v$, threshold $\tau$, score) & Results (weak)\\
+\S2.1 & The surplus defined at the benchmark; the loss $L(c)$ & Stance, Results\\
+\addlinespace
+\S2.2 & Jeffrey's rule, Diaconis--Zabell's support for it, the sentence placing all results at $\omega=1$ & Stance, Channels\\
+\S2.2 & Definition of the sequence effect & Vignette\\
+\S2.2 & Definition of the gap; the benchmark as the same impressions read as Bayes factors & Stance\\
+\S2.2 & Example 1, the panel's numbers & Vignette\\
+\addlinespace
+\S2.3 & Assumption 1, small $c$ & Precision\\
+\S2.3 & Assumption 2, soft cues & Stance\\
+\S2.3 & Assumption 3, attribute-locality & Gap (last sentence)\\
+\S2.3 & Assumption 4, surplus criterion & Results\\
+\addlinespace
+\S3 & The Döring and Hawthorne debate; the two responses (a defect to repair, the input re-described) & Literature, Stance\\
+\S3 & The information-theoretic ground for the premise; the degree of adoption as something to measure & Stance\\
+\S3 & Observational learning (Bikhchandani--Hirshleifer--Welch, Banerjee) and the dynamics of discrimination & \none\\
+\S3 & Decision-theory axiomatisations, Pettigrew--Weisberg, cumulative prospect theory & \none\ (only Hogarth--Einhorn is previewed)\\
+\S3 & Statistical discrimination, Coate--Loury, the referral gap, stereotypes as selective recall & Results (weak)\\
+\S3 & Audits: Heckman; identification from the history of evaluations & Gap, Results\\
+\S3 & Bohren--Imas--Rosenberg; where partiality must sit in order to act & Channels\\
+\addlinespace
+\S4 opening & First against second order; why these statistics (three coordinates of a belief; how many against how much) & Results, Precision\\
+\S4.1 & Proposition IMM, immunity on a single cue and at $c=0$ & Channels\\
+\S4.1 & Proposition DIV, its mechanism and conditions; the individual sequence effect & Results, Channels\\
+\S4.1 & The score gap & Results\\
+\S4.2 & Lemma ASC; the marginal as a read-out of the gap & Results\\
+\S4.3 & The flip indicator as a step function; the individual loss & Results\\
+\addlinespace
+\S5 opening & The classification survives averaging; distortion and protection defined & Results, Precision\\
+\S5 & Proposition ORD, the sequence effect read through the statistic, with no benchmark & Results, Vignette\\
+\S5 & The answer is settled before averaging; detectability belongs to the instrument ($\varepsilon$) & Results, Precision\\
+\S5 & Table 1 & Results\\
+\S5.1 & Aggregate gap and score gap; Lemma SCR & Results\\
+\S5.2 & The stereotype defined; Lemma SEP for any number of attributes; Proposition DEC & Results, Gap\\
+\S5.2 & The odds ratio unchanged by every separable reweighting & \none\\
+\S5.2 & The vignette's implication: a reviewer of the average association sees nothing & Vignette, Results\\
+\S5.2 & Proposition DRF and its consequence & Results\\
+\S5.3 & Theorem LOS, the band figure, Proposition SHR, the audit implication & Results\\
+\S5.4 & Proposition PRO, the protected class, the panel's audit questions & Results\\
+\addlinespace
+\S6 & The assumptions revisited & Precision, Stance, Gap, Results\\
+\S6 & The homogeneous prior: every evaluator shares one $c$ & \none\\
+\S6 & Partial adoption, the four cases, Proposition LAD, the cases table & Channels, Stance\\
+\S6 & The Hawthorne paragraph & Stance\\
+\addlinespace
+\S7 & The audit-questions table; the central contribution; the three implications for audits & Results, Precision\\
+\S7 & Locating the objection in the levels rather than in the believed link & Stance, Literature\\
+\addlinespace
+App.~A & Proofs of DIV, SEP, LOS and PRO & Results\\
+App.~A & Proof of LAD & Channels\\
+\end{longtable}
+\normalsize
+
+\section{Findings}\label{sec:findings}
+
+\paragraph{Introduction paragraphs thinly expanded.}
+\begin{itemize}
+\item \textbf{Gap.} ``Remains valid for any number of cues and attributes'' rests on Lemma SEP alone; no other result is shown beyond two cues.
+\item \textbf{Literature.} It previews only the Jeffrey and belief-adjustment strand, while most of Section 3 is about economics.
+\item \textbf{Precision.} Its one body home of substance is the paragraph in Section 5 on detectability as a property of the instrument.
+\end{itemize}
+
+\paragraph{Body content with no introduction home.}
+\begin{itemize}
+\item \textbf{Three strands of Section 3}: observational learning, decision-theory axiomatisations, and statistical discrimination with audits. The introduction never says the paper positions itself against economics.
+\item \textbf{The odds-ratio invariance}, the one statistic that never registers the sequence.
+\item \textbf{The homogeneous-prior scope limit} in Section 6.
+\item \textbf{The three-coordinates rationale} in Section 4's opening. The current introduction carries it in paragraph 3, but the planned 3A and 3B do not, so it loses its home once they go in.
+\item \textbf{The decision model itself} ($v$, $\tau$, the score). The introduction mentions decisions only through their results.
+\end{itemize}
+
+\end{document}
