@@ -458,6 +458,27 @@ paper's claims, and only then write the manuscript.
   proved (`exists_mem_ge`, `exists_not_mem_le`), and `count_invariance`
   holds with no hypothesis beyond the model's. `MEASUREMENT_MAP.tex` and the
   P5-inv passage and row of `PROOFS.tex` cite the Lean. Pass 3 is complete.
+  Pass 4a done 7 Oct 2026. `MANUSCRIPT.tex` now carries model rows M1 to M8
+  (P1, P2, P3, the monotonicity corollary, P5, count invariance, identities
+  pinned, N4) with a notation block and eight proofs in Appendix A, each
+  naming its Lean theorems and under the 30% prose limit. Writing the rows
+  found three statements of `PROOFS.tex` not machine-checked, now proved in
+  `lean/mathlib/Equilibrium.lean`. The strict part of the monotonicity
+  corollary (`Delta_step_strict`). N4 (i), that the assortative set is an
+  equilibrium (`assortative_is_equilibrium`). N4 (ii), that it minimises total
+  cost, which `PROOFS.tex` said was "checked numerically rather than proved in
+  Lean" (`assortative_min_cost`). N4 (iii) is now derived from the win
+  probabilities (`prize_term_anonymous`, `payoff_gap_anonymous`) instead of an
+  integer-list abstraction, and count invariance is stated for `Q`
+  challengers (`count_invariance_fin`). Three corrections carried into the
+  rows. P5 needs only a non-increasing `Delta`, where `PROOFS.tex` says
+  "strictly decreasing". The strict part of P2 needs `mu < 1`, which
+  `PROOFS.tex` omits. The step identity needs only atomless laws, so the
+  regularity assumption of `PROOFS.tex` (common lower endpoint, `phi`
+  vanishing at the endpoints) is unused and is for pass 5 to drop.
+  `PROOFS_ADDENDUM.tex` is created with eight results more general than the
+  manuscript states. `checks/verify_manuscript.py` now accepts theorem names
+  with non-ASCII letters. Next is pass 4b, P6 to P8.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

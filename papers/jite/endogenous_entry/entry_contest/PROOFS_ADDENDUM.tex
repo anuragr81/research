@@ -1,0 +1,89 @@
+% PROOFS_ADDENDUM.tex, results proved in Lean that go beyond what MANUSCRIPT.tex states.
+% Created 7 October 2026 with pass 4 of the plan in TODO.md (item PLAN).
+%
+% PURPOSE
+%   The author decided on 7 October 2026 that the manuscript keeps its stated
+%   assumptions and that proofs under weaker hypotheses, or of more general
+%   statements, are kept here for future reference. Each entry names the
+%   manuscript result it extends, the extension, and the Lean theorems that prove
+%   it. An entry moves into MANUSCRIPT.tex if a later pass needs it there.
+%
+% WRITING
+%   notes/writing_discipline.md applies.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
+
+\newcommand{\entry}[3]{\paragraph{#1.} #2\par\noindent{\raggedright\small\textit{Lean:}
+  \lean{#3}.\par}\medskip}
+
+\title{Threshold Entry in a Fixed-Prize Contest\\[2pt]
+  \large Proofs addendum}
+\author{Anurag Srivastava}
+\date{7 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent The results below are proved in Lean and are more general than the
+statements of \texttt{MANUSCRIPT.tex}. Notation is that of Appendix~A there.
+
+\entry{Dominance with $\mu\le1$}
+{$F\le G$ holds for every $\mu\le1$, with no lower bound on $\mu$, because the
+term $\mu r$ is common to both scores.}
+{EntryContestP1P2.p2_fosd}
+
+\entry{Saturation for every incumbent}
+{$\Delta(m)\le V/(m+1)$ for every $Q$ needs no atoms in the investor's law only.
+The non-investor's law and the incumbent's law $C$ can be any probability laws.}
+{EntryContestP6P7.p7_Delta_le, EntryContestP6P7.p7_cap}
+
+\entry{The benchmark limit from both sides}
+{$\Delta(m)\to V/(m+2)$ as $\mu\to0$ in a two-sided neighbourhood of $0$, for any
+law of $r$, when $s\ge0$ has no atoms.}
+{EntryContestP6P7.p6_limit}
+
+\entry{Strictness under a spread with weaker hypotheses}
+{The strict fall of $k^*$ under a strong enough linear spread needs only a
+non-increasing $\kappa$ above $c$, the divergence of $\kappa$ at $c$ and a
+non-increasing $\Delta$. Neither the continuity of $\kappa$ nor the strictness of
+burden-monotonicity is used.}
+{EntryContestKappa.p9_strict, EntryContestKappa.p9_monotone}
+
+\entry{The divergence primitive}
+{For $u$ continuous at $c$, $\kappa(w)\to\infty$ as $w\downarrow c$ exactly when
+$u(x)\to-\infty$ as $x\downarrow0$.}
+{EntryContestKappa.kappa_diverges_iff}
+
+\entry{Burden-monotonicity without curvature}
+{If $u'(w)<u'(w-c)$ for every $w>c$, $\kappa$ is strictly decreasing on
+$(c,\infty)$. A convex stretch of $u$ wider than $c$ rules burden-monotonicity
+out, and every width below $c$ is attained by an admissible $u$.}
+{EntryContestBM.burden_strictAnti_of_deriv, EntryContestBM.not_burden_of_convex_stretch, EntryContestBM.admissible_width}
+
+\entry{The no-collapse bound in general}
+{When non-investor scores never exceed $x_G$, for $m<Q$
+\[
+  \Delta(m,Q)\ge V\Big(\int_{x\ge x_G}CF^m\,dF-\frac{1}{Q-m}\Big).
+\]}
+{EntryContestRefute.r1_lower_bound}
+
+\entry{Count invariance over all indices}
+{The count-invariance argument holds with the outsider condition imposed at
+every index, not only below $Q$.}
+{EntryContestMM.count_invariance}
+
+\end{document}

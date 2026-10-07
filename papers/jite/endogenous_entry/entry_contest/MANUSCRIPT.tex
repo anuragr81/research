@@ -38,6 +38,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
 
@@ -45,22 +46,26 @@
 
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\newcommand{\lean}[1]{\texttt{#1}}
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
 \newcommand{\rowref}[1]{#1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
-\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & \ref{proof:#1} \\ \addlinespace}
+\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
 
 \newenvironment{mproof}[2]
   {\subsection*{Proof of #1}\label{proof:#1}%
-   \noindent\textit{Lean:} \lean{#2}.\par\smallskip}
+   {\raggedright\noindent\textit{Lean:} \lean{#2}.\par}\smallskip}
   {\par\hfill$\square$\par\medskip}
 
 \title{Threshold Entry in a Fixed-Prize Contest}
 \author{Anurag Srivastava}
-\date{Manuscript skeleton, 6 October 2026}
+\date{Manuscript skeleton, 7 October 2026}
 
 \begin{document}
 \maketitle
@@ -99,6 +104,37 @@ that check it.}\\
 \endhead
 \bottomrule
 \endfoot
+\mrow{M1}{Representation (P1).}
+  {$\Delta(m)=V\!\int\varphi\,dH_m=V\,\mathbb E[\varphi(M_m)]$, with $M_m\sim H_m$.}
+  {EntryContestP1P2.two_max_sum, EntryContestP1P2.p1_representation, EntryContestP1P2.Delta_eq_expectation}
+\mrow{M2}{Dominance (P2).}
+  {For $s\ge0$ and $\mu\le1$, $F\le G$ and $\Delta(m)\ge0$. For $\mu<1$ and
+  $\Pr(s>0)>0$, $F<G$ on some $[q,u)$ with $q<u$.}
+  {EntryContestP1P2.p2_fosd, EntryContestP1P2.p2_strict_interval, EntryContestP1P2.Delta_nonneg_from_primitives}
+\mrow{M3}{Step identity (P3).}
+  {For $m+2\le Q$, $\Delta(m{+}1)-\Delta(m)=-\tfrac V2\int\varphi^2\,dK_m$.}
+  {EntryContestStep.three_max_sum_real, EntryContestStep.step_identity, EntryContestModel.Delta_step}
+\mrow{M4}{Monotonicity.}
+  {$\Delta(m{+}1)\le\Delta(m)$ for $V\ge0$, with $<$ when $V>0$ and
+  $\int\varphi^2\,dK_m>0$.}
+  {EntryContestModel.Delta_step_nonpos, EntryContestModel.DeltaUpTo_step, EntryContestEq.Delta_step_strict}
+\mrow{M5}{Threshold entry (P5).}
+  {For $\kappa_0\le\dots\le\kappa_{Q-1}$ and $\Delta$ non-increasing,
+  $\kappa_j\le\Delta(j)$ and $i\le j$ give $\kappa_i\le\Delta(i)$.}
+  {EntryContest.single_crossing, EntryContestModel.p5_threshold_from_primitives}
+\mrow{M6}{Count invariance.}
+  {Every equilibrium $S$, with $\kappa_i\le\Delta(|S|-1)$ for $i\in S$ and
+  $\Delta(|S|)<\kappa_j$ for $j\notin S$, has $|S|=k^*$.}
+  {EntryContestEq.count_invariance_fin, EntryContestMM.exists_mem_ge, EntryContestMM.exists_not_mem_le}
+\mrow{M7}{Identities pinned.}
+  {If $\Delta(k^*-1)<\kappa_{k^*}$, the assortative set $\{0,\dots,k^*-1\}$ is the
+  only equilibrium.}
+  {EntryContest.members_below_kstar, EntryContestEq.assortative_unique}
+\mrow{M8}{Assortative selection (N4).}
+  {$\{0,\dots,k^*-1\}$ is an equilibrium; $\sum_{i<k}\kappa_i\le\sum_{i\in S}\kappa_i$
+  for $|S|=k$; with identical score laws, payoff sums of equal-size equilibria
+  differ by their cost sums.}
+  {EntryContestEq.assortative_is_equilibrium, EntryContestEq.assortative_min_cost, EntryContestEq.prize_term_anonymous, EntryContestEq.payoff_gap_anonymous}
 \end{longtable}
 \normalsize
 
@@ -146,6 +182,135 @@ on.}\\
 
 \section{Proofs}
 \label{app:proofs}
+
+\paragraph{Notation.} Challenger $i$ scores $\sigma_i=\mu r_i+(1-\mu)s_ie_i$, with
+$r_i$ and $s_i\ge0$ drawn independently of wealth. $F$ and $G$ are the score CDFs
+of an entrant and of an outsider, and $C$ is the incumbent's, each without atoms.
+With $m$ other entrants among the $Q$ challengers,
+\[
+  H_m=C\,F^{m}G^{Q-1-m},\qquad K_m=C\,F^{m}G^{Q-2-m},\qquad \varphi=G-F,
+\]
+\[
+  \Delta(m)=V\Big(\int H_m\,dF-\int H_m\,dG\Big),\qquad \kappa(w)=u(w)-u(w-c).
+\]
+Challengers are indexed $0,\dots,Q-1$ in increasing order of cost,
+$\kappa_0\le\dots\le\kappa_{Q-1}$, which is decreasing order of wealth. Index $j$
+enters when $\kappa_j\le\Delta(j)$, and $k^*$ satisfies $\kappa_j\le\Delta(j)$ for
+$j<k^*$ and $\Delta(k^*)<\kappa_{k^*}$ when $k^*<Q$.
+
+\begin{mproof}{M1}{EntryContestP1P2.two_max_sum, EntryContestP1P2.p1_representation, EntryContestP1P2.Delta_eq_expectation}
+For independent $X\sim A$ and $Y\sim B$ with $B$ atomless, $\Pr(X=Y)=0$, so
+\[
+  \int B\,dA+\int A\,dB=\Pr(Y\le X)+\Pr(X\le Y)=1 .
+\]
+With $(A,B)=(F,H_m)$ and $(A,B)=(G,H_m)$,
+\[
+  \int H_m\,dF=1-\int F\,dH_m,\qquad \int H_m\,dG=1-\int G\,dH_m ,
+\]
+so
+\[
+  \frac{\Delta(m)}{V}=\int (G-F)\,dH_m=\int\varphi\,dH_m=\mathbb E[\varphi(M_m)] .
+\]
+\end{mproof}
+
+\begin{mproof}{M2}{EntryContestP1P2.p2_fosd, EntryContestP1P2.p2_strict_interval, EntryContestP1P2.Delta_nonneg_from_primitives}
+Let $X=\mu r+(1-\mu)s$ and $Y=\mu r$. For $\mu\le1$ and $s\ge0$, $X-Y=(1-\mu)s\ge0$,
+so $\{X\le x\}\subseteq\{Y\le x\}\cup\{s<0\}$ and
+\[
+  F(x)\le G(x)+\Pr(s<0)=G(x),\qquad \Delta(m)=V\!\int\varphi\,dH_m\ge0 .
+\]
+For $\mu<1$,
+\[
+  \{s>0\}\subseteq\{Y<X\}=\bigcup_{q\in\mathbb Q}\{Y\le q<X\},
+\]
+so $\Pr(s>0)>0$ gives $q\in\mathbb Q$ with $\Pr(Y\le q<X)>0$, and
+\[
+  G(q)\ge\Pr(X\le q)+\Pr(Y\le q<X)>F(q).
+\]
+$G-F$ is right-continuous, so $G-F>0$ on some $[q,u)$.
+\end{mproof}
+
+\begin{mproof}{M3}{EntryContestStep.three_max_sum_real, EntryContestStep.step_identity, EntryContestModel.Delta_step}
+Write $K=K_m$, so $H_{m+1}=KF$ and $H_m=KG$. For independent atomless draws
+$Z\sim K$, $X\sim A$, $Y\sim B$, exactly one is the largest,
+\[
+  \int AB\,dK+\int KB\,dA+\int KA\,dB=1 .
+\]
+With $(A,B)=(F,F)$, $(G,G)$ and $(F,G)$,
+\[
+  \int KF\,dF=\tfrac12\Big(1-\int F^2dK\Big),\quad
+  \int KG\,dG=\tfrac12\Big(1-\int G^2dK\Big),\quad
+  \int KG\,dF+\int KF\,dG=1-\int FG\,dK ,
+\]
+so
+\[
+  \frac{\Delta(m{+}1)-\Delta(m)}{V}
+  =\int KF\,dF-\int KF\,dG-\int KG\,dF+\int KG\,dG
+  =-\tfrac12\int (F-G)^2\,dK .
+\]
+\end{mproof}
+
+\begin{mproof}{M4}{EntryContestModel.Delta_step_nonpos, EntryContestModel.DeltaUpTo_step, EntryContestEq.Delta_step_strict}
+By M3 and $\varphi^2\ge0$,
+\[
+  \Delta(m{+}1)-\Delta(m)=-\tfrac V2\int\varphi^2\,dK_m\le0 \quad (V\ge0),
+  \qquad <0 \quad \Big(V>0,\ \int\varphi^2\,dK_m>0\Big).
+\]
+For $m\ge Q-1$ the gain is extended as $\Delta(Q-1)$, so $\Delta(m{+}1)\le\Delta(m)$
+for every $m$.
+\end{mproof}
+
+\begin{mproof}{M5}{EntryContest.single_crossing, EntryContestModel.p5_threshold_from_primitives}
+For $i\le j$, by M4,
+\[
+  \kappa_i\le\kappa_j\le\Delta(j)\le\Delta(i).
+\]
+\end{mproof}
+
+\begin{mproof}{M6}{EntryContestEq.count_invariance_fin, EntryContestMM.exists_mem_ge, EntryContestMM.exists_not_mem_le}
+Let $k=|S|$. A $k$-set of indices has an element $i\ge k-1$, since
+$S\subseteq\{0,\dots,k-2\}$ gives $k\le k-1$, and omits some $j\le k$, since
+$\{0,\dots,k\}\subseteq S$ gives $k+1\le k$. If $k>k^*$, then $k^*<Q$ and
+\[
+  \Delta(k^*)<\kappa_{k^*}\le\kappa_{k-1}\le\kappa_i\le\Delta(k-1)\le\Delta(k^*).
+\]
+If $k<k^*$, then $j<Q$ and
+\[
+  \Delta(k)<\kappa_j\le\kappa_k\le\Delta(k).
+\]
+Both are contradictions, so $k=k^*$.
+\end{mproof}
+
+\begin{mproof}{M7}{EntryContest.members_below_kstar, EntryContestEq.assortative_unique}
+A member $i$ of an equilibrium has $\kappa_i\le\Delta(k^*-1)$ by M6. If $i\ge k^*$,
+\[
+  \kappa_i\ge\kappa_{k^*}>\Delta(k^*-1),
+\]
+so $i<k^*$. Then $S\subseteq\{0,\dots,k^*-1\}$ and $|S|=k^*$ give
+$S=\{0,\dots,k^*-1\}$.
+\end{mproof}
+
+\begin{mproof}{M8}{EntryContestEq.assortative_is_equilibrium, EntryContestEq.assortative_min_cost, EntryContestEq.prize_term_anonymous, EntryContestEq.payoff_gap_anonymous}
+(i) For $i<k^*$ and for $k^*\le j<Q$,
+\[
+  \kappa_i\le\kappa_{k^*-1}\le\Delta(k^*-1),\qquad \Delta(k^*)<\kappa_{k^*}\le\kappa_j .
+\]
+(ii) Induct on $S$, adding its largest element $a$ last. With $T=S\setminus\{a\}$
+and $T\subseteq\{0,\dots,a-1\}$, $|T|\le a$, so
+\[
+  \sum_{i<|T|+1}\kappa_i=\sum_{i<|T|}\kappa_i+\kappa_{|T|}
+  \le\sum_{i\in T}\kappa_i+\kappa_a=\sum_{i\in S}\kappa_i .
+\]
+(iii) With identical laws, the win probability of $i$ is
+$P^{\mathrm{in}}(|S|)=\int CF^{|S|-1}G^{Q-|S|}\,dF$ for $i\in S$ and
+$P^{\mathrm{out}}(|S|)=\int CF^{|S|}G^{Q-1-|S|}\,dG$ for $i\notin S$, so with
+$EU_i(S)=u(w_i)-\kappa_i\mathbf 1\{i\in S\}+V P_i(S)$,
+\[
+  \sum_iEU_i(S)=\sum_iu(w_i)-\sum_{i\in S}\kappa_i
+  +V\big(|S|P^{\mathrm{in}}(|S|)+(Q-|S|)P^{\mathrm{out}}(|S|)\big),
+\]
+and the last term is equal for $|S|=|T|$.
+\end{mproof}
 
 \section{Evidence and verification}
 \label{app:evidence}

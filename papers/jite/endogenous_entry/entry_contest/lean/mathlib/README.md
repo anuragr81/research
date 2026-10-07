@@ -237,6 +237,21 @@ fixed a size or a family, in general.
 | `eu_affine`, `mm10a`, `mm10a_example`, `mm10b` | MM10. Expected-payoff rankings are unchanged by `a U + b` with `a > 0`, and the example's ranking reverses under `(√)⁴` |
 | `exists_mem_ge`, `exists_not_mem_le`, `count_invariance` | P5-inv with the two counting facts proved, so every pure-strategy equilibrium has size `k*` with no extra hypothesis |
 
+## Equilibrium.lean, equilibrium structure for the manuscript (pass 4a)
+
+Challengers are indexed `0, …, Q − 1` in increasing order of cost. `k*` satisfies
+the entry condition below it and fails it at `k*` when `k* < Q`.
+
+| Theorem or definition | Content |
+|---|---|
+| `Delta_step_strict` | The gain falls strictly from `m` to `m + 1` when `V > 0` and `∫ φ² dK_m > 0` |
+| `IsEquilibriumR`, `count_invariance_fin` | Every pure-strategy equilibrium among `Q` challengers has size `k*` |
+| `assortative_is_equilibrium` | N4 (i). The `k*` cheapest challengers form an equilibrium |
+| `assortative_unique` | An equilibrium of size `k*` whose members all lie below `k*` is the assortative set |
+| `assortative_min_cost` | N4 (ii). No set of `k` challengers costs less in total than the `k` cheapest |
+| `prod_profile_anonymous`, `prize_term_anonymous` | With identical score laws, the challengers' win probabilities sum to a function of the entrant count alone |
+| `payoffSum`, `payoff_gap_anonymous` | N4 (iii). Payoff sums of two equal-size entrant sets differ exactly by their total costs |
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
