@@ -218,6 +218,7 @@ Write `G_t` for the non-investor's law `G` shifted up by the lift `t = 1 − μ`
 | `must_fall` | In the single-step class with `p < 1`, the strict gain on `(a, b]` makes `Δ(0, ·)` fall strictly at every `Q` from some `Q0` on |
 | `witness_must_fall` | The base density `2(1 − r)` with `μ = 3/4` meets the condition on `(1/2, 5/8]`, so its gain must fall, for every `0 ≤ p < 1` |
 | `uniform_fails_gain` | A uniform base law meets the condition on no interval, because its gain never falls |
+| `unif_shiftMono`, `uniform_never_gains` | The uniform law is shift-monotone, so the last result needs no hypothesis (pass 4d) |
 
 ## MeasurementMap.lean, the measurement-map checks and P5-inv
 
@@ -269,6 +270,39 @@ count as the length of the prefix of entrants.
 | `witness_counts`, `witness_signs`, `band_both_directions`, `band_both_directions_positive` | Inside the band both directions occur, with the same signs, at the benchmark gains and for every small `μ > 0` |
 | `mps_lowers_count` | A change that keeps the total and majorizes the profile lowers the count with the marginal entrant above the mean, so the mean cannot replace the pivot |
 | `mPre`, `mUp`, `mDown`, `antitone_of_four`, `mps_band_signs`, `mps_witness_counts`, `mps_band_both_directions`, `mps_band_both_directions_positive` | Four challengers. Two changes that keep the total and majorize the profile, with the same signs at every rank, put the margin in the band and move the count up and down, at the benchmark gains and for every small `μ > 0` |
+
+## FullertonMcAfee.lean, the literature check of Fullerton and McAfee (1999)
+
+The Lean half of `lit/fullerton_mcafee_1999/`, kept here because the claims
+need real analysis. Locators are printed pages of the *JPE* article.
+
+| Theorem | Content |
+|---|---|
+| `win_prob` | Eq. (1). `∫_0^1 z_i t^{Z−1} dt = z_i / Z`, the ratio-form win probability from independent draws |
+| `IsNash`, `zstar_isNash`, `nash_char`, `nash_unique`, `active_prefix`, `profit_zstar`, `all_active` | Theorem 1 from the primitives. The effort subgame has exactly one Nash equilibrium, `z_i = (P/t)(1 − c_i/t)^+` with `t` the unique root of `Σ (t − c_i)^+ = t`, the active firms are the lowest-cost ones, and profits are eq. (4) |
+| `root_two`, `root_unique`, `best_response`, `zstar_sum` | The steps behind it |
+| `fin_all_active`, `two_sizes` | Entry equilibria of sizes 2 and 3 in one economy, so the count is not invariant in their model |
+| `lemma1_deviation`, `lemma1_bound`, `lemma1_case_out`, `lemma1_exact` | Lemma 1 and the example in which its bound binds |
+| `thm2_iff`, `thm2_iff_needs_sign`, `thm2_step` | Theorem 2's step, and the sign condition its first display needs |
+| `symmetric_case`, `TC`, `TC_formula`, `TC_step` | The symmetric case and Theorem 3 |
+| `lemma2_step`, `lemma2_single_m_fails`, `lemma2_constant_increment`, `lemma2_proportional` | Lemma 2 with its induction hypothesis made explicit, a counterexample to the single-`m` reading, and the two named families |
+| `uniform_bid_scale`, `uniform_bid_constant` | With two entrants and uniform costs the uniform-price bid does not depend on cost |
+| `lemma4`, `lemma4_sharp` | Lemma 4, and that its condition cannot be dropped |
+| `Thm4Hyp`, `thm4_hyp_always`, `thm4_hyp_with_increasing_bid`, `thm4_interior` | Theorem 4's hypothesis as printed holds for every `Ψ`, and the reading its proof needs |
+
+## LewisThompson.lean, the literature check of Lewis and Thompson (1981)
+
+The Lean half of `lit/lewis_thompson_1981/`, an earlier source for the dispersive
+order. Locators are printed pages of the *J. Appl. Prob.* article.
+
+| Theorem | Content |
+|---|---|
+| `OrdCdf`, `OrdSpacing`, `OrdDiff`, `cdf_iff_spacing`, `spacing_iff_diff` | Their (1.6), quantile spacing and Hopkins and Kornienko's Definition 1 are one order for continuous, strictly increasing distribution functions |
+| `transport_disp`, `transport_pivot` | The transport map has a non-decreasing displacement exactly under the order, and with a crossing it is a pivot-spread |
+| `affine_invariant`, `scale_pair` | Invariance under location and positive scale, and `X` against `kX` for `k ≥ 1` |
+| `qAsym`, `qNeg`, `qAsym_strictMonoOn`, `sig`, `sig_mem`, `qAsym_sig`, `qAsym_continuousOn`, `qAsym_onto`, `neg_quantile`, `spacing_gap`, `neg_not_ordered` | "X and kX form an o.d. pair for k ≠ 1" fails at `k = −1` for a distribution function strictly increasing on `ℝ` |
+| `thm1`, `thm2`, `thm2_density` | Theorems 1 and 2 in quantile-derivative form |
+| `scale_family`, `pareto`, `lognormal_ratio`, `mixture_logconvex` | The examples of Section 6 |
 
 ## What is still assumed
 

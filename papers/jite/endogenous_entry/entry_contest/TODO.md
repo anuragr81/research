@@ -428,6 +428,39 @@ paper's claims, and only then write the manuscript.
     (`band_both_directions`) did not keep the total. M13 and M14 of
     `MANUSCRIPT.tex` now cite the new theorems.
 
+- [!] **L6. Fullerton and McAfee (1999) read, 7 Oct 2026. Decisions for Anurag.**
+  Read in full from `auction_entry.pdf` (printed pages 573 to 603, the last two
+  pages absent from the upload). Everything below rests on
+  `lean/mathlib/FullertonMcAfee.lean` (35 theorems, axiom-audited) and
+  `lit/fullerton_mcafee_1999/`.
+  0. **"Differs in kind" narrows.** Their efficient entry equilibrium admits the
+     lowest-cost firms (Theorem 2) and their contestant selection auction
+     admits the best types (Theorem 5), so entrant identity is a property of
+     the agents there too. `LITERATURE.tex` §sec:entry made the claim
+     conditional on exactly this and now states the narrower version. What
+     separates P5 is the sorting variable. Their types enter the contest, and
+     our wealth enters only `kappa`.
+  1. **Their entry stage has equilibria of different sizes.** With costs
+     `(2.1, 2.3, 2.5, 2.6)`, prize `1` and fixed cost `19/250`, `{2.1, 2.3}`
+     and `{2.1, 2.5, 2.6}` are both entry equilibria (`two_sizes`). The proof
+     solves their effort subgame from its primitives (existence, uniqueness,
+     the active prefix and eq. (4)). An entrant's profit there depends on its
+     rivals' costs, so the gain is not anonymous. This is an exact external
+     witness that anonymity carries our count invariance (M6). The author
+     should decide whether the manuscript cites it where count invariance is
+     stated.
+  2. **Their Lemma 1 is a precedent for identity multiplicity** under
+     heterogeneous types. The novelty ledger's identity rows now cite it.
+  3. **Discrepancies in the source, recorded and not ours to fix.** Lemma 2 as
+     printed is false for a single `m` (`lemma2_single_m_fails`), Theorem 4's
+     hypothesis as printed holds for every `Psi` (`thm4_hyp_always`), Theorem
+     2's first display needs a sign condition (`thm2_iff_needs_sign`), and
+     Theorem 3's "positive" is "nonnegative". `NOTES.md` §2 has the detail.
+  4. **Convention.** The paper's claims need real analysis, so its Lean file
+     lives in `lean/mathlib/` under the Mathlib audit, and the paper directory
+     holds a `LEAN` pointer that `lit/coverage.py` now reads.
+  - Done when the author decides item 1.
+
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
   conclusions), and appendices hold every proof and everything else
@@ -551,6 +584,16 @@ paper's claims, and only then write the manuscript.
   rule. Writing the rows found that the tail condition needs only two ranks
   and that the band of `PROOFS.tex` is the wrong one, recorded as item L5.
   L5 decided and applied 7 Oct 2026. Next is pass 4d, P-MU.
+  Pass 4d done 7 Oct 2026. Model rows M16 to M22 with their proofs, on
+  `PMU.lean`, `Refutations.lean`, `ShiftClass.lean`, `FallWitness.lean`,
+  `MustFall.lean` and `PMUWitness.lean`. M16 is the identity and the kernel,
+  M17 the rise-then-fall result under single crossing, M18 the uniform base
+  score (non-decreasing in `Q`), M19 the shift-monotone class, M20 the fall
+  exhibited, M21 the must-fall condition and M22 the dominance witnesses. The
+  notation block defines `Delta_Q(0)`, `D(Q)` and `W_Q`. Writing M21 found that
+  the uniform case assumed the uniform law shift-monotone without proof, and
+  `MustFall.lean` now proves it (`unif_shiftMono`, `uniform_never_gains`).
+  Next is pass 4e, BM and ANON.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
@@ -591,7 +634,16 @@ paper's claims, and only then write the manuscript.
   7. **Novelty reading.** Fullerton-McAfee (1999), Mathews-Namoro (2008),
      Corcoran (1984), Corcoran-Karels (1985) and Shaked (1982), each with a
      `lit/` directory and Lean, then the novelty ledger revised. Blocked on the
-     PDFs.
+     PDFs. Fullerton-McAfee read 7 Oct 2026 (item L6). The upload expected to
+     be Shaked turned out to be Lewis and Thompson (1981), *J. Appl. Prob.* 18,
+     76-90, which the author decided on 7 Oct 2026 to use as an earlier source
+     for the dispersive order. Read in full, `lit/lewis_thompson_1981/`,
+     `lean/mathlib/LewisThompson.lean` (21 theorems). Their definition is
+     Hopkins and Kornienko's Definition 1 (`cdf_iff_spacing`,
+     `spacing_iff_diff`), and their claim that `X` and `kX` are ordered for
+     every `k ≠ 1` fails at `k = −1` (`neg_not_ordered`). `PROOFS.tex` and
+     `LITERATURE.tex` now cite it beside Shaked. Shaked (1982) itself remains
+     unread.
   8. **Conclusions, then introduction.** Conclusions carry only the novel
      claims from the revised ledger, each linked to model or literature rows.
      The introduction states the headlines and their number, each traced to a
@@ -1128,8 +1180,8 @@ be claimed as novel.
 | Margin condition, each branch reading one rank: the marginal entrant's for the rise branch, the first outsider's for the fall branch (revised 7 Oct 2026, L5; was "One-sided tail condition, fall branch free at the margin") | **SURVIVES (minor), pending pass 7** | `margin_rise`, `margin_fall` in `lean/mathlib/Spreads.lean`, axiom-audited. The rank-by-rank form (`tail_rise`, `tail_fall`) and the pivot rule (`pivot_rise`, `pivot_fall`) are special cases, and the earlier grounds (`nonentry_preserved_of_beyond_margin`, R1-WEAK sampling) are subsumed. The proof is the prefix structure of the new profile. A sharpening of the hypothesis, not a new result. Pass 7 weighs it against Costrell and Loury (2004), whose sign also turns on the quantile of one marginal agent, before anything is claimed |
 | Dispersive order + crossing ⇔ pivot-spread class, crossing necessary | **SURVIVES (minor)** | `Dispersive.lean`, 7 theorems, axiom-audited. Converts the pivot class from ad hoc to HK's own stochastic order. A lemma about stochastic orders, not about contests |
 | Assortative set is the cheapest equilibrium | **SURVIVES as a fact; NOT as a welfare claim** | Existence and cost-minimisation correct, machine-checked and re-run. The welfare reading was corrected under F6 and is now stated as what it is: an unweighted sum of the model's utility units, carrying no resource-efficiency content (all equilibria cost `k*c`) and favouring the wealthiest entrants, verified 1344/1344 in N4-WELFARE. It ranks equilibria at a fixed count and is independent of whether `k*` is too large. **Do not present it as a welfare result.** Selection-grade, not novelty-grade |
-| Count invariance across all pure equilibria (P5-inv) | **SURVIVES (conditional on anonymity — see A1)** | `equilibrium_count_unique` machine-checked; `verify_equilibria.py` E2/E3 (20,000 instances) plus an independent re-test (8,000, different seed and code); E6 control shows antitonicity of `Delta` is load-bearing, so it is not a tautology. Stronger than the original P5 claim, which only constructed the assortative equilibrium |
-| Identity pinning by the wealth ordering | **WITHDRAWN — was false** | Counterexample in `SOUNDNESS_20260902.md` Finding 1; multiplicity in 17–22% of instances. Holds only under `kappa_(k*+1) > Delta(k*-1)` (`members_below_kstar`) |
+| Count invariance across all pure equilibria (P5-inv) | **SURVIVES (conditional on anonymity — see A1)** | `equilibrium_count_unique` machine-checked; `verify_equilibria.py` E2/E3 (20,000 instances) plus an independent re-test (8,000, different seed and code); E6 control shows antitonicity of `Delta` is load-bearing, so it is not a tautology. Stronger than the original P5 claim, which only constructed the assortative equilibrium. Fullerton and McAfee (1999) give an exact external witness that anonymity is load-bearing: in their entry stage, where an entrant's profit depends on its rivals' costs, entry sets of two and three firms are both equilibria (`FullertonMcAfee.two_sizes`, 7 Oct 2026, L6) |
+| Identity pinning by the wealth ordering | **WITHDRAWN — was false** | Counterexample in `SOUNDNESS_20260902.md` Finding 1; multiplicity in 17–22% of instances. Holds only under `kappa_(k*+1) > Delta(k*-1)` (`members_below_kstar`). Fullerton and McAfee's Lemma 1 (1999, p.579) is a precedent for non-assortative entry equilibria under heterogeneous types (L6) |
 | Margin condition on two sorted profiles, with non-dispersive changes inside its scope, and its band (revised 7 Oct 2026, L5; was "One-sided rank condition on two sorted profiles") | **SURVIVES, narrower than first written; the sharpness claim WITHDRAWN** | Proposition (margin condition) in `lean/mathlib/Spreads.lean`. The statements quantify over arbitrary sorted profiles, so the displacement may cross zero freely away from the two ranks read, and mean-preservation is not used (F3). **The scope caveat stands and is now exact.** The condition is silent exactly on the band `d_{k*} < 0 < d_{k*+1}` (1-indexed; `branch_of_not_band`). Dispersive changes never reach the band (`not_band_of_single_crossing`, `pivot_single_crossing`). Inside the band two mean-preserving spreads with the same signs at every rank move `k*` in opposite directions, exactly, for every small `mu > 0` (`mps_band_both_directions_positive`). A total-preserving majorizing change can lower `k*` with the marginal entrant above the mean (`mps_lowers_count`), so the mean cannot replace the pivot. The 2 Sep claim that the rank-by-rank condition "is the whole of what the sign pattern supports" was false and is withdrawn. The sampled grounds (R1, R1-SCOPE, `verify_tailband.py`) are illustrations, and the band frequencies describe the superseded band |
 | Endogenous marginal agent in the pivot rule | **SURVIVES** | Proposition (endogenous margin), machine-checked and independently recompiled (axiom-free); 20,000 economies with `k*` recomputed on both sides, 0 violations; control at the wrong index gives 154/2744, so the hypothesis is not slack. Differs from CL's fixed `theta`; framing settled under F7 — offered as a consequence of the extensive-margin formulation, not as a stronger theorem than theirs |
 | P7 uniform cap | **DOES NOT SURVIVE** | `Accounting.lean`: FJL's bound and P7's cap are instances of one lemma |

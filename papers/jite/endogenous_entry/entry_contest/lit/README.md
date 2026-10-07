@@ -21,6 +21,7 @@ mean-preserving spread).
 | `verify_<slug>.py` | SymPy suite checking the claims that are checkable. One check per claim ID where possible. |
 | `<Slug>.lean` | Required for every cited paper (author's instruction, 6 Oct 2026). Core Lean only, no Mathlib, no comments. It formalises what our documents attribute to the paper, with analytic content entering as named hypotheses, and it carries at least one control that fails when a hypothesis is dropped. A claim about interpretation rather than mathematics is verified by quotation in `CLAIMS.md`, which says so. |
 | `NOTES.md` | What was verified, what could not be, and every discrepancy found against the source. |
+| `LEAN` | Optional, from 7 Oct 2026. When a paper's claims need real analysis, its Lean file uses Mathlib and lives in `lean/mathlib/`, where `checks/verify_mathlib.py` builds and audits it under the Mathlib rule (`propext`, `Classical.choice` and `Quot.sound`). `LEAN` names that file, and `coverage.py` counts its theorems. The paper's `verify_*.py` still measures the file itself. |
 
 ## Why reconstruction comes first
 

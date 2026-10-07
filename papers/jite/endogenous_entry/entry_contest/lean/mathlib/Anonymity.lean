@@ -209,6 +209,9 @@ theorem κ3_values : κ3 0 = 16 / 77 ∧ κ3 1 = 16 / 45 ∧ κ3 2 = 1 / 2 := by
   · simp only [κ3, kappa, crra_two, h2]
     norm_num
 
+/-- The costs at the three wealths, under an ASCII name for the manuscript. -/
+theorem kappa3_values : κ3 0 = 16 / 77 ∧ κ3 1 = 16 / 45 ∧ κ3 2 = 1 / 2 := κ3_values
+
 /-- Wealth falls and ability rises along the ranking. -/
 theorem ability_against_wealth : w3 1 < w3 0 ∧ w3 2 < w3 1 ∧ kk3 0 < kk3 1 ∧ kk3 1 < kk3 2 := by
   obtain ⟨h0, h1, h2⟩ := w3_val

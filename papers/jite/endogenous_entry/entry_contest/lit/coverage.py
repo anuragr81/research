@@ -32,9 +32,12 @@ for d in sorted(os.listdir(HERE)):
 def lean_info(d):
     if d is None:
         return "", 0
-    files = [f for f in os.listdir(os.path.join(HERE, d)) if f.endswith(".lean")]
-    n = sum(len(re.findall(r"^theorem\s", open(os.path.join(HERE, d, f)).read(), re.M)) for f in files)
-    return ", ".join(sorted(files)), n
+    paths = [os.path.join(HERE, d, f) for f in os.listdir(os.path.join(HERE, d)) if f.endswith(".lean")]
+    listed = os.path.join(HERE, d, "LEAN")
+    if os.path.isfile(listed):
+        paths += [os.path.join(ROOT, q) for q in open(listed).read().split()]
+    n = sum(len(re.findall(r"^theorem\s", open(q).read(), re.M)) for q in paths)
+    return ", ".join(sorted(os.path.basename(q) for q in paths)), n
 
 
 rows = []

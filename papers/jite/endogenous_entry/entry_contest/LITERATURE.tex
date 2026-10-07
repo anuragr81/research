@@ -295,7 +295,15 @@ cannot compare distributions with different supports, so it cannot handle a
 policy that raises the floor of the income distribution while taxing the top.
 The paper switches to indexing agents by \emph{rank} $r = G(z)$ instead, and
 introduces the dispersive order for this purpose, citing \citet{Shaked1982}
-directly (full citation added to \texttt{refs.bib} below) --- rank-indexing
+directly (full citation added to \texttt{refs.bib} below). The order is older
+than that citation. \citet{LewisThompson1981} define it as ``ordering in
+dispersion'' by quantile spacing (p.~77), read in full \textbf{[F]}
+(\texttt{lit/lewis\_thompson\_1981}), and their definition is the same order as
+Hopkins and Kornienko's Definition~1 for continuous, strictly increasing
+distribution functions (\texttt{LewisThompson.cdf\_iff\_spacing},
+\texttt{LewisThompson.spacing\_iff\_diff}, proved in Lean). Their
+``dispersive'' distributions, the log-concave ones of their Theorem~8, are a
+different notion from a dispersive spread. Rank-indexing
 plus the dispersive order is presented there as a new technique built
 specifically to sign comparative statics of a competitive equilibrium under a
 change in the underlying distribution, which is precisely the class of problem
@@ -381,13 +389,27 @@ pure-strategy count $k^*$ is deterministic under \emph{simultaneous} entry with
 no mixing and no arrival order --- and, by the count-invariance proposition in
 \texttt{PROOFS.tex}, the same in every pure-strategy equilibrium.
 
-The comparison covers the four papers read here and no others.
 \citet{MorganOrzenSefton2012} (p.~442) also cite \citet{FullertonMcAfee1999},
 who ``study contests where agents are heterogeneous and entry is determined by
-an auction''. If that auction selects entrants by type, entrant identity is
-already a property of the agents there, and ``differs in kind'' narrows to a
-comparison with the three devices above. That paper has not been read
-(\S\ref{sec:unread}).
+an auction''. That paper has now been read in full \textbf{[F]}, printed pages
+573 to 603 of the published article (\texttt{lit/fullerton\_mcafee\_1999}).
+Fullerton and McAfee's contestants differ in research cost or in a general
+quality attribute. The efficient entry equilibrium admits the lowest-cost firms
+(their Theorem~2, p.~580), and their contestant selection auction admits the
+best types (Theorem~5, p.~591). Entrant identity is therefore already a
+property of the agents in that paper, and ``differs in kind'' narrows to a
+comparison with the three devices above. What still separates P5 from
+Fullerton and McAfee is the sorting variable. A Fullerton--McAfee type enters
+the contest itself, so an entrant's profit depends on its rivals' types (their
+eq.~(4), p.~579). In our model wealth enters only the utility cost of the fee,
+and the gain depends on the number of entrants alone. That difference carries
+count invariance. In the Fullerton--McAfee entry stage the number of entrants
+differs across equilibria. With costs $(2.1, 2.3, 2.5, 2.6)$, prize $1$ and
+fixed cost $19/250$, a set of two firms and a set of three firms are both entry
+equilibria (\texttt{FullertonMcAfee.two\_sizes}, proved in Lean). Their
+Lemma~1 (p.~579) is also a precedent for entry equilibria that exclude a
+cheaper firm, with the excluded firm's cost at least $(m^2-m)/(m^2-m+1)$ times
+an entrant's.
 
 The claim should stop there, and an earlier version of this survey did not.
 Heterogeneous costs do not by themselves pin \emph{which} agents enter: with
@@ -1256,14 +1278,15 @@ functions, has not been read.
 
 \citet{MorganOrzenSefton2012} (p.~442) place their model against four papers,
 none of which this survey had cited. Each bears on the novelty verdict and
-should be read before the conclusions are fixed. \textbf{[C]} for all four.
+should be read before the conclusions are fixed. \textbf{[C]} for the three
+still unread.
 
 \begin{itemize}
 \item \citet{FullertonMcAfee1999} ``study contests where agents are
-  heterogeneous and entry is determined by an auction''. If the auction selects
-  entrants by type, entrant identity is a property of the agents there, which
-  bears directly on the claim that P5 differs in kind from the other devices
-  (\S\ref{sec:entry}).
+  heterogeneous and entry is determined by an auction''. Read in full since,
+  \textbf{[F]}. The auction and the efficient entry equilibrium both select
+  entrants by type, and the consequences for P5 are stated in
+  \S\ref{sec:entry}.
 \item \citet{MathewsNamoro2008} ``consider entry decisions when each agent faces
   multiple possible contests'', in rank-order tournaments with endogenous
   entry.
@@ -1282,7 +1305,9 @@ Moreno--Wooders (published); Che--Gale 1997 (published); Suen (published);
 Costrell--Loury (draft); Cole--Mailath--Postlewaite 1992 (published) and
 1995 (WP); Becker--Murphy--Werning (draft); Moldovanu--Sela 2001 (draft);
 Hoppe--Moldovanu--Sela (published); Lazear--Rosen (published); Schoemaker
-1982 (published); Sen 1973 (published). Every substantive claim in this
+1982 (published); Sen 1973 (published); Fullerton--McAfee (published,
+printed pages 573 to 603); Lewis--Thompson 1981 (published). Every
+substantive claim in this
 document about what a paper does now rests on a full read, except where marked
 [A] or [C]. Where a working paper or draft was read, the published version has
 not been line-checked. Each paper cited in \texttt{PROOFS.tex} except
@@ -1302,12 +1327,15 @@ margin condition rather than by the Suen and Costrell--Loury technique
 Outstanding, in descending order of consequence for the current claims:
 
 \begin{enumerate}
-\item Read the four leads of \S\ref{sec:unread}, beginning with
-  \citet{FullertonMcAfee1999}, before the novelty verdict is used to fix the
-  conclusions.
+\item Read the three remaining leads of \S\ref{sec:unread},
+  \citet{MathewsNamoro2008}, \citet{Corcoran1984} and \citet{CorcoranKarels1985},
+  before the novelty verdict is used to fix the conclusions.
+  \citet{FullertonMcAfee1999} has been read.
 \item Read \citet{Shaked1982}, cited twice in \texttt{PROOFS.tex} and not yet
   read, and give the claims made of \citet{HopkinsKornienko2004} and
   \citet{HopkinsKornienko2009} a Lean file of their own.
+  \citet{LewisThompson1981}, an earlier source for the same order, has been
+  read and covers the definition.
 \item Published-version checks: Schroyen--Treich (\emph{GEB}, Theorem~3 and
   the payoff specifications); Fu--Lu (\emph{EI}, the title differs between
   MPRA and Fu--Jiao--Lu's citation); Cole--Mailath--Postlewaite 1995

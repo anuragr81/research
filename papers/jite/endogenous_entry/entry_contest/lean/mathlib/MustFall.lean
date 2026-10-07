@@ -325,6 +325,36 @@ theorem uniform_fails_gain (V : ℝ) (hV : 0 < V) (p μ : ℝ) [Fact (0 ≤ p �
   have hnn := pmu_step_nonneg_uniform V hV.le μ hμ hμ1.le (bern p) C (bern_Iio p) Q0 hQ0
   linarith
 
+/-- The uniform base score is shift-monotone, since its density does not rise on the positive
+    reals. -/
+theorem unif_shiftMono : ShiftMono unif := by
+  have e : unif = volume.withDensity
+      (fun r => ENNReal.ofReal ((Icc (0 : ℝ) 1).indicator (fun _ => (1 : ℝ)) r)) := by
+    have hf : (fun r => ENNReal.ofReal ((Icc (0 : ℝ) 1).indicator (fun _ => (1 : ℝ)) r))
+        = (Icc (0 : ℝ) 1).indicator 1 := by
+      funext r
+      by_cases h : r ∈ Icc (0 : ℝ) 1
+      · simp [indicator_of_mem h]
+      · simp [indicator_of_notMem h]
+    rw [hf, withDensity_indicator_one measurableSet_Icc]
+    rfl
+  rw [e]
+  refine shiftMono_of_density _ (fun x y hx hxy => ?_)
+  by_cases hy : y ∈ Icc (0 : ℝ) 1
+  · have hx' : x ∈ Icc (0 : ℝ) 1 := ⟨hx.le, hxy.trans hy.2⟩
+    rw [indicator_of_mem hy, indicator_of_mem hx']
+  · rw [indicator_of_notMem hy]
+    exact indicator_nonneg (fun _ _ => zero_le_one) x
+
+/-- **A uniform base score never meets the must-fall condition.** -/
+theorem uniform_never_gains (V : ℝ) (hV : 0 < V) (p μ : ℝ) [Fact (0 ≤ p ∧ p ≤ 1)] (hp1 : p < 1)
+    (hμ : 0 < μ) (hμ1 : μ < 1) (C : Measure ℝ) [IsProbabilityMeasure C] (a b : ℝ)
+    (hta : 1 - μ < a) (hab : a < b) (hC : 0 < cdf C a)
+    (hGb : cdf (nonInvestorLaw μ unif) b < 1)
+    (hGt : cdf (nonInvestorLaw μ unif) (1 - μ) < cdf (nonInvestorLaw μ unif) a) :
+    ¬ nonInvestorLaw μ unif (Ioc a b) < (unif.map (fun r => μ * r + (1 - μ))) (Ioc a b) :=
+  uniform_fails_gain V hV p μ hp1 hμ hμ1 C a b hta hab hC hGb hGt unif_shiftMono
+
 end Instances
 
 end EntryContestMustFall
