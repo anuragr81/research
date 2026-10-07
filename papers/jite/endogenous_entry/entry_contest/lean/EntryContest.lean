@@ -641,9 +641,10 @@ section CountUniqueness
     (high) some member sits at index `>= k-1`;
     (low)  some index `<= k` is NOT a member.
 
-  Both are discharged by exhaustive enumeration in
-  `checks/verify_equilibria.py`, which also checks the conclusions below
-  directly on random instances.
+  Both are proved in `lean/mathlib/MeasurementMap.lean` (`exists_mem_ge`,
+  `exists_not_mem_le`), which composes them with the theorems below into
+  `count_invariance`. `checks/verify_equilibria.py` checks the conclusions
+  on random instances as corroboration.
 -/
 
 variable {α : Type}

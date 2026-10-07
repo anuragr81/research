@@ -287,7 +287,7 @@ P5 \S\ref{prop:P5} & Existence \& uniqueness of $k^*$ (prefix property) &
   \file{lean/EntryContest.lean} (3 theorems, listed in \S\ref{prop:P5}); \file{checks/run\_all.py} (P5) \\[4pt]
 P5-inv \S\ref{prop:count-inv} & Every pure-strategy equilibrium has count $k^*$; identities pinned under a stated condition &
   \status{PROVED} & \tier{L} &
-  \file{lean/EntryContest.lean} (\texttt{count\_le\_kstar}, \texttt{count\_ge\_kstar}, \texttt{equilibrium\_count\_unique}, \texttt{members\_below\_kstar}); \file{checks/verify\_equilibria.py} (E1--E6: 20{,}000 instances, exhaustive enumeration, antitonicity control) \\[4pt]
+  \file{lean/EntryContest.lean} (\texttt{count\_le\_kstar}, \texttt{count\_ge\_kstar}, \texttt{equilibrium\_count\_unique}, \texttt{members\_below\_kstar}); \file{lean/mathlib/MeasurementMap.lean} (\texttt{count\_invariance}, with the counting facts proved); \file{checks/verify\_equilibria.py} (E1--E6: 20{,}000 instances, corroboration) \\[4pt]
 N4 \S\ref{prop:assort} & Assortative set is always an equilibrium and minimises total $\kappa$; ranking is an unweighted utility sum, not resource efficiency &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{cost\_exchange\_le}, \texttt{totalCost\_cons}, \texttt{surplus\_gap\_is\_cost\_gap}); \file{checks/verify\_equilibria.py} (N4, 6000 economies, 1335 with multiplicity; control 3892; N4-WELFARE, 1344 multiplicity economies) \\[4pt]
@@ -827,15 +827,15 @@ $\kappa\le\Delta(k)$ --- contradicting the outsider condition. Hence
 $k = k^*$.
 \end{proof}
 
-The two combinatorial steps --- some member at index $\ge k-1$, some index
-$\le k$ omitted --- are pigeonhole facts about a $k$-element set of indices;
-they enter the Lean development as explicit hypotheses and are discharged by
-exhaustive enumeration in \file{checks/verify\_equilibria.py}, which also
-confirms the conclusion directly on $20{,}000$ random instances (every
-equilibrium of every instance has count $k^*$; identity multiplicity occurs in
-$17.3\%$ of them). The order-theoretic core is machine-checked as
-\texttt{count\_le\_kstar}, \texttt{count\_ge\_kstar} and
-\texttt{equilibrium\_count\_unique}.
+The two combinatorial steps, some member at index $\ge k-1$ and some index
+$\le k$ omitted, are counting facts about a $k$-element set of indices. Both
+are proved (\file{lean/mathlib/MeasurementMap.lean}, \texttt{exists\_mem\_ge},
+\texttt{exists\_not\_mem\_le}) and composed with the order-theoretic core,
+\texttt{count\_le\_kstar} and \texttt{count\_ge\_kstar}, into
+\texttt{count\_invariance}, which holds with no hypothesis beyond the model's.
+An earlier version left the two counting facts to enumeration in
+\file{checks/verify\_equilibria.py}, which remains as corroboration on
+$20{,}000$ random instances.
 
 \emph{This is what licenses the rest of the document.} P7, P8, P9, P9-gen,
 P9-str and P-MU are all statements about $k^*$, and $k^*$ is exactly the

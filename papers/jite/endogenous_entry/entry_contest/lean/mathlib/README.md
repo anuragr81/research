@@ -219,6 +219,24 @@ Write `G_t` for the non-investor's law `G` shifted up by the lift `t = 1 − μ`
 | `witness_must_fall` | The base density `2(1 − r)` with `μ = 3/4` meets the condition on `(1/2, 5/8]`, so its gain must fall, for every `0 ≤ p < 1` |
 | `uniform_fails_gain` | A uniform base law meets the condition on no interval, because its gain never falls |
 
+## MeasurementMap.lean, the measurement-map checks and P5-inv
+
+Each group replaces the SymPy block of the same name in
+`checks/verify_measurement_map.py`, stated over the reals and, where the SymPy
+fixed a size or a family, in general.
+
+| Theorem | Content |
+|---|---|
+| `mm1a` to `mm1d` | MM1. From the displacements at two ranks, `λ = 1 + (d_a − d_b)/(w_a − w_b)` and `x0 = (d_b w_a − d_a w_b)/(d_b − d_a)`; the swapped numerator fails |
+| `mm2a` to `mm2c` | MM2. For any number of challengers, a spread about the profile mean keeps the mean, `λ` is read off any challenger, and a spread about another point with `λ ≠ 1` moves the mean |
+| `mm3`, `mm4`, `mm5`, `mm5a`, `mm5b` | MM3 to MM5. P6, the P7 base integral and the P-MU identity with the factor `V`, from the earlier files, and `−V/70` for `F = x²`, `G = x`, `Q = 3` |
+| `mm6a` to `mm6f`, `Delta_scale` | MM6. Under `(u, V) ↦ (a u + b, a V)` with `a > 0`, `κ` and `Δ` scale by `a`, every entry condition is unchanged, invariant statements depend on `κ/V` only, and cost and payoff differences scale by `a` |
+| `mm7_equilibria`, `mm7a`, `mm7b` | MM7. With `Δ = (12, 10, 1)` and `κ = (2, 5, 8)` the equilibria are the three pairs, all of count 2, and one omits the rank-2 challenger |
+| `mm8a`, `mm8b` | MM8. With `r` uniform on `[0, b]`, the non-investor's CDF reaches 1 exactly from `μ b` on, and the top is `μ` exactly when `b = 1` |
+| `mm9a`, `mm9b`, `mm9_model` | MM9. Expected payoff with entry minus without is `V(P1 − P0) − κ(w)`, and in the model entering is weakly better exactly when `κ(w) ≤ Δ` |
+| `eu_affine`, `mm10a`, `mm10a_example`, `mm10b` | MM10. Expected-payoff rankings are unchanged by `a U + b` with `a > 0`, and the example's ranking reverses under `(√)⁴` |
+| `exists_mem_ge`, `exists_not_mem_le`, `count_invariance` | P5-inv with the two counting facts proved, so every pure-strategy equilibrium has size `k*` with no extra hypothesis |
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;

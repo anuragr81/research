@@ -450,6 +450,14 @@ paper's claims, and only then write the manuscript.
   rise-then-fall shape and the referee's direction exactly, inside the
   primitives, with `r` the smaller of two uniform draws. The closed forms of
   the first two steps in `Q` are polynomials in the failure probability `p`.
+  Pass 3h done 7 Oct 2026. `lean/mathlib/MeasurementMap.lean` proves MM1 to
+  MM10 over the reals, in general where the SymPy fixed a size or a family,
+  and cites the earlier theorems for MM3 to MM5. The pass also closed a gap in
+  P5-inv. The two counting facts that `lean/EntryContest.lean` took as
+  hypotheses, left to enumeration in `checks/verify_equilibria.py`, are now
+  proved (`exists_mem_ge`, `exists_not_mem_le`), and `count_invariance`
+  holds with no hypothesis beyond the model's. `MEASUREMENT_MAP.tex` and the
+  P5-inv passage and row of `PROOFS.tex` cite the Lean. Pass 3 is complete.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
@@ -499,6 +507,11 @@ paper's claims, and only then write the manuscript.
      on, with verbatim quotes and pages from `lit/<paper>/CLAIMS.md`.
   10. **Readability passes** on the appendix proofs, as many as needed, under
      the 30% checker.
+  11. **Referee comments, again.** Agreed 7 Oct 2026. Once passes 1 to 10 are
+     done, re-read every referee comment against the verified results and
+     record, for each, whether the skeleton answers it, with the Lean theorem
+     or quote that does. The author asked for no rush, with every step
+     verified before the next.
   Running alongside, as PDFs arrive. Lean for the remaining cited works,
   Hopkins-Kornienko 2004 and 2009 claims, published-version checks (S1), and
   the welfare result W1 if the conclusions are to claim it.
