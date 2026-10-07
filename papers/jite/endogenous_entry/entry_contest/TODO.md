@@ -124,6 +124,47 @@ paper's claims, and only then write the manuscript.
   - Since PROOFS.tex is to be retired (pass plan below), accepted fixes to it
     are applied in the manuscript skeleton instead.
 
+- [!] **L2. Lean pass 3d, 7 Oct 2026. Decisions for Anurag.** Each item
+  below rests on a theorem in `lean/mathlib/KappaSpread.lean`, except where
+  it says otherwise.
+  0. **The separating example of Claim BM violates the divergence
+     primitive.** `PROOFS.tex` uses `u(x) = sqrt(x) + eps sin(kx)`, which is
+     continuous at 0, so its `kappa` stays bounded as `w` falls to `c`
+     (`bm_example_not_diverges`). The example lies outside the admissible
+     class, and the claim that the admissible class is strictly larger than
+     the concave class is therefore not yet established. A replacement for
+     pass 3f is `log x + eps sin(2 pi x / p)` with `p` dividing `c`, whose
+     `kappa` equals that of `log` and so diverges. A second problem, checked by
+     hand and not yet in Lean, is that the stated example is not increasing.
+     With `eps = 3/50` and period `p = 1`, so `k = 2 pi`, at `x = 5/2`
+     `u'(x) = 1/(2 sqrt(5/2)) - 6 pi/50`, and `1/(2 sqrt(5/2)) < 1/3 < 18/50 <
+     6 pi/50`, so `u' < 0` there. Pass 3f settles both in Lean.
+  1. **P9 strictness needs a convention at the support floor.** A large `lam`
+     pushes the poorest challengers below `c` before the marginal entrant
+     exits, which leaves the primitives' wealth support. The Lean statement
+     (`p9_strict`) adopts the convention that a challenger whose wealth is at
+     or below `c` does not enter. The manuscript should either state that
+     convention or restrict `lam` to spreads that keep every challenger
+     above `c`, and the second option may lose the strict drop.
+  2. **P9 strictness uses less than `PROOFS.tex` says.** The proof needs
+     weak burden-monotonicity, the divergence of `kappa` at `c` and a
+     non-increasing `Delta`. The continuity of `kappa` and the strictness of
+     burden-monotonicity are not used.
+  3. **The divergence primitive is `u(0+) = -infinity`.** For `u` continuous
+     at `c`, `kappa` diverges as `w` falls to `c` exactly when `u` falls
+     without bound at 0 (`kappa_diverges_iff`). Log and CRRA with `gamma > 1`
+     satisfy the primitive. CRRA with `gamma < 1`, the square root among them,
+     does not (`crra_kappa_not_diverges`). S16 tested log and three exponents
+     above 1, so the exclusion was never visible. The primitives section
+     should say which families the assumption admits.
+  4. **S17 tested the sign of `kappa'` at one point per family.** Lean now
+     proves `kappa` strictly decreasing on `(c, infinity)` for every `u`
+     strictly concave on the positive reals
+     (`burden_strictAnti_of_strictConcave`), which covers log and CRRA for
+     every `gamma > 0`. No derivative of `u` is used.
+  - Done when each item has the author's decision recorded and, where
+    accepted, the edit applied in the manuscript skeleton.
+
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
   conclusions), and appendices hold every proof and everything else
@@ -172,6 +213,14 @@ paper's claims, and only then write the manuscript.
   `s >= 0` almost surely and no atoms in the law of `s`, and the incumbent
   invests (`C = F`), as in `PROOFS.tex`. The proviso `s > 0` almost surely in
   `PROOFS.tex` follows from those two assumptions (`Iic_zero_null`).
+  Pass 3d done 7 Oct 2026. `lean/mathlib/KappaSpread.lean` proves that strict
+  concavity of `u` gives strict burden-monotonicity, that `kappa` diverges at
+  `c` exactly when `u(0+) = -infinity`, and both facts for log and CRRA. It
+  then proves P9 strictness over the reals with an explicit entrant count
+  (`p9_strict`), the monotone part of the same proposition (`p9_monotone`),
+  and P9 strictness from the primitives with the model's `Delta`
+  (`p9_strict_model`). The analytic step (b) that `lean/EntryContest.lean`
+  took as a hypothesis is therefore proved. Findings are in item L2.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

@@ -87,6 +87,27 @@ surely and no atoms in the law of `s`. The law of `r` is arbitrary. At
 while `p6_limit` stays inside them for every `μ ≠ 0`. The limit is taken in a
 neighbourhood of 0 and so also holds as `μ` falls to 0 from above.
 
+## KappaSpread.lean, the cost of entry and P9 strictness
+
+| Theorem | Content |
+|---|---|
+| `burden_strictAnti_of_strictConcave` | If `u` is strictly concave on the positive reals, `κ(w) = u(w) − u(w − c)` is strictly decreasing on `(c, ∞)` |
+| `kappa_diverges_iff` | For `u` continuous at `c`, `κ → ∞` as `w ↓ c` exactly when `u → −∞` as its argument falls to 0 |
+| `log_burden_strictAnti`, `log_kappa_diverges` | Log utility has both properties |
+| `crra_strictConcave`, `crra_burden_strictAnti` | CRRA utility `x^(1−γ)/(1−γ)` is strictly concave and its burden strictly decreasing, for every `γ > 0`, `γ ≠ 1` |
+| `crra_kappa_diverges`, `crra_kappa_not_diverges` | The cost diverges for `γ > 1` and stays bounded for `γ < 1` |
+| `bm_example_not_diverges` | The separating example `√x + ε sin(kx)` of Claim BM has a bounded cost at `c` |
+| `enters_downward` | After any spread with `λ ≥ 0`, the entry set is a prefix of the wealth ranking |
+| `exit_below_pivot` | A challenger below the pivot fails to enter once `λ` is large enough |
+| `p9_strict`, `p9_monotone` | P9 strictness. With an entrant below the pivot at `λ = 1`, the count is non-increasing in `λ ≥ 1` and strictly lower for every `λ` above some `λ̄` |
+| `p9_strict_model` | The same with the model's `Δ` from `EntryContestModel.lean` and the cost from any strictly concave `u` with `u(0+) = −∞` |
+
+A challenger enters when its wealth after the spread exceeds `c` and its cost
+is within the gain at its index (`Enters`). The first conjunct is the
+convention that a challenger whose wealth falls to `c` or below does not
+enter, which large spreads require, because they push the poorest challengers
+below the support floor `c`.
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
