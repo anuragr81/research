@@ -1623,9 +1623,18 @@ $s\ge0$ and any $0<\mu\le1$ (\texttt{uniform\_left}, \texttt{uniform\_right},
 (\S\ref{sec:R2}, \texttt{Delta\_mono\_uniform}), so the falling phase needs
 another law of $r$. It occurs for $r$ the smaller of two uniform draws, where
 the gain rises from $Q=1$ to $Q=2$ and falls from $Q=2$ to $Q=3$
-(\file{lean/mathlib/FallWitness.lean}, \texttt{rise\_then\_fall}). Whether the
-hypothesis holds for that law, and for which laws of $r$ in general, is not yet
-proved.
+(\file{lean/mathlib/FallWitness.lean}, \texttt{rise\_then\_fall}). The
+hypothesis holds for a class of primitives that contains both cases. Let the
+investment lift the score by $1-\mu$ with probability $1-p$ and by nothing
+otherwise, let $r$ put no mass at or below $0$, and let the law of $r$ never
+lose mass when a set above $c>0$ moves down by $c$, which holds when $r$ has a
+density that does not rise on the positive reals. Then for every $0<\mu<1$,
+every $p$ and every incumbent, $dF-dG$ changes sign once, at $x_0=1-\mu$, and
+$\Delta(0,\cdot)$ is quasi-concave in $Q$
+(\file{lean/mathlib/ShiftClass.lean}, \texttt{quasiconcave\_of\_shiftMono},
+\texttt{shiftMono\_of\_density}). The density $2(1-r)$ of the witness above lies
+in the class (\texttt{witness\_quasiconcave}). Which members of the class must
+fall, and not only may, is not yet proved.
 
 \section{Contribution and its precedents}
 \label{sec:contribution}
@@ -1867,9 +1876,10 @@ What genuinely remains:
   attempted.
 \item \textbf{The competitor-number effect, sharpened.} $\Delta(0,\cdot)$ is
   quasi-concave in $Q$ when $\varphi$ is single-peaked, and $\varphi$ is
-  single-peaked when $r$ is uniform (\S\ref{prop:PMU}). Open are the laws of
-  $r$ beyond the uniform for which $\varphi$ is single-peaked, and the location
-  of the peak in $Q$. An earlier version of this item conjectured an interior
+  single-peaked when $r$ is uniform and, with a single-step investment, when
+  $r$ has a density that does not rise (\S\ref{prop:PMU}). Open are a
+  condition under which the gain must fall, the location of the peak in $Q$,
+  and laws of $s$ beyond a single step. An earlier version of this item conjectured an interior
   \emph{minimum}, from the reversed orientation that \S\ref{prop:PMU} corrects.
   Under the single-peaked hypothesis an interior minimum is impossible.
 \end{enumerate}

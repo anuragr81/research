@@ -331,6 +331,15 @@ paper's claims, and only then write the manuscript.
      general statement that the single-peaked hypothesis holds for a base
      density that does not rise and a single-step lift below `mu` is the next
      proof to add, at the author's request for proofs beyond witnesses.
+     Done 7 Oct 2026, in `lean/mathlib/ShiftClass.lean`. For any base law
+     with no mass at or below 0 that never loses mass when a set above `c`
+     moves down by `c`, any `0 < mu < 1`, any failure probability and any
+     incumbent, `Delta(0, .)` is quasi-concave in `Q`
+     (`quasiconcave_of_shiftMono`). A density that does not rise on the
+     positive reals gives that property (`shiftMono_of_density`), and the
+     witness's base law has density `2(1 - r)` and lies in the class
+     (`witness_quasiconcave`). Not proved is a condition under which the gain
+     must fall, and laws of `s` beyond a single step.
   3. **The anonymity boundary has an exact witness inside the primitives.**
      Three challengers have wealth `11/4, 9/4, 2`, abilities `1, 2, 3` (the
      largest of `n` uniform draws, so ability falls with wealth), CRRA

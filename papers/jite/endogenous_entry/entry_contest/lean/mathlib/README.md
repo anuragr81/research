@@ -196,6 +196,17 @@ The polynomial coefficients were generated outside Lean and pasted in. Lean
 re-verifies each piece against the CDF formulas and each closed form against
 the pieces, so a wrong coefficient would fail the build.
 
+## ShiftClass.lean, quasi-concavity for a class of primitives
+
+| Theorem or definition | Content |
+|---|---|
+| `ShiftMono` | A law never loses mass when a set above `c > 0` moves down by `c` |
+| `left_of_lift`, `right_of_lift` | With a single-step lift of `1 − μ`, `dF − dG ≤ 0` up to `1 − μ` and `≥ 0` beyond it, the second when the base law is shift-monotone |
+| `quasiconcave_of_shiftMono` | For any shift-monotone base law with no mass at or below 0, any `0 < μ < 1`, any failure probability and any incumbent, `Δ(0, ·)` is quasi-concave in `Q` |
+| `shiftMono_of_density` | A law with a density that does not rise on the positive reals is shift-monotone |
+| `lawA_eq_densLaw`, `lawA_shiftMono` | The witness's base law has density `2(1 − r)` on `[0, 1]` and is shift-monotone |
+| `witness_quasiconcave` | The witness of `FallWitness.lean` lies in the class |
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
