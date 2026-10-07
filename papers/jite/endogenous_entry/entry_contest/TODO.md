@@ -478,6 +478,9 @@ paper's claims, and only then write the manuscript.
   5. **Ability rising with wealth.** Count invariance held in every sampled
      economy (`checks/verify_anonymity.py`, A1-4b). This is not claimed, and a
      proof or a counterexample is open.
+  6. **A comparative static in `μ`.** Both referees asked how the count moves
+     with the weight of the investment in the score (R1.a7, R2.1). Nothing in
+     Lean addresses it, and the coverage appendix marks it open.
   - Closed since `PROOFS.tex` listed it: how much room burden-monotonicity
     leaves beyond concavity. A convex stretch longer than `c` rules it out
     (`not_burden_of_convex_stretch`), and every length below `c` occurs
@@ -649,6 +652,20 @@ paper's claims, and only then write the manuscript.
   introduction table has K1 to K6, each with a scope note saying what it does
   not claim. Next are readability (pass 10) and the referee comments (pass 11),
   with the coverage of the referee comments as a separate appendix.
+  Pass 10, first round, done 7 Oct 2026. The notation block now glosses `M_m`
+  and `K_m`, M8 (iii) no longer reuses `T`, M10 names the entrant's cost, M11
+  defines `Delta_V`, M6 opens by naming the equilibrium, and M12 and the
+  notation say "change" where any change of profile is meant. Every proof is
+  at most 21% prose. Further rounds may follow.
+  Pass 11 done 7 Oct 2026. Appendix G, "Coverage of the referee comments",
+  maps every substantive comment of both reports
+  (`HANDOVER_referee_reports_20260831.md`) to the model rows or appendices that
+  answer it, marked answered, partly answered, open or moot. Open are a
+  comparative static in `μ` (O1.6) and the incumbent abstaining while a
+  challenger enters (O1.1). Partly answered are locating the contribution
+  (waits on pass 7), the welfare objective, and a reduced-form contest success
+  function. Remaining from the plan are pass 6 (retire `PROOFS.tex`), pass 7
+  (four PDFs) and the conclusions table, which waits on pass 7.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

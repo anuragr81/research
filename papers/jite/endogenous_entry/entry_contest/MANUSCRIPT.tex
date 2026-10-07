@@ -386,13 +386,16 @@ With $m$ other entrants among the $Q$ challengers,
 \[
   \Delta(m)=V\Big(\int H_m\,dF-\int H_m\,dG\Big),\qquad \kappa(w)=u(w)-u(w-c).
 \]
+$H_m$ is the CDF of the best score facing a challenger, $M_m$ a random variable
+with that CDF, and $K_m$ the same CDF with one more challenger set aside, so that
+$H_{m+1}=K_mF$ and $H_m=K_mG$.
 Challengers are indexed $0,\dots,Q-1$ in increasing order of cost,
 $\kappa_0\le\dots\le\kappa_{Q-1}$, which is decreasing order of wealth. Index $j$
 enters when $\kappa_j\le\Delta(j)$, and $k^*$ satisfies $\kappa_j\le\Delta(j)$ for
 $j<k^*$ and $\Delta(k^*)<\kappa_{k^*}$ when $k^*<Q$. In the results on wealth
 profiles, rank $j$ has wealth $w_j$ with $w_0\ge w_1\ge\cdots$, and enters when
 $w_j>c$ and $\kappa(w_j)\le\Delta(j)$, so a challenger whose wealth is at or below
-the fee does not enter. A prime marks the profile after a spread and its count
+the fee does not enter. A prime marks the profile after a change and its count
 $k'^*$. When the number of challengers varies, $\Delta_Q(0)$ is the first
 entrant's gain among $Q$ challengers, with
 \[
@@ -457,7 +460,7 @@ By M3 and $\varphi^2\ge0$,
   \Delta(m{+}1)-\Delta(m)=-\tfrac V2\int\varphi^2\,dK_m\le0 \quad (V\ge0),
   \qquad <0 \quad \Big(V>0,\ \int\varphi^2\,dK_m>0\Big).
 \]
-For $m\ge Q-1$ the gain is extended as $\Delta(Q-1)$, so $\Delta(m{+}1)\le\Delta(m)$
+Beyond $m=Q-1$ the gain is set to $\Delta(Q-1)$, so $\Delta(m{+}1)\le\Delta(m)$
 for every $m$.
 \end{mproof}
 
@@ -469,7 +472,8 @@ For $i\le j$, by M4,
 \end{mproof}
 
 \begin{mproof}{M6}{EntryContestEq.count_invariance_fin, EntryContestMM.exists_mem_ge, EntryContestMM.exists_not_mem_le}
-Let $k=|S|$. A $k$-set of indices has an element $i\ge k-1$, since
+Let $S$ be an equilibrium and $k=|S|$. A $k$-set of indices has an element
+$i\ge k-1$, since
 $S\subseteq\{0,\dots,k-2\}$ gives $k\le k-1$, and omits some $j\le k$, since
 $\{0,\dots,k\}\subseteq S$ gives $k+1\le k$. If $k>k^*$, then $k^*<Q$ and
 \[
@@ -510,7 +514,7 @@ $EU_i(S)=u(w_i)-\kappa_i\mathbf 1\{i\in S\}+V P_i(S)$,
   \sum_iEU_i(S)=\sum_iu(w_i)-\sum_{i\in S}\kappa_i
   +V\big(|S|P^{\mathrm{in}}(|S|)+(Q-|S|)P^{\mathrm{out}}(|S|)\big),
 \]
-and the last term is equal for $|S|=|T|$.
+and the last term is the same for any two entrant sets of one size.
 \end{mproof}
 
 \begin{mproof}{M9}{EntryContestP6P7.integral_iid, EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p6_evaluation, EntryContestP6P7.p6_at_zero, EntryContestP6P7.tendsto_cdf_investorLaw, EntryContestP6P7.tendsto_cdf_nonInvestorLaw, EntryContestP6P7.p6_limit}
@@ -539,7 +543,7 @@ From $C\le1$, $G\le1$ and $\int H_m\,dG\ge0$,
 \[
   \Delta(m)\le V\int H_m\,dF\le V\int F^m\,dF=\frac V{m+1}.
 \]
-An entrant at index $m$ has $\kappa\le\Delta(m)$, so
+An entrant at index $m$ with cost $\kappa$ has $\kappa\le\Delta(m)$, so
 \[
   (m+1)\,\kappa\le(m+1)\,\Delta(m)\le V,\qquad m+1\le\frac V\kappa\quad(\kappa>0).
 \]
@@ -552,8 +556,8 @@ then $k'^*<Q$ and
 \[
   \Delta'(k'^*)<\kappa'_{k'^*}\le\kappa_{k'^*}\le\Delta(k'^*)\le\Delta'(k'^*),
 \]
-so $k^*\le k'^*$. By M1 and M2, $\Delta_V(j)=V\,\Delta_1(j)$ with
-$\Delta_1(j)\ge0$, and for $u$ non-decreasing,
+so $k^*\le k'^*$. Write $\Delta_V$ for the gain at prize $V$. By M1 and M2,
+$\Delta_V(j)=V\,\Delta_1(j)$ with $\Delta_1(j)\ge0$, and for $u$ non-decreasing,
 \[
   V\le V'\ \Rightarrow\ \Delta_V\le\Delta_{V'},\qquad
   c\le c'\ \Rightarrow\ u(w)-u(w-c)\le u(w)-u(w-c').
@@ -569,13 +573,13 @@ and for $i\le k^*-1$, with $w'_i\ge w'_{k^*-1}>c$,
 \[
   \kappa(w'_i)\le\kappa(w'_{k^*-1})\le\Delta(k^*-1)\le\Delta(i).
 \]
-Every $i<k^*$ enters after the spread, so $k^*\le k'^*$.
-(ii) For $k^*<Q$, rank $k^*$ fails before the spread. If $w'_{k^*}>c$, then
+Every $i<k^*$ enters after the change, so $k^*\le k'^*$.
+(ii) For $k^*<Q$, rank $k^*$ fails before the change. If $w'_{k^*}>c$, then
 $c<w'_{k^*}\le w_{k^*}$ and
 \[
   \kappa(w'_{k^*})\ge\kappa(w_{k^*})>\Delta(k^*),
 \]
-so rank $k^*$ fails after the spread and $k'^*\le k^*$.
+so rank $k^*$ fails after the change and $k'^*\le k^*$.
 \end{mproof}
 
 \begin{mproof}{M13}{EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count}
@@ -1122,6 +1126,120 @@ artefact of uniform supports and of a limit in $Q$ under which the
 equilibrium does not exist. The saturation bound replaces it. An entrant at
 index $m$ with cost $\kappa$ has $(m+1)\kappa\le V$, so the marginal entrant
 gives $k^*\le V/\kappa_{k^*-1}$ for every $Q$, with no limit taken (M10).
+
+\section{Coverage of the referee comments}
+\label{app:coverage}
+
+The two reports on the earlier submission (BEJEAP, rejected 31 August 2026)
+are recorded comment by comment in \path{HANDOVER_referee_reports_20260831.md}.
+Each comment is marked \emph{answered} when a model row or an appendix settles
+it, \emph{partly answered} when part of it remains, \emph{open} when nothing
+here settles it, and \emph{moot} when it concerned text or an object that the
+rebuilt model no longer has. Comments that only praised a change are omitted.
+
+\footnotesize
+\begin{longtable}{@{}P{1.3cm}P{5.7cm}P{1.9cm}P{7.0cm}@{}}
+\toprule
+\textbf{Comment} & \textbf{Substance} & \textbf{Status} & \textbf{Where} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Comment} & \textbf{Substance} & \textbf{Status} & \textbf{Where} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{4}{@{}l}{\emph{Reviewer 1}}\\[2pt]
+R1.1 & Aggregate regimes were compared in place of unilateral deviations. &
+  answered & Deviations are checked index by index. The count $k^*$ is the
+  same in every pure-strategy equilibrium, and the assortative set is one
+  (M5 to M8). \\
+R1.2 & The reach into education policy is limited by a zero-sum, fixed-slot
+  contest. & answered & The rebuilt model makes no policy claim. The prize is
+  fixed and awarded by rank, and the scope is stated with it
+  (Appendix~\ref{app:primitives}). \\
+R1.3 & Results were asserted beyond uniform distributions without proof. &
+  answered & Every row holds for general laws of $r$ and $s$ unless it names a
+  family or a class, and the rows that do say so (M18 to M22, M27). \\
+R1.4 & The contribution is not located against contests with entry costs,
+  positional education and status competition. & partly answered & The
+  literature table (L1 to L13) places each result. The novelty reading of the
+  remaining papers is pending, and the conclusions table waits for it. \\
+R1.4 & The mobility ceiling reflects the uniform specification. & answered &
+  The ceiling is replaced by a bound for every $Q$ and every law, with no
+  limit taken (M10). \\
+R1.a2 & ``Stable Nash equilibrium'' is undefined. & answered & Only
+  pure-strategy Nash equilibrium is used (M6). \\
+R1.a3 & Full withdrawal should be a third regime. & answered & The count
+  $k^*$ ranges over $0,\dots,Q$, so no entry, partial entry and full entry are
+  all cases of one result (M5, M6). \\
+R1.a4 & The ceiling is used inconsistently across regimes. & answered & One
+  bound covers every count (M10). \\
+R1.a5 & Prize effects and affordability effects are conflated. & answered &
+  The prize sits outside $u$ and the fee inside it
+  (Appendix~\ref{app:primitives}). The prize and the fee move the count
+  separately (M11). \\
+R1.a6 & The notation $\Phi(Q)$ is inconsistent. & moot & The rebuilt model
+  has no $\Phi$. \\
+R1.a7 & Comparative statics in $\mu$ were misstated. & open & No comparative
+  static in $\mu$ is claimed. \\
+R1.a8 & The paper is verbose. & answered & Results sit in tables, and every
+  proof is at most 30\% prose, checked by script
+  (Appendix~\ref{app:evidence}). \\[4pt]
+\multicolumn{4}{@{}l}{\emph{Reviewer 2}}\\[2pt]
+R2.1 & Asymmetric equilibria in which only some challengers enter. & answered
+  & The equilibrium is the count $k^*$ of entrants, and every equilibrium has
+  it (M5, M6). \\
+R2.1 & More enter as the prize rises and as the fee falls. & answered & M11. \\
+R2.1 & More enter as social capital matters more ($\mu$ falls). & open & Not
+  claimed. \\
+R2.1 & At $\mu=0$ the number entering does not depend on $Q$. & answered & At
+  $\mu=0$ the gain is $V/(m+2)$ for every $Q$ (M9), so with the same costs the
+  count is the same. \\
+R2.1 & At $\mu>0$ a larger $Q$ means fewer enter. & answered & Not in
+  general. The first entrant's gain can rise in $Q$, never falls with a
+  uniform base score, and the sign depends on the law of $r$ (M16 to M22,
+  conjecture R2 in Appendix~\ref{app:refuted}). \\
+R2.1 & An equilibrium in which the incumbent abstains and a challenger
+  enters. & open & The incumbent's entry is exogenous here. Endogenising it is
+  item O1 of \path{TODO.md}. \\
+R2.2 & The effect of inequality on status expenditure is unclear, and the
+  prize is the inequality. & answered & The prize is fixed and apart from the
+  wealth distribution. A spread changes the count, and so the resource
+  expenditure $k^*c$, with a sign set by the marginal entrant against the pivot
+  (M12 to M15). \\
+R2.2 & Endowment inequality should reduce status expenditure, as in the
+  literature. & answered & It does when the marginal entrant is at or below the
+  pivot, and the reverse holds when it is above (M13). \\
+R2.3 & Policy is discussed without an objective. & partly answered & No
+  policy claim is made. Among equilibria of one size the assortative set has the
+  least total utility cost, and the resource cost $k^*c$ is the same in all of
+  them (M6, M8). No welfare section is attempted. \\
+R2.4 & The ceiling is an artefact, inconsistent with equilibrium, and set in
+  an artificial comparative static. & answered & M10 bounds $k^*$ for every
+  $Q$ with no limit taken. \\
+R2.5 & A static one-shot model would be simpler. & answered & The game is
+  static and played once (Appendix~\ref{app:primitives}). \\
+R2.5 & Give the incumbent a lower cost instead of relying on concavity. &
+  answered & M5 to M8 hold for any ordered costs, whatever their source, and
+  concavity is replaced by burden-monotonicity (M23, M24). \\
+R2.5 & Financial constraints are not crucial. & answered & No budget
+  constraint is used beyond a challenger at or below the fee not entering
+  (Appendix~\ref{app:primitives}). \\
+R2.5 & Consider a reduced-form contest success function. & partly answered &
+  The score is kept, and every result is stated in the laws $F$, $G$ and $C$
+  of the scores. \\
+R2.5 & Why is $\mu<\tfrac12$ needed? & answered & No row assumes it. The
+  family of conjecture R1 uses $\mu\le\tfrac12$ only to be explicit. \\
+R2.6 & Results should be precise propositions with proofs. & answered & Each
+  model row states hypotheses and a conclusion and has a proof checked in
+  Lean (Appendix~\ref{app:proofs}). \\
+R2.6 & Errors in the text of the earlier manuscript (saving, $p_1$,
+  marginal utility cost, income ratios, free riding, the Sutton Trust
+  passage). & moot & The text is retired. One point carries over. A uniform
+  rise in every wealth lowers every cost, so the count does not fall (M12). \\
+\end{longtable}
+\normalsize
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
