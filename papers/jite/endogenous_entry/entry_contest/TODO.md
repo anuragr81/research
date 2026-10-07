@@ -372,7 +372,7 @@ paper's claims, and only then write the manuscript.
   - Done when each item has the author's decision recorded and, where
     accepted, the edit applied in the manuscript skeleton or in `PROOFS.tex`.
 
-- [!] **L5. Pass 4c, 7 Oct 2026. Decisions for Anurag.** Each item rests on
+- [x] **L5. Pass 4c, 7 Oct 2026. Decided by Anurag 7 Oct 2026.** Each item rests on
   `lean/mathlib/Spreads.lean`. Profiles are sorted, richest first, and a
   challenger at or below the fee does not enter.
   0. **The tail condition needs only two ranks.** `PROOFS.tex`
@@ -403,9 +403,30 @@ paper's claims, and only then write the manuscript.
      that each branch reads one rank. Pass 7 should weigh whether that
      changes the comparison with Costrell and Loury.
   - The manuscript rows M12 to M14 already state the margin version, since
-    it is the verified statement. Done when the author decides whether
-    `PROOFS.tex` §R1 and §The band are rewritten now or left to pass 5, and
-    the ledger row is revised.
+    it is the verified statement.
+  - **Decisions, 7 Oct 2026.** "Entrant" and "entry count" stay, with no
+    rename to "field" for now. Item 1 is done now. `PROOFS.tex` §R1 states
+    Proposition (margin condition) at ranks `k*` and `k*+1` (1-indexed), with
+    the support-floor rule, and §The band states the band `d_{k*} < 0 <
+    d_{k*+1}`, with no "iff" and the sharpness sentence withdrawn. The index
+    rows R1 and BAND, the terminology table, the contribution passage, open
+    item `item:tailopen`, `MEASUREMENT_MAP.tex` and `LITERATURE.tex` follow.
+    Item 2 is done now. The two ledger rows are revised below.
+  - **Added during the rewrite, all in `lean/mathlib/Spreads.lean` and
+    axiom-audited.** `mps_lowers_count`: the profiles (2.9, 2.8, 2.0) and
+    (3.6, 2.2, 1.9) have the same total, the second majorizes the first, the
+    marginal entrant is above the mean, and the count falls from 2 to 1 at the
+    benchmark gains. The mean therefore cannot replace the pivot, and this
+    replaces the sampled R1-SCOPE. The fall branch applies to this pair and
+    allows the fall. `mps_band_signs`, `mps_witness_counts`,
+    `mps_band_both_directions`, `mps_band_both_directions_positive`: with
+    four challengers, (4, 2.8, 2.2, 2) has count 2, and two changes that keep
+    the total and majorize it, with signs (+, -, +, -) at every rank, put the
+    margin in the band and move the count to 3 and to 1, at the benchmark gains
+    and for every small `mu > 0`. Mean-preservation therefore does not keep a
+    margin out of the band, and the earlier band witnesses
+    (`band_both_directions`) did not keep the total. M13 and M14 of
+    `MANUSCRIPT.tex` now cite the new theorems.
 
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
@@ -529,7 +550,7 @@ paper's claims, and only then write the manuscript.
   `lean/mathlib/KappaSpread.lean`. The notation block states the support-floor
   rule. Writing the rows found that the tail condition needs only two ranks
   and that the band of `PROOFS.tex` is the wrong one, recorded as item L5.
-  Next is pass 4d, P-MU.
+  L5 decided and applied 7 Oct 2026. Next is pass 4d, P-MU.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
@@ -1096,7 +1117,7 @@ paper's claims, and only then write the manuscript.
   condition vs P5) and `ChungLee2017` (welfare template, feeds W1) are still
   [A]. Upgrade if either is used for a load-bearing claim.
 
-## Novelty ledger (assessment, revised 2 Sep 2026 — revise only against evidence)
+## Novelty ledger (assessment, revised 2 Sep 2026, rows marked revised 7 Oct 2026 — revise only against evidence)
 
 Where each candidate claim stands. Anything not listed as SURVIVES is not to
 be claimed as novel.
@@ -1104,12 +1125,12 @@ be claimed as novel.
 | Claim | Verdict | Ground |
 |---|---|---|
 | MPS sign determined with `u''` alone, where the intensive-margin result needs `u'''` | **SURVIVES** | Both ends verified: ST Thm 3's `u'''`-dependence exhibited by exact separator (CARA `a=1` vs log at `w=1`: same `A=1`, `P=1` vs `2`, opposite signs at `m=1/2`); P9-gen's independence machine-checked; quadratic utility separates the channels (`kappa'=-c/4<0` while `A'>0`, IARA) |
-| One-sided tail condition, fall branch free at the margin | **SURVIVES (minor)** | `nonentry_preserved_of_beyond_margin` and `nonentry_preserved_beyond_marginal_index`, axiom-free; `downFromMargin_imp_beyondMargin` shows the earlier hypothesis was strictly stronger. R1-WEAK: 4000 cases with the margin free, 0 violations; control 362/4000. A sharpening of the statement, not a new result |
+| Margin condition, each branch reading one rank: the marginal entrant's for the rise branch, the first outsider's for the fall branch (revised 7 Oct 2026, L5; was "One-sided tail condition, fall branch free at the margin") | **SURVIVES (minor), pending pass 7** | `margin_rise`, `margin_fall` in `lean/mathlib/Spreads.lean`, axiom-audited. The rank-by-rank form (`tail_rise`, `tail_fall`) and the pivot rule (`pivot_rise`, `pivot_fall`) are special cases, and the earlier grounds (`nonentry_preserved_of_beyond_margin`, R1-WEAK sampling) are subsumed. The proof is the prefix structure of the new profile. A sharpening of the hypothesis, not a new result. Pass 7 weighs it against Costrell and Loury (2004), whose sign also turns on the quantile of one marginal agent, before anything is claimed |
 | Dispersive order + crossing ⇔ pivot-spread class, crossing necessary | **SURVIVES (minor)** | `Dispersive.lean`, 7 theorems, axiom-audited. Converts the pivot class from ad hoc to HK's own stochastic order. A lemma about stochastic orders, not about contests |
 | Assortative set is the cheapest equilibrium | **SURVIVES as a fact; NOT as a welfare claim** | Existence and cost-minimisation correct, machine-checked and re-run. The welfare reading was corrected under F6 and is now stated as what it is: an unweighted sum of the model's utility units, carrying no resource-efficiency content (all equilibria cost `k*c`) and favouring the wealthiest entrants, verified 1344/1344 in N4-WELFARE. It ranks equilibria at a fixed count and is independent of whether `k*` is too large. **Do not present it as a welfare result.** Selection-grade, not novelty-grade |
 | Count invariance across all pure equilibria (P5-inv) | **SURVIVES (conditional on anonymity — see A1)** | `equilibrium_count_unique` machine-checked; `verify_equilibria.py` E2/E3 (20,000 instances) plus an independent re-test (8,000, different seed and code); E6 control shows antitonicity of `Delta` is load-bearing, so it is not a tautology. Stronger than the original P5 claim, which only constructed the assortative equilibrium |
 | Identity pinning by the wealth ordering | **WITHDRAWN — was false** | Counterexample in `SOUNDNESS_20260902.md` Finding 1; multiplicity in 17–22% of instances. Holds only under `kappa_(k*+1) > Delta(k*-1)` (`members_below_kstar`) |
-| One-sided rank condition on two sorted profiles, with non-dispersive spreads inside its scope | **SURVIVES, narrower than first written** | Proposition (tail condition), machine-checked and independently recompiled; pivot-spread shown to be a special case; explicit multi-crossing witness plus 3000 randomised spreads (977 multi-crossing, 2276 genuine MPS), 0 violations. **Does not remove the scope caveat** — MPS does not imply the tail condition (37/4,000 genuine MPS fail it with `k*` strictly falling, F2), and mean-preservation is not used in the proof at all (F3). Weakens the caveat and relocates it to an endogenous object |
+| Margin condition on two sorted profiles, with non-dispersive changes inside its scope, and its band (revised 7 Oct 2026, L5; was "One-sided rank condition on two sorted profiles") | **SURVIVES, narrower than first written; the sharpness claim WITHDRAWN** | Proposition (margin condition) in `lean/mathlib/Spreads.lean`. The statements quantify over arbitrary sorted profiles, so the displacement may cross zero freely away from the two ranks read, and mean-preservation is not used (F3). **The scope caveat stands and is now exact.** The condition is silent exactly on the band `d_{k*} < 0 < d_{k*+1}` (1-indexed; `branch_of_not_band`). Dispersive changes never reach the band (`not_band_of_single_crossing`, `pivot_single_crossing`). Inside the band two mean-preserving spreads with the same signs at every rank move `k*` in opposite directions, exactly, for every small `mu > 0` (`mps_band_both_directions_positive`). A total-preserving majorizing change can lower `k*` with the marginal entrant above the mean (`mps_lowers_count`), so the mean cannot replace the pivot. The 2 Sep claim that the rank-by-rank condition "is the whole of what the sign pattern supports" was false and is withdrawn. The sampled grounds (R1, R1-SCOPE, `verify_tailband.py`) are illustrations, and the band frequencies describe the superseded band |
 | Endogenous marginal agent in the pivot rule | **SURVIVES** | Proposition (endogenous margin), machine-checked and independently recompiled (axiom-free); 20,000 economies with `k*` recomputed on both sides, 0 violations; control at the wrong index gives 154/2744, so the hypothesis is not slack. Differs from CL's fixed `theta`; framing settled under F7 — offered as a consequence of the extensive-margin formulation, not as a stronger theorem than theirs |
 | P7 uniform cap | **DOES NOT SURVIVE** | `Accounting.lean`: FJL's bound and P7's cap are instances of one lemma |
 | P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
@@ -1248,7 +1269,9 @@ be claimed as novel.
     falls in 130, with two displayed witnesses of the same sign class and
     opposite conclusions. **One such pair refutes any purported strengthening,
     so this is established, not sampled.** The tail condition is the whole of
-    what the displacement signs support.
+    what the displacement signs support. **CORRECTED 7 Oct 2026 (L5): false.**
+    The margin condition reads two ranks and still settles the direction, so
+    the band is `d_{k*} < 0 < d_{k*+1}`, not `L < k* <= M`.
   - **A number NOT to quote.** The band covers 47.2% of admissible spreads
     under the unstructured generator — but that describes the generator, where
     multi-crossing is typical by construction. Under a linear MPS and under a

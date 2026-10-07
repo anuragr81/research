@@ -263,10 +263,12 @@ count as the length of the prefix of entrants.
 |---|---|
 | `enters_down`, `count_ge_of_enters`, `count_le_of_fails` | Entrants form a prefix, and the count is bounded by which ranks enter |
 | `margin_rise`, `margin_fall` | If the marginal entrant's wealth does not fall, the count does not fall; if the first outsider's wealth does not rise, the count does not rise |
-| `tail_rise`, `tail_fall` | The rank-by-rank tail condition of `PROOFS.tex` as a special case |
+| `tail_rise`, `tail_fall` | The rank-by-rank tail condition of earlier drafts of `PROOFS.tex` as a special case |
 | `IsPivotSpread`, `pivot_rise`, `pivot_fall`, `spread_isPivot` | P9-gen and P9. The direction is set by the marginal entrant's position against the pivot, and the linear spread with `λ ≥ 1` is a pivot-spread |
 | `InBand`, `branch_of_not_band`, `not_band_of_single_crossing`, `pivot_single_crossing` | The direction is open only when the displacement is negative at the margin and positive at the first outsider, which a pivot-spread never produces |
 | `witness_counts`, `witness_signs`, `band_both_directions`, `band_both_directions_positive` | Inside the band both directions occur, with the same signs, at the benchmark gains and for every small `μ > 0` |
+| `mps_lowers_count` | A change that keeps the total and majorizes the profile lowers the count with the marginal entrant above the mean, so the mean cannot replace the pivot |
+| `mPre`, `mUp`, `mDown`, `antitone_of_four`, `mps_band_signs`, `mps_witness_counts`, `mps_band_both_directions`, `mps_band_both_directions_positive` | Four challengers. Two changes that keep the total and majorize the profile, with the same signs at every rank, put the margin in the band and move the count up and down, at the benchmark gains and for every small `μ > 0` |
 
 ## What is still assumed
 

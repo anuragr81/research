@@ -315,22 +315,23 @@ P9 \S\ref{prop:P9} & MPS sign flips exactly at $\bar w=\bar\mu$ (full effect) &
 P9-gen \S\ref{prop:P9gen} & Sign rule for arbitrary pivot-spreads (pivot $x_0$, not the mean) &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{cost\_falls\_above\_pivot}, \texttt{cost\_rises\_below\_pivot}, \texttt{order\_preserved}; composed into \texttt{entry\_preserved\_above\_pivot}, \texttt{nonentry\_preserved\_below\_pivot}, \texttt{entry\_set\_grows\_above\_pivot}); \file{checks/verify\_p9gen.py} (4 families, 0 violations; 729 control violations) \\[4pt]
-R1 \S\ref{prop:tailprop} & One-sided rank condition on two sorted profiles suffices; pivot-spread is a special case &
+R1 \S\ref{prop:tailprop} & Margin condition on two sorted profiles; the marginal entrant's rank settles the rise branch and the first outsider's rank the fall branch; the rank-by-rank form and pivot-spreads are special cases; the mean cannot replace the pivot &
   \status{PROVED} & \tier{L} &
-  \file{lean/EntryContest.lean} (\texttt{entry\_preserved\_of\_up\_to\_margin}, \texttt{nonentry\_preserved\_of\_beyond\_margin}, \texttt{downFromMargin\_imp\_beyondMargin}, \texttt{pivot\_imp\_upToMargin}, \texttt{pivot\_imp\_downFromMargin}); \file{checks/verify\_p9gen.py} (R1: explicit non-pivot witness; 3000 spreads, 977 multi-crossing, 2276 genuine MPS, 0 violations; R1-SCOPE: MPS alone insufficient, 37/4000; R1-WEAK: margin unconstrained, 4000 cases, control 362; R1-FREE: mean-preservation not assumed, 4000 cases) \\[4pt]
-BAND \S\ref{prop:band} & Coverage is exactly $k^*\le L$ or $M<k^*$; every
-  margin is covered iff the spread is dispersive; and inside the band the
-  displacement signs determine nothing &
-  \status{PROVED} & \tier{L}\,/\,\tier{N} &
-  Coverage criterion \tier{L}: \file{lean/EntryContest.lean}
-  (\texttt{band\_empty\_iff}, \texttt{band\_nonempty\_of\_lt}; both
-  axiom-free). Faithfulness of the $L/M$ form and sharpness \tier{N}:
-  \file{checks/verify\_tailband.py} (T1, $20{,}000$, $0$ mismatches; T2
-  equivalence with single crossing; T3 $20{,}889$ covered instances, $0$
-  violations, incl.\ $1982/1982$ where both branches force $k^*$ fixed; T4
-  two opposite-direction witnesses inside the band --- a refutation, hence
-  established; T5 band frequency $47.2\%$ unstructured vs $0.0\%$ dispersive).
-  Resolves open item~\ref{item:tailopen}. \\[4pt]
+  \file{lean/mathlib/Spreads.lean} (\texttt{margin\_rise}, \texttt{margin\_fall}, \texttt{tail\_rise}, \texttt{tail\_fall}, \texttt{pivot\_rise}, \texttt{pivot\_fall}, \texttt{mps\_lowers\_count}); \file{lean/EntryContest.lean} (\texttt{entry\_preserved\_of\_up\_to\_margin}, \texttt{nonentry\_preserved\_of\_beyond\_margin}, rank-by-rank form); \file{checks/verify\_p9gen.py} (R1, R1-SCOPE, R1-WEAK, R1-FREE, illustration) \\[4pt]
+BAND \S\ref{prop:band} & The margin condition is silent only on the band
+  $d_{k^*}<0<d_{k^*+1}$; dispersive changes never reach the band; inside the
+  band the displacement signs determine nothing, for mean-preserving spreads
+  too &
+  \status{PROVED} & \tier{L} &
+  \file{lean/mathlib/Spreads.lean} (\texttt{branch\_of\_not\_band},
+  \texttt{not\_band\_of\_single\_crossing}, \texttt{pivot\_single\_crossing},
+  \texttt{mps\_band\_signs}, \texttt{mps\_witness\_counts},
+  \texttt{mps\_band\_both\_directions},
+  \texttt{mps\_band\_both\_directions\_positive}, \texttt{band\_both\_directions},
+  \texttt{band\_both\_directions\_positive}); \file{lean/EntryContest.lean}
+  (\texttt{band\_empty\_iff}, \texttt{band\_nonempty\_of\_lt}, superseded
+  $L/M$ band); \file{checks/verify\_tailband.py} (T1--T5, superseded band,
+  illustration). Resolves open item~\ref{item:tailopen}. \\[4pt]
 P9-str \S\ref{prop:P9strict} & Strong spread $\Rightarrow$ $k^*$ falls strictly &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{linSpread\_strict\_anti\_in\_lam}, \texttt{linSpread\_unbounded\_below}, \texttt{entry\_ceiling\_of\_marginal\_exit}, \texttt{strict\_drop\_of\_marginal\_exit}); \file{checks/verify\_sympy.py} (S16 $\kappa\to\infty$, S17 strict monotonicity); \file{checks/verify\_p9gen.py} (P9-STRICT, 400 economies) \\[4pt]
@@ -491,8 +492,7 @@ takes burden-monotonicity as the hypothesis
 \texttt{hkap}~$:\forall a\,b,\ a\le b\to\kappa(b)\le\kappa(a)$ directly, and
 the symbol $u$ does not occur in the file at all. So the restatement above
 closes a gap between the prose and the formal layer rather than changing what
-was proved --- the same direction as the tail-condition correction, with the
-prose having claimed \emph{less} than had been established.
+was proved. The prose had claimed \emph{less} than had been established.
 
 \begin{claim}[Burden-monotonicity is strictly weaker than concavity]
 \label{claim:bmweak}
@@ -676,10 +676,13 @@ pivot & $x_0$ & The wealth at which the displacement changes sign. \\
 pivot-spread & $T$ with $w\ge x_0\Rightarrow Tw\ge w$ and
   $w\le x_0\Rightarrow Tw\le w$ & A spread expanding on both sides of a
   single pivot; the dispersive case. \\
-tail condition & $w'_{(j)}\ge w_{(j)}$ for $j\le k^*$; or
-  $w'_{(j)}\le w_{(j)}$ for $j>k^*$ & The one-sided rank hypothesis of
-  Proposition~\ref{prop:tailprop}; implied by, but weaker than, the pivot
-  hypothesis. \\
+margin condition & $w'_{(k^*)}\ge w_{(k^*)}$; or
+  $w'_{(k^*+1)}\le w_{(k^*+1)}$ & The two-rank hypothesis of
+  Proposition~\ref{prop:tailprop}, read at the marginal entrant and the first
+  outsider; implied by the pivot hypothesis and by the rank-by-rank condition
+  of earlier drafts. \\
+band & $d_{k^*}<0<d_{k^*+1}$ & The margins on which the margin condition is
+  silent; \S\ref{prop:band}. \\
 endogenous margin & $k^*$ moving with the profile & The marginal entrant is
   a different agent before and after; Proposition~\ref{prop:endogenous}. \\[4pt]
 \multicolumn{3}{@{}l}{\emph{Aggregates}}\\[2pt]
@@ -699,7 +702,7 @@ resources ($c$): only the first varies with wealth, and only the second is
 what society gives up. \emph{Count invariance} versus \emph{identity
 multiplicity}: the first holds, the second is real, and every comparative
 static below is about the count for that reason. \emph{Spread} versus
-\emph{tail condition}: the propositions are stated on the second, and the
+\emph{margin condition}: the propositions are stated on the second, and the
 first is what they are applied to.
 
 \section{Proofs}
@@ -1364,172 +1367,155 @@ marginal index is the load-bearing comparison point. Machine-checked as
 $k^*$ recomputed on both sides over $20\,000$ economies, $0$ violations, the
 count actually moving in $393$ of them.
 
-\subsubsection{R1: a one-sided tail condition, and the spreads it covers}
+\subsubsection{R1: the margin condition, and the spreads it covers}
 \label{prop:tail}
 
-Theorem~\ref{thm:P9gen} assumes $T$ is a pivot-spread: the displacement
-changes sign exactly once. That is the dispersive case. A general
-mean-preserving spread need not be dispersive --- its quantile difference may
-cross zero arbitrarily often. The pivot hypothesis is nonetheless stronger
-than the argument requires.
+Theorem~\ref{thm:P9gen} assumes $T$ is a pivot-spread, so the displacement
+changes sign at most once, which is the dispersive case. A general
+mean-preserving spread need not be dispersive, since its quantile difference may
+cross zero any number of times. The pivot hypothesis is stronger than the
+argument requires, and so is the rank-by-rank condition an earlier version of
+this section stated.
 
-Compare the two \emph{sorted} profiles rank by rank. This is always
-available: the rank-wise comparison of two distributions is their quantile
-coupling, $w'_{(j)}-w_{(j)}=\Lambda_\beta^{-1}(r_j)-\Lambda_\alpha^{-1}(r_j)$,
-and it is monotone by construction, so no assumption is needed to obtain it.
+Compare the two \emph{sorted} profiles rank by rank. The rank-wise comparison of
+two distributions is their quantile coupling,
+$w'_{(j)}-w_{(j)}=\Lambda_\beta^{-1}(r_j)-\Lambda_\alpha^{-1}(r_j)$, so no
+assumption is needed to obtain it.
 
-\begin{proposition}[tail condition]
+\begin{proposition}[margin condition]
 \label{prop:tailprop}
-Let $w$ and $w'$ be any two wealth profiles, each sorted descending, and let
-$k^*$ and $k^{*\prime}$ be the entry counts they induce through
-\eqref{eq:entry}.
+Let $w$ and $w'$ be two wealth profiles, each sorted descending, and let $k^*$
+and $k^{*\prime}$ be the entry counts they induce through \eqref{eq:entry}, a
+challenger whose wealth is at or below $c$ not entering.
 \begin{enumerate}
-\item If $w'_{(j)}\ge w_{(j)}$ for every $j\le k^*$, then $k^{*\prime}\ge k^*$.
-\item If $w'_{(j)}\le w_{(j)}$ for every $j>k^*$, then $k^{*\prime}\le k^*$.
+\item[(i)] If $w'_{(k^*)}\ge w_{(k^*)}$, then $k^{*\prime}\ge k^*$.
+\item[(ii)] If $w'_{(k^*+1)}\le w_{(k^*+1)}$, then $k^{*\prime}\le k^*$.
 \end{enumerate}
-Nothing is assumed about the displacement on the other side of the margin,
-which may therefore change sign any number of times. In (ii) nothing is
-assumed at the margin either: rank $k^*$ is the marginal \emph{entrant}, so
-her wealth may move in either direction.
+Nothing is assumed about any rank other than the marginal entrant in (i) and
+the first outsider in (ii).
 \end{proposition}
 
-The hypotheses are worth reading for what they omit. Two properties are used
-and no others: $\kappa$ is non-increasing in wealth, which is concavity and
-nothing more (\S\ref{sec:primitives}), and both profiles are sorted, so that
-Lemma~\ref{lem:crossing} defines each count. There is no requirement that
-$w'$ be obtained from $w$ by a spread, by a mean-preserving transformation,
-or by any transformation at all --- in particular
-$\sum_j\bigl(w'_{(j)}-w_{(j)}\bigr)=0$ is nowhere used, and the two profiles
-need bear no relation to each other beyond the rank-wise inequality assumed.
-The Lean development has always been at this generality
-(\texttt{entry\_preserved\_of\_up\_to\_margin} quantifies over arbitrary
-\texttt{w w'}); what is corrected here is the surrounding statement, which
-described the result as being about spreads.
-
-Mean-preserving spreads are the case of economic interest, and everything
-below applies the proposition to them. But they are the application, not the
-hypothesis, and the distinction matters for what may be claimed: the
-proposition is not a comparative-static result about $\Lambda$, it is a
-monotonicity result about a threshold statistic, which is then \emph{used}
-to obtain comparative statics whenever a spread happens to satisfy its
-condition.
-
 \begin{proof}
-(i) For $j\le k^*$, $\kappa$ decreasing gives $\kappa(w'_{(j)})\le
-\kappa(w_{(j)})\le\Delta(j-1)$, so \eqref{eq:entry} still holds at every such
-$j$, and the count cannot fall. (ii) For $j>k^*$ the agent is an outsider, so
-$\kappa(w_{(j)})>\Delta(j-1)$ by the definition of $k^*$; the hypothesis
-gives $\kappa(w'_{(j)})\ge\kappa(w_{(j)})$, so \eqref{eq:entry} still fails
-and the count cannot rise. Note that the argument is available only at
-$j>k^*$: at $j=k^*$ the entry condition \emph{holds}, which is what makes
-that agent the margin, so no conclusion is drawn there and none is needed.
+(i) The marginal entrant has $c<w_{(k^*)}\le w'_{(k^*)}$, so
+$\kappa(w'_{(k^*)})\le\kappa(w_{(k^*)})\le\Delta(k^*-1)$. For $j\le k^*$, sorting
+gives $w'_{(j)}\ge w'_{(k^*)}>c$, so
+$\kappa(w'_{(j)})\le\kappa(w'_{(k^*)})\le\Delta(k^*-1)\le\Delta(j-1)$, and every
+rank up to $k^*$ enters after the change. (ii) If $k^*=Q$, then $k^{*\prime}\le Q=k^*$. Otherwise rank
+$k^*+1$ fails before the change. If $w'_{(k^*+1)}>c$, then $c<w'_{(k^*+1)}\le w_{(k^*+1)}$ and
+$\kappa(w'_{(k^*+1)})\ge\kappa(w_{(k^*+1)})>\Delta(k^*)$, so rank $k^*+1$ fails
+after the change too, and by the prefix property no rank beyond it enters.
 \end{proof}
 
-The pivot hypothesis implies the tail condition
-(\texttt{pivot\_imp\_upToMargin}, \texttt{pivot\_imp\_downFromMargin}), so
-Theorem~\ref{thm:P9gen} and Proposition~\ref{prop:endogenous} are special
-cases. The converse fails, which is the content: an explicit witness with
-$Q=8$, displacement $(0.02,0.02,0.02,0.30,-0.20,0.15,-0.10,\cdot)$ closed to
-sum zero, is mean-preserving, keeps the profile sorted, changes sign three
-times --- so it is \emph{not} a pivot-spread --- satisfies the tail
-condition, and moves $k^*$ from $3$ to $4$. Randomised: $3000$ spreads, of
-which $977$ change sign at least twice and $2276$ are mean-preserving spreads
-in the second-order-dominance sense rather than merely mean-preserving
-perturbations; no violations (\file{checks/verify\_p9gen.py}, R1).
-Machine-checked as \texttt{entry\_preserved\_of\_up\_to\_margin} and
-\texttt{nonentry\_preserved\_of\_beyond\_margin}, the latter on the
-strict-outsider hypothesis stated above;
-\texttt{downFromMargin\_imp\_beyondMargin} records that the earlier
-formulation, which also signed the displacement at the margin, assumed more
-than the conclusion needs. Checked numerically with the margin and every
-inframarginal rank left free to move either way: $4000$ cases, $0$
-violations, against a control in which no rank is signed and $k^*$ rises in
-$362$ of $4000$ (\file{checks/verify\_p9gen.py}, R1-WEAK).
+The reduction to two ranks comes from the prefix structure of the new profile.
+Entry at the marginal entrant's rank carries to every richer rank, and failure
+at the first outsider's rank caps the count. The rank-by-rank condition of the
+earlier version, $w'_{(j)}\ge w_{(j)}$ for every $j\le k^*$ or
+$w'_{(j)}\le w_{(j)}$ for every $j>k^*$, is a special case, and so are
+Theorem~\ref{thm:P9gen} and Proposition~\ref{prop:endogenous}, with the
+marginal entrant at or above the pivot in the rise branch and at or below it in
+the fall branch. Machine-checked as \texttt{margin\_rise} and
+\texttt{margin\_fall}, with \texttt{tail\_rise} and \texttt{tail\_fall} for the
+rank-by-rank form and \texttt{pivot\_rise} and \texttt{pivot\_fall} for
+pivot-spreads (\file{lean/mathlib/Spreads.lean}). Each statement quantifies
+over arbitrary profiles $w$ and $w'$, so the displacement may cross zero any
+number of times away from the two ranks the statement reads.
 
-The condition is a genuine hypothesis and not a restatement of
-mean-preservation, in both directions. It is not implied by it: among $4000$
-sampled spreads that are mean-preserving in the second-order-dominance sense,
-$37$ have a quantile difference that turns negative at some rank at or above
-the margin, and in those cases $k^*$ \emph{falls} --- witness $Q=10$,
-$k^*=8\to7$ (\file{checks/verify\_p9gen.py}, R1-SCOPE). Nor does it imply
-mean-preservation: over $4000$ profile pairs satisfying the condition and
-deliberately \emph{not} mean-preserving, the count never falls
-(\file{checks/verify\_p9gen.py}, R1-FREE), confirming on the checked layer
-what the proof already shows --- that
-$\sum_j\bigl(w'_{(j)}-w_{(j)}\bigr)=0$ is not among the hypotheses. Which
-mean-preserving spreads satisfy the condition is settled in
-\S\ref{prop:band} below, and the witness above is what makes that question
-non-vacuous.
+The hypotheses are worth reading for what they omit. Branch (i) uses three
+properties and no others. $\kappa$ is non-increasing in wealth above $c$, which
+is burden-monotonicity (\S\ref{sec:primitives}), $\Delta$ is non-increasing
+(Corollary~\ref{cor:monotone}), and the new profile is sorted. Branch (ii)
+uses the first property alone. There is no
+requirement that $w'$ be obtained from $w$ by a spread or by any transformation
+at all, and $\sum_j\bigl(w'_{(j)}-w_{(j)}\bigr)=0$ is nowhere used. The
+proposition is therefore not a comparative-static result about $\Lambda$ but a
+monotonicity result about a threshold statistic, which is then \emph{used} to
+obtain comparative statics whenever a change of profile satisfies its
+condition.
 
-Why this works where the assignment literature needs more machinery: $k^*$ is
-a threshold statistic, not an integral. \citet{Suen2007} and
+The pivot cannot be replaced by the mean. Take $c=1$, CRRA utility with
+$\gamma=2$, so that $\kappa(w)=1/(w-1)-1/w$, and the gains $\Delta(m)=1/(m+2)$
+of the benchmark of \S\ref{prop:P6} with $V=1$. The profiles $(2.9,2.8,2.0)$
+and $(3.6,2.2,1.9)$ have the same total, and the second majorizes the first.
+The marginal entrant lies above the mean before the change, and the count falls
+from $2$ to $1$ (\texttt{mps\_lowers\_count}). The marginal entrant's wealth
+falls, so branch (i) does not apply. The first outsider's wealth falls too, so
+branch (ii) applies, and branch (ii) allows the fall. An earlier version of
+this paragraph rested the point on sampling (\file{checks/verify\_p9gen.py},
+R1-SCOPE), which remains as an illustration.
+
+The assignment literature needs more machinery than this for a reason. The
+entry count $k^*$ is a threshold statistic, and the aggregates of the
+assignment literature are integrals. \citet{Suen2007} and
 \citet{CostrellLoury2004} sign smooth aggregates and must therefore control
 the quantile difference at every rank, which is what forces integration by
 parts and a log-concavity or monotone-weight condition. The entry count reads
-the quantile function only down to the margin, so one-sided information
-suffices and no such condition is needed.
+the quantile difference at two ranks, the marginal entrant and the first
+outsider, so no condition on the rest of the quantile function is needed.
 
-\subsubsection{The band: which margins the tail condition covers, and why it
-cannot be weakened}
+\subsubsection{The band: which margins the margin condition covers}
 \label{prop:band}
 
 Write the rank-by-rank displacement of the two sorted profiles as
-$d_j=w'_{(j)}-w_{(j)}$, rank $1$ richest, and set
+$d_j=w'_{(j)}-w_{(j)}$, rank $1$ richest. The margin condition settles the
+direction of $k^*$ unless
 \[
-  L=\min\{j: d_j<0\},\qquad M=\max\{j: d_j>0\},
+  d_{k^*}<0<d_{k^*+1},
 \]
-the richest rank whose wealth falls and the poorest rank whose wealth rises.
-The two hypotheses of Proposition~\ref{prop:tailprop} are then exactly
-$k^*\le L$ (rise branch) and $M<k^*$ (fall branch), an equivalence verified
-over $20\,000$ instances with no mismatch (\file{checks/verify\_tailband.py},
-T1). The proposition is therefore silent precisely on margins with
-$L<k^*\le M$. Call that range the \emph{band}.
+\begin{sloppypar}\noindent
+that is, unless the marginal entrant becomes poorer while the first outsider
+becomes richer (\texttt{branch\_of\_not\_band}). A margin with this property
+lies in the \emph{band}. In the Lean development the ranks are counted from
+$0$, so the band reads $d(k-1)<0<d(k)$ there (\texttt{InBand}).
+\end{sloppypar}
 
-Two things follow, and together they close the question.
+\begin{sloppypar}
+\paragraph{Dispersive changes leave no margin in the band.} If $d_j>0$ implies
+$d_i\ge0$ for every $i<j$, which is single crossing from positive to negative
+down the ranks, no margin lies in the band
+(\texttt{not\_band\_of\_single\_crossing}). A pivot-spread has this property,
+since $d_j>0$ forces $w_{(j)}>x_0$ and then $w_{(i)}\ge w_{(j)}>x_0$ for $i<j$
+(\texttt{pivot\_single\_crossing}). So the rule holds at every margin for every
+pivot-spread.
+\end{sloppypar}
 
-\paragraph{What dispersiveness buys, exactly.} Every margin is covered if and
-only if $M\le L$ --- that is, if and only if no rank that rises is poorer than
-a rank that falls, which is precisely single crossing of the displacement.
-This is machine-checked: \obj{lean/EntryContest.lean}{band\_empty\_iff},
-axiom-free, together with the contrapositive
-\obj{lean/EntryContest.lean}{band\_nonempty\_of\_lt}. So a pivot-spread is not
-a convenient special case of the tail condition; it is \emph{the} class on
-which the rule holds at every margin, and the band is the exact price of
-leaving it.
+\paragraph{Inside the band the signs settle nothing, for mean-preserving
+spreads too.} With $Q=4$, the same $\kappa$ and the same benchmark gains, the
+profile $(4,2.8,2.2,2)$ has $k^*=2$. The profiles $(4.1,2.7,2.6,1.6)$ and
+$(4.6,2.25,2.25,1.9)$ have the same total as the original profile, and each
+majorizes it. Both displacements have the signs $(+,-,+,-)$ at every rank, both
+put the margin in the band, and the first moves the count to $3$ while the
+second moves the count to $1$ (\texttt{mps\_band\_signs},
+\texttt{mps\_band\_both\_directions}). The three counts hold for every gain
+schedule in a box around the benchmark gains, and the benchmark gains lie
+strictly inside that box (\texttt{mps\_witness\_counts}). The model's gains
+converge to the benchmark gains as $\mu\to0$, so the same counts hold for every
+small $\mu>0$ with $r$ and $s$ uniform and an investing incumbent
+(\texttt{mps\_band\_both\_directions\_positive}). No rule that uses only the
+signs of the displacement can therefore sign the change inside the band, and
+mean-preservation does not keep a margin out of the band. A second pair with
+$Q=3$, whose changes do not preserve the total, gives the same conclusion with
+the signs $(0,-,+)$ (\texttt{band\_both\_directions},
+\texttt{band\_both\_directions\_positive}).
 
-\paragraph{The hypothesis is sharp.} Inside the band both directions occur.
-Over $40\,000$ genuine mean-preserving spreads the rule is never violated
-where it applies --- $20\,889$ covered instances, $0$ violations, including
-$1\,982$ in which \emph{both} branches apply and the rule accordingly forces
-$k^*$ to be unchanged, which it is in every one. Inside the band, by contrast,
-$k^*$ rises in $4\,785$ cases and falls in $130$
-(\file{checks/verify\_tailband.py}, T3--T4). Two witnesses with the same
-displacement-sign class and opposite conclusions are displayed there. Since a
-single such pair refutes any purported strengthening, this is established
-rather than sampled: \textbf{no conclusion about the direction of $k^*$ can be
-drawn from the displacement signs alone once the margin lies in the band.}
-The tail condition is not a convenient sufficient condition awaiting
-improvement; it is the whole of what the sign pattern supports.
+\begin{sloppypar}
+\paragraph{The earlier band.} An earlier version of this section defined the
+band through $L$, the richest rank whose wealth falls, and $M$, the poorest rank
+whose wealth rises, and reported sampled frequencies for it
+(\file{checks/verify\_tailband.py}, T1--T5). That band belongs to the
+rank-by-rank condition and is superseded, and so are the frequencies. The
+coverage criterion of the earlier band remains machine-checked as
+\obj{lean/EntryContest.lean}{band\_empty\_iff}. The sentence of that
+version saying the rank-by-rank condition was the whole of what the sign pattern
+supports was wrong, since the margin condition is weaker and still settles the
+direction.
+\end{sloppypar}
 
-\paragraph{A caution about how large the band is.} It is tempting to quote a
-frequency, and misleading to do so. Under the unstructured generator that
-produced the R1-SCOPE witness --- displacements drawn independently and then
-balanced --- $47.2\%$ of admissible spreads leave the margin in the band. That
-number describes the generator, not the economics: multi-crossing is typical
-by construction there. Under a linear mean-preserving spread and under a
-mean-preserving increase in the dispersion of a lognormal, the figure is
-$0.0\%$ in $8\,000$ instances each, since both families are dispersive and
-Lemma \obj{lean/EntryContest.lean}{band\_empty\_iff} then applies at every
-margin (T5). The honest statement is the conditional one: the band is empty
-for dispersive spreads and can be substantial for spreads whose quantile
-difference oscillates, and no single frequency should be attached to it.
-
-\paragraph{What remains open.} Only this: whether some statistic of the spread
-\emph{other} than the displacement signs --- its magnitudes, or a weighted
-functional of the quantile difference of the kind
-\citet{CostrellLoury2004} use --- predicts the direction of $k^*$ inside the
-band. The present result says the signs do not, and says nothing about
-whether something else might.
+\paragraph{What remains open.} One question remains open. Some statistic of
+the change other than its signs might predict the direction of $k^*$ inside the
+band, for instance its magnitudes or a weighted functional of the quantile
+difference of the kind \citet{CostrellLoury2004} use. The witnesses above say
+that the signs do not, and the witnesses say nothing about whether another
+statistic might.
 
 \subsection{P9 strictness}
 \label{prop:P9strict}
@@ -1661,9 +1647,10 @@ once, the leading case being the linear mean-preserving spread
 $w\mapsto\bar\mu+\lambda(w-\bar\mu)$ of Theorem~\ref{thm:P9} ---
 \emph{widens} entry when the marginal competitor is richer than the pivot and
 \emph{shrinks} it when poorer (Theorem~\ref{thm:P9gen}), strictly so under the
-boundary condition of Proposition~\ref{prop:strict}. What the proof actually
-uses is weaker still: a one-sided condition on the quantile difference down to
-the margin, with mean-preservation nowhere among the hypotheses
+boundary condition of Proposition~\ref{prop:strict}. What the proof uses is
+weaker still. The rise branch reads the quantile difference at the marginal
+entrant alone, the fall branch reads the quantile difference at the first
+outsider alone, and mean-preservation is nowhere among the hypotheses
 (Proposition~\ref{prop:tailprop}). Within that class the rule holds globally,
 distribution-free, and under burden-monotonicity of $u$ alone
 (\eqref{eq:burdenmono}; strict concavity is sufficient but not necessary,
@@ -1671,18 +1658,18 @@ Claim~\ref{claim:bmweak}).
 
 That class is a genuine restriction, and it belongs with the claim rather than
 only with the scope discussion at the end of this section. A
-Rothschild--Stiglitz mean-preserving spread need \emph{not} be dispersive: its
-quantile difference may cross zero any number of times, and $37$ of $4000$
-sampled genuine mean-preserving spreads fail the tail condition with $k^*$
-moving against the rule (\S\ref{prop:tail},
-\file{checks/verify\_p9gen.py}~R1-SCOPE). So the sign rule is a theorem about
-dispersive spreads and about the tail condition, and not about mean-preserving
-spreads as such; it should not be quoted in the latter form. Which spreads
-satisfy the condition is settled in \S\ref{prop:band}: coverage is exactly
-$k^*\le L$ or $M<k^*$ in the notation there, every margin is covered if and
-only if the spread is dispersive, and --- the substantive half --- inside the
-band the displacement signs determine nothing, so the hypothesis is
-\emph{sharp} rather than merely sufficient.
+Rothschild--Stiglitz mean-preserving spread need \emph{not} be dispersive, since
+its quantile difference may cross zero any number of times. With the marginal
+entrant above the mean, a change that preserves the total and majorizes the
+original profile can lower $k^*$ (\S\ref{prop:tail}, \texttt{mps\_lowers\_count}),
+so the rule stated with the mean in place of the pivot fails for such changes.
+The sign rule is therefore a theorem about dispersive spreads and about the
+margin condition, and not about mean-preserving spreads as such, and the rule
+should not be quoted in the latter form. Which changes the margin condition
+covers is settled in \S\ref{prop:band}. The condition is silent exactly when
+the marginal entrant becomes poorer and the first outsider becomes richer.
+Dispersive changes never reach that band, and inside the band the displacement
+signs determine nothing, for mean-preserving spreads as for other changes.
 
 The economic content is a reconciliation. The received result --- inequality
 dampens status competition --- goes back to
@@ -1790,16 +1777,18 @@ order-statistic kernel of \citet{RyvkinDrugov2020}, whose message --- that no
 competitor-number prediction is universal across noise distributions --- is
 theirs in print; what is added is the extensive-margin instance that refutes
 the referee's conjecture. And the scope of the central claim is stated with
-it. The rule is proved under a one-sided condition on the quantile difference
-down to the margin (Proposition~\ref{prop:tailprop}); pivot-spreads ---
-equivalently, dispersive shifts with a crossing --- are the special case in
-which that condition holds at every margin. A mean-preserving spread is
-covered when, and only when, its quantile difference is signed down to the
-margin; it may cross freely below. That is a restriction and not a
-formality --- mean-preservation does not imply it, and spreads violating it
-can move $k^*$ the other way (\S\ref{prop:tail}). What is not settled is a
-characterisation of which spreads have the property (\S\ref{sec:open},
-item~\ref{item:tailopen}).
+it. The rule is proved under the margin condition of
+Proposition~\ref{prop:tailprop}, which reads the quantile difference at the
+marginal entrant for the rise branch and at the first outsider for the fall
+branch. Pivot-spreads are the special case in which one branch applies at every
+margin. A mean-preserving spread is covered when the displacement is
+non-negative at the marginal entrant or non-positive at the first outsider, and
+the displacement may cross zero freely at the other ranks. The condition is a
+restriction and not a formality, since two mean-preserving spreads with the
+same displacement signs at every rank can put the margin in the band and move
+$k^*$ in opposite directions (\S\ref{prop:band}). What is not settled is
+whether some statistic of the change other than its signs predicts the
+direction inside the band (\S\ref{sec:open}, item~\ref{item:tailopen}).
 
 \section{How this addresses the referee reports}
 
@@ -1865,22 +1854,24 @@ What genuinely remains:
   a smooth \emph{aggregate} under a general spread and therefore need
   integration by parts and, in Suen's case, log-concavity of $1-F$. But
   $k^*$ is not an aggregate: it is a threshold statistic that reads the
-  quantile function only down to the margin. The recorded ``count versus
+  quantile function at the marginal entrant and the first outsider. The recorded ``count versus
   aggregate'' obstacle was real, and it runs the opposite way --- the count
   is \emph{easier}. What remains genuinely open is narrower.
 
-\item \textbf{When does the tail condition hold? --- resolved, and the
-  answer is that the hypothesis is sharp.}
+\item \textbf{When does the margin condition hold? Resolved, with a
+  correction.}
   \label{item:tailopen}
   This item previously asked for a characterisation of the mean-preserving
-  spreads satisfying Proposition~\ref{prop:tailprop}. That characterisation
-  turns out to be exact but nearly definitional, and the substantive question
-  --- whether the hypothesis could be weakened --- has a negative answer. Both
-  are established in \S\ref{prop:band} and
-  \file{checks/verify\_tailband.py}. What remains open is narrower and is
-  stated there: whether some statistic of the spread \emph{other} than the
-  displacement signs predicts the direction inside the band. That is where the
-  \citet{CostrellLoury2004} monotone-weight technique would belong if an
+  spreads satisfying Proposition~\ref{prop:tailprop}, and an earlier answer
+  called the rank-by-rank condition sharp. The rank-by-rank condition was not
+  sharp, since the margin condition reads only two ranks and still settles the
+  direction. The margin condition is silent exactly on the band
+  $d_{k^*}<0<d_{k^*+1}$, and inside the band the displacement signs determine
+  nothing, for mean-preserving spreads as for other changes. Both facts are
+  established in \S\ref{prop:band} and \file{lean/mathlib/Spreads.lean}. What
+  remains open is narrower. Some statistic of the change other than its signs
+  might predict the direction inside the band, and the
+  \citet{CostrellLoury2004} monotone-weight technique would belong there if an
   aggregate version were wanted later.
 \item \textbf{Strictness away from the linear family.}
   Proposition~\ref{prop:strict} is stated for $T_\lambda$ with

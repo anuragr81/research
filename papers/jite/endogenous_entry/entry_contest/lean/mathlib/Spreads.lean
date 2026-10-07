@@ -305,6 +305,208 @@ theorem band_both_directions_positive :
     (by rw [e μ 1 (by norm_num)]; exact a1.le) (by rw [e μ 1 (by norm_num)]; exact a1')
     (by rw [e μ 2 (by norm_num)]; exact a2.le) (by rw [e μ 2 (by norm_num)]; exact a2')
 
+/-- A profile `(2.9, 2.8, 2.0)` and a mean-preserving spread of it, `(3.6, 2.2, 1.9)`. -/
+noncomputable def wMpsPre (j : ℕ) : ℝ :=
+  if j = 0 then 29 / 10 else if j = 1 then 28 / 10 else if j = 2 then 2 else 0
+noncomputable def wMpsPost (j : ℕ) : ℝ :=
+  if j = 0 then 36 / 10 else if j = 1 then 22 / 10 else if j = 2 then 19 / 10 else 0
+
+/-- **A mean-preserving spread can lower the count with the marginal entrant above the mean.**
+    The two profiles have the same total, the second majorizes the first (its partial sums from
+    the poorest up are no larger), the marginal entrant is above the mean before the spread, and
+    the count falls from 2 to 1 at the benchmark gains. -/
+theorem mps_lowers_count :
+    (wMpsPre 0 + wMpsPre 1 + wMpsPre 2 = wMpsPost 0 + wMpsPost 1 + wMpsPost 2)
+      ∧ wMpsPost 2 ≤ wMpsPre 2 ∧ wMpsPost 2 + wMpsPost 1 ≤ wMpsPre 2 + wMpsPre 1
+      ∧ (wMpsPre 0 + wMpsPre 1 + wMpsPre 2) / 3 < wMpsPre 1
+      ∧ IsCount κc 1 (fun m => 1 / ((m : ℝ) + 2)) 3 wMpsPre 2
+      ∧ IsCount κc 1 (fun m => 1 / ((m : ℝ) + 2)) 3 wMpsPost 1 := by
+  refine ⟨by simp [wMpsPre, wMpsPost]; norm_num, by simp [wMpsPre, wMpsPost]; norm_num,
+    by simp [wMpsPre, wMpsPost]; norm_num, by simp [wMpsPre]; norm_num,
+    ⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩, ⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩⟩
+  · interval_cases j
+    · refine ⟨by simp [wMpsPre]; norm_num, ?_⟩
+      simp [wMpsPre]
+      rw [κc_eq]
+      norm_num
+    · refine ⟨by simp [wMpsPre]; norm_num, ?_⟩
+      simp [wMpsPre]
+      rw [κc_eq]
+      norm_num
+  · rintro ⟨_, h⟩
+    simp [wMpsPre] at h
+    rw [κc_eq] at h
+    norm_num at h
+  · interval_cases j
+    refine ⟨by simp [wMpsPost]; norm_num, ?_⟩
+    simp [wMpsPost]
+    rw [κc_eq]
+    norm_num
+  · rintro ⟨_, h⟩
+    simp [wMpsPost] at h
+    rw [κc_eq] at h
+    norm_num at h
+
+/-! **Mean-preserving spreads inside the band.** Four challengers. Before the spread the wealth is
+`(4, 14/5, 11/5, 2)` and the count is 2. Two spreads, each preserving the total and majorizing
+the original profile, have the displacement signs `(+, −, +, −)` and move the count to 3 and
+to 1. -/
+
+noncomputable def mPre (j : ℕ) : ℝ :=
+  if j = 0 then 4 else if j = 1 then 14 / 5 else if j = 2 then 11 / 5 else if j = 3 then 2 else 0
+noncomputable def mUp (j : ℕ) : ℝ :=
+  if j = 0 then 41 / 10 else if j = 1 then 27 / 10 else if j = 2 then 13 / 5 else if j = 3 then 8 / 5
+    else 0
+noncomputable def mDown (j : ℕ) : ℝ :=
+  if j = 0 then 23 / 5 else if j = 1 then 9 / 4 else if j = 2 then 9 / 4 else if j = 3 then 19 / 10
+    else 0
+
+theorem antitone_of_four (w : ℕ → ℝ) (a b c' e : ℝ) (h0 : w 0 = a) (h1 : w 1 = b) (h2 : w 2 = c')
+    (h3 : w 3 = e) (hrest : ∀ j, 4 ≤ j → w j = 0) (hab : b ≤ a) (hbc : c' ≤ b) (hce : e ≤ c')
+    (he : 0 ≤ e) : Antitone w := by
+  intro i j hij
+  have key : ∀ n, w n =
+      if n = 0 then a else if n = 1 then b else if n = 2 then c' else if n = 3 then e else 0 := by
+    intro n
+    rcases n with _ | _ | _ | _ | n
+    · simp [h0]
+    · simp [h1]
+    · simp [h2]
+    · simp [h3]
+    · simp [hrest (n + 4) (by omega)]
+  rw [key i, key j]
+  split_ifs <;> first | omega | linarith
+
+theorem mPre_anti : Antitone mPre :=
+  antitone_of_four mPre 4 (14 / 5) (11 / 5) 2 (by simp [mPre]) (by simp [mPre]) (by simp [mPre])
+    (by simp [mPre]) (fun j hj => by
+      simp [mPre, show j ≠ 0 by omega, show j ≠ 1 by omega, show j ≠ 2 by omega,
+        show j ≠ 3 by omega]) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+theorem mUp_anti : Antitone mUp :=
+  antitone_of_four mUp (41 / 10) (27 / 10) (13 / 5) (8 / 5) (by simp [mUp]) (by simp [mUp])
+    (by simp [mUp]) (by simp [mUp]) (fun j hj => by
+      simp [mUp, show j ≠ 0 by omega, show j ≠ 1 by omega, show j ≠ 2 by omega,
+        show j ≠ 3 by omega]) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+theorem mDown_anti : Antitone mDown :=
+  antitone_of_four mDown (23 / 5) (9 / 4) (9 / 4) (19 / 10) (by simp [mDown]) (by simp [mDown])
+    (by simp [mDown]) (by simp [mDown]) (fun j hj => by
+      simp [mDown, show j ≠ 0 by omega, show j ≠ 1 by omega, show j ≠ 2 by omega,
+        show j ≠ 3 by omega]) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
+/-- Both spreads preserve the total, majorize the original profile (partial sums from the poorest
+    up are no larger), have the signs `(+, −, +, −)`, and put the margin `k = 2` in the band. -/
+theorem mps_band_signs :
+    (mUp 0 + mUp 1 + mUp 2 + mUp 3 = mPre 0 + mPre 1 + mPre 2 + mPre 3)
+      ∧ mUp 3 ≤ mPre 3 ∧ mUp 3 + mUp 2 ≤ mPre 3 + mPre 2
+      ∧ mUp 3 + mUp 2 + mUp 1 ≤ mPre 3 + mPre 2 + mPre 1
+      ∧ (mDown 0 + mDown 1 + mDown 2 + mDown 3 = mPre 0 + mPre 1 + mPre 2 + mPre 3)
+      ∧ mDown 3 ≤ mPre 3 ∧ mDown 3 + mDown 2 ≤ mPre 3 + mPre 2
+      ∧ mDown 3 + mDown 2 + mDown 1 ≤ mPre 3 + mPre 2 + mPre 1
+      ∧ 0 < mUp 0 - mPre 0 ∧ mUp 1 - mPre 1 < 0 ∧ 0 < mUp 2 - mPre 2 ∧ mUp 3 - mPre 3 < 0
+      ∧ 0 < mDown 0 - mPre 0 ∧ mDown 1 - mPre 1 < 0 ∧ 0 < mDown 2 - mPre 2
+      ∧ mDown 3 - mPre 3 < 0
+      ∧ InBand (fun j => mUp j - mPre j) 2 ∧ InBand (fun j => mDown j - mPre j) 2 := by
+  simp only [InBand, mUp, mDown, mPre]
+  norm_num
+
+/-- The counts for any gain schedule close enough to the benchmark `Δ(m) = 1/(m + 2)`. -/
+theorem mps_witness_counts (Δ : ℕ → ℝ) (h0 : 1 / 12 ≤ Δ 0) (h1 : 100 / 459 ≤ Δ 1)
+    (h1' : Δ 1 < 16 / 45) (h2 : 25 / 104 ≤ Δ 2) (h2' : Δ 2 < 25 / 66) (h3' : Δ 3 < 25 / 24) :
+    IsCount κc 1 Δ 4 mPre 2 ∧ IsCount κc 1 Δ 4 mUp 3 ∧ IsCount κc 1 Δ 4 mDown 1 := by
+  have k4 : κc 4 = 1 / 12 := by rw [κc_eq]; norm_num
+  refine ⟨⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩, ⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩,
+    ⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩⟩
+  · interval_cases j
+    · exact ⟨by simp [mPre], by simp [mPre]; rw [k4]; exact h0⟩
+    · refine ⟨by simp [mPre]; norm_num, ?_⟩
+      simp [mPre]
+      rw [κc_eq]
+      norm_num
+      linarith
+  · rintro ⟨_, h⟩
+    simp [mPre] at h
+    rw [κc_eq] at h
+    norm_num at h
+    linarith
+  · interval_cases j
+    · refine ⟨by simp [mUp]; norm_num, ?_⟩
+      simp [mUp]
+      rw [κc_eq]
+      norm_num
+      linarith
+    · refine ⟨by simp [mUp]; norm_num, ?_⟩
+      simp [mUp]
+      rw [κc_eq]
+      norm_num
+      linarith
+    · refine ⟨by simp [mUp]; norm_num, ?_⟩
+      simp [mUp]
+      rw [κc_eq]
+      norm_num
+      linarith
+  · rintro ⟨_, h⟩
+    simp [mUp] at h
+    rw [κc_eq] at h
+    norm_num at h
+    linarith
+  · interval_cases j
+    refine ⟨by simp [mDown]; norm_num, ?_⟩
+    simp [mDown]
+    rw [κc_eq]
+    norm_num
+    linarith
+  · rintro ⟨_, h⟩
+    simp [mDown] at h
+    rw [κc_eq] at h
+    norm_num at h
+    linarith
+
+/-- **At the benchmark gains, two mean-preserving spreads with the same signs move the count up
+    in one case and down in the other.** -/
+theorem mps_band_both_directions :
+    IsCount κc 1 (fun m => 1 / ((m : ℝ) + 2)) 4 mPre 2
+      ∧ IsCount κc 1 (fun m => 1 / ((m : ℝ) + 2)) 4 mUp 3
+      ∧ IsCount κc 1 (fun m => 1 / ((m : ℝ) + 2)) 4 mDown 1 :=
+  mps_witness_counts _ (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    (by norm_num)
+
+/-- **Inside the primitives.** For every small `μ > 0`, with `r` and `s` uniform and the
+    incumbent investing, the model's gains give the same three counts. -/
+theorem mps_band_both_directions_positive :
+    ∀ᶠ μ in 𝓝[>] 0,
+      IsCount κc 1 (DeltaUpTo 1 (investorLaw μ unif unif) (nonInvestorLaw μ unif)
+          (investorLaw μ unif unif) 4) 4 mPre 2
+      ∧ IsCount κc 1 (DeltaUpTo 1 (investorLaw μ unif unif) (nonInvestorLaw μ unif)
+          (investorLaw μ unif unif) 4) 4 mUp 3
+      ∧ IsCount κc 1 (DeltaUpTo 1 (investorLaw μ unif unif) (nonInvestorLaw μ unif)
+          (investorLaw μ unif unif) 4) 4 mDown 1 := by
+  have hs : unif (Iio 0) = 0 := by
+    have h := cdf_unif_of_mem 0 le_rfl zero_le_one
+    rw [cdf_eq_real, measureReal_def] at h
+    refine measure_mono_null Iio_subset_Iic_self ?_
+    exact ((ENNReal.toReal_eq_zero_iff _).mp h).resolve_right (measure_ne_top _ _)
+  have lim : ∀ m : ℕ, Tendsto (fun t => Delta 1 (investorLaw t unif unif) (nonInvestorLaw t unif)
+      (investorLaw t unif unif) 4 m) (𝓝 0) (𝓝 (1 / ((m : ℝ) + 2))) := fun m => by
+    have := p6_limit unif unif hs 1 4 m
+    simpa using this
+  have e : ∀ t (m : ℕ), m ≤ 3 → DeltaUpTo 1 (investorLaw t unif unif) (nonInvestorLaw t unif)
+      (investorLaw t unif unif) 4 m = Delta 1 (investorLaw t unif unif) (nonInvestorLaw t unif)
+      (investorLaw t unif unif) 4 m := fun t m hm => by
+    unfold DeltaUpTo
+    rw [min_eq_left (by omega)]
+  have t0 := (lim 0).eventually (eventually_gt_nhds (show (1 : ℝ) / 12 < 1 / ((0 : ℕ) + 2) by norm_num))
+  have t1 := (lim 1).eventually (eventually_gt_nhds (show (100 : ℝ) / 459 < 1 / ((1 : ℕ) + 2) by norm_num))
+  have t1' := (lim 1).eventually (eventually_lt_nhds (show 1 / (((1 : ℕ) : ℝ) + 2) < 16 / 45 by norm_num))
+  have t2 := (lim 2).eventually (eventually_gt_nhds (show (25 : ℝ) / 104 < 1 / ((2 : ℕ) + 2) by norm_num))
+  have t2' := (lim 2).eventually (eventually_lt_nhds (show 1 / (((2 : ℕ) : ℝ) + 2) < 25 / 66 by norm_num))
+  have t3' := (lim 3).eventually (eventually_lt_nhds (show 1 / (((3 : ℕ) : ℝ) + 2) < 25 / 24 by norm_num))
+  filter_upwards [nhdsWithin_le_nhds t0, nhdsWithin_le_nhds t1, nhdsWithin_le_nhds t1',
+    nhdsWithin_le_nhds t2, nhdsWithin_le_nhds t2', nhdsWithin_le_nhds t3'] with μ a0 a1 a1' a2 a2' a3'
+  exact mps_witness_counts _ (by rw [e μ 0 (by norm_num)]; exact a0.le)
+    (by rw [e μ 1 (by norm_num)]; exact a1.le) (by rw [e μ 1 (by norm_num)]; exact a1')
+    (by rw [e μ 2 (by norm_num)]; exact a2.le) (by rw [e μ 2 (by norm_num)]; exact a2')
+    (by rw [e μ 3 (by norm_num)]; exact a3')
+
 end Witness
 
 end EntryContestSpread

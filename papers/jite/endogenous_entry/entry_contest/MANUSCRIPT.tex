@@ -154,13 +154,15 @@ that check it.}\\
 \mrow{M13}{Pivot spreads (P9-gen, P9).}
   {For a pivot-spread $T$ about $x_0$, $k^*$ weakly rises when $w_{k^*-1}\ge x_0$ and
   weakly falls when $w_{k^*-1}\le x_0$. The linear spread about the mean is one,
-  and keeps the mean.}
-  {EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a}
+  and keeps the mean. A change that keeps the total and majorizes $w$ can lower
+  $k^*$ with $w_{k^*-1}$ above the mean.}
+  {EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count}
 \mrow{M14}{The band.}
   {With $d=w'-w$, the signs of $d$ leave the direction of $k^*$ open only when
-  $d_{k^*-1}<0<d_{k^*}$. A pivot-spread never does so, and inside the band both
-  directions occur for every small $\mu>0$.}
-  {EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.witness_counts, EntryContestSpread.witness_signs, EntryContestSpread.band_both_directions, EntryContestSpread.band_both_directions_positive}
+  $d_{k^*-1}<0<d_{k^*}$. A pivot-spread never does so. Inside the band two
+  changes that keep the total and majorize $w$, with the same signs at every
+  rank, move $k^*$ in opposite directions for every small $\mu>0$.}
+  {EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
 \mrow{M15}{Strictness under a spread (P9).}
   {If some entrant lies below $x_0$ at $\lambda=1$ and $\kappa(w)\to\infty$ as
   $w\downarrow c$, $k^*(\lambda)$ is non-increasing in $\lambda\ge1$ and
@@ -412,7 +414,7 @@ $c<w'_{k^*}\le w_{k^*}$ and
 so rank $k^*$ fails after the spread and $k'^*\le k^*$.
 \end{mproof}
 
-\begin{mproof}{M13}{EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a}
+\begin{mproof}{M13}{EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count}
 $T$ is non-decreasing, so $w'_j=T(w_j)$ is sorted, and
 \[
   x_0\le w_{k^*-1}\ \Rightarrow\ w_{k^*-1}\le T(w_{k^*-1}),\qquad
@@ -424,30 +426,48 @@ so M12 applies. For $T(w)=x_0+\lambda(w-x_0)$ with $\lambda\ge1$,
   \frac1Q\sum_jT(w_j)=\bar w+\lambda\Big(\frac1Q\sum_jw_j-\bar w\Big)=\bar w
   \quad (x_0=\bar w).
 \]
+With $c=1$, $\kappa(w)=\frac1{w-1}-\frac1w$ and $\Delta(m)=\frac1{m+2}$,
+\[
+  w=\big(\tfrac{29}{10},\tfrac{14}5,2\big),\quad
+  w'=\big(\tfrac{18}5,\tfrac{11}5,\tfrac{19}{10}\big),\quad
+  \textstyle\sum_jw_j=\sum_jw'_j,\quad w'_2\le w_2,\quad w'_2+w'_1\le w_2+w_1,
+\]
+\[
+  \kappa(w)=\big(\tfrac{100}{551},\tfrac{25}{126},\tfrac12\big),\quad
+  \kappa(w')=\big(\tfrac{25}{234},\tfrac{25}{66},\tfrac{100}{171}\big),\quad
+  \tfrac13\textstyle\sum_jw_j=\tfrac{77}{30}<w_1,
+\]
+so the counts are $2$ and $1$.
 \end{mproof}
 
-\begin{mproof}{M14}{EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.witness_counts, EntryContestSpread.witness_signs, EntryContestSpread.band_both_directions, EntryContestSpread.band_both_directions_positive}
+\begin{mproof}{M14}{EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
 Outside the band $d_{k^*-1}\ge0$ or $d_{k^*}\le0$, and M12 signs the change. If
 \[
   i\le j,\ d_j>0\ \Rightarrow\ d_i\ge0,
 \]
 then $d_{k^*}>0$ gives $d_{k^*-1}\ge0$. A pivot-spread has this property, since
-$d_j>0$ gives $w_j>x_0$ and then $w_i\ge w_j>x_0$. With $c=1$,
-$\kappa(w)=\frac1{w-1}-\frac1w$ and $\Delta(m)=\frac1{m+2}$, the profiles
+$d_j>0$ gives $w_j>x_0$ and then $w_i\ge w_j>x_0$. With $\kappa$ and $\Delta$ as
+in M13, the profiles
 \[
-  w=\big(4,\tfrac{27}{10},\tfrac{21}{10}\big),\quad
-  w'=\big(4,\tfrac{53}{20},\tfrac{13}{5}\big),\quad
-  w''=\big(4,\tfrac94,\tfrac{11}5\big)
+  w=\big(4,\tfrac{14}{5},\tfrac{11}{5},2\big),\quad
+  w'=\big(\tfrac{41}{10},\tfrac{27}{10},\tfrac{13}{5},\tfrac85\big),\quad
+  w''=\big(\tfrac{23}5,\tfrac94,\tfrac94,\tfrac{19}{10}\big)
 \]
-have
+all sum to $11$, with partial sums from the poorest up
 \[
-  \kappa(w)=\big(\tfrac1{12},\tfrac{100}{459},\tfrac{100}{231}\big),\quad
-  \kappa(w')=\big(\tfrac1{12},\tfrac{400}{1749},\tfrac{25}{104}\big),\quad
-  \kappa(w'')=\big(\tfrac1{12},\tfrac{16}{45},\tfrac{25}{66}\big)
+  \big(2,\tfrac{21}5,7\big),\quad
+  \big(\tfrac85,\tfrac{21}5,\tfrac{69}{10}\big),\quad
+  \big(\tfrac{19}{10},\tfrac{83}{20},\tfrac{32}5\big),
 \]
-against $\Delta=\big(\tfrac12,\tfrac13,\tfrac14\big)$, so the counts are $2$, $3$ and
-$1$, and $d'$ and $d''$ both have signs $(0,-,+)$. Every inequality is strict, so
-by M9 the counts hold for every small $\mu>0$.
+and
+\[
+  \kappa(w)=\big(\tfrac1{12},\tfrac{25}{126},\tfrac{25}{66},\tfrac12\big),\quad
+  \kappa(w')=\big(\tfrac{100}{1271},\tfrac{100}{459},\tfrac{25}{104},\tfrac{25}{24}\big),\quad
+  \kappa(w'')=\big(\tfrac{25}{414},\tfrac{16}{45},\tfrac{16}{45},\tfrac{100}{171}\big)
+\]
+against $\Delta=\big(\tfrac12,\tfrac13,\tfrac14,\tfrac15\big)$. The counts are
+$2$, $3$ and $1$, and $d'$ and $d''$ both have signs $(+,-,+,-)$. Every
+inequality is strict, so by M9 the counts hold for every small $\mu>0$.
 \end{mproof}
 
 \begin{mproof}{M15}{EntryContestKappa.exit_below_pivot, EntryContestKappa.enters_downward, EntryContestKappa.p9_strict, EntryContestKappa.p9_monotone, EntryContestKappa.p9_strict_model}
