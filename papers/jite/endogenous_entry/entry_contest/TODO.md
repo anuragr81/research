@@ -461,6 +461,28 @@ paper's claims, and only then write the manuscript.
      holds a `LEAN` pointer that `lit/coverage.py` now reads.
   - Done when the author decides item 1.
 
+- [ ] **O1. Open items carried from `PROOFS.tex` §Open items (pass 5, 7 Oct 2026).**
+  1. **The incumbent's own entry** is exogenous throughout (`C` is fixed in
+     `H_m`). Endogenising it, and asking whether an equilibrium exists in which
+     the incumbent abstains while a challenger enters, is a modelling extension
+     and not a gap in what is claimed.
+  2. **Inside the band** (M14) the displacement signs settle nothing. Whether
+     some other statistic of the change, its magnitudes or a weighted
+     functional of the quantile difference as in Costrell and Loury, predicts
+     the direction is open.
+  3. **Strictness away from the linear family.** M15 is stated for the linear
+     spread with `λ` large. Which spreads move `k*` strictly is not attempted.
+  4. **The competitor-number effect.** The location of the peak of
+     `Δ_Q(0)` in `Q` (M17 to M21), and laws of `s` beyond a single step, are
+     open.
+  5. **Ability rising with wealth.** Count invariance held in every sampled
+     economy (`checks/verify_anonymity.py`, A1-4b). This is not claimed, and a
+     proof or a counterexample is open.
+  - Closed since `PROOFS.tex` listed it: how much room burden-monotonicity
+    leaves beyond concavity. A convex stretch longer than `c` rules it out
+    (`not_burden_of_convex_stretch`), and every length below `c` occurs
+    (`admissible_width`).
+
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
   conclusions), and appendices hold every proof and everything else
@@ -600,6 +622,33 @@ paper's claims, and only then write the manuscript.
   on `KappaSpread.lean`, `BurdenWeaker.lean` and `Anonymity.lean`.
   `Anonymity.lean` gained the ASCII alias `kappa3_values` so the manuscript can
   cite the costs. Pass 4 is complete. Next is pass 5.
+  Pass 5 done 7 Oct 2026. The five appendix stubs of `MANUSCRIPT.tex` are
+  filled. Evidence and verification is rewritten for the current state (every
+  row a Lean theorem, the axiom audit, the manuscript checker, the `lit/`
+  records, the tiers retired, and the one assumption Lean does not derive,
+  atomless `F` and `G`). Terminology carries the `PROOFS.tex` table into
+  manuscript notation, with the margin condition, the band and ordering in
+  dispersion. Primitives and scope drops the unused regularity assumption and
+  the inadmissible sine example, and cites the multiplicity example to a new
+  theorem, `EntryContestEq.three_equilibria`. Refuted conjectures R1 and R2
+  and the referee responses point to Lean and to model rows. The open items of
+  `PROOFS.tex` are below as item O1. Still in `PROOFS.tex` and not yet carried:
+  the section "Contribution and its precedents", which is input to the
+  conclusions table and goes to `LITERATURE.tex` at pass 6, and the
+  verification index, which the model table's Lean column supersedes.
+  Next is pass 6.
+  Pass 9 and the headlines done 7 Oct 2026, ahead of passes 6 to 8 at the
+  author's request ("just do it for what you have and mark any unverified
+  claims as unverified"; "You're welcome to put headline as the first
+  section"). The literature table has L1 to L13, one row per paper read, each
+  quote verbatim in the paper's `lit/` record. Fu-Lu, Costrell-Loury and
+  Schroyen-Treich are marked unverified for their published versions, and
+  Shaked, Mathews-Namoro, Corcoran and Corcoran-Karels are listed below the
+  table as unread. Two one-line quotation records were added (Lazear-Rosen,
+  Hopkins-Kornienko), copied from quotations already recorded. The
+  introduction table has K1 to K6, each with a scope note saying what it does
+  not claim. Next are readability (pass 10) and the referee comments (pass 11),
+  with the coverage of the referee comments as a separate appendix.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

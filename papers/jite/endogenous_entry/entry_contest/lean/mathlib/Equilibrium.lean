@@ -109,6 +109,27 @@ theorem assortative_min_cost (hcost : Monotone cost) (S : Finset ℕ) :
       rw [Finset.card_insert_of_notMem haT, Finset.sum_range_succ, Finset.sum_insert haT]
       linarith [hcost hcard]
 
+
+/-- **Identities are not pinned without M7's condition.** With costs `(2, 5, 8)` and gains
+    `(12, 10, 1)`, the sets `{0, 1}`, `{0, 2}` and `{1, 2}` are all equilibria, the last without
+    the richest challenger. -/
+theorem three_equilibria :
+    IsEquilibriumR (fun i => if i = 0 then 2 else if i = 1 then 5 else 8)
+        (fun m => if m = 0 then 12 else if m = 1 then 10 else 1) 3 {0, 1}
+      ∧ IsEquilibriumR (fun i => if i = 0 then 2 else if i = 1 then 5 else 8)
+        (fun m => if m = 0 then 12 else if m = 1 then 10 else 1) 3 {0, 2}
+      ∧ IsEquilibriumR (fun i => if i = 0 then 2 else if i = 1 then 5 else 8)
+        (fun m => if m = 0 then 12 else if m = 1 then 10 else 1) 3 {1, 2} := by
+  refine ⟨⟨?_, ?_, ?_⟩, ⟨?_, ?_, ?_⟩, ⟨?_, ?_, ?_⟩⟩
+  all_goals first
+    | (intro x hx; simp only [Finset.mem_insert, Finset.mem_singleton] at hx;
+       simp only [Finset.mem_range]; omega)
+    | (intro i hi; simp only [Finset.mem_insert, Finset.mem_singleton] at hi;
+       rcases hi with rfl | rfl <;> norm_num)
+    | (intro j hj hjS; simp only [Finset.mem_range] at hj;
+       simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hjS;
+       interval_cases j <;> simp_all)
+
 end Selection
 
 section ComparativeStatics

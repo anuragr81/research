@@ -114,3 +114,12 @@ Regex widened to `[A-Za-z0-9_']*` in both places.
   natural next artifact and is not started.
 - HK2009 Propositions 4 and 5 (welfare comparisons under rank indexing).
 - HK-A, HK-B, HK-C, HK-J: structural/textual readings, not arithmetic.
+
+## Quotations used in `MANUSCRIPT.tex`
+
+One line each, copied from Definition 1 above so the manuscript checker can
+match it. No new reading.
+
+| Page | Quotation |
+|---|---|
+| HK2010 p.128 | "A variable with distribution F is said to be smaller in the dispersive order (or less dispersed) than a variable with a distribution G" |

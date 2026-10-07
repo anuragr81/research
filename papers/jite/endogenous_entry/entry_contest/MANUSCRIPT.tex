@@ -52,6 +52,7 @@
 \makeatother
 \newcommand{\lean}[1]{\path{#1}}
 \newcommand{\rowref}[1]{#1}
+\newcommand{\unv}[1]{\textit{Unverified:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
@@ -85,6 +86,44 @@
 \endhead
 \bottomrule
 \endfoot
+\krow{K1}{Every pure-strategy equilibrium has the same number of entrants,
+  $k^*$, and the $k^*$ richest challengers entering is always one of them.}
+  {M5, M6, M8}
+  {The count is pinned, and who enters is not, unless the condition of M7
+  holds. The count needs a gain that depends on the number of entrants alone
+  (M26), and it fails when ability falls with wealth (M27).}
+\krow{K2}{The effect of a spread of wealth on how many enter has a sign set by
+  one comparison. Entry weakly rises when the marginal entrant stands at or
+  above the pivot, and weakly falls when it stands at or below.}
+  {M12, M13, M15}
+  {Proved for pivot-spreads, and more generally under the margin condition.
+  Inside the band the signs of the change settle nothing (M14), and the mean
+  cannot replace the pivot (M13). Strict change is shown only for linear
+  spreads (M15).}
+\krow{K3}{The sorting needs only that the fee's utility cost falls with
+  wealth, which strict concavity implies and which is strictly weaker.}
+  {M23, M24}
+  {No condition on $u'''$ is used. Wealth sorting into a tournament is in
+  print (Lazear and Rosen), through a condition on $u'''$, so the mechanism is
+  not claimed as new.}
+\krow{K4}{Entry is capped by the prize for every number of challengers. An
+  entrant at index $m$ with cost $\kappa$ has $(m+1)\kappa\le V$.}
+  {M10}
+  {The accounting behind the cap is in print for identical agents (Fu, Jiao
+  and Lu; Fu and Lu). It replaces the old mobility ceiling and is not claimed
+  as new.}
+\krow{K5}{A larger prize does not lower the number of entrants, and a larger
+  fee does not raise it.}
+  {M11}
+  {Weak monotonicity only.}
+\krow{K6}{When the score gap is single-peaked, the first entrant's gain can
+  rise and then fall in the number of challengers, and it never falls and then
+  rises. With a uniform base score it never falls, for some base scores it
+  must eventually fall, and stochastic dominance alone does not sign it.}
+  {M16, M17, M18, M19, M20, M21, M22}
+  {The kernel and the message that no such prediction is universal are Ryvkin
+  and Drugov's. Whether the rise-then-fall result is new is pending the novelty
+  reading (pass 7).}
 \end{longtable}
 \normalsize
 
@@ -256,8 +295,62 @@ quote.}\\
 \endhead
 \bottomrule
 \endfoot
+\lrow{L1}{LazearRosen1981}{Wealth sorting into a tournament is in print, by
+  example and through declining absolute risk aversion, a condition on
+  $u'''$. M23 sorts through $\kappa$ alone, which $u''<0$ gives.}
+  {Individuals will self-select the payment scheme in accordance with their wealth.}{855}{M5, M23}
+\lrow{L2}{LevinSmith1994}{With identical potential entrants, pure strategies
+  leave who enters unexplained, and mixed entry makes the count random.}
+  {The process by which potential bidders divide into these two groups is not explained}{586}{M6, M7}
+\lrow{L3}{MorganOrzenSefton2012}{With identical players the entrants' identities
+  are not pinned, and sequential entry orders them.}
+  {the identity of the players choosing to opt into the contest is not uniquely determined}{441}{M6, M7}
+\lrow{L4}{MorenoWooders2011}{Under private entry costs every buyer compares her
+  cost with one threshold, and the count is binomial. Here the threshold
+  depends on the index.}
+  {indicating the maximum entry cost for which the buyer enters the auction}{319--320}{M5, M6}
+\lrow{L5}{FullertonMcAfee1999}{With heterogeneous types the efficient entry
+  equilibrium admits the lowest-cost firms. Profits depend on rivals' types,
+  and entry equilibria of sizes 2 and 3 coexist
+  (\lean{FullertonMcAfee.two_sizes}), so count invariance needs anonymity.}
+  {entry of the m lowest-cost firms is an equilibrium}{580}{M6, M7, M26}
+\lrow{L6}{FuJiaoLu2015}{The rent-accounting bound behind M10, for identical
+  agents with mixed entry, capping an expected count.}
+  {the rent to be dissipated in the contest cannot exceed}{397}{M10}
+\lrow{L7}{FuLu2010}{Total effort equals the budget less the entrants' total
+  entry cost, in a contest chosen by a designer. \unv{the working paper (MPRA
+  945) was read, and the \emph{Economic Inquiry} version is not checked.}}
+  {the equilibrium total effort is given by the difference between the total budget of the contest organizer and the total entry costs incurred by participating contestants, regardless of the contest technology.}{10}{M10}
+\lrow{L8}{RyvkinDrugov2020}{The order-statistic kernel, and that no prediction
+  in the number of players holds for every noise law. M16 to M22 are the
+  entry-gain instance.}
+  {There is not a single prediction, either for individual or aggregate effort, that cannot be reversed for at least some distribution of noise.}{1589}{M16, M17, M22}
+\lrow{L9}{CostrellLoury2004}{A spread's effect signed by the position of one
+  marginal quantile, which is fixed by technology there and endogenous in M12.
+  \unv{a draft was read, and the published version is not checked.}}
+  {completely characterize the technology}{6}{M12, M13}
+\lrow{L10}{HopkinsKornienko2010}{The dispersive order as the order for
+  inequality comparisons, quoting Shaked and Shanthikumar (2007).}
+  {A variable with distribution $F$ is said to be smaller in the dispersive order (or less dispersed) than a variable with a distribution $G$}{128}{M13, M14}
+\lrow{L11}{LewisThompson1981}{The same order, defined earlier by quantile
+  spacing, which with a crossing point gives the pivot-spreads of M13.}
+  {We call the relationship defined by (1.1), (1.2) an ordering in dispersion of $G$ and $H$}{77}{M13, M14}
+\lrow{L12}{SchroyenTreich2016}{The privilege-contest payoff, with a prize valued
+  apart from wealth, and an intensive-margin effect of a spread that turns on
+  $u'''$. \unv{the working paper (No.~16-699) was read, and the \emph{Games and
+  Economic Behavior} version is not checked.}}
+  {and therefore its marginal value is independent of the level of wealth}{8}{M13, M23}
+\lrow{L13}{ColeMailathPostlewaite1992}{A more compact income distribution raises
+  savings through matching on wealth. The direction matches the below-pivot
+  branch of M13, and the mechanism differs.}
+  {the agent from the economy with the more compact income distribution will tend to have a higher savings rate}{1103}{M13}
 \end{longtable}
 \normalsize
+
+Papers cited in our other documents and not read are not in the table, and
+every claim made about them is unverified. They are \citet{Shaked1982}, which
+Hopkins and Kornienko cite for the dispersive order, \citet{MathewsNamoro2008},
+\citet{Corcoran1984} and \citet{CorcoranKarels1985}.
 
 \section{Conclusions}
 
@@ -763,17 +856,272 @@ gain is continuous in $\mu$ at $0$, so both remain equilibria for small $\mu>0$.
 \section{Evidence and verification}
 \label{app:evidence}
 
+Every row of the model table is a theorem of Lean~4 with Mathlib. The Lean
+column names the theorems, and the proof of each row in
+Appendix~\ref{app:proofs} names the same ones. The development lives in
+\path{lean/mathlib/}, built on the toolchain \path{v4.24.0-rc1} against Mathlib
+commit \path{14871d5}, beside the core file \path{lean/EntryContest.lean}, which
+uses no Mathlib. The script \path{verify.sh} runs three kinds of check on every
+build, and \path{VERIFICATION.md} records what they printed.
+
+\begin{enumerate}
+\item \emph{The axiom audit.} No source file contains \texttt{sorry}. Every
+  declared theorem is passed to \texttt{\#print axioms}. A Mathlib theorem that
+  depends on an axiom other than \texttt{propext}, \texttt{Classical.choice} and
+  \texttt{Quot.sound} fails the build, and a theorem of the core file that
+  depends on an axiom other than \texttt{propext} and \texttt{Quot.sound} fails
+  it too.
+\item \emph{The manuscript checker} (\path{checks/verify_manuscript.py}).
+  Every model row names audited theorems and has exactly one proof naming the
+  same theorems. Introduction rows point to model rows, and conclusion rows
+  point to model or literature rows. Every literature quote appears verbatim
+  in the cited paper's record under \path{lit/}. Plain English is at most 30\%
+  of every proof. Each rule also runs on a faulty sample, which the rule must
+  reject.
+\item \emph{The literature records.} Each cited paper has a directory under
+  \path{lit/} holding a reconstruction from the source, the claims our
+  documents make about the paper with page locators, notes on every
+  discrepancy found, and Lean for the mathematical claims. A record checks our
+  reading of a source and does not reprove the source. The records run under
+  \path{lit/verify_lit.sh}.
+\end{enumerate}
+
+\paragraph{What Lean does not carry.} The standing assumptions of
+Appendix~\ref{app:primitives} enter the theorems as hypotheses. The rows assume
+that $F$ and $G$ have no atoms rather than deriving it. The assumption follows
+from the primitives when $r$ has no atoms and $\mu\ne0$
+(\lean{EntryContestRefute.investorLaw_noAtoms'},
+\lean{EntryContestRefute.nonInvestorLaw_noAtoms'}). A statement about what a
+cited paper says rests on a quotation with its page, recorded under
+\path{lit/}, and not on Lean.
+
+\paragraph{Illustrations.} The SymPy and numerical scripts under
+\path{checks/} still run in \path{verify.sh}, as illustrations and as
+regression tests. No row rests on them. Earlier drafts graded each claim by an
+evidence tier (Lean, SymPy or numerical) because several analytic steps entered
+the Lean development only as hypotheses. Those steps are now proved in Lean,
+and the tiers are retired.
+
 \section{Terminology}
 \label{app:terminology}
 
+Every English term that carries load in a row or a proof is bound here to a
+symbol built from the primitives of Appendix~\ref{app:primitives}. Each entry
+names an object already defined, so the table is a translation key and not a
+second set of definitions. Indices follow Appendix~\ref{app:proofs}, with the
+richest challenger at index $0$.
+
+\footnotesize
+\begin{longtable}{@{}P{3.4cm}P{4.2cm}P{8.6cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\multicolumn{3}{@{}l}{\emph{Players and actions}}\\[2pt]
+challenger & $i\in\{0,\dots,Q-1\}$ & A player of given wealth who chooses
+  whether to compete. \\
+incumbent & $C$ & The additional player, who competes in every case and
+  appears only through the score CDF $C$. \\
+enter & $e_i=1$ & Pay the fee $c$ and add $(1-\mu)s_i$ to the score. \\
+entrant, outsider & $e_i=1$, $e_i=0$ & A challenger who enters, and one who
+  does not. \\
+entrant set & $S=\{i:e_i=1\}$ & The challengers who enter. \\
+prize & $V>0$ & Fixed and awarded by rank, outside $u$. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Wealth and cost}}\\[2pt]
+wealth & $w_i$ & Challenger $i$'s resource. A challenger with $w_i\le c$ does
+  not enter. \\
+wealth profile & $(w_0,\dots,w_{Q-1})$ & The realised wealths, common
+  knowledge, sorted with $w_0\ge w_1\ge\cdots$. \\
+entry cost & $\kappa(w)=u(w)-u(w-c)$ & The burden of the fee in utility
+  units. \\
+fee & $c$ & The nominal cost of entry, the same for every challenger. \\
+burden-monotonicity & $\kappa$ strictly decreasing on $(c,\infty)$ & The
+  assumption on $u$ (M23), weaker than strict concavity (M24). \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Scores and gains}}\\[2pt]
+score & $\sigma_i=\mu r_i+(1-\mu)s_ie_i$ & The prize goes to the highest
+  score. \\
+score CDFs & $F$, $G$ & The laws of an entrant's score and an outsider's, with
+  $F\le G$ (M2). \\
+dominance gap & $\varphi=G-F\ge0$ & What entry buys. \\
+best rival score & $H_m=CF^mG^{Q-1-m}$ & The CDF of the best score facing a
+  challenger when $m$ others enter. \\
+gain & $\Delta(m)$ & The value of entering when $m$ others enter, with
+  $\Delta(m+1)\le\Delta(m)$ (M4). \\
+anonymity & $\Delta$ depends on $m$ alone & The gain depends on how many
+  others enter and not on who they are (M26, M27). \\
+first entrant's gain & $\Delta_Q(0)$, $D(Q)$ & The gain with no other entrant
+  among $Q$ challengers, and its step in $Q$ (M16 to M22). \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Equilibrium}}\\[2pt]
+entry condition & $\kappa_j\le\Delta(j)$ & Index $j$ enters when its cost is at
+  most its gain. \\
+entry count & $k^*$ & The number of indices before the first one whose entry
+  condition fails (M5). \\
+count invariance & $|S|=k^*$ & Every pure-strategy equilibrium has $k^*$
+  entrants (M6). \\
+identity multiplicity & $S\ne S'$, $|S|=|S'|=k^*$ & Different entrant sets can
+  be equilibria at the same count (Appendix~\ref{app:primitives}). \\
+assortative set & $\{0,\dots,k^*-1\}$ & The $k^*$ richest challengers (M7,
+  M8). \\
+marginal entrant & index $k^*-1$ & The poorest entrant of the assortative
+  set. \\
+first outsider & index $k^*$ & The richest challenger outside the assortative
+  set. \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Comparative statics}}\\[2pt]
+change of profile & $w\mapsto w'$ & Any map between sorted wealth profiles.
+  No result assumes it keeps the mean unless it says so. \\
+mean-preserving spread & $\sum_jw'_j=\sum_jw_j$, $w'$ majorizing $w$ & The case
+  of economic interest, and not a hypothesis of M12. \\
+displacement & $d_j=w'_j-w_j$ & The rank-by-rank difference of the two sorted
+  profiles. \\
+pivot-spread & $T$ with $T(w)\ge w$ for $w\ge x_0$ and $T(w)\le w$ for
+  $w\le x_0$ & A non-decreasing map that spreads wealth on both sides of the
+  pivot $x_0$ (M13). \\
+ordering in dispersion & $z-y$ non-decreasing & For quantile functions $y$ and
+  $z$, the second law is more dispersed \citep{LewisThompson1981}. With a
+  crossing point, the transport map between the two laws is a pivot-spread. \\
+margin condition & $d_{k^*-1}\ge0$, or $d_{k^*}\le0$ & The hypothesis of the
+  rise branch, read at the marginal entrant, and of the fall branch, read at
+  the first outsider (M12). \\
+band & $d_{k^*-1}<0<d_{k^*}$ & The margins on which the margin condition is
+  silent (M14). \\[4pt]
+\multicolumn{3}{@{}l}{\emph{Aggregates}}\\[2pt]
+total entry cost & $\sum_{i\in S}\kappa(w_i)$ & In utility units. Its resource
+  counterpart $|S|c=k^*c$ is the same in every equilibrium. \\
+sum of payoffs & $\sum_iU_i$ & Unweighted, so an interpersonal comparison of
+  the index $u$ (M8). \\
+selection & a rule picking one equilibrium & Not a refinement. Nothing claims
+  that players coordinate on it. \\
+\end{longtable}
+\normalsize
+
+Three pairs are kept apart because earlier drafts conflated them. The entry
+cost in utility, $\kappa$, varies with wealth, while the fee in resources, $c$,
+does not and is what society gives up. Count invariance holds, while identity
+multiplicity is real, and every comparative static concerns the count for that
+reason. A change of profile is what the results apply to, while the margin
+condition is what they assume.
+
 \section{Primitives and scope}
-\label{app:scope}
+\label{app:primitives}
+
+\paragraph{The contest.} One prize of value $V>0$ is fixed and exogenous, and
+it is awarded by rank rather than sold. $Q$ challengers and one incumbent
+compete. Each challenger chooses $e_i\in\{0,1\}$, and entry costs the fee $c$.
+The draws $r_i$ and $s_i\ge0$ are independent across players and independent of
+the wealth profile, from arbitrary laws. The score is
+$\sigma_i=\mu r_i+(1-\mu)s_ie_i$, the highest score takes the prize, and the game
+is static and played once. By M1 the gain is proportional to $V$, so $V$ enters
+only as a scale. \citet{ColeMailathPostlewaite1992} read status as ``a ranking
+device that determines how well he or she fares in the nonmarket sector'', which
+is the sense of a prize awarded by rank.
+
+\paragraph{Payoffs.} With $u$ the utility of wealth,
+\[
+  U_i=u(w_i-c\,e_i)+V\,\mathbf 1\{i\text{ wins}\}.
+\]
+The fee is paid inside $u$, so its burden is felt in utility and varies with
+wealth. The prize enters outside $u$ and linearly, so rich and poor value it
+alike. Inequality therefore acts through one channel, the cost of entry. This
+is the privilege contest of \citet{SchroyenTreich2016}, and not their
+rent-seeking contest, in which a money prize would sit inside $u$.
+
+\paragraph{Utility.} $u$ is strictly increasing and burden-monotone, so
+$\kappa(w)=u(w)-u(w-c)$ is strictly decreasing on $(c,\infty)$. Strict
+concavity implies it (M23), and it is strictly weaker (M24). A challenger whose
+wealth is at or below $c$ does not enter. The strictness result M15 also uses
+$\kappa(w)\to\infty$ as $w\downarrow c$, which holds exactly when
+$u(x)\to-\infty$ as $x\downarrow0$ (M25).
+
+\paragraph{Score laws.} $F$ is the law of $\mu r+(1-\mu)s$ and $G$ the law of
+$\mu r$, and both are taken to have no atoms (Appendix~\ref{app:evidence}).
+Earlier drafts also assumed a common lower endpoint for $F$ and $G$ and that
+$\varphi$ vanishes at both ends of the support. No row uses either, and both
+are dropped.
+
+\paragraph{Information.} The realised wealth profile is common knowledge, and
+entry is simultaneous. Under this assumption the entry condition is written on
+the sorted profile, and $k^*$ is a count shared by every pure-strategy
+equilibrium (M6). It does not pin who enters. With
+$\kappa=(2,5,8)$ and $\Delta=(12,10,1)$, the sets $\{0,1\}$, $\{0,2\}$ and
+$\{1,2\}$ are all equilibria, the last without the richest challenger
+(\lean{EntryContestEq.three_equilibria}). Identities are pinned when
+$\Delta(k^*-1)<\kappa_{k^*}$ (M7). Under private entry costs the count would be
+binomial and the entrant set random, as in \citet{MorenoWooders2011}, where
+every buyer compares her own cost with one threshold. Here the threshold
+depends on the index, $\kappa_j\le\Delta(j)$, and it is flat only when $\Delta$
+is constant, which M4 rules out whenever $\int\varphi^2\,dK_m>0$.
+
+\paragraph{The anonymity boundary.} Independence of the draws from wealth makes
+$F$ and $G$, and so $\Delta$, depend on the count of entrants alone (M26).
+Economies in which wealth buys ability are outside every row. The exclusion is
+shown and not only asserted. When ability falls with wealth, equilibria of
+different sizes coexist (M27), and count invariance fails. The question of
+how many enter and the question of which enter then cease to be separable,
+and every comparative static of the model concerns the count. When ability
+rises with wealth, count invariance held in every economy sampled by
+\path{checks/verify_anonymity.py}. That direction is not claimed.
 
 \section{Refuted conjectures}
 \label{app:refuted}
 
+\paragraph{R1, a collapse threshold.} An earlier draft conjectured a finite
+$\bar Q$ beyond which $k^*=0$. The conjecture is false. With $r$ uniform on
+$[0,1]$, $s=0$ with probability $p$ and $s=1$ otherwise, $0<\mu\le\frac12$ and
+an investing incumbent, for every $Q\ge1$
+\[
+  \Delta_Q(0)=V\Big(\frac{1-p^2}2-\frac{p(1-p)}{Q+1}\Big)\ge V\,\frac{1-p}2,
+  \qquad \Delta_Q(0)\to V\,\frac{1-p^2}2,
+\]
+so a challenger whose cost is at most $V(1-p)/2$ enters for every $Q$
+(\lean{EntryContestRefute.bern_Delta}, \lean{EntryContestRefute.bern_Delta_lower},
+\lean{EntryContestRefute.bern_Delta_limit}). When an outsider's score never
+exceeds $x_G$, $\Delta(m)\ge V\big(\int_{x\ge x_G}CF^m\,dF-\frac1{Q-m}\big)$ for
+$m<Q$, and the first term does not depend on $Q$
+(\lean{EntryContestRefute.r1_lower_bound}). An earlier draft gave the limit as
+$\Pr(X>\mu)$ times the chance of beating the incumbent. That formula is
+withdrawn, since in the family above $\Pr(X>\mu)=1-p$
+(\lean{EntryContestRefute.bern_investor_above}) while the limit is
+$V(1-p)(1+p)/2$.
+
+\paragraph{R2, fewer entrants as $Q$ grows.} A referee conjectured that for
+$\mu>0$ a larger $Q$ shrinks the gain, so fewer enter. The conjecture is not
+general. In the family of R1 with $0<p<1$, $\Delta_Q(0)$ rises strictly at
+every $Q$ (\lean{EntryContestRefute.bern_Delta_strictMono}), so a challenger
+whose cost lies between $\Delta_Q(0)$ and $\Delta_{Q+1}(0)$ stays out with $Q$
+challengers and enters with $Q+1$. With $r$ uniform the gain never falls in $Q$
+(M18). The conjectured direction occurs for other primitives (M20), and the
+sign of the effect is set by the law of $r$ (M16 to M22).
+
 \section{Responses to the referee reports}
 \label{app:referees}
+
+\paragraph{Asymmetric $k$-of-$Q$ equilibria.} Both referees found that the
+earlier version compared aggregate participation regimes instead of checking
+unilateral deviations. The model now derives the asymmetric equilibrium in
+which $k^*$ of the $Q$ challengers enter, checks deviations index by index, and
+shows the count is the same in every equilibrium (M5 to M8).
+
+\paragraph{Prize and affordability.} The second referee objected that the
+earlier version used one quantity both as inequality and as the prize, which
+made the inequality result close to tautological, and that a larger prize
+should raise every participant's incentive. The prize is now fixed and
+separate from the wealth distribution (Appendix~\ref{app:primitives}). A larger
+prize raises every gain and does not lower the entry count, and a larger fee
+does not raise it (M11).
+The inequality result is the sign rule of M12 to M15, in which $V$ does not
+move.
+
+\paragraph{The mobility ceiling.} Both referees found the old ceiling an
+artefact of uniform supports and of a limit in $Q$ under which the
+equilibrium does not exist. The saturation bound replaces it. An entrant at
+index $m$ with cost $\kappa$ has $(m+1)\kappa\le V$, so the marginal entrant
+gives $k^*\le V/\kappa_{k^*-1}$ for every $Q$, with no limit taken (M10).
 
 \bibliographystyle{plainnat}
 \bibliography{refs}

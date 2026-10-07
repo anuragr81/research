@@ -372,3 +372,12 @@ check.
 The audit reports 28 theorems, 28 audited and 0 sorry. Nine theorems use no axiom, three
 use `propext` only and sixteen use `propext` and `Quot.sound`. No theorem uses
 `Classical.choice`.
+
+## Quotations used in `MANUSCRIPT.tex`
+
+One line each, copied from the block quotations above so the manuscript
+checker can match them. No new reading.
+
+| Page | Quotation |
+|---|---|
+| p.855 | "Individuals will self-select the payment scheme in accordance with their wealth." |

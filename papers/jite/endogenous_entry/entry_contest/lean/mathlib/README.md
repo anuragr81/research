@@ -249,6 +249,7 @@ the entry condition below it and fails it at `k*` when `k* < Q`.
 | `IsEquilibriumR`, `count_invariance_fin` | Every pure-strategy equilibrium among `Q` challengers has size `k*` |
 | `assortative_is_equilibrium` | N4 (i). The `k*` cheapest challengers form an equilibrium |
 | `assortative_unique` | An equilibrium of size `k*` whose members all lie below `k*` is the assortative set |
+| `three_equilibria` | With costs `(2, 5, 8)` and gains `(12, 10, 1)`, the sets `{0, 1}`, `{0, 2}` and `{1, 2}` are all equilibria, so identities are not pinned without M7's condition (pass 5) |
 | `assortative_min_cost` | N4 (ii). No set of `k` challengers costs less in total than the `k` cheapest |
 | `prod_profile_anonymous`, `prize_term_anonymous` | With identical score laws, the challengers' win probabilities sum to a function of the entrant count alone |
 | `payoffSum`, `payoff_gap_anonymous` | N4 (iii). Payoff sums of two equal-size entrant sets differ exactly by their total costs |
