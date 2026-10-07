@@ -294,6 +294,9 @@ paper's claims, and only then write the manuscript.
      carries the exact strict rise and the uniform monotonicity and marks the
      crossover as an illustration, and the index rows R1 and R2 cite the Lean.
      `LITERATURE.tex` §Refuted conjectures was brought into line.
+     The referee's direction is now exhibited exactly (`fall_from_one` in
+     `lean/mathlib/FallWitness.lean`, 7 Oct 2026), so §R2 now says that the
+     sign depends on the primitives and that the law of `r` sets it.
   2. **With a uniform base score the first entrant's gain never falls in
      `Q`.** For any law of `s >= 0`, any `0 < mu <= 1` and any incumbent,
      `Delta(0, .)` is non-decreasing (`pmu_step_nonneg_uniform`,
@@ -319,6 +322,15 @@ paper's claims, and only then write the manuscript.
      investing incumbent, with steps `23/960`, `491/86016` and
      `-1277/2580480`. The same `r` with `s` equal to `0` or `1/4` gave a fall
      from `Q = 1`, the referee's direction. The Lean proof is the next task.
+     Done 7 Oct 2026, in `lean/mathlib/FallWitness.lean`. The cheapest
+     parameters are `s` in `{0, 1}`, `mu = 3/4` and an investing incumbent,
+     so that only `Q = 1` and `Q = 2` are needed. At `p = 1/2` the gain rises
+     from `Q = 1` to `Q = 2` and falls from `Q = 2` to `Q = 3`
+     (`rise_then_fall`). At `p = 1/4` it falls from `Q = 1`
+     (`fall_from_one`). The claim can be stated with the fall exhibited. The
+     general statement that the single-peaked hypothesis holds for a base
+     density that does not rise and a single-step lift below `mu` is the next
+     proof to add, at the author's request for proofs beyond witnesses.
   3. **The anonymity boundary has an exact witness inside the primitives.**
      Three challengers have wealth `11/4, 9/4, 2`, abilities `1, 2, 3` (the
      largest of `n` uniform draws, so ability falls with wealth), CRRA
@@ -416,6 +428,10 @@ paper's claims, and only then write the manuscript.
   different laws, proves Proposition (anonymity) in that setting, and gives
   an exact two-size witness that holds for every small `mu > 0`. Findings are
   in item L4.
+  Pass 3g addendum, 7 Oct 2026. `lean/mathlib/FallWitness.lean` exhibits the
+  rise-then-fall shape and the referee's direction exactly, inside the
+  primitives, with `r` the smaller of two uniform draws. The closed forms of
+  the first two steps in `Q` are polynomials in the failure probability `p`.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
@@ -994,7 +1010,7 @@ be claimed as novel.
 | Endogenous marginal agent in the pivot rule | **SURVIVES** | Proposition (endogenous margin), machine-checked and independently recompiled (axiom-free); 20,000 economies with `k*` recomputed on both sides, 0 violations; control at the wrong index gives 154/2744, so the hypothesis is not slack. Differs from CL's fixed `theta`; framing settled under F7 — offered as a consequence of the extensive-margin formulation, not as a stronger theorem than theirs |
 | P7 uniform cap | **DOES NOT SURVIVE** | `Accounting.lean`: FJL's bound and P7's cap are instances of one lemma |
 | P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
-| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked, which holds for a uniform base score | **CANDIDATE, adopted as a claim by the author on 7 Oct 2026, novelty pending pass 7** | `pmu_single_crossing`, `pmu_quasiconcave`, `pmu_quasiconcave_uniform` in `lean/mathlib/PMU.lean`. Ryvkin and Drugov (2020) obtain unimodality of individual effort in the number of players with the same kernel through Karlin's step, so pass 7 must decide whether the result is an instance of theirs or a new statement about the entry gain |
+| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked, which holds for a uniform base score | **CANDIDATE, adopted as a claim by the author on 7 Oct 2026, novelty pending pass 7** | `pmu_single_crossing`, `pmu_quasiconcave`, `pmu_quasiconcave_uniform` in `lean/mathlib/PMU.lean`; the fall is exhibited exactly in `lean/mathlib/FallWitness.lean` (`rise_then_fall`). Ryvkin and Drugov (2020) obtain unimodality of individual effort in the number of players with the same kernel through Karlin's step, so pass 7 must decide whether the result is an instance of theirs or a new statement about the entry gain |
 | The mechanism (wealth sorts entry via concavity) | **DOES NOT SURVIVE** | Lazear–Rosen (1981) §III; Schroyen–Treich (2016) privilege contest |
 | "The combination of P7, P9-gen, P-MU" | **WEAK — see N3** | Combination claims are discounted; two of three components are not individually novel |
 

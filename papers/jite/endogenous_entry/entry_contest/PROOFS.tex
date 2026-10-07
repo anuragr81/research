@@ -302,7 +302,7 @@ P7 \S\ref{prop:P7} & $\Delta(m)\le V/(m{+}1)$; $k^*\le V/\kappa$, unif.\ in $Q$ 
   Algebraic steps \tier{S}: \file{checks/verify\_sympy.py} (S18 dominance factorisation, abstract $F,G,C$; S19 $G^{e}\le1$ on $[0,1]$; S20 $\int_0^1u^m\,du=1/(m{+}1)$, symbolic in $m$). Deduction bound~$\Rightarrow$~cap \tier{L}: \file{lean/EntryContest.lean} (\texttt{entry\_index\_bounded}). Integral monotonicity assumed, see \S\ref{sec:tiers}. Corroborated \tier{N}: \file{checks/verify\_p679.py}, \file{checks/run\_all.py}. \\[4pt]
 R2 \S\ref{sec:R2} & $k^*$ decreasing in $Q$ for all $\mu>0$ &
   \status{REFUTED} (referee) & \tier{L} &
-  \file{lean/mathlib/Refutations.lean} (\texttt{bern\_Delta\_strictMono}, \texttt{Delta\_mono\_uniform}); \file{checks/run\_all.py} (R2, illustration) \\[4pt]
+  \file{lean/mathlib/Refutations.lean} (\texttt{bern\_Delta\_strictMono}, \texttt{Delta\_mono\_uniform}); \file{lean/mathlib/FallWitness.lean} (\texttt{fall\_from\_one}, \texttt{rise\_then\_fall}); \file{checks/run\_all.py} (R2, illustration) \\[4pt]
 P8 \S\ref{prop:P8} & $k^*$ nondecr.\ in $V$, nonincr.\ in $c$ &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{entry\_monotone}, \texttt{nonentry\_monotone}); \file{checks/verify\_p89.py} (P8a, P8b) \\[4pt]
@@ -1077,11 +1077,18 @@ with $Q+1$. With $r$ uniform the gain never falls in $Q$, for any law of
 $s\ge0$, any $0<\mu\le1$ and any incumbent (\texttt{Delta\_mono\_uniform}),
 because the weight of \S\ref{prop:PMU} vanishes above $\mu$, where the
 non-investor's score cannot reach, and below $\mu$ the investor's law lies
-under the non-investor's. The conjectured direction, a gain that falls in
-$Q$, is not exhibited exactly in the model. \file{checks/run\_all.py} (R2)
-reports it by quadrature for $r$ and $s$ both Beta$(2,2)$ at $\mu$ above a
-crossover, which is an illustration and not evidence. An earlier version of
-this paragraph stated the crossover as a result.
+under the non-investor's. The conjectured direction occurs too, for other
+primitives. Take $r$ the smaller of two uniform draws, with density $2(1-r)$,
+an investment that fails with probability $p$ and otherwise lifts the score by
+$1-\mu$, $\mu=3/4$ and an investing incumbent. With $p=1/4$ the gain falls
+from $Q=1$ to $Q=2$ (\file{lean/mathlib/FallWitness.lean},
+\texttt{fall\_from\_one}), and with $p=1/2$ the gain rises from $Q=1$ to $Q=2$
+and falls from $Q=2$ to $Q=3$ (\texttt{rise\_then\_fall}). The sign of the $Q$
+comparative static therefore depends on the primitives, and the law of $r$
+sets it. \file{checks/run\_all.py} (R2) reports a crossover in $\mu$ by
+quadrature for $r$ and $s$ both Beta$(2,2)$, which is an illustration and not
+evidence. An earlier version of this paragraph stated the crossover as a
+result.
 
 \subsection{P8: prize and affordability, separated}
 \label{prop:P8}
@@ -1612,8 +1619,13 @@ nonpositive, so $\Delta(0,\cdot)$ is quasi-concave on $Q\ge1$, rising and then
 falling, where either phase may be absent (\texttt{pmu\_quasiconcave}). The
 hypothesis holds at $x_0=\mu$ when $r$ is uniform on $[0,1]$, for any law of
 $s\ge0$ and any $0<\mu\le1$ (\texttt{uniform\_left}, \texttt{uniform\_right},
-\texttt{pmu\_quasiconcave\_uniform}). Whether the hypothesis holds for other
-laws of $r$ is open.
+\texttt{pmu\_quasiconcave\_uniform}). With $r$ uniform the gain never falls
+(\S\ref{sec:R2}, \texttt{Delta\_mono\_uniform}), so the falling phase needs
+another law of $r$. It occurs for $r$ the smaller of two uniform draws, where
+the gain rises from $Q=1$ to $Q=2$ and falls from $Q=2$ to $Q=3$
+(\file{lean/mathlib/FallWitness.lean}, \texttt{rise\_then\_fall}). Whether the
+hypothesis holds for that law, and for which laws of $r$ in general, is not yet
+proved.
 
 \section{Contribution and its precedents}
 \label{sec:contribution}

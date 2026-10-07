@@ -28,7 +28,7 @@ def declarations(path):
         if m and ns and ns[-1] == m.group(1):
             ns.pop()
             continue
-        m = re.match(r"\s*(?:theorem|lemma)\s+([A-Za-z0-9_.']+)", ln)
+        m = re.match(r"\s*(?:theorem|lemma)\s+([^\s:(\[{]+)", ln)
         if m:
             names.append(".".join(ns + [m.group(1)]))
     return names

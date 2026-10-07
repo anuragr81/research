@@ -176,6 +176,26 @@ that `φ = G − F` is single-peaked.
 | `winProb_tendsto`, `gain_tendsto` | Every win probability is continuous at `μ = 0` |
 | `anon_witness_positive`, `anon_witness_exists`, `laws_noAtoms` | Both equilibria persist for every small `μ > 0`, where every law has no atoms, so count invariance fails inside the primitives once ability falls with wealth |
 
+## FallWitness.lean, the gain rises and then falls in `Q`
+
+The base score `r` is the smaller of two uniform draws, with density `2(1 − r)`.
+The investment fails (`s = 0`) with probability `p` and otherwise lifts the
+score by `1 − μ`, with `μ = 3/4`, and the incumbent invests.
+
+| Theorem | Content |
+|---|---|
+| `investorLaw_bern`, `cdf_investorLaw_bern`, `integral_investorLaw_bern` | The investor's law is `p` times the base law scaled by `μ` plus `1 − p` times the same law shifted by `1 − μ`, with the CDF and integrals that follow |
+| `integral_poly8` | The integral of a polynomial of degree at most 7 over an interval, by its antiderivative |
+| `base1_one` to `shift1_two` | The six piecewise polynomial integrals that `Δ(0, 1)`, `Δ(0, 2)` and `Δ(0, 3)` reduce to, each verified by `ring` |
+| `stepQ_one`, `stepQ_two` | `Δ(0, 2) − Δ(0, 1) = V(−11p²/162 + 1901p/21870 − 208/10935)` and `Δ(0, 3) − Δ(0, 2) = V(−4933p²/393660 + 77219p/2755620 − 10672/688905)` |
+| `rise_then_fall` | At `p = 1/2`, `Δ(0, 1) < Δ(0, 2)` and `Δ(0, 3) < Δ(0, 2)` |
+| `fall_from_one` | At `p = 1/4`, `Δ(0, 2) < Δ(0, 1)`, the direction Referee 2 conjectured |
+| `αp_le_β0`, `αp_noAtoms`, `β0_noAtoms` | The witness satisfies P2 and has no atoms, so it lies inside the primitives |
+
+The polynomial coefficients were generated outside Lean and pasted in. Lean
+re-verifies each piece against the CDF formulas and each closed form against
+the pieces, so a wrong coefficient would fail the build.
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
