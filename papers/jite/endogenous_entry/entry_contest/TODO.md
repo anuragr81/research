@@ -228,15 +228,32 @@ paper's claims, and only then write the manuscript.
      not proved. The author should decide whether the paper claims the
      unimodality and for which laws of `r`. Its novelty against Ryvkin and
      Drugov is a question for pass 7.
+     Decision recorded 7 Oct 2026. The author adopts the rise-then-fall result
+     as a claim, stated under the single-peaked hypothesis with the uniform
+     base score as the case proved from the primitives. The claim is a
+     candidate row of the novelty ledger until pass 7.
   2. **The identity and the hump are proved as stated, with the factor `V`.**
      `D(Q) = -V (int W dF - int W dG)` for `Q >= 1` and every incumbent law
      (`pmu_identity`, `pmu_sign_iff`). `PROOFS.tex` writes it with `V = 1`.
      The kernel `g^(Q-1) (1 - g)` rises up to `(Q-1)/Q` and falls after it
      (`kernel_rises`, `kernel_falls`, `kernel_max`).
+     Decision recorded 7 Oct 2026. The author asked for the two passages to
+     be rewritten. `PROOFS.tex` §P-MU now states the identity with `V` and
+     `C`, corrects the orientation and states the quasi-concavity with its
+     hypothesis, and open item 5 now names what remains open. The tier caveat
+     on P-MU, the P-MU row of the verification index and the matching item of
+     `LITERATURE.tex` were brought into line in the same edit.
   3. **"First-order stochastic dominance alone cannot sign the comparison"
      is not yet proved.** The hump does not show it. A proof needs two
      admissible pairs with `F <= G` and opposite signs of `D(Q)` at one `Q`,
      which pass 3g can supply as exact witnesses.
+     Proved 7 Oct 2026 at the author's request
+     (`lean/mathlib/PMUWitness.lean`, `fosd_does_not_sign`). The pair
+     `F = x`, `G = 1 - (1-x)^2` gives `D(1) = V/60` and `D(2) = V/420`, and
+     the pair `F = x^2`, `G = x` gives `D(Q) = -V Q/((Q+2)(Q+3)(Q+4))` for
+     every `Q` (`pairB_step`). Both pairs have `F <= G`, no atoms and an
+     investing incumbent. The claim is therefore true, at `Q = 1` and at
+     `Q = 2`.
   - Done when each item has the author's decision recorded and, where
     accepted, the edit applied in the manuscript skeleton.
 
@@ -885,7 +902,8 @@ be claimed as novel.
 | One-sided rank condition on two sorted profiles, with non-dispersive spreads inside its scope | **SURVIVES, narrower than first written** | Proposition (tail condition), machine-checked and independently recompiled; pivot-spread shown to be a special case; explicit multi-crossing witness plus 3000 randomised spreads (977 multi-crossing, 2276 genuine MPS), 0 violations. **Does not remove the scope caveat** — MPS does not imply the tail condition (37/4,000 genuine MPS fail it with `k*` strictly falling, F2), and mean-preservation is not used in the proof at all (F3). Weakens the caveat and relocates it to an endogenous object |
 | Endogenous marginal agent in the pivot rule | **SURVIVES** | Proposition (endogenous margin), machine-checked and independently recompiled (axiom-free); 20,000 economies with `k*` recomputed on both sides, 0 violations; control at the wrong index gives 154/2744, so the hypothesis is not slack. Differs from CL's fixed `theta`; framing settled under F7 — offered as a consequence of the extensive-margin formulation, not as a stronger theorem than theirs |
 | P7 uniform cap | **DOES NOT SURVIVE** | `Accounting.lean`: FJL's bound and P7's cap are instances of one lemma |
-| P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics |
+| P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
+| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked, which holds for a uniform base score | **CANDIDATE, adopted as a claim by the author on 7 Oct 2026, novelty pending pass 7** | `pmu_single_crossing`, `pmu_quasiconcave`, `pmu_quasiconcave_uniform` in `lean/mathlib/PMU.lean`. Ryvkin and Drugov (2020) obtain unimodality of individual effort in the number of players with the same kernel through Karlin's step, so pass 7 must decide whether the result is an instance of theirs or a new statement about the entry gain |
 | The mechanism (wealth sorts entry via concavity) | **DOES NOT SURVIVE** | Lazear–Rosen (1981) §III; Schroyen–Treich (2016) privilege contest |
 | "The combination of P7, P9-gen, P-MU" | **WEAK — see N3** | Combination claims are discounted; two of three components are not individually novel |
 

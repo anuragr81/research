@@ -209,17 +209,11 @@ bound, so the \emph{proof steps} are verified rather than the conclusion. The
 numerical block in \file{checks/verify\_p679.py} is retained as corroboration
 and is subject to the same caveat.
 
-\paragraph{A caveat on P-MU.} S11 establishes that the weight
-$W=G^{Q-1}(1-G)F$ is hump-shaped in $G$, so first-order stochastic dominance
-cannot by itself sign $\int W\,dF-\int W\,dG$. S12 then evaluates that
-integral exactly over the power family $F=x^{k}$, $G=x$ satisfying the
-model's constraint $F\le G$, and finds the \emph{same} sign in all fifteen
-admissible pairs tested. So the hump-shape is a statement about what FOSD
-alone cannot deliver; it is not a demonstration that both signs occur within
-that family. The $\mu$-crossover that refutes R2 is exhibited in
-\file{checks/verify\_p89.py} using the model's induced $F,G$, which are not
-power functions. This distinction was not drawn in earlier versions of this
-document and the earlier phrasing overstated what had been shown.
+\paragraph{A caveat on P-MU.} The hump of the weight does not by itself show
+that first-order stochastic dominance leaves the sign of the P-MU comparison
+open. Two exact witnesses with $F\le G$ and opposite signs show it, and both are
+proved in Lean (\S\ref{prop:PMU}). An earlier version of this paragraph rested
+the point on S11 and S12, which do not establish it.
 
 \paragraph{Why row BM is in the table at all.} Every other row records a
 result derived \emph{within} the model. Row BM does not: it is a statement
@@ -341,9 +335,9 @@ BAND \S\ref{prop:band} & Coverage is exactly $k^*\le L$ or $M<k^*$; every
 P9-str \S\ref{prop:P9strict} & Strong spread $\Rightarrow$ $k^*$ falls strictly &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{linSpread\_strict\_anti\_in\_lam}, \texttt{linSpread\_unbounded\_below}, \texttt{entry\_ceiling\_of\_marginal\_exit}, \texttt{strict\_drop\_of\_marginal\_exit}); \file{checks/verify\_sympy.py} (S16 $\kappa\to\infty$, S17 strict monotonicity); \file{checks/verify\_p9gen.py} (P9-STRICT, 400 economies) \\[4pt]
-P-MU \S\ref{prop:PMU} & Exact condition for sign of $d\Delta(0)/dQ$ &
-  \status{PROVED} & \tier{S} &
-  \file{checks/verify\_sympy.py} (S10 identity exact; S11 weight hump-shaped; S12 sign over the admissible power family, see \S\ref{sec:tiers}); \file{checks/verify\_p89.py} (P-MU, observed sign) \\[4pt]
+P-MU \S\ref{prop:PMU} & Exact condition for sign of $d\Delta(0)/dQ$; $\Delta(0,\cdot)$ quasi-concave in $Q$ when $\varphi$ is single-peaked &
+  \status{PROVED} & \tier{L} &
+  \file{lean/mathlib/PMU.lean} (\texttt{pmu\_identity}, \texttt{pmu\_sign\_iff}, \texttt{kernel\_rises}, \texttt{kernel\_falls}, \texttt{pmu\_single\_crossing}, \texttt{pmu\_quasiconcave}, \texttt{pmu\_quasiconcave\_uniform}); \file{lean/mathlib/PMUWitness.lean} (\texttt{fosd\_does\_not\_sign}); \file{checks/verify\_sympy.py} (S10--S12); \file{checks/verify\_p89.py} (P-MU, observed sign) \\[4pt]
 Alg & $KF-KG=K(F-G)$ (factorisation used in P3) &
   \status{PROVED} & \tier{L} &
   \file{lean/EntryContest.lean} (\texttt{step\_factor}, \texttt{step\_sign}) \\
@@ -1542,43 +1536,54 @@ strictly lower at $\lambda=100$ than at $\lambda=1$ in every case.
 \label{prop:PMU}
 
 \begin{proposition}
-$\Delta(0,Q{+}1)-\Delta(0,Q) = -\int G^{Q-1}(1-G)F\,(dF-dG)$, so
-$\Delta(0)$ is increasing in $Q$ if and only if
+For $Q\ge1$, $\Delta(0,Q{+}1)-\Delta(0,Q) = -V\int W\,(dF-dG)$ with
+$W \equiv C\,G^{Q-1}(1-G)$, where $C$ is the incumbent's CDF. With $V>0$,
+$\Delta(0)$ rises from $Q$ to $Q+1$ if and only if
 \[
-  \int W\,dF \;<\; \int W\,dG, \qquad W \equiv G^{Q-1}(1-G)F .
+  \int W\,dF \;<\; \int W\,dG .
 \]
 \end{proposition}
-The difference identity is exact (\file{checks/verify\_sympy.py}, S10), and
-$W$ is hump-shaped in $G$ with an interior maximum at $G=(Q-1)/Q$ (S11), so
-first-order stochastic dominance alone cannot sign the comparison: the
-crossover $\mu^*$ of \S\ref{sec:R2} is where the weighting flips. This is an
-exact characterisation, not an asymptotic one, and it is why $\mu^*$ is
-distribution-dependent rather than universal.
+The identity holds for every incumbent CDF $C$
+(\file{lean/mathlib/PMU.lean}, \texttt{pmu\_identity}, \texttt{pmu\_sign\_iff}).
+The factor $G^{Q-1}(1-G)$ rises in $G$ up to $(Q-1)/Q$ and falls beyond it
+(\texttt{kernel\_rises}, \texttt{kernel\_falls}). First-order stochastic
+dominance alone does not sign the comparison. Two pairs with $F\le G$, no atoms
+and an investing incumbent give opposite signs at $Q=1$ and at $Q=2$. The pair
+$F=x$, $G=1-(1-x)^2$ on $[0,1]$ gives $V/60$ and $V/420$, while the pair
+$F=x^2$, $G=x$ gives $-VQ/\big((Q+2)(Q+3)(Q+4)\big)$ at every $Q$
+(\file{lean/mathlib/PMUWitness.lean}, \texttt{fosd\_does\_not\_sign},
+\texttt{pairB\_step}).
 
-\paragraph{Provenance of the weight.} The hump-shaped factor is not an artefact
-of this construction. $G^{Q-1}(1-G)$, peaking at $G=(Q-1)/Q$, is exactly the
-log-supermodular kernel $F^{k-1}(1-F)$, peaking at $F=(k-1)/k$, that
-\citet{RyvkinDrugov2020} use to drive their comparative statics in the number
-of players, under $G \leftrightarrow F$ and $Q \leftrightarrow k$; the extra
-factor $F$ here is the incumbent's CDF and carries no $Q$. Their corresponding
-object is $b_k = \mathbb{E}[f(X_{(k-1:k-1)})]$, the individual marginal benefit
-of effort, which is the right comparator for $\Delta(0)$ --- their hazard-rate
-result concerns \emph{aggregate} effort and a different order statistic. The
-log-supermodularity that drives their argument does carry over to $W$, but
-their single-crossing hypothesis does not: Karlin's variation-diminishing step
-requires the integrand to cross $+-$, whereas $F(f-g) = -F\varphi'$ crosses
-$-+$. Consequently no unimodality of $\Delta(0,Q)$ in $Q$ is claimed here, and
-none follows from the correspondence.
+\paragraph{Provenance of the weight.} The factor $G^{Q-1}(1-G)$ has the form of
+the log-supermodular kernel $F^{k-1}(1-F)$ that \citet{RyvkinDrugov2020} use for
+their comparative statics in the number of players, under $G \leftrightarrow F$
+and $Q \leftrightarrow k$. The peak at $(Q-1)/Q$ is our computation, which
+\citet{RyvkinDrugov2020} do not state. The extra factor $C$ here is the
+incumbent's CDF and carries no $Q$. Their corresponding object is
+$b_k = \mathbb{E}[f(X_{(k-1:k-1)})]$, the individual marginal benefit of effort,
+which is the right comparator for $\Delta(0)$, whereas their hazard-rate result
+concerns aggregate effort and a different order statistic.
 
-One caveat, recorded because an earlier version of this document overstated
-the point. Hump-shapedness shows that FOSD does not \emph{determine} the
-sign; it does not by itself exhibit both signs. Evaluating the integral
-exactly over the power family $F=x^{k},G=x$ subject to the model constraint
-$F\le G$ gives the same sign in all fifteen admissible pairs tested (S12).
-The sign reversal underlying the refutation of R2 is exhibited in
-\file{checks/verify\_p89.py} on the model's induced $F,G$ --- scores
-$\mu r+(1-\mu)se$ --- which are not power functions. Verified against the
-observed sign at $\mu\in\{0.1,\dots,0.9\}$ and $Q\in\{4,8,16\}$.
+\paragraph{The single-crossing step carries over.} Since $f-g=-\varphi'$, the
+identity reads $\Delta(0,Q{+}1)-\Delta(0,Q)=V\int G^{Q-1}(1-G)\,C\varphi'\,dx$,
+and $C\varphi'$ crosses $+-$ whenever $\varphi$ is single-peaked, the
+orientation that the variation-diminishing step of
+\citet{RyvkinDrugov2020} needs. An earlier version of this paragraph dropped
+the leading minus sign of the identity and concluded that the orientation was
+reversed. The step is proved on measures, without densities. If $dF-dG$ is
+nonpositive on $(-\infty,x_0]$ and nonnegative on $(x_0,\infty)$, then for
+$1\le Q_1\le Q_2$
+\[
+  \Delta(0,Q_2{+}1)-\Delta(0,Q_2) \;\le\; G(x_0)^{Q_2-Q_1}
+  \big[\Delta(0,Q_1{+}1)-\Delta(0,Q_1)\big]
+\]
+(\texttt{pmu\_single\_crossing}). Once the difference is nonpositive it stays
+nonpositive, so $\Delta(0,\cdot)$ is quasi-concave on $Q\ge1$, rising and then
+falling, where either phase may be absent (\texttt{pmu\_quasiconcave}). The
+hypothesis holds at $x_0=\mu$ when $r$ is uniform on $[0,1]$, for any law of
+$s\ge0$ and any $0<\mu\le1$ (\texttt{uniform\_left}, \texttt{uniform\_right},
+\texttt{pmu\_quasiconcave\_uniform}). Whether the hypothesis holds for other
+laws of $r$ is open.
 
 \section{Contribution and its precedents}
 \label{sec:contribution}
@@ -1817,16 +1822,13 @@ What genuinely remains:
   $\lambda\to\infty$. A characterisation of exactly which spreads move
   $k^*$ strictly, rather than an asymptotic sufficient condition, is not
   attempted.
-\item \textbf{The competitor-number effect, sharpened.} P-MU characterises the
-  sign of $\mathrm{d}\Delta(0)/\mathrm{d}Q$ exactly, but says nothing about the
-  \emph{shape} of $\Delta(0,\cdot)$. Its weight coincides with the kernel
-  \citet{RyvkinDrugov2020} use to establish unimodality in the number of
-  players, and the log-supermodularity their argument needs does carry over
-  (\S\ref{prop:PMU}); what fails is the orientation of the single crossing.
-  Reworking the argument for the reversed orientation would plausibly yield an
-  interior \emph{minimum} of $\Delta(0,Q)$ in $Q$, which would sit
-  consistently with the refutations of \S\ref{sec:R1} and \S\ref{sec:R2}. Not
-  attempted, and not claimed.
+\item \textbf{The competitor-number effect, sharpened.} $\Delta(0,\cdot)$ is
+  quasi-concave in $Q$ when $\varphi$ is single-peaked, and $\varphi$ is
+  single-peaked when $r$ is uniform (\S\ref{prop:PMU}). Open are the laws of
+  $r$ beyond the uniform for which $\varphi$ is single-peaked, and the location
+  of the peak in $Q$. An earlier version of this item conjectured an interior
+  \emph{minimum}, from the reversed orientation that \S\ref{prop:PMU} corrects.
+  Under the single-peaked hypothesis an interior minimum is impossible.
 \end{enumerate}
 
 \bibliography{refs}

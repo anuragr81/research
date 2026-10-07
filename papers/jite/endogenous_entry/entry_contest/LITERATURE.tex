@@ -1200,12 +1200,14 @@ require the $Q$-player binary-entry setting jointly:
   then falls, and an interior \emph{minimum} is excluded. An exact example
   with $F = x^4$ and $G = 1-(1-x)^5$ rises and then falls, the difference
   being $1/9009$ and $106/2909907$ at $Q = 1, 2$ and negative for $Q = 3$ to $6$
-  (\texttt{lit/ryvkin\_drugov\_2020}, RD-8, recomputed independently). Two
-  steps are not established, that $\varphi$ is single-peaked for the model's
-  induced $F$ and $G$, and the continuous variation-diminishing step, which
-  the Lean proves for finite sums only. No unimodality claim is made until both
-  are. \texttt{PROOFS.tex} still carries the reversed-orientation sentence and
-  the interior-minimum target (\texttt{TODO.md} item L1, entry 0).
+  (\texttt{lit/ryvkin\_drugov\_2020}, RD-8, recomputed independently). The
+  continuous variation-diminishing step is proved on measures, without
+  densities (\texttt{lean/mathlib/PMU.lean}, \texttt{pmu\_single\_crossing},
+  \texttt{pmu\_quasiconcave}), and $\varphi$ is single-peaked for the model's
+  induced $F$ and $G$ when $r$ is uniform (\texttt{pmu\_quasiconcave\_uniform}).
+  Other laws of $r$ are open. The author has adopted the rise-then-fall result
+  as a claim of the paper, and its novelty against \citet{RyvkinDrugov2020} is
+  assessed with the other novelty-bearing readings (\texttt{TODO.md} item L3).
 \end{enumerate}
 
 An earlier version of this section concluded that the contribution should be

@@ -142,6 +142,16 @@ The hypothesis is stated on measures, `α|(−∞, x0] ≤ β|(−∞, x0]` and
 `β|(x0, ∞) ≤ α|(x0, ∞)`, so no densities are assumed. With densities it says
 that `φ = G − F` is single-peaked.
 
+## PMUWitness.lean, first-order dominance does not sign P-MU
+
+| Theorem | Content |
+|---|---|
+| `cdf_unif_of_mem`, `integral_udiff` | The uniform law has `cdf = x` on `[0, 1]`, and `∫ (u^k − u^(k+1)) du = 1/(k+1) − 1/(k+2)` |
+| `pairB_fosd`, `pairB_step`, `pairB_step_neg` | Pair B, `F = x²` (the larger of two uniforms) and `G = x`. `F ≤ G`, and `D(Q) = −V Q/((Q+2)(Q+3)(Q+4)) < 0` for every `Q ≥ 1` |
+| `lawA`, `cdf_lawA`, `pairA_fosd` | Pair A, `F = x` and `G = 1 − (1 − x)²` (the smaller of two uniforms, built by reflecting the larger). `F ≤ G` |
+| `pairA_step_one`, `pairA_step_two` | `D(1) = V/60` and `D(2) = V/420` for pair A |
+| `fosd_does_not_sign` | At `Q = 1` and `Q = 2`, the two pairs give opposite signs, both with `F ≤ G`, no atoms and the incumbent investing |
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
