@@ -139,6 +139,27 @@ paper's claims, and only then write the manuscript.
      With `eps = 3/50` and period `p = 1`, so `k = 2 pi`, at `x = 5/2`
      `u'(x) = 1/(2 sqrt(5/2)) - 6 pi/50`, and `1/(2 sqrt(5/2)) < 1/3 < 18/50 <
      6 pi/50`, so `u' < 0` there. Pass 3f settles both in Lean.
+     Settled by pass 3f, 7 Oct 2026 (`lean/mathlib/BurdenWeaker.lean`). The
+     example is not increasing for any `eps > 0` and `k > 0`
+     (`bm_example_not_monotone`), so it fails two admissibility conditions.
+     The periodic replacement proposed above fails too, because a fixed
+     amplitude eventually dominates the falling marginal utility of `log`
+     (checked by hand with the argument of `bm_example_not_monotone`, not in
+     Lean, since the candidate was dropped). The
+     corrected example is `u(x) = log x + x + eta int_0^x ramp`, where the
+     ramp rises from 0 to 1 over `[x0, x0 + sigma]`. That `u` is strictly
+     increasing, strictly convex on `[x0, x0 + sigma]`, and admissible, since
+     its burden is strictly decreasing and diverges at `c`
+     (`rampU_admissible`). Claim BM therefore holds as stated
+     (`bm_strictly_weaker`). The example is not knife-edge, because its
+     admissible parameters form an open set (`admissibleParams_open`). The
+     open question in `PROOFS.tex` on how much room burden-monotonicity buys is
+     answered for convex stretches. Every width below `c` is admissible
+     (`admissible_width`), and a convex stretch wider than `c` rules
+     burden-monotonicity out (`not_burden_of_convex_stretch`). The example is
+     continuously differentiable but not twice differentiable at the ends of
+     the ramp. Decision recorded 7 Oct 2026. The author asked for pass 3f to
+     settle the claim before pass 3e.
   1. **P9 strictness needs a convention at the support floor.** A large `lam`
      pushes the poorest challengers below `c` before the marginal entrant
      exits, which leaves the primitives' wealth support. The Lean statement
@@ -146,10 +167,18 @@ paper's claims, and only then write the manuscript.
      or below `c` does not enter. The manuscript should either state that
      convention or restrict `lam` to spreads that keep every challenger
      above `c`, and the second option may lose the strict drop.
+     Decision recorded 7 Oct 2026. The author accepts the convention. The
+     manuscript states it as `kappa(w) = +infinity` for `w <= c`, which
+     continues `kappa` under the divergence primitive, matches a challenger's
+     inability to pay a fee above the challenger's wealth, and leaves every
+     challenger above `c` unaffected.
   2. **P9 strictness uses less than `PROOFS.tex` says.** The proof needs
      weak burden-monotonicity, the divergence of `kappa` at `c` and a
      non-increasing `Delta`. The continuity of `kappa` and the strictness of
      burden-monotonicity are not used.
+     Decision recorded 7 Oct 2026. The manuscript keeps its stated
+     assumptions, and proofs under weaker hypotheses go to a proofs-addendum
+     document kept for future reference.
   3. **The divergence primitive is `u(0+) = -infinity`.** For `u` continuous
      at `c`, `kappa` diverges as `w` falls to `c` exactly when `u` falls
      without bound at 0 (`kappa_diverges_iff`). Log and CRRA with `gamma > 1`
@@ -157,6 +186,12 @@ paper's claims, and only then write the manuscript.
      does not (`crra_kappa_not_diverges`). S16 tested log and three exponents
      above 1, so the exclusion was never visible. The primitives section
      should say which families the assumption admits.
+     Decision recorded 7 Oct 2026. Restricting or excluding families is
+     acceptable when the manuscript gives an economic or intuitive reason.
+     The reason to state here is that the primitive makes being left with no
+     wealth after the fee unboundedly costly. Under a utility with finite
+     `u(0+)`, a challenger at the floor would face a bounded cost and could
+     enter with everything staked.
   4. **S17 tested the sign of `kappa'` at one point per family.** Lean now
      proves `kappa` strictly decreasing on `(c, infinity)` for every `u`
      strictly concave on the positive reals
@@ -221,6 +256,13 @@ paper's claims, and only then write the manuscript.
   and P9 strictness from the primitives with the model's `Delta`
   (`p9_strict_model`). The analytic step (b) that `lean/EntryContest.lean`
   took as a hypothesis is therefore proved. Findings are in item L2.
+  Pass 3f done 7 Oct 2026, ahead of pass 3e at the author's request.
+  `lean/mathlib/BurdenWeaker.lean` proves Claim BM with an admissible example,
+  shows the example of `PROOFS.tex` inadmissible, proves that
+  burden-monotonicity follows when `u'` falls across every span of length `c`,
+  and bounds the admissible convex width at `c` from both sides. Details are
+  in item L2.0. Proofs that go beyond what the manuscript states are to be
+  kept in a proofs-addendum document, created with pass 4.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

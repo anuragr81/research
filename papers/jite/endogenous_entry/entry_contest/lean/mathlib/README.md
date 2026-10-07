@@ -108,6 +108,23 @@ convention that a challenger whose wealth falls to `c` or below does not
 enter, which large spreads require, because they push the poorest challengers
 below the support floor `c`.
 
+## BurdenWeaker.lean, Claim BM
+
+| Theorem | Content |
+|---|---|
+| `burden_strictAnti_of_deriv` | If `u'(w) < u'(w − c)` for every `w > c`, the burden is strictly decreasing, with no sign of `u''` assumed |
+| `not_burden_of_convex_stretch` | If `u` is convex on `[a, b]` with `b − a > c`, the burden is not strictly decreasing |
+| `bm_example_not_monotone` | The example `√x + ε sin(kx)` of `PROOFS.tex` is not increasing, for any `ε > 0` and `k > 0` |
+| `rampU`, `rampU_hasDerivAt` | The corrected example `log x + x + η ∫₀ˣ ramp`, with marginal utility `1/x + 1 + η · ramp(x)` |
+| `rampU_strictMono`, `rampU_strictConvex`, `rampU_not_concave` | It is strictly increasing on the positive reals and strictly convex on `[x0, x0 + σ]` |
+| `rampU_burden`, `rampU_kappa_diverges` | Its burden is strictly decreasing and diverges at `c` |
+| `admissibleParams_open`, `rampU_admissible` | The parameters `(x0, σ, η)` that make it admissible and non-concave form an open set |
+| `admissible_width` | Every convex width `σ < c` is attained by some admissible parameters |
+| `bm_strictly_weaker` | Claim BM. For every `c > 0`, some admissible utility is not concave |
+
+The example is continuously differentiable. It is not twice differentiable at
+`x0` and `x0 + σ`, where the ramp has corners.
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
