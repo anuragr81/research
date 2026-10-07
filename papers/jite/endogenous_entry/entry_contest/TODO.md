@@ -372,6 +372,41 @@ paper's claims, and only then write the manuscript.
   - Done when each item has the author's decision recorded and, where
     accepted, the edit applied in the manuscript skeleton or in `PROOFS.tex`.
 
+- [!] **L5. Pass 4c, 7 Oct 2026. Decisions for Anurag.** Each item rests on
+  `lean/mathlib/Spreads.lean`. Profiles are sorted, richest first, and a
+  challenger at or below the fee does not enter.
+  0. **The tail condition needs only two ranks.** `PROOFS.tex`
+     §R1 (Proposition tail condition) asks that wealth weakly rise at every
+     rank up to the margin for the count not to fall, and weakly fall at
+     every rank beyond it for the count not to rise. With both profiles
+     sorted, the rise branch needs only the marginal entrant's wealth not to
+     fall (`margin_rise`), because every richer challenger after the spread
+     is at least as rich as the marginal entrant is. The fall branch needs
+     only the first outsider's wealth not to rise (`margin_fall`). The
+     rank-by-rank conditions are special cases (`tail_rise`, `tail_fall`).
+  1. **The band moves, and the sharpness claim of `PROOFS.tex` is false as
+     stated.** With `d = w' - w`, the signs of `d` leave the direction open
+     only when `d` is negative at the marginal entrant and positive at the
+     first outsider (`branch_of_not_band`). `PROOFS.tex` §The band defines the
+     band as `L < k* <= M` from the whole sign pattern and says the tail
+     condition "is the whole of what the sign pattern supports". The margin
+     condition is strictly weaker and still settles the direction, so that
+     sentence is wrong. What survives is the corrected band. A pivot-spread
+     never enters it (`not_band_of_single_crossing`,
+     `pivot_single_crossing`), and inside it both directions occur with the
+     same signs, exactly, for every small `mu > 0`
+     (`band_both_directions_positive`). The frequencies of
+     `checks/verify_tailband.py` (T1 to T5, the 47.2% figure) describe the old
+     band and are sampling in any case.
+  2. **The novelty ledger row for the tail condition** ("One-sided tail
+     condition, fall branch free at the margin", SURVIVES minor) should say
+     that each branch reads one rank. Pass 7 should weigh whether that
+     changes the comparison with Costrell and Loury.
+  - The manuscript rows M12 to M14 already state the margin version, since
+    it is the verified statement. Done when the author decides whether
+    `PROOFS.tex` §R1 and §The band are rewritten now or left to pass 5, and
+    the ledger row is revised.
+
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
   conclusions), and appendices hold every proof and everything else
@@ -488,6 +523,13 @@ paper's claims, and only then write the manuscript.
   (`kstar_mono`), with the prize effect (`Delta_mono_prize`) and the fee
   effect for any non-decreasing `u` (`kappa_mono_fee`), where `PROOFS.tex`
   differentiated `u`. Next is pass 4c, the P9 family with the band.
+  Pass 4c done 7 Oct 2026. Model rows M12 (the margin condition), M13 (pivot
+  spreads, P9-gen and P9), M14 (the band) and M15 (strictness under a spread)
+  with their proofs, on `lean/mathlib/Spreads.lean` and
+  `lean/mathlib/KappaSpread.lean`. The notation block states the support-floor
+  rule. Writing the rows found that the tail condition needs only two ranks
+  and that the band of `PROOFS.tex` is the wrong one, recorded as item L5.
+  Next is pass 4d, P-MU.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

@@ -251,6 +251,22 @@ the entry condition below it and fails it at `k*` when `k* < Q`.
 | `assortative_min_cost` | N4 (ii). No set of `k` challengers costs less in total than the `k` cheapest |
 | `prod_profile_anonymous`, `prize_term_anonymous` | With identical score laws, the challengers' win probabilities sum to a function of the entrant count alone |
 | `payoffSum`, `payoff_gap_anonymous` | N4 (iii). Payoff sums of two equal-size entrant sets differ exactly by their total costs |
+| `kstar_mono`, `Delta_mono_prize`, `kappa_mono_fee` | P8. `k*` rises when costs fall and gains rise, the gain rises with the prize, and the cost rises with the fee for non-decreasing `u` |
+
+## Spreads.lean, wealth spreads and the entrant count (pass 4c)
+
+Profiles are sorted with the richest at rank 0. Rank `j` enters when its wealth
+exceeds `c` and its cost is within `Δ(j)` (`EntersP`), and `IsCount` fixes the
+count as the length of the prefix of entrants.
+
+| Theorem | Content |
+|---|---|
+| `enters_down`, `count_ge_of_enters`, `count_le_of_fails` | Entrants form a prefix, and the count is bounded by which ranks enter |
+| `margin_rise`, `margin_fall` | If the marginal entrant's wealth does not fall, the count does not fall; if the first outsider's wealth does not rise, the count does not rise |
+| `tail_rise`, `tail_fall` | The rank-by-rank tail condition of `PROOFS.tex` as a special case |
+| `IsPivotSpread`, `pivot_rise`, `pivot_fall`, `spread_isPivot` | P9-gen and P9. The direction is set by the marginal entrant's position against the pivot, and the linear spread with `λ ≥ 1` is a pivot-spread |
+| `InBand`, `branch_of_not_band`, `not_band_of_single_crossing`, `pivot_single_crossing` | The direction is open only when the displacement is negative at the margin and positive at the first outsider, which a pivot-spread never produces |
+| `witness_counts`, `witness_signs`, `band_both_directions`, `band_both_directions_positive` | Inside the band both directions occur, with the same signs, at the benchmark gains and for every small `μ > 0` |
 
 ## What is still assumed
 

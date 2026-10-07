@@ -147,6 +147,25 @@ that check it.}\\
   {$k^*$ is non-decreasing in $V$ and, for $u$ non-decreasing, non-increasing
   in $c$.}
   {EntryContestEq.kstar_mono, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestEq.kappa_mono_fee}
+\mrow{M12}{Margin condition.}
+  {For sorted profiles $w$ and $w'$, $w_{k^*-1}\le w'_{k^*-1}$ gives $k^*\le k'^*$, and
+  $w'_{k^*}\le w_{k^*}$ gives $k'^*\le k^*$.}
+  {EntryContestSpread.enters_down, EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_le_of_fails, EntryContestSpread.margin_rise, EntryContestSpread.margin_fall}
+\mrow{M13}{Pivot spreads (P9-gen, P9).}
+  {For a pivot-spread $T$ about $x_0$, $k^*$ weakly rises when $w_{k^*-1}\ge x_0$ and
+  weakly falls when $w_{k^*-1}\le x_0$. The linear spread about the mean is one,
+  and keeps the mean.}
+  {EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a}
+\mrow{M14}{The band.}
+  {With $d=w'-w$, the signs of $d$ leave the direction of $k^*$ open only when
+  $d_{k^*-1}<0<d_{k^*}$. A pivot-spread never does so, and inside the band both
+  directions occur for every small $\mu>0$.}
+  {EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.witness_counts, EntryContestSpread.witness_signs, EntryContestSpread.band_both_directions, EntryContestSpread.band_both_directions_positive}
+\mrow{M15}{Strictness under a spread (P9).}
+  {If some entrant lies below $x_0$ at $\lambda=1$ and $\kappa(w)\to\infty$ as
+  $w\downarrow c$, $k^*(\lambda)$ is non-increasing in $\lambda\ge1$ and
+  $k^*(\lambda)<k^*(1)$ above some $\bar\lambda$.}
+  {EntryContestKappa.exit_below_pivot, EntryContestKappa.enters_downward, EntryContestKappa.p9_strict, EntryContestKappa.p9_monotone, EntryContestKappa.p9_strict_model}
 \end{longtable}
 \normalsize
 
@@ -208,7 +227,11 @@ With $m$ other entrants among the $Q$ challengers,
 Challengers are indexed $0,\dots,Q-1$ in increasing order of cost,
 $\kappa_0\le\dots\le\kappa_{Q-1}$, which is decreasing order of wealth. Index $j$
 enters when $\kappa_j\le\Delta(j)$, and $k^*$ satisfies $\kappa_j\le\Delta(j)$ for
-$j<k^*$ and $\Delta(k^*)<\kappa_{k^*}$ when $k^*<Q$.
+$j<k^*$ and $\Delta(k^*)<\kappa_{k^*}$ when $k^*<Q$. In the results on wealth
+profiles, rank $j$ has wealth $w_j$ with $w_0\ge w_1\ge\cdots$, and enters when
+$w_j>c$ and $\kappa(w_j)\le\Delta(j)$, so a challenger whose wealth is at or below
+the fee does not enter. A prime marks the profile after a spread and its count
+$k'^*$.
 
 \begin{mproof}{M1}{EntryContestP1P2.two_max_sum, EntryContestP1P2.p1_representation, EntryContestP1P2.Delta_eq_expectation}
 For independent $X\sim A$ and $Y\sim B$ with $B$ atomless, $\Pr(X=Y)=0$, so
@@ -369,6 +392,80 @@ $\Delta_1(j)\ge0$, and for $u$ non-decreasing,
   V\le V'\ \Rightarrow\ \Delta_V\le\Delta_{V'},\qquad
   c\le c'\ \Rightarrow\ u(w)-u(w-c)\le u(w)-u(w-c').
 \]
+\end{mproof}
+
+\begin{mproof}{M12}{EntryContestSpread.enters_down, EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_le_of_fails, EntryContestSpread.margin_rise, EntryContestSpread.margin_fall}
+(i) The marginal entrant has $c<w_{k^*-1}\le w'_{k^*-1}$, so
+\[
+  \kappa(w'_{k^*-1})\le\kappa(w_{k^*-1})\le\Delta(k^*-1),
+\]
+and for $i\le k^*-1$, with $w'_i\ge w'_{k^*-1}>c$,
+\[
+  \kappa(w'_i)\le\kappa(w'_{k^*-1})\le\Delta(k^*-1)\le\Delta(i).
+\]
+Every $i<k^*$ enters after the spread, so $k^*\le k'^*$.
+(ii) For $k^*<Q$, rank $k^*$ fails before the spread. If $w'_{k^*}>c$, then
+$c<w'_{k^*}\le w_{k^*}$ and
+\[
+  \kappa(w'_{k^*})\ge\kappa(w_{k^*})>\Delta(k^*),
+\]
+so rank $k^*$ fails after the spread and $k'^*\le k^*$.
+\end{mproof}
+
+\begin{mproof}{M13}{EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a}
+$T$ is non-decreasing, so $w'_j=T(w_j)$ is sorted, and
+\[
+  x_0\le w_{k^*-1}\ \Rightarrow\ w_{k^*-1}\le T(w_{k^*-1}),\qquad
+  w_{k^*}\le w_{k^*-1}\le x_0\ \Rightarrow\ T(w_{k^*})\le w_{k^*},
+\]
+so M12 applies. For $T(w)=x_0+\lambda(w-x_0)$ with $\lambda\ge1$,
+\[
+  T(w)-w=(\lambda-1)(w-x_0),\qquad
+  \frac1Q\sum_jT(w_j)=\bar w+\lambda\Big(\frac1Q\sum_jw_j-\bar w\Big)=\bar w
+  \quad (x_0=\bar w).
+\]
+\end{mproof}
+
+\begin{mproof}{M14}{EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.witness_counts, EntryContestSpread.witness_signs, EntryContestSpread.band_both_directions, EntryContestSpread.band_both_directions_positive}
+Outside the band $d_{k^*-1}\ge0$ or $d_{k^*}\le0$, and M12 signs the change. If
+\[
+  i\le j,\ d_j>0\ \Rightarrow\ d_i\ge0,
+\]
+then $d_{k^*}>0$ gives $d_{k^*-1}\ge0$. A pivot-spread has this property, since
+$d_j>0$ gives $w_j>x_0$ and then $w_i\ge w_j>x_0$. With $c=1$,
+$\kappa(w)=\frac1{w-1}-\frac1w$ and $\Delta(m)=\frac1{m+2}$, the profiles
+\[
+  w=\big(4,\tfrac{27}{10},\tfrac{21}{10}\big),\quad
+  w'=\big(4,\tfrac{53}{20},\tfrac{13}{5}\big),\quad
+  w''=\big(4,\tfrac94,\tfrac{11}5\big)
+\]
+have
+\[
+  \kappa(w)=\big(\tfrac1{12},\tfrac{100}{459},\tfrac{100}{231}\big),\quad
+  \kappa(w')=\big(\tfrac1{12},\tfrac{400}{1749},\tfrac{25}{104}\big),\quad
+  \kappa(w'')=\big(\tfrac1{12},\tfrac{16}{45},\tfrac{25}{66}\big)
+\]
+against $\Delta=\big(\tfrac12,\tfrac13,\tfrac14\big)$, so the counts are $2$, $3$ and
+$1$, and $d'$ and $d''$ both have signs $(0,-,+)$. Every inequality is strict, so
+by M9 the counts hold for every small $\mu>0$.
+\end{mproof}
+
+\begin{mproof}{M15}{EntryContestKappa.exit_below_pivot, EntryContestKappa.enters_downward, EntryContestKappa.p9_strict, EntryContestKappa.p9_monotone, EntryContestKappa.p9_strict_model}
+Let $j$ be an entrant at $\lambda=1$ with $w_j<x_0$. Since $\kappa(v)\to\infty$ as
+$v\downarrow c$, some $u>c$ has $\kappa>\Delta(j)$ on $(c,u)$, and
+\[
+  \lambda>\bar\lambda=\max\Big(1,\frac{x_0-u}{x_0-w_j}\Big)
+  \ \Rightarrow\ x_0+\lambda(w_j-x_0)<u ,
+\]
+so rank $j$ fails at $\lambda$. By the prefix property no rank from $j$ on
+enters, and
+\[
+  k^*(\lambda)\le j<j+1\le k^*(1).
+\]
+For $1\le\lambda_1\le\lambda_2$, ranks with $w_i\ge x_0$ have $i<j$ and enter at
+$\lambda_1$, while ranks with $w_i<x_0$ have
+$x_0+\lambda_2(w_i-x_0)\le x_0+\lambda_1(w_i-x_0)$, so every entrant at
+$\lambda_2$ enters at $\lambda_1$.
 \end{mproof}
 
 \section{Evidence and verification}
