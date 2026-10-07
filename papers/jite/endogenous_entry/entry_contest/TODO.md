@@ -149,6 +149,12 @@ paper's claims, and only then write the manuscript.
   structure is therefore machine-checked from the model's assumptions, and the
   abstract's "no claim is machine-checked end to end" no longer holds for P5.
   `StepNonpos.lean`, which assumed densities, was removed as superseded.
+  Pass 3b done 7 Oct 2026. `lean/mathlib/RepresentationFOSD.lean` proves P1,
+  `Delta(m) = V E[phi(M_m)]`, by the two-draw version of the same argument;
+  P2, `F <= G`, from score laws built from the laws of `r` and `s`; the strict
+  part of P2 on an interval `[q, u)`, as `PROOFS.tex` states it; and
+  `Delta >= 0` from the primitives. P2 needs only `mu <= 1`, since the
+  compiler reported `0 <= mu` unused.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than

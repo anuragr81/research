@@ -54,12 +54,24 @@ The only assumptions are the model's own. The score laws `α` (investor, `F`),
 with no atoms, which is the continuity of `F` and `G` stated in the primitives,
 and `V ≥ 0`.
 
+## RepresentationFOSD.lean, P1 and P2
+
+| Theorem or definition | Content |
+|---|---|
+| `two_max_sum` | For independent draws with no atoms in the second law, `∫ cdf_B dA + ∫ cdf_A dB = 1` (exactly one draw is the larger) |
+| `p1_representation`, `Delta_eq_expectation` | P1. `Δ(m) = V ∫ (G − F) dH_m = V E[φ(M_m)]` |
+| `investorLaw`, `nonInvestorLaw` | The score laws built from the laws of `r` and `s`, of `μr + (1 − μ)s` and of `μr` |
+| `p2_fosd` | P2. `F ≤ G` everywhere, when `s ≥ 0` almost surely and `μ ≤ 1` |
+| `p2_strict_point`, `p2_strict_interval` | P2, strict part. When also `μ < 1` and `s > 0` with positive probability, `F < G` on an interval `[q, u)` |
+| `Delta_nonneg`, `Delta_nonneg_from_primitives` | Investing never hurts. `Δ(m) ≥ 0` for every `m` |
+
+P2 needs only `μ ≤ 1`. The hypothesis `0 ≤ μ` was in the first draft and the
+compiler reported it unused, since the `μr` term is common to both scores.
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
   deriving it from the laws of `r` and `s` is not attempted.
-- The P1 representation `Δ(m) = V E[φ(M_m)]` is not yet in Lean (pass 3b in
-  `TODO.md`). The chain above does not use it.
 
 `StepNonpos.lean`, compiled in pass 2, assumed densities. It was removed on
 6 October 2026 because `StepIdentity.lean` proves the same sign without them.
