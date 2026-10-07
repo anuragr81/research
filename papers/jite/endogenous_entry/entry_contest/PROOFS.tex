@@ -1633,8 +1633,21 @@ every $p$ and every incumbent, $dF-dG$ changes sign once, at $x_0=1-\mu$, and
 $\Delta(0,\cdot)$ is quasi-concave in $Q$
 (\file{lean/mathlib/ShiftClass.lean}, \texttt{quasiconcave\_of\_shiftMono},
 \texttt{shiftMono\_of\_density}). The density $2(1-r)$ of the witness above lies
-in the class (\texttt{witness\_quasiconcave}). Which members of the class must
-fall, and not only may, is not yet proved.
+in the class (\texttt{witness\_quasiconcave}).
+
+\paragraph{When the gain must fall.} Within the class, the gain must fall, and
+not only may, under a strict version of the same condition. Let $G_t$ be the
+non-investor's law shifted up by the lift $t=1-\mu$. Suppose that on some
+interval $(a,b]$ with $t<a<b$ the shifted law puts strictly more mass than
+$G$, that $G(t)<G(a)$, $G(b)<1$ and $C(a)>0$, and that $p<1$. Then
+$\Delta(0,Q{+}1)<\Delta(0,Q)$ for every $Q$ from some $Q_0$ on
+(\file{lean/mathlib/MustFall.lean}, \texttt{must\_fall}). The proof bounds the
+part of the step below $t$ by $G(t)^{Q-1}$ times a constant, where the shifted
+law has no mass, and bounds the part above $a$ from below by $G(a)^{Q-1}$
+times a positive constant, so the ratio $(G(t)/G(a))^{Q-1}$ decides the sign
+(\texttt{must\_fall\_general}). The base density $2(1-r)$ meets the condition
+on $(a,b]=(1/2,5/8]$ for every $p<1$ (\texttt{witness\_must\_fall}), while a
+uniform base law meets it on no interval (\texttt{uniform\_fails\_gain}).
 
 \section{Contribution and its precedents}
 \label{sec:contribution}
@@ -1877,9 +1890,10 @@ What genuinely remains:
 \item \textbf{The competitor-number effect, sharpened.} $\Delta(0,\cdot)$ is
   quasi-concave in $Q$ when $\varphi$ is single-peaked, and $\varphi$ is
   single-peaked when $r$ is uniform and, with a single-step investment, when
-  $r$ has a density that does not rise (\S\ref{prop:PMU}). Open are a
-  condition under which the gain must fall, the location of the peak in $Q$,
-  and laws of $s$ beyond a single step. An earlier version of this item conjectured an interior
+  $r$ has a density that does not rise, and the gain must eventually fall
+  when the lift strictly adds mass on an interval of the non-investor's range
+  (\S\ref{prop:PMU}). Open are the location of the peak in $Q$ and laws of
+  $s$ beyond a single step. An earlier version of this item conjectured an interior
   \emph{minimum}, from the reversed orientation that \S\ref{prop:PMU} corrects.
   Under the single-peaked hypothesis an interior minimum is impossible.
 \end{enumerate}

@@ -340,6 +340,15 @@ paper's claims, and only then write the manuscript.
      witness's base law has density `2(1 - r)` and lies in the class
      (`witness_quasiconcave`). Not proved is a condition under which the gain
      must fall, and laws of `s` beyond a single step.
+     The must-fall condition is proved 7 Oct 2026, at the author's request,
+     in `lean/mathlib/MustFall.lean`. Let `G_t` be the non-investor's law
+     shifted up by the lift `t = 1 - mu`. If `G_t` puts strictly more mass
+     than `G` on some `(a, b]` with `t < a < b`, `G(t) < G(a)`, `G(b) < 1`,
+     `C(a) > 0` and `p < 1`, the gain falls strictly at every `Q` from some
+     `Q0` on (`must_fall`). The witness's base law meets the condition for
+     every `p < 1` (`witness_must_fall`), and a uniform base law meets it on no
+     interval (`uniform_fails_gain`). Open are the location of the peak in
+     `Q` and laws of `s` beyond a single step.
   3. **The anonymity boundary has an exact witness inside the primitives.**
      Three challengers have wealth `11/4, 9/4, 2`, abilities `1, 2, 3` (the
      largest of `n` uniform draws, so ability falls with wealth), CRRA

@@ -207,6 +207,18 @@ the pieces, so a wrong coefficient would fail the build.
 | `lawA_eq_densLaw`, `lawA_shiftMono` | The witness's base law has density `2(1 − r)` on `[0, 1]` and is shift-monotone |
 | `witness_quasiconcave` | The witness of `FallWitness.lean` lies in the class |
 
+## MustFall.lean, when the gain must fall in `Q`
+
+Write `G_t` for the non-investor's law `G` shifted up by the lift `t = 1 − μ`.
+
+| Theorem | Content |
+|---|---|
+| `must_fall_general` | If `G_t` has no mass at or below `t`, dominates `G` above `t`, and puts strictly more mass than `G` on some `(a, b]` with `t < a < b`, `G(t) < G(a)`, `G(b) < 1` and `C(a) > 0`, then `∫ W_Q dG < ∫ W_Q dG_t` for every `Q` from some `Q0` on |
+| `shift_dominates`, `stepQ_bern` | For a shift-monotone base law, `G_t` dominates `G` above the lift, and the step in `Q` is `−V(1 − p)(∫ W_Q dG_t − ∫ W_Q dG)` |
+| `must_fall` | In the single-step class with `p < 1`, the strict gain on `(a, b]` makes `Δ(0, ·)` fall strictly at every `Q` from some `Q0` on |
+| `witness_must_fall` | The base density `2(1 − r)` with `μ = 3/4` meets the condition on `(1/2, 5/8]`, so its gain must fall, for every `0 ≤ p < 1` |
+| `uniform_fails_gain` | A uniform base law meets the condition on no interval, because its gain never falls |
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;
