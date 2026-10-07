@@ -152,6 +152,30 @@ that `φ = G − F` is single-peaked.
 | `pairA_step_one`, `pairA_step_two` | `D(1) = V/60` and `D(2) = V/420` for pair A |
 | `fosd_does_not_sign` | At `Q = 1` and `Q = 2`, the two pairs give opposite signs, both with `F ≤ G`, no atoms and the incumbent investing |
 
+## Refutations.lean, R1 and R2
+
+| Theorem | Content |
+|---|---|
+| `r1_lower_bound` | If non-investor scores never exceed `xG`, then `Δ(m, Q) ≥ V (∫_{x ≥ xG} C F^m dF − 1/(Q − m))` |
+| `pmu_step_nonneg_uniform`, `Delta_mono_uniform` | With `r` uniform on `[0, 1]`, any law of `s ≥ 0`, `0 < μ ≤ 1` and any incumbent, `Δ(0, ·)` never falls in `Q` |
+| `bern`, `bern_restrict` | The success-or-failure family. `s = 0` with probability `p`, `s = 1` otherwise, `r` uniform, `μ ≤ 1/2`. Below `μ` the investor's law is `p` times the non-investor's |
+| `bern_Delta` | `Δ(0, Q) = V ((1 − p²)/2 − p(1 − p)/(Q + 1))` for `Q ≥ 1`, with the incumbent investing |
+| `bern_Delta_strictMono` | R2 refuted. `Δ(0, ·)` rises strictly at every `Q` for `0 < p < 1` |
+| `bern_Delta_lower`, `bern_Delta_limit` | R1 refuted. `Δ(0, Q) ≥ V(1 − p)/2` at every `Q`, and `Δ(0, Q) → V(1 − p²)/2` |
+| `bern_investor_above` | An investor scores above `μ` with probability `1 − p` |
+
+## Anonymity.lean, the anonymity boundary
+
+| Theorem or definition | Content |
+|---|---|
+| `winProb`, `profile`, `gain`, `IsEquilibrium` | Challengers may draw from different laws. Challenger `i` wins with probability `∫ C · ∏_{j ≠ i} F_j dF_i`, the formula `Delta` uses for identical laws |
+| `gain_anonymous` | Proposition (anonymity). With identical entrant laws the gain is `Δ(|T|)`, a function of the number of other entrants alone |
+| `gain_zero` | At `μ = 0`, with abilities `n_i` (the largest of `n_i` uniform draws), the gain is `V n_i / (1 + n_i + Σ_{j ∈ T} n_j)` |
+| `κ3_values`, `ability_against_wealth`, `gains3` | Three challengers with wealth `11/4, 9/4, 2`, abilities `1, 2, 3`, CRRA `γ = 2`, `c = 1`, `V = 1` |
+| `anon_witness_zero` | At `μ = 0`, the poorest challenger alone and the two richest together are both equilibria |
+| `winProb_tendsto`, `gain_tendsto` | Every win probability is continuous at `μ = 0` |
+| `anon_witness_positive`, `anon_witness_exists`, `laws_noAtoms` | Both equilibria persist for every small `μ > 0`, where every law has no atoms, so count invariance fails inside the primitives once ability falls with wealth |
+
 ## What is still assumed
 
 - That the score laws have no atoms. The primitives assume it for `F` and `G`;

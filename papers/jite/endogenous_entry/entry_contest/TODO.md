@@ -257,6 +257,68 @@ paper's claims, and only then write the manuscript.
   - Done when each item has the author's decision recorded and, where
     accepted, the edit applied in the manuscript skeleton.
 
+- [!] **L4. Lean pass 3g, 7 Oct 2026. Decisions for Anurag.** Items 0 to 2
+  rest on `lean/mathlib/Refutations.lean`, item 3 on
+  `lean/mathlib/Anonymity.lean`. The success-or-failure family has `r`
+  uniform on `[0, 1]`, an investment that fails (`s = 0`) with probability `p`
+  and succeeds (`s = 1`) otherwise, `0 < mu <= 1/2` and an investing
+  incumbent. In that family
+  `Delta(0, Q) = V ((1 - p^2)/2 - p(1 - p)/(Q + 1))` for every `Q >= 1`
+  (`bern_Delta`).
+  0. **R1 is refuted exactly.** `Delta(0, Q) >= V (1 - p)/2` at every `Q`
+     (`bern_Delta_lower`), so a challenger whose cost is at most that enters
+     however many challengers compete, and `Delta(0, Q)` converges to
+     `V (1 - p^2)/2` (`bern_Delta_limit`). The mechanism holds in general.
+     If non-investor scores never exceed `xG`, then
+     `Delta(m, Q) >= V (int_{x >= xG} C F^m dF - 1/(Q - m))`
+     (`r1_lower_bound`). The limit formula of `PROOFS.tex` §R1, the product of
+     `Pr(X > mu)` and `Pr(beat incumbent)`, is wrong in this family. There
+     `Pr(X > mu) = 1 - p` (`bern_investor_above`) and an investor beats an
+     investing incumbent with probability `1/2`, so the product is
+     `V (1 - p)/2`, whereas the limit is `V (1 - p)(1 + p)/2`, larger by the
+     factor `1 + p`. A plausible reading, not proved, is that scoring above
+     `mu` and beating the incumbent are positively related, since an
+     investor above `mu` also beats an incumbent whose investment failed.
+  1. **R2 is refuted exactly.** `Delta(0, .)` rises strictly at every `Q`, for
+     every `0 < mu <= 1/2` and `0 < p < 1` (`bern_Delta_strictMono`). With a
+     cost between `Delta(0, Q)` and `Delta(0, Q + 1)`, the richest challenger
+     enters with `Q + 1` challengers and stays out with `Q`, so the entrant
+     count rises with `Q`. The further claim of `PROOFS.tex` §R2, that the sign
+     reverses at a crossover `mu*` in `[0.1, 0.7]`, rests on one family,
+     `r` and `s` both Beta(2,2), in `checks/run_all.py`, and has no Lean
+     witness. The referee's direction has not been exhibited exactly in the
+     model.
+  2. **With a uniform base score the first entrant's gain never falls in
+     `Q`.** For any law of `s >= 0`, any `0 < mu <= 1` and any incumbent,
+     `Delta(0, .)` is non-decreasing (`pmu_step_nonneg_uniform`,
+     `Delta_mono_uniform`). The weight `W` vanishes above `mu`, where the
+     non-investor's score cannot reach, and below `mu` the investor's law lies
+     under the non-investor's. The rise-then-fall claim the author adopted on
+     7 Oct 2026 is therefore monotone in the one case proved from the
+     primitives. A fall needs the crossing point `x0` strictly inside the
+     support of `G`, which plausibly requires a density of `r` that falls
+     toward the top of its support, as Beta(2,2) does. That is not proved.
+     The author should decide whether the claim is stated as "rises, and
+     never has an interior minimum" with the uniform case monotone, or
+     whether a witness with a fall is sought first.
+  3. **The anonymity boundary has an exact witness inside the primitives.**
+     Three challengers have wealth `11/4, 9/4, 2`, abilities `1, 2, 3` (the
+     largest of `n` uniform draws, so ability falls with wealth), CRRA
+     utility with `gamma = 2`, `c = 1` and `V = 1`, and the incumbent has
+     ability 1. At `mu = 0` the poorest challenger entering alone and the two
+     richest entering together are both equilibria (`anon_witness_zero`). All
+     six equilibrium conditions hold strictly, every win probability is
+     continuous at `mu = 0` (`winProb_tendsto`), so both equilibria persist
+     for every small `mu > 0`, where every law has no atoms
+     (`anon_witness_positive`, `anon_witness_exists`). With identical laws the
+     gain is `Delta(|T|)` (`gain_anonymous`), which is Proposition (anonymity)
+     in the setting with different laws. The witness in `PROOFS.tex`
+     (`Q = 4`, `mu = 1/2`, `theta = -3/2`) remains numerical, and the claim
+     that count invariance holds when ability rises with wealth remains
+     support from sampling, as `PROOFS.tex` already says.
+  - Done when each item has the author's decision recorded and, where
+    accepted, the edit applied in the manuscript skeleton or in `PROOFS.tex`.
+
 - [ ] **PLAN. Pass plan agreed 6 Oct 2026.** One manuscript skeleton in LaTeX
   replaces `PROOFS.tex`. It has four tables (introduction, model, literature,
   conclusions), and appendices hold every proof and everything else
@@ -325,6 +387,12 @@ paper's claims, and only then write the manuscript.
   step, the quasi-concavity of `Delta(0, .)` in `Q` that follows from it, and
   the single-crossing hypothesis for a uniform base score. Findings are in
   item L3.
+  Pass 3g done 7 Oct 2026. `lean/mathlib/Refutations.lean` refutes R1 and R2
+  in an exact family of the model and proves the R1 mechanism in general.
+  `lean/mathlib/Anonymity.lean` states win probabilities for challengers with
+  different laws, proves Proposition (anonymity) in that setting, and gives
+  an exact two-size witness that holds for every small `mu > 0`. Findings are
+  in item L4.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
