@@ -543,7 +543,10 @@ paper's claims, and only then write the manuscript.
   the credentials claim (item 11 or 9); the author will be asked first.
   Author's rule (8 Oct 2026): one major citation per claim for the sociology,
   since it supplies concepts only. Tilly (item 10): the author has read the
-  book and will verify a passage and page on request. Hirsch (item 14):
+  book; done 9 Oct 2026 from the author's photograph of p. 154,
+  `lit/tilly_1998/`, row L19 (the outcome, opportunity hoarding; Weber L16
+  keeps the mechanism). Edition to be confirmed. Parkin (items 9 and 11):
+  not needed for now (author, 9 Oct 2026). Hirsch (item 14):
   cited without quotation, for the fixed supply of positional goods.
 
   C. Model artifacts the claims above lean on and that do not yet exist:
