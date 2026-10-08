@@ -461,6 +461,98 @@ paper's claims, and only then write the manuscript.
      holds a `LEAN` pointer that `lit/coverage.py` now reads.
   - Done when the author decides item 1.
 
+- [ ] **L7. Literature claims raised by the class-share exploration, 8 Oct 2026.
+  Each enters the manuscript only with a verbatim quote in its `lit/` record
+  and, where it leans on the model, a Lean artifact.**
+  A. Verifiable now from existing records.
+  1. Weber p.302 (WB-7): "class situation" is "the typical probability of
+     ... gaining a position in life". Claim: a win probability for the
+     position is a class situation in Weber's own terms, so the
+     entrant-outsider gap Δ(k*−1)/V is a gap in class situation. Route:
+     quote recorded; needs the sentence and a row link (M5, M8).
+  2. Weber pp.43-44 (WB-3, WB-10) and p.303 (WB-9): closure and
+     "monopolization of costly (educational) status privileges". Claim: the
+     paying class is the closed group and its share of the prize is what the
+     closure captures. Route: quotes recorded; model artifact = the share
+     row (PayerShare.lean, in progress).
+  3. Weber p.932 (WB-8): property becomes a status qualification "in the
+     long run". Claim: the model is static and does not speak to it. Route:
+     quote recorded; scope sentence in Appendix D.
+  4. Fullerton-McAfee (L5, `FullertonMcAfee.two_sizes`): entry equilibria of
+     sizes 2 and 3 coexist with heterogeneous types. Claim: M27 and M29 are
+     the same phenomenon once score laws differ by identity, in either
+     direction. Route: quote and Lean exist; add M29 to L5's row links.
+  5. Ryvkin-Drugov (L8): no competitor-number prediction is universal across
+     noise laws. Claim: the weight-on-talent direction (M28) has a universal
+     sign, unlike the number-of-players direction. Route: quote exists; check
+     the record for any result of theirs on noise scale or precision before
+     saying the contrast is new, and link M28 to L8.
+  6. Cole-Mailath-Postlewaite (L13; Appendix D quotes "a ranking device that
+     determines how well he or she fares in the nonmarket sector"). Claim:
+     the share of positions is that ranking device aggregated by class.
+     Route: quote recorded; sentence only.
+  7. Schroyen-Treich (L12): the privilege contest with a prize apart from
+     wealth. Claim: their object is expenditure, ours is the paying class's
+     share of the privilege; check the record before contrasting.
+  8. Fu-Jiao-Lu, Fu-Lu (L6, L7): rent accounting. Claim: the paying class's
+     outlay k*c against its share of V is a dissipation ratio bounded by M10.
+     Route: quotes exist; needs a small Lean corollary if stated as a row.
+  B. Need a read and a `lit/` record before any citation (all from general
+     knowledge so far).
+  9. Parkin 1979, closure as exclusion and usurpation, credentials and
+     property as the exclusionary devices. Claim: the fee is exclusion;
+     usurpation (outsiders acting together) is absent.
+  10. Tilly 1998, opportunity hoarding. Claim: the share is the hoarded
+      fraction of positions.
+  11. Collins 1979, credentials as closure. Claim: the bought component read
+      as a credential.
+  12. Murphy 1988, closure rules. Optional.
+  13. Bourdieu 1986, conversion of economic into cultural capital. Claim: the
+      fee converts wealth into s at the access margin only; the anonymous
+      contest is where the parallel ends. Weber-Bourdieu contrast as
+      discussed 8 Oct 2026.
+  14. Hirsch 1976, positional goods. Cite the idea of limited positions for
+      the fixed prize; no quotation needed (author, 8 Oct 2026), but the
+      page must be read.
+  15. Postlewaite 1998, status through consumption or income. Claim: the
+      rejected paper's "status only through future income" is replaced by a
+      prize outside u; contrast needs his words.
+  16. Laurison-Friedman 2016 (ASR), and Friedman-Laurison 2019. Claim 7's
+      first half: the class gap rises where the bought component weighs
+      more. Their object is a pay gap within occupations by origin, not a
+      share of positions; the share is closer to access. The "consistent
+      with" sentence waits on the read.
+  17. Mocetti-Roma-Rubolino 2022. Claim 7's second half (less able heirs
+      exit first) is not expressible here, since draws come after entry;
+      cite only to say so, if at all.
+  18. Shinohara 2023 (JITE), rent dissipation monotone in the number of
+      teams and non-monotone in team size [A, abstract only]. Claim: a JITE
+      precedent for one count with a sign and one without, as M28 against
+      M16-M22. Needs the paper.
+  19. Wegener 1992 and Mijs 2020-21: carried from the rejected paper; drop
+      unless a specific sentence needs them.
+  Progress 8 Oct 2026. Item 16 done: Laurison-Friedman read in full
+  (accepted version), `lit/laurison_friedman_2016/`, row L17. Their object
+  is a pay gap after entry; the model can be compared only with their
+  access finding, and the rejected paper's claim 7 mapping fails against
+  their access data (science has no pay gap but is closed in access).
+  Item 19 done for Wegener: read in full, `lit/wegener_1992/`, row L18, the
+  closure-versus-hierarchy distinction only. Parkin (item 9) is not cited in
+  Wegener (the author had Parsons in mind, 8 Oct 2026); Wegener is used as a
+  survey of the problem only. Parkin is needed only if the manuscript makes
+  the credentials claim (item 11 or 9); the author will be asked first.
+  Author's rule (8 Oct 2026): one major citation per claim for the sociology,
+  since it supplies concepts only. Tilly (item 10): the author has read the
+  book and will verify a passage and page on request. Hirsch (item 14):
+  cited without quotation, for the fixed supply of positional goods.
+
+  C. Model artifacts the claims above lean on and that do not yet exist:
+  the share row (done 8 Oct 2026 as M31, `lean/mathlib/PayerShare.lean`,
+  and added to the measurement map's outputs as a recorded quantity); share under pivot spreads follows k* (small
+  corollary); share = 1 at μ = 0 for s > 0 a.s.; the challengers' share
+  (mobility) and its relation to the old claim 4; the dissipation ratio of
+  item 8.
+
 - [ ] **O1. Open items carried from `PROOFS.tex` §Open items (pass 5, 7 Oct 2026).**
   1. **The incumbent's own entry** is exogenous throughout (`C` is fixed in
      `H_m`). Endogenising it, and asking whether an equilibrium exists in which
@@ -1133,7 +1225,7 @@ paper's claims, and only then write the manuscript.
   `T_λ` as `λ → ∞`. A characterisation of which spreads move `k*` strictly —
   rather than an asymptotic sufficient condition — is not attempted.
 
-- [ ] **M1. Endogenise the incumbent's entry.** `C` is fixed throughout
+- [x] **M1. Endogenise the incumbent's entry.** Done 8 Oct 2026 as M30 (see O1.1). `C` is fixed throughout
   `H_m = F^m G^(Q−1−m) C`. This is R2.1's open question: does an equilibrium
   exist in which the incumbent abstains and a challenger invests? Lazear–Rosen
   §IV handicap algebra (`h* = Δμ/2`) is the tool. Modelling extension, not a

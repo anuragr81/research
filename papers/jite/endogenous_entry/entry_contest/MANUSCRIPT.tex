@@ -301,6 +301,13 @@ that check it.}\\
   case, and if $g(k^*-1)<\kappa_{k^*}$ then $0$ is in every non-empty
   equilibrium.}
   {EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.band_witness, EntryContestInc.control_no_band}
+\mrow{M31}{The paying class's share.}
+  {With the incumbent investing and $k$ of $Q$ challengers paying, the prize
+  goes to a payer with probability $s(k)=\int G^{Q-k}\,d(F^{k+1})$. For $F$
+  atomless, $s$ is non-decreasing in $k$ and $s(Q)=1$; for $F=G$,
+  $s(k)=\frac{k+1}{Q+1}$; for $s\ge0$ and $r$ atomless, $s(k)$ is
+  non-increasing in $\mu>0$, and with fixed costs so is $s(k^*)$.}
+  {EntryContestShare.payerShare_full, EntryContestShare.payerShare_eq_one_sub, EntryContestShare.payerShare_monotone, EntryContestShare.payerShare_at_equal, EntryContestShare.payerShare_normalise, EntryContestShare.payerShare_antitone_mu, EntryContestShare.payerShare_kstar_antitone_mu, EntryContestShare.control_share_needs_nonneg}
 \end{longtable}
 \normalsize
 
@@ -385,6 +392,17 @@ quote.}\\
   such a condition, and M4 gives entrants an interest in it, since each further
   entrant lowers the gain. No agent sets the fee here.}
   {participation of certain persons is excluded, limited, or subjected to conditions}{43}{M4, M10}
+\lrow{L17}{LaurisonFriedman2016}{Access to the traditional professions is
+  more closed than to management, which earns more, so closure does not
+  follow the prize. Their main finding, a pay gap after entry, is outside the
+  model, which stops at entry. \unv{the accepted version was read, and the
+  published pagination is not checked.}}
+  {the higher professions remain significantly more elitist in terms of restricting access for those from working class backgrounds}{13}{M5, M11, M28}
+\lrow{L18}{Wegener1992}{A survey of prestige in stratification theory, which
+  separates closure from a hierarchy of positions and finds no theory that
+  joins them. The question here is narrower: how wealth differences decide
+  who competes for positions open to every entrant on one score.}
+  {None of these theories is able to solve the problem of how theoretically to merge the idea of social closure with that of a hierarchy of positions.}{253}{M5, M26}
 \end{longtable}
 \normalsize
 
@@ -1042,6 +1060,32 @@ condition fails, so $0\in S$ for every non-empty equilibrium $S$;
 $\{0,\dots,k^*-1\}$ is an equilibrium by M8. For $\kappa=(2,5,8)$ and
 $g=(12,10,1)$, $k^*=2$, $g(2)=1<2$, $\kappa_2=8\le10=g(1)$, and $\{1,2\}$
 is an equilibrium; with $\kappa_2=11>10$ no equilibrium omits $0$.
+\end{mproof}
+
+\begin{mproof}{M31}{EntryContestShare.payerShare_full, EntryContestShare.payerShare_eq_one_sub, EntryContestShare.payerShare_monotone, EntryContestShare.payerShare_at_equal, EntryContestShare.payerShare_normalise, EntryContestShare.payerShare_antitone_mu, EntryContestShare.payerShare_kstar_antitone_mu, EntryContestShare.control_share_needs_nonneg}
+The best of $k+1$ payers has law $F^{k+1}$ and the best of $n=Q-k$ outsiders
+$G^{n}$, so $s(k)=\Pr(\text{best payer}>\text{best outsider})$, and $s(Q)=1$.
+For $n\ge1$, by $\int A\,dB+\int B\,dA=1$ for atomless $B$,
+\[
+  s(k)=1-\int F^{k+1}\,d(G^{n}),
+\]
+\[
+  s(k+1)-s(k)=\int F^{k+1}\,d(G^{n})-\int F^{k+2}\,d(G^{n-1})\ge0,
+\]
+since $F^{k+2}\le F^{k+1}$ and $\int F^{k+1}\,d(G^{n-1})\le\int F^{k+1}\,d(G^{n})$
+by the same identity and $G^{n}\le G^{n-1}$. For $F=G$,
+\[
+  s(k)=(k+1)\int F^{Q-k}F^{k}\,dF=\frac{k+1}{Q+1}.
+\]
+For $\mu>0$, dividing every score by $\mu$ changes no rank, so $s$ is
+computed from $F_t$ and $G$ with $t=(1-\mu)/\mu$; $F_{t'}\le F_t$ for
+$t\le t'$ (M28), so $s(k)$ is non-decreasing in $t$ and non-increasing in
+$\mu$. With $\kappa$ fixed and $\mu'\le\mu$, $k^*(\mu)\le k^*(\mu')$ by M28, and
+\[
+  s\big(k^*(\mu);\mu\big)\le s\big(k^*(\mu);\mu'\big)\le s\big(k^*(\mu');\mu'\big).
+\]
+With $s=-1$, $r$ uniform and $Q=1$, $k=0$: $s(0)=\frac12$ at $t=0$ and $0$ at
+$t=1$, so $s\ge0$ is needed.
 \end{mproof}
 
 
