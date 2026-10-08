@@ -292,6 +292,15 @@ that check it.}\\
   largest of $12$, $10$ and $9$ uniform draws, the incumbent's of one, and
   $\kappa$ from $u(x)=-1/x$, $c=1$, $w=(\frac{43}{20},\frac{52}{25},\frac{83}{40})$.}
   {EntryContestAligned.kappaA_values, EntryContestAligned.ability_with_wealth, EntryContestAligned.costs_ordered, EntryContestAligned.gainsA, EntryContestAligned.aligned_witness_zero, EntryContestAligned.aligned_witness_positive, EntryContestAligned.aligned_witness_exists, EntryContestAligned.control_window}
+\mrow{M30}{The incumbent as a challenger.}
+  {Let the incumbent be player $0$ of a game of $Q+1$ players with
+  $\kappa_0\le\kappa_j$ and gain $g(m)=\Delta(m)$ at $C=G$; her being in
+  gives a challenger $g(m+1)$. An equilibrium with $0$ out and some
+  challenger in exists iff $1\le k^*\le Q$, $g(k^*)<\kappa_0$ and
+  $\kappa_{k^*}\le g(k^*-1)$; $\{0,\dots,k^*-1\}$ is an equilibrium in every
+  case, and if $g(k^*-1)<\kappa_{k^*}$ then $0$ is in every non-empty
+  equilibrium.}
+  {EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.band_witness, EntryContestInc.control_no_band}
 \end{longtable}
 \normalsize
 
@@ -1012,6 +1021,29 @@ gain is continuous in $\mu$ at $0$, so both remain equilibria for small
 $\mu>0$. Raising $\kappa_2$ to $\frac{23}{50}>\frac9{20}$ removes $\{1,2\}$.
 \end{mproof}
 
+\begin{mproof}{M30}{EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.band_witness, EntryContestInc.control_no_band}
+Players $0,\dots,Q$, costs $\kappa_0\le\dots\le\kappa_Q$, gain $g(m)$ with $m$
+others in. For $m+2\le Q$,
+\[
+  F\cdot F^{m}G^{Q-1-m}=G\cdot F^{m+1}G^{Q-2-m},
+\]
+so $\Delta(m)|_{C=F}=g(m+1)$, and $g(m+1)\le g(m)$ by M4. Let $S$ be an
+equilibrium with $0\notin S\neq\emptyset$. By M6, $|S|=k^*\ge1$;
+$S\subseteq\{1,\dots,Q\}$ gives $k^*\le Q$; $0\notin S$ gives
+$g(k^*)<\kappa_0$; and $|\{1,\dots,k^*-1\}|=k^*-1<|S|$ gives $i\in S$ with
+$i\ge k^*$, so
+\[
+  \kappa_{k^*}\le\kappa_i\le g(k^*-1).
+\]
+Conversely let $S=\{1,\dots,k^*\}$: for $i\in S$,
+$\kappa_i\le\kappa_{k^*}\le g(k^*-1)=g(|S|-1)$, and for $j\notin S$,
+$g(|S|)=g(k^*)<\kappa_0\le\kappa_j$. If $g(k^*-1)<\kappa_{k^*}$ the
+condition fails, so $0\in S$ for every non-empty equilibrium $S$;
+$\{0,\dots,k^*-1\}$ is an equilibrium by M8. For $\kappa=(2,5,8)$ and
+$g=(12,10,1)$, $k^*=2$, $g(2)=1<2$, $\kappa_2=8\le10=g(1)$, and $\{1,2\}$
+is an equilibrium; with $\kappa_2=11>10$ no equilibrium omits $0$.
+\end{mproof}
+
 
 
 \section{Evidence and verification}
@@ -1186,9 +1218,11 @@ is the sense of a prize awarded by rank.
 \paragraph{The incumbent.} The incumbent is scored by the rule that admits the
 challengers: her law is $C=F$, so she holds the bought component and differs
 from an entrant in nothing, and M26 includes her. This is the open contest,
-in which the holder competes again under the same rule, and her entry is not
-a choice here. Two institutions are not modelled, and this choice turns them
-off. A protected holder, who keeps the position unless the best challenger
+in which the holder competes again under the same rule. Her entry is a
+parameter in M1 to M29 and a choice in M30, where she is player $0$ of a game
+of $Q+1$ players with the lowest cost, and is in every equilibrium outside
+the band of M6, so $C=F$ is the equilibrium outcome there. Two institutions
+are not modelled, and this choice turns them off. A protected holder, who keeps the position unless the best challenger
 clears a fixed bar, is a law $C$ that stays put as $\mu$ varies. A holder
 with an edge beyond wealth is a law above $F$, and sits at the boundary of
 M27. Every row holds for an arbitrary atomless $C$ except M9, M20, M22 and
@@ -1391,8 +1425,10 @@ R2.1 & At $\mu>0$ a larger $Q$ means fewer enter. & answered & Not in
   uniform base score, and the sign depends on the law of $r$ (M16 to M22,
   conjecture R2 in Appendix~\ref{app:refuted}). \\
 R2.1 & An equilibrium in which the incumbent abstains and a challenger
-  enters. & open & The incumbent's entry is exogenous here. Endogenising it is
-  item O1 of \path{TODO.md}. \\
+  enters. & answered & Only inside the band. With the incumbent as player $0$
+  of a game of $Q+1$ players, such an equilibrium exists iff $g(k^*)<\kappa_0$
+  and $\kappa_{k^*}\le g(k^*-1)$, and the assortative set, with her in, is an
+  equilibrium in every case (M30). \\
 R2.2 & The effect of inequality on status expenditure is unclear, and the
   prize is the inequality. & answered & The prize is fixed and apart from the
   wealth distribution. A spread changes the count, and so the resource

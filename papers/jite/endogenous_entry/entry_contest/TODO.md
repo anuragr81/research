@@ -465,7 +465,19 @@ paper's claims, and only then write the manuscript.
   1. **The incumbent's own entry** is exogenous throughout (`C` is fixed in
      `H_m`). Endogenising it, and asking whether an equilibrium exists in which
      the incumbent abstains while a challenger enters, is a modelling extension
-     and not a gap in what is claimed.
+     and not a gap in what is claimed. Done 8 Oct 2026 as M30
+     (`lean/mathlib/IncumbentEntry.lean`): with the incumbent as player 0 of
+     a (Q+1)-player game with the lowest cost and symmetric gain `g(m) =
+     Delta(m)` at `C = G` (a challenger's gain with her in is `g(m+1)`,
+     `Delta_incumbent_in_eq`), an equilibrium with her out and someone in
+     exists iff `1 ≤ k* ≤ Q`, `g(k*) < κ_0` and `κ_{k*} ≤ g(k*−1)`
+     (`incumbent_out_iff`); the assortative set with her in is always an
+     equilibrium (`incumbent_out_not_unique`); under M7's condition she is in
+     every non-empty equilibrium (`incumbent_in_of_pinned`). Witness: the
+     (2,5,8)/(12,10,1) example; control: `κ_2 = 11` admits no equilibrium
+     without her. So `C = F` in M9 and M28 is the equilibrium outcome outside
+     the band. Not done: rewriting M1 to M29 for Q+1 players (the measurement
+     map's `C` row stays an input for those rows).
   2. **Inside the band** (M14) the displacement signs settle nothing. Whether
      some other statistic of the change, its magnitudes or a weighted
      functional of the quantile difference as in Costrell and Loury, predicts
