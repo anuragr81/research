@@ -690,6 +690,18 @@ paper's claims, and only then write the manuscript.
   entry papers (C5, C6), a comparison with Ryvkin and Drugov's unimodality
   result (C7), and the published version of Costrell and Loury (C8). The
   conclusions are revised when pass 7 lands.
+  Weber read 8 Oct 2026 at the author's request ("see if there are parts in
+  the book that support the architecture"; no Lean). Three sections of
+  *Economy and Society* (1978) were read: pp. 43-44, 302-307 and 926-937. The
+  record is `lit/weber_1978/`, and its suite matches every quotation against
+  the scanned text, with a fabricated quotation as control. Rows L14 to L16
+  give the support (exclusion through marginal utility, money not being a
+  status qualification, closure), and NOTES.md gives where the parallel ends.
+  The anonymous contest is what Weber calls market-like (p. 936), no agent
+  sets the fee, and there are no status groups. The introduction mentions
+  Weber in one line, as the author asked. Still to read before citing: Hirsch
+  (cited for positional scarcity only, not quoted), Wegener, Postlewaite
+  beyond Cole et al., and Bourdieu if cited.
   Pass 3 therefore splits into 3a step identity (in full generality, no
   densities, decided by the author), 3b P1 and P2, 3c P7 and P6, 3d kappa
   divergence and monotonicity, 3e P-MU, 3f burden-monotonicity weaker than
