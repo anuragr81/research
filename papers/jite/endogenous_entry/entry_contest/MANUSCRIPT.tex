@@ -1131,8 +1131,20 @@ rent-seeking contest, in which a money prize would sit inside $u$.
 
 \paragraph{Utility.} $u$ is strictly increasing and burden-monotone, so
 $\kappa(w)=u(w)-u(w-c)$ is strictly decreasing on $(c,\infty)$. Strict
-concavity implies it (M23), and it is strictly weaker (M24). A challenger whose
-wealth is at or below $c$ does not enter. The strictness result M15 also uses
+concavity implies it (M23), and it is strictly weaker (M24). One $u$ serves
+every challenger, so $\kappa$ varies across challengers through wealth alone.
+$u$ is not observed. It represents the recorded entries rather than
+determining them, preference being ``the binary representation of individual
+choice'' \citep[p.~253]{Sen1973} and utility being ``used to represent
+preferences'' \citep[p.~532]{Schoemaker1982}, and it enters the model only
+through $\kappa$. $\kappa$ is a difference of such a $u$ and not a measure of
+how strongly the fee is felt \citep[p.~533]{Schoemaker1982}. The statement
+that $\kappa$ falls with wealth therefore has no content of its own. Its
+content is what it implies for a record of wealths, fee, prize and entries:
+the richest $k^*$ challengers entering is an equilibrium, and the only one
+when $\Delta(k^*-1)<\kappa_{k^*}$ (M7, M8), and the count moves with the prize,
+the fee and the profile as M11 to M13 state. A challenger whose wealth is at
+or below $c$ does not enter. The strictness result M15 also uses
 $\kappa(w)\to\infty$ as $w\downarrow c$, which holds exactly when
 $u(x)\to-\infty$ as $x\downarrow0$ (M25).
 
@@ -1142,10 +1154,15 @@ Earlier drafts also assumed a common lower endpoint for $F$ and $G$ and that
 $\varphi$ vanishes at both ends of the support. No row uses either, and both
 are dropped.
 
-\paragraph{Information.} The realised wealth profile is common knowledge, and
-entry is simultaneous. Under this assumption the entry condition is written on
-the sorted profile, and $k^*$ is a count shared by every pure-strategy
-equilibrium (M6). It does not pin who enters. With
+\paragraph{Information.} The realised wealth profile is common knowledge,
+entry is simultaneous, and the draws $r_i$ and $s_i$ are made after entry. At
+the entry stage a challenger knows $c$, $V$, $\mu$, the laws of $r$ and $s$
+and the wealth profile, and not her own draws, which reach her decision only
+through $F$ and $G$. Her condition $\kappa(w_i)\le\Delta(j)$ has $w_i$ as its
+only individual datum, so talent enters neither the cost of entry nor the
+decision. Because the profile is common knowledge, the entry condition is
+written on the sorted profile, and $k^*$ is a count shared by every
+pure-strategy equilibrium (M6). It does not pin who enters. With
 $\kappa=(2,5,8)$ and $\Delta=(12,10,1)$, the sets $\{0,1\}$, $\{0,2\}$ and
 $\{1,2\}$ are all equilibria, the last without the richest challenger
 (\lean{EntryContestEq.three_equilibria}). Identities are pinned when

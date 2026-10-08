@@ -1,7 +1,6 @@
 # Schoemaker (1982), claims our documents make or rely on
 
-Cited in `MEASUREMENT_MAP.tex` (framing paragraph and the `κ` row). Not cited
-in `PROOFS.tex` or `LITERATURE.tex`, and not in `refs.bib`. Read in full [F].
+Cited in `MEASUREMENT_MAP.tex` (framing paragraph and the `κ` row). Cited in `MANUSCRIPT.tex` (Appendix D, the utility paragraph) and in `refs.bib`. Read in full [F].
 
 | ID | Claim | Locator | Verbatim source | Verified by |
 |---|---|---|---|---|

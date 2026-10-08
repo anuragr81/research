@@ -1,7 +1,7 @@
 # Sen (1973), claims our documents make or rely on
 
 Cited in `MEASUREMENT_MAP.tex` (framing paragraph, the `V` row, the `ΣU_i`
-row). Not cited in `PROOFS.tex` or `LITERATURE.tex`, and not in `refs.bib`.
+row). Cited in `MANUSCRIPT.tex` (Appendix D, the utility paragraph) and in `refs.bib`.
 Read in full [F].
 
 | ID | Claim | Locator | Verbatim source | Verified by |
