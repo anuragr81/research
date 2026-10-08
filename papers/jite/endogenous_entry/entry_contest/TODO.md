@@ -477,10 +477,38 @@ paper's claims, and only then write the manuscript.
      open.
   5. **Ability rising with wealth.** Count invariance held in every sampled
      economy (`checks/verify_anonymity.py`, A1-4b). This is not claimed, and a
-     proof or a counterexample is open.
+     proof or a counterexample is open. Sampling note, 8 Oct 2026 (illustration
+     only, not a proof): at `μ = 0` with three challengers, exponential `s`
+     with means (1.2, 1.0, 0.98) falling in the cost order (ability rising
+     with wealth) and the incumbent at mean 0.8, the sets {0} and {1, 2} are
+     both equilibria for costs near (0.323, 0.334, 0.334), counts 1 and 2. The
+     richest's edge over the pair is smaller than the crowding penalty of one
+     more rival. The window of costs is thin, which is why A1-4b never hit it.
+     Done the same day as M29 (`lean/mathlib/AlignedBoundary.lean`,
+     `aligned_witness_zero`, `aligned_witness_exists`): abilities the largest
+     of 12, 10 and 9 uniform draws, CRRA(2) costs from wealths (43/20, 52/25,
+     83/40), {0} and {1, 2} both equilibria at `μ = 0` and for small
+     `μ > 0`; controls show the cost window is load-bearing and that equal
+     abilities do not admit both. K1's scope note now reads "fails for some
+     costs whenever the ability laws differ by identity, in either direction".
+     Still open: what aligned ability preserves (perhaps that richest-first
+     remains an equilibrium), and the identification point for the
+     measurement map, that entry by the rich cannot be attributed to wealth
+     rather than ability.
   6. **A comparative static in `μ`.** Both referees asked how the count moves
-     with the weight of the investment in the score (R1.a7, R2.1). Nothing in
-     Lean addresses it, and the coverage appendix marks it open.
+     with the weight of the investment in the score (R1.a7, R2.1). Done 8 Oct
+     2026 as M28: with the incumbent scored like an entrant (`C = F`), the
+     gain and the count are non-increasing in `μ` for every law of `r`
+     (atomless) and `s ≥ 0`, by a pathwise argument on the normalised scores
+     `r + t s`, `t = (1−μ)/μ` (`lean/mathlib/MuMonotone.lean`,
+     `Delta_antitone_mu`, `kstar_antitone_mu`; controls show the result needs
+     `s ≥ 0` and `μ > 0`). The sign is universal, unlike the `Q` direction
+     (M16 to M22). The argument breaks for an incumbent law fixed in `μ`. The
+     author's placement decision (8 Oct 2026): explore it as robustness at
+     least; whether it enters the conclusions is open, and novelty waits on
+     pass 7. Still open: a class-gap definition for claim 7's
+     Laurison-Friedman half, and the `μ` row of the measurement map's outputs
+     table.
   - Closed since `PROOFS.tex` listed it: how much room burden-monotonicity
     leaves beyond concavity. A convex stretch longer than `c` rules it out
     (`not_burden_of_convex_stretch`), and every length below `c` occurs

@@ -97,7 +97,8 @@ status: wealth sets only the cost of entering, and the prize is won by rank
   {M5, M6, M8}
   {The count is pinned, and who enters is not, unless the condition of M7
   holds. The count needs a gain that depends on the number of entrants alone
-  (M26), and it fails when ability falls with wealth (M27).}
+  (M26), and for some costs it fails whenever the ability laws differ by
+  identity, falling with wealth (M27) or rising with it (M29).}
 \krow{K2}{The effect of a spread of wealth on how many enter has a sign set by
   one comparison. Entry weakly rises when the marginal entrant stands at or
   above the pivot, and weakly falls when it stands at or below.}
@@ -280,6 +281,17 @@ that check it.}\\
   entrants are. With ability falling in wealth, an equilibrium of one entrant
   and an equilibrium of two coexist for every small $\mu>0$.}
   {EntryContestAnon.winProb_zero_entrant, EntryContestAnon.winProb_zero_outsider, EntryContestAnon.gain_zero, EntryContestAnon.kappa3_values, EntryContestAnon.gains3, EntryContestAnon.anon_witness_zero, EntryContestAnon.gain_tendsto, EntryContestAnon.anon_witness_positive, EntryContestAnon.anon_witness_exists}
+\mrow{M28}{Weight on talent.}
+  {With the incumbent investing, $s\ge0$, $r$ atomless and $V\ge0$, for
+  $0<\mu'\le\mu$ and every $Q$ and $m$, $\Delta(m;\mu)\le\Delta(m;\mu')$, and
+  with fixed costs $k^*$ is non-increasing in $\mu$.}
+  {EntryContestMu.Delta_normalise, EntryContestMu.cdf_payerLaw_antitone, EntryContestMu.first_integral, EntryContestMu.Delta_payer_mono, EntryContestMu.Delta_antitone_mu, EntryContestMu.kstar_antitone_mu}
+\mrow{M29}{The boundary, aligned.}
+  {With ability rising in wealth, an equilibrium of one entrant and an
+  equilibrium of two coexist at $\mu=0$ and for every small $\mu>0$: $s_j$ the
+  largest of $12$, $10$ and $9$ uniform draws, the incumbent's of one, and
+  $\kappa$ from $u(x)=-1/x$, $c=1$, $w=(\frac{43}{20},\frac{52}{25},\frac{83}{40})$.}
+  {EntryContestAligned.kappaA_values, EntryContestAligned.ability_with_wealth, EntryContestAligned.costs_ordered, EntryContestAligned.gainsA, EntryContestAligned.aligned_witness_zero, EntryContestAligned.aligned_witness_positive, EntryContestAligned.aligned_witness_exists, EntryContestAligned.control_window}
 \end{longtable}
 \normalsize
 
@@ -949,6 +961,57 @@ so $\{2\}$ and $\{0,1\}$ are equilibria. Every inequality is strict and each
 gain is continuous in $\mu$ at $0$, so both remain equilibria for small $\mu>0$.
 \end{mproof}
 
+\begin{mproof}{M28}{EntryContestMu.Delta_normalise, EntryContestMu.cdf_payerLaw_antitone, EntryContestMu.first_integral, EntryContestMu.Delta_payer_mono, EntryContestMu.Delta_antitone_mu, EntryContestMu.kstar_antitone_mu}
+For $\mu>0$ put $t=(1-\mu)/\mu$, $F_t$ the law of $r+ts$ and $G$ the law of
+$r$. Dividing every score by $\mu$ changes no rank, so with $C=F$ and
+$n=Q-1-m$,
+\[
+  \Delta(m;\mu)=V\Big(\int F_t^{\,m+1}G^{\,n}\,dF_t-\int F_t^{\,m+1}G^{\,n}\,dG\Big).
+\]
+For $s\ge0$ and $t\le t'$, $r+t's\ge r+ts$, so $F_{t'}(x)\le F_t(x)$ for every
+$x$, and the second integral is non-increasing in $t$. For the first, with
+$n\ge1$,
+\[
+  \int F_t^{\,m+1}G^{\,n}\,dF_t=\frac1{m+2}\int G^{\,n}\,d\big(F_t^{\,m+2}\big)
+  =\frac1{m+2}\Big(1-\int F_t^{\,m+2}\,d\big(G^{\,n}\big)\Big),
+\]
+by $\int gF^{k}\,dF=\frac1{k+1}\int g\,d(F^{k+1})$ and
+$\int A\,dB+\int B\,dA=1$ for atomless $B$; the last integral is
+non-increasing in $t$. For $n=0$ the first integral is $1/(m+2)$. So
+$\Delta(m;\mu)$ is non-decreasing in $t$, and $t$ is decreasing in $\mu$.
+With $\kappa$ fixed, if $k'^*<k^*$ then
+\[
+  \Delta(k'^*;\mu')<\kappa_{k'^*}\le\Delta(k'^*;\mu)\le\Delta(k'^*;\mu'),
+\]
+so $k^*(\mu)\le k^*(\mu')$ for $\mu'\le\mu$.
+\end{mproof}
+
+\begin{mproof}{M29}{EntryContestAligned.kappaA_values, EntryContestAligned.ability_with_wealth, EntryContestAligned.costs_ordered, EntryContestAligned.gainsA, EntryContestAligned.aligned_witness_zero, EntryContestAligned.aligned_witness_positive, EntryContestAligned.aligned_witness_exists, EntryContestAligned.control_window}
+Let $s_j$ be the largest of $n_j$ uniform draws with $n=(12,10,9)$, the
+incumbent's the largest of one, and $\mu=0$. An outsider scores $0$ and never
+wins, and for $i\in S$,
+\[
+  \mathrm{gain}_i(S\setminus\{i\})=\frac{n_i}{n_i+1+\sum_{j\in S\setminus\{i\}}n_j},
+\]
+so
+\[
+  \mathrm{gain}_0(\emptyset)=\tfrac{12}{13},\ \mathrm{gain}_0(\{1,2\})=\tfrac38,\
+  \mathrm{gain}_1(\{0\})=\tfrac{10}{23},\ \mathrm{gain}_1(\{2\})=\tfrac12,\
+  \mathrm{gain}_2(\{0\})=\tfrac9{22},\ \mathrm{gain}_2(\{1\})=\tfrac9{20}.
+\]
+With $u(x)=-1/x$, $c=1$ and $w=(\frac{43}{20},\frac{52}{25},\frac{83}{40})$,
+$\kappa=(\frac{400}{989},\frac{625}{1404},\frac{1600}{3569})$, increasing in
+the index, and
+\[
+  \tfrac38<\kappa_0\le\tfrac{12}{13},\qquad
+  \tfrac{10}{23}<\kappa_1\le\tfrac12,\qquad
+  \tfrac9{22}<\kappa_2\le\tfrac9{20},
+\]
+so $\{0\}$ and $\{1,2\}$ are equilibria. Every inequality is strict and each
+gain is continuous in $\mu$ at $0$, so both remain equilibria for small
+$\mu>0$. Raising $\kappa_2$ to $\frac{23}{50}>\frac9{20}$ removes $\{1,2\}$.
+\end{mproof}
+
 
 
 \section{Evidence and verification}
@@ -1024,8 +1087,9 @@ richest challenger at index $0$.
 \multicolumn{3}{@{}l}{\emph{Players and actions}}\\[2pt]
 challenger & $i\in\{0,\dots,Q-1\}$ & A player of given wealth who chooses
   whether to compete. \\
-incumbent & $C$ & The additional player, who competes in every case and
-  appears only through the score CDF $C$. \\
+incumbent & $C\in\{F,G\}$ & The additional player, who competes in every
+  case and appears only through her score CDF: $F$ when she holds the bought
+  component, which M9, M20, M22 and M28 take, and $G$ when she does not. \\
 enter & $e_i=1$ & Pay the fee $c$ and add $(1-\mu)s_i$ to the score. \\
 entrant, outsider & $e_i=1$, $e_i=0$ & A challenger who enters, and one who
   does not. \\
@@ -1118,6 +1182,19 @@ is static and played once. By M1 the gain is proportional to $V$, so $V$ enters
 only as a scale. \citet{ColeMailathPostlewaite1992} read status as ``a ranking
 device that determines how well he or she fares in the nonmarket sector'', which
 is the sense of a prize awarded by rank.
+
+\paragraph{The incumbent.} The incumbent is scored by the rule that admits the
+challengers: her law is $C=F$, so she holds the bought component and differs
+from an entrant in nothing, and M26 includes her. This is the open contest,
+in which the holder competes again under the same rule, and her entry is not
+a choice here. Two institutions are not modelled, and this choice turns them
+off. A protected holder, who keeps the position unless the best challenger
+clears a fixed bar, is a law $C$ that stays put as $\mu$ varies. A holder
+with an edge beyond wealth is a law above $F$, and sits at the boundary of
+M27. Every row holds for an arbitrary atomless $C$ except M9, M20, M22 and
+M28, which take $C=F$, and M21, which needs $C(a)>0$. A fixed $C$ therefore
+keeps the count, the sorting, the cap and the spread results, and loses the
+two $\mu$ benchmarks and M28.
 
 \paragraph{Payoffs.} With $u$ the utility of wealth,
 \[
@@ -1303,8 +1380,9 @@ R2.1 & Asymmetric equilibria in which only some challengers enter. & answered
   & The equilibrium is the count $k^*$ of entrants, and every equilibrium has
   it (M5, M6). \\
 R2.1 & More enter as the prize rises and as the fee falls. & answered & M11. \\
-R2.1 & More enter as social capital matters more ($\mu$ falls). & open & Not
-  claimed. \\
+R2.1 & More enter as social capital matters more ($\mu$ falls). & answered &
+  With the incumbent investing, the gain and the count are non-increasing in
+  $\mu$ for every law of $r$ and of $s\ge0$ (M28). \\
 R2.1 & At $\mu=0$ the number entering does not depend on $Q$. & answered & At
   $\mu=0$ the gain is $V/(m+2)$ for every $Q$ (M9), so with the same costs the
   count is the same. \\
