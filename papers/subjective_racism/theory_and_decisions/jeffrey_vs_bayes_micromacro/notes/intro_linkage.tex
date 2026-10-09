@@ -8,7 +8,7 @@
 % it is a promise the paper does not keep, and a body unit with no tag is
 % content the introduction never announces.
 %
-% The introduction is mapped as it stands at 02696a3d, in six paragraphs.
+% The introduction is mapped as it stands at ff1d52ff, in six paragraphs.
 % Paragraph 2 now ends with the stance that the plan had given a paragraph
 % 3A of its own, so Stance is a job hosted at the end of paragraph 2 and
 % Channels is paragraph 3. The roadmap paragraph is excluded, since every
@@ -19,7 +19,10 @@
 % On 2026-10-09 each job was set beside what its paragraph now says, the
 % introduction homes in the body mapping were rechecked, and the report
 % gives each earlier item its status. Only the introduction changed
-% between b3b12e42 and 02696a3d, so the body units are as before.
+% between b3b12e42 and 02696a3d, so the body units are as before. Later
+% the same day bda3c559 edited the abstract and paragraph 2, and ff1d52ff
+% cut Section 3's Heckman audit paragraph and Bohren partiality paragraph,
+% whose rows are removed.
 %
 % A unit is a paragraph, or a numbered result together with the prose and
 % proof pointer around it. Appendix proofs are mapped to the result they
@@ -46,7 +49,7 @@
 \maketitle
 
 \noindent Each paragraph of the introduction is named by its job, and each job is set beside
-what the paragraph says at 02696a3d (Table~\ref{tab:names}). Every unit of the body is then
+what the paragraph says at ff1d52ff (Table~\ref{tab:names}). Every unit of the body is then
 tagged with the introduction paragraphs it expands (Table~\ref{tab:map}). An introduction
 paragraph with few body units behind it is thinly expanded, and a body unit tagged \none\ is
 content the introduction does not announce (Section~\ref{sec:findings}). Paragraph 2 hosts two
@@ -69,13 +72,13 @@ statistics of the average belief fall on each side.
 
 \small
 \begin{longtable}{@{}p{0.7cm}p{1.6cm}p{6.5cm}p{6.5cm}@{}}
-\caption{The introduction's paragraphs, named by their job, and what each says at 02696a3d.}\label{tab:names}\\
+\caption{The introduction's paragraphs, named by their job, and what each says at ff1d52ff.}\label{tab:names}\\
 \toprule
-\textbf{\P} & \textbf{Name} & \textbf{Job} & \textbf{At 02696a3d}\\
+\textbf{\P} & \textbf{Name} & \textbf{Job} & \textbf{At ff1d52ff}\\
 \midrule
 \endfirsthead
 \toprule
-\textbf{\P} & \textbf{Name} & \textbf{Job} & \textbf{At 02696a3d}\\
+\textbf{\P} & \textbf{Name} & \textbf{Job} & \textbf{At ff1d52ff}\\
 \midrule
 \endhead
 \bottomrule
@@ -87,7 +90,7 @@ statistics of the average belief fall on each side.
   & As the job. Its last literature sentence says the factor inputs leave open whether an observer can tell the rules apart (item 10, resolved).\\
 \addlinespace
 2, end & Stance & Hawthorne leaves open whether evaluators adopt each impression in full or adjust their belief by a factor; the paper does not resolve that question but measures how full adoption departs from the sequence-free factor reading of the same impressions, which is the benchmark.
-  & Hawthorne's question, then a sentence setting full adoption against partial adoption, then the departure of full adoption from the sequence-free factor reading. The factor reading is not called the benchmark here.\\
+  & Hawthorne's question, then one sentence that sets full adoption against partial adoption and measures how far full adoption, ``which Hawthorne finds unrealistic'', can depart from the sequence-free factor reading (item 17). The factor reading is not called the benchmark here.\\
 \addlinespace
 3 & Channels & The sequence acts through what the evaluator believes, the association channel ($c$), or through the weight the evaluator gives a cue by its place in the sequence, the position channel ($\omega$); under full adoption ($\omega=1$) only the association channel acts, so the departure exists only when the attributes are believed related.
   & As the job, with the position channel defined as a weight by place (02696a3d). Adds the three coordinates of a belief and that a difference below the precision is invisible. The sentence giving the orders was cut in 3fdcac51.\\
@@ -103,7 +106,7 @@ statistics of the average belief fall on each side.
 \end{longtable}
 
 \begin{longtable}{@{}p{1.7cm}p{9.6cm}p{4.0cm}@{}}
-\caption{The body of the paper mapped to the introduction at 02696a3d.}\label{tab:map}\\
+\caption{The body of the paper mapped to the introduction at ff1d52ff.}\label{tab:map}\\
 \toprule
 \textbf{Location} & \textbf{Content} & \textbf{Intro home}\\
 \midrule
@@ -134,8 +137,6 @@ statistics of the average belief fall on each side.
 \S3 & Observational learning (Bikhchandani--Hirshleifer--Welch, Banerjee) and the dynamics of discrimination & \none\ (item 2)\\
 \S3 & Decision-theory axiomatisations, Pettigrew--Weisberg, cumulative prospect theory & \none\ (item 2)\\
 \S3 & Statistical discrimination, Coate--Loury, the referral gap, stereotypes as selective recall & Results (weak; item 2)\\
-\S3 & Audits: Heckman; identification from the history of evaluations & Gap, Results\\
-\S3 & Bohren--Imas--Rosenberg; where partiality must sit in order to act & Channels\\
 \addlinespace
 \S4 opening & First against second order; why these statistics (three coordinates of a belief; how many against how much) & Channels, Precision, Results\\
 \S4.1 & Proposition IMM, immunity on a single cue and at $c=0$ & Channels, Vignette\\
@@ -174,8 +175,9 @@ App.~A & Proof of LAD & Channels\\
 \section{Report}\label{sec:findings}
 
 Items 1 to 14 come from the mapping of 2026-10-08 and keep their numbers. Their status is given
-at 02696a3d. Items 15 and 16 are new. Reading the introduction at 02696a3d against the headline
-found one error not listed before, the argument returned to paragraph 1 under item 11. Drafts
+at ff1d52ff. Items 15 to 17 are new. Reading the introduction against the headline found two
+errors not listed before, the argument returned to paragraph 1 under item 11 and the wording
+attributed to Hawthorne under item 17. Drafts
 follow \texttt{notes/writing\_discipline.md}.
 
 \subsection*{Resolved}
@@ -198,11 +200,12 @@ so plan entry 1.7 (C.7) still applies to it. That entry's other half, the typos 
 sentence, is now in the manuscript, with ``proximity to'' where the entry has ``proximity
 with''.
 
-\paragraph{9. ``Correlated''.} Four places call the attributes or the cues correlated, where the
-model has an evaluator who believes the attributes related. They are the abstract (``two
-correlated soft cues''), Assumption 1 (``the two correlated attributes'', found on 2026-10-09),
-Assumption 2 (``bundled, correlated, and soft''), and paragraph 4 (``even if the traits were
-uncorrelated'', proposal 4b of 2026-10-09, not taken). Plan entry 2.6 rewrites Assumption 2.
+\paragraph{9. ``Correlated''.} The abstract's ``two correlated soft cues'' is gone (bda3c559).
+Three places still call the attributes or the cues correlated, where the model has an evaluator
+who believes the attributes related. They are Assumption 1 (``the two correlated attributes'',
+found on 2026-10-09), Assumption 2 (``bundled, correlated, and soft''), and paragraph 4 (``even if
+the traits were uncorrelated'', proposal 4b of 2026-10-09, not taken). Plan entry 2.6 rewrites
+Assumption 2.
 
 \paragraph{11. Paragraph 1 argues the premise from personal histories.} The ``unlikely
 situation'' sentence was cut in 6668d98c, and its replacement makes a related argument. It
@@ -233,12 +236,20 @@ read ``arrival sequence''.
 consequence, is'' and ``may not even be detectable'' remain. Plan entry 1.8 (C.8) covers them, and
 was proposal 6b of 2026-10-09, not taken.
 
+\paragraph{17. Paragraph 2: ``which Hawthorne finds unrealistic''.} Added in bda3c559.
+Hawthorne's word is ``implausible'' (``highly implausible'', p.~97; ``it seems implausible
+that\ldots'', pp.~98--99), and at p.~115 ``psychologically less plausible'', all verified in the
+citation audit (H3, H6, H7). The parenthesis also sits in the sentence that sets full adoption
+against partial adoption, so a reader can take partial adoption as Hawthorne's alternative. The
+audit found that attribution unsupported (H34), since his alternatives are factor models.
+\emph{Remedy (Stance).} ``(which Hawthorne finds implausible, pp.~98--99)''.
+
 \subsection*{Open, incomplete rather than wrong}
 
 \paragraph{2. Literature: only the Jeffrey and belief-adjustment strand.}
 \emph{Finding.} Paragraph 2 previews the commutation debate, belief adjustment and Hawthorne's
 factor models. Most of Section 3 positions the paper against economics (observational learning,
-decision-theory axiomatisations, statistical discrimination and audits), and the introduction
+decision-theory axiomatisations and statistical discrimination), and the introduction
 never says so.
 \emph{Remedy (Literature).} One sentence before the stance at the end of paragraph 2:
 \begin{quote}
