@@ -8,13 +8,18 @@
 % it is a promise the paper does not keep, and a body unit with no tag is
 % content the introduction never announces.
 %
-% The introduction is mapped in its planned form, in which paragraph 3 is
-% split into 3A (Stance) and 3B (Channels). The manuscript at b3b12e42 still
-% has the single paragraph 3. The roadmap paragraph is excluded, since every
+% The introduction is mapped as it stands at 02696a3d, in six paragraphs.
+% Paragraph 2 now ends with the stance that the plan had given a paragraph
+% 3A of its own, so Stance is a job hosted at the end of paragraph 2 and
+% Channels is paragraph 3. The roadmap paragraph is excluded, since every
 % section links to it trivially.
 %
-% The paragraph jobs were redrafted on 2026-10-08 from the headline, which
+% The paragraph jobs were drafted on 2026-10-08 from the headline, which
 % the author settled first; each job expands one stretch of the headline.
+% On 2026-10-09 each job was set beside what its paragraph now says, the
+% introduction homes in the body mapping were rechecked, and the report
+% gives each earlier item its status. Only the introduction changed
+% between b3b12e42 and 02696a3d, so the body units are as before.
 %
 % A unit is a paragraph, or a numbered result together with the prose and
 % proof pointer around it. Appendix proofs are mapped to the result they
@@ -40,15 +45,13 @@
 \begin{document}
 \maketitle
 
-\noindent Each paragraph of the introduction is named by its job
-(Table~\ref{tab:names}). Every unit of the body is then tagged with the
-introduction paragraphs it expands (Table~\ref{tab:map}). An introduction
-paragraph with few body units behind it is thinly expanded, and a body unit
-tagged \none\ is content the introduction does not announce
-(Section~\ref{sec:findings}). The introduction is taken in its planned form,
-with paragraph 3 split into 3A and 3B, and the roadmap is left out. The jobs
-are drafted from the headline below, so that the paragraphs read in order
-compact into it.
+\noindent Each paragraph of the introduction is named by its job, and each job is set beside
+what the paragraph says at 02696a3d (Table~\ref{tab:names}). Every unit of the body is then
+tagged with the introduction paragraphs it expands (Table~\ref{tab:map}). An introduction
+paragraph with few body units behind it is thinly expanded, and a body unit tagged \none\ is
+content the introduction does not announce (Section~\ref{sec:findings}). Paragraph 2 hosts two
+jobs, Literature and Stance, and the roadmap is left out. The jobs are drafted from the headline
+below, so that the paragraphs read in order compact into it.
 
 \paragraph{Headline.} The introduction's paragraphs compacted into one sentence, in their order.
 \begin{quote}
@@ -64,34 +67,43 @@ questions and distinguishable through others, and the paper says exactly which s
 statistics of the average belief fall on each side.
 \end{quote}
 
-\begin{table}[htbp]
-\centering
 \small
-\caption{The introduction's paragraphs, named by their job.}\label{tab:names}
-\begin{tabular}{@{}p{0.8cm}p{2.0cm}p{12.4cm}@{}}
+\begin{longtable}{@{}p{0.7cm}p{1.6cm}p{6.5cm}p{6.5cm}@{}}
+\caption{The introduction's paragraphs, named by their job, and what each says at 02696a3d.}\label{tab:names}\\
 \toprule
-\textbf{\P} & \textbf{Name} & \textbf{Job}\\
+\textbf{\P} & \textbf{Name} & \textbf{Job} & \textbf{At 02696a3d}\\
 \midrule
-1 & Gap & Sequence effects on judgment are long established, but how far they can be measured, in the statistics of beliefs and decisions an observer reads, has had little attention.\\
-\addlinespace
-2 & Literature & Work on Jeffrey conditioning asks whether updates in opposite sequences agree, not how far their disagreement can be measured; Hawthorne's factor inputs remove the dependence but leave open whether an observer can tell which rule evaluators follow.\\
-\addlinespace
-3A & Stance & Hawthorne leaves open whether evaluators adopt each impression in full or adjust their belief by a factor; the paper does not resolve that question but measures how full adoption departs from the sequence-free factor reading of the same impressions, which is the benchmark.\\
-\addlinespace
-3B & Channels & The sequence acts through what the evaluator believes, the association channel ($c$), or through how the evaluator revises, the position channel ($\omega$); under full adoption ($\omega=1$) only the association channel acts, so the departure exists only when the attributes are believed related.\\
-\addlinespace
-4 & Vignette & Two hiring panels read a credential and a reference letter in opposite sequences; when the traits are believed related, each panel's belief departs from the factor reading at first order in the prevalence of the trait it reads last and at second order in the association, and across many files the share of hiring decisions changed is first order and the surplus lost second order.\\
-\addlinespace
-5 & Precision & ``Order'' is order in $c$ and ``sequence'' is reading order; an observer resolves a departure only when it exceeds the precision $\varepsilon$, so with $c^{2}\ll\varepsilon\ll c$ the factor reading is indistinguishable from full adoption through the second-order questions and distinguishable through the first-order ones.\\
-\addlinespace
-6 & Results & The vignette's orders are proved in the model (DIV, DRF, SHR at first order; DEC, LOS at second), and a smooth statistic of the average belief is second order exactly when its differential at independence is proportional to the association's (PRO), which says on which side of the precision each such question falls; an audit's answer turns on the statistic read, not on how many evaluators are averaged.\\
+\endfirsthead
+\toprule
+\textbf{\P} & \textbf{Name} & \textbf{Job} & \textbf{At 02696a3d}\\
+\midrule
+\endhead
 \bottomrule
-\end{tabular}
-\end{table}
+\endfoot
+1 & Gap & Sequence effects on judgment are long established, but how far they can be measured, in the statistics of beliefs and decisions an observer reads, has had little attention.
+  & States the gap, and previews the share of decisions changed at first order and the association and the surplus lost at second. The marginals are not named. The second sentence argues the gap's premise from personal histories (item 11).\\
+\addlinespace
+2 & Literature & Work on Jeffrey conditioning asks whether updates in opposite sequences agree, not how far their disagreement can be measured; Hawthorne's factor inputs remove the dependence but leave open whether an observer can tell which rule evaluators follow.
+  & As the job. Its last literature sentence says the factor inputs leave open whether an observer can tell the rules apart (item 10, resolved).\\
+\addlinespace
+2, end & Stance & Hawthorne leaves open whether evaluators adopt each impression in full or adjust their belief by a factor; the paper does not resolve that question but measures how full adoption departs from the sequence-free factor reading of the same impressions, which is the benchmark.
+  & Hawthorne's question, then a sentence setting full adoption against partial adoption, then the departure of full adoption from the sequence-free factor reading. The factor reading is not called the benchmark here.\\
+\addlinespace
+3 & Channels & The sequence acts through what the evaluator believes, the association channel ($c$), or through the weight the evaluator gives a cue by its place in the sequence, the position channel ($\omega$); under full adoption ($\omega=1$) only the association channel acts, so the departure exists only when the attributes are believed related.
+  & As the job, with the position channel defined as a weight by place (02696a3d). Adds the three coordinates of a belief and that a difference below the precision is invisible. The sentence giving the orders was cut in 3fdcac51.\\
+\addlinespace
+4 & Vignette & Two hiring panels read a credential and a reference letter in opposite sequences; when the traits are believed related, each panel's belief departs from the factor reading at first order in the prevalence of the trait it reads last and at second order in the association, and across many files the share of hiring decisions changed is first order and the surplus lost second order.
+  & Two panels read the file in opposite sequences and, under full adoption, differ only when the traits are believed related. The rest sets full adoption against partial adoption and points to Section~6. None of the job's orders is stated (item 16).\\
+\addlinespace
+5 & Precision & ``Order'' is order in $c$ and ``sequence'' is reading order; an observer resolves a departure only when it exceeds the precision $\varepsilon$, so with $c^{2}\ll\varepsilon\ll c$ the factor reading is indistinguishable from full adoption through the second-order questions and distinguishable through the first-order ones.
+  & As the job. The Domotor sentence (item 3) and ``the two sequences separate'' and ``arrival order'' (item 13) remain.\\
+\addlinespace
+6 & Results & The vignette's orders are proved in the model (DIV, DRF, SHR at first order; DEC, LOS at second), and a smooth statistic of the average belief is second order exactly when its differential at independence is proportional to the association's (PRO), which says on which side of the precision each such question falls; an audit's answer turns on the statistic read, not on how many evaluators are averaged.
+  & DIV, DEC, LOS and PRO, then the audit sentences (item 14). DRF and SHR are not named (item 15).\\
+\end{longtable}
 
-\small
 \begin{longtable}{@{}p{1.7cm}p{9.6cm}p{4.0cm}@{}}
-\caption{The body of the paper mapped to the introduction.}\label{tab:map}\\
+\caption{The body of the paper mapped to the introduction at 02696a3d.}\label{tab:map}\\
 \toprule
 \textbf{Location} & \textbf{Content} & \textbf{Intro home}\\
 \midrule
@@ -103,9 +115,9 @@ statistics of the average belief fall on each side.
 \bottomrule
 \endfoot
 \S2.1 & Belief as a joint law; the association defined; the prior as the evaluator's credence; $\alpha$, $\beta$, $c$ as beliefs, not frequencies & Channels\\
-\S2.1 & Impressions are attribute-local credences, not likelihoods; the sequence $\sigma$, the share $\lambda$, the adoption weight $\omega$ & Stance, Channels\\
-\S2.1 & The engagement decision (desirability $v$, threshold $\tau$, score) & Vignette, Results (both weak)\\
-\S2.1 & The surplus defined at the benchmark; the loss $L(c)$ & Vignette, Results\\
+\S2.1 & Impressions are attribute-local credences, not likelihoods; the sequence $\sigma$, the share $\lambda$, the adoption weight $\omega$ & Stance, Channels, Vignette\\
+\S2.1 & The engagement decision (desirability $v$, threshold $\tau$, score) & Gap, Results (both weak)\\
+\S2.1 & The surplus defined at the benchmark; the loss $L(c)$ & Gap, Results\\
 \addlinespace
 \S2.2 & Jeffrey's rule, Diaconis--Zabell's support for it, the sentence placing all results at $\omega=1$ & Stance, Channels\\
 \S2.2 & Definition of the sequence effect & Vignette\\
@@ -113,9 +125,9 @@ statistics of the average belief fall on each side.
 \S2.2 & Example 1, the panel's numbers & Vignette\\
 \addlinespace
 \S2.3 & Assumption 1, small $c$ & Precision\\
-\S2.3 & Assumption 2, soft cues & Stance\\
+\S2.3 & Assumption 2, soft cues & Vignette, Stance\\
 \S2.3 & Assumption 3, attribute-locality & Channels\\
-\S2.3 & Assumption 4, surplus criterion & Results\\
+\S2.3 & Assumption 4, surplus criterion & Gap, Results\\
 \addlinespace
 \S3 & The Döring and Hawthorne debate; the two responses (a defect to repair, the input re-described) & Literature, Stance\\
 \S3 & The information-theoretic ground for the premise; the degree of adoption as something to measure & Stance\\
@@ -125,11 +137,11 @@ statistics of the average belief fall on each side.
 \S3 & Audits: Heckman; identification from the history of evaluations & Gap, Results\\
 \S3 & Bohren--Imas--Rosenberg; where partiality must sit in order to act & Channels\\
 \addlinespace
-\S4 opening & First against second order; why these statistics (three coordinates of a belief; how many against how much) & Vignette, Results, Precision\\
-\S4.1 & Proposition IMM, immunity on a single cue and at $c=0$ & Channels\\
+\S4 opening & First against second order; why these statistics (three coordinates of a belief; how many against how much) & Channels, Precision, Results\\
+\S4.1 & Proposition IMM, immunity on a single cue and at $c=0$ & Channels, Vignette\\
 \S4.1 & Proposition DIV, its mechanism and conditions; the individual sequence effect & Results, Channels\\
 \S4.1 & The score gap & Results\\
-\S4.2 & Lemma ASC; the marginal as a read-out of the gap & Vignette, Results\\
+\S4.2 & Lemma ASC; the marginal as a read-out of the gap & Vignette, Precision, Results\\
 \S4.3 & The flip indicator as a step function; the individual loss & Results\\
 \addlinespace
 \S5 opening & The classification survives averaging; distortion and protection defined & Results, Precision\\
@@ -141,55 +153,94 @@ statistics of the average belief fall on each side.
 \S5.2 & The stereotype defined; Lemma SEP for any number of attributes; Proposition DEC & Results, Channels\\
 \S5.2 & The odds ratio unchanged by every separable reweighting & \none\ (item 5)\\
 \S5.2 & The vignette's implication: a reviewer of the average association sees nothing & Vignette, Precision\\
-\S5.2 & Proposition DRF and its consequence & Vignette, Results\\
-\S5.3 opening & Share and loss read the same threshold band, counted against weighted by stake & Vignette, Results\\
-\S5.3 & Theorem LOS, the band figure, Proposition SHR, the audit implication & Results\\
+\S5.2 & Proposition DRF and its consequence & Precision (weak; item 15)\\
+\S5.3 opening & Share and loss read the same threshold band, counted against weighted by stake & Gap, Results\\
+\S5.3 & Theorem LOS, the band figure, Proposition SHR, the audit implication & Gap, Results (SHR in Gap only; item 15)\\
 \S5.4 & Proposition PRO, the protected class, the panel's audit questions & Results\\
 \addlinespace
 \S6 & The assumptions revisited & Precision, Stance, Channels, Results\\
 \S6 & The homogeneous prior: every evaluator shares one $c$ & \none\ (item 6)\\
-\S6 & Partial adoption, the four cases, Proposition LAD, the cases table & Channels, Stance\\
+\S6 & Partial adoption, the four cases, Proposition LAD, the cases table & Vignette, Channels, Stance\\
 \S6 & The Hawthorne paragraph & Stance\\
 \addlinespace
-\S7 & The audit-questions table; the central contribution; the three implications for audits & Results, Precision\\
-\S7 & Locating the objection in the levels rather than in the believed link; the normative question left where Döring and Hawthorne leave it & Stance, Literature\\
+\S7 & The audit-questions table; the central contribution; the three implications for audits & Gap, Results, Precision\\
+\S7 & Locating the objection in the levels rather than in the believed link; the normative question left where Döring and Hawthorne leave it & Gap, Stance, Literature\\
 \addlinespace
 App.~A & Proofs of DIV, SEP, LOS and PRO & Results\\
 App.~A & Proof of LAD & Channels\\
 \end{longtable}
 \normalsize
 
-\section{Report and proposed remedies}\label{sec:findings}
+\section{Report}\label{sec:findings}
 
-Each item gives what the mapping shows, a remedy with the paragraph that would host it, and the
-grounds for any claim a draft adds. Drafts follow \texttt{notes/writing\_discipline.md}. Nothing
-here has been applied to the manuscript.
+Items 1 to 14 come from the mapping of 2026-10-08 and keep their numbers. Their status is given
+at 02696a3d. Items 15 and 16 are new. Reading the introduction at 02696a3d against the headline
+found one error not listed before, the argument returned to paragraph 1 under item 11. Drafts
+follow \texttt{notes/writing\_discipline.md}.
 
-\subsection*{Introduction paragraphs thinly expanded}
+\subsection*{Resolved}
 
-\paragraph{1. Gap: ``any number of cues and attributes''.}
-\emph{Finding.} The planned Gap paragraph states the problem only, so the current paragraph 1's
-last sentence needs another home. It also claims more than the paper shows: ``Despite its
-simplicity the two-cue setting demonstrates the central mechanism of how an attribute-local
-updating leaves the interactions among attributes untouched remains valid for any number of cues
-and attributes.'' Only Lemma SEP is shown for more than two cues; every order result is proved for
-two.
-\emph{Remedy (Vignette).} Cut the sentence from paragraph 1, and narrow the vignette's clause
-``While the mechanism can extend to higher number of cues'' to what Lemma SEP proves:
+\paragraph{1. Gap: ``any number of cues and attributes''.} The sentence was cut from paragraph 1
+in 3fdcac51, and the vignette's clause on more cues in 6668d98c. The general case of Lemma SEP now
+has no introduction statement, which the introduction need not carry.
+
+\paragraph{7. The three coordinates of a belief.} Paragraph 3 now names them (6668d98c), and
+paragraph 1 previews the two decision statistics.
+
+\paragraph{10. Paragraph 2's ``cannot tell''.} The sentence now says the factor inputs leave open
+whether an observer can tell the rules apart (6668d98c).
+
+\subsection*{Errors still open}
+
+\paragraph{3. Precision: the Domotor sentence.} The ``myopic structure'' sentence was cut
+(02696a3d). The Domotor sentence remains and cites a source that does not support the mechanism,
+so plan entry 1.7 (C.7) still applies to it. That entry's other half, the typos in the terminology
+sentence, is now in the manuscript, with ``proximity to'' where the entry has ``proximity
+with''.
+
+\paragraph{9. ``Correlated''.} Four places call the attributes or the cues correlated, where the
+model has an evaluator who believes the attributes related. They are the abstract (``two
+correlated soft cues''), Assumption 1 (``the two correlated attributes'', found on 2026-10-09),
+Assumption 2 (``bundled, correlated, and soft''), and paragraph 4 (``even if the traits were
+uncorrelated'', proposal 4b of 2026-10-09, not taken). Plan entry 2.6 rewrites Assumption 2.
+
+\paragraph{11. Paragraph 1 argues the premise from personal histories.} The ``unlikely
+situation'' sentence was cut in 6668d98c, and its replacement makes a related argument. It
+reads ``if individual judgments did not depend on the cue-arrival sequence at all, then
+subjective experiences should not depend on personal histories either''. Under the factor
+reading the belief depends on every impression received and is free only of their sequence, so
+judgments free of sequence still depend on personal histories, and the inference does not hold.
+The sentence also judges the factor rule on plausibility, the ground the paper sets aside.
+\emph{Remedy (Gap).} Cut the clause from ``since'' to the end of the sentence. The first
+sentence's citations already carry that sequence effects are well established.
+
+\paragraph{12. Setup 2.2 says the benchmark is not a rival rule.} Unchanged at line 199, ``The
+benchmark $\PB$ is not a rival updating rule but the same two impressions re-expressed''. The
+headline sets the factor reading against full adoption as the rule Hawthorne prefers.
+\emph{Remedy (Setup 2.2).}
 \begin{quote}
-The setting has two cues, but its mechanism, that an update on one attribute rescales the
-association rather than creating it, holds for any number of cues and attributes
-(Lemma~SEP).
+The benchmark $\PB$ is the same two impressions re-expressed, each read as a multiplicative factor
+relative to the prior marginal.
 \end{quote}
-\emph{Grounds.} LemmaSEP.lean, general $N$: \texttt{applySteps\_no\_pair\_interaction},
-\texttt{sep\_rescales\_association}.
+
+\paragraph{13. ``Order'' for reading sequence.} Three places remain. Paragraph 5's ``the two
+sequences separate'' and ``structurally blind to arrival order'' were proposals 5d and 5f of
+2026-10-09, not taken. Section 5.2's ``whether arrival order matters or not'' (line 715) should
+read ``arrival sequence''.
+
+\paragraph{14. Typos and one misstatement in paragraph 6.} ``bechmark'', the backquotes closing
+``sequence'' and ``while evaluator diverges'' are fixed (02696a3d). ``and audit's answer'', ``One
+consequence, is'' and ``may not even be detectable'' remain. Plan entry 1.8 (C.8) covers them, and
+was proposal 6b of 2026-10-09, not taken.
+
+\subsection*{Open, incomplete rather than wrong}
 
 \paragraph{2. Literature: only the Jeffrey and belief-adjustment strand.}
 \emph{Finding.} Paragraph 2 previews the commutation debate, belief adjustment and Hawthorne's
 factor models. Most of Section 3 positions the paper against economics (observational learning,
 decision-theory axiomatisations, statistical discrimination and audits), and the introduction
 never says so.
-\emph{Remedy (Literature).} One sentence at the end of paragraph 2:
+\emph{Remedy (Literature).} One sentence before the stance at the end of paragraph 2:
 \begin{quote}
 In economics, sequence has been studied across agents, as in observational learning
 \citep{BHW1992,Banerjee1992}, and discrimination through evaluators' beliefs and preferences
@@ -201,26 +252,14 @@ evaluator's reading sequence registers in what an audit measures.
 claim, as Section 3 states it (a single agent, two cues, a kinematic rather than an equilibrium
 object).
 
-\paragraph{3. Precision: one body home, and two sentences with none.}
-\emph{Finding.} Paragraph 5's precision argument is developed in one Section 5 paragraph (the
-instrument), with mentions in Assumption 1, Section 5.2 and the conclusion. That is enough for a
-framing device. But two of its sentences have no body home: ``Thus sequence effect is a
-sequential, myopic structure that makes Jeffrey conditioning the coherent response to a delivered
-credence'' is never expanded or explained, and the Domotor sentence cites a source that does not
-support the mechanism (pending plan entry 1.7).
-\emph{Remedy (Precision).} Cut the ``myopic structure'' sentence, and apply entry 1.7 for the
-Domotor sentence.
-
-\subsection*{Body content with no introduction home}
-
-\paragraph{4. Section 3's economics strands.} Covered by remedy 2.
+\paragraph{4. Section 3's economics strands.} Covered by item 2.
 
 \paragraph{5. The odds-ratio invariance.}
 \emph{Finding.} Section 5.2 shows the odds ratio is unchanged by every separable reweighting, so
 the odds ratio of each evaluator's belief is the same under both sequences and the benchmark, at
 any precision. It is the one question that never tells the two rules apart, and the introduction
 does not mention it.
-\emph{Remedy (Precision).} A clause at the end of paragraph 5's last sentence:
+\emph{Remedy (Precision).} A clause at the end of paragraph 5's precision argument:
 \begin{quote}
 \ldots, and the odds ratio of each evaluator's belief does not tell them apart at any precision
 (Lemma~SEP).
@@ -237,25 +276,10 @@ about populations, and they carry this condition silently.
 reading sequences in a population whose members share one prior, and across an open set of
 priors''. The alternative is to leave scope limits to Section 6, which the roadmap points to.
 
-\paragraph{7. The three coordinates of a belief.}
-\emph{Finding.} The planned vignette names the four statistics (the prevalence of a trait, the
-association, the share of decisions changed, the surplus lost) but not why these four. Section 4
-opens with the reason: a belief about two binary attributes has three coordinates, and the
-decisions read from it are counted by how many change and what that costs.
-\emph{Remedy (Results).} Replace paragraph 6's opening ``The key finding is presented in two
-parts.'' with:
-\begin{quote}
-A belief about two binary attributes has three coordinates, the two marginal probabilities and
-the association, and the decisions read from it give two further statistics, the share of
-decisions the sequence changes and the surplus that change costs. The key finding comes in two
-parts.
-\end{quote}
-
 \paragraph{8. The decision model.}
-\emph{Finding.} The planned vignette speaks of hiring decisions changed, but the introduction
+\emph{Finding.} Paragraph 1 speaks of decisions changed by the sequence, but the introduction
 never says how a belief becomes a decision.
-\emph{Remedy (Vignette).} One sentence in paragraph 4, after ``identical evidence can license
-different decisions'':
+\emph{Remedy (Vignette).} One sentence in paragraph 4, after the panels' differing beliefs:
 \begin{quote}
 The panel hires when the expected value of the candidate under its belief exceeds the value of
 its outside option, so a change of belief changes the decision only for candidates near that
@@ -264,53 +288,30 @@ threshold.
 \emph{Grounds.} Setup 2.1 (engage if and only if $s(P)\ge\tau$); Decision.lean \texttt{flips\_iff},
 \texttt{not\_flips\_of\_pointing\_away}.
 
-\subsection*{Errors found along the way}
-
-\paragraph{9. ``Correlated'' cues.} Assumption 2 reads ``The cues are bundled, correlated, and soft'',
-and the abstract ``two correlated soft cues''. In the model the cues are not correlated: each bears
-on one attribute, and the correlation is the evaluator's belief that the attributes go together,
-$c$. Pending plan entry 2.6 rewrites Assumption 2; the abstract needs the same correction.
-
-\paragraph{10. Paragraph 2 says an observer cannot tell the rules apart.} Its last sentence ends
-``it hardly addresses the empirical issue that an observer cannot tell whether impressions replace
-prior belief or adjust it''. The headline says the opposite for some questions: at a precision
-finer than $c$, the marginals and the share of decisions changed separate full adoption from the
-factor reading. The literature leaves the matter open; it does not settle it in the negative.
-\emph{Remedy (Literature).}
+\paragraph{15. The marginals' first order has no introduction statement.}
+\emph{Finding.} Paragraph 3's sentence giving the marginals and the share at first order was cut
+in 3fdcac51. Paragraph 1 previews the share at first order and does not name the marginals.
+Paragraph 5 says only that the marginals' sequence dependence ``follows easily''. Paragraph 6
+names DIV, DEC, LOS and PRO and does not name DRF or SHR. The headline's ``first order in the
+marginals'' is therefore carried by the abstract and by no introduction paragraph.
+\emph{Remedy (Results).} The first part of paragraph 6 could name both:
 \begin{quote}
-\ldots, it leaves open whether an observer can tell an evaluator who replaces prior belief with
-each impression from one who adjusts it.
+First, we establish that each evaluator's belief diverges from the benchmark at first order in
+$c$ (Proposition~DIV), and so do at least one marginal of the average belief
+(Proposition~DRF) and the share of decisions the sequence changes (Proposition~SHR), while the
+average believed association between attributes (Proposition~DEC) and the surplus-weighted loss
+of the population's decisions (Theorem~LOS) are second order.
 \end{quote}
+\emph{Grounds.} DRF ends ``For every $\lambda\in[0,1]$, therefore, at least one marginal drifts at
+first order''; SHR gives the share as $f(0)\cdot\mathcal{O}(c)$. Records as in
+\texttt{verification\_coverage.md}; SHR's exact constant is a sympy record only.
 
-\paragraph{11. Paragraph 1 judges the factor rule unlikely.} Its second sentence argues that
-sequence-free judgment would mean ``the unlikely situation where experience does not change how
-later cues are read at all''. The planned paragraph 3A says the paper does not resolve
-Hawthorne's question, and paragraph 1 would then have answered it on plausibility, the ground
-the paper sets aside.
-\emph{Remedy (Gap).} Cut the sentence. The first sentence's citations already carry that
-sequence effects are well established.
-
-\paragraph{12. Setup 2.2 says the benchmark is not a rival rule.} It reads ``The benchmark $\PB$ is
-not a rival updating rule but the same two impressions re-expressed''. The headline sets the
-factor reading against full adoption as the rule Hawthorne prefers, which is what makes
-distinguishing them bear on his question.
-\emph{Remedy (Setup 2.2).}
-\begin{quote}
-The benchmark $\PB$ is the same two impressions re-expressed, each read as a multiplicative factor
-relative to the prior marginal.
-\end{quote}
-
-\paragraph{13. ``Order'' for reading sequence.} Three places break the paper's own terminology,
-two of them in the paragraph that defines it. Paragraph 5: ``For small enough $c$ the two
-sequences separate'' should be ``the two orders separate'', and ``structurally blind to arrival
-order'' should be ``arrival sequence''. Section 5.2, opening of the aggregate belief statistics:
-``whether arrival order matters or not'' should be ``arrival sequence''.
-
-\paragraph{14. Typos and one misstatement in paragraphs 5 and 6.} Paragraph 5: ``bechmark'' for
-``benchmark'', and ``\texttt{\`{}\`{}sequence\`{}\`{}}'' closes with backquotes. Paragraph 6:
-``while evaluator diverges'' should be ``while each evaluator's belief diverges''; ``and audit's
-answer'' should be ``an audit's answer''; ``One consequence, is'' loses its comma. The last
-sentence says the belief audits ``may not even be detectable''; what it means is that they may
-not detect the stereotype.
+\paragraph{16. Paragraph 4's job moved.}
+\emph{Finding.} The vignette now carries the adoption contrast and points to Section 6, so
+Section 6's partial adoption, cases table and Proposition LAD gain a home in paragraph 4. The
+orders that the job gave the vignette are announced by paragraphs 1, 5 and 6 instead, and the
+body rows that expand them (Section 4.2, the reviewer in Section 5.2, the opening of Section 5.3)
+are re-tagged in Table~\ref{tab:map}. No error follows. The cost is item 15, since the marginals
+were the order the vignette alone had carried.
 
 \end{document}
