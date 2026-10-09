@@ -887,6 +887,14 @@ paper's claims, and only then write the manuscript.
      every `k ≠ 1` fails at `k = −1` (`neg_not_ordered`). `PROOFS.tex` and
      `LITERATURE.tex` now cite it beside Shaked. Shaked (1982) itself remains
      unread.
+  Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
+  Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
+  narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
+  Drugov and Ryvkin (2020); needs that PDF and Morgan, Tumlinson and Vardy
+  (2022). C13 narrowed with the reason the share is undefined in the entry
+  models read. Ledger rows revised and added. PDFs still needed: Drugov and
+  Ryvkin (2020) JET 188; Morgan, Tumlinson and Vardy (2022) JET 201;
+  Mathews-Namoro, Corcoran, Corcoran-Karels, Shaked.
   8. **Conclusions, then introduction.** Conclusions carry only the novel
      claims from the revised ledger, each linked to model or literature rows.
      The introduction states the headlines and their number, each traced to a
@@ -1437,7 +1445,11 @@ be claimed as novel.
 | Endogenous marginal agent in the pivot rule | **SURVIVES** | Proposition (endogenous margin), machine-checked and independently recompiled (axiom-free); 20,000 economies with `k*` recomputed on both sides, 0 violations; control at the wrong index gives 154/2744, so the hypothesis is not slack. Differs from CL's fixed `theta`; framing settled under F7 — offered as a consequence of the extensive-margin formulation, not as a stronger theorem than theirs |
 | P7 uniform cap | **DOES NOT SURVIVE** | `Accounting.lean`: FJL's bound and P7's cap are instances of one lemma |
 | P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
-| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked, which holds for a uniform base score | **CANDIDATE, adopted as a claim by the author on 7 Oct 2026, novelty pending pass 7** | `pmu_single_crossing`, `pmu_quasiconcave`, `pmu_quasiconcave_uniform` in `lean/mathlib/PMU.lean`; the fall is exhibited exactly in `lean/mathlib/FallWitness.lean` (`rise_then_fall`). Ryvkin and Drugov (2020) obtain unimodality of individual effort in the number of players with the same kernel through Karlin's step, so pass 7 must decide whether the result is an instance of theirs or a new statement about the entry gain |
+| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked (revised 9 Oct 2026, pass 7) | **DOES NOT SURVIVE as a result; the score-technology side is a CANDIDATE (minor), pending** | M1 writes the gain as `V E[phi(M)]` with `M` the best rival's score, the form of RD's `b_k = E[f(X_(k-1:k-1))]`, and RD's Karlin step (p.1597) with `u = phi` and `H = C G^(Q-1)` gives M17 (`weight_tp2`, `pmu_orientation`, `karlin_ratio`; `lit/ryvkin_drugov_2020/NOTES.md` pass 3). M21 makes precise RD's remark that large-`k` comparative statics follow the upper tail (p.1601). What may remain: M18 (a uniform base score puts the peak of `phi` at the top of the outsiders' support, where RD's kernel cannot vanish) and M19 (primitive conditions on `r`, `s` for a single-peaked `phi`). No precedent found at the abstract level, 9 Oct 2026 |
+| The count, and the payers' share, fall as the rule weighs talent more (M28), with a sign universal across laws (added 9 Oct 2026) | **PENDING, likely an analogue** | Drugov and Ryvkin (2020) [A, abstract and RD's footnotes 23 and 29]: effort falls as noise becomes more dispersed, for arbitrary prize schedules; raising `mu` scales the base score up relative to the bought component, a dispersive change. Morgan, Tumlinson and Vardy (2022) [A]: noise intensity changes who drops out. The contrast with the number of players (no universal sign) is already theirs across the two papers. New, if anything, is the entry margin with a random bought component. Needs both PDFs |
+| The paying class's share of the prize, as a function of how many pay (M31) (added 9 Oct 2026) | **CANDIDATE, pending** | In every entry model read (L2 to L7) non-entrants cannot win, so the share is not defined there; here outsiders compete on the base score. Binary contests (Ghosh and Kleinberg) and contests with pre-contest investment are the places to look; not searched beyond abstracts |
+| The incumbent abstains while a challenger enters only inside the band (M30) (added 9 Oct 2026) | **SURVIVES (minor) as an answer to R2.1; not a novelty claim** | A corollary of M6 and M7 for `Q+1` symmetric players (`incumbent_out_iff`) |
+| Count invariance fails with ability rising in wealth (M29) (added 9 Oct 2026) | **Scope result, not a novelty claim** | Same phenomenon as Fullerton and McAfee's `two_sizes` (L5): the gain depends on who enters |
 | The mechanism (wealth sorts entry via concavity) | **DOES NOT SURVIVE** | Lazear–Rosen (1981) §III; Schroyen–Treich (2016) privilege contest |
 | "The combination of P7, P9-gen, P-MU" | **WEAK — see N3** | Combination claims are discounted; two of three components are not individually novel |
 
