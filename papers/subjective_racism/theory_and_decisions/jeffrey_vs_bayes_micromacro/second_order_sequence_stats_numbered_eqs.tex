@@ -379,7 +379,7 @@ mixture.
 Before these are detailed, it is worth stating why the respective statistics were considered. For belief statistics, a two cue setting means that belief is a joint law on $\{0,1\}^{2}$ and a point of $\Delta^{3}$ - which in turn suggests three degrees of freedom. Thus, the marginal probability for each attribute together with a single association parameter were considered for belief statistics. The two decision statistics simply measure \emph{how many} are affected by the arrival sequence (flip indicator) and \emph{how much} they are affected (loss weighted by surplus $|u|$ ). This is the standard incidence-versus-intensity pairing of the measurement literature, where a headcount (a count of those past a threshold) and a mean shortfall (average of their distances from it) are first two members of a single parametrised family of indices \citep{FosterGreerThorbecke1984}.
 
 \subsection{Primitives for single evaluator}\label{sec:individual_primitives}
-Starting with the \emph{gap}, we first state the rather trivial assertion that the difference between Jeffrey and Bayes is absent on a single cue or on two cues on independent attributes\footnote{Since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (see Assumption~\ref{as:soft})}.
+Starting with the \emph{gap}, we first state the rather trivial assertion that the difference between the Jeffrey posterior and the benchmark is absent on a single cue or on two cues on independent attributes\footnote{Since we focus on soft, credence-delivering evidence in the current paper, the fact that two hard cues---delivered as a likelihood--- already commute, remains out of scope (see Assumption~\ref{as:soft})}.
 
 \begin{proposition}[exact immunity]\label{prop:IMM}
 On a single cue, the Jeffrey posterior equals the matched Bayesian posterior identically, for
@@ -686,7 +686,7 @@ The aggregation of belief statistics also shows that aggregation doesn't really 
 \label{sec:association}
 
 Recall that the sense of stereotype in the paper depends on the cross-attribute association. With $\assoc(Q)=Q_{00}Q_{11}-Q_{01}Q_{10}$ as the association of a joint law $Q$, the \emph{stereotype} is the believed association absent from---or in excess of---the benchmark, a
-nonzero $\assoc(\Pbar)-\assoc(\PB)$. By definition, stereotype is absent when the belief matches the Bayesian benchmark.
+nonzero $\assoc(\Pbar)-\assoc(\PB)$. By definition, stereotype is absent when the belief matches the sequence-free benchmark.
 
 We now explain how the average believed cross-attribute association is second order because of a separable reweighting
 (Lemma~\ref{lem:SEP})---rather than the Jeffrey conditioning or the presence of two cues. More particularly, every updating route in the model composes to a separable
@@ -751,7 +751,7 @@ multiplier equals $\bigl(q_0q_1/\alpha(1-\alpha)\bigr)\bigl(r_0r_1/\beta(1-\beta
 Hence $\assoc(\Pbar)=\lambda\,\assoc(\PJ_{AB})+(1-\lambda)\,\assoc(\PJ_{BA})+\bigO(c^2)
 =Kc+\bigO(c^2)$ (the mixture identity holds to leading order; $\assoc$ is quadratic, and the
 cross terms are $\bigO(c^2)$) and
-$\assoc(\Pbar)-\assoc(\PB)=\bigO(c^2)$, the $\bigO(c)$ coefficients cancelling since Jeffrey and Bayes are both separable, so both can only rescale the prior
+$\assoc(\Pbar)-\assoc(\PB)=\bigO(c^2)$, the $\bigO(c)$ coefficients cancelling since the Jeffrey steps and the benchmark update are both separable, so both can only rescale the prior
 association by the same leading factor.
 
 \end{proof}
@@ -1122,7 +1122,7 @@ the position channel.}
 How much stereotype is carried by population's average belief?
   & $\assoc(\Pbar)-\assoc(\PB)$
   & $\bigO(c^{2})$ exactly (Lemma~\ref{lem:ASC}; Prop.~\ref{prop:DEC})\\
-How far does population's believed prevalence of an attribute sit from order-free inference?
+How far does population's believed prevalence of an attribute sit from the sequence-free benchmark?
   & $\Pbar(A{=}1)-\PB(A{=}1)$
   & $\Theta(c)$ generically, at least one attribute (Prop.~\ref{prop:DRF})\\
 \midrule
@@ -1142,8 +1142,8 @@ How large is the efficiency loss incurred through sequence-affected decisions?
 
 The paper's central contribution is a characterisation that delineates the conditions under which an arbitrary smooth statistic of the average belief is protected, at first order, from the non-commutativity of coherent sequential updating. This characterisation is built up from the fundamental observation that the gap is not an arbitrary perturbation. Each reading sequence contributes one route direction ($R_1$ and $R_2$), so the leading-order departures of the average posterior from the benchmark are confined to the plane those two directions span. Whether a statistic is protected therefore turns on whether its differential annihilates the route plane or not.
 
-This answer carries two implications for audits where soft-cue updating can be assumed. First, an aggregate matching the Bayesian benchmark does not license the inference that its members are Bayesian. The population's mean believed association and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark while every member's
-gap diverges at $\bigO(c)$. At leading order, a population's aggregate beliefs can look externally Bayesian---sequence-free, benchmark-conforming on the protected statistics---even when no member's belief is.
+This answer carries two implications for audits where soft-cue updating can be assumed. First, an aggregate matching the sequence-free benchmark does not license the inference that its members' beliefs are free of the sequence. The population's mean believed association and its surplus-weighted loss sit within $\bigO(c^{2})$ of the benchmark while every member's
+gap diverges at $\bigO(c)$. At leading order, a population's aggregate beliefs can look sequence-free on the protected statistics even when no member's belief is.
 
 Second, the results bear on how a stereotype is looked for outside the model. The instruments a society most naturally trusts for detecting stereotype are
 of the belief-auditing kind---asking what a population believes, in aggregate, about how attributes go together---and the association they measure is protected
