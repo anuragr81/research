@@ -891,6 +891,14 @@ paper's claims, and only then write the manuscript.
      claims from the revised ledger, each linked to model or literature rows.
      The introduction states the headlines and their number, each traced to a
      model row and assessed for overreach.
+     Revised 9 Oct 2026 for M28 to M31 and L14 to L19, ahead of pass 7 at the
+     author's request: the introduction opens with the paper's question; K1's
+     scope note carries M30; K7 is the paying class's share (M31, M28).
+     Table 4 adds C9 (count in mu), C10 (the share, with Tilly and
+     Laurison-Friedman), C11 (the incumbent); Table 5 adds C12 and C13, the
+     novelty of M28 and M31, pending pass 7. Appendix D gains "After entry"
+     (the model stops at entry). C-row IDs are kept stable, so C9 to C11 sit
+     in Table 4 after C4 while C5 to C8 are in Table 5.
   9. **Literature table.** Only the papers a conclusion or model row depends
      on, with verbatim quotes and pages from `lit/<paper>/CLAIMS.md`.
   10. **Readability passes** on the appendix proofs, as many as needed, under
