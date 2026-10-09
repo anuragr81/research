@@ -433,12 +433,17 @@ quote.}\\
   \unv{the 2018 working paper was read, and the \emph{Journal of Economic
   Theory} version is not checked.}}
   {at a critical point, competition becomes so intense that contestants start ‘dropping out,’ i.e., they put in zero effort}{4}{M28}
+\lrow{L21}{Shaked1982}{The dispersive order holds exactly when every shift of
+  one distribution function crosses the other at most once, from below
+  (Theorem 2.1). This is the crossing in the pivot-spreads of M13. He credits
+  the relation to Saunders and Moran (1978) and its name to Lewis and
+  Thompson (L11).}
+  {In the first pair of theorems it is shown that order in dispersion is equivalent to the condition that some functions, determined by the pair of the underlying distributions, change sign at most once.}{311}{M13, M14}
 \end{longtable}
 \normalsize
 
 Papers cited in our other documents and not read are not in the table, and
-every claim made about them is unverified. They are \citet{Shaked1982}, which
-Hopkins and Kornienko cite for the dispersive order, \citet{MathewsNamoro2008},
+every claim made about them is unverified. They are \citet{MathewsNamoro2008},
 \citet{Corcoran1984} and \citet{CorcoranKarels1985}, and, for C12,
 \citet{DrugovRyvkin2020a}, known from its abstract and from footnotes 23 and
 29 of \citet{RyvkinDrugov2020}.
@@ -499,9 +504,13 @@ reading is pass~7 of \path{TODO.md}.
   bought component, when the incumbent is scored by the same rule. For an
   incumbent protected from the rule, whose law does not move with the weight,
   the argument does not apply (Appendix~\ref{app:primitives}). The sign
-  belongs to entry by a fixed fee in which non-payers still compete: with an
-  effort choice, contestants drop out as the costly choice is ranked more
-  accurately (L20).}
+  belongs to entry by a fixed fee in which non-payers still compete. With an
+  effort choice it is the opposite (L20): a more accurate ranking raises the
+  return to effort, effort rises until those who compete earn nothing, and
+  from then on the prizes clear only if some drop out, so participation rises
+  with noise. Here the fee is fixed, nothing escalates with accuracy, and a
+  more accurate ranking of the bought component only raises the return to
+  paying (Appendix~\ref{app:primitives}, ``No effort margin'').}
   {M28, L20}
 \crow{C10}{The share of the prize taken by those who pay is set by the count,
   so it moves with the prize, the fee and the wealth profile as the count does,
@@ -1373,6 +1382,26 @@ rank, and nothing after the award is modelled. Differences in pay among those
 who hold positions, such as the class pay gap of \citet{LaurisonFriedman2016},
 are outside it; the comparable quantity is the share of positions held by
 those who paid (M31).
+
+\paragraph{No effort margin.} Entry costs a fixed fee and buys a fixed
+component of the score; there is no effort to choose. This is why the count
+does not rise as the rule weighs talent more (M28), and why the sign is the
+opposite of \citet{MorganTumlinsonVardy2022}, where contestants choose effort
+and drop out as the ranking becomes more accurate (L20). In their model a more
+accurate ranking raises the marginal return to effort, effort rises until
+competing earns nothing, and the mass of winners then matches the prizes only
+if some drop out. In their equilibrium system with logistic noise of scale
+$\sigma$, cost $k\,e^{\alpha x}$ in log-output and a mass $m$ of prizes, the
+logistic hazard equals the distribution function, so the first-order and
+participation conditions give $F(z)=\sigma\alpha$, and market clearing gives
+participation $m/(1-\sigma\alpha)$. It rises with the noise, from $m$ as
+$\sigma\to0$ to $1$ at $\sigma=(1-m)/\alpha$, and their second-order condition
+holds throughout (\lean{MeritocracyLogistic.mixed_region},
+\lean{MeritocracyLogistic.participation_strictMonoOn},
+\lean{MeritocracyLogistic.soc_mixed}). This instance is derived here in their
+model; they do not state it. In the entry model nothing is competed away by
+accuracy: a higher weight on the bought component raises what paying buys,
+and the only force against entry is crowding (M4).
 
 \paragraph{Utility.} $u$ is strictly increasing and burden-monotone, so
 $\kappa(w)=u(w)-u(w-c)$ is strictly decreasing on $(c,\infty)$. Strict

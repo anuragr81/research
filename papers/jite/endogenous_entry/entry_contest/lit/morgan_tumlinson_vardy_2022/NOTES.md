@@ -2,8 +2,8 @@
 
 Run `python3 lit/morgan_tumlinson_vardy_2022/verify_mtv.py` from the
 repository root. It matches the quotations against the cached text, runs a
-reversed-quote control, compiles `MorganTumlinsonVardy.lean` and audits its
-axioms.
+reversed-quote control, and measures `lean/mathlib/MeritocracyLogistic.lean`
+(see `LEAN`), the exact logistic instance of their Proposition 1.
 
 ## Verdict for C12
 
@@ -28,6 +28,18 @@ Not a precedent for M28; a contrast that sharpens its scope.
   (Tullock), more noise can encourage entry, the same direction as MTV. Our
   own record of Fu, Jiao and Lu does not cover this; it is cited only as
   MTV's report.
+
+## The instance (`lean/mathlib/MeritocracyLogistic.lean`)
+
+Their equilibrium system, with logistic noise and their leading cost
+`k·e^{αx}`, gives participation `m/(1 − σα)` in the drop-out region: it rises
+with the noise, from m as σ → 0 to 1 at σ = (1 − m)/α. This is our
+derivation inside their model, checked in Lean, with their second-order
+condition (4). It makes the reason for the opposite sign exact: the rising
+hazard of the log-concave noise (here the logistic hazard equals the CDF)
+links the effort that clears the market to the noise scale, and the
+zero-profit condition then sets participation. A constant hazard breaks the
+system (`control_constant_hazard_no_solution`).
 
 ## A parallel worth noting
 

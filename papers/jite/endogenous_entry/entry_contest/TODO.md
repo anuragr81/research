@@ -892,6 +892,15 @@ paper's claims, and only then write the manuscript.
   choice is ranked more accurately, the opposite of M28, because of the effort
   margin. C9 now states the scope; C12 claims the sign on the entry margin,
   pending only Drugov and Ryvkin (2020).
+  Shaked (1982) read 9 Oct 2026 from page images, `lit/shaked_1982/`, row L21,
+  `lean/mathlib/ShakedDispersive.lean` (33 theorems: Theorem 2.1 both forms,
+  Theorem 2.3, Example 3.3, controls). He credits the order to Saunders and
+  Moran (1978), unread, and the name to Lewis and Thompson. MTV's instance
+  of Proposition 1 is in `lean/mathlib/MeritocracyLogistic.lean`
+  (participation m/(1 - sigma alpha) with logistic noise, SOC (4) checked);
+  the reason for the opposite sign is in C9 and Appendix D, "No effort
+  margin" (author's request). The SOC display on MTV p.13 drops a minus sign
+  (recorded as MTV-D1).
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of

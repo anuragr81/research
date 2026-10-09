@@ -1,8 +1,9 @@
-"""Suite for Morgan, Tumlinson and Vardy (IMF WP/18/231, 2018). The claims
-are about what the paper reports, so the suite checks each quotation verbatim
-(after normalising case, spacing, punctuation and ligatures) against the
-cached text of the working paper, runs a reversed-quote control, compiles the
-core-Lean record of the sign comparison with M28, and audits its axioms.
+"""Suite for Morgan, Tumlinson and Vardy (IMF WP/18/231, 2018). It checks each
+quotation verbatim (after normalising case, spacing, punctuation and
+ligatures) against the cached text of the working paper, runs a reversed-quote
+control, and measures lean/mathlib/MeritocracyLogistic.lean, the exact
+instance of their Proposition 1: a build root, it builds, no sorry, every Lean
+name cited in CLAIMS.md declared, every theorem within the Mathlib axioms.
 """
 
 import os
@@ -35,7 +36,7 @@ def norm(s):
 
 
 print("=" * 72)
-print("MORGAN-TUMLINSON-VARDY (working paper 2018; quotations, sign record in core Lean)")
+print("MORGAN-TUMLINSON-VARDY (working paper 2018; quotations; lean/mathlib/MeritocracyLogistic.lean)")
 print("=" * 72)
 
 claims = (HERE / "CLAIMS.md").read_text()
@@ -53,36 +54,48 @@ for rid, page, quote in rows:
 flip = "once it kicks in, attrition proceeds from the top of the ability distribution"
 check("MTV-C1 control: MTV-5 with bottom replaced by top is not in the text", norm(flip) not in tn)
 
-lean = shutil.which("lean")
-if lean is None:
-    check("MTV-L2 lean on PATH", False, "lean not on PATH")
-else:
-    src = SRC.read_text()
-    p = subprocess.run([lean, str(SRC)], capture_output=True, text=True)
-    check("MTV-L2 MorganTumlinsonVardy.lean compiles with no errors", p.returncode == 0,
-          (p.stdout + p.stderr).strip()[:300])
-    check("MTV-L3 no sorry in the source", re.search(r"\bsorry\b", src) is None)
-    names = re.findall(r"^theorem\s+(\w+)", src, re.M)
-    with tempfile.TemporaryDirectory() as td:
-        audit = os.path.join(td, "audit.lean")
-        with open(audit, "w") as fh:
-            fh.write(src + "\n")
-            for n in names:
-                fh.write(f"#print axioms {NS}.{n}\n")
-        q = subprocess.run([lean, audit], capture_output=True, text=True)
-        out = q.stdout + q.stderr
-    allowed = {"propext", "Quot.sound"}
-    bad = []
+ROOT = HERE.parent.parent
+PROJ = ROOT / "lean" / "mathlib"
+LSRC = PROJ / "MeritocracyLogistic.lean"
+LNS = "MeritocracyLogistic"
+ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
+
+
+def parse_axioms(out, names):
+    used = {}
     for n in names:
-        m = re.search(rf"'{NS}\.{re.escape(n)}' (does not depend on any axioms|depends on axioms: \[([^\]]*)\])", out)
-        if m is None:
-            bad.append((n, "no audit line"))
-        elif m.group(2):
-            used = {a.strip() for a in m.group(2).split(",")}
-            if not used <= allowed:
-                bad.append((n, ", ".join(sorted(used - allowed))))
-    check(f"MTV-L4 every theorem audited within {sorted(allowed)}", not bad, f"{len(names)} theorems; {bad}")
-    check("MTV-L5 the control is present", "control_same_margin_same_sign" in names)
+        m = re.search(rf"'{re.escape(n)}' (does not depend on any axioms|depends on axioms: \[([^\]]*)\])", out)
+        if m:
+            used[n] = set() if m.group(2) is None else {a.strip() for a in m.group(2).split(",")}
+    return used
+
+
+lsrc = LSRC.read_text()
+lakefile = (PROJ / "lakefile.toml").read_text()
+check("MTV-L2 MeritocracyLogistic is a build root", '"MeritocracyLogistic"' in lakefile)
+check("MTV-L3 no sorry in the source", re.search(r"\bsorry\b", lsrc) is None)
+declared = re.findall(r"^theorem\s+([^\s:(\[{]+)", lsrc, re.M)
+cited = sorted(set(re.findall(r"`([a-z][A-Za-z0-9_']*)`", claims)))
+missing = [c for c in cited if c not in declared]
+check("MTV-L4 every Lean name cited in CLAIMS.md is declared", not missing,
+      f"{len(cited)} cited, {len(declared)} declared" + (f", missing {missing}" if missing else ""))
+lake = shutil.which("lake") or os.path.expanduser("~/.elan/bin/lake")
+b = subprocess.run([lake, "build", LNS], cwd=PROJ, capture_output=True, text=True)
+check("MTV-L5 lake build MeritocracyLogistic succeeds", b.returncode == 0, b.stderr.strip()[-200:])
+names = [f"{LNS}.{d}" for d in declared]
+with tempfile.NamedTemporaryFile("w", suffix=".lean", dir=PROJ, delete=False) as fh:
+    fh.write(f"import {LNS}\n")
+    for n in names:
+        fh.write(f"#print axioms {n}\n")
+    tmp = fh.name
+pr = subprocess.run([lake, "env", "lean", tmp], cwd=PROJ, capture_output=True, text=True)
+os.unlink(tmp)
+used = parse_axioms(pr.stdout + pr.stderr, names)
+check("MTV-L6 the axiom audit covers every declared theorem", len(used) == len(names), f"{len(used)} of {len(names)}")
+bad = {n: sorted(a - ALLOWED) for n, a in used.items() if a - ALLOWED}
+check("MTV-L7 no axiom outside propext, Classical.choice and Quot.sound", not bad, str(bad) if bad else "")
+check("MTV-L8 the controls are present",
+      "control_constant_hazard_no_solution" in declared and "control_soc_fails" in declared)
 
 fails = results.count(False)
 print("=" * 72)
