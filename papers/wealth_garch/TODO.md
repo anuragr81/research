@@ -191,6 +191,40 @@ invented comparative statics for one source, so only raw text counted.
 - The envelope identities $\partial_KV=-N$, $\partial_{\lambda_S}V=-W$: no
   source found stating them; likely standard, never claimed new.
 
+## H2 and H4 search, 10 October 2026
+
+Exploration level only.
+
+- H4, smooth fit at the impulse trigger, is a standard result. Guo and Wu
+  (2009), "Smooth Fit Principle for Impulse Control of Multidimensional
+  Diffusion Processes", *SIAM Journal on Control and Optimization*
+  48(2):594-617, doi 10.1137/080716001, prove $C^1$ regularity across the
+  intervention boundary by viscosity methods [A]; Davis, Guo and Wu
+  (arXiv:0912.3297) extend it [A]. In one dimension it goes back to Richard
+  (1977) and Harrison, Sellke and Taylor (1983) [A]/[C]. What remains
+  specific here is the local setting (a diffusion degenerate at $x=1$, a
+  singular dividend control) and the proof route (no convex kink). H4 is
+  not a novelty headline. A scope note saying it is known needs Guo and Wu
+  as a primary source.
+- H2, the degeneracy at $x=1$ as an artefact of the level coordinate. Taksar
+  (2000), "Optimal risk and dividend distribution control models for an
+  insurance company", *Mathematical Methods of Operations Research*
+  51(1):1-42, doi 10.1007/s001860050001: under the optimal policy the reserve
+  "behaves like a logarithmic Brownian motion" near 0 and bankruptcy time is
+  infinite (the agent read the 1999 SFB 303 preprint). Same mechanism as H2,
+  and as the constancy of $\nu_1^2$ in C2. Behind it, Højgaard and Taksar
+  (1999), *Mathematical Finance* 9(2):153-182 [A]. The CPPI literature uses
+  the log cushion as standard (Dupret and Hainaut 2021 [A]). With BCVW
+  Remark 3.1, H2 is not a novelty headline.
+- Taksar (2000) is therefore also a lead for C2, alongside Black and Perold
+  (1992).
+- Excluded [A]: He and Liang (2009), Kulenko and Schmidli (2008),
+  Bolton-Chen-Wang (2011), Décamps et al. (2011), Peura and Keppo (2006),
+  Junca, Moreno-Franco and Pérez (arXiv:1808.02182), Cadenillas, Sarkar and
+  Zapatero (2007), all with recapitalisation at a fixed boundary or impulses
+  on dividends; Hugonnier and Morellec (2017), Brigo and Vrins, Azcue and
+  Muler (2010), De Angelis (arXiv:1805.12035), Huang (arXiv:2107.02242).
+
 ## Novelty ledger
 
 No result is claimed new yet. Candidates, from the numbered results of
