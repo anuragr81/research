@@ -6,9 +6,9 @@
   Santos. NBER Working Paper 7220, July 1999. 50 pages. Evidence tag [F] for
   this version: the full text was read, including the appendix, tables and
   figure captions.
-- The working paper is the version cited, by the author's decision of
-  2026-10-10. The later journal version was not read, and nothing is
-  attributed to it (BHS-D1).
+- The journal version (QJE 2001) has its own record,
+  `lit/barberis_huang_santos_2001/`, and is the version the manuscript cites
+  (BHS-D1).
 - Supplied by the author on Google Drive (folder
   `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, file `w7220.pdf`), uploaded
   2026-10-10. Cached at `~/.cache/wealth_garch/bhs_w7220.pdf`, sha256

@@ -12,7 +12,7 @@
 
 ## Not verified
 
-- The later journal version, which is not cited (BHS-D1).
+- Nothing about the journal version. It has its own record (BHS-D1).
 - The numerical solution of Section 3.
 
 ## Discrepancies

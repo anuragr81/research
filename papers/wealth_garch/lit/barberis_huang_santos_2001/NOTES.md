@@ -38,4 +38,5 @@ Read in both versions, page by page.
 
 - For C2 the journal version states the parallel more strongly than the
   working paper, since Table XIII shows the volatility unchanged across four
-  values of $b_0$ (QJE-Q2). Which version L2 cites is the author's decision.
+  values of $b_0$ (QJE-Q2). L2 cites this version (author's decision,
+  2026-10-10).

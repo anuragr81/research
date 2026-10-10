@@ -56,12 +56,10 @@ grounds.
   `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, cached locally under
   `~/.cache/wealth_garch/`.
 
-- 2026-10-10. Barberis, Huang and Santos are read and cited in NBER Working
-  Paper 7220 (1999), key `barberis1999`. The journal version is not used.
 - 2026-10-10. The journal version of Barberis, Huang and Santos was supplied
-  and read (`lit/barberis_huang_santos_2001`). L2 still cites the working
-  paper. Switching L2 to the journal version, whose Table XIII shows the
-  volatility unchanged across four values of $b_0$, is open for the author.
+  and read (`lit/barberis_huang_santos_2001`). L2 cites it (key
+  `barberis2001`, p. 47), replacing the working-paper citation of earlier the
+  same day. Both records are kept.
 - 2026-10-10. The saturation limits are renamed $\nu_1^2,\nu_3^2$ (from
   PROOFS_v2's $\kappa_1^2,\kappa_3^2$) so that $\kappa$ means only the
   proportional issuance cost. Lean `CapGeometry.kappa2` became
@@ -130,7 +128,7 @@ the search itself is the pending item.
 
 | ID | Candidate claim | Rests on | Lean | Reading |
 |---|---|---|---|---|
-| H1 (C1 in Table 4, C2 in Table 5; M1 to M3, L1 to L3) | The variance ratio $\lambda_V^4=\nu_1^2/\nu_3^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | done, `RateBased`, `CapGeometry` | read: `bayraktar2026` (defines the cap, no limits), `barberis1999` (level of loss aversion silent in return volatility), `engle2018` (decomposition of a news asymmetry). `li2023` read (preference reaches the limits of an unconstrained control, L4). `barberis2001` (journal version) read, not cited. Waiting: a search for papers that evaluate limits of state volatility under a regulatory cap on the risky position |
+| H1 (C1 in Table 4, C2 in Table 5; M1 to M3, L1 to L3) | The variance ratio $\lambda_V^4=\nu_1^2/\nu_3^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | done, `RateBased`, `CapGeometry` | read: `bayraktar2026` (defines the cap, no limits), `barberis2001` (level of loss aversion silent in return volatility, cited in L2), `engle2018` (decomposition of a news asymmetry). `li2023` read (preference reaches the limits of an unconstrained control, L4). `barberis1999` (working paper) read too. Waiting: a search for papers that evaluate limits of state volatility under a regulatory cap on the risky position |
 | H2 | The degeneracy of the diffusion at the distress boundary $x=1$ is a coordinate artefact. In $z=\log((x-1)/q)$ the volatility is constant on the solvency regime. | `prop:rrL`, `prop:statemap`, `cor:boundary` | port CCP and TSO (i) to (iii); `BCVW.diffusion_vanishes_at_one`, `BCVW.drift_at_one` exist | `bayraktar2026` read: Remark 3.1 (p. 11) states the degeneracy at $y=1$ and the drift $r-r_L$. The paper never changes coordinate, so only the artefact reading can be new. Search for degenerate-diffusion bank capital models |
 | H2b | $x=1$ is unreachable if and only if $r>r_L$. | `cor:boundary` | none possible as stated: boundary classification of a diffusion is not in Mathlib. Enters as a hypothesis unless the scale-function step is formalised | `bayraktar2026` Remark 3.1 already states "locally repelling when r > rL" (BCVW-Q3). Not new as a local statement |
 | H3 | $(\lambda_S,K)$ is locally identified from the pair of thresholds $(y^*,x_L)$, because the two parameters move the trigger in opposite directions. | `lem:reg`, `lem:envelope`, `lem:bdr`, `prop:tcs`, `lem:envelopeK`, `prop:kcs`, `cor:idn`, `prop:soc` | Envelope cores exist (`Envelope.*`); port TCS, KCS, IDN, SOC algebra; REG and BDR enter as hypotheses | `bayraktar2026` read: no fixed issuance cost, and it states one would generally break the one-dimensional reduction (BCVW-Q4). Appendix D must state that PROOFS_v2's $K$ is charged per unit of liabilities when $K$ enters a row. Search for comparative statics of impulse-control thresholds in a fixed issuance cost; `altinkilic2000`, `buhner2002` for the cost structure only |
