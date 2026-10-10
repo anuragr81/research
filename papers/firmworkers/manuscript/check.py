@@ -190,6 +190,19 @@ def check_map(data, mmap, errors, notes):
                 errors.append(f'{rid}: empty {field}')
         if r.get('support') == 'NONE' and str(r.get('referent', '')).strip():
             errors.append(f'{rid}: support NONE but a referent is given')
+        obs = str(r.get('observation', '')).strip()
+        if r.get('support') == 'NONE':
+            if obs or r.get('observation_status'):
+                errors.append(f'{rid}: support NONE but an observation is given')
+        elif not obs:
+            errors.append(f'{rid}: no observation, say how an observer could obtain it')
+        elif r.get('observation_status') not in mmap.get('observation_status', {}):
+            errors.append(f'{rid}: observation_status must be one of {", ".join(mmap.get("observation_status", {}))}')
+        for m in r.get('pending', []) or []:
+            if m not in model:
+                errors.append(f'{rid}: pending cites missing {m}')
+            elif model[m]['status'] not in ('UNDERSPECIFIED', 'OPEN'):
+                errors.append(f'{rid}: pending on {m}, which is {model[m]["status"]}')
         if r.get('support') in ('POSIT', 'LITERATURE') and not str(r.get('referent', '')).strip():
             errors.append(f'{rid}: support {r.get("support")} without a referent')
         if r.get('support') == 'LITERATURE':
@@ -242,6 +255,10 @@ def check_derived_claims(data, rows, errors, notes):
                         errors.append(f'{cid}: rests on missing {r}')
                     elif rows[r]['support'] == 'POSIT':
                         notes.append(f'{cid}: rests on POSIT row {r}')
+                    if r in rows and rows[r].get('observation_status') == 'PROPOSED':
+                        notes.append(f'{cid}: rests on {r}, whose observation is only proposed')
+                    if r in rows and rows[r].get('pending'):
+                        errors.append(f'{cid}: rests on {r}, which is pending on {", ".join(rows[r]["pending"])}')
                 else:
                     errors.append(f'{cid}: may rest only on M, L or X ids, not {r}')
 

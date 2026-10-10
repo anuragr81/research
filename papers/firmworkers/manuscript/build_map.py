@@ -16,17 +16,24 @@ def used_in(claims):
     return out
 
 
+def observation_cell(r):
+    if not str(r.get('observation', '')).strip():
+        return '---'
+    pend = f"\\newline pending on {', '.join(r['pending'])}" if r.get('pending') else ''
+    return f"{mixed(r['observation'])} \\newline \\texttt{{{escape_text(r['observation_status'])}}}{pend}"
+
+
 def table(rows, used, role):
-    head = r'ID & Symbol & Model meaning & Real-world referent & Support & Direction & Used in \\ \midrule \endhead'
+    head = r'ID & Symbol & Model meaning & Real-world referent & Support & Direction & How an observer could obtain it & Used in \\ \midrule \endhead'
     body = []
     for r in rows:
         if r['role'] != role:
             continue
         prod = f"\\newline produced by {', '.join(r['produced_by'])}" if r.get('produced_by') else ''
         body.append(f"{r['id']} & {r['symbol']}{prod} & {mixed(r['meaning'])} & {mixed(r.get('referent')) or '---'} & "
-                    f"\\texttt{{{escape_text(r['support'])}}} & {mixed(r.get('direction')) or '---'} & "
+                    f"\\texttt{{{escape_text(r['support'])}}} & {mixed(r.get('direction')) or '---'} & {observation_cell(r)} & "
                     f"{', '.join(used.get(r['id'], []))} \\\\ \\midrule")
-    return f"\\begin{{longtable}}{{{col([0.9, 2.6, 5.6, 5.2, 1.9, 5.0, 2.6])}}}\n\\toprule {head}\n" + '\n'.join(body) + "\n\\end{longtable}"
+    return f"\\begin{{longtable}}{{{col([0.8, 2.2, 4.0, 3.6, 1.6, 4.0, 4.6, 1.8])}}}\n\\toprule {head}\n" + '\n'.join(body) + "\n\\end{longtable}"
 
 
 def main():
@@ -50,11 +57,12 @@ def main():
 \date{{Pass {meta['pass']}}}
 \begin{{document}}
 \maketitle
-{mixed(meta['scope'])} Model claims M1--M23 are those of the manuscript skeleton of the same pass. No data source is assigned in this pass.
+{mixed(meta['scope'])} Model claims M1--M23 are those of the manuscript skeleton of the same pass. Each row says how an observer could obtain the object. Entries marked PROPOSED await the author's confirmation; a headline resting on one is flagged, and a headline resting on a row pending on an undecided model claim is an error.
 
 \section*{{Support vocabulary}}
 \begin{{description}}
 {vocab(mmap['support_status'])}
+{vocab(mmap['observation_status'])}
 \end{{description}}
 
 \section{{Inputs}}

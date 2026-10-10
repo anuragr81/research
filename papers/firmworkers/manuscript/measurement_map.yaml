@@ -8,6 +8,10 @@ support_status:
   POSIT: 'the paper''s own identification, supported by nothing else in the ledger'
   NONE: 'modelling device with no real-world referent'
 
+observation_status:
+  PROPOSED: 'how an observer could obtain the object, proposed and awaiting the author''s confirmation'
+  CONFIRMED: 'confirmed by the author'
+
 rows:
   - id: X1
     symbol: '$N$'
@@ -16,6 +20,9 @@ rows:
     referent: 'size of the labour market'
     support: POSIT
     direction: ''
+    observation: 'count of jobs in the market studied, from a job-title register or a matched employer-employee panel'
+    observation_status: PROPOSED
+
   - id: X2
     symbol: '$q\in[0,1)$'
     role: input
@@ -23,6 +30,9 @@ rows:
     referent: 'percentile of a job in the wage ranking'
     support: POSIT
     direction: 'higher $q$ is a better-paid job (M2)'
+    observation: 'percentile of the job''s wage in the wage distribution of the same market, from payroll or matched employer-employee data'
+    observation_status: PROPOSED
+
   - id: X3
     symbol: '$x_0$'
     role: input
@@ -30,6 +40,9 @@ rows:
     referent: 'lowest wage'
     support: POSIT
     direction: ''
+    observation: 'lowest wage of the market, read as a low percentile of the wage distribution in payroll data'
+    observation_status: PROPOSED
+
   - id: X4
     symbol: '$a$'
     role: input
@@ -37,6 +50,9 @@ rows:
     referent: 'income dispersion across ranks, inversely'
     support: POSIT
     direction: 'higher $a$ lowers income at every interior quantile (M3) and narrows every income gap (M4), so higher $a$ means a more equal ladder'
+    observation: 'Pareto index of the upper tail of the wage distribution, estimated by regressing log rank on log wage'
+    observation_status: PROPOSED
+
   - id: X5
     symbol: '$b$'
     role: input
@@ -44,6 +60,9 @@ rows:
     referent: 'convexity of retraining cost in the income distance climbed'
     support: POSIT
     direction: 'for $b\ge1$ two adjacent steps cost no more than the jump (M8). For $0\le b\le1$ the jump costs no more than the steps (M9)'
+    observation: 'growth of retraining cost (tuition and earnings forgone while retraining) with the wage gap between origin and destination job, from training records linked to job moves'
+    observation_status: PROPOSED
+
   - id: X6
     symbol: '$m$'
     role: input
@@ -51,6 +70,9 @@ rows:
     referent: 'wage of a job'
     support: POSIT
     direction: ''
+    observation: 'wage of the job, from payroll data'
+    observation_status: PROPOSED
+
   - id: X7
     symbol: '$L$'
     role: input
@@ -58,13 +80,20 @@ rows:
     referent: 'cost of social navigation, such as networking, club membership and compliance with social closure'
     support: POSIT
     direction: 'higher $L$ lowers the participation threshold (M13)'
+    observation: 'spending on social navigation such as membership fees and networking time, from expenditure or time-use surveys'
+    observation_status: PROPOSED
+
   - id: X8
     symbol: 'swap rule'
     role: input
-    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other $N-1$ workers'
+    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$. M11 to M13 draw $k$ uniformly from the other $N-1$ workers; whether the pool is the lottery entrants or all workers is pending'
+    pending: [M14]
     referent: 'a social contest that reallocates jobs by connection or luck rather than by skill'
     support: POSIT
     direction: ''
+    observation: 'not observed directly; its implication is a rank change after job loss that is unrelated to the worker''s own rank, testable on the distribution of rank changes in panel data'
+    observation_status: PROPOSED
+
   - id: X9
     symbol: '$u$'
     role: input
@@ -72,6 +101,9 @@ rows:
     referent: 'attitude to income risk, risk-seeking below a reference income and risk-averse above it'
     support: POSIT
     direction: ''
+    observation: 'not measured; a construct that rationalises recorded choices between the lottery route and the downgrade at each income'
+    observation_status: PROPOSED
+
   - id: X10
     symbol: '$\bar y$'
     role: input
@@ -79,6 +111,9 @@ rows:
     referent: 'expected income'
     support: POSIT
     direction: ''
+    observation: 'mean income change of workers who take the lottery route, from panel data'
+    observation_status: PROPOSED
+
   - id: X11
     symbol: '$\sigma_y$'
     role: input
@@ -86,6 +121,9 @@ rows:
     referent: 'income risk created by taking part in social contests'
     support: POSIT
     direction: ''
+    observation: 'standard deviation of that income change, from panel data'
+    observation_status: PROPOSED
+
   - id: X12
     symbol: '$\varepsilon$'
     role: input
@@ -93,6 +131,8 @@ rows:
     referent: ''
     support: NONE
     direction: ''
+    observation: ''
+
   - id: X13
     symbol: '$s$'
     role: input
@@ -100,6 +140,9 @@ rows:
     referent: 'income risk per unit of income staked on social contests'
     support: POSIT
     direction: ''
+    observation: 'ratio of the income risk of the lottery route to the income staked, compared across income levels in panel data'
+    observation_status: PROPOSED
+
   - id: X14
     symbol: '$\lambda$'
     role: input
@@ -107,6 +150,9 @@ rows:
     referent: 'share of resources spent on human capital rather than on social navigation'
     support: POSIT
     direction: ''
+    observation: 'share of spending on training or certification against spending on social navigation, from expenditure or time-use surveys'
+    observation_status: PROPOSED
+
   - id: X15
     symbol: '$x(q)$'
     role: output
@@ -115,6 +161,9 @@ rows:
     referent: 'wage of the job at percentile $q$'
     support: POSIT
     direction: 'increasing in $q$ (M2), decreasing in $a$ (M3)'
+    observation: 'wage at percentile q of the wage distribution, from payroll data'
+    observation_status: PROPOSED
+
   - id: X16
     symbol: '$C(m_i,m_k)$'
     role: output
@@ -123,6 +172,9 @@ rows:
     referent: 'retraining cost of moving from job $i$ up to job $k$'
     support: POSIT
     direction: 'zero for downward and lateral moves (M7)'
+    observation: 'retraining cost of an observed upward move, from training records and earnings forgone'
+    observation_status: PROPOSED
+
   - id: X17
     symbol: '$S$'
     role: output
@@ -131,6 +183,9 @@ rows:
     referent: 'total wage bill'
     support: POSIT
     direction: 'unchanged by any swap (M10)'
+    observation: 'total wage bill of the market, from payroll data'
+    observation_status: PROPOSED
+
   - id: X18
     symbol: '$G_i$'
     role: output
@@ -139,6 +194,9 @@ rows:
     referent: 'expected net payoff to worker $i$ from social navigation, valued risk-neutrally'
     support: POSIT
     direction: 'sums to $-NL$ over workers (M12)'
+    observation: 'mean income change net of the entry cost for workers from rank i who take the lottery route, from panel data'
+    observation_status: PROPOSED
+
   - id: X19
     symbol: '$\bar x_{\mathrm{part}}$'
     role: output
@@ -147,6 +205,9 @@ rows:
     referent: 'income below which social navigation pays in expectation'
     support: POSIT
     direction: ''
+    observation: 'income below which workers take the lottery route, estimated as a participation threshold on rank'
+    observation_status: PROPOSED
+
   - id: X20
     symbol: '$\tfrac12u^{\prime\prime}(\bar y)\sigma_y^2$'
     role: output
@@ -155,6 +216,9 @@ rows:
     referent: 'utility value of the income risk from social contests'
     support: POSIT
     direction: 'positive exactly where $u^{\prime\prime}>0$ (M16)'
+    observation: 'not measured; a construct inferred only through choices under risk'
+    observation_status: PROPOSED
+
   - id: X21
     symbol: '$p$'
     role: output
@@ -163,3 +227,5 @@ rows:
     referent: 'risk-premium coefficient of a worker with income $m$'
     support: POSIT
     direction: 'scales with $m^2$ (M18)'
+    observation: 'not measured directly; inferred from how take-up of the lottery route falls with income'
+    observation_status: PROPOSED

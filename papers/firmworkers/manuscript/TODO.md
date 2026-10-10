@@ -34,7 +34,15 @@ L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calv�
 - 10 Oct 2026: the working papers of Cunha–Heckman (NBER WP 12840) and Gibbons–Waldman (NBER WP 6454) are cited as the versions read; the published AER and QJE versions are not needed for now.
 - 10 Oct 2026: headlines rest on the measurement map (X rows) as the empirical key, not on model rows alone. Deliberate departure from skeleton MS-2.
 
+## Measurement map
+
+- [ ] Confirm or revise the PROPOSED observation entries (X1–X21, except X12), added 10 Oct 2026
+- [ ] Add rows for the reference income r, displacement, the downgrade, the rank kernel and a mobility measure as the decisions below are made
+
 ## Model decisions pending (micro)
+
+Each option is weighed by whether its objects are observable, since headlines rest on the measurement map.
+
 
 - [ ] State space: rank plus human capital stock $(r, h)$
 - [ ] Law of motion for $h$: does categorical friction enter $f$ (Borjas / Bowles–Loury–Sethi route), the rank kernel only, or both
