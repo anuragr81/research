@@ -44,4 +44,22 @@ theorem upCost_jump_le_steps {b m₁ m₂ m₃ : ℝ} (hb0 : 0 ≤ b) (hb1 : b �
   rw [hsum]
   exact Real.rpow_add_le_add_rpow (by linarith) (by linarith) hb0 hb1
 
+theorem printed_index_base_nonpos {i : ℕ} (hi : 1 ≤ i) : (1 : ℝ) - i ≤ 0 := by
+  have : (1 : ℝ) ≤ (i : ℝ) := by exact_mod_cast hi
+  linarith
+
+theorem printed_charged_branch_base_neg {b mi mk : ℝ} (h : mk < mi) :
+    mk - mi < 0 ∧ upCost b mi mk = 0 ∧ ¬ ∃ y : ℝ, y ^ 2 = mk - mi := by
+  refine ⟨by linarith, upCost_down_free h.le, ?_⟩
+  rintro ⟨y, hy⟩
+  nlinarith [sq_nonneg y]
+
+theorem pareto_top_decile (x0 a : ℝ) : pareto x0 a (9 / 10) = x0 * (10 : ℝ) ^ (1 / a) := by
+  unfold pareto
+  have h : (1 : ℝ) - 9 / 10 = (10 : ℝ)⁻¹ := by norm_num
+  rw [h, Real.inv_rpow (by norm_num), Real.rpow_neg (by norm_num), inv_inv]
+
+theorem top_decile_witness : pareto 1 3 (9 / 10) < pareto 1 2 (9 / 10) :=
+  pareto_strictAnti_tail one_pos two_pos (by norm_num) (by norm_num) (by norm_num)
+
 end Isc

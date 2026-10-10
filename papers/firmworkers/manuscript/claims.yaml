@@ -6,7 +6,6 @@ meta:
 model_status:
   LEAN_PROVED: 'Lean theorem compiles against Mathlib without sorry'
   LEAN_WRITTEN: 'Lean theorem written, not yet compiled'
-  SYMPY: 'checked by the SymPy script, no Lean proof yet'
   OPEN: 'stated in the manuscript, no formal object yet'
   UNDERSPECIFIED: 'the manuscript leaves a primitive undefined'
   ILL_POSED: 'not well-defined as printed'
@@ -25,8 +24,10 @@ model:
     anchor: 'Appendix, condition 3: "pareto income list x0 (1 - i)^{-1/a} for 1 <= i <= N"'
     claim: '$x_i = x_0(1-i)^{-1/a}$ for $1 \le i \le N$ defines the income ladder'
     assumptions: '$a>0$'
-    evidence: 'sympy/micro_checks.py::m1_printed_index_ill_posed. Base $1-i=0$ at $i=1$ and $1-i<0$ for $i\ge 2$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.printed_index_base_nonpos. Base $1-i\le 0$ for every $i\ge 1$, so $(1-i)^{-1/a}$ is not a power of a positive base'
+    lean: Isc.printed_index_base_nonpos
     status: ILL_POSED
+    repaired_by: [M2, M3, M4]
     symbols: [X1, X3, X4]
   - id: M2
     anchor: 'repair of M1 with a quantile index'
@@ -48,7 +49,7 @@ model:
     anchor: 'repair of M1 with a quantile index'
     claim: '$x(q_2;a_2)-x(q_1;a_2) < x(q_2;a_1)-x(q_1;a_1)$, so every income gap on the ladder shrinks as $a$ rises'
     assumptions: '$x_0>0$, $0<a_1<a_2$, $0\le q_1<q_2<1$'
-    evidence: 'lean/IscLean/Gap.lean::Isc.pareto_gap_strictAnti_tail. Cross-check sympy/micro_checks.py::m4_adjacent_gap_decreasing_in_a'
+    evidence: 'lean/IscLean/Gap.lean::Isc.pareto_gap_strictAnti_tail'
     lean: Isc.pareto_gap_strictAnti_tail
     status: LEAN_PROVED
     symbols: [X2, X3, X4, X15]
@@ -56,15 +57,18 @@ model:
     anchor: 'Appendix, condition 3: "A higher a corresponds to higher-stakes through income levels."'
     claim: 'Higher $a$ raises the stakes across income levels'
     assumptions: 'ladder of M2'
-    evidence: 'Contradicted by M3 and M4. $x(0.9)/x_0 = 4.642, 3.162, 2.154, 1.585$ at $a=1.5,2,3,5$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.top_decile_witness. Contradicted by M3 and M4. At $x_0=1$, $x(0.9)$ is lower at $a=3$ than at $a=2$. $x(0.9)/x_0=10^{1/a}$, which is $10^{2/3}, 10^{1/2}, 10^{1/3}, 10^{1/5}$ at $a=1.5,2,3,5$'
+    lean: [Isc.top_decile_witness, Isc.pareto_top_decile]
     status: REFUTED
     symbols: [X4]
   - id: M6
     anchor: 'Appendix, condition 2: "C(mi, mk) = (mk - mi)^b for mi > mk, 0 for mi < mk"'
     claim: 'The printed cost function charges $(m_k-m_i)^b$ for downward moves and nothing for upward moves'
     assumptions: '$b>0$'
-    evidence: 'sympy/micro_checks.py::m6_printed_cost_complex_branch. Base $m_k-m_i<0$ on the charged branch, complex at $b=1/2$. Contradicts the next sentence of the manuscript, "no cost is paid for moving from a position of high-skill to low". $m_i=m_k$ unassigned'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.printed_charged_branch_base_neg. Base $m_k-m_i<0$ on the charged branch $m_i>m_k$, which is the branch the repair M7 leaves free. No real number squares to $m_k-m_i$, so at $b=1/2$ the printed cost has no real value. Contradicts the next sentence of the manuscript, "no cost is paid for moving from a position of high-skill to low". $m_i=m_k$ unassigned'
+    lean: Isc.printed_charged_branch_base_neg
     status: ILL_POSED
+    repaired_by: [M7, M8, M9]
     symbols: [X5, X6, X16]
   - id: M7
     anchor: 'repair of M6'
@@ -128,13 +132,14 @@ model:
     assumptions: ''
     evidence: 'The manuscript does not say whether $k$ is drawn from participants or from all $N$ workers. If from all $N$, non-participants are swapped without choosing to play'
     status: UNDERSPECIFIED
+    affects: [M11, M12, M13]
     symbols: [X8]
   - id: M15
     anchor: 'Appendix, Linear Approximation: "E[u(y)] = u(ybar) + 1/2 u′′(ybar) sigma_y^2"'
     claim: '$\mathbb{E}[u(\bar y)+u^{\prime}(\bar y)\sigma\varepsilon+\tfrac12u^{\prime\prime}(\bar y)\sigma^2\varepsilon^2]=u(\bar y)+\tfrac12u^{\prime\prime}(\bar y)\sigma^2$'
-    assumptions: '$\varepsilon$ with finite support, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$. General distributions not covered'
-    evidence: 'lean/IscLean/Lottery.lean::Isc.taylor_expectation'
-    lean: Isc.taylor_expectation
+    assumptions: 'probability measure, $\varepsilon$ and $\varepsilon^2$ integrable, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$'
+    evidence: 'lean/IscLean/Moments.lean::Isc.taylor_expectation_integral. Finite-support case Isc.taylor_expectation in Lottery.lean'
+    lean: Isc.taylor_expectation_integral
     status: LEAN_PROVED
     symbols: [X9, X10, X11, X12, X20]
   - id: M16
@@ -149,8 +154,10 @@ model:
     anchor: 'Appendix, Linear Approximation: "sigma_y^2 = c((1 - lambda_H) m_H)^2 = p_H (1 - lambda_H)^2 (p_H < 0)"'
     claim: 'The lottery variance equals $p(1-\lambda)^2$ with $p<0$'
     assumptions: ''
-    evidence: 'sympy/micro_checks.py::m17_variance_sign_conflict. Left side $\ge 0$, right side $<0$ for $\lambda<1$'
+    evidence: 'lean/IscLean/Moments.lean::Isc.variance_ne_neg_multiple. Any variance is $\ge 0$, while $p(1-\lambda)^2<0$ for $p<0$, $\lambda<1$'
+    lean: Isc.variance_ne_neg_multiple
     status: ILL_POSED
+    repaired_by: [M18]
     symbols: [X11, X14]
   - id: M18
     anchor: 'repair of M17'
@@ -166,6 +173,7 @@ model:
     assumptions: ''
     evidence: '$r$ is not defined in the manuscript. No functional form of $u$ is given'
     status: UNDERSPECIFIED
+    affects: [M20]
     symbols: [X9]
   - id: M20
     anchor: 'Appendix: "the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery"'
@@ -173,6 +181,8 @@ model:
     assumptions: ''
     evidence: 'No functional form of $u$, no equilibrium concept and no transition kernel are defined. M13 gives the risk-neutral version only'
     status: OPEN
+    waits_on: 'M19 (functional form of $u$ and the reference income $r$), an equilibrium concept, and the rank kernel of M23'
+    rows: [M13, M16, M19, M23]
     symbols: [X7, X9]
   - id: M21
     anchor: 'Appendix: "higher costs (b) discourage mobility and higher stakes (a) encourage bets"'
@@ -180,6 +190,8 @@ model:
     assumptions: ''
     evidence: 'Mobility measure undefined. The second half presumes higher $a$ means higher stakes, which M5 refutes for the printed ladder'
     status: OPEN
+    waits_on: 'a mobility measure, and a meaning of stakes in $a$ that survives the refutation M5'
+    rows: [M3, M4, M5, M8, M9]
     symbols: [X4, X5]
   - id: M22
     anchor: 'Appendix: "The more a worker upskills oneself, the harder it becomes for the worker to move up (as the swap pool gets limited)"'
@@ -187,6 +199,8 @@ model:
     assumptions: ''
     evidence: 'No formal object links upskilling to the swap pool'
     status: OPEN
+    waits_on: 'the state $(r,h)$ and a formal object linking upskilling to the swap pool of M14'
+    rows: [M14]
     symbols: [X14]
   - id: M23
     anchor: 'Appendix: "The long-term transition-probability can thus be determined from the costs of moving up the ladder"'
@@ -194,6 +208,8 @@ model:
     assumptions: ''
     evidence: 'No kernel is defined'
     status: OPEN
+    waits_on: 'the rank-kernel decision (global or reference-set rank, channels, where categorical friction enters)'
+    rows: [M7, M8, M9]
     symbols: [X1, X5]
 
 literature:

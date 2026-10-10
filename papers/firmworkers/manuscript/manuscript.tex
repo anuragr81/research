@@ -5,6 +5,7 @@
 \setmonofont{DejaVu Sans Mono}[Scale=0.9]
 \usepackage{amsmath,amssymb,longtable,booktabs,array,xurl,fancyvrb}
 \usepackage[hidelinks]{hyperref}
+\newcommand{\pend}[1]{\textit{Pending:} #1}
 \renewcommand{\arraystretch}{1.25}
 \setlength{\tabcolsep}{4pt}
 \setlength{\parindent}{0pt}
@@ -15,13 +16,12 @@
 \maketitle
 Source manuscript for the model claims: firmworkers\_model.pdf, 15 March 2026 (Appendix: The closed N-player economy; Linear Approximation for Risk-Premium).
 
-Headline and concluding claims may rest only on model claims, literature claims and measurement-map rows. Model claims are proved in Lean 4 against Mathlib. The full Lean source is in Appendix~A and the build files in Appendix~B.
+Headline and concluding claims may rest only on model claims, literature claims and measurement-map rows. Model claims are proved in Lean 4 against Mathlib. The full Lean source is in Appendix~A and the build files in Appendix~B. Claims the source manuscript needs but leaves undefined are in Appendix~D. Claims it prints that fail as printed are in Appendix~E, each with its Lean counterexample and the rows that repair or refute it.
 
 \section*{Status vocabulary}
 \begin{description}
 \item[\texttt{LEAN\_PROVED}] Lean theorem compiles against Mathlib without sorry
 \item[\texttt{LEAN\_WRITTEN}] Lean theorem written, not yet compiled
-\item[\texttt{SYMPY}] checked by the SymPy script, no Lean proof yet
 \item[\texttt{OPEN}] stated in the manuscript, no formal object yet
 \item[\texttt{UNDERSPECIFIED}] the manuscript leaves a primitive undefined
 \item[\texttt{ILL\_POSED}] not well-defined as printed
@@ -39,12 +39,9 @@ No headline claims are admitted in this pass.
 {\small
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.8cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{2.9cm} >{\raggedright\arraybackslash}p{3.9cm} >{\raggedright\arraybackslash}p{4.4cm} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{2.5cm}}
 \toprule ID & Claim & Assumptions & Manuscript anchor & Evidence & Proof location & Status \\ \midrule \endhead
-M1 & $x_i = x_0(1-i)^{-1/a}$ for $1 \le i \le N$ defines the income ladder & $a>0$ & Appendix, condition 3: "pareto income list x0 (1 - i)\textasciicircum{}\{-1/a\} for 1 \textless{}= i \textless{}= N" & Base $1-i=0$ at $i=1$ and $1-i<0$ for $i\ge 2$ & SymPy \nolinkurl{m1_printed_index_ill_posed}, Listing C.1, lines 10--12 & \texttt{ILL\_POSED} \\ \midrule
 M2 & $x(q)=x_0(1-q)^{-1/a}$ is strictly increasing in $q$ & $x_0>0$, $a>0$, $q_1<q_2<1$ & repair of M1 with a quantile index & --- & Lean \nolinkurl{Isc.pareto_strictMono_quantile}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 7--15 & \texttt{LEAN\_PROVED} \\ \midrule
 M3 & $x(q)$ is strictly decreasing in $a$ at every interior quantile & $x_0>0$, $0<a_1<a_2$, $0<q<1$ & repair of M1 with a quantile index & --- & Lean \nolinkurl{Isc.pareto_strictAnti_tail}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 17--23 & \texttt{LEAN\_PROVED} \\ \midrule
-M4 & $x(q_2;a_2)-x(q_1;a_2) < x(q_2;a_1)-x(q_1;a_1)$, so every income gap on the ladder shrinks as $a$ rises & $x_0>0$, $0<a_1<a_2$, $0\le q_1<q_2<1$ & repair of M1 with a quantile index & --- & Lean \nolinkurl{Isc.pareto_gap_strictAnti_tail}, Listing A.4 (\nolinkurl{Gap.lean}), lines 23--45; SymPy \nolinkurl{m4_adjacent_gap_decreasing_in_a}, Listing C.1, lines 15--30 & \texttt{LEAN\_PROVED} \\ \midrule
-M5 & Higher $a$ raises the stakes across income levels & ladder of M2 & Appendix, condition 3: "A higher a corresponds to higher-stakes through income levels." & Contradicted by M3 and M4. $x(0.9)/x_0 = 4.642, 3.162, 2.154, 1.585$ at $a=1.5,2,3,5$ & --- & \texttt{REFUTED} \\ \midrule
-M6 & The printed cost function charges $(m_k-m_i)^b$ for downward moves and nothing for upward moves & $b>0$ & Appendix, condition 2: "C(mi, mk) = (mk - mi)\textasciicircum{}b for mi \textgreater{} mk, 0 for mi \textless{} mk" & Base $m_k-m_i<0$ on the charged branch, complex at $b=1/2$. Contradicts the next sentence of the manuscript, "no cost is paid for moving from a position of high-skill to low". $m_i=m_k$ unassigned & SymPy \nolinkurl{m6_printed_cost_complex_branch}, Listing C.1, lines 38--40 & \texttt{ILL\_POSED} \\ \midrule
+M4 & $x(q_2;a_2)-x(q_1;a_2) < x(q_2;a_1)-x(q_1;a_1)$, so every income gap on the ladder shrinks as $a$ rises & $x_0>0$, $0<a_1<a_2$, $0\le q_1<q_2<1$ & repair of M1 with a quantile index & --- & Lean \nolinkurl{Isc.pareto_gap_strictAnti_tail}, Listing A.4 (\nolinkurl{Gap.lean}), lines 23--45 & \texttt{LEAN\_PROVED} \\ \midrule
 M7 & $C(m_i,m_k)=(m_k-m_i)^b$ if $m_i<m_k$ and $0$ otherwise. Downward and lateral moves cost $0$ & $m_k\le m_i$ & repair of M6 & --- & Lean \nolinkurl{Isc.upCost_down_free}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 27--28 & \texttt{LEAN\_PROVED} \\ \midrule
 M8 & $C(m_1,m_2)+C(m_2,m_3)\le C(m_1,m_3)$. Two adjacent upward moves cost no more than the direct jump & $b\ge 1$, $m_1<m_2<m_3$ & repair of M6 & --- & Lean \nolinkurl{Isc.upCost_steps_le_jump}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 30--36 & \texttt{LEAN\_PROVED} \\ \midrule
 M9 & $C(m_1,m_3)\le C(m_1,m_2)+C(m_2,m_3)$. The direct jump costs no more than two steps & $0\le b\le 1$, $m_1<m_2<m_3$ & repair of M6 & --- & Lean \nolinkurl{Isc.upCost_jump_le_steps}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 38--45 & \texttt{LEAN\_PROVED} \\ \midrule
@@ -52,16 +49,9 @@ M10 & A swap of positions $i,k$ leaves total income $\sum_j x_j$ unchanged & $x:
 M11 & Expected net lottery gain $G_i=\frac{S-Nx_i}{N-1}-L$, with $S=\sum_k x_k$ & $k$ uniform over the $N-1$ other workers, risk-neutral valuation. Uniformity is added to the manuscript & Appendix, condition 1 & --- & Lean \nolinkurl{Isc.lotteryGain_closed}, Listing A.2 (\nolinkurl{Lottery.lean}), lines 31--33 & \texttt{LEAN\_PROVED} \\ \midrule
 M12 & $\sum_i G_i=-NL$. The lottery is zero-sum in income and negative-sum net of entry costs & as M11, $N\ge 2$ & Appendix, condition 1 & --- & Lean \nolinkurl{Isc.lotteryGain_total}, Listing A.2 (\nolinkurl{Lottery.lean}), lines 35--44 & \texttt{LEAN\_PROVED} \\ \midrule
 M13 & $G_i>0 \iff x_i<\frac{S-(N-1)L}{N}$ & as M11, $N\ge 2$ & Appendix, condition 1 & --- & Lean \nolinkurl{Isc.lotteryGain_pos_iff}, Listing A.2 (\nolinkurl{Lottery.lean}), lines 46--52 & \texttt{LEAN\_PROVED} \\ \midrule
-M14 & The swap partner $k$ is drawn from lottery participants &  & Appendix, condition 1: "Worker k does not pay any additional cost other than the fixed lottery cost L" & The manuscript does not say whether $k$ is drawn from participants or from all $N$ workers. If from all $N$, non-participants are swapped without choosing to play & --- & \texttt{UNDERSPECIFIED} \\ \midrule
-M15 & $\mathbb{E}[u(\bar y)+u^{\prime}(\bar y)\sigma\varepsilon+\tfrac12u^{\prime\prime}(\bar y)\sigma^2\varepsilon^2]=u(\bar y)+\tfrac12u^{\prime\prime}(\bar y)\sigma^2$ & $\varepsilon$ with finite support, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$. General distributions not covered & Appendix, Linear Approximation: "E[u(y)] = u(ybar) + 1/2 u′′(ybar) sigma\_y\textasciicircum{}2" & --- & Lean \nolinkurl{Isc.taylor_expectation}, Listing A.2 (\nolinkurl{Lottery.lean}), lines 54--65 & \texttt{LEAN\_PROVED} \\ \midrule
+M15 & $\mathbb{E}[u(\bar y)+u^{\prime}(\bar y)\sigma\varepsilon+\tfrac12u^{\prime\prime}(\bar y)\sigma^2\varepsilon^2]=u(\bar y)+\tfrac12u^{\prime\prime}(\bar y)\sigma^2$ & probability measure, $\varepsilon$ and $\varepsilon^2$ integrable, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$ & Appendix, Linear Approximation: "E[u(y)] = u(ybar) + 1/2 u′′(ybar) sigma\_y\textasciicircum{}2" & Finite-support case Isc.taylor\_expectation in Lottery.lean & Lean \nolinkurl{Isc.taylor_expectation_integral}, Listing A.5 (\nolinkurl{Moments.lean}), lines 7--24 & \texttt{LEAN\_PROVED} \\ \midrule
 M16 & $\tfrac12u^{\prime\prime}\sigma^2>0\iff u^{\prime\prime}>0$ & $\sigma\ne 0$ & Appendix, Linear Approximation: "positive when u′′ \textgreater{} 0" & --- & Lean \nolinkurl{Isc.premium_pos_iff}, Listing A.2 (\nolinkurl{Lottery.lean}), lines 67--78 & \texttt{LEAN\_PROVED} \\ \midrule
-M17 & The lottery variance equals $p(1-\lambda)^2$ with $p<0$ &  & Appendix, Linear Approximation: "sigma\_y\textasciicircum{}2 = c((1 - lambda\_H) m\_H)\textasciicircum{}2 = p\_H (1 - lambda\_H)\textasciicircum{}2 (p\_H \textless{} 0)" & Left side $\ge 0$, right side $<0$ for $\lambda<1$ & SymPy \nolinkurl{m17_variance_sign_conflict}, Listing C.1, lines 43--47 & \texttt{ILL\_POSED} \\ \midrule
 M18 & If $\sigma_y=s(1-\lambda)m$ then $\tfrac12u^{\prime\prime}\sigma_y^2=(\tfrac12u^{\prime\prime}s^2m^2)(1-\lambda)^2$. The coefficient $p=\tfrac12u^{\prime\prime}s^2m^2$ varies with income $m$ &  & repair of M17 & --- & Lean \nolinkurl{Isc.premium_scales_with_income}, Listing A.2 (\nolinkurl{Lottery.lean}), lines 80--82 & \texttt{LEAN\_PROVED} \\ \midrule
-M19 & The convex region of $u$ lies below a reference income $r$ &  & Appendix, Linear Approximation: "positive when u′′ \textgreater{} 0 (convex region -\textgreater{} below r)" & $r$ is not defined in the manuscript. No functional form of $u$ is given & --- & \texttt{UNDERSPECIFIED} \\ \midrule
-M20 & In long-run equilibrium high ranks choose the downgrade and low ranks choose the lottery &  & Appendix: "the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery" & No functional form of $u$, no equilibrium concept and no transition kernel are defined. M13 gives the risk-neutral version only & --- & \texttt{OPEN} \\ \midrule
-M21 & Mobility falls in $b$. Lottery play rises in $a$ &  & Appendix: "higher costs (b) discourage mobility and higher stakes (a) encourage bets" & Mobility measure undefined. The second half presumes higher $a$ means higher stakes, which M5 refutes for the printed ladder & --- & \texttt{OPEN} \\ \midrule
-M22 & Upward mobility falls as a worker upskills &  & Appendix: "The more a worker upskills oneself, the harder it becomes for the worker to move up (as the swap pool gets limited)" & No formal object links upskilling to the swap pool & --- & \texttt{OPEN} \\ \midrule
-M23 & A long-run transition kernel on ranks follows from the cost function &  & Appendix: "The long-term transition-probability can thus be determined from the costs of moving up the ladder" & No kernel is defined & --- & \texttt{OPEN} \\ \midrule
 \end{longtable}}
 
 \section{Literature claims}
@@ -84,7 +74,17 @@ L13 & Fershtman, C., Murphy, K. M. and Weiss, Y. (1996). Social Status, Educatio
 \end{longtable}}
 
 \section{Concluding remarks}
+\subsection*{Conclusions resting on verified rows}
 No concluding claims are admitted in this pass.
+\subsection*{Pending}
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.8cm} >{\raggedright\arraybackslash}p{10.6cm} >{\raggedright\arraybackslash}p{7.4cm} >{\raggedright\arraybackslash}p{4.2cm}}
+\toprule ID & Claim stated in the source & Manuscript anchor & Related rows \\ \midrule \endhead
+M20 & In long-run equilibrium high ranks choose the downgrade and low ranks choose the lottery. \pend{M19 (functional form of $u$ and the reference income $r$), an equilibrium concept, and the rank kernel of M23} & Appendix: "the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery" & M13, M16, M19, M23 \\ \midrule
+M21 & Mobility falls in $b$. Lottery play rises in $a$. \pend{a mobility measure, and a meaning of stakes in $a$ that survives the refutation M5} & Appendix: "higher costs (b) discourage mobility and higher stakes (a) encourage bets" & M3, M4, M5, M8, M9 \\ \midrule
+M22 & Upward mobility falls as a worker upskills. \pend{the state $(r,h)$ and a formal object linking upskilling to the swap pool of M14} & Appendix: "The more a worker upskills oneself, the harder it becomes for the worker to move up (as the swap pool gets limited)" & M14 \\ \midrule
+M23 & A long-run transition kernel on ranks follows from the cost function. \pend{the rank-kernel decision (global or reference-set rank, channels, where categorical friction enters)} & Appendix: "The long-term transition-probability can thus be determined from the costs of moving up the ladder" & M7, M8, M9 \\ \midrule
+\end{longtable}}
 
 \section{References}
 {\small
@@ -119,6 +119,9 @@ No concluding claims are admitted in this pass.
 \subsection*{Listing A.4: \nolinkurl{lean/IscLean/Gap.lean}}
 \VerbatimInput[numbers=left,numbersep=4pt,fontsize=\footnotesize,frame=single]{lean/IscLean/Gap.lean}
 
+\subsection*{Listing A.5: \nolinkurl{lean/IscLean/Moments.lean}}
+\VerbatimInput[numbers=left,numbersep=4pt,fontsize=\footnotesize,frame=single]{lean/IscLean/Moments.lean}
+
 \section{Lean build files}
 \subsection*{Listing B.1: \nolinkurl{lean/lean-toolchain}}
 \VerbatimInput[numbers=left,numbersep=4pt,fontsize=\scriptsize,frame=single]{lean/lean-toolchain}
@@ -129,10 +132,22 @@ No concluding claims are admitted in this pass.
 \subsection*{Listing B.3: \nolinkurl{lean/lake-manifest.json}}
 \VerbatimInput[numbers=left,numbersep=4pt,fontsize=\scriptsize,frame=single]{lean/lake-manifest.json}
 
-\section{SymPy evidence}
-\subsection*{Listing C.1: \nolinkurl{sympy/micro_checks.py}}
-\VerbatimInput[numbers=left,numbersep=4pt,fontsize=\footnotesize,frame=single]{sympy/micro_checks.py}
-
 \section{Measurement-map rows cited by headline and concluding claims}
 No headline or concluding claim cites a measurement-map row in this pass.
+\section{Primitives and scope}
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.8cm} >{\raggedright\arraybackslash}p{4.6cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{6.6cm} >{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{2.8cm}}
+\toprule ID & Claim the source needs & Manuscript anchor & What the source leaves undefined & Rows that depend on it & Decision \\ \midrule \endhead
+M14 & The swap partner $k$ is drawn from lottery participants & Appendix, condition 1: "Worker k does not pay any additional cost other than the fixed lottery cost L" & The manuscript does not say whether $k$ is drawn from participants or from all $N$ workers. If from all $N$, non-participants are swapped without choosing to play & M11, M12, M13 & pending, see \nolinkurl{TODO.md} \\ \midrule
+M19 & The convex region of $u$ lies below a reference income $r$ & Appendix, Linear Approximation: "positive when u′′ \textgreater{} 0 (convex region -\textgreater{} below r)" & $r$ is not defined in the manuscript. No functional form of $u$ is given & M20 & pending, see \nolinkurl{TODO.md} \\ \midrule
+\end{longtable}}
+\section{Refuted conjectures}
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.8cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{3.9cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{2.3cm}}
+\toprule ID & Conjecture as printed & Manuscript anchor & Why it fails & Lean counterexample & Repair or refuting rows & Status \\ \midrule \endhead
+M1 & $x_i = x_0(1-i)^{-1/a}$ for $1 \le i \le N$ defines the income ladder & Appendix, condition 3: "pareto income list x0 (1 - i)\textasciicircum{}\{-1/a\} for 1 \textless{}= i \textless{}= N" & Base $1-i\le 0$ for every $i\ge 1$, so $(1-i)^{-1/a}$ is not a power of a positive base & Lean \nolinkurl{Isc.printed_index_base_nonpos}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 47--49 & M2, M3, M4 & \texttt{ILL\_POSED} \\ \midrule
+M5 & Higher $a$ raises the stakes across income levels & Appendix, condition 3: "A higher a corresponds to higher-stakes through income levels." & Contradicted by M3 and M4. At $x_0=1$, $x(0.9)$ is lower at $a=3$ than at $a=2$. $x(0.9)/x_0=10^{1/a}$, which is $10^{2/3}, 10^{1/2}, 10^{1/3}, 10^{1/5}$ at $a=1.5,2,3,5$ & Lean \nolinkurl{Isc.top_decile_witness}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 62--63; Lean \nolinkurl{Isc.pareto_top_decile}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 57--60 & M3, M4 & \texttt{REFUTED} \\ \midrule
+M6 & The printed cost function charges $(m_k-m_i)^b$ for downward moves and nothing for upward moves & Appendix, condition 2: "C(mi, mk) = (mk - mi)\textasciicircum{}b for mi \textgreater{} mk, 0 for mi \textless{} mk" & Base $m_k-m_i<0$ on the charged branch $m_i>m_k$, which is the branch the repair M7 leaves free. No real number squares to $m_k-m_i$, so at $b=1/2$ the printed cost has no real value. Contradicts the next sentence of the manuscript, "no cost is paid for moving from a position of high-skill to low". $m_i=m_k$ unassigned & Lean \nolinkurl{Isc.printed_charged_branch_base_neg}, Listing A.3 (\nolinkurl{Ladder.lean}), lines 51--55 & M7, M8, M9 & \texttt{ILL\_POSED} \\ \midrule
+M17 & The lottery variance equals $p(1-\lambda)^2$ with $p<0$ & Appendix, Linear Approximation: "sigma\_y\textasciicircum{}2 = c((1 - lambda\_H) m\_H)\textasciicircum{}2 = p\_H (1 - lambda\_H)\textasciicircum{}2 (p\_H \textless{} 0)" & Any variance is $\ge 0$, while $p(1-\lambda)^2<0$ for $p<0$, $\lambda<1$ & Lean \nolinkurl{Isc.variance_ne_neg_multiple}, Listing A.5 (\nolinkurl{Moments.lean}), lines 26--35 & M18 & \texttt{ILL\_POSED} \\ \midrule
+\end{longtable}}
 \end{document}

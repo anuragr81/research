@@ -7,9 +7,9 @@ import yaml
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LEAN_DIR = os.path.join(ROOT, 'lean')
 LEAN_BIN = os.environ.get('LEAN_BIN', '/opt/lean/lean-4.21.0-linux/bin')
-SYMPY_SCRIPT = os.path.join(ROOT, 'sympy', 'micro_checks.py')
 SOURCES_DIR = os.path.join(ROOT, 'sources')
-CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN', 'SYMPY'}
+CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
+PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED',), 'waits_on': ('OPEN',), 'rows': ('OPEN',)}
 
 
 def load():
@@ -31,6 +31,11 @@ def lean_declared(full_name, text):
     namespace, _, short = full_name.rpartition('.')
     return bool(re.search(r'\bnamespace\s+' + re.escape(namespace) + r'\b', text)) and bool(
         re.search(r'\btheorem\s+' + re.escape(short) + r'\b', text))
+
+
+def lean_names(claim):
+    v = claim.get('lean') or []
+    return [v] if isinstance(v, str) else list(v)
 
 
 def lean_module(claim):
@@ -61,11 +66,6 @@ def lean_axioms(module, names):
         if m:
             verdict[m.group(1)] = 'sorryAx' not in block
     return verdict, run.stdout
-
-
-def sympy_results():
-    run = subprocess.run([sys.executable, SYMPY_SCRIPT], capture_output=True, text=True)
-    return dict(re.findall(r'^(M\d+) (PASS|FAIL)$', run.stdout, flags=re.M))
 
 
 def load_map():
@@ -232,8 +232,7 @@ def main():
         errors.append(f'duplicate id {dup}')
     by_id = {c['id']: c for c in data['model']}
     lean_text = lean_sources()
-    sympy = sympy_results()
-    lean_claims = [c for c in data['model'] if c['status'] in ('LEAN_PROVED', 'LEAN_WRITTEN')]
+    lean_claims = [c for c in data['model'] if c['status'] in ('LEAN_PROVED', 'LEAN_WRITTEN') or lean_names(c)]
     verdict, unbuilt = None, set()
     if use_lean and lean_claims:
         verdict = {}
@@ -243,7 +242,7 @@ def main():
                 unbuilt.add(module)
                 notes.append(f'{module}: not compiled, its claims not re-verified')
                 continue
-            names = [c['lean'] for c in lean_claims if lean_module(c) == module]
+            names = [n for c in lean_claims if lean_module(c) == module for n in lean_names(c)]
             result, log = lean_axioms(module, names)
             if result is None:
                 errors.append(f'lean axiom probe failed for {module}:\n' + log[-2000:])
@@ -258,28 +257,53 @@ def main():
         for field in ('anchor', 'claim', 'evidence'):
             if not str(c.get(field, '')).strip():
                 errors.append(f'{cid}: empty {field}')
-        if st in ('LEAN_PROVED', 'LEAN_WRITTEN'):
-            name = c.get('lean', '')
-            if not name or not lean_declared(name, lean_text):
+        names = lean_names(c)
+        if st in ('LEAN_PROVED', 'LEAN_WRITTEN') and not names:
+            errors.append(f'{cid}: {st} without a lean theorem')
+        if names and verdict is None:
+            notes.append(f'{cid}: {st} lean not re-verified (run with --lean)')
+        for name in names:
+            if not lean_declared(name, lean_text):
                 errors.append(f'{cid}: lean theorem {name!r} not declared')
-            elif verdict is not None and lean_module(c) in unbuilt:
-                if st == 'LEAN_PROVED':
-                    errors.append(f'{cid}: LEAN_PROVED but {lean_module(c)} is not compiled')
-            elif verdict is not None:
-                ok = verdict.get(name)
-                if ok is None:
+            elif verdict is None:
+                continue
+            elif lean_module(c) in unbuilt:
+                if st != 'LEAN_WRITTEN':
+                    errors.append(f'{cid}: {st} but {lean_module(c)} is not compiled')
+            elif st == 'LEAN_WRITTEN':
+                if verdict.get(name) is None:
                     errors.append(f'{cid}: no axiom report for {name}')
-                elif ok and st == 'LEAN_WRITTEN':
+                elif verdict[name]:
                     errors.append(f'{cid}: compiles sorry-free, status must be LEAN_PROVED')
-                elif not ok and st == 'LEAN_PROVED':
-                    errors.append(f'{cid}: depends on sorryAx, status cannot be LEAN_PROVED')
-            elif st == 'LEAN_PROVED':
-                notes.append(f'{cid}: LEAN_PROVED not re-verified (run with --lean)')
-        if 'micro_checks.py::' in c.get('evidence', ''):
-            if sympy.get(cid) != 'PASS':
-                errors.append(f'{cid}: sympy check {sympy.get(cid, "missing")}')
-        elif st == 'SYMPY':
-            errors.append(f'{cid}: SYMPY status without a sympy reference')
+            elif verdict.get(name) is not True:
+                errors.append(f'{cid}: {name} absent from axiom report or depends on sorryAx')
+        for field, owner in PLACEMENT.items():
+            if c.get(field) and st not in owner:
+                errors.append(f'{cid}: field {field} is only for status {", ".join(owner)}')
+        if st in ('ILL_POSED', 'REFUTED') and not names:
+            errors.append(f'{cid}: {st} needs a Lean counterexample')
+        if st == 'ILL_POSED':
+            rep = c.get('repaired_by') or []
+            if not rep:
+                errors.append(f'{cid}: ILL_POSED without repaired_by')
+            for r in rep:
+                if r not in by_id:
+                    errors.append(f'{cid}: repaired_by missing {r}')
+                elif by_id[r]['status'] not in CHECKED:
+                    errors.append(f'{cid}: repair {r} has status {by_id[r]["status"]}')
+        if st == 'UNDERSPECIFIED':
+            aff = c.get('affects') or []
+            if not aff:
+                errors.append(f'{cid}: UNDERSPECIFIED without affects')
+            for r in aff:
+                if r not in by_id:
+                    errors.append(f'{cid}: affects missing {r}')
+        if st == 'OPEN':
+            if not str(c.get('waits_on', '')).strip():
+                errors.append(f'{cid}: OPEN without waits_on')
+            for r in c.get('rows') or []:
+                if r not in by_id:
+                    errors.append(f'{cid}: rows cites missing {r}')
         if st == 'REFUTED':
             refs = re.findall(r'\bM\d+\b', c['evidence'])
             if not refs:

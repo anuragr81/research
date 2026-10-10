@@ -17,6 +17,12 @@
 - [ ] Ghiglino and Goyal (2010), JEEA 8(1) — L9
 - [ ] Lower priority: Rosen (1986) L8, Gibbons and Waldman (1999) L2, Altonji and Pierret (2001) L12, Luttmer (2005) L11, Fershtman, Murphy and Weiss (1996) L13
 
+## Decisions recorded
+
+- 10 Oct 2026: proofs stay Lean-only for now. Informal proofs under the skeleton's 30% prose limit (MS-6) are deferred, not dropped.
+- 10 Oct 2026: no paper prose for now. Work is on claims; prose will be written from the claims later.
+- 10 Oct 2026: headlines rest on the measurement map (X rows) as the empirical key, not on model rows alone. Deliberate departure from skeleton MS-2.
+
 ## Model decisions pending (micro)
 
 - [ ] State space: rank plus human capital stock $(r, h)$
@@ -29,7 +35,9 @@
 
 ## Lean
 
-- [ ] M15 for general distributions (currently finite support only)
+- [x] M15 for general distributions (Moments.lean, 10 Oct 2026)
+- [x] Lean evidence for ILL_POSED rows M1, M6, M17
+- [x] SymPy replaced by Lean throughout the micro ledger (M1, M4, M5, M6, M17)
 
 ## References
 

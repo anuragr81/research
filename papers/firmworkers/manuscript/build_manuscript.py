@@ -5,11 +5,10 @@ import yaml
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
-from check import load_map, reference_citations, cited_map_rows
+from check import load_map, reference_citations, cited_map_rows, lean_names
 
-LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean']
+LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean']
 BUILD_FILES = ['lean/lean-toolchain', 'lean/lakefile.toml', 'lean/lake-manifest.json']
-SYMPY_FILE = 'sympy/micro_checks.py'
 SPECIAL = {'&': r'\&', '%': r'\%', '#': r'\#', '_': r'\_', '{': r'\{', '}': r'\}',
            '~': r'\textasciitilde{}', '^': r'\textasciicircum{}', '\\': r'\textbackslash{}',
            '<': r'\textless{}', '>': r'\textgreater{}'}
@@ -60,27 +59,20 @@ def lean_location(name):
     raise SystemExit(f'lean theorem {name} not found in listings')
 
 
-def sympy_location(fn):
-    rng = block_range(read(SYMPY_FILE), r'^def\s+' + re.escape(fn) + r'\b', r'^(def|CHECKS|if __name__)\b')
-    if not rng:
-        raise SystemExit(f'sympy function {fn} not found')
-    return rng
-
-
 def proof_cell(c):
     parts = []
-    if c.get('lean'):
-        idx, rel, (a, b) = lean_location(c['lean'])
-        parts.append(f"Lean \\nolinkurl{{{c['lean']}}}, Listing A.{idx + 1} (\\nolinkurl{{{os.path.basename(rel)}}}), lines {a}--{b}")
-    for fn in re.findall(r'micro_checks\.py::(\w+)', c.get('evidence', '')):
-        a, b = sympy_location(fn)
-        parts.append(f"SymPy \\nolinkurl{{{fn}}}, Listing C.1, lines {a}--{b}")
+    for name in lean_names(c):
+        idx, rel, (a, b) = lean_location(name)
+        parts.append(f"Lean \\nolinkurl{{{name}}}, Listing A.{idx + 1} (\\nolinkurl{{{os.path.basename(rel)}}}), lines {a}--{b}")
     return '; '.join(parts) if parts else '---'
 
 
+def by_status(d, *statuses):
+    return [c for c in d['model'] if c['status'] in statuses]
+
+
 def evidence_text(c):
-    text = re.sub(r'(lean|sympy)/[\w/]+\.(lean|py)::[\w.]+\.?\s*', '', str(c.get('evidence', ''))).strip()
-    text = re.sub(r'^Cross-check\s*', '', text).strip()
+    text = re.sub(r'lean/[\w/]+\.lean::[\w.]+\.?\s*', '', str(c.get('evidence', ''))).strip()
     return mixed(text) if text else '---'
 
 
@@ -94,6 +86,32 @@ def model_table(items):
         f"{c['id']} & {c['claim']} & {mixed(c['assumptions'])} & {mixed(c['anchor'])} & {evidence_text(c)} & "
         f"{proof_cell(c)} & \\texttt{{{escape_text(c['status'])}}} \\\\ \\midrule" for c in items)
     return f"\\begin{{longtable}}{{{col([0.8, 5.0, 2.9, 3.9, 4.4, 3.6, 2.5])}}}\n\\toprule {head}\n{rows}\n\\end{{longtable}}"
+
+
+def pending_table(items):
+    head = r'ID & Claim stated in the source & Manuscript anchor & Related rows \\ \midrule \endhead'
+    rows = '\n'.join(
+        f"{c['id']} & {c['claim']}. \\pend{{{mixed(c['waits_on'])}}} & {mixed(c['anchor'])} & "
+        f"{', '.join(c.get('rows') or []) or '---'} \\\\ \\midrule" for c in items)
+    return f"\\begin{{longtable}}{{{col([0.8, 10.6, 7.4, 4.2])}}}\n\\toprule {head}\n{rows}\n\\end{{longtable}}"
+
+
+def primitives_table(items):
+    head = r'ID & Claim the source needs & Manuscript anchor & What the source leaves undefined & Rows that depend on it & Decision \\ \midrule \endhead'
+    rows = '\n'.join(
+        f"{c['id']} & {c['claim']} & {mixed(c['anchor'])} & {evidence_text(c)} & {', '.join(c['affects'])} & "
+        f"pending, see \\nolinkurl{{TODO.md}} \\\\ \\midrule" for c in items)
+    return f"\\begin{{longtable}}{{{col([0.8, 4.6, 5.0, 6.6, 2.6, 2.8])}}}\n\\toprule {head}\n{rows}\n\\end{{longtable}}"
+
+
+def refuted_table(items):
+    head = r'ID & Conjecture as printed & Manuscript anchor & Why it fails & Lean counterexample & Repair or refuting rows & Status \\ \midrule \endhead'
+    rows = []
+    for c in items:
+        answer = c.get('repaired_by') or re.findall(r'\bM\d+\b', c['evidence'])
+        rows.append(f"{c['id']} & {c['claim']} & {mixed(c['anchor'])} & {evidence_text(c)} & {proof_cell(c)} & "
+                    f"{', '.join(answer)} & \\texttt{{{escape_text(c['status'])}}} \\\\ \\midrule")
+    return f"\\begin{{longtable}}{{{col([0.8, 3.8, 3.9, 5.2, 4.2, 2.2, 2.3])}}}\n\\toprule {head}\n" + '\n'.join(rows) + "\n\\end{longtable}"
 
 
 def literature_table(items):
@@ -166,6 +184,7 @@ def main():
 \setmonofont{{DejaVu Sans Mono}}[Scale=0.9]
 \usepackage{{amsmath,amssymb,longtable,booktabs,array,xurl,fancyvrb}}
 \usepackage[hidelinks]{{hyperref}}
+\newcommand{{\pend}}[1]{{\textit{{Pending:}} #1}}
 \renewcommand{{\arraystretch}}{{1.25}}
 \setlength{{\tabcolsep}}{{4pt}}
 \setlength{{\parindent}}{{0pt}}
@@ -176,7 +195,7 @@ def main():
 \maketitle
 Source manuscript for the model claims: {mixed(meta['manuscript'])}.
 
-Headline and concluding claims may rest only on model claims, literature claims and measurement-map rows. Model claims are proved in Lean 4 against Mathlib. The full Lean source is in Appendix~A and the build files in Appendix~B.
+Headline and concluding claims may rest only on model claims, literature claims and measurement-map rows. Model claims are proved in Lean 4 against Mathlib. The full Lean source is in Appendix~A and the build files in Appendix~B. Claims the source manuscript needs but leaves undefined are in Appendix~D. Claims it prints that fail as printed are in Appendix~E, each with its Lean counterexample and the rows that repair or refute it.
 
 \section*{{Status vocabulary}}
 \begin{{description}}
@@ -189,14 +208,18 @@ Headline and concluding claims may rest only on model claims, literature claims 
 
 \section{{Model claims}}
 {{\small
-{model_table(d['model'])}}}
+{model_table(by_status(d, 'LEAN_PROVED', 'LEAN_WRITTEN'))}}}
 
 \section{{Literature claims}}
 {{\small
 {literature_table(d['literature'])}}}
 
 \section{{Concluding remarks}}
+\subsection*{{Conclusions resting on verified rows}}
 {derived_table(d.get('concluding') or [], 'No concluding claims are admitted in this pass.')}
+\subsection*{{Pending}}
+{{\small
+{pending_table(by_status(d, 'OPEN'))}}}
 
 \section{{References}}
 {{\small
@@ -207,10 +230,14 @@ Headline and concluding claims may rest only on model claims, literature claims 
 {lean_listings}
 \section{{Lean build files}}
 {build_listings}
-\section{{SymPy evidence}}
-{listing(SYMPY_FILE, 'C.1')}
 \section{{Measurement-map rows cited by headline and concluding claims}}
 {cited_rows_appendix(d, mmap)}
+\section{{Primitives and scope}}
+{{\small
+{primitives_table(by_status(d, 'UNDERSPECIFIED'))}}}
+\section{{Refuted conjectures}}
+{{\small
+{refuted_table(by_status(d, 'ILL_POSED', 'REFUTED'))}}}
 \end{{document}}
 """
     with open(os.path.join(ROOT, 'manuscript.tex'), 'w', encoding='utf8') as fh:
