@@ -67,6 +67,16 @@ grounds.
   coordinate and the drift at the distress boundary) and M10 (smooth fit at
   the trigger), with no novelty claim (author's decision). Guo and Wu (2009)
   is therefore not needed.
+- 2026-10-10. C2 is narrowed to the two-branch result, that the ratio
+  $\nu_1^2/\nu_3^2$ under the Basel cap carries no information about
+  $\lambda_S$, and moves to Table 4. The constancy of $\nu_1^2$ and the log
+  coordinate are stated as not claimed new (author's decision). Black and
+  Perold (1992) and Taksar (2000) are excluded for the narrowed claim at
+  abstract level: CPPI has one multiplier and no preference parameter
+  [A]/[C]; Taksar's model is risk neutral, with exposure capped by full
+  retention rather than a two-branch cap [C, from the 1999 preprint read by
+  the search agent]. Taksar remains useful for a scope note on the
+  log-reserve mechanism, not needed.
 - 2026-10-10. The saturation limits are renamed $\nu_1^2,\nu_3^2$ (from
   PROOFS_v2's $\kappa_1^2,\kappa_3^2$) so that $\kappa$ means only the
   proportional issuance cost. Lean `CapGeometry.kappa2` became
@@ -138,7 +148,8 @@ exploration level ([A] abstract or search summary, [C] citing description),
 by the author's rule of 2026-10-10 that primary sources are needed only for
 verification and novelty checks.
 
-- Survives, primary source needed for C2: Black and Perold (1992).
+- Survived triage for the first wording of C2: Black and Perold (1992).
+  Excluded for the narrowed C2 (Decisions, 2026-10-10).
 - Excluded [A]: Décamps, Mariotti, Rochet and Villeneuve (2011), stock-price
   volatility from issuance costs, no capped capital-ratio state. Hilscher,
   Raviv and Wiener (2024), a volatility schedule imposed by regulation, not
