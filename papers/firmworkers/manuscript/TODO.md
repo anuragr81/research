@@ -28,6 +28,14 @@ L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calv�
 
 ## Decisions recorded
 
+- 10 Oct 2026 (Q1): the micro state is rank plus human capital, (r, h).
+- 10 Oct 2026 (Q2): categorical friction enters the rank kernel, not the accumulation of h, because the friction of interest arises from non-contractual relationships in Weber's framework.
+- 10 Oct 2026 (Q4): u is not observed; preferences over income lotteries take expected-utility form, so u is a representation unique up to a positive affine transformation and its curvature is meaningful (M16, `premium_sign_affine_invariant`).
+- 10 Oct 2026 (Q3): the swap pool is the lottery entrants only (M14 DECIDED). M11–M13 restated over the pool; M24 proves risk-neutral entry unravels when L > 0, so a pool survives only through the convex region of u.
+- 10 Oct 2026 (Q5): choice set and equilibrium left to tractability (proposal: a one-shot comparison of the three routes for a displaced worker at each rank).
+- 10 Oct 2026 (Q6): global rank on the ladder, with the source's three channels.
+- 10 Oct 2026 (Q9): headlines and conclusions revisited once Q1–Q8 are settled.
+- Open: Q7 (meaning of stakes), Q8 (repairs), law of motion for h, how friction enters the kernel (proposal: cross-group draws inside the entrant pool weighted by a closure parameter).
 - 10 Oct 2026: primary sources (with record and Lean) are required for papers needed for verification or novelty; exploration does not need them.
 - 10 Oct 2026: proofs stay Lean-only for now. Informal proofs under the skeleton's 30% prose limit (MS-6) are deferred, not dropped.
 - 10 Oct 2026: no paper prose for now. Work is on claims; prose will be written from the claims later.

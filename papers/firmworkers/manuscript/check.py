@@ -16,7 +16,8 @@ ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
 QUOTE_ROW = re.compile(r'^\|\s*[A-Z]+-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
 CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
-PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED',), 'waits_on': ('OPEN',), 'rows': ('OPEN',)}
+PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED', 'DECIDED'), 'decision': ('DECIDED',),
+             'waits_on': ('OPEN',), 'rows': ('OPEN',)}
 
 
 def load():
@@ -245,7 +246,7 @@ def check_derived_claims(data, rows, errors, notes):
                 if r.startswith('M'):
                     if r not in model:
                         errors.append(f'{cid}: rests on missing {r}')
-                    elif model[r]['status'] not in CHECKED:
+                    elif model[r]['status'] not in CHECKED | {'DECIDED'}:
                         errors.append(f'{cid}: rests on {r} with status {model[r]["status"]}')
                 elif r.startswith('L'):
                     if r not in lit:
@@ -423,10 +424,12 @@ def main():
                     errors.append(f'{cid}: repaired_by missing {r}')
                 elif by_id[r]['status'] not in CHECKED:
                     errors.append(f'{cid}: repair {r} has status {by_id[r]["status"]}')
-        if st == 'UNDERSPECIFIED':
+        if st == 'DECIDED' and not str(c.get('decision', '')).strip():
+            errors.append(f'{cid}: DECIDED without a dated decision')
+        if st in ('UNDERSPECIFIED', 'DECIDED'):
             aff = c.get('affects') or []
             if not aff:
-                errors.append(f'{cid}: UNDERSPECIFIED without affects')
+                errors.append(f'{cid}: {st} without affects')
             for r in aff:
                 if r not in by_id:
                     errors.append(f'{cid}: affects missing {r}')

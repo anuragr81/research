@@ -100,7 +100,7 @@ def primitives_table(items):
     head = r'ID & Claim the source needs & Manuscript anchor & What the source leaves undefined & Rows that depend on it & Decision \\ \midrule \endhead'
     rows = '\n'.join(
         f"{c['id']} & {c['claim']} & {mixed(c['anchor'])} & {evidence_text(c)} & {', '.join(c['affects'])} & "
-        f"pending, see \\nolinkurl{{TODO.md}} \\\\ \\midrule" for c in items)
+        f"{mixed(c['decision']) if c.get('decision') else 'pending, see \\nolinkurl{TODO.md}'} \\\\ \\midrule" for c in items)
     return f"\\begin{{longtable}}{{{col([0.8, 4.6, 5.0, 6.6, 2.6, 2.8])}}}\n\\toprule {head}\n{rows}\n\\end{{longtable}}"
 
 
@@ -260,7 +260,7 @@ Headline and concluding claims may rest only on model claims, literature claims 
 {cited_rows_appendix(d, mmap)}
 \section{{Primitives and scope}}
 {{\small
-{primitives_table(by_status(d, 'UNDERSPECIFIED'))}}}
+{primitives_table(by_status(d, 'UNDERSPECIFIED', 'DECIDED'))}}}
 \section{{Refuted conjectures}}
 {{\small
 {refuted_table(by_status(d, 'ILL_POSED', 'REFUTED'))}}}

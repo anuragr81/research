@@ -86,8 +86,7 @@ rows:
   - id: X8
     symbol: 'swap rule'
     role: input
-    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$. M11 to M13 draw $k$ uniformly from the other $N-1$ workers; whether the pool is the lottery entrants or all workers is pending'
-    pending: [M14]
+    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other entrants (M14, decided 10 Oct 2026); cross-group draws to be weighted by categorical friction'
     referent: 'a social contest that reallocates jobs by connection or luck rather than by skill'
     support: POSIT
     direction: ''
@@ -97,7 +96,7 @@ rows:
   - id: X9
     symbol: '$u$'
     role: input
-    meaning: 'utility over income, S-shaped in the manuscript, functional form not given'
+    meaning: 'utility over income in expected-utility form, unique up to a positive affine transformation (decision of 10 Oct 2026), S-shaped in the manuscript, functional form not given'
     referent: 'attitude to income risk, risk-seeking below a reference income and risk-averse above it'
     support: POSIT
     direction: ''
@@ -190,10 +189,10 @@ rows:
     symbol: '$G_i$'
     role: output
     produced_by: [M11]
-    meaning: '$\frac{S-Nx_i}{N-1}-L$'
+    meaning: '$\frac{S_P-|P|x_i}{|P|-1}-L$'
     referent: 'expected net payoff to worker $i$ from social navigation, valued risk-neutrally'
     support: POSIT
-    direction: 'sums to $-NL$ over workers (M12)'
+    direction: 'sums to $-|P|L$ over the pool (M12); negative for the richest entrant when $L>0$ (M24)'
     observation: 'mean income change net of the entry cost for workers from rank i who take the lottery route, from panel data'
     observation_status: PROPOSED
 
@@ -201,7 +200,7 @@ rows:
     symbol: '$\bar x_{\mathrm{part}}$'
     role: output
     produced_by: [M13]
-    meaning: '$\frac{S-(N-1)L}{N}$, with $G_i>0\iff x_i<\bar x_{\mathrm{part}}$'
+    meaning: '$\frac{S_P-(|P|-1)L}{|P|}$, with $G_i>0\iff x_i<\bar x_{\mathrm{part}}$'
     referent: 'income below which social navigation pays in expectation'
     support: POSIT
     direction: ''
@@ -228,4 +227,24 @@ rows:
     support: POSIT
     direction: 'scales with $m^2$ (M18)'
     observation: 'not measured directly; inferred from how take-up of the lottery route falls with income'
+    observation_status: PROPOSED
+
+  - id: X22
+    symbol: '$S_P$'
+    role: input
+    meaning: 'sum of the incomes of the lottery entrants'
+    referent: 'income held by those who compete through connections'
+    support: POSIT
+    direction: ''
+    observation: 'sum of the wages of workers who take the lottery route, from panel data'
+    observation_status: PROPOSED
+
+  - id: X23
+    symbol: '$|P|$'
+    role: input
+    meaning: 'number of lottery entrants'
+    referent: 'number of workers competing through connections'
+    support: POSIT
+    direction: 'a risk-neutral pool of two or more with $L>0$ is not stable (M24)'
+    observation: 'count of workers who take the lottery route, from panel data'
     observation_status: PROPOSED

@@ -10,6 +10,7 @@ model_status:
   UNDERSPECIFIED: 'the manuscript leaves a primitive undefined'
   ILL_POSED: 'not well-defined as printed'
   REFUTED: 'contradicted by a proved or checked claim'
+  DECIDED: 'a primitive the manuscript leaves open, fixed by the author and recorded in Appendix D with its date and reason'
 
 literature_status:
   VERBATIM: 'quote extracted from the primary text supplied, page given, checked against local text'
@@ -104,35 +105,36 @@ model:
     symbols: [X1, X8, X15, X17]
   - id: M11
     anchor: 'Appendix, condition 1'
-    claim: 'Expected net lottery gain $G_i=\frac{S-Nx_i}{N-1}-L$, with $S=\sum_k x_k$'
-    assumptions: '$k$ uniform over the $N-1$ other workers, risk-neutral valuation. Uniformity is added to the manuscript'
-    evidence: 'lean/IscLean/Lottery.lean::Isc.lotteryGain_closed'
-    lean: Isc.lotteryGain_closed
+    claim: 'Expected net lottery gain of entrant $i$ in the pool $P$, $G_i=\frac{S_P-|P|x_i}{|P|-1}-L$, with $S_P=\sum_{k\in P}x_k$'
+    assumptions: '$i\in P$, partner $k$ uniform over the other entrants (M14), risk-neutral valuation. Uniformity is added to the manuscript'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.poolGain_closed'
+    lean: Isc.poolGain_closed
     status: LEAN_PROVED
-    symbols: [X1, X7, X8, X15, X17, X18]
+    symbols: [X7, X8, X15, X18, X22, X23]
   - id: M12
     anchor: 'Appendix, condition 1'
-    claim: '$\sum_i G_i=-NL$. The lottery is zero-sum in income and negative-sum net of entry costs'
-    assumptions: 'as M11, $N\ge 2$'
-    evidence: 'lean/IscLean/Lottery.lean::Isc.lotteryGain_total'
-    lean: Isc.lotteryGain_total
+    claim: '$\sum_{i\in P}G_i=-|P|L$. The lottery is zero-sum in income within the pool and negative-sum net of entry costs'
+    assumptions: 'as M11, for a pool of any size'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.poolGain_total'
+    lean: Isc.poolGain_total
     status: LEAN_PROVED
-    symbols: [X1, X7, X18]
+    symbols: [X7, X18, X23]
   - id: M13
     anchor: 'Appendix, condition 1'
-    claim: '$G_i>0 \iff x_i<\frac{S-(N-1)L}{N}$'
-    assumptions: 'as M11, $N\ge 2$'
-    evidence: 'lean/IscLean/Lottery.lean::Isc.lotteryGain_pos_iff'
-    lean: Isc.lotteryGain_pos_iff
+    claim: '$G_i>0 \iff x_i<\frac{S_P-(|P|-1)L}{|P|}$'
+    assumptions: 'as M11, $|P|\ge 2$'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.poolGain_pos_iff'
+    lean: Isc.poolGain_pos_iff
     status: LEAN_PROVED
-    symbols: [X1, X7, X15, X17, X18, X19]
+    symbols: [X7, X15, X18, X19, X22, X23]
   - id: M14
     anchor: 'Appendix, condition 1: "Worker k does not pay any additional cost other than the fixed lottery cost L"'
     claim: 'The swap partner $k$ is drawn from lottery participants'
     assumptions: ''
-    evidence: 'The manuscript does not say whether $k$ is drawn from participants or from all $N$ workers. If from all $N$, non-participants are swapped without choosing to play'
-    status: UNDERSPECIFIED
-    affects: [M11, M12, M13]
+    evidence: 'The manuscript says both that $k$ is drawn from the $N$ workers and that $k$ pays only the lottery cost $L$. Decided for the pool of entrants'
+    status: DECIDED
+    decision: '10 Oct 2026, the author. The pool is the lottery entrants only, so the social contest is voluntary on both sides and a partner pays only the entry cost, as the manuscript says'
+    affects: [M11, M12, M13, M24]
     symbols: [X8]
   - id: M15
     anchor: 'Appendix, Linear Approximation: "Expanding the utility around the mean ȳ using a second-order Taylor series"'
@@ -146,8 +148,8 @@ model:
     anchor: 'Appendix, Linear Approximation: "positive when u′′ > 0"'
     claim: '$\tfrac12u^{\prime\prime}\sigma^2>0\iff u^{\prime\prime}>0$'
     assumptions: '$\sigma\ne 0$'
-    evidence: 'lean/IscLean/Lottery.lean::Isc.premium_pos_iff'
-    lean: Isc.premium_pos_iff
+    evidence: 'lean/IscLean/Lottery.lean::Isc.premium_pos_iff. The sign is unchanged by a positive affine transformation of $u$, so it is meaningful for expected utility (decision of 10 Oct 2026)'
+    lean: [Isc.premium_pos_iff, Isc.premium_sign_affine_invariant]
     status: LEAN_PROVED
     symbols: [X9, X11, X20]
   - id: M17
@@ -211,6 +213,14 @@ model:
     waits_on: 'the rank-kernel decision (global or reference-set rank, channels, where categorical friction enters)'
     rows: [M7, M8, M9]
     symbols: [X1, X5]
+  - id: M24
+    anchor: 'consequence of the entrant pool decided in M14'
+    claim: 'With risk-neutral entrants and $L>0$, the richest entrant of any pool of two or more expects to lose, so no such pool is stable and risk-neutral entry unravels'
+    assumptions: '$|P|\ge 2$, $L>0$, risk-neutral valuation'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.richest_entrant_loses. A pool can survive only if entrants are not risk-neutral, which is the role of the convex region of $u$ below the reference income (M19)'
+    lean: [Isc.richest_entrant_loses, Isc.no_stable_risk_neutral_pool]
+    status: LEAN_PROVED
+    symbols: [X7, X8, X18, X22, X23]
 
 literature:
   - id: L1
