@@ -1,0 +1,165 @@
+meta:
+  title: 'Inequality and Social Contests: measurement map'
+  scope: 'Micro model only. Macro variables deferred.'
+  pass: 2
+
+support_status:
+  LITERATURE: 'a literature claim uses the variable with this real-world meaning'
+  POSIT: 'the paper''s own identification, supported by nothing else in the ledger'
+  NONE: 'modelling device with no real-world referent'
+
+rows:
+  - id: X1
+    symbol: '$N$'
+    role: input
+    meaning: 'number of workers, equal to the number of jobs'
+    referent: 'size of the labour market'
+    support: POSIT
+    direction: ''
+  - id: X2
+    symbol: '$q\in[0,1)$'
+    role: input
+    meaning: 'rank quantile of a job on the ladder'
+    referent: 'percentile of a job in the wage ranking'
+    support: POSIT
+    direction: 'higher $q$ is a better-paid job (M2)'
+  - id: X3
+    symbol: '$x_0$'
+    role: input
+    meaning: 'income at $q=0$'
+    referent: 'lowest wage'
+    support: POSIT
+    direction: ''
+  - id: X4
+    symbol: '$a$'
+    role: input
+    meaning: 'tail index of the income ladder $x(q)=x_0(1-q)^{-1/a}$'
+    referent: 'income dispersion across ranks, inversely'
+    support: POSIT
+    direction: 'higher $a$ lowers income at every interior quantile (M3) and narrows every income gap (M4), so higher $a$ means a more equal ladder'
+  - id: X5
+    symbol: '$b$'
+    role: input
+    meaning: 'exponent of the upward-move cost $C(m_i,m_k)=(m_k-m_i)^b$'
+    referent: 'convexity of retraining cost in the income distance climbed'
+    support: POSIT
+    direction: 'for $b\ge1$ two adjacent steps cost no more than the jump (M8). For $0\le b\le1$ the jump costs no more than the steps (M9)'
+  - id: X6
+    symbol: '$m$'
+    role: input
+    meaning: 'income of a position, written $x$ on the ladder'
+    referent: 'wage of a job'
+    support: POSIT
+    direction: ''
+  - id: X7
+    symbol: '$L$'
+    role: input
+    meaning: 'fixed cost of entering the lottery'
+    referent: 'cost of social navigation, such as networking, club membership and compliance with social closure'
+    support: POSIT
+    direction: 'higher $L$ lowers the participation threshold (M13)'
+  - id: X8
+    symbol: 'swap rule'
+    role: input
+    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other $N-1$ workers'
+    referent: 'a social contest that reallocates jobs by connection or luck rather than by skill'
+    support: POSIT
+    direction: ''
+  - id: X9
+    symbol: '$u$'
+    role: input
+    meaning: 'utility over income, S-shaped in the manuscript, functional form not given'
+    referent: 'attitude to income risk, risk-seeking below a reference income and risk-averse above it'
+    support: POSIT
+    direction: ''
+  - id: X10
+    symbol: '$\bar y$'
+    role: input
+    meaning: 'mean of net income from the lottery component'
+    referent: 'expected income'
+    support: POSIT
+    direction: ''
+  - id: X11
+    symbol: '$\sigma_y$'
+    role: input
+    meaning: 'standard deviation of net income from the lottery component'
+    referent: 'income risk created by taking part in social contests'
+    support: POSIT
+    direction: ''
+  - id: X12
+    symbol: '$\varepsilon$'
+    role: input
+    meaning: 'standardised shock, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$'
+    referent: ''
+    support: NONE
+    direction: ''
+  - id: X13
+    symbol: '$s$'
+    role: input
+    meaning: 'scale in $\sigma_y=s(1-\lambda)m$'
+    referent: 'income risk per unit of income staked on social contests'
+    support: POSIT
+    direction: ''
+  - id: X14
+    symbol: '$\lambda$'
+    role: input
+    meaning: 'share of income allocated to upskilling, with $1-\lambda$ allocated to the lottery'
+    referent: 'share of resources spent on human capital rather than on social navigation'
+    support: POSIT
+    direction: ''
+  - id: X15
+    symbol: '$x(q)$'
+    role: output
+    produced_by: [M2]
+    meaning: '$x_0(1-q)^{-1/a}$'
+    referent: 'wage of the job at percentile $q$'
+    support: POSIT
+    direction: 'increasing in $q$ (M2), decreasing in $a$ (M3)'
+  - id: X16
+    symbol: '$C(m_i,m_k)$'
+    role: output
+    produced_by: [M7]
+    meaning: '$(m_k-m_i)^b$ if $m_i<m_k$, $0$ otherwise'
+    referent: 'retraining cost of moving from job $i$ up to job $k$'
+    support: POSIT
+    direction: 'zero for downward and lateral moves (M7)'
+  - id: X17
+    symbol: '$S$'
+    role: output
+    produced_by: [M10]
+    meaning: '$\sum_k x_k$'
+    referent: 'total wage bill'
+    support: POSIT
+    direction: 'unchanged by any swap (M10)'
+  - id: X18
+    symbol: '$G_i$'
+    role: output
+    produced_by: [M11]
+    meaning: '$\frac{S-Nx_i}{N-1}-L$'
+    referent: 'expected net payoff to worker $i$ from social navigation, valued risk-neutrally'
+    support: POSIT
+    direction: 'sums to $-NL$ over workers (M12)'
+  - id: X19
+    symbol: '$\bar x_{\mathrm{part}}$'
+    role: output
+    produced_by: [M13]
+    meaning: '$\frac{S-(N-1)L}{N}$, with $G_i>0\iff x_i<\bar x_{\mathrm{part}}$'
+    referent: 'income below which social navigation pays in expectation'
+    support: POSIT
+    direction: ''
+  - id: X20
+    symbol: '$\tfrac12u^{\prime\prime}(\bar y)\sigma_y^2$'
+    role: output
+    produced_by: [M15]
+    meaning: 'second-order risk term in expected utility'
+    referent: 'utility value of the income risk from social contests'
+    support: POSIT
+    direction: 'positive exactly where $u^{\prime\prime}>0$ (M16)'
+  - id: X21
+    symbol: '$p$'
+    role: output
+    produced_by: [M18]
+    meaning: '$\tfrac12u^{\prime\prime}s^2m^2$, coefficient on $(1-\lambda)^2$'
+    referent: 'risk-premium coefficient of a worker with income $m$'
+    support: POSIT
+    direction: 'scales with $m^2$ (M18)'

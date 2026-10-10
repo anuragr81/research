@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,landscape,margin=1.5cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setmonofont{DejaVu Sans Mono}[Scale=0.9]
+\usepackage{amsmath,amssymb,longtable,booktabs,array,xurl}
+\usepackage[hidelinks]{hyperref}
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\title{Inequality and Social Contests: measurement map}
+\date{Pass 2}
+\begin{document}
+\maketitle
+Micro model only. Macro variables deferred. Model claims M1--M23 are those of the manuscript skeleton of the same pass. No data source is assigned in this pass.
+
+\section*{Support vocabulary}
+\begin{description}
+\item[\texttt{LITERATURE}] a literature claim uses the variable with this real-world meaning
+\item[\texttt{POSIT}] the paper's own identification, supported by nothing else in the ledger
+\item[\texttt{NONE}] modelling device with no real-world referent
+\end{description}
+
+\section{Inputs}
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{5.6cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{1.9cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{2.6cm}}
+\toprule ID & Symbol & Model meaning & Real-world referent & Support & Direction & Used in \\ \midrule \endhead
+X1 & $N$ & number of workers, equal to the number of jobs & size of the labour market & \texttt{POSIT} & --- & M1, M10, M11, M12, M13, M23 \\ \midrule
+X2 & $q\in[0,1)$ & rank quantile of a job on the ladder & percentile of a job in the wage ranking & \texttt{POSIT} & higher $q$ is a better-paid job (M2) & M2, M3, M4 \\ \midrule
+X3 & $x_0$ & income at $q=0$ & lowest wage & \texttt{POSIT} & --- & M1, M2, M3, M4 \\ \midrule
+X4 & $a$ & tail index of the income ladder $x(q)=x_0(1-q)^{-1/a}$ & income dispersion across ranks, inversely & \texttt{POSIT} & higher $a$ lowers income at every interior quantile (M3) and narrows every income gap (M4), so higher $a$ means a more equal ladder & M1, M2, M3, M4, M5, M21 \\ \midrule
+X5 & $b$ & exponent of the upward-move cost $C(m_i,m_k)=(m_k-m_i)^b$ & convexity of retraining cost in the income distance climbed & \texttt{POSIT} & for $b\ge1$ two adjacent steps cost no more than the jump (M8). For $0\le b\le1$ the jump costs no more than the steps (M9) & M6, M7, M8, M9, M21, M23 \\ \midrule
+X6 & $m$ & income of a position, written $x$ on the ladder & wage of a job & \texttt{POSIT} & --- & M6, M7, M8, M9, M18 \\ \midrule
+X7 & $L$ & fixed cost of entering the lottery & cost of social navigation, such as networking, club membership and compliance with social closure & \texttt{POSIT} & higher $L$ lowers the participation threshold (M13) & M11, M12, M13, M20 \\ \midrule
+X8 & swap rule & a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other $N-1$ workers & a social contest that reallocates jobs by connection or luck rather than by skill & \texttt{POSIT} & --- & M10, M11, M14 \\ \midrule
+X9 & $u$ & utility over income, S-shaped in the manuscript, functional form not given & attitude to income risk, risk-seeking below a reference income and risk-averse above it & \texttt{POSIT} & --- & M15, M16, M18, M19, M20 \\ \midrule
+X10 & $\bar y$ & mean of net income from the lottery component & expected income & \texttt{POSIT} & --- & M15 \\ \midrule
+X11 & $\sigma_y$ & standard deviation of net income from the lottery component & income risk created by taking part in social contests & \texttt{POSIT} & --- & M15, M16, M17, M18 \\ \midrule
+X12 & $\varepsilon$ & standardised shock, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$ & --- & \texttt{NONE} & --- & M15 \\ \midrule
+X13 & $s$ & scale in $\sigma_y=s(1-\lambda)m$ & income risk per unit of income staked on social contests & \texttt{POSIT} & --- & M18 \\ \midrule
+X14 & $\lambda$ & share of income allocated to upskilling, with $1-\lambda$ allocated to the lottery & share of resources spent on human capital rather than on social navigation & \texttt{POSIT} & --- & M17, M18, M22 \\ \midrule
+\end{longtable}}
+
+\section{Outputs}
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{5.6cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{1.9cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{2.6cm}}
+\toprule ID & Symbol & Model meaning & Real-world referent & Support & Direction & Used in \\ \midrule \endhead
+X15 & $x(q)$\newline produced by M2 & $x_0(1-q)^{-1/a}$ & wage of the job at percentile $q$ & \texttt{POSIT} & increasing in $q$ (M2), decreasing in $a$ (M3) & M2, M3, M4, M10, M11, M13 \\ \midrule
+X16 & $C(m_i,m_k)$\newline produced by M7 & $(m_k-m_i)^b$ if $m_i<m_k$, $0$ otherwise & retraining cost of moving from job $i$ up to job $k$ & \texttt{POSIT} & zero for downward and lateral moves (M7) & M6, M7, M8, M9 \\ \midrule
+X17 & $S$\newline produced by M10 & $\sum_k x_k$ & total wage bill & \texttt{POSIT} & unchanged by any swap (M10) & M10, M11, M13 \\ \midrule
+X18 & $G_i$\newline produced by M11 & $\frac{S-Nx_i}{N-1}-L$ & expected net payoff to worker $i$ from social navigation, valued risk-neutrally & \texttt{POSIT} & sums to $-NL$ over workers (M12) & M11, M12, M13 \\ \midrule
+X19 & $\bar x_{\mathrm{part}}$\newline produced by M13 & $\frac{S-(N-1)L}{N}$, with $G_i>0\iff x_i<\bar x_{\mathrm{part}}$ & income below which social navigation pays in expectation & \texttt{POSIT} & --- & M13 \\ \midrule
+X20 & $\tfrac12u^{\prime\prime}(\bar y)\sigma_y^2$\newline produced by M15 & second-order risk term in expected utility & utility value of the income risk from social contests & \texttt{POSIT} & positive exactly where $u^{\prime\prime}>0$ (M16) & M15, M16 \\ \midrule
+X21 & $p$\newline produced by M18 & $\tfrac12u^{\prime\prime}s^2m^2$, coefficient on $(1-\lambda)^2$ & risk-premium coefficient of a worker with income $m$ & \texttt{POSIT} & scales with $m^2$ (M18) & M18 \\ \midrule
+\end{longtable}}
+\end{document}

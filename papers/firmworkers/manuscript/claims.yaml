@@ -1,0 +1,385 @@
+meta:
+  title: 'Inequality and Social Contests: manuscript skeleton'
+  manuscript: 'firmworkers_model.pdf, 15 March 2026 (Appendix: The closed N-player economy; Linear Approximation for Risk-Premium)'
+  pass: 2
+
+model_status:
+  LEAN_PROVED: 'Lean theorem compiles against Mathlib without sorry'
+  LEAN_WRITTEN: 'Lean theorem written, not yet compiled'
+  SYMPY: 'checked by the SymPy script, no Lean proof yet'
+  OPEN: 'stated in the manuscript, no formal object yet'
+  UNDERSPECIFIED: 'the manuscript leaves a primitive undefined'
+  ILL_POSED: 'not well-defined as printed'
+  REFUTED: 'contradicted by a proved or checked claim'
+
+literature_status:
+  VERBATIM: 'quote extracted from the primary text supplied, page given, checked against local text'
+  PRIMARY_WEB: 'primary full text read through the web tool, quote not verbatim-checked'
+  ABSTRACT: 'only the abstract or publisher summary was read'
+  SECONDARY: 'supported only by a secondary source'
+
+headline: []
+
+model:
+  - id: M1
+    anchor: 'Appendix, condition 3: "pareto income list x0 (1 - i)^{-1/a} for 1 <= i <= N"'
+    claim: '$x_i = x_0(1-i)^{-1/a}$ for $1 \le i \le N$ defines the income ladder'
+    assumptions: '$a>0$'
+    evidence: 'sympy/micro_checks.py::m1_printed_index_ill_posed. Base $1-i=0$ at $i=1$ and $1-i<0$ for $i\ge 2$'
+    status: ILL_POSED
+    symbols: [X1, X3, X4]
+  - id: M2
+    anchor: 'repair of M1 with a quantile index'
+    claim: '$x(q)=x_0(1-q)^{-1/a}$ is strictly increasing in $q$'
+    assumptions: '$x_0>0$, $a>0$, $q_1<q_2<1$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.pareto_strictMono_quantile'
+    lean: Isc.pareto_strictMono_quantile
+    status: LEAN_PROVED
+    symbols: [X2, X3, X4, X15]
+  - id: M3
+    anchor: 'repair of M1 with a quantile index'
+    claim: '$x(q)$ is strictly decreasing in $a$ at every interior quantile'
+    assumptions: '$x_0>0$, $0<a_1<a_2$, $0<q<1$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.pareto_strictAnti_tail'
+    lean: Isc.pareto_strictAnti_tail
+    status: LEAN_PROVED
+    symbols: [X2, X3, X4, X15]
+  - id: M4
+    anchor: 'repair of M1 with a quantile index'
+    claim: '$x(q_2;a_2)-x(q_1;a_2) < x(q_2;a_1)-x(q_1;a_1)$, so every income gap on the ladder shrinks as $a$ rises'
+    assumptions: '$x_0>0$, $0<a_1<a_2$, $0\le q_1<q_2<1$'
+    evidence: 'lean/IscLean/Gap.lean::Isc.pareto_gap_strictAnti_tail. Cross-check sympy/micro_checks.py::m4_adjacent_gap_decreasing_in_a'
+    lean: Isc.pareto_gap_strictAnti_tail
+    status: LEAN_PROVED
+    symbols: [X2, X3, X4, X15]
+  - id: M5
+    anchor: 'Appendix, condition 3: "A higher a corresponds to higher-stakes through income levels."'
+    claim: 'Higher $a$ raises the stakes across income levels'
+    assumptions: 'ladder of M2'
+    evidence: 'Contradicted by M3 and M4. $x(0.9)/x_0 = 4.642, 3.162, 2.154, 1.585$ at $a=1.5,2,3,5$'
+    status: REFUTED
+    symbols: [X4]
+  - id: M6
+    anchor: 'Appendix, condition 2: "C(mi, mk) = (mk - mi)^b for mi > mk, 0 for mi < mk"'
+    claim: 'The printed cost function charges $(m_k-m_i)^b$ for downward moves and nothing for upward moves'
+    assumptions: '$b>0$'
+    evidence: 'sympy/micro_checks.py::m6_printed_cost_complex_branch. Base $m_k-m_i<0$ on the charged branch, complex at $b=1/2$. Contradicts the next sentence of the manuscript, "no cost is paid for moving from a position of high-skill to low". $m_i=m_k$ unassigned'
+    status: ILL_POSED
+    symbols: [X5, X6, X16]
+  - id: M7
+    anchor: 'repair of M6'
+    claim: '$C(m_i,m_k)=(m_k-m_i)^b$ if $m_i<m_k$ and $0$ otherwise. Downward and lateral moves cost $0$'
+    assumptions: '$m_k\le m_i$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.upCost_down_free'
+    lean: Isc.upCost_down_free
+    status: LEAN_PROVED
+    symbols: [X5, X6, X16]
+  - id: M8
+    anchor: 'repair of M6'
+    claim: '$C(m_1,m_2)+C(m_2,m_3)\le C(m_1,m_3)$. Two adjacent upward moves cost no more than the direct jump'
+    assumptions: '$b\ge 1$, $m_1<m_2<m_3$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.upCost_steps_le_jump'
+    lean: Isc.upCost_steps_le_jump
+    status: LEAN_PROVED
+    symbols: [X5, X6, X16]
+  - id: M9
+    anchor: 'repair of M6'
+    claim: '$C(m_1,m_3)\le C(m_1,m_2)+C(m_2,m_3)$. The direct jump costs no more than two steps'
+    assumptions: '$0\le b\le 1$, $m_1<m_2<m_3$'
+    evidence: 'lean/IscLean/Ladder.lean::Isc.upCost_jump_le_steps'
+    lean: Isc.upCost_jump_le_steps
+    status: LEAN_PROVED
+    symbols: [X5, X6, X16]
+  - id: M10
+    anchor: 'Appendix, condition 1: "another worker k out of N workers is randomly selected to swap her job with worker i"'
+    claim: 'A swap of positions $i,k$ leaves total income $\sum_j x_j$ unchanged'
+    assumptions: '$x:\{1..N\}\to\mathbb{R}$'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.swap_preserves_total'
+    lean: Isc.swap_preserves_total
+    status: LEAN_PROVED
+    symbols: [X1, X8, X15, X17]
+  - id: M11
+    anchor: 'Appendix, condition 1'
+    claim: 'Expected net lottery gain $G_i=\frac{S-Nx_i}{N-1}-L$, with $S=\sum_k x_k$'
+    assumptions: '$k$ uniform over the $N-1$ other workers, risk-neutral valuation. Uniformity is added to the manuscript'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.lotteryGain_closed'
+    lean: Isc.lotteryGain_closed
+    status: LEAN_PROVED
+    symbols: [X1, X7, X8, X15, X17, X18]
+  - id: M12
+    anchor: 'Appendix, condition 1'
+    claim: '$\sum_i G_i=-NL$. The lottery is zero-sum in income and negative-sum net of entry costs'
+    assumptions: 'as M11, $N\ge 2$'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.lotteryGain_total'
+    lean: Isc.lotteryGain_total
+    status: LEAN_PROVED
+    symbols: [X1, X7, X18]
+  - id: M13
+    anchor: 'Appendix, condition 1'
+    claim: '$G_i>0 \iff x_i<\frac{S-(N-1)L}{N}$'
+    assumptions: 'as M11, $N\ge 2$'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.lotteryGain_pos_iff'
+    lean: Isc.lotteryGain_pos_iff
+    status: LEAN_PROVED
+    symbols: [X1, X7, X15, X17, X18, X19]
+  - id: M14
+    anchor: 'Appendix, condition 1: "Worker k does not pay any additional cost other than the fixed lottery cost L"'
+    claim: 'The swap partner $k$ is drawn from lottery participants'
+    assumptions: ''
+    evidence: 'The manuscript does not say whether $k$ is drawn from participants or from all $N$ workers. If from all $N$, non-participants are swapped without choosing to play'
+    status: UNDERSPECIFIED
+    symbols: [X8]
+  - id: M15
+    anchor: 'Appendix, Linear Approximation: "E[u(y)] = u(ybar) + 1/2 u′′(ybar) sigma_y^2"'
+    claim: '$\mathbb{E}[u(\bar y)+u^{\prime}(\bar y)\sigma\varepsilon+\tfrac12u^{\prime\prime}(\bar y)\sigma^2\varepsilon^2]=u(\bar y)+\tfrac12u^{\prime\prime}(\bar y)\sigma^2$'
+    assumptions: '$\varepsilon$ with finite support, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$. General distributions not covered'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.taylor_expectation'
+    lean: Isc.taylor_expectation
+    status: LEAN_PROVED
+    symbols: [X9, X10, X11, X12, X20]
+  - id: M16
+    anchor: 'Appendix, Linear Approximation: "positive when u′′ > 0"'
+    claim: '$\tfrac12u^{\prime\prime}\sigma^2>0\iff u^{\prime\prime}>0$'
+    assumptions: '$\sigma\ne 0$'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.premium_pos_iff'
+    lean: Isc.premium_pos_iff
+    status: LEAN_PROVED
+    symbols: [X9, X11, X20]
+  - id: M17
+    anchor: 'Appendix, Linear Approximation: "sigma_y^2 = c((1 - lambda_H) m_H)^2 = p_H (1 - lambda_H)^2 (p_H < 0)"'
+    claim: 'The lottery variance equals $p(1-\lambda)^2$ with $p<0$'
+    assumptions: ''
+    evidence: 'sympy/micro_checks.py::m17_variance_sign_conflict. Left side $\ge 0$, right side $<0$ for $\lambda<1$'
+    status: ILL_POSED
+    symbols: [X11, X14]
+  - id: M18
+    anchor: 'repair of M17'
+    claim: 'If $\sigma_y=s(1-\lambda)m$ then $\tfrac12u^{\prime\prime}\sigma_y^2=(\tfrac12u^{\prime\prime}s^2m^2)(1-\lambda)^2$. The coefficient $p=\tfrac12u^{\prime\prime}s^2m^2$ varies with income $m$'
+    assumptions: ''
+    evidence: 'lean/IscLean/Lottery.lean::Isc.premium_scales_with_income'
+    lean: Isc.premium_scales_with_income
+    status: LEAN_PROVED
+    symbols: [X6, X9, X11, X13, X14, X21]
+  - id: M19
+    anchor: 'Appendix, Linear Approximation: "positive when u′′ > 0 (convex region -> below r)"'
+    claim: 'The convex region of $u$ lies below a reference income $r$'
+    assumptions: ''
+    evidence: '$r$ is not defined in the manuscript. No functional form of $u$ is given'
+    status: UNDERSPECIFIED
+    symbols: [X9]
+  - id: M20
+    anchor: 'Appendix: "the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery"'
+    claim: 'In long-run equilibrium high ranks choose the downgrade and low ranks choose the lottery'
+    assumptions: ''
+    evidence: 'No functional form of $u$, no equilibrium concept and no transition kernel are defined. M13 gives the risk-neutral version only'
+    status: OPEN
+    symbols: [X7, X9]
+  - id: M21
+    anchor: 'Appendix: "higher costs (b) discourage mobility and higher stakes (a) encourage bets"'
+    claim: 'Mobility falls in $b$. Lottery play rises in $a$'
+    assumptions: ''
+    evidence: 'Mobility measure undefined. The second half presumes higher $a$ means higher stakes, which M5 refutes for the printed ladder'
+    status: OPEN
+    symbols: [X4, X5]
+  - id: M22
+    anchor: 'Appendix: "The more a worker upskills oneself, the harder it becomes for the worker to move up (as the swap pool gets limited)"'
+    claim: 'Upward mobility falls as a worker upskills'
+    assumptions: ''
+    evidence: 'No formal object links upskilling to the swap pool'
+    status: OPEN
+    symbols: [X14]
+  - id: M23
+    anchor: 'Appendix: "The long-term transition-probability can thus be determined from the costs of moving up the ladder"'
+    claim: 'A long-run transition kernel on ranks follows from the cost function'
+    assumptions: ''
+    evidence: 'No kernel is defined'
+    status: OPEN
+    symbols: [X1, X5]
+
+literature:
+  - id: L1
+    ref: CunhaHeckman2007
+    source: 'Cunha, F. and Heckman, J. J. (2007). The Technology of Skill Formation. American Economic Review 97(2), 31--47'
+    claim: 'Skill formation is written $\theta_{t+1}=f_t(h,\theta_t,I_t)$, with $\theta$ the skill stock, $h$ parental characteristics and $I$ investment. Self-productivity is $\partial f_t/\partial\theta_t>0$. Dynamic complementarity is $\partial^2 f_t/\partial\theta_t\partial I_t>0$'
+    evidence_seen: 'NBER WP 12840 full text via web tool. Citation from IZA DP 2550 imprint'
+    open_copy: 'https://www.nber.org/papers/w12840'
+    quote: ''
+    page: ''
+    status: PRIMARY_WEB
+  - id: L2
+    ref: GibbonsWaldman1999
+    source: 'Gibbons, R. and Waldman, M. (1999). A Theory of Wage and Promotion Dynamics Inside Firms. Quarterly Journal of Economics 114(4), 1321--1358'
+    claim: 'The model combines job assignment, on-the-job human capital acquisition and learning'
+    evidence_seen: 'NBER WP 6454 abstract page'
+    open_copy: 'https://www.nber.org/papers/w6454'
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L3
+    ref: Loury1977
+    source: 'Loury, G. C. (1977). A Dynamic Theory of Racial Income Differences. In Wallace, P. A. and LaMond, A. M. (eds.), Women, Minorities, and Employment Discrimination, Lexington Books, 153--186'
+    claim: 'Under racial social grouping, children with equal family income face different community environments and different costs of becoming skilled. Equal opportunity alone need not remove an initial racial earnings gap'
+    evidence_seen: 'University of Chicago teaching handout summarising the chapter'
+    open_copy: ''
+    quote: ''
+    page: ''
+    status: SECONDARY
+  - id: L4
+    ref: Borjas1992
+    source: 'Borjas, G. J. (1992). Ethnic Capital and Intergenerational Mobility. Quarterly Journal of Economics 107(1), 123--150'
+    claim: 'A child''s skills depend on parental skills and on the average skill of the parents'' ethnic group in the parents'' generation'
+    evidence_seen: 'NBER WP 3788 abstract page'
+    open_copy: 'https://gborjas.scholars.harvard.edu/resource/qje1992pdf'
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L5
+    ref: Benabou1996
+    source: 'B\''enabou, R. (1996). Equity and Efficiency in Human Capital Investment: The Local Connection. Review of Economic Studies 63(2), 237--264'
+    claim: 'Small differences in endowments, preferences or credit access can produce large polarisation through community formation. Equilibrium stratification tends to be excessive'
+    evidence_seen: 'IDEAS abstract page. Full text paywalled'
+    open_copy: ''
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L6
+    ref: BowlesLourySethi2014
+    source: 'Bowles, S., Loury, G. C. and Sethi, R. (2014). Group Inequality. Journal of the European Economic Association 12(1), 129--152'
+    claim: 'Skill cost $c(a,\sigma)$ falls in ability and in peer skill $\sigma_i=\eta s_i+(1-\eta)s$, where $\eta$ is the own-group share of social affiliates. Group inequality can persist under identical ability distributions only if segregation $\eta$ is high enough. Stability of the equal state changes at a threshold $\hat\eta$ (Proposition 3)'
+    evidence_seen: 'Full text on G. Loury''s Brown University page via web tool'
+    open_copy: 'https://www.brown.edu/Departments/Economics/Faculty/Glenn_Loury/louryhomepage/cvandbio/GROUP%20INEQUALITY%20-%20Bowles%20-%202014%20-%20Journal%20of%20the%20European%20Economic%20Association%20-%20Wiley%20Online%20Library.pdf'
+    quote: ''
+    page: ''
+    status: PRIMARY_WEB
+  - id: L7
+    ref: CalvoArmengolJackson2004
+    source: 'Calv\''o-Armengol, A. and Jackson, M. O. (2004). The Effects of Social Networks on Employment and Inequality. American Economic Review 94(3), 426--453 (IDEAS lists 426--454)'
+    claim: 'Job information arrives at rate $a$ and is passed by employed agents to unemployed contacts. Long-run employment of path-connected agents is positively correlated (Proposition 1). Re-employment probability falls with spell length (Proposition 3). Groups with identical networks but worse initial states have persistently lower employment (Proposition 4)'
+    evidence_seen: 'Full text on a course page (NYU) via web tool'
+    open_copy: 'https://pages.nyu.edu/debraj/Courses/NewRes05/Papers/CalvoJackson.pdf'
+    quote: ''
+    page: ''
+    status: PRIMARY_WEB
+  - id: L8
+    ref: Rosen1986
+    source: 'Rosen, S. (1986). Prizes and Incentives in Elimination Tournaments. American Economic Review 76(4), 701--715'
+    claim: 'In sequential elimination tournaments the top prize must be raised to sustain effort in later rounds'
+    evidence_seen: 'IDEAS abstract page'
+    open_copy: 'https://www.nber.org/papers/w1668'
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L9
+    ref: GhiglinoGoyal2010
+    source: 'Ghiglino, C. and Goyal, S. (2010). Keeping Up with the Neighbors: Social Interaction in a Market Economy. Journal of the European Economic Association 8(1), 90--119'
+    claim: 'Utility falls in neighbours'' consumption. Equilibrium consumption depends on network centrality. Integrating segregated communities lowers the utility of the poorer'
+    evidence_seen: 'IDEAS abstract page. Full text paywalled'
+    open_copy: ''
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L10
+    ref: ImmorlicaEtAl2017
+    source: 'Immorlica, N., Kranton, R., Manea, M. and Stoddard, G. (2017). Social Status in Networks. American Economic Journal: Microeconomics 9(1), 1--30'
+    claim: 'Equilibria partition agents into classes. Network cohesion determines each class''s action. The highest class is the largest maximally cohesive set'
+    evidence_seen: 'Duke Scholars abstract page. Definition of status not seen'
+    open_copy: ''
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L11
+    ref: Luttmer2005
+    source: 'Luttmer, E. F. P. (2005). Neighbors as Negatives: Relative Earnings and Well-Being. Quarterly Journal of Economics 120(3), 963--1002'
+    claim: 'Holding own income fixed, higher local average earnings are associated with lower self-reported happiness'
+    evidence_seen: 'NBER WP 10667 abstract page'
+    open_copy: 'https://www.nber.org/papers/w10667'
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L12
+    ref: AltonjiPierret2001
+    source: 'Altonji, J. G. and Pierret, C. R. (2001). Employer Learning and Statistical Discrimination. Quarterly Journal of Economics 116(1), 313--350'
+    claim: 'The wage return to hard-to-observe productivity rises with experience and the return to education falls. Firms do not fully use the information in race'
+    evidence_seen: 'NBER WP 6279 abstract page'
+    open_copy: 'https://www.nber.org/papers/w6279'
+    quote: ''
+    page: ''
+    status: ABSTRACT
+  - id: L13
+    ref: FershtmanMurphyWeiss1996
+    source: 'Fershtman, C., Murphy, K. M. and Weiss, Y. (1996). Social Status, Education, and Growth. Journal of Political Economy 104(1), 108--132'
+    claim: 'When status matters, low-ability high-wealth individuals can crowd high-ability low-wealth individuals out of schooling, which lowers growth. A more equal wealth distribution can raise growth by reducing demand for status'
+    evidence_seen: 'IDEAS abstract page of the Tel Aviv working paper'
+    open_copy: ''
+    quote: ''
+    page: ''
+    status: ABSTRACT
+
+concluding: []
+
+references:
+  - key: CunhaHeckman2007
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Candidate law of motion for the human capital stock $h$ in the micro state (TODO: state space)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the law of motion for $h$ has no cited form and must be posited'
+  - key: GibbonsWaldman1999
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Precedent for a state that combines a job ladder with on-the-job human capital accumulation (TODO: state space)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the joint rank and human capital state has no cited precedent'
+  - key: Loury1977
+    math_content: 'to confirm'
+    lean: NOT_STARTED
+    reason: 'Precedent for a group-level effect on the cost of acquiring skill (TODO: where categorical friction enters)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the route by which categorical friction enters skill acquisition has no cited origin'
+  - key: Borjas1992
+    math_content: 'to confirm'
+    lean: NOT_STARTED
+    reason: 'Precedent for group-average skill entering an individual''s skill formation (TODO: where categorical friction enters)'
+    impact_if_removed: 'No current claim rests on this paper. Without it group capital in the law of motion for $h$ has no cited basis'
+  - key: Benabou1996
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Precedent for local spillovers and stratification amplifying small differences (TODO: locality)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the locality assumption has one fewer cited precedent'
+  - key: BowlesLourySethi2014
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Candidate operationalisation of categorical friction as an own-group affiliation share in peer skill (TODO: where categorical friction enters)'
+    impact_if_removed: 'No current claim rests on this paper. Without it categorical friction has no cited functional form'
+  - key: CalvoArmengolJackson2004
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Candidate propagation channel for the rank kernel: opportunities passed through contacts (TODO: rank kernel)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the propagation channel of the kernel has no cited mechanism'
+  - key: Rosen1986
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Candidate rank-local kernel through sequential pairwise contests (TODO: rank kernel)'
+    impact_if_removed: 'No current claim rests on this paper. Without it rank-local transitions have no cited contest structure'
+  - key: GhiglinoGoyal2010
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Candidate reference-set rank: payoffs depend on neighbours rather than on the whole population (TODO: rank kernel)'
+    impact_if_removed: 'No current claim rests on this paper. Without it reference-set rank has one fewer cited precedent'
+  - key: ImmorlicaEtAl2017
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Candidate reference-set rank through status in networks (TODO: rank kernel)'
+    impact_if_removed: 'No current claim rests on this paper. Without it reference-set rank has one fewer cited precedent'
+  - key: Luttmer2005
+    math_content: 'no'
+    lean: NOT_APPLICABLE
+    reason: 'Empirical motivation that comparisons are local (TODO: locality)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the locality assumption has no cited empirical motivation'
+  - key: AltonjiPierret2001
+    math_content: 'to confirm'
+    lean: NOT_STARTED
+    reason: 'Candidate observer-learning channel, and evidence that employers do not fully use race information (TODO: rank kernel, categorical friction)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the observer-learning channel and the premise that firms do not act on categorisation have no cited basis'
+  - key: FershtmanMurphyWeiss1996
+    math_content: 'yes'
+    lean: NOT_STARTED
+    reason: 'Positioning of the inequality and growth claim against a status-and-schooling model (deferred with the macro model)'
+    impact_if_removed: 'No current claim rests on this paper. Without it the growth positioning has one fewer cited comparator'

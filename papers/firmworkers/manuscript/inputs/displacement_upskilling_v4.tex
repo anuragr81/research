@@ -1,0 +1,983 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{parskip}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\title{\textbf{Wage Inequality, Upskilling, and Long-Run Growth:\\
+A Three-Player Model}\\[0.8em]
+\large Working Paper}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We develop a tractable three-player model connecting wage inequality,
+worker upskilling decisions, and firm asset accumulation. A single
+parameter $\mu \in (0,\tfrac{1}{2})$ --- the income share of the
+lower-ranked worker group --- governs the entire distribution of wages.
+Workers allocate income between upskilling investment and participation
+in a zero-sum displacement lottery. Preferences are modelled using
+linear utility augmented by a signed curvature parameter $\theta_s$
+per worker: $\theta_L > 0$ for the lower-income worker (risk-seeking)
+and $\theta_H < 0$ for the higher-income worker (risk-averse). This
+two-parameter specification replaces the full Friedman-Savage machinery
+while preserving the essential risk asymmetry. All equilibrium
+quantities --- upskilling fractions, lottery stakes, firm asset
+accumulation, and steady-state wage split --- remain in closed form.
+We distinguish two upskilling measures: an individual measure
+$K^*_{\mathrm{ind}} = 2\kappa^{\min}(\mu)$ independent of population
+structure, and an aggregate measure
+$K^*_{\mathrm{agg}} = (W+1)\kappa^{\min}(\mu)$ weighted by the
+population mass ratio $W = i^*/(N-i^*)$, which enters firm growth
+through the upskilling index $\Phi(\mu)$. We address two questions:
+how do workers respond to wage inequality $\mu$, and what constraints
+does $\mu$ place on long-term growth?
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------
+\section{Introduction}
+%----------------------------------------------------------------------
+
+How should a firm set wages across skill groups to maximise long-run
+asset growth? And how do workers in different income groups respond to
+the wage structure they face? This paper provides a unified framework
+with closed-form answers to both questions.
+
+There are three players: a lower-income worker $L$, a higher-income
+worker $H$, and a firm. The firm holds productive assets and pays wages
+as a share of those assets. It chooses a wage-split parameter
+$\mu \in (0, \tfrac{1}{2})$ each period --- the income share of the
+lower-income group --- trading off the upskilling return from greater
+equality against a convex restructuring cost. Workers receive wages
+determined by $\mu$ and split income between upskilling investment and
+participation in a zero-sum displacement lottery. A participation
+constraint ensures each worker invests enough to maintain a subsistence
+base income.
+
+Preferences are modelled parsimoniously. The baseline is linear utility
+$u(m) = m$, augmented by a single curvature correction per worker:
+\begin{equation}
+  u_s(m) = m + \frac{\theta_s}{2}(m - \bar{b})^2
+  \label{eq:utility_intro}
+\end{equation}
+where $\bar{b}$ is the subsistence income and $\theta_s = u_s''(\bar{b})$
+is the signed curvature at subsistence. Setting $\theta_L > 0$ makes
+worker $L$ locally risk-seeking (convex utility) and $\theta_H < 0$
+makes worker $H$ locally risk-averse (concave utility). This replaces
+the three-parameter Friedman-Savage specification $(\alpha_u, \beta_u,
+m^*)$ with two parameters $(\theta_L, \theta_H)$, while retaining the
+key qualitative asymmetry. Crucially, these parameters affect only the
+welfare evaluation of lottery participation, not the equilibrium
+allocation quantities, which remain unchanged from the linear case.
+
+A central structural result concerns the role of the population mass
+ratio $W = i^*/(N-i^*)$, where $i^*$ is the class barrier separating
+lower- and upper-income workers in the underlying $N$-worker model.
+At the individual level, each representative worker's upskilling
+investment $\kappa^{\min}(\mu)$ is determined solely by the
+participation constraint, with no dependence on $W$. At the
+economy-wide level, however, the population-weighted aggregate
+$(W+1)\kappa^{\min}(\mu)$ does depend on $W$ and is the quantity the
+firm internalises through its upskilling index $\Phi(\mu)$. This
+distinction --- $W$ enters growth through aggregation, not through
+individual incentives --- is a main structural result of the model.
+
+%----------------------------------------------------------------------
+\section{Model Setup}
+%----------------------------------------------------------------------
+
+\subsection{Players and Incomes}
+
+There are three strategic players: worker $L$, worker $H$, and a firm.
+The firm holds asset stock $A_t$ and distributes total income $R$ to
+workers. It chooses the income-split parameter $\mu \in (0, \tfrac{1}{2})$:
+\begin{equation}
+  M_L = R\mu, \qquad M_H = R(1-\mu)
+  \label{eq:incomes}
+\end{equation}
+Since $\mu < \tfrac{1}{2}$, worker $H$ always earns more than worker
+$L$. Higher $\mu$ means greater wage equality; lower $\mu$ means
+greater inequality. The income ratio $M_H/M_L = (1-\mu)/\mu$ is
+strictly decreasing in $\mu$.
+
+\begin{definition}[Wage inequality parameter]
+$\mu \in (0, \tfrac{1}{2})$ is the income share of worker $L$,
+chosen by the firm each period. It is the single measure of wage
+inequality in the model.
+\end{definition}
+
+In the underlying $N$-worker model with a Pareto income ladder
+$m_i = x_0(1 - i/(N+1))^{-1/\alpha}$ and a class barrier at rank
+$i^*$, the two-player reduction yields $\mu$ as the lower hump's
+share of total representative income:
+\begin{equation}
+  \mu \approx \frac{\displaystyle\int_0^{i^*/N}
+    x_0(1-s)^{-1/\alpha}\,ds}
+  {\displaystyle\int_0^{1}
+    x_0(1-s)^{-1/\alpha}\,ds}
+  \label{eq:mu_micro}
+\end{equation}
+In the macroeconomic model $\mu$ is taken as the firm's policy
+instrument rather than a fixed structural outcome.
+
+\subsection{The Population Mass Ratio $W$}
+
+The population mass ratio is:
+\begin{equation}
+  W = \frac{i^*}{N - i^*} \geq 1
+  \label{eq:W_def}
+\end{equation}
+Under the Pareto distribution the lower group is generically more
+numerous ($W \geq 1$). The parameter $W$ enters the model in two
+distinct and separate ways:
+\begin{enumerate}
+  \item \textbf{Lottery pool}: $W$ amplifies worker $L$'s aggregate
+        stake in the prize pot, reflecting the greater frequency of
+        lower-rank displacement events per period.
+  \item \textbf{Aggregate upskilling}: $W$ weights the lower group's
+        upskilling in the population-weighted total $(W+1)\kappa^{\min}$,
+        which the firm uses to compute the return on its wage bill.
+\end{enumerate}
+$W$ does \emph{not} affect any individual worker's budget or
+participation constraint. Each representative worker invests
+$\kappa^{\min}(\mu)$ regardless of $W$.
+
+\subsection{Worker Budget and Allocation}
+
+Each worker $s \in \{L, H\}$ allocates fraction $\lambda_s \in [0,1]$
+of income $M_s$ to upskilling and the remainder to the lottery:
+\begin{equation}
+  \kappa_s = \lambda_s M_s \quad \text{(upskilling)},
+  \qquad
+  \ell_s = (1-\lambda_s)M_s \quad \text{(lottery stake)}
+  \label{eq:budget}
+\end{equation}
+Upskilling produces output $f(\kappa_s) = \kappa_s^\gamma$,
+$\gamma \in (0,1)$, with diminishing returns. The certain base income
+after upskilling and human capital depreciation $\delta_w > 0$:
+\begin{equation}
+  b_s(\lambda_s) = \kappa_s + \kappa_s^\gamma - \delta_w
+  \label{eq:base_income}
+\end{equation}
+
+\subsection{Two Upskilling Measures}
+
+\begin{definition}[Individual upskilling total]
+$K^*_{\mathrm{ind}} = \kappa_L^* + \kappa_H^* = 2\kappa^{\min}(\mu)$
+is the sum of the two representative agents' equilibrium investments.
+It is independent of $W$.
+\end{definition}
+
+\begin{definition}[Aggregate upskilling total]
+$K^*_{\mathrm{agg}} = W\kappa_L^* + \kappa_H^* = (W+1)\kappa^{\min}(\mu)$
+is the population-weighted sum. It enters the firm's asset accumulation
+through the upskilling index $\Phi(\mu) = K^*_{\mathrm{agg}}/R$.
+\end{definition}
+
+The ratio $K^*_{\mathrm{agg}}/K^*_{\mathrm{ind}} = (W+1)/2 \geq 1$.
+For $W > 1$, aggregate upskilling exceeds the two-agent sum because
+the more numerous lower group amplifies the economy-wide human capital
+base.
+
+\subsection{Zero-Sum Displacement Lottery}
+
+The lottery pool is:
+\begin{equation}
+  \Lambda = W(1-\lambda_L)M_L + (1-\lambda_H)M_H = W\ell_L + \ell_H
+  \label{eq:pool}
+\end{equation}
+Each worker wins the pool with probability $\tfrac{1}{2}$. Outcome
+incomes are:
+\begin{align}
+  M_L^{\mathrm{win}}  &= b_L + (1-\lambda_H)M_H \label{eq:MLwin} \\
+  M_L^{\mathrm{lose}} &= b_L - W(1-\lambda_L)M_L \label{eq:MLlose} \\
+  M_H^{\mathrm{win}}  &= b_H + W(1-\lambda_L)M_L \label{eq:MHwin} \\
+  M_H^{\mathrm{lose}} &= b_H - (1-\lambda_H)M_H \label{eq:MHlose}
+\end{align}
+The lottery is strictly zero-sum: $\Lambda$ is redistributed, not
+created. Only upskilling changes total income.
+
+\subsection{Participation Constraint}
+
+Each worker must maintain base income above a subsistence floor
+$\bar{b}(\mu) = \bar{b}_0 R\mu$, proportional to the lower worker's
+wage:
+\begin{equation}
+  b_s(\lambda_s) \geq \bar{b}(\mu)
+  \iff
+  \kappa_s + \kappa_s^\gamma \geq \bar{b}_0 R\mu + \delta_w
+  \label{eq:pc}
+\end{equation}
+The minimum upskilling satisfying this constraint, $\kappa^{\min}(\mu)$,
+solves:
+\begin{equation}
+  \kappa^{\min} + \left(\kappa^{\min}\right)^\gamma
+  = \bar{b}_0 R\mu + \delta_w
+  \label{eq:kappa_min}
+\end{equation}
+For $\gamma = 2$, adopted throughout for closed form:
+\begin{equation}
+  \kappa^{\min}(\mu)
+  = \frac{-1 + \sqrt{1 + 4(\bar{b}_0 R\mu + \delta_w)}}{2}
+  \label{eq:kappa_min_gamma2}
+\end{equation}
+This is strictly increasing and concave in $\mu$, with sensitivity:
+\begin{equation}
+  \frac{d\kappa^{\min}}{d\mu} \equiv \Psi(\mu)
+  = \frac{\bar{b}_0 R}{1 + 2\kappa^{\min}(\mu)} > 0
+  \label{eq:dkdmu}
+\end{equation}
+
+%----------------------------------------------------------------------
+\section{Preferences: Linear Utility with Curvature Correction}
+%----------------------------------------------------------------------
+
+\subsection{The Two-Parameter Specification}
+
+We use linear utility augmented by a quadratic curvature correction
+evaluated at the subsistence income $\bar{b}$:
+\begin{equation}
+  u_s(m) = m + \frac{\theta_s}{2}(m - \bar{b})^2
+  \label{eq:utility}
+\end{equation}
+where $\theta_s \in \mathbb{R}$ is the curvature parameter for worker
+$s$. The derivatives are:
+\begin{align}
+  u_s'(m) &= 1 + \theta_s(m - \bar{b}) \label{eq:uprime} \\
+  u_s''(m) &= \theta_s \label{eq:upprime}
+\end{align}
+The curvature $u_s'' = \theta_s$ is constant --- the simplest possible
+departure from linearity. We impose:
+\begin{equation}
+  \theta_L > 0 \quad \text{(worker $L$: convex utility, risk-seeking)},
+  \qquad
+  \theta_H < 0 \quad \text{(worker $H$: concave utility, risk-averse)}
+  \label{eq:theta_signs}
+\end{equation}
+This two-parameter specification directly encodes the Friedman-Savage
+risk asymmetry without requiring an inflection point or a polynomial
+of degree greater than two.
+
+\begin{remark}
+Equation~(\ref{eq:utility}) is equivalent to a second-order Taylor
+expansion of any smooth utility function around $\bar{b}$, retaining
+only the zeroth, first, and second-order terms. The parameter
+$\theta_s = u_s''(\bar{b})$ is the Arrow-Pratt numerator evaluated at
+subsistence. The Arrow-Pratt denominator $u_s'(\bar{b}) = 1$ under
+this specification, giving absolute risk aversion
+$A_s(\bar{b}) = -\theta_s$.
+\end{remark}
+
+\subsection{Risk Premia}
+
+For a binary lottery paying $\bar{b} + x$ or $\bar{b} - y$ with equal
+probability, the expected utility under specification~(\ref{eq:utility})
+is:
+\begin{equation}
+  \frac{1}{2}u_s(\bar{b}+x) + \frac{1}{2}u_s(\bar{b}-y)
+  = \bar{b} + \frac{x-y}{2}
+    + \frac{\theta_s}{2}\cdot\frac{x^2+y^2}{2}
+  \label{eq:EU_lottery}
+\end{equation}
+The first two terms are the linear expected value. The third term
+$\frac{\theta_s}{4}(x^2 + y^2)$ is the risk premium correction.
+Using the compact notation:
+\begin{align}
+  a(\mu) &= R\mu - \kappa^{\min}(\mu)
+  && \text{(worker $L$ stake)} \label{eq:a} \\
+  c(\mu) &= R(1-\mu) - \kappa^{\min}(\mu)
+  && \text{(worker $H$ stake)} \label{eq:c} \\
+  \Pi(\mu) &= Wa(\mu) + c(\mu)
+  && \text{(total pool spread)} \label{eq:Pi} \\
+  \epsilon_L(\mu) &= \tfrac{c(\mu) - Wa(\mu)}{2}
+  && \text{(net expected transfer to $L$)} \label{eq:epsilonL} \\
+  \epsilon_H(\mu) &= -\epsilon_L(\mu)
+  && \text{(net expected transfer to $H$)} \label{eq:epsilonH}
+\end{align}
+the win and lose amounts for worker $s$ are
+$x_s = \Pi_{-s}$ (prize received) and $y_s = W_s\ell_s$ (stake lost).
+Substituting into equation~(\ref{eq:EU_lottery}):
+\begin{equation}
+  V_s = \bar{b} + \epsilon_s
+        + \underbrace{\frac{\theta_s}{4}
+        \!\left(\Pi_{-s}^2 + (W_s\ell_s)^2\right)}_{\tilde\rho_s}
+  \label{eq:Vs_full}
+\end{equation}
+At the constrained equilibrium where $b_s = \bar{b}$,
+$\Pi_L = c$, $\Pi_H = Wa$, $W_L\ell_L = Wa$, $W_H\ell_H = c$:
+\begin{equation}
+  \tilde\rho_L = \frac{\theta_L}{4}(c^2 + W^2a^2),
+  \qquad
+  \tilde\rho_H = \frac{\theta_H}{4}(W^2a^2 + c^2)
+  \label{eq:rho_explicit}
+\end{equation}
+Writing $\Sigma^2 \equiv c^2 + W^2a^2$, the risk premia take the
+symmetric form:
+\begin{equation}
+  \boxed{\tilde\rho_s = \frac{\theta_s}{4}\Sigma^2}
+  \label{eq:rho_simple}
+\end{equation}
+Since $\theta_L > 0$: $\tilde\rho_L > 0$ --- worker $L$ gains welfare
+from the lottery beyond expected income. Since $\theta_H < 0$:
+$\tilde\rho_H < 0$ --- worker $H$ loses welfare from the lottery.
+
+The net social risk premium is:
+\begin{equation}
+  \tilde\rho_L + \tilde\rho_H
+  = \frac{\theta_L + \theta_H}{4}\,\Sigma^2
+  \label{eq:social_premium}
+\end{equation}
+The lottery displacement mechanism is socially desirable if and only if:
+\begin{equation}
+  \theta_L + \theta_H > 0
+  \label{eq:social_condition}
+\end{equation}
+The lower worker's risk-seeking gain outweighs the upper worker's
+risk-aversion loss. This is a single inequality in two observable
+parameters, requiring no reference to an inflection point.
+
+\subsection{Equilibrium Utility}
+
+At the constrained equilibrium ($b_s = \bar{b}$), the full utility
+is:
+\begin{equation}
+  V_s = \underbrace{\bar{b}}_{\text{subsistence}}
+      + \underbrace{\epsilon_s}_{\text{expected transfer}}
+      + \underbrace{\frac{\theta_s}{4}\Sigma^2}_{\text{risk premium}}
+  \label{eq:V_final}
+\end{equation}
+The three terms are cleanly separated. The curvature parameters
+$(\theta_L, \theta_H)$ affect only the third term. They do not enter
+the participation constraint, the optimal $\lambda_s^*$, the firm's
+FOC, or any accumulation object. This clean separation is the main
+advantage of the quadratic specification: risk preferences are welfare
+relevant but allocation neutral.
+
+%----------------------------------------------------------------------
+\section{Derivation of Optimal $\lambda_s^*$}
+%----------------------------------------------------------------------
+
+\subsection{Why the FOC Has No Interior Solution}
+
+Worker $s$ maximises $V_s(\lambda_s;\lambda_{-s})$ subject to
+$b_s(\lambda_s) \geq \bar{b}$. Differentiating with respect to
+$\lambda_s$:
+\begin{equation}
+  \frac{\partial V_s}{\partial\lambda_s}
+  = \frac{\partial b_s}{\partial\lambda_s}
+    + \frac{\partial\epsilon_s}{\partial\lambda_s}
+    + \frac{\theta_s}{4}\frac{\partial\Sigma^2}{\partial\lambda_s}
+  \label{eq:dV_full}
+\end{equation}
+Using $\partial b_s/\partial\lambda_s = M_s(1+\gamma\kappa_s^{\gamma-1})>0$,
+$\partial\epsilon_s/\partial\lambda_s$ from the stake expressions, and
+$\partial\Sigma^2/\partial\lambda_s$, each component is bounded and
+finite. However, the dominant term is $\partial b_s/\partial\lambda_s
+> 0$: raising $\lambda_s$ raises base income in both outcome states,
+and for small $\theta_s$ this dominates. More precisely, taking the
+full derivative and examining signs shows $\partial V_s/\partial\lambda_s
+> 0$ over the relevant range, so $V_s$ is increasing in $\lambda_s$.
+There is no interior zero of the FOC.
+
+The economic reason is that raising $\lambda_s$ improves both the win
+outcome ($b_s + \Pi_{-s}$ rises as $b_s$ rises) and the lose outcome
+($b_s - W_s\ell_s$ rises as $b_s$ rises and $\ell_s$ falls). Both
+states improve simultaneously, so the unconstrained optimum is the
+corner $\lambda_s = 1$.
+
+\subsection{The Binding Participation Constraint}
+
+Since $V_s$ is increasing in $\lambda_s$ and the worker cannot set
+$\lambda_s = 1$ without violating the subsistence floor
+(at $\lambda_s = 1$, $\kappa_s = M_s$ but $b_s$ may exceed $\bar{b}$
+--- the constraint binds from below as $\lambda_s$ is pushed up until
+$b_s$ just reaches $\bar{b}$), the optimal solution is:
+\begin{equation}
+  b_s(\lambda_s^*) = \bar{b}
+  \iff
+  \kappa_s^* + (\kappa_s^*)^\gamma = \bar{b} + \delta_w
+  \label{eq:binding_pc}
+\end{equation}
+This is precisely the equation defining $\kappa^{\min}$. Since
+$\kappa_s^* = \lambda_s^* M_s = \lambda_s^* RM_s^0$:
+\begin{equation}
+  \lambda_s^* = \frac{\kappa^{\min}(\mu)}{RM_s^0}
+  \label{eq:lambda_star_general}
+\end{equation}
+For worker $L$ ($M_L^0 = \mu$) and worker $H$ ($M_H^0 = 1-\mu$):
+\begin{equation}
+  \boxed{
+    \lambda_L^*(\mu) = \frac{\kappa^{\min}(\mu)}{R\mu},
+    \qquad
+    \lambda_H^*(\mu) = \frac{\kappa^{\min}(\mu)}{R(1-\mu)}
+  }
+  \label{eq:lambda_star}
+\end{equation}
+
+\subsection{Ordering and Separation}
+
+Since $R\mu < R(1-\mu)$, the ordering $\lambda_L^* > \lambda_H^*$
+holds always. The lower-income worker invests a larger fraction in
+upskilling because the same absolute floor $\kappa^{\min}$ represents
+a larger share of a smaller budget. This is an income-scaling effect,
+not a preference effect. The curvature parameters $(\theta_L, \theta_H)$
+do not appear in equation~(\ref{eq:lambda_star}).
+
+%----------------------------------------------------------------------
+\section{Question 1: Worker Responses to Wage Inequality $\mu$}
+\label{sec:workers}
+%----------------------------------------------------------------------
+
+\subsection{Upskilling Responses}
+
+Differentiating equation~(\ref{eq:lambda_star}):
+\begin{align}
+  \frac{d\lambda_L^*}{d\mu}
+  &= \frac{\Psi(\mu) - \kappa^{\min}(\mu)/\mu}{R\mu}
+  \label{eq:dlL_dmu} \\[4pt]
+  \frac{d\lambda_H^*}{d\mu}
+  &= \frac{\Psi(\mu) + \kappa^{\min}(\mu)/(1-\mu)}{R(1-\mu)}
+  > 0 \quad \text{always}
+  \label{eq:dlH_dmu}
+\end{align}
+Worker $H$ always raises their upskilling fraction when equality rises
+because both terms in the numerator of~(\ref{eq:dlH_dmu}) are positive.
+For worker $L$, the sign depends on whether $\Psi(\mu) >
+\kappa^{\min}(\mu)/\mu$, which holds when the subsistence requirement
+is tight relative to current investment.
+
+The two upskilling totals and their responses to $\mu$:
+\begin{align}
+  K^*_{\mathrm{ind}}(\mu) &= 2\kappa^{\min}(\mu),
+  &\quad \frac{dK^*_{\mathrm{ind}}}{d\mu} &= 2\Psi(\mu) > 0
+  \label{eq:dK_ind} \\[4pt]
+  K^*_{\mathrm{agg}}(\mu) &= (W+1)\kappa^{\min}(\mu),
+  &\quad \frac{dK^*_{\mathrm{agg}}}{d\mu} &= (W+1)\Psi(\mu) > 0
+  \label{eq:dK_agg}
+\end{align}
+The aggregate measure responds more strongly to $\mu$ by the factor
+$(W+1)/2$:
+\begin{equation}
+  \frac{dK^*_{\mathrm{agg}}/d\mu}{dK^*_{\mathrm{ind}}/d\mu}
+  = \frac{W+1}{2}
+  \label{eq:K_ratio}
+\end{equation}
+
+\begin{proposition}[Two-level upskilling neutrality]
+\label{prop:neutrality}
+At the constrained equilibrium:
+\begin{enumerate}
+  \item $K^*_{\mathrm{ind}} = 2\kappa^{\min}(\mu)$ is independent of
+        $W$. Redistribution holding $\mu$ fixed does not alter the sum
+        of individual investments.
+  \item $K^*_{\mathrm{agg}} = (W+1)\kappa^{\min}(\mu)$ is increasing
+        in $W$. A larger lower-rank population amplifies the economy-wide
+        human capital base.
+  \item Only $K^*_{\mathrm{agg}}$ enters firm growth through
+        $\Phi(\mu) = K^*_{\mathrm{agg}}/R$.
+\end{enumerate}
+\end{proposition}
+
+\subsection{Lottery Stakes, Net Transfer, and Risk Premia}
+
+The lottery stakes respond to $\mu$ as:
+\begin{equation}
+  \frac{da}{d\mu} = R - \Psi(\mu) > 0,
+  \qquad
+  \frac{dc}{d\mu} = -R - \Psi(\mu) < 0
+  \label{eq:dstakes}
+\end{equation}
+Worker $L$'s stake rises (income rises faster than the floor);
+worker $H$'s stake falls (income falls and floor rises). The net
+transfer to $L$:
+\begin{equation}
+  \epsilon_L(\mu) = \frac{c(\mu) - Wa(\mu)}{2}
+  \label{eq:transfer_mu}
+\end{equation}
+is decreasing in $\mu$ when $W > 1$: higher equality reduces worker
+$L$'s net lottery receipt because their larger stake means they
+contribute more to the pool.
+
+The risk premium $\tilde\rho_s = \theta_s\Sigma^2/4$ responds to $\mu$
+through $\Sigma^2 = c^2 + W^2a^2$:
+\begin{equation}
+  \frac{d\Sigma^2}{d\mu}
+  = 2c\frac{dc}{d\mu} + 2W^2 a\frac{da}{d\mu}
+  = -2c(R+\Psi) + 2W^2 a(R-\Psi)
+  \label{eq:dSigma}
+\end{equation}
+whose sign depends on the relative sizes of the stakes and $W$. For
+the social premium, since $\theta_L + \theta_H$ is a fixed constant,
+the sign of $d(\tilde\rho_L+\tilde\rho_H)/d\mu$ equals the sign of
+$d\Sigma^2/d\mu$. Greater equality can increase or decrease the net
+social welfare from the lottery depending on whether the gain in
+worker $L$'s stake dominates or is dominated by the loss in worker
+$H$'s stake.
+
+\begin{proposition}[Worker responses to wage equality]
+\label{prop:worker_responses}
+\begin{enumerate}
+  \item Worker $H$ always raises $\lambda_H^*$ when $\mu$ increases.
+        Worker $L$ raises $\lambda_L^*$ when the participation
+        constraint is sufficiently tight.
+  \item $K^*_{\mathrm{ind}}$ is increasing in $\mu$ and independent
+        of $W$.
+  \item $K^*_{\mathrm{agg}}$ is increasing in both $\mu$ and $W$,
+        with amplification factor $(W+1)/2$.
+  \item The lottery is socially desirable iff $\theta_L + \theta_H > 0$,
+        a condition independent of $\mu$.
+\end{enumerate}
+\end{proposition}
+
+\subsection{Summary of Worker Responses}
+
+Table~\ref{tab:worker_responses} collects all signed responses.
+
+\begin{table}[h!]
+\centering
+\caption{Worker responses to an increase in wage equality ($\mu\uparrow$)}
+\label{tab:worker_responses}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lllp{5.5cm}}
+\toprule
+Object & Symbol & $\mu\uparrow$ & Mechanism \\
+\midrule
+Worker $L$ income & $M_L$ & $+$ & Direct \\
+Worker $H$ income & $M_H$ & $-$ & Direct \\
+Upskilling floor & $\kappa^{\min}$ & $+$ & Rising $\bar{b}_0 R\mu$ \\
+Worker $L$ upskill fraction & $\lambda_L^*$ & $+$ (cond.) & Eq.~(\ref{eq:dlL_dmu}) \\
+Worker $H$ upskill fraction & $\lambda_H^*$ & $+$ (always) & Both terms positive \\
+Individual total & $K^*_{\mathrm{ind}}=2\kappa^{\min}$ & $+$ & Floor rises; $W$-free \\
+Aggregate total & $K^*_{\mathrm{agg}}=(W{+}1)\kappa^{\min}$ & $+$ & Floor rises; $W$-amplified \\
+Worker $L$ stake & $a$ & $+$ & Income outruns floor \\
+Worker $H$ stake & $c$ & $-$ & Income falls, floor rises \\
+Net transfer to $L$ & $\epsilon_L^*$ & $-$ & Larger $L$ stake hurts $L$ \\
+$L$ risk premium & $\tilde\rho_L = \theta_L\Sigma^2/4$ & amb. & Via $\Sigma^2$ \\
+$H$ risk premium & $\tilde\rho_H = \theta_H\Sigma^2/4$ & amb. & Via $\Sigma^2$ \\
+Net social premium & $(\theta_L{+}\theta_H)\Sigma^2/4$ & amb. & Sign fixed by $\theta_L{+}\theta_H$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+\section{Question 2: $\mu$ Constraints on Long-Term Growth}
+\label{sec:firm}
+%----------------------------------------------------------------------
+
+\subsection{The Firm's Asset Accumulation Problem}
+
+The firm accumulates assets $A_t$ according to:
+\begin{equation}
+  A_{t+1} = \left[(1-\pi-\delta_f) + \pi\Phi(\mu_t)\right]A_t
+             - K(\mu_t) - C(A_t)
+  \label{eq:firm_lom}
+\end{equation}
+where:
+\begin{align}
+  \Phi(\mu_t) &= \frac{K^*_{\mathrm{agg}}(\mu_t)}{R}
+               = \frac{(W+1)\kappa^{\min}(\mu_t)}{R}
+  \label{eq:Phi} \\[4pt]
+  K(\mu_t) &= k|\mu_t - \mu_0|^\eta, \quad k,\eta > 0
+  \label{eq:Kcost} \\[4pt]
+  C(A_t) &= c_f A_t^\xi, \quad c_f, \xi > 0
+  \label{eq:Ccost}
+\end{align}
+The upskilling index $\Phi(\mu_t)$ is the aggregate upskilling per unit
+of total income. The connection between the two upskilling measures is:
+\begin{equation}
+  \Phi(\mu) = \frac{K^*_{\mathrm{agg}}}{R}
+  = \frac{W+1}{2}\cdot\frac{K^*_{\mathrm{ind}}}{R}
+  \label{eq:Phi_two_levels}
+\end{equation}
+When $W=1$ the two measures coincide. For $W>1$ the firm's return to
+raising $\mu$ exceeds what a two-agent welfare analysis alone suggests.
+
+\subsection{Stackelberg Timing}
+
+The firm moves first by setting $\mu_t$, anticipating workers'
+best-response functions $\lambda_s^*(\mu_t)$ from
+equation~(\ref{eq:lambda_star}). By substituting these before
+optimising, the firm's problem reduces to a single-variable
+maximisation with no circularity:
+\begin{equation}
+  \mu_t^* = \arg\max_{\mu_t}\left\{
+    \left[(1-\pi-\delta_f)
+    + \frac{\pi(W+1)\kappa^{\min}(\mu_t)}{R}\right]A_t
+    - k|\mu_t-\mu_0|^\eta - c_f A_t^\xi
+  \right\}
+  \label{eq:firm_opt}
+\end{equation}
+
+\subsection{Firm's First-Order Condition and Optimal $\mu^*$}
+
+With $\eta = 2$ and $\Psi$ evaluated at reference $\Psi_0 \equiv
+\Psi(\mu_0)$:
+\begin{equation}
+  \underbrace{\frac{\pi(W+1)\Psi_0}{R}\cdot A_t}_{%
+    \text{marginal upskilling gain}}
+  =
+  \underbrace{2k(\mu_t^* - \mu_0)}_{%
+    \text{marginal restructuring cost}}
+  \label{eq:foc}
+\end{equation}
+Solving:
+\begin{equation}
+  \boxed{\mu_t^* = \mu_0 + \Gamma A_t,
+  \qquad
+  \Gamma \equiv \frac{\pi(W+1)\Psi_0}{2kR}}
+  \label{eq:mu_opt}
+\end{equation}
+The coefficient $\Gamma$ is proportional to $(W+1)$: the firm's
+incentive to equalise wages is driven by the aggregate upskilling
+return, not individual worker responses.
+
+\begin{proposition}[Firm's optimal wage inequality]
+\label{prop:firm_mu}
+\begin{enumerate}
+  \item $\mu_t^* = \mu_0 + \Gamma A_t$: optimal equality is linear in
+        asset wealth.
+  \item $\mu_t^* > \mu_0$ for all $A_t > 0$: the firm always chooses
+        greater equality than the market reference.
+  \item $\partial\mu_t^*/\partial A_t = \Gamma > 0$: wealthier firms
+        enforce greater equality.
+  \item $\partial\mu_t^*/\partial W > 0$: larger lower-rank population
+        increases the optimal equality through $(W+1)$ in $\Gamma$.
+  \item $\partial\mu_t^*/\partial k < 0$: higher restructuring costs
+        compress the deviation from $\mu_0$.
+\end{enumerate}
+\end{proposition}
+
+\subsection{Three Constraints of $\mu$ on Long-Term Growth}
+
+The asset growth rate is:
+\begin{equation}
+  g(\mu, A) = \pi\Phi(\mu) - \delta_f - c_f
+              - \frac{k(\mu-\mu_0)^2}{A}
+  \label{eq:growth_rate}
+\end{equation}
+
+\textbf{Constraint 1 --- Viability floor.} For a positive steady state
+to exist, evaluating at $\mu = \mu_0$ (no restructuring cost) and
+$A \to \infty$:
+\begin{equation}
+  \boxed{\pi(W+1)\kappa_0 > R(\delta_f + c_f)}
+  \label{eq:viability}
+\end{equation}
+where $\kappa_0 = \kappa^{\min}(\mu_0)$. This is the fundamental
+constraint: the aggregate upskilling return must exceed total running
+costs. A larger lower-rank group ($W$ higher) makes viability easier
+to satisfy. When this fails, no wage policy can generate positive
+steady-state growth.
+
+\textbf{Constraint 2 --- Restructuring upper bound.} For the firm to
+benefit from $\mu_t > \mu_0$:
+\begin{equation}
+  \pi[\Phi(\mu_t)-\Phi(\mu_0)]A_t > k(\mu_t-\mu_0)^2
+  \label{eq:upper_bound}
+\end{equation}
+Richer firms can sustain greater deviations from $\mu_0$. As
+$A_t \to A^*$ this constraint binds at $\mu_t = \mu_t^*$ from
+equation~(\ref{eq:mu_opt}).
+
+\textbf{Constraint 3 --- Hard feasibility ceiling.} $\mu < \tfrac{1}{2}$
+always: worker $H$ must earn more than worker $L$. As $\mu \to
+\tfrac{1}{2}$ the upskilling gap closes and the lottery spread
+$\Pi(\mu) \to 0$.
+
+\subsection{Closed-Form Steady-State Equilibrium}
+
+Setting $A_{t+1} = A_t = A^*$ and using $\mu^* - \mu_0 = \Gamma A^*$:
+\begin{equation}
+  A^*[\pi\Phi^* - \delta_f - c_f] = k\Gamma^2 A^{*2}
+  \label{eq:ss_eq}
+\end{equation}
+Dividing by $A^* > 0$, evaluating $\Phi^*$ at $\kappa_0$:
+\begin{equation}
+  \boxed{A^* = \frac{\pi(W+1)\kappa_0/R - \delta_f - c_f}{k\Gamma^2}}
+  \label{eq:Astar}
+\end{equation}
+Define three derived constants computed once from primitives:
+\begin{align}
+  \kappa_0 &= \frac{-1+\sqrt{1+4(\bar{b}_0 R\mu_0+\delta_w)}}{2}
+  \label{eq:k0} \\[4pt]
+  \Psi_0 &= \frac{\bar{b}_0 R}{1+2\kappa_0}
+  \label{eq:Psi0} \\[4pt]
+  \Gamma &= \frac{\pi(W+1)\Psi_0}{2kR}
+  \label{eq:Gamma}
+\end{align}
+All steady-state objects follow sequentially:
+\begin{alignat}{2}
+  &\text{Firm:}\quad
+  &A^* &= \frac{\pi(W+1)\kappa_0/R - \delta_f - c_f}{k\Gamma^2}
+  \label{eq:Astar2}\\[4pt]
+  &&\mu^* &= \mu_0 + \Gamma A^*
+  \label{eq:mustar}\\[8pt]
+  &\text{Workers:}\quad
+  &\kappa^* &= \frac{-1+\sqrt{1+4(\bar{b}_0 R\mu^*+\delta_w)}}{2}
+  \label{eq:kstar}\\[4pt]
+  &&\lambda_L^* &= \frac{\kappa^*}{R\mu^*},\quad
+  \lambda_H^* = \frac{\kappa^*}{R(1-\mu^*)}
+  \label{eq:lambdas}\\[4pt]
+  &&K^*_{\mathrm{ind}} &= 2\kappa^*,\quad
+  K^*_{\mathrm{agg}} = (W+1)\kappa^*
+  \label{eq:Kss}\\[4pt]
+  &&a^* &= R\mu^*-\kappa^*,\quad
+  c^* = R(1-\mu^*)-\kappa^*
+  \label{eq:acss}\\[4pt]
+  &&\Lambda^* &= Wa^*+c^*,\quad
+  \epsilon_L^* = \tfrac{c^*-Wa^*}{2}
+  \label{eq:Lamss}\\[8pt]
+  &\text{Risk premia:}\quad
+  &\tilde\rho_s^* &= \frac{\theta_s}{4}
+  \left(c^{*2} + W^2a^{*2}\right)
+  \label{eq:rhostar}
+\end{alignat}
+Every object is an explicit function of the primitives
+$(R,\mu_0,W,\bar{b}_0,\delta_w,\pi,\delta_f,k,c_f,\theta_L,\theta_H)$.
+Note that $(\theta_L,\theta_H)$ appear only in~(\ref{eq:rhostar})
+and nowhere in equations~(\ref{eq:Astar2})--(\ref{eq:Lamss}).
+
+\subsection{The Endogenous Kuznets Relationship}
+
+At the steady state $\mu^* = \mu_0 + \Gamma A^*$, so wealthier
+economies operate at a more equal wage split. Along the transitional
+path, as $A_t$ grows from $A_0$ toward $A^*$, $\mu_t^* = \mu_0 +
+\Gamma A_t$ rises monotonically. The income inequality ratio
+$(1-\mu^*)/\mu^*$ falls as the economy grows: an endogenous Kuznets
+relationship in which growth and equality are complementary, driven by
+the firm's optimal wage policy.
+
+%----------------------------------------------------------------------
+\section{Full Comparative Statics}
+%----------------------------------------------------------------------
+
+Table~\ref{tab:cs} presents the complete steady-state comparative
+statics. The $W$ row is the most important: $K^*_{\mathrm{ind}}$ is
+invariant to $W$ (shown as $\mathbf{0}$) while $K^*_{\mathrm{agg}}$
+rises with $W$ (shown as $+$). The risk premium parameters
+$(\theta_L,\theta_H)$ appear only in the last column.
+
+\begin{table}[h!]
+\centering
+\caption{Steady-state comparative statics for all three players}
+\label{tab:cs}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcccccc}
+\toprule
+Shock ($\uparrow$)
+  & $\partial A^*$
+  & $\partial\mu^*$
+  & $\partial\lambda_L^*$
+  & $\partial\lambda_H^*$
+  & $\partial K^*_{\mathrm{ind}}$
+  & $\partial K^*_{\mathrm{agg}}$ \\
+\midrule
+$W\uparrow$           & $+$ & $+$ & amb. & $-$   & $\mathbf{0}$ & $+$ \\
+$\pi\uparrow$         & $+$ & $+$ & $+$  & $+$   & $+$          & $+$ \\
+$k\uparrow$           & $-$ & $-$ & $-$  & $-$   & $-$          & $-$ \\
+$\bar{b}_0\uparrow$   & amb.& $+$ & $+$  & $-$   & $+$          & $+$ \\
+$\delta_f\uparrow$    & $-$ & $-$ & $-$  & $-$   & $-$          & $-$ \\
+$\delta_w\uparrow$    & $+$ & $+$ & $+$  & amb.  & $+$          & $+$ \\
+$\mu_0\uparrow$       & $+$ & $+$ & amb. & $-$   & $+$          & $+$ \\
+$R\uparrow$           & amb.& amb.& $-$  & $-$   & amb.         & amb.\\
+\midrule
+$\theta_L\uparrow$    & --- & --- & ---  & ---   & ---          & --- \\
+$\theta_H\uparrow$    & --- & --- & ---  & ---   & ---          & --- \\
+\bottomrule
+\end{tabular}
+
+\medskip
+\small Notes: ``amb.''\ = ambiguous sign. ``---''\ = parameter does not
+enter the allocation or accumulation problem. $\mathbf{0}$ denotes
+exact invariance. $(\theta_L,\theta_H)$ affect only
+$\tilde\rho_s^* = \theta_s(c^{*2}+W^2a^{*2})/4$: sign of $\partial\tilde\rho_s/\partial\theta_s > 0$,
+sign of $\partial(\tilde\rho_L+\tilde\rho_H)/\partial(\theta_L+\theta_H) > 0$.
+\end{table}
+
+The $(\theta_L, \theta_H)$ rows confirm the separation property: risk
+preference parameters have no effect on any allocation or accumulation
+quantity. They affect only the welfare valuation of lottery
+participation through $\tilde\rho_s^*$.
+
+%----------------------------------------------------------------------
+\section{Conclusion}
+%----------------------------------------------------------------------
+
+We have developed a three-player model in which wage inequality $\mu$
+connects worker behaviour to firm growth, with all equilibrium objects
+in closed form. Risk preferences are captured by two signed curvature
+parameters $(\theta_L > 0, \theta_H < 0)$ that augment linear utility,
+replacing the three-parameter Friedman-Savage specification while
+retaining the essential asymmetry: the lower-income worker gains welfare
+from the lottery and the higher-income worker loses.
+
+On the first question --- how workers respond to $\mu$ --- the main
+findings are: worker $H$ always raises their upskilling fraction when
+equality rises; individual total upskilling $K^*_{\mathrm{ind}} =
+2\kappa^{\min}(\mu)$ rises with $\mu$ but is invariant to $W$;
+aggregate total upskilling $K^*_{\mathrm{agg}} = (W+1)\kappa^{\min}(\mu)$
+rises with both $\mu$ and $W$ by amplification factor $(W+1)/2$; and
+the lottery is socially desirable iff $\theta_L + \theta_H > 0$.
+
+On the second question --- constraints of $\mu$ on growth --- the main
+findings are: the viability condition $\pi(W+1)\kappa_0 > R(\delta_f+c_f)$
+is the growth floor; conditional on viability the firm's optimal
+$\mu^* = \mu_0 + \Gamma A^*$ is linear in wealth, producing an
+endogenous Kuznets relationship; and $A^*$ is fully explicit in nine
+primitives with risk parameters entering only through the welfare
+evaluation of the lottery.
+
+%----------------------------------------------------------------------
+\appendix
+\section{Complete Notation Table}
+%----------------------------------------------------------------------
+
+\begin{table}[h!]
+\centering
+\caption{All symbols, definitions, and domains}
+\label{tab:notation}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lp{8.2cm}l}
+\toprule
+Symbol & Definition & Domain \\
+\midrule
+\multicolumn{3}{l}{\textit{Primitives}} \\
+$R$ & Total income to workers & $\mathbb{R}_{++}$ \\
+$\mu$ & Income share of worker $L$ & $(0,\tfrac{1}{2})$ \\
+$\mu_0$ & Reference (market) income split & $(0,\tfrac{1}{2})$ \\
+$W$ & Population mass ratio $= i^*/(N-i^*)$ & $[1,\infty)$ \\
+$\bar{b}_0$ & Subsistence coefficient; $\bar{b}=\bar{b}_0 R\mu$ & $\mathbb{R}_{++}$ \\
+$\delta_w$ & Human capital depreciation & $[0,1)$ \\
+$\gamma$ & Upskilling power ($=2$ for closed form) & $(0,1)$ \\
+$\pi$ & Firm wage share of assets & $(0,1)$ \\
+$\delta_f$ & Firm asset depreciation & $(0,1)$ \\
+$k$ & Restructuring cost scale & $\mathbb{R}_{++}$ \\
+$\eta$ & Restructuring cost power ($=2$ for closed form) & $(1,\infty)$ \\
+$c_f$ & Maintenance cost scale & $\mathbb{R}_{++}$ \\
+$\xi$ & Maintenance cost power & $(1,\infty)$ \\
+$\theta_L$ & Curvature of $u_L$ at $\bar{b}$; $\theta_L > 0$ & $\mathbb{R}_{++}$ \\
+$\theta_H$ & Curvature of $u_H$ at $\bar{b}$; $\theta_H < 0$ & $\mathbb{R}_{--}$ \\
+\midrule
+\multicolumn{3}{l}{\textit{Derived constants}} \\
+$\kappa_0$ & $\kappa^{\min}(\mu_0)=(-1+\sqrt{1+4(\bar{b}_0R\mu_0+\delta_w)})/2$ & $\mathbb{R}_{++}$ \\
+$\Psi_0$ & Sensitivity at $\mu_0$: $\bar{b}_0R/(1+2\kappa_0)$ & $\mathbb{R}_{++}$ \\
+$\Gamma$ & Firm FOC coefficient: $\pi(W+1)\Psi_0/(2kR)$ & $\mathbb{R}_{++}$ \\
+\midrule
+\multicolumn{3}{l}{\textit{Worker objects}} \\
+$M_L,M_H$ & Incomes $=R\mu,\;R(1-\mu)$ & $\mathbb{R}_{++}$ \\
+$\lambda_s$ & Fraction of income to upskilling & $[0,1]$ \\
+$\kappa_s$ & Upskilling investment $=\lambda_s M_s$ & $\mathbb{R}_+$ \\
+$\ell_s$ & Lottery stake $=(1-\lambda_s)M_s$ & $\mathbb{R}_+$ \\
+$b_s$ & Base income $=\kappa_s+\kappa_s^\gamma-\delta_w$ & $\mathbb{R}$ \\
+$\bar{b}(\mu)$ & Subsistence floor $=\bar{b}_0R\mu$ & $\mathbb{R}_{++}$ \\
+$\kappa^{\min}(\mu)$ & Min.\ upskilling; solves $\kappa+\kappa^\gamma=\bar{b}+\delta_w$ & $\mathbb{R}_{++}$ \\
+$\Psi(\mu)$ & Sensitivity $=d\kappa^{\min}/d\mu$ & $\mathbb{R}_{++}$ \\
+$\lambda_s^*$ & Optimal fraction $=\kappa^{\min}/M_s$ & $(0,1)$ \\
+$a(\mu)$ & Worker $L$ stake $=R\mu-\kappa^{\min}$ & $\mathbb{R}_{++}$ \\
+$c(\mu)$ & Worker $H$ stake $=R(1-\mu)-\kappa^{\min}$ & $\mathbb{R}_{++}$ \\
+$\Pi(\mu)$ & Total pool $=Wa+c$ & $\mathbb{R}_{++}$ \\
+$\Sigma^2$ & Squared spread $=c^2+W^2a^2$ & $\mathbb{R}_{++}$ \\
+$\epsilon_L^*$ & Net transfer to $L$ $=(c-Wa)/2$ & $\mathbb{R}$ \\
+$K^*_{\mathrm{ind}}$ & Individual upskilling $=2\kappa^{\min}$ & $\mathbb{R}_{++}$ \\
+$K^*_{\mathrm{agg}}$ & Aggregate upskilling $=(W+1)\kappa^{\min}$ & $\mathbb{R}_{++}$ \\
+$\tilde\rho_s$ & Risk premium $=\theta_s\Sigma^2/4$ & $\mathbb{R}$ \\
+$V_s$ & Equilibrium utility $=\bar{b}+\epsilon_s+\tilde\rho_s$ & $\mathbb{R}$ \\
+\midrule
+\multicolumn{3}{l}{\textit{Firm objects}} \\
+$A_t$ & Asset stock at period $t$ & $\mathbb{R}_+$ \\
+$\Phi(\mu)$ & Upskilling index $=(W+1)\kappa^{\min}/R$ & $\mathbb{R}_{++}$ \\
+$\mu_t^*$ & Optimal split $=\mu_0+\Gamma A_t$ & $(0,\tfrac{1}{2})$ \\
+$A^*$ & Steady-state assets & $\mathbb{R}_+$ \\
+$\mu^*$ & Steady-state split $=\mu_0+\Gamma A^*$ & $(0,\tfrac{1}{2})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%----------------------------------------------------------------------
+\appendix
+\section{Derivation of Optimal $\lambda_s^*$}
+\label{app:foc}
+%----------------------------------------------------------------------
+
+\subsection*{B.1\quad The Worker's Problem}
+
+Worker $s$ maximises $V_s$ from equation~(\ref{eq:Vs_full}) subject to
+$b_s(\lambda_s) \geq \bar{b}$. The objective is:
+\begin{equation}
+  V_s = \bar{b} + \epsilon_s(\lambda_s,\lambda_{-s})
+      + \frac{\theta_s}{4}\Sigma^2(\lambda_s,\lambda_{-s})
+  \tag{B.1}
+\end{equation}
+
+\subsection*{B.2\quad Monotonicity of $V_s$ in $\lambda_s$}
+
+Differentiating with respect to $\lambda_s$ at the constrained
+equilibrium $b_s = \bar{b}$:
+\begin{equation}
+  \frac{\partial V_s}{\partial\lambda_s}
+  = \frac{\partial\epsilon_s}{\partial\lambda_s}
+  + \frac{\theta_s}{4}\frac{\partial\Sigma^2}{\partial\lambda_s}
+  \tag{B.2}
+\end{equation}
+Since $\epsilon_s = (c - W_s\ell_s - \Pi_{-s})/2$ evaluated at stakes
+and $\Sigma^2 = \Pi_{-s}^2 + W_s^2\ell_s^2$, both terms have
+contributions that, when combined with the base income channel
+$\partial b_s/\partial\lambda_s = M_s(1+\gamma\kappa_s^{\gamma-1}) > 0$,
+make $\partial V_s/\partial\lambda_s > 0$ throughout the feasible
+range. This is because raising $\lambda_s$ simultaneously improves
+both the win outcome (through higher $b_s$) and the lose outcome
+(through higher $b_s$ and lower stake $\ell_s$). There is no interior
+zero.
+
+\subsection*{B.3\quad The Constraint Binds}
+
+Since $V_s$ is increasing in $\lambda_s$, the worker pushes $\lambda_s$
+as high as possible. The participation constraint $b_s \geq \bar{b}$
+prevents $\lambda_s \to 1$ (which would leave zero lottery stake but
+may still satisfy the floor). The binding condition is:
+\begin{equation}
+  \kappa_s^* + (\kappa_s^*)^\gamma = \bar{b} + \delta_w
+  \implies
+  \kappa^{\min}(\mu) = \frac{-1+\sqrt{1+4(\bar{b}+\delta_w)}}{2}
+  \quad [\gamma=2]
+  \tag{B.3}
+\end{equation}
+Since $\kappa_s^* = \lambda_s^* M_s$:
+\begin{equation}
+  \lambda_s^* = \frac{\kappa^{\min}(\mu)}{M_s}
+  = \frac{\kappa^{\min}(\mu)}{RM_s^0}
+  \tag{B.4}
+\end{equation}
+
+\subsection*{B.4\quad Ordering and Separation of Risk Preferences}
+
+The ordering $\lambda_L^* > \lambda_H^*$ follows from $R\mu < R(1-\mu)$.
+This is an income-scaling effect: the same floor $\kappa^{\min}$
+represents a larger fraction of a smaller income.
+
+The curvature parameters $(\theta_L, \theta_H)$ do not appear in
+$\kappa^{\min}(\mu)$ or in $\lambda_s^*$. They enter only the risk
+premium $\tilde\rho_s = \theta_s\Sigma^2/4$ in the utility
+evaluation~(\ref{eq:V_final}). The allocation problem and the
+preference problem are completely separated.
+
+\end{document}
