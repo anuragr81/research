@@ -929,6 +929,13 @@ paper's claims, and only then write the manuscript.
      on, with verbatim quotes and pages from `lit/<paper>/CLAIMS.md`.
   10. **Readability passes** on the appendix proofs, as many as needed, under
      the 30% checker.
+     Round 2, 10 Oct 2026, on the text added since 8 Oct (M28 to M31, L14 to
+     L22, K7, C9 to C14, Appendix D): colons removed from prose; the share
+     renamed from s(k) to xi(k), since s is the bought component; C9 cut to a
+     pointer so the effort-margin mechanism appears once (Appendix D); the
+     anonymity-boundary paragraph corrected for M29 (it still said the rising
+     direction was unclaimed); the lists of rows taking C = F completed; the
+     share added to the terminology table as "paying class's share".
   11. **Referee comments, again.** Agreed 7 Oct 2026. Once passes 1 to 10 are
      done, re-read every referee comment against the verified results and
      record, for each, whether the skeleton answers it, with the Lean theorem
