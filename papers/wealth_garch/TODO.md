@@ -161,6 +161,36 @@ Leads as reported:
   (2006), Bolton, Li, Wang and Yang (2025), Hugonnier and Morellec (2017),
   Klimenko, Pfeil, Rochet and De Nicolò, Chevalier, Ly Vath and Roch (2020).
 
+## C4 search, 10 October 2026
+
+Exploration level only ([A] abstract, publisher page or author slides read,
+[C] citing description). The search agent warned that a page summariser
+invented comparative statics for one source, so only raw text counted.
+
+- Part (iii), joint local identification of a preference parameter and a
+  fixed issuance cost from two thresholds: no lead found that could contain
+  it. Excluded [A]: Peura and Keppo (2006, *Journal of Business*
+  79(4):2163-2202), calibrated to bank data but no preference parameter;
+  Hugonnier and Morellec (2017); Décamps, Gryglewicz, Morellec and Villeneuve
+  (2017, RFS); Løkka and Zervos (2008), proportional costs only; Eisenberg
+  and Schmidli (2011); Xu and Woo (2020); Xu (2023); Constantinides and
+  Richard (1978); Lakner and Reed (arXiv:2206.04107); Attanasio (2000) and
+  Aguirregabiria (1999), reduced-form or retail (S,s) estimation with no
+  shortfall preference.
+- Parts (i) and the target/gap-in-$K$ half of (ii), which C4 does not claim
+  as new but a headline built on M4 and M5 would: possibly in Décamps,
+  Mariotti, Rochet and Villeneuve (2011, *Journal of Finance*
+  66(5):1501-1544), fixed and proportional issuance costs, issuance at zero
+  cash; Bolton, Chen and Wang (2011, *Journal of Finance* 66:1545-1578),
+  fixed cost reported from memory by the agent, unconfirmed; Zhou and Yuen
+  (2015, *ASTIN Bulletin*), injection size rising in $K/l$, numerically.
+  Lower: Zhu (2017, *ASTIN Bulletin* 47(1):239-268); Yao, Yang and Wang
+  (2011, *EJOR* 211(3):568-576). None has a chosen recapitalisation trigger
+  that moves with a preference parameter. Primary sources are needed only if
+  a headline claims (i) or (ii) as new.
+- The envelope identities $\partial_KV=-N$, $\partial_{\lambda_S}V=-W$: no
+  source found stating them; likely standard, never claimed new.
+
 ## Novelty ledger
 
 No result is claimed new yet. Candidates, from the numbered results of
