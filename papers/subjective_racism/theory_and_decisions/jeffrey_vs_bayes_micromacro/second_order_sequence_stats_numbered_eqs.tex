@@ -85,7 +85,7 @@ the two marginal probabilities and the cross-attribute association, and explains
 difference from the sequence-free benchmark below the observer's precision is
 invisible in the statistic read by the observer.
 
-The vignette used to discuss this setting consists of a hiring panel working through a candidate’s file on the basis of two pieces of evidence that bear on the decision---i) a credential that speaks to competence, and ii) the tone of a reference letter that speaks to trustworthiness. Both are soft evidence in the sense of \citet{Jeffrey1983} so that neither is decisive but each leaves an impression. One panel may read the credential first and the letter second, and an otherwise identical panel may read them in reverse. Under full adoption, which this paper explores, the two panels finish with different beliefs about the same candidate so long as the two attributes are believed to go together at all. How much of the difference between the panels an observer can see in their believed association depends on how fully each panel adopts the document it reads second. When each impression is adopted in full, the letter fixes the belief about trustworthiness whatever the credential implied, so the sequence acts only through the believed link between the traits. Under partial adoption, on the other hand, a letter adopted only in part moves that belief from wherever the credential left it. Thus under partial adoption, a sequence-dependence would follow even if the traits were uncorrelated. The effects of the degree of adoption on the paper's core results on statistics are explained in Section \ref{sec:scope}.
+The vignette used to discuss this setting consists of a hiring panel working through a candidate’s file on the basis of two pieces of evidence that bear on the decision---i) a credential that speaks to competence, and ii) the tone of a reference letter that speaks to trustworthiness. Both are soft evidence in the sense of \citet{Jeffrey1983} so that neither is decisive but each leaves an impression. One panel may read the credential first and the letter second, and an otherwise identical panel may read them in reverse. Under full adoption, which this paper explores, the two panels finish with different beliefs about the same candidate so long as the two attributes are believed to go together at all. How much of the difference between the panels an observer can see in their believed association depends on how fully each panel adopts the document it reads second. When each impression is adopted in full, the letter fixes the belief about trustworthiness whatever the credential implied, so the sequence acts only through the believed link between the traits. Under partial adoption, on the other hand, a letter adopted only in part moves that belief from wherever the credential left it. Thus under partial adoption, a sequence-dependence would follow even if the traits were uncorrelated. The effects of the degree of adoption on the paper's core results on statistics are explained in Section \ref{sec:partial}.
 
 To avoid a clash in terminology we use ``order'' to describe proximity to the sequence-free benchmark and ``sequence'' to denote the sequence in which evidence is read. The distinction between first and second order, on the other hand, is what an observer can or cannot see. More specifically, with $c$ the prior covariance, a departure from the sequence-free benchmark is resolvable only when its size exceeds the observer's measurement precision $\varepsilon$. For small enough $c$ the two sequences separate, since $\varepsilon$ can sit between them, $c^{2}\ll\varepsilon\ll c$. A first-order departure is then resolvable and a second-order one is not, so the same population can present a visible effect on one statistic and none on another. The sequence-dependence of marginals follows easily -- since the likelihood a delivered credence implies must be read against the marginal in force when the cue arrives \citep{Domotor1980}. What is less obvious is the finding that some aggregate statistics are structurally blind to arrival order. 
 
@@ -96,7 +96,7 @@ Section~\ref{sec:literature} relates the paper to the literature.
 Section~\ref{sec:individual} establishes the individual-level results, exact immunity on a single cue and first-order divergence on two. Section~\ref{sec:aggregation} asks which of these carry over into the population, namely the
 second-order surplus-weighted loss, the decoupling of the believed cross-attribute association, the
 characterisation of the protected class, and the criterion split.
-Section~\ref{sec:scope} states the scope of results and limitations that would break the results. Section~\ref{sec:conclusion} discusses the key takeaways from the results. Proofs not discussed in the main text are provided in Appendix \ref{app:proofs}.
+Section~\ref{sec:partial} says what changes under partial adoption. Section~\ref{sec:scope} states the scope of results and limitations that would break the results. Section~\ref{sec:conclusion} discusses the key takeaways from the results. Proofs not discussed in the main text are provided in Appendix \ref{app:proofs}.
 
 \section{Setup}
 \label{sec:setup}
@@ -146,7 +146,7 @@ it replaces, $(\alpha,1-\alpha)$ for $q$ and $(\beta,1-\beta)$ for $r$. In other
 same document for a candidate who lacks the attribute, which an impression does not supply. The product of the
 two impressions can be written $q\otimes r$, with $(q\otimes r)_{ij}=q_{i}r_{j}$ \anchor{Setup}. For the two-cues setting, a sequence $\sigma\in\{AB,BA\}$ is whether a panel read the credential or the letter first, which an observer records or an experimenter assigns, and $\lambda\in[0,1]$ is the share of panels that read the credential first, which is counted where the sequence is recorded and unknown in a pooled audit. To compare full adoption with the belief-adjustment model of
 \citet{HogarthEinhorn1992}, in which a later impression is adopted only in part, we
-also consider an adoption weight $\omega\in[0,1]$ (Section~\ref{sec:scope}), which
+also consider an adoption weight $\omega\in[0,1]$ (Section~\ref{sec:partial}), which
 denotes how far the letter
 displaces what the credential had already implied about trustworthiness. At
 $\omega=1$ the letter sets the rating outright, and at $\omega=0$ the credential's
@@ -185,7 +185,7 @@ two-cue Jeffrey posteriors are the two sequences
 \]
 Resetting the marginal to the delivered credence is adoption in full, $\omega=1$, and
 every result of Sections~\ref{sec:individual} and~\ref{sec:aggregation} is stated at
-that weight; Section~\ref{sec:scope} says what changes at $\omega<1$, down to
+that weight; Section~\ref{sec:partial} says what changes at $\omega<1$, down to
 $\omega=0$, where the second cue is ignored.
 
 \begin{definition}[sequence effect]\label{def:seqeffect}
@@ -534,7 +534,7 @@ The second decision statistic is the panel's \textbf{foregone surplus}, the cost
   \quad \forall\, k\ge 0,
 \]
 
-\section{Averaging Effects on statistics}
+\section{Averaging Effects}
 \label{sec:aggregation}
 
 The previous section classified statistics for one evaluator. This section shows
@@ -612,7 +612,7 @@ either vanishes identically exactly when
 $\langle\nabla F,R_1\rangle=\langle\nabla F,R_2\rangle=0$.
 \end{proof}
 
-A particularly surprising finding is that for a smooth statistic of the belief,
+Notice that for a smooth statistic of the belief,
 the answer is settled before any averaging over the aggregate takes place
 (Proposition~\ref{prop:ORD}). The aggregation confines the average posterior to a two-dimensional plane, spanned by the leading directions $R_1$ and $R_2$ of the two reading sequences, so whether a statistic is protected turns only on whether its differential at independence annihilates that plane. The attribute-locality assumption and Lemma~\ref{lem:ASC} ensure that the annihilator is exactly $\mathrm{span}\{d\,\assoc\}$. As we summarise in Table~\ref{tab:order-summary}, the average believed cross-attribute association
 (Proposition~\ref{prop:DEC}) and the surplus-weighted loss $L(c)$ (Theorem~\ref{thm:LOS}) are
@@ -757,10 +757,10 @@ association by the same leading factor.
 
 The multiplier identity in the proof above yields an exact statement for the odds-ratio forms of association. In the ratio $Q'_{00}Q'_{11}/(Q'_{01}Q'_{10})$ the factor
 $g_0g_1h_0h_1/Z^{2}$ cancels, so every separable reweighting leaves the odds ratio unchanged wherever the entries are positive. It follows that $\PJ_{AB}$, $\PJ_{BA}$ and $\PB$ all carry the prior's odds ratio
-identically in $c$. For believed association in odds-ratio form the departure from the benchmark is exactly zero rather than $\bigO(c^{2})$. Sequence effects live in the reset marginals and not in the preserved
+identically in $c$. For believed association in odds-ratio form the departure from the benchmark is exactly zero rather than $\bigO(c^{2})$. In short, sequence effects live in the reset marginals and not in the preserved
 association.
 
-The proposition's implications for the example vignette are also quite revealing. In a population of panels evaluating a common pool---where each receives the same two impressions, one bearing on competence and one on trustworthiness---each panel's posterior differs from the benchmark at $\bigO(c)$
+The proposition's implications for the example vignette are revealing. In a population of panels evaluating a common pool---where each receives the same two impressions, one bearing on competence and one on trustworthiness---each panel's posterior differs from the benchmark at $\bigO(c)$
 (Proposition~\ref{prop:DIV}). Yet the average believed association---whether the evaluators
 collectively take the two attributes to go together more or less than the benchmark
 warrants---carries no first-order trace of the sequence (Proposition~\ref{prop:DEC}). In other words, reading sequence cannot, to first order, build or erode the perceived relationship between the attributes,
@@ -987,21 +987,13 @@ the other (Proposition~\ref{prop:DIV} and its mirror)---so the annihilator of th
 is two-dimensional and spanned by the constants and $\nabla\assoc$, and the converse follows
 from the nonconstancy of $\kappa/\kappa'$ on any open set of priors.
 
-\textbf{The smooth statistics protected to second order are exactly} the \emph{local dependence
+What follows is that \textbf{the smooth statistics protected to second order are exactly} the \emph{local dependence
 measures}, those that, to first order at independence, depend on the posterior only through its
 association. This includes the association itself (Proposition~\ref{prop:DEC} is the case
 $F=\assoc$), the odds ratio, its logarithm, and Yule's $Q$; among expectations
 $\langle v,P\rangle$ it admits exactly those whose $v$ lies in the two-dimensional span of the
 constants and $\nabla\assoc$ (Lemma~\ref{lem:SCR}). No statistic outside the class is second order on an open
 set of priors.
-
-The quantification over $\lambda$ in part~(i) is what makes the class a classification of
-statistics rather than of populations: the aggregate first-order coefficient is
-$\lambda\langle\nabla F,\kappa R_1\rangle+(1-\lambda)\langle\nabla F,\kappa' R_2\rangle$, and
-requiring it to vanish at every interior $\lambda$ forces both inner products to vanish
-separately rather than merely cancel against each other at some particular composition of the
-population. Protection in the sense of Definition~\ref{def:protection} is thus annihilation of
-the route directions, not cancellation between them.
 
 In the panel example, the classification says which audit questions can register the sequencing, and
 the boundary falls in an instructive place. Ask how likely the panels believe a
@@ -1014,12 +1006,8 @@ is second order, since the subtraction removes the component along the marginal 
 and leaves a differential at independence that is a positive multiple of $d\,\assoc$, placing
 this difference in the protected class. Stereotypes do persist, but not as trivially as is often presumed.
 
-\section{Scope}
-\label{sec:scope}
-
-We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in
-Section~\ref{sec:assumptions} define the scope of the conclusions drawn from the
-model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply. Second, Assumption~\ref{as:soft} states that a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:IMM} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise when Assumption~\ref{as:soft} is not met. Third, attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:SEP}) and is the engine of Proposition~\ref{prop:DEC}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:IMM} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}), since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:SHR}). Fifth, the population modelled throughout is homogeneous in one further respect: every evaluator shares the same prior $(\alpha,\beta,c)$, and only the encounter sequence---and, for the surplus-weighted loss, the stakes $u$---varies across the pool. A population whose members differ in the prior covariance $c$ itself is outside the scope of stated results.
+\section{Partial adoption}
+\label{sec:partial}
 
 Reading a cue as a credence, as is the case when evidence is soft, does not oblige the
 evaluator to adopt it in full. The paper focuses on full adoption not to discount partial
@@ -1104,7 +1092,12 @@ the position channel.}
 \label{tab:cases}
 \end{table}
 
+\section{Scope}
+\label{sec:scope}
 
+We now revisit how Assumptions~\ref{as:localc}--\ref{as:surplus} in
+Section~\ref{sec:assumptions} define the scope of the conclusions drawn from the
+model. First, a prior covariance outside the leading-order regime voids the separation (Assumption~\ref{as:localc}) that is key to much of the propositional claim in the paper. More particularly, Assumption~\ref{as:localc} states the results as $c\to0$, they compare $\bigO(c)$ to $\bigO(c^{2})$, a comparison that is informative only when the prior covariance $c$ is small relative to its feasibility bound, since $\bigO(c^{2})$ is then smaller than $\bigO(c)$. When $c$ is instead a sizable fraction of that bound, the two orders are no longer numerically distinguishable, and the local-in-$c$ results do not apply. Second, Assumption~\ref{as:soft} states that a single cue, taken alone, produces no phenomenon at all. As Proposition~\ref{prop:IMM} shows, the Jeffrey and benchmark posteriors coincide exactly on one cue and the question of sequence-dependence does not arise when Assumption~\ref{as:soft} is not met. Third, attribute-locality (Assumption~\ref{as:local}) makes every Jeffrey update a separable reweighting (Lemma~\ref{lem:SEP}) and is the engine of Proposition~\ref{prop:DEC}. A cue delivering an impression on a joint event---a credence on both attributes together rather than on a single attribute's partition, which Assumption~\ref{as:local} excludes---is out of scope. Such a cue reweights the joint law non-separably and could itself manufacture association from independence, so the immunity of Proposition~\ref{prop:IMM} would not apply. Fourth, a non-surplus criterion breaks the surplus decoupling (Assumption~\ref{as:surplus}), since the aggregate loss is first order under a fixed per-error cost (Proposition~\ref{prop:SHR}). Fifth, the population modelled throughout is homogeneous in one further respect: every evaluator shares the same prior $(\alpha,\beta,c)$, and only the encounter sequence---and, for the surplus-weighted loss, the stakes $u$---varies across the pool. A population whose members differ in the prior covariance $c$ itself is outside the scope of stated results.
 
 \section{Concluding remarks}
 \label{sec:conclusion}
