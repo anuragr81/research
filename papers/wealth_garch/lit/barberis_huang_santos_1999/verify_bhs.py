@@ -6,7 +6,7 @@ from litcheck import run
 
 run({
     "dir": os.path.dirname(os.path.abspath(__file__)),
-    "title": "BARBERIS, HUANG AND SANTOS, NBER WP 7220 (read for QJE 2001)",
+    "title": "BARBERIS, HUANG AND SANTOS, NBER WP 7220 (1999)",
     "pdf": "bhs_w7220.pdf",
     "sha256": "dca360482ae82da568a5b366ad699910258fa3cb3e940f5a4f4d6f0bf3cd6c4b",
     "pages": (1, 50),

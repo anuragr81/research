@@ -1,4 +1,4 @@
-# Notes: Barberis, Huang and Santos (2001)
+# Notes: Barberis, Huang and Santos (1999)
 
 ## Verified
 
@@ -12,7 +12,7 @@
 
 ## Not verified
 
-- The published QJE version (BHS-D1). Page numbers and wording may differ.
+- The later journal version, which is not cited (BHS-D1).
 - The numerical solution of Section 3.
 
 ## Discrepancies

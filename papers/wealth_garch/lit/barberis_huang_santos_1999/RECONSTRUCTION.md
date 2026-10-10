@@ -1,4 +1,4 @@
-# Reconstruction: Barberis, Huang and Santos (2001)
+# Reconstruction: Barberis, Huang and Santos (1999)
 
 ## Source read
 
@@ -6,10 +6,9 @@
   Santos. NBER Working Paper 7220, July 1999. 50 pages. Evidence tag [F] for
   this version: the full text was read, including the appendix, tables and
   figure captions.
-- The citation is the published article, *Quarterly Journal of Economics*
-  116(1):1-53, 2001. The published version was not read. Every page number
-  below is the working paper's, and nothing is attributed to the published
-  version (BHS-D1).
+- The working paper is the version cited, by the author's decision of
+  2026-10-10. The later journal version was not read, and nothing is
+  attributed to it (BHS-D1).
 - Supplied by the author on Google Drive (folder
   `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, file `w7220.pdf`), uploaded
   2026-10-10. Cached at `~/.cache/wealth_garch/bhs_w7220.pdf`, sha256

@@ -1,7 +1,7 @@
-# Claims: Barberis, Huang and Santos (2001)
+# Claims: Barberis, Huang and Santos (1999)
 
-Bib key `barberis2001`. Version read: NBER Working Paper 7220, July 1999.
-Evidence [F] for the working paper only. Pages are the working paper's.
+Bib key `barberis1999`. Version read and cited: NBER Working Paper 7220,
+July 1999. Evidence [F].
 
 ## Quotations
 
@@ -30,7 +30,7 @@ Evidence [F] for the working paper only. Pages are the working paper's.
 
 | ID | Where | Reading adopted | Reason |
 |---|---|---|---|
-| BHS-D1 | title page | The version read is NBER WP 7220 (July 1999). The cited version is QJE 116(1):1-53 (2001). | Only the working paper was supplied. The L row carries `\unv`. |
+| BHS-D1 | title page | The version read and cited is NBER WP 7220 (July 1999). | Author's decision of 2026-10-10. The later journal version was not read, and nothing is attributed to it. |
 | BHS-D2 | throughout | The text layer drops the "fi" and "fl" ligatures ("nancial", "specications"). | Quotations are taken from passages without them, and each is checked on its page. |
 | BHS-D3 | p. 16, eq. 15 | $R_{t+1}=\frac{1+f}{f}e^{g+\sigma\varepsilon_{t+1}}$. | Garbled in the text layer. The reading follows from eq. (10) with constant $f$, and gives the stated log-return volatility $\sigma=3.79\%$. |
 | BHS-D4 | p. 10, eq. 4 | $v(X)=X$ for $X\ge0$, $\lambda X$ for $X<0$. | Garbled in the text layer. The reading matches "piecewise linear ... kinked at the origin" and the caption of Figure 1. |

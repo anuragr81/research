@@ -1,8 +1,8 @@
 /-
 ================================================================================
   Barberis, Huang and Santos, "Prospect Theory and Asset Prices",
-  NBER Working Paper 7220 (July 1999), the version read. What
-  lit/barberis_huang_santos_2001/ attributes to the paper, in the paper's
+  NBER Working Paper 7220 (July 1999), the version read and cited. What
+  lit/barberis_huang_santos_1999/ attributes to the paper, in the paper's
   notation (λ loss aversion, f the price-dividend ratio, g and σ the mean and
   volatility of log consumption growth, ε the standard normal shock).
 ================================================================================
