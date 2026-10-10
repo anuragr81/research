@@ -56,6 +56,16 @@ grounds.
   `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, cached locally under
   `~/.cache/wealth_garch/`.
 
+## Waiting on the author
+
+1. Symbol $\kappa$. The fixed terms reserve bare $\kappa$ for the proportional
+   issuance cost, while PROOFS_v2 and the manuscript write the saturation
+   limits as $\kappa_1^2,\kappa_3^2$. The subscript keeps them apart on the
+   page, but they share a letter. Keep, or rename the saturation limits.
+   Recommendation: rename them before the prose pass, since $\kappa$ and
+   $\kappa_1$ will sit in the same sentences once the issuance cost enters
+   the rows.
+
 ## Bundle mechanics
 
 - The MS-5 control resolves its literature row against a fixture record
@@ -79,6 +89,11 @@ SymPy, to port to Lean:
 `prop:rrL` CCP, `prop:statemap` TSO, `cor:boundary` CDA, `prop:satlimits` SCG,
 `prop:tcs` TCS, `prop:kcs` KCS, `cor:idn` IDN, `prop:soc` SOC.
 
+- Done 2026-10-10: `thm:lambda4` and `prop:robust` are row M1;
+  `prop:statemap` (ii) and `prop:satlimits` are rows M2 and M3
+  (`CapGeometry.lean`). The identification of the discrete-time $\lambda_V^4$
+  with $\kappa_1^2/\kappa_3^2$ is a definition, recorded in Appendix D, and no
+  theorem links the discrete recursion to the diffusion.
 - `prop:sojourn` is already proved in `RateBased.lean`
   (`sojourn_strictAnti`, `sojourn_tendsto_atTop`).
 - `thm:lambda4` rests on `RateBased.saturated_ratio_tendsto`, now free of
@@ -113,7 +128,7 @@ the search itself is the pending item.
 
 | ID | Candidate claim | Rests on | Lean | Reading |
 |---|---|---|---|---|
-| H1 | The variance ratio $\lambda_V^4=\kappa_1(c)^2/\kappa_3(c)^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | `RateBased.saturated_ratio_tendsto` (one `sorry`), `saturated_ratio_lambda4`; port TSO (ii) and SCG | `engle2018` (in `references.bib`); Nelson (1991) EGARCH, named in PROOFS_v2 text but not in the bib; search for state-dependent volatility of bank capital |
+| H1 (C1; M1, M2, M3 from 2026-10-10) | The variance ratio $\lambda_V^4=\kappa_1(c)^2/\kappa_3(c)^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | `RateBased.saturated_ratio_tendsto` (one `sorry`), `saturated_ratio_lambda4`; port TSO (ii) and SCG | `engle2018` (in `references.bib`); Nelson (1991) EGARCH, named in PROOFS_v2 text but not in the bib; search for state-dependent volatility of bank capital |
 | H2 | The degeneracy of the diffusion at the distress boundary $x=1$ is a coordinate artefact. In $z=\log((x-1)/q)$ the volatility is constant on the solvency regime. | `prop:rrL`, `prop:statemap`, `cor:boundary` | port CCP and TSO (i) to (iii) | the paper behind the benchmark solver (`github.com/yuqiongwang/bank_capital_structure`), whose coordinate this is; search for degenerate-diffusion bank capital models |
 | H2b | $x=1$ is unreachable if and only if $r>r_L$. | `cor:boundary` | none possible as stated: boundary classification of a diffusion is not in Mathlib. Enters as a hypothesis unless the scale-function step is formalised | as H2 |
 | H3 | $(\lambda_S,K)$ is locally identified from the pair of thresholds $(y^*,x_L)$, because the two parameters move the trigger in opposite directions. | `lem:reg`, `lem:envelope`, `lem:bdr`, `prop:tcs`, `lem:envelopeK`, `prop:kcs`, `cor:idn`, `prop:soc` | Envelope cores exist (`Envelope.*`); port TCS, KCS, IDN, SOC algebra; REG and BDR enter as hypotheses | search for comparative statics of impulse-control thresholds in a fixed issuance cost; `altinkilic2000`, `buhner2002` for the cost structure only |
