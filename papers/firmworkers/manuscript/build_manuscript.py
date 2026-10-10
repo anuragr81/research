@@ -114,16 +114,37 @@ def refuted_table(items):
     return f"\\begin{{longtable}}{{{col([0.8, 3.8, 3.9, 5.2, 4.2, 2.2, 2.3])}}}\n\\toprule {head}\n" + '\n'.join(rows) + "\n\\end{longtable}"
 
 
-def literature_table(items):
-    head = r'ID & Source & Claim & Evidence seen & Verbatim quote & Status \\ \midrule \endhead'
-    rows = []
-    for c in items:
-        copy = f"\\newline \\url{{{c['open_copy']}}}" if c.get('open_copy') else ''
-        quote = mixed(c.get('quote')) or '---'
-        page = f" (p.~{escape_text(str(c['page']))})" if c.get('page') else ''
-        rows.append(f"{c['id']} & {c['source']} & {c['claim']} & {mixed(c['evidence_seen'])}{copy} & {quote}{page} & "
-                    f"\\texttt{{{escape_text(c['status'])}}} \\\\ \\midrule")
-    return f"\\begin{{longtable}}{{{col([0.8, 4.6, 6.6, 5.2, 3.4, 2.5])}}}\n\\toprule {head}\n" + '\n'.join(rows) + "\n\\end{longtable}"
+def short_cite(c):
+    m = re.match(r"(.+?\(\d{4}\))", c['source'])
+    return m.group(1) if m else c['source']
+
+
+def literature_table(d, rows_by_lit):
+    read = [c for c in d['literature'] if c['status'] == 'VERBATIM']
+    unread = [c for c in d['literature'] if c['status'] != 'VERBATIM']
+    head = r'ID & Paper & What we rely on & Quote & Page & Rows \\ \midrule \endhead'
+    body = '\n'.join(
+        f"{c['id']} & {c['source']} & {c['claim']} & ``{mixed(c['quote'])}'' & {escape_text(str(c['page']))} & "
+        f"{', '.join(rows_by_lit.get(c['id'], [])) or '---'} \\\\ \\midrule" for c in read)
+    table = (f"\\begin{{longtable}}{{{col([0.8, 5.4, 5.6, 7.0, 1.2, 2.0])}}}\n\\toprule {head}\n{body}\n\\end{{longtable}}"
+             if read else 'No paper has been read in full in this pass.')
+    names = ', '.join(f"{c['id']} {short_cite(c)}" for c in unread)
+    tail = (f"Papers cited but not yet read in full are {names}. Every claim made about them is unverified."
+            if unread else '')
+    return f"{table}\n\n{tail}"
+
+
+def literature_rows(d):
+    out = {}
+    for c in d['model']:
+        for lid in re.findall(r'\bL\d+\b', str(c.get('evidence', '')) + ' ' + str(c.get('assumptions', ''))):
+            out.setdefault(lid, []).append(c['id'])
+    for section in ('headline', 'concluding'):
+        for c in d.get(section) or []:
+            for r in c.get('rests_on') or []:
+                if r.startswith('L'):
+                    out.setdefault(r, []).append(c['id'])
+    return out
 
 
 def derived_table(items, empty):
@@ -212,7 +233,7 @@ Headline and concluding claims may rest only on model claims, literature claims 
 
 \section{{Literature claims}}
 {{\small
-{literature_table(d['literature'])}}}
+{literature_table(d, literature_rows(d))}}}
 
 \section{{Concluding remarks}}
 \subsection*{{Conclusions resting on verified rows}}

@@ -2,20 +2,21 @@
 
 ## Primary texts needed (to move literature claims to VERBATIM)
 
-- [ ] Lazear and Rosen (1981), JPE 89(5)
+- [ ] Lazear and Rosen (1981), JPE 89(5). On Drive as `1981-lazear.pdf`; entry_contest has a record (`lit/lazear_rosen_1981`, core Lean) to adapt
 - [ ] Spence (1973), QJE 87(3)
 - [ ] Alós-Ferrer and Prat (2012), JET, or IZA DP 3285 (2008)
-- [ ] Hopkins and Kornienko (2004), AER
+- [ ] Hopkins and Kornienko (2004), AER. On Drive as `hopkins_kornienko_status_game*.pdf`; entry_contest has a record (`lit/hopkins_kornienko`) to adapt
 - [ ] Friedman and Savage (1948), JPE (the manuscript's S-shaped utility)
 - [ ] Bowles, Loury and Sethi (2014), JEEA 12(1) — L6
 - [ ] Calvó-Armengol and Jackson (2004), AER 94(3) — L7, page range to confirm
-- [ ] Cunha and Heckman (2007), AER 97(2) — L1
-- [ ] Borjas (1992), QJE 107(1) — L4
+- [ ] Cunha and Heckman (2007), AER 97(2) — L1. NBER WP 12840 (Jan 2007) uploaded 10 Oct 2026; the AER version would avoid an unverified-version flag
+- [x] Borjas (1992), QJE 107(1) — L4, read in full 10 Oct 2026, `lit/borjas_1992`
 - [ ] Loury (1977), book chapter — L3
 - [ ] Bénabou (1996), REStud 63(2) — L5
 - [ ] Immorlica, Kranton, Manea and Stoddard (2017), AEJ Micro 9(1) — L10, definition of status
 - [ ] Ghiglino and Goyal (2010), JEEA 8(1) — L9
-- [ ] Lower priority: Rosen (1986) L8, Gibbons and Waldman (1999) L2, Altonji and Pierret (2001) L12, Luttmer (2005) L11, Fershtman, Murphy and Weiss (1996) L13
+- [ ] Gibbons and Waldman (1999) L2. NBER WP 6454 (Mar 1998, "...in Internal Labor Markets") uploaded 10 Oct 2026; the QJE version would avoid an unverified-version flag
+- [ ] Lower priority: Rosen (1986) L8, Altonji and Pierret (2001) L12, Luttmer (2005) L11, Fershtman, Murphy and Weiss (1996) L13
 
 ## Decisions recorded
 
@@ -41,8 +42,8 @@
 
 ## References
 
-- [ ] Lean implementation of mathematical content in cited papers (all `NOT_STARTED`)
-- [ ] Confirm `math_content` for Loury (1977), Borjas (1992), Altonji and Pierret (2001)
+- [ ] Lean implementation for every cited paper (rule of 10 Oct 2026, empirical papers included). Done: Borjas (1992), `lean/Lit/Borjas1992.lean`
+- [ ] Confirm `math_content` for Loury (1977), Altonji and Pierret (2001)
 
 ## Deferred to macro sync
 

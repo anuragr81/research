@@ -44,4 +44,9 @@ theorem pareto_gap_strictAnti_tail {x0 a₁ a₂ q₁ q₂ : ℝ} (hx0 : 0 < x0)
   linarith [hk, mul_sub x0 ((1 - q₂) ^ (-(1 / a₂))) ((1 - q₁) ^ (-(1 / a₂))),
     mul_sub x0 ((1 - q₂) ^ (-(1 / a₁))) ((1 - q₁) ^ (-(1 / a₁)))]
 
+theorem control_gap_needs_a_pos :
+    ¬ (pareto 1 1 (1 / 2) - pareto 1 1 0 < pareto 1 (-1) (1 / 2) - pareto 1 (-1) 0) := by
+  unfold pareto
+  norm_num [Real.rpow_neg_one, Real.rpow_one]
+
 end Isc

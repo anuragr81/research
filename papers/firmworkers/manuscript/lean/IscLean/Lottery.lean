@@ -81,4 +81,17 @@ theorem premium_scales_with_income (u2 s m lam : ℝ) :
     (1 / 2) * u2 * (s * (1 - lam) * m) ^ 2 = ((1 / 2) * u2 * s ^ 2 * m ^ 2) * (1 - lam) ^ 2 := by
   ring
 
+theorem control_taylor_needs_mean_zero :
+    (1 : ℝ) * (0 + 1 * (1 * 1) + (1 / 2) * 0 * (1 * 1) ^ 2) ≠ 0 + (1 / 2) * 0 * 1 ^ 2 := by
+  norm_num
+
+theorem control_premium_needs_sigma_ne_zero :
+    ¬ ((0 : ℝ) < (1 / 2) * 1 * 0 ^ 2 ↔ (0 : ℝ) < 1) := by
+  norm_num
+
+theorem control_lotteryGain_pos_needs_two :
+    0 < lotteryGain (fun _ : Fin 1 => (0 : ℝ)) (-1) 0
+      ∧ ¬ ((0 : ℝ) < ((∑ _k : Fin 1, (0 : ℝ)) - (((1 : ℕ) : ℝ) - 1) * (-1)) / ((1 : ℕ) : ℝ)) := by
+  simp [lotteryGain]
+
 end Isc

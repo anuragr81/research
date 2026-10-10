@@ -34,4 +34,13 @@ theorem variance_ne_neg_multiple {Ω : Type*} [MeasurableSpace Ω] (X : Ω → �
   intro h
   linarith
 
+theorem control_taylor_integral_needs_mean_zero :
+    ∫ ω, (0 + 1 * (1 * ω) + (1 / 2) * 0 * (1 * ω) ^ 2) ∂(Measure.dirac (1 : ℝ))
+      ≠ 0 + (1 / 2) * 0 * 1 ^ 2 := by
+  rw [integral_dirac]
+  norm_num
+
+theorem control_variance_needs_p_neg : ∃ v : ℝ, 0 ≤ v ∧ v = 1 * (1 - 0) ^ 2 :=
+  ⟨1, by norm_num⟩
+
 end Isc

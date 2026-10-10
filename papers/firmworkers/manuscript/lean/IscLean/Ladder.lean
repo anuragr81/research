@@ -62,4 +62,21 @@ theorem pareto_top_decile (x0 a : ℝ) : pareto x0 a (9 / 10) = x0 * (10 : ℝ) 
 theorem top_decile_witness : pareto 1 3 (9 / 10) < pareto 1 2 (9 / 10) :=
   pareto_strictAnti_tail one_pos two_pos (by norm_num) (by norm_num) (by norm_num)
 
+theorem control_pareto_mono_needs_a_pos : ¬ (pareto 1 (-1) 0 < pareto 1 (-1) (1 / 2)) := by
+  unfold pareto
+  norm_num [Real.rpow_one]
+
+theorem control_upCost_steps_needs_b_ge_one :
+    ¬ (upCost (1 / 2) 0 1 + upCost (1 / 2) 1 2 ≤ upCost (1 / 2) 0 2) := by
+  have h := Real.rpow_lt_rpow_of_exponent_lt (by norm_num : (1 : ℝ) < 2) (by norm_num : (1 / 2 : ℝ) < 1)
+  rw [Real.rpow_one] at h
+  simp only [upCost]
+  norm_num
+  linarith
+
+theorem control_upCost_jump_needs_b_le_one :
+    ¬ (upCost 2 0 2 ≤ upCost 2 0 1 + upCost 2 1 2) := by
+  simp only [upCost]
+  norm_num [Real.rpow_two]
+
 end Isc

@@ -7,7 +7,11 @@ import yaml
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LEAN_DIR = os.path.join(ROOT, 'lean')
 LEAN_BIN = os.environ.get('LEAN_BIN', '/opt/lean/lean-4.21.0-linux/bin')
-SOURCES_DIR = os.path.join(ROOT, 'sources')
+LIT_DIR = os.path.join(ROOT, 'lit')
+BIB = os.path.join(ROOT, 'refs.bib')
+ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
+LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
+QUOTE_ROW = re.compile(r'^\|\s*[A-Z]+-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
 CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
 PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED',), 'waits_on': ('OPEN',), 'rows': ('OPEN',)}
 
@@ -18,19 +22,58 @@ def load():
 
 
 def lean_sources():
-    text = ''
-    for dirpath, _, files in os.walk(os.path.join(LEAN_DIR, 'IscLean')):
-        for name in files:
-            if name.endswith('.lean'):
-                with open(os.path.join(dirpath, name), encoding='utf8') as fh:
-                    text += fh.read() + '\n'
-    return text
+    files = {}
+    for name in sorted(os.listdir(os.path.join(LEAN_DIR, 'IscLean'))):
+        if name.endswith('.lean'):
+            with open(os.path.join(LEAN_DIR, 'IscLean', name), encoding='utf8') as fh:
+                files['IscLean.' + name[:-5]] = fh.read()
+    return files
 
 
-def lean_declared(full_name, text):
+def declared_theorems(text):
+    return re.findall(r"^theorem\s+([A-Za-z0-9_']+)", text, re.M)
+
+
+def lean_declared(full_name, files):
     namespace, _, short = full_name.rpartition('.')
-    return bool(re.search(r'\bnamespace\s+' + re.escape(namespace) + r'\b', text)) and bool(
-        re.search(r'\btheorem\s+' + re.escape(short) + r'\b', text))
+    return any(re.search(r'\bnamespace\s+' + re.escape(namespace) + r'\b', t) and short in declared_theorems(t)
+               for t in files.values())
+
+
+def lit_norm(s):
+    for k, v in LIGATURES.items():
+        s = s.replace(k, v)
+    s = re.sub(r'-\s*\n\s*', '', s).lower()
+    s = re.sub(r'[^a-z0-9]+', ' ', s)
+    return re.sub(r'\s+', ' ', s).strip()
+
+
+def bib_keys():
+    if not os.path.exists(BIB):
+        return set()
+    with open(BIB, encoding='utf8') as fh:
+        return set(re.findall(r'@\w+\{([^,\s]+),', fh.read()))
+
+
+def lit_records():
+    records = {}
+    if not os.path.isdir(LIT_DIR):
+        return records
+    for name in sorted(os.listdir(LIT_DIR)):
+        keys = os.path.join(LIT_DIR, name, 'KEYS')
+        if os.path.exists(keys):
+            with open(keys, encoding='utf8') as fh:
+                for k in fh.read().split():
+                    records[k] = os.path.join(LIT_DIR, name)
+    return records
+
+
+def record_text(path, name):
+    f = os.path.join(path, name)
+    if not os.path.exists(f):
+        return ''
+    with open(f, encoding='utf8') as fh:
+        return fh.read()
 
 
 def lean_names(claim):
@@ -60,12 +103,41 @@ def lean_axioms(module, names):
     os.remove(probe)
     if run.returncode != 0:
         return None, run.stdout + run.stderr
-    verdict = {}
-    for block in re.split(r"(?=^')", run.stdout, flags=re.M):
-        m = re.match(r"'([^']+)'", block)
+    axioms = {}
+    for n in names:
+        m = re.search(rf"'{re.escape(n)}' (does not depend on any axioms|depends on axioms: \[([^\]]*)\])", run.stdout)
         if m:
-            verdict[m.group(1)] = 'sorryAx' not in block
-    return verdict, run.stdout
+            axioms[n] = set() if m.group(2) is None else {a.strip() for a in m.group(2).split(',')}
+    return axioms, run.stdout
+
+
+def audit_model_lean(files, written, errors, notes):
+    for module, text in files.items():
+        declared = declared_theorems(text)
+        if module == 'IscLean.IscLean' or not declared:
+            continue
+        if not module_built(module):
+            errors.append(f'{module}: not compiled, cannot audit')
+            continue
+        names = [f'Isc.{d}' for d in declared]
+        axioms, log = lean_axioms(module, names)
+        if axioms is None:
+            errors.append(f'lean audit failed for {module}:\n' + log[-2000:])
+            continue
+        if len(axioms) != len(names):
+            errors.append(f'{module}: audited {len(axioms)} of {len(names)} declared theorems')
+        for n, used in axioms.items():
+            bad = used - ALLOWED_AXIOMS - ({'sorryAx'} if n in written else set())
+            if bad:
+                errors.append(f'{module}: {n} depends on {", ".join(sorted(bad))}')
+        notes.append(f'{module}: {len(axioms)} of {len(names)} theorems audited')
+
+
+def check_controls(files, errors):
+    for module, text in files.items():
+        declared = declared_theorems(text)
+        if declared and not any(d.startswith('control_') for d in declared):
+            errors.append(f'{module}: no control_* theorem')
 
 
 def load_map():
@@ -181,6 +253,8 @@ def reference_citations(data, rows):
 
 def check_references(data, rows, errors, notes):
     refs = {r['key']: r for r in data.get('references', []) or []}
+    records = lit_records()
+    verbatim_refs = {c.get('ref') for c in data['literature'] if c.get('status') == 'VERBATIM'}
     for c in data['literature']:
         if c.get('ref') not in refs:
             errors.append(f'{c["id"]}: ref {c.get("ref")!r} has no references entry')
@@ -191,12 +265,17 @@ def check_references(data, rows, errors, notes):
             errors.append(f'{k}: reference not linked to any literature claim')
         if r.get('math_content') not in ('yes', 'no', 'to confirm'):
             errors.append(f'{k}: math_content must be yes, no or to confirm')
-        if r.get('lean') not in ('NOT_STARTED', 'LEAN_PARTIAL', 'LEAN_PROVED', 'NOT_APPLICABLE'):
-            errors.append(f'{k}: unknown lean status {r.get("lean")}')
-        if r.get('math_content') == 'no' and r.get('lean') != 'NOT_APPLICABLE':
-            errors.append(f'{k}: no mathematical content, lean must be NOT_APPLICABLE')
-        if r.get('math_content') != 'no' and r.get('lean') == 'NOT_APPLICABLE':
-            errors.append(f'{k}: mathematical content possible, lean cannot be NOT_APPLICABLE')
+        if r.get('lean') not in ('NOT_STARTED', 'LEAN_PARTIAL', 'LEAN_PROVED'):
+            errors.append(f'{k}: lean status {r.get("lean")} not allowed, every cited paper needs Lean')
+        if r.get('lean') in ('LEAN_PARTIAL', 'LEAN_PROVED'):
+            rec = records.get(k)
+            lean_rel = record_text(rec, 'LEAN').strip() if rec else ''
+            if not rec:
+                errors.append(f'{k}: lean {r.get("lean")} but no lit record lists the key')
+            elif not lean_rel or not os.path.exists(os.path.join(ROOT, lean_rel)):
+                errors.append(f'{k}: lit record has no LEAN file naming an existing Lean source')
+        if k in verbatim_refs and r.get('lean') not in ('LEAN_PARTIAL', 'LEAN_PROVED'):
+            errors.append(f'{k}: read in full but lean is {r.get("lean")}')
         for field in ('reason', 'impact_if_removed'):
             if not str(r.get(field, '')).strip():
                 errors.append(f'{k}: empty {field}')
@@ -218,10 +297,6 @@ def cited_map_rows(data):
     return out
 
 
-def normalise(s):
-    return re.sub(r'\s+', ' ', s).strip().lower()
-
-
 def main():
     use_lean = '--lean' in sys.argv
     data = load()
@@ -232,6 +307,8 @@ def main():
         errors.append(f'duplicate id {dup}')
     by_id = {c['id']: c for c in data['model']}
     lean_text = lean_sources()
+    check_controls(lean_text, errors)
+    bib, records = bib_keys(), lit_records()
     lean_claims = [c for c in data['model'] if c['status'] in ('LEAN_PROVED', 'LEAN_WRITTEN') or lean_names(c)]
     verdict, unbuilt = None, set()
     if use_lean and lean_claims:
@@ -247,7 +324,9 @@ def main():
             if result is None:
                 errors.append(f'lean axiom probe failed for {module}:\n' + log[-2000:])
             else:
-                verdict.update(result)
+                verdict.update({n: 'sorryAx' not in a for n, a in result.items()})
+        written = {n for c in data['model'] if c['status'] == 'LEAN_WRITTEN' for n in lean_names(c)}
+        audit_model_lean(lean_text, written, errors, notes)
     for c in data['model']:
         cid, st = c['id'], c['status']
         if not re.fullmatch(r'M\d+', cid):
@@ -326,15 +405,18 @@ def main():
                 errors.append(f'{cid}: empty {field}')
         quote, page = str(c.get('quote', '')).strip(), str(c.get('page', '')).strip()
         if st == 'VERBATIM':
-            path = os.path.join(SOURCES_DIR, f'{cid}.txt')
+            ref = c.get('ref')
             if not quote or not page:
                 errors.append(f'{cid}: VERBATIM needs quote and page')
-            elif not os.path.exists(path):
-                errors.append(f'{cid}: VERBATIM but sources/{cid}.txt absent')
+            elif ref not in bib:
+                errors.append(f'{cid}: VERBATIM but {ref} is not in refs.bib')
+            elif ref not in records:
+                errors.append(f'{cid}: VERBATIM but no lit record lists {ref} in KEYS')
             else:
-                with open(path, encoding='utf8') as fh:
-                    if normalise(quote) not in normalise(fh.read()):
-                        errors.append(f'{cid}: quote not found in sources/{cid}.txt')
+                claims_md = record_text(records[ref], 'CLAIMS.md')
+                rows_on_page = [q for p, q in QUOTE_ROW.findall(claims_md) if p == page]
+                if not any(lit_norm(quote) in lit_norm(q) for q in rows_on_page):
+                    errors.append(f'{cid}: quote not found on p.{page} of {os.path.relpath(records[ref], ROOT)}/CLAIMS.md')
         elif quote:
             errors.append(f'{cid}: quote present but status is {st}')
     mmap = load_map()
