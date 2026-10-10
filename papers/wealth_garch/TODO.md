@@ -10,7 +10,7 @@ The skeleton follows `../MANUSCRIPT_SKELETON.md`, with
 | 1 | Scaffold: four empty tables, ID scheme, appendix stubs, `checks/verify_manuscript.py` with controls, `verify.sh` | done 2026-10-10 |
 | 2 | Lean project `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1), every file a build root, axiom audit in `verify.sh` | done 2026-10-10; the `sorry` in `RateBased.saturated_ratio_tendsto` closed by `RateBased.tendsto_tanh_atTop` |
 | 2a | Candidate claims: every headline PROOFS_v2 makes is listed in the novelty ledger below, with the results it rests on, the Lean it waits on and the reading its novelty waits on. A candidate enters Table 5 as a C row once its first model row exists, since MS-3 refuses a C row with no row to point to. This list drives passes 3 and 7 | done 2026-10-10 |
-| 3 | Port the analytic steps to Lean, one cluster per pass, with `control_*` theorems and counterexamples (inventory below) | |
+| 3 | Port the analytic steps to Lean, one cluster per pass, with `control_*` theorems and counterexamples (inventory below) | in progress; H1 (`CapGeometry`) and H3 (`Identification`) done 2026-10-10 |
 | 4 | Model rows and Appendix A proofs, one family per pass | |
 | 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | |
 | 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | |
@@ -118,6 +118,30 @@ Illustrations: `rem:solver` SLV, `rem:capbinds` CBI, `rem:compstat` CSL,
 No file under `lean/mathlib/` has a `control_*` theorem yet. Every cluster
 needs one.
 
+## C2 search, 10 October 2026
+
+Run by a web-search agent; every entry is a lead to be read, not a finding.
+
+- Black and Perold (1992), "Theory of constant proportion portfolio
+  insurance", *Journal of Economic Dynamics and Control* 16(3):403-426. The
+  solvency branch $u=(x-1)/a_1$ is a CPPI rule with floor 1 and multiplier
+  $1/a_1$, and under CPPI the log cushion has constant volatility. If the
+  reading confirms it, the constancy of $\nu_1^2$ is CPPI geometry and C2's
+  novelty rests on the two-branch limits, the deposit-shock terms and the
+  silence of $\lambda_S$.
+- Décamps, Mariotti, Rochet and Villeneuve (2011), "Free Cash Flow, Issuance
+  Costs, and Stock Prices", *Journal of Finance* 66(5):1501-1544. Volatility
+  asymmetry from financing frictions with risk-neutral shareholders.
+- Hilscher, Raviv and Wiener (2024), "Dynamic volatility regulation of
+  financial institutions", *Finance Research Letters* 61, doi
+  10.1016/j.frl.2023.104968.
+- Dudziak and Schmidli, "Stochastic Control of Dividends with a Drawdown
+  Penalty", arXiv:2510.25494.
+- Lower: Milne and Whalley, "Bank Capital and Incentives for Risk-Taking",
+  SSRN 303176. Checked by the agent as likely not relevant: Peura and Keppo
+  (2006), Bolton, Li, Wang and Yang (2025), Hugonnier and Morellec (2017),
+  Klimenko, Pfeil, Rochet and De Nicolò, Chevalier, Ly Vath and Roch (2020).
+
 ## Novelty ledger
 
 No result is claimed new yet. Candidates, from the numbered results of
@@ -131,8 +155,8 @@ the search itself is the pending item.
 | H1 (C1 in Table 4, C2 in Table 5; M1 to M3, L1 to L3) | The variance ratio $\lambda_V^4=\nu_1^2/\nu_3^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | done, `RateBased`, `CapGeometry` | read: `bayraktar2026` (defines the cap, no limits), `barberis2001` (level of loss aversion silent in return volatility, cited in L2), `engle2018` (decomposition of a news asymmetry). `li2023` read (preference reaches the limits of an unconstrained control, L4). `barberis1999` (working paper) read too. Waiting: a search for papers that evaluate limits of state volatility under a regulatory cap on the risky position |
 | H2 | The degeneracy of the diffusion at the distress boundary $x=1$ is a coordinate artefact. In $z=\log((x-1)/q)$ the volatility is constant on the solvency regime. | `prop:rrL`, `prop:statemap`, `cor:boundary` | port CCP and TSO (i) to (iii); `BCVW.diffusion_vanishes_at_one`, `BCVW.drift_at_one` exist | `bayraktar2026` read: Remark 3.1 (p. 11) states the degeneracy at $y=1$ and the drift $r-r_L$. The paper never changes coordinate, so only the artefact reading can be new. Search for degenerate-diffusion bank capital models |
 | H2b | $x=1$ is unreachable if and only if $r>r_L$. | `cor:boundary` | none possible as stated: boundary classification of a diffusion is not in Mathlib. Enters as a hypothesis unless the scale-function step is formalised | `bayraktar2026` Remark 3.1 already states "locally repelling when r > rL" (BCVW-Q3). Not new as a local statement |
-| H3 | $(\lambda_S,K)$ is locally identified from the pair of thresholds $(y^*,x_L)$, because the two parameters move the trigger in opposite directions. | `lem:reg`, `lem:envelope`, `lem:bdr`, `prop:tcs`, `lem:envelopeK`, `prop:kcs`, `cor:idn`, `prop:soc` | Envelope cores exist (`Envelope.*`); port TCS, KCS, IDN, SOC algebra; REG and BDR enter as hypotheses | `bayraktar2026` read: no fixed issuance cost, and it states one would generally break the one-dimensional reduction (BCVW-Q4). Appendix D must state that PROOFS_v2's $K$ is charged per unit of liabilities when $K$ enters a row. Search for comparative statics of impulse-control thresholds in a fixed issuance cost; `altinkilic2000`, `buhner2002` for the cost structure only |
-| H3b | The fixed issuance cost widens the inaction region at both ends, and the trigger-to-target gap $y_{\text{post}}-x_L$ is strictly increasing in $K$. | `prop:kcs`, `lem:envelopeK` | as H3 | as H3 |
+| H3 (C3 in Table 4, C4 in Table 5; M4 to M6, L5, L6 from 2026-10-10) | $(\lambda_S,K)$ is locally identified from the pair of thresholds $(y^*,x_L)$, because the two parameters move the trigger in opposite directions. | `lem:reg`, `lem:envelope`, `lem:bdr`, `prop:tcs`, `lem:envelopeK`, `prop:kcs`, `cor:idn`, `prop:soc` | Envelope cores exist (`Envelope.*`); port TCS, KCS, IDN, SOC algebra; REG and BDR enter as hypotheses | `bayraktar2026` read: no fixed issuance cost, and it states one would generally break the one-dimensional reduction (BCVW-Q4). Appendix D must state that PROOFS_v2's $K$ is charged per unit of liabilities when $K$ enters a row. Search for comparative statics of impulse-control thresholds in a fixed issuance cost; `altinkilic2000`, `buhner2002` for the cost structure only |
+| H3b (M5) | The fixed issuance cost widens the inaction region at both ends, and the trigger-to-target gap $y_{\text{post}}-x_L$ is strictly increasing in $K$. | `prop:kcs`, `lem:envelopeK` | as H3 | as H3 |
 | H4 | Smooth fit holds at the recapitalisation trigger, $V'(x_L^-)=V'(x_L^+)=1+\kappa$. | `prop:smf`, `rem:smfn`, `lem:itr` | `SmoothFit.smooth_fit` exists; ITR and the viscosity supersolution property enter as hypotheses | Øksendal and Sulem, *Applied Stochastic Control of Jump Diffusions*, Thm 9.7 and Ch. 9, and Crandall, Ishii and Lions (1992), both cited in the header of `SmoothFit.lean` for the supersolution property and unread; search for smooth fit at impulse-control boundaries. High risk that this is known. `bayraktar2026` read: smooth fit only at the dividend barrier, and its recapitalisation threshold is exogenous (BCVW-Q6) |
 | H5 | At $\lambda_S=1$ the problem is the risk-neutral benchmark exactly, and the running payoff $-\Lambda$ is concave for every $\lambda_S\ge1$, unlike an S-shaped penalty. | `prop:nesting`, `prop:concave-payoff` | `QVI_Part1.lambda_asymmetry_vanishes_at_one`, `QVI_Part1.neg_Lambda_concave` | `kahneman1979` unread. `barberis1999` and `barberis2001` read: the loss-aversion term is already kinked-linear (BHS-Q4, QJE-Q4), so the kinked-linear form is not new and the contrast is only with S-shaped curvature. `li2023` read: the S-shaped case that needs a concave envelope (LYZ-Q3). Positioning rather than novelty |
 | H6 | The discrete-time recursion is observationally equivalent to an EGARCH-class specification conditioned on the state level, so $\lambda_V$ is estimable from returns without observing $Q_t$, given $\theta$. | `prop:egarch` | port; rests on Gaussian moment identities, Mathlib coverage unchecked | Nelson (1991); `engle2018` |

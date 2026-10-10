@@ -109,6 +109,9 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M1}{The deficit-to-surplus variance ratio of the discrete-time recursion is $\lambda_V^4$, for every saturation scale.}{$V_0>0$, $\theta>0$, $\lambda_V>0$, $V(z)=V_0\exp\big(-2\log\lambda_V\tanh(z/\theta)\big)$ $\Rightarrow$ $V(-z)/V(z)\to\lambda_V^4$ as $z\to\infty$.}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
 \mrow{M2}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there the $z$-volatility is the constant $\nu_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\nu_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
 \mrow{M3}{For any exposure policy that binds the cap near an end of the state space, the $z$-volatility tends to $\nu_1^2$ at the distress boundary and to $\nu_3^2$ deep in surplus.}{$q>0$, $0<a_1<a_3$, $a_2<1$. If $\pi(x)\,x=u(x)$ for all $x$ near $1^+$ then $\zeta(x)\to\nu_1^2$ as $x\to1^+$. If $\pi(x)\,x=u(x)$ for all large $x$ then $\zeta(x)\to\nu_3^2$ as $x\to\infty$. Both fail without $a_1<a_3$ or without binding.}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
+\mrow{M4}{The dividend barrier rises in the asymmetry parameter and in the fixed issuance cost.}{$\theta\in\{\lambda_S,K\}$, $F=W$ or $N$. If $V''(y^*)=0$, $V'(y^*)=1$, $\Lambda'(y^*)=0$, $F'(y^*)=0$, $\sigma^2(y^*)>0$, $\rho_L\ne\mu'(y^*)$, $\partial_\theta V=-F$ and the chain rule holds along $y^*(\theta)$, then $dy^*/d\theta=\rho_LF(y^*)/(\rho_L-\mu'(y^*))$, positive when $0<\rho_L$, $\mu'(y^*)<\rho_L$ and $F(y^*)>0$.}{Identification.vppp_at_barrier, Identification.fpp_at_barrier, Identification.barrier_slope, Identification.barrier_slope_pos, Identification.control_barrier_sign_needs_gap, Envelope.wode_of_envelope, Envelope.node_of_envelope, Envelope.neumann_at_ystar}
+\mrow{M5}{The recapitalisation trigger rises in the asymmetry parameter and falls in the fixed issuance cost, the injection target rises in the fixed issuance cost, and the trigger-to-target gap widens in it.}{If $V''(x)\,dx/d\theta+\partial_\theta V'(x)=0$ along a boundary $x(\theta)$, $V''(x)\ne0$ and $\partial_\theta V'=-F'$, then $dx/d\theta=F'(x)/V''(x)$. With $W'(x_L)>0$, $N'(x_L),N'(y_{\text{post}})<0$ and $V''(x_L)>0>V''(y_{\text{post}})$, $dx_L/d\lambda_S>0$, $dx_L/dK<0$, $dy_{\text{post}}/dK>0$ and $d(y_{\text{post}}-x_L)/dK>0$.}{Identification.boundary_slope, Identification.trigger_rises_in_lambda, Identification.trigger_falls_in_K, Identification.target_rises_in_K, Identification.gap_increasing_in_K, Identification.control_trigger_slope_needs_curvature, Envelope.trigger_jump}
+\mrow{M6}{The Jacobian of the barrier and the trigger in the two parameters is non-singular, because the parameters move the trigger in opposite directions.}{$\det\partial(y^*,x_L)/\partial(\lambda_S,K)=\frac{\rho_L}{(\rho_L-\mu'(y^*))V''(x_L)}\big(W(y^*)N'(x_L)-N(y^*)W'(x_L)\big)$, negative under the signs of M4 and M5. For $a_{11},a_{12},a_{21}>0>a_{22}$, $a_{11}a_{22}-a_{12}a_{21}<0$. With $a_{22}>0$ it can vanish.}{Identification.det_formula, Identification.det_neg_of_opposite, Identification.det_neg, Identification.control_same_direction_can_fail}
 
 \bottomrule
 \end{longtable}
@@ -131,12 +134,17 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L2}{barberis2001}{With a constant level of loss aversion, the volatility of log returns equals that of dividend growth for every level (12 percent at four values of $b_0$, their Table XIII), the parallel to the silence of $\lambda_S$ in C2. The parallel ends at the mechanism, a constant price-dividend ratio in an endowment economy rather than a binding regulatory cap.}{the volatility of log returns in this model is equal to the volatility of log dividend growth, namely 12 percent.}{47}{C2}
 \lrow{L3}{engle2018}{They split observed equity volatility asymmetry into a mechanical-leverage share (3\% by their correlation measure) and a market-exposure share, separating a structural source from a non-structural one as C2 does. The parallel ends at the object, since their asymmetry is a response of variance to the sign of news and not a ratio of variances across regions of a state variable.}{Volatility asymmetry is mostly explained by exposure to the aggregate market, not a mechanical leverage effect.}{449}{C2}
 \lrow{L4}{li2023}{In an unconstrained loss-averse consumption and investment problem, the large-wealth limits of the optimal controls depend on the preference parameters, the contrast to the silence of $\lambda_S$ in C2. The parallel ends at the constraint, since their risky position is unconstrained and the limit is a Merton-type scaling, while in C2 a binding regulatory cap fixes it. By their own formulas the loss-aversion degree enters those limits only when the curvatures on gains and losses are equal.}{our asymptotic limits differ significantly from the ones in the Merton's problem, which now sensitively depends on the reference degree parameter}{13}{C2}
+\lrow{L5}{bayraktar2026}{The paper has no fixed issuance cost, fixes its recapitalisation threshold exogenously, and names a fixed cost as a change that could move recapitalisation. M5 and C4 take up that change. The parallel ends there, since the paper derives no threshold response to a fixed cost and no identification.}{If one introduced fixed issuance costs, endogenous market access, or adverse-selection costs that rise near distress, earlier recapitalization or inaction at the boundary could become optimal.}{13}{M5, C4}
+\lrow{L6}{bayraktar2026}{A fixed issuance cost charged in dollars breaks the reduction to one dimension. M4 to M6 charge $K$ per unit of liabilities, which keeps it (Appendix~\ref{app:primitives}).}{Fixed issuance costs, nonlinear issuance costs, taxes, deposit insurance premia, endogenous deposit rates, balance-sheet size effects, multiple asset classes, or regulatory constraints depending on dollar levels rather than ratios would generally break the one-dimensional reduction.}{9}{M4, M5, M6}
 
 \bottomrule
 \end{longtable}
 \normalsize
 
-Every paper the tables name has been read.
+Black and Perold (1992), Décamps, Mariotti, Rochet and Villeneuve (2011),
+Hilscher, Raviv and Wiener (2024) and Dudziak and Schmidli
+(arXiv:2510.25494) are named in Table~\ref{tab:pending} but have not been
+read, and every claim made about them is unverified.
 
 \section{Conclusions}
 
@@ -157,6 +165,7 @@ ID & Statement & Rows \\
 \midrule
 \endhead
 \crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the saturation limits of the $z$-volatility are $\nu_1^2$ and $\nu_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$.}{M1, M2, M3, L1}
+\crow{C3}{Under the hypotheses listed in Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M4, M5, M6}
 
 \bottomrule
 \end{longtable}
@@ -171,7 +180,8 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
-\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). \pend{a search for papers that evaluate limits of state volatility under a regulatory cap on the risky position.}}{M3, L1, L2, L3, L4}
+\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). \pend{reading the candidates of the search of 10 October 2026, Black and Perold (1992) on constant proportion portfolio insurance, whose cushion has the form of the solvency branch of $u$, Décamps, Mariotti, Rochet and Villeneuve (2011) on volatility asymmetry from issuance costs rather than preference, Hilscher, Raviv and Wiener (2024) on volatility regulation of financial institutions, and Dudziak and Schmidli (arXiv:2510.25494) on dividends with a drawdown penalty.}}{M3, L1, L2, L3, L4}
+\crow{C4}{That the asymmetry parameter and the fixed issuance cost are jointly identified from the two thresholds is new. \citet{bayraktar2026} have no fixed issuance cost and set the recapitalisation threshold exogenously (L5). \pend{a search for comparative statics of impulse-control thresholds in a fixed issuance cost, and for identification of preference and cost parameters from capital thresholds.}}{M6, L5}
 
 
 \bottomrule
@@ -198,6 +208,13 @@ $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$,
 with $c$ the correlation between the risky return and the liability shock.
 The $z$-volatility is $\zeta(x)=z'(x)^2\,\sigma^2\big(x,\pi(x)\big)$, the
 exposure ratio is $\omega(x)=\pi(x)\,x/(x-1)$, and $\nu_i^2=\sigma^2/a_i^2-2c\sigma\sigma_L/a_i+\sigma_L^2$ for $i\in\{1,3\}$.
+For M4 to M6, $V$ is the value function, $y^*$ the dividend barrier, $x_L$
+the recapitalisation trigger and $y_{\text{post}}$ the injection target. $W$
+is the expected discounted shortfall and $N$ the discounted injection count
+under the optimal policy, $\theta$ is $\lambda_S$ or $K$, and $F$ is $W$ or $N$
+accordingly. $\rho_L$ is the liability-net discount rate, $\mu'$ the
+derivative in $x$ of the drift along the cap, and $g=(R-x)^+$ for $F=W$ and
+$g=0$ for $F=N$. Primes are derivatives in $x$.
 
 \begin{mproof}{M1}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
 For every $z$,
@@ -223,6 +240,26 @@ Controls, at $\sigma=1$, $\sigma_L=c=0$, $q=1$.
 \[ \pi\equiv0\ \Rightarrow\ \zeta(2)=0\ne4=\nu_1^2. \]
 \end{mproof}
 
+\begin{mproof}{M4}{Identification.vppp_at_barrier, Identification.fpp_at_barrier, Identification.barrier_slope, Identification.barrier_slope_pos, Identification.control_barrier_sign_needs_gap, Envelope.wode_of_envelope, Envelope.node_of_envelope, Envelope.neumann_at_ystar}
+\[ \tfrac12\sigma^2V'''+\tfrac12(\sigma^2)'V''+\mu V''+\mu'V'-\rho_LV'-\Lambda'=0,\quad V''=0,\ V'=1,\ \Lambda'=0\ \Rightarrow\ \tfrac12\sigma^2V'''=\rho_L-\mu' . \]
+\[ \tfrac12\sigma^2F''+\mu F'-\rho_LF+g=0,\quad F'(y^*)=0,\ g(y^*)=0\ \Rightarrow\ \tfrac12\sigma^2F''=\rho_LF . \]
+\[ V'''\frac{dy^*}{d\theta}+\partial_\theta V''=0,\quad \partial_\theta V''=-F''\ \Rightarrow\ \frac{dy^*}{d\theta}=\frac{F''}{V'''}=\frac{\rho_LF(y^*)}{\rho_L-\mu'(y^*)} . \]
+Control, $\rho_L=1$, $\mu'=2$, $F=1$ $\Rightarrow$ $dy^*/d\theta=-1$.
+\end{mproof}
+
+\begin{mproof}{M5}{Identification.boundary_slope, Identification.trigger_rises_in_lambda, Identification.trigger_falls_in_K, Identification.target_rises_in_K, Identification.gap_increasing_in_K, Identification.control_trigger_slope_needs_curvature, Envelope.trigger_jump}
+\[ V''(x)\frac{dx}{d\theta}+\partial_\theta V'(x)=0,\quad \partial_\theta V'=-F'\ \Rightarrow\ \frac{dx}{d\theta}=\frac{F'(x)}{V''(x)} . \]
+\[ \frac{dx_L}{d\lambda_S}=\frac{W'(x_L)}{V''(x_L)}>0,\qquad \frac{dx_L}{dK}=\frac{N'(x_L)}{V''(x_L)}<0,\qquad \frac{dy_{\text{post}}}{dK}=\frac{N'(y_{\text{post}})}{V''(y_{\text{post}})}>0 . \]
+\[ \frac{d(y_{\text{post}}-x_L)}{dK}>0,\qquad N(x_L)=N(y_{\text{post}})+1 . \]
+Control, $V''(x)=0$, $F'(x)=0$ $\Rightarrow$ $dx=0$ and $dx=1$ both solve the chain rule.
+\end{mproof}
+
+\begin{mproof}{M6}{Identification.det_formula, Identification.det_neg_of_opposite, Identification.det_neg, Identification.control_same_direction_can_fail}
+\[ \det\begin{pmatrix}\frac{\rho_LW(y^*)}{\rho_L-\mu'}&\frac{\rho_LN(y^*)}{\rho_L-\mu'}\\[2pt] \frac{W'(x_L)}{V''(x_L)}&\frac{N'(x_L)}{V''(x_L)}\end{pmatrix}=\frac{\rho_L}{(\rho_L-\mu')V''(x_L)}\big(W(y^*)N'(x_L)-N(y^*)W'(x_L)\big) . \]
+\[ a_{11},a_{12},a_{21}>0>a_{22}\ \Rightarrow\ a_{11}a_{22}<0<a_{12}a_{21}\ \Rightarrow\ a_{11}a_{22}-a_{12}a_{21}<0 . \]
+Control, $a_{11}=a_{12}=a_{21}=a_{22}=1$ $\Rightarrow$ $\det=0$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -244,6 +281,19 @@ $z(X_t)$ is Itô's formula, which is not proved (M2, M3). That the optimal
 policy binds the cap near both ends of the state space is a hypothesis of M3,
 and C1 states it as its condition. \path{PROOFS_v2.tex} supports it only by
 the numerical solve, which is evidence and not proof.
+
+M4 to M6 take as hypotheses, in raw form, the inputs that
+\path{PROOFS_v2.tex} establishes analytically or assumes. That $V$ is the
+value function is the verification theorem, not proved. Differentiability of
+$V$ and of the thresholds in $\theta$ is the regularity lemma and the implicit
+function theorem. The envelope identities $\partial_{\lambda_S}V=-W$ and
+$\partial_KV=-N$ are Danskin's theorem. The interior equation enters
+differentiated in $x$ and in $\theta$. The signs $W(y^*)>0$, $N(y^*)>0$,
+$N'<0$ on the inaction region and $W'(x_L)>0$ come from hitting-time
+arguments, and $W'(x_L)>0$ holds exactly when $\rho_LW(y_{\text{post}})<R-x_L$.
+The signs $V''(x_L)>0>V''(y_{\text{post}})$ are the second-order conditions,
+not yet in Lean. $\rho_L>\mu'(y^*)$ is a parameter condition. C3 states these
+as its hypotheses.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 
@@ -269,6 +319,12 @@ Cap geometry & $a_1,a_2,a_3$ & The parameters of the regulatory cap. \\
 Solvency and liquidity regime & $x\le\bar x$, $x\ge\bar x$ & The ranges where the first and the second branch of $u$ bind (M2). \\
 $z$-volatility & $\zeta(x)$ & The squared diffusion coefficient of $z$ (Appendix~\ref{app:evidence}). \\
 Saturation limits & $\nu_1^2,\nu_3^2$ & The limits of $\zeta$ at the distress boundary and deep in surplus (M3). \\
+Fixed issuance cost & $K$ & The cost of an issue that does not scale with its size, per unit of liabilities (Appendix~\ref{app:primitives}). \\
+Dividend barrier & $y^*$ & The state at which dividends are paid. \\
+Recapitalisation trigger & $x_L$ & The state at which capital is raised. \\
+Injection target & $y_{\text{post}}$ & The state reached by an issue. \\
+Expected discounted shortfall & $W$ & $\mathbb E_x\int_0^\infty e^{-\rho_Lt}(R-X_t)^+dt$ under the optimal policy, $-\partial_{\lambda_S}V$. \\
+Discounted injection count & $N$ & $\mathbb E_x\sum_ie^{-\rho_L\tau_i}$ under the optimal policy, $-\partial_KV$. \\
 \bottomrule
 \end{longtable}
 \normalsize
@@ -289,6 +345,11 @@ $\nu_1^2/\nu_3^2$, identifying the conditional variance $V(z)$ deep in
 deficit and deep in surplus with the two saturation limits of $\zeta$. This
 is a definition, not a result, and no theorem connects the discrete-time
 recursion to the continuous-time diffusion. C1 depends on it.
+
+\paragraph{The fixed issuance cost.} $K$ is charged per unit of
+liabilities, so the dollar cost of an issue is $K$ times liabilities. This
+keeps the reduction of the bank's problem to the single state $x$, which a
+fixed cost in dollars would break (L6). M4 to M6, C3 and C4 depend on it.
 
 \section{Refuted conjectures}
 \label{app:refuted}
