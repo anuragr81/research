@@ -197,6 +197,49 @@ check("RD-8 the u'-role function crosses +- and D(Q) single-crosses +- in Q",
       "Delta(0,Q) rises then falls here: an interior MAXIMUM, not a minimum")
 
 print()
+print("RD-Q  pass 3 quotations against the cached text of the PDF")
+print("-" * 72)
+import difflib
+import pathlib
+cache = pathlib.Path.home() / ".cache" / "entry_contest" / "ryvkin_drugov_2020.txt"
+
+
+def _norm(s):
+    s = s.lower().replace("\u201c", '"').replace("\u201d", '"')
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _best(q, tn):
+    q = _norm(q)
+    if q in tn:
+        return 1.0
+    qw = q.split()
+    best = 0.0
+    for k in range(max(1, len(qw) - 2)):
+        anchor = " ".join(qw[k:k + 3])
+        off = len(" ".join(qw[:k])) + (1 if k else 0)
+        for m in re.finditer(re.escape(anchor), tn):
+            w = tn[max(0, m.start() - off):max(0, m.start() - off) + len(q)]
+            best = max(best, difflib.SequenceMatcher(None, q, w).ratio())
+    return best
+
+
+claims_text = open(os.path.join(HERE, "CLAIMS.md")).read()
+rows = re.findall(r"^\|\s*(RD-[J-Z])\s*\|\s*(\d+)\s*\|\s*\"(.+?)\"\s*\|", claims_text, re.M)
+if not cache.exists():
+    check("RD-Q the cached text of the PDF is available", False, str(cache))
+else:
+    tn = _norm(cache.read_text())
+    scores = {rid: _best(q, tn) for rid, _, q in rows}
+    check("RD-Q every pass 3 quotation is in the text verbatim (after normalising spacing and case)",
+          len(rows) == 4 and all(v == 1.0 for v in scores.values()),
+          ", ".join(f"{k} {v:.2f}" for k, v in scores.items()))
+    flip = "as k becomes large, the comparative statics are determined by the shape of the lower tail of f"
+    check("RD-Q control: RD-J with the tail reversed is not in the text", _best(flip, tn) < 1.0,
+          f"best match {_best(flip, tn):.2f}")
+
+print()
 print("RD-L  Lean: kernel TP2, peak, single-crossing, discrete Karlin step")
 print("-" * 72)
 ALLOWED_AXIOMS = {"propext", "Quot.sound"}

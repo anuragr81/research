@@ -4,6 +4,61 @@ Run: `python3 verify_rd.py` gives **13 checks, 0 failures** (pass 2, 2026-10-06)
 Pass 1 had 7 checks. Pass 2 adds RD-8 and the five RD-L checks on
 `RyvkinDrugov.lean`.
 
+## Pass 3 (9 Oct 2026). The C7 comparison, for pass 7 of the manuscript plan
+
+The question C7 left open: is the rise-then-fall result for the first
+entrant's gain (M16 to M21) an instance of RD's unimodality result, or a new
+statement? Answer: M17 is an instance; what is left is narrower.
+
+**The correspondence.** M1 writes the gain as `Δ(0) = V·E[φ(M)]`, with `φ =
+G − F` and `M` the best rival's score, whose CDF is `H(z|Q) = C(z)·G(z)^{Q−1}`.
+RD's marginal benefit is `b_k = E[f(X_{(k−1:k−1)})]`, the noise density at
+the best rival's shock (eqs. (3), (9)). Their Karlin step (p.1597, RD-F)
+applies to any `γ(θ) = ∫ u dH(·|θ)`: with `u = φ`, `θ = Q` and this `H`,
+
+- `−H_θ = C·G^{Q−1}·(1−G)` is log supermodular in `(z, Q)`, since `C` does
+  not depend on `Q` (RD-5; Lean `weight_tp2` on a grid);
+- `u′ = g − f` crosses `+−` exactly when `φ` is single-peaked, which is
+  M17's hypothesis (pass 2, finding F1; Lean `pmu_orientation`);
+- so `D(Q)` crosses `+−` and `Δ_Q(0)` has no interior minimum, which is
+  M17. M17's ratio bound `D(Q2) ≤ G(x0)^{Q2−Q1}·D(Q1)` is the quantitative
+  form of the same step (Lean `karlin_ratio` for sums).
+
+So the no-interior-minimum result is RD's Karlin step with the score gap in
+place of the noise density and the best rival's law, including the
+incumbent, in place of `F^{k−1}`. It is not new as a result.
+
+**What is left, and how far it is RD's.**
+
+1. M21 (for some base laws the gain must eventually fall) makes precise, for
+   the entry gain, RD's remark that for many players "the comparative
+   statics are determined by the shape of the upper tail" (RD-J, p.1601).
+   The precise tail condition is ours; the idea is theirs.
+2. M18 (with a uniform base score the gain never falls in `Q`) is the
+   monotone case of the same step, with a twist that RD's tournament cannot
+   have: the kernel `1 − G` vanishes above the top of the outsiders' support,
+   and a uniform base score puts the peak of `φ` exactly there (`x0 = μ`).
+   In RD all players draw from one law, so the kernel is positive on the
+   whole support.
+3. M19 (primitive conditions on `r` and `s` under which `φ` is
+   single-peaked) is about the score technology, which RD do not have.
+
+Items 2 and 3 are what C7 may still claim, as statements about entry, and
+only if no contest with a binary investment states them. The abstract-level
+searches of 9 Oct 2026 found none; that is not a proof of absence, and C7
+stays pending on it.
+
+**C12, the weight on talent.** RD's footnotes 23 and 29 (RD-K, RD-L, RD-M)
+point to Drugov and Ryvkin (2020), where effort falls as noise becomes more
+dispersed in the dispersive order, for arbitrary prize schedules, and to
+Morgan, Tumlinson and Vardy, where noise intensity changes who drops out.
+Raising `μ` scales the base score up relative to the bought component,
+which is a dispersive change of the common component. M28 is therefore
+likely the entry-margin analogue of Drugov and Ryvkin's result, and the
+contrast between a universal sign in noise dispersion and none in the number
+of players is already theirs across the two papers. Both papers are unread;
+C12 is narrowed accordingly.
+
 ## Pass 2 (2026-10-06). Lean formalisation and a full re-read of the PDF
 
 ### Source read

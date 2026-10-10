@@ -47,3 +47,16 @@ has been applied there.
   object. RD-7 separates the two order statistics involved.
 - **RD-D to RD-H** are formalised in `RyvkinDrugov.lean` (pass 2). RD-I is
   covered by the SymPy checks RD-1 and RD-7 and has no Lean counterpart.
+
+## Pass 3 (9 Oct 2026): quotations used in the pass 7 novelty reading
+
+Re-read from the same Drive PDF; the extracted text is cached at
+`~/.cache/entry_contest/ryvkin_drugov_2020.txt`, and `verify_rd.py` (check
+RD-Q) matches each quotation against it. Pages are journal pages.
+
+| ID | Page | Quotation | Used for |
+|---|---|---|---|
+| RD-J | 1601 | "as k becomes large, the comparative statics are determined by the shape of the upper tail of f" | M21 is the precise version of this remark for the entry gain (C14) |
+| RD-K | 1607 | "show that aggregate effort can be nonmonotone in noise intensity due to players dropping out when the winner determination process becomes “too meritocratic.”" | Footnote 23 on Morgan, Tumlinson and Vardy: a precedent candidate for C12, unread |
+| RD-L | 1607 | "provide a systematic study of how equilibrium effort is affected by changes in the distribution of noise, and what it means to have “more noise” in a tournament" | Footnote 23 on Drugov and Ryvkin (2020): a precedent candidate for C12, unread |
+| RD-M | 1610 | "show that ranking noise distributions in the dispersive order is necessary and sufficient to rank equilibrium effort in tournaments with arbitrary sizes and prize schedules" | Footnote 29 on Drugov and Ryvkin (2020): the dispersive-order result C12 is measured against |

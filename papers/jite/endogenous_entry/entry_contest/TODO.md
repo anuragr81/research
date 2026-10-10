@@ -887,6 +887,32 @@ paper's claims, and only then write the manuscript.
      every `k ≠ 1` fails at `k = −1` (`neg_not_ordered`). `PROOFS.tex` and
      `LITERATURE.tex` now cite it beside Shaked. Shaked (1982) itself remains
      unread.
+  Morgan, Tumlinson and Vardy read 9 Oct 2026 (IMF WP/18/231, Sections I to IV),
+  `lit/morgan_tumlinson_vardy_2022/`, row L20: participation falls as the costly
+  choice is ranked more accurately, the opposite of M28, because of the effort
+  margin. C9 now states the scope; C12 claims the sign on the entry margin,
+  pending only Drugov and Ryvkin (2020).
+  Shaked (1982) read 9 Oct 2026 from page images, `lit/shaked_1982/`, row L21,
+  `lean/mathlib/ShakedDispersive.lean` (33 theorems: Theorem 2.1 both forms,
+  Theorem 2.3, Example 3.3, controls). He credits the order to Saunders and
+  Moran (1978), unread, and the name to Lewis and Thompson. MTV's instance
+  of Proposition 1 is in `lean/mathlib/MeritocracyLogistic.lean`
+  (participation m/(1 - sigma alpha) with logistic noise, SOC (4) checked);
+  the reason for the opposite sign is in C9 and Appendix D, "No effort
+  margin" (author's request). The SOC display on MTV p.13 drops a minus sign
+  (recorded as MTV-D1).
+  Drugov and Ryvkin (NES WP 256) read 10 Oct 2026, `lit/drugov_ryvkin_2020/`, row
+  L22: Section 5.3 has free entry with the opposite sign to M28 (fewer entrants
+  with less noise). C12 now claims M28's sign on the entry margin, pending
+  only the binary-investment search shared with C13.
+  Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
+  Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
+  narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
+  Drugov and Ryvkin (2020); needs that PDF and Morgan, Tumlinson and Vardy
+  (2022). C13 narrowed with the reason the share is undefined in the entry
+  models read. Ledger rows revised and added. PDFs still needed: Drugov and
+  Ryvkin (2020) JET 188; Morgan, Tumlinson and Vardy (2022) JET 201;
+  Mathews-Namoro, Corcoran, Corcoran-Karels, Shaked.
   8. **Conclusions, then introduction.** Conclusions carry only the novel
      claims from the revised ledger, each linked to model or literature rows.
      The introduction states the headlines and their number, each traced to a
@@ -903,6 +929,13 @@ paper's claims, and only then write the manuscript.
      on, with verbatim quotes and pages from `lit/<paper>/CLAIMS.md`.
   10. **Readability passes** on the appendix proofs, as many as needed, under
      the 30% checker.
+     Round 2, 10 Oct 2026, on the text added since 8 Oct (M28 to M31, L14 to
+     L22, K7, C9 to C14, Appendix D): colons removed from prose; the share
+     renamed from s(k) to xi(k), since s is the bought component; C9 cut to a
+     pointer so the effort-margin mechanism appears once (Appendix D); the
+     anonymity-boundary paragraph corrected for M29 (it still said the rising
+     direction was unclaimed); the lists of rows taking C = F completed; the
+     share added to the terminology table as "paying class's share".
   11. **Referee comments, again.** Agreed 7 Oct 2026. Once passes 1 to 10 are
      done, re-read every referee comment against the verified results and
      record, for each, whether the skeleton answers it, with the Lean theorem
@@ -1437,7 +1470,11 @@ be claimed as novel.
 | Endogenous marginal agent in the pivot rule | **SURVIVES** | Proposition (endogenous margin), machine-checked and independently recompiled (axiom-free); 20,000 economies with `k*` recomputed on both sides, 0 violations; control at the wrong index gives 154/2744, so the hypothesis is not slack. Differs from CL's fixed `theta`; framing settled under F7 — offered as a consequence of the extensive-margin formulation, not as a stronger theorem than theirs |
 | P7 uniform cap | **DOES NOT SURVIVE** | `Accounting.lean`: FJL's bound and P7's cap are instances of one lemma |
 | P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
-| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked, which holds for a uniform base score | **CANDIDATE, adopted as a claim by the author on 7 Oct 2026, novelty pending pass 7** | `pmu_single_crossing`, `pmu_quasiconcave`, `pmu_quasiconcave_uniform` in `lean/mathlib/PMU.lean`; the fall is exhibited exactly in `lean/mathlib/FallWitness.lean` (`rise_then_fall`). Ryvkin and Drugov (2020) obtain unimodality of individual effort in the number of players with the same kernel through Karlin's step, so pass 7 must decide whether the result is an instance of theirs or a new statement about the entry gain |
+| `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked (revised 9 Oct 2026, pass 7) | **DOES NOT SURVIVE as a result; the score-technology side is a CANDIDATE (minor), pending** | M1 writes the gain as `V E[phi(M)]` with `M` the best rival's score, the form of RD's `b_k = E[f(X_(k-1:k-1))]`, and RD's Karlin step (p.1597) with `u = phi` and `H = C G^(Q-1)` gives M17 (`weight_tp2`, `pmu_orientation`, `karlin_ratio`; `lit/ryvkin_drugov_2020/NOTES.md` pass 3). M21 makes precise RD's remark that large-`k` comparative statics follow the upper tail (p.1601). What may remain: M18 (a uniform base score puts the peak of `phi` at the top of the outsiders' support, where RD's kernel cannot vanish) and M19 (primitive conditions on `r`, `s` for a single-peaked `phi`). No precedent found at the abstract level, 9 Oct 2026 |
+| The count, and the payers' share, fall as the rule weighs talent more (M28) (revised 10 Oct 2026 after reading Drugov and Ryvkin) | **CANDIDATE on the entry margin; pending only a search of binary pre-contest investment** | Both entry margins read have the opposite sign: Morgan, Tumlinson and Vardy (L20, exact logistic instance in `MeritocracyLogistic.lean`) and Drugov and Ryvkin's free-entry extension (WP 256 Section 5.3, L22: the less dispersed noise has weakly fewer entrants). The cause is the effort margin: effort rises as noise falls and competes away the rents of entry. M28's sign equals their intensive margin (effort falls with dispersion, Prop 1). The universal-versus-none contrast with the number of players is theirs (L8, L22) |
+| The paying class's share of the prize, as a function of how many pay (M31) (added 9 Oct 2026) | **CANDIDATE, pending** | In every entry model read (L2 to L7) non-entrants cannot win, so the share is not defined there; here outsiders compete on the base score. Binary contests (Ghosh and Kleinberg) and contests with pre-contest investment are the places to look; not searched beyond abstracts |
+| The incumbent abstains while a challenger enters only inside the band (M30) (added 9 Oct 2026) | **SURVIVES (minor) as an answer to R2.1; not a novelty claim** | A corollary of M6 and M7 for `Q+1` symmetric players (`incumbent_out_iff`) |
+| Count invariance fails with ability rising in wealth (M29) (added 9 Oct 2026) | **Scope result, not a novelty claim** | Same phenomenon as Fullerton and McAfee's `two_sizes` (L5): the gain depends on who enters |
 | The mechanism (wealth sorts entry via concavity) | **DOES NOT SURVIVE** | Lazear–Rosen (1981) §III; Schroyen–Treich (2016) privilege contest |
 | "The combination of P7, P9-gen, P-MU" | **WEAK — see N3** | Combination claims are discounted; two of three components are not individually novel |
 
