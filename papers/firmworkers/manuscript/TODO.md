@@ -1,25 +1,34 @@
 # TODO
 
-## Primary texts needed (to move literature claims to VERBATIM)
+## Literature, by purpose (rule of 10 Oct 2026)
 
-- [ ] Lazear and Rosen (1981), JPE 89(5). On Drive as `1981-lazear.pdf`; entry_contest has a record (`lit/lazear_rosen_1981`, core Lean) to adapt
-- [ ] Spence (1973), QJE 87(3)
-- [ ] Alós-Ferrer and Prat (2012), JET, or IZA DP 3285 (2008)
-- [ ] Hopkins and Kornienko (2004), AER. On Drive as `hopkins_kornienko_status_game*.pdf`; entry_contest has a record (`lit/hopkins_kornienko`) to adapt
-- [ ] Friedman and Savage (1948), JPE (the manuscript's S-shaped utility)
-- [ ] Bowles, Loury and Sethi (2014), JEEA 12(1) — L6
-- [ ] Calvó-Armengol and Jackson (2004), AER 94(3) — L7, page range to confirm
-- [x] Cunha and Heckman (2007), AER 97(2) — L1, NBER WP 12840 read in full 10 Oct 2026, `lit/cunha_heckman_2007`; cited as the working paper (decision of 10 Oct 2026)
-- [x] Borjas (1992), QJE 107(1) — L4, read in full 10 Oct 2026, `lit/borjas_1992`
-- [ ] Loury (1977), book chapter — L3
-- [ ] Bénabou (1996), REStud 63(2) — L5
-- [ ] Immorlica, Kranton, Manea and Stoddard (2017), AEJ Micro 9(1) — L10, definition of status
-- [ ] Ghiglino and Goyal (2010), JEEA 8(1) — L9
-- [x] Gibbons and Waldman (1999) L2, NBER WP 6454 (Mar 1998, "...in Internal Labor Markets") read in full 10 Oct 2026, `lit/gibbons_waldman_1998`; cited as the working paper (decision of 10 Oct 2026)
-- [ ] Lower priority: Rosen (1986) L8, Altonji and Pierret (2001) L12, Luttmer (2005) L11, Fershtman, Murphy and Weiss (1996) L13
+A paper needs its primary source, a `lit/` record and Lean only when a claim rests on it (verification) or a novelty check needs it. Exploration needs neither; exploratory rows stay at abstract level, marked unverified, and `check.py` rejects any claim that rests on a row not read in full.
+
+### Read, recorded, with Lean
+
+- [x] Borjas (1992) — L4, `lit/borjas_1992`
+- [x] Cunha and Heckman (2007), NBER WP 12840 — L1, `lit/cunha_heckman_2007`
+- [x] Gibbons and Waldman, NBER WP 6454 (1998) — L2, `lit/gibbons_waldman_1998`
+
+### Needed for verification
+
+None today: no model, map, headline or concluding row rests on a paper. The source manuscript (`inputs/firmworkers_model.pdf`) invokes these by name where a future claim would need them:
+
+- [ ] Friedman and Savage (1948), JPE — the S-shaped utility behind M19 and M20 (Appendix). Needed if M19/M20 become claims
+- [ ] Spence (1973), QJE — "labour-queue theory" (Section 2). Macro model, deferred
+- [ ] Tullock lottery with r = 1 (footnote 2) — macro shared-pool abstraction, deferred; reference not given in the source
+
+### Needed for novelty
+
+To be fixed once definite claims exist (after the M14, M19, M23 decisions): every paper that could already contain a claimed result. Candidates on Drive with entry_contest records to adapt: Lazear and Rosen (1981), Hopkins and Kornienko (2004).
+
+### Exploration only (no primary source needed)
+
+L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calvó-Armengol and Jackson (2004), L8 Rosen (1986), L9 Ghiglino and Goyal (2010), L10 Immorlica et al. (2017), L11 Luttmer (2005), L12 Altonji and Pierret (2001), L13 Fershtman, Murphy and Weiss (1996); Alós-Ferrer and Prat (2012). None is cited by the source manuscript; they were added as candidates for the pending micro extensions. A row moves to verification, and needs its PDF, when a decision makes a claim rest on it.
 
 ## Decisions recorded
 
+- 10 Oct 2026: primary sources (with record and Lean) are required for papers needed for verification or novelty; exploration does not need them.
 - 10 Oct 2026: proofs stay Lean-only for now. Informal proofs under the skeleton's 30% prose limit (MS-6) are deferred, not dropped.
 - 10 Oct 2026: no paper prose for now. Work is on claims; prose will be written from the claims later.
 - 10 Oct 2026: the working papers of Cunha–Heckman (NBER WP 12840) and Gibbons–Waldman (NBER WP 6454) are cited as the versions read; the published AER and QJE versions are not needed for now.

@@ -5,6 +5,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import unicodedata
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LEAN_PROJECT = ROOT / "lean"
@@ -35,6 +36,7 @@ class Suite:
 
 
 def norm(s):
+    s = unicodedata.normalize("NFKD", s)
     for k, v in LIGATURES.items():
         s = s.replace(k, v)
     s = re.sub(r"-\s*\n\s*", "", s).lower()

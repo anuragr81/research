@@ -133,7 +133,7 @@ def literature_table(d, rows_by_lit):
     table = (f"\\begin{{longtable}}{{{col([0.8, 5.4, 5.6, 7.0, 1.2, 2.0])}}}\n\\toprule {head}\n{body}\n\\end{{longtable}}"
              if read else 'No paper has been read in full in this pass.')
     names = ', '.join(f"{c['id']} {short_cite(c)}" for c in unread)
-    tail = (f"Papers cited but not yet read in full are {names}. Every claim made about them is unverified."
+    tail = (f"Papers explored but not read in full are {names}. Every statement about them is unverified, and no claim rests on them."
             if unread else '')
     return f"{table}\n\n{tail}"
 

@@ -1,6 +1,7 @@
 import os
 import re
 import subprocess
+import unicodedata
 import sys
 import yaml
 
@@ -8,6 +9,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 LEAN_DIR = os.path.join(ROOT, 'lean')
 LEAN_BIN = os.environ.get('LEAN_BIN', '/opt/lean/lean-4.21.0-linux/bin')
 LIT_DIR = os.path.join(ROOT, 'lit')
+SOURCE_PDF = os.path.join(ROOT, 'inputs', 'firmworkers_model.pdf')
+SOURCE_SHA = 'd79d5651207296d02661381f2f9322391c664de3d9c845cb5a5598bbad8d783e'
 BIB = os.path.join(ROOT, 'refs.bib')
 ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
@@ -41,6 +44,7 @@ def lean_declared(full_name, files):
 
 
 def lit_norm(s):
+    s = unicodedata.normalize('NFKD', s)
     for k, v in LIGATURES.items():
         s = s.replace(k, v)
     s = re.sub(r'-\s*\n\s*', '', s).lower()
@@ -66,6 +70,18 @@ def lit_records():
                 for k in fh.read().split():
                     records[k] = os.path.join(LIT_DIR, name)
     return records
+
+
+def source_text(errors):
+    import hashlib
+    with open(SOURCE_PDF, 'rb') as fh:
+        if hashlib.sha256(fh.read()).hexdigest() != SOURCE_SHA:
+            errors.append('inputs/firmworkers_model.pdf does not match its pinned sha256')
+    run = subprocess.run(['pdftotext', '-raw', SOURCE_PDF, '-'], capture_output=True, text=True)
+    if run.returncode != 0:
+        errors.append('pdftotext failed on inputs/firmworkers_model.pdf: ' + run.stderr[-200:])
+        return ''
+    return lit_norm(run.stdout)
 
 
 def record_text(path, name):
@@ -230,6 +246,22 @@ def check_derived_claims(data, rows, errors, notes):
                     errors.append(f'{cid}: may rest only on M, L or X ids, not {r}')
 
 
+def literature_uses(data, rows):
+    uses = {}
+    for c in data['model']:
+        for lid in re.findall(r'\bL\d+\b', str(c.get('evidence', '')) + ' ' + str(c.get('assumptions', ''))):
+            uses.setdefault(c['id'], []).append(lid)
+    for section in ('headline', 'concluding'):
+        for c in data.get(section, []) or []:
+            for r in c.get('rests_on', []) or []:
+                if r.startswith('L'):
+                    uses.setdefault(c['id'], []).append(r)
+    for rid, r in rows.items():
+        for lid in r.get('literature', []) or []:
+            uses.setdefault(rid, []).append(lid)
+    return uses
+
+
 def reference_citations(data, rows):
     lit_ref = {c['id']: c.get('ref') for c in data['literature']}
     cited = {r['key']: [] for r in data.get('references', []) or []}
@@ -309,6 +341,7 @@ def main():
     lean_text = lean_sources()
     check_controls(lean_text, errors)
     bib, records = bib_keys(), lit_records()
+    source = source_text(errors)
     lean_claims = [c for c in data['model'] if c['status'] in ('LEAN_PROVED', 'LEAN_WRITTEN') or lean_names(c)]
     verdict, unbuilt = None, set()
     if use_lean and lean_claims:
@@ -336,6 +369,9 @@ def main():
         for field in ('anchor', 'claim', 'evidence'):
             if not str(c.get(field, '')).strip():
                 errors.append(f'{cid}: empty {field}')
+        for q in re.findall(r'"([^"]+)"', str(c.get('anchor', ''))):
+            if source and lit_norm(q) not in source:
+                errors.append(f'{cid}: anchor quote not found in inputs/firmworkers_model.pdf: {q[:60]}')
         names = lean_names(c)
         if st in ('LEAN_PROVED', 'LEAN_WRITTEN') and not names:
             errors.append(f'{cid}: {st} without a lean theorem')
@@ -423,6 +459,11 @@ def main():
             errors.append(f'{cid}: version_read must be non-empty and only on a VERBATIM row')
     mmap = load_map()
     rows = check_map(data, mmap, errors, notes)
+    lit_status = {c['id']: c['status'] for c in data['literature']}
+    for who, lids in literature_uses(data, rows).items():
+        for lid in lids:
+            if lid in lit_status and lit_status[lid] != 'VERBATIM':
+                errors.append(f'{who}: rests on {lid}, which is {lit_status[lid]}; a paper a claim rests on must be read in full')
     check_derived_claims(data, rows, errors, notes)
     check_references(data, rows, errors, notes)
     counts = {}

@@ -135,7 +135,7 @@ model:
     affects: [M11, M12, M13]
     symbols: [X8]
   - id: M15
-    anchor: 'Appendix, Linear Approximation: "E[u(y)] = u(ybar) + 1/2 u′′(ybar) sigma_y^2"'
+    anchor: 'Appendix, Linear Approximation: "Expanding the utility around the mean ȳ using a second-order Taylor series"'
     claim: '$\mathbb{E}[u(\bar y)+u^{\prime}(\bar y)\sigma\varepsilon+\tfrac12u^{\prime\prime}(\bar y)\sigma^2\varepsilon^2]=u(\bar y)+\tfrac12u^{\prime\prime}(\bar y)\sigma^2$'
     assumptions: 'probability measure, $\varepsilon$ and $\varepsilon^2$ integrable, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$'
     evidence: 'lean/IscLean/Moments.lean::Isc.taylor_expectation_integral. Finite-support case Isc.taylor_expectation in Lottery.lean'
@@ -151,7 +151,7 @@ model:
     status: LEAN_PROVED
     symbols: [X9, X11, X20]
   - id: M17
-    anchor: 'Appendix, Linear Approximation: "sigma_y^2 = c((1 - lambda_H) m_H)^2 = p_H (1 - lambda_H)^2 (p_H < 0)"'
+    anchor: 'Appendix, Linear Approximation: "is the variance of the lottery income component, it scales with the share of income allocated to the lottery"'
     claim: 'The lottery variance equals $p(1-\lambda)^2$ with $p<0$'
     assumptions: ''
     evidence: 'lean/IscLean/Moments.lean::Isc.variance_ne_neg_multiple. Any variance is $\ge 0$, while $p(1-\lambda)^2<0$ for $p<0$, $\lambda<1$'
