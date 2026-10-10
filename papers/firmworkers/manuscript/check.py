@@ -419,6 +419,8 @@ def main():
                     errors.append(f'{cid}: quote not found on p.{page} of {os.path.relpath(records[ref], ROOT)}/CLAIMS.md')
         elif quote:
             errors.append(f'{cid}: quote present but status is {st}')
+        if 'version_read' in c and (st != 'VERBATIM' or not str(c['version_read']).strip()):
+            errors.append(f'{cid}: version_read must be non-empty and only on a VERBATIM row')
     mmap = load_map()
     rows = check_map(data, mmap, errors, notes)
     check_derived_claims(data, rows, errors, notes)

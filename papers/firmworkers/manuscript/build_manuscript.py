@@ -119,12 +119,16 @@ def short_cite(c):
     return m.group(1) if m else c['source']
 
 
+def unverified(c):
+    return f". \\unv{{{mixed(c['version_read'])}}}" if c.get('version_read') else ''
+
+
 def literature_table(d, rows_by_lit):
     read = [c for c in d['literature'] if c['status'] == 'VERBATIM']
     unread = [c for c in d['literature'] if c['status'] != 'VERBATIM']
     head = r'ID & Paper & What we rely on & Quote & Page & Rows \\ \midrule \endhead'
     body = '\n'.join(
-        f"{c['id']} & {c['source']} & {c['claim']} & ``{mixed(c['quote'])}'' & {escape_text(str(c['page']))} & "
+        f"{c['id']} & {c['source']} & {c['claim'].rstrip('.') if c.get('version_read') else c['claim']}{unverified(c)} & ``{mixed(c['quote'])}'' & {escape_text(str(c['page']))} & "
         f"{', '.join(rows_by_lit.get(c['id'], [])) or '---'} \\\\ \\midrule" for c in read)
     table = (f"\\begin{{longtable}}{{{col([0.8, 5.4, 5.6, 7.0, 1.2, 2.0])}}}\n\\toprule {head}\n{body}\n\\end{{longtable}}"
              if read else 'No paper has been read in full in this pass.')
@@ -206,6 +210,7 @@ def main():
 \usepackage{{amsmath,amssymb,longtable,booktabs,array,xurl,fancyvrb}}
 \usepackage[hidelinks]{{hyperref}}
 \newcommand{{\pend}}[1]{{\textit{{Pending:}} #1}}
+\newcommand{{\unv}}[1]{{\textit{{Unverified:}} #1}}
 \renewcommand{{\arraystretch}}{{1.25}}
 \setlength{{\tabcolsep}}{{4pt}}
 \setlength{{\parindent}}{{0pt}}
