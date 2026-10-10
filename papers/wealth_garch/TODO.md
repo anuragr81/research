@@ -12,7 +12,7 @@ The skeleton follows `../MANUSCRIPT_SKELETON.md`, with
 | 2a | Candidate claims: every headline PROOFS_v2 makes is listed in the novelty ledger below, with the results it rests on, the Lean it waits on and the reading its novelty waits on. A candidate enters Table 5 as a C row once its first model row exists, since MS-3 refuses a C row with no row to point to. This list drives passes 3 and 7 | done 2026-10-10 |
 | 3 | Port the analytic steps to Lean, one cluster per pass, with `control_*` theorems and counterexamples (inventory below) | in progress; H1 (`CapGeometry`), H3 (`Identification`) and SOC (`SecondOrder`, M7) done 2026-10-10 |
 | 4 | Model rows and Appendix A proofs, one family per pass | |
-| 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | |
+| 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | `MEASUREMENT_MAP.tex` (G1 to G17), `checks/verify_measurement.py` (suite 2), `lean/mathlib/MeasurementMap.lean` and `lit/bcbs_2011`, `lit/bcbs_2013`, `lit/ffiec_2026` done 2026-10-10; FDIC field names pending |
 | 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | done 2026-10-10; `proof_registry.py` and `check_citations.py` retired with it |
 | 7 | Novelty reading, one `lit/` record per paper | in progress; `lit/bayraktar_2026`, `lit/barberis_huang_santos_1999`, `lit/barberis_huang_santos_2001`, `lit/engle_siriwardane_2018`, `lit/li_yu_zhang_2023` done 2026-10-10 |
 | 8 | Conclusions, then introduction; headline overreach review | conclusions C1 to C4 and headlines K1, K2 done 2026-10-10 |
@@ -81,6 +81,25 @@ grounds.
   PROOFS_v2's $\kappa_1^2,\kappa_3^2$) so that $\kappa$ means only the
   proportional issuance cost. Lean `CapGeometry.kappa2` became
   `CapGeometry.nu2`.
+
+## Measurement map, 10 October 2026
+
+- Sources read, pages only as listed in each `RECONSTRUCTION.md`. Basel III
+  capital framework (rev June 2011), Basel III LCR (January 2013), FFIEC
+  031/041 Schedule RC-R Part I instructions (June 2026).
+- $a_1=0.045$ is the CET1 minimum (B3-Q1), though BCVW names the Tier 1
+  ratio (B3-D1). $a_2=0.05$ is the stable retail deposit run-off (LCR-Q9).
+  $a_3=0.30$ is no haircut of the standard (LCR-D2), so G6 is a
+  calibration.
+- $q$ is read as a leverage floor, $q=\ell_0/(1-\ell_0)$ (G7). The
+  $z$-volatility and so K1 are free of $q$ (`MeasurementMap.zvol2_free_of_q`).
+- Pending. The FDIC field names of the empirical scripts (RWAJT, RBCT1J,
+  RBCRWAJ, ASSET, LIAB, EQCDIV, EQCSTKRX) need the FDIC data dictionary.
+  Schedule RC-R items 12 to 18 and 27 to 29 (the adjustments) were not
+  read. Banks electing the community bank leverage ratio report no
+  risk-based ratio (RCR-D1).
+- `lit/litcheck.py` now refuses a stated page that maps before the first
+  PDF page. Before, such a page made `pdftotext` read the whole document.
 
 ## Bundle mechanics
 

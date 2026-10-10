@@ -47,6 +47,7 @@ need them report SKIP with the reason.
 ## Layout
 
     MANUSCRIPT.tex  the theory, as a verified skeleton (see README.md)
+    MEASUREMENT_MAP.tex  how each model object is observed
     00_document/    EMPIRICAL_v2.tex, references.bib
     00_reader/      TODO.md, ledger_empirical.py, TERMINOLOGY.md
     01_theory/      the SymPy verifiers

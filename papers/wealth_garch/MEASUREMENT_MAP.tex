@@ -1,0 +1,143 @@
+% MEASUREMENT_MAP.tex, how each object of the model in MANUSCRIPT.tex is
+% observed. Created 10 October 2026 at pass 5 of the plan in TODO.md.
+%
+% PURPOSE
+%   One row per model input and output. Each row says what the object is in
+%   the model, what its counterpart is in the Basel standards and the US
+%   Call Report, and how it is observed. The FDIC empirics stay in their own
+%   document (TODO.md, Decisions).
+%
+% STRUCTURE THE CHECKER RELIES ON (checks/verify_measurement.py)
+%   Rows are written only through
+%     \grow{ID}{object}{role in the model}{counterpart and observation}{status}{evidence}
+%   IDs are G1, G2, ... in order. Status is one of Rule, Report,
+%   Calibration, Unobserved, Output. Evidence is a comma-separated list of
+%   quotation or reading IDs of a lit/ record (B3-Q1, LCR-D2, ...), Lean
+%   theorems declared under lean/mathlib/, and rows of MANUSCRIPT.tex.
+%
+% RULES THE CHECKER ENFORCES
+%   IDs are well formed, unique and in order. Every status is in the list.
+%   Every evidence item resolves. Rule and Report rows cite a quotation from a
+%   regulatory document, Calibration rows a quotation from BCVW, Unobserved
+%   and Output rows a row of MANUSCRIPT.tex. Every symbol of the coverage
+%   list in the checker has a row.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\emergencystretch=1.5em
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,\do\-}
+\makeatother
+\newcommand{\ev}[1]{\path{#1}}
+
+\newcommand{\grow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
+
+\title{Measurement Map}
+\author{}
+\date{Companion to the manuscript skeleton, 10 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Scope}
+
+The map takes each object of the model in \path{MANUSCRIPT.tex} to its
+counterpart in the Basel capital framework \citep{bcbs2011}, the Basel
+liquidity standard \citep{bcbs2013} and the Call Report instructions for
+regulatory capital \citep{ffiec2026}, and says how it is observed. The
+regulatory cap is that of \citet{bayraktar2026} (BCVW). Quotation and
+reading IDs refer to the \path{lit/} records, where each quotation is checked
+verbatim on its page. The rearrangements of the regulatory ratios are proved
+in \path{lean/mathlib/MeasurementMap.lean}.
+
+A status of Rule means a regulation sets the value. Report means a
+regulatory report records the object for each bank. Calibration means the
+model takes a value with no regulatory counterpart. Unobserved means
+neither a rule nor a report gives it. Output means the model produces it
+and its observation is part of the empirical design.
+
+\section{Map}
+
+\footnotesize
+\begin{longtable}{@{}P{0.6cm}P{1.5cm}P{2.7cm}P{5.2cm}P{1.6cm}P{3.6cm}@{}}
+\caption{Model objects and their observation.}\label{tab:map}\\
+\toprule
+ID & Object & Role in the model & Counterpart and observation & Status & Evidence \\
+\midrule
+\endfirsthead
+\toprule
+ID & Object & Role in the model & Counterpart and observation & Status & Evidence \\
+\midrule
+\endhead
+\grow{G1}{$x$}{The state, assets over liabilities.}{Total assets over total liabilities. From the reported leverage ratio $\ell$ (Tier 1 over total assets for the leverage ratio), $x=1/(1-\ell)$ holds only if Tier 1 equals book equity and the denominator equals total assets.}{Report}{RCR-Q4, RCR-D3, MeasurementMap.leverage_of_state}
+\grow{G2}{$\pi$}{The share of assets in the risky asset.}{Risk-weighted assets over total assets, under risk weights of 0 on the riskless and 1 on the risky asset. With a positive weight on the riskless asset the identification fails.}{Report}{RCR-Q5, RCR-D2, MeasurementMap.rwa_two_assets, MeasurementMap.control_rwa_needs_zero_weight_on_riskless}
+\grow{G3}{$X-L$}{Equity, assets less liabilities.}{CET1 capital or Tier 1 capital as reported. Both are net of regulatory adjustments, so they equal book equity only when the adjustments vanish.}{Report}{B3-Q3, RCR-Q1, RCR-Q3, B3-D2}
+\grow{G4}{$a_1$}{The floor on equity over risky assets, the solvency branch $(x-1)/a_1$ of the cap.}{The CET1 minimum of 4.5\% of risk-weighted assets, which is BCVW's baseline 0.045, or the Tier 1 minimum of 6.0\%. The bank's own ratio is reported as CET1 or Tier 1 capital over risk-weighted assets. Banks electing the community bank leverage ratio report neither.}{Rule}{BCVW-Q9, BCVW-Q13, B3-Q1, B3-Q2, B3-D1, RCR-Q2, RCR-Q6, RCR-Q7, RCR-D1, MeasurementMap.solvency_iff, MeasurementMap.control_solvency_needs_positive_exposure}
+\grow{G5}{$a_2$}{Net 30-day outflows as a share of liabilities, in the liquidity branch $(x-a_2)/a_3$ of the cap.}{A run-off rate on all liabilities. BCVW's baseline 0.05 is the factor for stable insured retail deposits, and less stable retail deposits run off at 10\% or more. The LCR must be at least 100\%. No report read gives the rate.}{Rule}{BCVW-Q10, LCR-Q1, LCR-Q9, LCR-Q10, LCR-D1, MeasurementMap.lcr_iff, MeasurementMap.control_lcr_needs_positive_runoff}
+\grow{G6}{$a_3$}{The haircut on the risky asset in high-quality liquid assets, the slope $1/a_3$ of the liquidity branch.}{The riskless asset counts in full, as Level 1 assets do. The standard's haircuts are 15\% (Level 2A) and 25\% or 50\% (Level 2B). BCVW's baseline 0.30 is none of them. The 40\% cap on Level 2 assets and the 75\% cap on inflows are not in the model.}{Calibration}{BCVW-Q11, BCVW-Q12, BCVW-Q13, LCR-Q2, LCR-Q3, LCR-Q4, LCR-Q5, LCR-Q6, LCR-Q7, LCR-Q8, LCR-D2, LCR-D3, MeasurementMap.hqla_haircut, MeasurementMap.cap_iff}
+\grow{G7}{$q$}{The requirement on $x-1$, with $z=0$ at $x=1+q$.}{A floor $\ell_0$ on the leverage ratio is the floor $\ell_0/(1-\ell_0)$ on $x-1$, so the 3\% Tier 1 leverage ratio gives $q=3/97$ when Tier 1 equals book equity. This is a reading, and the bundle does not fix $q$. The $z$-volatility does not depend on $q$.}{Rule}{B3-Q7, RCR-Q4, MeasurementMap.leverage_req_iff, MeasurementMap.control_leverage_needs_l0_lt_one, MeasurementMap.zvol2_free_of_q}
+\grow{G8}{$\sigma$, $\mu_s$, $r$}{The volatility and drift of the risky asset and the riskless rate.}{No regulatory counterpart. BCVW's baseline is $\sigma=0.08$, $\mu=0.04$, $r=0.02$.}{Calibration}{BCVW-Q14}
+\grow{G9}{$\sigma_L$, $c$, $\gamma$, $\mu_L$, $r_L$}{The liability shock, its correlation with the risky return, the net income on liabilities, the liability drift and the deposit rate, with $\mu_L=\gamma+r_L$.}{No regulatory counterpart. BCVW's baseline is $\sigma_L=0.03$, $c=0.20$, $\gamma=0.02$, $\mu_L=0.03$.}{Calibration}{BCVW-Q14, M9}
+\grow{G10}{$\rho_L$}{The liability-net discount rate of the reduced problem.}{Formed from the shareholder discount rate, BCVW's baseline $\rho=0.12$. No regulatory counterpart.}{Calibration}{BCVW-Q14}
+\grow{G11}{$\kappa$}{The proportional issuance cost.}{No regulatory counterpart. BCVW's baseline is $\kappa=0.01$ for dilution and $\kappa'=0.02$ per unit issued.}{Calibration}{BCVW-Q14}
+\grow{G12}{$K$}{The fixed issuance cost, charged per unit of liabilities.}{Not observed. A cost fixed in dollars would break the reduction to $x$. Locally identified together with $\lambda_S$ from the barrier and the trigger.}{Unobserved}{BCVW-Q4, K2, M5, M6}
+\grow{G13}{$\lambda_S$}{The asymmetry parameter of the shortfall penalty.}{Not observed. The variance ratio carries no information about it. Locally identified together with $K$ from the barrier and the trigger.}{Unobserved}{K1, K2, M3, M6, M11}
+\grow{G14}{$y^*$}{The dividend barrier.}{The state at which the bank pays dividends. Under the conservation buffer a bank with CET1 between 4.5\% and 7.0\% of risk-weighted assets has its distributions restricted, so observed payouts reflect the rule as well as the barrier.}{Output}{M4, B3-Q4, B3-Q5, B3-Q6, B3-D3}
+\grow{G15}{$x_L$, $y_{\text{post}}$}{The recapitalisation trigger and the injection target.}{The state just before and just after an equity issue.}{Output}{M5, M6, M7, M10}
+\grow{G16}{$\zeta$, $\nu_1^2$, $\nu_3^2$}{The $z$-volatility and its limits at the distress boundary and deep in surplus.}{The variance of changes in $z=\log((x-1)/q)$ near the distress boundary and deep in surplus. It does not depend on $q$.}{Output}{M2, M3, M8, MeasurementMap.zvol2_free_of_q}
+\grow{G17}{$\nu_1^2/\nu_3^2$}{The deficit-to-surplus variance ratio, read in discrete time as $\lambda_V^4$.}{The ratio of the two variances of G16. Reading it as $\lambda_V^4$ is a definition.}{Output}{K1, M1, M3}
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{The ratio constraints in the state}
+
+With equity $X-L$, risk-weighted assets $\pi X$, high-quality liquid assets
+$X-a_3\pi X$ and net outflows $a_2L$, the two ratio constraints of BCVW are
+the two branches of the cap in $x=X/L$. For $a_1,a_2,a_3,\pi,X,L>0$,
+\[
+a_1\le\frac{X-L}{\pi X}\iff\pi x\le\frac{x-1}{a_1},\qquad
+1\le\frac{X-a_3\pi X}{a_2L}\iff\pi x\le\frac{x-a_2}{a_3},
+\]
+and both hold if and only if $\pi x\le u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$
+(\path{MeasurementMap.solvency_iff}, \path{MeasurementMap.lcr_iff},
+\path{MeasurementMap.cap_iff}). At $\pi=0$ the left side of the first
+equivalence is undefined and the equivalence fails, and at $a_2=0$ the same
+holds for the second (the two controls). For $\ell_0<1$ and $X,L>0$,
+$\ell_0\le(X-L)/X\iff\ell_0/(1-\ell_0)\le x-1$
+(\path{MeasurementMap.leverage_req_iff}).
+
+\section{Pending}
+
+\begin{itemize}
+\item The FDIC field names used by the empirical scripts (\path{RWAJT},
+  \path{RBCT1J}, \path{RBCRWAJ}, \path{ASSET}, \path{LIAB}, \path{EQCDIV},
+  \path{EQCSTKRX}) do not appear in the Call Report instructions read. Their
+  link to the items of G1 to G4, G14 and G15 needs the FDIC data dictionary.
+\item Rows G1 to G3 assume regulatory capital equals book equity. Items
+  12 to 18 and 27 to 29 of Schedule RC-R, which give the adjustments, were
+  not read.
+\item The tier that $a_1$ stands for is not fixed (B3-D1).
+\end{itemize}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

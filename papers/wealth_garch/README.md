@@ -6,6 +6,8 @@
 rows each proved in Lean (`lean/mathlib/`), literature rows each quoting a
 paper read (`lit/`), and conclusions. `./verify.sh` checks it and writes
 `VERIFICATION.md`; `lit/verify_lit.sh` checks the literature records;
+`MEASUREMENT_MAP.tex` says how each model object is observed, against the
+Basel standards and the Call Report (`checks/verify_measurement.py`);
 `TODO.md` holds the plan and the author's decisions. `PROOFS_v2.tex` was
 retired into it on 10 Oct 2026; `RETIREMENT.md` maps every part of it to its
 new home. The rest of this file describes the numerical and empirical layer.

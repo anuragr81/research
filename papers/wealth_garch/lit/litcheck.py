@@ -102,6 +102,8 @@ def run(cfg):
 
     def on_page(text, printed):
         pg = printed - cfg["offset"]
+        if pg < 1:
+            return False
         if pg not in cache:
             cache[pg] = page_text(pdf, pg)
         return normalise(text) in cache[pg]
@@ -118,6 +120,8 @@ def run(cfg):
                 not on_page(cfg["fabricated"], p0), cfg["fabricated"][:60])
         s.check("Q-control a true quotation on the wrong page is not found",
                 not on_page(quotes[0][2], cfg["wrong_page"]), f"p. {cfg['wrong_page']}")
+        s.check("Q-control a page before the first PDF page is refused",
+                not on_page(quotes[0][2], cfg["offset"]), f"p. {cfg['offset']}")
 
     print("-" * 72)
     print("READINGS")

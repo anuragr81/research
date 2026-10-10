@@ -28,7 +28,9 @@ reading of the paper and does not reprove it. The permitted conclusion is
 
 1. The quotation rows parse, and their pages lie in the paper's range.
 2. Each quotation is found in the cached text by exact normalised
-   containment. A fabricated quotation is the control and must fail.
+   containment on PDF page = stated page − offset. A fabricated quotation,
+   a true quotation on the wrong page and a page before the first PDF page
+   are the controls and must fail.
 3. The cached file matches its pinned sha256.
 4. The Lean file is a build root, builds, has no `sorry`, declares every Lean
    name cited in `CLAIMS.md`, and every theorem passes the axiom audit.

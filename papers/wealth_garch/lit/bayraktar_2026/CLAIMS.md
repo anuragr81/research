@@ -14,6 +14,12 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | BCVW-Q6 | 2 | Rather than using the zero-equity level y = 1 as the intervention boundary, we introduce an internal distress threshold | The recapitalisation threshold is exogenous here, unlike the trigger $x_L$ of PROOFS_v2 (H4). |
 | BCVW-Q7 | 8 | This kinked investment cap is the main channel through which Basel-style regulation affects the bank's payout and recapitalization decisions. | The cap is the paper's mechanism. |
 | BCVW-Q8 | 15 | The key structure is the minimum operator in the regulatory constraint, with a switching point | The crossing point $\bar x$ of M2 is their switching point (BCVW-D1). |
+| BCVW-Q9 | 7 | the solvency ratio is the ratio of shareholders' equity to risky asset holdings | $a_1$ is a floor on equity over risky assets. The measurement map reads risky assets as risk-weighted assets (G4 in `MEASUREMENT_MAP.tex`). |
+| BCVW-Q10 | 8 | model the 30-day net outflow as a fixed fraction a2 ∈ (0, 1) of liabilities | $a_2$ is a run-off rate on all liabilities (G5). |
+| BCVW-Q11 | 8 | We assume that risk-free assets qualify fully as HQLA. | The riskless asset enters HQLA without haircut, as Level 1 assets do in the LCR standard (G6). |
+| BCVW-Q12 | 8 | a fraction a3 ∈ (0, 1) is excluded from HQLA | $a_3$ is a single haircut on the risky asset (G6). |
+| BCVW-Q13 | 13 | The baseline regulatory parameters are (a1 , a2 , a3 ) = (0.045, 0.05, 0.30) | The baseline values compared with the Basel numbers in the measurement map (G4 to G6). |
+| BCVW-Q14 | 13 | r = 0.02, µ = 0.04, µL = 0.03, ρ = 0.12, γ = 0.02, together with σ = 0.08, σL = 0.03, c = 0.20, κ = 0.01, κ′ = 0.02 | The market, liability and cost parameters have no regulatory counterpart and are calibrated at this baseline (G8 to G11). |
 
 ## Lean results
 

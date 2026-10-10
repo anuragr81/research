@@ -228,44 +228,49 @@ exactly what the rule forbids; it mentions $x$ once.
 \end{mproof}
 """
 
-lean = lean_declarations()
-bibs = bib_keys()
-lit = lit_records()
+def main():
+    lean = lean_declarations()
+    bibs = bib_keys()
+    lit = lit_records()
 
-print("=" * 72)
-print("MANUSCRIPT SKELETON (MANUSCRIPT.tex)")
-print("=" * 72)
-print(f"      Lean declarations found: {len(lean)}; bib keys: {len(bibs)}; lit keys: {len(lit)}")
+    print("=" * 72)
+    print("MANUSCRIPT SKELETON (MANUSCRIPT.tex)")
+    print("=" * 72)
+    print(f"      Lean declarations found: {len(lean)}; bib keys: {len(bibs)}; lit keys: {len(lit)}")
 
-tex = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
-real, counts = analyse(tex, lean, bibs, lit)
-print(f"      rows in MANUSCRIPT.tex: {counts}")
-names = {"MS-1": "row IDs well formed and unique",
-         "MS-2": "introduction rows point to model rows only",
-         "MS-3": "conclusion rows point to model or literature rows only",
-         "MS-4": "every model row names audited Lean theorems and has one matching proof",
-         "MS-5": "every literature row quotes its lit/ record verbatim",
-         "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof"}
-for k in sorted(real):
-    ok, detail = real[k]
-    check(f"{k} {names[k]}", ok, "" if ok else detail)
+    tex = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
+    real, counts = analyse(tex, lean, bibs, lit)
+    print(f"      rows in MANUSCRIPT.tex: {counts}")
+    names = {"MS-1": "row IDs well formed and unique",
+             "MS-2": "introduction rows point to model rows only",
+             "MS-3": "conclusion rows point to model or literature rows only",
+             "MS-4": "every model row names audited Lean theorems and has one matching proof",
+             "MS-5": "every literature row quotes its lit/ record verbatim",
+             "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof"}
+    for k in sorted(real):
+        ok, detail = real[k]
+        check(f"{k} {names[k]}", ok, "" if ok else detail)
 
-print("-" * 72)
-print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
-print("      the samples resolve Lean names, bib keys and the quote against the real bundle")
-check("MS-C0 the control's Lean theorem, bib key and lit record exist",
-      "SmoothFit.smooth_fit" in lean and "bayraktar2026" in bibs and "bayraktar2026" in lit)
-good, _ = analyse(GOOD, lean, bibs, lit)
-bad, _ = analyse(BAD, lean, bibs, lit)
-for k in sorted(good):
-    check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
-    check(f"{k}-control fails on the faulty sample", not bad[k][0])
-r_good = prose_ratio(proof_blocks(GOOD)[0][2])
-r_bad = prose_ratio(proof_blocks(BAD)[0][2])
-print(f"      prose share, well-formed sample {r_good[0]:.2f}; faulty sample {r_bad[0]:.2f}")
+    print("-" * 72)
+    print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
+    print("      the samples resolve Lean names, bib keys and the quote against the real bundle")
+    check("MS-C0 the control's Lean theorem, bib key and lit record exist",
+          "SmoothFit.smooth_fit" in lean and "bayraktar2026" in bibs and "bayraktar2026" in lit)
+    good, _ = analyse(GOOD, lean, bibs, lit)
+    bad, _ = analyse(BAD, lean, bibs, lit)
+    for k in sorted(good):
+        check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
+        check(f"{k}-control fails on the faulty sample", not bad[k][0])
+    r_good = prose_ratio(proof_blocks(GOOD)[0][2])
+    r_bad = prose_ratio(proof_blocks(BAD)[0][2])
+    print(f"      prose share, well-formed sample {r_good[0]:.2f}; faulty sample {r_bad[0]:.2f}")
 
-nf = sum(1 for _, ok in results if not ok)
-print("=" * 72)
-print(f"MANUSCRIPT SUMMARY: {len(results)} checks, {nf} failures")
-print("=" * 72)
-sys.exit(1 if nf else 0)
+    nf = sum(1 for _, ok in results if not ok)
+    print("=" * 72)
+    print(f"MANUSCRIPT SUMMARY: {len(results)} checks, {nf} failures")
+    print("=" * 72)
+    sys.exit(1 if nf else 0)
+
+
+if __name__ == "__main__":
+    main()
