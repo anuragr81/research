@@ -238,4 +238,10 @@ theorem smooth_fit
   · exact h.symm
   · exact absurd (no_convex_kink d (hsuper h)) (by simp)
 
+theorem control_kink_needs_obstacle :
+    ∃ (d : TriggerData) (v : ℝ → ℝ) (vR : ℝ), v d.xL = Mv d d.xL ∧
+      HasDerivWithinAt v vR (Set.Ici d.xL) d.xL ∧ vR < 1 + d.kappa :=
+  ⟨⟨1, 0, 0, 1, 0, 0, one_pos⟩, fun x => x, 1, by simp [Mv],
+    (hasDerivAt_id 0).hasDerivWithinAt, by norm_num⟩
+
 end SmoothFit

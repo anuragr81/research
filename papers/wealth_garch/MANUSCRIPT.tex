@@ -113,6 +113,9 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M5}{The recapitalisation trigger rises in the asymmetry parameter and falls in the fixed issuance cost, the injection target rises in the fixed issuance cost, and the trigger-to-target gap widens in it.}{If $V''(x)\,dx/d\theta+\partial_\theta V'(x)=0$ along a boundary $x(\theta)$, $V''(x)\ne0$ and $\partial_\theta V'=-F'$, then $dx/d\theta=F'(x)/V''(x)$. With $W'(x_L)>0$, $N'(x_L),N'(y_{\text{post}})<0$ and $V''(x_L)>0>V''(y_{\text{post}})$, $dx_L/d\lambda_S>0$, $dx_L/dK<0$, $dy_{\text{post}}/dK>0$ and $d(y_{\text{post}}-x_L)/dK>0$.}{Identification.boundary_slope, Identification.trigger_rises_in_lambda, Identification.trigger_falls_in_K, Identification.target_rises_in_K, Identification.gap_increasing_in_K, Identification.control_trigger_slope_needs_curvature, Envelope.trigger_jump}
 \mrow{M6}{The Jacobian of the barrier and the trigger in the two parameters is non-singular, because the parameters move the trigger in opposite directions.}{$\det\partial(y^*,x_L)/\partial(\lambda_S,K)=\frac{\rho_L}{(\rho_L-\mu'(y^*))V''(x_L)}\big(W(y^*)N'(x_L)-N(y^*)W'(x_L)\big)$, negative under the signs of M4 and M5. For $a_{11},a_{12},a_{21}>0>a_{22}$, $a_{11}a_{22}-a_{12}a_{21}<0$. With $a_{22}>0$ it can vanish.}{Identification.det_formula, Identification.det_neg_of_opposite, Identification.det_neg, Identification.control_same_direction_can_fail}
 \mrow{M7}{The value function is convex just above the recapitalisation trigger, strictly so exactly when waiting is strictly suboptimal just below it.}{$\Psi=\rho_LV+\Lambda-(1+\kappa)\mu$. If $\sigma^2(x_L)>0$, $\tfrac12\sigma^2V''+\mu V'-\rho_LV-\Lambda=0$ at $x_L^+$, $V'(x_L)=1+\kappa$ and $\mu(1+\kappa)-\rho_LV-\Lambda\le0$ at $x_L$, then $\tfrac12\sigma^2V''(x_L^+)=\Psi(x_L)\ge0$, and $V''(x_L^+)>0\iff\Psi(x_L)>0$. With $\Psi(x_L)=0$, $V''(x_L^+)=0$.}{SecondOrder.psi_identity, SecondOrder.psi_nonneg_of_qvi, SecondOrder.trigger_convex, SecondOrder.trigger_strict_iff, SecondOrder.control_trigger_flat_when_psi_zero}
+\mrow{M8}{The log coordinate maps the state space onto the real line, with the requirement at zero and the distress boundary at minus infinity.}{$q>0$ $\Rightarrow$ $z$ is strictly increasing on $(1,\infty)$, $1+qe^{z(x)}=x$ for $x>1$, $z(1+qe^{w})=w$, $z(1+q)=0$, $z(x)\to-\infty$ as $x\to1^+$ and $z(x)\to\infty$ as $x\to\infty$.}{CapGeometry.zmap_inverse, CapGeometry.zmap_of_inverse, Coordinate.zmap_strictMonoOn, Coordinate.zmap_at_requirement, Coordinate.zmap_tendsto_atBot, Coordinate.zmap_tendsto_atTop}
+\mrow{M9}{Along the cap the drift of the state at the distress boundary is $r-r_L$, and when the drift there is positive the drift of $z$ diverges to plus infinity at that boundary.}{$a_1,a_3>0$, $a_2<1$, $\mu_L=\gamma+r_L$ $\Rightarrow$ $B(1)=r-r_L$. If $B(x)\to b_1>0$ as $x\to1^+$ then $B(x)/(x-1)\to\infty$. With $B\equiv-1$ it tends to $-\infty$.}{Coordinate.cappedDrift_at_one, Coordinate.zdrift_tendsto_atTop, Coordinate.control_zdrift_needs_positive_limit, BCVW.piBar_at_one, BCVW.piBar_mul_y}
+\mrow{M10}{The value function has no kink at the recapitalisation trigger.}{If $V\ge\mathcal MV$, $V(x_L)=\mathcal MV(x_L)$, $\mathcal MV$ is affine with slope $1+\kappa$, $V$ has right derivative $V'(x_L^+)$, $\sigma^2(x_L)>0$, and $V'(x_L^+)>1+\kappa$ would make $\tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0$ hold at $x_L$ for every $q$, then $V'(x_L^+)=1+\kappa$. If $\tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0$ is needed only for $q\le0$, it holds when $b\le\rho_LV+\Lambda$. Without $V\ge\mathcal MV$ a downward kink is possible.}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
 
 \bottomrule
 \end{longtable}
@@ -142,8 +145,9 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \end{longtable}
 \normalsize
 
-Black and Perold (1992) is named in Table~\ref{tab:pending} but has not
-been read, and every claim made about it is unverified.
+Black and Perold (1992) and Taksar (2000) are named in
+Table~\ref{tab:pending} but have not been read, and every claim made about
+them is unverified.
 
 \section{Conclusions}
 
@@ -165,6 +169,7 @@ ID & Statement & Rows \\
 \endhead
 \crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the saturation limits of the $z$-volatility are $\nu_1^2$ and $\nu_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$.}{M1, M2, M3, L1}
 \crow{C3}{Under the hypotheses listed in Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M4, M5, M6, M7}
+\crow{C4}{The joint identification of C3 is new against the papers read and the literature search of 10 October 2026 recorded in \path{TODO.md}, whose leads were excluded at the level of their abstracts. \citet{bayraktar2026} have no fixed issuance cost and set the recapitalisation threshold exogenously (L5). The responses of the barrier and of the target to the fixed issuance cost alone are not claimed new.}{M6, L5}
 
 \bottomrule
 \end{longtable}
@@ -179,8 +184,7 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
-\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). \pend{Black and Perold (1992) on constant proportion portfolio insurance, whose cushion has the form of the solvency branch of $u$, the one lead of the search of 10 October 2026 that survives triage at abstract level.}}{M3, L1, L2, L3, L4}
-\crow{C4}{That the asymmetry parameter and the fixed issuance cost are jointly identified from the two thresholds is new. \citet{bayraktar2026} have no fixed issuance cost and set the recapitalisation threshold exogenously (L5). \pend{a search for comparative statics of impulse-control thresholds in a fixed issuance cost, and for identification of preference and cost parameters from capital thresholds.}}{M6, L5}
+\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). \pend{Black and Perold (1992) on constant proportion portfolio insurance, whose cushion has the form of the solvency branch of $u$, and Taksar (2000), in whose insurance model the reserve behaves like a logarithmic Brownian motion near zero, the leads of the searches of 10 October 2026 that survive triage at abstract level.}}{M3, L1, L2, L3, L4}
 
 
 \bottomrule
@@ -213,7 +217,10 @@ is the expected discounted shortfall and $N$ the discounted injection count
 under the optimal policy, $\theta$ is $\lambda_S$ or $K$, and $F$ is $W$ or $N$
 accordingly. $\rho_L$ is the liability-net discount rate, $\mu'$ the
 derivative in $x$ of the drift along the cap, and $g=(R-x)^+$ for $F=W$ and
-$g=0$ for $F=N$. Primes are derivatives in $x$.
+$g=0$ for $F=N$. Primes are derivatives in $x$. $B(x)=u(x)(\mu_s-r)+(r-\mu_L)x+\gamma$
+is the drift of $x$ along the cap, with $\mu_L=\gamma+r_L$. $\kappa$ is the
+proportional issuance cost, $\mathcal MV$ the impulse operator, affine with
+slope $1+\kappa$ on the intervention side, and $b=(1+\kappa)\mu(x_L)$.
 
 \begin{mproof}{M1}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
 For every $z$,
@@ -265,6 +272,25 @@ Control, $a_{11}=a_{12}=a_{21}=a_{22}=1$ $\Rightarrow$ $\det=0$.
 Control, $\sigma^2=1$, $V'=1$, $\kappa=0$, $V=\Lambda=\mu=0$, $\rho_L=1$ $\Rightarrow$ $\Psi=0$, $V''(x_L^+)=0$.
 \end{mproof}
 
+\begin{mproof}{M8}{CapGeometry.zmap_inverse, CapGeometry.zmap_of_inverse, Coordinate.zmap_strictMonoOn, Coordinate.zmap_at_requirement, Coordinate.zmap_tendsto_atBot, Coordinate.zmap_tendsto_atTop}
+\[ z(x)=\log\frac{x-1}{q},\qquad 1+qe^{z(x)}=x\ \ (x>1),\qquad z(1+qe^{w})=w . \]
+\[ 1<x<y\ \Rightarrow\ \frac{x-1}{q}<\frac{y-1}{q}\ \Rightarrow\ z(x)<z(y),\qquad z(1+q)=\log1=0 . \]
+\[ \frac{x-1}{q}\to0^+\ (x\to1^+)\ \Rightarrow\ z\to-\infty,\qquad \frac{x-1}{q}\to\infty\ (x\to\infty)\ \Rightarrow\ z\to\infty . \]
+\end{mproof}
+
+\begin{mproof}{M9}{Coordinate.cappedDrift_at_one, Coordinate.zdrift_tendsto_atTop, Coordinate.control_zdrift_needs_positive_limit, BCVW.piBar_at_one, BCVW.piBar_mul_y}
+\[ u(1)=\bar\pi(1)\cdot1=0\ \Rightarrow\ B(1)=(r-\mu_L)+\gamma=r-r_L\qquad(\mu_L=\gamma+r_L) . \]
+\[ B(x)\to b_1>0,\quad (x-1)^{-1}\to\infty\ \ (x\to1^+)\ \Rightarrow\ \frac{B(x)}{x-1}\to\infty . \]
+Control, $B\equiv-1$ $\Rightarrow$ $B(x)/(x-1)\to-\infty$.
+\end{mproof}
+
+\begin{mproof}{M10}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
+\[ V\ge\mathcal MV,\ \ V(x_L)=\mathcal MV(x_L),\ \ (\mathcal MV)'=1+\kappa\ \Rightarrow\ V'(x_L^+)\ge1+\kappa . \]
+\[ V'(x_L^+)>1+\kappa\ \Rightarrow\ \tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0\ \ \forall q,\qquad q=\frac{2(\rho_LV+\Lambda-b+1)}{\sigma^2}\ \Rightarrow\ 1\le0 . \]
+\[ \Rightarrow\ V'(x_L^+)=1+\kappa;\qquad q\le0,\ \ b\le\rho_LV+\Lambda\ \Rightarrow\ \tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0 . \]
+Control, $v(x)=x$, $\kappa=1$, $\mathcal Mv(x)=2x$ $\Rightarrow$ $v(0)=\mathcal Mv(0)$, $v'(0^+)=1<2$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -302,6 +328,12 @@ $V''(y_{\text{post}})<0$ is a hypothesis, since the derivation of it in
 \path{PROOFS_v2.tex} fails (Appendix~\ref{app:refuted}). $\rho_L>\mu'(y^*)$ is a parameter condition. C3 states these
 as its hypotheses.
 
+M9 takes the drift of $z$ to be $B(x)/(x-1)-\nu_1^2/2$, its Itô form, and
+does not classify the boundary $x=1$, so whether it is reached is not proved.
+M10 takes the viscosity supersolution property of $V$ at $x_L$ as a
+hypothesis, in the form that a kink admits lower test functions of every
+curvature.
+
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 
 \section{Terminology}
@@ -332,6 +364,8 @@ Recapitalisation trigger & $x_L$ & The state at which capital is raised. \\
 Injection target & $y_{\text{post}}$ & The state reached by an issue. \\
 Expected discounted shortfall & $W$ & $\mathbb E_x\int_0^\infty e^{-\rho_Lt}(R-X_t)^+dt$ under the optimal policy, $-\partial_{\lambda_S}V$. \\
 Discounted injection count & $N$ & $\mathbb E_x\sum_ie^{-\rho_L\tau_i}$ under the optimal policy, $-\partial_KV$. \\
+Proportional issuance cost & $\kappa$ & The cost of an issue per unit raised. \\
+Impulse operator & $\mathcal MV$ & The value of issuing at once to the best target, net of both issuance costs. \\
 \bottomrule
 \end{longtable}
 \normalsize
