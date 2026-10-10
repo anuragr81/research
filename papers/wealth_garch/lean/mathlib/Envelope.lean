@@ -2,7 +2,7 @@
 ================================================================================
   Envelope identities and the smooth-fit discrimination check
   Companion to PROOFS_v2.tex: lem:envelope (ENV), lem:envelopeK (ENVK),
-  rem:smfn (SMFN).  Lean 4 + Mathlib.  DRAFT — not yet compiled.
+  rem:smfn (SMFN).  Lean 4 + Mathlib.
 ================================================================================
 
 SCOPE, in the same spirit as SmoothFit.lean.
@@ -39,7 +39,7 @@ Confidence, per declaration:
   it, and the hypotheses encode exactly the paper's premises.
 -/
 
-import AsymCapital.SmoothFit
+import SmoothFit
 
 open SmoothFit
 

@@ -19,19 +19,13 @@ control, calibrated), not a first-principles derivation from full
 retention.  The exact accounting alternative (additive drift) is covered
 separately by `sojourn_time` and its properties, which do not depend on
 `phi_minus` at all.
-
-STATUS.  Not compile-checked end-to-end against a live Lean/Mathlib
-toolchain -- no such toolchain is available in this environment. Every
-algebraic identity has been confirmed symbolically in SymPy first
-(verify_rate_based.py, tags noted per theorem). One leaf, `htanh` inside
-`saturated_ratio_tendsto`, is `sorry`; see the inline note at that step for
-what remains and two ways to close it. No other claim in this file depends
-on it.
 -/
 
 import Mathlib
 
 open Real
+
+namespace RateBased
 
 /-! ############################################################
     ## 1.  Persistence under the maintained model
@@ -114,6 +108,22 @@ theorem Vresp_ratio_eq (V0 c theta z : ℝ) (hV0 : 0 < V0) :
       Real.exp_sub]
   field_simp
 
+theorem tanh_eq_one_sub (y : ℝ) : Real.tanh y = 1 - 2 / (Real.exp (2 * y) + 1) := by
+  rw [Real.tanh_eq, Real.exp_neg, show 2 * y = y + y by ring, Real.exp_add]
+  have h : 0 < Real.exp y := Real.exp_pos y
+  field_simp
+  ring
+
+theorem tendsto_tanh_atTop : Filter.Tendsto Real.tanh Filter.atTop (nhds 1) := by
+  have he : Filter.Tendsto (fun y : ℝ => Real.exp (2 * y) + 1) Filter.atTop Filter.atTop :=
+    Filter.tendsto_atTop_add_const_right _ 1
+      (Real.tendsto_exp_atTop.comp (Filter.tendsto_id.const_mul_atTop two_pos))
+  have h2 : Filter.Tendsto (fun y : ℝ => 2 / (Real.exp (2 * y) + 1)) Filter.atTop (nhds 0) :=
+    tendsto_const_nhds.div_atTop he
+  have h3 := (tendsto_const_nhds (x := (1:ℝ))).sub h2
+  simp only [sub_zero] at h3
+  exact h3.congr (fun y => (tanh_eq_one_sub y).symm)
+
 /-- **Saturated ratio equals exp(4c) as z → ∞.** Combines the exact
     identity above with the standard fact that tanh → 1 at infinity and
     continuity of exp. Corresponds to SymPy tags S1a-S1b: the limit
@@ -138,23 +148,9 @@ theorem saturated_ratio_tendsto {V0 c theta : ℝ} (hV0 : 0 < V0) (htheta : 0 < 
     filter_upwards [Filter.eventually_ge_atTop (b * theta)] with z hz
     rw [le_div_iff₀ htheta]
     linarith
-  -- htanh: tanh(z/theta) -> 1 as z -> atTop.
-  -- NOT VERIFIED: I could not confirm a current Mathlib lemma name for
-  -- "tanh -> 1 at atTop" against a live library (unlike `hdiv` above, or
-  -- `Real.tendsto_sigmoid_atTop`, which I did confirm exists). The
-  -- mathematical content is standard, but do not trust `sorry` here as a
-  -- placeholder for anything beyond "this line needs one more lemma before
-  -- it compiles." Two ways to close it, in order of how much I'd trust them
-  -- without a compiler in front of me:
-  --   (a) search your local Mathlib (`exact?` / `apply?` / loogle on the
-  --       signature `Tendsto Real.tanh atTop (nhds 1)`) for the direct lemma;
-  --   (b) derive it from `Real.tendsto_sigmoid_atTop` via the identity
-  --       tanh x = 2 * sigmoid (2 * x) - 1, or directly from
-  --       `Real.tendsto_exp_atBot` applied to z ↦ -2*(z/theta), using
-  --       tanh x = (1 - exp (-2*x)) / (1 + exp (-2*x)).
   have htanh : Filter.Tendsto (fun z : ℝ => Real.tanh (z / theta))
-      Filter.atTop (nhds 1) := by
-    sorry -- see note above: needs the tanh-atTop limit lemma, name not confirmed
+      Filter.atTop (nhds 1) :=
+    tendsto_tanh_atTop.comp hdiv
   have hmul : Filter.Tendsto (fun z : ℝ => 4 * c * Real.tanh (z / theta))
       Filter.atTop (nhds (4 * c)) := by
     have := htanh.const_mul (4 * c)
@@ -205,3 +201,5 @@ theorem sojourn_tendsto_atTop {d : ℝ} (hd : 0 < d) :
       (nhdsWithin 0 (Set.Ioi 0)) Filter.atTop :=
     Filter.Tendsto.const_mul_atTop hd hrecip
   simpa [div_eq_mul_inv] using this
+
+end RateBased

@@ -49,12 +49,10 @@ need them report SKIP with the reason.
     00_document/    PROOFS_v2.tex (the paper), EMPIRICAL_v2.tex, references.bib
     00_reader/      TODO.md, proof_registry.py, check_citations.py,
                     ledger_empirical.py, TERMINOLOGY.md
-    01_theory/      the verifiers (SymPy) and the Lean files, including
-                    lean_project/ — a buildable Lake project (SMF, QVI_Part1,
-                    RateBased), pinned to Lean v4.32.0-rc1 + matching
-                    mathlib. Compiler-verified against that toolchain; see
-                    01_theory/lean_project/README.md to rebuild with
-                    `lake build`.
+    01_theory/      the SymPy verifiers
+    lean/mathlib/   the Lean files, a Lake project pinned to Lean
+                    v4.32.0-rc1 and Mathlib v4.32.0-rc1; see
+                    lean/mathlib/README.md to rebuild with `lake build`.
     02_numerical/   solver, M-operator verifier, sweep drivers
     03_empirical/   design, results/ (your .mat files go here)
     04_reproduce/   run_all.sh — the full harness

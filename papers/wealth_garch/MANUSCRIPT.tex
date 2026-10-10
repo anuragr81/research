@@ -1,0 +1,213 @@
+% MANUSCRIPT.tex, the manuscript skeleton for the asymmetric capital buffer
+% paper. Created 10 October 2026 as pass 1 of the plan in TODO.md (item PLAN).
+%
+% PURPOSE
+%   The manuscript. Four tables carry the body (introduction, model,
+%   literature, conclusions), and the appendices carry every proof.
+%   00_document/PROOFS_v2.tex is retired into this file at pass 6, with
+%   RETIREMENT.md recording where each part of it went.
+%
+% STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
+%   Rows are written only through the four row macros below, and proofs only
+%   through the mproof environment. IDs are K1, K2, ... (introduction),
+%   M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
+%     \krow{ID}{headline}{model rows}{scope note}
+%     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
+%     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
+%     \crow{ID}{statement}{model or literature rows}
+%     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
+%   Lists of rows or theorems are comma-separated. Lean theorem names are the
+%   fully qualified names declared under lean/mathlib/.
+%
+% RULES THE CHECKER ENFORCES
+%   Introduction rows point to model rows only. Conclusion rows point to model
+%   or literature rows only. Every model row names Lean theorems that exist in
+%   an audited Lean file and has exactly one proof in Appendix A naming the
+%   same theorems. Every literature row's quote appears verbatim in the
+%   paper's lit/ record. In every proof, plain English is at most 30% of the
+%   text, measured as prose words over prose words plus mathematical tokens.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\emergencystretch=1.5em
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
+\newcommand{\rowref}[1]{#1}
+\newcommand{\unv}[1]{\textit{Unverified:} #1}
+\newcommand{\pend}[1]{\textit{Pending:} #1}
+
+\newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
+\newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+
+\newenvironment{mproof}[2]
+  {\subsection*{Proof of #1}\label{proof:#1}%
+   {\raggedright\noindent\textit{Lean:} \lean{#2}.\par}\smallskip}
+  {\par\hfill$\square$\par\medskip}
+
+\title{Asymmetric Capital Buffer Control}
+\author{}
+\date{Manuscript skeleton, 10 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+The question is how an asymmetric penalty on a capital shortfall shapes a
+bank's recapitalisation policy and the volatility of its capital buffer.
+The model treats recapitalisation as impulse control under a fixed issuance
+cost and a regulatory cap on risky exposure.
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
+\caption{Headlines.}\label{tab:intro}\\
+\toprule
+ID & Headline & Model rows & Scope note \\
+\midrule
+\endfirsthead
+\toprule
+ID & Headline & Model rows & Scope note \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Model}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{3.8cm}P{6.3cm}P{3.7cm}P{1.1cm}@{}}
+\caption{Model results.}\label{tab:model}\\
+\toprule
+ID & Claim & Statement & Lean & Proof \\
+\midrule
+\endfirsthead
+\toprule
+ID & Claim & Statement & Lean & Proof \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Literature}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{2.2cm}P{3.5cm}P{5.5cm}P{1.3cm}P{1.9cm}@{}}
+\caption{Papers read.}\label{tab:lit}\\
+\toprule
+ID & Paper & What we rely on & Quote & Page & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Paper & What we rely on & Quote & Page & Rows \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Conclusions}
+
+Table~\ref{tab:concl} holds the conclusions that rest on model rows and on
+papers read in full. Table~\ref{tab:pending} holds every claim that a result
+is new and every other claim still waiting, and each of its rows names what
+it waits on.
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Conclusions.}\label{tab:concl}\\
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Pending conclusions.}\label{tab:pending}\\
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+\normalsize
+
+\appendix
+
+\section{Proofs}
+\label{app:proofs}
+
+\paragraph{Notation.}
+
+\section{Evidence and verification}
+\label{app:evidence}
+
+\paragraph{Toolchain.} Lean \path{v4.32.0-rc1} with Mathlib at tag
+\path{v4.32.0-rc1}, commit \path{360da6fa66c1}, pinned in \path{lean/mathlib/lake-manifest.json}. Every file under
+\path{lean/mathlib/} is a build root. A theorem passes the axiom audit when it
+depends on no axiom outside \path{propext}, \path{Classical.choice} and
+\path{Quot.sound}.
+
+\paragraph{Checks.} \path{verify.sh} runs \path{checks/verify_manuscript.py},
+\path{checks/verify_mathlib.py} and \path{checks/verify_docs.py}, and
+writes their output to \path{VERIFICATION.md}.
+\path{lit/verify_lit.sh} runs the suite of every literature record.
+
+\paragraph{What Lean does not carry.}
+
+\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
+
+\section{Terminology}
+\label{app:terms}
+
+\footnotesize
+\begin{longtable}{@{}P{3.4cm}P{4.2cm}P{8.6cm}@{}}
+\toprule
+Term & Symbol & Meaning \\
+\midrule
+\endfirsthead
+\toprule
+Term & Symbol & Meaning \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Primitives and scope}
+\label{app:primitives}
+
+\section{Refuted conjectures}
+\label{app:refuted}
+
+\end{document}

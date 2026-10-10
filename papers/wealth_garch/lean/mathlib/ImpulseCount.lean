@@ -1,8 +1,7 @@
 /-
 ================================================================================
   FIN (lem:fin): no chattering — the discounted impulse count is finite
-  Companion to PROOFS_v2.tex, Lemma FIN.  Lean 4 + Mathlib.  DRAFT — not
-  yet compiled.
+  Companion to PROOFS_v2.tex, Lemma FIN.  Lean 4 + Mathlib.
 ================================================================================
 
 SCOPE, in the same style as Envelope.lean.

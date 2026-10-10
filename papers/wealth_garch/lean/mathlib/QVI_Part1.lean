@@ -13,43 +13,13 @@ Conjecture in qvi_formulation.tex, not a theorem), or the comparative-
 statics prediction (downstream of that open conjecture).  Formalising any
 of those now would misrepresent their status -- see the ledger's own
 docstring for the same disclosure.
-
-STATUS.  Written without access to a Lean toolchain in this session, same
-as every prior Lean file in this project.  NOT YET COMPILE-CHECKED.  Both
-theorems verified symbolically first (verify_qvi_part1.py, tags Q1, Q2).
-
-Confidence assessment, stated honestly rather than uniformly:
-  `lambda_asymmetry_vanishes_at_one` is pure algebra (substitute lambda=1
-    into a product, get 0) -- high confidence, essentially mechanical.
-  `neg_Lambda_concave` originally used `h1.min h2`, guessing that
-    Mathlib exposes a `ConcaveOn.min` combinator. It does not. Checked
-    against Mathlib4 master (Analysis/Convex/Function.lean): the real
-    name is `ConcaveOn.inf` (pointwise-min-of-concave-is-concave,
-    proved by transporting through `ConvexOn.sup` and `.dual`), and it
-    concludes concavity of the lattice-inf `f ⊓ g`, not literally
-    `fun x => min x R`. The proof now uses `ConcaveOn.inf` and bridges
-    `⊓` to `min` via an isolated `funext x; rfl` step (`hpointwise`),
-    on the expectation that Pi's `⊓` and ℝ's `Min` instance reduce to
-    `min` definitionally -- this bridging step has NOT been compiled,
-    only checked by reading Mathlib's instance definitions
-    (Order/Lattice.lean's `Pi.inf_apply`, `Data/Real/Basic.lean`'s
-    `Min ℝ` instance), so it remains the one soft spot in this
-    theorem. A second guessed name, `ConcaveOn.sub_const`, also turned
-    out not to exist -- Mathlib has only `add_const` (and `ConcaveOn.sub`,
-    which wants a ConvexOn second argument), so the constant shift now
-    goes through `add_const (-R)` plus a second Pi-to-lambda bridge.
-    The names now actually checked against Mathlib master are
-    `ConcaveOn.inf`, `ConcaveOn.add_const`, `ConcaveOn.smul`,
-    `concaveOn_id`, `concaveOn_const`, `convex_univ` and `Pi.add_apply`.
-    Note `concaveOn_id` is stated for `_root_.id`, not `fun x => x`;
-    these are defeq so the ascription in `h1` should be accepted, but
-    that too is a defeq assumption rather than a compiled fact. None of
-    this file has been seen by an actual compiler.
 -/
 
 import Mathlib
 
 open Real
+
+namespace QVI_Part1
 
 /-! ############################################################
     ## 1.  Exact nesting at lambda = 1
@@ -104,18 +74,6 @@ theorem neg_Lambda_concave {lam R : ℝ} (hlam : 1 ≤ lam) :
   -- convex; the pointwise min of two concave functions is concave;
   -- affine functions are concave).
   --
-  -- Mathlib's combinator for this is `ConcaveOn.inf`, not `.min`
-  -- (verified against Mathlib4 master, Analysis/Convex/Function.lean):
-  --   theorem ConcaveOn.inf (hf : ConcaveOn 𝕜 s f) (hg : ConcaveOn 𝕜 s g) :
-  --       ConcaveOn 𝕜 s (f ⊓ g)
-  -- It's proved by transporting through ConvexOn.sup and .dual, so it
-  -- produces concavity of the lattice-inf `f ⊓ g`, not literally
-  -- `fun x => min x R`. Those are equal (Pi's `⊓` and ℝ's `Min`
-  -- instance both reduce to `min` by rfl), but that reduction hasn't
-  -- been compile-checked here, so it's isolated into its own line
-  -- (`hpointwise`) rather than left implicit -- if `rfl` ever doesn't
-  -- go through, only that one line needs fixing (try
-  -- `by ext x; simp [Pi.inf_apply]` as a fallback).
   have h1 : ConcaveOn ℝ Set.univ (fun x : ℝ => x) := concaveOn_id (convex_univ)
   have h2 : ConcaveOn ℝ Set.univ (fun _ : ℝ => R) := concaveOn_const R convex_univ
   have hinf : ConcaveOn ℝ Set.univ ((fun x : ℝ => x) ⊓ (fun _ : ℝ => R)) := h1.inf h2
@@ -123,12 +81,6 @@ theorem neg_Lambda_concave {lam R : ℝ} (hlam : 1 ≤ lam) :
       ((fun x : ℝ => x) ⊓ (fun _ : ℝ => R)) = fun x : ℝ => min x R := by
     funext x; rfl
   rw [hpointwise] at hinf
-  -- `ConcaveOn.sub_const` does NOT exist in Mathlib (verified against
-  -- master: Analysis/Convex/Function.lean has only `ConcaveOn.add_const`,
-  -- and `ConcaveOn.sub`, which needs a ConvexOn second argument). Also
-  -- note `add_const` concludes with the *Pi-addition* `f + fun _ => b`,
-  -- not `fun x => f x - b`. So: shift by `-R`, then bridge the
-  -- Pi-addition back into lambda form, same pattern as `hpointwise`.
   have hshift : ConcaveOn ℝ Set.univ ((fun x : ℝ => min x R) + fun _ : ℝ => -R) :=
     hinf.add_const (-R)
   have hbridge : ((fun x : ℝ => min x R) + fun _ : ℝ => -R)
@@ -136,3 +88,5 @@ theorem neg_Lambda_concave {lam R : ℝ} (hlam : 1 ≤ lam) :
     funext x
     simp [Pi.add_apply, sub_eq_add_neg]
   rwa [hbridge] at hshift
+
+end QVI_Part1

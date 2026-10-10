@@ -29,7 +29,7 @@ than proves.
     Thm 9.7 / Chapter 9; Crandall-Ishii-Lions user's guide, CIL92), not in
     dispute and not the novel content of SMF.  Mathlib has no viscosity-
     solution library, so proving it here would mean building that theory
-    from scratch and would leave a `sorry` at the load-bearing step.  The
+    from scratch and would leave the load-bearing step unproved.  The
     novel content -- the part this project actually needs machine-checked --
     is that GIVEN the supersolution property, a convex kink is impossible.
     That is what `no_convex_kink` proves, mechanically.
@@ -37,12 +37,6 @@ than proves.
   This scoping mirrors QVI_Part1.lean, which formalises the two facts that
   are genuinely settled and states plainly that the FOCs and the value-
   function concavity are out of scope.
-
-STATUS.  Verified against Mathlib for Lean v4.32.0-rc1 (the toolchain pinned
-in lean-toolchain).  Every declaration compiles with no `sorry`; the axiom
-footprint of `smooth_fit` is `[propext, Classical.choice, Quot.sound]` and no
-more, which certifies the whole file, since the two step lemmas are
-dependencies of `smooth_fit`.
 
 Declarations:
   `hasDeriv_Mv`      -- `Mv` is affine, so its derivative everywhere is the
