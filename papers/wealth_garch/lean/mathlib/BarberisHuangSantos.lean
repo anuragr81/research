@@ -1,10 +1,13 @@
 /-
 ================================================================================
-  Barberis, Huang and Santos, "Prospect Theory and Asset Prices",
-  NBER Working Paper 7220 (July 1999), the version read and cited. What
-  lit/barberis_huang_santos_1999/ attributes to the paper, in the paper's
-  notation (λ loss aversion, f the price-dividend ratio, g and σ the mean and
-  volatility of log consumption growth, ε the standard normal shock).
+  Barberis, Huang and Santos, "Prospect Theory and Asset Prices", in NBER
+  Working Paper 7220 (July 1999) and in the Quarterly Journal of Economics
+  116(1) (2001). What lit/barberis_huang_santos_1999/ and
+  lit/barberis_huang_santos_2001/ attribute to the paper, in its notation
+  (λ loss aversion, f the price-dividend ratio, g and σ the mean and
+  volatility of log growth, ε the standard normal shock). The working
+  paper's eq. (15) and the journal's eq. (46) have the same form, with
+  consumption growth in the first and dividend growth in the second.
 ================================================================================
 -/
 
