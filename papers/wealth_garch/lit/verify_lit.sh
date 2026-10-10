@@ -8,6 +8,7 @@ RAN=0
 for d in "$HERE"/*/; do
   name="$(basename "$d")"
   [ "$name" = "pdfs" ] && continue
+  [ "$name" = "__pycache__" ] && continue
   suite=$(find "$d" -maxdepth 1 -name 'verify_*.py' | head -1)
   if [ -z "$suite" ]; then
     echo "[FAIL] $name has no verify_*.py"

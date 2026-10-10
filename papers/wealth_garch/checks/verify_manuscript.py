@@ -205,13 +205,10 @@ def analyse(tex, lean, bibs, lit):
     return out, counts
 
 
-FIXTURE_KEY = "Fixture2000"
-FIXTURE_RECORD = "| F-Q1 | 1 | The buffer is replenished by a lump-sum issue when it reaches the trigger. | M1 |"
-
 GOOD = r"""
 \krow{K1}{h}{M1}{s}
 \mrow{M1}{c}{$x$}{SmoothFit.smooth_fit}
-\lrow{L1}{Fixture2000}{w}{The buffer is replenished by a lump-sum issue when it reaches the trigger.}{1}{M1}
+\lrow{L1}{bayraktar2026}{w}{the parameter a3 scales the entire liquidity constraint and determines its asymptotic upper bound}{17}{M1}
 \crow{C1}{s}{M1, L1}
 \begin{mproof}{M1}{SmoothFit.smooth_fit}
 Then \[ V'(s^-) = V'(s^+), \qquad \mathcal{M}V(s) = V(s) \] at the trigger $s$.
@@ -222,7 +219,7 @@ BAD = r"""
 \krow{K1}{h}{M9}{s}
 \krow{K1}{h}{M1}{s}
 \mrow{M1}{c}{$x$}{SmoothFit.no_such_theorem}
-\lrow{L1}{Fixture2000}{w}{A sentence the paper never printed.}{1}{M1}
+\lrow{L1}{bayraktar2026}{w}{A sentence the paper never printed.}{17}{M1}
 \crow{C1}{s}{X5}
 \begin{mproof}{M1}{SmoothFit.no_such_theorem}
 This proof talks through every step in words and uses almost no symbols at all, so
@@ -255,13 +252,11 @@ for k in sorted(real):
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
-print(f"      the samples resolve Lean names against the real lean/mathlib/ declarations,")
-print(f"      and their literature row against a fixture record keyed {FIXTURE_KEY}")
-check("MS-C0 the control's Lean theorem is declared in lean/mathlib/", "SmoothFit.smooth_fit" in lean)
-cbibs = bibs | {FIXTURE_KEY}
-clit = {**lit, FIXTURE_KEY: FIXTURE_RECORD}
-good, _ = analyse(GOOD, lean, cbibs, clit)
-bad, _ = analyse(BAD, lean, cbibs, clit)
+print("      the samples resolve Lean names, bib keys and the quote against the real bundle")
+check("MS-C0 the control's Lean theorem, bib key and lit record exist",
+      "SmoothFit.smooth_fit" in lean and "bayraktar2026" in bibs and "bayraktar2026" in lit)
+good, _ = analyse(GOOD, lean, bibs, lit)
+bad, _ = analyse(BAD, lean, bibs, lit)
 for k in sorted(good):
     check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])

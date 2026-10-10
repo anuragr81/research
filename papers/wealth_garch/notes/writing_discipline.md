@@ -94,6 +94,9 @@ that world out. A claim that cannot name its falsifier does not enter.
     and **impulse** (recapitalisation $I$ at the **recapitalisation
     trigger** $x_L$, up to the **injection target** $y_{\text{post}}$).
   - **Cap geometry** ($a_1,a_2,a_3$) is never called preference.
+  - $\nu_1^2,\nu_3^2$ are the **saturation limits** of the $z$-volatility
+    $\zeta$. Renamed 2026-10-10 from PROOFS_v2's $\kappa_1^2,\kappa_3^2$ so
+    that $\kappa$ means only the proportional issuance cost.
 - The "also called" synonyms in `TERMINOLOGY.md` (payout barrier, injection
   trigger, recapitalisation boundary, volatility ratio) do not enter the
   manuscript. One name each.

@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\title{Explored literature}
+\date{10 October 2026}
+
+\begin{document}
+\maketitle
+
+This document records what was read and is not an L row of
+\path{MANUSCRIPT.tex}. Each record under \path{lit/} holds the quotations,
+their pages and the Lean that checks our reading. Locators are to the version
+read.
+
+\section{\citet{bayraktar2026}}
+
+Read in full, arXiv:2603.14557v2 (record \path{lit/bayraktar_2026/}).
+
+\paragraph{The model of this bundle.} The cap, the diffusion of the
+asset-to-deposit ratio and the switching point between the solvency and the
+liquidity branch are this paper's (eq.~4, p.~10, p.~15). L1 rests on it.
+
+\paragraph{The boundary at one.} Remark~3.1 (p.~11) states that at the
+zero-equity level the cap forces zero risky exposure, the diffusion vanishes,
+and the point is locally repelling when $r>r_L$ and attracting when $r<r_L$.
+The paper avoids the point by intervening at an exogenous threshold above one
+(p.~2). This bears on H2 and H2b of \path{TODO.md}, whose degeneracy and
+repelling condition are therefore in print. What the paper does not do is
+change coordinate, so the reading of the degeneracy as an artefact of the
+level coordinate is not in it.
+
+\paragraph{No fixed issuance cost.} Issuance costs are a dilution cost and a
+proportional cost. The paper states that a fixed issuance cost would
+generally break the one-dimensional reduction (p.~9) and that it could make
+earlier recapitalisation or inaction at the boundary optimal (p.~13). A fixed
+cost keeps the reduction only when it is charged per unit of liabilities, as
+in \path{PROOFS_v2.tex}. This bears on H3 and H3b.
+
+\paragraph{Smooth fit.} Smooth fit is proved at the dividend barrier, and
+issuance occurs only at the exogenous threshold (Theorem~3.1, p.~12). There
+is no smooth fit at an optimally chosen recapitalisation trigger. This bears
+on H4.
+
+\section{\citet{barberis2001}}
+
+Read in full in NBER Working Paper 7220 (July 1999), not in the published
+article (record \path{lit/barberis_huang_santos_2001/}).
+
+\paragraph{Kinked-linear loss aversion.} The loss-aversion term is piecewise
+linear and kinked at the origin (p.~10), and the paper drops the curvature of
+prospect theory for simplicity (p.~11). A kinked-linear penalty is therefore
+not new as such. This bears on H5, whose contrast with S-shaped penalties
+must not suggest otherwise.
+
+\paragraph{Changing risk aversion.} Volatility above that of consumption
+growth comes from time variation in effective loss aversion through the
+benchmark state (Section~3). The level of loss aversion alone fails on both
+volatility and the premium (p.~15).
+
+\section{\citet{engle2018}}
+
+Read in full in the published article (record
+\path{lit/engle_siriwardane_2018/}).
+
+\paragraph{Precautionary capital.} The equity a firm must raise today to meet
+a capital ratio in a crisis with a given confidence (Section~3.1). It is a
+regulatory quantity of a firm, not of a control problem.
+
+\paragraph{The leverage multiplier.} Equity volatility is approximately the
+leverage multiplier times asset volatility (eq.~5, Appendix~A). The
+multiplier rises with leverage and is around 3 for the median firm
+(Section~2.3).
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

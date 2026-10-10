@@ -14,9 +14,9 @@ The skeleton follows `../MANUSCRIPT_SKELETON.md`, with
 | 4 | Model rows and Appendix A proofs, one family per pass | |
 | 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | |
 | 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | |
-| 7 | Novelty reading, one `lit/` record per paper | |
+| 7 | Novelty reading, one `lit/` record per paper | in progress; `lit/bayraktar_2026`, `lit/barberis_huang_santos_2001`, `lit/engle_siriwardane_2018` done 2026-10-10 |
 | 8 | Conclusions, then introduction; headline overreach review | |
-| 9 | Literature table | |
+| 9 | Literature table | L1 to L3 entered 2026-10-10 |
 | 10 | Readability rounds | |
 | 11 | Referee comments | not applicable |
 
@@ -56,25 +56,21 @@ grounds.
   `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, cached locally under
   `~/.cache/wealth_garch/`.
 
-## Waiting on the author
-
-1. Symbol $\kappa$. The fixed terms reserve bare $\kappa$ for the proportional
-   issuance cost, while PROOFS_v2 and the manuscript write the saturation
-   limits as $\kappa_1^2,\kappa_3^2$. The subscript keeps them apart on the
-   page, but they share a letter. Keep, or rename the saturation limits.
-   Recommendation: rename them before the prose pass, since $\kappa$ and
-   $\kappa_1$ will sit in the same sentences once the issuance cost enters
-   the rows.
+- 2026-10-10. The saturation limits are renamed $\nu_1^2,\nu_3^2$ (from
+  PROOFS_v2's $\kappa_1^2,\kappa_3^2$) so that $\kappa$ means only the
+  proportional issuance cost. Lean `CapGeometry.kappa2` became
+  `CapGeometry.nu2`.
 
 ## Bundle mechanics
 
-- The MS-5 control resolves its literature row against a fixture record
-  (`Fixture2000`) because `lit/` has no record yet. Switch the control to a
-  real record when the first one exists.
-- `refs.bib` is empty and `MANUSCRIPT.tex` has no `\bibliography` until the
-  first L row, since bibtex fails on a document with no citation.
-- `lit/verify_lit.sh` fails with "no paper suites ran" until the first
-  record exists.
+- The MS-5 control resolves its literature row against the real record
+  `lit/bayraktar_2026` (switched from a fixture on 2026-10-10).
+- Every literature suite uses `lit/litcheck.py`. It checks each quotation on
+  its stated page of the sha256-pinned PDF, after NFKC normalisation and
+  rejoining hyphens broken across lines, and builds and audits the paper's
+  Lean file.
+- C1 moved to Table 4 on 2026-10-10. It rests on M1 to M3 and on L1, read in
+  full, and claims nothing new. The novelty claim is C2, in Table 5.
 - `00_reader/TODO.md` and `04_reproduce/run_all.sh` belong to the PROOFS_v2
   layer and retire with it at pass 6. The root `README.md` "Lean status"
   section still describes the `sorry` closed on 2026-10-10 and the old
@@ -92,7 +88,7 @@ SymPy, to port to Lean:
 - Done 2026-10-10: `thm:lambda4` and `prop:robust` are row M1;
   `prop:statemap` (ii) and `prop:satlimits` are rows M2 and M3
   (`CapGeometry.lean`). The identification of the discrete-time $\lambda_V^4$
-  with $\kappa_1^2/\kappa_3^2$ is a definition, recorded in Appendix D, and no
+  with $\nu_1^2/\nu_3^2$ is a definition, recorded in Appendix D, and no
   theorem links the discrete recursion to the diffusion.
 - `prop:sojourn` is already proved in `RateBased.lean`
   (`sojourn_strictAnti`, `sojourn_tendsto_atTop`).
@@ -128,13 +124,13 @@ the search itself is the pending item.
 
 | ID | Candidate claim | Rests on | Lean | Reading |
 |---|---|---|---|---|
-| H1 (C1; M1, M2, M3 from 2026-10-10) | The variance ratio $\lambda_V^4=\kappa_1(c)^2/\kappa_3(c)^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | `RateBased.saturated_ratio_tendsto` (one `sorry`), `saturated_ratio_lambda4`; port TSO (ii) and SCG | `engle2018` (in `references.bib`); Nelson (1991) EGARCH, named in PROOFS_v2 text but not in the bib; search for state-dependent volatility of bank capital |
-| H2 | The degeneracy of the diffusion at the distress boundary $x=1$ is a coordinate artefact. In $z=\log((x-1)/q)$ the volatility is constant on the solvency regime. | `prop:rrL`, `prop:statemap`, `cor:boundary` | port CCP and TSO (i) to (iii) | the paper behind the benchmark solver (`github.com/yuqiongwang/bank_capital_structure`), whose coordinate this is; search for degenerate-diffusion bank capital models |
-| H2b | $x=1$ is unreachable if and only if $r>r_L$. | `cor:boundary` | none possible as stated: boundary classification of a diffusion is not in Mathlib. Enters as a hypothesis unless the scale-function step is formalised | as H2 |
-| H3 | $(\lambda_S,K)$ is locally identified from the pair of thresholds $(y^*,x_L)$, because the two parameters move the trigger in opposite directions. | `lem:reg`, `lem:envelope`, `lem:bdr`, `prop:tcs`, `lem:envelopeK`, `prop:kcs`, `cor:idn`, `prop:soc` | Envelope cores exist (`Envelope.*`); port TCS, KCS, IDN, SOC algebra; REG and BDR enter as hypotheses | search for comparative statics of impulse-control thresholds in a fixed issuance cost; `altinkilic2000`, `buhner2002` for the cost structure only |
+| H1 (C1 in Table 4, C2 in Table 5; M1 to M3, L1 to L3) | The variance ratio $\lambda_V^4=\nu_1^2/\nu_3^2$ is a function of $(\sigma,\sigma_L,a_1,a_3,c)$ only, so it carries no information about the asymmetry parameter $\lambda_S$. | `thm:lambda4`, `prop:robust`, `prop:statemap`, `prop:satlimits` | done, `RateBased`, `CapGeometry` | read: `bayraktar2026` (defines the cap, no limits), `barberis2001` WP (level of loss aversion silent in return volatility), `engle2018` (decomposition of a news asymmetry). Waiting: the published `barberis2001`; Li, Yu and Zhang (arXiv:2108.02648); a search for saturation limits of state volatility under a regulatory cap |
+| H2 | The degeneracy of the diffusion at the distress boundary $x=1$ is a coordinate artefact. In $z=\log((x-1)/q)$ the volatility is constant on the solvency regime. | `prop:rrL`, `prop:statemap`, `cor:boundary` | port CCP and TSO (i) to (iii); `BCVW.diffusion_vanishes_at_one`, `BCVW.drift_at_one` exist | `bayraktar2026` read: Remark 3.1 (p. 11) states the degeneracy at $y=1$ and the drift $r-r_L$. The paper never changes coordinate, so only the artefact reading can be new. Search for degenerate-diffusion bank capital models |
+| H2b | $x=1$ is unreachable if and only if $r>r_L$. | `cor:boundary` | none possible as stated: boundary classification of a diffusion is not in Mathlib. Enters as a hypothesis unless the scale-function step is formalised | `bayraktar2026` Remark 3.1 already states "locally repelling when r > rL" (BCVW-Q3). Not new as a local statement |
+| H3 | $(\lambda_S,K)$ is locally identified from the pair of thresholds $(y^*,x_L)$, because the two parameters move the trigger in opposite directions. | `lem:reg`, `lem:envelope`, `lem:bdr`, `prop:tcs`, `lem:envelopeK`, `prop:kcs`, `cor:idn`, `prop:soc` | Envelope cores exist (`Envelope.*`); port TCS, KCS, IDN, SOC algebra; REG and BDR enter as hypotheses | `bayraktar2026` read: no fixed issuance cost, and it states one would generally break the one-dimensional reduction (BCVW-Q4). Appendix D must state that PROOFS_v2's $K$ is charged per unit of liabilities when $K$ enters a row. Search for comparative statics of impulse-control thresholds in a fixed issuance cost; `altinkilic2000`, `buhner2002` for the cost structure only |
 | H3b | The fixed issuance cost widens the inaction region at both ends, and the trigger-to-target gap $y_{\text{post}}-x_L$ is strictly increasing in $K$. | `prop:kcs`, `lem:envelopeK` | as H3 | as H3 |
-| H4 | Smooth fit holds at the recapitalisation trigger, $V'(x_L^-)=V'(x_L^+)=1+\kappa$. | `prop:smf`, `rem:smfn`, `lem:itr` | `SmoothFit.smooth_fit` exists; ITR and the viscosity supersolution property enter as hypotheses | Øksendal and Sulem, *Applied Stochastic Control of Jump Diffusions*, Thm 9.7 and Ch. 9, and Crandall, Ishii and Lions (1992), both cited in the header of `SmoothFit.lean` for the supersolution property and unread; search for smooth fit at impulse-control boundaries. High risk that this is known |
-| H5 | At $\lambda_S=1$ the problem is the risk-neutral benchmark exactly, and the running payoff $-\Lambda$ is concave for every $\lambda_S\ge1$, unlike an S-shaped penalty. | `prop:nesting`, `prop:concave-payoff` | `QVI_Part1.lambda_asymmetry_vanishes_at_one`, `QVI_Part1.neg_Lambda_concave` | `kahneman1979`, `barberis2001` for the S-shaped contrast. Positioning rather than novelty |
+| H4 | Smooth fit holds at the recapitalisation trigger, $V'(x_L^-)=V'(x_L^+)=1+\kappa$. | `prop:smf`, `rem:smfn`, `lem:itr` | `SmoothFit.smooth_fit` exists; ITR and the viscosity supersolution property enter as hypotheses | Øksendal and Sulem, *Applied Stochastic Control of Jump Diffusions*, Thm 9.7 and Ch. 9, and Crandall, Ishii and Lions (1992), both cited in the header of `SmoothFit.lean` for the supersolution property and unread; search for smooth fit at impulse-control boundaries. High risk that this is known. `bayraktar2026` read: smooth fit only at the dividend barrier, and its recapitalisation threshold is exogenous (BCVW-Q6) |
+| H5 | At $\lambda_S=1$ the problem is the risk-neutral benchmark exactly, and the running payoff $-\Lambda$ is concave for every $\lambda_S\ge1$, unlike an S-shaped penalty. | `prop:nesting`, `prop:concave-payoff` | `QVI_Part1.lambda_asymmetry_vanishes_at_one`, `QVI_Part1.neg_Lambda_concave` | `kahneman1979` unread. `barberis2001` WP read: its loss-aversion term is already kinked-linear (BHS-Q4), so the kinked-linear form is not new and the contrast is only with S-shaped curvature. Positioning rather than novelty |
 | H6 | The discrete-time recursion is observationally equivalent to an EGARCH-class specification conditioned on the state level, so $\lambda_V$ is estimable from returns without observing $Q_t$, given $\theta$. | `prop:egarch` | port; rests on Gaussian moment identities, Mathlib coverage unchecked | Nelson (1991); `engle2018` |
 | H7 | Balanced growth forces $r_E=g/b$, and the persistence asymmetry $\phi^--\phi^+$ vanishes with $g$. | `prop:identity`, `prop:persistence` | `RateBased.persistence_asymmetry_*`, `phi_minus_*`; the theorem for ACI is unnamed | search; likely a known accounting identity (sustainable growth). Probably a lemma, not a headline |
 

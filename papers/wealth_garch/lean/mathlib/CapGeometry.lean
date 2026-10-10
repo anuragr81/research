@@ -24,7 +24,7 @@ noncomputable def sig2 (σ σL c x p : ℝ) : ℝ :=
 
 noncomputable def capU (a1 a2 a3 x : ℝ) : ℝ := min ((x - 1) / a1) ((x - a2) / a3)
 
-noncomputable def kappa2 (σ σL c a : ℝ) : ℝ := σ ^ 2 / a ^ 2 - 2 * c * σ * σL / a + σL ^ 2
+noncomputable def nu2 (σ σL c a : ℝ) : ℝ := σ ^ 2 / a ^ 2 - 2 * c * σ * σL / a + σL ^ 2
 
 noncomputable def xbar (a1 a2 a3 : ℝ) : ℝ := (a3 - a1 * a2) / (a3 - a1)
 
@@ -101,16 +101,16 @@ theorem zvol2_eq {σ σL c q x : ℝ} {pol : ℝ → ℝ} (hq : 0 < q) (hx : 1 <
 
 theorem zvol2_solvency {σ σL c q a1 a2 a3 x : ℝ} {pol : ℝ → ℝ} (hq : 0 < q) (ha1 : 0 < a1)
     (h13 : a1 < a3) (hx : 1 < x) (hxb : x ≤ xbar a1 a2 a3) (hpol : pol x * x = capU a1 a2 a3 x) :
-    zvol2 σ σL c q pol x = kappa2 σ σL c a1 := by
+    zvol2 σ σL c q pol x = nu2 σ σL c a1 := by
   rw [zvol2_eq hq hx, hpol, solvency_binds ha1 h13 hxb]
-  unfold kappa2
+  unfold nu2
   have hx1 : x - 1 ≠ 0 := by linarith
   field_simp
 
 theorem deficit_limit {σ σL c q a1 a2 a3 : ℝ} {pol : ℝ → ℝ} (hq : 0 < q) (ha1 : 0 < a1)
     (h13 : a1 < a3) (ha2 : a2 < 1)
     (hpol : ∀ᶠ x in 𝓝[>] 1, pol x * x = capU a1 a2 a3 x) :
-    Tendsto (zvol2 σ σL c q pol) (𝓝[>] 1) (𝓝 (kappa2 σ σL c a1)) := by
+    Tendsto (zvol2 σ σL c q pol) (𝓝[>] 1) (𝓝 (nu2 σ σL c a1)) := by
   have hlt : ∀ᶠ x in 𝓝[>] (1:ℝ), x < xbar a1 a2 a3 :=
     (eventually_lt_nhds (one_lt_xbar ha1 h13 ha2)).filter_mono nhdsWithin_le_nhds
   have hgt : ∀ᶠ x in 𝓝[>] (1:ℝ), 1 < x := eventually_nhdsWithin_of_forall fun x hx => hx
@@ -120,7 +120,7 @@ theorem deficit_limit {σ σL c q a1 a2 a3 : ℝ} {pol : ℝ → ℝ} (hq : 0 < 
 
 theorem surplus_limit {σ σL c q a1 a2 a3 : ℝ} {pol : ℝ → ℝ} (hq : 0 < q) (ha1 : 0 < a1)
     (h13 : a1 < a3) (hpol : ∀ᶠ x in atTop, pol x * x = capU a1 a2 a3 x) :
-    Tendsto (zvol2 σ σL c q pol) atTop (𝓝 (kappa2 σ σL c a3)) := by
+    Tendsto (zvol2 σ σL c q pol) atTop (𝓝 (nu2 σ σL c a3)) := by
   have ha3 : 0 < a3 := by linarith
   set w : ℝ → ℝ := fun x => 1 / a3 + (1 - a2) / a3 * (x - 1)⁻¹ with hw
   have hinv : Tendsto (fun x : ℝ => (x - 1)⁻¹) atTop (𝓝 0) :=
@@ -134,8 +134,8 @@ theorem surplus_limit {σ σL c q a1 a2 a3 : ℝ} {pol : ℝ → ℝ} (hq : 0 < 
     have hc : Continuous (fun t : ℝ => t ^ 2 * σ ^ 2 - 2 * t * c * σ * σL + σL ^ 2) := by
       fun_prop
     exact (hc.tendsto _).comp hwlim
-  have hk : (1 / a3) ^ 2 * σ ^ 2 - 2 * (1 / a3) * c * σ * σL + σL ^ 2 = kappa2 σ σL c a3 := by
-    unfold kappa2
+  have hk : (1 / a3) ^ 2 * σ ^ 2 - 2 * (1 / a3) * c * σ * σL + σL ^ 2 = nu2 σ σL c a3 := by
+    unfold nu2
     field_simp
   rw [hk] at hpoly
   refine hpoly.congr' ?_
@@ -153,13 +153,13 @@ theorem variance_ratio_is_cap_geometry {σ σL c q a1 a2 a3 : ℝ} {pol : ℝ �
     (hq : 0 < q) (ha1 : 0 < a1) (h13 : a1 < a3) (ha2 : a2 < 1)
     (hlo : ∀ᶠ x in 𝓝[>] 1, pol x * x = capU a1 a2 a3 x)
     (hhi : ∀ᶠ x in atTop, pol x * x = capU a1 a2 a3 x) :
-    Tendsto (zvol2 σ σL c q pol) (𝓝[>] 1) (𝓝 (kappa2 σ σL c a1)) ∧
-      Tendsto (zvol2 σ σL c q pol) atTop (𝓝 (kappa2 σ σL c a3)) :=
+    Tendsto (zvol2 σ σL c q pol) (𝓝[>] 1) (𝓝 (nu2 σ σL c a1)) ∧
+      Tendsto (zvol2 σ σL c q pol) atTop (𝓝 (nu2 σ σL c a3)) :=
   ⟨deficit_limit hq ha1 h13 ha2 hlo, surplus_limit hq ha1 h13 hhi⟩
 
 theorem control_surplus_limit_needs_a1_lt_a3 :
     ¬ Tendsto (zvol2 1 0 0 1 (fun x => capU (1/2) 0 (1/4) x / x)) atTop
-      (𝓝 (kappa2 1 0 0 (1/4))) := by
+      (𝓝 (nu2 1 0 0 (1/4))) := by
   intro h
   have hsolv : ∀ᶠ x in atTop, zvol2 1 0 0 1 (fun x => capU (1/2) 0 (1/4) x / x) x = 4 := by
     filter_upwards [eventually_gt_atTop (1:ℝ)] with x hx
@@ -177,13 +177,13 @@ theorem control_surplus_limit_needs_a1_lt_a3 :
   have h4 : Tendsto (zvol2 1 0 0 1 (fun x => capU (1/2) 0 (1/4) x / x)) atTop (𝓝 4) :=
     tendsto_const_nhds.congr' (hsolv.mono fun x hx => hx.symm)
   have := tendsto_nhds_unique h h4
-  unfold kappa2 at this
+  unfold nu2 at this
   norm_num at this
 
 theorem control_constancy_needs_binding :
-    zvol2 1 0 0 1 (fun _ => 0) 2 ≠ kappa2 1 0 0 (1/2) := by
+    zvol2 1 0 0 1 (fun _ => 0) 2 ≠ nu2 1 0 0 (1/2) := by
   rw [zvol2_eq one_pos (by norm_num : (1:ℝ) < 2)]
-  unfold kappa2
+  unfold nu2
   norm_num
 
 end CapGeometry

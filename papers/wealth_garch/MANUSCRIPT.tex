@@ -107,8 +107,8 @@ ID & Claim & Statement & Lean & Proof \\
 \midrule
 \endhead
 \mrow{M1}{The deficit-to-surplus variance ratio of the discrete-time recursion is $\lambda_V^4$, for every saturation scale.}{$V_0>0$, $\theta>0$, $\lambda_V>0$, $V(z)=V_0\exp\big(-2\log\lambda_V\tanh(z/\theta)\big)$ $\Rightarrow$ $V(-z)/V(z)\to\lambda_V^4$ as $z\to\infty$.}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
-\mrow{M2}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there the $z$-volatility is the constant $\kappa_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\kappa_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
-\mrow{M3}{For any exposure policy that binds the cap near an end of the state space, the $z$-volatility tends to $\kappa_1^2$ at the distress boundary and to $\kappa_3^2$ deep in surplus.}{$q>0$, $0<a_1<a_3$, $a_2<1$. If $\pi(x)\,x=u(x)$ for all $x$ near $1^+$ then $\zeta(x)\to\kappa_1^2$ as $x\to1^+$. If $\pi(x)\,x=u(x)$ for all large $x$ then $\zeta(x)\to\kappa_3^2$ as $x\to\infty$. Both fail without $a_1<a_3$ or without binding.}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
+\mrow{M2}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there the $z$-volatility is the constant $\nu_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\nu_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
+\mrow{M3}{For any exposure policy that binds the cap near an end of the state space, the $z$-volatility tends to $\nu_1^2$ at the distress boundary and to $\nu_3^2$ deep in surplus.}{$q>0$, $0<a_1<a_3$, $a_2<1$. If $\pi(x)\,x=u(x)$ for all $x$ near $1^+$ then $\zeta(x)\to\nu_1^2$ as $x\to1^+$. If $\pi(x)\,x=u(x)$ for all large $x$ then $\zeta(x)\to\nu_3^2$ as $x\to\infty$. Both fail without $a_1<a_3$ or without binding.}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
 
 \bottomrule
 \end{longtable}
@@ -127,14 +127,17 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 ID & Paper & What we rely on & Quote & Page & Rows \\
 \midrule
 \endhead
+\lrow{L1}{bayraktar2026}{The cap $u$, the diffusion $\sigma^2(x,\pi)$ and the crossing point $\bar x$ of M2 are this paper's model, its eq.~(4) and its switching point, 1.168 at its baseline (p.~15). M2 and M3 are statements about its cap. The parallel ends there, since the paper evaluates no limit of the volatility and has no asymmetry parameter.}{the parameter a3 scales the entire liquidity constraint and determines its asymptotic upper bound}{17}{M2, M3, C1, C2}
+\lrow{L2}{barberis2001}{With a constant level of loss aversion, the volatility of log returns equals that of consumption growth for every level, the parallel to the silence of $\lambda_S$ in C2. The parallel ends at the mechanism, a constant price-dividend ratio in an endowment economy rather than a binding regulatory cap. \unv{read in NBER Working Paper 7220 (July 1999), not the published article.}}{the volatility of log returns in this model is equal to the volatility of log consumption growth, namely 3.79\%.}{16}{C2}
+\lrow{L3}{engle2018}{They split observed equity volatility asymmetry into a mechanical-leverage share (3\% by their correlation measure) and a market-exposure share, separating a structural source from a non-structural one as C2 does. The parallel ends at the object, since their asymmetry is a response of variance to the sign of news and not a ratio of variances across regions of a state variable.}{Volatility asymmetry is mostly explained by exposure to the aggregate market, not a mechanical leverage effect.}{449}{C2}
+
 \bottomrule
 \end{longtable}
 \normalsize
 
-Bayraktar, Chevalier, Ly Vath and Wang (arXiv:2603.14557), Barberis, Huang
-and Santos (2001) and Engle and Siriwardane (2018) are named in
-Table~\ref{tab:pending} but have not been read, and every claim made about
-them is unverified.
+Li, Yu and Zhang (arXiv:2108.02648) and the published version of
+\citet{barberis2001} are named in Table~\ref{tab:pending} but have not been
+read, and every claim made about them is unverified.
 
 \section{Conclusions}
 
@@ -154,6 +157,8 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
+\crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the saturation limits of the $z$-volatility are $\nu_1^2$ and $\nu_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$.}{M1, M2, M3, L1}
+
 \bottomrule
 \end{longtable}
 
@@ -167,11 +172,15 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
-\crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the saturation limits of the $z$-volatility are $\kappa_1^2$ and $\kappa_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$. \pend{the novelty reading of Bayraktar, Chevalier, Ly Vath and Wang (arXiv:2603.14557), Barberis, Huang and Santos (2001) and Engle and Siriwardane (2018); and the binding hypothesis, which rests on numerical evidence only (Appendix~\ref{app:evidence}).}}{M1, M2, M3}
+\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3). \pend{the published version of \citet{barberis2001}; Li, Yu and Zhang (arXiv:2108.02648), the asymmetric-preference control model named in the project notes; and a search for saturation limits of state volatility under a regulatory cap.}}{M3, L1, L2, L3}
+
 
 \bottomrule
 \end{longtable}
 \normalsize
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
 
 \appendix
 
@@ -189,7 +198,7 @@ $\bar x=(a_3-a_1a_2)/(a_3-a_1)$. The diffusion of $x$ is
 $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$,
 with $c$ the correlation between the risky return and the liability shock.
 The $z$-volatility is $\zeta(x)=z'(x)^2\,\sigma^2\big(x,\pi(x)\big)$, the
-exposure ratio is $\omega(x)=\pi(x)\,x/(x-1)$, and $\kappa_i^2=\sigma^2/a_i^2-2c\sigma\sigma_L/a_i+\sigma_L^2$ for $i\in\{1,3\}$.
+exposure ratio is $\omega(x)=\pi(x)\,x/(x-1)$, and $\nu_i^2=\sigma^2/a_i^2-2c\sigma\sigma_L/a_i+\sigma_L^2$ for $i\in\{1,3\}$.
 
 \begin{mproof}{M1}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
 For every $z$,
@@ -202,17 +211,17 @@ $\theta$ enters only through $z/\theta\to\infty$, so the limit is free of $\thet
 \begin{mproof}{M2}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
 \[ \frac{x-1}{a_1}\le\frac{x-a_2}{a_3}\iff(a_3-a_1)\,x\le a_3-a_1a_2\iff x\le\bar x,\qquad \bar x-1=\frac{a_1(1-a_2)}{a_3-a_1}>0 . \]
 \[ z'(x)=\frac{1}{x-1},\qquad \zeta(x)=\omega(x)^2\sigma^2-2\,\omega(x)\,c\,\sigma\sigma_L+\sigma_L^2 . \]
-\[ 1<x\le\bar x,\ \pi(x)\,x=u(x)\ \Rightarrow\ \omega(x)=\frac{1}{a_1}\ \Rightarrow\ \zeta(x)=\kappa_1^2. \]
+\[ 1<x\le\bar x,\ \pi(x)\,x=u(x)\ \Rightarrow\ \omega(x)=\frac{1}{a_1}\ \Rightarrow\ \zeta(x)=\nu_1^2. \]
 \end{mproof}
 
 \begin{mproof}{M3}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
-Near $1^+$, $\bar x>1$ by M2, so $1<x<\bar x$ eventually and $\zeta(x)=\kappa_1^2$ there.
+Near $1^+$, $\bar x>1$ by M2, so $1<x<\bar x$ eventually and $\zeta(x)=\nu_1^2$ there.
 For $x\ge\bar x$,
 \[ \omega(x)=\frac{x-a_2}{a_3(x-1)}=\frac{1}{a_3}+\frac{1-a_2}{a_3}\,(x-1)^{-1}\to\frac{1}{a_3}, \]
-\[ \zeta(x)=\omega(x)^2\sigma^2-2\,\omega(x)\,c\,\sigma\sigma_L+\sigma_L^2\to\kappa_3^2 . \]
+\[ \zeta(x)=\omega(x)^2\sigma^2-2\,\omega(x)\,c\,\sigma\sigma_L+\sigma_L^2\to\nu_3^2 . \]
 Controls, at $\sigma=1$, $\sigma_L=c=0$, $q=1$.
-\[ a_1=\tfrac12,\ a_2=0,\ a_3=\tfrac14\ \Rightarrow\ u(x)=2(x-1),\ \zeta\equiv4\ne16=\kappa_3^2. \]
-\[ \pi\equiv0\ \Rightarrow\ \zeta(2)=0\ne4=\kappa_1^2. \]
+\[ a_1=\tfrac12,\ a_2=0,\ a_3=\tfrac14\ \Rightarrow\ u(x)=2(x-1),\ \zeta\equiv4\ne16=\nu_3^2. \]
+\[ \pi\equiv0\ \Rightarrow\ \zeta(2)=0\ne4=\nu_1^2. \]
 \end{mproof}
 
 \section{Evidence and verification}
@@ -233,9 +242,9 @@ writes their output to \path{VERIFICATION.md}.
 hypotheses or definitions. The $z$-volatility $\zeta$ is defined as
 $z'(x)^2\sigma^2(x,\pi(x))$, and that this is the diffusion coefficient of
 $z(X_t)$ is Itô's formula, which is not proved (M2, M3). That the optimal
-policy binds the cap near both ends of the state space is a hypothesis of M3.
-\path{PROOFS_v2.tex} supports it only by the numerical solve, which is
-evidence and not proof (C1).
+policy binds the cap near both ends of the state space is a hypothesis of M3,
+and C1 states it as its condition. \path{PROOFS_v2.tex} supports it only by
+the numerical solve, which is evidence and not proof.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 
@@ -260,7 +269,7 @@ Regulatory cap & $u(x)$ & The capped exposure $\min\{(x-1)/a_1,(x-a_2)/a_3\}$. \
 Cap geometry & $a_1,a_2,a_3$ & The parameters of the regulatory cap. \\
 Solvency and liquidity regime & $x\le\bar x$, $x\ge\bar x$ & The ranges where the first and the second branch of $u$ bind (M2). \\
 $z$-volatility & $\zeta(x)$ & The squared diffusion coefficient of $z$ (Appendix~\ref{app:evidence}). \\
-Saturation limits & $\kappa_1^2,\kappa_3^2$ & The limits of $\zeta$ at the distress boundary and deep in surplus (M3). \\
+Saturation limits & $\nu_1^2,\nu_3^2$ & The limits of $\zeta$ at the distress boundary and deep in surplus (M3). \\
 \bottomrule
 \end{longtable}
 \normalsize
@@ -277,7 +286,7 @@ depend on it.
 
 \paragraph{The variance ratio in continuous time.} \path{PROOFS_v2.tex}
 reads the discrete-time $\lambda_V^4$ of M1 in the continuous-time model as
-$\kappa_1^2/\kappa_3^2$, identifying the conditional variance $V(z)$ deep in
+$\nu_1^2/\nu_3^2$, identifying the conditional variance $V(z)$ deep in
 deficit and deep in surplus with the two saturation limits of $\zeta$. This
 is a definition, not a result, and no theorem connects the discrete-time
 recursion to the continuous-time diffusion. C1 depends on it.
