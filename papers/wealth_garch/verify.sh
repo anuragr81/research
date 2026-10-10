@@ -26,7 +26,8 @@ suite () {
 
 suite 1 "manuscript skeleton" checks/verify_manuscript.py
 suite 2 "Lean 4 with Mathlib" checks/verify_mathlib.py
-suite 3 "doc consistency" checks/verify_docs.py "$OUT"
+suite 3 "retirement of PROOFS_v2" checks/verify_retirement.py
+suite 4 "doc consistency" checks/verify_docs.py "$OUT"
 
 if [ "$FAILED" -eq 0 ]; then
   echo "ALL SUITES COMPLETED"

@@ -74,9 +74,10 @@ echo "run_all.sh exit code: $HARNESSRC"
 echo
 echo "### 4. DOCUMENT COMPILES, CROSS-REFERENCES RESOLVE"
 if command -v pdflatex >/dev/null 2>&1; then
-  ( cd 00_document \
-    && pdflatex -interaction=nonstopmode PROOFS_v2.tex >/tmp/_v2a.log 2>&1 \
-    && pdflatex -interaction=nonstopmode PROOFS_v2.tex >/tmp/_v2b.log 2>&1 )
+  ( pdflatex -interaction=nonstopmode MANUSCRIPT.tex >/tmp/_v2a.log 2>&1 \
+    && bibtex MANUSCRIPT >/dev/null 2>&1 \
+    && pdflatex -interaction=nonstopmode MANUSCRIPT.tex >/tmp/_v2a.log 2>&1 \
+    && pdflatex -interaction=nonstopmode MANUSCRIPT.tex >/tmp/_v2b.log 2>&1 )
   echo "  LaTeX errors      : $(grep -cE '^!' /tmp/_v2b.log)"
   echo "  undefined refs    : $(grep -ci 'undefined' /tmp/_v2b.log)"
   echo "  pages             : $(grep -o 'Output written.*' /tmp/_v2b.log | head -1)"
@@ -89,9 +90,9 @@ echo
 echo "### 5. STRUCTURAL CHECKS"
 python3 - <<'PY'
 import re, os
-p = '00_document/PROOFS_v2.tex'
+p = 'MANUSCRIPT.tex'
 if not os.path.exists(p):
-    print("  SKIP: PROOFS_v2.tex not found"); raise SystemExit
+    print("  FAIL: MANUSCRIPT.tex not found"); raise SystemExit(1)
 s = open(p).read()
 bad = False
 for env in ("proposition","lemma","corollary","remark","theorem","proof","equation","enumerate"):

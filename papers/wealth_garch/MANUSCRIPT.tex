@@ -4,8 +4,9 @@
 % PURPOSE
 %   The manuscript. Four tables carry the body (introduction, model,
 %   literature, conclusions), and the appendices carry every proof.
-%   00_document/PROOFS_v2.tex is retired into this file at pass 6, with
-%   RETIREMENT.md recording where each part of it went.
+%   00_document/PROOFS_v2.tex was retired into this file at pass 6
+%   (10 October 2026). RETIREMENT.md records where each part of it went, and
+%   checks/verify_retirement.py checks that record against the file in git.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
 %   Rows are written only through the four row macros below, and proofs only
@@ -370,7 +371,11 @@ drift $m$ from depth $d$ to be $d/m$, Wald's identity, which is not proved.
 M14 takes the cost bound as a hypothesis, that each impulse costs at least
 $K$ and the strategy's value is finite, with $e_i=e^{-\rho_L\tau_i}$ the
 discounted impulse times and $c_i$ the impulse terms of the verification
-argument.
+argument. Interior regularity of $V$, $C^2$ on the inaction region and $C^3$
+away from $R$ and $\bar x$, is assumed wherever a row differentiates $V$;
+that $\sigma^2(x,\pi)>0$ for $x\ne1$ and $c^2<1$ is
+\lean{BCVW.sig2_nondegenerate}. The lower bound $V(x)\ge x-1$ of
+\path{PROOFS_v2.tex} (Prop.~LQB) is used by no row and is not carried.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 

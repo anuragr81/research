@@ -12,8 +12,8 @@
 #                             .mat files are present, else SKIP
 #   02_numerical/verify_M_operator.m
 #                             here IF octave is on PATH, else SKIP
-#   01_theory/*.lean          NOT run here -- needs a mathlib toolchain.
-#                             Verify separately:  lake build
+#   lean/mathlib/             NOT run here -- ./verify.sh builds and audits it.
+#
 #   02_numerical sweeps       NOT run here -- hours of compute. See
 #                             run_lambda_sweep.sh / headless_* directly.
 #
@@ -68,18 +68,8 @@ run_py 01_theory/verify_smooth_fit_shooting.py
 # the counts below -- it is run here so a broken environment or a
 # regression that crashes it is caught, and so the figures the companion
 # quotes are regenerable on demand.
-echo "== 00_reader (registry, empirical ledger, citations) =="
-if [ ! -f 00_document/PROOFS_v2.aux ]; then
-    if command -v pdflatex > /dev/null 2>&1; then
-        (cd 00_document && pdflatex -interaction=nonstopmode PROOFS_v2.tex > /dev/null 2>&1)
-    fi
-fi
-if [ ! -f 00_document/PROOFS_v2.aux ]; then
-    echo "  SKIPPED: PROOFS_v2.aux absent and pdflatex unavailable."
-    echo "  The reader checks read numbering from the aux and cannot run without it."
-    skip=$((skip+1))
-else
-for reader_check in proof_registry ledger_empirical check_citations; do
+echo "== 00_reader (empirical ledger) =="
+for reader_check in ledger_empirical; do
     if (cd 00_reader && python3 ${reader_check}.py > /tmp/_${reader_check}.out 2>&1); then
         echo "  ${reader_check}: OK"
     else
@@ -88,7 +78,6 @@ for reader_check in proof_registry ledger_empirical check_citations; do
         fail=$((fail+1))
     fi
 done
-fi
 echo
 
 echo "== 01_theory/verify_egarch_recovery.py (report-style, no tags) =="
@@ -117,7 +106,7 @@ fi
 
 echo "=============================================================="
 echo "TOTAL: $pass pass / $fail fail / $expfail expected-fail / $skip skip"
-echo "Lean files (01_theory/*.lean) are NOT covered by this harness --"
-echo "run 'lake build' against them separately."
+echo "Lean files (lean/mathlib/) are NOT covered by this harness --"
+echo "run ./verify.sh, which builds and audits them."
 echo "=============================================================="
 exit $([ $fail -eq 0 ] && echo 0 || echo 1)

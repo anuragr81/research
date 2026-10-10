@@ -19,8 +19,8 @@
 \begin{abstract}
 \noindent
 This note is the empirical companion to \emph{Asymmetric Capital Buffer
-Control} (PROOFS\_v2); numbered results cited here --- Theorem~1,
-Proposition~11, Remark~1 --- refer to that document. It
+Control}, whose manuscript skeleton is \texttt{MANUSCRIPT.tex}; model
+results cited here are its rows M1 and M3, and its solver illustration. It
 states what the data say about the variance-asymmetry parameter $\lamV$,
 against the null of a risk-neutral bank facing the same regulation. Every
 figure below is regenerated from the scripts named in
@@ -34,7 +34,7 @@ results deliberately pending its own validation.
 \section{What is being estimated, and how}
 \label{sec:estimand}
 
-Theorem~1 makes $\lamV^4$ the ratio of conditional variances of the log
+Row M1 makes $\lamV^4$ the ratio of conditional variances of the log
 capital-buffer state deep in deficit to deep in surplus. Two facts about
 estimating it, both established by simulation
 (\texttt{verify\_egarch\_recovery.py}), fix the design.
@@ -72,18 +72,18 @@ conditional variance, because the cap tightens exposure as the buffer
 erodes; the honest null is therefore $\lamV$ computed from the solved
 model itself. Two routes exist and only one survives.
 
-The \emph{definitional} route --- Theorem~1's ratio evaluated at the
+The \emph{definitional} route --- M1's ratio evaluated at the
 saturation limits --- is a constant of cap geometry,
 $\lamV = (\kappa_1/\kappa_3)^{1/2} = 2.599$ at the baseline, with no
 dependence on $\lamS$ or any preference or cost parameter
-(Proposition~11). It cannot serve as a benchmark for data that never
+(M3). It cannot serve as a benchmark for data that never
 reach the saturation limits, and it carries no information about
 $\lamS$.
 
 The \emph{estimator} route applies the same $\theta$-free estimator to
-paths simulated from the solved model. Computed on the
-convergence-certified solves (Remark~1) at
-$\lamS\in\{1.00, 1.10, 1.25, 1.50, 1.75, 2.00\}$, under three
+paths simulated from the solved model. Computed at
+$\lamS\in\{1.00, 1.10, 1.25, 1.50, 1.75, 2.00\}$ on the
+convergence-certified solves of the solver illustration, under three
 conventions:
 
 \begin{center}
@@ -219,7 +219,7 @@ The attrition of Section~\ref{sec:attrition} motivates a second
 reference construction, recorded here \emph{before} its results are
 computed, for four reasons: the theory's reference is a threshold, not a
 country's own trend, so ``below your own past'' is not the estimand
-Theorem~1 defines; the surviving sample is selected on behaviour
+M1 defines; the surviving sample is selected on behaviour
 plausibly correlated with the quantity measured; the excluded countries
 are exactly the deep-banking-system economies the theory most concerns;
 and the model null of Section~\ref{sec:null} is computed from a
@@ -265,8 +265,8 @@ risk weights are asset-side, but has not been checked against the IMF's
 construction of FSKRC\_PT; the primary reading does not depend on it,
 since the median sits below the null under both. And whether the solved
 model's constructed value function is the value function --- the
-verification theorem --- remains open (PROOFS\_v2, ``What is not
-established''), so the null values here are properties of the certified
+verification theorem --- remains a hypothesis (\texttt{MANUSCRIPT.tex},
+Appendix B), so the null values here are properties of the certified
 numerical solution.
 
 \section{Reproduction}

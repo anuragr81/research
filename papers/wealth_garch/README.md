@@ -1,5 +1,15 @@
 # asymmetric_capital_control -- v2 (complete, pruned) -- 10 Aug 2026
 
+## Start here
+
+`MANUSCRIPT.tex` is the canonical statement of the theory: headlines, model
+rows each proved in Lean (`lean/mathlib/`), literature rows each quoting a
+paper read (`lit/`), and conclusions. `./verify.sh` checks it and writes
+`VERIFICATION.md`; `lit/verify_lit.sh` checks the literature records;
+`TODO.md` holds the plan and the author's decisions. `PROOFS_v2.tex` was
+retired into it on 10 Oct 2026; `RETIREMENT.md` maps every part of it to its
+new home. The rest of this file describes the numerical and empirical layer.
+
 This is the whole surviving project in one bundle: the clean document, every
 canonical verifier including the Lean files, the pruned numerical layer, the
 empirical layer with your solved sweep results, and a harness that runs
@@ -63,9 +73,7 @@ updated to match. Only then do the two flags flip to `True`.
 
 ## Layout
 
-    00_document/   PROOFS_v2.tex/.pdf -- 18 numbered results: Props 1-11,
-                     Thm 1, Cor 1, Rems 1-5.
-                   EMPIRICAL_v2.tex/.pdf -- the empirical companion:
+    00_document/   EMPIRICAL_v2.tex/.pdf -- the empirical companion:
                      estimator properties, the lambda_V(lambda_S) null,
                      the pre-registered panel as run (median 1.040, n=26,
                      attrition stated), and the specified-but-pending
@@ -99,11 +107,9 @@ updated to match. Only then do the two flags flip to `True`.
                    results/  your six solved resultM_lambda_*.mat (+ the
                              sweep's per-run CSVs) and lambda_V_curve.csv,
                              the lambda_V(lambda_S) curve computed from them
-    00_reader/     proof_registry.py (every numbered result and its ONE
-                     canonical verifier, numbering read from PROOFS_v2.aux),
-                     ledger_empirical.py (EMPIRICAL_v2's claims, their
-                     population and support, with the scope guard),
-                     check_citations.py (rebuilt for the v2 document set),
+    00_reader/     ledger_empirical.py (EMPIRICAL_v2's claims, their
+                     population and support, model support resolved
+                     against the rows of MANUSCRIPT.tex),
                      PITCH_AND_SUMMARY.md, README.md
 
     04_reproduce/  run_all.sh
@@ -191,40 +197,16 @@ expanding empirical mean, not the model's population stationary mean.
 
 ## Lean status
 
-QVI_Part1.lean builds clean, and is canonical for Props 6-7.
-
-RateBased.lean is canonical for Props 1-2, whose proofs are complete. It
-also contains one `sorry`, in `saturated_ratio_tendsto`, at the step
-`tanh(z/theta) -> 1 as z -> atTop`. That declaration is a leaf -- nothing
-else in the file depends on it, including `saturated_ratio_lambda4`,
-whose proof is standalone algebra despite its docstring. The content is
-standard; what is missing is a confirmed current Mathlib lemma name for
-the tanh limit (`exact?` / `apply?` / loogle on
-`Tendsto Real.tanh atTop (nhds 1)`, or derive from
-`Real.tendsto_exp_atBot` via tanh x = (1 - exp(-2x))/(1 + exp(-2x))).
-
-Thm 1 is therefore verified by SymPy (verify_rate_based.py, S1a-S1b),
-which computes the two saturation limits directly and independently. If
-the `sorry` is closed, Thm 1's row in the appendix can move back to Lean;
-nothing else changes.
+See `lean/mathlib/README.md` and `VERIFICATION.md`. Every file builds with
+no `sorry`, and every declared theorem passes the axiom audit.
 
 ## Open items (current)
 
-1. The `sorry` in RateBased.lean (see Lean status above). Optional: no
-   claim depends on it, since Thm 1 is SymPy-verified.
 2. The Rem 1 convergence figures are measured for the M operator this
    cycle. If the H operator's certification is also to be quoted, it needs
    its own re-run.
-3. The machine-checkable ledger and the pitch/summary layer are not yet
-   rebuilt to v2 (pass 6). The document layer is now PROOFS_v2 +
-   EMPIRICAL_v2.
 4. The secondary reference analysis (EMPIRICAL_v2 Section 4) is specified
    but unexecuted: it must pass its three-part simulation validation --
    including the trended null -- before touching real data. The
    pre-committed phi^- test and the bank-level feasibility check from the
    exclusions pre-registration also remain unexecuted.
-4. Prop 5 (sojourn) is currently assigned to SymPy in the appendix, but
-   RateBased.lean proves it too (`sojourn_strictAnti`,
-   `sojourn_tendsto_atTop`, both sorry-free). Under the Lean-where-it-
-   exists rule that row arguably belongs to Lean. Left as-is pending a
-   decision rather than changed silently.

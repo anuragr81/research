@@ -1,8 +1,9 @@
 """Ledger for EMPIRICAL_v2's claims.
 
 Layer 2 of the reader stack. Each claim records what it asserts, over what
-population, and what supports it; support that is a PROOFS_v2 result is
-resolved through proof_registry, and support that is a data artefact is
+population, and what supports it; support that is a model result is
+resolved against the rows of MANUSCRIPT.tex or the named illustrations, and
+support that is a data artefact is
 checked to exist and, where the claim quotes figures, to match. verify()
 checks internal consistency and scope discipline, not econometric validity.
 """
@@ -12,10 +13,25 @@ import re
 import sys
 from pathlib import Path
 
-import proof_registry as registry
 
 BUNDLE_ROOT = Path(__file__).resolve().parent.parent
 EMPIRICAL_TEX = BUNDLE_ROOT / "00_document" / "EMPIRICAL_v2.tex"
+MANUSCRIPT_TEX = BUNDLE_ROOT / "MANUSCRIPT.tex"
+ILLUSTRATIONS = {
+    "illustration:solver": "02_numerical/verify_M_operator.m",
+    "illustration:compstat": "01_theory/verify_document_figures.py",
+}
+
+
+def manuscript_rows(tex):
+    return set(re.findall(r"\\mrow\{(M[0-9]+)\}", tex))
+
+
+def cited_rows(text):
+    return set(re.findall(r"\b(M[0-9]+)\b", text))
+
+
+MODEL_ROWS = manuscript_rows(MANUSCRIPT_TEX.read_text())
 CURVE_CSV = BUNDLE_ROOT / "03_empirical" / "results" / "lambda_V_curve.csv"
 
 MEAN_REVERTING_SUBSAMPLE = "mean_reverting_subsample"
@@ -69,14 +85,14 @@ CLAIMS = {
     "saturation_ratio_is_a_constant_of_cap_geometry": {
         "population": SOLVED_MODEL,
         "support": PROOF_SUPPORT,
-        "proof_tags": ("thm:lambda4", "prop:satlimits"),
+        "proof_tags": ("M1", "M3"),
         "artefacts": (),
         "has_computed_result": True,
     },
     "definitional_null_rejected_as_benchmark": {
         "population": SOLVED_MODEL,
         "support": PROOF_SUPPORT,
-        "proof_tags": ("prop:satlimits",),
+        "proof_tags": ("M3",),
         "artefacts": (),
         "has_computed_result": True,
     },
@@ -97,7 +113,7 @@ CLAIMS = {
     "estimator_null_minimum_anywhere_is_1_2347": {
         "population": SOLVED_MODEL,
         "support": SOLVER_SUPPORT,
-        "proof_tags": ("rem:solver", "rem:compstat"),
+        "proof_tags": ("illustration:solver", "illustration:compstat"),
         "artefacts": ("03_empirical/results/lambda_V_curve.csv",),
         "has_computed_result": True,
     },
@@ -178,7 +194,7 @@ def unresolved_proof_tags():
     absent = {}
     for claim in CLAIMS:
         for tag in proof_tags_of(claim):
-            if tag not in registry.CANONICAL_VERIFIER:
+            if tag not in MODEL_ROWS and tag not in ILLUSTRATIONS:
                 absent.setdefault(claim, []).append(tag)
     return absent
 
@@ -186,7 +202,7 @@ def unresolved_proof_tags():
 def claims_resting_on_evidence_grade_results():
     resting = {}
     for claim in CLAIMS:
-        evidence = [t for t in proof_tags_of(claim) if registry.is_evidence_grade(t)]
+        evidence = [t for t in proof_tags_of(claim) if t in ILLUSTRATIONS]
         if evidence:
             resting[claim] = evidence
     return resting
@@ -285,10 +301,21 @@ def verify(report=True):
                   "set PANEL_RERUN_ON_CORRECTED_UNIVERSE_REFLECTED_IN_DOCUMENT "
                   "to True here.")
 
-    if not registry.verify(report=False):
+    if not MODEL_ROWS:
         ok = False
         if report:
-            print("FAIL proof_registry.verify() is False; fix layer 1 first")
+            print("FAIL no model rows found in MANUSCRIPT.tex")
+    cited = cited_rows(EMPIRICAL_TEX.read_text())
+    if cited - MODEL_ROWS:
+        ok = False
+        if report:
+            print(f"FAIL EMPIRICAL_v2 cites rows absent from MANUSCRIPT.tex: {sorted(cited - MODEL_ROWS)}")
+    if (manuscript_rows(r"\mrow{M1}{a}{b}{c}") != {"M1"}
+            or cited_rows("rows M1 and M3, and (M99).") != {"M1", "M3", "M99"}
+            or "M99" in MODEL_ROWS):
+        ok = False
+        if report:
+            print("FAIL control: the row parser or the citation finder misreads a sample")
 
     for claim in CLAIMS:
         if population_of(claim) not in POPULATIONS:
@@ -304,7 +331,7 @@ def verify(report=True):
     if unresolved:
         ok = False
         if report:
-            print(f"FAIL claim cites a tag absent from the registry: {unresolved}")
+            print(f"FAIL claim cites a tag absent from MANUSCRIPT.tex and the illustrations: {unresolved}")
 
     absent = missing_artefacts()
     if absent:

@@ -13,7 +13,7 @@ The skeleton follows `../MANUSCRIPT_SKELETON.md`, with
 | 3 | Port the analytic steps to Lean, one cluster per pass, with `control_*` theorems and counterexamples (inventory below) | in progress; H1 (`CapGeometry`), H3 (`Identification`) and SOC (`SecondOrder`, M7) done 2026-10-10 |
 | 4 | Model rows and Appendix A proofs, one family per pass | |
 | 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | |
-| 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | |
+| 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | done 2026-10-10; `proof_registry.py` and `check_citations.py` retired with it |
 | 7 | Novelty reading, one `lit/` record per paper | in progress; `lit/bayraktar_2026`, `lit/barberis_huang_santos_1999`, `lit/barberis_huang_santos_2001`, `lit/engle_siriwardane_2018`, `lit/li_yu_zhang_2023` done 2026-10-10 |
 | 8 | Conclusions, then introduction; headline overreach review | conclusions C1 to C4 and headlines K1, K2 done 2026-10-10 |
 | 9 | Literature table | L1 to L4 entered 2026-10-10 |
@@ -92,10 +92,18 @@ grounds.
   Lean file.
 - C1 moved to Table 4 on 2026-10-10. It rests on M1 to M3 and on L1, read in
   full, and claims nothing new. The novelty claim is C2, in Table 5.
-- `00_reader/TODO.md` and `04_reproduce/run_all.sh` belong to the PROOFS_v2
-  layer and retire with it at pass 6. The root `README.md` "Lean status"
-  section still describes the `sorry` closed on 2026-10-10 and the old
-  `01_theory/lean_project/` path. It is rewritten or retired at pass 6.
+- PROOFS_v2 retired 2026-10-10 (pin `1d1a56f5`). `EMPIRICAL_v2.tex` now
+  cites rows M1, M3 and the solver illustration, and
+  `00_reader/ledger_empirical.py` resolves them against `MANUSCRIPT.tex`.
+  `run_all.sh` and `VERIFY_NOW.sh` no longer compile PROOFS_v2.
+- Older author documents still cite PROOFS_v2 numbering (listed in
+  `RETIREMENT.md`): `00_reader/PITCH_AND_SUMMARY.md`,
+  `THEORY_PAPER_STARTER.md`, `00_reader/TODO.md`, `TERMINOLOGY.md`,
+  `05_summaries/`, `06_empirical_starter/`. Whether to retire them is the
+  author's decision.
+- `EMPIRICAL_v2.tex` has issues that predate the retirement: an undefined
+  reference `sec:attrition` and overfull lines at its lines 37-41, 122-133,
+  215 and 275-287.
 
 ## Pass 3 inventory
 

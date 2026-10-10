@@ -46,9 +46,9 @@ need them report SKIP with the reason.
 
 ## Layout
 
-    00_document/    PROOFS_v2.tex (the paper), EMPIRICAL_v2.tex, references.bib
-    00_reader/      TODO.md, proof_registry.py, check_citations.py,
-                    ledger_empirical.py, TERMINOLOGY.md
+    MANUSCRIPT.tex  the theory, as a verified skeleton (see README.md)
+    00_document/    EMPIRICAL_v2.tex, references.bib
+    00_reader/      TODO.md, ledger_empirical.py, TERMINOLOGY.md
     01_theory/      the SymPy verifiers
     lean/mathlib/   the Lean files, a Lake project pinned to Lean
                     v4.32.0-rc1 and Mathlib v4.32.0-rc1; see
@@ -74,16 +74,10 @@ need them report SKIP with the reason.
 
 ## Verification map
 
-Every numbered result in PROOFS_v2 has exactly one canonical verifier;
-`00_reader/proof_registry.py` enforces that and fails if any is unassigned.
-
-    lean            5   proof-grade
-    lean_partial    4   proof-grade  (algebraic core in Lean, analytic step in
-                                      the document; scope per entry in the
-                                      registry's LEAN_PARTIAL_SCOPE)
-    symbolic       12   proof-grade  (SymPy)
-    proof_in_text   5   proof-grade  (proved in the document, no machine check)
-    numerical       9   evidence-grade
+Every model row of `MANUSCRIPT.tex` rests on Lean; what Lean does not carry
+is listed in its Appendix B. `./verify.sh` checks the rows, builds and audits
+the Lean files, and checks `RETIREMENT.md` against the retired PROOFS_v2.
+The SymPy and numerical layers below are illustrations.
 
 `01_theory/verify_document_figures.py` regenerates every numerical figure the
 document quotes, from the .mat files, and asserts each against the printed
