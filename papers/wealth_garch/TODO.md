@@ -10,7 +10,7 @@ The skeleton follows `../MANUSCRIPT_SKELETON.md`, with
 | 1 | Scaffold: four empty tables, ID scheme, appendix stubs, `checks/verify_manuscript.py` with controls, `verify.sh` | done 2026-10-10 |
 | 2 | Lean project `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1), every file a build root, axiom audit in `verify.sh` | done 2026-10-10; the `sorry` in `RateBased.saturated_ratio_tendsto` closed by `RateBased.tendsto_tanh_atTop` |
 | 2a | Candidate claims: every headline PROOFS_v2 makes is listed in the novelty ledger below, with the results it rests on, the Lean it waits on and the reading its novelty waits on. A candidate enters Table 5 as a C row once its first model row exists, since MS-3 refuses a C row with no row to point to. This list drives passes 3 and 7 | done 2026-10-10 |
-| 3 | Port the analytic steps to Lean, one cluster per pass, with `control_*` theorems and counterexamples (inventory below) | in progress; H1 (`CapGeometry`) and H3 (`Identification`) done 2026-10-10 |
+| 3 | Port the analytic steps to Lean, one cluster per pass, with `control_*` theorems and counterexamples (inventory below) | in progress; H1 (`CapGeometry`), H3 (`Identification`) and SOC (`SecondOrder`, M7) done 2026-10-10 |
 | 4 | Model rows and Appendix A proofs, one family per pass | |
 | 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | |
 | 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | |
@@ -94,6 +94,12 @@ SymPy, to port to Lean:
   (`CapGeometry.lean`). The identification of the discrete-time $\lambda_V^4$
   with $\nu_1^2/\nu_3^2$ is a definition, recorded in Appendix D, and no
   theorem links the discrete recursion to the diffusion.
+- Done 2026-10-10: `prop:tcs`, `prop:kcs`, `cor:idn` are M4 to M6
+  (`Identification.lean`). `prop:soc` (ii) is M7 (`SecondOrder.lean`).
+  `prop:soc` (i), strict $V''(y_{\text{post}})<0$, is refuted as derived
+  (Appendix E, R1, `SecondOrder.refuted_target_strict`): a sign change of
+  $\varphi'$ allows $\varphi''=0$ at a zero of odd order. It stays a
+  hypothesis of M5, and C3 does not use it.
 - `prop:sojourn` is already proved in `RateBased.lean`
   (`sojourn_strictAnti`, `sojourn_tendsto_atTop`).
 - `thm:lambda4` rests on `RateBased.saturated_ratio_tendsto`, now free of
@@ -120,7 +126,20 @@ needs one.
 
 ## C2 search, 10 October 2026
 
-Run by a web-search agent; every entry is a lead to be read, not a finding.
+Run by a web-search agent; every entry is a lead, not a finding. Triage at
+exploration level ([A] abstract or search summary, [C] citing description),
+by the author's rule of 2026-10-10 that primary sources are needed only for
+verification and novelty checks.
+
+- Survives, primary source needed for C2: Black and Perold (1992).
+- Excluded [A]: Décamps, Mariotti, Rochet and Villeneuve (2011), stock-price
+  volatility from issuance costs, no capped capital-ratio state. Hilscher,
+  Raviv and Wiener (2024), a volatility schedule imposed by regulation, not
+  derived from a cap. Dudziak and Schmidli (arXiv:2510.25494), no investment
+  cap and no volatility analysis. Milne and Whalley (SSRN 303176), no
+  computation of the state's volatility seen.
+
+Leads as reported:
 
 - Black and Perold (1992), "Theory of constant proportion portfolio
   insurance", *Journal of Economic Dynamics and Control* 16(3):403-426. The

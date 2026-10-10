@@ -112,6 +112,7 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M4}{The dividend barrier rises in the asymmetry parameter and in the fixed issuance cost.}{$\theta\in\{\lambda_S,K\}$, $F=W$ or $N$. If $V''(y^*)=0$, $V'(y^*)=1$, $\Lambda'(y^*)=0$, $F'(y^*)=0$, $\sigma^2(y^*)>0$, $\rho_L\ne\mu'(y^*)$, $\partial_\theta V=-F$ and the chain rule holds along $y^*(\theta)$, then $dy^*/d\theta=\rho_LF(y^*)/(\rho_L-\mu'(y^*))$, positive when $0<\rho_L$, $\mu'(y^*)<\rho_L$ and $F(y^*)>0$.}{Identification.vppp_at_barrier, Identification.fpp_at_barrier, Identification.barrier_slope, Identification.barrier_slope_pos, Identification.control_barrier_sign_needs_gap, Envelope.wode_of_envelope, Envelope.node_of_envelope, Envelope.neumann_at_ystar}
 \mrow{M5}{The recapitalisation trigger rises in the asymmetry parameter and falls in the fixed issuance cost, the injection target rises in the fixed issuance cost, and the trigger-to-target gap widens in it.}{If $V''(x)\,dx/d\theta+\partial_\theta V'(x)=0$ along a boundary $x(\theta)$, $V''(x)\ne0$ and $\partial_\theta V'=-F'$, then $dx/d\theta=F'(x)/V''(x)$. With $W'(x_L)>0$, $N'(x_L),N'(y_{\text{post}})<0$ and $V''(x_L)>0>V''(y_{\text{post}})$, $dx_L/d\lambda_S>0$, $dx_L/dK<0$, $dy_{\text{post}}/dK>0$ and $d(y_{\text{post}}-x_L)/dK>0$.}{Identification.boundary_slope, Identification.trigger_rises_in_lambda, Identification.trigger_falls_in_K, Identification.target_rises_in_K, Identification.gap_increasing_in_K, Identification.control_trigger_slope_needs_curvature, Envelope.trigger_jump}
 \mrow{M6}{The Jacobian of the barrier and the trigger in the two parameters is non-singular, because the parameters move the trigger in opposite directions.}{$\det\partial(y^*,x_L)/\partial(\lambda_S,K)=\frac{\rho_L}{(\rho_L-\mu'(y^*))V''(x_L)}\big(W(y^*)N'(x_L)-N(y^*)W'(x_L)\big)$, negative under the signs of M4 and M5. For $a_{11},a_{12},a_{21}>0>a_{22}$, $a_{11}a_{22}-a_{12}a_{21}<0$. With $a_{22}>0$ it can vanish.}{Identification.det_formula, Identification.det_neg_of_opposite, Identification.det_neg, Identification.control_same_direction_can_fail}
+\mrow{M7}{The value function is convex just above the recapitalisation trigger, strictly so exactly when waiting is strictly suboptimal just below it.}{$\Psi=\rho_LV+\Lambda-(1+\kappa)\mu$. If $\sigma^2(x_L)>0$, $\tfrac12\sigma^2V''+\mu V'-\rho_LV-\Lambda=0$ at $x_L^+$, $V'(x_L)=1+\kappa$ and $\mu(1+\kappa)-\rho_LV-\Lambda\le0$ at $x_L$, then $\tfrac12\sigma^2V''(x_L^+)=\Psi(x_L)\ge0$, and $V''(x_L^+)>0\iff\Psi(x_L)>0$. With $\Psi(x_L)=0$, $V''(x_L^+)=0$.}{SecondOrder.psi_identity, SecondOrder.psi_nonneg_of_qvi, SecondOrder.trigger_convex, SecondOrder.trigger_strict_iff, SecondOrder.control_trigger_flat_when_psi_zero}
 
 \bottomrule
 \end{longtable}
@@ -141,10 +142,8 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \end{longtable}
 \normalsize
 
-Black and Perold (1992), Décamps, Mariotti, Rochet and Villeneuve (2011),
-Hilscher, Raviv and Wiener (2024) and Dudziak and Schmidli
-(arXiv:2510.25494) are named in Table~\ref{tab:pending} but have not been
-read, and every claim made about them is unverified.
+Black and Perold (1992) is named in Table~\ref{tab:pending} but has not
+been read, and every claim made about it is unverified.
 
 \section{Conclusions}
 
@@ -165,7 +164,7 @@ ID & Statement & Rows \\
 \midrule
 \endhead
 \crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the saturation limits of the $z$-volatility are $\nu_1^2$ and $\nu_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$.}{M1, M2, M3, L1}
-\crow{C3}{Under the hypotheses listed in Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M4, M5, M6}
+\crow{C3}{Under the hypotheses listed in Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M4, M5, M6, M7}
 
 \bottomrule
 \end{longtable}
@@ -180,7 +179,7 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
-\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). \pend{reading the candidates of the search of 10 October 2026, Black and Perold (1992) on constant proportion portfolio insurance, whose cushion has the form of the solvency branch of $u$, Décamps, Mariotti, Rochet and Villeneuve (2011) on volatility asymmetry from issuance costs rather than preference, Hilscher, Raviv and Wiener (2024) on volatility regulation of financial institutions, and Dudziak and Schmidli (arXiv:2510.25494) on dividends with a drawdown penalty.}}{M3, L1, L2, L3, L4}
+\crow{C2}{That the saturation limits of the $z$-volatility in a regulated bank's capital problem carry no information about the asymmetry parameter is new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), and \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). \pend{Black and Perold (1992) on constant proportion portfolio insurance, whose cushion has the form of the solvency branch of $u$, the one lead of the search of 10 October 2026 that survives triage at abstract level.}}{M3, L1, L2, L3, L4}
 \crow{C4}{That the asymmetry parameter and the fixed issuance cost are jointly identified from the two thresholds is new. \citet{bayraktar2026} have no fixed issuance cost and set the recapitalisation threshold exogenously (L5). \pend{a search for comparative statics of impulse-control thresholds in a fixed issuance cost, and for identification of preference and cost parameters from capital thresholds.}}{M6, L5}
 
 
@@ -260,6 +259,12 @@ Control, $V''(x)=0$, $F'(x)=0$ $\Rightarrow$ $dx=0$ and $dx=1$ both solve the ch
 Control, $a_{11}=a_{12}=a_{21}=a_{22}=1$ $\Rightarrow$ $\det=0$.
 \end{mproof}
 
+\begin{mproof}{M7}{SecondOrder.psi_identity, SecondOrder.psi_nonneg_of_qvi, SecondOrder.trigger_convex, SecondOrder.trigger_strict_iff, SecondOrder.control_trigger_flat_when_psi_zero}
+\[ \tfrac12\sigma^2V''+\mu V'-\rho_LV-\Lambda=0,\quad V'=1+\kappa\ \Rightarrow\ \tfrac12\sigma^2V''(x_L^+)=\rho_LV+\Lambda-(1+\kappa)\mu=\Psi(x_L) . \]
+\[ \mu(1+\kappa)-\rho_LV-\Lambda\le0\ \Rightarrow\ \Psi(x_L)\ge0\ \Rightarrow\ V''(x_L^+)\ge0,\qquad \sigma^2>0\ \Rightarrow\ \big(V''(x_L^+)>0\iff\Psi(x_L)>0\big) . \]
+Control, $\sigma^2=1$, $V'=1$, $\kappa=0$, $V=\Lambda=\mu=0$, $\rho_L=1$ $\Rightarrow$ $\Psi=0$, $V''(x_L^+)=0$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -291,8 +296,10 @@ $\partial_KV=-N$ are Danskin's theorem. The interior equation enters
 differentiated in $x$ and in $\theta$. The signs $W(y^*)>0$, $N(y^*)>0$,
 $N'<0$ on the inaction region and $W'(x_L)>0$ come from hitting-time
 arguments, and $W'(x_L)>0$ holds exactly when $\rho_LW(y_{\text{post}})<R-x_L$.
-The signs $V''(x_L)>0>V''(y_{\text{post}})$ are the second-order conditions,
-not yet in Lean. $\rho_L>\mu'(y^*)$ is a parameter condition. C3 states these
+$V''(x_L)>0$ follows from M7 given $\Psi(x_L)>0$, the strict form of the
+inequality the quasi-variational inequality gives on the intervention side.
+$V''(y_{\text{post}})<0$ is a hypothesis, since the derivation of it in
+\path{PROOFS_v2.tex} fails (Appendix~\ref{app:refuted}). $\rho_L>\mu'(y^*)$ is a parameter condition. C3 states these
 as its hypotheses.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
@@ -353,5 +360,16 @@ fixed cost in dollars would break (L6). M4 to M6, C3 and C4 depend on it.
 
 \section{Refuted conjectures}
 \label{app:refuted}
+
+\paragraph{R1, strict concavity at the injection target.}
+\path{PROOFS_v2.tex} (Prop.~SOC(i)) derives $V''(y_{\text{post}})<0$ from the
+sign change of $\varphi'=V'-(1+\kappa)$ at $y_{\text{post}}$, positive below and
+negative above, and from $\varphi\in C^3$, arguing that $\varphi''(y_{\text{post}})=0$
+would give a zero of even order. A zero of odd order can still have
+$\varphi''=0$. With $\varphi(y)=-y^4/4$ and $y_{\text{post}}=0$,
+$\varphi'(y)=-y^3$ is positive for $y<0$ and negative for $y>0$, while
+$\varphi''(0)=0$ (\lean{SecondOrder.refuted_target_strict}). The weak
+inequality survives and strictness does not, so $V''(y_{\text{post}})<0$ enters
+M5 as a hypothesis (Appendix~\ref{app:evidence}). C3 does not use it.
 
 \end{document}
