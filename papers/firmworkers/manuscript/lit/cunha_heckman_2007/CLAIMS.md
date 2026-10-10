@@ -1,8 +1,8 @@
 # Claims about Cunha and Heckman (2007)
 
 **Source.** NBER Working Paper 12840, January 2007, read in full [F]; the
-*AER* Papers and Proceedings version (97(2), 31–47) is **not** read, so the
-ledger row is unverified for that version. See `RECONSTRUCTION.md` for the
+*AER* Papers and Proceedings version is **not** read; the working paper is cited
+as the version read (author's decision, 10 Oct 2026). See `RECONSTRUCTION.md` for the
 copy, its sha256 and the cache path. Cited in `claims.yaml` as row L1 and in
 `refs.bib` as `CunhaHeckman2007`. Pages are the working paper's printed pages.
 Quotations are checked verbatim, page by page, by

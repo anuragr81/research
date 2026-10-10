@@ -42,8 +42,8 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 | Record | Key | Version read | Status |
 |---|---|---|---|
 | `borjas_1992` | `Borjas1992` | QJE article, pp.123–150 | read in full, 19 quotations, 47 Lean theorems |
-| `cunha_heckman_2007` | `CunhaHeckman2007` | NBER WP 12840 (Jan 2007), not the AER version cited | read in full, 20 quotations, 23 Lean theorems |
-| `gibbons_waldman_1998` | `GibbonsWaldman1999` | NBER WP 6454 (Mar 1998), scan read through Drive's OCR, not the QJE version cited | read in full, 17 quotations, 33 Lean theorems |
+| `cunha_heckman_2007` | `CunhaHeckman2007` | NBER WP 12840 (Jan 2007), cited as such | read in full, 20 quotations, 23 Lean theorems |
+| `gibbons_waldman_1998` | `GibbonsWaldman1999` | NBER WP 6454 (Mar 1998), scan read through Drive's OCR, cited as such | read in full, 17 quotations, 33 Lean theorems |
 
 ## Running
 

@@ -7,8 +7,8 @@ pp.31–37, references pp.37–40). Uploaded by the author on 10 Oct 2026 as
 `w6454.pdf` on Drive (id `1Spu8Ubj5cgNJ7LYYSJ3z2L0dr1J8Gf7V`). The ledger cites
 the published version, "A Theory of Wage and Promotion Dynamics Inside Firms",
 *Quarterly Journal of Economics* 114(4), 1999, 1321–1358, which was **not**
-read; the title differs, so the row is marked unverified and pages here are the
-working paper's. The PDF is a scan with no text layer. It is cached at
+read. By the author's decision of 10 Oct 2026 the working paper is cited as
+the version read, and pages here are its own. The PDF is a scan with no text layer. It is cached at
 `~/.cache/firmworkers/gibbons_waldman_1998_wp.pdf`, sha256
 `c2532455b6317169b726a2577cd2e8bf7d101e326f1ffe2e6845065e659d0bcd`. Text comes
 from Drive's own OCR of the same file, cached at

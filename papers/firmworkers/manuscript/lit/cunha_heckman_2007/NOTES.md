@@ -10,10 +10,9 @@ present).
 
 ## Version
 
-The source read is NBER WP 12840 (January 2007). The ledger cites the *AER*
-Papers and Proceedings version, which was not supplied. Page numbers and
-wording may differ; the ledger row carries `version_read` and is shown as
-unverified.
+The source read is NBER WP 12840 (January 2007), and the ledger cites it as such
+(author's decision, 10 Oct 2026). The *AER* Papers and Proceedings version was
+not read.
 
 ## What was verified
 

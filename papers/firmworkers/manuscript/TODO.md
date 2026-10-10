@@ -9,19 +9,20 @@
 - [ ] Friedman and Savage (1948), JPE (the manuscript's S-shaped utility)
 - [ ] Bowles, Loury and Sethi (2014), JEEA 12(1) — L6
 - [ ] Calvó-Armengol and Jackson (2004), AER 94(3) — L7, page range to confirm
-- [x] Cunha and Heckman (2007), AER 97(2) — L1, NBER WP 12840 read in full 10 Oct 2026, `lit/cunha_heckman_2007`; row unverified until the AER version is supplied
+- [x] Cunha and Heckman (2007), AER 97(2) — L1, NBER WP 12840 read in full 10 Oct 2026, `lit/cunha_heckman_2007`; cited as the working paper (decision of 10 Oct 2026)
 - [x] Borjas (1992), QJE 107(1) — L4, read in full 10 Oct 2026, `lit/borjas_1992`
 - [ ] Loury (1977), book chapter — L3
 - [ ] Bénabou (1996), REStud 63(2) — L5
 - [ ] Immorlica, Kranton, Manea and Stoddard (2017), AEJ Micro 9(1) — L10, definition of status
 - [ ] Ghiglino and Goyal (2010), JEEA 8(1) — L9
-- [x] Gibbons and Waldman (1999) L2, NBER WP 6454 (Mar 1998, "...in Internal Labor Markets") read in full 10 Oct 2026, `lit/gibbons_waldman_1998`; row unverified until the QJE version is supplied
+- [x] Gibbons and Waldman (1999) L2, NBER WP 6454 (Mar 1998, "...in Internal Labor Markets") read in full 10 Oct 2026, `lit/gibbons_waldman_1998`; cited as the working paper (decision of 10 Oct 2026)
 - [ ] Lower priority: Rosen (1986) L8, Altonji and Pierret (2001) L12, Luttmer (2005) L11, Fershtman, Murphy and Weiss (1996) L13
 
 ## Decisions recorded
 
 - 10 Oct 2026: proofs stay Lean-only for now. Informal proofs under the skeleton's 30% prose limit (MS-6) are deferred, not dropped.
 - 10 Oct 2026: no paper prose for now. Work is on claims; prose will be written from the claims later.
+- 10 Oct 2026: the working papers of Cunha–Heckman (NBER WP 12840) and Gibbons–Waldman (NBER WP 6454) are cited as the versions read; the published AER and QJE versions are not needed for now.
 - 10 Oct 2026: headlines rest on the measurement map (X rows) as the empirical key, not on model rows alone. Deliberate departure from skeleton MS-2.
 
 ## Model decisions pending (micro)

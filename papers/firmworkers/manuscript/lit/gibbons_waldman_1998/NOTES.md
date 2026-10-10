@@ -10,9 +10,9 @@ axioms only, controls present).
 
 ## Version and text
 
-The source read is NBER WP 6454 (March 1998). The ledger cites the *QJE*
-version (1999), under a different title; it was not supplied, so the row
-carries `version_read` and is shown as unverified. The PDF is a scan with no
+The source read is NBER WP 6454 (March 1998), and the ledger cites it as such
+(author's decision, 10 Oct 2026). The *QJE* version (1999), published under a
+different title, was not read. The PDF is a scan with no
 text layer and no OCR tool is installed locally, so the text is Drive's OCR of
 the same file, pinned by its own sha256. Where a printed page number is missing
 from the OCR (pp.1, 2, 4, 5, 9) the page block spans the neighbouring pages, so

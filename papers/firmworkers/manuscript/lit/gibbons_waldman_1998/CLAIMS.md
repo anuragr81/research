@@ -2,8 +2,8 @@
 
 **Source.** NBER Working Paper 6454, March 1998, "A Theory of Wage and Promotion
 Dynamics in Internal Labor Markets", read in full [F]; the *QJE* version (1999,
-"... Inside Firms") is **not** read, so the ledger row is unverified for that
-version. See `RECONSTRUCTION.md` for the scan, its sha256, the OCR text and its
+"... Inside Firms") is **not** read; the working paper is cited as the version
+read (author's decision, 10 Oct 2026). See `RECONSTRUCTION.md` for the scan, its sha256, the OCR text and its
 sha256. Cited in `claims.yaml` as row L2 and in `refs.bib` as
 `GibbonsWaldman1999`. Pages are the working paper's printed pages. Quotations
 are checked verbatim against the OCR text of the page block that carries their

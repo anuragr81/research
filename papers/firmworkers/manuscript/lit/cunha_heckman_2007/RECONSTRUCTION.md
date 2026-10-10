@@ -6,8 +6,8 @@ page, text pp.1–24, references pp.25–31, notes pp.32–34, Table 1, Figures 
 Uploaded by the author on 10 Oct 2026 as `w12840.pdf` on Drive (id
 `1S3862WYM57yaC821ss3XMxx_0p4XGHUr`). Read in full [F]. The ledger cites the
 published version, *American Economic Review* 97(2), 31–47 (Papers and
-Proceedings, May 2007), which was **not** read; the row is marked unverified
-for that reason and page numbers here are the working paper's. Cached at
+Proceedings, May 2007), which was **not** read. By the author's decision of 10 Oct 2026 the working paper
+is cited as the version read, and page numbers here are its own. Cached at
 `~/.cache/firmworkers/cunha_heckman_2007_wp.pdf`, sha256
 `b78d465c373fd588ac86dd8a4b98faad32aa4ad1093bb2c76138a43027015d84`; text
 extracted with `pdftotext -layout` to `cunha_heckman_2007_wp.txt`, one form
