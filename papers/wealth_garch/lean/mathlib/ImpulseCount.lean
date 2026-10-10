@@ -89,4 +89,9 @@ theorem impulse_sum_summable
   intro i
   simpa [Real.norm_eq_abs] using hbound i
 
+theorem control_count_needs_fixed_cost :
+    ∃ d : ℕ → ℝ, (∀ n : ℕ, 0 * ∑ i ∈ Finset.range n, d i ≤ 0) ∧ ¬ Summable d :=
+  ⟨fun _ => 1, fun n => by simp, fun h =>
+    one_ne_zero (tendsto_nhds_unique tendsto_const_nhds h.tendsto_atTop_zero)⟩
+
 end ImpulseCount

@@ -89,6 +89,9 @@ ID & Headline & Model rows & Scope note \\
 ID & Headline & Model rows & Scope note \\
 \midrule
 \endhead
+\krow{K1}{Under a binding regulatory cap, the ratio of the capital buffer's volatility deep in deficit to its volatility deep in surplus is fixed by the cap and carries no information about the asymmetry parameter $\lambda_S$.}{M1, M2, M3}{Holds wherever the optimal policy binds the cap near both ends of the state space, which is assumed and supported only by the numerical solve (Appendix~\ref{app:evidence}). Reading the discrete-time variance ratio as $\nu_1^2/\nu_3^2$ is a definition (Appendix~\ref{app:primitives}). Fails when $a_1\ge a_3$ or when the cap does not bind (M3). The cap is that of \citet{bayraktar2026}, and the constant volatility of the log coordinate on the solvency branch is not claimed new.}
+\krow{K2}{The asymmetry parameter and the fixed issuance cost are locally identified from the dividend barrier and the recapitalisation trigger, because they move the trigger in opposite directions.}{M4, M5, M6, M7}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M6). The fixed cost is charged per unit of liabilities (Appendix~\ref{app:primitives}). The responses of the barrier and the target to the fixed cost alone are not claimed new.}
+
 \bottomrule
 \end{longtable}
 \normalsize
@@ -115,7 +118,11 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M7}{The value function is convex just above the recapitalisation trigger, strictly so exactly when waiting is strictly suboptimal just below it.}{$\Psi=\rho_LV+\Lambda-(1+\kappa)\mu$. If $\sigma^2(x_L)>0$, $\tfrac12\sigma^2V''+\mu V'-\rho_LV-\Lambda=0$ at $x_L^+$, $V'(x_L)=1+\kappa$ and $\mu(1+\kappa)-\rho_LV-\Lambda\le0$ at $x_L$, then $\tfrac12\sigma^2V''(x_L^+)=\Psi(x_L)\ge0$, and $V''(x_L^+)>0\iff\Psi(x_L)>0$. With $\Psi(x_L)=0$, $V''(x_L^+)=0$.}{SecondOrder.psi_identity, SecondOrder.psi_nonneg_of_qvi, SecondOrder.trigger_convex, SecondOrder.trigger_strict_iff, SecondOrder.control_trigger_flat_when_psi_zero}
 \mrow{M8}{The log coordinate maps the state space onto the real line, with the requirement at zero and the distress boundary at minus infinity.}{$q>0$ $\Rightarrow$ $z$ is strictly increasing on $(1,\infty)$, $1+qe^{z(x)}=x$ for $x>1$, $z(1+qe^{w})=w$, $z(1+q)=0$, $z(x)\to-\infty$ as $x\to1^+$ and $z(x)\to\infty$ as $x\to\infty$.}{CapGeometry.zmap_inverse, CapGeometry.zmap_of_inverse, Coordinate.zmap_strictMonoOn, Coordinate.zmap_at_requirement, Coordinate.zmap_tendsto_atBot, Coordinate.zmap_tendsto_atTop}
 \mrow{M9}{Along the cap the drift of the state at the distress boundary is $r-r_L$, and when the drift there is positive the drift of $z$ diverges to plus infinity at that boundary.}{$a_1,a_3>0$, $a_2<1$, $\mu_L=\gamma+r_L$ $\Rightarrow$ $B(1)=r-r_L$. If $B(x)\to b_1>0$ as $x\to1^+$ then $B(x)/(x-1)\to\infty$. With $B\equiv-1$ it tends to $-\infty$.}{Coordinate.cappedDrift_at_one, Coordinate.zdrift_tendsto_atTop, Coordinate.control_zdrift_needs_positive_limit, BCVW.piBar_at_one, BCVW.piBar_mul_y}
-\mrow{M10}{The value function has no kink at the recapitalisation trigger.}{If $V\ge\mathcal MV$, $V(x_L)=\mathcal MV(x_L)$, $\mathcal MV$ is affine with slope $1+\kappa$, $V$ has right derivative $V'(x_L^+)$, $\sigma^2(x_L)>0$, and $V'(x_L^+)>1+\kappa$ would make $\tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0$ hold at $x_L$ for every $q$, then $V'(x_L^+)=1+\kappa$. If $\tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0$ is needed only for $q\le0$, it holds when $b\le\rho_LV+\Lambda$. Without $V\ge\mathcal MV$ a downward kink is possible.}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
+\mrow{M10}{The value function has no kink at the recapitalisation trigger.}{If $V\ge\mathcal MV$, $V(x_L)=\mathcal MV(x_L)$, $\mathcal MV$ is affine with slope $1+\kappa$, $V$ has right derivative $V'(x_L^+)$, $\sigma^2(x_L)>0$, and $V'(x_L^+)>1+\kappa$ would make $\tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0$ hold at $x_L$ for every $q$, then $V'(x_L^+)=1+\kappa$. If $\tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0$ is needed only for $q\le0$, it holds when $(1+\kappa)\mu\le\rho_LV+\Lambda$. Without $V\ge\mathcal MV$ a downward kink is possible.}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
+\mrow{M11}{At $\lambda_S=1$ the shortfall penalty vanishes identically, and for every $\lambda_S\ge1$ the running payoff is concave.}{$\Lambda(x)=(\lambda_S-1)(R-x)^+$ $\Rightarrow$ $\Lambda\equiv0$ at $\lambda_S=1$, and $-\Lambda$ is concave on $\mathbb R$ for $\lambda_S\ge1$. At $\lambda_S=0$, $R=0$ it is not concave.}{QVI_Part1.lambda_asymmetry_vanishes_at_one, QVI_Part1.neg_Lambda_concave, QVI_Part1.control_concavity_needs_lambda_ge_one}
+\mrow{M12}{Balanced growth of equity and requirement pins the return on equity, and the deficit persistence of the maintained model tends to one as growth vanishes, while the persistence asymmetry tends to the surplus payout rate.}{$b\ne0$, $1+g\ne0$ $\Rightarrow$ $\big((1+r_Eb)/(1+g)=1\iff r_E=g/b\big)$. $\phi^-=1-g(1-b)/b\to1$ as $g\to0^+$, strictly decreasing in $g$ for $0<b<1$. $\phi^--\phi^+=\delta_p+g-g/b\to\delta_p$.}{RateBased.balanced_growth_iff, RateBased.phi_minus_tendsto_one, RateBased.phi_minus_strictAnti, RateBased.persistence_asymmetry_eq, RateBased.persistence_asymmetry_tendsto, RateBased.control_identity_needs_retention, RateBased.control_persistence_needs_partial_retention}
+\mrow{M13}{The expected time below the requirement falls in the recovery drift and diverges as that drift vanishes.}{$d>0$ $\Rightarrow$ $m\mapsto d/m$ is strictly decreasing on $(0,\infty)$ and $d/m\to\infty$ as $m\to0^+$. At $d=0$ it is constant.}{RateBased.sojourn_strictAnti, RateBased.sojourn_tendsto_atTop, RateBased.control_sojourn_needs_positive_depth}
+\mrow{M14}{With a positive fixed issuance cost and a finite value, the discounted number of recapitalisations is finite, so the impulse terms of the verification argument converge absolutely.}{$K>0$, $e_i\ge0$, $K\sum_{i<n}e_i\le B$ for all $n$ $\Rightarrow$ $\sum_{i<n}e_i\le B/K$, $N=\sum_ie_i$ converges and $N\le B/K$. If also $|c_i|\le Ce_i$, $\sum_ic_i$ converges absolutely. With $K=0$, $e_i=1$ the cost bound holds and $N$ diverges.}{ImpulseCount.partial_sums_bounded, ImpulseCount.count_summable, ImpulseCount.count_le, ImpulseCount.impulse_sum_summable, ImpulseCount.control_count_needs_fixed_cost}
 
 \bottomrule
 \end{longtable}
@@ -214,11 +221,15 @@ the recapitalisation trigger and $y_{\text{post}}$ the injection target. $W$
 is the expected discounted shortfall and $N$ the discounted injection count
 under the optimal policy, $\theta$ is $\lambda_S$ or $K$, and $F$ is $W$ or $N$
 accordingly. $\rho_L$ is the liability-net discount rate, $\mu'$ the
-derivative in $x$ of the drift along the cap, and $g=(R-x)^+$ for $F=W$ and
-$g=0$ for $F=N$. Primes are derivatives in $x$. $B(x)=u(x)(\mu_s-r)+(r-\mu_L)x+\gamma$
+derivative in $x$ of the drift along the cap, and $\ell=(R-x)^+$ for $F=W$ and
+$\ell=0$ for $F=N$. Primes are derivatives in $x$. $B(x)=u(x)(\mu_s-r)+(r-\mu_L)x+\gamma$
 is the drift of $x$ along the cap, with $\mu_L=\gamma+r_L$. $\kappa$ is the
 proportional issuance cost, $\mathcal MV$ the impulse operator, affine with
-slope $1+\kappa$ on the intervention side, and $b=(1+\kappa)\mu(x_L)$.
+slope $1+\kappa$ on the intervention side, and $\mu=\mu(x_L)$ in M7 and M10. In discrete
+time, $g$ is the growth rate of required capital, $b$ the retention ratio,
+$r_E$ the return on equity, $\phi^-$ and $\phi^+$ the deficit and surplus
+persistence, $\delta_p$ the surplus payout rate, and $d$ and $m$ the depth
+below the requirement and the recovery drift.
 
 \begin{mproof}{M1}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
 For every $z$,
@@ -246,7 +257,7 @@ Controls, at $\sigma=1$, $\sigma_L=c=0$, $q=1$.
 
 \begin{mproof}{M4}{Identification.vppp_at_barrier, Identification.fpp_at_barrier, Identification.barrier_slope, Identification.barrier_slope_pos, Identification.control_barrier_sign_needs_gap, Envelope.wode_of_envelope, Envelope.node_of_envelope, Envelope.neumann_at_ystar}
 \[ \tfrac12\sigma^2V'''+\tfrac12(\sigma^2)'V''+\mu V''+\mu'V'-\rho_LV'-\Lambda'=0,\quad V''=0,\ V'=1,\ \Lambda'=0\ \Rightarrow\ \tfrac12\sigma^2V'''=\rho_L-\mu' . \]
-\[ \tfrac12\sigma^2F''+\mu F'-\rho_LF+g=0,\quad F'(y^*)=0,\ g(y^*)=0\ \Rightarrow\ \tfrac12\sigma^2F''=\rho_LF . \]
+\[ \tfrac12\sigma^2F''+\mu F'-\rho_LF+\ell=0,\quad F'(y^*)=0,\ \ell(y^*)=0\ \Rightarrow\ \tfrac12\sigma^2F''=\rho_LF . \]
 \[ V'''\frac{dy^*}{d\theta}+\partial_\theta V''=0,\quad \partial_\theta V''=-F''\ \Rightarrow\ \frac{dy^*}{d\theta}=\frac{F''}{V'''}=\frac{\rho_LF(y^*)}{\rho_L-\mu'(y^*)} . \]
 Control, $\rho_L=1$, $\mu'=2$, $F=1$ $\Rightarrow$ $dy^*/d\theta=-1$.
 \end{mproof}
@@ -284,9 +295,33 @@ Control, $B\equiv-1$ $\Rightarrow$ $B(x)/(x-1)\to-\infty$.
 
 \begin{mproof}{M10}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
 \[ V\ge\mathcal MV,\ \ V(x_L)=\mathcal MV(x_L),\ \ (\mathcal MV)'=1+\kappa\ \Rightarrow\ V'(x_L^+)\ge1+\kappa . \]
-\[ V'(x_L^+)>1+\kappa\ \Rightarrow\ \tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0\ \ \forall q,\qquad q=\frac{2(\rho_LV+\Lambda-b+1)}{\sigma^2}\ \Rightarrow\ 1\le0 . \]
-\[ \Rightarrow\ V'(x_L^+)=1+\kappa;\qquad q\le0,\ \ b\le\rho_LV+\Lambda\ \Rightarrow\ \tfrac12\sigma^2q+b-\rho_LV-\Lambda\le0 . \]
+\[ V'(x_L^+)>1+\kappa\ \Rightarrow\ \tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0\ \ \forall q,\qquad q=\frac{2(\rho_LV+\Lambda-(1+\kappa)\mu+1)}{\sigma^2}\ \Rightarrow\ 1\le0 . \]
+\[ \Rightarrow\ V'(x_L^+)=1+\kappa;\qquad q\le0,\ \ (1+\kappa)\mu\le\rho_LV+\Lambda\ \Rightarrow\ \tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0 . \]
 Control, $v(x)=x$, $\kappa=1$, $\mathcal Mv(x)=2x$ $\Rightarrow$ $v(0)=\mathcal Mv(0)$, $v'(0^+)=1<2$.
+\end{mproof}
+
+\begin{mproof}{M11}{QVI_Part1.lambda_asymmetry_vanishes_at_one, QVI_Part1.neg_Lambda_concave, QVI_Part1.control_concavity_needs_lambda_ge_one}
+\[ \Lambda(x)\big|_{\lambda_S=1}=(1-1)(R-x)^+=0 . \]
+\[ -\Lambda(x)=(\lambda_S-1)\big(\min\{x,R\}-R\big),\qquad \lambda_S-1\ge0,\ \ x\mapsto\min\{x,R\}\ \text{concave} . \]
+Control, $\lambda_S=0$, $R=0$ $\Rightarrow$ $-\Lambda(x)=\max\{-x,0\}$, $-\Lambda(0)=0<\tfrac12=\tfrac12(-\Lambda(-1))+\tfrac12(-\Lambda(1))$.
+\end{mproof}
+
+\begin{mproof}{M12}{RateBased.balanced_growth_iff, RateBased.phi_minus_tendsto_one, RateBased.phi_minus_strictAnti, RateBased.persistence_asymmetry_eq, RateBased.persistence_asymmetry_tendsto, RateBased.control_identity_needs_retention, RateBased.control_persistence_needs_partial_retention}
+\[ \frac{1+r_Eb}{1+g}=1\iff r_Eb=g\iff r_E=\frac gb . \]
+\[ \phi^-(g)=1-\frac{g(1-b)}{b}\to1\ \ (g\to0^+),\qquad g_1<g_2,\ 0<b<1\ \Rightarrow\ \phi^-(g_1)>\phi^-(g_2) . \]
+\[ \phi^--\phi^+=1-\frac{g(1-b)}b-(1-\delta_p)=\delta_p+g-\frac gb\to\delta_p . \]
+Controls, $b=0$, $g=1$ $\Rightarrow$ no $r_E$; $b=1$ $\Rightarrow$ $\phi^-\equiv1$.
+\end{mproof}
+
+\begin{mproof}{M13}{RateBased.sojourn_strictAnti, RateBased.sojourn_tendsto_atTop, RateBased.control_sojourn_needs_positive_depth}
+\[ 0<m_1<m_2\ \Rightarrow\ \frac d{m_1}>\frac d{m_2},\qquad \frac dm=d\,m^{-1}\to\infty\ \ (m\to0^+) . \]
+Control, $d=0$ $\Rightarrow$ $d/m\equiv0$.
+\end{mproof}
+
+\begin{mproof}{M14}{ImpulseCount.partial_sums_bounded, ImpulseCount.count_summable, ImpulseCount.count_le, ImpulseCount.impulse_sum_summable, ImpulseCount.control_count_needs_fixed_cost}
+\[ K\sum_{i<n}e_i\le B,\ K>0\ \Rightarrow\ \sum_{i<n}e_i\le\frac BK\ \ \forall n,\qquad e_i\ge0\ \Rightarrow\ N=\sum_ie_i\le\frac BK<\infty . \]
+\[ |c_i|\le Ce_i\ \Rightarrow\ \sum_i|c_i|\le C\,N<\infty . \]
+Control, $K=0$, $e_i=1$ $\Rightarrow$ $0\le0$ for every $n$ and $\sum_ie_i=\infty$.
 \end{mproof}
 
 \section{Evidence and verification}
@@ -330,7 +365,12 @@ M9 takes the drift of $z$ to be $B(x)/(x-1)-\nu_1^2/2$, its Itô form, and
 does not classify the boundary $x=1$, so whether it is reached is not proved.
 M10 takes the viscosity supersolution property of $V$ at $x_L$ as a
 hypothesis, in the form that a kink admits lower test functions of every
-curvature.
+curvature. M13 takes the expected first-passage time of a random walk with
+drift $m$ from depth $d$ to be $d/m$, Wald's identity, which is not proved.
+M14 takes the cost bound as a hypothesis, that each impulse costs at least
+$K$ and the strategy's value is finite, with $e_i=e^{-\rho_L\tau_i}$ the
+discounted impulse times and $c_i$ the impulse terms of the verification
+argument.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 
@@ -385,6 +425,11 @@ deficit and deep in surplus with the two saturation limits of $\zeta$. This
 is a definition, not a result, and no theorem connects the discrete-time
 recursion to the continuous-time diffusion. C1 depends on it.
 
+\paragraph{The persistence coefficients.} $\phi^-=1-g(1-b)/b$ and
+$\phi^+=1-\delta_p$ are the maintained model of \path{PROOFS_v2.tex}, a
+proportional control calibrated to the accounting identity, and are not
+derived from full retention. M12 depends on them.
+
 \paragraph{The fixed issuance cost.} $K$ is charged per unit of
 liabilities, so the dollar cost of an issue is $K$ times liabilities. This
 keeps the reduction of the bank's problem to the single state $x$, which a
@@ -403,5 +448,12 @@ $\varphi'(y)=-y^3$ is positive for $y<0$ and negative for $y>0$, while
 $\varphi''(0)=0$ (\lean{SecondOrder.refuted_target_strict}). The weak
 inequality survives and strictness does not, so $V''(y_{\text{post}})<0$ enters
 M5 as a hypothesis (Appendix~\ref{app:evidence}). C3 does not use it.
+
+\paragraph{R2, a vanishing persistence asymmetry.} \path{PROOFS_v2.tex}
+(Prop.~PSA) states that the persistence asymmetry $\phi^--\phi^+$ vanishes
+with $g$. With $\phi^+=1-\delta_p$ it equals $\delta_p+g-g/b$ and tends to
+$\delta_p$ (M12), so it vanishes only when $\delta_p=0$. At
+$b=\delta_p=\tfrac12$ the limit is $\tfrac12$, not $0$
+(\lean{RateBased.refuted_asymmetry_vanishes}). M12 states the limit.
 
 \end{document}

@@ -15,7 +15,7 @@ The skeleton follows `../MANUSCRIPT_SKELETON.md`, with
 | 5 | Appendices B to E; `MEASUREMENT_MAP.tex` | |
 | 6 | Retire `00_document/PROOFS_v2.tex` with `RETIREMENT.md` and its check | |
 | 7 | Novelty reading, one `lit/` record per paper | in progress; `lit/bayraktar_2026`, `lit/barberis_huang_santos_1999`, `lit/barberis_huang_santos_2001`, `lit/engle_siriwardane_2018`, `lit/li_yu_zhang_2023` done 2026-10-10 |
-| 8 | Conclusions, then introduction; headline overreach review | |
+| 8 | Conclusions, then introduction; headline overreach review | conclusions C1 to C4 and headlines K1, K2 done 2026-10-10 |
 | 9 | Literature table | L1 to L4 entered 2026-10-10 |
 | 10 | Readability rounds | |
 | 11 | Referee comments | not applicable |
@@ -117,6 +117,15 @@ SymPy, to port to Lean:
   (Appendix E, R1, `SecondOrder.refuted_target_strict`): a sign change of
   $\varphi'$ allows $\varphi''=0$ at a zero of odd order. It stays a
   hypothesis of M5, and C3 does not use it.
+- Done 2026-10-10: `prop:nesting` and `prop:concave-payoff` are M11
+  (`QVI_Part1`); `prop:identity` and `prop:persistence` are M12, with
+  `RateBased.balanced_growth_iff` the Lean statement of ACI; `prop:sojourn`
+  is M13; `lem:fin` is M14 (`ImpulseCount`). `prop:persistence` as stated in
+  PROOFS_v2 ("vanishes with g") is refuted (Appendix E, R2): the asymmetry
+  tends to $\delta_p$. Every Lean file now has a control.
+- Still without a row: `prop:egarch` (EGE, Gaussian moments), and the
+  hypotheses `lem:reg`, `lem:bdr`, `lem:itr`, `prop:lowerbound`, `prop:ver`,
+  which enter Appendix B. The numerical remarks stay illustrations.
 - `prop:sojourn` is already proved in `RateBased.lean`
   (`sojourn_strictAnti`, `sojourn_tendsto_atTop`).
 - `thm:lambda4` rests on `RateBased.saturated_ratio_tendsto`, now free of
@@ -138,8 +147,7 @@ Illustrations: `rem:solver` SLV, `rem:capbinds` CBI, `rem:compstat` CSL,
 `rem:nonconcave` LNC, `rem:Ksens` KSW, `rem:tcsn` TCSN, `rem:kcsn` KCSN,
 `rem:socn` SOCN, `rem:vern` VERN.
 
-No file under `lean/mathlib/` has a `control_*` theorem yet. Every cluster
-needs one.
+Every file under `lean/mathlib/` has at least one `control_*` theorem (2026-10-10).
 
 ## C2 search, 10 October 2026
 

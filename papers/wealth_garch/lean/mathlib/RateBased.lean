@@ -202,4 +202,31 @@ theorem sojourn_tendsto_atTop {d : ℝ} (hd : 0 < d) :
     Filter.Tendsto.const_mul_atTop hd hrecip
   simpa [div_eq_mul_inv] using this
 
+theorem balanced_growth_iff {g b rE : ℝ} (hb : b ≠ 0) (hg : 1 + g ≠ 0) :
+    (1 + rE * b) / (1 + g) = 1 ↔ rE = g / b := by
+  rw [div_eq_one_iff_eq hg, eq_div_iff hb]
+  constructor <;> intro h <;> linarith
+
+theorem control_identity_needs_retention : ¬ ∃ rE : ℝ, (1 + rE * 0) / (1 + 1) = (1 : ℝ) := by
+  rintro ⟨rE, h⟩
+  norm_num at h
+
+theorem control_persistence_needs_partial_retention :
+    phi_minus 1 1 = phi_minus 2 1 := by
+  unfold phi_minus
+  norm_num
+
+theorem control_sojourn_needs_positive_depth :
+    expected_sojourn 0 1 = expected_sojourn 0 2 := by
+  unfold expected_sojourn
+  norm_num
+
+theorem refuted_asymmetry_vanishes :
+    ¬ Filter.Tendsto (fun g => persistence_asymmetry g (1 / 2) (1 / 2))
+      (nhdsWithin 0 (Set.Ioi 0)) (nhds 0) := by
+  intro h
+  have h2 := persistence_asymmetry_tendsto (b := 1 / 2) (delta_p := 1 / 2) (by norm_num)
+  have := tendsto_nhds_unique h h2
+  norm_num at this
+
 end RateBased

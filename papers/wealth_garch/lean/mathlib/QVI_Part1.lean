@@ -89,4 +89,11 @@ theorem neg_Lambda_concave {lam R : ℝ} (hlam : 1 ≤ lam) :
     simp [Pi.add_apply, sub_eq_add_neg]
   rwa [hbridge] at hshift
 
+theorem control_concavity_needs_lambda_ge_one : ¬ ConcaveOn ℝ Set.univ (fun x => -Lambda 0 0 x) := by
+  intro h
+  have key := h.2 (Set.mem_univ (-1)) (Set.mem_univ 1) (by norm_num : (0:ℝ) ≤ 1 / 2)
+    (by norm_num : (0:ℝ) ≤ 1 / 2) (by norm_num)
+  simp only [smul_eq_mul, Lambda] at key
+  norm_num at key
+
 end QVI_Part1
