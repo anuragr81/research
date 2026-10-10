@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+
+\title{Response: the CSL/SCG open issue is not open}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\noindent
+The note is a faithful rendering of both what was said in discussion and
+what \texttt{PROOFS\_v2.tex} currently states. Both are out of date on
+this point, and the note inherits the staleness in a way that matters:
+it presents as an unresolved question something that has already been
+computed, and it proposes a route to closing it that is already known to
+fail. What follows corrects each in turn and states what should replace
+them.
+
+\bigskip
+\noindent\textbf{The estimated ratio has been computed.}
+The note says that whether the estimated variance ratio is invariant to
+the preference parameter ``has not been established.'' It has.
+\texttt{lambda\_RN\_measured.py} simulates the solved model, samples it
+quarterly over a sixty-quarter window after a long burn-in, and applies
+the panel's own estimator---the same estimator that would be used on real
+data---at four hundred paths per value of the asymmetry parameter. Under
+the first cost convention the median estimated ratio runs from
+approximately $1.334$ at the neutral parameter value down to
+approximately $1.152$ at the top of the admissible range; under the second
+it runs from approximately $1.390$ to $1.167$. The estimated ratio
+therefore \emph{does} vary with the preference parameter, it decreases,
+and the direction is known.
+
+The sentence in \texttt{PROOFS\_v2.tex} asserting that this ``is not
+known'' was already flagged for revision before this note was written. It
+was never edited, and the note has now carried it into a second document.
+That is precisely how a stale line becomes a stale literature, and it is
+the strongest practical argument for making the edit rather than
+continuing to work around it.
+
+\bigskip
+\noindent\textbf{The proposed closure route is already known to fail.}
+The note proposes closing the gap by showing that the estimated ratio
+``converges to or otherwise tracks the definitional one as sample size
+grows.'' That cannot be shown, because it is false. The panel estimator is
+asymptotically biased toward one: a true value of $1.30$ measures $1.164$
+at sixty observations, $1.145$ at five hundred, and $1.140$ at twenty
+thousand. The bias converges to roughly $-0.16$ and stays there. This is
+not a finite-sample deficiency that more data repairs; the estimator
+targets a \emph{different estimand}, because states near the
+classification boundary are assigned to one regime while their innovations
+reflect a mixture of both. The bridge the note asks for does not exist and
+will not be built. Treating this as pending an asymptotic argument points
+at a question that has already returned a negative answer.
+
+\bigskip
+\noindent\textbf{What should replace the open-issue framing.}
+The correct statement is not that volatility is uninformative and the
+estimated case is unchecked. It is a pair of claims at different
+strengths. First, the definitional evaluation of the ratio carries no
+information about the preference whatsoever---this is proved (SCG), and it
+is a derived consequence of how the cap's geometry propagates into the
+saturation limits, not a definitional identity. Second, the estimated
+ratio carries a weak signal, and the weakness is quantifiable: roughly
+$0.18$ of total movement across the entire admissible range of the
+preference parameter, against a per-path standard deviation of $0.16$ to
+$0.20$. For a single institution the signal is indistinguishable from its
+own noise; only a median across many institutions is informative at all.
+
+That is a quantitative weak-identification claim rather than a blank
+uninformativeness claim, and it is the stronger position of the two. It
+survives the obvious objection---someone will estimate the ratio, obtain a
+number that moves with the parameter, and the paper needs to have
+predicted that movement and characterised its size rather than been
+surprised by it.
+
+\bigskip
+\noindent\textbf{Consequence for the choice of first empirical test.}
+The note's conclusion is right and its reasoning is not. The K-sweep
+prediction (KSW) is the correct first test, but not because the
+definitional-versus-estimated relationship is unresolved groundwork. It is
+correct because that relationship \emph{is} resolved, and unfavourably:
+the estimated ratio is a biased, noisy, weakly-responsive proxy for a
+quantity that is provably constant. A threshold-based test therefore
+dominates a variance-based one on identification grounds, which is a
+positive argument for KSW rather than a deferral of the alternative.
+
+\bigskip
+\noindent\textbf{Two smaller points.}
+The phrase ``true by construction rather than by measurement'' undersells
+SCG and invites a referee to read it as tautological; it is a proved
+symbolic result, and ``proved from the model's structure'' carries the
+same meaning without the concession. And the suggestion that closure would
+proceed ``presumably through simulation'' describes work already performed
+at four hundred paths per parameter value, which will read oddly to anyone
+who has seen the measured-scale computation.
+
+\bigskip
+\noindent\textbf{Shortest path to fixing this.}
+One edit to the open-questions section of \texttt{PROOFS\_v2.tex},
+replacing the ``is not known'' sentence with the measured direction and
+the weak-identification magnitude, followed by a rewrite of this note
+against the corrected text. The note's structure survives; only its
+premise changes.
+
+\end{document}

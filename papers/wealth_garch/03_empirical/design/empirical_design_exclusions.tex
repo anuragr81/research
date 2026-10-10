@@ -1,0 +1,525 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\title{Empirical Design Notes: Sample Construction, Units, and Event
+Exclusions\\
+\large Rate-Based Reference Model (Direction F)}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Scope}
+
+This note documents the panel construction for the cross-sectional test of
+$\phi^- = 1 - (\mathrm{ROE} - g)$: the units basis (Section~\ref{sec:units},
+where an error in an earlier draft is corrected), what the regressor's
+variance decomposition implies about what the test actually identifies
+(Section~\ref{sec:decomp}), and the principled grounds for excluding
+specific country-episodes (Section~\ref{sec:exclusions}). Every exclusion
+is derived from a stated model assumption failing, not from an observation
+being inconvenient for the predicted slope.
+
+\section{Data}
+
+The buffer $z$ (regulatory capital to risk-weighted assets, IMF FSI code
+\texttt{FSKRC\_PT}) and the required return $\rho$ (approximated by return
+on equity, \texttt{FSERE\_PT}) are drawn from the IMF Financial Soundness
+Indicators dataset at quarterly frequency, Core Set, Deposit Takers.
+Growth $g$ is drawn from the IMF World Economic Outlook database.
+
+\subsection{Units: the regressor must be computed on a nominal basis}
+\label{sec:units}
+
+FSI return on equity is reported in nominal, domestic-currency terms: it
+is net income (a nominal flow) divided by book equity (a nominal stock).
+Required capital grows with the nominal balance sheet, since risk-weighted
+assets are carried at nominal values. The regressor $\mathrm{ROE} - g$
+is therefore only correctly specified when $g$ is \emph{nominal} GDP
+growth in the same domestic currency --- not real GDP growth.
+
+An earlier version of this analysis used WEO's \texttt{NGDP\_RPCH} (real,
+constant-price growth) throughout. This was an error, not a stylistic
+choice, and its effect is not small. Recomputing $g$ from WEO's
+\texttt{NGDP} (current-price GDP level, domestic currency) as
+$g_t = \mathrm{NGDP}_t/\mathrm{NGDP}_{t-1} - 1$ and averaging over each
+country's sample window changes the regressor materially:
+
+\begin{center}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+& real-basis (wrong) & nominal-basis (correct) \\
+\midrule
+mean of $\mathrm{ROE}-g$ & 10.34pp & 4.31pp \\
+sd of $\mathrm{ROE}-g$    & 5.12pp  & 7.14pp \\
+range                     & $-2.95$ to $24.00$ & $-34.42$ to $16.53$ \\
+countries with negative rebuild capacity & 3 & 9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The starkest illustration is Argentina, whose regressor value moves from
+$+24.00$ (the largest positive value in the real-basis panel) to
+$-34.42$ (the largest negative value in the nominal-basis panel) --- a
+58-point swing driven entirely by which growth series is used, for one
+country. Turkey, Belarus, Angola and Ghana show swings of 15--26 points
+for the same reason. The implied inflation proxy
+($g_{\text{nominal}} - g_{\text{real}}$) exceeds 10 percentage points for
+seven of seventy-five countries and has a panel median of 4.2pp, so this
+is not confined to a handful of extreme cases; it is a first-order
+correction to the regressor for a meaningful share of the sample.
+
+\textbf{All results in this note and in any subsequent estimation use the
+nominal basis.} The real-basis numbers should not be reported, including
+as a robustness check, since they are not an alternative specification of
+the same question --- they are the wrong quantity for the model as
+written.
+
+\section{What the regressor's variance decomposition implies}
+\label{sec:decomp}
+
+Across the panel (nominal basis, $n=75$), $\mathrm{ROE}$ has standard
+deviation 4.95pp and $g$ has standard deviation 1.62pp (real) or
+substantially more on a nominal basis in the high-inflation members; the
+correlation between $\mathrm{ROE}$ and real $g$ is 0.06. Decomposing the
+regressor's variance,
+$\operatorname{Var}(\mathrm{ROE}-g) = \operatorname{Var}(\mathrm{ROE}) +
+\operatorname{Var}(g) - 2\operatorname{Cov}(\mathrm{ROE},g)$, cross-country
+variation in $\mathrm{ROE}$ accounts for the large majority of the
+regressor's spread on the (mis-specified) real basis; on the nominal
+basis, variation in $g$ itself is substantially larger, since nominal
+growth ranges from near zero to over 50\% across the panel's
+high-inflation members.
+
+Two consequences follow.
+
+\emph{First}, whichever basis is used, the paper's identifying variation
+is not concentrated in near-zero-growth, low-inflation economies of the
+kind (Japan, stagnant Western Europe) that motivate the theory
+narratively. That mismatch between motivating case and estimating sample
+must be stated explicitly rather than left for a reader to notice.
+
+\emph{Second}, and more consequential on the nominal basis: the regressor
+now spans very high nominal growth rates in chronically high-inflation
+economies (Argentina, Turkey). Whether the linear model
+$\phi^- = 1-(\mathrm{ROE}-g)$ is a sensible description of buffer dynamics
+in a hyperinflationary or near-hyperinflationary economy is not
+established by anything in this project and should not be assumed; these
+observations may need their own treatment (Section~\ref{sec:exclusions})
+rather than being pooled with the rest of the panel at face value.
+
+\subsection{Negative rebuild capacity}
+
+Nine countries (nominal basis) have $\mathrm{ROE} < g$, implying
+$\phi^- > 1$: an explosive buffer under the model's linearisation. This is
+economically a coherent prediction --- a banking system that cannot fund
+its own required growth from earnings needs continuous external capital
+injection to avoid a widening deficit --- but it is not estimable as an
+ordinary autoregressive coefficient, and four of the nine (Argentina,
+Turkey, Belarus, Tajikistan) are also flagged above for basis-sensitivity.
+
+\paragraph{Decision, fixed before estimation (31 July 2026).} All nine are
+treated as a \textbf{separate documented subsample}, reported alongside
+the main estimation rather than pooled into it or dropped. Two of the
+three options considered are rejected on stated grounds: an estimator
+accommodating $\phi^- \geq 1$ is not adopted, because no such estimator
+has been validated on known truth in this project --- standing practice
+throughout this project is to validate any estimator against simulated
+data of known truth before applying it to real data ---
+and adopting one now, for exactly the
+observations that would otherwise embarrass a linear fit, is the kind of
+choice this document exists to prevent; outright exclusion under
+Section~\ref{sec:exclusions} is not adopted either, because negative
+rebuild capacity is not one of the four violations of B1--B2 listed
+there --- it is a prediction of the model at these parameter values, not
+a breakdown of its premises, and excluding a model's own predicted
+regime because it is awkward to estimate is not a defensible exclusion
+ground. A separate subsample is the only option that reports the
+observation rather than discarding or mis-estimating it. The main-sample
+result and the nine-country subsample result must both be reported;
+neither may be presented alone.
+
+
+\section{The deleveraging channel: B2 is incomplete, but the omission is
+not growth-correlated}
+\label{sec:deleveraging}
+
+Assumption B2 states that a capital deficit can only be closed by earning
+it back. That is incomplete: a deficit can also be closed by shrinking the
+denominator --- shedding risk-weighted assets. Post-2008 European bank
+capital ratios recovered substantially through balance-sheet contraction
+rather than through profitability, so this is not a hypothetical channel.
+
+The concern this raised was sharper than mere incompleteness. If
+deleveraging is \emph{cheaper when growth is low} --- shedding assets costs
+market share in a boom and much less when every competitor is shrinking
+--- then the omitted channel would be correlated with $g$, and the
+regression of $\phi^-$ on $(\mathrm{ROE}-g)$ would suffer omitted-variable
+bias in a known direction: steeper than $-1$. That is the same direction as
+the small-sample AR bias already documented, so the two would be
+confounded and neither could be identified from the other.
+
+\paragraph{Test.} Using IMF FSI risk-weighted-asset levels
+(\texttt{FS\_ODX\_ARW\_FSKRC\_XDC}, available for 66 of the 77 panel
+countries with clean overlap), quarterly RWA growth was computed and split
+by regime, with the deficit indicator taken from the buffer ratio. The
+statistic is the gap: surplus-quarter RWA growth minus deficit-quarter RWA
+growth, so a positive gap means RWA grows more slowly (or contracts) when
+the buffer is under pressure.
+
+\paragraph{Result 1: the channel is real.} Sixty-four percent of countries
+show a positive gap, with a cross-country mean of $1.19$ percentage points
+per quarter. Banks do shrink risk-weighted assets when capital is short.
+B2 as written omits something that happens.
+
+\paragraph{Result 2: it is not growth-dependent, and the identification
+concern does not survive.} The correlation between a country's average
+nominal growth and its deleveraging gap is $+0.33$ --- the \emph{opposite}
+sign to the one that would generate the feared bias. That weak positive
+association is itself fragile: it falls to $+0.22$ once Eswatini and
+Argentina are excluded (both already flagged in
+Section~\ref{sec:exclusions}; Eswatini's gap of $19.7$ is more than double
+any other country's, and Argentina's nominal growth is almost entirely
+inflation), and the rank correlation --- which prevents two extreme
+observations from driving the estimate --- is $0.19$ ($p = 0.13$) on the
+full sample and $0.16$ ($p=0.20$) excluding those two. A median split on
+growth is the clearest statement: low-growth countries average a gap of
+$1.17$, high-growth countries $1.21$. Indistinguishable.
+
+\paragraph{Consequence.} The deleveraging channel is a
+\textbf{model-completeness} issue, not a \textbf{slope-identification}
+threat. It belongs in the theory as an extension --- a deficit has a slow
+cheap route (earn) and a fast costly one (deleverage), with the mix
+depending on how binding the shortfall is --- but it does not need to be
+resolved before the main cross-sectional estimation can be trusted, and the
+overshoot to $-1.2/-1.3$ observed in simulation remains attributable to
+small-sample AR bias rather than to this omission. This corrects a concern
+raised earlier in the project's development, which anticipated the opposite
+finding.
+
+\paragraph{Coverage note.} Ten panel countries have no RWA level series at
+all: Ecuador, Estonia, Croatia, Latvia, Malta, Netherlands, Palestine,
+Slovakia, \textbf{the United States}, and Kosovo. This is a coverage gap on
+the outcome variable, layered on the gaps already documented for the
+regime variables, and the absence of the United States in particular should
+be stated rather than passed over.
+
+\paragraph{Eswatini.} The largest single outlier ($19.7$pp gap, more than
+twice the next) was investigated rather than left unexplained. No
+documented systemic banking crisis or bank resolution was found. What does
+exist is a well-documented 2010--11 fiscal crisis --- a collapse in
+Southern African Customs Union revenue --- at the very start of Eswatini's
+FSI window, combined with an IMF assessment that Eswatini's banks carry
+large exposures to the government such that a fiscal shock propagates
+directly into the financial sector. This is a sovereign shock transmitted
+to a very small banking system, not a banking crisis of the kind
+Section~\ref{sec:exclusions} enumerates. It is therefore a candidate for
+the size-based screen rather than the event-based one, and is flagged for
+manual review rather than automatic exclusion.
+
+
+\section{Estimating specification: regional fixed effects, with pooled OLS
+reported alongside}
+\label{sec:spec}
+
+Comparing a small sub-Saharan banking system directly against a large
+European one attributes to the model's mechanism what may simply be
+structural difference between economies operating under different
+pressures. The main specification therefore includes regional fixed
+effects, identifying the slope from \emph{within}-region variation in
+$(\mathrm{ROE}-g)$:
+\[
+  \hat\phi^-_i = \alpha_{r(i)} + \beta\,(\mathrm{ROE}_i - g_i)
+  + \varepsilon_i,
+  \qquad \text{model prediction } \beta = -1 .
+\]
+Pooled OLS without regional effects is reported alongside, so a reader can
+see directly whether the result depends on cross-regional comparison.
+
+\paragraph{Grouping.} Regions are assigned on \textbf{geographic proximity
+alone}. Political affiliation, trade arrangements, currency blocs and
+alliance structures are deliberately ignored; the grouping is meant to
+capture the shared economic environment that comes with location, not
+institutional membership. Eleven regions result:
+
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Region & $n$ & mean $(\mathrm{ROE}-g)$ & within-region sd \\
+\midrule
+Europe        & 19 & $3.02$  & $4.22$ \\
+Sub-Saharan Africa & 16 & $6.69$  & $5.47$ \\
+Latin America & 14 & $3.15$  & $11.23$ \\
+Southeast Asia & 6 & $4.93$  & $3.02$ \\
+Oceania       & 5  & $10.88$ & $4.82$ \\
+West Asia     & 3  & $-2.25$ & $6.35$ \\
+South Asia    & 3  & $0.99$  & $7.94$ \\
+East Asia     & 3  & $6.65$  & $3.48$ \\
+Middle East   & 2  & $7.31$  & $0.82$ \\
+North America & 2  & $8.78$  & $5.37$ \\
+Central Asia  & 2  & $-8.81$ & $4.87$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{What fixed effects cost.} Decomposing the regressor's variance,
+$24.9\%$ is between-region and $75.1\%$ within. Regional effects therefore
+discard about a quarter of the identifying variation, leaving three
+quarters --- ample for the slope test --- at a cost of eleven degrees of
+freedom ($n=75$ falls to $63$ residual df). No region is a singleton, so
+every observation contributes.
+
+\paragraph{Three grouping decisions, stated rather than buried.} Georgia,
+Armenia and Turkey are land-contiguous with both Europe and the Middle
+East; rather than force a choice they are grouped as West Asia. Korea is
+placed with Hong Kong and Macao as East Asia, not Southeast Asia. Bhutan,
+Sri Lanka and the Maldives form South Asia; the region is not labelled
+``India'' because India is not in the panel. Each of these would shift the
+relevant regional means, and any of them is arguable; they are recorded here
+so the choice is auditable rather than implicit.
+
+\paragraph{An incidental benefit, and a cost.} Geographic grouping absorbs
+some concerns that had been handled by separate rules. Latin America's
+within-region standard deviation of $11.23$ --- far the largest, and driven
+mostly by Argentina --- means regional effects partially absorb the
+high-inflation problem of Section~\ref{sec:units} without a dedicated
+exclusion. Central Asia separating cleanly from the Middle East
+($-8.81$ against $+7.31$) is the grouping working as intended: an earlier
+ad-hoc grouping had averaged those together and concealed the difference.
+
+The cost is specific and should not be glossed. With between-region
+variation removed, the specification can no longer test whether
+structurally slower-growing \emph{regions} carry systematically higher
+persistence. Given the growth distribution documented in
+Section~\ref{sec:decomp} --- the panel contains almost no genuine
+stagnation cases --- little is lost in practice, but the cross-regional
+form of the stagnation claim becomes untestable by construction rather
+than merely underpowered. That is why pooled OLS is reported alongside
+rather than discarded.
+
+\section{Economic grounds for excluding specific episodes}
+\label{sec:exclusions}
+
+Assumptions B1--B2 describe a going concern whose capital adjusts only
+through retained earnings (deficit) or a payout decision (surplus). Four
+situations are identifiable, in advance, as violations of this description
+rather than as instances of it:
+
+\begin{enumerate}
+\item \textbf{External recapitalisation.} Where a shortfall is closed by a
+  public injection, a bailout facility, or a state guarantee converted to
+  equity, the deficit closes by fiat, not by earning it back. This is the
+  single most consequential exclusion, because it is \emph{not neutral}: a
+  recapitalised deficit closes fast without being earned, which pushes the
+  observed $\hat\phi^-$ down. Removing these episodes therefore
+  \emph{raises} estimated persistence and flatters the model's prediction
+  at low growth --- the opposite of a conservative adjustment, and it must
+  be reported as such.
+
+\item \textbf{Payout restriction.} Where dividends and buybacks are
+  prohibited by supervisory action --- the near-universal 2020--21
+  restriction across advanced-economy banking systems being the largest
+  instance in this sample window --- $\delta_p$ is set to zero externally,
+  so $\phi^+ = 1$: surpluses become perfectly persistent, exactly the
+  reverse of B2's assumption that a surplus is a policy choice.
+
+\item \textbf{Resolution or nationalisation.} Where a bank is resolved,
+  nationalised, or subject to an imposed balance-sheet contraction, the
+  going-concern premise behind B1's growth identity does not hold.
+
+\item \textbf{Definitional discontinuity.} The Basel~II to Basel~III
+  transition changed what counts as regulatory capital, and adoption dates
+  differ by jurisdiction, producing a level break in $z$ at a
+  country-specific date unrelated to any economic event.
+
+\end{enumerate}
+
+\paragraph{A fifth, added after the units correction: chronic high
+inflation.} Where a country's nominal growth rate is dominated by
+inflation rather than real activity (Argentina and, over parts of the
+sample window, Turkey and Belarus), the linear relationship
+$\phi^- = 1-(\mathrm{ROE}-g)$ conflates a real economic mechanism with a
+nominal accounting phenomenon that the model does not describe. These are
+candidates for a separate high-inflation subsample rather than for the
+main estimation, pending a decision on whether the model should be
+respecified in real terms with a correspondingly real measure of
+$\mathrm{ROE}$.
+
+\paragraph{Protocol.} Event windows and the high-inflation flag are fixed
+from external, pre-existing sources --- Laeven and Valencia's systemic
+banking crisis database, in its current vintage extending through 2025
+(IMF Working Paper WP/26/94, May 2026), for the first four grounds; a
+simple threshold on average CPI inflation, fixed before estimation, for
+the fifth --- \emph{before} any regression is run. Results are reported
+with the flagged episodes and countries included and excluded, side by
+side. A rule chosen after seeing its effect on the estimated slope is not
+a rule.
+
+\paragraph{What this is not.} The country-level amplitude screen used
+earlier in sample construction (excluding, on the basis of return-on-equity
+volatility alone, observations such as Ukraine during the war, the 2013
+Cyprus bail-in, and the Greek banking crisis) conflates measurement noise
+from a national ratio dominated by one or two institutions with genuine
+systemic stress. The former is a data-quality problem and a candidate for
+exclusion; the latter is exactly the kind of episode a model of
+capital-buffer dynamics under stress ought to be tested against, not
+screened away from. Where volatility is high for an identifiable systemic
+reason, the preferred treatment is a robust estimator that limits its
+leverage, or an explicit crisis subsample reported alongside the main
+result, not deletion.
+
+\section{The country universe}
+\label{sec:universe}
+
+Earlier versions of this panel drew on a fixed list of 77 areas. That list
+excluded roughly half of the areas reporting the capital ratio, including
+several with more usable history than areas it retained, and no rationale
+for it is recorded anywhere in this project. Two candidate explanations
+were tested directly against the source and both were rejected: it is not
+the set of areas reporting both the capital ratio and return on equity
+(those two indicators are reported by an identical set of areas), and it
+does not correspond to any standard advanced-versus-emerging
+classification. It is not reconstructed here. It is replaced.
+
+\paragraph{The rule.} The universe is every area the source reports for
+the indicator that is a sovereign state or dependent territory ---
+operationally, an ISO~3166-1 alpha-2 code, together with Kosovo, which is
+an exceptional reservation rather than a formally assigned code and is
+admitted by name. Codes that are regional or income-group aggregates
+rather than reporting jurisdictions are excluded and named individually in
+the panel output. The rule is implemented once, in
+\texttt{panel\_universe.py}, and imported by every script that needs a
+country universe, so the two panel constructions cannot drift apart.
+
+\paragraph{No history screen at this stage.} Whether an area has enough
+observations to support an estimate is a property of the estimator, not of
+the universe, and it is applied inside the estimation loop and reported as
+attrition alongside every other reason an area drops out. Folding a
+feasibility threshold into universe construction is what made the previous
+list unauditable: it merged the question of which areas exist for this
+purpose with the question of which areas carry enough data, and left only
+the intersection visible. Keeping them separate means every exclusion is
+attributable to a stated cause.
+
+\section{Currency-union pseudo-replication: a checked and rejected
+exclusion}
+
+When the country universe was rebuilt (Section~\ref{sec:universe}), two
+clusters of areas were noticed to return near-identical numbers of
+observations: the Eastern Caribbean-adjacent group (Anguilla, Antigua and
+Barbuda, Dominica, Grenada, St Kitts and Nevis, St Lucia, Montserrat, St
+Vincent and the Grenadines) and the CEMAC-adjacent group (Cameroon,
+Central African Republic, Republic of Congo, Gabon, Equatorial Guinea,
+Chad). Both are currency unions with shared supervisory arrangements, so
+the natural suspicion was that their members report a single aggregated
+banking system, in which case treating them as independent observations
+would insert eight or six near-duplicate points into any cross-country
+median or dispersion statistic.
+
+\paragraph{Decision, taken before testing.} The suspicion was recorded as
+a flag in the panel output, not acted on as an exclusion. A pattern in
+observation counts is not evidence about the underlying series, and
+excluding countries on a plausible-sounding conjecture is precisely the
+practice this document exists to prevent.
+
+\paragraph{Test.} \texttt{panel\_currency\_union\_check.py} compares the
+actual reported value series, pair by pair within each cluster: the
+correlation across jointly observed quarters, and the fraction of
+quarters where two members report numerically identical values. Shared
+reporting would produce correlations near one together with a high
+identical-value fraction.
+
+\paragraph{Result: the suspicion is wrong.} Across all $28$ Eastern
+Caribbean pairs and all $15$ CEMAC pairs, the fraction of numerically
+identical quarters is \emph{zero}. Correlations are scattered across
+roughly $[-0.77, +0.74]$, many of them negative, with no pair approaching
+the near-unity that duplicated reporting would produce. The single
+highest, Equatorial Guinea and Chad at $+0.74$ with no identical values,
+is unremarkable co-movement between two small oil-exporting economies
+sharing a currency and a commodity cycle --- an economic correlation, not
+a reporting artefact.
+
+\paragraph{Consequence.} These are independent national series whose
+sample windows happen to begin together, which is what a common
+supervisory reporting start date produces. No exclusion is warranted,
+the flag has been removed from the panel script, and this section is the
+record of why. The test should be re-run if the source's coverage
+changes.
+
+\section{The Basel III attempt: a documented negative result}
+\label{sec:basel-negative}
+
+Applying ground~4 to real data did not go as the diagnosis leading to it
+suggested it would, and the failure is instructive enough to record in
+full rather than pass over.
+
+\paragraph{The pattern that motivated the attempt.} Constructing $z$ from
+each country's own expanding-mean reference (Section~\ref{sec:units} and
+its validation) and applying it to the real 77-country panel produced only
+26 non-degenerate country estimates out of 77 --- a two-thirds attrition
+rate against the classification guard. Among the thirteen countries with a
+\emph{complete} surplus skew (zero deficit quarters observed at all), every
+single one had an FSI sample window spanning the original Basel~III capital
+conservation buffer phase-in, sourced to the Bank for International
+Settlements' own international timetable (1 January 2013 for the CET1
+step-up, phased to full effect 1 January 2019) and confirmed directly for
+two of the thirteen: South Africa, via the South African Reserve Bank's own
+Banks Act Circular 4 of 2016, and Indonesia, via OJK Regulation
+No.\,11/POJK.03/2016. Eleven of the thirteen are BCBS, EU, or G20 members,
+jurisdictions with essentially no discretion over whether to follow the
+international schedule.
+
+\paragraph{The mechanism, confirmed by simulation before touching real data
+again.} A one-time, Basel-style level shift injected into an otherwise
+clean simulated capital-buffer process reproduces the symptom: degeneracy
+under a continuous expanding-mean reference rises from near zero to 40\%.
+Segmenting the reference at the shift --- restarting the expanding mean
+after the break rather than letting one continuous average straddle a
+change in what ``normal capital'' means --- cuts that to 22\%. The
+mechanism is real.
+
+\paragraph{The result on real data.} Segmenting the real panel's
+expanding-mean references at 1 January 2019 did not improve the usable
+count: 25 non-degenerate countries against 26--27 under the unsegmented
+construction, a wash within noise. More importantly, \emph{none of the
+thirteen targeted countries were rescued into non-degenerate status}. Two
+came close --- Latvia and the Netherlands were four and three observations
+short of the minimum-regime threshold respectively --- but most were not:
+Australia showed zero deficit quarters even measured against a reference
+that restarts after the transition, over roughly nine years of subsequent
+data. Segmentation instead lost five previously usable countries (Sri
+Lanka, Macau, Nicaragua, Eswatini, T\"urkiye) while gaining three different
+ones, one of which --- the United States, with an anomalously large
+$\hat\lambda = 1.61$ --- is better explained as noise from a thin
+post-break window than as signal.
+
+\paragraph{Why this happened, and what it establishes.} Segmenting a
+reference trades access for precision: splitting one long series into two
+shorter ones repairs the classification (the split becomes balanced) but
+shortens the sample each regime estimate draws on, and the resulting
+small-sample attenuation offsets the gain almost exactly. Simulation
+confirmed this in advance --- mean $\hat\lambda$ under segmentation was
+statistically indistinguishable from the unsegmented value, both well below
+the true parameter used to generate the data --- so the real-data outcome
+is not a surprise in hindsight, though it was not obvious before the
+attempt was made. A single calendar break, however well sourced, cannot
+simultaneously fit every country's true contamination structure: it
+resolves the mechanism for some observations and introduces a new mismatch
+for others, netting out to no improvement in aggregate even where the
+underlying diagnosis is correct.
+
+\paragraph{Disposition.} Basel~III timing is not abandoned as an
+explanation --- it remains the best-supported account of why a large block
+of otherwise well-constructed observations classify as degenerate --- but
+time-series segmentation is not the right tool to act on it. The
+recommended path, taken up after the remaining exclusion grounds in this
+section are applied, is to control for the transition at the
+\emph{regression} stage: a post-2019 indicator or interaction term on the
+cross-sectional estimates from the \emph{unsegmented} construction, which
+does not cost the sample length that segmentation does. Whether that
+control absorbs the pattern better than segmentation did is not yet known
+and should not be assumed.
+
+\end{document}

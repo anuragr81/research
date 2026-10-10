@@ -1,0 +1,206 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\usepackage[round]{natbib}
+
+\title{Asymmetric Capital Control: Executive Summary}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\noindent
+Codes in parentheses refer to results in the proofs document, which
+carries an index of them. Claims not so marked are either framing or are
+attributed to the literature.
+
+\bigskip
+
+Two banks facing identical regulation can run visibly different capital
+policies, and the difference matters: one that treats a shortfall against
+its own target as far worse than an equivalent \textbf{surplus} is good will hold
+more capital, pay out later, and recapitalise sooner than the rules alone
+require. Whether that conservatism comes from the regulation or from the
+bank's own asymmetric attitude to shortfalls determines how it responds
+when the rules change---and the two are not distinguishable by inspection,
+because both produce a bank holding more capital than the minimum.
+Recovering the preference separately from the regulation is therefore the
+prior question, and this paper's central finding is that the asymmetric
+aversion is invisible in the natural \textbf{volatility-based measure} of it, and
+visible instead in the thresholds the bank commits to. In a solved model
+of a bank managing its \textbf{capital buffer} under a \textbf{regulatory cap}, the
+\textbf{definitional evaluation} of the \textbf{deficit}-to-\textbf{surplus} \textbf{volatility ratio},
+computed directly from the model's structure rather than estimated,
+depends only on \textbf{cap geometry}---how the \textbf{regulatory cap} varies with the
+\textbf{buffer}---and carries no information about the preference at all~(SCG). The
+preference does show up in where the bank commits to act, and both
+responses are obtained in closed form: a more shortfall-averse bank
+retains a larger \textbf{buffer} before paying out at the \textbf{dividend barrier},
+and recapitalises earlier, from a higher level of capital, at the
+\textbf{recapitalisation trigger}~(TCS). The \textbf{fixed issuance cost} moves that
+trigger the opposite way~(KCS), and the opposition of the two is
+decisive: it renders the Jacobian of the two thresholds in the two
+parameters non-singular, so preference and cost are jointly identified
+from the boundaries alone~(IDN). Much of empirical finance reads a firm's
+risk attitude off its volatility; in this model that \textbf{identification}
+fails outright, and the decision boundaries carry the information
+instead.
+
+Two structural facts underpin that finding. First, setting the asymmetry
+parameter to its neutral value removes the \textbf{shortfall penalty} entirely,
+giving an \textbf{exact nesting} of the \textbf{risk-neutral benchmark} rather than a
+limiting approximation of it~(NST), so the parameter measures asymmetry in
+excess of what regulation and costs alone would produce. Second, because
+the \textbf{shortfall penalty} is kinked-linear rather than S-shaped, the running
+payoff stays concave for every degree of asymmetry~(RPC). This is the
+paper's departure from \textbf{reference}-dependent models built on the S-shaped
+\textbf{value function} of prospect theory \citep{kahneman1979}, which are convex
+below the \textbf{reference} and therefore require a concavification argument
+before any threshold structure can be recovered at all. The claim is
+stated at exactly that strength and no further: it concerns the
+objective's flow term, and does not deliver a concave \textbf{value function}. The
+\textbf{value function} is in fact locally convex above the \textbf{recapitalisation}
+trigger~(LNC), but that non-concavity is caused by the \textbf{fixed issuance cost}
+and is present even at the neutral parameter value, so it is localised and
+cost-driven rather than global and preference-driven---precisely the
+difference from the S-shaped case.
+
+A \textbf{discrete-time model} is worked out first and closed completely, with the
+\textbf{capital buffer} written as a ratio of equity to \textbf{required capital}. The
+\textbf{continuous-time formulation} restates the same bank's problem with three
+controls of distinct type: the \textbf{classical control} of \textbf{risky exposure},
+constrained by the \textbf{regulatory cap}; the \textbf{singular control} of \textbf{dividends},
+acting at the \textbf{dividend barrier}; and the \textbf{impulse control} of
+\textbf{recapitalisation}, carrying both a fixed and a \textbf{proportional issuance cost}.
+
+The \textbf{regulatory cap} is not a single constraint but two regimes, a solvency
+branch and a liquidity branch, with the binding one switching at the level
+where they cross. The bank's \textbf{capped exposure} is the smaller of the two at
+each point, which gives the cap a kink of its own, distinct from the kink
+in the preference. A consistency condition on the parameters governs
+behaviour at the \textbf{distress boundary}: the drift there is positive only if
+the return on assets exceeds the return on liabilities, which the
+parameters used throughout satisfy~(CCP). This is what pushes the \textbf{buffer}
+away from distress rather than into it, and it is the reason the distress
+boundary is never reached under the solved policy.
+
+An \textbf{accounting identity} ties the bank's \textbf{return on equity} to its growth and
+retention~(ACI). \textbf{Deficits} are taken to decay more slowly than \textbf{surpluses}, a
+\textbf{persistence asymmetry}~(PSA), and from that the central discrete-time
+result follows: the \textbf{volatility ratio} is a fixed power of the asymmetry
+parameter~(FPV), depending only on the \textbf{saturation limits} of the transition
+between the two states and not on how the transition is shaped in
+between~(ROB). The same recursion is observationally equivalent to a
+standard \textbf{asymmetric volatility specification} of the EGARCH class~(EGE), so
+the ratio could in principle be recovered from returns without observing
+\textbf{required capital} directly, and a first-passage argument gives the sojourn
+time---the expected length of time the \textbf{buffer} spends below the
+\textbf{reference}---in closed form~(SJT).
+
+In continuous time, a \textbf{liquidation payoff} bounds the \textbf{value function} from
+below~(LQB), and a change of variable shows that the discrete-time state
+and the continuous-time \textbf{capital buffer} are one state measured from one
+origin~(TSO). The apparent breakdown of the model at the distress
+boundary, the point at which the \textbf{buffer} exactly matches \textbf{required capital},
+turns out to be a \textbf{coordinate artefact} rather than a feature of the
+problem: in the reconciled coordinate the model is well-behaved
+everywhere, and the boundary is never actually reached~(CDA). That
+reconciliation is what makes it meaningful to compare the same
+preference's legibility in the thresholds and in realised volatility on
+equal footing.
+
+A separate finding concerns where the \textbf{regulatory cap} actually binds. Under
+the solved policy the cap is active across the whole \textbf{inaction region}: the
+solver searches the exposure over a grid spanning the admissible range and
+retains the maximiser, so a slack optimum would have been found had one
+existed, and at almost every solved case none is~(CBI). What closes the
+problem is therefore the \textbf{impulse control} rather than any interior
+relaxation of the cap. The paper states this at the strength it has---a
+finding at these parameters rather than a theorem, with the formulation
+accommodating either outcome without modification---and the solver
+producing it is separately documented and validated~(SLV).
+
+The thresholds' \textbf{comparative statics} give the fuller picture, and they
+are theorems rather than observations. Because the asymmetry parameter
+enters the objective linearly and never restricts the admissible set, the
+sensitivity of value to it is the expected discounted shortfall incurred
+under the optimal policy, and every boundary response reduces to a
+property of that single object~(ENV). Both smooth-fit conditions then
+supply its boundary data, and the derivatives follow in closed form:
+$dy^*/d\lambda_S$ from the second-order fit at the barrier ---
+the first-order condition being degenerate there --- and $dx_L/d\lambda_S$
+from a first-order expansion at the hitting time~(TCS). The
+\textbf{fixed issuance cost} admits the identical treatment with the discounted
+count of injections in place of the shortfall, and the signs oppose on the
+trigger: a steeper penalty makes the bank intervene earlier, a larger
+fixed cost makes it wait longer, while both raise the barrier~(KCS). That
+opposition is what makes the two parameters separately recoverable, and it
+does so unconditionally rather than by comparing magnitudes~(IDN).
+Empirically the two write themselves into different observables ---
+preference moves the levels, the \textbf{fixed issuance cost} moves the
+\textbf{trigger-to-target gap}, which vanishes exactly at zero fixed cost~(KSW). That threshold geometry should carry preference
+information is not without precedent at the firm level---\citet{angelis2025}
+derives an inaction band with two direction-dependent targets from loss
+aversion in a price-setting problem---but that model is a discrete
+behavioural one rather than a continuous-time control problem, and does
+not run the inverse mapping from band to preference.
+
+What the results rest on is stated rather than assumed. Differentiability
+of the value in each parameter needs no hypothesis at all: the value is a
+supremum of functions affine in that parameter, hence convex in it, hence
+differentiable off a countable set~(REG). Differentiability of the
+boundaries reduces to the implicit function theorem, whose non-degeneracy
+conditions turn out to be the same ones that sign the derivatives, so each
+does double duty~(BDR). The two second-order conditions the identification
+needs are likewise theorems: because the impulse operator is affine, the
+\textbf{injection target} is independent of where the injection is made from, and
+the required curvature at each boundary follows from a sign-change
+argument and from the variational inequality on the intervention
+region~(SOC). Verification itself is now unconditional: it rests on four
+hypotheses, all of which hold, and concavity is not among them --- its
+absence is therefore no obstruction~(VER). The one point that had
+remained --- whether the \textbf{value function} is continuously
+differentiable at the \textbf{recapitalisation trigger} --- is settled by
+the same variational inequality: a corner there would have to be convex,
+and a convex corner is incompatible with the value function being a
+viscosity supersolution, so smooth fit holds and the trigger derivative
+is continuous~(SMF). What the numerics could not resolve, because the
+discrete scheme carries a corner at the boundary by construction, the
+argument settles by showing a corner cannot exist. Each of the
+document's thirty-five numbered results carries one canonical verifier,
+recorded in its verification appendix: five are proved in Lean with no
+unproved gaps, four more have their algebraic cores machine-checked in
+Lean with the analytic input stated as an explicit hypothesis, twelve
+are exact symbolic checks, and the remainder are proofs in the text or
+labelled numerical findings. Separately, whether the
+\textbf{induced variance asymmetry}, as opposed to its \textbf{definitional evaluation},
+moves with the \textbf{asymmetry parameter} is weakly identified rather than
+absent, and the paper reports the magnitude rather than claiming
+invariance.
+
+Beyond those, the direction the finding opens is one of scope. The
+mechanism rests on a specific choice: the \textbf{kinked-linear penalty}, which
+keeps the \textbf{running payoff} concave~(RPC) and, by the same feature, keeps the
+thresholds responsive to the preference. Whether committed thresholds
+remain informative under other classes of \textbf{shortfall penalty}---and which
+classes preserve the contrast between uninformative variances and
+informative boundaries---would establish how far the result extends past
+the case solved here. \citet{armstrong2019} suggests the question has a
+sharp answer: their irrelevance results for constraints require a
+disutility that is sublinear in the left tail, a hypothesis a
+\textbf{kinked-linear penalty} does not satisfy, which is consistent with limits
+binding, and therefore revealing, in exactly this case. Establishing that
+connection is future work and not a result of this paper. To our knowledge
+no existing firm-level model combines singular payout control with impulse
+\textbf{recapitalisation} under an asymmetric preference rather than a constraint;
+the recent literature generalising preferences in dividend control remains
+singular-only \citep{chen2026,cao2026}. What this paper settles is which
+quantities in a solved bank's policy carry the preference and which
+cannot, and the answer holds whether or not any bank is ever measured.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

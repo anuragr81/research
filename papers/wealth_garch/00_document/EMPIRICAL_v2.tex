@@ -1,0 +1,288 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+
+\newcommand{\lamV}{\lambda_V}
+\newcommand{\lamS}{\lambda_S}
+\newcommand{\lamhat}{\hat\lambda}
+
+\title{Asymmetric Capital Buffer Control:\\ Empirical Companion}
+\author{}
+\date{11 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This note is the empirical companion to \emph{Asymmetric Capital Buffer
+Control} (PROOFS\_v2); numbered results cited here --- Theorem~1,
+Proposition~11, Remark~1 --- refer to that document. It
+states what the data say about the variance-asymmetry parameter $\lamV$,
+against the null of a risk-neutral bank facing the same regulation. Every
+figure below is regenerated from the scripts named in
+Section~\ref{sec:repro}; none is carried from an earlier draft. The
+primary analysis is the pre-registered design, reported exactly as run,
+including its attrition; a secondary analysis with an alternative
+reference construction is specified in Section~\ref{sec:secondary} with
+results deliberately pending its own validation.
+\end{abstract}
+
+\section{What is being estimated, and how}
+\label{sec:estimand}
+
+Theorem~1 makes $\lamV^4$ the ratio of conditional variances of the log
+capital-buffer state deep in deficit to deep in surplus. Two facts about
+estimating it, both established by simulation
+(\texttt{verify\_egarch\_recovery.py}), fix the design.
+
+\emph{First, $\theta$ and $\lamV$ are not jointly identified from
+routine-sized excursions.} With abundant data ($T=5000$) and the state
+ranging over $[-1.9, 1.4]$ against $\theta=1$, the profile log-likelihood
+in $\theta$ is flat to within about one point from $\theta=0.7$ to
+$\theta=5$ while the implied $\lamV$ runs from $1.37$ to $6.17$: many
+$(c,\theta)$ pairs are close to observationally equivalent, so $\theta$
+must come from outside the estimation. The practical consequence adopted
+here is an estimator that does not use $\theta$ at all: $\lamhat$ is the
+fourth root of the ratio of within-regime innovation variances, each from
+a within-regime AR(1) residual, so only the regime classification and the
+variance ratio enter.
+
+\emph{Second, conditional on that choice, recovery is clean.} At the null
+(true $\lambda=1$, $T=300$, twenty independent replications) the mean
+bias is $+0.085$ with standard deviation $0.119$, and the bias stays
+small and one-sided across a $(\phi,T)$ grid from $\phi=0.5$ to $0.95$
+and $T=150$ to $800$ --- shrinking to $+0.018$ at $(\phi,T)=(0.95,800)$.
+There is no free trend parameter whose mis-estimation could manufacture
+asymmetry, which is the failure mode that produced $\lamhat\approx 2$ at
+a true null in a sibling project's estimator. The small positive null
+bias means the estimator, if anything, overstates asymmetry slightly ---
+so it works against, not for, the direction of the finding reported
+below.
+
+\section{The null: what a risk-neutral bank would already show}
+\label{sec:null}
+
+The comparison value is not $\lamV=1$. A risk-neutral bank
+($\lamS=1$) facing the regulatory cap already generates asymmetric
+conditional variance, because the cap tightens exposure as the buffer
+erodes; the honest null is therefore $\lamV$ computed from the solved
+model itself. Two routes exist and only one survives.
+
+The \emph{definitional} route --- Theorem~1's ratio evaluated at the
+saturation limits --- is a constant of cap geometry,
+$\lamV = (\kappa_1/\kappa_3)^{1/2} = 2.599$ at the baseline, with no
+dependence on $\lamS$ or any preference or cost parameter
+(Proposition~11). It cannot serve as a benchmark for data that never
+reach the saturation limits, and it carries no information about
+$\lamS$.
+
+The \emph{estimator} route applies the same $\theta$-free estimator to
+paths simulated from the solved model. Computed on the
+convergence-certified solves (Remark~1) at
+$\lamS\in\{1.00, 1.10, 1.25, 1.50, 1.75, 2.00\}$, under three
+conventions:
+
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{6}{c}{$\lamS$} \\
+\cmidrule(lr){2-7}
+Convention & 1.00 & 1.10 & 1.25 & 1.50 & 1.75 & 2.00 \\
+\midrule
+(a) RWA$\sim$L, split at stationary mean & 1.3320 & 1.3269 & 1.2892 & 1.2724 & 1.2477 & 1.2347 \\
+(b) RWA$\sim$A, split at stationary mean & 1.4762 & 1.4764 & 1.4259 & 1.4038 & 1.3723 & 1.3545 \\
+(a$'$) RWA$\sim$L, split fixed at $R$ & 1.3100 & 1.3423 & 1.3590 & 1.3721 & 1.3967 & 1.4056 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three properties of this table matter. The $\lamS=1$ column is the
+risk-neutral null under each convention: $1.31$--$1.48$. The
+\emph{direction} in which $\lamV$ moves with $\lamS$ is
+convention-dependent: both moving-threshold conventions decrease
+(slopes $-0.10$ and $-0.13$ per unit $\lamS$), while the fixed-threshold
+convention increases ($+0.09$); the likely mechanism is that under a
+moving threshold the split point itself shifts with $\lamS$ (from
+$1.30$ to $1.43$ across the grid), confounding the $\lamS$ effect with a
+changing comparison point. The panel estimator of
+Section~\ref{sec:primary} classifies regimes against a moving,
+history-based threshold, so rows (a)--(b) are the relevant comparison
+for it, and under them $\lamV$ \emph{falls} as asymmetry rises. Finally,
+the smallest value anywhere in the table is $1.2347$: no admissible
+$\lamS$ in the solved range produces $\lamV$ below that, under any
+convention.
+
+\section{Primary analysis: the pre-registered design, as run}
+\label{sec:primary}
+
+Run on 11~August~2026 against the live IMF FSI panel under the stated
+universe rule (\texttt{panel\_universe.py}: every sovereign or
+dependent-territory area the source reports, no history pre-screen;
+152 areas returned, 151 sovereign, one regional aggregate excluded by
+name). Of the 151, 114 carry enough history to attempt estimation and 37
+are too short. The estimator produces a usable $\hat\lambda$ for
+\textbf{33 countries}: median $\mathbf{1.038}$, mean $1.132$, interquartile
+range $[0.963,\,1.288]$, fraction above one $0.61$. Ten of the 33 sit at
+or above the lowest model value; thirteen sit below one. One estimate
+(Equatorial Guinea) carries a within-regime AR coefficient of $-3.9$ and
+should be treated as unreliable regardless of its regime counts.
+
+The headline is robust to the universe correction: the previous,
+unexplained 77-country list gave median $1.0395$ on $n=26$; the full
+sovereign universe, roughly twice the size, gives $1.0379$ on $n=33$.
+Doubling the universe moved the median by $0.002$.
+
+\subsection{The attrition, stated}
+
+Of the 114 attempted, 81 do not yield an estimate, and the two mechanisms
+must be reported separately because only one is curable by threshold
+choice. \textbf{Structural} exclusions --- zero quarters in one regime,
+which no per-regime minimum can repair --- account for 24 countries, of
+which eighteen are advanced or EU economies: France (39 surplus quarters,
+0 deficit), the United Kingdom (44/0), Belgium (49/0), Sweden (39/0),
+Austria (51/0), Ireland (48/0), Israel (64/0), the Netherlands (56/0),
+Norway (52/0), and the remainder in central and northern Europe.
+\textbf{Near-miss} exclusions --- a nonzero smaller regime short of the
+per-regime minimum of 15 --- include Switzerland, Spain and Denmark at 2
+deficit quarters each, Luxembourg at 1, Greece at 3, Portugal at 6, and
+the United States at 14.
+
+The sharpened form of the selection finding is therefore: \emph{under a
+one-sided expanding-mean reference, the deficit regime is unobservable in
+every advanced banking system in the post-Basel~III sample.} Not thinly
+observed --- unobservable. A capital ratio that trends upward from the
+start of its reported history never falls below its own expanding mean,
+and the advanced economies are precisely the trending ones. An
+advanced-economy-only panel under this construction would have $n=4$
+(Canada, Estonia, Macao, San Marino). The measurable population is
+selected on the dynamics of the variable being measured, and the
+population of greatest interest for the theory is the one selected out.
+Section~\ref{sec:secondary} exists for exactly this reason.
+
+\subsection{Reading the result}
+
+The comparison must be made on the measured scale. The estimator is
+biased toward one, and the bias does not vanish with sample size: a
+process with true $\lambda=1.30$ measures $1.16$ at $T=60$ quarters and
+still $1.14$ at $T=20{,}000$, because observations near the
+classification boundary are assigned to a regime while their innovations
+reflect a mixture of both. It is a different estimand, not a small-sample
+artefact. The model's population value (Section~2) is therefore not the
+right benchmark for the panel median; the right benchmark is what the
+panel's own estimator returns when applied to the model
+(\texttt{results/lambda\_RN\_measured.py}: the solved model simulated at
+quarterly frequency over 60-quarter windows, estimated by the identical
+code path, 400 paths per parameter value).
+
+On that scale, the model class spans median measured values of
+$\mathbf{1.334}$ (risk-neutral, convention (a)) down to $\mathbf{1.152}$
+(the most asymmetric admissible parameter, $\lambda_S=2$), with
+convention (b) slightly higher throughout, and a per-path sampling
+standard deviation of $0.16$--$0.20$.
+
+Against this the panel median of $1.038$ sits below every cell of the
+grid: $0.30$ below the risk-neutral benchmark (roughly six to seven
+standard errors of a median of 33) and $0.11$ below even the most
+asymmetric admissible model (roughly two to three standard errors). The
+direction is unambiguous under both conventions and every admissible
+$\lambda_S$: \emph{measured deficit-state volatility in the usable panel
+is lower than a preference-free regulated bank would be measured at}.
+The magnitude, however, is modest once stated on the measured scale, and
+no claim is made here that a preference parameter is identified from it:
+13.2\% of individual simulated model banks measure at or below $1.038$
+over sixty quarters, so any single country at that level is unremarkable
+and the evidence rests entirely on the median of 33. The population
+value of the gap is roughly $0.20$ if the attenuation mapping is
+inverted, but that inversion is model-dependent and is not used for any
+claim.
+
+Two further cautions. First, the measured-scale model values are far
+flatter in $\lambda_S$ ($1.334$ to $1.152$ across the whole admissible
+range) than the population values, so the data compress exactly the
+variation that would be needed to read $\lambda_S$ back from a variance
+ratio --- consistent with the identification analysis in Section~2, and
+one more reason the committed thresholds, not the variance ratio, are
+the identifying moments if identification is ever attempted. Second, the
+usable panel is the mean-reverting, largely emerging-market subsample
+that the reference construction itself selected; the undershoot is a
+fact about that population, generalised to no other.
+
+\section{Secondary analysis: alternative reference (specified;
+results pending validation)}
+\label{sec:secondary}
+
+The attrition of Section~\ref{sec:attrition} motivates a second
+reference construction, recorded here \emph{before} its results are
+computed, for four reasons: the theory's reference is a threshold, not a
+country's own trend, so ``below your own past'' is not the estimand
+Theorem~1 defines; the surviving sample is selected on behaviour
+plausibly correlated with the quantity measured; the excluded countries
+are exactly the deep-banking-system economies the theory most concerns;
+and the model null of Section~\ref{sec:null} is computed from a
+stationary distribution, so the comparison currently holds only on the
+subsample where stationarity approximately obtains.
+
+\emph{Construction.} Per country, the reference is the full-sample mean
+of the log ratio, $R_i = \mathrm{mean}(\log\text{ratio}_{i,\cdot})$,
+constant over time; classification and the $\theta$-free estimator are
+otherwise unchanged. A trending series lies below its full-sample mean
+early and above it late, so both regimes exist for every country and the
+13 zero-deficit countries re-enter.
+
+\emph{Known costs, stated in advance.} The construction uses look-ahead
+--- the reference at date $t$ involves data after $t$ --- and for a
+trending series the regime label partially proxies for calendar time, so
+$\lamhat$ may pick up secular changes in volatility rather than
+state-dependence. Both effects are testable in simulation, and the
+design is therefore gated exactly as the primary was: it runs on
+simulated paths first --- recovery against the true-$z$ benchmark, a
+clean null with no manufactured asymmetry, and additionally a
+\emph{trended} null (upward-drifting ratio, symmetric shocks), which is
+the case the look-ahead concern targets --- and touches real data only
+if it passes all three. No bandwidth or window parameter is introduced,
+so there is no tuning margin between this specification and its result.
+
+\emph{Interpretation rule, fixed now.} If the secondary agrees with the
+primary (median well below the null range), the finding generalises
+beyond the mean-reverting subsample. If it disagrees, the primary result
+is evidence about the reference construction, not about banks, and
+neither number should be quoted without the other.
+
+\section{What this note does not establish}
+\label{sec:limits}
+
+The calibration behind the null is the project's stylised parameter set,
+not fitted to bank data. The pre-committed $\phi^-$ test, with its fixed
+treatment of the nine ROE${}<g$ countries, remains unexecuted, as does
+the bank-level feasibility check
+(\texttt{empirical\_design\_exclusions}). The RWA$\sim$A versus
+RWA$\sim$L choice is settled by the definitional argument that Basel's
+risk weights are asset-side, but has not been checked against the IMF's
+construction of FSKRC\_PT; the primary reading does not depend on it,
+since the median sits below the null under both. And whether the solved
+model's constructed value function is the value function --- the
+verification theorem --- remains open (PROOFS\_v2, ``What is not
+established''), so the null values here are properties of the certified
+numerical solution.
+
+\section{Reproduction}
+\label{sec:repro}
+
+Panel: \texttt{03\_empirical/design/expanding\_mean\_panel.py} (live IMF
+FSI fetch; requires network and \texttt{statsmodels}); run
+11~August~2026, output reproduced in Section~\ref{sec:primary}. Null
+curve: \texttt{02\_numerical/run\_lambda\_sweep.sh} at
+\texttt{max\_iter} $\ge 2000$, then
+\texttt{run\_lambda\_RN\_curve.sh} against
+\texttt{lambda\_RN\_panelconv.m}; the certified solves and the resulting
+\texttt{lambda\_V\_curve.csv} are in \texttt{03\_empirical/results/}.
+Estimator properties: \texttt{01\_theory/verify\_egarch\_recovery.py}
+(Parts A, B, E quoted in Section~\ref{sec:estimand}). The secondary
+analysis of Section~\ref{sec:secondary} has, deliberately, no results
+file yet; its validation harness extends the same script.
+
+\end{document}
