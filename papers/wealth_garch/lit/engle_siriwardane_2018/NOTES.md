@@ -37,6 +37,6 @@
   C2. The parallel ends at the object, since their asymmetry is a news
   response and not a ratio of state-dependent variances, and their residual
   goes to risk premia.
-- The project's earlier note in `00_reader/TODO.md` item B2 reports the same
+- The project's earlier reader TODO (item B2, retired, see `RETIREMENT.md`) reports the same
   figures (0.97, 0.86, 0.17, about 3%, 14% and 80%). They are now checked
   against the published text.

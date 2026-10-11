@@ -101,6 +101,26 @@ grounds.
 - `lit/litcheck.py` now refuses a stated page that maps before the first
   PDF page. Before, such a page made `pdftotext` read the whole document.
 
+## Carried from the retired documents, 11 October 2026
+
+From the reader TODO and the starter pack, retired at pin `4f57aab1`
+(`RETIREMENT.md`). None of these carries a row.
+
+- B3. Angelis (JEEA 2025). Full text blocked, embargoed to 15 Oct 2026, so
+  citable at abstract level only. Needed only if a row comes to rest on it.
+- C1. A K-sweep recording both thresholds directly, six solves at
+  K in {0, 0.001, 0.005, 0.01, 0.02, 0.05}. Illustration only.
+- C2. Convergence certification of the H-operator sweep. Illustration only.
+- F1. The KSW issuance question. The quarterly issuance rate (11.09%)
+  exceeded the annual rate (6.6%). Candidate cause, from the FDIC
+  definition of `EQCSTKRX`: banks under $100 million file it only in
+  December, and the field is net of buybacks and conversions.
+  `issuance_diagnostic.py` has not been run on real data.
+- The response d(level)/dK is not recorded and needs the solve files.
+- The retired summaries README left two bibliography items open (the page range
+  of Kahneman and Tversky, the volume and pages of `cao2026`). Neither is
+  cited by `MANUSCRIPT.tex`; they matter only if one is cited.
+
 ## Bundle mechanics
 
 - The MS-5 control resolves its literature row against the real record
@@ -115,11 +135,11 @@ grounds.
   cites rows M1, M3 and the solver illustration, and
   `00_reader/ledger_empirical.py` resolves them against `MANUSCRIPT.tex`.
   `run_all.sh` and `VERIFY_NOW.sh` no longer compile PROOFS_v2.
-- Older author documents still cite PROOFS_v2 numbering (listed in
-  `RETIREMENT.md`): `00_reader/PITCH_AND_SUMMARY.md`,
-  `THEORY_PAPER_STARTER.md`, `00_reader/TODO.md`, `TERMINOLOGY.md`,
-  `05_summaries/`, `06_empirical_starter/`. Whether to retire them is the
-  author's decision.
+- The older author documents that cited PROOFS_v2 numbering were retired
+  on 2026-10-11 (author's decision, pin `4f57aab1`). `RETIREMENT.md` maps
+  each to its new home. Their open items are under "Carried from the
+  retired documents" below. `HANDOVER_20261010.md`, the live handover of
+  the empirical companion, is kept.
 - `EMPIRICAL_v2.tex` has issues that predate the retirement: an undefined
   reference `sec:attrition` and overfull lines at its lines 37-41, 122-133,
   215 and 275-287.

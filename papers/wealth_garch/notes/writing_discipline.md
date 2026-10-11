@@ -75,7 +75,8 @@ that world out. A claim that cannot name its falsifier does not enter.
 ## 6. Manuscript terminology only, fixed and agreed (A)
 
 - One name per object. Agreed 2026-10-10, taken from
-  `00_reader/TERMINOLOGY.md` and the binding paragraph of
+  the reader terminology file (retired 11 Oct 2026, see `RETIREMENT.md`)
+  and the binding paragraph of
   `00_document/PROOFS_v2.tex`:
   - $\lambda_S$ is the **asymmetry parameter**, never "loss aversion".
     Loss-aversion language would need elicited-choice evidence that
@@ -97,7 +98,7 @@ that world out. A claim that cannot name its falsifier does not enter.
   - $\nu_1^2,\nu_3^2$ are the **saturation limits** of the $z$-volatility
     $\zeta$. Renamed 2026-10-10 from PROOFS_v2's $\kappa_1^2,\kappa_3^2$ so
     that $\kappa$ means only the proportional issuance cost.
-- The "also called" synonyms in `TERMINOLOGY.md` (payout barrier, injection
+- The "also called" synonyms of that terminology file (payout barrier, injection
   trigger, recapitalisation boundary, volatility ratio) do not enter the
   manuscript. One name each.
 - No new terms. If a term is not defined in the manuscript, use the

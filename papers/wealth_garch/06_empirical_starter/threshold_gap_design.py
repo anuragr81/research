@@ -1,8 +1,8 @@
 """
 threshold_gap_design.py
 
-DESIGN SKELETON for testing the KSW prediction (see EMPIRICAL_TEST_STARTER.md
-sec. 1 and 5). This script computes NOTHING resembling a final result. It:
+DESIGN SKELETON for testing the KSW prediction (see the retired KSW starter
+pack, sec. 1 and 5, at the commit named in RETIREMENT.md). This script computes NOTHING resembling a final result. It:
 
   1. defines event detection and gap computation as pure, testable functions;
   2. is validated here, in __main__, against SYNTHETIC data with a known,

@@ -17,11 +17,11 @@ Homes: a row ID of `MANUSCRIPT.tex` (K, M, L, C); `App. A` to `App. E` of
 file path.
 
 Documents that still cite PROOFS_v2's numbering and were not changed:
-`00_reader/PITCH_AND_SUMMARY.md`, `00_reader/THEORY_PAPER_STARTER.md`,
-`00_reader/TODO.md`, `00_reader/TERMINOLOGY.md`, `05_summaries/`,
-`06_empirical_starter/`, `HANDOVER_20261010.md`, the comments of
-`02_numerical/` and `01_theory/verify_document_figures.py`, and the headers
-of the Lean files. Their locators refer to commit `1d1a56f5`.
+`HANDOVER_20261010.md`, the comments of `02_numerical/` and
+`01_theory/verify_document_figures.py`, and the headers of the Lean files.
+Their locators refer to commit `1d1a56f5`. The older author documents that
+also cited it were retired on 2026-10-11 (section "Retired documents" at the
+end).
 
 ## Labels
 
@@ -237,3 +237,30 @@ Every decimal number in PROOFS_v2, with the line of its first occurrence.
 | `smooth_fit` | SmoothFit.smooth_fit (M10) |
 | `trigger_jump` | Envelope.trigger_jump (M5) |
 | `wode_of_envelope` | Envelope.wode_of_envelope (M4) |
+
+## Retired documents
+
+Retired on 2026-10-11 at the author's decision. Their last versions are at
+commit `4f57aab1`:
+
+    git show 4f57aab1:papers/wealth_garch/<path>
+
+`checks/verify_retirement.py` checks that each is readable there, gone from
+the tree, and named by no tracked file outside this one and the handover
+notes.
+
+| Path | What it held | Where it went |
+|---|---|---|
+| `00_reader/PITCH_AND_SUMMARY.md` | The paper in two lengths, synced to v2 on 11 Aug 2026 | `MANUSCRIPT.tex`, Table 1 (headlines) and Table 4 (conclusions) |
+| `00_reader/THEORY_PAPER_STARTER.md` | Starter pack for drafting the theory paper from PROOFS_v2 | `MANUSCRIPT.tex`. Of its section 8, the verification theorem and the regularity at the trigger are hypotheses in App. B, "What Lean does not carry"; the conditional concavity of $V$ is used by no row and is not carried. Its open items are in `TODO.md` |
+| `00_reader/TODO.md` | Pending items of the PROOFS_v2 era | Open items B3, C1, C2, F1 in `TODO.md`; E1 closed by `RateBased.tendsto_tanh_atTop` |
+| `00_reader/TODO.md.bak` | An older copy of the same | Nothing; superseded |
+| `00_reader/TERMINOLOGY.md` | Names of the model objects | `MANUSCRIPT.tex` App. C and `notes/writing_discipline.md` section 6 |
+| `05_summaries/EXECUTIVE_SUMMARY.tex`, `.pdf` | Summary of PROOFS_v2 | `MANUSCRIPT.tex` |
+| `05_summaries/SHORT_SUMMARY.tex`, `.pdf` | Summary of PROOFS_v2 | `MANUSCRIPT.tex` |
+| `05_summaries/THEORY_PITCH.md` | A seven-line pitch | `MANUSCRIPT.tex`, Table 1 |
+| `05_summaries/PROOFS_v2.pdf` | A copy of the retired PROOFS_v2 | Commit `1d1a56f5`, above |
+| `05_summaries/README.md` | Contents and open bibliography items of the folder | Bibliography items in `TODO.md` |
+| `05_summaries/references.bib` | A copy of `00_document/references.bib` | `00_document/references.bib` |
+| `06_empirical_starter/EMPIRICAL_TEST_STARTER.md` | Plan of the KSW empirical thread | `HANDOVER_20261010.md`; open item F1 in `TODO.md` |
+| `06_empirical_starter/HANDOVER.md` | Handover of the KSW thread, 12 Aug 2026 | `HANDOVER_20261010.md`; open item F1 in `TODO.md` |

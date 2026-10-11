@@ -111,8 +111,7 @@ updated to match. Only then do the two flags flip to `True`.
                              the lambda_V(lambda_S) curve computed from them
     00_reader/     ledger_empirical.py (EMPIRICAL_v2's claims, their
                      population and support, model support resolved
-                     against the rows of MANUSCRIPT.tex),
-                     PITCH_AND_SUMMARY.md, README.md
+                     against the rows of MANUSCRIPT.tex), README.md
 
     04_reproduce/  run_all.sh
 

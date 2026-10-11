@@ -7,6 +7,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COMMIT = "1d1a56f5"
 RETIRED = ["00_document/PROOFS_v2.tex", "00_document/PROOFS_v2.pdf",
            "00_reader/proof_registry.py", "00_reader/check_citations.py"]
+DOCS_COMMIT = "4f57aab1"
+DOCS = ["00_reader/PITCH_AND_SUMMARY.md", "00_reader/THEORY_PAPER_STARTER.md", "00_reader/TODO.md",
+        "00_reader/TODO.md.bak", "00_reader/TERMINOLOGY.md", "05_summaries/EXECUTIVE_SUMMARY.tex",
+        "05_summaries/EXECUTIVE_SUMMARY.pdf", "05_summaries/SHORT_SUMMARY.tex",
+        "05_summaries/SHORT_SUMMARY.pdf", "05_summaries/THEORY_PITCH.md", "05_summaries/PROOFS_v2.pdf",
+        "05_summaries/README.md", "05_summaries/references.bib",
+        "06_empirical_starter/EMPIRICAL_TEST_STARTER.md", "06_empirical_starter/HANDOVER.md"]
+DOC_NAMES = ["PITCH_AND_SUMMARY", "THEORY_PAPER_STARTER", "TERMINOLOGY.md", "EXECUTIVE_SUMMARY",
+             "SHORT_SUMMARY", "THEORY_PITCH", "EMPIRICAL_TEST_STARTER", "00_reader/TODO", "05_summaries"]
+EXEMPT = {"RETIREMENT.md", "checks/verify_retirement.py"}
+TEXT = (".md", ".tex", ".py", ".sh", ".txt", ".bib", ".lean", ".toml", ".m")
 results = []
 
 
@@ -94,8 +105,47 @@ if ok:
 present = [p for p in RETIRED if os.path.exists(os.path.join(ROOT, p))]
 check("R6 the retired files are gone from the tree", not present, f"{present}" if present else "")
 
+
+
+def git_prefix():
+    return subprocess.run(["git", "rev-parse", "--show-prefix"], cwd=ROOT,
+                          capture_output=True, text=True).stdout.strip()
+
+
+def readable_at(commit, paths):
+    prefix = git_prefix()
+    return [p for p in paths if subprocess.run(["git", "cat-file", "-e", f"{commit}:{prefix}{p}"],
+                                               cwd=ROOT, capture_output=True).returncode != 0]
+
+
+def tracked_texts():
+    out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True).stdout.split()
+    return {f: open(os.path.join(ROOT, f), errors="replace").read() for f in out
+            if f.endswith(TEXT) and f not in EXEMPT and not os.path.basename(f).startswith("HANDOVER")
+            and os.path.exists(os.path.join(ROOT, f))}
+
+
+def naming(texts):
+    return sorted({(f, n) for f, t in texts.items() for n in DOC_NAMES if n in t})
+
+
+print("-" * 72)
+print(f"RETIRED AUTHOR DOCUMENTS (read from git at {DOCS_COMMIT})")
+unread = readable_at(DOCS_COMMIT, DOCS)
+check("R7 every retired document is readable at the pinned commit", not unread, f"{unread}" if unread else "")
+still = [p for p in DOCS if os.path.exists(os.path.join(ROOT, p))]
+check("R8 the retired documents are gone from the tree", not still, f"{still}" if still else "")
+texts = tracked_texts()
+named = naming(texts)
+check("R9 no tracked file outside RETIREMENT.md and the handover notes names a retired document",
+      not named, f"{named}" if named else f"{len(texts)} files scanned")
+
 print("-" * 72)
 print("CONTROLS")
+check("R7-control a path never committed is reported unreadable",
+      readable_at(DOCS_COMMIT, ["00_reader/NO_SUCH_FILE.md"]) == ["00_reader/NO_SUCH_FILE.md"])
+check("R9-control a file naming a retired document is caught",
+      naming({"x.md": "see 00_reader/TERMINOLOGY.md"}) == [("x.md", "TERMINOLOGY.md")])
 fake = src + "\n\\label{prop:fabricated}\n\\section{A fabricated section}\nworth 9.8765 \\texttt{fake\\_lemma}\n"
 res, _ = audit(fake, md, row_ids)
 check("R-control a fabricated label, section, number and Lean name are all caught",

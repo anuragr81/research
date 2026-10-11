@@ -49,7 +49,7 @@ need them report SKIP with the reason.
     MANUSCRIPT.tex  the theory, as a verified skeleton (see README.md)
     MEASUREMENT_MAP.tex  how each model object is observed
     00_document/    EMPIRICAL_v2.tex, references.bib
-    00_reader/      TODO.md, ledger_empirical.py, TERMINOLOGY.md
+    00_reader/      ledger_empirical.py
     01_theory/      the SymPy verifiers
     lean/mathlib/   the Lean files, a Lake project pinned to Lean
                     v4.32.0-rc1 and Mathlib v4.32.0-rc1; see
@@ -61,7 +61,6 @@ need them report SKIP with the reason.
                     kink at x_L). Solves FRESH, ignores any existing
                     .mat/.csv. HOURS to run at default settings (real
                     solves at N up to 2401). Writes c3_output.txt.
-    05_summaries/   SHORT_SUMMARY, EXECUTIVE_SUMMARY, THEORY_PITCH
     06_empirical_starter/
                     EMPIRICAL_CLAIM + the KSW feasibility/design scripts,
                     the FDIC panel, and the two re-derivation scripts
@@ -90,7 +89,7 @@ Lean is not compile-checked by the harness — run `lake build` separately.
 
 ## Bibliography
 
-`references.bib` appears in four places — `00_document/`, `05_summaries/`,
+`references.bib` appears in three places — `00_document/`,
 `06_empirical_starter/`, `07_correspondence/` — because each must compile
 standalone. They are kept
 byte-identical; `00_document/references.bib` is canonical. Edit that one and
