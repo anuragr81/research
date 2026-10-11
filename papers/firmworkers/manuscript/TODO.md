@@ -49,7 +49,9 @@ Weber (1978) and Tilly (1998), cited by the source manuscript, exploration only 
 
 ## Measurement map
 
-- [ ] Confirm or revise the PROPOSED observation entries (X1–X21, except X12), added 10 Oct 2026
+- [ ] Confirm or revise the PROPOSED observation entries (X1–X26, except X12), added 10 Oct 2026
+- [x] Support for each observation, 11 Oct 2026: PROVEN by `IscLean/Identification.lean` or Closure/Lottery theorems (X2, X3, X4, X5, X13, X15, X18, X25, X26), DEFINITIONAL (X1, X6, X10, X11, X16, X17, X22, X23), CONSTRUCT (X9, X20, X21), UNVERIFIED (X7, X8, X14, X19, X24); `check.py` rejects a headline on an UNVERIFIED observation
+- [ ] Raise the UNVERIFIED observations: X7, X14, X24 need an empirical paper read in full that measures the object; X8 needs M14 decided and proven; X19 needs an identification of the threshold under curved $u$
 - [ ] Add rows for the reference income r, displacement, the downgrade, the rank kernel and a mobility measure as the decisions below are made
 
 ## Model decisions pending (micro)

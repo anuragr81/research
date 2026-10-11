@@ -20,7 +20,10 @@ def observation_cell(r):
     if not str(r.get('observation', '')).strip():
         return '---'
     pend = f"\\newline pending on {', '.join(r['pending'])}" if r.get('pending') else ''
-    return f"{mixed(r['observation'])} \\newline \\texttt{{{escape_text(r['observation_status'])}}}{pend}"
+    sup = r.get('observation_support', '')
+    lean = f" ({', '.join('\\nolinkurl{' + n + '}' for n in r['observation_lean'])})" if r.get('observation_lean') else ''
+    return (f"{mixed(r['observation'])} \\newline \\texttt{{{escape_text(r['observation_status'])}}}{pend}"
+            f" \\newline \\texttt{{{escape_text(sup)}}}{lean}. {mixed(r.get('observation_note', ''))}")
 
 
 def table(rows, used, role):
@@ -57,11 +60,18 @@ def main():
 \date{{Pass {meta['pass']}}}
 \begin{{document}}
 \maketitle
-{mixed(meta['scope'])} Model claims M1--M23 are those of the manuscript skeleton of the same pass. Each row says how an observer could obtain the object. Entries marked PROPOSED await the author's confirmation; a headline resting on one is flagged, and a headline resting on a row pending on an undecided model claim is an error.
+{mixed(meta['scope'])} Model claims M1--M23 are those of the manuscript skeleton of the same pass. Each row says how an observer could obtain the object. Each observation also carries its support. PROVEN means a Lean theorem shows the observed quantity determines the object within the model; DEFINITIONAL means the observation is the object once the referent is accepted; CONSTRUCT means the object is not measured; UNVERIFIED means neither, and no headline may rest on it. Entries marked PROPOSED await the author's confirmation; a headline resting on one is flagged, and a headline resting on a row pending on an undecided model claim is an error.
 
 \section*{{Support vocabulary}}
 \begin{{description}}
 {vocab(mmap['support_status'])}
+
+\section*{{Observation support}}
+
+{vocab(mmap['observation_support'])}
+
+\section*{{Observation status}}
+
 {vocab(mmap['observation_status'])}
 \end{{description}}
 

@@ -163,6 +163,7 @@ def load_map():
 
 
 def check_map(data, mmap, errors, notes):
+    lean_files = lean_sources()
     model = {c['id']: c for c in data['model']}
     lit = {c['id'] for c in data['literature']}
     rows = {r['id']: r for r in mmap['rows']}
@@ -199,6 +200,29 @@ def check_map(data, mmap, errors, notes):
             errors.append(f'{rid}: no observation, say how an observer could obtain it')
         elif r.get('observation_status') not in mmap.get('observation_status', {}):
             errors.append(f'{rid}: observation_status must be one of {", ".join(mmap.get("observation_status", {}))}')
+        osup = r.get('observation_support')
+        if r.get('support') != 'NONE':
+            if osup not in mmap.get('observation_support', {}):
+                errors.append(f'{rid}: observation_support must be one of {", ".join(mmap.get("observation_support", {}))}')
+            elif not str(r.get('observation_note', '')).strip():
+                errors.append(f'{rid}: observation_support {osup} needs an observation_note')
+        if r.get('observation_lean') and osup != 'PROVEN':
+            errors.append(f'{rid}: observation_lean is only for PROVEN')
+        if osup == 'PROVEN':
+            names = r.get('observation_lean') or []
+            if not names:
+                errors.append(f'{rid}: PROVEN without observation_lean')
+            for n in names:
+                if not lean_declared(n, lean_files):
+                    errors.append(f'{rid}: observation_lean {n} not declared')
+        if osup == 'LITERATURE':
+            lits = r.get('observation_literature') or []
+            lit_rows = {c['id']: c for c in data['literature']}
+            if not lits:
+                errors.append(f'{rid}: LITERATURE without observation_literature')
+            for l in lits:
+                if l not in lit_rows or lit_rows[l]['status'] != 'VERBATIM':
+                    errors.append(f'{rid}: observation_literature {l} is not a literature row read in full')
         for m in r.get('pending', []) or []:
             if m not in model:
                 errors.append(f'{rid}: pending cites missing {m}')
@@ -258,6 +282,10 @@ def check_derived_claims(data, rows, errors, notes):
                         notes.append(f'{cid}: rests on POSIT row {r}')
                     if r in rows and rows[r].get('observation_status') == 'PROPOSED':
                         notes.append(f'{cid}: rests on {r}, whose observation is only proposed')
+                    if r in rows and rows[r].get('observation_support') == 'UNVERIFIED':
+                        errors.append(f'{cid}: rests on {r}, whose observation is unverified')
+                    if r in rows and rows[r].get('observation_support') == 'CONSTRUCT':
+                        notes.append(f'{cid}: rests on {r}, a construct that is not measured')
                     if r in rows and rows[r].get('pending'):
                         errors.append(f'{cid}: rests on {r}, which is pending on {", ".join(rows[r]["pending"])}')
                 else:
