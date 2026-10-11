@@ -30,13 +30,15 @@ Scope today: micro model only (the N-player appendix of the source manuscript). 
 |---|---|
 | `claims.yaml` | single source for headline, model, literature, concluding claims and references |
 | `measurement_map.yaml` | X rows: symbol, role, meaning, referent, support, direction |
-| `check.py` | validator. `python3 check.py --lean` re-verifies every Lean claim via `#print axioms` |
+| `check.py` | validator. `python3 check.py --lean` audits every declared model theorem via `#print axioms` |
+| `verify.sh` | builds Lean, runs `check.py --lean` and `lit/verify_lit.sh`, writes `VERIFICATION.md` (generated, never edit) |
+| `refs.bib` | bibliography for literature rows read in full |
+| `lit/` | one record per paper read, see `lit/README.md`; Lean in `lean/Lit/<Paper>.lean` (library `Lit`) |
 | `build_manuscript.py` | writes `manuscript.tex` |
 | `build_map.py` | writes `measurement_map.tex` |
 | `manuscript.pdf`, `measurement_map.pdf` | compiled with `xelatex` twice each |
-| `lean/` | Lean project. `IscLean/Lottery.lean`, `IscLean/Ladder.lean`, `IscLean/Gap.lean` |
-| `sympy/micro_checks.py` | SymPy evidence for M1, M4 (cross-check), M5, M6, M17 |
-| `sources/` | plain text of primary PDFs as `L<n>.txt`, used by VERBATIM checks. Empty so far |
+| `lean/` | Lean project. `IscLean/Lottery.lean`, `IscLean/Ladder.lean`, `IscLean/Gap.lean`, `IscLean/Moments.lean` |
+| `~/.cache/firmworkers/` | source PDFs and extracted text, outside the repo, pinned by sha256 in each record's suite |
 | `TODO.md` | pending items, including differences from `displacement_upskilling_v4.tex` |
 | `inputs/firmworkers_model.pdf` | source manuscript, 15 March 2026. Model claim anchors quote its appendix |
 | `inputs/firmworkers_corrected.tex` | corrected LaTeX of the macro model from an earlier session |
@@ -57,7 +59,7 @@ Scope today: micro model only (the N-player appendix of the source manuscript). 
 
 ### Lemma names confirmed against Mathlib v4.21.0
 
-`Real.rpow_lt_rpow_of_exponent_neg`, `Real.rpow_lt_rpow_of_exponent_gt`, `Real.add_rpow_le_rpow_add`, `Real.rpow_add_le_add_rpow`, `Real.rpow_def_of_pos`, `Real.one_lt_exp_iff` (not `Real.one_lt_exp`), `Real.exp_lt_exp`, `Real.exp_le_exp`, `Real.log_nonpos`, `Real.log_lt_log`, `one_div_lt_one_div_of_lt`, `Equiv.sum_comp`, `Finset.add_sum_erase`, `Finset.card_erase_of_mem`, `Finset.sum_div` (needs `import Mathlib.Algebra.BigOperators.Field`), `lt_div_iff₀`.
+`Real.rpow_lt_rpow_of_exponent_neg`, `Real.rpow_lt_rpow_of_exponent_gt`, `Real.add_rpow_le_rpow_add`, `Real.rpow_add_le_add_rpow`, `Real.rpow_def_of_pos`, `Real.one_lt_exp_iff` (not `Real.one_lt_exp`), `Real.exp_lt_exp`, `Real.exp_le_exp`, `Real.log_nonpos`, `Real.log_lt_log`, `one_div_lt_one_div_of_lt`, `Equiv.sum_comp`, `Finset.add_sum_erase`, `Finset.card_erase_of_mem`, `Finset.sum_div` (needs `import Mathlib.Algebra.BigOperators.Field`), `lt_div_iff₀`, `MeasureTheory.integral_add`, `MeasureTheory.integral_const`, `MeasureTheory.integral_const_mul`, `MeasureTheory.integrable_const`, `MeasureTheory.Integrable.const_mul`, `MeasureTheory.measureReal_univ_eq_one`, `ProbabilityTheory.variance_nonneg`.
 
 ## 5. Lean status
 
@@ -75,22 +77,19 @@ Thirteen model claims are `LEAN_PROVED`, all axiom-clean (`propext`, `Classical.
 | M11 | `Isc.lotteryGain_closed` | Lottery.lean |
 | M12 | `Isc.lotteryGain_total` | Lottery.lean |
 | M13 | `Isc.lotteryGain_pos_iff` | Lottery.lean |
-| M15 | `Isc.taylor_expectation` (finite support only) | Lottery.lean |
+| M15 | `Isc.taylor_expectation_integral` (probability measure, integrability hypotheses); finite-support case `Isc.taylor_expectation` kept in Lottery.lean | Moments.lean |
 | M16 | `Isc.premium_pos_iff` | Lottery.lean |
 | M18 | `Isc.premium_scales_with_income` | Lottery.lean |
 
-Other statuses: M1, M6, M17 `ILL_POSED` (SymPy evidence). M5 `REFUTED` by M3 and M4. M14, M19 `UNDERSPECIFIED`. M20 to M23 `OPEN`.
+M14 is `DECIDED` (entrant pool, 10 Oct 2026; Appendix D shows the dated decision); M11–M13 are over the pool and M24 proves risk-neutral unravelling. M1, M6, M17 stay `ILL_POSED` (the printed claim is ill-posed) with Lean evidence, axiom-clean: M1 `Isc.printed_index_base_nonpos` and M6 `Isc.printed_charged_branch_base_neg` (Ladder.lean), M17 `Isc.variance_ne_neg_multiple` (Moments.lean). `check.py --lean` probes every row with a `lean:` field, whatever its status, and fails if the theorem is undeclared, uncompiled or uses `sorryAx` (mutation-tested). M5 `REFUTED` cites `Isc.pareto_top_decile` ($x(0.9)/x_0=10^{1/a}$, exact) besides M3 and M4. M6's theorem also proves no real number squares to $m_k-m_i$, which replaces the SymPy complex-branch check. SymPy was removed from the ledger on 10 Oct 2026: no `SYMPY` status, no `sympy/` folder, no SymPy appendix. Every model row with formal evidence is Lean.
+
+Other statuses: M5 `REFUTED` by M3 and M4. M14, M19 `UNDERSPECIFIED`. M20 to M23 `OPEN`.
 
 ## 6. Lean work queue, in priority order
 
-1. Give the SymPy-only rows Lean evidence, so each row has one canonical verifier, Lean where it reaches:
-   - M1: for every $i \ge 1$, $1 - i \le 0$, so $(1-i)^{-1/a}$ is not a positive real power. State the exact property used.
-   - M6: on the printed charged branch $m_k - m_i < 0$. State it in Lean as a sign fact. Do not attempt complex powers unless asked.
-   - M17: a variance $\ge 0$ cannot equal $p(1-\lambda)^2$ with $p<0$ and $\lambda<1$.
-   - After each, keep the SymPy function as a cross-check or remove it. Ask the owner which.
-2. M15 for general distributions. A measure-theoretic version with `MeasureTheory.integral` linearity, under explicit integrability hypotheses. Keep the finite-support theorem.
-3. Literature papers with mathematical content (references table, all `NOT_STARTED`). The owner plans this for a later pass. Do not start without being asked.
-4. Micro-model extensions (rank plus human capital state, rank kernel, categorical friction σ). Blocked on the owner's decisions. Do not choose them.
+1. Done 10 Oct 2026: Lean evidence for M1, M6, M17; M15 for general distributions. SymPy removed from the micro ledger.
+2. Literature records, started 10 Oct 2026 at the owner's request: every cited paper gets a `lit/` record with Lean, committed and pushed. Done: Borjas (1992); Cunha–Heckman and Gibbons–Waldman from their NBER working papers (cited as the working papers, author's decision of 10 Oct 2026; `version_read` remains available for future rows read in a version other than the one cited). Rule of 10 Oct 2026: primary sources are needed only for papers a claim rests on or a novelty check needs; exploration rows stay at abstract level and `check.py` rejects any claim resting on a row not read in full. Model anchors are checked verbatim against `inputs/firmworkers_model.pdf` (sha256 pinned). Every measurement-map row with a referent carries `observation` (how an observer could obtain it) and `observation_status` (PROPOSED until the owner confirms); a row may be `pending` on an undecided model claim (X8 on M14), and a headline may not rest on a pending row. See TODO.md, Literature by purpose. Gibbons–Waldman is a scan; its text is Drive's OCR, pinned by sha256. Cole–Mailath–Postlewaite (1992, 1995) read 11 Oct 2026 as the formal reference for $h$ as inherited social standing (`lit/cole_mailath_postlewaite`); the entry_contest record of the same papers covers §IV.A and Property 1, this one covers §III.D. Sources are in the shared Drive folder `1r7J3xJ2rotpmlRaBANCNhviy2d8a1bx_`.
+3. Micro-model extensions (rank plus human capital state, rank kernel, categorical friction σ). Blocked on the owner's decisions. Do not choose them.
 
 ## 7. Workflow for adding or changing a Lean claim
 
@@ -104,9 +103,13 @@ Other statuses: M1, M6, M17 `ILL_POSED` (SymPy evidence). M5 `REFUTED` by M3 and
 ## 8. Checker rules (all mutation-tested)
 
 - Lean claims must name a declared theorem. Axiom probe decides `LEAN_PROVED` vs `LEAN_WRITTEN`.
-- `SYMPY`, `ILL_POSED` and `REFUTED` rows citing `micro_checks.py::fn` must PASS that function.
+- Any row with a `lean:` field, whatever its status, must name a declared theorem that compiles without `sorryAx` under `--lean`.
+- `lean:` may be one name or a list. Every name is checked.
+- Placement by status (10 Oct 2026, following `papers/MANUSCRIPT_SKELETON.md`). `LEAN_PROVED`/`LEAN_WRITTEN` rows form the model table. `OPEN` rows go to the Pending table under Concluding remarks and need `waits_on` (optional `rows`). `UNDERSPECIFIED` rows go to Appendix D and need `affects`. `ILL_POSED` and `REFUTED` rows go to Appendix E and need a Lean counterexample; `ILL_POSED` also needs `repaired_by` naming proved rows. A placement field on a row of another status is an error, so promoting a row forces its old fields out. Every rule mutation-tested.
 - `REFUTED` must cite refuting M claims that are proved or checked.
-- `VERBATIM` literature rows need a quote, a page and `sources/L<n>.txt` containing the quote.
+- `VERBATIM` literature rows need a quote and page, the key in `refs.bib`, a `lit/` record whose `KEYS` lists it, and the quote on that page of the record's `CLAIMS.md` quotation table.
+- References may not be `NOT_APPLICABLE` (every cited paper needs Lean, 10 Oct 2026). `LEAN_PARTIAL`/`LEAN_PROVED` need a record whose `LEAN` names an existing file; a paper read in full must have one of them.
+- `--lean` audits every declared theorem of each `IscLean` module: coverage must be complete and no axiom outside `propext`, `Classical.choice`, `Quot.sound` (`sorryAx` only for theorems of `LEAN_WRITTEN` rows). Every model Lean file must declare a `control_*` theorem.
 - Every model claim declares `symbols` (X ids). Every X row is used by some claim. Output rows name `produced_by` claims that declare them.
 - Headline and concluding claims rest only on M, L or X ids. Resting on an `OPEN` model claim is an error. Resting on a `POSIT` row is flagged.
 - References: every L row links to a reference key. `impact_if_removed` must begin "No current claim rests on this paper" exactly when the computed cited-by list is empty.

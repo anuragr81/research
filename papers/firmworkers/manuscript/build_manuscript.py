@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 from check import load_map, reference_citations, cited_map_rows, lean_names
 
-LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean']
+LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean', 'lean/IscLean/Closure.lean']
 BUILD_FILES = ['lean/lean-toolchain', 'lean/lakefile.toml', 'lean/lake-manifest.json']
 SPECIAL = {'&': r'\&', '%': r'\%', '#': r'\#', '_': r'\_', '{': r'\{', '}': r'\}',
            '~': r'\textasciitilde{}', '^': r'\textasciicircum{}', '\\': r'\textbackslash{}',
