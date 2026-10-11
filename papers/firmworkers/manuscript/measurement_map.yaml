@@ -86,7 +86,7 @@ rows:
   - id: X8
     symbol: 'swap rule'
     role: input
-    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other entrants (M14, decided 10 Oct 2026); cross-group draws to be weighted by categorical friction'
+    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other entrants (M14, decided 10 Oct 2026); a draw across status groups is weighted by $1-\sigma$ (M29)'
     referent: 'a social contest that reallocates jobs by connection or luck rather than by skill'
     support: POSIT
     direction: ''
@@ -247,4 +247,35 @@ rows:
     support: POSIT
     direction: 'a risk-neutral pool of two or more with $L>0$ is not stable (M24)'
     observation: 'count of workers who take the lottery route, from panel data'
+    observation_status: PROPOSED
+
+  - id: X24
+    symbol: '$h$'
+    role: input
+    meaning: 'categorical status label of a worker, one of two groups, fixed within a working life (M28)'
+    referent: 'status group in Weber''s sense, a categorical identity such as ethnicity, religion, nationality or political identity'
+    support: POSIT
+    direction: ''
+    observation: 'group membership recorded in survey or administrative data, as self-reported identity'
+    observation_status: PROPOSED
+
+  - id: X25
+    symbol: '$\sigma$'
+    role: input
+    meaning: 'closure parameter in $[0,1]$; a partner draw across groups has weight $1-\sigma$ against $1$ within the group (M29)'
+    referent: 'social closure, the degree to which connections across status groups are restricted'
+    support: POSIT
+    direction: 'at $\sigma=0$ the contest ignores groups (M25), at $\sigma=1$ it runs within groups (M26); raising it lowers the gain of an entrant whose out-group is relatively richer (M27)'
+    observation: 'frequency of job moves through connections across groups against within groups, from referral or network data linked to a matched employer-employee panel'
+    observation_status: PROPOSED
+
+  - id: X26
+    symbol: '$G_i(\sigma)$'
+    role: output
+    produced_by: [M25, M26, M27]
+    meaning: '$\frac{a+(1-\sigma)b}{n+(1-\sigma)m}-L$, the closure-weighted expected swap gain'
+    referent: 'expected net payoff from competing through connections when connections are closed along status lines'
+    support: POSIT
+    direction: 'equals $G_i$ of M11 at $\sigma=0$ (M25)'
+    observation: 'mean income change net of the entry cost for entrants of each group who take the lottery route, from panel data'
     observation_status: PROPOSED

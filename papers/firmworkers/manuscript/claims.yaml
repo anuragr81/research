@@ -222,6 +222,49 @@ model:
     status: LEAN_PROVED
     symbols: [X7, X8, X18, X22, X23]
 
+  - id: M25
+    anchor: 'consequence of the closure form decided in M29'
+    claim: 'With no closure ($\sigma=0$) the closure-weighted swap gain equals the pool gain of M11'
+    assumptions: '$i\in P$'
+    evidence: 'lean/IscLean/Closure.lean::Isc.closureGain_zero'
+    lean: Isc.closureGain_zero
+    status: LEAN_PROVED
+    symbols: [X7, X18, X24, X25, X26]
+  - id: M26
+    anchor: 'consequence of the closure form decided in M29'
+    claim: 'With full closure ($\sigma=1$) an entrant swaps only within the own status group, and the gain is the pool gain of M11 over the own-group entrants'
+    assumptions: '$i\in P$'
+    evidence: 'lean/IscLean/Closure.lean::Isc.closureGain_one'
+    lean: Isc.closureGain_one
+    status: LEAN_PROVED
+    symbols: [X7, X18, X24, X25, X26]
+  - id: M27
+    anchor: 'consequence of the closure form decided in M29'
+    claim: 'Raising closure lowers the expected swap gain of an entrant whose out-group entrants are on average richer, relative to the entrant, than the in-group entrants'
+    assumptions: 'entrants of both groups present besides $i$, $0\le\sigma_1<\sigma_2\le 1$'
+    evidence: 'lean/IscLean/Closure.lean::Isc.closure_tightens_when_outgroup_richer. The gain is $\frac{a+(1-\sigma)b}{n+(1-\sigma)m}-L$ with in-group and out-group sums $a,b$ of $x_k-x_i$ over $n,m$ entrants, and it rises in $1-\sigma$ exactly when $b/m>a/n$. With equal means closure has no effect'
+    lean: [Isc.closureGain_formula, Isc.closure_tightens_when_outgroup_richer]
+    status: LEAN_PROVED
+    symbols: [X7, X24, X25, X26]
+  - id: M28
+    anchor: 'Introduction: "a long-term social categorisation derived from language, nationality, religion, or political identity"'
+    claim: 'Human capital $h$ is a categorical status label, fixed within a working life'
+    assumptions: ''
+    evidence: 'The manuscript says categorisation evolves far more slowly than adaptability. Decided as a label without a law of motion inside the micro model'
+    status: DECIDED
+    decision: '11 Oct 2026, the author. $h$ is social standing in the non-contractual order, observed by firms but not priced; it is fixed within a working life and its evolution belongs to the intergenerational layer. Cole, Mailath and Postlewaite (1992), aristocratic equilibrium, is the formal reference. Merging the upskilling cost into $h$ is rejected because it would let the firm govern social rank'
+    affects: [M25, M26, M27, M29]
+    symbols: [X24]
+  - id: M29
+    anchor: 'Introduction: "the economic interactions in the model treat social networks as an essential mechanism"'
+    claim: 'Categorical friction enters the social contest as one closure parameter $\sigma\in[0,1]$ that scales down the weight of a draw across status groups to $1-\sigma$'
+    assumptions: ''
+    evidence: 'The manuscript gives no form for friction. Decided in the simplest form, with its limitations stated in the decision'
+    status: DECIDED
+    decision: '11 Oct 2026, the author, on the condition that its limitations are stated. The form is one parameter, two status groups, and the same closure for both groups (symmetric weights); it is exogenous, not chosen by either group; it acts only on partner draws inside the entrant pool, not on the job ladder, which stays the market order; there is no network structure within a group; and $\sigma>1$ is excluded because cross-group weights would turn negative. Asymmetric closure, in which one group hoards access against the other, is outside this form'
+    affects: [M25, M26, M27]
+    symbols: [X8, X24, X25]
+
 literature:
   - id: L1
     ref: CunhaHeckman2007

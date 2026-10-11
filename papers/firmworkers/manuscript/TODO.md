@@ -25,7 +25,7 @@ To be fixed once definite claims exist (after the M14, M19, M23 decisions): ever
 
 ### Exploration only (no primary source needed)
 
-L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calvó-Armengol and Jackson (2004), L8 Rosen (1986), L9 Ghiglino and Goyal (2010), L10 Immorlica et al. (2017), L11 Luttmer (2005), L12 Altonji and Pierret (2001), L13 Fershtman, Murphy and Weiss (1996); Alós-Ferrer and Prat (2012). None is cited by the source manuscript; they were added as candidates for the pending micro extensions. A row moves to verification, and needs its PDF, when a decision makes a claim rest on it.
+Weber (1978) and Tilly (1998), cited by the source manuscript, exploration only by the author's decision of 11 Oct 2026 (records exist in entry_contest, not adapted). L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calvó-Armengol and Jackson (2004), L8 Rosen (1986), L9 Ghiglino and Goyal (2010), L10 Immorlica et al. (2017), L11 Luttmer (2005), L12 Altonji and Pierret (2001), L13 Fershtman, Murphy and Weiss (1996); Alós-Ferrer and Prat (2012). None is cited by the source manuscript; they were added as candidates for the pending micro extensions. A row moves to verification, and needs its PDF, when a decision makes a claim rest on it.
 
 ## Decisions recorded
 
@@ -37,7 +37,10 @@ L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calv�
 - 10 Oct 2026 (Q6): global rank on the ladder, with the source's three channels.
 - 10 Oct 2026 (Q9): headlines and conclusions revisited once Q1–Q8 are settled.
 - 11 Oct 2026: $h$ is social standing, non-contractual and outside the market; firms observe it but do not price it. Merging $b$ into $h$ is rejected because it would let the firm's price schedule govern social rank. Cole–Mailath–Postlewaite (1992) is the formal reference: the aristocratic equilibrium (status inherited, market decisions undistorted) is the case adopted, wealth-is-status the case rejected.
-- Open: Q7 (meaning of stakes), Q8 (repairs), whether $h$ is fixed within a working life (the aristocratic status rule (12) as its law of motion, with any evolution intergenerational), how friction enters the kernel (CMP92 p.1111: the block on crossing status lines comes from feasibility, not preference, so friction is that block), whether the Weber and Tilly records of entry_contest are adapted.
+- 11 Oct 2026: $h$ is a categorical label fixed within a working life; its evolution belongs to the intergenerational layer (M28 DECIDED).
+- 11 Oct 2026: friction is one closure parameter $\sigma$, symmetric between two groups, acting on partner draws in the entrant pool, with its limitations stated in M29 (DECIDED). Results M25–M27 in `IscLean/Closure.lean`.
+- 11 Oct 2026: Weber (1978) and Tilly (1998) stay exploration only; the entry_contest records are not adapted.
+- Open (superseded items struck): Q7 (meaning of stakes), Q8 (repairs). Earlier open items, now decided: whether $h$ is fixed within a working life (the aristocratic status rule (12) as its law of motion, with any evolution intergenerational), how friction enters the kernel (CMP92 p.1111: the block on crossing status lines comes from feasibility, not preference, so friction is that block), whether the Weber and Tilly records of entry_contest are adapted.
 - 10 Oct 2026: primary sources (with record and Lean) are required for papers needed for verification or novelty; exploration does not need them.
 - 10 Oct 2026: proofs stay Lean-only for now. Informal proofs under the skeleton's 30% prose limit (MS-6) are deferred, not dropped.
 - 10 Oct 2026: no paper prose for now. Work is on claims; prose will be written from the claims later.
