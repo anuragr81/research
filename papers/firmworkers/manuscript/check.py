@@ -14,7 +14,7 @@ SOURCE_SHA = 'd79d5651207296d02661381f2f9322391c664de3d9c845cb5a5598bbad8d783e'
 BIB = os.path.join(ROOT, 'refs.bib')
 ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
-QUOTE_ROW = re.compile(r'^\|\s*[A-Z]+-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
+QUOTE_ROW = re.compile(r'^\|\s*[A-Z][A-Z0-9]*-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
 CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
 PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED', 'DECIDED'), 'decision': ('DECIDED',),
              'waits_on': ('OPEN',), 'rows': ('OPEN',)}
@@ -45,7 +45,7 @@ def lean_declared(full_name, files):
 
 
 def lit_norm(s):
-    s = unicodedata.normalize('NFKD', s)
+    s = unicodedata.normalize('NFKD', s).replace('\u00ad', '-')
     for k, v in LIGATURES.items():
         s = s.replace(k, v)
     s = re.sub(r'-\s*\n\s*', '', s).lower()

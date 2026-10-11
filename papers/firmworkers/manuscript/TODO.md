@@ -9,10 +9,11 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 - [x] Borjas (1992) — L4, `lit/borjas_1992`
 - [x] Cunha and Heckman (2007), NBER WP 12840 — L1, `lit/cunha_heckman_2007`
 - [x] Gibbons and Waldman, NBER WP 6454 (1998) — L2, `lit/gibbons_waldman_1998`
+- [x] Cole, Mailath and Postlewaite (1992, JPE) and (1995, CARESS WP 95-14) — L14, L15, `lit/cole_mailath_postlewaite`, read 11 Oct 2026
 
 ### Needed for verification
 
-None today: no model, map, headline or concluding row rests on a paper. The source manuscript (`inputs/firmworkers_model.pdf`) invokes these by name where a future claim would need them:
+Cole–Mailath–Postlewaite (1992, 1995) are read and recorded; a claim about $h$ will rest on CMP92 once the law of motion is decided. Otherwise none today: no model, map, headline or concluding row rests on a paper. The source manuscript (`inputs/firmworkers_model.pdf`) invokes these by name where a future claim would need them:
 
 - [ ] Friedman and Savage (1948), JPE — the S-shaped utility behind M19 and M20 (Appendix). Needed if M19/M20 become claims
 - [ ] Spence (1973), QJE — "labour-queue theory" (Section 2). Macro model, deferred
@@ -35,7 +36,8 @@ L3 Loury (1977), L5 Bénabou (1996), L6 Bowles, Loury and Sethi (2014), L7 Calv�
 - 10 Oct 2026 (Q5): choice set and equilibrium left to tractability (proposal: a one-shot comparison of the three routes for a displaced worker at each rank).
 - 10 Oct 2026 (Q6): global rank on the ladder, with the source's three channels.
 - 10 Oct 2026 (Q9): headlines and conclusions revisited once Q1–Q8 are settled.
-- Open: Q7 (meaning of stakes), Q8 (repairs), law of motion for h, how friction enters the kernel (proposal: cross-group draws inside the entrant pool weighted by a closure parameter).
+- 11 Oct 2026: $h$ is social standing, non-contractual and outside the market; firms observe it but do not price it. Merging $b$ into $h$ is rejected because it would let the firm's price schedule govern social rank. Cole–Mailath–Postlewaite (1992) is the formal reference: the aristocratic equilibrium (status inherited, market decisions undistorted) is the case adopted, wealth-is-status the case rejected.
+- Open: Q7 (meaning of stakes), Q8 (repairs), whether $h$ is fixed within a working life (the aristocratic status rule (12) as its law of motion, with any evolution intergenerational), how friction enters the kernel (CMP92 p.1111: the block on crossing status lines comes from feasibility, not preference, so friction is that block), whether the Weber and Tilly records of entry_contest are adapted.
 - 10 Oct 2026: primary sources (with record and Lean) are required for papers needed for verification or novelty; exploration does not need them.
 - 10 Oct 2026: proofs stay Lean-only for now. Informal proofs under the skeleton's 30% prose limit (MS-6) are deferred, not dropped.
 - 10 Oct 2026: no paper prose for now. Work is on claims; prose will be written from the claims later.

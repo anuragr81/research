@@ -36,7 +36,7 @@ class Suite:
 
 
 def norm(s):
-    s = unicodedata.normalize("NFKD", s)
+    s = unicodedata.normalize("NFKD", s).replace("\u00ad", "-")
     for k, v in LIGATURES.items():
         s = s.replace(k, v)
     s = re.sub(r"-\s*\n\s*", "", s).lower()
