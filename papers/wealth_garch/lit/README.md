@@ -28,7 +28,9 @@ reading of the paper and does not reprove it. The permitted conclusion is
 
 1. The quotation rows parse, and their pages lie in the paper's range.
 2. Each quotation is found in the cached text by exact normalised
-   containment on PDF page = stated page − offset. A fabricated quotation,
+   containment on PDF page = stated page − offset. Text is extracted with
+   `pdftotext -layout`, or in reading order when the suite sets `layout`
+   to false (two-column sources). A fabricated quotation,
    a true quotation on the wrong page and a page before the first PDF page
    are the controls and must fail. For a spreadsheet source (a `sheet` in
    the suite's configuration), the Page column names the variable whose

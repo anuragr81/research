@@ -54,8 +54,8 @@ def table_rows(md, heading):
     return rows[1:]
 
 
-def page_text(pdf, page):
-    p = subprocess.run(["pdftotext", "-f", str(page), "-l", str(page), "-layout", pdf, "-"],
+def page_text(pdf, page, layout=True):
+    p = subprocess.run(["pdftotext", "-f", str(page), "-l", str(page)] + (["-layout"] if layout else []) + [pdf, "-"],
                        capture_output=True, text=True)
     return normalise(p.stdout)
 
@@ -150,7 +150,7 @@ def run(cfg):
                     f = os.path.join(ocr_dir, f"page-{pg:03d}.txt")
                     cache[pg] = normalise(open(f).read()) if os.path.exists(f) else ""
                 else:
-                    cache[pg] = page_text(pdf, pg)
+                    cache[pg] = page_text(pdf, pg, cfg.get("layout", True))
             return normalise(text) in cache[pg]
 
         for r in quotes:
