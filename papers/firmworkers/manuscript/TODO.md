@@ -15,6 +15,7 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 - [x] Ray and Robson (2012), Econometrica — L18, `lit/ray_robson_2012`, read 12 Oct 2026, novelty for the reference-dependent sub-section
 - [x] Kőszegi and Rabin (2006), QJE — L19, `lit/koszegi_rabin_2006`, read 12 Oct 2026, contrast case for $R_h$
 - [x] Genicot and Ray (2017), Econometrica — L20, `lit/genicot_ray_2017`, read 12 Oct 2026. Group-based aspirations are named as an extension (GR-13, GR-14); cross-group interaction is left open (GR-15). The novelty of the sub-section moves from $R_h$ itself to the interaction of a group reference with closure $\sigma$ in the cross-group pool
+- [x] Markowitz (1952), JPE (Cowles reprint) — L23, `lit/markowitz_1952`, read 12 Oct 2026; reference at own customary wealth, shape near it the reverse of prospect theory's
 - [x] Kahneman and Tversky (1979), Econometrica — L21, `lit/kahneman_tversky_1979`, read 12 Oct 2026 through a local OCR; source of the shape assumed below $R_h$ and of the unadapted-loss mechanism
 - [ ] Kaus on South Africa (the author's pointer, 12 Oct 2026): race-based reference groups in consumption, which bears directly on a group-norm $R_h$. Not on Drive; full reference to be confirmed with the author
 

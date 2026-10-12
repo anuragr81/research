@@ -50,6 +50,7 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 | `genicot_ray_2017` | `GenicotRay2017` | Econometrica article, pp.489–519; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
 | `kahneman_tversky_1979` | `KahnemanTversky1979` | Econometrica article, pp.263–291, ProQuest scan read through a local OCR (`lit/ocr_pages.py`) | read in full, 20 quotations, 13 Lean theorems |
 | `koszegi_rabin_2006` | `KoszegiRabin2006` | QJE article, pp.1133–1165 | read in full, 19 quotations, 13 Lean theorems |
+| `markowitz_1952` | `Markowitz1952` | JPE article in the Cowles Foundation Paper 57 reprint, pp.151–158, read through a local OCR (`lit/ocr_pages.py`) and Drive's OCR | read in full, 23 quotations, 8 Lean theorems |
 | `ray_robson_2012` | `RayRobson2012` | Econometrica article, pp.1505–1531; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
 | `robson_1992` | `Robson1992` | Econometrica article, pp.837–857, scan read through Drive's OCR, displays from page images | read in full, 26 quotations, 22 Lean theorems |
 
