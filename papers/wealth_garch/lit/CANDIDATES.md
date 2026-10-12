@@ -90,6 +90,21 @@ or not (our tests are new ground).
 | `cohen_scatigna_bis_wp443` | empirical | 32 | `bcd4b296d7a290a7` | https://www.bis.org/publications/working-paper-443-banks-and-capital-requirements-channels-adjustment.pdf |  |
 
 Full sha256 values are in `candidates_sha256.txt` next to the files.
+
+## Already in Drive
+
+Found by paging the whole Drive folder (`1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb` and its parent) on 2026-10-12. Cached under `~/.cache/wealth_garch/drive/`.
+
+| Drive file | Drive id | sha256 | Note |
+|---|---|---|---|
+| `Peura-OptimalBankCapital-2006.pdf` | `1RlWEWi6D0zIi4w9Z4oOH2Ql7wxCvjavd` | `6866d418083a0987` | Peura and Keppo (2006), JSTOR copy of the published article with a text layer. Supersedes the page-image copy of lit/peura_keppo_2006 (to be re-pinned). |
+| `ssrn-299319.pdf` | `1USmF4omD0nMzqpuFqH3qmMZV59G2y1mj` | `5f57f39e5432f23e` | Milne and Whalley (Dec 2001), 'Bank Capital Regulation and Incentives for Risk-Taking'. The search could not find this title; it is here. |
+| `work923.pdf` | `1R0I5FdE7qjQJq3qPkWjbP1qKTia_6fhK` | `ad8848f4a3824024` | Bertsch and Mariathasan (2021), 'Optimal bank leverage and recapitalization in crowded markets', BIS WP 923. New lead. |
+| `Klimenko-Pfeil-Rochet-Nicolo.pdf` | `14E9yQNQN_kgT1us3mdi7G2vuUGDZpu5N` | `66cfd74bf6be6c19` | Klimenko, Pfeil, Rochet and De Nicolò (June 2016), 'Aggregate Bank Capital and Credit Dynamics', SFI RP 16-42. |
+| `memmelraupach1.pdf` | `1ZoKitbBIeFQExiEBB3InDSEYHpED1YRt` | `53c253d977fd0c68` | Memmel and Raupach, Bundesbank DP 06/2007 (same version as the cached candidate). |
+| `wp369en.pdf` | `1g3rDUq1wvidbDFI61-4fKcOB0H4NliyA` | `99f54d75f68a4129` | Bakkar, De Jonghe and Tarazi (March 2019), NBB WP 369. |
+| `gordon_hirtle_epr_2026.pdf` | `1XQ8ecxcU33UNP2P6WZxknKuHAaBTY8e8` | `f1fe4e9c87a9ee8b` | Gordon and Hirtle, uploaded 2026-10-12 as epr_2026_banks-equity-capital_gordon.pdf. |
+
 ## Needed from the author
 
 No open copy was found, or the open copy is a working paper whose published
