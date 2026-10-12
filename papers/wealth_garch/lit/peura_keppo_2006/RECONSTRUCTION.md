@@ -3,18 +3,23 @@
 ## Source read
 
 - Samu Peura and Jussi Keppo, "Optimal Bank Capital with Costly
-  Recapitalization", *Journal of Business* 79(4), 2006, pp. 2163-2201 of
-  the copy supplied. Evidence tag [P]: 38 page images, read in full,
-  including the appendix and the references.
-- Supplied by the author on Google Drive (folder
-  `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, file `optimal_risk_control.pdf`),
-  uploaded 2026-10-12. Cached at `~/.cache/wealth_garch/peura_keppo_2006.pdf`,
-  sha256 `112de752eccbf5a81642ea1af52484ebe97daf6e6bbad2d4ebcc566f714fe5ab`.
-- No text layer. OCR text of each page, made by `lit/ocr_pages.py`
-  (rapidocr_onnxruntime 1.2.3, 200 dpi), is cached at
-  `~/.cache/wealth_garch/peura_keppo_2006.ocr/`. Printed page = PDF page +
-  2162 up to p. 2186; PDF page 24 holds pp. 2186 and 2187; from p. 2188,
-  printed page = PDF page + 2163.
+  Recapitalization", *Journal of Business* 79(4), 2006, pp. 2163-2201.
+  Evidence tag [F]: read in full, including the appendix and the
+  references, first on a page-image copy and then pinned to the JSTOR copy
+  with a text layer, which is the same published article.
+- Pinned copy: JSTOR (stable URL https://www.jstor.org/stable/10.1086/503660),
+  supplied by the author on Google Drive (folder
+  `1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb`, file
+  `Peura-OptimalBankCapital-2006.pdf`, id
+  `1RlWEWi6D0zIi4w9Z4oOH2Ql7wxCvjavd`). 40 PDF pages: a JSTOR cover, then
+  pp. 2163-2201 (printed page = PDF page + 2161). Cached at
+  `~/.cache/wealth_garch/peura_keppo_2006_jstor.pdf`, sha256
+  `6866d418083a098701a0d6fc57ad80ac11a30009cd452995621d6846c1fe98a6`.
+- Earlier copy, superseded on 2026-10-12: page images without a text layer
+  (file `optimal_risk_control.pdf`, sha256
+  `112de752eccbf5a81642ea1af52484ebe97daf6e6bbad2d4ebcc566f714fe5ab`),
+  checked through OCR text. Every quotation matches the JSTOR text layer
+  on the same printed page.
 
 ## Primitives
 

@@ -201,6 +201,11 @@ grounds.
   bank-quarters; 70.5% of stand-alone recapitalisation comes from the
   parent. MS-7 now pairs each results file with the pre-registration it
   names.
+- 2026-10-12. Records added: Gordon and Hirtle (2026), Berger et al.
+  (2008). Peura and Keppo re-pinned to the JSTOR copy with a text layer
+  (all 21 quotations match). Next in the reading order: Mankart,
+  Michaelides and Pagratis, Hirtle (SR 666), Jokipii and Milne (2008),
+  Baron (2020).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the

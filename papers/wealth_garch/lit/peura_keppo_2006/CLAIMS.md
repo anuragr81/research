@@ -1,6 +1,6 @@
 # Claims: Peura and Keppo (2006)
 
-Bib key `peura2006`. Version read: the published article, *Journal of Business* 79(4), pp. 2163-2201 of the copy supplied. Evidence [P]: page images, read in full; each quotation is also found verbatim in the OCR text of its page.
+Bib key `peura2006`. Version read: the published article, *Journal of Business* 79(4), pp. 2163-2201, pinned to the JSTOR copy. Evidence [F]: read in full; each quotation is found verbatim in the text layer of its page.
 
 ## Quotations
 
@@ -46,7 +46,7 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 
 | ID | Where | Reading adopted | Reason |
 |---|---|---|---|
-| PK-D1 | the copy supplied | Page images, no text layer. PDF page 24 holds printed pp. 2186 and 2187. | Quotations are checked against OCR text of each page and were read on the image. |
+| PK-D1 | the copy pinned | Since 2026-10-12 the JSTOR copy with a text layer (offset 2161). The earlier page-image copy, in which PDF page 24 held pp. 2186 and 2187, was checked through OCR. | Every quotation matches the JSTOR text layer on the same printed page. |
 | PK-D2 | pp. 2176, 2194 | Each capital issue brings the buffer exactly to the dividend barrier $u_2$. | PK-Q7, and the supremum of (11) is attained at $s^*=u_2-X_\Delta$ (p. 2194). The model predicts exact targeting, as M15's premise does here. |
 | PK-D3 | pp. 2181 to 2182 | $\mu$ and $\sigma$ are the mean and standard deviation of accounting return on risk-weighted assets, net of the risk-free return on capital. | The paper defines them through the accounting identity (24) to (28). In this baseline $\sigma$ is a book quantity and is measurable from Call Report data. |
 | PK-D4 | references | The copy read ends at p. 2201. | BCVW cites the article as pp. 2163-2202. A final page, if any, was not supplied. |

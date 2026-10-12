@@ -97,7 +97,7 @@ Found by paging the whole Drive folder (`1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb` and 
 
 | Drive file | Drive id | sha256 | Note |
 |---|---|---|---|
-| `Peura-OptimalBankCapital-2006.pdf` | `1RlWEWi6D0zIi4w9Z4oOH2Ql7wxCvjavd` | `6866d418083a0987` | Peura and Keppo (2006), JSTOR copy of the published article with a text layer. Supersedes the page-image copy of lit/peura_keppo_2006 (to be re-pinned). |
+| `Peura-OptimalBankCapital-2006.pdf` | `1RlWEWi6D0zIi4w9Z4oOH2Ql7wxCvjavd` | `6866d418083a0987` | Peura and Keppo (2006), JSTOR copy of the published article with a text layer. Supersedes the page-image copy; lit/peura_keppo_2006 is pinned to it since 2026-10-12. |
 | `ssrn-299319.pdf` | `1USmF4omD0nMzqpuFqH3qmMZV59G2y1mj` | `5f57f39e5432f23e` | Milne and Whalley (Dec 2001), 'Bank Capital Regulation and Incentives for Risk-Taking'. The search could not find this title; it is here. |
 | `work923.pdf` | `1R0I5FdE7qjQJq3qPkWjbP1qKTia_6fhK` | `ad8848f4a3824024` | Bertsch and Mariathasan (2021), 'Optimal bank leverage and recapitalization in crowded markets', BIS WP 923. New lead. |
 | `Klimenko-Pfeil-Rochet-Nicolo.pdf` | `14E9yQNQN_kgT1us3mdi7G2vuUGDZpu5N` | `66cfd74bf6be6c19` | Klimenko, Pfeil, Rochet and De Nicolò (June 2016), 'Aggregate Bank Capital and Credit Dynamics', SFI RP 16-42. |

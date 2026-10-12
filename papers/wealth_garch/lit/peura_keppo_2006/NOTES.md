@@ -2,10 +2,11 @@
 
 ## Verified
 
-- Every quotation in `CLAIMS.md` was read on the page image and is found
-  verbatim in the OCR text of its printed page. Controls: a fabricated
-  quotation, a true quotation on the wrong page, and a page outside the
-  page map are all refused.
+- Every quotation in `CLAIMS.md` is found verbatim in the text layer of its
+  printed page of the pinned JSTOR copy (offset 2161); each was first read
+  on the page images of the earlier copy. Controls: a fabricated
+  quotation, a true quotation on the wrong page, and a page before the
+  first PDF page are all refused.
 - The Lean results in `CLAIMS.md` are declared in
   `lean/mathlib/PeuraKeppo.lean`, which builds with no `sorry` and audits
   within propext, Classical.choice and Quot.sound. Our reading of the
