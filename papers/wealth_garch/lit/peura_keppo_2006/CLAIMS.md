@@ -25,6 +25,8 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-Q17 | 2192 | Our calibration exercise has been somewhat arbitrary. | Their own limit. |
 | PK-Q18 | 2192 | A model in which the penalty gradually increases as the capital ratio deteriorates would therefore be more realistic. | The extension they call for, a graduated penalty below the requirement. |
 | PK-Q19 | 2193 | bank capital requirements apply to an accounting measure of capital; hence, the dynamics of accounting measures could be all that matter. | Accounting volatility is the relevant sigma for a capital model (PK-D3). |
+| PK-Q20 | 2174 | We have done the optimization with the Solver add-in in Microsoft Excel. | The source of small numerical differences in the replication (`replication/peura_keppo_2006/results_stage1.md`). |
+| PK-Q21 | 2179 | the expected size of a new issue (which is well approximated by the difference between the dividend barrier and the capital issue barrier) increases with the capital raising cost K. | The approximation behind Table 2's issue-size column (PK-D5). |
 
 ## Lean results
 
@@ -48,3 +50,5 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-D2 | pp. 2176, 2194 | Each capital issue brings the buffer exactly to the dividend barrier $u_2$. | PK-Q7, and the supremum of (11) is attained at $s^*=u_2-X_\Delta$ (p. 2194). The model predicts exact targeting, as M15's premise does here. |
 | PK-D3 | pp. 2181 to 2182 | $\mu$ and $\sigma$ are the mean and standard deviation of accounting return on risk-weighted assets, net of the risk-free return on capital. | The paper defines them through the accounting identity (24) to (28). In this baseline $\sigma$ is a book quantity and is measurable from Call Report data. |
 | PK-D4 | references | The copy read ends at p. 2201. | BCVW cites the article as pp. 2163-2202. A final page, if any, was not supplied. |
+| PK-D5 | p. 2184, Table 2 | The column E[s] is $u_2-u_1$, the approximation of PK-Q21, not the conditional expectation its note describes. | Replication stage 1: the column matches $u_2-u_1$ in 10 of 12 rows and the conditional expectation in 1. |
+| PK-D6 | p. 2184, Table 2 | The column $E(t_i-t_{i-1})$ is the expected time from $u_2$ down to $u_1$, without the delay its note includes. | Replication stage 1: 9 of 12 rows match without the delay, 5 of 12 with it. |
