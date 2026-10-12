@@ -71,7 +71,8 @@ paper's claims, and only then write the manuscript.
      entry". Corcoran (1984) and Corcoran and Karels (1985), the long-run
      rent-seeking entry model MOS call theirs a version of. None is in
      `refs.bib`. Any of them may bear on what P5 and the sign rule can claim.
-     PDFs needed. Citation checked.
+     Citation checked. Status 12 Oct 2026: Mathews-Namoro and Corcoran (1984)
+     read (see the entry under item 7); Corcoran-Karels PDF still needed.
   3. **Costrell-Loury Proposition 10 reverses Proposition 6 only for concave
      beta** (draft p.28, "under concave b(.)", "for concave beta(.)"). Under
      convex beta both narrow the span. `PROOFS.tex` l.1250-1252 and
@@ -905,6 +906,29 @@ paper's claims, and only then write the manuscript.
   L22: Section 5.3 has free entry with the opposite sign to M28 (fewer entrants
   with less noise). C12 now claims M28's sign on the entry margin, pending
   only the binary-investment search shared with C13.
+  Mathews and Namoro read 12 Oct 2026 as the working paper of 29 March 2005
+  (the file `Participation_incentives_in_rank_order_t.pdf`; the published
+  version, J. Economics 95(1), is not checked), `lit/mathews_namoro_2008/`,
+  row L23, `lean/mathlib/MathewsNamoro.lean` (147 theorems). Two strategic
+  contestants each join one of two events; the strong one can join the event
+  with the smaller prize (allocation c). No entry cost, no count, no wealth,
+  so C5, C6 and C13 are not touched by it beyond a scope note: non-strategic
+  contestants fill the remaining places and can win without choosing. Three
+  printed errors recorded (MN-D1 on p.9, MN-D2 and MN-D3 on p.11); the
+  conclusion that follows from p.9 stands.
+  Corcoran (1984) read 12 Oct 2026, `lit/corcoran_1984/`, row L24,
+  `lean/mathlib/Corcoran.lean` (41 theorems). Identical players, a real-valued
+  count, long-run count r/(r-1) independent of the prize, total expenditure
+  equal to the discounted prize. Within his own eq. (3) the sentence on p.93
+  that total expenditure "cannot be determined" for r <= 1 is decided: it
+  rises with the count towards rR (CO-D1). The first-order point is shown to
+  be a best reply for r <= 1 and at the long-run count; not for 1 < r and a
+  count below r/(r-1), which is not asserted. Corcoran and Karels (1985,
+  Public Choice 46(3), 227-246) is the one entry paper still unread.
+  The file uploaded as "The asymptotic behavior of dynamic rent-seeking
+  games" is Chiarella and Szidarovszky (2002), CAMWA 43, 169-178: stability
+  of a rent-seeking game with a fixed number of agents. It is not
+  Corcoran-Karels and has no record under `lit/` (offered to the author).
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
@@ -1472,7 +1496,7 @@ be claimed as novel.
 | P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
 | `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked (revised 9 Oct 2026, pass 7) | **DOES NOT SURVIVE as a result; the score-technology side is a CANDIDATE (minor), pending** | M1 writes the gain as `V E[phi(M)]` with `M` the best rival's score, the form of RD's `b_k = E[f(X_(k-1:k-1))]`, and RD's Karlin step (p.1597) with `u = phi` and `H = C G^(Q-1)` gives M17 (`weight_tp2`, `pmu_orientation`, `karlin_ratio`; `lit/ryvkin_drugov_2020/NOTES.md` pass 3). M21 makes precise RD's remark that large-`k` comparative statics follow the upper tail (p.1601). What may remain: M18 (a uniform base score puts the peak of `phi` at the top of the outsiders' support, where RD's kernel cannot vanish) and M19 (primitive conditions on `r`, `s` for a single-peaked `phi`). No precedent found at the abstract level, 9 Oct 2026 |
 | The count, and the payers' share, fall as the rule weighs talent more (M28) (revised 10 Oct 2026 after reading Drugov and Ryvkin) | **CANDIDATE on the entry margin; pending only a search of binary pre-contest investment** | Both entry margins read have the opposite sign: Morgan, Tumlinson and Vardy (L20, exact logistic instance in `MeritocracyLogistic.lean`) and Drugov and Ryvkin's free-entry extension (WP 256 Section 5.3, L22: the less dispersed noise has weakly fewer entrants). The cause is the effort margin: effort rises as noise falls and competes away the rents of entry. M28's sign equals their intensive margin (effort falls with dispersion, Prop 1). The universal-versus-none contrast with the number of players is theirs (L8, L22) |
-| The paying class's share of the prize, as a function of how many pay (M31) (added 9 Oct 2026) | **CANDIDATE, pending** | In every entry model read (L2 to L7) non-entrants cannot win, so the share is not defined there; here outsiders compete on the base score. Binary contests (Ghosh and Kleinberg) and contests with pre-contest investment are the places to look; not searched beyond abstracts |
+| The paying class's share of the prize, as a function of how many pay (M31) (added 9 Oct 2026) | **CANDIDATE, pending** | In every entry model read (L2 to L7, L24) non-entrants cannot win, so the share is not defined there; in Mathews and Namoro (L23) non-strategic contestants fill the remaining places and can win without choosing, the strategic count is fixed at two and no share is analysed. Here outsiders compete on the base score. Binary contests (Ghosh and Kleinberg) and contests with pre-contest investment are the places to look; not searched beyond abstracts |
 | The incumbent abstains while a challenger enters only inside the band (M30) (added 9 Oct 2026) | **SURVIVES (minor) as an answer to R2.1; not a novelty claim** | A corollary of M6 and M7 for `Q+1` symmetric players (`incumbent_out_iff`) |
 | Count invariance fails with ability rising in wealth (M29) (added 9 Oct 2026) | **Scope result, not a novelty claim** | Same phenomenon as Fullerton and McAfee's `two_sizes` (L5): the gain depends on who enters |
 | The mechanism (wealth sorts entry via concavity) | **DOES NOT SURVIVE** | Lazear–Rosen (1981) §III; Schroyen–Treich (2016) privilege contest |
