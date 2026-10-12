@@ -160,13 +160,27 @@ def empirical_problems(erows, mids, gids):
             ok, detail = reproduce(f)
             if not ok:
                 problems.append((rid, f"{f}: {detail}"))
-        for pre in [e for e in files if re.search(r"/PREREG_[^/]+\.md$", e)]:
-            tp = first_commit_time(pre)
-            for f in results:
-                tr = first_commit_time(f)
-                if tp is None or tr is None or tp > tr:
+        pres = [e for e in files if re.search(r"/PREREG_[^/]+\.md$", e)]
+        paired = set()
+        for f in results:
+            for pre in run_under(f):
+                paired.add(pre)
+                if pre not in pres:
+                    problems.append((rid, f"{f} runs under {pre}, which the row does not list"))
+                elif order_problem(pre, f):
                     problems.append((rid, f"{pre} not committed before {f}"))
+        problems += [(rid, f"{pre} is named by no results file in the row") for pre in pres if pre not in paired]
     return problems
+
+
+def run_under(path):
+    text = open(os.path.join(ROOT, path)).read()
+    return [os.path.join(os.path.dirname(path), n) for n in re.findall(r"under (PREREG_[A-Za-z0-9_]+\.md)", text)]
+
+
+def order_problem(pre, res):
+    tp, tr = first_commit_time(pre), first_commit_time(res)
+    return tp is None or tr is None or tp > tr
 
 
 def analyse(tex, lean, bibs, lit, gids=None):
@@ -291,7 +305,7 @@ def main():
              "MS-4": "every model row names audited Lean theorems and has one matching proof",
              "MS-5": "every literature row quotes its lit/ record verbatim",
              "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof",
-             "MS-7": "every empirical row has a verdict, existing model and map rows, and results files that reproduce from pinned data, each after its pre-registration"}
+             "MS-7": "every empirical row has a verdict, existing model and map rows, and results files that reproduce from pinned data, each committed after the pre-registration it names"}
     for k in sorted(real):
         ok, detail = real[k]
         check(f"{k} {names[k]}", ok, "" if ok else detail)
@@ -306,6 +320,12 @@ def main():
     for k in sorted(good):
         check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
         check(f"{k}-control fails on the faulty sample", not bad[k][0])
+    check("MS-7-order-control a results file after its pre-registration passes",
+          not order_problem("06_empirical_starter/PREREG_ownership_split.md",
+                            "06_empirical_starter/results_ownership_split.md"))
+    check("MS-7-order-control a pre-registration committed after the results file fails",
+          order_problem("06_empirical_starter/PREREG_ownership_split_2.md",
+                        "06_empirical_starter/results_ownership_split.md"))
     r_good = prose_ratio(proof_blocks(GOOD)[0][2])
     r_bad = prose_ratio(proof_blocks(BAD)[0][2])
     print(f"      prose share, well-formed sample {r_good[0]:.2f}; faulty sample {r_bad[0]:.2f}")

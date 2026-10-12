@@ -189,6 +189,18 @@ grounds.
   (SAFE WP 156), Jokipii and Milne (BoF RDP 17/2006), Lepetit,
   Saghi-Zedek and Tarazi (HAL 2013), Valencia (IMF WP 08/248, 13/241)
   and Nuño and Thomas (ECB WP 1524).
+- 2026-10-12. Ownership split of E2 and E3, after reading Holod and Peek
+  and Houston, James and Marcus (subsidiaries' dividends and capital
+  receipts are transfers with the parent). Run 1
+  (PREREG_ownership_split.md): `HCTMULT` is never 0 and is constant within
+  banks, so the stand-alone group was empty; recorded unchanged. Run 2
+  (PREREG_ownership_split_2.md, groups from `RSSDHCR` counts per quarter):
+  stand-alone banks fail E3 (56.0% pay below y*) and E2 (b_post +1.38,
+  +1.39). E2 and E3 stand and now say so for stand-alone banks. Reported
+  only: banks with no holding company pay below y* in 26.8% of
+  bank-quarters; 70.5% of stand-alone recapitalisation comes from the
+  parent. MS-7 now pairs each results file with the pre-registration it
+  names.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
