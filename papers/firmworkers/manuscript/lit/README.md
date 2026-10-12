@@ -45,6 +45,7 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 | `cunha_heckman_2007` | `CunhaHeckman2007` | NBER WP 12840 (Jan 2007), cited as such | read in full, 20 quotations, 23 Lean theorems |
 | `gibbons_waldman_1998` | `GibbonsWaldman1999` | NBER WP 6454 (Mar 1998), scan read through Drive's OCR, cited as such | read in full, 17 quotations, 33 Lean theorems |
 | `cole_mailath_postlewaite` | `ColeMailathPostlewaite1992`, `ColeMailathPostlewaite1995` | JPE article; CARESS WP 95-14 | both read in full, 26 + 8 quotations, 33 Lean theorems |
+| `robson_1992` | `Robson1992` | Econometrica article, pp.837–857, scan read through Drive's OCR, displays from page images | read in full, 26 quotations, 22 Lean theorems |
 
 ## Running
 

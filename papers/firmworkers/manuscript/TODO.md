@@ -10,6 +10,7 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 - [x] Cunha and Heckman (2007), NBER WP 12840 — L1, `lit/cunha_heckman_2007`
 - [x] Gibbons and Waldman, NBER WP 6454 (1998) — L2, `lit/gibbons_waldman_1998`
 - [x] Cole, Mailath and Postlewaite (1992, JPE) and (1995, CARESS WP 95-14) — L14, L15, `lit/cole_mailath_postlewaite`, read 11 Oct 2026
+- [x] Robson (1992), Econometrica — L16, `lit/robson_1992`, read 12 Oct 2026, novelty for the reference-dependent sub-section
 
 ### Needed for verification
 
