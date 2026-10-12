@@ -47,6 +47,7 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 | `cole_mailath_postlewaite` | `ColeMailathPostlewaite1992`, `ColeMailathPostlewaite1995` | JPE article; CARESS WP 95-14 | both read in full, 26 + 8 quotations, 33 Lean theorems |
 | `becker_murphy_werning_2005` | `BeckerMurphyWerning2005` | authors' manuscript revised Dec 2003, pp.1–32, cited as the JPE article with `version_read` | read in full, 25 quotations, 17 Lean theorems |
 | `genicot_ray_2017` | `GenicotRay2017` | Econometrica article, pp.489–519; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
+| `kahneman_tversky_1979` | `KahnemanTversky1979` | Econometrica article, pp.263–291, ProQuest scan read through a local OCR (`lit/ocr_pages.py`) | read in full, 20 quotations, 13 Lean theorems |
 | `koszegi_rabin_2006` | `KoszegiRabin2006` | QJE article, pp.1133–1165 | read in full, 19 quotations, 13 Lean theorems |
 | `ray_robson_2012` | `RayRobson2012` | Econometrica article, pp.1505–1531; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
 | `robson_1992` | `Robson1992` | Econometrica article, pp.837–857, scan read through Drive's OCR, displays from page images | read in full, 26 quotations, 22 Lean theorems |
