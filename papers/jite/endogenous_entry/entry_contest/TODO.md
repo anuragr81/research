@@ -928,7 +928,14 @@ paper's claims, and only then write the manuscript.
   The file uploaded as "The asymptotic behavior of dynamic rent-seeking
   games" is Chiarella and Szidarovszky (2002), CAMWA 43, 169-178: stability
   of a rent-seeking game with a fixed number of agents. It is not
-  Corcoran-Karels and has no record under `lit/` (offered to the author).
+  Corcoran-Karels. At the author's request (13 Oct 2026) it was read in full,
+  `lit/chiarella_szidarovszky_2002/`, `lean/mathlib/ChiarellaSzidarovszky.lean`
+  (99 theorems). Not an entry paper; no manuscript row. Findings: the paper's
+  eq. (6) bounds every group (`m_l d_l + γ_l < 0`), which Example 2 violates,
+  so its limit-cycle example is not a game; an unstable complex pair does
+  occur at admissible parameters; Theorem 2's stability conclusions need
+  Theorem 1(ii)'s hypothesis (a witness with eigenvalue 1/27); the printed
+  numbers of Example 2 are right.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
