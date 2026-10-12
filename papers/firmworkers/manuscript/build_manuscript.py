@@ -173,6 +173,16 @@ def references_table(data, cited):
     return f"\\begin{{longtable}}{{{col([2.7, 5.0, 5.4, 5.4, 1.8, 2.6])}}}\n\\toprule {head}\n" + '\n'.join(rows) + "\n\\end{longtable}"
 
 
+def summary_text(d):
+    paras = {}
+    for sent in d.get('summary') or []:
+        paras.setdefault(sent['para'], []).append(escape_text(sent['text']))
+    body = '\n\n'.join(' '.join(v) for _, v in sorted(paras.items()))
+    return ('\\subsection*{The model in plain English}\n' + body + '\n\n'
+            'The terms are those of the terminology table in the measurement map. '
+            'Each sentence records in \\texttt{claims.yaml} the rows, Lean theorems or source premise it rests on.')
+
+
 def vocab(d):
     return '\n'.join(f"\\item[\\texttt{{{escape_text(k)}}}] {mixed(v)}" for k, v in d.items())
 
@@ -233,6 +243,8 @@ Headline and concluding claims may rest only on model claims, literature claims 
 {derived_table(d.get('headline') or [], 'No headline claims are admitted in this pass.')}
 
 \section{{Model claims}}
+{summary_text(d)}
+
 {{\small
 {model_table(by_status(d, 'LEAN_PROVED', 'LEAN_WRITTEN'))}}}
 

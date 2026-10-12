@@ -33,10 +33,22 @@ def table(rows, used, role):
         if r['role'] != role:
             continue
         prod = f"\\newline produced by {', '.join(r['produced_by'])}" if r.get('produced_by') else ''
-        body.append(f"{r['id']} & {r['symbol']}{prod} & {mixed(r['meaning'])} & {mixed(r.get('referent')) or '---'} & "
+        body.append(f"{r['id']} & {r['symbol']} \\newline \\textit{{{escape_text(r.get('term', ''))}}}{prod} & {mixed(r['meaning'])} & {mixed(r.get('referent')) or '---'} & "
                     f"\\texttt{{{escape_text(r['support'])}}} & {mixed(r.get('direction')) or '---'} & {observation_cell(r)} & "
                     f"{', '.join(used.get(r['id'], []))} \\\\ \\midrule")
     return f"\\begin{{longtable}}{{{col([0.8, 2.2, 4.0, 3.6, 1.6, 4.0, 4.6, 1.8])}}}\n\\toprule {head}\n" + '\n'.join(body) + "\n\\end{longtable}"
+
+
+def terminology(mmap):
+    rows = [(r['term'], r['symbol'], mixed(r['meaning']), r['id'], r.get('avoid') or [], r.get('term_status', ''))
+            for r in mmap['rows']]
+    rows += [(t['term'], '---', mixed(t['meaning']), ', '.join(t.get('defined_in') or []), t.get('avoid') or [],
+              t.get('status', '')) for t in mmap.get('terms') or []]
+    head = r'Term & Symbol & Meaning & Defined in & Not to be called & Status \\ \midrule \endhead'
+    body = '\n'.join(f"{escape_text(term)} & {sym} & {mean} & {where} & {escape_text(', '.join(avoid)) or '---'} & "
+                     f"\\texttt{{{escape_text(st)}}} \\\\ \\midrule"
+                     for term, sym, mean, where, avoid, st in sorted(rows, key=lambda r: r[0].lower()))
+    return f"\\begin{{longtable}}{{{col([3.4, 2.6, 7.4, 2.2, 5.0, 2.0])}}}\n\\toprule {head}\n{body}\n\\end{{longtable}}"
 
 
 def main():
@@ -74,6 +86,12 @@ def main():
 
 {vocab(mmap['observation_status'])}
 \end{{description}}
+
+\section{{Terminology}}
+One plain-English name per object. The model summary in the manuscript and the prose of this map use only these names; \texttt{{check.py}} rejects the names in the column Not to be called and lists the ledger rows that still use them. Terms marked PROPOSED await the author's agreement.
+
+{{\small
+{terminology(mmap)}}}
 
 \section{{Inputs}}
 {{\small

@@ -16,6 +16,8 @@ ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
 QUOTE_ROW = re.compile(r'^\|\s*[A-Z][A-Z0-9]*-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
 CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
+SUMMARY_WORDS = (270, 310)
+SUMMARY_MARKS = {':': 'colon', '\u2014': 'dash', '\u2013': 'dash', ' - ': 'dash', '$': 'symbol'}
 PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED', 'DECIDED'), 'decision': ('DECIDED',),
              'waits_on': ('OPEN',), 'rows': ('OPEN',)}
 
@@ -365,6 +367,104 @@ def check_references(data, rows, errors, notes):
     return cited
 
 
+def term_entries(mmap):
+    entries = [(r['term'], r.get('avoid') or [], r['id']) for r in mmap['rows'] if str(r.get('term', '')).strip()]
+    return entries + [(t['term'], t.get('avoid') or [], t['term']) for t in mmap.get('terms') or []]
+
+
+def avoided_hits(text, entries):
+    return [(a, term) for term, avoid, _ in entries for a in avoid
+            if re.search(r'(?<![\w-])' + re.escape(a) + r'(?![\w-])', text, re.I)]
+
+
+def check_terms(data, mmap, errors, notes):
+    model_ids = {c['id'] for c in data['model']}
+    xids = {r['id'] for r in mmap['rows']}
+    tstat = mmap.get('term_status') or {}
+    for r in mmap['rows']:
+        if not str(r.get('term', '')).strip():
+            errors.append(f'{r["id"]}: no plain-English term')
+        elif r.get('term_status') not in tstat:
+            errors.append(f'{r["id"]}: term_status must be one of {", ".join(tstat)}')
+    for t in mmap.get('terms') or []:
+        name = t.get('term', '?')
+        for field in ('term', 'meaning'):
+            if not str(t.get(field, '')).strip():
+                errors.append(f'term {name!r}: empty {field}')
+        if t.get('status') not in tstat:
+            errors.append(f'term {name!r}: status must be one of {", ".join(tstat)}')
+        if not t.get('defined_in'):
+            errors.append(f'term {name!r}: no defined_in rows')
+        for d in t.get('defined_in') or []:
+            if d not in model_ids | xids:
+                errors.append(f'term {name!r}: defined_in cites missing {d}')
+    entries = term_entries(mmap)
+    names = [e[0].lower() for e in entries]
+    for dup in sorted({n for n in names if names.count(n) > 1}):
+        errors.append(f'terminology: {dup!r} names more than one object')
+    for term, avoid, _ in entries:
+        for a in avoid:
+            if a.lower() in names:
+                errors.append(f'terminology: {a!r} is avoided for {term!r} but is itself a term')
+    for r in mmap['rows']:
+        for field in ('meaning', 'referent', 'observation', 'observation_note', 'direction'):
+            for a, term in avoided_hits(str(r.get(field, '') or ''), entries):
+                errors.append(f'{r["id"]}.{field}: uses {a!r}; the term is {term!r}')
+    for c in data['model']:
+        hits = sorted({f'{a!r} for {term!r}' for field in ('claim', 'evidence', 'decision', 'waits_on')
+                       for a, term in avoided_hits(str(c.get(field, '') or ''), entries)})
+        if hits:
+            notes.append(f'{c["id"]}: terminology, uses {"; ".join(hits)}')
+    return entries
+
+
+def check_summary(data, lean_text, source, entries, errors, notes):
+    summ = data.get('summary') or []
+    if not summ:
+        errors.append('summary: missing')
+        return
+    status = {c['id']: c['status'] for c in data['model']}
+    lit_status = {c['id']: c['status'] for c in data['literature']}
+    words = sum(len(str(s.get('text', '')).split()) for s in summ)
+    if not SUMMARY_WORDS[0] <= words <= SUMMARY_WORDS[1]:
+        errors.append(f'summary: {words} words, outside {SUMMARY_WORDS[0]} to {SUMMARY_WORDS[1]}')
+    for k, s in enumerate(summ, 1):
+        tag = f'summary sentence {k}'
+        text = str(s.get('text', '')).strip()
+        if not text:
+            errors.append(f'{tag}: empty')
+            continue
+        for mark, name in SUMMARY_MARKS.items():
+            if mark in text:
+                errors.append(f'{tag}: contains a {name}')
+        for a, term in avoided_hits(text, entries):
+            errors.append(f'{tag}: uses {a!r}; the term is {term!r}')
+        rests = [str(r) for r in s.get('rests_on') or []]
+        if not rests:
+            errors.append(f'{tag}: rests_on is empty')
+        for r in rests:
+            if r.startswith('anchor:'):
+                quote = r[len('anchor:'):].strip()
+                if source and lit_norm(quote) not in source:
+                    errors.append(f'{tag}: anchor not found in inputs/firmworkers_model.pdf: {quote[:60]}')
+            elif re.fullmatch(r'M\d+', r):
+                if r not in status:
+                    errors.append(f'{tag}: rests on missing {r}')
+                elif status[r] in ('OPEN', 'REFUTED', 'ILL_POSED'):
+                    errors.append(f'{tag}: rests on {r} with status {status[r]}')
+                elif status[r] == 'UNDERSPECIFIED':
+                    notes.append(f'{tag}: rests on {r}, which is UNDERSPECIFIED')
+            elif re.fullmatch(r'L\d+', r):
+                if lit_status.get(r) != 'VERBATIM':
+                    errors.append(f'{tag}: rests on {r}, which is not a literature row read in full')
+            elif r.startswith('Isc.'):
+                if not lean_declared(r, lean_text):
+                    errors.append(f'{tag}: Lean theorem {r} not declared')
+            else:
+                errors.append(f'{tag}: cannot rest on {r!r}')
+    notes.append(f'summary: {words} words in {len(summ)} sentences')
+
+
 def cited_map_rows(data):
     out = []
     for section in ('headline', 'concluding'):
@@ -514,6 +614,8 @@ def main():
                 errors.append(f'{who}: rests on {lid}, which is {lit_status[lid]}; a paper a claim rests on must be read in full')
     check_derived_claims(data, rows, errors, notes)
     check_references(data, rows, errors, notes)
+    entries = check_terms(data, mmap, errors, notes)
+    check_summary(data, lean_text, source, entries, errors, notes)
     counts = {}
     for c in data['model'] + data['literature'] + (data.get('headline') or []) + (data.get('concluding') or []):
         if 'status' not in c:

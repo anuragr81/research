@@ -19,9 +19,87 @@ observation_status:
   PROPOSED: 'how an observer could obtain the object, proposed and awaiting the author''s confirmation'
   CONFIRMED: 'confirmed by the author'
 
+term_status:
+  PROPOSED: 'plain-English name proposed, awaiting the author''s agreement'
+  AGREED: 'agreed by the author; the only name used for the object'
+
+terms:
+  - term: 'ladder'
+    meaning: 'the fixed list of jobs ordered by income'
+    defined_in: [M2, X15]
+    avoid: ['hierarchy', 'labour queue']
+    status: PROPOSED
+  - term: 'job'
+    meaning: 'one place on the ladder, held by one worker'
+    defined_in: [M10, X1]
+    avoid: ['position', 'slot']
+    status: PROPOSED
+  - term: 'bottom rung'
+    meaning: 'the lowest job on the ladder, paying the bottom income'
+    defined_in: [M32, X3]
+    avoid: ['floor']
+    status: PROPOSED
+  - term: 'displaced worker'
+    meaning: 'a worker whose job is lost to creative destruction'
+    defined_in: [M32]
+    avoid: ['job loser', 'separator']
+    status: PROPOSED
+  - term: 'downgrade'
+    meaning: 'the route of a displaced worker that pays the bottom income'
+    defined_in: [M32, M33]
+    avoid: ['step down']
+    status: PROPOSED
+  - term: 'return'
+    meaning: 'the route of a displaced worker that buys the former job back at the upskilling cost'
+    defined_in: [M35]
+    avoid: ['costly return', 're-entry']
+    status: PROPOSED
+  - term: 'lottery'
+    meaning: 'the route of a displaced worker that pays the lottery cost and swaps into the former job of a partner'
+    defined_in: [M11, M14, M32]
+    avoid: ['social lottery', 'social contest', 'social contests', 'social navigation', 'swap pool']
+    status: PROPOSED
+  - term: 'entrant'
+    meaning: 'a displaced worker who takes the lottery'
+    defined_in: [M14, M32]
+    avoid: ['participant', 'lottery player']
+    status: PROPOSED
+  - term: 'pool'
+    meaning: 'the set of entrants'
+    defined_in: [M14, X23]
+    avoid: ['swap pool']
+    status: PROPOSED
+  - term: 'partner'
+    meaning: 'the entrant whose former job an entrant receives'
+    defined_in: [M11, M14]
+    avoid: ['counterparty']
+    status: PROPOSED
+  - term: 'former income'
+    meaning: 'the income of the job a displaced worker lost'
+    defined_in: [M32, M33]
+    avoid: []
+    status: PROPOSED
+  - term: 'inequality'
+    meaning: 'the spread of incomes across ranks, which falls as the tail index rises'
+    defined_in: [M3, M4, X4]
+    avoid: ['stakes']
+    status: PROPOSED
+  - term: 'valuing income at its average'
+    meaning: 'utility linear in income, so a lottery is worth its mean income'
+    defined_in: [M24]
+    avoid: []
+    status: PROPOSED
+  - term: 'competing through connections'
+    meaning: 'the real-world counterpart of the lottery'
+    defined_in: [X8]
+    avoid: ['social navigation', 'social contest', 'social contests']
+    status: PROPOSED
+
 rows:
   - id: X1
     symbol: '$N$'
+    term: 'number of jobs'
+    term_status: PROPOSED
     role: input
     meaning: 'number of workers, equal to the number of jobs'
     referent: 'size of the labour market'
@@ -34,6 +112,9 @@ rows:
 
   - id: X2
     symbol: '$q\in[0,1)$'
+    term: 'rank'
+    avoid: ['position']
+    term_status: PROPOSED
     role: input
     meaning: 'rank quantile of a job on the ladder'
     referent: 'percentile of a job in the wage ranking'
@@ -47,6 +128,9 @@ rows:
 
   - id: X3
     symbol: '$x_0$'
+    term: 'bottom income'
+    avoid: ['floor']
+    term_status: PROPOSED
     role: input
     meaning: 'income at $q=0$'
     referent: 'lowest wage'
@@ -60,6 +144,9 @@ rows:
 
   - id: X4
     symbol: '$a$'
+    term: 'tail index'
+    avoid: ['stakes']
+    term_status: PROPOSED
     role: input
     meaning: 'tail index of the income ladder $x(q)=x_0(1-q)^{-1/a}$'
     referent: 'income dispersion across ranks, inversely'
@@ -73,12 +160,15 @@ rows:
 
   - id: X5
     symbol: '$b$'
+    term: 'cost exponent'
+    avoid: ['cost level']
+    term_status: PROPOSED
     role: input
-    meaning: 'exponent of the upward-move cost $C(m_i,m_k)=(m_k-m_i)^b$'
-    referent: 'convexity of retraining cost in the income distance climbed'
+    meaning: 'exponent of the upskilling cost $C(m_i,m_k)=(m_k-m_i)^b$'
+    referent: 'convexity of the upskilling cost in the income distance climbed'
     support: POSIT
     direction: 'for $b\ge1$ two adjacent steps cost no more than the jump (M8). For $0\le b\le1$ the jump costs no more than the steps (M9)'
-    observation: 'growth of retraining cost (tuition and earnings forgone while retraining) with the wage gap between origin and destination job, from training records linked to job moves'
+    observation: 'growth of the upskilling cost (tuition and earnings forgone while retraining) with the wage gap between origin and destination job, from training records linked to job moves'
     observation_status: PROPOSED
     observation_support: PROVEN
     observation_lean: [Isc.cost_exponent_log_linear]
@@ -86,8 +176,10 @@ rows:
 
   - id: X6
     symbol: '$m$'
+    term: 'income'
+    term_status: PROPOSED
     role: input
-    meaning: 'income of a position, written $x$ on the ladder'
+    meaning: 'income of a job, written $x$ on the ladder'
     referent: 'wage of a job'
     support: POSIT
     direction: ''
@@ -98,21 +190,27 @@ rows:
 
   - id: X7
     symbol: '$L$'
+    term: 'lottery cost'
+    avoid: ['entry fee', 'entry cost']
+    term_status: PROPOSED
     role: input
     meaning: 'fixed cost of entering the lottery'
-    referent: 'cost of social navigation, such as networking, club membership and compliance with social closure'
+    referent: 'cost of competing through connections, such as networking, club membership and compliance with social closure'
     support: POSIT
     direction: 'higher $L$ lowers the participation threshold (M13)'
-    observation: 'spending on social navigation such as membership fees and networking time, from expenditure or time-use surveys'
+    observation: 'spending on competing through connections, such as membership fees and networking time, from expenditure or time-use surveys'
     observation_status: PROPOSED
     observation_support: UNVERIFIED
-    observation_note: 'That spending on networking measures the entry cost is a posit; no paper read in full measures it'
+    observation_note: 'That spending on networking measures the lottery cost is a posit; no paper read in full measures it'
 
   - id: X8
     symbol: 'swap rule'
+    term: 'swap'
+    avoid: ['reshuffle']
+    term_status: PROPOSED
     role: input
     meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other entrants (M14, decided 10 Oct 2026); a draw across status groups is weighted by $1-\sigma$ (M29)'
-    referent: 'a social contest that reallocates jobs by connection or luck rather than by skill'
+    referent: 'competing through connections, which reallocates jobs by connection or luck rather than by skill'
     support: POSIT
     direction: ''
     observation: 'not observed directly; its implication is a rank change after job loss that is unrelated to the worker''s own rank, testable on the distribution of rank changes in panel data'
@@ -122,6 +220,9 @@ rows:
 
   - id: X9
     symbol: '$u$'
+    term: 'utility'
+    avoid: ['happiness']
+    term_status: PROPOSED
     role: input
     meaning: 'utility over income in expected-utility form, unique up to a positive affine transformation (decision of 10 Oct 2026), S-shaped in the manuscript, functional form not given'
     referent: 'attitude to income risk, risk-seeking below a reference income and risk-averse above it'
@@ -134,6 +235,8 @@ rows:
 
   - id: X10
     symbol: '$\bar y$'
+    term: 'mean lottery income'
+    term_status: PROPOSED
     role: input
     meaning: 'mean of net income from the lottery component'
     referent: 'expected income'
@@ -146,9 +249,11 @@ rows:
 
   - id: X11
     symbol: '$\sigma_y$'
+    term: 'lottery risk'
+    term_status: PROPOSED
     role: input
     meaning: 'standard deviation of net income from the lottery component'
-    referent: 'income risk created by taking part in social contests'
+    referent: 'income risk created by competing through connections'
     support: POSIT
     direction: ''
     observation: 'standard deviation of that income change, from panel data'
@@ -158,6 +263,8 @@ rows:
 
   - id: X12
     symbol: '$\varepsilon$'
+    term: 'standardised shock'
+    term_status: PROPOSED
     role: input
     meaning: 'standardised shock, $\mathbb{E}\varepsilon=0$, $\mathbb{E}\varepsilon^2=1$'
     referent: ''
@@ -167,9 +274,11 @@ rows:
 
   - id: X13
     symbol: '$s$'
+    term: 'risk scale'
+    term_status: PROPOSED
     role: input
     meaning: 'scale in $\sigma_y=s(1-\lambda)m$'
-    referent: 'income risk per unit of income staked on social contests'
+    referent: 'income risk per unit of income staked on competing through connections'
     support: POSIT
     direction: ''
     observation: 'ratio of the income risk of the lottery route to the income staked, compared across income levels in panel data'
@@ -180,18 +289,22 @@ rows:
 
   - id: X14
     symbol: '$\lambda$'
+    term: 'upskilling share'
+    term_status: PROPOSED
     role: input
     meaning: 'share of income allocated to upskilling, with $1-\lambda$ allocated to the lottery'
-    referent: 'share of resources spent on human capital rather than on social navigation'
+    referent: 'share of resources spent on upskilling rather than on competing through connections'
     support: POSIT
     direction: ''
-    observation: 'share of spending on training or certification against spending on social navigation, from expenditure or time-use surveys'
+    observation: 'share of spending on training or certification against spending on competing through connections, from expenditure or time-use surveys'
     observation_status: PROPOSED
     observation_support: UNVERIFIED
     observation_note: 'That the spending shares measure the upskilling share is a posit; no paper read in full measures it'
 
   - id: X15
     symbol: '$x(q)$'
+    term: 'ladder income'
+    term_status: PROPOSED
     role: output
     produced_by: [M2]
     meaning: '$x_0(1-q)^{-1/a}$'
@@ -206,19 +319,24 @@ rows:
 
   - id: X16
     symbol: '$C(m_i,m_k)$'
+    term: 'upskilling cost'
+    avoid: ['retraining cost', 'transition cost', 'skill cost', 'acquisition cost', 'upward-move cost']
+    term_status: PROPOSED
     role: output
     produced_by: [M7]
     meaning: '$(m_k-m_i)^b$ if $m_i<m_k$, $0$ otherwise'
-    referent: 'retraining cost of moving from job $i$ up to job $k$'
+    referent: 'upskilling cost of moving from job $i$ up to job $k$'
     support: POSIT
     direction: 'zero for downward and lateral moves (M7)'
-    observation: 'retraining cost of an observed upward move, from training records and earnings forgone'
+    observation: 'upskilling cost of an observed upward move, from training records and earnings forgone'
     observation_status: PROPOSED
     observation_support: DEFINITIONAL
     observation_note: 'The observation is the object itself once the referent is accepted'
 
   - id: X17
     symbol: '$S$'
+    term: 'total income'
+    term_status: PROPOSED
     role: output
     produced_by: [M10]
     meaning: '$\sum_k x_k$'
@@ -232,13 +350,15 @@ rows:
 
   - id: X18
     symbol: '$G_i$'
+    term: 'expected lottery gain'
+    term_status: PROPOSED
     role: output
     produced_by: [M11]
     meaning: '$\frac{S_P-|P|x_i}{|P|-1}-L$'
-    referent: 'expected net payoff to worker $i$ from social navigation, valued risk-neutrally'
+    referent: 'expected net payoff to worker $i$ from competing through connections, valued risk-neutrally'
     support: POSIT
     direction: 'sums to $-|P|L$ over the pool (M12); negative for the richest entrant when $L>0$ (M24)'
-    observation: 'mean income change net of the entry cost for workers from rank i who take the lottery route, from panel data'
+    observation: 'mean income change net of the lottery cost for workers from rank i who take the lottery route, from panel data'
     observation_status: PROPOSED
     observation_support: PROVEN
     observation_lean: [Isc.poolGain_closed]
@@ -246,10 +366,12 @@ rows:
 
   - id: X19
     symbol: '$\bar x_{\mathrm{part}}$'
+    term: 'break-even income'
+    term_status: PROPOSED
     role: output
     produced_by: [M13]
     meaning: '$\frac{S_P-(|P|-1)L}{|P|}$, with $G_i>0\iff x_i<\bar x_{\mathrm{part}}$'
-    referent: 'income below which social navigation pays in expectation'
+    referent: 'income below which competing through connections pays in expectation'
     support: POSIT
     direction: ''
     observation: 'income below which workers take the lottery route, estimated as a participation threshold on rank'
@@ -259,10 +381,12 @@ rows:
 
   - id: X20
     symbol: '$\tfrac12u^{\prime\prime}(\bar y)\sigma_y^2$'
+    term: 'risk term'
+    term_status: PROPOSED
     role: output
     produced_by: [M15]
     meaning: 'second-order risk term in expected utility'
-    referent: 'utility value of the income risk from social contests'
+    referent: 'utility value of the income risk from competing through connections'
     support: POSIT
     direction: 'positive exactly where $u^{\prime\prime}>0$ (M16)'
     observation: 'not measured; a construct inferred only through choices under risk'
@@ -272,6 +396,8 @@ rows:
 
   - id: X21
     symbol: '$p$'
+    term: 'risk-premium coefficient'
+    term_status: PROPOSED
     role: output
     produced_by: [M18]
     meaning: '$\tfrac12u^{\prime\prime}s^2m^2$, coefficient on $(1-\lambda)^2$'
@@ -285,6 +411,8 @@ rows:
 
   - id: X22
     symbol: '$S_P$'
+    term: 'pool income'
+    term_status: PROPOSED
     role: input
     meaning: 'sum of the former incomes of the lottery entrants, who are displaced workers (M32)'
     referent: 'income held by those who compete through connections'
@@ -297,6 +425,8 @@ rows:
 
   - id: X23
     symbol: '$|P|$'
+    term: 'pool size'
+    term_status: PROPOSED
     role: input
     meaning: 'number of lottery entrants, who are displaced workers (M32)'
     referent: 'number of workers competing through connections'
@@ -309,8 +439,11 @@ rows:
 
   - id: X24
     symbol: '$h$'
+    term: 'status group'
+    avoid: ['human capital', 'status label', 'caste']
+    term_status: PROPOSED
     role: input
-    meaning: 'categorical status label of a worker, one of two groups, fixed within a working life (M28)'
+    meaning: 'status group of a worker, one of two, fixed within a working life (M28)'
     referent: 'status group in Weber''s sense, a categorical identity such as ethnicity, religion, nationality or political identity'
     support: POSIT
     direction: ''
@@ -321,6 +454,9 @@ rows:
 
   - id: X25
     symbol: '$\sigma$'
+    term: 'closure'
+    avoid: ['categorical friction', 'friction']
+    term_status: PROPOSED
     role: input
     meaning: 'closure parameter in $[0,1]$; a partner draw across groups has weight $1-\sigma$ against $1$ within the group (M29)'
     referent: 'social closure, the degree to which connections across status groups are restricted'
@@ -334,13 +470,15 @@ rows:
 
   - id: X26
     symbol: '$G_i(\sigma)$'
+    term: 'closure-weighted lottery gain'
+    term_status: PROPOSED
     role: output
     produced_by: [M25, M26, M27]
     meaning: '$\frac{a+(1-\sigma)b}{n+(1-\sigma)m}-L$, the closure-weighted expected swap gain'
     referent: 'expected net payoff from competing through connections when connections are closed along status lines'
     support: POSIT
     direction: 'equals $G_i$ of M11 at $\sigma=0$ (M25)'
-    observation: 'mean income change net of the entry cost for entrants of each group who take the lottery route, from panel data'
+    observation: 'mean income change net of the lottery cost for entrants of each group who take the lottery route, from panel data'
     observation_status: PROPOSED
     observation_support: PROVEN
     observation_lean: [Isc.closureGain_formula]
