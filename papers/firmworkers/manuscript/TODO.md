@@ -14,7 +14,8 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 - [x] Becker, Murphy and Werning (2005), JPE, read in the authors' December 2003 manuscript — L17, `lit/becker_murphy_werning_2005`, read 12 Oct 2026, novelty for the reference-dependent sub-section
 - [x] Ray and Robson (2012), Econometrica — L18, `lit/ray_robson_2012`, read 12 Oct 2026, novelty for the reference-dependent sub-section
 - [x] Kőszegi and Rabin (2006), QJE — L19, `lit/koszegi_rabin_2006`, read 12 Oct 2026, contrast case for $R_h$
-- [ ] Genicot and Ray, "Aspirations and Inequality" (Econometrica, 2017, details unverified) — named by Ray and Robson (RR-7) for reference points built from the income distribution; the closest novelty risk for $R_h$. Not on Drive
+- [x] Genicot and Ray (2017), Econometrica — L20, `lit/genicot_ray_2017`, read 12 Oct 2026. Group-based aspirations are named as an extension (GR-13, GR-14); cross-group interaction is left open (GR-15). The novelty of the sub-section moves from $R_h$ itself to the interaction of a group reference with closure $\sigma$ in the cross-group pool
+- [ ] Kaus on South Africa (the author's pointer, 12 Oct 2026): race-based reference groups in consumption, which bears directly on a group-norm $R_h$. Not on Drive; full reference to be confirmed with the author
 
 ### Needed for verification
 
