@@ -39,6 +39,7 @@ Weber (1978) and Tilly (1998), cited by the source manuscript, exploration only 
 - 11 Oct 2026: $h$ is social standing, non-contractual and outside the market; firms observe it but do not price it. Merging $b$ into $h$ is rejected because it would let the firm's price schedule govern social rank. Cole–Mailath–Postlewaite (1992) is the formal reference: the aristocratic equilibrium (status inherited, market decisions undistorted) is the case adopted, wealth-is-status the case rejected.
 - 11 Oct 2026: $h$ is a categorical label fixed within a working life; its evolution belongs to the intergenerational layer (M28 DECIDED).
 - 11 Oct 2026: friction is one closure parameter $\sigma$, symmetric between two groups, acting on partner draws in the entrant pool, with its limitations stated in M29 (DECIDED). Results M25–M27 in `IscLean/Closure.lean`.
+- 12 Oct 2026: lottery entrants are displaced workers, and a displaced worker who does nothing falls to the bottom rung $x_0$ (M32 DECIDED, reading (a)). Results M33–M35 in `IscLean/Displacement.lean`. Specific forms of $u$ go in a separate sub-section with a reference income $R_h$, the income norm of the own status group; main claims stay form-free.
 - 11 Oct 2026: Weber (1978) and Tilly (1998) stay exploration only; the entry_contest records are not adapted.
 - Open (superseded items struck): Q7 (meaning of stakes), Q8 (repairs). Earlier open items, now decided: whether $h$ is fixed within a working life (the aristocratic status rule (12) as its law of motion, with any evolution intergenerational), how friction enters the kernel (CMP92 p.1111: the block on crossing status lines comes from feasibility, not preference, so friction is that block), whether the Weber and Tilly records of entry_contest are adapted.
 - 10 Oct 2026: primary sources (with record and Lean) are required for papers needed for verification or novelty; exploration does not need them.
@@ -52,7 +53,8 @@ Weber (1978) and Tilly (1998), cited by the source manuscript, exploration only 
 - [ ] Confirm or revise the PROPOSED observation entries (X1–X26, except X12), added 10 Oct 2026
 - [x] Support for each observation, 11 Oct 2026: PROVEN by `IscLean/Identification.lean` or Closure/Lottery theorems (X2, X3, X4, X5, X13, X15, X18, X25, X26), DEFINITIONAL (X1, X6, X10, X11, X16, X17, X22, X23), CONSTRUCT (X9, X20, X21), UNVERIFIED (X7, X8, X14, X19, X24); `check.py` rejects a headline on an UNVERIFIED observation
 - [ ] Raise the UNVERIFIED observations: X7, X14, X24 need an empirical paper read in full that measures the object; X8 needs M14 decided and proven; X19 needs an identification of the threshold under curved $u$
-- [ ] Add rows for the reference income r, displacement, the downgrade, the rank kernel and a mobility measure as the decisions below are made
+- [ ] Open for the author (12 Oct 2026): the cost of M7 has no scale, so the return-versus-downgrade comparison depends on the unit of income (M35); options include measuring income in units of $x_0$
+- [ ] Add rows for the reference income $R_h$, the downgrade, the rank kernel and a mobility measure as the decisions below are made
 
 ## Model decisions pending (micro)
 

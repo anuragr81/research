@@ -181,7 +181,7 @@ model:
     anchor: 'Appendix: "the higher-rank workers would prefer the downgrade while the low-rank workers may prefer the lottery"'
     claim: 'In long-run equilibrium high ranks choose the downgrade and low ranks choose the lottery'
     assumptions: ''
-    evidence: 'No functional form of $u$, no equilibrium concept and no transition kernel are defined. M13 gives the risk-neutral version only'
+    evidence: 'No functional form of $u$, no equilibrium concept and no transition kernel are defined. Under the displacement of M32, the lottery-against-downgrade part of the sorting holds for every nondecreasing $u$ but is of order $1/(|P|-1)$ (M34), so in a large pool the sorting has to come from the return route (M35) or from preferences that differ by group'
     status: OPEN
     waits_on: 'M19 (functional form of $u$ and the reference income $r$), an equilibrium concept, and the rank kernel of M23'
     rows: [M13, M16, M19, M23]
@@ -268,7 +268,7 @@ model:
     anchor: 'consequence of the entrant pool decided in M14'
     claim: 'For every expected-utility entrant whose $u$ is strictly increasing on the incomes involved, and $L>0$, the richest entrant of any pool of two or more strictly prefers to stay out, so no such pool is stable whatever the curvature of $u$'
     assumptions: '$|P|\ge 2$, $L>0$, partner uniform over the other entrants (M14), outcome $x_k-L$, $u$ strictly increasing on a set containing every $x_k$ and $x_k-L$'
-    evidence: 'lean/IscLean/Unravelling.lean::Isc.richest_entrant_prefers_out. Every outcome of the richest entrant, $x_k-L$, lies strictly below $x_i$, so staying out dominates entry in the first-order sense and no concavity or convexity of $u$ enters. With $u$ the identity the expected utility is the pool gain of M11 plus $x_i$ (Isc.poolEU_id), so M24 is the risk-neutral case'
+    evidence: 'lean/IscLean/Unravelling.lean::Isc.richest_entrant_prefers_out. Every outcome of the richest entrant, $x_k-L$, lies strictly below $x_i$, so staying out dominates entry in the first-order sense and no concavity or convexity of $u$ enters. Under M32 the alternative of a displaced worker is the downgrade, not $x_i$, so M30 says that no worker who keeps the job enters the lottery voluntarily, not that a pool of displaced workers unravels (M33). With $u$ the identity the expected utility is the pool gain of M11 plus $x_i$ (Isc.poolEU_id), so M24 is the risk-neutral case'
     lean: [Isc.richest_entrant_prefers_out, Isc.no_stable_pool, Isc.poolEU_id]
     status: LEAN_PROVED
     symbols: [X7, X9, X18, X22, X23]
@@ -280,6 +280,39 @@ model:
     lean: [Isc.richest_entrant_prefers_out_closure]
     status: LEAN_PROVED
     symbols: [X7, X9, X25]
+  - id: M32
+    anchor: 'Appendix: "a displaced worker can return to the previous job by investing in the skills or certifications required to perform it"'
+    claim: 'Lottery entrants are displaced workers. A displaced worker who does nothing falls to the bottom rung $x_0$, and the prize of the lottery is the former position of another displaced worker'
+    assumptions: ''
+    evidence: 'The manuscript says a worker who loses a job chooses among the downgrade, a costly return and the lottery, but gives no income for the worker who does nothing. With $C(x_0,x_i)=(x_i-x_0)^b$ the return is costly only if displacement first lowers the worker below $x_i$. Decided for the bottom rung, which adds no parameter'
+    status: DECIDED
+    decision: '12 Oct 2026, the author, reading (a) of three (bottom rung, proportional step, best vacated position below). The skills of the lost job are worth nothing on the ladder; every displaced worker has the same fallback $x_0$; there is no unemployment spell; displacement is exogenous, the creative destruction of the source. Under the pool of M14 the losers of a swap are other displaced workers, never incumbents, a departure from the manuscript, where the partner is "someone else in the job-market"'
+    affects: [M20, M30, M33, M34, M35]
+    symbols: [X3, X22, X23]
+  - id: M33
+    anchor: 'consequence of the displacement decided in M32'
+    claim: 'If every entrant''s former income less $L$ is at least the fallback $x_0$, every displaced entrant weakly prefers the lottery to the downgrade, for every nondecreasing $u$. A pool of displaced workers can be stable without any curvature of $u$'
+    assumptions: '$|P|\ge 2$, partner uniform over the other entrants (M14), outcome $x_k-L$, $L\le x_k-x_0$ for every $k\in P$, $u$ nondecreasing on a set containing $x_0$ and every $x_k-L$'
+    evidence: 'lean/IscLean/Displacement.lean::Isc.displaced_prefer_lottery. Every outcome of the lottery is at least $x_0$, so the lottery dominates the downgrade in the first-order sense. Under risk neutrality the lottery is worth the mean former income of the other entrants less $L$ (Isc.poolEU_id_avg)'
+    lean: [Isc.displaced_prefer_lottery, Isc.poolEU_id_avg]
+    status: LEAN_PROVED
+    symbols: [X3, X7, X22, X23]
+  - id: M34
+    anchor: 'consequence of the displacement decided in M32'
+    claim: 'For every nondecreasing $u$ the lottery is worth less to a richer displaced entrant, by exactly $\frac{u(x_i-L)-u(x_j-L)}{|P|-1}$ for $x_i\le x_j$. So if a richer entrant prefers the lottery to the downgrade, so does every poorer one, and a pool of displaced workers is stable exactly when its richest entrant prefers the lottery'
+    assumptions: '$|P|\ge 2$, partner uniform over the other entrants (M14), common $u$ and common fallback (M32), $u$ nondecreasing on a set containing every $x_k-L$'
+    evidence: 'lean/IscLean/Displacement.lean::Isc.poolEU_sub. The difference comes only from each entrant being excluded from the own draw, so it is of order $1/(|P|-1)$: with a common $u$ and a common fallback, entrants of a large pool face nearly the same lottery and rank sorting between the lottery and the downgrade vanishes, whatever the shape of $u$'
+    lean: [Isc.poolEU_sub, Isc.lottery_value_antitone, Isc.lottery_sorting, Isc.displaced_stable_iff_richest]
+    status: LEAN_PROVED
+    symbols: [X7, X9, X22, X23]
+  - id: M35
+    anchor: 'consequence of the displacement decided in M32'
+    claim: 'For $b>1$, the risk-neutral return to the former job, worth $x_i-(x_i-x_0)^b$, beats the downgrade exactly when the loss $x_i-x_0$ is less than one unit of income, so the comparison depends on the unit in which income is measured'
+    assumptions: '$x_0<x_i$, $b>1$, cost $C(x_0,x_i)=(x_i-x_0)^b$ (M7)'
+    evidence: 'lean/IscLean/Displacement.lean::Isc.return_vs_downgrade. A control theorem in the same file shows a loss of $1/2$ returns and the same loss measured as $2$ does not. The cost of M7 has no scale, which the manuscript does not address'
+    lean: [Isc.return_vs_downgrade, Isc.return_beats_downgrade_iff]
+    status: LEAN_PROVED
+    symbols: [X3, X5]
 
 literature:
   - id: L1
