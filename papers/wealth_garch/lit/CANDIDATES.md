@@ -104,6 +104,7 @@ Found by paging the whole Drive folder (`1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb` and 
 | `memmelraupach1.pdf` | `1ZoKitbBIeFQExiEBB3InDSEYHpED1YRt` | `53c253d977fd0c68` | Memmel and Raupach, Bundesbank DP 06/2007 (same version as the cached candidate). |
 | `wp369en.pdf` | `1g3rDUq1wvidbDFI61-4fKcOB0H4NliyA` | `99f54d75f68a4129` | Bakkar, De Jonghe and Tarazi (March 2019), NBB WP 369. |
 | `gordon_hirtle_epr_2026.pdf` | `1XQ8ecxcU33UNP2P6WZxknKuHAaBTY8e8` | `f1fe4e9c87a9ee8b` | Gordon and Hirtle, uploaded 2026-10-12 as epr_2026_banks-equity-capital_gordon.pdf. |
+| `ssrn-2902505.pdf` (cached as `baron_ssrn-2902505.pdf`) | `1lr4JhDO1p7MNSd2Wd5AiVzKOW9Nffjdh` | `5052f9fc20402a9e` | Baron, 'Countercyclical Bank Equity Issuance', accepted manuscript dated 13 Jan 2020, 'Forthcoming at Review of Financial Studies', 127 pages. Uploaded 2026-10-12. |
 
 ## Needed from the author
 
@@ -122,7 +123,7 @@ reported them, not yet verified.
 
 ### No open copy found
 
-7. Matthew Baron (2020), "Countercyclical Bank Equity Issuance", *Review of Financial Studies* 33(9):4186-4230.
+7. ~~Matthew Baron (2020), "Countercyclical Bank Equity Issuance", *Review of Financial Studies* 33(9):4186-4230.~~ Supplied 2026-10-12 (accepted manuscript, above).
 8. Rafael Kisin and Asaf Manela (2016), "The Shadow Cost of Bank Capital Requirements", *Review of Financial Studies* 29(7):1780-1820.
 9. Eric Floyd, Nan Li and Douglas J. Skinner (2015), "Payout policy through the financial crisis: The growth of repurchases and the resilience of dividends", *Journal of Financial Economics* 118(2):299-316.
 10. Jeungbo Shim (2013), "Bank capital buffer and portfolio risk: The influence of business cycle and revenue diversification", *Journal of Banking & Finance* 37(3):761-772.
