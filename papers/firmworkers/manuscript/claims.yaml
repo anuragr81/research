@@ -217,7 +217,7 @@ model:
     anchor: 'consequence of the entrant pool decided in M14'
     claim: 'With risk-neutral entrants and $L>0$, the richest entrant of any pool of two or more expects to lose, so no such pool is stable and risk-neutral entry unravels'
     assumptions: '$|P|\ge 2$, $L>0$, risk-neutral valuation'
-    evidence: 'lean/IscLean/Lottery.lean::Isc.richest_entrant_loses. A pool can survive only if entrants are not risk-neutral, which is the role of the convex region of $u$ below the reference income (M19)'
+    evidence: 'lean/IscLean/Lottery.lean::Isc.richest_entrant_loses. M30 extends the result to every strictly increasing $u$, so curvature of $u$ does not rescue the pool'
     lean: [Isc.richest_entrant_loses, Isc.no_stable_risk_neutral_pool]
     status: LEAN_PROVED
     symbols: [X7, X8, X18, X22, X23]
@@ -264,6 +264,22 @@ model:
     decision: '11 Oct 2026, the author, on the condition that its limitations are stated. The form is one parameter, two status groups, and the same closure for both groups (symmetric weights); it is exogenous, not chosen by either group; it acts only on partner draws inside the entrant pool, not on the job ladder, which stays the market order; there is no network structure within a group; and $\sigma>1$ is excluded because cross-group weights would turn negative. Asymmetric closure, in which one group hoards access against the other, is outside this form'
     affects: [M25, M26, M27]
     symbols: [X8, X24, X25]
+  - id: M30
+    anchor: 'consequence of the entrant pool decided in M14'
+    claim: 'For every expected-utility entrant whose $u$ is strictly increasing on the incomes involved, and $L>0$, the richest entrant of any pool of two or more strictly prefers to stay out, so no such pool is stable whatever the curvature of $u$'
+    assumptions: '$|P|\ge 2$, $L>0$, partner uniform over the other entrants (M14), outcome $x_k-L$, $u$ strictly increasing on a set containing every $x_k$ and $x_k-L$'
+    evidence: 'lean/IscLean/Unravelling.lean::Isc.richest_entrant_prefers_out. Every outcome of the richest entrant, $x_k-L$, lies strictly below $x_i$, so staying out dominates entry in the first-order sense and no concavity or convexity of $u$ enters. With $u$ the identity the expected utility is the pool gain of M11 plus $x_i$ (Isc.poolEU_id), so M24 is the risk-neutral case'
+    lean: [Isc.richest_entrant_prefers_out, Isc.no_stable_pool, Isc.poolEU_id]
+    status: LEAN_PROVED
+    symbols: [X7, X9, X18, X22, X23]
+  - id: M31
+    anchor: 'consequence of the closure form decided in M29'
+    claim: 'Closure does not rescue the pool: for $\sigma<1$ and every strictly increasing $u$, the richest entrant of any pool of two or more strictly prefers to stay out under closure-weighted draws'
+    assumptions: '$|P|\ge 2$, $L>0$, $\sigma<1$, $u$ strictly increasing on a set containing every $x_k$ and $x_k-L$'
+    evidence: 'lean/IscLean/Unravelling.lean::Isc.richest_entrant_prefers_out_closure. Weights $1$ and $1-\sigma$ are positive, so the closure-weighted expected utility is an average of values each below $u(x_i)$. At $\sigma=1$ the pool splits into group pools (M26), to each of which M30 applies'
+    lean: [Isc.richest_entrant_prefers_out_closure]
+    status: LEAN_PROVED
+    symbols: [X7, X9, X25]
 
 literature:
   - id: L1

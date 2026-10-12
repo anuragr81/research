@@ -32,7 +32,7 @@ Weber (1978) and Tilly (1998), cited by the source manuscript, exploration only 
 - 10 Oct 2026 (Q1): the micro state is rank plus human capital, (r, h).
 - 10 Oct 2026 (Q2): categorical friction enters the rank kernel, not the accumulation of h, because the friction of interest arises from non-contractual relationships in Weber's framework.
 - 10 Oct 2026 (Q4): u is not observed; preferences over income lotteries take expected-utility form, so u is a representation unique up to a positive affine transformation and its curvature is meaningful (M16, `premium_sign_affine_invariant`).
-- 10 Oct 2026 (Q3): the swap pool is the lottery entrants only (M14 DECIDED). M11–M13 restated over the pool; M24 proves risk-neutral entry unravels when L > 0, so a pool survives only through the convex region of u.
+- 10 Oct 2026 (Q3): the swap pool is the lottery entrants only (M14 DECIDED). M11–M13 restated over the pool; M24 proves risk-neutral entry unravels when L > 0. Corrected 12 Oct 2026: M30 proves it unravels for every strictly increasing u, and M31 under closure, so the convex region of u does not sustain an entrant-only pool.
 - 10 Oct 2026 (Q5): choice set and equilibrium left to tractability (proposal: a one-shot comparison of the three routes for a displaced worker at each rank).
 - 10 Oct 2026 (Q6): global rank on the ladder, with the source's three channels.
 - 10 Oct 2026 (Q9): headlines and conclusions revisited once Q1–Q8 are settled.
