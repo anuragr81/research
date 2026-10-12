@@ -29,6 +29,13 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 3. A quotation is verbatim. The suite finds it on its own printed page by exact
    containment after normalising case, spacing, punctuation, ligatures and
    line-end hyphens. A fabricated quotation is the control and must fail.
+   Two variants, added 12 Oct 2026, each declared in the record's `CLAIMS.md`:
+   where the text layer drops the spaces between words, the comparison removes
+   all spaces (Lazear–Rosen; the unspaced footnotes of Jacobson–LaLonde–Sullivan);
+   where the text layer mixes columns, the page is kept in several renderings
+   derived from the pinned PDF and a quotation must be on its own page in at
+   least one of them (Hopkins–Kornienko). The controls must fail in every
+   rendering.
 4. The Lean block of every suite measures what it reports: the module is a
    build root and builds, the source has no `sorry`, every name cited in
    `CLAIMS.md` is declared, every declared theorem is audited with
@@ -49,10 +56,12 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 | `becker_murphy_werning_2005` | `BeckerMurphyWerning2005` | authors' manuscript revised Dec 2003, pp.1–32, cited as the JPE article with `version_read` | read in full, 25 quotations, 17 Lean theorems |
 | `currarini_jackson_pin_2009` | `CurrariniJacksonPin2009` | working paper revised July 2008, pp.1–46, cited as the Econometrica article with `version_read` | read in full, 23 quotations, 11 Lean theorems |
 | `friedman_savage_1948` | `FriedmanSavage1948` | JPE article, pp.279–304, JSTOR scan read through Drive's OCR, pages checked against a local OCR (`lit/ocr_pages.py`) | read in full, 24 quotations, 12 Lean theorems |
+| `hopkins_kornienko_2004` | `HopkinsKornienko2004` | AER article, pp.1085–1107, JSTOR text layer with interleaved columns, checked in four renderings (layout, reading order, columns from word boxes by `lit/bbox_columns.py`, local OCR) | read in full, 31 quotations, 22 Lean theorems |
 | `jacobson_lalonde_sullivan_1993` | `JacobsonLaLondeSullivan1993` | Chicago Fed WP-92-28 revised Nov 1992, pp.1–36 with Tables 1–3, FRASER scan with its ABBYY text layer, cited as the AER article with `version_read` | read in full, 52 + 2 quotations, 33 Lean theorems |
 | `genicot_ray_2017` | `GenicotRay2017` | Econometrica article, pp.489–519; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
 | `kahneman_tversky_1979` | `KahnemanTversky1979` | Econometrica article, pp.263–291, ProQuest scan read through a local OCR (`lit/ocr_pages.py`) | read in full, 20 quotations, 13 Lean theorems |
 | `koszegi_rabin_2006` | `KoszegiRabin2006` | QJE article, pp.1133–1165 | read in full, 19 quotations, 13 Lean theorems |
+| `lazear_rosen_1981` | `LazearRosen1981` | JPE article, pp.841–864, text layer without spaces between many words, quotations checked with spaces removed | read in full, 43 quotations, 31 Lean theorems |
 | `markowitz_1952` | `Markowitz1952` | JPE article in the Cowles Foundation Paper 57 reprint, pp.151–158, read through a local OCR (`lit/ocr_pages.py`) and Drive's OCR | read in full, 23 quotations, 8 Lean theorems |
 | `ray_robson_2012` | `RayRobson2012` | Econometrica article, pp.1505–1531; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
 | `robson_1992` | `Robson1992` | Econometrica article, pp.837–857, scan read through Drive's OCR, displays from page images | read in full, 26 quotations, 22 Lean theorems |

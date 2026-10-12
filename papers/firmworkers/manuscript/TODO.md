@@ -31,7 +31,12 @@ Cole–Mailath–Postlewaite (1992, 1995) are read and recorded; a claim about $
 
 ### Needed for novelty
 
-To be fixed once definite claims exist (after the M14, M19, M23 decisions): every paper that could already contain a claimed result. Candidates on Drive with entry_contest records to adapt: Lazear and Rosen (1981), Hopkins and Kornienko (2004).
+To be fixed once definite claims exist (after the M14, M19, M23 decisions): every paper that could already contain a claimed result.
+
+- [x] Lazear and Rosen (1981), JPE — L27, `lit/lazear_rosen_1981`, read 12 Oct 2026 (not copied from entry_contest, whose record uses SymPy). Wealth sorting into a rank-order gamble, in the opposite direction to M34 and through DARA; the paper's own approximations favour the piece rate at a common `s` (LR-D3); segregated contests by productivity against closure by `h`
+- [x] Hopkins and Kornienko (2004), AER — L28, `lit/hopkins_kornienko_2004`, read 12 Oct 2026. Status spending against the income distribution, the closest precedent for the source's question on inequality and investment; exogenous status removes the race, which supports the reading of `h`
+- [ ] Friedman (1953), "Choice, Chance, and the Personal Distribution of Income", JPE 61(4), 277–290 — named by Lazear–Rosen as the earlier work on lotteries in occupations under Friedman–Savage utility, with assignment by endowed wealth; a direct novelty threat for the reference-dependent sub-section. Not on Drive (searched 12 Oct 2026)
+- [ ] Cooper, García-Peñalosa and Funk (2001), "Status Effects and Negative Utility Growth", EJ 111(473), 642–665 — cited by Hopkins–Kornienko as status with interaction only within the own wealth group, the full-closure limit; triage from the abstract first
 
 ### Exploration only (no primary source needed)
 
