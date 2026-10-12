@@ -206,6 +206,15 @@ grounds.
   (all 21 quotations match). Next in the reading order: Mankart,
   Michaelides and Pagratis, Hirtle (SR 666), Jokipii and Milne (2008),
   Baron (2020).
+- 2026-10-12. Records added: Mankart, Michaelides and Pagratis (NBER SI
+  draft, May 2016; not yet in Drive), Hirtle (SR 666), Jokipii and Milne
+  (2008), Baron (2020). litcheck reads two-column sources in reading order
+  when a suite sets `layout` to false. Mechanisms for the enhancement
+  discussion found in the records: concave dividend value (MMP-Q4), a
+  signalling cost of cutting dividends (H-Q4), asymmetric adjustment costs
+  named but untested (JM-Q1, BDF-Q15), and recapitalisation to the minimum
+  at a proportional cost (BAR-Q2, BAR-Q3). Next: Peura and Keppo
+  replication, stage 2.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
