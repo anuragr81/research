@@ -115,9 +115,8 @@ def e2(panel, eps, own):
     return out
 
 
-def main(panel_path, own_path):
+def report(panel_path, own_path, own):
     panel = load(panel_path)
-    own = load_ownership(own_path)
     print(f"panel sha256 {hashlib.sha256(open(panel_path, 'rb').read()).hexdigest()}")
     print(f"ownership sha256 {hashlib.sha256(open(own_path, 'rb').read()).hexdigest()}")
     tally = defaultdict(int)
@@ -138,6 +137,10 @@ def main(panel_path, own_path):
     v2 = e2(panel, episodes(panel, p3_cutoff(panel)), own)
     print()
     print(f"VERDICTS  E3: S {v3.get('S')}, M {v3.get('M')}   E2: S {v2.get('S')}, M {v2.get('M')}")
+
+
+def main(panel_path, own_path):
+    report(panel_path, own_path, load_ownership(own_path))
 
 
 if __name__ == "__main__":
