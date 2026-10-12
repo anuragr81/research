@@ -130,16 +130,27 @@ def run(cfg):
             s.check("Q-control a variable absent from the sheet is refused",
                     not on_page(quotes[0][2], "NO_SUCH_VARIABLE"))
     else:
-        print("QUOTATIONS  exact containment on the stated page, after normalisation")
+        ocr = cfg.get("ocr")
+        print("QUOTATIONS  exact containment on the stated page, after normalisation"
+              + (f", in the OCR text of {ocr}" if ocr else ""))
         lo, hi = cfg["pages"]
         cache = {}
+        if ocr:
+            ocr_dir = os.path.join(CACHE, ocr)
+            stamp = os.path.join(ocr_dir, "SOURCE")
+            fresh = os.path.exists(stamp) and open(stamp).read().split()[0] == cfg["sha256"]
+            s.check("S3 the OCR text was made from the pinned source", fresh, ocr_dir)
 
         def on_page(text, printed):
-            pg = printed - cfg["offset"]
-            if pg < 1:
+            pg = cfg["pdf_page"].get(printed) if "pdf_page" in cfg else printed - cfg["offset"]
+            if pg is None or pg < 1:
                 return False
             if pg not in cache:
-                cache[pg] = page_text(pdf, pg)
+                if ocr:
+                    f = os.path.join(ocr_dir, f"page-{pg:03d}.txt")
+                    cache[pg] = normalise(open(f).read()) if os.path.exists(f) else ""
+                else:
+                    cache[pg] = page_text(pdf, pg)
             return normalise(text) in cache[pg]
 
         for r in quotes:
