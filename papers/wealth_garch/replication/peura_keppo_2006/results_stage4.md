@@ -61,7 +61,8 @@ VERDICTS
   dividends start. E3, with our model's single barrier, failed for the
   opposite reason.
 - Recapitalisations neither start at the issue barrier nor end at the
-  dividend barrier: they start, on median, well above u1 and land 3.8-5.3
+  dividend barrier: 93-94% start more than σ above u1, and they land, on
+  median, 3.8-5.3
   points above u2. Banks recapitalise from positions the model calls safe.
 - The baseline fails three of four of its own untested predictions, on the
   banks most like Peura and Keppo's and on all national banks alike. With
