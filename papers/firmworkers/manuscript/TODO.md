@@ -22,7 +22,7 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 
 Cole–Mailath–Postlewaite (1992, 1995) are read and recorded; a claim about $h$ will rest on CMP92 once the law of motion is decided. Otherwise none today: no model, map, headline or concluding row rests on a paper. The source manuscript (`inputs/firmworkers_model.pdf`) invokes these by name where a future claim would need them:
 
-- [ ] Friedman and Savage (1948), JPE — the S-shaped utility behind M19 and M20 (Appendix). Needed if M19/M20 become claims
+- [x] Friedman and Savage (1948), JPE — L22, `lit/friedman_savage_1948`, read 12 Oct 2026. Their convex region lies between classes, not below a group norm; the appendix's "S-shaped Friedman-Savage utility" must say which reading it means
 - [ ] Spence (1973), QJE — "labour-queue theory" (Section 2). Macro model, deferred
 - [ ] Tullock lottery with r = 1 (footnote 2) — macro shared-pool abstraction, deferred; reference not given in the source
 
