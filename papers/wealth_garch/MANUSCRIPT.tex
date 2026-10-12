@@ -106,6 +106,41 @@ ID & Headline & Model rows & Scope note \\
 
 \section{Model}
 
+\subsection*{The model in plain English}
+
+% plain-summary begin
+A bank holds a risky asset and a riskless asset and funds them with equity
+and with liabilities subject to their own shock. The state is the assets-to-liabilities ratio. The capital buffer is the log
+of equity over required capital, so it is zero when equity equals required
+capital and falls without limit towards the distress boundary, where equity
+is zero. Regulation sets required capital and a regulatory cap on risky
+exposure. The solvency branch of the cap binds near the distress boundary
+and the liquidity branch binds deep in surplus. The bank chooses its risky
+exposure, pays dividends at the dividend barrier, and recapitalises at the
+recapitalisation trigger up to the injection target. Each issue pays a fixed
+issuance cost and a proportional issuance cost. The objective charges a
+shortfall penalty below the reference, weighted by the asymmetry parameter,
+and the penalty vanishes when the asymmetry parameter is one.
+
+When the regulatory cap binds, buffer variance tends to the deficit limit at
+the distress boundary and to the surplus limit deep in surplus. Both limits
+depend only on the asset volatility, the liability volatility, their
+correlation and the cap geometry, so the variance ratio carries no
+information about the asymmetry parameter. For every risky exposure that
+complies with the cap, buffer variance is at most the larger
+of the squared liability volatility and the deficit limit.
+
+The dividend barrier rises in the asymmetry parameter and in the fixed
+issuance cost. The recapitalisation trigger rises in the asymmetry parameter
+and falls in the fixed issuance cost. Because the two parameters move the
+trigger in opposite directions, they are locally identified from the
+dividend barrier and the recapitalisation trigger, under the conditions of
+their rows, M4 to M7.
+
+With these two issuance costs, the injection
+target does not depend on the state from which the bank recapitalises.
+% plain-summary end
+
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{3.8cm}P{6.3cm}P{3.7cm}P{1.1cm}@{}}
 \caption{Model results.}\label{tab:model}\\

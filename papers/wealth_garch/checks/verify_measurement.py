@@ -14,6 +14,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATUS = {"Rule", "Report", "Calibration", "Unobserved", "Output"}
 REGULATORY = ("B3-Q", "LCR-Q", "RCR-Q", "FDIC-Q")
 OUTCOMES = {"Tracked", "Holds", "Fails", "Not measured"}
+TERM_STATUS = {"Agreed", "In use", "Proposed"}
+BANNED = ["loss aversion", "payout barrier", "injection trigger", "recapitalisation boundary", "volatility ratio"]
 CALIBRATION = ("BCVW-Q",)
 COVERAGE = [r"$x$", r"$\pi$", r"$X-L$", r"$a_1$", r"$a_2$", r"$a_3$", r"$q$", r"$\sigma$", r"$\mu_s$",
             r"$r$", r"$\sigma_L$", r"$c$", r"$\gamma$", r"$\mu_L$", r"$r_L$", r"$\rho_L$", r"$\kappa$",
@@ -88,7 +90,42 @@ def analyse(tex, lean, lits, rows):
         if outcome in {"Holds", "Fails"} and not any(re.search(r"/results_[^/]+\.md$", i) for i in items):
             bad6.append((r[0], "no results file"))
     out["MM-6"] = (not bad6, f"{bad6}")
+    nrows = macro_calls(strip_comments(tex), "nrow", 5)
+    names = [r[0].strip().lower() for r in nrows]
+    symbols = [s.strip() for r in nrows for s in r[1].split(", ")]
+    bad8 = [n for n in names if names.count(n) > 1] + [s for s in symbols if symbols.count(s) > 1]
+    bad8 += [(r[0], r[3].strip()) for r in nrows if r[3].strip() not in TERM_STATUS]
+    bad8 += [r[0] for r in nrows if r[3].strip() == "Proposed" and not r[4].strip()]
+    out["MM-8"] = (nrows and not bad8, f"{bad8}" if nrows else "no terminology rows")
     return out, len(grows)
+
+
+def retired(tex):
+    out = set(BANNED)
+    for r in macro_calls(strip_comments(tex), "nrow", 5):
+        out |= {s.strip().lower() for s in r[4].split(",") if s.strip() and s.strip() != "none"}
+    return sorted(out)
+
+
+def summary_problems(manuscript, tex):
+    m = re.search(r"% plain-summary begin\n(.*?)% plain-summary end", manuscript, re.S)
+    if not m:
+        return ["no plain summary"]
+    body = m.group(1)
+    words = len(body.split())
+    bad = [] if 270 <= words <= 330 else [f"{words} words"]
+    bad += [c for c in "$:" if c in body]
+    bad += [n for n in retired(tex) if n in body.lower()]
+    return bad
+
+
+def unattested(manuscript, tex):
+    m = re.search(r"% plain-summary begin\n.*?% plain-summary end", manuscript, re.S)
+    text = strip_comments(manuscript.replace(m.group(0), "") if m else manuscript).lower()
+    body = strip_comments(tex)
+    body = body[body.index("\\section{Map}"):].lower() if "\\section{Map}" in body else ""
+    return [r[0].strip() for r in macro_calls(strip_comments(tex), "nrow", 5)
+            if r[3].strip() in {"Agreed", "In use"} and r[0].strip().lower() not in text + body]
 
 
 GOOD = r"""
@@ -96,6 +133,8 @@ GOOD = r"""
 \grow{G2}{$K$}{r}{c}{Unobserved}{K2}
 \trow{G1}{m}{d}{p}{Fails}{FDIC-Q1, 06_empirical_starter/results_model_and_data.md}
 \trow{G2}{m}{d}{p}{Not measured}{K2}
+\nrow{equity}{$X-L$}{m}{In use}{none}
+\nrow{buffer variance}{$\zeta$}{m}{Proposed}{z-volatility}
 """
 
 BAD = r"""
@@ -104,6 +143,8 @@ BAD = r"""
 \grow{G4}{$q$}{r}{c}{Output}{BCVW-Q14}
 \trow{G1}{m}{d}{p}{Fails}{FDIC-Q1}
 \trow{G2}{m}{d}{p}{Partly}{06_empirical_starter/no_such_results.md}
+\nrow{equity}{$X-L$}{m}{In use}{none}
+\nrow{Equity}{$\zeta$}{m}{Maybe}{}
 """
 
 lean = lean_declarations()
@@ -122,10 +163,23 @@ names = {"MM-1": "row IDs G1, G2, ... unique and in order",
          "MM-3": "every evidence item is a lit/ ID, a declared Lean theorem or a manuscript row",
          "MM-4": "Rule and Report rows cite a regulatory quotation, Calibration rows a BCVW quotation, Unobserved and Output rows a manuscript row",
          "MM-5": "every model object of the coverage list has a row",
-         "MM-6": "the results table has one row per map row, outcomes from the list, evidence that resolves, and a results file behind every Holds or Fails"}
+         "MM-6": "the results table has one row per map row, outcomes from the list, evidence that resolves, and a results file behind every Holds or Fails",
+         "MM-8": "terminology names and symbols unique, statuses Agreed, In use or Proposed, and every Proposed name says what it replaces"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
+
+term_symbols = {s.strip() for r in macro_calls(strip_comments(tex), "nrow", 5) for s in r[1].split(", ")}
+missing9 = [s for s in COVERAGE if s not in term_symbols]
+check("MM-9 every model object of the coverage list has a plain-English name", not missing9, f"{missing9}")
+manuscript = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
+bad10 = summary_problems(manuscript, tex)
+check("MM-10 the manuscript's plain summary has 270 to 330 words, no symbols, no colons and no retired name",
+      not bad10, f"{bad10}")
+
+bad11 = unattested(manuscript, tex)
+check("MM-11 every Agreed or In use name appears in the manuscript outside the plain summary or in the map's rows",
+      not bad11, f"{bad11}")
 
 print("-" * 72)
 print("MM-7  every cited results file reproduces from its pinned data")
@@ -144,6 +198,15 @@ for k in sorted(good):
         check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])
 sample = "Pinned: fdic_distress_panel_2015_2024.csv.gz sha256 " + "0" * 64 + "\n"
+good_summary = "% plain-summary begin\n" + " ".join(["word"] * 300) + "\n% plain-summary end\n"
+check("MM-10-control a 300-word summary with no symbol passes", summary_problems(good_summary, tex) == [])
+check("MM-10-control a summary using a retired name is caught",
+      summary_problems(good_summary.replace("word word", "loss aversion", 1), tex) != [])
+check("MM-10-control a summary with a symbol is caught", summary_problems(good_summary.replace("word", "$x$", 1), tex) != [])
+check("MM-10-control a 200-word summary is caught",
+      summary_problems("% plain-summary begin\n" + " ".join(["word"] * 200) + "\n% plain-summary end\n", tex) != [])
+check("MM-11-control an In use name found nowhere is caught",
+      unattested("text", "\\nrow{no such name}{$s$}{m}{In use}{none}\n\\section{Map}\n") == ["no such name"])
 check("MM-7-control a wrong pin is caught",
       pin_mismatches(sample, os.path.join(ROOT, "06_empirical_starter")) == ["fdic_distress_panel_2015_2024.csv.gz"])
 check("MM-7-control a file with no pins is caught", pin_mismatches("no pins here", ROOT) == ["(no pins)"])

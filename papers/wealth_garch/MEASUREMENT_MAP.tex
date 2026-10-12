@@ -50,6 +50,7 @@
 
 \newcommand{\grow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
 \newcommand{\trow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
+\newcommand{\nrow}[5]{#1 & #2 & #3 & #4 & #5 \\ \addlinespace}
 
 \title{Measurement Map}
 \author{}
@@ -75,6 +76,75 @@ regulatory report records the object for each bank. Calibration means the
 model takes a value with no regulatory counterpart. Unobserved means
 neither a rule nor a report gives it. Output means the model produces it
 and its observation is part of the empirical design.
+
+\section{Terminology}
+
+One plain-English name for each object of the model. The manuscript and
+this map use these names and no others. Agreed means fixed with the author
+on 10 October 2026 (\path{notes/writing_discipline.md}, section 6). In use
+means the manuscript already uses the name consistently. Proposed means a
+plain name offered on 12 October 2026 in place of the names in the last
+column, which leave the manuscript once the author agrees.
+
+\footnotesize
+\begin{longtable}{@{}P{3.0cm}P{2.2cm}P{6.2cm}P{1.4cm}P{2.8cm}@{}}
+\caption{Terminology.}\label{tab:terms}\\
+\toprule
+Name & Symbol & Meaning & Status & Replaces \\
+\midrule
+\endfirsthead
+\toprule
+Name & Symbol & Meaning & Status & Replaces \\
+\midrule
+\endhead
+\nrow{assets-to-liabilities ratio}{$x$}{Total assets over total liabilities, the state of the model.}{Proposed}{none}
+\nrow{equity}{$X-L$}{Assets less liabilities.}{In use}{none}
+\nrow{required capital}{$Q$, $q$}{The capital regulation requires, in dollars or as a ratio to liabilities.}{Agreed}{none}
+\nrow{capital buffer}{$z$, $z_t$}{The log of equity over required capital. Zero when equity equals required capital, falling without limit towards the distress boundary.}{Proposed}{log coordinate}
+\nrow{distress boundary}{$x=1$}{The state at which equity is zero.}{In use}{deep in deficit}
+\nrow{deficit}{$z<0$}{Equity below required capital.}{In use}{none}
+\nrow{surplus}{$z>0$}{Equity above required capital.}{In use}{none}
+\nrow{risky exposure}{$\pi$}{The share of assets held in the risky asset.}{Agreed}{none}
+\nrow{regulatory cap}{$u(x)$}{The largest risky exposure regulation allows at each state, the smaller of its two branches.}{In use}{none}
+\nrow{solvency branch}{$(x-1)/a_1$}{The branch of the regulatory cap set by capital. It binds near the distress boundary.}{In use}{none}
+\nrow{liquidity branch}{$(x-a_2)/a_3$}{The branch of the regulatory cap set by liquidity. It binds deep in surplus.}{In use}{none}
+\nrow{crossing point}{$\bar x$}{The state at which the two branches are equal.}{In use}{none}
+\nrow{cap geometry}{$a_1$, $a_2$, $a_3$}{The three parameters of the regulatory cap. Never a preference.}{Agreed}{none}
+\nrow{asset volatility}{$\sigma$}{The volatility of the risky asset.}{Proposed}{none}
+\nrow{expected asset return}{$\mu_s$}{The drift of the risky asset.}{Proposed}{none}
+\nrow{riskless rate}{$r$}{The return on the riskless asset.}{In use}{none}
+\nrow{liability volatility}{$\sigma_L$}{The volatility of the shock to liabilities.}{Proposed}{none}
+\nrow{return-liability correlation}{$c$}{The correlation between the risky return and the liability shock.}{Proposed}{none}
+\nrow{net income on liabilities}{$\gamma$}{Income earned on liabilities, net of their cost.}{In use}{none}
+\nrow{liability drift}{$\mu_L$}{The drift of liabilities, $\gamma+r_L$.}{In use}{none}
+\nrow{deposit rate}{$r_L$}{The rate paid on liabilities.}{In use}{none}
+\nrow{discount rate}{$\rho$}{The shareholders' discount rate.}{Agreed}{none}
+\nrow{liability-net discount rate}{$\rho_L$}{The discount rate of the problem written per unit of liabilities.}{Agreed}{none}
+\nrow{return on equity}{$r_E$}{Net income over equity.}{Agreed}{none}
+\nrow{dividends}{$D$}{Payments to shareholders, the singular control.}{Agreed}{none}
+\nrow{dividend barrier}{$y^*$}{The state at which dividends are paid.}{Agreed}{payout barrier}
+\nrow{recapitalisation}{$I$}{Capital raised in one issue, the impulse control.}{Agreed}{none}
+\nrow{recapitalisation trigger}{$x_L$}{The state at which capital is raised.}{Agreed}{injection trigger, recapitalisation boundary}
+\nrow{injection target}{$y_{\text{post}}$}{The state an issue reaches.}{Agreed}{none}
+\nrow{fixed issuance cost}{$K$}{The cost of an issue that does not scale with its size, per unit of liabilities.}{Agreed}{none}
+\nrow{proportional issuance cost}{$\kappa$}{The cost of an issue per unit raised.}{Agreed}{none}
+\nrow{asymmetry parameter}{$\lambda_S$}{How much more the objective weighs a shortfall below the reference than a surplus above it.}{Agreed}{loss aversion}
+\nrow{shortfall penalty}{$\Lambda$}{The term of the objective that charges a shortfall below the reference. Zero when the asymmetry parameter is one.}{In use}{none}
+\nrow{reference}{$R$}{The level below which the shortfall penalty applies.}{In use}{none}
+\nrow{buffer variance}{$\zeta$}{The variance per unit of time of the capital buffer.}{Proposed}{z-volatility, capital buffer's volatility}
+\nrow{deficit limit}{$\nu_1^2$}{The limit of buffer variance at the distress boundary.}{Proposed}{saturation limits}
+\nrow{surplus limit}{$\nu_3^2$}{The limit of buffer variance deep in surplus.}{Proposed}{saturation limits}
+\nrow{variance ratio}{$\lambda_V^4$, $\nu_1^2/\nu_3^2$}{The deficit limit over the surplus limit.}{Agreed}{volatility ratio}
+\nrow{induced variance asymmetry}{$\lambda_V$}{The asymmetry read off the variance ratio, distinct from the asymmetry parameter.}{Agreed}{none}
+\nrow{saturation scale}{$\theta$}{How sharply the variance of the discrete-time recursion moves between its deficit and surplus levels.}{In use}{none}
+\nrow{growth rate of required capital}{$g$}{The growth rate of required capital.}{In use}{none}
+\nrow{retention ratio}{$b$}{The share of net income retained.}{In use}{none}
+\nrow{surplus payout rate}{$\delta_p$}{The share of surplus paid out in a period.}{In use}{none}
+\nrow{deficit persistence}{$\phi^-$}{How much of a deficit remains after one period.}{In use}{none}
+\nrow{surplus persistence}{$\phi^+$}{How much of a surplus remains after one period.}{In use}{none}
+\bottomrule
+\end{longtable}
+\normalsize
 
 \section{Map}
 

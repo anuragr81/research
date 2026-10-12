@@ -239,6 +239,17 @@ grounds.
   samples. The four shares are the numbers an enhanced model is scored
   against. Open, for the author: whether to add the scorecard as an
   empirical row of MANUSCRIPT.tex, and which enhancement to solve first.
+- 2026-10-12. Plain-English summary of the model (306 words) at the head
+  of the Model section, and a terminology table in MEASUREMENT_MAP.tex with
+  one plain name per object (author's request). Checks MM-8 to MM-11 keep
+  them consistent. Open, for the author: the Proposed names (assets-to-
+  liabilities ratio, capital buffer, buffer variance, deficit limit,
+  surplus limit, asset volatility, expected asset return, liability
+  volatility, return-liability correlation). Once agreed, their replaced
+  names (log coordinate, z-volatility, saturation limits, deep in deficit,
+  capital buffer's volatility) leave K1, M2, M3, M8 and M15, the
+  manuscript's Terminology section takes the map's names, and the
+  retired-name check extends from the summary to the whole manuscript.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
