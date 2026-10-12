@@ -145,6 +145,23 @@ grounds.
   (2006, J. Business) [25]; Lokka and Zervos (2008, IME) [21]; Bolton,
   Chen and Wang (2011, JF) [4]. The reasons the chosen baseline is
   standard enter `MANUSCRIPT.tex` as literature rows with quotations.
+- 2026-10-12. Baseline candidates read in full: `lit/peura_keppo_2006`,
+  `lit/lokka_zervos_2008`, `lit/bolton_chen_wang_2011` (with BCVW).
+  Findings. (1) What is standard is the class, not one paper: a dividend
+  barrier with costly issuance at a lower barrier. BCW-Q1 (the double
+  barrier "is not new", Miller and Orr 1966), BCVW pp. 3-4 and PK-Q2
+  (builds on Milne and Robertson 1996) say so. (2) With a fixed issuance
+  cost proportional to size (PK-Q5, BCW-Q4, our K), issues are lumps to a
+  single target (PK-D2, BCW-D1); with proportional costs only, minimal
+  top-ups at zero (LZ-D1, BCW-Q8). Every member predicts dividends only at
+  the barrier. So the FDIC failures G14 and G15 are failures of the whole
+  class. (3) Peura and Keppo is the bank form of the class, published,
+  calibrated to 61 US banks' capital ratios, with sigma defined on
+  accounting returns (PK-D3). Proposed baseline: Peura and Keppo. (4)
+  Novelty: PK already ran an implied-volatility calibration (PK-Q10,
+  PK-Q15), so a sigma backtest is not new by itself; PK-Q18 calls for a
+  graduated penalty below the requirement, the role of lambda_S.
+  Decision pending with the author.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
