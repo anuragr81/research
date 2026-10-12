@@ -105,6 +105,8 @@ Found by paging the whole Drive folder (`1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb` and 
 | `wp369en.pdf` | `1g3rDUq1wvidbDFI61-4fKcOB0H4NliyA` | `99f54d75f68a4129` | Bakkar, De Jonghe and Tarazi (March 2019), NBB WP 369. |
 | `gordon_hirtle_epr_2026.pdf` | `1XQ8ecxcU33UNP2P6WZxknKuHAaBTY8e8` | `f1fe4e9c87a9ee8b` | Gordon and Hirtle, uploaded 2026-10-12 as epr_2026_banks-equity-capital_gordon.pdf. |
 | `ssrn-2902505.pdf` (cached as `baron_ssrn-2902505.pdf`) | `1lr4JhDO1p7MNSd2Wd5AiVzKOW9Nffjdh` | `5052f9fc20402a9e` | Baron, 'Countercyclical Bank Equity Issuance', accepted manuscript dated 13 Jan 2020, 'Forthcoming at Review of Financial Studies', 127 pages. Uploaded 2026-10-12. |
+| `pdf-rwp08-01.pdf` | `1zNek_pxvvFBbrhBpbP7x2hlXPGB_8wgw` | `741123eec7a14635` | Berger, DeYoung, Flannery, Lee and Öztekin, Kansas City Fed RWP 08-01. Byte-identical to the cached candidate. Uploaded 2026-10-12. |
+| `sr666.pdf` | `1NYK20bEeSnDkvmHb7hc8L8sqzIdG0gwb` | `a053fd02846c45b1` | Hirtle, NY Fed Staff Report 666 (rev. April 2016). Byte-identical to the cached candidate. Uploaded 2026-10-12. |
 
 ## Needed from the author
 
