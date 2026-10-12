@@ -50,6 +50,14 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | 9 | `inputs/displacement_upskilling_v4.tex` | TODO sanity-check list | (a) Keep outside the ledger | As now. |
 | | | | (b) Admit its lottery or utility forms | Its two-agent lottery without entry cost contradicts M14/M32; its group-specific quadratic utilities contradict the common-`u` decision. |
 
+## Decided, with evidence that arrived after the decision
+
+Listed so the decision can be checked while the issues it bears on are settled; it stays decided unless the author reopens it.
+
+| Decided item | Evidence since | Bears on | If reopened |
+|---|---|---|---|
+| M32: a displaced worker falls to the bottom rung `x_0` (12 Oct 2026, reading (a) of three) | L26 (JLS, read later on 12 Oct): losses of about 25% of former earnings six years on, reported as shares and roughly equal across sex and age. The bottom rung implies shares rising with income; the only income contrast JLS report (men against women) goes the other way, which is suggestive, not a test | Issue 1 (M35 scales the loss `x_i − x_0`); issue 5b(b) (the richest have the largest loss only under a common fallback); M33–M35 | (b) proportional step `x_i(1 − δ)`: M33's stability needs a condition, and rank sorting appears for every nondecreasing `u` with gap of order `δ(x_j − x_i)` *(not in Lean)*; (c) best vacated position below: the fallback becomes an equilibrium object, no Lean |
+
 ## Actions that need no decision
 
 - Upload Friedman (1953), "Choice, Chance, and the Personal Distribution of Income", JPE 61(4), 277–290: a direct novelty threat for issue 5, named by L27; not on Drive. Novelty needs the primary source (rule of 10 Oct 2026).
