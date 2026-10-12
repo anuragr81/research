@@ -162,6 +162,23 @@ grounds.
   PK-Q15), so a sigma backtest is not new by itself; PK-Q18 calls for a
   graduated penalty below the requirement, the role of lambda_S.
   Decision pending with the author.
+- 2026-10-12. Rule for the empirical paper (author). Where a paper's
+  authors gave no empirical test, our test of its theory is new ground.
+  Where they did, we replicate their analysis first, to strengthen our
+  understanding and claims. Slow, verified route. Applied: Lokka and
+  Zervos (no test) and Bolton, Chen and Wang (calibration only, and for
+  non-financial firms, BCW-Q5) are new ground; Peura and Keppo (61 US
+  banks, 1983-2002) is replicated first. The same rule applies to any
+  later model that enters the comparison (Mankart, Michaelides and
+  Pagratis 2020; Corbae and D'Erasmo 2021, both [A], not yet read).
+- 2026-10-12. Peura and Keppo replication plan. Stage 1, model side:
+  reproduce the printed barriers (Fig. 2: u1 0.90%, u2 3.66%, u0 3.80%;
+  Table 2, twelve rows) from formulas (14)-(18). Stage 2, data side, their
+  period: Table 1, Fig. 5 and Table 3 on FDIC Call Reports (from 1984;
+  risk-weighted assets from 1990, earlier years imputed as in their n. 14),
+  pre-registered, with every difference from Compustat recorded. Stage 3:
+  the same method on 2015-2024. Stage 4: our tests of what they did not
+  test (dividend timing, targeting, persistence).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
