@@ -130,6 +130,15 @@ grounds.
   deficit shrink risk-weighted assets, which the model takes as exogenous.
   T3 (surplus level) fails: 0.9959 against 0.9789. T2 (fall in $g$) is not
   measured. Map rows G18 to G22.
+- 2026-10-12. Later option, not the primary goal (author). A sigma
+  backtest: solve the model on a grid of sigma and report, for each
+  observable, the band of sigma consistent with it. Only the
+  sigma-dependent claims enter (band location, the corner, volatility
+  levels). Exact targeting and dividends below the barrier fail at every
+  sigma and stay out. The test is whether the bands from different
+  observables overlap. M15 turns book volatility into a lower bound on
+  sigma, provided book volatility understates economic volatility. Cost:
+  one solve per grid point, about two hours each.
 - Open, for the author. Whether to reformulate the model claims as bounds
   that need no optimality (the cap bounds exposure and the $z$-volatility
   near each end), and whether to narrow theory and empirics to measurable,
