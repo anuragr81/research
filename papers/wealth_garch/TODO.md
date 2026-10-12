@@ -231,6 +231,14 @@ grounds.
   half the 61 largest banks have no issue barrier at K = 0.25% (μ/σ ≥ 2.6):
   the model's optimum for them is never to issue. Next: stage 4, our tests
   of what Peura and Keppo did not test.
+- 2026-10-12. Peura and Keppo stage 4 (PREREG_stage4.md), the baseline's
+  scorecard on 2015-2024 with bank-specific barriers: T1 (dividends below
+  the barrier) holds only because capital sits far above the barrier;
+  T2 (capital far above the barrier, 93-94% of bank-quarters), T3 (issues
+  start near u1, 6-7%) and T4 (issues land near u2, 8-11%) fail, in both
+  samples. The four shares are the numbers an enhanced model is scored
+  against. Open, for the author: whether to add the scorecard as an
+  empirical row of MANUSCRIPT.tex, and which enhancement to solve first.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
