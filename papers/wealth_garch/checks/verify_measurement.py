@@ -8,6 +8,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from verify_manuscript import lean_declarations, macro_calls, split_list, strip_comments
+from computed import code_block, pin_mismatches, reproduce
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATUS = {"Rule", "Report", "Calibration", "Unobserved", "Output"}
@@ -88,37 +89,6 @@ def analyse(tex, lean, lits, rows):
             bad6.append((r[0], "no results file"))
     out["MM-6"] = (not bad6, f"{bad6}")
     return out, len(grows)
-
-
-def code_block(text):
-    m = re.search(r"^```\n(.*?)^```", text, re.M | re.S)
-    return m.group(1) if m else None
-
-
-def pin_mismatches(text, here):
-    bad = []
-    pins = re.findall(r"^Pinned: (\S+) sha256 ([0-9a-f]{64})$", text, re.M)
-    for path, digest in pins:
-        full = os.path.join(here, path)
-        if not os.path.exists(full) or hashlib.sha256(open(full, "rb").read()).hexdigest() != digest:
-            bad.append(path)
-    return bad if pins else ["(no pins)"]
-
-
-def reproduce(path, text=None):
-    here = os.path.dirname(os.path.join(ROOT, path))
-    text = open(os.path.join(ROOT, path)).read() if text is None else text
-    m = re.search(r"^Reproduce: (.+)$", text, re.M)
-    expected = code_block(text)
-    if not m or expected is None:
-        return False, "no Reproduce line or no output block"
-    bad = pin_mismatches(text, here)
-    if bad:
-        return False, f"pins differ {bad}"
-    run = subprocess.run(shlex.split(m.group(1)), cwd=here, capture_output=True, text=True)
-    if run.returncode != 0:
-        return False, run.stderr.strip()[-200:]
-    return run.stdout == expected, "" if run.stdout == expected else "output differs from the recorded block"
 
 
 GOOD = r"""

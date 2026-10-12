@@ -3,8 +3,12 @@ import os
 import re
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from computed import first_commit_time, reproduce
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROSE_LIMIT = 0.30
+VERDICTS = {"holds", "fails", "not measured"}
 results = []
 
 
@@ -134,8 +138,41 @@ def prose_ratio(body):
     return (ptok / total if total else 0.0), ptok, mtok
 
 
-def analyse(tex, lean, bibs, lit):
+def map_ids():
+    path = os.path.join(ROOT, "MEASUREMENT_MAP.tex")
+    return set(re.findall(r"\\grow\{(G[0-9]+)\}", strip_comments(open(path).read())))
+
+
+def empirical_problems(erows, mids, gids):
+    problems = []
+    for r in erows:
+        rid, verdict, models, maps, evidence = r[0].strip(), r[2].strip(), split_list(r[3]), split_list(r[4]), split_list(r[5])
+        if verdict not in VERDICTS:
+            problems.append((rid, f"verdict {verdict}"))
+        problems += [(rid, f"model row {m}") for m in (models or ["(none)"]) if m not in mids]
+        problems += [(rid, f"map row {g}") for g in (maps or ["(none)"]) if g not in gids]
+        files = [e for e in evidence if os.path.exists(os.path.join(ROOT, e))]
+        problems += [(rid, f"missing {e}") for e in evidence if e not in files]
+        results = [e for e in files if re.search(r"/results_[^/]+\.md$", e)]
+        if not results:
+            problems.append((rid, "no results file"))
+        for f in results:
+            ok, detail = reproduce(f)
+            if not ok:
+                problems.append((rid, f"{f}: {detail}"))
+        for pre in [e for e in files if re.search(r"/PREREG_[^/]+\.md$", e)]:
+            tp = first_commit_time(pre)
+            for f in results:
+                tr = first_commit_time(f)
+                if tp is None or tr is None or tp > tr:
+                    problems.append((rid, f"{pre} not committed before {f}"))
+    return problems
+
+
+def analyse(tex, lean, bibs, lit, gids=None):
     tex = strip_comments(tex)
+    gids = map_ids() if gids is None else gids
+    erows = macro_calls(tex, "erow", 6)
     krows = macro_calls(tex, "krow", 4)
     mrows = macro_calls(tex, "mrow", 4)
     lrows = macro_calls(tex, "lrow", 6)
@@ -145,6 +182,7 @@ def analyse(tex, lean, bibs, lit):
 
     ids = [(r[0].strip(), "K") for r in krows] + [(r[0].strip(), "M") for r in mrows]
     ids += [(r[0].strip(), "L") for r in lrows] + [(r[0].strip(), "C") for r in crows]
+    ids += [(r[0].strip(), "E") for r in erows]
     bad_form = [i for i, p in ids if not re.fullmatch(p + r"[1-9][0-9]*", i)]
     seen, dup = set(), []
     for i, _ in ids:
@@ -156,10 +194,11 @@ def analyse(tex, lean, bibs, lit):
     mids = {r[0].strip() for r in mrows}
     lids = {r[0].strip() for r in lrows}
     cids = {r[0].strip() for r in crows}
-    bad_k = [(r[0], l) for r in krows for l in (split_list(r[2]) or ["(none)"]) if l not in mids]
-    out["MS-2"] = (not bad_k, f"introduction links not to a model row {bad_k}")
-    bad_c = [(r[0], l) for r in crows for l in (split_list(r[2]) or ["(none)"]) if l not in mids | lids]
-    out["MS-3"] = (not bad_c, f"conclusion links not to a model or literature row {bad_c}")
+    eids = {r[0].strip() for r in erows}
+    bad_k = [(r[0], l) for r in krows for l in (split_list(r[2]) or ["(none)"]) if l not in mids | eids]
+    out["MS-2"] = (not bad_k, f"introduction links not to a model or empirical row {bad_k}")
+    bad_c = [(r[0], l) for r in crows for l in (split_list(r[2]) or ["(none)"]) if l not in mids | lids | eids]
+    out["MS-3"] = (not bad_c, f"conclusion links not to a model, literature or empirical row {bad_c}")
 
     problems = []
     proof_ids = [p[0].strip() for p in proofs]
@@ -201,7 +240,10 @@ def analyse(tex, lean, bibs, lit):
             over.append((pid, round(ratio, 3), p, m))
     out["MS-6"] = (not over, f"proofs above {PROSE_LIMIT:.0%} prose {over}")
 
-    counts = f"K{len(krows)} M{len(mrows)} L{len(lrows)} C{len(crows)}, proofs {len(proofs)}"
+    eprob = empirical_problems(erows, mids, gids)
+    out["MS-7"] = (not eprob, f"{eprob}")
+
+    counts = f"K{len(krows)} M{len(mrows)} L{len(lrows)} C{len(crows)} E{len(erows)}, proofs {len(proofs)}"
     return out, counts
 
 
@@ -210,6 +252,7 @@ GOOD = r"""
 \mrow{M1}{c}{$x$}{SmoothFit.smooth_fit}
 \lrow{L1}{bayraktar2026}{w}{the parameter a3 scales the entire liquidity constraint and determines its asymptotic upper bound}{17}{M1}
 \crow{C1}{s}{M1, L1}
+\erow{E1}{c}{fails}{M1}{G14}{06_empirical_starter/results_dividend_location.md}
 \begin{mproof}{M1}{SmoothFit.smooth_fit}
 Then \[ V'(s^-) = V'(s^+), \qquad \mathcal{M}V(s) = V(s) \] at the trigger $s$.
 \end{mproof}
@@ -221,6 +264,7 @@ BAD = r"""
 \mrow{M1}{c}{$x$}{SmoothFit.no_such_theorem}
 \lrow{L1}{bayraktar2026}{w}{A sentence the paper never printed.}{17}{M1}
 \crow{C1}{s}{X5}
+\erow{E1}{c}{partly}{M99}{G99}{06_empirical_starter/no_such_results.md}
 \begin{mproof}{M1}{SmoothFit.no_such_theorem}
 This proof talks through every step in words and uses almost no symbols at all, so
 a reader learns the argument from sentences rather than from expressions, which is
@@ -242,11 +286,12 @@ def main():
     real, counts = analyse(tex, lean, bibs, lit)
     print(f"      rows in MANUSCRIPT.tex: {counts}")
     names = {"MS-1": "row IDs well formed and unique",
-             "MS-2": "introduction rows point to model rows only",
-             "MS-3": "conclusion rows point to model or literature rows only",
+             "MS-2": "introduction rows point to model or empirical rows only",
+             "MS-3": "conclusion rows point to model, literature or empirical rows only",
              "MS-4": "every model row names audited Lean theorems and has one matching proof",
              "MS-5": "every literature row quotes its lit/ record verbatim",
-             "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof"}
+             "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof",
+             "MS-7": "every empirical row has a verdict, existing model and map rows, and results files that reproduce from pinned data, each after its pre-registration"}
     for k in sorted(real):
         ok, detail = real[k]
         check(f"{k} {names[k]}", ok, "" if ok else detail)

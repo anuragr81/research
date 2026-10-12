@@ -9,20 +9,25 @@
 %   checks/verify_retirement.py checks that record against the file in git.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
-%   Rows are written only through the four row macros below, and proofs only
+%   Rows are written only through the five row macros below, and proofs only
 %   through the mproof environment. IDs are K1, K2, ... (introduction),
-%   M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
+%   M1, ... (model), L1, ... (literature), E1, ... (empirical analysis) and
+%   C1, ... (conclusions).
 %     \krow{ID}{headline}{model rows}{scope note}
 %     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
 %     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
-%     \crow{ID}{statement}{model or literature rows}
+%     \crow{ID}{statement}{model, literature or empirical rows}
+%     \erow{ID}{claim}{verdict}{model rows}{map rows}{evidence files}
 %     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
 %   Lists of rows or theorems are comma-separated. Lean theorem names are the
 %   fully qualified names declared under lean/mathlib/.
 %
 % RULES THE CHECKER ENFORCES
-%   Introduction rows point to model rows only. Conclusion rows point to model
-%   or literature rows only. Every model row names Lean theorems that exist in
+%   Introduction rows point to model or empirical rows. Conclusion rows point
+%   to model, literature or empirical rows. Every empirical row has a verdict
+%   (holds, fails, not measured), names existing model rows and rows of
+%   MEASUREMENT_MAP.tex, and cites results files that the checker re-runs on
+%   their pinned data, each committed after any pre-registration it cites. Every model row names Lean theorems that exist in
 %   an audited Lean file and has exactly one proof in Appendix A naming the
 %   same theorems. Every literature row's quote appears verbatim in the
 %   paper's lit/ record. In every proof, plain English is at most 30% of the
@@ -43,6 +48,7 @@
 \usepackage{natbib}
 
 \emergencystretch=1.5em
+\DeclareUnicodeCharacter{2217}{\ensuremath{^*}}
 
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
@@ -59,6 +65,7 @@
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+\newcommand{\erow}[6]{#1 & #2 & #3 & \rowref{#4} & \rowref{#5} & \path{#6} \\ \addlinespace}
 
 \newenvironment{mproof}[2]
   {\subsection*{Proof of #1}\label{proof:#1}%
@@ -125,6 +132,7 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M13}{The expected time below the requirement falls in the recovery drift and diverges as that drift vanishes.}{$d>0$ $\Rightarrow$ $m\mapsto d/m$ is strictly decreasing on $(0,\infty)$ and $d/m\to\infty$ as $m\to0^+$. At $d=0$ it is constant.}{RateBased.sojourn_strictAnti, RateBased.sojourn_tendsto_atTop, RateBased.control_sojourn_needs_positive_depth}
 \mrow{M14}{With a positive fixed issuance cost and a finite value, the discounted number of recapitalisations is finite, so the impulse terms of the verification argument converge absolutely.}{$K>0$, $e_i\ge0$, $K\sum_{i<n}e_i\le B$ for all $n$ $\Rightarrow$ $\sum_{i<n}e_i\le B/K$, $N=\sum_ie_i$ converges and $N\le B/K$. If also $|c_i|\le Ce_i$, $\sum_ic_i$ converges absolutely. With $K=0$, $e_i=1$ the cost bound holds and $N$ diverges.}{ImpulseCount.partial_sums_bounded, ImpulseCount.count_summable, ImpulseCount.count_le, ImpulseCount.impulse_sum_summable, ImpulseCount.control_count_needs_fixed_cost}
 \mrow{M15}{For every exposure policy that complies with the cap, binding or not, the $z$-volatility is at most the larger of $\sigma_L^2$ and $\nu_1^2$ everywhere, and deep in surplus at most the larger of $\sigma_L^2$ and $\nu_3^2$ up to any margin.}{$q>0$, $a_1>0$, $x>1$, $0\le\pi(x)$, $\pi(x)\,x\le u(x)$ $\Rightarrow$ $\zeta(x)\le\max\{\sigma_L^2,\nu_1^2\}$. If $a_3>0$, $a_2<1$ and compliance holds for all large $x$, then for every $\varepsilon>0$, $\zeta(x)\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ for all large $x$. Both fail with $\pi<0$ or with $\pi x>u(x)$.}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
+\mrow{M16}{With a fixed issuance cost and a linear proportional cost, the injection target does not depend on the state from which the bank injects.}{$\forall z\ \big(V(z)-(1+\kappa)z\le V(y)-(1+\kappa)y\big)\iff\forall z\ \big(V(z)-(1+\kappa)(z-x)-K\le V(y)-(1+\kappa)(y-x)-K\big)$, for every $x$. A target optimal from one $x$ is optimal from every $x'$. With the convex cost $(z-x)^2$ and $V(z)=2z$, the optimal target moves with $x$.}{Targeting.target_free_of_start, Targeting.target_same_for_all_starts, Targeting.control_target_moves_with_convex_cost}
 
 \bottomrule
 \end{longtable}
@@ -149,12 +157,43 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L4}{li2023}{In an unconstrained loss-averse consumption and investment problem, the large-wealth limits of the optimal controls depend on the preference parameters, the contrast to the silence of $\lambda_S$ in C2. The parallel ends at the constraint, since their risky position is unconstrained and the limit is a Merton-type scaling, while in C2 a binding regulatory cap fixes it. By their own formulas the loss-aversion degree enters those limits only when the curvatures on gains and losses are equal.}{our asymptotic limits differ significantly from the ones in the Merton's problem, which now sensitively depends on the reference degree parameter}{13}{C2}
 \lrow{L5}{bayraktar2026}{The paper has no fixed issuance cost, fixes its recapitalisation threshold exogenously, and names a fixed cost as a change that could move recapitalisation. M5 and C4 take up that change. The parallel ends there, since the paper derives no threshold response to a fixed cost and no identification.}{If one introduced fixed issuance costs, endogenous market access, or adverse-selection costs that rise near distress, earlier recapitalization or inaction at the boundary could become optimal.}{13}{M5, C4}
 \lrow{L6}{bayraktar2026}{A fixed issuance cost charged in dollars breaks the reduction to one dimension. M4 to M6 charge $K$ per unit of liabilities, which keeps it (Appendix~\ref{app:primitives}).}{Fixed issuance costs, nonlinear issuance costs, taxes, deposit insurance premia, endogenous deposit rates, balance-sheet size effects, multiple asset classes, or regulatory constraints depending on dollar levels rather than ratios would generally break the one-dimensional reduction.}{9}{M4, M5, M6}
+\lrow{L7}{peura2006}{The bank form of the standard class of capital models, calibrated by its authors to 61 US banks and judged by its fit to capital ratios. Its fixed issuance cost is a fixed proportion of size, the device of M4 to M6, and each issue ends at the dividend barrier, the single target of M16.}{As in the general case, the dividend barrier is also the level up to which the capital ratio is replenished each time a new capital issue is implemented.}{2176}{M4, M5, M16}
+\lrow{L8}{bolton2011}{Its authors state that the double barrier of payout and external financing is an established structure. Its fixed issuance cost is proportional to capital to keep the model homogeneous, as in M4 to M6, and each issue returns to one target, as in M16.}{While this double-barrier policy is not new (it goes back to the inventory model of Miller and Orr 1966 in corporate finance), our model provides substantial new insight}{3}{M4, M16}
+\lrow{L9}{lokka2008}{With proportional issuance costs only, issuance is a minimal reflection at zero, neither a lump nor a target. The fixed cost is what produces the single target of M16.}{In this problem, it is optimal to issue minimal new equity so as to reflect the reserves process at 0 and make minimal dividend payments so as to reflect the reserves process at a certain level x∗ (see Section 4).}{2}{M16}
 
 \bottomrule
 \end{longtable}
 \normalsize
 
 Every paper the tables name has been read.
+
+\section{Empirical analysis}
+\label{sec:empirical}
+
+Each row confronts a model row with the FDIC panel of US banks, 2015 to
+2024, through the objects of \path{MEASUREMENT_MAP.tex}. The evidence is a
+computation on pinned data, which the checker re-runs, with a verdict rule
+committed before the data were fetched wherever a choice was involved.
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{6.1cm}P{1.4cm}P{1.4cm}P{1.2cm}P{4.3cm}@{}}
+\caption{Empirical rows.}\label{tab:empirical}\\
+\toprule
+ID & Claim & Verdict & Model rows & Map rows & Evidence \\
+\midrule
+\endfirsthead
+\toprule
+ID & Claim & Verdict & Model rows & Map rows & Evidence \\
+\midrule
+\endhead
+\erow{E1}{US banks do not hold their exposure at the regulatory cap, the condition of M3. Risk-weighted assets over total assets are 0.69 at the median, against a capped share of 2.38, and Tier~1 capital over risk-weighted assets is 15.0\%, 3.3 times the CET1 minimum.}{fails}{M2, M3}{G2, G4}{06_empirical_starter/results_model_and_data.md}
+\erow{E2}{Within a bank, recapitalisations after losses or a fall in capital do not end at a common target, against M16. The post-issue state rises with the issue, by 1.37 and 1.36 per unit of issue for the two valid distress proxies.}{fails}{M5, M16}{G15}{06_empirical_starter/PREREG_distress_targeting.md, 06_empirical_starter/results_distress_targeting.md}
+\erow{E3}{Banks pay dividends below the dividend barrier of the solved model, in 56.2\% of bank-quarters below it, where the model pays none.}{fails}{M4}{G14}{06_empirical_starter/results_dividend_location.md}
+\erow{E4}{The persistence of the capital buffer differs from the maintained model of M12. Deficits revert at 0.88 a quarter against 1.01 predicted, and surpluses persist at 0.996 against 0.979.}{fails}{M12}{G19, G22}{06_empirical_starter/PREREG_persistence.md, 06_empirical_starter/results_persistence.md}
+
+\bottomrule
+\end{longtable}
+\normalsize
 
 \section{Conclusions}
 
@@ -333,6 +372,12 @@ Control, $K=0$, $e_i=1$ $\Rightarrow$ $0\le0$ for every $n$ and $\sum_ie_i=\inft
 \[ 0\le\pi,\ \ \pi x\le u(x)\le\frac{x-1}{a_1}\ \Rightarrow\ 0\le\omega\le\frac1{a_1}\ \Rightarrow\ \zeta(x)\le\max\{\sigma_L^2,\nu_1^2\} . \]
 \[ \pi x\le\frac{x-a_2}{a_3}\ \Rightarrow\ \omega\le w(x)=\frac1{a_3}+\frac{1-a_2}{a_3(x-1)}\to\frac1{a_3},\qquad Q(w(x))\to\nu_3^2 . \]
 Controls, $(\sigma,\sigma_L,c)=(1,1,1)$, $\omega=-1$ $\Rightarrow$ $Q=4>1=\max\{Q(0),Q(1)\}$; $(\sigma,\sigma_L,c)=(1,0,0)$, $\omega=2>1$ $\Rightarrow$ $Q=4>1$.
+\end{mproof}
+
+\begin{mproof}{M16}{Targeting.target_free_of_start, Targeting.target_same_for_all_starts, Targeting.control_target_moves_with_convex_cost}
+\[ V(z)-(1+\kappa)(z-x)-K=\big(V(z)-(1+\kappa)z\big)+\big((1+\kappa)x-K\big), \]
+\[ \arg\max_z\big(V(z)-(1+\kappa)(z-x)-K\big)=\arg\max_z\big(V(z)-(1+\kappa)z\big)\quad\forall x . \]
+Control, $V(z)=2z$, cost $(z-x)^2$ $\Rightarrow$ $\arg\max_z\big(2z-(z-x)^2\big)=x+1$.
 \end{mproof}
 
 \section{Evidence and verification}
