@@ -37,7 +37,7 @@ def normalise(s):
     s = unicodedata.normalize("NFKC", s)
     s = s.replace("’", "'").replace("‘", "'").replace("“", '"').replace("”", '"')
     s = s.replace("``", '"').replace("''", '"')
-    s = re.sub(r"-[ \t]*\n[ \t]*", "-", s)
+    s = re.sub(r"-[ \t]*\n\s*", "-", s)
     return re.sub(r"\s+", " ", s).strip()
 
 
