@@ -107,6 +107,9 @@ Found by paging the whole Drive folder (`1pnev5GIF5BsJMmmNV2xmpm_pwcOOlbEb` and 
 | `ssrn-2902505.pdf` (cached as `baron_ssrn-2902505.pdf`) | `1lr4JhDO1p7MNSd2Wd5AiVzKOW9Nffjdh` | `5052f9fc20402a9e` | Baron, 'Countercyclical Bank Equity Issuance', accepted manuscript dated 13 Jan 2020, 'Forthcoming at Review of Financial Studies', 127 pages. Uploaded 2026-10-12. |
 | `pdf-rwp08-01.pdf` | `1zNek_pxvvFBbrhBpbP7x2hlXPGB_8wgw` | `741123eec7a14635` | Berger, DeYoung, Flannery, Lee and Öztekin, Kansas City Fed RWP 08-01. Byte-identical to the cached candidate. Uploaded 2026-10-12. |
 | `sr666.pdf` | `1NYK20bEeSnDkvmHb7hc8L8sqzIdG0gwb` | `a053fd02846c45b1` | Hirtle, NY Fed Staff Report 666 (rev. April 2016). Byte-identical to the cached candidate. Uploaded 2026-10-12. |
+| `li_n_2015_payout_policy_tspace.pdf` | `12CTXmUqxd_-5GD-OXRMooxpPtEp_9YgN` | `8da4be483dbb6432` | Floyd, Li and Skinner, accepted manuscript from TSpace (cover page names the JFE 118(2):299-316 version), 42 pages including the cover. Uploaded 2026-10-12. |
+| `jbfa.pdf` | `1piPVDkv6RKYi8nxw78eseDdzlpfvnZKo` | `2efb29180c377539` | Koussis and Makrominas, published version, DOI 10.1111/jbfa.12399, early-view pagination 1-30 (the issue pages are 1030-1059). Uploaded 2026-10-12. |
+| `dmytro-holod-pdf.pdf` | `1_e683rXhyeD4bcddubkbYBQftNbD4WkD` | `2a75b0608a34dc76` | Not Holod and Peek. The PDF metadata title is the Holod-Peek title, but all 22 slides are Holod and Kitsul, 'Capital Constraints and Systemic Risk', 46th Chicago Fed Bank Structure Conference (May 2010): market and bank-portfolio betas of high-trading BHCs before and after the 1998 market-risk capital charge. Uploaded 2026-10-12. |
 
 ## Needed from the author
 
@@ -129,13 +132,13 @@ Not needed: the author accepted the cached working papers for these six on 2026-
 
 7. ~~Matthew Baron (2020), "Countercyclical Bank Equity Issuance", *Review of Financial Studies* 33(9):4186-4230.~~ Supplied 2026-10-12 (accepted manuscript, above).
 8. Rafael Kisin and Asaf Manela (2016), "The Shadow Cost of Bank Capital Requirements", *Review of Financial Studies* 29(7):1780-1820.
-9. Eric Floyd, Nan Li and Douglas J. Skinner (2015), "Payout policy through the financial crisis: The growth of repurchases and the resilience of dividends", *Journal of Financial Economics* 118(2):299-316.
+9. ~~Eric Floyd, Nan Li and Douglas J. Skinner (2015), "Payout policy through the financial crisis: The growth of repurchases and the resilience of dividends", *Journal of Financial Economics* 118(2):299-316.~~ Supplied 2026-10-12 (accepted manuscript, above).
 10. Jeungbo Shim (2013), "Bank capital buffer and portfolio risk: The influence of business cycle and revenue diversification", *Journal of Banking & Finance* 37(3):761-772.
-11. Nikolaos Koussis and Michalis Makrominas (2019), "What factors determine dividend smoothing by US and EU banks?", *Journal of Business Finance & Accounting* 46(7-8):1030-1059.
+11. ~~Nicos Koussis and Michalis Makrominas (2019), "What factors determine dividend smoothing by US and EU banks?", *Journal of Business Finance & Accounting* 46(7-8):1030-1059.~~ Supplied 2026-10-12 (published version, above). The first author's name on the article is Nicos.
 12. Niranjan Tripathy, Di Wu and Yi Zheng (2021), "Dividends and financial health: Evidence from U.S. bank holding companies", *Journal of Corporate Finance* 66:101808.
 13. José Filipe Abreu and Mohamed Azzim Gulamhussen (2013), "Dividend payouts: Evidence from U.S. bank holding companies in the context of the financial crisis", *Journal of Corporate Finance* 22:54-65.
 14. Alexandros Kanas (2013), "Bank dividends, risk, and regulatory regimes", *Journal of Banking & Finance* 37(1):1-10.
-15. Dmytro Holod and Joe Peek (2010), "Capital constraints, asymmetric information, and internal capital markets in banking: New evidence", *Journal of Money, Credit and Banking* 42(5):879-906.
+15. Dmytro Holod and Joe Peek (2010), "Capital constraints, asymmetric information, and internal capital markets in banking: New evidence", *Journal of Money, Credit and Banking* 42(5):879-906. Still needed: the uploaded presentation is a different paper (Holod and Kitsul, above).
 16. Joel Houston, Christopher James and David Marcus (1997), "Capital market frictions and the role of internal capital markets in banking", *Journal of Financial Economics* 46(2):135-164.
 17. Marcia Millon Cornett, Hamid Mehran and Hassan Tehranian (1998), "Are financial markets overly optimistic about the prospects of firms that issue equity? Evidence from voluntary versus involuntary equity issuances by banks", *Journal of Finance* 53(6):2139-2159.
 18. Dinara Bayazitova and Anil Shivdasani (2012), "Assessing TARP", *Review of Financial Studies* 25(2):377-407.
