@@ -184,6 +184,11 @@ grounds.
   Begenau, Bigio, Majerovitz and Vieyra (2025), De Nicolò, Gamba and
   Lucchetta (2014), Berger et al. (2008) and Flannery and Rangan (2008)
   (author). Each record names its version and attributes only its pages.
+  Later the same day the author accepted working papers in general,
+  including Kisin and Manela (2014 draft), Gropp, Mosk, Ongena and Wix
+  (SAFE WP 156), Jokipii and Milne (BoF RDP 17/2006), Lepetit,
+  Saghi-Zedek and Tarazi (HAL 2013), Valencia (IMF WP 08/248, 13/241)
+  and Nuño and Thomas (ECB WP 1524).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
