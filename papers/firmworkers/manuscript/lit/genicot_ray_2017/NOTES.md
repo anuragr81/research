@@ -31,9 +31,9 @@ GR-D1 and GR-D2 in `CLAIMS.md`; neither affects a result.
    distribution (GR-4), including the mean (GR-5; Bogliacino and Ortoleva use a
    common mean, GR-6). Windows may be drawn by caste, religion or other inherited
    identity (GR-13), and group-based aspirations are named as an extension
-   (GR-14). With the author's pointer to consumption economics (Kaus on South
-   Africa, not yet read), the reference `R_h` set by the income norm of the own
-   status group cannot be claimed as new on its own.
+   (GR-14). As the author notes (12 Oct 2026), group reference points are also
+   established in consumption economics. The reference `R_h` set by the income
+   norm of the own status group cannot be claimed as new on its own.
 2. **What GR leave open is cross-group interaction.** Without interactions,
    group aspirations are "several co-existing copies" of their model; with
    them, "fresh and interesting considerations would arise" (GR-15), and they
@@ -43,8 +43,7 @@ GR-D1 and GR-D2 in `CLAIMS.md`; neither affects a result.
    therefore not `R_h` itself but the interaction: a group-specific reference
    (the preference channel) together with closure in a cross-group lottery for
    positions (the feasibility channel), with group membership inherited
-   (decision of 11 Oct 2026). That is a narrower claim, and it still needs
-   checking against Kaus and against the consumption literature.
+   (decision of 11 Oct 2026). That is a narrower claim.
 3. **Shape of the reference effect.** GR's milestone utility adds a concave
    payoff above the threshold, so the reference creates a convex kink (GR-10,
    GR-18), not a convex region below it. The sub-section's assumption "convex
