@@ -12,6 +12,8 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 - [x] Cole, Mailath and Postlewaite (1992, JPE) and (1995, CARESS WP 95-14) — L14, L15, `lit/cole_mailath_postlewaite`, read 11 Oct 2026
 - [x] Robson (1992), Econometrica — L16, `lit/robson_1992`, read 12 Oct 2026, novelty for the reference-dependent sub-section
 - [x] Becker, Murphy and Werning (2005), JPE, read in the authors' December 2003 manuscript — L17, `lit/becker_murphy_werning_2005`, read 12 Oct 2026, novelty for the reference-dependent sub-section
+- [x] Ray and Robson (2012), Econometrica — L18, `lit/ray_robson_2012`, read 12 Oct 2026, novelty for the reference-dependent sub-section
+- [ ] Genicot and Ray, "Aspirations and Inequality" (Econometrica, 2017, details unverified) — named by Ray and Robson (RR-7) for reference points built from the income distribution; the closest novelty risk for $R_h$. Not on Drive
 
 ### Needed for verification
 
