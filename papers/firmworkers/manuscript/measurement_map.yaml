@@ -55,7 +55,7 @@ terms:
     avoid: ['costly return', 're-entry']
     status: PROPOSED
   - term: 'lottery'
-    meaning: 'the route of a displaced worker that pays the lottery cost and swaps into the former job of a partner'
+    meaning: 'the route of a displaced worker that pays the lottery cost and receives the former job of a partner'
     defined_in: [M11, M14, M32]
     avoid: ['social lottery', 'social contest', 'social contests', 'social navigation', 'swap pool']
     status: PROPOSED
@@ -204,12 +204,12 @@ rows:
     observation_note: 'That spending on networking measures the lottery cost is a posit; no paper read in full measures it'
 
   - id: X8
-    symbol: 'swap rule'
-    term: 'swap'
-    avoid: ['reshuffle']
+    symbol: 'reassignment rule'
+    term: 'reassignment'
+    avoid: ['swap', 'reshuffle']
     term_status: PROPOSED
     role: input
-    meaning: 'a lottery entrant $i$ swaps positions with a partner $k$ drawn uniformly from the other entrants (M14, decided 10 Oct 2026); a draw across status groups is weighted by $1-\sigma$ (M29)'
+    meaning: 'the former jobs of the entrants are reassigned among them at random, each entrant receiving the former job of another entrant, every other entrant''s job equally likely (M14, M36); M29 weights a draw across status groups by $1-\sigma$, which no reassignment realises when the groups differ in size (M37)'
     referent: 'competing through connections, which reallocates jobs by connection or luck rather than by skill'
     support: POSIT
     direction: ''
@@ -342,7 +342,7 @@ rows:
     meaning: '$\sum_k x_k$'
     referent: 'total wage bill'
     support: POSIT
-    direction: 'unchanged by any swap (M10)'
+    direction: 'unchanged when jobs change hands (M10)'
     observation: 'total wage bill of the market, from payroll data'
     observation_status: PROPOSED
     observation_support: DEFINITIONAL
@@ -474,7 +474,7 @@ rows:
     term_status: PROPOSED
     role: output
     produced_by: [M25, M26, M27]
-    meaning: '$\frac{a+(1-\sigma)b}{n+(1-\sigma)m}-L$, the closure-weighted expected swap gain'
+    meaning: '$\frac{a+(1-\sigma)b}{n+(1-\sigma)m}-L$, the closure-weighted expected lottery gain'
     referent: 'expected net payoff from competing through connections when connections are closed along status lines'
     support: POSIT
     direction: 'equals $G_i$ of M11 at $\sigma=0$ (M25)'

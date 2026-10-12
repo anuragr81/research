@@ -40,8 +40,8 @@ summary:
     text: 'The return buys the former job back at an upskilling cost that rises with the income climbed.'
     rests_on: ['M7', 'Isc.loss_and_cost_rise_with_rank']
   - para: 2
-    text: 'Displaced workers who choose the lottery are its entrants, and each pays the lottery cost and swaps former jobs with a partner drawn at random from the other entrants.'
-    rests_on: ['M11', 'M14', 'M32']
+    text: 'Displaced workers who choose the lottery are its entrants, and each pays the lottery cost and receives the former job of a partner, another entrant drawn at random.'
+    rests_on: ['M11', 'M14', 'M32', 'M36']
   - para: 2
     text: 'Closure lowers the chance that the partner comes from the other status group.'
     rests_on: ['M29']
@@ -363,6 +363,24 @@ model:
     lean: [Isc.return_vs_downgrade, Isc.return_beats_downgrade_iff]
     status: LEAN_PROVED
     symbols: [X3, X5]
+  - id: M36
+    anchor: 'Appendix, condition 1: "another worker k out of N workers is randomly selected to swap her job with worker i"'
+    claim: 'The former jobs of the entrants are reassigned among them at random, each entrant receiving the former job of another entrant, so that every former job goes to exactly one entrant and each entrant is equally likely to receive the former job of any other entrant'
+    assumptions: ''
+    evidence: 'lean/IscLean/Reassignment.lean::Isc.reassignment_chances_equal. The manuscript says the partner is drawn at random but not how simultaneous draws are made consistent. Random pairs need an even number of entrants or a rule for the one left over; random reassignment works for any pool of two or more. Each entrant is equally likely to receive each other entrant''s former job (Isc.reassignment_chances_equal), which is all that M11 to M13, M30, M33 and M34 use; any reassignment leaves total income unchanged (Isc.reassignment_preserves_total) and assigns every former job with total probability one (Isc.reassignment_column_sum), which the closure weights of M29 violate when the groups differ in size (M37)'
+    lean: [Isc.reassignment_chances_equal, Isc.reassignment_preserves_total, Isc.reassignment_column_sum]
+    status: DECIDED
+    decision: '12 Oct 2026, the author: random reassignment rather than random pairs, because pairs need an even pool. Every entrant receives the former job of another entrant, and every other entrant''s former job is equally likely, as M11 assumes'
+    affects: [M10, M11, M23, M29, M37]
+    symbols: [X8]
+  - id: M37
+    anchor: 'consequence of the lottery rule decided in M36 and the closure form decided in M29'
+    claim: 'With partial closure, $0<\sigma<1$, and two status groups with different numbers of entrants, no random reassignment of the entrants'' former jobs gives each entrant the closure-weighted chances of M29: those chances assign the former job of an entrant with total probability one exactly when $\sigma=0$ or the groups have equal numbers of entrants'
+    assumptions: 'a finite pool with two status groups, each with at least one entrant; chances $w_{ik}/\sum_{j\ne i}w_{ij}$ with $w_{ik}=1$ within a group and $1-\sigma$ across; any probability distribution over reassignments of the former jobs'
+    evidence: 'lean/IscLean/Reassignment.lean::Isc.closure_chances_infeasible. Any reassignment assigns each former job with total probability one (Isc.reassignment_column_sum). The closure chances of an entrant''s former job sum to $1+\frac{(1-\sigma)n_o\sigma(n_k-n_o)}{r_kr_o}$, with $n_k,n_o$ the entrants in the job''s group and in the other, $r_k=n_k-1+(1-\sigma)n_o$ and $r_o=n_o-1+(1-\sigma)n_k$ (Isc.closure_column_sum, Isc.closure_column_sum_eq_one_iff). With two entrants in one group and one in the other at $\sigma=1/2$, the lone entrant''s former job would be claimed with total probability $2/3$ (control). M25, M26 and M31 are unaffected; the formula of M27 describes chances no reassignment realises when the groups differ in size'
+    lean: [Isc.closure_chances_infeasible, Isc.closure_column_sum, Isc.closure_column_sum_eq_one_iff]
+    status: LEAN_PROVED
+    symbols: [X8, X24, X25]
 
 literature:
   - id: L1
