@@ -130,6 +130,12 @@ grounds.
   deficit shrink risk-weighted assets, which the model takes as exogenous.
   T3 (surplus level) fails: 0.9959 against 0.9789. T2 (fall in $g$) is not
   measured. Map rows G18 to G22.
+- 2026-10-12. Direction (author). No paper built on a negative empirical
+  result. The paper's claim is that its enhanced model explains the data
+  better than a simple standard baseline, shown by a backtest fixed in
+  advance. The empirical backtest and the model enhancement run in
+  parallel. The failures found so far become the baseline's scorecard.
+  Open: the baseline (BCVW proposed).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
