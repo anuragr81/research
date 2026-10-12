@@ -18,6 +18,7 @@ A paper needs its primary source, a `lit/` record and Lean only when a claim res
 - [x] Clark and Oswald (1996), JPubE, read in the August 1995 revision — L25, `lit/clark_oswald_1996`, read 12 Oct 2026; comparison income as the pay of comparable workers, a referent for $R_h$, but evidence from reported satisfaction, not choice
 - [x] Currarini, Jackson and Pin (2009), Econometrica, read in the July 2008 working paper — L24, `lit/currarini_jackson_pin_2009`, read 12 Oct 2026; under the closure weighting $\sigma = IH/H$ (Coleman's index), so X25 should cite it
 - [x] Markowitz (1952), JPE (Cowles reprint) — L23, `lit/markowitz_1952`, read 12 Oct 2026; reference at own customary wealth, shape near it the reverse of prospect theory's
+- [x] Jacobson, LaLonde and Sullivan (1993), AER, read in the Chicago Fed WP-92-28 (revised November 1992) — L26, `lit/jacobson_lalonde_sullivan_1993`, read 12 Oct 2026; losses of about 25 per cent of former earnings, persistent and beginning before separation; reported as shares, closer to a proportional step than to M32's common fallback (flag for the author); an observation for a row for the downgrade
 - [x] Kahneman and Tversky (1979), Econometrica — L21, `lit/kahneman_tversky_1979`, read 12 Oct 2026 through a local OCR; source of the shape assumed below $R_h$ and of the unadapted-loss mechanism
 
 ### Needed for verification
