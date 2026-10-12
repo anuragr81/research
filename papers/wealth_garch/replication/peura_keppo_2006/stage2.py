@@ -57,7 +57,7 @@ def load_rates(path):
     return {y: statistics.fmean(v) / 100 for y, v in by.items() if len(v) == 12}
 
 
-def bank_record(cert, s, rates):
+def bank_record(cert, s, rates, screen=False):
     if any(rec["BKCLASS"] != "N" for rec in s.values()):
         return None
     shares = [s[y]["RWAJT"] / s[y]["ASSET"] for y in range(1993, 2003)
@@ -75,7 +75,7 @@ def bank_record(cert, s, rates):
             R[y] = rec["ASSET"] * share
             X[y] = rec["EQ"] / R[y]
     roa = [s[y]["NETINC"] / R[y - 1] - rates[y] * X[y - 1] for y in range(1985, 2003)
-           if y in s and y - 1 in R and s[y]["NETINC"] is not None]
+           if y in s and y - 1 in R and s[y]["NETINC"] is not None and (not screen or steady(s, y))]
     buf = [s[y]["RBCRWAJ"] / 100 - 0.08 for y in range(1993, 2003) if y in s and s[y]["RBCRWAJ"]]
     llp = [s[y]["ELNATR"] / s[y]["ASSET"] for y in range(1985, 2003)
            if y in s and s[y]["ELNATR"] is not None and s[y]["ASSET"]]
@@ -90,6 +90,11 @@ def bank_record(cert, s, rates):
     return {"cert": cert, "mu": mu, "sigma": sigma, "buf": statistics.fmean(buf), "bufmax": max(buf),
             "llp": statistics.fmean(llp), "size": statistics.fmean(assets), "growth": statistics.fmean(growth),
             "n": len(roa)}
+
+
+def steady(s, y):
+    a, b = s[y]["ASSET"], s[y - 1]["ASSET"]
+    return bool(a and b) and 0.5 <= a / b <= 2
 
 
 def barriers_scaled(mu, sigma):
