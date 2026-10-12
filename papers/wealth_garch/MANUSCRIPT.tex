@@ -124,6 +124,7 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M12}{Balanced growth of equity and requirement pins the return on equity, and the deficit persistence of the maintained model tends to one as growth vanishes, while the persistence asymmetry tends to the surplus payout rate.}{$b\ne0$, $1+g\ne0$ $\Rightarrow$ $\big((1+r_Eb)/(1+g)=1\iff r_E=g/b\big)$. $\phi^-=1-g(1-b)/b\to1$ as $g\to0^+$, strictly decreasing in $g$ for $0<b<1$. $\phi^--\phi^+=\delta_p+g-g/b\to\delta_p$.}{RateBased.balanced_growth_iff, RateBased.phi_minus_tendsto_one, RateBased.phi_minus_strictAnti, RateBased.persistence_asymmetry_eq, RateBased.persistence_asymmetry_tendsto, RateBased.control_identity_needs_retention, RateBased.control_persistence_needs_partial_retention}
 \mrow{M13}{The expected time below the requirement falls in the recovery drift and diverges as that drift vanishes.}{$d>0$ $\Rightarrow$ $m\mapsto d/m$ is strictly decreasing on $(0,\infty)$ and $d/m\to\infty$ as $m\to0^+$. At $d=0$ it is constant.}{RateBased.sojourn_strictAnti, RateBased.sojourn_tendsto_atTop, RateBased.control_sojourn_needs_positive_depth}
 \mrow{M14}{With a positive fixed issuance cost and a finite value, the discounted number of recapitalisations is finite, so the impulse terms of the verification argument converge absolutely.}{$K>0$, $e_i\ge0$, $K\sum_{i<n}e_i\le B$ for all $n$ $\Rightarrow$ $\sum_{i<n}e_i\le B/K$, $N=\sum_ie_i$ converges and $N\le B/K$. If also $|c_i|\le Ce_i$, $\sum_ic_i$ converges absolutely. With $K=0$, $e_i=1$ the cost bound holds and $N$ diverges.}{ImpulseCount.partial_sums_bounded, ImpulseCount.count_summable, ImpulseCount.count_le, ImpulseCount.impulse_sum_summable, ImpulseCount.control_count_needs_fixed_cost}
+\mrow{M15}{For every exposure policy that complies with the cap, binding or not, the $z$-volatility is at most the larger of $\sigma_L^2$ and $\nu_1^2$ everywhere, and deep in surplus at most the larger of $\sigma_L^2$ and $\nu_3^2$ up to any margin.}{$q>0$, $a_1>0$, $x>1$, $0\le\pi(x)$, $\pi(x)\,x\le u(x)$ $\Rightarrow$ $\zeta(x)\le\max\{\sigma_L^2,\nu_1^2\}$. If $a_3>0$, $a_2<1$ and compliance holds for all large $x$, then for every $\varepsilon>0$, $\zeta(x)\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ for all large $x$. Both fail with $\pi<0$ or with $\pi x>u(x)$.}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
 
 \bottomrule
 \end{longtable}
@@ -323,6 +324,15 @@ Control, $d=0$ $\Rightarrow$ $d/m\equiv0$.
 \[ K\sum_{i<n}e_i\le B,\ K>0\ \Rightarrow\ \sum_{i<n}e_i\le\frac BK\ \ \forall n,\qquad e_i\ge0\ \Rightarrow\ N=\sum_ie_i\le\frac BK<\infty . \]
 \[ |c_i|\le Ce_i\ \Rightarrow\ \sum_i|c_i|\le C\,N<\infty . \]
 Control, $K=0$, $e_i=1$ $\Rightarrow$ $0\le0$ for every $n$ and $\sum_ie_i=\infty$.
+\end{mproof}
+
+\begin{mproof}{M15}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
+\[ \zeta(x)=Q(\omega),\qquad Q(\omega)=\omega^2\sigma^2-2\omega c\sigma\sigma_L+\sigma_L^2,\qquad \omega=\frac{\pi(x)\,x}{x-1}, \]
+\[ Q(0)=\sigma_L^2,\qquad Q(1/a_i)=\nu_i^2 . \]
+\[ \omega=tM,\ t\in[0,1]\ \Rightarrow\ Q(\omega)=(1-t)Q(0)+tQ(M)+\sigma^2M^2(t^2-t)\le\max\{Q(0),Q(M)\} . \]
+\[ 0\le\pi,\ \ \pi x\le u(x)\le\frac{x-1}{a_1}\ \Rightarrow\ 0\le\omega\le\frac1{a_1}\ \Rightarrow\ \zeta(x)\le\max\{\sigma_L^2,\nu_1^2\} . \]
+\[ \pi x\le\frac{x-a_2}{a_3}\ \Rightarrow\ \omega\le w(x)=\frac1{a_3}+\frac{1-a_2}{a_3(x-1)}\to\frac1{a_3},\qquad Q(w(x))\to\nu_3^2 . \]
+Controls, $(\sigma,\sigma_L,c)=(1,1,1)$, $\omega=-1$ $\Rightarrow$ $Q=4>1=\max\{Q(0),Q(1)\}$; $(\sigma,\sigma_L,c)=(1,0,0)$, $\omega=2>1$ $\Rightarrow$ $Q=4>1$.
 \end{mproof}
 
 \section{Evidence and verification}

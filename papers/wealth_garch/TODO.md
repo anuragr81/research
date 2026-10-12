@@ -120,6 +120,16 @@ grounds.
   measure (results table). Fails: the corner (G2, G4), dividends only at
   the barrier (G14), exact targeting (G15). Tracked: G1, G3. Not measured:
   the rest, including $\sigma$ and every level that needs it.
+- 2026-10-12. M15 added: for every policy that complies with the cap,
+  binding or not, $\zeta\le\max\{\sigma_L^2,\nu_1^2\}$ everywhere and
+  $\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ deep in surplus
+  (`Bounds.lean`). It is the bound form of K1 and needs no optimality.
+  K1 itself is unchanged, pending the author.
+- 2026-10-12. M12 tested under `PREREG_persistence.md` (`2a56b918`).
+  T1 (deficit level) fails: persistence 0.88 against 1.01, because banks in
+  deficit shrink risk-weighted assets, which the model takes as exogenous.
+  T3 (surplus level) fails: 0.9959 against 0.9789. T2 (fall in $g$) is not
+  measured. Map rows G18 to G22.
 - Open, for the author. Whether to reformulate the model claims as bounds
   that need no optimality (the cap bounds exposure and the $z$-volatility
   near each end), and whether to narrow theory and empirics to measurable,

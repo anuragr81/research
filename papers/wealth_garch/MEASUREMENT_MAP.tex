@@ -106,6 +106,11 @@ ID & Object & Role in the model & Counterpart and observation & Status & Evidenc
 \grow{G15}{$x_L$, $y_{\text{post}}$}{The recapitalisation trigger and the injection target.}{The state just before and just after a recapitalisation, measured as net stock issuance (\path{EQCSXQ}) plus capital from the parent holding company (\path{EQCBHCTR}), in quarters without merger-driven equity changes (\path{EQCMRG}).}{Output}{FDIC-Q9, FDIC-Q10, FDIC-Q12, FDIC-Q13, M5, M6, M7, M10}
 \grow{G16}{$\zeta$, $\nu_1^2$, $\nu_3^2$}{The $z$-volatility and its limits at the distress boundary and deep in surplus.}{The variance of changes in $z=\log((x-1)/q)$ near the distress boundary and deep in surplus. It does not depend on $q$.}{Output}{M2, M3, M8, MeasurementMap.zvol2_free_of_q}
 \grow{G17}{$\nu_1^2/\nu_3^2$}{The deficit-to-surplus variance ratio, read in discrete time as $\lambda_V^4$.}{The ratio of the two variances of G16. Reading it as $\lambda_V^4$ is a definition.}{Output}{K1, M1, M3}
+\grow{G18}{$z_t$}{The discrete-time state, the log of equity over required capital $Q_t$.}{Tier 1 capital over 8.5\% of risk-weighted assets, the Tier 1 minimum plus the conservation buffer.}{Report}{FDIC-Q3, FDIC-Q4, B3-Q2, B3-Q4, M12}
+\grow{G19}{$g$}{The growth rate of required capital, exogenous in the model.}{Quarterly growth of risk-weighted assets.}{Report}{FDIC-Q3, M12}
+\grow{G20}{$b$}{The retention ratio.}{One minus dividends over net income, over four quarters, defined when net income is positive.}{Report}{FDIC-Q7, FDIC-Q8, M12}
+\grow{G21}{$\delta_p$}{The surplus payout rate.}{The share of the log-surplus paid as dividends in a quarter.}{Report}{FDIC-Q8, M12}
+\grow{G22}{$\phi^-$, $\phi^+$}{Deficit and surplus persistence of $z_t$.}{Least squares of $z_t$ on $z_{t-1}$ through the origin, on pairs starting in deficit or surplus.}{Output}{M12}
 
 \bottomrule
 \end{longtable}
@@ -148,6 +153,11 @@ ID & Measured as & What the data show & Model prediction & Outcome & Evidence \\
 \trow{G15}{Recapitalisations, $x$ before and after, within bank, under the pre-registered rule.}{Issue size is unrelated to the pre-issue state and the post-issue state rises with it, $b_{\text{post}}=+1.37$ and $+1.36$ for the two valid distress proxies. Issues start at a mean $x$ of 1.11, against the trigger 1.03.}{One target within a bank, $b_{\text{post}}=0$.}{Fails}{FDIC-Q9, FDIC-Q12, M5, 06_empirical_starter/PREREG_distress_targeting.md, 06_empirical_starter/results_distress_targeting.md}
 \trow{G16}{Not computed. A level would need the economic $\sigma$ of G8.}{Nothing.}{$\nu_1^2,\nu_3^2$, which need the cap to bind (M3), and it does not (G2).}{Not measured}{M3}
 \trow{G17}{Not computed on this panel.}{Nothing.}{$\nu_1^2/\nu_3^2$, under the same condition as G16.}{Not measured}{K1, M3}
+\trow{G18}{Tier 1 capital over 8.5\% of risk-weighted assets.}{462 of 130,488 quarter pairs start in deficit, about 0.35\%.}{None on its own.}{Tracked}{FDIC-Q3, FDIC-Q4, 06_empirical_starter/results_persistence.md}
+\trow{G19}{Quarterly growth of risk-weighted assets.}{Mean $-0.47\%$ a quarter on deficit pairs: banks in deficit shrink risk-weighted assets.}{Exogenous, so no response to a deficit.}{Fails}{FDIC-Q3, M12, 06_empirical_starter/results_persistence.md}
+\trow{G20}{One minus dividends over net income, four quarters.}{0.3131 on the 108 deficit pairs where it is defined in $(0,1]$.}{None on its own.}{Tracked}{FDIC-Q7, FDIC-Q8, 06_empirical_starter/results_persistence.md}
+\trow{G21}{Share of the log-surplus paid out per quarter.}{0.0211 a quarter.}{None on its own.}{Tracked}{FDIC-Q8, 06_empirical_starter/results_persistence.md}
+\trow{G22}{Within the pre-registered tests T1 to T3.}{Deficit persistence 0.88 against 1.01 predicted (T1, fails). Surplus persistence 0.9959 against 0.9789 (T3, fails). The fall of $\phi^-$ in $g$ is not measured (T2).}{$\phi^-=1-g(1-b)/b$, $\phi^+=1-\delta_p$.}{Fails}{M12, 06_empirical_starter/PREREG_persistence.md, 06_empirical_starter/results_persistence.md}
 
 \bottomrule
 \end{longtable}

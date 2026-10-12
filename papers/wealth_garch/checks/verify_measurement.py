@@ -17,7 +17,7 @@ CALIBRATION = ("BCVW-Q",)
 COVERAGE = [r"$x$", r"$\pi$", r"$X-L$", r"$a_1$", r"$a_2$", r"$a_3$", r"$q$", r"$\sigma$", r"$\mu_s$",
             r"$r$", r"$\sigma_L$", r"$c$", r"$\gamma$", r"$\mu_L$", r"$r_L$", r"$\rho_L$", r"$\kappa$",
             r"$K$", r"$\lambda_S$", r"$y^*$", r"$x_L$", r"$y_{\text{post}}$", r"$\zeta$", r"$\nu_1^2$",
-            r"$\nu_3^2$", r"$\nu_1^2/\nu_3^2$"]
+            r"$\nu_3^2$", r"$\nu_1^2/\nu_3^2$", r"$z_t$", r"$g$", r"$b$", r"$\delta_p$", r"$\phi^-$", r"$\phi^+$"]
 results = []
 
 
