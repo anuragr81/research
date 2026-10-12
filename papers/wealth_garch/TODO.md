@@ -224,6 +224,13 @@ grounds.
   banks with slope below one and positive intercept; the model
   underpredicts capital). F1, their negative μ-σ correlation, reproduces in
   no run. Next: stage 3, the same method on 2015-2024.
+- 2026-10-12. Peura and Keppo stage 3 (PREREG_stage3.md; windows
+  2015-2024 and 2005-2024). F3, F4 and F7 hold in every sample and window;
+  F1 in none, including the window with the 2008-2010 crisis. F5 fails
+  mostly on its slope and intercept conditions with few banks. In 2015-2024
+  half the 61 largest banks have no issue barrier at K = 0.25% (μ/σ ≥ 2.6):
+  the model's optimum for them is never to issue. Next: stage 4, our tests
+  of what Peura and Keppo did not test.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
