@@ -46,6 +46,7 @@ follows `papers/MANUSCRIPT_SKELETON.md` §6 and the reference bundle
 | `gibbons_waldman_1998` | `GibbonsWaldman1999` | NBER WP 6454 (Mar 1998), scan read through Drive's OCR, cited as such | read in full, 17 quotations, 33 Lean theorems |
 | `cole_mailath_postlewaite` | `ColeMailathPostlewaite1992`, `ColeMailathPostlewaite1995` | JPE article; CARESS WP 95-14 | both read in full, 26 + 8 quotations, 33 Lean theorems |
 | `becker_murphy_werning_2005` | `BeckerMurphyWerning2005` | authors' manuscript revised Dec 2003, pp.1–32, cited as the JPE article with `version_read` | read in full, 25 quotations, 17 Lean theorems |
+| `currarini_jackson_pin_2009` | `CurrariniJacksonPin2009` | working paper revised July 2008, pp.1–46, cited as the Econometrica article with `version_read` | read in full, 23 quotations, 11 Lean theorems |
 | `friedman_savage_1948` | `FriedmanSavage1948` | JPE article, pp.279–304, JSTOR scan read through Drive's OCR, pages checked against a local OCR (`lit/ocr_pages.py`) | read in full, 24 quotations, 12 Lean theorems |
 | `genicot_ray_2017` | `GenicotRay2017` | Econometrica article, pp.489–519; Supplemental Material not read | read in full, 24 quotations, 12 Lean theorems |
 | `kahneman_tversky_1979` | `KahnemanTversky1979` | Econometrica article, pp.263–291, ProQuest scan read through a local OCR (`lit/ocr_pages.py`) | read in full, 20 quotations, 13 Lean theorems |
