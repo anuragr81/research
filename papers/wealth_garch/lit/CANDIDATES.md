@@ -114,12 +114,14 @@ reported them, not yet verified.
 
 ### Published versions of priority working papers
 
-1. Jochen Mankart, Alexander Michaelides and Spyros Pagratis (2020), "Bank capital buffers in a dynamic model", *Financial Management* 49(2):473-502.
-2. Dean Corbae and Pablo D'Erasmo (2021), "Capital Buffers in a Quantitative Model of Banking Industry Dynamics", *Econometrica* 89(6):2975-3023.
-3. Juliane Begenau, Saki Bigio, Jeremy Majerovitz and Matias Vieyra (2025), "A Q-Theory of Banks", *Review of Economic Studies*, doi:10.1093/restud/rdaf035.
-4. Gianni De Nicolò, Andrea Gamba and Marcella Lucchetta (2014), "Microprudential Regulation in a Dynamic Model of Banking", *Review of Financial Studies* 27(7):2097-2138.
-5. Allen N. Berger, Robert DeYoung, Mark J. Flannery, David Lee and Özde Öztekin (2008), "How do large banking organizations manage their capital ratios?", *Journal of Financial Services Research* 34(2-3):123-149.
-6. Mark J. Flannery and Kasturi P. Rangan (2008), "What caused the bank capital build-up of the 1990s?", *Review of Finance* 12(2):391-429.
+Not needed: the author accepted the cached working papers for these six on 2026-10-12. Each record attributes only its working paper's pages and names the version read.
+
+1. ~~Jochen Mankart, Alexander Michaelides and Spyros Pagratis (2020), "Bank capital buffers in a dynamic model", *Financial Management* 49(2):473-502.~~ Working paper accepted.
+2. ~~Dean Corbae and Pablo D'Erasmo (2021), "Capital Buffers in a Quantitative Model of Banking Industry Dynamics", *Econometrica* 89(6):2975-3023.~~ Working paper accepted.
+3. ~~Juliane Begenau, Saki Bigio, Jeremy Majerovitz and Matias Vieyra (2025), "A Q-Theory of Banks", *Review of Economic Studies*, doi:10.1093/restud/rdaf035.~~ Working paper accepted.
+4. ~~Gianni De Nicolò, Andrea Gamba and Marcella Lucchetta (2014), "Microprudential Regulation in a Dynamic Model of Banking", *Review of Financial Studies* 27(7):2097-2138.~~ Working paper accepted.
+5. ~~Allen N. Berger, Robert DeYoung, Mark J. Flannery, David Lee and Özde Öztekin (2008), "How do large banking organizations manage their capital ratios?", *Journal of Financial Services Research* 34(2-3):123-149.~~ Working paper accepted.
+6. ~~Mark J. Flannery and Kasturi P. Rangan (2008), "What caused the bank capital build-up of the 1990s?", *Review of Finance* 12(2):391-429.~~ Working paper accepted.
 
 ### No open copy found
 

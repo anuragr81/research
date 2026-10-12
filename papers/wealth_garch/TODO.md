@@ -179,6 +179,11 @@ grounds.
   pre-registered, with every difference from Compustat recorded. Stage 3:
   the same method on 2015-2024. Stage 4: our tests of what they did not
   test (dividend timing, targeting, persistence).
+- 2026-10-12. Working papers are accepted as the version read for
+  Mankart, Michaelides and Pagratis (2020), Corbae and D'Erasmo (2021),
+  Begenau, Bigio, Majerovitz and Vieyra (2025), De Nicolò, Gamba and
+  Lucchetta (2014), Berger et al. (2008) and Flannery and Rangan (2008)
+  (author). Each record names its version and attributes only its pages.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
