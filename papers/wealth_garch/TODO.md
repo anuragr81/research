@@ -215,6 +215,15 @@ grounds.
   named but untested (JM-Q1, BDF-Q15), and recapitalisation to the minimum
   at a proportional cost (BAR-Q2, BAR-Q3). Next: Peura and Keppo
   replication, stage 2.
+- 2026-10-12. Peura and Keppo stage 2 (their section V on Call Reports,
+  1984-2002). Run 1 (PREREG_stage2.md): charter consolidations dominate
+  the return moments; recorded unchanged. Run 2 (PREREG_stage2_2.md, an
+  asset-doubling screen, written after run 1 and saying so): the 61
+  largest national banks reproduce F3 to F7, the model-side findings
+  (barrier driven by σ; buffers track the barrier among high-provision
+  banks with slope below one and positive intercept; the model
+  underpredicts capital). F1, their negative μ-σ correlation, reproduces in
+  no run. Next: stage 3, the same method on 2015-2024.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
