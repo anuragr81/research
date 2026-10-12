@@ -3,6 +3,8 @@
 Run 11 October 2026 under PREREG_distress_targeting.md (commit d92b237d),
 on fdic_distress_panel_2015_2024.csv.gz, fetched by fetch_distress_panel.py.
 
+Pinned: fdic_distress_panel_2015_2024.csv.gz sha256 3cb78c0aa33691037f275eaf7bea5a75d02958161e0f8f7f2318fae4b0cc879b
+
 Reproduce: python3 distress_targeting.py fdic_distress_panel_2015_2024.csv.gz
 
 ```

@@ -60,6 +60,19 @@ def page_text(pdf, page):
     return normalise(p.stdout)
 
 
+def sheet_entries(path, sheet):
+    import openpyxl
+    wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+    out = {}
+    for row in wb[sheet].iter_rows(values_only=True):
+        if not row or row[0] is None:
+            continue
+        key = str(row[0]).strip()
+        text = " ".join(str(c) for c in row[1:] if c is not None).replace("_x000D_", " ")
+        out[key] = normalise(out.get(key, "") + " " + text)
+    return out
+
+
 def declarations(path):
     names, ns = [], []
     for ln in open(path):
@@ -82,46 +95,67 @@ def run(cfg):
     s = Suite(cfg["title"])
     claims = open(os.path.join(here, "CLAIMS.md")).read()
     pdf = os.path.join(CACHE, cfg["pdf"])
+    sheet = cfg.get("sheet")
 
     print("-" * 72)
     print("SOURCE")
     have = os.path.exists(pdf)
-    s.check("S1 cached PDF present", have, pdf)
+    s.check("S1 cached source present", have, pdf)
     if have:
         digest = hashlib.sha256(open(pdf, "rb").read()).hexdigest()
-        s.check("S2 cached PDF matches its pinned sha256", digest == cfg["sha256"], digest)
+        s.check("S2 cached source matches its pinned sha256", digest == cfg["sha256"], digest)
         s.check("S2-control a different digest is rejected", digest != "0" * 64)
 
     print("-" * 72)
-    print("QUOTATIONS  exact containment on the stated page, after normalisation")
     quotes = table_rows(claims, "Quotations")
     s.check("Q0 the quotation table parses and is non-empty", quotes and all(len(r) >= 4 for r in quotes),
             f"{len(quotes)} rows")
-    lo, hi = cfg["pages"]
-    cache = {}
+    if sheet:
+        print(f"QUOTATIONS  exact containment in the stated variable's entry of sheet '{sheet}'")
+        cells = sheet_entries(pdf, sheet) if have else {}
 
-    def on_page(text, printed):
-        pg = printed - cfg["offset"]
-        if pg < 1:
-            return False
-        if pg not in cache:
-            cache[pg] = page_text(pdf, pg)
-        return normalise(text) in cache[pg]
+        def on_page(text, key):
+            return key in cells and normalise(text) in cells[key]
 
-    for r in quotes:
-        qid, page, quote = r[0], r[1], r[2]
-        ok_page = page.isdigit() and lo <= int(page) <= hi
-        s.check(f"{qid} page {page} lies in {lo}-{hi}", ok_page)
-        if ok_page and have:
-            s.check(f"{qid} found verbatim on p. {page}", on_page(quote, int(page)), quote[:60])
-    if have and quotes:
-        p0 = int(quotes[0][1])
-        s.check("Q-control a fabricated quotation is not found",
-                not on_page(cfg["fabricated"], p0), cfg["fabricated"][:60])
-        s.check("Q-control a true quotation on the wrong page is not found",
-                not on_page(quotes[0][2], cfg["wrong_page"]), f"p. {cfg['wrong_page']}")
-        s.check("Q-control a page before the first PDF page is refused",
-                not on_page(quotes[0][2], cfg["offset"]), f"p. {cfg['offset']}")
+        for r in quotes:
+            qid, key, quote = r[0], r[1], r[2]
+            s.check(f"{qid} variable {key} is in the sheet", key in cells)
+            if key in cells:
+                s.check(f"{qid} found verbatim in {key}", on_page(quote, key), quote[:60])
+        if have and quotes:
+            s.check("Q-control a fabricated quotation is not found",
+                    not on_page(cfg["fabricated"], quotes[0][1]), cfg["fabricated"][:60])
+            s.check("Q-control a true quotation under the wrong variable is not found",
+                    not on_page(quotes[0][2], cfg["wrong_page"]), cfg["wrong_page"])
+            s.check("Q-control a variable absent from the sheet is refused",
+                    not on_page(quotes[0][2], "NO_SUCH_VARIABLE"))
+    else:
+        print("QUOTATIONS  exact containment on the stated page, after normalisation")
+        lo, hi = cfg["pages"]
+        cache = {}
+
+        def on_page(text, printed):
+            pg = printed - cfg["offset"]
+            if pg < 1:
+                return False
+            if pg not in cache:
+                cache[pg] = page_text(pdf, pg)
+            return normalise(text) in cache[pg]
+
+        for r in quotes:
+            qid, page, quote = r[0], r[1], r[2]
+            ok_page = page.isdigit() and lo <= int(page) <= hi
+            s.check(f"{qid} page {page} lies in {lo}-{hi}", ok_page)
+            if ok_page and have:
+                s.check(f"{qid} found verbatim on p. {page}", on_page(quote, int(page)), quote[:60])
+        if have and quotes:
+            p0 = int(quotes[0][1])
+            s.check("Q-control a fabricated quotation is not found",
+                    not on_page(cfg["fabricated"], p0), cfg["fabricated"][:60])
+            s.check("Q-control a true quotation on the wrong page is not found",
+                    not on_page(quotes[0][2], cfg["wrong_page"]), f"p. {cfg['wrong_page']}")
+            s.check("Q-control a page before the first PDF page is refused",
+                    not on_page(quotes[0][2], cfg["offset"]), f"p. {cfg['offset']}")
 
     print("-" * 72)
     print("READINGS")

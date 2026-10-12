@@ -101,6 +101,31 @@ grounds.
 - `lit/litcheck.py` now refuses a stated page that maps before the first
   PDF page. Before, such a page made `pdftotext` read the whole document.
 
+## Decisions, 12 October 2026
+
+- 2026-10-12. Computation on pinned data is a third evidence class, beside
+  verbatim quotations and Lean proofs (author's decision). A computed claim
+  needs its input data pinned by sha256 and committed or fetched by a
+  committed script, its fields defined through a `lit/` record
+  (`lit/fdic_2026` for the FDIC panel), a results file holding the exact
+  output, and a pre-registration where any choice was involved.
+  `checks/verify_measurement.py` (MM-7) re-runs every cited results file on
+  its pinned data.
+- 2026-10-11. The empirical test asks the narrower question: do distress
+  recapitalisations behave like the model's impulse (author's decision).
+  Pre-registered in `06_empirical_starter/PREREG_distress_targeting.md`
+  (`d92b237d`). Result: exact targeting fails for both valid proxies
+  (`results_distress_targeting.md`).
+- 2026-10-12. `MEASUREMENT_MAP.tex` records what the FDIC panel could
+  measure (results table). Fails: the corner (G2, G4), dividends only at
+  the barrier (G14), exact targeting (G15). Tracked: G1, G3. Not measured:
+  the rest, including $\sigma$ and every level that needs it.
+- Open, for the author. Whether to reformulate the model claims as bounds
+  that need no optimality (the cap bounds exposure and the $z$-volatility
+  near each end), and whether to narrow theory and empirics to measurable,
+  scale-free implications. An Empirical analysis section of
+  `MANUSCRIPT.tex` (E rows, headlines allowed to cite them) waits on this.
+
 ## Carried from the retired documents, 11 October 2026
 
 From the reader TODO and the starter pack, retired at pin `4f57aab1`

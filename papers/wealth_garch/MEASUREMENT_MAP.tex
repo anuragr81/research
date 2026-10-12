@@ -10,6 +10,8 @@
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_measurement.py)
 %   Rows are written only through
 %     \grow{ID}{object}{role in the model}{counterpart and observation}{status}{evidence}
+%   and the results table only through
+%     \trow{G-ID}{measured as}{what the data show}{model prediction}{outcome}{evidence}
 %   IDs are G1, G2, ... in order. Status is one of Rule, Report,
 %   Calibration, Unobserved, Output. Evidence is a comma-separated list of
 %   quotation or reading IDs of a lit/ record (B3-Q1, LCR-D2, ...), Lean
@@ -47,6 +49,7 @@
 \newcommand{\ev}[1]{\path{#1}}
 
 \newcommand{\grow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
+\newcommand{\trow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
 
 \title{Measurement Map}
 \author{}
@@ -61,6 +64,7 @@ The map takes each object of the model in \path{MANUSCRIPT.tex} to its
 counterpart in the Basel capital framework \citep{bcbs2011}, the Basel
 liquidity standard \citep{bcbs2013} and the Call Report instructions for
 regulatory capital \citep{ffiec2026}, and says how it is observed. The
+FDIC panel fields are defined in the FDIC variable workbook \citep{fdic2026}. The
 regulatory cap is that of \citet{bayraktar2026} (BCVW). Quotation and
 reading IDs refer to the \path{lit/} records, where each quotation is checked
 verbatim on its page. The rearrangements of the regulatory ratios are proved
@@ -85,10 +89,10 @@ ID & Object & Role in the model & Counterpart and observation & Status & Evidenc
 ID & Object & Role in the model & Counterpart and observation & Status & Evidence \\
 \midrule
 \endhead
-\grow{G1}{$x$}{The state, assets over liabilities.}{Total assets over total liabilities. From the reported leverage ratio $\ell$ (Tier 1 over total assets for the leverage ratio), $x=1/(1-\ell)$ holds only if Tier 1 equals book equity and the denominator equals total assets.}{Report}{RCR-Q4, RCR-D3, MeasurementMap.leverage_of_state}
-\grow{G2}{$\pi$}{The share of assets in the risky asset.}{Risk-weighted assets over total assets, under risk weights of 0 on the riskless and 1 on the risky asset. With a positive weight on the riskless asset the identification fails.}{Report}{RCR-Q5, RCR-D2, MeasurementMap.rwa_two_assets, MeasurementMap.control_rwa_needs_zero_weight_on_riskless}
-\grow{G3}{$X-L$}{Equity, assets less liabilities.}{CET1 capital or Tier 1 capital as reported. Both are net of regulatory adjustments, so they equal book equity only when the adjustments vanish.}{Report}{B3-Q3, RCR-Q1, RCR-Q3, B3-D2}
-\grow{G4}{$a_1$}{The floor on equity over risky assets, the solvency branch $(x-1)/a_1$ of the cap.}{The CET1 minimum of 4.5\% of risk-weighted assets, which is BCVW's baseline 0.045, or the Tier 1 minimum of 6.0\%. The bank's own ratio is reported as CET1 or Tier 1 capital over risk-weighted assets. Banks electing the community bank leverage ratio report neither.}{Rule}{BCVW-Q9, BCVW-Q13, B3-Q1, B3-Q2, B3-D1, RCR-Q2, RCR-Q6, RCR-Q7, RCR-D1, MeasurementMap.solvency_iff, MeasurementMap.control_solvency_needs_positive_exposure}
+\grow{G1}{$x$}{The state, assets over liabilities.}{Total assets over total liabilities, \path{ASSET}/\path{LIAB} in the FDIC panel. From the reported leverage ratio $\ell$ (Tier 1 over total assets for the leverage ratio), $x=1/(1-\ell)$ holds only if Tier 1 equals book equity and the denominator equals total assets.}{Report}{FDIC-Q1, FDIC-Q2, RCR-Q4, RCR-D3, MeasurementMap.leverage_of_state}
+\grow{G2}{$\pi$}{The share of assets in the risky asset.}{Risk-weighted assets over total assets, \path{RWAJT}/\path{ASSET}, under risk weights of 0 on the riskless and 1 on the risky asset. With a positive weight on the riskless asset the identification fails.}{Report}{FDIC-Q3, RCR-Q5, RCR-D2, MeasurementMap.rwa_two_assets, MeasurementMap.control_rwa_needs_zero_weight_on_riskless}
+\grow{G3}{$X-L$}{Equity, assets less liabilities.}{CET1 capital or Tier 1 capital (\path{RBCT1J}) as reported. Both are net of regulatory adjustments, so they equal book equity only when the adjustments vanish.}{Report}{FDIC-Q4, B3-Q3, RCR-Q1, RCR-Q3, B3-D2}
+\grow{G4}{$a_1$}{The floor on equity over risky assets, the solvency branch $(x-1)/a_1$ of the cap.}{The CET1 minimum of 4.5\% of risk-weighted assets, which is BCVW's baseline 0.045, or the Tier 1 minimum of 6.0\%. The bank's own ratio is reported as CET1 (\path{RBCT1CER}) or Tier 1 capital over risk-weighted assets. Banks electing the community bank leverage ratio report neither.}{Rule}{FDIC-Q5, FDIC-Q6, BCVW-Q9, BCVW-Q13, B3-Q1, B3-Q2, B3-D1, RCR-Q2, RCR-Q6, RCR-Q7, RCR-D1, MeasurementMap.solvency_iff, MeasurementMap.control_solvency_needs_positive_exposure}
 \grow{G5}{$a_2$}{Net 30-day outflows as a share of liabilities, in the liquidity branch $(x-a_2)/a_3$ of the cap.}{A run-off rate on all liabilities. BCVW's baseline 0.05 is the factor for stable insured retail deposits, and less stable retail deposits run off at 10\% or more. The LCR must be at least 100\%. No report read gives the rate.}{Rule}{BCVW-Q10, LCR-Q1, LCR-Q9, LCR-Q10, LCR-D1, MeasurementMap.lcr_iff, MeasurementMap.control_lcr_needs_positive_runoff}
 \grow{G6}{$a_3$}{The haircut on the risky asset in high-quality liquid assets, the slope $1/a_3$ of the liquidity branch.}{The riskless asset counts in full, as Level 1 assets do. The standard's haircuts are 15\% (Level 2A) and 25\% or 50\% (Level 2B). BCVW's baseline 0.30 is none of them. The 40\% cap on Level 2 assets and the 75\% cap on inflows are not in the model.}{Calibration}{BCVW-Q11, BCVW-Q12, BCVW-Q13, LCR-Q2, LCR-Q3, LCR-Q4, LCR-Q5, LCR-Q6, LCR-Q7, LCR-Q8, LCR-D2, LCR-D3, MeasurementMap.hqla_haircut, MeasurementMap.cap_iff}
 \grow{G7}{$q$}{The requirement on $x-1$, with $z=0$ at $x=1+q$.}{A floor $\ell_0$ on the leverage ratio is the floor $\ell_0/(1-\ell_0)$ on $x-1$, so the 3\% Tier 1 leverage ratio gives $q=3/97$ when Tier 1 equals book equity. This is a reading, and the bundle does not fix $q$. The $z$-volatility does not depend on $q$.}{Rule}{B3-Q7, RCR-Q4, MeasurementMap.leverage_req_iff, MeasurementMap.control_leverage_needs_l0_lt_one, MeasurementMap.zvol2_free_of_q}
@@ -98,10 +102,52 @@ ID & Object & Role in the model & Counterpart and observation & Status & Evidenc
 \grow{G11}{$\kappa$}{The proportional issuance cost.}{No regulatory counterpart. BCVW's baseline is $\kappa=0.01$ for dilution and $\kappa'=0.02$ per unit issued.}{Calibration}{BCVW-Q14}
 \grow{G12}{$K$}{The fixed issuance cost, charged per unit of liabilities.}{Not observed. A cost fixed in dollars would break the reduction to $x$. Locally identified together with $\lambda_S$ from the barrier and the trigger.}{Unobserved}{BCVW-Q4, K2, M5, M6}
 \grow{G13}{$\lambda_S$}{The asymmetry parameter of the shortfall penalty.}{Not observed. The variance ratio carries no information about it. Locally identified together with $K$ from the barrier and the trigger.}{Unobserved}{K1, K2, M3, M6, M11}
-\grow{G14}{$y^*$}{The dividend barrier.}{The state at which the bank pays dividends. Under the conservation buffer a bank with CET1 between 4.5\% and 7.0\% of risk-weighted assets has its distributions restricted, so observed payouts reflect the rule as well as the barrier.}{Output}{M4, B3-Q4, B3-Q5, B3-Q6, B3-D3}
-\grow{G15}{$x_L$, $y_{\text{post}}$}{The recapitalisation trigger and the injection target.}{The state just before and just after an equity issue.}{Output}{M5, M6, M7, M10}
+\grow{G14}{$y^*$}{The dividend barrier.}{The state at which the bank pays dividends (\path{EQCDIV}). Under the conservation buffer a bank with CET1 between 4.5\% and 7.0\% of risk-weighted assets has its distributions restricted, so observed payouts reflect the rule as well as the barrier.}{Output}{FDIC-Q8, M4, B3-Q4, B3-Q5, B3-Q6, B3-D3}
+\grow{G15}{$x_L$, $y_{\text{post}}$}{The recapitalisation trigger and the injection target.}{The state just before and just after a recapitalisation, measured as net stock issuance (\path{EQCSXQ}) plus capital from the parent holding company (\path{EQCBHCTR}), in quarters without merger-driven equity changes (\path{EQCMRG}).}{Output}{FDIC-Q9, FDIC-Q10, FDIC-Q12, FDIC-Q13, M5, M6, M7, M10}
 \grow{G16}{$\zeta$, $\nu_1^2$, $\nu_3^2$}{The $z$-volatility and its limits at the distress boundary and deep in surplus.}{The variance of changes in $z=\log((x-1)/q)$ near the distress boundary and deep in surplus. It does not depend on $q$.}{Output}{M2, M3, M8, MeasurementMap.zvol2_free_of_q}
 \grow{G17}{$\nu_1^2/\nu_3^2$}{The deficit-to-surplus variance ratio, read in discrete time as $\lambda_V^4$.}{The ratio of the two variances of G16. Reading it as $\lambda_V^4$ is a definition.}{Output}{K1, M1, M3}
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{What the empirical analysis measured}
+
+Each object of the map, and what the FDIC panel of US banks, 2015 to 2024,
+could do with it. Tracked means the object is measured and no model
+prediction about it is tested. Holds and Fails mean a prediction of the
+solved model about it is tested. Not measured means the data available do
+not measure the object. Each figure is printed by the computation in the
+cited results file, which the checker re-runs on its pinned data.
+
+\footnotesize
+\begin{longtable}{@{}P{0.6cm}P{3.2cm}P{4.1cm}P{2.6cm}P{1.5cm}P{3.2cm}@{}}
+\caption{What the data could measure.}\label{tab:measured}\\
+\toprule
+ID & Measured as & What the data show & Model prediction & Outcome & Evidence \\
+\midrule
+\endfirsthead
+\toprule
+ID & Measured as & What the data show & Model prediction & Outcome & Evidence \\
+\midrule
+\endhead
+\trow{G1}{\path{ASSET}/\path{LIAB}, 213,771 bank-quarters.}{Median 1.1182, interquartile range 1.0997 to 1.1447.}{None on its own.}{Tracked}{FDIC-Q1, FDIC-Q2, 06_empirical_starter/results_model_and_data.md}
+\trow{G2}{\path{RWAJT}/\path{ASSET}, under the risk-weight identification.}{Median 0.6857.}{$\pi=\bar\pi$, 2.3794 at the median state.}{Fails}{FDIC-Q3, MeasurementMap.rwa_two_assets, 06_empirical_starter/results_model_and_data.md}
+\trow{G3}{Book equity over assets, and Tier 1 capital (\path{RBCT1J}).}{Book equity over assets has median 10.57\%, interquartile range 9.06\% to 12.64\%.}{None on its own.}{Tracked}{FDIC-Q4, 06_empirical_starter/results_model_and_data.md}
+\trow{G4}{The bank's Tier 1 capital over risk-weighted assets.}{Median 15.04\%, 3.34 times $a_1$, and 2.78 times at the 25th percentile.}{The ratio sits at $a_1$.}{Fails}{FDIC-Q4, B3-Q1, B3-D1, 06_empirical_starter/results_model_and_data.md}
+\trow{G5}{Not reported in the data read.}{Nothing.}{None tested.}{Not measured}{G5}
+\trow{G6}{Not reported in the data read.}{Nothing.}{None tested.}{Not measured}{G6}
+\trow{G7}{Not reported. The leverage ratio gives a candidate floor.}{Nothing.}{None tested.}{Not measured}{G7}
+\trow{G8}{The volatility of book $x$ is computed, which is not the economic $\sigma$.}{Book volatility of $x$ 0.01468 a year. The model's volatility of $x$ is 0.06081 at the observed $\pi$, 4.1 times larger.}{A level, on an economic-value basis.}{Not measured}{06_empirical_starter/results_model_and_data.md}
+\trow{G9}{Not separately measured.}{Nothing.}{None tested.}{Not measured}{G9}
+\trow{G10}{Not measured.}{Nothing.}{None tested.}{Not measured}{G10}
+\trow{G11}{Not measured.}{Nothing.}{None tested.}{Not measured}{G11}
+\trow{G12}{Through the trigger and target of G15, which the data do not show.}{No trigger-and-target behaviour (G15).}{Identified with $\lambda_S$ from the thresholds.}{Not measured}{K2, 06_empirical_starter/results_distress_targeting.md}
+\trow{G13}{As G12.}{As G12.}{As G12.}{Not measured}{K2, 06_empirical_starter/results_distress_targeting.md}
+\trow{G14}{Quarters with a dividend (\path{EQCDIV}), by $x$.}{56.2\% of bank-quarters below $y^*=1.5715$ pay a dividend. Payment falls as $x$ rises, from 60.1\% for $x$ between 1.03 and 1.10 to 32.0\% between 1.20 and 1.39.}{No dividend below $y^*$.}{Fails}{FDIC-Q8, M4, 06_empirical_starter/results_dividend_location.md}
+\trow{G15}{Recapitalisations, $x$ before and after, within bank, under the pre-registered rule.}{Issue size is unrelated to the pre-issue state and the post-issue state rises with it, $b_{\text{post}}=+1.37$ and $+1.36$ for the two valid distress proxies. Issues start at a mean $x$ of 1.11, against the trigger 1.03.}{One target within a bank, $b_{\text{post}}=0$.}{Fails}{FDIC-Q9, FDIC-Q12, M5, 06_empirical_starter/PREREG_distress_targeting.md, 06_empirical_starter/results_distress_targeting.md}
+\trow{G16}{Not computed. A level would need the economic $\sigma$ of G8.}{Nothing.}{$\nu_1^2,\nu_3^2$, which need the cap to bind (M3), and it does not (G2).}{Not measured}{M3}
+\trow{G17}{Not computed on this panel.}{Nothing.}{$\nu_1^2/\nu_3^2$, under the same condition as G16.}{Not measured}{K1, M3}
 
 \bottomrule
 \end{longtable}
@@ -127,10 +173,10 @@ $\ell_0\le(X-L)/X\iff\ell_0/(1-\ell_0)\le x-1$
 \section{Pending}
 
 \begin{itemize}
-\item The FDIC field names used by the empirical scripts (\path{RWAJT},
-  \path{RBCT1J}, \path{RBCRWAJ}, \path{ASSET}, \path{LIAB}, \path{EQCDIV},
-  \path{EQCSTKRX}) do not appear in the Call Report instructions read. Their
-  link to the items of G1 to G4, G14 and G15 needs the FDIC data dictionary.
+\item The CET1 ratio (\path{RBCT1CER}) is not yet in the panel. The corner
+  test of G4 uses Tier 1 against the CET1 minimum (B3-D1).
+\item The unit of the FDIC amounts, thousands of dollars, is read from one
+  API record and not from the workbook (FDIC-D1).
 \item Rows G1 to G3 assume regulatory capital equals book equity. Items
   12 to 18 and 27 to 29 of Schedule RC-R, which give the adjustments, were
   not read.

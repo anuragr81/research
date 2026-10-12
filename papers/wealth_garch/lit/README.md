@@ -30,7 +30,10 @@ reading of the paper and does not reprove it. The permitted conclusion is
 2. Each quotation is found in the cached text by exact normalised
    containment on PDF page = stated page − offset. A fabricated quotation,
    a true quotation on the wrong page and a page before the first PDF page
-   are the controls and must fail.
+   are the controls and must fail. For a spreadsheet source (a `sheet` in
+   the suite's configuration), the Page column names the variable whose
+   entry must contain the quotation, and a variable absent from the sheet
+   is the third control.
 3. The cached file matches its pinned sha256.
 4. The Lean file is a build root, builds, has no `sorry`, declares every Lean
    name cited in `CLAIMS.md`, and every theorem passes the axiom audit.
