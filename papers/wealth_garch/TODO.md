@@ -135,7 +135,16 @@ grounds.
   better than a simple standard baseline, shown by a backtest fixed in
   advance. The empirical backtest and the model enhancement run in
   parallel. The failures found so far become the baseline's scorecard.
-  Open: the baseline (BCVW proposed).
+  Open: the baseline. BCVW was proposed as standard on no literature
+  evidence. It is an arXiv preprint (v2, 2026) and calls its own main
+  theorem "a robustness and extension result" of classical threshold
+  models (BCVW pp. 3-4, read 2026-10-12). The baseline is chosen only
+  after reading in full, as primary sources, the candidates BCVW cites
+  (descriptions so far [C], from BCVW's reference list):
+  Moreno-Bromberg and Rochet (2018, Princeton UP) [23]; Peura and Keppo
+  (2006, J. Business) [25]; Lokka and Zervos (2008, IME) [21]; Bolton,
+  Chen and Wang (2011, JF) [4]. The reasons the chosen baseline is
+  standard enter `MANUSCRIPT.tex` as literature rows with quotations.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
