@@ -1,14 +1,56 @@
 # Claims about Costrell & Loury
 
 **Paper.** Robert M. Costrell, Glenn C. Loury, "Distribution of Ability and
-Earnings in a Hierarchical Job Assignment Model". Read as the **draft of 11
-December 2003**; published as *JPE* 112(6), 2004. Evidence level
-**[F, draft version]**. Proposition numbers are the draft's.
+Earnings in a Hierarchical Job Assignment Model", *Journal of Political
+Economy* 112(6), 1322-1363 (2004). The **published version was read in full on
+13 October 2026** [F], from the author's Drive upload
+`Distribution_of_ability_and_earnings_in.pdf` (42 pages, cached at
+`~/.cache/entry_contest/costrell_loury_2004_jpe.pdf`, sha256 pinned in
+`verify_cl.py`). The earlier passes read the draft of 11 December 2003; their
+tables below keep the draft's page numbers, and the table that follows maps
+them to the journal.
 
-The Lean pass of 2026-10-06 re-read the same draft in full (Drive file
-`job_assignment.pdf`, id `1ZER3CMY4nv4fFSEc7ux_hEQk-1uumFlC`, title page dated
-December 11, 2003, 37 pages). The published *JPE* article is not on Drive, so
-every proposition number below is still the draft's number.
+## Published version: quotations checked against the journal text
+
+Pages are the journal's. `verify_cl.py` checks each quotation verbatim on its
+page. The journal's symbol font renders Greek letters as Latin ones (θ as `v`,
+β as `b`, μ as `m`), so the quotations avoid formulas.
+
+| ID | Page | Quotation | Draft locator it replaces |
+|---|---|---|---|
+| CLP-1 | 1327 | "The key feature of the model is that jobs must be filled in fixed proportions to one another" | §2, p.6 |
+| CLP-2 | 1327 | "completely characterize the technology" | §2, p.6 (row L9) |
+| CLP-3 | 1330 | "the role of the ability distribution in the wage function is entirely captured by" | p.9 |
+| CLP-4 | 1330 | "This improves ability in the right tail and reduces ability in the left tail (with possible multiple crossings in between)." | p.9 |
+| CLP-5 | 1330 | "The effect depends on whether the worker on the margin between jobs, at quantile" | p.9 |
+| CLP-6 | 1330 | "If proper job assignment is most critical in the top jobs" | p.9 |
+| CLP-7 | 1330 | "Conversely, if assignment matters most toward the bottom of the spectrum" | p.9 ("toward to" in the draft) |
+| CLP-8 | 1342 | "with possibly multiple crossings (see the Appendix for the proof)." | §4.3, p.19 |
+| CLP-9 | 1342 | "but the two distributions have the same mean" | Prop 5, p.19 |
+| CLP-10 | 1343 | "So the inequality of the lemma is the principal characterization result for second-order stochastic dominance (the expectation of a convex function is no less under a riskier distribution)." | Lemma 1, p.20 ("principle" in the draft) |
+| CLP-11 | 1344 | "then a greater dispersion of ability (on fixed support) lowers wages for the most (least) skilled workers and compresses (widens) the wage span." | discussion of Prop 6, p.21 |
+| CLP-12 | 1352 | "quite unlike the fixed-proportions case (proposition 6), where the shape of" | §5.4, p.28 |
+| CLP-13 | 1353 | "the reoptimizing assignment reverses these results." | §5.4, p.28 |
+| CLP-14 | 1353 | "We have found opposite effects on the wage span from a mean-preserving spread in abilities under Cobb-Douglas and Leontief crowding technologies" | §5.5, p.28 |
+| CLP-15 | 1358 | "Integrate by parts, and recall" | Appendix, p.33 |
+| CLP-16 | 1341 | "Consider two tests of worker abilities, and suppose that test 1 is more informative than test 2 in the sense of Blackwell (1953)." | Theorem 1, p.18 |
+| CLP-17 | 1340 | "Thus we are neglecting here the important issue of how changing the quality of information available to employers about worker abilities affects the incentives that workers have to acquire skills." | (footnote 14) |
+| CLP-18 | 1355 | "Under perfect observability, the model generalizes nicely, and we are able to show that investment in ability is efficient." | (conclusion) |
+| CLP-19 | 1355 | "However, if there is imperfect observability, investment is suboptimal and, more interesting, may in some cases become even more suboptimal when information becomes less imperfect." | (conclusion) |
+
+**Draft against journal.** Every proposition, the theorem, Lemma 1 and the two
+corollaries keep their numbers, and their statements are unchanged in
+substance. Equation numbers agree up to (16); the draft's (17), Lemma 1's
+inequality, is unnumbered in the journal, where (17) is output under variable
+proportions. The draft's Sections 5.4 and 5.5 are the journal's Sections V.D
+and V.E. Three wordings in the draft quotations recorded in `NOTES.md` were
+corrected in print: "toward to the bottom" (CLP-7), "principle
+characterization" (CLP-10) and "non-decreasing" (CLP-15, "nondecreasing"). The
+journal's Proposition 10 ends with a sentence on mean-preserving spreads, and
+the theorem table's quotation of it stops before that sentence. Nothing in the
+journal signs a change in the wage distribution by two ranks: the two-job
+results read one marginal quantile fixed by technology, and the continuum
+results read the curvature or shape of `β`.
 
 ## Claims as stated in `LITERATURE.tex` §sec:assignment and §Verdict
 

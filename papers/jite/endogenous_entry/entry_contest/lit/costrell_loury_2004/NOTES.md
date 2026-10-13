@@ -421,3 +421,25 @@ output.
 
 Our reading is arithmetically consistent with the source except where F1 to
 F4 record a discrepancy. Nothing here reproves a result of the paper.
+
+## Published-version pass, 13 October 2026
+
+The journal article (*JPE* 112(6), 1322-1363) was read in full, Appendix
+included, from the author's Drive upload. `CLAIMS.md` carries the quotations
+checked against it (CLP-1 to CLP-19) and the map from draft to journal.
+
+**Verdict for C2 and C8.** C2's reading of the paper stands in the published
+version: a spread is signed by one marginal quantile fixed by technology in the
+two-job model (CLP-3 to CLP-7), and by the curvature of `β` in the continuum
+model (CLP-11). C8 waited only on this check. The journal has no result that
+signs a change by two ranks, so C8 has nothing left to wait on.
+
+**Investment.** The paper takes abilities as exogenous (CLP-17). Its conclusion
+states, without a proof in the paper, that investment in ability is efficient
+under perfect observability and may become more suboptimal as information
+improves (CLP-18, CLP-19). Nothing in the record or the manuscript relies on
+that remark.
+
+**Lean.** `CostrellLoury.lean` is unchanged. Its statements are about the
+propositions, whose numbers and content are the same in the journal.
+

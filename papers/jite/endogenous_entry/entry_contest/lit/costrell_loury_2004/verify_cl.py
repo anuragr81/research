@@ -22,7 +22,7 @@ p, x = sp.symbols("p x", positive=True)
 print("=" * 72)
 print("Costrell & Loury, 'Distribution of Ability and Earnings in a")
 print("Hierarchical Job Assignment Model'.  Draft, 11 December 2003.")
-print("Published as JPE 112(6), 2004 -- proposition numbers are the DRAFT's.")
+print("Published as JPE 112(6), 2004; the published version is checked in CL-P below.")
 print("Checks of OUR READING.")
 print("=" * 72)
 print()
@@ -214,6 +214,44 @@ else:
         r = subprocess.run([lean, neg], capture_output=True, text=True)
     check("CL-L4 CONTROL: Lean rejects the negated control statement",
           r.returncode != 0, "the compile check can fail")
+
+print()
+print("CL-P  Published version (JPE 112(6) 2004): quotations on their pages")
+print("-" * 72)
+import hashlib
+import pathlib
+PUB = pathlib.Path.home() / ".cache" / "entry_contest" / "costrell_loury_2004_jpe.pdf"
+PUB_SHA = "84b06f83760fe45b374d5643c2bd31484ec45ff14f1853247638db5a53dbe55f"
+FIRST_PAGE = 1322
+
+
+def norm(s):
+    s = re.sub(r"-\s*\n\s*", "", s).lower()
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+claims = open(os.path.join(HERE, "CLAIMS.md")).read()
+prow = re.findall(r"^\|\s*(CLP-\d+)\s*\|\s*(\d+)\s*\|\s*\"(.+?)\"\s*\|", claims, re.M)
+check("CL-P0 the published quotation rows are present", len(prow) >= 19, f"{len(prow)} rows")
+if not PUB.exists():
+    check("CL-P1 the published PDF is available", False, f"download it from Drive to {PUB}")
+else:
+    digest = hashlib.sha256(PUB.read_bytes()).hexdigest()
+    check("CL-P1 the published PDF is the one read", digest == PUB_SHA, digest[:16])
+    pt = shutil.which("pdftotext")
+    if pt is None:
+        check("CL-P2 pdftotext is available", False)
+    else:
+        pages = subprocess.run([pt, "-layout", str(PUB), "-"], capture_output=True, text=True).stdout.split("\f")
+        check("CL-P2 the text is the journal article", "Hierarchical Job Assignment Model" in pages[0]
+              and "1322" in pages[0], f"{len(pages)} pages")
+        for rid, page, quote in prow:
+            idx = int(page) - FIRST_PAGE
+            check(f"{rid} (p.{page}) is on the page verbatim",
+                  0 <= idx < len(pages) and norm(quote) in norm(pages[idx]))
+        check("CL-PC control: the draft's 'toward to the bottom' is not in the journal",
+              "toward to the bottom" not in norm(" ".join(pages)))
 
 print()
 print("=" * 72)

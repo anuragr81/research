@@ -976,6 +976,12 @@ paper's claims, and only then write the manuscript.
   target. C12 narrowed to "for a rule that weighs talent more"; its \pend now
   names only Coate and Loury 1993. The paper asserts the pool's growth; the
   Lean file derives it under the hazard-rate order. Three slips (FT-D1 to D3).
+  Costrell and Loury read 13 Oct 2026 in the published JPE version (author's
+  upload `Distribution_of_ability_and_earnings_in.pdf`), CLAIMS.md CLP-1 to
+  CLP-19 checked on journal pages by `verify_cl.py` (33 checks). Same
+  proposition numbers and statements as the draft; three draft typos corrected
+  in print; no two-rank result. L9's \unv removed (page 1327); C8 moved to the
+  settled table; C2's draft caveat removed.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
