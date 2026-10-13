@@ -192,7 +192,7 @@ that check it.}\\
 \mrow{M7}{Identities pinned.}
   {If $\Delta(k^*-1)<\kappa_{k^*}$, the assortative set $\{0,\dots,k^*-1\}$ is the
   only equilibrium.}
-  {EntryContest.members_below_kstar, EntryContestEq.assortative_unique}
+  {EntryContest.members_below_kstar, EntryContestEq.assortative_unique, EntryContestEq.assortative_only, EntryContestEq.assortative_only_model}
 \mrow{M8}{Assortative selection (N4).}
   {$\{0,\dots,k^*-1\}$ is an equilibrium; $\sum_{i<k}\kappa_i\le\sum_{i\in S}\kappa_i$
   for $|S|=k$; with identical score laws, payoff sums of equal-size equilibria
@@ -207,9 +207,10 @@ that check it.}\\
   $(m+1)\kappa\le V$.}
   {EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p7_Delta_le, EntryContestP6P7.p7_cap, EntryContestP6P7.p7_count}
 \mrow{M11}{Prize and fee (P8).}
-  {$k^*$ is non-decreasing in $V$ and, for $u$ non-decreasing, non-increasing
-  in $c$.}
-  {EntryContestEq.kstar_mono, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestEq.kappa_mono_fee}
+  {With challengers at or below the fee out, $k^*$ is non-decreasing in $V$ for
+  $\mu\le1$ and $s\ge0$, and non-increasing in $c$ for $u$ non-decreasing on
+  $(0,\infty)$.}
+  {EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_mono_gain, EntryContestSpread.count_mono_prize, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestSpread.count_antitone_fee}
 \mrow{M12}{Margin condition.}
   {For sorted profiles $w$ and $w'$, $w_{k^*-1}\le w'_{k^*-1}$ gives $k^*\le k'^*$, and
   $w'_{k^*}\le w_{k^*}$ gives $k'^*\le k^*$.}
@@ -218,8 +219,8 @@ that check it.}\\
   {For a pivot-spread $T$ about $x_0$, $k^*$ weakly rises when $w_{k^*-1}\ge x_0$ and
   weakly falls when $w_{k^*-1}\le x_0$. The linear spread about the mean is one,
   and keeps the mean. A change that keeps the total and majorizes $w$ can lower
-  $k^*$ with $w_{k^*-1}$ above the mean.}
-  {EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count}
+  $k^*$ with $w_{k^*-1}$ above the mean, for every small $\mu>0$.}
+  {EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count, EntryContestSpread.mps_lowers_witness_counts, EntryContestSpread.mps_lowers_count_positive}
 \mrow{M14}{The band.}
   {With $d=w'-w$, the signs of $d$ leave the direction of $k^*$ open only when
   $d_{k^*-1}<0<d_{k^*}$. A pivot-spread never does so. Inside the band two
@@ -311,13 +312,16 @@ that check it.}\\
   {EntryContestAligned.kappaA_values, EntryContestAligned.ability_with_wealth, EntryContestAligned.costs_ordered, EntryContestAligned.gainsA, EntryContestAligned.aligned_witness_zero, EntryContestAligned.aligned_witness_positive, EntryContestAligned.aligned_witness_exists, EntryContestAligned.control_window}
 \mrow{M30}{The incumbent as a challenger.}
   {Let the incumbent be player $0$ of a game of $Q+1$ players with
-  $\kappa_0\le\kappa_j$ and gain $g(m)=\Delta(m)$ at $C=G$; her being in
-  gives a challenger $g(m+1)$. An equilibrium with $0$ out and some
+  $\kappa_0\le\kappa_j$, and let $g(m)$ be the gain against $Q$ rivals of whom
+  $m$ are in: $\Delta(m)$ at $C=G$ for $m\le Q-1$, and $\Delta(Q-1)$ at $C=F$
+  for $m=Q$. Then $g$ is non-increasing, her being in gives a challenger
+  $g(m+1)$ for every $m\le Q-1$, and every equilibrium has $k^*$ entrants, with
+  $k^*$ the count of this game. An equilibrium with $0$ out and some
   challenger in exists iff $1\le k^*\le Q$, $g(k^*)<\kappa_0$ and
   $\kappa_{k^*}\le g(k^*-1)$; $\{0,\dots,k^*-1\}$ is an equilibrium in every
   case, and if $g(k^*-1)<\kappa_{k^*}$ then $0$ is in every non-empty
   equilibrium.}
-  {EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.band_witness, EntryContestInc.control_no_band}
+  {EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.Delta_incumbent_in_incGain, EntryContestInc.incGain_top_step, EntryContestInc.incGain_antitone, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_iff_model, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_assortative_model, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.incumbent_in_of_pinned_model, EntryContestInc.incumbent_count_model, EntryContestInc.band_witness, EntryContestInc.control_no_band}
 \mrow{M31}{The paying class's share.}
   {With the incumbent investing and $k$ of $Q$ challengers paying, the prize
   goes to a payer with probability $\xi(k)=\int G^{Q-k}\,d(F^{k+1})$. For $F$
@@ -812,13 +816,14 @@ If $k<k^*$, then $j<Q$ and
 Both are contradictions, so $k=k^*$.
 \end{mproof}
 
-\begin{mproof}{M7}{EntryContest.members_below_kstar, EntryContestEq.assortative_unique}
+\begin{mproof}{M7}{EntryContest.members_below_kstar, EntryContestEq.assortative_unique, EntryContestEq.assortative_only, EntryContestEq.assortative_only_model}
 A member $i$ of an equilibrium has $\kappa_i\le\Delta(k^*-1)$ by M6. If $i\ge k^*$,
 \[
   \kappa_i\ge\kappa_{k^*}>\Delta(k^*-1),
 \]
 so $i<k^*$. Then $S\subseteq\{0,\dots,k^*-1\}$ and $|S|=k^*$ give
-$S=\{0,\dots,k^*-1\}$.
+$S=\{0,\dots,k^*-1\}$, an equilibrium by M8. With $\Delta$ the model's gain,
+non-increasing by M4, nothing further is assumed.
 \end{mproof}
 
 \begin{mproof}{M8}{EntryContestEq.assortative_is_equilibrium, EntryContestEq.assortative_min_cost, EntryContestEq.prize_term_anonymous, EntryContestEq.payoff_gap_anonymous}
@@ -875,19 +880,19 @@ An entrant at index $m$ with cost $\kappa$ has $\kappa\le\Delta(m)$, so
 \]
 \end{mproof}
 
-\begin{mproof}{M11}{EntryContestEq.kstar_mono, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestEq.kappa_mono_fee}
-Let $k^*$ and $k'^*$ be the counts for $(\kappa,\Delta)$ and $(\kappa',\Delta')$, with
-$\kappa'_j\le\kappa_j$ and $\Delta(j)\le\Delta'(j)$ for every $j$. If $k'^*<k^*$,
-then $k'^*<Q$ and
+\begin{mproof}{M11}{EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_mono_gain, EntryContestSpread.count_mono_prize, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestSpread.count_antitone_fee}
+Rank $j$ enters when $c<w_j$ and $\kappa(w_j)\le\Delta(j)$, and $k^*$ is the length of
+the prefix of entrants. If every rank $j<k'$ enters under $(\kappa,\Delta)$ then
+$k'\le k^*$. Write $\Delta_V$ for the gain at prize $V$. By M1 and M2,
 \[
-  \Delta'(k'^*)<\kappa'_{k'^*}\le\kappa_{k'^*}\le\Delta(k'^*)\le\Delta'(k'^*),
+  \Delta_V(j)=V\,\Delta_1(j),\quad \Delta_1(j)\ge0\quad(\mu\le1,\ s\ge0),\qquad
+  V\le V'\ \Rightarrow\ \Delta_V(j)\le\Delta_{V'}(j),
 \]
-so $k^*\le k'^*$. Write $\Delta_V$ for the gain at prize $V$. By M1 and M2,
-$\Delta_V(j)=V\,\Delta_1(j)$ with $\Delta_1(j)\ge0$, and for $u$ non-decreasing,
+so an entrant at $V$ enters at $V'$. For $c\le c'$ and $c'<w_j$,
 \[
-  V\le V'\ \Rightarrow\ \Delta_V\le\Delta_{V'},\qquad
-  c\le c'\ \Rightarrow\ u(w)-u(w-c)\le u(w)-u(w-c').
+  c<w_j,\qquad 0<w_j-c'\le w_j-c\ \Rightarrow\ u(w_j)-u(w_j-c)\le u(w_j)-u(w_j-c'),
 \]
+so an entrant at $c'$ enters at $c$.
 \end{mproof}
 
 \begin{mproof}{M12}{EntryContestSpread.enters_down, EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_le_of_fails, EntryContestSpread.margin_rise, EntryContestSpread.margin_fall}
@@ -908,7 +913,7 @@ $c<w'_{k^*}\le w_{k^*}$ and
 so rank $k^*$ fails after the change and $k'^*\le k^*$.
 \end{mproof}
 
-\begin{mproof}{M13}{EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count}
+\begin{mproof}{M13}{EntryContestSpread.pivot_rise, EntryContestSpread.pivot_fall, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count, EntryContestSpread.mps_lowers_witness_counts, EntryContestSpread.mps_lowers_count_positive}
 $T$ is non-decreasing, so $w'_j=T(w_j)$ is sorted, and
 \[
   x_0\le w_{k^*-1}\ \Rightarrow\ w_{k^*-1}\le T(w_{k^*-1}),\qquad
@@ -931,7 +936,13 @@ With $c=1$, $\kappa(w)=\frac1{w-1}-\frac1w$ and $\Delta(m)=\frac1{m+2}$,
   \kappa(w')=\big(\tfrac{25}{234},\tfrac{25}{66},\tfrac{100}{171}\big),\quad
   \tfrac13\textstyle\sum_jw_j=\tfrac{77}{30}<w_1,
 \]
-so the counts are $2$ and $1$.
+so the counts are $2$ and $1$. They hold for any $\Delta$ with
+\[
+  \tfrac{100}{551}\le\Delta(0),\quad \tfrac{25}{126}\le\Delta(1)<\tfrac{25}{66},\quad
+  \Delta(2)<\tfrac12,
+\]
+strict at $\Delta(m)=\frac1{m+2}$, so by M9 they hold for every small $\mu>0$ with
+$r$ and $s$ uniform.
 \end{mproof}
 
 \begin{mproof}{M14}{EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, EntryContestSpread.pivot_single_crossing, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
@@ -1232,13 +1243,19 @@ gain is continuous in $\mu$ at $0$, so both remain equilibria for small
 $\mu>0$. Raising $\kappa_2$ to $\frac{23}{50}>\frac9{20}$ removes $\{1,2\}$.
 \end{mproof}
 
-\begin{mproof}{M30}{EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.band_witness, EntryContestInc.control_no_band}
+\begin{mproof}{M30}{EntryContestInc.Delta_incumbent_in_eq, EntryContestInc.symGain_step, EntryContestInc.Delta_incumbent_in_incGain, EntryContestInc.incGain_top_step, EntryContestInc.incGain_antitone, EntryContestInc.incumbent_out_iff, EntryContestInc.incumbent_out_iff_model, EntryContestInc.incumbent_out_not_unique, EntryContestInc.incumbent_assortative_model, EntryContestInc.incumbent_in_of_pinned, EntryContestInc.incumbent_in_of_pinned_model, EntryContestInc.incumbent_count_model, EntryContestInc.band_witness, EntryContestInc.control_no_band}
 Players $0,\dots,Q$, costs $\kappa_0\le\dots\le\kappa_Q$, gain $g(m)$ with $m$
 others in. For $m+2\le Q$,
 \[
   F\cdot F^{m}G^{Q-1-m}=G\cdot F^{m+1}G^{Q-2-m},
 \]
-so $\Delta(m)|_{C=F}=g(m+1)$, and $g(m+1)\le g(m)$ by M4. Let $S$ be an
+so $\Delta(m)|_{C=F}=g(m+1)$, and $g(m+1)\le g(m)$ by M4. At $m=Q-1$ both
+sides are $g(Q)$, and with $K=F^{Q-1}$ the step identity of M3 gives
+\[
+  g(Q)-g(Q-1)=-\tfrac V2\textstyle\int\varphi^2\,dK\le0\quad(Q\ge2),
+\]
+while for $Q=1$, $\int F\,dF=\int G\,dG=\frac12$ and $\int G\,dF+\int F\,dG=1$ give
+$g(1)=g(0)$. So $g$ is non-increasing and M6 gives the count. Let $S$ be an
 equilibrium with $0\notin S\neq\emptyset$. By M6, $|S|=k^*\ge1$;
 $S\subseteq\{1,\dots,Q\}$ gives $k^*\le Q$; $0\notin S$ gives
 $g(k^*)<\kappa_0$; and $|\{1,\dots,k^*-1\}|=k^*-1<|S|$ gives $i\in S$ with

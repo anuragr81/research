@@ -216,6 +216,119 @@ theorem symGain_antitoneOn [NoAtoms α] [NoAtoms β] (hV : 0 ≤ V) (Q : ℕ) :
   rw [min_eq_left (Set.mem_Iic.mp ha), min_eq_left (Set.mem_Iic.mp hb)] at h
   exact h
 
+/-- **The gain of the `(Q + 1)`-player game at every count.** A player facing `m` entrants
+    among its `Q` rivals. For `m < Q` this is the challenger gain with the incumbent out, `Δ(m)`
+    at `C = G`. At `m = Q` every rival pays, which is the challenger gain with the incumbent in
+    and the other `Q − 1` challengers in. Beyond `Q` it stays at that value. -/
+noncomputable def incGain (Q m : ℕ) : ℝ :=
+  if m < Q then Delta V α β β Q m else Delta V α β α Q (Q - 1)
+
+theorem incGain_eq_Delta (Q m : ℕ) (hm : m < Q) : incGain V α β Q m = Delta V α β β Q m := by
+  unfold incGain
+  rw [if_pos hm]
+
+theorem incGain_top (Q : ℕ) : incGain V α β Q Q = Delta V α β α Q (Q - 1) := by
+  unfold incGain
+  rw [if_neg (lt_irrefl Q)]
+
+/-- **Her being in gives a challenger the gain at one more entrant**, for every count `m ≤ Q − 1`
+    of other challengers in, the top count included. -/
+theorem Delta_incumbent_in_incGain (Q m : ℕ) (hm : m + 1 ≤ Q) :
+    Delta V α β α Q m = incGain V α β Q (m + 1) := by
+  rcases Nat.lt_or_ge (m + 1) Q with h | h
+  · rw [incGain_eq_Delta V α β Q (m + 1) h]
+    exact Delta_incumbent_in_eq V α β Q m (by omega)
+  · have hmQ : m = Q - 1 := by omega
+    have hQ : m + 1 = Q := by omega
+    rw [hQ, incGain_top, hmQ]
+
+/-- **The top step.** With every rival in, the gain is no larger than with one rival out. For
+    `Q ≥ 2` this is the step identity with `K = F^{Q-1}`; for `Q = 1` the two gains are equal. -/
+theorem incGain_top_step [NoAtoms α] [NoAtoms β] (hV : 0 ≤ V) (Q : ℕ) (hQ : 1 ≤ Q) :
+    incGain V α β Q Q ≤ incGain V α β Q (Q - 1) := by
+  rw [incGain_top, incGain_eq_Delta V α β Q (Q - 1) (by omega)]
+  unfold Delta
+  rw [Nat.sub_self]
+  rcases Nat.lt_or_ge Q 2 with hQ2 | hQ2
+  · have hQ1 : Q = 1 := by omega
+    subst hQ1
+    have e1 : ∀ x, cdf (rivals α α β (1 - 1) 0) x = cdf α x := fun x => by
+      rw [cdf_rivals]; simp
+    have e2 : ∀ x, cdf (rivals β α β (1 - 1) 0) x = cdf β x := fun x => by
+      rw [cdf_rivals]; simp
+    simp_rw [e1, e2]
+    have hαα := EntryContestP1P2.two_max_sum α α
+    have hββ := EntryContestP1P2.two_max_sum β β
+    have hαβ := EntryContestP1P2.two_max_sum α β
+    have : (∫ x, cdf α x ∂α) - (∫ x, cdf α x ∂β) = (∫ x, cdf β x ∂α) - (∫ x, cdf β x ∂β) := by
+      linarith
+    rw [this]
+  · set κ := rivals α α β (Q - 2) 0 with hκ
+    have e1 : ∀ x, cdf (rivals α α β (Q - 1) 0) x = cdf κ x * cdf α x := fun x => by
+      rw [hκ, cdf_rivals, cdf_rivals, show Q - 1 = (Q - 2) + 1 by omega, pow_succ]
+      ring
+    have e2 : ∀ x, cdf (rivals β α β (Q - 1) 0) x = cdf κ x * cdf β x := fun x => by
+      rw [hκ, cdf_rivals, cdf_rivals, show Q - 1 = (Q - 2) + 1 by omega, pow_succ]
+      ring
+    simp_rw [e1, e2]
+    have hI := EntryContestStep.step_identity α β κ
+    have hpos : 0 ≤ ∫ x, (cdf α x - cdf β x) ^ 2 ∂κ := integral_nonneg (fun x => sq_nonneg _)
+    apply mul_le_mul_of_nonneg_left _ hV
+    linarith
+
+/-- **The gain of the `(Q + 1)`-player game is non-increasing at every count**, from M4 below the
+    top and from `incGain_top_step` at the top. -/
+theorem incGain_antitone [NoAtoms α] [NoAtoms β] (hV : 0 ≤ V) (Q : ℕ) (hQ : 1 ≤ Q) :
+    Antitone (incGain V α β Q) := by
+  refine antitone_nat_of_succ_le (fun n => ?_)
+  rcases Nat.lt_or_ge (n + 1) Q with h | h
+  · rw [incGain_eq_Delta V α β Q (n + 1) h, incGain_eq_Delta V α β Q n (by omega)]
+    exact Delta_step_nonpos V α β β hV Q n (by omega)
+  · rcases Nat.lt_or_ge n Q with h' | h'
+    · have hn : n = Q - 1 := by omega
+      have hn1 : n + 1 = Q := by omega
+      rw [hn1, hn]
+      exact incGain_top_step V α β hV Q hQ
+    · unfold incGain
+      rw [if_neg (by omega), if_neg (by omega)]
+
+/-- **M30 inside the model: the incumbent-out band.** -/
+theorem incumbent_out_iff_model [NoAtoms α] [NoAtoms β] (hV : 0 ≤ V) (Q : ℕ) (hQ : 1 ≤ Q)
+    (cost : ℕ → ℝ) (hcost : Monotone cost) (kstar : ℕ) (hkN : kstar ≤ Q + 1)
+    (hprefix : ∀ j, j < kstar → cost j ≤ incGain V α β Q j)
+    (hfail : kstar < Q + 1 → incGain V α β Q kstar < cost kstar) :
+    (∃ S : Finset ℕ, IsEquilibriumR cost (incGain V α β Q) (Q + 1) S ∧ 0 ∉ S ∧ S.Nonempty)
+      ↔ (1 ≤ kstar ∧ kstar < Q + 1 ∧ incGain V α β Q kstar < cost 0
+          ∧ cost kstar ≤ incGain V α β Q (kstar - 1)) :=
+  incumbent_out_iff cost (incGain V α β Q) (Q + 1) kstar hcost (incGain_antitone V α β hV Q hQ)
+    hkN hprefix hfail
+
+/-- **M30 inside the model: the assortative set is an equilibrium in every case.** -/
+theorem incumbent_assortative_model (Q : ℕ) (cost : ℕ → ℝ) (hcost : Monotone cost) (kstar : ℕ)
+    (hkN : kstar ≤ Q + 1) (hprefix : ∀ j, j < kstar → cost j ≤ incGain V α β Q j)
+    (hfail : kstar < Q + 1 → incGain V α β Q kstar < cost kstar) :
+    IsEquilibriumR cost (incGain V α β Q) (Q + 1) (Finset.range kstar) :=
+  assortative_is_equilibrium cost (incGain V α β Q) (Q + 1) kstar hcost hkN hprefix hfail
+
+/-- **M30 inside the model: when identities are pinned, the incumbent enters.** -/
+theorem incumbent_in_of_pinned_model [NoAtoms α] [NoAtoms β] (hV : 0 ≤ V) (Q : ℕ) (hQ : 1 ≤ Q)
+    (cost : ℕ → ℝ) (hcost : Monotone cost) (kstar : ℕ) (hkN : kstar ≤ Q + 1)
+    (hprefix : ∀ j, j < kstar → cost j ≤ incGain V α β Q j)
+    (hfail : kstar < Q + 1 → incGain V α β Q kstar < cost kstar)
+    (hpin : incGain V α β Q (kstar - 1) < cost kstar) (S : Finset ℕ)
+    (hS : IsEquilibriumR cost (incGain V α β Q) (Q + 1) S) (hne : S.Nonempty) : 0 ∈ S :=
+  incumbent_in_of_pinned cost (incGain V α β Q) (Q + 1) kstar hcost
+    (incGain_antitone V α β hV Q hQ) hkN hprefix hfail hpin S hS hne
+
+/-- **M30 inside the model: every equilibrium of the `(Q + 1)`-player game has `k*` entrants.** -/
+theorem incumbent_count_model [NoAtoms α] [NoAtoms β] (hV : 0 ≤ V) (Q : ℕ) (hQ : 1 ≤ Q)
+    (cost : ℕ → ℝ) (hcost : Monotone cost) (kstar : ℕ) (hkN : kstar ≤ Q + 1)
+    (hprefix : ∀ j, j < kstar → cost j ≤ incGain V α β Q j)
+    (hfail : kstar < Q + 1 → incGain V α β Q kstar < cost kstar) (S : Finset ℕ)
+    (hS : IsEquilibriumR cost (incGain V α β Q) (Q + 1) S) : S.card = kstar :=
+  count_invariance_fin cost (incGain V α β Q) (Q + 1) kstar hcost (incGain_antitone V α β hV Q hQ)
+    hkN hprefix hfail S hS
+
 end Model
 
 end EntryContestInc

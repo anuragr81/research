@@ -95,6 +95,26 @@ theorem assortative_unique (S : Finset ℕ) (hsub : ∀ i ∈ S, i < kstar) (hca
   Finset.eq_of_subset_of_card_le (fun i hi => Finset.mem_range.mpr (hsub i hi))
     (by rw [Finset.card_range, hcard])
 
+/-- **M7, composed.** Under M7's condition the assortative set is an equilibrium and every
+    equilibrium is the assortative set. The condition is vacuous when all `Q` challengers enter. -/
+theorem assortative_only (hcost : Monotone cost) (hgain : Antitone gain) (hkQ : kstar ≤ Q)
+    (hprefix : ∀ j, j < kstar → cost j ≤ gain j) (hfail : kstar < Q → gain kstar < cost kstar)
+    (hpin : kstar < Q → gain (kstar - 1) < cost kstar) :
+    IsEquilibriumR cost gain Q (Finset.range kstar)
+      ∧ ∀ S, IsEquilibriumR cost gain Q S → S = Finset.range kstar := by
+  refine ⟨assortative_is_equilibrium cost gain Q kstar hcost hkQ hprefix hfail, fun S hS => ?_⟩
+  have hcard := count_invariance_fin cost gain Q kstar hcost hgain hkQ hprefix hfail S hS
+  obtain ⟨hsub, hmem, -⟩ := hS
+  refine assortative_unique (kstar := kstar) S (fun i hi => ?_) hcard
+  by_contra hik
+  push_neg at hik
+  have hiQ : i < Q := Finset.mem_range.mp (hsub hi)
+  have h1 := hmem i hi
+  rw [hcard] at h1
+  have h2 := hpin (by omega)
+  have h3 := hcost hik
+  linarith
+
 /-- **N4 (ii).** No set of `k` challengers costs less in total than the `k` cheapest. -/
 theorem assortative_min_cost (hcost : Monotone cost) (S : Finset ℕ) :
     ∑ i ∈ Finset.range S.card, cost i ≤ ∑ i ∈ S, cost i := by
@@ -131,6 +151,36 @@ theorem three_equilibria :
        interval_cases j <;> simp_all)
 
 end Selection
+
+section SelectionModel
+
+/-! **M6 and M7 with the model's gain.** The gain is `Δ` built from the score laws, extended
+past `Q − 1` as `DeltaUpTo`, which agrees with `Δ` on `0, …, Q − 1`. Its antitonicity is M4,
+proved from the primitives, so no monotonicity of the gain is assumed. -/
+
+variable (V : ℝ) (α β C : Measure ℝ) [IsProbabilityMeasure α] [IsProbabilityMeasure β]
+  [IsProbabilityMeasure C] [NoAtoms α] [NoAtoms β] [NoAtoms C]
+
+/-- **M6 from the primitives.** Every pure-strategy equilibrium has `k*` entrants. -/
+theorem count_invariance_model (hV : 0 ≤ V) (cost : ℕ → ℝ) (Q kstar : ℕ) (hcost : Monotone cost)
+    (hkQ : kstar ≤ Q) (hprefix : ∀ j, j < kstar → cost j ≤ DeltaUpTo V α β C Q j)
+    (hfail : kstar < Q → DeltaUpTo V α β C Q kstar < cost kstar) (S : Finset ℕ)
+    (hS : IsEquilibriumR cost (DeltaUpTo V α β C Q) Q S) : S.card = kstar :=
+  count_invariance_fin cost (DeltaUpTo V α β C Q) Q kstar hcost
+    (EntryContestKappa.DeltaUpTo_antitone V α β C hV Q) hkQ hprefix hfail S hS
+
+/-- **M7 from the primitives.** Under M7's condition the assortative set is the only
+    equilibrium. -/
+theorem assortative_only_model (hV : 0 ≤ V) (cost : ℕ → ℝ) (Q kstar : ℕ) (hcost : Monotone cost)
+    (hkQ : kstar ≤ Q) (hprefix : ∀ j, j < kstar → cost j ≤ DeltaUpTo V α β C Q j)
+    (hfail : kstar < Q → DeltaUpTo V α β C Q kstar < cost kstar)
+    (hpin : kstar < Q → DeltaUpTo V α β C Q (kstar - 1) < cost kstar) :
+    IsEquilibriumR cost (DeltaUpTo V α β C Q) Q (Finset.range kstar)
+      ∧ ∀ S, IsEquilibriumR cost (DeltaUpTo V α β C Q) Q S → S = Finset.range kstar :=
+  assortative_only cost (DeltaUpTo V α β C Q) Q kstar hcost
+    (EntryContestKappa.DeltaUpTo_antitone V α β C hV Q) hkQ hprefix hfail hpin
+
+end SelectionModel
 
 section ComparativeStatics
 

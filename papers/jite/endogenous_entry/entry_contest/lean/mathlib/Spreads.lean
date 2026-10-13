@@ -88,6 +88,49 @@ theorem tail_fall (hκ : AntitoneOn κ (Ioi c)) (w w' : ℕ → ℝ) (k k' : ℕ
 
 end Counts
 
+section FeePrize
+
+/-! **M11 on wealth profiles.** The prize and fee comparisons for the count of a sorted profile,
+with the support-floor rule: a challenger whose wealth is at or below the fee does not enter. -/
+
+/-- A gain at least as large at every rank does not lower the count. -/
+theorem count_mono_gain (κ : ℝ → ℝ) (c : ℝ) (Δ Δ' : ℕ → ℝ) (hΔ : ∀ j, Δ j ≤ Δ' j) (Q : ℕ)
+    (w : ℕ → ℝ) (k k' : ℕ) (hk : IsCount κ c Δ Q w k) (hk' : IsCount κ c Δ' Q w k') :
+    k ≤ k' :=
+  count_ge_of_enters κ c Δ' Q w k k' hk.1 hk'
+    (fun j hj => ⟨(hk.2.1 j hj).1, (hk.2.1 j hj).2.trans (hΔ j)⟩)
+
+/-- **M11, prize half, from the primitives.** For `μ ≤ 1` and `s ≥ 0` the gain is nonnegative
+    (M2), so a larger prize does not lower the count, for any atomless incumbent law. -/
+theorem count_mono_prize (μ : ℝ) (hμ1 : μ ≤ 1) (ρr ρs : Measure ℝ) [IsProbabilityMeasure ρr]
+    [IsProbabilityMeasure ρs] (hs : ρs (Iio 0) = 0) [NoAtoms (investorLaw μ ρr ρs)]
+    [NoAtoms (nonInvestorLaw μ ρr)] (C : Measure ℝ) [IsProbabilityMeasure C] [NoAtoms C] (V V' : ℝ)
+    (hVV : V ≤ V') (κ : ℝ → ℝ) (c : ℝ) (Q : ℕ) (w : ℕ → ℝ) (k k' : ℕ)
+    (hk : IsCount κ c (DeltaUpTo V (investorLaw μ ρr ρs) (nonInvestorLaw μ ρr) C Q) Q w k)
+    (hk' : IsCount κ c (DeltaUpTo V' (investorLaw μ ρr ρs) (nonInvestorLaw μ ρr) C Q) Q w k') :
+    k ≤ k' :=
+  count_mono_gain κ c _ _ (fun j => by
+    unfold DeltaUpTo
+    exact EntryContestEq.Delta_mono_prize V V' hVV _ _ C Q _
+      (Delta_nonneg_from_primitives (V := 1) (C := C) (μ := μ) (ρr := ρr) (ρs := ρs)
+        zero_le_one hμ1 hs Q _)) Q w k k' hk hk'
+
+/-- **M11, fee half, on wealth profiles.** With the floor rule, a higher fee does not raise the
+    count, for any `u` non-decreasing on the positive reals, log and CRRA included. -/
+theorem count_antitone_fee (u : ℝ → ℝ) (hu : MonotoneOn u (Ioi 0)) (c c' : ℝ) (hcc : c ≤ c')
+    (Δ : ℕ → ℝ) (Q : ℕ) (w : ℕ → ℝ) (k k' : ℕ)
+    (hk : IsCount (kappa u c) c Δ Q w k) (hk' : IsCount (kappa u c') c' Δ Q w k') : k' ≤ k :=
+  count_ge_of_enters (kappa u c) c Δ Q w k' k hk'.1 hk (fun j hj => by
+    obtain ⟨hw, hκ⟩ := hk'.2.1 j hj
+    refine ⟨lt_of_le_of_lt hcc hw, le_trans ?_ hκ⟩
+    unfold kappa
+    have h1 : 0 < w j - c' := by linarith
+    have h2 : w j - c' ≤ w j - c := by linarith
+    have := hu (mem_Ioi.mpr h1) (mem_Ioi.mpr (by linarith)) h2
+    linarith)
+
+end FeePrize
+
 section Pivot
 
 /-! **P9-gen.** A monotone map `T` is a pivot-spread about `x0` when it moves wealth up above
@@ -346,6 +389,73 @@ theorem mps_lowers_count :
     simp [wMpsPost] at h
     rw [κc_eq] at h
     norm_num at h
+
+/-- The counts of `mps_lowers_count` for any gain schedule close enough to the benchmark
+    `Δ(m) = 1/(m + 2)`. -/
+theorem mps_lowers_witness_counts (Δ : ℕ → ℝ) (h0 : 100 / 551 ≤ Δ 0) (h1 : 25 / 126 ≤ Δ 1)
+    (h1' : Δ 1 < 25 / 66) (h2' : Δ 2 < 1 / 2) :
+    IsCount κc 1 Δ 3 wMpsPre 2 ∧ IsCount κc 1 Δ 3 wMpsPost 1 := by
+  refine ⟨⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩, ⟨by norm_num, fun j hj => ?_, fun _ => ?_⟩⟩
+  · interval_cases j
+    · refine ⟨by simp [wMpsPre]; norm_num, ?_⟩
+      simp [wMpsPre]
+      rw [κc_eq]
+      norm_num
+      linarith
+    · refine ⟨by simp [wMpsPre]; norm_num, ?_⟩
+      simp [wMpsPre]
+      rw [κc_eq]
+      norm_num
+      linarith
+  · rintro ⟨_, h⟩
+    simp [wMpsPre] at h
+    rw [κc_eq] at h
+    norm_num at h
+    linarith
+  · interval_cases j
+    refine ⟨by simp [wMpsPost]; norm_num, ?_⟩
+    simp [wMpsPost]
+    rw [κc_eq]
+    norm_num
+    linarith
+  · rintro ⟨_, h⟩
+    simp [wMpsPost] at h
+    rw [κc_eq] at h
+    norm_num at h
+    linarith
+
+/-- **Inside the primitives.** For every small `μ > 0`, with `r` and `s` uniform and the
+    incumbent investing, the model's gains give the same two counts, so the mean-preserving
+    spread of `mps_lowers_count` lowers the count from 2 to 1. -/
+theorem mps_lowers_count_positive :
+    ∀ᶠ μ in 𝓝[>] 0,
+      IsCount κc 1 (DeltaUpTo 1 (investorLaw μ unif unif) (nonInvestorLaw μ unif)
+          (investorLaw μ unif unif) 3) 3 wMpsPre 2
+      ∧ IsCount κc 1 (DeltaUpTo 1 (investorLaw μ unif unif) (nonInvestorLaw μ unif)
+          (investorLaw μ unif unif) 3) 3 wMpsPost 1 := by
+  have hs : unif (Iio 0) = 0 := by
+    have h := cdf_unif_of_mem 0 le_rfl zero_le_one
+    rw [cdf_eq_real, measureReal_def] at h
+    refine measure_mono_null Iio_subset_Iic_self ?_
+    exact ((ENNReal.toReal_eq_zero_iff _).mp h).resolve_right (measure_ne_top _ _)
+  have lim : ∀ m : ℕ, Tendsto (fun t => Delta 1 (investorLaw t unif unif) (nonInvestorLaw t unif)
+      (investorLaw t unif unif) 3 m) (𝓝 0) (𝓝 (1 / ((m : ℝ) + 2))) := fun m => by
+    have := p6_limit unif unif hs 1 3 m
+    simpa using this
+  have e : ∀ t (m : ℕ), m ≤ 2 → DeltaUpTo 1 (investorLaw t unif unif) (nonInvestorLaw t unif)
+      (investorLaw t unif unif) 3 m = Delta 1 (investorLaw t unif unif) (nonInvestorLaw t unif)
+      (investorLaw t unif unif) 3 m := fun t m hm => by
+    unfold DeltaUpTo
+    rw [min_eq_left (by omega)]
+  have t0 := (lim 0).eventually (eventually_gt_nhds (show (100 : ℝ) / 551 < 1 / ((0 : ℕ) + 2) by norm_num))
+  have t1 := (lim 1).eventually (eventually_gt_nhds (show (25 : ℝ) / 126 < 1 / ((1 : ℕ) + 2) by norm_num))
+  have t1' := (lim 1).eventually (eventually_lt_nhds (show 1 / (((1 : ℕ) : ℝ) + 2) < 25 / 66 by norm_num))
+  have t2' := (lim 2).eventually (eventually_lt_nhds (show 1 / (((2 : ℕ) : ℝ) + 2) < 1 / 2 by norm_num))
+  filter_upwards [nhdsWithin_le_nhds t0, nhdsWithin_le_nhds t1, nhdsWithin_le_nhds t1',
+    nhdsWithin_le_nhds t2'] with μ a0 a1 a1' a2'
+  exact mps_lowers_witness_counts _ (by rw [e μ 0 (by norm_num)]; exact a0.le)
+    (by rw [e μ 1 (by norm_num)]; exact a1.le) (by rw [e μ 1 (by norm_num)]; exact a1')
+    (by rw [e μ 2 (by norm_num)]; exact a2')
 
 /-! **Mean-preserving spreads inside the band.** Four challengers. Before the spread the wealth is
 `(4, 14/5, 11/5, 2)` and the count is 2. Two spreads, each preserving the total and majorizing
