@@ -39,7 +39,7 @@ def rows_of(path):
     name = zf.namelist()[0]
     year = int(re.search(r"(\d{4})1231", os.path.basename(path)).group(1))
     text = io.TextIOWrapper(zf.open(name), encoding="latin-1")
-    return year, csv.reader(text, delimiter="^")
+    return year, csv.reader(text, delimiter="^", quoting=csv.QUOTE_NONE)
 
 
 def num(v):
