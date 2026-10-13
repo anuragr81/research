@@ -220,13 +220,13 @@ for f in cited:
     check(f"MM-7 {f}", ok, detail)
 
 print("-" * 72)
-print("MM-14 the common bank dataset reproduces from its pinned files, fetched after its pre-registration")
-common = "common_data/results_common_data.md"
-ok, detail = reproduce(common)
-check(f"MM-14 {common} reproduces", ok, detail)
-pres = run_under(common)
-check("MM-14 it names its pre-registration, committed before it",
-      pres and not any(order_problem(p, common) for p in pres), f"{pres}")
+print("MM-14 standing results files reproduce from their pinned files, after their pre-registrations")
+for standing in ("common_data/results_common_data.md", "replication/gordon_hirtle_2026/results_stage1.md"):
+    ok, detail = reproduce(standing)
+    check(f"MM-14 {standing} reproduces", ok, detail)
+    pres = run_under(standing)
+    check(f"MM-14 {standing} names its pre-registrations, each committed before it",
+          pres and not any(order_problem(p, standing) for p in pres), f"{pres}")
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass MM-1 to MM-4 and MM-6; a faulty one must fail every rule")

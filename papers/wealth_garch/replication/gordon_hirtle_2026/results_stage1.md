@@ -1,6 +1,6 @@
 # Replication of Gordon and Hirtle (2026), stage 1: their facts on their data
 
-Run 13 October 2026 under PREREG_stage1.md (commit 799cfea6) and
+Run 13 October 2026 under PREREG_stage1.md (commit 799cfea6) and under
 PREREG_stage1_2.md (commit 48a74626). Y-9C December files 1990-2020 and CPI
 were fetched by fetch_stage1.py after the first file; the FFIEC files
 2021-2024 and the NIC relationships file were downloaded by the author
