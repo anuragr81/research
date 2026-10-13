@@ -293,6 +293,12 @@ grounds.
   The first enhancement is their model with the shortfall penalty added,
   which must return their barriers at lambda_S = 1. Delta = 0 may be
   explored, and it is the bridge to the manuscript's instantaneous model.
+- 2026-10-13. The common dataset is banks, Call Reports (author): the
+  paper stays with banks. Papers built on holding companies (Berger et
+  al., Gordon and Hirtle, Hirtle) are replicated on their own FR Y-9C
+  data, then their findings are tested on the bank data. Data inventory in
+  `lit/DATA_INVENTORY.md`. WRDS (Compustat, CRSP) is open: the author
+  would obtain access if needed.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
