@@ -274,6 +274,14 @@ grounds.
   PREREG_comparison.md: the verdict rule across the grid, the reference R
   (8% or 10.5%), and whether the enhancement keeps Peura and Keppo's issue
   delay (PK-Q3, PK-Q8) so that it nests the baseline.
+- 2026-10-13. Direction (author). We find the empirical data of the
+  background papers and implement those papers ourselves, as with Peura
+  and Keppo. The testing thread then scores every implemented paper on one
+  common dataset that we choose. No time limit. First step: a data
+  inventory of the records with bank-level empirical work (Baron; Mankart,
+  Michaelides and Pagratis; Bayraktar et al.; Berger et al.; Gordon and
+  Hirtle; Hirtle; Jokipii and Milne; Holod and Peek; Houston, James and
+  Marcus), each source quoted from its data section.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
