@@ -299,6 +299,16 @@ grounds.
   data, then their findings are tested on the bank data. Data inventory in
   `lit/DATA_INVENTORY.md`. WRDS (Compustat, CRSP) is open: the author
   would obtain access if needed.
+- 2026-10-13. FDIC API coverage, probed on the first 2,000 banks of each
+  report date (indicative; the pre-registered fetch will state the full
+  counts). No registration. Capital, income and dividends are quarterly
+  from 1984; risk-weighted assets from 1990. The equity-change flows
+  (`EQCSXQ`, `EQCBHCTR`, `EQCMRG`) are reported by every bank in December
+  from 1984, but in mid-year quarters by only about a fifth to a third of
+  banks until 2000 (small banks filed the schedule annually, as HP-A3
+  says), and by every bank quarterly from 2001. FFIEC CDR bulk files
+  answer (HTTP 200); the FFIEC NIC Y-9C download page refuses scripted
+  access (HTTP 403).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
