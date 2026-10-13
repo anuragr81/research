@@ -27,6 +27,12 @@ for d in "$HERE"/*/; do
   echo
 done
 
+echo "======================================================================"
+echo " data inventory"
+echo "======================================================================"
+python3 "$HERE/verify_inventory.py" || { echo "[FAIL] data inventory reported failures"; FAILED=1; }
+echo
+
 if [ "$RAN" -eq 0 ]; then
   echo "[FAIL] no paper suites ran"
   FAILED=1
