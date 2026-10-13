@@ -318,6 +318,16 @@ grounds.
   1990, EQCTRSTX in 2001. MM-14 reproduces the coverage on every run.
   Next: Gordon and Hirtle (needs FR Y-9C, possibly a manual download),
   or Mankart, Michaelides and Pagratis, which runs on this dataset.
+- 2026-10-13. Gordon and Hirtle, stage 1, pre-registered
+  (`replication/gordon_hirtle_2026/PREREG_stage1.md`, 799cfea6) with the
+  MDRM dictionary pinned. Y-9C December files 1990-2020 and CPI fetched by
+  fetch_stage1.py and pinned. A development run of stage1.py on 1990-2020
+  was made and its output seen, to test the code before the 2021-2024
+  files (manual FFIEC download by the author) arrive. Code changes after
+  it: standard errors printed to four decimals, to confirm that two-way
+  clustering differs from one-way (it does, 0.0316 against 0.0319; their
+  columns 1 and 2 also share a standard error). No pre-registered choice
+  changed. The results file is written only from the full 1990-2024 run.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
