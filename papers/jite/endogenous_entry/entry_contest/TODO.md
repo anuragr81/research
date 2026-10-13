@@ -966,7 +966,9 @@ paper's claims, and only then write the manuscript.
   Proposition 1(ii) fails for K ≥ 4 (exact bound (K-1)(K+1)^2/(4K^3)), the
   derivative of Φ on p.6 is misprinted, the K = 3 candidate never survives a
   deviation to zero (Prop 1(iv) compares efforts, not payoffs), so
-  Corollaries 1-2 fail. Author to decide whether C7 moves to the settled table.
+  Corollaries 1-2 fail. Author to decide whether C7 moves to the settled table. Decided 13 Oct 2026
+  (author: "If C7 is decided - move it away from pending"): C7 is now in the
+  settled table after C4; K6's scope note no longer calls it pending.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
