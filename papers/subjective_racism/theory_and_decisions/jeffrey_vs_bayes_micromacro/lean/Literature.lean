@@ -6,6 +6,7 @@ import Literature.Barberis
 import Literature.BHW
 import Literature.Banerjee
 import Literature.Becker
+import Literature.BonnayCozic
 import Literature.BenjaminBodohCreedRabin
 import Literature.BohrenImasRosenberg
 import Literature.CanayMogstadMountjoy

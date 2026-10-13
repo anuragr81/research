@@ -58,6 +58,7 @@ asserting sympy checks; coverage is tracked in the audit, item R5.
 | [tversky_kahneman1992](tversky_kahneman1992/README.md) | Lean + sympy (journal PDF) | done 2026-10-03 |
 | [barberis2012](barberis2012/README.md) | Lean + sympy (journal version) | done 2026-10-03 (dropped from write-ups) |
 | [becker1962](becker1962/README.md) | Lean + sympy (web copy, not Drive) | done 2026-09-30 |
+| [bonnay_cozic2018](bonnay_cozic2018/README.md) | Lean + sympy (asserting); not yet cited | done 2026-10-13 |
 | [wilson2014](wilson2014/README.md) | Lean + sympy (April 2003 draft) | done 2026-09-30 |
 | [canay_mogstad_mountjoy2024](canay_mogstad_mountjoy2024/README.md) | Lean + sympy (NBER WP 27802, June 2023) | done 2026-10-03 |
 | [cassell2020](cassell2020/README.md) | Lean + sympy | done 2026-09-30 |
