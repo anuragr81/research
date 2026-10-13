@@ -282,6 +282,12 @@ grounds.
   Michaelides and Pagratis; Bayraktar et al.; Berger et al.; Gordon and
   Hirtle; Hirtle; Jokipii and Milne; Holod and Peek; Houston, James and
   Marcus), each source quoted from its data section.
+- 2026-10-13. Grid verdict rule and reference level are decided once the
+  papers are implemented, as a discussion of findings (author). Setting new
+  parameters on a 2005-2014 training window (b) is preferred, one value
+  fixed from the literature (c) acceptable if it does the job. The
+  reference level is open. The decisive comparison runs on the sealed
+  hold-out, so exploration on 2015-2024 does not spend it.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
