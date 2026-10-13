@@ -1007,6 +1007,12 @@ paper's claims, and only then write the manuscript.
   and with 2/3 its bounds are exactly Proposition 3's hypotheses. No misprint.
   Corcoran-Karels: the author reported an upload on 13 Oct 2026, and it was not
   visible on Drive at about 13:10 UTC.
+  Decided 13 Oct 2026 (author): the \unv marks for a working paper or
+  manuscript read in place of the journal version (L7, L12, L17, L20, L22, L23,
+  L25, L26, L27) are not a concern, and Tilly (L19) is not load-bearing because
+  it is not a quantitative model. Their published versions are not to be
+  sought. The marks stay as labels. Corcoran-Karels (C5, C6, C13) is the only
+  paper the novelty pass waits on.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
