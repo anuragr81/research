@@ -328,6 +328,17 @@ grounds.
   clustering differs from one-way (it does, 0.0316 against 0.0319; their
   columns 1 and 2 also share a standard error). No pre-registered choice
   changed. The results file is written only from the full 1990-2024 run.
+- 2026-10-13. Gordon and Hirtle stage 1 run (results_stage1.md). The FFIEC
+  files carry no holder fields, so top-tier for 2021-2024 comes from the
+  NIC relationships file under PREREG_stage1_2.md (48a74626); it agrees
+  with RSSD9348 on 99.0% of 2015-2020 bank-years. 20 of 22 targets
+  reproduce: the typical-year components, median issue, Table 1 means and
+  all of Table 2 (first-lag coefficients 0.224, 0.224, 0.229, 0.106 against
+  0.201, 0.201, 0.208, 0.097). Differ: dividend-paying share 84.9% against
+  "more than 85 percent", and 7,843 bank-years against 6,448 (+21.6%),
+  source not identified. Open for the author: whether to investigate the
+  sample difference under a new pre-registration, and stage 2 (their
+  findings on the common bank dataset).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
