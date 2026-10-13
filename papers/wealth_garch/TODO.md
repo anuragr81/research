@@ -262,6 +262,18 @@ grounds.
   sentences that cite a paper (C2 keeps Barberis et al.'s own "loss
   aversion"). writing_discipline.md section 6 records the new names.
   Alternatives may be considered later (author).
+- 2026-10-13. Comparison protocol, decisions (author). The two threads are
+  named the testing thread (the backtest) and the enhancement thread (the
+  enhanced models); both are recorded in the one manuscript. Scorecard:
+  stage 4's T1 to T4 with their pre-registered tolerances. Verdict per
+  test by a margin of 10 points on the share. Sample B primary, A
+  reported. Enhancements' new parameters from regulation and a pre-fixed
+  grid, never chosen on 2015-2024; same mu_i, sigma_i as the baseline.
+  Enhancements nested, in several passes. A numerical HJB solve is
+  accepted as computation. 2025 stays sealed. Open before
+  PREREG_comparison.md: the verdict rule across the grid, the reference R
+  (8% or 10.5%), and whether the enhancement keeps Peura and Keppo's issue
+  delay (PK-Q3, PK-Q8) so that it nests the baseline.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
