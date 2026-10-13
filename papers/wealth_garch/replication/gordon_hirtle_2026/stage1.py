@@ -57,7 +57,26 @@ def load(path):
             continue
         rec = {k: (r[col[k]].strip() if k in ("RSSD9101",) else num(r[col[k]])) for k in ITEMS if k in col}
         out.append(rec)
-    return year, out
+    return year, out, "RSSD9348" in col
+
+
+def controlled_offspring(path):
+    zf = zipfile.ZipFile(path)
+    name = [n for n in zf.namelist() if n.lower().endswith(".csv")][0]
+    reader = csv.DictReader(io.TextIOWrapper(zf.open(name), encoding="latin-1"))
+    reader.fieldnames = [f.strip().strip("#").upper() for f in reader.fieldnames]
+    spans = defaultdict(list)
+    for r in reader:
+        if all(r[k].strip() == "1" for k in ("RELN_LVL", "CTRL_IND", "REG_IND", "EQUITY_IND")):
+            start, end = r["DT_START"].strip()[:8], r["DT_END"].strip()[:8]
+            spans[int(r["ID_RSSD_OFFSPRING"])].append((start, end))
+    return {year: {i for i, ss in spans.items() if any(s <= f"{year}1231" < e for s, e in ss)}
+            for year in range(2015, 2025)}
+
+
+def top_by_holder(rec):
+    hh = rec.get("RSSD9348")
+    return hh in (None, 0.0) or int(hh) == int(rec["RSSD9001"])
 
 
 def requirement(year):
@@ -70,10 +89,8 @@ def z(v):
     return 0.0 if v is None else v
 
 
-def bank_year(rec, year, cpi):
+def bank_year(rec, year, cpi, top):
     rid = int(rec["RSSD9001"])
-    hh = rec.get("RSSD9348")
-    top = hh in (None, 0.0) or int(hh) == rid
     dom = rec.get("RSSD9101") == "Y"
     assets, ni = rec.get("BHCK2170"), rec.get("BHCK4340")
     if assets is None or ni is None:
@@ -114,22 +131,41 @@ def verdict_count(ours, theirs):
     return "reproduces" if abs(ours - theirs) <= 0.10 * theirs else "differs"
 
 
-def main(cpi_path, paths):
+def main(cpi_path, rel_path, paths):
     print(f"{os.path.basename(cpi_path)} sha256 {sha(cpi_path)}")
+    if rel_path != "-":
+        print(f"{os.path.basename(rel_path)} sha256 {sha(rel_path)}")
     for p in paths:
         print(f"{os.path.basename(p)} sha256 {sha(p)}")
     cpi = cpi_annual(cpi_path)
-    sample, alt = [], 0
+    nic = controlled_offspring(rel_path) if rel_path != "-" else None
+    sample, alt, agree, compared = [], 0, 0, 0
+    top2020 = set()
     for p in paths:
-        year, recs = load(p)
+        year, recs, has_holder = load(p)
+        if not has_holder and (nic is None or year not in nic):
+            sys.exit(f"{os.path.basename(p)}: no holder field and no NIC relationships for {year}")
         for rec in recs:
-            b = bank_year(rec, year, cpi)
+            nic_top = None if nic is None or year not in nic else int(rec["RSSD9001"]) not in nic[year]
+            top = top_by_holder(rec) if has_holder else nic_top
+            b = bank_year(rec, year, cpi, top)
+            if has_holder and nic_top is not None and bank_year(rec, year, cpi, True):
+                compared += 1
+                agree += top == nic_top
             if b:
                 sample.append(b)
-                alt += b["alt_top"]
+                alt += has_holder and b["alt_top"]
+                if year == 2020:
+                    top2020.add(b["id"])
     years = sorted({b["year"] for b in sample})
     print(f"\nbank-years {len(sample)}, banks {len({b['id'] for b in sample})}, years {years[0]}-{years[-1]} ({len(years)})")
-    print(f"reported: bank-years also top-tier under RSSD9364 {alt}")
+    print(f"reported: bank-years from files with holder fields also top-tier under RSSD9364 {alt}")
+    if compared:
+        share_agree = agree / compared
+        print(f"control: RSSD9348 and the NIC rule agree on {agree}/{compared} = {100 * share_agree:.1f}% of 2015-2020 "
+              f"bank-years passing the other rules -> {'at least 97%' if share_agree >= 0.97 else 'below 97%'}")
+        late = [b for b in sample if b["year"] >= 2021]
+        print(f"reported: 2021-2024 bank-years {len(late)}, of which top-tier in 2020 {sum(b['id'] in top2020 for b in late)}")
 
     print("\nR1 medians over years of aggregate component / aggregate adjusted prior equity (%)")
     for key, theirs in (("earn", 11.6), ("iss", 2.5), ("div", 4.7), ("rep", 4.2)):
@@ -205,4 +241,4 @@ def main(cpi_path, paths):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2:])
+    main(sys.argv[1], sys.argv[2], sys.argv[3:])
