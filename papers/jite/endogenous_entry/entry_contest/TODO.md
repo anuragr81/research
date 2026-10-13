@@ -936,6 +936,19 @@ paper's claims, and only then write the manuscript.
   occur at admissible parameters; Theorem 2's stability conclusions need
   Theorem 1(ii)'s hypothesis (a witness with eigenvalue 1/27); the printed
   numbers of Example 2 are right.
+  Binary-investment search, 13 Oct 2026 (author: "carry on with the
+  binary-investment search"). Log and triage in `LITERATURE.tex`
+  §"Binary investment before the contest". Closest: Fryer and Loury, "Valuing
+  Diversity", JPE 121(4) 2013 (NBER w16568 "Valuing Identity" cached at
+  `~/.cache/entry_contest/w16568.pdf`): e ∈ {0,1}, noisy productivity, a fixed
+  supply of slots, groups with different cost distributions; bears on C13 and
+  C10. Also to read: Coate and Loury, AER 1993 (on Drive, other folder,
+  `Coate&Loury_AER1993.pdf`); Fryer and Loury, JEI 2005 (NBER w10104 cached);
+  Fu and Lu, Econ Letters 2009 (PDF needed; C7). Classified, not to read:
+  Garg, Li and Monachou (test-taking buys information; non-takers excluded),
+  Liu and Lu 2019, Kawamura and Moreno de Barreda 2014, Hvide and Kristiansen
+  2003, Konrad 2002, Cornell and Welch 1996, Moro and Norman 2003.
+  C7, C12, C13 \pend notes now name these papers.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
