@@ -87,20 +87,32 @@ that world out. A claim that cannot name its falsifier does not enter.
   - $Q$ (level) and $q$ (ratio) are **required capital**. $K$ is only the
     **fixed issuance cost**, and $\kappa$ the **proportional issuance
     cost**.
-  - $c$ is only the correlation between the risky return and the liability
-    shock. $\rho$ is only the discount rate, $\rho_L$ the liability-net
-    discount rate, and $r_E$ the return on equity.
+  - $c$ is only the **return-liability correlation**, between the risky
+    return and the liability shock. $\rho$ is only the discount rate,
+    $\rho_L$ the liability-net discount rate, and $r_E$ the return on equity.
   - The three controls are named by type, **classical** (risky exposure
     $\pi$), **singular** (dividends $D$ at the **dividend barrier** $y^*$)
     and **impulse** (recapitalisation $I$ at the **recapitalisation
     trigger** $x_L$, up to the **injection target** $y_{\text{post}}$).
   - **Cap geometry** ($a_1,a_2,a_3$) is never called preference.
-  - $\nu_1^2,\nu_3^2$ are the **saturation limits** of the $z$-volatility
-    $\zeta$. Renamed 2026-10-10 from PROOFS_v2's $\kappa_1^2,\kappa_3^2$ so
-    that $\kappa$ means only the proportional issuance cost.
+  - $\nu_1^2$ and $\nu_3^2$ are the **deficit limit** and the **surplus
+    limit** of **buffer variance** $\zeta$. Renamed 2026-10-10 from
+    PROOFS_v2's $\kappa_1^2,\kappa_3^2$ so that $\kappa$ means only the
+    proportional issuance cost, and on 2026-10-13 from "saturation limits"
+    of the "$z$-volatility" ($\zeta$ is a variance).
+- Agreed 2026-10-13, from the terminology table of `MEASUREMENT_MAP.tex`:
+  $x$ is the **assets-to-liabilities ratio**, $z$ the **capital buffer**
+  (never "log coordinate"), $x=1$ the **distress boundary** (never "deep in
+  deficit"), $\sigma$ the **asset volatility**, $\mu_s$ the **expected asset
+  return** and $\sigma_L$ the **liability volatility**.
 - The "also called" synonyms of that terminology file (payout barrier, injection
   trigger, recapitalisation boundary, volatility ratio) do not enter the
   manuscript. One name each.
+- The terminology table of `MEASUREMENT_MAP.tex` is the list of names. Its
+  Replaces column lists the retired names, and MM-12 of
+  `checks/verify_measurement.py` finds them anywhere in the manuscript or the
+  map. A literature row, or a sentence citing a paper, may use that paper's
+  own term for its own object (Barberis et al.'s loss aversion is theirs).
 - No new terms. If a term is not defined in the manuscript, use the
   manuscript's words for the thing.
 

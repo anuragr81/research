@@ -119,6 +119,28 @@ def summary_problems(manuscript, tex):
     return bad
 
 
+def retired_uses(manuscript, tex):
+    rows = macro_calls(strip_comments(tex), "nrow", 5)
+    mp = [ln for ln in strip_comments(tex).splitlines() if not ln.lstrip().startswith("\\nrow{")]
+    mp += [" ".join(r[:4]) for r in rows]
+    ms = [ln for ln in strip_comments(manuscript).splitlines() if not ln.lstrip().startswith("\\lrow{")]
+    ms = [s for s in re.split(r"(?<=\.)\s+", " ".join(ms)) if "\\cite" not in s]
+    found = []
+    for label, lines in (("MANUSCRIPT.tex", ms), ("MEASUREMENT_MAP.tex", mp)):
+        flat = " ".join(" ".join(lines).replace("$", "").lower().split())
+        found += [(label, n) for n in retired(tex) if n in flat]
+    return found
+
+
+def glossary_strays(manuscript, tex):
+    m = re.search(r"\\section\{Terminology\}.*?\\endhead(.*?)\\bottomrule", strip_comments(manuscript), re.S)
+    if not m:
+        return ["no terminology section"]
+    names = {r[0].strip().lower() for r in macro_calls(strip_comments(tex), "nrow", 5)}
+    terms = [ln.split("&")[0].strip() for ln in m.group(1).splitlines() if "&" in ln]
+    return [t for t in terms if t.lower() not in names]
+
+
 def unattested(manuscript, tex):
     m = re.search(r"% plain-summary begin\n.*?% plain-summary end", manuscript, re.S)
     text = strip_comments(manuscript.replace(m.group(0), "") if m else manuscript).lower()
@@ -181,6 +203,14 @@ bad11 = unattested(manuscript, tex)
 check("MM-11 every Agreed or In use name appears in the manuscript outside the plain summary or in the map's rows",
       not bad11, f"{bad11}")
 
+bad12 = retired_uses(manuscript, tex)
+check("MM-12 no retired name appears in the manuscript outside its literature rows and sentences citing a paper, or in the map outside the Replaces column",
+      not bad12, f"{bad12}")
+
+bad13 = glossary_strays(manuscript, tex)
+check("MM-13 every term of the manuscript's Terminology section is a name of the map's terminology table",
+      not bad13, f"{bad13}")
+
 print("-" * 72)
 print("MM-7  every cited results file reproduces from its pinned data")
 cited = sorted({i for r in macro_calls(strip_comments(tex), "trow", 6) for i in split_list(r[5])
@@ -207,6 +237,26 @@ check("MM-10-control a 200-word summary is caught",
       summary_problems("% plain-summary begin\n" + " ".join(["word"] * 200) + "\n% plain-summary end\n", tex) != [])
 check("MM-11-control an In use name found nowhere is caught",
       unattested("text", "\\nrow{no such name}{$s$}{m}{In use}{none}\n\\section{Map}\n") == ["no such name"])
+small_map = ("\\nrow{buffer variance}{$\\zeta$}{The variance of the capital buffer.}{Agreed}{z-volatility}\n"
+             "\\nrow{deficit limit}{$\\nu_1^2$}{m}{Agreed}{saturation limits}\n")
+check("MM-12-control a clean manuscript and map pass", retired_uses("buffer variance\n", small_map) == [])
+check("MM-12-control a retired name written with symbols in a model row is caught",
+      retired_uses("\\mrow{M2}{the $z$-volatility}\n", small_map) == [("MANUSCRIPT.tex", "z-volatility")])
+check("MM-12-control another paper's own term in a literature row passes",
+      retired_uses("\\lrow{L2}{barberis2001}{a constant level of loss aversion}\n", small_map) == [])
+check("MM-12-control another paper's own term in a sentence citing it passes",
+      retired_uses("Our model differs. \\citet{barberis2001} find loss aversion silent.\n", small_map) == [])
+check("MM-12-control a banned name in a sentence citing no paper is caught",
+      retired_uses("\\citet{barberis2001} differ. The asymmetry parameter is loss aversion.\n", small_map)
+      == [("MANUSCRIPT.tex", "loss aversion")])
+check("MM-12-control a retired name split across lines is caught",
+      retired_uses("the saturation\nlimits\n", small_map) == [("MANUSCRIPT.tex", "saturation limits")])
+check("MM-12-control a retired name in a map row outside the Replaces column is caught",
+      retired_uses("", small_map + "\\grow{G16}{$\\zeta$}{The z-volatility.}{x}{Output}{M3}\n")
+      == [("MEASUREMENT_MAP.tex", "z-volatility")])
+check("MM-13-control a glossary term not in the map is caught",
+      glossary_strays("\\section{Terminology}\n\\endhead\nLog coordinate & $z$ & m \\\\\nCapital buffer & $z$ & m \\\\\n\\bottomrule\n", tex)
+      == ["Log coordinate"])
 check("MM-7-control a wrong pin is caught",
       pin_mismatches(sample, os.path.join(ROOT, "06_empirical_starter")) == ["fdic_distress_panel_2015_2024.csv.gz"])
 check("MM-7-control a file with no pins is caught", pin_mismatches("no pins here", ROOT) == ["(no pins)"])

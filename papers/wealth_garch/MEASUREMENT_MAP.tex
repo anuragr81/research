@@ -81,10 +81,10 @@ and its observation is part of the empirical design.
 
 One plain-English name for each object of the model. The manuscript and
 this map use these names and no others. Agreed means fixed with the author
-on 10 October 2026 (\path{notes/writing_discipline.md}, section 6). In use
-means the manuscript already uses the name consistently. Proposed means a
-plain name offered on 12 October 2026 in place of the names in the last
-column, which leave the manuscript once the author agrees.
+on 10 or 13 October 2026 (\path{notes/writing_discipline.md}, section 6). In
+use means the manuscript already uses the name consistently. Proposed means a
+plain name offered to the author and not yet agreed. The names in the last
+column are retired, and neither document uses them for these objects.
 
 \footnotesize
 \begin{longtable}{@{}P{3.0cm}P{2.2cm}P{6.2cm}P{1.4cm}P{2.8cm}@{}}
@@ -97,10 +97,10 @@ Name & Symbol & Meaning & Status & Replaces \\
 Name & Symbol & Meaning & Status & Replaces \\
 \midrule
 \endhead
-\nrow{assets-to-liabilities ratio}{$x$}{Total assets over total liabilities, the state of the model.}{Proposed}{none}
+\nrow{assets-to-liabilities ratio}{$x$}{Total assets over total liabilities, the state of the model.}{Agreed}{none}
 \nrow{equity}{$X-L$}{Assets less liabilities.}{In use}{none}
 \nrow{required capital}{$Q$, $q$}{The capital regulation requires, in dollars or as a ratio to liabilities.}{Agreed}{none}
-\nrow{capital buffer}{$z$, $z_t$}{The log of equity over required capital. Zero when equity equals required capital, falling without limit towards the distress boundary.}{Proposed}{log coordinate}
+\nrow{capital buffer}{$z$, $z_t$}{The log of equity over required capital. Zero when equity equals required capital, falling without limit towards the distress boundary.}{Agreed}{log coordinate}
 \nrow{distress boundary}{$x=1$}{The state at which equity is zero.}{In use}{deep in deficit}
 \nrow{deficit}{$z<0$}{Equity below required capital.}{In use}{none}
 \nrow{surplus}{$z>0$}{Equity above required capital.}{In use}{none}
@@ -110,11 +110,11 @@ Name & Symbol & Meaning & Status & Replaces \\
 \nrow{liquidity branch}{$(x-a_2)/a_3$}{The branch of the regulatory cap set by liquidity. It binds deep in surplus.}{In use}{none}
 \nrow{crossing point}{$\bar x$}{The state at which the two branches are equal.}{In use}{none}
 \nrow{cap geometry}{$a_1$, $a_2$, $a_3$}{The three parameters of the regulatory cap. Never a preference.}{Agreed}{none}
-\nrow{asset volatility}{$\sigma$}{The volatility of the risky asset.}{Proposed}{none}
-\nrow{expected asset return}{$\mu_s$}{The drift of the risky asset.}{Proposed}{none}
+\nrow{asset volatility}{$\sigma$}{The volatility of the risky asset.}{Agreed}{none}
+\nrow{expected asset return}{$\mu_s$}{The drift of the risky asset.}{Agreed}{none}
 \nrow{riskless rate}{$r$}{The return on the riskless asset.}{In use}{none}
-\nrow{liability volatility}{$\sigma_L$}{The volatility of the shock to liabilities.}{Proposed}{none}
-\nrow{return-liability correlation}{$c$}{The correlation between the risky return and the liability shock.}{Proposed}{none}
+\nrow{liability volatility}{$\sigma_L$}{The volatility of the shock to liabilities.}{Agreed}{none}
+\nrow{return-liability correlation}{$c$}{The correlation between the risky return and the liability shock.}{Agreed}{none}
 \nrow{net income on liabilities}{$\gamma$}{Income earned on liabilities, net of their cost.}{In use}{none}
 \nrow{liability drift}{$\mu_L$}{The drift of liabilities, $\gamma+r_L$.}{In use}{none}
 \nrow{deposit rate}{$r_L$}{The rate paid on liabilities.}{In use}{none}
@@ -131,9 +131,12 @@ Name & Symbol & Meaning & Status & Replaces \\
 \nrow{asymmetry parameter}{$\lambda_S$}{How much more the objective weighs a shortfall below the reference than a surplus above it.}{Agreed}{loss aversion}
 \nrow{shortfall penalty}{$\Lambda$}{The term of the objective that charges a shortfall below the reference. Zero when the asymmetry parameter is one.}{In use}{none}
 \nrow{reference}{$R$}{The level below which the shortfall penalty applies.}{In use}{none}
-\nrow{buffer variance}{$\zeta$}{The variance per unit of time of the capital buffer.}{Proposed}{z-volatility, capital buffer's volatility}
-\nrow{deficit limit}{$\nu_1^2$}{The limit of buffer variance at the distress boundary.}{Proposed}{saturation limits}
-\nrow{surplus limit}{$\nu_3^2$}{The limit of buffer variance deep in surplus.}{Proposed}{saturation limits}
+\nrow{expected discounted shortfall}{$W$}{The expected discounted shortfall below the reference under the optimal policy.}{In use}{none}
+\nrow{discounted injection count}{$N$}{The expected discounted number of issues under the optimal policy.}{In use}{none}
+\nrow{impulse operator}{$\mathcal MV$}{The value of issuing at once to the best target, net of both issuance costs.}{In use}{none}
+\nrow{buffer variance}{$\zeta$}{The variance per unit of time of the capital buffer.}{Agreed}{z-volatility, capital buffer's volatility}
+\nrow{deficit limit}{$\nu_1^2$}{The limit of buffer variance at the distress boundary.}{Agreed}{saturation limits}
+\nrow{surplus limit}{$\nu_3^2$}{The limit of buffer variance deep in surplus.}{Agreed}{saturation limits}
 \nrow{variance ratio}{$\lambda_V^4$, $\nu_1^2/\nu_3^2$}{The deficit limit over the surplus limit.}{Agreed}{volatility ratio}
 \nrow{induced variance asymmetry}{$\lambda_V$}{The asymmetry read off the variance ratio, distinct from the asymmetry parameter.}{Agreed}{none}
 \nrow{saturation scale}{$\theta$}{How sharply the variance of the discrete-time recursion moves between its deficit and surplus levels.}{In use}{none}
@@ -165,7 +168,7 @@ ID & Object & Role in the model & Counterpart and observation & Status & Evidenc
 \grow{G4}{$a_1$}{The floor on equity over risky assets, the solvency branch $(x-1)/a_1$ of the cap.}{The CET1 minimum of 4.5\% of risk-weighted assets, which is BCVW's baseline 0.045, or the Tier 1 minimum of 6.0\%. The bank's own ratio is reported as CET1 (\path{RBCT1CER}) or Tier 1 capital over risk-weighted assets. Banks electing the community bank leverage ratio report neither.}{Rule}{FDIC-Q5, FDIC-Q6, BCVW-Q9, BCVW-Q13, B3-Q1, B3-Q2, B3-D1, RCR-Q2, RCR-Q6, RCR-Q7, RCR-D1, MeasurementMap.solvency_iff, MeasurementMap.control_solvency_needs_positive_exposure}
 \grow{G5}{$a_2$}{Net 30-day outflows as a share of liabilities, in the liquidity branch $(x-a_2)/a_3$ of the cap.}{A run-off rate on all liabilities. BCVW's baseline 0.05 is the factor for stable insured retail deposits, and less stable retail deposits run off at 10\% or more. The LCR must be at least 100\%. No report read gives the rate.}{Rule}{BCVW-Q10, LCR-Q1, LCR-Q9, LCR-Q10, LCR-D1, MeasurementMap.lcr_iff, MeasurementMap.control_lcr_needs_positive_runoff}
 \grow{G6}{$a_3$}{The haircut on the risky asset in high-quality liquid assets, the slope $1/a_3$ of the liquidity branch.}{The riskless asset counts in full, as Level 1 assets do. The standard's haircuts are 15\% (Level 2A) and 25\% or 50\% (Level 2B). BCVW's baseline 0.30 is none of them. The 40\% cap on Level 2 assets and the 75\% cap on inflows are not in the model.}{Calibration}{BCVW-Q11, BCVW-Q12, BCVW-Q13, LCR-Q2, LCR-Q3, LCR-Q4, LCR-Q5, LCR-Q6, LCR-Q7, LCR-Q8, LCR-D2, LCR-D3, MeasurementMap.hqla_haircut, MeasurementMap.cap_iff}
-\grow{G7}{$q$}{The requirement on $x-1$, with $z=0$ at $x=1+q$.}{A floor $\ell_0$ on the leverage ratio is the floor $\ell_0/(1-\ell_0)$ on $x-1$, so the 3\% Tier 1 leverage ratio gives $q=3/97$ when Tier 1 equals book equity. This is a reading, and the bundle does not fix $q$. The $z$-volatility does not depend on $q$.}{Rule}{B3-Q7, RCR-Q4, MeasurementMap.leverage_req_iff, MeasurementMap.control_leverage_needs_l0_lt_one, MeasurementMap.zvol2_free_of_q}
+\grow{G7}{$q$}{The requirement on $x-1$, with $z=0$ at $x=1+q$.}{A floor $\ell_0$ on the leverage ratio is the floor $\ell_0/(1-\ell_0)$ on $x-1$, so the 3\% Tier 1 leverage ratio gives $q=3/97$ when Tier 1 equals book equity. This is a reading, and the bundle does not fix $q$. Buffer variance does not depend on $q$.}{Rule}{B3-Q7, RCR-Q4, MeasurementMap.leverage_req_iff, MeasurementMap.control_leverage_needs_l0_lt_one, MeasurementMap.zvol2_free_of_q}
 \grow{G8}{$\sigma$, $\mu_s$, $r$}{The volatility and drift of the risky asset and the riskless rate.}{No regulatory counterpart. BCVW's baseline is $\sigma=0.08$, $\mu=0.04$, $r=0.02$.}{Calibration}{BCVW-Q14}
 \grow{G9}{$\sigma_L$, $c$, $\gamma$, $\mu_L$, $r_L$}{The liability shock, its correlation with the risky return, the net income on liabilities, the liability drift and the deposit rate, with $\mu_L=\gamma+r_L$.}{No regulatory counterpart. BCVW's baseline is $\sigma_L=0.03$, $c=0.20$, $\gamma=0.02$, $\mu_L=0.03$.}{Calibration}{BCVW-Q14, M9}
 \grow{G10}{$\rho_L$}{The liability-net discount rate of the reduced problem.}{Formed from the shareholder discount rate, BCVW's baseline $\rho=0.12$. No regulatory counterpart.}{Calibration}{BCVW-Q14}
@@ -174,7 +177,7 @@ ID & Object & Role in the model & Counterpart and observation & Status & Evidenc
 \grow{G13}{$\lambda_S$}{The asymmetry parameter of the shortfall penalty.}{Not observed. The variance ratio carries no information about it. Locally identified together with $K$ from the barrier and the trigger.}{Unobserved}{K1, K2, M3, M6, M11}
 \grow{G14}{$y^*$}{The dividend barrier.}{The state at which the bank pays dividends (\path{EQCDIV}). Under the conservation buffer a bank with CET1 between 4.5\% and 7.0\% of risk-weighted assets has its distributions restricted, so observed payouts reflect the rule as well as the barrier.}{Output}{FDIC-Q8, M4, B3-Q4, B3-Q5, B3-Q6, B3-D3}
 \grow{G15}{$x_L$, $y_{\text{post}}$}{The recapitalisation trigger and the injection target.}{The state just before and just after a recapitalisation, measured as net stock issuance (\path{EQCSXQ}) plus capital from the parent holding company (\path{EQCBHCTR}), in quarters without merger-driven equity changes (\path{EQCMRG}).}{Output}{FDIC-Q9, FDIC-Q10, FDIC-Q12, FDIC-Q13, M5, M6, M7, M10}
-\grow{G16}{$\zeta$, $\nu_1^2$, $\nu_3^2$}{The $z$-volatility and its limits at the distress boundary and deep in surplus.}{The variance of changes in $z=\log((x-1)/q)$ near the distress boundary and deep in surplus. It does not depend on $q$.}{Output}{M2, M3, M8, MeasurementMap.zvol2_free_of_q}
+\grow{G16}{$\zeta$, $\nu_1^2$, $\nu_3^2$}{Buffer variance, with its deficit limit and its surplus limit.}{The variance of changes in $z=\log((x-1)/q)$ near the distress boundary and deep in surplus. It does not depend on $q$.}{Output}{M2, M3, M8, MeasurementMap.zvol2_free_of_q}
 \grow{G17}{$\nu_1^2/\nu_3^2$}{The deficit-to-surplus variance ratio, read in discrete time as $\lambda_V^4$.}{The ratio of the two variances of G16. Reading it as $\lambda_V^4$ is a definition.}{Output}{K1, M1, M3}
 \grow{G18}{$z_t$}{The discrete-time state, the log of equity over required capital $Q_t$.}{Tier 1 capital over 8.5\% of risk-weighted assets, the Tier 1 minimum plus the conservation buffer.}{Report}{FDIC-Q3, FDIC-Q4, B3-Q2, B3-Q4, M12}
 \grow{G19}{$g$}{The growth rate of required capital, exogenous in the model.}{Quarterly growth of risk-weighted assets.}{Report}{FDIC-Q3, M12}

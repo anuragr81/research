@@ -82,7 +82,7 @@
 \section{Introduction}
 
 The question is how an asymmetric penalty on a capital shortfall shapes a
-bank's recapitalisation policy and the volatility of its capital buffer.
+bank's recapitalisation policy and the variance of its capital buffer.
 The model treats recapitalisation as impulse control under a fixed issuance
 cost and a regulatory cap on risky exposure.
 
@@ -97,7 +97,7 @@ ID & Headline & Model rows & Scope note \\
 ID & Headline & Model rows & Scope note \\
 \midrule
 \endhead
-\krow{K1}{Under a binding regulatory cap, the ratio of the capital buffer's volatility deep in deficit to its volatility deep in surplus is fixed by the cap and carries no information about the asymmetry parameter $\lambda_S$.}{M1, M2, M3}{Holds wherever the optimal policy binds the cap near both ends of the state space, which is assumed and supported only by the numerical solve (Appendix~\ref{app:evidence}). Reading the discrete-time variance ratio as $\nu_1^2/\nu_3^2$ is a definition (Appendix~\ref{app:primitives}). Fails when $a_1\ge a_3$ or when the cap does not bind (M3). The cap is that of \citet{bayraktar2026}, and the constant volatility of the log coordinate on the solvency branch is not claimed new.}
+\krow{K1}{Under a binding regulatory cap, the ratio of the deficit limit to the surplus limit of buffer variance is fixed by the cap and carries no information about the asymmetry parameter $\lambda_S$.}{M1, M2, M3}{Holds wherever the optimal policy binds the cap near both ends of the state space, which is assumed and supported only by the numerical solve (Appendix~\ref{app:evidence}). Reading the discrete-time variance ratio as $\nu_1^2/\nu_3^2$ is a definition (Appendix~\ref{app:primitives}). Fails when $a_1\ge a_3$ or when the cap does not bind (M3). The cap is that of \citet{bayraktar2026}, and the constant buffer variance on the solvency branch is not claimed new.}
 \krow{K2}{The asymmetry parameter and the fixed issuance cost are locally identified from the dividend barrier and the recapitalisation trigger, because they move the trigger in opposite directions.}{M4, M5, M6, M7}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M6). The fixed cost is charged per unit of liabilities (Appendix~\ref{app:primitives}). The responses of the barrier and the target to the fixed cost alone are not claimed new.}
 
 \bottomrule
@@ -153,20 +153,20 @@ ID & Claim & Statement & Lean & Proof \\
 \midrule
 \endhead
 \mrow{M1}{The deficit-to-surplus variance ratio of the discrete-time recursion is $\lambda_V^4$, for every saturation scale.}{$V_0>0$, $\theta>0$, $\lambda_V>0$, $V(z)=V_0\exp\big(-2\log\lambda_V\tanh(z/\theta)\big)$ $\Rightarrow$ $V(-z)/V(z)\to\lambda_V^4$ as $z\to\infty$.}{RateBased.Vresp_ratio_eq, RateBased.tendsto_tanh_atTop, RateBased.saturated_ratio_tendsto, RateBased.saturated_ratio_lambda4}
-\mrow{M2}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there the $z$-volatility is the constant $\nu_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\nu_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
-\mrow{M3}{For any exposure policy that binds the cap near an end of the state space, the $z$-volatility tends to $\nu_1^2$ at the distress boundary and to $\nu_3^2$ deep in surplus.}{$q>0$, $0<a_1<a_3$, $a_2<1$. If $\pi(x)\,x=u(x)$ for all $x$ near $1^+$ then $\zeta(x)\to\nu_1^2$ as $x\to1^+$. If $\pi(x)\,x=u(x)$ for all large $x$ then $\zeta(x)\to\nu_3^2$ as $x\to\infty$. Both fail without $a_1<a_3$ or without binding.}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
+\mrow{M2}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there buffer variance is the constant deficit limit $\nu_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\nu_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
+\mrow{M3}{For any exposure policy that binds the cap near an end of the state space, buffer variance tends to the deficit limit $\nu_1^2$ at the distress boundary and to the surplus limit $\nu_3^2$ deep in surplus.}{$q>0$, $0<a_1<a_3$, $a_2<1$. If $\pi(x)\,x=u(x)$ for all $x$ near $1^+$ then $\zeta(x)\to\nu_1^2$ as $x\to1^+$. If $\pi(x)\,x=u(x)$ for all large $x$ then $\zeta(x)\to\nu_3^2$ as $x\to\infty$. Both fail without $a_1<a_3$ or without binding.}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
 \mrow{M4}{The dividend barrier rises in the asymmetry parameter and in the fixed issuance cost.}{$\theta\in\{\lambda_S,K\}$, $F=W$ or $N$. If $V''(y^*)=0$, $V'(y^*)=1$, $\Lambda'(y^*)=0$, $F'(y^*)=0$, $\sigma^2(y^*)>0$, $\rho_L\ne\mu'(y^*)$, $\partial_\theta V=-F$ and the chain rule holds along $y^*(\theta)$, then $dy^*/d\theta=\rho_LF(y^*)/(\rho_L-\mu'(y^*))$, positive when $0<\rho_L$, $\mu'(y^*)<\rho_L$ and $F(y^*)>0$.}{Identification.vppp_at_barrier, Identification.fpp_at_barrier, Identification.barrier_slope, Identification.barrier_slope_pos, Identification.control_barrier_sign_needs_gap, Envelope.wode_of_envelope, Envelope.node_of_envelope, Envelope.neumann_at_ystar}
 \mrow{M5}{The recapitalisation trigger rises in the asymmetry parameter and falls in the fixed issuance cost, the injection target rises in the fixed issuance cost, and the trigger-to-target gap widens in it.}{If $V''(x)\,dx/d\theta+\partial_\theta V'(x)=0$ along a boundary $x(\theta)$, $V''(x)\ne0$ and $\partial_\theta V'=-F'$, then $dx/d\theta=F'(x)/V''(x)$. With $W'(x_L)>0$, $N'(x_L),N'(y_{\text{post}})<0$ and $V''(x_L)>0>V''(y_{\text{post}})$, $dx_L/d\lambda_S>0$, $dx_L/dK<0$, $dy_{\text{post}}/dK>0$ and $d(y_{\text{post}}-x_L)/dK>0$.}{Identification.boundary_slope, Identification.trigger_rises_in_lambda, Identification.trigger_falls_in_K, Identification.target_rises_in_K, Identification.gap_increasing_in_K, Identification.control_trigger_slope_needs_curvature, Envelope.trigger_jump}
 \mrow{M6}{The Jacobian of the barrier and the trigger in the two parameters is non-singular, because the parameters move the trigger in opposite directions.}{$\det\partial(y^*,x_L)/\partial(\lambda_S,K)=\frac{\rho_L}{(\rho_L-\mu'(y^*))V''(x_L)}\big(W(y^*)N'(x_L)-N(y^*)W'(x_L)\big)$, negative under the signs of M4 and M5. For $a_{11},a_{12},a_{21}>0>a_{22}$, $a_{11}a_{22}-a_{12}a_{21}<0$. With $a_{22}>0$ it can vanish.}{Identification.det_formula, Identification.det_neg_of_opposite, Identification.det_neg, Identification.control_same_direction_can_fail}
 \mrow{M7}{The value function is convex just above the recapitalisation trigger, strictly so exactly when waiting is strictly suboptimal just below it.}{$\Psi=\rho_LV+\Lambda-(1+\kappa)\mu$. If $\sigma^2(x_L)>0$, $\tfrac12\sigma^2V''+\mu V'-\rho_LV-\Lambda=0$ at $x_L^+$, $V'(x_L)=1+\kappa$ and $\mu(1+\kappa)-\rho_LV-\Lambda\le0$ at $x_L$, then $\tfrac12\sigma^2V''(x_L^+)=\Psi(x_L)\ge0$, and $V''(x_L^+)>0\iff\Psi(x_L)>0$. With $\Psi(x_L)=0$, $V''(x_L^+)=0$.}{SecondOrder.psi_identity, SecondOrder.psi_nonneg_of_qvi, SecondOrder.trigger_convex, SecondOrder.trigger_strict_iff, SecondOrder.control_trigger_flat_when_psi_zero}
-\mrow{M8}{The log coordinate maps the state space onto the real line, with the requirement at zero and the distress boundary at minus infinity.}{$q>0$ $\Rightarrow$ $z$ is strictly increasing on $(1,\infty)$, $1+qe^{z(x)}=x$ for $x>1$, $z(1+qe^{w})=w$, $z(1+q)=0$, $z(x)\to-\infty$ as $x\to1^+$ and $z(x)\to\infty$ as $x\to\infty$.}{CapGeometry.zmap_inverse, CapGeometry.zmap_of_inverse, Coordinate.zmap_strictMonoOn, Coordinate.zmap_at_requirement, Coordinate.zmap_tendsto_atBot, Coordinate.zmap_tendsto_atTop}
+\mrow{M8}{The capital buffer maps the state space onto the real line, with required capital at zero and the distress boundary at minus infinity.}{$q>0$ $\Rightarrow$ $z$ is strictly increasing on $(1,\infty)$, $1+qe^{z(x)}=x$ for $x>1$, $z(1+qe^{w})=w$, $z(1+q)=0$, $z(x)\to-\infty$ as $x\to1^+$ and $z(x)\to\infty$ as $x\to\infty$.}{CapGeometry.zmap_inverse, CapGeometry.zmap_of_inverse, Coordinate.zmap_strictMonoOn, Coordinate.zmap_at_requirement, Coordinate.zmap_tendsto_atBot, Coordinate.zmap_tendsto_atTop}
 \mrow{M9}{Along the cap the drift of the state at the distress boundary is $r-r_L$, and when the drift there is positive the drift of $z$ diverges to plus infinity at that boundary.}{$a_1,a_3>0$, $a_2<1$, $\mu_L=\gamma+r_L$ $\Rightarrow$ $B(1)=r-r_L$. If $B(x)\to b_1>0$ as $x\to1^+$ then $B(x)/(x-1)\to\infty$. With $B\equiv-1$ it tends to $-\infty$.}{Coordinate.cappedDrift_at_one, Coordinate.zdrift_tendsto_atTop, Coordinate.control_zdrift_needs_positive_limit, BCVW.piBar_at_one, BCVW.piBar_mul_y}
 \mrow{M10}{The value function has no kink at the recapitalisation trigger.}{If $V\ge\mathcal MV$, $V(x_L)=\mathcal MV(x_L)$, $\mathcal MV$ is affine with slope $1+\kappa$, $V$ has right derivative $V'(x_L^+)$, $\sigma^2(x_L)>0$, and $V'(x_L^+)>1+\kappa$ would make $\tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0$ hold at $x_L$ for every $q$, then $V'(x_L^+)=1+\kappa$. If $\tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0$ is needed only for $q\le0$, it holds when $(1+\kappa)\mu\le\rho_LV+\Lambda$. Without $V\ge\mathcal MV$ a downward kink is possible.}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
 \mrow{M11}{At $\lambda_S=1$ the shortfall penalty vanishes identically, and for every $\lambda_S\ge1$ the running payoff is concave.}{$\Lambda(x)=(\lambda_S-1)(R-x)^+$ $\Rightarrow$ $\Lambda\equiv0$ at $\lambda_S=1$, and $-\Lambda$ is concave on $\mathbb R$ for $\lambda_S\ge1$. At $\lambda_S=0$, $R=0$ it is not concave.}{QVI_Part1.lambda_asymmetry_vanishes_at_one, QVI_Part1.neg_Lambda_concave, QVI_Part1.control_concavity_needs_lambda_ge_one}
 \mrow{M12}{Balanced growth of equity and requirement pins the return on equity, and the deficit persistence of the maintained model tends to one as growth vanishes, while the persistence asymmetry tends to the surplus payout rate.}{$b\ne0$, $1+g\ne0$ $\Rightarrow$ $\big((1+r_Eb)/(1+g)=1\iff r_E=g/b\big)$. $\phi^-=1-g(1-b)/b\to1$ as $g\to0^+$, strictly decreasing in $g$ for $0<b<1$. $\phi^--\phi^+=\delta_p+g-g/b\to\delta_p$.}{RateBased.balanced_growth_iff, RateBased.phi_minus_tendsto_one, RateBased.phi_minus_strictAnti, RateBased.persistence_asymmetry_eq, RateBased.persistence_asymmetry_tendsto, RateBased.control_identity_needs_retention, RateBased.control_persistence_needs_partial_retention}
 \mrow{M13}{The expected time below the requirement falls in the recovery drift and diverges as that drift vanishes.}{$d>0$ $\Rightarrow$ $m\mapsto d/m$ is strictly decreasing on $(0,\infty)$ and $d/m\to\infty$ as $m\to0^+$. At $d=0$ it is constant.}{RateBased.sojourn_strictAnti, RateBased.sojourn_tendsto_atTop, RateBased.control_sojourn_needs_positive_depth}
 \mrow{M14}{With a positive fixed issuance cost and a finite value, the discounted number of recapitalisations is finite, so the impulse terms of the verification argument converge absolutely.}{$K>0$, $e_i\ge0$, $K\sum_{i<n}e_i\le B$ for all $n$ $\Rightarrow$ $\sum_{i<n}e_i\le B/K$, $N=\sum_ie_i$ converges and $N\le B/K$. If also $|c_i|\le Ce_i$, $\sum_ic_i$ converges absolutely. With $K=0$, $e_i=1$ the cost bound holds and $N$ diverges.}{ImpulseCount.partial_sums_bounded, ImpulseCount.count_summable, ImpulseCount.count_le, ImpulseCount.impulse_sum_summable, ImpulseCount.control_count_needs_fixed_cost}
-\mrow{M15}{For every exposure policy that complies with the cap, binding or not, the $z$-volatility is at most the larger of $\sigma_L^2$ and $\nu_1^2$ everywhere, and deep in surplus at most the larger of $\sigma_L^2$ and $\nu_3^2$ up to any margin.}{$q>0$, $a_1>0$, $x>1$, $0\le\pi(x)$, $\pi(x)\,x\le u(x)$ $\Rightarrow$ $\zeta(x)\le\max\{\sigma_L^2,\nu_1^2\}$. If $a_3>0$, $a_2<1$ and compliance holds for all large $x$, then for every $\varepsilon>0$, $\zeta(x)\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ for all large $x$. Both fail with $\pi<0$ or with $\pi x>u(x)$.}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
+\mrow{M15}{For every exposure policy that complies with the cap, binding or not, buffer variance is at most the larger of $\sigma_L^2$ and the deficit limit $\nu_1^2$ everywhere, and deep in surplus at most the larger of $\sigma_L^2$ and the surplus limit $\nu_3^2$ up to any margin.}{$q>0$, $a_1>0$, $x>1$, $0\le\pi(x)$, $\pi(x)\,x\le u(x)$ $\Rightarrow$ $\zeta(x)\le\max\{\sigma_L^2,\nu_1^2\}$. If $a_3>0$, $a_2<1$ and compliance holds for all large $x$, then for every $\varepsilon>0$, $\zeta(x)\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ for all large $x$. Both fail with $\pi<0$ or with $\pi x>u(x)$.}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
 \mrow{M16}{With a fixed issuance cost and a linear proportional cost, the injection target does not depend on the state from which the bank injects.}{$\forall z\ \big(V(z)-(1+\kappa)z\le V(y)-(1+\kappa)y\big)\iff\forall z\ \big(V(z)-(1+\kappa)(z-x)-K\le V(y)-(1+\kappa)(y-x)-K\big)$, for every $x$. A target optimal from one $x$ is optimal from every $x'$. With the convex cost $(z-x)^2$ and $V(z)=2z$, the optimal target moves with $x$.}{Targeting.target_free_of_start, Targeting.target_same_for_all_starts, Targeting.control_target_moves_with_convex_cost}
 
 \bottomrule
@@ -248,10 +248,10 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
-\crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the saturation limits of the $z$-volatility are $\nu_1^2$ and $\nu_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$.}{M1, M2, M3, L1}
+\crow{C1}{Wherever the optimal policy binds the regulatory cap near both ends of the state space, the limits of buffer variance are the deficit limit $\nu_1^2$ and the surplus limit $\nu_3^2$. Their ratio involves $(\sigma,\sigma_L,a_1,a_3,c)$ only, so read as the variance ratio $\lambda_V^4$ it carries no information about $\lambda_S$.}{M1, M2, M3, L1}
 \crow{C3}{Under the hypotheses listed in Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M4, M5, M6, M7}
 \crow{C4}{The joint identification of C3 is new against the papers read and the literature search of 10 October 2026 recorded in \path{TODO.md}, whose leads were excluded at the level of their abstracts. \citet{bayraktar2026} have no fixed issuance cost and set the recapitalisation threshold exogenously (L5). The responses of the barrier and of the target to the fixed issuance cost alone are not claimed new.}{M6, L5}
-\crow{C2}{That the ratio $\nu_1^2/\nu_3^2$ of the two saturation limits under the two-branch regulatory cap carries no information about the asymmetry parameter is new. The constancy of $\nu_1^2$ on the solvency branch and the log coordinate are not claimed new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). The searches of 10 October 2026 recorded in \path{TODO.md} found no paper that could contain the result, their leads excluded at the level of their abstracts.}{M3, L1, L2, L3, L4}
+\crow{C2}{That the ratio $\nu_1^2/\nu_3^2$ of the deficit limit to the surplus limit under the two-branch regulatory cap carries no information about the asymmetry parameter is new. The constancy of buffer variance on the solvency branch and the capital buffer itself are not claimed new. Among the papers read, \citet{bayraktar2026} define the cap without evaluating these limits (L1), \citet{barberis2001} find the level of loss aversion silent in return volatility through a constant price-dividend ratio rather than a binding cap (L2), \citet{engle2018} assign observed volatility asymmetry to market exposure rather than mechanical leverage, for a news response rather than a ratio of variances (L3), and \citet{li2023} find preference parameters in the large-wealth limits of an unconstrained loss-averse control rather than a capped one (L4). The searches of 10 October 2026 recorded in \path{TODO.md} found no paper that could contain the result, their leads excluded at the level of their abstracts.}{M3, L1, L2, L3, L4}
 
 \bottomrule
 \end{longtable}
@@ -281,16 +281,17 @@ ID & Statement & Rows \\
 \label{app:proofs}
 
 \paragraph{Notation.} In discrete time $V(z)$ is the conditional variance of
-the shock at log buffer ratio $z$, with induced variance asymmetry
+the shock at capital buffer $z$, with induced variance asymmetry
 $\lambda_V>0$, saturation scale $\theta>0$ and level $V_0>0$. In continuous
-time $x\in(1,\infty)$ is the ratio of assets to liabilities, $q>0$ the ratio
-requirement, and $z(x)=\log\big((x-1)/q\big)$. The risky exposure is $\pi(x)$,
+time $x\in(1,\infty)$ is the assets-to-liabilities ratio, $q>0$ required
+capital as a ratio, and $z(x)=\log\big((x-1)/q\big)$. The risky exposure is $\pi(x)$,
 and the regulatory cap gives the capped exposure
 $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with crossing point
 $\bar x=(a_3-a_1a_2)/(a_3-a_1)$. The diffusion of $x$ is
 $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$,
-with $c$ the correlation between the risky return and the liability shock.
-The $z$-volatility is $\zeta(x)=z'(x)^2\,\sigma^2\big(x,\pi(x)\big)$, the
+with $\sigma$ the asset volatility, $\sigma_L$ the liability volatility and $c$ the
+return-liability correlation.
+Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2\big(x,\pi(x)\big)$, the
 exposure ratio is $\omega(x)=\pi(x)\,x/(x-1)$, and $\nu_i^2=\sigma^2/a_i^2-2c\sigma\sigma_L/a_i+\sigma_L^2$ for $i\in\{1,3\}$.
 For M4 to M6, $V$ is the value function, $y^*$ the dividend barrier, $x_L$
 the recapitalisation trigger and $y_{\text{post}}$ the injection target. $W$
@@ -430,7 +431,7 @@ writes their output to \path{VERIFICATION.md}.
 \path{lit/verify_lit.sh} runs the suite of every literature record.
 
 \paragraph{What Lean does not carry.} Two inputs enter the theorems as
-hypotheses or definitions. The $z$-volatility $\zeta$ is defined as
+hypotheses or definitions. Buffer variance $\zeta$ is defined as
 $z'(x)^2\sigma^2(x,\pi(x))$, and that this is the diffusion coefficient of
 $z(X_t)$ is Itô's formula, which is not proved (M2, M3). That the optimal
 policy binds the cap near both ends of the state space is a hypothesis of M3,
@@ -482,22 +483,33 @@ Term & Symbol & Meaning \\
 Term & Symbol & Meaning \\
 \midrule
 \endhead
-Induced variance asymmetry & $\lambda_V$ & The asymmetry read off the variance ratio, distinct from $\lambda_S$. \\
-Variance ratio & $\lambda_V^4$ & The ratio of conditional variances deep in deficit to deep in surplus (M1). \\
-Saturation scale & $\theta$ & How sharply the conditional variance moves between its deficit and surplus levels. \\
-Asymmetry parameter & $\lambda_S$ & The weight on shortfall below the reference in the objective. \\
-Regulatory cap & $u(x)$ & The capped exposure $\min\{(x-1)/a_1,(x-a_2)/a_3\}$. \\
+Assets-to-liabilities ratio & $x$ & Total assets over total liabilities, the state of the model. \\
+Required capital & $Q$, $q$ & The capital regulation requires, in dollars or as a ratio to liabilities. \\
+Capital buffer & $z$ & The log of equity over required capital, $\log((x-1)/q)$ (M8). \\
+Distress boundary & $x=1$ & The state at which equity is zero. \\
+Regulatory cap & $u(x)$ & The largest risky exposure regulation allows, $\min\{(x-1)/a_1,(x-a_2)/a_3\}$. \\
+Solvency branch & $(x-1)/a_1$ & The branch of the regulatory cap that binds for $x\le\bar x$ (M2). \\
+Liquidity branch & $(x-a_2)/a_3$ & The branch of the regulatory cap that binds for $x\ge\bar x$ (M2). \\
+Crossing point & $\bar x$ & The state at which the two branches are equal. \\
 Cap geometry & $a_1,a_2,a_3$ & The parameters of the regulatory cap. \\
-Solvency and liquidity regime & $x\le\bar x$, $x\ge\bar x$ & The ranges where the first and the second branch of $u$ bind (M2). \\
-$z$-volatility & $\zeta(x)$ & The squared diffusion coefficient of $z$ (Appendix~\ref{app:evidence}). \\
-Saturation limits & $\nu_1^2,\nu_3^2$ & The limits of $\zeta$ at the distress boundary and deep in surplus (M3). \\
+Asset volatility & $\sigma$ & The volatility of the risky asset. \\
+Expected asset return & $\mu_s$ & The drift of the risky asset. \\
+Liability volatility & $\sigma_L$ & The volatility of the shock to liabilities. \\
+Return-liability correlation & $c$ & The correlation between the risky return and the liability shock. \\
+Asymmetry parameter & $\lambda_S$ & The weight on shortfall below the reference in the objective. \\
+Buffer variance & $\zeta(x)$ & The squared diffusion coefficient of the capital buffer (Appendix~\ref{app:evidence}). \\
+Deficit limit & $\nu_1^2$ & The limit of buffer variance at the distress boundary (M3). \\
+Surplus limit & $\nu_3^2$ & The limit of buffer variance deep in surplus (M3). \\
+Variance ratio & $\lambda_V^4$ & The ratio of conditional variances at the distress boundary to deep in surplus (M1). \\
+Induced variance asymmetry & $\lambda_V$ & The asymmetry read off the variance ratio, distinct from $\lambda_S$. \\
+Saturation scale & $\theta$ & How sharply the conditional variance moves between its deficit and surplus levels. \\
 Fixed issuance cost & $K$ & The cost of an issue that does not scale with its size, per unit of liabilities (Appendix~\ref{app:primitives}). \\
+Proportional issuance cost & $\kappa$ & The cost of an issue per unit raised. \\
 Dividend barrier & $y^*$ & The state at which dividends are paid. \\
 Recapitalisation trigger & $x_L$ & The state at which capital is raised. \\
 Injection target & $y_{\text{post}}$ & The state reached by an issue. \\
 Expected discounted shortfall & $W$ & $\mathbb E_x\int_0^\infty e^{-\rho_Lt}(R-X_t)^+dt$ under the optimal policy, $-\partial_{\lambda_S}V$. \\
 Discounted injection count & $N$ & $\mathbb E_x\sum_ie^{-\rho_L\tau_i}$ under the optimal policy, $-\partial_KV$. \\
-Proportional issuance cost & $\kappa$ & The cost of an issue per unit raised. \\
 Impulse operator & $\mathcal MV$ & The value of issuing at once to the best target, net of both issuance costs. \\
 \bottomrule
 \end{longtable}
@@ -515,8 +527,9 @@ depend on it.
 
 \paragraph{The variance ratio in continuous time.} \path{PROOFS_v2.tex}
 reads the discrete-time $\lambda_V^4$ of M1 in the continuous-time model as
-$\nu_1^2/\nu_3^2$, identifying the conditional variance $V(z)$ deep in
-deficit and deep in surplus with the two saturation limits of $\zeta$. This
+$\nu_1^2/\nu_3^2$, identifying the conditional variance $V(z)$ at the
+distress boundary and deep in surplus with the deficit limit and the surplus
+limit. This
 is a definition, not a result, and no theorem connects the discrete-time
 recursion to the continuous-time diffusion. C1 depends on it.
 

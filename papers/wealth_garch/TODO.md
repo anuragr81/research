@@ -250,6 +250,17 @@ grounds.
   capital buffer's volatility) leave K1, M2, M3, M8 and M15, the
   manuscript's Terminology section takes the map's names, and the
   retired-name check extends from the summary to the whole manuscript.
+- 2026-10-13. The author agreed the nine Proposed names; all are now
+  Agreed. The retired names left K1, M2, M3, M8, M15, C1, C2, the
+  appendices and map row G7 and G16. The manuscript's Terminology section
+  uses only the map's names (MM-13) and gained the assets-to-liabilities
+  ratio, capital buffer, distress boundary, the two branches, the crossing
+  point and the four volatility and return names. The map gained rows for
+  W, N and the impulse operator, which the glossary already used. MM-12
+  checks retired names across both documents, exempting literature rows and
+  sentences that cite a paper (C2 keeps Barberis et al.'s own "loss
+  aversion"). writing_discipline.md section 6 records the new names.
+  Alternatives may be considered later (author).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
