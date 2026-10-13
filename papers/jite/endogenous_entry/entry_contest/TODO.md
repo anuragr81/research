@@ -959,6 +959,14 @@ paper's claims, and only then write the manuscript.
   cross-references in the WP recorded (FL-D1 to FL-D3). Still to read for
   C12/C13: Coate and Loury 1993 (on Drive), Fryer and Loury 2005 (w10104
   cached); for C7: Fu and Lu 2009 (PDF needed).
+  Fu and Lu read 13 Oct 2026 (author's upload `Contest_invest0212.pdf`, the
+  accepted manuscript of Feb 2009), `lit/fu_lu_2009/`, row L26,
+  `lean/mathlib/FuLu.lean` (21 theorems). Not a precedent for C7 (continuous
+  investment, everyone competes); C7's \pend now names no paper. Their
+  Proposition 1(ii) fails for K ≥ 4 (exact bound (K-1)(K+1)^2/(4K^3)), the
+  derivative of Φ on p.6 is misprinted, the K = 3 candidate never survives a
+  deviation to zero (Prop 1(iv) compares efforts, not payoffs), so
+  Corollaries 1-2 fail. Author to decide whether C7 moves to the settled table.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
