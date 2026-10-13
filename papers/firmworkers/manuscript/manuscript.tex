@@ -49,13 +49,6 @@ When displaced workers value income at its average, those who choose the return 
 
 The scale of the upskilling cost and the shape of utility are not yet fixed.
 
-\subsection*{Why displaced workers choose the lottery}
-A worker chooses the lottery only after losing a job to creative destruction. Workers who keep their jobs never sustain a pool, because the lottery creates no income and the richest entrant does better outside.
-
-The downgrade pays the bottom income, the lowest on the ladder. When no partner's former income less the lottery cost falls below the bottom income, the lottery does at least as well as the downgrade, whatever the shape of utility. Even a displaced worker who dislikes risk has no reason to take the downgrade, so the cause is the bottom income, not a taste for risk. When displaced workers value income at its average, the return can beat the lottery only within one band of ranks. Where the upskilling cost exceeds the income it buys back, the return is no better than the downgrade, and under the same condition the lottery is no worse than either. With a cost exponent above one, this case, once it holds at a rank, holds at every higher rank as the loss grows.
-
-The source attributes the choice to an S-shaped utility that favours risk after large losses, whereas in the model the bottom income suffices. The firm prefers upskilling, because spending on it flows back to the firm whereas lottery spending is lost to it.
-
 The terms are those of the terminology table in the measurement map. Each sentence records in \texttt{claims.yaml} the rows, Lean theorems or source premise it rests on.
 
 {\small
@@ -85,6 +78,18 @@ M34 & For every nondecreasing $u$ the lottery is worth less to a richer displace
 M35 & For $b>1$, the risk-neutral return to the former job, worth $x_i-(x_i-x_0)^b$, beats the downgrade exactly when the loss $x_i-x_0$ is less than one unit of income, so the comparison depends on the unit in which income is measured & $x_0<x_i$, $b>1$, cost $C(x_0,x_i)=(x_i-x_0)^b$ (M7) & consequence of the displacement decided in M32 & A control theorem in the same file shows a loss of $1/2$ returns and the same loss measured as $2$ does not. The cost of M7 has no scale, which the manuscript does not address & Lean \nolinkurl{Isc.return_vs_downgrade}, Listing A.9 (\nolinkurl{Displacement.lean}), lines 86--93; Lean \nolinkurl{Isc.return_beats_downgrade_iff}, Listing A.9 (\nolinkurl{Displacement.lean}), lines 74--84 & \texttt{LEAN\_PROVED} \\ \midrule
 M37 & With partial closure, $0<\sigma<1$, and two status groups with different numbers of entrants, no random reassignment of the entrants' former jobs gives each entrant the closure-weighted chances of M29: those chances assign the former job of an entrant with total probability one exactly when $\sigma=0$ or the groups have equal numbers of entrants & a finite pool with two status groups, each with at least one entrant; chances $w_{ik}/\sum_{j\ne i}w_{ij}$ with $w_{ik}=1$ within a group and $1-\sigma$ across; any probability distribution over reassignments of the former jobs & consequence of the lottery rule decided in M36 and the closure form decided in M29 & Any reassignment assigns each former job with total probability one (Isc.reassignment\_column\_sum). The closure chances of an entrant's former job sum to $1+\frac{(1-\sigma)n_o\sigma(n_k-n_o)}{r_kr_o}$, with $n_k,n_o$ the entrants in the job's group and in the other, $r_k=n_k-1+(1-\sigma)n_o$ and $r_o=n_o-1+(1-\sigma)n_k$ (Isc.closure\_column\_sum, Isc.closure\_column\_sum\_eq\_one\_iff). With two entrants in one group and one in the other at $\sigma=1/2$, the lone entrant's former job would be claimed with total probability $2/3$ (control). M25, M26 and M31 are unaffected; the formula of M27 describes chances no reassignment realises when the groups differ in size & Lean \nolinkurl{Isc.closure_chances_infeasible}, Listing A.10 (\nolinkurl{Reassignment.lean}), lines 163--177; Lean \nolinkurl{Isc.closure_column_sum}, Listing A.10 (\nolinkurl{Reassignment.lean}), lines 95--161; Lean \nolinkurl{Isc.closure_column_sum_eq_one_iff}, Listing A.10 (\nolinkurl{Reassignment.lean}), lines 58--81 & \texttt{LEAN\_PROVED} \\ \midrule
 \end{longtable}}
+
+\section{Idea summaries}
+Each idea summary states one idea of the model in plain words. Every sentence records in \texttt{claims.yaml} the rows, Lean theorems or source premise it rests on, and uses the terms of the terminology table. \texttt{check.py} fails when a row or theorem statement a summary cites changes, until the summary is reviewed and re-stamped, so the summaries move with the claims.
+
+\subsection{Why displaced workers choose the lottery}
+A worker chooses the lottery only after losing a job to creative destruction. Workers who keep their jobs never sustain a pool, because the lottery creates no income and the richest entrant does better outside the pool.
+
+For a displaced worker, the downgrade pays the bottom income, the lowest on the ladder. When no partner's former income less the lottery cost falls below the bottom income, the lottery does at least as well as the downgrade, whatever the shape of utility. Under that condition even a displaced worker who dislikes risk has no reason to take the downgrade, so the bottom income, not the source's S-shaped utility, drives the choice between the lottery and the downgrade.
+
+Where the upskilling cost is at least the income climbed back to the former job, the return is worth no more than the downgrade, and so, under the condition on partners' former incomes, no more than the lottery. With a cost exponent of at least one, the ranks at which the upskilling cost is at least the income climbed lie above all the others, since the income climbed rises with rank.
+
+The firm prefers upskilling to the lottery, because spending on upskilling flows back to the firm whereas spending on the lottery is lost to the firm.
 
 \section{Literature claims}
 {\small

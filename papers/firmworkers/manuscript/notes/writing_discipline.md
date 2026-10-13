@@ -105,6 +105,14 @@ that world out. A claim that cannot name its falsifier does not enter.
   sentence on model rows, Lean theorems or a verbatim source premise, and
   `check.py` keeps it within 270 to 310 words, free of colons, dashes and
   symbols.
+- Idea summaries (`claims.yaml`, `idea_summaries`; section Idea summaries of
+  the skeleton) follow the same rules, each with its own word range. They stay
+  in step with the claims at all times (author, 13 Oct 2026).
+  `summary_stamps.yaml` holds a fingerprint of every row and theorem statement
+  each summary (and the model summary) cites; `check.py` fails when one
+  changes or a new one is cited. Review the sentences resting on it, revise
+  them, and only then run `check.py --restamp`. Restamping without the review
+  defeats the check.
 
 ## 7. Mechanism before prose (S)
 

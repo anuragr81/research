@@ -173,19 +173,27 @@ def references_table(data, cited):
     return f"\\begin{{longtable}}{{{col([2.7, 5.0, 5.4, 5.4, 1.8, 2.6])}}}\n\\toprule {head}\n" + '\n'.join(rows) + "\n\\end{longtable}"
 
 
-def plain_block(d, key, title):
+def plain_block(sentences, title, numbered=False):
     paras = {}
-    for sent in d.get(key) or []:
+    for sent in sentences:
         paras.setdefault(sent['para'], []).append(escape_text(sent['text']))
     body = '\n\n'.join(' '.join(v) for _, v in sorted(paras.items()))
-    return f'\\subsection*{{{title}}}\n' + body
+    return f'\\subsection{"" if numbered else "*"}{{{title}}}\n' + body
 
 
 def summary_text(d):
-    return (plain_block(d, 'summary', 'The model in plain English') + '\n\n'
-            + plain_block(d, 'lottery_cause', 'Why displaced workers choose the lottery') + '\n\n'
+    return (plain_block(d.get('summary') or [], 'The model in plain English') + '\n\n'
             'The terms are those of the terminology table in the measurement map. '
             'Each sentence records in \\texttt{claims.yaml} the rows, Lean theorems or source premise it rests on.')
+
+
+def idea_summaries(d):
+    blocks = '\n\n'.join(plain_block(i['sentences'], escape_text(i['title']), numbered=True)
+                         for i in d.get('idea_summaries') or [])
+    return ('Each idea summary states one idea of the model in plain words. Every sentence records in '
+            '\\texttt{claims.yaml} the rows, Lean theorems or source premise it rests on, and uses the terms of '
+            'the terminology table. \\texttt{check.py} fails when a row or theorem statement a summary cites '
+            'changes, until the summary is reviewed and re-stamped, so the summaries move with the claims.\n\n' + blocks)
 
 
 def vocab(d):
@@ -252,6 +260,9 @@ Headline and concluding claims may rest only on model claims, literature claims 
 
 {{\small
 {model_table(by_status(d, 'LEAN_PROVED', 'LEAN_WRITTEN'))}}}
+
+\section{{Idea summaries}}
+{idea_summaries(d)}
 
 \section{{Literature claims}}
 {{\small

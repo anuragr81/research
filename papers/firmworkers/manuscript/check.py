@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 import subprocess
@@ -16,7 +17,8 @@ ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
 QUOTE_ROW = re.compile(r'^\|\s*[A-Z][A-Z0-9]*-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
 CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
-PLAIN_BLOCKS = {'summary': (270, 310), 'lottery_cause': (180, 220)}
+PLAIN_BLOCKS = {'summary': (270, 310)}
+STAMPS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'summary_stamps.yaml')
 SUMMARY_MARKS = {':': 'colon', '\u2014': 'dash', '\u2013': 'dash', ' - ': 'dash', '$': 'symbol'}
 PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED', 'DECIDED'), 'decision': ('DECIDED',),
              'waits_on': ('OPEN',), 'rows': ('OPEN',)}
@@ -419,12 +421,82 @@ def check_terms(data, mmap, errors, notes):
 
 
 def check_summary(data, lean_text, source, entries, errors, notes):
-    for key, bounds in PLAIN_BLOCKS.items():
-        check_plain(data, key, bounds, lean_text, source, entries, errors, notes)
+    blocks = {key: (data.get(key) or [], bounds) for key, bounds in PLAIN_BLOCKS.items()}
+    ideas = data.get('idea_summaries') or []
+    if not ideas:
+        errors.append('idea_summaries: missing')
+    for idea in ideas:
+        iid = str(idea.get('id', '')).strip()
+        key = f'idea:{iid}'
+        if not re.fullmatch(r'[a-z][a-z_]*', iid):
+            errors.append(f'idea summary {iid!r}: id must be lower case with underscores')
+            continue
+        if key in blocks:
+            errors.append(f'{key}: duplicate id')
+        if not str(idea.get('title', '')).strip():
+            errors.append(f'{key}: no title')
+        words = idea.get('words') or []
+        if len(words) != 2 or not words[0] < words[1]:
+            errors.append(f'{key}: words must be [min, max]')
+            continue
+        blocks[key] = (idea.get('sentences') or [], tuple(words))
+    for key, (summ, bounds) in blocks.items():
+        check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes)
+    check_stamps(blocks, data, lean_text, errors, notes)
 
 
-def check_plain(data, key, bounds, lean_text, source, entries, errors, notes):
-    summ = data.get(key) or []
+def theorem_statement(full_name, files):
+    namespace, _, short = full_name.rpartition('.')
+    for t in files.values():
+        if re.search(r'\bnamespace\s+' + re.escape(namespace) + r'\b', t):
+            m = re.search(r'\b(?:theorem|lemma)\s+' + re.escape(short) + r"(?![\w.'])(.*?):=", t, re.S)
+            if m:
+                return ' '.join(m.group(1).split())
+    return None
+
+
+def cited_fingerprint(item, data, lean_text):
+    rows = {c['id']: c for c in data['model'] + data['literature']}
+    if item in rows:
+        body = repr([(f, rows[item].get(f)) for f in ('status', 'claim', 'lean', 'decision', 'quote', 'page')])
+    elif item.startswith('Isc.'):
+        body = theorem_statement(item, lean_text) or ''
+    else:
+        return None
+    return hashlib.sha256(body.encode()).hexdigest()[:12]
+
+
+def check_stamps(blocks, data, lean_text, errors, notes):
+    now = {}
+    for key, (summ, _) in blocks.items():
+        items = sorted({str(r) for s in summ for r in s.get('rests_on') or []})
+        for i in items:
+            if i.startswith('Isc.') and theorem_statement(i, lean_text) is None:
+                errors.append(f'{key}: cannot read the statement of {i} to stamp it')
+        now[key] = {i: h for i in items if (h := cited_fingerprint(i, data, lean_text))}
+    if '--restamp' in sys.argv:
+        with open(STAMPS, 'w', encoding='utf8') as fh:
+            fh.write('# Written by check.py --restamp after each summary was reviewed against the rows and\n'
+                     '# theorem statements it cites. Source anchors are pinned by the source PDF instead.\n')
+            yaml.safe_dump(now, fh, sort_keys=True, allow_unicode=True)
+        notes.append(f'stamps written for {len(now)} summaries')
+        return
+    saved = {}
+    if os.path.exists(STAMPS):
+        with open(STAMPS, encoding='utf8') as fh:
+            saved = yaml.safe_load(fh) or {}
+    for key, items in now.items():
+        old = saved.get(key)
+        if old is None:
+            errors.append(f'{key}: not stamped; review it against its claims, then run check.py --restamp')
+            continue
+        changed = sorted(i for i, h in items.items() if old.get(i) != h)
+        if changed:
+            errors.append(f'{key}: {", ".join(changed)} changed or newly cited since the last review; '
+                          'review the sentences resting on them, then run check.py --restamp')
+
+
+def check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes):
     if not summ:
         errors.append(f'{key}: missing')
         return
