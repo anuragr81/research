@@ -135,8 +135,8 @@ where the parallel ends).
   {M16, M17, M18, M19, M20, M21, M22}
   {The absence of an interior minimum is Ryvkin and Drugov's Karlin step
   applied to the gain, with the score gap in place of the noise density, and
-  the message that no such prediction is universal is theirs (C14). What may
-  be new is the uniform case and the conditions on the base score (C7).}
+  the message that no such prediction is universal is theirs (C14). What is
+  new is the uniform case and the conditions on the base score (C7).}
 \krow{K7}{Those who pay take the prize with a probability that does not fall
   as more of them pay. It equals $\frac{k^*+1}{Q+1}$ when paying buys nothing,
   and it does not rise, nor does the number who pay, as the rule weighs talent
@@ -146,8 +146,8 @@ where the parallel ends).
   outside the model (Appendix~\ref{app:primitives}). The directions in the
   weight on talent hold for every law of talent and of the bought component,
   with the incumbent scored by the same rule. That the number who pay does not
-  rise as the rule weighs talent more is new (C12); whether the share as a
-  function of how many pay is new is pending (C13).}
+  rise as the rule weighs talent more is new (C12), and so is the share as a
+  function of how many pay (C13).}
 \end{longtable}
 \normalsize
 
@@ -511,20 +511,29 @@ quote.}\\
   fixed prize, no rank and no fee, and the number assigned moves with the
   standard.}
   {Lowering the standard may reduce investment incentives, however, because the favored workers see themselves as likely to succeed without acquiring the relevant skills.}{1221}{M6, M28, C6, C10, C12, C13}
+\lrow{L29}{CorcoranKarels1985}{Identical players bet continuously in a Tullock
+  lottery with free entry. The count is set by the lottery's exponent $r$, by
+  the commitment assumed, or by a minimum bet. With a minimum bet $Z$, which the
+  paper reads as a fixed entry fee, every entrant bets $Z$ and wins with
+  probability $1/n$, so entry continues while $nZ\le X$. That is the bound of
+  M10 binding, because those who do not bet cannot win. Under hit-and-run entry
+  several counts are stable equilibria, because incumbents choose among a range
+  of pre-emptive bets, not because entrants differ. There is no wealth and no
+  spread of entry costs. The record in \path{lit/corcoran_karels_1985} adds a
+  closed form for the hardball count and lists misprints.}
+  {In such a case, instead of a minimum bet requirement there is a fixed entry fee}{232}{M6, M10, C5, C6, C13}
 \end{longtable}
 \normalsize
 
-A paper cited in our other documents and not read is not in the table, and
-every claim made about it is unverified. It is \citet{CorcoranKarels1985}.
+Papers that \path{LITERATURE.tex} classifies from their abstracts only are not
+in the table, and no row rests on them.
 
 \section{Conclusions}
 
-The conclusions come in two tables. Table~\ref{tab:concl} holds the claims
-that rest on the model rows and on papers read in full, including a claim that
-something is new once every paper it waited on has been read (C7, C8, C12).
-Table~\ref{tab:pending} holds the claims that something is new that still wait
-on a paper not yet read in full, or on a comparison not yet done, and says
-which. The novelty
+Table~\ref{tab:concl} holds the conclusions, each resting on the model rows
+and on papers read in full. A claim that something is new entered the table
+once every paper it waited on had been read. The last was
+\citet{CorcoranKarels1985}, which settled C5, C6 and C13 (L29). The novelty
 reading is pass~7 of \path{TODO.md}.
 
 \footnotesize
@@ -569,6 +578,28 @@ reading is pass~7 of \path{TODO.md}.
   always an equilibrium. Who enters is pinned only under the further condition
   of M7.}
   {M5, M6, M7, M8, L2, L3, L4}
+\crow{C5}{The sign rule of C1 is new. None of the entry papers read signs the
+  effect of a spread of wealth, or of entry costs, on the number of entrants
+  at a fixed number of potential entrants. In \citet{CorcoranKarels1985}, whose
+  players are identical, the count is set by the lottery's exponent, the
+  commitment assumed or a minimum bet (L29).}
+  {M13, L2, L3, L4, L5, L6, L7, L23, L24, L29}
+\crow{C6}{Count invariance across pure-strategy equilibria with heterogeneous
+  entry costs is new. The entry papers read have identical entrants (Levin and
+  Smith, Morgan, Orzen and Sefton, Fu, Jiao and Lu, Fu and Lu, Corcoran,
+  Corcoran and Karels), a random count
+  under private costs (Moreno and Wooders), or, in Fullerton and McAfee, a count
+  that differs across equilibria. Mathews and Namoro fix the number of
+  strategic entrants at two. In the continuum model of Fryer and Loury, with a
+  binary investment and heterogeneous costs, the investment rate is unique and
+  the investors are the agents below a cost threshold (L25); with finitely many
+  contestants the count is pinned while the identities need not be (M6, M7).
+  In the continuum model of Coate and Loury the investment rate need not be
+  unique, because the employer's standard responds to the rate it expects
+  (L28); with the rule fixed, as here, that channel is absent. Under
+  hit-and-run entry Corcoran and Karels find several stable counts, because
+  incumbents choose among pre-emptive bets, not because entrants differ (L29).}
+  {M6, M7, L2, L3, L4, L5, L6, L7, L23, L24, L25, L28, L29}
 \crow{C7}{Beyond what C14 credits to Ryvkin and Drugov, two statements about the
   gain from entry are new. With a uniform base score the gain never falls in
   the number of challengers, because the peak of the score gap sits at the top
@@ -635,49 +666,6 @@ reading is pass~7 of \path{TODO.md}.
   C9's: a fixed prize awarded by rank, a fixed fee, and every law of talent and
   of the bought component.}
   {M16, M28, L8, L20, L22, L25, L27, L28}
-\crow{C14}{The first entrant's gain is $V\,\mathbb E[\varphi(M)]$, with $M$ the
-  best rival's score (M1). This is the form of the marginal benefit of
-  \citet{RyvkinDrugov2020}, the noise density at the best rival's shock, with
-  the score gap $\varphi$ in place of the density. Their Karlin step, with
-  the law of $M$ in place of $F^{k-1}$, gives M17, no interior minimum in the
-  number of challengers when $\varphi$ is single-peaked. Their remark that
-  with many players the comparative statics follow the upper tail is what M21
-  makes precise for the gain.}
-  {M1, M17, M21, L8}
-\end{longtable}
-
-\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
-\caption{Claims pending verification. Each says what it waits on.}
-\label{tab:pending}\\
-\toprule
-\textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
-\midrule
-\endhead
-\bottomrule
-\endfoot
-\crow{C5}{The sign rule of C1 is new. None of the entry papers read signs the
-  effect of a spread of wealth, or of entry costs, on the number of entrants
-  at a fixed number of potential entrants. \pend{\citet{CorcoranKarels1985}, an
-  entry paper that is not read.}}
-  {M13, L2, L3, L4, L5, L6, L7, L23, L24}
-\crow{C6}{Count invariance across pure-strategy equilibria with heterogeneous
-  entry costs is new. The entry papers read have identical entrants (Levin and
-  Smith, Morgan, Orzen and Sefton, Fu, Jiao and Lu, Fu and Lu, Corcoran), a random count
-  under private costs (Moreno and Wooders), or, in Fullerton and McAfee, a count
-  that differs across equilibria. Mathews and Namoro fix the number of
-  strategic entrants at two. In the continuum model of Fryer and Loury, with a
-  binary investment and heterogeneous costs, the investment rate is unique and
-  the investors are the agents below a cost threshold (L25); with finitely many
-  contestants the count is pinned while the identities need not be (M6, M7).
-  In the continuum model of Coate and Loury the investment rate need not be
-  unique, because the employer's standard responds to the rate it expects
-  (L28); with the rule fixed, as here, that channel is absent.
-  \pend{\citet{CorcoranKarels1985}, not read.}}
-  {M6, M7, L2, L3, L4, L5, L6, L7, L23, L24, L25, L28}
 \crow{C13}{The share of the prize taken by those who enter, as a function of
   how many enter, and its comparative statics are new in the entry literature.
   In every entry model read, those who do not enter cannot win, so the share
@@ -692,10 +680,21 @@ reading is pass~7 of \path{TODO.md}.
   comparative statics. In \citet{CoateLoury1993} those who do not invest can
   reach the better job and the assignment rate is split between investors and
   non-investors, but the number of places moves with the standard and the
-  investors' share is not analysed (L28).
-  \pend{\citet{CorcoranKarels1985}, not read.}}
-  {M31, L2, L3, L4, L5, L6, L7, L23, L24, L25, L28}
+  investors' share is not analysed (L28). In the minimum-bet case of Corcoran
+  and Karels every entrant wins with probability $1/n$ and those who do not
+  bet cannot win (L29).}
+  {M31, L2, L3, L4, L5, L6, L7, L23, L24, L25, L28, L29}
+\crow{C14}{The first entrant's gain is $V\,\mathbb E[\varphi(M)]$, with $M$ the
+  best rival's score (M1). This is the form of the marginal benefit of
+  \citet{RyvkinDrugov2020}, the noise density at the best rival's shock, with
+  the score gap $\varphi$ in place of the density. Their Karlin step, with
+  the law of $M$ in place of $F^{k-1}$, gives M17, no interior minimum in the
+  number of challengers when $\varphi$ is single-peaked. Their remark that
+  with many players the comparative statics follow the upper tail is what M21
+  makes precise for the gain.}
+  {M1, M17, M21, L8}
 \end{longtable}
+
 \normalsize
 
 \appendix
@@ -1652,12 +1651,12 @@ R1.3 & Results were asserted beyond uniform distributions without proof. &
   answered & Every row holds for general laws of $r$ and $s$ unless it names a
   family or a class, and the rows that do say so (M18 to M22, M27). \\
 R1.4 & The contribution is not located against contests with entry costs,
-  positional education and status competition. & partly answered & The
-  literature table (L1 to L19) places each result. L14 to L16 place the
+  positional education and status competition. & answered & The
+  literature table (L1 to L29) places each result. L14 to L16 place the
   status reading against Weber's distinction of class from status, and L17 to
   L19 against access to positions, closure and opportunity hoarding (C10).
-  The novelty reading of the remaining papers is pending, and Table~\ref{tab:pending} says
-  what each novelty claim waits on. \\
+  The novelty reading is complete, and every claim that something is new
+  rests on papers read in full (Table~\ref{tab:concl}). \\
 R1.4 & The mobility ceiling reflects the uniform specification. & answered &
   The ceiling is replaced by a bound for every $Q$ and every law, with no
   limit taken (M10). \\
