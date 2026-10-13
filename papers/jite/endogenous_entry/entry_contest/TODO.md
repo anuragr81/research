@@ -969,6 +969,13 @@ paper's claims, and only then write the manuscript.
   Corollaries 1-2 fail. Author to decide whether C7 moves to the settled table. Decided 13 Oct 2026
   (author: "If C7 is decided - move it away from pending"): C7 is now in the
   settled table after C4; K6's scope note no longer calls it pending.
+  Fryer and Loury 2005 read 13 Oct 2026 in full as NBER WP 10104 (2003),
+  `lit/fryer_loury_2003/`, row L27, `lean/mathlib/FryerLouryTournament.lean`
+  (11 theorems). The blind rule's zero-effort pool, which still competes, grows
+  with the aggressiveness of the target: M28's direction for a redistribution
+  target. C12 narrowed to "for a rule that weighs talent more"; its \pend now
+  names only Coate and Loury 1993. The paper asserts the pool's growth; the
+  Lean file derives it under the hazard-rate order. Three slips (FT-D1 to D3).
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
