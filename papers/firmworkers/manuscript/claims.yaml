@@ -70,6 +70,39 @@ summary:
     text: 'The scale of the upskilling cost and the shape of utility are not yet fixed.'
     rests_on: ['M35', 'M19']
 
+# Why workers choose the lottery in the model, about 200 words, same rules as the summary.
+lottery_cause:
+  - para: 1
+    text: 'A worker chooses the lottery only after losing a job to creative destruction.'
+    rests_on: ['M32']
+  - para: 1
+    text: 'Workers who keep their jobs never sustain a pool, because the lottery creates no income and the richest entrant does better outside.'
+    rests_on: ['M10', 'M12', 'M24', 'M30']
+  - para: 2
+    text: 'The downgrade pays the bottom income, the lowest on the ladder.'
+    rests_on: ['M32', 'M3']
+  - para: 2
+    text: 'When no partner''s former income less the lottery cost falls below the bottom income, the lottery does at least as well as the downgrade, whatever the shape of utility.'
+    rests_on: ['M33']
+  - para: 2
+    text: 'Even a displaced worker who dislikes risk has no reason to take the downgrade, so the cause is the bottom income, not a taste for risk.'
+    rests_on: ['M33']
+  - para: 2
+    text: 'When displaced workers value income at its average, the return can beat the lottery only within one band of ranks.'
+    rests_on: ['Isc.return_set_interval']
+  - para: 2
+    text: 'Where the upskilling cost exceeds the income it buys back, the return is no better than the downgrade, and under the same condition the lottery is no worse than either.'
+    rests_on: ['Isc.top_displaced_prefer_lottery']
+  - para: 2
+    text: 'With a cost exponent above one, this case, once it holds at a rank, holds at every higher rank as the loss grows.'
+    rests_on: ['Isc.cost_exceeds_regain_upward', 'Isc.loss_and_cost_rise_with_rank']
+  - para: 3
+    text: 'The source attributes the choice to an S-shaped utility that favours risk after large losses, whereas in the model the bottom income suffices.'
+    rests_on: ['anchor: higher risk-taking for higher losses', 'M33']
+  - para: 3
+    text: 'The firm prefers upskilling, because spending on it flows back to the firm whereas lottery spending is lost to it.'
+    rests_on: ['anchor: flows back to the firm as upskilling investments', 'anchor: rather than being diverted into the social lottery channel']
+
 model:
   - id: M1
     anchor: 'Appendix, condition 3: "pareto income list x0 (1 - i)^{-1/a} for 1 <= i <= N"'

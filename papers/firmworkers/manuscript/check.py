@@ -16,7 +16,7 @@ ALLOWED_AXIOMS = {'propext', 'Classical.choice', 'Quot.sound'}
 LIGATURES = {'\ufb00': 'ff', '\ufb01': 'fi', '\ufb02': 'fl', '\ufb03': 'ffi', '\ufb04': 'ffl'}
 QUOTE_ROW = re.compile(r'^\|\s*[A-Z][A-Z0-9]*-\d+\s*\|\s*(\d+)\s*\|\s*"(.+?)"\s*\|', re.M)
 CHECKED = {'LEAN_PROVED', 'LEAN_WRITTEN'}
-SUMMARY_WORDS = (270, 310)
+PLAIN_BLOCKS = {'summary': (270, 310), 'lottery_cause': (180, 220)}
 SUMMARY_MARKS = {':': 'colon', '\u2014': 'dash', '\u2013': 'dash', ' - ': 'dash', '$': 'symbol'}
 PLACEMENT = {'repaired_by': ('ILL_POSED',), 'affects': ('UNDERSPECIFIED', 'DECIDED'), 'decision': ('DECIDED',),
              'waits_on': ('OPEN',), 'rows': ('OPEN',)}
@@ -419,17 +419,22 @@ def check_terms(data, mmap, errors, notes):
 
 
 def check_summary(data, lean_text, source, entries, errors, notes):
-    summ = data.get('summary') or []
+    for key, bounds in PLAIN_BLOCKS.items():
+        check_plain(data, key, bounds, lean_text, source, entries, errors, notes)
+
+
+def check_plain(data, key, bounds, lean_text, source, entries, errors, notes):
+    summ = data.get(key) or []
     if not summ:
-        errors.append('summary: missing')
+        errors.append(f'{key}: missing')
         return
     status = {c['id']: c['status'] for c in data['model']}
     lit_status = {c['id']: c['status'] for c in data['literature']}
     words = sum(len(str(s.get('text', '')).split()) for s in summ)
-    if not SUMMARY_WORDS[0] <= words <= SUMMARY_WORDS[1]:
-        errors.append(f'summary: {words} words, outside {SUMMARY_WORDS[0]} to {SUMMARY_WORDS[1]}')
+    if not bounds[0] <= words <= bounds[1]:
+        errors.append(f'{key}: {words} words, outside {bounds[0]} to {bounds[1]}')
     for k, s in enumerate(summ, 1):
-        tag = f'summary sentence {k}'
+        tag = f'{key} sentence {k}'
         text = str(s.get('text', '')).strip()
         if not text:
             errors.append(f'{tag}: empty')
@@ -462,7 +467,7 @@ def check_summary(data, lean_text, source, entries, errors, notes):
                     errors.append(f'{tag}: Lean theorem {r} not declared')
             else:
                 errors.append(f'{tag}: cannot rest on {r!r}')
-    notes.append(f'summary: {words} words in {len(summ)} sentences')
+    notes.append(f'{key}: {words} words in {len(summ)} sentences')
 
 
 def cited_map_rows(data):

@@ -364,6 +364,23 @@ theorem tails_gamble_example :
   rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) by norm_num, Real.rpow_natCast, Real.rpow_natCast, Real.rpow_natCast]
   norm_num
 
+theorem cost_exceeds_regain_upward {κ b ℓ₁ ℓ₂ : ℝ} (hκ : 0 ≤ κ) (hb : 1 ≤ b) (h1 : 0 < ℓ₁)
+    (h12 : ℓ₁ ≤ ℓ₂) (h : 1 ≤ κ * ℓ₁ ^ (b - 1)) : 1 ≤ κ * ℓ₂ ^ (b - 1) := by
+  have hp : ℓ₁ ^ (b - 1) ≤ ℓ₂ ^ (b - 1) := Real.rpow_le_rpow h1.le h12 (by linarith)
+  nlinarith [mul_le_mul_of_nonneg_left hp hκ]
+
+theorem scale_free_return_beats_step {b δ x : ℝ} (hb : 1 < b) (hδ0 : 0 < δ) (hδ1 : δ < 1)
+    (hx : 0 < x) : (1 - δ) * x < x - x * δ ^ b := by
+  have h : δ ^ b < δ ^ (1 : ℝ) := Real.rpow_lt_rpow_of_exponent_gt hδ0 hδ1 hb
+  rw [Real.rpow_one] at h
+  nlinarith [mul_lt_mul_of_pos_left h hx]
+
+theorem control_step_beats_scale_free_return_below_unit {b δ x : ℝ} (hb : b < 1) (hδ0 : 0 < δ)
+    (hδ1 : δ < 1) (hx : 0 < x) : x - x * δ ^ b < (1 - δ) * x := by
+  have h : δ ^ (1 : ℝ) < δ ^ b := Real.rpow_lt_rpow_of_exponent_gt hδ0 hδ1 hb
+  rw [Real.rpow_one] at h
+  nlinarith [mul_lt_mul_of_pos_left h hx]
+
 theorem control_mobility_falls_in_b_below_unit :
     returnFromLoss 1 2 0 (1 / 2) < returnFromLoss 1 3 0 (1 / 2) := by
   unfold returnFromLoss
