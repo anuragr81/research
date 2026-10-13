@@ -949,6 +949,16 @@ paper's claims, and only then write the manuscript.
   Liu and Lu 2019, Kawamura and Moreno de Barreda 2014, Hvide and Kristiansen
   2003, Konrad 2002, Cornell and Welch 1996, Moro and Norman 2003.
   C7, C12, C13 \pend notes now name these papers.
+  Fryer and Loury read 13 Oct 2026 in full as NBER WP 16568 (2010),
+  `lit/fryer_loury_2010/`, row L25, `lean/mathlib/FryerLoury.lean`
+  (13 theorems). Verdict: C13 narrowed to the payers' share as a function of
+  how many pay in a finite contest with a fixed prize, and its comparative
+  statics (they have the group gap in a continuum with priced slots); C10
+  cites their laissez-faire direction; C12 cites their draft conjecture that
+  blind rationing lowers investment (p.26, "(I think!)"). Three wrong
+  cross-references in the WP recorded (FL-D1 to FL-D3). Still to read for
+  C12/C13: Coate and Loury 1993 (on Drive), Fryer and Loury 2005 (w10104
+  cached); for C7: Fu and Lu 2009 (PDF needed).
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
@@ -1516,7 +1526,7 @@ be claimed as novel.
 | P-MU | **DOES NOT SURVIVE as such** | Kernel is RD's (RD-4); "no universal sign" is theirs; S12 limits the both-signs claim to induced `F,G` numerics. Both signs are now exhibited exactly in Lean (`fosd_does_not_sign`, 7 Oct 2026), which leaves the verdict unchanged |
 | `Delta(0, .)` rises and then falls in `Q` when `phi` is single-peaked (revised 9 Oct 2026, pass 7) | **DOES NOT SURVIVE as a result; the score-technology side is a CANDIDATE (minor), pending** | M1 writes the gain as `V E[phi(M)]` with `M` the best rival's score, the form of RD's `b_k = E[f(X_(k-1:k-1))]`, and RD's Karlin step (p.1597) with `u = phi` and `H = C G^(Q-1)` gives M17 (`weight_tp2`, `pmu_orientation`, `karlin_ratio`; `lit/ryvkin_drugov_2020/NOTES.md` pass 3). M21 makes precise RD's remark that large-`k` comparative statics follow the upper tail (p.1601). What may remain: M18 (a uniform base score puts the peak of `phi` at the top of the outsiders' support, where RD's kernel cannot vanish) and M19 (primitive conditions on `r`, `s` for a single-peaked `phi`). No precedent found at the abstract level, 9 Oct 2026 |
 | The count, and the payers' share, fall as the rule weighs talent more (M28) (revised 10 Oct 2026 after reading Drugov and Ryvkin) | **CANDIDATE on the entry margin; pending only a search of binary pre-contest investment** | Both entry margins read have the opposite sign: Morgan, Tumlinson and Vardy (L20, exact logistic instance in `MeritocracyLogistic.lean`) and Drugov and Ryvkin's free-entry extension (WP 256 Section 5.3, L22: the less dispersed noise has weakly fewer entrants). The cause is the effort margin: effort rises as noise falls and competes away the rents of entry. M28's sign equals their intensive margin (effort falls with dispersion, Prop 1). The universal-versus-none contrast with the number of players is theirs (L8, L22) |
-| The paying class's share of the prize, as a function of how many pay (M31) (added 9 Oct 2026) | **CANDIDATE, pending** | In every entry model read (L2 to L7, L24) non-entrants cannot win, so the share is not defined there; in Mathews and Namoro (L23) non-strategic contestants fill the remaining places and can win without choosing, the strategic count is fixed at two and no share is analysed. Here outsiders compete on the base score. Binary contests (Ghosh and Kleinberg) and contests with pre-contest investment are the places to look; not searched beyond abstracts |
+| The paying class's share of the prize, as a function of how many pay (M31) (added 9 Oct 2026; narrowed 13 Oct 2026 by Fryer and Loury, L25) | **CANDIDATE, pending; narrowed** | Fryer and Loury (WP 2010) have a binary investment where non-investors compete and derive the group gap in slots, in a continuum with priced slots; what remains is the share as a function of how many pay in a finite contest with a fixed prize, and its comparative statics. In every entry model read (L2 to L7, L24) non-entrants cannot win, so the share is not defined there; in Mathews and Namoro (L23) non-strategic contestants fill the remaining places and can win without choosing, the strategic count is fixed at two and no share is analysed. Here outsiders compete on the base score. Binary contests (Ghosh and Kleinberg) and contests with pre-contest investment are the places to look; not searched beyond abstracts |
 | The incumbent abstains while a challenger enters only inside the band (M30) (added 9 Oct 2026) | **SURVIVES (minor) as an answer to R2.1; not a novelty claim** | A corollary of M6 and M7 for `Q+1` symmetric players (`incumbent_out_iff`) |
 | Count invariance fails with ability rising in wealth (M29) (added 9 Oct 2026) | **Scope result, not a novelty claim** | Same phenomenon as Fullerton and McAfee's `two_sizes` (L5): the gain depends on who enters |
 | The mechanism (wealth sorts entry via concavity) | **DOES NOT SURVIVE** | Lazear–Rosen (1981) §III; Schroyen–Treich (2016) privilege contest |

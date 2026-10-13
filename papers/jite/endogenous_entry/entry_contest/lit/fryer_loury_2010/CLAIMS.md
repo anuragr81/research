@@ -1,0 +1,67 @@
+# Claims about Fryer and Loury (2010)
+
+**Source.** Roland G. Fryer, Jr. and Glenn Loury, "Valuing Identity", NBER
+Working Paper 16568 (December 2010), 28 printed pages and a figure, downloaded
+from nber.org; read in full [F]. It was published as "Valuing Diversity",
+*Journal of Political Economy* 121(4), 747-774 (2013), which is not checked.
+Pages are the printed pages; the printed page is the PDF page minus 2. Cited
+in `MANUSCRIPT.tex` (row L25) and in `refs.bib` as `FryerLoury2010`. Each
+quotation is checked verbatim, on the page named, against the extracted text.
+The results we use are proved in `lean/mathlib/FryerLoury.lean` (see `LEAN`).
+
+## Quotations
+
+| ID | Page | Quotation | What we rely on |
+|---|---|---|---|
+| FL-1 | 5 | "Imagine a world where “agents” are assigned to “slots” to produce “widgets.”" | The model |
+| FL-2 | 5 | "Although our model is simple — a continuum of positions in a hierarchy" | A continuum, not a finite contest |
+| FL-3 | 5 | "At the ex ante stage agents, distinguished by their identity and effort cost (i, c), choose whether or not to exert effort." | A binary investment before assignment |
+| FL-4 | 5 | "We imagine these costs to encompass everything that hinders or helps individuals invest in skills: peer and neighborhood effects, innate ability, quality of schooling, and so on." | Costs stand for endowments generally, not wealth |
+| FL-5 | 6 | "is taken to be a noisy function of prior effort at the individual level." | Those who do not invest still compete |
+| FL-6 | 8 | "So, a disadvantaged group would be underrepresented (holding a fraction of the slots that is less than their fraction in the population), since their effort costs are higher (Assumption 1), and effort is productive (Assumption 2)." | The group gap under laissez-faire |
+| FL-7 | 8 | "Lemma 1 shows that an efficient assignment of workers to slots is top-down" | Assignment by rank |
+| FL-8 | 11 | "In competitive equilibrium, this private incentive equals the social return from greater effort, ensuring efficiency." | Theorem 2 |
+| FL-9 | 11 | "That is, given any z, there is a greater fraction of group b workers assigned to slots at or below z." | The group gap formula |
+| FL-10 | 20 | "Rather than a measure of status inequality, in this simple model Assumption 1 will ensure that there are a smaller fraction of Bs assigned to jobs relative to As." | The two-job version |
+| FL-11 | 21 | "So, a blind ex post preference lowers productivity standards by moving from “select the very best” to “select those who are good enough.”" | Blind policy rations at random |
+| FL-12 | 24 | "The efficient policy subsidizes human capital investment for all agents" | Proposition 1 |
+
+## Results in Lean (`lean/mathlib/FryerLoury.lean`, namespace `FryerLoury2010`)
+
+| Result | Lean | What is proved |
+|---|---|---|
+| Mixtures and the group gap (pp.7, 11) | `pop_mix`, `group_gap`, `group_gap_pos`, `group_gap_of_costs` | the population law is the mixture at the population effort rate; the gap between the groups' cumulative shares is `(π_a - π_b)(F_0 - F_1)`, positive when group a invests more and effort raises productivity; a cost order at the common return gives it |
+| Lemma 1, the exchange step (p.8) | `assignment_monotone` | if swapping two agents' slots cannot raise surplus, the more productive holds the higher slot |
+| Corollary 1 (p.9) | `cor1` | with the payment rule of eq. (5), the worker's payoff rises in productivity at the rate of the slot's effectiveness |
+| The private return to effort (proof of Theorem 2, p.11) | `gain_by_parts` | `∫ W (f_1 - f_0) = ∫ W' ΔF` on a bounded support where `ΔF` vanishes at both ends |
+| The two-job version (pp.20-22) | `alphaC_lt_one`, `Rcon_zero_iff`, `R_hasDerivAt`, `R_deriv_pos` | the rationing probability of eq. (14) is below one; eq. (17) is the target rate as rationing times the willing-buyer rate; footnote 12's derivative, and its sign when group b's hazard at the ceiling is above the population's |
+| The investors' share of slots (not in the paper) | `investor_share_eq`, `investor_share_gt` | in the two-job version investors hold slots in proportion to their number when effort does not change productivity at the threshold, and more than that when it raises it |
+
+Not formalised: that the likelihood-ratio orders of Assumptions 1 and 2 imply
+the distribution orders (pp.6-7; hypotheses in the Lean file), Theorem 1's
+payment schedule, the change of variables that completes Theorem 2, Lemma 2,
+Theorems 3 and 4, and Proposition 1.
+
+## Reading recorded
+
+| ID | Page | Text | Our reading |
+|---|---|---|---|
+| FL-D1 | 16 | "Theorem 2 says that no explicit skills subsidy should be used to efficiently promote the access of a disadvantaged group to scarce positions when identity is fully contractible." | The result described is Theorem 3, the sighted case; Theorem 2 is laissez-faire |
+| FL-D2 | 20 | "a universal skills subsidy is the optimal group-sighted affirmative action policy." | The sentence follows Theorem 4, which is about a blind environment; "group-blind" is meant |
+| FL-D3 | 23 | "Thus, by Lemma 2, the efficient blind policy is defined by the optimization problem" | The blind problem is Lemma 3's; Lemma 2 is the sighted one |
+| FL-D4 | 26 | "On the other hand, blindness lowers investment rate in both groups (I think!)" | A conjecture in a draft passage of the concluding remarks, not derived. It is the direction of M28: random assignment above a threshold lowers the return to investing |
+
+## Comparison with the model rows
+
+Fryer and Loury's structure is the closest found to ours. Effort is binary,
+productivity after effort has law `F_1` and without it `F_0`, and agents who
+do not invest still compete. In our model these are the entrant and outsider
+score laws `F` and `G`. Their gap between groups with different cost laws is
+the counterpart of the class gap of M31 and C10. Three things differ:
+
+- their agents form a continuum and slots are priced in a market, so there is
+  no count of payers, no fixed prize and no equilibrium set to pin down (M5,
+  M6);
+- there is no weight on talent, so nothing corresponds to M28;
+- they study policy between identity groups and do not derive the investors'
+  share as a function of how many invest, which is M31's `ξ(k)`.
