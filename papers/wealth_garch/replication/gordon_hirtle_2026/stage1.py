@@ -15,7 +15,7 @@ import statsmodels.api as sm
 
 ITEMS = ["RSSD9001", "RSSD9348", "RSSD9101", "BHCK2170", "BHCK4340", "BHCKB511", "BHCKB508", "BHCK3217",
          "BHCK4356", "BHCK3579", "BHCK3580", "BHCK4782", "BHCK4783", "BHCK4460", "BHCK3210",
-         "BHCK8274", "BHCKA223", "BHCA8274", "BHCAA223", "RSSD9364"]
+         "BHCK8274", "BHCKA223", "BHCA8274", "BHCAA223", "RSSD9364", "RSSD9346"]
 CONSERVATION = {2016: 0.625, 2017: 1.25, 2018: 1.875}
 
 
@@ -55,7 +55,7 @@ def load(path):
     for r in reader:
         if len(r) < len(hdr) or not r[col["RSSD9001"]].strip().isdigit():
             continue
-        rec = {k: (r[col[k]].strip() if k in ("RSSD9101",) else num(r[col[k]])) for k in ITEMS if k in col}
+        rec = {k: (r[col[k]].strip() if k in ("RSSD9101", "RSSD9346") else num(r[col[k]])) for k in ITEMS if k in col}
         out.append(rec)
     return year, out, "RSSD9348" in col
 
@@ -166,7 +166,11 @@ def main(cpi_path, rel_path, paths):
               f"bank-years passing the other rules -> {'at least 97%' if share_agree >= 0.97 else 'below 97%'}")
         late = [b for b in sample if b["year"] >= 2021]
         print(f"reported: 2021-2024 bank-years {len(late)}, of which top-tier in 2020 {sum(b['id'] in top2020 for b in late)}")
+    report(sample)
 
+
+def report(sample):
+    years = sorted({b["year"] for b in sample})
     print("\nR1 medians over years of aggregate component / aggregate adjusted prior equity (%)")
     for key, theirs in (("earn", 11.6), ("iss", 2.5), ("div", 4.7), ("rep", 4.2)):
         annual = []

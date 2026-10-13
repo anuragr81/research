@@ -339,6 +339,18 @@ grounds.
   source not identified. Open for the author: whether to investigate the
   sample difference under a new pre-registration, and stage 2 (their
   findings on the common bank dataset).
+- 2026-10-13. Gordon and Hirtle sample-size difference
+  (PREREG_stage1_3.md, PREREG_stage1_4.md; results_stage1_3.md,
+  results_chart2.md). C1, bank holding companies only, drops 319 savings
+  and loan holding companies and 16 intermediate holding companies (the
+  2012 jump) and is adopted: primary sample 7,508 bank-years, and the
+  dividend share now reproduces (85.4%). Their Chart 2, read by pixel,
+  sits 11 to 48 a year below our C1 counts in every year, 30 on average,
+  evenly over time; C2 (GDP deflator) and C3 (continuity) do not close it
+  and are not adopted. The first draft states our rule, theirs as
+  written, and the remaining gap; every result except the count reproduces
+  in every candidate sample. Writing to the authors is optional, not a
+  dependency (author).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
