@@ -309,6 +309,15 @@ grounds.
   says), and by every bank quarterly from 2001. FFIEC CDR bulk files
   answer (HTTP 200); the FFIEC NIC Y-9C download page refuses scripted
   access (HTTP 403).
+- 2026-10-13. Common bank dataset fetched and pinned
+  (`common_data/`, PREREG_common_data.md, results_common_data.md): 41
+  yearly files, 1984-2024, 1,656,057 rows, 39 fields. All five coverage
+  expectations hold; a same-day refetch of 2024 is byte-identical. From
+  2020 about 35-38% of commercial banks report RWAJT = 0 (community bank
+  leverage ratio), so tests treat RWAJT <= 0 as missing. RBCT2 starts in
+  1990, EQCTRSTX in 2001. MM-14 reproduces the coverage on every run.
+  Next: Gordon and Hirtle (needs FR Y-9C, possibly a manual download),
+  or Mankart, Michaelides and Pagratis, which runs on this dataset.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the

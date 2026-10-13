@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from verify_manuscript import lean_declarations, macro_calls, split_list, strip_comments
+from verify_manuscript import lean_declarations, macro_calls, order_problem, run_under, split_list, strip_comments
 from computed import code_block, pin_mismatches, reproduce
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -218,6 +218,15 @@ cited = sorted({i for r in macro_calls(strip_comments(tex), "trow", 6) for i in 
 for f in cited:
     ok, detail = reproduce(f)
     check(f"MM-7 {f}", ok, detail)
+
+print("-" * 72)
+print("MM-14 the common bank dataset reproduces from its pinned files, fetched after its pre-registration")
+common = "common_data/results_common_data.md"
+ok, detail = reproduce(common)
+check(f"MM-14 {common} reproduces", ok, detail)
+pres = run_under(common)
+check("MM-14 it names its pre-registration, committed before it",
+      pres and not any(order_problem(p, common) for p in pres), f"{pres}")
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass MM-1 to MM-4 and MM-6; a faulty one must fail every rule")
