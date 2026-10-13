@@ -5,7 +5,8 @@ Working Paper 16568 (December 2010), 28 printed pages and a figure, downloaded
 from nber.org; read in full [F]. It was published as "Valuing Diversity",
 *Journal of Political Economy* 121(4), 747-774 (2013), which is not checked.
 Pages are the printed pages; the printed page is the PDF page minus 2. Cited
-in `MANUSCRIPT.tex` (row L25) and in `refs.bib` as `FryerLoury2010`. Each
+in `MANUSCRIPT.tex` (row L25) and in `refs.bib` as `FryerLoury2010`; the
+published version, `FryerLoury2013`, is recorded in the last section. Each
 quotation is checked verbatim, on the page named, against the extracted text.
 The results we use are proved in `lean/mathlib/FryerLoury.lean` (see `LEAN`).
 
@@ -65,3 +66,56 @@ the counterpart of the class gap of M31 and C10. Three things differ:
 - there is no weight on talent, so nothing corresponds to M28;
 - they study policy between identity groups and do not derive the investors'
   share as a function of how many invest, which is M31's `ξ(k)`.
+
+## Published version: "Valuing Diversity", JPE 121(4), 747-774 (2013)
+
+Read in full on 13 October 2026 [F] from the author's Drive upload
+`Fryer&Loury_JPE2013.pdf`. The file is the journal's page proofs of 8 June 2013
+(Achorn International, 28 proof pages and a page of queries to the authors),
+cached at `~/.cache/entry_contest/fryer_loury_2013_jpe.pdf`. Pages below are
+proof pages. The final journal pagination (747-774, the same length) and any
+corrections made after the proofs are not checked. `verify_fryer_loury.py`
+checks each quotation verbatim on its proof page.
+
+| ID | Page | Quotation | What we rely on |
+|---|---|---|---|
+| FLP-1 | 1 | "When agent identity is contractible, efficient policy grants preferred access to slots but offers no direct assistance for acquiring skills." | The sighted result |
+| FLP-2 | 3 | "With no policy intervention the disadvantaged will be less than proportionally represented among slot owners, compared to their presence in the population, since agents face a common slots price in market equilibrium." | The group gap |
+| FLP-3 | 6 | "We take it that there is a fixed measure of slots" | Scarce positions |
+| FLP-4 | 6 | "agents who do not purchase a slot are assumed to earn a payoff that is independent of productivity" | The outside option |
+| FLP-5 | 6 | "The two stages of the model are linked because productivity is taken to be a noisy function of prior skill investment at the individual level" | Non-investors still compete |
+| FLP-6 | 6 | "In most settings in which affirmative action policies are employed, such as college admissions, the scarce positions for which agents compete are allocated administratively and are not auctioned to the highest bidders." | Footnote 7: the market is an abstraction |
+| FLP-7 | 8 | "Only the agents with cost c that is no greater than the anticipated net benefit from investment" | A cost threshold: investors are the lowest-cost agents |
+| FLP-8 | 11 | "So, the equation can have at most one solution" | Proposition 1: a unique investment rate |
+| FLP-9 | 11 | "That is, B’s invest in skills at the ex ante stage and acquire slots at the ex post stage at a lower rate than A’s in equilibrium." | The group slot rates |
+| FLP-10 | 5 | "the efficient blind ex post stage policy is a mix of competitive bidding and random assignment of slots" | Theorem 1 |
+| FLP-11 | 26 | "That is, under blind affirmative action the optimal ex ante policy entails a universal skill subsidy whenever B’s are relatively more prevalent on the development margin than they are on the slot assignment margin." | The ex ante condition |
+| FLP-12 | 27 | "In our simple and transparent laboratory—two jobs, supply-demand allocation late, rational skill acquisition early, and a heterogeneous population" | The published model is the two-job one |
+
+**Working paper against published version.**
+- *Model.* The working paper assigns every agent to a continuum of slots
+  `z ∈ [0,1]` with payoff `µβ(z)`. The published version has a fixed measure
+  `θ < 1` of slots sold to the highest bidders, payoff `max{m − p, 0} − cs`, and
+  zero for those without a slot: the working paper's two-job special case made
+  the model.
+- *Results.*
+  - Proposition 1 adds that the laissez-faire investment rate is unique
+    (FLP-8).
+  - The slot rates `ξ_a > θ > ξ_b` are stated (FLP-9).
+  - The sighted result is a fixed slot subsidy.
+  - The blind ex post policy is Theorem 1, a lottery of free slots plus a
+    price floor, under a concave `f_1/f_0` (FLP-10).
+  - The ex ante condition is the working paper's.
+- *Dropped.* The working paper's draft conjecture on blindness and investment
+  (FL-D4) and its three wrong cross-references (FL-D1 to FL-D3) are gone.
+
+| Result | Lean | What is proved |
+|---|---|---|
+| Group slot rates (proof p.11) | `jpe_slot_rates` | with a common price, `ξ_b < θ < ξ_a` when group a invests more and effort raises productivity at the price |
+| Proposition 1, uniqueness (proof pp.10-11) | `jpe_unique_rate` | a strictly increasing cost quantile and a non-increasing return cross at most once |
+| Footnote 10 (proof p.16) | `fn10_convex` | the second derivative of y is positive where `r'' < 0` |
+| The example of proof pp.16-18 | `jpe_example_v`, `jpe_example_v2`, `jpe_example_v_signs` | the printed first and second derivatives of v, and their signs |
+
+Not formalised for the published version: Theorem 1's optimality argument and
+the derivatives on proof pp.24-25.
+

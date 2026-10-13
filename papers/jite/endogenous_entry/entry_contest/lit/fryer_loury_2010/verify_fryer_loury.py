@@ -69,6 +69,25 @@ flip = "so a disadvantaged group would be overrepresented"
 check("FL-C1 control: FL-6 with under- replaced by over- is not in the text", flip not in norm(" ".join(pages)))
 check("FL-C2 control: FL-6 is not on the first page", norm(rows[5][2]) not in norm(pages[0]))
 
+PUB = pathlib.Path.home() / ".cache" / "entry_contest" / "fryer_loury_2013_jpe.pdf"
+PUB_SHA = "365d04fa5484130075279a2684d57bc4948ab97a4421a6576c1992eb3fff3b09"
+prow = re.findall(r"^\|\s*(FLP-\d+)\s*\|\s*(\d+)\s*\|\s*\"(.+?)\"\s*\|", claims, re.M)
+check("FL-P0 the published-version quotation rows are present", len(prow) >= 12, f"{len(prow)} rows")
+if not PUB.exists():
+    check("FL-P1 the page proofs are available", False, f"download them from Drive to {PUB}")
+else:
+    d = hashlib.sha256(PUB.read_bytes()).hexdigest()
+    check("FL-P1 the page proofs are the ones read", d == PUB_SHA, d[:16])
+    pt = shutil.which("pdftotext")
+    pub = subprocess.run([pt, "-layout", str(PUB), "-"], capture_output=True, text=True).stdout.split("\f")
+    check("FL-P2 the text is the JPE article", "Valuing Diversity" in pub[0] and "vol. 121, no. 4" in pub[0],
+          f"{len(pub)} pages")
+    for rid, page, quote in prow:
+        p = int(page)
+        check(f"{rid} (proof p.{page}) is on the page verbatim", 1 <= p <= len(pub) and norm(quote) in norm(pub[p - 1]))
+    check("FL-PC control: the working paper's conjecture is not in the published version",
+          "i think" not in norm(" ".join(pub)))
+
 ROOT = HERE.parent.parent
 PROJ = ROOT / "lean" / "mathlib"
 LSRC = PROJ / "FryerLoury.lean"

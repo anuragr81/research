@@ -982,6 +982,14 @@ paper's claims, and only then write the manuscript.
   proposition numbers and statements as the draft; three draft typos corrected
   in print; no two-rank result. L9's \unv removed (page 1327); C8 moved to the
   settled table; C2's draft caveat removed.
+  Fryer and Loury, "Valuing Diversity", read 13 Oct 2026 as the JPE page proofs
+  of 8 June 2013 (author's upload `Fryer&Loury_JPE2013.pdf`), added to
+  `lit/fryer_loury_2010/` (FLP-1 to FLP-12, 44 checks) and to
+  `FryerLoury.lean` (19 theorems). Published model = the WP's two-job case;
+  unique LF investment rate. L25 now cites FryerLoury2013; C12's conjecture
+  sentence names the WP; C6 gains the continuum contrast (unique rate,
+  threshold identities) against our finite count invariance; C13's \pend now
+  names only Coate-Loury and Corcoran-Karels.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of

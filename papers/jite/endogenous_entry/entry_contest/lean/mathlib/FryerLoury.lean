@@ -30,6 +30,11 @@ through a market.  With a fraction `π` exerting effort the productivity law is
    of slots is `π` when effort does not change productivity at the margin, and exceeds
    `π` when it raises it (`investor_share_eq`, `investor_share_gt`).
 
+7. The published version (JPE 2013, read as page proofs): the group slot rates
+   `ξ_a > θ > ξ_b` (`jpe_slot_rates`), uniqueness of the laissez-faire investment rate
+   (`jpe_unique_rate`), footnote 10's convexity (`fn10_convex`), and the example's
+   derivatives (`jpe_example_v`, `jpe_example_v2`, `jpe_example_v_signs`).
+
 ## Not formalised
 
 That the likelihood-ratio orders of Assumptions 1 and 2 imply the distribution orders
@@ -187,5 +192,87 @@ theorem investor_share_gt (π F1 F0 : ℝ) (hπ0 : 0 < π) (hπ1 : π < 1) (hF :
   have : 0 < π * ((1 - π) * (F0 - F1)) := by
     apply mul_pos hπ0; apply mul_pos <;> linarith
   linarith
+
+/-! ## 7. The published version, "Valuing Diversity" (JPE 2013, page proofs)
+
+The published model has a fixed measure `θ < 1` of slots sold to the highest bidders at a
+market price; an agent who does not buy earns zero (proof pp.6-8). -/
+
+/-- Proof p.11: with a common slots price `p`, group `i` holds slots at the rate
+`ξ_i = 1 - F(π_i, p)`, and `ξ_a > θ > ξ_b` when group `a` invests more and effort raises
+productivity at `p`; `θ = 1 - F(π, p)` is the population rate. -/
+theorem jpe_slot_rates (la lb πa πb F1 F0 : ℝ) (hla : 0 < la) (hlb : 0 < lb) (hl : la + lb = 1)
+    (hπ : πb < πa) (hF : F1 < F0) :
+    1 - mix πb F1 F0 < 1 - mix (la * πa + lb * πb) F1 F0 ∧
+      1 - mix (la * πa + lb * πb) F1 F0 < 1 - mix πa F1 F0 := by
+  unfold mix
+  have hb : lb = 1 - la := by linarith
+  subst hb
+  constructor <;> nlinarith [mul_pos hla hlb, mul_pos (mul_pos hla hlb) (sub_pos.mpr hπ)]
+
+/-- Proposition 1 (proof pp.10-11): the laissez-faire investment rate is unique, because the
+cost quantile `G⁻¹(π)` rises in `π` while the return `∫_{F⁻¹(π,1-θ)} ΔF` falls. -/
+theorem jpe_unique_rate (Ginv R : ℝ → ℝ) (hG : StrictMono Ginv) (hR : Antitone R) {π π' : ℝ}
+    (h : Ginv π = R π) (h' : Ginv π' = R π') : π = π' := by
+  by_contra hne
+  rcases lt_or_gt_of_ne hne with hlt | hlt
+  · have h1 := hG hlt
+    have h2 := hR hlt.le
+    linarith
+  · have h1 := hG hlt
+    have h2 := hR hlt.le
+    linarith
+
+/-- Footnote 10 (proof p.16): with `r = f₁/f₀` and `π_b < π`, the second derivative of
+`y = λ_b (π_b r + 1 - π_b)/(π r + 1 - π)` is positive where `r'' < 0`. -/
+theorem fn10_convex (lb πb π r r1 r2 : ℝ) (hlb : 0 < lb) (hπ : πb < π) (hπ0 : 0 ≤ π)
+    (hden : 0 < π * r + (1 - π)) (hr2 : r2 < 0) :
+    0 < lb * ((πb - π) * (r2 * (π * r + (1 - π)) - 2 * π * r1 ^ 2)) / (π * r + (1 - π)) ^ 3 := by
+  have hinner : r2 * (π * r + (1 - π)) - 2 * π * r1 ^ 2 < 0 := by
+    have : r2 * (π * r + (1 - π)) < 0 := mul_neg_of_neg_of_pos hr2 hden
+    nlinarith [sq_nonneg r1]
+  have : 0 < (πb - π) * (r2 * (π * r + (1 - π)) - 2 * π * r1 ^ 2) :=
+    mul_pos_of_neg_of_neg (by linarith) hinner
+  positivity
+
+/-- The example of proof pp.16-18: with `f₀ = 1/m̄` and `f₁ = 2m/m̄²` the ratio
+`v = f(π_b, m)/f(π, m)` falls and is convex in `m`; its derivatives are the printed ones. -/
+theorem jpe_example_v (mb πb π m : ℝ) (hmb : 0 < mb) (hden : 0 < π * (2 / mb ^ 2) * m + (1 - π) / mb) :
+    HasDerivAt (fun x => (πb * (2 / mb ^ 2) * x + (1 - πb) / mb) / (π * (2 / mb ^ 2) * x + (1 - π) / mb))
+      (2 / mb ^ 3 * (πb - π) / (π * (2 / mb ^ 2) * m + (1 - π) / mb) ^ 2) m := by
+  have hn : HasDerivAt (fun x : ℝ => πb * (2 / mb ^ 2) * x + (1 - πb) / mb) (πb * (2 / mb ^ 2)) m := by
+    simpa using ((hasDerivAt_id m).const_mul (πb * (2 / mb ^ 2))).add_const ((1 - πb) / mb)
+  have hd : HasDerivAt (fun x : ℝ => π * (2 / mb ^ 2) * x + (1 - π) / mb) (π * (2 / mb ^ 2)) m := by
+    simpa using ((hasDerivAt_id m).const_mul (π * (2 / mb ^ 2))).add_const ((1 - π) / mb)
+  have h := hn.div hd hden.ne'
+  refine h.congr_deriv ?_
+  field_simp
+  ring
+
+/-- The second derivative of the example's `v`: differentiating the first derivative gives the
+printed `8 π (π - π_b) / (m̄⁵ [...]³)`. -/
+theorem jpe_example_v2 (mb πb π m : ℝ) (hmb : 0 < mb) (hden : 0 < π * (2 / mb ^ 2) * m + (1 - π) / mb) :
+    HasDerivAt (fun x => 2 / mb ^ 3 * (πb - π) / (π * (2 / mb ^ 2) * x + (1 - π) / mb) ^ 2)
+      (8 / mb ^ 5 * π * (π - πb) / (π * (2 / mb ^ 2) * m + (1 - π) / mb) ^ 3) m := by
+  have hd : HasDerivAt (fun x : ℝ => π * (2 / mb ^ 2) * x + (1 - π) / mb) (π * (2 / mb ^ 2)) m := by
+    simpa using ((hasDerivAt_id m).const_mul (π * (2 / mb ^ 2))).add_const ((1 - π) / mb)
+  have h := (hasDerivAt_const m (2 / mb ^ 3 * (πb - π))).div (hd.pow 2) (pow_ne_zero 2 hden.ne')
+  refine h.congr_deriv ?_
+  simp only [Pi.pow_apply]
+  push_cast
+  field_simp
+  ring
+
+theorem jpe_example_v_signs (mb πb π m : ℝ) (hmb : 0 < mb) (hπ : πb < π) (hπ0 : 0 < π)
+    (hden : 0 < π * (2 / mb ^ 2) * m + (1 - π) / mb) :
+    2 / mb ^ 3 * (πb - π) / (π * (2 / mb ^ 2) * m + (1 - π) / mb) ^ 2 < 0 ∧
+      0 < 8 / mb ^ 5 * π * (π - πb) / (π * (2 / mb ^ 2) * m + (1 - π) / mb) ^ 3 := by
+  constructor
+  · apply div_neg_of_neg_of_pos
+    · have : 0 < 2 / mb ^ 3 := by positivity
+      nlinarith
+    · positivity
+  · have : 0 < π - πb := by linarith
+    positivity
 
 end FryerLoury2010

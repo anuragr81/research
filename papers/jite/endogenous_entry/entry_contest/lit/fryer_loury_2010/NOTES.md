@@ -39,3 +39,20 @@ measures `lean/mathlib/FryerLoury.lean` (see `LEAN`).
    `investor_share_gt`). This is the continuum counterpart of
    `ξ(k) = (k+1)/(Q+1)` at `F = G` in M31.
 3. Three cross-references are wrong in the working paper (FL-D1 to FL-D3).
+
+## Published-version pass, 13 October 2026 (JPE page proofs)
+
+**Verdict.**
+- **C13** stays as narrowed: the published version derives group slot rates,
+  not the payers' share as a function of how many pay.
+- **C10's** citation stands. The group gap is now an explicit statement
+  (FLP-2, FLP-9; `jpe_slot_rates`).
+- **C12's** sentence on the conjecture must name the working paper, since the
+  published version drops it.
+- **C6:** Proposition 1 is the continuum counterpart of count invariance. With
+  heterogeneous costs and a binary investment the investment rate is unique
+  (FLP-8, `jpe_unique_rate`), and the investors are the agents below a cost
+  threshold (FLP-7), so identities are pinned too. With finitely many
+  contestants the count is pinned while identities need not be (M6, M7). C6
+  should say this.
+
