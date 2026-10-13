@@ -6,9 +6,11 @@ version, with no printed page numbers). Page references below are to the PDF's
 pages. Read in full on 2026-10-13, from the abstract through §6, the notes, the
 acknowledgements and the references.
 
-**Status in the manuscript:** not cited as of 2026-10-13. It is a candidate
-citation for the partial-adoption rule, which the manuscript currently credits to
-\citet{HogarthEinhorn1992} alone (MS §2.1, §6, Proposition LAD).
+**Status in the manuscript:** cited once, 2026-10-13, in a footnote in Related
+literature ¶2, for the stance that failure of commutativity is not a knock-down
+objection to Jeffrey conditioning (quotation from PDF p. 11). The author chose
+not to cite it for the partial-adoption rule, which the manuscript credits to
+\citet{HogarthEinhorn1992} (MS §2.1, §6, Proposition LAD).
 
 ## The paper's structure (what is where)
 
