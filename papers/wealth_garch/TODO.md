@@ -288,6 +288,11 @@ grounds.
   fixed from the literature (c) acceptable if it does the job. The
   reference level is open. The decisive comparison runs on the sealed
   hold-out, so exploration on 2015-2024 does not spend it.
+- 2026-10-13. The enhancement thread keeps Peura and Keppo's issue delay
+  (Delta = 0.5 years; PK-Q3, PK-Q8), as established literature (author).
+  The first enhancement is their model with the shortfall penalty added,
+  which must return their barriers at lambda_S = 1. Delta = 0 may be
+  explored, and it is the bridge to the manuscript's instantaneous model.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
