@@ -161,7 +161,8 @@ grounds.
   Novelty: PK already ran an implied-volatility calibration (PK-Q10,
   PK-Q15), so a sigma backtest is not new by itself; PK-Q18 calls for a
   graduated penalty below the requirement, the role of lambda_S.
-  Decision pending with the author.
+  Decided (author, 2026-10-12, by starting the replication stages, and
+  confirmed 2026-10-13): the baseline is Peura and Keppo (2006).
 - 2026-10-12. Rule for the empirical paper (author). Where a paper's
   authors gave no empirical test, our test of its theory is new ground.
   Where they did, we replicate their analysis first, to strengthen our
