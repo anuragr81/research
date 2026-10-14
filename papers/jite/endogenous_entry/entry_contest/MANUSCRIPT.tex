@@ -95,31 +95,38 @@ where the parallel ends).
 \endhead
 \bottomrule
 \endfoot
-\krow{K1}{Every pure-strategy equilibrium has the same number of entrants,
-  $k^*$, and the $k^*$ richest challengers entering is always one of them.}
-  {M5, M6, M8, M30}
-  {The count is pinned, and who enters is not, unless the condition of M7
-  holds. The count needs a gain that depends on the number of entrants alone
-  (M26), and for some costs it fails whenever the ability laws differ by
-  identity, falling with wealth (M27) or rising with it (M29). An incumbent
-  who competes under the same rule is the lowest-cost player and sits out
-  while a challenger enters only inside the band of M6 (M30).}
-\krow{K2}{The effect of a spread of wealth on how many enter has a sign set by
-  one comparison. Entry weakly rises when the marginal entrant stands at or
-  above the pivot, and weakly falls when it stands at or below.}
-  {M12, M13, M15}
-  {Proved for pivot-spreads, and more generally under the margin condition.
-  Inside the band the signs of the change settle nothing (M14), and the mean
-  cannot replace the pivot (M13). Strict change is shown only for linear
-  spreads (M15).}
-\krow{K3}{The sorting needs only that the fee's utility cost falls with
-  wealth, which strict concavity implies and which is strictly weaker.}
-  {M23, M24}
-  {No condition on $u'''$ is used. Wealth sorting into a tournament is in
-  print (Lazear and Rosen), through a condition on $u'''$, so the mechanism is
-  not claimed as new.}
+\krow{K1}{Every pure-strategy equilibrium, with an indifferent challenger
+  entering, has the same number of entrants, $k^*$, and the $k^*$ richest
+  challengers entering is always one of them.}
+  {M5, M6, M7, M8, M26, M27, M29, M30}
+  {The count is pinned. Who enters is pinned when the condition of M7 holds,
+  and need not be otherwise. The count rests on a gain that depends on the
+  number of entrants alone (M26); for some ability laws that differ by
+  identity, falling with wealth (M27) or rising with it (M29), and some costs,
+  it is not pinned. An incumbent who competes under the same rule, taken to be
+  the lowest-cost player, sits out while a challenger enters only when
+  $g(k^*)<\kappa_0$ and $\kappa_{k^*}\le g(k^*-1)$ (M30). At exact ties, with
+  an indifferent challenger staying out, other counts can occur.}
+\krow{K2}{The effect of a pivot-spread of wealth on how many enter has a sign
+  set by one comparison. Entry weakly rises when the marginal entrant stands at
+  or above the pivot, and weakly falls when it stands at or below.}
+  {M12, M13, M14, M15}
+  {Proved for pivot-spreads (M13). For any change of profile, a two-rank
+  comparison signs the change outside the band (M12, M14); inside the band the
+  signs of the change settle nothing (M14), and the mean cannot replace the
+  pivot (M13). A strict fall is shown only for linear spreads with a large
+  enough stretch, when the fee's utility cost diverges at the fee (M15).}
+\krow{K3}{Given score laws that do not depend on who enters, the sorting needs
+  only that the fee's utility cost falls with wealth, which strict concavity
+  implies and which is strictly weaker.}
+  {M5, M8, M23, M24, M26}
+  {No condition on $u'''$ is used. When ability laws differ by identity the
+  sorting can fail (M27). Wealth sorting into a tournament is in print, by
+  example (Lazear and Rosen), under declining absolute risk aversion, which
+  needs $u'''>0$, so the mechanism is not claimed as new.}
 \krow{K4}{Entry is capped by the prize for every number of challengers. An
-  entrant at index $m$ with cost $\kappa$ has $(m+1)\kappa\le V$.}
+  index $m$ with $\kappa_m\le\Delta(m)$ has $(m+1)\kappa_m\le V$, and every
+  member $i$ of an equilibrium $S$ has $|S|\,\kappa_i\le V$.}
   {M10}
   {The accounting behind the cap is in print for identical agents (Fu, Jiao
   and Lu; Fu and Lu). It replaces the old mobility ceiling and is not claimed
@@ -135,19 +142,22 @@ where the parallel ends).
   {M16, M17, M18, M19, M20, M21, M22}
   {The absence of an interior minimum is Ryvkin and Drugov's Karlin step
   applied to the gain, with the score gap in place of the noise density, and
-  the message that no such prediction is universal is theirs (C14). What is
-  new is the uniform case and the conditions on the base score (C7).}
+  the message that no such prediction is universal is theirs (L8, C12). What
+  is new among the papers read is the uniform case and, for a bought component
+  of two values, a condition on the base score that makes the gap
+  single-peaked (C7).}
 \krow{K7}{Those who pay take the prize with a probability that does not fall
-  as more of them pay. It equals $\frac{k^*+1}{Q+1}$ when paying buys nothing,
-  and it does not rise, nor does the number who pay, as the rule weighs talent
-  more.}
+  as more of them pay. With $k$ payers it equals $\frac{k+1}{Q+1}$ when paying
+  buys nothing, and, with costs fixed, it does not rise, nor does the number who
+  pay, as the rule weighs talent more.}
   {M28, M31}
   {The share counts positions and not their pay; earnings after entry are
   outside the model (Appendix~\ref{app:primitives}). The directions in the
-  weight on talent hold for every law of talent and of the bought component,
-  with the incumbent scored by the same rule. That the number who pay does not
-  rise as the rule weighs talent more is new (C12), and so is the share as a
-  function of how many pay (C13).}
+  weight on talent hold for every atomless law of talent and every law of a
+  non-negative bought component, with the incumbent scored by the same rule.
+  That the number who pay does not rise as the rule weighs talent more, and the
+  share as a function of how many pay, are new among the papers read (C12,
+  C13).}
 \end{longtable}
 \normalsize
 
@@ -203,8 +213,9 @@ that check it.}\\
   for every $Q$, and $\Delta(m)\to V/(m+2)$ as $\mu\to0$.}
   {EntryContestP6P7.integral_iid, EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p6_evaluation, EntryContestP6P7.p6_at_zero, EntryContestP6P7.tendsto_cdf_investorLaw, EntryContestP6P7.tendsto_cdf_nonInvestorLaw, EntryContestP6P7.p6_limit}
 \mrow{M10}{Saturation (P7).}
-  {$\Delta(m)\le V/(m+1)$ for every $Q$, and an entrant at index $m$ has
-  $(m+1)\kappa\le V$.}
+  {$\Delta(m)\le V/(m+1)$ for every $Q$; an index $m$ with $\kappa_m\le\Delta(m)$
+  has $(m+1)\kappa_m\le V$, and every member $i$ of an equilibrium $S$ has
+  $|S|\,\kappa_i\le V$.}
   {EntryContestP6P7.integral_cdf_pow, EntryContestP6P7.p7_Delta_le, EntryContestP6P7.p7_cap, EntryContestP6P7.p7_count}
 \mrow{M11}{Prize and fee (P8).}
   {With challengers at or below the fee out, $k^*$ is non-decreasing in $V$ for
@@ -295,9 +306,12 @@ that check it.}\\
   against the entrants $T$ is $\Delta(|T|)$, whoever they are.}
   {EntryContestAnon.profile_mem, EntryContestAnon.profile_not_mem, EntryContestAnon.cdf_profile, EntryContestAnon.gain_anonymous}
 \mrow{M27}{The anonymity boundary.}
-  {If the law of $s_j$ varies with $j$, the gain depends on who the other
+  {If the law of $s_j$ varies with $j$, the gain can depend on who the other
   entrants are. With ability falling in wealth, an equilibrium of one entrant
-  and an equilibrium of two coexist for every small $\mu>0$.}
+  and an equilibrium of two can coexist for every small $\mu>0$: with $V=1$,
+  $r$ uniform on $[0,1]$, $s_j$ the largest of $1$, $2$ and $3$ uniform draws,
+  the incumbent's of one, and $\kappa$ from $u(x)=-1/x$, $c=1$,
+  $w=(\frac{11}4,\frac94,2)$.}
   {EntryContestAnon.winProb_zero_entrant, EntryContestAnon.winProb_zero_outsider, EntryContestAnon.gain_zero, EntryContestAnon.kappa3_values, EntryContestAnon.gains3, EntryContestAnon.anon_witness_zero, EntryContestAnon.gain_tendsto, EntryContestAnon.anon_witness_positive, EntryContestAnon.anon_witness_exists}
 \mrow{M28}{Weight on talent.}
   {With the incumbent investing, $s\ge0$, $r$ atomless and $V\ge0$, for
@@ -306,9 +320,10 @@ that check it.}\\
   {EntryContestMu.Delta_normalise, EntryContestMu.cdf_payerLaw_antitone, EntryContestMu.first_integral, EntryContestMu.Delta_payer_mono, EntryContestMu.Delta_antitone_mu, EntryContestMu.kstar_antitone_mu}
 \mrow{M29}{The boundary, aligned.}
   {With ability rising in wealth, an equilibrium of one entrant and an
-  equilibrium of two coexist at $\mu=0$ and for every small $\mu>0$, with $s_j$ the
-  largest of $12$, $10$ and $9$ uniform draws, the incumbent's of one, and
-  $\kappa$ from $u(x)=-1/x$, $c=1$, $w=(\frac{43}{20},\frac{52}{25},\frac{83}{40})$.}
+  equilibrium of two can coexist at $\mu=0$ and for every small $\mu>0$: with
+  $V=1$, $r$ uniform on $[0,1]$, $s_j$ the largest of $12$, $10$ and $9$
+  uniform draws, the incumbent's of one, and $\kappa$ from $u(x)=-1/x$, $c=1$,
+  $w=(\frac{43}{20},\frac{52}{25},\frac{83}{40})$.}
   {EntryContestAligned.kappaA_values, EntryContestAligned.ability_with_wealth, EntryContestAligned.costs_ordered, EntryContestAligned.gainsA, EntryContestAligned.aligned_witness_zero, EntryContestAligned.aligned_witness_positive, EntryContestAligned.aligned_witness_exists, EntryContestAligned.control_window}
 \mrow{M30}{The incumbent as a challenger.}
   {Let the incumbent be player $0$ of a game of $Q+1$ players with
@@ -480,7 +495,7 @@ quote.}\\
   groups, and the published version drops the conjecture. \unv{the journal's
   page proofs of 8 June 2013 were read, and the final pagination is not
   checked.}}
-  {With no policy intervention the disadvantaged will be less than proportionally represented among slot owners, compared to their presence in the population, since agents face a common slots price in market equilibrium.}{3}{M5, M6, M31, C6, C10, C13}
+  {With no policy intervention the disadvantaged will be less than proportionally represented among slot owners, compared to their presence in the population, since agents face a common slots price in market equilibrium.}{3}{M5, M6, M31, C6, C10, C12, C13}
 \lrow{L26}{FuLu2009}{Identical contestants choose a continuous investment
   that lowers their cost of effort, and then all compete in a Tullock
   contest. The paper finds investment and effort non-monotonic in the number of
@@ -501,14 +516,15 @@ quote.}\\
   for a redistribution target, with a continuous effort and no fee. \unv{the
   working paper (NBER WP 10104) was read, and the \emph{Journal of Economic
   Inequality} version (2005) is not checked.}}
-  {And, this pool increases with the aggressiveness of the redistributive goal.}{18}{M28, C10, C12}
+  {And, this pool increases with the aggressiveness of the redistributive goal.}{18}{M28, C12}
 \lrow{L28}{CoateLoury1993}{Workers choose a binary investment whose cost is
   private and has the same law in both groups. A noisy test reads the
   investment, and employers assign to the better job by a threshold they set
   from their beliefs, so a worker who did not invest can still get it. The
   investment rate need not be unique, because the standard responds to the
-  belief. In their uniform example, at a fixed employer policy, both investment
-  rates fall as the test becomes less accurate (record in
+  belief. In their uniform example, at a fixed employer policy, their formulas
+  imply that both investment rates fall as the test becomes less accurate; the
+  paper does not state this, and the derivation is ours (record in
   \path{lit/coate_loury_1993}). Under an equal-assignment rule employers can
   patronize a group by lowering its standard, which lowers its investment. With
   unequal cost laws the group with higher costs does less well. There is no
@@ -535,14 +551,16 @@ in the table, and no row rests on them.
 \section{Conclusions}
 
 Table~\ref{tab:concl} holds the conclusions, each resting on the model rows
-and on papers read in full. A claim that something is new entered the table
+and on papers read in full, with two exceptions that the rows name:
+\citet{MorganTumlinsonVardy2022} were read in Sections I to IV (L20) and
+\citet{Tilly1998} from one page (L19). A claim that something is new entered the table
 once every paper it waited on had been read. The last was
 \citet{CorcoranKarels1985}, which settled C5, C6 and C13 (L29). The novelty
 reading is pass~7 of \path{TODO.md}.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
-\caption{Conclusions that rest on the model rows and on papers read in full.}
+\caption{Conclusions that rest on the model rows and on the papers read.}
 \label{tab:concl}\\
 \toprule
 \textbf{ID} & \textbf{Statement} & \textbf{Rests on} \\
@@ -554,140 +572,157 @@ reading is pass~7 of \path{TODO.md}.
 \endhead
 \bottomrule
 \endfoot
-\crow{C1}{For a fixed prize awarded by rank, a spread of wealth changes the
-  number of entrants in a direction set by one comparison, the marginal entrant
-  against the pivot of the spread, and the rule needs only that the fee's
-  utility cost falls with wealth. In the privilege contest of Schroyen and
-  Treich the effect of a spread on effort turns on $u'''$, so the entry margin
-  is what frees the sign from the third derivative. Their paper was read in its
-  working-paper version (L12).}
-  {M12, M13, M23, M24, L12}
-\crow{C2}{The rule reads the wealth profile at two ranks only, the marginal
-  entrant and the first outsider, and it holds for any change of profile,
-  mean-preserving or not. Where the marginal entrant becomes poorer and the
-  first outsider richer, the signs of the change settle nothing, even for
-  mean-preserving spreads, and the mean cannot stand in for the pivot. Costrell
-  and Loury sign a spread by one marginal quantile fixed by technology (L9),
-  and here the margin is the count itself, which moves with the profile.}
+\crow{C1}{For a fixed prize awarded by rank, a pivot-spread of wealth moves the
+  number of entrants weakly, in a direction set by one comparison, the
+  marginal entrant against the pivot of the spread. Given score laws that do
+  not depend on who enters, the rule needs only that the fee's utility cost
+  falls with wealth. In the privilege contest of Schroyen and Treich the effect
+  of a spread on effort turns on $u'''$; on the entry margin the sign needs no
+  condition on $u'''$. Their paper was read in its working-paper version (L12).}
+  {M13, M23, M24, M26, L12}
+\crow{C2}{The margin condition reads the wealth profile at two ranks only, the
+  marginal entrant and the first outsider, and it holds for any change of
+  profile, mean-preserving or not (M12). Where the marginal entrant becomes
+  poorer and the first outsider richer, the signs of the change settle nothing,
+  even for mean-preserving spreads, and the mean cannot stand in for the pivot
+  (M13, M14). Costrell and Loury, in their two-job model, sign a spread by one
+  marginal quantile fixed by technology (L9); here the margin is the count
+  itself, which moves with the profile.}
   {M12, M13, M14, L9}
 \crow{C3}{Every pure-strategy equilibrium has the same number of entrants
-  because the gain depends on that number alone. When the gain depends on who
-  enters, the count is not pinned. This happens in the model when ability
-  falls with wealth, and in the entry stage of Fullerton and McAfee, where
-  profits depend on rivals' costs.}
-  {M6, M26, M27, L5}
-\crow{C4}{Under complete information, heterogeneous entry costs pin the count
-  without the devices that models with identical entrants use (mixed entry,
-  sequential arrival, private random delays), and the $k^*$ richest entering is
-  always an equilibrium. Who enters is pinned only under the further condition
-  of M7.}
-  {M5, M6, M7, M8, L2, L3, L4}
-\crow{C5}{The sign rule of C1 is new. None of the entry papers read signs the
-  effect of a spread of wealth, or of entry costs, on the number of entrants
-  at a fixed number of potential entrants. In \citet{CorcoranKarels1985}, whose
-  players are identical, the count is set by the lottery's exponent, the
-  commitment assumed or a minimum bet (L29).}
-  {M13, L2, L3, L4, L5, L6, L7, L23, L24, L29}
+  because the gain depends on that number alone and does not rise with it (M4,
+  M26). When the gain depends on who enters, the count need not be pinned: for
+  some laws in which ability falls (M27) or rises (M29) with wealth it is not,
+  and our witness in the entry stage of Fullerton and McAfee, where profits
+  depend on rivals' costs, has two counts (L5).}
+  {M4, M6, M26, M27, M29, L5}
+\crow{C4}{Under complete information every pure-strategy equilibrium has $k^*$
+  entrants (M6), as in pure strategies with identical entrants (L2, L3). With
+  heterogeneous costs the $k^*$ richest entering is always an equilibrium
+  (M8), so who enters is settled without the devices that models with
+  identical entrants use for that purpose: mixed entry (L2), private random
+  delays (L3) and sequential arrival (L7). Who enters is pinned when the
+  condition of M7 holds, and need not be otherwise.}
+  {M5, M6, M7, M8, L2, L3, L4, L7}
+\crow{C5}{The sign rule of C1 is new among the papers read. None of the entry
+  papers read signs the effect of a spread of wealth, or of a spread of entry
+  costs, on the number of entrants at a fixed number of potential entrants. In
+  \citet{CorcoranKarels1985}, whose players are identical, the count is set by
+  the lottery's exponent, the commitment assumed or a minimum bet (L29). The
+  privilege contest of C1 signs effort, not entry (L12).}
+  {M13, L2, L3, L4, L5, L6, L7, L12, L23, L24, L29}
 \crow{C6}{Count invariance across pure-strategy equilibria with heterogeneous
-  entry costs is new. The entry papers read have identical entrants (Levin and
-  Smith, Morgan, Orzen and Sefton, Fu, Jiao and Lu, Fu and Lu, Corcoran,
-  Corcoran and Karels), a random count
-  under private costs (Moreno and Wooders), or, in Fullerton and McAfee, a count
-  that differs across equilibria. Mathews and Namoro fix the number of
-  strategic entrants at two. In the continuum model of Fryer and Loury, with a
-  binary investment and heterogeneous costs, the investment rate is unique and
-  the investors are the agents below a cost threshold (L25); with finitely many
-  contestants the count is pinned while the identities need not be (M6, M7).
-  In the continuum model of Coate and Loury the investment rate need not be
-  unique, because the employer's standard responds to the rate it expects
-  (L28); with the rule fixed, as here, that channel is absent. Under
-  hit-and-run entry Corcoran and Karels find several stable counts, because
-  incumbents choose among pre-emptive bets, not because entrants differ (L29).}
+  entry costs, for finitely many challengers, is new among the papers read. The
+  entry papers read have identical entrants (Levin and Smith, Morgan, Orzen and
+  Sefton, Fu, Jiao and Lu, Fu and Lu, Corcoran, Corcoran and Karels), a random
+  count under private costs (Moreno and Wooders), or, in our witness for the
+  entry stage of Fullerton and McAfee, a count that differs across equilibria.
+  Mathews and Namoro fix the number of strategic entrants at two. In the
+  continuum model of Fryer and Loury, with a binary investment and
+  heterogeneous costs, the investment rate is unique and the investors are the
+  agents below a cost threshold (L25), the continuum counterpart; with finitely
+  many contestants the count is pinned (M6) while the identities need not be
+  (the example in Appendix~\ref{app:primitives}, Information). In the continuum
+  model of Coate and Loury the investment rate need not be unique, because the
+  employer's standard responds to the rate it expects (L28); with the rule
+  fixed, as here, that channel is absent. Under hit-and-run entry Corcoran and
+  Karels find several stable counts, because incumbents choose among
+  pre-emptive bets, not because entrants differ (L29).}
   {M6, M7, L2, L3, L4, L5, L6, L7, L23, L24, L25, L28, L29}
 \crow{C7}{Beyond what C14 credits to Ryvkin and Drugov, two statements about the
-  gain from entry are new. With a uniform base score the gain never falls in
-  the number of challengers, because the peak of the score gap sits at the top
-  of the outsiders' support, where the kernel vanishes, which it cannot do in
-  their tournament (M18). Primitive conditions on the base score and the
-  bought component make the score gap single-peaked (M19). The search of
-  13 October 2026 for contests with a binary investment found one candidate,
-  \citet{FuLu2009}, whose investment is continuous and made by every
-  contestant, so it is not a precedent (L26).}
-  {M18, M19, L8, L26}
-\crow{C8}{That two ranks suffice to sign the change in the count is a
-  sharpening that the assignment literature does not have. Costrell and Loury,
-  read in their published version, sign a spread by one marginal quantile fixed
-  by technology, or by the curvature of the weight on ability, and never by two
-  ranks (L9).}
-  {M12, L9}
-\crow{C9}{With the fee and the prize fixed, the number of entrants does not
-  rise as the rule weighs talent more, for every law of talent and of the
-  bought component, when the incumbent is scored by the same rule. For an
-  incumbent protected from the rule, whose law does not move with the weight,
-  the argument does not apply (Appendix~\ref{app:primitives}). The sign
-  belongs to entry by a fixed fee in which non-payers still compete. With an
-  effort choice it is the opposite (L20, L22), because effort rises with the
-  accuracy of the ranking until entry earns nothing, while a fixed fee does
-  not rise (Appendix~\ref{app:primitives}, ``No effort margin'').}
+  first entrant's gain are new among the papers read. With a uniform base score
+  it never falls in the number of challengers, because the peak of the score
+  gap sits at the top of the outsiders' support, where the kernel vanishes,
+  which it cannot do in their tournament (M18). For a bought component of two
+  values, a shift condition on the base score makes the score gap single-peaked
+  (M19). The search of 13 October 2026 found one candidate for these
+  statements, \citet{FuLu2009}, whose investment is continuous and made by
+  every contestant, so it is not a precedent (L26); the binary-investment
+  models it also found, Fryer and Loury (L25) and Coate and Loury (L28), are
+  continua with no number of challengers.}
+  {M18, M19, L8, L25, L26, L28}
+\crow{C8}{Outside the band, two ranks suffice to sign the change in the count
+  (M12, M14), a sharpening of \citet{CostrellLoury2004}. Read in their
+  published version, they sign a spread by one marginal quantile fixed by
+  technology, or by the shape of the weight on ability, and never by two ranks
+  (L9).}
+  {M12, M14, L9}
+\crow{C9}{With the fee, the prize and the wealth profile fixed, the number of
+  entrants does not rise as the rule weighs talent more, for every atomless law
+  of talent and every law of a non-negative bought component, when the
+  incumbent is scored by the same rule. For an incumbent protected from the
+  rule, whose law does not move with the weight, the argument does not apply
+  (Appendix~\ref{app:primitives}). In the two effort models read the sign is
+  the opposite (L20, L22): effort rises with the accuracy of the ranking until
+  entry earns no more than staying out, while a fixed fee does not rise
+  (Appendix~\ref{app:primitives}, ``No effort margin'').}
   {M28, L20, L22}
 \crow{C10}{The share of the prize taken by those who pay is set by the count,
-  so it moves with the prize, the fee and the wealth profile as the count does,
-  and it does not rise as the rule weighs talent more. That a group with higher
-  investment costs holds fewer positions is Fryer and Loury's result under
-  laissez-faire, for identity groups in a continuum (L25), and Coate and
-  Loury's when employers set the standard (L28). The outcome is the opportunity
-  hoarding of \citet{Tilly1998}, a bounded group keeping access to a valuable
-  resource, but here no one hoards, and the fee and the wealth profile produce it.
-  \citet{LaurisonFriedman2016} find access to the traditional professions more
-  closed than to management, which pays more. Read as shares, a larger prize
-  alone does not lower the share, so the prize does not account for that
-  pattern, and a rule weighing the bought component more is one difference
-  that would.}
-  {M11, M28, M31, L17, L19, L25, L28}
+  so it moves weakly with the prize, the fee and the wealth profile in the
+  direction the count does (M11 to M13), and it does not rise as the rule
+  weighs talent more. That a group with higher investment costs holds fewer
+  positions is Fryer and Loury's result under laissez-faire, for identity
+  groups in a continuum (L25); in Coate and Loury such a group does less well
+  when employers set the standard (L28). The outcome is the opportunity hoarding
+  of \citet{Tilly1998}, a bounded group keeping access to a valuable resource,
+  read from one page (L19), but here no one hoards, and the fee and the wealth
+  profile produce it. \citet{LaurisonFriedman2016} find access to the
+  traditional professions more closed than to management, which pays more. Read
+  as shares, a larger prize alone does not lower the share, so the prize does
+  not account for that pattern; a rule weighing the bought component more is
+  one difference consistent with it (weakly, M31), though the weight is not
+  measured.}
+  {M11, M12, M13, M28, M31, L17, L19, L25, L28}
 \crow{C11}{An incumbent scored by the same rule, with the lowest cost, sits out
   while a challenger enters only as one of several equilibria with the same
-  count, inside the band of M6, and never when identities are pinned.}
+  count, when $g(k^*)<\kappa_0$ and $\kappa_{k^*}\le g(k^*-1)$, and never when
+  identities are pinned.}
   {M6, M7, M30}
 \crow{C12}{The sign of M28 on the entry margin, for a rule that weighs talent
-  more, is new. The entry margins read
-  have the opposite sign, more noise bringing more entrants, because effort
-  rises as noise falls and competes the rents of entry away (L20; Drugov and
-  Ryvkin's free-entry extension, L22). M28's sign is that of their intensive
-  margin, effort falling as noise becomes more dispersed (L22), because paying for the
-  bought component is the investment itself. The contrast with the number of
-  challengers, which has no universal sign, is theirs across their two papers
-  (L8, L22). The working paper of Fryer and Loury conjectures, without deriving it, that
-  a blind rule rationing slots at random lowers investment in both groups, the
-  direction of M28; the published version drops the conjecture (L25). In their pair-wise tournaments a blind redistribution rule creates
-  a pool of contestants who exert no effort and still compete, and the pool
-  grows as the rule rewards effort less (L27): the same direction, for a
-  redistribution target rather than a weight on talent, and with a continuous
-  effort rather than a fee. In \citet{CoateLoury1993} a noisy test reads a
-  binary investment, and in their uniform example, at a fixed employer policy,
-  both investment rates fall as the test becomes less accurate (L28): the
-  direction of M28 again, for the accuracy of a test and a standard that
-  employers set, in the formulas of one example. The sign that is new is
-  C9's: a fixed prize awarded by rank, a fixed fee, and every law of talent and
-  of the bought component.}
-  {M16, M28, L8, L20, L22, L25, L27, L28}
+  more, is new among the papers read. The two noise-comparative entry models
+  read have the opposite sign, more noise bringing more entrants, because
+  effort rises as noise falls and competes away the rents of entry above
+  staying out (L20; Drugov and Ryvkin's free-entry extension, L22). M28's sign
+  is that of their intensive margin, effort falling as noise becomes more
+  dispersed (L22), which we read as the same margin, since paying for the
+  bought component is the investment. The contrast with the number of
+  challengers, which has no universal sign (M18, M20, M22), is theirs across
+  their two papers (L8, L22). The working paper of Fryer and Loury conjectures,
+  without deriving it, that a blind rule rationing slots at random lowers
+  investment in both groups, the direction of M28; the published version drops
+  the conjecture (L25). In the pair-wise tournaments of Fryer and Loury (2005)
+  a blind redistribution rule creates a pool of contestants who exert no effort
+  and still compete, and the pool grows as the redistribution target becomes
+  more aggressive, which the paper asserts and the record derives (L27): the
+  same direction, for a redistribution target rather than a weight on talent,
+  and with a continuous effort rather than a fee. In \citet{CoateLoury1993} a
+  noisy test reads a binary investment, and in their uniform example, at a
+  fixed employer policy, their formulas imply that both investment rates fall
+  as the test becomes less accurate, a derivation of ours that the paper does
+  not state (L28): the direction of M28 again, for the accuracy of a test and a
+  standard that employers set. The sign that is new is C9's: a fixed prize
+  awarded by rank, a fixed fee, the incumbent scored by the same rule, and
+  every atomless law of talent and every law of a non-negative bought
+  component.}
+  {M18, M20, M22, M28, L8, L20, L22, L25, L27, L28}
 \crow{C13}{The share of the prize taken by those who enter, as a function of
-  how many enter, and its comparative statics are new in the entry literature.
-  In every entry model read, those who do not enter cannot win, so the share
-  is not defined there; here outsiders compete on the base score. In Mathews
-  and Namoro, non-strategic contestants fill the places that the strategic
-  ones leave and can win, but they make no choice, the number of strategic
-  contestants is fixed at two, and no share is analysed (L23). Outside the
-  entry literature, Fryer and Loury have a binary investment in which those who
-  do not invest still compete, and the group with higher costs holds fewer
-  slots (L25). Their agents form a continuum and slots are priced, so they do
-  not derive the payers' share as a function of how many pay, nor its
-  comparative statics. In \citet{CoateLoury1993} those who do not invest can
-  reach the better job and the assignment rate is split between investors and
+  how many enter, and its comparative statics are new among the entry papers
+  read. In Mathews and Namoro, non-strategic contestants fill the places that
+  the strategic ones leave and can win, but they make no choice, the number of
+  strategic contestants is fixed at two, and no share is analysed (L23). In
+  every other entry model read, those who do not enter cannot win, so the share
+  is not defined there; here outsiders compete on the base score. In the
+  minimum-bet case of Corcoran and Karels every entrant wins with probability
+  $1/n$ and those who do not bet cannot win (L29). Outside the entry
+  literature, Fryer and Loury have a binary investment in which those who do
+  not invest still compete, and the group with higher costs holds fewer slots
+  (L25). Their agents form a continuum and slots are priced, so they do not
+  derive the payers' share as a function of how many pay, nor its comparative
+  statics. In \citet{CoateLoury1993} those who do not invest can reach the
+  better job and the assignment rate is split between investors and
   non-investors, but the number of places moves with the standard and the
-  investors' share is not analysed (L28). In the minimum-bet case of Corcoran
-  and Karels every entrant wins with probability $1/n$ and those who do not
-  bet cannot win (L29).}
-  {M31, L2, L3, L4, L5, L6, L7, L23, L24, L25, L28, L29}
+  investors' share is not analysed (L28).}
+  {M31, L2, L3, L4, L5, L6, L7, L20, L22, L23, L24, L25, L28, L29}
 \crow{C14}{The first entrant's gain is $V\,\mathbb E[\varphi(M)]$, with $M$ the
   best rival's score (M1). This is the form of the marginal benefit of
   \citet{RyvkinDrugov2020}, the noise density at the best rival's shock, with
@@ -695,7 +730,7 @@ reading is pass~7 of \path{TODO.md}.
   the law of $M$ in place of $F^{k-1}$, gives M17, no interior minimum in the
   number of challengers when $\varphi$ is single-peaked. Their remark that
   with many players the comparative statics follow the upper tail is what M21
-  makes precise for the gain.}
+  makes precise for the gain, in the class of M19.}
   {M1, M17, M21, L8}
 \end{longtable}
 
@@ -707,7 +742,8 @@ reading is pass~7 of \path{TODO.md}.
 \label{app:proofs}
 
 \paragraph{Notation.} Challenger $i$ scores $\sigma_i=\mu r_i+(1-\mu)s_ie_i$, with
-$r_i$ and $s_i\ge0$ drawn independently of wealth. $F$ and $G$ are the score CDFs
+$r_i$ and $s_i\ge0$ drawn independently of each other and of wealth, and the fee
+is $c>0$. $F$ and $G$ are the score CDFs
 of an entrant and of an outsider, and $C$ is the incumbent's, each without atoms.
 With $m$ other entrants among the $Q$ challengers,
 \[
@@ -722,7 +758,9 @@ $H_{m+1}=K_mF$ and $H_m=K_mG$.
 Challengers are indexed $0,\dots,Q-1$ in increasing order of cost,
 $\kappa_0\le\dots\le\kappa_{Q-1}$, which is decreasing order of wealth. Index $j$
 enters when $\kappa_j\le\Delta(j)$, and $k^*$ satisfies $\kappa_j\le\Delta(j)$ for
-$j<k^*$ and $\Delta(k^*)<\kappa_{k^*}$ when $k^*<Q$. In the results on wealth
+$j<k^*$ and $\Delta(k^*)<\kappa_{k^*}$ when $k^*<Q$. Past $Q-1$, $\Delta(m)$ means
+$\Delta(Q-1)$; so extended, $\Delta$ is non-increasing on every count by M4, and
+the results that use this cite M4. In the results on wealth
 profiles, rank $j$ has wealth $w_j$ with $w_0\ge w_1\ge\cdots$, and enters when
 $w_j>c$ and $\kappa(w_j)\le\Delta(j)$, so a challenger whose wealth is at or below
 the fee does not enter. A prime marks the profile after a change and its count
@@ -874,10 +912,12 @@ From $C\le1$, $G\le1$ and $\int H_m\,dG\ge0$,
 \[
   \Delta(m)\le V\int H_m\,dF\le V\int F^m\,dF=\frac V{m+1}.
 \]
-An entrant at index $m$ with cost $\kappa$ has $\kappa\le\Delta(m)$, so
+For $\kappa\le\Delta(m)$,
 \[
-  (m+1)\,\kappa\le(m+1)\,\Delta(m)\le V,\qquad m+1\le\frac V\kappa\quad(\kappa>0).
+  (m+1)\,\kappa\le(m+1)\,\Delta(m)\le V,\qquad m+1\le\frac V\kappa\quad(\kappa>0),
 \]
+and a member $i$ of an equilibrium $S$ has $\kappa_i\le\Delta(|S|-1)$, so
+$|S|\,\kappa_i\le V$.
 \end{mproof}
 
 \begin{mproof}{M11}{EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_mono_gain, EntryContestSpread.count_mono_prize, EntryContestEq.Delta_mono_prize, EntryContestMM.Delta_scale, EntryContestSpread.count_antitone_fee}
@@ -1171,8 +1211,8 @@ $F$ for an entrant and $G$ for an outsider. With $|T|=m$ and $i\notin T$,
 \end{mproof}
 
 \begin{mproof}{M27}{EntryContestAnon.winProb_zero_entrant, EntryContestAnon.winProb_zero_outsider, EntryContestAnon.gain_zero, EntryContestAnon.kappa3_values, EntryContestAnon.gains3, EntryContestAnon.anon_witness_zero, EntryContestAnon.gain_tendsto, EntryContestAnon.anon_witness_positive, EntryContestAnon.anon_witness_exists}
-Let entrant $j$'s $s_j$ be the largest of $n_j$ uniform draws, the incumbent's the
-largest of one, and $\mu=0$. An outsider scores $0$, and among the
+Let $r$ be uniform on $[0,1]$, entrant $j$'s $s_j$ the largest of $n_j$ uniform
+draws, the incumbent's the largest of one, and $\mu=0$. An outsider scores $0$, and among the
 $1+\sum_{j\in S}n_j$ draws each is equally likely to be the largest, so
 \[
   \Pr(i\text{ wins})=\frac{n_i}{1+\sum_{j\in S}n_j},\qquad
@@ -1218,8 +1258,8 @@ so $k^*(\mu)\le k^*(\mu')$ for $\mu'\le\mu$.
 \end{mproof}
 
 \begin{mproof}{M29}{EntryContestAligned.kappaA_values, EntryContestAligned.ability_with_wealth, EntryContestAligned.costs_ordered, EntryContestAligned.gainsA, EntryContestAligned.aligned_witness_zero, EntryContestAligned.aligned_witness_positive, EntryContestAligned.aligned_witness_exists, EntryContestAligned.control_window}
-Let $s_j$ be the largest of $n_j$ uniform draws with $n=(12,10,9)$, the
-incumbent's the largest of one, and $\mu=0$. An outsider scores $0$ and never
+Let $V=1$, $r$ be uniform on $[0,1]$, $s_j$ the largest of $n_j$ uniform draws
+with $n=(12,10,9)$, the incumbent's the largest of one, and $\mu=0$. An outsider scores $0$ and never
 wins, and for $i\in S$,
 \[
   \mathrm{gain}_i(S\setminus\{i\})=\frac{n_i}{n_i+1+\sum_{j\in S\setminus\{i\}}n_j},
@@ -1462,9 +1502,9 @@ condition is what they assume.
 
 \paragraph{The contest.} One prize of value $V>0$ is fixed and exogenous, and
 it is awarded by rank rather than sold. $Q$ challengers and one incumbent
-compete. Each challenger chooses $e_i\in\{0,1\}$, and entry costs the fee $c$.
-The draws $r_i$ and $s_i\ge0$ are independent across players and independent of
-the wealth profile, from arbitrary laws. The score is
+compete. Each challenger chooses $e_i\in\{0,1\}$, and entry costs the fee $c>0$.
+The draws $r_i$ and $s_i\ge0$ are independent of each other, across players and
+of the wealth profile, from arbitrary laws. The score is
 $\sigma_i=\mu r_i+(1-\mu)s_ie_i$, the highest score takes the prize, and the game
 is static and played once. By M1 the gain is proportional to $V$, so $V$ enters
 only as a scale. \citet{ColeMailathPostlewaite1992} read status as ``a ranking

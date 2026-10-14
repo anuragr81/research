@@ -1031,6 +1031,25 @@ paper's claims, and only then write the manuscript.
   - Splitting does not always pay (fails at r = 1).
   - Misprints in Tables 1-4, two text aggregates (98.18, 98.84), n = 2.6 for
     8/3, and note 9's "equation (30)".
+  Fidelity audit 13-14 Oct 2026, read-only, by five independent agents. Model
+  rows were compared against their Lean statements, and every K and C claim was
+  traced to its rows and lit records. No model row was wrong.
+  - Four proof gaps, closed in commit 33405f08: M7 (`assortative_only`, plus
+    model versions), M11 (fee and prize on wealth profiles with the floor rule,
+    u non-decreasing on (0,∞)), M13 (majorization witness for small μ>0), and
+    M30 (`incGain`, correct at the top count, with its antitonicity and model
+    instances).
+  - Wording fixed 14 Oct 2026:
+    - M10/K4 cap for equilibrium members (|S|κ_i ≤ V);
+    - M27/M29 stated as examples, with V=1 and r uniform;
+    - standing assumptions r ⊥ s within a player, c > 0, and Δ extended past
+      Q−1 (non-increasing by M4);
+    - K1-K4, K6, K7 and C1-C14 brought within their rows (pivot-spreads only;
+      M7 sufficient, not necessary; examples, not universals; atomless r and
+      s ≥ 0; C4's misreading of identical-entrant devices; C8 outside the band;
+      "among the papers read"; ties; Coate-Loury's result marked as our
+      derivation; MTV and Tilly read in part);
+    - L25/L27 link columns corrected.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
