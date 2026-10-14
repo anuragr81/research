@@ -388,6 +388,14 @@ grounds.
   include securities interest that their appendix leaves out). Next:
   stage 2, solving the model at their Table 4 parameters (equations to be
   read from page images; the text layer drops Greek letters).
+- 2026-10-14. MMP stage 2a-2c. MODEL.md specifies the model from the August
+  2018 manuscript (= Bundesbank DP 51/2018), which settles five of six gaps
+  in the 2016 draft; pinned locally. PREREG_stage2.md fixes our choices
+  (v^d = u(c_D)/(1 - beta), discretisation, moments); PREREG_stage2_2.md
+  amends the validation after a failed first run. The solver (mmp_model.py,
+  numba) passes V1 (converges to the cake-eating answer) and V2 (shock
+  discretisation); results_validation_stage2.md. Next: 2d, the full model
+  at Table 4 parameters, with the V3 grid check.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
