@@ -109,12 +109,12 @@ For a joint law $Q$ on $\{0,1\}^2$, the \emph{cross-attribute association} is
 which exists only on the joint law, never on its two marginals separately. Evaluated at the prior, $\assoc(P)=c$.
 \end{definition}
 
-The prior $P$ is the evaluator's subjective credence, before any cue arrives, over the joint attributes of a randomly drawn candidate. It constitutes what a panelist believes about an applicant drawn at random before the file is opened, a probability for each of the four combinations $(i,j)$ of competence and trustworthiness. It concerns the applicant's traits alone, and no outcome of the hire enters it. The prior is a point of $\Delta^{3}$ fixed by three numbers, the marginals
+The prior $P$ is the evaluator's subjective credence, before any cue arrives, over the joint attributes of a randomly drawn candidate. It constitutes what a panelist believes about an applicant drawn at random before the file is opened, a probability for each of the four combinations $(i,j)$ of competence and trustworthiness. It concerns the applicant's traits alone, and no outcome of the hire enters it. The prior $P$ is a point of $\Delta^{3}$ fixed by three numbers, the marginals
 $P(A{=}0)=\alpha$ and $P(B{=}0)=\beta$ and the prior covariance $c$ between the
-attributes,
+attributes,\footnote{With $P_{ij}=P(A{=}i,B{=}j)$, the covariance of the two indicators gives $P_{11}=P(A{=}1)P(B{=}1)+c=(1-\alpha)(1-\beta)+c$. The marginals then fix the other cells, $P_{01}=(1-\beta)-P_{11}=\alpha(1-\beta)-c$, $P_{10}=(1-\alpha)-P_{11}=(1-\alpha)\beta-c$ and $P_{00}=\alpha-P_{01}=\alpha\beta+c$. Expanding gives $P_{00}P_{11}-P_{01}P_{10}=c$, so $\assoc(P)=c$.}
 \[
   P=\begin{pmatrix}\alpha\beta+c & \alpha(1-\beta)-c\\[2pt](1-\alpha)\beta-c & (1-\alpha)(1-\beta)+c\end{pmatrix},
-  \qquad \operatorname{Cov}(A,B)=c,
+  \qquad \operatorname{Cov}(A,B)=c.
 \]
 
 The prior marginals $\alpha$ and $\beta$ and the prior covariance $c$ are the evaluator's own beliefs about a candidate drawn at random, not frequencies in
@@ -122,7 +122,7 @@ the real-world. In other words, the evaluator is not estimating them and no obse
 fixed by the requirement that all four cells of $P$ stay nonnegative, which
 bounds it above by the smaller of $\alpha(1-\beta)$ and $(1-\alpha)\beta$ and
 below by minus the smaller of $\alpha\beta$ and $(1-\alpha)(1-\beta)$. These
-are the Fr\'echet--Hoeffding bounds for a $2\times2$ table. Simply put, the marginals $\alpha=P(A{=}0)$ and $\beta=P(B{=}0)$ denote the shares
+are the Fr\'echet--Hoeffding bounds for a $2\times2$ table, and $c$ is taken strictly inside them, so that every cell of $P$ is positive and the second Jeffrey step never divides by zero. Simply put, the marginals $\alpha=P(A{=}0)$ and $\beta=P(B{=}0)$ denote the shares
 of applicants the panelist believes to lack competence and to lack trustworthiness,
 and the prior covariance $c=\assoc(P)$ denotes how strongly the panelist believes
 the two traits to go together among applicants. A positive $c$ means a competent
@@ -149,7 +149,7 @@ implication is never moved.
 The engagement decision for the evaluator is defined in terms of a desirability vector $\vv=(v_{ij})_{i,j\in\{0,1\}}$---one entry per state-space cell (the same shape as $P$). With the score $s(P)=\langle\vv,P\rangle=\sum_{ij}v_{ij}P(i,j)$, the evaluator engages if and only if
 $s(P)\ge\tau$ \anchor{Setup}. This is expected-utility maximisation at the belief $P$---so that $s(P)$ is the expected desirability of engaging, and $\tau$ is the value of the outside option one forgoes by not engaging. Whether sequence-dependence changes what evaluators do or not is driven by the expected desirability an evaluator forgoes when their sequence-dependent belief leads them to a different action than a benchmark belief. 
 
-As we further detail in Section \ref{sec:jeffrey}, the Bayes-factor benchmark $\PB$ is used as a sequence-free reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
+As we further detail in Section \ref{sec:jeffrey}, the sequence-free benchmark $\PB$ is used as a reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
 $\tau$ entering the results only through $u=s(\PB)-\tau$ and never appearing on its own.
 
 The surplus thus defined is what is of interest as the notion of loss in the population aggregate. With $\delta_\sigma$ as the first-order coefficient with which an evaluator's own score departs from the benchmark's under reading sequence $\sigma$ (see Section~\ref{sec:individual}), $g$ as the joint density of $(u,\delta_\sigma)$ across the population and the sequence distribution, the expected foregone surplus is defined as 
@@ -161,8 +161,7 @@ the cost $|u|$ borne by exactly those evaluators whose decision the sequence cha
 \subsection{Jeffrey updating and the sequence-free benchmark}
 \label{sec:jeffrey}
 
-Jeffrey's rule updates on an impression by resetting the cue's marginal to the delivered
-credence and holding the conditionals given the cue's partition fixed, the invariance
+Jeffrey's rule updates on an impression by resetting the cue's marginal to a target and holding the conditionals given the cue's partition fixed, the invariance
 condition \citep[ch.~3]{Jeffrey2004}, which \citet[ch.~11]{Jeffrey1983} expresses by
 saying that the change originates in the partition. For an impression $q$ on $A$,
 \[
@@ -177,9 +176,9 @@ two-cue Jeffrey posteriors are the two sequences
 \[
   \PJ_{AB}=\PJ_{B}\!\circ\PJ_{A}\,P,\qquad \PJ_{BA}=\PJ_{A}\!\circ\PJ_{B}\,P .
 \]
-Resetting the marginal to the delivered credence is adoption in full, $\omega=1$, and
+Taking the delivered credence itself as the target is adoption in full, $\omega=1$, and
 every result of Sections~\ref{sec:individual} and~\ref{sec:aggregation} is stated at
-that weight; Section~\ref{sec:partial} says what changes at $\omega<1$, down to
+that weight. What the two sequences disagree about is set by the target alone. Under the same rule, a target equal to the delivered credence depends on the sequence and a target equal to the marginal the factors imply does not, which is the benchmark below; Section~\ref{sec:partial} says what changes at $\omega<1$, down to
 $\omega=0$, where the second cue is ignored.
 
 \begin{definition}[sequence effect]\label{def:seqeffect}
