@@ -8,7 +8,7 @@ def term(spec):
     return (m.group(2), int(m.group(1))) if m else (spec, 0)
 
 
-def system_gmm(df, y, regressors, gmm, iv, level=True, constant=True, idcol="id", tcol="year"):
+def system_gmm(df, y, regressors, gmm, iv, level=True, constant=True, collapse=False, idcol="id", tcol="year"):
     ids = sorted(df[idcol].unique())
     times = sorted(df[tcol].unique())
     T, N = len(times), len(ids)
@@ -35,14 +35,21 @@ def system_gmm(df, y, regressors, gmm, iv, level=True, constant=True, idcol="id"
 
     instr = []
     for v, a, b in gmm:
-        for t in diff_t:
-            for lag in range(a, min(b, t) + 1):
-                instr.append(("dgmm", v, t, lag))
+        if collapse:
+            for lag in range(a, min(b, diff_t[-1]) + 1):
+                instr.append(("dgmm", v, None, lag))
+        else:
+            for t in diff_t:
+                for lag in range(a, min(b, t) + 1):
+                    instr.append(("dgmm", v, t, lag))
     if level:
         for v, a, _ in gmm:
-            for t in level_t:
-                if t - (a - 1) >= 1:
-                    instr.append(("lgmm", v, t, a - 1))
+            if collapse:
+                instr.append(("lgmm", v, None, a - 1))
+            else:
+                for t in level_t:
+                    if t - (a - 1) >= 1:
+                        instr.append(("lgmm", v, t, a - 1))
     for u in iv:
         instr.append(("iv", u, None, None))
     if constant and level:
@@ -70,9 +77,9 @@ def system_gmm(df, y, regressors, gmm, iv, level=True, constant=True, idcol="id"
         Y[:, r] = np.where(ok, yv, 0.0)
         X[:, r, :] = np.where(ok[:, None], xs, 0.0)
         for j, (kind, v, tt, lag) in enumerate(instr):
-            if kind == "dgmm" and eq == "d" and tt == t:
+            if kind == "dgmm" and eq == "d" and tt in (t, None):
                 z = at(v, lag, t)
-            elif kind == "lgmm" and eq == "l" and tt == t:
+            elif kind == "lgmm" and eq == "l" and tt in (t, None) and t - lag >= 1:
                 z = at(v, lag, t) - at(v, lag + 1, t)
             elif kind == "iv":
                 z = at(*term(v), t) - at(term(v)[0], term(v)[1], t - 1) if eq == "d" else at(*term(v), t)

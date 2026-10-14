@@ -56,20 +56,26 @@ def main():
     match = (round(ours['b1'][0], 7) == 0.6862261 and round(ours['se1'][0], 7) == 0.1445943
              and round(ours['b2'][0], 3) == 0.629)
     print(f"gmm.py matches Roodman: {match}")
+    for collapse in (False, True):
+        system_check(df, collapse)
+
+
+def system_check(df, collapse):
     sys_cmd = "n L1.n w L1.w k ys | gmm(n, 2:4) gmm(w, 2:3) iv(k ys)"
+    extra = " collapse" if collapse else ""
     ref = {}
     for opt in ("onestep", ""):
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
-            regression.abond(sys_cmd + " | " + opt, df, ["id", "year"])
+            regression.abond(sys_cmd + " | " + opt + extra, df, ["id", "year"])
         rows = re.findall(r"\|\s*(L1\.n|w|L1\.w|k|ys|_con)\s*\|\s*(-?[\d.]+)\s*\|\s*([\d.]+)", buf.getvalue())
         ref[opt or "twostep"] = [(float(b), float(s)) for _, b, s in rows]
-    mine = system_gmm(df, "n", ["L1.n", "w", "L1.w", "k", "ys"], [("n", 2, 4), ("w", 2, 3)], ["k", "ys"])
+    mine = system_gmm(df, "n", ["L1.n", "w", "L1.w", "k", "ys"], [("n", 2, 4), ("w", 2, 3)], ["k", "ys"], collapse=collapse)
     gaps = [abs(a - b) for (b, s), a in zip(ref["onestep"], mine["b1"])] + [abs(a - s) for (b, s), a in zip(ref["onestep"], mine["se1"])]
     gaps += [abs(a - b) for (b, s), a in zip(ref["twostep"], mine["b2"])] + [abs(a - s) for (b, s), a in zip(ref["twostep"], mine["se2"])]
-    print(f"gmm.py system GMM against pydynpd: {len(gaps)} coefficients and standard errors, largest gap {max(gaps):.1e}, "
+    print(f"gmm.py system GMM{extra} against pydynpd: {len(gaps)} coefficients and standard errors, largest gap {max(gaps):.1e}, "
           f"{mine['nobs']} obs, {mine['ninst']} instruments, Hansen {mine['hansen']:.3f}")
-    print(f"gmm.py matches pydynpd to 7 decimals: {max(gaps) < 5e-8}")
+    print(f"gmm.py{extra} matches pydynpd to 7 decimals: {max(gaps) < 5e-8}")
 
 
 if __name__ == "__main__":

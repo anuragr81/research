@@ -19,6 +19,10 @@ standard errors.
 - gmm.py reproduces pydynpd's one- and two-step system GMM on the same
   data, all 24 coefficients and standard errors within 4.1e-08, and its
   observation count, instrument count and Hansen statistic.
+- Added 14 October 2026 for PREREG_stage1_2.md, before any sensitivity run:
+  with collapsed instruments, gmm.py reproduces pydynpd's one- and two-step
+  system GMM on the same data, all 24 coefficients and standard errors
+  within 4.9e-08, with 10 instruments.
 - Roodman's printed one-step system-GMM example (p. 36, 0.9356053) uses
   xtabond2's default h(3) weighting; pydynpd's h(2) gives 0.9326197 on it.
   The two-step estimator, used for Berger et al., is not this example.
@@ -43,4 +47,6 @@ gmm.py difference GMM: L1.n one-step 0.6862261 se 0.1445943, two-step 0.6287089,
 gmm.py matches Roodman: True
 gmm.py system GMM against pydynpd: 24 coefficients and standard errors, largest gap 4.1e-08, 751 obs, 48 instruments, Hansen 57.905
 gmm.py matches pydynpd to 7 decimals: True
+gmm.py system GMM collapse against pydynpd: 24 coefficients and standard errors, largest gap 4.9e-08, 751 obs, 10 instruments, Hansen 9.070
+gmm.py collapse matches pydynpd to 7 decimals: True
 ```
