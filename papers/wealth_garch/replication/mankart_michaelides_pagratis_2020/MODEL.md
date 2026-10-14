@@ -1,118 +1,116 @@
-# The model of Mankart, Michaelides and Pagratis (May 2016 draft), as stated
+# The model of Mankart, Michaelides and Pagratis, as stated
 
-Stage 2a of the replication: the model written out from the paper, every
-item with its PDF page, and the gaps the paper leaves. The text layer of
-the PDF drops Greek letters; the equations below were transcribed from
-the pages rendered as images (110 dpi) on 14 October 2026, and checked by
-eye against them. Printed page = PDF page - 2.
+Stage 2a of the replication. Version used: the August 2018 manuscript
+(`MMP_2018Aug21.pdf`, Drive file 1ISiwGhVJUiwr9fbhDd0c3a4FvWfuM3Sz), which
+matches Deutsche Bundesbank Discussion Paper 51/2018 (`1046840088.pdf`,
+Drive file 1XQdu5vos1zRWuOgutx-bLYqMv0lhUUR2) in model, parameters and
+appendix, and precedes the Financial Management article (49(2), 473-502,
+2020). Read on 14 October 2026 through the Drive connector's text
+extraction, which keeps Greek letters; page numbers are the manuscript's
+printed pages. Not yet pinned locally (to do: local copies for quote
+checks). The May 2016 NBER draft read first (lit record) differs in timing,
+costs and parameters, and leaves more unstated; its gaps G1-G6 are listed
+at the end with how the 2018 version settles them.
 
-## State, shocks and timing (pp. 16-18)
+## Shocks (p. 14)
 
-- Balance sheet: loans L (return r_L), liquid assets S (r_S); deposits D
-  (r_D), wholesale funding F (cost g_F), equity E (Table 3, p. 16).
-- Aggregate state b: two-state Markov chain, expansion or recession;
-  recessions last 8 quarters and expansions 20 on average (pp. 23-24; the
-  appendix says 2 and 5 years, p. 56).
-- Loan write-offs (1), p. 16: w_{t+1} = mu_b + rho_b w_t + sigma_b eps_{t+1},
-  eps ~ N(0,1), parameters by state b.
-- Deposit growth (2), p. 16: log(D_{t+1}/D_t) ~ N(mu_bD, sigma_bD^2), i.i.d.
-  given b.
-- Returns: "the various returns r ... stochastic and vary with the
-  business cycle" (p. 15); their values are the state-conditional means of
-  Table 2 (p. 14): real deposit rate, loan spread, liquid-asset spread.
-- Timing (p. 17): at t+ the bank chooses whether to continue; if it does,
-  it liquidates S_t, repays F_t, makes new loans N_t (L_{t+} = L_t + N_t;
-  N_t < 0 is liquidation at a cost), chooses S_{t+} >= 0, F_{t+} and
-  dividend X_t, with E_{t+} = E_t - X_t.
-- Balance sheet (3), p. 17: L_{t+} + S_{t+} = D_t + F_{t+} + E_{t+}.
-- Capital adequacy (4), p. 17: (omega_L L_{t+} + omega_S S_{t+}) / E_{t+}
-  <= lambda_w.
-- Leverage (5), p. 18: (L_{t+} + S_{t+}) / E_{t+} <= lambda_u.
-- Loans (6), p. 18: L_{t+1} = (1 - theta - w_{t+1}) L_{t+}, theta the
-  repaid fraction.
-- Pre-tax profit (7), p. 18: Pi_{t+1} = (r_{L,t+1} - w_{t+1}) L_{t+}
-  + r_{S,t+1} S_{t+} - r_{D,t+1} D_t - g_{F,t+1} F_{t+} - g_N - c D_t.
-- Equity (8), p. 19: E_{t+1} = E_{t+} + (1 - tau) Pi_{t+1} 1{Pi>0}
-  + Pi_{t+1} 1{Pi<=0}.
+- (1) w_t+1 = mu_b + rho_b w_t + sigma_b eps_t+1, eps ~ N(0,1), by
+  business-cycle state b (two-state Markov chain).
+- (2) log(D_t+1/D_t) ~ N(mu_bD, sigma_bD^2), i.i.d. given b.
+- Recessions last 8 quarters and expansions 20 on average (p. 21).
+- Returns: the real deposit rate and the loan and liquid-asset spreads of
+  Table 2, by state (p. 22); returns "vary with the business cycle" (p. 13).
 
-## Objective (pp. 19-20)
+## Timing, profits and equity (pp. 14-16)
 
-- (9): V = E_0 sum_t beta^t X_t^{1-gamma}/(1-gamma).
-- (10): V^C(L, D, E; w, r) = max over X, S_{t+}, F_{t+}, N of
-  { X^{1-gamma}/(1-gamma) + E_t[beta V(L', D', E'; w', r')] }.
-- (11): V = max[0, V^C], "limited liability".
+- The bank enters t with L_t-1, S_t-1, D_t-1, F_t-1, E_t-1; shocks are
+  realised; it decides to continue or fail; it liquidates S_t-1, repays
+  F_t-1, realises loan losses w_t.
+- (3) Pi_t = (r_L,t - w_t) L_t-1 + r_S,t S_t-1 - r_D,t D_t-1
+  - g_F(F_t-1, D_t-1, E_t-1) - g_N(N_t-1, D_t-1) - c D_t-1.
+- Taxes tau on positive profits only.
+- (4) E_t = E_t-1 - X_t + (1 - tau) Pi_t 1{Pi_t > 0} + Pi_t 1{Pi_t <= 0}.
+- (5) L_t = (1 - theta - w_t) L_t-1 + N_t; N_t < 0 is liquidation.
+- (6) L_t + S_t = D_t + F_t + E_t.
+- (7) (omega_L L_t + omega_S S_t) / E_t <= lambda_w, E_t after dividends
+  and retained profits.
+- (8) (L_t + S_t) / E_t <= lambda_u.
 
-## Costs (p. 21)
+## Objective (pp. 17-18)
 
-- Screening (12): g_N(N, D) = 1{N>0} phi_N N^2/D + 1{N<=0} psi phi_N N^2/D,
-  psi > 1.
-- Wholesale funding (13): g_F(F, D, E) = r_{F,t+1} F + phi_F F^2/D
-  - phi_E E^2/D.
+- (9) V = E_0 sum beta^t X_t^(1-gamma)/(1-gamma).
+- (10) V^C(L_t-1, D_t-1, E_t-1; Omega_t) = max over X_t, S_t, F_t, N_t of
+  X_t^(1-gamma)/(1-gamma) + beta E_t[V(...; Omega_t+1)].
+- (11) V = max[V^D, V^C]: limited liability, outside option V^D. A bank
+  that violates a constraint even at zero dividends fails; slightly above,
+  it may prefer the outside option (p. 18).
 
-## Normalisation and algorithm (pp. 55-59)
+## Costs (pp. 18-19)
 
-- Variables divided by D_t; Gamma_{t+1} = D_{t+1}/D_t (p. 55).
-- (14), p. 56: (omega_L (l + n) + omega_S s) / (e - x - g_N(n)) <= lambda_w.
-- (15), p. 56: e_{t+1} = (e_t - x_t)/Gamma_{t+1} + (1 - tau) pi_{t+1}
-  1{Pi>0} + pi_{t+1} 1{Pi<=0} - g_N(n_t).
-- Liquid assets from the balance sheet: s = 1 + f + e - x - l - n
-  (p. 57, step 7a).
-- Failure value v^d implied by "consumption after failure" c-bar
-  (p. 57, step 5); a candidate that violates a constraint gets v^d
-  (step 7c); the continuation value is v or v^d (step 7b).
-- Grids for e and l; three nested grids for (x, n, f) at each node;
-  two-dimensional linear interpolation; value function iteration to a
-  tolerance (pp. 56-58).
-- Write-offs discretised "using the procedures described by Adda and
-  Cooper (2003)" (p. 56).
-- Simulation: 10,000 banks, 2,000 periods, the last 500 used; a failed
-  bank is replaced by one with mean equity, mean loans and a low loss
-  state (pp. 58-59).
+- (12) g_N(N, D) = 1{N>0} phi_N N^2/D + 1{N<=0} psi phi_N N^2/D.
+- (13) g_F(F_t-1, D_t-1, E_t-1) = r_D,t F_t-1 + phi_F F_t-1^2/D_t-1
+  - phi_E E_t-1^2/D_t-1: the base rate is the risk-free deposit rate.
 
-## Parameter values
+## Normalisation and algorithm (pp. 55-58)
+
+- Divide by D_t; Gamma_t = D_t/D_t-1.
+- (15) (omega_L (l_t + n_t) + omega_S s_t) / e_t <= lambda_w.
+- (16) e_t = (e_t-1 - x_t)/Gamma_t + (1 - tau) pi_t 1{Pi>0} + pi_t 1{Pi<=0}.
+- s = 1 + f + e - x - l - n (step 7a).
+- Two continuous states (e, l); write-offs discretised "using the
+  procedures described by Adda and Cooper (2003)"; nested grids for
+  (x, n, f) at each node; two-dimensional linear interpolation; value
+  function iteration to a tolerance; a constraint violation gets v^d; the
+  continuation value is v or v^d (steps 5-8).
+- Simulation: 10,000 banks, 2,000 periods, last 500 used; a failed bank is
+  replaced by one with mean equity, mean loans and low loan losses (steps
+  10-13).
+- Estimation weights: standard deviations of the data moments, with "a high
+  weight" on the failure rate (n. 19, p. 23).
+
+## Parameters
 
 | Parameter | Large | Small | Source |
 |---|---|---|---|
-| phi_F | 0.0092 | 0.081 | Table 4, p. 25 |
-| phi_E | 0.07 | 0.007 | Table 4 |
-| beta | 0.975 | 0.986 | Table 4 |
-| gamma (CRRA) | 1.31 | 1.89 | Table 4 |
-| c_D (consumption after failure) | 2e-5 | 4e-5 | Table 4 |
-| c (operating cost) | 0.011 | 0.0096 | Table 4 |
-| phi_N | 0.63 | 0.90 | Table 4 |
-| theta | 0.06 | 0.08 | p. 24, p. 55 |
-| tau | 0.15 | 0.15 | p. 24 |
-| lambda_w, lambda_u | 16.66, 33.33 | same | p. 24 |
-| omega_L, omega_S | 1, 0.2 | same | p. 24 |
-| w, deposit growth, rates, by state | Table 2 | Table 2 | p. 14 |
+| phi_F | 0.0092 | 0.0803 | Table 4, p. 24 |
+| phi_E | 0.0705 | 0.0072 | Table 4 |
+| beta | 0.9753 | 0.9859 | Table 4 |
+| gamma | 1.3023 | 1.9054 | Table 4 |
+| c | 0.0110 | 0.0096 | Table 4 |
+| phi_N | 0.4352 | 0.9005 | Table 4 |
+| c_D | 2e-5 | 4e-5 | Table 4 |
+| theta | 0.06 | 0.08 | p. 22 |
+| psi | 1.3 | 1.3 | p. 22 |
+| tau | 0.15 | 0.15 | p. 22 |
+| lambda_w, lambda_u | 16.66, 33.33 | same | p. 22 |
+| omega_L, omega_S | 1, 0.2 | same | p. 22 |
+| shocks and rates by state | Table 2 | Table 2 | p. 22 |
 
-## Gaps: items the paper does not state or states inconsistently
+Table 5 (model and data moments) is identical to the 2016 draft's.
 
-- G1. r_F, the base rate on wholesale funding in (13): not given.
-- G2. psi, the liquidation cost multiplier in (12): only "psi > 1".
-- G3. v^d: the formula from c-bar is not given; (11) bounds the value at 0,
-  which with gamma > 1 (negative utility) would make exit always optimal,
-  while the appendix uses v^d.
-- G4. g_F is a rate times F_{t+} in (7) but a total cost in (13); (13)
-  uses E_t without saying whether before or after the dividend.
-- G5. g_N is paid out of next period's profit in (7) but out of current
-  equity in (14) and (15).
-- G6. (15) divides the profit by D_{t+1} but g_N(n_t) by D_t.
-- G7. The discretisation: number of write-off nodes, how the
-  state-dependent AR(1) is discretised across regime switches, nodes for
-  deposit growth; grid sizes and ranges for e, l, x, n, f.
-- G8. Whether rates are real or nominal in the model (Table 2's deposit
-  rate is real; its spreads are differences).
-- G9. Whether simulated write-offs are bounded (a normal AR(1) can go
-  negative).
-- G10. The model counterparts of the Table 5 moments: loans/assets as
-  l/(l + s), deposits/assets as 1/(l + s), and whether standard deviations
-  are per bank over time (as the data) or across the panel.
-- G11. Initial states of the simulated banks.
+## Gaps of the 2016 draft and the 2018 version
 
-## Consequence for stage 2
+| Gap (2016) | 2018 |
+|---|---|
+| G1 wholesale base rate r_F | settled: r_D, eq. (13) |
+| G2 liquidation cost psi | settled: 1.3, p. 22 |
+| G3 failure value | partly: V = max[V^D, V^C] with an outside option, but v^d's formula from c_D is not given |
+| G4 g_F rate or total | settled: total cost in profits (3) |
+| G5 timing of g_N | settled: in profits (3), on last period's new loans |
+| G6 normalisation dates | settled: (16) |
 
-G1 to G6 change the model, not only its numerics. A reproduction of the
-Table 5 model columns therefore needs either these values from the
-authors' published version or code, or choices fixed in a pre-registration
-and reported as ours.
+## Remaining gaps (2018)
+
+- R1. v^d as a function of c_D (step 5) is not given.
+- R2. Discretisation: number of write-off nodes; how the state-dependent
+  AR(1) is discretised across regime switches; nodes for deposit growth;
+  grid sizes and ranges for e, l, x, n, f; the tolerance.
+- R3. Whether returns are fixed at their state means or random.
+- R4. Bounds on simulated write-offs (a normal AR(1) can go negative).
+- R5. The model counterparts of the Table 5 moments: definitions of the
+  ratios, profit as Pi before or after tax, standard deviations per bank
+  over time or across the panel, failure rate per quarter.
+- R6. Initial states of the simulated banks; the shock seed.
+
+R1 changes the model; R2 to R6 are numerics and measurement. Each needs a
+choice fixed in the stage 2 pre-registration and reported as ours.
