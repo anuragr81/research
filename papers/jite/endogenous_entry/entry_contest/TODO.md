@@ -1073,6 +1073,15 @@ paper's claims, and only then write the manuscript.
     certificate attests policies against decree parameters).
   Record and suite: lit/applications_2026 (19 checks). Qing was dropped as an
   example.
+  Evidence and bibliography added 14 Oct 2026 (author: "it's worth adding the
+  quotes as evidence from the material you've searched"). LITERATURE.tex
+  section "Application search of 14 October 2026" quotes the Chiba and Italian
+  sources and one abstract sentence for each of 26 papers found (5 more cited by
+  title only, having no usable abstract), grouped by subject and not judged as
+  precedents. 33 new refs.bib entries (29 papers, 4 primary sources).
+  lit/applications_2026/abstracts_2026.json (Crossref/OpenAlex, pinned) holds
+  the abstracts; the suite now has 87 checks. All 31 papers are [A]: none has a
+  lit record or Lean until read in full.
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to

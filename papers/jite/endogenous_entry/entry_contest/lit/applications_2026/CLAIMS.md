@@ -8,6 +8,12 @@ in `~/.cache/entry_contest/applications/` and pinned by sha256.
 `verify_applications.py` checks each quotation verbatim against the cached
 document. Ignoring whitespace is the only normalisation.
 
+The same suite checks the quotations in the section "Application search of
+14 October 2026" of `LITERATURE.tex`: the primary-source quotations against
+these documents, and one sentence from each paper found against
+`abstracts_2026.json` (abstracts from Crossref or OpenAlex, 14 October 2026,
+pinned by sha256).
+
 The application search of 14 October 2026 (about 45 settings; see `TODO.md`)
 chose these two because they are current and their rules are public. The
 historical sale of status (Qing *jiansheng*) was dropped at the author's

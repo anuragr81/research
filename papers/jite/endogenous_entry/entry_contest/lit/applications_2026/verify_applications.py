@@ -4,10 +4,16 @@ It pins each cached document by sha256, extracts its text (pdftotext for the Chi
 tag-stripping for the Normattiva HTML), checks every quotation in CLAIMS.md verbatim with
 whitespace removed, checks that the "+4" sits on the same table row as the unlicensed-care
 item, and runs a reversed-quote control.
+
+It also checks the section "Application search of 14 October 2026" of LITERATURE.tex:
+every \\aq{key}{text} against that paper's abstract in abstracts_2026.json (pinned), with
+the source named in the [A, ...] tag; every \\pq or \\pqj{document}{text} against the cached
+document; and every citation key against refs.bib.
 """
 
 import hashlib
 import html
+import json
 import pathlib
 import re
 import shutil
@@ -15,6 +21,8 @@ import subprocess
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
+ROOT = HERE.parent.parent
+ABSTRACTS_PIN = "bf146484373fde7730aa04f3f964e2efb4f61939532c50caa4ffe11d8c51977f"
 CACHE = pathlib.Path.home() / ".cache" / "entry_contest" / "applications"
 PINS = {
     "chiba_senkoukijun_r9.pdf": "7c8c161d2fe08c0038aab645528831edd96a4f2d643b9393960c784994f2ebf3",
@@ -84,6 +92,47 @@ check("AP-C1 control: AP-6 with highest replaced by lowest is not in the documen
 flip2 = squash("il minor punteggio da attribuire alle imprese")
 check("AP-C2 control: AP-8 with maggior replaced by minor is not in the statute",
       flip2 not in squash(texts.get("normattiva_dlgs36_2023_art108.html", "")))
+
+print()
+print("LITERATURE.tex, section Application search of 14 October 2026")
+abs_path = HERE / "abstracts_2026.json"
+d = hashlib.sha256(abs_path.read_bytes()).hexdigest()
+check("AP-A0 abstracts_2026.json is the record built on 14 October 2026", d == ABSTRACTS_PIN, d[:16])
+abstracts = json.loads(abs_path.read_text())
+lit = (ROOT / "LITERATURE.tex").read_text()
+m = re.search(r"\\section\{Application search of 14 October 2026\}(.*?)\\section\{", lit, re.S)
+sec = m.group(1) if m else ""
+check("AP-A1 the section is in LITERATURE.tex", bool(sec))
+
+
+def delatex(t):
+    return t.replace("\\%", "%").replace("\\&", "&").replace("~", " ")
+
+
+def in_abstract(key, text):
+    a = html.unescape(abstracts.get(key, {}).get("abstract") or "")
+    return bool(a) and squash(delatex(text)) in squash(a)
+
+
+aqs = re.findall(r"\\aq\{(\w+)\}\{([^{}]*)\}\s*\[A, (\w+)", sec)
+check("AP-A2 the section quotes at least 25 abstracts, each tagged with its source",
+      len(aqs) >= 25 and len(aqs) == sec.count("\\aq{"), f"{len(aqs)} quotations")
+for key, text, src in aqs:
+    check(f"AP-A3 {key}: quotation is in its abstract verbatim", in_abstract(key, text))
+    check(f"AP-A4 {key}: tagged source {src} is the abstract's source",
+          src == abstracts.get(key, {}).get("abstract_source"))
+pqs = re.findall(r"\\pqj?\{([\w.\-]+)\}\{([^{}]*)\}", sec)
+check("AP-A5 the section quotes the primary documents", len(pqs) >= 9, f"{len(pqs)} quotations")
+for doc, text in pqs:
+    t = texts.get(doc, "")
+    check(f"AP-A6 {doc}: quotation is in the document verbatim", bool(t) and squash(text) in squash(t),
+          text[:24])
+bib = set(re.findall(r"^@\w+\{([^,]+),", (ROOT / "refs.bib").read_text(), re.M))
+cited = set(k.strip() for g in re.findall(r"\\cite[pt]?\{([^}]*)\}", sec) for k in g.split(","))
+missing = sorted(cited - bib)
+check("AP-A7 every key cited in the section is in refs.bib", not missing, ", ".join(missing))
+check("AP-C3 control: AP-A3 with higher replaced by lower is not in Adiri and Yechiali",
+      not in_abstract("AdiriYechiali1974", "The lower the priority of the queue, the higher the toll fee"))
 
 fails = results.count(False)
 print("=" * 72)

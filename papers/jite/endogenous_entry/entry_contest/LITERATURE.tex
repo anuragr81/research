@@ -6,12 +6,20 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[round]{natbib}
 \usepackage{parskip}
+\usepackage{CJKutf8}
+\DeclareUnicodeCharacter{2010}{-}
+% \aq{key}{text}: a quotation from the abstract of key, and \pq{document}{text}
+% or \pqj{document}{text} (Japanese): a quotation from a cached primary
+% document. Both are checked by lit/applications_2026/verify_applications.py.
+\newcommand{\aq}[2]{``#2''}
+\newcommand{\pq}[2]{``#2''}
+\newcommand{\pqj}[2]{\begin{CJK}{UTF8}{min}「#2」\end{CJK}}
 \emergencystretch=1.5em
 
 \title{Literature position for the threshold-entry contest\\
 \large Survey and verified bibliography}
 \author{}
-\date{1 September 2026, revised 6 October 2026}
+\date{1 September 2026, revised 14 October 2026}
 
 \begin{document}
 \maketitle
@@ -1446,6 +1454,128 @@ C13 stands. C7 waits on no paper found:
 not enter cannot win stays true of the entry models. It does not cover the
 statistical-discrimination models, in which those who do not invest can still
 win.
+
+\section{Application search of 14 October 2026}
+\label{sec:application-search}
+
+The Research question of \texttt{MANUSCRIPT.tex} (\S1) rests on this search.
+Education was dropped as the application because referees read it through
+human capital. The search looked for settings in which a fixed outlay buys
+standing in a ranked allocation, those without it still compete, and wealth
+matters only through affordability. It scoped about 45 settings (log in
+\texttt{TODO.md}). The author chose two areas, bought priority in
+administrative allocation and the sale of status, and asked for current
+institutions over historical ones. The two institutions below come from the
+first area. The literature lists that follow record what the search found,
+grouped by subject. They are not judged as precedents here, because the
+conclusions may still change (author, 14 October 2026).
+
+The suite \path{lit/applications_2026/verify_applications.py} checks every
+quotation below verbatim, with whitespace removed as the only normalisation. Quotations from the institutions are checked
+against the cached and pinned documents. Quotations from papers are checked
+against \path{lit/applications_2026/abstracts_2026.json}, which holds each
+paper's abstract as Crossref or OpenAlex returned it on 14 October 2026 and is
+pinned by sha256. English renderings of the Japanese and Italian are ours.
+
+\subsection{The two institutions, from primary sources}
+
+\paragraph{Chiba City daycare selection \citep{ChibaSelection2027,ChibaRevision2025}.}
+The city states its rule as
+\pqj{chiba_kaisei_r8.pdf}{保育の必要性を点数化し、点数の高い方から、入所の決定をします。}
+(``the need for childcare is scored, and places are decided from the highest
+score''). The current criteria rank children first by priority tier,
+\pqj{chiba_senkoukijun_r9.pdf}{優先項目に該当する児童（Ａ）から選考を行い}
+(``selection starts with children who meet a priority item (A)''), and
+within a tier by points:
+\pqj{chiba_senkoukijun_r9.pdf}{選考順位内で入所選考点数が高い方から、希望している保育園等に空きがある場合に、内定します。}
+(``within a selection rank, a place is provisionally offered from the highest
+selection points, where the requested nursery has a vacancy''). One
+adjustment item covers
+\pqj{chiba_senkoukijun_r9.pdf}{認可外保育施設又はベビーシッター、幼稚園の実施する預かり保育等}
+(``an unlicensed nursery or a babysitter, extended care run by a kindergarten,
+and so on'') with the condition
+\pqj{chiba_senkoukijun_r9.pdf}{一時預かり事業の利用(月６４時間以上)}
+(``use of temporary care, at least 64 hours a month''), and it scores
+\pqj{chiba_senkoukijun_r9.pdf}{＋４}; the suite checks that the ``+4'' sits on the
+same row of the table as the item. The criteria are current:
+\pqj{chiba_senkoukijun_r9.pdf}{令和９年４月利用選考から適用}
+(``applied from the selection for April 2027'').
+
+\paragraph{Italian public tenders \citep{DLgs36_2023,DLgs198_2006}.}
+Article 108(7) of the public contracts code provides that
+\pq{normattiva_dlgs36_2023_art108.html}{le stazioni appaltanti prevedono, nei bandi di gara, negli avvisi e negli inviti, il maggior punteggio da attribuire alle imprese per l'adozione di politiche tese al raggiungimento della parità di genere comprovata dal possesso della certificazione della parità di genere}
+(``contracting authorities provide, in calls for tenders, notices and
+invitations, for the higher score to be awarded to firms for adopting policies
+aimed at gender equality, proven by holding the gender-equality
+certificate''). The certificate exists
+\pq{normattiva_dlgs198_2006_art46bis.html}{al fine di attestare le politiche e le misure concrete adottate dai datori di lavoro per ridurre il divario di genere}
+(``to attest the policies and concrete measures adopted by employers to reduce
+the gender gap''), and a decree sets
+\pq{normattiva_dlgs198_2006_art46bis.html}{i parametri minimi per il conseguimento della certificazione della parità di genere}
+(``the minimum parameters for obtaining the certificate'').
+
+Where each institution departs from the model is recorded in
+\path{lit/applications_2026/CLAIMS.md} (AP-D1, AP-D2): in Chiba the points
+are earned by buying a service whose price the provider sets, so the outlay is
+not one fixed fee; in Italy the certificate needs compliance as well as a
+payment.
+
+\subsection{Literature found, grouped by subject}
+
+All entries are \textbf{[A]}: the abstract only, with its source named. None
+has a \texttt{lit/} record or Lean yet; a paper read in full gets both.
+
+\paragraph{Bought priority and allocation of scarce places.}
+\begin{itemize}
+\item \citet{SonmezSwitzer2013}: \aq{SonmezSwitzer2013}{Cadets at USMA can increase their branch priorities at a fraction of slots by extending their service agreement.} [A, OpenAlex]
+\item \citet{Sonmez2013}: \aq{Sonmez2013}{the Army recently introduced incentives programs in which cadets could bid 3 years of additional service obligation to obtain higher priority for their desired branches.} [A, OpenAlex]
+\item \citet{GreenbergPathakSonmez2024}: \aq{GreenbergPathakSonmez2024}{Four objectives— respecting merit, increasing retention, aligning talent, and enhancing trust—guided reforms to the US Army’s centralized branching process of cadets to military specialties since 2006.} [A, Crossref]
+\item \citet{Kleinrock1967}: \aq{Kleinrock1967}{In this paper we consider that relative position in queue is determined according to the size of a customer’s bribe (which is paid before the customer sees the queue length).} [A, Crossref]
+\item \citet{AdiriYechiali1974}: \aq{AdiriYechiali1974}{The higher the priority of the queue, the higher the toll fee to join it but the shorter the time spent in the system.} [A, Crossref]
+\item \citet{HassinHaviv1997}: \aq{HassinHaviv1997}{We provide a detailed analysis of a queueing model in which two priority levels can be purchased.} [A, Crossref]
+\item \citet{GavirneniKulkarni2016}: \aq{GavirneniKulkarni2016}{Service providers, in the presence of congestion and heterogeneity of customer waiting costs, often introduce a fee‐based premier option using which the customers self‐segment themselves.} [A, Crossref]
+\item \citet{FernandezGali1999}: \aq{FernandezGali1999}{We compare the performance of markets and tournaments as allocative mechanisms in an economy with borrowing constraints.} [A, OpenAlex]
+\item \citet{CheGaleKim2013}: \aq{CheGaleKim2013}{This article studies different methods of assigning a good to budget-constrained agents.} [A, OpenAlex]
+\item \citet{AkbarpourDworczakKominers2024}: \aq{AkbarpourDworczakKominers2024}{Many scarce public resources are allocated at below-market-clearing prices, and sometimes for free.} [A, OpenAlex]
+\item \citet{Condorelli2013} and \citet{YamaguchiAsaiKambayashi2018}, the
+  second on childcare rationing in Japan: neither Crossref nor OpenAlex holds
+  an abstract, so they are cited by title only.
+\end{itemize}
+
+\paragraph{Sale of office and status.}
+\begin{itemize}
+\item \citet{Allen1998}: \aq{Allen1998}{This article argues that the system was efficient in that it solved a selection problem and provided appropriate incentives.} [A, OpenAlex]
+\item \citet{CrettezDeffainsMusyTallec2025}: \aq{CrettezDeffainsMusyTallec2025}{Venality, i.e., the sale of public positions, was widely used in the judicial sector in France between the 16th and 18th centuries.} [A, OpenAlex]
+\item \citet{Guardado2018}: \aq{Guardado2018}{The paper uses a unique hand-collected dataset of the prices at which the Spanish Crown sold colonial provincial governorships in seventeenth and eighteenth century Peru to examine the impact of colonial officials on long-run development.} [A, Crossref]
+\item \citet{Twinam2015}: \aq{Twinam2015}{Members of mixed races could, however, free themselves from such burdensome restrictions through the purchase of a gracias al sacar —a royal exemption that provided the privileges of Whiteness.} [A, OpenAlex]
+\item \citet{Zhang2013}: \aq{Zhang2013}{Wealth was the key to unlocking this path of advancement and continued to play a role in the competition for success even among those who had already been certified as eligible for office.} [A, Crossref]
+\item \citet{PugaTrefler2014}: \aq{PugaTrefler2014}{However, starting in 1297, a small group of particularly wealthy merchants blocked political and economic competition: they made parliamentary participation hereditary and erected barriers to participation in the most lucrative aspects of long-distance trade.} [A, Crossref]
+\item \citet{BaiJia2016}: \aq{BaiJia2016}{This paper studies how the abolition of an elite recruitment system—China's civil exam system that lasted over 1,300 years—affects political stability.} [A, OpenAlex]
+\item \citet{ChenKungMa2020}: \aq{ChenKungMa2020}{China's civil examination system (keju), an incredibly long-lived institution, has a persistent impact on human capital outcomes today.} [A, Crossref]
+\end{itemize}
+
+\paragraph{Credentials, certification and costly verification.}
+\begin{itemize}
+\item \citet{BenPorathDekelLipman2014}: \aq{BenPorathDekelLipman2014}{There are no monetary transfers, but the principal can check an agent’s information at a cost.} [A, Crossref]
+\item \citet{Lizzeri1999}: \aq{Lizzeri1999}{I show that in a class of environments the optimal choice for a monopoly intermediary is to reveal only whether quality is above some minimal standard.} [A, OpenAlex]
+\item \citet{StahlStrausz2017WP}: \aq{StahlStrausz2017WP}{While both sellers and buyers have a demand for certification, its role differs fundamentally: sellers use it for signaling, buyers use it for inspection.} [A, OpenAlex, WP version]
+\item \citet{FrankelKartik2022}: \aq{FrankelKartik2022}{We formalize why and how a decision maker should commit to underutilizing data.} [A, Crossref]
+\item \citet{Stiglitz1975}: \aq{Stiglitz1975}{This paper focuses on the labeling of individuals, on the economic costs and benefits of labeling, the institutions that provide it, and the determination of the equilibrium amount of screening under various institutional arrangements.} [A, OpenAlex]
+\item \citet{Bidner2014}: \aq{Bidner2014}{I propose a model in which credentials, such as diplomas, are instrumentally valuable to workers.} [A, Crossref]
+\item \citet{Hopkins2012}: \aq{Hopkins2012}{This paper considers a matching model of the labor market where workers, who have private information on their quality, signal to firms that also differ in quality.} [A, OpenAlex]
+\item \citet{BartosBauerChytilovaMatejka2016}: \aq{BartosBauerChytilovaMatejka2016}{In both countries we study, negatively stereotyped minority names reduce employers' effort to inspect resumes.} [A, Crossref]
+\item \citet{Spence1973}, \citet{Arrow1973} and \citet{Townsend1979}: cited by
+  title only. OpenAlex returns a table of contents for Spence and the opening
+  of the text for Townsend, and no source holds an abstract for Arrow.
+\end{itemize}
+
+\paragraph{What the search records.} The Stahl and Strausz entry is the 2017
+working paper; its journal version was not confirmed, because the DOI the
+search first returned resolves to a different paper. No paper in these lists
+was found to model a selector who chooses the weight on a purchasable
+credential given a cost of verification. That is a statement about the
+abstracts read, not a novelty claim, and it enters no C row of
+\texttt{MANUSCRIPT.tex}.
 
 \section{Contribution and its precedents, carried from \texttt{PROOFS.tex}}
 \label{sec:contribution-carried}
