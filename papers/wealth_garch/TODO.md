@@ -360,6 +360,17 @@ grounds.
   (vanishes with bank effects, 0.015). Bank payouts are dividends (7.40%
   of prior equity a year) with almost no repurchases (0.05%). Next:
   Berger et al. or Mankart, Michaelides and Pagratis.
+- 2026-10-14. Berger et al. stage 1 (PREREG_stage1.md, results_stage1.md),
+  1997-2006, 3,517 bank-years of 643 public bank holding companies, with
+  gmm.py (validated against Roodman and pydynpd, results_validation.md).
+  5 of 18 targets hold: mean capital ratios (all three), the Tier 1 Step 2
+  speed, the leverage size sign. Step 1 speeds are 0.15-0.19 against
+  0.49-0.60, so targets are ill-determined. Run 1 read NIC end dates as
+  exclusive (they are inclusive); fixed here and in the Gordon and Hirtle
+  scripts, whose results barely moved (control 99.0% -> 99.1%). Open for
+  the author: whether a second pre-registration should test sensitivity
+  (instrument lags, collapsed instruments, BUSINESSLOAN over total assets,
+  annualised STDROA).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the

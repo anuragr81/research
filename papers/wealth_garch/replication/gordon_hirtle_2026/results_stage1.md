@@ -12,6 +12,13 @@ because a stray quote character in a caret-delimited text field opened a
 quoted field. The fix reads those files with quoting off; afterwards every
 line of the four files parses with the header's field count.
 
+## Correction, 14 October 2026
+
+NIC relationship and attribute end dates are inclusive (the last day in
+force; NIC data shows a parent link ending the day before the merger that
+ends it). The first version treated them as exclusive. Fixed in stage1.py
+and stage1_3.py and rerun: the 2015-2020 agreement of the two top-tier rules is 1,832 of 1,848 (99.1%) rather than 1,829 (99.0%). No sample or target changed.
+
 ## Findings
 
 - 20 of 22 targets reproduce under the pre-registered rule; 2 differ.
@@ -29,7 +36,7 @@ line of the four files parses with the header's field count.
   their deflator or any exclusion beyond top-tier, U.S.-owned, full-year
   and the size threshold.
 - Control of the amended top-tier rule: on 2015-2020 it agrees with
-  `RSSD9348` on 99.0% of bank-years passing the other rules, above the
+  `RSSD9348` on 99.1% of bank-years passing the other rules, above the
   pre-registered 97%, so the 2021-2024 sample uses it alone.
 - Known differences from the pre-registration hold: no OCI before 2001, no
   Tier 1 buffer before 1996, no bank-specific capital surcharges.
@@ -115,7 +122,7 @@ BHCF20241231.ZIP sha256 a22b6c39d264ae1697c5e0a6a2d085f414aa059648b0059f83f8dc65
 
 bank-years 7843, banks 760, years 1990-2024 (35)
 reported: bank-years from files with holder fields also top-tier under RSSD9364 6621
-control: RSSD9348 and the NIC rule agree on 1829/1848 = 99.0% of 2015-2020 bank-years passing the other rules -> at least 97%
+control: RSSD9348 and the NIC rule agree on 1832/1848 = 99.1% of 2015-2020 bank-years passing the other rules -> at least 97%
 reported: 2021-2024 bank-years 1216, of which top-tier in 2020 1008
 
 R1 medians over years of aggregate component / aggregate adjusted prior equity (%)

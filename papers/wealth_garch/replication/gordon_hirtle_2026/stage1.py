@@ -70,7 +70,7 @@ def controlled_offspring(path):
         if all(r[k].strip() == "1" for k in ("RELN_LVL", "CTRL_IND", "REG_IND", "EQUITY_IND")):
             start, end = r["DT_START"].strip()[:8], r["DT_END"].strip()[:8]
             spans[int(r["ID_RSSD_OFFSPRING"])].append((start, end))
-    return {year: {i for i, ss in spans.items() if any(s <= f"{year}1231" < e for s, e in ss)}
+    return {year: {i for i, ss in spans.items() if any(s <= f"{year}1231" <= e for s, e in ss)}
             for year in range(2015, 2025)}
 
 

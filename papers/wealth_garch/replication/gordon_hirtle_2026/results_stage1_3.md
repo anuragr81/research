@@ -9,6 +9,13 @@ report in t-1" as a December file record with total assets reported.
 stage1.py was split into a sample step and a report step with no change to
 its output (results_stage1.md still reproduces).
 
+## Correction, 14 October 2026
+
+NIC relationship and attribute end dates are inclusive (the last day in
+force; NIC data shows a parent link ending the day before the merger that
+ends it). The first version treated them as exclusive. Fixed in stage1.py
+and stage1_3.py and rerun: for 2021-2024 the entity type now comes from the attributes files for 858 bank-years and from the 2020 `RSSD9346` for 351 (856 and 353 before). No sample or target changed.
+
 ## Findings
 
 - C1 (bank holding companies only, entity type BHC or FHD) drops 335
@@ -23,8 +30,8 @@ its output (results_stage1.md still reproduces).
   still reproduces; the total of 7,508 against 6,448 still differs.
 - The 2020 control: the attributes files and `RSSD9346` agree on keep or
   drop for all 156 holding companies compared. For 2021-2024 the entity
-  type came from the attributes files for 856 bank-years, from the 2020
-  `RSSD9346` for 353, and was unknown for 7 (kept).
+  type came from the attributes files for 858 bank-years, from the 2020
+  `RSSD9346` for 351, and was unknown for 7 (kept).
 - C2 (GDP deflator) and C3 (continuity) are reported, not adopted. All
   three together leave 7,170 bank-years. Every combination keeps R4's
   means, the Tier 1 buffer and all of R5 reproducing; see the output.
@@ -121,7 +128,7 @@ BHCF20231231.ZIP sha256 d7b60d0c97e76d4e4641bb0d8285e5636fc33f7525b5ecf744f67908
 BHCF20241231.ZIP sha256 a22b6c39d264ae1697c5e0a6a2d085f414aa059648b0059f83f8dc6545d336a3
 
 control: 2020 keep-or-drop by attributes against RSSD9346: 156/156 agree
-2021-2024 entity type read from: {'attributes': 856, 'carried RSSD9346': 353, 'unknown': 7}
+2021-2024 entity type read from: {'attributes': 858, 'carried RSSD9346': 351, 'unknown': 7}
 C1 drops by entity type: {'IHC': 16, 'SLHC': 319}
 C1 drops by year: 2011:1 2012:44 2013:38 2014:28 2015:27 2016:26 2017:25 2018:24 2019:23 2020:18 2021:20 2022:20 2023:21 2024:20
 

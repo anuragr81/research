@@ -53,13 +53,13 @@ def main(cpi_path, gdp_path, rel_path, attr_paths, prior_path, paths):
             if "RSSD9346" in rec:
                 etype, how = rec["RSSD9346"], "RSSD9346"
                 last_type[rid] = etype
-            elif rid in attr and attr[rid][1] <= end < attr[rid][2]:
+            elif rid in attr and attr[rid][1] <= end <= attr[rid][2]:
                 etype, how = attr[rid][0], "attributes"
             elif rid in last_type:
                 etype, how = last_type[rid], "carried RSSD9346"
             else:
                 etype, how = None, "unknown"
-            if year == 2020 and rid in attr and attr[rid][1] <= end < attr[rid][2] and bank_year(rec, year, cpi, top):
+            if year == 2020 and rid in attr and attr[rid][1] <= end <= attr[rid][2] and bank_year(rec, year, cpi, top):
                 compared += 1
                 agree += (attr[rid][0] in KEEP) == (etype in KEEP)
             for deflator, prices in (("cpi", cpi), ("gdp", gdp)):
