@@ -113,6 +113,10 @@ that world out. A claim that cannot name its falsifier does not enter.
   changes or a new one is cited. Review the sentences resting on it, revise
   them, and only then run `check.py --restamp`. Restamping without the review
   defeats the check.
+- The Players sub-section (`claims.yaml`, `players`, `choices`) follows the
+  same grounding, terms and stamps. Each player is a term of the table, and
+  each choice row carries a status (DECIDED, PROPOSED, DEFERRED) and names the
+  issue that would decide it.
 
 ## 7. Mechanism before prose (S)
 

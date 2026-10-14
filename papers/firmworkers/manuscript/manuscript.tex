@@ -51,6 +51,28 @@ The scale of the upskilling cost and the shape of utility are not yet fixed.
 
 The terms are those of the terminology table in the measurement map. Each sentence records in \texttt{claims.yaml} the rows, Lean theorems or source premise it rests on.
 
+\subsection*{Players}
+The players of the micro model and what each is. Every cell records in \texttt{claims.yaml} the rows or source premises it rests on, and is stamped like the summaries.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}p{12.5cm} >{\raggedright\arraybackslash}p{8.0cm}}
+\toprule Player & Definition & Rests on \\ \midrule \endhead
+firm & The one firm of the closed economy, where all income passes between workers and the firm. It sets the income of each job on the ladder and receives the upskilling cost paid on the return. In the source it also ranks workers by perceived earning potential, a rule the micro model does not yet use & source, ``all income circulates between workers and firm''; source, ``income level that is eventually set by the firm''; source, ``rank workers based on the perceived earning potentials of workers''; M38 \\ \midrule
+job holder & A worker who keeps a job through the period. Every worker holds exactly one job, and the number of jobs is fixed & source, ``Every worker holds exactly one job and the number of jobs does not change over time in the economy''; M32 \\ \midrule
+displaced worker & A worker separated from a job by creative destruction. The job stays on the ladder, vacant. A displaced worker who takes the lottery is an entrant & M32; M38; M36 \\ \midrule
+\end{longtable}
+
+What each player chooses and what the choice is made to maximise. \texttt{DECIDED} rests on decided or proved rows; holds in the model as it stands. \texttt{PROPOSED} under discussion; the open item names the issue that decides it. \texttt{DEFERRED} belongs to the macro model, postponed.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.4cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{2.0cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{4.4cm}}
+\toprule Player & Chooses & To maximise & Status & Open & Rests on \\ \midrule \endhead
+displaced worker & one route, once, among the downgrade, the return and the lottery & expected utility of income, with any nondecreasing utility & \texttt{DECIDED} & what the downgrade pays (issue 11a), the unit of the upskilling cost (issue 1), the form of the lottery cost (issue 11d), partner chances under closure (M37) & M32; M38; M36; M30; M33 \\ \midrule
+job holder & nothing in the micro model, since only displaced workers enter the lottery & none in the micro model. A pool of job holders would not hold together, because its richest entrant does better outside & \texttt{DECIDED} &  & M32; M30 \\ \midrule
+firm & nothing in the micro model, where the tail index is a parameter & none in the micro model. Its stated principle is to prefer upskilling, whose spending flows back to the firm, to the lottery, whose spending is lost to the firm & \texttt{DECIDED} &  & M3; source, ``flows back to the firm as upskilling investments''; source, ``rather than being diverted into the social lottery channel'' \\ \midrule
+firm & the tail index of the ladder, with the wage bill fixed & what returners pay for upskilling, one period at a time & \texttt{PROPOSED} & issues 11c (instruments) and 11e (objective), with issue 4 (upskilling as the return) & M3; M38; source, ``The firm thus chooses'' \\ \midrule
+firm & the split of the wage bill between higher-ranked and lower-ranked workers ($\mu$) & next period's assets, through the share of wages spent on upskilling & \texttt{DEFERRED} &  & source, ``The firm thus chooses''; source, ``effective upskilling fraction'' \\ \midrule
+job holder & the share of current income spent on upskilling, the rest going to the lottery ($\lambda$) & net income with a quadratic risk term & \texttt{DEFERRED} &  & source, ``as their share of current income allocated to upskilling''; source, ``The rest of their income is allocated to a shared lottery pool''; source, ``quadratic risk-premium approximation'' \\ \midrule
+\end{longtable}
+
 {\small
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.8cm} >{\raggedright\arraybackslash}p{5.0cm} >{\raggedright\arraybackslash}p{2.9cm} >{\raggedright\arraybackslash}p{3.9cm} >{\raggedright\arraybackslash}p{4.4cm} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{2.5cm}}
 \toprule ID & Claim & Assumptions & Manuscript anchor & Evidence & Proof location & Status \\ \midrule \endhead

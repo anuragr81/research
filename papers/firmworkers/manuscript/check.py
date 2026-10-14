@@ -442,6 +442,8 @@ def check_summary(data, lean_text, source, entries, errors, notes):
         blocks[key] = (idea.get('sentences') or [], tuple(words))
     for key, (summ, bounds) in blocks.items():
         check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes)
+    check_players(data, lean_text, source, entries, errors, notes)
+    blocks['players'] = ((data.get('players') or []) + (data.get('choices') or []), None)
     check_stamps(blocks, data, lean_text, errors, notes)
 
 
@@ -500,8 +502,6 @@ def check_plain(key, summ, bounds, data, lean_text, source, entries, errors, not
     if not summ:
         errors.append(f'{key}: missing')
         return
-    status = {c['id']: c['status'] for c in data['model']}
-    lit_status = {c['id']: c['status'] for c in data['literature']}
     words = sum(len(str(s.get('text', '')).split()) for s in summ)
     if not bounds[0] <= words <= bounds[1]:
         errors.append(f'{key}: {words} words, outside {bounds[0]} to {bounds[1]}')
@@ -516,30 +516,81 @@ def check_plain(key, summ, bounds, data, lean_text, source, entries, errors, not
                 errors.append(f'{tag}: contains a {name}')
         for a, term in avoided_hits(text, entries):
             errors.append(f'{tag}: uses {a!r}; the term is {term!r}')
-        rests = [str(r) for r in s.get('rests_on') or []]
-        if not rests:
-            errors.append(f'{tag}: rests_on is empty')
-        for r in rests:
-            if r.startswith('anchor:'):
-                quote = r[len('anchor:'):].strip()
-                if source and lit_norm(quote) not in source:
-                    errors.append(f'{tag}: anchor not found in inputs/firmworkers_model.pdf: {quote[:60]}')
-            elif re.fullmatch(r'M\d+', r):
-                if r not in status:
-                    errors.append(f'{tag}: rests on missing {r}')
-                elif status[r] in ('OPEN', 'REFUTED', 'ILL_POSED'):
-                    errors.append(f'{tag}: rests on {r} with status {status[r]}')
-                elif status[r] == 'UNDERSPECIFIED':
-                    notes.append(f'{tag}: rests on {r}, which is UNDERSPECIFIED')
-            elif re.fullmatch(r'L\d+', r):
-                if lit_status.get(r) != 'VERBATIM':
-                    errors.append(f'{tag}: rests on {r}, which is not a literature row read in full')
-            elif r.startswith('Isc.'):
-                if not lean_declared(r, lean_text):
-                    errors.append(f'{tag}: Lean theorem {r} not declared')
-            else:
-                errors.append(f'{tag}: cannot rest on {r!r}')
+        check_rests(tag, s, data, lean_text, source, errors, notes)
     notes.append(f'{key}: {words} words in {len(summ)} sentences')
+
+
+def check_rests(tag, entry, data, lean_text, source, errors, notes):
+    status = {c['id']: c['status'] for c in data['model']}
+    lit_status = {c['id']: c['status'] for c in data['literature']}
+    rests = [str(r) for r in entry.get('rests_on') or []]
+    if not rests:
+        errors.append(f'{tag}: rests_on is empty')
+    for r in rests:
+        if r.startswith('anchor:'):
+            quote = r[len('anchor:'):].strip()
+            if source and lit_norm(quote) not in source:
+                errors.append(f'{tag}: anchor not found in inputs/firmworkers_model.pdf: {quote[:60]}')
+        elif re.fullmatch(r'M\d+', r):
+            if r not in status:
+                errors.append(f'{tag}: rests on missing {r}')
+            elif status[r] in ('OPEN', 'REFUTED', 'ILL_POSED'):
+                errors.append(f'{tag}: rests on {r} with status {status[r]}')
+            elif status[r] == 'UNDERSPECIFIED':
+                notes.append(f'{tag}: rests on {r}, which is UNDERSPECIFIED')
+        elif re.fullmatch(r'L\d+', r):
+            if lit_status.get(r) != 'VERBATIM':
+                errors.append(f'{tag}: rests on {r}, which is not a literature row read in full')
+        elif r.startswith('Isc.'):
+            if not lean_declared(r, lean_text):
+                errors.append(f'{tag}: Lean theorem {r} not declared')
+        else:
+            errors.append(f'{tag}: cannot rest on {r!r}')
+
+
+def check_cells(tag, entry, fields, entries, errors):
+    for field in fields:
+        text = str(entry.get(field, '') or '').strip()
+        if not text:
+            errors.append(f'{tag}: empty {field}')
+            continue
+        for mark, name in SUMMARY_MARKS.items():
+            if mark in text and mark != '$':
+                errors.append(f'{tag}.{field}: contains a {name}')
+        for a, term in avoided_hits(text, entries):
+            errors.append(f'{tag}.{field}: uses {a!r}; the term is {term!r}')
+
+
+def check_players(data, lean_text, source, entries, errors, notes):
+    players = data.get('players') or []
+    choices = data.get('choices') or []
+    vocab = data.get('choice_status') or {}
+    terms = {e[0].lower() for e in entries}
+    names = [str(p.get('name', '')).strip() for p in players]
+    if not players:
+        errors.append('players: missing')
+    for dup in sorted({n for n in names if names.count(n) > 1}):
+        errors.append(f'players: {dup!r} listed twice')
+    for p, name in zip(players, names):
+        tag = f'player {name!r}'
+        if name.lower() not in terms:
+            errors.append(f'{tag}: not a term of the terminology table')
+        check_cells(tag, p, ('definition',), entries, errors)
+        check_rests(tag, p, data, lean_text, source, errors, notes)
+    for k, c in enumerate(choices, 1):
+        tag = f'choice {k} ({c.get("player", "?")})'
+        if c.get('player') not in names:
+            errors.append(f'{tag}: player is not in the players table')
+        if c.get('status') not in vocab:
+            errors.append(f'{tag}: status must be one of {", ".join(vocab)}')
+        check_cells(tag, c, ('chooses', 'objective'), entries, errors)
+        if c.get('open'):
+            check_cells(tag, c, ('open',), entries, errors)
+        check_rests(tag, c, data, lean_text, source, errors, notes)
+    missing = [n for n in names if not any(c.get('player') == n for c in choices)]
+    for n in missing:
+        errors.append(f'player {n!r}: no row in the choices table')
+    notes.append(f'players: {len(players)} players, {len(choices)} choice rows')
 
 
 def cited_map_rows(data):

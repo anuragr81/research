@@ -187,6 +187,31 @@ def summary_text(d):
             'Each sentence records in \\texttt{claims.yaml} the rows, Lean theorems or source premise it rests on.')
 
 
+def grounds(rests):
+    out = []
+    for r in rests or []:
+        r = str(r)
+        out.append(f"source, ``{mixed(r[len('anchor:'):].strip())}''" if r.startswith('anchor:') else mixed(r))
+    return '; '.join(out)
+
+
+def players_tables(d):
+    prow = '\n'.join(f"{escape_text(p['name'])} & {mixed(p['definition'])} & {grounds(p.get('rests_on'))} \\\\ \\midrule"
+                     for p in d.get('players') or [])
+    crow = '\n'.join(f"{escape_text(c['player'])} & {mixed(c['chooses'])} & {mixed(c['objective'])} & "
+                     f"\\texttt{{{c['status']}}} & {mixed(c.get('open') or '')} & {grounds(c.get('rests_on'))} \\\\ \\midrule"
+                     for c in d.get('choices') or [])
+    vocab_rows = ' '.join(f"\\texttt{{{k}}} {mixed(v)}." for k, v in (d.get('choice_status') or {}).items())
+    return ('\\subsection*{Players}\n'
+            'The players of the micro model and what each is. Every cell records in \\texttt{claims.yaml} the rows '
+            'or source premises it rests on, and is stamped like the summaries.\n\n'
+            f"\\begin{{longtable}}{{{col([3.0, 12.5, 8.0])}}}\n\\toprule Player & Definition & Rests on "
+            f"\\\\ \\midrule \\endhead\n{prow}\n\\end{{longtable}}\n\n"
+            'What each player chooses and what the choice is made to maximise. ' + vocab_rows + '\n\n'
+            f"\\begin{{longtable}}{{{col([2.4, 5.0, 5.0, 2.0, 5.0, 4.4])}}}\n\\toprule Player & Chooses & To maximise & "
+            f"Status & Open & Rests on \\\\ \\midrule \\endhead\n{crow}\n\\end{{longtable}}")
+
+
 def idea_summaries(d):
     blocks = '\n\n'.join(plain_block(i['sentences'], escape_text(i['title']), numbered=True)
                          for i in d.get('idea_summaries') or [])
@@ -257,6 +282,8 @@ Headline and concluding claims may rest only on model claims, literature claims 
 
 \section{{Model claims}}
 {summary_text(d)}
+
+{players_tables(d)}
 
 {{\small
 {model_table(by_status(d, 'LEAN_PROVED', 'LEAN_WRITTEN'))}}}
