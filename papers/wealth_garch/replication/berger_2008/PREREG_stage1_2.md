@@ -23,7 +23,7 @@ Instrument sets, for Steps 1 and 3:
 - I1: DNK GMM-style lags 2 to 3 (stage 1).
 - I2: DNK lags 2 to 4.
 - I3: DNK lags 2 and longer, collapsed (one instrument per lag, not per
-  period; Roodman 2008, section 4).
+  period; Roodman 2008, section 3.2).
 - I4: difference GMM (no levels equation), DNK lags 2 to 3.
 
 Data versions:
