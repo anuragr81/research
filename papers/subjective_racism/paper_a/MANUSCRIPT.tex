@@ -119,6 +119,25 @@ that check it.}\\
   $\ell_g(c)=Z_g$ for every $c$.
   Neither hypothesis can be dropped.}
   {Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
+\mrow{M2}{Under group sufficiency, the Bayesian posterior on class is the
+  within-group class distributions mixed by the Bayesian posterior on group.}
+  {$\mathcal{G}$, $\mathcal{C}$ finite, $\sum_c\pi_g(c)=1$ and
+  $\ell_g(c)=\lambda_g$ for every $g$ and $c$. Then
+  $P(c\mid m)=\sum_g\pi_g(c)\,q'(g)$ for every $c$.
+  It fails without $\ell_g(c)=\lambda_g$, and without
+  $\sum_c\pi_g(c)=1$.}
+  {ClassPosterior.bayes_class_eq_mixture, ClassPosterior.control_sufficiency_needed, ClassPosterior.control_normalised_needed}
+\mrow{M3}{Every revision of the group weights from a prior that gives every
+  group positive weight is a Bayesian update, for a marker likelihood that
+  depends on group alone. The posterior on class is then the mixture by the
+  revised weights.}
+  {$q(g)>0$, $\sum_g w(g)=1$, $\sum_c\pi_g(c)=1$, $\kappa\neq0$ and
+  $\ell_g(c)=\kappa\,w(g)/q(g)$. Then $q'=w$ and
+  $P(c\mid m)=\sum_g\pi_g(c)\,w(g)$. If also $0<\kappa\le q(g)$ and
+  $0\le w(g)\le1$, then $0\le\ell_g(c)\le1$.
+  It fails without $q(g)>0$, since $q=(1,0)$ gives $q'(1)=0$ for every
+  $\ell$.}
+  {ClassPosterior.bayes_group_of_ratio, ClassPosterior.bayes_class_of_ratio, ClassPosterior.ratioLik_mem_unit, ClassPosterior.control_prior_support_needed}
 \end{longtable}
 \normalsize
 
@@ -195,6 +214,13 @@ distribution of class within group $g$. The marker is $m$, and its likelihood
 is $\ell_g(c)=P(m\mid c,g)$. The marginal of the marker within the group is
 $Z_g=\sum_{c'\in\mathcal{C}}\ell_g(c')\,\pi_g(c')=P(m\mid g)$, and the
 Bayesian posterior on class is $\pi'_g(c)=\ell_g(c)\,\pi_g(c)/Z_g=P(c\mid m,g)$.
+Rows M2 and M3 range over a finite set of groups $\mathcal{G}$. The
+observer's weights on the groups are $q(g)$ before the marker is read, the
+marginal of the marker is
+$Z=\sum_{g}\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)=P(m)$, the Bayesian posterior on
+group is $q'(g)=\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)/Z$, and the Bayesian
+posterior on class is $P(c\mid m)=\sum_{g}\ell_g(c)\,\pi_g(c)\,q(g)/Z$. In M3,
+$w$ is a target revision of the group weights and $\kappa$ a scale.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -213,6 +239,45 @@ Controls, with $\mathcal{C}=\{0,1\}$. For (i), $\pi_g=(\tfrac12,\tfrac12)$ and
 $\ell_g=(1,0)$ give $Z_g=\tfrac12$ and $\pi'_g(0)=1\neq\tfrac12=\pi_g(0)$. For
 (ii), $\pi_g=(1,0)$ and $\ell_g=(1,2)$ give $Z_g=1$ and $\pi'_g=\pi_g$, while
 $\ell_g(0)=1\neq2=\ell_g(1)$.
+\end{mproof}
+
+\begin{mproof}{M2}{ClassPosterior.bayes_class_eq_mixture, ClassPosterior.control_sufficiency_needed, ClassPosterior.control_normalised_needed}
+With $\ell_g(c)=\lambda_g$ and $\sum_c\pi_g(c)=1$,
+\[
+\sum_{c'}\ell_g(c')\,\pi_g(c')\,q(g)=\lambda_g\,q(g)\sum_{c'}\pi_g(c')=\lambda_g\,q(g)
+\;\Longrightarrow\;
+q'(g)=\frac{\lambda_g\,q(g)}{Z},
+\]
+\[
+P(c\mid m)=\sum_g\frac{\lambda_g\,\pi_g(c)\,q(g)}{Z}
+=\sum_g\pi_g(c)\,\frac{\lambda_g\,q(g)}{Z}=\sum_g\pi_g(c)\,q'(g).
+\]
+Controls, with $\mathcal{G}=\{0\}$ and $\mathcal{C}=\{0,1\}$. For sufficiency,
+$q=(1)$, $\pi_0=(\tfrac12,\tfrac12)$ and $\ell_0=(1,0)$ give $Z=\tfrac12$,
+$P(0\mid m)=1$ and $q'(0)=1$, so $\sum_g\pi_g(0)\,q'(g)=\tfrac12\neq1$. For
+normalisation, $\pi_0=(1,1)$ and $\ell_0=(1,1)$ give $Z=2$, $P(0\mid m)=\tfrac12$
+and $q'(0)=1$, so $\sum_g\pi_g(0)\,q'(g)=1\neq\tfrac12$.
+\end{mproof}
+
+\begin{mproof}{M3}{ClassPosterior.bayes_group_of_ratio, ClassPosterior.bayes_class_of_ratio, ClassPosterior.ratioLik_mem_unit, ClassPosterior.control_prior_support_needed}
+With $\ell_g(c)=\kappa\,w(g)/q(g)$, $q(g)>0$ and $\sum_c\pi_g(c)=1$,
+\[
+\sum_c\ell_g(c)\,\pi_g(c)\,q(g)=\kappa\,w(g)\sum_c\pi_g(c)=\kappa\,w(g),
+\qquad
+Z=\kappa\sum_g w(g)=\kappa,
+\qquad
+q'(g)=\frac{\kappa\,w(g)}{\kappa}=w(g).
+\]
+$\ell_g$ is constant in $c$, so M2 applies and
+$P(c\mid m)=\sum_g\pi_g(c)\,q'(g)=\sum_g\pi_g(c)\,w(g)$. With
+$0<\kappa\le q(g)$ and $0\le w(g)\le1$,
+\[
+0\le\frac{\kappa\,w(g)}{q(g)}
+\quad\text{and}\quad
+\kappa\,w(g)\le\kappa\le q(g)\;\Longrightarrow\;\frac{\kappa\,w(g)}{q(g)}\le1.
+\]
+Control, with $\mathcal{G}=\{0,1\}$ and $q=(1,0)$. For every $\ell$ and $\pi$,
+$\sum_c\ell_1(c)\,\pi_1(c)\cdot0=0$, so $q'(1)=0$.
 \end{mproof}
 
 \section{Evidence and verification}
@@ -239,7 +304,7 @@ matches the audit.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The class space is finite in the Lean
-statement of M1. The predecessor manuscript gives class a Beta law on
+statements of M1 to M3, and so is the set of groups in M2 and M3. The predecessor manuscript gives class a Beta law on
 $[0,1]$, and the continuous form of M1 is not formalised.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. The
@@ -271,6 +336,14 @@ Posterior & $\pi'_g(c)$ & The Bayesian distribution of class within group $g$
 Group sufficiency & $\ell_g(c)=Z_g$ for every $c$ & The marker says nothing
   about class beyond what the group says. M1 shows this equals
   $\pi'_g=\pi_g$ under a prior with full support. \\ \addlinespace
+Group weights & $q(g)$ & The observer's probability that the person
+  read belongs to group $g$, before the marker is read. \\ \addlinespace
+Posterior on group & $q'(g)$ & The Bayesian group weights after the marker
+  is read. \\ \addlinespace
+Mixture & $\sum_g\pi_g(c)\,w(g)$ & The distribution of class reached by
+  weighting each group's class distribution by group weights $w$. M2 and M3
+  show it is the Bayesian posterior on class exactly when $w=q'$. \\
+  \addlinespace
 \end{longtable}
 \normalsize
 
@@ -287,6 +360,31 @@ $P(m\mid c,g)=P(m\mid g)$ and the posterior form $P(c\mid m,g)=P(c\mid g)$.
 Row M1 proves the two forms equivalent when the prior gives every class
 positive probability, and its second control shows the posterior form is
 weaker without that support.
+
+\paragraph{The updating rule.} The observer updates by Bayes' rule alone, a
+choice the author made on 14 October 2026. The reason is rows M2 and M3. The
+predecessor manuscript adds Jeffrey's rule of conditioning in the form of its
+equation (kinematics), which mixes the within-group class distributions by
+group weights taken as given. Under group sufficiency, the Bayesian posterior
+on class is such a mixture (M2), and every such mixture whose prior gives each
+group positive weight is a Bayesian posterior for some marker likelihood
+(M3). Within one reading of a marker, the two rules therefore produce the same
+set of posteriors on class, and a second rule adds no result. What lies
+outside the rows is a sequence of several soft readings, where the order of
+the readings could matter. The model has no such sequence.
+\unv{The attribution of the kinematics formula to Jeffrey (1965) rests on the
+predecessor manuscript. The source has not been read for this skeleton.}
+
+\paragraph{The group prior across generations.} Each generation the observer's
+class distribution for a group is re-learned from the group's current
+standing, a choice the author made on 14 October 2026. The reason is that
+this is the model the predecessor manuscript writes down, in its equations
+(prior), (dynamic) and (composed) and its loop figure, where the discrimination
+rate of a generation is computed from that generation's standing. The
+alternative holds the distribution fixed at its first value. No row depends on
+this choice yet. The rows on the composed map and the closure trap will
+(\path{TODO.md}, items Q3 to Q5), and the fixed alternative will enter as a
+row of its own (Q5).
 
 \section{Refuted conjectures}
 \label{app:refuted}
