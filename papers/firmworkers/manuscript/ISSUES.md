@@ -1,4 +1,4 @@
-# Issues outstanding (13 Oct 2026)
+# Issues outstanding (14 Oct 2026)
 
 Open decisions only. Decided items are not listed: decided model rows (M14, M28, M29, M32) are in Appendix D of the skeleton; decisions without a model row (Q1, Q2, Q4–Q6, Q9, the reference-dependent sub-section with `R_h`, the macro deferral) are in `TODO.md`, Decisions recorded, and `HANDOVER.md`.
 
@@ -31,7 +31,7 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | 5c | Statistic for `R_h` | L25 (CO), L20 (GR), L28 (HK); planned X row (issue 8) | (a) Median of the own group's income | A quantile, so it sits on M2's quantile ladder and is observed directly. |
 | | | | (b) Mean of the own group's income | On M3's ladder the mean is `x_0 a/(a − 1)`, infinite for `a ≤ 1` *(not in Lean)*; sensitive to the top tail. |
 | | | | (c) Predicted pay of comparable workers (CO's `y*`) | Matches CO's evidence; a regression construct over many characteristics, not a norm by `h` alone; not a function of the ladder. |
-| 10 | Reading of the cost route (ii) | M7, M21, M22, M32; MICRO_REVIEW claims 6, 9 | (a) Return to one's own former job (line 384; the ledger's reading so far) | The costly route is the only one that leaves rank unchanged, so where a higher `b` raises costs it raises mobility (`movers_rise_in_b`); M21's cost part and "less likely to be replaced" are rejected; M22 holds through the lottery (`up_moves_fall_with_rank`). Lean exists (`Routes.lean`). |
+| 10 | Reading of the cost route (ii) | M7, M21, M22, M32; MICRO_REVIEW claims 6, 9 | (a) Return to one's own former job (line 384; defined in M38, 14 Oct) | The costly route is the only one that leaves rank unchanged, so where a higher `b` raises costs it raises mobility (`movers_rise_in_b`); M21's cost part and "less likely to be replaced" are rejected; M22 holds through the lottery (`up_moves_fall_with_rank`). Lean exists (`Routes.lean`). |
 | | | | (b) Claim any higher position from a worker willing to step down (line 386) | A two-sided market of up-movers who pay `C` and down-movers who step down; costs gate upward moves, so M21's cost part can hold where `b` raises costs; swaps conserve jobs. Needs a matching model (who pairs with whom, what the down-mover gets); no Lean; interacts with M14's pool and M32's fallback. |
 | | | | (c) Both routes available | Union of (a) and (b); the sign of M21's cost part depends on the mix; the largest model. |
 | 11a | The firm, part 1: what a displaced worker keeps (13 Oct discussion; agreed principle and exclusions in `TODO.md`) | M32, M20, M33; L26 (JLS-3, JLS-4, JLS-27, JLS-43); issue 1 | (a) Keep the bottom rung (M32 as decided) | The lottery's cause is the bottom income, not a taste for risk (`lottery_cause` in `claims.yaml`); M20 fails for every increasing `u` (MICRO_REVIEW claim 5). |

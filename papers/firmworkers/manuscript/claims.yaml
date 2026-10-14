@@ -38,7 +38,7 @@ summary:
     rests_on: ['M32']
   - para: 2
     text: 'The return buys the former job back at an upskilling cost that rises with the income climbed.'
-    rests_on: ['M7', 'Isc.loss_and_cost_rise_with_rank']
+    rests_on: ['M38', 'M7', 'Isc.loss_and_cost_rise_with_rank']
   - para: 2
     text: 'Displaced workers who choose the lottery are its entrants, and each pays the lottery cost and receives the former job of a partner, another entrant drawn at random.'
     rests_on: ['M11', 'M14', 'M32', 'M36']
@@ -95,7 +95,7 @@ idea_summaries:
         rests_on: ['M33', 'anchor: higher risk-taking for higher losses', 'anchor: S-shaped Friedman-Savage utility']
       - para: 3
         text: 'Where the upskilling cost is at least the income climbed back to the former job, the return is worth no more than the downgrade, and so, under the condition on partners'' former incomes, no more than the lottery.'
-        rests_on: ['Isc.top_displaced_prefer_lottery']
+        rests_on: ['M38', 'Isc.top_displaced_prefer_lottery']
       - para: 3
         text: 'With a cost exponent of at least one, the ranks at which the upskilling cost is at least the income climbed lie above all the others, since the income climbed rises with rank.'
         rests_on: ['Isc.cost_exceeds_regain_upward', 'Isc.loss_and_cost_rise_with_rank']
@@ -414,6 +414,16 @@ model:
     lean: [Isc.closure_chances_infeasible, Isc.closure_column_sum, Isc.closure_column_sum_eq_one_iff]
     status: LEAN_PROVED
     symbols: [X8, X24, X25]
+
+  - id: M38
+    anchor: 'Appendix: "a displaced worker can return to the previous job by investing in the skills or certifications required to perform it"'
+    claim: 'A displaced worker who takes the return regains the former job, which stays on the ladder, vacant, after displacement, and pays the upskilling cost $C(f,x_i)$ of climbing from the income $f$ of the downgrade back to the former income $x_i$. The firm receives the payment. Under M32, $f=x_0$, so the return is worth $x_i-(x_i-x_0)^b$'
+    assumptions: ''
+    evidence: 'The manuscript lists "costly investment to move upward" among three mechanisms and gives the return to the previous job as its instance (the anchor). It formalises the mechanism as a pairing of workers, "pay the skill cost required to claim a higher-ranked position from someone willing to step down"; whether the return should also cover that market is issue 10. The job must survive displacement, because the return regains it and the lottery awards the former jobs of entrants (M36), and the number of jobs is fixed ("the number of jobs does not change over time"). The climb starts at the income of the downgrade, because the cost $C(x_0,x_i)$ of M7 is paid only if displacement first lowers the worker (M32). The firm receives the payment, "Higher b corresponds to higher costs (charged by the firm". The scale of the cost is issue 1 (M35)'
+    status: DECIDED
+    decision: '14 Oct 2026, the author: the return is defined as stated, so the term no longer rests on a result (M35). The vacated jobs of downgraders still need a refill rule (M23)'
+    affects: [M7, M20, M21, M23, M35]
+    symbols: [X27, X3, X16]
 
 literature:
   - id: L1

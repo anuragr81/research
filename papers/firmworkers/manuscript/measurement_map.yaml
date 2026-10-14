@@ -40,19 +40,14 @@ terms:
     avoid: ['floor']
     status: PROPOSED
   - term: 'displaced worker'
-    meaning: 'a worker whose job is lost to creative destruction'
-    defined_in: [M32]
+    meaning: 'a worker separated from a job by creative destruction; the job stays on the ladder, vacant'
+    defined_in: [M32, M38]
     avoid: ['job loser', 'separator']
     status: PROPOSED
   - term: 'downgrade'
     meaning: 'the route of a displaced worker that pays the bottom income'
     defined_in: [M32, M33]
     avoid: ['step down']
-    status: PROPOSED
-  - term: 'return'
-    meaning: 'the route of a displaced worker that buys the former job back at the upskilling cost'
-    defined_in: [M35]
-    avoid: ['costly return', 're-entry']
     status: PROPOSED
   - term: 'lottery'
     meaning: 'the route of a displaced worker that pays the lottery cost and receives the former job of a partner'
@@ -483,3 +478,18 @@ rows:
     observation_support: PROVEN
     observation_lean: [Isc.closureGain_formula]
     observation_note: 'The closure-weighted gain is the weighted average of $x_k-x_i$ over the other entrants, weights $1$ within and $1-\sigma$ across groups'
+
+  - id: X27
+    symbol: 'return route'
+    term: 'return'
+    avoid: ['costly return', 're-entry']
+    term_status: PROPOSED
+    role: input
+    meaning: 'the route of a displaced worker that regains the former job, income $x_i$, by paying the upskilling cost $C(f,x_i)$ of climbing from the income $f$ of the downgrade back to the former income; the firm receives the payment (M38). Under M32, $f=x_0$'
+    referent: 'regaining one''s former job, or its wage, after retraining or certification'
+    support: POSIT
+    direction: ''
+    observation: 're-employment in the former job, or at the former wage, after retraining, from linked employer and employee records'
+    observation_status: PROPOSED
+    observation_support: UNVERIFIED
+    observation_note: 'No paper read in full measures it. The nearest measured event is recall to the former employer after a layoff (leads, unread: Katz 1986; Fujita and Moscarini 2017), which usually involves no retraining'
