@@ -230,6 +230,10 @@ for standing in ("common_data/results_common_data.md", "replication/gordon_hirtl
     check(f"MM-14 {standing} names its pre-registrations, each committed before it",
           pres and not any(order_problem(p, standing) for p in pres), f"{pres}")
 
+for software in ("replication/berger_2008/results_validation.md",):
+    ok, detail = reproduce(software)
+    check(f"MM-14 {software} (software validation, no pre-registration) reproduces", ok, detail)
+
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass MM-1 to MM-4 and MM-6; a faulty one must fail every rule")
 good, _ = analyse(GOOD, lean, lits, rows)
