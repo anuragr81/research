@@ -1082,6 +1082,20 @@ paper's claims, and only then write the manuscript.
   lit/applications_2026/abstracts_2026.json (Crossref/OpenAlex, pinned) holds
   the abstracts; the suite now has 87 checks. All 31 papers are [A]: none has a
   lit record or Lean until read in full.
+  Full reads, 14 Oct 2026 (author: "Go ahead"), of the two leads closest to
+  C1-C14. Neither changes a claim; rows L30 and L31; C3, C5, C6, C12 and C13
+  cite them.
+  - Fernandez-Gali: NBER WP 5930, image-only, OCR from pages rendered by
+    pdftoppm (pdfimages gives mirrored scans). Record lit/fernandez_gali_1999
+    (35 checks), lean/mathlib/FernandezGali.lean (16 theorems). Wealth works
+    through a borrowing constraint with linear utility, so `kappa_linear` is
+    the bridge to our channel.
+  - Hassin-Haviv: the authors' preprint, ay.pdf on Drive. Record
+    lit/hassin_haviv_1997 (25 checks), lean/mathlib/HassinHaviv.lean
+    (9 theorems). Buying priority follows the crowd, the opposite of our M4.
+    The stated bound floor(1/(1-rho)) on the pure equilibria is one short when
+    1/(1-rho) is not an integer: three equilibria at rho = 3/5, from their own
+    recursion computed exactly (kernel decide).
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to
