@@ -1,0 +1,304 @@
+% MANUSCRIPT.tex, the manuscript skeleton for Paper A (Stereotype Rigidity in
+% Social Inferences). Created 14 October 2026 as pass 1 of the plan in TODO.md
+% (item PLAN), following papers/MANUSCRIPT_SKELETON.md. The predecessor
+% document is papers/subjective_racism/theory_and_decisions/manuscript.tex,
+% which stays in place until a later pass retires it.
+%
+% STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
+%   Rows are written only through the four row macros below, and proofs only
+%   through the mproof environment. IDs are K1, K2, ... (introduction),
+%   M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
+%     \krow{ID}{headline}{model rows}{scope note}
+%     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
+%     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
+%     \crow{ID}{statement}{model or literature rows}
+%     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
+%   Lists of rows or theorems are comma-separated. Lean theorem names are the
+%   fully qualified names declared under lean/ or lean/mathlib/.
+%
+% RULES THE CHECKER ENFORCES
+%   Introduction rows point to model rows only. Conclusion rows point to model
+%   or literature rows only. Every model row names Lean theorems that exist in
+%   an audited Lean file and has exactly one proof in Appendix A naming the
+%   same theorems. Every literature row's quote appears verbatim in the
+%   paper's lit/ record. In every proof, plain English is at most 30% of the
+%   text, measured as prose words over prose words plus mathematical tokens.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\emergencystretch=1.5em
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
+\newcommand{\rowref}[1]{#1}
+\newcommand{\unv}[1]{\textit{Unverified:} #1}
+\newcommand{\pend}[1]{\textit{Pending:} #1}
+
+\newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
+\newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+
+\newenvironment{mproof}[2]
+  {\subsection*{Proof of #1}\label{proof:#1}%
+   {\raggedright\noindent\textit{Lean:} \lean{#2}.\par}\smallskip}
+  {\par\hfill$\square$\par\medskip}
+
+\title{Stereotype Rigidity in Social Inferences}
+\author{Anurag Srivastava}
+\date{Manuscript skeleton, 14 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+% The question below recasts the first sentence of the predecessor's abstract.
+% The author has not yet confirmed it (TODO.md, item Q).
+Why do social boundaries persist despite counter-examples, legal equality and
+anti-discrimination instruments?
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
+\caption{Headline claims, each traced to the model rows it rests on.}\\
+\toprule
+\textbf{ID} & \textbf{Headline} & \textbf{Model rows} & \textbf{Scope note} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Headline} & \textbf{Model rows} & \textbf{Scope note} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+\section{Model}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{3.8cm}P{6.3cm}P{3.7cm}P{1.1cm}@{}}
+\caption{Results of the model, each with its statement and the Lean theorems
+that check it.}\\
+\toprule
+\textbf{ID} & \textbf{Claim} & \textbf{Statement} & \textbf{Lean} & \textbf{Proof} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Claim} & \textbf{Statement} & \textbf{Lean} & \textbf{Proof} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mrow{M1}{A marker whose likelihood does not depend on class leaves the
+  Bayesian posterior on class equal to the prior. Under a prior that gives
+  every class positive probability, the converse holds, so the two forms of
+  group sufficiency are equivalent.}
+  {$\mathcal{C}$ finite, $\sum_{c}\pi_g(c)=1$,
+  $Z_g=\sum_{c'}\ell_g(c')\,\pi_g(c')$,
+  $\pi'_g(c)=\ell_g(c)\,\pi_g(c)/Z_g$.
+  (i) If $\ell_g(c)=k\neq0$ for every $c$, then $\pi'_g=\pi_g$.
+  (ii) If $\pi_g(c)>0$ for every $c$, $Z_g\neq0$ and $\pi'_g=\pi_g$, then
+  $\ell_g(c)=Z_g$ for every $c$.
+  Neither hypothesis can be dropped.}
+  {Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
+\end{longtable}
+\normalsize
+
+\section{Literature}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{2.2cm}P{3.5cm}P{5.5cm}P{1.3cm}P{1.9cm}@{}}
+\caption{Papers read, with the passage each row relies on.}\\
+\toprule
+\textbf{ID} & \textbf{Paper} & \textbf{What we rely on} & \textbf{Quote} &
+\textbf{Page} & \textbf{Rows} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Paper} & \textbf{What we rely on} & \textbf{Quote} &
+\textbf{Page} & \textbf{Rows} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+No paper has been read for this skeleton yet, so every claim the predecessor
+manuscript makes about a source is unverified.
+
+\section{Conclusions}
+
+Table~\ref{tab:conclusions} will hold the conclusions that rest on model rows
+and on papers read in full. Table~\ref{tab:pending} will hold every claim that
+a result is new, and every other claim still waiting on a paper or a search.
+Both are empty until the model rows they need exist.
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Conclusions resting on model rows and papers read.}
+\label{tab:conclusions}\\
+\toprule
+\textbf{ID} & \textbf{Conclusion} & \textbf{Rows} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Conclusion} & \textbf{Rows} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Pending conclusions, each naming what it waits on.}
+\label{tab:pending}\\
+\toprule
+\textbf{ID} & \textbf{Conclusion} & \textbf{Rows} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Conclusion} & \textbf{Rows} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\end{longtable}
+\normalsize
+
+\appendix
+
+\section{Proofs}
+\label{app:proofs}
+
+\paragraph{Notation.} A group is $g$. Economic class takes values in a finite
+set $\mathcal{C}$. The prior $\pi_g(c)=P(c\mid g)$ is the observer's
+distribution of class within group $g$. The marker is $m$, and its likelihood
+is $\ell_g(c)=P(m\mid c,g)$. The marginal of the marker within the group is
+$Z_g=\sum_{c'\in\mathcal{C}}\ell_g(c')\,\pi_g(c')=P(m\mid g)$, and the
+Bayesian posterior on class is $\pi'_g(c)=\ell_g(c)\,\pi_g(c)/Z_g=P(c\mid m,g)$.
+
+\begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
+(i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
+\[
+Z_g=\sum_{c'}k\,\pi_g(c')=k\sum_{c'}\pi_g(c')=k,
+\qquad
+\pi'_g(c)=\frac{k\,\pi_g(c)}{k}=\pi_g(c).
+\]
+(ii) With $Z_g\neq0$, $\pi_g(c)>0$ and $\pi'_g(c)=\pi_g(c)$,
+\[
+\ell_g(c)\,\pi_g(c)=Z_g\,\pi_g(c)
+\;\Longrightarrow\;
+\ell_g(c)=Z_g .
+\]
+Controls, with $\mathcal{C}=\{0,1\}$. For (i), $\pi_g=(\tfrac12,\tfrac12)$ and
+$\ell_g=(1,0)$ give $Z_g=\tfrac12$ and $\pi'_g(0)=1\neq\tfrac12=\pi_g(0)$. For
+(ii), $\pi_g=(1,0)$ and $\ell_g=(1,2)$ give $Z_g=1$ and $\pi'_g=\pi_g$, while
+$\ell_g(0)=1\neq2=\ell_g(1)$.
+\end{mproof}
+
+\section{Evidence and verification}
+\label{app:evidence}
+
+Every row of the model table is a theorem of Lean~4 with Mathlib. The Lean
+column names the theorems, and the proof of each row in
+Appendix~\ref{app:proofs} names the same ones. The development lives in
+\path{lean/mathlib/}, built on the toolchain \path{v4.24.0-rc1} against
+Mathlib commit \path{14871d5}. The script \path{verify.sh} runs three suites on
+every build, and \path{VERIFICATION.md} records what they printed.
+
+\begin{enumerate}
+\item \emph{The Lean build and axiom audit.} Every file under
+\path{lean/mathlib/} is a build root and builds. No source contains
+\texttt{sorry}. Every declared theorem is audited with \texttt{\#print axioms},
+and none depends on an axiom outside \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}.
+\item \emph{The skeleton checker.} Rules MS-1 to MS-6 of
+\path{checks/verify_manuscript.py}, each also run on a well-formed sample it
+must accept and a faulty sample it must reject.
+\item \emph{Doc consistency.} Every theorem count stated here is in digits and
+matches the audit.
+\end{enumerate}
+
+\paragraph{What Lean does not carry.} The class space is finite in the Lean
+statement of M1. The predecessor manuscript gives class a Beta law on
+$[0,1]$, and the continuous form of M1 is not formalised.
+
+\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. The
+SymPy scripts of the predecessor bundle are not part of this skeleton.
+
+\section{Terminology}
+\label{app:terms}
+
+\footnotesize
+\begin{longtable}{@{}P{3.4cm}P{4.2cm}P{8.6cm}@{}}
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Term} & \textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Prior & $\pi_g(c)$ & The observer's distribution of class within group $g$
+  before the marker is read. \\ \addlinespace
+Likelihood & $\ell_g(c)$ & The probability of the marker given class and
+  group. \\ \addlinespace
+Marginal & $Z_g$ & The probability of the marker given the group alone. \\
+  \addlinespace
+Posterior & $\pi'_g(c)$ & The Bayesian distribution of class within group $g$
+  after the marker is read. \\ \addlinespace
+Group sufficiency & $\ell_g(c)=Z_g$ for every $c$ & The marker says nothing
+  about class beyond what the group says. M1 shows this equals
+  $\pi'_g=\pi_g$ under a prior with full support. \\ \addlinespace
+\end{longtable}
+\normalsize
+
+\section{Primitives and scope}
+\label{app:scope}
+
+\paragraph{Class space.} Class takes finitely many values in the Lean
+statement of every row so far. Row M1 depends on this. The continuous class of
+the predecessor manuscript lies outside the rows until a row states it.
+
+\paragraph{Group sufficiency.} The predecessor manuscript states the
+assumption in two forms joined by ``equivalently'', the likelihood form
+$P(m\mid c,g)=P(m\mid g)$ and the posterior form $P(c\mid m,g)=P(c\mid g)$.
+Row M1 proves the two forms equivalent when the prior gives every class
+positive probability, and its second control shows the posterior form is
+weaker without that support.
+
+\section{Refuted conjectures}
+\label{app:refuted}
+
+None yet.
+
+\section{Responses to the referee reports}
+
+Not applicable. The paper has not been through review in this form.
+
+\section{Coverage of the referee comments}
+
+Not applicable, for the same reason.
+
+\end{document}
