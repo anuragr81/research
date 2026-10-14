@@ -351,6 +351,15 @@ grounds.
   written, and the remaining gap; every result except the count reproduces
   in every candidate sample. Writing to the authors is optional, not a
   dependency (author).
+- 2026-10-14. Gordon and Hirtle stage 2 (PREREG_stage2.md, results_stage2.md):
+  their findings on the common bank dataset, commercial banks above $3
+  billion, 1990-2024. Hold: the capital-management channel (equity/assets
+  raises the chance payouts exceed earnings) and the earnings-shock
+  channel. Fail: dividends in more than 85% of years (78.2%), payouts
+  above earnings in more than 20% (19.8%), and persistence within a bank
+  (vanishes with bank effects, 0.015). Bank payouts are dividends (7.40%
+  of prior equity a year) with almost no repurchases (0.05%). Next:
+  Berger et al. or Mankart, Michaelides and Pagratis.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
