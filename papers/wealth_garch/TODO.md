@@ -380,6 +380,14 @@ grounds.
   0.244-0.353 (theirs 0.279-0.411). Step 3 targets are unstable in every
   run. For the testing thread: partial adjustment holds, at about 0.15 to
   0.35 a year depending on the step; the targets are not identified.
+- 2026-10-14. Mankart, Michaelides and Pagratis stage 1 (PREREG_stage1.md,
+  results_stage1.md), Call Reports 1990-2010 from the common dataset plus
+  a pre-registered supplement. Their Table 5 data moments, the targets of
+  their estimation, reproduce 20 of 22; Table 1 14 of 16; Table 2 29 of
+  60, with every rate cell differing (their liquid-asset return must
+  include securities interest that their appendix leaves out). Next:
+  stage 2, solving the model at their Table 4 parameters (equations to be
+  read from page images; the text layer drops Greek letters).
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
