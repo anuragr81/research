@@ -49,3 +49,23 @@ ACCEPTED: follows from the micro model. REJECTED: the micro model gives the oppo
 - M22: promoted, with the reading "upskilled = higher rank" as an assumption.
 - M23: `waits_on` narrowed to the displacement rate and the refill rule.
 - Rows for claims 1, 2–3, 4, 9, 11 and 12, which the ledger does not yet record.
+
+## Pass 2 (14 Oct 2026): the steady state
+
+The author's decision (M39): one type of player, the worker, in two states; uniform displacement at rate `d`; the steady state as the object; routes compared by lifetime value `V(x) = (x + βdW)/(1 − β(1 − d))`, which is affine in income with slope the lifetime multiplier `A = 1/(1 − β(1 − d)) ≥ 1` (`SteadyState.lean`, audited). Two consequences for every one-shot result: comparisons that hold for any nondecreasing utility of income carry over unchanged, because `V` rises with income; comparisons of a one-time cost with an income gain change, because the gain is multiplied by `A` while the cost is not (issue 13).
+
+| # | Pass 1 verdict | Pass 2 | Lean |
+|---|---|---|---|
+| 1 | CONDITIONAL on the unit | unchanged; the unit question now has a yardstick, the lifetime value of the income climbed | — |
+| 2, 3 | ACCEPTED | unchanged | `loss_and_cost_rise_with_rank` |
+| 4 | ACCEPTED, sharpened (middle band) | the band survives with the threshold `κℓ^{b−1} ≥ A` in place of `≥ 1` (risk-neutral); the top case holds at every higher rank once reached | `top_displaced_prefer_lottery_lifetime`, `cost_ratio_rises_with_loss` |
+| 5 | REJECTED under M32(a) | unchanged; M41 carries M33 over, so the lottery still beats the downgrade for the top at any shape of utility of lifetime value | `lottery_beats_downgrade_lifetime` |
+| 6 | REJECTED (cost part) | unchanged in direction; the turning point moves to `κbℓ^{b−1} = A` *(not in Lean)* | — |
+| 7 | PARTIAL (inequality) | to redo: the counterexample `lottery_play_can_fall_with_inequality` compares a one-time cost with one period's income, so it must be recomputed with the multiplier; the two positive results carry over (they compare incomes) | `inequality_pushes_top_to_lottery`, `pool_prizes_rise_with_inequality` carry over; counterexample open |
+| 8 | ACCEPTED | unchanged | `up_moves_fall_with_rank` |
+| 9 | REJECTED | now rejected by decision: uniform displacement (M39) gives every rank the same chance of being replaced | — |
+| 10 | PARTIAL (kernel) | the displacement rate is now a primitive (`d`, X28); the kernel needs only the refill rule (issue 12) | — |
+| 11 | PARTIAL | unchanged | — |
+| 12 | ACCEPTED; primitive missing | the missing primitive (uniform displacement) is now M39 | — |
+
+What the steady state adds that the one-shot model could not state: a long-run distribution of workers over ranks, and with closure, of the two status groups over ranks. That is the object the paper's question about status groups and inequality needs, and it is the next Lean target once issue 12 is decided.

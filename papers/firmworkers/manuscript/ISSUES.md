@@ -1,4 +1,4 @@
-# Issues outstanding (14 Oct 2026)
+# Issues outstanding (14 Oct 2026, steady state)
 
 Open decisions only. Decided items are not listed: decided model rows (M14, M28, M29, M32) are in Appendix D of the skeleton; decisions without a model row (Q1, Q2, Q4–Q6, Q9, the reference-dependent sub-section with `R_h`, the macro deferral) are in `TODO.md`, Decisions recorded, and `HANDOVER.md`.
 
@@ -47,6 +47,12 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | 11e | The firm, part 5: its objective in the micro model | lines 126, 130, 138, 258; principle agreed 13 Oct | (a) The source's accounting: the return cost is paid to the firm, `L` leaks; the firm chooses `a`, with the mean fixed, to maximise returners' payments | Micro counterpart of `φ(μ)` (line 147) derived from route choices; one cycle at a time (line 138); displacement rate a parameter. First target: the sign of the trade-off in `a` *(not in Lean)*. |
 | | | | (b) Output reading (Becker): the return restores specific skills whose return the firm shares | Same ranking of routes; needs a production function. |
 
+| 12 | Jobs vacated by downgraders in the steady state (M39, M23) | M32, M38, M39; MICRO_REVIEW claim 10 | (a) Vacated jobs go to the lottery's entrants, so the pool's prizes include them | Conserves jobs without a new route; the pool is no longer a permutation of the entrants' own former jobs (M36 to be re-derived); prizes are drawn from a larger set *(not in Lean)*. |
+| | | | (b) The downgrade keeps the worker in the same job at reduced pay | Nothing is ever vacated; "job loss" becomes a loss of the job's pay (issue 11a(b) reading); M32's bottom rung is replaced; simplest for the steady state *(not in Lean)*. |
+| | | | (c) Vacated jobs are refilled from the bottom rung in rank order | A cascade of promotions each period; a second mobility channel the source does not name. |
+| 13 | Route costs paid once or every period (M39, M40, M41) | M35, M40, M41; issue 1 | (a) Once, at the moment of choice (the Lean of M40 and M41) | The return and the lottery gain by the lifetime multiplier against the downgrade (`return_beats_downgrade_lifetime_iff`, `one_time_cost_cheaper`); a cost of five for an income gap of one is paid at `β = 9/10`, `d = 1/10`; the unit problem of issue 1 remains for `b ≠ 1`, but the natural yardstick is now the lifetime value of the income climbed. |
+| | | | (b) Every period while the job is held | The one-shot comparisons of M35 and `Routes.lean` are exactly this case; costs then scale with the multiplier like incomes, so nothing changes from the one-shot results. |
+
 ## B. Measurement map
 
 | # | Issue | Depends on | Option | Ramifications |
@@ -79,7 +85,7 @@ Listed so each decision can be checked while the issues it bears on are settled;
 
 - Upload Friedman (1953), "Choice, Chance, and the Personal Distribution of Income", JPE 61(4), 277–290: a direct novelty threat for issue 5, named by L27; not on Drive. Novelty needs the primary source (rule of 10 Oct 2026).
 - Triage Cooper, García-Peñalosa and Funk (2001), EJ 111(473), from its abstract (cited by L28 as the full-closure limit).
-- Turn the verdicts of `MICRO_REVIEW.md` into ledger rows once discussed (proposals at its end); the one-shot route comparison of Q5 is in `lean/IscLean/Routes.lean`.
+- Turn the verdicts of `MICRO_REVIEW.md` into ledger rows once discussed (proposals at its end, pass 2 for the steady state); the one-shot route comparison of Q5, superseded by M39, is in `lean/IscLean/Routes.lean` and the lifetime values in `lean/IscLean/SteadyState.lean`.
 - Prove X8's implication in Lean (issue 7b).
 - Trim M23's `waits_on`: the rank kernel is decided (global rank and three channels, Q6; friction as closure, M29), but the skeleton's Pending table still shows it as open. What M23 still needs is the displacement rate and a rule for positions vacated by downgraders (MICRO_REVIEW claim 10).
 - Record the novelty statements when prose starts: LR against M34 (direction, channel, object); LR's productivity rationing against closure by `h` (M29); HK's spending race against access through `σ`, and their exogenous-status benchmark for `h`; GR's group-based aspirations as the named extension.

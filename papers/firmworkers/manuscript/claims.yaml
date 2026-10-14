@@ -31,8 +31,8 @@ summary:
     text: 'Each worker belongs to one of two status groups throughout a working life.'
     rests_on: ['M28', 'M29']
   - para: 2
-    text: 'Creative destruction costs some workers their jobs, and each displaced worker takes one of three routes.'
-    rests_on: ['M32']
+    text: 'Each period creative destruction displaces every job holder with the same chance, whatever the rank, and each displaced worker takes one of three routes before holding a job again.'
+    rests_on: ['M39', 'M32', 'anchor: triggered by uniform displacements']
   - para: 2
     text: 'The downgrade pays the bottom income.'
     rests_on: ['M32']
@@ -52,17 +52,14 @@ summary:
     text: 'When no partner''s former income less the lottery cost falls below the bottom income, every entrant does at least as well in the lottery as in the downgrade, whatever the shape of utility.'
     rests_on: ['M33']
   - para: 3
-    text: 'Under that condition, a displaced worker whose return is worth less than the downgrade does no worse in the lottery than on either other route.'
-    rests_on: ['Isc.top_displaced_prefer_lottery']
-  - para: 3
     text: 'A richer entrant values the lottery no more than a poorer one, and the gap shrinks as the pool grows.'
     rests_on: ['M34']
   - para: 4
     text: 'When displaced workers value income at its average, those who choose the return form one band of ranks.'
     rests_on: ['Isc.return_set_interval']
   - para: 4
-    text: 'Whether a higher cost exponent raises the upskilling cost depends on the unit of income.'
-    rests_on: ['Isc.upCost_rises_in_b_iff', 'M35']
+    text: 'Routes are compared by lifetime value, so the return beats the downgrade exactly when its one-time upskilling cost is at most the income climbed times the lifetime multiplier.'
+    rests_on: ['M39', 'M40']
   - para: 4
     text: 'More inequality keeps in the lottery the entrants above the rank where the return starts to lose value, and can draw lower entrants back to the return when the upskilling cost is nearly proportional.'
     rests_on: ['Isc.inequality_pushes_top_to_lottery', 'Isc.pool_prizes_rise_with_inequality', 'Isc.lottery_play_can_fall_with_inequality']
@@ -77,27 +74,24 @@ choice_status:
   PROPOSED: 'under discussion; the open item names the issue that decides it'
   DEFERRED: 'belongs to the macro model, postponed'
 players:
+  - name: 'worker'
+    definition: 'A worker lives forever on the ladder and is in one of two states, holding a job or displaced. Every worker holds exactly one job and the number of jobs is fixed. Each period a job holder is displaced with the same chance, whatever the rank, and a displaced worker holds a job again next period'
+    rests_on: ['M39', 'anchor: Every worker holds exactly one job and the number of jobs does not change over time in the economy', 'anchor: triggered by uniform displacements']
   - name: 'firm'
-    definition: 'The one firm of the closed economy, where all income passes between workers and the firm. It sets the income of each job on the ladder and receives the upskilling cost paid on the return. In the source it also ranks workers by perceived earning potential, a rule the micro model does not yet use'
+    definition: 'The one firm of the closed economy, where all income passes between workers and the firm. It sets the income of each job on the ladder and receives the upskilling cost paid on the return. In the source it also ranks workers by perceived earning potential, a rule the micro model does not use'
     rests_on: ['anchor: all income circulates between workers and firm', 'anchor: income level that is eventually set by the firm', 'anchor: rank workers based on the perceived earning potentials of workers', 'M38']
-  - name: 'job holder'
-    definition: 'A worker who keeps a job through the period. Every worker holds exactly one job, and the number of jobs is fixed'
-    rests_on: ['anchor: Every worker holds exactly one job and the number of jobs does not change over time in the economy', 'M32']
-  - name: 'displaced worker'
-    definition: 'A worker separated from a job by creative destruction. The job stays on the ladder, vacant. A displaced worker who takes the lottery is an entrant'
-    rests_on: ['M32', 'M38', 'M36']
 choices:
-  - player: 'displaced worker'
-    chooses: 'one route, once, among the downgrade, the return and the lottery'
-    objective: 'expected utility of income, with any nondecreasing utility'
+  - player: 'worker'
+    chooses: 'when displaced, one route among the downgrade, the return and the lottery'
+    objective: 'lifetime value, the discounted expected income over the rest of a working life with displacement at the displacement rate. Comparisons that hold for any nondecreasing utility of income carry over, because the lifetime value rises with the job''s income'
     status: DECIDED
-    rests_on: ['M32', 'M38', 'M36', 'M30', 'M33']
-    open: 'what the downgrade pays (issue 11a), the unit of the upskilling cost (issue 1), the form of the lottery cost (issue 11d), partner chances under closure (M37)'
-  - player: 'job holder'
-    chooses: 'nothing in the micro model, since only displaced workers enter the lottery'
-    objective: 'none in the micro model. A pool of job holders would not hold together, because its richest entrant does better outside'
+    rests_on: ['M39', 'M40', 'M41', 'M32', 'M38', 'M36']
+    open: 'what the downgrade pays (issue 11a), the unit of the upskilling cost (issue 1), the form of the lottery cost (issue 11d), partner chances under closure (M37), the rule that fills jobs vacated by downgraders (issue 12), whether route costs are paid once (issue 13)'
+  - player: 'worker'
+    chooses: 'while holding a job, nothing. Displacement strikes every rank with the same chance and cannot be prevented'
+    objective: 'none while holding a job. A pool of job holders would not hold together, because its richest entrant does better outside'
     status: DECIDED
-    rests_on: ['M32', 'M30']
+    rests_on: ['M39', 'M30']
   - player: 'firm'
     chooses: 'nothing in the micro model, where the tail index is a parameter'
     objective: 'none in the micro model. Its stated principle is to prefer upskilling, whose spending flows back to the firm, to the lottery, whose spending is lost to the firm'
@@ -105,17 +99,17 @@ choices:
     rests_on: ['M3', 'anchor: flows back to the firm as upskilling investments', 'anchor: rather than being diverted into the social lottery channel']
   - player: 'firm'
     chooses: 'the tail index of the ladder, with the wage bill fixed'
-    objective: 'what returners pay for upskilling, one period at a time'
+    objective: 'what returners pay for upskilling in the steady state'
     status: PROPOSED
-    rests_on: ['M3', 'M38', 'anchor: The firm thus chooses']
+    rests_on: ['M3', 'M38', 'M39', 'anchor: The firm thus chooses']
     open: 'issues 11c (instruments) and 11e (objective), with issue 4 (upskilling as the return)'
   - player: 'firm'
     chooses: 'the split of the wage bill between higher-ranked and lower-ranked workers ($\mu$)'
     objective: 'next period''s assets, through the share of wages spent on upskilling'
     status: DEFERRED
     rests_on: ['anchor: The firm thus chooses', 'anchor: effective upskilling fraction']
-  - player: 'job holder'
-    chooses: 'the share of current income spent on upskilling, the rest going to the lottery ($\lambda$)'
+  - player: 'worker'
+    chooses: 'in the macro model, the share of current income spent on upskilling, the rest going to the lottery ($\lambda$)'
     objective: 'net income with a quadratic risk term'
     status: DEFERRED
     rests_on: ['anchor: as their share of current income allocated to upskilling', 'anchor: The rest of their income is allocated to a shared lottery pool', 'anchor: quadratic risk-premium approximation']
@@ -132,8 +126,8 @@ idea_summaries:
         text: 'A worker chooses the lottery only after losing a job to creative destruction.'
         rests_on: ['M32', 'anchor: creative destruction in endogenous growth economy']
       - para: 1
-        text: 'Workers who keep their jobs never sustain a pool, because the lottery creates no income and the richest entrant does better outside the pool.'
-        rests_on: ['M10', 'M12', 'M24', 'M30']
+        text: 'Job holders never sustain a pool, because the lottery creates no income and the richest entrant does better outside the pool.'
+        rests_on: ['M10', 'M12', 'M24', 'M30', 'M39']
       - para: 2
         text: 'For a displaced worker, the downgrade pays the bottom income, the lowest on the ladder.'
         rests_on: ['M32', 'M3']
@@ -142,15 +136,15 @@ idea_summaries:
         rests_on: ['M33']
       - para: 2
         text: 'Under that condition even a displaced worker who dislikes risk has no reason to take the downgrade, so the bottom income, not the source''s S-shaped utility, drives the choice between the lottery and the downgrade.'
-        rests_on: ['M33', 'anchor: higher risk-taking for higher losses', 'anchor: S-shaped Friedman-Savage utility']
+        rests_on: ['M33', 'M41', 'anchor: higher risk-taking for higher losses', 'anchor: S-shaped Friedman-Savage utility']
       - para: 3
-        text: 'Where the upskilling cost is at least the income climbed back to the former job, the return is worth no more than the downgrade, and so, under the condition on partners'' former incomes, no more than the lottery.'
-        rests_on: ['M38', 'Isc.top_displaced_prefer_lottery']
+        text: 'Valuing income at its average, a displaced worker whose upskilling cost is at least the income climbed times the lifetime multiplier does no better on the return than on the downgrade, nor, under the condition on partners'' former incomes, than in the lottery.'
+        rests_on: ['M38', 'M40', 'M41', 'Isc.top_displaced_prefer_lottery_lifetime']
       - para: 3
-        text: 'With a cost exponent of at least one, the ranks at which the upskilling cost is at least the income climbed lie above all the others, since the income climbed rises with rank.'
-        rests_on: ['Isc.cost_exceeds_regain_upward', 'Isc.loss_and_cost_rise_with_rank']
+        text: 'With a cost exponent of at least one, the cost per unit of income climbed rises with rank, so this case, once it holds at a rank, holds at every higher rank.'
+        rests_on: ['Isc.cost_ratio_rises_with_loss', 'Isc.loss_and_cost_rise_with_rank']
       - para: 4
-        text: 'The firm prefers upskilling to the lottery, because spending on upskilling flows back to the firm whereas spending on the lottery is lost to the firm.'
+        text: 'The firm prefers upskilling to the lottery, because upskilling spending flows back to the firm whereas lottery spending is lost to the firm.'
         rests_on: ['anchor: flows back to the firm as upskilling investments', 'anchor: rather than being diverted into the social lottery channel']
 
 model:
@@ -474,6 +468,32 @@ model:
     decision: '14 Oct 2026, the author: the return is defined as stated, so the term no longer rests on a result (M35). The vacated jobs of downgraders still need a refill rule (M23)'
     affects: [M7, M20, M21, M23, M35]
     symbols: [X27, X3, X16]
+  - id: M39
+    anchor: 'Appendix: "the workers in the economy face temporary job loss"; footnote: "triggered by uniform displacements"'
+    claim: 'Every worker lives forever on the fixed ladder and is in one of two states, holding a job or displaced. Each period a job holder is displaced with the same chance $d$, whatever the rank. A displaced worker chooses a route and holds a job again next period. The object of the model is the steady state of this process, and routes are compared by lifetime value, the discounted expected income over the rest of a working life'
+    assumptions: ''
+    evidence: 'lean/IscLean/SteadyState.lean::Isc.holdValue_recursion. The value $V(x)$ of holding a job paying $x$ satisfies $V(x)=x+\beta((1-d)V(x)+dW)$, with $W$ the value of being displaced, which is the same whichever route led there because every displaced worker holds a job again next period (Isc.holdValue_recursion); $V$ rises with $x$ (Isc.holdValue_mono), so every comparison of routes that holds for any nondecreasing utility of income carries over. The manuscript assumes temporary job loss, no long-term unemployment and uniform displacement, and its macro model looks for a steady state'
+    lean: [Isc.holdValue_recursion, Isc.holdValue_mono]
+    status: DECIDED
+    decision: '14 Oct 2026, the author: one type of player, the worker, in two states, since with infinitely lived workers on a fixed ladder the difference between a job holder and a displaced worker is not significant in the steady state; uniform displacement for simplicity, so a job holder can do nothing to protect the job and the source''s "less likelihood of being replaced" is dropped; the steady state replaces the one-shot comparison of Q5 as the object of the micro model. Open: the rule that fills jobs vacated by downgraders (issue 12) and whether route costs are paid once (issue 13)'
+    affects: [M20, M21, M22, M23, M30, M32, M33, M34, M35, M38]
+    symbols: [X28, X29, X1]
+  - id: M40
+    anchor: 'consequence of M39 and M38'
+    claim: 'With lifetime values, the return, paying the upskilling cost once, beats the downgrade exactly when the cost is at most the income climbed times the lifetime multiplier $1/(1-\beta(1-d))$, which is at least one. The one-shot comparison of M35 is the case of a multiplier of one, so it understates the return''s case'
+    assumptions: '$0\le\beta<1$, $0\le d\le1$; the downgrade pays an income $f$ and the return regains $x_i$'
+    evidence: 'lean/IscLean/SteadyState.lean::Isc.return_beats_downgrade_lifetime_iff. $V(x_i)-V(f)=(x_i-f)/(1-\beta(1-d))$ (Isc.holdValue_sub) and the multiplier is at least one (Isc.lifeMult_ge_one). Control: at $\beta=9/10$, $d=1/10$ the multiplier is $100/19$, so a cost of $5$ for an income gap of $1$ is paid in lifetime terms although the one-shot comparison rejects it; at $\beta=1$, $d=0$ the multiplier is undefined (Lean returns $0$)'
+    lean: [Isc.return_beats_downgrade_lifetime_iff, Isc.lifeMult_ge_one, Isc.holdValue_sub]
+    status: LEAN_PROVED
+    symbols: [X28, X29, X16, X3]
+  - id: M41
+    anchor: 'consequence of M39 and M33'
+    claim: 'M33 carries over to lifetime values with the lottery cost paid once: if every partner''s former income less the lottery cost is at least the income of the downgrade, every displaced entrant does at least as well in the lottery as in the downgrade. A cost paid once is no worse than the same amount taken off the job''s income for good. A displaced worker whose upskilling cost is at least the income climbed times the lifetime multiplier does no better on the return than in the lottery'
+    assumptions: 'lifetime value valued at its average (the value $V$ is linear in income); $L\ge0$; a pool of two or more entrants'
+    evidence: 'lean/IscLean/SteadyState.lean::Isc.lottery_beats_downgrade_lifetime. From M33 applied to $V$, which is nondecreasing, and Isc.poolEU_one_time_cost, which shows the lottery with the cost taken off every partner''s income is worth the lottery with the cost paid once less $L$ times the multiplier (Isc.one_time_cost_cheaper for a single job). The top case combines M40 and this row (Isc.top_displaced_prefer_lottery_lifetime). The cost per unit of income climbed, $\kappa\ell^{b-1}$, rises with the income climbed for $b\ge1$ (Isc.cost_ratio_rises_with_loss), so the top case, once reached at a rank, holds at every higher rank'
+    lean: [Isc.lottery_beats_downgrade_lifetime, Isc.poolEU_one_time_cost, Isc.one_time_cost_cheaper, Isc.top_displaced_prefer_lottery_lifetime, Isc.cost_ratio_rises_with_loss]
+    status: LEAN_PROVED
+    symbols: [X28, X29, X7, X3, X16]
 
 literature:
   - id: L1

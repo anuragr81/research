@@ -39,19 +39,34 @@ terms:
     defined_in: [M32, X3]
     avoid: ['floor']
     status: PROPOSED
+  - term: 'worker'
+    meaning: 'a person on the ladder, who lives forever and is in one of two states, job holder or displaced worker'
+    defined_in: [M39]
+    avoid: ['employee', 'agent']
+    status: PROPOSED
   - term: 'firm'
     meaning: 'the one firm of the closed economy, which sets the income of each job and receives the upskilling cost'
     defined_in: [M38]
     avoid: []
     status: PROPOSED
+  - term: 'lifetime value'
+    meaning: 'the discounted expected income of a worker over the rest of a working life, with displacement at the displacement rate'
+    defined_in: [M39, M40]
+    avoid: ['continuation value', 'present value']
+    status: PROPOSED
+  - term: 'lifetime multiplier'
+    meaning: 'what one unit of income is worth for as long as the job is held, one over one less the discount factor times the chance of keeping the job'
+    defined_in: [M40]
+    avoid: []
+    status: PROPOSED
   - term: 'job holder'
-    meaning: 'a worker who keeps a job through the period'
-    defined_in: [M32, M30]
+    meaning: 'the state of a worker who holds a job this period'
+    defined_in: [M39, M30]
     avoid: ['incumbent', 'job keeper', 'stayer']
     status: PROPOSED
   - term: 'displaced worker'
-    meaning: 'a worker separated from a job by creative destruction; the job stays on the ladder, vacant'
-    defined_in: [M32, M38]
+    meaning: 'the state of a worker separated from a job by creative destruction this period; the job stays on the ladder, vacant'
+    defined_in: [M32, M38, M39]
     avoid: ['job loser', 'separator']
     status: PROPOSED
   - term: 'downgrade'
@@ -499,7 +514,37 @@ rows:
     referent: 'regaining one''s former job, or its wage, after retraining or certification'
     support: POSIT
     direction: ''
-    observation: 're-employment in the former job, or at the former wage, after retraining, from linked employer and employee records'
+    observation: 're-employment in the former job, or at the former wage, after retraining, from linked payroll records of firms and workers'
     observation_status: PROPOSED
     observation_support: UNVERIFIED
     observation_note: 'No paper read in full measures it. The nearest measured event is recall to the former employer after a layoff (leads, unread: Katz 1986; Fujita and Moscarini 2017), which usually involves no retraining'
+
+  - id: X28
+    symbol: '$d$'
+    term: 'displacement rate'
+    avoid: ['separation rate', 'layoff rate']
+    term_status: PROPOSED
+    role: input
+    meaning: 'chance that a job holder is displaced in a period, the same at every rank (M39)'
+    referent: 'yearly rate of job loss through plant closings, failed projects and reorganisation'
+    support: POSIT
+    direction: ''
+    observation: 'share of job holders displaced per year, from displaced worker surveys or linked payroll records of firms and workers'
+    observation_status: PROPOSED
+    observation_support: UNVERIFIED
+    observation_note: 'No paper read in full measures a rate; JLS count separators in one state over one period and do not report a rate'
+
+  - id: X29
+    symbol: '$\beta$'
+    term: 'discount factor'
+    avoid: ['patience']
+    term_status: PROPOSED
+    role: input
+    meaning: 'weight a worker places on next period''s value (M39)'
+    referent: 'time preference of workers'
+    support: POSIT
+    direction: ''
+    observation: 'not observed directly; a construct set by convention or estimated from choices over time'
+    observation_status: PROPOSED
+    observation_support: CONSTRUCT
+    observation_note: 'Like utility, a representation of recorded choices rather than a measured quantity'
