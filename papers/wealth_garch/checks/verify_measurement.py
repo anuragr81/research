@@ -223,7 +223,8 @@ print("-" * 72)
 print("MM-14 standing results files reproduce from their pinned files, after their pre-registrations")
 for standing in ("common_data/results_common_data.md", "replication/gordon_hirtle_2026/results_stage1.md",
                  "replication/gordon_hirtle_2026/results_stage1_3.md", "replication/gordon_hirtle_2026/results_chart2.md",
-                 "replication/gordon_hirtle_2026/results_stage2.md", "replication/berger_2008/results_stage1.md"):
+                 "replication/gordon_hirtle_2026/results_stage2.md", "replication/berger_2008/results_stage1.md",
+                 "replication/berger_2008/results_stage1_2.md"):
     ok, detail = reproduce(standing)
     check(f"MM-14 {standing} reproduces", ok, detail)
     pres = run_under(standing)

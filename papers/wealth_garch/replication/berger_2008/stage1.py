@@ -22,7 +22,7 @@ GH = os.path.join(os.path.dirname(HERE), "gordon_hirtle_2026")
 DEC_ITEMS = ["RSSD9001", "RSSD9348", "RSSD9101", "RSSD9346", "BHCK8274", "BHCK3792", "BHCKA223", "BHCK2170", "BHCK4340",
              "BHCK4460", "BHCK4598", "BHCB3187", "BHOD3187", "BHCB6648", "BHOD6648", "BHCK2948", "BHCK1766", "BHDM1480",
              "BHDM1415", "BHCK2122", "BHCKA126", "BHCKA127", "BHCK8723", "BHCK8724", "BHCK8725", "BHCK8726", "BHCK8727",
-             "BHCK8728", "BHCK8729", "BHCK8730", "BHCK8731", "BHCK8732", "BHCK4300"]
+             "BHCK8728", "BHCK8729", "BHCK8730", "BHCK8731", "BHCK8732", "BHCK4300", "BHCB2389", "BHOD2389"]
 TEXT = {"RSSD9101", "RSSD9346"}
 NOTIONAL = ["BHCKA126", "BHCKA127"] + [f"BHCK{c}" for c in range(8723, 8733)]
 MEASURES = {"CAPLEV": ("BHCK8274", "BHCK2170", 5.0, 4.0), "CAPTIER1": ("BHCK8274", "BHCKA223", 6.0, 4.0),
@@ -92,13 +92,15 @@ def ancestors(entity, day, up):
     return seen
 
 
-def acquisitions(trans_zip, up, years):
+def acquisitions(trans_zip, up, years, banks=None):
     zf = zipfile.ZipFile(trans_zip)
     reader = csv.DictReader(io.TextIOWrapper(zf.open(zf.namelist()[0]), encoding="latin-1"))
     reader.fieldnames = [f.strip("#") for f in reader.fieldnames]
     count = defaultdict(int)
     for r in reader:
         if r["TRNSFM_CD"].strip() not in ("1", "9"):
+            continue
+        if banks is not None and int(r["ID_RSSD_PREDECESSOR"]) not in banks:
             continue
         d = r["DT_TRANS"].strip()
         if int(d[:4]) not in years:
@@ -142,7 +144,7 @@ def position(ratio, well, adequate):
     return "UNDERCAP" if pct >= adequate - 1 else "SIG_UNDERCAP"
 
 
-def build(dec, quarters, cpi, link, acq):
+def build(dec, quarters, cpi, link, acq, d2=False):
     rows = []
     for t in range(1997, 2007):
         for rid, rec in dec[t].items():
@@ -170,8 +172,9 @@ def build(dec, quarters, cpi, link, acq):
             row["LNASSETS"] = math.log(prev["BHCK2170"])
             row["D50B"] = 1.0 if prev["BHCK2170"] * cpi[2001] / cpi[t - 1] > 50_000_000 else 0.0
             row["D50B_LNASSETS"] = row["D50B"] * row["LNASSETS"]
-            row["RETAILDEP"] = (z(prev, "BHCB3187") + z(prev, "BHOD3187") + z(prev, "BHCB6648") + z(prev, "BHOD6648")) / prev["BHCK2948"]
-            row["BUSINESSLOAN"] = (z(prev, "BHCK1766") + z(prev, "BHDM1480") + z(prev, "BHDM1415")) / prev["BHCK2122"]
+            savings = z(prev, "BHCB2389") + z(prev, "BHOD2389") if d2 else 0.0
+            row["RETAILDEP"] = (z(prev, "BHCB3187") + z(prev, "BHOD3187") + z(prev, "BHCB6648") + z(prev, "BHOD6648") + savings) / prev["BHCK2948"]
+            row["BUSINESSLOAN"] = (z(prev, "BHCK1766") + z(prev, "BHDM1480") + z(prev, "BHDM1415")) / prev["BHCK2170" if d2 else "BHCK2122"]
             row["OFFBSHEET"] = 1.0 if sum(z(prev, k) for k in NOTIONAL) > 10 * prev["BHCK2170"] else 0.0
             rows.append(row)
     df = pd.DataFrame(rows)
@@ -186,15 +189,15 @@ def within(ours, theirs, tol):
     return "holds" if abs(ours - theirs) <= tol else "differs"
 
 
-def run(df, m):
+def run(df, m, lags=(2, 3), collapse=False, level=True):
     xs = ["STDROA", "NMERGER", "LNASSETS", "D50B", "D50B_LNASSETS", "RETAILDEP"] + (["BUSINESSLOAN", "OFFBSHEET"] if m == "CAPLEV" else [])
     yrs = [f"yr{y}" for y in range(1998, 2007)]
     d = df.rename(columns={m: "k", "DNK_" + m: "dnk"})
     mean_k, (t_k, t_l1, t_l2, t_tgt) = d["k"].mean(), THEIRS[m]
-    s1 = system_gmm(d, "k", ["dnk"] + xs + yrs, [("dnk", 2, 3)], xs + yrs)
+    s1 = system_gmm(d, "k", ["dnk"] + xs + yrs, [("dnk",) + tuple(lags)], xs + yrs, level=level, collapse=collapse)
     b = dict(zip(s1["labels"], s1["b2"]))
     lam = 1 - b["dnk"]
-    d["target1"] = (b["_cons"] + sum(b[x] * d[x] for x in xs)) / lam
+    d["target1"] = (b.get("_cons", 0.0) + sum(b[x] * d[x] for x in xs)) / lam
     d["dev"] = d["target1"] - d["dnk"]
     zcols = []
     for zn in ZNAMES:
@@ -210,7 +213,7 @@ def run(df, m):
     for x in xs:
         d["lam_" + x] = d["lam"] * d[x]
         lx.append("lam_" + x)
-    s3 = system_gmm(d, "y3", ["lam"] + lx + yrs, [("dnk", 2, 3)], ["lam"] + lx + yrs)
+    s3 = system_gmm(d, "y3", ["lam"] + lx + yrs, [("dnk",) + tuple(lags)], ["lam"] + lx + yrs, level=level, collapse=collapse)
     b3 = dict(zip(s3["labels"], s3["b2"]))
     se3 = dict(zip(s3["labels"], s3["se2"]))
     d["target3"] = b3["lam"] + sum(b3["lam_" + x] * d[x] for x in xs)
@@ -232,6 +235,8 @@ def run(df, m):
         print(f"    lam_{x:14s} {b3['lam_' + x]: .4f} (se {se3['lam_' + x]:.4f})")
     t6 = b3["lam_LNASSETS"] < 0 and (m == "CAPLEV" or b3["lam_STDROA"] > 0)
     print(f"  T6 LNASSETS negative{'' if m == 'CAPLEV' else ', STDROA positive'} -> {'holds' if t6 else 'differs'}")
+    return {"lam1": lam, "lam2": d["lam"].mean(), "tgt3": tgt,
+            "verdicts": [abs(mean_k - t_k) <= 0.010, abs(lam - t_l1) <= 0.10, abs(d["lam"].mean() - t_l2) <= 0.10, t4, t5, t6]}
 
 
 def main(paths):

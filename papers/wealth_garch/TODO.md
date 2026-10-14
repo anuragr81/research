@@ -371,6 +371,15 @@ grounds.
   the author: whether a second pre-registration should test sensitivity
   (instrument lags, collapsed instruments, BUSINESSLOAN over total assets,
   annualised STDROA).
+- 2026-10-14. Berger et al. sensitivity (PREREG_stage1_2.md,
+  results_stage1_2.md): four instrument sets by two data versions. In none
+  of the eight runs is the Step 1 speed within 0.10 of theirs (0.145 to
+  0.261 under system GMM against 0.486 to 0.602), so by the pre-registered
+  reading the gap is due to the data. Revised definitions (D2) bring
+  RETAILDEP and BUSINESSLOAN close to their means and Step 2 speeds to
+  0.244-0.353 (theirs 0.279-0.411). Step 3 targets are unstable in every
+  run. For the testing thread: partial adjustment holds, at about 0.15 to
+  0.35 a year depending on the step; the targets are not identified.
 - 2026-10-12. Later option, not the primary goal (author). A sigma
   backtest: solve the model on a grid of sigma and report, for each
   observable, the band of sigma consistent with it. Only the
