@@ -1063,6 +1063,25 @@ paper's claims, and only then write the manuscript.
   dispersion was added. Literature rows and sentences about other papers keep
   those papers' words. checks/verify_docs.py D4 now fails on any retired
   synonym in either document and on any Terminology term absent from the map.
+  Research question section added 14 Oct 2026, before the Introduction. Its two
+  examples come from primary sources only (author: "we need primary sources to
+  establish our grounding"; current examples preferred to historical ones):
+  - Chiba City's daycare selection rules (+4 points for 64+ hours a month of
+    unlicensed care, places to the highest points within priority tiers);
+  - Italy's D.Lgs. 36/2023 art. 108(7) (extra tender points for a
+    gender-equality certificate) with D.Lgs. 198/2006 art. 46-bis (the
+    certificate attests policies against decree parameters).
+  Record and suite: lit/applications_2026 (19 checks). Qing was dropped as an
+  example.
+- [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
+  The model is static: wealth is given and nothing accumulates. The author's
+  idea is to show how the results change once savings let wealth respond to
+  past success. That would measure how deep the shift is from allocated status
+  to a market-driven order: Weber's question about rational capitalism, and the
+  development economists' question about the agrarian-to-market transition.
+  - Place it as a shown boundary, as M27 and M29 are, not as an asserted one.
+  - It is new theory (a dynamic extension with savings), and no current row
+  covers it. Until it is proved, it is a scope statement only.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of
