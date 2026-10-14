@@ -7,8 +7,10 @@ Drive file 1XQdu5vos1zRWuOgutx-bLYqMv0lhUUR2) in model, parameters and
 appendix, and precedes the Financial Management article (49(2), 473-502,
 2020). Read on 14 October 2026 through the Drive connector's text
 extraction, which keeps Greek letters; page numbers are the manuscript's
-printed pages. Not yet pinned locally (to do: local copies for quote
-checks). The May 2016 NBER draft read first (lit record) differs in timing,
+printed pages. Pinned locally the same day from the author's upload:
+`~/.cache/wealth_garch/mmp_2018aug21.pdf`, sha256
+`c0024bb5771afad373af0f81a3c744e6b2a128dba9e585c5a3641a9e6cdcf00b`,
+1,118,459 bytes (the Drive file's size); PDF page = printed page + 2. The May 2016 NBER draft read first (lit record) differs in timing,
 costs and parameters, and leaves more unstated; its gaps G1-G6 are listed
 at the end with how the 2018 version settles them.
 
