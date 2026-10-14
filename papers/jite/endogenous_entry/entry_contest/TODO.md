@@ -1050,6 +1050,19 @@ paper's claims, and only then write the manuscript.
       "among the papers read"; ties; Coate-Loury's result marked as our
       derivation; MTV and Tilly read in part);
     - L25/L27 link columns corrected.
+  Terminology pass 14 Oct 2026 (author: "any name is fine so long as it's
+  defined properly, incumbent vs entrant"). One name per object across
+  MANUSCRIPT.tex and MEASUREMENT_MAP.tex: entrant/outsider for e_i (not payer,
+  investor), base component for r and bought component for s (not talent,
+  ability, base score), weight on the base component for μ, and "the incumbent
+  scored as an entrant" for C = F (not "investing"). The Terminology appendix
+  gains rows for r, s, μ and "scored as an entrant", and its incumbent row now
+  matches Appendix D (C = F; a choice only in M30). The map's C row was stale
+  (exogenous C recorded as whether she paid) and now follows the manuscript;
+  its D(Q) row uses the manuscript's symbols; a row for the ordering in
+  dispersion was added. Literature rows and sentences about other papers keep
+  those papers' words. checks/verify_docs.py D4 now fails on any retired
+  synonym in either document and on any Terminology term absent from the map.
   Pass 7 without new PDFs, 9 Oct 2026. C7 decided: M17 is Ryvkin and
   Drugov's Karlin step applied to the entry gain (C14, Table 4); C7 is
   narrowed to M18 and M19. C12 narrowed: M28 is likely the entry analogue of

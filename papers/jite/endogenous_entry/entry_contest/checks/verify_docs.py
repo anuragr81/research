@@ -121,6 +121,82 @@ check("D3 no orphaned check scripts", not orphans,
 
 print()
 print("=" * 72)
+print("D4  ONE NAME PER OBJECT: MANUSCRIPT.tex AND MEASUREMENT_MAP.tex")
+print("=" * 72)
+print("      The Terminology appendix binds one English name to each object.")
+print("      Synonyms it retires (payer, investor, talent, ability, base score,")
+print("      the incumbent investing) must not reappear in authored prose. The")
+print("      literature table keeps other papers' words, Lean identifiers are")
+print("      names, and the sentence that states the rule is allowed to list them.")
+
+BANNED = [r"\bpayers?\b", r"\bpaying class", r"\binvestors?\b", r"\bnon-investors?\b",
+          r"\btalent\b", r"\bability\b", r"\bbase score", r"incumbent investing",
+          r"investing incumbent", r"\bweight on talent"]
+ALLOW = [r"ability_with_wealth", r"payerShare", r"\\lrow", r"\\citet", r"^%",
+         r"weight on ability",            # Costrell and Loury's own object (C8)
+         r"investment rate", r"investors are the agents",   # Fryer and Loury's objects (C6)
+         r"between investors and", r"non-investors, but", r"investors' share is not",  # Coate and Loury's (C13)
+         r"not a payer", r"not talent", r"investor\)"]     # the rule sentence itself
+
+
+def lit_table_span(text):
+    a = text.find(r"\lrow{L1}")
+    b = text.find(r"\end{longtable}", a)
+    return (a, b) if a >= 0 and b >= 0 else (-1, -1)
+
+
+def offenders_in(text, lit_excluded):
+    a, b = lit_table_span(text) if lit_excluded else (-1, -1)
+    out = []
+    pos = 0
+    for i, line in enumerate(text.split("\n"), 1):
+        start, pos = pos, pos + len(line) + 1
+        if a <= start < b:
+            continue
+        if any(re.search(x, line) for x in ALLOW):
+            continue
+        hits = [x for x in BANNED if re.search(x, line, re.I)]
+        if hits:
+            out.append((i, line.strip()[:90]))
+    return out
+
+
+mp = (HERE / "MEASUREMENT_MAP.tex").read_text()
+off_tex = offenders_in(tex, True)
+off_map = offenders_in(mp, False)
+for i, l in off_tex[:12]:
+    print(f"      MANUSCRIPT.tex:{i}  {l}")
+for i, l in off_map[:12]:
+    print(f"      MEASUREMENT_MAP.tex:{i}  {l}")
+check("D4a no retired synonym in MANUSCRIPT.tex outside the literature table",
+      not off_tex, f"{len(off_tex)} lines")
+check("D4b no retired synonym in MEASUREMENT_MAP.tex", not off_map, f"{len(off_map)} lines")
+
+ta = tex.find(r"\section{Terminology}")
+tb = tex.find(r"\section{Primitives and scope}", ta)
+terms = re.findall(r"^([a-z][a-z' \-]+?) & \$", tex[ta:tb], re.M)
+TERM_ALIASES = {"enter": ["enter", "entry"], "entrant, outsider": ["entrant", "outsider"],
+                "entry count": ["k^*", "count"], "count invariance": ["count invariance", "every pure-strategy"],
+                "identity multiplicity": ["identit"], "ordering in dispersion": ["dispers"],
+                "sum of payoffs": ["payoffs"], "total entry cost": ["k^*c", "entry cost"],
+                "selection": ["selection", "assortative"], "best rival score": ["best rival"],
+                "first entrant's gain": ["first entrant", r"\Delta_Q(0)"], "dominance gap": ["wedge", "varphi"],
+                "entry condition": ["entry condition"], "scored as an entrant": ["scored as an"]}
+missing = []
+for t in terms:
+    keys = TERM_ALIASES.get(t, [t])
+    if not any(k.lower() in mp.lower() for k in keys):
+        missing.append(t)
+print(f"      {len(terms)} terms in the Terminology table")
+for t in missing:
+    print(f"      MISSING from MEASUREMENT_MAP.tex: {t}")
+check("D4c every Terminology term is used by name in MEASUREMENT_MAP.tex", not missing,
+      f"{len(missing)} missing")
+ctrl = offenders_in("the investor pays and the payer invests; talent is ability", False)
+check("D4-control retired synonyms are caught", bool(ctrl))
+
+print()
+print("=" * 72)
 nf = sum(1 for _, ok in results if not ok)
 print(f"DOCS SUMMARY: {len(results)} checks, {nf} failures")
 print("=" * 72)
