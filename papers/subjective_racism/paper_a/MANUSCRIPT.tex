@@ -1,11 +1,7 @@
-% MANUSCRIPT.tex, the manuscript skeleton for Paper A1 (Class Read from Group
-% Markers). Created 14 October 2026 as pass 1 of the plan in TODO.md, following
-% papers/MANUSCRIPT_SKELETON.md, as Paper A (Closure Traps from Social
-% Inference). Split on 15 October 2026 (TODO.md, pass 15). Paper A1 keeps every
-% row that needs no law of motion, and checks/verify_no_law.py fails if one
-% enters. Paper A2 (../paper_a2) starts from the snapshot of Paper A at commit
-% 9f108a44 and holds the rest. Row IDs are shared with that snapshot, so the
-% IDs of rows that live in Paper A2 are absent here.
+% MANUSCRIPT.tex, the manuscript skeleton for Paper A1. Created 14 October
+% 2026 as pass 1 of the plan in TODO.md, following papers/MANUSCRIPT_SKELETON.md.
+% Restricted to one generation on 15 October 2026 (TODO.md, pass 15), and
+% checks/verify_no_law.py fails if an object across generations enters.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
 %   Rows are written only through the six row macros below, and proofs only
@@ -21,8 +17,6 @@
 %     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
 %   Lists of rows or theorems are comma-separated. Lean theorem names are the
 %   fully qualified names declared under lean/ or lean/mathlib/.
-%   \outside{...} marks a scope statement that names what lies outside this
-%   paper. checks/verify_no_law.py exempts its content and counts it.
 %
 % RULES THE CHECKER ENFORCES
 %   Introduction rows point to model rows only. Player rows and conclusion rows
@@ -31,7 +25,7 @@
 %   naming the same theorems. Every literature row's quote appears verbatim in
 %   the paper's lit/ record. In every proof, plain English is at most 30% of
 %   the text, measured as prose words over prose words plus mathematical
-%   tokens. No object of the law of motion appears outside \outside{...}.
+%   tokens. No object of a law of motion appears, and no other paper is named.
 
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
@@ -59,7 +53,6 @@
 \newcommand{\rowref}[1]{#1}
 \newcommand{\unv}[1]{\textit{Unverified:} #1}
 \newcommand{\pend}[1]{\textit{Pending:} #1}
-\newcommand{\outside}[1]{#1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
 \newcommand{\prow}[6]{#1 & #2 & #3 & #4 & #5 & \rowref{#6} \\ \addlinespace}
@@ -91,10 +84,7 @@ of a group, what does the reading do within one generation? The paper asks
 three things. What the marker does to the observer's belief about the
 person's class. What leaving the visible group does to the group's mean
 class and to the refusal of those who stay. And whom a platform admits when
-its clients read class the same way. \outside{How a group's standing moves
-from one generation to the next, and whether the reading holds a group at a
-low standing, is the question of Paper A2, which starts from the same rows
-and adds a law of motion with a basis for it.}
+its clients read class the same way.
 
 \subsection{Answer}
 
@@ -164,10 +154,7 @@ model rows it rests on and what it does not claim.
   composition externality are not derived (M15,
   Appendix~\ref{app:scope}). That full admission earns more than exclusion
   is shown for the two ends of the admission rate, and no row ranks the
-  interior rates against full admission. \outside{The spillover from the
-  room into the host's standing, and the comparison of the admission
-  threshold with the host's tipping point, need the law of motion and are in
-  Paper A2.}}
+  interior rates against full admission.}
 \end{longtable}
 \normalsize
 
@@ -218,8 +205,7 @@ literature row draws the parallel.
 \prow{P3}{The outsider group}{None. Its standing is the mean class of its
   visible members, a state.}
   {The standing is an input to M14 and M15. Within the generation it changes
-  only by composition, when members pass (M14). \outside{How it moves from
-  one generation to the next is the law of motion of Paper A2.}}
+  only by composition, when members pass (M14).}
   {No paper read in this bundle draws the parallel.}
   {M14, M15}
 \prow{P4}{The host group}{None. Its standing is a state, as for the
@@ -459,10 +445,7 @@ Phelps (1972) and Jeffrey's chapter on probability kinematics in the 1983
 edition were read in full (\path{lit/phelps_1972/},
 \path{lit/jeffrey_1983/}). Loury (2002), the platform-discrimination studies
 the predecessor cites, Jeffrey's first edition of 1965 and Arrow's published
-chapter of 1973 are not read, and no row rests on them. \outside{Coate and
-Loury (1993) and Arrow's 1971 working paper were read in full for their
-parallels to the results of the law of motion, and their records and rows
-are in Paper A2.}
+chapter of 1973 are not read, and no row rests on them.
 
 \section{Conclusions}
 
@@ -722,22 +705,18 @@ matches the audit.
 how an observer would obtain it. Its Name column is the terminology, and
 every term of Appendix~\ref{app:terms} is checked against it. The note is a
 reference and not evidence for any row.
-\item \emph{Scope.} \outside{\path{checks/verify_no_law.py} fails if a
-build root, a Lean source, this manuscript or the measurement map names an
-object of the law of motion, apart from the scope statements written with
-\texttt{\textbackslash outside}, which it exempts and counts, and each of
-which names Paper A2. The objects it forbids are those of Paper A2, among
-them the composed map, the closure trap, the tipping point and the mobility
-threshold.}
+\item \emph{Scope.} \path{checks/verify_no_law.py} keeps the paper within
+one generation. It fails if a build root, a Lean source, this manuscript or
+the measurement map names an object on its list, each of which would carry a
+group's standing from one generation to the next. Its controls check that an
+injected object of each kind is caught.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The class space and the set of groups
 are finite in M1 to M3. The passing decision of M14 is a rule, and its gain
 and cost are not derived. The platform's objective of M15 is the
 predecessor's first-order condition taken as a definition, and no row ranks
-the interior admission rates against full admission. \outside{Everything
-that rests on a law of motion for a group's standing, the predecessor's
-figures among it, is outside this paper and in Paper A2.}
+the interior admission rates against full admission.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. The
 SymPy scripts of the predecessor bundle are not part of this skeleton.
@@ -839,9 +818,7 @@ Jeffrey's rule need not commute (L7), and the model has one reading.
 predecessor's passing appendix for a finite population. Row M14 does not carry
 the passing decision itself, which the predecessor derives from a benefit
 and a cost of suppressing markers that no row defines. Part (ii) says only
-what the decision needs to make the leavers an upper set. \outside{The
-feedback from the lower visible mean to the next generation's standing needs
-the law of motion and is in Paper A2.}
+what the decision needs to make the leavers an upper set.
 
 \paragraph{The platform channel.} Row M15 takes the predecessor's
 first-order condition as the platform's objective, linear in the admission
@@ -850,18 +827,13 @@ self-selection function, the willingness to pay and the composition
 externality are not derived, and a row that derives them would replace M15.
 The predecessor's shadow-market proposition rests on an informed and an
 uninformed social quality, $S^\ast$ and $S^{\mathrm{rand}}$, that no equation
-of the predecessor defines, so it is not a row. \outside{Its spillover
-formula and its partial-inclusion proposition compare the room with the
-host's tipping point, which needs the law of motion, and both are in Paper
-A2.}
+of the predecessor defines, so it is not a row.
 
 \section{Refuted conjectures}
 \label{app:refuted}
 
 No conjecture of the predecessor that this paper's rows can state is
-refuted. \outside{The predecessor's partial-inclusion proposition, refuted
-in the snapshot of Paper A as R1, compares the admission threshold with the
-host's tipping point and is in Paper A2.}
+refuted.
 
 \section{Responses to the referee reports}
 
