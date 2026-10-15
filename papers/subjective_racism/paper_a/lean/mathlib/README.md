@@ -146,3 +146,29 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `upper_set_of_threshold` | M14 (ii). A monotone benefit and an antitone cost make the passers an upper set |
 | `rate_rises` | M14 (iii). A lower mean raises `s F` under antitone `F` |
 | `control_ordering_needed` | Classes `(0, 1)` with the class-0 member leaving give a visible mean of 1 against 1/2 |
+
+## Platform.lean, row M15 and R1
+
+`marg` is the predecessor's admission first-order condition, `profit σ = σ marg`,
+`cAdm` the admission threshold, `cEff` the host's effective standing and
+`etaCrit` the critical outsider fraction.
+
+| Theorem | Content |
+|---|---|
+| `marg_neg_iff`, `marg_neg_iff_below` | M15 (i). The margin is negative exactly when `W |A| < n (1 − α)(c_I − c_O)`, that is when `c_O < c_E` |
+| `exclude_of_neg` | M15 (ii). A negative margin makes every positive admission rate earn less than exclusion |
+| `control_admit_of_pos` | A positive margin makes full admission earn more |
+| `tip_iff` | M15 (iii). The host tips exactly when `η > η_crit` |
+| `etaCrit_anti` | M15 (iv). `η_crit` falls in `θ` while the host is above its tipping point |
+| `control_etaCrit_sign` | With the host below its tipping point, `η_crit` rises in `θ` |
+| `tokenism_not_implied` | R1. For every `c_M < 1` there is a `W` with `c_E > c_M` and one with `c_E < c_M` |
+
+## Slowing.lean, row M16
+
+| Theorem | Content |
+|---|---|
+| `Q_threshold_plus` | At `γ = γ* + ε`, `Q c = (√b c − √μ)² + ε c` |
+| `step_bounds` | Inside the window of half-width `√ε/√b` about the merged root, one step moves the standing up by between 0 and `2ε` |
+| `slowing` | M16. From the window's lower edge, reaching its upper edge takes at least `1/(√b √ε)` generations |
+| `control_start_matters` | From the upper edge no generation is needed, while the bound is positive |
+| `bound_at_example` | At `(μ, b, ε) = (1/20, 3/10, 1/100)` the hypotheses hold and the bound is at least 18 |

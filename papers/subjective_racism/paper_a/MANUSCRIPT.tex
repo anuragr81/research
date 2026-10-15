@@ -300,6 +300,40 @@ that check it.}\\
   (i) fails without the ordering, since classes $(0,1)$ with the class-$0$
   member leaving give a visible mean of $1$ against $\tfrac12$.}
   {Passing.cross, Passing.mean_sdiff_le, Passing.mean_sdiff_lt, Passing.upper_set_of_threshold, Passing.rate_rises, Passing.control_ordering_needed}
+\mrow{M15}{With the predecessor's admission objective, linear in the
+  admission rate, the platform excludes the outsider group exactly when an
+  admittee's willingness to pay falls short of the composition externality,
+  which is exactly when the outsider's standing is below the admission
+  threshold. The host tips exactly when the outsider fraction exceeds the
+  critical fraction, which falls in the spillover sensitivity while the host
+  is above its tipping point.}
+  {$\mathrm{marg}=W+n(1-\alpha)(\bar c_O-\bar c_I)/|A|$, $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
+  $c_E=\bar c_I-W|A|/(n(1-\alpha))$.
+  (i) $|A|>0$. $\mathrm{marg}<0\iff W|A|<n(1-\alpha)(\bar c_I-\bar c_O)$, and
+  with $n(1-\alpha)>0$, $\iff\bar c_O<c_E$.
+  (ii) $\mathrm{marg}<0$ and $\sigma>0$ give $\Pi(\sigma)<\Pi(0)$.
+  (iii) $c_{\mathrm{eff}}=\bar c_I-\theta\eta(\bar c_I-c_E)$, $\theta>0$,
+  $\bar c_I>c_E$. Then $c_{\mathrm{eff}}<c_M\iff\eta>\eta_{\mathrm{crit}}
+  =(\bar c_I-c_M)/(\theta(\bar c_I-c_E))$.
+  (iv) $\bar c_I>c_M$, $\bar c_I>c_E$, $0<\theta_1<\theta_2$ give
+  $\eta_{\mathrm{crit}}(\theta_2)<\eta_{\mathrm{crit}}(\theta_1)$.
+  (ii) fails with $\mathrm{marg}>0$, where $\Pi(1)>\Pi(0)$. (iv) fails with
+  $\bar c_I<c_M$, where $\eta_{\mathrm{crit}}$ rises in $\theta$.}
+  {Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign}
+\mrow{M16}{Just above the mobility threshold, the generations needed to cross
+  the window about the merged root grow at least as the inverse square root
+  of the excess mobility.}
+  {$\varepsilon=\tilde\gamma-\tilde\gamma^\ast>0$, $\varepsilon\le\mu$,
+  $\sqrt\mu+\sqrt\varepsilon\le\sqrt b$, $c_0=\sqrt\mu/\sqrt b$,
+  $h=\sqrt\varepsilon/\sqrt b$.
+  $Q(\bar c)=(\sqrt b\,\bar c-\sqrt\mu)^2+\varepsilon\bar c$.
+  For $\bar c\in[c_0-h,c_0+h]$, $0\le\mathcal{H}(\bar c)-\bar c\le2\varepsilon$.
+  If $\mathcal{H}^n(c_0-h)\ge c_0+h$, then $n\ge1/(\sqrt b\sqrt\varepsilon)$.
+  At $(\mu,b,\varepsilon)=(\tfrac1{20},\tfrac3{10},\tfrac1{100})$ the
+  hypotheses hold and $n\ge18$.
+  The start matters, since $\mathcal{H}^0(c_0+h)=c_0+h$ while the bound is
+  positive.}
+  {Slowing.Q_threshold_plus, Slowing.step_bounds, Slowing.slowing, Slowing.control_start_matters, Slowing.bound_at_example}
 \end{longtable}
 \normalsize
 
@@ -416,6 +450,17 @@ classes $c_i$, the passers $P\subseteq V$, the visible group $V\setminus P$,
 and the mean class $\bar c(S)=\sum_{i\in S}c_i/|S|$ of a non-empty set $S$.
 In (ii) $\beta$ is the benefit of passing and $\kappa$ its cost, both
 functions of class.
+
+Row M15 has the predecessor's platform. $W$ is an admittee's willingness to
+pay, $n$ the number of host clients, $\alpha$ the weight on objective
+quality, $|A|$ the room size, $\sigma\in[0,1]$ the admission rate,
+$\mathrm{marg}$ the admission margin, $\Pi$ the profit, $c_E$ the admission
+threshold, $\eta$ the outsider fraction in the room, $\theta$ the spillover
+sensitivity, $c_{\mathrm{eff}}$ the host's effective standing and
+$\eta_{\mathrm{crit}}$ the critical fraction. Row M16 has the excess mobility
+$\varepsilon=\tilde\gamma-\tilde\gamma^\ast$, the merged root
+$c_0=\sqrt\mu/\sqrt b$, the half-width $h=\sqrt\varepsilon/\sqrt b$ of the
+window $[c_0-h,c_0+h]$, and the escape time $n$.
 
 Row M11 has two groups, an outsider $O$ moved by $\mathcal{H}$ with
 parameters $(\mu,\tilde\gamma,b)$ and a host $I$ moved by $\mathcal{H}_I$, the
@@ -748,6 +793,56 @@ Control. $V=\{0,1\}$, $c=(0,1)$, $P=\{0\}$. $\bar c(V\setminus P)=1$ and
 $\bar c(V)=\tfrac12$.
 \end{mproof}
 
+\begin{mproof}{M15}{Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign}
+(i) With $|A|>0$,
+\[
+\mathrm{marg}=\frac{W|A|-n(1-\alpha)(\bar c_I-\bar c_O)}{|A|}<0
+\iff W|A|<n(1-\alpha)(\bar c_I-\bar c_O)
+\iff\frac{W|A|}{n(1-\alpha)}<\bar c_I-\bar c_O
+\iff\bar c_O<c_E .
+\]
+(ii) $\Pi(\sigma)-\Pi(0)=\sigma\,\mathrm{marg}<0$.
+(iii) With $\theta(\bar c_I-c_E)>0$,
+\[
+\bar c_I-\theta\eta(\bar c_I-c_E)<c_M
+\iff\bar c_I-c_M<\theta\eta(\bar c_I-c_E)
+\iff\eta_{\mathrm{crit}}<\eta .
+\]
+(iv) $0<\theta_1(\bar c_I-c_E)<\theta_2(\bar c_I-c_E)$ and $\bar c_I-c_M>0$.
+Controls. $\Pi(1)-\Pi(0)=\mathrm{marg}$. With $\bar c_I-c_M<0$,
+$1/(\theta_2(\bar c_I-c_E))<1/(\theta_1(\bar c_I-c_E))$ multiplied by a
+negative number reverses.
+\end{mproof}
+
+\begin{mproof}{M16}{Slowing.Q_threshold_plus, Slowing.step_bounds, Slowing.slowing, Slowing.control_start_matters, Slowing.bound_at_example}
+Put $u=\sqrt b$, $v=\sqrt\mu$, $e=\sqrt\varepsilon$. With
+$\tilde\gamma=(u-v)^2-\mu+\varepsilon$, $b-\tilde\gamma=2uv-\varepsilon$ and
+\[
+Q(\bar c)=u^2\bar c^2-2uv\bar c+v^2+\varepsilon\bar c=(u\bar c-v)^2+\varepsilon\bar c .
+\]
+Window. $e\le v$ gives $c_0-h\ge0$, and $v+e\le u$ gives $c_0+h\le1$. For
+$\bar c$ in the window, $|u\bar c-v|\le e$, so
+\[
+0\le Q(\bar c)\le e^2+\varepsilon\bar c\le2\varepsilon,
+\qquad
+0\le\mathcal{H}(\bar c)-\bar c=(1-\bar c)Q(\bar c)\le2\varepsilon .
+\]
+Induction on $k$, with $x_k=\mathcal{H}^k(c_0-h)$. Either $c_0-h\le x_k\le c_0-h+2\varepsilon k$,
+or $c_0+h\le c_0-h+2\varepsilon k$. If the first holds and $x_k<c_0+h$, the
+window bound gives the first at $k+1$. If the first holds and
+$x_k\ge c_0+h$, the second holds at $k$ and so at $k+1$. The second persists.
+At $n$, $x_n\ge c_0+h$ gives $c_0+h\le c_0-h+2\varepsilon n$ in both cases, so
+\[
+2h\le2\varepsilon n
+\iff\frac{e}{u}\le e^2n
+\iff\frac1{ue}\le n .
+\]
+Example. $\sqrt{1/100}=\tfrac1{10}$, $\sqrt{1/20}\le\tfrac14$,
+$\tfrac12\le\sqrt{3/10}\le\tfrac59$, so $\tfrac14+\tfrac1{10}\le\sqrt{3/10}$
+and $1/(\sqrt{3/10}\cdot\tfrac1{10})\ge18$.
+Control. $\mathcal{H}^0$ is the identity, and $ue>0$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -787,7 +882,9 @@ a double root of $\mathcal{H}(\bar c)-\bar c$ with slope $\mathcal{H}'=1$,
 the saddle-node condition in the predecessor's words. That the fixed points
 on either side move apart as $\tilde\gamma$ falls below the threshold is in
 M5's closed form and not stated as a row. Row M12 covers a general $F$ with
-sufficient conditions only. An exact region for the general $F$, and the
+sufficient conditions only. Row M16 is a lower bound on the escape time
+with the exponent $-\tfrac12$. The predecessor's asymptotic constant
+$C=\pi/\sqrt{|ab|}$ and the matching upper bound are not stated. An exact region for the general $F$, and the
 count of fixed points under the predecessor's regularity assumption, are not
 stated.
 The composed map itself enters rows M4 to M8 as a definition, so its derivation from
@@ -875,6 +972,33 @@ Visible group & $V\setminus P$ & The members who stay (M14). \\
   \addlinespace
 Visible mean & $\bar c(V\setminus P)$ & The mean class of the visible group
   (M14). \\ \addlinespace
+Willingness to pay & $W$ & What an admitted outsider pays the platform
+  (M15). \\ \addlinespace
+Host clients & $n$ & The number of host-group clients on the platform
+  (M15). \\ \addlinespace
+Objective weight & $\alpha$ & The weight on objective quality in a client's
+  experience, with $1-\alpha$ on social quality (M15). \\ \addlinespace
+Room size & $|A|$ & The number of attendees (M15). \\ \addlinespace
+Admission rate & $\sigma$ & The share of outsider members the platform
+  admits (M15). \\ \addlinespace
+Admission margin & $\mathrm{marg}$ & The profit from admitting one more
+  outsider member (M15). \\ \addlinespace
+Admission threshold & $c_E$ & The outsider standing at which the admission
+  margin is zero (M15). \\ \addlinespace
+Outsider fraction & $\eta$ & The share of the room that is outsiders
+  (M15). \\ \addlinespace
+Spillover sensitivity & $\theta$ & The share of the room's lower mean that
+  passes into the host's standing (M15). \\ \addlinespace
+Effective host standing & $c_{\mathrm{eff}}$ & The host's standing after
+  the spillover (M15). \\ \addlinespace
+Critical fraction & $\eta_{\mathrm{crit}}$ & The outsider fraction at which
+  the host reaches its tipping point (M15). \\ \addlinespace
+Excess mobility & $\varepsilon$ & Mobility less the mobility threshold
+  (M16). \\ \addlinespace
+Window & $[c_0-h,c_0+h]$ & The standings within $h=\sqrt\varepsilon/\sqrt b$
+  of the merged root (M16). \\ \addlinespace
+Escape time & $n$ & The generations needed to cross the window
+  (M16). \\ \addlinespace
 Frozen prior & $\beta_0$ & The group prior held at its first value, with mean
   standing $\beta_0$, in place of re-learning it each generation. \\
   \addlinespace
@@ -956,6 +1080,16 @@ what the decision needs to make the leavers an upper set. The feedback from
 the lower visible mean to the next generation's standing is the composed map
 of M4 to M6, applied to the visible group, and is not restated.
 
+\paragraph{The platform channel.} Row M15 takes the predecessor's
+first-order condition as the platform's objective, linear in the admission
+rate, and its spillover formula as a definition. The atmosphere vector, the
+self-selection function, the willingness to pay and the composition
+externality are not derived, and a row that derives them would replace M15.
+The predecessor's shadow-market proposition rests on an informed and an
+uninformed social quality, $S^\ast$ and $S^{\mathrm{rand}}$, that no equation
+of the predecessor defines, so it is not a row. Its partial-inclusion
+proposition is Appendix~\ref{app:refuted}, R1.
+
 \paragraph{The group prior across generations.} Each generation the observer's
 class distribution for a group is re-learned from the group's current
 standing, a choice the author made on 14 October 2026. The reason is that
@@ -974,7 +1108,15 @@ converge once $k\ge1-\mu-\tilde\gamma$.
 \section{Refuted conjectures}
 \label{app:refuted}
 
-None yet.
+\paragraph{R1. The admission threshold lies below the tipping point.} The
+predecessor's partial-inclusion proposition states
+$c_E<c_M$, and argues that the two thresholds ``answer to structurally
+different objects''. That does not order them. With $\bar c_I=1$, for every
+$c_M<1$, every $n(1-\alpha)>0$ and every $|A|>0$, there is a willingness to
+pay $W>0$ with $c_E>c_M$ and one with $c_E<c_M$
+(\lean{Platform.tokenism\_not\_implied}). The claim therefore does not follow
+from the premises the predecessor states. A bound on $W$ relative to the
+gap $1-c_M$ would restore it, and no row states one.
 
 \section{Responses to the referee reports}
 

@@ -14,8 +14,8 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M14 done. Next are Q10 and Q11 |
-| 5. Appendices B to G | [~] filled for M1 to M14, and Appendix D records D1 and D4 |
+| 3 and 4. Claims into Lean and model rows, one at a time | [x] 15 Oct. M1 to M16 and R1. Every predecessor claim is a row, a refuted conjecture, or recorded as not stated (Q12) |
+| 5. Appendices B to G | [~] filled for M1 to M16, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [ ] |
@@ -120,20 +120,24 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   when one is strictly above (`mean_sdiff_lt`). Threshold structure from a
   monotone benefit and an antitone cost. Rate rises under antitone `F`.
   Control without the ordering. The passing decision itself is not a row.
-- [ ] **Q10. The platform channel.** `prop:shadow`, `prop:exclusion`,
-  `prop:tokenism`, `prop:spillover`. The predecessor's platform (atmosphere,
-  admission policy, profit) is not defined to the point where these are
-  statements. What is algebra, the sign of the admission first-order
-  condition and `eta_crit` decreasing in `epsilon`, can be rows with the
-  objective written down. `prop:tokenism` asserts `c_excl < c_mid` from
-  "structurally different objects", which is not a proof, and a parameter
-  choice with `c_excl > c_mid` would refute it as stated. `prop:shadow`
-  needs `S*` and `S_rand`, which no equation defines.
-- [ ] **Q11. `cor:Tstar`, critical slowing.** A lower bound of order
-  `(gamma - gamma*)^(-1/2)` on the generations spent near the merged root
-  is in reach from M9's factorisation
-  `H c - c = (1 - c)((u c - v)^2 + (gamma - gamma*) c)`. The predecessor's
-  constant `C = pi/sqrt|ab|` is an asymptotic claim and not in reach.
+- [x] **Q10, M15 and R1. The platform channel.** `Platform.lean`, 15 Oct.
+  `prop:exclusion` and `prop:spillover` as algebra on the predecessor's
+  first-order condition and spillover formula, taken as definitions (M15).
+  `prop:tokenism` is refuted as stated, Appendix F R1, since `c_E` can lie
+  on either side of `c_M` (`tokenism_not_implied`). `prop:shadow` is not a
+  row, since `S*` and `S_rand` are undefined (Appendix D, "The platform
+  channel").
+- [x] **Q11, M16. `cor:Tstar`, critical slowing.** `Slowing.lean`, 15 Oct.
+  From the lower edge of the window of half-width `sqrt(eps)/sqrt(b)` about
+  the merged root, crossing it takes at least `1/(sqrt(b) sqrt(eps))`
+  generations, `eps = gamma - gamma*`. Exponent `-1/2` as the predecessor
+  claims, as a lower bound. At `(1/20, 3/10, 1/100)` at least 18
+  generations, against the predecessor's "approximately 65". The constant
+  `C = pi/sqrt|ab|` and an upper bound are not stated.
+- [ ] **Q12. What the appendix pass left.** A row deriving `F` from the
+  engagement threshold `d_bar`. A platform objective derived rather than
+  assumed. An upper bound on the escape time. These are new rows, not
+  predecessor claims.
 - [x] **Measurement map.** `MEASUREMENT_MAP.tex`, 15 Oct 2026. Inputs,
   internal objects and outputs, each with one name, a type, what it
   represents and how it is obtained, and four recovery formulas proved in

@@ -179,6 +179,26 @@ rows reach them.
   the outsider group who suppress their markers and leave the visible group
   (M14).}{Recorded as the members whose marker is no longer read, where a
   panel follows people, or elicited as self-reported suppression.}
+\mm{$W$}{Willingness to pay}{A real number.}{What an admitted outsider
+  member pays the platform (M15).}{Recorded as the price paid, or elicited
+  as a reservation price.}
+\mm{$n$}{Host clients}{A positive integer.}{The number of host-group clients
+  on the platform (M15).}{Recorded by the platform.}
+\mm{$\alpha$}{Objective weight}{A real number in $(0,1)$.}{The weight a
+  client puts on objective quality against social quality (M15).}{Elicited
+  from clients, or never observed where only admissions are seen.}
+\mm{$|A|$}{Room size}{A positive integer.}{The number of attendees
+  (M15).}{Recorded by the platform.}
+\mm{$\eta$}{Outsider fraction}{A real number in $[0,1]$.}{The share of the
+  room that is outsider members (M15).}{Recorded by the platform, or by an
+  observer counting markers in the room.}
+\mm{$\theta$}{Spillover sensitivity}{A real number in $(0,1]$.}{The share of
+  the room's lower mean class that passes into the host's own standing
+  through repeated encounters (M15).}{Never observed. The predecessor
+  introduces it as a parameter and no row derives it.}
+\mm{$\varepsilon$}{Excess mobility}{A real number, $\varepsilon=\tilde\gamma-\tilde\gamma^\ast$.}{How
+  far mobility exceeds the threshold (M16).}{Computed from $\tilde\gamma$
+  and $\tilde\gamma^\ast$.}
 \mm{$\bar d$}{Engagement threshold}{A real number with $\bar d>0$.}{The
   largest expected class distance at which the observer still engages, the
   predecessor's equation (threshold). It lies upstream of $F$.}{Never observed.
@@ -262,6 +282,18 @@ rows reach them.
 \mm{$V\setminus P$}{Visible group}{A finite set of people.}{The members
   of the outsider group whose markers are still read (M14).}{Recorded as the
   complement of the passers.}
+\mm{$\mathrm{marg}$}{Admission margin}{A real number,
+  $W+n(1-\alpha)(\bar c_O-\bar c_I)/|A|$.}{The profit from admitting one more
+  outsider member, the predecessor's first-order condition (M15).}{Computed
+  from its five inputs.}
+\mm{$c_{\mathrm{eff}}$}{Effective host standing}{A real number,
+  $\bar c_I-\theta\eta(\bar c_I-c_E)$.}{The host's standing after the
+  spillover from the room (M15).}{Computed from its inputs. The predecessor
+  gives the formula as a definition.}
+\mm{$[c_0-h,c_0+h]$}{Window}{An interval, with $c_0=\sqrt\mu/\sqrt b$ and
+  $h=\sqrt\varepsilon/\sqrt b$.}{The standings near the merged root where
+  each generation moves the standing by at most $2\varepsilon$
+  (M16).}{Computed from $(\mu,b,\varepsilon)$.}
 \mm{$u$, $v$, $w$, $A$, $G$, $r$, $B$, $D$}{Proof devices}{Real numbers and
   expressions named in Appendix B of the manuscript.}{Square roots of $b$,
   $\mu$ and $\mu+\tilde\gamma$, the monotonicity margin and its difference
@@ -349,6 +381,22 @@ rows reach them.
   leavers are the upper members.}{Recorded as the mean class rank of the
   members whose marker is still read, and compared with the mean of the
   whole group.}
+\mm{$\sigma$}{Admission rate}{A real number in $[0,1]$.}{The share of
+  outsider members the platform admits (M15). M15 predicts $0$ when the
+  outsider stands below the admission threshold.}{Recorded as the share of
+  outsider applicants admitted.}
+\mm{$c_E$}{Admission threshold}{A real number,
+  $\bar c_I-W|A|/(n(1-\alpha))$.}{The outsider standing above which the
+  platform admits (M15).}{Computed from its inputs. In records it is
+  bracketed by the outsider standings at which admissions start.}
+\mm{$\eta_{\mathrm{crit}}$}{Critical fraction}{A real number,
+  $(\bar c_I-c_M)/(\theta(\bar c_I-c_E))$.}{The outsider fraction at which
+  the host reaches its tipping point (M15).}{Computed from its inputs, and
+  from the computed $c_M$.}
+\mm{$n$ generations}{Escape time}{A natural number.}{The generations the
+  standing spends crossing the window just above the threshold. M16 bounds
+  it below by $1/(\sqrt b\sqrt\varepsilon)$.}{Recorded as the number of
+  generations a path spends inside the computed window.}
 \mm{$c^\ast$}{Frozen fixed point}{A real number in $(0,1)$, the root of
   $P$.}{The one long-run standing under the frozen prior (M7). It rises with
   the frozen prior and does not depend on the initial standing (M7,
