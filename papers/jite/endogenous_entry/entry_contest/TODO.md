@@ -1197,7 +1197,18 @@ paper's claims, and only then write the manuscript.
   lower (selection_falls_with_exit). Manuscript: M32 + proof, Table 2 row,
   Appendix D paragraph; map row r_W; addendum W-3 rewritten (it was false as
   stated, and the "two forces" paragraph was corrected).
-- [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
+- [x] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
+  Closed 15 Oct 2026 (author: "Close it"): Appendix D "The contest" now says
+  equilibrium is the one-shot equilibrium at a state, that a steady state with
+  wealth responding to past success is outside the model, and gives the bridge
+  condition; STEADY_STATE_ADDENDUM.tex records the rest. Same day: M32 became
+  headline K9; Table 2 replaced by a pointer to the Main answer and the
+  headlines; the Introduction's opening paragraph merged into the Research
+  question; Appendix D gained "The two institutions" (AP-D1, AP-D2).
+  Title, 15 Oct 2026 (author chose option 2 of three): "Who Pays to Compete?
+  Wealth, a Fixed Fee and Entry by Rank", replacing "Threshold Entry in a
+  Fixed-Prize Contest" in the manuscript, the map, PROOFS_ADDENDUM and
+  LITERATURE.tex.
   Author, 15 Oct 2026: a long-run steady state would need the incumbent to
   become a challenger and vice versa over time. Agreed. Every equilibrium in
   the paper is of the one-shot game (Appendix D, "The contest": static, played
