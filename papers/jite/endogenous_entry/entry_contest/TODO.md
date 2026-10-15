@@ -1170,6 +1170,17 @@ paper's claims, and only then write the manuscript.
   Appendix D paragraph; map row r_W; addendum W-3 rewritten (it was false as
   stated, and the "two forces" paragraph was corrected).
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
+  Author, 15 Oct 2026: a long-run steady state would need the incumbent to
+  become a challenger and vice versa over time. Agreed. Every equilibrium in
+  the paper is of the one-shot game (Appendix D, "The contest": static, played
+  once); the incumbent's identity is fixed, even in M30, and the prize has no
+  effect on next period's wealth. A dynamic version needs (i) turnover: the
+  winner is next period's incumbent; (ii) a wealth law of motion: the prize and
+  the fee feed wealth, so kappa moves; (iii) a choice about whether a holder's
+  components persist or are redrawn. M32's common-bonus mechanism becomes a
+  dynamic question there. Scope statement for the manuscript: say "equilibrium"
+  means the one-shot equilibrium, and name the three ingredients above as what
+  a steady state would add.
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to
   past success. That would measure how deep the shift is from allocated status
