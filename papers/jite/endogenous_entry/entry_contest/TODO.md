@@ -1140,6 +1140,34 @@ paper's claims, and only then write the manuscript.
   tables, Inputs, Model-internal variables and Outputs, each with an Observed
   column coded R (recorded), C (computed from records), N (not observed, a fact
   of nature or of the contest) and K (not observed, a construct).
+- [ ] **S (author, 15 Oct 2026). The steady state, as an extension.**
+  STEADY_STATE_ADDENDUM.tex is the starter (author: "we also need to establish
+  how long-term equilibria changes the current claims"; "a steady-state
+  addendum - not for this paper but as a potential extension"). Three forks:
+  turnover; the law of motion of wealth (S-A the position pays an income y,
+  S-B it does not); the life of the components (redrawn or kept). Per
+  headline: unchanged per period; in the steady state S-1 (one step from M31
+  and exchangeability: under redraw the incumbent is displaced with probability
+  at least 1 - xi(k)/(k+1), so closure needs k* = 0 and xi(0) = 1, i.e. (1 - mu) s
+  above mu times the width of r's support a.s., as at mu = 0 with s > 0), S-2 to S-4 and S-6 conjectures with
+  falsifiers, S-5 one step from M5 (a long-tenured holder under S-A is the
+  richest player and enters whenever anyone does). Closure needs mu = 0 or a
+  kept bonus; wealth alone under redraw does not close the position. Literature:
+  no search run yet; candidates listed [unread]. Manuscript: scope sentence in
+  Appendix D "The contest" (equilibrium means the one-shot equilibrium with the
+  incumbent's identity fixed). checks/verify_docs.py D5 now covers both addenda.
+  Lean: S-1 and S-5 are the first to prove.
+  Reframed the same day (author: "the goal of the addendum is to just establish
+  the scope of the main paper"; the paper is a Nash-equilibrium analysis and in
+  the long run the variables are set by the dynamics): the addendum is now "The
+  Long Run: Scope of the Main Paper", with no literature section. Reading: the
+  one-shot equilibrium is where the forces settle at a state; the long run
+  decides which states are reached; the claims are conditional on the state.
+  Bridge condition, in the addendum and in Appendix D: each period of a
+  repeated contest is the one-shot game if players are myopic or value
+  incumbency alike (a common continuation value only enlarges V, by M1); a
+  wealth-dependent continuation value breaks "valued alike by rich and poor",
+  the one case in which the long run changes the claims themselves.
 - [ ] **W (author, 15 Oct 2026). The institution's choice of mu, as an extension.**
   WEIGHT_ADDENDUM.tex is the starter (author: "do it in an addendum - that would
   serve both as a starter document and ... scope related sentences in the

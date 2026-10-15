@@ -1,0 +1,234 @@
+% STEADY_STATE_ADDENDUM.tex, the scope of the main paper with respect to the long run: what its
+% one-shot Nash analysis covers, and what a contest that repeats, with the incumbent and the
+% challengers exchanging roles, would decide. Not a literature position (author, 15 October 2026:
+% "the goal of the addendum is to just establish the scope of the main paper"). Origin (author, 15 October 2026: "if we talk
+% about long-term steady-state equilibria - then we have to consider the possibility that the
+% incumbent becomes the contender and vice versa over time").
+%
+% RULES
+%   A statement that rests on a row of MANUSCRIPT.tex cites the row. A statement that follows
+%   from a row in one step says so and names the step. Everything else is a conjecture or an
+%   open question, labelled S-n, with the world in which it is false. Terms are the manuscript's;
+%   checks/verify_docs.py (D5) checks the terms and that every cited row exists.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage[round]{natbib}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\title{The Long Run: Scope of the Main Paper}
+\author{Companion note to the manuscript}
+\date{15 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{The scope}
+
+The paper is a Nash-equilibrium analysis. Every equilibrium in it is an
+equilibrium of a game played once: the incumbent's identity is fixed, the prize
+is awarded, and the model stops (manuscript, Appendix~D, ``The contest''). Over
+time the contest repeats. The winner holds the position next period, the
+displaced holder competes again, and wealth responds to past success.
+
+The two are read together as forces and states. At any date the state is the
+wealth profile, who holds the position, and the prize, the fee and the weight in
+force. The one-shot equilibrium at that state is where the opposing forces of
+the model settle. The fee weighs less on the rich, so they enter first (K1,
+K3); the gain from entering falls as more enter, which caps entry (M4, K4); a
+spread of wealth moves the count in a direction set by where the marginal
+entrant stands (K2); a heavier weight on the base component lowers entry (K8)
+without guaranteeing a better winner (M32). The long run decides which states
+are reached. Its variables are not free parameters but values the process
+arrives at, and every claim of the paper holds at whatever values it reaches.
+The claims are therefore conditional on the state, which is the scope this note
+records.
+
+\paragraph{The bridge condition.} The reading holds when the period game is the
+one-shot game. That is so if agents are myopic, or if the value of holding the
+position after this period is the same for every player. A forward-looking
+challenger values winning at $V$ plus the discounted value of incumbency. Since
+$V$ enters the gain only as a scale (M1), a continuation value common to all
+players changes the prize and nothing else, and every result holds with the
+larger prize. If the continuation value depends on a player's own wealth, the
+prize is no longer valued alike by rich and poor (Appendix~D, ``Payoffs''), and
+wealth acts through the prize as well as through the fee. The period game is
+then a different game, and that is the one case in which the long run would
+change the claims themselves rather than the state at which they are read.
+
+\section{What the one-shot model fixes}
+
+Given the wealth profile and the incumbent at a date, the one-shot results hold
+at that date. The table lists the ones the extension would lean on.
+
+\begin{center}
+\small
+\begin{tabular}{@{}P{4.4cm}P{8.2cm}P{2.6cm}@{}}
+\toprule
+\textbf{Statement} & \textbf{Content} & \textbf{Rests on} \\
+\midrule
+The count each period & Given the profile, every one-shot equilibrium has
+  $k^*$ entrants, and the $k^*$ richest entering is one of them. & K1, M6, M8 \\
+  \addlinespace
+Wealth enters only through $\kappa$ & The fee's utility cost
+  $\kappa(w)=u(w)-u(w-c)$ falls with wealth. & K3, M23 \\ \addlinespace
+The prize is outside $u$ & The prize enters payoffs linearly and outside the
+  utility of wealth, so it does not change wealth. & Appendix~D, Payoffs \\
+  \addlinespace
+The incumbent's entry & As player $0$ with the lowest cost, she is in every
+  non-empty equilibrium outside the band of M6. & M30 \\ \addlinespace
+The entrants' share & The prize goes to an entrant with probability $\xi(k)$,
+  non-decreasing in $k$, equal to $1$ when all enter, non-increasing in $\mu$. &
+  M31 \\ \addlinespace
+A common bonus & It washes out when every player holds it and favours holders
+  once some stop buying. & M32 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{The ingredients of a steady state}
+
+Three choices turn the one-shot game into a process. Each is a modelling fork,
+and the extension must take one branch of each.
+
+\paragraph{Turnover.} The winner at date $t$ is the incumbent at $t+1$; the
+displaced holder joins the challengers. Variants: the position lasts a fixed
+number of periods, or a replacement shock ends tenure.
+
+\paragraph{The law of motion of wealth.} In the manuscript the prize is outside
+$u$, so winning changes nothing but the payoff. For wealth to respond to
+success the position must pay. Two branches.
+\begin{itemize}
+\item \textbf{S-A, the position pays.} The holder receives an income $y>0$ each
+  period of tenure, in wealth units, besides the prize's value $V$ in utility.
+  Then $w_{t+1}=w_t-c\,e_t+y\,\mathbf 1\{\text{holds}\}$, plus any endowment
+  shock. This is a step from the privilege contest of Appendix~D towards a
+  rent-seeking contest, since part of what is won is now money.
+\item \textbf{S-B, the position does not pay.} Wealth moves only through the
+  fees paid and an exogenous endowment process. Then every entrant is poorer
+  next period by $c$, and success does not feed wealth.
+\end{itemize}
+
+\paragraph{The life of the components.} Either the base and bought components
+are redrawn each period (memoryless), or the bought component persists for the
+holder once bought (a credential kept). Under persistence the fee is paid once,
+which is an investment rather than a fee, and the incumbent is scored as an
+entrant by inheritance rather than by choice.
+
+\section{How the claims change}
+
+The one-shot claims survive as statements about each period, since each period
+is the one-shot game at the current state. What changes is the state. The
+table gives, for each headline, what is unchanged and what the steady state
+adds, with the conjectures labelled.
+
+\footnotesize
+\begin{longtable}{@{}P{1.6cm}P{5.2cm}P{8.4cm}@{}}
+\caption{Each headline, per period and in the steady state.}\\
+\toprule
+\textbf{Row} & \textbf{Per period} & \textbf{In the steady state} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Row} & \textbf{Per period} & \textbf{In the steady state} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+K1 & Unchanged: the count is pinned at each date by the current profile. & The
+  incumbent's identity becomes a Markov chain on the players. \textbf{S-1}
+  (one step from M31 and the symmetry of the entrant law): with components
+  redrawn each period and the incumbent scored as an entrant, the $k+1$
+  entrants win with equal probability, so the incumbent is displaced with
+  probability at least $1-\xi(k)/(k+1)$, which is at least $\tfrac12$ whenever
+  one challenger enters, and with probability $1-\xi(0)$ when none does.
+  Closure under redraw therefore needs $k^*=0$ and $\xi(0)=1$, which holds
+  when $(1-\mu)s$ exceeds $\mu$ times the width of the support of $r$ almost
+  surely, as at the $\mu=0$ boundary with $s>0$.
+  \emph{False if} the entrant law is not exchangeable across entrants, which
+  the anonymity of M26 rules out. \\ \addlinespace
+K2 & Unchanged for a change of the current profile. & The spread is no longer
+  exogenous. Under S-A the holder's wealth rises by $y$ each period, so the
+  stationary profile is more dispersed than the endowment profile.
+  \textbf{S-2} (conjecture): the stationary dispersion of wealth rises in $y$.
+  \emph{False if} turnover is so fast that no holder accumulates, which S-1
+  makes possible at small $\xi(k)$. The sign rule of K2 then applies to a
+  spread the process generates, read at the stationary marginal entrant. \\
+  \addlinespace
+K3 & Unchanged. & Unchanged; $\kappa$ is still the only channel within a
+  period. Under S-A wealth also records past success, so the richest-first
+  sorting of K1 reads as a sorting by past success. \\ \addlinespace
+K4, K5 & Unchanged. & The prize gains a second channel. \textbf{S-3}
+  (conjecture, S-A): the stationary count is non-decreasing in $y$, because a
+  displaced holder returns richer by her tenure's income, and by M5 a richer
+  challenger enters whenever a poorer one does. \emph{False if} the income $y$ raises the holder's
+  wealth enough to change the law of $s$ or $r$, which the anonymity of M26
+  excludes, or if $y$ is taxed into the fee. \\ \addlinespace
+K6 & Unchanged. & Unchanged; the number of challengers is fixed. \\
+  \addlinespace
+K7, K8 & Unchanged. & \textbf{S-4} (conjecture, persistence): with the bought
+  component kept by the holder, a higher $\mu$ lowers the number who buy (K8),
+  and the holder's kept bonus then counts against fewer holders, so tenure
+  lengthens and mobility falls; closure can then arise at $\mu>0$. Under
+  redraw there is no such persistence, and S-1 bounds mobility below.
+  \emph{False if} the kept bonus depreciates faster than the entry response. \\
+  \addlinespace
+M30 & The incumbent chooses as player $0$. & \textbf{S-5} (one step from M5
+  and the law of motion): under S-A each period of tenure adds $y$ to the
+  holder's wealth while no challenger's wealth rises, so after enough periods
+  of tenure the holder is the richest player, has the lowest cost and, by M5,
+  enters whenever any challenger does. ``Scored as an entrant'' is then the
+  outcome of the process for a holder of long enough tenure, not an
+  assumption. \emph{False if} tenure ends before that, which S-1 makes likely
+  under redraw whenever a challenger enters. \\ \addlinespace
+M32 & Unchanged. & The common-bonus mechanism compounds. Under persistence, a
+  holder who keeps the bonus wins against outsiders with better base
+  components in every period in which some challengers have stopped buying, so
+  the winner's base component in the steady state is below its one-shot
+  level. \textbf{S-6} (conjecture): under persistence and S-A, the stationary
+  expected base component of the holder falls in $\mu$. \emph{False if} S-1's
+  turnover dominates, as under redraw. \\ \addlinespace
+C1 to C14 & Unchanged; they are claims about the one-shot model. & Unchanged as
+  claims about each period; any claim about the steady state itself would be a
+  new claim. \\
+\end{longtable}
+\normalsize
+
+\section{Mobility and closure as objects}
+
+Mobility is the stationary probability that the position changes hands.
+Closure is mobility zero. In the one-shot model closure is the $\mu=0$
+boundary, where outsiders score nothing (manuscript, Research question). In the
+process it has two further routes, each a conjecture above: a holder's wealth
+that makes her the lowest-cost player every period (S-5, which gives
+persistence of entry, not of the position), and a kept bonus that counts
+against fewer holders as $\mu$ rises (S-4, which gives persistence of the
+position). S-1 says that under redraw neither route closes the position while
+any challenger enters. So the sharpest statement the extension can aim at is
+that closure needs either the $\mu=0$ boundary or a bought component that
+persists; wealth alone, under redraw, does not close it.
+
+\section{What this gives the manuscript}
+
+Two sentences in Appendix~D of the manuscript (``The contest''). The first says
+that ``equilibrium'' means the one-shot equilibrium with the incumbent's
+identity fixed, so the claims are conditional on the state, and that a steady
+state is outside the model. The second gives the bridge condition, myopia or a
+continuation value common to all players, under which each period of a
+repeated contest is the one-shot game.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}
