@@ -171,6 +171,31 @@ that check it.}\\
   automatic. At $(\tfrac1{20},0,3)$, $\mathcal{H}(\tfrac15)<0$, and at
   $(\tfrac1{20},0,1)$, $\mathcal{H}(\tfrac1{100})<\mathcal{H}(0)$.}
   {ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone}
+\mrow{M7}{With the group prior frozen at its first value, the map has exactly
+  one fixed point in $[0,1]$. A higher frozen discrimination rate gives a lower
+  fixed point, so a higher frozen belief about the group gives a higher one.}
+  {$\mu>0$, $\tilde\gamma\ge0$, $k=s_g\delta F(\beta_0)$. $\mathcal{H}_F$ with
+  $F$ held at $F(\beta_0)$ is $\mathcal{H}_k$, and
+  $\mathcal{H}_k(\bar c)-\bar c=-P(\bar c)$. If $k>0$, then
+  $P(c^\ast)=0$ for some $c^\ast\in(0,1)$, and $x,y\ge0$ with
+  $P(x)=P(y)=0$ gives $x=y$.
+  $k_1<k_2\Rightarrow c^\ast(k_2)<c^\ast(k_1)$. If $s_g\delta>0$ and
+  $F(\beta_2)<F(\beta_1)$, then $c^\ast$ at $\beta_1$ is below $c^\ast$ at
+  $\beta_2$.
+  It fails without $\mu>0$, since at $(\mu,\tilde\gamma,k)=(0,\tfrac12,\tfrac14)$
+  both $0$ and $\tfrac12$ are fixed points.}
+  {FrozenMap.Hf_frozen, FrozenMap.Hk_sub_self, FrozenMap.fixed_iff_P, FrozenMap.P_cross, FrozenMap.fixed_unique, FrozenMap.exists_fixed, FrozenMap.P_neg_below, FrozenMap.P_pos_above, FrozenMap.fixed_anti, FrozenMap.fixed_mono_belief, FrozenMap.control_mu_needed}
+\mrow{M8}{When the frozen rate is also small enough for the map to be
+  increasing, every standing in $[0,1]$ converges to that one fixed point. The
+  frozen map has no tipping point.}
+  {$\tilde\gamma\ge0$ and $k<1-\mu-\tilde\gamma$. Then $x<y\le1\Rightarrow
+  \mathcal{H}_k(x)<\mathcal{H}_k(y)$. If also $\mu>0$, $0<c^\ast<1$ and
+  $P(c^\ast)=0$, then $\bar c^0\in[0,1]\Rightarrow
+  \mathcal{H}_k^n(\bar c^0)\to c^\ast$.
+  It fails without the bound on $k$. At $(\mu,\tilde\gamma,k)=(\tfrac12,0,\tfrac32)$,
+  $\mathcal{H}_k(\bar c)=\tfrac12-\bar c$ and $P(\tfrac14)=0$, and the orbit
+  of $0$ alternates between $0$ and $\tfrac12$ and has no limit.}
+  {FrozenMap.Hk_continuous, FrozenMap.Hk_strictMonoOn, FrozenMap.converges_to_fixed, FrozenMap.control_cycle_fixed, FrozenMap.control_cycle}
 \end{longtable}
 \normalsize
 
@@ -265,6 +290,13 @@ $\mathcal{H}_F(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-s_g\delta F(\bar c))
 $\mathcal{H}(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-b(1-\bar c)^2)
 -\tilde\gamma\,\bar c^2$, and $Q(\bar c)=b\bar c^2-(b-\tilde\gamma)\bar c+\mu$.
 $\mathcal{H}^n$ is the $n$-th iterate of $\mathcal{H}$.
+
+Rows M7 and M8 hold the group prior at its first value, whose mean standing
+is $\beta_0$, so the discrimination rate is the constant $k=s_g\delta F(\beta_0)$.
+The frozen map is $\mathcal{H}_k(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-k)
+-\tilde\gamma\,\bar c^2$, its fixed-point polynomial is
+$P(\bar c)=\tilde\gamma\,\bar c^2+(\mu+k-\tilde\gamma)\,\bar c-\mu$, and $c^\ast$
+is a root of $P$ in $(0,1)$, written $c^\ast(k)$ where $k$ varies.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -399,6 +431,56 @@ $\mathcal{H}(\tfrac1{100})-\mathcal{H}(0)=\tfrac1{100}(\tfrac{19}{20}-(\tfrac{99
 at $(\tfrac1{20},0,1)$.
 \end{mproof}
 
+\begin{mproof}{M7}{FrozenMap.Hf_frozen, FrozenMap.Hk_sub_self, FrozenMap.fixed_iff_P, FrozenMap.P_cross, FrozenMap.fixed_unique, FrozenMap.exists_fixed, FrozenMap.P_neg_below, FrozenMap.P_pos_above, FrozenMap.fixed_anti, FrozenMap.fixed_mono_belief, FrozenMap.control_mu_needed}
+With $F$ held at $F(\beta_0)$,
+\[
+\mathcal{H}_F(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-k)-\tilde\gamma\,\bar c^2
+=\mathcal{H}_k(\bar c),
+\qquad
+\mathcal{H}_k(\bar c)-\bar c=-P(\bar c).
+\]
+For every $x$ and $y$,
+\[
+y\,P(x)-x\,P(y)=(x-y)\,(\tilde\gamma\,xy+\mu).
+\]
+Uniqueness. $P(x)=P(y)=0$ with $x,y\ge0$ gives $(x-y)(\tilde\gamma\,xy+\mu)=0$
+and $\tilde\gamma\,xy+\mu\ge\mu>0$, so $x=y$.
+Existence. $P(0)=-\mu<0<k=P(1)$ and $P$ is continuous, so $P(c^\ast)=0$ for
+some $c^\ast\in(0,1)$. $P(0)\neq0$ and $P(1)\neq0$, so $c^\ast$ is the only
+fixed point in $[0,1]$.
+Sign. With $y=c^\ast$,
+\[
+c^\ast P(x)=(x-c^\ast)(\tilde\gamma\,x\,c^\ast+\mu),
+\]
+so $P<0$ on $[0,c^\ast)$ and $P>0$ on $(c^\ast,\infty)$.
+Comparison. With $c_1=c^\ast(k_1)$ and $c_2=c^\ast(k_2)$,
+\[
+P_{k_2}(c_1)=P_{k_1}(c_1)+(k_2-k_1)\,c_1=(k_2-k_1)\,c_1>0,
+\]
+so $c_1>c_2$ by the sign of $P_{k_2}$. $F(\beta_2)<F(\beta_1)$ and
+$s_g\delta>0$ give $s_g\delta F(\beta_2)<s_g\delta F(\beta_1)$.
+Control. At $(0,\tfrac12,\tfrac14)$,
+$P(\bar c)=\tfrac12\bar c^2-\tfrac14\bar c=\tfrac12\bar c\,(\bar c-\tfrac12)$.
+\end{mproof}
+
+\begin{mproof}{M8}{FrozenMap.Hk_continuous, FrozenMap.Hk_strictMonoOn, FrozenMap.converges_to_fixed, FrozenMap.control_cycle_fixed, FrozenMap.control_cycle}
+For $x<y\le1$, $\tilde\gamma(x+y)\le2\tilde\gamma$, so
+\[
+\mathcal{H}_k(y)-\mathcal{H}_k(x)=(y-x)\big(1-\mu+\tilde\gamma-k-\tilde\gamma(x+y)\big)
+\ge(y-x)(1-\mu-\tilde\gamma-k)>0.
+\]
+By M7, $\mathcal{H}_k(\bar c)-\bar c=-P(\bar c)$ is $>0$ on $[0,c^\ast)$ and
+$<0$ on $(c^\ast,1]$. The monotone orbit argument of M6 with $p=c^\ast$
+applies to $\bar c^0\in[0,c^\ast]$, and its mirror to $\bar c^0\in(c^\ast,1]$.
+Control. At $(\tfrac12,0,\tfrac32)$, $\mathcal{H}_k(\bar c)=\tfrac12-\bar c$ and
+$P(\bar c)=2\bar c-\tfrac12$. With $u_n=\mathcal{H}_k^n(0)$,
+\[
+u_{n+1}=\tfrac12-u_n,\qquad |u_n-\tfrac14|=\tfrac14\ \text{for every }n.
+\]
+If $u_n\to L$, then $2L=\lim(u_{n+1}+u_n)=\tfrac12$, so $L=\tfrac14$, which
+$|u_n-\tfrac14|=\tfrac14$ rules out.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -425,8 +507,9 @@ matches the audit.
 \paragraph{What Lean does not carry.} The class space is finite in the Lean
 statements of M1 to M3, and so is the set of groups in M2 and M3. Rows M5
 and M6 are proved for the canonical $F(\bar c)=(1-\bar c)^2$ only. The general
-$F$ of the predecessor's regularity assumption is not yet covered. The
-composed map itself enters every row as a definition, so its derivation from
+$F$ of the predecessor's regularity assumption is not yet covered there.
+Rows M7 and M8 hold for every $F$, which enters them only through $F(\beta_0)$.
+The composed map itself enters rows M4 to M8 as a definition, so its derivation from
 the engagement decision is not checked (Appendix~\ref{app:scope}). The predecessor manuscript gives class a Beta law on
 $[0,1]$, and the continuous form of M1 is not formalised.
 
@@ -478,6 +561,12 @@ Tipping point & $c_M$ & The middle fixed point, which separates the two
   basins of M6. \\ \addlinespace
 Integration & $\bar c=1$ & The fixed point at full standing (M4). \\
   \addlinespace
+Frozen prior & $\beta_0$ & The group prior held at its first value, with mean
+  standing $\beta_0$, in place of re-learning it each generation. \\
+  \addlinespace
+Frozen map & $\mathcal{H}_k$, $k=s_g\delta F(\beta_0)$ & The composed map
+  under the frozen prior. M7 and M8 show it has one fixed point $c^\ast$,
+  which attracts every standing. \\ \addlinespace
 \end{longtable}
 \normalsize
 
@@ -509,7 +598,7 @@ the readings could matter. The model has no such sequence.
 \unv{The attribution of the kinematics formula to Jeffrey (1965) rests on the
 predecessor manuscript. The source has not been read for this skeleton.}
 
-\paragraph{The law of motion.} Rows M4 to M6 take the predecessor's
+\paragraph{The law of motion.} Rows M4 to M8 take the predecessor's
 composed map, its equation (composed), as the law of motion of a group's
 standing. Its derivation from the engagement decision and the discrimination
 rate is not a row yet. The bounds $b<1-\mu+\tilde\gamma$ and
@@ -523,10 +612,14 @@ standing, a choice the author made on 14 October 2026. The reason is that
 this is the model the predecessor manuscript writes down, in its equations
 (prior), (dynamic) and (composed) and its loop figure, where the discrimination
 rate of a generation is computed from that generation's standing. The
-alternative holds the distribution fixed at its first value. No row depends on
-this choice yet. The rows on the composed map and the closure trap will
-(\path{TODO.md}, items Q3 to Q5), and the fixed alternative will enter as a
-row of its own (Q5).
+alternative holds the distribution fixed at its first value. Rows M4 to M6
+take the re-learned prior, and rows M7 and M8 take the alternative. Under the
+frozen prior the map has one fixed point (M7), and when the map is increasing
+every standing converges to it (M8). Its location rises with the frozen belief
+$\beta_0$ (M7) and does not depend on the standing the group starts from (M8).
+Under the re-learned prior, a standing above the tipping point converges to
+integration (M6). The control of M8 shows the frozen map need not
+converge once $k\ge1-\mu-\tilde\gamma$.
 
 \section{Refuted conjectures}
 \label{app:refuted}

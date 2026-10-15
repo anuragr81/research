@@ -47,3 +47,23 @@ Every file here is a build root in `lakefile.toml` and is audited by
 | `basins` | M6. Under those bounds, orbits from `[0, c₂)` converge to `c₁` and orbits from `(c₂, 1]` converge to 1 |
 | `basins_hypotheses_at_figure` | The bounds hold at `(1/20, 1/10, 1/2)` |
 | `control_leaves_unit`, `control_not_monotone` | At `(1/20, 0, 3)`, `H (1/5) < 0`. At `(1/20, 0, 1)`, `H (1/100) < H 0` |
+
+## FrozenMap.lean, rows M7 and M8
+
+`Hk` is the composed map with the group prior frozen, so the discrimination
+rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − μ`, and
+`Hk c − c = − P c`.
+
+| Theorem | Content |
+|---|---|
+| `Hf_frozen` | `Hf` with `F` held at `F β₀` is `Hk` with `k = s δ F β₀` |
+| `Hk_sub_self`, `fixed_iff_P` | The fixed points of `Hk` are the roots of `P` |
+| `P_cross` | `y P x − x P y = (x − y)(γ x y + μ)` |
+| `fixed_unique` | M7. With `μ > 0`, `γ ≥ 0`, `P` has at most one root in `[0, ∞)` |
+| `exists_fixed` | M7. With `μ > 0`, `k > 0`, `P` has a root in `(0, 1)` |
+| `P_neg_below`, `P_pos_above` | `P` is negative below the root and positive above it, on `[0, ∞)` |
+| `fixed_anti`, `fixed_mono_belief` | M7. A higher `k` gives a lower root, so a lower `F β₀` gives a higher one |
+| `control_mu_needed` | At `(0, 1/2, 1/4)`, both 0 and 1/2 are roots |
+| `Hk_continuous`, `Hk_strictMonoOn` | `Hk` is continuous, and strictly increasing up to 1 when `γ ≥ 0` and `k < 1 − μ − γ` |
+| `converges_to_fixed` | M8. Under that bound, every orbit from `[0, 1]` converges to the root |
+| `control_cycle_fixed`, `control_cycle` | At `(1/2, 0, 3/2)`, `Hk c = 1/2 − c`, the root is 1/4, and the orbit of 0 has no limit |

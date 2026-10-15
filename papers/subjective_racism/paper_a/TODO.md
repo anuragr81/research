@@ -3,7 +3,7 @@
 Conventions as in the reference bundle. `[ ]` open, `[~]` in progress, `[x]`
 done, `[!]` needs a decision from the author. Each item says what counts as done.
 
-Last updated 14 October 2026.
+Last updated 15 October 2026.
 
 ## PLAN
 
@@ -14,8 +14,8 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M6 done. Next is Q5 |
-| 5. Appendices B to G | [~] filled for M1 to M6, and Appendix D records D1 and D4 |
+| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M8 done. Next is Q4e |
+| 5. Appendices B to G | [~] filled for M1 to M8, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [ ] |
@@ -64,12 +64,20 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   `cor:salience-threshold`. M5 gives the boundary `(b - gamma)^2 = 4 mu b` in
   closed form. The rows still to prove are what happens on it (one double
   fixed point) and the threshold in `gamma` it implies.
-- [ ] **Q5. The frozen-belief map has one equilibrium.** With `phi` held at
-  `s_g F(beta_0)`, the fixed-point equation is the quadratic
-  `gamma c^2 + (mu + delta phi - gamma) c - mu = 0`. Its roots multiply to
-  `-mu/gamma < 0`, so it has exactly one positive root, for every `beta_0`. This
-  is the rival object that the two-object rule of `notes/from_archive/POSTMORTEM.md`
-  asks for, and it carries no trap.
+- [x] **Q5, M7 and M8. The frozen-belief map has one equilibrium.** With
+  `phi` held at `s_g F(beta_0)`, so `k = s_g delta F(beta_0)`, the fixed points
+  are the roots of `P c = gamma c^2 + (mu + k - gamma) c - mu`. M7: for `k > 0`
+  exactly one lies in [0, 1], it is inside (0, 1), and it falls as `k` rises,
+  so it rises with the frozen belief `beta_0`. Uniqueness holds on `[0, inf)`
+  for `gamma >= 0`, through `y P x - x P y = (x - y)(gamma x y + mu)`, which
+  avoids the case split at `gamma = 0` that the root-product argument needs.
+  M8: when `k < 1 - mu - gamma` the map is increasing and every standing in
+  [0, 1] converges to the fixed point. Both rows hold for every F. Unlike M6,
+  M8 has a true control: at `(1/2, 0, 3/2)` the orbit of 0 cycles and
+  converges to nothing (`control_cycle`). Found on the way. The frozen map is
+  not free of persistence. Its long-run standing is set by `beta_0` and does
+  not depend on the starting standing, so raising a group's standing without
+  moving the belief has no lasting effect. What it lacks is the tipping point.
 - [x] **Q6. Moot, 14 Oct.** The dynamic half of `prop:coincidence` compared
   Bayes and Jeffrey across generations. With D1 (re-learned prior) and D4
   (Bayes only) there is no second rule to compare.
@@ -102,7 +110,9 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   replace it.
 - [!] **D3. The title.** "Stereotype Rigidity" names a mechanism that the
   rows so far do not carry. The author agreed on 14 Oct that it may not
-  survive. Decide once Q4 and Q5 are in.
+  survive. Q4 and Q5 are now in. A belief held rigid is the frozen reading,
+  M7 and M8, which has no trap. The trap of M5 and M6 needs the belief to
+  follow the standing, which is the opposite of rigidity.
 - [x] **D4. Drop Jeffrey's rule. Decided 14 Oct 2026 by the author**, on the
   condition that the two rules are shown not to differ here. M2 and M3 show
   it for one reading of a marker under group sufficiency. The skeleton names
