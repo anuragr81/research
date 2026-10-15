@@ -650,3 +650,12 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   fall in value (sweep 68 and 54). Next: put A1-A3 in stage2.py, rerun V1
   and V2 on the amended solver, then the full rerun. results_diagnosis_stage2.md
   is not yet in the MM-14 list (a reproduction takes 76 minutes).
+- 2026-10-15. MMP stage 2d rerun. Amendments A1-A3 are in mmp_a1.py and
+  stage2.py (390dea33); the amended solver passes V1 and V2
+  (results_validation_stage2_a1.md, in the MM-14 list; the checker: 66
+  checks, 0 failures). The full rerun (stage2.py, 41 and 61 point grids,
+  both sizes, cap 400 sweeps) started 12:57 as the systemd user unit
+  mmp-stage2-rerun; output in rerun_out.txt, log in rerun_log.txt. A 7-point
+  smoke test of the run script was seen (not a result: 7 by 7 grid, 500
+  banks, 40 quarters).
+
