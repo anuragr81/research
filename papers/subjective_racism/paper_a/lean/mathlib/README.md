@@ -27,3 +27,23 @@ Every file here is a build root in `lakefile.toml` and is audited by
 | `bayes_group_of_ratio`, `bayes_class_of_ratio` | M3. With `q g > 0`, `∑ w = 1` and `κ ≠ 0`, the Bayesian group posterior is `w` and the class posterior is the mixture by `w` |
 | `ratioLik_mem_unit` | The likelihood lies in `[0, 1]` when `0 < κ ≤ q g` and `0 ≤ w g ≤ 1` |
 | `control_prior_support_needed` | Prior `(1, 0)`. Group 1 keeps posterior weight 0 under every likelihood |
+
+## ClosureMap.lean, rows M4 to M6
+
+`Hf` is the composed map for a general `F`, and `H` the map for
+`F c = (1 − c)²` with `b = s δ`. `Q c = b c² − (b − γ) c + μ`.
+
+| Theorem | Content |
+|---|---|
+| `Hf_zero`, `Hf_one_iff`, `H_eq_Hf` | M4. `Hf 0 = μ`; with `s δ ≠ 0`, `Hf 1 = 1 ↔ F 1 = 0`; the canonical `F` gives `H` |
+| `control_F_one_needed` | `F ≡ 1` sends 1 to 0 |
+| `H_sub_self`, `fixed_iff_Q`, `H_one` | `H c − c = (1 − c) Q c`, so the fixed points other than 1 are the roots of `Q` |
+| `vieta`, `Q_factor` | Two distinct roots satisfy `b (c₁ + c₂) = b − γ` and `b c₁ c₂ = μ`, and then `Q c = b (c − c₁)(c − c₂)` |
+| `two_interior_iff` | M5. With `μ > 0`, `γ ≥ 0`, `b > 0`, two fixed points in `(0, 1)` exist exactly when `b − γ > 0` and `(b − γ)² > 4 μ b` |
+| `fixed_points_exactly` | The fixed points are then exactly `c₁`, `c₂` and 1 |
+| `trap_at_figure_parameters`, `control_no_trap` | The condition holds at `(1/20, 1/10, 1/2)` and fails at `(1/20, 1/10, 1/5)` |
+| `tendsto_up`, `tendsto_down` | A continuous map, nondecreasing on an interval, with a fixed endpoint and moving every point towards it, carries every orbit to that endpoint |
+| `H_continuous`, `H_strictMonoOn` | `H` is continuous, and strictly increasing on `[0, 1]` when `b < 1 − μ + γ` and `μ + γ < 1` |
+| `basins` | M6. Under those bounds, orbits from `[0, c₂)` converge to `c₁` and orbits from `(c₂, 1]` converge to 1 |
+| `basins_hypotheses_at_figure` | The bounds hold at `(1/20, 1/10, 1/2)` |
+| `control_leaves_unit`, `control_not_monotone` | At `(1/20, 0, 3)`, `H (1/5) < 0`. At `(1/20, 0, 1)`, `H (1/100) < H 0` |

@@ -14,8 +14,8 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M3 done. Next is Q3 |
-| 5. Appendices B to G | [~] filled for M1 to M3, and Appendix D records D1 and D4 |
+| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M6 done. Next is Q5 |
+| 5. Appendices B to G | [~] filled for M1 to M6, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [ ] |
@@ -42,12 +42,28 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   the salience `s_g` as Jeffrey's directly given group weight. With Jeffrey
   dropped (D4), `s_g` needs a Bayesian reading, which M3 supplies. Write the
   map from `s_g` to `q'` once the engagement decision enters.
-- [ ] **Q3. The composed map.** `eq:composed`. `H(0) = mu` and `H(1) = 1` for
-  every salience, given `F(1) = 0`.
-- [ ] **Q4. Class closure.** `prop:class-closure`. With `F = (1-c)^2` first,
-  then under `ass:Freg`, three fixed points with the low one stable and the
-  middle one unstable, for small `gamma` and large `delta`. The precise
-  parameter region has to come from the theorem, not from the prose.
+- [x] **Q3, M4. The composed map's boundary values.** `H_F(0) = mu` for every
+  F, and `H_F(1) = 1` exactly when `F(1) = 0` (given `s delta != 0`).
+- [x] **Q4, M5 and M6. Class closure, canonical F.** `prop:class-closure`.
+  M5: two fixed points inside (0, 1) exactly when `b - gamma > 0` and
+  `(b - gamma)^2 > 4 mu b`, with `b = s_g delta`, and then the fixed points in
+  [0, 1] are those two and 1. M6: when also `b < 1 - mu + gamma` and
+  `mu + gamma < 1`, the map is increasing, every standing below the middle
+  fixed point converges to the low one and every standing above it converges
+  to 1. Found on the way. The predecessor's "sufficiently large delta" is
+  bounded above, since for large `s_g delta` the map leaves [0, 1]
+  (`control_leaves_unit`). The compiler showed `basins` needs neither
+  `mu > 0` nor `gamma >= 0`, and both were dropped.
+- [ ] **Q4c. A true control for M6.** The two controls of M6 show its bounds
+  are not automatic. Neither shows the basin conclusion failing without them.
+  Find parameters with the trap condition, a bound violated, and a standing
+  below `c_M` that does not converge to `c_L`, or record that none exists.
+- [ ] **Q4d. Class closure under `ass:Freg`.** General F, C^1, strictly
+  decreasing, convex, `F(1) = F'(1) = 0`. Expect sufficient conditions only.
+- [ ] **Q4e. The bifurcation.** `prop:bifurcation` and
+  `cor:salience-threshold`. M5 gives the boundary `(b - gamma)^2 = 4 mu b` in
+  closed form. The rows still to prove are what happens on it (one double
+  fixed point) and the threshold in `gamma` it implies.
 - [ ] **Q5. The frozen-belief map has one equilibrium.** With `phi` held at
   `s_g F(beta_0)`, the fixed-point equation is the quadratic
   `gamma c^2 + (mu + delta phi - gamma) c - mu = 0`. Its roots multiply to

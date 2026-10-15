@@ -138,6 +138,39 @@ that check it.}\\
   It fails without $q(g)>0$, since $q=(1,0)$ gives $q'(1)=0$ for every
   $\ell$.}
   {ClassPosterior.bayes_group_of_ratio, ClassPosterior.bayes_class_of_ratio, ClassPosterior.ratioLik_mem_unit, ClassPosterior.control_prior_support_needed}
+\mrow{M4}{The composed map sends standing 0 to $\mu$ for every
+  discrimination-rate function. It fixes standing 1 exactly when $F(1)=0$.
+  With $F(\bar c)=(1-\bar c)^2$ it is the canonical map $\mathcal{H}$.}
+  {$\mathcal{H}_F(0)=\mu$. If $s_g\delta\neq0$, then
+  $\mathcal{H}_F(1)=1\iff F(1)=0$. For $F(\bar c)=(1-\bar c)^2$,
+  $\mathcal{H}_F=\mathcal{H}$ with $b=s_g\delta$.
+  It fails without $F(1)=0$, since $F\equiv1$, $\mu=\tfrac1{20}$,
+  $\tilde\gamma=\tfrac1{10}$ and $s_g\delta=1$ give $\mathcal{H}_F(1)=0$.}
+  {ClosureMap.Hf_zero, ClosureMap.Hf_one_iff, ClosureMap.H_eq_Hf, ClosureMap.control_F_one_needed}
+\mrow{M5}{For the canonical map, there are two fixed points strictly inside
+  $(0,1)$ exactly when the trap condition holds. The fixed points in $[0,1]$
+  are then those two and integration at 1.}
+  {$\mu>0$, $\tilde\gamma\ge0$, $b>0$.
+  $\mathcal{H}(\bar c)-\bar c=(1-\bar c)\,Q(\bar c)$.
+  $\exists\,0<c_L<c_M<1$ with $\mathcal{H}(c_L)=c_L$, $\mathcal{H}(c_M)=c_M$
+  $\iff$ $b-\tilde\gamma>0$ and $(b-\tilde\gamma)^2>4\mu b$.
+  Then $\mathcal{H}(\bar c)=\bar c\iff\bar c\in\{c_L,c_M,1\}$.
+  The condition holds at $(\mu,\tilde\gamma,b)=(\tfrac1{20},\tfrac1{10},\tfrac12)$
+  and fails at $(\tfrac1{20},\tfrac1{10},\tfrac15)$, where no fixed point lies
+  inside $(0,1)$.}
+  {ClosureMap.H_sub_self, ClosureMap.fixed_iff_Q, ClosureMap.H_one, ClosureMap.vieta, ClosureMap.Q_factor, ClosureMap.two_interior_iff, ClosureMap.fixed_points_exactly, ClosureMap.control_no_trap, ClosureMap.trap_at_figure_parameters}
+\mrow{M6}{When the map is also increasing, every standing below the middle
+  fixed point converges to the low one, the closure trap, and every standing
+  above it converges to integration.}
+  {$b>0$, $b<1-\mu+\tilde\gamma$, $\mu+\tilde\gamma<1$, and
+  $0<c_L<c_M<1$ fixed points. Then $0\le x<y\le1\Rightarrow
+  \mathcal{H}(x)<\mathcal{H}(y)$,
+  $\bar c^0\in[0,c_M)\Rightarrow\mathcal{H}^n(\bar c^0)\to c_L$ and
+  $\bar c^0\in(c_M,1]\Rightarrow\mathcal{H}^n(\bar c^0)\to1$.
+  Both bounds hold at $(\tfrac1{20},\tfrac1{10},\tfrac12)$. Neither is
+  automatic. At $(\tfrac1{20},0,3)$, $\mathcal{H}(\tfrac15)<0$, and at
+  $(\tfrac1{20},0,1)$, $\mathcal{H}(\tfrac1{100})<\mathcal{H}(0)$.}
+  {ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone}
 \end{longtable}
 \normalsize
 
@@ -222,6 +255,17 @@ group is $q'(g)=\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)/Z$, and the Bayesian
 posterior on class is $P(c\mid m)=\sum_{g}\ell_g(c)\,\pi_g(c)\,q(g)/Z$. In M3,
 $w$ is a target revision of the group weights and $\kappa$ a scale.
 
+Rows M4 to M6 concern a group's standing $\bar c\in[0,1]$, the mean class of
+the group, which the observer's prior re-learns each generation
+(Appendix~\ref{app:scope}). The parameters are the convergence rate $\mu$,
+the mobility $\tilde\gamma$, the salience $s_g$, the cost of exclusion $\delta$
+and the discrimination-rate function $F$. The composed map is
+$\mathcal{H}_F(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-s_g\delta F(\bar c))
+-\tilde\gamma\,\bar c^2$. With $F(\bar c)=(1-\bar c)^2$ and $b=s_g\delta$ it is
+$\mathcal{H}(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-b(1-\bar c)^2)
+-\tilde\gamma\,\bar c^2$, and $Q(\bar c)=b\bar c^2-(b-\tilde\gamma)\bar c+\mu$.
+$\mathcal{H}^n$ is the $n$-th iterate of $\mathcal{H}$.
+
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
 \[
@@ -280,6 +324,81 @@ Control, with $\mathcal{G}=\{0,1\}$ and $q=(1,0)$. For every $\ell$ and $\pi$,
 $\sum_c\ell_1(c)\,\pi_1(c)\cdot0=0$, so $q'(1)=0$.
 \end{mproof}
 
+\begin{mproof}{M4}{ClosureMap.Hf_zero, ClosureMap.Hf_one_iff, ClosureMap.H_eq_Hf, ClosureMap.control_F_one_needed}
+\[
+\mathcal{H}_F(0)=\mu+0-0=\mu,
+\qquad
+\mathcal{H}_F(1)=\mu+(1-\mu+\tilde\gamma-s_g\delta F(1))-\tilde\gamma
+=1-s_g\delta F(1).
+\]
+So $\mathcal{H}_F(1)=1\iff s_g\delta F(1)=0\iff F(1)=0$ when $s_g\delta\neq0$.
+Substituting $F(\bar c)=(1-\bar c)^2$ and $b=s_g\delta$ gives $\mathcal{H}$.
+Control: $F\equiv1$ gives
+$\mathcal{H}_F(1)=\tfrac1{20}+(1-\tfrac1{20}+\tfrac1{10}-1)-\tfrac1{10}=0$.
+\end{mproof}
+
+\begin{mproof}{M5}{ClosureMap.H_sub_self, ClosureMap.fixed_iff_Q, ClosureMap.H_one, ClosureMap.vieta, ClosureMap.Q_factor, ClosureMap.two_interior_iff, ClosureMap.fixed_points_exactly, ClosureMap.control_no_trap, ClosureMap.trap_at_figure_parameters}
+Expanding,
+\[
+\mathcal{H}(\bar c)-\bar c=\mu(1-\bar c)+\tilde\gamma\,\bar c(1-\bar c)
+-b\,\bar c(1-\bar c)^2=(1-\bar c)\,Q(\bar c),
+\]
+so for $\bar c\neq1$, $\mathcal{H}(\bar c)=\bar c\iff Q(\bar c)=0$, and
+$\mathcal{H}(1)=1$.
+($\Rightarrow$) $Q(c_L)=Q(c_M)=0$ with $c_L\neq c_M$ gives
+\[
+b(c_L+c_M)=b-\tilde\gamma,\qquad b\,c_Lc_M=\mu,
+\]
+so $b-\tilde\gamma=b(c_L+c_M)>0$ and
+$(b-\tilde\gamma)^2-4\mu b=b^2(c_L+c_M)^2-4b^2c_Lc_M=b^2(c_M-c_L)^2>0$.
+($\Leftarrow$) Put $B=b-\tilde\gamma$, $D=B^2-4\mu b>0$, $r=\sqrt D$ and
+\[
+c_L=\frac{B-r}{2b},\qquad c_M=\frac{B+r}{2b}.
+\]
+Then $Q(c_L)=Q(c_M)=0$ by $r^2=D$. $0<r<B$ since $D<B^2$, so $0<c_L<c_M$.
+$r<b+\tilde\gamma$ since $D-(b+\tilde\gamma)^2=-4b\tilde\gamma-4\mu b<0$, so
+$c_M<1$.
+Exactness. With the two relations above,
+$Q(\bar c)=b(\bar c-c_L)(\bar c-c_M)$, so
+\[
+\mathcal{H}(\bar c)-\bar c=(1-\bar c)\,b\,(\bar c-c_L)(\bar c-c_M)=0
+\iff\bar c\in\{c_L,c_M,1\}.
+\]
+Controls. At $(\tfrac1{20},\tfrac1{10},\tfrac12)$, $B^2=\tfrac4{25}>\tfrac1{10}=4\mu b$.
+At $(\tfrac1{20},\tfrac1{10},\tfrac15)$, $B^2=\tfrac1{100}<\tfrac1{25}=4\mu b$.
+\end{mproof}
+
+\begin{mproof}{M6}{ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone}
+Put $A=1-\mu+\tilde\gamma-b$. For $0\le x<y\le1$,
+\[
+\mathcal{H}(y)-\mathcal{H}(x)=(y-x)\,G,\qquad
+G=A+(2b-\tilde\gamma)(x+y)-b(x^2+xy+y^2),
+\]
+\[
+G=A(1-x)(1-y)+(1-\mu)\big(x(1-y)+y(1-x)\big)+(1-\mu-\tilde\gamma)\,xy
++b\,x(1-x)+b\,y(1-y).
+\]
+The three weights are $\ge0$ and sum to 1, $A>0$, $1-\mu>0$ and
+$1-\mu-\tilde\gamma>0$, so $G\ge\min(A,1-\mu-\tilde\gamma)>0$.
+By M5, $\mathcal{H}(\bar c)-\bar c=(1-\bar c)\,b\,(\bar c-c_L)(\bar c-c_M)$, which is
+$>0$ on $[0,c_L)$, $<0$ on $(c_L,c_M)$ and $>0$ on $(c_M,1)$.
+Monotone orbits. Let $f$ be continuous, nondecreasing on $[x_0,p]$, $f(p)=p$
+and $f(x)>x$ on $[x_0,p)$. With $u_n=f^n(x_0)$,
+\[
+x_0\le u_n\le u_{n+1}\le p,\qquad u_n\to L=\sup_n u_n\in[x_0,p],
+\qquad f(L)=\lim f(u_n)=\lim u_{n+1}=L,
+\]
+and $L<p$ would give $f(L)>L$, so $L=p$. The mirror case $f(x)<x$ on
+$(p,x_0]$ gives $u_n\downarrow p$.
+Apply it with $p=c_L$ for $\bar c^0\in[0,c_L]$, the mirror with $p=c_L$ for
+$\bar c^0\in(c_L,c_M)$, and $p=1$ for $\bar c^0\in(c_M,1]$, where
+$\mathcal{H}(1)=1$ by M5.
+Controls. $\mathcal{H}(\tfrac15)=\tfrac1{20}+\tfrac15(\tfrac{19}{20}-3\cdot\tfrac{16}{25})<0$
+at $(\tfrac1{20},0,3)$, and
+$\mathcal{H}(\tfrac1{100})-\mathcal{H}(0)=\tfrac1{100}(\tfrac{19}{20}-(\tfrac{99}{100})^2)<0$
+at $(\tfrac1{20},0,1)$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -304,7 +423,11 @@ matches the audit.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The class space is finite in the Lean
-statements of M1 to M3, and so is the set of groups in M2 and M3. The predecessor manuscript gives class a Beta law on
+statements of M1 to M3, and so is the set of groups in M2 and M3. Rows M5
+and M6 are proved for the canonical $F(\bar c)=(1-\bar c)^2$ only. The general
+$F$ of the predecessor's regularity assumption is not yet covered. The
+composed map itself enters every row as a definition, so its derivation from
+the engagement decision is not checked (Appendix~\ref{app:scope}). The predecessor manuscript gives class a Beta law on
 $[0,1]$, and the continuous form of M1 is not formalised.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. The
@@ -344,6 +467,17 @@ Mixture & $\sum_g\pi_g(c)\,w(g)$ & The distribution of class reached by
   weighting each group's class distribution by group weights $w$. M2 and M3
   show it is the Bayesian posterior on class exactly when $w=q'$. \\
   \addlinespace
+Standing & $\bar c$ & The mean class of a group, in $[0,1]$. \\ \addlinespace
+Composed map & $\mathcal{H}_F$, $\mathcal{H}$ & A group's standing in the
+  next generation as a function of its standing now. \\ \addlinespace
+Trap condition & $b-\tilde\gamma>0$, $(b-\tilde\gamma)^2>4\mu b$ & The
+  condition of M5 for two fixed points inside $(0,1)$. \\ \addlinespace
+Closure trap & $c_L$ & The low interior fixed point. M6 shows it attracts
+  every standing below $c_M$. \\ \addlinespace
+Tipping point & $c_M$ & The middle fixed point, which separates the two
+  basins of M6. \\ \addlinespace
+Integration & $\bar c=1$ & The fixed point at full standing (M4). \\
+  \addlinespace
 \end{longtable}
 \normalsize
 
@@ -374,6 +508,14 @@ outside the rows is a sequence of several soft readings, where the order of
 the readings could matter. The model has no such sequence.
 \unv{The attribution of the kinematics formula to Jeffrey (1965) rests on the
 predecessor manuscript. The source has not been read for this skeleton.}
+
+\paragraph{The law of motion.} Rows M4 to M6 take the predecessor's
+composed map, its equation (composed), as the law of motion of a group's
+standing. Its derivation from the engagement decision and the discrimination
+rate is not a row yet. The bounds $b<1-\mu+\tilde\gamma$ and
+$\mu+\tilde\gamma<1$ of M6 limit the cost of exclusion from above. The
+predecessor's ``sufficiently large $\delta$'' is therefore bounded, and the
+first control of M6 shows the map leaves $[0,1]$ when $s_g\delta$ is large.
 
 \paragraph{The group prior across generations.} Each generation the observer's
 class distribution for a group is re-learned from the group's current
