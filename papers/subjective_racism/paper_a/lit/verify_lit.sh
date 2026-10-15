@@ -6,6 +6,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 FAILED=0; N=0
 for d in "$HERE"/*/; do
   [ -d "$d" ] || continue
+  case "$(basename "$d")" in __*) continue;; esac
   N=$((N+1))
   s=$(ls "$d"verify_*.py 2>/dev/null | head -1)
   if [ -z "$s" ]; then

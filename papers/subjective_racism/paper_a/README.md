@@ -24,7 +24,7 @@ it from git.
     cd lean/mathlib && lake exe cache get && lake build
     ./verify.sh
     lit/verify_lit.sh
-    pdflatex MANUSCRIPT.tex && pdflatex MANUSCRIPT.tex
+    pdflatex MANUSCRIPT.tex && bibtex MANUSCRIPT && pdflatex MANUSCRIPT.tex && pdflatex MANUSCRIPT.tex
     pdflatex MEASUREMENT_MAP.tex
 
 `lean/mathlib/.lake/` is not committed. On this machine it was copied, by

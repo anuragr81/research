@@ -8,4 +8,10 @@ Each record checks our reading of a source, never the source itself. Write
 
 `verify_lit.sh` runs every record's suite and fails when a record has no suite.
 
-No paper has been read for this skeleton yet (14 October 2026).
+Shared checks are in `litcheck.py` (LC-1 to LC-5). Each record's suite calls
+it with the paper's pages, pinned sha256 and named controls. Sources are cached
+under `~/.cache/paper_a/`, downloaded from the author's Drive.
+
+| Record | Read | Lean | Rows |
+|---|---|---|---|
+| `coate_loury_1993/` | [F] 15 Oct 2026 | `lean/mathlib/CoateLoury1993.lean` | L1 to L3, C12, C13, C18 |

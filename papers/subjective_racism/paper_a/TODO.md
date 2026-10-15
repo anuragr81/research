@@ -17,7 +17,7 @@ has been established so far, and go claim by claim.
 | 3 and 4. Claims into Lean and model rows, one at a time | [x] 15 Oct. M1 to M17 and R1. Every predecessor claim is a row, a refuted conjecture, or recorded as not stated (Q12) |
 | 5. Appendices B to G | [~] filled for M1 to M17, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [x] 15 Oct. Removed, `RETIREMENT.md` maps every part, suite 5 checks it against git commit `91a74cb1` |
-| 7. Novelty reading | [ ] |
+| 7. Novelty reading | [~] Coate and Loury (1993) read [F] 15 Oct. Phelps (1972) and Arrow (1973) next, from page images |
 | 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C16 pending, K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
 | 10. Readability rounds | [ ] |
@@ -193,7 +193,14 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
 
 ## Novelty ledger
 
-Nothing claimed as new yet. Every source the predecessor cites is unread for
-this skeleton (Jeffrey 1965, Diaconis and Zabell 1982, Coate and Loury 1993,
-Phelps 1972, Arrow 1973, among others), so every claim about them is
-unverified.
+Nothing claimed as new yet. C12 (the closed forms) is pending.
+
+| Source | Status | Bearing |
+|---|---|---|
+| Coate and Loury (1993) | Read [F] 15 Oct 2026, `lit/coate_loury_1993/` | No closed-form threshold, a different channel, and zero is always their equilibrium. Does not anticipate M5, M9 or M10. The predecessor's "patronising equilibrium" identification is unsupported (C13) |
+| Phelps (1972), Arrow (1973) | On Drive (`temp`), scans without a text layer | C14 |
+| Jeffrey (1965), Diaconis and Zabell (1982) | On Drive (`temp`) | The attribution in Appendix D |
+| Loury (2002) | Not found on Drive | C17 |
+| Naipaul (1967) | Not found on Drive | C16 |
+| Platform-discrimination studies | Not found on Drive | C15 |
+| Selection–mutation literature, Fisher (1930) | Not found on Drive | C12 |
