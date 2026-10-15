@@ -460,7 +460,7 @@ def theorem_statement(full_name, files):
 def cited_fingerprint(item, data, lean_text):
     rows = {c['id']: c for c in data['model'] + data['literature']}
     if item in rows:
-        body = repr([(f, rows[item].get(f)) for f in ('status', 'claim', 'lean', 'decision', 'quote', 'page')])
+        body = repr([(f, rows[item].get(f)) for f in ('status', 'claim', 'assumptions', 'lean', 'decision', 'quote', 'page')])
     elif item.startswith('Isc.'):
         body = theorem_statement(item, lean_text) or ''
     else:
