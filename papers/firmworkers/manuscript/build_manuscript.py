@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 from check import load_map, reference_citations, cited_map_rows, lean_names
 
-LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean', 'lean/IscLean/Closure.lean', 'lean/IscLean/Identification.lean', 'lean/IscLean/Unravelling.lean', 'lean/IscLean/Displacement.lean', 'lean/IscLean/Reassignment.lean', 'lean/IscLean/Routes.lean', 'lean/IscLean/SteadyState.lean']
+LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean', 'lean/IscLean/Closure.lean', 'lean/IscLean/Identification.lean', 'lean/IscLean/Unravelling.lean', 'lean/IscLean/Displacement.lean', 'lean/IscLean/Reassignment.lean', 'lean/IscLean/Routes.lean', 'lean/IscLean/SteadyState.lean', 'lean/IscLean/Mobility.lean', 'lean/IscLean/BaseCase.lean']
 BUILD_FILES = ['lean/lean-toolchain', 'lean/lakefile.toml', 'lean/lake-manifest.json']
 SPECIAL = {'&': r'\&', '%': r'\%', '#': r'\#', '_': r'\_', '{': r'\{', '}': r'\}',
            '~': r'\textasciitilde{}', '^': r'\textasciicircum{}', '\\': r'\textbackslash{}',
@@ -212,6 +212,23 @@ def players_tables(d):
             f"Status & Open & Rests on \\\\ \\midrule \\endhead\n{crow}\n\\end{{longtable}}")
 
 
+def base_case_section(d):
+    bc = d.get('base_case') or {}
+    ids = set(bc.get('rows') or [])
+    paras = {}
+    for sent in bc.get('summary') or []:
+        paras.setdefault(sent['para'], []).append(escape_text(sent['text']))
+    body = '\n\n'.join(' '.join(v) for _, v in sorted(paras.items()))
+    prow = '\n'.join(f"{escape_text(r['route'])} & {mixed(r['richer'])} & {mixed(r['poorer'])} & {grounds(r.get('rests_on'))} \\\\ \\midrule"
+                     for r in bc.get('payoffs') or [])
+    rows = [c for c in d['model'] if c['id'] in ids]
+    return (f"\\subsection*{{{escape_text(bc.get('title', 'Base case'))}}}\n"
+            "Two displaced workers with former incomes $x_i<x_j$ form the pool. The table gives each entrant’s income on each route, with $\\kappa$ the scale of the upskilling cost, which M7 and M38 set to one and issue 1 leaves open.\n\n"
+            f"\\begin{{longtable}}{{{col([5.0, 5.0, 5.0, 8.0])}}}\n\\toprule Route & Richer entrant & Poorer entrant & Rests on "
+            f"\\\\ \\midrule \\endhead\n{prow}\n\\end{{longtable}}\n\n"
+            + body + '\n\n{\\small\n' + model_table(rows) + '}')
+
+
 def idea_summaries(d):
     blocks = '\n\n'.join(plain_block(i['sentences'], escape_text(i['title']), numbered=True)
                          for i in d.get('idea_summaries') or [])
@@ -285,8 +302,11 @@ Headline and concluding claims may rest only on model claims, literature claims 
 
 {players_tables(d)}
 
+{base_case_section(d)}
+
 {{\small
-{model_table(by_status(d, 'LEAN_PROVED', 'LEAN_WRITTEN'))}}}
+\subsection*{{The model in general}}
+{model_table([c for c in by_status(d, 'LEAN_PROVED', 'LEAN_WRITTEN') if c['id'] not in set((d.get('base_case') or {{}}).get('rows') or [])])}}}
 
 \section{{Idea summaries}}
 {idea_summaries(d)}

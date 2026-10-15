@@ -117,6 +117,9 @@ that world out. A claim that cannot name its falsifier does not enter.
   same grounding, terms and stamps. Each player is a term of the table, and
   each choice row carries a status (DECIDED, PROPOSED, DEFERRED) and names the
   issue that would decide it.
+- The base case (`claims.yaml`, `base_case`) follows the same rules: its
+  summary like an idea summary, its payoff table like the players table,
+  and only LEAN_PROVED rows.
 
 ## 7. Mechanism before prose (S)
 

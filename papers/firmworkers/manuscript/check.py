@@ -444,6 +444,7 @@ def check_summary(data, lean_text, source, entries, errors, notes):
         check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes)
     check_players(data, lean_text, source, entries, errors, notes)
     blocks['players'] = ((data.get('players') or []) + (data.get('choices') or []), None)
+    check_base_case(data, lean_text, source, entries, errors, notes, blocks)
     check_stamps(blocks, data, lean_text, errors, notes)
 
 
@@ -496,6 +497,35 @@ def check_stamps(blocks, data, lean_text, errors, notes):
         if changed:
             errors.append(f'{key}: {", ".join(changed)} changed or newly cited since the last review; '
                           'review the sentences resting on them, then run check.py --restamp')
+
+
+def check_base_case(data, lean_text, source, entries, errors, notes, blocks):
+    bc = data.get('base_case')
+    if not bc:
+        errors.append('base_case: missing')
+        return
+    status = {c['id']: c['status'] for c in data['model']}
+    if not str(bc.get('title', '')).strip():
+        errors.append('base_case: no title')
+    for r in bc.get('rows') or []:
+        if r not in status:
+            errors.append(f'base_case: row {r} missing')
+        elif status[r] != 'LEAN_PROVED':
+            errors.append(f'base_case: row {r} has status {status[r]}, must be LEAN_PROVED')
+    words = bc.get('words') or []
+    if len(words) != 2 or not words[0] < words[1]:
+        errors.append('base_case: words must be [min, max]')
+    else:
+        check_plain('base_case', bc.get('summary') or [], tuple(words), data, lean_text, source, entries, errors, notes)
+        blocks['base_case'] = (bc.get('summary') or [], tuple(words))
+    pay = bc.get('payoffs') or []
+    if not pay:
+        errors.append('base_case: no payoffs')
+    for k, row in enumerate(pay, 1):
+        tag = f'base_case payoff {k}'
+        check_cells(tag, row, ('route', 'richer', 'poorer'), entries, errors)
+        check_rests(tag, row, data, lean_text, source, errors, notes)
+    blocks['base_case:payoffs'] = (pay, None)
 
 
 def check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes):

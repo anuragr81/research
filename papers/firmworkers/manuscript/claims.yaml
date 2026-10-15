@@ -67,6 +67,52 @@ summary:
     text: 'The scale of the upskilling cost and the shape of utility are not yet fixed.'
     rests_on: ['M35', 'M19']
 
+# Base case: two displaced workers, rendered at the head of the model section. The rows are
+# shown here instead of the model table; the summary follows the rules of the summaries and the
+# payoff table the rules of the players table; both are stamped.
+base_case:
+  title: 'Base case, two displaced workers'
+  rows: [M42, M43, M44, M45, M46]
+  words: [150, 220]
+  summary:
+    - para: 1
+      text: 'The base case is the smallest pool, two displaced workers with unequal former incomes.'
+      rests_on: ['M42', 'M32']
+    - para: 1
+      text: 'With two entrants the lottery is the exchange of their former jobs, so neither faces any risk.'
+      rests_on: ['M42']
+    - para: 2
+      text: 'The richer entrant gives up income in the exchange, while the poorer gains whenever the lottery cost is below the gap between their former incomes.'
+      rests_on: ['M46']
+    - para: 2
+      text: 'The richer entrant still prefers the exchange to its other routes when its upskilling cost is at least the income it climbs and the poorer entrant''s former income less the lottery cost is at least the bottom income, because the downgrade pays only the bottom income.'
+      rests_on: ['M43', 'M32']
+    - para: 2
+      text: 'The poorer entrant prefers the exchange when its former income is at least the lottery cost below the richer entrant''s, whatever its upskilling cost.'
+      rests_on: ['M43']
+    - para: 2
+      text: 'Both conditions hold for every nondecreasing utility, so the transfer from the richer entrant to the poorer rests on the bottom income rather than on a taste for risk.'
+      rests_on: ['M43']
+    - para: 3
+      text: 'If the downgrade instead kept a fixed share of former income, the richer entrant would refuse every partner whose former income less the lottery cost is below that share, which closes the path from the bottom to the top.'
+      rests_on: ['M44']
+    - para: 3
+      text: 'Closure cannot act with two entrants, so the base case shows the exchange without status groups, and closure enters with a third entrant.'
+      rests_on: ['M45']
+  payoffs:
+    - route: 'downgrade'
+      richer: '$x_0$'
+      poorer: '$x_0$'
+      rests_on: ['M32']
+    - route: 'return'
+      richer: '$x_j-\kappa(x_j-x_0)^b$'
+      poorer: '$x_i-\kappa(x_i-x_0)^b$'
+      rests_on: ['M38', 'M7', 'M43']
+    - route: 'lottery, which is the exchange'
+      richer: '$x_i-L$'
+      poorer: '$x_j-L$'
+      rests_on: ['M42', 'M11']
+
 # Players of the model and the choices they make, rendered as the sub-section Players of the
 # model section. Every cell rests on rows or verbatim source premises; stamped like the summaries.
 choice_status:
@@ -494,6 +540,46 @@ model:
     lean: [Isc.lottery_beats_downgrade_lifetime, Isc.poolEU_one_time_cost, Isc.one_time_cost_cheaper, Isc.top_displaced_prefer_lottery_lifetime, Isc.cost_ratio_rises_with_loss]
     status: LEAN_PROVED
     symbols: [X28, X29, X7, X3, X16]
+  - id: M42
+    anchor: 'consequence of the lottery rule decided in M36'
+    claim: 'With exactly two entrants the reassignment of M36 is the exchange of their former jobs, so the lottery carries no risk for either'
+    assumptions: 'a pool of two displaced workers, $i\ne j$'
+    evidence: 'lean/IscLean/BaseCase.lean::Isc.two_entrant_exchange. Every reassignment in which nobody keeps their own former job sends $i$ to $j$ and $j$ to $i$. Control: with three entrants the rotation sends $0$ to $1$ but $1$ to $2$, so a reassignment need not be an exchange (Isc.control_exchange_needs_two)'
+    lean: [Isc.two_entrant_exchange, Isc.control_exchange_needs_two]
+    status: LEAN_PROVED
+    symbols: [X8, X23]
+  - id: M43
+    anchor: 'consequence of M32 and M42'
+    claim: 'Under the bottom rung both entrants of a two-entrant pool weakly prefer the exchange to the downgrade and to the return, for every nondecreasing $u$, when the richer entrant''s upskilling cost is at least the income it climbs, $\kappa(x_j-x_0)^{b-1}\ge1$, the poorer entrant''s former income less the lottery cost is at least the bottom income, $x_i-L\ge x_0$, and the poorer entrant is at least the lottery cost below the richer, $x_i\le x_j-L$'
+    assumptions: '$x_0<x_j$, $\kappa\ge0$, $L\ge0$; the poorer entrant''s condition holds for any upskilling cost'
+    evidence: 'lean/IscLean/Mobility.lean::Isc.bottom_rung_top_accepts_entrant. The richer entrant''s return is worth no more than $x_0$ under its cost condition, and $x_0\le x_i-L$, so the exchange is at least as good as both other routes; the poorer entrant''s return is worth at most $x_i\le x_j-L$ (Isc.entrant_accepts_top). Control: with a cheap return, $\kappa=1/4$, $b=1$, $x_j=10$, $x_0=1$, the richer entrant keeps $31/4$ and refuses an entrant paying $3$ less $1/10$ (Isc.control_bottom_rung_needs_cost_bound)'
+    lean: [Isc.bottom_rung_top_accepts_entrant, Isc.entrant_accepts_top, Isc.control_bottom_rung_needs_cost_bound]
+    status: LEAN_PROVED
+    symbols: [X3, X7, X16, X9]
+  - id: M44
+    anchor: 'consequence of reading (b) of M32, the proportional step, rejected on 15 Oct 2026'
+    claim: 'If the downgrade kept the job at reduced pay $(1-\delta)x_j$, the richer entrant of a two-entrant pool would strictly prefer the downgrade to the exchange with any entrant whose former income less the lottery cost is below that reduced pay, for every strictly increasing $u$, which closes the path from the bottom of the ladder to the top'
+    assumptions: 'reading (b) of M32, not the decided reading'
+    evidence: 'lean/IscLean/Mobility.lean::Isc.proportional_top_refuses_entrant. On the ladder of M3 with $a=2$ and $\delta=1/4$, the top at quantile $99/100$ refuses every rank up to quantile $8/9$ (Isc.control_proportional_refusal_reaches_far_down); an entrant paying at least the reduced pay plus the lottery cost is accepted (Isc.control_proportional_top_accepts_near_entrant). This row is why the bottom rung was kept (issue 11a, 15 Oct 2026)'
+    lean: [Isc.proportional_top_refuses_entrant, Isc.control_proportional_refusal_reaches_far_down, Isc.control_proportional_top_accepts_near_entrant]
+    status: LEAN_PROVED
+    symbols: [X7, X9, X15]
+  - id: M45
+    anchor: 'consequence of the closure form decided in M29'
+    claim: 'With exactly two entrants closure cannot act: each receives the other''s former job with chance one, whatever the closure parameter below one and whether or not they share a status group. With three entrants it acts'
+    assumptions: 'a pool of two displaced workers; $\sigma<1$'
+    evidence: 'lean/IscLean/BaseCase.lean::Isc.two_entrant_closure_inert. The closure weight of the one possible partner cancels in its own normalisation. Control: with two entrants of one group and one of the other at $\sigma=1/2$, an entrant of the larger group receives the lone entrant''s former job with chance $1/3$, not $1/2$ (Isc.control_closure_acts_with_three)'
+    lean: [Isc.two_entrant_closure_inert, Isc.control_closure_acts_with_three]
+    status: LEAN_PROVED
+    symbols: [X25, X24]
+  - id: M46
+    anchor: 'consequence of M10, M12 and M42'
+    claim: 'The exchange moves income between the two entrants without creating any and costs the pair $2L$. The richer entrant loses income, and the poorer gains exactly when the lottery cost is below the gap between their former incomes'
+    assumptions: '$x_i<x_j$, $L\ge0$'
+    evidence: 'lean/IscLean/BaseCase.lean::Isc.exchange_costs_the_pair. The two income changes sum to $-2L$; the richer entrant''s change $x_i-L-x_j$ is negative and the poorer''s $x_j-L-x_i$ is positive exactly when $L<x_j-x_i$ (Isc.exchange_moves_income_to_poorer). Control: at $L=x_j-x_i$ the poorer entrant gains nothing (Isc.control_poorer_gains_nothing_at_gap)'
+    lean: [Isc.exchange_costs_the_pair, Isc.exchange_moves_income_to_poorer, Isc.control_poorer_gains_nothing_at_gap]
+    status: LEAN_PROVED
+    symbols: [X7, X6]
 
 literature:
   - id: L1
