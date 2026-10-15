@@ -111,3 +111,12 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `two_fixed_of_dip` | M12. `F` continuous on `[0, 1]`, a dip at `c` and a rise at `d > c` give fixed points in `(0, c)` and `(c, d)` |
 | `dip_of_trap` | For the canonical map, the midpoint of two interior fixed points is a dip |
 | `control_dip_needed` | `F ≡ 0` puts the map above the diagonal on `[0, 1)` |
+
+## MeasurementMap.lean, the recovery formulas of MEASUREMENT_MAP.tex
+
+| Theorem | Content |
+|---|---|
+| `recovery_mu_gamma` | With `b = 0`, two pairs of consecutive standings give `γ` and `μ` |
+| `recovery_b`, `control_recovery_b_interior` | Under the canonical `F`, one pair inside `(0, 1)` gives `b`. At standing 0 the formula returns 0 |
+| `recovery_delta` | With the discrimination rate recorded, one pair gives `δ` |
+| `recovery_F` | With salience and the rate, `F` is read off pointwise |

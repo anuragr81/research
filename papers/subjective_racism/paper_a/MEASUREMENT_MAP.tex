@@ -1,0 +1,414 @@
+% MEASUREMENT_MAP.tex, a companion to MANUSCRIPT.tex. Written 15 October 2026
+% against rows M1 to M12.
+%
+% PURPOSE
+%   A reference note, not part of the paper. For every object of the model it
+%   records one plain-English name, its mathematical type, what it stands for
+%   in the world, and whether and how an observer could obtain it. The Name
+%   column is the terminology. The manuscript uses these names and no
+%   synonyms, and checks/verify_measurement_map.py (suite 4) checks that every
+%   term of the manuscript's Terminology appendix is a name here.
+%
+% TABLES
+%   Inputs are the primitives the model takes as given. Internal objects are
+%   built from the inputs inside the model and named for the proofs. Outputs
+%   are what the rows predict.
+%
+% THE LAST COLUMN
+%   Each entry begins with one of six words or phrases. "Recorded" means an
+%   observer writes it down. "Elicited" means it is a belief, obtained by
+%   asking the observer. "Computed" means it is calculated from recorded or
+%   elicited objects, and the recovery formulas at the end say how. "Assumed"
+%   means the model fixes its form and no measurement is proposed. "Never
+%   observed" means it exists in the world but no record reaches it. "A
+%   device" means it exists only inside a proof.
+%
+% VERIFICATION NOTE
+%   The only mathematics this note adds of its own is the three recovery
+%   formulas, each a theorem of lean/mathlib/MeasurementMap.lean, audited by
+%   checks/verify_mathlib.py. Everything else restates a model row or the
+%   predecessor manuscript, and the rows are the evidence.
+%
+% NAMES OF RESULTS
+%   Results are named by the model rows of MANUSCRIPT.tex (M1 to M12). Labels
+%   in brackets such as (prior) and (threshold) are equation labels of the
+%   predecessor manuscript, ../theory_and_decisions/manuscript.tex.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+% \mm{symbol}{name}{type}{represents}{obtained how}
+\newcommand{\mm}[5]{#1 & \textbf{#2} & #3 & #4 & #5 \\ \addlinespace}
+\newcommand{\lean}[1]{\texttt{\footnotesize #1}}
+
+\title{Stereotype Rigidity in Social Inferences\\ Measurement Map}
+\author{Companion note to the manuscript}
+\date{15 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent The model has a static part and a dynamic part. In the static part
+an observer meets a person, reads a marker, and forms a belief about the
+person's class through the group the marker signals (M1 to M3). In the
+dynamic part a group's standing, the mean class of its members, moves from
+one generation to the next under three forces, exclusion, convergence and
+mobility, and the exclusion force depends on the standing itself through the
+discrimination rate (M4 to M12). The discrete objects are the group, the
+marker, and in the Lean rows the class. The continuous objects are the
+standing, the beliefs, the rates and the maps. Every belief is the observer's
+and is a construct attributed to the observer to rationalise what the
+observer does. Every rate is a fact of the world that records can reach. The
+model contains no payoff and no utility, so no object needs to be read up to
+an affine transformation. The engagement decision of the predecessor
+manuscript, which turns a belief into a refusal, is not a row yet, and the
+discrimination-rate function $F$ stands in for it. Objects that no row
+carries are listed with that said, so that their names are fixed before the
+rows reach them.
+
+\section*{Inputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.8cm}P{2.1cm}P{2.4cm}P{4.3cm}P{4.4cm}@{}}
+\caption{Inputs of the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$g$, $\mathcal{G}$}{Group}{An element of a finite set.}{The category the
+  observer reads a person into from the marker. The predecessor's host group
+  and outsider group are two of them.}{Recorded by the observer as the
+  category the marker signals, or self-reported in a survey. In audit and
+  correspondence studies it is assigned by the experimenter through the
+  marker shown.}
+\mm{$O$}{Outsider group}{One of the groups.}{A group whose standing starts
+  below its tipping point, as the predecessor defines it (M11).}{Recorded as
+  the group whose first recorded standing lies below the computed tipping
+  point.}
+\mm{$I$}{Host group}{One of the groups.}{The group alongside the outsider,
+  with its own parameters (M11).}{Recorded as the other group in the record.}
+\mm{$c$, $\mathcal{C}$}{Class}{A finite set in the Lean rows. The predecessor
+  uses $[0,1]$.}{A person's economic position, income, wealth or occupation,
+  as a rank.}{Recorded as an income or wealth rank scaled to $[0,1]$, after
+  the fact. It is never seen at the encounter, which is the premise of the
+  model.}
+\mm{$m$}{Marker}{A signal read at the encounter.}{A trait visible at contact,
+  phenotype, accent, dress or name.}{Recorded as present or absent, or by its
+  value. In correspondence studies it is assigned by the experimenter.}
+\mm{$\pi_g(c)$}{Prior}{A probability mass function on $\mathcal{C}$ for each
+  $g$. The predecessor gives it a Beta law with mean $\bar c$.}{The observer's
+  belief about the class of a member of group $g$ before the marker is
+  read.}{Elicited from the observer before the marker is shown. The
+  predecessor identifies it with the group's class history, its equation
+  (prior), under which it is computed from the recorded classes of past
+  members. The two readings can differ, and no row takes a side.}
+\mm{$\ell_g(c)$}{Likelihood}{A function of $c$ and $g$ with values in
+  $[0,1]$.}{The probability that the marker is seen on a person of class $c$ in
+  group $g$.}{Computed from records of the marker by group and by class, with
+  class recorded after the fact. Group sufficiency restricts it to depend on
+  $g$ alone (M1).}
+\mm{$q(g)$}{Group weights}{A probability mass function on $\mathcal{G}$.}{The
+  observer's probability that the person met belongs to group $g$, before the
+  marker is read.}{Elicited from the observer, or proxied by the shares of the
+  groups in the population of the place of the encounter.}
+\mm{$\mu$}{Convergence rate}{A real number with $0<\mu<1$.}{The rise in a
+  group's standing per generation that owes nothing to exclusion and nothing
+  to within-group dispersion. The predecessor's exogenous drift.}{Computed
+  from two consecutive recorded standings of a group with no exclusion,
+  $s_g=0$, together with $\tilde\gamma$ (Recovery~1). At standing $0$ the
+  mobility term vanishes and $\mu$ is the rise itself.}
+\mm{$\gamma$, $\nu$, $\tilde\gamma=\gamma/(1+\nu)$}{Mobility}{Real numbers.
+  The rows use $\tilde\gamma\ge0$ only.}{$\gamma$ is the upward push on a
+  group's mean class per unit of within-group variance. $\nu$ is the
+  within-group concentration of the predecessor's Beta law. Their ratio is
+  what enters every row.}{Computed. $\gamma$ and $\nu$ are never needed
+  separately by a row. $\nu$ follows from the recorded within-group variance,
+  $\sigma_g^2=\bar c(1-\bar c)/(1+\nu)$, and $\tilde\gamma$ from consecutive
+  standings (Recovery~1).}
+\mm{$s_g$}{Salience}{A real number in $[0,1]$.}{The probability the observer
+  assigns to the outsider group after reading the marker, the predecessor's
+  $P'(g_O\mid m)$. By M3 it is a Bayesian posterior on group. Immutable markers
+  put it near $1$ and mutable ones near $0$.}{Elicited from the observer after
+  the marker is shown. In audits it is the share of encounters in which the
+  person carrying the marker is treated as the outsider group.}
+\mm{$\delta$}{Cost of exclusion}{A real number with $\delta>0$.}{The loss of
+  standing per generation per unit of the discrimination rate. The reduced
+  form of refused contact, matching, referrals and cultural capital.}{Computed
+  from a recorded standing path and a recorded discrimination rate
+  (Recovery~3). It is never observed on its own, and rows M5 to M12 use it
+  only through the exclusion pressure $b=s_g\delta$.}
+\mm{$F$}{Discrimination-rate function}{A function $[0,1]\to[0,1]$. Rows M4 to
+  M11 use the canonical $F(\bar c)=(1-\bar c)^2$. Row M12 uses any continuous
+  $F$ with $F(1)=0$ and $F'(1)=0$.}{The share of encounters refused when the
+  person is read as the outsider group with certainty, as a function of the
+  group's standing.}{Assumed in its canonical form. Its shape could be
+  computed from recorded refusal rates, callbacks, viewings or service,
+  against the group's recorded standing, across groups or across generations
+  (Recovery~4).}
+\mm{$\bar c^0$}{Initial standing}{A real number in $[0,1]$.}{The group's
+  standing when the record starts.}{Recorded as the group's mean class rank
+  in the first generation observed.}
+\mm{$\beta_0$}{Frozen prior}{A real number in $[0,1]$.}{The standing imputed
+  to the group and then held for good, in the frozen reading of M7 and
+  M8.}{Elicited at the first generation, or taken as the recorded $\bar c^0$.
+  The frozen reading says it never moves afterwards.}
+\mm{$\mu_I$, $\tilde\gamma_I$, $b_I$}{Host parameters}{As for $\mu$,
+  $\tilde\gamma$ and $b$.}{The host group's own parameters in M11.}{Computed
+  from the host's own records as for the outsider's.}
+\mm{$\bar d$}{Engagement threshold}{A real number with $\bar d>0$.}{The
+  largest expected class distance at which the observer still engages, the
+  predecessor's equation (threshold). It lies upstream of $F$.}{Never observed.
+  No row carries it, and $F$ is taken as given. The name is fixed
+  here for the row that will derive $F$ from it.}
+\mm{$\sigma_g^2$}{Within-group dispersion}{A real number,
+  $\sigma_g^2=\bar c(1-\bar c)/(1+\nu)$ in the predecessor.}{The variance of
+  class within the group, which the mobility force acts on.}{Computed from the
+  recorded classes of the group's members. No row carries it separately, and
+  it enters the rows through $\tilde\gamma$.}
+\end{longtable}
+\normalsize
+
+\section*{Internal objects}
+
+\footnotesize
+\begin{longtable}{@{}P{1.8cm}P{2.1cm}P{2.4cm}P{4.3cm}P{4.4cm}@{}}
+\caption{Objects built inside the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$Z_g$}{Marginal}{A real number, $Z_g=\sum_c\ell_g(c)\pi_g(c)$.}{The
+  probability of the marker given the group alone.}{Computed from the
+  likelihood and the prior. It is also recorded directly as the frequency of
+  the marker within the group.}
+\mm{$Z$}{Marginal across groups}{A real number, $Z=\sum_g Z_g\,q(g)$.}{The
+  probability of the marker before the group is known.}{Computed from the
+  marginals and the group weights.}
+\mm{$\ell_g(c)=Z_g$ for every $c$}{Group sufficiency}{A restriction on the
+  likelihood.}{The marker says nothing about class beyond what the group
+  says. M1 shows it equals $\pi'_g=\pi_g$ under a prior with full
+  support.}{Assumed. It could be tested on records of the marker by class
+  within one group.}
+\mm{$w$, $\kappa$}{Target weights}{A probability mass function on
+  $\mathcal{G}$ and a scale $\kappa\neq0$.}{In M3, a revision of the group
+  weights that the observer might reach by any rule, and the scale of the
+  likelihood that reaches it by Bayes' rule.}{A device of M3, which shows
+  every such revision is Bayesian.}
+\mm{$\sum_g\pi_g(c)\,w(g)$}{Mixture}{A probability mass function on
+  $\mathcal{C}$.}{The class distribution reached by weighting each group's
+  prior by group weights $w$. M2 and M3 show it is the Bayesian posterior on
+  class exactly when $w=q'$.}{Computed from the priors and the weights.}
+\mm{$\bar c$}{Standing}{A real number in $[0,1]$.}{The mean class of a group
+  in a generation. The state of the dynamic part.}{Recorded as the group's
+  mean class rank in that generation.}
+\mm{$b=s_g\delta$}{Exclusion pressure}{A real number with $b>0$.}{Salience
+  times the cost of exclusion, the only way the two enter rows M5 to
+  M12.}{Computed from a recorded standing path (Recovery~2). Salience and the
+  cost are not separated by the rows.}
+\mm{$\mathcal{H}_F$, $\mathcal{H}$}{Composed map}{A function of the standing,
+  $\mathcal{H}_F(\bar c)=\mu+\bar c(1-\mu+\tilde\gamma-s_g\delta F(\bar c))-\tilde\gamma\bar c^2$,
+  and $\mathcal{H}$ its canonical case.}{The law of motion of the standing,
+  with the discrimination rate re-learned from the current standing each
+  generation (Appendix D of the manuscript).}{Computed from the parameters.
+  Each recorded pair of consecutive standings is one evaluation of it.}
+\mm{$\mathcal{H}^n$}{Orbit}{The $n$-th iterate of $\mathcal{H}$.}{The
+  standing $n$ generations on, from a given start.}{Computed. It is what the
+  recorded standing path should trace.}
+\mm{$Q$}{Fixed-point polynomial}{$Q(\bar c)=b\bar c^2-(b-\tilde\gamma)\bar c+\mu$,
+  with $\mathcal{H}(\bar c)-\bar c=(1-\bar c)Q(\bar c)$.}{Its roots are the
+  fixed points of the canonical map other than integration.}{Computed from
+  the parameters.}
+\mm{$k=s_g\delta F(\beta_0)$}{Frozen rate}{A real number.}{The discrimination
+  rate under the frozen prior, which never moves.}{Computed from the
+  parameters and $\beta_0$.}
+\mm{$\mathcal{H}_k$, $P$}{Frozen map}{$\mathcal{H}_k(\bar c)=\mu+\bar c(1-\mu+\tilde\gamma-k)-\tilde\gamma\bar c^2$,
+  and $P(\bar c)=\tilde\gamma\bar c^2+(\mu+k-\tilde\gamma)\bar c-\mu$ with
+  $\mathcal{H}_k(\bar c)-\bar c=-P(\bar c)$.}{The law of motion under the
+  frozen prior (M7, M8).}{Computed from the parameters.}
+\mm{$\mathcal{H}\times\mathcal{H}_I$}{Joint step}{A map on pairs of
+  standings.}{The outsider's and the host's standings moved together (M11).
+  Neither enters the other's map.}{Computed. Its independence across the two
+  groups is a property of the model, not a finding.}
+\mm{$u$, $v$, $w$, $A$, $G$, $r$, $B$, $D$}{Proof devices}{Real numbers and
+  expressions named in Appendix B of the manuscript.}{Square roots of $b$,
+  $\mu$ and $\mu+\tilde\gamma$, the monotonicity margin and its difference
+  quotient, and the discriminant of $Q$.}{A device of the proofs with no
+  meaning in the world.}
+\end{longtable}
+\normalsize
+
+\section*{Outputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.8cm}P{2.1cm}P{2.4cm}P{4.3cm}P{4.4cm}@{}}
+\caption{Outputs of the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$\pi'_g(c)$}{Posterior}{A probability mass function on
+  $\mathcal{C}$.}{The observer's belief about the class of a member of group
+  $g$ after the marker is read.}{Elicited after the marker is shown. M1
+  predicts that it equals the prior under group sufficiency, so a marker that
+  moves it within a group refutes sufficiency for that marker.}
+\mm{$q'(g)$}{Posterior on group}{A probability mass function on
+  $\mathcal{G}$.}{The observer's group weights after the marker is read. For
+  the outsider group it is the salience.}{Elicited after the marker is shown,
+  as for the salience.}
+\mm{$P(c\mid m)$}{Posterior on class}{A probability mass function on
+  $\mathcal{C}$.}{The observer's belief about the person's class after the
+  marker, across groups.}{Elicited after the marker is shown. M2 predicts the
+  mixture of the priors by the posterior on group.}
+\mm{$\phi^t=s_gF(\bar c^t)$}{Discrimination rate}{A real number in
+  $[0,1]$.}{The share of encounters with the group's members that end in
+  refusal in generation $t$.}{Recorded in audit and correspondence studies as
+  the refusal or non-callback rate for the marker, and in surveys as reported
+  exclusion.}
+\mm{$\bar c^{t+1}$, $\mathcal{H}^n(\bar c^0)$}{Standing path}{A sequence in
+  $[0,1]$.}{The group's standing generation by generation.}{Recorded as the
+  mean class rank per generation, from repeated cross-sections or linked
+  panels. Rows M6, M8 and M11 predict where it goes.}
+\mm{$c_L$}{Closure trap}{A real number in $(0,1)$, $c_L=(B-r)/(2b)$ with
+  $B=b-\tilde\gamma$ and $r=\sqrt{B^2-4\mu b}$.}{The low self-reproducing
+  standing, where a group that started below the tipping point ends (M5,
+  M6).}{Computed from $(\mu,\tilde\gamma,b)$ by M5's closed form. It is seen as
+  the standing at which a recorded path settles short of the top.}
+\mm{$c_M$}{Tipping point}{A real number in $(0,1)$, $c_M=(B+r)/(2b)$.}{The
+  standing above which a group integrates and below which it falls to the
+  trap (M6).}{Computed by M5's closed form. Never seen as a resting point,
+  being unstable. In records it is bracketed between the highest starting
+  standing that fell and the lowest that rose.}
+\mm{$\bar c=1$}{Integration}{The ceiling of standing.}{A group whose mean
+  class is at the top rank, fixed under the map (M4).}{Recorded as a path
+  reaching the top rank.}
+\mm{$b-\tilde\gamma>0$, $(b-\tilde\gamma)^2>4\mu b$}{Trap condition}{An
+  inequality in $(\mu,\tilde\gamma,b)$.}{The condition of M5 for the trap
+  and the tipping point to exist.}{Computed from the parameters. The test is
+  whether recorded paths from different starts diverge.}
+\mm{$\tilde\gamma^\ast=b-2\sqrt{\mu b}$}{Mobility threshold}{A real
+  number.}{The mobility below which the trap condition holds (M9), positive
+  only when $b>4\mu$. It rises with salience from $b=\mu$ on (M10).}{Computed
+  from $(\mu,b)$. Its rise with salience is a comparison of recorded paths
+  across groups that differ in the marker but not in $\mu$, $\tilde\gamma$ or
+  $\delta$.}
+\mm{$b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$}{Exclusion threshold}{A
+  real number.}{The exclusion pressure above which the trap condition holds
+  (M10).}{Computed from $(\mu,\tilde\gamma)$. The predecessor's bifurcation
+  figure reports it as $\delta^\ast\approx0.29$ at $\mu=\tilde\gamma=0.05$,
+  $s_g=1$, and M10 puts it between $0.29$ and $0.30$.}
+\mm{$\sqrt\mu/\sqrt b$}{Merged root}{A real number in $(0,1)$ when
+  $\mu<b$.}{The one interior fixed point at the threshold, where the trap and
+  the tipping point meet with slope $1$ (M9).}{Computed from $(\mu,b)$. It is
+  a reference, reached at no recorded mobility except the threshold itself.}
+\mm{$c^\ast$}{Frozen fixed point}{A real number in $(0,1)$, the root of
+  $P$.}{The one long-run standing under the frozen prior (M7). It rises with
+  the frozen prior and does not depend on the initial standing (M7,
+  M8).}{Computed from $(\mu,\tilde\gamma,k)$. Its rise with $\beta_0$ is a
+  comparison across groups that differ in the elicited initial belief, and
+  its independence from $\bar c^0$ a comparison across groups that share
+  it.}
+\mm{Direction of the standing path}{Basin}{Rise to $1$, or fall to
+  $c_L$.}{M6 and M11 predict the rise for every start above the tipping
+  point and the fall for every start below it. M8 predicts one destination
+  for every start.}{Recorded directly as the direction of the path. No
+  computed reference is needed for the direction, and the tipping point
+  itself is needed only to say which start is above it.}
+\mm{The host's path}{Host path}{A sequence in $[0,1]$.}{The host group's
+  standing path, which M11 states is its own whatever the outsider
+  does.}{Recorded as for the standing path. Its independence from the
+  outsider is built into the model, and a recorded dependence would refute
+  the model rather than the row.}
+\end{longtable}
+\normalsize
+
+\section*{Structure}
+
+\begin{itemize}
+\item \emph{Entering only through others.} $\gamma$ and $\nu$ enter only
+  through $\tilde\gamma$. $s_g$ and $\delta$ enter rows M5 to M12 only through
+  $b=s_g\delta$, and $F$ enters M7 and M8 only through $F(\beta_0)$. The
+  likelihood enters M2 and M3 only through group sufficiency.
+\item \emph{Given directly by recorded comparisons.} The direction of a
+  standing path. The divergence of paths from different starts (the trap
+  condition). The direction of $\tilde\gamma^\ast$ in salience, across groups
+  that differ in the marker alone. The host's path against the outsider's
+  presence.
+\item \emph{Needing a computed reference.} $c_L$, $c_M$, the merged root,
+  $\tilde\gamma^\ast$, $b^\ast$ and $c^\ast$, each from the parameters by a
+  closed form of M5, M7, M9 or M10.
+\item \emph{Elicited and not recorded.} Every belief, the prior, the group
+  weights, the three posteriors, the salience and the frozen prior. Each is
+  the observer's and rationalises the observer's refusals, which are what the
+  discrimination rate records.
+\item \emph{Assumed.} The canonical form of $F$ and group sufficiency.
+\item \emph{Never observed.} The cost of exclusion on its own, and the
+  engagement threshold.
+\end{itemize}
+
+\section*{Recovery formulas}
+
+Each formula is a theorem of \texttt{lean/mathlib/MeasurementMap.lean}. The names in
+brackets are its theorems.
+
+\begin{enumerate}
+\item \emph{Convergence rate and mobility, from a group with no exclusion}
+  (\lean{MeasurementMap.recovery\_mu\_gamma}). With $s_g=0$ the map is
+  $\mathcal{H}(\bar c)=\bar c+(1-\bar c)(\mu+\tilde\gamma\bar c)$. From two
+  recorded pairs of consecutive standings $(\bar c_1,\bar c_1')$ and
+  $(\bar c_2,\bar c_2')$ with $\bar c_i<1$ and $\bar c_1\neq\bar c_2$, put
+  $y_i=(\bar c_i'-\bar c_i)/(1-\bar c_i)$. Then
+  \[
+  \tilde\gamma=\frac{y_1-y_2}{\bar c_1-\bar c_2},
+  \qquad
+  \mu=y_1-\tilde\gamma\,\bar c_1 .
+  \]
+\item \emph{Exclusion pressure, from a group under the canonical $F$}
+  (\lean{MeasurementMap.recovery\_b}). With $\mu$ and $\tilde\gamma$ in hand
+  and one recorded pair $(\bar c,\bar c')$ with $0<\bar c<1$,
+  \[
+  b=\frac{(1-\bar c)(\mu+\tilde\gamma\bar c)-(\bar c'-\bar c)}{\bar c(1-\bar c)^2}.
+  \]
+  The control (\lean{MeasurementMap.control\_recovery\_b\_interior}) shows the
+  formula returns $0$ at $\bar c=0$ whatever $b$ is.
+\item \emph{Cost of exclusion, from a recorded discrimination rate}
+  (\lean{MeasurementMap.recovery\_delta}). With $\mu$ and $\tilde\gamma$ in
+  hand, a recorded pair $(\bar c,\bar c')$ and the recorded rate $\phi$ of that
+  generation, with $\phi\bar c\neq0$,
+  \[
+  \delta=\frac{(1-\bar c)(\mu+\tilde\gamma\bar c)-(\bar c'-\bar c)}{\phi\,\bar c}.
+  \]
+  This separates $\delta$ from $s_g$ only because $\phi$ is recorded.
+\item \emph{The discrimination-rate function, pointwise}
+  (\lean{MeasurementMap.recovery\_F}). With $s_g\neq0$ elicited and $\phi$
+  recorded at standing $\bar c$, $F(\bar c)=\phi/s_g$. One generation gives
+  one point of $F$, and its canonical form is a hypothesis about the points.
+\end{enumerate}
+
+\end{document}

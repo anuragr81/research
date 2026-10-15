@@ -112,13 +112,13 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
 - [ ] **Q8 onward.** The appendix propositions (`prop:passing`, `prop:shadow`,
   `prop:exclusion`, `prop:tokenism`, `prop:spillover`, `prop:loury-nesting`,
   `cor:Tstar`). To be ordered next.
-- [ ] **Measurement map.** None exists for Paper A (checked 15 Oct 2026).
-  `../theory_and_decisions/jeffrey_vs_bayes_micromacro/notes/empirical_analytics.tex`
-  is Paper B's. The predecessor's empirical remarks are scattered (its
-  "Empirical prediction" on raising `gamma`, the `T* ~ (gamma - gamma*)^(-1/2)`
-  scaling, the platform-discrimination remark). Format to follow:
-  `papers/jite/endogenous_entry/entry_contest/MEASUREMENT_MAP.tex` with its
-  checker. Build once the model rows settle.
+- [x] **Measurement map.** `MEASUREMENT_MAP.tex`, 15 Oct 2026. Inputs,
+  internal objects and outputs, each with one name, a type, what it
+  represents and how it is obtained, and four recovery formulas proved in
+  `MeasurementMap.lean`. Suite 4 checks it. Objects no row carries yet, the
+  engagement threshold and the within-group dispersion, are named there so
+  the names are fixed. Format follows
+  `papers/jite/endogenous_entry/entry_contest/MEASUREMENT_MAP.tex`.
 
 ## Decisions for the author
 

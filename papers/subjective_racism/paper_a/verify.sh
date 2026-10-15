@@ -29,6 +29,7 @@ suite () {
 suite "Suite 1 - Lean 4 with Mathlib (checks/verify_mathlib.py)" python3 "$HERE/checks/verify_mathlib.py"
 suite "Suite 2 - manuscript skeleton (checks/verify_manuscript.py)" python3 "$HERE/checks/verify_manuscript.py"
 suite "Suite 3 - doc consistency (checks/verify_docs.py)" python3 "$HERE/checks/verify_docs.py" "$OUT"
+suite "Suite 4 - measurement map (checks/verify_measurement_map.py)" python3 "$HERE/checks/verify_measurement_map.py"
 
 if [ "$FAILED" -eq 0 ]; then
   echo "ALL SUITES COMPLETED"

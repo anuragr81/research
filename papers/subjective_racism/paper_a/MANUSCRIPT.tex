@@ -355,7 +355,8 @@ Rows M4 to M6 concern a group's standing $\bar c\in[0,1]$, the mean class of
 the group, which the observer's prior re-learns each generation
 (Appendix~\ref{app:scope}). The parameters are the convergence rate $\mu$,
 the mobility $\tilde\gamma$, the salience $s_g$, the cost of exclusion $\delta$
-and the discrimination-rate function $F$. The composed map is
+and the discrimination-rate function $F$, and $b=s_g\delta$ is the exclusion
+pressure. The composed map is
 $\mathcal{H}_F(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-s_g\delta F(\bar c))
 -\tilde\gamma\,\bar c^2$. With $F(\bar c)=(1-\bar c)^2$ and $b=s_g\delta$ it is
 $\mathcal{H}(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-b(1-\bar c)^2)
@@ -689,6 +690,12 @@ and none depends on an axiom outside \texttt{propext},
 must accept and a faulty sample it must reject.
 \item \emph{Doc consistency.} Every theorem count stated here is in digits and
 matches the audit.
+\item \emph{The measurement map.} Rules MM-1 to MM-6 of
+\path{checks/verify_measurement_map.py} on the companion note
+\path{MEASUREMENT_MAP.tex}, which names every object of the model and says
+how an observer would obtain it. Its Name column is the terminology, and
+every term of Appendix~\ref{app:terms} is checked against it. The note is a
+reference and not evidence for any row.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The class space is finite in the Lean
@@ -746,6 +753,20 @@ Mixture & $\sum_g\pi_g(c)\,w(g)$ & The distribution of class reached by
   show it is the Bayesian posterior on class exactly when $w=q'$. \\
   \addlinespace
 Standing & $\bar c$ & The mean class of a group, in $[0,1]$. \\ \addlinespace
+Convergence rate & $\mu$ & The rise in standing per generation owed to
+  neither exclusion nor dispersion. \\ \addlinespace
+Mobility & $\tilde\gamma$ & The upward push on standing per unit of
+  within-group dispersion. \\ \addlinespace
+Salience & $s_g$ & The observer's posterior weight on the outsider group
+  after the marker. \\ \addlinespace
+Cost of exclusion & $\delta$ & The loss of standing per unit of the
+  discrimination rate. \\ \addlinespace
+Exclusion pressure & $b=s_g\delta$ & Salience times the cost of exclusion,
+  the only way the two enter M5 to M12. \\ \addlinespace
+Discrimination-rate function & $F$ & The refusal share as a function of
+  standing when the person is read as the outsider group. \\ \addlinespace
+Discrimination rate & $\phi^t=s_gF(\bar c^t)$ & The share of encounters
+  refused in generation $t$. \\ \addlinespace
 Composed map & $\mathcal{H}_F$, $\mathcal{H}$ & A group's standing in the
   next generation as a function of its standing now. \\ \addlinespace
 Trap condition & $b-\tilde\gamma>0$, $(b-\tilde\gamma)^2>4\mu b$ & The
