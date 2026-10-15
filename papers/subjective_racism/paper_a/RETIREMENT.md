@@ -15,7 +15,7 @@ parameters" and a misdescription of which forms of group sufficiency the
 predecessor joins with "equivalently", both since corrected.
 
 The documents that replace it are `MANUSCRIPT.tex` (model rows M1 to M17,
-refuted conjecture R1, Appendices A to G), `MEASUREMENT_MAP.tex`, `TODO.md`
+assumptions A1 to A13, refuted conjecture R1, Appendices A to G), `MEASUREMENT_MAP.tex`, `TODO.md`
 and `lean/mathlib/README.md`.
 
 Not retired, and left where they are. `theory_and_decisions/welfare_analysis_addendum.tex`
@@ -30,14 +30,14 @@ Paper B.
 
 | Line | Environment | Goes to |
 |---|---|---|
-| 335 | assumption `ass:timescale`, timescale separation | Appendix D, "The law of motion". The composed map takes the discrimination rate of a generation from that generation's standing, which is what the assumption buys |
-| 435 | assumption `ass:sufficiency`, group sufficiency | M1, which proves the likelihood and posterior forms equivalent under full support, and Appendix D |
+| 335 | assumption `ass:timescale`, timescale separation | A7, and Appendix D, "The law of motion". The composed map takes the discrimination rate of a generation from that generation's standing, which is what the assumption buys |
+| 435 | assumption `ass:sufficiency`, group sufficiency | A4, and M1, which proves the likelihood and posterior forms equivalent under full support, and Appendix D |
 | 494 | example `ex:jeffrey-bayes`, the stranger and the accent | M17 (`stranger_example`), the mixture of M2 and M3. The Jeffrey reading is dropped (D4, Appendix D) |
 | 535 | example `ex:misaddressed`, the misaddressed parcel | Not carried. Its Bayesian agent revises the within-group association from an anomalous second signal, which group sufficiency excludes (M1). Two readings of a marker are outside the rows (Appendix D, "The updating rule") |
 | 675 | assumption `ass:preferences`, risk-neutral payoff in squared class distance | Not a row. It feeds the engagement decision, which lies upstream of `F` (Appendix D, "The law of motion"; `TODO.md` Q12) |
 | 683 | assumption `ass:beliefs`, Beta–de Finetti within-group beliefs | `MEASUREMENT_MAP.tex`, rows Within-group dispersion and Mobility. It enters the rows only through `gamma_tilde = gamma/(1 + nu)` |
-| 798 | assumption `ass:exclusion-cost`, the cost of exclusion | M4 to M12, through the composed map, and the Terminology row Cost of exclusion |
-| 848 | assumption `ass:Freg`, regularity of `F` | M12, which uses continuity and `F(1) = F'(1) = 0` only, and M4 |
+| 798 | assumption `ass:exclusion-cost`, the cost of exclusion | A5 and A6, M4 to M12 through the composed map, and the Terminology row Cost of exclusion |
+| 848 | assumption `ass:Freg`, regularity of `F` | A9, M12, which uses continuity and `F(1) = F'(1) = 0` only, and M4 |
 | 891 | definition `def:closure`, closure equilibrium | M5, the fixed points of the composed map, and the Terminology rows Closure trap and Discrimination rate |
 | 903 | proposition `prop:class-closure`, class closure | M5 and M6 for the canonical `F`, M12 for a general `F` |
 | 951 | proposition `prop:coincidence`, the structural trap | M1 to M3, and Appendix D, "The updating rule". Its across-generations half is moot under D1 and D4 (`TODO.md` Q6) |

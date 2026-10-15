@@ -18,10 +18,11 @@ has been established so far, and go claim by claim.
 | 5. Appendices B to G | [~] filled for M1 to M17, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [x] 15 Oct. Removed, `RETIREMENT.md` maps every part, suite 5 checks it against git commit `91a74cb1` |
 | 7. Novelty reading | [~] Coate and Loury (1993) [F], Phelps (1972) [P], Arrow (1971) [P] and Jeffrey (1983, ch. 11) [P] read 15 Oct. Waiting on Loury (2002), platform studies and the selection–mutation literature |
-| 8. Conclusions, then introduction headlines | [x] 15 Oct. Table 4 holds C1 to C11, C13, C14, C18 and C19, each resting only on Lean rows and quoted reads (D3 checks it). Table 5 holds C12, C15 and C17, claims not yet verified. C16 removed at the author's request. K1 to K6 with scope notes |
+| 8. Conclusions, then introduction headlines | [x] 15 Oct. Table 4 (Table 5 since pass 12) holds C1 to C11, C13, C14, C18 and C19, each resting only on Lean rows and quoted reads (D3 checks it). Table 5 (now Table 6) holds C12, C15 and C17, claims not yet verified. C16 removed at the author's request. K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
 | 10. Readability rounds | [~] Round 1, 15 Oct, against `notes/writing_discipline.md`. Appendix D split to one job per paragraph (the predecessor's corrections gathered in one paragraph, the D1 paragraph no longer restating M7 and M8), "What Lean does not carry" limited to what it does not carry, pronouns and a colon fixed. The coined names exclusion pressure, frozen map, merged root, window and escape time were accepted by the author on 15 Oct (rule 6) |
 | 11. Referee comments | [ ] not applicable unless the paper has reports |
+| 12. Introduction as question and answer, assumptions table | [x] 15 Oct, at the author's request. Section 1 is split into Question and Answer, and the answer is written from rows M5 to M16. Section 2 opens with Table 2, assumptions A1 to A13, each naming its symbols and the model rows it serves (MS-7 checks every model row rests on one). Every symbol of the assumptions has one row in `MEASUREMENT_MAP.tex` (MM-8, MM-9), and the map's three tables gain a Directly observed column (MM-7). Symbols used twice were renamed (frozen polynomial `P_k`, host clients `N`, passing `gain` and `cost`, proof devices `z` and `a`). K6, C10 and M14's claim now say the rate does not fall, which is what `Passing.rate_rises` proves |
 
 ## Claim queue
 

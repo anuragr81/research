@@ -6,10 +6,11 @@
 % retired at pass 6 on 15 October 2026. RETIREMENT.md maps every part of it.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
-%   Rows are written only through the four row macros below, and proofs only
+%   Rows are written only through the five row macros below, and proofs only
 %   through the mproof environment. IDs are K1, K2, ... (introduction),
-%   M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
+%   A1, ... (assumptions), M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
 %     \krow{ID}{headline}{model rows}{scope note}
+%     \arow{ID}{assumption}{symbols}{model rows}{reason}
 %     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
 %     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
 %     \crow{ID}{statement}{model or literature rows}
@@ -53,6 +54,7 @@
 \newcommand{\pend}[1]{\textit{Pending:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\arow}[5]{#1 & #2 & #3 & \rowref{#4} & #5 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
@@ -71,15 +73,52 @@
 
 \section{Introduction}
 
+\subsection{Question}
+
 % The question is the author's choice of 15 October 2026 (TODO.md, D2).
 When does reading class from group markers trap a group at a low standing, and
 how much mobility does it take to get out? An observer who cannot see a
-person's class reads it from the markers of a group, and the group's standing
-in turn moves with how often its members are refused.
+person's class reads it from the markers of a group, and the group's standing,
+the mean class of its members, in turn moves with how often its members are
+refused. The question asks when this loop holds a group at a low standing
+rather than letting it rise to integration, and what mobility breaks the loop.
+
+\subsection{Answer}
+
+A group is trapped when two conditions hold together. The observer's belief
+about the group follows the group's standing from one generation to the next,
+and mobility is below the mobility threshold
+$\tilde\gamma^\ast=b-2\sqrt{\mu b}$, where $b$ is the exclusion pressure,
+salience times the cost of exclusion, and $\mu$ is the convergence rate (M9).
+The group then has a closure trap and a tipping point, and under the bounds of
+M6 every group that starts below the tipping point ends in the trap (M5, M6).
+Without the first condition there is no trap, since a belief frozen at its
+first value gives one fixed point and no tipping point (M7, M8). Without the
+second, integration is the only fixed point (M9). The threshold is positive
+only when $b>4\mu$, so a group under weaker exclusion pressure is never
+trapped, and more salient markers raise the threshold wherever it is positive
+(M9, M10). These statements are for the canonical discrimination-rate
+function, and for a general one a standing at which the composed map dips
+below the diagonal gives a trap (M12).
+
+Mobility above the threshold gets every group out. Integration is then the
+only fixed point, and under the bounds of M6 every standing converges to it
+(M9, M11). Just above the threshold the way out is slow, since crossing the
+window about the merged root takes at least $1/(\sqrt b\sqrt\varepsilon)$
+generations when mobility exceeds the threshold by $\varepsilon$ (M16). A
+one-off rise in standing is no substitute for mobility. Below the threshold
+it gets a group out only if it lifts the group above the tipping point, and a
+rise that leaves the group below the tipping point returns it to the trap
+(M6). Nor is the exit of individual members the group's escape. When the
+better-off members pass, the visible group's mean class falls (M14).
+
+Table~\ref{tab:headlines} states this answer as headlines, each with the model
+rows it rests on and what it does not claim.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
-\caption{Headline claims, each traced to the model rows it rests on.}\\
+\caption{Headline claims, each traced to the model rows it rests on.}
+\label{tab:headlines}\\
 \toprule
 \textbf{ID} & \textbf{Headline} & \textbf{Model rows} & \textbf{Scope note} \\
 \midrule
@@ -121,16 +160,132 @@ in turn moves with how often its members are refused.
   rises with the belief and ignores the starting standing (M7, M8).
   Convergence needs the frozen rate below $1-\mu-\tilde\gamma$, and above it
   the standing can cycle (M8).}
-\krow{K6}{When the better-off members of a visible group pass, the visible
-  group's mean class falls and the discrimination rate against those who stay
-  rises.}{M14}{A finite population and a statement about composition. The
+\krow{K6}{When the better-off members of a group pass, the visible group's
+  mean class falls, and the discrimination rate against those who stay does
+  not fall.}{M14}{A finite population and a statement about composition. The
   passing decision is not derived, and (ii) of M14 says only what it needs to
   make the leavers the upper members. Without that ordering exit can raise
-  the mean (M14).}
+  the mean (M14). The rate needs a discrimination-rate function that does not
+  rise in standing, and M14 shows only that the rate does not fall, not that
+  it rises.}
 \end{longtable}
 \normalsize
 
 \section{Model}
+
+\subsection{Assumptions}
+
+Table~\ref{tab:assumptions} lists the assumptions the model rows rest on, each
+with the rows that use it and the reason it is made. Every symbol in it has
+exactly one row in the measurement map (\texttt{MEASUREMENT\_MAP.tex}), which
+says whether the object is an input, an internal object or an output, what
+it stands for in the world, whether it is directly observed, and how it is
+obtained. Appendix~\ref{app:scope} gives the longer reasons.
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{5.6cm}P{2.6cm}P{2.0cm}P{4.6cm}@{}}
+\caption{Assumptions of the model.}
+\label{tab:assumptions}\\
+\toprule
+\textbf{ID} & \textbf{Assumption} & \textbf{Symbols} & \textbf{Model rows} & \textbf{Reason} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Assumption} & \textbf{Symbols} & \textbf{Model rows} & \textbf{Reason} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\arow{A1}{Class takes finitely many values $c\in\mathcal{C}$.}
+  {$c$, $\mathcal{C}$}{M1, M2, M3}
+  {The Lean statements range over a finite set. The predecessor's class in
+  $[0,1]$ is outside the rows (Appendix~\ref{app:scope}, Class space).}
+\arow{A2}{Class is not seen at the encounter. The observer sees a marker $m$,
+  which signals one of finitely many groups $g\in\mathcal{G}$.}
+  {$m$, $g$, $\mathcal{G}$}{M1, M2, M3}
+  {The premise of the question.}
+\arow{A3}{The observer revises the prior $\pi_g(c)$ and the group weights
+  $q(g)$ by Bayes' rule alone, giving the posterior $\pi'_g(c)$, the
+  posterior on group $q'(g)$ and the posterior on class $P(c\mid m)$.}
+  {$\pi_g(c)$, $\ell_g(c)$, $q(g)$, $\pi'_g(c)$, $q'(g)$, $P(c\mid m)$}
+  {M1, M2, M3, M17}
+  {The author's choice of 14 October 2026. M2 and M3 show that a second rule
+  gives no posterior on class that Bayes' rule does not, within one reading
+  (Appendix~\ref{app:scope}, The updating rule).}
+\arow{A4}{Group sufficiency. Within a group the marker's likelihood does not
+  depend on class, $\ell_g(c)=Z_g$ for every $c$.}
+  {$\ell_g(c)$, $Z_g$, $\lambda_g$}{M1, M2, M3}
+  {The predecessor's assumption. M1 shows its likelihood and posterior forms
+  agree under a prior with full support (Appendix~\ref{app:scope}, Group
+  sufficiency).}
+\arow{A5}{$0<\mu<1$, $\tilde\gamma\ge0$, $0\le s_g\le1$ and $\delta>0$, so
+  the exclusion pressure $b=s_g\delta$ is at least $0$.}
+  {$\mu$, $\tilde\gamma$, $s_g$, $\delta$, $b$}{M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, M17}
+  {A group at standing $0$ still rises by $\mu$ (M4), mobility pushes
+  standing up, salience is a probability, and exclusion costs standing.}
+\arow{A6}{The standing $\bar c^t$ of a group in generation $t$ moves by
+  $\bar c^{t+1}=\mu+\bar c^t(1-\mu+\tilde\gamma-\delta\phi^t)-\tilde\gamma(\bar c^t)^2$,
+  where $\phi^t$ is the discrimination rate.}
+  {$\bar c$, $\mu$, $\tilde\gamma$, $\delta$, $\phi^t$}
+  {M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M15, M16, M17}
+  {The predecessor's law of motion, taken as given rather than derived. The
+  engagement decision that would derive it lies upstream of $F$
+  (Appendix~\ref{app:scope}, The law of motion).}
+\arow{A7}{Re-learned prior. Each generation the observer re-learns the prior
+  $\pi_g(c)$ from the group's current standing, so the discrimination rate is
+  $\phi^t=s_gF(\bar c^t)$ and the law of A6 is the composed map
+  $\bar c^{t+1}=\mathcal{H}_F(\bar c^t)$.}
+  {$\pi_g(c)$, $\phi^t$, $s_g$, $F$, $\bar c$, $\mathcal{H}_F$}
+  {M4, M5, M6, M9, M10, M11, M12, M13, M15, M16, M17}
+  {The author's choice of 14 October 2026, and the model the predecessor
+  writes down (Appendix~\ref{app:scope}, The group prior across
+  generations).}
+\arow{A8}{Frozen prior, in place of A7. The prior is held at its first value,
+  with mean standing $\beta_0$, so $\phi^t=s_gF(\beta_0)$ in every generation
+  and the law of A6 is the frozen map $\mathcal{H}_k$ with
+  $k=s_g\delta F(\beta_0)$.}
+  {$\beta_0$, $\phi^t$, $s_g$, $\delta$, $F$, $k$, $\mathcal{H}_k$}{M7, M8}
+  {Kept to test whether the trap needs A7, which C7 answers.}
+\arow{A9}{The discrimination-rate function is $F(\bar c)=(1-\bar c)^2$, so the
+  composed map is the canonical map $\mathcal{H}$ with exclusion pressure
+  $b=s_g\delta$. Row M12 replaces it with any continuous $F$ with $F(1)=0$ and
+  $F'(1)=0$.}
+  {$F$, $\bar c$, $\mathcal{H}$, $b$, $s_g$, $\delta$}
+  {M4, M5, M6, M9, M10, M11, M12, M13, M15, M16, M17}
+  {The predecessor's canonical case. Refusal falls to zero at full standing
+  with zero slope, the property M12 keeps.}
+\arow{A10}{No group's standing enters another group's law of motion. The
+  outsider group $O$ and the host group $I$ each move by their own composed
+  map, the host's with parameters $\mu_I$, $\tilde\gamma_I$ and $b_I$.}
+  {$O$, $I$, $\mu_I$, $\tilde\gamma_I$, $b_I$}{M11}
+  {The predecessor's equations give each group its own map
+  (Appendix~\ref{app:scope}, Two groups).}
+\arow{A11}{The intensity $\rho$ multiplies the exclusion pressure and enters
+  nowhere else, so the composed map has $b=\rho s_g\delta$.}
+  {$\rho$, $b$, $s_g$, $\delta$}{M13}
+  {The predecessor's equation (loury-rho) (Appendix~\ref{app:scope}, The
+  intensity parameter).}
+\arow{A12}{A group is a finite set of people $V$, each with a class $c$. A
+  member passes, leaving the visible group, when the passing gain
+  $\mathrm{gain}(c)$ is at least the passing cost $\mathrm{cost}(c)$, and the
+  passers are $P$.}
+  {$V$, $c$, $P$, $\mathrm{gain}$, $\mathrm{cost}$}{M14}
+  {The predecessor's passing appendix. The gain and the cost are not derived
+  (Appendix~\ref{app:scope}, Passing).}
+\arow{A13}{A platform admits a share $\sigma$ of outsider applicants to a room
+  of $|A|$ attendees, with $N$ host clients, objective weight $\alpha$ and
+  willingness to pay $W$. Its profit is $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
+  linear in $\sigma$, with the admission margin $\mathrm{marg}$. A share
+  $\eta$ of outsiders in the room passes a share $\theta$ of the room's lower
+  mean class into the host's standing, giving $c_{\mathrm{eff}}$.}
+  {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$, $\eta$,
+  $\theta$, $c_{\mathrm{eff}}$}{M15}
+  {The predecessor's first-order condition and spillover formula, taken as
+  definitions (Appendix~\ref{app:scope}, The platform channel).}
+\end{longtable}
+\normalsize
+
+\subsection{Results}
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{3.8cm}P{6.3cm}P{3.7cm}P{1.1cm}@{}}
@@ -153,7 +308,7 @@ that check it.}\\
   {$\mathcal{C}$ finite, $\sum_{c}\pi_g(c)=1$,
   $Z_g=\sum_{c'}\ell_g(c')\,\pi_g(c')$,
   $\pi'_g(c)=\ell_g(c)\,\pi_g(c)/Z_g$.
-  (i) If $\ell_g(c)=k\neq0$ for every $c$, then $\pi'_g=\pi_g$.
+  (i) If $\ell_g(c)=\lambda_g\neq0$ for every $c$, then $\pi'_g=\pi_g$.
   (ii) If $\pi_g(c)>0$ for every $c$, $Z_g\neq0$ and $\pi'_g=\pi_g$, then
   $\ell_g(c)=Z_g$ for every $c$.
   Neither hypothesis can be dropped.}
@@ -218,9 +373,9 @@ that check it.}\\
   fixed point, so a higher frozen belief about the group gives a higher one.}
   {$\mu>0$, $\tilde\gamma\ge0$, $k=s_g\delta F(\beta_0)$. $\mathcal{H}_F$ with
   $F$ held at $F(\beta_0)$ is $\mathcal{H}_k$, and
-  $\mathcal{H}_k(\bar c)-\bar c=-P(\bar c)$. If $k>0$, then
-  $P(c^\ast)=0$ for some $c^\ast\in(0,1)$, and $x,y\ge0$ with
-  $P(x)=P(y)=0$ gives $x=y$.
+  $\mathcal{H}_k(\bar c)-\bar c=-P_k(\bar c)$. If $k>0$, then
+  $P_k(c^\ast)=0$ for some $c^\ast\in(0,1)$, and $x,y\ge0$ with
+  $P_k(x)=P_k(y)=0$ gives $x=y$.
   $k_1<k_2\Rightarrow c^\ast(k_2)<c^\ast(k_1)$. If $s_g\delta>0$ and
   $F(\beta_2)<F(\beta_1)$, then $c^\ast$ at $\beta_1$ is below $c^\ast$ at
   $\beta_2$.
@@ -232,10 +387,10 @@ that check it.}\\
   frozen map has no tipping point.}
   {$\tilde\gamma\ge0$ and $k<1-\mu-\tilde\gamma$. Then $x<y\le1\Rightarrow
   \mathcal{H}_k(x)<\mathcal{H}_k(y)$. If also $\mu>0$, $0<c^\ast<1$ and
-  $P(c^\ast)=0$, then $\bar c^0\in[0,1]\Rightarrow
+  $P_k(c^\ast)=0$, then $\bar c^0\in[0,1]\Rightarrow
   \mathcal{H}_k^n(\bar c^0)\to c^\ast$.
   It fails without the bound on $k$. At $(\mu,\tilde\gamma,k)=(\tfrac12,0,\tfrac32)$,
-  $\mathcal{H}_k(\bar c)=\tfrac12-\bar c$ and $P(\tfrac14)=0$, and the orbit
+  $\mathcal{H}_k(\bar c)=\tfrac12-\bar c$ and $P_k(\tfrac14)=0$, and the orbit
   of $0$ alternates between $0$ and $\tfrac12$ and has no limit.}
   {FrozenMap.Hk_continuous, FrozenMap.Hk_strictMonoOn, FrozenMap.converges_to_fixed, FrozenMap.control_cycle_fixed, FrozenMap.control_cycle}
 \mrow{M9}{For the canonical map, the trap condition holds exactly when
@@ -329,16 +484,17 @@ that check it.}\\
 \mrow{M14}{If the members who leave the visible group are those above every
   member who stays, the visible mean falls, strictly when some leaver is
   above some stayer. A passing cost that does not rise in class and a benefit
-  that does not fall in it make the leavers such a set. Under a decreasing
-  discrimination-rate function the rate against those who stay rises.}
+  that does not fall in it make the leavers such a set. Under a
+  discrimination-rate function that does not rise in standing, the rate
+  against those who stay does not fall.}
   {People $V$ finite, classes $c_i$, passers $P\subseteq V$, with $P$ and
   $V\setminus P$ non-empty.
   (i) If $c_j\le c_i$ for every $i\in P$ and $j\in V\setminus P$, then
   $\bar c(V\setminus P)\le\bar c(V)$, and $<$ if some $c_j<c_i$.
-  (ii) If $\beta$ is non-decreasing and $\kappa$ non-increasing, then
-  $\kappa(x)\le\beta(x)$ and $x\le y$ give $\kappa(y)\le\beta(y)$.
-  (iii) If $F$ is non-increasing, $s_g\ge0$ and $m'\le m$, then
-  $s_gF(m)\le s_gF(m')$.
+  (ii) If $\mathrm{gain}$ is non-decreasing and $\mathrm{cost}$ non-increasing, then
+  $\mathrm{cost}(x)\le\mathrm{gain}(x)$ and $x\le y$ give $\mathrm{cost}(y)\le\mathrm{gain}(y)$.
+  (iii) If $F$ is non-increasing, $s_g\ge0$ and $\bar c'\le\bar c$, then
+  $s_gF(\bar c)\le s_gF(\bar c')$.
   (i) fails without the ordering, since classes $(0,1)$ with the class-$0$
   member leaving give a visible mean of $1$ against $\tfrac12$.}
   {Passing.cross, Passing.mean_sdiff_le, Passing.mean_sdiff_lt, Passing.upper_set_of_threshold, Passing.rate_rises, Passing.control_ordering_needed}
@@ -350,17 +506,17 @@ that check it.}\\
   critical fraction, which falls in the spillover sensitivity while the host
   is above its tipping point. The admission threshold can lie on either side
   of the tipping point.}
-  {$\mathrm{marg}=W+n(1-\alpha)(\bar c_O-\bar c_I)/|A|$, $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
-  $c_E=\bar c_I-W|A|/(n(1-\alpha))$.
-  (i) $|A|>0$. $\mathrm{marg}<0\iff W|A|<n(1-\alpha)(\bar c_I-\bar c_O)$, and
-  with $n(1-\alpha)>0$, $\iff\bar c_O<c_E$.
+  {$\mathrm{marg}=W+N(1-\alpha)(\bar c_O-\bar c_I)/|A|$, $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
+  $c_E=\bar c_I-W|A|/(N(1-\alpha))$.
+  (i) $|A|>0$. $\mathrm{marg}<0\iff W|A|<N(1-\alpha)(\bar c_I-\bar c_O)$, and
+  with $N(1-\alpha)>0$, $\iff\bar c_O<c_E$.
   (ii) $\mathrm{marg}<0$ and $\sigma>0$ give $\Pi(\sigma)<\Pi(0)$.
   (iii) $c_{\mathrm{eff}}=\bar c_I-\theta\eta(\bar c_I-c_E)$, $\theta>0$,
   $\bar c_I>c_E$. Then $c_{\mathrm{eff}}<c_M\iff\eta>\eta_{\mathrm{crit}}
   =(\bar c_I-c_M)/(\theta(\bar c_I-c_E))$.
   (iv) $\bar c_I>c_M$, $\bar c_I>c_E$, $0<\theta_1<\theta_2$ give
   $\eta_{\mathrm{crit}}(\theta_2)<\eta_{\mathrm{crit}}(\theta_1)$.
-  (v) With $\bar c_I=1$, $n(1-\alpha)>0$ and $|A|>0$, every $c_M<1$ has a
+  (v) With $\bar c_I=1$, $N(1-\alpha)>0$ and $|A|>0$, every $c_M<1$ has a
   $W>0$ with $c_E>c_M$ and a $W>0$ with $c_E<c_M$.
   (ii) fails with $\mathrm{marg}>0$, where $\Pi(1)>\Pi(0)$. (iv) fails with
   $\bar c_I<c_M$, where $\eta_{\mathrm{crit}}$ rises in $\theta$.}
@@ -537,8 +693,8 @@ no conclusion rests on them.
   threshold and cannot be told apart from salience or the cost of
   exclusion.}{M13}
 \crow{C10}{Selective passing by the upper members lowers the visible
-  group's mean and raises the discrimination rate against those who
-  stay.}{M14}
+  group's mean, and under a discrimination-rate function that does not rise
+  in standing the rate against those who stay does not fall.}{M14}
 \crow{C11}{Under the predecessor's admission objective, a platform excludes
   the outsider group below an admission threshold, and admitting it can tip
   a host group near its own tipping point. The admission threshold can lie
@@ -631,25 +787,26 @@ Rows M7 and M8 hold the group prior at its first value, whose mean standing
 is $\beta_0$, so the discrimination rate is the constant $k=s_g\delta F(\beta_0)$.
 The frozen map is $\mathcal{H}_k(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-k)
 -\tilde\gamma\,\bar c^2$, its fixed-point polynomial is
-$P(\bar c)=\tilde\gamma\,\bar c^2+(\mu+k-\tilde\gamma)\,\bar c-\mu$, and $c^\ast$
-is a root of $P$ in $(0,1)$, written $c^\ast(k)$ where $k$ varies.
+$P_k(\bar c)=\tilde\gamma\,\bar c^2+(\mu+k-\tilde\gamma)\,\bar c-\mu$, and $c^\ast$
+is a root of $P_k$ in $(0,1)$, written $c^\ast(k)$ where $k$ varies.
 
 Rows M9 and M10 return to the canonical map $\mathcal{H}$. The mobility
 threshold is $\tilde\gamma^\ast=b-2\sqrt{\mu b}$, written
 $\tilde\gamma^\ast(b)$ where $b$ varies, and the exclusion threshold is
 $b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$. In the proofs $u=\sqrt b$,
-$v=\sqrt\mu$ and $w=\sqrt{\mu+\tilde\gamma}$.
+$v=\sqrt\mu$ and $z=\sqrt{\mu+\tilde\gamma}$.
 
 Row M13 has the intensity $\rho\in[0,1]$, the map $\mathcal{H}_\rho$ with
 exclusion pressure $\rho s_g\delta$, and the intensity threshold
 $\rho^\ast=b^\ast/(s_g\delta)$. Row M14 has a finite set of people $V$ with
 classes $c_i$, the passers $P\subseteq V$, the visible group $V\setminus P$,
 and the mean class $\bar c(S)=\sum_{i\in S}c_i/|S|$ of a non-empty set $S$.
-In (ii) $\beta$ is the benefit of passing and $\kappa$ its cost, both
-functions of class.
+In (ii) $\mathrm{gain}$ is the benefit of passing and $\mathrm{cost}$ its
+cost, both functions of class. In (iii) $\bar c$ and $\bar c'$ are the
+group's mean class before and after the passers leave.
 
 Row M15 has the predecessor's platform. $W$ is an admittee's willingness to
-pay, $n$ the number of host clients, $\alpha$ the weight on objective
+pay, $N$ the number of host clients, $\alpha$ the weight on objective
 quality, $|A|$ the room size, $\sigma\in[0,1]$ the admission rate,
 $\mathrm{marg}$ the admission margin, $\Pi$ the profit, $c_E$ the admission
 threshold, $\eta$ the outsider fraction in the room, $\theta$ the spillover
@@ -664,11 +821,11 @@ parameters $(\mu,\tilde\gamma,b)$ and a host $I$ moved by $\mathcal{H}_I$, the
 canonical map with its own parameters $(\mu_I,\tilde\gamma_I,b_I)$.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
-(i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
+(i) With $\ell_g(c)=\lambda_g\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
 \[
-Z_g=\sum_{c'}k\,\pi_g(c')=k\sum_{c'}\pi_g(c')=k,
+Z_g=\sum_{c'}\lambda_g\,\pi_g(c')=\lambda_g\sum_{c'}\pi_g(c')=\lambda_g,
 \qquad
-\pi'_g(c)=\frac{k\,\pi_g(c)}{k}=\pi_g(c).
+\pi'_g(c)=\frac{\lambda_g\,\pi_g(c)}{\lambda_g}=\pi_g(c).
 \]
 (ii) With $Z_g\neq0$, $\pi_g(c)>0$ and $\pi'_g(c)=\pi_g(c)$,
 \[
@@ -766,17 +923,17 @@ At $(\tfrac1{20},\tfrac1{10},\tfrac15)$, $B^2=\tfrac1{100}<\tfrac1{25}=4\mu b$.
 \end{mproof}
 
 \begin{mproof}{M6}{ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_example, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
-Put $A=1-\mu+\tilde\gamma-b$. For $0\le x<y\le1$,
+Put $a=1-\mu+\tilde\gamma-b$. For $0\le x<y\le1$,
 \[
 \mathcal{H}(y)-\mathcal{H}(x)=(y-x)\,G,\qquad
-G=A+(2b-\tilde\gamma)(x+y)-b(x^2+xy+y^2),
+G=a+(2b-\tilde\gamma)(x+y)-b(x^2+xy+y^2),
 \]
 \[
-G=A(1-x)(1-y)+(1-\mu)\big(x(1-y)+y(1-x)\big)+(1-\mu-\tilde\gamma)\,xy
+G=a(1-x)(1-y)+(1-\mu)\big(x(1-y)+y(1-x)\big)+(1-\mu-\tilde\gamma)\,xy
 +b\,x(1-x)+b\,y(1-y).
 \]
-The three weights are $\ge0$ and sum to 1, $A>0$, $1-\mu>0$ and
-$1-\mu-\tilde\gamma>0$, so $G\ge\min(A,1-\mu-\tilde\gamma)>0$.
+The three weights are $\ge0$ and sum to 1, $a>0$, $1-\mu>0$ and
+$1-\mu-\tilde\gamma>0$, so $G\ge\min(a,1-\mu-\tilde\gamma)>0$.
 By M5, $\mathcal{H}(\bar c)-\bar c=(1-\bar c)\,b\,(\bar c-c_L)(\bar c-c_M)$, which is
 $>0$ on $[0,c_L)$, $<0$ on $(c_L,c_M)$ and $>0$ on $(c_M,1)$.
 Monotone orbits. Let $f$ be continuous, nondecreasing on $[x_0,p]$, $f(p)=p$
@@ -808,22 +965,22 @@ With $F$ held at $F(\beta_0)$,
 \mathcal{H}_F(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-k)-\tilde\gamma\,\bar c^2
 =\mathcal{H}_k(\bar c),
 \qquad
-\mathcal{H}_k(\bar c)-\bar c=-P(\bar c).
+\mathcal{H}_k(\bar c)-\bar c=-P_k(\bar c).
 \]
 For every $x$ and $y$,
 \[
-y\,P(x)-x\,P(y)=(x-y)\,(\tilde\gamma\,xy+\mu).
+y\,P_k(x)-x\,P_k(y)=(x-y)\,(\tilde\gamma\,xy+\mu).
 \]
-Uniqueness. $P(x)=P(y)=0$ with $x,y\ge0$ gives $(x-y)(\tilde\gamma\,xy+\mu)=0$
+Uniqueness. $P_k(x)=P_k(y)=0$ with $x,y\ge0$ gives $(x-y)(\tilde\gamma\,xy+\mu)=0$
 and $\tilde\gamma\,xy+\mu\ge\mu>0$, so $x=y$.
-Existence. $P(0)=-\mu<0<k=P(1)$ and $P$ is continuous, so $P(c^\ast)=0$ for
-some $c^\ast\in(0,1)$. $P(0)\neq0$ and $P(1)\neq0$, so $c^\ast$ is the only
+Existence. $P_k(0)=-\mu<0<k=P_k(1)$ and $P_k$ is continuous, so $P_k(c^\ast)=0$ for
+some $c^\ast\in(0,1)$. $P_k(0)\neq0$ and $P_k(1)\neq0$, so $c^\ast$ is the only
 fixed point in $[0,1]$.
 Sign. With $y=c^\ast$,
 \[
-c^\ast P(x)=(x-c^\ast)(\tilde\gamma\,x\,c^\ast+\mu),
+c^\ast P_k(x)=(x-c^\ast)(\tilde\gamma\,x\,c^\ast+\mu),
 \]
-so $P<0$ on $[0,c^\ast)$ and $P>0$ on $(c^\ast,\infty)$.
+so $P_k<0$ on $[0,c^\ast)$ and $P_k>0$ on $(c^\ast,\infty)$.
 Comparison. With $c_1=c^\ast(k_1)$ and $c_2=c^\ast(k_2)$,
 \[
 P_{k_2}(c_1)=P_{k_1}(c_1)+(k_2-k_1)\,c_1=(k_2-k_1)\,c_1>0,
@@ -831,7 +988,7 @@ P_{k_2}(c_1)=P_{k_1}(c_1)+(k_2-k_1)\,c_1=(k_2-k_1)\,c_1>0,
 so $c_1>c_2$ by the sign of $P_{k_2}$. $F(\beta_2)<F(\beta_1)$ and
 $s_g\delta>0$ give $s_g\delta F(\beta_2)<s_g\delta F(\beta_1)$.
 Control. At $(0,\tfrac12,\tfrac14)$,
-$P(\bar c)=\tfrac12\bar c^2-\tfrac14\bar c=\tfrac12\bar c\,(\bar c-\tfrac12)$.
+$P_k(\bar c)=\tfrac12\bar c^2-\tfrac14\bar c=\tfrac12\bar c\,(\bar c-\tfrac12)$.
 \end{mproof}
 
 \begin{mproof}{M8}{FrozenMap.Hk_continuous, FrozenMap.Hk_strictMonoOn, FrozenMap.converges_to_fixed, FrozenMap.control_cycle_fixed, FrozenMap.control_cycle}
@@ -840,11 +997,11 @@ For $x<y\le1$, $\tilde\gamma(x+y)\le2\tilde\gamma$, so
 \mathcal{H}_k(y)-\mathcal{H}_k(x)=(y-x)\big(1-\mu+\tilde\gamma-k-\tilde\gamma(x+y)\big)
 \ge(y-x)(1-\mu-\tilde\gamma-k)>0.
 \]
-By M7, $\mathcal{H}_k(\bar c)-\bar c=-P(\bar c)$ is $>0$ on $[0,c^\ast)$ and
+By M7, $\mathcal{H}_k(\bar c)-\bar c=-P_k(\bar c)$ is $>0$ on $[0,c^\ast)$ and
 $<0$ on $(c^\ast,1]$. The monotone orbit argument of M6 with $p=c^\ast$
 applies to $\bar c^0\in[0,c^\ast]$, and its mirror to $\bar c^0\in(c^\ast,1]$.
 Control. At $(\tfrac12,0,\tfrac32)$, $\mathcal{H}_k(\bar c)=\tfrac12-\bar c$ and
-$P(\bar c)=2\bar c-\tfrac12$. With $u_n=\mathcal{H}_k^n(0)$,
+$P_k(\bar c)=2\bar c-\tfrac12$. With $u_n=\mathcal{H}_k^n(0)$,
 \[
 u_{n+1}=\tfrac12-u_n,\qquad |u_n-\tfrac14|=\tfrac14\ \text{for every }n.
 \]
@@ -889,12 +1046,12 @@ $\mathcal{H}'=1-\tfrac1{20}+\tfrac1{10}-\tfrac45\cdot\tfrac9{16}+\tfrac85\cdot\t
 \end{mproof}
 
 \begin{mproof}{M10}{Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.gammaStar_rises_where_positive, Bifurcation.bStar_zero_mobility, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
-With $w=\sqrt{\mu+\tilde\gamma}\ge v$, by M9,
+With $z=\sqrt{\mu+\tilde\gamma}\ge v$, by M9,
 \[
-\tilde\gamma<\tilde\gamma^\ast\iff(u-v)^2>v^2+\tilde\gamma=w^2
-\iff u-v>w\iff b=u^2>(v+w)^2=b^\ast,
+\tilde\gamma<\tilde\gamma^\ast\iff(u-v)^2>v^2+\tilde\gamma=z^2
+\iff u-v>z\iff b=u^2>(v+z)^2=b^\ast,
 \]
-where $u-v<-w$ is ruled out because it gives $u<v-w\le0$.
+where $u-v<-z$ is ruled out because it gives $u<v-z\le0$.
 Monotonicity. $\tilde\gamma^\ast(b)=(\sqrt b-v)^2-\mu$, and
 $v\le\sqrt{b_1}<\sqrt{b_2}$ gives $(\sqrt{b_1}-v)^2<(\sqrt{b_2}-v)^2$.
 $\delta>0$ gives $s_1\delta<s_2\delta$. A positive threshold has $b_1>4\mu\ge\mu$
@@ -964,8 +1121,8 @@ predecessor's equation (loury-rho),
 (i) By M10 with $b=\rho s_g\delta$,
 $\tilde\gamma<\tilde\gamma^\ast(b)\iff b>b^\ast\iff\rho>b^\ast/(s_g\delta)$.
 (ii) The strict form of M10, $\tilde\gamma^\ast(b)<\tilde\gamma\iff b<b^\ast$,
-follows from $u-v<w\iff u<v+w$ (M10's proof, with the case $u-v<0$ giving
-$u<v\le v+w$ at once). With $\rho<\rho^\ast$, $b<b^\ast$, so
+follows from $u-v<z\iff u<v+z$ (M10's proof, with the case $u-v<0$ giving
+$u<v\le v+z$ at once). With $\rho<\rho^\ast$, $b<b^\ast$, so
 $\tilde\gamma>\tilde\gamma^\ast(b)$ and M9(ii) applies.
 (iii) $b^\ast>0$, so $0<\rho^\ast$, and $\rho^\ast<1\iff b^\ast<s_g\delta$.
 Example and control. At $(\tfrac1{20},\tfrac1{10},\tfrac12)$, M5's trap
@@ -986,8 +1143,8 @@ $\sum_V=\sum_S+\sum_P$ and $|V|=|S|+|P|$,
 \iff|P|\sum_Sc\le|S|\sum_Pc ,
 \]
 and the same with $<$.
-(ii) $\kappa(y)\le\kappa(x)\le\beta(x)\le\beta(y)$.
-(iii) $m'\le m\Rightarrow F(m)\le F(m')$, and $s_g\ge0$.
+(ii) $\mathrm{cost}(y)\le\mathrm{cost}(x)\le\mathrm{gain}(x)\le\mathrm{gain}(y)$.
+(iii) $\bar c'\le\bar c\Rightarrow F(\bar c)\le F(\bar c')$, and $s_g\ge0$.
 Control. $V=\{0,1\}$, $c=(0,1)$, $P=\{0\}$. $\bar c(V\setminus P)=1$ and
 $\bar c(V)=\tfrac12$.
 \end{mproof}
@@ -995,9 +1152,9 @@ $\bar c(V)=\tfrac12$.
 \begin{mproof}{M15}{Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign, Platform.tokenism_not_implied}
 (i) With $|A|>0$,
 \[
-\mathrm{marg}=\frac{W|A|-n(1-\alpha)(\bar c_I-\bar c_O)}{|A|}<0
-\iff W|A|<n(1-\alpha)(\bar c_I-\bar c_O)
-\iff\frac{W|A|}{n(1-\alpha)}<\bar c_I-\bar c_O
+\mathrm{marg}=\frac{W|A|-N(1-\alpha)(\bar c_I-\bar c_O)}{|A|}<0
+\iff W|A|<N(1-\alpha)(\bar c_I-\bar c_O)
+\iff\frac{W|A|}{N(1-\alpha)}<\bar c_I-\bar c_O
 \iff\bar c_O<c_E .
 \]
 (ii) $\Pi(\sigma)-\Pi(0)=\sigma\,\mathrm{marg}<0$.
@@ -1011,9 +1168,9 @@ $\bar c(V)=\tfrac12$.
 Controls. $\Pi(1)-\Pi(0)=\mathrm{marg}$. With $\bar c_I-c_M<0$,
 $1/(\theta_2(\bar c_I-c_E))<1/(\theta_1(\bar c_I-c_E))$ multiplied by a
 negative number reverses.
-(v) With $\bar c_I=1$ and $k=n(1-\alpha)$, $c_E=1-W|A|/k$. The choice
-$W=(1-c_M)k/(2|A|)$ gives $c_E=1-\tfrac12(1-c_M)>c_M$, and
-$W=2(1-c_M)k/|A|$ gives $c_E=1-2(1-c_M)<c_M$.
+(v) With $\bar c_I=1$ and $K=N(1-\alpha)$, $c_E=1-W|A|/K$. The choice
+$W=(1-c_M)K/(2|A|)$ gives $c_E=1-\tfrac12(1-c_M)>c_M$, and
+$W=2(1-c_M)K/|A|$ gives $c_E=1-2(1-c_M)<c_M$.
 \end{mproof}
 
 \begin{mproof}{M16}{Slowing.Q_threshold_plus, Slowing.step_bounds, Slowing.slowing, Slowing.control_start_matters, Slowing.bound_at_example}
@@ -1029,10 +1186,10 @@ $\bar c$ in the window, $|u\bar c-v|\le e$, so
 \qquad
 0\le\mathcal{H}(\bar c)-\bar c=(1-\bar c)Q(\bar c)\le2\varepsilon .
 \]
-Induction on $k$, with $x_k=\mathcal{H}^k(c_0-h)$. Either $c_0-h\le x_k\le c_0-h+2\varepsilon k$,
-or $c_0+h\le c_0-h+2\varepsilon k$. If the first holds and $x_k<c_0+h$, the
-window bound gives the first at $k+1$. If the first holds and
-$x_k\ge c_0+h$, the second holds at $k$ and so at $k+1$. The second persists.
+Induction on $j$, with $x_j=\mathcal{H}^j(c_0-h)$. Either $c_0-h\le x_j\le c_0-h+2\varepsilon j$,
+or $c_0+h\le c_0-h+2\varepsilon j$. If the first holds and $x_j<c_0+h$, the
+window bound gives the first at $j+1$. If the first holds and
+$x_j\ge c_0+h$, the second holds at $j$ and so at $j+1$. The second persists.
 At $n$, $x_n\ge c_0+h$ gives $c_0+h\le c_0-h+2\varepsilon n$ in both cases, so
 \[
 2h\le2\varepsilon n
@@ -1231,7 +1388,7 @@ Visible mean & $\bar c(V\setminus P)$ & The mean class of the visible group
   (M14). \\ \addlinespace
 Willingness to pay & $W$ & What an admitted outsider pays the platform
   (M15). \\ \addlinespace
-Host clients & $n$ & The number of host-group clients on the platform
+Host clients & $N$ & The number of host-group clients on the platform
   (M15). \\ \addlinespace
 Objective weight & $\alpha$ & The weight on objective quality in a client's
   experience, with $1-\alpha$ on social quality (M15). \\ \addlinespace
@@ -1374,7 +1531,7 @@ aside, and conclusion C7 compares the two.
 predecessor's partial-inclusion proposition states
 $c_E<c_M$, and argues that the two thresholds ``answer to structurally
 different objects''. That does not order them. With $\bar c_I=1$, for every
-$c_M<1$, every $n(1-\alpha)>0$ and every $|A|>0$, there is a willingness to
+$c_M<1$, every $N(1-\alpha)>0$ and every $|A|>0$, there is a willingness to
 pay $W>0$ with $c_E>c_M$ and one with $c_E<c_M$
 (\lean{Platform.tokenism\_not\_implied}). The claim therefore does not follow
 from the premises the predecessor states. A bound on $W$ relative to the
