@@ -1123,6 +1123,16 @@ paper's claims, and only then write the manuscript.
   (two cost groups, threshold); both free on arXiv, suggested for full reads
   for positioning only. The TSE lead on wealth effects is Schroyen-Treich,
   already L12. The applications suite now has 140 checks.
+- 15 Oct 2026, full reads (author: "go ahead") of the two nearest neighbours of
+  the search: Liu-Garg-Borgs 2022 (arXiv v2; lit/liu_garg_borgs_2022, 28
+  checks; LiuGargBorgs.lean, 11 theorems; row L32) and Hu-Immorlica-Vaughan
+  2019 (arXiv v4; lit/hu_immorlica_vaughan_2019, 25 checks;
+  HuImmorlicaVaughan.lean, 9 theorems; row L33). Neither changes a claim. C13
+  now names access as the nearest construct to the entrants' share; K3's
+  scope note cites HIV's derivation of its group cost condition. Findings:
+  two slips in LGB's proof of Proposition 4.4 (access under pure
+  randomization is rho, not 0; thresB(c) >= c, not <= c); a sign misprint in
+  HIV's appendix l_m (+1 for -1) and a label slip in their Example 3.
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to
