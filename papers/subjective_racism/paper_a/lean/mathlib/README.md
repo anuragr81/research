@@ -67,3 +67,22 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `Hk_continuous`, `Hk_strictMonoOn` | `Hk` is continuous, and strictly increasing up to 1 when `γ ≥ 0` and `k < 1 − μ − γ` |
 | `converges_to_fixed` | M8. Under that bound, every orbit from `[0, 1]` converges to the root |
 | `control_cycle_fixed`, `control_cycle` | At `(1/2, 0, 3/2)`, `Hk c = 1/2 − c`, the root is 1/4, and the orbit of 0 has no limit |
+
+## Bifurcation.lean, rows M9 and M10
+
+`gammaStar μ b = b − 2 √(μ b)` is the mobility threshold and
+`bStar μ γ = (√μ + √(μ + γ))²` the threshold on `b = s δ`.
+
+| Theorem | Content |
+|---|---|
+| `gammaStar_eq` | `γ* = (√b − √μ)² − μ` |
+| `trap_iff_gamma` | M9. The trap condition of M5 holds exactly when `γ < γ*` |
+| `Q_pos_above`, `only_one_above` | M9. Above `γ*`, `Q > 0` on `[0, ∞)` and 1 is the only fixed point in `[0, 1]` |
+| `at_threshold_factor`, `at_threshold_fixed` | M9. At `γ*`, `H c − c = (1 − c)(√b c − √μ)²`, and the fixed points are `√μ / √b` and 1 |
+| `double_root_mem` | The double root lies in `(0, 1)` when `μ < b` |
+| `gammaStar_pos_iff` | M9. `γ* > 0 ↔ b > 4 μ` |
+| `control_threshold_zero` | `γ* = 0` at `(μ, b) = (1/20, 1/5)` |
+| `trap_iff_b` | M10. With `γ ≥ 0`, `γ < γ* ↔ b* < b` |
+| `gammaStar_strictMono`, `gammaStar_strictMono_salience` | M10. `γ*` rises with `b` from `b = μ` on, and so with `s` at fixed `δ > 0` |
+| `bStar_at_figure` | `0.29 < b* < 0.30` at `μ = γ = 1/20` |
+| `control_not_mono_below_mu` | At `μ = 1`, `γ*(1/4) = −3/4 < 0 = γ*(0)` |

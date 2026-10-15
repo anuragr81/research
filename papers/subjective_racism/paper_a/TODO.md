@@ -14,8 +14,8 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M8 done. Next is Q4e |
-| 5. Appendices B to G | [~] filled for M1 to M8, and Appendix D records D1 and D4 |
+| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M10 done. Next to be chosen |
+| 5. Appendices B to G | [~] filled for M1 to M10, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [ ] |
@@ -60,10 +60,23 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   below `c_M` that does not converge to `c_L`, or record that none exists.
 - [ ] **Q4d. Class closure under `ass:Freg`.** General F, C^1, strictly
   decreasing, convex, `F(1) = F'(1) = 0`. Expect sufficient conditions only.
-- [ ] **Q4e. The bifurcation.** `prop:bifurcation` and
-  `cor:salience-threshold`. M5 gives the boundary `(b - gamma)^2 = 4 mu b` in
-  closed form. The rows still to prove are what happens on it (one double
-  fixed point) and the threshold in `gamma` it implies.
+- [x] **Q4e, M9 and M10. The bifurcation.** `prop:bifurcation` and
+  `cor:salience-threshold`, canonical F, `Bifurcation.lean`. M9: the trap
+  condition holds exactly when `gamma < gamma* = b - 2 sqrt(mu b)`. Above
+  `gamma*` integration is the only fixed point in [0, 1]. At `gamma*` the
+  low and middle fixed points merge into the double root `sqrt(mu)/sqrt(b)`.
+  `gamma* > 0` exactly when `b > 4 mu`. M10: with `gamma >= 0`, the trap
+  condition holds exactly when `s_g delta > b* = (sqrt mu + sqrt(mu + gamma))^2`,
+  and `gamma*` rises with `b`, so with salience, from `b = mu` on. Found on
+  the way. (1) The predecessor's "there exists gamma* > 0" needs
+  `s_g delta > 4 mu` (`control_threshold_zero`). (2) Its salience corollary
+  claims `d gamma*/d s_g > 0` without restriction, which fails for
+  `s_g delta < mu` (`control_not_mono_below_mu`), a region where the threshold
+  is negative and so harmless. (3) Its figure's `delta* ~ 0.29` is confirmed,
+  `0.29 < b* < 0.30` at `mu = gamma = 0.05`, `s_g = 1` (`bStar_at_figure`).
+  Not in Lean: the slope `H' = 1` at the merged root (Q4f).
+- [ ] **Q4f. The slope at the merged root.** State `HasDerivAt H 1` at
+  `sqrt(mu)/sqrt(b)` when `gamma = gamma*`, the saddle-node condition.
 - [x] **Q5, M7 and M8. The frozen-belief map has one equilibrium.** With
   `phi` held at `s_g F(beta_0)`, so `k = s_g delta F(beta_0)`, the fixed points
   are the roots of `P c = gamma c^2 + (mu + k - gamma) c - mu`. M7: for `k > 0`

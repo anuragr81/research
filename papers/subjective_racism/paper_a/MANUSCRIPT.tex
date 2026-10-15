@@ -196,6 +196,38 @@ that check it.}\\
   $\mathcal{H}_k(\bar c)=\tfrac12-\bar c$ and $P(\tfrac14)=0$, and the orbit
   of $0$ alternates between $0$ and $\tfrac12$ and has no limit.}
   {FrozenMap.Hk_continuous, FrozenMap.Hk_strictMonoOn, FrozenMap.converges_to_fixed, FrozenMap.control_cycle_fixed, FrozenMap.control_cycle}
+\mrow{M9}{For the canonical map, the trap condition holds exactly when
+  mobility is below the threshold $\tilde\gamma^\ast$. Above it, integration
+  is the only fixed point in $[0,1]$. At it, the low and middle fixed points
+  merge into one double fixed point. The threshold is positive only when
+  $b>4\mu$.}
+  {$\mu>0$, $b>0$, $\tilde\gamma^\ast=b-2\sqrt{\mu b}=(\sqrt b-\sqrt\mu)^2-\mu$.
+  (i) $b-\tilde\gamma>0$ and $(b-\tilde\gamma)^2>4\mu b$ $\iff$
+  $\tilde\gamma<\tilde\gamma^\ast$.
+  (ii) If $\tilde\gamma>\tilde\gamma^\ast$ and $0\le\bar c\le1$, then
+  $\mathcal{H}(\bar c)=\bar c\iff\bar c=1$.
+  (iii) At $\tilde\gamma=\tilde\gamma^\ast$,
+  $\mathcal{H}(\bar c)-\bar c=(1-\bar c)(\sqrt b\,\bar c-\sqrt\mu)^2$, so
+  $\mathcal{H}(\bar c)=\bar c\iff\bar c\in\{\sqrt\mu/\sqrt b,\,1\}$, and
+  $0<\sqrt\mu/\sqrt b<1$ when $\mu<b$.
+  (iv) $\tilde\gamma^\ast>0\iff b>4\mu$.
+  A positive threshold fails to exist without $b>4\mu$, since
+  $(\mu,b)=(\tfrac1{20},\tfrac15)$ gives $\tilde\gamma^\ast=0$.}
+  {Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero}
+\mrow{M10}{With mobility non-negative, the trap condition holds exactly when
+  $s_g\delta$ exceeds the exclusion threshold $b^\ast$. The mobility
+  threshold rises with salience wherever it is non-negative. At the
+  predecessor's figure parameters, $b^\ast$ lies between $0.29$ and $0.30$.}
+  {$\mu>0$, $\tilde\gamma\ge0$, $b>0$,
+  $b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$. Then
+  $\tilde\gamma<\tilde\gamma^\ast\iff b>b^\ast$.
+  $\mu\le b_1<b_2\Rightarrow\tilde\gamma^\ast(b_1)<\tilde\gamma^\ast(b_2)$.
+  If $\delta>0$, $\mu\le s_1\delta$ and $s_1<s_2$, then
+  $\tilde\gamma^\ast(s_1\delta)<\tilde\gamma^\ast(s_2\delta)$.
+  $\tfrac{29}{100}<b^\ast<\tfrac3{10}$ at $\mu=\tilde\gamma=\tfrac1{20}$.
+  It fails below $b=\mu$, since at $\mu=1$,
+  $\tilde\gamma^\ast(\tfrac14)=-\tfrac34<0=\tilde\gamma^\ast(0)$.}
+  {Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
 \end{longtable}
 \normalsize
 
@@ -297,6 +329,12 @@ The frozen map is $\mathcal{H}_k(\bar c)=\mu+\bar c\,(1-\mu+\tilde\gamma-k)
 -\tilde\gamma\,\bar c^2$, its fixed-point polynomial is
 $P(\bar c)=\tilde\gamma\,\bar c^2+(\mu+k-\tilde\gamma)\,\bar c-\mu$, and $c^\ast$
 is a root of $P$ in $(0,1)$, written $c^\ast(k)$ where $k$ varies.
+
+Rows M9 and M10 return to the canonical map $\mathcal{H}$. The mobility
+threshold is $\tilde\gamma^\ast=b-2\sqrt{\mu b}$, written
+$\tilde\gamma^\ast(b)$ where $b$ varies, and the exclusion threshold is
+$b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$. In the proofs $u=\sqrt b$,
+$v=\sqrt\mu$ and $w=\sqrt{\mu+\tilde\gamma}$.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -481,6 +519,53 @@ If $u_n\to L$, then $2L=\lim(u_{n+1}+u_n)=\tfrac12$, so $L=\tfrac14$, which
 $|u_n-\tfrac14|=\tfrac14$ rules out.
 \end{mproof}
 
+\begin{mproof}{M9}{Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero}
+With $u=\sqrt b$ and $v=\sqrt\mu$, $\sqrt{\mu b}=uv$, so
+$\tilde\gamma^\ast=u^2-2uv=(u-v)^2-\mu=u\,(u-2v)$.
+(i) With $B=b-\tilde\gamma$ and $4\mu b=(2uv)^2$,
+\[
+B>0\ \text{and}\ B^2>(2uv)^2\iff B>2uv\iff\tilde\gamma<u^2-2uv.
+\]
+(ii) For every $\bar c$,
+\[
+Q(\bar c)=(u\bar c-v)^2+(2uv-b+\tilde\gamma)\,\bar c,
+\]
+and $\tilde\gamma>\tilde\gamma^\ast$ makes the coefficient positive, so
+$Q(\bar c)>0$ for $\bar c>0$, and $Q(0)=\mu>0$. By M5, a fixed point
+$\bar c\in[0,1)$ would need $Q(\bar c)=0$.
+(iii) At $\tilde\gamma=\tilde\gamma^\ast$, $b-\tilde\gamma^\ast=2uv$ and
+\[
+Q(\bar c)=u^2\bar c^2-2uv\,\bar c+v^2=(u\bar c-v)^2,
+\]
+so M5 gives $\mathcal{H}(\bar c)-\bar c=(1-\bar c)(u\bar c-v)^2$. With $u>0$,
+$u\bar c=v\iff\bar c=v/u$, and $v/u<1\iff\mu<b$.
+(iv) $u\,(u-2v)>0\iff u>2v\iff b>4\mu$.
+Control. $\sqrt{1/100}=\tfrac1{10}$, so
+$\tilde\gamma^\ast=\tfrac15-\tfrac2{10}=0$.
+\end{mproof}
+
+\begin{mproof}{M10}{Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
+With $w=\sqrt{\mu+\tilde\gamma}\ge v$, by M9,
+\[
+\tilde\gamma<\tilde\gamma^\ast\iff(u-v)^2>v^2+\tilde\gamma=w^2
+\iff u-v>w\iff b=u^2>(v+w)^2=b^\ast,
+\]
+where $u-v<-w$ is ruled out because it gives $u<v-w\le0$.
+Monotonicity. $\tilde\gamma^\ast(b)=(\sqrt b-v)^2-\mu$, and
+$v\le\sqrt{b_1}<\sqrt{b_2}$ gives $(\sqrt{b_1}-v)^2<(\sqrt{b_2}-v)^2$.
+$\delta>0$ gives $s_1\delta<s_2\delta$.
+Figure. At $\mu=\tilde\gamma=\tfrac1{20}$,
+\[
+b^\ast=\tfrac1{20}+\tfrac1{10}+2\sqrt{\tfrac1{20}\cdot\tfrac1{10}}
+=\tfrac3{20}+2\sqrt{\tfrac1{200}},
+\qquad
+\big(\tfrac7{100}\big)^2<\tfrac1{200}<\big(\tfrac3{40}\big)^2,
+\]
+so $\tfrac{29}{100}<b^\ast<\tfrac3{10}$.
+Control. $\tilde\gamma^\ast(\tfrac14)=\tfrac14-2\sqrt{\tfrac14}=-\tfrac34$ and
+$\tilde\gamma^\ast(0)=0$ at $\mu=1$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -509,6 +594,10 @@ statements of M1 to M3, and so is the set of groups in M2 and M3. Rows M5
 and M6 are proved for the canonical $F(\bar c)=(1-\bar c)^2$ only. The general
 $F$ of the predecessor's regularity assumption is not yet covered there.
 Rows M7 and M8 hold for every $F$, which enters them only through $F(\beta_0)$.
+Rows M9 and M10 are for the canonical $F$. M9 shows the merged fixed point is
+a double root of $\mathcal{H}(\bar c)-\bar c$. The slope
+$\mathcal{H}'=1$ there, which makes the merger a saddle-node bifurcation in
+the predecessor's words, is not stated in Lean.
 The composed map itself enters rows M4 to M8 as a definition, so its derivation from
 the engagement decision is not checked (Appendix~\ref{app:scope}). The predecessor manuscript gives class a Beta law on
 $[0,1]$, and the continuous form of M1 is not formalised.
@@ -561,6 +650,11 @@ Tipping point & $c_M$ & The middle fixed point, which separates the two
   basins of M6. \\ \addlinespace
 Integration & $\bar c=1$ & The fixed point at full standing (M4). \\
   \addlinespace
+Mobility threshold & $\tilde\gamma^\ast$ & The mobility below which the
+  trap condition holds (M9). \\ \addlinespace
+Exclusion threshold & $b^\ast$ & The value of $s_g\delta$ above which the
+  trap condition holds, at given $\mu$ and $\tilde\gamma$ (M10). \\
+  \addlinespace
 Frozen prior & $\beta_0$ & The group prior held at its first value, with mean
   standing $\beta_0$, in place of re-learning it each generation. \\
   \addlinespace
@@ -605,6 +699,14 @@ rate is not a row yet. The bounds $b<1-\mu+\tilde\gamma$ and
 $\mu+\tilde\gamma<1$ of M6 limit the cost of exclusion from above. The
 predecessor's ``sufficiently large $\delta$'' is therefore bounded, and the
 first control of M6 shows the map leaves $[0,1]$ when $s_g\delta$ is large.
+From below, the trap needs $s_g\delta>b^\ast$ (M10). The predecessor states
+that a positive mobility threshold exists. Row M9 shows this needs
+$s_g\delta>4\mu$. Its bifurcation figure reports $\delta^\ast\approx0.29$ at
+$\mu=\tilde\gamma=0.05$ and $s_g=1$, and M10 puts $b^\ast$ there between
+$0.29$ and $0.30$. Its salience corollary states that the threshold rises
+with salience without restriction. Row M10 proves it for $s_g\delta\ge\mu$,
+which covers every case where the threshold is non-negative, and its control
+shows it fails below.
 
 \paragraph{The group prior across generations.} Each generation the observer's
 class distribution for a group is re-learned from the group's current
