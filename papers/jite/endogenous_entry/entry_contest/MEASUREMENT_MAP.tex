@@ -32,8 +32,9 @@
 %       and not under a monotone non-affine map (MM10).
 %     Inputs, V. Scale factor of Delta, manuscript P1 (S).
 %     Inputs, mu. sup supp(G)=mu needs r to have upper endpoint 1 (MM8).
-%     Inputs, kappa. Strictly decreasing and divergent at c are manuscript
-%       assumptions (burden-monotonicity; S16).
+%     Inputs, kappa. Strictly decreasing is the manuscript's assumption
+%       (burden-monotonicity, M23, weaker than concavity by M24); divergence
+%       at c is a condition (M25), used by M15 only.
 %     Inputs, F and G. F<=G is manuscript P2 (L).
 %     Inputs, x0 and lambda. Recovery formulas (MM1, MM2).
 %     Outputs, k*. Count invariance, manuscript (L).
@@ -44,7 +45,7 @@
 %     Outputs, P6. With the factor V (MM3); manuscript S9 without it.
 %     Outputs, P7. With the factor V (MM4); manuscript S18-S20 and
 %       entry_index_bounded.
-%     Outputs, P8, P9, P9-gen, endogenous margin, margin condition. Manuscript (L).
+%     Outputs, the directions of k* (M11 to M15, M28). Manuscript (L).
 %     Outputs, band. Manuscript (L).
 %     Outputs, P-MU. With the factor V (MM5); manuscript S10 without it.
 %     Outputs, k*c. Identical across equilibria, manuscript N4 discussion.
@@ -212,9 +213,10 @@ $u$ & Function of wealth, increasing, satisfying burden-monotonicity; a
   attributed to the agent, rather than a quantity in the world. & Not
   observed, being a construct. It rationalises the recorded entry decisions,
   and enters the model only through $\kappa$. \\ \addlinespace
-$\kappa(w)=u(w)-u(w-c)$ & Function on $(c,\infty)$; continuous, strictly
-  decreasing, $\kappa\to\infty$ as $w\downarrow c$; scales with $a$ under the
-  transformation above. & ``The burden of $c$ in utility units'', the entry
+$\kappa(w)=u(w)-u(w-c)$ & Function on $(c,\infty)$; strictly decreasing
+  (burden-monotonicity, M23, which strict concavity implies and which is
+  weaker, M24); scales with $a$ under the transformation above. It diverges
+  as $w\downarrow c$ only under the condition of M25, which M15 alone uses. & ``The burden of $c$ in utility units'', the entry
   cost (utility). ``The sole route by which the wealth distribution affects
   behaviour.'' The modeller's construct, attributed to the agent. It is a
   difference of a utility that represents preferences over lotteries, rather
@@ -277,7 +279,7 @@ $m$ & Integer in $\{0,\dots,Q-1\}$. & The number of other challengers who
   \addlinespace
 $\theta$ & Real number; $\theta=0$ is the model. & Tilt of the law of $s$
   against wealth rank, outside the model's scope, used in the manuscript's Appendix D
-  to show where count invariance fails. & Never observed as a parameter. The
+  to show where count invariance fails (M27). & Never observed as a parameter. The
   independence that $\theta$ relaxes is a direct comparison of recorded
   entrant scores across wealth ranks. \\ \addlinespace
 $w\mapsto w'$; $T$ & A map between wealth profiles; $T$ increasing for a
@@ -423,8 +425,8 @@ Entrants' share of the prize & Real number in $[0,1]$. & M31: the
   estimates $\xi(k^*)$. No construct enters, unlike every quantity built on
   $u$. \\ \addlinespace
 Direction of $k^*$ under a change of profile & Sign of a weak change, rise
-  or fall. & M13 (the linear spread), M13 (pivot-spreads), Proposition
-  (endogenous margin), M12 (margin condition). & Direct comparison of
+  or fall. & M12 (margin condition) and M13 (pivot spreads, the linear
+  spread among them). & Direct comparison of
   recorded $k^*$ under two recorded profiles, with $Q$, $c$, the prize and the
   score technology unchanged. The hypothesis ($w_{(k^*)}$ against $x_0$, or
   the margin condition, which reads $d_{k^*}$ for the rise branch and
