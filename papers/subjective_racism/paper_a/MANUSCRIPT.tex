@@ -1070,24 +1070,17 @@ sections, figures or numbers has no home in this bundle or in
 \path{RETIREMENT.md}.
 \end{enumerate}
 
-\paragraph{What Lean does not carry.} The class space is finite in the Lean
-statements of M1 to M3, and so is the set of groups in M2 and M3. Rows M5
-and M6 are proved for the canonical $F(\bar c)=(1-\bar c)^2$ only, and M12
-gives sufficient conditions for the general $F$.
-Rows M7 and M8 hold for every $F$, which enters them only through $F(\beta_0)$.
-Rows M9 and M10 are for the canonical $F$. M9 shows the merged fixed point is
-a double root of $\mathcal{H}(\bar c)-\bar c$ with slope $\mathcal{H}'=1$,
-the saddle-node condition in the predecessor's words. That the fixed points
-on either side move apart as $\tilde\gamma$ falls below the threshold is in
-M5's closed form and not stated as a row. Row M12 covers a general $F$ with
-sufficient conditions only. Row M16 is a lower bound on the escape time
-with the exponent $-\tfrac12$. The predecessor's asymptotic constant
-$C=\pi/\sqrt{|ab|}$ and the matching upper bound are not stated. An exact region for the general $F$, and the
-count of fixed points under the predecessor's regularity assumption, are not
-stated.
-The composed map itself enters rows M4 to M8 as a definition, so its derivation from
-the engagement decision is not checked (Appendix~\ref{app:scope}). The predecessor manuscript gives class a Beta law on
-$[0,1]$, and the continuous form of M1 is not formalised.
+\paragraph{What Lean does not carry.} The class space and the set of groups
+are finite in M1 to M3, and the continuous class of the predecessor's Beta
+law is not formalised. The exact trap condition, its basins and the two
+thresholds (M5, M6, M9, M10) are for the canonical $F(\bar c)=(1-\bar c)^2$.
+For a general $F$, row M12 gives sufficient conditions only, with no exact
+region and no count of fixed points. That the two interior fixed points move
+apart as mobility falls below the threshold follows from M5's closed form and
+is not a row. The escape time of M16 is bounded below only, with neither the
+predecessor's constant $C=\pi/\sqrt{|ab|}$ nor an upper bound. The composed
+map enters rows M4 to M17 as a definition, so its derivation from the
+engagement decision is not checked (Appendix~\ref{app:scope}).
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. The
 SymPy scripts of the predecessor bundle are not part of this skeleton.
@@ -1236,34 +1229,31 @@ predecessor manuscript. The source has not been read for this skeleton.}
 
 \paragraph{The law of motion.} Rows M4 to M17 take the predecessor's
 composed map, its equation (composed), as the law of motion of a group's
-standing. Its derivation from the engagement decision and the discrimination
-rate is not a row yet. The engagement decision, with the predecessor's
-risk-neutral payoff in squared class distance, its Beta law for class within
-a group and its engagement threshold, lies upstream of $F$, and $F$ is taken
-as given. The rate of a generation is computed from that generation's
-standing, which is what the predecessor's timescale separation provides. The bounds $b<1-\mu+\tilde\gamma$ and
-$\mu+\tilde\gamma<1$ of M6 limit the cost of exclusion from above. The
-predecessor's ``sufficiently large $\delta$'' is therefore bounded, the
-first control of M6 shows the map leaves $[0,1]$ when $s_g\delta$ is large,
-and its third control shows the basin result itself failing above the bound,
-with the orbit of standing $0$ landing on the tipping point.
-From below, the trap needs $s_g\delta>b^\ast$ (M10). The predecessor states
-that a positive mobility threshold exists. Row M9 shows this needs
-$s_g\delta>4\mu$. Its bifurcation figure reports $\delta^\ast\approx0.29$ at
-$\mu=\tilde\gamma=0.05$ and $s_g=1$, and M10 puts $b^\ast$ there between
-$0.29$ and $0.30$. Its salience corollary states that the threshold rises
-with salience without restriction. Row M10 proves it for $s_g\delta\ge\mu$,
-which covers every case where the threshold is non-negative, and its control
-shows it fails below.
+standing, rather than deriving it. The engagement decision that would derive
+it, with the predecessor's risk-neutral payoff in squared class distance, its
+Beta law for class within a group and its engagement threshold, lies upstream
+of $F$, and $F$ is taken as given. The rate of a generation is computed from
+that generation's standing, which is what the predecessor's timescale
+separation provides.
+
+\paragraph{Corrections to the predecessor's propositions.} Four of the
+predecessor's propositions hold only with hypotheses it does not state. Its
+``sufficiently large $\delta$'' for the trap is bounded above as well as
+below, since the basins of M6 need $s_g\delta<1-\mu+\tilde\gamma$, the first
+control of M6 shows the map leaving $[0,1]$ when $s_g\delta$ is large, and
+the third shows the basin result failing above the bound. Its positive
+mobility threshold needs $s_g\delta>4\mu$ (M9), the value of $b^\ast$ at zero
+mobility. Its salience corollary holds for $s_g\delta\ge\mu$ rather than for
+every salience (M10), which covers every case in which the threshold is
+non-negative. Its outsider result needs the bounds of M6 as well as the
+threshold (M11). A fifth proposition, on partial inclusion, does not follow
+from its premises (Appendix~\ref{app:refuted}, R1).
 
 \paragraph{Two groups.} The law of motion of one group does not take any
-other group's standing. The independence of the outsider and the host in M11
-is therefore a property of the map, not a result about how groups interact.
+other group's standing, so the independence of the outsider and the host in
+M11 is a property of the map rather than a result about how groups interact.
 A channel between groups, such as the host's standing entering the
-outsider's discrimination rate, would need a row of its own. The predecessor
-states the outsider result with the threshold alone. Row M11 adds the bounds
-of M6, so both parts hold only for $s_g\delta$ in the band those bounds and
-M10 leave.
+outsider's discrimination rate, would need a row of its own.
 
 \paragraph{The intensity parameter.} The predecessor introduces
 $\rho\in[0,1]$ as a discrimination-intensity or rigidity parameter and
@@ -1274,13 +1264,17 @@ exclusion. Row M13 states the threshold as a rescaling of M10. A reading of
 $\rho$ as a property of belief updating would need a row in which it enters
 through the updating rule, and no such row exists.
 
-\paragraph{The predecessor's numbers.} Its intensity proposition reports
-$\rho^\ast\approx0.31$ ``under base parameters'' that it does not state. At
-the parameters of its composed-map figure, panel (a), M17 puts $\rho^\ast$
-between $0.58$ and $0.60$. Its empirical prediction that raising mobility by
-$0.01$ above the threshold takes about 65 generations names no parameters
-either, and M16 bounds the escape time below by $1/(\sqrt b\sqrt\varepsilon)$,
-which at $\varepsilon=0.01$ is $10/\sqrt b$. Neither number is carried.
+\paragraph{The predecessor's numbers.} Two of the predecessor's numbers are
+confirmed and two are not carried. Its bifurcation figure's
+$\delta^\ast\approx0.29$ at $\mu=\tilde\gamma=0.05$ and $s_g=1$ is confirmed,
+since M10 puts $b^\ast$ there between $0.29$ and $0.30$, and both panels of
+its composed-map figure are confirmed by M17. Its intensity proposition
+reports $\rho^\ast\approx0.31$ ``under base parameters'' that it does not
+state, whereas at the parameters of its composed-map figure, panel (a), M17
+puts $\rho^\ast$ between $0.58$ and $0.60$. Its empirical prediction that
+raising mobility by $0.01$ above the threshold takes about 65 generations
+names no parameters either, and M16 bounds the escape time below by
+$1/(\sqrt b\sqrt\varepsilon)$, which at $\varepsilon=0.01$ is $10/\sqrt b$.
 
 \paragraph{Passing.} Row M14 carries the composition claim of the
 predecessor's passing appendix for a finite population. Row M14 does not carry
@@ -1300,20 +1294,13 @@ uninformed social quality, $S^\ast$ and $S^{\mathrm{rand}}$, that no equation
 of the predecessor defines, so it is not a row. Its partial-inclusion
 proposition is Appendix~\ref{app:refuted}, R1.
 
-\paragraph{The group prior across generations.} Each generation the observer's
-class distribution for a group is re-learned from the group's current
-standing, a choice the author made on 14 October 2026. The reason is that
-this is the model the predecessor manuscript writes down, in its equations
-(prior), (dynamic) and (composed) and its loop figure, where the discrimination
-rate of a generation is computed from that generation's standing. The
-alternative holds the distribution fixed at its first value. Rows M4 to M6
-take the re-learned prior, and rows M7 and M8 take the alternative. Under the
-frozen prior the map has one fixed point (M7), and when the map is increasing
-every standing converges to it (M8). Its location rises with the frozen belief
-$\beta_0$ (M7) and does not depend on the standing the group starts from (M8).
-Under the re-learned prior, a standing above the tipping point converges to
-integration (M6). The control of M8 shows the frozen map need not
-converge once $k\ge1-\mu-\tilde\gamma$.
+\paragraph{The group prior across generations.} Each generation the
+observer's class distribution for a group is re-learned from the group's
+current standing, a choice the author made on 14 October 2026, because this
+is the model the predecessor manuscript writes down in its equations (prior),
+(dynamic) and (composed) and its loop figure. The alternative, a distribution
+frozen at its first value, enters as rows M7 and M8 rather than being set
+aside, and conclusion C7 compares the two.
 
 \section{Refuted conjectures}
 \label{app:refuted}
