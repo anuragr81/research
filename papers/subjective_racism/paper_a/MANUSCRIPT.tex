@@ -112,8 +112,8 @@ in turn moves with how often its members are refused.
   $-\tfrac12$. No upper bound and no constant are stated, and the
   predecessor's figure of about 65 generations is not checked.}
 \krow{K4}{More salient markers demand more mobility to escape.}{M10}{Holds
-  for $s_g\delta\ge\mu$, which covers every case in which the threshold is
-  non-negative. Below that the threshold falls in salience (M10), harmlessly,
+  for $s_g\delta\ge\mu$, and so wherever the threshold is positive (M10).
+  Below $s_g\delta=\mu$ the threshold falls in salience (M10), harmlessly,
   since it is then negative.}
 \krow{K5}{A belief about the group that never moves gives no trap and no
   tipping point, so the trap needs the belief to follow the group's
@@ -262,7 +262,7 @@ that check it.}\\
   {Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero, Bifurcation.H_hasDerivAt, Bifurcation.slope_one_at_threshold, Bifurcation.control_slope_off_threshold, Bifurcation.gammaStar_example}
 \mrow{M10}{With mobility non-negative, the trap condition holds exactly when
   $s_g\delta$ exceeds the exclusion threshold $b^\ast$. The mobility
-  threshold rises with salience wherever it is non-negative. At the
+  threshold rises with salience wherever it is positive. At the
   predecessor's figure parameters, $b^\ast$ lies between $0.29$ and $0.30$.}
   {$\mu>0$, $\tilde\gamma\ge0$, $b>0$,
   $b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$. Then
@@ -270,10 +270,13 @@ that check it.}\\
   $\mu\le b_1<b_2\Rightarrow\tilde\gamma^\ast(b_1)<\tilde\gamma^\ast(b_2)$.
   If $\delta>0$, $\mu\le s_1\delta$ and $s_1<s_2$, then
   $\tilde\gamma^\ast(s_1\delta)<\tilde\gamma^\ast(s_2\delta)$.
+  $\tilde\gamma^\ast(b_1)>0$ and $b_1<b_2$ give
+  $\tilde\gamma^\ast(b_1)<\tilde\gamma^\ast(b_2)$. At $\tilde\gamma=0$,
+  $b^\ast=4\mu$.
   $\tfrac{29}{100}<b^\ast<\tfrac3{10}$ at $\mu=\tilde\gamma=\tfrac1{20}$.
   It fails below $b=\mu$, since at $\mu=1$,
   $\tilde\gamma^\ast(\tfrac14)=-\tfrac34<0=\tilde\gamma^\ast(0)$.}
-  {Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
+  {Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.gammaStar_rises_where_positive, Bifurcation.bStar_zero_mobility, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
 \mrow{M11}{An outsider group that enters below its tipping point, with
   mobility below its threshold, converges to its own closure trap whatever
   the host group does, and the host's path is its own. Above the threshold,
@@ -345,7 +348,8 @@ that check it.}\\
   which is exactly when the outsider's standing is below the admission
   threshold. The host tips exactly when the outsider fraction exceeds the
   critical fraction, which falls in the spillover sensitivity while the host
-  is above its tipping point.}
+  is above its tipping point. The admission threshold can lie on either side
+  of the tipping point.}
   {$\mathrm{marg}=W+n(1-\alpha)(\bar c_O-\bar c_I)/|A|$, $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
   $c_E=\bar c_I-W|A|/(n(1-\alpha))$.
   (i) $|A|>0$. $\mathrm{marg}<0\iff W|A|<n(1-\alpha)(\bar c_I-\bar c_O)$, and
@@ -356,9 +360,11 @@ that check it.}\\
   =(\bar c_I-c_M)/(\theta(\bar c_I-c_E))$.
   (iv) $\bar c_I>c_M$, $\bar c_I>c_E$, $0<\theta_1<\theta_2$ give
   $\eta_{\mathrm{crit}}(\theta_2)<\eta_{\mathrm{crit}}(\theta_1)$.
+  (v) With $\bar c_I=1$, $n(1-\alpha)>0$ and $|A|>0$, every $c_M<1$ has a
+  $W>0$ with $c_E>c_M$ and a $W>0$ with $c_E<c_M$.
   (ii) fails with $\mathrm{marg}>0$, where $\Pi(1)>\Pi(0)$. (iv) fails with
   $\bar c_I<c_M$, where $\eta_{\mathrm{crit}}$ rises in $\theta$.}
-  {Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign}
+  {Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign, Platform.tokenism_not_implied}
 \mrow{M16}{Just above the mobility threshold, the generations needed to cross
   the window about the merged root grow at least as the inverse square root
   of the excess mobility.}
@@ -440,24 +446,23 @@ that check it.}\\
   generations.}{The weights applied to the test information and the skin
   color information are inversely related to the variances of the respective
   disturbance terms corresponding to them.}{660}{M1, C19}
-\lrow{L5}{Arrow1973}{\unv{Read in the 1971 Princeton working-paper version,
-  not the 1973 chapter, and cited by its PDF page.} Beliefs about a group
-  confirm themselves when workers' unobserved investment responds to the
-  wage the beliefs set, so the symmetric equilibrium can be unstable. The
-  trap is the analogue. The parallel ends at existence, which Arrow infers
-  from instability while M5 exhibits it in closed form.}{a result which
-  strongly suggests, though [...] that there are equilibria other than the
-  symmetric, non-discriminatory, one.}{32}{M5, M6, C14}
-\lrow{L6}{Jeffrey1983}{\unv{Read in the 1983 second edition, chapter 11 and
-  the preface, and cited by PDF page. The preface says the rest of the book
-  is as in the 1965 first edition except for minor corrections.} Jeffrey's
+\lrow{L5}{Arrow1971}{Beliefs about a group confirm themselves when
+  workers' unobserved investment responds to the wage the beliefs set, so
+  the symmetric equilibrium can be unstable. The trap is the analogue. The
+  parallel ends at existence, which Arrow infers from instability while M5
+  exhibits it in closed form. Cited by PDF page of the working paper.}{a
+  result which strongly suggests, though [...] that there are equilibria
+  other than the symmetric, non-discriminatory, one.}{32}{M5, M6, C14}
+\lrow{L6}{Jeffrey1983}{Jeffrey's
   rule mixes the probabilities conditional on the atoms of a partition by
   new weights for the atoms, and holds exactly when those conditionals are
   unchanged. M2 and M3 show the Bayesian posterior on class under group
-  sufficiency is such a mixture.}{it did not change the conditional degrees
+  sufficiency is such a mixture. Cited by PDF page of the 1983 edition,
+  whose preface says the rest of the book is as in the 1965 first edition
+  except for minor corrections.}{it did not change the conditional degrees
   of belief in any propositions on the evidence B or on the evidence}{180}{M2,
   M3, C1}
-\lrow{L7}{Jeffrey1983}{\unv{Edition as for L6.} Two applications of the rule
+\lrow{L7}{Jeffrey1983}{Two applications of the rule
   need not commute, which \path{Jeffrey1983.control_not_commutative} exhibits
   on four outcomes. The model reads a marker once, so the order effect lies
   outside it rather than being ruled out by it.}{Nor need it always be the
@@ -466,22 +471,22 @@ that check it.}\\
 \end{longtable}
 \normalsize
 
-Coate and Loury (1993), Phelps (1972) and Arrow (1973), the last in its 1971
-working-paper version, were read in full, and Jeffrey's chapter on probability
-kinematics in the 1983 edition (\path{lit/coate_loury_1993/},
-\path{lit/phelps_1972/}, \path{lit/arrow_1973/}, \path{lit/jeffrey_1983/}).
+Coate and Loury (1993), Phelps (1972) and Arrow's 1971 working paper were
+read in full, and Jeffrey's chapter on probability kinematics in the 1983
+edition (\path{lit/coate_loury_1993/}, \path{lit/phelps_1972/},
+\path{lit/arrow_1971/}, \path{lit/jeffrey_1983/}).
 Loury (2002), the platform-discrimination studies the
 predecessor cites, the selection--mutation literature behind the law of
 motion, Jeffrey's first edition of 1965 and Arrow's published chapter of 1973
-are named in Table~\ref{tab:pending} and in L5 and L6 but not read, and every
-claim made about them is unverified.
+are not read, and no row rests on them.
 
 \section{Conclusions}
 
-Table~\ref{tab:conclusions} holds the conclusions that rest on model rows
-and on the papers read in full. Table~\ref{tab:pending} holds every
-claim that a result is new, and every claim about another paper, each naming
-what it waits on.
+Table~\ref{tab:conclusions} holds the conclusions, each resting only on
+Lean results of the model table and on quotations from papers read.
+Table~\ref{tab:pending} holds claims that are not conclusions, because they
+wait on a source not yet read, and each names that source. No headline and
+no conclusion rests on them.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -501,26 +506,30 @@ what it waits on.
   class only through the group it signals, and a second rule for soft
   evidence produces no posterior that Bayes' rule does not, within one
   reading of a marker.}{M1, M2, M3, L6, L7}
-\crow{C2}{When the group prior follows the group's standing, a low standing
-  can reproduce itself, and every group that starts below the tipping point
-  converges to that standing. The trap exists exactly below the mobility
-  threshold, and for
-  salience times the cost of exclusion in a band, above $b^\ast$ and below
-  $1-\mu+\tilde\gamma$.}{M5, M6, M9, M10}
+\crow{C2}{When the group prior follows the group's standing, the canonical
+  map has a low fixed point and a tipping point exactly when mobility is
+  below the mobility threshold, equivalently when salience times the cost of
+  exclusion exceeds $b^\ast$. Every group that starts below the tipping point
+  then converges to the low fixed point when $s_g\delta<1-\mu+\tilde\gamma$
+  and $\mu+\tilde\gamma<1$, and above the first bound this basin result can
+  fail.}{M5, M6, M9, M10}
 \crow{C3}{The trap is not an artefact of the canonical discrimination-rate
   function. For every continuous $F$ with $F(1)=F'(1)=0$, a standing at which
   the map dips below the diagonal gives a fixed point on each side.}{M12}
-\crow{C4}{Above the mobility threshold every standing converges to
-  integration, and the threshold is positive only when $b>4\mu$.}{M9, M11}
+\crow{C4}{Above the mobility threshold integration is the only fixed point
+  in $[0,1]$, every standing converges to it under the bounds of M6, and the
+  threshold is positive only when $b>4\mu$.}{M9, M11}
 \crow{C5}{Salience raises the mobility threshold wherever the threshold is
-  non-negative.}{M10}
-\crow{C6}{Near the threshold escape is slow. Crossing the window about the
-  merged root takes at least $1/(\sqrt b\sqrt\varepsilon)$
-  generations.}{M9, M16}
-\crow{C7}{A belief frozen at its first value gives one long-run standing,
-  set by the belief and not by the starting standing, so raising a group's
-  standing without moving the belief has no lasting effect. The trap needs a
-  belief that follows standing.}{M7, M8}
+  positive.}{M10}
+\crow{C6}{Near the threshold escape is slow. When the excess mobility
+  $\varepsilon$ satisfies the window conditions of M16, crossing the window
+  about the merged root from its lower edge takes at least
+  $1/(\sqrt b\sqrt\varepsilon)$ generations.}{M9, M16}
+\crow{C7}{A belief frozen at its first value gives exactly one fixed point
+  in $[0,1]$, so no trap and no tipping point. When the frozen rate is below
+  $1-\mu-\tilde\gamma$, every standing converges to that fixed point, which
+  is set by the belief and not by the starting standing, so raising a group's
+  standing without moving the belief has no lasting effect.}{M7, M8}
 \crow{C8}{The outsider's trap is its own and leaves the host's path alone,
   because no group's standing enters another group's law of
   motion.}{M11}
@@ -534,23 +543,30 @@ what it waits on.
   the outsider group below an admission threshold, and admitting it can tip
   a host group near its own tipping point. The admission threshold can lie
   on either side of the tipping point.}{M15}
-\crow{C13}{The closure trap is a self-confirming low equilibrium in the sense
-  of Coate and Loury's Definition 1, with the belief about the group correct
-  at the fixed point. The closure trap is not their patronizing equilibrium,
-  which needs an
-  equal-assignment constraint this model does not have, and unlike theirs the
-  zero standing is never an equilibrium.}{M4, M5, M6, L1, L2}
-\crow{C18}{A push that leaves a group below the tipping point returns it to
-  the trap, while mobility above the threshold removes the trap, as Coate and
-  Loury find for marginal and large subsidies to workers.}{M6, M9, M11, L3}
+\crow{C13}{The closure trap is the analogue of Coate and Loury's
+  self-confirming equilibrium of Definition 1, a low fixed point of a
+  one-dimensional map, and not of their patronizing equilibrium, which needs
+  an equal-assignment constraint this model does not have. Unlike theirs, the
+  zero standing is never a fixed point.}{M4, M5, M6, L1, L2}
+\crow{C18}{Under the bounds of M6, a push that leaves a group below the
+  tipping point returns it to the trap, while mobility above the threshold
+  removes the trap, as Coate and Loury find for marginal and large subsidies
+  to workers.}{M6, M9, M11, L3}
 \crow{C19}{Phelps's statistical discrimination combines a group prior with
   evidence about the individual in one static decision, whereas here the
   marker is evidence about the group alone and the standing moves across
   generations.}{M1, L4}
+\crow{C14}{Neither Phelps nor Arrow's 1971 working paper has a benchmark
+  in which counter-examples erode a stereotype. Phelps names persistence
+  without modelling it, and Arrow leaves open how employers' knowledge
+  modifies their estimates. So the model's zero-exclusion case is not such a
+  benchmark, and Arrow's beliefs that confirm themselves through workers'
+  investment are the analogue of the trap rather than of its
+  absence.}{M5, M6, M9, L4, L5}
 \end{longtable}
 
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
-\caption{Pending conclusions, each naming what it waits on.}
+\caption{Claims not yet verified, each naming what it waits on.}
 \label{tab:pending}\\
 \toprule
 \textbf{ID} & \textbf{Conclusion} & \textbf{Rows} \\
@@ -570,13 +586,6 @@ what it waits on.
   intergenerational maps.}}{M5, M9, M10, L1}
 \crow{C17}{The trap works through the contact channel rather than the
   contracting channel. \pend{Loury (2002), read in full.}}{M5, M6}
-\crow{C14}{Neither Phelps nor Arrow, in the versions read, has a benchmark
-  in which counter-examples erode a stereotype, so the model's
-  zero-exclusion case is not such a benchmark. Arrow's beliefs that confirm
-  themselves through workers' investment are the analogue of the trap
-  rather than of its absence. \pend{Arrow (1973), the published chapter, to
-  confirm that the 1971 working paper read here matches it.}}{M5, M6, M9,
-  L4, L5}
 \crow{C15}{Platform discrimination rises with the introduction of photographs
   and real names, as a rise in salience predicts. \pend{The
   platform-discrimination studies the predecessor cites, read in full, and a
@@ -879,7 +888,7 @@ and $\bar c=\tfrac14$,
 $\mathcal{H}'=1-\tfrac1{20}+\tfrac1{10}-\tfrac45\cdot\tfrac9{16}+\tfrac85\cdot\tfrac3{16}-\tfrac1{20}=\tfrac{17}{20}$.
 \end{mproof}
 
-\begin{mproof}{M10}{Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
+\begin{mproof}{M10}{Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.gammaStar_rises_where_positive, Bifurcation.bStar_zero_mobility, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
 With $w=\sqrt{\mu+\tilde\gamma}\ge v$, by M9,
 \[
 \tilde\gamma<\tilde\gamma^\ast\iff(u-v)^2>v^2+\tilde\gamma=w^2
@@ -888,7 +897,9 @@ With $w=\sqrt{\mu+\tilde\gamma}\ge v$, by M9,
 where $u-v<-w$ is ruled out because it gives $u<v-w\le0$.
 Monotonicity. $\tilde\gamma^\ast(b)=(\sqrt b-v)^2-\mu$, and
 $v\le\sqrt{b_1}<\sqrt{b_2}$ gives $(\sqrt{b_1}-v)^2<(\sqrt{b_2}-v)^2$.
-$\delta>0$ gives $s_1\delta<s_2\delta$.
+$\delta>0$ gives $s_1\delta<s_2\delta$. A positive threshold has $b_1>4\mu\ge\mu$
+by M9(iv), so the monotonicity applies. At $\tilde\gamma=0$,
+$b^\ast=(2\sqrt\mu)^2=4\mu$.
 Figure. At $\mu=\tilde\gamma=\tfrac1{20}$,
 \[
 b^\ast=\tfrac1{20}+\tfrac1{10}+2\sqrt{\tfrac1{20}\cdot\tfrac1{10}}
@@ -981,7 +992,7 @@ Control. $V=\{0,1\}$, $c=(0,1)$, $P=\{0\}$. $\bar c(V\setminus P)=1$ and
 $\bar c(V)=\tfrac12$.
 \end{mproof}
 
-\begin{mproof}{M15}{Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign}
+\begin{mproof}{M15}{Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos, Platform.tip_iff, Platform.etaCrit_anti, Platform.control_etaCrit_sign, Platform.tokenism_not_implied}
 (i) With $|A|>0$,
 \[
 \mathrm{marg}=\frac{W|A|-n(1-\alpha)(\bar c_I-\bar c_O)}{|A|}<0
@@ -1000,6 +1011,9 @@ $\bar c(V)=\tfrac12$.
 Controls. $\Pi(1)-\Pi(0)=\mathrm{marg}$. With $\bar c_I-c_M<0$,
 $1/(\theta_2(\bar c_I-c_E))<1/(\theta_1(\bar c_I-c_E))$ multiplied by a
 negative number reverses.
+(v) With $\bar c_I=1$ and $k=n(1-\alpha)$, $c_E=1-W|A|/k$. The choice
+$W=(1-c_M)k/(2|A|)$ gives $c_E=1-\tfrac12(1-c_M)>c_M$, and
+$W=2(1-c_M)k/|A|$ gives $c_E=1-2(1-c_M)<c_M$.
 \end{mproof}
 
 \begin{mproof}{M16}{Slowing.Q_threshold_plus, Slowing.step_bounds, Slowing.slowing, Slowing.control_start_matters, Slowing.bound_at_example}
@@ -1078,7 +1092,7 @@ records what they printed.
 \endhead
 \bottomrule
 \endfoot
-\path{Arrow1973} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Arrow1973.lean}{\path{lean/mathlib/Arrow1973.lean}} & L5 \\
+\path{Arrow1971} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Arrow1971.lean}{\path{lean/mathlib/Arrow1971.lean}} & L5 \\
 \path{Bifurcation} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Bifurcation.lean}{\path{lean/mathlib/Bifurcation.lean}} & M9, M10 \\
 \path{ClassPosterior} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/ClassPosterior.lean}{\path{lean/mathlib/ClassPosterior.lean}} & M2, M3 \\
 \path{ClosureMap} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/ClosureMap.lean}{\path{lean/mathlib/ClosureMap.lean}} & M4, M5, M6 \\
@@ -1295,9 +1309,8 @@ below, since the basins of M6 need $s_g\delta<1-\mu+\tilde\gamma$, the first
 control of M6 shows the map leaving $[0,1]$ when $s_g\delta$ is large, and
 the third shows the basin result failing above the bound. Its positive
 mobility threshold needs $s_g\delta>4\mu$ (M9), the value of $b^\ast$ at zero
-mobility. Its salience corollary holds for $s_g\delta\ge\mu$ rather than for
-every salience (M10), which covers every case in which the threshold is
-non-negative. Its outsider result needs the bounds of M6 as well as the
+mobility (M10). Its salience corollary holds for $s_g\delta\ge\mu$ rather than
+for every salience, and so wherever the threshold is positive (M10). Its outsider result needs the bounds of M6 as well as the
 threshold (M11). A fifth proposition, on partial inclusion, does not follow
 from its premises (Appendix~\ref{app:refuted}, R1).
 

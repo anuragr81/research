@@ -6,7 +6,7 @@ employer's probabilities that a W or B worker is qualified, `M` is `MP_S`,
 the marginal product of a qualified skilled worker, `wW` and `wB` the skilled
 wages, and `r` the required return on the personnel investment. -/
 
-namespace Arrow1973
+namespace Arrow1971
 
 /-- Eqs. (13) and (14). Equal required returns give
 `w_W = q w_B + (1 − q) MP_S` with `q = p_B/p_W`. -/
@@ -60,4 +60,4 @@ theorem control_no_personnel_cost {E p v : ℝ} :
     (E * p / v) * 0 / p ^ 2 = 0 := by
   simp
 
-end Arrow1973
+end Arrow1971

@@ -183,6 +183,20 @@ theorem gammaStar_strictMono_salience {μ δ s₁ s₂ : ℝ} (hμ : 0 ≤ μ) (
     gammaStar μ (s₁ * δ) < gammaStar μ (s₂ * δ) :=
   gammaStar_strictMono hμ h1 (mul_lt_mul_of_pos_right h12 hδ)
 
+/-- Row M10. Wherever the threshold is positive it rises with `b`, since a
+positive threshold needs `b > 4 μ ≥ μ`. -/
+theorem gammaStar_rises_where_positive {μ b₁ b₂ : ℝ} (hμ : 0 < μ) (hb : 0 < b₁)
+    (hpos : 0 < gammaStar μ b₁) (h12 : b₁ < b₂) :
+    gammaStar μ b₁ < gammaStar μ b₂ := by
+  have h4 := (gammaStar_pos_iff hμ hb).1 hpos
+  exact gammaStar_strictMono hμ.le (by linarith) h12
+
+/-- At zero mobility the exclusion threshold is `4 μ`. -/
+theorem bStar_zero_mobility {μ : ℝ} (hμ : 0 ≤ μ) : bStar μ 0 = 4 * μ := by
+  unfold bStar
+  rw [add_zero, ← two_mul, mul_pow, Real.sq_sqrt hμ]
+  ring
+
 /-- The predecessor's bifurcation figure, `μ = γ = 1/20`, `s = 1`, reports
 `δ* ≈ 0.29`. In closed form `0.29 < b* < 0.30`. -/
 theorem bStar_at_figure : 29 / 100 < bStar (1 / 20) (1 / 20) ∧ bStar (1 / 20) (1 / 20) < 3 / 10 := by

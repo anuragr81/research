@@ -1,25 +1,28 @@
-# Arrow (1973), reconstruction
+# Arrow (1971), reconstruction
 
-Cited as Kenneth J. Arrow, "The Theory of Discrimination", in O. Ashenfelter
-and A. Rees (eds.), *Discrimination in Labor Markets*, Princeton University
-Press, 1973, pp. 3–33.
+Kenneth J. Arrow, "The Theory of Discrimination", Industrial Relations
+Section Working Paper No. 30A, Princeton University, presented at the
+conference "Discrimination in Labor Markets", 7–8 October 1971. Cited as
+`Arrow1971`. It is the conference version of the chapter published in O.
+Ashenfelter and A. Rees (eds.), *Discrimination in Labor Markets*, Princeton
+University Press, 1973, pp. 3–33, which is not read.
 
 ## Source read
 
-- **Not the cited version.** The Drive file `Arrow_1973_Discrimination and
+- **The version read is the version cited.** The Drive file `Arrow_1973_Discrimination and
   Prejudice.pdf` (Drive id `16A4PTSWmYyzZ3ncLofKSr52_SeUi2Q8-`, 2,473,233
   bytes, folder `temp`) is Princeton Industrial Relations Section Working
   Paper No. 30A, "The Theory of Discrimination", presented at the conference
-  "Discrimination in Labor Markets", 7–8 October 1971. The 1973 chapter is
-  the published version of that conference paper. It has not been read, so
-  every claim here is about the working paper (AR-D1).
+  "Discrimination in Labor Markets", 7–8 October 1971. The record
+  cites the working paper, `Arrow1971`, and every claim here is about it.
+  The published chapter of 1973 is not read (AR-D1).
 - 37 PDF pages, a scan without a text layer. Cached at
-  `~/.cache/paper_a/arrow_1973.pdf`, sha256 `5fb8d80d…0473`.
+  `~/.cache/paper_a/arrow_1971.pdf`, sha256 `5fb8d80d…0473`.
 - Read in full from page images on 15 October 2026 [P], all 37 pages at
   100 dpi and Section 4 (PDF pages 27 to 33) again at 130 dpi. The images
   are pinned in `NOTES.md`.
 - OCR by `lit/ocr_pages.py` in single-column mode, cached at
-  `~/.cache/paper_a/arrow_1973.txt`, sha256 `83c6fc44…889f`. The OCR drops
+  `~/.cache/paper_a/arrow_1971.txt`, sha256 `83c6fc44…889f`. The OCR drops
   some lines (AR-D2).
 - Pages are cited as PDF pages, since the working paper numbers its pages
   `-2-` to `-31-` with an unnumbered figure page and restarts at the

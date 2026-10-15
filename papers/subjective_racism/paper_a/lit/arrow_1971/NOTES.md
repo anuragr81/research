@@ -1,4 +1,4 @@
-# Arrow (1973), notes
+# Arrow (1971), notes
 
 ## What was verified
 
@@ -8,7 +8,8 @@
 - Eqs. (13) and (14) and our derivation of the difference mode are Lean
   theorems in the paper's notation (LC-4).
 - Our reading is consistent with the working paper on these points. The
-  published chapter is not read.
+  published chapter of 1973 is not read, and the record cites the working
+  paper.
 
 ## The parallel with Paper A, and where it ends
 

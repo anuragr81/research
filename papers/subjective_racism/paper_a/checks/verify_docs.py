@@ -69,6 +69,40 @@ check("D2b every Lean file is cited by a row, R1, a literature record or the mea
 fake = tex.replace(r"\mrow{M1}{", r"\mrow{M99}{", 1)
 check("D2-control a renamed row makes the table stale", current(fake) != table(fake)[0])
 
+print("=" * 72)
+print("D3  CONCLUSIONS STAND ON VERIFIED GROUND")
+print("=" * 72)
+
+
+def split_tables(text):
+    text = re.sub(r"(?<!\\)%.*", "", text)
+    i = text.find(r"\label{tab:conclusions}")
+    j = text.find(r"\label{tab:pending}")
+    k = text.find(r"\end{longtable}", j) if j >= 0 else -1
+    if min(i, j, k) < 0:
+        return None, None
+    return text[i:j], text[j:k]
+
+
+def crows(block):
+    return re.findall(r"\\crow\{(C\d+)\}\{((?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*)\}", block)
+
+
+t4, t5 = split_tables(tex)
+if t4 is None:
+    check("D3 the two conclusion tables are found", False)
+else:
+    marked = [r for r, body in crows(t4) if "\\pend{" in body or "\\unv{" in body]
+    unnamed = [r for r, body in crows(t5) if "\\pend{" not in body]
+    print(f"      Table 4 conclusions: {len(crows(t4))}; Table 5 claims: {len(crows(t5))}")
+    check("D3a no conclusion in Table 4 carries a pending or unverified mark", not marked, f"{marked}")
+    check("D3b every claim in Table 5 names what it waits on", not unnamed, f"{unnamed}")
+    sample = (r"\label{tab:conclusions} \crow{C1}{x \pend{a paper}}{M1} "
+              r"\label{tab:pending} \crow{C2}{y}{M1} \end{longtable}")
+    s4, s5 = split_tables(sample)
+    check("D3-control a pending mark in Table 4 and an unnamed claim in Table 5 are both caught",
+          any("\\pend{" in b for _, b in crows(s4)) and any("\\pend{" not in b for _, b in crows(s5)))
+
 nf = sum(1 for _, ok in results if not ok)
 print("=" * 72)
 print(f"DOCS SUMMARY: {len(results)} checks, {nf} failures")
