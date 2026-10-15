@@ -20,7 +20,7 @@ has been established so far, and go claim by claim.
 | 7. Novelty reading | [~] Coate and Loury (1993) [F], Phelps (1972) [P], Arrow (1971 version) [P] and Jeffrey (1983, ch. 11) [P] read 15 Oct. Waiting on Loury (2002), platform studies, the selection–mutation literature and the 1973 Arrow chapter |
 | 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C15 pending (C16 removed 15 Oct at the author's request), K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
-| 10. Readability rounds | [~] Round 1, 15 Oct, against `notes/writing_discipline.md`. Appendix D split to one job per paragraph (the predecessor's corrections gathered in one paragraph, the D1 paragraph no longer restating M7 and M8), "What Lean does not carry" limited to what it does not carry, pronouns and a colon fixed. Open for the author: the coined names exclusion pressure, frozen map, merged root, window and escape time (rule 6) |
+| 10. Readability rounds | [~] Round 1, 15 Oct, against `notes/writing_discipline.md`. Appendix D split to one job per paragraph (the predecessor's corrections gathered in one paragraph, the D1 paragraph no longer restating M7 and M8), "What Lean does not carry" limited to what it does not carry, pronouns and a colon fixed. The coined names exclusion pressure, frozen map, merged root, window and escape time were accepted by the author on 15 Oct (rule 6) |
 | 11. Referee comments | [ ] not applicable unless the paper has reports |
 
 ## Claim queue
