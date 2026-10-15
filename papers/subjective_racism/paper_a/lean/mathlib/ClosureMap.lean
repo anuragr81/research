@@ -385,4 +385,29 @@ theorem control_leaves_unit : H (1 / 20) 0 3 (1 / 5) < 0 := by
 theorem control_not_monotone : H (1 / 20) 0 1 (1 / 100) < H (1 / 20) 0 1 0 := by
   norm_num [H]
 
+/-- Control for M6 with teeth. At `μ = 3/5`, `γ = 0`, `b = 5/2` the trap
+condition holds, with fixed points `2/5` and `3/5`, and the bound
+`b < 1 − μ + γ` fails. The orbit of `0` lands on the tipping point `3/5` in
+one step and stays there, so it does not converge to `2/5`. -/
+theorem control_basin_fails :
+    (0 < (2 / 5 : ℝ) ∧ (2 / 5 : ℝ) < 3 / 5 ∧ (3 / 5 : ℝ) < 1 ∧
+      H (3 / 5) 0 (5 / 2) (2 / 5) = 2 / 5 ∧ H (3 / 5) 0 (5 / 2) (3 / 5) = 3 / 5) ∧
+    ¬ ((5 / 2 : ℝ) < 1 - 3 / 5 + 0) ∧
+    ¬ Tendsto (fun n => (H (3 / 5) 0 (5 / 2))^[n] 0) atTop (𝓝 (2 / 5)) := by
+  refine ⟨by norm_num [H], by norm_num, ?_⟩
+  intro hL
+  have hconst : ∀ n, (H (3 / 5) 0 (5 / 2))^[n + 1] 0 = 3 / 5 := by
+    intro n
+    induction n with
+    | zero => norm_num [H]
+    | succ n ih =>
+      rw [Function.iterate_succ_apply', ih]
+      norm_num [H]
+  have hM : Tendsto (fun n => (H (3 / 5) 0 (5 / 2))^[n] 0) atTop (𝓝 (3 / 5)) :=
+    tendsto_atTop_of_eventually_const (i₀ := 1) fun n hn => by
+      obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le' hn
+      exact hconst k
+  have := tendsto_nhds_unique hL hM
+  norm_num at this
+
 end ClosureMap

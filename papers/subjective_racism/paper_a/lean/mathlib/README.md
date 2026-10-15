@@ -47,6 +47,7 @@ Every file here is a build root in `lakefile.toml` and is audited by
 | `basins` | M6. Under those bounds, orbits from `[0, c₂)` converge to `c₁` and orbits from `(c₂, 1]` converge to 1 |
 | `basins_hypotheses_at_figure` | The bounds hold at `(1/20, 1/10, 1/2)` |
 | `control_leaves_unit`, `control_not_monotone` | At `(1/20, 0, 3)`, `H (1/5) < 0`. At `(1/20, 0, 1)`, `H (1/100) < H 0` |
+| `control_basin_fails` | At `(3/5, 0, 5/2)` the trap condition holds with fixed points `2/5` and `3/5`, the bound `b < 1 − μ + γ` fails, and the orbit of 0 converges to `3/5`, not `2/5` |
 
 ## FrozenMap.lean, rows M7 and M8
 
@@ -86,6 +87,8 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `gammaStar_strictMono`, `gammaStar_strictMono_salience` | M10. `γ*` rises with `b` from `b = μ` on, and so with `s` at fixed `δ > 0` |
 | `bStar_at_figure` | `0.29 < b* < 0.30` at `μ = γ = 1/20` |
 | `control_not_mono_below_mu` | At `μ = 1`, `γ*(1/4) = −3/4 < 0 = γ*(0)` |
+| `H_hasDerivAt`, `slope_one_at_threshold` | The derivative of `H`, and `H' = 1` at `√μ / √b` when `γ = γ*` |
+| `control_slope_off_threshold`, `gammaStar_example` | At `(1/20, 1/10, 4/5)` the slope at `1/4` is `17/20`, while `γ*(1/20, 4/5) = 2/5` |
 
 ## Outsider.lean, row M11
 
@@ -98,3 +101,13 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `integrates_above` | M11 (ii). Above `γ*` and under the same bounds, every orbit from `[0, 1]` converges to 1 |
 | `trapped_hypotheses_example`, `integrates_hypotheses_example` | The hypotheses of each part hold at `(1/20, 1/10, 1/2)` and `(1/20, 1/10, 1/5)` |
 | `control_threshold_needed` | At `(1/20, 1/10, 1/2)` the orbit of 0 does not converge to 1 |
+
+## GeneralF.lean, row M12
+
+| Theorem | Content |
+|---|---|
+| `Hf_sub_self` | `Hf c − c = (1 − c)(μ + γ c) − s δ c F c` |
+| `rise_near_one` | With `F 1 = 0`, `F' 1 = 0`, `μ > 0`, `γ ≥ 0`, `s δ ≥ 0`, the map is above the diagonal at some `d` between any `c ∈ [0, 1)` and 1 |
+| `two_fixed_of_dip` | M12. `F` continuous on `[0, 1]`, a dip at `c` and a rise at `d > c` give fixed points in `(0, c)` and `(c, d)` |
+| `dip_of_trap` | For the canonical map, the midpoint of two interior fixed points is a dip |
+| `control_dip_needed` | `F ≡ 0` puts the map above the diagonal on `[0, 1)` |

@@ -169,8 +169,11 @@ that check it.}\\
   $\bar c^0\in(c_M,1]\Rightarrow\mathcal{H}^n(\bar c^0)\to1$.
   Both bounds hold at $(\tfrac1{20},\tfrac1{10},\tfrac12)$. Neither is
   automatic. At $(\tfrac1{20},0,3)$, $\mathcal{H}(\tfrac15)<0$, and at
-  $(\tfrac1{20},0,1)$, $\mathcal{H}(\tfrac1{100})<\mathcal{H}(0)$.}
-  {ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone}
+  $(\tfrac1{20},0,1)$, $\mathcal{H}(\tfrac1{100})<\mathcal{H}(0)$.
+  The conclusion fails without $b<1-\mu+\tilde\gamma$. At
+  $(\tfrac35,0,\tfrac52)$ the trap condition holds with $c_L=\tfrac25$ and
+  $c_M=\tfrac35$, and $\mathcal{H}^n(0)\to\tfrac35$, not $\tfrac25$.}
+  {ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
 \mrow{M7}{With the group prior frozen at its first value, the map has exactly
   one fixed point in $[0,1]$. A higher frozen discrimination rate gives a lower
   fixed point, so a higher frozen belief about the group gives a higher one.}
@@ -209,11 +212,15 @@ that check it.}\\
   (iii) At $\tilde\gamma=\tilde\gamma^\ast$,
   $\mathcal{H}(\bar c)-\bar c=(1-\bar c)(\sqrt b\,\bar c-\sqrt\mu)^2$, so
   $\mathcal{H}(\bar c)=\bar c\iff\bar c\in\{\sqrt\mu/\sqrt b,\,1\}$, and
-  $0<\sqrt\mu/\sqrt b<1$ when $\mu<b$.
+  $0<\sqrt\mu/\sqrt b<1$ when $\mu<b$. The slope there is
+  $\mathcal{H}'(\sqrt\mu/\sqrt b)=1$.
   (iv) $\tilde\gamma^\ast>0\iff b>4\mu$.
+  The slope is 1 only at the threshold. At $(\mu,b)=(\tfrac1{20},\tfrac45)$,
+  $\tilde\gamma^\ast=\tfrac25$ and $\sqrt\mu/\sqrt b=\tfrac14$, and under
+  $\tilde\gamma=\tfrac1{10}$ the slope at $\tfrac14$ is $\tfrac{17}{20}$.
   A positive threshold fails to exist without $b>4\mu$, since
   $(\mu,b)=(\tfrac1{20},\tfrac15)$ gives $\tilde\gamma^\ast=0$.}
-  {Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero}
+  {Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero, Bifurcation.H_hasDerivAt, Bifurcation.slope_one_at_threshold, Bifurcation.control_slope_off_threshold, Bifurcation.gammaStar_example}
 \mrow{M10}{With mobility non-negative, the trap condition holds exactly when
   $s_g\delta$ exceeds the exclusion threshold $b^\ast$. The mobility
   threshold rises with salience wherever it is non-negative. At the
@@ -245,6 +252,21 @@ that check it.}\\
   (ii) fails without $\tilde\gamma>\tilde\gamma^\ast$, since at
   $(\tfrac1{20},\tfrac1{10},\tfrac12)$ the orbit of $0$ does not converge to 1.}
   {Outsider.decoupled, Outsider.outsider_trapped, Outsider.integrates_above, Outsider.trapped_hypotheses_example, Outsider.integrates_hypotheses_example, Outsider.control_threshold_needed}
+\mrow{M12}{For every continuous discrimination-rate function with $F(1)=0$ and
+  $F'(1)=0$, a standing at which the map dips below the diagonal gives a fixed
+  point on each side of it. For the canonical $F$ the trap condition supplies
+  such a standing, so the trap of M5 is the canonical case of a general one.}
+  {$\mathcal{H}_F(\bar c)-\bar c=(1-\bar c)(\mu+\tilde\gamma\bar c)-s_g\delta\,\bar c F(\bar c)$.
+  (i) $\mu>0$, $\tilde\gamma\ge0$, $s_g\delta\ge0$, $F(1)=0$, $F'(1)=0$ and
+  $0\le c<1$. Then $\exists\,d\in(c,1)$ with $\mathcal{H}_F(d)>d$.
+  (ii) $F$ continuous on $[0,1]$, $\mu>0$, $0<c<d<1$,
+  $\mathcal{H}_F(c)<c$ and $\mathcal{H}_F(d)>d$. Then
+  $\exists\,c_1\in(0,c)$, $c_2\in(c,d)$ with $\mathcal{H}_F(c_i)=c_i$.
+  (iii) For $\mathcal{H}$ with $b>0$ and fixed points $c_L<c_M<1$,
+  $\mathcal{H}(\tfrac{c_L+c_M}2)<\tfrac{c_L+c_M}2$.
+  It fails without the dip, since $F\equiv0$ gives
+  $\mathcal{H}_F(\bar c)>\bar c$ on $[0,1)$.}
+  {GeneralF.Hf_sub_self, GeneralF.rise_near_one, GeneralF.two_fixed_of_dip, GeneralF.dip_of_trap, GeneralF.control_dip_needed}
 \end{longtable}
 \normalsize
 
@@ -459,7 +481,7 @@ Controls. At $(\tfrac1{20},\tfrac1{10},\tfrac12)$, $B^2=\tfrac4{25}>\tfrac1{10}=
 At $(\tfrac1{20},\tfrac1{10},\tfrac15)$, $B^2=\tfrac1{100}<\tfrac1{25}=4\mu b$.
 \end{mproof}
 
-\begin{mproof}{M6}{ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone}
+\begin{mproof}{M6}{ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
 Put $A=1-\mu+\tilde\gamma-b$. For $0\le x<y\le1$,
 \[
 \mathcal{H}(y)-\mathcal{H}(x)=(y-x)\,G,\qquad
@@ -487,7 +509,13 @@ $\mathcal{H}(1)=1$ by M5.
 Controls. $\mathcal{H}(\tfrac15)=\tfrac1{20}+\tfrac15(\tfrac{19}{20}-3\cdot\tfrac{16}{25})<0$
 at $(\tfrac1{20},0,3)$, and
 $\mathcal{H}(\tfrac1{100})-\mathcal{H}(0)=\tfrac1{100}(\tfrac{19}{20}-(\tfrac{99}{100})^2)<0$
-at $(\tfrac1{20},0,1)$.
+at $(\tfrac1{20},0,1)$. At $(\tfrac35,0,\tfrac52)$,
+\[
+Q(\bar c)=\tfrac52\bar c^2-\tfrac52\bar c+\tfrac35=\tfrac52(\bar c-\tfrac25)(\bar c-\tfrac35),
+\qquad
+\mathcal{H}(0)=\mu=\tfrac35,\qquad \mathcal{H}(\tfrac35)=\tfrac35,
+\]
+so $\mathcal{H}^n(0)=\tfrac35$ for $n\ge1$, and $\tfrac52>\tfrac25=1-\mu+\tilde\gamma$.
 \end{mproof}
 
 \begin{mproof}{M7}{FrozenMap.Hf_frozen, FrozenMap.Hk_sub_self, FrozenMap.fixed_iff_P, FrozenMap.P_cross, FrozenMap.fixed_unique, FrozenMap.exists_fixed, FrozenMap.P_neg_below, FrozenMap.P_pos_above, FrozenMap.fixed_anti, FrozenMap.fixed_mono_belief, FrozenMap.control_mu_needed}
@@ -540,7 +568,7 @@ If $u_n\to L$, then $2L=\lim(u_{n+1}+u_n)=\tfrac12$, so $L=\tfrac14$, which
 $|u_n-\tfrac14|=\tfrac14$ rules out.
 \end{mproof}
 
-\begin{mproof}{M9}{Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero}
+\begin{mproof}{M9}{Bifurcation.gammaStar_eq, Bifurcation.trap_iff_gamma, Bifurcation.Q_pos_above, Bifurcation.only_one_above, Bifurcation.at_threshold_factor, Bifurcation.at_threshold_fixed, Bifurcation.double_root_mem, Bifurcation.gammaStar_pos_iff, Bifurcation.control_threshold_zero, Bifurcation.H_hasDerivAt, Bifurcation.slope_one_at_threshold, Bifurcation.control_slope_off_threshold, Bifurcation.gammaStar_example}
 With $u=\sqrt b$ and $v=\sqrt\mu$, $\sqrt{\mu b}=uv$, so
 $\tilde\gamma^\ast=u^2-2uv=(u-v)^2-\mu=u\,(u-2v)$.
 (i) With $B=b-\tilde\gamma$ and $4\mu b=(2uv)^2$,
@@ -560,9 +588,20 @@ Q(\bar c)=u^2\bar c^2-2uv\,\bar c+v^2=(u\bar c-v)^2,
 \]
 so M5 gives $\mathcal{H}(\bar c)-\bar c=(1-\bar c)(u\bar c-v)^2$. With $u>0$,
 $u\bar c=v\iff\bar c=v/u$, and $v/u<1\iff\mu<b$.
+Slope. For every $\bar c$,
+\[
+\mathcal{H}'(\bar c)=1-\mu+\tilde\gamma-b(1-\bar c)^2+2b\bar c(1-\bar c)-2\tilde\gamma\bar c .
+\]
+At $\tilde\gamma=u^2-2uv$, $b=u^2$, $\mu=v^2$ and $u\bar c=v$,
+\[
+\mathcal{H}'(\bar c)-1=-v^2-2uv+2u^2\bar c-3u^2\bar c^2+4uv\bar c
+=(u\bar c-v)(2u+v-3u\bar c)=0 .
+\]
 (iv) $u\,(u-2v)>0\iff u>2v\iff b>4\mu$.
-Control. $\sqrt{1/100}=\tfrac1{10}$, so
-$\tilde\gamma^\ast=\tfrac15-\tfrac2{10}=0$.
+Controls. $\sqrt{1/100}=\tfrac1{10}$, so
+$\tilde\gamma^\ast=\tfrac15-\tfrac2{10}=0$. At $(\tfrac1{20},\tfrac1{10},\tfrac45)$
+and $\bar c=\tfrac14$,
+$\mathcal{H}'=1-\tfrac1{20}+\tfrac1{10}-\tfrac45\cdot\tfrac9{16}+\tfrac85\cdot\tfrac3{16}-\tfrac1{20}=\tfrac{17}{20}$.
 \end{mproof}
 
 \begin{mproof}{M10}{Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
@@ -609,6 +648,26 @@ Control. By (i) at $(\tfrac1{20},\tfrac1{10},\tfrac12)$, $\mathcal{H}^n(0)\to c_
 and $c_L<c_M<1$, so by uniqueness of limits $\mathcal{H}^n(0)\not\to1$.
 \end{mproof}
 
+\begin{mproof}{M12}{GeneralF.Hf_sub_self, GeneralF.rise_near_one, GeneralF.two_fixed_of_dip, GeneralF.dip_of_trap, GeneralF.control_dip_needed}
+Expanding, $\mathcal{H}_F(\bar c)-\bar c=\mu(1-\bar c)+\tilde\gamma\bar c(1-\bar c)-s_g\delta\,\bar cF(\bar c)$.
+(i) $F'(1)=0$ and $F(1)=0$ give, for $\varepsilon=\mu/(2(s_g\delta+1))$, an
+$r>0$ with $|F(x)|<\varepsilon(1-x)$ whenever $|x-1|<r$ and $x\neq1$. Take
+$d=\tfrac12(\max(c,1-r)+1)$, so $c<d<1$ and $1-d<r$. Then
+\[
+s_g\delta\,dF(d)\le s_g\delta|F(d)|<(s_g\delta+1)\,\varepsilon(1-d)
+=\tfrac12\mu(1-d)<(1-d)(\mu+\tilde\gamma d).
+\]
+(ii) $x\mapsto\mathcal{H}_F(x)-x$ is continuous on $[0,1]$, equals $\mu>0$
+at $0$, is $<0$ at $c$ and $>0$ at $d$. The intermediate value theorem on
+$[0,c]$ and on $[c,d]$ gives $c_1$ and $c_2$.
+(iii) By M5, with $m=\tfrac12(c_L+c_M)$,
+\[
+\mathcal{H}(m)-m=(1-m)\,b\,(m-c_L)(m-c_M)<0 .
+\]
+Control. $F\equiv0$ gives $\mathcal{H}_F(\bar c)-\bar c=(1-\bar c)(\mu+\tilde\gamma\bar c)>0$
+for $0\le\bar c<1$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -634,13 +693,17 @@ matches the audit.
 
 \paragraph{What Lean does not carry.} The class space is finite in the Lean
 statements of M1 to M3, and so is the set of groups in M2 and M3. Rows M5
-and M6 are proved for the canonical $F(\bar c)=(1-\bar c)^2$ only. The general
-$F$ of the predecessor's regularity assumption is not yet covered there.
+and M6 are proved for the canonical $F(\bar c)=(1-\bar c)^2$ only, and M12
+gives sufficient conditions for the general $F$.
 Rows M7 and M8 hold for every $F$, which enters them only through $F(\beta_0)$.
 Rows M9 and M10 are for the canonical $F$. M9 shows the merged fixed point is
-a double root of $\mathcal{H}(\bar c)-\bar c$. The slope
-$\mathcal{H}'=1$ there, which makes the merger a saddle-node bifurcation in
-the predecessor's words, is not stated in Lean.
+a double root of $\mathcal{H}(\bar c)-\bar c$ with slope $\mathcal{H}'=1$,
+the saddle-node condition in the predecessor's words. That the fixed points
+on either side move apart as $\tilde\gamma$ falls below the threshold is in
+M5's closed form and not stated as a row. Row M12 covers a general $F$ with
+sufficient conditions only. An exact region for the general $F$, and the
+count of fixed points under the predecessor's regularity assumption, are not
+stated.
 The composed map itself enters rows M4 to M8 as a definition, so its derivation from
 the engagement decision is not checked (Appendix~\ref{app:scope}). The predecessor manuscript gives class a Beta law on
 $[0,1]$, and the continuous form of M1 is not formalised.
@@ -739,13 +802,15 @@ the readings could matter. The model has no such sequence.
 \unv{The attribution of the kinematics formula to Jeffrey (1965) rests on the
 predecessor manuscript. The source has not been read for this skeleton.}
 
-\paragraph{The law of motion.} Rows M4 to M8 take the predecessor's
+\paragraph{The law of motion.} Rows M4 to M12 take the predecessor's
 composed map, its equation (composed), as the law of motion of a group's
 standing. Its derivation from the engagement decision and the discrimination
 rate is not a row yet. The bounds $b<1-\mu+\tilde\gamma$ and
 $\mu+\tilde\gamma<1$ of M6 limit the cost of exclusion from above. The
-predecessor's ``sufficiently large $\delta$'' is therefore bounded, and the
-first control of M6 shows the map leaves $[0,1]$ when $s_g\delta$ is large.
+predecessor's ``sufficiently large $\delta$'' is therefore bounded, the
+first control of M6 shows the map leaves $[0,1]$ when $s_g\delta$ is large,
+and its third control shows the basin result itself failing above the bound,
+with the orbit of standing $0$ landing on the tipping point.
 From below, the trap needs $s_g\delta>b^\ast$ (M10). The predecessor states
 that a positive mobility threshold exists. Row M9 shows this needs
 $s_g\delta>4\mu$. Its bifurcation figure reports $\delta^\ast\approx0.29$ at

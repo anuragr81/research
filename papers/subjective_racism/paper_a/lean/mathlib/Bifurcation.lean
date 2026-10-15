@@ -206,4 +206,54 @@ theorem control_not_mono_below_mu : gammaStar 1 (1 / 4) < gammaStar 1 0 := by
   rw [show (1 : ℝ) * (1 / 4) = (1 / 2) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]
   norm_num
 
+/-! ### The slope at the merged root -/
+
+/-- The derivative of the canonical map. -/
+theorem H_hasDerivAt (μ γ b c : ℝ) :
+    HasDerivAt (H μ γ b)
+      (1 - μ + γ - b * (1 - c) ^ 2 + 2 * b * c * (1 - c) - 2 * γ * c) c := by
+  have hid := hasDerivAt_id c
+  have h1 : HasDerivAt (fun x : ℝ => 1 - x) (-1) c := by
+    simpa using hid.const_sub 1
+  have h2 := h1.pow 2
+  have h3 := h2.const_mul b
+  have h4 := h3.const_sub (1 - μ + γ)
+  have h5 := hid.mul h4
+  have h6 := (hid.pow 2).const_mul γ
+  have h7 := (h5.const_add μ).sub h6
+  convert h7 using 1
+  simp only [Pi.pow_apply, id_eq, Nat.cast_ofNat, Nat.reduceSub, pow_one]
+  ring
+
+/-- At the threshold the slope of the map at the merged root is 1, the
+saddle-node condition. -/
+theorem slope_one_at_threshold {μ b : ℝ} (hμ : 0 < μ) (hb : 0 < b) :
+    HasDerivAt (H μ (gammaStar μ b) b) 1 (Real.sqrt μ / Real.sqrt b) := by
+  have h := H_hasDerivAt μ (gammaStar μ b) b (Real.sqrt μ / Real.sqrt b)
+  convert h using 1
+  rw [gammaStar_eq hμ.le hb.le]
+  have hu0 : Real.sqrt b ≠ 0 := (Real.sqrt_pos.2 hb).ne'
+  set u := Real.sqrt b with hu_def
+  set v := Real.sqrt μ with hv_def
+  have hu : u ^ 2 = b := Real.sq_sqrt hb.le
+  have hv : v ^ 2 = μ := Real.sq_sqrt hμ.le
+  have hc : u * (v / u) = v := by field_simp
+  clear_value u v
+  subst hu hv
+  linear_combination (3 * u * (v / u) - 2 * u - v) * hc
+
+/-- Control: away from the threshold the slope at `√μ / √b` is not 1. At
+`μ = 1/20`, `b = 4/5`, where `√μ / √b = 1/4` and `γ* = 2/5`, the slope at
+`1/4` under `γ = 1/10` is `17/20`. -/
+theorem control_slope_off_threshold :
+    HasDerivAt (H (1 / 20) (1 / 10) (4 / 5)) (17 / 20) (1 / 4) := by
+  have h := H_hasDerivAt (1 / 20) (1 / 10) (4 / 5) (1 / 4)
+  convert h using 1
+  norm_num
+
+theorem gammaStar_example : gammaStar (1 / 20) (4 / 5) = 2 / 5 := by
+  unfold gammaStar
+  rw [show (1 / 20 : ℝ) * (4 / 5) = (1 / 5) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]
+  norm_num
+
 end Bifurcation
