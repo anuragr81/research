@@ -91,7 +91,7 @@ Copy these verbatim. The checker parses them by name and argument count.
 \newcommand{\pend}[1]{\textit{Pending:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
-\newcommand{\arow}[5]{#1 & #2 & #3 & \rowref{#4} & #5 \\ \addlinespace}
+\newcommand{\arow}[6]{#1 & #2 & #3 & #4 & \rowref{#5} & #6 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
@@ -105,7 +105,7 @@ Copy these verbatim. The checker parses them by name and argument count.
 The arguments, in order, are these.
 
 - `\krow{ID}{headline}{model rows}{scope note}`
-- `\arow{ID}{assumption}{symbols}{model rows}{reason}`
+- `\arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}`
 - `\mrow{ID}{claim in words}{statement in symbols}{Lean theorems}`
 - `\lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model or conclusion rows}`
 - `\crow{ID}{statement}{model or literature rows}`
@@ -133,9 +133,11 @@ Lists are comma-separated. A Lean name is fully qualified,
      hypotheses the headline needs, where it fails (citing the counterexample
      row), and what is already in print.
 2. **Model.** Two subsections.
-   - **Assumptions.** Table 2 has the columns ID, Assumption, Symbols, Model
-     rows and Reason. It lists every assumption the model rows rest on,
-     including the author's modelling choices and the forms taken as given.
+   - **Assumptions.** Table 2 has the columns ID, Assumption, In plain
+     English, Symbols, Model rows and Reason. It lists every assumption the
+     model rows rest on, including the author's modelling choices and the
+     forms taken as given. The plain-English reading restates the assumption
+     with no symbols, naming each object by its name in the measurement map.
      The Symbols column lists every symbol the assumption uses, and each has
      exactly one row in the measurement map. The reason is one or two
      sentences, and points to the paragraph of Appendix D that gives the
@@ -246,7 +248,7 @@ the paper's terminology, and the manuscript uses those names and no synonyms.
   proof). A computed object names its recovery formula, and each recovery
   formula is a Lean theorem.
 
-`checks/verify_measurement_map.py` applies nine rules, each with a
+`checks/verify_measurement_map.py` applies ten rules, each with a
 well-formed and a faulty sample.
 
 | Rule | Requirement |
@@ -260,6 +262,7 @@ well-formed and a faulty sample.
 | MM-7 | Directly observed is Yes exactly when Obtained how begins with Recorded. |
 | MM-8 | No symbol names two rows. A cell `symbol = formula` names its left side. |
 | MM-9 | Every symbol in the assumptions table's Symbols column is a symbol of the map, and every letter in an assumption's mathematics belongs to a symbol the row lists. |
+| MM-10 | Every plain-English reading in the assumptions table has no mathematics, and names the map entry of every symbol its row lists. |
 
 MM-8 is what makes "every symbol is in the map" mean one thing. In Paper A,
 MM-8 and the search of the manuscript that went with it found letters used

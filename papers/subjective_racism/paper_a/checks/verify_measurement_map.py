@@ -1,5 +1,5 @@
 """Checks MEASUREMENT_MAP.tex, the companion note that names every object of
-the model. Rules MM-1 to MM-9, each run on the note and on a well-formed and
+the model. Rules MM-1 to MM-10, each run on the note and on a well-formed and
 a faulty sample.
 
 MM-1  every \\mm row has six non-empty fields and a plain-English name
@@ -14,6 +14,8 @@ MM-8  no symbol names two rows
 MM-9  every symbol in the manuscript's table of assumptions is a symbol of
       the map, and every letter in an assumption's mathematics belongs to a
       symbol the assumption lists
+MM-10 every assumption's plain-English reading has no mathematics and names
+      the map entry of every symbol the assumption lists
 """
 import glob
 import os
@@ -127,18 +129,33 @@ def letters(math):
 
 
 def assumption_rows(tex):
-    return macro_calls(strip_comments(tex), "arow", 5)
+    return macro_calls(strip_comments(tex), "arow", 6)
 
 
 def assumption_problems(arows, keys):
     unknown, stray = [], []
     for r in arows:
-        listed = re.findall(r"\$([^$]*)\$", r[2])
+        listed = re.findall(r"\$([^$]*)\$", r[3])
         unknown += [(r[0], x) for x in listed if re.sub(r"\s+", "", x) not in keys]
         allowed = set().union(*[letters(x) for x in listed]) if listed else set()
         used = set().union(*[letters(x) for x in re.findall(r"\$([^$]*)\$", r[1])] or [set()])
         stray += [(r[0], t) for t in sorted(used - allowed - INDICES)]
     return unknown, stray
+
+
+def plain_problems(arows, owner):
+    """An assumption's plain-English reading must carry no mathematics and must
+    name, by its map name, the row of every symbol the assumption lists."""
+    maths, unnamed = [], []
+    for r in arows:
+        plain = re.sub(r"\s+", " ", r[2])
+        if "$" in plain or re.search(r"\\[A-Za-z]", plain):
+            maths.append(r[0])
+        for x in re.findall(r"\$([^$]*)\$", r[3]):
+            for name in owner.get(re.sub(r"\s+", "", x), []):
+                if name.lower() not in plain.lower():
+                    unnamed.append((r[0], name))
+    return maths, unnamed
 
 
 def prose_only(body):
@@ -181,6 +198,9 @@ def analyse(tex, terms, lean, arows):
     unknown_a, stray = assumption_problems(arows, set(owner))
     out["MM-9"] = (bool(arows) and not unknown_a and not stray,
                    f"assumption symbols absent from the map {unknown_a}; letters not listed {stray}")
+    maths, unnamed = plain_problems(arows, owner)
+    out["MM-10"] = (bool(arows) and not maths and not unnamed,
+                    f"readings with mathematics {maths}; map names missing {unnamed}")
     return out, len(rows)
 
 
@@ -206,8 +226,10 @@ The formula is a theorem (\lean{Fixture.no\_such}) and here is a colon: in prose
 """
 
 FIX_A_GOOD = [["A1", r"The marker $m$ moves the prior $\pi_g(c)$ through $Z_g$.",
+               "The marker moves the prior through the marginal.",
                r"$m$, $\pi_g(c)$, $Z_g$", "M1", "r"]]
 FIX_A_BAD = [["A1", r"The prior $\pi_g(c)$ is scaled by $\delta$.",
+              r"The belief is scaled by $\delta$.",
               r"$\pi_g(c)$, $\theta$", "M1", "r"]]
 
 lean = lean_declarations()
@@ -229,8 +251,9 @@ names = {"MM-1": "every row has six non-empty fields and a plain-English name",
          "MM-6": "every Lean name the note cites is declared",
          "MM-7": "Directly observed is Yes exactly for recorded objects",
          "MM-8": "no symbol names two rows",
-         "MM-9": "every symbol of every assumption is a symbol of the map"}
-for k in sorted(real):
+         "MM-9": "every symbol of every assumption is a symbol of the map",
+         "MM-10": "every plain-English reading is free of mathematics and uses the map's names"}
+for k in sorted(real, key=lambda s: int(s.split('-')[1])):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
 
@@ -238,7 +261,7 @@ print("-" * 72)
 print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
 good, _ = analyse(GOOD, FIX_TERMS_GOOD, FIX_LEAN, FIX_A_GOOD)
 bad, _ = analyse(BAD, FIX_TERMS_BAD, FIX_LEAN, FIX_A_BAD)
-for k in sorted(good):
+for k in sorted(good, key=lambda s: int(s.split('-')[1])):
     check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])
 

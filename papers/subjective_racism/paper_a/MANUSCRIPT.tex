@@ -10,7 +10,7 @@
 %   through the mproof environment. IDs are K1, K2, ... (introduction),
 %   A1, ... (assumptions), M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
 %     \krow{ID}{headline}{model rows}{scope note}
-%     \arow{ID}{assumption}{symbols}{model rows}{reason}
+%     \arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}
 %     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
 %     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
 %     \crow{ID}{statement}{model or literature rows}
@@ -54,7 +54,7 @@
 \newcommand{\pend}[1]{\textit{Pending:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
-\newcommand{\arow}[5]{#1 & #2 & #3 & \rowref{#4} & #5 \\ \addlinespace}
+\newcommand{\arow}[6]{#1 & #2 & #3 & #4 & \rowref{#5} & #6 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
@@ -176,37 +176,48 @@ rows it rests on and what it does not claim.
 \subsection{Assumptions}
 
 Table~\ref{tab:assumptions} lists the assumptions the model rows rest on, each
-with the rows that use it and the reason it is made. Every symbol in it has
+with a reading in plain English, the rows that use it and the reason it is
+made. The plain-English reading uses no symbols and names each object by its
+name in the measurement map. Every symbol in the table has
 exactly one row in the measurement map (\texttt{MEASUREMENT\_MAP.tex}), which
 says whether the object is an input, an internal object or an output, what
 it stands for in the world, whether it is directly observed, and how it is
 obtained. Appendix~\ref{app:scope} gives the longer reasons.
 
 \footnotesize
-\begin{longtable}{@{}P{0.8cm}P{5.6cm}P{2.6cm}P{2.0cm}P{4.6cm}@{}}
+\begin{longtable}{@{}P{0.7cm}P{3.5cm}P{4.2cm}P{2.0cm}P{1.5cm}P{3.3cm}@{}}
 \caption{Assumptions of the model.}
 \label{tab:assumptions}\\
 \toprule
-\textbf{ID} & \textbf{Assumption} & \textbf{Symbols} & \textbf{Model rows} & \textbf{Reason} \\
+\textbf{ID} & \textbf{Assumption} & \textbf{In plain English} & \textbf{Symbols} & \textbf{Model rows} & \textbf{Reason} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{ID} & \textbf{Assumption} & \textbf{Symbols} & \textbf{Model rows} & \textbf{Reason} \\
+\textbf{ID} & \textbf{Assumption} & \textbf{In plain English} & \textbf{Symbols} & \textbf{Model rows} & \textbf{Reason} \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
 \arow{A1}{Class takes finitely many values $c\in\mathcal{C}$.}
+  {A person's class is one of a finite list of values.}
   {$c$, $\mathcal{C}$}{M1, M2, M3}
   {The Lean statements range over a finite set. The predecessor's class in
   $[0,1]$ is outside the rows (Appendix~\ref{app:scope}, Class space).}
 \arow{A2}{Class is not seen at the encounter. The observer sees a marker $m$,
   which signals one of finitely many groups $g\in\mathcal{G}$.}
+  {The observer cannot see a person's class at the encounter and sees only a
+  marker, which is evidence about the person's group. There are finitely
+  many groups.}
   {$m$, $g$, $\mathcal{G}$}{M1, M2, M3}
   {The premise of the question.}
 \arow{A3}{The observer revises the prior $\pi_g(c)$ and the group weights
   $q(g)$ by Bayes' rule alone, giving the posterior $\pi'_g(c)$, the
   posterior on group $q'(g)$ and the posterior on class $P(c\mid m)$.}
+  {The observer starts from a prior on class within each group and from
+  group weights. On reading the marker the observer updates both by Bayes'
+  rule, through the likelihood of the marker, and by no other rule. The
+  results are the posterior within each group, the posterior on group and
+  the posterior on class.}
   {$\pi_g(c)$, $\ell_g(c)$, $q(g)$, $\pi'_g(c)$, $q'(g)$, $P(c\mid m)$}
   {M1, M2, M3, M17}
   {The author's choice of 14 October 2026. M2 and M3 show that a second rule
@@ -214,18 +225,29 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   (Appendix~\ref{app:scope}, The updating rule).}
 \arow{A4}{Group sufficiency. Within a group the marker's likelihood does not
   depend on class, $\ell_g(c)=Z_g$ for every $c$.}
+  {Once the group is known, the marker says nothing more about class. Within
+  each group the likelihood of the marker is one constant likelihood for
+  every class, and so equals the marginal.}
   {$\ell_g(c)$, $Z_g$, $\lambda_g$}{M1, M2, M3}
   {The predecessor's assumption. M1 shows its likelihood and posterior forms
   agree under a prior with full support (Appendix~\ref{app:scope}, Group
   sufficiency).}
 \arow{A5}{$0<\mu<1$, $\tilde\gamma\ge0$, $0\le s_g\le1$ and $\delta>0$, so
   the exclusion pressure $b=s_g\delta$ is at least $0$.}
+  {The convergence rate lies strictly between zero and one, mobility is not
+  negative, salience is a probability and the cost of exclusion is positive.
+  The exclusion pressure, salience times the cost of exclusion, is therefore
+  not negative.}
   {$\mu$, $\tilde\gamma$, $s_g$, $\delta$, $b$}{M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, M17}
   {A group at standing $0$ still rises by $\mu$ (M4), mobility pushes
   standing up, salience is a probability, and exclusion costs standing.}
 \arow{A6}{The standing $\bar c^t$ of a group in generation $t$ moves by
   $\bar c^{t+1}=\mu+\bar c^t(1-\mu+\tilde\gamma-\delta\phi^t)-\tilde\gamma(\bar c^t)^2$,
   where $\phi^t$ is the discrimination rate.}
+  {From one generation to the next a group's standing rises by the
+  convergence rate times its distance from full standing, rises by mobility
+  times standing times that distance, and falls by the cost of exclusion
+  times the discrimination rate times standing.}
   {$\bar c$, $\mu$, $\tilde\gamma$, $\delta$, $\phi^t$}
   {M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M15, M16, M17}
   {The predecessor's law of motion, taken as given rather than derived. The
@@ -235,6 +257,10 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   $\pi_g(c)$ from the group's current standing, so the discrimination rate is
   $\phi^t=s_gF(\bar c^t)$ and the law of A6 is the composed map
   $\bar c^{t+1}=\mathcal{H}_F(\bar c^t)$.}
+  {Each generation the observer learns the prior afresh from the group's
+  current standing. The discrimination rate is then salience times the
+  discrimination-rate function at the current standing, and the step of A6
+  becomes the composed map from this generation's standing to the next.}
   {$\pi_g(c)$, $\phi^t$, $s_g$, $F$, $\bar c$, $\mathcal{H}_F$}
   {M4, M5, M6, M9, M10, M11, M12, M13, M15, M16, M17}
   {The author's choice of 14 October 2026, and the model the predecessor
@@ -244,12 +270,23 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   with mean standing $\beta_0$, so $\phi^t=s_gF(\beta_0)$ in every generation
   and the law of A6 is the frozen map $\mathcal{H}_k$ with
   $k=s_g\delta F(\beta_0)$.}
+  {The alternative to A7. The observer keeps the prior of the first
+  generation, the frozen prior, so the discrimination rate is the same in
+  every generation, salience times the discrimination-rate function at the
+  mean of the frozen prior. The cost of exclusion times this rate is the
+  frozen rate, and the step of A6 becomes the frozen map.}
   {$\beta_0$, $\phi^t$, $s_g$, $\delta$, $F$, $k$, $\mathcal{H}_k$}{M7, M8}
   {Kept to test whether the trap needs A7, which C7 answers.}
 \arow{A9}{The discrimination-rate function is $F(\bar c)=(1-\bar c)^2$, so the
   composed map is the canonical map $\mathcal{H}$ with exclusion pressure
   $b=s_g\delta$. Row M12 replaces it with any continuous $F$ with $F(1)=0$ and
   $F'(1)=0$.}
+  {The discrimination-rate function is the square of the distance from full
+  standing, so refusal falls as standing rises and reaches zero, with zero
+  slope, at full standing. The composed map then depends on salience and the
+  cost of exclusion only through their product, the exclusion pressure. M12
+  keeps only that the function is continuous and is zero with zero slope at
+  full standing.}
   {$F$, $\bar c$, $\mathcal{H}$, $b$, $s_g$, $\delta$}
   {M4, M5, M6, M9, M10, M11, M12, M13, M15, M16, M17}
   {The predecessor's canonical case. Refusal falls to zero at full standing
@@ -257,11 +294,16 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
 \arow{A10}{No group's standing enters another group's law of motion. The
   outsider group $O$ and the host group $I$ each move by their own composed
   map, the host's with parameters $\mu_I$, $\tilde\gamma_I$ and $b_I$.}
+  {The outsider group and the host group each move by their own composed
+  map, the host group's with its own host parameters, and neither group's
+  standing enters the other group's map.}
   {$O$, $I$, $\mu_I$, $\tilde\gamma_I$, $b_I$}{M11}
   {The predecessor's equations give each group its own map
   (Appendix~\ref{app:scope}, Two groups).}
 \arow{A11}{The intensity $\rho$ multiplies the exclusion pressure and enters
   nowhere else, so the composed map has $b=\rho s_g\delta$.}
+  {The intensity multiplies the exclusion pressure, salience times the cost
+  of exclusion, and enters the model nowhere else.}
   {$\rho$, $b$, $s_g$, $\delta$}{M13}
   {The predecessor's equation (loury-rho) (Appendix~\ref{app:scope}, The
   intensity parameter).}
@@ -269,6 +311,10 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   member passes, leaving the visible group, when the passing gain
   $\mathrm{gain}(c)$ is at least the passing cost $\mathrm{cost}(c)$, and the
   passers are $P$.}
+  {A group is a finite set of group members, each with a class. A member
+  passes, suppressing the marker and leaving the visible group, when the
+  passing gain at the member's class is at least the passing cost. The
+  members who pass are the passers.}
   {$V$, $c$, $P$, $\mathrm{gain}$, $\mathrm{cost}$}{M14}
   {The predecessor's passing appendix. The gain and the cost are not derived
   (Appendix~\ref{app:scope}, Passing).}
@@ -278,6 +324,13 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   linear in $\sigma$, with the admission margin $\mathrm{marg}$. A share
   $\eta$ of outsiders in the room passes a share $\theta$ of the room's lower
   mean class into the host's standing, giving $c_{\mathrm{eff}}$.}
+  {A platform sets the admission rate of outsider members into a room of a
+  given room size. Its host clients weigh objective quality by the objective
+  weight, and an admitted outsider member pays the willingness to pay.
+  Platform profit is the admission rate times the admission margin, so it is
+  linear in the admission rate. The outsider fraction of the room times the
+  spillover sensitivity is the share of the room's lower mean class that
+  passes into the host's standing, giving the effective host standing.}
   {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$, $\eta$,
   $\theta$, $c_{\mathrm{eff}}$}{M15}
   {The predecessor's first-order condition and spillover formula, taken as
@@ -1281,7 +1334,7 @@ and none depends on an axiom outside \texttt{propext},
 must accept and a faulty sample it must reject.
 \item \emph{Doc consistency.} Every theorem count stated here is in digits and
 matches the audit.
-\item \emph{The measurement map.} Rules MM-1 to MM-6 of
+\item \emph{The measurement map.} Rules MM-1 to MM-10 of
 \path{checks/verify_measurement_map.py} on the companion note
 \path{MEASUREMENT_MAP.tex}, which names every object of the model and says
 how an observer would obtain it. Its Name column is the terminology, and

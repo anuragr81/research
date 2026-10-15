@@ -139,7 +139,7 @@ def prose_ratio(body):
 def analyse(tex, lean, bibs, lit):
     tex = strip_comments(tex)
     krows = macro_calls(tex, "krow", 4)
-    arows = macro_calls(tex, "arow", 5)
+    arows = macro_calls(tex, "arow", 6)
     mrows = macro_calls(tex, "mrow", 4)
     lrows = macro_calls(tex, "lrow", 6)
     crows = macro_calls(tex, "crow", 3)
@@ -165,8 +165,8 @@ def analyse(tex, lean, bibs, lit):
     bad_c = [(r[0], l) for r in crows for l in (split_list(r[2]) or ["(none)"]) if l not in mids | lids]
     out["MS-3"] = (not bad_c, f"conclusion links not to a model or literature row {bad_c}")
 
-    bad_a = [(r[0], l) for r in arows for l in (split_list(r[3]) or ["(none)"]) if l not in mids]
-    covered = {l for r in arows for l in split_list(r[3])}
+    bad_a = [(r[0], l) for r in arows for l in (split_list(r[4]) or ["(none)"]) if l not in mids]
+    covered = {l for r in arows for l in split_list(r[4])}
     bare = sorted(mids - covered)
     out["MS-7"] = (bool(arows) and not bad_a and not bare,
                    f"assumption links not to a model row {bad_a}; model rows under no assumption {bare}")
@@ -225,7 +225,7 @@ FIX_LIT = {"Fixture2000": "The marker carries no information about class within 
 
 GOOD = r"""
 \krow{K1}{h}{M1}{s}
-\arow{A1}{a}{$x$}{M1}{r}
+\arow{A1}{a}{p}{$x$}{M1}{r}
 \mrow{M1}{c}{$x$}{Fixture.flat_posterior}
 \lrow{L1}{Fixture2000}{w}{The marker carries no information about class within a group.}{12}{M1}
 \crow{C1}{s}{M1, L1}
@@ -236,7 +236,7 @@ Then \[ \frac{\ell(c)\pi(c)}{\sum_{c'} \ell(c')\pi(c')} = \pi(c) \] for every $c
 
 BAD = r"""
 \krow{K1}{h}{M9}{s}
-\arow{A1}{a}{$x$}{M9}{r}
+\arow{A1}{a}{p}{$x$}{M9}{r}
 \krow{K1}{h}{M1}{s}
 \mrow{M1}{c}{$x$}{Fixture.no_such_theorem}
 \lrow{L1}{Fixture2000}{w}{A sentence the paper never printed.}{12}{M1}
