@@ -638,3 +638,15 @@ The scope note of each such headline says so.
 
 Bib entries in `00_document/references.bib` not yet tied to a candidate:
 `armstrong2019`, `chen2026`, `cao2026`, `angelis2025`.
+- 2026-10-15. MMP stage 2d, first full run and its diagnosis. The first run
+  (stage2.py, 21e1a556) did not converge: large banks cycled with period 6
+  to the 200-sweep cap (15 h), small banks stalled at a change of about 426
+  by sweep 34, where it was stopped; no moment was printed. Logs kept
+  (stage2_log.txt, stage2_run_log.txt). PREREG_stage2_3.md (9f2e3f20)
+  fixed the diagnosis and its decision rules before any run;
+  results_diagnosis_stage2.md (small grid, 76 min): the optimiser falls
+  short of the previous policy in 58 of 59 sweeps for both sizes, and
+  amendment A1 (keep the previous policy as a candidate) converges with no
+  fall in value (sweep 68 and 54). Next: put A1-A3 in stage2.py, rerun V1
+  and V2 on the amended solver, then the full rerun. results_diagnosis_stage2.md
+  is not yet in the MM-14 list (a reproduction takes 76 minutes).
