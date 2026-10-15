@@ -1,0 +1,192 @@
+% WEIGHT_ADDENDUM.tex, a starter for the extension in which the institution chooses the weight
+% mu (author, 15 October 2026: "do it in an addendum - that would serve both as a starter
+% document and might probably get us some scope related sentences in the manuscript").
+%
+% RULES
+%   A statement that rests on a row of MANUSCRIPT.tex cites the row. A statement that follows
+%   from a row in one step says so and names the step. Everything else is a conjecture or an
+%   open question, labelled W-n, with the world in which it is false. The institution's
+%   objective is a construct, to be read as rationalising the rules institutions publish, not
+%   as a quantity in the world (measurement map, the mu row). Terms are the manuscript's;
+%   checks/verify_docs.py (D4, D5) checks the terms and that every cited row exists.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[round]{natbib}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\title{The Institution's Weight: A Starter for the Extension}
+\author{Companion note to the manuscript}
+\date{15 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{The question}
+
+In the manuscript the rule's weight on the base component, $\mu$, is given.
+Its motivation is the author's account of information asymmetry and
+institutional development (14 October 2026): a credential buys a cleaner
+status than the disorganised status that comes from unverified providers, and
+that is why status becomes important. An institution allocating positions
+cannot see the quality it cares about. What it can read without verifying it is
+disorganised: claims, reputations and signals from providers it does not check.
+A credential is organised status: standardised, issued under rules, and cheap to
+check. The weight $1-\mu$ is how far the rule leans on that organised status,
+and $\mu$ how far it still reads the rest. As credentialing becomes organised,
+an institution has reason to lean on it more, which is the shift from
+disorganised to organised status in the story of institutional development.
+Once the credential can be bought, its holders are those who can afford it,
+which is what the manuscript studies. The extension asks why an institution
+sets $\mu$ where it does. Its answer has two sides. The cost side,
+what a higher $\mu$ does to who pays and what they take, is in the manuscript.
+The benefit side, what a higher $\mu$ does to the quality of the winner, is not.
+
+\section{What the manuscript already gives}
+
+\begin{center}
+\small
+\begin{tabular}{@{}P{4.2cm}P{7.8cm}P{3.2cm}@{}}
+\toprule
+\textbf{Statement} & \textbf{Content} & \textbf{Rests on} \\
+\midrule
+The gain falls with $\mu$ & With the incumbent scored as an entrant,
+  $\Delta(m;\mu)$ does not rise in $\mu$ at any $m$. & M28, K8 \\ \addlinespace
+The count falls with $\mu$ & With costs fixed, $k^*$ does not rise in $\mu$. &
+  M28, K8 \\ \addlinespace
+The entrants' share falls with $\mu$ & The probability that the prize goes to an
+  entrant does not rise in $\mu$. & M31, K7 \\ \addlinespace
+The benchmark at $\mu\to0$ & $\Delta(m)\to V/(m+2)$ for every $Q$. & M9 \\
+  \addlinespace
+Entry buys nothing at $\mu=1$ & At $\mu=1$ the score is $r$ for every player,
+  so $F=G$, $\varphi=0$ and $\Delta(m)=0$; with $c>0$ and $u$ strictly
+  increasing, $\kappa>0$ and no challenger enters. & One step from M1;
+  \texttt{no\_entry\_at\_one} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+So, with the fee, the prize and the wealth profile fixed, a rule that weighs the
+base component more draws no more entrants and gives them no larger share of the
+prize, and at $\mu=1$ it draws none.
+
+\section{What is missing: the benefit side}
+
+Let $r_W$ be the base component of the winner. The institution's benefit from a
+higher $\mu$ is a better $r_W$. Two endpoints follow from the score in one step
+each, both proved in \texttt{lean/mathlib/WeightEndpoints.lean}; what lies
+between them is settled in \texttt{lean/mathlib/WeightSelection.lean} (M32).
+
+\begin{itemize}
+\item \textbf{W-1 (proved).} At $\mu=1$ no challenger enters, every score is
+  $r$, and the winner is the player with the highest base component, so $r_W$
+  is the maximum of the $Q+1$ draws of $r$ (\texttt{winner\_base\_eq\_sup\_at\_one}).
+\item \textbf{W-2 (proved).} At $\mu=0$ every score is $s_ie_i$, so the winner is
+  picked by a rule on the bought components alone; with $r$ independent of $s$
+  and of a common law, $r_W$ has the law of $r$ (\texttt{score\_at\_zero},
+  \texttt{winner\_base\_law}). The incumbent, scored as an entrant, always
+  holds the bought component, so the winner is defined.
+\end{itemize}
+
+Between the endpoints two forces act. A higher $\mu$ weighs $r$ more in every
+score, which helps selection on $r$: with the entrants fixed, the winner's base
+component does not fall (M32). It also lowers entry (M28), which moves some
+challengers from the entrant law $F$ to the outsider law $G$, and that can hurt:
+a common bonus washes out when every challenger holds it, and favours its
+holders once some stop buying.
+
+\begin{itemize}
+\item \textbf{W-3 (settled, M32).} $\mathbb E[r_W]$ does not fall in $\mu$ with
+  the entrants fixed, pointwise and for any laws (\texttt{winner\_base\_mono}).
+  With entry responding it can fall. With one challenger, $r$ uniform, a bonus
+  $s\equiv1$ and $V=1$, the gain is $\frac12$ at $\mu=\frac12$ and $\frac38$ at
+  $\mu=\frac23$; a challenger with $\kappa=\frac7{16}$ enters at the first and
+  not at the second, and $\mathbb E[r_W]$ is strictly lower at the second
+  (\texttt{selection\_falls\_with\_exit}). The conjecture as stated is false.
+\end{itemize}
+
+\section{The institution's objective, as a construct}
+
+A candidate objective is
+\[
+  W(\mu)=\mathbb E[r_W](\mu)+\alpha\,c\,k^*(\mu)-\nu\,\gamma(\mu),
+\]
+with $\alpha\ge0$ the value to the institution of a fee collected, $\gamma$ a
+cost of reading the unverified part of the score, which rises in $\mu$, and
+$\nu\ge0$ its price. In the terms of Section~1, $\nu$ is how disorganised the
+uncredentialed information is. Each term is a construct. The recorded datum is the rule an institution
+publishes: Chiba City's four points for paid care against the rest of its
+index, or the points an Italian contracting authority gives a certificate. The
+observer orders published rules by $\mu$ without measuring it (measurement map,
+the $\mu$ row), and $W$ is admissible only as an ordering of $\mu$ that
+rationalises those choices.
+
+The questions the extension would answer:
+\begin{itemize}
+\item \textbf{W-4.} When is the optimal $\mu$ interior? At $\mu=1$ the fee term
+  is zero (no entrant) and verification is dearest; near $\mu=0$ the winner is
+  no better than a draw of $r$ (W-2).
+\item \textbf{W-5.} Does a spread of wealth move the optimal $\mu$? The count
+  responds to a spread by the sign rule of K2 (M13), so the fee term moves with
+  the spread, in a direction set by the marginal entrant against the pivot.
+\item \textbf{W-6.} Does better unverified information raise the optimal $\mu$?
+  A fall in $\nu$ lowers the cost of weighing the base component. With the
+  entrants fixed the benefit side does not fall in $\mu$ (M32), but with entry
+  responding it need not rise, so the answer turns on how entry moves.
+\item \textbf{W-7.} Institutional development. As credentialing becomes
+  organised, so that the credential tracks what the institution values more
+  closely, does the optimal $\mu$ fall? In the model the credential's content
+  is the law of $s$; a credential that is cleaner in this sense would be one
+  whose $s$ is less noisy. That is not yet a primitive the model varies.
+\item \textbf{W-8.} When does the institution choose closure, $\mu=0$? Only
+  when the fee term and the saving on verification outweigh the loss in $r_W$
+  from W-1 to W-2.
+\end{itemize}
+
+\section{Literature to read first}
+
+The application search of 14 October 2026 found no paper in which a selector
+chooses the weight on a purchasable credential given a cost of verification; that
+is a statement about the abstracts read (\texttt{LITERATURE.tex}, the
+application search of 14 October 2026), not yet a novelty claim. The nearest models, by what they
+share with the extension:
+\begin{itemize}
+\item \citet{FrankelKartik2022}: a decision maker commits to under-using data
+  that agents can manipulate. The weight is chosen; the cost of gaming is
+  continuous and there is no fee. \textbf{[A]}.
+\item \citet{Hancart2026}: firms choose the accuracy and difficulty of a test
+  in competition for candidates. The test is chosen; candidates differ only in
+  productivity. Read in Sections 1 to 4. \textbf{[A]}.
+\item \citet{LiuGargBorgs2022}, Appendix B.2: with a skill the school cannot
+  measure, some randomization of the reward can be optimal for the school.
+  Read in full (L32).
+\item \citet{BenPorathDekelLipman2014}: a principal allocates one object and
+  can verify a report at a cost. Verification is chosen per agent; there is no
+  credential. \textbf{[A]}.
+\item \citet{StahlStrausz2017WP} and \citet{Lizzeri1999}: certification as a
+  market, chosen by sellers, buyers or an intermediary. \textbf{[A]}.
+\end{itemize}
+Each would need a full read, a record and Lean before the extension cites it
+for positioning.
+
+\section{What this gives the manuscript}
+
+One paragraph in Appendix~D of the manuscript (``The institution's weight''),
+resting only on the table of Section~2: the model gives the cost side of the
+institution's choice of $\mu$ and not the benefit side, and the choice itself is
+left to the extension.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

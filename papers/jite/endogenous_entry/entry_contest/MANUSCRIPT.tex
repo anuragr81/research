@@ -79,7 +79,8 @@
 A credential is often worth more as a token than as evidence of skill. An
 institution that allocates scarce positions, and cannot cheaply observe the
 quality it cares about, has reason to weight a standardised token that it can
-verify at little cost. Once the token can be bought at a fixed price, who holds
+verify at little cost: a credential is a cleaner status than the disorganised
+status that comes from unverified providers. Once the token can be bought at a fixed price, who holds
 it depends on who can afford it. Two current institutions show the pieces.
 Chiba City allocates licensed daycare places, within priority tiers, to the
 highest selection points, and adds four points for a family that uses an
@@ -188,8 +189,10 @@ A spread of wealth about a pivot & The count weakly rises when the marginal
   below. Two ranks of the profile sign any change of profile outside a band. &
   K2, M12 to M15; new among the papers read (C1, C5, C8). \\ \addlinespace
 A larger weight on the base component & Neither the count nor the gain from
-  entering rises, with the incumbent scored as an entrant. & K8, M28; new among
-  the papers read (C9, C12). \\ \addlinespace
+  entering rises, with the incumbent scored as an entrant. The winner's base
+  component does not fall with the entrants fixed, and can fall once entry
+  responds. & K8, M28, M32; the count's sign is new among the papers read (C9,
+  C12). \\ \addlinespace
 More challengers & The first entrant's gain can rise and then fall, and never
   falls and then rises, when the gap $\varphi$ has one peak. With a uniform base
   component it never falls. & K6, M16 to M22; partly new (C7, C14). \\
@@ -489,6 +492,16 @@ that check it.}\\
   $\xi(k)=\frac{k+1}{Q+1}$; for $s\ge0$ and $r$ atomless, $\xi(k)$ is
   non-increasing in $\mu>0$, and with fixed costs so is $\xi(k^*)$.}
   {EntryContestShare.payerShare_full, EntryContestShare.payerShare_eq_one_sub, EntryContestShare.payerShare_monotone, EntryContestShare.payerShare_at_equal, EntryContestShare.payerShare_normalise, EntryContestShare.payerShare_antitone_mu, EntryContestShare.payerShare_kstar_antitone_mu, EntryContestShare.control_share_needs_nonneg}
+\mrow{M32}{Selection in the weight.}
+  {With the entrants fixed, if $i$ has the highest score at $\mu_1$ and $j$ at
+  $\mu_2$, $\mu_1<\mu_2\le1$, then $r_i\le r_j$, so the winner's expected base
+  component does not fall in $\mu$. With entry responding it can fall: for
+  $Q=1$, $r$ uniform on $[0,1]$, $s\equiv1$, $V=1$ and the incumbent scored as
+  an entrant, $\Delta(0)=\frac12$ at $\mu=\frac12$ and $\frac38$ at
+  $\mu=\frac23$, a challenger with $\kappa=\frac7{16}$ enters at $\frac12$ and
+  not at $\frac23$, and the winner's expected base component is strictly lower
+  at $\frac23$.}
+  {WeightSelection.winner_base_mono, WeightSelection.winner_base_mono_expect, WeightSelection.gain_half, WeightSelection.gain_two_thirds, WeightSelection.enters_at_half, WeightSelection.out_at_two_thirds, WeightSelection.selection_falls_with_exit, WeightSelection.winner_base_mono_needs_le_one}
 \end{longtable}
 \normalsize
 
@@ -1562,6 +1575,33 @@ $t=1$, so $s\ge0$ is needed.
 \end{mproof}
 
 
+\begin{mproof}{M32}{WeightSelection.winner_base_mono, WeightSelection.winner_base_mono_expect, WeightSelection.gain_half, WeightSelection.gain_two_thirds, WeightSelection.enters_at_half, WeightSelection.out_at_two_thirds, WeightSelection.selection_falls_with_exit, WeightSelection.winner_base_mono_needs_le_one}
+Write $a_k=s_ke_k$, $d_r=r_i-r_j$ and $d_a=a_i-a_j$. Maximality at $\mu_1$
+and at $\mu_2$ gives
+\[
+  \mu_1d_r+(1-\mu_1)d_a\ge0,\qquad \mu_2d_r+(1-\mu_2)d_a\le0 .
+\]
+Weighting the first by $1-\mu_2\ge0$ and the second by $1-\mu_1\ge0$ and
+subtracting,
+\[
+  (\mu_1-\mu_2)\,d_r\ge0,\qquad\text{so } r_i\le r_j ,
+\]
+pointwise, and integrating gives the expectation. In the example, dividing by
+$\mu$ gives the entrant law $r+t$, $t=(1-\mu)/\mu$, and the outsider law $r$,
+so with $Q=1$ and $m=0$, by M1 and $\int F\,dF=\frac12$,
+\[
+  \Delta(0)=\tfrac12-\int_0^1 F_U(y-t)\,dy=
+  \begin{cases}\tfrac12, & t=1\ (\mu=\tfrac12),\\[2pt]
+  \tfrac12-\int_{1/2}^{1}\big(y-\tfrac12\big)\,dy=\tfrac38, & t=\tfrac12\ (\mu=\tfrac23).\end{cases}
+\]
+With the challenger in, both scores carry the bonus and the winner's base
+component is $\max(r_0,r_1)$; with her out, it is at most that maximum, and
+strictly below it on $\{r_0<r_1<r_0+\tfrac12\}$, where the incumbent wins with
+the lower base component, a set of positive measure. Above $\mu=1$ the first
+order reverses.
+\end{mproof}
+
+
 
 \section{Evidence and verification}
 \label{app:evidence}
@@ -1804,6 +1844,22 @@ second-order condition holds throughout
 model, and they do not state it. In the free-entry extension of
 \citet{DrugovRyvkin2020a} the less dispersed noise brings higher effort and
 weakly fewer entrants, the same sign for the same reason (L22).
+
+\paragraph{The institution's weight.} The weight $\mu$ is given, and the
+model supplies one side of an institution's choice of it. With the fee, the
+prize and the wealth profile fixed, a rule that weighs the base component more
+draws no more entrants (M28) and gives them no larger share of the prize (M31).
+At $\mu=1$ entry buys nothing: every score is the base component, the two score
+laws coincide, and the gain of M1 is zero. The other side, how the base
+component of the winner moves with $\mu$, is signed only with the entrants
+fixed, where it does not fall (M32). Once entry responds it can fall: a common
+bonus washes out when every challenger holds it, and favours its holders once
+some stop buying (M32). So the model does not say where an institution sets its
+weight. The motivation is the one of the
+Research question: a credential is a cleaner status, cheap to check, than the
+disorganised status that comes from unverified providers. A
+model in which the institution chooses $\mu$ against that information is left
+to further work; \path{WEIGHT_ADDENDUM.tex} sets out what it needs.
 
 \paragraph{Utility.} $u$ is strictly increasing and burden-monotone, so
 $\kappa(w)=u(w)-u(w-c)$ is strictly decreasing on $(c,\infty)$. Strict

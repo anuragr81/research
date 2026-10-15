@@ -197,6 +197,34 @@ check("D4-control retired synonyms are caught", bool(ctrl))
 
 print()
 print("=" * 72)
+print("D5  WEIGHT_ADDENDUM.tex: TERMS AND ROW REFERENCES")
+print("=" * 72)
+print("      The addendum is a starter for the extension in which the institution")
+print("      chooses mu. It uses the manuscript's terms, and every row it cites")
+print("      must exist in MANUSCRIPT.tex, so a renumbered row cannot leave it stale.")
+wa = (HERE / "WEIGHT_ADDENDUM.tex").read_text()
+off_wa = offenders_in(wa, False)
+for i, l in off_wa[:12]:
+    print(f"      WEIGHT_ADDENDUM.tex:{i}  {l}")
+check("D5a no retired synonym in WEIGHT_ADDENDUM.tex", not off_wa, f"{len(off_wa)} lines")
+known = set(re.findall(r"\\[kmlc]row\{([KMLC]\d+)\}", tex))
+cited_rows = set(re.findall(r"\b([KMLC]\d+)\b", re.sub(r"^%.*$", "", wa, flags=re.M)))
+unknown = sorted(cited_rows - known)
+check("D5b every row WEIGHT_ADDENDUM.tex cites exists in MANUSCRIPT.tex", not unknown,
+      f"{len(cited_rows)} cited" + (f", unknown {unknown}" if unknown else ""))
+check("D5-control an unknown row is caught", "M99" not in known)
+we_src = "".join((HERE / "lean" / "mathlib" / f).read_text()
+                 for f in ("WeightEndpoints.lean", "WeightSelection.lean"))
+we_names = set(re.findall(r"^(?:theorem|lemma)\s+([^\s:(\[{]+)", we_src, re.M))
+wa_lean = sorted(set(n.replace("\\_", "_") for n in re.findall(r"\\texttt\{([a-z][A-Za-z0-9\\_']*)\}", wa)
+                     if "\\_" in n))
+missing_we = [n for n in wa_lean if n not in we_names]
+check("D5c every Lean name WEIGHT_ADDENDUM.tex cites is a theorem of WeightEndpoints or WeightSelection",
+      not missing_we and len(wa_lean) >= 4,
+      f"{len(wa_lean)} cited" + (f", missing {missing_we}" if missing_we else ""))
+
+print()
+print("=" * 72)
 nf = sum(1 for _, ok in results if not ok)
 print(f"DOCS SUMMARY: {len(results)} checks, {nf} failures")
 print("=" * 72)

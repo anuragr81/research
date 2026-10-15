@@ -1133,6 +1133,35 @@ paper's claims, and only then write the manuscript.
   two slips in LGB's proof of Proposition 4.4 (access under pure
   randomization is rho, not 0; thresB(c) >= c, not <= c); a sign misprint in
   HIV's appendix l_m (+1 for -1) and a label slip in their Example 3.
+- [ ] **W (author, 15 Oct 2026). The institution's choice of mu, as an extension.**
+  WEIGHT_ADDENDUM.tex is the starter (author: "do it in an addendum - that would
+  serve both as a starter document and ... scope related sentences in the
+  manuscript"). Motivation in the author's terms (14 Oct): information
+  asymmetry; a credential buys a cleaner status than the disorganised status
+  from unverified providers; the shift is institutional development. The
+  manuscript gives the cost side (M28, M31; at mu = 1 entry buys nothing, one
+  step from M1); the benefit side, E[r_W] in mu, is open: W-1, W-2 to prove in
+  Lean, W-3 a conjecture with its falsifier, W-4 to W-8 the questions.
+  Manuscript: Appendix D paragraph "The institution's weight"; the Research
+  question's motivating sentence now carries the author's contrast.
+  checks/verify_docs.py D5 checks the addendum's terms and row references.
+  Before citing for positioning: full reads of Frankel-Kartik, Hancart,
+  Ben-Porath-Dekel-Lipman, Stahl-Strausz, Lizzeri.
+  Lean, 15 Oct 2026 (author: "let's do the lean bits too"):
+  lean/mathlib/WeightEndpoints.lean, 12 theorems, standard axioms. Delta = 0
+  at mu = 1 on the paper's own laws and no entry (no_entry_at_one); W-1
+  (winner_base_eq_sup_at_one); W-2 for any measurable rule on the bought
+  components with r independent of s (winner_base_law, score_at_zero);
+  controls winner_at_one_needs_one, score_needs_zero. W-3 settled the same day
+  (author: "worth doing that real work - just for robustness of our model"):
+  lean/mathlib/WeightSelection.lean, 18 theorems, row M32. With the entrants
+  fixed the winner's base component does not fall in mu, pointwise and for any
+  laws (winner_base_mono). With entry responding it can fall: Q = 1, r uniform,
+  s = 1 (a fixed bonus, as Chiba's +4), V = 1; gain 1/2 at mu = 1/2 and 3/8 at
+  mu = 2/3 on the paper's Delta; kappa = 7/16 enters then exits; E[r_W] strictly
+  lower (selection_falls_with_exit). Manuscript: M32 + proof, Table 2 row,
+  Appendix D paragraph; map row r_W; addendum W-3 rewritten (it was false as
+  stated, and the "two forces" paragraph was corrected).
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to
