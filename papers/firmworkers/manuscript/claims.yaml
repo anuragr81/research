@@ -97,7 +97,7 @@ base_case:
       text: 'If the downgrade instead kept a fixed share of former income, the richer entrant would refuse every partner whose former income less the lottery cost is below that share, which closes the path from the bottom to the top.'
       rests_on: ['M44']
     - para: 3
-      text: 'Closure cannot act with two entrants, so the base case shows the exchange without status groups, and closure enters with a third entrant.'
+      text: 'Closure cannot act with two entrants, nor with two from one status group and one from the other, so it first acts with two in each.'
       rests_on: ['M45']
   payoffs:
     - route: 'downgrade'
@@ -566,10 +566,10 @@ model:
     symbols: [X7, X9, X15]
   - id: M45
     anchor: 'consequence of the closure form decided in M29'
-    claim: 'With exactly two entrants closure cannot act: each receives the other''s former job with chance one, whatever the closure parameter below one and whether or not they share a status group. With three entrants it acts'
+    claim: 'With exactly two entrants closure cannot act: each receives the other''s former job with chance one, whatever the closure parameter below one and whether or not they share a status group. With two entrants of one group and one of the other, every reassignment moves exactly two of the three jobs across the groups, so no feasible rule lets closure act either. Closure can first act with two entrants in each group'
     assumptions: 'a pool of two displaced workers; $\sigma<1$'
-    evidence: 'lean/IscLean/BaseCase.lean::Isc.two_entrant_closure_inert. The closure weight of the one possible partner cancels in its own normalisation. Control: with two entrants of one group and one of the other at $\sigma=1/2$, an entrant of the larger group receives the lone entrant''s former job with chance $1/3$, not $1/2$ (Isc.control_closure_acts_with_three)'
-    lean: [Isc.two_entrant_closure_inert, Isc.control_closure_acts_with_three]
+    evidence: 'lean/IscLean/BaseCase.lean::Isc.two_entrant_closure_inert. The closure weight of the one possible partner cancels in its own normalisation. With two entrants of one group and one of the other, both reassignments move two jobs across the groups (Isc.two_one_pool_forces_crossing); M29''s formula would give an entrant of the larger group the lone entrant''s former job with chance $1/3$ at $\sigma=1/2$ (Isc.control_closure_acts_with_three), but M37 shows no reassignment realises it. With two entrants in each group a reassignment with no crossing exists (Isc.control_two_two_pool_allows_no_crossing)'
+    lean: [Isc.two_entrant_closure_inert, Isc.two_one_pool_forces_crossing, Isc.control_two_two_pool_allows_no_crossing, Isc.control_closure_acts_with_three]
     status: LEAN_PROVED
     symbols: [X25, X24]
   - id: M46

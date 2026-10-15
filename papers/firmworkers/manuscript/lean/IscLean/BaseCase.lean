@@ -88,4 +88,17 @@ theorem control_poorer_gains_nothing_at_gap {xi xj : ℝ} :
     (xj - (xj - xi)) - xi = 0 := by
   ring
 
+/-- Two entrants in one status group and one in the other: every reassignment in which nobody
+keeps their own former job moves exactly two of the three jobs across the groups, so no rule
+for weighting reassignments can let closure change how many jobs cross. -/
+theorem two_one_pool_forces_crossing : ∀ π : Equiv.Perm (Fin 3), (∀ x, π x ≠ x) →
+    (univ.filter (fun x : Fin 3 => decide (x.val < 2) ≠ decide ((π x).val < 2))).card = 2 := by
+  decide
+
+/-- Control: with two entrants in each group a reassignment exists in which no job crosses the
+groups, so closure can act. -/
+theorem control_two_two_pool_allows_no_crossing : ∃ π : Equiv.Perm (Fin 4), (∀ x, π x ≠ x) ∧
+    (univ.filter (fun x : Fin 4 => decide (x.val < 2) ≠ decide ((π x).val < 2))).card = 0 :=
+  ⟨Equiv.swap 0 1 * Equiv.swap 2 3, by decide⟩
+
 end Isc
