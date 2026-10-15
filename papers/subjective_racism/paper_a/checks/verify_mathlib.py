@@ -63,6 +63,16 @@ print(f"      toolchain {toolchain}; modules {modules}; build roots {roots}")
 check("ML-1 every .lean file in lean/mathlib is a build root", set(modules) <= set(roots) and modules,
       f"not built: {sorted(set(modules) - set(roots))}" if set(modules) - set(roots) else "")
 
+
+def first_namespace(text):
+    m = re.search(r"^namespace\s+([A-Za-z0-9_.']+)", text, re.M)
+    return m.group(1) if m else None
+
+
+mismatch = [m for m, f in zip(modules, files) if first_namespace(open(f).read()) != m]
+check("ML-6 every file's namespace is its file name, so Namespace.name points to Namespace.lean",
+      not mismatch, f"{mismatch}")
+
 if lake is None:
     check("ML-2 lake on PATH", False, "install elan; the Mathlib suite did NOT run")
 elif not os.path.isdir(os.path.join(PROJ, ".lake", "packages", "mathlib", ".lake", "build")):
@@ -104,6 +114,8 @@ u = parse_axioms(sample, ["X.a", "X.b", "X.c", "X.d"])
 check("ML-C1 sorryAx is flagged as disallowed", "X.a" in disallowed(u))
 check("ML-C2 the three standard axioms are allowed", "X.b" not in disallowed(u) and "X.c" not in disallowed(u))
 check("ML-C3 an unaudited name is detected as missing", "X.d" not in u)
+check("ML-C4 a file whose namespace differs from its name is detected",
+      first_namespace("import Mathlib\nnamespace Other\n") != "Sample")
 
 nf = sum(1 for _, ok in results if not ok)
 print("=" * 72)

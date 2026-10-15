@@ -53,6 +53,22 @@ _, bad_w = stated_counts("We prove thirty-one theorems.")
 check("D1-control a wrong count and a count in words are both caught",
       any(d not in allowed for d in bad_d) and bool(bad_w))
 
+print("=" * 72)
+print("D2  THE TABLE OF LEAN FILES IN APPENDIX B")
+print("=" * 72)
+sys.path.insert(0, str(HERE / "checks"))
+from lean_files_table import current, table  # noqa: E402
+
+want, files, cites = table(tex)
+have = current(tex)
+check("D2a the table matches the rows that cite each file", have == want,
+      "run: python checks/lean_files_table.py --write" if have != want else "")
+uncited = [f for f in files if f not in cites]
+check("D2b every Lean file is cited by a row, R1, a literature record or the measurement map",
+      not uncited, f"{uncited}")
+fake = tex.replace(r"\mrow{M1}{", r"\mrow{M99}{", 1)
+check("D2-control a renamed row makes the table stale", current(fake) != table(fake)[0])
+
 nf = sum(1 for _, ok in results if not ok)
 print("=" * 72)
 print(f"DOCS SUMMARY: {len(results)} checks, {nf} failures")

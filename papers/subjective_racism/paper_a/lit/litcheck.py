@@ -102,8 +102,12 @@ def run(cfg):
     print("=" * 72)
     claims = open(os.path.join(here, "CLAIMS.md")).read()
     rows = quotation_rows(claims)
+    pmap = cfg.get("page_map")
     lo, hi = cfg["pages"]
-    bad_pages = [r[0] for r in rows if not lo <= r[1] <= hi]
+    if pmap:
+        bad_pages = [r[0] for r in rows if r[1] not in pmap]
+    else:
+        bad_pages = [r[0] for r in rows if not lo <= r[1] <= hi]
     check("LC-1 quotation rows parse and their pages lie in the paper's range",
           rows and not bad_pages, f"{len(rows)} rows" + (f", out of range {bad_pages}" if bad_pages else ""))
 
@@ -117,6 +121,9 @@ def run(cfg):
         pages = open(txt).read().split("\f")
 
         def page_text(p):
+            if pmap:
+                i = pmap.get(p, -1)
+                return pages[i] if 0 <= i < len(pages) else ""
             i = p - cfg["first_page"] + cfg["first_index"]
             return pages[i] if 0 <= i < len(pages) else ""
 
@@ -130,7 +137,11 @@ def run(cfg):
               not found(fake[1], page_text(fake[0]), ocr) and not any(found(fake[1], pt, ocr) for pt in pages))
         if rows:
             r0 = rows[0]
-            wrong = r0[1] + 1 if r0[1] < hi else r0[1] - 1
+            if pmap:
+                keys = sorted(pmap)
+                wrong = next(k for k in keys if k != r0[1])
+            else:
+                wrong = r0[1] + 1 if r0[1] < hi else r0[1] - 1
             check("LC-2 control, a true quotation is not found on a wrong page",
                   not found(r0[2], page_text(wrong), ocr))
 
