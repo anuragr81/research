@@ -512,6 +512,14 @@ that check it.}\\
   not at $\frac23$, and the winner's expected base component is strictly lower
   at $\frac23$.}
   {WeightSelection.winner_base_mono, WeightSelection.winner_base_mono_expect, WeightSelection.gain_half, WeightSelection.gain_two_thirds, WeightSelection.enters_at_half, WeightSelection.out_at_two_thirds, WeightSelection.selection_falls_with_exit, WeightSelection.winner_base_mono_needs_le_one}
+\mrow{M33}{Implications for the rule.}
+  {A fee that differs across challengers can reverse the order of their costs.
+  At a fee with $(k+1)\kappa_k>V$, at most $k$ challengers enter. A
+  compression of wealth toward $x_0$ weakly raises $k^*$ when
+  $w_{k^*-1}\le x_0$ and weakly lowers it when $w_{k^*}\ge x_0$. With $s\ge0$,
+  $r$ atomless and $0<\mu\le1$, $\xi(k)\ge\frac{k+1}{Q+1}$, and
+  $\xi(k)\ne\frac{k+1}{Q+1}$ implies $F\ne G$.}
+  {Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, Implications.compression_rises, Implications.compression_falls, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
 \end{longtable}
 \normalsize
 
@@ -782,7 +790,9 @@ claims. The search of 15 October 2026, on whether the question of
 Section~\ref{sec:question} had been answered, found no paper that answers it;
 its two nearest neighbours, \citet{LiuGargBorgs2022} (L32) and
 \citet{HuImmorlicaVaughan2019} (L33), were read in full and change none of the
-claims.
+claims. C15 to C18 are implications for an institution that sets the fee, the
+prize or the weight. They say what follows from each choice, not which choice
+is better, since the model has no welfare objective.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -977,6 +987,36 @@ claims.
   with many players the comparative statics follow the upper tail is what M21
   makes precise for the gain, in the class of M19.}
   {M1, M17, M21, L8}
+\crow{C15}{A fee equal for every challenger changes how many enter, not the
+  order in which they enter. At every fee the order of entry is the order of
+  wealth (M5, M23), and in the equilibrium in which the richest enter a lower
+  fee adds entrants from the next-richest down (M8, M11). Fees that differ
+  across challengers can reverse the order of costs (M33), so only a fee that
+  varies with the challenger can bring a poorer challenger in ahead of a
+  richer one.}
+  {M5, M8, M11, M23, M33}
+\crow{C16}{The prize caps how many pay, and the cap sets a fee. At any fee at
+  which $(k+1)\kappa_k$ exceeds $V$, at most $k$ challengers enter (M10, M33),
+  so an institution that wants at most $k$ entrants needs only the prize and
+  the cost of the fee to the $(k+1)$-th richest.}
+  {M10, M33}
+\crow{C17}{Whether a compression of wealth raises participation is read at two
+  ranks. A compression toward a pivot weakly raises the count when the marginal
+  entrant stands at or below the pivot, and weakly lowers it when the first
+  outsider stands at or above it (M12, M33); inside the band between them the
+  direction is not determined (M14). That less inequality brings more
+  participation has no general sign, since a spread that keeps the mean can
+  lower the count (M13).}
+  {M12, M13, M14, M33}
+\crow{C18}{A large share of positions among the holders of the bought
+  component is not by itself evidence that it counts. When it adds nothing to
+  the score, the entrants, the incumbent included, take $\frac{k+1}{Q+1}$ of
+  the prize, their share of the players (M31). With a non-negative bought
+  component the share is never below that benchmark, and a share off it means
+  the two score laws differ (M33), so only a share above the benchmark shows
+  that the bought component counts. This bears on how the opportunity hoarding
+  of \citet{Tilly1998} is read in data (L19).}
+  {M31, M33, L19}
 \end{longtable}
 
 \normalsize
@@ -1610,6 +1650,33 @@ strictly below it on $\{r_0<r_1<r_0+\tfrac12\}$, where the incumbent wins with
 the lower base component, a set of positive measure. Above $\mu=1$ the first
 order reverses.
 \end{mproof}
+
+\begin{mproof}{M33}{Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, Implications.compression_rises, Implications.compression_falls, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
+With $u=\log$,
+\[
+  \kappa\big|_{w=3,\,c=2}=\log3>\log\tfrac43=\kappa\big|_{w=2,\,c=1/2}.
+\]
+If index $k$ entered with $(k+1)\kappa_k>V$, M10 would give
+$(k+1)\kappa_k\le V$, so index $k$ fails the entry condition and
+\[
+  k'^*\le k .
+\]
+A compression $T$ is monotone and moves each wealth toward $x_0$ without
+crossing it, so $T\circ w$ is sorted and
+\[
+  w_{k^*-1}\le x_0\Rightarrow w_{k^*-1}\le T(w_{k^*-1}),\qquad
+  w_{k^*}\ge x_0\Rightarrow T(w_{k^*})\le w_{k^*},
+\]
+and M12 gives the two signs. By M31, $\xi$ is non-increasing in $\mu$, and at
+$\mu=1$ both laws are the law of $r$, so
+\[
+  \xi(k;\mu)\ge\xi(k;1)=\frac{k+1}{Q+1}.
+\]
+$F=G$ gives $\xi(k)=\frac{k+1}{Q+1}$ (M31); the last statement is its
+contrapositive. $x\mapsto\frac{x+1}{2}$ compresses toward $1$ and lowers $3$,
+so the rise needs $w_{k^*-1}\le x_0$.
+\end{mproof}
+
 
 
 

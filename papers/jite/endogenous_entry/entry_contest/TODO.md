@@ -1140,6 +1140,19 @@ paper's claims, and only then write the manuscript.
   tables, Inputs, Model-internal variables and Outputs, each with an Observed
   column coded R (recorded), C (computed from records), N (not observed, a fact
   of nature or of the contest) and K (not observed, a construct).
+- Implications for the rule, 15 Oct 2026 (author: "Let's see if we can add these
+  in conclusions and establish that we have verifiability for them"). Four
+  conclusion rows, each resting on proven model rows: C15 a uniform fee changes
+  how many enter, not the order (M5, M8, M11, M23, M33); C16 the prize caps the
+  count and sets a fee, (k+1) kappa_k > V gives at most k entrants (M10, M33);
+  C17 a compression of wealth is read at two ranks, with no general sign for
+  "less inequality, more participation" (M12, M13, M14, M33); C18 the share
+  benchmark (k+1)/(Q+1), only a share above it shows the bought component
+  counts (M31, M33, L19). The steps beyond existing rows are proved in
+  lean/mathlib/Implications.lean (8 theorems), row M33. The author dropped the
+  implication about the weight (it would have rested on K9's ambiguity).
+  Not recommendations: the model has no welfare objective (stated in the
+  Conclusions). The map's entrants' share row records the benchmark test.
 - [ ] **S (author, 15 Oct 2026). The steady state, as an extension.**
   STEADY_STATE_ADDENDUM.tex is the starter (author: "we also need to establish
   how long-term equilibria changes the current claims"; "a steady-state
