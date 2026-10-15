@@ -139,6 +139,7 @@ def prose_ratio(body):
 def analyse(tex, lean, bibs, lit):
     tex = strip_comments(tex)
     krows = macro_calls(tex, "krow", 4)
+    prows = macro_calls(tex, "prow", 6)
     arows = macro_calls(tex, "arow", 6)
     mrows = macro_calls(tex, "mrow", 4)
     lrows = macro_calls(tex, "lrow", 6)
@@ -147,6 +148,7 @@ def analyse(tex, lean, bibs, lit):
     out = {}
 
     ids = [(r[0].strip(), "K") for r in krows] + [(r[0].strip(), "M") for r in mrows]
+    ids += [(r[0].strip(), "P") for r in prows]
     ids += [(r[0].strip(), "A") for r in arows]
     ids += [(r[0].strip(), "L") for r in lrows] + [(r[0].strip(), "C") for r in crows]
     bad_form = [i for i, p in ids if not re.fullmatch(p + r"[1-9][0-9]*", i)]
@@ -170,6 +172,9 @@ def analyse(tex, lean, bibs, lit):
     bare = sorted(mids - covered)
     out["MS-7"] = (bool(arows) and not bad_a and not bare,
                    f"assumption links not to a model row {bad_a}; model rows under no assumption {bare}")
+
+    bad_p = [(r[0], l) for r in prows for l in (split_list(r[5]) or ["(none)"]) if l not in mids | lids]
+    out["MS-8"] = (bool(prows) and not bad_p, f"player links not to a model or literature row {bad_p}")
 
     problems = []
     proof_ids = [p[0].strip() for p in proofs]
@@ -211,7 +216,7 @@ def analyse(tex, lean, bibs, lit):
             over.append((pid, round(ratio, 3), p, m))
     out["MS-6"] = (not over, f"proofs above {PROSE_LIMIT:.0%} prose {over}")
 
-    counts = f"K{len(krows)} A{len(arows)} M{len(mrows)} L{len(lrows)} C{len(crows)}, proofs {len(proofs)}"
+    counts = f"K{len(krows)} P{len(prows)} A{len(arows)} M{len(mrows)} L{len(lrows)} C{len(crows)}, proofs {len(proofs)}"
     return out, counts
 
 
@@ -225,6 +230,7 @@ FIX_LIT = {"Fixture2000": "The marker carries no information about class within 
 
 GOOD = r"""
 \krow{K1}{h}{M1}{s}
+\prow{P1}{p}{c}{h}{l}{M1, L1}
 \arow{A1}{a}{p}{$x$}{M1}{r}
 \mrow{M1}{c}{$x$}{Fixture.flat_posterior}
 \lrow{L1}{Fixture2000}{w}{The marker carries no information about class within a group.}{12}{M1}
@@ -236,6 +242,7 @@ Then \[ \frac{\ell(c)\pi(c)}{\sum_{c'} \ell(c')\pi(c')} = \pi(c) \] for every $c
 
 BAD = r"""
 \krow{K1}{h}{M9}{s}
+\prow{P1}{p}{c}{h}{l}{X5}
 \arow{A1}{a}{p}{$x$}{M9}{r}
 \krow{K1}{h}{M1}{s}
 \mrow{M1}{c}{$x$}{Fixture.no_such_theorem}
@@ -266,7 +273,8 @@ names = {"MS-1": "row IDs well formed and unique",
          "MS-4": "every model row names audited Lean theorems and has one matching proof",
          "MS-5": "every literature row quotes its lit/ record verbatim",
          "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof",
-         "MS-7": "assumption rows point to model rows, and every model row rests on one"}
+         "MS-7": "assumption rows point to model rows, and every model row rests on one",
+         "MS-8": "player rows point to model or literature rows only"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)

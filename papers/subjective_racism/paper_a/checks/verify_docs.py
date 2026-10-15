@@ -94,13 +94,13 @@ if t4 is None:
 else:
     marked = [r for r, body in crows(t4) if "\\pend{" in body or "\\unv{" in body]
     unnamed = [r for r, body in crows(t5) if "\\pend{" not in body]
-    print(f"      Table 4 conclusions: {len(crows(t4))}; Table 5 claims: {len(crows(t5))}")
-    check("D3a no conclusion in Table 4 carries a pending or unverified mark", not marked, f"{marked}")
-    check("D3b every claim in Table 5 names what it waits on", not unnamed, f"{unnamed}")
+    print(f"      conclusions table: {len(crows(t4))}; pending table: {len(crows(t5))}")
+    check("D3a no row of the conclusions table carries a pending or unverified mark", not marked, f"{marked}")
+    check("D3b every row of the pending table names what it waits on", not unnamed, f"{unnamed}")
     sample = (r"\label{tab:conclusions} \crow{C1}{x \pend{a paper}}{M1} "
               r"\label{tab:pending} \crow{C2}{y}{M1} \end{longtable}")
     s4, s5 = split_tables(sample)
-    check("D3-control a pending mark in Table 4 and an unnamed claim in Table 5 are both caught",
+    check("D3-control a pending mark in the conclusions table and an unnamed claim in the pending table are both caught",
           any("\\pend{" in b for _, b in crows(s4)) and any("\\pend{" not in b for _, b in crows(s5)))
 
 nf = sum(1 for _, ok in results if not ok)

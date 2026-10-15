@@ -6,10 +6,12 @@
 % retired at pass 6 on 15 October 2026. RETIREMENT.md maps every part of it.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
-%   Rows are written only through the five row macros below, and proofs only
+%   Rows are written only through the six row macros below, and proofs only
 %   through the mproof environment. IDs are K1, K2, ... (introduction),
-%   A1, ... (assumptions), M1, ... (model), L1, ... (literature) and C1, ... (conclusions).
+%   P1, ... (players), A1, ... (assumptions), M1, ... (model), L1, ... (literature)
+%   and C1, ... (conclusions).
 %     \krow{ID}{headline}{model rows}{scope note}
+%     \prow{ID}{player}{choice faced}{how the model settles it}{in the literature}{rows}
 %     \arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}
 %     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
 %     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
@@ -19,8 +21,8 @@
 %   fully qualified names declared under lean/ or lean/mathlib/.
 %
 % RULES THE CHECKER ENFORCES
-%   Introduction rows point to model rows only. Conclusion rows point to model
-%   or literature rows only. Every model row names Lean theorems that exist in
+%   Introduction rows point to model rows only. Player rows and conclusion rows
+%   point to model or literature rows only. Every model row names Lean theorems that exist in
 %   an audited Lean file and has exactly one proof in Appendix A naming the
 %   same theorems. Every literature row's quote appears verbatim in the
 %   paper's lit/ record. In every proof, plain English is at most 30% of the
@@ -54,6 +56,7 @@
 \newcommand{\pend}[1]{\textit{Pending:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\prow}[6]{#1 & #2 & #3 & #4 & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\arow}[6]{#1 & #2 & #3 & #4 & \rowref{#5} & #6 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
@@ -172,6 +175,81 @@ rows it rests on and what it does not claim.
 \normalsize
 
 \section{Model}
+
+\subsection{Players}
+
+Table~\ref{tab:players} lists everyone in the model, the choice each one
+faces, and how the model settles that choice. Two entries face no choice.
+The outsider group and the host group are populations whose standing moves
+by the law of motion of A6, and the rows treat them as state rather than as
+players. The one choice the rows derive is the platform's, and the
+observer's engagement decision and the member's passing decision enter as
+rules taken as given. The last column names the counterpart in the papers
+read, where a literature row draws the parallel.
+
+\footnotesize
+\begin{longtable}{@{}P{0.7cm}P{2.0cm}P{3.2cm}P{4.4cm}P{3.4cm}P{1.5cm}@{}}
+\caption{Players of the model, the choice each faces and how the rows settle it.}
+\label{tab:players}\\
+\toprule
+\textbf{ID} & \textbf{Player} & \textbf{Choice faced} & \textbf{How the model settles it} & \textbf{In the literature} & \textbf{Rows} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Player} & \textbf{Choice faced} & \textbf{How the model settles it} & \textbf{In the literature} & \textbf{Rows} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\prow{P1}{The observer}{What to believe about the class of a person whose
+  marker is read, and whether to engage with that person or refuse.}
+  {The belief is settled by Bayes' rule alone, from a prior on class within
+  each group and the group weights, with no second rule (A3, M1 to M3, M17).
+  The engagement decision is not derived. Its outcome enters as the
+  discrimination-rate function, the share refused at each standing, taken
+  as given (A6, A9, Appendix~\ref{app:scope}).}
+  {The employer of Phelps, who combines a group prior with a test score
+  (L4), the employers of Coate and Loury and of Arrow, whose beliefs about
+  a group confirm themselves (L1, L5), and the agent of Jeffrey, who revises
+  by a mixture rule (L6, L7).}
+  {M1, M2, M3, M17, L1, L4, L5, L6, L7}
+\prow{P2}{A member of the outsider group}{Whether to pass, suppressing the
+  marker and leaving the visible group, or to stay.}
+  {A member passes when the passing gain at the member's class is at least
+  the passing cost (A12). The gain and the cost are not derived, and M14 uses
+  only that the gain does not fall in class and the cost does not rise in it.}
+  {The workers of Coate and Loury and of Arrow, who choose whether to invest
+  (L1, L3, L5). Their choice is an investment within one generation, and the
+  member's here is an exit from the visible group.}
+  {M14, L1, L3, L5}
+\prow{P3}{The outsider group}{None. The group's standing is a state, the
+  mean class of its members, and no one chooses it.}
+  {The standing moves by the law of motion (A6), with the discrimination
+  rate re-learned from the current standing (A7) or frozen (A8). Its fixed
+  points and basins are the results of M4 to M13 and M16.}
+  {The group whose equilibrium beliefs are correct and self-confirming in
+  Coate and Loury (L1), the analogue of a fixed point of the composed map.}
+  {M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M16, M17, L1}
+\prow{P4}{The host group}{None. Its standing is a state, as for the
+  outsider group.}
+  {The standing moves by the host group's own composed map, with the host
+  parameters, and the outsider's standing does not enter it (A10, M11). In
+  M15 a share of the room's lower mean class passes into the host's
+  standing through the spillover (A13).}
+  {No paper read draws the parallel.}
+  {M11, M15}
+\prow{P5}{The platform}{The admission rate, the share of outsider applicants
+  admitted to the room.}
+  {Platform profit is linear in the admission rate (A13), so the platform
+  admits every applicant when the admission margin is positive and none when
+  it is negative, which is exactly when the outsider's standing is below the
+  admission threshold (M15). Partial inclusion does not follow from these
+  premises (R1, Appendix~\ref{app:refuted}).}
+  {No paper read has a platform. The reading list of
+  Table~\ref{tab:pending} names the platform studies that wait (C15).}
+  {M15}
+\end{longtable}
+\normalsize
 
 \subsection{Assumptions}
 
@@ -1336,7 +1414,7 @@ records what they printed.
 \texttt{sorry}. Every declared theorem is audited with \texttt{\#print axioms},
 and none depends on an axiom outside \texttt{propext},
 \texttt{Classical.choice} and \texttt{Quot.sound}.
-\item \emph{The skeleton checker.} Rules MS-1 to MS-6 of
+\item \emph{The skeleton checker.} Rules MS-1 to MS-8 of
 \path{checks/verify_manuscript.py}, each also run on a well-formed sample it
 must accept and a faulty sample it must reject.
 \item \emph{Doc consistency.} Every theorem count stated here is in digits and
