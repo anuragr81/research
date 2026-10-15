@@ -16,6 +16,7 @@ under `~/.cache/paper_a/`, downloaded from the author's Drive.
 |---|---|---|---|
 | `coate_loury_1993/` | [F] 15 Oct 2026 | `lean/mathlib/CoateLoury1993.lean` | L1 to L3, C12, C13, C18 |
 | `phelps_1972/` | [P] 15 Oct 2026, page images, quotations checked against OCR | `lean/mathlib/Phelps1972.lean` | L4, C14, C19 |
+| `arrow_1973/` | [P] 15 Oct 2026, the 1971 working paper, not the cited chapter | `lean/mathlib/Arrow1973.lean` | L5, C14 |
 
 Scanned sources without a text layer are read from page images [P], and put
 through `ocr_pages.py` (RapidOCR, not installed in the repository) so that the
