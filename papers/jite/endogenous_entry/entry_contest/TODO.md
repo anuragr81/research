@@ -1104,6 +1104,25 @@ paper's claims, and only then write the manuscript.
   day: a tournament with a binary investment. Target journal: JITE first
   (time to final decision about 73 days, its metrics page, 2024-2025); the
   turnaround of JLEO, JPET and JEBO is unverified.
+- 15 Oct 2026, two tasks from the author. (1) RICS chartered status, examined
+  against the four properties of the application search from RICS's own
+  documents (APC candidate guide August 2026, Valuer Registration FAQ 2025,
+  join fees page, UK Regulated Professions Register), cached under
+  applications/rics and pinned (AP-11 to AP-18, reading AP-D4). Verdict: it is
+  an instance of why an institution weights a credential and of the closure
+  boundary, not of a bought component, because the credential attests
+  competence (structured training, competency levels, assessed interview);
+  no activity is reserved in the UK but Red Book valuation needs registration.
+  Not used in the manuscript; recorded in LITERATURE.tex. (2) A fresh search
+  on whether the research question is already answered: no paper found
+  answers any piece of it. 15 new neighbours recorded at abstract level in
+  LITERATURE.tex §search-answered, abstracts pinned in
+  lit/applications_2026/abstracts_2026b.json, refs.bib +15 (133 entries).
+  Closest: Liu-Garg-Borgs 2022 (strategic ranking; their "access" is the
+  nearest construct to the entrants' share) and Hu-Immorlica-Vaughan 2019
+  (two cost groups, threshold); both free on arXiv, suggested for full reads
+  for positioning only. The TSE lead on wealth effects is Schroyen-Treich,
+  already L12. The applications suite now has 140 checks.
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to
