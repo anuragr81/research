@@ -1,21 +1,26 @@
-# Paper A, verified manuscript skeleton
+# Paper A1, verified manuscript skeleton
 
-Closure Traps from Social Inference (titled Stereotype Rigidity in Social
-Inferences until 15 October 2026), rebuilt claim by claim under `papers/MANUSCRIPT_SKELETON.md`. The predecessor document,
-`../theory_and_decisions/manuscript.tex`, was retired at pass 6 on 15 October
-2026. `RETIREMENT.md` maps every part of it to its home and says how to read
-it from git.
+Class Read from Group Markers. Until 15 October 2026 this bundle was Paper A,
+Closure Traps from Social Inference, rebuilt claim by claim under
+`papers/MANUSCRIPT_SKELETON.md` from a predecessor retired at pass 6. On
+15 October 2026 the author split Paper A in two. Paper A1, this bundle, keeps
+every row that needs no law of motion for a group's standing, and suite 5
+fails if one creeps in. Paper A2, `../paper_a2`, starts from the snapshot of
+Paper A at commit `9f108a44` and holds the law of motion, the basis for it,
+and every row that rests on it. The predecessor's retirement record and its
+suite live there. Row IDs are shared with the snapshot, so IDs absent here
+(M4 to M13, M16, A5 to A11, L1 to L3, L5, C2 to C9, C12 to C14, C17, C18,
+R1) are rows of Paper A2.
 
 | Path | Role |
 |---|---|
 | `MANUSCRIPT.tex` | The skeleton, and the only canonical statement of the results. |
-| `MEASUREMENT_MAP.tex` | Companion note. Every object of the model with one name, its type, what it represents and how an observer obtains it. Its Name column is the terminology. |
-| `RETIREMENT.md` | Where every environment, section, figure and number of the retired predecessor went. Checked by `checks/verify_retirement.py`. |
+| `MEASUREMENT_MAP.tex` | Companion note. Every object of the model with one name, its type, what it represents, whether it is directly observed and how an observer obtains it. Its Name column is the terminology. |
 | `TODO.md` | The pass plan, the claim queue, the author's decisions and the novelty ledger. Read it first. |
 | `lean/mathlib/` | Lake project pinned to Lean `v4.24.0-rc1` and Mathlib `14871d5`. |
-| `checks/` | `verify_mathlib.py` (build and axiom audit), `verify_manuscript.py` (rules MS-1 to MS-8), `verify_docs.py` (stated counts against the audit), `verify_measurement_map.py` (rules MM-1 to MM-10), `verify_retirement.py` (the retired predecessor, R0 to R8), `lean_files_table.py` (the linked table of Lean files in Appendix B). |
+| `checks/` | `verify_mathlib.py` (build and axiom audit), `verify_manuscript.py` (rules MS-1 to MS-8), `verify_docs.py` (stated counts against the audit), `verify_measurement_map.py` (rules MM-1 to MM-10), `verify_no_law.py` (no law of motion, NL-1 to NL-5), `lean_files_table.py` (the linked table of Lean files in Appendix B). |
 | `verify.sh` | Runs every suite and writes `VERIFICATION.md`, which is generated. |
-| `lit/` | One record per paper read. None yet. |
+| `lit/` | One record per paper read. Phelps (1972) and Jeffrey (1983, chapter 11). |
 | `notes/writing_discipline.md` | The writing rules, copied from the reference bundle. |
 | `notes/from_archive/` | Three notes from the author's archive of Paper A (snapshot of 3 July 2026), kept as background. They are not evidence for any row. |
 

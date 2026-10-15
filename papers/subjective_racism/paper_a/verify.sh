@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Runs every suite of the Paper A skeleton and writes VERIFICATION.md.
+# Runs every suite of the Paper A1 skeleton and writes VERIFICATION.md.
 # VERIFICATION.md is generated. Never edit it by hand.
 set -u -o pipefail
 
@@ -30,7 +30,7 @@ suite "Suite 1 - Lean 4 with Mathlib (checks/verify_mathlib.py)" python3 "$HERE/
 suite "Suite 2 - manuscript skeleton (checks/verify_manuscript.py)" python3 "$HERE/checks/verify_manuscript.py"
 suite "Suite 3 - doc consistency (checks/verify_docs.py)" python3 "$HERE/checks/verify_docs.py" "$OUT"
 suite "Suite 4 - measurement map (checks/verify_measurement_map.py)" python3 "$HERE/checks/verify_measurement_map.py"
-suite "Suite 5 - retirement of the predecessor (checks/verify_retirement.py)" python3 "$HERE/checks/verify_retirement.py"
+suite "Suite 5 - no law of motion (checks/verify_no_law.py)" python3 "$HERE/checks/verify_no_law.py"
 suite "Suite 6 - paper records (lit/verify_lit.sh)" bash "$HERE/lit/verify_lit.sh"
 
 if [ "$FAILED" -eq 0 ]; then
