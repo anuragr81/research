@@ -1096,6 +1096,14 @@ paper's claims, and only then write the manuscript.
     The stated bound floor(1/(1-rho)) on the pure equilibria is one short when
     1/(1-rho) is not an integer: three equilibria at rho = 3/5, from their own
     recursion computed exactly (kernel decide).
+- M28 promoted to a headline, 15 Oct 2026 (author: "Yes make it a headline").
+  K8 states it with its scope (incumbent scored as an entrant; a protected
+  incumbent not covered; weak sign, no size; the opposite sign in the two
+  noise-comparative entry models, C9). K7 keeps the entrants' share, whose
+  direction in the weight is that of the count. Positioning agreed the same
+  day: a tournament with a binary investment. Target journal: JITE first
+  (time to final decision about 73 days, its metrics page, 2024-2025); the
+  turnaround of JLEO, JPET and JEBO is unverified.
 - [ ] **D1 (author, 14 Oct 2026). Savings and mobility as the model's limit.**
   The model is static: wealth is given and nothing accumulates. The author's
   idea is to show how the results change once savings let wealth respond to
