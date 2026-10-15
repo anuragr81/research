@@ -14,8 +14,8 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M10 done. Next to be chosen |
-| 5. Appendices B to G | [~] filled for M1 to M10, and Appendix D records D1 and D4 |
+| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M11 done. Next to be chosen |
+| 5. Appendices B to G | [~] filled for M1 to M11, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [ ] |
@@ -94,10 +94,24 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
 - [x] **Q6. Moot, 14 Oct.** The dynamic half of `prop:coincidence` compared
   Bayes and Jeffrey across generations. With D1 (re-learned prior) and D4
   (Bayes only) there is no second rule to compare.
-- [ ] **Q7 onward.** `prop:bifurcation`, `cor:salience-threshold`,
-  `prop:enemy`, and the appendix propositions (`prop:passing`, `prop:shadow`,
+- [x] **Q7, M11. The outsider trap.** `prop:enemy`, `Outsider.lean`. Below
+  the threshold, an outsider starting below its `c_M` converges to its own
+  `c_L` for every host, and the host's orbit is its own. Above the threshold
+  every standing in [0, 1] converges to 1. Both parts need the bounds of M6,
+  which the predecessor omits. The independence of the two groups is
+  structural, since neither group's standing enters the other's map
+  (Appendix D, "Two groups"). Part (ii) has a true control on the threshold.
+  Its bounds have the same gap as M6 (Q4c).
+- [ ] **Q8 onward.** The appendix propositions (`prop:passing`, `prop:shadow`,
   `prop:exclusion`, `prop:tokenism`, `prop:spillover`, `prop:loury-nesting`,
-  `cor:Tstar`). To be ordered once Q1 to Q6 are in.
+  `cor:Tstar`). To be ordered next.
+- [ ] **Measurement map.** None exists for Paper A (checked 15 Oct 2026).
+  `../theory_and_decisions/jeffrey_vs_bayes_micromacro/notes/empirical_analytics.tex`
+  is Paper B's. The predecessor's empirical remarks are scattered (its
+  "Empirical prediction" on raising `gamma`, the `T* ~ (gamma - gamma*)^(-1/2)`
+  scaling, the platform-discrimination remark). Format to follow:
+  `papers/jite/endogenous_entry/entry_contest/MEASUREMENT_MAP.tex` with its
+  checker. Build once the model rows settle.
 
 ## Decisions for the author
 

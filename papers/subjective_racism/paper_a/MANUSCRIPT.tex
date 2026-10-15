@@ -228,6 +228,23 @@ that check it.}\\
   It fails below $b=\mu$, since at $\mu=1$,
   $\tilde\gamma^\ast(\tfrac14)=-\tfrac34<0=\tilde\gamma^\ast(0)$.}
   {Bifurcation.trap_iff_b, Bifurcation.gammaStar_strictMono, Bifurcation.gammaStar_strictMono_salience, Bifurcation.bStar_at_figure, Bifurcation.control_not_mono_below_mu}
+\mrow{M11}{An outsider group that enters below its tipping point, with
+  mobility below its threshold, converges to its own closure trap whatever
+  the host group does, and the host's path is its own. Above the threshold,
+  every standing converges to integration. Both parts need the bounds of M6.}
+  {Joint step $(\bar c_O,\bar c_I)\mapsto(\mathcal{H}(\bar c_O),\mathcal{H}_I(\bar c_I))$,
+  whose $n$-th iterate is $(\mathcal{H}^n(\bar c_O),\mathcal{H}_I^n(\bar c_I))$.
+  (i) $\mu>0$, $\tilde\gamma\ge0$, $b>0$, $\tilde\gamma<\tilde\gamma^\ast$,
+  $b<1-\mu+\tilde\gamma$, $\mu+\tilde\gamma<1$. Then fixed points
+  $0<c_L<c_M<1$ exist, and for every $\mathcal{H}_I$, $\bar c_I$ and
+  $\bar c_O\in[0,c_M)$, $\mathcal{H}^n(\bar c_O)\to c_L$.
+  (ii) $\mu>0$, $b>0$, $\tilde\gamma>\tilde\gamma^\ast$ and the same bounds.
+  Then $\bar c^0\in[0,1]\Rightarrow\mathcal{H}^n(\bar c^0)\to1$.
+  The hypotheses of (i) hold at $(\mu,\tilde\gamma,b)=(\tfrac1{20},\tfrac1{10},\tfrac12)$
+  and those of (ii) at $(\tfrac1{20},\tfrac1{10},\tfrac15)$.
+  (ii) fails without $\tilde\gamma>\tilde\gamma^\ast$, since at
+  $(\tfrac1{20},\tfrac1{10},\tfrac12)$ the orbit of $0$ does not converge to 1.}
+  {Outsider.decoupled, Outsider.outsider_trapped, Outsider.integrates_above, Outsider.trapped_hypotheses_example, Outsider.integrates_hypotheses_example, Outsider.control_threshold_needed}
 \end{longtable}
 \normalsize
 
@@ -335,6 +352,10 @@ threshold is $\tilde\gamma^\ast=b-2\sqrt{\mu b}$, written
 $\tilde\gamma^\ast(b)$ where $b$ varies, and the exclusion threshold is
 $b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$. In the proofs $u=\sqrt b$,
 $v=\sqrt\mu$ and $w=\sqrt{\mu+\tilde\gamma}$.
+
+Row M11 has two groups, an outsider $O$ moved by $\mathcal{H}$ with
+parameters $(\mu,\tilde\gamma,b)$ and a host $I$ moved by $\mathcal{H}_I$, the
+canonical map with its own parameters $(\mu_I,\tilde\gamma_I,b_I)$.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=k\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -566,6 +587,28 @@ Control. $\tilde\gamma^\ast(\tfrac14)=\tfrac14-2\sqrt{\tfrac14}=-\tfrac34$ and
 $\tilde\gamma^\ast(0)=0$ at $\mu=1$.
 \end{mproof}
 
+\begin{mproof}{M11}{Outsider.decoupled, Outsider.outsider_trapped, Outsider.integrates_above, Outsider.trapped_hypotheses_example, Outsider.integrates_hypotheses_example, Outsider.control_threshold_needed}
+The joint step is the product map, so by induction on $n$,
+\[
+(\mathcal{H}\times\mathcal{H}_I)^n=\mathcal{H}^n\times\mathcal{H}_I^n .
+\]
+(i) M9(i) turns $\tilde\gamma<\tilde\gamma^\ast$ into the trap condition, M5
+gives $c_L$ and $c_M$, and M6 gives $\mathcal{H}^n(\bar c_O)\to c_L$ for
+$\bar c_O\in[0,c_M)$.
+(ii) For $x\in[0,1)$, M9(ii) gives $Q(x)>0$, so by M5
+\[
+\mathcal{H}(x)-x=(1-x)\,Q(x)>0 .
+\]
+$\mathcal{H}$ is increasing on $[0,1]$ by M6 and $\mathcal{H}(1)=1$, so the
+monotone orbit argument of M6 with $p=1$ gives $\mathcal{H}^n(\bar c^0)\to1$.
+Examples. At $(\tfrac1{20},\tfrac1{10},\tfrac12)$, M5 gives the trap condition
+and M9(i) turns it into $\tilde\gamma<\tilde\gamma^\ast$. At
+$(\tfrac1{20},\tfrac1{10},\tfrac15)$, $\tilde\gamma^\ast=0<\tfrac1{10}$ by M9.
+Both bounds hold at each.
+Control. By (i) at $(\tfrac1{20},\tfrac1{10},\tfrac12)$, $\mathcal{H}^n(0)\to c_L$,
+and $c_L<c_M<1$, so by uniqueness of limits $\mathcal{H}^n(0)\not\to1$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -655,6 +698,10 @@ Mobility threshold & $\tilde\gamma^\ast$ & The mobility below which the
 Exclusion threshold & $b^\ast$ & The value of $s_g\delta$ above which the
   trap condition holds, at given $\mu$ and $\tilde\gamma$ (M10). \\
   \addlinespace
+Outsider group & $O$ & A group whose standing starts below its tipping point
+  $c_M$, as the predecessor defines it (M11). \\ \addlinespace
+Host group & $I$ & The group alongside the outsider, with its own composed
+  map (M11). \\ \addlinespace
 Frozen prior & $\beta_0$ & The group prior held at its first value, with mean
   standing $\beta_0$, in place of re-learning it each generation. \\
   \addlinespace
@@ -707,6 +754,15 @@ $0.29$ and $0.30$. Its salience corollary states that the threshold rises
 with salience without restriction. Row M10 proves it for $s_g\delta\ge\mu$,
 which covers every case where the threshold is non-negative, and its control
 shows it fails below.
+
+\paragraph{Two groups.} The law of motion of one group does not take any
+other group's standing. The independence of the outsider and the host in M11
+is therefore a property of the map, not a result about how groups interact.
+A channel between groups, such as the host's standing entering the
+outsider's discrimination rate, would need a row of its own. The predecessor
+states the outsider result with the threshold alone. Row M11 adds the bounds
+of M6, so both parts hold only for $s_g\delta$ in the band those bounds and
+M10 leave.
 
 \paragraph{The group prior across generations.} Each generation the observer's
 class distribution for a group is re-learned from the group's current

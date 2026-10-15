@@ -86,3 +86,15 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `gammaStar_strictMono`, `gammaStar_strictMono_salience` | M10. `γ*` rises with `b` from `b = μ` on, and so with `s` at fixed `δ > 0` |
 | `bStar_at_figure` | `0.29 < b* < 0.30` at `μ = γ = 1/20` |
 | `control_not_mono_below_mu` | At `μ = 1`, `γ*(1/4) = −3/4 < 0 = γ*(0)` |
+
+## Outsider.lean, row M11
+
+`step` moves an outsider by `H μ γ b` and a host by `H μI γI bI`.
+
+| Theorem | Content |
+|---|---|
+| `decoupled` | The `n`-th joint iterate is the pair of separate `n`-th iterates |
+| `outsider_trapped` | M11 (i). Below `γ*` and under the bounds of M6, an outsider from `[0, c_M)` converges to `c_L` for every host, whose orbit is its own |
+| `integrates_above` | M11 (ii). Above `γ*` and under the same bounds, every orbit from `[0, 1]` converges to 1 |
+| `trapped_hypotheses_example`, `integrates_hypotheses_example` | The hypotheses of each part hold at `(1/20, 1/10, 1/2)` and `(1/20, 1/10, 1/5)` |
+| `control_threshold_needed` | At `(1/20, 1/10, 1/2)` the orbit of 0 does not converge to 1 |
