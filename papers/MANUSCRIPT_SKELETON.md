@@ -4,7 +4,10 @@ These are instructions for a session that builds or extends a manuscript
 skeleton like the one in `papers/jite/endogenous_entry/entry_contest/`. They
 assume no knowledge of the conversations that produced it. The entry-contest
 bundle is the reference implementation. Copy from it and change only what the
-new paper needs.
+new paper needs. Paper A in `papers/subjective_racism/paper_a/` is the
+reference for three later parts that the entry-contest bundle does not have:
+the introduction as question and answer, the table of assumptions, and the
+measurement map with its checker.
 
 Before starting, read this file, then these four files in the reference bundle.
 
@@ -17,22 +20,26 @@ Before starting, read this file, then these four files in the reference bundle.
 
 ## 1. What the skeleton is
 
-The skeleton is a manuscript whose body is four tables (introduction, model,
-literature, conclusions) and whose appendices carry every proof. Every
+The skeleton is a manuscript whose body is five tables (introduction,
+assumptions, model, literature, conclusions) and whose appendices carry every
+proof. Every
 statement in it rests on one of four grounds.
 
 - A theorem of Lean 4.
 - A counterexample checked in Lean.
-- A model assumption, stated in the primitives appendix.
+- A model assumption, stated in the table of assumptions, with its longer
+  reason in the primitives appendix.
 - A verbatim quotation, with its page, from a source that was read.
 
 Numbers may appear as illustrations. SymPy and numerical sampling are never
 evidence for a claim. They stay in the bundle only as illustrations and
 regression tests.
 
-A script checks four things on every build. Every row link resolves, every
-Lean name exists and passes the axiom audit, every quotation appears in its
-source record, and no proof exceeds the prose limit. The prose submitted to a
+A script checks five things on every build. Every row link resolves, every
+model row rests on an assumption, every Lean name exists and passes the axiom
+audit, every quotation appears in its source record, and no proof exceeds the
+prose limit. A second script checks that every symbol of the assumptions has
+exactly one row in the measurement map. The prose submitted to a
 journal is written from the skeleton later. The skeleton is what makes that
 prose checkable.
 
@@ -59,11 +66,12 @@ yet verified goes into the pending conclusions table or stays out.
 | `checks/verify_manuscript.py` | The skeleton checker (section 4.3). |
 | `checks/verify_mathlib.py` | Builds and axiom-audits the Mathlib files. |
 | `checks/verify_docs.py` | Fails if a count stated in the manuscript differs from the generated audit. |
+| `checks/verify_measurement_map.py` | The measurement-map checker (section 4.5). |
 | `verify.sh` | Runs everything and writes `VERIFICATION.md`. That file is generated, so never edit it by hand. |
 | `TODO.md` | The pass plan (item PLAN), the author's decisions with dates, and the novelty ledger. |
 | `LITERATURE.tex` | The explored literature. It holds everything read that is not an L row, and may be amended freely. |
 | `PROOFS_ADDENDUM.tex` | Results proved in Lean that go beyond what the manuscript states, such as weaker hypotheses or more general statements. |
-| `MEASUREMENT_MAP.tex` | Optional. For every input and output of the model, it records what the object is and how an observer could obtain it. |
+| `MEASUREMENT_MAP.tex` | Required. Every object of the model, in three tables (inputs, internal objects, outputs), with what it stands for in the world, whether it is directly observed, and how it is obtained (section 4.5). |
 | `RETIREMENT.md` | Only when the skeleton replaces an earlier document. It maps every part of the earlier document to its new home, and a script checks the map against git. |
 | `notes/writing_discipline.md` | The writing rules. |
 
@@ -83,6 +91,7 @@ Copy these verbatim. The checker parses them by name and argument count.
 \newcommand{\pend}[1]{\textit{Pending:} #1}
 
 \newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\arow}[5]{#1 & #2 & #3 & \rowref{#4} & #5 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
@@ -96,6 +105,7 @@ Copy these verbatim. The checker parses them by name and argument count.
 The arguments, in order, are these.
 
 - `\krow{ID}{headline}{model rows}{scope note}`
+- `\arow{ID}{assumption}{symbols}{model rows}{reason}`
 - `\mrow{ID}{claim in words}{statement in symbols}{Lean theorems}`
 - `\lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model or conclusion rows}`
 - `\crow{ID}{statement}{model or literature rows}`
@@ -108,28 +118,42 @@ Lists are comma-separated. A Lean name is fully qualified,
 
 ### 4.2 Sections, in order
 
-1. **Introduction.**
-   - It opens with a paragraph of two or three sentences. The paragraph states
-     the paper's question in one sentence, in the author's words if the author
-     gave them, and adds at most one line of framing.
-   - Table 1 follows, with columns ID, Headline, Model rows and Scope note.
+1. **Introduction.** The question and the answer drive it, in two
+   subsections.
+   - **Question.** The paper's question in one sentence, in the author's
+     words if the author gave them, and at most two sentences of framing that
+     name the mechanism the question is about.
+   - **Answer.** The paper's answer to the question, in prose, one paragraph
+     per part of the question. Every sentence cites the model rows it rests
+     on, and says no more than those rows and the headlines' scope notes
+     allow.
+   - Table 1 follows the answer, with columns ID, Headline, Model rows and
+     Scope note. It states the answer as headlines.
    - Each scope note says what its headline does not claim. That covers the
      hypotheses the headline needs, where it fails (citing the counterexample
      row), and what is already in print.
-2. **Model.** Table 2 has the columns ID, Claim, Statement, Lean and Proof.
-   - The claim is in words. The statement is in symbols and gives both the
-     hypotheses and the conclusion.
-   - The Proof column holds the page of the proof and is generated by the
-     macro.
-3. **Literature.** Table 3 has the columns ID, Paper, What we rely on, Quote,
+2. **Model.** Two subsections.
+   - **Assumptions.** Table 2 has the columns ID, Assumption, Symbols, Model
+     rows and Reason. It lists every assumption the model rows rest on,
+     including the author's modelling choices and the forms taken as given.
+     The Symbols column lists every symbol the assumption uses, and each has
+     exactly one row in the measurement map. The reason is one or two
+     sentences, and points to the paragraph of Appendix D that gives the
+     longer reason. An assumption that replaces another in some rows (such as
+     an alternative law of motion) says so and names the rows.
+   - **Results.** Table 3 has the columns ID, Claim, Statement, Lean and
+     Proof. The claim is in words. The statement is in symbols and gives both
+     the hypotheses and the conclusion. The Proof column holds the page of the
+     proof and is generated by the macro.
+3. **Literature.** Table 4 has the columns ID, Paper, What we rely on, Quote,
    Page and Rows.
    - It holds only papers that were read.
    - Below the table, one sentence names every paper that is cited elsewhere
      but not read, and says that every claim made about them is unverified.
 4. **Conclusions.** A short paragraph explains the two tables that follow.
-   - **Table 4** holds the conclusions that rest on model rows and on papers
+   - **Table 5** holds the conclusions that rest on model rows and on papers
      read in full.
-   - **Table 5** holds every claim that something is new, and anything else
+   - **Table 6** holds every claim that something is new, and anything else
      still waiting. Each of its rows ends with `\pend{...}`, naming exactly
      what it waits on (a paper, a published version, or a search).
    - Keep C IDs stable when a row moves between the tables.
@@ -148,7 +172,8 @@ The appendices follow the conclusions.
   load-bearing English term to a symbol already defined, so it is a key and
   not a second set of definitions.
 - **D. Primitives and scope.**
-  - One paragraph per primitive or boundary.
+  - One paragraph per primitive or boundary. The reason column of the
+    assumptions table points here.
   - Each paragraph says what lies outside the model and which rows depend on
     it.
   - Model choices made by the author are recorded here, with their reason.
@@ -163,16 +188,17 @@ The appendices follow the conclusions.
 
 ### 4.3 What the checker enforces
 
-`checks/verify_manuscript.py` applies six rules.
+`checks/verify_manuscript.py` applies seven rules.
 
 | Rule | Requirement |
 |---|---|
-| MS-1 | Row IDs are well formed (`K1`, `M1`, `L1`, `C1`, ...) and unique. |
+| MS-1 | Row IDs are well formed (`K1`, `A1`, `M1`, `L1`, `C1`, ...) and unique. |
 | MS-2 | Introduction rows point to model rows only. |
 | MS-3 | Conclusion rows point to model or literature rows only. |
 | MS-4 | Every model row names Lean theorems that are declared in an audited file. Every model row has exactly one proof, and the proof names the same theorems. |
 | MS-5 | Every literature row's bib key is in `refs.bib` and has a `lit/` record, the record's `KEYS` file lists that key, and the quote appears verbatim in the record's `CLAIMS.md` or `NOTES.md`, after normalising LaTeX and whitespace. |
 | MS-6 | Plain English is at most 30% of every proof, counted as prose words over prose words plus mathematical tokens. |
+| MS-7 | Assumption rows point to model rows only, and every model row rests on at least one assumption. |
 
 Each rule also runs on a well-formed sample, which it must accept, and on a
 faulty sample, which it must reject. A rule that cannot fail measures nothing.
@@ -188,7 +214,7 @@ and keep the rest. Wire the checker into `verify.sh`.
   paper supports or contrasts with, and says where the parallel ends.
 - **Versions.** Mark an L row `\unv{...}` when the version read is not the
   version cited, such as a working paper or a draft, and say which was read.
-- **Novelty.** A claim that a result is new stays in Table 5 until every paper
+- **Novelty.** A claim that a result is new stays in Table 6 until every paper
   that could contain the result has been read in full.
 - **New rows.** When a new row contradicts text already in an appendix, fix
   that text in the same commit. Search the appendices for every object the new
@@ -199,6 +225,48 @@ and keep the rest. Wire the checker into `verify.sh`.
   family of functions needs an economic reason.
 - **Lean names.** They are for internal verification. They leave the printed
   manuscript before submission.
+- **Assumptions.** A hypothesis that appears in a row's statement, such as a
+  bound needed for one result, stays in the row. An assumption is what the
+  model as a whole takes as given, and it goes in Table 2.
+
+### 4.5 The measurement map
+
+`MEASUREMENT_MAP.tex` names every object of the model once. Its name column is
+the paper's terminology, and the manuscript uses those names and no synonyms.
+
+- **Three tables.** Inputs are what the model takes as given. Internal
+  objects are built from the inputs inside the model, including devices of
+  the proofs. Outputs are what the rows predict.
+- **One macro.** `\mm{symbol}{name}{type}{represents}{directly observed}{obtained how}`.
+- **Directly observed** is Yes when a record of the world gives the object
+  with no computation, and No otherwise. An elicited belief is No, since the
+  answer stands in for the belief.
+- **Obtained how** begins with one of six status words. Recorded, Elicited,
+  Computed, Assumed, Never observed, or A device (it exists only inside a
+  proof). A computed object names its recovery formula, and each recovery
+  formula is a Lean theorem.
+
+`checks/verify_measurement_map.py` applies nine rules, each with a
+well-formed and a faulty sample.
+
+| Rule | Requirement |
+|---|---|
+| MM-1 | Every row has six non-empty fields and a plain-English name. |
+| MM-2 | Names are unique. |
+| MM-3 | Every term of the manuscript's Terminology appendix is a name in the map. |
+| MM-4 | Every Obtained how entry begins with a status word. |
+| MM-5 | No colon in the note's prose. |
+| MM-6 | Every Lean theorem the note names is an audited declaration. |
+| MM-7 | Directly observed is Yes exactly when Obtained how begins with Recorded. |
+| MM-8 | No symbol names two rows. A cell `symbol = formula` names its left side. |
+| MM-9 | Every symbol in the assumptions table's Symbols column is a symbol of the map, and every letter in an assumption's mathematics belongs to a symbol the row lists. |
+
+MM-8 is what makes "every symbol is in the map" mean one thing. In Paper A,
+MM-8 and the search of the manuscript that went with it found letters used
+for two objects, among them `P` for both the passers and a polynomial, and
+`n` for both a head count and a number of generations. MM-8 sees only the
+map, so search the manuscript's rows and proofs as well when a symbol is
+added.
 
 ## 5. Lean
 
@@ -295,14 +363,14 @@ done before the predecessor document was retired.
 
 | Pass | Work | Done when |
 |---|---|---|
-| 1 | Scaffold the skeleton: four empty tables, the ID scheme, the appendix stubs, and the checker with its controls, wired into `verify.sh`. | The empty skeleton builds, and every rule passes its good sample and fails its bad one. |
+| 1 | Scaffold the skeleton: five empty tables, the ID scheme, the appendix stubs, and the checker with its controls, wired into `verify.sh`. | The empty skeleton builds, and every rule passes its good sample and fails its bad one. |
 | 2 | Set up the Lean project, with the toolchain and Mathlib pinned, the build roots listed, and the audit in place. | `verify.sh` builds and audits it. |
 | 3 | Move the analytic steps into Lean, one cluster per pass, with controls and counterexamples. | Each step is a theorem that passes the audit. |
-| 4 | Add model rows and their Appendix A proofs, one family of results per pass. | MS-4 and MS-6 pass. |
+| 4 | Add model rows and their Appendix A proofs, one family of results per pass, and the assumptions they rest on, with every symbol in the measurement map. | MS-4, MS-6, MS-7 and the measurement-map suite pass. |
 | 5 | Fill Appendices B to G. Open items go to `TODO.md`. | Every stub is filled. |
 | 6 | Retire any predecessor document. A completeness check confirms that every claim, number and Lean name in it has a home. | `verify.sh` is green without it. |
-| 7 | Do the novelty reading. Every paper that could hold a claimed result gets a `lit/` record and Lean, and then the ledger is revised. | Every Table 5 row names only what is genuinely outstanding. |
-| 8 | Write the conclusions, then the introduction. Each headline is assessed for overreach. | MS-2 and MS-3 pass, and every headline has a scope note. |
+| 7 | Do the novelty reading. Every paper that could hold a claimed result gets a `lit/` record and Lean, and then the ledger is revised. | Every Table 6 row names only what is genuinely outstanding. |
+| 8 | Write the conclusions, then the introduction, its answer written from the rows and then the headlines. Each headline and each sentence of the answer is assessed for overreach. | MS-2 and MS-3 pass, and every headline has a scope note. |
 | 9 | Fill the literature table, with only the papers a model or conclusion row depends on. | MS-5 passes. |
 | 10 | Readability rounds on the text added since the previous round, under the writing discipline. | Record what changed in `TODO.md`. |
 | 11 | Re-read every referee comment against the verified results and update Appendix G. | Every comment has a status and a place. |
