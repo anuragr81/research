@@ -14,9 +14,9 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [x] 15 Oct. M1 to M16 and R1. Every predecessor claim is a row, a refuted conjecture, or recorded as not stated (Q12) |
-| 5. Appendices B to G | [~] filled for M1 to M16, and Appendix D records D1 and D4 |
-| 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
+| 3 and 4. Claims into Lean and model rows, one at a time | [x] 15 Oct. M1 to M17 and R1. Every predecessor claim is a row, a refuted conjecture, or recorded as not stated (Q12) |
+| 5. Appendices B to G | [~] filled for M1 to M17, and Appendix D records D1 and D4 |
+| 6. Retire `../theory_and_decisions/manuscript.tex` | [x] 15 Oct. Removed, `RETIREMENT.md` maps every part, suite 5 checks it against git commit `91a74cb1` |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C16 pending, K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
@@ -26,7 +26,8 @@ has been established so far, and go claim by claim.
 ## Claim queue
 
 Taken from the predecessor manuscript. Each becomes a model row only once it is
-a Lean theorem with a control. Labels are those of `../theory_and_decisions/manuscript.tex`.
+a Lean theorem with a control. Labels are those of the predecessor, retired at
+pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
 
 - [x] **Q1, M1. Group sufficiency, both forms.** `ass:sufficiency` states the
   likelihood form and the posterior form as equivalent. Proved over a finite
@@ -134,10 +135,20 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   claims, as a lower bound. At `(1/20, 3/10, 1/100)` at least 18
   generations, against the predecessor's "approximately 65". The constant
   `C = pi/sqrt|ab|` and an upper bound are not stated.
-- [ ] **Q12. What the appendix pass left.** A row deriving `F` from the
-  engagement threshold `d_bar`. A platform objective derived rather than
-  assumed. An upper bound on the escape time. These are new rows, not
-  predecessor claims.
+- [ ] **Q12. What the appendix pass and the retirement left.** New rows, not
+  predecessor claims. A row deriving `F` from the engagement decision
+  (`ass:preferences`, `ass:beliefs`, the threshold `d_bar`), which would also
+  carry `rem:graded` and `rem:salience`. The signal precision `tau` of
+  `rem:resolution`. A platform objective derived rather than assumed. An
+  upper bound on the escape time. Cohorts, if the Discussion's claim that
+  the trap regenerates after forced integration is to be stated, since M6
+  says a single group pushed above `c_M` integrates. The welfare addendum.
+- [x] **Q13, M17. The predecessor's figures and worked example.**
+  `Figures.lean`, 15 Oct. Found in the retirement inventory: the parameters
+  earlier called "the figure's", `(1/20, 1/10, 1/2)`, are not Figure 1's,
+  whose script uses `gamma = 0.05` and `0.30`. The theorems were renamed
+  `trap_at_example` and `basins_hypotheses_at_example`, and M17 checks the
+  real panels.
 - [x] **Measurement map.** `MEASUREMENT_MAP.tex`, 15 Oct 2026. Inputs,
   internal objects and outputs, each with one name, a type, what it
   represents and how it is obtained, and four recovery formulas proved in

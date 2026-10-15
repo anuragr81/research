@@ -87,7 +87,7 @@ theorem rhoStar_mem_iff {μ γ δ s : ℝ} (hμ : 0 < μ) (hsd : 0 < s * δ) :
   · intro h
     exact ⟨div_pos hpos hsd, (div_lt_one hsd).2 h⟩
 
-/-- The threshold is interior at the predecessor's closure-trap figure,
+/-- The threshold is interior at the illustrative parameters
 `μ = 1/20`, `γ = 1/10`, `s δ = 1/2`. -/
 theorem rhoStar_interior_example :
     0 < rhoStar (1 / 20) (1 / 10) (1 / 2) 1 ∧ rhoStar (1 / 20) (1 / 10) (1 / 2) 1 < 1 := by

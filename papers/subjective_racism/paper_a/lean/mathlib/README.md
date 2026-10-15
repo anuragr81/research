@@ -41,11 +41,11 @@ Every file here is a build root in `lakefile.toml` and is audited by
 | `vieta`, `Q_factor` | Two distinct roots satisfy `b (c₁ + c₂) = b − γ` and `b c₁ c₂ = μ`, and then `Q c = b (c − c₁)(c − c₂)` |
 | `two_interior_iff` | M5. With `μ > 0`, `γ ≥ 0`, `b > 0`, two fixed points in `(0, 1)` exist exactly when `b − γ > 0` and `(b − γ)² > 4 μ b` |
 | `fixed_points_exactly` | The fixed points are then exactly `c₁`, `c₂` and 1 |
-| `trap_at_figure_parameters`, `control_no_trap` | The condition holds at `(1/20, 1/10, 1/2)` and fails at `(1/20, 1/10, 1/5)` |
+| `trap_at_example`, `control_no_trap` | The condition holds at the illustrative `(1/20, 1/10, 1/2)` and fails at `(1/20, 1/10, 1/5)`. The predecessor's Figure 1 is checked in `Figures.lean` |
 | `tendsto_up`, `tendsto_down` | A continuous map, nondecreasing on an interval, with a fixed endpoint and moving every point towards it, carries every orbit to that endpoint |
 | `H_continuous`, `H_strictMonoOn` | `H` is continuous, and strictly increasing on `[0, 1]` when `b < 1 − μ + γ` and `μ + γ < 1` |
 | `basins` | M6. Under those bounds, orbits from `[0, c₂)` converge to `c₁` and orbits from `(c₂, 1]` converge to 1 |
-| `basins_hypotheses_at_figure` | The bounds hold at `(1/20, 1/10, 1/2)` |
+| `basins_hypotheses_at_example` | The bounds hold at `(1/20, 1/10, 1/2)` |
 | `control_leaves_unit`, `control_not_monotone` | At `(1/20, 0, 3)`, `H (1/5) < 0`. At `(1/20, 0, 1)`, `H (1/100) < H 0` |
 | `control_basin_fails` | At `(3/5, 0, 5/2)` the trap condition holds with fixed points `2/5` and `3/5`, the bound `b < 1 − μ + γ` fails, and the orbit of 0 converges to `3/5`, not `2/5` |
 
@@ -172,3 +172,18 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `slowing` | M16. From the window's lower edge, reaching its upper edge takes at least `1/(√b √ε)` generations |
 | `control_start_matters` | From the upper edge no generation is needed, while the bound is positive |
 | `bound_at_example` | At `(μ, b, ε) = (1/20, 3/10, 1/100)` the hypotheses hold and the bound is at least 18 |
+
+## Figures.lean, row M17
+
+The predecessor's Figure 1 (`fig:closure-map`) uses `μ = 0.05`, `δ = 0.5`,
+`s = 1`, start `0.55`, `γ = 0.05` in panel (a) and `γ = 0.30` in panel (b),
+read from `figures/generate_figures.py`. Figure 2 is checked by
+`Bifurcation.bStar_at_figure`.
+
+| Theorem | Content |
+|---|---|
+| `fig1a_start_between`, `fig1a_trapped` | Panel (a). The start `11/20` lies between the interior fixed points, and its orbit converges to the lower |
+| `fig1b_integrates` | Panel (b). The orbit of `11/20` converges to 1 |
+| `control_fig1a_not_integrated` | In panel (a) the orbit of `11/20` does not converge to 1 |
+| `rhoStar_at_fig1` | `0.58 < ρ* < 0.60` at panel (a), against the predecessor's unexplained `0.31` |
+| `stranger_example` | The worked example's mixtures, `1/2` and `19/50` |

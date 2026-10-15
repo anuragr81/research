@@ -171,9 +171,9 @@ theorem control_no_trap :
   rw [two_interior_iff (by norm_num) (by norm_num) (by norm_num)]
   norm_num
 
-/-- The trap condition is met at the predecessor's figure parameters,
+/-- The trap condition is met at the illustrative parameters
 `μ = 1/20`, `γ = 1/10`, `b = 1/2`. -/
-theorem trap_at_figure_parameters :
+theorem trap_at_example :
     ∃ c₁ c₂, 0 < c₁ ∧ c₁ < c₂ ∧ c₂ < 1 ∧
       H (1 / 20) (1 / 10) (1 / 2) c₁ = c₁ ∧ H (1 / 20) (1 / 10) (1 / 2) c₂ = c₂ := by
   rw [two_interior_iff (by norm_num) (by norm_num) (by norm_num)]
@@ -370,8 +370,10 @@ theorem basins {μ γ b c₁ c₂ : ℝ} (hb : 0 < b)
         positivity
       nlinarith
 
-/-- Every hypothesis of `basins` holds at the predecessor's figure parameters. -/
-theorem basins_hypotheses_at_figure :
+/-- Every hypothesis of `basins` holds at the illustrative parameters
+`μ = 1/20`, `γ = 1/10`, `b = 1/2`. The predecessor's Figure 1 uses `γ = 1/20`,
+checked in `Figures.lean`. -/
+theorem basins_hypotheses_at_example :
     (1 / 2 : ℝ) < 1 - 1 / 20 + 1 / 10 ∧ (1 / 20 : ℝ) + 1 / 10 < 1 := by
   norm_num
 

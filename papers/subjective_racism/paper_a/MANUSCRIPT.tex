@@ -2,8 +2,8 @@
 % Inference, titled Stereotype Rigidity in Social Inferences until 15 October
 % 2026). Created 14 October 2026 as pass 1 of the plan in TODO.md
 % (item PLAN), following papers/MANUSCRIPT_SKELETON.md. The predecessor
-% document is papers/subjective_racism/theory_and_decisions/manuscript.tex,
-% which stays in place until a later pass retires it.
+% document was papers/subjective_racism/theory_and_decisions/manuscript.tex,
+% retired at pass 6 on 15 October 2026. RETIREMENT.md maps every part of it.
 %
 % STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
 %   Rows are written only through the four row macros below, and proofs only
@@ -197,7 +197,7 @@ that check it.}\\
   The condition holds at $(\mu,\tilde\gamma,b)=(\tfrac1{20},\tfrac1{10},\tfrac12)$
   and fails at $(\tfrac1{20},\tfrac1{10},\tfrac15)$, where no fixed point lies
   inside $(0,1)$.}
-  {ClosureMap.H_sub_self, ClosureMap.fixed_iff_Q, ClosureMap.H_one, ClosureMap.vieta, ClosureMap.Q_factor, ClosureMap.two_interior_iff, ClosureMap.fixed_points_exactly, ClosureMap.control_no_trap, ClosureMap.trap_at_figure_parameters}
+  {ClosureMap.H_sub_self, ClosureMap.fixed_iff_Q, ClosureMap.H_one, ClosureMap.vieta, ClosureMap.Q_factor, ClosureMap.two_interior_iff, ClosureMap.fixed_points_exactly, ClosureMap.control_no_trap, ClosureMap.trap_at_example}
 \mrow{M6}{When the map is also increasing, every standing below the middle
   fixed point converges to the low one, the closure trap, and every standing
   above it converges to integration.}
@@ -212,7 +212,7 @@ that check it.}\\
   The conclusion fails without $b<1-\mu+\tilde\gamma$. At
   $(\tfrac35,0,\tfrac52)$ the trap condition holds with $c_L=\tfrac25$ and
   $c_M=\tfrac35$, and $\mathcal{H}^n(0)\to\tfrac35$, not $\tfrac25$.}
-  {ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
+  {ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_example, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
 \mrow{M7}{With the group prior frozen at its first value, the map has exactly
   one fixed point in $[0,1]$. A higher frozen discrimination rate gives a lower
   fixed point, so a higher frozen belief about the group gives a higher one.}
@@ -373,6 +373,21 @@ that check it.}\\
   The start matters, since $\mathcal{H}^0(c_0+h)=c_0+h$ while the bound is
   positive.}
   {Slowing.Q_threshold_plus, Slowing.step_bounds, Slowing.slowing, Slowing.control_start_matters, Slowing.bound_at_example}
+\mrow{M17}{The predecessor's composed-map figure and its worked example agree
+  with the rows. In panel (a) the start $0.55$ falls to the closure trap, and
+  in panel (b) it rises to integration. The predecessor's stranger moves from
+  an expected class of $0.50$ to $0.38$, which is the mixture of M2 and M3.}
+  {(a) $(\mu,\tilde\gamma,b)=(\tfrac1{20},\tfrac1{20},\tfrac12)$, that is
+  $\mu=\tilde\gamma=0.05$ and $s_g\delta=0.5$. Fixed points $c_L<c_M<1$
+  satisfy $c_L<\tfrac{11}{20}<c_M$, and $\mathcal{H}^n(\tfrac{11}{20})\to c_L$.
+  (b) $(\tfrac1{20},\tfrac3{10},\tfrac12)$, that is $\tilde\gamma=0.30$. Then
+  $\mathcal{H}^n(\tfrac{11}{20})\to1$.
+  At (a), $\tfrac{29}{50}<\rho^\ast<\tfrac35$.
+  The mixture of standings $(\tfrac7{10},\tfrac3{10})$ by weights
+  $(\tfrac12,\tfrac12)$ is $\tfrac12$, and by $(\tfrac15,\tfrac45)$ is
+  $\tfrac{19}{50}$.
+  At (a), $\mathcal{H}^n(\tfrac{11}{20})\not\to1$.}
+  {Figures.fig1a_start_between, Figures.fig1a_trapped, Figures.fig1b_integrates, Figures.control_fig1a_not_integrated, Figures.rhoStar_at_fig1, Figures.stranger_example}
 \end{longtable}
 \normalsize
 
@@ -634,7 +649,7 @@ Control: $F\equiv1$ gives
 $\mathcal{H}_F(1)=\tfrac1{20}+(1-\tfrac1{20}+\tfrac1{10}-1)-\tfrac1{10}=0$.
 \end{mproof}
 
-\begin{mproof}{M5}{ClosureMap.H_sub_self, ClosureMap.fixed_iff_Q, ClosureMap.H_one, ClosureMap.vieta, ClosureMap.Q_factor, ClosureMap.two_interior_iff, ClosureMap.fixed_points_exactly, ClosureMap.control_no_trap, ClosureMap.trap_at_figure_parameters}
+\begin{mproof}{M5}{ClosureMap.H_sub_self, ClosureMap.fixed_iff_Q, ClosureMap.H_one, ClosureMap.vieta, ClosureMap.Q_factor, ClosureMap.two_interior_iff, ClosureMap.fixed_points_exactly, ClosureMap.control_no_trap, ClosureMap.trap_at_example}
 Expanding,
 \[
 \mathcal{H}(\bar c)-\bar c=\mu(1-\bar c)+\tilde\gamma\,\bar c(1-\bar c)
@@ -665,7 +680,7 @@ Controls. At $(\tfrac1{20},\tfrac1{10},\tfrac12)$, $B^2=\tfrac4{25}>\tfrac1{10}=
 At $(\tfrac1{20},\tfrac1{10},\tfrac15)$, $B^2=\tfrac1{100}<\tfrac1{25}=4\mu b$.
 \end{mproof}
 
-\begin{mproof}{M6}{ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_figure, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
+\begin{mproof}{M6}{ClosureMap.tendsto_up, ClosureMap.tendsto_down, ClosureMap.H_continuous, ClosureMap.H_strictMonoOn, ClosureMap.basins, ClosureMap.basins_hypotheses_at_example, ClosureMap.control_leaves_unit, ClosureMap.control_not_monotone, ClosureMap.control_basin_fails}
 Put $A=1-\mu+\tilde\gamma-b$. For $0\le x<y\le1$,
 \[
 \mathcal{H}(y)-\mathcal{H}(x)=(y-x)\,G,\qquad
@@ -940,6 +955,27 @@ and $1/(\sqrt{3/10}\cdot\tfrac1{10})\ge18$.
 Control. $\mathcal{H}^0$ is the identity, and $ue>0$.
 \end{mproof}
 
+\begin{mproof}{M17}{Figures.fig1a_start_between, Figures.fig1a_trapped, Figures.fig1b_integrates, Figures.control_fig1a_not_integrated, Figures.rhoStar_at_fig1, Figures.stranger_example}
+(a) With $b=\tfrac12$, $\tilde\gamma=\mu=\tfrac1{20}$,
+\[
+Q(\tfrac{11}{20})=\tfrac12\cdot\tfrac{121}{400}-\tfrac9{20}\cdot\tfrac{11}{20}+\tfrac1{20}
+=-\tfrac{235}{800}<0,
+\]
+and $Q(\bar c)=b(\bar c-c_L)(\bar c-c_M)$ by M5, so $c_L<\tfrac{11}{20}<c_M$.
+The trap condition is $(\tfrac9{20})^2=\tfrac{81}{400}>\tfrac1{10}=4\mu b$.
+The bounds of M6 are $\tfrac12<1$ and $\tfrac1{10}<1$, so M6 gives
+$\mathcal{H}^n(\tfrac{11}{20})\to c_L$.
+(b) $\sqrt{1/40}>\tfrac1{10}$, so
+$\tilde\gamma^\ast=\tfrac12-2\sqrt{1/40}<\tfrac3{10}$. The bounds of M6 are
+$\tfrac12<\tfrac54$ and $\tfrac7{20}<1$, and M11(ii) gives
+$\mathcal{H}^n(\tfrac{11}{20})\to1$.
+Intensity. $\rho^\ast=b^\ast/\tfrac12=2b^\ast$ and $\tfrac{29}{100}<b^\ast<\tfrac3{10}$
+by M10.
+Example. $\tfrac12\cdot\tfrac7{10}+\tfrac12\cdot\tfrac3{10}=\tfrac12$ and
+$\tfrac15\cdot\tfrac7{10}+\tfrac45\cdot\tfrac3{10}=\tfrac{7}{50}+\tfrac{12}{50}=\tfrac{19}{50}$.
+Control. $\mathcal{H}^n(\tfrac{11}{20})\to c_L<1$, and limits are unique.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -967,6 +1003,10 @@ matches the audit.
 how an observer would obtain it. Its Name column is the terminology, and
 every term of Appendix~\ref{app:terms} is checked against it. The note is a
 reference and not evidence for any row.
+\item \emph{Retirement.} \path{checks/verify_retirement.py} reads the
+predecessor manuscript from git and fails if any of its environments,
+sections, figures or numbers has no home in this bundle or in
+\path{RETIREMENT.md}.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The class space is finite in the Lean
@@ -1133,10 +1173,14 @@ the readings could matter. The model has no such sequence.
 \unv{The attribution of the kinematics formula to Jeffrey (1965) rests on the
 predecessor manuscript. The source has not been read for this skeleton.}
 
-\paragraph{The law of motion.} Rows M4 to M12 take the predecessor's
+\paragraph{The law of motion.} Rows M4 to M17 take the predecessor's
 composed map, its equation (composed), as the law of motion of a group's
 standing. Its derivation from the engagement decision and the discrimination
-rate is not a row yet. The bounds $b<1-\mu+\tilde\gamma$ and
+rate is not a row yet. The engagement decision, with the predecessor's
+risk-neutral payoff in squared class distance, its Beta law for class within
+a group and its engagement threshold, lies upstream of $F$, and $F$ is taken
+as given. The rate of a generation is computed from that generation's
+standing, which is what the predecessor's timescale separation provides. The bounds $b<1-\mu+\tilde\gamma$ and
 $\mu+\tilde\gamma<1$ of M6 limit the cost of exclusion from above. The
 predecessor's ``sufficiently large $\delta$'' is therefore bounded, the
 first control of M6 shows the map leaves $[0,1]$ when $s_g\delta$ is large,
@@ -1168,6 +1212,14 @@ else, so the rows cannot tell it from salience or from the cost of
 exclusion. Row M13 states the threshold as a rescaling of M10. A reading of
 $\rho$ as a property of belief updating would need a row in which it enters
 through the updating rule, and no such row exists.
+
+\paragraph{The predecessor's numbers.} Its intensity proposition reports
+$\rho^\ast\approx0.31$ ``under base parameters'' that it does not state. At
+the parameters of its composed-map figure, panel (a), M17 puts $\rho^\ast$
+between $0.58$ and $0.60$. Its empirical prediction that raising mobility by
+$0.01$ above the threshold takes about 65 generations names no parameters
+either, and M16 bounds the escape time below by $1/(\sqrt b\sqrt\varepsilon)$,
+which at $\varepsilon=0.01$ is $10/\sqrt b$. Neither number is carried.
 
 \paragraph{Passing.} Row M14 carries the composition claim of the
 predecessor's passing appendix for a finite population. It does not carry
