@@ -1133,6 +1133,13 @@ paper's claims, and only then write the manuscript.
   two slips in LGB's proof of Proposition 4.4 (access under pure
   randomization is rho, not 0; thresB(c) >= c, not <= c); a sign misprint in
   HIV's appendix l_m (+1 for -1) and a label slip in their Example 3.
+- Restructure, 15 Oct 2026 (author): the Research question is now Section 1.1
+  inside the Introduction, followed by 1.2 Main answer (the answer to the
+  question, one lever at a time, each sentence resting on a K row, M32 or a C
+  row) and 1.3 Headline claims (the K table). The measurement map now has three
+  tables, Inputs, Model-internal variables and Outputs, each with an Observed
+  column coded R (recorded), C (computed from records), N (not observed, a fact
+  of nature or of the contest) and K (not observed, a construct).
 - [ ] **W (author, 15 Oct 2026). The institution's choice of mu, as an extension.**
   WEIGHT_ADDENDUM.tex is the starter (author: "do it in an addendum - that would
   serve both as a starter document and ... scope related sentences in the
