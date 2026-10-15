@@ -69,3 +69,17 @@ The author's decision (M39): one type of player, the worker, in two states; unif
 | 12 | ACCEPTED; primitive missing | the missing primitive (uniform displacement) is now M39 | — |
 
 What the steady state adds that the one-shot model could not state: a long-run distribution of workers over ranks, and with closure, of the two status groups over ranks. That is the object the paper's question about status groups and inequality needs, and it is the next Lean target once issue 12 is decided.
+
+## Mobility test (15 Oct 2026), before deciding issue 12
+
+The author's concern: a fallback rule that closes the path from the bottom to the top builds immobility into the baseline, so closure could not then be analysed as its cause. The test: with no closure and one utility for everyone, can a worker of any rank reach the top and return? `lean/IscLean/Mobility.lean` (audited) answers it in the sharpest case, a pool of exactly two, the top worker and a worker of rank `i`, which uniform displacement produces with positive probability. In that pool the lottery is a sure exchange, so the path is open exactly when both weakly prefer the lottery, and since the exchange is sure, no risk attitude enters.
+
+| Rule | Does the top accept the exchange? | Does rank `i` accept it? | Lean |
+|---|---|---|---|
+| Bottom rung (M32 as decided) | Yes, with any entrant whose income less `L` is at least `x_0`, provided the top's return is worth no more than `x_0` (the cost bound of M33's top case), for every nondecreasing `u` | Yes, whenever `x_i ≤ x_top − L`, for any upskilling cost and every nondecreasing `u` | `bottom_rung_top_accepts_entrant`, `entrant_accepts_top` |
+| Proportional step `(1 − δ) x_top` | No, for every entrant whose income less `L` is below the top's reduced pay, for every strictly increasing `u`. On the Pareto ladder at `a = 2`, `δ = 1/4`, the top at quantile `99/100` refuses every rank up to quantile `8/9` | — | `proportional_top_refuses_entrant`, `control_proportional_refusal_reaches_far_down` |
+| Either rule, routes a fixed function of rank | A rank that returns is sealed: nothing reaches it and it reaches nothing, while lottery ranks reach one another in one move | | `return_rank_sealed`, `return_rank_unreachable`, `lottery_ranks_communicate` |
+
+Controls: under the bottom rung a top with a cheap return refuses a low entrant (`control_bottom_rung_needs_cost_bound`); under the proportional step the top accepts an entrant paying at least its reduced pay plus `L` (`control_proportional_top_accepts_near_entrant`).
+
+Reading. The bottom rung keeps the bottom-to-top path open through the lottery itself, which is the channel closure acts on, and it does so for every risk attitude. The proportional step closes it for every rank below the top's reduced pay, which at JLS's `δ ≈ 1/4` is most of the ladder. The third row is the caveat for both rules: a rank whose displaced holder always returns is sealed. With a random pool that caveat weakens, since a rank whose return is worth less than `x_top − L` gambles whenever it is displaced together with the top (`entrant_accepts_top`), so under the bottom rung every rank at least `L` below the top is connected to the top, and through it to every other such rank. Not yet proved: that the resulting chain is irreducible on the whole ladder, which needs the reassignment's positive probabilities (M36) and `0 < d < 1`.
