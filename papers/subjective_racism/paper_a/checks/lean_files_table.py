@@ -49,6 +49,10 @@ def table(tex):
     for rid, _, _, lean in brace_args(tex, "mrow", 4):
         for name in [x.strip() for x in lean.split(",") if x.strip()]:
             cites.setdefault(name.split(".")[0], set()).add(rid)
+    # an assumption's plain-English reading cites the theorems that check it
+    for args in brace_args(tex, "arow", 6):
+        for name in re.findall(r"\\lean\{([A-Za-z0-9]+)\.", args[2]):
+            cites.setdefault(name, set()).add(args[0])
     lrows = brace_args(tex, "lrow", 6)
     for args in lrows:
         for name in re.findall(r"\\path\{([A-Za-z0-9]+)\.[A-Za-z0-9_']+\}", args[2]):

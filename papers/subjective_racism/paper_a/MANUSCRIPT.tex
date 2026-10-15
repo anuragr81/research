@@ -227,7 +227,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   depend on class, $\ell_g(c)=Z_g$ for every $c$.}
   {Once the group is known, the marker says nothing more about class. Within
   each group the likelihood of the marker is one constant likelihood for
-  every class, and so equals the marginal.}
+  every class, and so equals the marginal.
+  Lean, \lean{Assumptions.marginal\_of\_flat}.}
   {$\ell_g(c)$, $Z_g$, $\lambda_g$}{M1, M2, M3}
   {The predecessor's assumption. M1 shows its likelihood and posterior forms
   agree under a prior with full support (Appendix~\ref{app:scope}, Group
@@ -237,7 +238,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   {The convergence rate lies strictly between zero and one, mobility is not
   negative, salience is a probability and the cost of exclusion is positive.
   The exclusion pressure, salience times the cost of exclusion, is therefore
-  not negative.}
+  not negative.
+  Lean, \lean{Assumptions.pressure\_nonneg}.}
   {$\mu$, $\tilde\gamma$, $s_g$, $\delta$, $b$}{M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, M17}
   {A group at standing $0$ still rises by $\mu$ (M4), mobility pushes
   standing up, salience is a probability, and exclusion costs standing.}
@@ -247,7 +249,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   {From one generation to the next a group's standing rises by the
   convergence rate times its distance from full standing, rises by mobility
   times standing times that distance, and falls by the cost of exclusion
-  times the discrimination rate times standing.}
+  times the discrimination rate times standing.
+  Lean, \lean{Assumptions.law\_plain}.}
   {$\bar c$, $\mu$, $\tilde\gamma$, $\delta$, $\phi^t$}
   {M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M15, M16, M17}
   {The predecessor's law of motion, taken as given rather than derived. The
@@ -260,7 +263,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   {Each generation the observer learns the prior afresh from the group's
   current standing. The discrimination rate is then salience times the
   discrimination-rate function at the current standing, and the step of A6
-  becomes the composed map from this generation's standing to the next.}
+  becomes the composed map from this generation's standing to the next.
+  Lean, \lean{Assumptions.law\_relearned}.}
   {$\pi_g(c)$, $\phi^t$, $s_g$, $F$, $\bar c$, $\mathcal{H}_F$}
   {M4, M5, M6, M9, M10, M11, M12, M13, M15, M16, M17}
   {The author's choice of 14 October 2026, and the model the predecessor
@@ -274,7 +278,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   generation, the frozen prior, so the discrimination rate is the same in
   every generation, salience times the discrimination-rate function at the
   mean of the frozen prior. The cost of exclusion times this rate is the
-  frozen rate, and the step of A6 becomes the frozen map.}
+  frozen rate, and the step of A6 becomes the frozen map.
+  Lean, \lean{Assumptions.law\_frozen}.}
   {$\beta_0$, $\phi^t$, $s_g$, $\delta$, $F$, $k$, $\mathcal{H}_k$}{M7, M8}
   {Kept to test whether the trap needs A7, which C7 answers.}
 \arow{A9}{The discrimination-rate function is $F(\bar c)=(1-\bar c)^2$, so the
@@ -286,7 +291,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   slope, at full standing. The composed map then depends on salience and the
   cost of exclusion only through their product, the exclusion pressure. M12
   keeps only that the function is continuous and is zero with zero slope at
-  full standing.}
+  full standing.
+  Lean, \lean{Assumptions.canonF\_one}, \lean{Assumptions.canonF\_deriv\_one}, \lean{Assumptions.canonF\_strictAntiOn}, \lean{Assumptions.canon\_through\_product}.}
   {$F$, $\bar c$, $\mathcal{H}$, $b$, $s_g$, $\delta$}
   {M4, M5, M6, M9, M10, M11, M12, M13, M15, M16, M17}
   {The predecessor's canonical case. Refusal falls to zero at full standing
@@ -1303,6 +1309,7 @@ records what they printed.
 \bottomrule
 \endfoot
 \path{Arrow1971} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Arrow1971.lean}{\path{lean/mathlib/Arrow1971.lean}} & L5 \\
+\path{Assumptions} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Assumptions.lean}{\path{lean/mathlib/Assumptions.lean}} & A4, A5, A6, A7, A8, A9 \\
 \path{Bifurcation} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Bifurcation.lean}{\path{lean/mathlib/Bifurcation.lean}} & M9, M10 \\
 \path{ClassPosterior} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/ClassPosterior.lean}{\path{lean/mathlib/ClassPosterior.lean}} & M2, M3 \\
 \path{ClosureMap} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/ClosureMap.lean}{\path{lean/mathlib/ClosureMap.lean}} & M4, M5, M6 \\

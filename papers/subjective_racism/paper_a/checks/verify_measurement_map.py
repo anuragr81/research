@@ -14,8 +14,9 @@ MM-8  no symbol names two rows
 MM-9  every symbol in the manuscript's table of assumptions is a symbol of
       the map, and every letter in an assumption's mathematics belongs to a
       symbol the assumption lists
-MM-10 every assumption's plain-English reading has no mathematics and names
-      the map entry of every symbol the assumption lists
+MM-10 every assumption's plain-English reading has no mathematics beyond the
+      Lean theorems it cites, names the map entry of every symbol the
+      assumption lists, and cites only declared theorems
 """
 import glob
 import os
@@ -143,19 +144,22 @@ def assumption_problems(arows, keys):
     return unknown, stray
 
 
-def plain_problems(arows, owner):
-    """An assumption's plain-English reading must carry no mathematics and must
-    name, by its map name, the row of every symbol the assumption lists."""
-    maths, unnamed = [], []
+def plain_problems(arows, owner, lean=frozenset()):
+    """An assumption's plain-English reading must carry no mathematics apart
+    from the Lean theorems it cites, must name, by its map name, the row of
+    every symbol the assumption lists, and may cite only declared theorems."""
+    maths, unnamed, undeclared = [], [], []
     for r in arows:
-        plain = re.sub(r"\s+", " ", r[2])
+        cited = [c[0].replace("\\_", "_").strip() for c in macro_calls(r[2], "lean", 1)]
+        undeclared += [(r[0], c) for c in cited if c not in lean]
+        plain = re.sub(r"\s+", " ", re.sub(r"\\lean\{[^{}]*\}", " ", r[2]))
         if "$" in plain or re.search(r"\\[A-Za-z]", plain):
             maths.append(r[0])
         for x in re.findall(r"\$([^$]*)\$", r[3]):
             for name in owner.get(re.sub(r"\s+", "", x), []):
                 if name.lower() not in plain.lower():
                     unnamed.append((r[0], name))
-    return maths, unnamed
+    return maths, unnamed, undeclared
 
 
 def prose_only(body):
@@ -198,9 +202,10 @@ def analyse(tex, terms, lean, arows):
     unknown_a, stray = assumption_problems(arows, set(owner))
     out["MM-9"] = (bool(arows) and not unknown_a and not stray,
                    f"assumption symbols absent from the map {unknown_a}; letters not listed {stray}")
-    maths, unnamed = plain_problems(arows, owner)
-    out["MM-10"] = (bool(arows) and not maths and not unnamed,
-                    f"readings with mathematics {maths}; map names missing {unnamed}")
+    maths, unnamed, undeclared = plain_problems(arows, owner, lean)
+    out["MM-10"] = (bool(arows) and not maths and not unnamed and not undeclared,
+                    f"readings with mathematics {maths}; map names missing {unnamed}; "
+                    f"Lean names not declared {undeclared}")
     return out, len(rows)
 
 
@@ -226,10 +231,10 @@ The formula is a theorem (\lean{Fixture.no\_such}) and here is a colon: in prose
 """
 
 FIX_A_GOOD = [["A1", r"The marker $m$ moves the prior $\pi_g(c)$ through $Z_g$.",
-               "The marker moves the prior through the marginal.",
+               r"The marker moves the prior through the marginal. Lean, \lean{Fixture.flat\_posterior}.",
                r"$m$, $\pi_g(c)$, $Z_g$", "M1", "r"]]
 FIX_A_BAD = [["A1", r"The prior $\pi_g(c)$ is scaled by $\delta$.",
-              r"The belief is scaled by $\delta$.",
+              r"The belief is scaled by $\delta$. Lean, \lean{Fixture.no\_such}.",
               r"$\pi_g(c)$, $\theta$", "M1", "r"]]
 
 lean = lean_declarations()
@@ -252,7 +257,7 @@ names = {"MM-1": "every row has six non-empty fields and a plain-English name",
          "MM-7": "Directly observed is Yes exactly for recorded objects",
          "MM-8": "no symbol names two rows",
          "MM-9": "every symbol of every assumption is a symbol of the map",
-         "MM-10": "every plain-English reading is free of mathematics and uses the map's names"}
+         "MM-10": "every plain-English reading is free of mathematics, uses the map's names and cites declared theorems"}
 for k in sorted(real, key=lambda s: int(s.split('-')[1])):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)

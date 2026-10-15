@@ -187,3 +187,22 @@ read from `figures/generate_figures.py`. Figure 2 is checked by
 | `control_fig1a_not_integrated` | In panel (a) the orbit of `11/20` does not converge to 1 |
 | `rhoStar_at_fig1` | `0.58 < ρ* < 0.60` at panel (a), against the predecessor's unexplained `0.31` |
 | `stranger_example` | The worked example's mixtures, `1/2` and `19/50` |
+
+## Assumptions.lean, the plain-English readings of Table 2
+
+Where a reading in the In plain English column of the assumptions table
+restates algebra or a property of a formula, the statement is proved here.
+`law` is the law of motion of A6 with the discrimination rate `φ` free, and
+`canonF c = (1 − c)²`.
+
+| Theorem or definition | Content |
+|---|---|
+| `marginal_of_flat` | A4. A likelihood constant in class, under a prior that sums to one, has that constant as its marginal |
+| `pressure_nonneg` | A5. Salience in `[0, 1]` and a positive cost of exclusion give an exclusion pressure that is not negative |
+| `law_plain` | A6. The law of motion is `c + μ (1 − c) + γ c (1 − c) − δ φ c` |
+| `law_relearned` | A7. With `φ = s F c`, the law is the composed map `Hf` |
+| `law_frozen` | A8. With `φ = s F β₀`, the law is the frozen map `Hk` with `k = s δ F β₀` |
+| `canonF_one`, `canonF_deriv_one` | A9. The canonical `F` is zero with zero slope at full standing |
+| `canonF_strictAntiOn` | A9. The canonical `F` falls as standing rises on `[0, 1]` |
+| `canon_through_product` | A9. Under the canonical `F`, two pairs `(s, δ)` with the same product give the same composed map |
+| `control_slope_needed` | `F c = 1 − c` is zero at 1 but has slope `−1` there |
