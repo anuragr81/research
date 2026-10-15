@@ -1,7 +1,7 @@
 # Paper A, verified manuscript skeleton
 
-Closure Traps from Social Inference (the "Mimic Men" paper, titled Stereotype
-Rigidity in Social Inferences until 15 October 2026), rebuilt claim by claim under `papers/MANUSCRIPT_SKELETON.md`. The predecessor document,
+Closure Traps from Social Inference (titled Stereotype Rigidity in Social
+Inferences until 15 October 2026), rebuilt claim by claim under `papers/MANUSCRIPT_SKELETON.md`. The predecessor document,
 `../theory_and_decisions/manuscript.tex`, was retired at pass 6 on 15 October
 2026. `RETIREMENT.md` maps every part of it to its home and says how to read
 it from git.
@@ -17,7 +17,7 @@ it from git.
 | `verify.sh` | Runs every suite and writes `VERIFICATION.md`, which is generated. |
 | `lit/` | One record per paper read. None yet. |
 | `notes/writing_discipline.md` | The writing rules, copied from the reference bundle. |
-| `notes/from_archive/` | Three notes from the author's archive `paper-A-mimic-men.tar.gz` (snapshot of 3 July 2026), kept as background. They are not evidence for any row. |
+| `notes/from_archive/` | Three notes from the author's archive of Paper A (snapshot of 3 July 2026), kept as background. They are not evidence for any row. |
 
 ## Setup
 

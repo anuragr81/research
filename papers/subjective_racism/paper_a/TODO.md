@@ -193,9 +193,9 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
 
 ## Novelty ledger
 
-Naipaul (1967) and conclusion C16, which tied the passing result to his
-mimic men, were removed on 15 October 2026 at the author's request. M14
-stands without it.
+Naipaul (1967) and conclusion C16, which tied the passing result to a
+literary reference, were removed on 15 October 2026 at the author's request,
+and so were the remaining references to that theme. M14 stands without it.
 
 
 Nothing claimed as new yet. C12 (the closed forms) is pending.
