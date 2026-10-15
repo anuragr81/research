@@ -50,10 +50,14 @@ def fragments(quote):
     return [normalise(f) for f in q.split("[...]") if normalise(f)]
 
 
-def found(quote, page_text):
+def found(quote, page_text, ocr=False):
     t = normalise(page_text)
+    frags = fragments(quote)
+    if ocr:
+        t = re.sub(r"\s+", "", t)
+        frags = [re.sub(r"\s+", "", f) for f in frags]
     pos = 0
-    for f in fragments(quote):
+    for f in frags:
         i = t.find(f, pos)
         if i < 0:
             return False
@@ -116,16 +120,19 @@ def run(cfg):
             i = p - cfg["first_page"] + cfg["first_index"]
             return pages[i] if 0 <= i < len(pages) else ""
 
-        missing = [r[0] for r in rows if not found(r[2], page_text(r[1]))]
+        ocr = cfg.get("ocr", False)
+        if ocr:
+            print("      text is OCR of a scan; quotations are compared with whitespace removed")
+        missing = [r[0] for r in rows if not found(r[2], page_text(r[1]), ocr)]
         check("LC-2 every quotation is found on the page it cites", not missing, f"not found {missing}")
         fake = cfg["fabricated"]
         check("LC-2 control, a fabricated quotation is not found",
-              not found(fake[1], page_text(fake[0])) and not any(found(fake[1], pt) for pt in pages))
+              not found(fake[1], page_text(fake[0]), ocr) and not any(found(fake[1], pt, ocr) for pt in pages))
         if rows:
             r0 = rows[0]
             wrong = r0[1] + 1 if r0[1] < hi else r0[1] - 1
             check("LC-2 control, a true quotation is not found on a wrong page",
-                  not found(r0[2], page_text(wrong)))
+                  not found(r0[2], page_text(wrong), ocr))
 
     lean_ptr = open(os.path.join(here, "LEAN")).read().strip()
     module = os.path.splitext(os.path.basename(lean_ptr))[0]

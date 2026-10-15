@@ -17,7 +17,7 @@ has been established so far, and go claim by claim.
 | 3 and 4. Claims into Lean and model rows, one at a time | [x] 15 Oct. M1 to M17 and R1. Every predecessor claim is a row, a refuted conjecture, or recorded as not stated (Q12) |
 | 5. Appendices B to G | [~] filled for M1 to M17, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [x] 15 Oct. Removed, `RETIREMENT.md` maps every part, suite 5 checks it against git commit `91a74cb1` |
-| 7. Novelty reading | [~] Coate and Loury (1993) read [F] 15 Oct. Phelps (1972) and Arrow (1973) next, from page images |
+| 7. Novelty reading | [~] Coate and Loury (1993) [F] and Phelps (1972) [P] read 15 Oct. Arrow next |
 | 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C16 pending, K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
 | 10. Readability rounds | [ ] |
@@ -198,7 +198,8 @@ Nothing claimed as new yet. C12 (the closed forms) is pending.
 | Source | Status | Bearing |
 |---|---|---|
 | Coate and Loury (1993) | Read [F] 15 Oct 2026, `lit/coate_loury_1993/` | No closed-form threshold, a different channel, and zero is always their equilibrium. Does not anticipate M5, M9 or M10. The predecessor's "patronising equilibrium" identification is unsupported (C13) |
-| Phelps (1972), Arrow (1973) | On Drive (`temp`), scans without a text layer | C14 |
+| Phelps (1972) | Read [P] 15 Oct 2026, `lit/phelps_1972/` | Static, and the individual's own test score is evidence about the individual. No erosion of stereotypes is modelled (C19), so C14's Phelps half fails |
+| Arrow (1973) | The Drive file is the 1971 Princeton working paper No. 30A, not the 1973 chapter. OCR cached, reading in progress | C14 |
 | Jeffrey (1965), Diaconis and Zabell (1982) | On Drive (`temp`) | The attribution in Appendix D |
 | Loury (2002) | Not found on Drive | C17 |
 | Naipaul (1967) | Not found on Drive | C16 |

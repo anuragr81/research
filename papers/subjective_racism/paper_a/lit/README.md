@@ -15,3 +15,10 @@ under `~/.cache/paper_a/`, downloaded from the author's Drive.
 | Record | Read | Lean | Rows |
 |---|---|---|---|
 | `coate_loury_1993/` | [F] 15 Oct 2026 | `lean/mathlib/CoateLoury1993.lean` | L1 to L3, C12, C13, C18 |
+| `phelps_1972/` | [P] 15 Oct 2026, page images, quotations checked against OCR | `lean/mathlib/Phelps1972.lean` | L4, C14, C19 |
+
+Scanned sources without a text layer are read from page images [P], and put
+through `ocr_pages.py` (RapidOCR, not installed in the repository) so that the
+suite has a text to check quotations against. Quotations are then compared
+with whitespace removed, which is weaker than a check against a publisher's
+text layer.
