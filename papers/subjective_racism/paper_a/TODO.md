@@ -17,8 +17,8 @@ has been established so far, and go claim by claim.
 | 3 and 4. Claims into Lean and model rows, one at a time | [x] 15 Oct. M1 to M17 and R1. Every predecessor claim is a row, a refuted conjecture, or recorded as not stated (Q12) |
 | 5. Appendices B to G | [~] filled for M1 to M17, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [x] 15 Oct. Removed, `RETIREMENT.md` maps every part, suite 5 checks it against git commit `91a74cb1` |
-| 7. Novelty reading | [~] Coate and Loury (1993) [F], Phelps (1972) [P], Arrow (1971 version) [P] and Jeffrey (1983, ch. 11) [P] read 15 Oct. Waiting on Loury (2002), Naipaul (1967), platform studies, the selection–mutation literature and the 1973 Arrow chapter |
-| 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C16 pending, K1 to K6 with scope notes |
+| 7. Novelty reading | [~] Coate and Loury (1993) [F], Phelps (1972) [P], Arrow (1971 version) [P] and Jeffrey (1983, ch. 11) [P] read 15 Oct. Waiting on Loury (2002), platform studies, the selection–mutation literature and the 1973 Arrow chapter |
+| 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C15 pending (C16 removed 15 Oct at the author's request), K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
 | 10. Readability rounds | [~] Round 1, 15 Oct, against `notes/writing_discipline.md`. Appendix D split to one job per paragraph (the predecessor's corrections gathered in one paragraph, the D1 paragraph no longer restating M7 and M8), "What Lean does not carry" limited to what it does not carry, pronouns and a colon fixed. Open for the author: the coined names exclusion pressure, frozen map, merged root, window and escape time (rule 6) |
 | 11. Referee comments | [ ] not applicable unless the paper has reports |
@@ -193,6 +193,11 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
 
 ## Novelty ledger
 
+Naipaul (1967) and conclusion C16, which tied the passing result to his
+mimic men, were removed on 15 October 2026 at the author's request. M14
+stands without it.
+
+
 Nothing claimed as new yet. C12 (the closed forms) is pending.
 
 | Source | Status | Bearing |
@@ -203,6 +208,5 @@ Nothing claimed as new yet. C12 (the closed forms) is pending.
 | Jeffrey (1983) | Read [P] 15 Oct 2026, chapter 11 and the preface of the second edition, `lit/jeffrey_1983/`. The 1965 first edition is not read | Replaces the unverified attribution in Appendix D (L6). Non-commutativity of the rule is now a Lean control (L7) |
 | Diaconis and Zabell (1982) | On Drive (`temp`), not read | Not needed by any row |
 | Loury (2002) | Not found on Drive | C17 |
-| Naipaul (1967) | Not found on Drive | C16 |
 | Platform-discrimination studies | Not found on Drive | C15 |
 | Selection–mutation literature, Fisher (1930) | Not found on Drive | C12 |
