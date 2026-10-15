@@ -8,7 +8,8 @@ import numpy as np
 from numba import njit, prange
 
 from mmp_config import PB, TABLE2, model
-from mmp_model import NEG, interp2, nelder_mead, solve, value_of
+from mmp_a1 import solve_a1
+from mmp_model import NEG, interp2, nelder_mead, value_of
 
 THEIRS = {"large": {"failure rate": 0.092, "loans/assets": 0.704, "deposits/assets": 0.638, "equity/assets": 0.065,
                     "profit/equity": 0.055, "dividends/equity": 0.029, "sd loans/assets": 0.100,
@@ -121,9 +122,11 @@ def simulate(m, V, pol, size):
 
 def moments(rec):
     res = {"failure rate": 100 * np.nanmean(rec[:, :, 5])}
+    live = ~np.all(np.isnan(rec[:, :, 0]), axis=0)
+    res["banks with no live quarter"] = int((~live).sum())
     for k, name in enumerate(RATIOS):
-        res[name] = float(np.nanmean(np.nanmean(rec[:, :, k], axis=0)))
-        res["sd " + name] = float(np.nanmean(np.nanstd(rec[:, :, k], axis=0)))
+        res[name] = float(np.mean(np.nanmean(rec[:, live, k], axis=0)))
+        res["sd " + name] = float(np.mean(np.nanstd(rec[:, live, k], axis=0)))
     return res
 
 
@@ -136,27 +139,32 @@ def verdict(ours, theirs, name):
 def run(size, npts, log):
     m = model(size, ne=npts, nl=npts)
     t0 = time.time()
-    V, pol, outer, diff = solve(m, tol=1e-6, howard=500, max_outer=200, log=log)
-    log(f"{size} {npts}x{npts}: solved in {outer} sweeps, last change {diff:.1e}, {time.time() - t0:.0f}s")
-    return moments(simulate(m, V, pol, size)), outer, diff
+    V, pol, outer, diff, ok, fall = solve_a1(m, rel=1e-6, howard=500, max_outer=400, log=log)
+    log(f"{size} {npts}x{npts}: {'converged' if ok else 'NOT converged'} after {outer} sweeps, last change {diff:.1e}, "
+        f"largest fall in any cell {fall:.1e} of the value range, {time.time() - t0:.0f}s")
+    mom = moments(simulate(m, V, pol, size))
+    print(f"{size} {npts}x{npts}: {'converged' if ok else 'not converged'} after {outer} sweeps; moments {mom}", flush=True)
+    return mom, outer, diff, ok
 
 
 def main():
-    for f in ("mmp_model.py", "mmp_config.py", "stage2.py"):
+    for f in ("mmp_model.py", "mmp_config.py", "mmp_a1.py", "stage2.py"):
         print(f"{f} sha256 {hashlib.sha256(open(f, 'rb').read()).hexdigest()}")
     results = {}
     for npts in (41, 61):
         for size in ("large", "small"):
             results[(size, npts)] = run(size, npts, lambda s: print(s, file=sys.stderr, flush=True))
     for size in ("large", "small"):
-        mom41, outer41, diff41 = results[(size, 41)]
-        mom61, outer61, diff61 = results[(size, 61)]
-        print(f"\n===== {size}: 41x41 grid ({outer41} sweeps, last change {diff41:.1e}); "
-              f"61x61 grid ({outer61} sweeps, last change {diff61:.1e})")
+        mom41, outer41, diff41, ok41 = results[(size, 41)]
+        mom61, outer61, diff61, ok61 = results[(size, 61)]
+        print(f"\n===== {size}: 41x41 grid ({'converged' if ok41 else 'NOT converged'}, {outer41} sweeps, last change "
+              f"{diff41:.1e}, {mom41['banks with no live quarter']} banks with no live quarter); 61x61 grid "
+              f"({'converged' if ok61 else 'NOT converged'}, {outer61} sweeps, last change {diff61:.1e}, "
+              f"{mom61['banks with no live quarter']} banks with no live quarter)")
         holds = 0
         for name, theirs in THEIRS[size].items():
             a, b = mom41[name], mom61[name]
-            ok = verdict(a, theirs, name)
+            ok = verdict(a, theirs, name) and ok41
             holds += ok
             moved = abs(b - a) > 0.10 * abs(a) if a != 0 else b != 0
             print(f"  {name:20s} ours {a:8.4f} [{theirs}] -> {'reproduces' if ok else 'differs'}; "
