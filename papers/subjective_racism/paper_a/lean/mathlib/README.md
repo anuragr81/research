@@ -120,3 +120,29 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `recovery_b`, `control_recovery_b_interior` | Under the canonical `F`, one pair inside `(0, 1)` gives `b`. At standing 0 the formula returns 0 |
 | `recovery_delta` | With the discrimination rate recorded, one pair gives `δ` |
 | `recovery_F` | With salience and the rate, `F` is read off pointwise |
+
+## Intensity.lean, row M13
+
+`Hrho μ γ δ s ρ = H μ γ (ρ s δ)`, the predecessor's intensity-scaled map, and
+`rhoStar = bStar / (s δ)`.
+
+| Theorem | Content |
+|---|---|
+| `Hrho_eq` | `Hrho` is the predecessor's equation (loury-rho) under the canonical `F` |
+| `gammaStar_lt_iff` | The strict form of M10, `γ* < γ ↔ b < b*` |
+| `trap_iff_rho` | M13 (i). The trap condition holds exactly when `ρ > ρ*` |
+| `only_integration_below` | M13 (ii). Below `ρ*`, 1 is the only fixed point in `[0, 1]` |
+| `rhoStar_mem_iff`, `rhoStar_interior_example` | M13 (iii). `0 < ρ* < 1 ↔ b* < s δ`, which holds at `(1/20, 1/10, 1/2)` |
+| `control_rhoStar_not_interior` | At `(1/20, 1/20, 1/5)`, `ρ* > 1` |
+
+## Passing.lean, row M14
+
+`mean c V` is the mean class of a finite set of people.
+
+| Theorem | Content |
+|---|---|
+| `cross` | `∑ over S × P of (c i − c j) = |S| ∑_P c − |P| ∑_S c` |
+| `mean_sdiff_le`, `mean_sdiff_lt` | M14 (i). Leavers at or above every stayer lower the visible mean, strictly when one is strictly above |
+| `upper_set_of_threshold` | M14 (ii). A monotone benefit and an antitone cost make the passers an upper set |
+| `rate_rises` | M14 (iii). A lower mean raises `s F` under antitone `F` |
+| `control_ordering_needed` | Classes `(0, 1)` with the class-0 member leaving give a visible mean of 1 against 1/2 |

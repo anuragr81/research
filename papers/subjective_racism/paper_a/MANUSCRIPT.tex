@@ -267,6 +267,39 @@ that check it.}\\
   It fails without the dip, since $F\equiv0$ gives
   $\mathcal{H}_F(\bar c)>\bar c$ on $[0,1)$.}
   {GeneralF.Hf_sub_self, GeneralF.rise_near_one, GeneralF.two_fixed_of_dip, GeneralF.dip_of_trap, GeneralF.control_dip_needed}
+\mrow{M13}{The predecessor's intensity parameter scales the exclusion pressure
+  and nothing else. The trap condition holds exactly above an intensity
+  threshold, below it integration is the only fixed point, and the threshold
+  lies strictly between 0 and 1 exactly when the exclusion pressure at full
+  intensity exceeds the exclusion threshold.}
+  {$\mathcal{H}_\rho(\bar c)=\mathcal{H}(\bar c)$ with $b=\rho s_g\delta$,
+  which is the predecessor's equation (loury-rho) under the canonical $F$.
+  $\rho^\ast=b^\ast/(s_g\delta)$. With $\mu>0$, $\tilde\gamma\ge0$,
+  $s_g\delta>0$ and $\rho>0$,
+  (i) $\tilde\gamma<\tilde\gamma^\ast(\rho s_g\delta)\iff\rho>\rho^\ast$,
+  (ii) $\rho<\rho^\ast$ and $0\le\bar c\le1$ give
+  $\mathcal{H}_\rho(\bar c)=\bar c\iff\bar c=1$,
+  (iii) $0<\rho^\ast<1\iff s_g\delta>b^\ast$.
+  The threshold is interior at $(\mu,\tilde\gamma,s_g\delta)=(\tfrac1{20},\tfrac1{10},\tfrac12)$.
+  (iii) fails without $s_g\delta>b^\ast$, since at
+  $(\tfrac1{20},\tfrac1{20},\tfrac15)$, $\rho^\ast>1$.}
+  {Intensity.Hrho_eq, Intensity.gammaStar_lt_iff, Intensity.trap_iff_rho, Intensity.only_integration_below, Intensity.rhoStar_mem_iff, Intensity.rhoStar_interior_example, Intensity.control_rhoStar_not_interior}
+\mrow{M14}{If the members who leave the visible group are those above every
+  member who stays, the visible mean falls, strictly when some leaver is
+  above some stayer. A passing cost that does not rise in class and a benefit
+  that does not fall in it make the leavers such a set. Under a decreasing
+  discrimination-rate function the rate against those who stay rises.}
+  {People $V$ finite, classes $c_i$, passers $P\subseteq V$, with $P$ and
+  $V\setminus P$ non-empty.
+  (i) If $c_j\le c_i$ for every $i\in P$ and $j\in V\setminus P$, then
+  $\bar c(V\setminus P)\le\bar c(V)$, and $<$ if some $c_j<c_i$.
+  (ii) If $\beta$ is non-decreasing and $\kappa$ non-increasing, then
+  $\kappa(x)\le\beta(x)$ and $x\le y$ give $\kappa(y)\le\beta(y)$.
+  (iii) If $F$ is non-increasing, $s_g\ge0$ and $m'\le m$, then
+  $s_gF(m)\le s_gF(m')$.
+  (i) fails without the ordering, since classes $(0,1)$ with the class-$0$
+  member leaving give a visible mean of $1$ against $\tfrac12$.}
+  {Passing.cross, Passing.mean_sdiff_le, Passing.mean_sdiff_lt, Passing.upper_set_of_threshold, Passing.rate_rises, Passing.control_ordering_needed}
 \end{longtable}
 \normalsize
 
@@ -375,6 +408,14 @@ threshold is $\tilde\gamma^\ast=b-2\sqrt{\mu b}$, written
 $\tilde\gamma^\ast(b)$ where $b$ varies, and the exclusion threshold is
 $b^\ast=(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$. In the proofs $u=\sqrt b$,
 $v=\sqrt\mu$ and $w=\sqrt{\mu+\tilde\gamma}$.
+
+Row M13 has the intensity $\rho\in[0,1]$, the map $\mathcal{H}_\rho$ with
+exclusion pressure $\rho s_g\delta$, and the intensity threshold
+$\rho^\ast=b^\ast/(s_g\delta)$. Row M14 has a finite set of people $V$ with
+classes $c_i$, the passers $P\subseteq V$, the visible group $V\setminus P$,
+and the mean class $\bar c(S)=\sum_{i\in S}c_i/|S|$ of a non-empty set $S$.
+In (ii) $\beta$ is the benefit of passing and $\kappa$ its cost, both
+functions of class.
 
 Row M11 has two groups, an outsider $O$ moved by $\mathcal{H}$ with
 parameters $(\mu,\tilde\gamma,b)$ and a host $I$ moved by $\mathcal{H}_I$, the
@@ -669,6 +710,44 @@ Control. $F\equiv0$ gives $\mathcal{H}_F(\bar c)-\bar c=(1-\bar c)(\mu+\tilde\ga
 for $0\le\bar c<1$.
 \end{mproof}
 
+\begin{mproof}{M13}{Intensity.Hrho_eq, Intensity.gammaStar_lt_iff, Intensity.trap_iff_rho, Intensity.only_integration_below, Intensity.rhoStar_mem_iff, Intensity.rhoStar_interior_example, Intensity.control_rhoStar_not_interior}
+Substituting $F(\bar c)=(1-\bar c)^2$ and $\phi=F(\bar c)$ into the
+predecessor's equation (loury-rho),
+\[
+\mu+\bar c\,(1-\mu-\rho s_g\delta(1-\bar c)^2)+\tilde\gamma\bar c(1-\bar c)
+=\mathcal{H}(\bar c)\ \text{with}\ b=\rho s_g\delta .
+\]
+(i) By M10 with $b=\rho s_g\delta$,
+$\tilde\gamma<\tilde\gamma^\ast(b)\iff b>b^\ast\iff\rho>b^\ast/(s_g\delta)$.
+(ii) The strict form of M10, $\tilde\gamma^\ast(b)<\tilde\gamma\iff b<b^\ast$,
+follows from $u-v<w\iff u<v+w$ (M10's proof, with the case $u-v<0$ giving
+$u<v\le v+w$ at once). With $\rho<\rho^\ast$, $b<b^\ast$, so
+$\tilde\gamma>\tilde\gamma^\ast(b)$ and M9(ii) applies.
+(iii) $b^\ast>0$, so $0<\rho^\ast$, and $\rho^\ast<1\iff b^\ast<s_g\delta$.
+Example and control. At $(\tfrac1{20},\tfrac1{10},\tfrac12)$, M5's trap
+condition gives $b^\ast<\tfrac12$ by M10. At $(\tfrac1{20},\tfrac1{20})$,
+$b^\ast>\tfrac{29}{100}>\tfrac15$ by M10, so $\rho^\ast=5b^\ast>1$.
+\end{mproof}
+
+\begin{mproof}{M14}{Passing.cross, Passing.mean_sdiff_le, Passing.mean_sdiff_lt, Passing.upper_set_of_threshold, Passing.rate_rises, Passing.control_ordering_needed}
+Write $S=V\setminus P$. Then
+\[
+\sum_{(j,i)\in S\times P}(c_i-c_j)=|S|\sum_{i\in P}c_i-|P|\sum_{j\in S}c_j ,
+\]
+which is $\ge0$ under the ordering and $>0$ if one term is. With
+$\sum_V=\sum_S+\sum_P$ and $|V|=|S|+|P|$,
+\[
+\bar c(S)\le\bar c(V)
+\iff|V|\sum_Sc\le|S|\sum_Vc
+\iff|P|\sum_Sc\le|S|\sum_Pc ,
+\]
+and the same with $<$.
+(ii) $\kappa(y)\le\kappa(x)\le\beta(x)\le\beta(y)$.
+(iii) $m'\le m\Rightarrow F(m)\le F(m')$, and $s_g\ge0$.
+Control. $V=\{0,1\}$, $c=(0,1)$, $P=\{0\}$. $\bar c(V\setminus P)=1$ and
+$\bar c(V)=\tfrac12$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -786,6 +865,16 @@ Outsider group & $O$ & A group whose standing starts below its tipping point
   $c_M$, as the predecessor defines it (M11). \\ \addlinespace
 Host group & $I$ & The group alongside the outsider, with its own composed
   map (M11). \\ \addlinespace
+Intensity & $\rho$ & The predecessor's scale on the exclusion pressure,
+  $b=\rho s_g\delta$ (M13). \\ \addlinespace
+Intensity threshold & $\rho^\ast=b^\ast/(s_g\delta)$ & The intensity above
+  which the trap condition holds (M13). \\ \addlinespace
+Passers & $P$ & The members who leave the visible group by suppressing
+  their markers (M14). \\ \addlinespace
+Visible group & $V\setminus P$ & The members who stay (M14). \\
+  \addlinespace
+Visible mean & $\bar c(V\setminus P)$ & The mean class of the visible group
+  (M14). \\ \addlinespace
 Frozen prior & $\beta_0$ & The group prior held at its first value, with mean
   standing $\beta_0$, in place of re-learning it each generation. \\
   \addlinespace
@@ -849,6 +938,23 @@ outsider's discrimination rate, would need a row of its own. The predecessor
 states the outsider result with the threshold alone. Row M11 adds the bounds
 of M6, so both parts hold only for $s_g\delta$ in the band those bounds and
 M10 leave.
+
+\paragraph{The intensity parameter.} The predecessor introduces
+$\rho\in[0,1]$ as a discrimination-intensity or rigidity parameter and
+places the Coate--Loury self-confirming equilibrium at $\rho>\rho^\ast$. In
+its equation (loury-rho), $\rho$ multiplies $s_g\delta$ and appears nowhere
+else, so the rows cannot tell it from salience or from the cost of
+exclusion. Row M13 states the threshold as a rescaling of M10. A reading of
+$\rho$ as a property of belief updating would need a row in which it enters
+through the updating rule, and no such row exists.
+
+\paragraph{Passing.} Row M14 carries the composition claim of the
+predecessor's passing appendix for a finite population. It does not carry
+the passing decision itself, which the predecessor derives from a benefit
+and a cost of suppressing markers that no row defines. Part (ii) says only
+what the decision needs to make the leavers an upper set. The feedback from
+the lower visible mean to the next generation's standing is the composed map
+of M4 to M6, applied to the visible group, and is not restated.
 
 \paragraph{The group prior across generations.} Each generation the observer's
 class distribution for a group is re-learned from the group's current

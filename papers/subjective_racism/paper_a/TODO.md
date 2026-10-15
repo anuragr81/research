@@ -14,8 +14,8 @@ has been established so far, and go claim by claim.
 |---|---|
 | 1. Scaffold the skeleton, checker and controls | [x] 14 Oct. Empty tables, appendix stubs, `verify.sh`, MS-1 to MS-6 each with a passing and a failing control |
 | 2. Lean project pinned, build roots, audit | [x] 14 Oct. `lean/mathlib/`, Lean `v4.24.0-rc1`, Mathlib `14871d5` |
-| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M12 done. Next are the appendix propositions (Q8) |
-| 5. Appendices B to G | [~] filled for M1 to M12, and Appendix D records D1 and D4 |
+| 3 and 4. Claims into Lean and model rows, one at a time | [~] M1 to M14 done. Next are Q10 and Q11 |
+| 5. Appendices B to G | [~] filled for M1 to M14, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
 | 8. Conclusions, then introduction headlines | [ ] |
@@ -109,9 +109,31 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
   structural, since neither group's standing enters the other's map
   (Appendix D, "Two groups"). Part (ii) has a true control on the threshold.
   Its bounds have the same gap as M6 (Q4c).
-- [ ] **Q8 onward.** The appendix propositions (`prop:passing`, `prop:shadow`,
-  `prop:exclusion`, `prop:tokenism`, `prop:spillover`, `prop:loury-nesting`,
-  `cor:Tstar`). To be ordered next.
+- [x] **Q8, M13. `prop:loury-nesting`.** `Intensity.lean`, 15 Oct. The
+  predecessor's `rho` multiplies `s_g delta` and appears nowhere else, so
+  `rho* = b*/(s_g delta)` and the proposition is M10 rescaled. Interior
+  threshold exactly when `s_g delta > b*`, with a control where it is not
+  (`rho* > 1` at the bifurcation figure's `s_g delta = 1/5`). Appendix D
+  records that the rows cannot read `rho` as rigidity.
+- [x] **Q9, M14. `prop:passing`.** `Passing.lean`, 15 Oct. Finite
+  population. Leavers above every stayer lower the visible mean, strictly
+  when one is strictly above (`mean_sdiff_lt`). Threshold structure from a
+  monotone benefit and an antitone cost. Rate rises under antitone `F`.
+  Control without the ordering. The passing decision itself is not a row.
+- [ ] **Q10. The platform channel.** `prop:shadow`, `prop:exclusion`,
+  `prop:tokenism`, `prop:spillover`. The predecessor's platform (atmosphere,
+  admission policy, profit) is not defined to the point where these are
+  statements. What is algebra, the sign of the admission first-order
+  condition and `eta_crit` decreasing in `epsilon`, can be rows with the
+  objective written down. `prop:tokenism` asserts `c_excl < c_mid` from
+  "structurally different objects", which is not a proof, and a parameter
+  choice with `c_excl > c_mid` would refute it as stated. `prop:shadow`
+  needs `S*` and `S_rand`, which no equation defines.
+- [ ] **Q11. `cor:Tstar`, critical slowing.** A lower bound of order
+  `(gamma - gamma*)^(-1/2)` on the generations spent near the merged root
+  is in reach from M9's factorisation
+  `H c - c = (1 - c)((u c - v)^2 + (gamma - gamma*) c)`. The predecessor's
+  constant `C = pi/sqrt|ab|` is an asymptotic claim and not in reach.
 - [x] **Measurement map.** `MEASUREMENT_MAP.tex`, 15 Oct 2026. Inputs,
   internal objects and outputs, each with one name, a type, what it
   represents and how it is obtained, and four recovery formulas proved in
