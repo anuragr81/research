@@ -18,7 +18,7 @@ has been established so far, and go claim by claim.
 | 5. Appendices B to G | [~] filled for M1 to M16, and Appendix D records D1 and D4 |
 | 6. Retire `../theory_and_decisions/manuscript.tex` | [ ] |
 | 7. Novelty reading | [ ] |
-| 8. Conclusions, then introduction headlines | [ ] |
+| 8. Conclusions, then introduction headlines | [x] 15 Oct. C1 to C11 on model rows, C12 to C16 pending, K1 to K6 with scope notes |
 | 9. Literature table | [ ] |
 | 10. Readability rounds | [ ] |
 | 11. Referee comments | [ ] not applicable unless the paper has reports |
@@ -165,14 +165,14 @@ a Lean theorem with a control. Labels are those of `../theory_and_decisions/manu
     bifurcation. The frozen map then enters as Q5, a row of its own that shows
     what the trap needs. Under this reading the trap rests on the group prior
     following the group's standing, and on neither updating rule.
-- [!] **D2. The research question.** The skeleton's opening sentence recasts
-  the first sentence of the predecessor's abstract as a question. Confirm or
-  replace it.
-- [!] **D3. The title.** "Stereotype Rigidity" names a mechanism that the
-  rows so far do not carry. The author agreed on 14 Oct that it may not
-  survive. Q4 and Q5 are now in. A belief held rigid is the frozen reading,
-  M7 and M8, which has no trap. The trap of M5 and M6 needs the belief to
-  follow the standing, which is the opposite of rigidity.
+- [x] **D2. The research question. Decided 15 Oct 2026 by the author.**
+  "When does reading class from group markers trap a group at a low
+  standing, and how much mobility does it take to get out?" Every part is a
+  row (M5, M6, M9, M10, M16).
+- [x] **D3. The title. Decided 15 Oct 2026 by the author.** "Closure Traps
+  from Social Inference". "Stereotype Rigidity" was dropped because the
+  rigid, frozen belief has no trap (M7, M8) and the predecessor's rigidity
+  parameter is only a scale on the exclusion pressure (M13).
 - [x] **D4. Drop Jeffrey's rule. Decided 14 Oct 2026 by the author**, on the
   condition that the two rules are shown not to differ here. M2 and M3 show
   it for one reading of a marker under group sufficiency. The skeleton names

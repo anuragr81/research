@@ -1,5 +1,6 @@
-% MANUSCRIPT.tex, the manuscript skeleton for Paper A (Stereotype Rigidity in
-% Social Inferences). Created 14 October 2026 as pass 1 of the plan in TODO.md
+% MANUSCRIPT.tex, the manuscript skeleton for Paper A (Closure Traps from Social
+% Inference, titled Stereotype Rigidity in Social Inferences until 15 October
+% 2026). Created 14 October 2026 as pass 1 of the plan in TODO.md
 % (item PLAN), following papers/MANUSCRIPT_SKELETON.md. The predecessor
 % document is papers/subjective_racism/theory_and_decisions/manuscript.tex,
 % which stays in place until a later pass retires it.
@@ -61,19 +62,20 @@
    {\raggedright\noindent\textit{Lean:} \lean{#2}.\par}\smallskip}
   {\par\hfill$\square$\par\medskip}
 
-\title{Stereotype Rigidity in Social Inferences}
+\title{Closure Traps from Social Inference}
 \author{Anurag Srivastava}
-\date{Manuscript skeleton, 14 October 2026}
+\date{Manuscript skeleton, 14 October 2026, revised 15 October 2026}
 
 \begin{document}
 \maketitle
 
 \section{Introduction}
 
-% The question below recasts the first sentence of the predecessor's abstract.
-% The author has not yet confirmed it (TODO.md, item Q).
-Why do social boundaries persist despite counter-examples, legal equality and
-anti-discrimination instruments?
+% The question is the author's choice of 15 October 2026 (TODO.md, D2).
+When does reading class from group markers trap a group at a low standing, and
+how much mobility does it take to get out? An observer who cannot see a
+person's class reads it from the markers of a group, and the group's standing
+in turn moves with how often its members are refused.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
@@ -88,6 +90,43 @@ anti-discrimination instruments?
 \endhead
 \bottomrule
 \endfoot
+\krow{K1}{Reading class from group markers can hold a group at a low standing
+  that reproduces itself, with every group that starts below a tipping point
+  ending there.}{M5, M6, M12}{Needs the group prior to follow the group's
+  standing. A prior frozen at its first value has no trap (M7, M8). The exact
+  condition is for $F(\bar c)=(1-\bar c)^2$, and for a general $F$ there are
+  sufficient conditions only (M12). The basins need $s_g\delta$ below
+  $1-\mu+\tilde\gamma$, and above that bound the orbit of standing 0 can land
+  on the tipping point instead (M6). Not claimed as new (Table~\ref{tab:pending}).}
+\krow{K2}{The trap exists exactly when mobility is below
+  $\tilde\gamma^\ast=b-2\sqrt{\mu b}$, equivalently when salience times the
+  cost of exclusion exceeds $(\sqrt\mu+\sqrt{\mu+\tilde\gamma})^2$.}{M9,
+  M10}{For the canonical $F$. The threshold is positive only when $b>4\mu$,
+  and at $(\mu,b)=(\tfrac1{20},\tfrac15)$ it is $0$ (M9). The predecessor's
+  value $\delta^\ast\approx0.29$ is confirmed, not derived anew.}
+\krow{K3}{Above the threshold every group integrates whatever its starting
+  standing, and just above it crossing the region where the trap was takes
+  at least $1/(\sqrt b\sqrt\varepsilon)$ generations.}{M11, M16}{Integration
+  from every start needs the bounds of M6. The escape time is a lower bound
+  from the edge of a window about the merged root, with exponent
+  $-\tfrac12$. No upper bound and no constant are stated, and the
+  predecessor's figure of about 65 generations is not checked.}
+\krow{K4}{More salient markers demand more mobility to escape.}{M10}{Holds
+  for $s_g\delta\ge\mu$, which covers every case in which the threshold is
+  non-negative. Below that the threshold falls in salience (M10), harmlessly,
+  since it is then negative.}
+\krow{K5}{A belief about the group that never moves gives no trap and no
+  tipping point, so the trap needs the belief to follow the group's
+  standing.}{M7, M8}{The frozen belief still sets where the group ends, which
+  rises with the belief and ignores the starting standing (M7, M8).
+  Convergence needs the frozen rate below $1-\mu-\tilde\gamma$, and above it
+  the standing can cycle (M8).}
+\krow{K6}{When the better-off members of a visible group pass, the visible
+  group's mean class falls and the discrimination rate against those who stay
+  rises.}{M14}{A finite population and a statement about composition. The
+  passing decision is not derived, and (ii) of M14 says only what it needs to
+  make the leavers the upper members. Without that ordering exit can raise
+  the mean (M14).}
 \end{longtable}
 \normalsize
 
@@ -357,15 +396,18 @@ that check it.}\\
 \end{longtable}
 \normalsize
 
-No paper has been read for this skeleton yet, so every claim the predecessor
-manuscript makes about a source is unverified.
+No paper has been read for this skeleton yet. Coate and Loury (1993), Loury
+(2002), Phelps (1972), Arrow (1973), Jeffrey (1965), Naipaul (1967) and the
+platform-discrimination studies the predecessor cites are named in
+Table~\ref{tab:pending} and Appendix~\ref{app:scope}, and every claim made
+about them is unverified.
 
 \section{Conclusions}
 
-Table~\ref{tab:conclusions} will hold the conclusions that rest on model rows
-and on papers read in full. Table~\ref{tab:pending} will hold every claim that
-a result is new, and every other claim still waiting on a paper or a search.
-Both are empty until the model rows they need exist.
+Table~\ref{tab:conclusions} holds the conclusions that rest on model rows
+alone, since no paper has been read yet. Table~\ref{tab:pending} holds every
+claim that a result is new, and every claim about another paper, each naming
+what it waits on.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -381,6 +423,42 @@ Both are empty until the model rows they need exist.
 \endhead
 \bottomrule
 \endfoot
+\crow{C1}{Under group sufficiency a marker moves the observer's belief about
+  class only through the group it signals, and a second rule for soft
+  evidence produces no posterior that Bayes' rule does not, within one
+  reading of a marker.}{M1, M2, M3}
+\crow{C2}{When the group prior follows the group's standing, a low standing
+  can reproduce itself, and every group that starts below the tipping point
+  converges to it. This holds exactly below the mobility threshold, and for
+  salience times the cost of exclusion in a band, above $b^\ast$ and below
+  $1-\mu+\tilde\gamma$.}{M5, M6, M9, M10}
+\crow{C3}{The trap is not an artefact of the canonical discrimination-rate
+  function. For every continuous $F$ with $F(1)=F'(1)=0$, a standing at which
+  the map dips below the diagonal gives a fixed point on each side.}{M12}
+\crow{C4}{Above the mobility threshold every standing converges to
+  integration, and the threshold is positive only when $b>4\mu$.}{M9, M11}
+\crow{C5}{Salience raises the mobility threshold wherever the threshold is
+  non-negative.}{M10}
+\crow{C6}{Near the threshold escape is slow. Crossing the window about the
+  merged root takes at least $1/(\sqrt b\sqrt\varepsilon)$
+  generations.}{M9, M16}
+\crow{C7}{A belief frozen at its first value gives one long-run standing,
+  set by the belief and not by the starting standing, so raising a group's
+  standing without moving the belief has no lasting effect. The trap needs a
+  belief that follows standing.}{M7, M8}
+\crow{C8}{The outsider's trap is its own and leaves the host's path alone,
+  because no group's standing enters another group's law of
+  motion.}{M11}
+\crow{C9}{An intensity factor on the exclusion pressure moves the trap
+  threshold and cannot be told apart from salience or the cost of
+  exclusion.}{M13}
+\crow{C10}{Selective passing by the upper members lowers the visible
+  group's mean and raises the discrimination rate against those who
+  stay.}{M14}
+\crow{C11}{Under the predecessor's admission objective, a platform excludes
+  the outsider group below an admission threshold, and admitting it can tip
+  a host group near its own tipping point. The admission threshold can lie
+  on either side of the tipping point.}{M15}
 \end{longtable}
 
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -396,6 +474,25 @@ Both are empty until the model rows they need exist.
 \endhead
 \bottomrule
 \endfoot
+\crow{C12}{The closed forms of the trap condition, the mobility threshold
+  and the exclusion threshold are new. \pend{Coate and Loury (1993), the
+  selection--mutation literature behind the law of motion, and a search for
+  closed-form thresholds in cubic intergenerational maps.}}{M5, M9, M10}
+\crow{C13}{The closure trap is the self-confirming equilibrium of Coate and
+  Loury, reached through the contact channel rather than the contracting
+  channel. \pend{Coate and Loury (1993) and Loury (2002), read in
+  full.}}{M5, M6, M13}
+\crow{C14}{With the exclusion pressure at zero the model is the
+  statistical-discrimination benchmark of Phelps and Arrow, in which
+  counter-examples erode the stereotype. \pend{Phelps (1972) and Arrow
+  (1973), read in full, and a row stating the benchmark.}}{M9, M13}
+\crow{C15}{Platform discrimination rises with the introduction of photographs
+  and real names, as a rise in salience predicts. \pend{The
+  platform-discrimination studies the predecessor cites, read in full, and a
+  row deriving salience from the platform's design.}}{M10, M15}
+\crow{C16}{The passing result is the predicament of Naipaul's mimic men, in
+  which an individual's escape harms those left behind. \pend{Naipaul (1967),
+  read for the passage relied on.}}{M14}
 \end{longtable}
 \normalsize
 

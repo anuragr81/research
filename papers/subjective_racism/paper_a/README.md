@@ -1,7 +1,7 @@
 # Paper A, verified manuscript skeleton
 
-Stereotype Rigidity in Social Inferences (the "Mimic Men" paper), rebuilt claim
-by claim under `papers/MANUSCRIPT_SKELETON.md`. The predecessor document is
+Closure Traps from Social Inference (the "Mimic Men" paper, titled Stereotype
+Rigidity in Social Inferences until 15 October 2026), rebuilt claim by claim under `papers/MANUSCRIPT_SKELETON.md`. The predecessor document is
 `../theory_and_decisions/manuscript.tex`. It stays in place until a later pass
 retires it.
 
