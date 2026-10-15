@@ -7,7 +7,12 @@ after this record was written. Its last version is in git at commit
 Line numbers below refer to that version. `checks/verify_retirement.py`
 (suite 5) reads it from git, takes an inventory of its environments, sections,
 figures, Lean names and numbers, and fails if any item is neither present in
-the documents that replace it nor listed here with a reason.
+the documents that replace it nor listed here with a reason. Since 15 October
+2026 it also checks every prose quotation of the predecessor in
+`MANUSCRIPT.tex` and `MEASUREMENT_MAP.tex` against the retired text (R8). Its
+first run caught two of our own misquotations, a lower-cased "Under base
+parameters" and a misdescription of which forms of group sufficiency the
+predecessor joins with "equivalently", both since corrected.
 
 The documents that replace it are `MANUSCRIPT.tex` (model rows M1 to M17,
 refuted conjecture R1, Appendices A to G), `MEASUREMENT_MAP.tex`, `TODO.md`

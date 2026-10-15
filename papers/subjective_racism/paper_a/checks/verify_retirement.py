@@ -42,6 +42,22 @@ def inventory(src):
     return envs, secs, figs, names, nums
 
 
+def prose_quotes(tex):
+    """Quotations in prose, written ``...''. The L-row macro adds its own quote
+    marks, so L-row quotations do not appear here; MS-5 checks those."""
+    tex = re.sub(r"(?<!\\)%.*", "", tex)
+    return [q for q in re.findall(r"``(.*?)''", tex, re.S) if "#" not in q]
+
+
+def squash(s):
+    return re.sub(r"\s+", "", s)
+
+
+def misquoted(quotes, src):
+    flat = squash(re.sub(r"(?<!\\)%.*", "", src))
+    return [q for q in quotes if squash(q) not in flat]
+
+
 def unaccounted(inv, dest, record):
     envs, secs, figs, names, nums = inv
     rows = set(re.findall(r"^\|\s*([^|]+?)\s*\|", record, re.M))
@@ -79,6 +95,13 @@ check("R5 every figure has a destination", not bf, f"{bf}")
 check("R6 every Lean name is carried or recorded", not bn, f"{bn}")
 check("R7 every number is carried or recorded with a reason", not bu, f"{bu}")
 
+quotes = []
+for f in ["MANUSCRIPT.tex", "MEASUREMENT_MAP.tex"]:
+    quotes += prose_quotes((HERE / f).read_text())
+bad_q = misquoted(quotes, src)
+print(f"      prose quotations of the predecessor: {len(quotes)}")
+check("R8 every prose quotation is verbatim in the retired file", quotes and not bad_q, f"{bad_q}")
+
 print()
 print("CONTROLS  an invented item of each kind must be caught")
 fake = src + "\n\\begin{proposition}x\\end{proposition}\n\\section{An invented section}\n" \
@@ -89,6 +112,10 @@ check("R-C2 an invented section is caught", "An invented section" in fs)
 check("R-C3 an invented figure is caught", "figures/invented" in ff)
 check("R-C4 an invented Lean name is caught", "invented_theorem_name" in fn)
 check("R-C5 an invented number is caught", "98765" in fu)
+check("R-C6 a quotation with altered case is caught",
+      misquoted(prose_quotes("``under base parameters''"), src) == ["under base parameters"])
+check("R-C7 a quotation broken across lines in the source is accepted",
+      not misquoted(prose_quotes("``sufficiently large $\\delta$''"), src))
 
 fails = results.count(False)
 print("=" * 72)
