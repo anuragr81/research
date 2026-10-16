@@ -35,6 +35,34 @@ is in `notes/motivation_scan.md`.
 | `peski_szentes_2012/` | [F] 16 Oct 2026, BFI working paper 2012-005, cited as such | `lean/mathlib/PeskiSzentes2012.lean` | none yet |
 | `eguia_2013/` | [F] 16 Oct 2026, the NYU working paper of 10 September 2013, cited as such | `lean/mathlib/Eguia2013.lean` | none yet |
 | `craig_fryer_2017/` | [F] 16 Oct 2026, NBER working paper 23811 | `lean/mathlib/CraigFryer2017.lean` | none yet |
+| `labov_1964/` | [F] 16 Oct 2026, the Columbia dissertation, all 646 pages from OCR, cited as such | `lean/mathlib/Labov1964.lean` | none yet |
+| `aigner_cain_1977/` | [F] 16 Oct 2026 | `lean/mathlib/AignerCain1977.lean` | none yet |
+| `mcpherson_smith_lovin_cook_2001/` | [F] 16 Oct 2026 | `lean/mathlib/McPhersonEtAl2001.lean` | none yet |
+| `bertrand_mullainathan_2004/` | [F] 16 Oct 2026, the article only, not the cited-by list that follows it in the PDF | `lean/mathlib/BertrandMullainathan2004.lean` | none yet |
+| `hitsch_hortacsu_ariely_2006/` | [F] 16 Oct 2026, MIT Sloan working paper 4603-06, cited as such | `lean/mathlib/HitschEtAl2006.lean` | none yet |
+| `currarini_jackson_pin_2008/` | [F] 16 Oct 2026, the working paper of 29 July 2008, cited as such | `lean/mathlib/CurrariniEtAl2008.lean` | none yet |
+| `fang_moro_2010/` | [F] 16 Oct 2026, NBER working paper 15860, cited as such | `lean/mathlib/FangMoro2010.lean` | none yet |
+| `peng_zhang_pan_2010/` | [F] 16 Oct 2026 | `lean/mathlib/PengEtAl2010.lean` | none yet |
+| `mill_stein_2012/` | [F] 16 Oct 2026, the working paper of 30 December 2012, cited as such | `lean/mathlib/MillStein2012.lean` | none yet |
+| `kraus_park_tan_2017/` | [F] 16 Oct 2026, the accepted manuscript | `lean/mathlib/KrausEtAl2017.lean` | none yet |
+| `edelman_luca_svirsky_2017/` | [F] 16 Oct 2026, the accepted version | `lean/mathlib/EdelmanEtAl2017.lean` | none yet |
+| `rothschild_white_1993/` | [F] 16 Oct 2026, the NBER chapter, not the 1995 article | `lean/mathlib/RothschildWhite1993.lean` | none yet |
+| `grogger_2018/` | [F] 16 Oct 2026, the working paper Speech and Wages, version 8, not the 2011 article | `lean/mathlib/Grogger2018.lean` | none yet |
+| `bohren_imas_rosenberg_2019/` | [F] 16 Oct 2026, the working paper of January 2019, cited as such | `lean/mathlib/BohrenEtAl2019.lean` | none yet |
+| `dahis_nix_qian_2019/` | [F] 16 Oct 2026, NBER working paper 26465 as revised in June 2020 | `lean/mathlib/DahisEtAl2019.lean` | none yet |
+| `kraus_et_al_2019/` | [F] 16 Oct 2026, the PubMed Central text without the SI appendix | `lean/mathlib/KrausEtAl2019.lean` | none yet |
+| `levon_et_al_2020/` | [F] 16 Oct 2026, the Accent Bias Britain report | `lean/mathlib/LevonEtAl2020.lean` | none yet |
+| `chetty_et_al_2022a/` | [F] 16 Oct 2026, Social Capital I in Nature | `lean/mathlib/ChettyEtAl2022a.lean` | none yet |
+| `chetty_et_al_2022b/` | [F] 16 Oct 2026, Social Capital II in Nature, with the NBER version read for differences | `lean/mathlib/ChettyEtAl2022b.lean` | none yet |
+| `crabtree_et_al_2022/` | [F] 16 Oct 2026 | `lean/mathlib/CrabtreeEtAl2022.lean` | none yet |
+| `laouenan_rathelot_2022/` | [F] 16 Oct 2026, with the WRAP manuscript read for differences | `lean/mathlib/LaouenanRathelot2022.lean` | none yet |
+| `levon_sharma_ilbury_2022/` | [F] 16 Oct 2026, the Sutton Trust report Speaking Up | `lean/mathlib/LevonEtAl2022.lean` | none yet |
+| `bohren_hull_imas_2024/` | [F] 16 Oct 2026, NBER working paper 29820 as revised in December 2024 | `lean/mathlib/BohrenEtAl2024.lean` | none yet |
+| `goffman_1951_es/` | [F] 16 Oct 2026, the authorised Spanish translation only, cited as such | `lean/mathlib/Goffman1951es.lean` | none yet |
+
+Where a cached text interleaves two columns, the record checks quotations
+against a reading-order extraction made with `pdftotext` from the same pinned
+PDF, as the Chetty records do. The suite pins the PDF and that extraction.
 
 Scanned sources without a text layer are read from page images [P], and put
 through `ocr_pages.py` (RapidOCR, not installed in the repository) so that the

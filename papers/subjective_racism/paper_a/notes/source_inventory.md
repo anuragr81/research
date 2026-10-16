@@ -4,7 +4,10 @@ Full texts sought for the sources in `motivation_scan.md`. "Found" means a
 complete text is cached. It does not mean read. A source becomes evidence for a
 row only after a full read and a record under `lit/`. The sources read in full
 on 16 October 2026 are listed in `lit/README.md`. The full reads corrected the
-versions of five files, and the rows below give the version read.
+versions of seven files, and the rows below give the version read. Two Chetty
+records check quotations against reading-order extractions of the pinned PDFs,
+`chetty_2022_sc1_read.txt` and `chetty_2022_sc2_nature_read.txt`, because the
+`-layout` texts interleave the two columns.
 
 Cache: `~/.cache/paper_a/sources/` (each PDF with its `pdftotext -layout` text)
 and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
@@ -26,7 +29,7 @@ and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
 | Bertrand and Mullainathan (2004), AER 94 | Names in hiring | `bertrand_mullainathan_2004.pdf`, paper then a cited-by list | 796b4bd2fe98000b |
 | Moav and Neeman (2012), EJ 122 | Consumption signals income | `moav_neeman_2012.pdf` | fb6e40bd940465af |
 | Peng et al. (2010), IJUFKS 18 | Soft and virtual evidence | `peng_2010.pdf` | ecda7d4b87fd7797 |
-| Labov (1966), dissertation | Speech and class | `labov_1966.pdf` | 9eb8bc5cd9315a86 |
+| Labov, the Columbia dissertation, 1964 (University Microfilms 67-9411), not the 1966 book | Speech and class | `labov_1966.pdf` | 9eb8bc5cd9315a86 |
 | Accent Bias Britain report (2020) | Accent and class | `accent_bias_britain_2020.pdf` | a2bb6ae755fe0ad7 |
 | Sutton Trust, Speaking Up (2022) | Accent suppression | `sutton_trust_2022.pdf` | 7e30567705ba4f5d |
 
@@ -46,10 +49,10 @@ and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
 | Bohren, Imas and Rosenberg (2019), AER 109 | WP, January 2019 | `bohren_imas_rosenberg_2019_wp.pdf` | aa697aa3f30eccc4 |
 | Bohren, Hull and Imas, Systemic Discrimination | NBER w29820 | `bohren_hull_imas_wp.pdf` | 0973ae89c4763ef0 |
 | Craig and Fryer, Complementary Bias, two-sided statistical discrimination | NBER w23811, 2017 | `complementary_bias_w23811.pdf` | 86f10e79e6c918fe |
-| Fang and Moro (2011), Handbook of Social Economics | NBER w15860 | `fang_moro_2011.pdf` | 30fc4e8fcc04b997 |
+| Fang and Moro (2011), Handbook of Social Economics | NBER w15860, April 2010 | `fang_moro_2011.pdf` | 30fc4e8fcc04b997 |
 | Edelman, Luca and Svirsky (2017), AEJ Applied 9 | Accepted version | `edelman_luca_svirsky_2017.pdf` | b28a4e16965f02c6 |
 | Hitsch, Hortaçsu and Ariely (2006) | MIT Sloan WP 4603-06 | `hitsch_2006.pdf` | f0def83bd731e103 |
-| Dahis, Nix and Qian (2019) | NBER w26465 | `dahis_nix_qian_2019.pdf` | 11cca560e4b083ad |
+| Dahis, Nix and Qian (2019) | NBER w26465, revised June 2020 | `dahis_nix_qian_2019.pdf` | 11cca560e4b083ad |
 | Mill and Stein (2012) | WP, December 2012 | `mill_stein_2012.pdf` | 19df2e69f6b9c44d |
 | Kraus, Park and Tan (2017), PPS 12 | Accepted manuscript | `kraus_park_tan_2017.pdf` | 49c866cc610311a3 |
 | Corneo and Jeanne (1997), JPubE 66 | Bonn DP A-461, December 1994, titled "Conspicuous Consumption and the Existence of Upward Sloping Demand Curves" | `corneo_jeanne_1997_dp.pdf` | 2f315ec019f7f38f |
