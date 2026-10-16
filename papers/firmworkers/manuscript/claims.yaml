@@ -580,6 +580,31 @@ model:
     lean: [Isc.exchange_costs_the_pair, Isc.exchange_moves_income_to_poorer, Isc.control_poorer_gains_nothing_at_gap]
     status: LEAN_PROVED
     symbols: [X7, X6]
+  - id: M47
+    anchor: 'Introduction: "the worker invest in both dimensions of social capital: adaptability to enhance short-term productivity and categorisation to secure long-term social positioning whereas firms or institutions only account for adaptability"'
+    claim: 'The status group $h$ is the categorisation dimension of the manuscript, the order outside the market. It is not priced by the firm, not a function of income or rank, and fixed within a working life, and rank is not a function of it. It acts in the economy at one point only, access to partners in the lottery, which is the one allocation of jobs the firm does not make'
+    assumptions: 'two status groups; the aristocratic norm of Cole, Mailath and Postlewaite, status inherited and assigned outside the market, rather than their wealth-is-status norm'
+    evidence: 'The manuscript separates adaptability, which the firm prices, from categorisation, which it does not (the anchor). Cole, Mailath and Postlewaite read status as "a ranking device that determines how well he or she fares in the nonmarket sector" (L14 record, CMP92-1, p.1092), not bought, "willingness to make such a payment is not sufficient to guarantee inclusion" (CMP92-3, p.1093), and under the inherited norm leaving market decisions undistorted (CMP92-19, p.1109). The one non-market allocation in this model is the lottery, so the status group enters there (M29) and nowhere else (M28)'
+    status: DECIDED
+    decision: '16 Oct 2026, the author: the status group is defined by what it governs, access to the non-market allocation of jobs, following the Cole, Mailath and Postlewaite idea that the social order touches the economy only through what markets do not allocate, without their marriage model. Weber stays background, not a source the definition rests on. That a recorded identity is the status group of the model remains a posit (X24)'
+    affects: [M28, M29, M37, M45]
+    symbols: [X24, X25, X2]
+  - id: M48
+    anchor: 'test of option (a) for M29, the two-stage draw, in the smallest pool where closure can act (M45)'
+    claim: 'Under the two-stage rule, in which each entrant enters the own group''s lottery with chance $\sigma$ and the joint lottery otherwise, lone lotteries merging into the joint one, an entrant in a pool of two from each status group receives a partner from the own group with chance $(1-\sigma^2)^2/3+\sigma^2(2-\sigma^2)$, which is $1/3$ at $\sigma=0$, $1$ at $\sigma=1$ and rises with $\sigma$. The effect of closure is second order in $\sigma$: the excess over $1/3$ is $\tfrac23\sigma^2(2-\sigma^2)$'
+    assumptions: 'the two-stage rule, not decided; a pool of two entrants from each group; M36 within every lottery'
+    evidence: 'lean/IscLean/TwoStage.lean::Isc.two_stage_within_chance. The final lotteries depend only on whether both entrants of a group chose their own lottery; if either pair did, each pair exchanges, otherwise all four are in the joint lottery with chance $1/3$ each (Isc.reassignment_chances_equal). Limits Isc.two_stage_limits; monotone Isc.two_stage_chances_rise; second order Isc.two_stage_effect_second_order. The stage-one chances sum to one (Isc.control_stage_one_total). M29''s per-entrant weights give $1/(3-2\sigma)$ in the same pool, first order in $\sigma$; the rules cross, the weights more closed at $\sigma=1/10$ and the two-stage rule at $\sigma=1/2$ (Isc.two_stage_vs_weights_cross)'
+    lean: [Isc.two_stage_within_chance, Isc.two_stage_limits, Isc.two_stage_chances_rise, Isc.two_stage_effect_second_order, Isc.two_stage_vs_weights_cross, Isc.control_stage_one_total, Isc.control_lone_outcomes_have_weight]
+    status: LEAN_PROVED
+    symbols: [X25, X24, X8, X23]
+  - id: M49
+    anchor: 'test of option (a) for M29: persistence of the groups'' positions'
+    claim: 'Under the two-stage rule, in a pool of two from each status group, the chance that no job crosses the groups, so that the lottery leaves each group''s positions on the ladder unchanged, is $(1-\sigma^2)^2/9+\sigma^2(2-\sigma^2)$, rising from $1/9$ with no closure to $1$ with full closure. Closure therefore governs how long a gap between the groups'' positions persists, not where the ladder settles'
+    assumptions: 'the two-stage rule, not decided; a pool of two entrants from each group'
+    evidence: 'lean/IscLean/TwoStage.lean::Isc.two_stage_no_cross_chance. In the joint lottery of four, nine reassignments leave nobody with their own former job and exactly one keeps every job within its group (Isc.joint_four_counts, by exhaustion), so the chance of no crossing is $1/9$ there and $1$ when the pairs exchange within their groups. Limits Isc.two_stage_persistence_limits; monotone Isc.two_stage_chances_rise'
+    lean: [Isc.two_stage_no_cross_chance, Isc.two_stage_persistence_limits, Isc.joint_four_counts]
+    status: LEAN_PROVED
+    symbols: [X25, X24, X8, X23]
 
 literature:
   - id: L1
@@ -895,7 +920,7 @@ references:
     math_content: 'yes'
     lean: LEAN_PARTIAL
     reason: 'The formal model of status assigned outside the market: the aristocratic equilibrium is the reading of $h$ as inherited standing that leaves market decisions undistorted (decision of 11 Oct 2026)'
-    impact_if_removed: 'No current claim rests on this paper. Without it the separation of market rank from social standing has no formal precedent and the status rule for $h$ no cited form'
+    impact_if_removed: 'M47 rests on it for the reading of the status group as inherited status assigned outside the market, which its decision names as the idea the paper banks on; without it the status group would have no formal reference and X24 would rest on the manuscript alone'
   - key: ColeMailathPostlewaite1995
     math_content: 'yes'
     lean: LEAN_PARTIAL
