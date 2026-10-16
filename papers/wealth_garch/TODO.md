@@ -658,4 +658,13 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   mmp-stage2-rerun; output in rerun_out.txt, log in rerun_log.txt. A 7-point
   smoke test of the run script was seen (not a result: 7 by 7 grid, 500
   banks, 40 quarters).
+- 2026-10-17. MMP stage 2d rerun finished (results_stage2.md). All four
+  solves converged with no fall in value. Large banks: 0 of 11 moments
+  reproduce, four NaN; small banks: 6 of 11. V3 flags five large-bank and
+  four small-bank moments as not converged in the grid. PREREG_stage2_4.md
+  C2-C3 running (unit mmp-inspect: solve_save.py large 41, then
+  inspect_stage2.py). A 5 by 5 smoke test of the inspection script showed
+  equity becoming infinite in the simulation, which points at the dynamics
+  (banks above the top of the equity grid); not a result until C3 on the
+  real grid reports.
 
