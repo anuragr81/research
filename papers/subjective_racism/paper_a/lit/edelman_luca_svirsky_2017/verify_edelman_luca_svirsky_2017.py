@@ -21,5 +21,6 @@ run({
     "fabricated": (3, "When we restrict our analysis to hosts who have had an African-American guest in the recent past, discrimination doubles"),
     "controls": ["EdelmanEtAl2017.control_no_interaction",
                  "EdelmanEtAl2017.control_simple_yes_not_fifty",
-                 "EdelmanEtAl2017.control_sure_replacement_costless"],
+                 "EdelmanEtAl2017.control_sure_replacement_costless",
+                 "EdelmanEtAl2017.control_displayed_marker"],
 })

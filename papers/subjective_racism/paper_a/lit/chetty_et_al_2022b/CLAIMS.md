@@ -25,6 +25,12 @@ paper 30314 was read for differences only and is not quoted.
 | CB-Q13 | 12 | "creating new programs and venues for cross-SES interaction (for example, through peer mentoring programs or internship programs) could help to reduce friending bias." | Venues as a lever on friending bias. No model of venue choice |
 | CB-Q14 | 14 | "We also do not use direct information on individuals’ incomes or wealth, as we do not observe these variables at the individual level in our data" | SES is predicted from markers by the authors. Friending bias is measured on predicted SES, not on what friends see |
 | CB-Q15 | 30 | "the tendency for low-SES people to befriend high-SES people at lower rates even conditional on exposure" | The reporting summary carries the wording the motivation scan uses (CB-D2) |
+| CB-Q16 | 3 | "Figure 2c (orange bars) shows that, across all settings, people with high SES are more likely to befriend their fellow high-SES group members (and correspondingly less likely to befriend low-SES group members) than would be expected based solely on the socioeconomic compositions of their groups." | Avoidance across class runs from both sides in the measure, checked against the benchmark in `ChettyEtAl2022b.high_below_bench` |
+| CB-Q17 | 3 | "Holding fixed exposure, people with low SES are about 20% more likely to befriend a given high-SES person in their religious groups than in their neighbourhoods" | The setting gap the puzzle includes. The 20% is a difference in bias (CB-D17), `ChettyEtAl2022b.religious_vs_neighbourhood` |
+| CB-Q18 | 15 | "Maintaining this difference in the number of total friends, in a setting with no homophily by SES (that is, a setting in which low- and high-SES individuals have the same probability of befriending a given high-SES person), friending bias would be negative." | The premise of the benchmark (5), under which the level of bias in the puzzle is measured |
+| CB-Q19 | 12 | "causing implicit segregation, resulting in student learning communities with separated concentrations of white students and students of color" | A rule that is neutral on race (assignment to learning communities) separates students by race, quoted by the authors from a student newspaper |
+| CB-Q20 | 9 | "Payton is a public magnet school that requires that all students complete an entrance exam." | Screening on a correlate of class at entry goes with low bias inside the school |
+| CB-Q21 | 12 | "recruiting personal trainers from lower-SES backgrounds to coach their more affluent clients" | A paid venue that creates contact across class by assigning market roles |
 
 ## Lean results
 
@@ -46,6 +52,30 @@ paper 30314 was read for differences only and is not quoted.
 | `ChettyEtAl2022b.tcec_max_at_half` | TCEC read with the low-SES share is maximised at a high-SES share of one half |
 | `ChettyEtAl2022b.control_tcec_printed` | Control. The printed TCEC, read literally, is higher at one quarter and negative at three quarters |
 | `ChettyEtAl2022b.fig6_numbers` | Fig. 6. Marginal bias 0.11, corrected slope 0.61/0.67 ≈ 0.91 |
+| `ChettyEtAl2022b.gap_numbers` | 22.4% from EC 0.776, and the gap 0.708 of Fig. 3a |
+| `ChettyEtAl2022b.religious_vs_neighbourhood` | The 20% of CB-Q17 is the difference in bias, 0.198. The ratio of befriending rates is 1.24 |
+| `ChettyEtAl2022b.bias_cut_raises_ec` | Eq. (6). Cutting bias by `d` raises EC by `E · d` |
+| `ChettyEtAl2022b.complements_last_largest` | Exposure and lower bias are complements, so a factor equated last has the larger effect (p. 16) |
+| `ChettyEtAl2022b.variance_ratios` | Extended Data Table 1. 3.3 for exposure and 3.25 for bias |
+| `ChettyEtAl2022b.spec1_is_restricted_spec2` | Table 1. Column 1 is column 2 with equal coefficients on the two logs |
+| `ChettyEtAl2022b.control_spec_unequal` | Control. With unequal coefficients no single elasticity reproduces column 2 |
+| `ChettyEtAl2022b.elasticity_p7` | 0.236 maps a 10% rise in EC to 2.4% |
+| `ChettyEtAl2022b.reliability_p8` | Reliability 0.58 turns 10% into 5.8% |
+| `ChettyEtAl2022b.eths_p9` | 8% under-representation, and 0.15 is "almost twice" 0.08 |
+| `ChettyEtAl2022b.cohort_slope` | Fig. 6a. With bias common to cohorts, the slope of EC deviations on exposure deviations is one minus bias |
+| `ChettyEtAl2022b.control_cohort_varying_bias` | Control. With bias varying across cohorts the slope is not one minus any cohort's bias |
+| `ChettyEtAl2022b.attenuation` | Fig. 6b. The slope on the leave-out estimate is the true slope times the attenuation factor |
+| `ChettyEtAl2022b.rd_jump` | The regression-discontinuity specification jumps by `β1` at the cut-off |
+| `ChettyEtAl2022b.rd_identifies` | With nothing else jumping, the jump is the effect of exposure |
+| `ChettyEtAl2022b.control_rd_other_jump` | Control. A jump in another determinant is added to the estimate |
+| `ChettyEtAl2022b.rd_numbers` | Extended Data Fig. 4a. 0.39 − 0.33 = 0.06 |
+| `ChettyEtAl2022b.excess_low` | Low-SES bias exceeds the setting benchmark by about 0.10 (religious) to 0.30 (neighbourhoods), our computation (CB-D18) |
+| `ChettyEtAl2022b.high_below_bench` | High-SES bias lies below the setting benchmark in five settings, our computation (CB-D18) |
+| `ChettyEtAl2022b.control_rec_high_at_bench` | Control. In recreational groups high-SES bias is at its benchmark |
+| `ChettyEtAl2022b.diversity_le` | The diversity index over five shares is at most 0.8, the end of the axes |
+| `ChettyEtAl2022b.control_diversity_needs_shares` | Control. Without shares summing to one the bound fails |
+| `ChettyEtAl2022b.raceOnlyBias_formula` | Our reading of CB-Q7 as a model. Race-only friending gives mean bias `πA πB (hA − hB)²/(w(1 − w))`, proportional to two-race diversity at a given SES gap |
+| `ChettyEtAl2022b.control_raceOnly_no_gap` | Control. With equal SES shares across races, race-only friending gives no bias |
 
 ## Readings recorded
 
@@ -67,3 +97,35 @@ paper 30314 was read for differences only and is not quoted.
 | CB-D14 | EC is 0.776 for low-SES people in the companion paper (p. 2) and 0.826 for the representative low-SES person here (Fig. 3a) | The second uses only the 30% of friendships assigned to groups and multiplies setting means. NBER footnote 9 (PDF p. 44) says so and gives the companion gap as 1.4 − 0.78 = 0.63 |
 | CB-D15 | Eq. (5) is read as following from the share `w x/(w x + 1 − w)` | The paper prints the formula without a friending model. The reading reproduces the formula and both printed values (`eq5`, `benchmark_values`) |
 | CB-D16 | Friending bias is measured with respect to the authors' predicted SES. Neither version says whether people observe each other's SES, and neither uses individual race | CB-Q14, and racial shares come from NCES, IPEDS and ACS at the group level (p. 19, p. 21). A1's premise that class is unseen is neither supported nor contradicted by the measure |
+| CB-D17 | "About 20% more likely" (CB-Q17) is read as the difference in friending bias between religious groups and neighbourhoods, 0.198 from Extended Data Table 4 | At fixed exposure the ratio of befriending rates is `(1 − B_rel)/(1 − B_nbhd)` = 1.24 (`religious_vs_neighbourhood`). The text's figure matches the difference, not the ratio |
+| CB-D18 | The setting benchmarks in `excess_low` and `high_below_bench` take `w = Exposure/2` from Extended Data Table 4 and the national friend-count ratio 1.254 | The paper prints the benchmark only for a group with `w = 0.5` (−0.11) and for high schools with parental SES (−0.10). Setting ratios of friend counts are not printed, and setting means of individual ratios are not ratios at the means. The excesses are therefore approximate. Their signs hold with margins well above the approximation for low-SES people, and for high-SES people except in recreational groups |
+| CB-D19 | `raceOnlyBias` is our model of the authors' one-sentence explanation (CB-Q7), with friendship only within race, random within race and equal friend counts | The paper states the explanation in words and does not model it |
+
+## Coverage of the source's results
+
+| Result (as the source numbers it) | Lean name | Status | Reason for anything short of general |
+|---|---|---|---|
+| Eq. (1), individual EC | `IEC` (definition) | general | |
+| Eq. (2), the decomposition | `eq2` | general | |
+| Eq. (3), exposure | `Exposure` (definition) | general | |
+| Eq. (4), friending bias | `FriendingBias` (definition), `bias_zero_of_random` | general | |
+| Eq. (5), the no-homophily benchmark and its sign | `eq5`, `eq5_neg`, `benchmark_values`, `control_bias_zero_iff_equal_friends` | special case | The friending model behind (5) is not printed. Formalised under our reading of it (CB-D15) |
+| Eq. (6), recomposed area EC | `bias_cut_raises_ec`, `eq7` | general | |
+| Eq. (7), the log form | `eq7` | general | |
+| TCEC (Methods, unnumbered) | `tcec_max_at_half`, `control_tcec_printed` | special case | Formalised with the low-SES share in the first factor, as the text describes it (CB-D5) |
+| Fig. 3a and the order dependence (pp. 5, 16) | `fig3a_shares`, `control_order_matters`, `complements_last_largest`, `gap_numbers` | general | |
+| Fig. 3b, 73%, 16%, 11% | `fig3b_average_of_orders`, `control_fig3b_single_order` | special case | The averaging over orders is our reading (CB-D4) |
+| Extended Data Table 1, the ratios 3.3 | `variance_ratios` | general | The adjusted R² themselves are estimates on data |
+| Table 1, the specifications | `spec1`, `spec2` (definitions), `spec1_is_restricted_spec2`, `control_spec_unequal`, `elasticity_p7` | general | The estimates are on data |
+| Table 1, the estimates and standard errors | none | not formalised | Regressions on data we do not hold |
+| Religious groups against neighbourhoods (p. 3) | `religious_vs_neighbourhood` | general | |
+| Reliabilities 0.99, 0.58, 0.88 and the 5.8% reading (p. 8) | `reliability_p8` | special case | The split-sample estimates are on data. Only the arithmetic reading is formalised |
+| ETHS and the average school (p. 9) | `eths_p9` | general | |
+| Predictors of bias, including racial diversity (Extended Data Figs. 1 to 3) | `diversity_le`, `control_diversity_needs_shares` | not formalised | Binned scatter plots on data, with no printed coefficients. Only the index is formalised |
+| The suggested race mechanism (CB-Q7) | `raceOnlyBias_formula`, `control_raceOnly_no_gap` | special case | A model of our reading, two races, friendship only within race (CB-D19) |
+| Cross-cohort design and Fig. 6a | `dev` (definition), `cohort_slope`, `control_cohort_varying_bias`, `fig6_numbers` | general | The identifying assumption, orthogonality of cohort composition to other determinants, is stated as the hypothesis of `cohort_slope` |
+| Fig. 6b and the attenuation correction | `attenuation`, `fig6_numbers` | special case | Linear conditional expectation of true bias in the leave-out estimate is assumed |
+| Regression discontinuity, specification and identification | `rdSpec`, `T` (definitions), `rd_jump`, `rd_identifies`, `control_rd_other_jump`, `rd_numbers` | general | |
+| Extended Data Fig. 4b slopes 0.94 and 0.80 | none | not formalised | Estimates on data |
+| Level of bias against the setting benchmarks (our computation) | `excess_low`, `high_below_bench`, `control_rec_high_at_bench` | special case | Approximate benchmarks (CB-D18) |
+

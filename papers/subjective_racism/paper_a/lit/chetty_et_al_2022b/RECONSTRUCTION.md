@@ -133,15 +133,30 @@ co-authors, "Social capital II: determinants of economic connectedness",
 
 ## What could not be reconstructed
 
-- The magnitudes and functional form of the racial-diversity gradient. No
-  coefficient, standard error or control set is reported. The figures fit
-  quadratics by OLS to ventile means, and the readings in CB-D7 are from the
-  plots.
+This list matches the coverage table in CLAIMS.md.
+
+- The estimates themselves. Table 1, the reliabilities, the slopes of Fig. 6
+  and Extended Data Fig. 4, and the adjusted R² of Extended Data Table 1 are
+  regressions on data we do not hold. Their specifications, identifying
+  conditions and the arithmetic read off them are formalised (`spec1`,
+  `cohort_slope`, `rd_identifies`, `attenuation`, `variance_ratios`).
+- The predictors of bias in Extended Data Figs. 1 to 3, racial diversity among
+  them. They are binned scatter plots with no printed coefficient, standard
+  error or control set. Only the diversity index is formalised
+  (`diversity_le`), and the readings in CB-D7 are from the plots.
+- The friending model behind eq. (5). Formalised under our reading (CB-D15).
+- The averaging behind the 73% and 16% of Fig. 3b. Formalised as our reading
+  (CB-D4).
+- TCEC as printed. Formalised with the low-SES share in the first factor
+  (CB-D5).
+- The authors' race mechanism (CB-Q7). Stated in one sentence. Formalised as
+  our two-race model (`raceOnlyBias_formula`, CB-D19).
+- The setting benchmarks. The paper prints the benchmark only for a group half
+  high-SES and for high schools. Our setting benchmarks use the national
+  friend-count ratio (CB-D18).
 - Whether the missing cross-SES friendships in diverse schools are cross-race
   friendships. No individual race is used. Racial composition is school-level
   (NCES), college-level (IPEDS) and ZIP-level (ACS).
-- Any model of why friending bias arises. The paper gives none and says the
-  correlates are not exhaustive (CB-Q9).
 - The Supplementary Information of the Nature article, which the main text
   cites for Supplementary Figs. 1 to 6 and Tables 1 to 3. The NBER version
   contains these, and its differences are in CB-D8 to CB-D12.

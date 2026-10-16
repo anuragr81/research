@@ -13,7 +13,7 @@ doi:10.1073/pnas.1900500116.
   `be676006…9967`. The text has no page numbers and no form feeds, so the
   suite treats it as one page and every quotation cites page 1 with its
   section heading (KT-D1).
-- Read in full on 16 October 2026: the significance statement, abstract,
+- Read in full on 16 October 2026, covering the significance statement, abstract,
   introduction, results (studies 1 to 5), discussion, materials and methods,
   and the reference list. Evidence tag [F].
 - The SI Appendix (`pnas.1900500116.sapp.pdf`) is linked from the page but is
@@ -84,13 +84,41 @@ perceivers to track the social class of speakers is considered accurate"
   of the paper. They show that above-chance class accuracy by itself does not
   separate a speech cue from inference from the group, which is why the
   study 2 controls for speaker race (KT-Q6) carry the weight.
+- The composite measure of class averages z scores of the available
+  indicators. Each z score and so the composite has sample mean zero
+  (`mean_zscore`, `mean_composite`), which raw averages do not
+  (`control_raw_average_not_centered`).
+- Study 4's accuracy is a Pearson correlation, invariant to any increasing
+  affine recoding of the ratings (`corr_affine_pos`) and reversed by a
+  decreasing one (`control_corr_neg_scale`). The ladder's scale does not
+  matter.
+- The printed effect sizes follow from the printed `t` statistics by two
+  conventions. Study 1 and study 4 use `2t/√df` (`study1_D`, `study4_D`);
+  study 5 uses `t/√df` (`study5_D_*`). Under the one-sample convention study
+  1's class accuracy has `d` under 0.49, not 0.97 (KT-D8). Study 5's hiring
+  value does not reproduce (KT-D9).
+- Correlations and their `t` statistics agree through `t² = r² df/(1 − r²)`
+  for study 4 speech and the 30 s check (`study4_speech_t`, `study4_30s_t`)
+  and for study 1's perceiver education (`study1_education_t`), and disagree
+  for study 4 transcript (`study4_transcript_t_mismatch`, KT-D10).
+- Hypothesis 3, read as class cues used as a proxy for merit. An increasing
+  map from perceived class to judged competence favours the higher-class
+  applicant with no information on qualifications (`proxy_bias`).
 
 ## What could not be reconstructed
 
 - Nothing in the SI Appendix, which is not cached (KT-D2).
 - The base rate of college graduates among study 1 stimuli, and so whether
   50% is the right chance line for that study (KT-D3).
+- Every estimate from data. These are the study 2 regressions and ICC, the
+  study 3 ANOVA, the study 4 linear trend, the study 5 `F` statistics,
+  salaries, bonuses and `α`. No printed number among them follows from another.
 - The regression coefficient on speaker race in study 2. The text says only
   that no control was significant (KT-Q6).
+- Every `P` value, which needs the `t` or `F` distribution. The `t`
+  statistics behind them are checked where they follow from printed numbers.
+- The power target is checked only under the normal approximation with
+  quantiles the paper does not print (`power_goal`).
+- Hypothesis 2, which has no structure beyond its estimates.
 - The sample counts disagree between the results and the methods for studies
   1, 2 and 4 (KT-D4, KT-D5).

@@ -125,8 +125,16 @@ danced and mixed with (DNQ-Q5).
 
 ## What could not be reconstructed
 
-- The regressions. The linked microdata are not available here, and the
-  estimates are taken as printed.
-- The weights of Appendix F, beyond the arithmetic of the adjusted rate.
+The coverage table in `CLAIMS.md` lists every result. What is short of general
+is the following.
+
+- The estimated rates of Tables 1 to 5 and A.2 to A.8, the coefficients of
+  Tables 7 and 8, and the segregation regressions of PDF p. 30. The linked
+  microdata are not available here, so the estimates are taken as printed.
+  Their specifications are formalised (`lin`, `lin_change`) and so are the
+  numbers the text derives from them.
+- Figure A.4 is formalised as the example it is.
+- The probit of Appendix F and the adjusted probit rate of 6.8%. The weight is
+  formalised as a function of the propensity (`probitWeight`), not estimated.
 - Whether the 8.6% link rate of the 10% base sample is the right share for the
   whole black population, which the lower bound of 1.4% assumes.

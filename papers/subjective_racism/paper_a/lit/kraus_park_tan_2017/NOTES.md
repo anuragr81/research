@@ -2,13 +2,17 @@
 
 ## What was verified
 
-- Fourteen quotations are found on the PDF pages they cite in the text layer
+- Fifteen quotations are found on the PDF pages they cite in the text layer
   of the accepted manuscript (LC-2).
-- The quartile and half chance benchmark, and our formal reading of the
-  sorting argument, are Lean theorems (LC-4). The sorting argument is stated
-  in words in the manuscript. The formalisation is of our reading of its
-  structure, with A1's squared-distance utility standing in for "similarity
-  enhances liking", and is not attributed to the authors.
+- The quartile and half chance benchmark is the manuscript's own metric and is
+  formalised in general (`blindHit_uniform`).
+- Every other Lean theorem formalises our reading of a claim the manuscript
+  makes in words. These cover sorting, own-class affiliation, accuracy and
+  inequality, stereotyping, strategic sharing and visible gaps. The
+  squared-distance form in the sorting theorems is A1's utility standing in
+  for "similarity enhances liking", and is not attributed to the authors. The
+  coverage table in `CLAIMS.md` lists every prediction and statistic and says
+  which are not formalised.
 - Our reading is consistent with the accepted manuscript on these points.
 
 ## What could not be verified
@@ -17,70 +21,90 @@
   seven-word study, and every cited study, which is known here only through
   this manuscript [C].
 - The Figure 2 values, read from the bars to about a percentage point
-  (KPT-D4).
+  (KPT-D4), and the `χ²` and `p` values.
 
 ## The bearing on Paper A1
 
-**How accurately class is read.** Weakly, with correlations of .22 to .28
-between perceived and actual class from 60 s of behaviour, 20 Facebook
-photographs or seven words (KPT-Q2, KPT-Q4). By quartiles, observers are
-right about 35% to 36.5% of the time against 25%, and by halves about 60% to
-62% against 50% (Figure 2, KPT-Q6). The authors call this "preliminary yet
-promising" (p. 12).
+**The puzzle.** The manuscript offers a rival account of class homophily
+without groups. Class signals perceived directly "create barriers for
+relationship formation across class boundaries" (KPT-Q7), so friending bias
+would follow from reading class off the person. It says nothing on racial
+diversity. The interplay of class and race perception is named as future
+research (KPT-Q10). The one cited study that combines them, Bergeron and
+Zanna, uses an indigenous Peruvian writer as its lower-class condition, so it
+cannot separate ethnicity from class (KPT-Q9). The manuscript conjectures
+that class is harder to discern where inequality is lower (KPT-Q12). In our
+signal-plus-noise reading, accuracy rises with the spread of class
+(`accuracy_rises_with_spread`). If racially diverse settings have larger class
+gaps between groups, the same logic makes a group marker more informative
+there. That extension is ours.
 
-**A1's premise that class is unseen and inferred from group markers.** The
-manuscript's premise is the opposite in emphasis. Class is "signaled and
-perceived accurately" (p. 6) from the person's own behaviour, speech and
-possessions (KPT-Q1). Two of its numbers bear directly on A1.
-- The accuracy survives controls for the target's race (KPT-Q2, KPT-Q4). The
-  class read here is read from an individual cue net of race, not inferred
-  from the group.
-- The accuracy is low. A correlation of about .2 leaves most of the variance
-  in class unread, which is consistent with A1 treating class as unseen to a
-  first approximation and the group as the remaining evidence. The manuscript
-  does not draw that conclusion.
+**Budget compatibility.** The manuscript's origin of homophily is similarity,
+"similarity enhances liking and relationship formation" (p. 14, KPT-Q7). The
+cited Côté et al. signals are spending plans and budget constraints, a summer
+in Europe against a summer job "to help with family bills" (KPT-Q8). These
+are the activities budget compatibility is about, though the manuscript reads
+them as similarity. Its motive for class-directed sharing is a vertical
+return, few "direct economic benefits for the sharer" (KPT-Q16,
+`visible_share_rich`), which is not budget compatibility.
 
-**Is a racial signal read as a class signal?** Not shown. The one cited study
-that bundles them, Bergeron and Zanna, uses an indigenous Peruvian writer as
-the lower-class condition (KPT-Q9), so its result cannot separate ethnicity
-from class. The interplay of class and race perception is named as future
-research (KPT-Q10).
+**Avoidance that depends on the observer's class.**
+- Direction (i), avoidance runs both ways. Supported by cited evidence.
+  Upper-class participants affiliate more with upper-class signals and
+  lower-class participants with lower-class signals (KPT-Q8,
+  `own_class_ranking`). Under an accurate signal the sorting is symmetric
+  (`sorting_symmetric`). A vertical preference would give a common ranking
+  instead (`control_vertical_common_ranking`).
+- Direction (ii), a low-class member of the high group prefers outsiders. Not
+  stated. The nearest evidence is that first-generation students feel
+  alienated in universities populated by highly educated families (KPT-Q8),
+  which is a lower-class individual in a high-class setting. The group there
+  is the class itself, not a racial group, so it neither supports nor
+  contradicts direction (ii) as A1 states it.
 
-**Contributions 1 to 4.**
-1. Group avoidance from class homophily. The micro-step is here in words, the
-   group step is not. Accurate class signals create "barriers for
-   relationship formation across class boundaries" through similarity
-   (KPT-Q7), and the cited Côté et al. result has affiliation following the
-   observer's own class (KPT-Q8), which is the observer-type dependence of
-   contribution 1. Both are about class read from the person, not inferred
-   from a group, and neither has a variance term. A1 can cite KPT-Q8 [C] as
-   evidence for the homophily it assumes. It cannot cite the manuscript for
-   group avoidance.
-2. Budget compatibility. Not present. The reason given for homophily is
-   similarity and liking (KPT-Q7), and for strategic sharing it is the
-   expected return from a partner with resources (p. 21), a vertical motive.
-3. Venue exclusion. Not present. Rivera's elite firms screening on club
-   memberships (p. 15) and school uniforms concealing class (KPT-Q14) are the
-   nearest points, both cited, neither modelled.
-4. A test of the class channel. Not present as a test of the group penalty.
-   The cited Nishi et al. experiment varies whether resources are visible and
-   finds sharing directed to the rich only when they are (KPT-Q11). That is a
-   test of what showing type does to behaviour, not of whether a group
-   penalty vanishes when class is shown.
+**The penalty vanishing when class is shown.** No statement on a group
+penalty. The cited Nishi et al. experiment has the converse property. With
+resources hidden, participants shared "regardless of the resources of their
+partners", and with resources visible they shared with the rich (KPT-Q11,
+`invisible_share_indifferent`, `visible_share_rich`). There is no marker in
+that design, so it says nothing about a group penalty.
 
-**Premises that differ.** In A1 the marker is fixed and passing is a choice
-of marker. Here the class signal itself can be changed by aspiring
-individuals (KPT-Q13), so the manipulable object is the class cue, not the
-group.
+**The shadow market.** Two passages bear on it, both about class signals
+rather than group.
+- Top firms "rely on social class information in extracurricular activities
+  and club memberships" to find higher-class applicants (KPT-Q15). That is
+  screening on correlated social information, which is the kind of variable
+  the shadow market trades.
+- School uniforms aim to conceal class, and the authors ask whether "the
+  myriad and subtle ways in which behaviors signal social class" make the
+  policy ineffective (KPT-Q14). That is the shadow-market question, whether a
+  rule on one channel moves the information to others. The manuscript asks it
+  and does not answer it.
+- Nothing on law, on venues as intermediaries, or on information about where
+  to go acquiring value.
+
+**Premises of A1 the source does not share.**
+- Class is "signaled and perceived accurately" (p. 6) from the person's own
+  behaviour, speech and possessions (KPT-Q1), with accuracy that survives
+  controls for race (KPT-Q2, KPT-Q4). In A1 class is unseen and read from the
+  group. The accuracy is low, correlations near .2 to .28, which leaves room
+  for A1's idealisation.
+- Class signals can be changed by aspiring individuals (KPT-Q13,
+  `signal_upgrade_raises_competence`). In A1 the marker is fixed and passing
+  is a choice of marker.
+- Preferences are horizontal for sorting (KPT-Q7, KPT-Q8) but vertical for
+  stereotypes and sharing (KPT-Q16). A1 has only the horizontal form.
 
 ## Controls
 
 - LC-2. A fabricated quotation, "these associations disappeared after
   accounting for the race and gender of participants", the opposite of
   KPT-Q2, is not found. A true quotation is not found on a neighbouring page.
-- Lean. `control_nonuniform_categories` shows the 25% benchmark needs
-  sample-quantile categories. `control_vertical_common_ranking` shows the
-  observer-dependent ranking fails under a vertical utility.
-- The suite's LC-4 build-root check fails until the coordinator adds
-  `KrausEtAl2017` to `lakefile.toml`. The axiom audit passed against an
-  olean built in the reader's scratch directory.
+- Lean. Each main result has a control. `control_nonuniform_categories` shows
+  the 25% benchmark needs sample quantiles. `control_vertical_common_ranking`
+  shows own-class ranking fails under a vertical utility.
+  `control_noiseless_flat` shows the link of accuracy to inequality needs
+  noise. `control_flat_stereotype` shows the gain from an upgraded signal
+  needs competence to depend on class.
+- Axiom audit by hand against the scratch olean, all 16 declared theorems
+  checked, none beyond propext, Classical.choice and Quot.sound.

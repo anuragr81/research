@@ -60,26 +60,47 @@ Economics* 120(2), 2005. The published version is not read (AS-D4).
    education level is reached by pooling in the minority and by separation in
    the majority (AS-Q13, AS-Q14).
 
-## Derivation chain of what Paper A1 uses
+## Derivation chain
 
-- The group's value of accepting is `z = F γb/(1−γ) + (1 − F) γ[πb − (1−π)Bk]/(1 − πγ)`
-  (PDF p. 28), the second term from the lottery faced each period by a type
-  above `θ̂`. `z ≥ 0` if and only if `F ≥ F₀` (`lemma2_accept_iff`), and (7)
-  puts `F₀` in `(0, 1)` (`F0_mem`).
-- A pool reaching above `θ̂` dilutes `F(θ̂|s)`. Under a uniform prior the pool
-  `[0, θ*]` has `F = θ̂/θ*` and is accepted if and only if `θ* ≤ θ̂/F₀`
-  (`pool_accept_iff`), so types up to `θ̂/F₀`, above `θ̂`, are accepted
-  (`pool_admits_unreliable`). This is the mechanism of Proposition 3(3), shown
-  here for a uniform prior only.
-- Proposition 8's condition comes from comparing honest and deceptive
-  statements under [T1] (`prop8_honest_iff`). Proposition 9's threshold comes
-  from the difference of the two group payoffs (`prop9_derived`).
+- Lemma 1 (PDF pp. 26–27). Comparing (12) and (13) gives (14) (`eq14`). The left
+  side of (15) is strictly decreasing in the type (`G_strictAnti`), positive at
+  `θ = 0` by (3) and negative at `θ = 1/k` by (7), so it has a unique zero
+  `θ̂(δ) ∈ (0, 1/k)` (`lemma1_exists_unique`), and [P2] is the best response
+  (`lemma1_threshold`). The left side of (15) rises with `δ` at a fixed type,
+  so `θ̂(δ)` rises with `δ` (`lemma1_mono`), and it tends to 0 as `δ` does
+  (`lemma1_limit`). The paper uses implicit differentiation for the
+  monotonicity, and the formalisation compares the two zeros directly.
+- Lemma 2 (PDF pp. 27–28). The group's value of accepting is
+  `z = F γb/(1−γ) + (1 − F) γ[πb − (1−π)Bk]/(1 − πγ)`, the second term from the
+  lottery faced each period by a type above `θ̂`. `z ≥ 0` if and only if
+  `F ≥ F₀` (`lemma2_accept_iff`), and (7) puts `F₀` in `(0, 1)` (`F0_mem`). The
+  comparative statics of `F₀` stated on PDF p. 15 follow by cross-multiplying
+  (`F0_anti_pi`, `F0_anti_gamma`, `F0_anti_b`, `F0_mono_Bk`).
+- Proposition 1 is Lemmas 1 and 2 together (`prop1`).
+- Lemma 3 (PDF pp. 28–29) adds the two incentive constraints and uses
+  `c_sθ < 0` (`lemma3`). Lemma 4 (PDF pp. 29–30) compares the local incentive
+  condition (18) with the first-order condition (19) (`lemma4_step`), and
+  Remark 1 compares (19) across group decisions (`remark1`).
+- Proposition 3(3) (PDF p. 31) rests on Lemma 2 at a revealed type below `θ̂`
+  (`prop3_3_core`). A pool reaching above `θ̂` dilutes `F(θ̂|s)`, and under a
+  uniform prior the pool `[0, θ*]` is accepted if and only if `θ* ≤ θ̂/F₀`
+  (`pool_accept_iff`, `pool_admits_unreliable`). Corollary 1 follows in that
+  case from Lemma 1 (`corollary1_uniform`).
+- Proposition 8 (PDF pp. 36–37) compares honest and deceptive statements under
+  [T1] (`prop8_honest_iff`) and checks the tolerant group's acceptance
+  (`prop8_tolerant_accepts`). Proposition 9 (PDF p. 37) takes the difference
+  of the two group payoffs (`prop9_derived`).
 
 ## What could not be reconstructed
 
-- Propositions 2 and 4 to 7 rest on D1 arguments (Cho and Sobel 1990) and
-  are not formalised.
-- The existence of `θ̂(δ)` and its monotonicity in `δ` (Lemma 1) need the
-  functional form of `v` and are taken as given.
-- The printed threshold of Proposition 9 is not reproduced for `γ > 0`
-  (AS-D2).
+- Proposition 2, which argues over separating strategies as functions with
+  the concavity of `U` in `s`.
+- Propositions 4 to 7, which rest on the D1 refinement (Cho and Sobel 1990)
+  and, for Propositions 5 and 6, on the envelope argument for `Δ(θ̂(δ))`.
+- Proposition 3, claims (1) and (2).
+- Lemma 4's differential equation (17) and Remark 1's derivation of the order
+  of the two first-order conditions from (3). The closing comparisons are
+  formalised.
+- Corollary 1 beyond a uniform prior, and Proposition 8's step to
+  `θ^T ≤ θ̂(δ)` and its separating tolerant equilibrium.
+- The printed threshold of Proposition 9 for `γ > 0` (AS-D2).

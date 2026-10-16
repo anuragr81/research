@@ -86,6 +86,12 @@ pp. 175–187.
   which gives Fig. 2's lower black pay at `y = α` (`fig2_black_paid_less`).
 - With zero reliability the prediction is the group mean and the risk factor
   is `k Var(q)` (`zero_reliability`).
+- The structure `Group` and the definitions `Group.wage`,
+  `ConsistentBeliefs` and `Prefers` set out the model's primitives and
+  solution concepts. Eqs. (2) to (6), Figs. 1A, 1B, 2, 4 and 5 and the
+  perfect-information remark are stated on its parameters
+  (`fig1_crossing`, `fig2_crossing`, `fig4_truncation`, `fig5_parallel`,
+  `perfect_information`).
 - The two conditions of the Fig. 2 result are each necessary, as the
   controls show. Without risk aversion there is no discount
   (`control_risk_neutral`), and without spread in `q` there is no discount
@@ -93,11 +99,20 @@ pp. 175–187.
 
 ## What could not be reconstructed
 
-- The selection–truncation model is stated in words and a figure, with no
-  equation, and is not formalised. Its logic (compression of `q̂` toward the
-  mean under a floor above the mean) is recorded in words only.
-- The Spence discussion and the counter-example handout of footnote 24 are
-  outside the paper and not formalised.
+The coverage table in `CLAIMS.md` has a row for every displayed result. Short
+of general are these.
+
+- Eqs. (2) and (4) are formalised as the least-squares slope in second
+  moments (`eq2_least_squares`). That the conditional expectation of a normal
+  `q` given `y` is linear is used, not proved, because Mathlib has no usable
+  conditional expectation for a bivariate normal.
+- The selection–truncation model is formalised only at the extreme of Fig. 4
+  (`fig4_truncation`). The general model has no equation in the paper, and
+  "half the whites" rests on the symmetry of the normal law, not formalised.
+- The remark under Fig. 2 that every white worker is paid more only if the
+  penalty is as large as `q₂ − q₁` concerns the bounded range drawn; on the
+  real line the two lines always cross (`fig2_crossing`).
+- Spence's model (pp. 10–11) and footnote 3 are in words and not formalised.
 - The empirical magnitudes on p. 9 (a differential of perhaps 10 to 30
   percent) are the authors' estimate with no source given, and nothing here
   relies on them.

@@ -84,9 +84,20 @@ read (CJP-D1).
 
 ## What could not be reconstructed
 
-- The existence proofs (Propositions 3, 6, 9) and the welfare results, which
-  are not formalised.
-- The fit of Section 7.2 and Figures 6 and 7, which rest on a numerical grid
-  search whose code is not in the paper.
+The coverage table in `CLAIMS.md` lists every numbered result, and the gaps are these.
+
+- Existence with many types (Proposition 6), which uses Brouwer's theorem,
+  and the random-matching foundation of Appendix A (Lemmas 2 and 3). The
+  ordering part of Proposition 6 is formalised, and its last step holds only
+  when the smaller type is at or above baseline (CJP-D8).
+- The steady state is formalised for two types with unbiased matching. The
+  general matching process `F` and the `K`-type steady state are not.
+- Propositions 4 and 5 are stated through the marginal return
+  `φ(q, t) = ∂/∂t U(q t, (1 − q) t)`, with diminishing returns as strict
+  decrease of `φ` in `t`. Utility functions themselves are not built.
+- The fit of Section 7.2, Figures 6 to 9 and footnote 47's equilibria, all
+  numerical.
 - The Hispanic value in the example school (CJP-D2).
+- The second derivative in Appendix D, of which only the sign of the printed
+  numerator is checked.
 - The Supplementary Material on satiated preferences, which is not read.

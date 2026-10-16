@@ -90,15 +90,28 @@ and Measurement", NBER Working Paper 29820, March 2022, revised December 2024.
   `μ̃*(y⁰, b) = μ*(y⁰, w)` and `μ̃*(y⁰, w) = μ*(y⁰, b)` so both systemic terms
   vanish and total equals direct (`same_signal_all_direct`). This is our
   statement of a case the paper describes in words when `Y⁰ = S*` (PDF p. 21).
+- A group-neutral rule applied to a signal that is distributed alike in both
+  groups at the reference qualification gives no total discrimination at
+  that qualification (`neutral_rule_same_signal_no_gap`). A group-neutral
+  rule applied to a signal that differs by group at the same qualification
+  gives total discrimination that is all systemic
+  (`neutral_rule_all_systemic`, `control_audit_misses_systemic`).
 - In the two-node subsystem, `Δˢ(y⁰, b)` depends on the group only through
   `A¹(g, y⁰)` (eqs. 7, 8), so it vanishes without initial-node direct
   discrimination (`no_initial_direct_no_systemic`).
 
 ## What could not be reconstructed
 
-- The estimates. Table values are transcribed from the text layer, and no
-  data were read. Figure 5, which carries the shares by thickness, is an
-  image (BHI-D2).
-- The measure-theoretic general case. The Lean file uses a finite signal
-  space, where the integrals are sums.
-- Appendix B.1.1 is read with a correction (BHI-D5) and not formalised.
+The coverage table in `CLAIMS.md` lists every numbered result, and the gaps are these.
+
+- The measure-theoretic general case. Definitions 1 to 3, Proposition 1 and
+  eqs. (3) to (6) are formalised on a finite signal space at one
+  qualification level, where the integrals are sums. The algebra is the same.
+- The estimates. Table values are transcribed from the text layer and only
+  their internal arithmetic is checked (`table1_arith`, `table3_arith`). No
+  data were read. Figure 5, which carries the systemic shares by thickness,
+  is an image (BHI-D2).
+- Appendix B.1.1 is formalised for any strictly increasing `Φ`, with the
+  square roots restored (BHI-D5). The averages over productivity that give
+  the "cherry-picking" and "lemon-dropping" conclusions need normal
+  integrals and are not formalised.

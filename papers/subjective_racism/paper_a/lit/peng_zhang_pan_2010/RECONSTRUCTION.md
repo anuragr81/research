@@ -60,25 +60,48 @@ Knowledge-Based Systems* 18(5), 2010, pp. 539–564, DOI
 
 ## Derivation chain of what Paper A1 uses
 
-- A sum over joint states regroups by `y` (`sum_by_cell`, `sum_cell`).
+- A sum over joint states regroups by `y` (`sum_by_cell`, `sum_cell`), which
+  gives eq. (1) from eq. (2) (`eq1`).
 - Eq. (2) gives `Q(Y) = R(Y)` where `P(y) ≠ 0` (`jeffrey_marginal`). Lean's
   division by zero returns `0`, which is eq. (2)'s "otherwise" branch.
-- Eq. (9) and the cited Theorem 5 of Chan and Darwiche. With `L(y) =
-  R(y)/P(y)`, the normaliser of Bayes' rule is `Σ_y R(y) = 1`, so the virtual
-  update is eq. (2) (`eq9_soft_eq_virtual`).
-- The converse direction, which the paper asserts as an equivalence (PZ-Q3)
-  but does not write out. Bayes with any `L` is eq. (2) with
-  `R(y) = L(y)P(y)/Σ_y' L(y')P(y')` (`virtual_eq_jeffrey`), a distribution on
-  `Y` (`virtual_soft_sums_to_one`). The likelihood is defined up to scale
-  (`virtual_scale`).
+- Theorem 1 follows from the pointwise bound `a − b ≤ a log(a/b)`
+  (`kl_term_ge`): for any `Q̃ ∈ P_{R(Y)}`, `I(Q̃‖P) ≥ Σ Q̃ log(R(y)/P(y)) =
+  I(Q‖P)`, with `Q` Jeffrey's rule (`theorem1`). Without dominance the finite
+  I-divergence breaks it (`control_theorem1_dominance`).
 - Theorem 2, as stated and as proved in the appendix, (A-1) and (A-2)
   (`theorem2`).
+- Theorem 4. Each IPFP step on `Y^j ⊆ Y` multiplies `Q` by a function of `y`
+  (`step_factor`), so every finite iterate is `Q_0(x) K(y)`
+  (`theorem4_finite`, `theorem4_rigid`).
+- Theorem 5 does not follow. Theorem 2 gives minimality only over the
+  distributions with marginal `Q*(Y)`, and a counterexample shows the
+  statement false (`t5_two_steps`, `t5_ipfp_limit`, `theorem5_fails`).
+- Eq. (9) and the cited Theorem 5 of Chan and Darwiche. With `L(y) =
+  R(y)/P(y)`, the normaliser of Bayes' rule is `Σ_y R(y) = 1`, so the virtual
+  update is eq. (2) (`eq9_soft_eq_virtual`). The converse, which the paper
+  asserts as an equivalence (PZ-Q3) but does not write out
+  (`virtual_eq_jeffrey`, `virtual_soft_sums_to_one`, `virtual_scale`).
+- Hard evidence is the degenerate soft evidence (`hard_evidence`), and as a
+  virtual likelihood it conditions and forgets the prior's weights across
+  instantiations (`hard_evidence_virtual`, `hard_evidence_forgets_prior`).
 - Two virtual evidences commute (`virtual_commute`) but, as Example 1 shows,
   do not preserve two soft marginals (`control_two_virtual_not_soft`).
+- Theorem 7. Eq. (13-1) (`eq13_1`) and (A-5) (`eqA5`) with Theorem 2 give a
+  contraction by `α` for one step (`theorem7_step`).
+- Eq. (14) at `k = 0` and Table 4 (`eq14_initial`, `table4_consistent`,
+  `table4_inconsistent`).
 
 ## What could not be reconstructed
 
-- Theorems 3, 4, 5, 6 and 7 (IPFP, BN-IPFP, SMOOTH) are read, not formalised.
-  Paper A1 has one reading of a marker, so nothing in it rests on them.
-- The timing experiments (Tables 2, 3, 5 to 10) are reported, not checked.
+The coverage table in `CLAIMS.md` has a row for every numbered result. Short
+of general are these.
+
+- Definition 1 and Theorem 1 are formalised without eq. (3)'s `+∞` branch,
+  so Theorem 1 is proved for a strictly positive prior.
+- Theorem 3 (cited), the limit in Theorems 4 and 6, and the iteration and
+  limit in Theorem 7 need convergence arguments not formalised; Theorems 4,
+  6 and 7 are formalised at every finite step.
+- BN-IPFP's junction-tree computations, GEMA, SR-IPFP's convergence, Fig. 2's
+  converged likelihoods, the conjecture for `m > 2`, and the timing and
+  divergence tables are not formalised.
 - Chan and Darwiche (2005), the source of the cited Theorem 5, is not read.

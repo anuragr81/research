@@ -78,19 +78,39 @@ The report states no model. It has two parts.
 ## The structure we attribute, and the Lean
 
 The identities behind the reported shares are formalised (`agree_shares`,
-`bars_sum`, `overall_is_weighted`). The authors' inference from the age
-pattern to modification is formalised in our reading, as a reported rate
-equal to the share who have not modified times the rate at which they are
-mocked. More modification lowers the reported rate
-(`modification_lowers_reports`), but a fall in the rate of mockery across
-cohorts produces the same figure (`control_not_identified`). The authors name
-the two rival readings themselves, that younger people meet more bias or
-perceive more of it, before preferring modification (PDF p. 33).
+`bars_sum`, `overall_is_weighted`, `institutional_overall`, `seg_shares`), and
+so are the comparisons the text draws from printed numbers
+(`social_exceeds_institutional`, `high_stakes_against_institutional`,
+`senior_gap_social_exceeds_workplace`, `fig17_workplace_not_antitone`). Three
+structural claims about modification are formalised in our reading. The
+authors' inference from the age pattern to modification reads a reported rate
+as the share who have not modified times the rate at which they are mocked.
+More modification lowers the reported rate (`modification_lowers_reports`),
+but a fall in mockery across cohorts produces the same figure
+(`control_not_identified`). The authors name the two rival readings
+themselves, that younger people meet more bias or perceive more of it, before
+preferring modification (PDF p. 33). The claim that encouraging modification
+maintains RP's over-representation reads the share of RP heard as natives plus
+modifiers over all (`modification_raises_heard_RP`). The accent-strength
+finding reads a rating as linear in strength, with a steeper slope for MLE
+than for Northern accents (`steeper_slope_larger_return`).
 
 ## What could not be reconstructed
 
+The coverage table in `CLAIMS.md` lists every finding. Those not formalised,
+and the special case, are these.
+
 - No coefficient, standard error or model specification is reported, so the
-  statements of significance cannot be checked.
-- The share of any group that has modified its accent is not measured.
+  statements of significance, and the claim that class replaces region as the
+  leading factor across life stages, cannot be checked.
+- The regional, year-of-study and age differences of Figures 7 to 16 are
+  printed numbers with no arithmetic relation to one another, so nothing in
+  them follows from anything else.
+- The vicious circle (ST-Q25) is a dynamic claim with no stated structure.
+- The share of any group that has modified its accent is not measured
+  (ST-D8).
 - The accent-strength finding (ST-Q3) is cited from Cardoso et al. (2019),
-  which is not read, and the report gives no numbers for it.
+  which is not read. The report gives no numbers for it, so the linear form is
+  a special case of our choosing.
+- The claim that only one bias-reduction strategy works (PDF p. 39) has no
+  printed estimates.

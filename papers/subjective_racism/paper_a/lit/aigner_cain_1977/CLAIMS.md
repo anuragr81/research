@@ -24,27 +24,79 @@ in the last column (AC-D1).
 | AC-Q11 | 11 | "without recourse to risk aver" | The selection–truncation model "incorporates reliability differences but without recourse to risk aversion" (the word is broken at the column line). A penalty on the noisier group that does not need risk aversion |
 | AC-Q12 | 11 | "tion is nullified because workers with low" | "The potential preference for blacks at the lower end of the y distribution is nullified because workers with low y scores are not hired". The truncation is what turns compression toward the mean into a penalty |
 | AC-Q13 | 12 | "In the presence of perfect information" | "(γ = 1), the systematic difference in E(q\|y) or E(q\|q) for the two racial groups disappears". The labour-market form of contribution 4's prediction |
+| AC-Q15 | 6 | "ment that payments be equal for equal y" | "Even a legal requirement that payments be equal for equal y scores would contribute nothing to the overall improvement of the status of blacks". A legal rule on the observed criterion leaves the group outcome in place |
+| AC-Q16 | 10 | "should activate a market for "test in" | "a large R factor should activate a market for "test instruments" that are tailored to the separate groups". Information about the unseen type acquires market value |
+| AC-Q17 | 11 | "race-biased in their hiring process: that is," | In the truncation model employers "are not race-biased in their hiring process: that is, they hire workers solely on the basis of E(q\|y)". A group-neutral rule yields a group gap |
+| AC-Q18 | 8 | "the costs of mistakes in assigning workers" | "the risk costs of variance in worker abilities may stem from variance in output within homogeneous jobs or from the costs of mistakes in assigning workers to heterogeneous job slots". The curvature of eq. (7) is read as a cost of mismatch between worker and slot |
+| AC-Q19 | 9 | "segregation of black workers away from" | "The geographic segregation of black workers away from white employers (firms), for example, may well impose extra search and informational costs upon black workers". Location as a carrier of information costs |
 | AC-Q14 | 13 | "differential with risk aversion by" | "When we combine this reliability differential with risk aversion by employers, our model depicts economic discrimination". The conclusion ties the variance penalty to risk aversion |
 
 ## Lean results
 
-`lean/mathlib/AignerCain1977.lean`, in the paper's notation. The last three
-rows are contrasts with Paper A1's utility, not attributions to the paper.
+`lean/mathlib/AignerCain1977.lean`, in the paper's notation. The three
+`contrast_` rows are contrasts with Paper A1's utility, not attributions to the
+paper.
 
 | Theorem | What it checks |
 |---|---|
 | `AignerCain1977.gamma_mem` | Eq. (3). `0 < γ < 1` when both variances are positive |
+| `AignerCain1977.eq3_cov` | Eq. (3). `γ = Cov(q,y)/Var(y) = Cov(q,y)²/(Var(q)Var(y))` with `Cov(q,y) = Var(q)` |
+| `AignerCain1977.eq2_least_squares` | Eq. (2) as least squares. `γ` minimises the mean squared error over slopes |
 | `AignerCain1977.condVar_symm` | Footnotes 15 and 18. `Var(q)(1 − γ) = Var(q)Var(u)/(Var(q) + Var(u))` |
+| `AignerCain1977.fn15` | Footnote 15. `Var(q) − γ²Var(y) = Var(q)(1 − γ)` |
+| `AignerCain1977.eq6` | Eq. (6). `E(q̂\|q) = (1 − γ)α + γq` |
+| `AignerCain1977.mean_wage` | Pp. 6–7. A group's mean pay is its mean ability |
+| `AignerCain1977.fig1A_slope` | Fig. 1A. Equal `Var(u)`, larger `Var(q^B)`: `γ^B > γ^W` |
+| `AignerCain1977.fig1_crossing` | Figs. 1A and 1B. With equal means, the steeper group is predicted higher exactly above the mean |
+| `AignerCain1977.control_fig1_equal_slopes` | Control. Without a slope difference there is no crossing |
 | `AignerCain1977.eq8` | Footnote 17 and eq. (8). Under `q ~ N(m, v)`, `E[a − b e^{−cq}] = a − b e^{−cm + (c²/2)v}` |
 | `AignerCain1977.eq8_order` | P. 181. For `b, c > 0`, eq. (8) ranks beliefs as `m − (c/2) v` does |
-| `AignerCain1977.condVar_strictMono_Vu` | `Var(q\|y)` rises with `Var(u)` when `Var(q) > 0` |
+| `AignerCain1977.condVar_strictMono_Vu` | Fig. 3. `Var(q\|y)` rises with `Var(u)` when `Var(q) > 0` |
 | `AignerCain1977.fig2_black_paid_less` | Fig. 2. Equal means and `Var(q)`, `Var(u^B) > Var(u^W)`, `k > 0`: lower black pay at `y = α` |
-| `AignerCain1977.zero_reliability` | With `γ = 0` the prediction is `α` and the risk factor is `k Var(q)` |
+| `AignerCain1977.fig2_crossing` | Fig. 2. Black pay exceeds white pay exactly below a score `y₀ < α` |
+| `AignerCain1977.control_fig2_no_discount` | Control. Without risk aversion the crossing is at `α` |
 | `AignerCain1977.control_risk_neutral` | Control. With `k = 0` the two groups are paid the same at `y = α` |
 | `AignerCain1977.control_no_spread` | Control. With `Var(q) = 0` there is no risk discount whatever `Var(u)` |
+| `AignerCain1977.zero_reliability` | With `γ = 0` the prediction is `α` and the risk factor is `k Var(q)` |
+| `AignerCain1977.fig4_truncation` | Fig. 4. With zero reliability no black worker clears the floor `α`; with perfect reliability a white worker does iff `y > α` |
+| `AignerCain1977.control_fig4_reliable` | Control. With perfect reliability a black worker above the floor is hired |
+| `AignerCain1977.fig5_parallel` | Fig. 5 and eq. (6). Equal slopes `γ < 1`, `α^B < α^W`: the black line is lower by `(1 − γ)(α^W − α^B)` |
+| `AignerCain1977.perfect_information` | P. 12. With `γ = 1` both lines are the 45° line and the risk discount is zero |
+| `AignerCain1977.control_fig5_perfect_information` | Control. With `γ = 1` the Fig. 5 gap is zero |
 | `AignerCain1977.contrast_quadratic_ce` | Contrast. Under `v − κ(c − x)²`, expected utility is `v − κ((x̄ − c)² + σ²)` for any finite belief |
 | `AignerCain1977.contrast_cara_common_ranking` | Contrast. Under `m − kV`, equal-variance groups are ranked by mean whatever `k` |
 | `AignerCain1977.contrast_quadratic_ranking_depends_on_own_class` | Contrast. Under the quadratic loss, observers of class 0 and class 1 rank two equal-variance groups oppositely |
+
+## Coverage of the source's results
+
+The paper numbers equations (1) to (8), footnotes and Figs. 1A to 5; it has no
+propositions. Every displayed result and every claim drawn from a figure has a
+row.
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Eq. (1), `y = q + u` | `AignerCain1977.eq3_cov` (its consequence) | general | The measurement equation is a primitive; its consequences `Cov(q,y) = Var(q)`, `Var(y) = Var(q) + Var(u)` are the hypotheses of `eq3_cov` |
+| Eq. (2), `E(q\|y) = (1 − γ)α + γy` | `AignerCain1977.eq2_least_squares` | special case | Proved as the least-squares slope in second moments. That the normal conditional expectation is linear is not formalised, since Mathlib has no usable conditional expectation for a bivariate normal |
+| Eq. (3) | `AignerCain1977.gamma_mem`, `AignerCain1977.eq3_cov` | general | |
+| Eq. (4), the population regression | `AignerCain1977.eq2_least_squares` | special case | As for eq. (2) |
+| Eqs. (5a), (5b) | `AignerCain1977.fig1_crossing`, `AignerCain1977.fig5_parallel` | general | `qhat` with group parameters |
+| Eq. (6) | `AignerCain1977.eq6`, `AignerCain1977.fig5_parallel` | general | |
+| Eq. (7) | `AignerCain1977.eq8` | general | A definition, used in `eq8` |
+| Eq. (8), footnote 17 | `AignerCain1977.eq8` | general | |
+| Mean–variance step, p. 181 | `AignerCain1977.eq8_order` | general | The paper's route through the logarithm is replaced (AC-D3) |
+| Footnote 15 | `AignerCain1977.fn15`, `AignerCain1977.condVar_symm` | general | |
+| Footnote 18 | `AignerCain1977.condVar_symm` | general | |
+| Equal mean wages, pp. 6–7 | `AignerCain1977.mean_wage` | general | |
+| Fig. 1A, steeper black slope | `AignerCain1977.fig1A_slope` | general | |
+| Figs. 1A and 1B, crossing at the mean | `AignerCain1977.fig1_crossing` | general | |
+| Fig. 2, lower black pay at `y = α` | `AignerCain1977.fig2_black_paid_less` | general | |
+| Fig. 2, black pay higher below `y₀` | `AignerCain1977.fig2_crossing` | general | The remark that every W worker is paid more only if the penalty is as large as `q₂ − q₁` refers to a bounded range of `y` drawn in the figure; on the whole line two lines of different slope always cross. Not formalised beyond `fig2_crossing` |
+| Fig. 3, smaller conditional variance for whites | `AignerCain1977.condVar_strictMono_Vu` | general | |
+| Selection–truncation model, p. 11 | `AignerCain1977.fig4_truncation` | special case | Only the extreme of Fig. 4 (reliability 0 and 1, floor at `α`). The general claim needs the distribution of `q̂` above a floor, which the paper does not state; "half the whites" needs the symmetry of the normal law, not formalised |
+| Fig. 5, parallel lines | `AignerCain1977.fig5_parallel` | general | |
+| Perfect information, p. 12 | `AignerCain1977.perfect_information` | general | |
+| Spence's model, pp. 10–11 | none | not formalised | Discussed in words, with no equations |
+| Footnote 3, a constant test bias is inconsequential | none | not formalised | Stated in words; it is a relabelling of `q` |
 
 ## Readings recorded
 

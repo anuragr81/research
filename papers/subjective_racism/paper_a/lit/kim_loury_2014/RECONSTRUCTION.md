@@ -72,8 +72,10 @@ Published as *International Economic Review* (2018), which is not read.
 - **Law of motion** (PDF p. 11, eqs. 8, 9). `Π̇ = λ'(φ − Π)`. With `φ = Π_h`
   the path from `Π_l` reaches `Π*` at `T = (1/λ') ln[(Π_h − Π_l)/(Π_h − Π*)]`,
   eq. (10). Proposition 1, eq. (11), combines (7) and (10). Corollary 1,
-  eq. (12), restates it in `δ` (KLB-D6). Not formalised, since Paper A1 has
-  no law of motion.
+  eq. (12), restates it in `δ` (KLB-D6). Formalised as `eq8_quotient`, `eq9`,
+  `eq10` (with uniqueness of the solution, `linear_unique`), `prop1` and
+  `cor1`. Paper A1 has no law of motion, and the record formalises the
+  source's own.
 - **Dynamic system, Theorem 1** (PDF pp. 12–13). `Π̇ = λ'(φ − Π)` and
   `V̇ᵉ = (δ + λ')(Vᵉ − β(ξ) − ω')`, with `φ = G(Vᵉ/(δ + λ'))`. `Π` is a flow
   variable and `Vᵉ` jumps. The steady states are `Q_l = (ωPq + ω', Π_l)` and
@@ -83,28 +85,60 @@ Published as *International Economic Review* (2018), which is not read.
   and `πᵖ = Π_l + (Π* − Π_l)(1 − v*)^{−λ'/(δ+λ')}`, with
   `v* = ((δ+λ')cm − ωPq − ω')/(ωPu − ωPq)`. Proposition 3 gives the overlap
   `[π°, πᵖ]`. Theorem 2 says a trap `[0, π°)` containing `Π_l` exists iff
-  `(Π_h − Π*)/(Π_h − Π_l) < v*^{λ'/(δ+λ')}`. Both integrals were checked by
-  hand. The final equivalence is formalised as `trap_iff`.
+  `(Π_h − Π*)/(Π_h − Π_l) < v*^{λ'/(δ+λ')}`. Both integrals are formalised as
+  equal hitting times of the explicit solutions (`eq15_return`, `eq17`,
+  `eq16_return`, `eq18`). Lemma 3 and Proposition 3 are formalised on
+  `[Π_l, Π_h]` (`opt_feasible_iff`, `pes_feasible_iff`, `prop3`), and
+  Theorem 2 as `theorem2` and `trap_iff`.
+- **Comparative statics in `δ`** (PDF p. 16). The paper states that `π°`
+  rises and `πᵖ` falls with `δ`, without proof. The first holds
+  (`piO_strictMono_delta`). The second holds only with `v*` held fixed
+  (`piP_anti_fixed_v`). Since `v*` rises with `δ` (`vSd_strictMono`), `πᵖ`
+  in fact rises with `δ` whenever `ωPq > 0` and Lemma 1 holds
+  (`piP_strictMono_delta`, with a numerical case in `piP_rises_example`).
+  The proof compares `ln(1/(1 − v*))/(δ + λ')` at two rates, using
+  `ln x ≤ x − 1` twice (KLB-D10).
 - **Paths and welfare** (PDF pp. 18–19, 28–31). The paths spiral out from
   `((δ+λ')cm, Π*)` when the overlap is interior (Proposition 4, Corollary 2).
-  `Q_h` Pareto dominates `Q_l` (Corollary 3).
+  The curves of eqs. (31) and (34) and Condition 1 of the proof are
+  formalised (`va_eq31`, `va'_eq34`, `prop4_condition1`). `Q_h` Pareto
+  dominates `Q_l` (Corollary 3, `cor3_medium`, `cor3_workers`,
+  `cor3_employers`).
 - **Policy** (PDF pp. 19–23). A training subsidy that lowers `cm` to `c̃m` of
   eq. (20), or a hiring standard `θ̃` in `[θ̃'', θ̃']`, makes recovery
   feasible. A standard below `θ̃''` lowers the return to investment and is
   "patronizing" (Proposition 5), and an equal-hiring quota can be.
+  Formalised as `eq20`, `lemma4`, `betaHat_lt`, `betaHat_gt_iff`, `eq23` to
+  `eq25`, `prop5` and `quota`.
 - **Appendix A** (PDF pp. 24–26). With a monotone likelihood ratio, the hiring
   standard is `s(Π) = min{θ : ψ(θ) ≤ ρΠ/(1 − Π)}`, the return to investment is
   hump-shaped in `Π`, and with three steady states `Q_h` and `Q_l` are saddles
   and `Q_m` is a source (Lemma 5). Paths spiral near `Q_m` above a critical
-  `(δ/λ')*` (Lemma 6).
+  `(δ/λ')*` (Lemma 6). Formalised are eq. (26) for `Π < 1`
+  (`sStd_antitone`) and the linear algebra of Lemmas 5 and 6 (`JE_trace`,
+  `JE_det`, `lemma5_saddle`, `lemma5_source`, `lemma6`, `lemma6_no_real_root`,
+  `lemma6_node`).
 
 ## What could not be reconstructed
 
-- The differential equations are not formalised. Lean covers the one-period
-  structure (items 5 to 7, Lemma 1) and the algebra of eqs. (7) and (19), not
-  the solution of the system, the spiral of Proposition 4 or the
-  linearisation of Lemma 5.
-- The claim on PDF p. 15 that `∂π°/∂δ > 0` and `∂πᵖ/∂δ < 0` is stated without
-  proof, and `δ` enters `v*` through `ω'` as well as `(δ + λ')cm`. It is not
-  checked.
+The coverage table in `CLAIMS.md` lists every result. What is short of
+general is the following.
+
+- Eqs. (13) and (14) are formalised along paths whose flow return switches
+  once, the only paths the paper uses, and not for a general expected path.
+- Theorem 1 is formalised for its steady states. The direction arrows of
+  Figure 1 are not formalised.
+- Lemma 3 and Proposition 3 are formalised for reputations in `[Π_l, Π_h]`.
+  The clause that the lower boundary is zero when `π° ≤ Π_l` rests on paths
+  from below `Π_l`, which the paper reaches through the spiral (KLB-D12).
+- Proposition 4 is formalised in Condition 1 only. Condition 2 (eqs. 37 and
+  38) and the step from the two conditions to the spiral are not
+  formalised, and neither are the region integrations of eqs. (29), (30),
+  (32) and (33). Corollary 2 is not formalised.
+- Eq. (26) is formalised for `Π < 1`. The hump shape of `β(Π)` and the
+  existence of a steady state in Appendix A rest on assumptions about `F_q`,
+  `F_u` and `G` that the paper does not state.
+- Lemmas 5 and 6 are formalised in their linear algebra. The slope ordering
+  at `Q_h` and `Q_l` is read from Appendix Figure 1, and the step from the
+  linearised to the nonlinear system is not formalised.
 - The figures (PDF pp. 34–38) are schematic and carry no numbers.

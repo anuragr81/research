@@ -23,6 +23,9 @@ coincide with the printed pages (CJP-D1).
 | CJP-Q12 | 27 | "We see that a bias in meetings generates the observed inbreeding homophily patterns regardless of the type-sensitivity of preferences, but does not generate the observed friendship relationship without type sensitivity in preferences" | The separation. Meeting bias carries the inbreeding pattern and taste carries the friend counts |
 | CJP-Q13 | 28 | "an explanation for the data built entirely on increasing returns would require the meeting process to be sensitive to type while the agents in the society are type-blind." | The separation rests on equal meeting rates across types. Increasing returns could replace the taste |
 | CJP-Q14 | 33 | "we find that the observed inbreeding homophily patterns can only be generated (in the context of our model) with some bias in the meeting process in favor of own type." | The paper's conclusion on the inverted U |
+| CJP-Q15 | 14 | "Purely Social Networks: One shares more interests with same-type individuals than with different type individuals." | One of four suggested origins of same-type bias, stated as an illustration and not modelled |
+| CJP-Q16 | 14 | "However, same types are closer geographically or socially than different types, and thus easier to arrange a viable (and self-enforcing) risk-sharing agreement with." | Another illustration. Same types are cheaper to sustain a relationship with |
+| CJP-Q17 | 24 | "Individuals who have preferences with a same-type bias would tend to gain by biasing their search so that it yields higher ratio of same type compared to their stock in the matching process." | The return to directing where one searches, the motive for meeting bias |
 
 ## Lean results
 
@@ -42,6 +45,41 @@ coincide with the printed pages (CJP-D1).
 | `CurrariniEtAl2008.example_45` | Section 4.5. The printed solution satisfies the steady-state conditions, and the larger group is inbreeding homophilous |
 | `CurrariniEtAl2008.control_type_sensitive_numbers_differ` | Control. With type-sensitive preferences the two types form different numbers of friendships, so Proposition 1 needs type neutrality |
 | `CurrariniEtAl2008.control_biased_matching_all_homophilous` | Control. Under the biased process (7) with `β = 2`, two equal groups are both inbreeding homophilous, so Proposition 2 needs unbiased matching |
+| `CurrariniEtAl2008.baseline_rel` | Definition 3. Baseline homophily implies relative homophily |
+| `CurrariniEtAl2008.fn10` | Footnote 10. The small-sample biases of `H_i` and `IH_i` |
+| `CurrariniEtAl2008.table1_columns` | Table 1. Columns sum to 100 and the shares round as printed |
+| `CurrariniEtAl2008.lemma1` | Lemma 1, eq. (3), from an interior maximum |
+| `CurrariniEtAl2008.eq8_iff` | Proof of Proposition 3. Eq. (8) is equivalent to condition (iii) |
+| `CurrariniEtAl2008.eq4_quadratic` | Section 4.5. Condition (iii) as a quadratic in `q_i` |
+| `CurrariniEtAl2008.eq4_root` | Eq. (4). The printed root solves the quadratic |
+| `CurrariniEtAl2008.prop3` | Proposition 3. A solution of eq. (8) with `q_i ∈ (1/2, 1)` exists when `N_i > N_j` |
+| `CurrariniEtAl2008.control_equal_inflows_half` | Control. With equal inflows `q = 1/2` solves eq. (8) |
+| `CurrariniEtAl2008.claim1` | Claim 1. Uniqueness when `t(q)(1 − q)` is strictly decreasing |
+| `CurrariniEtAl2008.control_claim1_needs_anti` | Control. Without monotonicity every `q` can solve eq. (8) |
+| `CurrariniEtAl2008.prop4` | Proposition 4 |
+| `CurrariniEtAl2008.control_no_bias_equal_times` | Control. Without same-type bias the two groups stay equally long |
+| `CurrariniEtAl2008.prop5_t_mono` | Proposition 5, `t(q)` increasing under strong same-type bias |
+| `CurrariniEtAl2008.prop5_q_mono` | Proposition 5, `q_i` increasing in `w_i` |
+| `CurrariniEtAl2008.control_prop5_flat` | Control. Without dependence on the mix, `t` is constant |
+| `CurrariniEtAl2008.prop6_ratio` | Proposition 6, `q_i/w_i` ordered as `t_i` |
+| `CurrariniEtAl2008.prop6_IH_order` | Proposition 6, the `IH` ordering when the smaller type is at or above baseline |
+| `CurrariniEtAl2008.control_prop6_step_fails` | CJP-D8. The last step of the proof of Proposition 6 fails below baseline |
+| `CurrariniEtAl2008.prop7` | Proposition 7, eq. (16) |
+| `CurrariniEtAl2008.control_log_not_proportional` | Control. Without homogeneity utility is not proportional to friendships |
+| `CurrariniEtAl2008.prop8` | Proposition 8 |
+| `CurrariniEtAl2008.sec9_t` | Section 9, the optimal time for `√s + γ√d` |
+| `CurrariniEtAl2008.sec9_argmax` | Section 9, the critical point `q* = 1/(1 + γ²)` |
+| `CurrariniEtAl2008.eq22` | Proof of Proposition 10, eq. (22) from eq. (21) |
+| `CurrariniEtAl2008.prop10_bound` | Proposition 10, the elasticity bound |
+| `CurrariniEtAl2008.prop10_ratio` | Proof of Proposition 10, `t/q` decreasing iff the elasticity is below 1 |
+| `CurrariniEtAl2008.control_prop10_alpha` | Control. At `α = 0.9` the bound is 9 |
+| `CurrariniEtAl2008.prop9_fixed` | Proposition 9, existence of a fixed point of the meeting bias |
+| `CurrariniEtAl2008.prop9_order` | Proposition 9, uniqueness and `q₂ < q₁` |
+| `CurrariniEtAl2008.control_prop9_needs_anti` | Control. The identity has many fixed points |
+| `CurrariniEtAl2008.appD_ray` | Appendix D, logarithmic utility along the ray |
+| `CurrariniEtAl2008.appD_time` | Footnote 48, baseline homophily under logarithmic utility |
+| `CurrariniEtAl2008.appD_peak` | Appendix D, utility peaks at `w = 1/(1 + g)` |
+| `CurrariniEtAl2008.appD_concave` | Appendix D, the printed second-derivative numerator is negative on `(0, 1)` iff `g > 1/3` |
 
 ## Readings recorded
 
@@ -54,3 +92,38 @@ coincide with the printed pages (CJP-D1).
 | CJP-D5 | The text cites "Billingsley, 1958" (PDF p. 39) and "Blalock (1967)" (PDF p. 5), while the reference list has Billingsley (1968) and Blalock (1982) | Reference list, PDF pp. 34–36. Not relied on |
 | CJP-D6 | Proposition 3 (PDF p. 20) states that an equilibrium with relative homophily exists when `N_i > N_j`. The text after it (PDF p. 21) says relative homophily "is exhibited by all equilibria", while PDF p. 20 restricts the claim to equilibria where stocks are ordered as inflows | We rely only on existence, and on uniqueness under Claim 1 |
 | CJP-D7 | Proposition 10 assumes `α ∈ (0, 1/2)` and its proof uses `α ≤ 1/2`. Appendix D says the second derivative is negative "only if g > 1/3" and then concludes for `g ≥ 1/3` | Boundary cases only. Not relied on |
+| CJP-D8 | The proof of Proposition 6 (PDF p. 42) ends by saying that `q_i/w_i > q_j/w_j` "also follows easily" into `IH_i > IH_j`. The step holds when the smaller type is at or above baseline (`prop6_IH_order`) but fails below it. Shares `(1/10, 2/5, 1/2)` with meeting probabilities `(1/25, 1/5, 19/25)` satisfy the ordering of `q_i/w_i` and give the middle type a lower `IH` than the smallest | `CurrariniEtAl2008.control_prop6_step_fails`. Whether an equilibrium realises these numbers is not checked, so the proposition is unproven rather than false. Not relied on |
+
+## Coverage of the source's results
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Definitions 1 to 6 | `H`, `IH`, `relHomophily`, `baseline`, `IH_pos_iff`, `IH_neg_iff`, `baseline_rel` | general | |
+| Footnote 10 | `fn10` | general | |
+| Table 1 and its `IH` values | `table1_columns`, `table1_white_black`, `table1_hispanic_not_reproduced` | general | The Hispanic value is not reproduced (CJP-D2) |
+| Data regressions, footnotes 15 to 18 | none | not formalised | Estimates. No printed number follows from others |
+| Diminishing returns, eq. (1) | `prop4` (hypothesis `hdec`) | special case | Used as strict decrease of the marginal return along a ray, which is what the proofs use |
+| Lemma 1, eqs. (2), (3) | `lemma1` | general | Given the chain-rule derivative of `U(q t, (1 − q) t)` |
+| Steady-state equilibrium, Section 4.4 | `steady2`, `eq8_iff`, `H_eq_q` | special case | Two types with unbiased matching. The `K`-type and general `F` cases are not formalised |
+| Section 4.5, the general `t_i` | `t_half` | special case | Only at `α = 1/2` |
+| Eq. (4) | `eq4_quadratic`, `eq4_root` | general | Given a nonnegative discriminant |
+| Section 4.5, the solution at `γ = 1/2` | `example_45` | general | |
+| Proposition 1 | `prop1` | general | |
+| Proposition 2 | `prop2`, `eq6` | general | |
+| Proposition 3 | `prop3`, `eq8_iff` | special case | Existence for `N_i > N_j` with `t` continuous and positive on `[0, 1]`. "Both types active in all equilibria" is not formalised |
+| Claim 1 | `claim1` | general | |
+| Definitions 7, 8 | hypotheses of `prop4`, `prop5_t_mono` | general | Stated through the marginal return `φ(q, t)` |
+| Proposition 4 | `prop4` | general | In terms of `φ`, given the equilibrium of Proposition 3 |
+| Proposition 5 | `prop5_t_mono`, `prop5_q_mono` | general | In terms of `φ` and of the right side of eq. (8) |
+| Eqs. (5), (6) | `prop4`, `eq6` | general | |
+| Eq. (7) and Section 7.1 | `control_biased_matching_all_homophilous` | special case | The example `β = 2` with equal groups |
+| Section 7.2 fit, Figures 6 and 7 | none | not formalised | Numerical grid search |
+| Proposition 6 | `prop6_ratio`, `prop6_IH_order`, `control_prop6_step_fails` | special case | Existence needs Brouwer's theorem, not used here. The `IH` ordering is proved only when the smaller type is at or above baseline (CJP-D8) |
+| Proposition 7, eq. (16) | `prop7` | general | Given the homogeneous form along the ray |
+| Proposition 8 | `prop8` | general | |
+| Section 9, `√s + γ√d` | `sec9_t`, `sec9_argmax` | general | The welfare plots of Figure 8 are numerical |
+| Proposition 9, eqs. (17) to (19) | `prop9_fixed`, `prop9_order` | special case | The fixed point and its order. Existence of the equilibrium with `q₁ > q̂` repeats the argument of `prop3` and is not restated |
+| Proposition 10, eqs. (20) to (22) | `eq22`, `prop10_bound`, `prop10_ratio` | general | Given the homogeneous form and differentiability of `t` |
+| Footnote 47 | `control_prop10_alpha` | special case | The numerical equilibria are not reproduced |
+| Appendix A, Lemmas 2 and 3 | none | not formalised | Random matching on a continuum (Alós-Ferrer), not in Mathlib |
+| Appendix D and footnote 48 | `appD_ray`, `appD_time`, `appD_peak`, `appD_concave` | special case | The second derivative itself is not derived, only the sign of its printed numerator |

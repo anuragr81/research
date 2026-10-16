@@ -2,85 +2,124 @@
 
 ## What was verified
 
-- Fourteen quotations are found on the PDF pages they cite, by exact
+- Nineteen quotations are found on the PDF pages they cite, by exact
   normalised containment in the cached text (LC-2). Because the cached text
   interleaves the two columns, each quotation is a contiguous run within one
   column line, and the rest of the sentence is given in the last column of
   `CLAIMS.md` from the page read (AC-D1).
-- Eqs. (3) and (8), footnotes 15, 17 and 18, the mean–variance criterion and
-  the Fig. 2 result are Lean theorems in the paper's notation (LC-4). Eq. (8)
-  is proved from the moment generating function of the normal law, not
-  assumed.
+- Eqs. (2) to (8), footnotes 15, 17 and 18, the mean–variance criterion and
+  the results drawn from Figs. 1A to 5 are Lean theorems in the paper's
+  notation (LC-4). Eq. (8) is proved from the moment generating function of
+  the normal law, not assumed. The coverage table in `CLAIMS.md` has 22
+  rows, 17 general, 3 special cases and 2 not formalised.
 - Our reading is consistent with the source on these points.
 
 ## What could not be verified
 
 - The selection–truncation model (p. 11) has no equation in the paper and is
-  read, not formalised.
+  formalised only at the extreme of Fig. 4. Eq. (2)'s normal conditional
+  expectation is formalised as a least-squares slope. Spence's model is not
+  formalised.
 - The authors' estimate that the black–white differential is "perhaps 10 to
   30 percent for the same number of years of schooling" (p. 9) carries no
   source and is not used.
 
 ## The bearing on Paper A1
 
-One framing in the brief does not survive the reading, and it comes first.
-The brief contrasts A1's `σ_g²` term, entering "through a quadratic loss in
-class distance", with the paper's variance, entering "through risk aversion
-over productivity". These are one mechanism. A1's `v − κ(c_i − x)²` is a
-concave utility over the partner's class `x`, and its expectation is the
-utility at the mean less `κσ²` (`contrast_quadratic_ce`). The `σ_g²` term is
-therefore the risk premium of that utility, as `k Var(q|y)` is the risk
-premium of eq. (7) (`eq8`, `eq8_order`). What differs is narrower and
-checkable.
+Nothing in the paper contradicts the corrected account of A1. One framing
+used in the first pass does not survive the reading, and it comes first. A1's
+`σ_g²` term is not an alternative to risk aversion. A1's `v − κ(c_i − x)²` is a
+concave utility over the partner's class, and its expectation is the utility
+at the mean less `κσ²` (`contrast_quadratic_ce`), so `σ_g²` is the risk premium
+of A1's utility, as `k Var(q|y)` is the risk premium of eq. (7) (`eq8`,
+`eq8_order`). What differs is narrower. A1's premium is exact for any
+distribution, where the paper's needs a normal belief and exponential utility.
+A1's curvature `κ` is the strength of homophily, so A1 has no counterpart of
+the paper's risk-neutral employer (AC-Q4, `control_risk_neutral`).
 
-- A1's penalty is exact for any distribution of class. The paper's needs a
-  normal belief and exponential utility (footnote 17).
-- A1's curvature `κ` is the strength of homophily itself, so A1 has no
-  counterpart of the paper's risk-neutral employer (AC-Q4,
-  `control_risk_neutral`). Setting `κ = 0` removes the mean term and the
-  variance term together.
-- A1's mean term is the squared gap to the observer's own class. The paper's
-  employers rank groups of equal conditional variance by their means alike,
-  whatever their risk aversion (`contrast_cara_common_ranking`). Under A1,
-  observers of different classes rank them oppositely
-  (`contrast_quadratic_ranking_depends_on_own_class`).
+### The puzzle
 
-A1 should present `σ_g²` as the risk premium implied by homophily and cite
-the paper for the penalty on a group's variance, rather than as an
-alternative to risk aversion.
+The paper is about pay in labour markets and says nothing about contact,
+friendship or the diversity of a setting. It does not bear on why friending
+bias across class is higher in racially diverse settings.
 
-1. **Contribution 1 (group avoidance from class homophily under inference).**
-   The variance half is in the paper, for hiring. A risk-averse employer
-   "will attempt to hire from the group of workers that maximizes expected
-   productivity, q, discounted for risk" (AC-Q6), and the discount is on the
-   group's conditional variance (AC-Q7, AC-Q8, AC-Q9). With a signal that says
-   nothing about the individual, which is A1's group sufficiency, the
-   discount is `k` times the group's own variance (`zero_reliability`). Every
-   risk-averse employer applies it. The motivation scan's statement that "no
-   source read has a group's spread penalised in matching" must be qualified,
-   since hiring from one group or the other is a choice of partner group. The
-   observer-dependent half is not in the paper. Its employers differ only in
-   the coefficient `k` (p. 10), which changes the weight on the variance but
-   not the ranking by mean.
-2. **Contribution 2 (budget compatibility).** Not in the paper. Its payoff is
-   the employer's profit from `q`, monotone in `q`.
-3. **Contribution 3 (venue exclusion).** Not in the paper. The truncation
-   model has a hiring floor on `E(q|y)` (AC-Q12), which screens on predicted
-   type, but no venue chosen by clients.
-4. **Contribution 4 (the test of the class channel).** The labour-market form
-   is in the paper. With perfect information "the systematic difference in
-   E(q|y) or E(q|q) for the two racial groups disappears" (AC-Q13), and with
-   `γ = 1` the risk discount is zero, since `Var(q|y) = Var(q)(1 − γ)`. A1's
-   test applies the same logic to contact.
+### Budget compatibility
 
-The paper also states the consistency of beliefs that A1 imposes on imputed
-group standing (AC-Q2, AC-Q3), as an assumption backed by competition rather
-than an equilibrium fixed point.
+The paper assumes no homophily and no assortative matching. Its employer's
+payoff rises in the worker's productivity alone (eq. 7). The nearest thing to
+a cost of mismatch is the authors' reading of the curvature of eq. (7) as "the
+costs of mistakes in assigning workers to heterogeneous job slots" (AC-Q18).
+That gives a concave payoff an origin in mismatch between a worker and a
+slot, as budget compatibility gives A1's quadratic loss an origin in
+mismatch between two budgets. Nothing in the paper concerns affordability or
+shared consumption.
 
-The brief's phrase "penalised only under risk aversion" holds for the
-paper's risk model and its Phelps model, where mean wages are equal without
-risk aversion, but not for its truncation model, which penalises the noisier
-group "without recourse to risk aversion" (AC-Q11, AC-D5).
+### Avoidance that depends on the observer's class
+
+The paper has no observer type. Its employers differ only in the
+coefficient `k` (p. 10), which changes the weight on the variance and never
+the ranking of groups of equal variance by their means
+(`contrast_cara_common_ranking`). So the paper neither supports nor
+contradicts direction (i) or direction (ii). It limits both in one respect.
+The variance penalty is common to every observer (`fig2_black_paid_less`,
+AC-Q6, AC-Q9), so in A1 the `σ_g²` term pushes every observer away from a
+heterogeneous group, whatever the observer's class. For direction (ii), a
+low-class member of a high group prefers outsiders only when
+`(c̄_out − c_i)² + σ_out² < (c̄_own − c_i)² + σ_own²`; the paper's mechanism is
+the second term, which can work against (ii) when the outside group is the
+more heterogeneous. Under A1's utility the ranking of equal-variance groups
+does turn on the observer's own class
+(`contrast_quadratic_ranking_depends_on_own_class`); that is our contrast,
+not the paper's. The paper also shows a penalty that reverses with the
+worker's own position, not the observer's. Below `y₀` the noisier group is
+paid more (`fig2_crossing`), and in Figs. 1A and 1B the steeper group is
+favoured above the mean and penalised below it (`fig1_crossing`).
+
+### The penalty vanishing when class is shown
+
+The paper states it for its unequal-means model. "In the presence of perfect
+information (γ = 1), the systematic difference in E(q|y) or E(q|q) for the
+two racial groups disappears" (AC-Q13, `perfect_information`). The conditions
+are equal reliability across groups and a fully reliable signal. Short of
+full revelation the gap is `(1 − γ)(α^W − α^B)`, so it shrinks in proportion
+to the unreliability (`fig5_parallel`, `control_fig5_perfect_information`).
+In the risk model the discount `k Var(q)(1 − γ)` also vanishes at `γ = 1`. A1's
+property, that the group penalty vanishes when class is shown, is the case
+`γ = 1` of this statement with A1's quadratic loss in place of pay. With
+group sufficiency, `γ = 0`, the paper's discount is `k` times the group's
+own variance (`zero_reliability`), the counterpart of A1's `σ_g²`.
+
+### The shadow market
+
+Three passages bear on discrimination that survives a rule on the formal
+criterion.
+- A legal rule on the observed criterion does not reach the group outcome.
+  "Even a legal requirement that payments be equal for equal y scores would
+  contribute nothing to the overall improvement of the status of blacks"
+  (AC-Q15).
+- A group-neutral rule on a correlated variable yields a group gap. In the
+  truncation model employers "are not race-biased in their hiring process"
+  (AC-Q17) and hire on `E(q|y)` alone, yet the group with the less reliable
+  test is hired less (AC-Q11, AC-Q12, `fig4_truncation`). The correlated
+  variable is the reliability of the signal, not a marker.
+- Information about the unseen type acquires market value as the penalty
+  grows. "A large R factor should activate a market for "test instruments"
+  that are tailored to the separate groups" (AC-Q16), and location carries
+  "extra search and informational costs" (AC-Q19). In the paper this market
+  reduces the penalty by improving the signal; in A1's shadow market social
+  information is used to sort. The paper has no venues and no platforms.
+
+### Premises of A1 the paper does not share
+
+- A payoff monotone in the other's type (eq. 7), where A1's has an ideal point
+  at the observer's own class.
+- A normal belief and exponential utility (footnote 17), where A1's premium
+  needs neither.
+- An individual signal `y` about the worker, where A1's marker under group
+  sufficiency carries information about the group only.
+- Consistency of beliefs with group means as an assumption backed by
+  competition (AC-Q2, AC-Q3), where A1 imposes it as an equilibrium condition.
+- Equal group means in the risk model, where A1's groups differ in mean.
 
 ## Controls
 

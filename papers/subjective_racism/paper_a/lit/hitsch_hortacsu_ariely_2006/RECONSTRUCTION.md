@@ -101,24 +101,35 @@ whom and who sent a first-contact e-mail to whom.
 
 ## What is formalised
 
-`lean/mathlib/HitschEtAl2006.lean`, eq. (5) for one attribute without the
-categorical terms and the shock.
+`lean/mathlib/HitschEtAl2006.lean`, in the paper's notation. The table
+"Coverage of the source's results" in `CLAIMS.md` lists every numbered item.
 
-- Footnote 21's identity and the non-identification with `α = 1`
-  (`fn21_identity`, `not_identified_linear`), and the failure of the same
-  reparametrisation at `α = 2` (`control_identified_quadratic`).
-- With `γ⁺ = γ⁻ = −κ` and `α = 2`, eq. (5) is `β x_w − κ (x_w − x_m)²`, A1's
-  form in an attribute that is seen (`symmetric_quadratic`).
-- Assumption 1 holds without distance terms (`vertical_rank_indep_own`) and
-  fails with them (`control_distance_terms_break_assumption1`).
-- The compensating income `−ϑ/b` (`compensating_income`), the "Not feasible"
-  case under a flat income valuation (`control_flat_income_not_feasible`), and
-  an approximate reconstruction of the $154,000 figure (`table56_black_approx`).
+- Section 3. The threshold rule (eq. 1), the expected utility of a meeting, the
+  Bellman equations (eq. 2) as a definition on a finite market, and
+  Gale–Shapley stability for two men and two women.
+- Section 5.1. Under assumptions 1 and 2 the contacts received rise with rank
+  (`received_mono`), the incidence rate ratio, and the college premium with the
+  inconsistency of HHA-D2.
+- Section 5.2. Eq. (5) for one attribute, footnotes 20, 21 and 23, the logit
+  probability, and the reduction to A1's form (`symmetric_quadratic`).
+- Section 6.3. In the two by two case, vertical preferences and preferences for
+  similarity both make assortative matching the only stable one
+  (`sorting_observationally_equivalent`).
+- The arithmetic of the trade-off tables, the random matching benchmark,
+  Table 6.2's column sums and the BMI constant.
 
 ## What could not be reconstructed
 
-- The estimates themselves. The data are not available, and the full outcome
+- The estimates, from data that are not available. The full outcome
   regressions are "available from the authors" (PDF p. 20, n. 16).
+- Adachi's (2003) results, that eq. (2) has a lattice of solutions and that its
+  matches converge to the Gale–Shapley stable set as `ρ → 1` (eq. 3), and the
+  men-optimal and women-optimal stable matchings. The source cites them and
+  does not prove them.
+- Eq. (5) in general. It is formalised for one attribute, without the
+  categorical terms and the shock, and stability for two men and two women.
+- The probit probability, which needs the normal distribution function and from
+  which nothing is derived.
 - Table 5.6 exactly. With the rounded logit coefficients and the distance
   terms left out, the compensation for a black man lies between $148,000 and
   $149,000, against the printed $154,000 (HHA-D3). Which model the trade-offs

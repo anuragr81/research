@@ -81,13 +81,24 @@ Consumption and Race", NBER Working Paper 13392, September 2007. Published as
   `share_decreasing_in_mu`).
 - The appendix's change of variables omits a factor (`chain_rule_gap`, CH-D2).
 
+## Second pass, 16 October 2026
+
+The general model of Section 4 is now in Lean: eq. (2) as a definition, eq.
+(3) as the first order condition of an interior maximum, its two
+implications, and eq. (4) from implicit differentiation. The Theory
+Appendix's first order condition, ODE, stated solution and constant are
+theorems, and with income known its status `y/μ_G` still depends on the
+group (`known_income_status`). The estimating model is a definition (`Spec`),
+with footnote 12's bias and Table 8's omitted-variable identity as theorems,
+and every number in the text that follows from printed numbers is checked.
+Three of those checks fail, recorded as CH-D7 to CH-D9.
+
 ## What could not be reconstructed
 
-- Whether the corrected ODE in the share preserves the sign of the appendix's
-  conclusion is not checked. A comparison argument suggests it does, since a
-  larger `μ_G` steepens `g` at every point, but this is our inference and is
-  not formalised.
-- The general model leaves `s(c, μ_G)` unspecified, so nothing beyond the sign
-  argument of eq. (4) is formalised for it.
-- The regressions are not reproduced. Only the printed regression lines of
-  the figures were read, from the images.
+- The regressions, the survey and the figures. They need the CEX, CPS and
+  PSID microdata.
+- Whether the solution of the correct ODE of the Theory Appendix has a share
+  falling in `μ_G` (CH-D2). The stated solution does.
+- Footnote 24 on the variance, which the model does not carry.
+- Footnote 12 and Table 8 are formalised in a linear population model and
+  through the printed coefficients, not on the data.

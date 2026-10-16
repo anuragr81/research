@@ -24,22 +24,60 @@ are PDF pages. The printed page is the PDF page minus 2.
 | AB-Q13 | 23 | "We do not interpret it as an absence of bias altogether, but rather a likely effect of professionalism and heightened diversity awareness and training in top tier law firms." | The authors do not read the lawyers' result as an absence of the association between accent and class |
 | AB-Q14 | 25 | "We therefore cannot conclude that accent bias does not play a role in the overall hiring process." | The scope. The recruiter study covers only the rating of answer content |
 | AB-Q15 | 18 | "they showed some similar accent biases, but the differences were much smaller." | Real voices give smaller gaps than labels. `control_signal_can_widen_gap` shows this is an empirical finding and not implied by a Bayesian reading |
+| AB-Q16 | 8 | "Unlike ethnicity, social class, or race, accent is not a protected characteristic under the Equality Act 2010. As such, employers can legally discriminate against candidates based on their accent." | Accent is a marker correlated with protected groups that the law does not reach, so screening on it is lawful. The report lists social class as protected, which the Sutton Trust report contradicts (AB-D10) |
+| AB-Q17 | 25 | "It does not provide information on the potential for accent or language bias in other aspects of professional life, e.g. informal interaction during the interview, post-hiring experiences of candidates from non-traditional backgrounds, or progression through more senior career stages." | The recruiter study covers formal rating of content only. Informal interaction, the contact channel, is outside it |
+| AB-Q18 | 18 | "So it is more likely that the pattern in figure 2 means that people's attitudes about accents conform increasingly to established norms as they enter the workforce and get older." | The life-stage reading of the age pattern, formalised against a cohort reading as `cohort_sections_differ` |
 
 ## Lean results
 
 `lean/mathlib/LevonEtAl2020.lean`. The report states no model. The file
-formalises our reading of the structure it attributes to listeners, a prior
-attached to the accent and an answer read as a signal of competence.
+formalises the printed numbers that follow from others and our reading of
+every structural claim the report makes about listeners.
 
 | Theorem | What it checks |
 |---|---|
+| `LevonEtAl2020.voices_sample` | 890 + 51 + 90 + 31 = 1062, the real-voice sample by nation |
+| `LevonEtAl2020.voices_design` | Two speakers of each of five accents make the ten clips |
 | `LevonEtAl2020.identical_answer_penalty` | With a prior gap in favour of RP and an answer that does not reveal competence, the RP speaker is rated higher for the same good answer |
 | `LevonEtAl2020.revealing_no_penalty` | An answer that reveals competence gives a zero penalty for every accent with a positive prior |
 | `LevonEtAl2020.uninformative_is_label` | An uninformative answer leaves the rating at the prior, the reading of the label survey |
+| `LevonEtAl2020.expert_raises_all` | An answer more likely from a competent speaker raises the rating at every prior, so expert content raises every accent |
 | `LevonEtAl2020.quality_only_no_penalty` | A rating that depends on the answer alone gives every accent the same rating, the lawyers' reading |
+| `LevonEtAl2020.rating_penalty` | With weight `γ` on content, the penalty for an identical answer is `(1 − γ)` times the stereotype gap |
+| `LevonEtAl2020.penalty_antitone_in_control` | More attention to content gives a smaller penalty, the reading of the awareness intervention and of MCPR |
+| `LevonEtAl2020.full_control_no_penalty` | Full attention to content gives no penalty |
+| `LevonEtAl2020.cohort_shifts` | Under a cohort model a later cross-section is the earlier one shifted in age |
+| `LevonEtAl2020.cohort_sections_differ` | Under a strictly monotone cohort profile two cross-sections years apart differ at every age, so the same pattern in 2007 and 2019 favours the life-stage reading |
+| `LevonEtAl2020.higher_expectation_lower_rating` | A higher expectation for RP rates the same answer lower in RP, one of the two readings of the lawyers' likeability ratings |
 | `LevonEtAl2020.control_partial_signal` | Control. Without full revelation the penalty on a good answer is positive |
 | `LevonEtAl2020.control_signal_can_widen_gap` | Control. An informative answer can widen the gap beyond the prior gap, so the smaller gap with real voices is not implied by the reading |
 | `LevonEtAl2020.control_additive_accent_effect` | Control. Without the answer-only condition an additive accent effect survives at every answer quality |
+| `LevonEtAl2020.control_partial_control` | Control. At any weight on content below 1 the penalty is positive |
+| `LevonEtAl2020.control_flat_cohort` | Control. A flat cohort profile gives identical cross-sections, so the life-stage inference needs cohorts that differ |
+| `LevonEtAl2020.control_equal_expectation` | Control. With equal expectations the same answer is not rated lower in RP |
+
+## Coverage of the source's results
+
+The report numbers no results. Each row is a finding or structural claim as
+the report states it, by PDF page.
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Hierarchy of labels, stable over fifty years (pp. 5, 17, 18) | none | not formalised | No values are printed and the figure axes cannot be read (AB-D3) |
+| Real-voice sample by nation (p. 11) | `voices_sample` | general | |
+| Two speakers per accent, ten clips (pp. 12, 13) | `voices_design` | general | |
+| Identical answers rated higher in RP (p. 5) | `identical_answer_penalty` | special case | Our reading, with two competence types |
+| Smaller gaps with real voices than with labels (p. 18) | `uninformative_is_label`, `control_signal_can_widen_gap` | general | The reading shows the finding is empirical, not implied |
+| Age pattern read as life stage, not change over time (p. 18) | `cohort_shifts`, `cohort_sections_differ` | general | |
+| Expert content improves all accents (p. 19) | `expert_raises_all` | special case | Two competence types |
+| Expertise does not override bias for older Southern listeners (p. 19) | `identical_answer_penalty` | special case | Two competence types |
+| Bias more prevalent among listeners of higher class (p. 19) | none | not formalised | A finding with no stated structure or numbers |
+| High MCPR raises all ratings and removes the dispreference (pp. 20, 21) | `rating_penalty`, `full_control_no_penalty` | general | Our reading of control over attention |
+| Lawyers rate by quality regardless of accent (p. 22) | `quality_only_no_penalty`, `full_control_no_penalty` | general | |
+| EE and MLE get the lowest single ratings among lawyers (p. 22) | none | not formalised | Read from Figure 6, no numbers printed |
+| Lawyers rate RP lower on likeability, two readings (p. 22) | `higher_expectation_lower_rating` | special case | The expectation reading only. The solidarity reading has no stated structure |
+| Raising awareness narrows the gap most (pp. 23, 24) | `penalty_antitone_in_control` | special case | Narrowing is formalised. The ranking of the five interventions has no printed estimates |
+| Accent is not protected by the Equality Act (p. 8) | none | not formalised | A legal statement. The two reports disagree on social class (AB-D10) |
 
 ## Readings recorded
 
@@ -54,3 +92,4 @@ attached to the accent and an answer read as a signal of competence.
 | AB-D7 | The report's statement that "All interventions are beneficial" (PDF p. 24) is recorded against the Sutton Trust's statement that only one of five strategies had an effect (Sutton Trust 2022, PDF p. 39) | The two reports by overlapping authors disagree. Neither gives the estimates |
 | AB-D8 | The class associations of RP and MLE are read from the page image of PDF p. 7, not quoted | The two boxes are set in parallel columns that the text layer interleaves line by line |
 | AB-D9 | Pages 2, 26 and 27 are blank or carry only the logo, and PDF p. 28 is the back cover | Page images. The cached text has 29 segments for 28 pages, the last one empty |
+| AB-D10 | The statement that social class is a protected characteristic under the Equality Act 2010 (PDF p. 8, AB-Q16) is not relied on. Only the part on accent is | The Sutton Trust report by overlapping authors says "accent, alongside social class, is not protected" (ST-Q17). The Act itself is not read |

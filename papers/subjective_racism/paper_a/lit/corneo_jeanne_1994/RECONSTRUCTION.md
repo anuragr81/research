@@ -75,10 +75,21 @@ which is not read (CJ-D1).
 - A rank utility that rises in income gives a negative signaling value
   (`control_rising_rank_utility`).
 
+## Second pass, 16 October 2026
+
+Every numbered equation and proposition now has a row in the coverage table
+of `CLAIMS.md`. Added in this pass are the purchase rule and the upper set of
+buyers, the limits of eq. (8), the case `γ = 1` with its concavity and
+footnote 8's counterexample, existence and uniqueness of the price in
+Proposition 1, eqs. (13) to (17) in general, eq. (18), and Propositions 2 to 4
+with eq. (24).
+
 ## What could not be reconstructed
 
-- Uniqueness and continuity of `p(n)` (CJ-D5), the policy results of Section
-  4 and the pooling Propositions 3 and 4 are not formalised.
+- The continuity of `p(n)` in Proposition 1 (CJ-D5).
+- That the stationary rank `γ/(2 + γ)` is the maximum of the rank utility.
+- The text's necessity reading of the upward slope ("only if `γ` and `λ` are
+  sufficiently large and `μ` is sufficiently small"). Sufficiency is formalised.
+- The monopoly discussion of Section 4.2 and eq. (19), which the paper argues
+  in words or reduces to Proposition 1.
 - Figures 1 and 2 are blank in the copy read (CJ-D6).
-- The general Section 3 example is formalised only at `μ = λ = 1`, `γ = 2`,
-  `ū = 0`.

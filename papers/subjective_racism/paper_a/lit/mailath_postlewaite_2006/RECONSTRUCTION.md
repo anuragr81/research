@@ -69,38 +69,53 @@ All page numbers below are PDF pages of the 06-003 file.
   `Hn`, `Ly` pair blocks if and only if `1 − u < βk/(1 − β) < u` (3.1).
   Proposition 1 (`prop1`): assortative matching is stable if and only if
   `βk ≤ (1 − u)(1 − β)` or `u(1 − β) ≤ βk`. With `k = 0` it is always stable
-  (`assort_stable_unproductive`).
+  (`assort_stable_unproductive`). On the model of characteristics, where
+  stability is checked over every pair, `Hy` never deviates
+  (`hy_never_deviates`), only an `Hn`, `Ly` pair can block
+  (`stable_assort_iff`), and Proposition 1 follows (`prop1_stable`).
 - **Mixed matching** (pp. 9–10). `Hn` matches `Ly`, the others match their
   own characteristic. The value equations (3.2), (3.3) give (3.4),
   `V_y^M − V_n^M = (1 + 2k)(1 − β)/(2 − β(1 + 2k))` (`eq_3_4`). The two
   incentive constraints (3.5) and the `Ly` constraint combine into (3.6), and
-  with (3.4) into Proposition 2 (3.7) (`prop2`).
+  with (3.4) into Proposition 2 (3.7) (`prop2`). Over every pair, only two
+  `Hn` agents or two `Ly` agents can block (`stable_mixed_iff`), which gives
+  Proposition 2 as stated on characteristics (`prop2_stable`).
 - **Unproductive attribute** (pp. 10–11). With `k = 0` the right inequality
   of (3.7) holds for every `u ≥ 1/2` (`right_ineq_free`), and the left one is
   (3.8), `u ≥ (4 − 3β)/(2(2 − β))` (`eq_3_8`). Both matchings are then
-  stable, and the attribute has value only in the mixed one.
+  equilibria (`multiple_equilibria_k0`), and the attribute has value only in
+  the mixed one.
 - **Pareto ranking** (pp. 12, 32–33). Proposition 3: with `k = 0` the mixed
   matching weakly Pareto dominates the assortative one if and only if (3.8)
   holds. The appendix solves (3.2), (3.3) at `k = 0` (`values_k0`) and
-  compares each characteristic's value (`prop3_Hn`, `prop3_Ln`). The welfare
-  gain is insurance of descendants' consumption and transfer to them, which
-  have no market. The variance of consumption is lower under the mixed
-  matching (MP-Q4, MP-Q11).
+  compares each characteristic's value (`prop3_Hn`, `prop3_Ln`, `prop3`). The
+  welfare gain is insurance of descendants' consumption and transfer to them,
+  which have no market. The variance of consumption is lower under the mixed
+  matching (MP-Q4).
 - **Emergence and collapse** (pp. 13–17). A once-productive attribute can
   leave a mixed matching that remains stable (Section 3.4). Proposition 4:
   with decreasing relative risk aversion, a small per-period probability of a
   permanent income rise supports mixed matching until the rise and
-  assortative matching after it. These are perturbation arguments around the
-  Section 3 values and are not formalised.
-- **General case** (pp. 17–21). The law of motion (5.1) for `μ_y`.
-  Proposition 5 (rationing when `μ_y ≠ 1/2`), 6 (`ρ < 1/2`) and 7 (`ρ > 1/2`,
-  unravelling). Our reading of the rationed difference and threshold (5.2)
-  differs from the printed one (MP-D4, `rationed_diff`, `rationed_HnIC`).
+  assortative matching after it. The configuration of Section 3.4 is
+  `section34_config` and footnote 9 is `crra_u_invariant`. Proposition 4
+  itself is a perturbation argument around the Section 3 values.
+- **General case** (pp. 17–21). The law of motion (5.1) for `μ_y`
+  (`law_5_1_high`, `law_5_1_low`), with every share a steady state at
+  `ρ = 1/2` (`rho_half_steady`), convergence to 0 for `ρ < 1/2`
+  (`rho_lt_half_tendsto`) and to 1 for `ρ > 1/2` (`rho_gt_half_tendsto`).
+  Proposition 5 (rationing when `μ_y ≠ 1/2`; `prop5_low`, `prop5_high`), 6
+  (`ρ < 1/2`) and 7 (`ρ > 1/2`, unravelling; `prop7_core`). Our reading of the
+  rationed difference and threshold (5.2) differs from the printed one
+  (MP-D4, `rationed_diff`, `rationed_HnIC`).
 - **Endogenous attribute** (pp. 21–28). Parents can buy probability `q` of
   the attribute at cost `c(q)`. Proposition 8 (existence of a steady state, by
   Brouwer) and Examples 1 and 2, in which more agents hold the productive
-  attribute under the mixed matching. Not formalised.
-- **Discussion** (pp. 28–32). A non-matching example (white-shoe lawyers),
+  attribute under the mixed matching. The steady state `μ_y^A`
+  (`steady_state_assort`), the ordering of purchases (`q_order`, `q_pos`),
+  the assortative part of Example 1 (`example1_muA_zero`) and the algebra of
+  Example 2 (`eq_6_3`, `eq_6_4`, `example2_gaps`, `eq_decomp`) are formalised.
+- **Discussion** (pp. 28–32). A non-matching example (white-shoe lawyers,
+  `lawyer_accept`, `lawyer_wage_two`),
   the contrast with Fang (2001), and the contrast with social capital
   sustained by sanctions.
 
@@ -114,7 +129,26 @@ who inherit it (MP-Q9), not from anything the attribute reveals.
 
 ## What could not be reconstructed
 
-- Propositions 4, 6, 7 and 8 and Examples 1 and 2 are limit, continuity and
-  fixed-point arguments. They are read, not formalised.
+The coverage table in CLAIMS.md lists every numbered result. What is short
+of general is the following.
+
+- The model on characteristics covers the balanced case `ρ = 1/2`,
+  `μ_y = 1/2`. Rationed matchings are handled through their value equations.
+- Proposition 4 is not formalised. It is a limit of infinite-horizon value
+  functions under a regime switch as `p → 0`. Footnote 9 is formalised.
+- Proposition 5 is formalised on our reading of the `μ_y > 1/2` case (MP-D4)
+  and our reconstruction of the `μ_y < 1/2` case (MP-D13). Its Pareto clause
+  is not formalised.
+- Propositions 6 and 7 are formalised in their dynamics (`rho_lt_half_tendsto`,
+  `rho_gt_half_tendsto`) and, for Proposition 7, in the failure of the `Hn`
+  constraint at small rationing (`prop7_core`). The existence of a lower bound
+  on `ρ`, the convergence of utility and the unravelling argument are not.
+- Proposition 8 is not formalised, because Mathlib has no Brouwer
+  fixed-point theorem.
+- In Section 6, the bound `q < 1`, the stability claims of Example 1, the
+  bound `μ_y ≤ 4p(1 − p)` and the risk-aversion step of Example 2 are not
+  formalised.
+- In Section 7, the Pareto ranking of the two lawyer equilibria is not
+  formalised.
 - The published version is not read. Whether MP-D4 is corrected there is
   unknown.

@@ -2,12 +2,11 @@
 
 ## What was verified
 
-- Thirteen quotations are found on the PDF pages they cite, by exact
+- Nineteen quotations are found on the PDF pages they cite, by exact
   normalised containment in the text layer (LC-2). CJ-Q1, CJ-Q4 and CJ-Q8
   carry elisions where the text layer drops an accent or a ligature (CJ-D3).
-- Eqs. (8), (9) and (11), the snobbish half of Proposition 1, and the Section 3
-  example at one parameter point are Lean theorems in the paper's notation
-  (LC-4).
+- The model is implemented in Lean in the paper's notation (LC-4). The
+  coverage table in `CLAIMS.md` lists every numbered result with its status.
 - Our reading is consistent with the discussion paper on these points, with
   the reading CJ-D2 of the proof of Proposition 1.
 
@@ -19,34 +18,66 @@
 
 ## The bearing on Paper A1
 
-1. **An equilibrium consistency condition on group means.** Eq. (8) values
-   the buyers and the non-buyers each at the actual mean rank utility of the
-   people who make that choice in equilibrium (CJ-Q5). This is the structure
-   of A1's requirement that the imputed group standing equal the actual mean
-   of the visible members, for a marker that is chosen (buying the good). The
-   value of the marker depends on how many hold it (`σ(n)`), and the fear of
-   being pooled with the poor drives conformism (CJ-Q8). A1 should cite this
-   paper for the consistency condition with a chosen marker, and say that A1's
-   marker is a group, with passing as the choice.
-2. **Contribution 1, avoidance from homophily under inference.** Not in the
-   paper. Every observer reads the signal the same way (CJ-Q3), and nobody
-   chooses contact. The rank utility `a` is the same for everyone, so nothing
-   depends on the observer's own rank. No variance term appears. A group is
-   valued at the mean of a nonlinear `a`, so the spread within a group
-   matters through the curvature of `a`, but the paper does not say so and
-   this is our inference.
-3. **Contribution 2, budget compatibility.** Not as homophily. The budget
-   enters only as affordability, which can bind the purchase threshold
-   (eq. 6).
-4. **Contribution 3, venues and price screening.** Price screening as
-   certification is in the paper. A priced good separates the rich, who buy,
-   from the poor, who abstain (CJ-Q4), and buying certifies membership in the
-   richest `n` (CJ-Q5). The paper applies this to clubs that charge above the
-   market price to make contribution visible (CJ-Q10, CJ-Q11). A1 cannot
-   claim price screening as certification of class as new. What the paper
-   does not have is venue exclusion as the aggregate of clients' inference
-   about one another, and any effect of certification on whom people meet.
-5. **Contribution 4, the class-channel test.** Not in the paper.
+Judged against the corrected account of A1 (16 October 2026).
+
+### The puzzle
+
+Not addressed. The paper has no contact, no friendship and no groups other
+than buyers and non-buyers.
+
+### Budget compatibility
+
+The paper gives a budget mechanism by which a priced, shared consumption
+gathers people by income. A consumer buys when the signaling value exceeds
+the utility cost of the price (`eq4_buy`), and with concave `u` that cost falls
+in income, so the buyers are the richest `n` (`buyers_upper`, CJ-Q4, CJ-Q5).
+When the budget binds, the threshold is the price itself (eq. 6, `eq17`). The
+sorting comes from cost and concavity, not from a taste for similar others,
+and it reverses under convex `u` (`control_convex_buyers`). This is close to
+A1's budget compatibility, that a shared activity needs budgets that can
+afford it. The paper says nothing about whom the buyers then meet, so it
+gives the sorting into an activity and not the homophily of a relationship.
+
+### Avoidance that depends on the observer's class
+
+Every spectator reads the signal the same way (CJ-Q3), so nothing depends on
+the observer's rank, and nobody chooses contact. The consumer's motives are
+about being pooled. Under conformism the motive is the fear of being
+identified with the poor (CJ-Q8); under snobbism it is the hope of being
+identified with the rich (CJ-Q19). Which motive holds depends on the shape
+of the rank utility (`gamma_one_concave`, `gamma_one_convex`), and the link
+is not general (`control_fn8_conformist_not_concave`). Neither A1 direction is
+supported or contradicted.
+
+### The penalty vanishing when class is shown
+
+Not in the paper. Income is never shown. The nearest statement is that under
+passive conjectures the good carries no meaning, its signaling value is nil,
+and nobody buys (`prop3_passive`, `prop4_passive`).
+
+### The shadow market
+
+The paper has the price-as-information half of the shadow market. The price
+signals the quality of the consumer, not of the product (CJ-Q14). The authors
+place their analysis next to Becker's restaurant pricing (CJ-Q15). Clubs
+charge above the market price to make contributors visible (CJ-Q10,
+CJ-Q11). A cheap good has no signaling value under snobbism (CJ-Q16,
+`prop2`), so a seller with market power can create a status signal by holding
+the price up (CJ-Q17). In the labour-market reading, a signal of income stands
+in for an unobserved productive ability (CJ-Q18). The paper has no law, no
+group and no banned criterion, so it says nothing on discrimination moving to
+channels the law does not reach.
+
+### Premises of A1 the source does not share
+
+- Status is a rank utility of inferred rank, not a payoff from engaging with
+  someone.
+- Observers are homogeneous (CJ-Q3).
+- There is one indivisible good and no visible group marker. The only groups
+  are those the purchase creates.
+- The equilibrium values each group at its own mean rank utility (`eq8`), the
+  same consistency condition A1 imposes on group standing, but for a chosen
+  signal rather than a group.
 
 ## Controls
 
@@ -55,5 +86,8 @@
   opposite of CJ-Q3, is not found. A true quotation is not found on a
   neighbouring page.
 - Lean. `control_conformist_price_rises` shows the falling price of
-  Proposition 1 needs snobbism, and `control_rising_rank_utility` that a
-  positive signaling value needs a rank utility that does not rise in income.
+  Propositions 1 and 2 needs snobbism, `control_rising_rank_utility` that a
+  positive signaling value needs a rank utility that does not rise in income,
+  `control_fn8_conformist_not_concave` that conformism and concavity part
+  outside `γ = 1`, and `control_convex_buyers` and `control_prop3_concavity`
+  that the upper set of buyers and Proposition 3 need concave `u`.

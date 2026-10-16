@@ -4,88 +4,115 @@
 
 - Fourteen quotations are found on the PDF pages they cite, by exact
   normalised containment in the publisher's text layer (LC-2).
-- Lemma 4 in one attribute, Proposition 1, Table 1 of Example 1, the
-  prototype error of Example 1, the mean prediction error of a category, the
-  identity in the proof of Proposition 2 and the two-category remark of
-  Section 7 are Lean theorems (LC-4).
+- The model is implemented in Lean in the paper's notation. Lemmas 2, 3 and 4,
+  Theorem 1, Propositions 1 and 2, the equivalence of Section 3, Examples 1
+  and 2 and the two-category claim of Section 7 are formalised in the paper's
+  generality. Lemma 1, Lemma 5, Corollary 1 and Examples 3 and 4 are
+  formalised in part (coverage table in `CLAIMS.md`).
 - Our reading is consistent with the source on these points.
 
 ## What could not be verified
 
-- Example 4 and its footnote 22. Our computation from the stated primitives
-  does not give the printed variations or the printed optimum (FJ-D3).
-- The last step of the proof of Corollary 1 (FJ-D4). Corollary 1 is not
-  formalised and not relied on.
+- Example 4's printed variations and optimum (FJ-D3).
+- The parts of Lemma 1, Lemma 5 and Corollary 1 listed in the coverage table.
 
 ## The bearing on Paper A1
 
-Nothing in the source contradicts the A1 model. The two models answer
-different questions. Fryer and Jackson ask how an observer who sees every
-attribute stores past encounters. Paper A1 asks whom an observer engages
-when class is unseen.
+Nothing in the source contradicts the corrected account of A1. The two models
+answer different questions. Fryer and Jackson ask how an observer who sees
+every attribute files past encounters. A1 asks whom an observer engages when
+class is unseen.
 
-1. **Group avoidance from class homophily under inference (contribution 1).**
-   Not in the source. The observer sees all attributes and stores them
-   coarsely (FJ-Q5), so nothing is inferred about an unseen type from a
-   marker. The observer's utility is the accuracy of a prediction (FJ-Q6,
-   `meanDev_eq`) and does not depend on the observer's own attributes, so
-   there is no observer-dependent squared gap. There is no engagement
-   decision. Past encounters are given, and the observer chooses only how to
-   file them (FJ-Q8).
-   - **The σ² question.** A spread term does appear, in the observer's loss
-     and not in a preference over groups. In one binary attribute the
-     expected prediction error per member of a category is `2 p (1 − p)`,
-     twice the variance of the share (`meanDev_eq`). The minority's category is
-     more heterogeneous (FJ-Q1, FJ-Q2), so predictions about its members are
-     less accurate on average. The metric is city-block, not squared, so the
-     loss of a single member is that member's distance from the prototype and
-     does not split into a gap term plus a variance term as A1's
-     `E[(c_i − c_j)² | g] = (c̄_g − c_i)² + σ_g²` does. The harm the paper
-     names falls on the high member through the category mean (FJ-Q3,
-     `example1_prototype_error`), which corresponds to A1's mean term, not
-     to its σ² term. Fryer and Jackson therefore give a reason the imputed
-     variance of a minority is higher, namely coarser storage. They do not
-     give a variance penalty in a choice of partner, and they do not show
-     that every observer avoids a group with more spread.
-2. **Budget compatibility as the micro-foundation of class homophily
-   (contribution 2).** Not in the source. There are no budgets or prices.
-3. **Venue exclusion and price screening (contribution 3).** Not in the
-   source. FJ-Q13 says minority members benefit from congregating, because
-   observers there have more minority encounters. That remark is about the
-   observer's memory, it is stated without derivation, and it involves no
-   screening on an unobserved type.
-4. **The test of the class channel (contribution 4).** The source contains
-   the rival prediction. In this model discrimination "can exist even when
-   skills are observable" (FJ-Q11), because a shown attribute is still filed
-   in a coarse category. A1 predicts that the group penalty in contact
-   vanishes when class is shown. A finding that the penalty survives when
-   class is shown would fit Fryer and Jackson and not A1, so the test
-   separates the two models, and A1 should cite FJ-Q11 as the alternative
-   its test rules out. FJ-Q12 gives a second separating prediction. More
-   minority encounters lower categorical discrimination.
+### The puzzle
 
-What A1 should cite. FJ-Q1 and FJ-Q2 as the source of a higher imputed
-spread for small groups, distinct from A1's σ² term, which is the group's
-actual within variance in class. FJ-Q11 as the rival to A1's test. FJ-Q14
-records that the authors read chosen attributes as identity, informally and
-without a model of passing.
+The source bears on the puzzle as a rival with the opposite sign. In Fryer and
+Jackson a group is filed coarsely because the observer meets it rarely
+(FJ-Q1), and more encounters give finer categories and less discrimination
+(FJ-Q12). Read as a theory of friending bias, the model predicts less bias
+where groups mix more, while Chetty et al. (2022) find more bias across class
+lines in racially diverse schools. The source therefore cannot explain the
+puzzle, and A1 can cite it as the categorical account that the puzzle's sign
+rules out.
+
+### Budget compatibility
+
+The source assumes no homophily, by budgets or otherwise. The decision maker's
+payoff is the accuracy of a prediction (FJ-Q6, `FryerJackson2008.eu_iff_var`),
+and the population of encounters is given rather than chosen (FJ-Q8). Nothing
+bears on cost, affordability or shared consumption. A1's budget foundation
+neither conflicts with the source nor gains support from it.
+
+### Avoidance that depends on the observer's class
+
+- **Both directions.** The source supports direction (i) for categorization,
+  though not for avoidance. A minority is defined relative to "the set of
+  objects that a given observer will have encountered" (FJ-Q9), so where each
+  group mostly meets its own members, each group files the other coarsely.
+  The face-recognition evidence the authors cite (PDF pp. 26–27) is of this
+  two-way kind.
+- **The low member of the high group.** The source says nothing about
+  direction (ii). The observer's own attributes do not enter the loss
+  (`FryerJackson2008.meanDev_eq`).
+- **The σ² question.** A spread term appears, but in the observer's
+  prediction loss and not in a preference over partners. The expected error
+  per member of a category is `2 p (1 − p)` in one attribute, twice the
+  variance of the share (`FryerJackson2008.meanDev_eq`). The metric is
+  city-block, so the error does not split into a gap term plus a variance
+  term as A1's `(c̄_g − c_i)² + σ_g²` does. The harm the paper names works
+  through the category mean (FJ-Q3, `FryerJackson2008.example1_prototype_error`),
+  which matches A1's mean term rather than its σ² term.
+
+### The penalty vanishing when class is shown
+
+The source states the contrast that A1 needs. A statistical discrimination
+model "would not allow for such discrimination" once skills are observable,
+while categorical discrimination "can exist even when skills are observable"
+(FJ-Q11, FJ-Q5). The condition in the source is a limited number of
+categories, under which a shown attribute is still filed in a coarse category
+(FJ-Q2, `FryerJackson2008.example1_race_optimal`). With enough categories, or
+with two in Example 1, the coarse filing of the minority disappears
+(FJ-Q10, `FryerJackson2008.control_two_categories`). A1's property, that the
+group penalty vanishes when class is shown, is therefore the statistical side
+of the authors' own contrast, and it would fail for an observer with limited
+categories in their sense.
+
+### The shadow market
+
+The source has no market of social information and no venues. Two remarks
+touch the corrected account. The authors note that disparate-treatment law
+rests on malevolent intent and that "regulating cognitive processes" is
+impossible (FJ-Q14), so their discrimination escapes an intent standard
+because it has no intent, not because it moves to channels the law does not
+reach. They also advise minority members to apply to schools and firms "more
+frequented by other minorities" and to congregate (FJ-Q13), which gives
+information about where to go a value. That remark is about observers' memory,
+is not derived, and involves no intermediary.
+
+### Premises of A1 the source does not share
+
+- Every attribute is observed (FJ-Q5). A1's class is unseen.
+- The observer's limit is the number of categories, a bound on memory
+  (FJ-Q8). A1's observer is Bayesian with group sufficiency.
+- The loss is city-block, not squared (`FryerJackson2008.lemma4`), and the
+  observer's own type does not enter it.
+- There is no engagement decision and no equilibrium. The population of
+  encounters is fixed.
+- Coarseness comes from a group's rarity in the observer's experience, not
+  from the group's within variance in class.
 
 ## Controls
 
 - LC-2. A fabricated quotation, "In our model, discriminating behavior
   disappears once skills are observable", the opposite of FJ-Q11, is not
   found. A true quotation is not found on a neighbouring page.
-- Lean. `control_no_minority` shows that the strict optimality of the
-  race-based categorization needs the black group to be a minority. With 25
-  of each type the two merges tie. `control_two_categories` shows that the
-  coarse sorting of the minority needs three categories. With two, the split
-  by human capital is strictly best and the black workers are sorted by
-  human capital.
-
-## Suite status
-
-The coordinator adds `FryerJackson2008` to the build roots. Until then LC-4
-fails its build-root check, and the axiom audit, which imports the module,
-cannot run. The audit was run by hand on a scratch copy of the file with
-`#print axioms` appended for every cited theorem, and every theorem depends
-only on `propext`, `Classical.choice` and `Quot.sound`.
+- Lean. Each main result has a control that drops one condition.
+  - `control_lemma4_needs_binary` drops binary attributes from Lemmas 3 and 4.
+  - `control_no_minority` drops the minority from Theorem 1, Proposition 1
+    and Example 1.
+  - `control_lemma1_needs_triangle` drops the triangle inequality from
+    Lemma 1.
+  - `control_hypercube_tight` shows the bound in Lemma 5's fact is tight.
+  - `control_corollary1` drops `r_E (2 − r_I) > 1`.
+  - `control_eu_unequal_weights` drops equal weights from Section 3.
+  - `control_two_categories` drops the third category from Example 1.
+- The suite names `control_no_minority` and `control_two_categories`.

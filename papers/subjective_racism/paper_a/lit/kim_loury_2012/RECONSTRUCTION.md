@@ -58,6 +58,15 @@ J15.
 
 ## Derivation chain of the main results
 
+- **The wage and the return to skill** (pp. 7–9). The posterior rises in the
+  reputation and, under MLRP, in the signal (`rhoRaw_strictMonoOn`,
+  `rhoRaw_mono_ratio`), so both wages rise in `π` (`V_strictMonoOn`).
+  Eqs. (4) to (8) follow by differentiating finite sums (`eq_4`, `eq_7_8`,
+  `eq_5`, `eq_6`). `R″ < 0` for an informative signal (`eq_6_neg`), so `R`
+  is strictly concave (`R_strictConcaveOn`), with `R(0) = R(1) = 0`
+  (`R_zero_one`), `R′(0) > 0 > R′(1)` (`Rp_zero`, `Rp_one`), and the
+  endpoint values of `V_e′` (`Vp_ends`, `Vp_cross`). `ω − R(π) =
+  ω Σ f₁f₀/f > 0` (`R_lt_omega`). Derived from eq. (1) and full support.
 - **Eq. (15) and Lemma 1** (p. 10). `U(π, c) = max {R(π) − c; 0} + V₀(π)`
   (`eq_15`). Hence `ΔU` is `V₁(πA) − V₁(πB)` below both returns
   (`lemma1_low`), `V₀(πA) − V₀(πB)` above both (`lemma1_high`), and linear in
@@ -70,7 +79,8 @@ J15.
 - **Lemma 2 and Proposition 2** (p. 11). When `R(πA) > R(πB)`, the weight
   `H(ΔU(c))` on a type is non-increasing in `c`, so the members of A are
   tilted toward low costs and `φ(πA, πB) > G(R(πA))`, while
-  `φ(πB, πA) < G(R(πB))` (`selRate_ge`, `prop2`). Derived from Lemma 1, the
+  `φ(πB, πA) < G(R(πB))` (`selRate_ge`, `prop2`, and `prop2_strict` for the
+  strict form). Derived from Lemma 1, the
   monotonicity of `H`, and the independence of `c` and `k`. Conditioned on
   the returns `R`, not on the beliefs `π` (KLI-D2). The benchmark is the
   investment rate under random membership at the same beliefs, `G(R(π))`,
@@ -82,7 +92,10 @@ J15.
   cannot be stable, that two non-trivial ASE exist, and that inequality
   between endogenous groups "can be greater" (KLI-Q12, KLI-Q13). The
   argument speaks of entering cohorts and stability, but the article defines
-  no law of motion and gives no existence proof (KLI-D5).
+  no law of motion and gives no existence proof (KLI-D5). What follows from
+  Proposition 2 is that two PSE with different returns do not form an ASE
+  (`not_ase_of_two_pse`), and that the gap between the entering members of
+  the two groups exceeds the gap between their reputations (`cohort_gap`).
 - **Ex-cons** (p. 12). A costly, certifiable programme that those who will
   go straight are more willing to join, because they gain more from a job
   (KLI-Q14). Stated in words, without a model.
@@ -97,14 +110,27 @@ written down, and neither stability nor convergence is proved.
 
 ## What could not be reconstructed
 
-- The existence of a non-trivial ASE and the claim that endogenous-group
-  inequality is "at least as great" (abstract, p. 2, and introduction, p. 6)
-  are not proved in the
-  article. The body says "can be greater" (KLI-Q13).
-- Eqs. (2) to (8) are checked by hand against the image of p. 11 and
-  `R(π) < ω` on p. 12 by hand. They are not formalised. `V₀` and `V₁` enter
-  the Lean file as given functions, so the hump of `R` is not derived there.
-- The continuous `G` is replaced by a finite distribution in Lean, and the
-  strict inequalities of Proposition 2 are proved in weak form (KLI-D6).
-- The signal's support is `R+` in the text and `[0, 1]` in the integrals
-  (KLI-D4).
+The coverage table in `CLAIMS.md` lists every numbered result. Of 25 rows, 4
+are formalised in the article's generality, 16 in a special case, and 5 not
+at all.
+
+- **Not formalised.** The existence of two non-trivial ASE (p. 11), and the
+  claim that endogenous-group inequality is "at least as great" (abstract,
+  p. 2, and introduction, p. 6) or "can be greater" (p. 11). The article
+  proves neither (KLI-D5). Also not formalised are the remark that `V₀′`
+  "tends to increase" (p. 8), the remark that there are one or three PSE
+  (p. 9), and the ex-convict programme (p. 12), which has no model.
+- **Special case, the signal.** Eqs. (1) to (8), the concavity of `R`, and
+  the signs of `R′` at 0 and 1 are proved for a finite signal space with
+  densities of full support, in place of densities on `[0, 1]`. The article's
+  signal lives on `R+` in the text and on `[0, 1]` in the integrals (KLI-D4).
+- **Special case, the costs.** Every result that integrates over `G` is
+  proved for a finite cost distribution. The strict forms of Lemma 2 and
+  Proposition 2 need `H` strictly increasing, unequal returns, and mass on
+  both sides of the thresholds (KLI-D6).
+- **Read, not derived.** The article calls `(π_h, π_l)` "not stable". The
+  Lean result is that the pair is not an ASE (`not_ase_of_two_pse`), since
+  the article defines no law of motion against which to judge stability.
+- **The social optimum.** `R(π) < ω` is proved. The step to
+  `G(R(π̂)) < G(ω)` needs `G` strictly increasing at `ω`, which is not
+  formalised.

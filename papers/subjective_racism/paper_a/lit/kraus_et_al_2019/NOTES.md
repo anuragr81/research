@@ -2,13 +2,20 @@
 
 ## What was verified
 
-- Fourteen quotations are found by exact normalised containment in the cached
+- Fifteen quotations are found by exact normalised containment in the cached
   PubMed Central text, which is one page (LC-2). Each row gives its section
   heading because the text has no page numbers (KT-D1).
-- The accuracy metric of study 1 and two facts about it are Lean theorems
-  (LC-4). The theorems formalise our reading of the metric. The paper states
-  the metric and the 50% benchmark and does not state the theorems.
-- Our reading is consistent with the main text on these points.
+- The estimating model is formalised in Lean (LC-4). This covers the
+  proportion correct and its chance line, the z-score composite, the profile
+  correlation, and every printed number that follows from other printed
+  numbers (effect sizes from `t`, `t` from correlations, the study 5
+  difference in differences). The coverage table in `CLAIMS.md` lists every
+  result.
+- Two pieces are our reading and are not attributed to the authors. These
+  are the race-only perceiver (`race_judge_gain`) and hypothesis 3 as a
+  monotone proxy (`proxy_bias`).
+- Our reading is consistent with the main text on these points, with four
+  disagreements between printed numbers (KT-D8 to KT-D11).
 
 ## What could not be verified
 
@@ -17,58 +24,66 @@
   details are known only from the main text's description (KT-D2).
 - The base rate of college graduates among the study 1 stimuli is not
   reported, so the validity of the 50% chance line is not checked (KT-D3).
-- The sample counts of studies 1 and 4 differ between the results and the
-  methods (KT-D4, KT-D5).
+- `P` values and estimates from data (see the coverage table).
 
 ## The bearing on Paper A1
 
-**How accurately class is read.** Weakly. From seven isolated words class is
-judged correctly 55.49% of the time against a 50% line (KT-Q3). From 90 s of
-speech the correlation between perceived and actual class is 0.21 (KT-Q7). In
-study 5 the high and low candidates differ by under one rung of a ten-rung
-ladder (KT-Q8). The authors define accuracy as any tendency above chance and
-say it "falls well short of error-free" (KT-Q2).
+**The puzzle.** The paper does not address friending bias or diversity. Two
+of its findings bear on the puzzle. From the same seven words, race is read
+more accurately than class, 64.05% against 55.49% (KT-Q4), and the authors
+attribute the gap to the concealability of class (KT-Q5). In a first
+encounter the racial marker is therefore available before class is. Our own
+arithmetic on the paper's metric adds one point (`race_judge_gain`). With a
+balanced set of speakers, a perceiver who reads class from race alone gains
+`2 w (1 − w)(p₁ − p₂)` over chance, which is largest at equal group shares.
+Race is then the most useful class cue in the most mixed population. That is
+our reading, not the paper's, and it holds only under the balance condition.
 
-**A1's premise that class is unseen and inferred from group markers.** The
-source supports half of it and does not test the other half.
-- Supported. Class is read less accurately than race from the same seven
-  words, 55.49% against 64.05% (KT-Q4), and the authors attribute the gap to
-  the concealability of class (KT-Q5). That is the asymmetry A1 assumes, a
-  visible marker and a concealed class.
-- Not tested. The cue studied is pronunciation, which is evidence about the
-  individual speaker in the sense of Phelps's test score, not a group marker
-  under group sufficiency. With speaker race as a control, pronunciation
-  still predicts perceived class, and race has no significant effect
-  (KT-Q6). The paper therefore shows class read from an individual cue net of
-  race. It does not show class read from the group.
-- A caution for any use of the accuracy numbers. A perceiver who answers from
-  race alone scores above 50% whenever graduation rates differ by race
-  (`race_judge_above_chance`, `race_judge_gain`). Above-chance accuracy alone
-  does not separate a class cue from group inference. Only the controls of
-  study 2 do, and study 1 has no such control.
+**Budget compatibility.** Not in the source. The origins it offers for
+preferring a higher-class or similar person are cultural matching and
+similarity (KT-Q16, KT-Q9) and class taken as a proxy for merit
+(hypothesis 3, `proxy_bias`). Nothing in the paper bears on cost,
+affordability or shared consumption.
 
-**Is a racial signal read as a class signal?** Not in this paper. Race enters
-only as a control (KT-Q6) and as a judgement made in parallel with class
-(KT-Q4). The link from race to class is named as future research in both
-directions (KT-Q10).
+**Avoidance that depends on the observer's class.** Partial and one-sided.
+Perceivers' class judgements correlate with their own class (KT-Q12), more
+educated perceivers read college-educated speakers better (KT-Q11), and
+perceivers with hiring experience, who "tend to be higher in social class",
+judge higher-class candidates more similar to themselves (KT-Q9). Both
+results on the perceiver are from the unread SI Appendix. Direction (i),
+avoidance running both ways, is not testable here because lower-class
+perceivers are not studied apart. Direction (ii), a low-class member of the
+high group preferring outsiders, has nothing in the source.
 
-**Contributions 1 to 4.**
-1. Group avoidance from class homophily. Not present. The one hint of
-   observer-type dependence is that accuracy and perceived class rise with
-   the perceiver's own class (KT-Q11, KT-Q12), both from the unread SI
-   Appendix, and study 5's perceivers rate higher-class candidates as "more
-   similar" to themselves (KT-Q9). None of this is a preference over groups,
-   and there is no variance term.
-2. Budget compatibility. Not present. Study 5 is hiring, where the authors
-   read class as a proxy for merit and fit, not contact.
-3. Venue exclusion. Not present.
-4. A test of the class channel. Not present. No study shows class and then
-   measures a group penalty. Study 4's speech against transcript contrast
-   varies how much of the class cue is shown, not the group marker.
+**The penalty vanishing when class is shown.** No statement. No study shows
+class and then measures a group penalty. Study 4's speech against transcript
+contrast varies how much of the class cue is shown, not the group marker
+(KT-Q7).
 
-**What A1 should cite it for.** The accuracy numbers of KT-Q3, KT-Q4 and KT-Q7
-as evidence that class is read only weakly from brief cues and less
-accurately than race, with the caution above.
+**The shadow market.** Present, and in the contracting channel rather than
+the contact channel. The authors write that hiring managers "may
+intentionally seek out these cues in applicants in ways that would be illegal
+if racial or gender cues were utilized" (KT-Q15). That is a signal
+substituting for a banned criterion. They add that class cues "may be used as
+a means to perpetuate racial inequality, given the overlap between social
+class and race" (KT-Q10), which is a group-neutral criterion correlated with
+the group. And they note that standardising interviews "would not eliminate
+the ways that bias enters into hiring practices at other stages of the
+process" (KT-Q17), so a rule on the formal stage leaves the informal stages
+unreached. The setting is preinterview small talk inside hiring. A1 can cite
+the mechanism. It cannot cite the paper for venues or contact.
+
+**Premises of A1 the source does not share.**
+- Class is partly seen. It is read from the individual's own pronunciation,
+  net of race (KT-Q6), weakly but above chance (KT-Q2, KT-Q3), and the
+  study 1 effect is about half the size its printed `D` suggests (KT-D8).
+  A1's "unseen" is an idealisation of this.
+- The cue is evidence about the individual, not a group marker under group
+  sufficiency. Class read from the group is not studied (KT-Q10).
+- Preferences in study 5 are vertical in the sense that higher class is
+  judged better on every dimension (KT-Q9). With a perceiver pool skewed to
+  high class, the data cannot separate a vertical preference from A1's
+  squared distance.
 
 ## Controls
 
@@ -76,9 +91,10 @@ accurately than race, with the caution above.
   more accurate relative to speaker race", the opposite of KT-Q4, is not
   found. A true quotation is not found on a neighbouring page (an empty page,
   since the text is one page).
-- Lean. `control_majority_beats_half` shows the 50% line is chance only under
-  balance. `control_no_gap_chance` shows the race-only perceiver needs a gap
-  in graduation rates to beat chance.
-- The suite's LC-4 build-root check fails until the coordinator adds
-  `KrausEtAl2019` to `lakefile.toml`. The axiom audit passed against an
-  olean built in the reader's scratch directory.
+- Lean. Each main result has a control: `control_majority_beats_half` (the 50%
+  line needs balance), `control_no_gap_chance` (the race-only perceiver needs
+  a gap), `control_raw_average_not_centered` (the composite needs z scores),
+  `control_corr_neg_scale` (scale invariance needs an increasing recoding),
+  `control_no_proxy` (the hiring bias needs judgements that depend on class).
+- Axiom audit by hand against the scratch olean, all 34 declared theorems
+  checked, none beyond propext, Classical.choice and Quot.sound.

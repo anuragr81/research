@@ -100,19 +100,52 @@ symbols losing value as lower-standing users take them up (GF-Q15).
 
 ## The structure we attribute, and the Lean
 
-`lean/mathlib/Goffman1951es.lean` formalises our reading of three steps. The
-*prueba* as a symbol all of whose displayers have at least a given standing,
-with the intrinsic restriction making a priced symbol a *prueba* of its price
-(`intrinsic_is_prueba`, `prueba_mean_ge`). The value of a symbol as the mean
-standing of its displayers, which falls when lower-standing users join
-(`association_lowers_value`). Combined restrictions as restrictions a
-pretender must evade together (`conjunctive_restrictions`). These readings are
-ours. The essay states them in words only.
+`lean/mathlib/Goffman1951es.lean` formalises our reading of every structural
+claim in the essay that has a structure to formalise. The essay states these
+claims in words only, and every formal version is ours.
+
+- The *prueba* as a symbol all of whose displayers have at least a given
+  standing (`IsPrueba`), with fraud as a displayer below it
+  (`not_prueba_iff`, `curator_breaks_prueba`).
+- Five of the six restrictions. Moral, scruple and the sanction of opinion
+  against the benefit (`moral_deters`, `scruple_reinforces_sanction`).
+  Intrinsic, a priced symbol as a *prueba* of its price (`intrinsic_is_prueba`,
+  `prueba_mean_ge`). Natural, scarce units held by the top
+  (`scarcity_prueba`) and the capacity bound on intimate association and on a
+  live audience (`association_capacity`). Socialisation, imitation detected
+  with a probability (`socialisation_deters`). Refinement, a cost of time
+  falling in standing (`refinement_upper_set`).
+- The price of scarce objects as experiential plus display value
+  (`price_from_display`).
+- Restrictions in combination (`conjunctive_restrictions`,
+  `one_checks_failure`, `evasion_always_possible`).
+- The value of a symbol as the mean standing of its displayers, which falls
+  when lower-standing users take it up (`association_lowers_value`), the
+  mechanism of decline, of the new rich and of circulation.
+- The margin of doubt as disagreement over the weights of the sources of class
+  (`opposite_rankings`).
+- Public proof binding open treatment and not covert treatment
+  (`open_treatment_equal`, `control_covert_treatment`).
 
 ## What could not be reconstructed
+
+The coverage table in `CLAIMS.md` lists every claim. Those not formalised,
+and the special cases, are these.
 
 - Anything about the English wording. The translation's "fraudulenta",
   "prueba de status" and "distorsión" are taken as the translator's renderings
   of terms not seen here.
-- Any quantity. The essay has no data and no model. Section III closes by
-  calling for empirical studies of the social careers of particular symbols.
+- Claims with no stated structure: solidarity within and hostility between
+  categories, categorical and expressive significance, partial symbolism, and
+  the expressive loss of an adopting class.
+- The organic restriction, a claim about biological growth, and the caste
+  footnote, a classification.
+- Class movement, a claim about change over time. A1 is static, and the essay
+  gives no structure for the lag.
+- The originators' move to an uncontaminated symbol under circulation. The
+  fall in value is formalised, the move is not.
+- The special cases are two sources of class with linear weights, additive
+  scruple and sanction, detection as a probability, a linear cost of time, two
+  independent restrictions, and a two-group mean.
+- Any quantity. The essay has no data. Section III closes by calling for
+  empirical studies of the social careers of particular symbols.

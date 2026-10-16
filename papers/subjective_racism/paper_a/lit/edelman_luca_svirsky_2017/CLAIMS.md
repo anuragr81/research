@@ -25,6 +25,13 @@ numbers of this version. The published pagination is not read (ELS-D6).
 | ELS-Q13 | 14 | "If our findings are driven by statistical discrimination, positive reviews from previous hosts may reduce the extent of discrimination." | The authors state the information prediction without testing it, and argue that reviews would be an incomplete remedy |
 | ELS-Q14 | 16 | "The median host who rejects a guest because of race is turning down between $65 and $100 of revenue." | Hosts discriminate at a cost in net revenue (`cost_identity`, `cost_numbers`) |
 | ELS-Q15 | 8 | "we restrict our attention to the simplest response – “Yes” – though all of our results are robust to using “No” instead" | Read with ELS-D1. The 50 and 42 percent rates follow from Appendix Table 4 only when the "Yes" categories are pooled |
+| ELS-Q16 | 2 | "Whereas antidiscrimination laws ban the landlord of a large apartment building from discriminating based on race, the prevailing view among legal scholars is that such laws likely do not reach many of the smaller landlords using Airbnb" | The law reaches formal screening by large landlords and not the small hosts of the platform. The setting is outside the contracting channel the law constrains |
+| ELS-Q17 | 17 | "Clearly, the manager of a Holiday Inn cannot examine names of potential guests and reject them based on race or socioeconomic status or some combination of the two." | Where the seller has committed to serve all comers, the marker has no use. The contrast is a design rule, not a preference |
+| ELS-Q18 | 18 | "it could conceal guest names, just as it already prevents transmission of email addresses and phone numbers" | The first remedy. The platform decides which markers reach the host. Formalised in our reading as `gap_zero_all_rules_iff` |
+| ELS-Q19 | 4 | "sellers effectively pre-commit to accept all buyers regardless of race or ethnicity." | Platforms such as Amazon, eBay and Expedia remove the seller's screen. Instant Book is the same rule on Airbnb (PDF p. 18) |
+| ELS-Q20 | 19 | "but we highlight a situation in which platforms may be providing too much information." | Information about the person is the channel of discrimination here, in contrast to Laouénan and Rathelot's remedy of more information (LR-Q17) |
+| ELS-Q21 | 20 | "However, as of the time of publication, Airbnb continued to reject suggestions to conceal guest photos and names before booking." | The platform kept the markers visible. Whether discrimination would move to other displayed variables is not observed |
+| ELS-Q22 | 11 | "Column 2 shows that the extent of discrimination does not vary with the proportion of nearby residents who are African-American." | Table 6, interaction 0.02 (0.08). The penalty does not vary with the racial composition of the neighbourhood |
 
 ## Numbers A1 would cite
 
@@ -62,6 +69,41 @@ price above median × guest 0.01 (0.03), tract share African-American × guest
 | `EdelmanEtAl2017.cost_numbers` | PDF p. 16. $64.19 and $98.19 to the cent |
 | `EdelmanEtAl2017.cost_pos` | The cost is positive when `π < 1` and `p > f` |
 | `EdelmanEtAl2017.control_sure_replacement_costless` | Control. With `π = 1` the cost is zero |
+| `EdelmanEtAl2017.appendix3_implied` | Appendix Table 3. The five city implied coefficients are the exact sums of the printed coefficients |
+| `EdelmanEtAl2017.implied_within_rounding` | Tables 3 and 5. Eight implied coefficients are within 0.01 of the printed sums |
+| `EdelmanEtAl2017.table5_col4_inconsistent` | Table 5, column 4. `−0.11 − 0.01 = −0.12` against a printed −0.08 (ELS-D8) |
+| `EdelmanEtAl2017.table7_count` | Table 7. The name counts sum to 6,269, not 6,390 (ELS-D9) |
+| `EdelmanEtAl2017.table7_rates` | Table 7. Weighted rates 0.432 overall, 0.474 White, 0.389 African-American |
+| `EdelmanEtAl2017.footnote7_survey` | Footnote 7 against Appendix Table 1. Every stated bound holds |
+| `EdelmanEtAl2017.replacement_shares` | PDF p. 15. 25.9 + 37.9 + 36.1 = 99.9 and `37.9/63.8 = 0.594` |
+| `EdelmanEtAl2017.footnote17_drops` | Footnote 17. Costs $52.38 and $80.03 with hosts who said Yes, drops of $11.81 and $18.17 |
+| `EdelmanEtAl2017.gap_zero_all_rules_iff` | Our reading of PDF p. 18. The gap is zero under every acceptance rule exactly when the two accounts are displayed identically |
+| `EdelmanEtAl2017.control_displayed_marker` | Control. If any displayed variable differs, some rule gives a nonzero gap |
+
+## Coverage of the source's results
+
+The source is a field experiment with no model. Its results are the
+regression estimates, the arithmetic built on them, and the remedy it
+proposes. 16 rows: 11 general, 1 special case, 4 not formalised.
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Linear probability model with an interaction, Tables 2–6 | `accept`, `gap_with_trait`, `gap_without_trait`, `gap_vanishes_iff`, `control_no_interaction` | general | |
+| Printed implied coefficients, Tables 3, 5 and Appendix Table 3 | `appendix3_implied`, `implied_within_rounding`, `table5_col4_inconsistent` | general | Table 5, column 4 does not add up (ELS-D8) |
+| The 16 percent headline, PDF pp. 1–2 | `pooled_gap`, `same_points_not_same_percent` | general | |
+| The 50 and 42 percent rates, PDF pp. 2, 8 | `white_total`, `aa_total`, `pooled_yes_rates`, `control_simple_yes_not_fifty` | general | With the pooled "Yes" (ELS-D1) |
+| Response shares, PDF p. 13 | `response_shares` | general | With "Not sure" as no response (ELS-D2) |
+| Footnote 11 | `same_points_not_same_percent` | general | |
+| Cost of discrimination, PDF pp. 15–16 | `costOfDiscrimination`, `cost_identity`, `cost_numbers`, `cost_pos`, `control_sure_replacement_costless` | general | |
+| Replacement shares, PDF p. 15 | `replacement_shares` | general | |
+| Footnote 17 | `footnote17_drops` | general | |
+| Footnote 7 and Appendix Table 1 | `footnote7_survey` | general | |
+| Table 7, entire sample | `table7_count`, `table7_rates` | general | The count and the base rate disagree with the text (ELS-D9) |
+| The remedies, PDF p. 18 | `displayGap`, `gap_zero_all_rules_iff`, `control_displayed_marker` | special case | Our reading. Acceptance is a function of what is displayed, and the two accounts differ only in what the platform shows. The authors state the remedy in words |
+| Balance tests, Table 1 | none | not formalised | The p-values need the data |
+| Predicted probability of filling, Table 6 column 4 | none | not formalised | The first-stage probit is not reported |
+| Standard errors and significance statements | none | not formalised | They need the data |
+| Power analysis, footnote 9 | none | not formalised | The effect size used is not printed |
 
 ## Readings recorded
 
@@ -74,3 +116,6 @@ price above median × guest 0.01 (0.03), tract share African-American × guest
 | ELS-D5 | Implied coefficients differ from the sum of the rounded coefficients by 0.01, for example Table 5, column 5, `−0.09 + 0.06` printed as −0.04, and Table 3, male hosts, `−0.09 − 0.11` printed as −0.19 | Rounding of unrounded estimates. The sentence that the zero gap among hosts with an African-American guest is "only significant at the 10% level" (PDF p. 13) is ambiguous and is not relied on |
 | ELS-D6 | The version read is the accepted manuscript marked "forthcoming". The published article is in *American Economic Journal: Applied Economics* 9(2), 2017 | The cached file has no journal pagination. The issue number and pages of the published article are not checked against a copy of it |
 | ELS-D7 | "six groups" of responses (PDF p. 8) and "11 categories" (PDF p. 9) are read as the coarse coding and the categories of Appendix Table 4 | Appendix Table 4 lists eleven |
+| ELS-D8 | Table 5, column 4 (PDF p. 30, read from the image) prints −0.11 for the guest coefficient, −0.01 for the interaction and −0.08 for the implied coefficient | The sum is −0.12 (`table5_col4_inconsistent`). Either a coefficient or the implied row is misprinted. Not relied on |
+| ELS-D9 | Table 7 (PDF p. 32) prints 6,390 for the entire sample, but its twenty name counts sum to 6,269. Its count-weighted rates are 0.474 for White and 0.389 for African-American names, below the 0.496 and 0.415 of the pooled "Yes" | `table7_count`, `table7_rates`. The table appears to use a third definition of a positive response. Not relied on |
+| ELS-D10 | `displayGap`, `gap_zero_all_rules_iff` and `control_displayed_marker` formalise our reading of the remedy on PDF p. 18, not a model the authors state | Stated in the Lean file |

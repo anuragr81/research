@@ -171,19 +171,41 @@ model of choice or of equilibrium.
 
 ## What the Lean file formalises
 
-The indexes, the SEC sum and its configurations, the index of linguistic
-insecurity, the department store ordering against the wage ordering, the
-deviation measure, the cross-over as a failure of class order across styles, and
-our reading of the inference from speech to class as Bayes' rule with two
-classes. The last is our reading of a stated inference, not a model in the
-source.
+Our reading of every structure the dissertation states that has formal content.
+- The indexes: (r), (th)-(dh), (eh), (oh) and (ay).
+- The SEC matrix as printed, its configurations, and the SC index.
+- The index of linguistic insecurity, and the definitions of the subjective
+  reaction tests.
+- The department store orderings against the wage ordering.
+- Table 4 of Chapter VII as a regular structure, with the deviation count
+  recomputed. It gives 0 deviations for (r), (th) and (dh), 1 for (eh) and 9 of 30
+  for (oh).
+- The cross-over, and Cases I-B and II-B of apparent time.
+- Every printed number that follows from other printed numbers in the tables
+  covered.
+- The inference from speech to class, as Bayes' rule with two classes.
+
+The coverage of each result is tabulated in `CLAIMS.md`.
 
 ## What could not be reconstructed
 
-- Values printed only in figures whose OCR is garbled, and the class 9 (r) value
-  in isolated words (LV-D9).
-- Michael's construction of the income rank beyond the steps quoted on PDF
-  p. 243, which cite an unpublished Mobilization for Youth report.
-- The dissertation reports no tests of statistical significance. Its claims rest
-  on the regularity of the arrays and on agreement between independent samples.
+These are the rows of the coverage table that are short of general.
+- Values printed only in figures with garbled OCR. These are Figure 5 of
+  Chapter III, Figures 9 to 11 of Chapter VII, Figures 8 and 9 of Chapter VIII,
+  Table 1 of Chapter XI, and the class 9 (r) value in isolated words (LV-D9).
+- Structures above the second order (PDF pp. 261 to 263, 373, 523 to 532). The
+  deviation count is formalised for two linear sets only.
+- The hypothesis of real deviation in general. It is an empirical conjecture that
+  the dissertation itself leaves unconfirmed (PDF p. 290). It is checked only on
+  Figure 3.
+- Fine against sharp stratification. The source gives no quantitative criterion.
+- Cases I-A, II-A, III-A and III-B, which are tables of "high" and "low" with no
+  rule for equality.
+- Correlational claims without printed coefficients. These are the order of
+  influences on p. 300, the ethnic and sex tables of Chapter VIII, Tables 3 to 15
+  of Chapter XI except Tables 6, 11 and 12, and Appendix E.
+- The phonological vowel structures of Chapter XII, and the summaries of
+  Chapters XI and XIII.
+- Michael's construction of the income rank beyond the steps quoted on PDF p. 243.
+- The dissertation reports no tests of statistical significance.
 - The 1966 book, which this record does not read (LV-D1).

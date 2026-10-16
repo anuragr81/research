@@ -24,26 +24,117 @@ printed page is one less (CF-D1).
 | CF-Q13 | 32 | "differences can be driven by either side of the market: workers or firms; universities or applicants; police or civilians." | The authors extend the two-sided reading beyond labour, to settings closer to A1's contact |
 | CF-Q14 | 20 | "if Bs do not apply, firms are not punished for not hiring." | Under mutual consent, one side's withdrawal makes the other side's exclusion costless |
 | CF-Q15 | 47 | "In this sense, if investment costs are marginal, there is no inherent disadvantage to being a member of a minority group." | The minority disadvantage comes from fixed costs and can be removed. It is separate from inference |
+| CF-Q16 | 3 | "Firm investment is a fixed cost of creating a work environment conducive to workers (e.g. flexible work hours for women or affinity groups for minority workers)." | The firm's investment is a group-specific environment, the nearest object in the source to a venue's atmosphere, and its cost is fixed |
+| CF-Q17 | 31 | "Since βj is exactly the degree to which statistical discrimination lowers the return to productivity" | The weight on the group mean in the wage. It vanishes with a noiseless signal (`betaj_perfect_signal`) |
+| CF-Q18 | 18 | "this policy can only be enforced if – in every instance – a regulator can observe and verify all information upon which employers rely when making hiring decisions." | The law cannot reach the information employers use, the premise of A1's shadow market |
+| CF-Q19 | 6 | "The labor market in our game could be viewed as a ‘platform’, with each side (workers vs. firms) benefiting from participation by the other." | The source names the platform reading of its market, in a footnote |
+| CF-Q20 | 5 | "These programs combine worker investment with additional signals to firms, while at the same time demonstrating to workers that firms are investing." | An intermediary that carries information to both sides |
+| CF-Q21 | 8 | "a higher level of firm (worker) investment raises the incentive for any worker (firm) to invest." | The strategic complementarity between the sides (`g_mono`) |
+
 
 ## Lean results
 
-`lean/mathlib/CraigFryer2017.lean`, in the paper's notation.
+`lean/mathlib/CraigFryer2017.lean`, in the paper's notation. The primitives are
+the structure `Model`, `ϖ` is `varpi`, `χ̄` is `chibar`, eqs. (1) and (2) are
+`betaW` and `betaE`, eqs. (3) and (4) are `IsEquilibrium`, and the Section 3.1
+example is `βex`, `clip`, `g` and `IsEq`.
 
 | Theorem | What it checks |
 |---|---|
 | `CraigFryer2017.offer_iff` | PDF pp. 10–11. Hiring (or applying) has positive expected payoff exactly when `χ_q/χ_u > ((1 − π)/π) φ(θ)` |
 | `CraigFryer2017.post_uninformative` | With `f_q = f_u` the posterior is the group prior |
+| `CraigFryer2017.post_revealing` | With a revealing signal (`f_u = 0`) the posterior is 1 whatever the positive prior |
+| `CraigFryer2017.control_post_not_revealing` | Control. With a non-revealing signal the prior still binds |
 | `CraigFryer2017.match_gain_indep_own` | PDF p. 9. The worker's gain from a job does not depend on her own investment |
+| `CraigFryer2017.zero_equilibrium_general` | PDF p. 13. The zero investment equilibrium in the general model |
+| `CraigFryer2017.ee_curve` | The EE curve. A threshold `s` is optimal at belief `π` exactly when `π = φ(s)/(χ_q/χ_u + φ(s))` |
+| `CraigFryer2017.prop1_two_solutions` | Proposition 1, first part. Eq. (3) has two non-zero solutions |
+| `CraigFryer2017.prop1_fixed_point` | Proposition 1, second part. A monotone `π̄* ∘ δ̄*` above the diagonal somewhere has a non-zero fixed point |
+| `CraigFryer2017.control_prop1_below_diagonal` | Control. Without a point above the diagonal zero can be the only fixed point |
+| `CraigFryer2017.prop2_nonbinding` | Proposition 2. With no B applicants the B payoff is zero at every standard |
+| `CraigFryer2017.prop2_constraint_solvable` | Proposition 2. The offer-equality constraint can be met for B |
+| `CraigFryer2017.control_prop2_applicants` | Control. With applicants the B payoff need not be zero |
+| `CraigFryer2017.prop3` | Proposition 3. No positive equilibrium with equal employer beliefs when `λ_A ≠ λ_B` |
+| `CraigFryer2017.control_prop3_equal_shares` | Control. With equal shares such an equilibrium can exist |
+| `CraigFryer2017.prop4_collapse` | Proposition 4, last step. A non-positive firm return for B gives `δ_B = 0`, then `π_B = 0` |
+| `CraigFryer2017.control_prop4_positive_return` | Control. A positive return leaves firm investment positive |
+| `CraigFryer2017.prop6_cap` | Proposition 6. The hiring rate for B is at most `1 − F_i^E(t_B)` |
+| `CraigFryer2017.prop6_quota` | Proposition 6. The quota caps A hiring at the B rate |
+| `CraigFryer2017.subsidy_always_apply` | Section 4.C. A wage subsidy above `ω_u` makes every worker apply |
+| `CraigFryer2017.subsidy_kills_firm_investment` | Section 4.C. If every worker applies, no firm invests |
+| `CraigFryer2017.prop7_st_fails` | Proposition 7. From zero investment, thresholds alone leave both returns non-positive |
+| `CraigFryer2017.prop8_payment` | Proposition 8. A payment on an informative government signal reaches any target return |
+| `CraigFryer2017.control_prop8_uninformative` | Control. On an uninformative signal no payment moves the return |
+| `CraigFryer2017.prop8_permanent_zero_iff` | Proposition 8. The permanent subsidy is zero exactly when `λ_A = λ_B` |
+| `CraigFryer2017.betaj_perfect_signal` | Section 6. With a noiseless signal `β_j = 1` and the group mean has no weight |
+| `CraigFryer2017.control_betaj_noise` | Control. With noise `β_j < 1` and the group mean keeps a positive weight |
+| `CraigFryer2017.prop10_coefficient` | Proposition 10. The coefficient on the old wage |
+| `CraigFryer2017.prop10_decomposition` | Proposition 10. The estimate is `ρ` times the true gap plus an old-information term |
+| `CraigFryer2017.prop10_downward` | Proposition 10. Under the stated conditions the estimate understates the gap |
+| `CraigFryer2017.control_prop10_overstate` | Control. A positive old-information term can make the estimate overstate |
+| `CraigFryer2017.normalization_invest` | 8.2.1. The investment condition with an outside option |
+| `CraigFryer2017.normalization_apply` | 8.2.1. The application condition with an outside option |
+| `CraigFryer2017.unif_values` | 8.2.2. The uniform signal distributions at the thresholds |
+| `CraigFryer2017.appendix822_betaW` | 8.2.2. `β_W` in its four cases |
+| `CraigFryer2017.appendix822_betaE` | 8.2.2. `β_E` in its four cases |
+| `CraigFryer2017.wages_no_homogeneous` | 8.3.1 B. No positive equilibrium with equal beliefs when shares differ |
+| `CraigFryer2017.eq11_indep_lambda` | 8.3.2, eq. (11). With costs per hire the share cancels |
+| `CraigFryer2017.control_eq11_fixed_cost` | Control. With a fixed cost the return depends on the share |
 | `CraigFryer2017.hats` | Section 3.1. `φ̂ = 1`, `π̂ = δ̂ = 1/4` |
+| `CraigFryer2017.example_switch` | Section 3.1. Offers to unclear workers exactly when `π_j > π̂_j` |
 | `CraigFryer2017.betaW_primitives` | Section 3.1. `β_W` from eq. (1) and the uniform signals |
 | `CraigFryer2017.betaE_primitives` | Section 3.1. `β_E` from eq. (2) with `λ = 1/2` |
-| `CraigFryer2017.betaex_switch` | The two branches of `β` agree at the switch, so the boundary choice does not matter |
+| `CraigFryer2017.betaex_switch` | The two branches of `β` agree at the switch |
+| `CraigFryer2017.betaex_mono` | The return rises with the other side's rate |
 | `CraigFryer2017.g_mono` | Each side's investment rate rises with the other side's, the strategic complementarity |
 | `CraigFryer2017.fixed_iff` | The fixed points of the symmetric map are 0, 1/3 and 1 |
 | `CraigFryer2017.three_equilibria` | Figure 3. The equilibria are exactly `Z`, `U` and `S` |
-| `CraigFryer2017.zero_equilibrium` | The zero investment equilibrium |
+| `CraigFryer2017.zero_equilibrium` | The zero investment equilibrium of the example |
+| `CraigFryer2017.example_Z_stable` | Near `Z` the adjustment map contracts by 3/4 |
+| `CraigFryer2017.example_U_unstable` | Near `U` it expands deviations by 7/4 |
+| `CraigFryer2017.example_S_stable` | Near `S` it is constant at 1 |
 | `CraigFryer2017.control_one_sided_zero_fails` | Control. With firm investment held positive, zero worker investment is not an equilibrium |
 | `CraigFryer2017.control_minority_breaks_U` | Control. With group share 1/4 instead of 1/2, `U` is not an equilibrium |
+
+## Coverage of the source's results
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Bayes' rule and the offer and application thresholds, PDF pp. 10–11 | `CraigFryer2017.offer_iff` | general | |
+| Eqs. (1) to (4), returns and the definition of equilibrium | `CraigFryer2017.zero_equilibrium_general` | general | Implemented as `betaW`, `betaE`, `IsEquilibrium` |
+| Zero investment equilibrium, PDF p. 13 | `CraigFryer2017.zero_equilibrium_general` | general | |
+| Nesting of Coate and Loury (1993), PDF p. 12 | none | not formalised | A statement about another model |
+| Prop. 1, non-zero solutions of eq. (3) | `CraigFryer2017.prop1_two_solutions` | general | Continuity is assumed, as in the paper |
+| Prop. 1, `π̄*` and `δ̄*` increasing | none | not formalised | The paper's curve-crossing argument is not formalised |
+| Prop. 1, multiple equilibria | `CraigFryer2017.prop1_fixed_point` | general | Given the monotonicity of the row above |
+| Adjustment process and local stability of zero, PDF p. 13 | `CraigFryer2017.example_Z_stable` | special case | The uniform example only |
+| Stability condition of the linearised system, PDF p. 14 | none | not formalised | Eigenvalue conditions for a 2×2 system are not formalised |
+| Section 3.1 example, returns and equilibria | `CraigFryer2017.betaW_primitives`, `CraigFryer2017.betaE_primitives`, `CraigFryer2017.three_equilibria` | general | |
+| Section 3.1, only `S` and `Z` stable | `CraigFryer2017.example_Z_stable`, `CraigFryer2017.example_U_unstable`, `CraigFryer2017.example_S_stable` | general | |
+| Definition of equilibrium under affirmative action | none | not formalised | Only its pieces `rho` and `Pay` are defined |
+| Prop. 2 | `CraigFryer2017.prop2_nonbinding`, `CraigFryer2017.prop2_constraint_solvable` | general | Assumes, as the paper does, an A-market equilibrium with positive investment |
+| Prop. 3 | `CraigFryer2017.prop3` | general | `ϖ` is assumed injective, weaker than the paper's increasing |
+| Prop. 4 | `CraigFryer2017.prop4_collapse` | special case | The last step; the effect of affirmative action on `s_B` is not formalised |
+| Lemma, PDF p. 33 | none | not formalised | A limit argument on first-order conditions |
+| Definition of equilibrium under an employment quota | none | not formalised | |
+| Prop. 5 | none | not formalised | A limit in the observability of firm investment |
+| Prop. 6 | `CraigFryer2017.prop6_cap`, `CraigFryer2017.prop6_quota` | special case | The cap on A hiring; the corner `s_B = 0` and zero B investment are not formalised |
+| Wage and employment subsidies, Section 4.C | `CraigFryer2017.subsidy_always_apply`, `CraigFryer2017.subsidy_kills_firm_investment` | general | |
+| Prop. 7 | `CraigFryer2017.prop7_st_fails` | special case | The failure of `{s, t}`; the other pairs and the speed ranking are not formalised |
+| Prop. 8 | `CraigFryer2017.prop8_payment`, `CraigFryer2017.prop8_permanent_zero_iff` | special case | The payment and the permanent subsidy; the step from equal returns to equal thresholds is not formalised |
+| Note 1 | none | not formalised | Conditions stated with `≈` |
+| Prop. 9 | none | not formalised | An existence claim by construction of distributions |
+| Log wage equation and `β_j`, PDF pp. 30–31 | `CraigFryer2017.betaj_perfect_signal` | special case | The property of `β_j` used; the log-normal updating behind the wage equation is not formalised |
+| Lang and Lehmann's implication, PDF p. 29 | none | not formalised | A regression argument reported from another paper |
+| Prop. 10 | `CraigFryer2017.prop10_coefficient`, `CraigFryer2017.prop10_decomposition`, `CraigFryer2017.prop10_downward` | special case | The algebra and the sign; the step from the regression to its probability limit is taken as given |
+| 8.2.1, normalisation of payoffs | `CraigFryer2017.normalization_invest`, `CraigFryer2017.normalization_apply` | general | |
+| 8.2.2, returns in the example | `CraigFryer2017.appendix822_betaW`, `CraigFryer2017.appendix822_betaE` | general | |
+| 8.3.1 A, ex-post bargaining | none | not formalised | Definitions of payoffs only |
+| 8.3.1 B, discriminatory equilibria exist | none | not formalised | Existence by construction of `G^W` |
+| 8.3.1 B, no equilibrium with equal beliefs | `CraigFryer2017.wages_no_homogeneous` | general | |
+| 8.3.1 B, affirmative action and investment insurance | none | not formalised | |
+| 8.3.2, eq. (11), group size drops out | `CraigFryer2017.eq11_indep_lambda` | general | |
+| 8.3.2, zero equilibrium exists and is stable | none | not formalised | |
 
 ## Readings recorded
 
@@ -56,3 +147,4 @@ printed page is one less (CF-D1).
 | CF-D5 | In the first-order conditions on PDF pp. 35 and 37, `f_q^E(s_B)`, `f_u^E(s_B)` and `f_A^W` are read as `f_q^W(s_B)`, `f_u^W(s_B)` and `f_q^W`, and `(1 − π_A) π_A f_q^W(s_A)` as `(1 − π_A) f_u^W(s_A)` | Typos. Not relied on |
 | CF-D6 | On PDF p. 46 the displayed `w(π_A, θ) < w(π_B, θ)` and `δ_A < δ_B` are read with the inequalities reversed, and `π_A^β` on PDF p. 44 as `π_A^γ`. "an equilibrium without homogenous beliefs" on PDF p. 46 is read as "with" | The sentences beside them say the minority's wages and firm investment are lower. Not relied on |
 | CF-D7 | The version read is the NBER working paper of September 2017 | No later version is read or cited from this record |
+| CF-D8 | Proposition 1's multiplicity step is proved here by a supremum argument rather than by the paper's continuity argument | The paper argues from the continuity of the diagonal and the monotonicity of the composite `π̄* ∘ δ̄*`. Monotonicity alone suffices (`prop1_fixed_point`), so the reading does not depend on how the paper's step is completed |

@@ -2,79 +2,128 @@
 
 ## What was verified
 
-- Fifteen quotations are found on the journal pages they cite in the cached
+- Twenty quotations are found on the journal pages they cite in the cached
   layout text, by exact normalised containment, with elisions for the
-  interleaved column and for hyphen-broken words (LC-2, BM-D1).
-- The arithmetic of Tables 1 and 4 and two of the four correlations of Table 8
-  are Lean theorems (LC-4).
+  interleaved column and for hyphen-broken words (LC-2, BM-D1, BM-D10).
+- Every number in Tables 1, 2 and 4 that follows from other printed numbers,
+  the classification of Table 2, two of the four correlations of Table 8, the
+  race-blind benchmark of Section IV.A and the four models of Section IV.C are
+  Lean theorems (LC-4). Two printed values of Table 1 disagree with the rates
+  (BM-D9).
 - The logic of the Table 8 and Table 6 tests is formalised in Lean. **The
   formalisation of the two tests is of our reading.** The paper states the
-  predictions in words and no model, and the linear predictor of class from
-  group and address is ours.
+  predictions in words, and the linear predictor of class from group and
+  address is ours.
 - Our reading is consistent with the source on these points.
 
 ## What could not be verified
 
-- The probit estimates and their standard errors.
+- The probit estimates and their standard errors, the tests of proportions,
+  and the averages of Table 8.
 - The White female and White male correlations of Table 8 in Lean (BM-D2).
 - Fryer and Levitt (2003) and Mullainathan (2003), which the paper cites.
 
 ## The bearing on Paper A1
 
-**What the source does not show, first.** The abstract reports "little
-evidence that employers are inferring social class from the names" (BM-Q1). A1
-must not read that as evidence against its own channel. The authors say that a
-class effect is "of independent interest" only if the names they chose carry a
-lower background than the average African-American, or a higher one than the
-average White (BM-Q8). Their tests ask whether the name conveys class beyond
-race (BM-Q6). A1's channel is class inferred from the group itself, under group
-sufficiency, and the paper sets that aside. Under group sufficiency an
-employer's inference is the same for every name in a group, so the Table 8
-test predicts no association between callback and mother's education rather
-than a positive one (`control_group_sufficiency_zero`, against
-`background_concordant`). The negative correlations of Table 8 (BM-Q10,
-BM-Q12) therefore reject class conveyed by the name, and they say nothing
-about class conveyed by race.
+Nothing in the source contradicts the corrected account. One finding limits the
+link A1 draws to statistical discrimination, and it comes first. Better
+credentials raise callbacks less for African-American names (BM-Q2,
+`table4_all`). A model in which race stands in for unobservable skill predicts
+the reverse (BM-Q13, BM-Q14, `phelps_larger_update`). A model in which the same
+credential is noisier for one group predicts the finding
+(`aigner_cain_smaller_update`), and so does lexicographic search (BM-Q15,
+`lexicographic_zero_return`). A1 must place its property among these.
 
-**What does cut against an inference reading, in hiring.** Better credentials
-raise callbacks less for African-American names (BM-Q2, `table4_returns`). The
-authors read this as the opposite of what a model with race as a proxy for
-unobservable skill predicts (BM-Q13, BM-Q14). If a credential were a shown
-signal of class, A1's inference would predict the reverse. A1 concerns contact
-rather than hiring, and a credential is skill rather than class, but a referee
-will raise this result against any account of the race penalty as inference.
+### The puzzle
 
-The candidate contributions of A1 are taken in turn.
+The source is about hiring, not friending, and does not bear on friending bias
+directly. Its one result on the racial make-up of a setting runs the other way
+from the puzzle. Employers located in more African-American neighbourhoods
+discriminate somewhat less (BM-Q20), significantly so only in Chicago (p. 1006).
+That is the contracting channel, where the law applies, and A1's puzzle is in
+the contact channel.
 
-1. **Group avoidance from class homophily under inference.** Not in the
-   source. Employers rank applicants vertically. Nothing depends on the
-   employer's own class, and no group's spread is penalised.
-2. **Budget compatibility.** Not in the source.
-3. **Venue exclusion.** Not in the source.
-4. **A test of the class channel.** The source has the nearest tests in the
-   labour market, of whether a name penalty is a class signal. They differ from
-   A1's test in two ways.
-   - Their tests vary the class conveyed within a group, by name (Table 8), and
-     A1's test shows the individual's class. Neither of their tests shows class
-     in A1's sense.
-   - The address is the nearest thing to showing class, and a better address
-     does not narrow the gap (BM-Q4, BM-Q7). In a linear predictor of class
-     from group and address with a common weight on the address, the gap is the
-     same at every address (`gap_indep_address`). It vanishes only when the
-     address shows class fully (`gap_vanishes_class_shown`). It moves with the
-     address only if the weight differs by group
-     (`control_unequal_weights_gap_moves`). So the address result is consistent
-     with a class channel unless the address reveals class, which a zip code
-     average does not. This is our reading, not the authors'.
-   - Lexicographic search (BM-Q15) would make any shown class unread. A1's test
-     needs class not only shown but seen.
+### Budget compatibility
 
-What A1 should cite the source for. The size of the name penalty in hiring
-(BM-Q2, `table1_gap`), the authors' own statement of the class channel as an
-inference from a name (BM-Q5), and the scope of their class tests (BM-Q8), as
-the gap A1's test fills. A1 should also cite the design choice of names over
-affiliations because affiliations "may especially convey more than race"
-(BM-Q3), which bears on markers that are chosen.
+Not in the source. Employers rank applicants vertically, and the paper says
+nothing on cost, affordability or shared consumption. The only bearing is that
+an applicant's neighbourhood raises callbacks for everyone (BM-Q18), so
+employers value a correlate of class in its own right.
+
+### Avoidance that depends on the observer's class
+
+The source cannot speak to either direction. The employer's own class and race
+are not observed. The only attribute of the observer measured is location
+(BM-Q20). At the level of ads, 3.5 percent of employers favour African-American
+names against 8.4 percent favouring White names (`table2_counts`), which shows
+that treatment is not uniform across employers but does not say why.
+
+### The penalty vanishing when class is shown
+
+The source states two versions of the property, each with its condition, and
+finds neither.
+- If the names mainly signal background, the gap should be smaller at better
+  addresses (BM-Q7). It is not (BM-Q4).
+- If race stands in for unobservable skill, credentials should help
+  African-Americans more (BM-Q13, BM-Q14). They help them less (BM-Q2).
+
+Two things limit what these findings say about A1's property. First, the tests
+concern class conveyed by the name beyond race (BM-Q6, BM-Q8). Class conveyed
+by race itself, A1's channel under group sufficiency, is set aside, and under
+group sufficiency the Table 8 test predicts no association rather than a
+positive one (`control_group_sufficiency_zero`, against
+`background_concordant`). Second, an address shows class only in part. In a
+linear predictor with a common weight `w` on the address, the gap is
+`(1 − w)(μ_W − μ_B)` at every address (`gap_indep_address`). It vanishes when
+the address shows class fully (`gap_vanishes_class_shown`) and moves with the
+address level only if the weight differs by group
+(`control_unequal_weights_gap_moves`). A1's property is the limit `w = 1`.
+The source varies the level of a partial signal, not its precision, so it does
+not reach that limit. This reading is ours, not the authors'.
+
+For the link to the statistical-discrimination literature, the source is where
+the two classes of model are set against data. The Phelps and Arrow class
+predicts larger returns to shown information for the group with the more
+uncertain prior. The Aigner and Cain class predicts smaller returns for the
+group whose signal is noisier (`phelps_larger_update`,
+`aigner_cain_smaller_update`, `control_equal_precision`). A1's property should
+state which of the two it shares.
+
+### The shadow market
+
+The source bears on four of the items in the corrected account.
+- **A marker through which a banned criterion enters.** Race is not on the
+  resume, the name carries it, and screening on it "matches the legal
+  definition of discrimination" (BM-Q19, `race_blind_equal`,
+  `control_race_used`). The authors chose names because affiliations would
+  carry more than race (BM-Q3).
+- **A group-neutral variable correlated with group.** The address raises
+  callbacks, more for Whiter, more educated and richer zip codes (BM-Q18,
+  `table6_college`), and screening on it is legal.
+- **Legal strictness.** Equal Opportunity Employers and federal contractors do
+  not show a smaller gap (BM-Q17), and each shows a larger one, marginally
+  significant for federal contractors (p. 1005). The authors note these
+  employers may receive more African-American applications (n. 41). In the
+  contracting channel, tighter legal exposure does not shrink the gap.
+- **The channel the experiment cannot reach.** Social networks are "another
+  common means through which people find jobs" and cannot be studied here
+  (BM-Q16). That is the contact channel, which the corrected account says the
+  law does not reach.
+
+### Premises of A1 the source does not share
+
+- The observer is an employer who ranks applicants vertically. A1's observer
+  values distance in class.
+- The setting is the contracting channel, a callback, not contact.
+- The class question is about the name beyond race (BM-Q8), not about the group.
+- Credentials are skill, not class (BM-Q2).
+
+What A1 should cite the source for. The size of the name penalty (BM-Q2,
+`table1_gap`), the authors' statement of the class channel as an inference
+from a name (BM-Q5), the scope of their class tests (BM-Q8), the contrast
+between the two classes of statistical discrimination on returns to
+credentials (BM-Q13, BM-Q14), and the shadow-market items above (BM-Q16 to
+BM-Q19).
 
 ## Controls
 
@@ -85,3 +134,7 @@ affiliations because affiliations "may especially convey more than race"
   `background_concordant` fails when the callback depends on the group only.
   `control_unequal_weights_gap_moves` shows the invariance of
   `gap_indep_address` fails when the weight on the address differs by group.
+- Lean, added in the second pass. `control_race_used` shows equal treatment
+  fails once the rule uses race, `control_equal_precision` that neither
+  statistical model predicts different returns without a difference in
+  precision, and `control_no_taste` that a taste-based gap needs `d > 0`.

@@ -2,12 +2,12 @@
 
 ## What was verified
 
-- Fifteen quotations are found on the PDF pages they cite, by exact
+- Twenty-five quotations are found on the PDF pages they cite, by exact
   normalised containment in the text layer (LC-2). CH-Q13 carries an elision
   where the text layer places the parenthesis of `g(c^i)` inside the sentence.
-- Eq. (4)'s sign argument, the Theory Appendix's status function, its
-  no-status share and its stated solution are Lean theorems in the paper's
-  notation (LC-4).
+- The general model, the Theory Appendix, the estimating model and every
+  number that follows from printed numbers are in Lean in the paper's
+  notation (LC-4). The coverage table in `CLAIMS.md` lists each result.
 - Our reading is consistent with the working paper on these points.
 
 ## What could not be verified
@@ -22,41 +22,76 @@
 
 ## The bearing on Paper A1
 
-1. **How the group enters.** The observer does not infer income from race.
-   Outsiders see the person's visible consumption and know the group's income
-   (CH-Q2), and the signalling equilibrium separates, so consumption reveals
-   income (CH-Q3). Race fixes the reference group (CH-Q7, CH-Q11), and the
-   group mean is the yardstick of status, `s = g(c)/μ_G` (CH-Q6, CH-Q13). A
-   richer own group therefore lowers a member's status at given income. In A1
-   a richer group raises the class an outsider imputes to a member. The two
-   roles of the group mean are different objects, so A1 should not cite this
-   paper as an instance of an outsider imputing class from the group. The
-   group's variance is named in footnote 24 and left out of the model (CH-Q4).
-2. **Contribution 1, avoidance from homophily under inference.** Not in the
-   paper. Observers are homogeneous outsiders in anonymous interactions
-   (CH-Q12), no one chooses contact, and nothing depends on the observer's own
-   income. The variance does not enter as a penalty. The empirical dispersion
-   coefficient is negative for Whites (CH-Q8) and positive and not
-   significant for minorities (CH-Q9), and its definition is uncertain
-   (CH-D3).
-3. **Contribution 2, budget compatibility.** Not in the paper.
-4. **Contribution 3, venues and price screening.** Not in the paper. Visible
-   goods signal income by their cost, but no venue, club or price screens
-   whom a person meets.
-5. **Contribution 4, the class-channel test.** Not in the paper in A1's form.
-   The nearest result is Table 8, where the racial gap in visible spending
-   vanishes once the own-group mean income is controlled (CH-Q10). That test
-   conditions on the group mean and measures the sender's spending. A1's test
-   conditions on the individual's class and measures the observer's contact.
-   A1 can cite Table 8 as a precedent for a race coefficient that disappears
-   when the income channel is controlled, and for the authors' reading that
-   race matters only through the reference group (CH-Q11).
+Judged against the corrected account of A1 (16 October 2026).
 
-What A1 might cite. The working paper as evidence that race is treated as
-an economically meaningful reference group, the explicit note that the group
-variance matters in a pure signalling model but is not modelled (CH-Q4), and
-Table 8 as the consumption-side analogue of a test that removes the group
-coefficient by controlling the income channel.
+### The puzzle
+
+The paper is about display, not contact, and does not address friending
+bias. It does show that at equal permanent income Black and Hispanic
+households display about 30 percent more visible goods than White households
+(Table 2, `numbers_visible_dollars`), and that the gap goes with the mean
+income of the own-race group (CH-Q10). An observer who reads class from
+display in a racially mixed setting therefore reads a display shifted by
+group. That this bears on cross-class friending in diverse settings is our
+inference, and the paper does not draw it.
+
+### Budget compatibility
+
+This is the paper's most direct bearing. At equal total expenditure,
+households of different races allocate their budgets differently, with more
+on visible goods and less on education, entertainment and health (CH-Q19,
+CH-Q20, Table 5). About 60 percent of the extra visible spending comes out of
+education, health, food and housing (`numbers_table9`,
+`numbers_diversion`). So the same budget does not mean the same activities,
+and the visible part of a budget, which is what a stranger sees, overstates
+the resources left for other shared activities in groups with a lower mean.
+The paper does not derive any grouping. It assumes race-by-state reference
+groups from cultural separation and segregation (CH-Q16, CH-Q7), and leaves
+open whether the relevant group is local or racial (CH-Q17) and whether people
+choose neighbours for status (CH-Q18). No matching cost appears.
+
+### Avoidance that depends on the observer's class
+
+Observers are homogeneous strangers and nobody chooses contact (CH-Q12), so
+direction (i) gets no support or contradiction. Direction (ii) has a parallel
+on the side of status, not engagement. With status as income relative to the
+group mean, a member's status falls as the group gets richer
+(`known_income_status`, `s_c_mu`), so a low-income member of a rich group
+would gain status from a poorer reference group. The paper only raises the
+choice of neighbours (CH-Q18), and the gain from switching is our inference.
+Ireland's alternative, where a richer group confers status (CH-Q5), reverses
+it (`control_status_gain_rising`). Direction (ii) in this literature therefore
+depends on how status is formed.
+
+### The penalty vanishing when class is shown
+
+The paper's exact statement is in the Theory Appendix. With income known,
+status would be relative income, `y/μ_G` (CH-Q21). Showing income ends the
+signalling, but the group mean still moves status at fixed income
+(`known_income_status`). This is a limit on A1's property, which holds when
+the group enters only as a prior about class. Where the group is also the
+yardstick of comparison, showing class does not remove it. The empirical
+counterpart, Table 8, removes the race coefficient by controlling the group
+mean, not individual income (CH-Q10, `ovb`, `table8_implied`). The paper does
+not cite the statistical-discrimination literature.
+
+### The shadow market
+
+The paper sets aside discrimination in the housing and mortgage markets, a
+contracting channel, as a reason to exclude housing (CH-Q22). It notes that
+an observable correlated with poverty, participation in means-tested
+programs, becomes a signal of class and carries a stigma (CH-Q23). Visible
+goods are the signals of anonymous encounters (CH-Q12). It has no venue,
+platform or law reaching the contact channel.
+
+### Premises of A1 the source does not share
+
+- Display separates. Consumption reveals income (CH-Q3), so the group is not
+  a prior about class.
+- Status is income relative to the own group, and the group is the yardstick
+  (CH-Q6, CH-Q13).
+- Race fixes the reference group exogenously (CH-Q7, CH-Q16).
+- There is no engagement payoff, and observers are homogeneous strangers.
 
 ## Controls
 
@@ -65,5 +100,8 @@ coefficient by controlling the income channel.
   CH-Q2 and CH-Q4, is not found. A true quotation is not found on a
   neighbouring page.
 - Lean. `control_status_gain_rising` shows the decline in the group mean needs
-  `s_cμ < 0`, and `control_soc_needed` that it needs the second order
-  condition.
+  `s_cμ < 0`, `control_soc_needed` that it needs the second order condition,
+  `control_status_negative` and `control_concavity_needed` that the two
+  implications of eq. (3) need `s_c > 0` and `u'' < 0`, and
+  `control_fn12_no_bias` and `control_ovb_no_channel` that the bias and the
+  decomposition vanish without their channel.

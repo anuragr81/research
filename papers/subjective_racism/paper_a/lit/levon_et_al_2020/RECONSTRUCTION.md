@@ -85,25 +85,45 @@ tests (AB-D4).
 
 The report's premise is that accent reflects social background and not
 competence (AB-Q3), and that listeners use the stereotype of the accent's
-group to judge competence (AB-Q2, AB-Q4). We read this as a prior on
-competence attached to the accent and an answer read as a signal of
-competence. Then identical answers are rated differently when the priors
-differ and the answer does not reveal competence (`identical_answer_penalty`),
-the penalty is zero when the answer reveals competence
-(`revealing_no_penalty`), and the label survey corresponds to an uninformative
-signal (`uninformative_is_label`). The lawyers' result corresponds to a rating
-on the answer alone (`quality_only_no_penalty`). This is our reading. The
-report states none of it.
+group to judge competence (AB-Q2, AB-Q4). We read this in two ways, both ours.
+As inference, a prior on competence attached to the accent and an answer read
+as a signal. Identical answers are then rated differently when the priors
+differ and the answer does not reveal competence
+(`identical_answer_penalty`), expert content raises every accent
+(`expert_raises_all`), the penalty is zero when the answer reveals competence
+(`revealing_no_penalty`), and the label survey is an uninformative signal
+(`uninformative_is_label`). As attention, a rating that puts weight `γ` on
+content and `1 − γ` on the stereotype. The penalty is then `(1 − γ)` times the
+stereotype gap (`rating_penalty`), which falls as attention rises
+(`penalty_antitone_in_control`) and vanishes for the lawyers
+(`full_control_no_penalty`, `quality_only_no_penalty`). The authors' reading of
+the age pattern as life stage rather than cohort is formalised against a
+cohort model (`cohort_sections_differ`), and one reading of the lawyers' lower
+likeability of RP as a rating relative to expectation
+(`higher_expectation_lower_rating`). The printed sample identities are checked
+(`voices_sample`, `voices_design`).
 
 ## What could not be reconstructed
 
+The coverage table in `CLAIMS.md` lists every finding. Those not formalised,
+and the special cases, are these.
+
 - No estimate, standard error or test can be reconstructed, because the
-  report gives none (AB-D4). Values read from the figures are approximate and
-  no row relies on them (AB-D3).
+  report gives none (AB-D4). The label hierarchy and its stability, the lowest
+  single ratings of EE and MLE among lawyers, and the ranking of the five
+  interventions rest on figures with no printed values (AB-D3), so none is
+  formalised.
+- The larger bias among listeners of higher class (AB-Q8) is a finding with no
+  stated structure, and is not formalised.
+- The solidarity reading of the lawyers' likeability ratings has no stated
+  structure, and is not formalised.
+- The inference reading uses two competence types, a special case of a
+  graded competence the report does not specify.
 - The report does not separate class from ethnicity. The bottom of the label
   ranking mixes working-class accents with ethnic-minority accents (AB-Q6),
   and the PDF p. 7 box describes MLE as originating among working-class
   young people "of different ethnicities". Both EE and MLE are working-class
   London accents, so the contrast between them is not a class contrast.
 - The report rates competence and likeability. It does not measure contact,
-  avoidance or venue choice.
+  avoidance or venue choice, and it says it does not cover informal
+  interaction (AB-Q17).

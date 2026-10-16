@@ -29,6 +29,11 @@ broken words are named in the last column and in BM-D1.
 | BM-Q13 | 1010 | "In one class of [...] discrimination models, employers use [...] (observable) race to proxy for unobservable [...] skills" | The Phelps and Arrow reading of the gap. Broken word "statistical" |
 | BM-Q14 | 1010 | "Indeed, [...] the added credentials should lead to a larger [...] update for African-Americans and hence greater [...] returns to skills for that group." | That reading's prediction for credentials, contradicted by Table 4 |
 | BM-Q15 | 1011 | "One such [...] heuristic could be to simply read no further [...] when they see an African-American name." | Lexicographic search. Under it a shown credential or class is not read |
+| BM-Q16 | 997 | "As is well known from previous [...] work, social networks are another common [...] means through which people find jobs and one [...] that clearly cannot be studied here." | The channel of networks lies outside the experiment, as it lies outside screening on paper |
+| BM-Q17 | 1005 | "Neither “Equal Opportunity Employers” nor [...] federal contractors appear to treat [...] more favorably." | Employers under more legal scrutiny do not show a smaller gap. Broken word "African-Americans" |
+| BM-Q18 | 1003 | "Applicants living in Whiter (column [...] 1), more educated (column 3), or higher-income [...] (column 5) neighborhoods have a higher [...] of receiving a callback." | Employers screen on a group-neutral variable, the address, that is correlated with race and class. Broken word "probability" |
+| BM-Q19 | 1006 | "So our results [...] must imply that employers use race as a factor [...] when reviewing resumes, which matches the [...] legal definition of discrimination." | The name acts as a marker through which a banned criterion enters screening. Formalised as `race_blind_equal` and `control_race_used` |
+| BM-Q20 | 1010 | "Employer discrimination also [...] matches the finding that employers located in [...] more African-American neighborhoods appear to [...] discriminate somewhat less." | Where the employer sits in a more African-American neighbourhood, the gap is smaller |
 
 ## Lean results
 
@@ -47,6 +52,58 @@ correlations are the paper's. The test logic is our reading.
 | `BertrandMullainathan2004.gap_indep_address` | Our reading. With a common weight on the address, the group gap in predicted class is `(1 − w)(μ_W − μ_B)` at every address |
 | `BertrandMullainathan2004.gap_vanishes_class_shown` | The gap is zero when the address shows class fully |
 | `BertrandMullainathan2004.control_unequal_weights_gap_moves` | Control. With different weights by group the gap moves with the address |
+| `BertrandMullainathan2004.table1_rows` | Table 1, Chicago, females, administrative and males. Differences exact, ratios round to the printed values |
+| `BertrandMullainathan2004.table1_boston_discrepancy` | BM-D9. The Boston rates give a difference of 3.87, not the printed 4.05 |
+| `BertrandMullainathan2004.table1_sales_ratio` | BM-D9. The sales rates give a ratio in `[1.225, 1.226)`, against the printed 1.22 |
+| `BertrandMullainathan2004.table1_counts` | Tables 1 and 3. The numbers of resumes add up |
+| `BertrandMullainathan2004.ads_per_callback` | P. 998. About 10 ads per callback for White names and about 15 for African-American names |
+| `BertrandMullainathan2004.table2_classes` | Table 2. The nine outcomes fall into equal treatment, Whites favoured and African-Americans favoured as the note says |
+| `BertrandMullainathan2004.table2_counts` | Table 2. Counts add to 1,323 ads, and every percentage is its count over 1,323 |
+| `BertrandMullainathan2004.table2_rounding` | BM-D3. The printed parts of "African-Americans Favored" sum to 3.47 |
+| `BertrandMullainathan2004.table4_all` | Table 4, both panels, and the 27 and 8 percent of p. 1000–1001 |
+| `BertrandMullainathan2004.table6_college` | P. 1003. 0.054 per unit of the college fraction gives 0.54 points for ten points |
+| `BertrandMullainathan2004.race_blind_equal` | Section IV.A. A race-blind rule with randomised names gives equal expected callbacks |
+| `BertrandMullainathan2004.control_race_used` | Control. A rule that lowers one group's callback gives unequal rates on the same resumes |
+| `BertrandMullainathan2004.phelps_larger_update` | Section IV.C. With more uncertainty about a group, a credential moves its estimate more |
+| `BertrandMullainathan2004.aigner_cain_smaller_update` | Section IV.C. With a noisier credential for a group, it moves the estimate less |
+| `BertrandMullainathan2004.control_equal_precision` | Control. With equal variance and noise neither group's credential counts more |
+| `BertrandMullainathan2004.taste_gap_region` | Section IV.C. A taste `d` treats the groups differently exactly on `θ ≤ y < θ + d` |
+| `BertrandMullainathan2004.control_no_taste` | Control. With `d = 0` nobody is treated differently |
+| `BertrandMullainathan2004.lexicographic_zero_return` | Section IV.C. Under lexicographic search a credential earns nothing for the group whose resumes are not read |
+
+
+## Coverage of the source's results
+
+The source numbers tables and sections, not propositions. Every table, every
+model the paper reasons with, and every number in the text that follows from
+other printed numbers has a row. Definitions are cited without the module
+prefix.
+
+| Result (as the source numbers it) | Lean name | Status | Reason |
+|---|---|---|---|
+| Table 1, every row, and its resume counts | `BertrandMullainathan2004.table1_gap`, `BertrandMullainathan2004.table1_rows`, `BertrandMullainathan2004.table1_boston_discrepancy`, `BertrandMullainathan2004.table1_sales_ratio`, `BertrandMullainathan2004.table1_counts` | general | Two printed values disagree with the rates (BM-D9) |
+| Text, eight years of experience and 10 against 15 ads (p. 998) | `BertrandMullainathan2004.table1_gap`, `BertrandMullainathan2004.ads_per_callback` | general | |
+| Table 1's tests of proportions | none | not formalised | p-values need the data |
+| Table 2, the classification and every percentage | `classify` (definition), `BertrandMullainathan2004.table2_classes`, `BertrandMullainathan2004.table2_counts`, `BertrandMullainathan2004.table2_rounding` | general | |
+| Table 2's symmetry test | none | not formalised | Needs the data |
+| Table 3 | `BertrandMullainathan2004.table1_counts` | special case | The sample sizes only. The means are from the data |
+| Table 4, both panels, and the 27 and 8 percent in the text | `BertrandMullainathan2004.table4_returns`, `BertrandMullainathan2004.table4_all` | general | The prediction procedure of Panel B is not formalised |
+| Table 5, race-specific probits | none | not formalised | Estimates from the data |
+| Table 6, address | `BertrandMullainathan2004.table6_college`; our reading `BertrandMullainathan2004.gap_indep_address`, `BertrandMullainathan2004.gap_vanishes_class_shown`, `BertrandMullainathan2004.control_unequal_weights_gap_moves` | special case | The arithmetic of the text. The predictor of class is ours |
+| Table 7, job and employer characteristics | none | not formalised | Estimates from the data |
+| Table 8, correlations | `BertrandMullainathan2004.table8_aa_male`, `BertrandMullainathan2004.table8_aa_female` | special case | Two of four. The White groups involve ties (BM-D2) |
+| Table 8, the social background test | `BertrandMullainathan2004.background_concordant`, `BertrandMullainathan2004.control_group_sufficiency_zero`, `BertrandMullainathan2004.table8_rejects_monotone` | general | Our reading of the test |
+| Table 8, "Average" and "Overall" mother's education | none | not formalised | Averages over births, whose weights are not printed |
+| Table A1 | none | not formalised | Likelihood ratios and survey shares from the data |
+| Section IV.A, a race-blind rule gives equal treatment | `expectedCallback` (definition), `BertrandMullainathan2004.race_blind_equal`, `BertrandMullainathan2004.control_race_used` | general | |
+| Section IV.A, rules that target a racial mix | none | not formalised | Argued in words against the evidence |
+| Section IV.B, familiarity and reverse discrimination | none | not formalised | Argued in words |
+| Section IV.C, customer and co-worker tastes | none | not formalised | Argued in words, from variation across occupations |
+| Section IV.C, employer tastes | `BertrandMullainathan2004.taste_gap_region`, `BertrandMullainathan2004.control_no_taste` | special case | A deterministic threshold |
+| Section IV.C, statistical discrimination after Phelps and Arrow | `credWeight` (definition), `BertrandMullainathan2004.phelps_larger_update` | special case | Normal signal extraction |
+| Section IV.C, statistical discrimination after Aigner and Cain | `BertrandMullainathan2004.aigner_cain_smaller_update`, `BertrandMullainathan2004.control_equal_precision` | special case | Normal signal extraction |
+| Section IV.C, lexicographic search | `BertrandMullainathan2004.lexicographic_zero_return` | general | |
+| Footnote 51, coarser categories | none | not formalised | Cited from Mullainathan (2003), not read |
 
 ## Readings recorded
 
@@ -60,3 +117,5 @@ correlations are the paper's. The test logic is our reading.
 | BM-D6 | "Log(median per capital income)" in Tables 3 and 6 is read as per capita income | Typo |
 | BM-D7 | In Table 6 the African-American name coefficient in the log income column is −0.112 (0.152), against −0.031 in the other two | It is a level at log income zero, not comparable with the others. Not relied on |
 | BM-D8 | PDF pp. 24 to 162 are a publisher's list of citing works, not part of the paper | The suite's range is set to journal pp. 991 to 1013 |
+| BM-D9 | Table 1 prints the Boston difference as 4.05, while 11.63 − 7.76 = 3.87, and the ratio for females in sales as 1.22, while 8.37/6.83 rounds to 1.23 | `table1_boston_discrepancy`, `table1_sales_ratio`. The sales ratio may come from unrounded rates. The Boston figure cannot. Not relied on |
+| BM-D10 | An elision in BM-Q16 to BM-Q20 stands for the other column's text or for a hyphen-broken word, "African-Americans" (Q17) and "probability" (Q18) | As BM-D1 |

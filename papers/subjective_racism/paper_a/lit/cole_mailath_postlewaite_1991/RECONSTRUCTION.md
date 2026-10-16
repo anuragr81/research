@@ -98,28 +98,53 @@ paper (CM-D1).
     allocator does not sell it (CM-Q13). Section 5.6 leaves the origin of
     norms open.
 
-## Derivation chain of what Paper A would use
+## Derivation chain, as formalised
 
-- (13) is `V*(k) + j ≤ V*(k) + i/(1 − β)` with `V*(k)` cancelled
-  (`eq13`). It fails for status 0 and any positive `j` (`control_zero_status_deviates`).
-- `L_t(j)` exceeds `k_t(j)` by the consumption value `β j/(1 − β)` of the
-  status a woman gives up, and equals it at `j = 0` (`L_ge_k`,
-  `control_L_eq_k_at_zero`).
-- The upper group's match value is the mean of the uniform distribution on
-  `[i, 1]` (`upper_group_mean`), the loss from banishment follows
-  (`banishment_loss`), and the printed `(1 − i)/2` is not that mean
-  (`control_printed_value_not_mean`).
-- Because `j` enters utility linearly, a random match within a group is worth
-  the group mean, whatever the group's spread (`spread_blind`).
-- The stationary ratio of eq. (6) (`stationary_ratio`).
+- **Two-period example.** The first-order condition of (2) in ratio form,
+  `((1 − λ)/λ)^γ = β A^{1−γ}`, is solved by `λ(0)` (`lambda0_foc`). Since
+  `V(j) = V(0)` fixes `g(λ(j)) = V(0) − β j` with `g` rising below `λ(0)`,
+  `λ(j)` falls in `j` (`lambda_j_antitone`).
+- **Exogenous matching.** Stationarity of (6) is `(1 − λ*)^γ = A^{1−γ} β`
+  (`stationary_ratio`, `lamStar_stationary`). Capital follows (7) (`eq7`).
+  The identity `β((1 − λ*) A)^{1−γ} = 1 − λ*` (`discount_identity`) makes the
+  utility of consumption a geometric series in `1 − λ*`, which sums to (8)
+  (`eq8`).
+- **Wealth-is-status.** With capital strictly increasing in the index, the
+  mass of poorer men equals the index, so `m(i) = i` (`wis_rank`). In (10) a
+  larger matching term forces a larger bequest when `u′` is decreasing
+  (`bequest_rises`). Property 1 follows from an exchange inequality for
+  strictly concave `u` (`property1_exchange`, `property1_no_switch`).
+  Property 3 rests on the best woman of a pool beating its average
+  (`property3_step`).
+- **Aristocratic.** The status rule (12) (`eq12`). Writing
+  `V(k, s) = V*(k) + s/(1 − β)`, (13) is the cancellation of `V*(k)`
+  (`eq13`). The compensating capital satisfies
+  `V*(L) − V*(k) = β j/(1 − β)` (`L_ge_k`), and with `V*(x) = C x^{1−γ}` from
+  (8) it has the printed closed form (`L_closed_form`, `C_inv`).
+- **Hybrid.** A random match in `[i, 1]` is worth `(1 + i)/2`
+  (`upper_group_mean`), banishment costs at least `(1 − i)/2`
+  (`banishment_loss`), members below the group mean gain in matching and the
+  top man loses `(1 − i)/2` (`hybrid_welfare`, `top_man_loss`).
+- **Section 5.3.** One unit a period is worth `1/(1 − β)`
+  (`match_value_bound`).
+- **For the contrast with Paper A.** The payoff is linear in `j`, so a group's
+  spread does not enter (`spread_blind`), while a quadratic loss adds `s²/3`
+  for a uniform group of half-width `s` (`quadratic_spread`).
 
 ## What could not be reconstructed
 
-- Propositions I to III and Properties 1 to 6 are existence and asymptotic
-  results whose proofs rest on Mas-Colell's theorem and on limits in `t` and
-  `β`. They are read and summarised, not formalised.
-- The two-period comparative statics in `K` and `γ` (PDF p. 10) are stated
-  without derivation, and the expression for `∂λ(j)/∂j` is taken from the
-  image without a separate check.
+The coverage table in `CLAIMS.md` gives one row per result. In short:
+
+- Not formalised, 12 rows. Proposition I (Mas-Colell's existence theorem is
+  not in Mathlib), Proposition II with (15), Proposition III, the Lemma,
+  Properties 2, 4, 5 and 6, eqs. (11) and (14), the unequal-wealth case of the
+  two-period example, and the modified aristocratic rule. They need the whole
+  equilibrium path, limits in `t` or `β`, or are verbal.
+- Special cases, 8 rows. Eq. (2) is checked in ratio form without the
+  concavity step. `∂λ(j)/∂j < 0` uses a monotone inverse with the
+  monotonicity of `g` as a hypothesis. That the constant `λ*` solves (3) is
+  not checked, only its stationarity. Eq. (10) holds the matching term fixed.
+  Properties 1 and 3 are their one-period steps. `V(k, s)` takes its
+  additive split as given. The welfare comparison covers matching only.
 - The journal version (JPE 1992) is not read, so nothing here is attributed
   to it.

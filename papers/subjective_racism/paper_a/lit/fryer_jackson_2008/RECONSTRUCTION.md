@@ -47,28 +47,53 @@ Biased Decision Making", *The B.E. Journal of Theoretical Economics* 8(1)
    recognition, identity as a choice of attributes, endogenous categories,
    tests of the model, role models and policy.
 
-## Derivation chain of what Paper A1 uses
+## Derivation chain
 
-- Lemma 4 (PDF p. 34) follows from Lemma 3 and the additivity of the
-  city-block metric across attributes. In one attribute it is
-  `Var = 2 n⁺ n⁻ / n` (`lemma4_one`).
-- Proposition 1 follows from Lemma 4. Two homogeneous groups differing on `h`
-  attributes have pooled variation `h · 2 n_i n_j/(n_i + n_j)` (`pairVar`,
-  `prop1`).
+- Lemma 4 (PDF p. 34) follows from the additivity of the city-block metric
+  across attributes and, in each binary attribute, from splitting the objects
+  into those with and without it (`lemma4`). Lemma 3 follows by counting the
+  pairs that differ in each attribute (`lemma3`). In the paper Lemma 4 is
+  derived from Lemma 3, and here the order is reversed, with the same content.
+- Theorem 1 (PDF pp. 34–35) follows from Lemma 4. Merging two groups adds
+  `2 Σ_k (n_k^{A+} n_k^{B−} − n_k^{A−} n_k^{B+})² / (n_A n_B (n_A + n_B))`
+  (`theorem1_cost`), so the comparison (10) is a comparison of factors (6)
+  (`theorem1`).
+- Proposition 1 is Theorem 1 for homogeneous groups, where each differing
+  attribute contributes `n_i n_j/(n_i + n_j)` to the factor
+  (`prop1_from_theorem1`, `prop1`).
+- Lemma 1 (PDF pp. 35–36) writes the two categories' variation, by Lemma 3, as a
+  function of the share of the block in the first, shows each part concave from
+  the triangle inequality (8) (`lemma1_triangle`, `g_chord`), and concludes that
+  an endpoint is at least as good (`lemma1`).
+- Lemma 2 follows from Lemma 4, since replication multiplies every count, and
+  so every variation, by `k` (`varG_scale`, `lemma2`).
+- Proposition 2 follows from Lemma 3 in the equidistant world (`prop2`).
+- Lemma 5 (PDF p. 36) combines a count of categories holding only minority
+  types (`lemma5_count`) with the fact that a large set of cube vertices has an
+  adjacent pair (`hypercube_adjacent`).
+- Corollary 1 (PDF pp. 37–38) reduces, through Lemmas 1 and 5 and Theorem 1, to
+  `1/n₁ + 1/n₂ > 1/n₃ + 1/n₄`, which follows from `r_E (2 − r_I) > 1`
+  (`corollary1_step`, FJ-D4).
 - Example 1's Table 1 follows from Lemma 4 (`example1_table`,
   `example1_race_optimal`). The prototype `(0, 1/2)` of the black category puts
   the black worker of high human capital `1/2` below his type
   (`example1_prototype_error`).
 - The decision maker's expected per-object accuracy loss in a category, from
   item 5, is the category's variation divided by its size, which in one
-  binary attribute is `2 p (1 − p)` (`meanDev_eq`).
+  binary attribute is `2 p (1 − p)` (`meanDev_eq`, `eu_iff_var`).
 
 ## What could not be reconstructed
 
-- Example 4's footnote numbers (FJ-D3) and the last step of the proof of
-  Corollary 1 (FJ-D4). Neither is relied on.
-- Theorem 1 and Corollary 1 in general are not formalised. Paper A1 relies only
-  on the one-attribute structure.
+- Example 4's printed variations and optimum (FJ-D3). The distances are
+  reproduced.
+- Lemma 1 in its strict form, for a category that holds only the block, and
+  iterated over more than two categories. The weak form for two categories that
+  both hold other objects is formalised.
+- Lemma 5's first claim, that a majority type without its own category leaves
+  more than `(3/8) 2^m` categories holding only minority types, is taken as a
+  hypothesis. The rest of Lemma 5 is formalised.
+- Corollary 1's reduction to the extreme case. Its final step is formalised.
+- Example 3's optimality, checked by script and not in Lean.
 - The model has no equilibrium. The decision maker optimises memory against a
   fixed population of past experiences, and the population does not respond,
   except in the informal remarks on human capital (PDF p. 8) and identity

@@ -2,88 +2,125 @@
 
 ## What was verified
 
-- Fifteen quotations are found on the pages they cite in the publisher's text
-  layer, by exact normalised containment (LC-2).
-- Eq. (3) in both of its printed forms, the effect of assimilation on the two
-  group means and on the mean endowment, the derivative on p. 32 and the
-  screening argument of p. 27 are Lean theorems in the paper's notation
-  (LC-4). Our reading is consistent with the source on these points, except
-  for the value at `s = 1` recorded as EG-D1.
+- Twenty-one quotations are found on the pages they cite in the publisher's
+  text layer, by exact normalised containment (LC-2).
+- The model of Sections 1 and 2 is implemented in Lean in the paper's
+  notation. Eqs. (1) to (9), the steps of the proof of Proposition 1, the
+  screening argument of p. 27 and the arithmetic of Example 4 are theorems,
+  general where the coverage table in `CLAIMS.md` says so and special cases
+  where it says so (LC-4). Every main result has a control that drops one
+  condition. Our reading is consistent with the source on these points,
+  except for the value at `s = 1` recorded as EG-D1 and the implicit proviso
+  recorded as EG-D7.
 
 ## What could not be verified
 
-- Propositions 1 to 3 in general. Their proofs rest on continuity in `λ` and
-  on `c′/c` being very negative, with no explicit bounds, and they are not
-  formalised.
+- The parts of Propositions 1 to 3 marked "not formalised" in the coverage
+  table, chiefly the arguments by continuity in `λ`, the uniqueness of each
+  incumbent's preferred cutoff, and the `𝒟` side of Proposition 3.
 - The formal versions of the three generalizations, which are in an unread
   add-on file (EG-D6).
 - The published 2017 article (EG-D5).
 
 ## The bearing on Paper A1
 
-Nothing in the source contradicts the A1 model. One premise differs in a way
-that matters. Ability has the same distribution in both backgrounds (EG-Q3),
-so the background is no evidence about ability, and the paper's case against
-barriers on immutable traits (EG-Q14) rests on that. In A1 the group class
-distributions differ, so the marker is informative and that case does not
-carry over.
+Nothing in the source contradicts the corrected account of A1. Two of A1's
+directions meet findings in the source that point the other way, and these are
+recorded under the headings below as limits, not contradictions, because the
+source's objects differ from A1's.
 
-The three questions put to this source have these answers.
-- **An unseen type inferred from a group marker.** No. Ability is private
-  (EG-Q2), and nobody forms a belief about another person from the person's
-  group or from anything else (EG-Q10). The group enters payoffs through its
-  realised mean endowment and mean skill (eq. 1, EG-Q5, EG-Q6).
-- **A cost of assimilating.** Yes. Joining the advantaged group costs
-  `d c(s_i)`, falling in skill (EG-Q4), with `d` set by incumbents to screen
-  (EG-Q1, EG-Q9).
-- **An equilibrium condition on group composition.** Yes. The group means are
-  those of the members that the cutoff admits (eq. 3, `eq3_sA`, `eq3_sD`),
-  and the cutoff agent is indifferent at the composition the cutoff produces
-  (EG-Q7). This is a fixed point on realised group means, the same kind of
-  condition as A1's requirement that the imputed group standing equal the
-  actual mean of the visible members. In Eguia the mean is paid out directly
-  as an externality rather than imputed to individuals.
+### The puzzle
 
-The candidate contributions of A1 are taken in turn.
-1. **Group avoidance from class homophily under inference.** Not in the
-   source. Preferences over group composition are vertical. Every member gains
-   from higher mean skill and endowment (EG-Q6), which is the reverse of
-   homophily. The incumbent's preferred barrier does depend on the incumbent's
-   own skill (EG-Q8), but through an assumed complementarity `v_{s_i s_J} ≥ 0`
-   and over a group's mean, not over a dyadic partner. The externality
-   depends on group means only (EG-Q11), so nothing penalises within-group
-   spread, and there is no counterpart of A1's σ² term. Homophily on the
-   marker appears only as a taste, in words (EG-Q15).
-2. **Budget compatibility as the source of class homophily.** Not in the
-   source. The endowment enters as an externality to the group (EG-Q6).
-3. **Venue exclusion and price screening as certification of class.**
-   Partly. Incumbents choose an entry cost that separates the able from the
-   rest without observing anyone's ability (EG-Q1, EG-Q9), and those who pay
-   it are certified as above the cutoff. The instrument is a learning cost
-   that falls with the type (EG-Q4), not a price, and it is chosen by a
-   pivotal incumbent under a strategy-proof rule, not aggregated from client
-   inference. The source's control is useful to A1. A cost that does not vary
-   with the type cannot screen (`control_lump_sum_no_screen`, EG-Q14), so a
-   price screens on class in A1 only because its burden varies with class.
-4. **A test of the class channel.** Not in the source. There is no inference
-   about persons, hence no group penalty that showing the type could remove.
+The source does not study friending across class. The source reads the
+evidence on acting white as stronger in integrated schools (EG-Q13), and
+explains the pattern by the exit option that integration offers to the ablest
+members of the disadvantaged group (EG-Q19). That is a second mechanism by
+which racial diversity turns differences within a group into sorting across
+groups. A1 explains the same kind of pattern by inference about class from the
+marker, and the source explains it by selective exit with no inference about
+persons (EG-Q10). The source leaves open whether its exit mechanism lowers
+cross-class ties within the disadvantaged group.
 
-On the point known not to be new. Selective exit from the disadvantaged group
-lowers that group's mean skill (`sD_lt_half`) and raises the mean skill of the
-group joined (`sA_gt_half`), while diluting its mean endowment (`eAbar_lt`).
-The passing effect is recorded as known (Kim and Loury 2012), and Eguia (2013) states
-the same composition effect in a static model of assimilation. On the
-empirical hook, the source reads the acting-white evidence as stronger in
-integrated schools (EG-Q13). That is a different outcome from friending bias,
-but it is a second reason, besides A1's, why cross-group ties are scarcer in
-mixed schools.
+### Budget compatibility
+
+The source assumes that interaction pays when agents "follow the same norms
+and take part in the same activities" (EG-Q17), which is close to A1's shared
+activities. The source then models the payoff as vertical. A richer, more
+skilled group gives every member more (EG-Q6, eq. 1), so a gap in endowment
+is a gain to the poorer member rather than a cost to the relationship. The
+source therefore has shared activity as the origin of the value of contact,
+and has no cost of a gap in resources. Affordability enters only as the cost
+of learning the advantaged group's norms, which falls with skill (EG-Q4,
+`screen_exists`), not with wealth.
+
+### Avoidance that depends on the observer's class
+
+- **Direction (i), avoidance runs both ways.** The source has it only as a
+  taste for the other group's marker, in words (EG-Q15, EG-Q20). When both
+  groups dislike each other's attributes, fewer agents assimilate and the
+  result is voluntary segregation (EG-Q20). The derived preferences of the
+  model run one way, since only the advantaged group sets a barrier.
+- **Direction (ii), a low-class member of the high group may prefer
+  outsiders.** The source points the other way. The least skilled members of
+  the advantaged group are the most exclusionary, because they lose most from
+  the dilution of the group's endowment and gain least from its skill
+  (EG-Q18, `prop1iii`, `maximiser_antitone`). The object differs from A1's.
+  In the source the low-skilled incumbent ranks entrants by what they do to the
+  group's mean, and in A1 the low-class member ranks partners by distance in
+  class. The source supports the mirror image of (ii). The ablest members of
+  the disadvantaged group turn toward the other group and are more popular
+  there (EG-Q19, `cutoff_rule`).
+
+### The penalty vanishing when class is shown
+
+The source has no such statement. Nobody infers anyone's type, so there is no
+group penalty on persons for revealed type to remove (EG-Q2, EG-Q10).
+Screening works "without a need to observe" skill (EG-Q9), and the source
+does not say what would change if skill were observed.
+
+### The shadow market
+
+The source has the substitution of a correlated criterion for the marker. It
+argues that the barrier "must be based on malleable individual traits and
+behaviors that correlate with ability, and not on immutable characteristics"
+(EG-Q16), built as norms that the able acquire cheaply (EG-Q21), and a barrier
+on an immutable trait cannot screen (`control_lump_sum_no_screen`, EG-Q14).
+The motive differs from A1's shadow market. In the source the marker carries
+no information about ability (EG-Q3), so the incumbents move to correlated
+traits for efficiency. In A1 the marker is informative and the law bans
+screening on it, so the correlated cues gain value from the ban. The source
+has no law, no venues and no intermediaries of social information. Its one
+formal channel is immigration policy, mentioned in passing on p. 15.
+
+### Premises of A1 the source does not share
+
+- Ability has the same distribution in both backgrounds (EG-Q3), whereas A1's
+  group class distributions differ.
+- Preferences over group composition are vertical (EG-Q6), whereas A1's are
+  homophilous in class.
+- The payoff depends on realised group means only (EG-Q11), so within-group
+  spread has no counterpart of A1's σ² term.
+- Nobody forms beliefs about persons (EG-Q10), whereas A1's engagement rests
+  on the posterior given the marker.
+- The game is sequential, with incumbents moving first and a pivotal member
+  setting the barrier (`clamp_truthful`), whereas A1 is a simultaneous Nash
+  equilibrium.
+- The composition condition is the same in kind as A1's. Group means are the
+  means of the members the cutoff admits (`eq3_sA`, `eq3_sD`), and the
+  marginal entrant is indifferent at that composition (`dcut_indifferent`).
+  Selective exit lowers the source group's mean (`sD_lt_half`), the effect A1
+  records as known.
 
 ## Controls
 
 - LC-2. A fabricated quotation, "Individual ability is publicly observed by
   every agent.", the opposite of EG-Q2, is not found. A true quotation is not
   found on a neighbouring page.
-- Lean. `control_no_mobility` shows `sD_lt_half` needs `λ > 0`,
-  `control_cutoff_zero` that `sA_gt_half` needs `s > 0`, and
-  `control_lump_sum_no_screen` that screening needs a cost that varies with
-  the type.
+- Lean. Each main result has a control. `control_no_mobility` and
+  `control_cutoff_zero` for the composition effects,
+  `control_cutoff_needs_monotone_gain` for the cutoff rule,
+  `control_dcut_no_gap` for the increase of `d(s)`, `control_foc_no_mobility`
+  and `control_foc_large_endowment` for the first-order condition,
+  `control_prop1ii_large_endowment`, `control_prop1iii_increasing_differences`,
+  `control_clamp_not_single_peaked`, `control_prop2_large_gap`,
+  `control_prop3_pressure_bites` and `control_lump_sum_no_screen`.

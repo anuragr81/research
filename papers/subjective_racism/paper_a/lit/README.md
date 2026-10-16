@@ -13,7 +13,11 @@ it with the paper's pages, pinned sha256 and named controls. Sources are cached
 under `~/.cache/paper_a/`, downloaded from the author's Drive or, for the
 records of 16 October 2026, from the open sources listed in
 `notes/source_inventory.md`. A record with no rows yet bears on the
-positioning of Paper A1. What each one shows for the candidate contributions
+positioning of Paper A1. In a second pass on 16 October 2026 each record's
+Lean file was extended to implement the source's model, and each `CLAIMS.md`
+gained a table, "Coverage of the source's results", that lists every numbered
+result as proved in general, proved in a special case, or not formalised with a
+reason. What each one shows for the candidate contributions
 is in `notes/motivation_scan.md`.
 
 | Record | Read | Lean | Rows |

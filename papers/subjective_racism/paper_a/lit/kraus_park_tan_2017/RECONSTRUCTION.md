@@ -43,8 +43,8 @@ educational attainment, or occupation status" (p. 3). Three predictions
      seven isolated words, 568 Qualtrics observers. Perceived class
      correlates with the speaker composite, r(211) = .22, and β = .14 with
      speaker race, gender, pitch and zip-code characteristics as controls
-     (KPT-Q4). The association holds in three of four Census regions
-     (KPT-Q5). Quartile and half accuracy beat chance (KPT-Q6).
+     (KPT-Q4). The association holds in three of four Census regions,
+     all but the Midwest (p. 11). Quartile and half accuracy beat chance (KPT-Q6).
 2. **Signals augment group boundaries** (pp. 13–20), by sorting
    ("similarity enhances liking", KPT-Q7), stereotyping and class conflict.
    The evidence for sorting is cited work, including Bergeron and Zanna
@@ -73,11 +73,30 @@ educational attainment, or occupation status" (p. 3). Three predictions
   pattern cited from Côté et al. A vertical utility does not
   (`control_vertical_common_ranking`). The manuscript states the argument in
   words only. The squared-distance form is ours and is A1's own utility.
+- Accuracy and inequality, our reading of KPT-Q12. With a signal that is class
+  plus noise of fixed variance, the squared correlation of signal and class is
+  `vc/(vc + ve)`, rising in the spread of class (`accuracy_rises_with_spread`).
+  Without noise the dependence goes (`control_noiseless_flat`).
+- Stereotyping and the Pygmalion question, our reading. If competence is judged
+  by an increasing function of perceived class, an upgraded signal raises
+  judged competence (`signal_upgrade_raises_competence`), and not otherwise
+  (`control_flat_stereotype`).
+- Strategic sharing and conflict, our reading. With visible resources the
+  sharer prefers the richer partner (`visible_share_rich`), with invisible
+  ones partners are read alike (`invisible_share_indifferent`). An accurate
+  signal shows the actual gap and a uniform one shows none (`visible_gap`).
+- Under an accurate signal the sorting runs both ways (`sorting_symmetric`).
 
 ## What could not be reconstructed
 
 - The bars of Figure 2 are read from the image, not from numbers in the text.
-  The text gives the χ² statistics only.
+- The `χ²` statistics, which need cell counts the manuscript does not print,
+  and every `p` value, which needs the `t` distribution.
+- The correlations, `β` and the region `F`, which are data.
+- Dehumanisation, justifying ideology, the step from a visible gap to
+  conflict, warmth in the stereotype content model, and the cognitive cost of
+  changing one's signals. Each is stated in words with no structure to
+  formalise.
 - The cited studies (Côté et al., Bergeron and Zanna, Nishi et al., Rivera)
   are known only through this manuscript's description [C].
 - The supplementary materials the manuscript points to for the seven-word

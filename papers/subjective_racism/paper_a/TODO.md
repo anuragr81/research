@@ -208,6 +208,12 @@ and so were the remaining references to that theme. M14 stands without it.
 
 Nothing claimed as new yet. C12 (the closed forms) is pending.
 
+On 16 October 2026 the author corrected the account of A1 (no empirical test,
+budget compatibility kept, venues as a shadow market of discrimination rather
+than exclusion), and every record was refreshed against it. The verdicts by
+heading are in `notes/motivation_scan.md`, which supersedes the rows below where
+they differ.
+
 | Source | Status | Bearing |
 |---|---|---|
 | Phelps (1972) | Read [P] 15 Oct 2026, `lit/phelps_1972/` | Static, and the individual's own test score is evidence about the individual. No erosion of stereotypes is modelled (C19), so C14's Phelps half fails |

@@ -114,8 +114,16 @@ and is tagged [C] for the article (GRG-D1).
 
 ## What could not be reconstructed
 
-- The regressions. The NLSY97 audio-linked data are restricted, and the
-  estimates are taken as printed.
-- The OLS bias argument of footnote 20, which is read but not formalised.
+The coverage table in `CLAIMS.md` lists every result. What is short of general
+is the following.
+
+- The regression estimates and test statistics. The NLSY97 audio-linked data
+  are restricted, and the estimates are taken as printed. The specifications
+  and every number the text derives from the tables are formalised.
+- Footnote 19 is formalised without the disturbances, and footnote 20 as a
+  three-type example (`fn20_downward`). The general downward bias under normal
+  errors is not formalised.
+- Eq. (2) is proved for any strictly increasing `F`. That the normal cdf is
+  strictly increasing is not proved here.
 - Which of the two explanations, taste or social skill, holds. The paper does
   not separate them.

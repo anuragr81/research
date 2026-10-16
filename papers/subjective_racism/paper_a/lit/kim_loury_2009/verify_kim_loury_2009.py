@@ -21,5 +21,6 @@ run({
                        "the group disparity caused by the difference of initial group reputations will persist"),
     "controls": ["KimLoury2009.control_no_low_state_if_cutoff_low",
                  "KimLoury2009.control_equal_informativeness",
-                 "KimLoury2009.control_employer_ranking_needs_threshold"],
+                 "KimLoury2009.control_employer_ranking_needs_threshold",
+                 "KimLoury2009.control_lemma1_vortex"],
 })

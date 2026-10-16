@@ -94,15 +94,32 @@ as *American Economic Review* 109, 2019, pp. 3395–3436 (as Bohren, Hull and Im
   (`k_eq`, BIR-D6), so it lies in `(0, 1)` (`k_mem`, `lemma2`).
 - Proposition 2 is Lemma 2 applied period by period, with Lemma 3 turning the
   order of means into the sign of `D` (`prop2`).
+- That discrimination also falls, which the paper leaves at a display, follows
+  because the weight `τq(t)/(τq(t) + τη)` rises more slowly than the gap
+  shrinks (`prop2_D_decreases`, with `control_D_rises_without_shrinking`).
 - The step that makes Proposition 3 possible is that an impartial evaluator
   who attributes an evaluation to a biased evaluator backs out a higher
   signal for a woman (`control_reversal_misspecified`).
 
 ## What could not be reconstructed
 
+The coverage table in `CLAIMS.md` lists every numbered result, and the gaps are these.
+
+- Normal densities and integrals are not formalised. Eq. (4) and Lemma 1
+  are checked as identities of log kernels and of the update recursion
+  (`normal_update`, `lemma1`).
 - Proposition 3 in general. The mixture posterior and the derivative in `p`
-  (PDF pp. 52–55) are not formalised. Only the degenerate case in which the
-  impartial evaluator is sure the first evaluator was heuristic is.
-- Proposition 4 and Appendix A.2. These rest on MLRP and on numerical checks
-  with Matlab code in a supplement that is not read.
+  (PDF pp. 52–55) are not formalised. The boundary `p = 0`, the order of the
+  backed-out signals and the degenerate case in which the impartial evaluator
+  is sure the first evaluator was heuristic are.
+- Proposition 4 and Lemma 5, which need preservation of the monotone
+  likelihood ratio property under convolution (Keilson and Sumita), and the
+  hazard-rate bound in Lemma 4, which the paper takes from Stack Exchange.
+  Only the step `τx ≥ 1` of Lemma 4 is formalised.
+- Appendix A.2, whose checks are numerical with code in an unread
+  supplement. For the binary model, the monotonicity of `φ` and the inversion
+  of eq. (19) are formalised.
+- The claim after Definition 6 fails as printed (BIR-D8).
+- The regression estimates themselves and eqs. (28), (29). Only the internal
+  arithmetic of Tables 1 to 6 is checked.
 - The figures, whose plotted values are not in the text layer.

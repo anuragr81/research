@@ -112,4 +112,93 @@ theorem table4_col2 : (-69 / 1000 : ℝ) + 119 / 1000 = 50 / 1000 := by norm_num
 theorem table7 : (2 : ℝ) / 25 = 8 / 100 ∧ (44 / 100 : ℝ) < 4 / 9 ∧ (4 : ℝ) / 9 < 45 / 100 := by
   norm_num
 
+/-! ### Footnote 20, a special case
+
+The footnote says that, under the "normal case", the OLS estimate of `λ₁` in
+sector 1 is biased downward, because a low-`S` worker is found in sector 1
+only with a high `ε₁`. A three-type example shows the sign. Take `α₀ = λ₀ = 0`,
+`ε₀ = 0`, `α₁ = −1/2`, `λ₁ = 1`, `S ∈ {0, 1}` and `ε₁ ∈ {−1, 0, 1}`. The workers
+in sector 1 are `(S, w₁) = (0, 1/2), (1, 1/2), (1, 3/2)`. -/
+
+/-- The least-squares slope through three points. -/
+noncomputable def ols3 (x₁ x₂ x₃ y₁ y₂ y₃ : ℝ) : ℝ :=
+  let mx := (x₁ + x₂ + x₃) / 3
+  let my := (y₁ + y₂ + y₃) / 3
+  ((x₁ - mx) * (y₁ - my) + (x₂ - mx) * (y₂ - my) + (x₃ - mx) * (y₃ - my)) /
+    ((x₁ - mx) ^ 2 + (x₂ - mx) ^ 2 + (x₃ - mx) ^ 2)
+
+/-- Who is in sector 1 in the example. A worker chooses sector 1 when
+`w₁ > w₀`, that is `−1/2 + S + ε₁ > 0`. -/
+theorem fn20_sector1 :
+    ((-1 / 2 : ℝ) + 0 + 1 > 0) ∧ ¬ ((-1 / 2 : ℝ) + 0 + 0 > 0) ∧ ¬ ((-1 / 2 : ℝ) + 0 + -1 > 0) ∧
+      ((-1 / 2 : ℝ) + 1 + 1 > 0) ∧ ((-1 / 2 : ℝ) + 1 + 0 > 0) ∧ ¬ ((-1 / 2 : ℝ) + 1 + -1 > 0) := by
+  norm_num
+
+/-- Footnote 20 in the example. The sector-1 OLS slope is `1/2`, below
+`λ₁ = 1`. -/
+theorem fn20_downward : ols3 0 1 1 (1 / 2) (1 / 2) (3 / 2) = 1 / 2 := by
+  unfold ols3; norm_num
+
+/-- Control. Without selection, with the same `ε₁` at each `S`, the slope is
+`λ₁`. Points `(0, −1/2), (1, 1/2)` and `(1, 1/2)`. -/
+theorem control_fn20_no_selection : ols3 0 1 1 (-1 / 2) (1 / 2) (1 / 2) = 1 := by
+  unfold ols3; norm_num
+
+/-! ### Numbers in the text that follow from printed numbers -/
+
+/-- Table 1 and PDF p. 11. Shares of listener reports, in tenths of a percent.
+At least four of six heard black: 70.8% ("Seventy-one percent"). Mainstream
+blacks, fewer than four: 29.3% ("29 percent", PDF p. 17). Southern whites heard
+black by at least one: 39.8%. Non-Southern whites, 11.7%. Southern whites heard
+Southern by at least one: 76.2%, by four or more: 32.2%. Mainstream Southern,
+fewer than four Southern reports: 67.8% ("68 percent", PDF p. 18). -/
+theorem table1_shares :
+    (156 + 226 + 326 : ℕ) = 708 ∧ (53 + 55 + 58 + 127 : ℕ) = 293 ∧ (1000 - 602 : ℕ) = 398 ∧
+      (1000 - 883 : ℕ) = 117 ∧ (1000 - 238 : ℕ) = 762 ∧ (126 + 100 + 96 : ℕ) = 322 ∧
+      (238 + 153 + 149 + 138 : ℕ) = 678 := by
+  norm_num
+
+/-- Table 2 and PDF p. 12. Between the extremes of black speakers, "almost
+three years" of education, `14.37 − 11.46 = 2.91`, and "nine-tenths of a
+standard deviation" of AFQT, `0.07 − (−0.83) = 0.90`. -/
+theorem table2_extremes :
+    (1437 - 1146 : ℝ) / 100 = 291 / 100 ∧ (7 / 100 : ℝ) - (-83 / 100) = 9 / 10 := by norm_num
+
+/-- Appendix Table 1 and the Data Appendix. Consent and loss rates. -/
+theorem appendix_table1 :
+    (1698 + 786 + 2034 + 1562 : ℕ) = 6080 ∧ (1402 + 651 + 1603 + 1251 : ℕ) = 4907 ∧
+      (1168 + 602 + 1594 + 861 : ℕ) = 4225 ∧ (1698 + 786 : ℕ) = 2484 ∧
+      (1402 + 651 : ℕ) = 2053 ∧ (2484 - 2053 : ℕ) = 431 ∧ (2034 - 1603 : ℕ) = 431 ∧
+      (213 + 538 : ℕ) = 751 ∧ (1698 - 1691 : ℕ) = 7 ∧ (786 - 783 : ℕ) = 3 ∧
+      (17 / 100 : ℝ) < 431 / 2484 ∧ (431 / 2484 : ℝ) < 18 / 100 ∧
+      (21 / 100 : ℝ) < 431 / 2034 ∧ (431 / 2034 : ℝ) < 22 / 100 ∧
+      (83 / 100 : ℝ) < 1168 / 1402 ∧ (92 / 100 : ℝ) < 602 / 651 ∧ (99 / 100 : ℝ) < 1594 / 1603 := by
+  norm_num
+
+/-- PDF p. 9 against Appendix Table 1 (GRG-D13). Among black respondents
+interviewed in person, 1,698 of 1,833 consented, above 92%, not "83 percent".
+The 83% is consent among all Round-15 black respondents, 1,698 of 2,036. -/
+theorem consent_rates :
+    (92 / 100 : ℝ) < 1698 / 1833 ∧ (83 / 100 : ℝ) < 1698 / 2036 ∧ (1698 / 2036 : ℝ) < 84 / 100 := by
+  norm_num
+
+/-- PDF p. 20 (GRG-D2). "About one-third" of the gap is explained if the black
+coefficient falls from 0.152 to the text's 0.099, a share of `53/152`. With
+Table 4's printed 0.050 the share is `102/152`, about two-thirds. -/
+theorem one_third_share :
+    (1 / 3 : ℝ) < 53 / 152 ∧ (53 / 152 : ℝ) < 36 / 100 ∧ (2 / 3 : ℝ) < 102 / 152 := by
+  norm_num
+
+/-- Table 4, column 3. College-educated blacks: `−0.067 + 0.191 = 0.124`, the
+"small though insignificant wage premium for blacks". -/
+theorem table4_col3_BA : (-67 / 1000 : ℝ) + 191 / 1000 = 124 / 1000 := by norm_num
+
+/-- PDF p. 27 (GRG-D14). The t-statistic of the interactive sorting probit is
+`0.598/0.147`, between 4.0 and 4.1, not the text's 4.4. -/
+theorem table6_tstat : (4 : ℝ) < 598 / 147 ∧ (598 / 147 : ℝ) < 41 / 10 := by norm_num
+
+/-- Table 7 row and column totals. -/
+theorem table7_totals : (23 + 2 : ℕ) = 25 ∧ (4 + 5 : ℕ) = 9 ∧ (23 + 4 : ℕ) = 27 ∧ (2 + 5 : ℕ) = 7 := by
+  norm_num
+
 end Grogger2018

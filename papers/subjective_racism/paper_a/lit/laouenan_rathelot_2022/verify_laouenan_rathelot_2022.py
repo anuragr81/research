@@ -20,5 +20,8 @@ run({
     "fabricated": (2, "If the price gap is due to taste-based discrimination, the price gap should decrease with the number of reviews and tend to zero"),
     "controls": ["LaouenanRathelot2022.control_taste_gap_survives",
                  "LaouenanRathelot2022.control_equal_means_needed",
-                 "LaouenanRathelot2022.control_printed_p0"],
+                 "LaouenanRathelot2022.control_printed_p0",
+                 "LaouenanRathelot2022.control_rho_needs_reviews",
+                 "LaouenanRathelot2022.control_zeta_varies",
+                 "LaouenanRathelot2022.control_uninformative_proxy"],
 })

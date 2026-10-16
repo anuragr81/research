@@ -84,14 +84,26 @@ read (EG-D5).
 
 ## What could not be reconstructed
 
-- The three generalizations of the appendix (immutable traits, intrinsic
-  preferences over diversity, a symmetric society) are given in words only,
-  pp. 27–29. Their formal versions are in the unread add-on file.
-- The general existence and uniqueness argument of Proposition 1 rests on
-  continuity in `λ` and on the sign of `c′/c`, without explicit bounds. Only
-  the composition algebra (eq. 3), the derivative of `s_A` on p. 32 and the
-  screening logic are formalised.
-- Example 4's column without peer pressure (`θ* = 0.610`, `d* = 1.341`,
-  `s_D = 0.487`) was reproduced by a numerical grid search for reading only.
-  It is not a Lean result and no row relies on it. The peer-pressure column was
-  not reproduced.
+The coverage table in `CLAIMS.md` lists every result. Of its 31 rows, 16 are
+formalised in the source's generality, 7 as special cases and 8 not at all.
+What is missing is this.
+- The third step of the proof of Proposition 1 for `λ > 0`, both sufficient
+  conditions. The paper argues by continuity in `λ` and by a bound on `c′/c`,
+  neither made explicit.
+- The uniqueness of each incumbent's preferred cutoff, which rests on the
+  signs of second derivatives of an unspecified `v`.
+- Existence in Proposition 1 (i). Uniqueness of the cutoff and `θ* > 1/2` are
+  formalised.
+- Propositions 1 (ii), 1 (iii), 2 (i) and 2 (ii) in general. They are
+  formalised for `v` linear in the group averages, or with decreasing
+  differences assumed.
+- The strategy-proofness of the order-statistic rule is formalised with the
+  rule written in clamp form, which every order statistic has from one
+  proposer's point of view; that representation is not proved.
+- Proposition 3 on the `𝒟` side (`s^P_𝒟 < γ` in some and in every
+  equilibrium).
+- The levels in Example 4. Column (2) was reproduced numerically for reading
+  only, and no row relies on it.
+- The three generalizations of pp. 27–29 beyond the screening argument, and
+  the cascades of p. 13, which the paper states in words and refers to an
+  unread add-on file.

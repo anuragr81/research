@@ -2,79 +2,96 @@
 
 ## What was verified
 
-- Fourteen quotations are found on the PDF pages they cite, by exact
+- Seventeen quotations are found on the PDF pages they cite, by exact
   normalised containment in the working paper's text layer (LC-2).
-- The homophily measures, `H_i = q_i` in equilibrium, Propositions 1 and 2,
-  eq. (6), and the Section 4.5 example are Lean theorems in the paper's
-  notation (LC-4). The white and black values of `IH` in Table 1 are
-  reproduced. Our reading is consistent with the source on these points.
+- The model is implemented in `lean/mathlib/CurrariniEtAl2008.lean`. The
+  homophily measures, footnote 10, Table 1, Lemma 1, the two-type steady
+  state, eq. (4), Propositions 1, 2, 4, 5, 7, 8 and 10, Claim 1, Section 9
+  and Appendix D are Lean theorems, in the generality the coverage table in
+  `CLAIMS.md` gives. Propositions 3, 6 and 9 are covered in special cases.
+  Our reading is consistent with the source on these points, except for
+  CJP-D2 and CJP-D8.
+- The last step of the proof of Proposition 6 fails for types below baseline
+  (CJP-D8, `control_prop6_step_fails`), so the claim that larger groups show
+  more inbreeding homophily is unproven for more than two types.
 
 ## What could not be verified
 
+- The existence results that need Brouwer's theorem or random matching on a
+  continuum, the fit of Section 7.2 and the welfare plots.
 - The Hispanic value of `IH` in the example school (CJP-D2).
-- The existence results, the fit of Section 7.2 and the welfare results.
 - The Econometrica version (CJP-D1).
-
-## The questions put to this source
-
-**How the paper separates a taste for same-type friends from biased
-meeting.** Within the model, by two impossibility results that each shut one
-channel. Without a taste (type-neutral `U`), every type forms the same number
-of friends whatever the matching (Proposition 1, CJP-Q8, `prop1`), so the
-rise of friend counts with group size needs a taste. Without biased meeting,
-one group's inbreeding homophily forces another's heterophily (Proposition 2,
-CJP-Q9, `prop2`, `eq6`), so homophily in every group needs biased meeting.
-The fit and Figure 7 then assign the inverted U to meeting bias and the
-friend counts to taste (CJP-Q12). The separation rests on equal meeting
-rates across types. With increasing returns in meeting, the matching process
-alone could produce the friend counts (CJP-Q13).
-
-**How homophily varies with group size.** Relative homophily `H_i` rises with
-group share. Inbreeding homophily `IH_i` is an inverted U, near 0 for very
-small and very large groups and near .8 for groups of middle size (CJP-Q2,
-CJP-Q4). In the model without meeting bias, the smaller group is
-heterophilous (eq. 6), so the fit needs the meeting bias to be largest for
-small groups (CJP-Q11).
-
-**The bearing on the Chetty finding.** With two large groups, a middle group
-share is a racially mixed school, so the source's inverted U says that own-race
-bias relative to the population share is largest in racially mixed schools.
-That pattern runs in the same direction as higher friending bias in racially
-diverse schools. It is a different measurement, though. The source measures
-own-race friendship by race, and Chetty et al. measure cross-class friendship
-against exposure. The source attributes its pattern to biased meeting through
-friends, clubs and activities (CJP-Q10, CJP-Q14), and not to tastes and not
-to inference about an unseen trait. It therefore supplies a rival account
-for A1 to set against its own. A1 must say why its channel, class read from a
-race marker, predicts the cross-class pattern in diverse schools where a
-race-based meeting bias would not.
 
 ## The bearing on Paper A1
 
-Nothing in the source contradicts the A1 model. Two premises differ. Agents
-never reject a meeting (CJP-Q7), whereas A1's observer decides whether to
-engage. And types are seen, so nothing is inferred.
+Nothing in the source contradicts the corrected account of A1.
 
-1. **Group avoidance from class homophily under inference (contribution 1).**
-   Not in the source. Preferences are over the seen type, same or different,
-   with no distance between types (CJP-Q5), and they are the same for every
-   type (CJP-Q6). So there is no dependence on the observer's own position,
-   no inference of an unseen type from a marker, and no term in a group's
-   spread. The source's same-type bias (Definition 7) is the taste for
-   same-type friends that A1 replaces with class homophily under inference.
-2. **Budget compatibility (contribution 2).** Not in the source. The only
-   cost is the time cost `c` per unit of search.
-3. **Venue exclusion and price screening (contribution 3).** Not in the
-   source. Clubs and activities appear as a reason meetings are biased toward
-   one's own type (CJP-Q10), stated in words and not derived, with no
-   exclusion and no screening on an unseen type. A1's venue channel differs
-   in that a venue selects its clients by what they infer from markers.
-4. **A test of the class channel (contribution 4).** Not in the source.
+**The puzzle.** Inbreeding homophily by race is an inverted U in group share,
+near 0 for very small and very large groups and near .8 for groups of
+middle size (CJP-Q2, CJP-Q4). With two large groups a middle share is a
+racially mixed school, so own-race bias relative to the population share is
+largest in mixed schools. This runs in the same direction as Chetty et al.'s
+higher cross-class friending bias in racially diverse schools, but it
+measures own-race friendship by race, not friendship across class. Within
+the model the inverted U needs a bias in meeting, largest for small groups
+(CJP-Q11, CJP-Q14), because without it one group's homophily is the other's
+heterophily (`prop2`, `eq6`). The source therefore offers a rival
+explanation of A1's puzzle, meeting bias through friends, clubs and
+activities (CJP-Q10), and leaves open why the bias would cross from race to
+class. A1's explanation is that class is read from the race marker.
 
-What A1 should cite. CJP-Q2 and CJP-Q4 for the inverted U of own-group bias in
-group share. CJP-Q12 and CJP-Q14 for the rival account by biased meeting.
-CJP-Q5 and CJP-Q6 for a taste over the seen type that does not depend on the
-agent's own type, the specification A1 departs from.
+**Budget compatibility.** The source assumes homophily rather than deriving
+it. Preferences have a same-type bias (Definition 7), and meetings may be
+biased toward one's own type (eq. 7). The only cost is a time cost `c` per
+unit of search, the same for all types, so nothing depends on budgets. The
+authors suggest origins of same-type bias in words, among them shared
+interests (CJP-Q15) and the ease of sustaining a risk-sharing agreement with
+those who are closer (CJP-Q16). Shared interests are the nearest the source
+comes to shared consumption, and the risk-sharing remark is a cost of
+sustaining a cross-type relationship. Neither is modelled, and neither is a
+budget constraint. A1's budget compatibility is a different origin and does
+not conflict with the source.
+
+**Avoidance that depends on the observer's class.**
+- Direction (i), avoidance running both ways. The source supports it in
+  form. Preferences are the same for every type (CJP-Q6) and distinguish
+  only same from different (CJP-Q5), so each group favours its own and the
+  bias runs both ways. It is assumed for the seen type, not derived from an
+  unseen one.
+- Direction (ii), a low-class member of the high group preferring outsiders.
+  The source cannot represent it. Types are the groups, there is no
+  variation within a group, and preferences are not indexed by type, so no
+  member of a group differs from another in whom she favours.
+- The marginal return to friendships rising with the share of one's own type
+  (`prop4`, `prop5_t_mono`) gives larger groups more friends. In A1 the
+  observer's own class sets which group is closer, which the source has no
+  counterpart for.
+
+**The penalty vanishing when class is shown.** Not applicable. Types are
+seen and nothing is inferred, so there is no group penalty that showing a
+trait could remove.
+
+**The shadow market.** The source has no law and no prices. Two points bear
+on it.
+- Directing one's search toward one's own type pays when preferences have a
+  same-type bias (CJP-Q17), and the authors name meeting friends through
+  friends and joining clubs and activities as the means (CJP-Q10). That is a
+  return to information about where to go and whom to meet, which is the
+  object of the predecessor's shadow market. The source takes the meeting
+  bias as exogenous, with no market for it and no intermediary.
+- The welfare analysis treats school tracking and other constraints on the
+  meeting process as policy levers (PDF p. 30). Changing the meeting process
+  changes homophily without changing preferences (`control_biased_matching_all_homophilous`).
+
+**Premises of A1 the source does not share.**
+- Types are seen. A1's class is inferred from a marker.
+- No meeting is ever refused (CJP-Q7). A1's observer decides whether to
+  engage.
+- Utility is the same for every type and depends only on same against
+  different (CJP-Q5, CJP-Q6). A1's engagement utility depends on the squared
+  distance between the two classes.
+- The model is a steady state of flows with a time cost, not a static Nash
+  equilibrium of engagement.
 
 ## Controls
 
@@ -82,17 +99,21 @@ agent's own type, the specification A1 departs from.
   any preferences and any steady state equilibrium, every type can be
   homophilous at once", the opposite of CJP-Q9, is not found. A true
   quotation is not found on a neighbouring page.
-- Lean. `control_type_sensitive_numbers_differ` shows that Proposition 1
-  fails without type neutrality, since in the Section 4.5 example the two
-  types form `√3/(8c²)` and `(3 − √3)/(8c²)` friendships.
-  `control_biased_matching_all_homophilous` shows that Proposition 2 fails
-  under the biased process (7). With `β = 2` and equal groups, both meet their
-  own type with probability `√2/2 > 1/2`.
+- Lean. Each main result has a control. Proposition 1,
+  `control_type_sensitive_numbers_differ`. Proposition 2,
+  `control_biased_matching_all_homophilous`. Proposition 3,
+  `control_equal_inflows_half`. Claim 1, `control_claim1_needs_anti`.
+  Proposition 4, `control_no_bias_equal_times`. Proposition 5,
+  `control_prop5_flat`. Proposition 6, `control_prop6_step_fails`.
+  Proposition 7, `control_log_not_proportional`. Proposition 9,
+  `control_prop9_needs_anti`. Proposition 10, `control_prop10_alpha`.
+  Proposition 8 has no separate control. It is an identity given the steady
+  state and Proposition 7.
 
 ## Suite status
 
-The coordinator adds `CurrariniEtAl2008` to the build roots. Until then LC-4
-fails its build-root check. With the module compiled into the scratch
-directory and that directory on `LEAN_PATH`, the axiom audit passes for all
-twelve cited theorems, which depend only on `propext`, `Classical.choice` and
-`Quot.sound`.
+The suite ends with 11 checks and 0 failures when the edited module is
+compiled into the scratch directory and the axiom audit is pointed at it,
+with all 47 cited theorems depending only on `propext`, `Classical.choice`
+and `Quot.sound`. Until the coordinator rebuilds the library, the audit run
+through `lake env` finds the older build.

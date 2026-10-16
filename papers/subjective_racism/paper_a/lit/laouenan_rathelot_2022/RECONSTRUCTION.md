@@ -93,12 +93,25 @@ Economics* 14(1), January 2022, pp. 107–132, doi:10.1257/app.20190188.
 
 ## What could not be reconstructed
 
-- The proofs of Predictions 0 to 2 are in the online appendix, Section F, which
-  is not read. The step from eq. (2) to eqs. (3) and (4) is rebuilt here from
-  the definitions, and the use of the last rating as a proxy for `r` is taken
-  as the paper states it.
-- The derivation of eq. (1) is not given in the paper. Our first-order
-  condition gives the same eq. (1) with the opposite sign on `p₀` (LR-D2).
+The coverage table in `CLAIMS.md` has one row per numbered result. What is
+short of general is this.
+
+- Normal–normal conjugacy. The posterior mean is checked as the
+  precision-weighted average (`precision_weighted`). That this is the Bayesian
+  posterior under normal priors and signals is taken from the paper, since
+  Mathlib has no Gaussian conjugacy.
+- Predictions 0, 1 and 2. Their content as statements about the conditional
+  mean of the log price is formalised (`model_is_eq3`, `model_is_eq4`), with the
+  signal `r` known. The paper proxies `r` by the last rating in four bins and
+  estimates by nonlinear least squares. The proxy step and the properties of
+  the estimator are not formalised, and the proofs in the online appendix,
+  Section F, are not read. Under the deterministic reading eq. (4) has `βk = 0`.
+- Eq. (1). The interior first-order condition is solved
+  (`eq1_from_foc`). The second-order condition and existence of a maximum are
+  not formalised. The printed constant `p₀` has the opposite sign (LR-D2).
+- Eq. (6) and the Table 8 equation are specifications with no derived claim and
+  are not formalised. The beta-prior variant of the online appendix, Section E,
+  is not read.
 - The paper's conclusions about taste-based discrimination are limited by its
   design. A level penalty, whether taste or an unobserved differential, is
-  absorbed by the listing effect (LR-Q9, LR-Q14).
+  absorbed by the listing effect (LR-Q9, LR-Q14, `control_zeta_varies`).

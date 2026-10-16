@@ -116,13 +116,52 @@ Statistical Discrimination", MPRA Paper No. 18765, version dated November 12,
   benefit `ω` independent of reputation when the signal reveals type
   (`revealed_type_no_group_effect`).
 
+## Derivation chain of the dynamics
+
+- Within a region of the `(v, Π)` plane both equations are linear, so a path
+  is `v = ξ + (v₀ − ξ)e^{(δ+λ)t}`, `Π = X + (Π₀ − X)e^{−λt}` (`V_path`,
+  `reputation_path`), and `|v − ξ|^{ρ′}(Π − X)` is constant along it
+  (`region_invariant`). This is (15), (16), (18), (19).
+- Eliminating the crossing points gives (17) and (20) (`eq17`, `eq20`).
+  Tangent lines to the concave `x^{ρ′}` then show the return point lies
+  farther out (`lemma1_spiral_out`). At `δ = 0`, `ρ′ = 1`, the orbit closes
+  (`control_lemma1_vortex`).
+- Solving the invariant for `Π` gives `Π = X + C|v − ξ|^{−ρ′}`, convex or
+  concave by the sign of `C` (`lemma2_right`, `lemma2_left`).
+- The vertical lines `v = 1` and `v = 0` carry paths into `Qh` and `Ql`
+  (`prop2_Qh`, `prop2_Ql`).
+- The invariant through `(1, Π*)` and `(0, Π*)` gives `π^o` and `π^p`
+  (`piO_on_path`, `piP_on_path`), hence Lemma 3 by logarithms, eq. (12),
+  and Proposition 4 by monotonicity of `x^{−ρ′}` in the base and in the
+  exponent.
+- Section 5 uses the same invariant to place the path through `(v*, Πl)`
+  (`prop5_threshold_path`) or `(v*′, Πl)` (`prop5_subsidy_path`).
+- Appendix A replaces `δ + λ` by `δ + λ + η` in the discount and adds the
+  value of revelation (`appA_revelation_value`).
+
 ## What could not be reconstructed
 
-- Lemma 3's separation condition as printed does not follow from the printed
-  `π^o` and `π^p` (KLA-D2). The two conditions `π^o > Πl` and `π^p < Πh`
-  have different denominators. Paper A relies on neither.
-- Lemmas 1 and 2, the overlap formula (12), Proposition 4's signs and the
-  profit integrals (13), (14) are not reconstructed in Lean. The phase
-  diagram arguments rest on figures.
-- The general model's saddle property depends on the slopes at the steady
-  states read from Figure 5, not on stated conditions.
+The coverage table in `CLAIMS.md` has a row for every numbered result. Of its
+47 rows, 34 are formalised in the paper's generality, 7 in a special case and
+6 not at all.
+
+- **Not formalised.** Theorem 2 rests on the stable manifold theorem and on
+  the phase diagram of Figure 5, and Mathlib has neither. Eqs. (13) and (14)
+  are defined in the text and not evaluated there, so only their parts are
+  checked (`YQl_eq`, `prop5_TC`). The rise of `Πh` and `Πl` with `η` in the
+  general model is read from Appendix Figure 1. The p. 6 remark on more
+  informative signals, footnote 4 and the verbal sections 4 and 6 make no
+  precise claim.
+- **Special cases.** `Fq ≤ Fu` is proved for the uniform signals of section
+  3.3, not for a general monotone likelihood ratio. Eqs. (4), (5) and (7)
+  are proved where `β` or `φ` is constant, which covers every path of the
+  simple model piece by piece but not a general `β`. Lemma 4 is the linear
+  algebra at a steady state, with the sign of `β′φ′ − 1` at each state taken
+  as a hypothesis read from Figure 5, and without the linearisation theorem.
+  Lemma 3 is proved in the form that follows from the printed `π^o` and
+  `π^p`, which differs from the printed condition (KLA-D2). Appendix A's
+  differential equation is checked through its locus only.
+- **Hypotheses added.** Proposition 1 needs boundary signs at `0` and `θ̄`
+  that the paper leaves unstated (KLA-D10). Lemma 1 takes the crossing
+  points of Appendix Figure 2 as given and is proved by a tangent-line
+  argument rather than by the paper's conditions 1 and 2.

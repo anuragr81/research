@@ -86,30 +86,55 @@ Economic Review* 85(4), September 1995, pp. 771–792.
 11. **Appendix** (PDF pp. 17–20). Strategies, the outline proof of
     Theorem 1, and proofs of Propositions 1 to 3.
 
-## Derivation chain of what Paper A would use
+## Derivation chain, as formalised
 
-- Eq. (2) from the composition of the pool outside the design (`eq2`), and
-  eq. (3) from the composition inside it (`eq3`).
-- The shape of eq. (4): rising on `[0, α]` (`bandwagon`), falling above
-  (`snob`), the peak `f(α) = v^h` under complementarity (`peak`), and
-  `f(1) = α v^ℓ > 0` (`f_one`).
-- Sorting by willingness to pay. A pool with a higher share of high types is
-  worth more to a high type than to a low type exactly by complementarity
-  (`single_crossing`). When the in-group is the high types, a price in
-  `(v^ℓ, v^h]` keeps the high types in and the low types out, and such a price
-  exists if and only if (1) holds (`separating_price_iff`). This is the static
-  counterpart of the price floor in Proposition 3, not Proposition 3.
-- The contrast with A1's utility. On two classes, `v − κ(c_i − c_j)²`
-  satisfies (1) (`quadratic_complementarity`) but not the assumption that both
-  types prefer a high partner (`control_quadratic_low_prefers_low`). With two
-  types the expected squared gap to a pool is fixed by its share of high
-  types (`two_type_gap`), so a pool's spread cannot vary apart from its mean.
+- **Matching technology (i).** The chance of a high partner is the share of
+  high types among the actual users of a design. An all-high pool gives 1, the
+  non-users of `[0, q]` give `(α − q)/(1 − q)`, and the users of `[0, q]` with
+  `q > α` give `α/q` (`in_pool_high`, `out_pool_high`, `in_pool_low`).
+- **Static demand.** Eqs. (2) and (3) follow (`eq2`, `eq3`), and eq. (4)
+  rises on `[0, α]`, falls above, peaks at `v^h` and ends at `α v^ℓ > 0`
+  (`bandwagon`, `snob`, `peak`, `f_one`). Eq. (5) is linear in the chance of a
+  high partner, so every type that prefers a high partner values a richer pool
+  more (`pool_value_mono`).
+- **Sorting and screening.** Complementarity makes a richer pool worth more to
+  a high type than to a low type (`single_crossing`), and a price that admits
+  only high types exists exactly under complementarity
+  (`separating_price_iff`).
+- **Proposition 1.** The step that `(q − q′) f(q)` peaks at `α` or 1
+  (`prop1_static_step`), the lower bound on cycle length from the revenue
+  premise (`prop1_ii`), and the unbounded-gain step of (iii)
+  (`prop1_iii_step`).
+- **Examples.** The prices that do and do not follow from (9) at the printed
+  numbers (`example1_last`, `example1_second_by_eq9`, `example2_second`,
+  `example2_last_by_eq9`).
+- **Proposition 3 and competition.** A price `v^ℓ(1 − δ^n)` with `n` periods
+  of use left equals a low type's value of an all-high pool for those periods
+  (`prop3_price`). A covering cycle length exists when `c < α v^ℓ/N`
+  (`prop3_T_exists`). The price is at least `2c/α` (`price_floor`).
+  Footnotes 24 and 26 (`fn24`, `fn26`).
+- **The necessary condition of PDF p. 15**, in our reading. With types
+  observed a high type meets a high type without the design, so the design is
+  worth nothing (`observed_type_no_value`).
+- **The contrast with Paper A.** On two classes A1's quadratic utility
+  satisfies (1) (`quadratic_complementarity`), but the low class prefers a low
+  partner (`control_quadratic_low_prefers_low`), so avoidance runs both ways
+  (`quadratic_avoidance_both_ways`). With two types a pool's spread is fixed
+  by its mean (`two_type_gap`).
 
 ## What could not be reconstructed
 
-- Theorem 1 and Propositions 1 to 3 rest on the durable-goods monopoly
-  results of Gul, Sonnenschein and Wilson (1986) and on limits in `δ`. They
-  are read and summarised, not formalised.
-- Footnote 9's continuum case is described in words only, and the example
-  `u(q, q') = (1 − q)^a (1 − q')^a` is taken from the image without a check
-  of the stated threshold `a < 1/3`.
+The coverage table in `CLAIMS.md` gives one row per result. In short:
+
+- Not formalised, 7 rows. Theorem 1, Proposition 1 (iv), Proposition 2,
+  Claims 1 and 2 with (A1) to (A4), eqs. (8) to (10) as an equilibrium,
+  matching technology (ii) and (iii), and footnote 9's continuum example. They
+  rest on the durable-goods monopoly results of Gul, Sonnenschein and Wilson
+  (1986), on mixed pricing, or on limits in `δ`.
+- Special cases, 7 rows. Proposition 1 (i) to (iii) are the steps of their
+  proofs, with the revenue bound of (ii) as a hypothesis. Proposition 3 is its
+  price path and cycle length without subgame perfection. The examples are
+  checked only where their prices follow from (9). The necessary condition of
+  PDF p. 15 is our reading.
+- Footnote 9's example `u(q, q′) = (1 − q)^a (1 − q′)^a` is taken from the
+  image without a check of the threshold `a < 1/3`.

@@ -24,6 +24,9 @@ against a reading-order extraction of the pinned PDF (CA-D1).
 | CA-Q13 | 16 | "We define the level of EC in community (county or ZIP code) c as the mean level of individual EC of low-SES (for example, below-median) members of that community" | Eq. (3), a mean over people, formalised with `ChettyEtAl2022a.control_EC_mean_of_ratios` |
 | CA-Q14 | 3 | "If high-SES and low-SES individuals were to make friendships independent of SES (that is, there were no homophily by SES) and also were to make the same number of friends on average, then 50% of low-SES individuals’ friends would have high SES." | The benchmark with equal friend counts, `ChettyEtAl2022a.control_equal_friends` |
 | CA-Q15 | 3 | "On average, 38.8% of the friends of below-median-SES individuals have above-median SES, whereas 70.6% of the friends of above-median-SES individuals have above-median SES." | The two shares from which EC 0.776 and the gap 0.636 follow, `ChettyEtAl2022a.shares_p3` |
+| CA-Q16 | 15 | "Facebook friendship links need to be confirmed by both parties" | Friendship is mutual, so cross-SES links counted from either side balance, `ChettyEtAl2022a.cross_links_balance` |
+| CA-Q17 | 17 | "we restrict our attention to reciprocal followers to mimic friendships on Facebook when measuring connectedness" | The authors impose mutuality on a directed relation, the condition `ChettyEtAl2022a.control_balance_needs_symmetry` drops |
+| CA-Q18 | 9 | "in the absence of individual-level data on race" | Race enters only through the composition of areas (CA-D4) |
 
 ## Lean results
 
@@ -42,6 +45,17 @@ against a reading-order extraction of the pinned PDF (CA-D1).
 | `ChettyEtAl2022a.income_p9` | 19.5%, 6.23 percentiles, about 37% of 17 percentiles, and 17.5% |
 | `ChettyEtAl2022a.row1_strictAnti` | Extended Data Table 1A. The bottom decile's friend shares fall across deciles |
 | `ChettyEtAl2022a.row5_interior_peak` | Extended Data Table 1A. The fifth decile's friend shares peak at decile 6 and are lower at both ends |
+| `ChettyEtAl2022a.cross_links_balance` | Mutual friendship. Cross-SES links counted from the low-SES side equal those counted from the high-SES side |
+| `ChettyEtAl2022a.balance_shares` | The same in shares, `d_L f_{LH} = d_H (1 − f_{HH})` with equal group sizes |
+| `ChettyEtAl2022a.control_balance_needs_symmetry` | Control. A directed relation need not balance |
+| `ChettyEtAl2022a.printed_shares_not_pooled` | Pooled balance would give 0.3687 for the printed 0.388, so the printed shares are means over people (CA-D8) |
+| `ChettyEtAl2022a.shareOf_mem` | Eqs. (4) and (6). Clustering and the support ratio lie in [0, 1] |
+| `ChettyEtAl2022a.stochastic_eig_le_one` | Every real eigenvalue of a nonnegative row-stochastic matrix, spectral homophily among them, has absolute value at most 1 |
+| `ChettyEtAl2022a.control_eig_needs_nonneg` | Control. Without nonnegativity an eigenvalue of 3 occurs |
+| `ChettyEtAl2022a.bottom_decile_p3` | EC below 0.58 is 42% fewer high-SES friends |
+| `ChettyEtAl2022a.mobility_p6` | Minneapolis 0.98, Indianapolis 0.64 against the printed 0.65, 25% to 50% is 0.5 units, and 16.4 × 0.5 = 8.2 |
+| `ChettyEtAl2022a.scale_numbers` | 72.2 million is 3,610 times Add Health, and 9.8 percentiles is 30.7% of a mean rank near 31.9 |
+| `ChettyEtAl2022a.signalCorr_one` | The signal correlation of Methods equals the raw one at perfect reliability |
 
 ## Readings recorded
 
@@ -54,3 +68,29 @@ against a reading-order extraction of the pinned PDF (CA-D1).
 | CA-D5 | The analysis sample is 72.2 million here and 70.3 million in the companion paper, and the parent-linked subsample of 19.4 million is "about 27%" here (p. 16) and 28% there | The companion paper keeps only users with at least one friendship assigned to a group. The two percentages use different denominators |
 | CA-D6 | "In the presence of homophily, EC ranges from 0 to 1" (p. 16) is read as a statement about the usual case, not a bound | Counties in the top decile have EC of 1.05 or more (p. 3) |
 | CA-D7 | The fifth-decile row of Extended Data Table 1A is read as evidence that friend shares by SES are not ordered alike for every own decile | Shares are an outcome of meeting, choice and both sides' consent, and of high-SES people having more friends. The table does not separate preference from opportunity |
+| CA-D8 | The shares 38.8% and 70.6% (CA-Q15) are read as means over people of individual shares | With mutual friendship and 25.4% more friends for high-SES people, pooled shares would satisfy `0.388 = 1.254 × 0.294`, which gives 0.3687 (`printed_shares_not_pooled`). The 5% difference is what averaging over people produces when friend counts vary (`control_EC_mean_of_ratios`) |
+| CA-D9 | Indianapolis is printed with 32% high-SES friends and EC 0.65 (p. 6), while twice 32% is 0.64 | The share is rounded. Minneapolis, 49% and 0.98, is exact (`mobility_p6`) |
+
+## Coverage of the source's results
+
+| Result (as the source numbers it) | Lean name | Status | Reason for anything short of general |
+|---|---|---|---|
+| Eq. (1), friend shares by quantile | `f` (definition) | general | |
+| Eq. (2), individual EC | `IEC` (definition) | general | |
+| Eq. (3), community EC | `EC` (definition), `EC_pooled_of_equal_degree`, `control_EC_mean_of_ratios` | general | |
+| Eq. (4), individual clustering, and its range | `shareOf` (definition), `shareOf_mem` | general | Stated as the share of a finite set of pairs satisfying a predicate, which is the form of eq. (4) |
+| Eq. (5), community clustering, a mean of eq. (4) | none | not formalised | A mean over residents with nothing printed that follows from it |
+| Eq. (6), support ratio, and its range | `shareOf` (definition), `shareOf_mem` | general | As for eq. (4) |
+| Spectral homophily (Methods, unnumbered) and its range | `stochastic_eig_le_one`, `control_eig_needs_nonneg` | special case | The bound `|λ| ≤ 1` for real eigenvalues is proved. That the second eigenvalue lies in [0, 1], as the text says, is not, because it can be negative for some graphs and Mathlib lacks the spectral theory of stochastic matrices |
+| The shares and representation figures of p. 3 | `shares_p3`, `decile_p3`, `bottom_decile_p3` | general | |
+| The no-homophily benchmark 55.6% and 30.2% (p. 3) | `benchmark_value`, `fewer_p3`, `benchmark_strictMono`, `control_equal_friends` | special case | The benchmark formula is our reading (CA-D3) |
+| Mutuality of friendship (Methods) | `cross_links_balance`, `balance_shares`, `control_balance_needs_symmetry`, `printed_shares_not_pooled` | general | |
+| Extended Data Table 1, the gradient in SES distance | `row1_strictAnti`, `row5_interior_peak` | special case | Rows 1 and 5 only. The other rows are data with the same reading |
+| Homophily slopes of Fig. 1 (0.44, 0.46, 0.31) | none | not formalised | Regressions on data |
+| Table 1, correlations among social capital measures | none | not formalised | Data |
+| Fig. 3, Fig. 5, Extended Data Table 2, correlations with mobility | none | not formalised | Data |
+| Fig. 4 and p. 6 arithmetic | `mobility_p6` | general | |
+| Table 2, regressions on EC and area characteristics | none | not formalised | Data |
+| Extended Data Table 3, race-specific correlations | none | not formalised | Data |
+| Causal effects and income arithmetic of p. 9 | `income_p9`, `scale_numbers`, `signalCorr_one` | special case | The slope 9.8 and the signal correlation 0.44 are estimates. The arithmetic read off them is formalised |
+

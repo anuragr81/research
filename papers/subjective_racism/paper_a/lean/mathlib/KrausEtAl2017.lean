@@ -102,4 +102,79 @@ theorem control_vertical_common_ranking {L H : ℝ} (h : L < H) :
   intro ⟨_, h2⟩
   linarith
 
+/-- With an accurate signal the sorting runs both ways. The observer of class
+`cᵢ` avoids `cⱼ` exactly when `cⱼ` avoids `cᵢ`. -/
+theorem sorting_symmetric (Δ cᵢ cⱼ : ℝ) : affiliates Δ cᵢ cⱼ ↔ affiliates Δ cⱼ cᵢ := by
+  unfold affiliates
+  rw [show (cⱼ - cᵢ) ^ 2 = (cᵢ - cⱼ) ^ 2 by ring]
+
+/-! ### Accuracy and the spread of class (p. 13)
+
+Our reading of KPT-Q12. A signal is class plus independent noise,
+`ĉ = c + ε`, with `var c = vc` and `var ε = ve`. The squared correlation of
+signal with class, the share of the signal's variance that is class, is
+`vc/(vc + ve)`. -/
+
+/-- The squared correlation of a signal with class. -/
+noncomputable def reliability (vc ve : ℝ) : ℝ := vc / (vc + ve)
+
+/-- With noise of fixed size, more spread in class, more inequality, makes the
+signal a better guide to class. Lower inequality makes class "harder to
+discern". -/
+theorem accuracy_rises_with_spread {v₁ v₂ ve : ℝ} (he : 0 < ve) (h1 : 0 ≤ v₁) (h12 : v₁ < v₂) :
+    reliability v₁ ve < reliability v₂ ve := by
+  unfold reliability
+  rw [div_lt_div_iff₀ (by linarith) (by linarith)]
+  nlinarith
+
+/-- Control. Drop the noise and the dependence on inequality goes. A noiseless
+signal is perfectly accurate at every positive spread. -/
+theorem control_noiseless_flat {vc : ℝ} (h : 0 < vc) : reliability vc 0 = 1 := by
+  unfold reliability; rw [add_zero, div_self h.ne']
+
+/-! ### Stereotyping (pp. 16, 19)
+
+"the stereotype content association of high competence to high social class",
+and the Pygmalion question of p. 19, whether shifting one's signals upward
+"will elicit others' judgments of heightened competence". Competence is judged
+as a function `f` of perceived class. -/
+
+/-- If competence is an increasing function of perceived class, an upward shift
+of the class signal raises judged competence. -/
+theorem signal_upgrade_raises_competence {f : ℝ → ℝ} (hf : StrictMono f) {ĉ δ : ℝ} (hδ : 0 < δ) :
+    f ĉ < f (ĉ + δ) := hf (by linarith)
+
+/-- Control. Drop the link from class to competence and the upgrade gains
+nothing. -/
+theorem control_flat_stereotype (k ĉ δ : ℝ) : (fun _ : ℝ => k) ĉ = (fun _ : ℝ => k) (ĉ + δ) := rfl
+
+/-! ### Strategic sharing (p. 21)
+
+"sharing resources with a person with low economic standing may be perceived as
+risky behavior because such a sharing relationship has few direct economic
+benefits for the sharer". The sharer values a partner by the partner's
+perceived resources. -/
+
+/-- With visible resources, `ĉ = c`, the sharer prefers the richer partner. -/
+theorem visible_share_rich {cⱼ cₖ : ℝ} (h : cₖ < cⱼ) : (fun c : ℝ => c) cₖ < (fun c : ℝ => c) cⱼ := h
+
+/-- With invisible resources every partner is read alike, so the sharer's
+ranking of partners does not depend on their resources. -/
+theorem invisible_share_indifferent (m cⱼ cₖ : ℝ) :
+    (fun _ : ℝ => m) cⱼ = (fun _ : ℝ => m) cₖ := rfl
+
+/-! ### Class conflict (pp. 16–18)
+
+Signals "make salient that resources are unequally shared". The perceived gap
+between two people is the distance between their signals. -/
+
+/-- The perceived gap. -/
+def perceivedGap (ĉᵢ ĉⱼ : ℝ) : ℝ := |ĉᵢ - ĉⱼ|
+
+/-- An accurate signal makes the actual gap visible, and a signal that reads
+everyone alike hides it. -/
+theorem visible_gap (cᵢ cⱼ m : ℝ) :
+    perceivedGap cᵢ cⱼ = |cᵢ - cⱼ| ∧ perceivedGap m m = 0 := by
+  unfold perceivedGap; simp
+
 end KrausEtAl2017

@@ -21,5 +21,7 @@ run({
     "fabricated": (8, "Allocations differ in efficiency even when there is no synergy."),
     "controls": ["RothschildWhite1993.control_no_synergy",
                  "RothschildWhite1993.control_perfect_correlation",
-                 "RothschildWhite1993.control_personalised_separates"],
+                 "RothschildWhite1993.control_personalised_separates",
+                 "RothschildWhite1993.control_choice_not_monotone",
+                 "RothschildWhite1993.control_singleton_tests_insufficient"],
 })

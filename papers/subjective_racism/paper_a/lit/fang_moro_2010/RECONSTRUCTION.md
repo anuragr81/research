@@ -71,22 +71,46 @@ the version read and is cited as such (FM-D1).
 
 ## Derivation chain of what Paper A1 uses
 
-- Eq. (1)'s weights sum to one (`eq1_weights_sum`), and the conditional
-  variance of Section 2.2.1 rises with the noise when the group has spread
-  (`condVar_strictMono_noise`) and is zero without spread
-  (`control_condVar_zero_spread`).
-- Eq. (4)'s posterior rises with the prior share `π`
-  (`post_strictMono_prior`), and is the prior when the signal is
-  uninformative (`control_uninformative_signal`), which is the case of A1's
-  group sufficiency.
-- Eqs. (6) and (7) are equivalent (`eq7_iff`).
-- The pooled variance is the law of total variance (`pool_variance`), and the
-  survey's expression differs from it (`control_survey_pooled_variance`).
+The Lean file has one section per model the survey presents, in the survey's
+notation (`CLAIMS.md`, Lean results).
+
+- Phelps (Section 2.1). Eq. (1) (`eq1_weights_sum`), Case 1
+  (`phelps_case1`), Case 2 with equal averages (`phelps_case2`,
+  `phelps_case2_average`), and the precise signal that removes the group
+  (`phelps_precise_signal`).
+- Aigner and Cain, Lundberg and Startz, Cornell and Welch (Section 2.2).
+  `condVar_strictMono_noise`, `aignerCain_average_wage`, `ls_eq2`,
+  `ls_noisier_invests_less`, `cw_variance`.
+- Arrow and Coate and Loury (Section 3). `arrow_wage_relation`,
+  `arrow_lower_wage`, eqs. (4) to (17) (`post_strictMono_prior`, `eq7_iff`,
+  `cl_eq8_unique`, `cl_eq9`, `cl_eq12`, `cl_eq13`, `cl_trivial_equilibrium`).
+- Moro and Norman, Mailath, Samuelson and Shaked, Fang, Chaudhuri and Sethi
+  (Section 4). `mn_eq18`, `mn_eq20`, `mss_eq24_25`, `mss_VB_lt_VW`,
+  `fang_low_cost`, `fang_eq38`, `fang_pareto`, `cs_peer_gap`.
+- Affirmative action (Section 6). `cl_aa_sufficient`, eqs. (47) to (51)
+  (`patron_eq47`, `patron_eq50`, `patron_eq51`, `patron_dynamics_slope`),
+  `mnaa_threshold_order`, Fang and Norman's eqs. (54), (55) (`fn_eq54`,
+  `fn_eq55`, `fn_precision`), Chung (`chung_role_model`, `chung_fn20`), Chan
+  and Eyster (`ce_eq58`), Fryer and Loury (`fl_colorsighted`, `fl_eq79`).
+- Efficiency (Section 7). `eff_total_product`, `pool_variance`,
+  `ls_net_product`, `norman_example`, `norman_eq82`, `mn_pareto_chain`.
 
 ## What could not be reconstructed
 
-- The survey reports results of the models it covers without proofs. Only
-  the steps above are formalised. Every result attributed to a cited model
-  rests on the survey and is tagged [C] unless that model is read (FM-D10).
-- The search model of Section 4.2 (eqs. 21 to 36) and the colour-blind
-  admission problem (eqs. 56 to 59) are read, not formalised.
+The coverage table in `CLAIMS.md` has a row for each model's numbered
+equations and displayed claims, 31 general, 10 special cases and 13 not
+formalised. Short of general are these.
+
+- Results the survey states in words or with figures only, which are Cornell and
+  Welch's limit, Arrow's and Coate and Loury's multiple equilibria and Pareto
+  ranking, Moro and Norman's factor-ratio, cross-group and group-size claims,
+  the dynamic models of Section 5, Schwab, the two-job mismatch, and the
+  results attributed to Fang and Norman and to Chan and Eyster beyond the
+  equations.
+- Results that need a printed equation the survey omits or a limit. Eqs. (24), (25) need the firm's value equation (FM-D12); (31) to (36) are
+  stated without derivation; the patronising dynamics are formalised to local
+  stability only; Fang's `Δ ≥ 0` to necessity only.
+- Fryer and Loury's eqs. (60) to (68) and (80), (81), quantile calculus with
+  a sign problem in eq. (61) (FM-D16).
+- Every result attributed to a cited model rests on the survey and is tagged
+  [C] unless that model is read (FM-D10).

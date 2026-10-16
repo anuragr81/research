@@ -84,11 +84,20 @@ University of Chicago Press for the NBER, 1993, pp. 11–42 (conference of
 
 ## What could not be reconstructed
 
-- The chapter's claims in section 1.3 are verbal. The general monotone benefit
-  of section 1.3.2 is formalised only in the linear special case, and the
-  claim that anonymous prices cannot achieve the diverse allocation is
-  formalised only as the ranking lemma, without capacities or the dependence
-  of benefits on the allocation.
-- The Spence-type segregating price system (RW-Q8) and the non-existence
-  result (RW-Q9) are cited, not derived, in the chapter.
-- Sections 1.2 and 1.4 are not formalised. A1 does not rely on them.
+The coverage table in `CLAIMS.md` has one row per displayed claim. What is
+short of general is this.
+
+- Homogeneity (section 1.3.2) is formalised for four students in two colleges
+  of two with benefit `mean − k · variance`. The chapter's general monotone
+  benefit, with any number of students and colleges, is not.
+- Diversity (section 1.3.3) is formalised as the variance of a student's share,
+  and the claim about anonymous prices as a ranking lemma without capacities
+  or allocation-dependent benefits.
+- The application of the stand-alone test to universities checks survival
+  against single-product rivals, which covers singletons only
+  (`control_singleton_tests_insufficient`).
+- Not formalised. Economies of scope, the stability results of matching theory,
+  the claim that eq. (1) is not competitive, the segregating price system and
+  the non-existence of equilibrium (both cited, not derived), the law of large
+  numbers remark, the internalisation of the externality in tuition, and the
+  rank correlations of PDF pp. 19–20.

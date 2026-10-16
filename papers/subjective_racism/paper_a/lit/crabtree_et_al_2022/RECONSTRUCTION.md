@@ -82,14 +82,33 @@ excludability or "information equivalence" (CR-Q3).
   that degree (`gap_shrinks`). The gap vanishes only at full weight
   (`gap_zero_iff`) and persists below it (`control_gap_persists`). The paper
   does not state a model of perception. The linear mixture is ours.
+- The estimating model. With one dummy per intended group, least squares is
+  fitted by the group means (`ols_dummies_group_means`), because residuals from
+  group means sum to zero within each group (`resid_sum_zero`) and so are
+  orthogonal to any function of the group (`cross_zero`). The plotted
+  predictions of Figures 1, 3 and 5 are therefore mean answers by intended
+  group (or by cell in Figure 5). Least absolute deviations would not give the
+  means (`control_lad_not_mean`).
+- Name selection. A name counts as distinctive for a group when its share of
+  users in that group meets the threshold. Thresholds above one half make the
+  assignment unique (`distinctive_unique`). The 0.45 threshold for Black
+  surnames does not, and admits surnames used mostly by White people
+  (`control_black_surname_threshold`).
+- Study 5's "reduced considerably" compares gaps across education levels,
+  which is a difference in differences of four cell means (`gap_change_did`).
+  A gap that changes across levels rules out every common-weight mixture
+  (`varying_gap_needs_varying_weight`).
 
 ## What could not be reconstructed
 
 - The numerical predictions behind the figures. Values above are read from
   the images.
+- Robust standard errors, confidence intervals and every `p < 0.05` test.
 - Whether perceived class ordering matches the groups' actual class
   distributions. The paper does not compare perceptions with group data and
   says people "often misperceive economic reality" (CR-Q4).
 - Respondent heterogeneity. Respondent class, race and other covariates are
   collected in Studies 2–5 (p. 4) but no result by respondent type is
   reported.
+- The Study 4 recoding of free text and the question order of Studies 1–3,
+  which are design facts with no structure to formalise.

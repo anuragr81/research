@@ -107,6 +107,146 @@ theorem control_no_spread (k α Vu y : ℝ) :
     pay k α 0 Vu y = qhat α (gamma 0 Vu) y := by
   unfold pay condVar; ring
 
+/-! ### The rest of the paper's model
+
+A group is the triple `(α, Var(q), Var(u))` of eqs. (1), (5a) and (5b). The
+solution concept is competitive pay at expected productivity, eq. (2) and p. 4,
+or at risk-discounted productivity, p. 181, with beliefs about `α` that equal
+the actual mean (p. 4). -/
+
+/-- A group of workers, eqs. (1), (5a), (5b). -/
+structure Group where
+  α : ℝ
+  Vq : ℝ
+  Vu : ℝ
+
+/-- The group's reliability, eq. (3). -/
+noncomputable def Group.γ (G : Group) : ℝ := gamma G.Vq G.Vu
+
+/-- Pay in the Phelps model, eqs. (5a) and (5b). -/
+noncomputable def Group.wage (G : Group) (y : ℝ) : ℝ := qhat G.α G.γ y
+
+/-- P. 4. Employers' subjective group mean equals the actual one. -/
+def ConsistentBeliefs (αSubj : ℝ) (G : Group) : Prop := αSubj = G.α
+
+/-- P. 181. The employer prefers group `G₁` to `G₂` at score `y`. -/
+def Prefers (k : ℝ) (G₁ G₂ : Group) (y : ℝ) : Prop :=
+  pay k G₂.α G₂.Vq G₂.Vu y < pay k G₁.α G₁.Vq G₁.Vu y
+
+/-- Eq. (3). With `u` independent of `q`, `Cov(q, y) = Var(q)` and
+`Var(y) = Var(q) + Var(u)`, so `γ = Cov(q,y)/Var(y) = Cov(q,y)²/(Var(q)Var(y))`. -/
+theorem eq3_cov {Vq Vu : ℝ} (hq : Vq ≠ 0) (hy : Vq + Vu ≠ 0) :
+    gamma Vq Vu = Vq / (Vq + Vu) ∧ gamma Vq Vu = Vq ^ 2 / (Vq * (Vq + Vu)) := by
+  refine ⟨rfl, ?_⟩
+  unfold gamma; field_simp
+
+/-- Eq. (2) as a least-squares regression, p. 3. Among slopes `b` on the centred
+score, the mean squared error `Var(q) − 2 b Cov(q,y) + b² Var(y)` is least at
+`b = γ = Cov(q,y)/Var(y)`. -/
+theorem eq2_least_squares {Vq Vu : ℝ} (hy : 0 < Vq + Vu) (b : ℝ) :
+    Vq - 2 * gamma Vq Vu * Vq + gamma Vq Vu ^ 2 * (Vq + Vu)
+      ≤ Vq - 2 * b * Vq + b ^ 2 * (Vq + Vu) := by
+  have hd : (Vq + Vu) ≠ 0 := hy.ne'
+  have e : Vq - 2 * b * Vq + b ^ 2 * (Vq + Vu)
+      - (Vq - 2 * gamma Vq Vu * Vq + gamma Vq Vu ^ 2 * (Vq + Vu))
+      = (Vq + Vu) * (b - gamma Vq Vu) ^ 2 := by
+    unfold gamma; field_simp; ring
+  nlinarith [mul_nonneg hy.le (sq_nonneg (b - gamma Vq Vu))]
+
+/-- Footnote 15. `Var(q|y) = Var(q) − γ² Var(y) = Var(q)(1 − γ)`. -/
+theorem fn15 {Vq Vu : ℝ} (hy : Vq + Vu ≠ 0) :
+    Vq - gamma Vq Vu ^ 2 * (Vq + Vu) = condVar Vq (gamma Vq Vu) := by
+  unfold condVar gamma; field_simp
+
+/-- Eq. (6). With `E(y|q) = q`, `E(q̂|q) = (1 − γ) α + γ q`, which is eq. (2)
+evaluated at `y = q`. -/
+theorem eq6 (α γ q : ℝ) : qhat α γ q = (1 - γ) * α + γ * q := rfl
+
+/-- Pp. 6 and 7. Each group's mean pay is its mean ability, since `E(y) = α`:
+groups with equal means receive equal mean wages, in Figs. 1A and 1B. -/
+theorem mean_wage (α γ : ℝ) : qhat α γ α = α := by unfold qhat; ring
+
+/-- Fig. 1A. With equal `Var(u)`, a larger `Var(q^B)` gives blacks the steeper
+slope, `γ^B > γ^W`. -/
+theorem fig1A_slope {VqW VqB Vu : ℝ} (hu : 0 < Vu) (hW : 0 ≤ VqW) (hWB : VqW < VqB) :
+    gamma VqW Vu < gamma VqB Vu := by
+  unfold gamma
+  rw [div_lt_div_iff₀ (by linarith) (by linarith)]
+  nlinarith
+
+/-- Figs. 1A and 1B. With equal means, the group with the steeper slope is
+predicted higher exactly above the mean score and lower below it. -/
+theorem fig1_crossing {α γ₁ γ₂ : ℝ} (h : γ₂ < γ₁) (y : ℝ) :
+    qhat α γ₂ y < qhat α γ₁ y ↔ α < y := by
+  unfold qhat
+  constructor <;> intro h' <;> nlinarith
+
+/-- Control for Figs. 1A and 1B: without a difference in slopes the crossing
+fails, since at any score above the mean neither line lies above the other. -/
+theorem control_fig1_equal_slopes (α γ : ℝ) :
+    ¬ ∀ y, (qhat α γ y < qhat α γ y ↔ α < y) := by
+  intro h
+  have := (h (α + 1)).2 (by linarith)
+  exact lt_irrefl _ this
+
+/-- Fig. 2. With equal means, a flatter line for blacks (`γ^B < γ^W`) and a
+larger risk discount for blacks, black pay exceeds white pay exactly below a
+score `y₀ < α`. -/
+theorem fig2_crossing {k α γB γW VB VW : ℝ} (hk : 0 < k) (hγ : γB < γW) (hV : VW < VB) :
+    ∃ y₀ < α, ∀ y, (qhat α γW y - k * VW < qhat α γB y - k * VB ↔ y < y₀) := by
+  have hg : 0 < γW - γB := by linarith
+  refine ⟨α - k * (VB - VW) / (γW - γB), ?_, fun y => ?_⟩
+  · have : 0 < k * (VB - VW) / (γW - γB) := div_pos (by nlinarith) hg
+    linarith
+  · unfold qhat
+    have key : α - k * (VB - VW) / (γW - γB) = (α * (γW - γB) - k * (VB - VW)) / (γW - γB) := by
+      field_simp
+    rw [key, lt_div_iff₀ hg]
+    constructor <;> intro h <;> nlinarith
+
+/-- Control for Fig. 2: without risk aversion the lines cross at the mean
+score, not below it. -/
+theorem control_fig2_no_discount {α γB γW VB VW : ℝ} (hγ : γB < γW) (y : ℝ) :
+    qhat α γW y - 0 * VW < qhat α γB y - 0 * VB ↔ y < α := by
+  unfold qhat
+  constructor <;> intro h <;> nlinarith
+
+/-- Fig. 4, the extreme selection–truncation case. With zero reliability no
+black worker's prediction exceeds the floor `α`, and with perfect reliability a
+white worker's does exactly when `y > α`. -/
+theorem fig4_truncation (α y : ℝ) :
+    ¬ (α < qhat α 0 y) ∧ (α < qhat α 1 y ↔ α < y) := by
+  unfold qhat; constructor
+  · simp
+  · simp
+
+/-- Control for Fig. 4: with perfect reliability a black worker scoring above
+the floor is hired, so the exclusion needs the zero reliability. -/
+theorem control_fig4_reliable (α : ℝ) : α < qhat α 1 (α + 1) := by
+  unfold qhat; linarith
+
+/-- Fig. 5 and eq. (6). With equal slopes `γ < 1` and `α^B < α^W`, the black line
+lies below the white one by `(1 − γ)(α^W − α^B)` at every score, and at every
+true ability. -/
+theorem fig5_parallel {αB αW γ : ℝ} (hγ : γ < 1) (hα : αB < αW) (y : ℝ) :
+    qhat αW γ y - qhat αB γ y = (1 - γ) * (αW - αB) ∧ qhat αB γ y < qhat αW γ y := by
+  unfold qhat
+  constructor
+  · ring
+  · nlinarith
+
+/-- P. 12 (AC-Q13). With perfect information, `γ = 1`, the two lines coincide
+with the 45° line and the conditional variance, hence the risk discount, is
+zero. -/
+theorem perfect_information (αB αW Vq y : ℝ) :
+    qhat αB 1 y = y ∧ qhat αW 1 y = y ∧ condVar Vq 1 = 0 := by
+  unfold qhat condVar; refine ⟨by ring, by ring, by ring⟩
+
+/-- Control for Fig. 5: with `γ = 1` the gap of Fig. 5 is zero, so the result
+needs imperfect information. -/
+theorem control_fig5_perfect_information (αB αW y : ℝ) :
+    qhat αW 1 y - qhat αB 1 y = 0 := by unfold qhat; ring
+
 /-! ### Contrast with Paper A1's quadratic loss
 
 A finite belief is a list of weights `w` on class values `x`, with

@@ -135,4 +135,133 @@ discrimination is nearly costless for the host"). -/
 theorem control_sure_replacement_costless (p f : ℝ) : costOfDiscrimination p f 1 = 0 := by
   unfold costOfDiscrimination; ring
 
+/-! ### Implied coefficients printed in the tables
+
+Each "Implied Coefficient" row should be `b + i` from the printed `b` and `i`,
+up to rounding of the unrounded estimates. -/
+
+/-- Appendix Table 3 (PDF p. 35). The five city rows add exactly:
+Baltimore `−0.07 − 0.12 = −0.19`, Dallas `−0.08 − 0.01 = −0.09`, Los Angeles
+`−0.10 + 0.03 = −0.07`, St. Louis `−0.08 + 0.02 = −0.06`, Washington
+`−0.08 − 0.01 = −0.09`. -/
+theorem appendix3_implied :
+    (-7 / 100 - 12 / 100 : ℚ) = -19 / 100 ∧ (-8 / 100 - 1 / 100 : ℚ) = -9 / 100 ∧
+      (-10 / 100 + 3 / 100 : ℚ) = -7 / 100 ∧ (-8 / 100 + 2 / 100 : ℚ) = -6 / 100 ∧
+      (-8 / 100 - 1 / 100 : ℚ) = -9 / 100 := by
+  norm_num
+
+/-- Table 3 (PDF p. 28) and Table 5, columns 1 to 3 and 5 (PDF p. 30). Each
+implied coefficient is within 0.01 of the sum of the printed coefficients. -/
+theorem implied_within_rounding :
+    |(-8 / 100 + 1 / 100 : ℚ) - (-7 / 100)| ≤ 1 / 100 ∧
+      |(-9 / 100 - 11 / 100 : ℚ) - (-19 / 100)| ≤ 1 / 100 ∧
+      |(-9 / 100 + 11 / 100 : ℚ) - 2 / 100| ≤ 1 / 100 ∧
+      |(-7 / 100 - 6 / 100 : ℚ) - (-12 / 100)| ≤ 1 / 100 ∧
+      |(-7 / 100 - 2 / 100 : ℚ) - (-9 / 100)| ≤ 1 / 100 ∧
+      |(-8 / 100 - 1 / 100 : ℚ) - (-9 / 100)| ≤ 1 / 100 ∧
+      |(-9 / 100 + 1 / 100 : ℚ) - (-8 / 100)| ≤ 1 / 100 ∧
+      |(-9 / 100 + 6 / 100 : ℚ) - (-4 / 100)| ≤ 1 / 100 := by
+  norm_num [abs_le]
+
+/-- Table 5, column 4 (PDF p. 30, read from the image). The printed guest
+coefficient −0.11 and interaction −0.01 sum to −0.12, but the implied
+coefficient is printed as −0.08. The gap of 0.04 is not rounding (ELS-D8). -/
+theorem table5_col4_inconsistent : (3 / 100 : ℚ) < |(-11 / 100 - 1 / 100 : ℚ) - (-8 / 100)| := by
+  norm_num [abs_of_neg]
+
+/-! ### Table 7 and Appendix Table 1 -/
+
+/-- Table 7 (PDF p. 32). The twenty name counts sum to 6,269, not the 6,390
+printed for the entire sample (ELS-D9). -/
+theorem table7_count :
+    (306 + 344 + 325 + 327 + 303 + 317 + 332 + 279 + 312 + 314
+      + 324 + 331 + 327 + 339 + 309 + 285 + 328 + 300 + 313 + 254 : ℚ) = 6269 := by
+  norm_num
+
+/-- Table 7. Weighting each name's rate by its count gives 0.432 overall,
+0.474 for White names and 0.389 for African-American names. The overall rate
+matches the printed 0.43, and the gap of 8.5 points matches the main effect,
+but the base is below the 0.496 of the pooled "Yes" (ELS-D9). -/
+theorem table7_rates :
+    let wN : ℚ := 306 + 344 + 325 + 327 + 303 + 317 + 332 + 279 + 312 + 314
+    let aN : ℚ := 324 + 331 + 327 + 339 + 309 + 285 + 328 + 300 + 313 + 254
+    let wY : ℚ := 49/100*306 + 56/100*344 + 48/100*325 + 50/100*327 + 49/100*303
+      + 41/100*317 + 48/100*332 + 44/100*279 + 45/100*312 + 43/100*314
+    let aY : ℚ := 42/100*324 + 35/100*331 + 43/100*327 + 47/100*339 + 40/100*309
+      + 38/100*285 + 33/100*328 + 36/100*300 + 38/100*313 + 36/100*254
+    (43 / 100 : ℚ) < (wY + aY) / (wN + aN) ∧ (wY + aY) / (wN + aN) < 435 / 1000 ∧
+      (47 / 100 : ℚ) < wY / wN ∧ wY / wN < 48 / 100 ∧
+      (38 / 100 : ℚ) < aY / aN ∧ aY / aN < 39 / 100 := by
+  norm_num
+
+/-- Footnote 7 (PDF p. 7) against Appendix Table 1 (PDF p. 33). Every White
+female name scores at least 0.90, every African-American female name at most
+0.10, every White male name at least 0.88, and every African-American male
+name at most 0.10 except Jermaine Jones at 0.26. -/
+theorem footnote7_survey :
+    (∀ x ∈ ({93/100, 95/100, 97/100, 98/100, 1} : Finset ℚ), 90/100 ≤ x) ∧
+      (∀ x ∈ ({3/100, 5/100, 7/100} : Finset ℚ), x ≤ 10/100) ∧
+      (∀ x ∈ ({88/100, 90/100, 91/100, 93/100, 98/100} : Finset ℚ), 88/100 ≤ x) ∧
+      (∀ x ∈ ({0, 6/100, 7/100, 10/100} : Finset ℚ), x ≤ 10/100) ∧ (10/100 : ℚ) < 26/100 := by
+  refine ⟨?_, ?_, ?_, ?_, by norm_num⟩ <;>
+    simp only [Finset.mem_insert, Finset.mem_singleton, forall_eq_or_imp, forall_eq] <;> norm_num
+
+/-! ### The replacement probabilities and footnote 17 (PDF pp. 15–16) -/
+
+/-- 25.9 percent vacant, 37.9 percent filled and 36.1 percent delisted sum to
+99.9 percent, and excluding the delisted, the share that found a replacement is
+`37.9/(25.9 + 37.9) = 0.594`. -/
+theorem replacement_shares :
+    (259 / 10 + 379 / 10 + 361 / 10 : ℚ) = 999 / 10 ∧
+      (5935 / 10000 : ℚ) < (379 / 10) / (259 / 10 + 379 / 10) ∧
+      ((379 / 10) / (259 / 10 + 379 / 10) : ℚ) < 5945 / 10000 := by
+  norm_num
+
+/-- Footnote 17. Counting hosts who said Yes, the median price $150 and the
+replacement rates 64 and 45 percent give costs of $52.38 and $80.03, drops of
+$11.81 and $18.17 from $64.19 and $98.19, "about $10 or $20". -/
+theorem footnote17_drops :
+    costOfDiscrimination 150 (3 / 100 * 150) (64 / 100) = 5238 / 100 ∧
+      costOfDiscrimination 150 (3 / 100 * 150) (45 / 100) = 80025 / 1000 ∧
+      (6419 / 100 : ℝ) - 5238 / 100 = 1181 / 100 ∧ (9819 / 100 : ℝ) - 80025 / 1000 = 18165 / 1000 := by
+  unfold costOfDiscrimination
+  norm_num
+
+/-! ### The remedies of PDF pp. 17–20
+
+The authors propose concealing guest names or expanding Instant Book, so that
+hosts "accept guests without screening them first" and the design "would
+eliminate the opportunity for discrimination" (PDF p. 18). Our reading: the
+host's acceptance is a function of what the platform displays about an account,
+and the experiment's two accounts differ only in the name. -/
+
+/-- The race gap between two accounts under an acceptance rule acting on the
+display. -/
+def displayGap {Acct Info : Type*} (display : Acct → Info) (accept : Info → ℝ) (aa w : Acct) : ℝ :=
+  accept (display aa) - accept (display w)
+
+/-- Our reading of PDF p. 18. The gap is zero under every acceptance rule if
+and only if the platform shows the two accounts identically. Hiding the name
+removes the gap only when nothing else displayed differs between them. -/
+theorem gap_zero_all_rules_iff {Acct Info : Type*} [DecidableEq Info] (display : Acct → Info)
+    (aa w : Acct) :
+    (∀ accept : Info → ℝ, displayGap display accept aa w = 0) ↔ display aa = display w := by
+  constructor
+  · intro h
+    by_contra hne
+    have hne' : display w ≠ display aa := fun e => hne e.symm
+    have := h (fun i => if i = display aa then 1 else 0)
+    simp [displayGap, hne'] at this
+  · intro h accept
+    simp [displayGap, h]
+
+/-- Control: if a displayed variable differs, say a name or a photo, some rule
+gives a nonzero gap. -/
+theorem control_displayed_marker {Acct Info : Type*} [DecidableEq Info] (display : Acct → Info)
+    (aa w : Acct) (hne : display aa ≠ display w) :
+    ∃ accept : Info → ℝ, displayGap display accept aa w ≠ 0 := by
+  by_contra h
+  push_neg at h
+  exact hne ((gap_zero_all_rules_iff display aa w).mp h)
+
 end EdelmanEtAl2017

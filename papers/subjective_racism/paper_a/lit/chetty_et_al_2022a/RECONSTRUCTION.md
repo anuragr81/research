@@ -98,8 +98,16 @@ mobility", *Nature* 608, 4 August 2022, pp. 108–121, doi
 
 ## What could not be reconstructed
 
-- The SES prediction model and the bootstrap standard errors, which are in the
-  Supplementary Information and rest on data we do not hold.
+This list matches the coverage table in CLAIMS.md.
+
+- The correlations and regressions of Figs. 1, 3, 4 and 5, Tables 1 and 2 and
+  Extended Data Tables 2 and 3, and the SES model with its bootstrap standard
+  errors. They rest on data we do not hold. The arithmetic printed from them is
+  formalised (`income_p9`, `mobility_p6`, `scale_numbers`).
+- Eq. (5), a mean of eq. (4) over residents, from which nothing printed follows.
+- That spectral homophily lies in [0, 1]. Only `|λ| ≤ 1` is proved
+  (`stochastic_eig_le_one`).
+- The benchmark formula, formalised under our reading (CA-D3).
 - Any statement about whether people see each other's SES. The paper measures
   homophily on predicted SES and does not model friendship formation.
 - The decomposition into exposure and friending bias, which this paper defers

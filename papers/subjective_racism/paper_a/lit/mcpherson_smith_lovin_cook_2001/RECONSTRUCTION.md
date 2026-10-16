@@ -85,27 +85,37 @@ study and [F] only for what the review says.
 
 ## What is formalised, and from what
 
-The Lean file `lean/mathlib/McPhersonEtAl2001.lean` formalises our reading of
-three structures the review describes in words. None is a result of the review.
+`lean/mathlib/McPhersonEtAl2001.lean` formalises our reading of every structural
+claim the review makes. None is a result the review proves. The table "Coverage
+of the source's results" in `CLAIMS.md` lists each claim with its Lean name.
 
-- Baseline and inbreeding (MSC-Q3) as the in-group share `p` under random
-  assortment and the excess `H − p` (`inbreeding`, `baseline_minority`).
-- Consolidation (MSC-Q5, MSC-Q7) as two classes with different racial mixes
-  and ties formed only within class. Race's in-group share then exceeds its
-  baseline by `nH nL (aH − aL)² / ((nH + nL)(nH aH + nL aL))`
-  (`consolidation_inbreeding`, `consolidation_pos`), and equals it when the
-  mixes are equal (`control_no_consolidation`).
-- A social distance effect (MSC-Q10) as a propensity `v − κ d²` that falls in
-  the difference (`distance_effect`), against a same-different rule that is
-  flat in it (MSC-Q9, `control_same_different_flat`).
+- Homophily, the ordering of dimensions, baseline and inbreeding (MSC-Q1 to
+  MSC-Q3, `race_strongest`, `baseline_minority`, `inbreeding_antitone_size`).
+- Consolidation and foci, in any number of classes or foci
+  (`consolidation_inbreeding`, `consolidation_pos`, `foci_inbreeding_nonneg`,
+  with controls), which also covers value homophily derived from status and
+  tracking in schools (MSC-Q5, MSC-Q7, MSC-Q14, MSC-Q19).
+- A graded distance effect against same-different (MSC-Q9, MSC-Q10, MSC-Q18,
+  `distance_effect`, `control_same_different_flat`).
+- Multiplex ties, selective dissolution, the edge of a niche and co-membership
+  counts (`multiplex_cumulates`, `dissolution_raises_homophily`,
+  `niche_decomposition`, `comembership_ties`, `comembership_per_member`).
 
 ## What could not be reconstructed
 
-- No result of the review can be derived, because it states none. Its
-  numbers are other studies' estimates, read here only as reported.
-- Marsden (1988), Blau et al. (1982), Laumann (1973), Kalmijn (1998) and the
-  other studies the review cites are not read. Anything attributed to them
-  through this record is [C].
+- No result of the review can be derived from it, because it states none. Its
+  numbers are other studies' estimates and are read as reported. Of them, only
+  Marsden's benchmark follows arithmetically from printed numbers
+  (`marsden_random_benchmark`).
+- The claims that selection outweighs influence and that structure outweighs
+  choice are empirical comparisons with no stated structure, and are not
+  formalised.
+- Four formalisations are special cases chosen by us. The distance effect uses
+  a quadratic form, the multiplex claim a multiplicative odds model, the niche
+  claim mean squared distance with no exit rule, and the size claim a fixed
+  in-group share.
+- Marsden (1988), Blau et al. (1982), Laumann (1973), Kalmijn (1998),
+  Hallinan and Smith (1985) and the other studies the review cites are not
+  read. Anything attributed to them through this record is [C].
 - The review does not define inbreeding homophily by a formula. The excess
-  `H − p` is our reading of "over and above the opportunity set", and the
-  consolidation model is ours.
+  `H − p` is our reading of "over and above the opportunity set".

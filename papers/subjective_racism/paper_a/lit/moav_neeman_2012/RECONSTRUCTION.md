@@ -67,12 +67,28 @@ September 2012, pp. 933–956, doi 10.1111/j.1468-0297.2012.02516.x.
   `control_unobserved_constant`), and the mapping is linear in case (i)
   (`phi_case_i`).
 
+## Second pass, 16 October 2026
+
+The model is now implemented in Lean for a fixed `h`. The Definition is the
+structure `SeparatingEq`. Eq. (9) is shown to be a separating equilibrium
+(`prop1_exists`, through the global incentive constraint `prop1_ic`), and the
+only one among strategies continuous on `[y̲, ∞)` and differentiable above `y̲`
+(`prop1_floor`, `prop1_foc`, `prop1_unique`). Eqs. (4) to (6) and (8), the six
+properties, Propositions 2 (corrected) and 3, the Remark, footnote 14, both
+cases of Section 4 and steps (i) and (ii) of Proposition A1 are theorems. The
+coverage table in `CLAIMS.md` lists each result.
+
 ## What could not be reconstructed
 
-- The uniqueness argument of Proposition 1 and the refinement of
-  Proposition A1 are not formalised.
-- Proposition 3's expectation over `π` and the two crossings of `φ` are not
-  formalised. The derivative printed in the proof of Proposition 3 was checked
-  by hand against the image and agrees with the integrand.
+- Proposition 1's uniqueness is proved within strategies that are continuous
+  on `[y̲, ∞)` and differentiable above `y̲`. A separating equilibrium with a
+  non-differentiable spending function is not ruled out.
+- Proposition A1, steps (iii) to (v), and the proposition itself are not
+  formalised, because they need belief functions with jumps and the variant
+  of the intuitive criterion as objects.
+- In Section 4, the existence of the two fixed points of Figure 2 is proved,
+  but not that there are exactly two.
+- Footnote 15 concerns partially separating equilibria, which the record does
+  not define.
 - The model has no group and no matching, so nothing in it can be checked
   against A1's engagement rule.

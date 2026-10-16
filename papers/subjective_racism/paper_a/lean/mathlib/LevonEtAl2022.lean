@@ -79,4 +79,87 @@ theorem control_not_identified :
 theorem control_unweighted_not_24 : ((18 + 33 + 19) / 3 : ℝ) < 47 / 2 := by
   norm_num
 
+/-! ### Further printed numbers -/
+
+/-- Socio-economic grades (PDF p. 15). AB 22%, C1 31%, C2 21% and DE 26% make
+100%, so upper SEG (ABC1) is 53% and lower SEG (C2DE) 47% of the 2011
+population. -/
+theorem seg_shares : (22 + 31 + 21 + 26 : ℕ) = 100 ∧ (22 + 31 : ℕ) = 53 ∧ (21 + 26 : ℕ) = 47 := by
+  decide
+
+/-- "Almost a third of respondents overall reported some such experience in an
+institutional context" (PDF p. 17). The sample-weighted mean of 29%, 30% and
+25% is in `[27.5, 28.5)`, below a third. -/
+theorem institutional_overall :
+    let x : ℝ := (511 * 29 + 1029 * 30 + 1014 * 25) / (511 + 1029 + 1014)
+    55 / 2 ≤ x ∧ x < 57 / 2 ∧ x < 100 / 3 := by
+  norm_num
+
+/-- Mockery in social settings exceeds mockery in institutions at every life
+stage, 40 > 29, 47 > 30 and 46 > 25 (Figures 5 and 6). -/
+theorem social_exceeds_institutional :
+    agree 4 25 < agree 7 33 ∧ agree 8 22 < agree 12 35 ∧ agree 5 20 < agree 10 36 := by
+  decide
+
+/-- "Rates were marginally lower" in high-stakes contexts (PDF p. 17). For
+school students (26% against 29%) and professionals (8% against 25%) they are
+lower. For university students they are higher, 31% against 30%. -/
+theorem high_stakes_against_institutional :
+    (26 : ℕ) < 29 ∧ (8 : ℕ) < 25 ∧ (30 : ℕ) < 31 := by decide
+
+/-- Senior managers by parental grade (PDF p. 34). The class gap in social
+settings, 55 − 34, exceeds the gap in the workplace, 29 − 22. -/
+theorem senior_gap_social_exceeds_workplace : (29 - 22 : ℕ) < 55 - 34 := by decide
+
+/-! ### Modification and the accents heard in authority (PDF p. 7)
+
+"Encouraging employees to change their accents will maintain an
+over-representation of RP in contexts of authority." We read the share of RP
+heard among `nR` native RP speakers and `nO` others, of whom a share `m`
+modify to RP, as `(nR + m nO)/(nR + nO)`. -/
+
+/-- The share of RP heard. -/
+noncomputable def heardRP (nR nO m : ℝ) : ℝ := (nR + m * nO) / (nR + nO)
+
+/-- More modification raises the share of RP heard above the native share. -/
+theorem modification_raises_heard_RP {nR nO m m' : ℝ} (hR : 0 ≤ nR) (hO : 0 < nO)
+    (h : m < m') : heardRP nR nO m < heardRP nR nO m' := by
+  unfold heardRP
+  have : 0 < nR + nO := by linarith
+  rw [div_lt_div_iff_of_pos_right this]
+  nlinarith
+
+/-- Control: with no modification the share heard is the native share. -/
+theorem control_no_modification_native_share (nR nO : ℝ) :
+    heardRP nR nO 0 = nR / (nR + nO) := by
+  unfold heardRP; ring_nf
+
+/-! ### Accent strength (PDF pp. 13, 14)
+
+A strong MLE accent was the lowest-rated recording and a milder one was rated
+well. The sensitivity was weaker for Northern accents, "suggesting a penalty
+for not modifying certain accents". We read a rating as falling linearly in
+accent strength `s` with slope `β` for the accent. -/
+
+/-- A rating that falls in accent strength. -/
+def strengthRating (r0 β s : ℝ) : ℝ := r0 - β * s
+
+/-- The return to lowering strength by `Δ` is `β Δ`. -/
+theorem modification_return (r0 β s Δ : ℝ) :
+    strengthRating r0 β (s - Δ) - strengthRating r0 β s = β * Δ := by
+  unfold strengthRating; ring
+
+/-- A steeper slope, as for MLE against Northern accents, gives a larger
+return to the same modification. -/
+theorem steeper_slope_larger_return {r0 βN βM s Δ : ℝ} (hβ : βN < βM) (hΔ : 0 < Δ) :
+    strengthRating r0 βN (s - Δ) - strengthRating r0 βN s
+      < strengthRating r0 βM (s - Δ) - strengthRating r0 βM s := by
+  rw [modification_return, modification_return]
+  nlinarith
+
+/-- Control: with no sensitivity to strength, modification returns nothing. -/
+theorem control_flat_strength (r0 s Δ : ℝ) :
+    strengthRating r0 0 (s - Δ) - strengthRating r0 0 s = 0 := by
+  rw [modification_return]; ring
+
 end LevonEtAl2022

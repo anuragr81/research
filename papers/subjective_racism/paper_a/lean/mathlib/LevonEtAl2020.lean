@@ -106,4 +106,127 @@ theorem control_additive_accent_effect (f : Bool → ℝ) {β : ℝ} (hβ : β �
   simp
   exact hβ
 
+/-! ### The sample of the real-voice study (PDF pp. 11, 12)
+
+The nations add to the stated sample, and ten speakers, two per accent, give
+the ten clips each listener hears, two versions of each accent. -/
+
+/-- England 890, Wales 51, Scotland 90 and Northern Ireland 31 make 1062. -/
+theorem voices_sample : (890 + 51 + 90 + 31 : ℕ) = 1062 := by norm_num
+
+/-- Two native speakers of each of five accents make ten speakers, and two
+versions of each accent make the ten clips a listener hears. -/
+theorem voices_design : (2 * 5 : ℕ) = 10 := by norm_num
+
+/-! ### Expert content (PDF p. 19)
+
+"Expert content improves the judgement of all accents." We read an expert
+answer as one more likely from a competent speaker, a larger `p` at the same
+`q`. -/
+
+/-- An answer more likely from a competent speaker raises the rating at every
+prior strictly between 0 and 1, so it raises every accent's rating. -/
+theorem expert_raises_all {π p p' q : ℝ} (h0 : 0 < π) (h1 : π < 1) (hq : 0 < q)
+    (hp : 0 < p) (hpp : p < p') : post π p q < post π p' q := by
+  unfold post
+  have d1 : 0 < π * p + (1 - π) * q := by nlinarith
+  have d2 : 0 < π * p' + (1 - π) * q := by nlinarith
+  rw [div_lt_div_iff₀ d1 d2]
+  have : 0 < π * (1 - π) * q * (p' - p) := by
+    have : 0 < 1 - π := by linarith
+    have : 0 < p' - p := by linarith
+    positivity
+  nlinarith
+
+/-! ### Cognitive control (PDF pp. 20 to 24)
+
+The report's account of the lawyers, of listeners with high motivation to
+control a prejudiced response (MCPR) and of the awareness intervention is that
+a rater can attend to content rather than to the stereotype (PDF pp. 5, 23).
+We read a rating as a weighted mix, `γ` on content and `1 − γ` on the
+stereotype attached to the accent. -/
+
+/-- A rating with weight `γ` on content and `1 − γ` on the stereotype. -/
+def rating (γ stereo content : ℝ) : ℝ := γ * content + (1 - γ) * stereo
+
+/-- For an identical answer, the accent penalty is `(1 − γ)` times the gap in
+stereotypes. -/
+theorem rating_penalty (γ sR sA c : ℝ) :
+    rating γ sR c - rating γ sA c = (1 - γ) * (sR - sA) := by
+  unfold rating; ring
+
+/-- More attention to content gives a smaller penalty, the reading of the
+awareness intervention (PDF p. 23). -/
+theorem penalty_antitone_in_control {γ₁ γ₂ sR sA c : ℝ} (hs : sA < sR) (hγ : γ₁ < γ₂) :
+    rating γ₂ sR c - rating γ₂ sA c < rating γ₁ sR c - rating γ₁ sA c := by
+  rw [rating_penalty, rating_penalty]
+  nlinarith
+
+/-- Full attention to content gives no penalty, the lawyers' reading
+(PDF p. 22). -/
+theorem full_control_no_penalty (sR sA c : ℝ) :
+    rating 1 sR c - rating 1 sA c = 0 := by
+  rw [rating_penalty]; ring
+
+/-- Control: drop full attention to content. With a stereotype gap the penalty
+is positive at every `γ < 1`. -/
+theorem control_partial_control {γ sR sA c : ℝ} (hs : sA < sR) (hγ : γ < 1) :
+    0 < rating γ sR c - rating γ sA c := by
+  rw [rating_penalty]
+  have : 0 < 1 - γ := by linarith
+  have : 0 < sR - sA := by linarith
+  positivity
+
+/-! ### Life stage against cohort (PDF p. 18)
+
+Older listeners rate the accents lower. The authors read this as a life-stage
+effect rather than change over time, because Coupland and Bishop (2007) found
+the same age pattern. We read a cohort model as a rating that depends on the
+year of birth, `f (t − a)` in year `t` at age `a`, and a life-stage model as a
+rating `g a` that depends on age alone. -/
+
+/-- The cross-section by age in year `t` under a cohort model. -/
+def cohortSection (f : ℝ → ℝ) (t a : ℝ) : ℝ := f (t - a)
+
+/-- Under a cohort model the cross-section `d` years later is the earlier one
+shifted by `d` years of age. -/
+theorem cohort_shifts (f : ℝ → ℝ) (t d a : ℝ) :
+    cohortSection f (t + d) a = cohortSection f t (a - d) := by
+  unfold cohortSection; ring_nf
+
+/-- Under a cohort model with a strictly monotone profile, two cross-sections
+`d ≠ 0` years apart differ at every age, so the same age pattern in both
+surveys rules the model out. -/
+theorem cohort_sections_differ {f : ℝ → ℝ} (hf : StrictMono f) {d : ℝ} (hd : d ≠ 0)
+    (t a : ℝ) : cohortSection f (t + d) a ≠ cohortSection f t a := by
+  unfold cohortSection
+  intro h
+  have := hf.injective h
+  apply hd; linarith
+
+/-- Control: drop the strict monotonicity. A flat cohort profile gives the
+same cross-section in every year, so the inference needs a profile that varies
+across cohorts. -/
+theorem control_flat_cohort (k t d a : ℝ) :
+    cohortSection (fun _ => k) (t + d) a = cohortSection (fun _ => k) t a := rfl
+
+/-! ### RP likeability among lawyers (PDF p. 22)
+
+One reading the authors offer for the lawyers' marginally lower likeability of
+RP is "a higher expectation of quality answers for RP speakers". We read this
+as a rating relative to the expectation attached to the accent. -/
+
+/-- A rating of an answer of quality `s` relative to the expectation `E`. -/
+def relRating (s E : ℝ) : ℝ := s - E
+
+/-- A higher expectation for RP rates the same answer lower in RP. -/
+theorem higher_expectation_lower_rating {s ER EA : ℝ} (h : EA < ER) :
+    relRating s ER < relRating s EA := by
+  unfold relRating; linarith
+
+/-- Control: drop the gap in expectations. With equal expectations the same
+answer is not rated lower in RP. -/
+theorem control_equal_expectation (s E : ℝ) : ¬ relRating s E < relRating s E :=
+  lt_irrefl _
+
 end LevonEtAl2020

@@ -100,31 +100,46 @@ Than Lakisha and Jamal? A Field Experiment on Labor Market Discrimination",
 
 ## What is formalised, and from what
 
-`lean/mathlib/BertrandMullainathan2004.lean`.
+`lean/mathlib/BertrandMullainathan2004.lean`. The table "Coverage of the
+source's results" in `CLAIMS.md` lists every table and every model the paper
+reasons with.
 
-- The arithmetic of Tables 1 and 4 (`table1_gap`, `table4_returns`).
+- The arithmetic of every row of Table 1, every cell of Tables 2 and 4, the
+  resume counts of Tables 1 and 3, and the numbers in the text that follow from
+  them (`table1_gap`, `table1_rows`, `table1_counts`, `ads_per_callback`,
+  `table2_counts`, `table4_all`, `table6_college`). Two printed values of
+  Table 1 disagree with the rates (BM-D9).
+- Table 2's classification of ads (`classify`, `table2_classes`).
 - Two Spearman correlations of Table 8 from its printed ranks
   (`table8_aa_male` = −25/42, `table8_aa_female` = −23/60, BM-D2).
-- **Our reading** of the Table 8 test. A callback strictly increasing in the
-  class a name conveys gives a positive concordance with mother's education
-  (`background_concordant`). Under group sufficiency the callback is constant
-  within a group and the concordance is zero
-  (`control_group_sufficiency_zero`). Table 8 rejects a strictly increasing map
-  for African-American males (`table8_rejects_monotone`).
-- **Our reading** of the Table 6 test, in a linear predictor of class from group
-  and address that the paper does not state. With a common weight on the
-  address the group gap is the same at every address (`gap_indep_address`). It
-  is zero when the address shows class fully (`gap_vanishes_class_shown`), and
-  moves with the address only when the weights differ by group
-  (`control_unequal_weights_gap_moves`).
+- Section IV.A, that a race-blind rule with randomised names treats the groups
+  equally (`race_blind_equal`, `control_race_used`).
+- Section IV.C, the four models the paper weighs against its findings. Employer
+  taste (`taste_gap_region`), statistical discrimination after Phelps and Arrow
+  and after Aigner and Cain (`phelps_larger_update`,
+  `aigner_cain_smaller_update`), and lexicographic search
+  (`lexicographic_zero_return`).
+- **Our reading** of the Table 8 test (`background_concordant`,
+  `control_group_sufficiency_zero`, `table8_rejects_monotone`) and of the
+  Table 6 test in a linear predictor of class that the paper does not state
+  (`gap_indep_address`, `gap_vanishes_class_shown`,
+  `control_unequal_weights_gap_moves`).
 
 ## What could not be reconstructed
 
-- The probit estimates and their standard errors, from data not available.
-- The White female and White male correlations of Table 8 are not formalised.
-  Both involve ties, and the reproduction of the printed values depends on how
-  ties are ranked (BM-D2).
-- The unpublished appendix on occupation and industry gaps (p. 1005), which is
-  not in the article.
-- Fryer and Levitt (2003) on names and background, and Mullainathan (2003) on
-  categories, are cited by the paper and not read.
+- The probit estimates of Tables 5 to 7, the tests of proportions and the
+  symmetry test of Table 2, the means of Table 3, Table A1 and the "Average"
+  and "Overall" rows of Table 8. They come from data that are not available,
+  and the Table 8 averages are weighted by births whose numbers are not
+  printed.
+- The prediction procedure of Table 4, Panel B.
+- The White female and White male correlations of Table 8. Both involve ties,
+  and the reproduction of the printed values depends on how ties are ranked
+  (BM-D2).
+- The verbal arguments of Sections IV.A to IV.C on target racial mixes,
+  familiarity, reverse discrimination, and customer and co-worker tastes.
+- The four models of Section IV.C are formalised only in special cases, a
+  deterministic threshold for taste and normal signal extraction for the two
+  statistical models.
+- The unpublished appendix on occupation and industry gaps (p. 1005), Fryer and
+  Levitt (2003) on names and background, and Mullainathan (2003) on categories.

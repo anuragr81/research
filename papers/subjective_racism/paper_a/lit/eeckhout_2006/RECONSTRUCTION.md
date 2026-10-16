@@ -46,20 +46,26 @@ Studies* 73(1), January 2006, pp. 31–53.
 
 - **Incubation** (PDF pp. 5 to 6). Playing `(D, D)` in the first period and
   `(C, C)` after gives `v_I = δ`, and it is an equilibrium when `g ≤ δ`, eq.
-  (2). Formalised as `incubation_ic`.
+  (2). Formalised as `incubation_value`, `incubation_ic`, and for `k`
+  periods (footnote 13) as `k_incubation_ic`.
 - **Constrained efficiency** (PDF p. 6). No deviation in the cooperation
-  phase needs `v(s) ≤ V̄ = 1 − g(1 − δ)/δ`, eq. (3).
+  phase needs `v(s) ≤ V̄ = 1 − g(1 − δ)/δ`, eq. (3). Formalised as `eq3`.
 - **Proposition 1** (PDF p. 7, proof PDF pp. 17 to 19). Generically the best
   colour-blind equilibrium has `v(s*) < V̄`. The proof reduces constrained
   efficiency with interior mixing to the polynomial condition (A.5) and
-  argues it fails off a lower-dimensional set. Not formalised.
+  argues it fails off a lower-dimensional set. Lemma A1 (continuation
+  probabilities are 0 or 1), Lemma A2 (`σ = 1` is not an equilibrium), the
+  case `σ = 0` and the formula for interior `σ` are formalised as
+  `lemmaA1`, `lemmaA2`, `prop1_incubation` and `sigma_interior`. The
+  genericity step is not.
 - **Proposition 2** (PDF p. 10, proof PDF pp. 19 to 20). With symmetric
   shares some segregation strategy Pareto dominates `s*`. In the incubation
   case, cooperating at once in a same-colour match gives
   `v(s^S) = π + (1 − π)δ > δ`, and the incentive constraint holds when
   `π ≤ 1 − g/δ`. Formalised as `prop2_incubation_pareto` and
-  `prop2_incubation_ic`. The interior-mixing case uses the implicit
-  function theorem and is not formalised.
+  `prop2_incubation_ic`, and for any `v(s*) < 1` as `inclusive_pareto`.
+  The interior-mixing case uses the implicit function theorem and is not
+  formalised.
 - **Proposition 3** (PDF p. 13, proof PDF p. 21). With shares other than
   one half, symmetric type-dependent strategies are constrained
   inefficient. The step is `(1 − 2Π)(v(s_i) − v(s_{−i})) = 0`. Formalised
@@ -67,7 +73,8 @@ Studies* 73(1), January 2006, pp. 31–53.
 - **Proposition 4** (PDF p. 14, proof PDF p. 21). Minority bias, eqs. (4)
   and (5), raises aggregate welfare over symmetric segregation when
   `π > 1/(2 + g − l)`, subject to (A.10) and (A.11). Formalised as
-  `prop4_identity`, `prop4_welfare`, `eqA10` and `eqA11`.
+  `prop4`, `prop4_identity`, `prop4_welfare`, `eqA10`, `eqA11` and
+  `minority_bias_vb_gt_vw`.
 - **Exclusive segregation** (PDF pp. 14 to 15, derivation PDF p. 22).
   Cooperate forever with one's own colour and defect and rematch otherwise.
   The white share among singles `Π` solves
@@ -76,14 +83,34 @@ Studies* 73(1), January 2006, pp. 31–53.
   when `Π < Π_0 = 1 − g/((1 + g)δ)`, and the minority does worse than under
   incubation when `Π > Π_1 = 1/(1 + δ)`. The interval is non-empty when
   `g < δ²/(1 + δ − δ²)`. Formalised as `singles_quadratic`, `singles_root`,
-  `majority_ic`, `minority_worse` and `interval_nonempty`.
+  `majority_ic`, `minority_worse` and `interval_nonempty`. The bounds
+  `1/2 < Π < π` and the dominance of inclusive over exclusive segregation
+  for the majority are `singles_share_bounds` and
+  `exclusive_below_inclusive`.
+- **Exogenous randomisation** (PDF pp. 15 to 16). Cooperating below a
+  threshold `q̄` of a uniform draw meets the constraint when
+  `q̄ ≤ 1 − g/((1 + g)δ)`. Formalised as `public_randomization`.
+- **Numbers** (PDF pp. 7, 8, 11, 12). `V̄ = 0·875`, the `l = 0·5` example
+  (`σ = 0·3545`, `v(s*) = 0·8063`) and the `l = 1` row of Table 2 are
+  formalised as `Vbar_example`, `example_l05`, `example_l05_numbers`,
+  `table2_l1` and `table2_discrepancy`.
 
 ## What could not be reconstructed
 
-- Proposition 1 and the interior case of Proposition 2 are genericity and
-  implicit-function arguments. They are read and not checked. Tables 1 and
-  2 are numerical and not recomputed.
-- The claim on PDF p. 15 that `π ≥ Π ≥ 1/2` is read and not formalised.
-- The model has no heterogeneity beyond colour. The author names
+The coverage table in `CLAIMS.md` lists every numbered result. The gaps are
+these.
+
+- **Proposition 1, the genericity step.** (A.4) and (A.5) reduce constrained
+  efficiency to a polynomial condition, and the claim that its zero set is
+  nowhere dense is not formalised.
+- **Proposition 2, the interior case.** The implicit-function argument on
+  (A.6) and (A.7), with signs the paper calls generic, is not formalised.
+- **Tables 1 and 2.** Only the `l = 0·5` example of Table 1 and the `l = 1`
+  row of Table 2 are recomputed. One entry of that row disagrees with its
+  formula (EE-D8).
+- **Age-dependent strategies.** The stationary measures (A.8) and (A.9), the
+  value `0·8238` and §4.1.2 are not formalised.
+- **`Π` increasing in `π`** (§4.2.3) is not formalised.
+- **Heterogeneity.** The model has none beyond colour. The author names
   heterogeneity as in Burdett and Coles (1997) as an extension (EE-Q14).
   Burdett and Coles (1997) is not read.

@@ -94,9 +94,22 @@ Two-Sided Statistical Discrimination", NBER Working Paper 23811, September
 
 ## What could not be reconstructed
 
-- Propositions 1 to 10 in general. Only the posterior and threshold rule, the
-  independence of the match gain from one's own investment, and the Section
-  3.1 example are formalised. The example is a special case, and the general
-  existence argument is not formalised.
-- The stability analysis of Section 3.F and the wage-regression algebra of
-  Section 6 and Proposition 10 are read but not checked.
+The coverage table in `CLAIMS.md` lists every numbered result and every
+displayed claim the paper relies on. Of its 35 rows, 14 are formalised in the
+source's generality, 7 as special cases and 14 not at all. What is missing is
+this.
+- The monotonicity of the largest solutions `π̄*(δ)` and `δ̄*(π)` in
+  Proposition 1. The multiplicity step is formalised given that monotonicity.
+- The stability condition of the linearised system. Stability is formalised
+  for the uniform example only.
+- The definitions of equilibrium under affirmative action and under a quota,
+  the Lemma, Propositions 5 and 9 and Note 1, which rest on limits and
+  constructions stated with `≈` or by example.
+- The first steps of Propositions 4, 6, 7 and 8. Their final steps are
+  formalised.
+- The log-normal updating behind the wage equation of Section 6, the step from
+  the regression to its probability limit in Proposition 10, and the
+  Lang and Lehmann implication.
+- The appendix extensions beyond the normalisation, the example's returns, the
+  absence of homogeneous equilibria with wages equal to marginal product, and
+  eq. (11).

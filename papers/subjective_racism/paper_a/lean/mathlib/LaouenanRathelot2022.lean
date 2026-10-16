@@ -291,4 +291,246 @@ theorem control_printed_p0 {κ αt c : ℝ} (hκ : 1 < κ) (hα0 : 0 < αt) (hc 
     linarith
   · linarith [hpos]
 
+/-! ### The estimating equations as specifications
+
+Each specification is the conditional mean of `p_it` (or of another outcome),
+with listing effect `μ` and `X β_x` collapsed into the scalars `μ` and `xb`.
+`βr` is the coefficient on `1{r̄_i = r̄} f(K)` for the listing's rating bin. -/
+
+/-- Eq. (3). -/
+def eq3 (βr βm m fK μ xb : ℝ) : ℝ := βr * fK - βm * m * fK + μ + xb
+
+/-- Eq. (4). -/
+def eq4 (βk βtm m fK μ xb : ℝ) : ℝ := βk * fK - βtm * m * fK + μ + xb
+
+/-- Eq. (5), with `K` linear and quadratic. -/
+def eq5 (βr1 βr2 βm1 βm2 m K μ xb : ℝ) : ℝ :=
+  (βr1 * K + βr2 * K ^ 2) - m * (βm1 * K + βm2 * K ^ 2) + μ + xb
+
+/-- Eqs. (7), (8) and (9) share one form, with `b_r` and `b_m` in place of
+`β_r` and `β_m`. -/
+def eq789 (br bm m fK μ xb : ℝ) : ℝ := br * fK - bm * m * fK + μ + xb
+
+/-- Predictions 0 and 1 (PDF pp. 12–13). With guests' prior `ν̄₀ + m(ν̃₁ − ν̄₀)`
+and the signal `r` taken as known (the paper proxies it by the last rating),
+eq. (2) is eq. (3) with `βr = λβ(r − ν̄₀)`, `βm = λβ(ν̃₁ − ν̄₀)` and the
+time-invariant terms in `μ`. -/
+theorem model_is_eq3 {p0 lam γ α w β ζ m K ρ r νt1 ν0 : ℝ} (h : K + ρ ≠ 0) :
+    price p0 lam γ α w β ζ m K ρ r (ν0 + m * (νt1 - ν0))
+      = eq3 (lam * β * (r - ν0)) (betaM lam β νt1 ν0) m (f K ρ)
+          (p0 - lam * γ * m + lam * α * w + lam * β * ζ + lam * β * (ν0 + m * (νt1 - ν0))) 0 := by
+  unfold price eq3 betaM
+  rw [postMean_eq _ _ h]
+  ring
+
+/-- Prediction 2 (PDF p. 13). With `r` at its group's true mean `ν̄₀ + m(ν̄₁ − ν̄₀)`,
+eq. (2) is eq. (4) with `βk = 0` and `β̃m = λβ(ν̃₁ − ν̄₁)`. The paper's `βk f(K)`
+picks up the average drift of `r` across listings, which this deterministic
+reading sets to zero. -/
+theorem model_is_eq4 {p0 lam γ α w β ζ m K ρ νt1 ν1 ν0 : ℝ} (h : K + ρ ≠ 0) :
+    price p0 lam γ α w β ζ m K ρ (ν0 + m * (ν1 - ν0)) (ν0 + m * (νt1 - ν0))
+      = eq4 0 (betaTildeM lam β νt1 ν1) m (f K ρ)
+          (p0 - lam * γ * m + lam * α * w + lam * β * ζ + lam * β * (ν0 + m * (νt1 - ν0))) 0 := by
+  unfold price eq4 betaTildeM
+  rw [postMean_eq _ _ h]
+  ring
+
+/-! ### Normal learning as precision weighting (PDF pp. 11–12)
+
+The paper states the posterior mean of `ν` after `K` reviews. Under normal
+learning it is the precision-weighted average of the prior mean and the review
+average. The conjugacy of the normal prior and normal signals is taken as
+given (Mathlib has no Gaussian conjugacy); what is checked is that the
+precision-weighted mean is the paper's `(K r + ρ ν̄_m)/(K + ρ)` with
+`ρ = σ²/σ_ν²`. -/
+
+theorem precision_weighted {σ2 σν2 K : ℝ} (r νbar : ℝ) (hσ : 0 < σ2) (hν : 0 < σν2)
+    (hK : 0 ≤ K) :
+    (νbar / σν2 + K * r / σ2) / (1 / σν2 + K / σ2) = postMean K (σ2 / σν2) r νbar := by
+  unfold postMean
+  have h1 : 0 < 1 / σν2 + K / σ2 := by positivity
+  have h2 : 0 < K + σ2 / σν2 := by positivity
+  field_simp
+  ring
+
+/-- `f(K) = K/(K + ρ)` rises strictly in `K`. -/
+theorem f_strictMonoOn {ρ : ℝ} (hρ : 0 < ρ) : StrictMonoOn (fun K => f K ρ) (Set.Ici 0) := by
+  intro x hx y hy hxy
+  simp only [Set.mem_Ici] at hx hy
+  unfold f
+  rw [div_lt_div_iff₀ (by linarith) (by linarith)]
+  nlinarith
+
+/-- PDF p. 122. `f` is concave on `K ≥ 0`, which is why the quadratic term on
+`K` in eq. (5) should be negative, `βm,2 < 0`. -/
+theorem f_concaveOn {ρ : ℝ} (hρ : 0 < ρ) : ConcaveOn ℝ (Set.Ici 0) (fun K => f K ρ) := by
+  refine ⟨convex_Ici 0, ?_⟩
+  intro x hx y hy a b ha hb hab
+  simp only [Set.mem_Ici] at hx hy
+  simp only [smul_eq_mul]
+  unfold f
+  have hb' : b = 1 - a := by linarith
+  subst hb'
+  have hx' : 0 < x + ρ := by linarith
+  have hy' : 0 < y + ρ := by linarith
+  have hz : 0 < a * x + (1 - a) * y + ρ := by nlinarith
+  rw [← mul_div_assoc, ← mul_div_assoc, div_add_div _ _ hx'.ne' hy'.ne',
+    div_le_div_iff₀ (by positivity) hz]
+  nlinarith [mul_nonneg (mul_nonneg (mul_nonneg ha hb) hρ.le) (sq_nonneg (x - y))]
+
+/-- `ρ` is identified from any listing with reviews. If `K/(K + ρ) = K/(K + ρ')`
+at some `K > 0`, then `ρ = ρ'`. -/
+theorem rho_identified {K ρ ρ' : ℝ} (hK : 0 < K) (hρ : 0 < ρ) (hρ' : 0 < ρ')
+    (h : f K ρ = f K ρ') : ρ = ρ' := by
+  unfold f at h
+  rw [div_eq_div_iff (by linarith) (by linarith)] at h
+  have : K * (ρ' - ρ) = 0 := by linarith
+  rcases mul_eq_zero.mp this with h1 | h1
+  · linarith
+  · linarith
+
+/-- Control: at `K = 0` every `ρ` gives the same `f`, so listings without
+reviews say nothing about `ρ`. -/
+theorem control_rho_needs_reviews (ρ ρ' : ℝ) : f 0 ρ = f 0 ρ' := by
+  unfold f; simp
+
+/-! ### The identifying condition of Section III.A
+
+"Conditional on listing fixed effects and `X_it`, the variability in prices
+over time does not come from variations in features `ζ` or the outside option
+`w`" (PDF p. 12). Under it the change in a listing's price between two dates is
+`λβ` times the change in the guests' expected `ν`, whatever `p₀`, `γ`, `α`,
+`w`, `ζ` and `m`. -/
+
+theorem within_listing_difference (p0 lam γ α w β ζ m K1 K2 ρ r1 r2 νbar : ℝ) :
+    price p0 lam γ α w β ζ m K1 ρ r1 νbar - price p0 lam γ α w β ζ m K2 ρ r2 νbar
+      = lam * β * (postMean K1 ρ r1 νbar - postMean K2 ρ r2 νbar) := by
+  unfold price; ring
+
+/-- Control: if `ζ` moves between the dates, the within-listing change picks up
+`λβ (ζ₁ − ζ₂)` as well, and the slope in reviews no longer isolates the
+statistical term. -/
+theorem control_zeta_varies {p0 lam γ α w β ζ1 ζ2 m K1 K2 ρ r1 r2 νbar : ℝ}
+    (hlb : lam * β ≠ 0) (hζ : ζ1 ≠ ζ2) :
+    price p0 lam γ α w β ζ1 m K1 ρ r1 νbar - price p0 lam γ α w β ζ2 m K2 ρ r2 νbar
+      ≠ lam * β * (postMean K1 ρ r1 νbar - postMean K2 ρ r2 νbar) := by
+  unfold price
+  intro h
+  have : lam * β * (ζ1 - ζ2) = 0 := by linarith
+  rcases mul_eq_zero.mp this with h1 | h1
+  · exact hlb h1
+  · exact hζ (by linarith)
+
+/-! ### Section IV.E. The rating of the new reviews (PDF p. 126)
+
+`r̃_it = (r̄_it K_it − r̄_i,t−1 K_i,t−1)/(K_it − K_i,t−1)`. With `S_t` the sum of
+all ratings at `t`, so that `r̄_t = S_t/K_t`, this is the average of the reviews
+that arrived between `t − 1` and `t`. -/
+
+theorem new_reviews_average {Kt Ks St Ss : ℝ} (hKt : Kt ≠ 0) (hKs : Ks ≠ 0) :
+    ((St / Kt) * Kt - (Ss / Ks) * Ks) / (Kt - Ks) = (St - Ss) / (Kt - Ks) := by
+  rw [div_mul_cancel₀ _ hKt, div_mul_cancel₀ _ hKs]
+
+/-! ### Section IV.G. Eq. (9) (PDF pp. 128–129)
+
+In eq. (9) the minority term is `−bm m f(K)`. A minority listing's expected
+flow of new reviews at `K = 0` exceeds its flow as `K → ∞` (where `f → 1`) by
+`bm`. Table 10 gives `−bm = −0.018`, the "0.02 more reviews". -/
+
+theorem table10_initial_difference (bm : ℝ) : (-(bm * 1 * 0)) - (-(bm * 1 * 1)) = bm := by
+  ring
+
+/-! ### Numbers that follow from printed numbers -/
+
+/-- Table 1 (PDF p. 8). The five groups sum to the 2,474,551 observations of
+Tables 2 and 4, and so do the five subsamples of Table 3 (PDF p. 10). The
+minority share is 6.2 percent and the majority share 93.8 percent. -/
+theorem sample_sizes :
+    (2320285 + 49706 + 21365 + 31145 + 52050 : ℚ) = 2474551 ∧
+      (351631 + 808000 + 789798 + 352906 + 172216 : ℚ) = 2474551 ∧
+      (615 / 10000 : ℚ) < (49706 + 21365 + 31145 + 52050) / 2474551 ∧
+      ((49706 + 21365 + 31145 + 52050) / 2474551 : ℚ) < 625 / 10000 ∧
+      (9375 / 10000 : ℚ) < 2320285 / 2474551 ∧ (2320285 / 2474551 : ℚ) < 9385 / 10000 := by
+  norm_num
+
+/-- PDF pp. 3 and 9. The raw gap of −0.169 log points is a price ratio of
+`exp(−0.169)`, a gap between 15 and 16 percent, which the text rounds to
+"around 16 percent" on PDF p. 3 and reports as "17 percent" on PDF p. 9 by
+reading log points as percent (LR-D8). -/
+theorem raw_gap_percent :
+    (15 / 100 : ℝ) < 1 - Real.exp (-(169 / 1000)) ∧ 1 - Real.exp (-(169 / 1000)) < 16 / 100 := by
+  have hx0 : (0 : ℝ) ≤ 169 / 1000 := by norm_num
+  have lo := Real.quadratic_le_exp_of_nonneg hx0
+  have hi := Real.exp_bound' hx0 (by norm_num : (169 / 1000 : ℝ) ≤ 1) (by norm_num : 0 < 3)
+  simp [Finset.sum_range_succ, Nat.factorial] at hi
+  have hpos := Real.exp_pos (169 / 1000 : ℝ)
+  rw [Real.exp_neg]
+  constructor
+  · rw [lt_sub_iff_add_lt, ← lt_sub_iff_add_lt', inv_lt_comm₀ hpos (by norm_num)]
+    norm_num at hi ⊢
+    linarith
+  · rw [sub_lt_iff_lt_add, ← sub_lt_iff_lt_add', lt_inv_comm₀ (by norm_num) hpos]
+    norm_num at lo ⊢
+    linarith
+
+/-- PDF p. 10. A 3.2 percent gap on an average price of $136 is $4.35, which
+the text rounds to $4.4, and it is 16.7 percent of the $26 surplus, "a 17
+percent ethnic differential in surplus". -/
+theorem surplus_numbers :
+    (32 / 1000 : ℚ) * 136 = 4352 / 1000 ∧
+      (165 / 1000 : ℚ) < 4352 / 1000 / 26 ∧ (4352 / 1000 / 26 : ℚ) < 175 / 1000 := by
+  norm_num
+
+/-- PDF p. 14 and footnote 23. `3.4 − 2.5 = 0.9`; `2.5/3.4` is about
+three-quarters and `0.9/3.4` about one quarter; and the point estimate 0.009 of
+`βm − β̃m` lies in its interval `[0.006, 0.010]`. -/
+theorem decomposition_numbers :
+    (34 / 10 : ℚ) - 25 / 10 = 9 / 10 ∧
+      (73 / 100 : ℚ) < (25 / 10) / (34 / 10) ∧ ((25 / 10) / (34 / 10) : ℚ) < 74 / 100 ∧
+      (26 / 100 : ℚ) < (9 / 10) / (34 / 10) ∧ ((9 / 10) / (34 / 10) : ℚ) < 27 / 100 ∧
+      (6 / 1000 : ℚ) ≤ 9 / 1000 ∧ (9 / 1000 : ℚ) ≤ 10 / 1000 := by
+  norm_num
+
+/-- PDF p. 18, Table 6. `ρ` is 22 for shared flats and 12 for entire flats,
+"roughly twice larger". -/
+theorem shared_flat_rho : (18 / 10 : ℚ) < 22 / 12 ∧ (22 / 12 : ℚ) < 19 / 10 := by norm_num
+
+/-! ### Our extension, not in the source: concealing the marker
+
+The conclusion (PDF p. 24) weighs concealing identity against disclosing more
+information. The source does not model concealment. Within its posterior, a
+hidden `m` replaces the group prior by the pooled prior `s ν̄₁ + (1 − s) ν̄₀`,
+where `s` is the minority share, and a visible proxy `ℓ` (location, say)
+replaces it by `π_ℓ ν̄₁ + (1 − π_ℓ) ν̄₀`, with `π_ℓ` the minority share among
+listings with that proxy. These three theorems are ours. -/
+
+/-- The prior given a proxy whose minority share is `π`. -/
+def proxyPrior (π ν1 ν0 : ℝ) : ℝ := π * ν1 + (1 - π) * ν0
+
+/-- Ours. Two listings of the same quality with proxy shares `π₁`, `π₀` differ
+in price by `λβ (π₁ − π₀)(ν̄₁ − ν̄₀) ρ/(K + ρ)` when `m` is hidden. -/
+theorem proxy_gap {p0 lam α w β ζ K ρ r π1 π0 ν1 ν0 : ℝ} (h : K + ρ ≠ 0) :
+    price p0 lam 0 α w β ζ 0 K ρ r (proxyPrior π1 ν1 ν0)
+        - price p0 lam 0 α w β ζ 0 K ρ r (proxyPrior π0 ν1 ν0)
+      = lam * β * (π1 - π0) * (ν1 - ν0) * (ρ / (K + ρ)) := by
+  unfold price postMean proxyPrior
+  field_simp
+  ring
+
+/-- Ours. A proxy that separates the groups perfectly restores the whole
+statistical gap of `gap_same_quality` at `γ = 0`. -/
+theorem perfect_proxy_restores_gap {p0 lam α w β ζ K ρ r ν1 ν0 : ℝ} (h : K + ρ ≠ 0) :
+    price p0 lam 0 α w β ζ 0 K ρ r (proxyPrior 1 ν1 ν0)
+        - price p0 lam 0 α w β ζ 0 K ρ r (proxyPrior 0 ν1 ν0)
+      = price p0 lam 0 α w β ζ 1 K ρ r ν1 - price p0 lam 0 α w β ζ 0 K ρ r ν0 := by
+  rw [proxy_gap h, gap_same_quality h]
+  ring
+
+/-- Ours. Control: an uninformative proxy, `π₁ = π₀`, leaves no gap. -/
+theorem control_uninformative_proxy {p0 lam α w β ζ K ρ r π1 π0 ν1 ν0 : ℝ} (h : K + ρ ≠ 0)
+    (hπ : π1 = π0) :
+    price p0 lam 0 α w β ζ 0 K ρ r (proxyPrior π1 ν1 ν0)
+        - price p0 lam 0 α w β ζ 0 K ρ r (proxyPrior π0 ν1 ν0) = 0 := by
+  rw [proxy_gap h, hπ]; ring
+
 end LaouenanRathelot2022

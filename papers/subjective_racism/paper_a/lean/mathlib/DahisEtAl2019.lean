@@ -201,4 +201,166 @@ theorem control_no_selection {s m ms : ℝ} (hs1 : s < 1)
   have : (1 - s) ≠ 0 := by linarith
   exact mul_left_cancel₀ this h
 
+/-! ### The conditions for a false pass (Section 4, PDF p. 16)
+
+The paper says the 2SUP link overstates passing only if three conditions hold
+for the black man `i` of year `t`: (1) no black man of `t + 10` can be linked to
+him, (2) exactly one white man of `t + 10` can, and (3) that white man links
+back only to `i`. A recorded 2SUP pass to a white record implies all three. -/
+
+/-- Section 4. A 2SUP link from `i` to a white record `j` has no black
+candidate (condition 1), `j` as its only candidate (condition 2), and `i` as
+the only backward candidate of `j` (condition 3). -/
+theorem false_pass_conditions {α β : Type*} {cand : α → β → Prop} {black : β → Prop}
+    {i : α} {j : β} (h : twoSided cand i j) (hw : ¬ black j) :
+    (∀ j', cand i j' → ¬ black j') ∧ (∀ j', cand i j' → j' = j) ∧
+      (∀ i', cand i' j → i' = i) := by
+  refine ⟨fun j' hj' hb => hw ?_, h.1.2, h.2⟩
+  rwa [← h.1.2 j' hj']
+
+/-- Control for condition 2. A record with two candidates in `t + 10` has no
+one-sided link at all, so it cannot be recorded as passing. -/
+theorem control_two_candidates {α β : Type*} {cand : α → β → Prop} {i : α} {j₁ j₂ : β}
+    (h₁ : cand i j₁) (h₂ : cand i j₂) (hne : j₁ ≠ j₂) : ∀ j, ¬ oneSided cand i j := by
+  intro j hj
+  exact hne ((hj.2 j₁ h₁).trans (hj.2 j₂ h₂).symm)
+
+/-! ### The estimating models of Tables 7 and 8
+
+Both are linear in the regressor of interest, a linear probability model for
+passing (Table 7) and a linear model of the occupational score (Table 8). With
+the other regressors fixed, the prediction moves by the coefficient times the
+change in the regressor. -/
+
+/-- A linear specification with coefficient `b` on the regressor `x` and the
+rest of the index `r`. -/
+def lin (b x r : ℝ) : ℝ := b * x + r
+
+/-- The change in the prediction when the regressor moves from `x` to `x'`. -/
+theorem lin_change (b x x' r : ℝ) : lin b x' r - lin b x r = b * (x' - x) := by
+  unfold lin; ring
+
+/-- Table 7, column 5, read as in DNQ-D3. Doubling a share `x` moves the
+linear probability by `0.345 x`, which is `0.345` only at `x = 1`. -/
+theorem doubling_share (x r : ℝ) :
+    lin (345 / 1000) (2 * x) r - lin (345 / 1000) x r = 345 / 1000 * x := by
+  unfold lin; ring
+
+/-- Control for DNQ-D3. At an immigrant share of 0.1, doubling moves the
+probability by 3.45 points, not 34.5. -/
+theorem control_doubling_not_unit (r : ℝ) :
+    lin (345 / 1000) (2 * (1 / 10)) r - lin (345 / 1000) (1 / 10) r ≠ 345 / 1000 := by
+  rw [doubling_share]; norm_num
+
+/-- Table 7, column 1. Legal intermarriage goes with 31.9 percentage points
+less passing, the coefficient on a dummy in a linear probability model. -/
+theorem miscegenation_points (r : ℝ) : lin (-319 / 1000) 1 r - lin (-319 / 1000) 0 r = -319 / 1000 := by
+  unfold lin; ring
+
+/-! ### Appendix F. Post-stratification and probit weights -/
+
+section Weights
+
+variable {K : Type*} [Fintype K]
+
+/-- Footnote 95. With population shares `pop k` and linked-sample shares
+`smp k` over cells `k`, the post-stratified rate weights each linked man by
+`pop k / smp k`. Summed over a cell of linked share `smp k` and pass rate
+`r k`, it is the population-share-weighted mean of the cell rates. -/
+theorem post_stratified (pop smp r : K → ℝ) (h : ∀ k, smp k ≠ 0) :
+    ∑ k, smp k * (pop k / smp k) * r k = ∑ k, pop k * r k := by
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  field_simp [h k]
+
+/-- Appendix F, selection on observables (DNQ-Q13). If the unlinked of each
+cell pass at the linked rate, the post-stratified rate is the population rate.
+`ℓ k` is the linked fraction of cell `k` and `u k` the unlinked rate. -/
+theorem post_stratified_eq_pop (pop ℓ r u : K → ℝ) (hu : ∀ k, u k = r k) :
+    ∑ k, pop k * r k = ∑ k, pop k * (ℓ k * r k + (1 - ℓ k) * u k) := by
+  refine Finset.sum_congr rfl (fun k _ => ?_)
+  rw [hu k]; ring
+
+/-- Control. If the unlinked of a cell pass at a different rate, the cell's
+population rate differs from its linked rate. -/
+theorem control_selection_unobservables {ℓ r u : ℝ} (hℓ : ℓ < 1) (hu : u ≠ r) :
+    ℓ * r + (1 - ℓ) * u ≠ r := by
+  intro h
+  apply hu
+  have h1 : (1 - ℓ) * (u - r) = 0 := by linarith
+  rcases mul_eq_zero.1 h1 with h2 | h2
+  · exact absurd h2 (by linarith)
+  · linarith
+
+/-- Footnote 97. The probit weight of a linked man with link propensity `P`,
+when a share `q` of records is linked. -/
+noncomputable def probitWeight (P q : ℝ) : ℝ := (1 - P) / P * (q / (1 - q))
+
+/-- Footnote 97, read. In a cell of mass `N` and propensity `P`, the weighted
+mass of the linked, `N P` times the weight, is the unlinked mass `N (1 − P)`
+times the constant `q/(1 − q)`. The weights give the linked sample the
+distribution of the unlinked over cells (DNQ-D13). -/
+theorem probit_weighted_mass {N P q : ℝ} (hP : P ≠ 0) :
+    N * P * probitWeight P q = N * (1 - P) * (q / (1 - q)) := by
+  unfold probitWeight
+  field_simp
+
+end Weights
+
+/-! ### Numbers in the text that follow from printed numbers -/
+
+/-- Section 2.3, the genetic exercise. With European-Americans 72.4% and
+African-Americans 12.6% of the population, a share `p` of European-Americans
+with African ancestry is `p × 72.4/12.6` of today's black population. The
+paper's 20%, 57.4%, 4.6% and 49.6% follow from `p` = 3.5%, 10%, 0.8% and 8.63%. -/
+noncomputable def geneticRate (p : ℝ) : ℝ := p * (724 / 10) / (126 / 10)
+
+theorem genetic_rates :
+    (20 / 100 : ℝ) < geneticRate (35 / 1000) ∧ geneticRate (35 / 1000) < 21 / 100 ∧
+      (574 / 1000 : ℝ) < geneticRate (10 / 100) ∧ geneticRate (10 / 100) < 575 / 1000 ∧
+      (45 / 1000 : ℝ) < geneticRate (8 / 1000) ∧ geneticRate (8 / 1000) < 47 / 1000 ∧
+      (495 / 1000 : ℝ) < geneticRate (863 / 10000) ∧ geneticRate (863 / 10000) < 497 / 1000 := by
+  unfold geneticRate; norm_num
+
+/-- Section 1, DNQ-D14. Johnson's 2.5% a year does not give "around 21%" per
+ten years. Compounded it gives between 22% and 23%, and summed it gives 25%. -/
+theorem johnson_intercensal :
+    (22 / 100 : ℝ) < 1 - (1 - 25 / 1000) ^ 10 ∧ 1 - (1 - 25 / 1000 : ℝ) ^ 10 < 23 / 100 ∧
+      (10 : ℝ) * (25 / 1000) = 25 / 100 := by
+  norm_num
+
+/-- Table 6, panel I. The "move county or state" column is the sum of the two
+before it, for passers and non-passers in every row. -/
+theorem table6_sums :
+    (497 + 387 : ℕ) = 884 ∧ (513 + 408 : ℕ) = 921 ∧ (550 + 353 : ℕ) = 903 ∧
+      (496 + 361 : ℕ) = 857 ∧ (500 + 417 : ℕ) = 917 ∧ (447 + 399 : ℕ) = 846 ∧
+      (227 + 165 : ℕ) = 392 ∧ (324 + 189 : ℕ) = 513 ∧ (267 + 134 : ℕ) = 401 ∧
+      (239 + 164 : ℕ) = 403 ∧ (214 + 205 : ℕ) = 419 ∧ (176 + 143 : ℕ) = 319 := by
+  norm_num
+
+/-- PDF p. 29. Non-passers move at "approximately half" the passers' rate,
+`39.2/88.4`, between 0.44 and 0.45. -/
+theorem migration_half : (44 / 100 : ℝ) < 392 / 884 ∧ (392 / 884 : ℝ) < 45 / 100 := by norm_num
+
+/-- Appendix C.3. `0.01/0.08 = 0.125`. -/
+theorem parents_birthstate : (1 / 100 : ℝ) / (8 / 100) = 125 / 1000 := by norm_num
+
+/-- Table 2, row A. The shares of black men by race ten years later sum to
+100% up to the cell printed as "<0.01%". -/
+theorem table2_rowA : (848 + 150 + 1 + 1 : ℕ) = 1000 := by norm_num
+
+/-- Figure A.5. The 2SUP share 8.6% of the base population is the 14.1%
+unique-perfect share thinned by the backward condition to `0.086/0.141`, about
+61% of the one-sided links. -/
+theorem backward_retention : (60 / 100 : ℝ) < 86 / 141 ∧ (86 / 141 : ℝ) < 62 / 100 := by norm_num
+
+/-- Table 4, columns 3 and 4. White men recorded as black ten years later, by
+counts times pass rates. Those who become married to a black woman (rows B, E,
+H) are `M`, and all are `M` plus rows A, D, G (rows C, F, I pass at 0%). `M`
+is between 50% and 55% of the total. -/
+theorem table4_white_to_black :
+    let M : ℝ := 1151 * (988 / 1000) + 15 * (867 / 1000) + 1098 * (994 / 1000)
+    let T : ℝ := M + 267111 * (7 / 1000) + 3 * (667 / 1000) + 3391 * (48 / 1000)
+    1 / 2 < M / T ∧ M / T < 55 / 100 := by
+  norm_num
+
 end DahisEtAl2019

@@ -79,9 +79,15 @@ marked "forthcoming", cited as such (ELS-D6).
 
 ## What could not be reconstructed
 
-- The regressions themselves. The record checks the arithmetic the paper
-  reports, not the data.
-- The pooled outcome of ELS-D1 is inferred from Appendix Table 4. The paper does
-  not state which categories its "Yes" includes beyond PDF p. 8.
-- The paper has no model. The Lean file formalises the identities and the
-  arithmetic the paper uses, not a theory of the host's decision.
+The coverage table in `CLAIMS.md` has one row per result. What is short of
+general is this.
+
+- The regressions themselves, their standard errors and significance, the
+  balance tests of Table 1, the probit behind Table 6 column 4, and the power
+  analysis of footnote 9. They need the data or numbers not printed.
+- The pooled outcome of ELS-D1 is inferred from Appendix Table 4. Table 7 uses a
+  base that matches neither reading (ELS-D9), and Table 5 column 4 does not add
+  up (ELS-D8).
+- The paper has no model. The remedy of PDF p. 18 is formalised in our reading,
+  with acceptance a function of what the platform displays
+  (`gap_zero_all_rules_iff`).

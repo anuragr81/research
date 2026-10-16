@@ -4,9 +4,12 @@
 
 - Fifteen quotations are found on the PDF pages they cite, by exact
   normalised containment in the text layer (LC-2).
-- The acceptance condition of Lemma 2 and eq. (11), the role of assumption
-  (7), the dilution of a pool under a uniform prior, the honesty condition of
-  Proposition 8 and the threshold of Proposition 9 are Lean theorems (LC-4).
+- The model is implemented in Lean in the paper's notation. Lemmas 1, 2 and 3,
+  Proposition 1, the comparative statics of eq. (11), the role of assumption
+  (7) and Proposition 9 are formalised in the paper's generality. Lemma 4,
+  Remark 1, Proposition 3, Corollary 1 and Proposition 8 are formalised in
+  part. Propositions 2 and 4 to 7 are not formalised (coverage table in
+  `CLAIMS.md`).
 - Our reading is consistent with the working paper on these points.
 
 ## What could not be verified
@@ -18,72 +21,110 @@
 
 ## The bearing on Paper A1
 
-Nothing in the source contradicts the A1 model. In this model the unseen type
-is read from a chosen signal, education, and not from a group marker. Group
-membership is not a marker in the model. Firms ignore it and the group does
-not condition on it (AS-Q2). The peer group is an audience that accepts or
-rejects, and race enters only in the conclusion, as which individuals face
-that audience (AS-Q13).
+Nothing in the source contradicts the corrected account of A1. In this model
+the unseen type is ability, read from a chosen signal, education, and not from
+a group marker. Firms ignore group membership and the group does not condition
+on it (AS-Q2). Race enters only in the conclusion, as which individuals face a
+peer audience (AS-Q13).
 
-1. **Group avoidance from class homophily under inference (contribution 1).**
-   Not in the source. The group's acceptance depends on the posterior mass
-   of reliable types, `F(θ̂|s) ≥ F₀` (AS-Q6, `lemma2_accept_iff`), and the
-   group has no type of its own, so there is no observer-dependent gap. The
-   criterion is linear in that posterior mass, so the spread of types in a
-   pool does not enter except through the mass below `θ̂`. The spread of
-   accepted types is an outcome that rises with patience (AS-Q11), not a
-   penalty in the group's choice. The nearest point to A1's σ² term is the
-   authors' remark that pooling gives some justification for Phelps's
-   assumption that minority ability is perceived more noisily (AS-Q12). That
-   remark makes the noise an outcome of pooling, stated without derivation,
-   and not an avoidance of noisy groups.
-2. **Budget compatibility (contribution 2).** Not in the source. Group
-   membership costs effort, not money, and the group has no interest in
-   income (AS-Q2).
-3. **Venue exclusion and screening (contribution 3).** The peer group is a
-   club that screens on an unobserved type (AS-Q3), with an acceptance
-   threshold on a posterior (AS-Q6). This is screening on unobserved type, a
-   form contribution 3 must cite. It differs from A1's venue in three ways.
-   The screen is a single group's decision, not the aggregate of clients'
-   inferences. The signal is education chosen by the individual, not a price
-   charged by a venue. The club screens on reliability, which the paper makes
-   unrelated to income, rather than on class. The pool's inclusion of
-   unreliable types (AS-Q9, `pool_admits_unreliable`) is the analogue of
-   A1's venue admitting members whose class the venue cannot see.
-4. **The test of the class channel (contribution 4).** Not in the source.
-5. **The equilibrium consistency condition on group means.** The source has
-   one. The pooled wage is the conditional mean of output over the pooled
-   types, eq. (8) with the same belief held by firms and group (AS-Q5), and
-   the proof of Proposition 5 writes it as the average `ω(s; θ′)` over the
-   pool (PDF p. 32). This is the counterpart of A1's requirement that the
-   imputed standing equal the actual mean of the visible members, with the
-   pool defined by a chosen signal rather than by a marker.
-6. **Passing.** The high types who separate and leave the pool (AS-Q10) are
-   the counterpart of passing, and the conclusion notes that a wage rise for
-   separators makes the marginal member break away (PDF p. 25), which lowers
-   the pool's mean. This is the known result A1 does not claim (Kim and Loury
-   2012).
+### The puzzle
 
-What A1 should cite. AS-Q1 and AS-Q5 for a type read from one signal by two
-audiences with one posterior. AS-Q3 and AS-Q6 for a club that screens on an
-unseen type by a threshold on a posterior. AS-Q14 for the same signal carrying
-a different meaning by group, which the authors tie to Milgrom and Oster
-(1987).
+The source offers a channel for bias in friendship across the group line that
+differs from A1's. The behaviours the authors' epigraph lists as sanctioned
+include "having white friends" (AS-Q10). In the model a signal sent to one
+audience is read by the other (AS-Q1), so a cross-group tie can cost a member
+acceptance in the member's own group. That cost comes from the member's own
+group reading the signal, not from the partner inferring the member's class.
+The model does not contain friendships, and the epigraph is quoted rather than
+derived. A1 can cite the source as a rival channel that operates on the race
+line, where A1's operates on the class line.
+
+### Budget compatibility
+
+The source's foundation for who is accepted is reliability under repeated
+interaction, not budgets. Membership costs effort, "not money per se"
+(AS-Q15), and the group has no preference over income (AS-Q2). The cost of a
+contribution, `θk`, rises with ability, so the able are the unreliable members
+(`AustenSmithFryer2003.lemma1_threshold`). Nothing bears on affordability or
+shared consumption. A1's budget foundation is a different premise from the
+source's, and the two do not conflict.
+
+### Avoidance that depends on the observer's class
+
+- **Both directions.** The source has one group, and the majority faces no
+  peer audience (AS-Q13). It neither supports nor contradicts two-way
+  avoidance.
+- **The member who differs from the group.** The source has the mirror image
+  of A1's direction (ii). In A1 a low-class member of the high group may prefer
+  outsiders. In the source a member whose type is above the group's critical
+  type leaves the group, either by separating at school or by refusing the
+  first high contribution (AS-Q9, `AustenSmithFryer2003.corollary1_uniform`).
+  The source thus supports the general point that a member who differs from
+  the group's own type has weaker reasons to stay. It limits the parallel,
+  because the difference runs upward and the exit is to the labour market,
+  not to another group.
+- The group itself has no type, so its acceptance cannot depend on an
+  observer's class (`AustenSmithFryer2003.lemma2_accept_iff`).
+
+### The penalty vanishing when class is shown
+
+The source has the parallel property for ability, with a condition A1 does not
+have. When the signal reveals the type, "there is no residual incomplete
+information" and the group accepts exactly the reliable types (AS-Q8,
+`AustenSmithFryer2003.prop3_3_core`, `AustenSmithFryer2003.control_separation_rejects`).
+The wage is the conditional mean of output given the signal (AS-Q5), so a
+pooled worker is paid the pool's mean and a revealed worker his own output.
+The conclusion turns this into a group difference. At one education level a
+minority worker pools and a majority worker separates, so the two signals
+differ as Milgrom and Oster (1987) postulate (AS-Q14), and the authors read
+this as support for Phelps's noisier perception of minority ability (AS-Q12).
+The condition is that the type can be revealed at all. Under peer pressure no
+equilibrium reveals every type (Proposition 2, not formalised), so in the
+source the penalty cannot vanish for the whole group. In A1 the property is
+stated for class shown exogenously, and the source shows what happens when
+showing it is a costly choice.
+
+### The shadow market
+
+The source places group-based sanction outside the labour contract. Firms are
+assumed to ignore group membership (AS-Q2), which matches a contracting
+channel closed to group, and the sanction operates through the peer group's
+acceptance, a contact channel the firm does not reach (AS-Q1). The group
+screens on education because reliability is unseen (AS-Q6), a signal standing
+in for a criterion that cannot be observed rather than one the law forbids.
+When cheap talk is available and individuals are patient, the tolerant group
+needs no screen (`AustenSmithFryer2003.prop8_honest_iff`). The source has no
+law, no venues, no prices and no intermediaries of social information, so
+none of the corrected account's comparative statics of the shadow market can
+be traced to it.
+
+### Premises of A1 the source does not share
+
+- The unseen type is ability, which lowers the cost of education and raises
+  the cost of contributing, not class.
+- Group membership is not a marker that anyone reads (AS-Q2).
+- The observer is one anthropomorphised group with no type of its own.
+- The signal is chosen, and acceptance is a threshold on a posterior mass, not
+  an expected squared gap (`AustenSmithFryer2003.lemma2_accept_iff`).
+- The model is dynamic, with repeated contributions after school, and the
+  equilibria are selected by the D1 refinement.
+- The spread of accepted types is an outcome of patience (AS-Q11), not a term
+  in anyone's payoff.
 
 ## Controls
 
 - LC-2. A fabricated quotation, "firms are assumed to care about each
   employee's group membership", the opposite of AS-Q2, is not found. A true
   quotation is not found on a neighbouring page.
-- Lean. `control_no_assumption7_all_accepted` shows that without (7) every
-  belief leads to acceptance, as AS-Q7 says.
-  `control_separation_rejects` shows that without pooling a type above `θ̂`
-  is rejected, so the acceptance of unreliable types needs the pool.
-
-## Suite status
-
-The coordinator adds `AustenSmithFryer2003` to the build roots. Until then
-LC-4 fails its build-root check, and the axiom audit, which imports the
-module, cannot run. The audit was run by hand on a scratch copy of the file
-with `#print axioms` appended for every cited theorem, and every theorem
-depends only on `propext`, `Classical.choice` and `Quot.sound`.
+- Lean. Each main result has a control that drops one condition.
+  - `control_lemma1_needs_7` drops `π v(1|1) < v(1|0)` from Lemma 1.
+  - `control_no_assumption7_all_accepted` drops (7) from Lemma 2, as AS-Q7
+    says.
+  - `control_lemma3_needs_single_crossing` drops single crossing from Lemma 3.
+  - `control_remark1` drops the strict gap in (3) from Remark 1.
+  - `control_separation_rejects` drops pooling from Proposition 3(3) and
+    Corollary 1.
+  - `control_prop8_needs_3` drops `v(1|1) > v(1|0)` from Proposition 8.
+  - `control_prop9_needs_pi_lt_one` drops `π < 1` from Proposition 9.
+- The suite names `control_no_assumption7_all_accepted` and
+  `control_separation_rejects`.

@@ -24,6 +24,12 @@ printed page is the PDF page minus 2 (BHI-D1).
 | BHI-Q13 | 33 | "but increases to 44% in intermediate markets with 8 jobs (50th percentile)." | The share at median thickness as stated on PDF p. 33 (BHI-D2) |
 | BHI-Q14 | 48 | "For example, a lending algorithm which considers a person's zip code but does not use racial information when determining loan eligibility may be race neutral in design but discriminatory in practice." | A group-neutral rule on a correlated variable is the paper's example of systemic discrimination |
 | BHI-Q15 | 50 | "evidence for a reversal of direct discrimination over time— such as the ones documented in Bohren et al. (2019) and Mengel et al. (2019)—may not imply that total discrimination has been mitigated or reversed." | A vanishing direct penalty need not mean a vanishing total gap |
+| BHI-Q16 | 17 | "the framework can also capture systemic discrimination arising from the choice of the productivity signaling technology itself (i.e., choosing the evaluation criteria)." | Choosing which signals are read is itself a node of the system |
+| BHI-Q17 | 17 | "our framework can also capture systemic discrimination driven by how anticipated actions at contemporaneous or future nodes impact the [...] decision." | Anticipated treatment elsewhere enters the focal decision. "focal-node" is elided because the text layer breaks it across a line |
+| BHI-Q18 | 23 | "since signal inflation is a statistical bias in the signal, it can be offset via "reverse" direct discrimination in the action rule." | A rule that may not use the group cannot make this offset, `BohrenEtAl2024.signal_inflation_offset` |
+| BHI-Q19 | 48 | "Mayhew (1968) argues that some organizations may have accepted Civil Rights legislation mandating [...] treatment because they were aware systemic discrimination could preserve the status quo." | Footnote 53. Discrimination expected to survive a colour-blind mandate through neutral channels. "color-blind" is elided because the text layer breaks it across a line |
+| BHI-Q20 | 49 | "A facially neutral practice may therefore be found to be discriminatory under this doctrine even in the absence of explicit categorization or animus." | The disparate impact doctrine reaches some group-neutral rules |
+| BHI-Q21 | 52 | "When the qualification is set to current productivity, [...] the former can lead to both direct and systemic forms of discrimination in the current decision, while the latter only leads to direct discrimination." | Appendix B. "The former" is a group difference in signal precision and "the latter" a group difference in the prior distribution of productivity. A group difference in class distribution read from the marker gives only direct discrimination |
 
 ## Lean results
 
@@ -40,6 +46,18 @@ signal space at one qualification level.
 | `BohrenEtAl2024.no_initial_direct_no_systemic` | Eqs. (7) and (8). In the two-node subsystem, no direct discrimination at the initial node gives no systemic discrimination at the focal node |
 | `BohrenEtAl2024.control_pairing_matters` | Control. Pairing `Δᴰ(y⁰, w)` with `Δˢ(y⁰, w)` instead of `Δˢ(y⁰, b)` fails, 2 against a total of 1 |
 | `BohrenEtAl2024.control_audit_misses_systemic` | Control. With a group-neutral rule and different signal distributions, direct discrimination is 0 and total discrimination is 1 |
+| `BohrenEtAl2024.neutral_rule_same_signal_no_gap` | A group-neutral rule on a signal distributed alike in both groups at the reference qualification gives no total discrimination |
+| `BohrenEtAl2024.signal_inflation_offset` | Section 3.3. Signal inflation offset by reverse direct discrimination, total 0 with direct 1 and systemic −1 |
+| `BohrenEtAl2024.two_node_decomp` | Section 4.1. Total discrimination in the two-node subsystem is the focal treatment component plus the systemic term |
+| `BohrenEtAl2024.experimental_ia` | Section 4.3 and Figure 4. Direct plus systemic equals total in the experimental Iterated Audit |
+| `BohrenEtAl2024.fn44_thin_thick` | Footnote 44 and Section 5.2. The experience gap is 0 with no openings, positive with one, and tends to 0 |
+| `BohrenEtAl2024.control_fn44_no_direct` | Control. Without first-round direct discrimination there is no experience gap |
+| `BohrenEtAl2024.table1_arith` | Table 1 and Section 5.2, printed differences and the 49 percent return to experience (BHI-D9) |
+| `BohrenEtAl2024.table3_arith` | Table 3, total equals direct plus systemic and the difference column |
+| `BohrenEtAl2024.b11_posterior` | Appendix B.1.1, the posterior mean `η s/(1 + η)` |
+| `BohrenEtAl2024.b11_cutoff_order` | Appendix B.1.1, the noisier group faces the higher signal cut-off |
+| `BohrenEtAl2024.b11_systemic_sign` | Appendix B.1.1, the sign of systemic discrimination above, below and at the cut-off, with the square roots restored (BHI-D5) |
+| `BohrenEtAl2024.control_equal_precision_no_systemic` | Control. Equal precisions give no systemic discrimination |
 
 ## Readings recorded
 
@@ -53,3 +71,27 @@ signal space at one qualification level.
 | BHI-D6 | Appendix B.1.3 (PDF p. 55) writes average direct discrimination as `τ(w, y⁰)` and total discrimination as `Δ(y⁰)`, against `Δᴰ(y⁰, w)` and `Δᵀ(y⁰)` in Section 3.2 | Notation only |
 | BHI-D7 | Footnote 41 (PDF p. 27) lists `A*(w, S̃*(w, y⁰))` twice and `A*(w, S̃*(b, y⁰))` as the actions that identify `Δˢ(y⁰, b)` and `Δᵀ(y⁰)`. By Definitions 2 and 3 with eqs. (7) and (8) we read `A*(w, S̃*(w, y⁰))`, `A*(b, S̃*(w, y⁰))` and `A*(b, S̃*(b, y⁰))` | Page image of PDF p. 27 |
 | BHI-D8 | The text layer renders "≠" as "6=" in Definitions 1 and 2 (PDF pp. 13, 15) | Quotations avoid these lines |
+| BHI-D9 | The introduction (PDF p. 6) says White applicants without experience were "13 percentage points (90%) more likely" to be called back. The rates of Section 5.2 give 12.4 points, which is 94 percent of the Black rate of 13.2 | `BohrenEtAl2024.table1_arith`. Not relied on |
+
+## Coverage of the source's results
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Definition 1 | `direct` | special case | Finite signal space at one qualification level. The paper allows measurable spaces |
+| Definition 2 | `total` | special case | As above |
+| Definition 3, eqs. (1), (2) | `mu`, `muT`, `sysW`, `sysB` | special case | As above |
+| Eq. (3) | `direct` | special case | As above |
+| Proposition 1, eq. (4) | `prop1` | special case | As above. The proof is the same add-and-subtract |
+| Eq. (5) | `eq5` | special case | As above |
+| Eq. (6) | `eq6` | special case | As above |
+| Footnote 26 | `neutral_rule_all_systemic` | special case | As above |
+| Section 3.3, signal inflation and its offset | `signal_inflation_offset` | special case | A two-signal example |
+| Section 3.3, differential screening and technological sources | `b11_systemic_sign` | special case | Only through the Appendix B.1.1 example |
+| Eqs. (7), (8) | `sysB2`, `total2`, `two_node_decomp`, `no_initial_direct_no_systemic` | general | Deterministic two-node subsystem, as the paper writes it |
+| Section 4.3, experimental Iterated Audit | `experimental_ia` | general | |
+| Footnote 44 | `pExp`, `fn44_thin_thick` | general | |
+| Section 5.2 and Table 1, printed arithmetic | `table1_arith` | general | |
+| Systemic shares 11, 44 and 32 percent (PDF p. 33) | none | not formalised | They come from Figure 5 and data not in the text (BHI-D2) |
+| Section 6 and Table 2 | none | not formalised | Estimates. No printed number follows from others |
+| Appendix B.1.1 | `b11_posterior`, `b11_cutoff_order`, `b11_systemic_sign` | special case | Any strictly increasing `Φ`. The "cherry-picking" and "lemon-dropping" averages need normal integrals and are not formalised |
+| Table 3 | `table3_arith` | general | |

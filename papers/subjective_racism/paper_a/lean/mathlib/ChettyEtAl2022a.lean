@@ -135,4 +135,119 @@ theorem row5_interior_peak :
     by simp [row1]; norm_num⟩
   fin_cases k <;> simp [row5] <;> norm_num
 
+/-! ### Both sides of a cross-SES friendship -/
+
+/-- Friendship is mutual (PDF p. 15, links "need to be confirmed by both
+parties"). With a symmetric adjacency `A` and disjoint sets `L` and `H`, the
+number of friendships counted from the low-SES side equals the number counted
+from the high-SES side. In pooled counts, low-SES people having few high-SES
+friends and high-SES people having few low-SES friends are one fact. -/
+theorem cross_links_balance {ι : Type*} (A : ι → ι → ℝ) (hA : ∀ i j, A i j = A j i)
+    (L H : Finset ι) :
+    ∑ i ∈ L, ∑ j ∈ H, A i j = ∑ j ∈ H, ∑ i ∈ L, A j i := by
+  rw [Finset.sum_comm]
+  exact Finset.sum_congr rfl (fun j _ => Finset.sum_congr rfl (fun i _ => hA i j))
+
+/-- In shares, with equal numbers of low- and high-SES people and friend counts
+`d_L` and `d_H`, pooled balance is `d_L f_{LH} = d_H (1 − f_{HH})`. -/
+theorem balance_shares {NL NH dL dH fLH fHH : ℝ} (hN : NL = NH)
+    (hbal : NL * dL * fLH = NH * dH * (1 - fHH)) (hN0 : NL ≠ 0) :
+    dL * fLH = dH * (1 - fHH) := by
+  subst hN
+  have := hbal
+  have h' : NL * (dL * fLH) = NL * (dH * (1 - fHH)) := by linarith
+  exact mul_left_cancel₀ hN0 h'
+
+/-- PDF p. 3. The printed shares are means over people, not pooled shares. With
+the 25.4% more friends of high-SES people, pooled balance would give a low-SES
+high-SES share of `1.254 × 0.294 = 0.3687`, against the printed 0.388. -/
+theorem printed_shares_not_pooled :
+    (1.254 : ℝ) * (1 - 0.706) = 0.368676 ∧ (0.368676 : ℝ) ≠ 0.388 := by
+  norm_num
+
+/-! ### Cohesiveness, eqs. (4) to (6), and spectral homophily -/
+
+/-- Eqs. (4) and (6) share one form, the fraction of a finite set of pairs that
+satisfy a predicate (friends of `i` who are friends, or friendships with a common
+friend). -/
+noncomputable def shareOf {α : Type*} (S : Finset α) (P : α → Prop) [DecidablePred P] : ℝ :=
+  ((S.filter P).card : ℝ) / S.card
+
+/-- PDF p. 5. Clustering and the support ratio range from 0 to 1. -/
+theorem shareOf_mem {α : Type*} (S : Finset α) (P : α → Prop) [DecidablePred P] :
+    0 ≤ shareOf S P ∧ shareOf S P ≤ 1 := by
+  unfold shareOf
+  refine ⟨by positivity, ?_⟩
+  rcases Nat.eq_zero_or_pos S.card with h | h
+  · simp [h]
+  · rw [div_le_one (by exact_mod_cast h)]
+    exact_mod_cast Finset.card_filter_le S P
+
+/-- Spectral homophily is an eigenvalue of the row-stochastic adjacency matrix
+(PDF p. 17). Every real eigenvalue of a nonnegative row-stochastic matrix has
+absolute value at most 1. -/
+theorem stochastic_eig_le_one {n : ℕ} (A : Fin n → Fin n → ℝ) (hA : ∀ i j, 0 ≤ A i j)
+    (hrow : ∀ i, ∑ j, A i j = 1) (v : Fin n → ℝ) (hv : v ≠ 0) (lam : ℝ)
+    (h : ∀ i, ∑ j, A i j * v j = lam * v i) : |lam| ≤ 1 := by
+  obtain ⟨k, hk⟩ : ∃ k, v k ≠ 0 := by
+    by_contra hc; push_neg at hc; exact hv (funext hc)
+  obtain ⟨i, -, hi⟩ := Finset.exists_max_image Finset.univ (fun j => |v j|) ⟨k, Finset.mem_univ k⟩
+  have hpos : 0 < |v i| := lt_of_lt_of_le (abs_pos.2 hk) (hi k (Finset.mem_univ k))
+  have key : |lam| * |v i| ≤ 1 * |v i| := by
+    rw [← abs_mul, ← h i]
+    calc |∑ j, A i j * v j| ≤ ∑ j, |A i j * v j| := Finset.abs_sum_le_sum_abs _ _
+      _ = ∑ j, A i j * |v j| := by
+          refine Finset.sum_congr rfl (fun j _ => ?_); rw [abs_mul, abs_of_nonneg (hA i j)]
+      _ ≤ ∑ j, A i j * |v i| := Finset.sum_le_sum (fun j _ =>
+          mul_le_mul_of_nonneg_left (hi j (Finset.mem_univ j)) (hA i j))
+      _ = 1 * |v i| := by rw [← Finset.sum_mul, hrow i]
+  exact le_of_mul_le_mul_right key hpos
+
+/-! ### Further printed arithmetic -/
+
+/-- PDF p. 3. Bottom-decile counties with EC below 0.58 have 42% fewer high-SES
+friends than the no-homophily benchmark with equal friend counts. -/
+theorem bottom_decile_p3 : 1 - (0.58 : ℝ) = 0.42 := by norm_num
+
+/-- PDF p. 6. Minneapolis, 49% high-SES friends, has EC `0.98`. Indianapolis,
+32%, is printed with EC 0.65, while `2 × 0.32 = 0.64`, so the 32% is rounded. An
+EC rise of 0.5 is a rise of the share from 25% to 50%, and at the slope 16.4 of
+Fig. 4 it is 8.2 percentiles. -/
+theorem mobility_p6 :
+    2 * (0.49 : ℝ) = 0.98 ∧ 2 * (0.32 : ℝ) = 0.64 ∧ 2 * (0.50 : ℝ) - 2 * 0.25 = 0.5 ∧
+      (16.4 : ℝ) * 0.5 = 8.2 := by
+  norm_num
+
+/-- PDF p. 3. The sample of 72.2 million is about 3,500 times the 20,000 of Add
+Health (3,610 times). PDF p. 9. 9.8 percentiles is 30.7% of a mean rank of
+about 31.9. -/
+theorem scale_numbers :
+    (72200000 : ℝ) / 20000 = 3610 ∧ 31.9 < (9.8 : ℝ) / 0.307 ∧ (9.8 : ℝ) / 0.307 < 32 := by
+  norm_num
+
+/-- Methods, "Correlations". The signal correlation divides the raw correlation
+by the square root of the reliability of the noisier variable. -/
+noncomputable def signalCorr (r rel : ℝ) : ℝ := r / Real.sqrt rel
+
+/-- With perfect reliability the signal correlation is the raw one. -/
+theorem signalCorr_one (r : ℝ) : signalCorr r 1 = r := by simp [signalCorr]
+
+/-- Control for `cross_links_balance`. Without mutual consent, a directed
+"follow" relation (as on Instagram before the paper restricts to reciprocal
+followers, PDF p. 17) need not balance. One low-SES person follows one high-SES
+person who does not follow back. -/
+theorem control_balance_needs_symmetry :
+    let A : Fin 2 → Fin 2 → ℝ := fun i j => if i = 0 ∧ j = 1 then 1 else 0
+    (∑ i ∈ ({0} : Finset (Fin 2)), ∑ j ∈ ({1} : Finset (Fin 2)), A i j)
+      ≠ ∑ j ∈ ({1} : Finset (Fin 2)), ∑ i ∈ ({0} : Finset (Fin 2)), A j i := by
+  simp
+
+/-- Control for `stochastic_eig_le_one`. Rows summing to one without
+nonnegativity allow an eigenvalue of 3. -/
+theorem control_eig_needs_nonneg :
+    let A : Fin 2 → Fin 2 → ℝ := ![![2, -1], ![-1, 2]]
+    let v : Fin 2 → ℝ := ![1, -1]
+    (∀ i, ∑ j, A i j = 1) ∧ (∀ i, ∑ j, A i j * v j = 3 * v i) ∧ 1 < |(3 : ℝ)| := by
+  refine ⟨?_, ?_, by norm_num⟩ <;> intro i <;> fin_cases i <;> simp [Fin.sum_univ_two] <;> norm_num
+
 end ChettyEtAl2022a

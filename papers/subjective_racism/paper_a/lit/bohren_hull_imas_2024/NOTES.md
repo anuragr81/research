@@ -2,84 +2,128 @@
 
 ## What was verified
 
-- Fifteen quotations are found on the PDF pages they cite, by exact
-  normalised containment in the working paper's text layer (LC-2).
-- Proposition 1 with eqs. (4) to (6), footnote 26, the vanishing of systemic
-  discrimination when the signal distributions coincide, and the two-node
-  structure of eqs. (7) and (8) are Lean theorems in the paper's notation, on
-  a finite signal space (LC-4). Our reading is consistent with the source on
-  these points.
+- Twenty-one quotations are found on the PDF pages they cite, by exact
+  normalised containment in the working paper's text layer (LC-2). Two use
+  an elision where the text layer breaks a hyphenated word across a line
+  (BHI-Q17, BHI-Q19).
+- The framework of Sections 3 and 4 is implemented in
+  `lean/mathlib/BohrenEtAl2024.lean`. Definitions 1 to 3, Proposition 1 and
+  eqs. (3) to (6) hold on a finite signal space at one qualification level.
+  The two-node subsystem of eqs. (7) and (8), the experimental Iterated
+  Audit, footnote 44, the printed arithmetic of Table 1 and Table 3, and the
+  screening example of Appendix B.1.1 are Lean theorems. The coverage table
+  in `CLAIMS.md` gives the status of every numbered result. Our reading is
+  consistent with the source on these points, except for the readings
+  recorded as BHI-D2 to BHI-D9.
 
 ## What could not be verified
 
 - The estimates of the two field experiments and of Appendix B. No data were
   read, Figure 5 is an image, and the text gives three statements of the
   systemic share at the median market (BHI-D2).
+- The measure-theoretic general case and the averages of Appendix B.1.1.
 - Any published version of the paper (BHI-D1).
 
-## The question put to this source
+## How the source classes a penalty through an unseen correlated variable
 
-Is a penalty that runs through an unseen correlated variable, such as class
-behind a group marker, classed as systemic? In this framework it is not. A
-penalty that arises because the decision maker infers an unseen,
+A penalty that arises because the decision maker infers an unseen,
 payoff-relevant trait from the group is statistical discrimination, and
-statistical discrimination is direct (BHI-Q3, BHI-Q9). It is measured at a
-fixed signal, and when the signal carries nothing about the individual
-beyond the group, both systemic terms are zero and the whole gap is direct
-(`same_signal_all_direct`). A1's group avoidance is of this kind. The
-observer reads class from the marker, so the penalty is direct
-discrimination at the contact decision.
-
-Systemic discrimination is the other case. The rule is the same for both
-groups, and the gap comes from group differences in what the rule is
-applied to, at a fixed reference qualification (BHI-Q7, BHI-Q8,
-`neutral_rule_all_systemic`). The zip-code rule is the paper's example
-(BHI-Q14). So a penalty through a correlated variable is systemic when the
-variable is shown and the rule ignores the group, and direct when the
-variable is unseen and inferred from the group. Two conditions qualify the
-systemic label. The variable's group difference must arise from
-discrimination at other nodes within the chosen subsystem, and otherwise the
-residual is left unclassified and may be non-discriminatory (BHI-Q5). And
-inaccurate beliefs act through the rule, so they are direct (BHI-Q10).
+statistical discrimination is direct (BHI-Q3, BHI-Q9). Appendix B states the
+sharper version. With productivity as the reference qualification, a group
+difference in the prior distribution of productivity gives only direct
+discrimination, while a group difference in the precision of the signal
+gives both direct and systemic discrimination (BHI-Q21). A1's group penalty
+comes from group differences in the class distribution read from the
+marker, so in this framework it is direct discrimination at the contact
+decision (`same_signal_all_direct`).
 
 ## The bearing on Paper A1
 
-Nothing in the source contradicts the A1 model. The framework is a
-classification of gaps and takes action rules in reduced form, so it neither
-derives nor rules out any of A1's mechanisms.
+Nothing in the source contradicts the corrected account of A1. One claim of
+the predecessor is qualified below under the shadow market.
 
-1. **Group avoidance from class homophily under inference (contribution 1).**
-   Not in the source. There are no preferences over partners, no observer
-   types and no variance term. The source gives A1 its classification. The
-   avoidance is direct statistical discrimination at the contact node
-   (BHI-Q3, BHI-Q9).
-2. **Budget compatibility (contribution 2).** Not in the source.
-3. **Venue exclusion and price screening (contribution 3).** Not in the
-   source. The classification bears on how A1 describes venue exclusion,
-   and the following is our inference, not checked in Lean. Exclusion keyed
-   to the marker would be direct discrimination at the venue node. Exclusion
-   through a price that is the same for both groups would leave a group gap
-   at the venue that is systemic in the paper's sense (BHI-Q7) only if the
-   class difference behind it is attributed to discrimination elsewhere in
-   the chosen subsystem.
-4. **A test of the class channel (contribution 4).** Not in the source for
-   contact. The source qualifies what A1's test can show. Showing class makes
-   class part of the signal, and with class as the reference qualification
-   the test measures direct discrimination at a fixed class, as a
-   correspondence study does (PDF p. 21, `same_signal_all_direct`). A
-   vanishing direct penalty need not mean a vanishing total gap (BHI-Q15),
-   because groups with different class distributions still meet different
-   rates of contact under a group-blind rule (`control_audit_misses_systemic`).
-   Whether that remaining gap counts as discrimination depends on whether
-   the class gap itself is attributed to discrimination, which is the
-   bad-control concern of BHI-Q2. A1 should say that its test separates the
-   class channel from a taste at a fixed class, and that it is silent on the
-   gap that remains through class differences.
+**The puzzle.** The source is silent on friendship and on diversity. It
+supplies a vocabulary for the puzzle that A1 may use, and the following
+mapping is our inference, not checked in Lean. Friending bias is measured
+conditional on exposure, so it plays the role of discrimination at the
+friending decision given who is met, while exposure is set at an earlier
+node, where people go. Which part counts as systemic depends on the chosen
+subsystem and reference qualification (BHI-Q5).
 
-What A1 should cite. BHI-Q3 and BHI-Q9 for classing marker-based inference as
-direct statistical discrimination. BHI-Q7 and BHI-Q14 for the systemic case
-of a group-neutral rule on a correlated variable. BHI-Q2 and BHI-Q15 for the
-limit of conditioning on shown class.
+**Budget compatibility.** Nothing in the source bears on cost, affordability
+or shared consumption, or on the origin of homophily. Action rules are
+reduced form (PDF p. 12).
+
+**Avoidance that depends on the observer's class.** Not in the source. There
+are two groups and one action rule per group and node, with no heterogeneity
+among decision makers by their own group or class, so the source neither
+supports nor limits directions (i) and (ii).
+
+**The penalty vanishing when class is shown.** The source has no statement
+for contact. Its framework places the property. Showing class puts class in
+the signal, and with class as the reference qualification the measure at a
+fixed class is direct discrimination, as in a correspondence study (PDF
+p. 21, `same_signal_all_direct`). A1's property is that this direct
+discrimination is zero once class is shown. Two qualifications follow from
+the source.
+- A vanishing direct penalty need not mean a vanishing total gap (BHI-Q15).
+  Groups with different class distributions still differ in contact under a
+  rule that ignores the group (`control_audit_misses_systemic`), and whether
+  that gap counts as discrimination depends on whether the class gap is
+  itself attributed to discrimination, the bad-control concern (BHI-Q2).
+- Inaccurate beliefs work through the action rule and so through direct
+  discrimination (BHI-Q10). The property does not depend on beliefs being
+  accurate.
+
+**The shadow market.** The source bears on it directly.
+- When the law forbids a rule that uses the group, a rule that uses
+  correlated markers has zero direct discrimination by definition, and any
+  group gap it produces is systemic (BHI-Q7, `neutral_rule_all_systemic`).
+  The zip-code rule is the paper's example (BHI-Q14). In the source's terms
+  the predecessor's shadow market converts direct discrimination into
+  systemic discrimination.
+- The classification turns on the reference qualification. If the venue's
+  instruments (price, dress code, atmosphere) select on signals of class that
+  are distributed alike in the two groups at the same class, then with class
+  as the reference qualification there is no discrimination at all
+  (`neutral_rule_same_signal_no_gap`). This is the predecessor's remark that
+  "racial correlation is a consequence rather than an input" (main
+  manuscript, line 1636). If the instruments read markers that differ by
+  group at the same class, such as an accent or a dress code correlated with
+  race beyond class, there is systemic discrimination at a fixed class
+  (`control_audit_misses_systemic`). With no reference qualification, the
+  whole group gap is systemic.
+- Choosing which signals are read is itself a node of the system (BHI-Q16),
+  and anticipated treatment at one node shapes choices at another (BHI-Q17).
+  A venue's choice of atmosphere and clients' choice of where to go fit
+  these two node types. The source does not model a market for that
+  information or its value.
+- The source records the expectation that discrimination survives a
+  colour-blind mandate through neutral channels (BHI-Q19). That is the
+  mechanism the predecessor attributes to legal strictness, stated as a
+  historical argument about organisations, not as a result.
+- A ban on using the group also forbids the "reverse" direct discrimination
+  that would offset signal inflation (BHI-Q18, `signal_inflation_offset`).
+  Under a strict ban a gap from inflated markers cannot be corrected inside
+  the rule. This bears on why the return to shadow information could rise
+  with legal strictness, and the step is our inference.
+- The source limits one claim of the predecessor. The disparate impact
+  doctrine reaches some facially neutral practices (BHI-Q20, the Griggs case
+  on PDF pp. 21 and 39). The law therefore reaches part of the channel the
+  predecessor calls unreached, at least in employment. A1 should say which
+  settings of contact the doctrine does not cover, rather than say that the
+  law does not reach group-neutral rules.
+
+**Premises of A1 the source does not share.**
+- Action rules are reduced form. Nothing is derived from preferences or
+  equilibrium, so the source cannot speak to why a rule takes the form A1
+  derives.
+- Group membership is treated as separately manipulable from the signal
+  (footnote 14, PDF p. 13). In A1 the group is known only through the
+  marker, which is part of what is observed.
+- Discrimination is defined relative to a chosen subsystem and reference
+  qualification, so the same gap can be direct, systemic or unclassified.
+  A1 has one decision and does not make this choice.
 
 ## Controls
 
@@ -87,15 +131,16 @@ limit of conditioning on shown class.
   race-neutral action rule is direct, as the systemic component is zero by
   definition.", the opposite of BHI-Q7, is not found. A true quotation is not
   found on a neighbouring page.
-- Lean. `control_pairing_matters` shows that eq. (4) needs its particular
-  pairing of the direct and systemic terms. `control_audit_misses_systemic`
-  shows that total discrimination equals direct discrimination only when the
-  signal distributions coincide.
+- Lean. `control_pairing_matters` (eq. (4) needs its pairing),
+  `control_audit_misses_systemic` (total equals direct only when signal
+  distributions coincide), `control_fn44_no_direct` (the experience gap needs
+  first-round direct discrimination) and `control_equal_precision_no_systemic`
+  (Appendix B.1.1 needs unequal precisions).
 
 ## Suite status
 
-The coordinator adds `BohrenEtAl2024` to the build roots. Until then LC-4
-fails its build-root check. With the module compiled into the scratch
-directory and that directory on `LEAN_PATH`, the axiom audit passes for all
-eight cited theorems, which depend only on `propext`, `Classical.choice` and
-`Quot.sound`.
+The suite ends with 11 checks and 0 failures when the edited module is
+compiled into the scratch directory and the axiom audit is pointed at it,
+with all 20 cited theorems depending only on `propext`, `Classical.choice`
+and `Quot.sound`. Until the coordinator rebuilds the library, the audit run
+through `lake env` finds the older build.

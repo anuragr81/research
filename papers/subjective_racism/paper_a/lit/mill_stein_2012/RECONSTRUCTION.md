@@ -101,11 +101,18 @@ group passed (MLS-Q4).
 
 ## What could not be reconstructed
 
-- The regressions. The microdata are not available here, and the estimates are
-  taken as printed.
-- The linking procedure in detail, since its appendix is absent from this
-  version.
+The coverage table in `CLAIMS.md` lists every result. What is short of general
+is the following.
+
+- The estimates of Tables 4 to 10. The microdata are not available here, and
+  the estimates are taken as printed. The specifications, eqs. (4.1) to (5.4),
+  are formalised, and so is every number the text derives from the tables.
+- The within-family estimator of eq. (4.2) is formalised for families of two
+  brothers without the controls `x` (`within_estimator`).
+- The attenuation argument after Griliches (1979) on PDF p. 29, which is
+  stated in words without a model.
 - The Roy argument as the authors state it, in variances. Our formalisation
-  replaces a higher variance with a steeper slope in earning potential, which
-  is one way to obtain the higher variance and is the form Table 10, column 3,
-  tests.
+  takes log income linear in one potential `s`, so that the higher White
+  variance is a steeper White slope (`roy_variance`), which is the form Table
+  10, column 3, tests.
+- The linking procedure, since its appendix is absent from this version.

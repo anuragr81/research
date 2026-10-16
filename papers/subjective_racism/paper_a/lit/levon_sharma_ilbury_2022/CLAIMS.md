@@ -25,22 +25,69 @@ minus 1.
 | ST-Q13 | 34 | "29% of respondents from lower socio-economic grades reported such experiences in the workplace, as against 22% from higher socio-economic grades. And 55% of senior professionals from lower socio-economic backgrounds report such experiences in social settings, as compared to 34% from higher socio-economic backgrounds." | Senior managers, by parental class. The gap is larger in social settings than in the workplace |
 | ST-Q14 | 36 | "Relatedly, standard accent speakers feel much less pressure to modify their accents." | Pressure to modify falls on speakers of non-standard accents |
 | ST-Q15 | 39 | "mock interview candidates who demonstrated technical expert knowledge in their response were subject to less accent-based differential rating" | Information about the individual's competence narrows the accent penalty. The study is Levon et al. (2021), not read |
+| ST-Q16 | 11 | "A 2015 Social Mobility Commission report also found that working-class candidates are often unable to gain access to elite professions, despite having the relevant qualifications and skills, because of informal 'poshness tests', such as a candidate's style of speaking." | Screening on a class marker by informal tests, reported second hand from a report not read |
+| ST-Q17 | 11 | "It should be noted that accent, alongside social class, is not protected by the Equality Act 2010." | Neither the marker nor the class it signals is protected, so screening on them is outside the law. Contradicts the 2020 report's list (AB-D10) |
+| ST-Q18 | 17 | "Almost a third of respondents overall reported some such experience in an institutional context, once again peaking in university at 30%, when individuals often interact with a substantially wider social range for the first time." | The authors tie the peak to entry into a wider social range. The overall share is about 28% (`institutional_overall`) |
+| ST-Q19 | 17 | "Rates were marginally lower when participants were asked more narrowly about experiences of bias in 'high stakes' contexts such as in the classroom or in recruiting (31% among university students, 26% among school students, and 8% among professionals). This suggests some effort in workplaces, though less in education, to attend to the risk of accent-based bias." | Bias in formal, high-stakes evaluation is much lower than bias overall for professionals, 8% against 25%. For students the rate is higher, not lower (ST-D12) |
+| ST-Q20 | 8 | "Accent-related commentary and mockery are highest in social settings, and this can compromise a person's sense of belonging in a given professional or educational community." | The authors place the bulk of accent bias in social settings rather than in formal ones (`social_exceeds_institutional`) |
+| ST-Q21 | 36 | "Individuals who speak in an RP accent only occasionally reported mild forms of bias [...] but in all of our surveys we had no reports of this leading to obstructed career advancement and social mobility." | Bias against the high-class accent exists in mild form and has no reported cost |
+| ST-Q22 | 28 | "a few students commented on being teased for sounding too posh" | Mockery of the high-class accent among students |
+| ST-Q23 | 36 | "there was a common attitude that specific skin colours spoke a specific way." | A teacher read as Black from a South London accent. The accent is read as group, not only as class |
+| ST-Q24 | 28 | "This makes me feel worried that I am disadvantaged because I don't come from as privileged a background as others, and so haven't had the same opportunities as them and can't relate to them." | A student's account of distance across class as a difference in past opportunities, not in present budgets |
+| ST-Q25 | 7 | "If gate-keepers favour candidates for reasons of prestige rather than merit, this can lead to a vicious circle, whereby non-traditional candidates are discriminated against, reducing their visibility in elite contexts and further marginalising their accent." | A dynamic claim with no stated structure. A1 has no law of motion |
+| ST-Q26 | 16 | "given this is a time period when young people have left school and joined a more heterogeneous social environment" | The authors' account of why bias peaks at university, a more heterogeneous setting |
 
 ## Lean results
 
 `lean/mathlib/LevonEtAl2022.lean`. The report states no model. The file
-formalises the definitions and identities its numbers rest on, and our
-reading of one inference it draws.
+formalises the definitions and identities its numbers rest on, every printed
+number that follows from others, and our reading of the structural claims it
+makes about accent modification.
 
 | Theorem | What it checks |
 |---|---|
 | `LevonEtAl2022.agree_shares` | Figures 3 to 6. Strongly plus slightly agree gives the shares stated in the text, 24, 35, 23; 18, 33, 19; 29, 30, 25; 40, 47, 46 |
 | `LevonEtAl2022.bars_sum` | Each bar of Figures 3 to 6 sums to 100 or, in four bars, 101 |
 | `LevonEtAl2022.overall_is_weighted` | The overall 24% is the sample-weighted mean of 18%, 33% and 19% |
+| `LevonEtAl2022.seg_shares` | AB 22 + C1 31 + C2 21 + DE 26 = 100, so ABC1 is 53 and C2DE 47 |
+| `LevonEtAl2022.institutional_overall` | The weighted mean of 29%, 30% and 25% is about 28%, below a third |
+| `LevonEtAl2022.social_exceeds_institutional` | Social-setting mockery exceeds institutional mockery at every life stage |
+| `LevonEtAl2022.high_stakes_against_institutional` | High-stakes rates are lower for school students and professionals and higher for university students |
+| `LevonEtAl2022.senior_gap_social_exceeds_workplace` | Among senior managers the class gap is 21 points in social settings and 7 in the workplace |
 | `LevonEtAl2022.modification_lowers_reports` | With a fixed rate of mockery, more modification lowers the reported rate |
 | `LevonEtAl2022.fig17_workplace_not_antitone` | Figure 17's workplace series rises from 19% to 20% between the two oldest groups |
+| `LevonEtAl2022.modification_raises_heard_RP` | More modification raises the share of RP heard above the native share |
+| `LevonEtAl2022.modification_return` | With a rating linear in accent strength, lowering strength by `Δ` returns `β Δ` |
+| `LevonEtAl2022.steeper_slope_larger_return` | A steeper slope, as for MLE against Northern accents, gives a larger return to the same modification |
 | `LevonEtAl2022.control_not_identified` | Control. The fall from 52% to 23% in Figure 17 arises from no modification with falling mockery and from fixed mockery with rising modification |
 | `LevonEtAl2022.control_unweighted_not_24` | Control. Without weighting by sample size the mean is below 23.5% |
+| `LevonEtAl2022.control_no_modification_native_share` | Control. With no modification the share of RP heard is the native share |
+| `LevonEtAl2022.control_flat_strength` | Control. With no sensitivity to strength, modification returns nothing |
+
+## Coverage of the source's results
+
+The report numbers no results. Each row is a finding or structural claim, by
+PDF page.
+
+| Result | Lean name | Status | Reason |
+|---|---|---|---|
+| Agree shares of Figures 3 to 6 and the key findings (pp. 5, 16 to 19) | `agree_shares` | general | |
+| Bars of Figures 3 to 6 sum to 100 (pp. 16 to 19) | `bars_sum` | general | Four bars sum to 101 by rounding |
+| Overall career anxiety 24% (p. 16) | `overall_is_weighted`, `control_unweighted_not_24` | general | Needs the reading of "Employees" in ST-D3 |
+| Almost a third mocked in institutions (p. 17) | `institutional_overall` | general | |
+| Socio-economic grade shares (p. 15) | `seg_shares` | general | |
+| Mockery highest in social settings (pp. 8, 17, 18) | `social_exceeds_institutional` | general | |
+| High-stakes rates "marginally lower" (p. 17) | `high_stakes_against_institutional` | general | Holds for two of three groups (ST-D12) |
+| Senior managers by grade, 21 against 12, 29 against 22, 55 against 34 (pp. 6, 32, 34) | `senior_gap_social_exceeds_workplace` | general | |
+| Age profile of Figure 17 (p. 33) | `fig17_workplace_not_antitone` | general | |
+| Older managers modified more (p. 33) | `modification_lowers_reports`, `control_not_identified` | general | Our reading. The figure does not identify it |
+| Penalty for not modifying MLE more than Northern accents (pp. 13, 14) | `modification_return`, `steeper_slope_larger_return` | special case | Linear in strength. The report gives no numbers and cites a paper not read |
+| Changing accents maintains RP's over-representation (p. 7) | `modification_raises_heard_RP` | general | |
+| Vicious circle of discrimination and visibility (p. 7) | none | not formalised | A dynamic claim with no stated structure (ST-Q25) |
+| Region replaced by class as the leading factor across life stages (pp. 34, 37) | none | not formalised | Regression results are not printed |
+| Regional, year-of-study and age differences (Figures 7 to 16) | none | not formalised | The printed numbers have no arithmetic relation to one another |
+| Accent Bias Britain findings as background (pp. 11 to 14) | none | not formalised here | Formalised in `LevonEtAl2020`, with the discrepancies in ST-D2 |
+| Only one of five bias-reduction strategies works (p. 39) | none | not formalised | No estimates printed (ST-D7) |
 
 ## Readings recorded
 
@@ -57,3 +104,4 @@ reading of one inference it draws.
 | ST-D9 | The foreword (PDF p. 4), in which the chairman says he learned a Surrey accent to fit in, is not quoted | The text layer interleaves it with a pull quote set beside it |
 | ST-D10 | Note 17 (PDF p. 13) gives the first author as "Lev-On E" and is read as Levon E | Notes 16 and 23 cite the same article as Levon et al. 2021 |
 | ST-D11 | The contents (PDF p. 3) title the first life stage "Secondary school and sixth form", while the heading (PDF p. 20) reads "Secondary school and university applicants" | Read as the same section |
+| ST-D12 | "Rates were marginally lower" in high-stakes contexts (PDF p. 17, ST-Q19) is read as holding for school students and professionals only | High-stakes rates are 26%, 31% and 8% against institutional rates of 29%, 30% and 25%, so for university students the high-stakes rate is higher. `high_stakes_against_institutional` |
