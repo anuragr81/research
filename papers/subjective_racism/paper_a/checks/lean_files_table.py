@@ -57,13 +57,16 @@ def table(tex):
     for args in lrows:
         for name in re.findall(r"\\path\{([A-Za-z0-9]+)\.[A-Za-z0-9_']+\}", args[2]):
             cites.setdefault(name, set()).add(args[0])
-    # a literature record's Lean file is cited by every L row that cites the record's key
+    # a literature record's Lean file is cited by every L row that cites the record's key,
+    # and by the record alone until such a row exists
     for rec in (HERE / "lit").glob("*/LEAN"):
         stem = pathlib.Path(rec.read_text().strip()).stem
         keys = set((rec.parent / "KEYS").read_text().split())
         for args in lrows:
             if args[1].strip() in keys:
                 cites.setdefault(stem, set()).add(args[0])
+        if stem not in cites:
+            cites[stem] = {"record only"}
     # refuted conjectures cite Lean by name in their paragraphs
     for rid, body in re.findall(r"\\paragraph\{(R\d+)\.(.*?)(?=\\paragraph|\\section)", tex, re.S):
         for name in re.findall(r"\\lean\{([A-Za-z0-9]+)\.", body):

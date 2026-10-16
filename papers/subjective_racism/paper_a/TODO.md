@@ -210,10 +210,13 @@ Nothing claimed as new yet. C12 (the closed forms) is pending.
 
 | Source | Status | Bearing |
 |---|---|---|
-| Coate and Loury (1993) | Read [F] 15 Oct 2026, `lit/coate_loury_1993/` | No closed-form threshold, a different channel, and zero is always their equilibrium. Does not anticipate M5, M9 or M10. The predecessor's "patronising equilibrium" identification is unsupported (C13) |
 | Phelps (1972) | Read [P] 15 Oct 2026, `lit/phelps_1972/` | Static, and the individual's own test score is evidence about the individual. No erosion of stereotypes is modelled (C19), so C14's Phelps half fails |
-| Arrow (1971) | Read [P] 15 Oct 2026, the Princeton working paper No. 30A, `lit/arrow_1971/`, cited as `Arrow1971`. The 1973 chapter is not read and no row cites it | Self-confirming beliefs suggested by instability, no erosion benchmark (C14, now a conclusion) |
 | Jeffrey (1983) | Read [P] 15 Oct 2026, chapter 11 and the preface of the second edition, `lit/jeffrey_1983/`. The 1965 first edition is not read | Replaces the unverified attribution in Appendix D (L6), cited as the edition read. Non-commutativity of the rule is now a Lean control (L7) |
+| Pęski and Szentes (2012 WP) | Read [F] 16 Oct 2026, `lit/peski_szentes_2012/` | States that statistical discrimination cannot depend on the observer's own colour (PS-Q4), the claim contribution 1 qualifies |
+| Pesendorfer (1995), Corneo and Jeanne (1994 DP) | Read [F] 16 Oct 2026, `lit/pesendorfer_1995/`, `lit/corneo_jeanne_1994/` | Price screening as certification of an unseen type is theirs, so contribution 3 is new only as venue exclusion built from clients' inference from a marker |
+| Mailath and Postlewaite (2006 WP), Cole, Mailath and Postlewaite (1991 WP) | Read [F] 16 Oct 2026 | Income seen at matching, vertical preferences. The rival to contribution 4 (MP-Q1 to MP-Q3) |
+| Kim and Loury (2009, 2012, 2014) | Read [F] 16 Oct 2026 | M14 holds toward the group with the greater return to skill, not the better reputation (KLI-D2). The consistency condition on group means is in their papers and in four other sources read |
+| Eeckhout (2006), Fryer and Jackson (2008), Austen-Smith and Fryer (2003 WP), Charles, Hurst and Roussanov (2007 WP), Moav and Neeman (2012), Eguia (2013 WP), Craig and Fryer (2017 WP) | Read [F] 16 Oct 2026 | None has contribution 1, 2 or 4. Verdicts by contribution in `notes/motivation_scan.md` |
 | Diaconis and Zabell (1982) | On Drive (`temp`), not read | Not needed by any row |
 | Loury (2002) | Not found on Drive | C17 |
 | Platform-discrimination studies | Not found on Drive | C15 |

@@ -2,7 +2,9 @@
 
 Full texts sought for the sources in `motivation_scan.md`. "Found" means a
 complete text is cached. It does not mean read. A source becomes evidence for a
-row only after a full read and a record under `lit/`.
+row only after a full read and a record under `lit/`. The sources read in full
+on 16 October 2026 are listed in `lit/README.md`. The full reads corrected the
+versions of five files, and the rows below give the version read.
 
 Cache: `~/.cache/paper_a/sources/` (each PDF with its `pdftotext -layout` text)
 and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
@@ -34,12 +36,12 @@ and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
 |---|---|---|---|
 | Pęski and Szentes (2013), AER 103 | BFI WP 2012-005, May 2012 | `peski_szentes_bfi.pdf` | 2e311476a5a57e67 |
 | Mailath and Postlewaite (2006), IER 47 | PIER WP 04-025 and 06-003 | `mailath_postlewaite_2006_wp.pdf`, `_wp06.pdf` | 2acab67af9256bf8, 3ec1560c4956c2c0 |
-| Cole, Mailath and Postlewaite (1992), JPE 100 | CARESS WP 91-14 | `cole_mailath_postlewaite_1992_wp.pdf` | 48ec38df87e7841d |
+| Cole, Mailath and Postlewaite (1992), JPE 100 | CARESS WP 91-14, June 1990, revised June 1991 | `cole_mailath_postlewaite_1992_wp.pdf` | 48ec38df87e7841d |
 | Kim and Loury (2019), JPubE 174, identity choice | KDI J. Econ. Policy 34(2), 2012, inside the issue | `novelty/kl_kdi.pdf` | b97e4d37ac881db3 |
-| Kim and Loury (2018), IER 59 | MPRA 54950, 2012 | `novelty/mpra54950.pdf` | 599ca92393150b5b |
-| Eguia (2017), JPubE 156 | WP, September 2013 | `eguia_2013_wp.pdf` | 8a54c300b3d8953c |
-| Charles, Hurst and Roussanov (2009), QJE 124 | NBER w13392 | `charles_hurst_roussanov_2009.pdf` | f386f956629c4d23 |
-| Austen-Smith and Fryer (2005), QJE 120 | NBER w9904 | `austen_smith_fryer_2005.pdf` | 8705cf80b719b7dd |
+| Kim and Loury (2018), IER 59 | MPRA 54950, version of 31 March 2014 | `novelty/mpra54950.pdf` | 599ca92393150b5b |
+| Eguia (2017), JPubE 156 | WP of 10 September 2013, titled "Discrimination and Assimilation" | `eguia_2013_wp.pdf` | 8a54c300b3d8953c |
+| Charles, Hurst and Roussanov (2009), QJE 124 | NBER w13392, September 2007 | `charles_hurst_roussanov_2009.pdf` | f386f956629c4d23 |
+| Austen-Smith and Fryer (2005), QJE 120 | NBER w9904, August 2003, titled "The Economics of 'Acting White'" | `austen_smith_fryer_2005.pdf` | 8705cf80b719b7dd |
 | Currarini, Jackson and Pin (2009), Econometrica 77 | 2008 WP | `cjp_2009_wp.pdf` | 6a46cd210f46ef74 |
 | Bohren, Imas and Rosenberg (2019), AER 109 | WP, January 2019 | `bohren_imas_rosenberg_2019_wp.pdf` | aa697aa3f30eccc4 |
 | Bohren, Hull and Imas, Systemic Discrimination | NBER w29820 | `bohren_hull_imas_wp.pdf` | 0973ae89c4763ef0 |
@@ -50,8 +52,9 @@ and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
 | Dahis, Nix and Qian (2019) | NBER w26465 | `dahis_nix_qian_2019.pdf` | 11cca560e4b083ad |
 | Mill and Stein (2012) | WP, December 2012 | `mill_stein_2012.pdf` | 19df2e69f6b9c44d |
 | Kraus, Park and Tan (2017), PPS 12 | Accepted manuscript | `kraus_park_tan_2017.pdf` | 49c866cc610311a3 |
-| Corneo and Jeanne (1997), JPubE 66 | Bonn DP A-461 | `corneo_jeanne_1997_dp.pdf` | 2f315ec019f7f38f |
+| Corneo and Jeanne (1997), JPubE 66 | Bonn DP A-461, December 1994, titled "Conspicuous Consumption and the Existence of Upward Sloping Demand Curves" | `corneo_jeanne_1997_dp.pdf` | 2f315ec019f7f38f |
 | Mailath and Postlewaite, Social Assets | PIER WP 02-003, 2002 | `novelty/mp_2002.pdf` | 6358be5b81c521ca |
+| Kim and Loury (2018), IER 59, the earlier version | MPRA 18765, version of 12 November 2009 | `novelty/mpra18765.pdf` | b898397bf690951d |
 
 ## Found, but not the paper cited
 
