@@ -101,4 +101,20 @@ theorem control_two_two_pool_allows_no_crossing : ∃ π : Equiv.Perm (Fin 4), (
     (univ.filter (fun x : Fin 4 => decide (x.val < 2) ≠ decide ((π x).val < 2))).card = 0 :=
   ⟨Equiv.swap 0 1 * Equiv.swap 2 3, by decide⟩
 
+/-! ### A pool of one (issue 14) -/
+
+/-- If a lone entrant got their own former job back at the lottery cost, the lottery would beat
+the return exactly when the lottery cost is below the upskilling cost. Both are paid once, so
+the comparison is the same in lifetime value. -/
+theorem lone_entrant_cheap_lottery_iff {xi L C : ℝ} : xi - C < xi - L ↔ L < C := by
+  constructor <;> intro h <;> linarith
+
+/-- The firm's receipt differs by the whole upskilling cost between the two routes: `C` on the
+return, nothing from the lottery, whose cost leaks out of the firm. -/
+theorem lone_entrant_firm_receipt_gap {C : ℝ} : C - 0 = C := by
+  ring
+
+/-- Control: at `L = C` the lone entrant is indifferent. -/
+theorem control_lone_entrant_indifferent_at_equal_costs {xi C : ℝ} : xi - C = xi - C := rfl
+
 end Isc

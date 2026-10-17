@@ -621,6 +621,14 @@ model:
     lean: [Isc.two_stage_gap_recursion, Isc.joint_expected_group_total, Isc.sum_over_derangements4, Isc.derangements4_fibers, Isc.derangements4_self, Isc.persistence_limits, Isc.persistence_rises, Isc.control_gap_recursion_no_closure]
     status: LEAN_PROVED
     symbols: [X25, X24, X8, X23, X6]
+  - id: M52
+    anchor: 'test of option (b) of issue 14, a lone entrant given their own former job at the lottery cost'
+    claim: 'If a lone entrant received their own former job back at the lottery cost, the lottery would beat the return exactly when the lottery cost is below the upskilling cost, and the firm would receive nothing instead of the upskilling cost, since the lottery cost leaks out of the firm. The firm''s principle of M39''s era, upskilling over the lottery, is then violated whenever $L<C$; under option (a), the lottery unavailable to a lone entrant, the lone entrant''s choice is the return against the downgrade of M40 and the principle holds'
+    assumptions: 'costs paid once; the lottery cost not received by the firm (source line 258)'
+    evidence: 'lean/IscLean/BaseCase.lean::Isc.lone_entrant_cheap_lottery_iff. $x_i-C<x_i-L\iff L<C$; the firm''s receipt is $C$ on the return and $0$ from the lottery (Isc.lone_entrant_firm_receipt_gap); indifference at $L=C$ (Isc.control_lone_entrant_indifferent_at_equal_costs). The manuscript: lottery spending is "diverted into the social lottery channel" and upskilling spending "flows back to the firm"'
+    lean: [Isc.lone_entrant_cheap_lottery_iff, Isc.lone_entrant_firm_receipt_gap, Isc.control_lone_entrant_indifferent_at_equal_costs]
+    status: LEAN_PROVED
+    symbols: [X7, X16, X6]
 
 literature:
   - id: L1

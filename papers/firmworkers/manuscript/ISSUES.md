@@ -54,7 +54,7 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | | | | (b) Every period while the job is held | The one-shot comparisons of M35 and `Routes.lean` are exactly this case; costs then scale with the multiplier like incomes, so nothing changes from the one-shot results. |
 
 | 14 | A pool of one, and when the choice is made (17 Oct) | M24, M30, M33, M36, M39; base case | (a) The lottery is unavailable to a lone entrant; the steady state assumes `d·N` large, so the pool has two or more entrants with probability near one, and the lottery is valued against the ladder's distribution rather than a known pool | Simplest; small-pool results (base case, M24, M30, M33) stay conditional on the pool; the choice before the pool is known becomes a belief about the ladder *(not in Lean)*. |
-| | | | (b) A lone entrant gets their own former job back at the lottery cost | The lottery becomes a return priced at `L`, competing with the upskilling cost whenever pools are small. |
+| | | | (b) A lone entrant gets their own former job back at the lottery cost | The lottery becomes a return priced at `L`; it beats the return exactly when `L < C` (M52), and the firm then receives nothing where the return would have paid it `C`, so the firm's principle (upskilling over the lottery) is violated. Rejected on that ground unless `L ≥ C` is assumed. |
 | | | | (c) A lone entrant swaps with a random job holder | The source's original reading, rejected in M14 and M32; job holders could then lose jobs to the lottery, against M39. |
 | | | | (d) A lone entrant waits for next period's pool | Adds a waiting state, against the steady state's simplicity. |
 
