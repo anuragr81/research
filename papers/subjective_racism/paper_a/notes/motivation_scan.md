@@ -3,7 +3,10 @@
 The author asked what research problem Paper A1 solves, and how class matters
 in social interaction in the existing literature. Every source with a cached
 full text was read in full on 16 October 2026 and given a record under `lit/`,
-39 records in all (`lit/README.md`). In a second pass each record's Lean file
+39 records in all (`lit/README.md`). Hanson and Hawley (2011) was read on 17
+October 2026 and is the fortieth. Goffman (1951), read only in the Spanish
+translation, is set aside at the author's direction on 17 October 2026 and is
+not cited below. In a second pass each record's Lean file
 was extended to implement the source's model, with a coverage table in
 `CLAIMS.md` that lists every numbered result as proved in general, proved in a
 special case, or not formalised with a reason. Quotation IDs below, such as
@@ -86,7 +89,6 @@ What supports it, in pieces:
 - At equal total spending budgets are allocated differently, and visible
   spending is drawn from other categories (CH-Q19, CH-Q20). Visible spending is
   drawn from the hidden budget (`MoavNeeman2012.x_anti_floor`).
-- Class symbols are outlays a class must sustain (GF-Q6, GF-Q20).
 - Chetty et al. suggest priced shared activities, fraternity dues and lunch
   prices (CB-Q10, CB-Q12). The class signals in the Côté study cited by Kraus,
   Park and Tan are budget-laden (KPT-Q8).
@@ -112,8 +114,8 @@ proved as `McPhersonEtAl2001.niche_decomposition`.
 - **Direction (i), avoidance both ways.** Supported by racial inbreeding in
   both groups, stronger for the minority (MSC-Q20, [C] for Shrum et al.), by
   all four ethnic groups on a dating site (HHA-Q16), by the
-  Côté study (KPT-Q8), by high-SES over-befriending in Chetty et al. (CB-Q16),
-  and by Goffman's hostility between categories (GF-Q2). Mutual friendship
+  Côté study (KPT-Q8), and by high-SES over-befriending in Chetty et al.
+  (CB-Q16). Mutual friendship
   makes the two directions one fact in pooled counts
   (`ChettyEtAl2022a.cross_links_balance`).
 - **Direction (ii), a low-class member of the high group preferring
@@ -122,7 +124,7 @@ proved as `McPhersonEtAl2001.niche_decomposition`.
   Eeckhout (EE-Q17, EE-Q18). Limited by Eguia, whose least skilled incumbents
   are the most exclusionary (EG-Q18), by the hybrid of Cole, Mailath and
   Postlewaite, where members below the group mean gain from closure (CM-Q16),
-  by ethnic loyalty in Goffman (GF-Q19), and by Myrdal's teacher, who stayed
+  and by Myrdal's teacher, who stayed
   for his standing among the black elite (MLS-Q8). Passing is the mirror case,
   a high-class member of the low group joining the high group, and is
   selected on income and schooling (DNQ-Q9, MLS-Q13).
@@ -151,21 +153,36 @@ Exact statements, with their conditions, to which A1 links its property:
   additional role" (FM-Q18, `FangMoro2010.phelps_precise_signal`). Craig and
   Fryer give the weight on the group mean as zero for a noiseless signal
   (`CraigFryer2017.betaj_perfect_signal`).
+- Hanson and Hawley, the nearest empirical statement, in rentals. Between two
+  high-class e-mails the net share of landlords who answer only the White name
+  is 1.77 percent and not significant, against 5.96 between two low-class
+  e-mails (HH-Q1, HH-Q7, `table6_high_high`). The scope is narrower than the
+  abstract says. Over all e-mails the gap between high-class e-mails is still
+  4.01 points and significant, and a high-class African American name gets
+  fewer replies than a low-class White name (HH-Q8, HH-D1). A reply is a
+  threshold, and a high enough partial signal puts both names over it although
+  the predictions still differ (`HansonHawley2011.threshold_equal_above`, our
+  reading). A1's engagement rule is a threshold too, so A1 can state the
+  property at the margin of engagement as well as in the limit of shown class.
+  The class e-mail moves the reply rate for African American names only
+  (`HansonHawley2011.table6_class_moves_one_group`), as normal updating
+  predicts for the group with the wider prior and as A1's σ² term suggests.
+  That link is our inference, and a ceiling on White replies would give the
+  same pattern.
 
 Limits on the property. A taste survives (BIR-Q9). A premium on a visible
 attribute survives with income shown in one equilibrium of Mailath and
 Postlewaite (MP-Q3). Firms search one group even under full information in
 Mailath, Samuelson and Shaked [C, through Fang and Moro]. Categorical
 discrimination survives where statistical discrimination would not (FJ-Q11). A
-penalty written into law does not vanish when class is shown (DNQ-Q16).
-Goffman's public proof cannot be openly denied, but covert treatment stays free
-(GF-Q18, `Goffman1951es.control_covert_treatment`). Class consolidated with
+penalty written into law does not vanish when class is shown (DNQ-Q16). Class
+consolidated with
 race produces the same pattern without inference
 (`McPhersonEtAl2001.consolidation_pos`). The empirical facts that a penalty
 survives shown income in dating (HHA-Q3), shown class in speech (LV-Q14) and
-skill controls (GRG-Q9) are facts A1 has to accommodate. Hanson and Hawley
-(2011), a rental penalty that falls when the message signals higher class, is
-known only through Edelman et al. (ELS-Q6).
+skill controls (GRG-Q9) are facts A1 has to accommodate. Two rental studies
+that Hanson and Hawley cite find that positive information does not close the
+gap (HH-Q20, HH-Q21, [C]).
 
 ## The shadow market
 
@@ -199,10 +216,20 @@ value of shadow information. The pieces it rests on are present.
   CJ-Q11), and an intermediary is valued by its clients' average type (PF-Q15).
   An anonymous price cannot separate clients who look alike
   (`RothschildWhite1993.anonymous_same_ranking`), so a variable correlated with
-  group gains value once pricing on group is barred. Theatre attendance, price
-  and curators carry class (GF-Q6, GF-Q8, GF-Q21), the law protects
-  occupational symbols but not class symbols (GF-Q16, GF-Q23), and class
-  benefits are treatment "not openly approved" (GF-Q17).
+  group gains value once pricing on group is barred.
+- **The venue operator screens for its clients' contact.** Landlords of
+  apartments and condominiums discriminate and landlords of single-family homes
+  do not (`HansonHawley2011.table9_nets`), because the former bear the cost if
+  other tenants are displeased (HH-Q12, HH-Q13). The landlord is bound by the
+  law (HH-Q19), and the tenants' contact preferences reach the decision through
+  the landlord.
+- **Discrimination where it leaves no record.** The venue warns that stating a
+  discriminatory preference is illegal (HH-Q18). The difference lies in
+  whether a landlord replies, and once a landlord replies the reply treats both
+  names alike on availability and viewings (HH-Q16). Our reading is that the
+  unanswered e-mail is the shadow channel. Landlords behind an anonymous
+  address do not discriminate more (HH-Q17), a limit on the claim that less
+  exposure raises discrimination.
 - **The mirror cases.** Pesendorfer has sumptuary law substitute for fashion
   where class is identifiable (PF-Q16, PF-Q17), so allowing a formal rule
   removes the need for the signal. In the segregated South the law mandated
@@ -223,8 +250,6 @@ value of shadow information. The pieces it rests on are present.
   (KT-Q3), and a judge using race alone also beats chance
   (`KrausEtAl2019.race_judge_gain`). A1 states that its marker is the group as
   seen and that these cues are outside the model.
-- **An inherited marker.** Goffman places inherited traits used as status
-  symbols in caste rather than class society (GF-Q12).
 - **Consistent beliefs.** Guests' beliefs about minority listings lie below the
   actual mean, carrying 2.5 of the 3.4-point statistical penalty (LR-Q6,
   LR-Q10). Hosts use "different statistical models" (ELS-Q11).
@@ -236,7 +261,7 @@ value of shadow information. The pieces it rests on are present.
 
 - The σ² term is Aigner and Cain's risk premium in a contact setting (AC-Q6,
   `AignerCain1977.contrast_quadratic_ce`).
-- Price screening of an unseen type (PF-Q2, CJ-Q5, GF-Q6).
+- Price screening of an unseen type (PF-Q2, CJ-Q5).
 - The condition that a group's imputed standing equal its members' actual mean
   (KLI-Q10, AS-Q5, `CorneoJeanne1994.eq8`, CF-Q4, CF-Q5).
 - Passing lowering the visible mean, in Kim and Loury toward the group with the
@@ -248,6 +273,6 @@ value of shadow information. The pieces it rests on are present.
 
 Loury (2002); Loury (1998), open access but refused to scripts; Epple and
 Romano (1998); Rothschild and White (1995); Akerlof (1997); Lang (1986); May and
-Goldsmith (2018); Burdett and Coles (1997); Hanson and Hawley (2011); Schwab
-(1986); Epple, Romano and Sieg (2008); Mailath, Samuelson and Shaked (2000);
-Marsden (1988); the books listed in `source_inventory.md`.
+Goldsmith (2018); Burdett and Coles (1997); Schwab (1986); Epple, Romano and
+Sieg (2008); Mailath, Samuelson and Shaked (2000); Marsden (1988); the books
+listed in `source_inventory.md`.

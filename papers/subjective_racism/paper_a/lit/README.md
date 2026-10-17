@@ -62,7 +62,8 @@ is in `notes/motivation_scan.md`.
 | `laouenan_rathelot_2022/` | [F] 16 Oct 2026, with the WRAP manuscript read for differences | `lean/mathlib/LaouenanRathelot2022.lean` | none yet |
 | `levon_sharma_ilbury_2022/` | [F] 16 Oct 2026, the Sutton Trust report Speaking Up | `lean/mathlib/LevonEtAl2022.lean` | none yet |
 | `bohren_hull_imas_2024/` | [F] 16 Oct 2026, NBER working paper 29820 as revised in December 2024 | `lean/mathlib/BohrenEtAl2024.lean` | none yet |
-| `goffman_1951_es/` | [F] 16 Oct 2026, the authorised Spanish translation only, cited as such | `lean/mathlib/Goffman1951es.lean` | none yet |
+| `goffman_1951_es/` | [F] 16 Oct 2026, the authorised Spanish translation only, set aside at the author's direction on 17 Oct 2026 and not cited | `lean/mathlib/Goffman1951es.lean` | none yet |
+| `hanson_hawley_2011/` | [F] 17 Oct 2026, Experimental Economics Center working paper 2011-05, cited as such | `lean/mathlib/HansonHawley2011.lean` | none yet |
 
 Where a cached text interleaves two columns, the record checks quotations
 against a reading-order extraction made with `pdftotext` from the same pinned

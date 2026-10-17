@@ -58,6 +58,7 @@ and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
 | Corneo and Jeanne (1997), JPubE 66 | Bonn DP A-461, December 1994, titled "Conspicuous Consumption and the Existence of Upward Sloping Demand Curves" | `corneo_jeanne_1997_dp.pdf` | 2f315ec019f7f38f |
 | Mailath and Postlewaite, Social Assets | PIER WP 02-003, 2002 | `novelty/mp_2002.pdf` | 6358be5b81c521ca |
 | Kim and Loury (2018), IER 59, the earlier version | MPRA 18765, version of 12 November 2009 | `novelty/mpra18765.pdf` | b898397bf690951d |
+| Hanson and Hawley (2011), JUE 70 | Experimental Economics Center WP 2011-05, from ScholarWorks@GSU, after review. The repository adds a dated cover sheet, so a fresh download has a different sha256 | `hanson_hawley_2011_wp.pdf` | 02e1f3394f4d8d8c |
 
 ## Found, but not the paper cited
 
@@ -65,7 +66,7 @@ and `~/.cache/paper_a/novelty/`. The sha256 prefix pins the file.
 |---|---|
 | Grogger (2011), JHR 46, Speech patterns and racial wage inequality | Grogger, Speech and Wages, a later paper (`grogger_speech_wp.pdf`) |
 | Rothschild and White (1995), JPE 103 | Their 1993 NBER chapter on the university in the marketplace (`rothschild_white_1993_chapter.pdf`) |
-| Goffman (1951), BJS 2, Symbols of class status | Authorised Spanish translation only (`goffman_1951_es.pdf`) |
+| Goffman (1951), BJS 2, Symbols of class status | Authorised Spanish translation only (`goffman_1951_es.pdf`), set aside at the author's direction on 17 October 2026 |
 
 ## Open access, but the site refuses scripts
 
