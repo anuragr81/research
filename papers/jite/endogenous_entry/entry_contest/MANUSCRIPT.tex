@@ -524,25 +524,27 @@ that check it.}\\
 \normalsize
 
 \section{Literature}
+\label{sec:literature}
 
-The 33 papers in the table supply the pieces of the model, and none supplies
-their combination. Entry models (L2 to L7, L24, L29, L31) give the count's
-monotonicity in the prize and the fee and the bound of M10, but with identical
-entrants they leave who enters unexplained, where here wealth pins the count
-and the $k^*$ richest entering is always an equilibrium (K1). In contests with
-an effort margin a more accurate ranking can draw fewer entrants (L20, L22),
-where here, with the incumbent scored as an entrant, a lower weight on the base
-component never lowers the count (M28).
-The pivot-spreads of M13 come from the orders of dispersion (L9 to L11, L21),
-with the pivot fixed by technology in L9 and set by the marginal entrant here
-(K2). Wealth effects in contests are in print through conditions on $u'''$ (L1,
-L12), where entry here sorts on $u''<0$ alone (M23). Models in which agents
-invest before a selection (L25, L27, L28, L30, L32, L33) come nearest, since
-those who do not invest still compete, but none counts those who pay a fee. No
-paper read or found in the search of 15 October 2026 (\path{LITERATURE.tex})
-combines a fixed fee that buys the bought component, outsiders who compete on
+% BEGIN literature summary, rendered by checks/ledger_literature.py --write; edit the ledger, not this text
+Models of entry give the entry count's monotonicity in the prize and the fee and
+its bound by the prize. With identical challengers they leave who enters
+unexplained, where here wealth pins the entry count and entry by the assortative
+set is always an equilibrium. In contests with an effort margin a more accurate
+ranking of the costly choice can drive contestants out once effort competes the
+rents away, where here, with the incumbent scored as an entrant, a lower weight
+on the base component never lowers the entry count. The pivot-spreads come from
+the orders of dispersion, and the position that signs their effect is fixed by
+technology in Costrell and Loury and set by the marginal entrant here. Wealth
+effects in contests turn in print on the third derivative of utility, where here
+burden-monotonicity, which strict concavity gives, sorts entry by wealth. Models
+of investment before a selection come nearest, since those who do not invest
+still compete, as an outsider does here, but none has an entry count of
+challengers who pay a fee. No paper read or found in the search of 15 October
+2026 combines a fixed fee buying the bought component, outsiders competing on
 the base component, a fixed number of positions awarded by rank, and wealth
-that acts only through the fee's utility cost.
+acting only through the entry cost.
+% END literature summary
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{2.2cm}P{3.5cm}P{5.5cm}P{1.3cm}P{1.9cm}@{}}
@@ -1707,7 +1709,7 @@ column names the theorems, and the proof of each row in
 Appendix~\ref{app:proofs} names the same ones. The development lives in
 \path{lean/mathlib/}, built on the toolchain \path{v4.24.0-rc1} against Mathlib
 commit \path{14871d5}, beside the core file \path{lean/EntryContest.lean}, which
-uses no Mathlib. The script \path{verify.sh} runs three kinds of check on every
+uses no Mathlib. The script \path{verify.sh} runs four kinds of check on every
 build, and \path{VERIFICATION.md} records what they printed.
 
 \begin{enumerate}
@@ -1730,6 +1732,18 @@ build, and \path{VERIFICATION.md} records what they printed.
   discrepancy found, and Lean for the mathematical claims. A record checks our
   reading of a source and does not reprove the source. The records run under
   \path{lit/verify_lit.sh}.
+\item \emph{The literature ledger} (\path{checks/ledger_literature.py}). The
+  summary that opens Section~\ref{sec:literature} is rendered from a ledger.
+  The ledger declares the entities first, namely the strands of the literature,
+  the search of 15 October 2026 and the objects of the model under their names
+  in Appendix~\ref{app:terminology}. It then records the relations among them,
+  each with the literature rows on one side and, for a contrast, the model rows
+  on the other. Each sentence expresses listed relations, so the prose carries
+  no row identifiers. The ledger fails when an entity or a row does not exist,
+  when a relation is expressed other than once, when a sentence does not name
+  the entities of its relations, when a cited row has changed since the
+  relations were last reviewed against it, and when the paragraph in the
+  manuscript is not its rendering.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The standing assumptions of

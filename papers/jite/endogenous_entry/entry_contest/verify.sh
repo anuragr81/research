@@ -253,6 +253,10 @@ echo "======================================================================"
 python3 "$HERE/checks/verify_docs.py" "$OUT" 2>&1 | tee -a "$OUT" || FAILED=1
 echo '```' >> "$OUT"
 
+{ echo; echo '## Suite 13b - literature summary ledger (`checks/ledger_literature.py`)'; echo; echo '```'; } >> "$OUT"
+python3 "$HERE/checks/ledger_literature.py" 2>&1 | tee -a "$OUT" || FAILED=1
+echo '```' >> "$OUT"
+
 echo
 if [ "$FAILED" -eq 0 ]; then
   echo "ALL SUITES COMPLETED"
