@@ -253,8 +253,9 @@ echo "======================================================================"
 python3 "$HERE/checks/verify_docs.py" "$OUT" 2>&1 | tee -a "$OUT" || FAILED=1
 echo '```' >> "$OUT"
 
-{ echo; echo '## Suite 13b - literature summary ledger (`checks/ledger_literature.py`)'; echo; echo '```'; } >> "$OUT"
+{ echo; echo '## Suite 13b - ledger of the conclusions (`checks/ledger_literature.py`)'; echo; echo '```'; } >> "$OUT"
 python3 "$HERE/checks/ledger_literature.py" 2>&1 | tee -a "$OUT" || FAILED=1
+dot -Tpdf "$HERE/figures/conclusions_ledger.dot" -o "$HERE/figures/conclusions_ledger.pdf" 2>&1 | tee -a "$OUT" || FAILED=1
 echo '```' >> "$OUT"
 
 echo

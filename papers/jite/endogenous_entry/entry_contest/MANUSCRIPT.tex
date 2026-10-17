@@ -39,6 +39,7 @@
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
+\usepackage{graphicx}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
@@ -527,23 +528,23 @@ that check it.}\\
 \label{sec:literature}
 
 % BEGIN literature summary, rendered by checks/ledger_literature.py --write; edit the ledger, not this text
-Models of entry give the entry count's monotonicity in the prize and the fee and
-its bound by the prize. With identical challengers they leave who enters
-unexplained, where here wealth pins the entry count and entry by the assortative
-set is always an equilibrium. In contests with an effort margin a more accurate
-ranking of the costly choice can drive contestants out once effort competes the
-rents away, where here, with the incumbent scored as an entrant, a lower weight
-on the base component never lowers the entry count. The pivot-spreads come from
-the orders of dispersion, and the position that signs their effect is fixed by
-technology in Costrell and Loury and set by the marginal entrant here. Wealth
-effects in contests turn in print on the third derivative of utility, where here
-burden-monotonicity, which strict concavity gives, sorts entry by wealth. Models
-of investment before a selection come nearest, since those who do not invest
-still compete, as an outsider does here, but none has an entry count of
-challengers who pay a fee. No paper read or found in the search of 15 October
-2026 combines a fixed fee buying the bought component, outsiders competing on
-the base component, a fixed number of positions awarded by rank, and wealth
-acting only through the entry cost.
+No paper read signs how a pivot-spread of wealth moves the entry count. Here,
+given anonymity and an entry cost that falls with wealth, the marginal entrant
+against the pivot sets the sign, and outside the band two ranks suffice where
+Costrell and Loury use one quantile fixed by technology. Every equilibrium has
+the same entry count, new for finitely many challengers whose entry costs differ
+with wealth, because the gain depends on the count alone, and the assortative
+set settles who enters without the devices of models with identical entrants.
+The first entrant's gain has the form of Ryvkin and Drugov's marginal benefit,
+and that it never falls in the number of challengers with a uniform base
+component is new. With the incumbent scored as an entrant, the entry count does
+not rise in the weight on the base component, a new sign, opposite to the effort
+models read. The entrants' share of the prize as a function of the entry count
+is new, since elsewhere outsiders cannot win or agents form a continuum, and it
+does not rise in the weight on the base component. Only an entrants' share above
+its benchmark, the entry count plus one over the number of challengers plus one,
+shows that the bought component counts, which bears on Tilly's opportunity
+hoarding.
 % END literature summary
 
 \footnotesize
@@ -813,7 +814,23 @@ its two nearest neighbours, \citet{LiuGargBorgs2022} (L32) and
 \citet{HuImmorlicaVaughan2019} (L33), were read in full and change none of the
 claims. C15 to C18 are implications for an institution that sets the fee, the
 prize or the weight. They say what follows from each choice, not which choice
-is better, since the model has no welfare objective.
+is better, since the model has no welfare objective. Figure~\ref{fig:ledger}
+draws the conclusions as relations among the players and the objects of the
+measurement map.
+
+\begin{figure}[p]
+\centering
+\includegraphics[angle=90,width=\textwidth,height=0.9\textheight,keepaspectratio]{figures/conclusions_ledger.pdf}
+\caption{The conclusions as relations among the players and the objects of the
+measurement map. Boxes are rows of the map, in its four tables, filled by their
+Observed code. Black edges are a player's options from
+Table~\ref{tab:players}. Each ellipse is a relation, labelled with what it says,
+the conclusions it represents and their standing against the papers read; solid
+edges lead in from what changes and out to what responds, and dashed edges are
+conditions. The figure is drawn by \texttt{checks/ledger\_literature.py} from its
+ledger (Appendix~\ref{app:evidence}).}
+\label{fig:ledger}
+\end{figure}
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -1732,18 +1749,23 @@ build, and \path{VERIFICATION.md} records what they printed.
   discrepancy found, and Lean for the mathematical claims. A record checks our
   reading of a source and does not reprove the source. The records run under
   \path{lit/verify_lit.sh}.
-\item \emph{The literature ledger} (\path{checks/ledger_literature.py}). The
-  summary that opens Section~\ref{sec:literature} is rendered from a ledger.
-  The ledger declares the entities first, namely the strands of the literature,
-  the search of 15 October 2026 and the objects of the model under their names
-  in Appendix~\ref{app:terminology}. It then records the relations among them,
-  each with the literature rows on one side and, for a contrast, the model rows
-  on the other. Each sentence expresses listed relations, so the prose carries
-  no row identifiers. The ledger fails when an entity or a row does not exist,
-  when a relation is expressed other than once, when a sentence does not name
-  the entities of its relations, when a cited row has changed since the
-  relations were last reviewed against it, and when the paragraph in the
-  manuscript is not its rendering.
+\item \emph{The ledger of the conclusions} (\path{checks/ledger_literature.py}).
+  The ledger declares the entities first, each a row of the measurement map
+  with its table and its Observed code, the players among them with the
+  options Table~\ref{tab:players} gives them. It then records the conclusions
+  as relations among the entities, a change in some entities that moves, pins,
+  orders or caps another under conditions that are themselves entities, each
+  citing the conclusions it represents, the rows they rest on and their
+  standing against the papers read. The summary that opens
+  Section~\ref{sec:literature} and Figure~\ref{fig:ledger} are rendered from
+  the ledger, so the prose carries no row identifiers. The ledger fails when an
+  entity is not a row of the map, when a player's option is not in its row of
+  Table~\ref{tab:players}, when a conclusion is represented by no relation, when
+  a relation cites a row its conclusions do not rest on or a standing they do
+  not state, when a relation with literature rows is not expressed exactly once,
+  when a sentence does not name the entities of its relations, when a cited row
+  has changed since the relations were last reviewed against it, and when the
+  paragraph or the figure is not its rendering.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The standing assumptions of
