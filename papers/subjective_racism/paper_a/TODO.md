@@ -252,6 +252,14 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   stands with the first family on the signal, an unchosen marker, and apart
   from all four on the reader, whose own class enters the decision. Rows
   L13 to L23 carry the quotations, and C22 names the nearest readers.
+- [x] **D10. An implications table, within one period and with its limits.
+  Decided 17 Oct 2026 by the author** ("write a table for these 5 policy
+  implications based on short-term solution that's in the paper. then
+  another column in this table should state how the long-term equilibrium
+  limits the implications"). Table I1 to I5 in the Conclusions. Row M20,
+  `Implications.lean`, signs the comparative statics of the sensitivity,
+  the engagement threshold and the admission threshold that I3 and I5 use.
+  The author may cut the table to two or three rows.
 
 ## Novelty ledger
 

@@ -66,6 +66,7 @@
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+\newcommand{\irow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
 
 \newenvironment{mproof}[2]
   {\subsection*{Proof of #1}\label{proof:#1}%
@@ -456,7 +457,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   weight, and an admitted outsider member pays the willingness to pay.
   Platform profit is the admission rate times the admission margin, so it is
   linear in the admission rate.}
-  {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$}{M15}
+  {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$}{M15, M20}
   {The predecessor's first-order condition, taken as a definition
   (Appendix~\ref{app:scope}, The platform channel).}
 \arow{A14}{The observer of own class $y$ values engagement with a person of
@@ -501,7 +502,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   shared level, and declining yields the outside option with the ideal
   level alone. Lean, \lean{Budget.payoff\_eq}.}
   {$c$, $b$, $\beta$, $p$, $\gamma$, $h$, $a$, $v$, $\bar u$}
-  {M19}
+  {M19, M20}
   {The author's account of budget compatibility as the micro-foundation of
   class homophily, with the quadratic payoff chosen so that the loss, the
   compromise and the sensitivity have closed forms. The general concave
@@ -655,6 +656,18 @@ that check it.}\\
   and $p^*(b_i+b_j)$ does not fall in $b_j$. Under separate budgets
   $v-\kappa(c_i-c_j')^2<v-\kappa(c_i-c_j)^2$ when $(c_i-c_j)^2<(c_i-c_j')^2$.}
   {Budget.payoff_eq, Budget.loss_eq, Budget.ideal_max, Budget.ideal_unique, Budget.ideal_sub, Budget.ideal_mono, Budget.argmax_mono, Budget.payoff_increasing_differences, Budget.concave_four_point, Budget.concave_increasing_differences, Budget.mid_min, Budget.loss_mid, Budget.engagement_utility, Budget.sensitivity_pos, Budget.engage_iff, Budget.weighted_losses, Budget.weighted_equal_iff, Budget.affordable_iff, Budget.bound_mono, Budget.control_linear_private, Budget.control_pooled_gap_free, Budget.control_pooled_level_mono, Budget.control_separate_gap_cost}
+\mrow{M20}{The sensitivity does not rise in the activity curvature and does
+  not fall in the budget slope, and the engagement threshold does not fall
+  as the sensitivity falls. The admission threshold does not rise in the
+  willingness to pay, the room size or the objective weight, and does not
+  fall in the number of host clients.}
+  {(i) $0<a+h$ and $h\le h'$ give $\kappa(a,h',\beta)\le\kappa(a,h,\beta)$.
+  (ii) $0\le\beta\le\beta'$ gives $\kappa(a,h,\beta)\le\kappa(a,h,\beta')$.
+  (iii) $u\le v$ and $0<\kappa\le\kappa'$ give $(v-u)/\kappa'\le(v-u)/\kappa$.
+  (iv) With $0\le W$, $0\le|A|$, $0<N$ and $\alpha<1$, $c_E$ does not rise
+  in $W$, in $|A|$ or in $\alpha$, and does not fall in $N$.
+  (iii) reverses with $v<u$, and (iv) reverses in $|A|$ with $W<0$.}
+  {Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses, Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
 \end{longtable}
 \normalsize
 
@@ -863,7 +876,8 @@ Table~\ref{tab:conclusions} holds the conclusions, each resting only on
 Lean results of the model table and on quotations from papers read.
 Table~\ref{tab:pending} holds claims that are not conclusions, because they
 wait on a source not yet read, and each names that source. No headline and
-no conclusion rests on them.
+no conclusion rests on them. Table~\ref{tab:implications} draws the
+implications for policy and says what limits each.
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -942,6 +956,77 @@ no conclusion rests on them.
   the literature it opens, read in full, and the dating evidence of L12
   reconciled with a cost in the gap.}}{M19, L12}
 \end{longtable}
+
+Table~\ref{tab:implications} draws five implications for policy from the
+rows. Each is a statement within one period, with the standings, the
+beliefs, the composition of settings and the class distribution fixed, and
+the last column says what moves beyond one period and how far that limits
+the implication. None is a conclusion, and the table claims nothing the
+rows do not.
+
+\begin{longtable}{@{}P{0.8cm}P{6.4cm}P{1.4cm}P{7.5cm}@{}}
+\caption{Implications for policy within one period, and what moves beyond it.}
+\label{tab:implications}\\
+\toprule
+\textbf{ID} & \textbf{Implication within one period} & \textbf{Rows} &
+\textbf{What moves beyond one period} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Implication within one period} & \textbf{Rows} &
+\textbf{What moves beyond one period} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\irow{I1}{Narrow the spread. The expected distance adds each group's spread
+  to the squared gap, weighted by the posterior on the group, so a narrower
+  spread lowers the distance for every observer, where a higher standing
+  lowers it only among observers above the standing. A price that certifies
+  class, or a shown class, acts on the spread.}{M18}{Once class is read
+  within the group, group sufficiency fails and the marker carries nothing,
+  so the setting is a signalling one (L17) and the sorting is by class in
+  place of group. The row says what the spread does while the marker still
+  holds.}
+\irow{I2}{Pair outsiders with hosts at or above the standing. A higher
+  outsider standing does not raise refusal among observers at or above the
+  standing and does not lower refusal among observers below it, so mixing
+  by venue should not expect the host's poorest to warm as the outsider
+  group rises.}{M18}{The standing is the mean of the observer's prior, and
+  no row ties it to the mean of the people the observer meets, whom refusal
+  selects. With both sides deciding, outsiders refuse too, and the mutual
+  engagement is the open double arrow of Figure~\ref{fig:ledger}. The sign
+  holds for a given standing and need not hold once the standing is the
+  outcome.}
+\irow{I3}{Fix the activity level. The sensitivity does not rise in the
+  activity curvature and does not fall in the budget slope, and the
+  engagement threshold widens as the sensitivity falls, so a setting where
+  the level is fixed or capped makes the class gap cheap to bridge, and a
+  setting where each pays for a chosen level makes the gap dear. The
+  compromise is affordable up to a bound that rises in the poorer
+  budget.}{M19, M20}{The richer leave a capped setting for one where the
+  level is not capped, which is the platform's self-selection on atmosphere
+  in Figure~\ref{fig:ledger}. The gain within the setting can be offset by
+  sorting between settings, and no row carries the choice of setting.}
+\irow{I4}{Do not reward passing. When the upper members pass, the visible
+  mean falls and the refusal rate against those who stay does not fall, so
+  a policy that raises the passing gain of the better-off lowers the
+  standing of those who stay, and a policy that lowers the gain keeps the
+  better-off visible.}{M14}{Passing lowers the visible mean, the lower mean
+  raises refusal, and higher refusal raises the gain from passing. The rows
+  carry one step of that chain, and whether the standing settles or keeps
+  falling is outside the paper.}
+\irow{I5}{Change the admission margin. The admission threshold does not
+  rise in the willingness to pay, the room size or the objective weight,
+  and does not fall in the number of host clients, so a subsidy to
+  admission, a larger room and clients who weight objective quality more
+  push a platform toward admission, and a platform with many host clients
+  is the one that excludes.}{M15, M20}{Admission changes the room's
+  composition, and clients self-select on atmosphere, so host clients may
+  leave. Fewer host clients lower the threshold further, and the outcome
+  is sorting across platforms in place of exclusion within one. The
+  platform market has no row (Figure~\ref{fig:ledger}).}
+\end{longtable}
 \normalsize
 
 \bibliographystyle{plainnat}
@@ -992,7 +1077,8 @@ curvature $a$, the payoff $V(p,b)$, the ideal level $p^*(b)$, the loss
 $L(p,b)$, the compromise level $\bar p$, a split $\omega$ between the two
 ideals, and two persons $i$ and $j$ with classes $c_i$, $c_j$ and budgets
 $b_i$, $b_j$. In M19 (i) $\varphi$ is any concave private utility and $\psi$
-any activity utility.
+any activity utility. Row M20 uses the symbols of M15, M18 and M19, with
+$c_E(\cdot)$ and $\kappa(\cdot)$ marking the argument that moves.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=\lambda_g\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -1163,6 +1249,30 @@ $p^*(b_i+b_j)$ rises with $b_j$ by (i). Under separate budgets
 $\kappa(c_i-c_j)^2<\kappa(c_i-c_j')^2$ for $\kappa>0$.
 \end{mproof}
 
+\begin{mproof}{M20}{Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses, Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
+(i) and (ii). $\kappa(a,h,\beta)=a^2\beta^2/(8(a+h))$. With $0<a+h\le a+h'$,
+\[
+\frac{a^2\beta^2}{8(a+h')}\le\frac{a^2\beta^2}{8(a+h)},
+\qquad\text{and with } 0\le\beta\le\beta',\quad
+\frac{a^2\beta^2}{8(a+h)}\le\frac{a^2\beta'^2}{8(a+h)}.
+\]
+(iii) With $0\le v-u$ and $0<\kappa\le\kappa'$, $(v-u)/\kappa'\le(v-u)/\kappa$.
+Control. With $v-u<0$ and $0<\kappa<\kappa'$, $1/\kappa'<1/\kappa$ and
+$(v-u)\cdot1/\kappa<(v-u)\cdot1/\kappa'$.
+(iv) $c_E=\bar c_I-W|A|/(N(1-\alpha))$, with $N(1-\alpha)>0$. With $0\le|A|$ and
+$W\le W'$, $W|A|\le W'|A|$, so $c_E(W')\le c_E(W)$. With $0\le W$ and
+$|A|\le|A'|$, $W|A|\le W|A'|$, so $c_E(|A'|)\le c_E(|A|)$. With $0\le W|A|$
+and $N\le N'$, $N(1-\alpha)\le N'(1-\alpha)$, so
+\[
+\frac{W|A|}{N'(1-\alpha)}\le\frac{W|A|}{N(1-\alpha)}
+\quad\Longrightarrow\quad c_E(N)\le c_E(N').
+\]
+With $\alpha\le\alpha'<1$, $N(1-\alpha')\le N(1-\alpha)$, so
+$W|A|/(N(1-\alpha))\le W|A|/(N(1-\alpha'))$ and $c_E(\alpha')\le c_E(\alpha)$.
+Control. With $W<0$ and $|A|\le|A'|$, $W|A'|\le W|A|$, so
+$c_E(|A|)\le c_E(|A'|)$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -1216,6 +1326,7 @@ records what they printed.
 \path{Grogger2018} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Grogger2018.lean}{\path{lean/mathlib/Grogger2018.lean}} & record only \\
 \path{HansonHawley2011} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/HansonHawley2011.lean}{\path{lean/mathlib/HansonHawley2011.lean}} & record only \\
 \path{HitschEtAl2006} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/HitschEtAl2006.lean}{\path{lean/mathlib/HitschEtAl2006.lean}} & L12 \\
+\path{Implications} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Implications.lean}{\path{lean/mathlib/Implications.lean}} & M20 \\
 \path{Jeffrey1983} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Jeffrey1983.lean}{\path{lean/mathlib/Jeffrey1983.lean}} & record only \\
 \path{KimLoury2009} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2009.lean}{\path{lean/mathlib/KimLoury2009.lean}} & record only \\
 \path{KimLoury2012} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2012.lean}{\path{lean/mathlib/KimLoury2012.lean}} & record only \\
