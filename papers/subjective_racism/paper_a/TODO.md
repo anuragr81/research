@@ -146,7 +146,8 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
 - [ ] **Q12. What the appendix pass and the retirement left.** New rows, not
   predecessor claims. Done 17 Oct 2026, M18, a row deriving `F` from the
   engagement decision (D5), carrying `rem:graded` as the two ranges of
-  monotonicity and `rem:salience` as part (iv). Still open, the rest of this
+  monotonicity and `rem:salience` as part (iv). M19, the quadratic utility
+  derived from budget compatibility (D6). Still open, the rest of this
   item. The signal precision `tau` of
   `rem:resolution`. A platform objective derived rather than assumed. An
   upper bound on the escape time. Cohorts, if the Discussion's claim that
@@ -206,7 +207,21 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   derived function does not rise in the standing only on the range at or
   below every observer's class, and does not fall on the range at or above
   it, so M14 (iii) holds for observers above the group and reverses below
-  it. The quadratic form of the utility is still taken as given.
+  it. The quadratic form of the utility was still taken as given until D6.
+- [x] **D6. Derive the quadratic engagement utility from budget
+  compatibility. Decided 17 Oct 2026 by the author** ("Ok let's address
+  that", on the report that the quadratic form was the loose end left by
+  D5). Row M19, `Budget.lean`, assumption A15. Separate budgets, one shared
+  activity at one level paid by each from the own budget, a quadratic payoff
+  over the level and private consumption. The ideal level rises in the
+  budget for any concave private utility (Topkis step), the pair's level is
+  the midpoint of the ideals, each side loses `κ (c_i − c_j)²` with
+  `κ = a²β²/(8(a+h))`, and the compromise is within the poorer partner's
+  budget only up to a gap bound that rises in that budget. Controls: a
+  linear private utility gives no loss, pooled budgets give a payoff in the
+  sum alone. What is still assumed is the quadratic payoff of A15 and the
+  pair's rule of minimising the two losses, not derived from bargaining.
+  The novelty claim is C24, pending.
 
 ## Novelty ledger
 

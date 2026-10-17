@@ -69,8 +69,10 @@ margin. Every belief is the observer's and is a construct attributed to the
 observer to rationalise what the observer does. Every rate is a fact of the
 world that records can reach. The model's one payoff
 is the engagement utility of M18, which enters every row only through the
-engagement threshold, so the baseline value, the sensitivity and the outside
-option are read only up to the threshold they give. The engagement decision
+engagement threshold, so the baseline value and the outside
+option are read only up to the threshold they give. The sensitivity is
+derived in M19 from the budget slope and the two curvatures of the payoff
+over the activity level and private consumption. The engagement decision
 of the predecessor manuscript, which turns a belief into a refusal, is row
 M18, and the discrimination-rate function $F$ that M14 uses is derived
 there. Objects that no row carries are listed with that said, so that their
@@ -190,10 +192,36 @@ here.
   class distance (M18).}
   {No}{Never observed. It enters every row only through the engagement
   threshold.}
-\mm{$\kappa$}{Sensitivity}{A real number with $\kappa>0$.}{The fall in
-  engagement utility per unit of squared class distance (M18).}
-  {No}{Never observed. It enters every row only through the engagement
-  threshold.}
+\mm{$\kappa$}{Sensitivity}{A real number with $\kappa>0$,
+  $\kappa=a^2\beta^2/(8(a+h))$.}{The fall in engagement utility per unit of
+  squared class distance (M18), the loss each side of a pair bears at the
+  compromise level (M19).}
+  {No}{Computed from the private curvature, the activity curvature and the
+  budget slope (M19, \lean{Budget.engagement\_utility}). It enters M18 only
+  through the engagement threshold.}
+\mm{$b$}{Budget}{A real number, $b=\beta c$.}{The consumption a person's
+  class affords, split between the shared activity and private consumption
+  (M19).}
+  {Yes}{Recorded as the person's income or total spending.}
+\mm{$\beta$}{Budget slope}{A real number with $\beta>0$.}{The budget per
+  unit of class (M19).}
+  {No}{Computed as the slope of recorded budgets on recorded class ranks.}
+\mm{$p$}{Activity level}{A real number.}{The level of the one activity a
+  pair shares, paid by each from the own budget (M19).}
+  {Yes}{Recorded as the price per head of the shared activity.}
+\mm{$\gamma$}{Activity value}{A real number.}{The payoff per unit of
+  activity level (M19).}
+  {No}{Never observed. It enters the rows through the ideal level and the
+  affordability bound.}
+\mm{$h$}{Activity curvature}{A real number with $h>0$.}{The fall in the
+  activity's marginal payoff per unit of level (M19).}
+  {No}{Never observed. It enters the rows through the ideal level and the
+  sensitivity.}
+\mm{$a$}{Private curvature}{A real number with $a>0$.}{The fall in the
+  marginal payoff of private consumption per unit of consumption (M19). With
+  a linear private utility the class gap costs nothing.}
+  {No}{Never observed. It enters the rows through the ideal level and the
+  sensitivity, and it is the curvature that a pooled budget would hide.}
 \mm{$\bar u$}{Outside option}{A real number.}{The utility of declining to
   engage (M18).}
   {No}{Never observed. It enters every row only through the engagement
@@ -257,6 +285,19 @@ here.
   prior by group weights $w$. M2 and M3 show it is the Bayesian posterior on
   class exactly when $w=q'$.}
   {No}{Computed from the priors and the weights.}
+\mm{$p^*$}{Ideal level}{A real number, $p^*(b)=(ab+\gamma-1)/(a+h)$.}{The
+  activity level a person would set alone, which does not fall in the
+  budget (M19).}
+  {No}{Computed from the budget, the activity value and the two curvatures
+  (M19, \lean{Budget.ideal\_max}, \lean{Budget.ideal\_mono}). Recorded
+  spending on activities against recorded budgets would test the
+  monotonicity.}
+\mm{$\bar p$}{Compromise level}{A real number, the midpoint of the two
+  ideal levels.}{The level a pair shares, the minimiser of the sum of the two
+  losses (M19).}
+  {No}{Computed from the two ideal levels (M19, \lean{Budget.mid\_min}).
+  The recorded price of what a pair does together against the two
+  members' budgets would test it.}
 \mm{$\bar c$}{Standing}{A real number in $[0,1]$.}{The mean class of a group
   in a generation. The state of the dynamic part.}
   {Yes}{Recorded as the group's
@@ -362,11 +403,13 @@ here.
 \item \emph{Elicited and not recorded.} Every belief, the prior, the group
   weights, the three posteriors and the salience. Each is the observer's and
   rationalises the observer's refusals, which are what records reach.
-\item \emph{Assumed.} Group sufficiency, the quadratic form of the engagement
-  utility, and the admission objective linear in the admission rate.
-\item \emph{Never observed.} The passing gain, the passing cost, and the
-  baseline value, the sensitivity and the outside option behind the
-  engagement threshold.
+\item \emph{Assumed.} Group sufficiency, the quadratic payoff over the
+  activity level and private consumption behind the engagement utility, the
+  pair's level as the minimiser of the two losses, and the admission
+  objective linear in the admission rate.
+\item \emph{Never observed.} The passing gain, the passing cost, the
+  baseline value and the outside option behind the engagement threshold,
+  and the activity value and the two curvatures behind the sensitivity.
 \end{itemize}
 
 \end{document}
