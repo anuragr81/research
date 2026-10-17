@@ -427,7 +427,7 @@ paper's claims, and only then write the manuscript.
     and for every small `mu > 0`. Mean-preservation therefore does not keep a
     margin out of the band, and the earlier band witnesses
     (`band_both_directions`) did not keep the total. M13 and M14 of
-    `MANUSCRIPT.tex` now cite the new theorems.
+    `skeleton_who_pays.tex` now cite the new theorems.
 
 - [!] **L6. Fullerton and McAfee (1999) read, 7 Oct 2026. Decisions for Anurag.**
   Read in full from `auction_entry.pdf` (printed pages 573 to 603, the last two
@@ -708,7 +708,7 @@ paper's claims, and only then write the manuscript.
   proved (`exists_mem_ge`, `exists_not_mem_le`), and `count_invariance`
   holds with no hypothesis beyond the model's. `MEASUREMENT_MAP.tex` and the
   P5-inv passage and row of `PROOFS.tex` cite the Lean. Pass 3 is complete.
-  Pass 4a done 7 Oct 2026. `MANUSCRIPT.tex` now carries model rows M1 to M8
+  Pass 4a done 7 Oct 2026. `skeleton_who_pays.tex` now carries model rows M1 to M8
   (P1, P2, P3, the monotonicity corollary, P5, count invariance, identities
   pinned, N4) with a notation block and eight proofs in Appendix A, each
   naming its Lean theorems and under the 30% prose limit. Writing the rows
@@ -761,7 +761,7 @@ paper's claims, and only then write the manuscript.
   on `KappaSpread.lean`, `BurdenWeaker.lean` and `Anonymity.lean`.
   `Anonymity.lean` gained the ASCII alias `kappa3_values` so the manuscript can
   cite the costs. Pass 4 is complete. Next is pass 5.
-  Pass 5 done 7 Oct 2026. The five appendix stubs of `MANUSCRIPT.tex` are
+  Pass 5 done 7 Oct 2026. The five appendix stubs of `skeleton_who_pays.tex` are
   filled. Evidence and verification is rewritten for the current state (every
   row a Lean theorem, the axiom audit, the manuscript checker, the `lit/`
   records, the tiers retired, and the one assumption Lean does not derive,
@@ -814,7 +814,7 @@ paper's claims, and only then write the manuscript.
   and no longer presents the withdrawn crossover `μ*` as an output.
   `checks/verify_docs.py` D1 now checks any theorem count the manuscript states
   against the audit, with a control. `lit/coverage.py` counts citations and
-  literature rows of `MANUSCRIPT.tex`. `verify.sh` names the manuscript as the
+  literature rows of `skeleton_who_pays.tex`. `verify.sh` names the manuscript as the
   canonical statement, and `lit/README.md` explains locators into the retired
   file.
   Conclusions drafted 7 Oct 2026 at the author's request ("is it possible to
@@ -845,7 +845,7 @@ paper's claims, and only then write the manuscript.
   counterexamples, 3h the measurement-map checks. Pass 6 drops statements
   that only sampling supports (the theta > 0 support claim, band frequencies,
   violation counts).
-  1. **Skeleton scaffold.** `MANUSCRIPT.tex` with the four tables empty, the ID
+  1. **Skeleton scaffold.** `skeleton_who_pays.tex` with the four tables empty, the ID
      scheme (K, M, L, C rows), appendix stubs, a link checker (K points to M; C
      points to M or L; every M row names a Lean theorem that exists and is
      audited) and the 30% prose checker. Both checkers wired into `verify.sh`.
@@ -1052,7 +1052,7 @@ paper's claims, and only then write the manuscript.
     - L25/L27 link columns corrected.
   Terminology pass 14 Oct 2026 (author: "any name is fine so long as it's
   defined properly, incumbent vs entrant"). One name per object across
-  MANUSCRIPT.tex and MEASUREMENT_MAP.tex: entrant/outsider for e_i (not payer,
+  skeleton_who_pays.tex and MEASUREMENT_MAP.tex: entrant/outsider for e_i (not payer,
   investor), base component for r and bought component for s (not talent,
   ability, base score), weight on the base component for μ, and "the incumbent
   scored as an entrant" for C = F (not "investing"). The Terminology appendix

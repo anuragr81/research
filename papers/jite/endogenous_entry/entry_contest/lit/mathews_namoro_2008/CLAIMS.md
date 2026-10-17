@@ -4,7 +4,7 @@
 in rank order tournaments with endogenous entry", working paper of 29 March
 2005, 31 pages, uploaded by the author on Drive; read in full [F]. The published version is *Journal of
 Economics* 95(1), 1-23 (2008); it is not checked, and the pagination used here
-is the working paper's printed pages. Cited in `MANUSCRIPT.tex` (row L23) and
+is the working paper's printed pages. Cited in `skeleton_who_pays.tex` (row L23) and
 in `refs.bib` as `MathewsNamoro2008`. Quotations are checked verbatim, on the
 page named, against the extracted text by `verify_mathews_namoro.py`. The
 results we use are proved in `lean/mathlib/MathewsNamoro.lean` (see `LEAN`).

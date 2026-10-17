@@ -1,7 +1,7 @@
 # Claims about Shaked (1982)
 
 **Source.** *J. Appl. Prob.* 19 (1982), 310-320, read in full [F] from page
-images (see `RECONSTRUCTION.md`). Cited in `MANUSCRIPT.tex` (row L21), in
+images (see `RECONSTRUCTION.md`). Cited in `skeleton_who_pays.tex` (row L21), in
 `LITERATURE.tex`, and in `refs.bib` as `Shaked1982`. Quotations were
 transcribed by me from the images; mathematical symbols are rendered in plain
 text. The results are checked in `lean/mathlib/ShakedDispersive.lean` (see

@@ -1,7 +1,7 @@
 # Claims about Tilly (1998)
 
 **Source.** *Durable Inequality*, p. 154, read from the author's photograph
-of the page [P] (see `RECONSTRUCTION.md`). Cited in `MANUSCRIPT.tex` (row
+of the page [P] (see `RECONSTRUCTION.md`). Cited in `skeleton_who_pays.tex` (row
 L19) and in `refs.bib` as `Tilly1998`. The quotations below were transcribed
 by me from the image, with line-end hyphens closed ("opportu- nity",
 "activi- ties"). `Tilly1998.lean` records the logical form of the definition,

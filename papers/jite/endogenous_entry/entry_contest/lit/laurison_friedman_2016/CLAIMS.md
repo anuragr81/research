@@ -1,7 +1,7 @@
 # Claims about Laurison and Friedman (2016)
 
 **Source.** Accepted author version (LSE Research Online), read in full [F];
-pages are the accepted version's. Cited in `MANUSCRIPT.tex` (row L17) and in
+pages are the accepted version's. Cited in `skeleton_who_pays.tex` (row L17) and in
 `refs.bib` as `LaurisonFriedman2016`. The published version is not checked,
 and the manuscript row says so. Every claim is a claim about what the paper
 reports, verified by quotation; the arithmetic that links the printed

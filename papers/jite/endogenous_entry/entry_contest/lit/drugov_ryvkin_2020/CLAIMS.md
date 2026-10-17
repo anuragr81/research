@@ -1,7 +1,7 @@
 # Claims about Drugov and Ryvkin (2020)
 
 **Source.** NES Working Paper 256 (February 2020), read in full [F]; the
-*JET* version is not checked. Cited in `MANUSCRIPT.tex` (row L22, C9, C12) and
+*JET* version is not checked. Cited in `skeleton_who_pays.tex` (row L22, C9, C12) and
 in `refs.bib` as `DrugovRyvkin2020a`. Pages are the working paper's.
 Quotations are checked verbatim against the extracted text by
 `verify_drugov_ryvkin.py`. The results we use are proved in

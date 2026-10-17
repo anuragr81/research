@@ -15,7 +15,7 @@ from the repository root. The suite does four things:
 This is not an entry paper, and it is not Corcoran and Karels (1985). The
 number of agents is fixed, every agent competes, and neither costs nor
 wealth decide who takes part. It bears on none of C5, C6 or C13, and it has no
-row in `MANUSCRIPT.tex`. Corcoran and Karels is still unread.
+row in `skeleton_who_pays.tex`. Corcoran and Karels is still unread.
 
 ## Findings from the formalisation
 

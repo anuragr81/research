@@ -5,7 +5,7 @@ in Winner-Take-All Markets", NBER Working Paper 10104 (November 2003), 26
 printed pages, downloaded from nber.org; read in full [F]. It was published as
 "Affirmative Action in Winner-Take-All Markets", *Journal of Economic
 Inequality* 3(3), 263-280 (2005), which is not checked. Pages are the printed
-pages; the printed page is the PDF page minus 1. Cited in `MANUSCRIPT.tex` (row
+pages; the printed page is the PDF page minus 1. Cited in `skeleton_who_pays.tex` (row
 L27) and in `refs.bib` as `FryerLoury2003`. Each quotation is checked verbatim,
 on the page named, against the extracted text. The results we use are proved in
 `lean/mathlib/FryerLouryTournament.lean` (see `LEAN`).

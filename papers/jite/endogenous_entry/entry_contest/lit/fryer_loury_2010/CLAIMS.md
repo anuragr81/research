@@ -5,7 +5,7 @@ Working Paper 16568 (December 2010), 28 printed pages and a figure, downloaded
 from nber.org; read in full [F]. It was published as "Valuing Diversity",
 *Journal of Political Economy* 121(4), 747-774 (2013), which is not checked.
 Pages are the printed pages; the printed page is the PDF page minus 2. Cited
-in `MANUSCRIPT.tex` (row L25) and in `refs.bib` as `FryerLoury2010`; the
+in `skeleton_who_pays.tex` (row L25) and in `refs.bib` as `FryerLoury2010`; the
 published version, `FryerLoury2013`, is recorded in the last section. Each
 quotation is checked verbatim, on the page named, against the extracted text.
 The results we use are proved in `lean/mathlib/FryerLoury.lean` (see `LEAN`).

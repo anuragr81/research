@@ -8,7 +8,7 @@ it from git, takes an inventory of its environments, sections, Lean names and
 numbers, and fails if any item is neither present in the documents that
 replace it nor listed here with a reason.
 
-The documents that replace it are `MANUSCRIPT.tex` (model rows M1 to M27,
+The documents that replace it are `skeleton_who_pays.tex` (model rows M1 to M27,
 Appendices A to G), `PROOFS_ADDENDUM.tex`, `LITERATURE.tex` (the section on
 the contribution, carried whole), `MEASUREMENT_MAP.tex`, `TODO.md` (item O1,
 the open items) and the `lit/` records.

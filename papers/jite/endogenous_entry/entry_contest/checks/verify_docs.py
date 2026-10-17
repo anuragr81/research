@@ -32,10 +32,10 @@ def check(name, ok, detail=""):
 HERE = pathlib.Path(__file__).resolve().parent.parent
 ver_path = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "VERIFICATION.md"
 ver = ver_path.read_text()
-tex = (HERE / "MANUSCRIPT.tex").read_text()
+tex = (HERE / "skeleton_who_pays.tex").read_text()
 
 print("=" * 72)
-print("D1  LEAN COUNTS STATED IN MANUSCRIPT.tex vs THE GENERATED AUDIT")
+print("D1  LEAN COUNTS STATED IN skeleton_who_pays.tex vs THE GENERATED AUDIT")
 print("=" * 72)
 print("      PROOFS.tex, retired at pass 6, stated the core counts in a sentence")
 print("      this check compared. The manuscript states no counts. Any count it")
@@ -121,7 +121,7 @@ check("D3 no orphaned check scripts", not orphans,
 
 print()
 print("=" * 72)
-print("D4  ONE NAME PER OBJECT: MANUSCRIPT.tex AND MEASUREMENT_MAP.tex")
+print("D4  ONE NAME PER OBJECT: skeleton_who_pays.tex AND MEASUREMENT_MAP.tex")
 print("=" * 72)
 print("      The Terminology appendix binds one English name to each object.")
 print("      Synonyms it retires (payer, investor, talent, ability, base score,")
@@ -165,10 +165,10 @@ mp = (HERE / "MEASUREMENT_MAP.tex").read_text()
 off_tex = offenders_in(tex, True)
 off_map = offenders_in(mp, False)
 for i, l in off_tex[:12]:
-    print(f"      MANUSCRIPT.tex:{i}  {l}")
+    print(f"      skeleton_who_pays.tex:{i}  {l}")
 for i, l in off_map[:12]:
     print(f"      MEASUREMENT_MAP.tex:{i}  {l}")
-check("D4a no retired synonym in MANUSCRIPT.tex outside the literature table",
+check("D4a no retired synonym in skeleton_who_pays.tex outside the literature table",
       not off_tex, f"{len(off_tex)} lines")
 check("D4b no retired synonym in MEASUREMENT_MAP.tex", not off_map, f"{len(off_map)} lines")
 
@@ -201,7 +201,7 @@ print("D5  THE ADDENDA: TERMS, ROW REFERENCES AND LEAN NAMES")
 print("=" * 72)
 print("      WEIGHT_ADDENDUM.tex and STEADY_STATE_ADDENDUM.tex are starters for")
 print("      extensions. Each uses the manuscript's terms, every row it cites must")
-print("      exist in MANUSCRIPT.tex, and every Lean name it cites must be a theorem")
+print("      exist in skeleton_who_pays.tex, and every Lean name it cites must be a theorem")
 print("      of the Weight files, so a renumbered row cannot leave them stale.")
 known = set(re.findall(r"\\[kmlc]row\{([KMLC]\d+)\}", tex))
 we_src = "".join((HERE / "lean" / "mathlib" / f).read_text()
@@ -215,7 +215,7 @@ for fname, tag, min_lean in (("WEIGHT_ADDENDUM.tex", "W", 4), ("STEADY_STATE_ADD
     check(f"D5a-{tag} no retired synonym in {fname}", not off_wa, f"{len(off_wa)} lines")
     cited_rows = set(re.findall(r"\b([KMLC]\d+)\b", re.sub(r"^%.*$", "", wa, flags=re.M)))
     unknown = sorted(cited_rows - known)
-    check(f"D5b-{tag} every row {fname} cites exists in MANUSCRIPT.tex", not unknown,
+    check(f"D5b-{tag} every row {fname} cites exists in skeleton_who_pays.tex", not unknown,
           f"{len(cited_rows)} cited" + (f", unknown {unknown}" if unknown else ""))
     wa_lean = sorted(set(n.replace("\\_", "_") for n in re.findall(r"\\texttt\{([a-z][A-Za-z0-9\\_']*)\}", wa)
                          if "\\_" in n))

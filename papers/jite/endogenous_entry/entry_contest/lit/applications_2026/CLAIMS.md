@@ -1,6 +1,6 @@
 # Primary sources for the two institutions in the Research question
 
-These are the sources behind the examples in Section 1 of `MANUSCRIPT.tex`
+These are the sources behind the examples in Section 1 of `skeleton_who_pays.tex`
 ("Research question"). Every quotation below is from a primary document: a
 municipality's own selection rules, or the official Italian legislative
 database (Normattiva). The documents were downloaded on 14 October 2026 (RICS and the UK

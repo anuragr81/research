@@ -1,36 +1,31 @@
-"""Ledger of the conclusions (MANUSCRIPT.tex, Section 5), over observable entities.
+"""Ledger of the conclusions (skeleton_who_pays.tex, Section 5): entities, actions, regularities.
 
-Entities first, then the relations among them, then the sentences rendered from the
-relations.
+The ledger is a graph. Its nodes are entities, things in the world that an observer
+records: three agents and three objects, each with the attributes that can be read
+from it. Its edges are actions, what an agent does to an entity, each leaving a
+record. A count or pattern over the edges of one kind (how many "buys" edges, on
+whom "awards" lands) is a pattern, computed from the records; it is not a node.
+A conclusion is a regularity of the graph across contests, how a pattern responds
+when an attribute or another pattern varies, and it is annotated on the edge or
+attribute it concerns, never drawn as a node. Every node, attribute, edge and
+pattern is a row of MEASUREMENT_MAP.tex whose Observed cell carries R or C.
+Constructs, unobserved facts, nature and the names of theorems are not in the
+graph; they enter a regularity only as its premises or grounds.
 
-  Entities   what an observer can record or compute from records, each a row of
-             MEASUREMENT_MAP.tex whose Observed cell carries R or C. Four kinds:
-             agents (who act), objects (what they act on, with readable attributes),
-             actions (agent, verb, object, with the record each leaves), and measures
-             of actions (counts, sets and frequencies computed from those records).
-             A change of the wealth profile is a state, two recorded profiles.
-             Constructs (utility, entry cost, gain, payoffs), unobserved facts (the
-             weight as a number, the draws, nature) and the names of theorems are
-             not entities; they appear only as premises or grounds of a relation.
-  Relations  what the conclusions C1 to C18 say: a change in some entities moves a
-             measure of an action, with other entities fixed and under conditions
-             that are themselves entities. Each relation cites the conclusions it
-             represents, the model and literature rows those conclusions rest on,
-             its premises (model assumptions that are constructs) and its standing
-             against the papers read.
-  Sentences  the summary that opens Section 4, each expressing listed relations and
-             naming their entities in the manuscript's words; no row identifiers.
+The summary that opens Section 4 is rendered from the regularities, and
+figures/conclusions_ledger.dot from the graph.
 
-verify() checks that every entity is an observable row of the map and is well
-formed for its kind; that every action is an option its agent has in the
-manuscript's table of players; that every conclusion is represented; that each
-relation cites only rows its conclusions rest on and a standing they state; that
-every relation with literature rows is expressed exactly once; that each sentence
-names what its relations vary and measure; that no cited row has changed since the
-relations were last reviewed; the surface rules of notes/writing_discipline.md; and
-that the paragraph in MANUSCRIPT.tex and figures/conclusions_ledger.dot are this
-ledger's renderings. It does not check that a relation is a fair reading of its
-conclusions; that is what the review before --restamp is for.
+verify() checks that every node, attribute, edge and pattern is an observable row
+of the map and is well formed for its kind; that every edge is an option its agent
+has in the manuscript's table of players; that every conclusion is represented by
+a regularity; that each regularity varies attributes or patterns and moves a
+pattern, cites only rows its conclusions rest on and a standing they state; that
+every regularity with literature rows is expressed exactly once in the summary;
+that each sentence names what its regularities vary and move; that no cited row
+has changed since the regularities were last reviewed; the surface rules of
+notes/writing_discipline.md; and that the paragraph and the figure's graph are
+this ledger's renderings. It does not check that a regularity is a fair reading of
+its conclusions; that is what the review before --restamp is for.
 
     python3 checks/ledger_literature.py              verify
     python3 checks/ledger_literature.py --write      render the paragraph and the figure's graph
@@ -47,7 +42,7 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent.parent
-MANUSCRIPT_TEX = HERE / "MANUSCRIPT.tex"
+MANUSCRIPT_TEX = HERE / "skeleton_who_pays.tex"
 MAP_TEX = HERE / "MEASUREMENT_MAP.tex"
 VERIFY_DOCS = HERE / "checks" / "verify_docs.py"
 STAMPS = HERE / "checks" / "ledger_literature_stamps.json"
@@ -68,63 +63,33 @@ MAP_TABLES = (("player", r"\section*{Players}"),
 
 
 # ---------------------------------------------------------------------------
-# Entities
+# Nodes: entities, with their readable attributes
 # ---------------------------------------------------------------------------
-
-AGENT, OBJECT, ATTRIBUTE, ACTION, MEASURE, STATE = "agent", "object", "attribute", "action", "measure", "state"
-KINDS = {AGENT, OBJECT, ATTRIBUTE, ACTION, MEASURE, STATE}
-
 # "map" is the row's Symbol cell exactly as MEASUREMENT_MAP.tex writes it; "names" are the
-# words the prose may use, each a Terminology term or a phrase of the row itself. An action
-# names its agent, verb and object and, in "table", the phrase of the agent's row in the
-# manuscript's table of players that gives it that option. A measure names the action it
-# measures; an attribute the object it is read from.
+# words the prose may use, each a Terminology term or a phrase of the row itself.
 
-ENTITIES = {
-    # agents
-    "challenger":  {"kind": AGENT, "map": r"challenger $i$", "names": ("challenger",)},
-    "incumbent":   {"kind": AGENT, "map": r"incumbent", "names": ("incumbent",)},
-    "institution": {"kind": AGENT, "map": r"institution", "names": ("institution",)},
-    # objects and their readable attributes
-    "rule":        {"kind": OBJECT, "map": r"published rule", "names": ("closure", "published rule")},
-    "fee":         {"kind": ATTRIBUTE, "of": "rule", "map": r"$c$", "names": ("fee",)},
-    "decisiveness": {"kind": ATTRIBUTE, "of": "rule", "map": r"published rule",
-                     "names": ("decisive", "credential")},
-    "prize":       {"kind": OBJECT, "map": r"$V$", "names": ("prize",)},
-    "prize_ranking": {"kind": ATTRIBUTE, "of": "prize", "map": r"$V$", "names": ("ranking",)},
-    "Q":           {"kind": OBJECT, "map": r"$Q$", "names": ("number of challengers",)},
-    "profile":     {"kind": OBJECT, "map": r"$w_i$; $(w_1,\dots,w_Q)$; $w_{(j)}$, $j$",
-                    "names": ("wealth",)},
-    "scores":      {"kind": OBJECT, "map": r"$\sigma_i$", "names": ("score",)},
-    # a state: two recorded profiles
-    "change":      {"kind": STATE, "map": r"$w\mapsto w'$; $T$",
-                    "names": ("pivot-spread", "change of profile")},
-    # actions
-    "pays":        {"kind": ACTION, "agent": "challenger", "verb": "pays", "object": "fee",
-                    "map": r"$e_i$", "table": "Enter or not",
-                    "names": ("enter", "paid")},
-    "incumbent_pays": {"kind": ACTION, "agent": "incumbent", "verb": "pays, in M30", "object": "fee",
-                       "map": r"incumbent", "table": "In M30, enter or not", "names": ("incumbent",)},
-    "sets_fee":    {"kind": ACTION, "agent": "institution", "verb": "sets", "object": "fee",
-                    "map": r"$c$", "table": r"Fixes $V$, $c$ and $\mu$", "names": ("fee",)},
-    "publishes":   {"kind": ACTION, "agent": "institution", "verb": "publishes", "object": "rule",
-                    "map": r"published rule", "table": r"Fixes $V$, $c$ and $\mu$", "names": ("rule",)},
-    "admits":      {"kind": ACTION, "agent": "institution", "verb": "admits", "object": "Q",
-                    "map": r"$Q$", "table": "", "names": ("number of challengers",)},
-    "awards":      {"kind": ACTION, "agent": "institution", "verb": "awards", "object": "prize",
-                    "reads": "scores", "map": r"$\mathbf 1\{i\text{ wins}\}$", "table": "",
-                    "names": ("takes the prize", "wins")},
-    # measures of actions
-    "entrant_set": {"kind": MEASURE, "of": "pays", "map": r"$S$", "names": ("entrant set", "equilibrium")},
-    "count":       {"kind": MEASURE, "of": "pays", "map": r"$k^*$", "names": ("entry count",)},
-    "marginal":    {"kind": MEASURE, "of": "pays", "map": r"$w_{(k^*)}$", "names": ("marginal entrant",)},
-    "assortative": {"kind": MEASURE, "of": "pays", "map": r"$\{(1),\dots,(k^*)\}$",
-                    "names": ("assortative set", "richest")},
-    "lone_payer_gain": {"kind": MEASURE, "of": "awards",
-                        "map": r"$\Delta_Q(0)$; $D(Q)=\Delta_{Q+1}(0)-\Delta_Q(0)$; $W_Q$",
-                        "names": ("first entrant's gain",)},
-    "share":       {"kind": MEASURE, "of": "awards", "map": r"Entrants' share of the prize",
-                    "names": ("entrants' share",)},
+AGENT, OBJECT = "agent", "object"
+
+NODES = {
+    "challenger":  {"kind": AGENT, "map": r"challenger $i$", "names": ("challenger",),
+                    "attributes": ("wealth",)},
+    "incumbent":   {"kind": AGENT, "map": r"incumbent", "names": ("incumbent",), "attributes": ()},
+    "institution": {"kind": AGENT, "map": r"institution", "names": ("institution",), "attributes": ()},
+    "position":    {"kind": OBJECT, "map": r"$V$", "names": ("prize",),
+                    "attributes": ("ranking",)},
+    "credential":  {"kind": OBJECT, "map": r"credential", "names": ("credential",),
+                    "attributes": ("fee",)},
+    "rule":        {"kind": OBJECT, "map": r"published rule", "names": ("closure", "rule"),
+                    "attributes": ("decisiveness",)},
+}
+
+ATTRIBUTES = {
+    "wealth":       {"of": "challenger", "map": r"$w_i$; $(w_1,\dots,w_Q)$; $w_{(j)}$, $j$",
+                     "names": ("wealth", "pivot-spread")},
+    "ranking":      {"of": "position", "map": r"$V$", "names": ("ranking",)},
+    "fee":          {"of": "credential", "map": r"$c$", "names": ("fee",)},
+    "decisiveness": {"of": "rule", "map": r"published rule", "names": ("decisive", "credential")},
+    "score":        {"of": "competes", "map": r"$\sigma_i$", "names": ("score",)},   # of an edge
 }
 
 # Rows of the map's Players table that are not agents of the ledger, with the reason.
@@ -135,7 +100,49 @@ TABLE_OF_PLAYERS = {"challenger": "Challenger $i$", "incumbent": "Incumbent",
 
 
 # ---------------------------------------------------------------------------
-# Relations
+# Edges: actions, each from an agent, with the record it leaves
+# ---------------------------------------------------------------------------
+# "table" is the phrase of the agent's row in the manuscript's table of players that gives it
+# this option, or "" where the table lists the action under the institution's settings.
+
+EDGES = {
+    "admits":     {"from": "institution", "to": "challenger", "verb": "admits", "map": r"$Q$",
+                   "table": "", "record": "who is eligible; their number"},
+    "publishes":  {"from": "institution", "to": "rule", "verb": "publishes", "map": r"published rule",
+                   "table": r"Fixes $V$, $c$ and $\mu$", "record": "the rule as published"},
+    "issues":     {"from": "institution", "to": "credential", "verb": "issues", "map": r"$c$",
+                   "table": r"Fixes $V$, $c$ and $\mu$", "record": "at the fee"},
+    "holds_position": {"from": "incumbent", "to": "position", "verb": "holds", "map": r"incumbent",
+                       "table": "", "record": "the holder before the contest"},
+    "holds_credential": {"from": "incumbent", "to": "credential", "verb": "holds", "map": r"incumbent",
+                         "table": "In M30, enter or not", "record": "scored as an entrant; buys it in M30"},
+    "competes":   {"from": "challenger", "to": "position", "verb": "competes for", "map": r"$\sigma_i$",
+                   "table": "", "record": "every challenger; the score"},
+    "buys":       {"from": "challenger", "to": "credential", "verb": "buys", "map": r"$e_i$",
+                   "table": "Enter or not", "record": "the entry decision, who paid"},
+    "awards":     {"from": "institution", "to": "position", "verb": "awards",
+                   "map": r"$\mathbf 1\{i\text{ wins}\}$", "table": "", "record": "to the winner"},
+}
+
+
+# ---------------------------------------------------------------------------
+# Patterns: counts and patterns over the edges of one kind
+# ---------------------------------------------------------------------------
+
+PATTERNS = {
+    "Q":           {"over": "admits", "map": r"$Q$", "names": ("number of challengers",)},
+    "entrant_set": {"over": "buys", "map": r"$S$", "names": ("entrant set", "equilibrium")},
+    "count":       {"over": "buys", "map": r"$k^*$", "names": ("entry count",)},
+    "marginal":    {"over": "buys", "map": r"$w_{(k^*)}$", "names": ("marginal entrant",)},
+    "assortative": {"over": "buys", "map": r"$\{(1),\dots,(k^*)\}$", "names": ("assortative set", "richest")},
+    "share":       {"over": "awards", "map": r"Entrants' share of the prize", "names": ("entrants' share",)},
+    "lone_gain":   {"over": "awards", "map": r"$\Delta_Q(0)$; $D(Q)=\Delta_{Q+1}(0)-\Delta_Q(0)$; $W_Q$",
+                    "names": ("first entrant's gain",)},
+}
+
+
+# ---------------------------------------------------------------------------
+# Regularities: what the conclusions say about the graph
 # ---------------------------------------------------------------------------
 
 # Standing against the papers read, each with the words a cited conclusion must use.
@@ -151,96 +158,97 @@ STANDING = {
 IMPLICATIONS = {"C15", "C16", "C17", "C18"}
 COMPARATIVE = {"new", "sharpening", "credited", "opposite", "settled"}
 
-# varies: what changes; fixed: what is held; measure: the measure of an action that responds;
-# effect: how, in words; given: observable conditions; premises: model assumptions that are
-# constructs, in words.
-RELATIONS = {
+# varies: attributes or patterns that change; fixed: what is held; moves: the pattern that
+# responds; effect: how, in words; given: observable conditions (attributes, patterns, edges);
+# premises: model assumptions that are constructs, in words.
+REGULARITIES = {
     "spread_sign": {
-        "varies": ("change",), "fixed": ("rule", "prize", "Q"), "measure": "count",
-        "effect": "sign set by the marginal entrant against the pivot", "given": ("marginal",),
+        "varies": ("wealth",), "fixed": ("fee", "decisiveness", "Q"), "moves": "count",
+        "effect": "a pivot-spread moves it with the sign set by the marginal entrant against the pivot",
+        "given": ("marginal",),
         "premises": "the fee's utility cost falls with wealth; draws independent of wealth",
         "conclusions": ("C1", "C5"), "standing": ("new",),
         "model": ("M13", "M23", "M24", "M26"), "lit": ("L12", "L29", "L30"),
     },
     "two_ranks": {
-        "varies": ("change",), "fixed": ("rule", "prize", "Q"), "measure": "count",
-        "effect": "signed by the change at two ranks, outside the band", "given": ("marginal",),
+        "varies": ("wealth",), "fixed": ("fee", "decisiveness", "Q"), "moves": "count",
+        "effect": "any change of profile is signed at two ranks, outside the band", "given": ("marginal",),
         "premises": "",
         "conclusions": ("C2", "C8"), "standing": ("sharpening",),
         "model": ("M12", "M13", "M14"), "lit": ("L9",),
     },
     "count_pinned": {
-        "varies": ("entrant_set",), "fixed": ("rule", "prize", "Q", "profile"), "measure": "count",
-        "effect": "the same in every equilibrium", "given": ("scores",),
-        "premises": "the gain from paying depends on how many pay, not on who",
+        "varies": ("entrant_set",), "fixed": ("fee", "decisiveness", "Q", "wealth"), "moves": "count",
+        "effect": "the same in every equilibrium", "given": ("score",),
+        "premises": "the gain from buying depends on how many buy, not on who",
         "conclusions": ("C3", "C6"), "standing": ("new",),
         "model": ("M4", "M6", "M26", "M27", "M29"), "lit": ("L2", "L3", "L5", "L25", "L28", "L29", "L31"),
     },
     "who_enters": {
-        "varies": ("profile",), "fixed": ("rule", "prize", "Q"), "measure": "assortative",
-        "effect": "the richest paying is always an equilibrium", "given": (),
+        "varies": ("wealth",), "fixed": ("fee", "decisiveness", "Q"), "moves": "assortative",
+        "effect": "the richest buying is always an equilibrium", "given": (),
         "premises": "unique when the next-richest's cost exceeds the gain",
         "conclusions": ("C4",), "standing": ("settled",),
         "model": ("M5", "M6", "M7", "M8"), "lit": ("L2", "L3", "L7"),
     },
     "gain_form": {
-        "varies": ("scores",), "fixed": ("Q",), "measure": "lone_payer_gain",
+        "varies": ("score",), "fixed": ("Q",), "moves": "lone_gain",
         "effect": "the form of Ryvkin and Drugov's marginal benefit", "given": (),
         "premises": "",
         "conclusions": ("C14",), "standing": ("credited",),
         "model": ("M1", "M17", "M21"), "lit": ("L8",),
     },
     "gain_in_Q": {
-        "varies": ("Q",), "fixed": ("rule", "prize"), "measure": "lone_payer_gain",
+        "varies": ("Q",), "fixed": ("fee", "decisiveness"), "moves": "lone_gain",
         "effect": "never falls", "given": (),
         "premises": "a uniform base component",
         "conclusions": ("C7",), "standing": ("new",),
         "model": ("M18", "M19"), "lit": ("L8", "L26"),
     },
     "closure_sign": {
-        "varies": ("decisiveness",), "fixed": ("fee", "prize", "profile"), "measure": "count",
-        "effect": "does not rise as the credential is less decisive", "given": ("incumbent",),
+        "varies": ("decisiveness",), "fixed": ("fee", "wealth", "Q"), "moves": "count",
+        "effect": "does not rise as the credential is less decisive", "given": ("holds_credential",),
         "premises": "the incumbent holds the credential",
         "conclusions": ("C9", "C12"), "standing": ("new", "opposite"),
         "model": ("M28",), "lit": ("L20", "L22"),
     },
     "share_follows": {
-        "varies": ("count", "decisiveness"), "fixed": (), "measure": "share",
+        "varies": ("count", "decisiveness"), "fixed": (), "moves": "share",
         "effect": "moves with the count; does not rise as the credential is less decisive",
         "given": (), "premises": "",
         "conclusions": ("C10", "C13"), "standing": ("new",),
         "model": ("M11", "M12", "M13", "M28", "M31"), "lit": ("L23", "L25", "L28", "L29", "L32"),
     },
     "incumbent_entry": {
-        "varies": ("entrant_set",), "fixed": ("rule", "prize", "Q", "profile"), "measure": "count",
-        "effect": "the incumbent sits out while a challenger pays only in one of several equilibria",
-        "given": ("incumbent",), "premises": "the incumbent has the lowest cost",
+        "varies": ("entrant_set",), "fixed": ("fee", "decisiveness", "Q", "wealth"), "moves": "count",
+        "effect": "the incumbent out while a challenger buys, only in one of several equilibria",
+        "given": ("holds_credential",), "premises": "the incumbent has the lowest cost",
         "conclusions": ("C11",), "standing": ("model",),
         "model": ("M6", "M7", "M30"), "lit": (),
     },
     "fee_order": {
-        "varies": ("fee",), "fixed": ("rule", "prize", "Q", "profile"), "measure": "assortative",
-        "effect": "a uniform fee changes how many pay, not the order", "given": (),
+        "varies": ("fee",), "fixed": ("decisiveness", "Q", "wealth"), "moves": "assortative",
+        "effect": "a uniform fee changes how many buy, not the order", "given": (),
         "premises": "the fee's utility cost falls with wealth",
         "conclusions": ("C15",), "standing": ("implication",),
         "model": ("M5", "M8", "M11", "M23", "M33"), "lit": (),
     },
     "prize_cap": {
-        "varies": ("prize_ranking", "fee"), "fixed": ("rule", "Q", "profile"), "measure": "count",
-        "effect": "the prize caps how many pay; the cap sets a fee", "given": (),
+        "varies": ("ranking", "fee"), "fixed": ("decisiveness", "Q", "wealth"), "moves": "count",
+        "effect": "the prize caps how many buy; the cap sets a fee", "given": (),
         "premises": "the cost to the next-richest against the prize",
         "conclusions": ("C16",), "standing": ("implication",),
         "model": ("M10", "M33"), "lit": (),
     },
     "compression": {
-        "varies": ("change",), "fixed": ("rule", "prize", "Q"), "measure": "count",
-        "effect": "read at two ranks; no general sign for less inequality", "given": ("marginal",),
-        "premises": "",
+        "varies": ("wealth",), "fixed": ("fee", "decisiveness", "Q"), "moves": "count",
+        "effect": "a compression is read at two ranks; no general sign for less inequality",
+        "given": ("marginal",), "premises": "",
         "conclusions": ("C17",), "standing": ("implication",),
         "model": ("M12", "M13", "M14", "M33"), "lit": (),
     },
     "share_benchmark": {
-        "varies": ("count", "Q"), "fixed": ("rule",), "measure": "share",
+        "varies": ("count", "Q"), "fixed": ("decisiveness",), "moves": "share",
         "effect": "above the benchmark only if the credential counts", "given": (),
         "premises": "",
         "conclusions": ("C18",), "standing": ("implication",),
@@ -266,8 +274,8 @@ SENTENCES = [
              "devices of identical-entrant models."},
     {"expresses": ("gain_form", "gain_in_Q"),
      "text": "The first entrant's gain, what entering adds to the chance of the award when no "
-             "other enters, read from the scores, has Ryvkin and Drugov's form and never falls in the number of challengers with a uniform "
-             "base component, which is new."},
+             "other enters, read from the scores, has Ryvkin and Drugov's form and never falls "
+             "in the number of challengers with a uniform base component, which is new."},
     {"expresses": ("closure_sign",),
      "text": "Across rules that make the credential less decisive, the incumbent holding it, "
              "the entry count does not rise, a new sign opposite to the effort models "
@@ -380,8 +388,18 @@ def surface_faults(text):
     return faults
 
 
-def entities_of(r):
-    return tuple(r["varies"]) + tuple(r["fixed"]) + (r["measure"],) + tuple(r["given"])
+def mapped():
+    """Every element of the graph that has a map row: key -> (kind, record)."""
+    out = {}
+    for k, v in NODES.items():
+        out[k] = ("node", v)
+    for k, v in ATTRIBUTES.items():
+        out[k] = ("attribute", v)
+    for k, v in EDGES.items():
+        out[k] = ("edge", v)
+    for k, v in PATTERNS.items():
+        out[k] = ("pattern", v)
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -390,13 +408,13 @@ def entities_of(r):
 
 def stamped_sources(blocks, mrows, players):
     out = {}
-    for key, e in ENTITIES.items():
-        if e["map"] in mrows:
-            out[f"map:{key}"] = digest(mrows[e["map"]]["text"])
+    for key, (kind, v) in mapped().items():
+        if v["map"] in mrows:
+            out[f"map:{key}"] = digest(mrows[v["map"]]["text"])
     for agent, label in TABLE_OF_PLAYERS.items():
         if label in players:
             out[f"players:{agent}"] = digest(players[label])
-    for r in RELATIONS.values():
+    for r in REGULARITIES.values():
         for c in r["conclusions"]:
             if c in blocks:
                 out[c] = digest(blocks[c])
@@ -430,59 +448,58 @@ def paragraph_in_manuscript(tex):
     return tex[a:b + len(END)]
 
 
-STANDING_COLOURS = {"new": "#2e7d32", "sharpening": "#1565c0", "credited": "#6a1b9a",
-                    "settled": "#00838f", "opposite": "#c62828", "implication": "#ef6c00",
-                    "model": "#616161"}
-KIND_STYLE = {AGENT: ("box", "#c8e6c9"), OBJECT: ("box", "#e3f2fd"), ATTRIBUTE: ("box", "#e3f2fd"),
-              ACTION: ("hexagon", "#fff9c4"), MEASURE: ("box", "#fce4ec"), STATE: ("box", "#e3f2fd")}
-KIND_TITLE = {AGENT: "Agents", OBJECT: "Objects and their readable attributes",
-              ACTION: "Actions", MEASURE: "Measures of actions"}
+def concerns():
+    """For each attribute and pattern, the conclusions in which it varies or responds."""
+    out = {}
+    for r in REGULARITIES.values():
+        for v in r["varies"]:
+            out.setdefault(v, {}).setdefault("varied in", set()).update(r["conclusions"])
+        out.setdefault(r["moves"], {}).setdefault("responds in", set()).update(r["conclusions"])
+    return out
+
+
+def crows(s):
+    return ", ".join(sorted(s, key=lambda c: int(c[1:])))
+
+
+def notes_for(key, con):
+    return "; ".join(f"{k} {crows(v)}" for k, v in con.get(key, {}).items())
 
 
 def dot():
-    out = ['digraph conclusions {', 'rankdir=LR; nodesep=0.25; ranksep=1.2; newrank=true;',
-           'node [fontname="Helvetica", fontsize=11]; edge [fontname="Helvetica", fontsize=9];',
-           'fontname="Helvetica";']
-    columns = {AGENT: [AGENT], OBJECT: [OBJECT, ATTRIBUTE, STATE], ACTION: [ACTION], MEASURE: [MEASURE]}
-    for col, kinds in columns.items():
-        out.append(f'subgraph cluster_{col} {{ label="{KIND_TITLE[col]}"; style=rounded; color="#999999"; rank=same;')
-        for key, e in ENTITIES.items():
-            if e["kind"] in kinds:
-                shape, fill = KIND_STYLE[e["kind"]]
-                sub = {ATTRIBUTE: "attribute of " + ENTITIES[e["of"]]["names"][0] if e["kind"] == ATTRIBUTE else "",
-                       STATE: "two recorded profiles"}.get(e["kind"], "")
-                head = e["verb"] if e["kind"] == ACTION else e["names"][0]
-                label = head + (f'<br/><font point-size="8">{sub}</font>' if sub else "")
-                out.append(f'"{key}" [shape={shape}, style="rounded,filled", fillcolor="{fill}", label=<{label}>];')
-        out.append('}')
-    for key, e in ENTITIES.items():
-        if e["kind"] == ACTION:
-            out.append(f'"{e["agent"]}" -> "{key}" [color="black"];')
-            out.append(f'"{key}" -> "{e["object"]}" [color="black"];')
-            if "reads" in e:
-                out.append(f'"{e["reads"]}" -> "{key}" [label="read by", color="black", style=dotted];')
-        elif e["kind"] == MEASURE:
-            out.append(f'"{e["of"]}" -> "{key}" [color="#880e4f", style=dotted];')
-    for rid, r in RELATIONS.items():
-        colour = STANDING_COLOURS[r["standing"][0]]
-        label = (f'{r["effect"]}<br/><font point-size="8">{", ".join(r["conclusions"])}; '
-                 f'{"/".join(r["standing"])}</font>')
-        out.append(f'"rel_{rid}" [shape=ellipse, color="{colour}", penwidth=2, fontsize=9, label=<{label}>];')
-        for v in r["varies"]:
-            out.append(f'"{v}" -> "rel_{rid}" [color="{colour}"];')
-        out.append(f'"rel_{rid}" -> "{r["measure"]}" [color="{colour}", penwidth=1.6];')
-        for g in r["given"]:
-            out.append(f'"{g}" -> "rel_{rid}" [color="{colour}", style=dashed, arrowhead=odot];')
-    out.append('legend [shape=plaintext, fontsize=9, label=<'
-               '<table border="0" cellspacing="2">'
-               '<tr><td align="left"><b>Boxes</b> are observable rows of the measurement map</td></tr>'
-               '<tr><td align="left">black edge, an action from its agent to its object (table of players)</td></tr>'
-               '<tr><td align="left">dotted edge, a measure computed from an action\'s record</td></tr>'
-               '<tr><td align="left"><b>Ellipses</b> are relations the conclusions state; colour is their standing; '
-               'in from what varies, out to the measure, dashed from a condition</td></tr>'
-               + "".join(f'<tr><td align="left"><font color="{c}">{s}</font></td></tr>'
-                         for s, c in STANDING_COLOURS.items())
-               + '</table>>];')
+    con = concerns()
+    out = ['digraph conclusions {', 'rankdir=LR; nodesep=0.5; ranksep=1.6;',
+           'node [fontname="Helvetica", fontsize=11, shape=plaintext];',
+           'edge [fontname="Helvetica", fontsize=9];', 'fontname="Helvetica";']
+    for key, n in NODES.items():
+        fill = "#c8e6c9" if n["kind"] == AGENT else "#e3f2fd"
+        rows = [f'<tr><td colspan="2" bgcolor="{fill}" align="left"><b>{n["names"][0]}</b></td></tr>']
+        for a in n["attributes"]:
+            rows.append(f'<tr><td align="left">{ATTRIBUTES[a]["names"][0]}</td><td align="left">'
+                        f'<font point-size="8" color="#555555">{notes_for(a, con)}</font></td></tr>')
+        out.append(f'"{key}" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="3" '
+                   f'color="#999999">{"".join(rows)}</table>>];')
+    for key, e in EDGES.items():
+        parts = [f'<b>{e["verb"]}</b>', f'<font point-size="8">{e["record"]}</font>']
+        for a, av in ATTRIBUTES.items():
+            if av["of"] == key:
+                notes = notes_for(a, con)
+                parts.append(f'<font point-size="8">{av["names"][0]}' + (f", {notes}" if notes else "") + '</font>')
+        for p, pv in PATTERNS.items():
+            if pv["over"] == key:
+                notes = notes_for(p, con)
+                parts.append(f'<font point-size="8" color="#880e4f">{pv["names"][0]}'
+                             + (f", {notes}" if notes else "") + '</font>')
+        colour = {"challenger": "#1b5e20", "institution": "#0d47a1"}.get(e["from"], "#4e342e")
+        out.append(f'"{e["from"]}" -> "{e["to"]}" [label=<{"<br/>".join(parts)}>, color="{colour}", '
+                   f'fontcolor="{colour}"];')
+    out.append('legend [label=<<table border="0" cellspacing="2">'
+               '<tr><td align="left"><b>Nodes</b> are entities with their readable attributes, '
+               'agents green and objects blue.</td></tr>'
+               '<tr><td align="left"><b>Edges</b> are actions, from the agent to what it acts on, '
+               'with the record each leaves; in purple, the counts and patterns over edges of that kind.</td></tr>'
+               '<tr><td align="left">Each attribute or pattern lists the conclusions in which it varies '
+               'or responds.</td></tr></table>>];')
     out.append('}')
     return "\n".join(out)
 
@@ -491,7 +508,7 @@ def write():
     tex = MANUSCRIPT_TEX.read_text()
     old = paragraph_in_manuscript(tex)
     if old is None:
-        sys.exit("no BEGIN/END markers in MANUSCRIPT.tex")
+        sys.exit("no BEGIN/END markers in the manuscript")
     MANUSCRIPT_TEX.write_text(tex.replace(old, rendered()))
     FIGURE_DOT.parent.mkdir(exist_ok=True)
     FIGURE_DOT.write_text(dot() + "\n")
@@ -501,98 +518,107 @@ def write():
 # Checks
 # ---------------------------------------------------------------------------
 
-def entity_faults(entities, mrows, terms, players):
+def graph_faults(nodes, attributes, edges, patterns, mrows, terms, players):
     faults = []
-    for key, e in entities.items():
-        row = mrows.get(e["map"])
+    elements = [("node", k, v) for k, v in nodes.items()] + [("attribute", k, v) for k, v in attributes.items()] \
+        + [("edge", k, v) for k, v in edges.items()] + [("pattern", k, v) for k, v in patterns.items()]
+    for kind, key, v in elements:
+        row = mrows.get(v["map"])
         if row is None:
-            faults.append(f"entity {key} is not a row of the measurement map")
+            faults.append(f"{kind} {key} is not a row of the measurement map")
             continue
         if not observable(row["observed"]):
-            faults.append(f"entity {key} is not observable; the map codes it {row['observed']!r}")
-        if e["kind"] not in KINDS:
-            faults.append(f"entity {key} has unknown kind {e['kind']!r}")
-        for n in e["names"]:
+            faults.append(f"{kind} {key} is not observable; the map codes it {row['observed']!r}")
+        for n in v.get("names", ()):
             if n.lower() not in terms and n.lower() not in row["text"].lower():
-                faults.append(f"entity {key} is called {n!r}, which is neither a Terminology term "
+                faults.append(f"{kind} {key} is called {n!r}, which is neither a Terminology term "
                               f"nor a phrase of its map row")
-        if e["kind"] == AGENT and row["table"] != "player":
+        if kind == "node" and v["kind"] == AGENT and row["table"] != "player":
             faults.append(f"agent {key} is not in the map's Players table")
-        if e["kind"] == ATTRIBUTE and entities.get(e.get("of"), {}).get("kind") != OBJECT:
-            faults.append(f"attribute {key} is not of an object")
-        if e["kind"] == MEASURE and entities.get(e.get("of"), {}).get("kind") != ACTION:
-            faults.append(f"measure {key} is not of an action")
-        if e["kind"] == ACTION:
-            if entities.get(e.get("agent"), {}).get("kind") != AGENT:
-                faults.append(f"action {key} has no agent")
-            if entities.get(e.get("object"), {}).get("kind") not in (OBJECT, ATTRIBUTE):
-                faults.append(f"action {key} acts on {e.get('object')}, which is not an object")
-            label = TABLE_OF_PLAYERS.get(e.get("agent"))
+        if kind == "node":
+            for a in v["attributes"]:
+                if attributes.get(a, {}).get("of") != key:
+                    faults.append(f"node {key} lists attribute {a}, which is not an attribute of it")
+        if kind == "attribute" and v["of"] not in nodes and v["of"] not in edges:
+            faults.append(f"attribute {key} is of {v['of']}, which is neither a node nor an edge")
+        if kind == "pattern" and v["over"] not in edges:
+            faults.append(f"pattern {key} is over {v['over']}, which is not an edge")
+        if kind == "edge":
+            if nodes.get(v["from"], {}).get("kind") != AGENT:
+                faults.append(f"edge {key} does not start from an agent")
+            if v["to"] not in nodes:
+                faults.append(f"edge {key} points to {v['to']}, which is not a node")
+            label = TABLE_OF_PLAYERS.get(v["from"])
             if label not in players:
-                faults.append(f"action {key}: its agent has no row in the table of players")
-            elif e["table"] and e["table"] not in players[label]:
-                faults.append(f"action {key}: {e['table']!r} is not in its agent's row of the table of players")
+                faults.append(f"edge {key}: its agent has no row in the table of players")
+            elif v["table"] and v["table"] not in players[label]:
+                faults.append(f"edge {key}: {v['table']!r} is not in its agent's row of the table of players")
     for symbol, row in mrows.items():
         if row["table"] == "player":
-            is_agent = any(e["kind"] == AGENT and e["map"] == symbol for e in entities.values())
+            is_agent = any(n["kind"] == AGENT and n["map"] == symbol for n in nodes.values())
             if not is_agent and symbol not in NOT_AGENTS:
                 faults.append(f"player row {symbol!r} of the map is neither an agent nor excused in NOT_AGENTS")
     return faults
 
 
-def relation_faults(relations, entities, blocks):
+def regularity_faults(regs, attributes, edges, patterns, blocks):
     faults = []
-    represented = {c for r in relations.values() for c in r["conclusions"]}
+    variable = set(attributes) | set(patterns)
+    represented = {c for r in regs.values() for c in r["conclusions"]}
     for c in sorted((b for b in blocks if b.startswith("C")), key=lambda x: int(x[1:])):
         if c not in represented:
-            faults.append(f"conclusion {c} is represented by no relation")
-    for rid, r in relations.items():
-        for e in entities_of(r):
-            if e not in entities:
-                faults.append(f"relation {rid} names {e}, which is not an entity")
-        if entities.get(r["measure"], {}).get("kind") != MEASURE:
-            faults.append(f"relation {rid} measures {r['measure']}, which is not a measure of an action")
+            faults.append(f"conclusion {c} is represented by no regularity")
+    for rid, r in regs.items():
         if not r["varies"]:
-            faults.append(f"relation {rid} varies nothing")
+            faults.append(f"regularity {rid} varies nothing")
+        for v in tuple(r["varies"]) + tuple(r["fixed"]):
+            if v not in variable:
+                faults.append(f"regularity {rid} varies or fixes {v}, which is not an attribute or a pattern")
+        if r["moves"] not in patterns:
+            faults.append(f"regularity {rid} moves {r['moves']}, which is not a pattern over an edge")
+        for g in r["given"]:
+            if g not in variable and g not in edges:
+                faults.append(f"regularity {rid} is given {g}, which is not an attribute, pattern or edge")
         missing = [c for c in r["conclusions"] if c not in blocks]
         if not r["conclusions"] or missing:
-            faults.append(f"relation {rid} cites no conclusion, or one that does not exist: {missing}")
+            faults.append(f"regularity {rid} cites no conclusion, or one that does not exist: {missing}")
             continue
         grounds = set().union(*(rests_on(blocks[c]) for c in r["conclusions"]))
         stray = [g for g in tuple(r["model"]) + tuple(r["lit"]) if g not in grounds]
         if stray:
-            faults.append(f"relation {rid} cites {stray}, on which its conclusions do not rest")
+            faults.append(f"regularity {rid} cites {stray}, on which its conclusions do not rest")
         text = " ".join(statement(blocks[c]) for c in r["conclusions"])
         for s in r["standing"]:
             if s not in STANDING:
-                faults.append(f"relation {rid} has unknown standing {s!r}")
+                faults.append(f"regularity {rid} has unknown standing {s!r}")
             elif s == "implication" and not set(r["conclusions"]) <= IMPLICATIONS:
-                faults.append(f"relation {rid} is an implication but cites a conclusion outside C15 to C18")
+                faults.append(f"regularity {rid} is an implication but cites a conclusion outside C15 to C18")
             elif STANDING[s] and not re.search(STANDING[s], text):
-                faults.append(f"relation {rid} is {s!r}, which none of its conclusions states")
+                faults.append(f"regularity {rid} is {s!r}, which none of its conclusions states")
         if set(r["standing"]) & COMPARATIVE and not r["lit"]:
-            faults.append(f"relation {rid} compares with the literature but cites no literature row")
+            faults.append(f"regularity {rid} compares with the literature but cites no literature row")
     return faults
 
 
-def sentence_faults(sentences, relations, entities):
+def sentence_faults(sentences, regs, attributes, patterns):
     faults = []
+    names = {**{k: v["names"] for k, v in attributes.items()}, **{k: v["names"] for k, v in patterns.items()}}
     expressed = [rid for s in sentences for rid in s["expresses"]]
-    for rid, r in relations.items():
+    for rid, r in regs.items():
         n = expressed.count(rid)
         if (r["lit"] and n != 1) or n > 1:
-            faults.append(f"relation {rid} is expressed {n} times")
-    for rid in sorted(set(expressed) - set(relations)):
-        faults.append(f"a sentence expresses {rid}, which is not a relation")
+            faults.append(f"regularity {rid} is expressed {n} times")
+    for rid in sorted(set(expressed) - set(regs)):
+        faults.append(f"a sentence expresses {rid}, which is not a regularity")
     for n, s in enumerate(sentences, 1):
         text = s["text"].lower()
         for rid in s["expresses"]:
-            r = relations.get(rid)
+            r = regs.get(rid)
             if r is None:
                 continue
-            for e in tuple(r["varies"]) + (r["measure"],):
-                if not any(name.lower() in text for name in entities[e]["names"]):
-                    faults.append(f"sentence {n} does not name {entities[e]['names'][0]!r}")
+            for e in tuple(r["varies"]) + (r["moves"],):
+                if e in names and not any(name.lower() in text for name in names[e]):
+                    faults.append(f"sentence {n} does not name {names[e][0]!r}")
         f = surface_faults(s["text"])
         if f:
             faults.append(f"sentence {n} breaks the surface rules: {f}")
@@ -611,35 +637,39 @@ def controls(blocks, mrows, terms, players):
         and any(f.startswith("retired synonym") for f in surface_faults("the payer enters"))
         and not surface_faults("A pivot-spread of wealth moves the entry count.")
     )
-    bad_entities = dict(ENTITIES,
-                        bogus={"kind": OBJECT, "map": "$zz$", "names": ("x",)},
-                        construct={"kind": OBJECT, "map": r"$\kappa(w)=u(w)-u(w-c)$", "names": ("entry cost",)},
-                        misnamed={"kind": OBJECT, "map": r"$c$", "names": ("toll",)},
-                        orphan={"kind": MEASURE, "of": "fee", "map": r"$S$", "names": ("entrant set",)},
-                        bid={"kind": ACTION, "agent": "challenger", "verb": "bids", "object": "prize",
-                             "map": r"$e_i$", "table": "Bids an amount", "names": ("bid",)})
-    e = entity_faults(bad_entities, mrows, terms, players)
-    entities_ok = (any("bogus is not a row" in f for f in e)
-                   and any("construct is not observable" in f for f in e)
-                   and any("'toll'" in f for f in e)
-                   and any("orphan is not of an action" in f for f in e)
-                   and any("'Bids an amount' is not in its agent's row" in f for f in e))
-    bad = dict(RELATIONS)
-    bad["share_benchmark"] = dict(RELATIONS["share_benchmark"], lit=("L1",))
-    bad["gain_form"] = dict(RELATIONS["gain_form"], standing=("new",))
-    bad["prize_cap"] = dict(RELATIONS["prize_cap"], measure="fee")
+    g = graph_faults(
+        dict(NODES, bogus={"kind": OBJECT, "map": "$zz$", "names": ("x",), "attributes": ()},
+             construct={"kind": OBJECT, "map": r"$\kappa(w)=u(w)-u(w-c)$", "names": ("entry cost",), "attributes": ()}),
+        dict(ATTRIBUTES, misnamed={"of": "credential", "map": r"$c$", "names": ("toll",)}),
+        dict(EDGES, bid={"from": "challenger", "to": "position", "verb": "bids", "map": r"$e_i$",
+                         "table": "Bids an amount", "record": ""},
+             drift={"from": "position", "to": "credential", "verb": "x", "map": r"$e_i$", "table": "", "record": ""}),
+        dict(PATTERNS, orphan={"over": "wealth", "map": r"$S$", "names": ("entrant set",)}),
+        mrows, terms, players)
+    graph_ok = (any("bogus is not a row" in f for f in g)
+                and any("construct is not observable" in f for f in g)
+                and any("'toll'" in f for f in g)
+                and any("'Bids an amount' is not in its agent's row" in f for f in g)
+                and any("drift does not start from an agent" in f for f in g)
+                and any("orphan is over wealth" in f for f in g))
+    bad = dict(REGULARITIES)
+    bad["share_benchmark"] = dict(REGULARITIES["share_benchmark"], lit=("L1",))
+    bad["gain_form"] = dict(REGULARITIES["gain_form"], standing=("new",))
+    bad["prize_cap"] = dict(REGULARITIES["prize_cap"], moves="fee")
+    bad["compression"] = dict(REGULARITIES["compression"], varies=("credential",))
     del bad["fee_order"]
-    r = relation_faults(bad, ENTITIES, blocks)
-    relations_ok = (any("C15 is represented by no relation" in f for f in r)
-                    and any("share_benchmark cites ['L1']" in f for f in r)
-                    and any("gain_form is 'new'" in f for f in r)
-                    and any("prize_cap measures fee" in f for f in r))
+    r = regularity_faults(bad, ATTRIBUTES, EDGES, PATTERNS, blocks)
+    regs_ok = (any("C15 is represented by no regularity" in f for f in r)
+               and any("share_benchmark cites ['L1']" in f for f in r)
+               and any("gain_form is 'new'" in f for f in r)
+               and any("prize_cap moves fee" in f for f in r)
+               and any("compression varies or fixes credential" in f for f in r))
     s = sentence_faults(SENTENCES + [{"expresses": ("closure_sign", "nothing"), "text": "Unnamed."}],
-                        RELATIONS, ENTITIES)
+                        REGULARITIES, ATTRIBUTES, PATTERNS)
     sentences_ok = (any("closure_sign is expressed 2 times" in f for f in s)
-                    and any("nothing, which is not a relation" in f for f in s)
+                    and any("nothing, which is not a regularity" in f for f in s)
                     and any("does not name" in f for f in s))
-    return parsers_ok and entities_ok and relations_ok and sentences_ok
+    return parsers_ok and graph_ok and regs_ok and sentences_ok
 
 
 def verify(report=True):
@@ -657,16 +687,16 @@ def verify(report=True):
     terms = terminology_terms(tex)
     players = table_of_players(tex)
 
-    for f in (entity_faults(ENTITIES, mrows, terms, players)
-              + relation_faults(RELATIONS, ENTITIES, blocks)
-              + sentence_faults(SENTENCES, RELATIONS, ENTITIES)):
+    for f in (graph_faults(NODES, ATTRIBUTES, EDGES, PATTERNS, mrows, terms, players)
+              + regularity_faults(REGULARITIES, ATTRIBUTES, EDGES, PATTERNS, blocks)
+              + sentence_faults(SENTENCES, REGULARITIES, ATTRIBUTES, PATTERNS)):
         fail(f)
 
     stamps = load_stamps()
     for k, d in sorted(stamped_sources(blocks, mrows, players).items()):
         if stamps.get(k) != d:
-            fail(f"{k} changed since the relations were reviewed against it; "
-                 f"re-read the relations that cite it, then run --restamp")
+            fail(f"{k} changed since the regularities were reviewed against it; "
+                 f"re-read the regularities that cite it, then run --restamp")
 
     words = len(" ".join(s["text"] for s in SENTENCES).split())
     if not WORDS[0] <= words <= WORDS[1]:
@@ -674,9 +704,9 @@ def verify(report=True):
 
     current = paragraph_in_manuscript(tex)
     if current is None:
-        fail("MANUSCRIPT.tex has no rendered literature summary")
+        fail("the manuscript has no rendered literature summary")
     elif current != rendered():
-        fail("the paragraph in MANUSCRIPT.tex is not the ledger's rendering; run --write")
+        fail("the paragraph in the manuscript is not the ledger's rendering; run --write")
 
     if not FIGURE_DOT.exists() or FIGURE_DOT.read_text() != dot() + "\n":
         fail("figures/conclusions_ledger.dot is not the ledger's graph; run --write")
@@ -685,16 +715,13 @@ def verify(report=True):
         fail("control: a check misses the fault it exists for")
 
     if report:
-        kinds = {}
-        for e in ENTITIES.values():
-            kinds[e["kind"]] = kinds.get(e["kind"], 0) + 1
-        print(f"conclusions ledger: {len(ENTITIES)} entities ("
-              + ", ".join(f"{n} {k}" for k, n in kinds.items())
-              + f"); {len(RELATIONS)} relations; {len(SENTENCES)} sentences, {words} words")
-        used = {e for r in RELATIONS.values() for e in entities_of(r)}
-        unused = sorted(k for k, e in ENTITIES.items() if k not in used and e["kind"] in (MEASURE, STATE, ATTRIBUTE))
+        print(f"conclusions ledger: {len(NODES)} nodes, {len(ATTRIBUTES)} attributes, {len(EDGES)} edges, "
+              f"{len(PATTERNS)} patterns; {len(REGULARITIES)} regularities; "
+              f"{len(SENTENCES)} sentences, {words} words")
+        used = {e for r in REGULARITIES.values() for e in tuple(r["varies"]) + (r["moves"],) + tuple(r["given"])}
+        unused = sorted(k for k in list(ATTRIBUTES) + list(PATTERNS) if k not in used)
         if unused:
-            print(f"REPORT measures, states or attributes in no relation: {', '.join(unused)}")
+            print(f"REPORT attributes or patterns in no regularity: {', '.join(unused)}")
         print("verify(): " + ("True" if ok else "False"))
     return ok
 

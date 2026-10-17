@@ -1,4 +1,4 @@
-"""Suite for the primary sources behind the Research question (MANUSCRIPT.tex, Section 1).
+"""Suite for the primary sources behind the Research question (skeleton_who_pays.tex, Section 1).
 
 It pins each cached document by sha256, extracts its text (pdftotext for the PDFs, in layout
 and in reading order; tag-stripping for the HTML), checks every quotation in CLAIMS.md verbatim with

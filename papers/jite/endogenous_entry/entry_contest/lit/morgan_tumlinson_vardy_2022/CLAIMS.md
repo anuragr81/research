@@ -1,7 +1,7 @@
 # Claims about Morgan, Tumlinson and Vardy (2018 working paper; 2022 JET)
 
 **Source.** IMF WP/18/231 (2018), read in part [F for Sections I to IV]; the
-2022 *JET* version is not checked. Cited in `MANUSCRIPT.tex` (row L20, C12)
+2022 *JET* version is not checked. Cited in `skeleton_who_pays.tex` (row L20, C12)
 and in `refs.bib` as `MorganTumlinsonVardy2022`. Pages are the working
 paper's. `lean/mathlib/MeritocracyLogistic.lean` (see `LEAN`) proves an exact
 instance of their Proposition 1 in their own model, with controls.

@@ -1,4 +1,4 @@
-% MANUSCRIPT.tex, the manuscript skeleton for the entry-contest paper (JITE).
+% skeleton_who_pays.tex, the manuscript skeleton for the entry-contest paper (JITE).
 % Created 6 October 2026 as pass 1 of the plan in TODO.md (item PLAN).
 %
 % PURPOSE
@@ -821,16 +821,14 @@ measurement map.
 \begin{figure}[p]
 \centering
 \includegraphics[angle=90,width=\textwidth,height=0.9\textheight,keepaspectratio]{figures/conclusions_ledger.pdf}
-\caption{The conclusions as relations among observable entities. Boxes are rows
-of the measurement map that an observer records or computes, in four columns,
-the agents, the objects they act on with their readable attributes, the actions
-and the measures of actions. A black edge runs from an agent through its action
-to the object, as Table~\ref{tab:players} gives the option; a dotted edge leads
-from an action to a measure computed from its record. Each ellipse is a relation
-the conclusions state, labelled with what it says, the conclusions it represents
-and their standing against the papers read; solid edges lead in from what varies
-and out to the measure that responds, and dashed edges are conditions. The
-figure is drawn by \texttt{checks/ledger\_literature.py} from its ledger
+\caption{The entities and actions of the model, with the conclusions placed on
+what they concern. Nodes are entities, the agents in green and the objects in
+blue, each with the attributes an observer can read from it. Edges are actions,
+from the agent to what it acts on, with the record each leaves and, in purple,
+the counts and patterns computed over edges of that kind. Each attribute and
+pattern lists the conclusions in which it varies or responds. Nothing in the
+figure is a construct or a theorem. The figure is drawn by
+\texttt{checks/ledger\_literature.py} from its ledger
 (Appendix~\ref{app:evidence}).}
 \label{fig:ledger}
 \end{figure}
@@ -1753,27 +1751,29 @@ build, and \path{VERIFICATION.md} records what they printed.
   reading of a source and does not reprove the source. The records run under
   \path{lit/verify_lit.sh}.
 \item \emph{The ledger of the conclusions} (\path{checks/ledger_literature.py}).
-  The ledger declares the entities first. Each is a row of the measurement map
-  that an observer records or computes from records, of four kinds, the agents
-  of Table~\ref{tab:players}, the objects they act on with the attributes that
-  can be read from them, the actions, each an agent, a verb and an object with
-  the record it leaves, and the measures of actions, the counts, sets and
-  frequencies computed from those records. Constructs, unobserved facts and the
-  names of theorems are not entities. The ledger then records the conclusions
-  as relations, a change in some entities that moves a measure of an action,
-  with other entities fixed and under conditions that are themselves entities,
-  each citing the conclusions it represents, the rows they rest on, its
+  The ledger is a graph. Its nodes are entities, the three agents of
+  Table~\ref{tab:players} and three objects, the position, the credential and
+  the rule, each with the attributes an observer can read from it. Its edges
+  are actions, what an agent does to an entity, each leaving a record. A count
+  or pattern over the edges of one kind, how many buy the credential or on whom
+  the award lands, is computed from the records and is not a node. Every node,
+  attribute, edge and pattern is a row of the measurement map that is recorded
+  or computed; constructs, unobserved facts and the names of theorems are not in
+  the graph. A conclusion is a regularity of the graph across contests, how a
+  pattern responds when an attribute or another pattern varies, and the ledger
+  records each with the conclusions it represents, the rows they rest on, its
   premises and its standing against the papers read. The summary that opens
   Section~\ref{sec:literature} and Figure~\ref{fig:ledger} are rendered from
   the ledger, so the prose carries no row identifiers. The ledger fails when an
-  entity is not an observable row of the map or is malformed for its kind, when
-  an action is not an option its agent has in Table~\ref{tab:players}, when a
-  conclusion is represented by no relation, when a relation cites a row its
-  conclusions do not rest on or a standing they do not state, when a relation
-  with literature rows is not expressed exactly once, when a sentence does not
-  name what its relations vary and measure, when a cited row has changed since
-  the relations were last reviewed against it, and when the paragraph or the
-  figure is not its rendering.
+  element of the graph is not an observable row of the map or is malformed for
+  its kind, when an edge is not an option its agent has in
+  Table~\ref{tab:players}, when a conclusion is represented by no regularity,
+  when a regularity varies or moves something that is not an attribute or a
+  pattern, cites a row its conclusions do not rest on or a standing they do not
+  state, when a regularity with literature rows is not expressed exactly once,
+  when a sentence does not name what its regularities vary and move, when a
+  cited row has changed since the regularities were last reviewed against it,
+  and when the paragraph or the figure is not its rendering.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The standing assumptions of

@@ -115,7 +115,7 @@ Regex widened to `[A-Za-z0-9_']*` in both places.
 - HK2009 Propositions 4 and 5 (welfare comparisons under rank indexing).
 - HK-A, HK-B, HK-C, HK-J: structural/textual readings, not arithmetic.
 
-## Quotations used in `MANUSCRIPT.tex`
+## Quotations used in `skeleton_who_pays.tex`
 
 One line each, copied from Definition 1 above so the manuscript checker can
 match it. No new reading.

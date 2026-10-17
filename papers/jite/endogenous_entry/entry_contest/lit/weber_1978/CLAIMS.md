@@ -7,7 +7,7 @@ sections**. Quotations are as printed; OCR noise in the scan was checked
 against the context and is not reproduced. `verify_weber.py` matches each
 quotation against the scan with a tolerance for OCR errors.
 
-## Quotations used in `MANUSCRIPT.tex`
+## Quotations used in `skeleton_who_pays.tex`
 
 | ID | Page | Quotation | What it supports | Model rows |
 |---|---|---|---|---|

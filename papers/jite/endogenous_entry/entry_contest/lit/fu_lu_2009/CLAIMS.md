@@ -6,7 +6,7 @@ Drive as `Contest_invest0212.pdf`. It thanks the editor, Eric Maskin, so it is
 the accepted version of *Economics Letters* 103(3), 142-145 (2009); the
 published pages are not checked. Read in full [F] and checked on page images
 [P]. Pages are the manuscript's pages (equal to the PDF pages). Cited in
-`MANUSCRIPT.tex` (row L26) and in `refs.bib` as `FuLu2009`.
+`skeleton_who_pays.tex` (row L26) and in `refs.bib` as `FuLu2009`.
 
 The text layer loses the Greek letters and renders the font's ligatures as
 stray glyphs ("e¤ort" for effort); the suite maps those glyphs back. Rows

@@ -1,7 +1,7 @@
 # Claims about Wegener (1992)
 
 **Source.** JSTOR copy, read in full [F]; pages are the journal's. Cited in
-`MANUSCRIPT.tex` (row L18) and in `refs.bib` as `Wegener1992`. Every claim is
+`skeleton_who_pays.tex` (row L18) and in `refs.bib` as `Wegener1992`. Every claim is
 interpretive and is verified by quotation; `Wegener1992.lean` (core Lean)
 records the typology of Table 1 as the paper prints it, so that the
 attribution "Weber's prestige is honor, in the conflict row read as social

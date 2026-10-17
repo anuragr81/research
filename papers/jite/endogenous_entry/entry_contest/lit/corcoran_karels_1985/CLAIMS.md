@@ -6,7 +6,7 @@ reprinted in *Efficient Rent-Seeking*, Springer 2001, pp.27-45, which is not
 used). The author uploaded it to Drive as `rent_seeking_corcoran_karels.pdf`,
 20 pages of page images with no text layer. Read in full from the page images
 [P]. Pages are the printed pages; the printed page is the PDF page plus 226.
-Cited in `MANUSCRIPT.tex` (row L29) and in `refs.bib` as `CorcoranKarels1985`.
+Cited in `skeleton_who_pays.tex` (row L29) and in `refs.bib` as `CorcoranKarels1985`.
 
 The text was made by OCR (`ocr_corcoran_karels.py`, RapidOCR on the page images
 upscaled 2.5 times) and is pinned by sha256. Every row not marked P is checked

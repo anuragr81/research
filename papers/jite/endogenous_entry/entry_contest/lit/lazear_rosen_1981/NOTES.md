@@ -373,7 +373,7 @@ The audit reports 28 theorems, 28 audited and 0 sorry. Nine theorems use no axio
 use `propext` only and sixteen use `propext` and `Quot.sound`. No theorem uses
 `Classical.choice`.
 
-## Quotations used in `MANUSCRIPT.tex`
+## Quotations used in `skeleton_who_pays.tex`
 
 One line each, copied from the block quotations above so the manuscript
 checker can match them. No new reading.

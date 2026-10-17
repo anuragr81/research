@@ -5,7 +5,7 @@ Eliminate Negative Stereotypes?", *American Economic Review* 83(5), 1220-1240
 (December 1993), the JSTOR copy (stable URL 2117558), 22 PDF pages: a JSTOR cover
 and then the AER pages. Read in full [F] and checked on page images [P]. Pages are
 the AER pages; the printed page is the PDF page plus 1218. Cited in
-`MANUSCRIPT.tex` (row L28) and in `refs.bib` as `CoateLoury1993`.
+`skeleton_who_pays.tex` (row L28) and in `refs.bib` as `CoateLoury1993`.
 
 The pages are set in two columns, and the text layer garbles the equations.
 `verify_coate_loury.py` extracts each column separately and checks every row not

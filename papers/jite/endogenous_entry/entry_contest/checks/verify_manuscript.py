@@ -235,13 +235,13 @@ bibs = bib_keys()
 lit = lit_records()
 
 print("=" * 72)
-print("MANUSCRIPT SKELETON (MANUSCRIPT.tex)")
+print("MANUSCRIPT SKELETON (skeleton_who_pays.tex)")
 print("=" * 72)
 print(f"      Lean declarations found: {len(lean)}; bib keys: {len(bibs)}; lit keys: {len(lit)}")
 
-tex = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
+tex = open(os.path.join(ROOT, "skeleton_who_pays.tex")).read()
 real, counts = analyse(tex, lean, bibs, lit)
-print(f"      rows in MANUSCRIPT.tex: {counts}")
+print(f"      rows in skeleton_who_pays.tex: {counts}")
 names = {"MS-1": "row IDs well formed and unique",
          "MS-2": "introduction rows point to model rows only",
          "MS-3": "conclusion rows point to model or literature rows only",

@@ -64,7 +64,7 @@ if p.returncode != 0:
 src = p.stdout
 check("R2 the retired file can be read from git", True, f"{len(src.splitlines())} lines")
 
-files = ["MANUSCRIPT.tex", "PROOFS_ADDENDUM.tex", "LITERATURE.tex", "MEASUREMENT_MAP.tex",
+files = ["skeleton_who_pays.tex", "PROOFS_ADDENDUM.tex", "LITERATURE.tex", "MEASUREMENT_MAP.tex",
          "TODO.md", "lean/mathlib/README.md"]
 files += [str(pathlib.Path(f).relative_to(HERE)) for f in glob.glob(str(HERE / "lit" / "*" / "*.md"))]
 dest = "\n".join((HERE / f).read_text() for f in files)

@@ -4,7 +4,7 @@
 in Rent-Seeking", *Public Choice* 43(1), 89-94 (1984), uploaded by the author
 on Drive as a JSTOR copy; read in full [F] and checked on page images [P].
 Pages are the printed pages (the printed page is the PDF page plus 87). Cited
-in `MANUSCRIPT.tex` (row L24) and in `refs.bib` as `Corcoran1984`. The text
+in `skeleton_who_pays.tex` (row L24) and in `refs.bib` as `Corcoran1984`. The text
 layer garbles the equations and most of the second paragraph after (10) on
 p.92, so the three p.92 rows marked P below were read from the page image,
 which `verify_corcoran.py` pins by sha256 but cannot match against text. The
