@@ -1,0 +1,83 @@
+% Ledger diagram of Paper A1, 17 October 2026.
+%   pdflatex -output-directory=build notes/ledger_diagram.tex
+% Nodes are the entities of notes/ledger_diagram.md. Edges are actions, one
+% entity acting on another, labelled by the verb and the rows that settle it
+% or the open relationship (U numbers of notes/entities.md). Solid edges are
+% settled by a model row, dashed edges are rules or inputs the model takes as
+% given, and dotted edges are open.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.symbols,shapes.misc,calc}
+\begin{document}
+\begin{tikzpicture}[
+  >={Stealth[length=2.2mm]},
+  every node/.style={font=\small},
+  ent/.style={draw=black!60, line width=0.5pt, align=center, text width=3.4cm, minimum height=1.1cm, inner sep=4pt},
+  player/.style={ent, rounded corners=4pt, fill=blue!10},
+  state/.style={ent, fill=black!8},
+  instr/.style={ent, ellipse, fill=yellow!20, text width=3.2cm},
+  constr/.style={ent, chamfered rectangle, chamfered rectangle xsep=10pt, fill=red!10},
+  record/.style={ent, fill=white, tape, tape bend top=none, tape bend height=2pt},
+  lab/.style={font=\scriptsize, align=center, fill=white, inner sep=1.2pt, text width=2.9cm},
+  settled/.style={->, line width=0.6pt},
+  given/.style={->, line width=0.6pt, dashed},
+  open/.style={->, line width=0.6pt, dotted, line cap=round},
+]
+% ---------------------------------------------------------------- nodes
+\node[constr]  (Law)      at (1,14)    {Law (E14)\\ strictness};
+\node[player]  (Clients)  at (-6,10)   {Clients (E11)\\ $N$ host clients, weight $\alpha$};
+\node[player]  (Venue)    at (1,10)    {Venue or platform (E10, P5)\\ admission rate, price, atmosphere};
+\node[state]   (Host)     at (8,10)    {Host group (E5, P4)\\ standing $\bar c_I$, spread $\nu_I$};
+\node[record]  (Record)   at (22,10)   {Record (E17)\\ refusals, callbacks, friendships};
+\node[player]  (Person)   at (1,5)     {Person met (E1, P2 when passing)\\ class unseen, marker shown};
+\node[player]  (Observer) at (8,5)     {Observer (E2, P1)\\ own class $y$};
+\node[player]  (Pair)     at (15,5)    {Pair (E3, P6)\\ both must engage};
+\node[constr]  (Setting)  at (22,5)    {Setting (E16)\\ school, college, neighbourhood};
+\node[state]   (Outsider) at (8,0)     {Outsider group (E4, P3)\\ standing $\bar c_O$, spread $\nu_O$};
+\node[instr]   (Budget)   at (1,0)     {Budget (E8)\\ $b=\beta c$};
+\node[instr]   (Activity) at (8,-4.5)  {Shared activity (E9)\\ one level $p$, each pays};
+
+% ---------------------------------------------------------------- person and observer, three parallel actions
+\draw[settled] ([yshift=13mm]Person.east) -- node[lab, pos=0.5, above=1pt, text width=4.2cm] {shows the marker (A4), read as evidence on group alone (M1 to M3, M17)} ([yshift=13mm]Observer.west);
+\draw[settled] (Observer.west) -- node[lab, pos=0.5, text width=3.6cm] {engages or refuses by own class and expected distance (A14, M18)} (Person.east);
+\draw[open]    ([yshift=-13mm]Person.east) -- node[lab, pos=0.5, above=1pt, text width=4.6cm] {shows class within the group, the penalty vanishes (U5)} ([yshift=-13mm]Observer.west);
+
+% ---------------------------------------------------------------- groups and the observer
+\draw[settled] (Host.south) -- node[lab, pos=0.2, anchor=east, xshift=-3pt, text width=3.2cm] {standing and spread enter the expected distance (M18, U12)} (Observer.north);
+\draw[settled] (Outsider.north) -- node[lab, pos=0.78, anchor=west, xshift=3pt, text width=3.2cm] {standing and spread enter the expected distance (M18, U12)} (Observer.south);
+\draw[open]    (Observer.south east) to[bend left=40] node[lab, pos=0.42, anchor=west, xshift=2pt, text width=3.0cm] {a low-class host member prefers outsiders (U3)} (Outsider.north east);
+\draw[given]   (Person.south east) -- node[lab, pos=0.74, sloped, below=1pt, text width=2.4cm] {passes, leaving the visible group, standing falls (A12, M14, U6)} (Outsider.north west);
+
+% ---------------------------------------------------------------- the pair, the budget, the activity
+\draw[open]    (Observer.east) -- node[lab, pos=0.5, above=1pt, text width=3.0cm] {engages, both ways (U2)} (Pair.west);
+\draw[open]    ([xshift=12mm]Person.north) to[out=80, in=125, looseness=0.9] node[lab, pos=0.65, above=1pt, text width=3.0cm] {engages in return (U2)} (Pair.north west);
+\draw[settled] (Person.south) -- node[lab, pos=0.5, anchor=east, xshift=-3pt, text width=2.4cm] {class affords (A15, M19)} (Budget.north);
+\draw[settled] (Observer.south west) -- node[lab, pos=0.3, anchor=north west, xshift=2pt, text width=2.2cm] {class affords (A15, M19)} (Budget.north east);
+\draw[settled] (Budget.south east) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.2cm] {pays the level from the own budget, ideal level rises in the budget (M19)} (Activity.west);
+\draw[settled] (Pair.south) -- node[lab, pos=0.55, anchor=west, xshift=3pt, text width=3.0cm] {sets the midpoint level, each side loses $\kappa(c_i-c_j)^2$ (M19)} (Activity.north east);
+\draw[open]    (Setting.west) -- node[lab, pos=0.5, text width=3.0cm] {fixes who can meet whom (U11)} (Pair.east);
+
+% ---------------------------------------------------------------- the venue
+\draw[open]    (Law.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.4cm] {bars admission on group, leaves price, location, atmosphere (U8)} (Venue.north);
+\draw[given]   (Host.west) -- node[lab, pos=0.5, above=1pt, text width=3.4cm] {host standing enters the admission margin (M15)} (Venue.east);
+\draw[given]   (Clients.east) -- node[lab, pos=0.5, text width=3.0cm] {pay, self-select on atmosphere (A13, U7)} (Venue.west);
+\draw[open]    (Clients.north east) to[bend left=30] node[lab, pos=0.5, above=1pt, text width=3.2cm] {know which venue is right, shadow information (U9)} (Venue.north west);
+\draw[open]    (Venue.south west) to[bend left=30] node[lab, pos=0.5, below=1pt, text width=3.2cm] {screens by price, location, atmosphere (U8)} (Clients.south east);
+\draw[given]   ([xshift=-9mm]Venue.south) -- node[lab, pos=0.5, anchor=east, xshift=-3pt, text width=2.6cm] {admits or excludes outsiders by the admission rate (A13, M15)} ([xshift=-9mm]Person.north);
+\draw[given]   ([xshift=9mm]Person.north) -- node[lab, pos=0.62, anchor=west, xshift=3pt, text width=2.2cm] {pays the price, which may certify class (U10)} ([xshift=9mm]Venue.south);
+
+% ---------------------------------------------------------------- the record
+\draw[settled] (Observer.north east) -- node[lab, pos=0.45, sloped, above=1pt, text width=3.2cm] {refusal share $F$ against the standing (M18)} (Record.west);
+\draw[given]   (Venue.north east) .. controls (6,13.2) and (17,13.2) .. node[lab, pos=0.55, above=1pt, text width=2.4cm] {admissions (M15)} (Record.north);
+\draw[open]    (Pair.north east) -- node[lab, pos=0.5, sloped, below=1pt, text width=3.2cm] {friending bias as Chetty et al.\ measure it (U11)} (Record.south west);
+
+% ---------------------------------------------------------------- legend
+\node[font=\small, align=left, anchor=north west] at (-8.2,17) {%
+  \textbf{Paper A1 ledger, 17 October 2026.} Nodes are entities. Arrows are actions, one entity on another, labelled by the rows that settle them or by the open relationship.\\
+  Solid = settled by a model row. \quad Dashed = a rule or input the model takes as given. \quad Dotted = open, with no row, assumption or map object.\\
+  Blue = player with a choice. \quad Grey = state, no choice. \quad Yellow = instrument. \quad Red = constraint. \quad White = record.};
+\end{tikzpicture}
+\end{document}
