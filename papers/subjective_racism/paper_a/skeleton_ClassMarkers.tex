@@ -99,10 +99,9 @@ group. Under group sufficiency the marker's likelihood within a group does
 not depend on class, and the two forms of that assumption, on the likelihood
 and on the posterior, are equivalent under a prior with full support (M1).
 The Bayesian posterior on class is then the within-group class distributions
-mixed by the posterior on group (M2), and every revision of the group
-weights from a prior with full support is a Bayesian update for some marker
-likelihood (M3). A second rule for soft evidence therefore gives no posterior
-on class that Bayes' rule does not, within one reading of a marker (M2, M3).
+mixed by the posterior on group (M2). Any weights on the groups are the
+Bayesian posterior on group for some marker likelihood, when the prior gives
+every group positive weight (M3).
 The predecessor's stranger, whose expected class moves from 0.50 to 0.38 on
 hearing an accent, is such a mixture (M17).
 
@@ -168,13 +167,12 @@ model rows it rests on and what it does not claim.
 \bottomrule
 \endfoot
 \krow{K1}{Under group sufficiency a marker moves the observer's belief about
-  class only through the group it signals, and a second rule for soft
-  evidence adds no posterior on class within one reading.}{M1, M2, M3}{A
-  finite class space and a finite set of groups. The converse in M1 needs a
-  prior with full support, and M2 needs the within-group distributions
-  normalised (M1, M2). Across several readings two rules can differ, since
-  Jeffrey's rule need not commute (L7), and the model has one reading. Not
-  claimed as new (Table~\ref{tab:pending}).}
+  class only through the group it signals, and the posterior on class is
+  the within-group class distributions mixed by the posterior on
+  group.}{M1, M2, M3}{A finite class space and a finite set of groups. The
+  converse in M1 needs a prior with full support, M2 needs the within-group
+  distributions normalised, and M3 needs a prior that gives every group
+  positive weight. Not claimed as new (Table~\ref{tab:pending}).}
 \krow{K7}{An observer engages when the expected squared class distance, the
   squared gap to the group's standing plus the group's spread, is at most the
   engagement threshold. The share of observers who refuse does not rise in a
@@ -268,18 +266,18 @@ person, and no arrow of the platform is solid.
 \prow{P1}{The observer}{What to believe about the class of a person whose
   marker is read, and whether to engage with that person or refuse.}
   {The belief is settled by Bayes' rule alone, from a prior on class within
-  each group and the group weights, with no second rule (A3, M1 to M3, M17).
+  each group and the group weights (A3, M1 to M3, M17).
   The engagement decision is the threshold rule of A14, whose quadratic
   utility and sensitivity M19 derives from separate budgets and one shared
   activity (A15). Row M18 derives from the rule the refusal share that M14
   takes as its discrimination-rate function, with the range of standings on
   which that share does not rise and the range on which it does not fall.}
   {The employer of Phelps, who combines a group prior with a test score
-  (L4), the agent of Jeffrey, who revises by a mixture rule (L6, L7), the
+  (L4), the
   employer of Aigner and Cain, who discounts a group for its spread (L8),
   and the employers of P\k{e}ski and Szentes, for whom a signal's value is
   the same whatever their own colour (L9).}
-  {M1, M2, M3, M14, M17, M18, M19, L4, L6, L7, L8, L9}
+  {M1, M2, M3, M14, M17, M18, M19, L4, L8, L9}
 \prow{P2}{A member of the outsider group}{Whether to pass, suppressing the
   marker and leaving the visible group, or to stay.}
   {A member passes when the passing gain at the member's class is at least
@@ -384,9 +382,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   the posterior on class.}
   {$\pi_g(c)$, $\ell_g(c)$, $q(g)$, $\pi'_g(c)$, $q'(g)$, $P(c\mid m)$}
   {M1, M2, M3, M17}
-  {The author's choice of 14 October 2026. M2 and M3 show that a second rule
-  gives no posterior on class that Bayes' rule does not, within one reading
-  (Appendix~\ref{app:scope}, The updating rule).}
+  {The author's choice of 14 October 2026 (Appendix~\ref{app:scope}, The
+  updating rule).}
 \arow{A4}{Group sufficiency. Within a group the marker's likelihood does not
   depend on class, $\ell_g(c)=Z_g$ for every $c$.}
   {Once the group is known, the marker says nothing more about class. Within
@@ -506,10 +503,10 @@ that check it.}\\
   It fails without $\ell_g(c)=\lambda_g$, and without
   $\sum_c\pi_g(c)=1$.}
   {ClassPosterior.bayes_class_eq_mixture, ClassPosterior.control_sufficiency_needed, ClassPosterior.control_normalised_needed}
-\mrow{M3}{Every revision of the group weights from a prior that gives every
-  group positive weight is a Bayesian update, for a marker likelihood that
-  depends on group alone. The posterior on class is then the mixture by the
-  revised weights.}
+\mrow{M3}{Under a prior that gives every group positive weight, any weights
+  on the groups are the Bayesian posterior on group, for a marker likelihood
+  that depends on group alone. The posterior on class is then the mixture by
+  those weights.}
   {$q(g)>0$, $\sum_g w(g)=1$, $\sum_c\pi_g(c)=1$, $\xi\neq0$ and
   $\ell_g(c)=\xi\,w(g)/q(g)$. Then $q'=w$ and
   $P(c\mid m)=\sum_g\pi_g(c)\,w(g)$. If also $0<\xi\le q(g)$ and
@@ -622,18 +619,14 @@ that check it.}\\
 \section{Literature}
 
 The papers read answer part of the question. \citet{Phelps1972} has an
-employer combine a group prior with a test score (L4). \citet{Jeffrey1983} revises beliefs by new weights
-on the cells of a partition (L6). \citet{AignerCain1977} penalise a group's
+employer combine a group prior with a test score (L4). \citet{AignerCain1977} penalise a group's
 spread (L8). \citet{PeskiSzentes2012} show that statistical discrimination
 gives a signal the same value for every employer, whatever the employer's
 own colour (L9). \citet{MailathPostlewaite2006} derive assortative matching
 on income from joint consumption, under which everyone prefers a richer
 partner (L10).
 
-The manuscript adds four results. The marker is evidence
-about the group alone, so the posterior on class mixes the within-group
-class distributions, and within one reading Jeffrey's rule adds nothing to
-Bayes' rule (M1 to M3). The observer's own class
+The manuscript adds three results. The observer's own class
 enters the engagement decision, so a higher standing of the outsider group
 does not raise refusal among observers above that standing and does not
 lower refusal among observers below it, a dependence that P\k{e}ski and
@@ -666,21 +659,6 @@ each result is new waits on the sources of Table~\ref{tab:pending}.
   marker here is evidence about the group alone (M1).}{The weights applied to the test information and the skin
   color information are inversely related to the variances of the respective
   disturbance terms corresponding to them.}{660}{M1, C19}
-\lrow{L6}{Jeffrey1983}{Jeffrey's
-  rule mixes the probabilities conditional on the atoms of a partition by
-  new weights for the atoms, and holds exactly when those conditionals are
-  unchanged. M2 and M3 show the Bayesian posterior on class under group
-  sufficiency is such a mixture. Cited by PDF page of the 1983 edition,
-  whose preface says the rest of the book is as in the 1965 first edition
-  except for minor corrections.}{it did not change the conditional degrees
-  of belief in any propositions on the evidence B or on the evidence}{180}{M2,
-  M3, C1}
-\lrow{L7}{Jeffrey1983}{Two applications of the rule
-  need not commute, which \path{Jeffrey1983.control_not_commutative} exhibits
-  on four outcomes. The model reads a marker once, so the order effect lies
-  outside it rather than being ruled out by it.}{Nor need it always be the
-  case that the result of two applications of (11-2) is independent of the
-  order}{183}{C1}
 \lrow{L8}{AignerCain1977}{The employer chooses the group that maximises
   expected productivity discounted for risk, so a group's conditional
   variance is penalised in its own right. The spread term of M18 is this
@@ -723,17 +701,16 @@ each result is new waits on the sources of Table~\ref{tab:pending}.
 \end{longtable}
 \normalsize
 
-Phelps (1972), Jeffrey's chapter on probability kinematics in the 1983
-edition, Aigner and Cain (1977), the 2012 working paper of P\k{e}ski and
+Phelps (1972), Aigner and Cain (1977), the 2012 working paper of P\k{e}ski and
 Szentes, Mailath and Postlewaite (2006), Charles, Hurst and Roussanov
 (2007) and Hitsch, Horta\c{c}su and Ariely (2006) were read in full
-(\path{lit/phelps_1972/}, \path{lit/jeffrey_1983/},
+(\path{lit/phelps_1972/},
 \path{lit/aigner_cain_1977/}, \path{lit/peski_szentes_2012/},
 \path{lit/mailath_postlewaite_2006/},
 \path{lit/charles_hurst_roussanov_2007/},
 \path{lit/hitsch_hortacsu_ariely_2006/}). Loury (1998), Loury (2002),
-Akerlof (1997), the platform-discrimination studies the predecessor cites,
-Jeffrey's first edition of 1965 and Arrow's published chapter of 1973 are
+Akerlof (1997), the platform-discrimination studies the predecessor cites
+and Arrow's published chapter of 1973 are
 not read, and no row rests on them.
 
 \section{Conclusions}
@@ -759,9 +736,9 @@ no conclusion rests on them.
 \bottomrule
 \endfoot
 \crow{C1}{Under group sufficiency a marker moves the observer's belief about
-  class only through the group it signals, and a second rule for soft
-  evidence produces no posterior that Bayes' rule does not, within one
-  reading of a marker.}{M1, M2, M3, L6, L7}
+  class only through the group it signals, and the posterior on class is
+  the within-group class distributions mixed by the posterior on
+  group.}{M1, M2, M3}
 \crow{C10}{Selective passing by the upper members lowers the visible
   group's mean, and under a discrimination-rate function that does not rise
   in standing the rate against those who stay does not fall.}{M14}
@@ -802,8 +779,8 @@ no conclusion rests on them.
 \endfoot
 \crow{C20}{The equivalence of the two forms of group sufficiency under full
   support, and the mixture form of the posterior on class, are standard
-  rather than new. \pend{A search of the literature on conditioning on a
-  partition, and a published statement of M1 to M3 to cite.}}{M1, M2, M3}
+  rather than new. \pend{A textbook statement of M1 to M3 to
+  cite.}}{M1, M2, M3}
 \crow{C15}{Platform discrimination rises with the introduction of photographs
   and real names. \pend{The platform-discrimination studies the predecessor
   cites, read in full, and a row linking the marker's salience to the
@@ -841,7 +818,7 @@ marginal of the marker is
 $Z=\sum_{g}\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)=P(m)$, the Bayesian posterior on
 group is $q'(g)=\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)/Z$, and the Bayesian
 posterior on class is $P(c\mid m)=\sum_{g}\ell_g(c)\,\pi_g(c)\,q(g)/Z$. In M3,
-$w$ is a target revision of the group weights and $\xi$ a scale.
+$w$ is a set of weights on the groups and $\xi$ a scale.
 
 Row M14 has a finite set of people $V$ with classes $c_i$, the passers
 $P\subseteq V$, the visible group $V\setminus P$, and the mean class
@@ -1093,7 +1070,7 @@ records what they printed.
 \path{Grogger2018} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Grogger2018.lean}{\path{lean/mathlib/Grogger2018.lean}} & record only \\
 \path{HansonHawley2011} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/HansonHawley2011.lean}{\path{lean/mathlib/HansonHawley2011.lean}} & record only \\
 \path{HitschEtAl2006} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/HitschEtAl2006.lean}{\path{lean/mathlib/HitschEtAl2006.lean}} & L12 \\
-\path{Jeffrey1983} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Jeffrey1983.lean}{\path{lean/mathlib/Jeffrey1983.lean}} & L6, L7 \\
+\path{Jeffrey1983} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Jeffrey1983.lean}{\path{lean/mathlib/Jeffrey1983.lean}} & record only \\
 \path{KimLoury2009} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2009.lean}{\path{lean/mathlib/KimLoury2009.lean}} & record only \\
 \path{KimLoury2012} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2012.lean}{\path{lean/mathlib/KimLoury2012.lean}} & record only \\
 \path{KimLoury2014} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2014.lean}{\path{lean/mathlib/KimLoury2014.lean}} & record only \\
@@ -1274,17 +1251,12 @@ gives every class positive probability, and its second control shows the
 posterior form is weaker without that support.
 
 \paragraph{The updating rule.} The observer updates by Bayes' rule alone, a
-choice the author made on 14 October 2026 because of rows M2 and M3. The
-predecessor manuscript adds Jeffrey's rule of conditioning in the form of its
-equation (kinematics), which mixes the within-group class distributions by
-group weights taken as given, as Jeffrey's own rule mixes conditionals on
-the atoms of a partition (L6). Under group sufficiency, the Bayesian
-posterior on class is such a mixture (M2), and every such mixture whose prior
-gives each group positive weight is a Bayesian posterior for some marker
-likelihood (M3). Within one reading of a marker the two rules therefore
-produce the same posteriors on class, and a second rule adds no result.
-Across several readings the two can differ, since two applications of
-Jeffrey's rule need not commute (L7), and the model has one reading.
+choice the author made on 14 October 2026. The predecessor manuscript's
+equation (kinematics) mixes the within-group class distributions by group
+weights taken as given. Under group sufficiency, any such weights are the
+Bayesian posterior on group for some marker likelihood (M3), and the mixture
+is then the Bayesian posterior on class (M2). The model therefore takes the
+group weights as a Bayesian posterior and needs no second rule.
 
 \paragraph{Passing.} Row M14 carries the composition claim of the
 predecessor's passing appendix for a finite population. Row M14 does not carry

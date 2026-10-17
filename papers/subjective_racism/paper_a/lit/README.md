@@ -23,7 +23,7 @@ is in `notes/motivation_scan.md`.
 | Record | Read | Lean | Rows |
 |---|---|---|---|
 | `phelps_1972/` | [P] 15 Oct 2026, page images, quotations checked against OCR | `lean/mathlib/Phelps1972.lean` | L4, C14, C19 |
-| `jeffrey_1983/` | [P] 15 Oct 2026, chapter 11 and the preface of the second edition, cited as such | `lean/mathlib/Jeffrey1983.lean` | L6, L7, C1 |
+| `jeffrey_1983/` | [P] 15 Oct 2026, chapter 11 and the preface of the second edition, cited as such | `lean/mathlib/Jeffrey1983.lean` | Record only. Rows L6, L7 and the Jeffrey clause of C1 removed 17 Oct 2026 (D8) |
 | `cole_mailath_postlewaite_1991/` | [F] 16 Oct 2026, CARESS working paper 91-14, cited as such | `lean/mathlib/ColeEtAl1991.lean` | none yet |
 | `pesendorfer_1995/` | [F] 16 Oct 2026 | `lean/mathlib/Pesendorfer1995.lean` | none yet |
 | `eeckhout_2006/` | [F] 16 Oct 2026 | `lean/mathlib/Eeckhout2006.lean` | none yet |

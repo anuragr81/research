@@ -196,10 +196,9 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   parameter is only a scale on the exclusion pressure (M13).
 - [x] **D4. Drop Jeffrey's rule. Decided 14 Oct 2026 by the author**, on the
   condition that the two rules are shown not to differ here. M2 and M3 show
-  it for one reading of a marker under group sufficiency. The skeleton names
-  Jeffrey only in Appendix D, "The updating rule", which gives the reason.
-  Not covered is a sequence of several soft readings, where order could
-  matter. The model has none.
+  it for one reading of a marker under group sufficiency. Not covered is a
+  sequence of several soft readings, where order could matter. The model
+  has none. Since D8 the skeleton does not name Jeffrey at all.
 - [x] **D5. Derive the discrimination-rate function from the engagement
   threshold. Decided 17 Oct 2026 by the author** ("Go, can we tie the loose
   end"), after `notes/entities.md` named the engagement decision the base
@@ -233,6 +232,17 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   file is `skeleton_ClassMarkers.tex`. The picture is `ledger_picture.tex`,
   Figure 1 in the Players subsection, on a landscape page, and the planning
   note is `notes/ledger_diagram.md`.
+- [x] **D8. Remove Jeffrey's rule from Paper A1. Decided 17 Oct 2026 by the
+  author** ("Option 2 To remove jeffey for a1"), after the question why
+  Diaconis and Zabell (1982) were still pending once the model used Bayes'
+  rule alone. Rows L6 and L7 are removed, and the Jeffrey clause leaves K1,
+  C1, the Answer, the Players table, A3, the Literature summary and the
+  appendix paragraph "The updating rule". M3 stays, restated without a
+  second rule, because the measurement map reads the salience as a Bayesian
+  posterior on group through it. The summary names three results, since M1
+  to M3 are not claimed as new. C20 now waits on a textbook statement of M1
+  to M3, and Diaconis and Zabell are no longer needed.
+  `lit/jeffrey_1983/` and `Jeffrey1983.lean` stay as a record.
 
 ## Novelty ledger
 
@@ -252,7 +262,7 @@ they differ.
 | Source | Status | Bearing |
 |---|---|---|
 | Phelps (1972) | Read [P] 15 Oct 2026, `lit/phelps_1972/` | Static, and the individual's own test score is evidence about the individual. No erosion of stereotypes is modelled (C19), so C14's Phelps half fails |
-| Jeffrey (1983) | Read [P] 15 Oct 2026, chapter 11 and the preface of the second edition, `lit/jeffrey_1983/`. The 1965 first edition is not read | Replaces the unverified attribution in Appendix D (L6), cited as the edition read. Non-commutativity of the rule is now a Lean control (L7) |
+| Jeffrey (1983) | Read [P] 15 Oct 2026, chapter 11 and the preface of the second edition, `lit/jeffrey_1983/`. The 1965 first edition is not read | Record only since D8, 17 Oct 2026. It had replaced the unverified attribution in Appendix D (L6) and given the non-commutativity control (L7). Both rows are removed |
 | Pęski and Szentes (2012 WP) | Read [F] 16 Oct 2026, `lit/peski_szentes_2012/` | States that statistical discrimination cannot depend on the observer's own colour (PS-Q4), the claim contribution 1 qualifies |
 | Pesendorfer (1995), Corneo and Jeanne (1994 DP) | Read [F] 16 Oct 2026, `lit/pesendorfer_1995/`, `lit/corneo_jeanne_1994/` | Price screening as certification of an unseen type is theirs, so contribution 3 is new only as venue exclusion built from clients' inference from a marker |
 | Mailath and Postlewaite (2006 WP), Cole, Mailath and Postlewaite (1991 WP) | Read [F] 16 Oct 2026 | Income seen at matching, vertical preferences. The rival to contribution 4 (MP-Q1 to MP-Q3) |
@@ -266,7 +276,7 @@ they differ.
 | Goffman (1951, translation) | Read [F] 16 Oct 2026, set aside at the author's direction on 17 Oct 2026 | Not cited, because only the Spanish translation was read |
 | Hanson and Hawley (2011 WP) | Read [F] 17 Oct 2026, `lit/hanson_hawley_2011/` | The penalty's net share vanishes between two high-class e-mails, while the pooled gap does not (HH-D1). Landlords of shared buildings screen for tenants' contact (HH-Q12, HH-Q13) |
 | McPherson et al. (2001), Currarini, Jackson and Pin (2008 WP), Bertrand and Mullainathan (2004), Edelman, Luca and Svirsky (2017), Bohren, Hull and Imas (2024 WP), Fang and Moro (2010 WP), Peng, Zhang and Pan (2010) | Read [F] 16 Oct 2026 | Rival accounts and limits of the test. Verdicts in `notes/motivation_scan.md` |
-| Diaconis and Zabell (1982) | On Drive (`temp`), not read | Not needed by any row |
+| Diaconis and Zabell (1982) | On Drive (`temp`), not read | Not needed since D8 removed the comparison with Jeffrey's rule |
 | Loury (2002) | Not found on Drive | C17 |
 | Platform-discrimination studies | Not found on Drive | C15 |
 | Selection–mutation literature, Fisher (1930) | Not found on Drive | C12 |
