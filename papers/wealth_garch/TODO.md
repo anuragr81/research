@@ -667,4 +667,14 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   equity becoming infinite in the simulation, which points at the dynamics
   (banks above the top of the equity grid); not a result until C3 on the
   real grid reports.
+- 2026-10-17. MMP stage 2d, the large-bank NaN explained
+  (results_nonfinite_stage2.md, PREREG_stage2_4.md and _5.md): simulated
+  banks that rise above the top of the equity grid (0.4) keep the policy of
+  the top grid point, and the convex equity term phi_E e^2 in profit then
+  sends their equity to infinity (first overflow at quarter 150); infinite
+  equity makes loans/assets, deposits/assets and dividends/equity zero and
+  the equity ratios NaN, so the large-bank moments are contaminated. Not
+  fixed: any change to the simulation or the grid needs its own dated
+  pre-registration, chosen by whether banks stay finite and on their grids.
+  Two unregistered looks are recorded in PREREG_stage2_5.md.
 

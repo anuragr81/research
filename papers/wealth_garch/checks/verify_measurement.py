@@ -227,7 +227,8 @@ for standing in ("common_data/results_common_data.md", "replication/gordon_hirtl
                  "replication/berger_2008/results_stage1_2.md",
                  "replication/mankart_michaelides_pagratis_2020/results_stage1.md",
                  "replication/mankart_michaelides_pagratis_2020/results_validation_stage2.md",
-                 "replication/mankart_michaelides_pagratis_2020/results_validation_stage2_a1.md"):
+                 "replication/mankart_michaelides_pagratis_2020/results_validation_stage2_a1.md",
+                 "replication/mankart_michaelides_pagratis_2020/results_nonfinite_stage2.md"):
     ok, detail = reproduce(standing)
     check(f"MM-14 {standing} reproduces", ok, detail)
     pres = run_under(standing)
