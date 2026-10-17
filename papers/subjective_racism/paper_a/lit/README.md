@@ -25,7 +25,7 @@ is in `notes/motivation_scan.md`.
 | `phelps_1972/` | [P] 15 Oct 2026, page images, quotations checked against OCR | `lean/mathlib/Phelps1972.lean` | L4, C14, C19 |
 | `jeffrey_1983/` | [P] 15 Oct 2026, chapter 11 and the preface of the second edition, cited as such | `lean/mathlib/Jeffrey1983.lean` | Record only. Rows L6, L7 and the Jeffrey clause of C1 removed 17 Oct 2026 (D8) |
 | `cole_mailath_postlewaite_1991/` | [F] 16 Oct 2026, CARESS working paper 91-14, cited as such | `lean/mathlib/ColeEtAl1991.lean` | none yet |
-| `pesendorfer_1995/` | [F] 16 Oct 2026 | `lean/mathlib/Pesendorfer1995.lean` | L19, C22 |
+| `pesendorfer_1995/` | [F] 16 Oct 2026 | `lean/mathlib/Pesendorfer1995.lean` | L19, C22, L24 |
 | `eeckhout_2006/` | [F] 16 Oct 2026 | `lean/mathlib/Eeckhout2006.lean` | none yet |
 | `mailath_postlewaite_2006/` | [F] 16 Oct 2026, PIER working paper 06-003, with 04-025 and 02-003 read for differences | `lean/mathlib/MailathPostlewaite2006.lean` | L21 |
 | `fryer_jackson_2008/` | [F] 16 Oct 2026 | `lean/mathlib/FryerJackson2008.lean` | L13 |
@@ -34,7 +34,7 @@ is in `notes/motivation_scan.md`.
 | `corneo_jeanne_1994/` | [F] 16 Oct 2026, Bonn discussion paper A-461, cited as such | `lean/mathlib/CorneoJeanne1994.lean` | L17 |
 | `moav_neeman_2012/` | [F] 16 Oct 2026 | `lean/mathlib/MoavNeeman2012.lean` | none yet |
 | `kim_loury_2009/` | [F] 16 Oct 2026, MPRA paper 18765, cited as such | `lean/mathlib/KimLoury2009.lean` | none yet |
-| `kim_loury_2012/` | [F] 16 Oct 2026, the KDI article, pp. 1 to 15 of the issue | `lean/mathlib/KimLoury2012.lean` | none yet |
+| `kim_loury_2012/` | [F] 16 Oct 2026, the KDI article, pp. 1 to 15 of the issue | `lean/mathlib/KimLoury2012.lean` | L29 |
 | `kim_loury_2014/` | [F] 16 Oct 2026, MPRA paper 54950, cited as such | `lean/mathlib/KimLoury2014.lean` | L23 |
 | `peski_szentes_2012/` | [F] 16 Oct 2026, BFI working paper 2012-005, cited as such | `lean/mathlib/PeskiSzentes2012.lean` | none yet |
 | `eguia_2013/` | [F] 16 Oct 2026, the NYU working paper of 10 September 2013, cited as such | `lean/mathlib/Eguia2013.lean` | L22 |
@@ -49,17 +49,17 @@ is in `notes/motivation_scan.md`.
 | `peng_zhang_pan_2010/` | [F] 16 Oct 2026 | `lean/mathlib/PengEtAl2010.lean` | none yet |
 | `mill_stein_2012/` | [F] 16 Oct 2026, the working paper of 30 December 2012, cited as such | `lean/mathlib/MillStein2012.lean` | none yet |
 | `kraus_park_tan_2017/` | [F] 16 Oct 2026, the accepted manuscript | `lean/mathlib/KrausEtAl2017.lean` | none yet |
-| `edelman_luca_svirsky_2017/` | [F] 16 Oct 2026, the accepted version | `lean/mathlib/EdelmanEtAl2017.lean` | none yet |
+| `edelman_luca_svirsky_2017/` | [F] 16 Oct 2026, the accepted version | `lean/mathlib/EdelmanEtAl2017.lean` | L30 |
 | `rothschild_white_1993/` | [F] 16 Oct 2026, the NBER chapter, not the 1995 article | `lean/mathlib/RothschildWhite1993.lean` | none yet |
 | `grogger_2018/` | [F] 16 Oct 2026, the working paper Speech and Wages, version 8, not the 2011 article | `lean/mathlib/Grogger2018.lean` | none yet |
 | `bohren_imas_rosenberg_2019/` | [F] 16 Oct 2026, the working paper of January 2019, cited as such | `lean/mathlib/BohrenEtAl2019.lean` | none yet |
-| `dahis_nix_qian_2019/` | [F] 16 Oct 2026, NBER working paper 26465 as revised in June 2020 | `lean/mathlib/DahisEtAl2019.lean` | none yet |
+| `dahis_nix_qian_2019/` | [F] 16 Oct 2026, NBER working paper 26465 as revised in June 2020 | `lean/mathlib/DahisEtAl2019.lean` | L28 |
 | `kraus_et_al_2019/` | [F] 16 Oct 2026, the PubMed Central text without the SI appendix | `lean/mathlib/KrausEtAl2019.lean` | none yet |
 | `levon_et_al_2020/` | [F] 16 Oct 2026, the Accent Bias Britain report | `lean/mathlib/LevonEtAl2020.lean` | none yet |
 | `chetty_et_al_2022a/` | [F] 16 Oct 2026, Social Capital I in Nature | `lean/mathlib/ChettyEtAl2022a.lean` | none yet |
-| `chetty_et_al_2022b/` | [F] 16 Oct 2026, Social Capital II in Nature, with the NBER version read for differences | `lean/mathlib/ChettyEtAl2022b.lean` | none yet |
+| `chetty_et_al_2022b/` | [F] 16 Oct 2026, Social Capital II in Nature, with the NBER version read for differences | `lean/mathlib/ChettyEtAl2022b.lean` | L25, L26, L27 |
 | `crabtree_et_al_2022/` | [F] 16 Oct 2026 | `lean/mathlib/CrabtreeEtAl2022.lean` | none yet |
-| `laouenan_rathelot_2022/` | [F] 16 Oct 2026, with the WRAP manuscript read for differences | `lean/mathlib/LaouenanRathelot2022.lean` | none yet |
+| `laouenan_rathelot_2022/` | [F] 16 Oct 2026, with the WRAP manuscript read for differences | `lean/mathlib/LaouenanRathelot2022.lean` | L31 |
 | `levon_sharma_ilbury_2022/` | [F] 16 Oct 2026, the Sutton Trust report Speaking Up | `lean/mathlib/LevonEtAl2022.lean` | none yet |
 | `bohren_hull_imas_2024/` | [F] 16 Oct 2026, NBER working paper 29820 as revised in December 2024 | `lean/mathlib/BohrenEtAl2024.lean` | none yet |
 | `goffman_1951_es/` | [F] 16 Oct 2026, the authorised Spanish translation only, set aside at the author's direction on 17 Oct 2026 and not cited | `lean/mathlib/Goffman1951es.lean` | none yet |

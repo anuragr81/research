@@ -260,6 +260,8 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   `Implications.lean`, signs the comparative statics of the sensitivity,
   the engagement threshold and the admission threshold that I3 and I5 use.
   The author may cut the table to two or three rows.
+  A fifth column, added the same day at the author's request, gives a case
+  from a paper read in which the longer run undoes the lever (L24 to L31).
 
 ## Novelty ledger
 
