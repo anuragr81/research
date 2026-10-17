@@ -677,4 +677,18 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   fixed: any change to the simulation or the grid needs its own dated
   pre-registration, chosen by whether banks stay finite and on their grids.
   Two unregistered looks are recorded in PREREG_stage2_5.md.
+- 2026-10-17. MMP grid candidate e_top 1.0 failed for large banks (133,861
+  bank-quarters above the top, 6.3 million non-finite; small banks pass).
+  Candidate 2.0 was started under PREREG_stage2_6.md and stopped by the
+  author's decision before its solve finished: the runaway follows from
+  eq. (13)'s term -phi_E E^2/D (2018 manuscript, checked against the pinned
+  PDF), which is unbounded and does not scale with wholesale funding; a
+  rough break-even (ignoring growth and risk) puts the zone where retaining
+  pays at e about 0.18 for large banks (theirs sit near 0.10) and 0.88 for
+  small. A wider grid cannot fix that. Next: read the published article
+  (Financial Management 49(2):473-502, 2020) for eq. (13); if unchanged,
+  report the unbounded region as a replication finding, keep small banks
+  for the testing thread, and treat a bounded funding premium as an
+  enhancement-thread variant. A dated file records this before any further
+  run.
 
