@@ -124,4 +124,82 @@ theorem control_lone_outcomes_have_weight {σ : ℝ} (h0 : 0 < σ) (h1 : σ < 1)
   have : 0 < 1 - σ := by linarith
   positivity
 
+/-! ### The structure of the groups under the two-stage rule -/
+
+/-- Any reassignment conserves the number of jobs each status group holds, because every
+entrant receives exactly one former job. -/
+theorem group_job_count_conserved {ι : Type*} [DecidableEq ι] (P : Finset ι) (g : ι → Bool)
+    (π : Equiv.Perm ι) (h : Bool) :
+    ((P.filter (fun i => g i = h)).image π).card = (P.filter (fun i => g i = h)).card :=
+  card_image_of_injective _ π.injective
+
+/-- The nine reassignments of a joint lottery of four. -/
+def derangements4 : Finset (Equiv.Perm (Fin 4)) := univ.filter (fun π => ∀ x, π x ≠ x)
+
+theorem derangements4_fibers : ∀ i k : Fin 4, i ≠ k →
+    (derangements4.filter (fun π => π i = k)).card = 3 := by decide
+
+theorem derangements4_self : ∀ i : Fin 4, (derangements4.filter (fun π => π i = i)).card = 0 := by
+  decide
+
+/-- Summed over the nine reassignments, an entrant's new job is worth three times the total of
+the others' former jobs. -/
+theorem sum_over_derangements4 (x : Fin 4 → ℝ) (i : Fin 4) :
+    ∑ π ∈ derangements4, x (π i) = 3 * (∑ k, x k - x i) := by
+  rw [← Finset.sum_fiberwise_of_maps_to (g := fun π => π i) (t := univ) (fun _ _ => mem_univ _)]
+  have h : ∀ k, ∑ π ∈ derangements4.filter (fun π => π i = k), x (π i)
+      = (derangements4.filter (fun π => π i = k)).card * x k := by
+    intro k
+    rw [sum_congr rfl (fun π hπ => by rw [(mem_filter.mp hπ).2]), sum_const, nsmul_eq_mul]
+  simp_rw [h]
+  rw [← sum_erase_add _ _ (mem_univ i), derangements4_self i]
+  rw [sum_congr rfl (fun k hk => by rw [derangements4_fibers i k (ne_of_mem_erase hk).symm])]
+  rw [sum_erase_eq_sub (mem_univ i), ← Finset.mul_sum]
+  push_cast
+  ring
+
+/-- In the joint lottery of four, the expected total of the jobs held by entrants `0` and `1`
+after the lottery is `(2S - T)/3`, with `S` the total of all four former jobs and `T` the
+total of theirs. -/
+theorem joint_expected_group_total (x : Fin 4 → ℝ) :
+    (∑ π ∈ derangements4, (x (π 0) + x (π 1))) / 9
+      = (2 * (∑ k, x k) - (x 0 + x 1)) / 3 := by
+  rw [sum_add_distrib, sum_over_derangements4, sum_over_derangements4]
+  ring
+
+/-- Expected total of group `A`'s jobs after the lottery, given the stage-one outcome: unchanged
+when the pairs exchange within their groups, `(2S - T)/3` in the joint lottery. -/
+noncomputable def groupTotalAfter (T S : ℝ) (a1 a2 b1 b2 : Bool) : ℝ :=
+  if pairedA a1 a2 b1 b2 then T else (2 * S - T) / 3
+
+/-- The persistence coefficient of the groups' positions. -/
+noncomputable def persistence (σ : ℝ) : ℝ := σ ^ 2 * (2 - σ ^ 2) - (1 - σ ^ 2) ^ 2 / 3
+
+/-- Under the two-stage rule, the expected gap between group `A`'s total and half the pool's
+total after the lottery is the gap before times `persistence σ`. -/
+theorem two_stage_gap_recursion (σ T S : ℝ) :
+    twoStage σ (groupTotalAfter T S) - S / 2 = persistence σ * (T - S / 2) := by
+  simp only [twoStage, Fintype.sum_bool, stageOne, ownCount, groupTotalAfter, pairedA, persistence]
+  simp
+  ring
+
+/-- Without closure the gap reverses and shrinks to a third, because nobody keeps their own
+former job; with full closure it persists entire. -/
+theorem persistence_limits : persistence 0 = -(1 / 3) ∧ persistence 1 = 1 := by
+  unfold persistence
+  norm_num
+
+/-- The persistence coefficient rises with closure on `[0, 1]`. -/
+theorem persistence_rises {σ₁ σ₂ : ℝ} (h0 : 0 ≤ σ₁) (h12 : σ₁ < σ₂) (h1 : σ₂ ≤ 1) :
+    persistence σ₁ < persistence σ₂ := by
+  unfold persistence
+  have hsq : σ₁ ^ 2 < σ₂ ^ 2 := by nlinarith
+  have hsq1 : σ₂ ^ 2 ≤ 1 := by nlinarith
+  nlinarith [sq_nonneg (σ₁ ^ 2 - σ₂ ^ 2)]
+
+/-- Control: the recursion is exact for the no-closure pool, the joint lottery of four. -/
+theorem control_gap_recursion_no_closure (T S : ℝ) :
+    twoStage 0 (groupTotalAfter T S) - S / 2 = -(1 / 3) * (T - S / 2) := by
+  rw [two_stage_gap_recursion, persistence_limits.1]
+
 end Isc

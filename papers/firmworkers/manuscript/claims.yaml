@@ -605,6 +605,22 @@ model:
     lean: [Isc.two_stage_no_cross_chance, Isc.two_stage_persistence_limits, Isc.joint_four_counts]
     status: LEAN_PROVED
     symbols: [X25, X24, X8, X23]
+  - id: M50
+    anchor: 'consequence of the lottery rule decided in M36'
+    claim: 'Every reassignment conserves the number of jobs each status group holds, because each entrant receives exactly one former job. The lottery can change which ranks a group holds, never how many'
+    assumptions: 'any pool, any reassignment, any grouping'
+    evidence: 'lean/IscLean/TwoStage.lean::Isc.group_job_count_conserved. The jobs held by a group after the lottery are the image of its entrants under the reassignment, and a permutation is injective'
+    lean: [Isc.group_job_count_conserved]
+    status: LEAN_PROVED
+    symbols: [X8, X24, X23]
+  - id: M51
+    anchor: 'test of option (a) for M29: the groups'' positions as a state variable'
+    claim: 'Under the two-stage rule, in a pool of two from each status group, the expected gap after the lottery between one group''s total former income and half the pool''s total is the gap before times $\rho(\sigma)=\sigma^2(2-\sigma^2)-(1-\sigma^2)^2/3$. With no closure $\rho=-1/3$, the gap reverses and shrinks to a third because nobody keeps their own former job; with full closure $\rho=1$ and the gap persists entire; $\rho$ rises with $\sigma$'
+    assumptions: 'the two-stage rule, not decided; a pool of two entrants from each group; incomes or ranks summed over a group''s entrants'
+    evidence: 'lean/IscLean/TwoStage.lean::Isc.two_stage_gap_recursion. In the joint lottery of four, each of the nine reassignments is equally likely (M36), and summed over them an entrant''s new job is worth three times the others'' former jobs (Isc.sum_over_derangements4, from the fibre counts Isc.derangements4_fibers by exhaustion), so a group''s expected total is $(2S-T)/3$ (Isc.joint_expected_group_total); when the pairs exchange within groups it is $T$. Limits Isc.persistence_limits; monotone Isc.persistence_rises; control at $\sigma=0$ Isc.control_gap_recursion_no_closure'
+    lean: [Isc.two_stage_gap_recursion, Isc.joint_expected_group_total, Isc.sum_over_derangements4, Isc.derangements4_fibers, Isc.derangements4_self, Isc.persistence_limits, Isc.persistence_rises, Isc.control_gap_recursion_no_closure]
+    status: LEAN_PROVED
+    symbols: [X25, X24, X8, X23, X6]
 
 literature:
   - id: L1
