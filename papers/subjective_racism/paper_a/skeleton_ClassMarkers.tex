@@ -128,7 +128,13 @@ compromise level between the two ideal levels, and each side loses the
 sensitivity times the squared class gap. Pooled budgets remove that loss,
 and so does a private consumption whose value does not diminish, so a cost
 to the class gap needs separate budgets and a diminishing value of private
-consumption.
+consumption. Part of the answer does not depend on the square. Whatever the
+benefit of contact, so long as it falls with the class distance, a group
+whose standing rises does not draw more refusal from observers above every
+member, and does not draw less from observers below every member. The sign
+of the spread does depend on it. The square makes a wider spread a cost to
+every observer, while a benefit that flattens with distance makes it a gain
+to observers far from the group.
 
 Passing and the platform follow from the standing. When the better-off
 members of the outsider group pass, the visible mean falls, and the refusal
@@ -232,10 +238,21 @@ model rows it rests on and what it does not claim.
   the quadratic loss. Under Akerlof's benefit, which falls in distance by a
   gravity formula, a wider spread helps observers far from the group, and
   the direction holds for observers beyond every member of the group rather
-  than on the whole range (L33). The spread term is the
+  than on the whole range (L33, K9). The spread term is the
   risk premium of L8 in a contact setting, and the dependence on the
   observer's own class qualifies the claim of L9, so only that dependence is
   a candidate for novelty, and it waits (Table~\ref{tab:pending}).}
+\krow{K9}{Two statements survive any benefit of contact that falls in the
+  class distance. A rise in a group's classes does not raise refusal among
+  observers at or above every member and does not lower it among observers
+  at or below every member. The spread changes sign with the curvature of
+  the benefit, a penalty under the quadratic loss and a gain for observers
+  beyond the group under a convex benefit such as Akerlof's.}{M21}{The
+  direction is shown at the two ends of the class range only, and between
+  them it turns on the form, with an observer above the standing and below
+  a member as the control. The spread is shown for two members placed
+  symmetrically, not for a general widening. The other rows keep the
+  quadratic of A14 (A16, M21).}
 \krow{K8}{Separate budgets and one shared activity at one level give the
   engagement utility its quadratic form, with each side of a pair losing
   the sensitivity times the squared class gap. Pooled budgets, or a linear
@@ -516,6 +533,19 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   class homophily, with the quadratic payoff chosen so that the loss, the
   compromise and the sensitivity have closed forms. The general concave
   case carries only the monotonicity of the ideal level (M19 (i)).}
+\arow{A16}{For row M21 only, engaging with a person at class distance $d$
+  is worth the benefit of contact $\Phi(d)$, which does not rise in $d$ for
+  $d\ge0$. The form of A14 is $\Phi(d)=v-\kappa d^2$.}
+  {For row M21 only, engaging with a person is worth a benefit of contact
+  that depends on nothing but the class distance between the two, and that
+  does not rise as the class distance grows. The engagement utility of A14
+  is the case where the benefit is the baseline value less the sensitivity
+  times the squared class distance.
+  Lean, \lean{Robustness.quadratic\_antitone}.}
+  {$\Phi$, $d$, $v$, $\kappa$}{M21}
+  {Pass 3 of the work on the engagement utility, 17 October 2026. The other
+  rows use A14. A16 is what M21 needs, and both the quadratic loss and the
+  benefit of Akerlof (L33) satisfy it (M21 (iii)).}
 \end{longtable}
 \normalsize
 
@@ -677,6 +707,26 @@ that check it.}\\
   in $W$, in $|A|$ or in $\alpha$, and does not fall in $N$.
   (iii) reverses with $v<u$, and (iv) reverses in $|A|$ with $W<0$.}
   {Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses, Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
+\mrow{M21}{For any benefit of contact that does not rise in the class
+  distance, a rise in every member's class does not raise refusal among
+  observers at or above every member and does not lower it among observers
+  at or below every member. A wider spread of two members does not lower
+  the mean benefit to an observer beyond both when the benefit is convex in
+  distance, and does not raise it when the benefit is concave. The benefit
+  of A14 is concave, and Akerlof's is convex.}
+  {$S$ finite, $p_i\ge0$, classes $x_i$, observers $J$ with classes $y_j$,
+  $t\ge0$, $\Phi$ not rising on $[0,\infty)$.
+  (i) If $x_i+t\le y_j$ for every $i$ and $j$, then
+  $|\{j:\sum_ip_i\Phi(|y_j-x_i-t|)<\bar u\}|\le|\{j:\sum_ip_i\Phi(|y_j-x_i|)<\bar u\}|$,
+  and if $y_j\le x_i$ for every $i$ and $j$ the reverse holds.
+  (ii) With $0\le s\le s'\le D$, convex $\Phi$ gives
+  $\Phi(D-s)+\Phi(D+s)\le\Phi(D-s')+\Phi(D+s')$, concave $\Phi$ the reverse,
+  and $\Phi(s')\le\Phi(s)$ at the centre.
+  (iii) $v-\kappa d^2$ is concave and does not rise for $\kappa\ge0$, and
+  $(g+d)^{-1}$ is convex and does not rise for $g>0$.
+  Between the ends of (i) the sign turns on $\Phi$, and (ii) changes sign
+  with the curvature.}
+  {Robustness.shift_up_above, Robustness.shift_up_below, Robustness.refusers_above, Robustness.refusers_below, Robustness.control_range_needs_quadratic, Robustness.majorize, Robustness.spread_convex, Robustness.spread_concave, Robustness.spread_at_centre, Robustness.quadratic_concave, Robustness.quadratic_antitone, Robustness.gravity_convex, Robustness.gravity_antitone, Robustness.control_spread_sign}
 \end{longtable}
 \normalsize
 
@@ -735,7 +785,9 @@ class distance, the form Akerlof sets aside as a special case of a benefit
 that falls with social distance (L32), and here it is derived from the
 budgets (M19). The choice matters. Under Akerlof's benefit a wider spread
 helps observers far from a group, and the direction of a group's effect
-holds only for observers beyond every member (L33). Two things the families settle are left open here.
+holds only for observers beyond every member (L33). The direction at the
+two ends survives any benefit that falls in distance, and the sign of the
+spread follows the curvature of the benefit (M21). Two things the families settle are left open here.
 Beliefs are not tied to the actual rates, a condition the second and
 third families impose (L14, L23), and the mutual consent of the fourth family is
 the dotted double arrow of Figure~\ref{fig:ledger}. Whether each result is
@@ -1011,6 +1063,11 @@ implications for policy and says what limits each.
   The quadratic form that A14 carried as the predecessor's is derived, and
   the sensitivity is a closed form in the budget slope and the two
   curvatures.}{M19, L10}
+\crow{C25}{The direction of a group's effect on refusal depends on the
+  observer's own class under any benefit of contact that falls in the class
+  distance, at the two ends of the class range. Its full range and the sign
+  of the spread term belong to the quadratic loss, and under Akerlof's
+  benefit a wider spread helps observers beyond the group.}{M21, L33}
 \end{longtable}
 
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -1075,13 +1132,13 @@ is a conclusion, and the table claims nothing the rows do not.
   to the squared gap, weighted by the posterior on the group, so a narrower
   spread lowers the distance for every observer, where a higher standing
   lowers it only among observers above the standing. A price that certifies
-  class, or a shown class, acts on the spread.}{M18, L24, L33}{Once class is read
+  class, or a shown class, acts on the spread.}{M18, M21, L24, L33}{Once class is read
   within the group, group sufficiency fails and the marker carries nothing,
   so the setting is a signalling one (L17) and the sorting is by class in
   place of group. The row says what the spread does while the marker still
   holds. The sign of the spread is also a property of the quadratic loss,
   and under Akerlof's benefit a wider spread helps observers far from the
-  group (L33).}{A price that certifies class is paid by those below it as well. In
+  group (L33), and its sign follows the curvature of the benefit (M21).}{A price that certifies class is paid by those below it as well. In
   Pesendorfer a seller whose clients are mostly low types loses value (L24),
   so the sign has to be replaced, and certification by price is a cycle of
   signs rather than a one-off narrowing of the spread.}
@@ -1193,7 +1250,12 @@ $L(p,b)$, the compromise level $\bar p$, a split $\omega$ between the two
 ideals, and two persons $i$ and $j$ with classes $c_i$, $c_j$ and budgets
 $b_i$, $b_j$. In M19 (i) $\varphi$ is any concave private utility and $\psi$
 any activity utility. Row M20 uses the symbols of M15, M18 and M19, with
-$c_E(\cdot)$ and $\kappa(\cdot)$ marking the argument that moves.
+$c_E(\cdot)$ and $\kappa(\cdot)$ marking the argument that moves. Row M21
+has a group $S$ with weights $p_i$ and classes $x_i$, observers $J$ with
+classes $y_j$, a rise $t$ in every class, the benefit of contact $\Phi$ of
+the class distance $d$ and the outside option $\bar u$. In (ii) two members
+stand at distances $D-s$ and $D+s$ from the observer, and in (iii) $g$ is
+the constant of Akerlof's benefit.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=\lambda_g\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -1388,6 +1450,41 @@ Control. With $W<0$ and $|A|\le|A'|$, $W|A'|\le W|A|$, so
 $c_E(|A|)\le c_E(|A'|)$.
 \end{mproof}
 
+\begin{mproof}{M21}{Robustness.shift_up_above, Robustness.shift_up_below, Robustness.refusers_above, Robustness.refusers_below, Robustness.control_range_needs_quadratic, Robustness.majorize, Robustness.spread_convex, Robustness.spread_concave, Robustness.spread_at_centre, Robustness.quadratic_concave, Robustness.quadratic_antitone, Robustness.gravity_convex, Robustness.gravity_antitone, Robustness.control_spread_sign}
+(i) With $x_i+t\le y$, both distances are differences,
+\[
+|y-x_i|=y-x_i\ \ge\ y-x_i-t=|y-x_i-t|\ \ge0
+\;\Longrightarrow\;
+p_i\Phi(|y-x_i|)\le p_i\Phi(|y-x_i-t|),
+\]
+and summing over $i$ gives $\sum_ip_i\Phi(|y-x_i|)\le\sum_ip_i\Phi(|y-x_i-t|)$.
+An observer with $\sum_ip_i\Phi(|y_j-x_i-t|)<\bar u$ then has
+$\sum_ip_i\Phi(|y_j-x_i|)<\bar u$, so the first set lies in the second. With
+$y\le x_i$, $|y-x_i|=x_i-y\le x_i+t-y=|y-x_i-t|$ and the inclusion reverses.
+(ii) Let $a=D-s$, $b=D+s$, $a'=D-s'$, $b'=D+s'$, so $a'\le a\le b\le b'$ and
+$a+b=a'+b'$. With $\tau=(b'-a)/(b'-a')\in[0,1]$,
+\[
+a=\tau a'+(1-\tau)b',\qquad b=(1-\tau)a'+\tau b',
+\]
+\[
+\Phi(a)+\Phi(b)\le\tau\Phi(a')+(1-\tau)\Phi(b')+(1-\tau)\Phi(a')+\tau\Phi(b')
+=\Phi(a')+\Phi(b').
+\]
+Concave $\Phi$ is $-\Phi$ convex. At the centre both distances are $s$, and
+$s\le s'$ gives $\Phi(s')\le\Phi(s)$.
+(iii) For $\lambda\in[0,1]$,
+\[
+\lambda(v-\kappa x^2)+(1-\lambda)(v-\kappa y^2)
+=v-\kappa(\lambda x+(1-\lambda)y)^2-\kappa\lambda(1-\lambda)(x-y)^2 ,
+\]
+and $(g+d)^{-1}$ is $z^{-1}$, convex on $z>0$, at $z=g+d$.
+Controls. Classes $0$ and $10$ with weights $\tfrac12$, $y=6$, $t=1$:
+$\tfrac12(5^2+5^2)=25<26=\tfrac12(6^2+4^2)$, while
+$\tfrac12(\tfrac16+\tfrac16)<\tfrac12(\tfrac17+\tfrac15)$. With $D=3$, $s=0$,
+$s'=1$: $\tfrac14<\tfrac12(\tfrac13+\tfrac15)$ for $(1+d)^{-1}$, and
+$-10<-9$ for $-d^2$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -1463,6 +1560,7 @@ records what they printed.
 \path{PeskiSzentes2012} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/PeskiSzentes2012.lean}{\path{lean/mathlib/PeskiSzentes2012.lean}} & L9 \\
 \path{Phelps1972} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Phelps1972.lean}{\path{lean/mathlib/Phelps1972.lean}} & L4 \\
 \path{Platform} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Platform.lean}{\path{lean/mathlib/Platform.lean}} & M15 \\
+\path{Robustness} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Robustness.lean}{\path{lean/mathlib/Robustness.lean}} & A16, M21, Measurement map \\
 \path{RothschildWhite1993} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/RothschildWhite1993.lean}{\path{lean/mathlib/RothschildWhite1993.lean}} & record only \\
 \path{Stranger} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Stranger.lean}{\path{lean/mathlib/Stranger.lean}} & M17 \\
 \path{Sufficiency} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Sufficiency.lean}{\path{lean/mathlib/Sufficiency.lean}} & M1 \\
@@ -1571,6 +1669,12 @@ Ideal level & $p^*$ & The activity level a person would set alone, given the
 Compromise level & $\bar p$ & The level a pair shares, the midpoint of the
   two ideal levels (M19). \\ \addlinespace
 Outside option & $\bar u$ & The utility of declining to engage (M18). \\
+  \addlinespace
+Benefit of contact & $\Phi$ & The worth of engaging as a function of the class
+  distance alone, which does not rise in the distance (A16, M21). \\
+  \addlinespace
+Class distance & $d$ & The distance between a person's class and the
+  observer's own class (A16, M21). \\
   \addlinespace
 Engagement threshold & $\bar d$ & The largest expected distance at which the
   observer engages, the baseline value less the outside option, divided by

@@ -272,6 +272,15 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   belong to the quadratic loss. The direction for observers beyond every
   member survives any benefit that falls in distance. C22 waits on Loury
   alone.
+- [x] **D12. Pass 3 of the utility work, robustness in Lean. 17 Oct 2026, at
+  the author's request** ("go ahead with pass 3"). Row M21,
+  `Robustness.lean`, under assumption A16, a benefit of contact that falls
+  in the class distance. The own-class direction holds at the two ends of
+  the class range for any such benefit, for the expected benefit and for the
+  refusal share. The sign of the spread follows the curvature of the
+  benefit in distance. A14's quadratic is concave and Akerlof's benefit is
+  convex. Headline K9 and conclusion C25 rest on M21, and K7's scope note,
+  the Literature opening, I1 and 1.2.1 cite it.
 
 ## Novelty ledger
 

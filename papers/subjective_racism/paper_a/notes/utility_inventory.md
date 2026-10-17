@@ -62,7 +62,9 @@ checked against them.
 ## 3. Passes still to do
 
 - **Pass 2, Akerlof.** Done on 17 October 2026 (`lit/akerlof_1997/`, D11).
-- **Pass 3, robustness in Lean.** Which statements of M18 hold for any
+- **Pass 3, robustness in Lean.** Done on 17 October 2026 (D12). Row M21,
+  `Robustness.lean`, under A16, carries headline K9 and conclusion C25. The
+  plan as first written follows. Which statements of M18 hold for any
   benefit that falls in distance. Pass 2 already proved the two ends
   (`Akerlof1997.contrast_shift_up_above`, `contrast_shift_up_below`) and the
   failure in between (`control_benefit_range_differs`). The pass would move
