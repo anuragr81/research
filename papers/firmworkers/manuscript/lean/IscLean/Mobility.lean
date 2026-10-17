@@ -126,4 +126,57 @@ theorem lottery_ranks_communicate {ι : Type*} (route : ι → Route) {i j : ι}
     (hi : route i = Route.lot) (hj : route j = Route.lot) : lotteryMove route i j :=
   Or.inr ⟨hi, hj⟩
 
+/-! ### What the lottery cost does -/
+
+/-- For every nondecreasing utility, the lottery is worth less at a higher lottery cost. -/
+theorem poolEU_antitone_in_L {ι : Type*} [DecidableEq ι] {P : Finset ι} (h2 : 2 ≤ P.card)
+    (x : ι → ℝ) {L L' : ℝ} {u : ℝ → ℝ} {S : Set ℝ} (hu : MonotoneOn u S)
+    (hS : ∀ k ∈ P, x k - L ∈ S) (hS' : ∀ k ∈ P, x k - L' ∈ S) (hLL : L ≤ L') (i : ι) :
+    poolEU P x L' u i ≤ poolEU P x L u i := by
+  have hpos : (0 : ℝ) ≤ (P.card : ℝ) - 1 := by
+    have : (2 : ℝ) ≤ (P.card : ℝ) := by exact_mod_cast h2
+    linarith
+  unfold poolEU
+  apply div_le_div_of_nonneg_right _ hpos
+  apply Finset.sum_le_sum
+  intro k hk
+  exact hu (hS' k (Finset.mem_of_mem_erase hk)) (hS k (Finset.mem_of_mem_erase hk)) (by linarith)
+
+/-- Whoever prefers the return to the lottery still does at any higher lottery cost, so the set
+of returners grows with the lottery cost. -/
+theorem return_keeps_beating_lottery_as_L_rises {ι : Type*} [DecidableEq ι] {P : Finset ι}
+    (h2 : 2 ≤ P.card) (x : ι → ℝ) {L L' r : ℝ} {u : ℝ → ℝ} {S : Set ℝ} (hu : MonotoneOn u S)
+    (hS : ∀ k ∈ P, x k - L ∈ S) (hS' : ∀ k ∈ P, x k - L' ∈ S) (hLL : L ≤ L') {i : ι}
+    (h : poolEU P x L u i ≤ u r) : poolEU P x L' u i ≤ u r :=
+  le_trans (poolEU_antitone_in_L h2 x hu hS hS' hLL i) h
+
+/-- Bottom rung: the top strictly prefers the downgrade to a sure exchange with an entrant whose
+former income less the lottery cost is below the bottom income, for every strictly increasing
+utility. So the lottery cost excludes the poorest entrants from the exchange. -/
+theorem top_refuses_below_floor {u : ℝ → ℝ} {S : Set ℝ} (hu : StrictMonoOn u S)
+    {x0 xi L : ℝ} (hi : xi - L ∈ S) (hx0 : x0 ∈ S) (hlow : xi - L < x0) : u (xi - L) < u x0 :=
+  hu hi hx0 hlow
+
+/-- The exchange window: an entrant of rank `i` is accepted by the top and accepts the top (M43's
+conditions) exactly when `x0 + L ≤ xi ≤ xtop - L`. The window shrinks at both ends as the
+lottery cost rises. -/
+theorem exchange_window_shrinks {x0 xtop L L' : ℝ} (hLL : L ≤ L') :
+    Set.Icc (x0 + L') (xtop - L') ⊆ Set.Icc (x0 + L) (xtop - L) := by
+  intro xi hxi
+  exact ⟨by linarith [hxi.1], by linarith [hxi.2]⟩
+
+/-- The window is empty once the lottery cost exceeds half the distance from the bottom income
+to the top. -/
+theorem exchange_window_empty {x0 xtop L : ℝ} (h : xtop - x0 < 2 * L) :
+    Set.Icc (x0 + L) (xtop - L) = ∅ := by
+  rw [Set.Icc_eq_empty_iff]
+  intro hle
+  linarith
+
+/-- Control: at a zero lottery cost the window is the whole ladder from the bottom income to the
+top. -/
+theorem control_window_full_at_zero_cost {x0 xtop : ℝ} :
+    Set.Icc (x0 + 0) (xtop - 0) = Set.Icc x0 xtop := by
+  simp
+
 end Isc

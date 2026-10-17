@@ -58,6 +58,10 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | | | | (c) A lone entrant swaps with a random job holder | The source's original reading, rejected in M14 and M32; job holders could then lose jobs to the lottery, against M39. |
 | | | | (d) A lone entrant waits for next period's pool | Adds a waiting state, against the steady state's simplicity. |
 
+| 15 | Where the lottery cost goes (17 Oct) | M46, M52, M53; source lines 103, 158, 258 | (a) It leaks out of the firm–worker circuit, as line 258 reads | Simplest; the firm never receives it (M52, M53); but line 103 says "all income circulates between workers and firm", so the closed economy has a leak to be named. |
+| | | | (b) It is paid to other workers, the connections themselves | A transfer among workers, zero-sum in aggregate; the receivers are not modelled; consistent with line 103. |
+| | | | (c) It is paid to the firm | The firm would then gain from the lottery, and the principle of upskilling over the lottery (TODO, 13 Oct) would need re-deriving; against line 110. |
+
 ## B. Measurement map
 
 | # | Issue | Depends on | Option | Ramifications |

@@ -193,6 +193,38 @@ idea_summaries:
         text: 'The firm prefers upskilling to the lottery, because upskilling spending flows back to the firm whereas lottery spending is lost to the firm.'
         rests_on: ['anchor: flows back to the firm as upskilling investments', 'anchor: rather than being diverted into the social lottery channel']
 
+  - id: lottery_cost
+    title: 'What the lottery cost does to each player'
+    words: [170, 240]
+    sentences:
+      - para: 1
+        text: 'The lottery cost is the price of competing through connections, the one channel of mobility the firm does not control, and nobody in the model sets it.'
+        rests_on: ['anchor: The lottery benefit is an exogenous benefit from social connections that is not managed by the firm', 'M47']
+      - para: 1
+        text: 'It is paid once by every entrant, and it leaves the circuit of the firm and its workers.'
+        rests_on: ['M46', 'anchor: rather than being diverted into the social lottery channel']
+      - para: 2
+        text: 'For a displaced worker, a higher lottery cost lowers the worth of the lottery for every shape of utility, so some who would have entered return instead, and the firm receives their upskilling cost.'
+        rests_on: ['M53']
+      - para: 2
+        text: 'The lottery cost sets the smallest gap in former income that an exchange can bridge with a gain to the poorer entrant.'
+        rests_on: ['M46']
+      - para: 2
+        text: 'It also excludes the poorest, whose former income less the lottery cost falls below the bottom income, because the top prefers the downgrade to their job, and it excludes the top as a prize for anyone within the lottery cost of it.'
+        rests_on: ['M54']
+      - para: 2
+        text: 'So the lottery cost narrows the window of ranks that can exchange with the top from both ends, and closes it once the cost exceeds half the distance from the bottom income to the top.'
+        rests_on: ['M54']
+      - para: 3
+        text: 'A job holder is untouched by the lottery cost until displaced, when it lowers the worth of being displaced.'
+        rests_on: ['M39', 'M53']
+      - para: 3
+        text: 'The two status groups face the same lottery cost, since closure acts on who can be a partner, not on the price.'
+        rests_on: ['M29', 'M47']
+      - para: 3
+        text: 'The firm never receives the lottery cost, but gains from a higher one, because more displaced workers upskill.'
+        rests_on: ['M53', 'anchor: flows back to the firm as upskilling investments']
+
 model:
   - id: M1
     anchor: 'Appendix, condition 3: "pareto income list x0 (1 - i)^{-1/a} for 1 <= i <= N"'
@@ -629,6 +661,22 @@ model:
     lean: [Isc.lone_entrant_cheap_lottery_iff, Isc.lone_entrant_firm_receipt_gap, Isc.control_lone_entrant_indifferent_at_equal_costs]
     status: LEAN_PROVED
     symbols: [X7, X16, X6]
+  - id: M53
+    anchor: 'Appendix: "pay a fixed cost that provides mobility with some risk (social lottery)"'
+    claim: 'For every nondecreasing $u$ the lottery is worth less at a higher lottery cost, and whoever prefers the return to the lottery still does at any higher lottery cost. So the set of displaced workers who return grows with the lottery cost, and with it, under the source''s accounting, what the firm receives'
+    assumptions: 'a pool of two or more; the utility defined at the incomes less either cost'
+    evidence: 'lean/IscLean/Mobility.lean::Isc.poolEU_antitone_in_L. Each partner''s former income less the cost falls, and $u$ is nondecreasing, so the average falls (Isc.poolEU_antitone_in_L); the return comparison then persists (Isc.return_keeps_beating_lottery_as_L_rises). The firm''s receipt is the accounting of M38 and the source''s "flows back to the firm"; the lottery cost itself does not reach the firm'
+    lean: [Isc.poolEU_antitone_in_L, Isc.return_keeps_beating_lottery_as_L_rises]
+    status: LEAN_PROVED
+    symbols: [X7, X9, X23, X16]
+  - id: M54
+    anchor: 'consequence of M43: the exchange window'
+    claim: 'Under the bottom rung, an entrant is accepted by the top and accepts the top exactly within the window of former incomes from $x_0+L$ to $x_{top}-L$. The top strictly prefers the downgrade to an entrant below $x_0+L$ for every strictly increasing $u$, so the lottery cost excludes the poorest from the exchange; the window shrinks at both ends as the cost rises and is empty once the cost exceeds half the distance from the bottom income to the top'
+    assumptions: 'a pool of two, the top and one entrant; the top''s return no better than the bottom income (M43''s cost condition)'
+    evidence: 'lean/IscLean/Mobility.lean::Isc.exchange_window_shrinks. Acceptance by the top needs $x_0\le x_i-L$ (Isc.bottom_rung_top_accepts_entrant) and refusal below it is strict (Isc.top_refuses_below_floor); acceptance of the top needs $x_i\le x_{top}-L$ (Isc.entrant_accepts_top). The window at a higher cost is contained in the window at a lower one (Isc.exchange_window_shrinks), is empty when $x_{top}-x_0<2L$ (Isc.exchange_window_empty), and is the whole ladder at zero cost (Isc.control_window_full_at_zero_cost)'
+    lean: [Isc.exchange_window_shrinks, Isc.exchange_window_empty, Isc.top_refuses_below_floor, Isc.control_window_full_at_zero_cost]
+    status: LEAN_PROVED
+    symbols: [X7, X3, X15, X9]
 
 literature:
   - id: L1
