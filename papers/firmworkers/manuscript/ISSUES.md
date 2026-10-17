@@ -53,6 +53,11 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | 13 | Route costs paid once or every period (M39, M40, M41). Under (a) the exact lifetime value is a fixed point, since the next displacement is worth more from a better job (the return regains it); M40 and M41 assume it is worth the same from every job | M35, M40, M41; issue 1 | (a) Once, at the moment of choice (the Lean of M40 and M41) | The return and the lottery gain by the lifetime multiplier against the downgrade (`return_beats_downgrade_lifetime_iff`, `one_time_cost_cheaper`); a cost of five for an income gap of one is paid at `β = 9/10`, `d = 1/10`; the unit problem of issue 1 remains for `b ≠ 1`, but the natural yardstick is now the lifetime value of the income climbed. |
 | | | | (b) Every period while the job is held | The one-shot comparisons of M35 and `Routes.lean` are exactly this case; costs then scale with the multiplier like incomes, so nothing changes from the one-shot results. |
 
+| 14 | A pool of one, and when the choice is made (17 Oct) | M24, M30, M33, M36, M39; base case | (a) The lottery is unavailable to a lone entrant; the steady state assumes `d·N` large, so the pool has two or more entrants with probability near one, and the lottery is valued against the ladder's distribution rather than a known pool | Simplest; small-pool results (base case, M24, M30, M33) stay conditional on the pool; the choice before the pool is known becomes a belief about the ladder *(not in Lean)*. |
+| | | | (b) A lone entrant gets their own former job back at the lottery cost | The lottery becomes a return priced at `L`, competing with the upskilling cost whenever pools are small. |
+| | | | (c) A lone entrant swaps with a random job holder | The source's original reading, rejected in M14 and M32; job holders could then lose jobs to the lottery, against M39. |
+| | | | (d) A lone entrant waits for next period's pool | Adds a waiting state, against the steady state's simplicity. |
+
 ## B. Measurement map
 
 | # | Issue | Depends on | Option | Ramifications |
