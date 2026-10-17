@@ -87,7 +87,7 @@ The author would need to supply these.
 | Kim and Loury (2019), JPubE, published version | Passing as identity choice |
 | Epple and Romano (1998), AER 88 | Venue pricing on peers |
 | Rothschild and White (1995), JPE 103 | Customers as inputs |
-| Akerlof (1997), Econometrica 65 | Social distance |
+| Akerlof (1997), Econometrica 65 | Social distance. Supplied by the author on 17 October 2026 and read, `lit/akerlof_1997/` |
 | Lang (1986), QJE 101 | Language and segregation |
 | Grogger (2011), JHR 46 | Speech and wages |
 | May and Goldsmith (2018), Sociology of Race and Ethnicity | Nightclub door audits |

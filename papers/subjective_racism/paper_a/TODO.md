@@ -262,6 +262,16 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   The author may cut the table to two or three rows.
   A fifth column, added the same day at the author's request, gives a case
   from a paper read in which the longer run undoes the lever (L24 to L31).
+- [x] **D11. Akerlof (1997) read, implemented and the manuscript
+  reassessed. 17 Oct 2026, at the author's request** ("read + implement +
+  reassess as needed"). `lit/akerlof_1997/`, `Akerlof1997.lean`. A14's
+  quadratic loss is the case Akerlof sets aside (L32). Under his gravity
+  benefit a wider spread helps observers far from a group, and the
+  own-class direction holds only for observers beyond every member (L33),
+  so K7's scope note and I1 now say that the spread term and the ranges
+  belong to the quadratic loss. The direction for observers beyond every
+  member survives any benefit that falls in distance. C22 waits on Loury
+  alone.
 
 ## Novelty ledger
 
@@ -296,6 +306,7 @@ they differ.
 | Hanson and Hawley (2011 WP) | Read [F] 17 Oct 2026, `lit/hanson_hawley_2011/` | The penalty's net share vanishes between two high-class e-mails, while the pooled gap does not (HH-D1). Landlords of shared buildings screen for tenants' contact (HH-Q12, HH-Q13) |
 | McPherson et al. (2001), Currarini, Jackson and Pin (2008 WP), Bertrand and Mullainathan (2004), Edelman, Luca and Svirsky (2017), Bohren, Hull and Imas (2024 WP), Fang and Moro (2010 WP), Peng, Zhang and Pan (2010) | Read [F] 16 Oct 2026 | Rival accounts and limits of the test. Verdicts in `notes/motivation_scan.md` |
 | Diaconis and Zabell (1982) | On Drive (`temp`), not read | Not needed since D8 removed the comparison with Jeffrey's rule |
+| Akerlof (1997) | Read [F] 17 Oct 2026, `lit/akerlof_1997/`, supplied by the author | A14's quadratic loss is Akerlof's special case (L32). Under his benefit the spread helps distant observers and the ranges of M18 narrow (L33). C22 no longer waits on it (L34) |
 | Loury (2002) | Not found on Drive | C17 |
 | Platform-discrimination studies | Not found on Drive | C15 |
 | Selection–mutation literature, Fisher (1930) | Not found on Drive | C12 |
@@ -304,4 +315,4 @@ On 17 October 2026 row M18 derived the discrimination-rate function from the
 engagement threshold. The spread term is Aigner and Cain's risk premium (L8)
 and the claim qualified is Pęski and Szentes's (L9). That the direction of a
 group's effect on refusal depends on the observer's own class is pending as
-C22, on Akerlof (1997) and Loury (1998, 2002).
+C22, on Loury (1998, 2002). Akerlof (1997) was read on 17 October 2026 (D11).

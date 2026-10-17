@@ -272,7 +272,8 @@ value of shadow information. The pieces it rests on are present.
 ## Not read
 
 Loury (2002); Loury (1998), open access but refused to scripts; Epple and
-Romano (1998); Rothschild and White (1995); Akerlof (1997); Lang (1986); May and
+Romano (1998); Rothschild and White (1995); Lang (1986); May and
 Goldsmith (2018); Burdett and Coles (1997); Schwab (1986); Epple, Romano and
 Sieg (2008); Mailath, Samuelson and Shaked (2000); Marsden (1988); the books
-listed in `source_inventory.md`.
+listed in `source_inventory.md`. Akerlof (1997) was read on 17 October 2026
+(`lit/akerlof_1997/`).

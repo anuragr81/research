@@ -64,6 +64,7 @@ is in `notes/motivation_scan.md`.
 | `bohren_hull_imas_2024/` | [F] 16 Oct 2026, NBER working paper 29820 as revised in December 2024 | `lean/mathlib/BohrenEtAl2024.lean` | none yet |
 | `goffman_1951_es/` | [F] 16 Oct 2026, the authorised Spanish translation only, set aside at the author's direction on 17 Oct 2026 and not cited | `lean/mathlib/Goffman1951es.lean` | none yet |
 | `hanson_hawley_2011/` | [F] 17 Oct 2026, Experimental Economics Center working paper 2011-05, cited as such | `lean/mathlib/HansonHawley2011.lean` | none yet |
+| `akerlof_1997/` | [F] 17 Oct 2026, the JSTOR copy of the published article, supplied by the author | `lean/mathlib/Akerlof1997.lean` | L32, L33, L34, C22 |
 
 Where a cached text interleaves two columns, the record checks quotations
 against a reading-order extraction made with `pdftotext` from the same pinned

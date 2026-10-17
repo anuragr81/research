@@ -61,6 +61,7 @@ signal).
 | Mailath and Postlewaite (2006) | Matching, attribute purchase in Sec. 6 | Stable each period, "rational expectations" | Nothing (MP-Q14) | None | Fixed point | Mutual | Yes |
 | Cole, Mailath and Postlewaite (1991) | Bequest given the norm | "essentially a Nash equilibrium", subgame perfect | Nothing (CM-Q4) | None | Fixed point, the norm | Mutual, propose and accept | Yes, eq. 13 |
 | Hitsch, Hortaçsu and Ariely (2006) | E-mail iff utility at least the reservation value (eq. 1), estimated as non-strategic | Stationary search equilibrium, Gale–Shapley stable | Nothing among users | None | Fixed point | Mutual | Yes, distance terms (HHA-Q11) |
+| Akerlof (1997) | Each chooses a position given static expectations of others' positions (eq. 6) | "rational expectations equilibrium" discussed, static expectations solved (AK-Q15, AK-Q17) | Nothing. Positions are known | None. Dialect is a chosen variable (AK-Q19) | Static, or rational in words | None, trade with everyone, weighted by distance | Yes, own position as a distance (AK-Q16) |
 | Rothschild and White (1993) | Planner's criterion, a cited Spence agent | None solved. Stability and competition cited | Not settled by the record | Cited only | Not modelled | Mutual, admission and choice (RW-Q5) | In the Spence sketch |
 
 ## 3. Four families
