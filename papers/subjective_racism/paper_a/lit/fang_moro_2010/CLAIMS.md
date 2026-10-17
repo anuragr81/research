@@ -34,6 +34,8 @@ printed page `n − 4` from PDF page 5. The text layer keeps the ligatures `ﬁ`
 | FM-Q23 | 53 | "the State of Texas passed a law guaranteeing entry to any state university of a student's choice if they ﬁnished in the top 10% of their graduating class." | A group-neutral rule on a variable correlated with group, adopted after a ban on the use of race |
 | FM-Q24 | 56 | "is coming from a black applicant is given by the likelihood ratio" | Chan and Eyster. Under a colour-blind rule the office values a score partly for the group it signals, `ce_eq58` [C] |
 | FM-Q15 | 71 | "we still have a relatively poor theoretical understanding on the evolution of stereotypes" | The survey's own statement of a gap, outside A1's static scope |
+| FM-Q25 | 30 | "A Bayesian Nash equilibrium of the game is a list including the workers’ skill investment decision [...] such that every player optimizes against other" | The survey's definition of the equilibrium of the models with inter-group interaction (Fang 2001). Each player optimises against the others' strategies and the group's rate is a fixed point. A1's observer optimises against a prior and no fixed point is imposed (M18) |
+| FM-Q26 | 18 | "Discrimination in this model can be viewed as a coordination failure." | Coate and Loury as the survey presents them. Discrimination is a choice between equilibria. In A1 refusal comes from the class distance under one belief (M18) |
 
 ## Lean results
 

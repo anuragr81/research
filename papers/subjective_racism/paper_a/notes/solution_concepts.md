@@ -140,3 +140,12 @@ take A1 into the other families, and each has its nearest papers.
 | Close U2, mutual engagement with hidden class | 2, as a Bayesian Nash equilibrium | Craig and Fryer, Hitsch, Hortaçsu and Ariely |
 | Derive passing from its gain and cost | 3, type-dependent signalling | Austen-Smith and Fryer, Kim and Loury (2012), Corneo and Jeanne |
 | Impose the consistency of standings | 2 | Kim and Loury, Coate and Loury |
+
+## 6. Done, 17 October 2026
+
+The Literature section now opens with the four families and places the
+method on the axes (commit after e4ac293f). Rows L13 to L23 carry the
+quotations the opening relies on, and C22 names the two nearest readers,
+Pesendorfer (L19) and Austen-Smith and Fryer (L18). The term "fixed point"
+is reserved for the law of motion by `checks/verify_no_law.py`, so the
+manuscript says "the rate must equal what the decisions produce".

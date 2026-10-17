@@ -243,6 +243,15 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   to M3 are not claimed as new. C20 now waits on a textbook statement of M1
   to M3, and Diaconis and Zabell are no longer needed.
   `lit/jeffrey_1983/` and `Jeffrey1983.lean` stay as a record.
+- [x] **D9. The Literature section opens by families of solution concept.
+  Decided 17 Oct 2026 by the author** ("summarise how the literature
+  attempts to view and solve our research question and formulate what our
+  method does that's novel - contrasting our method against that of the
+  literature families"). `notes/solution_concepts.md` places the 24 papers
+  read on seven axes and finds four families. The opening says the method
+  stands with the first family on the signal, an unchosen marker, and apart
+  from all four on the reader, whose own class enters the decision. Rows
+  L13 to L23 carry the quotations, and C22 names the nearest readers.
 
 ## Novelty ledger
 

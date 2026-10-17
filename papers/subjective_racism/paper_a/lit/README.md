@@ -25,27 +25,27 @@ is in `notes/motivation_scan.md`.
 | `phelps_1972/` | [P] 15 Oct 2026, page images, quotations checked against OCR | `lean/mathlib/Phelps1972.lean` | L4, C14, C19 |
 | `jeffrey_1983/` | [P] 15 Oct 2026, chapter 11 and the preface of the second edition, cited as such | `lean/mathlib/Jeffrey1983.lean` | Record only. Rows L6, L7 and the Jeffrey clause of C1 removed 17 Oct 2026 (D8) |
 | `cole_mailath_postlewaite_1991/` | [F] 16 Oct 2026, CARESS working paper 91-14, cited as such | `lean/mathlib/ColeEtAl1991.lean` | none yet |
-| `pesendorfer_1995/` | [F] 16 Oct 2026 | `lean/mathlib/Pesendorfer1995.lean` | none yet |
+| `pesendorfer_1995/` | [F] 16 Oct 2026 | `lean/mathlib/Pesendorfer1995.lean` | L19, C22 |
 | `eeckhout_2006/` | [F] 16 Oct 2026 | `lean/mathlib/Eeckhout2006.lean` | none yet |
-| `mailath_postlewaite_2006/` | [F] 16 Oct 2026, PIER working paper 06-003, with 04-025 and 02-003 read for differences | `lean/mathlib/MailathPostlewaite2006.lean` | none yet |
-| `fryer_jackson_2008/` | [F] 16 Oct 2026 | `lean/mathlib/FryerJackson2008.lean` | none yet |
-| `austen_smith_fryer_2003/` | [F] 16 Oct 2026, NBER working paper 9904, cited as such | `lean/mathlib/AustenSmithFryer2003.lean` | none yet |
+| `mailath_postlewaite_2006/` | [F] 16 Oct 2026, PIER working paper 06-003, with 04-025 and 02-003 read for differences | `lean/mathlib/MailathPostlewaite2006.lean` | L21 |
+| `fryer_jackson_2008/` | [F] 16 Oct 2026 | `lean/mathlib/FryerJackson2008.lean` | L13 |
+| `austen_smith_fryer_2003/` | [F] 16 Oct 2026, NBER working paper 9904, cited as such | `lean/mathlib/AustenSmithFryer2003.lean` | L18, C22 |
 | `charles_hurst_roussanov_2007/` | [F] 16 Oct 2026, NBER working paper 13392, cited as such | `lean/mathlib/CharlesEtAl2007.lean` | none yet |
-| `corneo_jeanne_1994/` | [F] 16 Oct 2026, Bonn discussion paper A-461, cited as such | `lean/mathlib/CorneoJeanne1994.lean` | none yet |
+| `corneo_jeanne_1994/` | [F] 16 Oct 2026, Bonn discussion paper A-461, cited as such | `lean/mathlib/CorneoJeanne1994.lean` | L17 |
 | `moav_neeman_2012/` | [F] 16 Oct 2026 | `lean/mathlib/MoavNeeman2012.lean` | none yet |
 | `kim_loury_2009/` | [F] 16 Oct 2026, MPRA paper 18765, cited as such | `lean/mathlib/KimLoury2009.lean` | none yet |
 | `kim_loury_2012/` | [F] 16 Oct 2026, the KDI article, pp. 1 to 15 of the issue | `lean/mathlib/KimLoury2012.lean` | none yet |
-| `kim_loury_2014/` | [F] 16 Oct 2026, MPRA paper 54950, cited as such | `lean/mathlib/KimLoury2014.lean` | none yet |
+| `kim_loury_2014/` | [F] 16 Oct 2026, MPRA paper 54950, cited as such | `lean/mathlib/KimLoury2014.lean` | L23 |
 | `peski_szentes_2012/` | [F] 16 Oct 2026, BFI working paper 2012-005, cited as such | `lean/mathlib/PeskiSzentes2012.lean` | none yet |
-| `eguia_2013/` | [F] 16 Oct 2026, the NYU working paper of 10 September 2013, cited as such | `lean/mathlib/Eguia2013.lean` | none yet |
-| `craig_fryer_2017/` | [F] 16 Oct 2026, NBER working paper 23811 | `lean/mathlib/CraigFryer2017.lean` | none yet |
+| `eguia_2013/` | [F] 16 Oct 2026, the NYU working paper of 10 September 2013, cited as such | `lean/mathlib/Eguia2013.lean` | L22 |
+| `craig_fryer_2017/` | [F] 16 Oct 2026, NBER working paper 23811 | `lean/mathlib/CraigFryer2017.lean` | L16 |
 | `labov_1964/` | [F] 16 Oct 2026, the Columbia dissertation, all 646 pages from OCR, cited as such | `lean/mathlib/Labov1964.lean` | none yet |
 | `aigner_cain_1977/` | [F] 16 Oct 2026 | `lean/mathlib/AignerCain1977.lean` | none yet |
 | `mcpherson_smith_lovin_cook_2001/` | [F] 16 Oct 2026 | `lean/mathlib/McPhersonEtAl2001.lean` | none yet |
 | `bertrand_mullainathan_2004/` | [F] 16 Oct 2026, the article only, not the cited-by list that follows it in the PDF | `lean/mathlib/BertrandMullainathan2004.lean` | none yet |
 | `hitsch_hortacsu_ariely_2006/` | [F] 16 Oct 2026, MIT Sloan working paper 4603-06, cited as such | `lean/mathlib/HitschEtAl2006.lean` | none yet |
-| `currarini_jackson_pin_2008/` | [F] 16 Oct 2026, the working paper of 29 July 2008, cited as such | `lean/mathlib/CurrariniEtAl2008.lean` | none yet |
-| `fang_moro_2010/` | [F] 16 Oct 2026, NBER working paper 15860, cited as such | `lean/mathlib/FangMoro2010.lean` | none yet |
+| `currarini_jackson_pin_2008/` | [F] 16 Oct 2026, the working paper of 29 July 2008, cited as such | `lean/mathlib/CurrariniEtAl2008.lean` | L20 |
+| `fang_moro_2010/` | [F] 16 Oct 2026, NBER working paper 15860, cited as such | `lean/mathlib/FangMoro2010.lean` | L14, L15 |
 | `peng_zhang_pan_2010/` | [F] 16 Oct 2026 | `lean/mathlib/PengEtAl2010.lean` | none yet |
 | `mill_stein_2012/` | [F] 16 Oct 2026, the working paper of 30 December 2012, cited as such | `lean/mathlib/MillStein2012.lean` | none yet |
 | `kraus_park_tan_2017/` | [F] 16 Oct 2026, the accepted manuscript | `lean/mathlib/KrausEtAl2017.lean` | none yet |
