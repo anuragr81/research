@@ -67,11 +67,13 @@ are the group, the marker, and in the Lean rows the class. The continuous
 objects are the standing, the beliefs, the refusal share and the platform's
 margin. Every belief is the observer's and is a construct attributed to the
 observer to rationalise what the observer does. Every rate is a fact of the
-world that records can reach. The model contains no payoff and no utility,
-so no object needs to be read up to an affine transformation. The engagement
-decision of the predecessor manuscript, which turns a belief into a refusal,
-is not a row, and the discrimination-rate function $F$ stands in for it in
-M14. Objects that no row carries are listed with that said, so that their
+world that records can reach. The model's one payoff
+is the engagement utility of M18, which enters every row only through the
+engagement threshold, so the baseline value, the sensitivity and the outside
+option are read only up to the threshold they give. The engagement decision
+of the predecessor manuscript, which turns a belief into a refusal, is row
+M18, and the discrimination-rate function $F$ that M14 uses is derived
+there. Objects that no row carries are listed with that said, so that their
 names are fixed before the rows reach them.
 
 The objects fall into three tables. Inputs are what the model takes as given,
@@ -118,6 +120,9 @@ here.
   {Yes}{Recorded as an income or wealth rank scaled to $[0,1]$, after
   the fact. Class is never seen at the encounter, which is the premise of the
   model.}
+\mm{$y$}{Own class}{A value of class.}{The class of the observer who decides
+  whether to engage (M18).}
+  {Yes}{Recorded as the observer's income or wealth rank, after the fact.}
 \mm{$m$}{Marker}{A signal read at the encounter.}{A trait visible at contact,
   phenotype, accent, dress or name.}
   {Yes}{Recorded as present or absent, or by its
@@ -148,13 +153,6 @@ here.
   {No}{Elicited from the observer after
   the marker is shown. In audits it is the share of encounters in which the
   person carrying the marker is treated as the outsider group.}
-\mm{$F$}{Discrimination-rate function}{A function $[0,1]\to[0,1]$. Row M14
-  uses only that it does not rise.}{The share of encounters refused when the
-  person is read as the outsider group with certainty, as a function of the
-  group's standing.}
-  {No}{Assumed. Its shape could be computed from recorded refusal rates,
-  callbacks, viewings or service, against the group's recorded standing,
-  across groups.}
 \mm{$P$}{Passers}{A subset of a finite set of people $V$.}{The members of
   the outsider group who suppress their markers and leave the visible group
   (M14).}
@@ -188,12 +186,28 @@ here.
 \mm{$|A|$}{Room size}{A positive integer.}{The number of attendees
   (M15).}
   {Yes}{Recorded by the platform.}
+\mm{$v$}{Baseline value}{A real number.}{The engagement utility at zero
+  class distance (M18).}
+  {No}{Never observed. It enters every row only through the engagement
+  threshold.}
+\mm{$\kappa$}{Sensitivity}{A real number with $\kappa>0$.}{The fall in
+  engagement utility per unit of squared class distance (M18).}
+  {No}{Never observed. It enters every row only through the engagement
+  threshold.}
+\mm{$\bar u$}{Outside option}{A real number.}{The utility of declining to
+  engage (M18).}
+  {No}{Never observed. It enters every row only through the engagement
+  threshold.}
+\mm{$J$}{Observers}{A finite set of people, each with an own class.}{The
+  observers over whom the refusal share is taken (M18).}
+  {Yes}{Recorded as the people whose encounters with the group are
+  observed.}
 \mm{$\bar d$}{Engagement threshold}{A real number with $\bar d>0$.}{The
-  largest expected class distance at which the observer still engages, the
-  predecessor's equation (threshold). The threshold lies upstream of $F$.}
-  {No}{Never observed.
-  No row carries it, and $F$ is taken as given. The name is fixed
-  here for the row that will derive $F$ from it.}
+  largest expected distance at which the observer still engages, the
+  predecessor's equation (threshold).}
+  {No}{Elicited as the largest expected distance at which the observer
+  still engages. It equals the baseline value less the outside option,
+  divided by the sensitivity (M18, \lean{Engagement.engages\_iff}).}
 \end{longtable}
 \normalsize
 
@@ -232,8 +246,8 @@ here.
   sufficiency holds (M1, M2).}
   {No}{A device of M1 and M2. When the prior sums to
   one it equals the marginal $Z_g$, as M1's proof shows.}
-\mm{$w$, $\kappa$}{Target weights}{A probability mass function on
-  $\mathcal{G}$ and a scale $\kappa\neq0$.}{In M3, a revision of the group
+\mm{$w$, $\xi$}{Target weights}{A probability mass function on
+  $\mathcal{G}$ and a scale $\xi\neq0$.}{In M3, a revision of the group
   weights that the observer might reach by any rule, and the scale of the
   likelihood that reaches it by Bayes' rule.}
   {No}{A device of M3, which shows
@@ -247,6 +261,26 @@ here.
   in a generation. The state of the dynamic part.}
   {Yes}{Recorded as the group's
   mean class rank in that generation.}
+\mm{$\nu_g$}{Spread}{A real number, $\nu_g=\sum_c\pi_g(c)(c-\bar c_g)^2$.}{The
+  variance of class within group $g$ under its prior (M18).}
+  {Yes}{Recorded as the variance of the recorded class ranks of the group's
+  members.}
+\mm{$E$}{Expected distance}{A real number,
+  $E=\sum_g q'(g)\,[(\bar c_g-y)^2+\nu_g]$.}{The expected squared class
+  distance from the observer to the person, under the posterior on group
+  (M18).}
+  {No}{Computed from the posterior on group, the standings, the spreads and
+  the own class (M18, \lean{Engagement.expDist\_decomp}).}
+\mm{$F$}{Discrimination-rate function}{A function $[0,1]\to[0,1]$,
+  $F(\bar c)=|\{j\in J:\bar d<(\bar c-y_j)^2+\nu_O\}|/|J|$. Row M14 uses only
+  that it does not rise, and M18 gives the range on which it does not.}{The
+  share of the observers who refuse when the person is read as the outsider
+  group with certainty, as a function of the group's standing.}
+  {No}{Computed from the observers' own classes, the outsider's standing and
+  spread, and the engagement threshold (M18,
+  \lean{Engagement.refusal\_iff}, \lean{Engagement.refusalShare\_antitone}).
+  Recorded refusal rates, callbacks, viewings or service against the group's
+  recorded standing would test the two ranges.}
 \mm{$V\setminus P$}{Visible group}{A finite set of people.}{The members
   of the outsider group whose markers are still read (M14).}
   {Yes}{Recorded as the
@@ -328,9 +362,10 @@ here.
 \item \emph{Elicited and not recorded.} Every belief, the prior, the group
   weights, the three posteriors and the salience. Each is the observer's and
   rationalises the observer's refusals, which are what records reach.
-\item \emph{Assumed.} Group sufficiency, and the admission objective linear
-  in the admission rate.
-\item \emph{Never observed.} The passing gain, the passing cost and the
+\item \emph{Assumed.} Group sufficiency, the quadratic form of the engagement
+  utility, and the admission objective linear in the admission rate.
+\item \emph{Never observed.} The passing gain, the passing cost, and the
+  baseline value, the sensitivity and the outside option behind the
   engagement threshold.
 \end{itemize}
 

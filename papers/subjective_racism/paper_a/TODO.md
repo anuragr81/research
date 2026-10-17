@@ -144,9 +144,10 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   generations, against the predecessor's "approximately 65". The constant
   `C = pi/sqrt|ab|` and an upper bound are not stated.
 - [ ] **Q12. What the appendix pass and the retirement left.** New rows, not
-  predecessor claims. A row deriving `F` from the engagement decision
-  (`ass:preferences`, `ass:beliefs`, the threshold `d_bar`), which would also
-  carry `rem:graded` and `rem:salience`. The signal precision `tau` of
+  predecessor claims. Done 17 Oct 2026, M18, a row deriving `F` from the
+  engagement decision (D5), carrying `rem:graded` as the two ranges of
+  monotonicity and `rem:salience` as part (iv). Still open, the rest of this
+  item. The signal precision `tau` of
   `rem:resolution`. A platform objective derived rather than assumed. An
   upper bound on the escape time. Cohorts, if the Discussion's claim that
   the trap regenerates after forced integration is to be stated, since M6
@@ -198,6 +199,14 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   Jeffrey only in Appendix D, "The updating rule", which gives the reason.
   Not covered is a sequence of several soft readings, where order could
   matter. The model has none.
+- [x] **D5. Derive the discrimination-rate function from the engagement
+  threshold. Decided 17 Oct 2026 by the author** ("Go, can we tie the loose
+  end"), after `notes/entities.md` named the engagement decision the base
+  relationship (U1). Row M18, `Engagement.lean`, assumption A14. The
+  derived function does not rise in the standing only on the range at or
+  below every observer's class, and does not fall on the range at or above
+  it, so M14 (iii) holds for observers above the group and reverses below
+  it. The quadratic form of the utility is still taken as given.
 
 ## Novelty ledger
 
@@ -235,3 +244,9 @@ they differ.
 | Loury (2002) | Not found on Drive | C17 |
 | Platform-discrimination studies | Not found on Drive | C15 |
 | Selection–mutation literature, Fisher (1930) | Not found on Drive | C12 |
+
+On 17 October 2026 row M18 derived the discrimination-rate function from the
+engagement threshold. The spread term is Aigner and Cain's risk premium (L8)
+and the claim qualified is Pęski and Szentes's (L9). That the direction of a
+group's effect on refusal depends on the observer's own class is pending as
+C22, on Akerlof (1997) and Loury (1998, 2002).

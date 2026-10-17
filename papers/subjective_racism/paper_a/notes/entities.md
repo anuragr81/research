@@ -54,7 +54,7 @@ observer's own class, the vanishing penalty and the shadow market.
 
 | ID | Entities | What has to be understood | Status | Sources | Heading |
 |---|---|---|---|---|---|
-| U1 | E2 reads E1 | How the observer's own class and the belief about the person give the engagement decision. The expected distance to a group is $(\bar c_g-c_j)^2+\sigma_g^2$, and the observer engages when it is under the threshold. A row deriving $F$ from the threshold would replace the assumed $F$ of M14 (TODO Q12) | Stated. The belief is Settled (M1 to M3) and the decision is a rule | The $\sigma^2$ term is the risk premium (AC-Q6, `AignerCain1977.contrast_quadratic_ce`). The decomposition is `McPhersonEtAl2001.niche_decomposition`. The claim qualified is PS-Q4 | Avoidance |
+| U1 | E2 reads E1 | How the observer's own class and the belief about the person give the engagement decision. The expected distance to a group is $(\bar c_g-c_j)^2+\sigma_g^2$, and the observer engages when it is under the threshold. Row M18 (17 October 2026) derives $F$ from the threshold, and the hypothesis of M14 (iii) holds on the range of standings at or below every observer's class and reverses above it | Settled in part. The decision and the derived $F$ are rows (M18), and the quadratic form stays Stated (A14) | The $\sigma^2$ term is the risk premium (AC-Q6, `AignerCain1977.contrast_quadratic_ce`). The decomposition is `McPhersonEtAl2001.niche_decomposition`. The claim qualified is PS-Q4 | Avoidance |
 | U2 | E3, both members of the pair | Who engages with whom when both must agree. A Nash equilibrium of engagement, where each person's set of partners is a best reply to everyone else's, and where the standing imputed to a group equals the actual mean of its visible members | Open. The predecessor states the bilateral condition and no row carries it | Avoidance in both groups (HHA-Q16, CB-Q16). The consistency condition (KLI-Q10, `CorneoJeanne1994.eq8`). Mutual ties pool the two directions (`ChettyEtAl2022a.cross_links_balance`) | Avoidance, the puzzle |
 | U3 | E6 against E4 and E5 | When a host member below the host mean prefers outsiders. The condition in the threshold form is $(\bar c_O-c_j)^2+\sigma_O^2<(\bar c_I-c_j)^2+\sigma_I^2$, and the question is where in the host's class distribution it holds and what the host's closure does to it | Open | Support in MSC-Q13. Limits in EG-Q18, CM-Q16 and MLS-Q8. Passing is the mirror case (DNQ-Q9) | Avoidance (ii) |
 | U4 | E8, E9, E1 and E2 | How separate budgets and a priced activity produce a cost that rises with the class gap. The quadratic $\kappa(c_i-c_j)^2$ is assumed, and budget compatibility is to be its micro-foundation. The budgets must not be pooled, since pooling turns a wealth gap into a preference for the richer partner | Open. No symbol in the map | Against pooling (CM-Q2, MP-Q5, `MailathPostlewaite2006.prop3`). Willingness against ability to pay (PF-Q14, `Pesendorfer1995.separating_price_iff`). Support (CH-Q19, CH-Q20, CB-Q10, CB-Q12, KPT-Q8). Limit (HHA-Q5) | Budget compatibility |
@@ -85,8 +85,9 @@ from the rows above it.
 
 - E1 becomes a player in its own right, with the venue choice and the return
   engagement, and not only the passer.
-- E2's engagement decision becomes a derived choice when U1 is a row, and $F$
-  leaves the map.
+- E2's engagement decision is derived in M18, and $F$ is computed in the map
+  rather than assumed. The quadratic form of the utility is still an
+  assumption (A14), which U4 would replace.
 - E3 is a new entry, the pair, with U2 as the row that settles it.
 - E6 is a case of E2 and gets its own entry only if U3 is a row.
 - E11 become players, with the venue choice, when U7 and U9 are rows.

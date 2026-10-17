@@ -68,7 +68,7 @@
 
 \title{Class Read from Group Markers}
 \author{Anurag Srivastava}
-\date{Manuscript skeleton of Paper A1, 14 October 2026, revised 15 October 2026}
+\date{Manuscript skeleton of Paper A1, 14 October 2026, revised 17 October 2026}
 
 \begin{document}
 \maketitle
@@ -82,7 +82,7 @@
 When an observer cannot see a person's class and reads it from the markers
 of a group, what does the reading do within one generation? The paper asks
 three things. What the marker does to the observer's belief about the
-person's class. What leaving the visible group does to the group's mean
+person's class, and to the decision to engage. What leaving the visible group does to the group's mean
 class and to the refusal of those who stay. And whom a platform admits when
 its clients read class the same way.
 
@@ -99,6 +99,20 @@ likelihood (M3). A second rule for soft evidence therefore gives no posterior
 on class that Bayes' rule does not, within one reading of a marker (M2, M3).
 The predecessor's stranger, whose expected class moves from 0.50 to 0.38 on
 hearing an accent, is such a mixture (M17).
+
+The belief becomes a decision through the engagement threshold. Under the
+posterior on group, the expected squared class distance from an observer to
+the person is the sum over groups of the squared gap between the observer's
+own class and the group's standing plus the group's spread, each weighted by
+the posterior on that group (M18). Read as the outsider with certainty, the
+observer refuses exactly when the squared gap to the outsider's standing plus
+the outsider's spread exceeds the threshold (M18). The share of observers who
+refuse does not rise in the outsider's standing among observers who stand at
+or above it, and does not fall among observers who stand at or below it, so
+the discrimination-rate function that M14 takes as given is derived, together
+with the range on which its hypothesis holds (M18). With two groups, more
+weight on the outsider raises the expected distance exactly when the
+outsider's expected distance exceeds the host's (M18).
 
 Leaving the visible group lowers it. When the members who pass are those
 above every member who stays, the visible mean falls, and a passing gain
@@ -138,6 +152,19 @@ model rows it rests on and what it does not claim.
   normalised (M1, M2). Across several readings two rules can differ, since
   Jeffrey's rule need not commute (L7), and the model has one reading. Not
   claimed as new (Table~\ref{tab:pending}).}
+\krow{K7}{An observer engages when the expected squared class distance, the
+  squared gap to the group's standing plus the group's spread, is at most the
+  engagement threshold. The share of observers who refuse does not rise in a
+  group's standing among observers at or above that standing, and does not
+  fall among observers at or below it.}{M18}{The engagement utility is the
+  predecessor's quadratic form taken as given (A14), and the baseline value,
+  the sensitivity and the outside option enter only through the threshold.
+  The decomposition needs priors that sum to one. Each monotonicity
+  statement holds on its own range and nothing is claimed off it, and one
+  observer below the standing is the control (M18). The spread term is the
+  risk premium of L8 in a contact setting, and the dependence on the
+  observer's own class qualifies the claim of L9, so only that dependence is
+  a candidate for novelty, and it waits (Table~\ref{tab:pending}).}
 \krow{K2}{When the better-off members of a group pass, the visible group's
   mean class falls, and the discrimination rate against those who stay does
   not fall.}{M14}{A finite population and a statement about composition. The
@@ -189,12 +216,16 @@ literature row draws the parallel.
   marker is read, and whether to engage with that person or refuse.}
   {The belief is settled by Bayes' rule alone, from a prior on class within
   each group and the group weights, with no second rule (A3, M1 to M3, M17).
-  The engagement decision is not derived. Row M14 takes the refusal share
-  against a group as a discrimination-rate function of the group's standing,
-  a hypothesis of that row and not a result.}
+  The engagement decision is the threshold rule of A14. Row M18 derives from
+  it the refusal share that M14 takes as its discrimination-rate function,
+  with the range of standings on which that share does not rise and the
+  range on which it does not fall.}
   {The employer of Phelps, who combines a group prior with a test score
-  (L4), and the agent of Jeffrey, who revises by a mixture rule (L6, L7).}
-  {M1, M2, M3, M14, M17, L4, L6, L7}
+  (L4), the agent of Jeffrey, who revises by a mixture rule (L6, L7), the
+  employer of Aigner and Cain, who discounts a group for its spread (L8),
+  and the employers of P\k{e}ski and Szentes, for whom a signal's value is
+  the same whatever their own colour (L9).}
+  {M1, M2, M3, M14, M17, M18, L4, L6, L7, L8, L9}
 \prow{P2}{A member of the outsider group}{Whether to pass, suppressing the
   marker and leaving the visible group, or to stay.}
   {A member passes when the passing gain at the member's class is at least
@@ -254,7 +285,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
 \endfoot
 \arow{A1}{Class takes finitely many values $c\in\mathcal{C}$.}
   {A person's class is one of a finite list of values.}
-  {$c$, $\mathcal{C}$}{M1, M2, M3}
+  {$c$, $\mathcal{C}$}{M1, M2, M3, M18}
   {The Lean statements range over a finite set. The predecessor's class in
   $[0,1]$ is outside the rows (Appendix~\ref{app:scope}, Class space).}
 \arow{A2}{Class is not seen at the encounter. The observer sees a marker $m$,
@@ -310,6 +341,25 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$}{M15}
   {The predecessor's first-order condition, taken as a definition
   (Appendix~\ref{app:scope}, The platform channel).}
+\arow{A14}{The observer of own class $y$ values engagement with a person of
+  class $c$ at $v-\kappa\,(c-y)^2$ against the outside option $\bar u$, and
+  engages when the expected distance $E$ under the posterior on group is at
+  most the engagement threshold $\bar d=(v-\bar u)/\kappa$. The observers
+  form a finite set $J$. Group $g$ has standing $\bar c_g$ and spread
+  $\nu_g$ under its prior.}
+  {An observer of a given own class values engaging with a person of a given
+  class at the baseline value less the sensitivity times the squared
+  distance between the two classes, and declines for the outside option. The
+  observer engages when the expected distance, taken under the posterior on
+  group, is at most the engagement threshold, which is the baseline value
+  less the outside option, divided by the sensitivity. The observers are
+  finitely many. Each group has a standing and a spread under its prior.
+  Lean, \lean{Engagement.engages\_iff}.}
+  {$c$, $y$, $v$, $\kappa$, $\bar u$, $E$, $\bar d$, $J$, $\bar c$, $\nu_g$}
+  {M18}
+  {The predecessor's engagement rule, its equations (utility) and
+  (threshold), taken as given (Appendix~\ref{app:scope}, The engagement
+  decision).}
 \end{longtable}
 \normalsize
 
@@ -353,9 +403,9 @@ that check it.}\\
   group positive weight is a Bayesian update, for a marker likelihood that
   depends on group alone. The posterior on class is then the mixture by the
   revised weights.}
-  {$q(g)>0$, $\sum_g w(g)=1$, $\sum_c\pi_g(c)=1$, $\kappa\neq0$ and
-  $\ell_g(c)=\kappa\,w(g)/q(g)$. Then $q'=w$ and
-  $P(c\mid m)=\sum_g\pi_g(c)\,w(g)$. If also $0<\kappa\le q(g)$ and
+  {$q(g)>0$, $\sum_g w(g)=1$, $\sum_c\pi_g(c)=1$, $\xi\neq0$ and
+  $\ell_g(c)=\xi\,w(g)/q(g)$. Then $q'=w$ and
+  $P(c\mid m)=\sum_g\pi_g(c)\,w(g)$. If also $0<\xi\le q(g)$ and
   $0\le w(g)\le1$, then $0\le\ell_g(c)\le1$.
   It fails without $q(g)>0$, since $q=(1,0)$ gives $q'(1)=0$ for every
   $\ell$.}
@@ -396,6 +446,33 @@ that check it.}\\
   $(\tfrac12,\tfrac12)$ is $\tfrac12$, and by $(\tfrac15,\tfrac45)$ is
   $\tfrac{19}{50}$.}
   {Stranger.stranger_example}
+\mrow{M18}{An observer engages when the expected squared class distance is
+  at most the engagement threshold. Under the posterior on group that
+  distance is the sum over groups of the squared gap to the group's standing
+  plus the group's spread. Read as the outsider with certainty, the observer
+  refuses exactly when the squared gap to the outsider's standing plus its
+  spread exceeds the threshold. The refusal share among the observers does
+  not rise in the standing on the range at or below every observer's class,
+  and does not fall on the range at or above every observer's class. With
+  two groups, more weight on the outsider raises the expected distance
+  exactly when the outsider's expected distance exceeds the host's.}
+  {$\mathcal{G}$, $\mathcal{C}$ finite, $\sum_c\pi_g(c)=1$,
+  $E(w,y)=\sum_c\big(\sum_g\pi_g(c)\,w(g)\big)(c-y)^2$,
+  $\bar c_g=\sum_c\pi_g(c)\,c$, $\nu_g=\sum_c\pi_g(c)(c-\bar c_g)^2$,
+  $\bar d=(v-\bar u)/\kappa$ with $\kappa>0$.
+  (i) $E(w,y)=\sum_g w(g)\,[(\bar c_g-y)^2+\nu_g]$.
+  (ii) $\bar u\le v-\kappa E\iff E\le\bar d$. With $w=\mathbf 1_O$,
+  $E=(\bar c_O-y)^2+\nu_O$, and the observer refuses iff
+  $\bar d<(\bar c_O-y)^2+\nu_O$.
+  (iii) $F(\bar c)=|\{j\in J:\bar d<(\bar c-y_j)^2+\nu_O\}|/|J|\in[0,1]$.
+  If $\bar c\le\bar c'\le y_j$ for every $j\in J$ then $F(\bar c')\le F(\bar c)$,
+  and if $y_j\le\bar c\le\bar c'$ for every $j\in J$ then $F(\bar c)\le F(\bar c')$.
+  (iv) $(1-s_g)E_I+s_gE_O=E_I+s_g(E_O-E_I)$, which for $s_g\le s_g'$ does not
+  fall when $E_I<E_O$ and does not rise when $E_O<E_I$, and $w=(1-s_g,s_g)$
+  in (i) gives this mixture.
+  (iii) fails off its range, since $J=\{0\}$, $y_0=0$, $\nu_O=0$, $\bar d=1$
+  give $F(1)=0$ and $F(2)=1$. (iv) is constant in $s_g$ when $E_I=E_O$.}
+  {Engagement.second_moment, Engagement.expDist_decomp, Engagement.expDist_certain, Engagement.engages_iff, Engagement.refusal_iff, Engagement.refusalShare_antitone, Engagement.refusalShare_monotone_above, Engagement.refusalShare_mem, Engagement.control_observer_below, Engagement.salience_slope, Engagement.salience_effect, Engagement.control_equal_distances, Engagement.expDist_two_groups}
 \end{longtable}
 \normalsize
 
@@ -438,14 +515,33 @@ that check it.}\\
   outside it rather than being ruled out by it.}{Nor need it always be the
   case that the result of two applications of (11-2) is independent of the
   order}{183}{C1}
+\lrow{L8}{AignerCain1977}{The employer chooses the group that maximises
+  expected productivity discounted for risk, so a group's conditional
+  variance is penalised in its own right. The spread term of M18 is this
+  penalty in a contact setting, with class distance in place of
+  productivity. The parallel ends at the observer, whose own class enters
+  M18 and plays no part in the employer's choice.}{an employer with this
+  utility function will attempt to hire from the group of workers that
+  maximizes expected productivity, q, discounted for risk}{8}{M18}
+\lrow{L9}{PeskiSzentes2012}{Statistical discrimination gives a signal the
+  same value for every employer, so a mutual bias between colours cannot
+  come from it. In M18 the posterior is the same for every observer and the
+  decision it supports is not, since the squared gap to a group's standing
+  depends on the observer's own class. The parallel ends there.}{Such a
+  phenomenon is inconsistent with statistical discrimination because the
+  signal value of colour must be the same for any employer, regardless of
+  his own colour.}{5}{M18, C21}
 \end{longtable}
 \normalsize
 
-Phelps (1972) and Jeffrey's chapter on probability kinematics in the 1983
-edition were read in full (\path{lit/phelps_1972/},
-\path{lit/jeffrey_1983/}). Loury (2002), the platform-discrimination studies
-the predecessor cites, Jeffrey's first edition of 1965 and Arrow's published
-chapter of 1973 are not read, and no row rests on them.
+Phelps (1972), Jeffrey's chapter on probability kinematics in the 1983
+edition, Aigner and Cain (1977) and the 2012 working paper of P\k{e}ski and
+Szentes were read in full (\path{lit/phelps_1972/},
+\path{lit/jeffrey_1983/}, \path{lit/aigner_cain_1977/},
+\path{lit/peski_szentes_2012/}). Loury (1998), Loury (2002), Akerlof (1997),
+the platform-discrimination studies the predecessor cites, Jeffrey's first
+edition of 1965 and Arrow's published chapter of 1973 are not read, and no
+row rests on them.
 
 \section{Conclusions}
 
@@ -483,6 +579,12 @@ no conclusion rests on them.
 \crow{C19}{Phelps's statistical discrimination combines a group prior with
   evidence about the individual in one static decision, whereas here the
   marker is evidence about the group alone.}{M1, L4}
+\crow{C21}{Under the engagement threshold, the refusal share against a group
+  does not rise in the group's standing among observers who stand at or
+  above it and does not fall among observers who stand at or below it, so
+  the direction of a group's effect on refusal depends on the observer's own
+  class, which the statistical discrimination of P\k{e}ski and Szentes rules
+  out for employers.}{M18, L9}
 \end{longtable}
 
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -506,6 +608,10 @@ no conclusion rests on them.
   and real names. \pend{The platform-discrimination studies the predecessor
   cites, read in full, and a row linking the marker's salience to the
   admission margin.}}{M15}
+\crow{C22}{That the direction of a group's effect on refusal depends on the
+  observer's own class is new to models of inference from a group marker.
+  \pend{Akerlof (1997) on social distance, Loury (1998) and Loury (2002),
+  read in full.}}{M18}
 \end{longtable}
 \normalsize
 
@@ -529,7 +635,7 @@ marginal of the marker is
 $Z=\sum_{g}\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)=P(m)$, the Bayesian posterior on
 group is $q'(g)=\sum_{c}\ell_g(c)\,\pi_g(c)\,q(g)/Z$, and the Bayesian
 posterior on class is $P(c\mid m)=\sum_{g}\ell_g(c)\,\pi_g(c)\,q(g)/Z$. In M3,
-$w$ is a target revision of the group weights and $\kappa$ a scale.
+$w$ is a target revision of the group weights and $\xi$ a scale.
 
 Row M14 has a finite set of people $V$ with classes $c_i$, the passers
 $P\subseteq V$, the visible group $V\setminus P$, and the mean class
@@ -543,7 +649,14 @@ the weight on objective quality, $|A|$ the room size, $\sigma\in[0,1]$ the
 admission rate, $\bar c_O$ and $\bar c_I$ the standings of the outsider and
 the host, $\mathrm{marg}$ the admission margin, $\Pi$ the profit and $c_E$
 the admission threshold. Row M17 mixes two standings by group weights as in
-M2 and M3.
+M2 and M3. Row M18 has an observer of own class $y$, the expected squared
+distance $E(w,y)$ under group weights $w$, the standing $\bar c_g$ and the
+spread $\nu_g$ of group $g$ under its prior, the baseline value $v$, the
+sensitivity $\kappa$, the outside option $\bar u$, the engagement threshold
+$\bar d=(v-\bar u)/\kappa$, the observers $J$ with classes $y_j$, the derived
+discrimination-rate function $F$, and the salience $s_g$ as the weight on
+the outsider. In M18 the values of class are real numbers, and $E_O$ and
+$E_I$ are the expected distances to the outsider and the host.
 
 \begin{mproof}{M1}{Sufficiency.posterior_eq_prior_of_flat, Sufficiency.flat_of_posterior_eq_prior, Sufficiency.control_flat_needed, Sufficiency.control_support_needed}
 (i) With $\ell_g(c)=\lambda_g\neq0$ for every $c\in\mathcal{C}$ and $\sum_c\pi_g(c)=1$,
@@ -583,21 +696,21 @@ and $q'(0)=1$, so $\sum_g\pi_g(0)\,q'(g)=1\neq\tfrac12$.
 \end{mproof}
 
 \begin{mproof}{M3}{ClassPosterior.bayes_group_of_ratio, ClassPosterior.bayes_class_of_ratio, ClassPosterior.ratioLik_mem_unit, ClassPosterior.control_prior_support_needed}
-With $\ell_g(c)=\kappa\,w(g)/q(g)$, $q(g)>0$ and $\sum_c\pi_g(c)=1$,
+With $\ell_g(c)=\xi\,w(g)/q(g)$, $q(g)>0$ and $\sum_c\pi_g(c)=1$,
 \[
-\sum_c\ell_g(c)\,\pi_g(c)\,q(g)=\kappa\,w(g)\sum_c\pi_g(c)=\kappa\,w(g),
+\sum_c\ell_g(c)\,\pi_g(c)\,q(g)=\xi\,w(g)\sum_c\pi_g(c)=\xi\,w(g),
 \qquad
-Z=\kappa\sum_g w(g)=\kappa,
+Z=\xi\sum_g w(g)=\xi,
 \qquad
-q'(g)=\frac{\kappa\,w(g)}{\kappa}=w(g).
+q'(g)=\frac{\xi\,w(g)}{\xi}=w(g).
 \]
 $\ell_g$ is constant in $c$, so M2 applies and
 $P(c\mid m)=\sum_g\pi_g(c)\,q'(g)=\sum_g\pi_g(c)\,w(g)$. With
-$0<\kappa\le q(g)$ and $0\le w(g)\le1$,
+$0<\xi\le q(g)$ and $0\le w(g)\le1$,
 \[
-0\le\frac{\kappa\,w(g)}{q(g)}
+0\le\frac{\xi\,w(g)}{q(g)}
 \quad\text{and}\quad
-\kappa\,w(g)\le\kappa\le q(g)\;\Longrightarrow\;\frac{\kappa\,w(g)}{q(g)}\le1.
+\xi\,w(g)\le\xi\le q(g)\;\Longrightarrow\;\frac{\xi\,w(g)}{q(g)}\le1.
 \]
 Control, with $\mathcal{G}=\{0,1\}$ and $q=(1,0)$. For every $\ell$ and $\pi$,
 $\sum_c\ell_1(c)\,\pi_1(c)\cdot0=0$, so $q'(1)=0$.
@@ -650,6 +763,33 @@ $\tfrac12\cdot\tfrac7{10}+\tfrac12\cdot\tfrac3{10}=\tfrac12$ and
 $\tfrac15\cdot\tfrac7{10}+\tfrac45\cdot\tfrac3{10}=\tfrac{7}{50}+\tfrac{12}{50}=\tfrac{19}{50}$.
 \end{mproof}
 
+\begin{mproof}{M18}{Engagement.second_moment, Engagement.expDist_decomp, Engagement.expDist_certain, Engagement.engages_iff, Engagement.refusal_iff, Engagement.refusalShare_antitone, Engagement.refusalShare_monotone_above, Engagement.refusalShare_mem, Engagement.control_observer_below, Engagement.salience_slope, Engagement.salience_effect, Engagement.control_equal_distances, Engagement.expDist_two_groups}
+(i) With $m_g=\bar c_g$ and $\sum_c\pi_g(c)=1$, so that
+$\sum_c\pi_g(c)(c-m_g)=m_g-m_g=0$,
+\[
+\sum_c\pi_g(c)(c-y)^2
+=\sum_c\pi_g(c)\big[(c-m_g)^2+2(m_g-y)(c-m_g)+(m_g-y)^2\big]
+=\nu_g+(m_g-y)^2 ,
+\]
+\[
+E(w,y)=\sum_c\sum_g\pi_g(c)\,w(g)\,(c-y)^2
+=\sum_g w(g)\sum_c\pi_g(c)(c-y)^2
+=\sum_g w(g)\,[(\bar c_g-y)^2+\nu_g].
+\]
+(ii) $\bar u\le v-\kappa E\iff\kappa E\le v-\bar u\iff E\le\bar d$ for
+$\kappa>0$. $w=\mathbf 1_O$ in (i). Refusal is $\neg(E\le\bar d)\iff\bar d<E$.
+(iii) $\bar c\le\bar c'\le y_j\Rightarrow(\bar c'-y_j)^2\le(\bar c-y_j)^2$, so
+$\{j:\bar d<(\bar c'-y_j)^2+\nu_O\}\subseteq\{j:\bar d<(\bar c-y_j)^2+\nu_O\}$
+and $F(\bar c')\le F(\bar c)$. $y_j\le\bar c\le\bar c'$ reverses the
+inclusion. $0\le|\cdot|/|J|\le1$.
+(iv) $(1-s_g)E_I+s_gE_O=E_I+s_g(E_O-E_I)$. For $s_g\le s_g'$,
+$E_I<E_O\Rightarrow E_I+s_g(E_O-E_I)\le E_I+s_g'(E_O-E_I)$ and
+$E_O<E_I\Rightarrow\ge$. $w=(1-s_g,s_g)$ in (i).
+Controls. $J=\{0\}$, $y_0=0$, $\nu_O=0$, $\bar d=1$. $1<(1-0)^2+0$ is false
+and $1<(2-0)^2+0$ is true, so $F(1)=0$, $F(2)=1$. $E_I=E_O=e$ gives
+$(1-s_g)e+s_ge=e$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -676,7 +816,7 @@ records what they printed.
 \endhead
 \bottomrule
 \endfoot
-\path{AignerCain1977} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/AignerCain1977.lean}{\path{lean/mathlib/AignerCain1977.lean}} & record only \\
+\path{AignerCain1977} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/AignerCain1977.lean}{\path{lean/mathlib/AignerCain1977.lean}} & L8 \\
 \path{Assumptions} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Assumptions.lean}{\path{lean/mathlib/Assumptions.lean}} & A4 \\
 \path{AustenSmithFryer2003} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/AustenSmithFryer2003.lean}{\path{lean/mathlib/AustenSmithFryer2003.lean}} & record only \\
 \path{BertrandMullainathan2004} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/BertrandMullainathan2004.lean}{\path{lean/mathlib/BertrandMullainathan2004.lean}} & record only \\
@@ -695,6 +835,7 @@ records what they printed.
 \path{EdelmanEtAl2017} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/EdelmanEtAl2017.lean}{\path{lean/mathlib/EdelmanEtAl2017.lean}} & record only \\
 \path{Eeckhout2006} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Eeckhout2006.lean}{\path{lean/mathlib/Eeckhout2006.lean}} & record only \\
 \path{Eguia2013} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Eguia2013.lean}{\path{lean/mathlib/Eguia2013.lean}} & record only \\
+\path{Engagement} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Engagement.lean}{\path{lean/mathlib/Engagement.lean}} & A14, M18, Measurement map \\
 \path{FangMoro2010} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/FangMoro2010.lean}{\path{lean/mathlib/FangMoro2010.lean}} & record only \\
 \path{FryerJackson2008} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/FryerJackson2008.lean}{\path{lean/mathlib/FryerJackson2008.lean}} & record only \\
 \path{Goffman1951es} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Goffman1951es.lean}{\path{lean/mathlib/Goffman1951es.lean}} & record only \\
@@ -718,7 +859,7 @@ records what they printed.
 \path{Passing} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Passing.lean}{\path{lean/mathlib/Passing.lean}} & M14 \\
 \path{PengEtAl2010} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/PengEtAl2010.lean}{\path{lean/mathlib/PengEtAl2010.lean}} & record only \\
 \path{Pesendorfer1995} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Pesendorfer1995.lean}{\path{lean/mathlib/Pesendorfer1995.lean}} & record only \\
-\path{PeskiSzentes2012} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/PeskiSzentes2012.lean}{\path{lean/mathlib/PeskiSzentes2012.lean}} & record only \\
+\path{PeskiSzentes2012} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/PeskiSzentes2012.lean}{\path{lean/mathlib/PeskiSzentes2012.lean}} & L9 \\
 \path{Phelps1972} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Phelps1972.lean}{\path{lean/mathlib/Phelps1972.lean}} & L4 \\
 \path{Platform} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Platform.lean}{\path{lean/mathlib/Platform.lean}} & M15 \\
 \path{RothschildWhite1993} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/RothschildWhite1993.lean}{\path{lean/mathlib/RothschildWhite1993.lean}} & record only \\
@@ -753,8 +894,11 @@ injected object of each kind is caught.
 \end{enumerate}
 
 \paragraph{What Lean does not carry.} The class space and the set of groups
-are finite in M1 to M3. The passing decision of M14 is a rule, and its gain
-and cost are not derived. The platform's objective of M15 is the
+are finite in M1 to M3 and in M18. The engagement utility of M18 is the
+predecessor's quadratic form taken as given, and its baseline value,
+sensitivity and outside option enter only through the engagement threshold.
+The passing decision of M14 is a rule, and its gain and cost are not
+derived. The platform's objective of M15 is the
 predecessor's first-order condition taken as a definition, and no row ranks
 the interior admission rates against full admission.
 
@@ -798,8 +942,27 @@ Mixture & $\sum_g\pi_g(c)\,w(g)$ & The distribution of class reached by
 Standing & $\bar c$ & The mean class of a group, in $[0,1]$. \\ \addlinespace
 Salience & $s_g$ & The observer's posterior weight on the outsider group
   after the marker. \\ \addlinespace
-Discrimination-rate function & $F$ & The refusal share as a function of
-  standing when the person is read as the outsider group. \\ \addlinespace
+Discrimination-rate function & $F$ & The refusal share among the observers
+  when the person is read as the outsider group, as a function of the
+  standing, derived in M18 and used in M14. \\ \addlinespace
+Own class & $y$ & The class of the observer who decides whether to engage
+  (M18). \\ \addlinespace
+Baseline value & $v$ & The engagement utility at zero class distance
+  (M18). \\ \addlinespace
+Sensitivity & $\kappa$ & The fall in engagement utility per unit of squared
+  class distance (M18). \\ \addlinespace
+Outside option & $\bar u$ & The utility of declining to engage (M18). \\
+  \addlinespace
+Engagement threshold & $\bar d$ & The largest expected distance at which the
+  observer engages, the baseline value less the outside option, divided by
+  the sensitivity (M18). \\ \addlinespace
+Expected distance & $E$ & The expected squared class distance from the
+  observer to the person, under the posterior on group (M18). \\
+  \addlinespace
+Spread & $\nu_g$ & The variance of class within group $g$ under its prior
+  (M18). \\ \addlinespace
+Observers & $J$ & The finite set of observers over whom the refusal share is
+  taken (M18). \\ \addlinespace
 Outsider group & $O$ & The group the marker signals, whose members may pass
   (M14) and whom a platform admits or excludes (M15). \\ \addlinespace
 Host group & $I$ & The group alongside the outsider, whose clients the
@@ -859,6 +1022,16 @@ predecessor's passing appendix for a finite population. Row M14 does not carry
 the passing decision itself, which the predecessor derives from a benefit
 and a cost of suppressing markers that no row defines. Part (ii) says only
 what the decision needs to make the leavers an upper set.
+
+\paragraph{The engagement decision.} Row M18 takes the predecessor's
+engagement rule as assumption A14, with the quadratic utility and the
+outside option as given, and derives from it the discrimination-rate
+function that M14 takes as a hypothesis. The derived function does not rise
+in the standing on the range at or below every observer's class and does not
+fall on the range at or above it, so M14 (iii) holds for observers who stand
+above the group and reverses for observers who stand below it. The baseline
+value, the sensitivity and the outside option enter only through the
+engagement threshold, and no row derives them or the quadratic form.
 
 \paragraph{The platform channel.} Row M15 takes the predecessor's
 first-order condition as the platform's objective, linear in the admission
