@@ -120,6 +120,9 @@ that world out. A claim that cannot name its falsifier does not enter.
 - The base case (`claims.yaml`, `base_case`) follows the same rules: its
   summary like an idea summary, its payoff table like the players table,
   and only LEAN_PROVED rows.
+- The questions and answers (`claims.yaml`, `faq`) follow the same rules;
+  each answer has its own word range and is stamped, and each question ends
+  with a question mark and uses the manuscript's terms.
 
 ## 7. Mechanism before prose (S)
 

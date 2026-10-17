@@ -445,6 +445,7 @@ def check_summary(data, lean_text, source, entries, errors, notes):
     check_players(data, lean_text, source, entries, errors, notes)
     blocks['players'] = ((data.get('players') or []) + (data.get('choices') or []), None)
     check_base_case(data, lean_text, source, entries, errors, notes, blocks)
+    check_faq(data, lean_text, source, entries, errors, notes, blocks)
     check_stamps(blocks, data, lean_text, errors, notes)
 
 
@@ -526,6 +527,29 @@ def check_base_case(data, lean_text, source, entries, errors, notes, blocks):
         check_cells(tag, row, ('route', 'richer', 'poorer'), entries, errors)
         check_rests(tag, row, data, lean_text, source, errors, notes)
     blocks['base_case:payoffs'] = (pay, None)
+
+
+def check_faq(data, lean_text, source, entries, errors, notes, blocks):
+    faq = data.get('faq') or []
+    if not faq:
+        errors.append('faq: missing')
+    for k, item in enumerate(faq, 1):
+        key = f'faq:{k}'
+        q = str(item.get('question', '')).strip()
+        if not q.endswith('?'):
+            errors.append(f'{key}: question must end with a question mark')
+        for mark, name in SUMMARY_MARKS.items():
+            if mark in q:
+                errors.append(f'{key}: question contains a {name}')
+        for a, term in avoided_hits(q, entries):
+            errors.append(f'{key}: question uses {a!r}; the term is {term!r}')
+        words = item.get('words') or []
+        if len(words) != 2 or not words[0] < words[1]:
+            errors.append(f'{key}: words must be [min, max]')
+            continue
+        answer = [dict(s, para=1) for s in item.get('answer') or []]
+        check_plain(key, answer, tuple(words), data, lean_text, source, entries, errors, notes)
+        blocks[key] = (answer, tuple(words))
 
 
 def check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes):

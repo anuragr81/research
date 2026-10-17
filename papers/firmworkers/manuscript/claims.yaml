@@ -225,6 +225,97 @@ idea_summaries:
         text: 'The firm never receives the lottery cost, but gains from a higher one, because more displaced workers upskill.'
         rests_on: ['M53', 'anchor: flows back to the firm as upskilling investments']
 
+# Questions and answers, rendered as a section after the concluding remarks. Each answer follows
+# the rules of the summaries and is stamped, so the answers move with the claims.
+faq:
+  - question: 'What does it mean that every entrant receives exactly one former job?'
+    words: [20, 200]
+    answer:
+      - text: 'The lottery hands out exactly the former jobs of its entrants, one to each entrant, and no entrant receives their own former job back.'
+        rests_on: ['M36']
+      - text: 'So every job keeps exactly one worker, and each status group holds as many jobs after the lottery as before, though not the same ranks.'
+        rests_on: ['M36', 'M50', 'anchor: Every worker holds exactly one job and the number of jobs does not change over time in the economy']
+  - question: 'Can a pool have only one entrant, and what happens then?'
+    words: [20, 200]
+    answer:
+      - text: 'Displacement strikes each job holder with the same chance, so a period can leave exactly one displaced worker in the lottery.'
+        rests_on: ['M39']
+      - text: 'The lottery is then unavailable, because the only former job in the pool is the entrant''s own, and the entrant chooses between the return and the downgrade.'
+        rests_on: ['M55']
+      - text: 'Handing the lone entrant their own former job back at the lottery cost would let the lottery undercut the return whenever the lottery cost is below the upskilling cost, and the firm would then receive nothing.'
+        rests_on: ['M52']
+  - question: 'What does the handling of a pool of one imply for larger pools?'
+    words: [20, 220]
+    answer:
+      - text: 'The chance that fewer than two workers enter the lottery falls to zero as the number of workers grows, for any chance of entry strictly between zero and one.'
+        rests_on: ['M56']
+      - text: 'A displaced worker who enters and finds no partner takes the route it would otherwise have chosen, so the chance of an empty pool does not change who enters, and choices in pools of every size are as if every pool had two entrants or more.'
+        rests_on: ['M57']
+      - text: 'Handing back the lone entrant''s own former job would instead give the lottery a guaranteed minimum that the return lacks, and draw more workers into the lottery in pools of every size.'
+        rests_on: ['M57', 'M52']
+  - question: 'Does a job holder expect to lose the job, and can the job holder protect it?'
+    words: [20, 200]
+    answer:
+      - text: 'A job holder is displaced with the same chance in every period, whatever the rank, and nothing the job holder does changes that chance.'
+        rests_on: ['M39']
+      - text: 'The lottery never takes a job from a job holder, because only the former jobs of entrants are handed out.'
+        rests_on: ['M36', 'M32']
+  - question: 'Who sets the lottery cost, and does the firm''s preference for upskilling survive it?'
+    words: [20, 200]
+    answer:
+      - text: 'Nobody in the model sets the lottery cost, which is the price of competing through connections, the one channel of mobility the firm does not manage.'
+        rests_on: ['anchor: The lottery benefit is an exogenous benefit from social connections that is not managed by the firm', 'M47']
+      - text: 'The firm never receives the lottery cost, and a higher lottery cost leads more displaced workers to return and pay the firm the upskilling cost, so the firm''s preference for upskilling over the lottery holds.'
+        rests_on: ['M53', 'M58', 'anchor: flows back to the firm as upskilling investments']
+  - question: 'How does the choice between the lottery and upskilling look to the firm, to the displaced worker and to workers taken together?'
+    words: [30, 230]
+    answer:
+      - text: 'The displaced worker compares the former income less the upskilling cost with the expected prize less the lottery cost, and so weighs the difference between the two costs against the difference between the prize and the former income.'
+        rests_on: ['M60']
+      - text: 'The firm receives the upskilling cost from a returner and nothing from an entrant, so it prefers the return whatever the two costs are.'
+        rests_on: ['M60']
+      - text: 'Workers taken together recover the lottery cost, so they prefer the lottery whenever the displaced worker does, and also in some cases where the displaced worker returns.'
+        rests_on: ['M60', 'M58']
+  - question: 'How does a status group benefit from the lottery?'
+    words: [30, 230]
+    answer:
+      - text: 'Through the lottery cost a status group gains nothing as a whole, because its members receive in equal shares exactly what its entrants pay, so the lottery cost moves money within the group from those who enter to all members.'
+        rests_on: ['M58']
+      - text: 'The group benefits through ranks instead, because the lottery can move higher ranks from one group to the other, and with two entrants from each group the expected gap between a group''s share of their former income and half the total shrinks with every lottery unless closure is complete.'
+        rests_on: ['M50', 'M51']
+      - text: 'So a group holding the lower ranks gains ranks from an open lottery, and a group holding the higher ranks keeps them longer the stronger closure is.'
+        rests_on: ['M51']
+  - question: 'Where does the lottery cost go?'
+    words: [20, 200]
+    answer:
+      - text: 'The lottery cost stays among workers, in a closed economy in which all income passes between workers and the firm.'
+        rests_on: ['M58', 'anchor: all income circulates between workers and firm']
+      - text: 'Each entrant pays it to the members of the entrant''s own status group, who share it equally.'
+        rests_on: ['M58']
+      - text: 'Such receipts do not depend on one''s own route, so they change no result that rests on first-order dominance or on valuing income at its average.'
+        rests_on: ['M59']
+  - question: 'Why does the model have only one social attribute?'
+    words: [20, 200]
+    answer:
+      - text: 'The status group is the only order outside the market, and a separate set of brokers would have added a second one with its own rules and its own measurement.'
+        rests_on: ['M47']
+      - text: 'Paying the lottery cost to status groups makes the group both the unit that closure acts on and the unit that receives the lottery cost.'
+        rests_on: ['M58', 'M29']
+  - question: 'What is a status group, and how does it differ from rank?'
+    words: [20, 200]
+    answer:
+      - text: 'Rank is the order of jobs on the ladder, set by the firm, whereas the status group is the order outside the market, inherited and not priced.'
+        rests_on: ['M47', 'M2']
+      - text: 'Neither is a function of the other, and the status group acts only on access to partners in the lottery, the one allocation of jobs the firm does not make.'
+        rests_on: ['M47']
+  - question: 'Why can closure not act with fewer than two entrants in each status group?'
+    words: [20, 200]
+    answer:
+      - text: 'With two entrants the lottery is a sure exchange, and with two from one group and one from the other every reassignment moves two of the three jobs across the groups.'
+        rests_on: ['M42', 'M45']
+      - text: 'Closure first acts with two entrants in each group, where one reassignment keeps every job within its group.'
+        rests_on: ['M45', 'M49']
+
 model:
   - id: M1
     anchor: 'Appendix, condition 3: "pareto income list x0 (1 - i)^{-1/a} for 1 <= i <= N"'
@@ -677,6 +768,57 @@ model:
     lean: [Isc.exchange_window_shrinks, Isc.exchange_window_empty, Isc.top_refuses_below_floor, Isc.control_window_full_at_zero_cost]
     status: LEAN_PROVED
     symbols: [X7, X3, X15, X9]
+  - id: M55
+    anchor: 'issue 14, a pool of one'
+    claim: 'The lottery is unavailable to a lone entrant, who chooses between the return and the downgrade. The steady state assumes an economy large enough that a pool of fewer than two entrants is negligible'
+    assumptions: ''
+    evidence: 'lean/IscLean/Economy.lean::Isc.voidPool_tendsto_zero. The only former job in a pool of one is the entrant''s own, which M36 does not hand back. The chance of a pool of fewer than two tends to zero as the number of workers grows (M56), and the rule does not change who enters (M57). Giving the lone entrant the own former job back at the lottery cost would undercut the return whenever the lottery cost is below the upskilling cost, and the firm would receive nothing (M52)'
+    status: DECIDED
+    decision: '17 Oct 2026, the author: option (a) of issue 14, with the large-economy assumption put into Lean'
+    affects: [M24, M30, M33, M36, M39, M52]
+    symbols: [X23, X28]
+  - id: M56
+    anchor: 'consequence of M39 and M55: the large economy'
+    claim: 'If each of $n$ workers enters the lottery independently with the same chance $q$, $0<q<1$, the chance of a pool of fewer than two entrants, $(1-q)^n+nq(1-q)^{n-1}$, tends to zero as $n$ grows'
+    assumptions: 'independent entry with a common chance $q$, as uniform displacement at rate $d$ gives for the workers in ranks that choose the lottery'
+    evidence: 'lean/IscLean/Economy.lean::Isc.voidPool_tendsto_zero. The chance is the sum of the binomial terms for no entrant and one entrant, and all binomial terms sum to one (Isc.voidPool_binomial_terms); the first term is a geometric sequence and the second a constant times $n(1-q)^n$, both tending to zero. Control: with two workers and $q=1/2$ the chance is $3/4$ (Isc.control_void_pool_likely_when_small)'
+    lean: [Isc.voidPool_tendsto_zero, Isc.voidPool_binomial_terms, Isc.control_void_pool_likely_when_small]
+    status: LEAN_PROVED
+    symbols: [X23, X28]
+  - id: M57
+    anchor: 'consequence of M55: the rule for a pool of one in larger pools'
+    claim: 'Under M55 the chance of an empty pool does not change who enters: a displaced worker who enters and finds no partner takes the route it would otherwise have chosen, so entering is at least as good as that route exactly when the draw is. The rule of M52 would instead give the lottery a guaranteed minimum that the return lacks and draw more workers into the lottery in pools of every size'
+    assumptions: 'a chance of an empty pool below one; values compared by expected utility'
+    evidence: 'lean/IscLean/Economy.lean::Isc.void_rule_neutral. $A\le\pi A+(1-\pi)D\iff A\le D$ for $\pi<1$. Control: under M52''s rule, with the lone entrant''s own job worth $8$, the alternative $5$ and the draw $4$, the lottery is entered at $\pi=1/2$ although its draw is worse (Isc.control_cheap_lone_rule_distorts)'
+    lean: [Isc.void_rule_neutral, Isc.control_cheap_lone_rule_distorts]
+    status: LEAN_PROVED
+    symbols: [X23, X7, X16]
+  - id: M58
+    anchor: 'Section 2: "all income circulates between workers and firm"'
+    claim: 'The lottery cost stays among workers. Each entrant pays it to the members of the entrant''s own status group, who share it equally, so every group''s receipts equal its payments in every pool and under any closure rule, and the economy has no leak'
+    assumptions: ''
+    evidence: 'lean/IscLean/Economy.lean::Isc.own_group_dues_balance. The manuscript has the costs of social ties "borne by workers" and not feeding back into the firm''s revenues, and social networks as "an essential mechanism to provide skilled labour". The rule makes the status group both the unit closure acts on (M29) and the unit that receives the lottery cost, with no second social attribute (M47)'
+    lean: [Isc.own_group_dues_balance]
+    status: DECIDED
+    decision: '17 Oct 2026, the author: the lottery cost goes to workers, never out of the closed economy (issue 15 option (b)), shared equally within groups; the choice of receiving group left to tractability. The own group is chosen because it balances every group''s accounts exactly, needs no large-pool argument, and does not depend on the closure rule still open for M29'
+    affects: [M46, M52, M53, M54]
+    symbols: [X7, X24]
+  - id: M59
+    anchor: 'consequence of M58'
+    claim: 'A receipt that does not depend on one''s own route leaves every comparison of sure routes unchanged and leaves the lottery-over-downgrade result of M33 holding for every nondecreasing $u$. So the receipts of M58 change no result that rests on first-order dominance or on valuing income at its average'
+    assumptions: 'results that compare utilities of shifted incomes beyond dominance may change through wealth effects and are not covered'
+    evidence: 'lean/IscLean/Economy.lean::Isc.receipt_preserves_dominance. Shifting every income by the receipt keeps M33''s condition, so M33 applies to the shifted incomes (Isc.receipt_preserves_dominance); sure comparisons are unchanged (Isc.receipt_preserves_sure_comparison)'
+    lean: [Isc.receipt_preserves_dominance, Isc.receipt_preserves_sure_comparison]
+    status: LEAN_PROVED
+    symbols: [X7, X9, X3]
+  - id: M60
+    anchor: 'consequence of M38 and M58: one choice, three interests'
+    claim: 'The entrant compares the return, worth the former income less the upskilling cost, with the lottery, worth its expected prize less the lottery cost. Workers taken together recover the lottery cost, so for them the lottery is worth its expected prize, and whenever the entrant prefers the lottery they do too, while the entrant can prefer the return where they would prefer the lottery. The firm receives the upskilling cost from a returner and nothing from an entrant, so it prefers the return whatever the lottery cost'
+    assumptions: 'valuing income at its average; workers taken together count the lottery cost as a transfer among them (M58)'
+    evidence: 'lean/IscLean/Economy.lean::Isc.workers_prefer_lottery_whenever_entrant_does. Control: former income $10$, upskilling cost $3$, expected prize $8$, lottery cost $2$; the return is worth $7$, the lottery $6$ to the entrant and $8$ to workers taken together (Isc.control_entrant_returns_where_workers_would_gamble). The firm''s preference (Isc.firm_prefers_return) is the source''s accounting, upskilling spending "flows back to the firm"'
+    lean: [Isc.workers_prefer_lottery_whenever_entrant_does, Isc.control_entrant_returns_where_workers_would_gamble, Isc.firm_prefers_return]
+    status: LEAN_PROVED
+    symbols: [X7, X16, X6]
 
 literature:
   - id: L1

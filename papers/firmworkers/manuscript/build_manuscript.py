@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 from check import load_map, reference_citations, cited_map_rows, lean_names
 
-LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean', 'lean/IscLean/Closure.lean', 'lean/IscLean/Identification.lean', 'lean/IscLean/Unravelling.lean', 'lean/IscLean/Displacement.lean', 'lean/IscLean/Reassignment.lean', 'lean/IscLean/Routes.lean', 'lean/IscLean/SteadyState.lean', 'lean/IscLean/Mobility.lean', 'lean/IscLean/BaseCase.lean', 'lean/IscLean/TwoStage.lean']
+LEAN_FILES = ['lean/IscLean.lean', 'lean/IscLean/Lottery.lean', 'lean/IscLean/Ladder.lean', 'lean/IscLean/Gap.lean', 'lean/IscLean/Moments.lean', 'lean/IscLean/Closure.lean', 'lean/IscLean/Identification.lean', 'lean/IscLean/Unravelling.lean', 'lean/IscLean/Displacement.lean', 'lean/IscLean/Reassignment.lean', 'lean/IscLean/Routes.lean', 'lean/IscLean/SteadyState.lean', 'lean/IscLean/Mobility.lean', 'lean/IscLean/BaseCase.lean', 'lean/IscLean/TwoStage.lean', 'lean/IscLean/Economy.lean']
 BUILD_FILES = ['lean/lean-toolchain', 'lean/lakefile.toml', 'lean/lake-manifest.json']
 SPECIAL = {'&': r'\&', '%': r'\%', '#': r'\#', '_': r'\_', '{': r'\{', '}': r'\}',
            '~': r'\textasciitilde{}', '^': r'\textasciicircum{}', '\\': r'\textbackslash{}',
@@ -229,6 +229,16 @@ def base_case_section(d):
             + body + '\n\n{\\small\n' + model_table(rows) + '}')
 
 
+def faq_section(d):
+    items = []
+    for item in d.get('faq') or []:
+        body = ' '.join(escape_text(s['text']) for s in item.get('answer') or [])
+        items.append(f"\\paragraph{{{escape_text(item['question'])}}} {body}")
+    return ('Each answer rests sentence by sentence on the rows, Lean theorems or source premises recorded in '
+            '\\texttt{claims.yaml}, and is stamped like the summaries, so the answers move with the claims.\n\n'
+            + '\n\n'.join(items))
+
+
 def idea_summaries(d):
     blocks = '\n\n'.join(plain_block(i['sentences'], escape_text(i['title']), numbered=True)
                          for i in d.get('idea_summaries') or [])
@@ -321,6 +331,9 @@ Headline and concluding claims may rest only on model claims, literature claims 
 \subsection*{{Pending}}
 {{\small
 {pending_table(by_status(d, 'OPEN'))}}}
+
+\section{{Frequently asked questions}}
+{faq_section(d)}
 
 \section{{References}}
 {{\small
