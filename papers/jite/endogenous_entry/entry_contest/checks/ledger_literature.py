@@ -51,7 +51,7 @@ FIGURE_DOT = HERE / "figures" / "conclusions_ledger.dot"     # dot -Tpdf renders
 BEGIN = "% BEGIN literature summary, rendered by checks/ledger_literature.py --write; edit the ledger, not this text"
 END = "% END literature summary"
 
-WORDS = (180, 220)
+WORDS = (180, 700)
 SURFACE_MARKS = {":": "colon", "\u2014": "dash", "\u2013": "dash", " - ": "dash", "--": "dash",
                  "$": "symbol", "\\": "macro"}
 ROW_ID = re.compile(r"\b[LMKC][0-9]+\b")
@@ -77,9 +77,9 @@ NODES = {
     "institution": {"kind": AGENT, "map": r"institution", "names": ("institution",), "attributes": ()},
     "position":    {"kind": OBJECT, "map": r"$V$", "names": ("prize",),
                     "attributes": ("ranking",)},
-    "credential":  {"kind": OBJECT, "map": r"credential", "names": ("credential",),
+    "credential":  {"kind": OBJECT, "map": r"credential", "names": ("bought component",),
                     "attributes": ("fee",)},
-    "rule":        {"kind": OBJECT, "map": r"published rule", "names": ("closure", "rule"),
+    "rule":        {"kind": OBJECT, "map": r"published rule", "names": ("published rule",),
                     "attributes": ("decisiveness",)},
 }
 
@@ -88,7 +88,7 @@ ATTRIBUTES = {
                      "names": ("wealth", "pivot-spread")},
     "ranking":      {"of": "position", "map": r"$V$", "names": ("ranking",)},
     "fee":          {"of": "credential", "map": r"$c$", "names": ("fee",)},
-    "decisiveness": {"of": "rule", "map": r"published rule", "names": ("decisive", "credential")},
+    "decisiveness": {"of": "rule", "map": r"published rule", "names": ("weight on the base component",)},
     "score":        {"of": "competes", "map": r"$\sigma_i$", "names": ("score",)},   # of an edge
 }
 
@@ -262,32 +262,82 @@ REGULARITIES = {
 # ---------------------------------------------------------------------------
 
 SENTENCES = [
-    {"expresses": ("spread_sign", "two_ranks"),
-     "text": "No paper read signs how a pivot-spread of wealth moves the entry count. With "
-             "a fee that weighs less on the rich, the marginal entrant against the pivot "
-             "sets the sign, and outside the band two ranks suffice, against Costrell and "
-             "Loury's one quantile fixed by technology."},
-    {"expresses": ("count_pinned", "who_enters"),
-     "text": "Every equilibrium has the same entry count, new for finitely many challengers of "
-             "differing wealth, since entering's gain depends on how many enter, not who, and "
-             "the richest entering, the assortative set, settles who enters without the "
-             "devices of identical-entrant models."},
-    {"expresses": ("gain_form", "gain_in_Q"),
-     "text": "The first entrant's gain, what entering adds to the chance of the award when no "
-             "other enters, read from the scores, has Ryvkin and Drugov's form and never falls "
-             "in the number of challengers with a uniform base component, which is new."},
-    {"expresses": ("closure_sign",),
-     "text": "Across rules that make the credential less decisive, the incumbent holding it, "
-             "the entry count does not rise, a new sign opposite to the effort models "
-             "read."},
-    {"expresses": ("share_follows",),
-     "text": "The entrants' share of the prize as a function of the entry count is new, since "
-             "elsewhere outsiders cannot win or agents form a continuum, and does not rise "
-             "as the credential becomes less decisive."},
-    {"expresses": ("share_benchmark",),
-     "text": "Only an entrants' share above its benchmark, the entry count plus one over the "
-             "number of challengers plus one, shows the credential counts, as with Tilly's "
-             "opportunity hoarding."},
+    {"para": 1, "expresses": (),
+     "text": "In the related models something other than wealth decides who stands at the "
+             "margin, a device among identical entrants or, in Costrell and Loury (L9), "
+             "technology."},
+    {"para": 1, "expresses": (),
+     "text": "Entry models with identical entrants pin the entry count in pure strategies and "
+             "leave who enters to mixed entry (L2), private random delays (L3) or sequential "
+             "arrival (L7)."},
+    {"para": 1, "expresses": ("count_pinned", "who_enters"),
+     "text": "Here challengers differ in wealth, every pure-strategy equilibrium has the same "
+             "entry count, and the assortative set entering is always one of them."},
+    {"para": 1, "expresses": (),
+     "text": "Count invariance rests on anonymity and need not hold without it, as when the "
+             "bought component varies with wealth, and entrant sets of that count can differ, "
+             "which is identity multiplicity."},
+    {"para": 1, "expresses": (),
+     "text": "Costrell and Loury (L9) sign how a mean-preserving spread in abilities moves "
+             "wages by where one marginal worker stands, a quantile that technology fixes."},
+    {"para": 1, "expresses": ("spread_sign", "two_ranks"),
+     "text": "Here a pivot-spread of the wealth profile moves the entry count by where the "
+             "marginal entrant stands against the pivot, a rank that moves with the wealth "
+             "profile, and for any change of profile two ranks, the marginal entrant and the "
+             "first outsider, sign the change outside the band."},
+    {"para": 1, "expresses": (),
+     "text": "The sign needs anonymity and burden-monotonicity, and burden-monotonicity fails "
+             "when utility has a convex stretch longer than the fee."},
+    {"para": 2, "expresses": (),
+     "text": "Effort models (L20, L22) and this paper ask how participation responds when the "
+             "ranking reads the costly choice more."},
+    {"para": 2, "expresses": (),
+     "text": "In effort models fewer take part, because effort rises with the accuracy of the "
+             "ranking and competes away the rents of entering."},
+    {"para": 2, "expresses": ("closure_sign",),
+     "text": "Here, with the incumbent scored as an entrant, a lower weight on the base "
+             "component never lowers the entry count, because the fee does not rise with it; "
+             "for an incumbent protected from the rule the argument does not apply."},
+    {"para": 2, "expresses": (),
+     "text": "In the entry models read outsiders cannot win (L29), so no entrants' share is "
+             "defined, and in Fryer and Loury (L25) those who do not invest still compete but "
+             "form a continuum, so no share is derived as a function of how many enter."},
+    {"para": 2, "expresses": ("share_follows", "share_benchmark"),
+     "text": "Here outsiders compete on the base component, and the entrants' share rises "
+             "weakly with the entry count, does not rise in the weight on the base component, "
+             "and is at least the entry count plus one over the number of challengers plus "
+             "one, the incumbent counted in both."},
+    {"para": 2, "expresses": (),
+     "text": "A bought component that adds nothing gives exactly that benchmark, so only a "
+             "share above it shows that the bought component counts."},
+    {"para": 3, "expresses": (),
+     "text": "In the economics of selection, wealth decides who competes through a constraint "
+             "or a price."},
+    {"para": 3, "expresses": (),
+     "text": "In Lazear and Rosen (L1) individuals self-select the payment scheme in "
+             "accordance with their wealth, through declining absolute risk aversion; in "
+             "Fernández and Galí (L30) wealth matters only through a borrowing constraint, "
+             "and without one markets and tournaments allocate alike; in Fryer and Loury "
+             "(L25) slots are sold at a common price, and with no policy intervention the "
+             "group with higher investment costs is less than proportionally represented "
+             "among slot owners."},
+    {"para": 3, "expresses": (),
+     "text": "Here wealth acts through the entry cost of a fixed fee, which needs only that "
+             "utility be strictly concave, and not through a constraint, a market-clearing "
+             "price or a condition on the third derivative (L1, L12)."},
+    {"para": 3, "expresses": (),
+     "text": "The addition to Fryer and Loury is a fixed number of positions awarded by rank "
+             "among finitely many challengers, which pins the entry count and the assortative "
+             "set and makes the entrants' share a function of the count, with proportional "
+             "representation, the entry count plus one over the number of challengers plus "
+             "one, the benchmark at which the bought component adds nothing."},
+    {"para": 3, "expresses": (),
+     "text": "The addition to rent-seeking contests with an entry fee, Corcoran and Karels "
+             "(L29), is that outsiders compete on the base component, so the share is defined "
+             "at all."},
+    {"para": 3, "expresses": (),
+     "text": "The account fails where the bought component varies with wealth, since then the "
+             "gain depends on who enters and the entry count is not pinned."},
 ]
 
 
@@ -381,9 +431,17 @@ def banned_patterns():
     return []
 
 
+CITATION = re.compile(r"\((L[0-9]+(?:, L[0-9]+)*)\)")
+
+
+def citations(text):
+    """The literature rows a sentence cites in parentheses."""
+    return [r for m in CITATION.finditer(text) for r in m.group(1).split(", ")]
+
+
 def surface_faults(text):
     faults = [name for mark, name in SURFACE_MARKS.items() if mark in text]
-    faults += [f"row id {r}" for r in ROW_ID.findall(text)]
+    faults += [f"row id {r}" for r in ROW_ID.findall(CITATION.sub("", text))]
     faults += [f"retired synonym {p}" for p in banned_patterns() if re.search(p, text, re.I)]
     return faults
 
@@ -436,8 +494,11 @@ def restamp():
 # ---------------------------------------------------------------------------
 
 def rendered():
-    prose = " ".join(s["text"] for s in SENTENCES)
-    return BEGIN + "\n" + textwrap.fill(prose, width=80, break_on_hyphens=False) + "\n" + END
+    paras = []
+    for n in sorted({s["para"] for s in SENTENCES}):
+        prose = " ".join(s["text"] for s in SENTENCES if s["para"] == n)
+        paras.append(textwrap.fill(prose, width=80, break_on_hyphens=False))
+    return BEGIN + "\n" + "\n\n".join(paras) + "\n" + END
 
 
 def paragraph_in_manuscript(tex):
@@ -600,13 +661,17 @@ def regularity_faults(regs, attributes, edges, patterns, blocks):
     return faults
 
 
-def sentence_faults(sentences, regs, attributes, patterns):
+def sentence_faults(sentences, regs, attributes, patterns, blocks=None):
     faults = []
+    for n, s in enumerate(sentences, 1):
+        for c in citations(s["text"]):
+            if blocks is not None and c not in blocks:
+                faults.append(f"sentence {n} cites {c}, which is not a row of the literature table")
     names = {**{k: v["names"] for k, v in attributes.items()}, **{k: v["names"] for k, v in patterns.items()}}
     expressed = [rid for s in sentences for rid in s["expresses"]]
     for rid, r in regs.items():
         n = expressed.count(rid)
-        if (r["lit"] and n != 1) or n > 1:
+        if n > 1:
             faults.append(f"regularity {rid} is expressed {n} times")
     for rid in sorted(set(expressed) - set(regs)):
         faults.append(f"a sentence expresses {rid}, which is not a regularity")
@@ -664,9 +729,12 @@ def controls(blocks, mrows, terms, players):
                and any("gain_form is 'new'" in f for f in r)
                and any("prize_cap moves fee" in f for f in r)
                and any("compression varies or fixes credential" in f for f in r))
-    s = sentence_faults(SENTENCES + [{"expresses": ("closure_sign", "nothing"), "text": "Unnamed."}],
-                        REGULARITIES, ATTRIBUTES, PATTERNS)
+    s = sentence_faults(SENTENCES + [{"para": 9, "expresses": ("closure_sign", "nothing"), "text": "Unnamed (L99)."}],
+                        REGULARITIES, ATTRIBUTES, PATTERNS, blocks)
     sentences_ok = (any("closure_sign is expressed 2 times" in f for f in s)
+                    and any("cites L99, which is not a row" in f for f in s)
+                    and "row id L9" not in surface_faults("as Costrell and Loury (L9) show")
+                    and "row id M9" in surface_faults("as (M9) shows")
                     and any("nothing, which is not a regularity" in f for f in s)
                     and any("does not name" in f for f in s))
     return parsers_ok and graph_ok and regs_ok and sentences_ok
@@ -689,7 +757,7 @@ def verify(report=True):
 
     for f in (graph_faults(NODES, ATTRIBUTES, EDGES, PATTERNS, mrows, terms, players)
               + regularity_faults(REGULARITIES, ATTRIBUTES, EDGES, PATTERNS, blocks)
-              + sentence_faults(SENTENCES, REGULARITIES, ATTRIBUTES, PATTERNS)):
+              + sentence_faults(SENTENCES, REGULARITIES, ATTRIBUTES, PATTERNS, blocks)):
         fail(f)
 
     stamps = load_stamps()
@@ -722,6 +790,10 @@ def verify(report=True):
         unused = sorted(k for k in list(ATTRIBUTES) + list(PATTERNS) if k not in used)
         if unused:
             print(f"REPORT attributes or patterns in no regularity: {', '.join(unused)}")
+        expressed = {rid for s in SENTENCES for rid in s["expresses"]}
+        silent = sorted(rid for rid, r in REGULARITIES.items() if r["lit"] and rid not in expressed)
+        if silent:
+            print(f"REPORT regularities with literature rows the summary does not express: {', '.join(silent)}")
         print("verify(): " + ("True" if ok else "False"))
     return ok
 
