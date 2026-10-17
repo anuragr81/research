@@ -1,87 +1,22 @@
-% Ledger diagram of Paper A1, 17 October 2026.
+% Standalone drawing of the ledger diagram of Paper A1, for the planning notes.
 %   pdflatex -output-directory=build notes/ledger_diagram.tex
-% Two entities, Person and Venue (notes/ledger_diagram.md, section 1). The
-% boxes inside Person are roles, not entities. Arrows are actions of one role
-% on another, labelled by the verb and the rows that settle them or by the
-% open relationship (U numbers of notes/entities.md). A double arrow is a
-% joint action. Solid = settled by a model row, dashed = a rule or input the
-% model takes as given, dotted = open. "Recorded as" marks the actions that
-% reach the data.
-\documentclass[tikz,border=8pt]{standalone}
+% The picture is ledger_picture.tex, shared with skeleton_ClassMarkers.tex.
+% Here the macros of that file print the ids of notes/entities.md.
+\documentclass[border=8pt]{standalone}
+\usepackage{tikz}
 \usepackage[T1]{fontenc}
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{amsmath}
 \usetikzlibrary{arrows.meta,positioning,fit,calc,backgrounds}
+\newcommand{\eid}[1]{\space(#1)}
+\newcommand{\uid}[1]{\space(#1)}
+\newcommand{\mix}[1]{, #1}
+\newcommand{\nodeid}[2]{\space(#1\ifx\relax#2\relax\else, #2\fi)}
 \begin{document}
-\begin{tikzpicture}[
-  >={Stealth[length=2.2mm]},
-  every node/.style={font=\small},
-  role/.style={draw=black!60, line width=0.5pt, align=center, text width=3.6cm, minimum height=4.2cm, inner sep=4pt, rounded corners=4pt, fill=blue!10},
-  pop/.style={draw=black!60, line width=0.5pt, align=center, text width=4.2cm, minimum height=1.2cm, inner sep=4pt, fill=black!8},
-  venue/.style={draw=black!60, line width=0.7pt, align=center, text width=4.4cm, minimum height=3.0cm, inner sep=5pt, rounded corners=4pt, fill=orange!15},
-  entity/.style={draw=black!80, line width=0.8pt, rounded corners=8pt, inner sep=10pt, fill=blue!3},
-  title/.style={font=\small\bfseries, anchor=north west, align=left},
-  attr/.style={font=\scriptsize, anchor=north west, align=left, text width=5.6cm},
-  lab/.style={font=\scriptsize, align=center, fill=white, inner sep=1.2pt, text width=3.0cm},
-  settled/.style={->, line width=0.6pt},
-  given/.style={->, line width=0.6pt, dashed},
-  open/.style={->, line width=0.6pt, dotted, line cap=round},
-  jointsettled/.style={<->, line width=0.6pt},
-  jointopen/.style={<->, line width=0.6pt, dotted, line cap=round},
-]
-% ---------------------------------------------------------------- roles of Person
-\node[pop]  (Pop)      at (7.5,10.5)  {Population state (E4, E5)\\ standing and spread of each label, $\bar c_I,\nu_I$ and $\bar c_O,\nu_O$};
-\node[role] (Observer) at (0,3)      {Observer (E2, P1)\\ own class $y$, own label\\[2pt] \scriptsize low-class host member (E6) when $y$ is low in the host label};
-\node[role] (Person)   at (9,3)      {Person met (E1, P2 when passing)\\ class unseen, marker shown\\[2pt] \scriptsize passer (E7) when the label shown is not the own};
-\node[role] (Client)   at (12,-5.5) {Client (E11)\\ a host person buying from the venue, $N$ of them, weight $\alpha$};
-
-% ---------------------------------------------------------------- the Person entity
-\begin{scope}[on background layer]
-\node[entity, fit=(Pop)(Observer)(Person)(Client), inner xsep=14pt, inner ysep=22pt] (PersonBox) {};
-\end{scope}
-\node[title] at ([xshift=4pt, yshift=-2pt]PersonBox.north west) {Person};
-\node[attr]  at ([xshift=4pt, yshift=-16pt]PersonBox.north west) {attributes: class $c$, unseen; group label; marker (A4); budget $b=\beta c$ (A15). The boxes are roles one person plays.};
-
-% ---------------------------------------------------------------- the Venue entity
-\node[venue] (Venue) at (22,3) {\textbf{Venue} (E10, P5)\\ admission rate, price, location, atmosphere\\[3pt] \scriptsize constraint: the law's strictness bars admission on the label (E14)\\[3pt] \scriptsize role: the setting (E16) when the measured encounters take place in it};
-
-% ---------------------------------------------------------------- person on person, three straight actions
-\draw[settled] ([yshift=15mm]Person.west) -- node[lab, pos=0.5, above=1pt, text width=4.4cm] {shows the marker (A4), read as evidence on the label alone (M1 to M3, M17)} ([yshift=15mm]Observer.east);
-\draw[settled] (Observer.east) -- node[lab, pos=0.5, text width=4.2cm] {engages or refuses by own class and expected distance (A14, M18); recorded as the refusal share $F$ against the standing} (Person.west);
-\draw[open]    ([yshift=-15mm]Person.west) -- node[lab, pos=0.5, below=1pt, text width=4.4cm] {shows class within the label, the penalty vanishes (U5)} ([yshift=-15mm]Observer.east);
-
-% ---------------------------------------------------------------- the low-class host member, above
-\draw[open]    (Observer.north east) to[bend left=30] node[lab, pos=0.5, above=1pt, text width=3.4cm] {a low-class host member prefers outsiders (U3)} (Person.north west);
-
-% ---------------------------------------------------------------- the population state
-\draw[settled] (Pop.west) to[bend right=25] node[lab, pos=0.45, anchor=east, xshift=-2pt, text width=3.0cm] {standing and spread of each label enter the expected distance (M18, U12)} (Observer.north);
-\draw[given]   ([xshift=8mm]Person.north) to[bend right=15] node[lab, pos=0.5, anchor=west, xshift=2pt, text width=3.0cm] {passes, leaving the visible label, the standing falls (A12, M14, U6)} (Pop.east);
-
-% ---------------------------------------------------------------- the two joint actions, below
-\draw[jointopen]    ([yshift=-3mm]Observer.south east) to[bend right=25] node[lab, pos=0.5, below=1pt, text width=4.4cm] (PairLab) {engage, both ways (U2); recorded as friendships, friending bias as Chetty et al.\ measure it (U11)} ([yshift=-3mm]Person.south west);
-\draw[jointsettled] ([xshift=-9mm]Observer.south) to[bend right=50] node[lab, pos=0.5, below=1pt, text width=4.6cm] {share one activity at the midpoint level, each pays from the own budget, each loses $\kappa(c_i-c_j)^2$ (A15, M19)} ([xshift=9mm]Person.south);
-
-% ---------------------------------------------------------------- the venue and the person met
-\draw[given]   ([yshift=10mm]Venue.west) -- node[lab, pos=0.5, above=1pt, text width=4.0cm] {admits or excludes outsiders by the admission rate (A13, M15); recorded as admissions, callbacks} ([yshift=10mm]Person.east);
-\draw[given]   ([yshift=-4mm]Person.east) -- node[lab, pos=0.5, below=1pt, text width=3.4cm] {pays the price, which may certify class (U10)} ([yshift=-4mm]Venue.west);
-
-% ---------------------------------------------------------------- the venue as the setting
-\draw[open]    ([yshift=-12mm]Venue.west) to[out=185, in=-15] (PairLab.east);
-\node[lab, text width=3.6cm] at (13.6,0.35) {as the setting, fixes who can meet whom and the label shares (U11)};
-
-% ---------------------------------------------------------------- the population state and the venue
-\draw[given]   (Pop.east) to[bend left=15] node[lab, pos=0.5, above=1pt, text width=3.4cm] {the host standing enters the admission margin (M15)} (Venue.north);
-
-% ---------------------------------------------------------------- the clients and the venue
-\draw[given]   (Client.north east) -- node[lab, pos=0.5, sloped, above=1pt, text width=3.2cm] {pay, self-select on atmosphere (A13, U7)} (Venue.south);
-\draw[open]    (Client.east) to[bend right=30] node[lab, pos=0.5, below=1pt, text width=3.6cm] {know which venue is right, shadow information (U9)} ([xshift=14mm]Venue.south);
-\draw[open]    ([xshift=-14mm]Venue.south) to[bend right=25] (Client.north);
-\node[lab, text width=3.8cm] at (14.2,-1.75) {screens by price, location, atmosphere, the law barring the label (U8)};
-
-% ---------------------------------------------------------------- legend
-\node[font=\small, align=left, anchor=south west] at ([yshift=10pt]PersonBox.north west) {%
-  \textbf{Paper A1 ledger, 17 October 2026.} Two entities, Person and Venue. The boxes inside Person are roles. Arrows are actions of one role on another, labelled by the rows that settle them or by the open relationship. A double arrow is a joint action.\\
-  Solid = settled by a model row. \quad Dashed = a rule or input the model takes as given. \quad Dotted = open, with no row, assumption or map object. \quad "Recorded as" marks the actions that reach the data.};
-\end{tikzpicture}
+\begin{minipage}{27cm}
+\input{ledger_picture.tex}\par\bigskip
+{\small\textbf{Paper A1 ledger, 17 October 2026.} Two entities, Person and Platform. The boxes inside Person are roles. Arrows are actions of one role on another, labelled by the rows that settle them or by the open relationship. A double arrow is a joint action.\par
+Solid = settled by a model row. \quad Dashed = a rule or input the model takes as given. \quad Dotted = open, with no row, assumption or map object. \quad ``Recorded as'' marks the actions that reach the data.\par}
+\end{minipage}
 \end{document}

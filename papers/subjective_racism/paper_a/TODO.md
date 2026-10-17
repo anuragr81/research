@@ -222,6 +222,17 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   sum alone. What is still assumed is the quadratic payoff of A15 and the
   pair's rule of minimising the two losses, not derived from bargaining.
   The novelty claim is C24, pending.
+- [x] **D7. Draw the ledger as a graph of entities and actions, and put the
+  graph in the manuscript. Decided 17 Oct 2026 by the author.** The author
+  reduced the entities to two, the person and the platform ("aren't client,
+  host/outsider group, pair just instances of person met and observer",
+  "record is also an action", "Shared activity is also an action"), then
+  asked that "the diagram needs to be in the manuscript" and that the
+  manuscript be renamed `skeleton_<SHORTENED_TITLE>`, the title in 15
+  characters or fewer. The title is "Class Read from Group Markers", so the
+  file is `skeleton_ClassMarkers.tex`. The picture is `ledger_picture.tex`,
+  Figure 1 in the Players subsection, on a landscape page, and the planning
+  note is `notes/ledger_diagram.md`.
 
 ## Novelty ledger
 

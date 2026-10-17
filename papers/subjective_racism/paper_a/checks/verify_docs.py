@@ -1,7 +1,7 @@
 """Does the manuscript's prose agree with the bundle's generated evidence?
 
 Runs last in verify.sh, after VERIFICATION.md is written, and takes that file as
-argv[1]. A theorem count stated in MANUSCRIPT.tex must be written in digits and
+argv[1]. A theorem count stated in skeleton_ClassMarkers.tex must be written in digits and
 must match the Mathlib audit of this run. A count spelled in words is refused,
 because a count in words once escaped a numeric check in the reference bundle.
 """
@@ -20,7 +20,7 @@ def check(name, ok, detail=""):
 HERE = pathlib.Path(__file__).resolve().parent.parent
 ver_path = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "VERIFICATION.md"
 ver = ver_path.read_text()
-tex = (HERE / "MANUSCRIPT.tex").read_text()
+tex = (HERE / "skeleton_ClassMarkers.tex").read_text()
 
 COUNT_WORDS = (r"(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|"
                r"twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred)")
@@ -33,7 +33,7 @@ def stated_counts(text):
 
 
 print("=" * 72)
-print("D1  THEOREM COUNTS STATED IN MANUSCRIPT.tex vs THE GENERATED AUDIT")
+print("D1  THEOREM COUNTS STATED IN skeleton_ClassMarkers.tex vs THE GENERATED AUDIT")
 print("=" * 72)
 m = re.search(r"theorems:\s*(\d+);\s*audited:\s*(\d+)", ver)
 if not m:

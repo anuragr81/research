@@ -1,4 +1,4 @@
-% MANUSCRIPT.tex, the manuscript skeleton for Paper A1. Created 14 October
+% skeleton_ClassMarkers.tex, the manuscript skeleton for Paper A1. Created 14 October
 % 2026 as pass 1 of the plan in TODO.md, following papers/MANUSCRIPT_SKELETON.md.
 % Restricted to one generation on 15 October 2026 (TODO.md, pass 15), and
 % checks/verify_no_law.py fails if an object across generations enters.
@@ -40,6 +40,12 @@
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{pdflscape}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,fit,calc,backgrounds}
 
 \emergencystretch=1.5em
 
@@ -229,6 +235,22 @@ decision and the member's passing decision enter as rules taken as given.
 The last column names the counterpart in the papers read, where a
 literature row draws the parallel.
 
+Figure~\ref{fig:ledger} draws the same model as a graph, and the graph merges
+entries of the table. The observer (P1) and the member who may pass (P2) are
+two roles of one entity, the person, and the client of the platform is a
+third role of the same entity. The two groups (P3, P4) are not entities of
+their own. Each group is a set of persons with a standing and a spread, and
+the graph draws the two groups together as the population state of the
+persons. The pair (P6) is not an
+entity either. Its engagement and its shared activity are two actions that
+the observer and the person met take together, and the graph draws each as a
+double arrow. The platform (P5) is the second entity. A solid arrow is an
+action that model rows settle, a dashed arrow is a rule or an input that the
+model takes as given, and a dotted arrow is open, with no row, assumption or
+map object that supports the arrow. Of fifteen arrows, four are solid, five
+are dashed and six are dotted. The four solid arrows all lie within the
+person, and no arrow of the platform is solid.
+
 \footnotesize
 \begin{longtable}{@{}P{0.7cm}P{2.0cm}P{3.2cm}P{4.4cm}P{3.4cm}P{1.5cm}@{}}
 \caption{Players of the model, the choice each faces and how the rows settle it.}
@@ -299,6 +321,21 @@ literature row draws the parallel.
   {M19, L10, L11}
 \end{longtable}
 \normalsize
+
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\adjustbox{max width=\linewidth, max height=0.86\textheight}{\input{ledger_picture.tex}}
+\caption{The model as a graph of two entities, the person and the platform.
+The boxes inside the person are roles. An arrow is an action of one role on
+another, labelled by the rows that settle the action, and a double arrow is
+an action that two roles take together. Solid arrows are settled by model
+rows, dashed arrows are rules or inputs taken as given, and dotted arrows
+are open. ``Recorded as'' marks an action that reaches the data.}
+\label{fig:ledger}
+\end{figure}
+\end{landscape}
+
 
 \subsection{Assumptions}
 

@@ -1,9 +1,9 @@
-"""Builds the table of Lean files in Appendix B of MANUSCRIPT.tex from the rows
+"""Builds the table of Lean files in Appendix B of skeleton_ClassMarkers.tex from the rows
 that cite them, and is imported by verify_docs.py to check the table is
 current.
 
     python checks/lean_files_table.py          print the table
-    python checks/lean_files_table.py --write  rewrite it in MANUSCRIPT.tex
+    python checks/lean_files_table.py --write  rewrite it in skeleton_ClassMarkers.tex
 """
 import pathlib
 import re
@@ -100,7 +100,7 @@ def current(tex):
 
 
 if __name__ == "__main__":
-    path = HERE / "MANUSCRIPT.tex"
+    path = HERE / "skeleton_ClassMarkers.tex"
     tex = path.read_text()
     new, _, _ = table(tex)
     if "--write" in sys.argv:

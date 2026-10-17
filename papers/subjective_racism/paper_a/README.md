@@ -14,7 +14,8 @@ R1) are rows of Paper A2.
 
 | Path | Role |
 |---|---|
-| `MANUSCRIPT.tex` | The skeleton, and the only canonical statement of the results. |
+| `skeleton_ClassMarkers.tex` | The skeleton, and the only canonical statement of the results. |
+| `ledger_picture.tex` | The picture of Figure 1, two entities and fifteen actions. The manuscript includes it, and `notes/ledger_diagram.tex` draws it alone for the planning notes. |
 | `MEASUREMENT_MAP.tex` | Companion note. Every object of the model with one name, its type, what it represents, whether it is directly observed and how an observer obtains it. Its Name column is the terminology. |
 | `TODO.md` | The pass plan, the claim queue, the author's decisions and the novelty ledger. Read it first. |
 | `lean/mathlib/` | Lake project pinned to Lean `v4.24.0-rc1` and Mathlib `14871d5`. |
@@ -29,7 +30,7 @@ R1) are rows of Paper A2.
     cd lean/mathlib && lake exe cache get && lake build
     ./verify.sh
     lit/verify_lit.sh
-    pdflatex MANUSCRIPT.tex && bibtex MANUSCRIPT && pdflatex MANUSCRIPT.tex && pdflatex MANUSCRIPT.tex
+    pdflatex skeleton_ClassMarkers.tex && bibtex skeleton_ClassMarkers && pdflatex skeleton_ClassMarkers.tex && pdflatex skeleton_ClassMarkers.tex
     pdflatex MEASUREMENT_MAP.tex
 
 `lean/mathlib/.lake/` is not committed. On this machine it was copied, by

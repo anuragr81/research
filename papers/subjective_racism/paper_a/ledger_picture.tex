@@ -1,0 +1,79 @@
+% ledger_picture.tex, the picture of Figure 1 of skeleton_ClassMarkers.tex.
+% It is included by the manuscript and by notes/ledger_diagram.tex, the
+% standalone drawing for the planning notes. Two entities, Person and Platform.
+% The boxes inside Person are roles. An arrow is an action of one role on
+% another, and a double arrow is a joint action. Solid arrows are settled by a
+% model row, dashed arrows are rules or inputs taken as given, and dotted
+% arrows are open. The macros below carry the ids of notes/entities.md (E and
+% U numbers). They print nothing in the manuscript, where those notes do not
+% appear, and the standalone drawing redefines them to print the ids.
+\providecommand{\eid}[1]{}
+\providecommand{\uid}[1]{}
+\providecommand{\mix}[1]{}
+\providecommand{\nodeid}[2]{\ifx\relax#2\relax\else\space(#2)\fi}
+\sffamily
+\begin{tikzpicture}[
+  >={Stealth[length=2.2mm]},
+  every node/.style={font=\small},
+  role/.style={draw=black!60, line width=0.5pt, align=center, text width=3.6cm, minimum height=4.2cm, inner sep=4pt, rounded corners=4pt, fill=blue!10},
+  pop/.style={draw=black!60, line width=0.5pt, align=center, text width=4.2cm, minimum height=1.2cm, inner sep=4pt, fill=black!8},
+  platform/.style={draw=black!60, line width=0.7pt, align=center, text width=4.4cm, minimum height=3.0cm, inner sep=5pt, rounded corners=4pt, fill=orange!15},
+  entity/.style={draw=black!80, line width=0.8pt, rounded corners=8pt, inner sep=10pt, fill=blue!3},
+  title/.style={font=\small\bfseries, anchor=north west, align=left},
+  attr/.style={font=\scriptsize, anchor=north west, align=left, text width=5.6cm},
+  lab/.style={font=\scriptsize, align=center, fill=white, inner sep=1.2pt, text width=3.0cm},
+  settled/.style={->, line width=0.6pt},
+  given/.style={->, line width=0.6pt, dashed},
+  open/.style={->, line width=0.6pt, dotted, line cap=round},
+  jointsettled/.style={<->, line width=0.6pt},
+  jointopen/.style={<->, line width=0.6pt, dotted, line cap=round},
+]
+% ---------------------------------------------------------------- roles of Person
+\node[pop]  (Pop)      at (7.5,9.7) {Population state\eid{E4, E5}\\ standing and spread of each group, $\bar c_I,\nu_I$ and $\bar c_O,\nu_O$};
+\node[role] (Observer) at (0,3)      {Observer\nodeid{E2}{P1}\\ own class $y$, own group\\[2pt] \scriptsize a low-class host member\eid{E6} when $y$ is low in the host group};
+\node[role] (Person)   at (9,3)      {Person met\nodeid{E1}{P2 when passing}\\ class unseen, marker shown\\[2pt] \scriptsize a passer\eid{E7} when the group shown is not the own};
+\node[role,minimum height=2.4cm] (Client) at (12,-4.6) {Client\eid{E11}\\ a host person buying from the platform, $N$ of them, weight $\alpha$};
+
+% ---------------------------------------------------------------- the Person entity
+\begin{scope}[on background layer]
+\node[entity, fit=(Pop)(Observer)(Person)(Client), inner xsep=14pt, inner ysep=22pt] (PersonBox) {};
+\end{scope}
+\node[title] at ([xshift=4pt, yshift=-2pt]PersonBox.north west) {Person};
+\node[attr]  at ([xshift=4pt, yshift=-16pt]PersonBox.north west) {Each person has a class $c$ that is unseen, a group, a marker (A4) and a budget $b=\beta c$ (A15). The boxes are roles that one person plays.};
+
+% ---------------------------------------------------------------- the Platform entity
+\node[platform] (Platform) at (22,3) {\textbf{Platform}\nodeid{E10}{P5}\\ admission rate, price, location, atmosphere\\[3pt] \scriptsize The law's strictness bars admission on the group, a constraint\eid{E14}.\\[3pt] \scriptsize The platform is the setting\eid{E16} when the measured encounters take place in it.};
+
+% ---------------------------------------------------------------- person on person, three straight actions
+\draw[settled] ([yshift=15mm]Person.west) -- node[lab, pos=0.5, above=1pt, text width=4.4cm] {shows the marker (A4), read as evidence on the group alone (M1 to M3, M17)} ([yshift=15mm]Observer.east);
+\draw[settled] (Observer.east) -- node[lab, pos=0.5, text width=4.2cm] {engages or refuses by own class and expected distance (A14, M18); recorded as the refusal share $F$ against the standing} (Person.west);
+\draw[open]    ([yshift=-15mm]Person.west) -- node[lab, pos=0.5, below=1pt, text width=4.4cm] {shows class within the group, the penalty vanishes\uid{U5}} ([yshift=-15mm]Observer.east);
+
+% ---------------------------------------------------------------- the low-class host member, above
+\draw[open]    (Observer.north east) to[bend left=30] node[lab, pos=0.5, above=1pt, text width=3.4cm] {a low-class host member prefers outsiders\uid{U3}} (Person.north west);
+
+% ---------------------------------------------------------------- the population state
+\draw[settled] (Pop.west) to[bend right=25] node[lab, pos=0.45, anchor=east, xshift=-2pt, text width=3.0cm] {standing and spread of each group enter the expected distance (M18\mix{U12})} (Observer.north);
+\draw[given]   ([xshift=8mm]Person.north) to[bend right=15] node[lab, pos=0.5, anchor=west, xshift=2pt, text width=3.0cm] {passes, leaving the visible group, the standing falls (A12, M14\mix{U6})} (Pop.east);
+
+% ---------------------------------------------------------------- the two joint actions, below
+\draw[jointopen]    ([yshift=-3mm]Observer.south east) to[bend right=25] node[lab, pos=0.5, below=1pt, text width=4.4cm] (PairLab) {engage, both ways\uid{U2}; recorded as friendships, friending bias as Chetty et al.\ measure it\uid{U11}} ([yshift=-3mm]Person.south west);
+\draw[jointsettled] ([xshift=-9mm]Observer.south) to[bend right=50] node[lab, pos=0.5, below=1pt, text width=4.6cm] {share one activity at the midpoint level, each pays from the own budget, each loses $\kappa(c_i-c_j)^2$ (A15, M19)} ([xshift=9mm]Person.south);
+
+% ---------------------------------------------------------------- the platform and the person met
+\draw[given]   ([yshift=10mm]Platform.west) -- node[lab, pos=0.5, above=1pt, text width=4.0cm] {admits or excludes outsiders by the admission rate (A13, M15); recorded as admissions, callbacks} ([yshift=10mm]Person.east);
+\draw[given]   ([yshift=-4mm]Person.east) -- node[lab, pos=0.5, below=1pt, text width=3.4cm] {pays the price, which may certify class\uid{U10}} ([yshift=-4mm]Platform.west);
+
+% ---------------------------------------------------------------- the platform as the setting
+\draw[open]    ([yshift=-12mm]Platform.west) to[out=185, in=-15] (PairLab.east);
+\node[lab, text width=3.6cm] at (13.6,0.35) {as the setting, fixes who can meet whom and the group shares\uid{U11}};
+
+% ---------------------------------------------------------------- the population state and the platform
+\draw[given]   (Pop.east) to[bend left=15] node[lab, pos=0.5, above=1pt, text width=3.4cm] {the host standing enters the admission margin (M15)} (Platform.north);
+
+% ---------------------------------------------------------------- the clients and the platform
+\draw[given]   (Client.north east) -- node[lab, pos=0.5, sloped, above=1pt, text width=3.2cm] {pay, self-select on atmosphere (A13\mix{U7})} (Platform.south);
+\draw[open]    (Client.east) to[bend right=30] node[lab, pos=0.5, below=1pt, text width=3.6cm] {know which platform is right, shadow information\uid{U9}} ([xshift=14mm]Platform.south);
+\draw[open]    ([xshift=-14mm]Platform.south) to[bend right=25] (Client.north);
+\node[lab, text width=3.8cm] at (14.0,-1.6) {screens by price, location, atmosphere, the law barring the group\uid{U8}};
+\end{tikzpicture}

@@ -2,8 +2,8 @@
 
 Paper A1 keeps every row that needs no law of motion for a group's standing.
 This suite fails if any object of the law of motion appears in the Lean
-build roots, in a Lean source, in MANUSCRIPT.tex or in MEASUREMENT_MAP.tex,
-outside TeX comments. It also fails if either TeX file, comments included,
+build roots, in a Lean source, in skeleton_ClassMarkers.tex, in ledger_picture.tex (the figure it includes)
+or in MEASUREMENT_MAP.tex, outside TeX comments. It also fails if either TeX file, comments included,
 names the companion paper or uses a scope-statement macro, since Paper A1
 does not point to other papers. Controls check that an injected object of
 each kind is caught.
@@ -88,7 +88,7 @@ print("NL  NO LAW OF MOTION IN PAPER A1")
 print("=" * 72)
 lakefile = open(os.path.join(LEAN_DIR, "lakefile.toml")).read()
 sources = {os.path.basename(f): open(f).read() for f in glob.glob(os.path.join(LEAN_DIR, "*.lean"))}
-manuscript = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
+manuscript = open(os.path.join(ROOT, "skeleton_ClassMarkers.tex")).read() + "\n" + open(os.path.join(ROOT, "ledger_picture.tex")).read()
 mmap = open(os.path.join(ROOT, "MEASUREMENT_MAP.tex")).read()
 real = analyse(lakefile, sources, manuscript, mmap)
 print(f"      Lean sources: {len(sources)}")
