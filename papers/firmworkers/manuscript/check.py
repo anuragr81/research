@@ -38,6 +38,16 @@ def lean_sources():
     return files
 
 
+def lit_lean_sources():
+    files = {}
+    folder = os.path.join(LEAN_DIR, 'Lit')
+    for name in sorted(os.listdir(folder)):
+        if name.endswith('.lean'):
+            with open(os.path.join(folder, name), encoding='utf8') as fh:
+                files['Lit.' + name[:-5]] = fh.read()
+    return files
+
+
 def declared_theorems(text):
     return re.findall(r"^theorem\s+([A-Za-z0-9_']+)", text, re.M)
 
@@ -464,7 +474,7 @@ def cited_fingerprint(item, data, lean_text):
     rows = {c['id']: c for c in data['model'] + data['literature']}
     if item in rows:
         body = repr([(f, rows[item].get(f)) for f in ('status', 'claim', 'assumptions', 'lean', 'decision', 'quote', 'page')])
-    elif item.startswith('Isc.'):
+    elif re.fullmatch(r'[A-Za-z]\w*\.\w+', item):
         body = theorem_statement(item, lean_text) or ''
     else:
         return None
@@ -476,7 +486,7 @@ def check_stamps(blocks, data, lean_text, errors, notes):
     for key, (summ, _) in blocks.items():
         items = sorted({str(r) for s in summ for r in s.get('rests_on') or []})
         for i in items:
-            if i.startswith('Isc.') and theorem_statement(i, lean_text) is None:
+            if re.fullmatch(r'[A-Za-z]\w*\.\w+', i) and theorem_statement(i, lean_text) is None:
                 errors.append(f'{key}: cannot read the statement of {i} to stamp it')
         now[key] = {i: h for i in items if (h := cited_fingerprint(i, data, lean_text))}
     if '--restamp' in sys.argv:
@@ -625,7 +635,7 @@ def check_rests(tag, entry, data, lean_text, source, errors, notes):
         elif re.fullmatch(r'L\d+', r):
             if lit_status.get(r) != 'VERBATIM':
                 errors.append(f'{tag}: rests on {r}, which is not a literature row read in full')
-        elif r.startswith('Isc.'):
+        elif re.fullmatch(r'[A-Za-z]\w*\.\w+', r):
             if not lean_declared(r, lean_text):
                 errors.append(f'{tag}: Lean theorem {r} not declared')
         else:
@@ -827,7 +837,7 @@ def main():
     check_derived_claims(data, rows, errors, notes)
     check_references(data, rows, errors, notes)
     entries = check_terms(data, mmap, errors, notes)
-    check_summary(data, lean_text, source, entries, errors, notes)
+    check_summary(data, {**lean_text, **lit_lean_sources()}, source, entries, errors, notes)
     counts = {}
     for c in data['model'] + data['literature'] + (data.get('headline') or []) + (data.get('concluding') or []):
         if 'status' not in c:
