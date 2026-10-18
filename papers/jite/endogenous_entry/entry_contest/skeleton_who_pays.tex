@@ -521,6 +521,15 @@ that check it.}\\
   $r$ atomless and $0<\mu\le1$, $\xi(k)\ge\frac{k+1}{Q+1}$, and
   $\xi(k)\ne\frac{k+1}{Q+1}$ implies $F\ne G$.}
   {Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, Implications.compression_rises, Implications.compression_falls, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
+\mrow{M34}{Selection loss.}
+  {The selection loss is the highest base component among the players less the
+  winner's base component. With the draws $(r_i,s_i)$ independent and
+  identically distributed across players, the law of the winner's base
+  component under an entrant set depends on the set only through its size. At
+  $\mu=1$, with a unique highest base component, the loss is zero; at $\mu=0$
+  the score reads the bought component alone, and the winner's base component
+  has the law of $r$. At $\mu=\frac12$ the loss can be positive.}
+  {SelectionLoss.winnerBase_perm, SelectionLoss.pi_map_perm, SelectionLoss.law_perm, SelectionLoss.exists_perm_of_card_eq, SelectionLoss.law_count, SelectionLoss.loss_zero_at_one, SelectionLoss.score_zero, SelectionLoss.loss_pos_at_half, WeightEndpoints.winner_base_eq_sup_at_one, WeightEndpoints.winner_base_law}
 \end{longtable}
 \normalsize
 
@@ -848,8 +857,37 @@ Section~\ref{sec:question} had been answered, found no paper that answers it;
 its two nearest neighbours, \citet{LiuGargBorgs2022} (L32) and
 \citet{HuImmorlicaVaughan2019} (L33), were read in full and change none of the
 claims. C15 to C18 are implications for an institution that sets the fee, the
-prize or the weight. They say what follows from each choice, not which choice
-is better, since the model has no welfare objective. Figure~\ref{fig:ledger}
+prize or the weight. They say what follows from each choice and not which
+choice is better, since the model has no welfare objective. The sum of payoffs
+is a sum of constructs that rationalise recorded choices, fixed only up to an
+affine transformation, so it cannot serve as one (Appendix~\ref{app:primitives},
+Payoffs). The implications are read instead against one concern, selection,
+which the Research question supplies. The prize should go to the base
+component, which every challenger has whether or not she enters, and the score
+weighs it against the bought component by $\mu$. The object is the selection
+loss, the highest base component among the players less the winner's base
+component. It is zero when the rule reads the base component alone, and the
+winner's base component is a single draw when the rule reads the bought
+component alone (M34). Who competes enters the concern through one channel.
+The draws do not depend on wealth, so the law of the winner's base component
+depends on the entrant set only through the entry count (M34); who enters at a
+given count leaves that law unchanged, and how many enter does not. Three
+implications survive the concern. A fee that varies with wealth is the only
+instrument that reorders entry (C15), and reordering at a fixed count leaves
+the law of the selection loss unchanged, so it moves who competes at no cost
+in selection. A share above $\frac{k^*+1}{Q+1}$, the entrants' share when the
+bought component adds nothing, shows that it counts, which a rule reading the
+base component alone cannot produce (C18); the converse is not shown, since a
+share at that value does not establish $F=G$. The weight on the base component
+moves both, since with the entrants fixed reading the base component more
+never raises the selection loss (M32), but fewer enter (K8), and with a common
+bonus the loss can rise once entry responds (K9), a trade-off the model
+locates and does not resolve. C16 and C17 remain facts about the entry count,
+which changes the selection loss in a direction the model does not state, so
+the concern gives them no sign. The channel closes where the bought component
+varies with wealth (M27, M29). Then the gain depends on who enters, the entry
+count is not pinned, and wealth reaches the winner's base component through
+the draws as well as through the fee. Figure~\ref{fig:ledger}
 draws the conclusions as relations among the players and the objects of the
 measurement map.
 
@@ -1751,6 +1789,29 @@ contrapositive. $x\mapsto\frac{x+1}{2}$ compresses toward $1$ and lowers $3$,
 so the rise needs $w_{k^*-1}\le x_0$.
 \end{mproof}
 
+\begin{mproof}{M34}{SelectionLoss.winnerBase_perm, SelectionLoss.pi_map_perm, SelectionLoss.law_perm, SelectionLoss.exists_perm_of_card_eq, SelectionLoss.law_count, SelectionLoss.loss_zero_at_one, SelectionLoss.score_zero, SelectionLoss.loss_pos_at_half, WeightEndpoints.winner_base_eq_sup_at_one, WeightEndpoints.winner_base_law}
+For a permutation $\sigma$ of the players,
+$\sigma_i(e\circ\sigma,x)=\sigma_{\sigma i}(e,x\circ\sigma^{-1})$, so the strict
+maximiser moves with $\sigma$ and
+\[
+  r_W(e\circ\sigma,x)=r_W(e,x\circ\sigma^{-1}).
+\]
+With $(r_i,s_i)$ i.i.d.\ with law $\nu$, $\mathcal L(x\circ\sigma^{-1})=\mathcal L(x)$,
+since on every box
+\[
+  \prod_j\nu\big(A_{\sigma^{-1}j}\big)=\prod_j\nu(A_j),
+\]
+so $\mathcal L\big(r_W(e\circ\sigma,X)\big)=\mathcal L\big(r_W(e,X)\big)$. If
+$|S|=|S'|$ then $e=e'\circ\sigma$ for some $\sigma$, which gives the law in
+$|S|$ alone. At $\mu=1$, $\sigma_i=r_i$, so the strict maximiser of $r$ wins and
+\[
+  \max_i r_i-r_W=0 .
+\]
+At $\mu=0$, $\sigma_i=s_ie_i$, a rule on $s$ alone, so $r_W\sim\nu_r$ by the law
+of the winner's base component at $\mu=0$. At $\mu=\tfrac12$ with
+$(r,s)=((1,0),(0,4))$ and both entering, $r_W=0<1=\max_i r_i$.
+\end{mproof}
+
 
 
 
@@ -1877,6 +1938,10 @@ burden-monotonicity & $\kappa$ strictly decreasing on $(c,\infty)$ & The
 \multicolumn{3}{@{}l}{\emph{Scores and gains}}\\[2pt]
 score & $\sigma_i=\mu r_i+(1-\mu)s_ie_i$ & The prize goes to the highest
   score. \\
+selection loss & $\max_i r_i-r_W$ & The highest base component among the
+  players less the winner's base component (M34). Zero at $\mu=1$ with a
+  unique highest base component; at $\mu=0$ the winner's base component is a
+  single draw. \\
 winner's base component & $r_W$ & The base component of the player who takes
   the prize (M32). \\
 common bonus & $s$ constant & A bought component equal for every holder, as
