@@ -446,6 +446,7 @@ def check_summary(data, lean_text, source, entries, errors, notes):
     blocks['players'] = ((data.get('players') or []) + (data.get('choices') or []), None)
     check_base_case(data, lean_text, source, entries, errors, notes, blocks)
     check_faq(data, lean_text, source, entries, errors, notes, blocks)
+    check_decisions(data, entries, errors, notes)
     check_stamps(blocks, data, lean_text, errors, notes)
 
 
@@ -550,6 +551,35 @@ def check_faq(data, lean_text, source, entries, errors, notes, blocks):
         answer = [dict(s, para=1) for s in item.get('answer') or []]
         check_plain(key, answer, tuple(words), data, lean_text, source, entries, errors, notes)
         blocks[key] = (answer, tuple(words))
+
+
+def check_decisions(data, entries, errors, notes):
+    decs = data.get('decisions') or []
+    if not decs:
+        errors.append('decisions: missing')
+    ids = {c['id'] for c in data['model']} | {c['id'] for c in data['literature']}
+    ids |= {r['id'] for r in load_map()['rows']}
+    for k, d in enumerate(decs, 1):
+        tag = f'decision {k}'
+        if not re.fullmatch(r'\d{1,2} [A-Z][a-z]{2} \d{4}', str(d.get('date', ''))):
+            errors.append(f'{tag}: date must read like 10 Oct 2026')
+        for field in ('decision', 'reason'):
+            if not str(d.get(field, '')).strip():
+                errors.append(f'{tag}: empty {field}')
+        if not d.get('bears_on'):
+            errors.append(f'{tag}: bears_on is empty')
+        for r in d.get('bears_on') or []:
+            if r not in ids:
+                errors.append(f'{tag}: bears_on cites missing {r}')
+        hits = sorted({f'{a!r} for {term!r}' for field in ('decision', 'reason')
+                       for a, term in avoided_hits(str(d.get(field, '')), entries)})
+        if hits:
+            notes.append(f'{tag}: terminology, uses {"; ".join(hits)}')
+    rows = [c for c in data['model'] if c['status'] == 'DECIDED']
+    for c in rows:
+        if not re.search(r'\d{1,2} [A-Z][a-z]{2} \d{4}', str(c.get('decision', ''))):
+            errors.append(f'{c["id"]}: decision carries no date')
+    notes.append(f'decisions: {len(decs)} without a row, {len(rows)} in rows')
 
 
 def check_plain(key, summ, bounds, data, lean_text, source, entries, errors, notes):

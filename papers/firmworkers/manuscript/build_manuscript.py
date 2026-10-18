@@ -239,6 +239,19 @@ def faq_section(d):
             + '\n\n'.join(items))
 
 
+def decisions_section(d):
+    rows = [c for c in d['model'] if c['status'] == 'DECIDED']
+    r1 = '\n'.join(f"{c['id']} & {mixed(c['claim'])} & {mixed(c['decision'])} \\\\ \\midrule" for c in rows)
+    r2 = '\n'.join(f"{escape_text(x['date'])} & {mixed(x['decision'])} & {mixed(x['reason'])} & {', '.join(x['bears_on'])} \\\\ \\midrule"
+                    for x in d.get('decisions') or [])
+    return ('Every decision the author made, with its reason, in two tables: decisions recorded as model rows, '
+            'whose reasons are the rows\u2019 decision fields, and decisions without a row.\n\n'
+            '\\subsection*{Decisions recorded as model rows}\n{\\small\n'
+            f"\\begin{{longtable}}{{{col([0.9, 9.0, 13.0])}}}\n\\toprule ID & Decision & Date, author and reason \\\\ \\midrule \\endhead\n{r1}\n\\end{{longtable}}}}\n\n"
+            '\\subsection*{Other decisions}\n{\\small\n'
+            f"\\begin{{longtable}}{{{col([2.0, 8.0, 10.0, 3.0])}}}\n\\toprule Date & Decision & Reason & Bears on \\\\ \\midrule \\endhead\n{r2}\n\\end{{longtable}}}}")
+
+
 def idea_summaries(d):
     blocks = '\n\n'.join(plain_block(i['sentences'], escape_text(i['title']), numbered=True)
                          for i in d.get('idea_summaries') or [])
@@ -334,6 +347,9 @@ Headline and concluding claims may rest only on model claims, literature claims 
 
 \section{{Frequently asked questions}}
 {faq_section(d)}
+
+\section{{Decisions and their reasons}}
+{decisions_section(d)}
 
 \section{{References}}
 {{\small

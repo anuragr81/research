@@ -1,4 +1,4 @@
-# Issues outstanding (16 Oct 2026)
+# Issues outstanding (18 Oct 2026)
 
 Open decisions only. Decided items are not listed: decided model rows (M14, M28, M29, M32) are in Appendix D of the skeleton; decisions without a model row (Q1, Q2, Q4–Q6, Q9, the reference-dependent sub-section with `R_h`, the macro deferral) are in `TODO.md`, Decisions recorded, and `HANDOVER.md`.
 
@@ -58,9 +58,13 @@ One row per option. "Depends on" lists the ledger rows the issue turns on; ramif
 | | | | (c) A lone entrant swaps with a random job holder | The source's original reading, rejected in M14 and M32; job holders could then lose jobs to the lottery, against M39. |
 | | | | (d) A lone entrant waits for next period's pool | Adds a waiting state, against the steady state's simplicity. |
 
-| 15 | Where the lottery cost goes (17 Oct). **Decided 17 Oct: (b), to the members of the entrant's own status group in equal shares** (M58), chosen for tractability as the author left it; receipts change no dominance result (M59) | M46, M52, M53; source lines 103, 158, 258 | (a) It leaks out of the firm–worker circuit, as line 258 reads | Simplest; the firm never receives it (M52, M53); but line 103 says "all income circulates between workers and firm", so the closed economy has a leak to be named. |
+| 15 | Where the lottery cost goes (17 Oct). Decided 17 Oct: (b), own status group in equal shares (M58); **reopened 18 Oct**, since under the sponsored reading of the lottery (issue 16) the cost would flow to the rich whose favour is sought | M46, M52, M53; source lines 103, 158, 258 | (a) It leaks out of the firm–worker circuit, as line 258 reads | Simplest; the firm never receives it (M52, M53); but line 103 says "all income circulates between workers and firm", so the closed economy has a leak to be named. |
 | | | | (b) It is paid to other workers, the connections themselves | A transfer among workers, zero-sum in aggregate; the receivers are not modelled; consistent with line 103. |
 | | | | (c) It is paid to the firm | The firm would then gain from the lottery, and the principle of upskilling over the lottery (TODO, 13 Oct) would need re-deriving; against line 110. |
+
+| 16 | What the lottery is (18 Oct). The author's reading: a means of natural mobility in which some workers make themselves favourable to the rich, almost a lottery from the worker's view; the lottery cost is the spending that makes one favourable, and the alternative is to refuse and upskill | M11, M14, M32, M36, M46, M58, M60; X7, X8; base case | (a) Exchange among the displaced (the ledger as it stands): entrants' former jobs reassigned at random among entrants; L to the own group | Every proved row holds. The rich appear only as rich entrants, who accept the exchange from their own calculus; nobody's favour is sought; L has no recipient with an interest in it. |
+| | | | (b) Sponsored allocation: the vacated jobs of the displaced are allocated among the paying displaced by the rich job holders, by favour the worker cannot predict, with the own group favoured (σ); L paid to the rich | Matches the author's reading and the source's Goode framing (lines 75 to 77, status consumption as a mechanism of mobility). Random reassignment stays as the worker's view, so M36 and the mobility and closure results survive as reduced forms *(to be checked row by row)*; M58 is replaced by a payment up the ladder, which offsets part of M46's transfer down; the two parties over L become the firm (receives C) and the rich (receive L), sharper than M60's workers taken together. Needs: who counts as rich, how L is shared among them, and whether the rich choose or only draw. |
+| | | | (c) Both readings stated, (a) as the model and (b) as its interpretation | No row changes; the interpretation must then be checked against each row that mentions a recipient or an interest in L. |
 
 ## B. Measurement map
 
