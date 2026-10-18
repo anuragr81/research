@@ -87,7 +87,8 @@
 % The question is the author's choice of 15 October 2026 (TODO.md, D2),
 % restricted on the same day to what needs no law of motion (pass 15).
 When an observer cannot see a person's class and reads it from the markers
-of a group, what does the reading do within one generation? The paper asks
+of a group, markers the person carries without choosing them, what does the
+reading do within one generation? The paper asks
 three things. What the marker does to the observer's belief about the
 person's class, and to the decision to engage. What leaving the visible group does to the group's mean
 class and to the refusal of those who stay. And whom a platform admits when
@@ -219,7 +220,7 @@ model rows it rests on and what it does not claim.
 \bottomrule
 \endfoot
 \krow{K1}{Under group sufficiency a marker moves the observer's belief about
-  class only through the group it signals, and the posterior on class is
+  class only through the group it indicates, and the posterior on class is
   the within-group class distributions mixed by the posterior on
   group.}{M1, M2, M3}{A finite class space and a finite set of groups. The
   converse in M1 needs a prior with full support, M2 needs the within-group
@@ -433,12 +434,19 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   {The Lean statements range over a finite set. The predecessor's class in
   $[0,1]$ is outside the rows (Appendix~\ref{app:scope}, Class space).}
 \arow{A2}{Class is not seen at the encounter. The observer sees a marker $m$,
-  which signals one of finitely many groups $g\in\mathcal{G}$.}
+  which indicates one of finitely many groups $g\in\mathcal{G}$. The person
+  does not acquire the marker by choice, and can suppress it only by passing
+  (A12).}
   {The observer cannot see a person's class at the encounter and sees only a
   marker, which is evidence about the person's group. There are finitely
-  many groups.}
+  many groups. The person carries the marker without choosing it, and can
+  hide it only by passing, as A12 describes.}
   {$m$, $g$, $\mathcal{G}$}{M1, M2, M3}
-  {The premise of the question.}
+  {The premise of the question. That the marker is not acquired by choice
+  separates the model from signalling, where the informed person chooses
+  the signal at a cost that varies with the hidden type (L17). Akerlof makes
+  dialect a choice that tracks whom one meets (L40), so the premise is an
+  assumption and not a result.}
 \arow{A3}{The observer revises the prior $\pi_g(c)$ and the group weights
   $q(g)$ by Bayes' rule alone, giving the posterior $\pi'_g(c)$, the
   posterior on group $q'(g)$ and the posterior on class $P(c\mid m)$.}
@@ -769,9 +777,20 @@ between positions that everyone knows, so the chooser's own position matters
 and nothing is read from a marker (L34).
 
 The method here stands with the first family on the signal and apart from
-all four on the reader. The marker is not chosen, and class stays hidden
-behind it, so the posterior on class is the within-group distributions
-mixed by the posterior on group (A4, M1 to M3). The observer's own class
+all four on the reader. The marker is not acquired by choice (A2), and class
+stays hidden behind it, so the posterior on class is the within-group
+distributions mixed by the posterior on group (A4, M1 to M3). The marker can
+still be shed by choice. A member passes when the passing gain is at least
+the passing cost, and with a gain that does not fall and a cost that does
+not rise in class the passers stand at or above every member who stays
+(A12, M14). The passing rule is a separation by a cost that varies with
+type, which the third family uses to reveal the type and which passing uses
+to hide it. The observer's
+belief does not take the passing rule into account, and M14 carries only
+the step from the passers to the visible mean. Akerlof goes further and
+makes dialect itself a choice, correlated with membership because people
+conform to those they meet (L40), which the first family and this paper
+both rule out by assumption. The observer's own class
 enters the decision to engage, so the direction of a group's effect on
 refusal depends on who the observer is (M18). No family has that in a
 reader of a hidden type. In the second the own type enters only the own
@@ -1073,6 +1092,14 @@ comparative statics behind I3, use the quadratic payoff of A15 (M19, M20).
   the quadratic loss, and its sign follows the curvature of the benefit of
   contact (M21).}{a decreasing function of the variance of
   ability}{10}{M18, M21}
+\lrow{L40}{Akerlof1997}{Dialect is a choice variable, and conformity to
+  those one interacts with makes it correlate with membership. A2 takes the
+  marker as carried without choice, and A4 takes its likelihood within a
+  group as flat. Akerlof's account is a reason the marker carries group
+  information, and also a reason it may not be exogenous, which no row of
+  this paper addresses.}{x could represent pronunciation or language, with
+  the model showing theoretically why there might be a correlation between a
+  choice variable, such as dialect, and subcultural membership.}{12}{M1}
 \end{longtable}
 \normalsize
 
@@ -1128,7 +1155,7 @@ implications for policy and says what limits each.
 \bottomrule
 \endfoot
 \crow{C1}{Under group sufficiency a marker moves the observer's belief about
-  class only through the group it signals, and the posterior on class is
+  class only through the group it indicates, and the posterior on class is
   the within-group class distributions mixed by the posterior on
   group.}{M1, M2, M3}
 \crow{C10}{Selective passing by the upper members lowers the visible
@@ -1603,7 +1630,7 @@ records what they printed.
 \bottomrule
 \endfoot
 \path{AignerCain1977} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/AignerCain1977.lean}{\path{lean/mathlib/AignerCain1977.lean}} & L8 \\
-\path{Akerlof1997} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Akerlof1997.lean}{\path{lean/mathlib/Akerlof1997.lean}} & L32, L33, L34 \\
+\path{Akerlof1997} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Akerlof1997.lean}{\path{lean/mathlib/Akerlof1997.lean}} & L32, L33, L34, L40 \\
 \path{Assumptions} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Assumptions.lean}{\path{lean/mathlib/Assumptions.lean}} & A4 \\
 \path{AustenSmithFryer2003} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/AustenSmithFryer2003.lean}{\path{lean/mathlib/AustenSmithFryer2003.lean}} & L18 \\
 \path{BertrandMullainathan2004} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/BertrandMullainathan2004.lean}{\path{lean/mathlib/BertrandMullainathan2004.lean}} & record only \\
@@ -1777,7 +1804,7 @@ Dispersion & $\nu_g$ & The variance of class within group $g$ under its prior
   (M18). \\ \addlinespace
 Observers & $J$ & The finite set of observers over whom the refusal share is
   taken (M18). \\ \addlinespace
-Outsider group & $O$ & The group the marker signals, whose members may pass
+Outsider group & $O$ & The group the marker indicates, whose members may pass
   (M14) and whom a platform admits or excludes (M15). \\ \addlinespace
 Host group & $I$ & The group alongside the outsider, whose clients the
   platform serves (M15). \\ \addlinespace

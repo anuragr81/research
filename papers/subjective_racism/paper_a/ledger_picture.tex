@@ -29,7 +29,7 @@
   jointopen/.style={<->, line width=0.6pt, dotted, line cap=round},
 ]
 % ---------------------------------------------------------------- roles of Person
-\node[pop]  (Pop)      at (7.5,9.7) {Population state\eid{E4, E5}\\ standing and spread of each group, $\bar c_I,\nu_I$ and $\bar c_O,\nu_O$};
+\node[pop]  (Pop)      at (7.5,9.7) {Population state\eid{E4, E5}\\ standing and dispersion of each group, $\bar c_I,\nu_I$ and $\bar c_O,\nu_O$};
 \node[role] (Observer) at (0,3)      {Observer\nodeid{E2}{P1}\\ own class $y$, own group\\[2pt] \scriptsize a low-class host member\eid{E6} when $y$ is low in the host group};
 \node[role] (Person)   at (9,3)      {Person met\nodeid{E1}{P2 when passing}\\ class unseen, marker shown\\[2pt] \scriptsize a passer\eid{E7} when the group shown is not the own};
 \node[role,minimum height=2.4cm] (Client) at (12,-4.6) {Client\eid{E11}\\ a host person buying from the platform, $N$ of them, weight $\alpha$};
@@ -53,7 +53,7 @@
 \draw[open]    (Observer.north east) to[bend left=30] node[lab, pos=0.5, above=1pt, text width=3.4cm] {a low-class host member prefers outsiders\uid{U3}} (Person.north west);
 
 % ---------------------------------------------------------------- the population state
-\draw[settled] (Pop.west) to[bend right=25] node[lab, pos=0.45, anchor=east, xshift=-2pt, text width=3.0cm] {standing and spread of each group enter the expected distance (M18\mix{U12})} (Observer.north);
+\draw[settled] (Pop.west) to[bend right=25] node[lab, pos=0.45, anchor=east, xshift=-2pt, text width=3.0cm] {standing and dispersion of each group enter the expected distance (M18\mix{U12})} (Observer.north);
 \draw[given]   ([xshift=8mm]Person.north) to[bend right=15] node[lab, pos=0.5, anchor=west, xshift=2pt, text width=3.0cm] {passes, leaving the visible group, the standing falls (A12, M14\mix{U6})} (Pop.east);
 
 % ---------------------------------------------------------------- the two joint actions, below

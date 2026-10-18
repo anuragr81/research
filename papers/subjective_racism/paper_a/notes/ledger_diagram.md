@@ -17,7 +17,7 @@ reduce to two entities.
 
 | Entity | Attributes | Population state | Roles a person or platform plays |
 |---|---|---|---|
-| Person | class, unseen; group; marker (A4); budget $b=\beta c$ (A15) | the standing and spread of each group, $\bar c_I$, $\nu_I$, $\bar c_O$, $\nu_O$ (E4, E5) | observer (E2, P1); person met (E1, P2); passer, a person met who passes (E7); low-class host member, an observer of low class in the host group (E6); client, a host person buying from the platform (E11) |
+| Person | class, unseen; group; marker (A4); budget $b=\beta c$ (A15) | the standing and dispersion of each group, $\bar c_I$, $\nu_I$, $\bar c_O$, $\nu_O$ (E4, E5) | observer (E2, P1); person met (E1, P2); passer, a person met who passes (E7); low-class host member, an observer of low class in the host group (E6); client, a host person buying from the platform (E11) |
 | Platform | admission rate, price, location, atmosphere (E10, P5); the law's strictness as a constraint, which bars admission on the group (E14) | none | the setting, when the measured encounters take place in it (E16) |
 
 What the first drawing had as nodes and this one does not.
@@ -25,7 +25,7 @@ What the first drawing had as nodes and this one does not.
 | Former node | What it is now |
 |---|---|
 | Pair (E3, P6) | The action "engage, both ways", a double arrow between the observer and the person met |
-| Host group, outsider group (E5, E4, P4, P3) | The population state of Person, the partition of persons by group with its standing and spread |
+| Host group, outsider group (E5, E4, P4, P3) | The population state of Person, the partition of persons by group with its standing and dispersion |
 | Clients (E11) | A role of Person |
 | Budget (E8) | An attribute of Person |
 | Shared activity (E9) | The action "share one activity at the midpoint level", a double arrow between the observer and the person met |
@@ -56,7 +56,7 @@ shadow information (E15).
 | Person met | Observer | Shows the marker, read as evidence on the group alone | A4, M1 to M3, M17 | Settled | |
 | Observer | Person met | Engages or refuses by own class and expected distance | A14, M18 | Settled | the refusal share $F$ against the standing (M18) |
 | Person met | Observer | Shows class within the group, the penalty vanishes | U5 | Open | |
-| Population state | Observer | The standing and spread of each group enter the expected distance | M18, U12 | Settled | |
+| Population state | Observer | The standing and dispersion of each group enter the expected distance | M18, U12 | Settled | |
 | Observer | Person met | A low-class host member prefers outsiders | U3 | Open | |
 | Person met | Population state | Passes, leaving the visible group, the standing falls | A12, M14, U6 | Rule taken as given | |
 | Observer | Person met, both ways | Engage, both ways | U2 | Open | friendships, friending bias as Chetty et al. measure it (U11) |

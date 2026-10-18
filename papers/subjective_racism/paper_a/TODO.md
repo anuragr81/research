@@ -302,6 +302,18 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   $\nu_g$. Lean identifiers keep `spread` (`Engagement.spread`,
   `Robustness.spread_convex` and the like), and the lit records keep their
   wording, since their quotations are verbatim.
+- [x] **D15. The marker as unchosen, against signalling. 18 Oct 2026, at
+  the author's request** ("go ahead"). The Question says the person carries
+  the markers without choosing them. A2 says the marker is not acquired by
+  choice and can be suppressed only by passing (A12), and its note sets that
+  against signalling (L17) and Akerlof's chosen dialect (L40, new). The
+  method paragraph now says the marker can be shed by choice, that the
+  passing rule is the third family's separation by a cost varying with type
+  used to hide the type, and that the observer's belief does not take the
+  passing rule into account. "Signals" became "indicates" where it meant
+  the marker's group (K1, A2, C1, Terminology, measurement map), so that
+  "signal" keeps the third family's sense. The ledger figure, missed in
+  D14, now says dispersion.
 
 ## Novelty ledger
 
