@@ -691,4 +691,17 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   for the testing thread, and treat a bounded funding premium as an
   enhancement-thread variant. A dated file records this before any further
   run.
+- 2026-10-18. Testing thread, option B (four model-free facts over
+  R = 10.5%, in units of each bank's sigma_i from 2005-2014;
+  comparison/PREREG_comparison.md, _2.md, _3.md). Observed on 2015-2024,
+  sample B: F1 4.8%, F2 61.6%, F3 15.2%, F4 30.4% (results_facts.md). The
+  baseline agrees on none (results_pk.md); MMP's small-bank model agrees on
+  none of its small-class facts and predicts no recapitalisations
+  (results_mmp.md); Berger and Gordon-Hirtle pending or not scoreable.
+  Training-window check (results_bound.md): even the strongest shortfall
+  penalty (minimum moved to R) leaves F2 at 0.2% against 48.0% observed, so
+  the penalty alone will not close the main gap; the next enhancement pass
+  needs a reason to hold large voluntary buffers (author to choose). MMP
+  stage 3 deferred (PREREG_stage3_3.md). Open: ledger entities for the
+  manuscript's model (proposal of 18 October awaiting the author).
 
