@@ -384,7 +384,7 @@ $\PJ_{AB}=\PJ_{BA}=\PB$ exactly. \anchor{Prop.~IMM}
 \end{proposition}
 
 \begin{proof}
-The single cue on $A$ means the matched likelihood $\ell^A_i=q_i Z/P(A{=}i)$, with $Z$ the normaliser fixing the posterior $A$-marginal to $q$---which gives $\PB(i,j)=P(i,j)\ell^A_i/Z=q_i\,P(i,j)/P(A{=}i)=(\PJ_A P)(i,j)$. For $c=0$ the prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$. Each Jeffrey step and the Bayesian update then act on independent coordinates, so both sequences and the Bayesian posterior equal the product $q\otimes r$.
+The single cue on $A$ means the matched likelihood $\ell^A_i=q_i \eta/P(A{=}i)$, with $\eta$ the normaliser fixing the posterior $A$-marginal to $q$---which gives $\PB(i,j)=P(i,j)\ell^A_i/\eta=q_i\,P(i,j)/P(A{=}i)=(\PJ_A P)(i,j)$. For $c=0$ the prior factorises, $P(i,j)=P(A{=}i)P(B{=}j)$. Each Jeffrey step and the Bayesian update then act on independent coordinates, so both sequences and the Bayesian posterior equal the product $q\otimes r$.
 \end{proof}
 
 In other words, a decision turning on \emph{one} cue is immune. Next we specify the sequence effect at the individual level---which is first order in our setup and serves as a building block for the rest of the propositions. 
@@ -616,7 +616,7 @@ the answer is settled before any averaging over the aggregate takes place
 second order, whereas the aggregate gap, score gaps on unprotected weights, the marginal
 probabilities, and the sequence-affected share remain first order.
 
-To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:ASC}, Proposition~\ref{prop:DEC}) -- whereas a reviewer computing the share of files whose decision the reading sequence changes finds a departure at $\bigO(c)$ instead. We detail the findings in the rest of the current section.
+To an observer of finite measurement precision $\varepsilon$ , a small $c$ allows $\varepsilon$ to fall so that $c^{2}\ll\varepsilon\ll c$. An observer resolves a departure when the departure's size exceeds their precision $\varepsilon$ and cannot resolve it when the departure sits below $\varepsilon$. Thus, the observer may resolve a first-order departure ($\varepsilon \ll c$) but cannot resolve the second-order one ($ c^2 \ll \varepsilon$). In the panel example, two panels reading the same file in opposite sequences differ in what they believe about the candidate's trustworthiness, and near the threshold in whom they hire. A reviewer who computes the panels' average believed association between competence and trustworthiness finds it within $\bigO(c^{2})$ of the benchmark and sees nothing (Lemma~\ref{lem:ASC}, Proposition~\ref{prop:DEC}) -- whereas a reviewer computing the share of decisions the reading sequence changes finds a departure at $\bigO(c)$ instead. We detail the findings in the rest of the current section.
 
 \begin{sidewaystable}[p]
 \centering
@@ -706,7 +706,7 @@ without ever coupling two coordinates, so the product form survives any finite s
 steps. 
 
 Proposition~\ref{prop:DEC} now shows how the second-order behaviour of the distortion of the average believed association depends on the separability lemma. More specifically, Lemma~\ref{lem:SEP} forces every updating route to act
-on the association by the pure multiplier $\assoc(Q')=(g_0g_1h_0h_1/Z^{2})\,\assoc(Q)$, so all of them share the same leading factor at independence and the $\bigO(c)$ terms in $\assoc(\Pbar)-\assoc(\PB)$ cancel identically. On the other hand, a non-separable updating route obeys no such
+on the association by the pure multiplier $\assoc(Q')=(g_0g_1h_0h_1/W^{2})\,\assoc(Q)$, so all of them share the same leading factor at independence and the $\bigO(c)$ terms in $\assoc(\Pbar)-\assoc(\PB)$ cancel identically. On the other hand, a non-separable updating route obeys no such
 identity and can shift $\assoc$ additively rather than merely rescale it, leaving a first-order distortion.
 
 \begin{proposition}[belief-level decoupling]\label{prop:DEC}
@@ -720,16 +720,16 @@ identically zero:
 
 \begin{proof}
 \emph{Association---the $\bigO(c)$ terms coincide by separable covariance.} For any rank-one
-(separable) reweighting $Q'_{ij}=g_i h_j Q_{ij}/Z$ of a joint law $Q$, with $Z=\sum_{ij}g_i h_j Q_{ij}$,
+(separable) reweighting $Q'_{ij}=g_i h_j Q_{ij}/W$ of a joint law $Q$, with $W=\sum_{ij}g_i h_j Q_{ij}$,
 \[
-  \assoc(Q')=\frac{g_0 g_1 h_0 h_1}{Z^{2}}\,\assoc(Q),
+  \assoc(Q')=\frac{g_0 g_1 h_0 h_1}{W^{2}}\,\assoc(Q),
 \]
 since the cross terms in $Q'_{00}Q'_{11}-Q'_{01}Q'_{10}$ carry the identical factor
 $g_0g_1h_0h_1$. Explicitly,
 \begin{align*}
   Q'_{00}Q'_{11}-Q'_{01}Q'_{10}
-  &=\frac{(g_0h_0Q_{00})(g_1h_1Q_{11})-(g_0h_1Q_{01})(g_1h_0Q_{10})}{Z^{2}}\\
-  &=\frac{g_0g_1h_0h_1}{Z^{2}}\bigl(Q_{00}Q_{11}-Q_{01}Q_{10}\bigr).
+  &=\frac{(g_0h_0Q_{00})(g_1h_1Q_{11})-(g_0h_1Q_{01})(g_1h_0Q_{10})}{W^{2}}\\
+  &=\frac{g_0g_1h_0h_1}{W^{2}}\bigl(Q_{00}Q_{11}-Q_{01}Q_{10}\bigr).
 \end{align*}
 Applying this with $Q=P$: by Lemma~\ref{lem:SEP}, every Jeffrey route composes to exactly such a
 separable reweighting (at $N=2$, a rank-one form $g_ih_j$), and the benchmark update is one
@@ -742,7 +742,7 @@ $(\alpha,1-\alpha)$ and $(\beta,1-\beta)$ regardless of route---gives the same l
   \assoc(\PJ_{AB})=\assoc(\PJ_{BA})=\assoc(\PB)=K\,c+\bigO(c^2),
   \qquad K=\frac{q_0 q_1\, r_0 r_1}{\alpha(1-\alpha)\beta(1-\beta)} .
 \]
-Explicitly, at $c=0$ one has $g_i=q_i/\alpha_i$, $h_j=r_j/\beta_j$ and $Z=1$, so the
+Explicitly, at $c=0$ one has $g_i=q_i/\alpha_i$, $h_j=r_j/\beta_j$ and $W=1$, so the
 multiplier equals $\bigl(q_0q_1/\alpha(1-\alpha)\bigr)\bigl(r_0r_1/\beta(1-\beta)\bigr)=K$.
 Hence $\assoc(\Pbar)=\lambda\,\assoc(\PJ_{AB})+(1-\lambda)\,\assoc(\PJ_{BA})+\bigO(c^2)
 =Kc+\bigO(c^2)$ (the mixture identity holds to leading order; $\assoc$ is quadratic, and the
@@ -753,7 +753,7 @@ association by the same leading factor.
 \end{proof}
 
 The multiplier identity in the proof above yields an exact statement for the odds-ratio forms of association. In the ratio $Q'_{00}Q'_{11}/(Q'_{01}Q'_{10})$ the factor
-$g_0g_1h_0h_1/Z^{2}$ cancels, so every separable reweighting leaves the odds ratio unchanged wherever the entries are positive. It follows that $\PJ_{AB}$, $\PJ_{BA}$ and $\PB$ all carry the prior's odds ratio
+$g_0g_1h_0h_1/W^{2}$ cancels, so every separable reweighting leaves the odds ratio unchanged wherever the entries are positive. It follows that $\PJ_{AB}$, $\PJ_{BA}$ and $\PB$ all carry the prior's odds ratio
 identically in $c$. For believed association in odds-ratio form the departure from the benchmark is exactly zero rather than $\bigO(c^{2})$. In short, sequence effects live in the reset marginals and not in the preserved
 association.
 
@@ -1272,13 +1272,13 @@ whatsoever (additive or not),
   \Delta_{abc}\varphi \;=\; \Delta_{ab}\varphi\big|_{x_{c}=1}-\Delta_{ab}\varphi\big|_{x_{c}=0},
 \]
 and analogously at every order above three, so $\Delta_{ab}\varphi\equiv0$ for all pairs forces
-every $\Delta_{S}\varphi\equiv0$, $|S|\ge2$---exactly the interaction coefficients $\lambda_{S}$
+every $\Delta_{S}\varphi\equiv0$, $|S|\ge2$---exactly the interaction coefficients $\theta_{S}$
 of the log-linear (M\"obius) decomposition
-$\varphi=\lambda_{\emptyset}+\sum_{a}\lambda_{a}(x_{a})+\sum_{a<b}\lambda_{ab}(x_{a},x_{b})
+$\varphi=\theta_{\emptyset}+\sum_{a}\theta_{a}(x_{a})+\sum_{a<b}\theta_{ab}(x_{a},x_{b})
 +\cdots$. Conversely,
 \[
-  \lambda_{\emptyset}:=\varphi(0),\qquad
-  \lambda_{a}(1):=\varphi(x_{a}{=}1,x_{-a}{=}0)-\varphi(0),\qquad \lambda_{a}(0):=0
+  \theta_{\emptyset}:=\varphi(0),\qquad
+  \theta_{a}(1):=\varphi(x_{a}{=}1,x_{-a}{=}0)-\varphi(0),\qquad \theta_{a}(0):=0
 \]
 reproduces $\varphi(x)$ exactly at every $x$ once every pairwise contrast vanishes, by the same
 telescope run backward. Separability of $P'/P$ and vanishing interaction of order $\ge2$ are
