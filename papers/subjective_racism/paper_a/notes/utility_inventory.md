@@ -71,5 +71,6 @@ checked against them.
   these into a model row, so that a headline can rest on them, and add the
   general statement for the spread, that its sign follows the curvature of
   the benefit in distance.
-- **Pass 4, the subsection.** Why this utility, how it varies, and which
-  conclusions turn on it, written from this table and the rows.
+- **Pass 4, the subsection.** Done on 18 October 2026 (D13). Literature,
+  subsection The engagement utility, written from this table and the rows,
+  with new rows L35 to L39.

@@ -281,6 +281,20 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   benefit in distance. A14's quadratic is concave and Akerlof's benefit is
   convex. Headline K9 and conclusion C25 rest on M21, and K7's scope note,
   the Literature opening, I1 and 1.2.1 cite it.
+- [x] **D13. Pass 4 of the utility work, the subsection. 18 Oct 2026, at
+  the author's request** ("let's do pass 4 then"). Literature now has three
+  subsections, how the papers read answer the question, the engagement
+  utility, and papers read. The utility sentences and the homophily
+  sentence left the method paragraph for the new subsection, which has four
+  paragraphs. Why this utility (M19 and its controls, against Akerlof's
+  convention, a taste and an identification choice), how the papers read
+  value the other (a shared scale, a complementarity, a distance), how the
+  spread enters (two papers penalise it, two name it and leave it out), and
+  which conclusions turn on the choice. Rows L35 to L39 are new
+  (Hitsch et al., Eguia twice, Charles et al., Rothschild and White), and
+  Rothschild and White joins the read list. Open for the author. I2 pairs
+  outsiders with hosts at or above the standing, the range of the
+  quadratic, and its rows do not cite M21.
 
 ## Novelty ledger
 
