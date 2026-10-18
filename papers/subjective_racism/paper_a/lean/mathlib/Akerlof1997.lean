@@ -153,7 +153,7 @@ theorem eq6_intrinsic_opt {ι : Type*} [Fintype ι] [DecidableEq ι] (f g a b c 
 /-- Contrast, ours. Two classes `m − s` and `m + s` with equal weight, read by
 an observer below both, so that the distances are `D − s` and `D + s` with
 `D = g + m − y`. The mean benefit `1/(g + distance)` does not fall as the
-spread grows. -/
+dispersion grows. -/
 theorem contrast_spread_helps_distant (D s s' : ℝ) (hs : 0 ≤ s) (hss : s ≤ s')
     (hD : s' < D) :
     (1 / (D - s) + 1 / (D + s)) / 2 ≤ (1 / (D - s') + 1 / (D + s')) / 2 := by
@@ -172,7 +172,7 @@ theorem contrast_spread_helps_distant (D s s' : ℝ) (hs : 0 ≤ s) (hss : s ≤
   exact div_le_div_of_nonneg_left hD0 hp hle
 
 /-- Contrast, ours. An observer at the mean of the same two classes is at
-distance `s` from each, and the mean benefit does not rise as the spread
+distance `s` from each, and the mean benefit does not rise as the dispersion
 grows. -/
 theorem contrast_spread_hurts_at_mean (g s s' : ℝ) (hg : 0 < g) (hs : 0 ≤ s)
     (hss : s ≤ s') : 1 / (g + s') ≤ 1 / (g + s) := by
@@ -181,7 +181,7 @@ theorem contrast_spread_hurts_at_mean (g s s' : ℝ) (hg : 0 < g) (hs : 0 ≤ s)
 
 /-- Contrast, ours. Under the quadratic loss the mean squared distance from
 any observer to the two classes is the squared gap to the mean plus `s²`, so
-the spread lowers the utility of every observer. -/
+the dispersion lowers the utility of every observer. -/
 theorem contrast_quadratic_spread (m y s : ℝ) :
     ((m - s - y) ^ 2 + (m + s - y) ^ 2) / 2 = (m - y) ^ 2 + s ^ 2 := by ring
 

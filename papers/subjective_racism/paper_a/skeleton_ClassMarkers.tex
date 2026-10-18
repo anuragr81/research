@@ -106,7 +106,7 @@ group stays as the prior had it.
 
 The observer engages or refuses by the expected distance. For each group,
 that distance adds the squared gap between the observer's own class and the
-group's standing to the group's spread, and weights the sum by the posterior
+group's standing to the group's dispersion, and weights the sum by the posterior
 on that group. The observer engages when the expected distance is at most
 the engagement threshold, and refuses when the expected distance exceeds
 the threshold. The observer's own class sits inside the gap, so a higher
@@ -132,7 +132,7 @@ consumption. Part of the answer does not depend on the square. Whatever the
 benefit of contact, so long as it falls with the class distance, a group
 whose standing rises does not draw more refusal from observers above every
 member, and does not draw less from observers below every member. The sign
-of the spread does depend on it. The square makes a wider spread a cost to
+of the dispersion does depend on it. The square makes a wider dispersion a cost to
 every observer, while a benefit that flattens with distance makes it a gain
 to observers far from the group.
 
@@ -160,10 +160,10 @@ hearing an accent, is such a mixture (M17).
 The belief becomes a decision through the engagement threshold. Under the
 posterior on group, the expected squared class distance from an observer to
 the person is the sum over groups of the squared gap between the observer's
-own class and the group's standing plus the group's spread, each weighted by
+own class and the group's standing plus the group's dispersion, each weighted by
 the posterior on that group (M18). Read as the outsider with certainty, the
 observer refuses exactly when the squared gap to the outsider's standing plus
-the outsider's spread exceeds the threshold (M18). The share of observers who
+the outsider's dispersion exceeds the threshold (M18). The share of observers who
 refuse does not rise in the outsider's standing among observers who stand at
 or above it, and does not fall among observers who stand at or below it, so
 the discrimination-rate function that M14 takes as given is derived, together
@@ -226,7 +226,7 @@ model rows it rests on and what it does not claim.
   distributions normalised, and M3 needs a prior that gives every group
   positive weight. Not claimed as new (Table~\ref{tab:pending}).}
 \krow{K7}{An observer engages when the expected squared class distance, the
-  squared gap to the group's standing plus the group's spread, is at most the
+  squared gap to the group's standing plus the group's dispersion, is at most the
   engagement threshold. The share of observers who refuse does not rise in a
   group's standing among observers at or above that standing, and does not
   fall among observers at or below it.}{M18}{The engagement utility is the
@@ -236,21 +236,21 @@ model rows it rests on and what it does not claim.
   statement holds on its own range and nothing is claimed off it, and one
   observer below the standing is the control (M18). The ranges belong to
   the quadratic loss. Under Akerlof's benefit, which falls in distance by a
-  gravity formula, a wider spread helps observers far from the group, and
+  gravity formula, a wider dispersion helps observers far from the group, and
   the direction holds for observers beyond every member of the group rather
-  than on the whole range (L33, K9). The spread term is the
+  than on the whole range (L33, K9). The dispersion term is the
   risk premium of L8 in a contact setting, and the dependence on the
   observer's own class qualifies the claim of L9, so only that dependence is
   a candidate for novelty, and it waits (Table~\ref{tab:pending}).}
 \krow{K9}{Two statements survive any benefit of contact that falls in the
   class distance. A rise in a group's classes does not raise refusal among
   observers at or above every member and does not lower it among observers
-  at or below every member. The spread changes sign with the curvature of
+  at or below every member. The dispersion changes sign with the curvature of
   the benefit, a penalty under the quadratic loss and a gain for observers
   beyond the group under a convex benefit such as Akerlof's.}{M21}{The
   direction is shown at the two ends of the class range only, and between
   them it turns on the form, with an observer above the standing and below
-  a member as the control. The spread is shown for two members placed
+  a member as the control. The dispersion is shown for two members placed
   symmetrically, not for a general widening. The other rows keep the
   quadratic of A14 (A16, M21).}
 \krow{K8}{Separate budgets and one shared activity at one level give the
@@ -304,7 +304,7 @@ Figure~\ref{fig:ledger} draws the same model as a graph, and the graph merges
 entries of the table. The observer (P1) and the member who may pass (P2) are
 two roles of one entity, the person, and the client of the platform is a
 third role of the same entity. The two groups (P3, P4) are not entities of
-their own. Each group is a set of persons with a standing and a spread, and
+their own. Each group is a set of persons with a standing and a dispersion, and
 the graph draws the two groups together as the population state of the
 persons. The pair (P6) is not an
 entity either. Its engagement and its shared activity are two actions that
@@ -341,7 +341,7 @@ person, and no arrow of the platform is solid.
   which that share does not rise and the range on which it does not fall.}
   {The employer of Phelps, who combines a group prior with a test score
   (L4), the
-  employer of Aigner and Cain, who discounts a group for its spread (L8),
+  employer of Aigner and Cain, who discounts a group for its dispersion (L8),
   and the employers of P\k{e}ski and Szentes, for whom a signal's value is
   the same whatever their own colour (L9).}
   {M1, M2, M3, M14, M17, M18, M19, L4, L8, L9}
@@ -488,7 +488,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   class $c$ at $v-\kappa\,(c-y)^2$ against the outside option $\bar u$, and
   engages when the expected distance $E$ under the posterior on group is at
   most the engagement threshold $\bar d=(v-\bar u)/\kappa$. The observers
-  form a finite set $J$. Group $g$ has standing $\bar c_g$ and spread
+  form a finite set $J$. Group $g$ has standing $\bar c_g$ and dispersion
   $\nu_g$ under its prior.}
   {An observer of a given own class values engaging with a person of a given
   class at the baseline value less the sensitivity times the squared
@@ -496,7 +496,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   observer engages when the expected distance, taken under the posterior on
   group, is at most the engagement threshold, which is the baseline value
   less the outside option, divided by the sensitivity. The observers are
-  finitely many. Each group has a standing and a spread under its prior.
+  finitely many. Each group has a standing and a dispersion under its prior.
   Lean, \lean{Engagement.engages\_iff}.}
   {$c$, $y$, $v$, $\kappa$, $\bar u$, $E$, $\bar d$, $J$, $\bar c$, $\nu_g$}
   {M18}
@@ -635,9 +635,9 @@ that check it.}\\
 \mrow{M18}{An observer engages when the expected squared class distance is
   at most the engagement threshold. Under the posterior on group that
   distance is the sum over groups of the squared gap to the group's standing
-  plus the group's spread. Read as the outsider with certainty, the observer
+  plus the group's dispersion. Read as the outsider with certainty, the observer
   refuses exactly when the squared gap to the outsider's standing plus its
-  spread exceeds the threshold. The refusal share among the observers does
+  dispersion exceeds the threshold. The refusal share among the observers does
   not rise in the standing on the range at or below every observer's class,
   and does not fall on the range at or above every observer's class. With
   two groups, more weight on the outsider raises the expected distance
@@ -710,7 +710,7 @@ that check it.}\\
 \mrow{M21}{For any benefit of contact that does not rise in the class
   distance, a rise in every member's class does not raise refusal among
   observers at or above every member and does not lower it among observers
-  at or below every member. A wider spread of two members does not lower
+  at or below every member. A wider dispersion of two members does not lower
   the mean benefit to an observer beyond both when the benefit is convex in
   distance, and does not raise it when the benefit is concave. The benefit
   of A14 is concave, and Akerlof's is convex.}
@@ -821,18 +821,18 @@ Under a distance the own type changes whether the rise brings the group
 nearer or takes it further, and that is how the direction of a group's
 effect on refusal comes to depend on the observer's own class (M18).
 
-A group's spread enters the value in two of the papers read. Aigner and
+A group's dispersion enters the value in two of the papers read. Aigner and
 Cain discount expected productivity for risk (L8), and Rothschild and White
 let a college's benefit fall in the variance of its students' ability
 (L39). Charles, Hurst and Roussanov name the variance and leave it out as
 hard to tell from the mean (L37), and Eguia names the whole distribution of
 skills and keeps the average (L38). The other papers read value a group by
-its mean alone. In the engagement utility the spread enters because the
+its mean alone. In the engagement utility the dispersion enters because the
 expected squared distance is the squared gap to the standing plus the
-spread (M18). The sign of the spread follows the curvature of the benefit
+dispersion (M18). The sign of the dispersion follows the curvature of the benefit
 of contact in the class distance. The quadratic loss is concave in
-distance, so a wider spread lowers the benefit to every observer. Akerlof's
-benefit is convex, so a wider spread does not lower the benefit to an
+distance, so a wider dispersion lowers the benefit to every observer. Akerlof's
+benefit is convex, so a wider dispersion does not lower the benefit to an
 observer beyond the group, whose nearer members come nearer, and does not
 raise it to an observer at the centre (M21, L33). The comparison is proved
 for two members placed symmetrically about the centre, not for a general
@@ -879,7 +879,7 @@ comparative statics behind I3, use the quadratic payoff of A15 (M19, M20).
   disturbance terms corresponding to them.}{660}{M1, C19}
 \lrow{L8}{AignerCain1977}{The employer chooses the group that maximises
   expected productivity discounted for risk, so a group's conditional
-  variance is penalised in its own right. The spread term of M18 is this
+  variance is penalised in its own right. The dispersion term of M18 is this
   penalty in a contact setting, with class distance in place of
   productivity. The parallel ends at the observer, whose own class enters
   M18 and plays no part in the employer's choice.}{an employer with this
@@ -979,7 +979,7 @@ comparative statics behind I3, use the quadratic payoff of A15 (M19, M20).
   population group.}{11}{M18}
 \lrow{L24}{Pesendorfer1995}{A seller's value is the average type of its
   clientele, so a sign that certifies class loses value as those below buy
-  it. The spread that I1 narrows widens again as the sign is copied, and
+  it. The dispersion that I1 narrows widens again as the sign is copied, and
   the sign is replaced.}{are mostly low types will be less attractive
   to}{16}{M18}
 \lrow{L25}{ChettyEtAl2022b}{Friending bias rises with racial diversity
@@ -1029,10 +1029,10 @@ comparative statics behind I3, use the quadratic payoff of A15 (M19, M20).
   sort-with the marginal utility of decreased distance vanishing at zero-to
   be a special case.}{7}{M18, M19}
 \lrow{L33}{Akerlof1997}{The benefit falls in distance toward zero and is
-  convex, so a wider spread helps an observer far from the group
+  convex, so a wider dispersion helps an observer far from the group
   (\path{Akerlof1997.contrast_spread_helps_distant}), and an observer above
   the standing but below some members can lose as the group rises
-  (\path{Akerlof1997.control_benefit_range_differs}). The spread term and
+  (\path{Akerlof1997.control_benefit_range_differs}). The dispersion term and
   the ranges of M18 belong to the quadratic loss. The direction for
   observers beyond every member survives any benefit that falls in distance
   (\path{Akerlof1997.contrast_shift_up_above}).}{as either the initial or
@@ -1058,18 +1058,18 @@ comparative statics behind I3, use the quadratic payoff of A15 (M19, M20).
   brings the group nearer.}{highly skilled individuals, who appreciate their
   group’s average skill more than less skilled individuals}{12}{M18}
 \lrow{L37}{CharlesEtAl2007}{The variance of group income is named as a
-  determinant of status and left out of the model. In M18 the spread enters
+  determinant of status and left out of the model. In M18 the dispersion enters
   every observer's expected distance.}{In general, equilibrium status can
   also depend on higher moments of the income distribution, such as the
   variance.}{22}{M18, M21}
 \lrow{L38}{Eguia2013}{The whole distribution of skills in a group is named
   as an extension, and the value of a group keeps its average skill alone.
-  In M18 the spread enters every observer's expected distance.}{assuming
+  In M18 the dispersion enters every observer's expected distance.}{assuming
   that v depends on the whole distribution of skills in group J, and not
   only on the average}{14}{M18, M21}
 \lrow{L39}{RothschildWhite1993}{The benefit of a college falls in the
   variance of its students' ability, as a cost of teaching that is supposed
-  rather than derived. The spread term of M18 penalises the spread through
+  rather than derived. The dispersion term of M18 penalises the dispersion through
   the quadratic loss, and its sign follows the curvature of the benefit of
   contact (M21).}{a decreasing function of the variance of
   ability}{10}{M18, M21}
@@ -1157,8 +1157,8 @@ implications for policy and says what limits each.
 \crow{C25}{The direction of a group's effect on refusal depends on the
   observer's own class under any benefit of contact that falls in the class
   distance, at the two ends of the class range. Its full range and the sign
-  of the spread term belong to the quadratic loss, and under Akerlof's
-  benefit a wider spread helps observers beyond the group.}{M21, L33}
+  of the dispersion term belong to the quadratic loss, and under Akerlof's
+  benefit a wider dispersion helps observers beyond the group.}{M21, L33}
 \end{longtable}
 
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -1219,20 +1219,20 @@ is a conclusion, and the table claims nothing the rows do not.
 \endhead
 \bottomrule
 \endfoot
-\irow{I1}{Narrow the spread. The expected distance adds each group's spread
+\irow{I1}{Narrow the dispersion. The expected distance adds each group's dispersion
   to the squared gap, weighted by the posterior on the group, so a narrower
-  spread lowers the distance for every observer, where a higher standing
+  dispersion lowers the distance for every observer, where a higher standing
   lowers it only among observers above the standing. A price that certifies
-  class, or a shown class, acts on the spread.}{M18, M21, L24, L33}{Once class is read
+  class, or a shown class, acts on the dispersion.}{M18, M21, L24, L33}{Once class is read
   within the group, group sufficiency fails and the marker carries nothing,
   so the setting is a signalling one (L17) and the sorting is by class in
-  place of group. The row says what the spread does while the marker still
-  holds. The sign of the spread is also a property of the quadratic loss,
-  and under Akerlof's benefit a wider spread helps observers far from the
+  place of group. The row says what the dispersion does while the marker still
+  holds. The sign of the dispersion is also a property of the quadratic loss,
+  and under Akerlof's benefit a wider dispersion helps observers far from the
   group (L33), and its sign follows the curvature of the benefit (M21).}{A price that certifies class is paid by those below it as well. In
   Pesendorfer a seller whose clients are mostly low types loses value (L24),
   so the sign has to be replaced, and certification by price is a cycle of
-  signs rather than a one-off narrowing of the spread.}
+  signs rather than a one-off narrowing of the dispersion.}
 \irow{I2}{Pair outsiders with hosts at or above the standing. A higher
   outsider standing does not raise refusal among observers at or above the
   standing and does not lower refusal among observers below it, so mixing
@@ -1328,7 +1328,7 @@ the host, $\mathrm{marg}$ the admission margin, $\Pi$ the profit and $c_E$
 the admission threshold. Row M17 mixes two standings by group weights as in
 M2 and M3. Row M18 has an observer of own class $y$, the expected squared
 distance $E(w,y)$ under group weights $w$, the standing $\bar c_g$ and the
-spread $\nu_g$ of group $g$ under its prior, the baseline value $v$, the
+dispersion $\nu_g$ of group $g$ under its prior, the baseline value $v$, the
 sensitivity $\kappa$, the outside option $\bar u$, the engagement threshold
 $\bar d=(v-\bar u)/\kappa$, the observers $J$ with classes $y_j$, the derived
 discrimination-rate function $F$, and the salience $s_g$ as the weight on
@@ -1773,7 +1773,7 @@ Engagement threshold & $\bar d$ & The largest expected distance at which the
 Expected distance & $E$ & The expected squared class distance from the
   observer to the person, under the posterior on group (M18). \\
   \addlinespace
-Spread & $\nu_g$ & The variance of class within group $g$ under its prior
+Dispersion & $\nu_g$ & The variance of class within group $g$ under its prior
   (M18). \\ \addlinespace
 Observers & $J$ & The finite set of observers over whom the refusal share is
   taken (M18). \\ \addlinespace

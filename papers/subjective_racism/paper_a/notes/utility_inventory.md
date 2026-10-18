@@ -11,7 +11,7 @@ checked against them.
 
 ## 1. The inventory
 
-| Paper | Objective of the deciding agent | What it depends on | Own type of the decider | Penalty on spread | Stated basis |
+| Paper | Objective of the deciding agent | What it depends on | Own type of the decider | Penalty on dispersion | Stated basis |
 |---|---|---|---|---|---|
 | Phelps (1972) | Expected profit, modelled as the least-squares predictor of qualification (eq. 5′, `Phelps1972.pred`) | Posterior mean of the hidden type | No | None. Variances set the weights (PH-Q4) | "maximize expected profit", no derivation |
 | Aigner and Cain (1977) | `U(q) = a − b e^{−cq}`, so `E(q|y) − k Var(q|y)` (eqs. 7, 8, `AignerCain1977.eq8_order`) | Posterior mean and variance | No | Yes, a risk premium (AC-Q6) | Cited to Parkin, chosen because it depends on the variance |
@@ -35,8 +35,8 @@ checked against them.
 | Laouénan and Rathelot (2022) | Guests' demand `Q^β/(P^κ Γ^m)`, hosts maximise profit | Posterior mean of quality | Guest no | None | "a simple conceptual framework" |
 | Hitsch, Hortaçsu and Ariely (2006) | `x_w′β + (|x_w − x_m|₊)^α γ⁺ + (|x_w − x_m|₋)^α γ⁻ + Σ ϑ^{kl} + ε` with `α = 2` (eq. 5, HHA-Q11) | Seen attributes, vertically and by distance | Yes, signed squared distances and own-by-mate pairs | None | Identification, the distance terms enter squared |
 | McPherson et al. (2001), Chetty et al. (2022b) | No utility. A homophily measure, and friending bias as one minus a share ratio | Sameness, or the high-SES share | By conditioning | None | Measurement |
-| **Akerlof (1997)** | `Σ_j e/((f + d₀)(g + |x − x₀ⱼ|)) − a x² + b x + c` (eq. 6). Also the quadratic `−d(x − x̄)²` of eq. (5) as "a special case" (AK-Q9) | The distance between known positions | **Yes, own position, as a distance** (AK-Q16) | None. The benefit is convex in distance, so spread can help (`contrast_spread_helps_distant`) | Gravity models of trade, "common practice" (AK-Q11) |
-| **A1** | `v − κ(c − y)²` against `ū`, with `κ = a²β²/(8(a + h))` (A14, M19) | Posterior on group, through the standing and spread of each group | **Yes, own class, as a distance** (M18) | **Yes, the spread enters every observer's expected distance** | **Derived from separate budgets and one shared activity (M19)** |
+| **Akerlof (1997)** | `Σ_j e/((f + d₀)(g + |x − x₀ⱼ|)) − a x² + b x + c` (eq. 6). Also the quadratic `−d(x − x̄)²` of eq. (5) as "a special case" (AK-Q9) | The distance between known positions | **Yes, own position, as a distance** (AK-Q16) | None. The benefit is convex in distance, so dispersion can help (`contrast_spread_helps_distant`) | Gravity models of trade, "common practice" (AK-Q11) |
+| **A1** | `v − κ(c − y)²` against `ū`, with `κ = a²β²/(8(a + h))` (A14, M19) | Posterior on group, through the standing and dispersion of each group | **Yes, own class, as a distance** (M18) | **Yes, the dispersion enters every observer's expected distance** | **Derived from separate budgets and one shared activity (M19)** |
 
 ## 2. What the inventory shows
 
@@ -46,10 +46,10 @@ checked against them.
    with the own type, Pesendorfer and Eguia. Two value the other by a
    distance from the own position, Akerlof and A1, and Hitsch, Hortaçsu
    and Ariely estimate distance terms alongside a vertical one.
-2. **The spread.** Only Aigner and Cain and Rothschild and White penalise a
-   spread, the first as a risk premium and the second as a teaching cost.
-   Charles, Hurst and Roussanov and Eguia name the spread and leave it out.
-   In A1 the spread enters through the quadratic loss, and under Akerlof's
+2. **The dispersion.** Only Aigner and Cain and Rothschild and White penalise a
+   dispersion, the first as a risk premium and the second as a teaching cost.
+   Charles, Hurst and Roussanov and Eguia name the dispersion and leave it out.
+   In A1 the dispersion enters through the quadratic loss, and under Akerlof's
    convex benefit it would enter with the opposite sign for distant
    observers.
 3. **The basis.** Most forms are chosen for tractability or by citation.
@@ -69,7 +69,7 @@ checked against them.
   (`Akerlof1997.contrast_shift_up_above`, `contrast_shift_up_below`) and the
   failure in between (`control_benefit_range_differs`). The pass would move
   these into a model row, so that a headline can rest on them, and add the
-  general statement for the spread, that its sign follows the curvature of
+  general statement for the dispersion, that its sign follows the curvature of
   the benefit in distance.
 - **Pass 4, the subsection.** Done on 18 October 2026 (D13). Literature,
   subsection The engagement utility, written from this table and the rows,

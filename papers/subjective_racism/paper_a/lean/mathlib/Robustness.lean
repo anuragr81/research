@@ -92,7 +92,7 @@ theorem control_range_needs_quadratic :
       ((5 : ℝ) ^ 2 + 5 ^ 2) / 2 < (6 ^ 2 + 4 ^ 2) / 2 := by
   constructor <;> norm_num
 
-/-! ### (ii) The spread, whose sign follows the curvature of the benefit -/
+/-! ### (ii) The dispersion, whose sign follows the curvature of the benefit -/
 
 /-- Two points `a ≤ b` inside `[a', b']` with the same sum. A function convex
 on a set holding `a'` and `b'` has `Φ a + Φ b ≤ Φ a' + Φ b'`. -/
@@ -119,7 +119,7 @@ theorem majorize {S : Set ℝ} {Φ : ℝ → ℝ} (hΦ : ConvexOn ℝ S Φ) {a b
 
 /-- A benefit convex in distance. Two members at distances `D − s` and `D + s`
 from the observer, as for an observer beyond both members of a pair centred
-at distance `D`. A wider spread does not lower the mean benefit. -/
+at distance `D`. A wider dispersion does not lower the mean benefit. -/
 theorem spread_convex {Φ : ℝ → ℝ} (hΦ : ConvexOn ℝ (Set.Ici 0) Φ) (D s s' : ℝ)
     (hs : 0 ≤ s) (hss : s ≤ s') (hD : s' ≤ D) :
     (Φ (D - s) + Φ (D + s)) / 2 ≤ (Φ (D - s') + Φ (D + s')) / 2 := by
@@ -128,7 +128,7 @@ theorem spread_convex {Φ : ℝ → ℝ} (hΦ : ConvexOn ℝ (Set.Ici 0) Φ) (D 
     (by linarith) (by linarith) (by linarith) (by ring)
   linarith
 
-/-- A benefit concave in distance. The same wider spread does not raise the
+/-- A benefit concave in distance. The same wider dispersion does not raise the
 mean benefit. -/
 theorem spread_concave {Φ : ℝ → ℝ} (hΦ : ConcaveOn ℝ (Set.Ici 0) Φ) (D s s' : ℝ)
     (hs : 0 ≤ s) (hss : s ≤ s') (hD : s' ≤ D) :
@@ -138,7 +138,7 @@ theorem spread_concave {Φ : ℝ → ℝ} (hΦ : ConcaveOn ℝ (Set.Ici 0) Φ) (
   linarith
 
 /-- An observer at the centre of the pair is at distance `s` from both, and for
-any benefit that falls in distance a wider spread does not raise the mean
+any benefit that falls in distance a wider dispersion does not raise the mean
 benefit. -/
 theorem spread_at_centre {Φ : ℝ → ℝ} (hΦ : AntitoneOn Φ (Set.Ici 0)) (s s' : ℝ)
     (hs : 0 ≤ s) (hss : s ≤ s') : (Φ s' + Φ s') / 2 ≤ (Φ s + Φ s) / 2 := by
@@ -148,7 +148,7 @@ theorem spread_at_centre {Φ : ℝ → ℝ} (hΦ : AntitoneOn Φ (Set.Ici 0)) (s
 
 /-! ### (iii) The two forms -/
 
-/-- A14's benefit `v − κ d²` is concave in distance, so (ii) gives the spread
+/-- A14's benefit `v − κ d²` is concave in distance, so (ii) gives the dispersion
 the sign of a penalty for every observer. -/
 theorem quadratic_concave (v κ : ℝ) (hκ : 0 ≤ κ) :
     ConcaveOn ℝ (Set.Ici 0) (fun d : ℝ => v - κ * d ^ 2) := by
@@ -169,7 +169,7 @@ theorem quadratic_antitone (v κ : ℝ) (hκ : 0 ≤ κ) :
   nlinarith
 
 /-- Akerlof's benefit `(g + d)⁻¹` is convex in distance, so (ii) gives the
-spread the sign of a gain for an observer beyond both members. -/
+dispersion the sign of a gain for an observer beyond both members. -/
 theorem gravity_convex (g : ℝ) (hg : 0 < g) :
     ConvexOn ℝ (Set.Ici 0) (fun d : ℝ => (g + d)⁻¹) := by
   have h := (convexOn_zpow (𝕜 := ℝ) (-1)).translate_right g
@@ -189,7 +189,7 @@ theorem gravity_antitone (g : ℝ) (hg : 0 < g) :
   simp only [Set.mem_Ici] at hx
   exact inv_anti₀ (by linarith) (by linarith)
 
-/-- Control for (ii). At distance `3` a spread of `1` raises the mean of
+/-- Control for (ii). At distance `3` a dispersion of `1` raises the mean of
 `(1 + d)⁻¹` from `1/4` to `4/15`, and lowers the mean of `−d²` from `−9` to
 `−10`. -/
 theorem control_spread_sign :

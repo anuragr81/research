@@ -295,6 +295,13 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   Rothschild and White joins the read list. Open for the author. I2 pairs
   outsiders with hosts at or above the standing, the range of the
   quadratic, and its rows do not cite M21.
+- [x] **D14. "Spread" renamed "dispersion". 18 Oct 2026, at the author's
+  request** (the word carries a finance meaning, and "dispersion is fine").
+  The manuscript, the measurement map, the Terminology table, the Lean
+  comments and `notes/utility_inventory.md` now say dispersion for
+  $\nu_g$. Lean identifiers keep `spread` (`Engagement.spread`,
+  `Robustness.spread_convex` and the like), and the lit records keep their
+  wording, since their quotations are verbatim.
 
 ## Novelty ledger
 

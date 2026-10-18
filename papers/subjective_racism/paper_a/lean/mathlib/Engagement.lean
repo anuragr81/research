@@ -9,7 +9,7 @@ group of M2 and M3. The engagement utility is `v − κ·(c − y)²`, so the
 observer engages exactly when the expected squared distance is at most the
 engagement threshold `D = (v − ū)/κ`. The expected squared distance to a
 group is the squared gap between the group's standing and the observer's own
-class, plus the group's spread. -/
+class, plus the group's dispersion. -/
 
 namespace Engagement
 
@@ -19,7 +19,7 @@ variable {G C ι : Type*} [Fintype G] [Fintype C]
 the class value of `c`. -/
 noncomputable def standing (p : G → C → ℝ) (x : C → ℝ) (g : G) : ℝ := ∑ c, p g c * x c
 
-/-- The spread of group `g`, the within-group variance of class. -/
+/-- The dispersion of group `g`, the within-group variance of class, named `spread` in the code. -/
 noncomputable def spread (p : G → C → ℝ) (x : C → ℝ) (g : G) : ℝ :=
   ∑ c, p g c * (x c - standing p x g) ^ 2
 
@@ -47,7 +47,7 @@ theorem second_moment (q : C → ℝ) (x : C → ℝ) (y : ℝ) (hq : ∑ c, q c
 
 /-- Row M18 (i). Under priors that each sum to one, the expected squared
 distance to the mixture is the weighted sum over groups of the squared gap to
-the group's standing plus the group's spread. -/
+the group's standing plus the group's dispersion. -/
 theorem expDist_decomp (p : G → C → ℝ) (x : C → ℝ) (w : G → ℝ) (y : ℝ)
     (hp : ∀ g, ∑ c, p g c = 1) :
     expDist p x w y = ∑ g, w g * ((standing p x g - y) ^ 2 + spread p x g) := by
@@ -62,7 +62,7 @@ theorem expDist_decomp (p : G → C → ℝ) (x : C → ℝ) (w : G → ℝ) (y 
 
 /-- Row M18 (ii). When the person is read as group `O` with certainty, the
 expected squared distance is the squared gap to `O`'s standing plus `O`'s
-spread. -/
+dispersion. -/
 theorem expDist_certain [DecidableEq G] (p : G → C → ℝ) (x : C → ℝ) (O : G) (y : ℝ)
     (hp : ∀ g, ∑ c, p g c = 1) :
     expDist p x (fun g => if g = O then 1 else 0) y =
@@ -82,7 +82,7 @@ theorem engages_iff (v κ u e : ℝ) (hκ : 0 < κ) : u ≤ v - κ * e ↔ engag
   constructor <;> intro h <;> linarith
 
 /-- Row M18 (ii). Read as `O` with certainty, the observer refuses exactly when
-the squared gap to `O`'s standing plus `O`'s spread exceeds the threshold. -/
+the squared gap to `O`'s standing plus `O`'s dispersion exceeds the threshold. -/
 theorem refusal_iff [DecidableEq G] (p : G → C → ℝ) (x : C → ℝ) (O : G) (y D : ℝ)
     (hp : ∀ g, ∑ c, p g c = 1) :
     ¬ engages D (expDist p x (fun g => if g = O then 1 else 0) y) ↔
@@ -92,7 +92,7 @@ theorem refusal_iff [DecidableEq G] (p : G → C → ℝ) (x : C → ℝ) (O : G
 /-- The discrimination-rate function derived from the threshold. Among the
 observers `J` with classes `y`, the share who refuse a person read as the
 outsider group with certainty, as a function of that group's standing `m`
-and spread `s`. -/
+and dispersion `s`. -/
 noncomputable def refusalShare [DecidableEq ι] (J : Finset ι) (y : ι → ℝ) (s D m : ℝ) : ℝ :=
   ((J.filter fun j => D < (m - y j) ^ 2 + s).card : ℝ) / J.card
 
@@ -111,7 +111,7 @@ theorem refusalShare_antitone [DecidableEq ι] (J : Finset ι) (y : ι → ℝ) 
     nlinarith
 
 /-- Control for (iii). An observer below the standing refuses more as the
-standing rises. One observer of class `0`, spread `0`, threshold `1`. At a
+standing rises. One observer of class `0`, dispersion `0`, threshold `1`. At a
 standing of `1` the observer engages, and at `2` the observer refuses. -/
 theorem control_observer_below :
     refusalShare ({0} : Finset (Fin 1)) (fun _ => 0) 0 1 1 = 0 ∧
