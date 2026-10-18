@@ -128,4 +128,93 @@ theorem control_entrant_returns_where_workers_would_gamble :
 prefers the return whenever the upskilling cost is positive, whatever the lottery cost. -/
 theorem firm_prefers_return {C : ℝ} (hC : 0 < C) : (0 : ℝ) < C := hC
 
+/-! ### Who receives the lottery cost: the job holders above the entrant (M58) -/
+
+section Dues
+
+variable {ι : Type*}
+
+/-- Job holders strictly above an entrant's former rank. -/
+def above (H : Finset ι) (r : ι → ℕ) (i : ι) : Finset ι := H.filter (fun k => r i < r k)
+
+/-- What job holder `h` receives: from each entrant with holders above, an equal share of `L`
+among those holders; from an entrant with no holder above, an equal share among all holders. -/
+noncomputable def dues (P H : Finset ι) (r : ι → ℕ) (L : ℝ) (h : ι) : ℝ :=
+  ∑ i ∈ P, (if r i < r h then L / ((above H r i).card : ℝ)
+            else if (above H r i).card = 0 then L / (H.card : ℝ) else 0)
+
+/-- Each entrant's lottery cost is received in full by the job holders. -/
+theorem dues_of_entrant (H : Finset ι) (r : ι → ℕ) (L : ℝ) (hH : H.Nonempty) (i : ι) :
+    ∑ h ∈ H, (if r i < r h then L / ((above H r i).card : ℝ)
+            else if (above H r i).card = 0 then L / (H.card : ℝ) else 0) = L := by
+  by_cases hn : (above H r i).card = 0
+  · have hnone : ∀ h ∈ H, ¬ r i < r h := by
+      intro h hh hlt
+      have : h ∈ above H r i := mem_filter.mpr ⟨hh, hlt⟩
+      rw [card_eq_zero] at hn
+      simp [hn] at this
+    rw [sum_congr rfl (fun h hh => by rw [if_neg (hnone h hh), if_pos hn])]
+    rw [sum_const, nsmul_eq_mul]
+    have : (H.card : ℝ) ≠ 0 := by exact_mod_cast (card_pos.mpr hH).ne'
+    field_simp
+  · rw [sum_congr rfl (fun h _ => by rw [if_neg hn])]
+    rw [← sum_filter]
+    show ∑ h ∈ above H r i, L / ((above H r i).card : ℝ) = L
+    rw [sum_const, nsmul_eq_mul]
+    have : ((above H r i).card : ℝ) ≠ 0 := by exact_mod_cast hn
+    field_simp
+
+/-- No leak: the job holders receive in total the number of entrants times the lottery cost. -/
+theorem dues_total (P H : Finset ι) (r : ι → ℕ) (L : ℝ) (hH : H.Nonempty) :
+    ∑ h ∈ H, dues P H r L h = L * P.card := by
+  unfold dues
+  rw [sum_comm, sum_congr rfl (fun i _ => dues_of_entrant H r L hH i), sum_const, nsmul_eq_mul]
+  ring
+
+/-- Receipts rise with rank: a job holder of higher rank receives at least as much. -/
+theorem dues_mono (P H : Finset ι) (r : ι → ℕ) {L : ℝ} (hL : 0 ≤ L) {h h' : ι} (hh' : h' ∈ H)
+    (hr : r h ≤ r h') : dues P H r L h ≤ dues P H r L h' := by
+  unfold dues
+  apply sum_le_sum
+  intro i _
+  by_cases h1 : r i < r h
+  · rw [if_pos h1, if_pos (lt_of_lt_of_le h1 hr)]
+  · rw [if_neg h1]
+    by_cases h2 : r i < r h'
+    · rw [if_pos h2]
+      have hpos : (above H r i).card ≠ 0 := by
+        intro hc
+        rw [card_eq_zero] at hc
+        have : h' ∈ above H r i := mem_filter.mpr ⟨hh', h2⟩
+        simp [hc] at this
+      rw [if_neg hpos]
+      positivity
+    · rw [if_neg h2]
+
+/-- A job holder with no entrant below receives nothing, when every entrant has a holder
+above. -/
+theorem dues_bottom_zero (P H : Finset ι) (r : ι → ℕ) (L : ℝ) {h : ι}
+    (hlow : ∀ i ∈ P, r h ≤ r i) (hab : ∀ i ∈ P, (above H r i).card ≠ 0) :
+    dues P H r L h = 0 := by
+  unfold dues
+  apply sum_eq_zero
+  intro i hi
+  rw [if_neg (not_lt.mpr (hlow i hi)), if_neg (hab i hi)]
+
+/-- Control: four ranks, the entrant from the bottom rank, three job holders above. Each holder
+receives a third of the lottery cost, and the holder of the top rank receives the same as the
+holder just above the entrant. -/
+theorem control_dues_example (L : ℝ) :
+    dues ({0} : Finset (Fin 4)) {1, 2, 3} (fun k => k.val) L 1 = L / 3 ∧
+      dues ({0} : Finset (Fin 4)) {1, 2, 3} (fun k => k.val) L 3 = L / 3 := by
+  constructor <;> simp [dues, above, Finset.filter_insert, Finset.filter_singleton]
+
+/-- Control: the fallback. An entrant from the top rank has no holder above, so its lottery
+cost goes to all three holders equally. -/
+theorem control_dues_top_entrant_fallback (L : ℝ) :
+    dues ({3} : Finset (Fin 4)) {0, 1, 2} (fun k => k.val) L 0 = L / 3 := by
+  simp [dues, above, Finset.filter_insert, Finset.filter_singleton]
+
+end Dues
+
 end Isc

@@ -73,17 +73,17 @@ summary:
 base_case:
   title: 'Base case, two displaced workers'
   rows: [M42, M43, M44, M45, M46]
-  words: [150, 220]
+  words: [150, 240]
   summary:
-    - para: 1
-      text: 'The base case is the smallest pool, two displaced workers with unequal former incomes.'
-      rests_on: ['M42', 'M32']
     - para: 1
       text: 'With two entrants the lottery is the exchange of their former jobs, so neither faces any risk.'
       rests_on: ['M42']
     - para: 2
       text: 'The richer entrant gives up income in the exchange, while the poorer gains whenever the lottery cost is below the gap between their former incomes.'
       rests_on: ['M46']
+    - para: 2
+      text: 'The poorer entrant''s lottery cost goes to the job holders above its former rank, the people whose favour the lottery stands for, and the exchange lifts it into the richer entrant''s former job.'
+      rests_on: ['M58', 'M42']
     - para: 2
       text: 'The richer entrant still prefers the exchange to its other routes when its upskilling cost is at least the income it climbs and the poorer entrant''s former income less the lottery cost is at least the bottom income, because the downgrade pays only the bottom income.'
       rests_on: ['M43', 'M32']
@@ -94,7 +94,7 @@ base_case:
       text: 'Both conditions hold for every nondecreasing utility, so the transfer from the richer entrant to the poorer rests on the bottom income rather than on a taste for risk.'
       rests_on: ['M43']
     - para: 3
-      text: 'If the downgrade instead kept a fixed share of former income, the richer entrant would refuse every partner whose former income less the lottery cost is below that share, which closes the path from the bottom to the top.'
+      text: 'Had the downgrade kept a share of former income, the richer entrant would refuse every partner paying less than that share plus the lottery cost, closing the path from the bottom to the top.'
       rests_on: ['M44']
     - para: 3
       text: 'Closure cannot act with two entrants, nor with two from one status group and one from the other, so it first acts with two in each.'
@@ -201,8 +201,8 @@ idea_summaries:
         text: 'The lottery cost is the price of competing through connections, the one channel of mobility the firm does not control, and nobody in the model sets it.'
         rests_on: ['anchor: The lottery benefit is an exogenous benefit from social connections that is not managed by the firm', 'M47']
       - para: 1
-        text: 'It is paid once by every entrant, and it leaves the circuit of the firm and its workers.'
-        rests_on: ['M46', 'anchor: rather than being diverted into the social lottery channel']
+        text: 'It is paid once by every entrant, to the job holders above the entrant''s former rank, so it stays among workers and flows up the ladder.'
+        rests_on: ['M46', 'M58']
       - para: 2
         text: 'For a displaced worker, a higher lottery cost lowers the worth of the lottery for every shape of utility, so some who would have entered return instead, and the firm receives their upskilling cost.'
         rests_on: ['M53']
@@ -210,14 +210,11 @@ idea_summaries:
         text: 'The lottery cost sets the smallest gap in former income that an exchange can bridge with a gain to the poorer entrant.'
         rests_on: ['M46']
       - para: 2
-        text: 'It also excludes the poorest, whose former income less the lottery cost falls below the bottom income, because the top prefers the downgrade to their job, and it excludes the top as a prize for anyone within the lottery cost of it.'
-        rests_on: ['M54']
-      - para: 2
-        text: 'So the lottery cost narrows the window of ranks that can exchange with the top from both ends, and closes it once the cost exceeds half the distance from the bottom income to the top.'
+        text: 'It also excludes the poorest, whose former income less the lottery cost falls below the bottom income, because the top prefers the downgrade to their job, and it excludes the top as a prize for anyone within the lottery cost of it, so the window of ranks that can exchange with the top narrows from both ends.'
         rests_on: ['M54']
       - para: 3
-        text: 'A job holder is untouched by the lottery cost until displaced, when it lowers the worth of being displaced.'
-        rests_on: ['M39', 'M53']
+        text: 'A job holder receives a share of the lottery cost of every entrant below, rising with rank, and is otherwise untouched by it until displaced.'
+        rests_on: ['M58', 'M39']
       - para: 3
         text: 'The two status groups face the same lottery cost, since closure acts on who can be a partner, not on the price.'
         rests_on: ['M29', 'M47']
@@ -265,7 +262,7 @@ faq:
     answer:
       - text: 'Nobody in the model sets the lottery cost, which is the price of competing through connections, the one channel of mobility the firm does not manage.'
         rests_on: ['anchor: The lottery benefit is an exogenous benefit from social connections that is not managed by the firm', 'M47']
-      - text: 'The firm never receives the lottery cost, and a higher lottery cost leads more displaced workers to return and pay the firm the upskilling cost, so the firm''s preference for upskilling over the lottery holds.'
+      - text: 'The firm never receives the lottery cost, which goes to the job holders above the entrant, and a higher lottery cost leads more displaced workers to return and pay the firm the upskilling cost, so the firm''s preference for upskilling over the lottery holds.'
         rests_on: ['M53', 'M58', 'anchor: flows back to the firm as upskilling investments']
   - question: 'How does the choice between the lottery and upskilling look to the firm, to the displaced worker and to workers taken together?'
     words: [30, 230]
@@ -274,12 +271,12 @@ faq:
         rests_on: ['M60']
       - text: 'The firm receives the upskilling cost from a returner and nothing from an entrant, so it prefers the return whatever the two costs are.'
         rests_on: ['M60']
-      - text: 'Workers taken together recover the lottery cost, so they prefer the lottery whenever the displaced worker does, and also in some cases where the displaced worker returns.'
+      - text: 'The job holders above the entrant receive the lottery cost, so they gain when the displaced worker enters, and workers taken together recover it and prefer the lottery whenever the displaced worker does.'
         rests_on: ['M60', 'M58']
   - question: 'How does a status group benefit from the lottery?'
     words: [30, 230]
     answer:
-      - text: 'Through the lottery cost a status group gains nothing as a whole, because its members receive in equal shares exactly what its entrants pay, so the lottery cost moves money within the group from those who enter to all members.'
+      - text: 'Through the lottery cost a status group gains only as far as its members hold the ranks above the entrants, because the lottery cost goes up the ladder to the job holders above the entrant whatever their group.'
         rests_on: ['M58']
       - text: 'The group benefits through ranks instead, because the lottery can move higher ranks from one group to the other, and with two entrants from each group the expected gap between a group''s share of their former income and half the total shrinks with every lottery unless closure is complete.'
         rests_on: ['M50', 'M51']
@@ -290,7 +287,7 @@ faq:
     answer:
       - text: 'The lottery cost stays among workers, in a closed economy in which all income passes between workers and the firm.'
         rests_on: ['M58', 'anchor: all income circulates between workers and firm']
-      - text: 'Each entrant pays it to the members of the entrant''s own status group, who share it equally.'
+      - text: 'Each entrant pays it to the job holders strictly above the entrant''s former rank, in equal shares, and an entrant with nobody above pays all job holders equally.'
         rests_on: ['M58']
       - text: 'Such receipts do not depend on one''s own route, so they change no result that rests on first-order dominance or on valuing income at its average.'
         rests_on: ['M59']
@@ -299,8 +296,8 @@ faq:
     answer:
       - text: 'The status group is the only order outside the market, and a separate set of brokers would have added a second one with its own rules and its own measurement.'
         rests_on: ['M47']
-      - text: 'Paying the lottery cost to status groups makes the group both the unit that closure acts on and the unit that receives the lottery cost.'
-        rests_on: ['M58', 'M29']
+      - text: 'Paying the lottery cost to the job holders above the entrant uses rank, which the model already has, so the people whose favour the lottery stands for need no attribute of their own.'
+        rests_on: ['M58', 'M47']
   - question: 'What is a status group, and how does it differ from rank?'
     words: [20, 200]
     answer:
@@ -397,7 +394,7 @@ decisions:
     bears_on: ['M47', 'L14', 'L15']
   - date: '17 Oct 2026'
     decision: 'The receiving group for the lottery cost was left to tractability and set to the entrant''s own status group in equal shares.'
-    reason: 'It balances every group''s accounts exactly, needs no large-pool argument and does not depend on the closure rule. Under review since 18 Oct 2026, because the lottery''s meaning (issue 16) may require the cost to flow to the rich instead.'
+    reason: 'It balanced every group''s accounts exactly and did not depend on the closure rule. Superseded on 18 Oct 2026 by M58 as now stated, once the lottery was read as making oneself favourable to those above: the cost flows up the ladder to the job holders above the entrant.'
     bears_on: ['M58']
 
 model:
@@ -878,15 +875,15 @@ model:
     status: LEAN_PROVED
     symbols: [X23, X7, X16]
   - id: M58
-    anchor: 'Section 2: "all income circulates between workers and firm"'
-    claim: 'The lottery cost stays among workers. Each entrant pays it to the members of the entrant''s own status group, who share it equally, so every group''s receipts equal its payments in every pool and under any closure rule, and the economy has no leak'
-    assumptions: ''
-    evidence: 'lean/IscLean/Economy.lean::Isc.own_group_dues_balance. The manuscript has the costs of social ties "borne by workers" and not feeding back into the firm''s revenues, and social networks as "an essential mechanism to provide skilled labour". The rule makes the status group both the unit closure acts on (M29) and the unit that receives the lottery cost, with no second social attribute (M47)'
-    lean: [Isc.own_group_dues_balance]
+    anchor: 'Section 2: "all income circulates between workers and firm"; Introduction: "consumption as a mechanism of social mobility"'
+    claim: 'The lottery cost stays among workers and flows up the ladder. Each entrant pays it to the job holders strictly above the entrant''s former rank, in equal shares; an entrant with no job holder above pays all job holders equally. The job holders receive in total the number of entrants times the lottery cost, a job holder''s receipts rise with rank, and a job holder with no entrant below receives nothing'
+    assumptions: 'at least one job holder; ranks as a function of workers'
+    evidence: 'lean/IscLean/Economy.lean::Isc.dues_total. Each entrant''s cost is received in full by the holders above it, or by all holders when none is above (Isc.dues_of_entrant), so the total is the number of entrants times the cost (Isc.dues_total); a holder of higher rank receives at least as much from every entrant (Isc.dues_mono); a holder with no entrant below receives nothing (Isc.dues_bottom_zero). Controls: with the entrant at the bottom of four ranks each of the three holders above receives a third (Isc.control_dues_example); an entrant at the top pays the three holders below a third each (Isc.control_dues_top_entrant_fallback). The manuscript''s lottery is Goode''s consumption as a mechanism of mobility, spending that makes a worker favourable to those above, and the costs of social ties are "borne by workers" and do not reach the firm'
+    lean: [Isc.dues_total, Isc.dues_of_entrant, Isc.dues_mono, Isc.dues_bottom_zero, Isc.control_dues_example, Isc.control_dues_top_entrant_fallback]
     status: DECIDED
-    decision: '17 Oct 2026, the author: the lottery cost goes to workers, never out of the closed economy (issue 15 option (b)), shared equally within groups; the choice of receiving group left to tractability. The own group is chosen because it balances every group''s accounts exactly, needs no large-pool argument, and does not depend on the closure rule still open for M29'
-    affects: [M46, M52, M53, M54]
-    symbols: [X7, X24]
+    decision: '18 Oct 2026, the author: the lottery is a means of mobility in which displaced workers make themselves favourable to those above them, so the lottery cost goes to the job holders strictly above the entrant''s former rank, shared equally. This supersedes the own-group rule of 17 Oct 2026. The fallback for an entrant with nobody above, equal shares to all job holders, is the smallest rule that avoids a leak; it was proposed by the assistant and is open to the author''s veto'
+    affects: [M46, M52, M53, M54, M59, M60]
+    symbols: [X7, X2, X6]
   - id: M59
     anchor: 'consequence of M58'
     claim: 'A receipt that does not depend on one''s own route leaves every comparison of sure routes unchanged and leaves the lottery-over-downgrade result of M33 holding for every nondecreasing $u$. So the receipts of M58 change no result that rests on first-order dominance or on valuing income at its average'
@@ -897,7 +894,7 @@ model:
     symbols: [X7, X9, X3]
   - id: M60
     anchor: 'consequence of M38 and M58: one choice, three interests'
-    claim: 'The entrant compares the return, worth the former income less the upskilling cost, with the lottery, worth its expected prize less the lottery cost. Workers taken together recover the lottery cost, so for them the lottery is worth its expected prize, and whenever the entrant prefers the lottery they do too, while the entrant can prefer the return where they would prefer the lottery. The firm receives the upskilling cost from a returner and nothing from an entrant, so it prefers the return whatever the lottery cost'
+    claim: 'The entrant compares the return, worth the former income less the upskilling cost, with the lottery, worth its expected prize less the lottery cost. The job holders above the entrant receive the lottery cost, so workers taken together recover it, the lottery is worth its expected prize to them, and whenever the entrant prefers the lottery they do too, while the entrant can prefer the return where they would prefer the lottery. The firm receives the upskilling cost from a returner and nothing from an entrant, so it prefers the return whatever the lottery cost. One choice thus pays either the firm or the job holders above'
     assumptions: 'valuing income at its average; workers taken together count the lottery cost as a transfer among them (M58)'
     evidence: 'lean/IscLean/Economy.lean::Isc.workers_prefer_lottery_whenever_entrant_does. Control: former income $10$, upskilling cost $3$, expected prize $8$, lottery cost $2$; the return is worth $7$, the lottery $6$ to the entrant and $8$ to workers taken together (Isc.control_entrant_returns_where_workers_would_gamble). The firm''s preference (Isc.firm_prefers_return) is the source''s accounting, upskilling spending "flows back to the firm"'
     lean: [Isc.workers_prefer_lottery_whenever_entrant_does, Isc.control_entrant_returns_where_workers_would_gamble, Isc.firm_prefers_return]
