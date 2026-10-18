@@ -156,7 +156,7 @@ $s(P)\ge\tau$ \anchor{Setup}. This is expected-utility maximisation at the belie
 As we further detail in Section \ref{sec:jeffrey}, the sequence-free benchmark $\PB$ is used as a reference \citep{Wagner2002} to define a surplus. Writing $u:=s(\PB)-\tau$ for the net surplus of engaging at the benchmark belief, the cost of taking the action that differs from the benchmark action is $|u|$. More specifically, if $u>0$, the benchmark says engage but the evaluator doesn't and they forgo a gain of $u$---so that the cost is $|u|$. Likewise, when $u<0$, the benchmark says not to engage, but the evaluator does, with the cost again being $|u|$. Whether engagement deviates from the benchmark is what feeds the aggregation picture, with
 $\tau$ entering the results only through $u=s(\PB)-\tau$ and never appearing on its own.
 
-The surplus thus defined is what is of interest as the notion of loss in the population aggregate. With $\delta_\sigma$ as the first-order coefficient with which an evaluator's own score departs from the benchmark's under reading sequence $\sigma$ (see Section~\ref{sec:individual}), $g$ as the joint density of $(u,\delta_\sigma)$ across the population and the sequence distribution, the expected foregone surplus is defined as 
+The surplus thus defined is what is of interest as the notion of loss in the population aggregate. With $\delta_\sigma$ as the first-order coefficient with which an evaluator's own score departs from the benchmark's under reading sequence $\sigma$ (see Section~\ref{sec:individual}), $g$ as the joint density of $(u,\delta_\sigma)$ across the population and the sequence distribution and $f$ as its $u$-marginal, the expected foregone surplus is defined as 
 \[
   L(c)=\iint_{\{\sgn(u)\neq\sgn(u+c\delta)\}}|u|\,g(u,\delta)\,\mathrm{d}u\,\mathrm{d}\delta,
 \]
@@ -226,7 +226,7 @@ place of $.70$. The benchmark gives $\PB(A{=}0)=.227$ and $\PB(B{=}0)=.647$. The
 sequence effect is therefore $.034$ on the $A$-marginal and $.057$ on the
 $B$-marginal. On the believed association it is $.0002$, since
 $\assoc(\PJ_{AB})=.0273$ and $\assoc(\PJ_{BA})=.0271$, smaller than either
-marginal effect by a factor above $150$. The odds ratio equals $9/4$ for the
+marginal effect by a factor above $150$. The odds ratio $Q_{00}Q_{11}/(Q_{01}Q_{10})$ equals $9/4$ for the
 prior, for both sequences and for the benchmark. Against the benchmark, sequence
 $AB$ departs by $.053$ on the marginal read last, by $.007$ on the marginal read
 first, and by $.002$ on the association.
@@ -332,7 +332,7 @@ The paper borrows the evaluator-with-binary-attribute frame from the
 statistical-discrimination lineage \citep{Arrow1973,CoateLoury1993}. However, the object of interest for the current paper remains
 kinematic rather than an equilibrium fixed point. Unlike \citet{CoateLoury1993}, for example, in which the stereotype is a self-confirming
 steady state of best responses, the current paper merely characterises the channel-free baseline. In this baseline, the differences are keyed to encounter sequence rather than to
-any group-marker, are individually first order, and yet remain invisible in the protected dependence statistics. The sequence need not be assigned by chance, however. A candidate who comes
+any group-marker, are individually first order, and yet remain invisible in the believed association and the other protected statistics (Definition~\ref{def:protection}). The sequence need not be assigned by chance, however. A candidate who comes
 through a referral is met first through the letter and one who applies unsolicited
 through the credential, so if referral is more common in one group, two groups
 presenting the same evidence to evaluators with the same priors and preferences
@@ -434,7 +434,7 @@ The second primitive, \emph{score-gap} of a panel (given a fixed weight $\vv$) i
 
 \subsection{Belief Statistics for single evaluator}
 
-The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap, the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:DIV}. As Lemma \ref{lem:ASC} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
+The two belief-statistics we consider are the \emph{believed association} between the two attributes and the believed \emph{marginal probability} of each attribute. The evaluator panel's \emph{believed cross-attribute association} is the association carried by the evaluator's own posterior, $\assoc(\PJ_\sigma)$, set against the benchmark's $\assoc(\PB)$. In the example, it measures only how strongly the panel takes competence and trustworthiness to go together once the file is read (not how attributes are observed in the candidate pool). Unlike the gap and the score gap $s(\PJ_\sigma)-s(\PB)$ (Lemma~\ref{lem:SCR}), the \emph{believed cross-attribute association} does not inherit the first order of Proposition~\ref{prop:DIV}. As Lemma \ref{lem:ASC} shows, the immunity that is implied is exact rather than generic and it is complete for a single evaluator (before any
 averaging takes place).
 
 \begin{lemma}[individual-level association immunity]\label{lem:ASC}
