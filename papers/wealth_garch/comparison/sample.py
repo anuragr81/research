@@ -9,8 +9,11 @@ PK = os.path.join(ROOT, "replication", "peura_keppo_2006")
 sys.path.insert(0, PK)
 sys.path.insert(0, os.path.join(ROOT, "06_empirical_starter"))
 
-from distress_targeting import MIN_ASSET, load, qflow, shift
-from stage2 import load_panel, load_rates, steady
+import csv
+import gzip
+
+from distress_targeting import MIN_ASSET, qflow, shift
+from stage2 import load_panel, load_rates, num, steady
 
 R_REF = 0.105
 ANNUAL = os.path.join(PK, "fdic_dec_2004_2024.csv.gz")
@@ -19,11 +22,15 @@ QUARTERLY = [os.path.join(ROOT, "common_data", f"fdic_q_{y}.csv.gz") for y in ra
 START = "20141231"
 
 
+TEXT = ("CERT", "REPDTE", "BKCLASS", "RSSDHCR")
+
+
 def quarterly():
     panel = defaultdict(dict)
     for path in QUARTERLY:
-        for cert, s in load(path).items():
-            panel[cert].update(s)
+        with gzip.open(path, "rt", newline="") as fh:
+            for r in csv.DictReader(fh):
+                panel[r["CERT"]][r["REPDTE"]] = {k: num(v) for k, v in r.items() if k not in TEXT}
     return panel
 
 
