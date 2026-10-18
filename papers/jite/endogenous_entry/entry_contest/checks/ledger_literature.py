@@ -247,6 +247,13 @@ REGULARITIES = {
         "conclusions": ("C17",), "standing": ("implication",),
         "model": ("M12", "M13", "M14", "M33"), "lit": (),
     },
+    "prize_fee": {
+        "varies": ("ranking", "fee"), "fixed": ("decisiveness", "Q", "wealth"), "moves": "count",
+        "effect": "does not fall in the prize and does not rise in the fee", "given": (),
+        "premises": "challengers at or below the fee out",
+        "conclusions": ("C19",), "standing": ("credited",),
+        "model": ("M11", "M31"), "lit": ("L2", "L3", "L4"),
+    },
     "share_benchmark": {
         "varies": ("count", "Q"), "fixed": ("decisiveness",), "moves": "share",
         "effect": "above the benchmark only if the credential counts", "given": (),
