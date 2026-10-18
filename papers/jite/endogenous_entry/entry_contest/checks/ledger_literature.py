@@ -289,8 +289,8 @@ SENTENCES = [
              "wages by where one marginal worker stands, a quantile that technology fixes."},
     {"para": 1, "expresses": ("spread_sign", "two_ranks"),
      "text": "Here a single-crossing widening of the wealth profile moves the entry count "
-             "by where the cut-off wealth stands against the widening's break-even wealth, "
-             "which moves with the wealth profile, and for any change of profile two ranks, "
+             "by where the cut-off wealth, which the wealth profile itself sets, stands "
+             "against the widening's break-even wealth, and for any change of profile two ranks, "
              "the marginal entrant and the "
              "first outsider, sign the change outside the band."},
     {"para": 1, "expresses": (),

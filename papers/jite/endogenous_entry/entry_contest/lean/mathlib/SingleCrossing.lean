@@ -224,6 +224,68 @@ theorem narrowing_fall (hκ : AntitoneOn κ (Set.Ioi c)) (hw : Antitone w)
   margin_fall κ c Δ Q hκ w w' k k' hk hk'
     (fun hkQ => narrowing_down hw hN hs k hkQ (hm hkQ))
 
+/-! ## 3a. The same, stated on the two sorted profiles alone
+
+A single-crossing widening, read on the sorted profiles: the displacement is non-negative at
+every rank whose first-profile wealth is at or above `x0` and non-positive at every rank at or
+below. No pairing of challengers is needed, and a pairing that is a widening implies it. -/
+
+/-- The displacement of the sorted profiles crosses zero once, from the top. -/
+def IsRankWidening (Q : ℕ) (x0 : ℝ) (w w' : ℕ → ℝ) : Prop :=
+  ∀ j, j < Q → (x0 ≤ w j → w j ≤ w' j) ∧ (w j ≤ x0 → w' j ≤ w j)
+
+/-- The displacement of the sorted profiles crosses zero once, toward `x0`. -/
+def IsRankNarrowing (Q : ℕ) (x0 : ℝ) (w w' : ℕ → ℝ) : Prop :=
+  ∀ j, j < Q → (x0 ≤ w j → w' j ≤ w j) ∧ (w j ≤ x0 → w j ≤ w' j)
+
+/-- A pairing that is a widening gives a rank widening of the sorted profiles. -/
+theorem widening_rank (hw : Antitone w) (hW : IsWidening x0 w g) (hs : IsSortedOf w' g) :
+    IsRankWidening Q x0 w w' :=
+  fun j hj => ⟨widening_up hw hW hs j hj, widening_down hw hW hs j hj⟩
+
+/-- A pairing that is a narrowing gives a rank narrowing of the sorted profiles. -/
+theorem narrowing_rank (hw : Antitone w) (hN : IsNarrowing x0 w g) (hs : IsSortedOf w' g) :
+    IsRankNarrowing Q x0 w w' :=
+  fun j hj => ⟨narrowing_down hw hN hs j hj, narrowing_up hw hN hs j hj⟩
+
+theorem rank_widening_rise (hκ : AntitoneOn κ (Set.Ioi c)) (hΔ : Antitone Δ) (hw' : Antitone w')
+    (hR : IsRankWidening Q x0 w w') {k k' : ℕ}
+    (hk : IsCount κ c Δ Q w k) (hk' : IsCount κ c Δ Q w' k') (hm : 1 ≤ k → x0 ≤ w (k - 1)) :
+    k ≤ k' :=
+  margin_rise κ c Δ Q hκ hΔ w w' hw' k k' hk hk'
+    (fun h1 => (hR (k - 1) (by have := hk.1; omega)).1 (hm h1))
+
+theorem rank_widening_fall (hκ : AntitoneOn κ (Set.Ioi c)) (hw : Antitone w)
+    (hR : IsRankWidening Q x0 w w') {k k' : ℕ}
+    (hk : IsCount κ c Δ Q w k) (hk' : IsCount κ c Δ Q w' k') (h1 : 1 ≤ k)
+    (hm : w (k - 1) ≤ x0) : k' ≤ k :=
+  margin_fall κ c Δ Q hκ w w' k k' hk hk'
+    (fun hkQ => (hR k hkQ).2 ((hw (by omega : k - 1 ≤ k)).trans hm))
+
+theorem rank_narrowing_rise (hκ : AntitoneOn κ (Set.Ioi c)) (hΔ : Antitone Δ) (hw' : Antitone w')
+    (hR : IsRankNarrowing Q x0 w w') {k k' : ℕ}
+    (hk : IsCount κ c Δ Q w k) (hk' : IsCount κ c Δ Q w' k') (hm : 1 ≤ k → w (k - 1) ≤ x0) :
+    k ≤ k' :=
+  margin_rise κ c Δ Q hκ hΔ w w' hw' k k' hk hk'
+    (fun h1 => (hR (k - 1) (by have := hk.1; omega)).2 (hm h1))
+
+theorem rank_narrowing_fall (hκ : AntitoneOn κ (Set.Ioi c))
+    (hR : IsRankNarrowing Q x0 w w') {k k' : ℕ}
+    (hk : IsCount κ c Δ Q w k) (hk' : IsCount κ c Δ Q w' k') (hm : k < Q → x0 ≤ w k) :
+    k' ≤ k :=
+  margin_fall κ c Δ Q hκ w w' k k' hk hk' (fun hkQ => (hR k hkQ).1 (hm hkQ))
+
+/-- A rank widening never puts the margin in the band. -/
+theorem rank_widening_not_band (hw : Antitone w) (hR : IsRankWidening Q x0 w w')
+    (k : ℕ) (hk1 : 1 ≤ k) (hkQ : k < Q) (hpos : 0 < w' k - w k) : 0 ≤ w' (k - 1) - w (k - 1) := by
+  have hxk : x0 < w k := by
+    by_contra h
+    push_neg at h
+    have := (hR k hkQ).2 h
+    linarith
+  have := (hR (k - 1) (by omega)).1 (hxk.le.trans (hw (by omega : k - 1 ≤ k)))
+  linarith
+
 /-! ## 4. The monotone class of M13 is a special case -/
 
 theorem pivot_is_widening {T : ℝ → ℝ} (hT : IsPivotSpread T x0) (w : ℕ → ℝ) :

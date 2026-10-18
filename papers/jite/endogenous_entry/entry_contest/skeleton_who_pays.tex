@@ -248,7 +248,7 @@ of the position (Appendix~\ref{app:primitives}, ``The contest'').
   weights up to one. The second is shown by one example, with one challenger,
   a uniform base component and a common bonus; how large the fall can be and
   how often it occurs are not derived. A common bonus washes out when every
-  player holds it and favours its holders once some stop buying (K8). The
+  player holds it and favours its holders when, at the higher weight, some do not buy (K8). The
   result is a scope on K8, not a claim of novelty.}
 \end{longtable}
 \normalsize
@@ -391,18 +391,21 @@ that check it.}\\
   $w'_{k^*}\le w_{k^*}$ gives $k'^*\le k^*$.}
   {EntryContestSpread.enters_down, EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_le_of_fails, EntryContestSpread.margin_rise, EntryContestSpread.margin_fall}
 \mrow{M13}{Single-crossing widenings (P9-gen, P9).}
-  {For a single-crossing widening with break-even wealth $x_0$, in which
-  challengers may change rank, $k^*$ weakly rises when the cut-off wealth
-  $w_{k^*-1}\ge x_0$ and weakly falls when $w_{k^*-1}\le x_0$. The linear widening
+  {For a single-crossing widening with break-even wealth $x_0$, $k^*$ weakly
+  rises when the cut-off wealth $w_{k^*-1}\ge x_0$, and weakly falls when
+  $k^*\ge1$ and $w_{k^*-1}\le x_0$. Any pairing of the two profiles that gives
+  each wealth at or above $x_0$ a weakly higher one and each wealth at or below
+  a weakly lower one is such a widening, whether or not challengers keep their
+  ranks. The linear widening
   about the mean is one, and keeps the total. A concentrating reallocation can
   lower $k^*$ with $w_{k^*-1}$ above the mean, for every small $\mu>0$.}
-  {SingleCrossing.ge_of_many, SingleCrossing.le_of_many, SingleCrossing.widening_up, SingleCrossing.widening_down, SingleCrossing.widening_rise, SingleCrossing.widening_fall, SingleCrossing.pivot_is_widening, SingleCrossing.pivot_sorted, SingleCrossing.overtaking_widening, SingleCrossing.overtaking_not_monotone, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count, EntryContestSpread.mps_lowers_witness_counts, EntryContestSpread.mps_lowers_count_positive}
+  {SingleCrossing.rank_widening_rise, SingleCrossing.rank_widening_fall, SingleCrossing.widening_rank, SingleCrossing.ge_of_many, SingleCrossing.le_of_many, SingleCrossing.widening_up, SingleCrossing.widening_down, SingleCrossing.widening_rise, SingleCrossing.widening_fall, SingleCrossing.pivot_is_widening, SingleCrossing.pivot_sorted, SingleCrossing.overtaking_widening, SingleCrossing.overtaking_not_monotone, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count, EntryContestSpread.mps_lowers_witness_counts, EntryContestSpread.mps_lowers_count_positive}
 \mrow{M14}{The band.}
   {With $d=w'-w$, the signs of $d$ leave the direction of $k^*$ open only when
   $d_{k^*-1}<0<d_{k^*}$. A single-crossing widening never does so. Inside the band
   two concentrating reallocations, with the same signs at every rank, move $k^*$
   in opposite directions for every small $\mu>0$.}
-  {EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, SingleCrossing.widening_not_band, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
+  {EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, SingleCrossing.widening_not_band, SingleCrossing.rank_widening_not_band, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
 \mrow{M15}{Strictness under a linear widening (P9).}
   {If some entrant lies below $x_0$ at $\lambda=1$ and $\kappa(w)\to\infty$ as
   $w\downarrow c$, $k^*(\lambda)$ is non-increasing in $\lambda\ge1$ and
@@ -523,12 +526,13 @@ that check it.}\\
 \mrow{M33}{Implications for the rule.}
   {A fee that differs across challengers can reverse the order of their costs.
   At a fee with $(k+1)\kappa_k>V$, at most $k$ challengers enter. A
-  single-crossing narrowing toward $x_0$, in which challengers may change rank,
-  weakly raises $k^*$ when $w_{k^*-1}\le x_0$ and weakly lowers it when
-  $w_{k^*}\ge x_0$. With $s\ge0$,
+  single-crossing narrowing toward $x_0$ weakly raises $k^*$ when
+  $w_{k^*-1}\le x_0$ and weakly lowers it when $w_{k^*}\ge x_0$, and any pairing
+  that gives each wealth one between it and $x_0$ is such a narrowing, whether or
+  not challengers keep their ranks. With $s\ge0$,
   $r$ atomless and $0<\mu\le1$, $\xi(k)\ge\frac{k+1}{Q+1}$, and
   $\xi(k)\ne\frac{k+1}{Q+1}$ implies $F\ne G$.}
-  {Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, SingleCrossing.narrowing_up, SingleCrossing.narrowing_down, SingleCrossing.narrowing_rise, SingleCrossing.narrowing_fall, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
+  {Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, SingleCrossing.rank_narrowing_rise, SingleCrossing.rank_narrowing_fall, SingleCrossing.narrowing_rank, SingleCrossing.narrowing_up, SingleCrossing.narrowing_down, SingleCrossing.narrowing_rise, SingleCrossing.narrowing_fall, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
 \mrow{M34}{Selection loss.}
   {The selection loss is the highest base component among the players less the
   winner's base component. With the draws $(r_i,s_i)$ independent and
@@ -557,11 +561,11 @@ sets of that count can differ, which is identity multiplicity. Costrell and
 Loury (L9) sign how a mean-preserving spread in abilities moves wages by where
 one marginal worker stands, a quantile that technology fixes. Here a
 single-crossing widening of the wealth profile moves the entry count by where
-the cut-off wealth stands against the widening's break-even wealth, which moves
-with the wealth profile, and for any change of profile two ranks, the marginal
-entrant and the first outsider, sign the change outside the band. The sign needs
-anonymity and burden-monotonicity, and burden-monotonicity fails when utility
-has a convex stretch longer than the fee.
+the cut-off wealth, which the wealth profile itself sets, stands against the
+widening's break-even wealth, and for any change of profile two ranks, the
+marginal entrant and the first outsider, sign the change outside the band. The
+sign needs anonymity and burden-monotonicity, and burden-monotonicity fails when
+utility has a convex stretch longer than the fee.
 
 Effort models (L20, L22) and this paper ask how participation responds when the
 ranking reads the costly choice more. In effort models fewer take part, because
@@ -957,9 +961,8 @@ figure is a construct or a theorem. The figure is drawn by
   {M13, M23, M24, M26, L12}
 \crow{C2}{The margin condition reads the wealth profile at two ranks only, the
   marginal entrant and the first outsider, and it holds for any change of
-  profile, whether it keeps the total or not (M12). Where the marginal entrant
-  becomes poorer and the first outsider richer, the signs of the change settle
-  nothing, even for concentrating reallocations, and the mean cannot stand in
+  profile, whether it keeps the total or not (M12). Where the wealth at the marginal entrant's index is lower in the second profile and the wealth at the
+  first outsider's index higher, the signs of the change settle nothing, even for concentrating reallocations, and the mean cannot stand in
   for the break-even wealth (M13, M14). Costrell and Loury, in their two-job
   model, sign a mean-preserving spread in abilities by one marginal quantile
   fixed by technology (L9); here the margin is the count
@@ -985,7 +988,7 @@ figure is a construct or a theorem. The figure is drawn by
   {M5, M6, M7, M8, L2, L3, L4, L7}
 \crow{C5}{The sign rule of C1 is new among the papers read. None of the entry
   papers read signs how a single-crossing widening or a concentrating
-  reallocation of wealth, or a widening of entry costs, moves the number of
+  reallocation of wealth, or a change in how entry costs differ across players, moves the number of
   entrants at a fixed number of potential entrants. In
   \citet{CorcoranKarels1985}, whose players are identical, the count is set by
   the lottery's exponent, the commitment assumed or a minimum bet (L29). The
@@ -1129,13 +1132,12 @@ figure is a construct or a theorem. The figure is drawn by
   with many players the comparative statics follow the upper tail is what M21
   makes precise for the gain, in the class of M19.}
   {M1, M17, M21, L8}
-\crow{C15}{A fee equal for every challenger changes how many enter, not the
-  order in which they enter. At every fee the order of entry is the order of
-  wealth (M5, M23), and in the equilibrium in which the richest enter a lower
+\crow{C15}{A fee equal for every challenger changes how many enter and not the ranking by
+  which they qualify, since at every fee the entry condition holding at one rank
+  holds at every richer rank (M5, M23), and in the equilibrium in which the richest enter a lower
   fee adds entrants from the next-richest down (M8, M11). Fees that differ
   across challengers can reverse the order of costs (M33), so only a fee that
-  varies with the challenger can bring a poorer challenger in ahead of a
-  richer one.}
+  varies with the challenger can admit a poorer challenger while a richer one stays out.}
   {M5, M8, M11, M23, M33}
 \crow{C16}{The prize caps how many pay, and the cap sets a fee. At any fee at
   which $(k+1)\kappa_k$ exceeds $V$, at most $k$ challengers enter (M10, M33),
@@ -1207,7 +1209,7 @@ $\Delta(Q-1)$; so extended, $\Delta$ is non-increasing on every count by M4, and
 the results that use this cite M4. In the results on wealth
 profiles, rank $j$ has wealth $w_j$ with $w_0\ge w_1\ge\cdots$, and enters when
 $w_j>c$ and $\kappa(w_j)\le\Delta(j)$, so a challenger whose wealth is at or below
-the fee does not enter. A prime marks the profile after a change and its count
+the fee does not enter. A prime marks the second profile of a comparison and its count
 $k'^*$. When the number of challengers varies, $\Delta_Q(0)$ is the first
 entrant's gain among $Q$ challengers, with
 \[
@@ -1380,7 +1382,7 @@ so an entrant at $c'$ enters at $c$.
 \end{mproof}
 
 \begin{mproof}{M12}{EntryContestSpread.enters_down, EntryContestSpread.count_ge_of_enters, EntryContestSpread.count_le_of_fails, EntryContestSpread.margin_rise, EntryContestSpread.margin_fall}
-(i) The marginal entrant has $c<w_{k^*-1}\le w'_{k^*-1}$, so
+(i) Rank $k^*-1$ has $c<w_{k^*-1}\le w'_{k^*-1}$, so
 \[
   \kappa(w'_{k^*-1})\le\kappa(w_{k^*-1})\le\Delta(k^*-1),
 \]
@@ -1388,17 +1390,20 @@ and for $i\le k^*-1$, with $w'_i\ge w'_{k^*-1}>c$,
 \[
   \kappa(w'_i)\le\kappa(w'_{k^*-1})\le\Delta(k^*-1)\le\Delta(i).
 \]
-Every $i<k^*$ enters after the change, so $k^*\le k'^*$.
-(ii) For $k^*<Q$, rank $k^*$ fails before the change. If $w'_{k^*}>c$, then
+Every rank $i<k^*$ enters at $w'$, so $k^*\le k'^*$.
+(ii) For $k^*<Q$, rank $k^*$ fails at $w$. If $w'_{k^*}>c$, then
 $c<w'_{k^*}\le w_{k^*}$ and
 \[
   \kappa(w'_{k^*})\ge\kappa(w_{k^*})>\Delta(k^*),
 \]
-so rank $k^*$ fails after the change and $k'^*\le k^*$.
+so rank $k^*$ fails at $w'$ and $k'^*\le k^*$.
 \end{mproof}
 
-\begin{mproof}{M13}{SingleCrossing.ge_of_many, SingleCrossing.le_of_many, SingleCrossing.widening_up, SingleCrossing.widening_down, SingleCrossing.widening_rise, SingleCrossing.widening_fall, SingleCrossing.pivot_is_widening, SingleCrossing.pivot_sorted, SingleCrossing.overtaking_widening, SingleCrossing.overtaking_not_monotone, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count, EntryContestSpread.mps_lowers_witness_counts, EntryContestSpread.mps_lowers_count_positive}
-Rank $i$ moves to $g_i$, and $w'$ sorts $g$. If $x_0\le w_j$,
+\begin{mproof}{M13}{SingleCrossing.rank_widening_rise, SingleCrossing.rank_widening_fall, SingleCrossing.widening_rank, SingleCrossing.ge_of_many, SingleCrossing.le_of_many, SingleCrossing.widening_up, SingleCrossing.widening_down, SingleCrossing.widening_rise, SingleCrossing.widening_fall, SingleCrossing.pivot_is_widening, SingleCrossing.pivot_sorted, SingleCrossing.overtaking_widening, SingleCrossing.overtaking_not_monotone, EntryContestSpread.spread_isPivot, EntryContestMM.mm2a, EntryContestSpread.mps_lowers_count, EntryContestSpread.mps_lowers_witness_counts, EntryContestSpread.mps_lowers_count_positive}
+At $j=k^*-1$ with $x_0\le w_{k^*-1}$ the displacement is $d_{k^*-1}\ge0$, and at
+$j=k^*$, since $w_{k^*}\le w_{k^*-1}\le x_0$, it is $d_{k^*}\le0$, so M12
+applies. A pairing gives such a displacement. Let rank $i$ of $w$ be paired with
+$g_i$, and let $w'$ sort $g$. If $x_0\le w_j$,
 \[
   i\le j\ \Rightarrow\ g_i\ge w_i\ge w_j ,
 \]
@@ -1406,8 +1411,7 @@ so at least $j+1$ entries of $g$ are $\ge w_j$ and $w'_j\ge w_j$. If $w_j\le x_0
 \[
   i\ge j\ \Rightarrow\ g_i\le w_i\le w_j ,
 \]
-so at least $Q-j$ entries are $\le w_j$ and $w'_j\le w_j$. At $j=k^*-1$, and at $j=k^*$
-since $w_{k^*}\le w_{k^*-1}$, M12 applies. A non-decreasing $T$ gives
+so at least $Q-j$ entries are $\le w_j$ and $w'_j\le w_j$. A non-decreasing $T$ gives
 $g_i=T(w_i)$, already sorted; $(3,2)\mapsto(3,4)$ about $x_0=1$ is a widening
 that no non-decreasing $T$ gives. For $T(w)=x_0+\lambda(w-x_0)$ with $\lambda\ge1$,
 \[
@@ -1435,13 +1439,13 @@ strict at $\Delta(m)=\frac1{m+2}$, so by M9 they hold for every small $\mu>0$ wi
 $r$ and $s$ uniform.
 \end{mproof}
 
-\begin{mproof}{M14}{EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, SingleCrossing.widening_not_band, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
+\begin{mproof}{M14}{EntryContestSpread.branch_of_not_band, EntryContestSpread.not_band_of_single_crossing, SingleCrossing.widening_not_band, SingleCrossing.rank_widening_not_band, EntryContestSpread.mps_band_signs, EntryContestSpread.mps_witness_counts, EntryContestSpread.mps_band_both_directions, EntryContestSpread.mps_band_both_directions_positive}
 Outside the band $d_{k^*-1}\ge0$ or $d_{k^*}\le0$, and M12 signs the change. If
 \[
   i\le j,\ d_j>0\ \Rightarrow\ d_i\ge0,
 \]
 then $d_{k^*}>0$ gives $d_{k^*-1}\ge0$. A single-crossing widening has this
-property at the margin, since $d_{k^*}>0$ gives $w_{k^*}>x_0$ by M13, so
+property at the margin, since $d_{k^*}>0$ gives $w_{k^*}>x_0$ by its definition, so
 $w_{k^*-1}\ge w_{k^*}>x_0$ and $d_{k^*-1}\ge0$. With $\kappa$ and $\Delta$ as
 in M13, the profiles
 \[
@@ -1816,7 +1820,7 @@ the lower base component, a set of positive measure. Above $\mu=1$ the first
 order reverses.
 \end{mproof}
 
-\begin{mproof}{M33}{Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, SingleCrossing.narrowing_up, SingleCrossing.narrowing_down, SingleCrossing.narrowing_rise, SingleCrossing.narrowing_fall, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
+\begin{mproof}{M33}{Implications.varying_fee_reorders, Implications.cap_sets_count, Implications.cap_sets_count_model, SingleCrossing.rank_narrowing_rise, SingleCrossing.rank_narrowing_fall, SingleCrossing.narrowing_rank, SingleCrossing.narrowing_up, SingleCrossing.narrowing_down, SingleCrossing.narrowing_rise, SingleCrossing.narrowing_fall, Implications.compression_rises_needs_below, Implications.share_off_benchmark, Implications.share_ge_benchmark}
 With $u=\log$,
 \[
   \kappa\big|_{w=3,\,c=2}=\log3>\log\tfrac43=\kappa\big|_{w=2,\,c=1/2}.
@@ -1826,7 +1830,7 @@ $(k+1)\kappa_k\le V$, so index $k$ fails the entry condition and
 \[
   k'^*\le k .
 \]
-Under a narrowing rank $i$ moves to $g_i$ between $w_i$ and $x_0$, and $w'$ sorts
+Under a pairing that gives rank $i$ of $w$ the wealth $g_i$ between $w_i$ and $x_0$, with $w'$ sorting
 $g$. If $w_j\le x_0$ then $i\le j$ gives $g_i\ge\min(w_i,x_0)\ge w_j$, and if
 $x_0\le w_j$ then $i\ge j$ gives $g_i\le\max(w_i,x_0)\le w_j$, so
 \[
@@ -1980,7 +1984,7 @@ challenger & $i\in\{0,\dots,Q-1\}$ & A player of given wealth who chooses
   whether to compete. \\
 incumbent & $C$ & The additional player, who competes in every case and
   appears only through her score CDF. Scored as an entrant, $C=F$: the open
-  contest, in which the holder competes again under the rule that admits the
+  contest, in which the holder competes under the rule that admits the
   challengers (Appendix~\ref{app:primitives}). Rows that hold for any atomless
   $C$ say so. Her entry is a parameter in M1 to M29 and a choice in M30. \\
 scored as an entrant & $C=F$ & The incumbent's score has an entrant's law, as
@@ -2058,33 +2062,36 @@ change of profile & $w\mapsto w'$ & A change in the challengers' wealths,
   so. \\
 displacement & $d_j=w'_j-w_j$ & The rank-by-rank difference of the two sorted
   profiles. \\
-single-crossing widening & $g_i\ge w_i$ for $w_i\ge x_0$, $g_i\le w_i$ for
-  $w_i\le x_0$ & A change of profile in which every wealth at or above $x_0$
-  weakly rises and every wealth at or below $x_0$ weakly falls, $g_i$ being the
-  challenger's wealth after the change. The displacement of the sorted profiles
-  is then non-negative at every rank whose wealth is at or above $x_0$ and
-  non-positive below, so it crosses zero once. Challengers may overtake one
-  another (M13). \\
-single-crossing narrowing & $x_0\le g_i\le w_i$ for $w_i\ge x_0$, $w_i\le
-  g_i\le x_0$ for $w_i\le x_0$ & A change of profile in which every wealth moves
-  toward $x_0$ without crossing it (M33). \\
-break-even wealth & $x_0$ & The wealth level of a given single-crossing
-  widening or narrowing at which its displacement crosses zero. Under a
-  widening wealths above it gain and wealths below it lose, and under a
-  narrowing the reverse. Where the change leaves an interval of wealth unmoved,
-  any $x_0$ in it serves, and every result holds for each. In two recorded
-  profiles it lies where the rank-by-rank displacement changes sign. \\
+single-crossing widening & $d_j\ge0$ where $w_j\ge x_0$, $d_j\le0$ where
+  $w_j\le x_0$ & A change of profile whose displacement is non-negative at every
+  rank at which the first profile's wealth is at or above $x_0$ and
+  non-positive at every rank at which it is at or below, so it crosses zero
+  once. Any pairing of the two profiles that gives each wealth at or above $x_0$
+  a weakly higher one and each wealth at or below a weakly lower one is such a
+  change, whether or not challengers keep their ranks (M13). \\
+single-crossing narrowing & $d_j\le0$ where $w_j\ge x_0$, $d_j\ge0$ where
+  $w_j\le x_0$ & A change of profile whose displacement has the signs of a
+  single-crossing widening reversed. Any pairing that gives each wealth one
+  between it and $x_0$ is such a change (M33). \\
+break-even wealth & $x_0$ & The wealth level at which the displacement of a
+  given single-crossing widening or narrowing changes sign. Under a widening
+  the ranks whose first-profile wealth is above it hold at least as much in the
+  second profile and the ranks below it at most as much, and under a narrowing
+  the reverse. Where the displacement is zero over an interval of wealth, any
+  $x_0$ in it serves, and every result holds for each. \\
 linear widening & $T(w)=x_0+\lambda(w-x_0)$, $\lambda\ge1$ & The single-crossing
-  widening that moves each wealth away from $x_0$ in proportion to its distance
-  from it, with break-even wealth $x_0$. With $x_0$ the mean wealth it keeps the
+  widening whose second profile is $T$ applied to the first, which maps each
+  wealth to one farther from $x_0$ in proportion to its distance from it, with break-even wealth $x_0$. With $x_0$ the mean wealth it keeps the
   total (M13, M15). \\
 concentrating reallocation & $\sum_jw'_j=\sum_jw_j$, $w'$ majorizing $w$ & A
-  change of profile that keeps the total and leaves the richest $j$
-  challengers together holding at least as much as before, for every $j$. It
+  change of profile that keeps the total and in which the richest $j$ in the
+  second profile together hold at least as much as the richest $j$ in the
+  first, for every $j$. It
   need not be single-crossing, and inside the band its signs settle nothing
   (M13, M14). \\
 cut-off wealth & $w_{k^*-1}$ & The wealth at the marginal entrant's index in
-  the profile before the change. In the equilibrium in which the richest
+  the first profile, defined when at least one challenger enters. In the
+  equilibrium in which the richest
   enter, no challenger poorer than it enters. \\
 ordering in dispersion & $z-y$ non-decreasing & For quantile functions $y$ and
   $z$, the second law is more dispersed \citep{LewisThompson1981}. With a
@@ -2184,7 +2191,7 @@ buys standing only in part. The readings are AP-D1 and AP-D2 in
 \paragraph{The incumbent.} The incumbent is scored as an entrant, under the
 rule that admits the challengers. Her law is $C=F$, so she holds the bought
 component and differs from an entrant in nothing, and M26 includes her. This is the open contest,
-in which the holder competes again under the same rule. Her entry is a
+in which the holder competes under the same rule. Her entry is a
 parameter in M1 to M29. In M30 it is a choice, she is player $0$ of a game of
 $Q+1$ players with the lowest cost, and outside the band of M6 she is in every
 non-empty equilibrium, so $C=F$ is the equilibrium outcome there. Two
@@ -2243,8 +2250,7 @@ At $\mu=1$ entry buys nothing: every score is the base component, the two score
 laws coincide, and the gain of M1 is zero. The other side, how the base
 component of the winner moves with $\mu$, is signed only with the entrants
 fixed, where it does not fall (M32). Once entry responds it can fall: a common
-bonus washes out when every challenger holds it, and favours its holders once
-some stop buying (M32). So the model does not say where an institution sets its
+bonus washes out when every challenger holds it, and favours its holders when, at the higher weight, some do not buy (M32). So the model does not say where an institution sets its
 weight. The motivation is the one of the
 Research question: a credential is a cleaner status, cheap to check, than the
 disorganised status that comes from unverified providers. A
