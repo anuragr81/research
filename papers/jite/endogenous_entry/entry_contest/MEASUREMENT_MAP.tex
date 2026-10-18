@@ -320,26 +320,29 @@ $\theta$ & Real number; $\theta=0$ is the model. & Tilt of the law of $s$
   to show where count invariance fails (M27). & N & Never observed as a parameter. The
   independence that $\theta$ relaxes is a direct comparison of recorded
   entrant scores across wealth ranks. \\ \addlinespace
-$w\mapsto w'$; $T$ & A map between wealth profiles; $T$ increasing for a
-  pivot-spread. & ``Any map between wealth profiles'', the change in the
-  wealth distribution that a comparative static is about. & R (two profiles) & Recorded as two
+$w\mapsto w'$; $g$ & A change of the challengers' wealths, $g_i$ being the
+  wealth after the change of the challenger at rank $i$ before. & The change in
+  the wealth distribution that a comparative static is about, read as a
+  comparison of the two sorted profiles; challengers may change rank. & R (two profiles) & Recorded as two
   wealth profiles, before and after a change, or of two contests. $T$ is seen
   only at the recorded wealths. \\ \addlinespace
 ordering in dispersion & A partial order on wealth laws. & For quantile
   functions $y$ and $z$, the second law is more dispersed when $z-y$ is
   non-decreasing \citep{LewisThompson1981}; with a crossing point the transport
-  map between the two laws is a pivot-spread, so M13 applies. & C & Computed from
+  map between the two laws is a single-crossing widening, so M13 applies. & C & Computed from
   two recorded profiles as the sign pattern of the rank differences
   $w'_{(j)}-w_{(j)}$ along the ranks. \\ \addlinespace
-$x_0$ & Real number, in wealth units. & The pivot, ``the wealth at which the
-  displacement changes sign.'' & C & Computed from two recorded profiles. In
+$x_0$ & Real number, in wealth units. & The break-even wealth of a
+  single-crossing widening or a single-crossing narrowing, the wealth at which
+  its displacement crosses zero; wealths above it gain and wealths below it
+  lose under a widening. & C & Computed from two recorded profiles. In
   general it is located only between two adjacent ranks; in the linear family
   it is given by Recovery~1. \\ \addlinespace
-$\lambda$ & Real number, $\lambda\ge1$ (M13, M15). & The factor of the linear spread
+$\lambda$ & Real number, $\lambda\ge1$ (M13, M15). & The factor of the linear widening
   $T_\lambda(w)=x_0+\lambda(w-x_0)$. & C & Computed from two recorded profiles
   (Recoveries 1--2). \\ \addlinespace
-$\bar\mu$ & Real number, $\bar\mu=\mathbb E[w]$. & Mean wealth, and the pivot
-  of the linear mean-preserving spread of M13 (the linear spread). & C & Computed from
+$\bar\mu$ & Real number, $\bar\mu=\mathbb E[w]$. & Mean wealth, and the break-even
+  wealth of the linear widening of M13 that keeps the total. & C & Computed from
   recorded wealths (Recovery~2). \\ \addlinespace
 $\Lambda_\alpha$, $\Lambda_\beta$; $r_j$ & Two wealth distributions; quantile
   levels. & The quantile coupling, which reads the displacement as
@@ -422,13 +425,13 @@ $\kappa(w_{(k^*+1)})>\Delta(k^*-1)$ & An inequality. & The condition of
   transformation of $u$ and $V$. \\ \addlinespace
 $d_j$; the band & Real numbers; a yes-or-no property of the margin, holding
   when $d_{k^*}<0<d_{k^*+1}$. & $d_j=w'_{(j)}-w_{(j)}$, rank $1$ richest. The
-  margin condition is silent exactly inside the band, a pivot-spread never
-  reaches the band, and inside the band the displacement signs determine
-  nothing, for mean-preserving spreads too (M14). & C & Computed from two
+  margin condition is silent exactly inside the band, a single-crossing
+  widening never reaches the band, and inside the band the displacement signs
+  determine nothing, for concentrating reallocations too (M14). & C & Computed from two
   recorded sorted profiles and the recorded pre-change $k^*$. Only $d_{k^*}$
   and $d_{k^*+1}$ are needed. \\ \addlinespace
 $1-\Lambda(\bar\mu)$ & Real number in $[0,1]$. & The entry rate at which the
-  sign of M13 (the linear spread) flips. & C & Computed from recorded wealths, and compared
+  sign of M13 (the linear widening) flips. & C & Computed from recorded wealths, and compared
   with the recorded entry rate. \\ \addlinespace
 $\Delta_Q(0)$; $D(Q)=\Delta_{Q+1}(0)-\Delta_Q(0)$; $W_Q$ & Real numbers;
   $W_Q=C\,G^{Q-1}(1-G)$, a function. & The first entrant's gain among $Q$
@@ -491,8 +494,8 @@ Direction of $k^*$ and of $\Delta$ in $\mu$ & Sign of a weak change. & M28
   rule is computed from that rule's recorded $F$ and $G$ (Recovery~3), and
   the two are compared. \\ \addlinespace
 Direction of $k^*$ under a change of profile & Sign of a weak change, rise
-  or fall. & M12 (margin condition) and M13 (pivot spreads, the linear
-  spread among them). & C (comparison of R) & Direct comparison of
+  or fall. & M12 (margin condition) and M13 (single-crossing widenings,
+  the linear widening among them). & C (comparison of R) & Direct comparison of
   recorded $k^*$ under two recorded profiles, with $Q$, $c$, the prize and the
   score technology unchanged. The hypothesis ($w_{(k^*)}$ against $x_0$, or
   the margin condition, which reads $d_{k^*}$ for the rise branch and
@@ -504,7 +507,7 @@ $k^*(\lambda)$; $\bar\lambda$ & A step function of $\lambda$; a real
   not observed, since the manuscript asserts its existence only, through
   $\kappa$ and $\Delta(k^*-1)$. \\ \addlinespace
 $w_{(k^*)}$ & Real number. & The marginal entrant, the rank-$k^*$ challenger,
-  and her wealth. & C & Computed from the recorded profile and recorded $k^*$ as
+  and her wealth, the cut-off wealth. & C & Computed from the recorded profile and recorded $k^*$ as
   the wealth of the $k^*$-th richest challenger, whether or not she is in the
   recorded $S$. Under identity multiplicity she can be absent. \\ \addlinespace
 $\{(1),\dots,(k^*)\}$ & Subset of size $k^*$. & The assortative set, the
@@ -609,9 +612,9 @@ selection loss & Real number, $\ge0$ when the highest base component is unique. 
   The formula for $\lambda$ needs $w_{(a)}\ne w_{(b)}$. The formula for $x_0$
   needs $d_a\ne d_b$, equivalently $\lambda\ne1$ and $w_{(a)}\ne w_{(b)}$. Both
   use four recorded wealths.
-\item \emph{Linear mean-preserving spread of M13 (the linear spread).} $\bar\mu$ is the
-  mean of the recorded profile, and the spread about $\bar\mu$ preserves that
-  mean. Then $\lambda=(w'_{(j)}-\bar\mu)/(w_{(j)}-\bar\mu)$ for any rank $j$
+\item \emph{Linear widening of M13 that keeps the total.} $\bar\mu$ is the
+  mean of the recorded profile, and the linear widening about $\bar\mu$ keeps
+  that mean. Then $\lambda=(w'_{(j)}-\bar\mu)/(w_{(j)}-\bar\mu)$ for any rank $j$
   with $w_{(j)}\ne\bar\mu$. The formula uses one recorded profile and one rank
   of the other.
 \item \emph{Gain schedule, up to $V$.} $\Delta(m)/V=\int H_m\,dF-\int

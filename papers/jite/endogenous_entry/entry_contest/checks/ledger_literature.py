@@ -85,7 +85,7 @@ NODES = {
 
 ATTRIBUTES = {
     "wealth":       {"of": "challenger", "map": r"$w_i$; $(w_1,\dots,w_Q)$; $w_{(j)}$, $j$",
-                     "names": ("wealth", "pivot-spread")},
+                     "names": ("wealth", "single-crossing widening")},
     "ranking":      {"of": "position", "map": r"$V$", "names": ("ranking",)},
     "fee":          {"of": "credential", "map": r"$c$", "names": ("fee",)},
     "decisiveness": {"of": "rule", "map": r"published rule", "names": ("weight on the base component",)},
@@ -164,7 +164,7 @@ COMPARATIVE = {"new", "sharpening", "credited", "opposite", "settled"}
 REGULARITIES = {
     "spread_sign": {
         "varies": ("wealth",), "fixed": ("fee", "decisiveness", "Q"), "moves": "count",
-        "effect": "a pivot-spread moves it with the sign set by the marginal entrant against the pivot",
+        "effect": "a single-crossing widening moves it, with the sign set by the cut-off wealth against the break-even wealth",
         "given": ("marginal",),
         "premises": "the fee's utility cost falls with wealth; draws independent of wealth",
         "conclusions": ("C1", "C5"), "standing": ("new",),
@@ -242,7 +242,7 @@ REGULARITIES = {
     },
     "compression": {
         "varies": ("wealth",), "fixed": ("fee", "decisiveness", "Q"), "moves": "count",
-        "effect": "a compression is read at two ranks; no general sign for less inequality",
+        "effect": "a single-crossing narrowing is read at two ranks; no general sign for less inequality",
         "given": ("marginal",), "premises": "",
         "conclusions": ("C17",), "standing": ("implication",),
         "model": ("M12", "M13", "M14", "M33"), "lit": (),
@@ -288,9 +288,10 @@ SENTENCES = [
      "text": "Costrell and Loury (L9) sign how a mean-preserving spread in abilities moves "
              "wages by where one marginal worker stands, a quantile that technology fixes."},
     {"para": 1, "expresses": ("spread_sign", "two_ranks"),
-     "text": "Here a pivot-spread of the wealth profile moves the entry count by where the "
-             "marginal entrant stands against the pivot, a rank that moves with the wealth "
-             "profile, and for any change of profile two ranks, the marginal entrant and the "
+     "text": "Here a single-crossing widening of the wealth profile moves the entry count "
+             "by where the cut-off wealth stands against the widening's break-even wealth, "
+             "which moves with the wealth profile, and for any change of profile two ranks, "
+             "the marginal entrant and the "
              "first outsider, sign the change outside the band."},
     {"para": 1, "expresses": (),
      "text": "The sign needs anonymity and burden-monotonicity, and burden-monotonicity fails "
@@ -707,7 +708,7 @@ def controls(blocks, mrows, terms, players):
         and "row id M28" in surface_faults("as M28 shows")
         and "colon" in surface_faults("one thing: another")
         and any(f.startswith("retired synonym") for f in surface_faults("the payer enters"))
-        and not surface_faults("A pivot-spread of wealth moves the entry count.")
+        and not surface_faults("A single-crossing widening of wealth moves the entry count.")
     )
     g = graph_faults(
         dict(NODES, bogus={"kind": OBJECT, "map": "$zz$", "names": ("x",), "attributes": ()},

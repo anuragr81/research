@@ -149,8 +149,8 @@ attitudes, and is stronger than DARA, being related to the risk vulnerability of
 \citet{GollierPratt1996}.
 
 P9-gen requires none of this. Its sign rule needs only that $\kappa$ is strictly
-decreasing and that $T$ is a pivot-spread, with the flip located at
-$w_{(k^*)}$ against the pivot $x_0$. No third derivative, no prudence condition,
+decreasing and that the change is a single-crossing widening, with the flip
+located at the cut-off wealth $w_{(k^*)}$ against the break-even wealth $x_0$. No third derivative, no prudence condition,
 no decisiveness parameter, no functional-form restriction, and the statement is
 global rather than a local second-order expansion. The contribution sentence
 should therefore be:
@@ -246,16 +246,18 @@ because SOSD compares distributions on both mean and dispersion while the
 dispersive order concerns dispersion alone.
 
 This bears on open item~2 of \texttt{PROOFS.tex}, which observes that
-Theorem~\textsf{P9gen} requires $T$ to be a pivot-spread and that a general
+Theorem~\textsf{P9gen} requires a single-crossing widening and that a general
 Rothschild--Stiglitz spread need not be monotone, leaving the general case open.
 The dispersive order is exactly the tool that literature uses for this
 difficulty, and the two conditions are close. Writing $T = \Lambda_\beta^{-1}
 \circ \Lambda_\alpha$, the dispersive order says $T(w) - w$ is increasing; if in
 addition $T(w) - w$ changes sign, it does so once, at a point $x_0$, giving
-$T(w) \geq w$ above $x_0$ and $T(w) \leq w$ below it --- which is the
-pivot-spread hypothesis. So the pivot-spread class is not an ad hoc restriction
-invented to make the proof work; it is, up to the crossing condition, the
-standard dispersion order of this literature. That is a considerably stronger
+$T(w) \geq w$ above $x_0$ and $T(w) \leq w$ below it, which is a single-crossing
+widening. So the single-crossing class is not an ad hoc restriction invented to
+make the proof work; it contains every dispersive shift with a crossing point,
+the standard dispersion order of this literature, and is strictly larger,
+since it requires neither that $T(w)-w$ increase nor that the order of the
+challengers be kept (\texttt{SingleCrossing.lean}). That is a considerably stronger
 position than the current text claims for itself, and it should be checked
 formally and then stated.
 
@@ -274,9 +276,9 @@ below a crossing point, not globally, so it is not a uniform-sign aggregate
 claim and should not be described as one. Second, their model already contains a
 crossing point at which effects change sign, though it is a crossing in the
 \emph{endowment functions} with a corresponding sign change in \emph{utility},
-not a sign change in the direction of the expenditure response. P9's pivot rule
-is a different object: a sign reversal in $\mathrm{d}k^*/\mathrm{d}(\text{spread})$
-located at the pivot $x_0$ relative to the marginal entrant's wealth
+not a sign change in the direction of the expenditure response. P9's break-even
+rule is a different object: a sign reversal in the response of $k^*$ to a
+widening, located at the break-even wealth $x_0$ relative to the cut-off wealth
 $w_{(k^*)}$. The claim in \texttt{PROOFS.tex} \S11 that the result
 ``reconciles'' the standard result with the motivating pattern is defensible
 only if stated at that level of precision. As drafted it is too loose, because
@@ -304,7 +306,7 @@ Proposition~4 partitions the population into three zones by two threshold
 points $\hat z_-, \hat z_+$ --- poor, middle, and rich --- and signs the effect of
 a spread separately in each zone, with the middle zone (where the density ratio
 is highest) unambiguously seeing higher conspicuous consumption. This is a
-\emph{two}-crossing-point result, more general than a single pivot.
+\emph{two}-crossing-point result, more general than a single break-even wealth.
 
 \citet{HopkinsKornienko2009} is explicit, in its own introduction, about why a
 second methodology was needed: the income-indexing approach of the 2004 paper
@@ -336,7 +338,7 @@ for the middle and upper ranks --- this is the source proposition the 2010
 paper's Proposition~4 (discussed above in \S\ref{sec:hk}) generalises. In both
 cases the sign of the welfare effect is pinned by a single crossing point
 $\hat r$ of the two distribution functions, in exactly the way P9-gen pins the
-sign of the entry-count effect by the pivot $x_0$. The two constructions are not
+sign of the entry-count effect by the break-even wealth $x_0$. The two constructions are not
 the same theorem --- theirs crosses in the distribution functions and signs a
 welfare comparison, P9-gen crosses in $T(w) - w$ and signs an entry-count
 comparison --- but they are the same technique applied to structurally
@@ -345,10 +347,10 @@ general textbook.
 
 \paragraph{A concrete open question this raises.} \citet{HopkinsKornienko2004}'s
 ULR result permits \emph{two} crossing points and three sign regions, not one.
-P9-gen's pivot-spread hypothesis is a single-crossing object. Whether a
-two-pivot generalisation of P9-gen exists --- for spreads that compress agents
-in the middle of the wealth distribution while still expanding the tails, which
-a single pivot cannot represent --- is an open question raised directly by this
+P9-gen's single-crossing widening is a single-crossing object. Whether a
+two-crossing generalisation of P9-gen exists, for changes that narrow wealth in
+the middle of the distribution while widening the tails, which a single
+break-even wealth cannot represent, is an open question raised directly by this
 reading and is not addressed anywhere in the current bundle.
 
 \paragraph{Consequence for the income/wealth question.} Both papers work
@@ -833,17 +835,17 @@ is the status-tournament link back to the abandoned paper's motivation, and a
 referee from that literature will expect it cited. \citet{LimMatros2009} is the
 binomial-$K$ special case. \textbf{[C]}
 
-\section{Assignment models and the pivot rule, read in full}
+\section{Assignment models and the break-even rule, read in full}
 \label{sec:assignment}
 
 Two papers previously listed as ``assignment-model comparators'' turn out to
-carry the closest published precedent for P9-gen's pivot rule.
+carry the closest published precedent for P9-gen's break-even rule.
 \citet{CostrellLoury2004} has been read as the draft of 11 December 2003 and,
 on 13 October 2026, in its published form \textbf{[F]}, with the same
 proposition numbers and statements (record in \texttt{lit/costrell\_loury\_2004});
 \citet{Suen2007} has been read in its published form \textbf{[F]}.
 
-\paragraph{Costrell--Loury and the single-pivot precedent.} In their two-job
+\paragraph{Costrell--Loury and the single-crossing precedent.} In their two-job
 model (\S2), jobs are filled in proportions $\theta$ and $1-\theta$, and the
 entire wage schedule is determined by one sufficient statistic: $\hat\mu =
 F^{-1}(\theta)$, the ability of the \emph{marginal} worker between jobs. Any
@@ -854,7 +856,7 @@ upper or lower tail: if $\theta$ is high the spread raises $\hat\mu$ and
 narrows the wage distribution, if $\theta$ is low it lowers $\hat\mu$ and
 widens it. The rule reads which tail the marginal agent's quantile lies in, and
 it allows ``possible multiple crossings in between'' (p.~9). For a
-single-crossing spread that is a single-pivot rule at the crossing point, the
+single-crossing spread that is a break-even rule at the crossing point, the
 same logic as P9-gen, where the sign of $\mathrm{d}k^*$ flips according to
 whether $w_{(k^*)}$ lies above or below $x_0$. Their object is a wage schedule through $\hat\mu$; ours
 is an entry count through $w_{(k^*)}$. P9-gen should be presented as the
@@ -1131,13 +1133,14 @@ tournaments. \textbf{[C]}
 
 Two references carry technical weight rather than positioning weight.
 \citet{ShakedShanthikumar2007} is the source for the dispersive and star orders
-and is the right citation for the pivot-spread class discussed in \S3.
+and is the right citation for the dispersive order, which the single-crossing
+widenings discussed in \S3 contain.
 \citet{RothschildStiglitz1970} is the definition open item~2 of
 \texttt{PROOFS.tex} appeals to when it observes that a general mean-preserving
 spread admits only a mean-preserving coupling $w' = w + \varepsilon$ with
 $\mathbb{E}[\varepsilon \mid w] = 0$, which need not be monotone. Citing both,
-and stating that the pivot-spread hypothesis is the dispersive-order
-restriction rather than an arbitrary one, converts that open item from an
+and stating that the single-crossing widening contains the dispersive-order
+restriction rather than being an arbitrary one, converts that open item from an
 admitted weakness into a deliberate and named choice of stochastic order.
 
 \section{Verdict on novelty}
@@ -1203,8 +1206,9 @@ require the $Q$-player binary-entry setting jointly:
   pure-strategy count rather than an expected one. It should be presented as
   that, not as a new inequality, and the novelty ledger in \texttt{TODO.md}
   records it as not novel.
-\item \textbf{P9 and P9-gen}, the pivot rule locating the sign reversal of the
-  inequality effect on aggregate entry at $w_{(k^*)}$ versus $x_0$. The novelty
+\item \textbf{P9 and P9-gen}, the break-even rule locating the sign reversal of
+  the inequality effect on aggregate entry at the cut-off wealth $w_{(k^*)}$
+  versus the break-even wealth $x_0$. The novelty
   is not that a mean-preserving spread is signed --- \citet{SchroyenTreich2016}
   do that --- but that it is signed \emph{globally and without higher-order
   restrictions on $u$}, where the intensive-margin result is local and needs
@@ -1212,7 +1216,7 @@ require the $Q$-player binary-entry setting jointly:
   exhibits the third-derivative dependence, CARA against log utility,
   separates only for $m < 2^{-1/2}$ (\S\ref{sec:st}). The literature supplies
   the stochastic order (dispersive) but not the entry-count application. The
-  closest structural precedent for the pivot rule itself is
+  closest structural precedent for the break-even rule itself is
   \citet{CostrellLoury2004}'s two-job model (\S\ref{sec:assignment}), where the
   sign of a spread's effect depends on whether the marginal worker's quantile
   lies in the upper or the lower tail; P9-gen is its entry-count analogue and
@@ -1262,7 +1266,7 @@ An earlier version of this section concluded that the contribution should be
 stated as those three theorems. The novelty ledger in \texttt{TODO.md} has since
 narrowed it. P9-gen survives, with its endogenous margin and its margin
 condition, as the claim that the sign of the inequality effect on entry is set
-by the marginal entrant's position against the pivot under burden-monotonicity
+by the cut-off wealth against the break-even wealth under burden-monotonicity
 alone, for which $u'' < 0$ suffices.
 P7 does not survive as novel, because its accounting is Fu--Jiao--Lu's and
 Fu--Lu's. P-MU does not survive as such, because its kernel and its message
@@ -1739,11 +1743,12 @@ to the novelty verdict, and it is not itself a statement of conclusions.
 \paragraph{The claim.} For a fixed prize awarded by rank, the effect of
 resource inequality on \emph{how many people compete} has a determinate sign,
 and the sign is set by a single observable: whether the marginal entrant
-stands above or below the pivot of the spread. A \emph{dispersive} spread of
-the resource distribution --- one whose displacement changes sign exactly
-once, the leading case being the linear mean-preserving spread
-$w\mapsto\bar\mu+\lambda(w-\bar\mu)$ of M13 ---
-\emph{widens} entry when the marginal competitor is richer than the pivot and
+stands above or below the break-even wealth of the change. A single-crossing
+widening of the resource distribution, one whose displacement changes sign
+exactly once, the leading case being the linear widening
+$w\mapsto\bar\mu+\lambda(w-\bar\mu)$ of M13 that keeps the total,
+\emph{widens} entry when the marginal competitor is richer than the break-even
+wealth and
 \emph{shrinks} it when poorer (M13), strictly so under the
 boundary condition of M15. What the proof uses is
 weaker still. The rise branch reads the quantile difference at the marginal
@@ -1760,14 +1765,16 @@ Rothschild--Stiglitz mean-preserving spread need \emph{not} be dispersive, since
 its quantile difference may cross zero any number of times. With the marginal
 entrant above the mean, a change that preserves the total and majorizes the
 original profile can lower $k^*$ (M13),
-so the rule stated with the mean in place of the pivot fails for such changes.
-The sign rule is therefore a theorem about dispersive spreads and about the
-margin condition, and not about mean-preserving spreads as such, and the rule
+so the rule stated with the mean in place of the break-even wealth fails for
+such changes. The sign rule is therefore a theorem about single-crossing
+widenings and about the margin condition, and not about concentrating
+reallocations as such, and the rule
 should not be quoted in the latter form. Which changes the margin condition
 covers is settled in M14. The condition is silent exactly when
 the marginal entrant becomes poorer and the first outsider becomes richer.
-Dispersive changes never reach that band, and inside the band the displacement
-signs determine nothing, for mean-preserving spreads as for other changes.
+Single-crossing widenings never reach that band, and inside the band the
+displacement signs determine nothing, for concentrating reallocations as for
+other changes.
 
 The economic content is a reconciliation. The received result --- inequality
 dampens status competition --- goes back to
@@ -1779,7 +1786,7 @@ conspicuous consumption. That finding is here recovered as one branch: mass
 competitions, in which the marginal entrant sits low in the distribution.
 Exclusive competitions, in which the marginal entrant is already wealthy,
 sit on the other branch, where inequality \emph{feeds} entry. The received
-result is the below-pivot case of a two-branch rule, not the general case.
+result is the below-break-even case of a two-branch rule, not the general case.
 This is non-tautological because $V$ is fixed by construction
 (M11): nothing about the prize moves when the distribution
 spreads.
@@ -1807,9 +1814,9 @@ being signed is an invariant of the game: every pure-strategy equilibrium has
 the same entrant count (M6), so ``how many
 compete'' does not depend on which equilibrium is selected --- even though
 \emph{who} competes does (Appendix D, Information). And the class
-of spreads for which the rule is proved is not bespoke: a pivot-spread is
-exactly a dispersive-order shift with a crossing point
-(M13), the dispersive order being the inequality order this
+of changes for which the rule is proved is not bespoke: a single-crossing
+widening contains every dispersive-order shift with a crossing point, and is
+strictly larger (M13), the dispersive order being the inequality order this
 literature already uses \citep{HopkinsKornienko2009,Shaked1982}.
 
 \paragraph{Why the extensive margin is the point.} The intensive-margin
@@ -1878,12 +1885,13 @@ the referee's conjecture. And the scope of the central claim is stated with
 it. The rule is proved under the margin condition of
 M12, which reads the quantile difference at the
 marginal entrant for the rise branch and at the first outsider for the fall
-branch. Pivot-spreads are the special case in which one branch applies at every
-margin. A mean-preserving spread is covered when the displacement is
+branch. Single-crossing widenings are the special case in which one branch
+applies at every margin. A concentrating reallocation is covered when the
+displacement is
 non-negative at the marginal entrant or non-positive at the first outsider, and
 the displacement may cross zero freely at the other ranks. The condition is a
-restriction and not a formality, since two mean-preserving spreads with the
-same displacement signs at every rank can put the margin in the band and move
+restriction and not a formality, since two concentrating reallocations with
+the same displacement signs at every rank can put the margin in the band and move
 $k^*$ in opposite directions (M14). What is not settled is
 whether some statistic of the change other than its signs predicts the
 direction inside the band (TODO item O1).

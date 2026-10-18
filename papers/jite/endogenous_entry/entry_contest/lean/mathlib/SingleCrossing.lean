@@ -172,6 +172,18 @@ theorem narrowing_down (hw : Antitone w) (hN : IsNarrowing x0 w g) (hs : IsSorte
     · exact ((hN i).1 h).2.trans hwi
     · exact ((hN i).2 h).2.trans hx)
 
+/-- Under a widening the sorted displacement never puts the margin in the band: a positive
+    displacement at the first outsider forces a non-negative one at the marginal entrant. -/
+theorem widening_not_band (hw : Antitone w) (hW : IsWidening x0 w g) (hs : IsSortedOf w' g)
+    (k : ℕ) (hk1 : 1 ≤ k) (hkQ : k < Q) (hpos : 0 < w' k - w k) : 0 ≤ w' (k - 1) - w (k - 1) := by
+  have hxk : x0 < w k := by
+    by_contra h
+    push_neg at h
+    have := widening_down hw hW hs k hkQ h
+    linarith
+  have := widening_up hw hW hs (k - 1) (by omega) (hxk.le.trans (hw (by omega : k - 1 ≤ k)))
+  linarith
+
 /-! ## 3. The sign rule for the entry count -/
 
 variable (κ : ℝ → ℝ) (c : ℝ) (Δ : ℕ → ℝ)
