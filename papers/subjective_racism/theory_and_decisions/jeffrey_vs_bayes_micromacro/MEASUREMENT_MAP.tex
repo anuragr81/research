@@ -1,0 +1,366 @@
+% MEASUREMENT_MAP.tex, a companion note to PAPER_B_MANUSCRIPT.tex.
+% Written 18 October 2026 against the manuscript at commit f0e1ac6c, following
+% papers/MANUSCRIPT_SKELETON.md section 4.5 and notes/writing_discipline.md.
+%
+% PURPOSE
+%   A reference note, not part of the paper. For every object of the model it
+%   records the paper's name for it, what it represents, whether a record of the
+%   world gives it directly, and how an observer could obtain it. It makes no
+%   arguments.
+%
+% RULES FOLLOWED (MANUSCRIPT_SKELETON.md 4.5)
+%   Three tables (inputs, internal objects, outputs). Six fields per row, with
+%   the macro \mm{symbol}{name}{type}{represents}{directly observed}{obtained how}.
+%   "Obtained how" begins with one of six status words, Recorded, Elicited,
+%   Computed, Assumed, Never observed, A device. Directly observed is Yes exactly
+%   when the entry begins with Recorded. An elicited belief is No, since the
+%   answer stands in for the belief. Names are unique and are the paper's terms.
+%   No colon in the prose.
+%
+% VERIFICATION NOTE
+%   Every Lean name below is a declaration of lean/JeffreyOrder/, audited by
+%   lean/check_axioms.lean. The recovery formula for the adoption weight is
+%   JeffreyOrder.omega_recovery (Anchoring.lean), added with this note. The cell
+%   formulas of the prior are JeffreyOrder.prior with assoc_prior.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\PB}{P^{\mathrm{B}}}
+\newcommand{\PJ}{P^{\mathrm{J}}}
+\newcommand{\Pbar}{\overline{P}}
+\newcommand{\assoc}{\operatorname{assoc}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\lean}[1]{\texttt{\scriptsize #1}}
+\newcommand{\mm}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\ \addlinespace}
+\newcommand{\mmhead}{%
+  \toprule
+  \textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} &
+  \textbf{Directly observed} & \textbf{Obtained how} \\
+  \midrule}
+
+\title{Effects of Reading Sequence on Belief and Decision Statistics\\
+  under Jeffrey Conditioning\\[2pt] \large Measurement map}
+\author{Companion note to the manuscript}
+\date{18 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent The model has one evaluator, who holds a prior over two binary
+attributes of a candidate and reads two documents, each bearing on one
+attribute. Each document leaves an impression, a credence about its own
+attribute, and the evaluator revises by Jeffrey conditioning. A population of
+evaluators with the same prior and impressions reads the documents in one of two
+sequences. An observer, the auditor, reads statistics of the population's beliefs
+and decisions and compares them with the sequence-free benchmark. The objects
+fall into three tables. Inputs are fixed before any document is read, internal
+objects are built from the inputs inside the model, including devices of the
+proofs, and outputs are what the results predict. The desirability vector, the
+outside option and every object built from them are the modeller's constructs,
+attributed to the evaluator to rationalise recorded engagement decisions, rather
+than quantities in the world. The beliefs are the evaluator's own and are
+obtained, when they are obtained at all, by asking.
+
+\section*{Inputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.6cm}P{1.9cm}P{1.8cm}P{4.1cm}P{1.2cm}P{4.1cm}@{}}
+\caption{Inputs of the model.}\\
+\mmhead
+\endfirsthead
+\mmhead
+\endhead
+\bottomrule
+\endfoot
+\mm{$(A,B)$}{the attributes}{Two variables in $\{0,1\}$.}
+  {Competence and trustworthiness of the candidate, each present ($1$) or
+  absent ($0$). Facts about the candidate.}{No}
+  {Never observed in the model. The evaluator and the observer see only the
+  documents, and no outcome of the hire enters.}
+\mm{$\alpha$}{prior marginal of competence}{Number in $(0,1)$.}
+  {$P(A{=}0)$, the evaluator's probability that a candidate drawn at random
+  lacks competence. A belief, not a frequency.}{No}
+  {Elicited by a question about competence alone, asked before the file is
+  opened.}
+\mm{$\beta$}{prior marginal of trustworthiness}{Number in $(0,1)$.}
+  {$P(B{=}0)$, the evaluator's probability that a candidate drawn at random
+  lacks trustworthiness.}{No}
+  {Elicited by a question about trustworthiness alone, asked before the file
+  is opened.}
+\mm{$c$}{prior covariance}{Number strictly inside the Fr\'echet--Hoeffding
+  bounds.}
+  {How strongly the evaluator believes the two traits go together among
+  applicants, $c=\assoc(P)$. The association channel exists only when
+  $c\neq0$.}{No}
+  {Elicited by a question about both traits at once, since neither marginal
+  carries it. From an elicited prior table it is $P_{00}P_{11}-P_{01}P_{10}$
+  (\lean{assoc\_prior}).}
+\mm{$q=(q_0,q_1)$}{impression of competence}{Probability on $A$'s
+  partition.}
+  {The credence about competence that the credential leaves. A delivered
+  credence, not a likelihood.}{No}
+  {Elicited as the belief about competence right after the credential is read
+  first, which equals $q$ under every adoption weight
+  (\lean{jeffreyA\_pins\_mA1}).}
+\mm{$r=(r_0,r_1)$}{impression of trustworthiness}{Probability on $B$'s
+  partition.}
+  {The credence about trustworthiness that the letter leaves.}{No}
+  {Elicited as the belief about trustworthiness right after the letter is read
+  first (\lean{jeffreyB\_pins\_mB1}).}
+\mm{$\sigma\in\{AB,BA\}$}{reading sequence}{Label.}
+  {Whether a panel read the credential first ($AB$) or the letter first
+  ($BA$).}{Yes}
+  {Recorded by the observer, or assigned by an experimenter.}
+\mm{$\lambda$}{share reading the credential first}{Number in $[0,1]$.}
+  {The share of panels whose sequence is $AB$, and the weight of that
+  sequence in the mean belief.}{No}
+  {Computed as a count share where the sequences are recorded. In a pooled
+  audit it is never observed.}
+\mm{$\omega$}{adoption weight}{Number in $[0,1]$.}
+  {How far the cue read second moves the belief about its own attribute toward
+  the delivered credence. \emph{Full adoption} is $\omega=1$, \emph{partial
+  adoption} is $0<\omega<1$ and \emph{no adoption} is $\omega=0$.}{No}
+  {Computed from three marginals of the attribute read second, elicited before
+  the second cue ($m$) and after it ($m'$), with its delivered credence $x$, as
+  $\omega=1-(m'-x)/(m-x)$ when $m\neq x$ (\lean{omega\_recovery}).}
+\mm{$v=(v_{ij})$}{desirability vector}{Vector with one entry per cell.}
+  {The value the evaluator attaches to engaging a candidate in each cell. A
+  construct.}{No}
+  {Assumed. Only the surplus $u$ enters the results.}
+\mm{$\tau$}{outside option}{Number.}
+  {The value forgone by not engaging. A construct.}{No}
+  {Assumed. It enters only through $u$.}
+\mm{$\varepsilon$}{observer's precision}{Positive number.}
+  {The smallest departure from the benchmark the observer's instrument
+  resolves. A first-order departure is resolvable and a second-order one is
+  not when $c^{2}\ll\varepsilon\ll c$.}{No}
+  {Assumed, as a property of the instrument.}
+\mm{$f$}{density of the surplus}{Density on $\mathbb R$.}
+  {The law of $u=s(\PB)-\tau$ across the population and the sequence
+  distribution, positive and bounded near zero (Theorem LOS). A law of
+  constructs.}{No}
+  {Assumed.}
+\end{longtable}
+\normalsize
+
+\section*{Internal objects}
+
+\footnotesize
+\begin{longtable}{@{}P{1.6cm}P{1.9cm}P{1.8cm}P{4.1cm}P{1.2cm}P{4.1cm}@{}}
+\caption{Objects the model builds from its inputs.}\\
+\mmhead
+\endfirsthead
+\mmhead
+\endhead
+\bottomrule
+\endfoot
+\mm{$P$}{prior}{A $2\times2$ table, a point of $\Delta^{3}$.}
+  {The evaluator's joint belief before any cue, $P_{00}=\alpha\beta+c$,
+  $P_{01}=\alpha(1-\beta)-c$, $P_{10}=(1-\alpha)\beta-c$,
+  $P_{11}=(1-\alpha)(1-\beta)+c$.}{No}
+  {Computed from $\alpha$, $\beta$ and $c$ by the cell formulas
+  (\lean{prior}, \lean{assoc\_prior}), or elicited as a full table.}
+\mm{$\ell^{A},\ell^{B}$}{Bayes factors}{Vectors on each partition.}
+  {Each impression read as a factor relative to the prior marginal,
+  $\ell^{A}_{i}\propto q_{i}/P(A{=}i)$ and $\ell^{B}_{j}\propto r_{j}/P(B{=}j)$.}{No}
+  {Computed from the elicited impressions and prior marginals.}
+\mm{$\PB$}{sequence-free benchmark}{A $2\times2$ table.}
+  {The single update on the two impressions' combined Bayes-factor content, the
+  same in either sequence.}{No}
+  {Computed from $P$, $q$ and $r$ (\lean{PB}, \lean{PB\_a00\_closed} to
+  \lean{PB\_a11\_closed}).}
+\mm{$\PJ_{AB},\PJ_{BA}$}{the two sequence posteriors}{$2\times2$ tables.}
+  {The beliefs after reading the credential then the letter, or the reverse,
+  under full adoption.}{No}
+  {Elicited as a full posterior table from a panel that read the file in that
+  sequence (\lean{PJab}, \lean{PJba} and their closed forms).}
+\mm{$\PJ_{AB}-\PJ_{BA}$}{sequence effect}{Signed table, cells summing to $0$.}
+  {The difference between the beliefs two evaluators reach from the same prior
+  and impressions, differing only in which cue they met first.}{No}
+  {Computed from two elicited posterior tables, one per sequence
+  (\lean{propDIV\_seq\_a00} to \lean{propDIV\_seq\_a11}).}
+\mm{$\PJ_{\sigma}-\PB$}{gap}{Signed table.}
+  {The difference between either sequence posterior and the benchmark.}{No}
+  {Computed from an elicited posterior and the computed benchmark
+  (\lean{propDIV\_gap\_AB\_a00} and the other cells).}
+\mm{$\Pbar_{\lambda}$}{mean belief}{A $2\times2$ table.}
+  {$\lambda\PJ_{AB}+(1-\lambda)\PJ_{BA}$, the population's average
+  belief.}{No}
+  {Computed from the elicited posteriors and $\lambda$
+  (\lean{meanBelief}).}
+\mm{$\assoc(Q)$}{believed association}{Function of a table.}
+  {$Q_{00}Q_{11}-Q_{01}Q_{10}$, the covariance of the two indicators under
+  $Q$.}{No}
+  {Computed from an elicited table (\lean{assoc}).}
+\mm{$\mathrm{OR}(Q)$}{odds ratio}{Function of a table.}
+  {$Q_{00}Q_{11}/(Q_{01}Q_{10})$, the same in both sequences and in the
+  benchmark, for every adoption weight.}{No}
+  {Computed from an elicited table (\lean{oddsRatio\_PJab\_eq\_prior},
+  \lean{oddsRatio\_PB\_eq\_prior}).}
+\mm{$F(\Pbar)-F(\PB)$}{distortion}{Number, for a smooth statistic $F$.}
+  {The departure of a statistic of the mean belief from its benchmark
+  value.}{No}
+  {Computed from the mean belief and the benchmark.}
+\mm{$s(P)$}{score}{Number.}
+  {$\langle v,P\rangle$, the expected desirability of engaging at the belief
+  $P$.}{No}
+  {Computed from $v$ and $P$ by definition (\lean{inner}). It carries the
+  status of $v$ as a construct.}
+\mm{$u$}{surplus}{Number.}
+  {$s(\PB)-\tau$, the surplus at the benchmark belief.}{No}
+  {Computed from constructs, and itself a construct.}
+\mm{$R_1,R_2$, $\kappa,\kappa'$, $M_\lambda$}{route directions}{Tables and
+  numbers.}
+  {The leading directions of the two sequences' gaps and their coefficients,
+  $\kappa=(\alpha-q_0)r_0(1-r_0)/Z$ and $\kappa'=(\beta-r_0)q_0(1-q_0)/Z$.}{No}
+  {A device of the proofs of DIV and PRO (\lean{R1}, \lean{R2},
+  \lean{kappa}, \lean{Mlam}).}
+\mm{$Z$}{normaliser}{Positive number.}
+  {$\alpha\beta(1-\alpha)(1-\beta)$.}{No}
+  {A device (\lean{Z\_pos}).}
+\mm{$H$}{association coefficient of partial adoption}{Number.}
+  {The factor in the first-order difference $c(1-\omega)H/Z$ of the believed
+  association between the sequences (Proposition LAD).}{No}
+  {A device (\lean{Hcof}).}
+\mm{$\delta_\sigma$}{score coefficient}{Number.}
+  {The first-order coefficient with which an evaluator's score departs from its
+  benchmark value.}{No}
+  {A device of Theorem LOS and Proposition SHR.}
+\end{longtable}
+\normalsize
+
+\section*{Outputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.6cm}P{1.9cm}P{1.8cm}P{4.1cm}P{1.2cm}P{4.1cm}@{}}
+\caption{What the results predict.}\\
+\mmhead
+\endfirsthead
+\mmhead
+\endhead
+\bottomrule
+\endfoot
+\mm{$\mathbb 1\{s(P)\ge\tau\}$}{engagement decision}{Binary.}
+  {Whether the evaluator engages the candidate.}{Yes}
+  {Recorded, one decision per evaluator and file.}
+\mm{$\sgn(u)\neq\sgn(u+c\delta_\sigma)$}{decision flip}{Indicator.}
+  {Whether the reading sequence changes the evaluator's decision.}{No}
+  {Never observed for one evaluator, who reads one file in one sequence
+  (\lean{Flips}, \lean{flips\_iff}).}
+\mm{$\Pr\{\text{flip}\}$}{share of decisions changed}{Probability.}
+  {The share of candidates whose decision the reading sequence changed,
+  $\Theta(c)$ (Proposition SHR).}{No}
+  {Never observed. The paper gives no formula recovering it from recorded
+  decisions (\lean{volume\_flipSet}).}
+\mm{$L(c)$}{surplus-weighted loss}{Number.}
+  {$\E\bigl[|u|\,\mathbb 1\{\text{flip}\}\bigr]$, the expected surplus forgone
+  through sequence-affected decisions, $\bigO(c^{2})$ (Theorem LOS).}{No}
+  {Never observed, since it weights flips by a construct
+  (\lean{lintegral\_stake\_le}).}
+\mm{$\assoc(\Pbar)-\assoc(\PB)$}{aggregate association distortion}{Number.}
+  {How far the population's believed association sits from the benchmark's,
+  $\bigO(c^{2})$ (Lemma ASC, Proposition DEC).}{No}
+  {Computed from the elicited posterior tables and the computed benchmark
+  (\lean{assoc\_PJab}, \lean{assoc\_PJba}, \lean{assoc\_PB}).}
+\mm{$\Pbar(A{=}1)-\PB(A{=}1)$}{marginal drift}{Number.}
+  {How far the population's believed prevalence of competence sits from the
+  benchmark's, $\Theta(c)$ for at least one attribute (Proposition DRF).}{No}
+  {Computed from the elicited posteriors and the computed benchmark
+  (\lean{propDRF}).}
+\mm{$\langle v,\Pbar\rangle-\langle v,\PB\rangle$}{score gap}{Number.}
+  {The mean score's departure from its benchmark value, $\Theta(c)$ unless
+  $v$ lies in the span of the constants and $\nabla\assoc$ (Lemma SCR).}{No}
+  {Computed from the elicited posteriors once $v$ is fixed by assumption
+  (\lean{lemmaSCR\_protected\_weight}).}
+\mm{protected, unprotected}{protection}{Property of a statistic.}
+  {A statistic is protected if its distortion is $\bigO(c^{2})$ and unprotected
+  if it is first order. The protected statistics are exactly those whose
+  differential at $q\otimes r$ is a multiple of $d\,\assoc$ (Proposition
+  PRO).}{No}
+  {Computed from the statistic's differential at $q\otimes r$
+  (\lean{propPRO\_protection}, \lean{propPRO\_uniqueness}).}
+\end{longtable}
+\normalsize
+
+\section*{Recovery formulas}
+
+\begin{enumerate}
+\item \emph{Prior covariance.} From an elicited prior table,
+  $c=P_{00}P_{11}-P_{01}P_{10}$ (\lean{assoc\_prior}).
+\item \emph{Impressions.} The belief about the attribute of the cue read
+  first, elicited right after that cue, is its delivered credence
+  (\lean{jeffreyA\_pins\_mA1}, \lean{jeffreyB\_pins\_mB1}).
+\item \emph{Adoption weight.} With $m$ the marginal of the attribute read
+  second before its cue, $m'$ the same marginal after it and $x$ its delivered
+  credence, $\omega=1-(m'-x)/(m-x)$ whenever $m\neq x$
+  (\lean{omega\_recovery}). When $m=x$ the cue moves nothing and $\omega$ is not
+  identified.
+\item \emph{Benchmark.} $\PB$ is the Jeffrey update of $P$ whose targets are
+  the marginals the Bayes factors imply, computed from $P$, $q$ and $r$
+  (\lean{PB} and its closed forms).
+\end{enumerate}
+
+\section*{Structure}
+
+\begin{itemize}
+\item \emph{Elicited.} The prior marginals, the prior covariance, the
+  impressions and the posterior tables. Each needs a question to the
+  evaluator. The covariance and the posterior tables need a question about both
+  traits at once.
+\item \emph{Recorded.} The reading sequence and the engagement decisions.
+\item \emph{Computed.} The prior table, the Bayes factors, the benchmark, the
+  sequence effect, the gaps, the mean belief, the distortions, the adoption
+  weight and the protection class.
+\item \emph{Constructs, not observed.} The desirability vector, the outside
+  option, the score, the surplus and its density, and the surplus-weighted
+  loss. Each rationalises recorded engagement decisions.
+\item \emph{Never observed.} The attributes themselves, the decision flip and
+  the share of decisions changed.
+\item \emph{Devices.} The route directions and their coefficients, the
+  normaliser, the association coefficient of partial adoption and the score
+  coefficient.
+\end{itemize}
+
+\section*{Terminology}
+
+\footnotesize
+\begin{longtable}{@{}P{3.4cm}P{6.6cm}P{5.6cm}@{}}
+\toprule
+\textbf{Name} & \textbf{Means} & \textbf{Not to be called} \\
+\midrule
+sequence & the order in which an evaluator reads the two documents & order \\
+order (first, second) & the power of $c$ at which a departure first appears &
+  sequence \\
+evaluator & the agent who reads the documents and revises & observer \\
+observer & the auditor who reads statistics of the population & evaluator \\
+marginal & the probability of one attribute on its own & base rate \\
+association channel & sequence dependence through the believed link, present
+  only when $c\neq0$ & interaction, bias \\
+position channel & sequence dependence through the weight a cue receives by
+  its place in the sequence & interaction, bias \\
+full, partial, no adoption & $\omega=1$, $0<\omega<1$, $\omega=0$ & amnestic
+  (except when quoting Hawthorne) \\
+adoption weight & $\omega$ & (none recorded) \\
+impression & the credence a document delivers about its own attribute &
+  likelihood \\
+sequence-free benchmark & $\PB$ & Bayesian benchmark, Bayes-factor benchmark,
+  sequence-invariant benchmark \\
+protected, unprotected & distortion of order $c^{2}$, or of order $c$ &
+  (none recorded) \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\end{document}

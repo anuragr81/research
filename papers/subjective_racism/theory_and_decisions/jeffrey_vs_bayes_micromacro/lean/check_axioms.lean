@@ -1527,3 +1527,5 @@ open JeffreyOrder
 #print axioms Literature.BonnayCozic.bool_sum
 #print axioms Literature.BonnayCozic.IE_forces_jeffrey
 -- END Literature.BonnayCozic
+
+#print axioms JeffreyOrder.omega_recovery

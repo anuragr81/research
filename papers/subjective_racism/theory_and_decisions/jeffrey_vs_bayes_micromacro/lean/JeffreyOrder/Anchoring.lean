@@ -110,6 +110,16 @@ theorem dampedB_deviation (Q : Mat) (hB1 : Q.mB1 ≠ 0) :
   unfold dampedTarget
   ring
 
+/-- Recovering the adoption weight from three marginals.  If the `B`-marginal
+before the second step (`Q.mB1`) differs from the delivered credence `1 - r₀`,
+the weight is one minus the ratio of the gap after the step to the gap before
+it.  All three marginals can be elicited, so `δ` is computed from them. -/
+theorem omega_recovery (Q : Mat) (hB1 : Q.mB1 ≠ 0) (hgap : Q.mB1 - (1 - r₀) ≠ 0) :
+    δ = 1 - ((dampedB Q r₀ δ).mB1 - (1 - r₀)) / (Q.mB1 - (1 - r₀)) := by
+  rw [dampedB_deviation Q hB1]
+  field_simp
+  ring
+
 /-- Consequently the whole `c`-dependence of the last-read marginal carries the
 factor `(1-δ)`: across any two covariances the difference of deviations scales by
 `(1-δ)`.  So the last-read marginal is `c`-invariant exactly when `δ = 1`, or
