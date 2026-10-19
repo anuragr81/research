@@ -136,3 +136,87 @@ the bottom-rung fallback, and the middle is empty at the source's parameters.
 The resemblance to a class system is not a prediction the model makes on its
 own; it is what the model says once those assumptions are granted and `κ` is
 small enough relative to `L`.
+
+## Primary sources read (19 Oct, supplied by the author)
+
+1. **Corcoran, Datcher and Duncan (1980)**, "Information and Influence Networks
+   in Labor Markets", ch. 1 of *Five Thousand American Families*, vol. VIII
+   (Ann Arbor: ISR), pp. 1–37. Read in full, through Drive's OCR of the scanned
+   volume (`~/.cache/firmworkers/psid_vol8_1980.drive_ocr.txt`; Drive id
+   1A3--iSRCC4DV8mTUzKTJmsbJqdWpxtYt). PSID 1978, heads and wives under 45 who
+   worked 250 hours or more in 1977; N = 1,499 white men, 988 white women,
+   667 black men, 605 black women. Page numbers below are from the OCR's page
+   markers and must be checked against the page images before a row rests on
+   them; table numbers are unambiguous.
+2. **Ioannides and Datcher Loury (2004)**, accepted manuscript of 29 June 2004
+   (Drive id 1NBUHWLmoWfteOdLTLCjcbLQJ_B4ecolu, sha256 416cf4cafe43da8b…), 62 pages.
+   Read: the stylised facts (section 2), the sociology of networks (3.1), the
+   appendix tables. Not read: the theory sections 3.2 to 5. Every passage
+   quoted above matches the published version (pp.1056–1093) word for word,
+   apart from "From Table 1 Appendix A" for "From appendix table 1".
+
+## What Corcoran, Datcher and Duncan show
+
+Share of white men who heard about their current job from a friend or relative
+(Table 1.7), by schooling: 8 or fewer grades 69.3%, 9–11 59.5%, 12 64.2%,
+12 plus non-academic 51.8%, 13–15 53.4%, BA 38.5%, advanced degree 22.8%; mean
+52.0%. By occupation (Table 1.6): professional 31.9%, manager 48.1%, clerical
+and sales 51.6%, foremen and craftsmen 58.1%, other operatives 61.2%, transport
+operatives 69.8%, labourers and household workers 74.6%. White-collar 41.6%
+against blue-collar 62.0%. First jobs (Table 1.8) show the same pattern more
+steeply: professional 20.0%, advanced degree 19.4%, unskilled labour and
+service 68.4%.
+
+Verbatim:
+- "Regardless of race/sex group, workers with college and advanced degrees and
+  professional workers were considerably less likely than the average worker to
+  report having used informal information and influence channels in obtaining
+  their current jobs (Tables 1.6 and 1.7)." (p.17)
+- "Perhaps informal information and influence networks tend to substitute for
+  the more formal credentials used by well-educated and professional workers."
+  (p.17)
+- "White men in blue collar occupations were more likely than other white men
+  to have heard about their jobs from a friend, to have known someone on the
+  Job, to have been helped by someone, to have both known and been helped by
+  someone and to have been helped by someone with much say" (p.17)
+- On Rees and Schultz's Chicago study: "Informal sources such as referrals from
+  employees or other employers accounted for about half of all white collar
+  hires and four-fifths of all blue collar hires." (p.3)
+- On Granovetter's 282 professional and technical men in Newton: "About 57
+  percent of these men had heard about their current job from a personal
+  contact" (p.4); a sample of job changers in one suburb, not comparable with
+  the PSID's 31.9% for professionals.
+- Occupation explains much of the schooling gradient for white men: "When
+  occupation is controlled (Table 1.10) the magnitude of the negative
+  association between schooling and the information and influence measures for
+  first and current jobs dropped sharply for white men." (p.25)
+- Wages: knowing someone on the job gives white men about 9 percent more at
+  first, "declining to zero within nine years for white men" (p.33); hearing
+  from a friend has no significant wage effect except for black men.
+
+## Revised verdict
+
+The worker-side primary evidence shows contact use falling with schooling and
+rank almost monotonically: highest for labourers and the least schooled, lowest
+for professionals and the most schooled, managers in between and below the
+mean. **There is no rise at the top.** The rise in the computed table from
+Ioannides and Datcher Loury's appendix concerns on-the-job searchers' search
+methods in 1993 (a method tried, not the source of the job), with small top
+cells; Marsden and Gorman's employer-side finding that contacts are used to fill
+managerial and professional positions is reported secondhand. Neither outweighs
+Corcoran, Datcher and Duncan's tables for the source of the current job.
+
+So the evidence matches the model's robust part, the bottom gambles, and does
+not support its assumption-driven part, the top gambles. The pattern the data
+show is "contact at the bottom, credentials at the top", with the two channels
+as substitutes, which is Corcoran, Datcher and Duncan's own reading (p.17) and
+the model's two channels exactly. In model terms it would hold if the
+return were cheap enough at the top, that is under a scale-free cost
+(`scale_free_return_beats_step`) or a small `κ` (issue 1), and not under the
+unit-dependent convex cost that produces the top band. The data therefore bear
+on issue 1: they favour a cost that does not make regaining a top job dearer
+than the bottom rung.
+
+Mismatches remain: the data cover all workers under 45, not the displaced, and
+"heard about the job from a friend" is a source of information, not the
+model's lottery.
