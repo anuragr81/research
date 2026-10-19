@@ -146,6 +146,139 @@ theorem spread_at_centre {Φ : ℝ → ℝ} (hΦ : AntitoneOn Φ (Set.Ici 0)) (s
     (show s' ∈ Set.Ici (0:ℝ) by simp only [Set.mem_Ici]; linarith) hss
   linarith
 
+/-! ### (ii) in general. A mean-preserving widening of a group, for any observer -/
+
+/-- A widening of a group. Member `i`, of class `x i`, is replaced by the
+classes `z i k` for `k` in `K i`, with weights `q i k` that sum to one and
+average to `x i`. This is the expected benefit after the widening. -/
+def widened {ι κ : Type*} (S : Finset ι) (K : ι → Finset κ) (p : ι → ℝ)
+    (q z : ι → κ → ℝ) (Φ : ℝ → ℝ) (y : ℝ) : ℝ :=
+  ∑ i ∈ S, p i * ∑ k ∈ K i, q i k * Φ |y - z i k|
+
+/-- A benefit concave and falling in distance is concave in the other's
+class, for any observer. -/
+theorem concave_in_class {Φ : ℝ → ℝ} (hc : ConcaveOn ℝ (Set.Ici 0) Φ)
+    (ha : AntitoneOn Φ (Set.Ici 0)) (y : ℝ) :
+    ConcaveOn ℝ Set.univ (fun x : ℝ => Φ |y - x|) := by
+  refine ⟨convex_univ, ?_⟩
+  intro x1 _ x2 _ a b ha0 hb0 hab
+  simp only [smul_eq_mul]
+  have e : y - (a * x1 + b * x2) = a * (y - x1) + b * (y - x2) := by
+    linear_combination (-y) * hab
+  have h1 : |y - (a * x1 + b * x2)| ≤ a * |y - x1| + b * |y - x2| := by
+    rw [e]
+    calc |a * (y - x1) + b * (y - x2)| ≤ |a * (y - x1)| + |b * (y - x2)| := abs_add_le _ _
+      _ = a * |y - x1| + b * |y - x2| := by
+        rw [abs_mul, abs_mul, abs_of_nonneg ha0, abs_of_nonneg hb0]
+  have h2 : Φ (a * |y - x1| + b * |y - x2|) ≤ Φ |y - (a * x1 + b * x2)| :=
+    ha (Set.mem_Ici.mpr (abs_nonneg _))
+      (show a * |y - x1| + b * |y - x2| ∈ Set.Ici (0:ℝ) from
+        add_nonneg (mul_nonneg ha0 (abs_nonneg _)) (mul_nonneg hb0 (abs_nonneg _))) h1
+  have h3 := hc.2 (Set.mem_Ici.mpr (abs_nonneg (y - x1)))
+    (Set.mem_Ici.mpr (abs_nonneg (y - x2))) ha0 hb0 hab
+  simp only [smul_eq_mul] at h3
+  linarith
+
+/-- A benefit concave in distance. Any mean-preserving widening of a group
+does not raise the expected benefit to any observer. -/
+theorem widen_concave {ι κ : Type*} (S : Finset ι) (K : ι → Finset κ) (p x : ι → ℝ)
+    (q z : ι → κ → ℝ) (Φ : ℝ → ℝ) (hc : ConcaveOn ℝ (Set.Ici 0) Φ)
+    (ha : AntitoneOn Φ (Set.Ici 0)) (hp : ∀ i ∈ S, 0 ≤ p i)
+    (hq : ∀ i ∈ S, ∀ k ∈ K i, 0 ≤ q i k) (hq1 : ∀ i ∈ S, ∑ k ∈ K i, q i k = 1)
+    (hmean : ∀ i ∈ S, ∑ k ∈ K i, q i k * z i k = x i) (y : ℝ) :
+    widened S K p q z Φ y ≤ expBen S p x Φ y := by
+  unfold widened expBen
+  apply Finset.sum_le_sum
+  intro i hi
+  apply mul_le_mul_of_nonneg_left _ (hp i hi)
+  have h := (concave_in_class hc ha y).le_map_sum (t := K i) (w := q i) (p := z i)
+    (hq i hi) (hq1 i hi) (fun k _ => Set.mem_univ _)
+  simp only [smul_eq_mul] at h
+  rw [hmean i hi] at h
+  exact h
+
+/-- A benefit convex in distance is convex in the other's class on the classes
+at or below the observer. -/
+theorem convex_in_class_below {Φ : ℝ → ℝ} (hc : ConvexOn ℝ (Set.Ici 0) Φ) (y : ℝ) :
+    ConvexOn ℝ (Set.Iic y) (fun x : ℝ => Φ |y - x|) := by
+  refine ⟨convex_Iic y, ?_⟩
+  intro x1 hx1 x2 hx2 a b ha0 hb0 hab
+  simp only [Set.mem_Iic] at hx1 hx2
+  simp only [smul_eq_mul]
+  have e : y - (a * x1 + b * x2) = a * (y - x1) + b * (y - x2) := by
+    linear_combination (-y) * hab
+  have hm : 0 ≤ y - (a * x1 + b * x2) := by
+    rw [e]; exact add_nonneg (mul_nonneg ha0 (by linarith)) (mul_nonneg hb0 (by linarith))
+  rw [abs_of_nonneg (by linarith : (0:ℝ) ≤ y - x1),
+    abs_of_nonneg (by linarith : (0:ℝ) ≤ y - x2), abs_of_nonneg hm, e]
+  have h := hc.2 (show y - x1 ∈ Set.Ici (0:ℝ) by simp only [Set.mem_Ici]; linarith)
+    (show y - x2 ∈ Set.Ici (0:ℝ) by simp only [Set.mem_Ici]; linarith) ha0 hb0 hab
+  simpa only [smul_eq_mul] using h
+
+/-- The same on the classes at or above the observer. -/
+theorem convex_in_class_above {Φ : ℝ → ℝ} (hc : ConvexOn ℝ (Set.Ici 0) Φ) (y : ℝ) :
+    ConvexOn ℝ (Set.Ici y) (fun x : ℝ => Φ |y - x|) := by
+  refine ⟨convex_Ici y, ?_⟩
+  intro x1 hx1 x2 hx2 a b ha0 hb0 hab
+  simp only [Set.mem_Ici] at hx1 hx2
+  simp only [smul_eq_mul]
+  have e : a * x1 + b * x2 - y = a * (x1 - y) + b * (x2 - y) := by
+    linear_combination y * hab
+  have hm : 0 ≤ a * x1 + b * x2 - y := by
+    rw [e]; exact add_nonneg (mul_nonneg ha0 (by linarith)) (mul_nonneg hb0 (by linarith))
+  rw [abs_sub_comm y x1, abs_sub_comm y x2, abs_sub_comm y (a * x1 + b * x2),
+    abs_of_nonneg (by linarith : (0:ℝ) ≤ x1 - y),
+    abs_of_nonneg (by linarith : (0:ℝ) ≤ x2 - y), abs_of_nonneg hm, e]
+  have h := hc.2 (show x1 - y ∈ Set.Ici (0:ℝ) by simp only [Set.mem_Ici]; linarith)
+    (show x2 - y ∈ Set.Ici (0:ℝ) by simp only [Set.mem_Ici]; linarith) ha0 hb0 hab
+  simpa only [smul_eq_mul] using h
+
+/-- A benefit convex in distance. A mean-preserving widening whose classes all
+stay at or below the observer does not lower the expected benefit to that
+observer. -/
+theorem widen_convex_above {ι κ : Type*} (S : Finset ι) (K : ι → Finset κ) (p x : ι → ℝ)
+    (q z : ι → κ → ℝ) (Φ : ℝ → ℝ) (hc : ConvexOn ℝ (Set.Ici 0) Φ)
+    (hp : ∀ i ∈ S, 0 ≤ p i)
+    (hq : ∀ i ∈ S, ∀ k ∈ K i, 0 ≤ q i k) (hq1 : ∀ i ∈ S, ∑ k ∈ K i, q i k = 1)
+    (hmean : ∀ i ∈ S, ∑ k ∈ K i, q i k * z i k = x i) (y : ℝ)
+    (habove : ∀ i ∈ S, ∀ k ∈ K i, z i k ≤ y) :
+    expBen S p x Φ y ≤ widened S K p q z Φ y := by
+  unfold widened expBen
+  apply Finset.sum_le_sum
+  intro i hi
+  apply mul_le_mul_of_nonneg_left _ (hp i hi)
+  have h := (convex_in_class_below hc y).map_sum_le (t := K i) (w := q i) (p := z i)
+    (hq i hi) (hq1 i hi) (fun k hk => by simp only [Set.mem_Iic]; exact habove i hi k hk)
+  simp only [smul_eq_mul] at h
+  rw [hmean i hi] at h
+  exact h
+
+/-- The same for an observer at or below every class of the widening. -/
+theorem widen_convex_below {ι κ : Type*} (S : Finset ι) (K : ι → Finset κ) (p x : ι → ℝ)
+    (q z : ι → κ → ℝ) (Φ : ℝ → ℝ) (hc : ConvexOn ℝ (Set.Ici 0) Φ)
+    (hp : ∀ i ∈ S, 0 ≤ p i)
+    (hq : ∀ i ∈ S, ∀ k ∈ K i, 0 ≤ q i k) (hq1 : ∀ i ∈ S, ∑ k ∈ K i, q i k = 1)
+    (hmean : ∀ i ∈ S, ∑ k ∈ K i, q i k * z i k = x i) (y : ℝ)
+    (hbelow : ∀ i ∈ S, ∀ k ∈ K i, y ≤ z i k) :
+    expBen S p x Φ y ≤ widened S K p q z Φ y := by
+  unfold widened expBen
+  apply Finset.sum_le_sum
+  intro i hi
+  apply mul_le_mul_of_nonneg_left _ (hp i hi)
+  have h := (convex_in_class_above hc y).map_sum_le (t := K i) (w := q i) (p := z i)
+    (hq i hi) (hq1 i hi) (fun k hk => by simp only [Set.mem_Ici]; exact hbelow i hi k hk)
+  simp only [smul_eq_mul] at h
+  rw [hmean i hi] at h
+  exact h
+
+/-- Control for the convex case. Akerlof's benefit `(1 + d)⁻¹` is convex in
+distance, yet an observer inside the widening loses. One member at `0`,
+widened to `−1` and `1` with equal weight, gives an observer at `0` a mean
+benefit of `1/2` in place of `1`. -/
+theorem control_widen_inside :
+    ((1 / 2 : ℝ) * (1 + 1)⁻¹ + (1 / 2) * (1 + 1)⁻¹) < (1 + 0 : ℝ)⁻¹ := by
+  norm_num
+
 /-! ### (iii) The two forms -/
 
 /-- A14's benefit `v − κ d²` is concave in distance, so (ii) gives the dispersion
@@ -180,7 +313,7 @@ theorem gravity_convex (g : ℝ) (hg : 0 < g) :
       linarith) (convex_Ici 0)
   convert h2 using 1
   funext d
-  simp [zpow_neg_one]
+  simp
 
 /-- Akerlof's benefit falls in distance. -/
 theorem gravity_antitone (g : ℝ) (hg : 0 < g) :

@@ -314,6 +314,25 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   the marker's group (K1, A2, C1, Terminology, measurement map), so that
   "signal" keeps the third family's sense. The ledger figure, missed in
   D14, now says dispersion.
+- [x] **D16. The utility subsection in three parts, with the two distances
+  and the levels of dependence. 19 Oct 2026, at the author's request**
+  ("Yes that looks good. let's do that."). The predecessor's economic
+  distance, the gap between two classes that no one sees and that the
+  budgets make costly, and its social distance, the observer's reading of
+  that gap from the marker, return as the names of $d$ and $E$ in the
+  Terminology table and the measurement map, with the bar sentence in 1.2.1
+  and in the subsection. The economic distance is the gap, not its square,
+  since under a general benefit the gap is the primitive. The subsection
+  has three parts, the utility and the two distances, the comparison with
+  the papers read (with Akerlof's social distance named as the economic
+  distance here with nothing hidden), and Table tab:levels, which sorts
+  every row, conclusion and implication by what it needs of the benefit of
+  contact, any benefit, the curvature, or the square. M21 (ii) is now a
+  general mean-preserving widening (`Robustness.widen_concave`,
+  `widen_convex_above`, `widen_convex_below`, `control_widen_inside`), so
+  the curvature level rests on more than two symmetric members. M15, C11
+  and I5 stand outside the levels, since the admission objective is not the
+  engagement utility.
 
 ## Novelty ledger
 

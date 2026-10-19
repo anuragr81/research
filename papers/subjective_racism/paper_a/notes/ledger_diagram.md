@@ -54,9 +54,9 @@ shadow information (E15).
 | From | To | Action | Rows | Status | Recorded as |
 |---|---|---|---|---|---|
 | Person met | Observer | Shows the marker, read as evidence on the group alone | A4, M1 to M3, M17 | Settled | |
-| Observer | Person met | Engages or refuses by own class and expected distance | A14, M18 | Settled | the refusal share $F$ against the standing (M18) |
+| Observer | Person met | Engages or refuses by own class and social distance | A14, M18 | Settled | the refusal share $F$ against the standing (M18) |
 | Person met | Observer | Shows class within the group, the penalty vanishes | U5 | Open | |
-| Population state | Observer | The standing and dispersion of each group enter the expected distance | M18, U12 | Settled | |
+| Population state | Observer | The standing and dispersion of each group enter the social distance | M18, U12 | Settled | |
 | Observer | Person met | A low-class host member prefers outsiders | U3 | Open | |
 | Person met | Population state | Passes, leaving the visible group, the standing falls | A12, M14, U6 | Rule taken as given | |
 | Observer | Person met, both ways | Engage, both ways | U2 | Open | friendships, friending bias as Chetty et al. measure it (U11) |
@@ -80,7 +80,7 @@ measured-as column.
 ## 4. What the drawing says about the order of work
 
 The settled actions are all person on person: the marker, the refusal, the
-population state entering the expected distance, and the shared activity.
+population state entering the social distance, and the shared activity.
 The two double arrows between the observer and the person met are the
 heart of the model, and one of them, that both must engage, is open (U2).
 The platform has no settled action. Its arrows are taken as given or open, and

@@ -73,4 +73,5 @@ checked against them.
   the benefit in distance.
 - **Pass 4, the subsection.** Done on 18 October 2026 (D13). Literature,
   subsection The engagement utility, written from this table and the rows,
-  with new rows L35 to L39.
+  with new rows L35 to L39. Restructured on 19 October 2026 (D16) into
+  three parts, with the two distances and Table tab:levels.
