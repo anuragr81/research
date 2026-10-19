@@ -139,16 +139,17 @@ choices:
     status: DECIDED
     rests_on: ['M39', 'M30']
   - player: 'firm'
-    chooses: 'nothing in the micro model, where the tail index is a parameter'
-    objective: 'none in the micro model. Its stated principle is to prefer upskilling, whose spending flows back to the firm, to the lottery, whose spending is lost to the firm'
+    chooses: 'the retraining price, the scale of the upskilling cost'
+    objective: 'profit per displaced cohort, receipts from returners less the specific-skill share of the income of every job filled through the lottery. A higher price shrinks the band of returners, so the optimum is interior, and the firm subsidises the retraining of ranks just below the lottery''s worth'
     status: DECIDED
-    rests_on: ['M3', 'anchor: flows back to the firm as upskilling investments', 'anchor: rather than being diverted into the social lottery channel']
+    rests_on: ['M61', 'M62', 'M63', 'anchor: flows back to the firm as upskilling investments']
+    open: 'the optimal price as a function of the lottery cost is derived, not proved; the ladder''s shape as a second instrument (issue 11c, next)'
   - player: 'firm'
     chooses: 'the tail index of the ladder, with the wage bill fixed'
-    objective: 'what returners pay for upskilling in the steady state'
+    objective: 'profit as in M61, with the ladder''s shape as a second instrument'
     status: PROPOSED
-    rests_on: ['M3', 'M38', 'M39', 'anchor: The firm thus chooses']
-    open: 'issues 11c (instruments) and 11e (objective), with issue 4 (upskilling as the return)'
+    rests_on: ['M3', 'M61', 'anchor: The firm thus chooses']
+    open: 'the next step after the retraining price (issue 11c)'
   - player: 'firm'
     chooses: 'the split of the wage bill between higher-ranked and lower-ranked workers ($\mu$)'
     objective: 'next period''s assets, through the share of wages spent on upskilling'
@@ -294,8 +295,8 @@ faq:
     answer:
       - text: 'The displaced worker compares the former income less the upskilling cost with the expected prize less the lottery cost, and so weighs the difference between the two costs against the difference between the prize and the former income.'
         rests_on: ['M60']
-      - text: 'The firm receives the upskilling cost from a returner and nothing from an entrant, so it prefers the return whatever the two costs are.'
-        rests_on: ['M60']
+      - text: 'The firm receives the upskilling cost from a returner and loses the specific-skill share of a job filled through the lottery, so it prefers the return whatever the two costs are, and it sets the retraining price to keep as many ranks returning as pays.'
+        rests_on: ['M60', 'M61']
       - text: 'The job holders above the entrant receive the lottery cost, so they gain when the displaced worker enters, and workers taken together recover it and prefer the lottery whenever the displaced worker does.'
         rests_on: ['M60', 'M58']
   - question: 'How does a status group benefit from the lottery?'
@@ -421,6 +422,14 @@ decisions:
     decision: 'The receiving group for the lottery cost was left to tractability and set to the entrant''s own status group in equal shares.'
     reason: 'It balanced every group''s accounts exactly and did not depend on the closure rule. Superseded on 18 Oct 2026 by M58 as now stated, once the lottery was read as making oneself favourable to those above: the cost flows up the ladder to the job holders above the entrant.'
     bears_on: ['M58']
+  - date: '19 Oct 2026'
+    decision: 'The firm optimises: it chooses the retraining price to maximise profit, receipts from returners less the specific-skill share of the income of jobs filled through the lottery; the ladder is given for now.'
+    reason: 'A firm that chooses nothing cannot be a party to the choice between upskilling and the lottery. The retraining price is what the manuscript says the firm sets, and profit with wages fixed varies only through receipts and through who fills each job, which the measured specific-skill share carries. The objective yields the case in which the firm retrains at its own expense, which a receipts-only objective could not.'
+    bears_on: ['M61', 'M62', 'M63']
+  - date: '19 Oct 2026'
+    decision: 'No revenue or production process in the micro model; exploration with endogenous displacement is a macro concern.'
+    reason: 'With the ladder and the wage bill fixed, output varies only through who fills each job, so a production function would restate what the specific-skill share already says. Only exploration that makes displacement a choice would change what the firm does, and that belongs with the firm''s dynamics in the macro layer.'
+    bears_on: ['M39', 'M61']
 
 
 model:
@@ -926,6 +935,32 @@ model:
     lean: [Isc.workers_prefer_lottery_whenever_entrant_does, Isc.control_entrant_returns_where_workers_would_gamble, Isc.firm_prefers_return]
     status: LEAN_PROVED
     symbols: [X7, X16, X6]
+  - id: M61
+    anchor: 'Section 2: "firms set training costs and wage differentials"; Appendix: "Higher $b$ corresponds to higher costs (charged by the firm"'
+    claim: 'The firm chooses the retraining price $\kappa$, the scale of the upskilling cost, to maximise profit per displaced cohort: receipts from returners, $\kappa(x_i-x_0)^b$ each, less the specific-skill share $\delta$ of the income of every job filled through the lottery. The exponent $b$ is technology, the ladder is given with its wage bill fixed, and the lottery cost is a social cost the firm does not set'
+    assumptions: 'the first approximation of M40, a common continuation value; under M33''s condition every displaced worker outside the return band enters the lottery'
+    evidence: 'lean/IscLean/Firm.lean::Isc.band_antitone_in_price. The manuscript has the firm setting training costs and charging them; its macro objective is the share of wages that returns as upskilling (line 258). Output is implicit in the ladder''s incomes, and the only output object is $\delta$, what a job loses when filled by someone without its specific skills (L26, JLS-3, JLS-43), so receipts less that loss is the firm''s profit once wages are fixed. Exploration with endogenous displacement is left to the macro layer, since a revenue process that does not change what the firm chooses adds nothing to the micro model'
+    lean: [Isc.band_antitone_in_price]
+    status: DECIDED
+    decision: '19 Oct 2026, the author: the firm must optimise something. The retraining price is its instrument (line 105 over line 110), profit as stated is its objective, the ladder is given for now and its choice is the next step; a revenue process is not added, because with the ladder and the wage bill fixed output varies only through who fills each job, which $\delta$ already carries; exploration with endogenous displacement is a macro concern'
+    affects: [M7, M35, M38, M53, M60]
+    symbols: [X30, X16, X5, X6, X3, X7]
+  - id: M62
+    anchor: 'consequence of M61'
+    claim: 'A higher retraining price shrinks the band of ranks that return, a dearer lottery enlarges it, the firm receives nothing at a zero price and nobody returns once the price exceeds every rank''s reservation, so profit has an interior optimum; and at any fixed price profit is nondecreasing in the lottery cost'
+    assumptions: 'incomes at or above the bottom income; a nonnegative price and specific-skill share'
+    evidence: 'lean/IscLean/Firm.lean::Isc.band_antitone_in_price. The band at a higher price is contained in the band at a lower one (Isc.band_antitone_in_price); at a higher lottery cost the band contains the old one (Isc.band_grows_with_lottery_cost); receipts vanish at a zero price (Isc.receipts_zero_at_zero_price) and the band is empty above every reservation (Isc.band_empty_above_reservations); receipts rise with the band and the lottery loss falls with it (Isc.profit_nondecreasing_in_lottery_cost). Control: a negative price enlarges the band (Isc.control_lower_price_keeps_band). That the optimal price is nondecreasing in the lottery cost follows for the optimum but is not yet proved'
+    lean: [Isc.band_antitone_in_price, Isc.band_grows_with_lottery_cost, Isc.receipts_zero_at_zero_price, Isc.band_empty_above_reservations, Isc.profit_nondecreasing_in_lottery_cost, Isc.control_lower_price_keeps_band]
+    status: LEAN_PROVED
+    symbols: [X30, X7, X16, X6]
+  - id: M63
+    anchor: 'consequence of M61: the subsidy case'
+    claim: 'A displaced worker whose own job is worth less than the lottery returns at a zero price only if paid the difference, $V-L-x_i$. The firm gains from paying it exactly when the payment is below the specific-skill loss of letting a stranger fill the job, that is when $V-L<(1+\delta)x_i$. So the firm subsidises the retraining of the ranks just below the lottery''s value and lets the ranks below $(V-L)/(1+\delta)$ enter the lottery'
+    assumptions: 'valuing income at its average; the firm''s loss on a lottery-filled job is $\delta$ times its income'
+    evidence: 'lean/IscLean/Firm.lean::Isc.subsidy_worthwhile_iff. The payment restores the return to the lottery''s worth (Isc.subsidy_restores_return). Control: with $\delta=1/4$ and a lottery worth $2$, a job paying $9/5$ is subsidised and a job paying $1$ is not (Isc.control_subsidy_covers_near_mean_not_bottom). This is the case in which the firm retrains at its own expense rather than charging, Becker''s specific-training result in the model''s terms'
+    lean: [Isc.subsidy_worthwhile_iff, Isc.subsidy_restores_return, Isc.control_subsidy_covers_near_mean_not_bottom]
+    status: LEAN_PROVED
+    symbols: [X30, X7, X6]
 
 literature:
   - id: L1
@@ -1276,7 +1311,7 @@ references:
     math_content: 'yes'
     lean: LEAN_PARTIAL
     reason: 'Empirical counterpart of the displacement of M32: size, persistence and timing of the loss of displaced workers, and an observation for a measurement-map row for the downgrade; reports losses as a share of former earnings, closer to a proportional step than to the common fallback of M32'
-    impact_if_removed: 'No current claim rests on this paper. Without it a row for the downgrade has no measured referent and M32 has no empirical check'
+    impact_if_removed: 'M61 rests on it for the specific-skill share $\delta$ as the firm''s loss on a job filled through the lottery; without it the firm''s objective would have no measured output object and would reduce to receipts from returners'
   - key: LazearRosen1981
     math_content: 'yes'
     lean: LEAN_PARTIAL
