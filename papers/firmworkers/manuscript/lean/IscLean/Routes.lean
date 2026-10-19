@@ -400,4 +400,23 @@ theorem control_top_lottery_needs_cost_bound :
     poolEU ({0, 1} : Finset ℕ) (fun k => if k = 0 then (2 : ℝ) else 3) 2 id 1 < 1 := by
   norm_num [poolEU]
 
+/-- At the source's own parameters, `κ = 1`, `b = 2`, income in units of the bottom income, the
+return to a job paying `x` is worth `x - (x - 1)²`, which never exceeds `5/4`. So whenever the
+lottery is worth at least `5/4`, as it is when the pool's mean prize is the ladder's mean `2`
+(Pareto with `a = 2`) and the lottery cost is at most `3/4`, no rank strictly prefers the return:
+there is no middle band, and the whole ladder gambles. -/
+theorem no_middle_band_at_source_parameters (x V : ℝ) (hV : 5 / 4 ≤ V) :
+    returnFromLoss 1 2 1 (x - 1) ≤ V := by
+  unfold returnFromLoss
+  rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) by norm_num, Real.rpow_natCast]
+  nlinarith [sq_nonneg (x - 3 / 2)]
+
+/-- Control: with a cheaper return, `κ = 1/4`, the middle band exists at the same lottery value:
+the job paying `2` is regained for `1/4` and kept, worth `7/4`, above a lottery worth `3/2`. -/
+theorem control_middle_band_with_cheap_return :
+    (3 / 2 : ℝ) < returnFromLoss (1 / 4) 2 1 (2 - 1) := by
+  unfold returnFromLoss
+  rw [show (2 : ℝ) = ((2 : ℕ) : ℝ) by norm_num, Real.rpow_natCast]
+  norm_num
+
 end Isc

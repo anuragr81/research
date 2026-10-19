@@ -103,3 +103,36 @@ the table counts a method used.
    cut by education.
 3. The top of the U needs Granovetter's occupational figures (65.4% managerial,
    56.1% professional and technical, secondary sources) checked in the book.
+
+## What the U-shape rests on (19 Oct, after the author's question)
+
+Three bands, three different grounds:
+
+1. **The bottom gambles** because the lottery is a random reshuffle of the
+   entrants' jobs: its expected prize is the pool's mean, so anyone below the
+   mean gains in expectation and anyone above loses (M13, `poolGain_pos_iff`).
+   This is structural (M36, uniform displacement M39) and holds for any
+   nondecreasing utility where the lottery dominates (M33); under curvature it
+   needs risk neutrality or near it. Robust.
+2. **The middle returns** only if the return can beat the lottery somewhere,
+   which needs `b ≥ 1` for the band to be an interval (`return_set_interval`)
+   and a return value above the lottery's. At the source's own parameters,
+   `κ = 1`, `b = 2`, income in units of `x_0`, the return is worth at most `5/4`
+   (`no_middle_band_at_source_parameters`), while the lottery is worth the
+   ladder's mean `2` less `L`; so unless `L > 3/4` **there is no middle band
+   and the whole ladder gambles**. The band exists with a cheaper return
+   (`control_middle_band_with_cheap_return`, `κ = 1/4`). Fragile: it is a
+   statement about `κ`, `L` and the unit (issue 1), not about the model's form.
+3. **The top gambles** because the convex cost makes regaining a top job worth
+   less than the bottom rung (`top_displaced_prefer_lottery`), which needs
+   `κ(x − x_0)^{b−1} ≥ 1`, unit-dependent (M35), and the bottom rung as the
+   fallback (M32); under a proportional step the top refuses the lottery (M44)
+   and under a scale-free cost the top returns (`scale_free_return_beats_step`).
+   Assumed, twice over.
+
+So "contact at the bottom" follows from the structure; "credentials in the
+middle" and "contact at the top" follow from the convex, unit-dependent cost and
+the bottom-rung fallback, and the middle is empty at the source's parameters.
+The resemblance to a class system is not a prediction the model makes on its
+own; it is what the model says once those assumptions are granted and `κ` is
+small enough relative to `L`.
