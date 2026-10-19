@@ -28,13 +28,11 @@
 %   but no record reaches it. "A device" means it exists only inside a proof.
 %
 % VERIFICATION NOTE
-%   This note adds no mathematics of its own. Everything restates a model row
-%   or the predecessor manuscript, and the rows are the evidence.
+%   This note adds no mathematics of its own. Everything restates a model row,
+%   and the rows are the evidence.
 %
 % NAMES OF RESULTS
-%   Results are named by the model rows of skeleton_ClassMarkers.tex. Labels in brackets
-%   such as (prior) and (threshold) are equation labels of the predecessor
-%   manuscript, retired at pass 6 and readable from git at commit 91a74cb1.
+%   Results are named by the model rows of skeleton_ClassMarkers.tex.
 
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
@@ -54,7 +52,7 @@
 
 \title{Class Read from Group Markers\\ Measurement Map}
 \author{Companion note to the manuscript}
-\date{15 October 2026}
+\date{19 October 2026}
 
 \begin{document}
 \maketitle
@@ -72,8 +70,8 @@ is the engagement utility of M18, which enters every row only through the
 engagement threshold, so the baseline value and the outside
 option are read only up to the threshold they give. The sensitivity is
 derived in M19 from the budget slope and the two curvatures of the payoff
-over the activity level and private consumption. The engagement decision
-of the predecessor manuscript, which turns a belief into a refusal, is row
+over the activity level and private consumption. The engagement decision,
+which turns a belief into a refusal, is row
 M18, and the discrimination-rate function $F$ that M14 uses is derived
 there. Objects that no row carries are listed with that said, so that their
 names are fixed before the rows reach them.
@@ -103,8 +101,8 @@ here.
 \bottomrule
 \endfoot
 \mm{$g$, $\mathcal{G}$}{Group}{An element of a finite set.}{The category the
-  observer reads a person into from the marker. The predecessor's host group
-  and outsider group are two of them.}
+  observer reads a person into from the marker. The host group
+  and the outsider group are two of them.}
   {Yes}{Recorded by the observer as the
   category the marker indicates, or self-reported in a survey. In audit and
   correspondence studies it is assigned by the experimenter through the
@@ -116,8 +114,8 @@ here.
 \mm{$I$}{Host group}{One of the groups.}{The group alongside the outsider,
   whose clients the platform serves (M15).}
   {Yes}{Recorded as the other group in the record.}
-\mm{$c$, $\mathcal{C}$}{Class}{A finite set in the Lean rows. The predecessor
-  uses $[0,1]$.}{A person's economic position, income, wealth or occupation,
+\mm{$c$, $\mathcal{C}$}{Class}{A finite set in the Lean rows. A
+  continuous class in $[0,1]$ is outside the rows.}{A person's economic position, income, wealth or occupation,
   as a rank.}
   {Yes}{Recorded as an income or wealth rank scaled to $[0,1]$, after
   the fact. Class is never seen at the encounter, which is the premise of the
@@ -130,13 +128,12 @@ here.
   {Yes}{Recorded as present or absent, or by its
   value. In correspondence studies it is assigned by the experimenter.}
 \mm{$\pi_g(c)$}{Prior}{A probability mass function on $\mathcal{C}$ for each
-  $g$. The predecessor gives it a Beta law with mean $\bar c$.}{The observer's
+  $g$. A Beta law with mean $\bar c$ is a continuous form outside the rows.}{The observer's
   belief about the class of a member of group $g$ before the marker is
   read.}
-  {No}{Elicited from the observer before the marker is shown. The
-  predecessor identifies it with the group's class history, its equation
-  (prior), under which it is computed from the recorded classes of past
-  members. The two readings can differ, and no row takes a side.}
+  {No}{Elicited from the observer before the marker is shown, or computed
+  from the recorded classes of the group's members. The two readings can
+  differ, and no row takes a side.}
 \mm{$\ell_g(c)$}{Likelihood}{A function of $c$ and $g$ with values in
   $[0,1]$.}{The probability that the marker is seen on a person of class $c$ in
   group $g$.}
@@ -149,8 +146,8 @@ here.
   {No}{Elicited from the observer, or proxied by the shares of the
   groups in the population of the place of the encounter.}
 \mm{$s_g$}{Salience}{A real number in $[0,1]$.}{The probability the observer
-  assigns to the outsider group after reading the marker, the predecessor's
-  $P'(g_O\mid m)$. By M3 it is a Bayesian posterior on group. Immutable markers
+  assigns to the outsider group after reading the marker,
+  $q'(g_O)$. By M3 it is a Bayesian posterior on group. Immutable markers
   put it near $1$ and mutable ones near $0$.}
   {No}{Elicited from the observer after
   the marker is shown. In audits it is the share of encounters in which the
@@ -240,8 +237,7 @@ here.
   person's class and the observer's own class (A16, M21).}
   {No}{Computed from the class and the own class.}
 \mm{$\bar d$}{Engagement threshold}{A real number with $\bar d>0$.}{The
-  largest social distance at which the observer still engages, the
-  predecessor's equation (threshold).}
+  largest social distance at which the observer still engages (A14).}
   {No}{Elicited as the largest social distance at which the observer
   still engages. It equals the baseline value less the outside option,
   divided by the sensitivity (M18, \lean{Engagement.engages\_iff}).}
@@ -346,13 +342,12 @@ here.
   complement of the passers.}
 \mm{$\mathrm{marg}$}{Admission margin}{A real number,
   $W+N(1-\alpha)(\bar c_O-\bar c_I)/|A|$.}{The profit from admitting one more
-  outsider member, the predecessor's first-order condition (M15).}
+  outsider member (A13, M15).}
   {No}{Computed
   from its five inputs.}
 \mm{$\Pi$}{Platform profit}{A function of the admission rate,
-  $\Pi(\sigma)=\sigma\,\mathrm{marg}$.}{The platform's objective in the
-  predecessor's first-order condition, linear in the admission rate
-  (M15).}
+  $\Pi(\sigma)=\sigma\,\mathrm{marg}$.}{The platform's objective, linear in the admission rate
+  (A13, M15).}
   {No}{Computed from the admission margin. Recorded profit would test the
   linear form.}
 \end{longtable}
