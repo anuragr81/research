@@ -110,4 +110,31 @@ theorem control_lower_price_keeps_band (x : ι → ℝ) {x0 b V L κ : ℝ} (hx 
     band x x0 b V L κ ⊆ band x x0 b V L (κ - 1) :=
   band_antitone_in_price x hx (by linarith)
 
+/-- Profit on a ladder of two ranks paying `1` and `4`, bottom income `0`, `b = 1`, a lottery
+prize worth `1` and specific-skill share `1/4`. -/
+theorem two_rank_profit (L κ : ℝ) :
+    profit ![1, 4] 0 1 1 L κ (1 / 4) =
+      (if max (1 - L) 0 ≤ 1 - κ then κ else 0) + (if max (1 - L) 0 ≤ 4 - κ * 4 then κ * 4 else 0)
+        - 1 / 4 * ((if max (1 - L) 0 ≤ 1 - κ then 0 else 1) +
+          (if max (1 - L) 0 ≤ 4 - κ * 4 then 0 else 4)) := by
+  simp only [profit, receipts, lotteryLoss, band, returnWorth, ← compl_eq_univ_sdiff,
+    compl_filter, sum_filter, Fin.sum_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.head_cons, sub_zero, Real.rpow_one, mul_one]
+  split_ifs <;> ring
+
+/-- The optimal price need not rise with the lottery cost. On the ladder of `two_rank_profit`,
+at lottery cost `1/2` the price `7/8` is optimal and only the top rank returns; at the dearer
+lottery cost `4/5` every price at or above `7/8` earns less than `4/5`, at which both ranks
+return. A dearer lottery makes the bottom rank cheap to keep, and the firm lowers its price to
+keep it. -/
+theorem optimal_price_can_fall_with_lottery_cost :
+    (∀ κ, profit ![1, 4] 0 1 1 (1 / 2) κ (1 / 4) ≤ profit ![1, 4] 0 1 1 (1 / 2) (7 / 8) (1 / 4)) ∧
+      (∀ κ, 7 / 8 ≤ κ →
+        profit ![1, 4] 0 1 1 (4 / 5) κ (1 / 4) < profit ![1, 4] 0 1 1 (4 / 5) (4 / 5) (1 / 4)) := by
+  have m1 : max (1 - (1 / 2 : ℝ)) 0 = 1 / 2 := by norm_num
+  have m2 : max (1 - (4 / 5 : ℝ)) 0 = 1 / 5 := by norm_num
+  refine ⟨fun κ => ?_, fun κ hκ => ?_⟩ <;> simp only [two_rank_profit, m1, m2]
+  · split_ifs <;> linarith
+  · split_ifs <;> linarith
+
 end Isc

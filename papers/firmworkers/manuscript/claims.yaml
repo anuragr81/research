@@ -142,8 +142,8 @@ choices:
     chooses: 'the retraining price, the scale of the upskilling cost'
     objective: 'profit per displaced cohort, receipts from returners less the specific-skill share of the income of every job filled through the lottery. A higher price shrinks the band of returners, so the optimum is interior, and the firm subsidises the retraining of ranks just below the lottery''s worth'
     status: DECIDED
-    rests_on: ['M61', 'M62', 'M63', 'anchor: flows back to the firm as upskilling investments']
-    open: 'the optimal price as a function of the lottery cost is derived, not proved; the ladder''s shape as a second instrument (issue 11c, next)'
+    rests_on: ['M61', 'M62', 'M63', 'M69', 'anchor: flows back to the firm as upskilling investments']
+    open: 'the optimal price can fall as the lottery cost rises (M69), so how it moves depends on the ladder; the ladder''s shape as a second instrument (issue 11c, next)'
   - player: 'firm'
     chooses: 'the tail index of the ladder, with the wage bill fixed'
     objective: 'profit as in M61, with the ladder''s shape as a second instrument'
@@ -202,8 +202,8 @@ idea_summaries:
         text: 'The lottery cost is the price of competing through connections, the one channel of mobility the firm does not control, and nobody in the model sets it.'
         rests_on: ['anchor: The lottery benefit is an exogenous benefit from social connections that is not managed by the firm', 'M47']
       - para: 1
-        text: 'It is paid once by every entrant, to the job holders above the entrant''s former rank, so it stays among workers and flows up the ladder.'
-        rests_on: ['M46', 'M58']
+        text: 'It is paid once by every entrant, to the job holders above the entrant''s former rank whom the entrant''s connections reach, so it stays among workers and flows up the ladder.'
+        rests_on: ['M46', 'M58', 'M66']
       - para: 2
         text: 'For a displaced worker, a higher lottery cost lowers the worth of the lottery for every shape of utility, so some who would have entered return instead, and the firm receives their upskilling cost.'
         rests_on: ['M53']
@@ -214,8 +214,8 @@ idea_summaries:
         text: 'It also excludes the poorest, whose former income less the lottery cost falls below the bottom income, because the top prefers the downgrade to their job, and it excludes the top as a prize for anyone within the lottery cost of it, so the window of ranks that can exchange with the top narrows from both ends.'
         rests_on: ['M54']
       - para: 3
-        text: 'A job holder receives a share of the lottery cost of every entrant below, rising with rank, and is otherwise untouched by it until displaced.'
-        rests_on: ['M58', 'M39']
+        text: 'A job holder receives a share of the lottery cost of every entrant below who reaches the job holder, rising with rank.'
+        rests_on: ['M58', 'M66']
       - para: 3
         text: 'The two status groups face the same lottery cost, since closure acts on who can be a partner, not on the price.'
         rests_on: ['M29', 'M47']
@@ -231,14 +231,17 @@ idea_summaries:
         text: 'Closure is the one number through which the status group enters the lottery, and it has a counterpart in the world.'
         rests_on: ['M29', 'M47']
       - para: 1
-        text: 'Under the closure weights, the share of a displaced worker''s partners drawn from the own status group, set against the group''s share among entrants, gives Coleman''s index of inbreeding homophily, and closure equals that index divided by the own-group share.'
-        rests_on: ['L24', 'CurrariniJacksonPin2009.closure_is_inbreeding_over_homophily']
+        text: 'In a large pool, the chance that an entrant''s next job comes from the own status group, set against the group''s share among entrants, gives Coleman''s index of inbreeding homophily, and that index equals closure exactly, whatever the group''s size.'
+        rests_on: ['L24', 'M68']
       - para: 1
         text: 'So closure is the inbreeding homophily of job-finding connections by status group, how far the connections through which displaced workers find their next job stay within the group, beyond what the group''s size alone would give.'
-        rests_on: ['L24', 'M29']
+        rests_on: ['L24', 'M68']
       - para: 2
         text: 'It is not the segregation of jobs by status group, which is the outcome the lottery produces over time, while closure is the mechanism that produces it.'
         rests_on: ['M50', 'M51']
+      - para: 2
+        text: 'Closure sets how long a gap between the groups'' incomes lasts.'
+        rests_on: ['M67']
       - para: 2
         text: 'It is not a preference for the own group, because Currarini, Jackson and Pin separate a bias in whom one meets from a bias in whom one prefers, and closure is the meeting side.'
         rests_on: ['L24', 'M29']
@@ -302,10 +305,14 @@ faq:
   - question: 'How does a status group benefit from the lottery?'
     words: [30, 230]
     answer:
-      - text: 'Through the lottery cost a status group gains only as far as its members hold the ranks above the entrants, because the lottery cost goes up the ladder to the job holders above the entrant whatever their group.'
-        rests_on: ['M58']
+      - text: 'Through the lottery cost a status group gains as far as its members hold the ranks above the entrants who reach them, because an entrant whose connections reach only the own group pays only that group''s job holders, while any other entrant pays the job holders above whatever their group.'
+        rests_on: ['M58', 'M66']
+      - text: 'Under complete closure each group''s job holders receive exactly what the group''s entrants pay.'
+        rests_on: ['M66']
       - text: 'The group benefits through ranks instead, because the lottery can move higher ranks from one group to the other, and with two entrants from each group the expected gap between a group''s share of their former income and half the total shrinks with every lottery unless closure is complete.'
         rests_on: ['M50', 'M51']
+      - text: 'In a large pool the gap between the groups'' mean incomes shrinks every period by the same factor whatever the groups'' sizes, and that factor depends only on closure and on how many displaced workers enter the lottery.'
+        rests_on: ['M67']
       - text: 'So a group holding the lower ranks gains ranks from an open lottery, and a group holding the higher ranks keeps them longer the stronger closure is.'
         rests_on: ['M51']
   - question: 'Where does the lottery cost go?'
@@ -315,6 +322,8 @@ faq:
         rests_on: ['M58', 'anchor: all income circulates between workers and firm']
       - text: 'Each entrant pays it to the job holders strictly above the entrant''s former rank, in equal shares, and an entrant with nobody above pays all job holders equally.'
         rests_on: ['M58']
+      - text: 'An entrant whose connections reach only the own status group pays only that group''s job holders in this way.'
+        rests_on: ['M66']
       - text: 'Such receipts do not depend on one''s own route, so they change no result that rests on first-order dominance or on valuing income at its average.'
         rests_on: ['M59']
   - question: 'Why does the model have only one social attribute?'
@@ -917,7 +926,7 @@ model:
     lean: [Isc.dues_total, Isc.dues_of_entrant, Isc.dues_mono, Isc.dues_bottom_zero, Isc.control_dues_example, Isc.control_dues_top_entrant_fallback]
     status: DECIDED
     decision: '18 Oct 2026, the author: the lottery is a means of mobility in which displaced workers make themselves favourable to those above them, so the lottery cost goes to the job holders strictly above the entrant''s former rank, shared equally. This supersedes the own-group rule of 17 Oct 2026. The fallback for an entrant with nobody above, equal shares to all job holders, is the smallest rule that avoids a leak; proposed by the assistant on 18 Oct 2026 and accepted by the author the same day'
-    affects: [M46, M52, M53, M54, M59, M60]
+    affects: [M46, M52, M53, M54, M59, M60, M66]
     symbols: [X7, X2, X6]
   - id: M59
     anchor: 'consequence of M58'
@@ -949,7 +958,7 @@ model:
     anchor: 'consequence of M61'
     claim: 'A higher retraining price shrinks the band of ranks that return, a dearer lottery enlarges it, the firm receives nothing at a zero price and nobody returns once the price exceeds every rank''s reservation, so profit has an interior optimum; and at any fixed price profit is nondecreasing in the lottery cost'
     assumptions: 'incomes at or above the bottom income; a nonnegative price and specific-skill share'
-    evidence: 'lean/IscLean/Firm.lean::Isc.band_antitone_in_price. The band at a higher price is contained in the band at a lower one (Isc.band_antitone_in_price); at a higher lottery cost the band contains the old one (Isc.band_grows_with_lottery_cost); receipts vanish at a zero price (Isc.receipts_zero_at_zero_price) and the band is empty above every reservation (Isc.band_empty_above_reservations); receipts rise with the band and the lottery loss falls with it (Isc.profit_nondecreasing_in_lottery_cost). Control: a negative price enlarges the band (Isc.control_lower_price_keeps_band). That the optimal price is nondecreasing in the lottery cost follows for the optimum but is not yet proved'
+    evidence: 'lean/IscLean/Firm.lean::Isc.band_antitone_in_price. The band at a higher price is contained in the band at a lower one (Isc.band_antitone_in_price); at a higher lottery cost the band contains the old one (Isc.band_grows_with_lottery_cost); receipts vanish at a zero price (Isc.receipts_zero_at_zero_price) and the band is empty above every reservation (Isc.band_empty_above_reservations); receipts rise with the band and the lottery loss falls with it (Isc.profit_nondecreasing_in_lottery_cost). Control: a negative price enlarges the band (Isc.control_lower_price_keeps_band). The optimal price itself need not rise with the lottery cost (M69)'
     lean: [Isc.band_antitone_in_price, Isc.band_grows_with_lottery_cost, Isc.receipts_zero_at_zero_price, Isc.band_empty_above_reservations, Isc.profit_nondecreasing_in_lottery_cost, Isc.control_lower_price_keeps_band]
     status: LEAN_PROVED
     symbols: [X30, X7, X16, X6]
@@ -965,12 +974,52 @@ model:
     anchor: 'the closure rule for M29 after M37 (issue 17)'
     claim: 'Closure is realised by a two-stage draw. With chance $\sigma$ a displaced entrant''s connections reach only the own status group, so the entrant''s former job is reassigned among the own group''s such entrants; otherwise the entrant joins the joint draw. A lottery left with fewer than two members merges into the joint one, and if the joint one is then left with fewer than two, all entrants form one lottery. Every lottery reassigns its members'' former jobs as in M36'
     assumptions: 'two status groups; the same $\sigma$ for both'
-    evidence: 'lean/IscLean/TwoStage.lean::Isc.two_stage_within_chance. In the pool of two from each group the rule gives the within-group partner chance $(1-\sigma^2)^2/3+\sigma^2(2-\sigma^2)$ and the no-crossing chance $(1-\sigma^2)^2/9+\sigma^2(2-\sigma^2)$ (M48, M49), both from the no-closure value to one, and the expected-gap recursion of M51. Feasible for any group sizes, which M29''s per-entrant weights are not (M37); $\sigma$ reads as the share of displaced workers whose courting stays within the group, Coleman''s inbreeding homophily in large pools (derived, not yet proved); the rich receive and do not choose, as issue 16 decided. Still to prove: feasibility in general (every lottery has two or more members), the general gap recursion that gives the half-life $\ln 2/((1-\sigma)d)$, and the large-pool identity $\sigma=IH$; and M58 is to be refined so that an entrant pays the job holders above within the entrant''s own lottery'
+    evidence: 'lean/IscLean/TwoStage.lean::Isc.two_stage_within_chance. In the pool of two from each group the rule gives the within-group partner chance $(1-\sigma^2)^2/3+\sigma^2(2-\sigma^2)$ and the no-crossing chance $(1-\sigma^2)^2/9+\sigma^2(2-\sigma^2)$ (M48, M49), both from the no-closure value to one, and the expected-gap recursion of M51. Feasible for any group sizes, which M29''s per-entrant weights are not (M37); $\sigma$ reads as the share of displaced workers whose courting stays within the group, Coleman''s inbreeding homophily in large pools (M68); the rich receive and do not choose, as issue 16 decided. Proved since the decision: feasibility for any group sizes (M65), M58 refined to the job holders the entrant reaches (M66), the large-pool gap recursion and half-life (M67), and $\sigma=IH$ in large pools (M68)'
     lean: [Isc.two_stage_within_chance, Isc.two_stage_no_cross_chance, Isc.two_stage_gap_recursion]
     status: DECIDED
     decision: '19 Oct 2026, the author: option (a) of issue 17 for this paper, because it covers unequal groups, determines the persistence of a gap between the groups, and keeps the rich as receivers rather than choosers. Options (b) and (c) are recorded in ISSUES'
-    affects: [M25, M26, M27, M29, M45, M48, M49, M51, M58]
+    affects: [M25, M26, M27, M29, M45, M48, M49, M51, M58, M65, M66, M67, M68]
     symbols: [X25, X24, X8]
+  - id: M65
+    anchor: 'consequence of M64 (issue 17b)'
+    claim: 'The two-stage draw is feasible for any group sizes and any $\sigma$. Whatever the first stage gives, every lottery has two or more members when the pool has, and some reassignment gives every entrant another member''s former job in the entrant''s lottery; an own lottery holds only the group''s entrants, so its reassignments keep jobs in the group; the chances of the first stage sum to one'
+    assumptions: 'a pool of two or more entrants; any number of status groups'
+    evidence: 'lean/IscLean/GroupDraw.lean::Isc.two_stage_feasible. The last merge leaves no lottery of one (Isc.lottery_has_two); each lottery''s members in a cycle give the reassignment (Isc.exists_reassignment_within); own lotteries stay in the group (Isc.own_lottery_within_group); the binomial sum is one (Isc.stage_one_chances_sum). Controls: with two entrants of one group in the own lottery and one of the other, the joint lottery would hold one member and the last merge forms one lottery of three (Isc.control_last_merge_needed); a lone entrant can receive only the own former job (Isc.control_feasibility_needs_two)'
+    lean: [Isc.two_stage_feasible, Isc.lottery_has_two, Isc.exists_reassignment_within, Isc.own_lottery_within_group, Isc.stage_one_chances_sum, Isc.control_last_merge_needed, Isc.control_feasibility_needs_two]
+    status: LEAN_PROVED
+    symbols: [X25, X24, X8]
+  - id: M66
+    anchor: 'M58 refined under M64 (issue 17a)'
+    claim: 'An entrant pays the lottery cost to the job holders strictly above the entrant''s former rank among those the entrant''s connections reach, the own status group''s job holders after the own lottery and all job holders after the joint one, with M58''s fallback within the same set. Nothing leaks, receipts rise with rank among job holders reached alike, and when every entrant reaches only the own group, as under full closure, each group''s job holders receive exactly the group''s entrants times the lottery cost. Below full closure the lottery cost crosses the groups only through entrants of the joint lottery'
+    assumptions: 'every entrant reaches at least one job holder; the reading of M64''s first stage under issue 16, that a worker courts those the worker''s connections reach'
+    evidence: 'lean/IscLean/GroupDraw.lean::Isc.duesReach_total. When every entrant reaches all job holders the rule is M58 (Isc.duesReach_eq_dues); the total is the number of entrants times the cost (Isc.duesReach_total); a set of job holders each entrant reaches wholly or not at all receives the cost of the entrants reaching it (Isc.duesReach_group), which gives the within-group balance under full closure (Isc.full_closure_dues_within_group); monotone in rank (Isc.duesReach_mono). Control: an entrant at rank 0 reaching only the own job holder at rank 1 pays it the whole cost and the other group''s holder at rank 2 nothing, while reaching both pays each half (Isc.control_reach_decides_who_is_paid). The own-group rule superseded on 18 Oct returns as the full-closure case'
+    lean: [Isc.duesReach_total, Isc.duesReach_eq_dues, Isc.duesReach_group, Isc.full_closure_dues_within_group, Isc.duesReach_mono, Isc.control_reach_decides_who_is_paid]
+    status: LEAN_PROVED
+    symbols: [X7, X25, X24, X2]
+  - id: M67
+    anchor: 'consequence of M64 and M50 in a large pool (issue 17c)'
+    claim: 'In a large pool the gap between the two status groups'' mean incomes is multiplied by $1-(1-\sigma)d$ each period, whatever the groups'' sizes, while the pool''s mean is unchanged; so below full closure the gap vanishes, and under full closure it persists entire. Its exact half-life is $\ln 2/(-\ln(1-(1-\sigma)d))$ periods, below the approximation $\ln 2/((1-\sigma)d)$ by at most $\ln 2$'
+    assumptions: 'a large pool, so a lottery''s jobs have the mean of the jobs vacated into it and own lotteries have two or more members; entry into the lottery at a rate $d$ that does not depend on rank or group'
+    evidence: 'lean/IscLean/GroupDraw.lean::Isc.large_pool_gap_step. A share $1-d$ of a group''s jobs is not entered, a share $d\sigma$ is reassigned within the group and keeps its former jobs, and a share $d(1-\sigma)$ draws from the joint lottery at the pool''s mean (Isc.nextMean); the pool''s mean is conserved (Isc.large_pool_mean_conserved), the gap recursion holds (Isc.large_pool_gap_step) and iterates (Isc.large_pool_gap); limits Isc.large_pool_gap_vanishes, Isc.large_pool_gap_full_closure; half-life Isc.halfLife_halves, bounds Isc.halfLife_bounds. Controls: a gap halved each period has half-life one period where the approximation gives about $1.39$ (Isc.control_halfLife_approximation_overstates); with every worker entering and no closure the large pool removes the gap in one period while the pool of two and two reverses it to a third (Isc.control_small_pool_differs, M51)'
+    lean: [Isc.large_pool_gap_step, Isc.large_pool_mean_conserved, Isc.large_pool_gap, Isc.large_pool_gap_vanishes, Isc.large_pool_gap_full_closure, Isc.halfLife_halves, Isc.halfLife_bounds, Isc.control_halfLife_approximation_overstates, Isc.control_small_pool_differs]
+    status: LEAN_PROVED
+    symbols: [X25, X24, X28, X6]
+  - id: M68
+    anchor: 'consequence of M64 in a large pool (issue 17d)'
+    claim: 'In a large pool an entrant of a status group with share $w$ among entrants receives a former job of the own group with chance $\sigma+(1-\sigma)w$, and Coleman''s inbreeding homophily index of that chance is exactly $\sigma$, for every group share. In a joint lottery of $n$ members the own group''s share among the others tends to $w$, so the index tends to $\sigma$ as the pool grows. Closure is therefore the inbreeding homophily of job-finding connections, while the own-group share itself depends on the group''s size'
+    assumptions: 'a large pool, as in M67; entry into the lottery that does not depend on group, so a group''s share among entrants is its share of workers'
+    evidence: 'lean/IscLean/GroupDraw.lean::Isc.closure_is_inbreeding_homophily, with the index as defined in the literature record (CurrariniJacksonPin2009.inbreeding, L24). The joint lottery''s own-group share tends to $w$ (Isc.joint_own_share_tendsto) and the index tends to $\sigma$ (Isc.inbreeding_tendsto_closure). Control: at $\sigma=1/2$ groups of a quarter and of half the entrants draw own-group jobs with chances $5/8$ and $3/4$, and the index is $1/2$ for both (Isc.control_share_differs_index_same)'
+    lean: [Isc.closure_is_inbreeding_homophily, Isc.joint_own_share_tendsto, Isc.inbreeding_tendsto_closure, Isc.control_share_differs_index_same]
+    status: LEAN_PROVED
+    symbols: [X25, X24]
+  - id: M69
+    anchor: 'consequence of M61'
+    claim: 'The optimal retraining price need not rise with the lottery cost. On a ladder of two ranks, a dearer lottery can make the firm switch from a high price at which only the top rank returns to a lower price at which both return, because the dearer lottery makes the bottom rank cheaper to keep'
+    assumptions: 'as M61; the example has ranks paying $1$ and $4$, bottom income $0$, $b=1$, a lottery prize worth $1$ and $\delta=1/4$'
+    evidence: 'lean/IscLean/Firm.lean::Isc.optimal_price_can_fall_with_lottery_cost. At lottery cost $1/2$ the price $7/8$ is optimal and only the top rank returns; at lottery cost $4/5$ every price at or above $7/8$ earns less than $4/5$, at which both ranks return (profit evaluated by Isc.two_rank_profit). Profit rises with the lottery cost at any fixed price (M62), but the optimum can jump down, because the band changes by whole ranks'
+    lean: [Isc.optimal_price_can_fall_with_lottery_cost, Isc.two_rank_profit]
+    status: LEAN_PROVED
+    symbols: [X30, X7, X6]
 
 literature:
   - id: L1
@@ -1335,8 +1384,8 @@ references:
   - key: CurrariniJacksonPin2009
     math_content: 'yes'
     lean: LEAN_PARTIAL
-    reason: 'Novelty check for the closure parameter (M29) and its identification (X25): under the closure weighting $\sigma$ equals Coleman''s inbreeding homophily divided by the homophily index; separates a meeting channel from a preference channel'
-    impact_if_removed: 'No current claim rests on this paper. Without it the identification of $\sigma$ is not tied to its established measure'
+    reason: 'Novelty check for the closure parameter (M29) and its identification (X25): under the closure weighting $\sigma$ equals Coleman''s inbreeding homophily divided by the homophily index, and under the two-stage draw (M64) it equals the index exactly in large pools (M68); separates a meeting channel from a preference channel'
+    impact_if_removed: 'M68 uses its definition of Coleman''s inbreeding homophily index. Without it the identity $\sigma=IH$ is an algebraic fact about an uncited index, and the identification of $\sigma$ is not tied to its established measure'
   - key: Markowitz1952
     math_content: 'yes'
     lean: LEAN_PARTIAL
