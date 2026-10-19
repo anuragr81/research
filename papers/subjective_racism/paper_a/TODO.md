@@ -333,6 +333,29 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   the curvature level rests on more than two symmetric members. M15, C11
   and I5 stand outside the levels, since the admission objective is not the
   engagement utility.
+- [x] **D17. A Contributions subsection, row M22, and one-way against two-way
+  avoidance. 19 Oct 2026, at the author's request** ("contribution
+  statement is good. But please formulate the platform/venue part as
+  well", using the older manuscript's paragraphs). Section 1.3 has three
+  contributions, each with its rows, its rival and what it waits on. The
+  reader of an unseen position (M18, M21, C22, against L9 and Akerlof's
+  L34). Homophily from separate budgets, opening with the author's bar
+  sentence from the predecessor (M19, M22, C23, C24, against Mailath and
+  Postlewaite's L10, with avoidance one way under pooled budgets and both
+  ways under separate ones). Venues that screen by markers, from the
+  predecessor's platform section and appendix, corrected to M15 and M20,
+  with the legal constraint kept and tokenism and host destabilisation left
+  out because they need the dynamics. The shadow market stays out until it
+  is developed (author, 19 Oct 2026). Row M22 under A17, in `Budget.lean`,
+  shows the loss rising in the gap for any activity payoff concave in the
+  level, so the cost of the economic distance does not need the square.
+  The bar sentence now appears once, in 1.3, and left 1.2.1 and 3.2.1.
+- [ ] **Shadow market, to develop before it enters the contributions.**
+  The predecessor's `prop:shadow` (shadow information value rising in legal
+  strictness, salience and the weight on social quality) has no row. Its
+  proof sets the effect of strictness by assumption (`S^rand` lowered by
+  `γλ`). A row would need the clients' value of a room derived from the
+  engagement utility.
 
 ## Novelty ledger
 

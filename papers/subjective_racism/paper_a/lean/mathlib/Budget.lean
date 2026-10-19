@@ -293,4 +293,99 @@ theorem control_separate_gap_cost (a h β v ci cj cj' : ℝ) (ha : a ≠ 0) (hβ
   have := sensitivity_pos a h β ha hβ hah
   nlinarith
 
+/-! ### Row M22. The loss rises in the gap for any payoff concave in the level -/
+
+/-- A payoff concave in the level and maximised at `p0` does not rise as the
+level moves away from `p0` above it. -/
+theorem concave_loss_right {f : ℝ → ℝ} (hf : ConcaveOn ℝ Set.univ f) {p0 p q : ℝ}
+    (hmax : ∀ x, f x ≤ f p0) (h1 : p0 ≤ p) (h2 : p ≤ q) : f q ≤ f p := by
+  rcases eq_or_lt_of_le (le_trans h1 h2) with h | h
+  · have e1 : p = p0 := by linarith
+    have e2 : q = p0 := by linarith
+    rw [e1, e2]
+  · have hd : 0 < q - p0 := by linarith
+    have ht : (q - p) / (q - p0) * (q - p0) = q - p := by field_simp
+    generalize (q - p) / (q - p0) = t at ht
+    have t0 : 0 ≤ t := by nlinarith
+    have t1 : 0 ≤ 1 - t := by nlinarith
+    have k := hf.2 (Set.mem_univ p0) (Set.mem_univ q) t0 t1 (by ring)
+    simp only [smul_eq_mul] at k
+    have ep : t * p0 + (1 - t) * q = p := by linear_combination -ht
+    rw [ep] at k
+    have := hmax q
+    nlinarith
+
+/-- The same below `p0`. -/
+theorem concave_loss_left {f : ℝ → ℝ} (hf : ConcaveOn ℝ Set.univ f) {p0 p q : ℝ}
+    (hmax : ∀ x, f x ≤ f p0) (h1 : p ≤ p0) (h2 : q ≤ p) : f q ≤ f p := by
+  have hg : ConcaveOn ℝ Set.univ (fun x => f (-x)) := by
+    refine ⟨convex_univ, ?_⟩
+    intro x _ y _ a b ha hb hab
+    have k := hf.2 (Set.mem_univ (-x)) (Set.mem_univ (-y)) ha hb hab
+    simp only [smul_eq_mul] at k ⊢
+    have e : a * -x + b * -y = -(a * x + b * y) := by ring
+    rw [e] at k
+    exact k
+  have := concave_loss_right hg (p0 := -p0) (p := -p) (q := -q)
+    (fun x => by simpa using hmax (-x)) (by linarith) (by linarith)
+  simpa using this
+
+/-- The level a pair shares, with weight `ω` on the partner's ideal. -/
+noncomputable def sharedLevel (ps : ℝ → ℝ) (ω bi bj : ℝ) : ℝ :=
+  (1 - ω) * ps bi + ω * ps bj
+
+/-- The loss from the shared level is never negative. -/
+theorem general_loss_nonneg (Ψ : ℝ → ℝ → ℝ) (ps : ℝ → ℝ)
+    (hmax : ∀ b x, Ψ x b ≤ Ψ (ps b) b) (ω bi bj : ℝ) :
+    0 ≤ Ψ (ps bi) bi - Ψ (sharedLevel ps ω bi bj) bi := by
+  have := hmax bi (sharedLevel ps ω bi bj)
+  linarith
+
+/-- A partner further above. With a payoff concave in the level, an ideal that
+does not fall in the budget and a fixed weight, the payoff from the shared
+level does not rise as the richer partner's budget rises. -/
+theorem loss_rises_above (Ψ : ℝ → ℝ → ℝ) (ps : ℝ → ℝ)
+    (hconc : ∀ b, ConcaveOn ℝ Set.univ (fun p => Ψ p b))
+    (hmax : ∀ b x, Ψ x b ≤ Ψ (ps b) b) (hmono : Monotone ps)
+    (ω : ℝ) (hω : 0 ≤ ω) (bi bj bj' : ℝ) (h1 : bi ≤ bj) (h2 : bj ≤ bj') :
+    Ψ (sharedLevel ps ω bi bj') bi ≤ Ψ (sharedLevel ps ω bi bj) bi := by
+  have m1 := hmono h1
+  have m2 := hmono h2
+  unfold sharedLevel
+  exact concave_loss_right (hconc bi) (hmax bi) (by nlinarith) (by nlinarith)
+
+/-- A partner further below. The payoff from the shared level does not rise as
+the poorer partner's budget falls. -/
+theorem loss_rises_below (Ψ : ℝ → ℝ → ℝ) (ps : ℝ → ℝ)
+    (hconc : ∀ b, ConcaveOn ℝ Set.univ (fun p => Ψ p b))
+    (hmax : ∀ b x, Ψ x b ≤ Ψ (ps b) b) (hmono : Monotone ps)
+    (ω : ℝ) (hω : 0 ≤ ω) (bi bj bj' : ℝ) (h1 : bj ≤ bi) (h2 : bj' ≤ bj) :
+    Ψ (sharedLevel ps ω bi bj') bi ≤ Ψ (sharedLevel ps ω bi bj) bi := by
+  have m1 := hmono h1
+  have m2 := hmono h2
+  unfold sharedLevel
+  exact concave_loss_left (hconc bi) (hmax bi) (by nlinarith) (by nlinarith)
+
+/-- The quadratic payoff of A15 is concave in the level, so M19 is a case of
+M22. -/
+theorem payoff_concave (a h γ b : ℝ) (hah : 0 ≤ a + h) :
+    ConcaveOn ℝ Set.univ (fun p => payoff a h γ p b) := by
+  refine ⟨convex_univ, ?_⟩
+  intro x _ y _ s t hs ht hst
+  simp only [smul_eq_mul]
+  unfold payoff
+  have ht' : t = 1 - s := by linarith
+  subst ht'
+  nlinarith [mul_nonneg (mul_nonneg hs ht) (mul_nonneg hah (sq_nonneg (x - y)))]
+
+/-- Control for M22. Without concavity the payoff can rise as the level moves
+away from the ideal. `−(p² − 2p)²` is maximised at `0`, and is higher at `2`
+than at `1`. -/
+theorem control_concavity_needed :
+    (∀ x : ℝ, -(x ^ 2 - 2 * x) ^ 2 ≤ -((0:ℝ) ^ 2 - 2 * 0) ^ 2) ∧
+      -((1:ℝ) ^ 2 - 2 * 1) ^ 2 < -((2:ℝ) ^ 2 - 2 * 2) ^ 2 := by
+  constructor
+  · intro x; nlinarith [sq_nonneg (x ^ 2 - 2 * x)]
+  · norm_num
+
 end Budget
