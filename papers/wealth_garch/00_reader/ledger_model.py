@@ -11,19 +11,24 @@ shortfall penalty, the asymmetry parameter, the discount rates, the value functi
 calibrated and unobserved quantities, and the model's outputs (the dividend barrier,
 the recapitalisation trigger, the injection target) are not nodes.
 
-This file holds the entities agreed with the author on 19 October 2026. The edges are
-proposed next.
+The entities were agreed with the author on 19 October 2026, and the edges as a first
+cut the same day. Every edge is a row of the map's Actions table. A rule is an object,
+not an agent; where it restricts an action, the ledger records that as a constraint on
+the edge, drawn dashed, never as an action.
 
-    python3 00_reader/ledger_model.py        verify
+    python3 00_reader/ledger_model.py            verify
+    python3 00_reader/ledger_model.py --write    verify, then render ledger_model.dot and ledger_model.pdf
 """
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 
 BUNDLE_ROOT = Path(__file__).resolve().parent.parent
 MAP_TEX = BUNDLE_ROOT / "MEASUREMENT_MAP.tex"
+FIGURE_DOT = BUNDLE_ROOT / "00_reader" / "ledger_model.dot"
 
 AGENT, OBJECT = "agent", "object"
 OBSERVED = ("Report", "Rule")
@@ -37,6 +42,22 @@ NODES = {
                                                                    "capital conservation buffer", "leverage floor")},
     "liquidity rule": {"kind": OBJECT, "row": "N6", "attributes": ("liquidity coverage ratio",)},
     "regulator":      {"kind": AGENT,  "row": "N7", "attributes": ()},
+}
+
+
+EDGES = {
+    "A1": {"agent": "bank", "target": "investors", "label": "pays dividends", "records": ("EQCDIV",)},
+    "A2": {"agent": "investors", "target": "equity", "label": "buy stock, net", "records": ("EQCSXQ",)},
+    "A3": {"agent": "investors", "target": "equity", "label": "inject capital (parent)", "records": ("EQCBHCTR",)},
+    "A4": {"agent": "depositors", "target": "bank", "label": "deposit and withdraw", "records": ("DEP",)},
+    "A5": {"agent": "bank", "target": "bank", "label": "takes risky exposure", "records": ("RWAJT", "ASSET")},
+    "A6": {"agent": "regulator", "target": "bank", "label": "supervises", "records": ("REGAGNT",)},
+}
+
+CONSTRAINTS = {
+    ("capital rule", "A1"): "restricts distributions inside the conservation buffer",
+    ("capital rule", "A5"): "sets the solvency branch of the cap",
+    ("liquidity rule", "A5"): "sets the liquidity branch of the cap",
 }
 
 
@@ -60,6 +81,11 @@ def cells(macro, tex):
 def entity_rows(tex):
     body = tex.split(r"\section{Entities}", 1)[1].split(r"\section{", 1)[0]
     return {r[0]: r for r in cells("entrow", body)}
+
+
+def action_rows(tex):
+    body = tex.split(r"\section{Actions}", 1)[1].split(r"\section{", 1)[0]
+    return {r[0]: r for r in cells("actrow", body)}
 
 
 def terminology(tex):
@@ -88,12 +114,48 @@ def verify():
         fields = [a for a in spec["attributes"] if a.isupper()]
         missing = [a for a in fields if a not in row[3]]
         check(f"LM-5 {node}: every report field among its attributes is in the row", not missing, missing)
+    actions = action_rows(tex)
+    for eid, e in EDGES.items():
+        row = actions.get(eid)
+        check(f"LM-8 {eid}: row in the Actions table", row is not None)
+        if row is None:
+            continue
+        check(f"LM-9 {eid}: the agent is an agent node and the target a node",
+              NODES.get(e["agent"], {}).get("kind") == AGENT and e["target"] in NODES, (e["agent"], e["target"]))
+        check(f"LM-10 {eid}: the row names its agent and its target", e["agent"] in row[1] and e["target"] in row[1], row[1])
+        check(f"LM-11 {eid}: status is Report", row[4] == "Report", row[4])
+        missing = [f for f in e["records"] if f not in row[3]]
+        check(f"LM-12 {eid}: every record field is in the row", not missing, missing)
+    check("LM-13 every Actions row is an edge of the ledger", set(actions) == set(EDGES), sorted(set(actions) ^ set(EDGES)))
+    bad = [k for k in CONSTRAINTS if NODES.get(k[0], {}).get("kind") != OBJECT or k[1] not in EDGES]
+    check("LM-14 every constraint runs from an object node to an edge", not bad, bad)
     extra = sorted(set(rows) - {s["row"] for s in NODES.values()})
     check("LM-6 every Entities row is a node of the ledger", not extra, extra)
     check("LM-7 the ledger has agents and objects", {s["kind"] for s in NODES.values()} == {AGENT, OBJECT})
-    print(f"LEDGER: {len(NODES)} nodes, {len(failures)} failures")
+    print(f"LEDGER: {len(NODES)} nodes, {len(EDGES)} edges, {len(failures)} failures")
     return not failures
 
 
+def dot():
+    lines = ["digraph ledger {", '  rankdir=LR; node [fontname="Helvetica", fontsize=11]; edge [fontname="Helvetica", fontsize=9];']
+    for name, spec in NODES.items():
+        shape = "ellipse" if spec["kind"] == AGENT else "box"
+        attrs = "\\n".join(spec["attributes"])
+        label = f"{name}\\n({spec['row']})" + (f"\\n{attrs}" if attrs else "")
+        lines.append(f'  "{name}" [shape={shape}, label="{label}"];')
+    for eid, e in EDGES.items():
+        lines.append(f'  "{e["agent"]}" -> "{e["target"]}" [label="{eid} {e["label"]}\\n{", ".join(e["records"])}"];')
+    for (rule, eid), text in CONSTRAINTS.items():
+        e = EDGES[eid]
+        lines.append(f'  "{rule}" -> "{e["agent"]}" [style=dashed, arrowhead=tee, label="constrains {eid}: {text}", fontsize=8];')
+    lines.append("}")
+    return "\n".join(lines) + "\n"
+
+
 if __name__ == "__main__":
-    sys.exit(0 if verify() else 1)
+    ok = verify()
+    if ok and "--write" in sys.argv:
+        FIGURE_DOT.write_text(dot())
+        subprocess.run(["dot", "-Tpdf", str(FIGURE_DOT), "-o", str(FIGURE_DOT.with_suffix(".pdf"))], check=True)
+        print(f"wrote {FIGURE_DOT.name} and {FIGURE_DOT.with_suffix('.pdf').name}")
+    sys.exit(0 if ok else 1)

@@ -711,5 +711,8 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   quotations (FDIC-Q14 to Q19: CERT, DEP, RSSDHCR, NAMEHCR, REGAGNT,
   BKCLASS), verified against the workbook. 00_reader/ledger_model.py holds
   the nodes; checks MM-15 (entity rows) and MM-16 (ledger matches map) added.
-  Next: the edges (proposal of 19 October awaiting the author).
+  Edges A1-A6 (first cut, author to review) in a new Actions section of
+  the map, with the rules drawn as dashed constraints; closures left out
+  until a primary source on the FDIC failures record is read. Rendered as
+  00_reader/ledger_model.dot and ledger_model.pdf.
 

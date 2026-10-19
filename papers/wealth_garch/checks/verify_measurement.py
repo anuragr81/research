@@ -97,16 +97,19 @@ def analyse(tex, lean, lits, rows):
     bad8 += [(r[0], r[3].strip()) for r in nrows if r[3].strip() not in TERM_STATUS]
     bad8 += [r[0] for r in nrows if r[3].strip() == "Proposed" and not r[4].strip()]
     out["MM-8"] = (nrows and not bad8, f"{bad8}" if nrows else "no terminology rows")
-    erows = macro_calls(strip_comments(tex), "entrow", 6)
-    eids = [r[0].strip() for r in erows]
-    bad15 = [] if eids == [f"N{i}" for i in range(1, len(eids) + 1)] else [("ids", eids)]
-    for r in erows:
-        items = split_list(r[5])
-        if r[4].strip() not in {"Rule", "Report"}:
-            bad15.append((r[0], r[4].strip()))
-        bad15 += [(r[0], it) for it in items if it not in lits]
-        if not any(i.startswith(REGULATORY) for i in items):
-            bad15.append((r[0], "no regulatory or report source"))
+    bad15 = []
+    for macro, prefix in (("entrow", "N"), ("actrow", "A")):
+        erows = macro_calls(strip_comments(tex), macro, 6)
+        eids = [r[0].strip() for r in erows]
+        if eids != [f"{prefix}{i}" for i in range(1, len(eids) + 1)]:
+            bad15.append(("ids", eids))
+        for r in erows:
+            items = split_list(r[5])
+            if r[4].strip() not in {"Rule", "Report"}:
+                bad15.append((r[0], r[4].strip()))
+            bad15 += [(r[0], it) for it in items if it not in lits]
+            if not any(i.startswith(REGULATORY) for i in items):
+                bad15.append((r[0], "no regulatory or report source"))
     out["MM-15"] = (not bad15, f"{bad15}")
     return out, len(grows)
 
@@ -169,6 +172,7 @@ GOOD = r"""
 \nrow{equity}{$X-L$}{m}{In use}{none}
 \nrow{buffer variance}{$\zeta$}{m}{Proposed}{z-volatility}
 \entrow{N1}{bank}{r}{c}{Report}{FDIC-Q14}
+\actrow{A1}{bank pays dividends to investors}{r}{c}{Report}{FDIC-Q8}
 """
 
 BAD = r"""
@@ -180,6 +184,7 @@ BAD = r"""
 \nrow{equity}{$X-L$}{m}{In use}{none}
 \nrow{Equity}{$\zeta$}{m}{Maybe}{}
 \entrow{N2}{bank}{r}{c}{Output}{XX-Q1}
+\actrow{A1}{bank pays dividends to investors}{r}{c}{Unobserved}{K2}
 """
 
 lean = lean_declarations()
@@ -200,7 +205,7 @@ names = {"MM-1": "row IDs G1, G2, ... unique and in order",
          "MM-5": "every model object of the coverage list has a row",
          "MM-6": "the results table has one row per map row, outcomes from the list, evidence that resolves, and a results file behind every Holds or Fails",
          "MM-8": "terminology names and symbols unique, statuses Agreed, In use or Proposed, and every Proposed name says what it replaces",
-         "MM-15": "entity rows N1, N2, ... in order, status Report or Rule, and every evidence item a lit/ ID with a regulatory or report source"}
+         "MM-15": "entity rows N1, N2, ... and action rows A1, A2, ... in order, status Report or Rule, and every evidence item a lit/ ID with a regulatory or report source"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
