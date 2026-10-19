@@ -50,6 +50,7 @@
 
 \newcommand{\grow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
 \newcommand{\trow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
+\newcommand{\entrow}[6]{#1 & #2 & #3 & #4 & #5 & \ev{#6} \\ \addlinespace}
 \newcommand{\nrow}[5]{#1 & #2 & #3 & #4 & #5 \\ \addlinespace}
 
 \title{Measurement Map}
@@ -81,7 +82,7 @@ and its observation is part of the empirical design.
 
 One plain-English name for each object of the model. The manuscript and
 this map use these names and no others. Agreed means fixed with the author
-on 10 or 13 October 2026 (\path{notes/writing_discipline.md}, section 6). In
+on 10, 13 or 19 October 2026 (\path{notes/writing_discipline.md}, section 6). In
 use means the manuscript already uses the name consistently. Proposed means a
 plain name offered to the author and not yet agreed. The names in the last
 column are retired, and neither document uses them for these objects.
@@ -97,6 +98,12 @@ Name & Symbol & Meaning & Status & Replaces \\
 Name & Symbol & Meaning & Status & Replaces \\
 \midrule
 \endhead
+\nrow{bank}{none}{The institution that files the report, the agent whose policy the model solves.}{Agreed}{none}
+\nrow{investors}{none}{Those who buy the bank's stock or receive its dividends, its parent holding company among them.}{Agreed}{none}
+\nrow{depositors}{none}{Those whose deposits are the bank's main liabilities.}{Agreed}{none}
+\nrow{regulator}{none}{The agency that supervises the bank and receives its reports.}{Agreed}{none}
+\nrow{capital rule}{none}{The published rule behind the solvency branch: the minimum capital ratios, the conservation buffer and the leverage floor.}{Agreed}{none}
+\nrow{liquidity rule}{none}{The published rule behind the liquidity branch: the liquidity coverage ratio, its run-off rates and its haircuts.}{Agreed}{none}
 \nrow{assets-to-liabilities ratio}{$x$}{Total assets over total liabilities, the state of the model.}{Agreed}{none}
 \nrow{equity}{$X-L$}{Assets less liabilities.}{In use}{none}
 \nrow{required capital}{$Q$, $q$}{The capital regulation requires, in dollars or as a ratio to liabilities.}{Agreed}{none}
@@ -184,6 +191,35 @@ ID & Object & Role in the model & Counterpart and observation & Status & Evidenc
 \grow{G20}{$b$}{The retention ratio.}{One minus dividends over net income, over four quarters, defined when net income is positive.}{Report}{FDIC-Q7, FDIC-Q8, M12}
 \grow{G21}{$\delta_p$}{The surplus payout rate.}{The share of the log-surplus paid as dividends in a quarter.}{Report}{FDIC-Q8, M12}
 \grow{G22}{$\phi^-$, $\phi^+$}{Deficit and surplus persistence of $z_t$.}{Least squares of $z_t$ on $z_{t-1}$ through the origin, on pairs starting in deficit or surplus.}{Output}{M12}
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Entities}
+
+The ledger of the model (\path{00_reader/ledger_model.py}) is a graph. Its
+nodes are these entities, the agents and the objects they act on, each
+observed as stated. Status has the meaning of the Map.
+
+\footnotesize
+\begin{longtable}{@{}P{0.6cm}P{1.5cm}P{2.7cm}P{5.2cm}P{1.6cm}P{3.6cm}@{}}
+\caption{Entities of the ledger.}\label{tab:entities}\\
+\toprule
+ID & Entity & Role in the model & Counterpart and observation & Status & Evidence \\
+\midrule
+\endfirsthead
+\toprule
+ID & Entity & Role in the model & Counterpart and observation & Status & Evidence \\
+\midrule
+\endhead
+\entrow{N1}{bank}{The agent whose policy the model solves. Its state is G1 and its risky exposure G2.}{The reporting institution, identified by \path{CERT}, with total assets \path{ASSET}, total liabilities \path{LIAB} and risk-weighted assets \path{RWAJT}.}{Report}{FDIC-Q14, FDIC-Q1, FDIC-Q2, FDIC-Q3}
+\entrow{N2}{equity}{The object that dividends draw down and recapitalisations add to (G3).}{Tier 1 capital \path{RBCT1J} and tier 2 capital \path{RBCT2}, net of regulatory adjustments, so not book equity (B3-D2).}{Report}{FDIC-Q4, RCR-Q1, RCR-Q3, B3-Q3}
+\entrow{N3}{investors}{Those who receive dividends and supply recapitalisations (G14, G15).}{The parent holding company, identified by \path{RSSDHCR}, through its transactions \path{EQCBHCTR}; outside buyers only in aggregate, through net stock sales \path{EQCSXQ}. Whether an investor is the parent holding company is read from \path{RSSDHCR}.}{Report}{FDIC-Q16, FDIC-Q17, FDIC-Q12, FDIC-Q9}
+\entrow{N4}{depositors}{The source of the liabilities, whose shock the model takes as given (G9).}{Total deposits \path{DEP}, in aggregate per bank.}{Report}{FDIC-Q15}
+\entrow{N5}{capital rule}{Sets the solvency branch of the regulatory cap and the requirement (G4, G7).}{The CET1 minimum of 4.5\%, the Tier 1 minimum of 6.0\%, the capital conservation buffer of 2.5\% with its distribution constraints, and the 3\% leverage floor, as published.}{Rule}{B3-Q1, B3-Q2, B3-Q4, B3-Q5, B3-Q7}
+\entrow{N6}{liquidity rule}{Sets the liquidity branch of the regulatory cap (G5, G6).}{The liquidity coverage ratio of at least 100\%, with its run-off rates and haircuts, as published. No report read gives a bank's own ratio.}{Rule}{LCR-Q1}
+\entrow{N7}{regulator}{Supervises the bank under the two rules.}{The bank's primary federal regulator, one of three federal regulators; for a national bank, the Office of the Comptroller of the Currency.}{Report}{FDIC-Q18, FDIC-Q19}
 
 \bottomrule
 \end{longtable}

@@ -92,11 +92,22 @@ def analyse(tex, lean, lits, rows):
     out["MM-6"] = (not bad6, f"{bad6}")
     nrows = macro_calls(strip_comments(tex), "nrow", 5)
     names = [r[0].strip().lower() for r in nrows]
-    symbols = [s.strip() for r in nrows for s in r[1].split(", ")]
+    symbols = [s.strip() for r in nrows for s in r[1].split(", ") if s.strip() != "none"]
     bad8 = [n for n in names if names.count(n) > 1] + [s for s in symbols if symbols.count(s) > 1]
     bad8 += [(r[0], r[3].strip()) for r in nrows if r[3].strip() not in TERM_STATUS]
     bad8 += [r[0] for r in nrows if r[3].strip() == "Proposed" and not r[4].strip()]
     out["MM-8"] = (nrows and not bad8, f"{bad8}" if nrows else "no terminology rows")
+    erows = macro_calls(strip_comments(tex), "entrow", 6)
+    eids = [r[0].strip() for r in erows]
+    bad15 = [] if eids == [f"N{i}" for i in range(1, len(eids) + 1)] else [("ids", eids)]
+    for r in erows:
+        items = split_list(r[5])
+        if r[4].strip() not in {"Rule", "Report"}:
+            bad15.append((r[0], r[4].strip()))
+        bad15 += [(r[0], it) for it in items if it not in lits]
+        if not any(i.startswith(REGULATORY) for i in items):
+            bad15.append((r[0], "no regulatory or report source"))
+    out["MM-15"] = (not bad15, f"{bad15}")
     return out, len(grows)
 
 
@@ -157,6 +168,7 @@ GOOD = r"""
 \trow{G2}{m}{d}{p}{Not measured}{K2}
 \nrow{equity}{$X-L$}{m}{In use}{none}
 \nrow{buffer variance}{$\zeta$}{m}{Proposed}{z-volatility}
+\entrow{N1}{bank}{r}{c}{Report}{FDIC-Q14}
 """
 
 BAD = r"""
@@ -167,6 +179,7 @@ BAD = r"""
 \trow{G2}{m}{d}{p}{Partly}{06_empirical_starter/no_such_results.md}
 \nrow{equity}{$X-L$}{m}{In use}{none}
 \nrow{Equity}{$\zeta$}{m}{Maybe}{}
+\entrow{N2}{bank}{r}{c}{Output}{XX-Q1}
 """
 
 lean = lean_declarations()
@@ -186,10 +199,15 @@ names = {"MM-1": "row IDs G1, G2, ... unique and in order",
          "MM-4": "Rule and Report rows cite a regulatory quotation, Calibration rows a BCVW quotation, Unobserved and Output rows a manuscript row",
          "MM-5": "every model object of the coverage list has a row",
          "MM-6": "the results table has one row per map row, outcomes from the list, evidence that resolves, and a results file behind every Holds or Fails",
-         "MM-8": "terminology names and symbols unique, statuses Agreed, In use or Proposed, and every Proposed name says what it replaces"}
+         "MM-8": "terminology names and symbols unique, statuses Agreed, In use or Proposed, and every Proposed name says what it replaces",
+         "MM-15": "entity rows N1, N2, ... in order, status Report or Rule, and every evidence item a lit/ ID with a regulatory or report source"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
+
+ledger = subprocess.run([sys.executable, os.path.join(ROOT, "00_reader", "ledger_model.py")], capture_output=True, text=True)
+check("MM-16 the ledger's nodes are the map's entities, named by its terminology (00_reader/ledger_model.py)",
+      ledger.returncode == 0, "" if ledger.returncode == 0 else ledger.stdout.strip().splitlines()[-1])
 
 term_symbols = {s.strip() for r in macro_calls(strip_comments(tex), "nrow", 5) for s in r[1].split(", ")}
 missing9 = [s for s in COVERAGE if s not in term_symbols]

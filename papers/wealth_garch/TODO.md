@@ -704,4 +704,12 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   needs a reason to hold large voluntary buffers (author to choose). MMP
   stage 3 deferred (PREREG_stage3_3.md). Open: ledger entities for the
   manuscript's model (proposal of 18 October awaiting the author).
+- 2026-10-19. Ledger of the model, entities (author's decisions): seven
+  nodes, each a row N1-N7 of a new Entities section of MEASUREMENT_MAP.tex
+  and a Terminology name (bank, investors, depositors, regulator, capital
+  rule and liquidity rule Agreed; equity In use). Evidence: six new FDIC
+  quotations (FDIC-Q14 to Q19: CERT, DEP, RSSDHCR, NAMEHCR, REGAGNT,
+  BKCLASS), verified against the workbook. 00_reader/ledger_model.py holds
+  the nodes; checks MM-15 (entity rows) and MM-16 (ledger matches map) added.
+  Next: the edges (proposal of 19 October awaiting the author).
 

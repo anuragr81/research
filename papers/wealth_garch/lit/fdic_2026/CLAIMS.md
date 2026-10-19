@@ -21,6 +21,12 @@ The Page column holds the variable whose entry (title and definition) contains t
 | FDIC-Q11 | EQCSTKRX | Institutions with total assets of less than $100 million file these data only on the December Call Report. | Equity flows are quarterly only for banks of at least $100 million. |
 | FDIC-Q12 | EQCBHCTR | Other transactions involving the institution's parent holding company which affect equity capital directly such as capital contributions other than those for stock or dividends to the holding company in the form of property rather than cash. | Capital from the parent, the other part of the recapitalisation measure (G15). |
 | FDIC-Q13 | EQCMRG | Changes that occur as a result of pooling of interest, purchase acquisition, or push down accounting. | Merger-driven equity changes, excluded from recapitalisations. |
+| FDIC-Q14 | CERT | A unique number assigned by the FDIC used to identify institutions and for the issuance of insurance certificates. | `CERT` identifies the bank, the reporting institution (N1). |
+| FDIC-Q15 | DEP | The sum of all deposits including demand deposits, money market deposits, other savings deposits, time deposits and deposits in foreign offices. | `DEP` records depositors' funds at the bank in aggregate (N4). |
+| FDIC-Q16 | RSSDHCR | The unique number assigned by the Federal Reserve Board to the regulatory high holding company of the institution. | `RSSDHCR` identifies the parent holding company among the investors (N3). |
+| FDIC-Q17 | NAMEHCR | Regulatory top holder is any company that directly or indirectly owns, controls or has power to vote 25 percent or more of a bank's or direct holding company's shares | The parent holding company is an investor that controls the bank (N3). |
+| FDIC-Q18 | REGAGNT | There are now three federal regulators of banks and savings and loan institutions. | The regulator is the bank's primary federal regulator (N7). |
+| FDIC-Q19 | BKCLASS | N - Commercial bank, national (federal) charter, Fed member, and supervised by the Office of the Comptroller of the Currency (OCC) | A national bank's regulator is the OCC (N7). |
 
 ## Lean results
 
