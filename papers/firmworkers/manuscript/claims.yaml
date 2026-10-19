@@ -961,6 +961,16 @@ model:
     lean: [Isc.subsidy_worthwhile_iff, Isc.subsidy_restores_return, Isc.control_subsidy_covers_near_mean_not_bottom]
     status: LEAN_PROVED
     symbols: [X30, X7, X6]
+  - id: M64
+    anchor: 'the closure rule for M29 after M37 (issue 17)'
+    claim: 'Closure is realised by a two-stage draw. With chance $\sigma$ a displaced entrant''s connections reach only the own status group, so the entrant''s former job is reassigned among the own group''s such entrants; otherwise the entrant joins the joint draw. A lottery left with fewer than two members merges into the joint one, and if the joint one is then left with fewer than two, all entrants form one lottery. Every lottery reassigns its members'' former jobs as in M36'
+    assumptions: 'two status groups; the same $\sigma$ for both'
+    evidence: 'lean/IscLean/TwoStage.lean::Isc.two_stage_within_chance. In the pool of two from each group the rule gives the within-group partner chance $(1-\sigma^2)^2/3+\sigma^2(2-\sigma^2)$ and the no-crossing chance $(1-\sigma^2)^2/9+\sigma^2(2-\sigma^2)$ (M48, M49), both from the no-closure value to one, and the expected-gap recursion of M51. Feasible for any group sizes, which M29''s per-entrant weights are not (M37); $\sigma$ reads as the share of displaced workers whose courting stays within the group, Coleman''s inbreeding homophily in large pools (derived, not yet proved); the rich receive and do not choose, as issue 16 decided. Still to prove: feasibility in general (every lottery has two or more members), the general gap recursion that gives the half-life $\ln 2/((1-\sigma)d)$, and the large-pool identity $\sigma=IH$; and M58 is to be refined so that an entrant pays the job holders above within the entrant''s own lottery'
+    lean: [Isc.two_stage_within_chance, Isc.two_stage_no_cross_chance, Isc.two_stage_gap_recursion]
+    status: DECIDED
+    decision: '19 Oct 2026, the author: option (a) of issue 17 for this paper, because it covers unequal groups, determines the persistence of a gap between the groups, and keeps the rich as receivers rather than choosers. Options (b) and (c) are recorded in ISSUES'
+    affects: [M25, M26, M27, M29, M45, M48, M49, M51, M58]
+    symbols: [X25, X24, X8]
 
 literature:
   - id: L1
