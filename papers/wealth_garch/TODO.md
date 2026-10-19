@@ -715,4 +715,13 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   the map, with the rules drawn as dashed constraints; closures left out
   until a primary source on the FDIC failures record is read. Rendered as
   00_reader/ledger_model.dot and ledger_model.pdf.
+- 2026-10-19. Ledger revised (author): rules are not nodes; they enter through
+  the agents who enforce them. Nodes now bank, equity, investors, insured
+  creditors, uninsured creditors (the author's names, split by deposit
+  insurance), supervisor, insurer (two nodes, by function). Edges A1-A8.
+  Evidence: FDIC-Q20 to Q25 (DEPINS, core deposits, VOLIAB, DEPUNA and its
+  $1 billion reporting threshold), verified. Next: the enforcing actions of
+  the supervisor (prompt corrective action), the insurer (assessments,
+  resolution) and their scope (US liquidity rule), from primary sources
+  fetched and recorded in lit/.
 

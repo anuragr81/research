@@ -11,10 +11,10 @@ shortfall penalty, the asymmetry parameter, the discount rates, the value functi
 calibrated and unobserved quantities, and the model's outputs (the dividend barrier,
 the recapitalisation trigger, the injection target) are not nodes.
 
-The entities were agreed with the author on 19 October 2026, and the edges as a first
-cut the same day. Every edge is a row of the map's Actions table. A rule is an object,
-not an agent; where it restricts an action, the ledger records that as a constraint on
-the edge, drawn dashed, never as an action.
+The entities and a first cut of the edges were agreed with the author on 19 October
+2026, and revised the same day: a rule is not a node; it enters through the agent who
+enforces it (the supervisor, the insurer, the uninsured creditors), and the creditors are
+split by deposit insurance. Every edge is a row of the map's Actions table.
 
     python3 00_reader/ledger_model.py            verify
     python3 00_reader/ledger_model.py --write    verify, then render ledger_model.dot and ledger_model.pdf
@@ -34,30 +34,24 @@ AGENT, OBJECT = "agent", "object"
 OBSERVED = ("Report", "Rule")
 
 NODES = {
-    "bank":           {"kind": AGENT,  "row": "N1", "attributes": ("CERT", "ASSET", "LIAB", "RWAJT")},
-    "equity":         {"kind": OBJECT, "row": "N2", "attributes": ("RBCT1J", "RBCT2")},
-    "investors":      {"kind": AGENT,  "row": "N3", "attributes": ("RSSDHCR",)},
-    "depositors":     {"kind": AGENT,  "row": "N4", "attributes": ("DEP",)},
-    "capital rule":   {"kind": OBJECT, "row": "N5", "attributes": ("CET1 minimum", "Tier 1 minimum",
-                                                                   "capital conservation buffer", "leverage floor")},
-    "liquidity rule": {"kind": OBJECT, "row": "N6", "attributes": ("liquidity coverage ratio",)},
-    "regulator":      {"kind": AGENT,  "row": "N7", "attributes": ()},
+    "bank":                {"kind": AGENT,  "row": "N1", "attributes": ("CERT", "ASSET", "LIAB", "RWAJT")},
+    "equity":              {"kind": OBJECT, "row": "N2", "attributes": ("RBCT1J", "RBCT2")},
+    "investors":           {"kind": AGENT,  "row": "N3", "attributes": ("RSSDHCR",)},
+    "insured creditors":   {"kind": AGENT,  "row": "N4", "attributes": ("DEPINS",)},
+    "uninsured creditors": {"kind": AGENT,  "row": "N5", "attributes": ("VOLIAB", "DEPUNA")},
+    "supervisor":          {"kind": AGENT,  "row": "N6", "attributes": ("REGAGNT",)},
+    "insurer":             {"kind": AGENT,  "row": "N7", "attributes": ()},
 }
-
 
 EDGES = {
     "A1": {"agent": "bank", "target": "investors", "label": "pays dividends", "records": ("EQCDIV",)},
     "A2": {"agent": "investors", "target": "equity", "label": "buy stock, net", "records": ("EQCSXQ",)},
     "A3": {"agent": "investors", "target": "equity", "label": "inject capital (parent)", "records": ("EQCBHCTR",)},
-    "A4": {"agent": "depositors", "target": "bank", "label": "deposit and withdraw", "records": ("DEP",)},
+    "A4": {"agent": "insured creditors", "target": "bank", "label": "deposit and withdraw", "records": ("DEPINS",)},
     "A5": {"agent": "bank", "target": "bank", "label": "takes risky exposure", "records": ("RWAJT", "ASSET")},
-    "A6": {"agent": "regulator", "target": "bank", "label": "supervises", "records": ("REGAGNT",)},
-}
-
-CONSTRAINTS = {
-    ("capital rule", "A1"): "restricts distributions inside the conservation buffer",
-    ("capital rule", "A5"): "sets the solvency branch of the cap",
-    ("liquidity rule", "A5"): "sets the liquidity branch of the cap",
+    "A6": {"agent": "supervisor", "target": "bank", "label": "supervises", "records": ("REGAGNT",)},
+    "A7": {"agent": "uninsured creditors", "target": "bank", "label": "lend and withdraw", "records": ("VOLIAB", "DEPUNA")},
+    "A8": {"agent": "insurer", "target": "insured creditors", "label": "insures", "records": ("DEPINS",)},
 }
 
 
@@ -127,8 +121,6 @@ def verify():
         missing = [f for f in e["records"] if f not in row[3]]
         check(f"LM-12 {eid}: every record field is in the row", not missing, missing)
     check("LM-13 every Actions row is an edge of the ledger", set(actions) == set(EDGES), sorted(set(actions) ^ set(EDGES)))
-    bad = [k for k in CONSTRAINTS if NODES.get(k[0], {}).get("kind") != OBJECT or k[1] not in EDGES]
-    check("LM-14 every constraint runs from an object node to an edge", not bad, bad)
     extra = sorted(set(rows) - {s["row"] for s in NODES.values()})
     check("LM-6 every Entities row is a node of the ledger", not extra, extra)
     check("LM-7 the ledger has agents and objects", {s["kind"] for s in NODES.values()} == {AGENT, OBJECT})
@@ -145,9 +137,6 @@ def dot():
         lines.append(f'  "{name}" [shape={shape}, label="{label}"];')
     for eid, e in EDGES.items():
         lines.append(f'  "{e["agent"]}" -> "{e["target"]}" [label="{eid} {e["label"]}\\n{", ".join(e["records"])}"];')
-    for (rule, eid), text in CONSTRAINTS.items():
-        e = EDGES[eid]
-        lines.append(f'  "{rule}" -> "{e["agent"]}" [style=dashed, arrowhead=tee, label="constrains {eid}: {text}", fontsize=8];')
     lines.append("}")
     return "\n".join(lines) + "\n"
 

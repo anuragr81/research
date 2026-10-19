@@ -27,6 +27,12 @@ The Page column holds the variable whose entry (title and definition) contains t
 | FDIC-Q17 | NAMEHCR | Regulatory top holder is any company that directly or indirectly owns, controls or has power to vote 25 percent or more of a bank's or direct holding company's shares | The parent holding company is an investor that controls the bank (N3). |
 | FDIC-Q18 | REGAGNT | There are now three federal regulators of banks and savings and loan institutions. | The regulator is the bank's primary federal regulator (N7). |
 | FDIC-Q19 | BKCLASS | N - Commercial bank, national (federal) charter, Fed member, and supervised by the Office of the Comptroller of the Currency (OCC) | A national bank's regulator is the OCC (N7). |
+| FDIC-Q20 | DEPINS | The estimated amount of FDIC Insured deposits in domestic offices and in Insured branches of Puerto Rico and US territories and possessions. | The insured deposits, held by the insured creditors and insured by the insurer (N4, N7). |
+| FDIC-Q21 | IDLNCORR | core deposits held in domestic offices now includes: total domestic office deposits minus time deposits of more than $250,000 held in domestic offices and brokered deposits of $250,000 or less held in domestic offices. | The FDIC's own split of stable from rate-sensitive deposits (N4, N5). |
+| FDIC-Q22 | VOLIAB | Federal funds purchased and securities sold under agreements to repurchase | The first item of volatile liabilities, funding from uninsured creditors (N5). |
+| FDIC-Q23 | VOLIAB | Time deposits over $250,000 held in domestic offices | Large time deposits count as volatile liabilities, so uninsured depositors are uninsured creditors (N5). |
+| FDIC-Q24 | DEPUNA | Estimated amount of uninsured deposits in domestic offices and in insured branches in Puerto Rico and U.S. territories and possessions reported by the institution. | The uninsured deposits (N5). |
+| FDIC-Q25 | DEPUNA | Beginning September 2019 this item is required to be reported by FFIEC CALL form 051 filers with $1 billion or more in total assets. | Uninsured deposits are observed only for banks of $1 billion or more (N5). |
 
 ## Lean results
 

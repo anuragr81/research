@@ -3,17 +3,16 @@ digraph ledger {
   "bank" [shape=ellipse, label="bank\n(N1)\nCERT\nASSET\nLIAB\nRWAJT"];
   "equity" [shape=box, label="equity\n(N2)\nRBCT1J\nRBCT2"];
   "investors" [shape=ellipse, label="investors\n(N3)\nRSSDHCR"];
-  "depositors" [shape=ellipse, label="depositors\n(N4)\nDEP"];
-  "capital rule" [shape=box, label="capital rule\n(N5)\nCET1 minimum\nTier 1 minimum\ncapital conservation buffer\nleverage floor"];
-  "liquidity rule" [shape=box, label="liquidity rule\n(N6)\nliquidity coverage ratio"];
-  "regulator" [shape=ellipse, label="regulator\n(N7)"];
+  "insured creditors" [shape=ellipse, label="insured creditors\n(N4)\nDEPINS"];
+  "uninsured creditors" [shape=ellipse, label="uninsured creditors\n(N5)\nVOLIAB\nDEPUNA"];
+  "supervisor" [shape=ellipse, label="supervisor\n(N6)\nREGAGNT"];
+  "insurer" [shape=ellipse, label="insurer\n(N7)"];
   "bank" -> "investors" [label="A1 pays dividends\nEQCDIV"];
   "investors" -> "equity" [label="A2 buy stock, net\nEQCSXQ"];
   "investors" -> "equity" [label="A3 inject capital (parent)\nEQCBHCTR"];
-  "depositors" -> "bank" [label="A4 deposit and withdraw\nDEP"];
+  "insured creditors" -> "bank" [label="A4 deposit and withdraw\nDEPINS"];
   "bank" -> "bank" [label="A5 takes risky exposure\nRWAJT, ASSET"];
-  "regulator" -> "bank" [label="A6 supervises\nREGAGNT"];
-  "capital rule" -> "bank" [style=dashed, arrowhead=tee, label="constrains A1: restricts distributions inside the conservation buffer", fontsize=8];
-  "capital rule" -> "bank" [style=dashed, arrowhead=tee, label="constrains A5: sets the solvency branch of the cap", fontsize=8];
-  "liquidity rule" -> "bank" [style=dashed, arrowhead=tee, label="constrains A5: sets the liquidity branch of the cap", fontsize=8];
+  "supervisor" -> "bank" [label="A6 supervises\nREGAGNT"];
+  "uninsured creditors" -> "bank" [label="A7 lend and withdraw\nVOLIAB, DEPUNA"];
+  "insurer" -> "insured creditors" [label="A8 insures\nDEPINS"];
 }
