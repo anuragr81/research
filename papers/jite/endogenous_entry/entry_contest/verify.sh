@@ -25,7 +25,10 @@ mathlib_probe () {
   # depth 12: a Lake project puts Mathlib.olean 11 levels below $HOME as
   # <proj>/.lake/packages/mathlib/.lake/build/lib/lean/.  A shallower search
   # silently reports NOT FOUND, which is how the wrong note survived before.
-  root="$(timeout 120 find "$HOME" -maxdepth 12 -type f -name 'Mathlib.olean' \
+  # The paper's own project is looked at first: the search of $HOME can run
+  # past its timeout on a large home and then reports NOT FOUND wrongly.
+  root="$HERE/lean/mathlib/.lake/packages/mathlib/.lake/build/lib/lean/Mathlib.olean"
+  [ -f "$root" ] || root="$(timeout 120 find "$HOME" -maxdepth 12 -type f -name 'Mathlib.olean' \
            -path '*/build/lib/lean/*' 2>/dev/null | head -1)"
   if [ -z "$root" ]; then
     echo "Mathlib probe (measured by verify.sh on this run): NOT FOUND under \$HOME."
