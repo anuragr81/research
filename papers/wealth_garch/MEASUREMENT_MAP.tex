@@ -218,9 +218,9 @@ ID & Entity & Role in the model & Counterpart and observation & Status & Evidenc
 \entrow{N2}{equity}{The object that dividends draw down and recapitalisations add to (G3).}{Tier 1 capital \path{RBCT1J} and tier 2 capital \path{RBCT2}, net of regulatory adjustments, so not book equity (B3-D2).}{Report}{FDIC-Q4, RCR-Q1, RCR-Q3, B3-Q3}
 \entrow{N3}{investors}{Those who receive dividends and supply recapitalisations (G14, G15).}{The parent holding company, identified by \path{RSSDHCR}, through its transactions \path{EQCBHCTR}; outside buyers only in aggregate, through net stock sales \path{EQCSXQ}. Whether an investor is the parent holding company is read from \path{RSSDHCR}.}{Report}{FDIC-Q16, FDIC-Q17, FDIC-Q12, FDIC-Q9}
 \entrow{N4}{insured creditors}{Holders of part of the liabilities, whose shock the model takes as given as one block (G9).}{Estimated insured deposits \path{DEPINS}, in aggregate per bank; the FDIC's core deposits exclude large time deposits and brokered deposits.}{Report}{FDIC-Q20, FDIC-Q21}
-\entrow{N5}{uninsured creditors}{Holders of the rest of the liabilities, which the model does not separate from the insured part (G9).}{Volatile liabilities \path{VOLIAB}: federal funds purchased and repurchase agreements, short-term borrowed money, time deposits over \$250,000 and foreign office deposits; estimated uninsured deposits \path{DEPUNA}, reported only by banks of \$1 billion or more.}{Report}{FDIC-Q22, FDIC-Q23, FDIC-Q24, FDIC-Q25}
-\entrow{N6}{supervisor}{Holds the bank to the regulatory cap and the requirement (G4, G5, G7).}{The bank's primary federal regulator \path{REGAGNT}, one of three federal regulators; for a national bank, the Office of the Comptroller of the Currency.}{Report}{FDIC-Q18, FDIC-Q19}
-\entrow{N7}{insurer}{Not in the model as stated; insures the insured creditors' deposits.}{The FDIC, as insurer of the deposits counted in \path{DEPINS}.}{Report}{FDIC-Q20}
+\entrow{N5}{uninsured creditors}{Holders of the rest of the liabilities, which the model does not separate from the insured part (G9). For banks outside the liquidity rule's scope, the only enforcers of the liquidity branch (G5).}{Volatile liabilities \path{VOLIAB}: federal funds purchased and repurchase agreements, short-term borrowed money, time deposits over \$250,000 and foreign office deposits; estimated uninsured deposits \path{DEPUNA}, reported only by banks of \$1 billion or more.}{Report}{FDIC-Q22, FDIC-Q23, FDIC-Q24, FDIC-Q25, OCCL-Q1, OCCL-Q2, OCCL-Q3}
+\entrow{N6}{supervisor}{Enforces the solvency branch of the cap and the requirement (G4, G7), to resolve banks' problems at the least long-term loss to the deposit insurance fund. It enforces the liquidity branch (G5) only for the largest banks.}{The bank's primary federal regulator \path{REGAGNT}, one of three federal regulators; for a national bank, the Office of the Comptroller of the Currency.}{Report}{FDIC-Q18, FDIC-Q19, PCA-Q1, PCA-Q2, OCCL-Q1}
+\entrow{N7}{insurer}{Not in the model as stated. Bears the loss when a bank fails, so it takes part in prompt corrective action and prices its insurance on the bank's capital.}{The FDIC, as insurer of the deposits counted in \path{DEPINS}.}{Report}{FDIC-Q20, PCA-Q1, PCA-Q2, ASMT-Q1}
 
 \bottomrule
 \end{longtable}
@@ -230,8 +230,8 @@ ID & Entity & Role in the model & Counterpart and observation & Status & Evidenc
 
 The edges of the ledger: what an agent does to an entity, each leaving a
 record. A rule enters only through the agent who enforces it; the
-enforcing actions of the supervisor and the insurer are added once their
-sources are read.
+enforcing actions of the supervisor and the insurer are A9 to A11, from
+the statute and the regulations read for them.
 
 \footnotesize
 \begin{longtable}{@{}P{0.6cm}P{2.4cm}P{2.6cm}P{5.0cm}P{1.4cm}P{3.0cm}@{}}
@@ -244,14 +244,17 @@ ID & Agent, action, entity & Role in the model & Record & Status & Evidence \\
 ID & Agent, action, entity & Role in the model & Record & Status & Evidence \\
 \midrule
 \endhead
-\actrow{A1}{bank pays dividends to investors}{The singular control, which draws down equity (G14).}{Cash dividends on common and preferred stock, \path{EQCDIV}, year to date.}{Report}{FDIC-Q8}
+\actrow{A1}{bank pays dividends to investors}{The singular control, which draws down equity (G14). A capital distribution under prompt corrective action, barred when it would leave the bank undercapitalized (A9).}{Cash dividends on common and preferred stock, \path{EQCDIV}, year to date.}{Report}{FDIC-Q8, PCA-Q3, PCA-Q5}
 \actrow{A2}{investors buy stock in equity}{One source of a recapitalisation (G15).}{Net sale, conversion, acquisition or retirement of capital stock, \path{EQCSXQ}, quarterly. It nets the bank's own buybacks and its employee stock ownership plan, which the record does not separate.}{Report}{FDIC-Q9, FDIC-Q10}
-\actrow{A3}{investors inject capital into equity}{The other source of a recapitalisation, by the parent holding company (G15).}{Transactions with the parent holding company, \path{EQCBHCTR}, year to date. They include dividends paid to the parent in property.}{Report}{FDIC-Q12}
+\actrow{A3}{investors inject capital into equity}{The other source of a recapitalisation, by the parent holding company (G15).}{Transactions with the parent holding company, \path{EQCBHCTR}, year to date. They include dividends paid to the parent in property. The supervisor requires a holding company to serve as a source of financial strength for its bank.}{Report}{FDIC-Q12, PCA-Q9}
 \actrow{A4}{insured creditors deposit at and withdraw from the bank}{The liability shock, taken as given (G9).}{The change in estimated insured deposits \path{DEPINS} between reports.}{Report}{FDIC-Q20}
 \actrow{A5}{bank takes risky exposure}{The risky exposure, the regular control, bounded by the regulatory cap (G2).}{Risk-weighted assets \path{RWAJT} over total assets \path{ASSET}.}{Report}{FDIC-Q3, RCR-Q5}
 \actrow{A6}{supervisor supervises the bank}{Holds the bank to the regulatory cap and the requirement.}{The bank's primary federal regulator, \path{REGAGNT}.}{Report}{FDIC-Q18, FDIC-Q19}
 \actrow{A7}{uninsured creditors lend to and withdraw from the bank}{Not in the model as stated; MMP's wholesale funding.}{The change in volatile liabilities \path{VOLIAB} between reports, and in estimated uninsured deposits \path{DEPUNA} for banks of \$1 billion or more.}{Report}{FDIC-Q22, FDIC-Q23, FDIC-Q24, FDIC-Q25}
 \actrow{A8}{insurer insures the insured creditors}{Not in the model as stated.}{The estimated insured deposits \path{DEPINS}.}{Report}{FDIC-Q20}
+\actrow{A9}{supervisor assigns the bank a capital category, with its restrictions}{Enforces the requirement: the bank's category sets which actions bind, from the bar on distributions (A1) to an order to sell shares.}{The capital category follows from the ratios the bank reports: well capitalized needs a total risk-based ratio of at least 10.0\%, adequately capitalized at least 8.0\%. Read from Tier 1 capital \path{RBCT1J}, tier 2 capital \path{RBCT2} and risk-weighted assets \path{RWAJT}; the directives themselves are not public.}{Rule}{OCC-Q1, OCC-Q2, OCC-Q3, OCC-Q4, OCC-Q6, PCA-Q5, PCA-Q6, PCA-Q7, RCR-Q7}
+\actrow{A10}{supervisor closes the bank}{The counterpart of the model's distress boundary (G1 at one, equity zero), reached earlier: within 90 days of a bank's tangible equity falling to 2\% of total assets, the supervisor must appoint a receiver or take another action the insurer concurs in.}{Receivership after critical undercapitalization; the FDIC's record of failed banks is not among the sources read.}{Rule}{PCA-Q4, PCA-Q8, OCC-Q5}
+\actrow{A11}{insurer prices the bank's deposit insurance}{Not in the model as stated. A bank with more capital pays less for its insurance.}{The assessment rate of a small bank, the uniform amount plus pricing multipliers times seven financial ratios, the first the leverage ratio; the multiplier on the leverage ratio is negative (ASMT-D1).}{Rule}{ASMT-Q1, ASMT-Q2, ASMT-Q3, ASMT-Q4}
 
 \bottomrule
 \end{longtable}

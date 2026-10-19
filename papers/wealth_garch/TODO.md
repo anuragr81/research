@@ -724,4 +724,18 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   the supervisor (prompt corrective action), the insurer (assessments,
   resolution) and their scope (US liquidity rule), from primary sources
   fetched and recorded in lit/.
+- 2026-10-19. Enforcers' actions sourced (author's request). Four primary
+  sources fetched from GovInfo, pinned and recorded in lit/ with page-checked
+  quotations and Lean lemmas: 12 U.S.C. 1831o (prompt corrective action;
+  purpose, the insurer's least loss) and 1831o-1 (source of strength),
+  lit/usc_2023; OCC 12 CFR part 6 (capital categories: well capitalized 10.0%,
+  adequately 8.0%, critical 2% tangible equity), lit/occ_pca_2024; OCC 12 CFR
+  part 50 (liquidity rule only for GSIB, Category II and III banks),
+  lit/occ_lcr_2024; FDIC 12 CFR part 327 (assessment rate linear in seven
+  ratios, negative multiplier on the leverage ratio), lit/fdic_assess_2024.
+  New actions A9 (supervisor assigns capital category and its restrictions),
+  A10 (supervisor closes, at 2% tangible equity rather than the model's zero),
+  A11 (insurer prices insurance on capital); A1 and A3 cite their legal
+  grounds. Lean: distribution_allowed_iff, critical_iff,
+  assessment_falls_in_leverage, with controls.
 

@@ -52,6 +52,9 @@ EDGES = {
     "A6": {"agent": "supervisor", "target": "bank", "label": "supervises", "records": ("REGAGNT",)},
     "A7": {"agent": "uninsured creditors", "target": "bank", "label": "lend and withdraw", "records": ("VOLIAB", "DEPUNA")},
     "A8": {"agent": "insurer", "target": "insured creditors", "label": "insures", "records": ("DEPINS",)},
+    "A9": {"agent": "supervisor", "target": "bank", "label": "assigns capital category, restricts", "records": ("RBCT1J", "RWAJT")},
+    "A10": {"agent": "supervisor", "target": "bank", "label": "closes", "records": ()},
+    "A11": {"agent": "insurer", "target": "bank", "label": "prices insurance on capital", "records": ()},
 }
 
 
@@ -117,7 +120,7 @@ def verify():
         check(f"LM-9 {eid}: the agent is an agent node and the target a node",
               NODES.get(e["agent"], {}).get("kind") == AGENT and e["target"] in NODES, (e["agent"], e["target"]))
         check(f"LM-10 {eid}: the row names its agent and its target", e["agent"] in row[1] and e["target"] in row[1], row[1])
-        check(f"LM-11 {eid}: status is Report", row[4] == "Report", row[4])
+        check(f"LM-11 {eid}: status is Report or Rule", row[4] in OBSERVED, row[4])
         missing = [f for f in e["records"] if f not in row[3]]
         check(f"LM-12 {eid}: every record field is in the row", not missing, missing)
     check("LM-13 every Actions row is an edge of the ledger", set(actions) == set(EDGES), sorted(set(actions) ^ set(EDGES)))

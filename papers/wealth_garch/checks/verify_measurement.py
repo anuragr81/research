@@ -12,7 +12,7 @@ from computed import code_block, pin_mismatches, reproduce
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATUS = {"Rule", "Report", "Calibration", "Unobserved", "Output"}
-REGULATORY = ("B3-Q", "LCR-Q", "RCR-Q", "FDIC-Q")
+REGULATORY = ("B3-Q", "LCR-Q", "RCR-Q", "FDIC-Q", "PCA-Q", "OCC-Q", "OCCL-Q", "ASMT-Q")
 OUTCOMES = {"Tracked", "Holds", "Fails", "Not measured"}
 TERM_STATUS = {"Agreed", "In use", "Proposed"}
 BANNED = ["loss aversion", "payout barrier", "injection trigger", "recapitalisation boundary", "volatility ratio"]

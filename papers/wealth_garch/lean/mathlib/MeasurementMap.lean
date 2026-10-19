@@ -88,4 +88,28 @@ theorem control_leverage_needs_l0_lt_one :
     ¬ ((1 : ℝ) ≤ (2 - 1) / 2) ∧ (1 : ℝ) / (1 - 1) ≤ (2 : ℝ) / 1 - 1 := by
   norm_num
 
+theorem distribution_allowed_iff {k C d R : ℝ} (hR : 0 < R) :
+    k ≤ (C - d) / R ↔ d ≤ C - k * R := by
+  rw [le_div_iff₀ hR]
+  constructor <;> intro h <;> linarith
+
+theorem control_distribution_needs_positive_rwa :
+    ¬ ((1 / 10 : ℝ) ≤ (1 - 0) / 0) ∧ (0 : ℝ) ≤ 1 - (1 / 10) * 0 := by
+  norm_num
+
+theorem critical_iff {E A : ℝ} (hA : 0 < A) : E / A ≤ 2 / 100 ↔ E ≤ 2 / 100 * A := by
+  rw [div_le_iff₀ hA]
+
+theorem control_critical_needs_positive_assets :
+    (1 : ℝ) / 0 ≤ 2 / 100 ∧ ¬ ((1 : ℝ) ≤ 2 / 100 * 0) := by
+  norm_num
+
+theorem assessment_falls_in_leverage {u m o l1 l2 : ℝ} (hm : m < 0) (hl : l1 < l2) :
+    u + m * l2 + o < u + m * l1 + o := by
+  nlinarith
+
+theorem control_assessment_needs_negative_multiplier :
+    ¬ ((0 : ℝ) + 1 * 2 + 0 < 0 + 1 * 1 + 0) := by
+  norm_num
+
 end MeasurementMap
