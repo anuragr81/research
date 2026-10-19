@@ -14,9 +14,8 @@ R1) are rows of Paper A2.
 
 | Path | Role |
 |---|---|
-| `skeleton_ClassMarkers.tex` | The skeleton, and the only canonical statement of the results. |
+| `skeleton_ClassMarkers.tex` | The skeleton, and the only canonical statement of the results. Its appendix Terminology and measurement map names every object of the model once, with its type, what it represents, whether it is directly observed and how an observer obtains it, and is the paper's only terminology. |
 | `ledger_picture.tex` | The picture of Figure 1, two entities and fifteen actions. The manuscript includes it, and `notes/ledger_diagram.tex` draws it alone for the planning notes. |
-| `MEASUREMENT_MAP.tex` | Companion note. Every object of the model with one name, its type, what it represents, whether it is directly observed and how an observer obtains it. Its Name column is the terminology. |
 | `TODO.md` | The pass plan, the claim queue, the author's decisions and the novelty ledger. Read it first. |
 | `lean/mathlib/` | Lake project pinned to Lean `v4.24.0-rc1` and Mathlib `14871d5`. |
 | `checks/` | `verify_mathlib.py` (build and axiom audit), `verify_manuscript.py` (rules MS-1 to MS-8), `verify_docs.py` (stated counts against the audit), `verify_measurement_map.py` (rules MM-1 to MM-10), `verify_no_law.py` (no law of motion, NL-1 to NL-5), `lean_files_table.py` (the linked table of Lean files in Appendix B). |
@@ -31,7 +30,6 @@ R1) are rows of Paper A2.
     ./verify.sh
     lit/verify_lit.sh
     pdflatex skeleton_ClassMarkers.tex && bibtex skeleton_ClassMarkers && pdflatex skeleton_ClassMarkers.tex && pdflatex skeleton_ClassMarkers.tex
-    pdflatex MEASUREMENT_MAP.tex
 
 `lean/mathlib/.lake/` is not committed. On this machine it was copied, by
 reflink, from the entry-contest bundle, which pins the same toolchain and

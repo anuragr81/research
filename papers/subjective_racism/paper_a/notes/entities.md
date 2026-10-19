@@ -3,7 +3,7 @@
 A planning note, not part of the paper. It takes the ledger spec's Players
 table (`papers/MANUSCRIPT_SKELETON.md`, section 4.2, with the columns ID,
 Player, Choice faced, How the model settles it, In the literature and Rows),
-the measurement map (`MEASUREMENT_MAP.tex`), the conclusions (C1, C10, C11,
+the measurement map (Appendix Terminology and measurement map of the skeleton), the conclusions (C1, C10, C11,
 C19) and the author's account of A1 (`notes/motivation_scan.md`, "Paper A1 as
 the author describes it"), and lists every entity those documents name or
 need, and every relationship between entities that a row of the restructured

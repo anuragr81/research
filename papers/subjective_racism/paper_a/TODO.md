@@ -375,8 +375,21 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
     passes and the bundle is deleted or restated as what the paper assumes,
     in the body, the rows, Primitives and scope, and Refuted conjectures.
     Stale scope text overtaken by M22 corrected (A15 reason, Budget
-    compatibility paragraph). MEASUREMENT_MAP.tex still names the
-    predecessor in nine printed places, not yet changed.
+    compatibility paragraph). MEASUREMENT_MAP.tex followed (4761d181):
+    its nine printed mentions and the old equation labels are gone.
+- [x] **D19. The measurement map moves into the manuscript. 19 Oct 2026, at
+  the author's request** ("measurement map ought to be in the manuscript
+  skeleton ... it also serves as the terminology table"). Appendix C is now
+  Terminology and measurement map (`app:terms`), with the map's Inputs,
+  Internal objects, Outputs and Structure, and it replaces the old
+  three-column Terminology table, every entry of which the map already had.
+  `MEASUREMENT_MAP.tex` is deleted. MM-1 to MM-10 read the appendix, MM-3 now
+  checks that the map is the only terminology, MM-5 ignores label and ref
+  keys, NL-4 reads the appendix, and `lean_files_table.py` takes the map's
+  Lean names from it. The writing discipline's rule 6 points to the Name
+  column. Two map wordings brought into line with D14 and D15 (social
+  distance as expected squared economic distance, the marker as indicating
+  a group).
 - [ ] **Shadow market, to develop before it enters the contributions.**
   The predecessor's `prop:shadow` (shadow information value rising in legal
   strictness, salience and the weight on social quality) has no row. Its

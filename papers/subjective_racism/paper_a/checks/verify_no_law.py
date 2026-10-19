@@ -2,8 +2,9 @@
 
 Paper A1 keeps every row that needs no law of motion for a group's standing.
 This suite fails if any object of the law of motion appears in the Lean
-build roots, in a Lean source, in skeleton_ClassMarkers.tex, in ledger_picture.tex (the figure it includes)
-or in MEASUREMENT_MAP.tex, outside TeX comments. It also fails if either TeX file, comments included,
+build roots, in a Lean source, in skeleton_ClassMarkers.tex or in ledger_picture.tex (the figure it
+includes), outside TeX comments, and checks the measurement map appendix on its own. It also fails if
+either TeX file, comments included,
 names the companion paper or uses a scope-statement macro, since Paper A1
 does not point to other papers. Controls check that an injected object of
 each kind is caught.
@@ -92,14 +93,20 @@ print("=" * 72)
 lakefile = open(os.path.join(LEAN_DIR, "lakefile.toml")).read()
 sources = {os.path.basename(f): open(f).read() for f in glob.glob(os.path.join(LEAN_DIR, "*.lean"))}
 manuscript = open(os.path.join(ROOT, "skeleton_ClassMarkers.tex")).read() + "\n" + open(os.path.join(ROOT, "ledger_picture.tex")).read()
-mmap = open(os.path.join(ROOT, "MEASUREMENT_MAP.tex")).read()
+_ms = open(os.path.join(ROOT, "skeleton_ClassMarkers.tex")).read()
+_i = _ms.find(r"\section{Terminology and measurement map}")
+_j = _ms.find(r"\section{", _i + 1)
+mmap = _ms[_i:_j] if _i >= 0 else ""
+if not mmap:
+    print("[FAIL] the measurement map appendix is missing")
+    results.append(False)
 real = analyse(lakefile, sources, manuscript, mmap)
 print(f"      Lean sources: {len(sources)}")
 labels = {"NL-1": "no build root is a module of the law of motion",
           "NL-2": "no Lean source names a module or declaration of the law of motion",
           "NL-3": "the manuscript names no object of the law of motion",
-          "NL-4": "the measurement map names no object of the law of motion",
-          "NL-5": "neither TeX file names the companion paper, even in a comment"}
+          "NL-4": "the measurement map appendix names no object of the law of motion",
+          "NL-5": "no TeX file names the companion paper, even in a comment"}
 for k in sorted(real):
     ok, d = real[k]
     check(f"{k} {labels[k]}", ok, "" if ok else d)

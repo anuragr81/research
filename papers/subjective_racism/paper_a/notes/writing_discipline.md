@@ -74,6 +74,11 @@ that world out. A claim that cannot name its falsifier does not enter.
 
 ## 6. Manuscript terminology only, fixed and agreed (A)
 
+- **Paper A1.** The terminology is the Name column of the appendix
+  Terminology and measurement map of `skeleton_ClassMarkers.tex`
+  (`app:terms`), and the paper has no other (rule MM-3). A term not in that
+  column is not a manuscript term. The examples below come from the
+  reference bundle's paper.
 - One name per object. Agreed 2026-09-27: **full adoption** ($\omega=1$),
   **no adoption** ($\omega=0$), **partial adoption** (interior), **adoption
   weight** ($\omega$). "Amnestic" only where Hawthorne is quoted; "primacy"

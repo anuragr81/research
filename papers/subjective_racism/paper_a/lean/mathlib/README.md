@@ -112,7 +112,7 @@ rate is the constant `k = s δ F β₀`. `P c = γ c² + (μ + k − γ) c − �
 | `dip_of_trap` | For the canonical map, the midpoint of two interior fixed points is a dip |
 | `control_dip_needed` | `F ≡ 0` puts the map above the diagonal on `[0, 1)` |
 
-## MeasurementMap.lean, the recovery formulas of MEASUREMENT_MAP.tex
+## MeasurementMap.lean, the recovery formulas of the measurement map
 
 | Theorem | Content |
 |---|---|

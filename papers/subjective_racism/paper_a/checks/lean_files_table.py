@@ -71,7 +71,8 @@ def table(tex):
     for rid, body in re.findall(r"\\paragraph\{(R\d+)\.(.*?)(?=\\paragraph|\\section)", tex, re.S):
         for name in re.findall(r"\\lean\{([A-Za-z0-9]+)\.", body):
             cites.setdefault(name, set()).add(rid)
-    mm = (HERE / "MEASUREMENT_MAP.tex").read_text()
+    i = tex.find(r"\section{Terminology and measurement map}")
+    mm = tex[i:tex.find(r"\section{", i + 1)] if i >= 0 else ""
     for name in set(re.findall(r"\\lean\{([A-Za-z0-9]+)\.", mm)):
         cites.setdefault(name, set()).add("Measurement map")
     files = sorted(p.stem for p in (HERE / "lean" / "mathlib").glob("*.lean"))

@@ -1,13 +1,13 @@
-"""Checks MEASUREMENT_MAP.tex, the companion note that names every object of
-the model. Rules MM-1 to MM-10, each run on the note and on a well-formed and
-a faulty sample.
+"""Checks the measurement map, Appendix app:terms of skeleton_ClassMarkers.tex,
+which names every object of the model and is the paper's terminology. Rules
+MM-1 to MM-10, each run on the map and on a well-formed and a faulty sample.
 
 MM-1  every \\mm row has six non-empty fields and a plain-English name
 MM-2  names are unique, one name per object
-MM-3  every term of the manuscript's Terminology appendix is a name in the map
+MM-3  the map is the manuscript's only terminology, with no second table of terms
 MM-4  every "Obtained how" entry begins with one of the six status words
-MM-5  no colon in the prose of the note outside mathematics
-MM-6  every Lean theorem the note names is an audited declaration
+MM-5  no colon in the prose of the map outside mathematics
+MM-6  every Lean theorem the map names is an audited declaration
 MM-7  every row says Yes or No under Directly observed, Yes exactly when its
       last column begins with "Recorded"
 MM-8  no symbol names two rows
@@ -92,16 +92,25 @@ def lean_declarations():
     return names
 
 
-def manuscript_terms(tex):
+MAP_HEAD = r"\section{Terminology and measurement map}"
+
+
+def map_section(tex):
+    """The map appendix of the manuscript, wrapped as a document body."""
+    i = tex.find(MAP_HEAD)
+    if i < 0:
+        return ""
+    j = tex.find(r"\section{", i + len(MAP_HEAD))
+    return "\\begin{document}\n" + tex[i:j if j >= 0 else len(tex)] + "\n\\end{document}\n"
+
+
+def other_glossaries(tex):
+    """Tables of terms outside the map, each a second terminology."""
     tex = strip_comments(tex)
-    m = re.search(r"\\section\{Terminology\}(.*?)\\section\{", tex, re.S)
-    body = m.group(1) if m else ""
-    terms = []
-    for ln in body.splitlines():
-        m = re.match(r"^([A-Z][A-Za-z\- ]*?) & ", ln)
-        if m:
-            terms.append(m.group(1).strip())
-    return terms
+    i = tex.find(MAP_HEAD)
+    j = tex.find(r"\section{", i + len(MAP_HEAD)) if i >= 0 else -1
+    rest = tex if i < 0 else tex[:i] + (tex[j:] if j >= 0 else "")
+    return re.findall(r"\\textbf\{Term\}", rest)
 
 
 GREEK = ("alpha beta gamma delta varepsilon epsilon zeta eta theta kappa lambda mu nu xi pi "
@@ -164,6 +173,7 @@ def plain_problems(arows, owner, lean=frozenset()):
 
 def prose_only(body):
     body = re.sub(r"\\lean\{[^{}]*\}", " ", body)
+    body = re.sub(r"\\(?:label|ref|pageref|eqref)\{[^{}]*\}", " ", body)
     body = re.sub(r"\\\[.*?\\\]", " ", body, flags=re.S)
     body = re.sub(r"\$[^$]*\$", " ", body)
     return body
@@ -179,9 +189,7 @@ def analyse(tex, terms, lean, arows):
     names = [r[1].strip() for r in rows]
     dup = sorted({n for n in names if names.count(n) > 1})
     out["MM-2"] = (not dup, f"names used twice {dup}")
-    low = {n.lower() for n in names}
-    missing = [t for t in terms if t.lower() not in low]
-    out["MM-3"] = (not missing, f"manuscript terms absent from the map {missing}")
+    out["MM-3"] = (bool(rows) and not terms, f"second tables of terms {terms}")
     bad4 = [r[1] for r in rows if not r[5].strip().startswith(STATUS)]
     out["MM-4"] = (not bad4, f"rows whose last column has no status word {bad4}")
     doc = tex.split(r"\begin{document}", 1)[-1]
@@ -210,8 +218,8 @@ def analyse(tex, terms, lean, arows):
 
 
 FIX_LEAN = {"Fixture.flat_posterior"}
-FIX_TERMS_GOOD = ["Prior"]
-FIX_TERMS_BAD = ["Ghost term"]
+FIX_TERMS_GOOD = []
+FIX_TERMS_BAD = [r"\textbf{Term}"]
 
 GOOD = r"""
 \begin{document}
@@ -239,21 +247,21 @@ FIX_A_BAD = [["A1", r"The prior $\pi_g(c)$ is scaled by $\delta$.",
 
 lean = lean_declarations()
 print("=" * 72)
-print("MEASUREMENT MAP (MEASUREMENT_MAP.tex)")
+print("MEASUREMENT MAP (Appendix app:terms of skeleton_ClassMarkers.tex)")
 print("=" * 72)
-tex = open(os.path.join(ROOT, "MEASUREMENT_MAP.tex")).read()
 mtex = open(os.path.join(ROOT, "skeleton_ClassMarkers.tex")).read()
-terms = manuscript_terms(mtex)
+tex = map_section(mtex)
+terms = other_glossaries(mtex)
 arows = assumption_rows(mtex)
 real, nrows = analyse(tex, terms, lean, arows)
-print(f"      rows in the map: {nrows}; terms in the manuscript's Terminology appendix: {len(terms)}; "
+print(f"      rows in the map: {nrows}; tables of terms outside the map: {len(terms)}; "
       f"assumptions: {len(arows)}")
 names = {"MM-1": "every row has six non-empty fields and a plain-English name",
          "MM-2": "one name per object",
-         "MM-3": "every manuscript term is a name in the map",
+         "MM-3": "the map is the only terminology",
          "MM-4": "every last column begins with a status word",
          "MM-5": "no colon in the prose",
-         "MM-6": "every Lean name the note cites is declared",
+         "MM-6": "every Lean name the map cites is declared",
          "MM-7": "Directly observed is Yes exactly for recorded objects",
          "MM-8": "no symbol names two rows",
          "MM-9": "every symbol of every assumption is a symbol of the map",
