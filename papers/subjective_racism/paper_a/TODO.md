@@ -350,6 +350,33 @@ pass 6 and readable from git at commit `91a74cb1` (`RETIREMENT.md`).
   shows the loss rising in the gap for any activity payoff concave in the
   level, so the cost of the economic distance does not need the square.
   The bar sentence now appears once, in 1.3, and left 1.2.1 and 3.2.1.
+- [x] **D18. The Introduction's answer in plain words, the Model in five
+  parts, venue claims apart, and no history in the paper. 19 Oct 2026, at
+  the author's request** (nine queued changes, applied on "go ahead apply
+  them").
+  - 1.2 Answer has no subsubsections. It explains group sufficiency and the
+    two-step belief with the stranger vignette (no row references), previews
+    the bar story in the social-distance paragraph (the full sentence stays
+    in 1.3), says what the paper adds to Akerlof's utility (the hidden
+    position, and budgets as the reason distance costs, neither needing the
+    square), and has a venue paragraph built from M15, M23 and C11.
+  - The old 1.2.2 In detail is now 2.1 Overview. The headline table stays
+    in 1.2. New 2.3 Model description after Players sets the model out in
+    the same order, with assumption IDs and player IDs. Assumptions 2.4,
+    Results 2.5. This departs from `papers/MANUSCRIPT_SKELETON.md`, which
+    asks for an Answer citing rows and a Model of three subsections; no MS
+    check enforces either.
+  - Row M20 split. M20 keeps the sensitivity and the engagement threshold.
+    New M23 has the admission threshold (Implications.cAdm_*), and sits with
+    M15 outside the levels of Table tab:levels. The results, conclusions
+    and pending tables each have an "Observers and groups" block and a
+    "Venues" block (M15, M23; C11; C15).
+  - Every printed mention of the predecessor, the author's dated choices,
+    passes and the bundle is deleted or restated as what the paper assumes,
+    in the body, the rows, Primitives and scope, and Refuted conjectures.
+    Stale scope text overtaken by M22 corrected (A15 reason, Budget
+    compatibility paragraph). MEASUREMENT_MAP.tex still names the
+    predecessor in nine printed places, not yet changed.
 - [ ] **Shadow market, to develop before it enters the contributions.**
   The predecessor's `prop:shadow` (shadow information value rising in legal
   strictness, salience and the weight on social quality) has no row. Its

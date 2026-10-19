@@ -51,7 +51,10 @@ def pointer_hits(tex):
 def tex_hits(body):
     hits = []
     for s in TEX_FORBIDDEN:
-        if s.startswith("\\") or s.endswith("(") or s.startswith("^") or "_" in s:
+        if s.startswith("\\") and s[1:].isalpha():
+            # a whole control word, so \mu does not match \multicolumn
+            found = re.search(re.escape(s) + r"(?![A-Za-z])", body) is not None
+        elif s.startswith("\\") or s.endswith("(") or s.startswith("^") or "_" in s:
             found = s in body
         else:
             found = re.search(r"(?i)\b" + re.escape(s), body) is not None

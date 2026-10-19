@@ -75,7 +75,7 @@
 
 \title{Class Read from Group Markers}
 \author{Anurag Srivastava}
-\date{Manuscript skeleton of Paper A1, 14 October 2026, revised 17 October 2026}
+\date{19 October 2026}
 
 \begin{document}
 \maketitle
@@ -96,113 +96,89 @@ its clients read class the same way.
 
 \subsection{Answer}
 
-\subsubsection{In plain words}
-
 The observer cannot see a person's class and sees a marker instead. The
 marker tells the observer which group the person is likely to belong to,
-and nothing more. Under group sufficiency the observer's belief about the
-person's class is the prior of each group, mixed by the posterior on group.
-The marker moves the group weights, and the picture of class within each
-group stays as the prior had it.
+and nothing more about class. That second part is group sufficiency.
+Within a group, a person of low class and a person of high class are
+equally likely to carry the marker, so once the observer knows the group,
+the marker adds nothing about class. The observer's belief about the
+person's class is then built in two steps. The first step takes, for each
+group, the share of the group's members at each class, which the observer
+held before seeing the marker. The second step weights each group's shares
+by the observer's new belief that the person belongs to that group, the
+posterior on group, and adds the weighted shares across groups. The marker
+moves the group weights, and the shares of class within each group stay as
+the prior had them. Suppose a stranger walks into a room, and the observer
+thinks the stranger equally likely to belong to a group of standing 0.7 and
+to a group of standing 0.3. The observer's expected class for the stranger
+is then 0.50. The stranger speaks with an accent more common in the second
+group, and the observer now puts one fifth on the first group and four
+fifths on the second. The observer's expected class for the stranger falls
+to 0.38. The accent says nothing about the stranger's place within either
+group, and moves the expected class only by moving the weight between the
+two groups.
 
-The observer engages or refuses by the social distance. For each group,
-that distance adds the squared gap between the observer's own class and the
-group's standing to the group's dispersion, and weights the sum by the posterior
-on that group. The observer engages when the social distance is at most
-the engagement threshold, and refuses when the social distance exceeds
-the threshold. The observer's own class sits inside the gap, so a higher
-standing of the outsider group brings that group nearer to observers who
-stand above the standing and takes the group further from observers who
-stand below. The discrimination-rate function, the refusal share among the
-observers, therefore does not rise in the standing among observers at or
-above the standing, and does not fall among observers at or below the
-standing.
+The observer engages or refuses by the social distance, the observer's
+reading of an economic distance that no one sees. The economic distance is
+the gap between two classes, and budgets make that gap costly. A poor man
+may walk into a bar or club and engage with richer members, but he cannot
+sustain those friendships if he cannot afford to keep going back. The
+social distance is the observer's estimate of that gap from the marker. For
+each group, the social distance adds the squared gap between the observer's
+own class and the group's standing to the group's dispersion, and weights
+the sum by the posterior on that group. The observer engages when the
+social distance is at most the engagement threshold, and refuses when the
+social distance exceeds the threshold. The observer's own class sits
+inside the gap, so a higher standing of the outsider group brings that
+group nearer to observers who stand above the standing and takes the group
+further from observers who stand below. The discrimination-rate function,
+the refusal share among the observers, therefore does not rise in the
+standing among observers at or above the standing, and does not fall among
+observers at or below the standing.
 
-The engagement utility is the baseline value less the sensitivity times
-the squared class gap, against the outside option. That form is not a
-taste for one's own class, and it is not taken from the predecessor as
-given. It comes from budgets, so the economic distance, the gap between
-two classes, costs something even though no one sees it. The social distance is what
-the observer makes of that gap from the marker. Class affords a budget
-through the budget slope, a pair that engages shares one activity at one
-activity level, and each person pays for that level from the own budget.
-The richer person has the costlier ideal level, the pair settles at the
-compromise level between the two ideal levels, and each side loses the
-sensitivity times the squared class gap. Pooled budgets remove that loss,
-and so does a private consumption whose value does not diminish, so a cost
-to the class gap needs separate budgets and a diminishing value of private
-consumption. Part of the answer does not depend on the square. Whatever the
-benefit of contact, so long as it falls with the economic distance, a group
-whose standing rises does not draw more refusal from observers above every
-member, and does not draw less from observers below every member. The sign
-of the dispersion does depend on it. The square makes a wider dispersion a cost to
-every observer, while a benefit that flattens with distance makes it a gain
-to observers far from the group.
+The engagement utility starts from Akerlof's model of social distance, in
+which the value of contact falls with the distance between two people's
+positions. The paper adds two things to that utility. The first is that the
+position is hidden. In Akerlof's model everyone knows everyone's position,
+so his distance is the economic distance here with nothing hidden. Here the
+observer sees only the marker and engages by the social distance, which
+weighs every class the person might hold, so the observer's decision
+depends on how far a group's standing lies from the observer's own class
+and on how widely the group's members are dispersed. The second is a reason
+why distance costs anything. Akerlof takes the fall in value with distance
+as given, and here the fall comes from budgets, as in the bar. Class
+affords a budget, a pair that engages shares one activity at one activity
+level, and each person pays for that level from the own budget. The richer
+person wants the costlier level, the pair settles at a compromise between
+the two ideal levels, and each side ends at a level it would not have
+chosen. Pooled budgets remove that loss, and so does a private consumption
+whose value does not diminish. Neither addition needs the square. The loss
+rises with the economic distance for any activity payoff concave in the
+activity level, and for any value of contact that falls with the economic
+distance a group whose standing rises does not draw more refusal from
+observers above every member, and does not draw less from observers below
+every member. The square adds the exact form, in which the social distance
+is the squared gap to the standing plus the dispersion, and a wider
+dispersion costs every observer.
 
-Passing and the platform follow from the standing. When the better-off
-members of the outsider group pass, the visible mean falls, and the refusal
-rate against the visible group does not fall. A platform whose profit rises
-with the admission rate admits outsiders when the outsider group's standing
-is above the admission threshold, and excludes outsiders below the
-threshold, where an admittee's willingness to pay falls short of the
-composition externality on the host clients.
+When the better-off members of the outsider group pass, suppressing the
+marker, the visible mean falls, and the refusal rate against the members
+who stay does not fall.
 
-\subsubsection{In detail}
-
-The marker moves the belief about class only through the belief about the
-group. Under group sufficiency the marker's likelihood within a group does
-not depend on class, and the two forms of that assumption, on the likelihood
-and on the posterior, are equivalent under a prior with full support (M1).
-The Bayesian posterior on class is then the within-group class distributions
-mixed by the posterior on group (M2). Any weights on the groups are the
-Bayesian posterior on group for some marker likelihood, when the prior gives
-every group positive weight (M3).
-The predecessor's stranger, whose expected class moves from 0.50 to 0.38 on
-hearing an accent, is such a mixture (M17).
-
-The belief becomes a decision through the engagement threshold. Under the
-posterior on group, the expected squared economic distance from an observer to
-the person is the sum over groups of the squared gap between the observer's
-own class and the group's standing plus the group's dispersion, each weighted by
-the posterior on that group (M18). Read as the outsider with certainty, the
-observer refuses exactly when the squared gap to the outsider's standing plus
-the outsider's dispersion exceeds the threshold (M18). The share of observers who
-refuse does not rise in the outsider's standing among observers who stand at
-or above it, and does not fall among observers who stand at or below it, so
-the discrimination-rate function that M14 takes as given is derived, together
-with the range on which its hypothesis holds (M18). With two groups, more
-weight on the outsider raises the social distance exactly when the
-outsider's social distance exceeds the host's (M18).
-
-The quadratic form of the engagement utility comes from separate budgets.
-Class affords a budget, a pair that engages shares one activity at one
-level, each pays for that level from the own budget, and the richer person
-wants the costlier level because the marginal unit of private consumption is
-worth less to the richer person (M19). The level the pair settles on
-minimises the sum of the two losses from the two ideal levels, and each
-person then loses the sensitivity times the squared class gap, the same
-amount on either side (M19). The sensitivity is the private curvature
-squared times the budget slope squared, over eight times the sum of the two
-curvatures, so the engagement threshold of M18 is reached from the budgets
-(M19). The compromise lies within the poorer partner's budget exactly when
-the class gap is at most a bound that rises in the poorer partner's budget
-(M19). Pooled budgets give a payoff that depends on the sum of the two
-budgets and not on the gap, and a linear private utility gives the same ideal
-level to every budget and no loss at all, so neither gives class homophily
-(M19).
-
-Leaving the visible group lowers it. When the members who pass are those
-above every member who stays, the visible mean falls, and a passing gain
-that does not fall in class together with a passing cost that does not rise
-in it makes the passers such a set (M14). Under a discrimination-rate
-function that does not rise in standing, the refusal rate against those who
-stay does not fall (M14).
-
-A platform whose profit is linear in the admission rate excludes every
-outsider applicant exactly when an admittee's willingness to pay falls short
-of the composition externality, which is exactly when the outsider's
-standing is below the admission threshold, and above the threshold full
-admission earns more than exclusion (M15).
+Platforms screen by the same reading. A restaurant, a club or a rental site
+admits guests whose class it cannot see, and its host clients read each
+guest's class from the markers as any observer does. The platform earns
+each outsider guest's willingness to pay and bears the composition
+externality, what the host clients lose when outsiders lower the room's
+standing. The platform excludes the outsider group exactly when the group's
+standing is below the admission threshold, where the willingness to pay no
+longer covers that loss, and above the threshold admitting every outsider
+earns more than admitting none. The admission threshold is lower, so the
+platform admits groups of lower standing, when guests pay more, when the
+room is larger and when the platform weighs objective quality more. The
+threshold is higher when the room has more host clients. The platform
+excludes without any observer refusing anyone, through what its clients
+read from markers.
 
 Table~\ref{tab:headlines} states this answer as headlines, each with the
 model rows it rests on and what it does not claim.
@@ -233,7 +209,7 @@ model rows it rests on and what it does not claim.
   engagement threshold. The share of observers who refuse does not rise in a
   group's standing among observers at or above that standing, and does not
   fall among observers at or below it.}{M18}{The engagement utility is the
-  predecessor's quadratic form taken as given (A14), and the baseline value,
+  quadratic form of A14, which M19 derives from separate budgets, and the baseline value,
   the sensitivity and the outside option enter only through the threshold.
   The decomposition needs priors that sum to one. Each monotonicity
   statement holds on its own range and nothing is claimed off it, and one
@@ -282,8 +258,8 @@ model rows it rests on and what it does not claim.
 \krow{K3}{A platform with profit linear in the admission rate excludes every
   outsider applicant exactly when the outsider's standing is below the
   admission threshold, and above it full admission earns more than
-  exclusion.}{M15}{The admission objective is the predecessor's first-order
-  condition taken as a definition, and the willingness to pay and the
+  exclusion.}{M15}{The admission objective is assumed linear in the
+  admission rate (A13), and the willingness to pay and the
   composition externality are not derived (M15,
   Appendix~\ref{app:scope}). That full admission earns more than exclusion
   is shown for the two ends of the admission rate, and no row ranks the
@@ -359,21 +335,85 @@ admittee's willingness to pay falls short of the composition externality on
 the host clients, and above the threshold full admission earns more than
 exclusion (M15). The admission threshold does not rise in the willingness
 to pay, the room size or the objective weight, and does not fall in the
-number of host clients (M20). Exclusion here needs no observer to refuse
+number of host clients (M23). Exclusion here needs no observer to refuse
 anyone. It follows from what the clients read from markers and from the
 platform's profit, a discrimination mediated by information that a bar on
 group criteria does not reach. Price screening that certifies an unseen
 type is Pesendorfer's (L24) and Corneo and Jeanne's (L17), so the
 contribution is the exclusion built from the clients' reading of a marker,
-and three parts of it are open. The clients' value of a room is the
-predecessor's, the standing read from the markers, and is not yet derived
-from the engagement utility of the first two contributions. The willingness
+and three parts of it are open. The clients value a room by the standing
+they read from the markers, a value not yet derived from the engagement utility of the first two contributions. The willingness
 to pay and the composition externality are not derived (A13). Whether the
 platform studies already have the result waits on C15.
 
 \section{Model}
 
+\subsection{Overview}
+
+This subsection walks through the results in the order of the question,
+each sentence with the model rows it rests on. Section~\ref{sec:players}
+lists who acts, Section~\ref{sec:description} sets the model out, and the
+assumptions and results tables state it in full.
+
+The marker moves the belief about class only through the belief about the
+group. Under group sufficiency the marker's likelihood within a group does
+not depend on class, and the two forms of that assumption, on the likelihood
+and on the posterior, are equivalent under a prior with full support (M1).
+The Bayesian posterior on class is then the within-group class distributions
+mixed by the posterior on group (M2). Any weights on the groups are the
+Bayesian posterior on group for some marker likelihood, when the prior gives
+every group positive weight (M3).
+The stranger of the Introduction, whose expected class moves from 0.50 to
+0.38 when the observer hears an accent, is such a mixture (M17).
+
+The belief becomes a decision through the engagement threshold. Under the
+posterior on group, the expected squared economic distance from an observer to
+the person is the sum over groups of the squared gap between the observer's
+own class and the group's standing plus the group's dispersion, each weighted by
+the posterior on that group (M18). Read as the outsider with certainty, the
+observer refuses exactly when the squared gap to the outsider's standing plus
+the outsider's dispersion exceeds the threshold (M18). The share of observers who
+refuse does not rise in the outsider's standing among observers who stand at
+or above it, and does not fall among observers who stand at or below it, so
+the discrimination-rate function that M14 takes as given is derived, together
+with the range on which its hypothesis holds (M18). With two groups, more
+weight on the outsider raises the social distance exactly when the
+outsider's social distance exceeds the host's (M18).
+
+The quadratic form of the engagement utility comes from separate budgets.
+Class affords a budget, a pair that engages shares one activity at one
+level, each pays for that level from the own budget, and the richer person
+wants the costlier level because the marginal unit of private consumption is
+worth less to the richer person (M19). The level the pair settles on
+minimises the sum of the two losses from the two ideal levels, and each
+person then loses the sensitivity times the squared class gap, the same
+amount on either side (M19). The sensitivity is the private curvature
+squared times the budget slope squared, over eight times the sum of the two
+curvatures, so the engagement threshold of M18 is reached from the budgets
+(M19). The compromise lies within the poorer partner's budget exactly when
+the class gap is at most a bound that rises in the poorer partner's budget
+(M19). Pooled budgets give a payoff that depends on the sum of the two
+budgets and not on the gap, and a linear private utility gives the same ideal
+level to every budget and no loss at all, so neither gives class homophily
+(M19).
+
+Leaving the visible group lowers it. When the members who pass are those
+above every member who stays, the visible mean falls, and a passing gain
+that does not fall in class together with a passing cost that does not rise
+in it makes the passers such a set (M14). Under a discrimination-rate
+function that does not rise in standing, the refusal rate against those who
+stay does not fall (M14).
+
+A platform whose profit is linear in the admission rate excludes every
+outsider applicant exactly when an admittee's willingness to pay falls short
+of the composition externality, which is exactly when the outsider's
+standing is below the admission threshold, and above the threshold full
+admission earns more than exclusion (M15). The admission threshold does not rise in
+the willingness to pay, the room size or the objective weight, and does not
+fall in the number of host clients (M23).
+
 \subsection{Players}
+\label{sec:players}
 
 Table~\ref{tab:players} lists everyone in the model, the choice each one
 faces, and how the model settles that choice. Two entries face no choice.
@@ -434,13 +474,13 @@ person, and no arrow of the platform is solid.
   {A member passes when the passing gain at the member's class is at least
   the passing cost (A12). The gain and the cost are not derived, and M14 uses
   only that the gain does not fall in class and the cost does not rise in it.}
-  {No paper read in this bundle draws the parallel.}
+  {No paper read draws the parallel.}
   {M14}
 \prow{P3}{The outsider group}{None. Its standing is the mean class of its
   visible members, a state.}
   {The standing is an input to M14 and M15. Within the generation it changes
   only by composition, when members pass (M14).}
-  {No paper read in this bundle draws the parallel.}
+  {No paper read draws the parallel.}
   {M14, M15}
 \prow{P4}{The host group}{None. Its standing is a state, as for the
   outsider group.}
@@ -486,6 +526,63 @@ are open. ``Recorded as'' marks an action that reaches the data.}
 \end{landscape}
 
 
+\subsection{Model description}
+\label{sec:description}
+
+The model has one period, and its two entities are the person and the
+platform (Figure~\ref{fig:ledger}). A person has a class $c$, one of
+finitely many values (A1), and belongs to one of finitely many groups
+$g\in\mathcal{G}$. Class is not seen at the encounter. The observer (P1)
+sees the person's marker $m$, which indicates the group, and the person
+carries the marker without choosing it (A2). Within group $g$ class has the
+prior $\pi_g(c)$, whose mean is the group's standing $\bar c_g$ and whose
+variance is the group's dispersion $\nu_g$ (A14). The outsider group (P3)
+and the host group (P4) enter the model through these two numbers.
+
+Before reading the marker, the observer holds the group weights $q(g)$. On
+reading the marker, the observer revises the group weights and the prior
+by Bayes' rule, through the marker's likelihood $\ell_g(c)$, and obtains
+the posterior on group $q'(g)$ and the posterior on class $P(c\mid m)$
+(A3). Under group sufficiency the likelihood does not depend on class
+within a group (A4), so the marker moves the group weights and leaves the
+prior within each group as it was.
+
+The observer of own class $y$ values engagement with a person of class $c$
+at the baseline value $v$ less the sensitivity $\kappa$ times the squared
+economic distance, $v-\kappa\,(c-y)^2$, against the outside option $\bar u$
+(A14). The economic distance is not seen, so the observer engages when the
+social distance $E$, the expected squared economic distance under the
+posterior on group, is at most the engagement threshold
+$\bar d=(v-\bar u)/\kappa$. The observers form a finite set $J$.
+
+The engagement utility rests on budgets (A15). Class affords the budget
+$b=\beta c$ through the budget slope $\beta$. A pair (P6) that engages
+shares one activity at one level $p$, each person pays for $p$ from the own
+budget, and the payoff from the level and from the private consumption
+$b-p$ is quadratic, with activity value $\gamma$, activity curvature $h$
+and private curvature $a$. The pair settles at the level that minimises the
+sum of the two losses from the two ideal levels. Two assumptions widen
+this for one row each. For row M21, A16 replaces the engagement utility by
+any benefit of contact $\Phi(d)$ that does not rise in the economic
+distance $d$. For row M22, A17 replaces the quadratic payoff by any
+activity payoff $\Psi(p,b)$ concave in the level, with the pair sharing a
+compromise level set by the compromise weight $\omega$.
+
+A group is a finite set of members $V$. A member of the outsider group (P2)
+passes, suppressing the marker and leaving the visible group, when the
+passing gain at the member's class is at least the passing cost, and the
+members who pass are the passers $P$ (A12). The standing of the visible
+group is the mean class of the members who stay.
+
+The platform (P5) sets the admission rate $\sigma$, the share of outsider
+applicants admitted to a room of $|A|$ attendees with $N$ host clients
+(A13). The host clients read each guest's class from the marker and weigh
+objective quality by the objective weight $\alpha$, and an admitted outsider
+member pays the willingness to pay $W$. Platform profit is
+$\Pi(\sigma)=\sigma\,\mathrm{marg}$, where the admission margin
+$\mathrm{marg}$ is the willingness to pay less the composition externality,
+the host clients' loss from the gap between the two standings.
+
 \subsection{Assumptions}
 
 Table~\ref{tab:assumptions} lists the assumptions the model rows rest on, each
@@ -514,7 +611,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
 \arow{A1}{Class takes finitely many values $c\in\mathcal{C}$.}
   {A person's class is one of a finite list of values.}
   {$c$, $\mathcal{C}$}{M1, M2, M3, M18}
-  {The Lean statements range over a finite set. The predecessor's class in
+  {The Lean statements range over a finite set. A continuous class in
   $[0,1]$ is outside the rows (Appendix~\ref{app:scope}, Class space).}
 \arow{A2}{Class is not seen at the encounter. The observer sees a marker $m$,
   which indicates one of finitely many groups $g\in\mathcal{G}$. The person
@@ -540,8 +637,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   the posterior on class.}
   {$\pi_g(c)$, $\ell_g(c)$, $q(g)$, $\pi'_g(c)$, $q'(g)$, $P(c\mid m)$}
   {M1, M2, M3, M17}
-  {The author's choice of 14 October 2026 (Appendix~\ref{app:scope}, The
-  updating rule).}
+  {A second rule for the group weights adds nothing (M3,
+  Appendix~\ref{app:scope}, The updating rule).}
 \arow{A4}{Group sufficiency. Within a group the marker's likelihood does not
   depend on class, $\ell_g(c)=Z_g$ for every $c$.}
   {Once the group is known, the marker says nothing more about class. Within
@@ -549,7 +646,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   every class, and so equals the marginal.
   Lean, \lean{Assumptions.marginal\_of\_flat}.}
   {$\ell_g(c)$, $Z_g$, $\lambda_g$}{M1, M2, M3}
-  {The predecessor's assumption. M1 shows its likelihood and posterior forms
+  {M1 shows the likelihood and posterior forms
   agree under a prior with full support (Appendix~\ref{app:scope}, Group
   sufficiency).}
 \arow{A12}{A group is a finite set of people $V$, each with a class $c$. A
@@ -561,7 +658,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   passing gain at the member's class is at least the passing cost. The
   members who pass are the passers.}
   {$V$, $c$, $P$, $\mathrm{gain}$, $\mathrm{cost}$}{M14}
-  {The predecessor's passing appendix. The gain and the cost are not derived
+  {The gain and the cost are not derived
   (Appendix~\ref{app:scope}, Passing).}
 \arow{A13}{A platform admits a share $\sigma$ of outsider applicants to a room
   of $|A|$ attendees, with $N$ host clients, objective weight $\alpha$ and
@@ -572,8 +669,8 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   weight, and an admitted outsider member pays the willingness to pay.
   Platform profit is the admission rate times the admission margin, so it is
   linear in the admission rate.}
-  {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$}{M15, M20}
-  {The predecessor's first-order condition, taken as a definition
+  {$\sigma$, $|A|$, $N$, $\alpha$, $W$, $\Pi$, $\mathrm{marg}$}{M15, M23}
+  {Assumed, and not derived from the clients' engagement utility
   (Appendix~\ref{app:scope}, The platform channel).}
 \arow{A14}{The observer of own class $y$ values engagement with a person of
   class $c$ at $v-\kappa\,(c-y)^2$ against the outside option $\bar u$, and
@@ -591,8 +688,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   Lean, \lean{Engagement.engages\_iff}.}
   {$c$, $y$, $v$, $\kappa$, $\bar u$, $E$, $\bar d$, $J$, $\bar c$, $\nu_g$}
   {M18}
-  {The predecessor's engagement rule, its equations (utility) and
-  (threshold). The quadratic loss in the economic distance is the form
+  {The quadratic loss in the economic distance is the form
   Akerlof sets aside as a special case of a benefit that falls with social
   distance (L32). The quadratic form and the sensitivity are derived in M19
   from A15, and what A14 adds is that the observer takes the expectation
@@ -620,10 +716,10 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   level alone. Lean, \lean{Budget.payoff\_eq}.}
   {$c$, $b$, $\beta$, $p$, $\gamma$, $h$, $a$, $v$, $\bar u$}
   {M19, M20}
-  {The author's account of budget compatibility as the micro-foundation of
-  class homophily, with the quadratic payoff chosen so that the loss, the
-  compromise and the sensitivity have closed forms. The general concave
-  case carries only the monotonicity of the ideal level (M19 (i)).}
+  {Budget compatibility as the micro-foundation of class homophily, with
+  the quadratic payoff chosen so that the loss, the compromise and the
+  sensitivity have closed forms. The general concave case is A17, under
+  which the loss still rises in the economic distance (M22).}
 \arow{A16}{For row M21 only, engaging with a person at economic distance $d$
   is worth the benefit of contact $\Phi(d)$, which does not rise in $d$ for
   $d\ge0$. The form of A14 is $\Phi(d)=v-\kappa d^2$.}
@@ -634,7 +730,7 @@ obtained. Appendix~\ref{app:scope} gives the longer reasons.
   times the squared economic distance.
   Lean, \lean{Robustness.quadratic\_antitone}.}
   {$\Phi$, $d$, $v$, $\kappa$}{M21}
-  {Pass 3 of the work on the engagement utility, 17 October 2026. The other
+  {The other
   rows use A14. A16 is what M21 needs, and both the quadratic loss and the
   benefit of Akerlof (L33) satisfy it (M21 (iii)).}
 \arow{A17}{For row M22 only, the activity payoff $\Psi(p,b)$ is concave in
@@ -672,6 +768,7 @@ that check it.}\\
 \endhead
 \bottomrule
 \endfoot
+\multicolumn{5}{@{}l}{\textit{Observers and groups}} \\ \addlinespace
 \mrow{M1}{A marker whose likelihood does not depend on class leaves the
   Bayesian posterior on class equal to the prior. Under a prior that gives
   every class positive probability, the converse holds, so the two forms of
@@ -720,20 +817,8 @@ that check it.}\\
   (i) fails without the ordering, since classes $(0,1)$ with the class-$0$
   member leaving give a visible mean of $1$ against $\tfrac12$.}
   {Passing.cross, Passing.mean_sdiff_le, Passing.mean_sdiff_lt, Passing.upper_set_of_threshold, Passing.rate_rises, Passing.control_ordering_needed}
-\mrow{M15}{With the predecessor's admission objective, linear in the
-  admission rate, the platform excludes the outsider group exactly when an
-  admittee's willingness to pay falls short of the composition externality,
-  which is exactly when the outsider's standing is below the admission
-  threshold.}
-  {$\mathrm{marg}=W+N(1-\alpha)(\bar c_O-\bar c_I)/|A|$, $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
-  $c_E=\bar c_I-W|A|/(N(1-\alpha))$.
-  (i) $|A|>0$. $\mathrm{marg}<0\iff W|A|<N(1-\alpha)(\bar c_I-\bar c_O)$, and
-  with $N(1-\alpha)>0$, $\iff\bar c_O<c_E$.
-  (ii) $\mathrm{marg}<0$ and $\sigma>0$ give $\Pi(\sigma)<\Pi(0)$.
-  (ii) fails with $\mathrm{marg}>0$, where $\Pi(1)>\Pi(0)$.}
-  {Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos}
-\mrow{M17}{The predecessor's worked example agrees with the rows. Its
-  stranger moves from an expected class of $0.50$ to $0.38$, which is the
+\mrow{M17}{In the stranger example the expected
+  class moves from an expected class of $0.50$ to $0.38$, which is the
   mixture of M2 and M3.}
   {The mixture of standings $(\tfrac7{10},\tfrac3{10})$ by weights
   $(\tfrac12,\tfrac12)$ is $\tfrac12$, and by $(\tfrac15,\tfrac45)$ is
@@ -804,16 +889,12 @@ that check it.}\\
   {Budget.payoff_eq, Budget.loss_eq, Budget.ideal_max, Budget.ideal_unique, Budget.ideal_sub, Budget.ideal_mono, Budget.argmax_mono, Budget.payoff_increasing_differences, Budget.concave_four_point, Budget.concave_increasing_differences, Budget.mid_min, Budget.loss_mid, Budget.engagement_utility, Budget.sensitivity_pos, Budget.engage_iff, Budget.weighted_losses, Budget.weighted_equal_iff, Budget.affordable_iff, Budget.bound_mono, Budget.control_linear_private, Budget.control_pooled_gap_free, Budget.control_pooled_level_mono, Budget.control_separate_gap_cost}
 \mrow{M20}{The sensitivity does not rise in the activity curvature and does
   not fall in the budget slope, and the engagement threshold does not fall
-  as the sensitivity falls. The admission threshold does not rise in the
-  willingness to pay, the room size or the objective weight, and does not
-  fall in the number of host clients.}
+  as the sensitivity falls.}
   {(i) $0<a+h$ and $h\le h'$ give $\kappa(a,h',\beta)\le\kappa(a,h,\beta)$.
   (ii) $0\le\beta\le\beta'$ gives $\kappa(a,h,\beta)\le\kappa(a,h,\beta')$.
   (iii) $u\le v$ and $0<\kappa\le\kappa'$ give $(v-u)/\kappa'\le(v-u)/\kappa$.
-  (iv) With $0\le W$, $0\le|A|$, $0<N$ and $\alpha<1$, $c_E$ does not rise
-  in $W$, in $|A|$ or in $\alpha$, and does not fall in $N$.
-  (iii) reverses with $v<u$, and (iv) reverses in $|A|$ with $W<0$.}
-  {Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses, Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
+  (iii) reverses with $v<u$.}
+  {Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses}
 \mrow{M21}{For any benefit of contact that does not rise in the class
   distance, a rise in every member's class does not raise refusal among
   observers at or above every member and does not lower it among observers
@@ -861,6 +942,26 @@ that check it.}\\
   (i) fails without concavity, since $-(p^2-2p)^2$ is maximised at $0$ and
   is $-1$ at $1$ and $0$ at $2$.}
   {Budget.concave_loss_right, Budget.concave_loss_left, Budget.general_loss_nonneg, Budget.loss_rises_above, Budget.loss_rises_below, Budget.payoff_concave, Budget.control_concavity_needed}
+\multicolumn{5}{@{}l}{\textit{Venues}} \\ \addlinespace
+\mrow{M15}{With an admission objective linear in the
+  admission rate (A13), the platform excludes the outsider group exactly when an
+  admittee's willingness to pay falls short of the composition externality,
+  which is exactly when the outsider's standing is below the admission
+  threshold.}
+  {$\mathrm{marg}=W+N(1-\alpha)(\bar c_O-\bar c_I)/|A|$, $\Pi(\sigma)=\sigma\,\mathrm{marg}$,
+  $c_E=\bar c_I-W|A|/(N(1-\alpha))$.
+  (i) $|A|>0$. $\mathrm{marg}<0\iff W|A|<N(1-\alpha)(\bar c_I-\bar c_O)$, and
+  with $N(1-\alpha)>0$, $\iff\bar c_O<c_E$.
+  (ii) $\mathrm{marg}<0$ and $\sigma>0$ give $\Pi(\sigma)<\Pi(0)$.
+  (ii) fails with $\mathrm{marg}>0$, where $\Pi(1)>\Pi(0)$.}
+  {Platform.marg_neg_iff, Platform.marg_neg_iff_below, Platform.exclude_of_neg, Platform.control_admit_of_pos}
+\mrow{M23}{The admission threshold does not rise in the willingness to pay,
+  the room size or the objective weight, and does not fall in the number of
+  host clients.}
+  {With $0\le W$, $0\le|A|$, $0<N$ and $\alpha<1$, $c_E$ does not rise
+  in $W$, in $|A|$ or in $\alpha$, and does not fall in $N$.
+  It reverses in $|A|$ with $W<0$.}
+  {Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
 \end{longtable}
 \normalsize
 
@@ -1003,7 +1104,7 @@ The conclusions divide by what each needs of the benefit of contact, and
 Table~\ref{tab:levels} sorts them. The first level needs only that the
 benefit falls in the economic distance, or needs no utility at all. The
 second needs its curvature. The third needs the square. The platform's
-admission objective is not the engagement utility (A13), so M15, C11 and I5
+admission objective is not the engagement utility (A13), so M15, M23, C11 and I5
 stand outside the three levels.
 
 \footnotesize
@@ -1297,8 +1398,8 @@ chapter of Rothschild and White were read in full
 \path{lit/kim_loury_2012/}, \path{lit/edelman_luca_svirsky_2017/},
 \path{lit/laouenan_rathelot_2022/}, \path{lit/akerlof_1997/},
 \path{lit/rothschild_white_1993/}). Loury (1998),
-Loury (2002), the platform-discrimination studies the predecessor cites
-and Arrow's published chapter of 1973 are
+Loury (2002), the studies of discrimination on rental and ride-share
+platforms and Arrow's published chapter of 1973 are
 not read, and no row rests on them.
 
 \section{Conclusions}
@@ -1324,6 +1425,7 @@ implications for policy and says what limits each.
 \endhead
 \bottomrule
 \endfoot
+\multicolumn{3}{@{}l}{\textit{Observers and groups}} \\ \addlinespace
 \crow{C1}{Under group sufficiency a marker moves the observer's belief about
   class only through the group it indicates, and the posterior on class is
   the within-group class distributions mixed by the posterior on
@@ -1331,10 +1433,6 @@ implications for policy and says what limits each.
 \crow{C10}{Selective passing by the upper members lowers the visible
   group's mean, and under a discrimination-rate function that does not rise
   in standing the rate against those who stay does not fall.}{M14}
-\crow{C11}{Under the predecessor's admission objective, a platform excludes
-  the outsider group exactly when its standing is below the admission
-  threshold, and above the threshold full admission earns more than
-  exclusion.}{M15}
 \crow{C19}{Phelps's statistical discrimination combines a group prior with
   evidence about the individual in one static decision, whereas here the
   marker is evidence about the group alone.}{M1, L4}
@@ -1348,7 +1446,7 @@ implications for policy and says what limits each.
   budgets and a diminishing marginal value of private consumption. Pooled
   budgets, the origin of assortative matching in Mailath and Postlewaite,
   remove the cost of the class gap, and so does a linear private utility.
-  The quadratic form that A14 carried as the predecessor's is derived, and
+  The quadratic form of A14 is derived, and
   the sensitivity is a closed form in the budget slope and the two
   curvatures. Under pooled budgets everyone prefers a richer partner, so
   avoidance runs one way, and under separate budgets both sides lose the
@@ -1358,6 +1456,11 @@ implications for policy and says what limits each.
   distance, at the two ends of the class range. Its full range and the sign
   of the dispersion term belong to the quadratic loss, and under Akerlof's
   benefit a wider dispersion helps observers beyond the group.}{M21, L33}
+\multicolumn{3}{@{}l}{\textit{Venues}} \\ \addlinespace
+\crow{C11}{Under an admission objective linear in the admission rate, a platform excludes
+  the outsider group exactly when its standing is below the admission
+  threshold, and above the threshold full admission earns more than
+  exclusion.}{M15}
 \end{longtable}
 
 \begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
@@ -1373,14 +1476,11 @@ implications for policy and says what limits each.
 \endhead
 \bottomrule
 \endfoot
+\multicolumn{3}{@{}l}{\textit{Observers and groups}} \\ \addlinespace
 \crow{C20}{The equivalence of the two forms of group sufficiency under full
   support, and the mixture form of the posterior on class, are standard
   rather than new. \pend{A textbook statement of M1 to M3 to
   cite.}}{M1, M2, M3}
-\crow{C15}{Platform discrimination rises with the introduction of photographs
-  and real names. \pend{The platform-discrimination studies the predecessor
-  cites, read in full, and a row linking the marker's salience to the
-  admission margin.}}{M15}
 \crow{C22}{That the direction of a group's effect on refusal depends on the
   observer's own class is new to models of inference from a group marker.
   The nearest readers found value a pool by the own type and refuse no one
@@ -1394,6 +1494,11 @@ implications for policy and says what limits each.
   household economics of non-pooled budgets, Lundberg and Pollak (1996) and
   the literature it opens, read in full, and the dating evidence of L12
   reconciled with a cost in the gap.}}{M19, M22, L12}
+\multicolumn{3}{@{}l}{\textit{Venues}} \\ \addlinespace
+\crow{C15}{Platform discrimination rises with the introduction of photographs
+  and real names. \pend{The studies of discrimination on rental and
+  ride-share platforms, read in full, and a row linking the marker's salience to the
+  admission margin.}}{M15}
 \end{longtable}
 
 Table~\ref{tab:implications} draws five implications for policy from the
@@ -1478,7 +1583,7 @@ is a conclusion, and the table claims nothing the rows do not.
   and does not fall in the number of host clients, so a subsidy to
   admission, a larger room and clients who weight objective quality more
   push a platform toward admission, and a platform with many host clients
-  is the one that excludes.}{M15, M20, L30, L31}{Admission changes the
+  is the one that excludes.}{M15, M23, L30, L31}{Admission changes the
   room's composition, and clients self-select on atmosphere, so host clients
   may leave. Fewer host clients lower the threshold further, and the outcome
   is sorting across platforms in place of exclusion within one. The
@@ -1519,7 +1624,7 @@ $\bar c(S)=\sum_{i\in S}c_i/|S|$ of a non-empty set $S$. In (ii)
 $\mathrm{gain}$ is the benefit of passing and $\mathrm{cost}$ its cost, both
 functions of class. In (iii) $\bar c$ and $\bar c'$ are the group's mean
 class before and after the passers leave, $s_g$ is the salience and $F$ the
-discrimination-rate function. Row M15 has the predecessor's platform. $W$ is
+discrimination-rate function. Row M15 has the platform of A13. $W$ is
 an admittee's willingness to pay, $N$ the number of host clients, $\alpha$
 the weight on objective quality, $|A|$ the room size, $\sigma\in[0,1]$ the
 admission rate, $\bar c_O$ and $\bar c_I$ the standings of the outsider and
@@ -1539,7 +1644,7 @@ curvature $a$, the payoff $V(p,b)$, the ideal level $p^*(b)$, the loss
 $L(p,b)$, the compromise level $\bar p$, a split $\omega$ between the two
 ideals, and two persons $i$ and $j$ with classes $c_i$, $c_j$ and budgets
 $b_i$, $b_j$. In M19 (i) $\varphi$ is any concave private utility and $\psi$
-any activity utility. Row M20 uses the symbols of M15, M18 and M19, with
+any activity utility. Rows M20 and M23 use the symbols of M15, M18 and M19, with
 $c_E(\cdot)$ and $\kappa(\cdot)$ marking the argument that moves. Row M21
 has a group $S$ with weights $p_i$ and classes $x_i$, observers $J$ with
 classes $y_j$, a rise $t$ in every class, the benefit of contact $\Phi$ of
@@ -1716,7 +1821,7 @@ $p^*(b_i+b_j)$ rises with $b_j$ by (i). Under separate budgets
 $\kappa(c_i-c_j)^2<\kappa(c_i-c_j')^2$ for $\kappa>0$.
 \end{mproof}
 
-\begin{mproof}{M20}{Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses, Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
+\begin{mproof}{M20}{Implications.sensitivity_antitone_h, Implications.sensitivity_mono_beta, Implications.threshold_antitone, Implications.control_threshold_reverses}
 (i) and (ii). $\kappa(a,h,\beta)=a^2\beta^2/(8(a+h))$. With $0<a+h\le a+h'$,
 \[
 \frac{a^2\beta^2}{8(a+h')}\le\frac{a^2\beta^2}{8(a+h)},
@@ -1726,18 +1831,6 @@ $\kappa(c_i-c_j)^2<\kappa(c_i-c_j')^2$ for $\kappa>0$.
 (iii) With $0\le v-u$ and $0<\kappa\le\kappa'$, $(v-u)/\kappa'\le(v-u)/\kappa$.
 Control. With $v-u<0$ and $0<\kappa<\kappa'$, $1/\kappa'<1/\kappa$ and
 $(v-u)\cdot1/\kappa<(v-u)\cdot1/\kappa'$.
-(iv) $c_E=\bar c_I-W|A|/(N(1-\alpha))$, with $N(1-\alpha)>0$. With $0\le|A|$ and
-$W\le W'$, $W|A|\le W'|A|$, so $c_E(W')\le c_E(W)$. With $0\le W$ and
-$|A|\le|A'|$, $W|A|\le W|A'|$, so $c_E(|A'|)\le c_E(|A|)$. With $0\le W|A|$
-and $N\le N'$, $N(1-\alpha)\le N'(1-\alpha)$, so
-\[
-\frac{W|A|}{N'(1-\alpha)}\le\frac{W|A|}{N(1-\alpha)}
-\quad\Longrightarrow\quad c_E(N)\le c_E(N').
-\]
-With $\alpha\le\alpha'<1$, $N(1-\alpha')\le N(1-\alpha)$, so
-$W|A|/(N(1-\alpha))\le W|A|/(N(1-\alpha'))$ and $c_E(\alpha')\le c_E(\alpha)$.
-Control. With $W<0$ and $|A|\le|A'|$, $W|A'|\le W|A|$, so
-$c_E(|A|)\le c_E(|A'|)$.
 \end{mproof}
 
 \begin{mproof}{M21}{Robustness.shift_up_above, Robustness.shift_up_below, Robustness.refusers_above, Robustness.refusers_below, Robustness.control_range_needs_quadratic, Robustness.majorize, Robustness.spread_convex, Robustness.spread_concave, Robustness.spread_at_centre, Robustness.concave_in_class, Robustness.widen_concave, Robustness.convex_in_class_below, Robustness.convex_in_class_above, Robustness.widen_convex_above, Robustness.widen_convex_below, Robustness.control_widen_inside, Robustness.quadratic_concave, Robustness.quadratic_antitone, Robustness.gravity_convex, Robustness.gravity_antitone, Robustness.control_spread_sign}
@@ -1811,6 +1904,21 @@ Control. $-(x^2-2x)^2\le0$ for every $x$, and
 $-(1-2)^2=-1<0=-(4-4)^2$.
 \end{mproof}
 
+\begin{mproof}{M23}{Implications.cAdm_antitone_W, Implications.cAdm_antitone_A, Implications.cAdm_mono_n, Implications.cAdm_antitone_alpha, Implications.control_cAdm_negative_W}
+$c_E=\bar c_I-W|A|/(N(1-\alpha))$, with $N(1-\alpha)>0$. With $0\le|A|$ and
+$W\le W'$, $W|A|\le W'|A|$, so $c_E(W')\le c_E(W)$. With $0\le W$ and
+$|A|\le|A'|$, $W|A|\le W|A'|$, so $c_E(|A'|)\le c_E(|A|)$. With $0\le W|A|$
+and $N\le N'$, $N(1-\alpha)\le N'(1-\alpha)$, so
+\[
+\frac{W|A|}{N'(1-\alpha)}\le\frac{W|A|}{N(1-\alpha)}
+\quad\Longrightarrow\quad c_E(N)\le c_E(N').
+\]
+With $\alpha\le\alpha'<1$, $N(1-\alpha')\le N(1-\alpha)$, so
+$W|A|/(N(1-\alpha))\le W|A|/(N(1-\alpha'))$ and $c_E(\alpha')\le c_E(\alpha)$.
+Control. With $W<0$ and $|A|\le|A'|$, $W|A'|\le W|A|$, so
+$c_E(|A|)\le c_E(|A'|)$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -1865,7 +1973,7 @@ records what they printed.
 \path{Grogger2018} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Grogger2018.lean}{\path{lean/mathlib/Grogger2018.lean}} & record only \\
 \path{HansonHawley2011} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/HansonHawley2011.lean}{\path{lean/mathlib/HansonHawley2011.lean}} & record only \\
 \path{HitschEtAl2006} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/HitschEtAl2006.lean}{\path{lean/mathlib/HitschEtAl2006.lean}} & L12, L35 \\
-\path{Implications} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Implications.lean}{\path{lean/mathlib/Implications.lean}} & M20 \\
+\path{Implications} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Implications.lean}{\path{lean/mathlib/Implications.lean}} & M20, M23 \\
 \path{Jeffrey1983} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/Jeffrey1983.lean}{\path{lean/mathlib/Jeffrey1983.lean}} & record only \\
 \path{KimLoury2009} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2009.lean}{\path{lean/mathlib/KimLoury2009.lean}} & record only \\
 \path{KimLoury2012} & \href{https://github.com/anuragr81/research/blob/master/papers/subjective_racism/paper_a/lean/mathlib/KimLoury2012.lean}{\path{lean/mathlib/KimLoury2012.lean}} & L29 \\
@@ -1921,16 +2029,15 @@ injected object of each kind is caught.
 \paragraph{What Lean does not carry.} The class space and the set of groups
 are finite in M1 to M3 and in M18. The engagement utility of M18 has the
 quadratic form that M19 derives from a quadratic payoff over the activity
-level and private consumption (A15), so the quadratic is assumed one step
-below where the predecessor assumed it, and the baseline value and the
+level and private consumption (A15), so the square is assumed in the payoff
+and not in the utility, M22 drops it for any concave activity payoff, and the baseline value and the
 outside option enter only through the engagement threshold.
 The passing decision of M14 is a rule, and its gain and cost are not
-derived. The platform's objective of M15 is the
-predecessor's first-order condition taken as a definition, and no row ranks
+derived. The platform's objective of M15 is
+assumed linear in the admission rate, and no row ranks
 the interior admission rates against full admission.
 
-\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. The
-SymPy scripts of the predecessor bundle are not part of this skeleton.
+\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 
 \section{Terminology}
 \label{app:terms}
@@ -2046,33 +2153,31 @@ Admission threshold & $c_E$ & The outsider standing at which the admission
 \label{app:scope}
 
 \paragraph{Class space.} Class takes finitely many values in the Lean
-statement of every row so far. Row M1 depends on this. The continuous class of
-the predecessor manuscript lies outside the rows until a row states it.
+statement of every row so far. Row M1 depends on this. A continuous class
+lies outside the rows until a row states it.
 
-\paragraph{Group sufficiency.} The predecessor manuscript states the
-assumption as conditional independence, $c\perp m\mid g$, ``equivalently''
-the posterior form $P(c\mid m,g)=P(c\mid g)$, and uses the likelihood form
-$P(m\mid c,g)=P(m\mid g)$ in the proof of its structural-trap proposition.
+\paragraph{Group sufficiency.} Group sufficiency can be stated on the
+likelihood, $P(m\mid c,g)=P(m\mid g)$, or on the posterior,
+$P(c\mid m,g)=P(c\mid g)$, which conditional independence $c\perp m\mid g$
+gives.
 Row M1 proves the likelihood and posterior forms equivalent when the prior
 gives every class positive probability, and its second control shows the
 posterior form is weaker without that support.
 
-\paragraph{The updating rule.} The observer updates by Bayes' rule alone, a
-choice the author made on 14 October 2026. The predecessor manuscript's
-equation (kinematics) mixes the within-group class distributions by group
-weights taken as given. Under group sufficiency, any such weights are the
+\paragraph{The updating rule.} The observer updates by Bayes' rule alone. A second
+rule that mixes the within-group class distributions by group weights taken
+as given adds nothing under group sufficiency, since any such weights are the
 Bayesian posterior on group for some marker likelihood (M3), and the mixture
 is then the Bayesian posterior on class (M2). The model therefore takes the
 group weights as a Bayesian posterior and needs no second rule.
 
-\paragraph{Passing.} Row M14 carries the composition claim of the
-predecessor's passing appendix for a finite population. Row M14 does not carry
-the passing decision itself, which the predecessor derives from a benefit
-and a cost of suppressing markers that no row defines. Part (ii) says only
+\paragraph{Passing.} Row M14 carries the composition claim of passing
+for a finite population, and not the passing decision itself, which would
+need a benefit and a cost of suppressing markers that no row defines. Part (ii) says only
 what the decision needs to make the leavers an upper set.
 
-\paragraph{The engagement decision.} Row M18 takes the predecessor's
-engagement rule as assumption A14, with the outside option as given, and
+\paragraph{The engagement decision.} Row M18 takes the engagement rule
+of A14, with the outside option as given, and
 derives from it the discrimination-rate function that M14 takes as a
 hypothesis. The derived function does not rise in the standing on the range
 at or below every observer's class and does not fall on the range at or
@@ -2085,26 +2190,21 @@ derives them.
 the sensitivity from assumption A15, under which class affords a budget, a
 pair shares one activity at one level that each pays from the own budget,
 and the payoff from the level and from private consumption is quadratic.
-The predecessor states that class determines the consumption bundle and
-uses the statement nowhere, and the quadratic payoff of A15 is where the
-quadratic now enters. The general concave case carries the monotonicity of
-the ideal level and nothing else. The pair's level is the minimiser of the
+Under the general concave payoff of A17, M22 shows the loss rising in the
+economic distance, and the square needs the quadratic payoff of A15. The pair's level is the minimiser of the
 sum of the two losses, and no row derives that rule from bargaining.
 
-\paragraph{The platform channel.} Row M15 takes the predecessor's
-first-order condition as the platform's objective, linear in the admission
-rate. The atmosphere vector, the
+\paragraph{The platform channel.} Row M15 takes as the platform's objective a profit
+linear in the admission rate. The atmosphere vector, the
 self-selection function, the willingness to pay and the composition
 externality are not derived, and a row that derives them would replace M15.
-The predecessor's shadow-market proposition rests on an informed and an
-uninformed social quality, $S^\ast$ and $S^{\mathrm{rand}}$, that no equation
-of the predecessor defines, so it is not a row.
+A shadow market, which needs an informed and an uninformed social quality,
+has no row yet.
 
 \section{Refuted conjectures}
 \label{app:refuted}
 
-No conjecture of the predecessor that this paper's rows can state is
-refuted.
+No conjecture that the rows can state is refuted.
 
 \section{Responses to the referee reports}
 

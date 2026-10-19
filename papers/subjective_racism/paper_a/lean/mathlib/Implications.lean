@@ -2,10 +2,10 @@ import Mathlib
 import Budget
 import Platform
 
-/-! # Row M20. Signed comparative statics for the implications table
+/-! # Rows M20 and M23. Signed comparative statics for the implications table
 
-The sensitivity of M19, the engagement threshold of M18 and the admission
-threshold of M15 are closed forms. This file signs their derivatives, so
+The sensitivity of M19 and the engagement threshold of M18 (row M20), and the
+admission threshold of M15 (row M23), are closed forms. This file signs their derivatives, so
 that each lever in the implications table rests on a theorem. -/
 
 namespace Implications
