@@ -21,9 +21,10 @@ issuance; dividends at the barrier.
 
 - 1, rare large losses: fails by the rule. Losses of 2 to 6 points of
   risk-weighted assets once in 10 or 25 years lower the dividend barrier
-  (median 0.0115 to 0.0087 over the minimum) instead of raising it: with
-  mean earnings held at mu_i, the bank's horizon shortens and it pays out
-  sooner.
+  (median 0.0115 to 0.0087 over the minimum, against 0.0124 with no
+  jumps) instead of raising it. Our reading: with mean earnings held at
+  mu_i, the risk of sudden failure shortens the bank's expected life, and
+  it pays out sooner.
 - 2, no issuance in a crisis: fails by the rule on the rows of
   results_reward.md, as fixed in advance.
 - 3, growth: by the rule's letter it fails (23.7% against 48.0% with the
@@ -41,7 +42,8 @@ issuance; dividends at the barrier.
   2005 below the raised minimum and are dropped as failed, so F2 runs
   over the better-capitalized banks. A hard minimum one point above R is
   also contradicted by the record: those 26 banks held less than 11.5% of
-  risk-weighted assets at the end of 2004 and were not closed. F1 falls
+  risk-weighted assets at the end of 2004 and were not closed: the sample
+  requires a buffer reported at the end of 2014. F1 falls
   to 0.1% or less, against the observed 17.1%.
 - The barrier solver matches the closed form with no jumps and no growth
   for every bank of sample A (largest difference 1.65e-07).
