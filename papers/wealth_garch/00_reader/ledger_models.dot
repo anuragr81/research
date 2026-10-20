@@ -18,7 +18,7 @@ digraph models {
   "insurer" -> "insured creditors" [label="A8 insures", color=black, fontcolor=black, style=solid];
   "supervisor" -> "bank" [label="A9 assigns capital category, restricts\nR7: the shortfall penalty stands in for this: binds only below a threshold", color=blue, fontcolor=blue, style=bold];
   "supervisor" -> "bank" [label="A10 closes\nR10: models fail at zero equity; the law acts at 2%", color=black, fontcolor=black, style=bold];
-  "insurer" -> "bank" [label="A11 prices insurance on capital\nR8: penalty copies this below the reference only; the reward above it is missing", color=blue, fontcolor=blue, style=bold];
+  "insurer" -> "bank" [label="A11 prices insurance on capital\nR8: penalty copies this below the reference only; the reward above it (up to a floor rate) is missing", color=blue, fontcolor=blue, style=bold];
   "equity notes" [shape=note, style=dashed, fontsize=9, label="R5: F2: baseline 0.0%, observed 61.6%; strongest penalty 0.2% vs 48.0%"];
   "equity" -> "equity notes" [style=dotted, arrowhead=none];
 }

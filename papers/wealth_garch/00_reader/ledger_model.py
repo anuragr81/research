@@ -100,10 +100,11 @@ ANNOTATIONS = [
      "says": "the shortfall penalty, zero above the reference and rising below it, stands in for the supervisor's "
              "restrictions, which bind only below a capital threshold; the baseline has no counterpart",
      "short": "the shortfall penalty stands in for this: binds only below a threshold"},
-    {"id": "R8", "on": "A11", "model": ENHANCED, "kind": READING, "rests_on": ("M11", "ASMT-Q2", "ASMT-D1"),
-     "says": "the insurer's price falls with the leverage ratio at every level; the shortfall penalty copies it below "
-             "the reference only, so the reward for capital above the reference is missing",
-     "short": "penalty copies this below the reference only; the reward above it is missing"},
+    {"id": "R8", "on": "A11", "model": ENHANCED, "kind": READING, "rests_on": ("M11", "ASMT-Q2", "ASMT-D1", "ASMT-Q5"),
+     "says": "the insurer's price falls with the leverage ratio until it reaches the floor rate for the bank's rating; "
+             "the shortfall penalty copies it below the reference only, so the reward for capital above the reference "
+             "is missing",
+     "short": "penalty copies this below the reference only; the reward above it (up to a floor rate) is missing"},
     {"id": "R9", "on": "A7", "model": ENHANCED, "kind": READING, "rests_on": ("M11", "OCCL-D1", "FDIC-Q22"),
      "says": "uninsured creditors price and withdraw at every level of capital; as with R8, the shortfall penalty "
              "copies only the part below the reference",
