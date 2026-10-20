@@ -1,0 +1,10 @@
+# Notes: Federal Reserve (2014), Dodd-Frank Act Stress Test 2014, Supervisory Stress Test Methodology And Results
+
+## Verified
+
+- Every quotation in `CLAIMS.md` is found verbatim on its stated printed page of the pinned PDF (offset -6).
+- The Lean results are declared in `lean/mathlib/StressTests.lean`.
+
+## Not verified
+
+- Anything outside the page named in `CLAIMS.md`.
