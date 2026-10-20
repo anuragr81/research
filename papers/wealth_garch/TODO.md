@@ -738,4 +738,15 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   A11 (insurer prices insurance on capital); A1 and A3 cite their legal
   grounds. Lean: distribution_allowed_iff, critical_iff,
   assessment_falls_in_leverage, with controls.
+- 2026-10-20. Ledger: baseline and enhanced model as annotations R1-R10 on
+  the edges (00_reader/ledger_models.pdf); the shortfall penalty stands in
+  for the supervisor's threshold (A9), and the insurer's and creditors'
+  pricing (A11, A7) rewards capital above the reference, up to the
+  insurer's floor rate (ASMT-Q5). Training-window check of that reward
+  (PREREG_comparison_4.md, results_reward.md): linear, uncapped, at up to
+  three times the insurer's channel, it leaves F2 at 17.4% against 48.0%
+  (sample B), 8.3% at the insurer's value. Neither the penalty nor the
+  reward produces large voluntary buffers in a barrier model with rho 4%;
+  the dividend barrier stays within about 1.6 points of the minimum. Next:
+  author to choose the next mechanism.
 
