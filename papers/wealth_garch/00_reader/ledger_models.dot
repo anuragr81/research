@@ -1,6 +1,6 @@
 digraph models {
   rankdir=LR; node [fontname="Helvetica", fontsize=11]; edge [fontname="Helvetica", fontsize=9];
-  labelloc="t"; label="Baseline and enhanced model on the ledger. Black: both models. Blue: enhanced only. Dashed boxes: annotations on an entity.";
+  labelloc="t"; label="Baseline and enhanced model on the ledger. Black: both models. Blue: enhanced only. Green: evidence. Dashed boxes: annotations on an entity.";
   "bank" [shape=ellipse, label="bank"];
   "equity" [shape=box, label="equity"];
   "investors" [shape=ellipse, label="investors"];
@@ -9,16 +9,16 @@ digraph models {
   "supervisor" [shape=ellipse, label="supervisor"];
   "insurer" [shape=ellipse, label="insurer"];
   "bank" -> "investors" [label="A1 pays dividends\nR1: only at the barrier; barrier rises with the asymmetry parameter (M4)\nR4: F1: baseline 90.0%, observed 4.8%", color=black, fontcolor=black, style=bold];
-  "investors" -> "equity" [label="A2 buy stock, net\nR2: starts at the trigger (rises with the asymmetry parameter, M5); lands at one target (M16)\nR6: F3/F4: baseline 70.8%/81.9%, observed 15.2%/30.4%", color=black, fontcolor=black, style=bold];
+  "investors" -> "equity" [label="A2 buy stock, net\nR2: starts at the trigger (rises with the asymmetry parameter, M5); lands at one target (M16)\nR6: F3/F4: baseline 70.8%/81.9%, observed 15.2%/30.4%\nR15: evidence: issuance costly, but cannot raise the buffer above u0", color=darkgreen, fontcolor=darkgreen, style=bold];
   "investors" -> "equity" [label="A3 inject capital (parent)\nR3: as A2: the model does not tell the parent from outside buyers", color=black, fontcolor=black, style=bold];
   "insured creditors" -> "bank" [label="A4 deposit and withdraw", color=black, fontcolor=black, style=solid];
   "bank" -> "bank" [label="A5 takes risky exposure", color=black, fontcolor=black, style=solid];
   "supervisor" -> "bank" [label="A6 supervises", color=black, fontcolor=black, style=solid];
-  "uninsured creditors" -> "bank" [label="A7 lend and withdraw\nR9: penalty copies this below the reference only", color=blue, fontcolor=blue, style=bold];
+  "uninsured creditors" -> "bank" [label="A7 lend and withdraw\nR9: penalty copies this below the reference only\nR14: evidence: creditors price default risk", color=blue, fontcolor=blue, style=bold];
   "insurer" -> "insured creditors" [label="A8 insures", color=black, fontcolor=black, style=solid];
-  "supervisor" -> "bank" [label="A9 assigns capital category, restricts\nR7: the shortfall penalty stands in for this: binds only below a threshold", color=blue, fontcolor=blue, style=bold];
+  "supervisor" -> "bank" [label="A9 assigns capital category, restricts\nR7: the shortfall penalty stands in for this: binds only below a threshold\nR13: evidence: buffers guard against intervention", color=blue, fontcolor=blue, style=bold];
   "supervisor" -> "bank" [label="A10 closes\nR10: models fail at zero equity; the law acts at 2%", color=black, fontcolor=black, style=bold];
   "insurer" -> "bank" [label="A11 prices insurance on capital\nR8: penalty copies this below the reference only; the reward above it (up to a floor rate) is missing", color=blue, fontcolor=blue, style=bold];
-  "equity notes" [shape=note, style=dashed, fontsize=9, label="R5: F2: baseline 0.0%, observed 61.6%; strongest penalty 0.2% vs 48.0%"];
+  "equity notes" [shape=note, style=dashed, fontsize=9, label="R5: F2: baseline 0.0%, observed 61.6%; strongest penalty 0.2% vs 48.0%\nR11: evidence: targets well above the minima, rising with risk\nR12: model needs risk 2-3x measured earnings volatility"];
   "equity" -> "equity notes" [style=dotted, arrowhead=none];
 }

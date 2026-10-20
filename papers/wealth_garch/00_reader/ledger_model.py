@@ -67,7 +67,7 @@ EDGES = {
 }
 
 
-BASELINE, ENHANCED, BOTH = "baseline", "enhanced", "both"
+BASELINE, ENHANCED, BOTH, EVIDENCE = "baseline", "enhanced", "both", "evidence"
 PROVEN, MEASURED, READING = "proven", "measured", "reading"
 
 ANNOTATIONS = [
@@ -112,6 +112,25 @@ ANNOTATIONS = [
     {"id": "R10", "on": "A10", "model": BOTH, "kind": READING, "rests_on": ("PCA-Q4", "PCA-Q8", "OCC-Q5"),
      "says": "both models fail a bank at zero equity; the supervisor acts at 2% tangible equity",
      "short": "models fail at zero equity; the law acts at 2%"},
+    {"id": "R11", "on": "equity", "model": EVIDENCE, "kind": READING, "rests_on": ("BDF-Q20", "BDF-Q21", "GH-Q12"),
+     "says": "banks choose capital targets substantially above the well-capitalized minima, rising with their risk; the "
+             "mean Tier 1 buffer is 6.74 points",
+     "short": "evidence: targets well above the minima, rising with risk"},
+    {"id": "R12", "on": "equity", "model": EVIDENCE, "kind": MEASURED, "rests_on": ("comparison/results_scale.md",),
+     "says": "the barrier model matches the share of buffers far above the reference only if the risk guarded against "
+             "is two to three times the bank's measured earnings volatility",
+     "short": "model needs risk 2-3x measured earnings volatility"},
+    {"id": "R13", "on": "A9", "model": EVIDENCE, "kind": READING, "rests_on": ("MW-Q2", "BDF-Q23"),
+     "says": "buffers guard against a costly regulatory intervention; adjustment is slower under severe regulatory "
+             "pressure",
+     "short": "evidence: buffers guard against intervention"},
+    {"id": "R14", "on": "A7", "model": EVIDENCE, "kind": READING, "rests_on": ("BDF-Q22", "BAR-Q13", "MW-Q2"),
+     "says": "targets reflect counterparties' sensitivity to default risk; debt funding costs fall after an equity issue",
+     "short": "evidence: creditors price default risk"},
+    {"id": "R15", "on": "A2", "model": EVIDENCE, "kind": READING, "rests_on": ("MW-Q3", "MW-D1", "JM-Q8", "BDF-Q9"),
+     "says": "issuance is costly, so banks do not recapitalise after every loss; but issue costs and audits cannot "
+             "raise the buffer above the non-issuer barrier",
+     "short": "evidence: issuance costly, but cannot raise the buffer above u0"},
 ]
 
 
@@ -188,7 +207,7 @@ def verify():
     for a in ANNOTATIONS:
         target_ok = a["on"] in EDGES or a["on"] in NODES
         check(f"LM-15 {a['id']}: annotates an edge or a node, never stands alone", target_ok, a["on"])
-        check(f"LM-16 {a['id']}: model and kind are known", a["model"] in (BASELINE, ENHANCED, BOTH)
+        check(f"LM-16 {a['id']}: model and kind are known", a["model"] in (BASELINE, ENHANCED, BOTH, EVIDENCE)
               and a["kind"] in (PROVEN, MEASURED, READING), (a["model"], a["kind"]))
         bad = [r for r in a["rests_on"] if not (r in mrows or r in lit_ids or (BUNDLE_ROOT / r).exists())]
         check(f"LM-17 {a['id']}: everything it rests on resolves (manuscript row, lit/ ID or file)", not bad, bad)
@@ -218,7 +237,7 @@ def dot():
 def models_dot():
     lines = ["digraph models {", '  rankdir=LR; node [fontname="Helvetica", fontsize=11]; edge [fontname="Helvetica", fontsize=9];',
              '  labelloc="t"; label="Baseline and enhanced model on the ledger. Black: both models. Blue: enhanced only. '
-             'Dashed boxes: annotations on an entity.";']
+             'Green: evidence. Dashed boxes: annotations on an entity.";']
     for name, spec in NODES.items():
         shape = "ellipse" if spec["kind"] == AGENT else "box"
         lines.append(f'  "{name}" [shape={shape}, label="{name}"];')
@@ -228,6 +247,8 @@ def models_dot():
     for eid, e in EDGES.items():
         parts = [f"{eid} {e['label']}"] + [f"{a['id']}: {a['short']}" for a in notes.get(eid, [])]
         color = "blue" if any(a["model"] == ENHANCED for a in notes.get(eid, [])) else "black"
+        if any(a["model"] == EVIDENCE for a in notes.get(eid, [])) and color == "black":
+            color = "darkgreen"
         style = "bold" if eid in notes else "solid"
         label = "\\n".join(parts)
         lines.append(f'  "{e["agent"]}" -> "{e["target"]}" [label="{label}", color={color}, fontcolor={color}, style={style}];')
