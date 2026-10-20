@@ -1,6 +1,6 @@
 # Claims: Berger, DeYoung, Flannery, Lee and Öztekin (2008)
 
-Bib key `berger2008`. Version read: Federal Reserve Bank of Kansas City Research Working Paper 08-01, 37 numbered pages after a cover and an abstract page. Evidence [F] for that version.
+Bib key `berger2008`. Version read: Federal Reserve Bank of Kansas City Research Working Paper 08-01, 37 numbered pages after a cover and an abstract page; the abstract page is cited as p. 0. Evidence [F] for that version.
 
 ## Quotations
 
@@ -25,6 +25,10 @@ Bib key `berger2008`. Version read: Federal Reserve Bank of Kansas City Research
 | BDF-Q17 | 31 | Mean fitted target .0830 .0864 | Table 3, Panel A. |
 | BDF-Q18 | 32 | Mean fitted target .1302 .1440 | Table 3, Panel B. |
 | BDF-Q19 | 33 | Mean fitted target .1500 .1694 | Table 3, Panel C. |
+| BDF-Q20 | 0 | choose target capital levels substantially above well-capitalized regulatory minima | Targets, not accidents: the buffer is chosen (abstract page, printed 0). |
+| BDF-Q21 | 0 | these targets increase with BHC risk but decrease with BHC size | The buffer scales with risk (mechanism 1, and the scale of the gap in results_mechanisms.md). |
+| BDF-Q22 | 0 | based on their risk exposures and their counterparties' sensitivities to default risk | Counterparties price default risk (ledger A7). |
+| BDF-Q23 | 0 | slower (ceteris paribus) for BHCs under severe regulatory pressure | The supervisor's pressure slows adjustment (ledger A9). |
 
 ## Lean results
 
