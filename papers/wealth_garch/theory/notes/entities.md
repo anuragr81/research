@@ -63,6 +63,11 @@ state (E15).
 
 ## 3. Proposed reduction under the author's rule
 
+Superseded, 23 October 2026, by `notes/ledger.md`, which follows the
+bundle's agreed ledger (`00_reader/ledger_model.py`): equity is an object
+node and the creditors are two entities. The row numbers below are the
+parent manuscript's.
+
 The author's rule of 17 October 2026 (Paper A, `notes/ledger_diagram.md`,
 section 1): an entity is something that acts or is acted on and is not a case
 of another entity. Roles, attributes and actions are not entities. The parent

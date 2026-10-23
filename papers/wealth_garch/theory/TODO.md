@@ -58,6 +58,11 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 
 ## Open, for the author
 
+- The ledger (`notes/ledger.md`, section 5). Six entities and eight
+  actions of the bundle's ledger are proposed, with the insurer left out.
+  Decide the name of P2 (investors, recommended), the creditors, the
+  insurer, the reading of the shortfall penalty, and a figure.
+
 - The question. The skeleton's question is drafted from the headlines;
   the author may reword it.
 - C4 and C5. The four papers of section 5 of the novelty note, each to be

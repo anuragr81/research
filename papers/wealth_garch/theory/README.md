@@ -4,14 +4,15 @@ The theory paper of `papers/wealth_garch`. `MANUSCRIPT.tex` is built
 under `papers/MANUSCRIPT_SKELETON.md` and carries the paper's theoretical
 rows only: headlines K1 (identification) and K2 (partition), model rows M1
 to M12, literature rows L1 to L14, conclusions C1 to C3, and C4, C5 pending. `TODO.md` holds the plan and the open
-decisions. `./verify.sh` runs both suites and writes `VERIFICATION.md`.
+decisions. `./verify.sh` runs the three suites and writes `VERIFICATION.md`.
 
 | Path | Role |
 |---|---|
 | `MANUSCRIPT.tex` | The manuscript, its tables and appendices A to G. |
 | `checks/verify_manuscript.py` | The skeleton checker, rules MS-1 to MS-9 with controls. |
+| `checks/ledger_theory.py` | The ledger of the paper under the bundle's spec (`00_reader/ledger_model.py`), proposed in `notes/ledger.md`. |
 | `verify_theory.py` | The Lean suite (below). |
-| `verify.sh` | Runs both suites, writes `VERIFICATION.md` (generated). |
+| `verify.sh` | Runs the three suites, writes `VERIFICATION.md` (generated). |
 | `refs.bib` | Bibliography, the nine papers the L rows cite. |
 | `notes/writing_discipline.md` | The writing rules, copied from the parent. |
 | `TODO.md` | Plan, decisions, open items. |
