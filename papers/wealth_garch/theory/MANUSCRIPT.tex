@@ -1,0 +1,307 @@
+% MANUSCRIPT.tex, the manuscript skeleton for the theory paper of
+% papers/wealth_garch. Created 23 October 2026 as pass 1 of the plan in
+% TODO.md (item PLAN), following papers/MANUSCRIPT_SKELETON.md, with
+% papers/subjective_racism/paper_a/skeleton_ClassMarkers.tex as the
+% reference. Every table is empty until the author sets what the paper
+% delivers.
+%
+% STRUCTURE THE CHECKER RELIES ON (checks/verify_manuscript.py)
+%   Rows are written only through the six row macros below, and proofs only
+%   through the mproof environment. IDs are K1, K2, ... (introduction),
+%   P1, ... (players), A1, ... (assumptions), M1, ... (model), L1, ... (literature)
+%   and C1, ... (conclusions).
+%     \krow{ID}{headline}{model rows}{scope note}
+%     \prow{ID}{player}{choice faced}{how the model settles it}{in the literature}{rows}
+%     \arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}
+%     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
+%     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{model rows}
+%     \crow{ID}{statement}{model or literature rows}
+%     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
+%   Lists of rows or theorems are comma-separated. Lean theorem names are the
+%   fully qualified names declared under theory/lean/.
+%
+% RULES THE CHECKER ENFORCES
+%   Introduction rows point to model rows only. Player rows and conclusion rows
+%   point to model or literature rows only. Assumption rows point to model rows
+%   only, and every model row rests on at least one assumption. Every model row
+%   names Lean theorems that exist in an audited Lean file and has exactly one
+%   proof in Appendix A naming the same theorems. Every literature row's quote
+%   appears verbatim in the paper's lit/ record. In every proof, plain English
+%   is at most 30% of the text, measured as prose words over prose words plus
+%   mathematical tokens. Every section and table of the skeleton is present,
+%   found by its label.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage[scaled=0.92]{helvet}
+
+\emergencystretch=1.5em
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
+\newcommand{\rowref}[1]{#1}
+\newcommand{\unv}[1]{\textit{Unverified:} #1}
+\newcommand{\pend}[1]{\textit{Pending:} #1}
+
+\newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\prow}[6]{#1 & #2 & #3 & #4 & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\arow}[6]{#1 & #2 & #3 & #4 & \rowref{#5} & #6 \\ \addlinespace}
+\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
+\newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+
+\newenvironment{mproof}[2]
+  {\subsection*{Proof of #1}\label{proof:#1}%
+   {\raggedright\noindent\textit{Lean:} \lean{#2}.\par}\smallskip}
+  {\par\hfill$\square$\par\medskip}
+
+% Working title, from papers/wealth_garch/MANUSCRIPT.tex. The author sets
+% the title.
+\title{Asymmetric Capital Buffer Control}
+\author{}
+\date{Manuscript skeleton, 23 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+
+\subsection{Question}
+
+\pend{the paper's question, in the author's words.}
+
+\subsection{Answer}
+
+\pend{the answer, written from the model rows once they enter.}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
+\caption{Headlines.}\label{tab:headlines}\\
+\toprule
+ID & Headline & Model rows & Scope note \\
+\midrule
+\endfirsthead
+\toprule
+ID & Headline & Model rows & Scope note \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Model}
+\label{sec:model}
+
+\subsection{Players}
+
+\footnotesize
+\begin{longtable}{@{}P{0.7cm}P{2.0cm}P{3.2cm}P{4.4cm}P{3.4cm}P{1.5cm}@{}}
+\caption{Players of the model, the choice each faces and how the rows settle it.}\label{tab:players}\\
+\toprule
+ID & Player & Choice faced & How the model settles it & In the literature & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Player & Choice faced & How the model settles it & In the literature & Rows \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Assumptions}
+
+\footnotesize
+\begin{longtable}{@{}P{0.7cm}P{3.5cm}P{4.2cm}P{2.0cm}P{1.5cm}P{3.3cm}@{}}
+\caption{Assumptions of the model.}\label{tab:assumptions}\\
+\toprule
+ID & Assumption & In plain English & Symbols & Model rows & Reason \\
+\midrule
+\endfirsthead
+\toprule
+ID & Assumption & In plain English & Symbols & Model rows & Reason \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\subsection{Results}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{3.8cm}P{6.3cm}P{3.7cm}P{1.1cm}@{}}
+\caption{Results of the model, each with its statement and the Lean theorems
+that prove it.}\label{tab:results}\\
+\toprule
+ID & Claim & Statement & Lean & Proof \\
+\midrule
+\endfirsthead
+\toprule
+ID & Claim & Statement & Lean & Proof \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Literature}
+\label{sec:literature}
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{2.2cm}P{3.5cm}P{5.5cm}P{1.3cm}P{1.9cm}@{}}
+\caption{Papers read, with the passage each row relies on.}\label{tab:literature}\\
+\toprule
+ID & Paper & What we rely on & Quote & Page & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Paper & What we rely on & Quote & Page & Rows \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+No paper is cited that was not read.
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+Table~\ref{tab:concl} holds the conclusions that rest on model rows and on
+papers read in full. Table~\ref{tab:pending} holds every claim that a result
+is new and every other claim still waiting, and each of its rows names what
+it waits on.
+
+\footnotesize
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Conclusions resting on model rows and papers read.}\label{tab:concl}\\
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+
+\begin{longtable}{@{}P{0.8cm}P{12.3cm}P{3.4cm}@{}}
+\caption{Claims not yet verified, each naming what it waits on.}\label{tab:pending}\\
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endfirsthead
+\toprule
+ID & Statement & Rows \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+% The bibliography enters with the first literature row. Until a key is
+% cited, bibtex has nothing to read and stops with an error.
+% \bibliographystyle{plainnat}
+% \bibliography{refs}
+
+\appendix
+
+\section{Proofs}
+\label{app:proofs}
+
+\paragraph{Notation.} No symbol is defined yet. Each symbol is defined here
+once, when the first row that uses it enters.
+
+\section{Evidence and verification}
+\label{app:evidence}
+
+Every row of the model table will be a theorem of Lean~4 with Mathlib. The
+Lean column names the theorems, and the proof of each row in
+Appendix~\ref{app:proofs} names the same ones. A theorem cited as
+\path{Namespace.name} is declared in the file
+\path{theory/lean/Namespace.lean}. The development is built on the
+toolchain \path{v4.32.0-rc1} against Mathlib commit \path{360da6f}. The script
+\path{theory/verify.sh} runs the suites below on every build, and
+\path{theory/VERIFICATION.md} records what they printed.
+
+\begin{enumerate}
+\item \emph{The Lean build and axiom audit.} Every file under
+\path{theory/lean/} is a build root and builds. No source contains
+\texttt{sorry}. Every declared theorem is audited with \texttt{\#print axioms},
+and none depends on an axiom outside \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}. Each file is identical to
+its source in \path{lean/mathlib/}.
+\item \emph{The skeleton checker.} Rules MS-1 to MS-9 of
+\path{theory/checks/verify_manuscript.py}, each also run on a well-formed
+sample it must accept and a faulty sample it must reject.
+\end{enumerate}
+
+\paragraph{What Lean does not carry.} No model row has entered, so no
+assumption enters a theorem only as a hypothesis yet.
+
+\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
+
+\section{Terminology}
+\label{app:terms}
+
+\footnotesize
+\begin{longtable}{@{}P{4.0cm}P{2.5cm}P{9.5cm}@{}}
+\caption{Terms, each bound to a symbol defined in Appendix~\ref{app:proofs}.}\label{tab:terms}\\
+\toprule
+Term & Symbol & Meaning \\
+\midrule
+\endfirsthead
+\toprule
+Term & Symbol & Meaning \\
+\midrule
+\endhead
+
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{Primitives and scope}
+\label{app:scope}
+
+No primitive is stated yet. Each primitive and each boundary of the model
+gets one paragraph here, saying what lies outside the model and which rows
+depend on it.
+
+\section{Refuted conjectures}
+\label{app:refuted}
+
+No conjecture is refuted yet.
+
+\section{Responses to the referee reports}
+
+Not applicable. The paper has not been through review.
+
+\section{Coverage of the referee comments}
+
+Not applicable, for the same reason.
+
+\end{document}

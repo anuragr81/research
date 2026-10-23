@@ -1,12 +1,23 @@
 # Theory paper
 
-The theory paper's Lean, separated from the literature and measurement
-files of `lean/mathlib/`. What the paper delivers is set by the author and
-not yet recorded here.
+The theory paper of `papers/wealth_garch`. `MANUSCRIPT.tex` is its
+skeleton, built under `papers/MANUSCRIPT_SKELETON.md` and empty until the
+author sets what the paper delivers. `TODO.md` holds the plan and the open
+decisions. `./verify.sh` runs both suites and writes `VERIFICATION.md`.
 
-## Contents
+| Path | Role |
+|---|---|
+| `MANUSCRIPT.tex` | The skeleton, eight empty tables and appendices A to G. |
+| `checks/verify_manuscript.py` | The skeleton checker, rules MS-1 to MS-9 with controls. |
+| `verify_theory.py` | The Lean suite (below). |
+| `verify.sh` | Runs both suites, writes `VERIFICATION.md` (generated). |
+| `refs.bib` | Bibliography, empty. |
+| `notes/writing_discipline.md` | The writing rules, copied from the parent. |
+| `TODO.md` | Plan, decisions, open items. |
 
-`lean/` is a Lake project holding the twelve files that MANUSCRIPT.tex's
+## Lean
+
+`lean/` is a Lake project holding the twelve files that the parent `MANUSCRIPT.tex`'s
 model rows M1 to M16 cite, and the refuted conjectures R1 and R2:
 
 | File | Rows |
@@ -32,7 +43,7 @@ The files are copies. `lean/mathlib/` stays the canonical project, which
 change is made there and copied here. Toolchain and Mathlib pin are those
 of `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1).
 
-## Check
+### Check
 
     python3 theory/verify_theory.py
 
@@ -43,10 +54,7 @@ of `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1).
   `sorry`, and every theorem's axioms within propext, Classical.choice
   and Quot.sound.
 
-`VERIFICATION.md` is the output of the last run: 5 checks, 0 failures;
-98 theorems built and audited.
-
-## Building
+### Building
 
     cd theory/lean && lake exe cache get && lake build
 
