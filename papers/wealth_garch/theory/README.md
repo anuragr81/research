@@ -43,6 +43,9 @@ of `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1).
   `sorry`, and every theorem's axioms within propext, Classical.choice
   and Quot.sound.
 
+`VERIFICATION.md` is the output of the last run: 5 checks, 0 failures;
+98 theorems built and audited.
+
 ## Building
 
     cd theory/lean && lake exe cache get && lake build
