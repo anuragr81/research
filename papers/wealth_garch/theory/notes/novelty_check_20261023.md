@@ -348,3 +348,29 @@ No paper read in full states either result. C2 needs its scope narrowed to the
 leveraged benchmark, or restated for the no-borrowing ceiling. C4 needs its
 contrast with two numerical precedents in bank models. Under the guideline
 both stay in the pending table.
+
+## 7. Records behind the theory paper's rows
+
+The theory `MANUSCRIPT.tex` now carries the two claims as pending rows, in
+its own numbering. The parent's C4 is the theory paper's C4, under headline
+K1, and the parent's C2 is the theory paper's C5, under headline K2. Every
+paper the theory rows cite was read in full, has a `lit/` record with a
+verbatim-quote suite, and has a Lean companion that `theory/lean/` builds
+(TH-4 of `theory/verify_theory.py`).
+
+| Paper | Record | Lean | Rows |
+|---|---|---|---|
+| Bayraktar et al. (2026) | `lit/bayraktar_2026` | `BCVW.lean`, with `ceiling_tighter_than_lcr` for the no-borrowing case | L1 to L4, C3 |
+| Black and Perold (1992) | `lit/black_perold_1992` | `BlackPerold.lean`, `cap_is_cppi` | L5, L6, C2, C5 |
+| Peura and Keppo (2006) | `lit/peura_keppo_2006` | `PeuraKeppo.lean`, `table2_det_neg` | L7, L8, C4 |
+| Dai, Huang and Keppo (2019) | `lit/dai_huang_keppo_2019` | `DaiHuangKeppo.lean`, `table21_det_neg` | L9, C4 |
+| Bolton, Chen and Wang (2011) | `lit/bolton_chen_wang_2011` | `BoltonChenWang.lean` | L10 |
+| Løkka and Zervos (2008) | `lit/lokka_zervos_2008` | `LokkaZervos.lean` | L11 |
+| Barberis, Huang and Santos (2001) | `lit/barberis_huang_santos_2001` | `BarberisHuangSantos.lean` | L12 |
+| Engle and Siriwardane (2018) | `lit/engle_siriwardane_2018` | `EngleSiriwardane.lean` | L13 |
+| Li, Yu and Zhang (2023) | `lit/li_yu_zhang_2023` | `LiYuZhang.lean` | L14 |
+
+Papers read in passes 1 to 6 but cited by no row (Hugonnier and Morellec;
+Bolton, Li, Wang and Yang; De Nicolò, Gamba and Lucchetta; Klimenko et al.;
+Angelis) need no record until a row cites them. Section 5 is unchanged, so
+C4 and C5 stay pending.

@@ -65,12 +65,51 @@ check("TH-1 every theory file is identical to its source in lean/mathlib",
 check("TH-2 every Lean name cited by MANUSCRIPT.tex is declared in theory/lean",
       names and not missing, f"missing: {missing}" if missing else "")
 
+THEORY_TEX = os.path.join(HERE, "MANUSCRIPT.tex")
+LIT = os.path.join(ROOT, "lit")
+
+
+def lit_lean(lit):
+    """Map each bib key in lit/*/KEYS to the Lean files in that record's LEAN."""
+    out = {}
+    for d in sorted(glob.glob(os.path.join(lit, "*", "KEYS"))):
+        rec = os.path.dirname(d)
+        lean = os.path.join(rec, "LEAN")
+        files = open(lean).read().split() if os.path.exists(lean) else []
+        for k in open(d).read().split():
+            out[k] = files
+    return out
+
+
+def cited_keys(tex):
+    return sorted({k.strip() for g in re.findall(r"\\cite[pt]?\{([^}]*)\}", tex)
+                   for k in g.split(",") if k.strip() and not k.strip().startswith("#")}
+                  | set(re.findall(r"^\\lrow\{[^{}]*\}\{([^{}]*)\}", tex, re.M)))
+
+
+keys = cited_keys(open(THEORY_TEX).read())
+lmap = lit_lean(LIT)
+present = {os.path.basename(f) for f in files}
+gaps = [k for k in keys if not lmap.get(k) or any(f not in present for f in lmap[k])]
+print(f"      papers cited by theory/MANUSCRIPT.tex {keys}")
+check("TH-4 every paper cited by theory/MANUSCRIPT.tex has a lit record whose Lean file is in theory/lean",
+      keys and not gaps, f"gaps: {gaps}" if gaps else "")
+
+tnames = [n for n in cited(open(THEORY_TEX).read()) if "#" not in n]
+tmissing = sorted(set(tnames) - declared)
+print(f"      Lean names cited by theory/MANUSCRIPT.tex {len(set(tnames))}")
+check("TH-5 every Lean name cited by theory/MANUSCRIPT.tex is declared in theory/lean",
+      tnames and not tmissing, f"missing: {tmissing}" if tmissing else "")
+
 print("-" * 72)
 print("CONTROLS")
 check("TH-C1 a fabricated citation is detected as missing",
       "RateBased.no_such_theorem" not in declared)
 check("TH-C2 a row's last brace group is read as its Lean names",
       cited(r"\mrow{M0}{a {b} c}{$x^{2}$}{A.one, B.two}") == ["A.one", "B.two"])
+
+check("TH-C3 a cited paper without a lit record is a gap",
+      not lmap.get("nosuchpaper1999") and cited_keys("\\citet{a1999, b2000}\\citep{c2001}\n\\lrow{L1}{d2002}{x}") == ["a1999", "b2000", "c2001", "d2002"])
 
 print("-" * 72)
 p = subprocess.run([sys.executable, os.path.join(ROOT, "checks", "verify_mathlib.py"), PROJ])
