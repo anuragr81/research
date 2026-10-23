@@ -23,7 +23,7 @@ MM-10 every assumption's plain-English reading has no mathematics beyond the
       Lean theorems it cites, names the map entry of every symbol the
       assumption lists, and cites only declared theorems
 MM-11 every name of the map is an Agreed or In use name of the parent
-      MEASUREMENT_MAP.tex, or one of the names PROPOSED below to the author
+      MEASUREMENT_MAP.tex (PROPOSED holds any name offered and not yet taken)
 """
 import glob
 import os
@@ -34,11 +34,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PARENT = os.path.dirname(ROOT)
 STATUS = ("Recorded", "Elicited", "Computed", "Assumed", "Never observed", "A device")
-# Names the theory paper needs that the parent's terminology table does not
-# yet carry, accepted by the author on 23 October 2026 (TODO.md) and kept here
-# until that table takes them. Each is one parameter of the cap
-# geometry, or the value function.
-PROPOSED = {"Solvency floor", "Run-off rate", "Liquidity haircut", "Value function"}
+# Names the parent's terminology table does not carry. Empty since 23 October
+# 2026, when the parent map took the solvency floor, the run-off rate, the
+# liquidity haircut and the value function as Agreed.
+PROPOSED = set()
 results = []
 
 
