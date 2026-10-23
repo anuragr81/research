@@ -3,7 +3,7 @@
 A planning note, not part of the paper. The parent `MANUSCRIPT.tex` claims two
 results new, C2 and C4. Both are candidates for the theory paper, whose
 skeleton has no rows yet. This note records an internal audit, a search-level
-pass (pass 0) and two full-text passes (passes 1 and 2). Further passes are planned
+pass (pass 0) and three full-text passes (passes 1 to 3). Further passes are planned
 (author, 23 October 2026, "happy to do this multiple passes").
 
 The claims, as the parent states them.
@@ -107,6 +107,50 @@ extracted text (every quotation below checked against it).
 | Klimenko, Pfeil, Rochet and De Nicolò (2016), "Aggregate bank capital and credit dynamics", SFI RP 16-42, Drive `14E9yQNQN_kgT1us3mdi7G2vuUGDZpu5N` | "This version: June, 2016", 54 PDF pages | State is aggregate book equity, with a loan-default shock only, since "the total volume of deposits is constant" (PDF p. 16). Proportional cost only, "issuing new equity entails a deadweight cost proportional to the size of the issuance" (p. 4, n. 1), reflecting barriers at zero and $E_{\max}$. "All agents are risk-neutral and have the same discount rate" (p. 8). A one-branch cap $e_t\ge\Lambda k_t$, "binding in poorly-capitalized states and is slack in well-capitalized states" (p. 5). "Corollary 1 Dividend threshold Emax is increasing with the magnitude of financial friction γ" (p. 19). The recapitalisation boundary "is increasing in the minimum capital ratio Λ" (p. 24). Where the cap binds, $d\log E$ has the constant volatility $\sigma_p/\Lambda$ (our reading of their p. 24 equation); "in the unconstrained region (i.e., in the well capitalized states), endogenous volatility is almost as high as in the unregulated set-up" (p. 6) | C2 partial, one branch only, binding near distress, constant log volatility there, no liability shock, no second limit, no preference parameter. C4 partial, barrier statics in a proportional cost and in the capital ratio, no fixed cost, no penalty parameter, no identification |
 | Bertsch and Mariathasan (2021), "Optimal bank leverage and recapitalization in crowded markets", BIS WP 923, Drive `1R0I5FdE7qjQJq3qPkWjbP1qKTia_6fhK` | January 2021, 65 PDF pages | Three dates, binary returns, "All agents are risk-neutral" (p. 7). Recapitalisation cost an endogenous premium rising with the system-wide need. No barriers, no diffusion, no capital volatility result | None |
 
+## 2c. Pass 3, Black and Perold
+
+Black and Perold (1992), "Theory of constant proportion portfolio insurance",
+*Journal of Economic Dynamics and Control* 16(3-4):403-426, uploaded by the
+author to the Drive on 23 October 2026 (`12Az94OgOB92_mfmZCEkrh15gP2swn718`,
+"28665427.pdf", PII 0165-1889(92)90043-E). Read in full, pp. 403-426 and the
+appendix, from the Drive connector's extracted text. The extraction garbles
+some formulas and Greek letters (ρ appears as "p", λ as "A" or "h"); a
+quotation that depends on such a symbol says so.
+
+- The rule is our cap's geometry. "E(t) =min{m.C(t),b\* W(t)). (2.1)"
+  (p. 406), with "the cushion is the difference between wealth and a
+  specified floor" (p. 404) and b the maximum leverage ratio. Our solvency
+  branch is the multiplier branch with $m=1/a_1$ and the floor at the
+  liabilities; our liquidity branch is the borrowing limit with $b=1/a_3$,
+  shifted by $a_2$.
+- The constant log-cushion volatility away from the limit is proved.
+  Proposition 2 (p. 410), with "d In(C) = m d In(S) - i(rn2 - m)a2 dt"
+  (appendix A.1, p. 422; read $d\ln C=m\,d\ln S-\tfrac12(m^2-m)\sigma^2dt$).
+  At the limit "the cushion grows only linearly in S" (p. 411), from which
+  the log-cushion volatility tends to $\sigma_S$ for large wealth (our
+  derivation, not stated). No limit, and no ratio of the two, is stated.
+- The safe asset may carry liability risk: "'safe' may mean that it closely
+  tracks a liability stream" (p. 404), and the numeraire is shares of it, so
+  that liability risk enters through the index ratio $S=A/R$ (pp. 407-408).
+  Floor and safe asset then move together, so the liability is hedged. In our
+  model the riskless asset does not track the liabilities, which is why
+  $\nu_1^2=\sigma^2/a_1^2-2c\sigma\sigma_L/a_1+\sigma_L^2$ rather than
+  $m^2\sigma_S^2$ (our reading of the two structures).
+- The slopes come from preferences. Proposition 11 (pp. 420-421) makes CPPI
+  optimal for a piecewise-HARA utility with a consumption floor; the maximum
+  leverage ratio is set by relative risk aversion ("The maxi- mum leverage
+  ratio b will exceed unity for sufficiently small A, i.e., an investor with
+  sufficiently large risk tolerance", p. 421, A standing for λ), and "The
+  multiple depends on the utility function only through p" (p. 421, p
+  standing for ρ, the impatience to consume).
+
+Overlap with C2: close in geometry, a contrast in substance. The two-branch
+rule and the one-branch constant log volatility are in print since 1992. In
+Black and Perold the two slopes, and so the two volatility levels and their
+ratio, are pinned by preferences. C2's case for novelty must therefore rest on
+the slopes being regulatory, so that the asymmetry parameter is silent, and on
+the liability shock being unhedged, which changes the limits.
+
 ## 3. What pass 1 changes
 
 **C2.** No paper read states the two limits, their ratio, or their
@@ -152,7 +196,7 @@ al.; Bertsch and Mariathasan).
 
 ## 5. What must still be read
 
-For C2. Black and Perold (1992), in full. Choulli, Taksar and Zhou (2003,
+For C2. Choulli, Taksar and Zhou (2003,
 SIAM J. Control Optim. 41(6):1946-1979), "A diffusion model for optimal
 dividend distribution for a company with constraints on risk control", cited
 by Bayraktar et al.
@@ -167,7 +211,16 @@ None is reachable by network or in the author's Drive on 23 October 2026,
 and neither are Black and Perold, Choulli, Taksar and Zhou, Décamps et al.
 or Alvarez, Le Bihan and Lippi.
 
-## 6. Verdict after passes 1 and 2
+## 6. Verdict after passes 1 to 3
+
+Pass 3 reads Black and Perold. C2 as now stated overreaches. Its
+geometry is capped CPPI, and the one-branch volatility is proved there.
+A defensible C2 says that under a regulatory two-branch cap with an
+unhedged liability shock the ratio of the two limits is silent on the
+asymmetry parameter, contrasted with Black and Perold, where the same
+ratio is set by preferences, and scoped to the leveraged case, or
+restated for the no-borrowing ceiling of Bayraktar et al.
+
 
 Pass 2 adds Klimenko et al., the closest bank model to C2's deficit end so
 far: a cap binding near distress pins a constant log volatility there. It
