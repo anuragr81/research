@@ -44,3 +44,10 @@
   condition $r>r_L$ (H2, H2b in `TODO.md`).
 - The paper's recapitalisation threshold is exogenous, and it has no fixed
   issuance cost (H3, H4).
+
+## Added 23 October 2026, for the theory paper's literature ledgers
+
+- BCVW-Q19 to BCVW-Q22 (pp. 12 to 13), for the drawing of the regulatory-cap
+  approach in the theory paper: the thresholds of Theorem 3.1, the
+  illustrative parameterisation, the correlated liability shock, and the cap
+  not creating the thresholds.

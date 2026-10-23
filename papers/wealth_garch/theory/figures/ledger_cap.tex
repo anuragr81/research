@@ -1,0 +1,23 @@
+% ledger_cap.tex, Figure 3 of wealth_garch_theory.tex: regulatory-cap
+% control, with Black and Perold's rule as the same geometry under
+% preferences. Labels cite the literature rows.
+\sffamily
+\begin{tikzpicture}[ledger]
+\node[regulator] (Reg) at (0,8) {\textbf{Regulator}\\ the cap with solvency and liquidity branches (L1, L26); an exogenous distress threshold (L28)};
+\node[agent, minimum height=3.6cm] (Bank) at (0,0) {\textbf{Bank}\\ asset-to-deposit ratio, risky fraction\\[3pt] \scriptsize chooses exposure, dividends and the post-issue state};
+\node[other] (Inv) at (13,0) {\textbf{Investors}\\ receive dividends; recapitalise at proportional costs only (L3)};
+\node[agent, text width=3.4cm, minimum height=2.4cm] (Dep) at (-8,0) {\textbf{Depositors}\\ liabilities with their own shock, correlated with the risky return (L30)};
+\node[pref, text width=4.8cm, minimum height=3.2cm] (BP) at (13,8) {\textbf{Black and Perold's investor}\\ exposure a constant multiple of the cushion, up to a borrowing limit (L5); the floor tracks a liability (L32)};
+\node[outside] (An) at (-8,8) {\textbf{Analyst}\\ \scriptsize sets the parameters};
+
+\draw[settled] ([xshift=-10mm]Reg.south) -- node[lab, pos=0.5, anchor=east, xshift=-3pt, text width=3.6cm] {caps exposure by the smaller branch, with a switching point (L26); the paper's cap (L1)} ([xshift=-10mm]Bank.north);
+\draw[settled] ([xshift=10mm]Reg.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.4cm] {forbids borrowing in the main banking case, under which the liquidity branch never binds (L2)} ([xshift=10mm]Bank.north);
+\draw[given]   ([xshift=-8mm]Bank.south) to[out=-90, in=-90, looseness=2.2] node[lab, pos=0.5, below=2pt, text width=6.4cm] {holds exposure at the cap, by the numerical solve; at zero equity the cap forces zero exposure and the diffusion vanishes (L27)} ([xshift=8mm]Bank.south);
+\draw[given]   ([yshift=10mm]Bank.east) -- node[lab, pos=0.5, above=2pt, text width=7.2cm] {pays dividends at an upper barrier (L28); the cap does not create the thresholds (L29)} ([yshift=10mm]Inv.west);
+\draw[given]   ([yshift=-8mm]Inv.west) -- node[lab, pos=0.5, below=2pt, text width=7.2cm] {recapitalise at the distress boundary to a post-issue target; a fixed cost would move recapitalisation earlier (L28, L3)} ([yshift=-8mm]Bank.east);
+\draw[settled] (Dep.east) -- node[lab, pos=0.5, above=2pt, text width=3.0cm] {the liability shock enters the diffusion (L30)} (Bank.west);
+\draw[settled] (BP.east) to[out=-10, in=10, looseness=6] node[lab, pos=0.5, anchor=west, xshift=4pt, text width=3.6cm] {keeps the multiple up to the limit; constant log-cushion volatility on the multiplier branch (L5)} ([yshift=8mm]BP.east);
+\draw[given]   ([xshift=-14mm]BP.north) to[out=110, in=70, looseness=3] node[lab, pos=0.5, above=2pt, text width=4.6cm] {the multiple from impatience, the limit from risk tolerance (L6)} ([xshift=14mm]BP.north);
+\draw[given]   (BP.west) -- node[lab, pos=0.5, above=2pt, text width=4.6cm] {the same geometry, preferences in place of regulation (L5, L6)} (Reg.east);
+\draw[open]    (An.east) -- node[lab, pos=0.5, above=2pt, text width=2.8cm] {an illustrative parameterisation (L31)} (Reg.west);
+\end{tikzpicture}

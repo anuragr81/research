@@ -1,0 +1,21 @@
+% ledger_paper.tex, Figure 1 of wealth_garch_theory.tex: the paper's own
+% ledger, six entities of the bundle ledger and eight actions
+% (notes/ledger.md). Labels cite the paper's rows.
+\sffamily
+\begin{tikzpicture}[ledger]
+\node[regulator] (Sup) at (0,8) {\textbf{Supervisor}\\ sets required capital $q$ and the regulatory cap $a_1,a_2,a_3$ (A2)};
+\node[agent, minimum height=3.4cm] (Bank) at (0,0) {\textbf{Bank}\\ assets-to-liabilities ratio $x$, risky exposure $\pi$ (A1)\\[3pt] \scriptsize chooses the dividend barrier $y^*$, the recapitalisation trigger $x_L$ and the injection target $y_{\text{post}}$ (A6)};
+\node[other] (Inv) at (13,0) {\textbf{Investors}\\ receive dividends and supply issues at $K$ and $\kappa$ (A5)\\[3pt] \scriptsize the parent holding company among them};
+\node[object] (Eq) at (13,-8.5) {\textbf{Equity}\\ $x-1$, with the capital buffer $z=\log((x-1)/q)$ (M9)\\[3pt] \scriptsize zero at the reference $R=1+q$ (A4)};
+\node[agent, text width=3.4cm, minimum height=2.2cm] (Ins) at (-8,1.6) {\textbf{Insured creditors}\\ part of the liabilities, shock $\sigma_L$, correlation $c$ (A1)};
+\node[agent, text width=3.4cm, minimum height=2.2cm] (Unins) at (-8,-3.4) {\textbf{Uninsured creditors}\\ the rest of the liabilities, the same shock (A1)};
+
+\draw[settled] ([yshift=6mm]Bank.east) -- node[lab, pos=0.5, above=2pt, text width=6.4cm] {pays dividends at the barrier, which rises in $\lambda_S$ and in $K$ (M1)} ([yshift=6mm]Inv.west);
+\draw[settled] ([xshift=-9mm]Inv.south) -- node[lab, pos=0.5, anchor=east, xshift=-3pt, text width=4.0cm] {buy stock, from the trigger to the target; the trigger rises in $\lambda_S$ and falls in $K$ (M2), the target does not depend on the start (M7), and the value is smooth and convex at the trigger (M4, M5)} ([xshift=-9mm]Eq.north);
+\draw[settled] ([xshift=11mm]Inv.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.0cm] {inject capital, the parent holding company, not told apart from a sale of stock; finitely many issues when $K>0$ (M6)} ([xshift=11mm]Eq.north);
+\draw[given]   (Ins.east) -- node[lab, pos=0.5, above=2pt, text width=2.8cm] {deposit and withdraw, the liability shock (A1)} ([yshift=16mm]Bank.west);
+\draw[given]   (Unins.east) -- node[lab, pos=0.5, below=2pt, text width=3.0cm] {lend and withdraw, the same shock (A1)} ([yshift=-12mm]Bank.west);
+\draw[given]   (Bank.south) |- node[lab, pos=0.75, below=3pt, text width=7.4cm] {takes risky exposure under the cap (A2); where it binds near an end, buffer variance tends to $\nu_1^2$ and $\nu_3^2$, free of $\lambda_S$ (M10, M11); for every compliant exposure it is bounded by them (M12); the surplus limit needs borrowing (C3)} (Eq.west);
+\draw[given]   ([xshift=-9mm]Sup.south) -- node[lab, pos=0.5, anchor=east, xshift=-3pt, text width=3.0cm] {supervises, holding the bank to the cap and the requirement (A2)} ([xshift=-9mm]Bank.north);
+\draw[open]    ([xshift=9mm]Sup.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.6cm] {assigns a capital category, with its restrictions; the shortfall penalty $\Lambda=(\lambda_S-1)(R-x)^+$ stands for it, a reading no row derives (M8, Appendix~D)} ([xshift=9mm]Bank.north);
+\end{tikzpicture}

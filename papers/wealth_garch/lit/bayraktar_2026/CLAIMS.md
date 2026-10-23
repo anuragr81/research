@@ -24,6 +24,10 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | BCVW-Q16 | 20 | the direct ceiling π ≤ 1 is tighter than the LCR constraint | In their parameter range the no-borrowing ceiling lies below the liquidity branch, `BCVW.ceiling_tighter_than_lcr` for every $a_2\le(1-a_3)y$. |
 | BCVW-Q17 | 20 | the LCR constraint is nonbinding within the parameter range considered | M3's surplus limit, which needs the liquidity branch to bind deep in surplus, belongs to their unrestricted benchmark. |
 | BCVW-Q18 | 17 | the LCR is everywhere weaker than the direct leverage ceiling and is therefore redundant | The same point for the value comparison of their Table 1. |
+| BCVW-Q19 | 12 | dividends are paid at an upper barrier, while recapitalization, when optimal, is triggered at the distress boundary and jumps to a post-issuance target | The thresholds of Theorem 3.1. The trigger is the exogenous distress boundary, not an interior threshold. |
+| BCVW-Q20 | 13 | These values constitute an illustrative parameterization rather than an empirical calibration | No parameter is set from data or read off the policy. |
+| BCVW-Q21 | 13 | c is their shock correlation | The liability shock is correlated with the risky return, as in the theory paper's A1. |
+| BCVW-Q22 | 13 | The regulatory constraints do not create the threshold structure from scratch | The cap moves the thresholds and does not make them; the thresholds come from the costs. |
 
 ## Lean results
 

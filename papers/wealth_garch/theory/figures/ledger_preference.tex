@@ -1,0 +1,17 @@
+% ledger_preference.tex, Figure 4 of wealth_garch_theory.tex: preference
+% asymmetry read in volatility. No bank and no regulator. Labels cite the
+% literature rows.
+\sffamily
+\begin{tikzpicture}[ledger]
+\node[pref, minimum height=3.6cm] (Inv) at (0,0) {\textbf{Investor}, or agent\\ a reference point and loss aversion over gains and losses, kinked-linear (L12) or S-shaped (L14)};
+\node[object, minimum height=3.2cm] (Asset) at (13,0) {\textbf{Asset}\\ the dividend claim, or the wealth process};
+\node[agent] (Firm) at (13,8) {\textbf{Firm}\\ leverage, which turns asset variance into equity variance (L34)};
+\node[outside] (Prior) at (0,8) {\textbf{Prior outcomes}\\ \scriptsize the gains and losses already taken};
+\node[object, text width=3.2cm, minimum height=2.4cm] (Mkt) at (21,0) {\textbf{Market}\\ the aggregate return};
+
+\draw[settled] ([yshift=9mm]Inv.east) -- node[lab, pos=0.5, above=2pt, text width=7.6cm] {prices the dividend claim; with constant loss aversion the volatility of log returns equals that of dividend growth at every level (L12)} ([yshift=9mm]Asset.west);
+\draw[settled] ([yshift=-9mm]Inv.east) -- node[lab, pos=0.5, below=2pt, text width=7.6cm] {consumes and invests under the S-shaped utility; the large-wealth limits of the controls depend on the reference parameter (L14)} ([yshift=-9mm]Asset.west);
+\draw[given]   (Prior.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.8cm] {loss aversion varies with prior outcomes, the source of volatility that constant loss aversion loses (L33)} (Inv.north);
+\draw[settled] (Firm.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.6cm] {equity variance is the squared multiplier times asset variance (L34)} (Asset.north);
+\draw[settled] (Mkt.west) -- node[lab, pos=0.5, above=2pt, text width=3.0cm] {volatility asymmetry is mostly market exposure, not leverage (L13)} (Asset.east);
+\end{tikzpicture}

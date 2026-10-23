@@ -351,7 +351,7 @@ both stay in the pending table.
 
 ## 7. Records behind the theory paper's rows
 
-The theory `MANUSCRIPT.tex` now carries the two claims as pending rows, in
+The theory manuscript, `wealth_garch_theory.tex`, now carries the two claims as pending rows, in
 its own numbering. The parent's C4 is the theory paper's C4, under headline
 K1, and the parent's C2 is the theory paper's C5, under headline K2. Every
 paper the theory rows cite was read in full, has a `lit/` record with a

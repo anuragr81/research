@@ -1,4 +1,4 @@
-% MANUSCRIPT.tex, the manuscript of the theory paper of papers/wealth_garch.
+% wealth_garch_theory.tex, the manuscript of the theory paper of papers/wealth_garch.
 % Created 23 October 2026 as pass 1 of the plan in TODO.md (item PLAN),
 % following papers/MANUSCRIPT_SKELETON.md, with
 % papers/subjective_racism/paper_a/skeleton_ClassMarkers.tex as the
@@ -45,6 +45,12 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
 \usepackage[scaled=0.92]{helvet}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{pdflscape}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,fit,calc,backgrounds}
+\input{figures/ledger_styles}
 
 \emergencystretch=1.5em
 % Characters that appear verbatim in quotations of the lit/ records.
@@ -173,6 +179,28 @@ ID & Player & Choice faced & How the model settles it & In the literature & Rows
 \end{longtable}
 \normalsize
 
+Figure~\ref{fig:ledger} draws the model as a graph. Its nodes are the agents
+and the object they act on, equity, named as in Appendix~\ref{app:terms}, and
+its arrows are the actions between them, each labelled by the rows that settle
+it. The players of Table~\ref{tab:players} are its agents, with the creditors
+drawn as the insured and the uninsured, since they hold the liabilities
+differently and the model takes their shock as one block (A1).
+
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\adjustbox{max width=\linewidth, max height=0.80\textheight}{\input{figures/ledger_paper.tex}}
+\caption{The paper's ledger. Six entities, the agents in green and orange, the
+supervisor in red and equity in blue, and eight actions. Solid arrows are
+settled by model rows, dashed arrows are rules or inputs taken as given, and
+the dotted arrow is open. Each label cites the rows that settle the action.
+The insurer is not drawn, since no row bears on it. K1 concerns the dividend
+arrow and the two issue arrows together (M3), and K2 the exposure arrow and
+equity (M10 to M12).}
+\label{fig:ledger}
+\end{figure}
+\end{landscape}
+
 \subsection{Assumptions}
 
 \footnotesize
@@ -260,6 +288,114 @@ multiple and the leverage limit, which preferences choose (L5, L6). For a bank
 under a regulatory cap no paper read evaluates the limits. K2 does (M10 to
 M12, C2), and C3 says where the surplus limit applies (L2).
 
+\subsection{The three approaches as ledgers}
+
+The papers read address the question in three ways, and each is drawn as a
+ledger of the same form as the paper's own (Figure~\ref{fig:ledger}), with the
+entities that act or are acted on and the actions between them. An arrow is
+solid when the paper derives the action and its Lean record proves it, dashed
+when the paper assumes it, and dotted when the paper states it in words and
+does not model it. Table~\ref{tab:approaches} sets the elements of the
+paper's ledger against the three.
+
+The first approach is the issuance-cost barrier models
+(Figure~\ref{fig:ledger-issuance}). The bank pays dividends at a barrier and
+issues in lumps because issues carry a fixed cost (L7, L22), and these
+thresholds and the fixed cost per unit of size are the paper's (M1, M2, M7,
+A5). The shortfall is liquidation at the minimum (L24), which
+\citet{peura2006} would replace with a penalty that grows as the ratio falls
+(L18), and in \citet{daihuangkeppo2019} the asymmetry is the regulator's and
+acts through the liquidation barrier (L25). No parameter is read off the
+thresholds. The analyst pins them from issue cost and frequency, imposes them
+or fits them to equity values (L8, L20, L21), and that dotted arrow is where
+the paper's M3 enters.
+
+The second is regulatory-cap control (Figure~\ref{fig:ledger-cap}). The cap
+is the paper's (L1, L26), and the thresholds survive it (L28), since the cap
+moves them and does not create them (L29). The trigger is the exogenous
+distress boundary and issues carry proportional costs only, and
+\citet{bayraktar2026} name a fixed cost as the change that would move
+recapitalisation (L3). There is no asymmetry parameter, and the parameters are
+illustrative (L31). The rule of \citet{blackperold1992} has the same geometry
+with preferences in place of regulation (L5, L6) and a safe asset that can
+track the liability (L32), so its two volatility levels carry preference
+information. In the paper the slopes are regulatory, the liability shock is
+unhedged, and the limits carry no information about the asymmetry parameter
+(M11).
+
+The third reads a preference asymmetry in volatility
+(Figure~\ref{fig:ledger-preference}). The asymmetry is an investor's
+preference over gains and losses, and its mark is sought in the variance of
+returns. With constant loss aversion it leaves none (L12), the volatility it
+adds comes from loss aversion that varies with prior outcomes (L33), and
+without a cap the large-wealth limits of the controls carry the reference
+parameter (L14). \citet{engle2018} assign volatility asymmetry to market
+exposure rather than to leverage (L13, L34). Under a binding regulatory cap
+the paper's limits carry no mark of the asymmetry parameter (M11), and the
+thresholds do (M1 to M3), so the variance route is closed by the cap and the
+threshold route is the one K1 opens.
+
+Set against Figure~\ref{fig:ledger}, each drawing lacks part of the paper's
+ledger. The first has the thresholds and the fixed cost, and no graduated
+penalty and no cap. The second has the cap and the thresholds, and no fixed
+cost and no asymmetry parameter. The third has the asymmetry, and no bank. The
+paper puts the three on one bank, and the arrow none of them has runs from the
+two thresholds to the two parameters (M3).
+
+\begin{table}[t]
+\footnotesize
+\caption{The elements of the paper's ledger against the three approaches.}\label{tab:approaches}
+\begin{tabular}{@{}P{3.4cm}P{3.1cm}P{3.1cm}P{3.1cm}P{2.8cm}@{}}
+\toprule
+Element of Figure~\ref{fig:ledger} & Issuance-cost models & Regulatory-cap control & Preference in volatility & This paper \\
+\midrule
+A fixed issuance cost that makes issues lumpy (A5, M6) & present (L7, L22) & absent (L3) & absent & present \\ \addlinespace
+A penalty growing below the requirement (A4, M8) & liquidation instead, a graded penalty called for (L24, L18) & an exogenous threshold (L28) & a preference over losses, no bank (L12) & present, with $R=1+q$ \\ \addlinespace
+A regulatory cap on exposure (A2, M10) & absent & present (L26) & absent & present \\ \addlinespace
+A trigger moved against the fixed cost (M2, M3) & the regulator's asymmetry, through the liquidation barrier (L25) & the trigger is the distress boundary (L28) & no trigger & the asymmetry parameter (M2, M3) \\ \addlinespace
+Parameters read off the thresholds (M3) & set by calibration or fit (L8, L20, L21) & illustrative (L31) & read off variance (L12, L14) & local identification (M3) \\ \addlinespace
+Variance limits set by the cap, free of the asymmetry (M11) & not evaluated & not evaluated, and preference-set slopes in the rule of Black and Perold (L6) & the reference parameter in the limits, with no cap (L14) & present (M11) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{landscape}
+\begin{figure}[p]
+\centering
+\adjustbox{max width=\linewidth, max height=0.80\textheight}{\input{figures/ledger_issuance.tex}}
+\caption{Issuance-cost barrier models, \citet{peura2006},
+\citet{daihuangkeppo2019}, \citet{bolton2011}, \citet{lokka2008} and
+\citet{milnewhalley2001}. Solid arrows are derived in the papers and proved in
+their Lean records, dashed arrows are assumed, and dotted arrows are stated in
+words and not modelled. The analyst is not an agent of the models. Against
+Figure~\ref{fig:ledger}, there is no cap and no graduated penalty, and the
+parameters are set rather than read off the thresholds.}
+\label{fig:ledger-issuance}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\adjustbox{max width=\linewidth, max height=0.80\textheight}{\input{figures/ledger_cap.tex}}
+\caption{Regulatory-cap control, \citet{bayraktar2026}, with the rule of
+\citet{blackperold1992} as the same geometry under preferences. Arrow styles as
+in Figure~\ref{fig:ledger-issuance}. Against Figure~\ref{fig:ledger}, there is
+no fixed issuance cost, the trigger is exogenous, and there is no asymmetry
+parameter.}
+\label{fig:ledger-cap}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\adjustbox{max width=\linewidth, max height=0.80\textheight}{\input{figures/ledger_preference.tex}}
+\caption{Preference asymmetry read in volatility, \citet{barberis2001},
+\citet{li2023} and \citet{engle2018}. Arrow styles as in
+Figure~\ref{fig:ledger-issuance}. There is no bank and no regulator. Against
+Figure~\ref{fig:ledger}, the asymmetry is sought in the variance of returns,
+which a binding cap closes (M11), and not in thresholds.}
+\label{fig:ledger-preference}
+\end{figure}
+\end{landscape}
+
 \subsection{Papers read}
 
 \footnotesize
@@ -294,6 +430,19 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L19}{peura2006}{The question they leave, whose cost binds the bank's capital. The thresholds identify the weight of the penalty under any reading and do not choose among them.}{Whether these omissions matter reduces to the issue of which constituency provides the binding constraint on bank capitalization.}{2192}{M3, M8}
 \lrow{L20}{peura2006}{Their parameters beyond the return moments are imposed, not identified from the bank's policy. M3 identifies two of them from the thresholds.}{imposed common values for other parameters (mainly guided by high level economic intuition)}{2192}{M3}
 \lrow{L21}{daihuangkeppo2019}{Their parameters are fitted to equity values, not identified from the thresholds.}{are calibrated by fitting the partially observed value function}{84}{M3}
+\lrow{L22}{peura2006}{Issues are larger and rarer when the fixed cost is high, the widening trigger-to-target gap of M2 and the finite count of M6.}{The owners optimally issue new equity in larger quantities but less frequently when the cost of issuance is high}{2179}{M2, M6}
+\lrow{L23}{peura2006}{In their model the fixed cost alone puts the issue barrier at the minimum, and the delay moves it up. In M2 the trigger is an interior threshold whose responses to the fixed cost and to the asymmetry parameter are derived.}{The sole presence of the fixed cost does not generate a positive capital issue barrier and will not result in a positive probability of liquidation.}{2177}{M2}
+\lrow{L24}{peura2006}{The penalty at the minimum is liquidation. The shortfall penalty of M8 grades it below the reference.}{We assume that the corrective action from violation of the minimum capital requirement will be liquidation}{2168}{M8}
+\lrow{L25}{daihuangkeppo2019}{The asymmetry in their model is the regulator's, between the costs of liquidating and of not liquidating, and it acts through the liquidation barrier. The asymmetry parameter of M2 and M3 is in the bank's objective and moves the trigger against the fixed cost.}{when the liquidation parameter a rises, then the liquidation barrier I falls}{71}{M2, M3}
+\lrow{L26}{bayraktar2026}{The minimum of two branches with a switching point, the cap and the crossing point of M10.}{The key structure is the minimum operator in the regulatory constraint, with a switching point}{15}{M10}
+\lrow{L27}{bayraktar2026}{At zero equity the cap forces zero exposure and the diffusion vanishes, the boundary that M9 sends to minus infinity and near which M11 takes its deficit limit.}{At the hypothetical zero-equity level y = 1, the solvency constraint forces π = 0 and the diffusion coefficient of the ratio process vanishes.}{11}{M9, M11}
+\lrow{L28}{bayraktar2026}{Their dividend barrier and post-issue target are the paper's. Their trigger is the exogenous distress boundary, where the trigger of M2 is interior and responds to the two parameters.}{dividends are paid at an upper barrier, while recapitalization, when optimal, is triggered at the distress boundary and jumps to a post-issuance target}{12}{M1, M2, M7}
+\lrow{L29}{bayraktar2026}{The cap moves the thresholds and does not create them, as in M1 and M2, where the costs make the thresholds and the cap of M10 shapes the variance.}{The regulatory constraints do not create the threshold structure from scratch}{13}{M1, M2, M10}
+\lrow{L30}{bayraktar2026}{The liability shock is correlated with the risky return, as in A1, and enters the variance of M10 to M12.}{c is their shock correlation}{13}{M10, M11, M12}
+\lrow{L31}{bayraktar2026}{Their parameters are illustrative and none is read off the policy, where M3 reads two off the thresholds.}{These values constitute an illustrative parameterization rather than an empirical calibration}{13}{M3}
+\lrow{L32}{blackperold1992}{Their safe asset can track the liability, so the liability is hedged. In M10 to M12 the liability shock enters buffer variance unhedged.}{'safe' may mean that it closely tracks a liability stream}{404}{M10, M11}
+\lrow{L33}{barberis2001}{Volatility from loss aversion needs loss aversion to vary over time. In M11 a constant asymmetry parameter leaves no mark on the variance limits, for a different reason, the binding cap.}{The investor's risk aversion is then constant over time, and stock prices lose an important source of volatility.}{4}{M11}
+\lrow{L34}{engle2018}{Equity variance is the squared leverage multiplier times asset variance, the structural relation behind the change of variable of M10.}{which is the exact relationship implied by structural models of credit}{459}{M10}
 \bottomrule
 \end{longtable}
 \normalsize

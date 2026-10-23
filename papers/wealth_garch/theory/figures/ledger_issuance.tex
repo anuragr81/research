@@ -1,0 +1,17 @@
+% ledger_issuance.tex, Figure 2 of wealth_garch_theory.tex: the
+% issuance-cost barrier models. Labels cite the literature rows.
+\sffamily
+\begin{tikzpicture}[ledger]
+\node[regulator] (Reg) at (0,8) {\textbf{Regulator}\\ a minimum capital ratio, with liquidation below it (L24); a costly intervention below the minimum (L16)};
+\node[agent, minimum height=5.4cm] (Bank) at (0,0) {\textbf{Bank}, its owners\\ capital ratio over risk-weighted assets\\[3pt] \scriptsize chooses the dividend barrier and the issue barrier, the double barrier established in the class (L10)};
+\node[other, minimum height=5.4cm] (Inv) at (13,0) {\textbf{Investors}, the capital market\\ supply an issue at a fixed cost proportional to size, after a delay (L7, L22), or at a proportional cost only (L11)};
+\node[outside] (An) at (13,8) {\textbf{Analyst}\\ \scriptsize not an agent of the model; sets its parameters};
+
+\draw[settled] ([yshift=18mm]Bank.east) -- node[lab, pos=0.5, above=2pt, text width=7.4cm] {pays dividends at the barrier, to which every issue replenishes the ratio (L7)} ([yshift=18mm]Inv.west);
+\draw[settled] ([yshift=2mm]Inv.west) -- node[lab, pos=0.5, above=2pt, text width=7.4cm] {issues larger and less often when the fixed cost is high (L22); the fixed cost alone puts the issue barrier at the minimum, and the delay moves it up (L23)} ([yshift=2mm]Bank.east);
+\draw[settled] ([yshift=-18mm]Inv.west) -- node[lab, pos=0.5, above=2pt, text width=7.4cm] {without a fixed cost, tops up at zero with no lump and no target (L11)} ([yshift=-18mm]Bank.east);
+\draw[given]   ([xshift=-10mm]Reg.south) -- node[lab, pos=0.5, anchor=east, xshift=-3pt, text width=3.8cm] {liquidates below the minimum (L24), a penalty the authors would replace with one that grows as the ratio falls (L18); the buffer guards against the intervention (L16)} ([xshift=-10mm]Bank.north);
+\draw[given]   ([xshift=10mm]Reg.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.6cm] {its own asymmetry, of liquidating against not, moves the liquidation barrier (L25)} ([xshift=10mm]Bank.north);
+\draw[open]    (An.west) -- node[lab, pos=0.5, above=2pt, text width=6.4cm] {pins the delay and the fixed cost from issue cost and frequency (L8), imposes the rest by intuition (L20), or fits them to equity values (L21)} (Reg.east);
+\draw[open]    (An.south) -- node[lab, pos=0.5, anchor=west, xshift=3pt, text width=3.0cm] {the parameters of the capital market are set, not read off the thresholds} (Inv.north);
+\end{tikzpicture}

@@ -26,7 +26,7 @@ creditors one entity, against the bundle's agreed ledger.
   when a theory row proves it, dashed (given) when the model takes it as a
   rule or an input, dotted (open) when nothing in the paper carries it.
 - A result is an annotation on the edge or node it concerns, resting on rows
-  of `MANUSCRIPT.tex`. Every model row M1 to M12 sits on the graph.
+  of `wealth_garch_theory.tex`. Every model row M1 to M12 sits on the graph.
 - The theory ledger is a subgraph of the bundle's. What it leaves out is
   listed with the reason.
 
@@ -102,7 +102,8 @@ where $\lambda_S$ does move the thresholds.
    puts it on the supervisor's restrictions (A9), and copies the insurer's
    price (A11) and the uninsured creditors' pricing (A7) below the reference
    only. The theory ledger carries only the first, as open.
-5. **A figure.** Paper A and the entry-contest paper draw the ledger as
+5. **A figure.** Done 23 October 2026, Figure 1 of the manuscript
+   (`figures/ledger_paper.tex`). Paper A and the entry-contest paper draw the ledger as
    Figure 1. Recommended once the names are agreed. Graphviz is not installed
    in this container, so the parent's `--write` route does not render here.
    A TikZ drawing like Paper A's `ledger_picture.tex` would need nothing new.

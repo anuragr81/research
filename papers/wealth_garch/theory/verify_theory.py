@@ -59,13 +59,13 @@ declared = {n for f in files for n in declarations(f)}
 names = cited(open(MANUSCRIPT).read())
 missing = sorted(set(names) - declared)
 print(f"      files {[os.path.basename(f) for f in files]}")
-print(f"      theorems declared {len(declared)}; Lean names cited by MANUSCRIPT.tex {len(set(names))}")
+print(f"      theorems declared {len(declared)}; Lean names cited by the parent MANUSCRIPT.tex {len(set(names))}")
 check("TH-1 every theory file is identical to its source in lean/mathlib",
       files and not drifted(PROJ, SOURCE), f"{drifted(PROJ, SOURCE)}")
-check("TH-2 every Lean name cited by MANUSCRIPT.tex is declared in theory/lean",
+check("TH-2 every Lean name cited by the parent MANUSCRIPT.tex is declared in theory/lean",
       names and not missing, f"missing: {missing}" if missing else "")
 
-THEORY_TEX = os.path.join(HERE, "MANUSCRIPT.tex")
+THEORY_TEX = os.path.join(HERE, "wealth_garch_theory.tex")
 LIT = os.path.join(ROOT, "lit")
 
 
@@ -91,14 +91,14 @@ keys = cited_keys(open(THEORY_TEX).read())
 lmap = lit_lean(LIT)
 present = {os.path.basename(f) for f in files}
 gaps = [k for k in keys if not lmap.get(k) or any(f not in present for f in lmap[k])]
-print(f"      papers cited by theory/MANUSCRIPT.tex {keys}")
-check("TH-4 every paper cited by theory/MANUSCRIPT.tex has a lit record whose Lean file is in theory/lean",
+print(f"      papers cited by theory/wealth_garch_theory.tex {keys}")
+check("TH-4 every paper cited by theory/wealth_garch_theory.tex has a lit record whose Lean file is in theory/lean",
       keys and not gaps, f"gaps: {gaps}" if gaps else "")
 
 tnames = [n for n in cited(open(THEORY_TEX).read()) if "#" not in n]
 tmissing = sorted(set(tnames) - declared)
-print(f"      Lean names cited by theory/MANUSCRIPT.tex {len(set(tnames))}")
-check("TH-5 every Lean name cited by theory/MANUSCRIPT.tex is declared in theory/lean",
+print(f"      Lean names cited by theory/wealth_garch_theory.tex {len(set(tnames))}")
+check("TH-5 every Lean name cited by theory/wealth_garch_theory.tex is declared in theory/lean",
       tnames and not tmissing, f"missing: {tmissing}" if tmissing else "")
 
 print("-" * 72)

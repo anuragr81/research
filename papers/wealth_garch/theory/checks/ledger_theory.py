@@ -1,4 +1,4 @@
-"""Ledger of the theory paper (theory/MANUSCRIPT.tex): entities, actions, annotations.
+"""Ledger of the theory paper (theory/wealth_garch_theory.tex): entities, actions, annotations.
 
 The ledger follows the bundle's spec, 00_reader/ledger_model.py and the Entities
 and Actions tables of MEASUREMENT_MAP.tex. Its nodes are entities, the agents and
@@ -9,7 +9,7 @@ through the agent who enforces it. Constructs (the shortfall penalty, the asymme
 parameter, the value function) and the model's outputs (the dividend barrier, the
 recapitalisation trigger, the injection target) are not nodes. A result of the
 theory paper is an annotation on the edge or node it concerns, resting on rows of
-theory/MANUSCRIPT.tex.
+theory/wealth_garch_theory.tex.
 
 The theory ledger is a subgraph of the bundle's: every node and edge here is one of
 00_reader/ledger_model.py with the same row, kind, agent and target, and every map
@@ -32,7 +32,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 THEORY = HERE.parent
 BUNDLE = THEORY.parent
-MANUSCRIPT = THEORY / "MANUSCRIPT.tex"
+MANUSCRIPT = THEORY / "wealth_garch_theory.tex"
 
 spec = importlib.util.spec_from_file_location("ledger_model", BUNDLE / "00_reader" / "ledger_model.py")
 LM = importlib.util.module_from_spec(spec)

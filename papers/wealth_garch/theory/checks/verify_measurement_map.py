@@ -1,5 +1,5 @@
 """Checks the measurement map, theory/MEASUREMENT_MAP.tex, whose tables
-(map_tables.tex) Appendix app:terms of theory/MANUSCRIPT.tex includes. The map
+(map_tables.tex) Appendix app:terms of theory/wealth_garch_theory.tex includes. The map
 names every object of the theory paper's model and is its terminology.
 Rules MM-1 to MM-11, each run on the map and on a well-formed and a faulty
 sample. MM-1 to MM-10 are Paper A's (papers/subjective_racism/paper_a/checks/
@@ -266,9 +266,9 @@ FIX_A_BAD = [["A1", r"The prior $\pi_g(c)$ is scaled by $\delta$.",
 lean = lean_declarations()
 agreed = parent_terms()
 print("=" * 72)
-print("MEASUREMENT MAP (theory/MEASUREMENT_MAP.tex, included by Appendix app:terms of MANUSCRIPT.tex)")
+print("MEASUREMENT MAP (theory/MEASUREMENT_MAP.tex, included by Appendix app:terms of wealth_garch_theory.tex)")
 print("=" * 72)
-mtex = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
+mtex = open(os.path.join(ROOT, "wealth_garch_theory.tex")).read()
 tex = map_section(open(os.path.join(ROOT, "MEASUREMENT_MAP.tex")).read())
 included = r"\input{map_tables}" in strip_comments(mtex)
 terms = other_glossaries(mtex)

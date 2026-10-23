@@ -1,0 +1,21 @@
+% ledger_styles.tex, the TikZ styles of the four ledger figures of
+% wealth_garch_theory.tex (Figures 1 to 4). Agents are green, objects blue,
+% counterparties orange, the regulator red, preference-driven agents violet,
+% and what is not an agent of the model grey and dashed. Solid arrows are
+% derived (a model row, or a paper's result its Lean record proves), dashed
+% arrows are assumed or taken as given, dotted arrows are stated in words or
+% open.
+\tikzset{
+  >={Stealth[length=2.2mm]},
+  ledger/.style={every node/.style={font=\small}},
+  agent/.style={draw=black!60, line width=0.6pt, align=center, text width=4.0cm, minimum height=3.0cm, inner sep=5pt, rounded corners=4pt, fill=green!10},
+  object/.style={draw=black!60, line width=0.6pt, align=center, text width=3.8cm, minimum height=2.6cm, inner sep=5pt, rounded corners=4pt, fill=blue!10},
+  other/.style={draw=black!60, line width=0.7pt, align=center, text width=4.4cm, minimum height=3.0cm, inner sep=5pt, rounded corners=4pt, fill=orange!15},
+  regulator/.style={other, fill=red!10},
+  pref/.style={other, fill=violet!10},
+  outside/.style={draw=black!50, dashed, align=center, text width=4.0cm, minimum height=1.8cm, inner sep=4pt, fill=black!5},
+  lab/.style={font=\scriptsize, align=center, fill=white, inner sep=1.2pt, text width=3.4cm},
+  settled/.style={->, line width=0.6pt},
+  given/.style={->, line width=0.6pt, dashed},
+  open/.style={->, line width=0.6pt, dotted, line cap=round},
+}

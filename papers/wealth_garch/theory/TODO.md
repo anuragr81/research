@@ -14,7 +14,7 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 | 6 | Retire a predecessor | Not applicable unless the parent manuscript's theory rows are moved here rather than copied. |
 | 7 | Novelty reading | Passes 0 to 6 done; four papers remain (`notes/novelty_check_20261023.md`, section 5). C4 and C5 pending. |
 | 8 | Conclusions, then the introduction | Done 2026-10-23. C1 to C3 and C6 verified, C4 and C5 pending; K1, K2. The question rewritten as the literature's. |
-| 9 | Literature table | Done 2026-10-23. L1 to L21, eleven papers, each read in full with a record and a Lean companion; L15 to L21 trace the question the literature leaves open. |
+| 9 | Literature table | Done 2026-10-23. L1 to L34, eleven papers, each read in full with a record and a Lean companion; L15 to L21 trace the question the literature leaves open, L22 to L34 carry the literature ledgers of Figures 2 to 4. |
 | 10 | Readability rounds | Open, for the author. |
 | 11 | Referee comments | Not applicable. |
 
@@ -49,7 +49,7 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 
 - 2026-10-23. The question is the literature's, not the author's (author,
   "we need to be clear that there is a question that remains unanswered in
-  the literature"). Section 4.1 of the manuscript traces it: buffers above
+  the literature"). Section 3.1 of the manuscript traces it: buffers above
   the minimum (L15), guarding against intervention or market response (L16),
   the issuance-cost model underpredicting (L17), Peura and Keppo calling for
   a graduated penalty (L18), leaving the constituency open (L19) and setting
@@ -98,6 +98,21 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   is the requirement, where prompt corrective action's restrictions begin.
   M1's hypothesis that the penalty is flat at the barrier now says the
   barrier lies above the requirement.
+
+- 2026-10-23. The four names are agreed in the parent map (solvency floor,
+  run-off rate, liquidity haircut, value function), and the theory map
+  checker's set of proposed names is empty.
+- 2026-10-23. The gap is drawn (author, "visualise the gap in literature
+  that the paper closes"). Three approaches, issuance-cost barrier models,
+  regulatory-cap control, and preference asymmetry read in volatility, each
+  as a ledger against the paper's own, in the manuscript as Figures 1 to 4
+  (author, "the diagrams should be in the manuscript"), with Section 3.2 and
+  Table `tab:approaches`. Thirteen literature rows, L22 to L34, carry the
+  quotations the drawings rest on; four quotations were added to the
+  Bayraktar et al. record (BCVW-Q19 to Q22). The planning note is
+  `notes/ledger_literature.md`.
+- 2026-10-23. The manuscript is `wealth_garch_theory.tex`, renamed from
+  `MANUSCRIPT.tex` (author). Every checker and note follows the new name.
 
 ### Row map, parent to theory
 

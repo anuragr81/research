@@ -1,16 +1,17 @@
 # Theory paper
 
-The theory paper of `papers/wealth_garch`. `MANUSCRIPT.tex` is built
+The theory paper of `papers/wealth_garch`. `wealth_garch_theory.tex` is built
 under `papers/MANUSCRIPT_SKELETON.md` and carries the paper's theoretical
 rows only: headlines K1 (identification) and K2 (partition), model rows M1
-to M12, literature rows L1 to L21, conclusions C1 to C3 and C6, and C4, C5
-pending. Section 4.1 traces the question the literature leaves open. `TODO.md` holds the plan and the open
+to M12, literature rows L1 to L34, conclusions C1 to C3 and C6, and C4, C5
+pending. Section 3.1 traces the question the literature leaves open, and Section 3.2 draws the three approaches as ledgers against the paper's own (Figures 1 to 4). `TODO.md` holds the plan and the open
 decisions. `./verify.sh` runs the four suites and writes `VERIFICATION.md`.
 
 | Path | Role |
 |---|---|
-| `MANUSCRIPT.tex` | The manuscript, its tables and appendices A to G. |
+| `wealth_garch_theory.tex` | The manuscript, its tables and appendices A to G (renamed from `MANUSCRIPT.tex` on 23 October 2026). |
 | `checks/verify_manuscript.py` | The skeleton checker, rules MS-1 to MS-9 with controls. |
+| `figures/` | The four ledger figures of the manuscript (TikZ) and their shared styles. |
 | `MEASUREMENT_MAP.tex`, `map_tables.tex` | The measurement map, its three tables shared with Appendix C of the manuscript. |
 | `checks/verify_measurement_map.py` | The map's checker, rules MM-1 to MM-11 with controls. |
 | `checks/ledger_theory.py` | The ledger of the paper under the bundle's spec (`00_reader/ledger_model.py`), proposed in `notes/ledger.md`. |
@@ -56,11 +57,11 @@ of `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1).
     python3 theory/verify_theory.py
 
 - TH-1 every file is identical to its source in `lean/mathlib/`.
-- TH-2 every Lean name MANUSCRIPT.tex cites (the last field of each model
+- TH-2 every Lean name the parent MANUSCRIPT.tex cites (the last field of each model
   row, and each inline `\lean{}`) is declared here: 89 names.
-- TH-4 every paper `theory/MANUSCRIPT.tex` cites has a `lit/` record whose
+- TH-4 every paper `theory/wealth_garch_theory.tex` cites has a `lit/` record whose
   Lean file (its `LEAN`) is in `theory/lean/`.
-- TH-5 every Lean name `theory/MANUSCRIPT.tex` cites (model rows and inline
+- TH-5 every Lean name `theory/wealth_garch_theory.tex` cites (model rows and inline
   `\lean{}`) is declared here: 72 names.
 - TH-3 runs `checks/verify_mathlib.py` on `theory/lean/`: `lake build`, no
   `sorry`, and every theorem's axioms within propext, Classical.choice
