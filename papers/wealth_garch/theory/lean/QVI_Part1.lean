@@ -89,6 +89,27 @@ theorem neg_Lambda_concave {lam R : ℝ} (hlam : 1 ≤ lam) :
     simp [Pi.add_apply, sub_eq_add_neg]
   rwa [hbridge] at hshift
 
+/-! ############################################################
+    ## 3.  The reference
+    ############################################################ -/
+
+/-- Above or at the reference the penalty is zero, for every weight. -/
+theorem shortfall_zero_at_or_above_reference {lam R x : ℝ} (h : R ≤ x) :
+    Lambda lam R x = 0 := by
+  unfold Lambda
+  rw [max_eq_right (by linarith), mul_zero]
+
+/-- Below the reference the penalty is positive once the weight exceeds one. -/
+theorem shortfall_pos_below_reference {lam R x : ℝ} (hlam : 1 < lam) (h : x < R) :
+    0 < Lambda lam R x := by
+  unfold Lambda
+  rw [max_eq_left (by linarith)]
+  exact mul_pos (by linarith) (by linarith)
+
+theorem control_pos_below_needs_lambda_gt_one : Lambda 1 0 (-1) = 0 := by
+  unfold Lambda
+  ring
+
 theorem control_concavity_needs_lambda_ge_one : ¬ ConcaveOn ℝ Set.univ (fun x => -Lambda 0 0 x) := by
   intro h
   have key := h.2 (Set.mem_univ (-1)) (Set.mem_univ 1) (by norm_num : (0:ℝ) ≤ 1 / 2)

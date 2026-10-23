@@ -80,6 +80,25 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   map (recorded, assumed, assumed); and value function ($V$). The parent
   map's Terminology table should take them if agreed.
 
+- 2026-10-23. The question stays one of identification, "a theory of what
+  the policy would reveal if a bank followed a threshold policy" (author).
+  The redirection toward what the panel shows belongs to the testing thread.
+- 2026-10-23. The four proposed names are accepted for now (author). The
+  checker keeps them in its PROPOSED set until the parent map's Terminology
+  table takes them.
+- 2026-10-23. The map is its own document, `theory/MEASUREMENT_MAP.tex`,
+  with the three tables in `theory/map_tables.tex`, which Appendix C of the
+  manuscript includes (author, "the measurement for the theory paper should
+  be in the theory paper's subfolder").
+- 2026-10-23. The reference is defined, $R=1+q$, the state at which equity
+  equals required capital and the capital buffer is zero (author, "if you
+  need to define R go ahead"). The penalty is then charged exactly in
+  deficit; `QVI_Part1.shortfall_zero_at_or_above_reference` and
+  `QVI_Part1.shortfall_pos_below_reference`, with a control. Its counterpart
+  is the requirement, where prompt corrective action's restrictions begin.
+  M1's hypothesis that the penalty is flat at the barrier now says the
+  barrier lies above the requirement.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |
@@ -106,7 +125,6 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 - Literature records. The checker reads the parent's `lit/` records, shared
   by the three papers, so no record is duplicated (recommended). The
   alternative is a `theory/lit/` of its own.
-- The four proposed names of the map (above), to agree or replace.
 - The Lean files are copies of `lean/mathlib/`, checked identical by TH-1.
   Moving them instead needs `verify.sh` and `checks/verify_mathlib.py` of
   the parent changed.

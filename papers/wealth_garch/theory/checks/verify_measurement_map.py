@@ -1,5 +1,6 @@
-"""Checks the measurement map, Appendix app:terms of theory/MANUSCRIPT.tex,
-which names every object of the theory paper's model and is its terminology.
+"""Checks the measurement map, theory/MEASUREMENT_MAP.tex, whose tables
+(map_tables.tex) Appendix app:terms of theory/MANUSCRIPT.tex includes. The map
+names every object of the theory paper's model and is its terminology.
 Rules MM-1 to MM-11, each run on the map and on a well-formed and a faulty
 sample. MM-1 to MM-10 are Paper A's (papers/subjective_racism/paper_a/checks/
 verify_measurement_map.py), with the Lean declarations read from theory/lean.
@@ -34,7 +35,8 @@ ROOT = os.path.dirname(HERE)
 PARENT = os.path.dirname(ROOT)
 STATUS = ("Recorded", "Elicited", "Computed", "Assumed", "Never observed", "A device")
 # Names the theory paper needs that the parent's terminology table does not
-# yet carry, offered to the author (TODO.md). Each is one parameter of the cap
+# yet carry, accepted by the author on 23 October 2026 (TODO.md) and kept here
+# until that table takes them. Each is one parameter of the cap
 # geometry, or the value function.
 PROPOSED = {"Solvency floor", "Run-off rate", "Liquidity haircut", "Value function"}
 results = []
@@ -111,16 +113,23 @@ def parent_terms():
 MAP_HEAD = r"\section{Terminology and measurement map}"
 
 
+def expand_inputs(tex, folder):
+    """Replace each \\input{name} by the file's text, so the rows are read where they live."""
+    def sub(m):
+        name = m.group(1)
+        f = os.path.join(folder, name if name.endswith(".tex") else name + ".tex")
+        return open(f).read() if os.path.exists(f) else ""
+    return re.sub(r"\\input\{([^{}]*)\}", sub, tex)
+
+
 def map_section(tex):
-    i = tex.find(MAP_HEAD)
-    if i < 0:
-        return ""
-    j = tex.find(r"\section{", i + len(MAP_HEAD))
-    return "\\begin{document}\n" + tex[i:j if j >= 0 else len(tex)] + "\n\\end{document}\n"
+    """The standalone map's document body, inputs expanded."""
+    i = tex.find(r"\begin{document}")
+    return expand_inputs(tex[i:] if i >= 0 else tex, ROOT)
 
 
 def other_glossaries(tex):
-    tex = strip_comments(tex)
+    tex = strip_comments(expand_inputs(tex, ROOT))
     i = tex.find(MAP_HEAD)
     j = tex.find(r"\section{", i + len(MAP_HEAD)) if i >= 0 else -1
     rest = tex if i < 0 else tex[:i] + (tex[j:] if j >= 0 else "")
@@ -258,10 +267,11 @@ FIX_A_BAD = [["A1", r"The prior $\pi_g(c)$ is scaled by $\delta$.",
 lean = lean_declarations()
 agreed = parent_terms()
 print("=" * 72)
-print("MEASUREMENT MAP (Appendix app:terms of theory/MANUSCRIPT.tex)")
+print("MEASUREMENT MAP (theory/MEASUREMENT_MAP.tex, included by Appendix app:terms of MANUSCRIPT.tex)")
 print("=" * 72)
 mtex = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
-tex = map_section(mtex)
+tex = map_section(open(os.path.join(ROOT, "MEASUREMENT_MAP.tex")).read())
+included = r"\input{map_tables}" in strip_comments(mtex)
 terms = other_glossaries(mtex)
 arows = assumption_rows(mtex)
 real, nrows = analyse(tex, terms, lean, arows, agreed)
@@ -281,6 +291,7 @@ names = {"MM-1": "every row has six non-empty fields and a plain-English name",
 for k in sorted(real, key=lambda s: int(s.split('-')[1])):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
+check("MM-0 the manuscript's Appendix C includes map_tables.tex, so manuscript and map cannot differ", included)
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")

@@ -11,7 +11,8 @@ decisions. `./verify.sh` runs the four suites and writes `VERIFICATION.md`.
 |---|---|
 | `MANUSCRIPT.tex` | The manuscript, its tables and appendices A to G. |
 | `checks/verify_manuscript.py` | The skeleton checker, rules MS-1 to MS-9 with controls. |
-| `checks/verify_measurement_map.py` | The measurement map of Appendix C, rules MM-1 to MM-11 with controls. |
+| `MEASUREMENT_MAP.tex`, `map_tables.tex` | The measurement map, its three tables shared with Appendix C of the manuscript. |
+| `checks/verify_measurement_map.py` | The map's checker, rules MM-1 to MM-11 with controls. |
 | `checks/ledger_theory.py` | The ledger of the paper under the bundle's spec (`00_reader/ledger_model.py`), proposed in `notes/ledger.md`. |
 | `verify_theory.py` | The Lean suite (below). |
 | `verify.sh` | Runs the four suites, writes `VERIFICATION.md` (generated). |

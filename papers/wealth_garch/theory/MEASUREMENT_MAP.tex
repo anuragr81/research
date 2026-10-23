@@ -1,0 +1,69 @@
+% MEASUREMENT_MAP.tex, the measurement map of the theory paper, built under
+% papers/MANUSCRIPT_SKELETON.md, section 4.5. The three tables live in
+% map_tables.tex, which this document and Appendix C of MANUSCRIPT.tex both
+% include, so the manuscript and the map cannot differ. Rows are written only
+% through \mm{symbol}{name}{type}{represents}{directly observed}{obtained how},
+% and checks/verify_measurement_map.py applies rules MM-1 to MM-11 to them.
+
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\emergencystretch=1.5em
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,\do\-}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
+\newcommand{\mm}[6]{#1 & \textbf{#2} & #3 & #4 & #5 & #6 \\ \addlinespace}
+
+\title{Measurement Map of the Theory Paper}
+\author{}
+\date{Companion to \path{theory/MANUSCRIPT.tex}, 23 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Scope}
+
+The map names every object of the model of the theory paper once, and the
+manuscript uses these names and no others. The names are those of the parent
+bundle's \path{MEASUREMENT_MAP.tex}, agreed with the author on 10, 13 and 19
+October 2026, and four names the author accepted on 23 October 2026, the
+solvency floor, the run-off rate, the liquidity haircut and the value function.
+Inputs are what the model takes as given, internal objects are built from the
+inputs inside the model, and outputs are what the rows predict. The column
+Directly observed says Yes when a record of the world gives the object without
+any computation, which is when its last column begins with Recorded, and No
+otherwise. The other status words are Elicited, Computed, Assumed, Never
+observed and A device. Every symbol in the manuscript's table of assumptions
+has exactly one row here. Where a row names the panel, it is the FDIC panel of
+US banks that the parent bundle read, 2015 to 2024, and the figures and the
+row numbers G1 to G22 are those of the parent map. Lean names are theorems of
+\path{theory/lean/}, audited by \path{verify_theory.py}.
+
+The theory paper is a theory of what a bank's policy would reveal if the bank
+followed a threshold policy, and the map says what that leaves for
+measurement. The asymmetry parameter and the fixed issuance cost are never
+observed. The two thresholds that identify them are recorded as the state at a
+dividend and at an issue, and on the panel read neither behaves as a
+threshold. The limits of buffer variance are computed from assumed volatilities
+and apply where the cap binds, and on that panel it does not. What reaches the
+data is the bound of M12 and the two recorded thresholds as events.
+
+\input{map_tables}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\end{document}

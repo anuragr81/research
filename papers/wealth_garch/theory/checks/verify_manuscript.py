@@ -275,6 +275,11 @@ print("=" * 72)
 print(f"      Lean declarations found: {len(lean)}; bib keys: {len(bibs)}; lit keys: {len(lit)}")
 
 tex = open(os.path.join(ROOT, "MANUSCRIPT.tex")).read()
+# Appendix C includes map_tables.tex, so the labels and rows it holds count.
+tex = re.sub(r"\\input\{([^{}]*)\}",
+             lambda m: open(os.path.join(ROOT, m.group(1) + ("" if m.group(1).endswith(".tex") else ".tex"))).read()
+             if os.path.exists(os.path.join(ROOT, m.group(1) + ("" if m.group(1).endswith(".tex") else ".tex"))) else "",
+             tex)
 real, counts = analyse(tex, lean, bibs, lit)
 print(f"      rows in MANUSCRIPT.tex: {counts}")
 names = {"MS-1": "row IDs well formed and unique",
