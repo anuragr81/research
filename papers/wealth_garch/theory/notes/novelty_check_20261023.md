@@ -3,7 +3,7 @@
 A planning note, not part of the paper. The parent `MANUSCRIPT.tex` claims two
 results new, C2 and C4. Both are candidates for the theory paper, whose
 skeleton has no rows yet. This note records an internal audit, a search-level
-pass (pass 0) and a full-text pass (pass 1). Further passes are planned
+pass (pass 0) and two full-text passes (passes 1 and 2). Further passes are planned
 (author, 23 October 2026, "happy to do this multiple passes").
 
 The claims, as the parent states them.
@@ -97,6 +97,16 @@ Seventeen papers. Every quotation below was checked against the PDF text.
 | arXiv:1805.09068 v4, "Non-concave optimal investment with Value-at-Risk constraint" | `cafc9c329fc08fdf`, 41 pp | Terminal-wealth constraints only; "increasing the loss aversion η leads the insurer to more prudent investment strategies in case of bad performance" (p. 20) | None. Loss aversion moves the exposure where no cap binds |
 | arXiv:1905.12431, "An assets-liabilities dynamical model of banking system" | v1, `a22cb2d88fedfd59`, 40 pp | A liability shock, uncorrelated with assets (p. 7), no exposure rule | None |
 
+## 2b. Pass 2, full text from the author's Drive
+
+Two of the cached bank models, read in full through the Drive connector's
+extracted text (every quotation below checked against it).
+
+| Paper | Version | What it has | Overlap |
+|---|---|---|---|
+| Klimenko, Pfeil, Rochet and De Nicolò (2016), "Aggregate bank capital and credit dynamics", SFI RP 16-42, Drive `14E9yQNQN_kgT1us3mdi7G2vuUGDZpu5N` | "This version: June, 2016", 54 PDF pages | State is aggregate book equity, with a loan-default shock only, since "the total volume of deposits is constant" (PDF p. 16). Proportional cost only, "issuing new equity entails a deadweight cost proportional to the size of the issuance" (p. 4, n. 1), reflecting barriers at zero and $E_{\max}$. "All agents are risk-neutral and have the same discount rate" (p. 8). A one-branch cap $e_t\ge\Lambda k_t$, "binding in poorly-capitalized states and is slack in well-capitalized states" (p. 5). "Corollary 1 Dividend threshold Emax is increasing with the magnitude of financial friction γ" (p. 19). The recapitalisation boundary "is increasing in the minimum capital ratio Λ" (p. 24). Where the cap binds, $d\log E$ has the constant volatility $\sigma_p/\Lambda$ (our reading of their p. 24 equation); "in the unconstrained region (i.e., in the well capitalized states), endogenous volatility is almost as high as in the unregulated set-up" (p. 6) | C2 partial, one branch only, binding near distress, constant log volatility there, no liability shock, no second limit, no preference parameter. C4 partial, barrier statics in a proportional cost and in the capital ratio, no fixed cost, no penalty parameter, no identification |
+| Bertsch and Mariathasan (2021), "Optimal bank leverage and recapitalization in crowded markets", BIS WP 923, Drive `1R0I5FdE7qjQJq3qPkWjbP1qKTia_6fhK` | January 2021, 65 PDF pages | Three dates, binary returns, "All agents are risk-neutral" (p. 7). Recapitalisation cost an endogenous premium rising with the system-wide need. No barriers, no diffusion, no capital volatility result | None |
+
 ## 3. What pass 1 changes
 
 **C2.** No paper read states the two limits, their ratio, or their
@@ -151,9 +161,18 @@ For C4. Alvarez, Le Bihan and Lippi's identification section. Hugonnier and
 Morellec (2017, JFE). Décamps, Mariotti, Rochet and Villeneuve (2011, JF).
 Bolton, Li, Wang and Yang (2025, JF).
 
-For both, the remaining cached bank models.
+For both, the remaining cached bank models (Hugonnier and Morellec; Bolton,
+Li, Wang and Yang; Glover et al.; Lambertini and Uysal; De Nicolò et al.).
+None is reachable by network or in the author's Drive on 23 October 2026,
+and neither are Black and Perold, Choulli, Taksar and Zhou, Décamps et al.
+or Alvarez, Le Bihan and Lippi.
 
-## 6. Verdict after pass 1
+## 6. Verdict after passes 1 and 2
+
+Pass 2 adds Klimenko et al., the closest bank model to C2's deficit end so
+far: a cap binding near distress pins a constant log volatility there. It
+has no second branch, no liability shock and no preference parameter, so
+C2's ratio is not in it.
 
 Neither claim can be called new yet, since the papers of section 5 are unread.
 No paper read in full states either result. C2 needs its scope narrowed to the
