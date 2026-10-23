@@ -26,7 +26,18 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 - 2026-10-23. The skeleton follows `papers/MANUSCRIPT_SKELETON.md`, with
   Paper A (`papers/subjective_racism/paper_a/`) as the reference (author).
 
+- 2026-10-23. Novelty check of C2 and C4 (`notes/novelty_check_20261023.md`).
+  Search only, every lead [A] or [C], since the paper hosts are denied by the
+  network policy. Neither claim can be called new yet. The closest leads
+  are Black and Perold (1992) for C2 and Angelis (2025) for C4. Peura and
+  Keppo's Table 2 shows C4's mechanism with the issue delay in place of the
+  asymmetry parameter.
+
 ## Open, for the author
+
+- Novelty. Whether C2 and C4 move to the parent's pending table now, as
+  section 4.4 of the skeleton guideline requires (recommended), and the
+  papers to supply for the readings of section 5 of the novelty note.
 
 - What the paper delivers. The question, and which rows enter. Candidates
   are in the parent `MANUSCRIPT.tex`, headlines K1 and K2, model rows M1 to
