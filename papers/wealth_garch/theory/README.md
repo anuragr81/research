@@ -3,7 +3,8 @@
 The theory paper of `papers/wealth_garch`. `MANUSCRIPT.tex` is built
 under `papers/MANUSCRIPT_SKELETON.md` and carries the paper's theoretical
 rows only: headlines K1 (identification) and K2 (partition), model rows M1
-to M12, literature rows L1 to L14, conclusions C1 to C3, and C4, C5 pending. `TODO.md` holds the plan and the open
+to M12, literature rows L1 to L21, conclusions C1 to C3 and C6, and C4, C5
+pending. Section 4.1 traces the question the literature leaves open. `TODO.md` holds the plan and the open
 decisions. `./verify.sh` runs the three suites and writes `VERIFICATION.md`.
 
 | Path | Role |
@@ -19,7 +20,7 @@ decisions. `./verify.sh` runs the three suites and writes `VERIFICATION.md`.
 
 ## Lean
 
-`lean/` is a Lake project holding twenty files. Twelve are those the parent
+`lean/` is a Lake project holding twenty-two files. Twelve are those the parent
 `MANUSCRIPT.tex`'s model rows cite; the theory rows use them as follows.
 
 | File | Theory rows |
@@ -37,11 +38,11 @@ decisions. `./verify.sh` runs the three suites and writes `VERIFICATION.md`.
 | `RateBased.lean` | none; kept for TH-2, the parent's rows |
 | `BCVW.lean` | L1 to L4, C3 |
 
-The other eight are the Lean companions of the literature records the L
+The other ten are the Lean companions of the literature records the L
 rows cite: `BlackPerold.lean` (L5, L6), `PeuraKeppo.lean` (L7, L8),
 `DaiHuangKeppo.lean` (L9), `BoltonChenWang.lean` (L10), `LokkaZervos.lean`
-(L11), `BarberisHuangSantos.lean` (L12), `EngleSiriwardane.lean` (L13) and
-`LiYuZhang.lean` (L14).
+(L11), `BarberisHuangSantos.lean` (L12), `EngleSiriwardane.lean` (L13),
+`LiYuZhang.lean` (L14), `BergerEtAl.lean` (L15) and `MilneWhalley.lean` (L16).
 
 The files are copies. `lean/mathlib/` stays the canonical project, which
 `verify.sh` builds; TH-1 fails if a copy differs from its source, so a

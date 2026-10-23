@@ -13,8 +13,8 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 | 5 | Appendices B to G filled | Done 2026-10-23. B, C, D and E filled; F and G not applicable. |
 | 6 | Retire a predecessor | Not applicable unless the parent manuscript's theory rows are moved here rather than copied. |
 | 7 | Novelty reading | Passes 0 to 6 done; four papers remain (`notes/novelty_check_20261023.md`, section 5). C4 and C5 pending. |
-| 8 | Conclusions, then the introduction | Done 2026-10-23. C1 to C3 verified, C4 and C5 pending; K1, K2. |
-| 9 | Literature table | Done 2026-10-23. L1 to L14, nine papers, each read in full with a record and a Lean companion. |
+| 8 | Conclusions, then the introduction | Done 2026-10-23. C1 to C3 and C6 verified, C4 and C5 pending; K1, K2. The question rewritten as the literature's. |
+| 9 | Literature table | Done 2026-10-23. L1 to L21, eleven papers, each read in full with a record and a Lean companion; L15 to L21 trace the question the literature leaves open. |
 | 10 | Readability rounds | Open, for the author. |
 | 11 | Referee comments | Not applicable. |
 
@@ -46,6 +46,17 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   read in full in their pre-publication versions (accepted manuscript;
   2005 preprint), tagged [F] for those versions. The published versions
   were not read.
+
+- 2026-10-23. The question is the literature's, not the author's (author,
+  "we need to be clear that there is a question that remains unanswered in
+  the literature"). Section 4.1 of the manuscript traces it: buffers above
+  the minimum (L15), guarding against intervention or market response (L16),
+  the issuance-cost model underpredicting (L17), Peura and Keppo calling for
+  a graduated penalty (L18), leaving the constituency open (L19) and setting
+  parameters by intuition (L20), Dai, Huang and Keppo fitting values (L21).
+  The chain is question, K1 and K2, M rows, C1 to C3 and C6, with C4 and C5
+  pending. The constituency question (L19) is outside the paper; the
+  thresholds identify the weight of the penalty, not whose cost it is.
 
 ### Row map, parent to theory
 

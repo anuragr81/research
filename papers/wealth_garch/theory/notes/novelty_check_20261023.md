@@ -362,13 +362,15 @@ verbatim-quote suite, and has a Lean companion that `theory/lean/` builds
 |---|---|---|---|
 | Bayraktar et al. (2026) | `lit/bayraktar_2026` | `BCVW.lean`, with `ceiling_tighter_than_lcr` for the no-borrowing case | L1 to L4, C3 |
 | Black and Perold (1992) | `lit/black_perold_1992` | `BlackPerold.lean`, `cap_is_cppi` | L5, L6, C2, C5 |
-| Peura and Keppo (2006) | `lit/peura_keppo_2006` | `PeuraKeppo.lean`, `table2_det_neg` | L7, L8, C4 |
-| Dai, Huang and Keppo (2019) | `lit/dai_huang_keppo_2019` | `DaiHuangKeppo.lean`, `table21_det_neg` | L9, C4 |
+| Peura and Keppo (2006) | `lit/peura_keppo_2006` | `PeuraKeppo.lean`, `table2_det_neg` | L7, L8, L17 to L20, C4, C6 |
+| Dai, Huang and Keppo (2019) | `lit/dai_huang_keppo_2019` | `DaiHuangKeppo.lean`, `table21_det_neg` | L9, L21, C4, C6 |
 | Bolton, Chen and Wang (2011) | `lit/bolton_chen_wang_2011` | `BoltonChenWang.lean` | L10 |
 | Løkka and Zervos (2008) | `lit/lokka_zervos_2008` | `LokkaZervos.lean` | L11 |
 | Barberis, Huang and Santos (2001) | `lit/barberis_huang_santos_2001` | `BarberisHuangSantos.lean` | L12 |
 | Engle and Siriwardane (2018) | `lit/engle_siriwardane_2018` | `EngleSiriwardane.lean` | L13 |
 | Li, Yu and Zhang (2023) | `lit/li_yu_zhang_2023` | `LiYuZhang.lean` | L14 |
+| Berger et al. (2008) | `lit/berger_2008` | `BergerEtAl.lean` | L15 |
+| Milne and Whalley (2001) | `lit/milne_whalley_2001` | `MilneWhalley.lean` | L16 |
 
 Papers read in passes 1 to 6 but cited by no row (Hugonnier and Morellec;
 Bolton, Li, Wang and Yang; De Nicolò, Gamba and Lucchetta; Klimenko et al.;

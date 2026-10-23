@@ -33,6 +33,10 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-Q25 | 2184 | .08 .10 .9 2.4 1.5 6 8 | Table 2 row $(\Delta,K)=(0.08,0.10)$: $u_1=0.9$, $u_2=2.4$. |
 | PK-Q26 | 2184 | .08 .25 .8 2.7 1.8 12 18 | Row $(0.08,0.25)$: $u_1=0.8$, $u_2=2.7$. |
 | PK-Q27 | 2184 | .5 .10 1.6 3.2 1.6 6 11 | Row $(0.5,0.10)$: $u_1=1.6$, $u_2=3.2$. |
+| PK-Q28 | 2192 | imposed common values for other parameters (mainly guided by high level economic intuition) | The parameters other than the return moments are imposed, not identified from the bank's policy. The theory paper's M3 identifies two of them from the thresholds. |
+| PK-Q29 | 2192 | It is the task of future research | The sentence continues "to test alternative model specifications", across a line-end hyphen in the text layer. The authors leave the specification open. |
+| PK-Q30 | 2192 | the penalty from regulatory capital violation is extreme | Liquidation at the minimum (PK-Q6) is, by their account, too severe a penalty. The sentence opens "In light of the FDICIA stipulations, our assumption concerning", across a line-end hyphen in the text layer. |
+| PK-Q31 | 2192 | Whether these omissions matter reduces to the issue of which constituency provides the binding constraint on bank capitalization. | The question they leave: whose cost binds the bank's capital, the regulator's or the market's. The theory paper identifies the weight of the shortfall penalty and not its constituency (Appendix D of the theory paper). |
 
 ## Lean results
 

@@ -46,3 +46,12 @@
   issue cost and frequency, the gap being driven by $K$ (PK-Q22, PK-Q23). The
   theory paper's identification headline cites this as its precedent.
 - Control: `PeuraKeppo.control_delay_lowers_trigger_at_high_K`.
+
+## Added 23 October 2026, second pass
+
+- PK-Q28 to PK-Q31, from the Discussion and Conclusions (p. 2192). They
+  state what the theory paper takes as the question the literature leaves
+  open: the penalty at the minimum is extreme (PK-Q30), a graduated penalty
+  is called for (PK-Q18), the specification is left to future research
+  (PK-Q29), the parameters beyond the return moments are imposed by
+  intuition (PK-Q28), and which constituency binds is the issue (PK-Q31).
