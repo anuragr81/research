@@ -3,7 +3,7 @@
 A planning note, not part of the paper. The parent `MANUSCRIPT.tex` claims two
 results new, C2 and C4. Both are candidates for the theory paper, whose
 skeleton has no rows yet. This note records an internal audit, a search-level
-pass (pass 0) and full-text passes 1 to 5. Further passes are planned
+pass (pass 0) and full-text passes 1 to 6. Further passes are planned
 (author, 23 October 2026, "happy to do this multiple passes").
 
 The claims, as the parent states them.
@@ -234,6 +234,25 @@ regulation, there is no preference parameter and no identification. This is
 the closest model to ours read so far and belongs in the literature table as
 the bank model of record.
 
+## 2f. Pass 6, De Nicolò, Gamba and Lucchetta
+
+De Nicolò, Gamba and Lucchetta, "Capital regulation, liquidity requirements
+and taxation in a dynamic model of banking", IMF Working Paper WP/12/72
+(March 2012, 53 pp., sha256 `3b201dbade82d682`), an earlier version of
+"Microprudential regulation in a dynamic model of banking", Review of
+Financial Studies 27(7):2097-2138 (2014), uploaded by the author to the Drive
+on 23 October 2026 (`1Nid7pP6A2G3es34VIy1C_UThqDPfmAIH`). Read in full.
+"Time is discrete and the horizon is infinite" (p. 7), the bank's
+"shareholders are risk–neutral" (p. 7), and equity issuance carries only "a
+proportional floatation cost" (p. 12), set at 10% (p. 23). Payout and issuance
+are the sign of a residual, with no thresholds or targets (p. 12). The deposit
+shock is correlated with the credit shock (ρ = −0.85, Table I). Capital and
+liquidity requirements restrict the choice set, the liquidity requirement
+"far more restrictive than the capital requirement for large enough L"
+(pp. 25-26). No statement on capital-ratio volatility.
+
+Overlap with C2 and with C4: none.
+
 ## 3. What pass 1 changes
 
 **C2.** No paper read states the two limits, their ratio, or their
@@ -287,14 +306,16 @@ For C4. The identification section of Alvarez, Le Bihan and Lippi (2014),
 Banque de France WP 492.
 
 For both. Glover, Johnson, Evatt and Cheng (2023); Lambertini and Uysal
-(2013, 2014). De Nicolò, Gamba and Lucchetta, read as IMF WP/12/72, is in
-pass 6.
+(2013, 2014).
 
 Optional, for positioning only. Décamps, Mariotti, Rochet and Villeneuve
 (2011), JF 66(5):1501-1544 (author's question of 23 October 2026: its asymmetric
 stock-return volatility is a neighbour of C2, and its owners are risk-neutral).
 
-## 6. Verdict after passes 1 to 5
+## 6. Verdict after passes 1 to 6
+
+Pass 6, De Nicolò, Gamba and Lucchetta, has no overlap with either claim.
+
 
 Pass 5 reads Bolton, Li, Wang and Yang, the closest model to ours: correlated
 deposit shock, fixed and proportional issuance costs, a capital requirement
