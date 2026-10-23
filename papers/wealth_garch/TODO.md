@@ -750,3 +750,19 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   the dividend barrier stays within about 1.6 points of the minimum. Next:
   author to choose the next mechanism.
 
+- 2026-10-24. Testing thread, training window, sample B. Four mechanisms
+  (PREREG_comparison_5.md, results_mechanisms.md): rare large losses at
+  most 12.7% F2 against 48.0%; no issuance 5.2%; growth leaves 54 of 61
+  banks without a barrier; supervisors expecting one point above R give
+  59.1%, with no source for the point. Risk scale (results_scale.md): the
+  barrier model matches F2 at about three times the measured sigma_i.
+  Judged risk (PREREG_comparison_7.md to _9.md, results_judged.md): on the
+  17 banks of the 11 stress-tested firms, the stress-test measure gives a
+  judged volatility about equal to sigma_i (buffers too thin, F2 12.6%
+  against 32.9%), the equity measure about eight times (too thick, F2
+  83.1%); the rule picks equity volatility (74.0 against 77.9 points), and
+  neither passes the 10-point rule. Prices: Stooq, downloaded by the
+  author, pinned in ~/.cache/wealth_garch/stooq_20261023/. PREREG_comparison_8.md
+  miscounted the covered banks (16; 17). Next: author to decide whether
+  the test window is scored with (B) as fixed, or a measure between the
+  two is pre-registered first.
