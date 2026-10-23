@@ -3,7 +3,7 @@
 A planning note, not part of the paper. The parent `MANUSCRIPT.tex` claims two
 results new, C2 and C4. Both are candidates for the theory paper, whose
 skeleton has no rows yet. This note records an internal audit, a search-level
-pass (pass 0) and three full-text passes (passes 1 to 3). Further passes are planned
+pass (pass 0) and four full-text passes (passes 1 to 4). Further passes are planned
 (author, 23 October 2026, "happy to do this multiple passes").
 
 The claims, as the parent states them.
@@ -151,6 +151,39 @@ ratio, are pinned by preferences. C2's case for novelty must therefore rest on
 the slopes being regulatory, so that the asymmetry parameter is silent, and on
 the liability shock being unhedged, which changes the limits.
 
+## 2d. Pass 4, Hugonnier and Morellec
+
+Hugonnier and Morellec, "Bank capital, liquid reserves, and insolvency risk",
+*Journal of Financial Economics* 125(2):266-285 (2017), read as the accepted
+manuscript ("Forthcoming: Journal of Financial Economics", "This version:
+August 31, 2016"), uploaded by the author to the Drive on 23 October 2026
+(`1cYFvmyZjH5RvxZK2vIachQBfYxTh5RWq`, "Banking.pdf"). Read in full, the main
+text pp. 1-40 (printed numbers) and the figure and table captions. The proofs
+are in "a separate Appendix" (p. 7) that the file does not contain.
+
+- No preference or penalty parameter. "all agents are risk neutral and
+  discount cash flows at a constant rate ρ > 0" (p. 7).
+- No exposure choice. "Because the bank's risky assets are fixed, the paper
+  does not explore how regulatory policies may affect the loan portfolio
+  choice of banks" (p. 7, n. 3).
+- A fixed issuance cost. "the bank has to pay a lump-sum cost φ upon raising
+  outside funds" (p. 10).
+- The recapitalisation point is not chosen in the interior. "because of the
+  fixed costs of financing, the bank only considers raising equity when cash
+  flow shocks deplete its liquid reserves, i.e. when s ≤ 0" (p. 12), and the
+  bank refinances "back to b∗ 0", the dividend barrier, or defaults
+  (Proposition 3, p. 22). A liquidity requirement shifts the refinancing point
+  to T (Proposition 4, p. 25).
+- Barrier statics in the fixed cost, proof in the missing appendix. "we show
+  in the Appendix that the target level of liquid reserves b∗ 0 increases
+  with refinancing costs φ and decreases with the liquidation value Λ of
+  assets" (p. 23).
+
+Overlap with C4: partial, on the part C4 does not claim (the barrier rising in
+the fixed cost). With the trigger pinned at zero reserves or at the
+regulatory level, the paper has no trigger to move, no asymmetry parameter and
+no identification. Overlap with C2: none, since exposure is fixed.
+
 ## 3. What pass 1 changes
 
 **C2.** No paper read states the two limits, their ratio, or their
@@ -201,17 +234,21 @@ SIAM J. Control Optim. 41(6):1946-1979), "A diffusion model for optimal
 dividend distribution for a company with constraints on risk control", cited
 by Bayraktar et al.
 
-For C4. Alvarez, Le Bihan and Lippi's identification section. Hugonnier and
-Morellec (2017, JFE). Décamps, Mariotti, Rochet and Villeneuve (2011, JF).
+For C4. Alvarez, Le Bihan and Lippi's identification section. Décamps, Mariotti, Rochet and Villeneuve (2011, JF).
 Bolton, Li, Wang and Yang (2025, JF).
 
-For both, the remaining cached bank models (Hugonnier and Morellec; Bolton,
+For both, the remaining cached bank models (Bolton,
 Li, Wang and Yang; Glover et al.; Lambertini and Uysal; De Nicolò et al.).
 None is reachable by network or in the author's Drive on 23 October 2026,
 and neither are Black and Perold, Choulli, Taksar and Zhou, Décamps et al.
 or Alvarez, Le Bihan and Lippi.
 
-## 6. Verdict after passes 1 to 3
+## 6. Verdict after passes 1 to 4
+
+Pass 4 reads Hugonnier and Morellec: a fixed issuance cost and the barrier
+rising in it, but the recapitalisation point is fixed at zero reserves and
+there is no asymmetry parameter, so C4's joint identification is not in it.
+
 
 Pass 3 reads Black and Perold. C2 as now stated overreaches. Its
 geometry is capped CPPI, and the one-branch volatility is proved there.
