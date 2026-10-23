@@ -2,37 +2,55 @@
 
 A planning note, not part of the paper. The parent `MANUSCRIPT.tex` claims two
 results new, C2 and C4. Both are candidates for the theory paper, whose
-skeleton has no rows yet. This note records an internal audit and a search
-run on 23 October 2026, extending the searches of 10 October 2026 in the
-parent `TODO.md` ("C2 search", "C4 search").
+skeleton has no rows yet. This note records an internal audit, a search-level
+pass (pass 0) and a full-text pass (pass 1). Further passes are planned
+(author, 23 October 2026, "happy to do this multiple passes").
 
-## Limits of the search
+The claims, as the parent states them.
 
-No paper text was read. The paper hosts are denied by this environment's
-network policy (arxiv.org, nber.org, ssrn.com, bis.org, epfl.ch, tse-fr.eu,
-eprints.gla.ac.uk, academic.oup.com, ideas.repec.org, core.ac.uk, econstor,
-hal, web.archive.org among them), and WebFetch failed to resolve any host.
-Three search agents ran about 70 WebSearch queries between them. Every lead
-below is therefore [A] or [C] in the sense of `lit/README.md`, and every
-phrase attributed to a paper is a search-tool snippet that may be a
-paraphrase. Under the rules of `papers/MANUSCRIPT_SKELETON.md`, such a lead
-can neither support nor defeat a positioning claim. It can only say what must
-be read.
+- **C2.** Under the two-branch regulatory cap
+  $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$, wherever the optimal policy binds the
+  cap near both ends, buffer variance tends to the deficit limit
+  $\nu_1^2=\sigma^2/a_1^2-2c\sigma\sigma_L/a_1+\sigma_L^2$ at the distress
+  boundary and to the surplus limit
+  $\nu_3^2=\sigma^2/a_3^2-2c\sigma\sigma_L/a_3+\sigma_L^2$ deep in surplus
+  (`CapGeometry.deficit_limit`, `CapGeometry.surplus_limit`), so their ratio
+  carries no information about the asymmetry parameter $\lambda_S$. Not
+  claimed new: constant buffer variance on the solvency branch, the capital
+  buffer itself.
+- **C4.** The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$
+  are locally identified from the dividend barrier and the recapitalisation
+  trigger, because both raise the barrier and they move the trigger in
+  opposite directions (M4 to M6). Not claimed new: the responses of the
+  barrier and the target to $K$ alone.
+
+## Rules of the passes
+
+Only text read in a paper's own PDF counts. Each PDF was fetched from arXiv or
+the author's repository, converted with `pdftotext -layout`, and quoted with
+its PDF page. A formula derived by us from a paper's dynamics is labelled as
+ours. Under `papers/MANUSCRIPT_SKELETON.md` a full-text reading here checks the
+claim and does not yet make a `lit/` record. A paper that enters a row needs
+its record, with its suite, before it is cited.
+
+Reachable hosts on 23 October 2026: arxiv.org and eprints.gla.ac.uk.
+academic.oup.com answers 403 to scripted requests. Every other paper host
+tried was refused by the network policy (nber.org, bis.org, ssrn.com,
+jstor.org, sciencedirect.com, epfl.ch, tse-fr.eu, banque-france.fr,
+projecteuclid.org, core.ac.uk, hal.science, econstor.eu, web.archive.org,
+the university hosts of the cached candidates).
 
 ## 1. Internal audit
 
 1. **Placement.** The parent puts C2 and C4 in its table of conclusions and
    leaves the pending table empty. Section 4.4 of the skeleton guideline keeps
    a claim that a result is new in the pending table "until every paper that
-   could contain the result has been read in full". Both rows say their leads
-   were "excluded at the level of their abstracts", and the cached bank
-   models of `lit/CANDIDATES.md` (Hugonnier and Morellec, Bolton, Li, Wang and
-   Yang, Klimenko et al., Glover et al., Lambertini and Uysal, De Nicolò et
-   al.) are unread. By the guideline, C2 and C4 are pending.
+   could contain the result has been read in full". By that rule C2 and C4
+   are pending until the readings of section 5 are done.
 2. **C4's mechanism in Peura and Keppo's Table 2.** Peura and Keppo is read in
    full (`lit/peura_keppo_2006`), and our replication reproduces its Table 2
-   (`replication/peura_keppo_2006/results_stage1.md`). Their printed values,
-   issue barrier $u_1$ and dividend barrier $u_2$ in percent:
+   (`replication/peura_keppo_2006/results_stage1.md`). Printed values, issue
+   barrier $u_1$ and dividend barrier $u_2$ in percent.
 
    | Delay $\Delta$ | $K=0.10$ | $K=0.25$ | $K=0.50$ | $K=1.00$ |
    |---|---|---|---|---|
@@ -40,75 +58,105 @@ be read.
    | 0.5 | 1.6 / 3.2 | 1.3 / 3.4 | 1.1 / 3.5 | 0.9 / 3.7 |
    | 1.0 | 1.7 / 3.5 | 1.4 / 3.7 | 1.1 / 3.7 | 0.6 / 3.8 |
 
-   The fixed cost $K$ lowers the issue barrier and raises the dividend barrier
-   in every row. The delay $\Delta$ raises the dividend barrier in every
-   column, and raises the issue barrier at $K=0.10$ and $K=0.25$. At those
-   points the two parameters move the trigger in opposite directions and the
-   barrier in the same direction, the configuration that makes the Jacobian
-   of M6 non-singular. So C4's mechanism is visible, as numbers, in a paper
-   read in full, with the issue delay in place of the asymmetry parameter.
-   Peura and Keppo state no identification and give no comparative statics in
-   $\Delta$ as a result. What C4 can still claim is the preference parameter
-   and the analytic proof, and the row should cite this contrast.
+   $K$ lowers the issue barrier and raises the dividend barrier in every row.
+   $\Delta$ raises the dividend barrier in every column and the issue barrier
+   at $K=0.10$ and $0.25$. At those points the two parameters move the
+   trigger in opposite directions and the barrier in the same direction, the
+   configuration of M6. Peura and Keppo state no identification.
 
-## 2. C2, leads ranked by threat
+## 2. Pass 1, full text
 
-| Lead | Tag | What could overlap | What to read |
+Seventeen papers. Every quotation below was checked against the PDF text.
+
+### Read in full, bearing on C4
+
+| Paper | Version, sha256 | What it has | Overlap with C4 |
 |---|---|---|---|
-| Black and Perold (1992), "Theory of constant proportion portfolio insurance", JEDC 16(3):403-426 | [C] | Capped CPPI sets exposure to $\min\{m\,C,\ l\,W\}$, cushion $C=W-F$. Our derivation, not their text: the log cushion has volatility $m\sigma$ near the floor and tends to $l\sigma$ for large wealth, so the ratio $m^2/l^2$ is set by the cap alone. That is C2's structure without the liability shock | Their section on CPPI with a borrowing limit, whether they evaluate the two volatilities, and whether $m$ comes from a preference |
-| Azcue and Muler (2010), "Optimal investment policy and dividend payment strategy in an insurance company", Ann. Appl. Probab. 20(4), doi 10.1214/09-AAP643, arXiv:1010.4988 | [C] | With a no-borrowing cap the whole surplus is in stocks for small surplus, so the volatility of log surplus near ruin is pinned by the cap, a one-branch analogue of the deficit limit | Section 6, Prop. 6.3(b) |
-| Grossman and Vila (1992), "Optimal dynamic trading with leverage constraints", JFQA 27(2):151-168 | [C] | Once the leverage cap binds, the cap rather than risk aversion sets the position | Whether wealth volatility in the binding region is stated |
-| Hilscher, Raviv and Wiener (2024), "Dynamic volatility regulation of financial institutions", Finance Research Letters 61:104968 | [C] | Asset volatility imposed as a function of the capital cushion | The volatility rule at small and large cushions |
-| Décamps, Mariotti, Rochet and Villeneuve (2011), JF 66(5):1501-1544 | [C] | Return volatility as a function of the cash state, read as asymmetric volatility. No cap, risk-neutral firm | The volatility section |
-| Bayraktar et al. (2026), read in full | [C] for the new point | A snippet paraphrases that in their parameter range a direct cap on the investment proportion is tighter than the liquidity constraint. `lit/bayraktar_2026` records no third cap. If the liquidity branch never binds in their numerics, L1 should say so | Their numerical section, against the cached PDF |
+| Dai, Huang and Keppo (2019), "Opaque bank assets and optimal equity capital", JEDC 100:369-394, read as chapter 2 of Huang, "Two stochastic control problems in capital structure and portfolio choice", NUS thesis, arXiv:2107.02242 | v1, `985a281d96915a84`, 167 pp | The bank model of Peura and Keppo with noisy accounting: dividend barrier $u_2$, recapitalisation barrier $u_1$, issue delay, a fixed cost $K$ "of equity issuance" (p. 30), a Basel floor $\kappa$ (p. 28). Table 2.1 (p. 76) gives the elasticities of $u_2$ and $u_1$ in seven parameters, among them $K$ (0.0017, −0.0543) and $\Delta$ (0.0808, −0.1444). The regulator's liquidation asymmetry $a=c_2/(c_1+c_2)$ (p. 35) lowers both barriers (pp. 71-72). $K$ is fixed from the literature (p. 77), the rest calibrated "by fitting the partially observed value function (2.19) to the realized market equity values in the least square sense" (p. 84) | Close in setting, partial in result. The $K$ column has C4's signs, numerically. A full threshold response matrix is tabulated, so pairs of parameters are locally identified from $(u_2,u_1)$ by their numbers, which the paper does not state. No shareholder shortfall penalty or asymmetry parameter. Liabilities deterministic ("We ignore debt volatility and debt financing", p. 26, n. 2) |
+| Angelis (2025), "Price setting and price stickiness: A behavioral foundation of inaction bands", JEEA 23(3):1095-1132, accepted manuscript of November 2023, eprints.gla.ac.uk/342107 | `5b94e1179e46e49c`, 52 pp | Loss aversion $\lambda$ alone gives an inaction band with two targets. The dynamic model "follows Nakamura and Steinsson (2008) in all dimensions but the menu-cost assumption" (p. 14), so there is no fixed cost. $\lambda$ is calibrated with $\sigma_\nu,\rho$ to three moments, $\lambda=7$ (p. 20). Static band edges $\lambda^{\pm1}\frac{\epsilon}{\epsilon-1}A^{-1}w$ (p. 8) | Partial. A preference parameter pinned by a threshold pair has a closed-form one-parameter analogue (the ratio of the band edges is $\lambda^2$, our reading of p. 8, not stated there). No fixed cost, so no joint identification |
+| Wang, Wang and Wu, arXiv:1807.11171, "Dividend and capital injection optimization with transaction cost for spectrally negative Lévy risk processes" | v4, `e3e26db73dece43f`, 32 pp | Fixed cost on lump-sum dividends, proportional cost $\phi$ on injection, injection a reflection at 0. Tables 1 and 2 (pp. 29-30): "z1 is seen to have a slow but steady downward trend when c increases while z2 has a solid upward trend"; "z1 and z2 are seen to have steady upward trends when φ increases" | Partial. Two dividend thresholds moving with two cost parameters, numerically. No injection trigger, no penalty, no identification |
+| Lakner and Reed, arXiv:2206.04107 | v1, `89721a52b8646611`, 27 pp | Fixed and variable costs on deposits and withdrawals, band $a<\alpha\le\beta<b$ (p. 6), a symmetric quadratic cost around a target (p. 18). No comparative statics | Partial, structure only |
+| Mguni, arXiv:1805.01578, "Optimal capital injections with the risk of ruin" | v3, `a51b251b884a033e`, 38 pp | Fixed plus proportional injection cost (p. 4), no dividends, no comparative statics | Structure only |
+| Junca, Moreno-Franco and Pérez, arXiv:1808.02182 | v2, `0bcdd661b172c4ad`, 25 pp | Fixed cost on dividends, injection a reflection with a unit cost $\Lambda$ (p. 4) | None |
+| Federico, Ferrari and Torrente, arXiv:2309.16303 | v2, `d7aa4d11f5dd426e`, 22 pp | Fixed cost on activating reinsurance; "The function K ↦ x∗b∗ is strictly increasing" (p. 9) | None |
+| Dudziak and Schmidli, arXiv:2510.25494 | v2, `5946ce1d5039967c`, 25 pp | Indicator drawdown penalty weighted by $\beta$, dividends at a bounded rate, no injection | Partial, a penalty weight moving dividend thresholds only |
+| Tse, arXiv:1810.03501 | v1, `bd5cd18ff8448ce1`, 33 pp | Log utility, no equity issuance ("we rule out the possibility of equity issuance", p. 6) | None |
+| Guan and Xu, arXiv:2604.04641 | v1, `a755d2c336e11bd3`, 38 pp | Ratcheting, proportional injection cost | None |
+| Aubert, Chevalier and Ly Vath, arXiv:2511.19701 | v2, `4543f45c6eb65dd4`, 38 pp | Proportional injection cost $\delta$, numerical statics in $\delta$ (p. 22) | None |
 
-Nothing seen states the ratio $\nu_1^2/\nu_3^2$, or its independence from a
-preference parameter, under a two-branch cap with a liability shock.
+### Read in full, bearing on C2
 
-## 3. C4, leads ranked by threat
-
-| Lead | Tag | What could overlap | What to read |
+| Paper | Version, sha256 | What it has | Overlap with C2 |
 |---|---|---|---|
-| Angelis (2025), "Price Setting and Price Stickiness: A Behavioral Foundation of Inaction Bands", JEEA 23(3):1095-1132, doi 10.1093/jeea/jvae049. Replication package zenodo.org/records/13785746 | [C] | Loss aversion with a menu cost gives an inaction band with two targets, calibrated to price microdata. Whether it gives the thresholds' comparative statics in the two parameters, or identifies them from the band, is not known | The model and calibration sections. The accepted manuscript (eprints.gla.ac.uk/342107) was embargoed to 15 October 2026 and could not be reached. Bibliography item B3 of the parent `TODO.md` |
-| Alvarez, Le Bihan and Lippi (2014), "Small and large price changes and the propagation of monetary shocks", Banque de France WP 492 (published version not checked) | [C] | A possible counterpoint. The snippet says identification of the menu cost needs data on the cost firms bear, beyond the distribution of price changes, which would cut against identification from thresholds alone | The identification section of WP 492 |
-| Bonaparte and Cooper (2009), "Costly portfolio adjustment", NBER w15227, and with Zhu (2011), NBER w16957 | [C] | Joint estimation of a preference (risk aversion) and an adjustment cost from inaction, by moments rather than a threshold Jacobian | The identification section of w16957 |
-| Federico, Modena and Regis (2025), "Coordinating dividend taxes and capital regulation", CRC TR224 DP 622 | [C] | Payout threshold and costly issuance in a bank model, recapitalisation moved by regulatory parameters. No preference parameter seen | Whether it has a fixed issuance cost and trigger statics |
-| Alvarez, Guiso and Lippi (2012), AER 102(5):2272-2300 | [C] | Two costs calibrated from two frequencies, the same counting logic, no preference parameter | Low priority |
+| Bayraktar, Chevalier, Ly Vath and Wang (2026), arXiv:2603.14557, already recorded in `lit/bayraktar_2026` | v2, `e080555878991988`, identical to the pinned copy | Besides the two-branch cap of eq. (4), a direct ceiling on the risky share. "Because π > 1 represents a leveraged position, we treat the π ≤ 1 case as the main banking interpretation and the unrestricted case as a mathematical benchmark" (p. 19). Under it, "the direct ceiling π ≤ 1 is tighter than the LCR constraint, so π a (y) is independent of a2 and a3" (p. 20), and "the LCR constraint is nonbinding within the parameter range considered" (p. 20). When $\pi_{\max}=1$ "the LCR is everywhere weaker than the direct leverage ceiling and is therefore redundant" (p. 17) | Not an overlap but a scope finding (section 3) |
+| Paulot and Lacroze, arXiv:0901.1218, "Efficient pricing of CPPI using Markov operators" | v1, `cf05a252144a057c`, 40 pp | "The process C − H is supposed to be log-normally distributed with volatility wmax σ where wmax is the maximum exposure, equal to the multiplier if no specific maximum exposure is set" (p. 16), an assumption to bound a grid | Partial. Constant log-cushion volatility, which C2 does not claim |
+| Paulot and Lacroze, arXiv:0905.2926, "One-dimensional pricing of CPPI" | v2, `484f77447ff0079c`, 19 pp | Uncapped CPPI, "a shifted lognormal distribution with volatility mσ" (p. 10). A capped rule appears at p. 16 with no volatility result | Partial, as above |
+| arXiv:1902.06505, "Options on CPPI with guaranteed minimum equity exposure" | v1, `b5c6cb752990c739`, 19 pp | Exposure $\max\{\min\{L_{\max}; M C_t/V_t\};\alpha_{\min}\}$ (p. 6), no volatility result. Cites Black and Perold only in reading lists (pp. 1-2) | Partial, the rule only |
+| arXiv:1005.1360, "Optimal dividend and investing control of a insurance company with higher solvency constraints" | v2, `fcd2349854080da2`, 31 pp | Two-branch reinsurance retention $a^*(x)=\lambda x$ below $x_0$ and 1 above (p. 7), constant log-reserve volatility near 0 in a proof (p. 14). The slope comes from the optimisation | Partial. No liability shock, no large-wealth limit |
+| Azcue and Muler (2010), arXiv:1010.4988, Ann. Appl. Probab. 20(4) | v1, `2981a454b8bd0d2e`, 51 pp | No-borrowing cap $\gamma\in[0,1]$ (p. 4). By Prop. 6.3(b) "γ∗ = 1 for small surpluses. This means that the whole surplus should be invested in stocks" (p. 29). No volatility statement | None on the result. A proof that a cap binds near ruin, the hypothesis K1 takes from the numerical solve |
+| arXiv:1805.09068 v4, "Non-concave optimal investment with Value-at-Risk constraint" | `cafc9c329fc08fdf`, 41 pp | Terminal-wealth constraints only; "increasing the loss aversion η leads the insurer to more prudent investment strategies in case of bad performance" (p. 20) | None. Loss aversion moves the exposure where no cap binds |
+| arXiv:1905.12431, "An assets-liabilities dynamical model of banking system" | v1, `a22cb2d88fedfd59`, 40 pp | A liability shock, uncorrelated with assets (p. 7), no exposure rule | None |
 
-No lead combined loss aversion or prospect theory with dividends or capital
-injection.
+## 3. What pass 1 changes
 
-## 4. Unread bank models
+**C2.** No paper read states the two limits, their ratio, or their
+independence from a preference parameter under a two-branch cap with a
+liability shock. The constant log-cushion volatility on a capped branch is in
+the CPPI pricing literature, as C2 already concedes. The finding that matters
+comes from Bayraktar et al. In their units $\pi$ is the risky share of assets,
+and our cap is $u(x)=x\,\pi(x)$. The liquidity branch exceeds the no-borrowing
+ceiling $u\le x$ exactly when $x\ge a_2/(1-a_3)$, so for every $a_2\le 1-a_3$
+it never binds on $x\ge1$ once borrowing is ruled out (our derivation, which
+their p. 20 computes for their grid). In the case the authors take as "the
+main banking interpretation", C2's surplus limit $\nu_3^2$ therefore never
+applies. Deep in surplus the ceiling binds, and the same algebra as
+`CapGeometry.surplus_limit` gives the limit
+$\sigma^2-2c\sigma\sigma_L+\sigma_L^2$, again free of $\lambda_S$ but free of
+$a_3$ too (our derivation, not yet a Lean theorem). The parent's E1 agrees.
+Its capped risky share of assets, 2.38, is above one. So C2 as stated is a
+result about the leveraged benchmark. The silence of $\lambda_S$ survives under
+no borrowing, while the role of the liquidity branch does not. L1 should
+record the ceiling and the authors' reading.
 
-None of the seven cached bank models of `lit/CANDIDATES.md` could be reached
-(Hugonnier and Morellec, Bolton, Li, Wang and Yang, Glover et al., Lambertini
-and Uysal, Klimenko et al., Décamps et al. 2011, Bertsch and Mariathasan).
-Their summaries show issuance costs in most of them and no penalty or
-asymmetry parameter in any, which is [A] and decides nothing. They are the
-natural place for comparative statics of the payout and issuance thresholds in
-a fixed cost, which C4 does not claim.
+**C4.** No paper read states identification of a preference or penalty
+parameter jointly with a fixed cost from the two thresholds, or proves the
+signs C4 proves. Two bank papers tabulate the mechanism numerically, Peura and
+Keppo (section 1) and Dai, Huang and Keppo (Table 2.1), each for parameters
+other than a shareholder asymmetry. Angelis pins loss aversion from a band
+with no fixed cost. What C4 can still claim is the analytic signs (M4, M5),
+the joint identification statement (M6), and a shareholder preference
+parameter as one of the pair. The row should cite Peura and Keppo and Dai,
+Huang and Keppo as the numerical precedents.
 
-## 5. What must be read before either claim is called new
+## 4. Pass 0, search level
 
-For C2.
-1. Black and Perold (1992), in full. If capped CPPI already gives cap-only
-   limits, C2's novelty narrows to the liability-shock terms ($\sigma_L$, $c$)
-   and to the reading as silence of $\lambda_S$, as the parent `TODO.md`
-   anticipated on 10 October.
-2. Azcue and Muler (2010), section 6.
-3. The numerical section of Bayraktar et al. (2026), already cached.
+Superseded where pass 1 read the paper. Kept as the reading list. Black and
+Perold (1992, JEDC) for C2; Alvarez, Le Bihan and Lippi (2014, Banque de France
+WP 492), Bonaparte and Cooper (2009, NBER w15227) and Bonaparte, Cooper and
+Zhu (2011, NBER w16957) for C4; Grossman and Vila (1992, JFQA), Hilscher,
+Raviv and Wiener (2024, FRL), Décamps, Mariotti, Rochet and Villeneuve (2011,
+JF), Federico, Modena and Regis (2025, CRC TR224 DP 622). And the cached bank
+models of `lit/CANDIDATES.md`, none reachable (Hugonnier and Morellec;
+Bolton, Li, Wang and Yang; Glover et al.; Lambertini and Uysal; Klimenko et
+al.; Bertsch and Mariathasan).
 
-For C4.
-1. Angelis (2025), in full.
-2. The identification section of Alvarez, Le Bihan and Lippi.
-3. Peura and Keppo's Table 2, already read, cited in the row as the contrast
-   of section 1.
+## 5. What must still be read
 
-For both, the cached bank models of section 4, in full.
+For C2. Black and Perold (1992), in full. Choulli, Taksar and Zhou (2003,
+SIAM J. Control Optim. 41(6):1946-1979), "A diffusion model for optimal
+dividend distribution for a company with constraints on risk control", cited
+by Bayraktar et al.
 
-## 6. Verdict
+For C4. Alvarez, Le Bihan and Lippi's identification section. Hugonnier and
+Morellec (2017, JFE). Décamps, Mariotti, Rochet and Villeneuve (2011, JF).
+Bolton, Li, Wang and Yang (2025, JF).
 
-Neither claim can be called new yet. No lead found states either result, and
-the closest leads (Black and Perold for C2, Angelis for C4) are unread. Under
-the guideline both move to the pending table, each naming the readings of
-section 5.
+For both, the remaining cached bank models.
+
+## 6. Verdict after pass 1
+
+Neither claim can be called new yet, since the papers of section 5 are unread.
+No paper read in full states either result. C2 needs its scope narrowed to the
+leveraged benchmark, or restated for the no-borrowing ceiling. C4 needs its
+contrast with two numerical precedents in bank models. Under the guideline
+both stay in the pending table.
