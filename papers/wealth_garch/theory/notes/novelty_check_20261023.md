@@ -3,7 +3,7 @@
 A planning note, not part of the paper. The parent `MANUSCRIPT.tex` claims two
 results new, C2 and C4. Both are candidates for the theory paper, whose
 skeleton has no rows yet. This note records an internal audit, a search-level
-pass (pass 0) and four full-text passes (passes 1 to 4). Further passes are planned
+pass (pass 0) and full-text passes 1 to 5. Further passes are planned
 (author, 23 October 2026, "happy to do this multiple passes").
 
 The claims, as the parent states them.
@@ -184,6 +184,56 @@ the fixed cost). With the trigger pinned at zero reserves or at the
 regulatory level, the paper has no trigger to move, no asymmetry parameter and
 no identification. Overlap with C2: none, since exposure is fixed.
 
+## 2e. Pass 5, Bolton, Li, Wang and Yang
+
+Bolton, Li, Wang and Yang, "Dynamic banking and the value of deposits", read
+as NBER Working Paper 28298 (December 2020, 61 pp., sha256
+`d69ea1e51ea6196e`), an earlier version of the *Journal of Finance* 80(4)
+article (2025), uploaded by the author to the Drive on 23 October 2026
+(`1rR4xx7iISpW-Drx2C9juW5cOyIpOfDWX`). Read in full from `pdftotext`, every
+quotation below checked against the text. The extraction drops overbars and
+underbars, so the payout and issuance boundaries both print as "k".
+
+- The state is the capital-to-deposit ratio, "V (X, K) = v (k) X, where
+  k = K/X" (p. 21), with a deposit shock correlated with the asset shock:
+  "Let φdt denote the instantaneous covariance between dWtX and dWtA"
+  (p. 11), φ = 0.8 (p. 26).
+- Fixed and proportional issuance costs, "proportional and fixed costs of
+  issuing equity" (p. 18), a dividend barrier and a lump-sum issue to a
+  return point (eqs. 34-37, p. 24).
+- The issuance trigger is not optimised. "we still need one condition to pin
+  down" it (p. 24), and it is set at zero or by the leverage ratio:
+  "SLR requirement becomes a lower bound on the state variable and triggers
+  equity issuance" (p. 24).
+- The capital requirement caps risky exposure at high capital ("When k is
+  large, the capital requirement binds", p. 24; "around 11% of the time, the
+  capital requirement binds", p. 30). Near the issuance boundary exposure is
+  interior.
+- No preference parameter. Shareholders are risk-neutral and risk aversion is
+  endogenous, "Even though the bank evaluates the equityholders' payoffs with
+  a risk-neutral objective" it can be "effectively risk-averse … due to the
+  equity issuance cost" (p. 19); "Regulation does not cause endogenous risk
+  aversion (equity issuance costs do) but regulation amplifies it" (p. 5).
+- Boundary statics in regulation and in the interest rate only: "the payout
+  and equity issuance boundaries both shift leftward" when the leverage ratio
+  is relaxed (p. 36); a higher franchise value "incentivizes the bank to
+  retain more equity capital as a risk buffer" (p. 43). None in the fixed
+  cost, which is calibrated, "The fixed cost is set to 0.1%" (p. 26).
+- No statement on the volatility of the capital ratio. By our derivation from
+  their eqs. (2), (11), (16) and (33), where the capital requirement binds the
+  variance of $\log k$ is $\xi_K^2\sigma_A^2+\sigma_X^2-2\xi_K\sigma_A\sigma_X\phi$,
+  free of preferences, the same structure as our surplus limit; near the
+  issuance boundary exposure is interior, so no cap-only limit exists there.
+
+Overlap with C2: none stated; the ingredients of a preference-free variance
+at the capped end exist, a correlated liability shock and a binding exposure
+cap, but only at the top, and the paper does not compute it. Overlap with C4:
+partial, on parts not claimed new (double barrier, fixed plus proportional
+costs, boundary shifts in a regulatory parameter); the trigger is set by
+regulation, there is no preference parameter and no identification. This is
+the closest model to ours read so far and belongs in the literature table as
+the bank model of record.
+
 ## 3. What pass 1 changes
 
 **C2.** No paper read states the two limits, their ratio, or their
@@ -229,21 +279,29 @@ al.; Bertsch and Mariathasan).
 
 ## 5. What must still be read
 
-For C2. Choulli, Taksar and Zhou (2003,
-SIAM J. Control Optim. 41(6):1946-1979), "A diffusion model for optimal
-dividend distribution for a company with constraints on risk control", cited
-by Bayraktar et al.
+For C2. Choulli, Taksar and Zhou (2003), "A diffusion model for optimal
+dividend distribution for a company with constraints on risk control", SIAM
+J. Control Optim. 41(6):1946-1979, cited by Bayraktar et al.
 
-For C4. Alvarez, Le Bihan and Lippi's identification section. Décamps, Mariotti, Rochet and Villeneuve (2011, JF).
-Bolton, Li, Wang and Yang (2025, JF).
+For C4. The identification section of Alvarez, Le Bihan and Lippi (2014),
+Banque de France WP 492.
 
-For both, the remaining cached bank models (Bolton,
-Li, Wang and Yang; Glover et al.; Lambertini and Uysal; De Nicolò et al.).
-None is reachable by network or in the author's Drive on 23 October 2026,
-and neither are Black and Perold, Choulli, Taksar and Zhou, Décamps et al.
-or Alvarez, Le Bihan and Lippi.
+For both. Glover, Johnson, Evatt and Cheng (2023); Lambertini and Uysal
+(2013, 2014). De Nicolò, Gamba and Lucchetta, read as IMF WP/12/72, is in
+pass 6.
 
-## 6. Verdict after passes 1 to 4
+Optional, for positioning only. Décamps, Mariotti, Rochet and Villeneuve
+(2011), JF 66(5):1501-1544 (author's question of 23 October 2026: its asymmetric
+stock-return volatility is a neighbour of C2, and its owners are risk-neutral).
+
+## 6. Verdict after passes 1 to 5
+
+Pass 5 reads Bolton, Li, Wang and Yang, the closest model to ours: correlated
+deposit shock, fixed and proportional issuance costs, a capital requirement
+capping exposure at high capital. Their trigger is regulatory, they have no
+preference parameter, and they compute no capital-ratio variance, so neither
+claim is in it.
+
 
 Pass 4 reads Hugonnier and Morellec: a fixed issuance cost and the barrier
 rising in it, but the recapitalisation point is fixed at zero reserves and
