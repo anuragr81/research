@@ -14,5 +14,6 @@ run({
     "prefix": "BCVW",
     "fabricated": "the parameter a3 is irrelevant for the asymptotic upper bound of the cap",
     "wrong_page": 3,
-    "controls": ["BCVW.control_nondegenerate_needs_abs_c_lt_one", "BCVW.control_limit_needs_a1_le_a3"],
+    "controls": ["BCVW.control_nondegenerate_needs_abs_c_lt_one", "BCVW.control_limit_needs_a1_le_a3",
+                 "BCVW.control_ceiling_needs_small_runoff"],
 })

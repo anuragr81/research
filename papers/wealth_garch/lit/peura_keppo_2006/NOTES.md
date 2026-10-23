@@ -38,3 +38,11 @@
   so is the underprediction of capital (PK-Q12).
 - PK-Q18 calls for a graduated penalty below the requirement, which is the
   role of the shortfall penalty with $\lambda_S$ in our model.
+
+## Added 23 October 2026
+
+- PK-Q22 to PK-Q27, PK-D7 and three Lean results. Table 2 has the sign
+  pattern of M6 in $(\Delta,K)$ at small $K$, and the authors pin $(D,K)$ from
+  issue cost and frequency, the gap being driven by $K$ (PK-Q22, PK-Q23). The
+  theory paper's identification headline cites this as its precedent.
+- Control: `PeuraKeppo.control_delay_lowers_trigger_at_high_K`.

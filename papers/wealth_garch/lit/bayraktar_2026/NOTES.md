@@ -27,8 +27,14 @@
   BCVW-D4 fails at $c=1$.
 - `BCVW.control_limit_needs_a1_le_a3` shows the limit $1/a_3$ fails when
   $a_1>a_3$.
+- `BCVW.control_ceiling_needs_small_runoff` shows the ceiling result fails
+  when the runoff $a_2$ is large.
 
 ## Consequences for this bundle
+
+- Added 23 October 2026 (BCVW-Q15 to Q18, BCVW-D8). The authors' main
+  banking case is no borrowing, under which the liquidity branch never binds.
+  M3's surplus limit belongs to their unrestricted benchmark.
 
 - M2's crossing point $\bar x$ is the paper's switching point $\hat y$. M2
   and M3 are statements about the paper's cap.

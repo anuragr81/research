@@ -20,6 +20,10 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | BCVW-Q12 | 8 | a fraction a3 ∈ (0, 1) is excluded from HQLA | $a_3$ is a single haircut on the risky asset (G6). |
 | BCVW-Q13 | 13 | The baseline regulatory parameters are (a1 , a2 , a3 ) = (0.045, 0.05, 0.30) | The baseline values compared with the Basel numbers in the measurement map (G4 to G6). |
 | BCVW-Q14 | 13 | r = 0.02, µ = 0.04, µL = 0.03, ρ = 0.12, γ = 0.02, together with σ = 0.08, σL = 0.03, c = 0.20, κ = 0.01, κ′ = 0.02 | The market, liability and cost parameters have no regulatory counterpart and are calibrated at this baseline (G8 to G11). |
+| BCVW-Q15 | 19 | we treat the π ≤ 1 case as the main banking interpretation and the unrestricted case as a mathematical benchmark | The authors' main banking case forbids borrowing to hold the risky asset. Under it the liquidity branch of the cap does not bind (BCVW-D8). |
+| BCVW-Q16 | 20 | the direct ceiling π ≤ 1 is tighter than the LCR constraint | In their parameter range the no-borrowing ceiling lies below the liquidity branch, `BCVW.ceiling_tighter_than_lcr` for every $a_2\le(1-a_3)y$. |
+| BCVW-Q17 | 20 | the LCR constraint is nonbinding within the parameter range considered | M3's surplus limit, which needs the liquidity branch to bind deep in surplus, belongs to their unrestricted benchmark. |
+| BCVW-Q18 | 17 | the LCR is everywhere weaker than the direct leverage ceiling and is therefore redundant | The same point for the value comparison of their Table 1. |
 
 ## Lean results
 
@@ -34,6 +38,9 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | `BCVW.switching_point_baseline` | $\lvert\hat y-1.168\rvert<0.0005$ at $(a_1,a_2,a_3)=(0.045,0.05,0.30)$. |
 | `BCVW.piBar_tendsto` | $\bar\pi(y)\to1/\max(a_1,a_3)$ as $y\to\infty$, for $a_1,a_3>0$. |
 | `BCVW.u_concave` | $u$ is concave on $\mathbb R$. |
+| `BCVW.lcr_branch_ge_one` | $0<a_3$, $0<y$, $a_2\le(1-a_3)y$ imply $1\le\frac1{a_3}(1-a_2/y)$: the liquidity branch of $\bar\pi$ is at least one. |
+| `BCVW.ceiling_tighter_than_lcr` | Under the same conditions $\min\{\frac1{a_3}(1-a_2/y),1\}=1$: with no borrowing the ceiling, not the liquidity branch, binds. |
+| `BCVW.control_ceiling_needs_small_runoff` | At $a_3=1/2$, $a_2=y=1$ the liquidity branch is $0<1$. |
 | `BCVW.control_nondegenerate_needs_abs_c_lt_one` | At $c=1$, $\sigma=\sigma_L=1$, $y=2$, $\pi=1/2$ the diffusion is $0$. |
 | `BCVW.control_limit_needs_a1_le_a3` | At $a_1=1/2>a_3=1/4$ the limit $1/\max(a_1,a_3)=2$ is not $1/a_3=4$. |
 
@@ -48,3 +55,4 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | BCVW-D5 | pp. 6, 10 | The paper's $K$ (Prop. 3.1) is a constant in an upper bound, its $\kappa$ a dilution cost and its $\kappa'$ the proportional cost. | PROOFS_v2 uses $K$ for a fixed issuance cost and $\kappa$ for the proportional cost. No symbol is carried over from the paper. |
 | BCVW-D6 | p. 17 | $\lim\bar\pi=1/a_3$ holds when $a_3\ge a_1$. | p. 17 states it without the condition. It holds at the baseline. The general limit is BCVW-D2. |
 | BCVW-D7 | p. 34 | $u(y)=\min\{(y-1)/a_1,(y-a_2)/a_3\}$ is concave in $y$. | The formula is garbled in the text layer. The reading is $\bar\pi(y)\,y$ (`BCVW.piBar_mul_y`, `BCVW.u_concave`). |
+| BCVW-D8 | pp. 17, 19-20 | With no borrowing ($\pi\le1$) the liquidity branch never binds once $a_2\le(1-a_3)y$, which holds on $y\ge1$ for every $a_2\le1-a_3$, so for all Basel-like parameters. | BCVW-Q15 to BCVW-Q18 state it for their grid; `BCVW.ceiling_tighter_than_lcr` proves it in general. |

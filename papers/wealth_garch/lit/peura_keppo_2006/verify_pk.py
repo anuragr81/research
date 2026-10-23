@@ -15,5 +15,6 @@ run({
     "fabricated": "Our main modeling innovation is to impose a fixed cost on capital issues.",
     "wrong_page": 2170,
     "controls": ["PeuraKeppo.control_dplus_needs_positive_rho",
-                 "PeuraKeppo.control_paste_needs_distinct_roots"],
+                 "PeuraKeppo.control_paste_needs_distinct_roots",
+                 "PeuraKeppo.control_delay_lowers_trigger_at_high_K"],
 })

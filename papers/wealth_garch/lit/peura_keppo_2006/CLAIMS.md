@@ -27,6 +27,12 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-Q19 | 2193 | bank capital requirements apply to an accounting measure of capital; hence, the dynamics of accounting measures could be all that matter. | Accounting volatility is the relevant sigma for a capital model (PK-D3). |
 | PK-Q20 | 2174 | We have done the optimization with the Solver add-in in Microsoft Excel. | The source of small numerical differences in the replication (`replication/peura_keppo_2006/results_stage1.md`). |
 | PK-Q21 | 2179 | the expected size of a new issue (which is well approximated by the difference between the dividend barrier and the capital issue barrier) increases with the capital raising cost K. | The approximation behind Table 2's issue-size column (PK-D5). |
+| PK-Q22 | 2184 | For D and K, we identify common estimates across banks such that their implied capital raising cost and frequency are of plausible magnitude. | The authors pin the delay and the fixed cost from two moments derived from the thresholds, issue cost and frequency. A precedent for C4's logic, by calibration rather than a local identification theorem, and with no preference parameter. |
+| PK-Q23 | 2184 | is driven by K, and hence we may choose K rather independently from D, so as to yield a desired proportional cost of capital issuance | The trigger-to-target gap is driven by the fixed cost, which is how they separate $K$ from $D$. |
+| PK-Q24 | 2184 | K is the fixed cost of capital issue, u1 is the optimal capital issue barrier, u2 is the optimal dividend barrier | The columns of Table 2. |
+| PK-Q25 | 2184 | .08 .10 .9 2.4 1.5 6 8 | Table 2 row $(\Delta,K)=(0.08,0.10)$: $u_1=0.9$, $u_2=2.4$. |
+| PK-Q26 | 2184 | .08 .25 .8 2.7 1.8 12 18 | Row $(0.08,0.25)$: $u_1=0.8$, $u_2=2.7$. |
+| PK-Q27 | 2184 | .5 .10 1.6 3.2 1.6 6 11 | Row $(0.5,0.10)$: $u_1=1.6$, $u_2=3.2$. |
 
 ## Lean results
 
@@ -41,6 +47,9 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | `PeuraKeppo.no_issue_barrier` | $u_0=\frac{2}{d_{1+}-d_{1-}}\log(-d_{1-}/d_{1+})$ solves $f_1(0;u_0)=0$, (17) and (A11). |
 | `PeuraKeppo.control_dplus_needs_positive_rho` | At $\rho=0$, $\mu=\sigma=1$, $d_{1+}=0$. |
 | `PeuraKeppo.control_paste_needs_distinct_roots` | With $d_{1+}=d_{1-}$ the coefficients fail smooth pasting. |
+| `PeuraKeppo.table2_signs` | From the printed Table 2 at $(\Delta,K)=(0.08,0.10)$: the dividend barrier rises in $\Delta$ and in $K$, the issue barrier rises in $\Delta$ and falls in $K$. |
+| `PeuraKeppo.table2_det_neg` | The finite-difference Jacobian of $(u_2,u_1)$ in $(\Delta,K)$ there is negative, by `Identification.det_neg_of_opposite`, the sign pattern of M6. |
+| `PeuraKeppo.control_delay_lowers_trigger_at_high_K` | At $K=1.00$ a longer delay lowers $u_1$ (0.9 to 0.6), so the pattern is local. |
 
 ## Readings recorded
 
@@ -52,3 +61,4 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-D4 | references | The copy read ends at p. 2201. | BCVW cites the article as pp. 2163-2202. A final page, if any, was not supplied. |
 | PK-D5 | p. 2184, Table 2 | The column E[s] is $u_2-u_1$, the approximation of PK-Q21, not the conditional expectation its note describes. | Replication stage 1: the column matches $u_2-u_1$ in 10 of 12 rows and the conditional expectation in 1. |
 | PK-D6 | p. 2184, Table 2 | The column $E(t_i-t_{i-1})$ is the expected time from $u_2$ down to $u_1$, without the delay its note includes. | Replication stage 1: 9 of 12 rows match without the delay, 5 of 12 with it. |
+| PK-D7 | p. 2184, Table 2 | Signs of the threshold responses are read from finite differences of printed values at one decimal; the opposite-direction pattern holds at $K=0.10$ and $0.25$ and fails at $K=1.00$. | PK-Q25 to PK-Q27; `PeuraKeppo.control_delay_lowers_trigger_at_high_K`. The replication reproduces the table (`replication/peura_keppo_2006/results_stage1.md`). |

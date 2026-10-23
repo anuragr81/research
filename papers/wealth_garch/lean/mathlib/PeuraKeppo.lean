@@ -13,6 +13,7 @@ are not formalised.
 -/
 
 import Mathlib
+import Identification
 
 open Real
 
@@ -108,6 +109,20 @@ theorem control_dplus_needs_positive_rho : dplus 1 1 0 = 0 := by
 
 theorem control_paste_needs_distinct_roots : a1 1 1 * 1 + a2 1 1 * 1 ≠ 1 := by
   unfold a1 a2
+  norm_num
+
+/-! Table 2 (p. 2184), printed values. Finite differences of the dividend barrier u₂
+and the issue barrier u₁ from (Δ, K) = (0.08, 0.10): Δ to 0.5 at K = 0.10, K to 0.25
+at Δ = 0.08. -/
+
+theorem table2_signs :
+    (0 : ℝ) < 3.2 - 2.4 ∧ (0 : ℝ) < 2.7 - 2.4 ∧ (0 : ℝ) < 1.6 - 0.9 ∧ (0.8 : ℝ) - 0.9 < 0 := by
+  norm_num
+
+theorem table2_det_neg : ((3.2 : ℝ) - 2.4) * (0.8 - 0.9) - (2.7 - 2.4) * (1.6 - 0.9) < 0 :=
+  Identification.det_neg_of_opposite (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
+theorem control_delay_lowers_trigger_at_high_K : (0.6 : ℝ) - 0.9 < 0 := by
   norm_num
 
 end PeuraKeppo

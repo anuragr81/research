@@ -91,6 +91,21 @@ theorem u_concave (a1 a2 a3 : ℝ) :
   have := h1.inf h3
   exact this.congr fun y _ => rfl
 
+theorem lcr_branch_ge_one {a2 a3 y : ℝ} (ha3 : 0 < a3) (hy : 0 < y) (h : a2 ≤ (1 - a3) * y) :
+    1 ≤ 1 / a3 * (1 - a2 / y) := by
+  have hq : a2 / y ≤ 1 - a3 := by
+    rw [div_le_iff₀ hy]
+    linarith
+  rw [one_div_mul_eq_div, le_div_iff₀ ha3]
+  linarith
+
+theorem ceiling_tighter_than_lcr {a2 a3 y : ℝ} (ha3 : 0 < a3) (hy : 0 < y) (h : a2 ≤ (1 - a3) * y) :
+    min (1 / a3 * (1 - a2 / y)) 1 = 1 :=
+  min_eq_right (lcr_branch_ge_one ha3 hy h)
+
+theorem control_ceiling_needs_small_runoff : 1 / (1 / 2 : ℝ) * (1 - 1 / 1) < 1 := by
+  norm_num
+
 theorem control_nondegenerate_needs_abs_c_lt_one : CapGeometry.sig2 1 1 1 2 (1 / 2) = 0 := by
   unfold CapGeometry.sig2
   norm_num
