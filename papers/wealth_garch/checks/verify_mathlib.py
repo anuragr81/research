@@ -7,7 +7,8 @@ import sys
 import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJ = os.path.join(ROOT, "lean", "mathlib")
+PROJ = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(ROOT, "lean", "mathlib")
+LABEL = os.path.relpath(PROJ, ROOT)
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 results = []
 
@@ -48,7 +49,7 @@ def disallowed(used):
 
 
 print("=" * 72)
-print("LEAN WITH MATHLIB (lean/mathlib/)")
+print(f"LEAN WITH MATHLIB ({LABEL}/)")
 print("=" * 72)
 
 lake = shutil.which("lake")
@@ -60,14 +61,14 @@ roots = [r for block in re.findall(r"roots\s*=\s*\[([^\]]*)\]", lakefile)
 toolchain = open(os.path.join(PROJ, "lean-toolchain")).read().strip()
 print(f"      toolchain {toolchain}; modules {modules}; build roots {roots}")
 
-check("ML-1 every .lean file in lean/mathlib is a build root", set(modules) <= set(roots) and modules,
+check(f"ML-1 every .lean file in {LABEL} is a build root", set(modules) <= set(roots) and modules,
       f"not built: {sorted(set(modules) - set(roots))}" if set(modules) - set(roots) else "")
 
 if lake is None:
     check("ML-2 lake on PATH", False, "install elan; the Mathlib suite did NOT run")
 elif not os.path.isdir(os.path.join(PROJ, ".lake", "packages", "mathlib", ".lake", "build")):
     check("ML-2 Mathlib build files present", False,
-          "run: cd lean/mathlib && lake exe cache get && lake build")
+          f"run: cd {LABEL} && lake exe cache get && lake build")
 else:
     p = subprocess.run([lake, "build"], cwd=PROJ, capture_output=True, text=True)
     check("ML-2 lake build succeeds", p.returncode == 0, (p.stdout + p.stderr).strip()[-300:])
