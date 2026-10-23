@@ -9,7 +9,7 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 | 1 | Skeleton, the empty tables, ID scheme, appendix stubs, checker with controls, `verify.sh` | Done 2026-10-23. MS-1 to MS-9 pass on the skeleton and on their good samples, and fail on their bad ones. The PDF builds with no warning. |
 | 2 | Lean project, toolchain and Mathlib pinned, build roots, audit | Done 2026-10-23. `lean/` holds the twelve files the parent manuscript's rows M1 to M16 and R1, R2 cite, and the eight Lean companions of the literature records the theory rows cite. 169 theorems audited. |
 | 3 | Analytic steps into Lean | Done 2026-10-23. No new step; the rows reuse the parent's audited theorems. `BCVW.ceiling_tighter_than_lcr` added for C3. |
-| 4 | Model rows, their proofs and assumptions, the measurement map | Rows done 2026-10-23, M1 to M12 and A1 to A6 (map below). The measurement map is open. |
+| 4 | Model rows, their proofs and assumptions, the measurement map | Done 2026-10-23. M1 to M12, A1 to A6 (map below), and the measurement map as Appendix C with its checker. |
 | 5 | Appendices B to G filled | Done 2026-10-23. B, C, D and E filled; F and G not applicable. |
 | 6 | Retire a predecessor | Not applicable unless the parent manuscript's theory rows are moved here rather than copied. |
 | 7 | Novelty reading | Passes 0 to 6 done; four papers remain (`notes/novelty_check_20261023.md`, section 5). C4 and C5 pending. |
@@ -58,6 +58,28 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   pending. The constituency question (L19) is outside the paper; the
   thresholds identify the weight of the penalty, not whose cost it is.
 
+- 2026-10-23. The question reassessed against a measurement map (author,
+  "use measurement map, redefine, reassess the question"). Appendix C is now
+  the map of `papers/MANUSCRIPT_SKELETON.md` section 4.5, three tables with
+  the six status words, checked by `checks/verify_measurement_map.py`
+  (Suite 4), with the parent's agreed names. What the map says. The
+  asymmetry parameter and the fixed issuance cost are never observed. The
+  two thresholds are recorded as the state at a dividend and at an issue,
+  and on the FDIC panel the parent bundle read neither behaves as a
+  threshold (parent map G14, G15 fail). The variance limits are computed
+  from assumed volatilities and apply where the cap binds, which on that
+  panel it does not (G2 fails). So K1 and K2 are results within the model,
+  the question is one of identification, and the Question, the Answer and
+  the scope notes now say so. The weight of the penalty matters because at
+  one it returns the issuance-cost model (M8), so its identification is what
+  would let the graduated-penalty specification be tested rather than
+  imposed.
+- 2026-10-23. Four names proposed to the author, not yet agreed. Solvency
+  floor ($a_1$), run-off rate ($a_2$) and liquidity haircut ($a_3$), since
+  the three parameters of the cap geometry have different statuses in the
+  map (recorded, assumed, assumed); and value function ($V$). The parent
+  map's Terminology table should take them if agreed.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |
@@ -84,9 +106,7 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 - Literature records. The checker reads the parent's `lit/` records, shared
   by the three papers, so no record is duplicated (recommended). The
   alternative is a `theory/lit/` of its own.
-- The measurement map. The parent's `MEASUREMENT_MAP.tex` holds the names the
-  author agreed on 13 October 2026. Recommended: the theory paper takes its
-  model objects from that map, so the three papers share one terminology.
+- The four proposed names of the map (above), to agree or replace.
 - The Lean files are copies of `lean/mathlib/`, checked identical by TH-1.
   Moving them instead needs `verify.sh` and `checks/verify_mathlib.py` of
   the parent changed.
@@ -94,5 +114,4 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 ## Mechanics deferred
 
 - `checks/verify_docs.py` enters with the first count the manuscript states.
-- The measurement-map checker enters with the map, at pass 4.
 - `lit/verify_lit.sh` is not yet in `verify.sh`. The nine cited suites are run by hand (all pass, 23 October 2026); they need the source PDFs in `~/.cache/wealth_garch/`.

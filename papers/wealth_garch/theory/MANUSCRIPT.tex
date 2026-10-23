@@ -61,6 +61,7 @@
 \g@addto@macro\UrlBreaks{\do\.\do\_\do\,}
 \makeatother
 \newcommand{\lean}[1]{\path{#1}}
+\newcommand{\mm}[6]{#1 & \textbf{#2} & #3 & #4 & #5 & #6 \\ \addlinespace}
 \newcommand{\rowref}[1]{#1}
 \newcommand{\unv}[1]{\textit{Unverified:} #1}
 \newcommand{\pend}[1]{\textit{Pending:} #1}
@@ -91,16 +92,19 @@
 
 \subsection{Question}
 
-% The question is the literature's, as Section~\ref{sec:literature} traces it.
+% The question is the literature's, as Section~\ref{sec:literature} traces it,
+% reassessed against the measurement map of Appendix~\ref{app:terms}.
 When a bank's capital buffer is explained by a fixed cost of issuing equity
-together with a penalty that grows as capital falls below the requirement, can
-the weight of that penalty be told apart from the issuance cost by where the
-bank pays dividends and where it recapitalises, and does the variance of the
-buffer carry that weight as well? The bank recapitalises by impulse control at
-a fixed issuance cost and takes risky exposure under a regulatory cap. The
-graduated penalty is the specification \citet{peura2006} call for and leave
-uncalibrated (L18, L20), and the thresholds and the variance of the buffer are
-what a bank's capital policy shows.
+together with a penalty that grows as capital falls below the requirement, does
+the bank's policy carry the weight of that penalty as a parameter of its own,
+separate from the issuance cost, and if so where, in the dividend barrier and
+the recapitalisation trigger or in the variance of the buffer? The weight is
+never observed (Appendix~\ref{app:terms}), so it can be read only off what the
+policy shows, and at one it switches the penalty off and returns the
+issuance-cost model (M8), so whether it is identified decides whether the
+specification \citet{peura2006} call for (L18) can be tested against theirs
+rather than imposed (L20). The bank recapitalises by impulse control at a fixed
+issuance cost and takes risky exposure under a regulatory cap.
 
 \subsection{Answer}
 
@@ -112,6 +116,10 @@ barrier and the trigger in $(\lambda_S,K)$ is non-singular, so the pair is
 locally identified from the two thresholds (M3), under the hypotheses that M4
 and Appendix~\ref{app:evidence} list. This is K1 and C1. The thresholds
 identify the weight of the penalty and not whose cost it is (Appendix~\ref{app:scope}).
+The identification is within the model. The two thresholds are recorded as the
+state at a dividend and at an issue, and on the panel the parent bundle read
+dividends are paid at every state and issues land at no single target, so
+neither is measured there as a threshold (Appendix~\ref{app:terms}).
 
 The penalty does not move the limits of buffer variance. Where the optimal
 exposure binds the cap near the distress boundary and deep in surplus, buffer
@@ -119,7 +127,10 @@ variance tends to the deficit limit and the surplus limit, which involve only
 the asset and liability shocks and the cap (M10, M11). For every exposure that
 complies with the cap, binding or not, buffer variance is bounded by the same
 quantities (M12). The asymmetry parameter enters the thresholds and not the
-limits of buffer variance. This is K2 and C2, with its scope in C3.
+limits of buffer variance. This is K2 and C2, with its scope in C3. The
+limits need the cap to bind, and on that panel the recorded exposure sits far
+below the cap, so the bound of M12, which needs no binding, is the result that
+reaches the data (Appendix~\ref{app:terms}).
 
 \footnotesize
 \begin{longtable}{@{}P{0.8cm}P{7.0cm}P{1.9cm}P{6.4cm}@{}}
@@ -132,8 +143,8 @@ ID & Headline & Model rows & Scope note \\
 ID & Headline & Model rows & Scope note \\
 \midrule
 \endhead
-\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the weight of the penalty, not whose cost it is (L19, Appendix~\ref{app:scope}). The fixed cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
-\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset and liability shocks and the cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis, supported only by the numerical solve of the parent bundle (Appendix~\ref{app:evidence}); the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged.}
+\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the weight of the penalty, not whose cost it is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the panel the parent bundle read neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. The fixed cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
+\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset and liability shocks and the cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis, supported only by the numerical solve of the parent bundle (Appendix~\ref{app:evidence}); the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the panel the parent bundle read the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -175,12 +186,12 @@ ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 \midrule
 \endhead
-\arow{A1}{The state is $x\in(1,\infty)$, with diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M9, M10, M11, M12}{The balance sheet of \citet{bayraktar2026} in ratio form. Appendix~\ref{app:scope}, the balance sheet.}
-\arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation caps the risky exposure by the smaller of a solvency branch, binding near distress, and a liquidity branch, binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
-\arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the state.}{$\zeta$, $z$, $x$, $\pi$}{M10, M11, M12}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
-\arow{A4}{The objective is dividends net of issuance costs minus the running shortfall penalty $\Lambda(x)=(\lambda_S-1)(R-x)^+$ with $\lambda_S\ge1$, discounted at $\rho_L$.}{Shareholders value dividends net of what they pay for issues, less a penalty for each moment the state sits below the reference, weighted by the asymmetry parameter.}{$\Lambda$, $\lambda_S$, $R$, $\rho_L$, $x$}{M1, M2, M3, M4, M8}{The asymmetric penalty is the paper's question. Appendix~\ref{app:scope}, the shortfall penalty.}
+\arow{A1}{The state is $x\in(1,\infty)$, with diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio, the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M9, M10, M11, M12}{The balance sheet of \citet{bayraktar2026} in ratio form. Appendix~\ref{app:scope}, the balance sheet.}
+\arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation sets a regulatory cap on the risky exposure at each assets-to-liabilities ratio, the smaller of a solvency branch, whose slope is the solvency floor and which binds near distress, and a liquidity branch, set by the run-off rate and the liquidity haircut and binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
+\arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the assets-to-liabilities ratio, at the risky exposure the bank takes and the asset volatility it bears.}{$\zeta$, $z$, $x$, $\pi$, $\sigma$}{M10, M11, M12}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
+\arow{A4}{The objective is dividends net of issuance costs minus the running shortfall penalty $\Lambda(x)=(\lambda_S-1)(R-x)^+$ with $\lambda_S\ge1$, discounted at $\rho_L$.}{Shareholders value dividends net of what they pay for issues, less a shortfall penalty for each moment the assets-to-liabilities ratio sits below the reference, weighted by the asymmetry parameter and discounted at the liability-net discount rate.}{$\Lambda$, $\lambda_S$, $R$, $\rho_L$, $x$}{M1, M2, M3, M4, M8}{The asymmetric penalty is the paper's question. Appendix~\ref{app:scope}, the shortfall penalty.}
 \arow{A5}{Each issue costs $K$ per unit of liabilities plus $\kappa$ per unit raised.}{Every recapitalisation pays a fixed issuance cost that does not scale with its size and a proportional issuance cost.}{$K$, $\kappa$}{M2, M5, M6, M7}{The cost structure of \citet{peura2006} and \citet{bolton2011}. Appendix~\ref{app:scope}, the fixed issuance cost.}
-\arow{A6}{$V$ is the value function, solves the quasi-variational inequality with impulse operator $\mathcal MV$, is $C^2$ on the inaction region, and the optimal policy is a dividend barrier $y^*$, a trigger $x_L$ and a target $y_{\text{post}}$, with $\partial_{\lambda_S}V=-W$ and $\partial_KV=-N$.}{The value of the bank is that of its best policy, which pays dividends at a barrier and recapitalises from a trigger to a target, and the value responds to the two parameters through the expected discounted shortfall and the discounted injection count.}{$V$, $\mathcal MV$, $y^*$, $x_L$, $y_{\text{post}}$, $W$, $N$, $\lambda_S$, $K$}{M1, M2, M3, M4, M5}{The verification theorem and the envelope identities, not proved in Lean. Appendix~\ref{app:evidence}.}
+\arow{A6}{$V$ is the value function, solves the quasi-variational inequality with impulse operator $\mathcal MV$, is twice continuously differentiable on the inaction region, and the optimal policy is a dividend barrier $y^*$, a trigger $x_L$ and a target $y_{\text{post}}$, with $\partial_{\lambda_S}V=-W$ and $\partial_KV=-N$.}{The value function is the value of the bank under its best policy, which pays dividends at the dividend barrier and recapitalises from the recapitalisation trigger to the injection target, the impulse operator being the value of issuing at once, and the value responds to the asymmetry parameter and the fixed issuance cost through the expected discounted shortfall and the discounted injection count.}{$V$, $\mathcal MV$, $y^*$, $x_L$, $y_{\text{post}}$, $W$, $N$, $\lambda_S$, $K$}{M1, M2, M3, M4, M5}{The verification theorem and the envelope identities, not proved in Lean. Appendix~\ref{app:evidence}.}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -233,8 +244,10 @@ from values. \citet{peura2006} impose common values by intuition and pin the
 delay and the fixed cost from issue cost and frequency (L20, L8), and
 \citet{daihuangkeppo2019} fit their parameters to equity values (L21). Neither
 asks whether the weight of the penalty and the fixed cost can be told apart by
-the bank's policy, where both raise the buffer. K1 answers that part (M1 to
-M3, C1, C6). Whose cost the penalty is, which \citet{peura2006} name as the
+the bank's policy, where both raise the buffer. The weight matters because at
+one the penalty is off and the model is theirs (M8), so an identified weight is
+what would let the specification be tested rather than imposed. K1 answers
+that part (M1 to M3, C1, C6). Whose cost the penalty is, which \citet{peura2006} name as the
 issue their omissions reduce to (L19), is not settled by the thresholds and
 stays outside the paper (Appendix~\ref{app:scope}).
 
@@ -505,46 +518,110 @@ away from $R$ and $\bar x$, is assumed wherever a row differentiates $V$.
 
 \paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
 
-\section{Terminology}
+\section{Terminology and measurement map}
 \label{app:terms}
 
+The map names every object of the model once, and the manuscript uses these
+names and no others. The names are those of the parent bundle's
+\path{MEASUREMENT_MAP.tex}, agreed with the author on 10, 13 and 19 October
+2026, and four names are proposed here, the three parameters of the cap
+geometry taken one by one and the value function. The objects fall into three
+tables. Inputs are what the model takes as given, internal objects are built
+from the inputs inside the model, and outputs are what the rows predict. The
+column Directly observed says Yes when a record of the world gives the object
+without any computation, which is when its last column begins with Recorded,
+and No otherwise. Every symbol in the table of assumptions has exactly one row
+here. Where a row names the panel, it is the FDIC panel of US banks that the
+parent bundle read, 2015 to 2024, and the figures are those of the parent map.
+
+The map carries the reassessment of the question. The asymmetry parameter and
+the fixed issuance cost are never observed. The two thresholds that identify
+them are recorded as the state at a dividend and at an issue, and on the panel
+read neither behaves as a threshold. The limits of buffer variance are computed
+from assumed volatilities and apply where the cap binds, and on that panel it
+does not. What reaches the data is the bound of M12 and the two recorded
+thresholds as events, so K1 and K2 are results within the model, and the
+question is one of identification, not of measurement.
+
+\subsection{Inputs}
+
 \footnotesize
-\begin{longtable}{@{}P{4.0cm}P{2.5cm}P{9.5cm}@{}}
-\caption{Terms, each bound to a symbol defined in Appendix~\ref{app:proofs}.}\label{tab:terms}\\
+\begin{longtable}{@{}P{1.5cm}P{2.2cm}P{2.2cm}P{3.7cm}P{1.2cm}P{4.2cm}@{}}
+\caption{Inputs of the model.}\label{tab:terms}\\
 \toprule
-Term & Symbol & Meaning \\
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
 \midrule
 \endfirsthead
 \toprule
-Term & Symbol & Meaning \\
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
 \midrule
 \endhead
-Assets-to-liabilities ratio & $x$ & Total assets over total liabilities, the state of the model. \\
-Required capital & $q$ & The capital regulation requires, as a ratio to liabilities. \\
-Capital buffer & $z$ & The log of equity over required capital, $\log((x-1)/q)$ (M9). \\
-Distress boundary & $x=1$ & The state at which equity is zero. \\
-Regulatory cap & $u(x)$ & The largest risky exposure regulation allows, $\min\{(x-1)/a_1,(x-a_2)/a_3\}$. \\
-Solvency branch & $(x-1)/a_1$ & The branch of the regulatory cap that binds for $x\le\bar x$ (M10). \\
-Liquidity branch & $(x-a_2)/a_3$ & The branch of the regulatory cap that binds for $x\ge\bar x$ (M10). \\
-Crossing point & $\bar x$ & The state at which the two branches are equal. \\
-Cap geometry & $a_1,a_2,a_3$ & The parameters of the regulatory cap. \\
-Asset volatility & $\sigma$ & The volatility of the risky asset. \\
-Liability volatility & $\sigma_L$ & The volatility of the shock to liabilities. \\
-Return-liability correlation & $c$ & The correlation between the risky return and the liability shock. \\
-Asymmetry parameter & $\lambda_S$ & The weight on shortfall below the reference in the objective. \\
-Shortfall penalty & $\Lambda$ & $(\lambda_S-1)(R-x)^+$, the running penalty below the reference $R$ (M8). \\
-Buffer variance & $\zeta(x)$ & The squared diffusion coefficient of the capital buffer (A3). \\
-Deficit limit & $\nu_1^2$ & The limit of buffer variance at the distress boundary (M11). \\
-Surplus limit & $\nu_3^2$ & The limit of buffer variance deep in surplus (M11). \\
-Fixed issuance cost & $K$ & The cost of an issue that does not scale with its size, per unit of liabilities (Appendix~\ref{app:scope}). \\
-Proportional issuance cost & $\kappa$ & The cost of an issue per unit raised. \\
-Dividend barrier & $y^*$ & The state at which dividends are paid. \\
-Recapitalisation trigger & $x_L$ & The state at which capital is raised. \\
-Injection target & $y_{\text{post}}$ & The state reached by an issue. \\
-Expected discounted shortfall & $W$ & $\mathbb E_x\int_0^\infty e^{-\rho_Lt}(R-X_t)^+dt$ under the optimal policy, $-\partial_{\lambda_S}V$. \\
-Discounted injection count & $N$ & $\mathbb E_x\sum_ie^{-\rho_L\tau_i}$ under the optimal policy, $-\partial_KV$. \\
-Impulse operator & $\mathcal MV$ & The value of issuing at once to the best target, net of both issuance costs. \\
 \bottomrule
+\endfoot
+\mm{$x$}{Assets-to-liabilities ratio}{A real number above one.}{Total assets over total liabilities, the state of the model (A1).}{Yes}{Recorded as total assets over total liabilities in the Call Report, \path{ASSET} over \path{LIAB} (parent map G1).}
+\mm{$\pi$}{Risky exposure}{A function of the state with values between zero and the cap over the state.}{The share of assets in the risky asset (A1, A2). No row derives it; M11 takes it at the cap and M12 bounds every compliant choice.}{Yes}{Recorded as risk-weighted assets over total assets, \path{RWAJT} over \path{ASSET}, under risk weights of zero on the riskless and one on the risky asset (parent map G2). On the panel its median is 0.69 against a cap of 2.38 at the median state, so the cap does not bind there.}
+\mm{$\sigma$}{Asset volatility}{A positive real number.}{The volatility of the risky asset, and the letter of the diffusion of the state (A1, A3).}{No}{Assumed at the baseline of \citet{bayraktar2026}, 0.08 (parent map G8). The volatility of the book ratio is computed on the panel and is 4.1 times smaller than the model's at the recorded exposure, so it is not this object.}
+\mm{$\sigma_L$}{Liability volatility}{A positive real number.}{The volatility of the shock to liabilities (A1).}{No}{Assumed at the baseline of \citet{bayraktar2026}, 0.03 (parent map G9).}
+\mm{$c$}{Return-liability correlation}{A real number of absolute value below one.}{The correlation between the risky return and the liability shock (A1).}{No}{Assumed at the baseline of \citet{bayraktar2026}, 0.20 (parent map G9).}
+\mm{$q$}{Required capital}{A positive real number.}{The capital regulation requires, as a ratio to liabilities, the zero of the capital buffer (A1).}{No}{Assumed. A floor on the leverage ratio gives a candidate, 3/97 for the 3\% Tier 1 leverage ratio when Tier 1 equals book equity, and the bundle does not fix it (parent map G7). Buffer variance does not depend on it.}
+\mm{$a_1$}{Solvency floor}{A real number between zero and the liquidity haircut.}{The floor on equity over risky assets, the slope of the solvency branch of the regulatory cap (A2).}{Yes}{Recorded in the Basel standard as the CET1 minimum of 4.5\% of risk-weighted assets, the baseline of \citet{bayraktar2026}; which tier it stands for is not fixed (parent map G4).}
+\mm{$a_2$}{Run-off rate}{A real number below one.}{Net 30-day outflows as a share of liabilities, the intercept of the liquidity branch (A2).}{No}{Assumed at 0.05, the standard's run-off factor for stable retail deposits. The standard sets a factor per class of liability, so one rate for all liabilities is the model's reduction (parent map G5).}
+\mm{$a_3$}{Liquidity haircut}{A real number between the solvency floor and one.}{The haircut on the risky asset in high-quality liquid assets, the slope of the liquidity branch (A2).}{No}{Assumed at 0.30, the baseline of \citet{bayraktar2026}, which is none of the standard's haircuts (parent map G6).}
+\mm{$\rho_L$}{Liability-net discount rate}{A positive real number.}{The discount rate of the problem written per unit of liabilities (A4).}{No}{Assumed from the shareholders' discount rate, 0.12 at the baseline of \citet{bayraktar2026} (parent map G10).}
+\mm{$R$}{Reference}{A real number above one.}{The state below which the shortfall penalty applies (A4).}{No}{Assumed. Read as the capital level below which the supervisor's restrictions begin, which prompt corrective action sets by capital category (parent ledger A9); no row fixes it.}
+\mm{$\lambda_S$}{Asymmetry parameter}{A real number at least one.}{How much more the objective weighs a shortfall below the reference than a surplus above it (A4). At one the shortfall penalty vanishes and the model is the issuance-cost model (M8).}{No}{Never observed. It enters the rows through the shortfall penalty only. M3 identifies it locally with the fixed issuance cost from the dividend barrier and the recapitalisation trigger, a statement within the model, since on the panel neither threshold is measured as one (the rows of the dividend barrier and the recapitalisation trigger below).}
+\mm{$K$}{Fixed issuance cost}{A positive real number.}{The cost of an issue that does not scale with its size, per unit of liabilities (A5).}{No}{Never observed. Its counterpart is the part of an issue's cost that does not scale with the amount raised, which \citet{peura2006} set from implied issue cost and frequency rather than record (L8). M3 identifies it locally with the asymmetry parameter from the two thresholds.}
+\mm{$\kappa$}{Proportional issuance cost}{A non-negative real number.}{The cost of an issue per unit raised (A5).}{No}{Assumed at the baseline of \citet{bayraktar2026}, 0.01 for dilution and 0.02 per unit issued (parent map G11).}
+\end{longtable}
+\normalsize
+
+\subsection{Internal objects}
+
+\footnotesize
+\begin{longtable}{@{}P{1.5cm}P{2.2cm}P{2.2cm}P{3.7cm}P{1.2cm}P{4.2cm}@{}}
+\caption{Internal objects of the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$z$}{Capital buffer}{A real number, $z=\log((x-1)/q)$.}{The log of equity over required capital, zero at the requirement and falling without limit towards the distress boundary (A1, M9).}{No}{Computed from the assets-to-liabilities ratio and required capital by its formula, whose inverse is \lean{CapGeometry.zmap_inverse} and which is zero at the requirement, \lean{Coordinate.zmap_at_requirement}. The parent bundle records its discrete-time form as Tier 1 capital over 8.5\% of risk-weighted assets (parent map G18).}
+\mm{$u$}{Regulatory cap}{A function of the state, $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$.}{The largest risky exposure regulation allows at each state, the smaller of its two branches (A2).}{No}{Computed from the assets-to-liabilities ratio and the cap geometry by its formula. The solvency branch is the smaller up to the crossing point, \lean{CapGeometry.solvency_binds}, and the liquidity branch beyond it, \lean{CapGeometry.liquidity_binds}.}
+\mm{$\bar x$}{Crossing point}{A real number above one, $\bar x-1=a_1(1-a_2)/(a_3-a_1)$.}{The state at which the two branches of the regulatory cap are equal (M10).}{No}{Computed from the cap geometry by its formula, \lean{CapGeometry.xbar_sub_one}.}
+\mm{$\Lambda$}{Shortfall penalty}{A function of the state, $\Lambda(x)=(\lambda_S-1)(R-x)^+$.}{The term of the objective that charges a shortfall below the reference (A4). Zero when the asymmetry parameter is one, \lean{QVI_Part1.lambda_asymmetry_vanishes_at_one}.}{No}{Never observed. It is a term of the objective, and whose cost it stands for is a reading (Appendix~\ref{app:scope}).}
+\mm{$V$}{Value function}{A function of the state, twice continuously differentiable on the inaction region (A6).}{The value of the bank under its best policy, per unit of liabilities.}{No}{Never observed. Its counterpart would be the market value of equity per unit of liabilities, which the panel does not carry; \citet{daihuangkeppo2019} fit their parameters to such values (L21).}
+\mm{$\mathcal MV$}{Impulse operator}{A function of the state, the supremum over targets of the value after an issue net of both issuance costs.}{The value of issuing at once to the best target (A6, M5, M7).}{No}{A device. It exists only inside the quasi-variational inequality and the proofs of M5 and M7.}
+\mm{$W$}{Expected discounted shortfall}{A function of the state, $W=-\partial_{\lambda_S}V$.}{The expected discounted shortfall below the reference under the optimal policy (A6).}{No}{A device. It enters M1 to M3 through the envelope identity only.}
+\mm{$N$}{Discounted injection count}{A function of the state, $N=-\partial_KV$.}{The expected discounted number of issues under the optimal policy (A6).}{No}{A device. It enters M1 to M3 through the envelope identity only; its sample counterpart, a discounted count of recorded issues, is used by no row.}
+\end{longtable}
+\normalsize
+
+\subsection{Outputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.5cm}P{2.2cm}P{2.2cm}P{3.7cm}P{1.2cm}P{4.2cm}@{}}
+\caption{Outputs of the model.}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$y^*$}{Dividend barrier}{A real number above one.}{The state at which dividends are paid (A6). M1 gives its response to the asymmetry parameter and the fixed issuance cost.}{Yes}{Recorded as the state at which a dividend is paid, from dividend quarters (\path{EQCDIV}) and the recorded state. On the panel, 56\% of bank-quarters below the solved barrier pay a dividend and payment falls as the state rises, so no barrier is measured there, and under the conservation buffer the recorded payouts reflect a rule as well as the barrier (parent map G14).}
+\mm{$x_L$}{Recapitalisation trigger}{A real number above one and below the dividend barrier.}{The state at which capital is raised (A6). M2 gives its response to the two parameters.}{Yes}{Recorded as the state just before a recapitalisation, from net stock issuance (\path{EQCSXQ}) and capital from the parent holding company (\path{EQCBHCTR}). On the panel, issues start at a mean state of 1.11 against a solved trigger of 1.03 (parent map G15).}
+\mm{$y_{\text{post}}$}{Injection target}{A real number between the trigger and the barrier.}{The state an issue reaches (A6). M7 says it does not depend on where the issue starts.}{Yes}{Recorded as the state just after a recapitalisation. On the panel the post-issue state rises with the pre-issue state, against the single target of M7 (parent map G15).}
+\mm{$\zeta$}{Buffer variance}{A function of the state, $\zeta(x)=z'(x)^2\sigma^2(x,\pi(x))$.}{The variance per unit of time of the capital buffer (A3).}{No}{Computed from the capital buffer, the asset volatility, the liability volatility, the return-liability correlation and the risky exposure by its formula, \lean{CapGeometry.zvol2_eq}. The parent bundle did not compute it, since a level needs the asset volatility, which is assumed (parent map G16).}
+\mm{$\nu_1^2$}{Deficit limit}{A real number, $\nu_1^2=\sigma^2/a_1^2-2c\sigma\sigma_L/a_1+\sigma_L^2$.}{The limit of buffer variance at the distress boundary where the exposure binds the solvency branch (M10, M11).}{No}{Computed from the asset volatility, the liability volatility, the return-liability correlation and the solvency floor by its formula, \lean{CapGeometry.deficit_limit}. It applies where the cap binds, which on the panel it does not (the row of the risky exposure).}
+\mm{$\nu_3^2$}{Surplus limit}{A real number, $\nu_3^2=\sigma^2/a_3^2-2c\sigma\sigma_L/a_3+\sigma_L^2$.}{The limit of buffer variance deep in surplus where the exposure binds the liquidity branch (M11), which needs borrowing (C3).}{No}{Computed from the asset volatility, the liability volatility, the return-liability correlation and the liquidity haircut by its formula, \lean{CapGeometry.surplus_limit}. It applies in the leveraged case only (C3).}
 \end{longtable}
 \normalsize
 
