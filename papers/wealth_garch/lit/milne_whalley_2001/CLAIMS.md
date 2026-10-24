@@ -15,6 +15,9 @@ Bib key `milnewhalley2001`. Version read: "Bank Capital Regulation and Incentive
 | MW-Q7 | 42 | which is the special case analysed by Milne and Robertson (1996). | Continuous audit with no recapitalisation, (A12), whose buffer is Peura and Keppo's u0 (MW-D1). |
 | MW-Q8 | 25 | Lowering ρ increases the maximum level of C | A lower cost of equity relative to deposits raises the target. |
 | MW-Q9 | 24 | will have negative cash flow one year in twenty, approximately the average observed performance of OECD banks. | Their calibration of earnings risk, in units of mean earnings. |
+| MW-Q10 | 9 | The bank capital decision is then akin to an (s, S) inventory problem. | The two frictions in one bank, the audit below the minimum and the fixed cost of issue, give an issue point and a target. |
+| MW-Q11 | 9 | desired bank capital holdings are a function of cash-flow uncertainty, franchise value, audit frequency, recapitalisation costs, and cost of equity relative to deposits | The cost of falling below the minimum (audit frequency) and the fixed cost of issue are joint determinants of the buffer. |
+| MW-Q12 | 23 | A shift in the same direction would be produced by an increase of q. | Result 12: more frequent audit moves the policy the same way as a higher fixed cost of issue, raising desired capital and the state below which an audited bank liquidates rather than recapitalises. |
 
 ## Lean results
 
