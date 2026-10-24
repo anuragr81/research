@@ -775,3 +775,8 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   Limits: 17 of 61 banks; no issuance, so F3 and F4 unscored. Next:
   extend the market measure to more banks of sample B, and an issuer
   version of the model for F3 and F4.
+- 2026-10-24. Scope (PREREG_comparison_11.md, agreed with the author): F1
+  and F2 are the scored facts from here on; F3 and F4 are reported and
+  decide nothing (too few recapitalisations on subsets: 9 on the 17 banks,
+  2015-2024). The issuer version of the enhanced model is dropped from the
+  plan. Next: extend the market measure to more of sample B's 61 banks.
