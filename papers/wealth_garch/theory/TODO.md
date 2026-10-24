@@ -151,6 +151,10 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   trigger together, is defined at first use in the Answer and entered as
   Proposed in the parent terminology table.
 
+- 2026-10-24. "Thresholds", the dividend barrier and the recapitalisation
+  trigger together, is Agreed (author) and so marked in the parent
+  terminology table.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |
@@ -162,8 +166,6 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 
 ## Open, for the author
 
-- "Thresholds" (Proposed, parent terminology table). Agree it, or name the
-  pair otherwise; it is the paper's most used collective (37 uses).
 
 - C6 and Section 4. C6 says what K1 supplies to the specification Peura and
   Keppo call for, which the K1 paragraph of Section 4 now says with its
