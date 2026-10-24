@@ -780,3 +780,17 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   decide nothing (too few recapitalisations on subsets: 9 on the 17 banks,
   2015-2024). The issuer version of the enhanced model is dropped from the
   plan. Next: extend the market measure to more of sample B's 61 banks.
+- 2026-10-24. Extension of the market measure (PREREG_comparison_12.md to
+  _14.md, results_match.md, results_extend.md): 38 of sample B's 61 banks
+  have a listed US parent; 18 new banks priced (Stooq, author's download,
+  pinned in ~/.cache/wealth_garch/stooq_20261024/; Stooq now caps a
+  download at about 5,449 rows, so most files start 25 February 2005).
+  On the 18 new banks, 2015-2024, (B) misses F1 + F2 by 32.8 points
+  against the baseline's 149.3, agreeing on F1 (0.2% against 6.7%) and
+  overshooting F2 (89.8% against 63.4%), the same pattern as the first 17.
+  35 of 61 banks now scored. (B) predicts F2 near 90% for any bank set:
+  sigma_B is 2.6 to 24 times sigma_i and u0 is above 4 sigma_i for every
+  bank, so the model says "far above the minimum" and does not place the
+  buffers. Not covered: ASB (history from 2014 only), UMBF and VLY (not
+  downloaded; report only if they arrive). Next: author to decide whether
+  to pursue the remaining 26 banks or turn to why (B) overshoots F2.
