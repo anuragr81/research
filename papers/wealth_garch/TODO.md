@@ -839,3 +839,15 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   calibrated without fitting. Testable instead, with a sourced sign: do
   stand-alone banks and banks without a listed parent hold more capital
   than affiliated or listed ones of the same size? Author to decide.
+- 2026-10-24. Access to capital and the size gradient
+  (PREREG_comparison_18.md, results_access.md): in sample A, stand-alone
+  banks do not hold more capital than affiliated ones of the same size
+  (test window: 1.7 points less, p 0.033), nor do banks without a listed
+  parent (p 0.50); adding these terms steepens the size coefficient; the
+  gradient holds within each group. Only the rank version shows a weak
+  listing effect. Foreign-parent banks (8 and 11) hold much more,
+  unpredicted. Access, as measurable here, does not explain the gradient;
+  diversification via volatility was ruled out earlier. Remaining: scale
+  economies in risk management, support for the largest, or an unnamed
+  cause. Next: author to decide whether to pursue the gradient further or
+  write up the level result.
