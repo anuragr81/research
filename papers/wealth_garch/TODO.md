@@ -766,3 +766,12 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   miscounted the covered banks (16; 17). Next: author to decide whether
   the test window is scored with (B) as fixed, or a measure between the
   two is pre-registered first.
+- 2026-10-24. Enhancement thread, first test-window result
+  (PREREG_comparison_10.md, results_test_judged.md): on the 17 banks of
+  the 11 stress-tested firms, 2015-2024, the barrier model with equity
+  volatility as the judged risk misses F1 + F2 by 30.0 points against the
+  baseline's 139.8, so it beats the baseline by the fixed rule; it agrees
+  on F1 (1.3% against 7.5%) and overshoots F2 (88.0% against 64.2%).
+  Limits: 17 of 61 banks; no issuance, so F3 and F4 unscored. Next:
+  extend the market measure to more banks of sample B, and an issuer
+  version of the model for F3 and F4.

@@ -256,7 +256,7 @@ for standing in ("common_data/results_common_data.md", "replication/gordon_hirtl
                  "comparison/results_facts.md", "comparison/results_pk.md",
                  "comparison/results_mmp.md", "comparison/results_bound.md", "comparison/results_reward.md",
                  "comparison/results_mechanisms.md", "comparison/results_scale.md",
-                 "comparison/results_judged.md"):
+                 "comparison/results_judged.md", "comparison/results_test_judged.md"):
     ok, detail = reproduce(standing)
     check(f"MM-14 {standing} reproduces", ok, detail)
     pres = run_under(standing)
