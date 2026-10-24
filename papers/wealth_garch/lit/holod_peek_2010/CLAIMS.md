@@ -1,6 +1,6 @@
 # Claims: Holod and Peek (2010)
 
-Bib key `holod2010`. Version read: the working paper dated 5 December 2006 (SSRN 891563), 44 numbered pages after a title page. Evidence [F] for that version.
+Bib key `holod2010`. Version read: the working paper dated 5 December 2006 (SSRN 891563), 44 numbered pages after a title page; the title page, which carries the abstract, is cited as p. 0. Evidence [F] for that version.
 
 ## Quotations
 
@@ -19,6 +19,10 @@ Bib key `holod2010`. Version read: the working paper dated 5 December 2006 (SSRN
 | HP-Q11 | 44 | Stand-alone banks include banks that are not affiliated with a bank holding company, as well as banks that are affiliated with a one-bank holding company. | The split adopted for the ownership test (n. 8). |
 | HP-Q12 | 44 | We use the (unweighted) leverage capital ratio rather than the risk-based capital ratio. | Their capital ratio (n. 10). |
 | HP-Q13 | 13 | Our annual sample covers the period from 1987 to 2004. | Sample period of equation (1). |
+| HP-Q14 | 0 | We find that internal capital markets are operative within multibank holding companies and that they are used to mitigate capital constraints faced by individual bank subsidiaries. | A parent supplies capital to its subsidiaries; abstract (title page, cited as p. 0). |
+| HP-Q15 | 6 | the asymmetry of information between a firm and a potential provider of funds to that firm makes external finance costly to firms | External equity is costly because of asymmetric information. |
+| HP-Q16 | 4 | Finally, the smaller is the bank, the larger is any capital transfer | Within a holding company, smaller subsidiaries receive larger transfers. |
+| HP-Q17 | 8 | banks in publicly traded banking organizations have better access to external funds in the form of large time deposits compared with non-publicly traded banks. | Being publicly traded eases access to external funds (deposits, citing Holod and Peek, forthcoming). |
 
 ## Lean results
 

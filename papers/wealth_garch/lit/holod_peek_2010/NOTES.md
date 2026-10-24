@@ -39,3 +39,9 @@
   CapTrans: part of what E2 calls recapitalisation is the parent moving
   capital.
 - The split of n. 8 (HP-Q11) is the one adopted for the ownership test.
+- External finance is costly through asymmetric information (HP-Q15), and
+  a holding company's internal capital market relieves its subsidiaries'
+  capital constraints (HP-Q14), more so for smaller subsidiaries (HP-Q16);
+  publicly traded organisations have better access to external funds
+  (HP-Q17, deposits). This supports, qualitatively, that banks without a
+  parent or a listing find capital dearer; it gives no cost by size.

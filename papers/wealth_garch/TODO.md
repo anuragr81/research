@@ -829,3 +829,13 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   neither the size direction. Next: a mechanism for the size gradient
   (candidate: size-dependent issue cost, MW Result 12), source needed
   before any pre-registration.
+- 2026-10-24. Sources for the size gradient: Berger et al. read again for
+  size (BDF-Q24 to Q29) and Holod and Peek for access to capital (HP-Q14
+  to Q17), page-verified. Berger et al. offer four explanations without
+  separating them and measure no issue cost; Holod and Peek give
+  qualitative support that stand-alone and non-public banks face dearer
+  external capital, with no cost figure. No source in hand gives an
+  issue-cost gradient by size, so a size-dependent issue cost cannot be
+  calibrated without fitting. Testable instead, with a sourced sign: do
+  stand-alone banks and banks without a listed parent hold more capital
+  than affiliated or listed ones of the same size? Author to decide.

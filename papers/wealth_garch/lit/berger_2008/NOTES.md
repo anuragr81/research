@@ -37,3 +37,9 @@
   the distance to the threshold.
 - The do-nothing ratio holds dividends at last year's level: sticky
   dividends are built into the benchmark (BDF-Q2, BDF-Q5).
+- The size gradient (BDF-Q24, BDF-Q26) comes with a list of possible
+  causes: diversification, scale economies in risk management, a lower
+  cost of raising equity on short notice, and too-big-to-fail. The paper
+  does not separate them (BDF-Q27) and measures no issue cost; its one
+  proxy for cheap external capital (MKTBOOK) is weak (BDF-Q28). It gives
+  no cost gradient by size for a model to use.
