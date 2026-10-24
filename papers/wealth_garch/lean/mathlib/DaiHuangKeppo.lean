@@ -43,6 +43,10 @@ theorem table21_delay_signs : (0 : ℝ) < 0.0808 ∧ (-0.1444 : ℝ) < 0 := by
 theorem table21_det_neg : (0.0808 : ℝ) * (-0.0543) - 0.0017 * (-0.1444) < 0 := by
   norm_num
 
+/-- The elasticity determinant of Table 2.1 in $(\Delta,K)$, exactly. -/
+theorem table21_det_value : (0.0808 : ℝ) * (-0.0543) - 0.0017 * (-0.1444) = -103549 / 25000000 := by
+  norm_num
+
 theorem control_proportional_columns_singular :
     (0.0808 : ℝ) * (2 * -0.1444) - (2 * 0.0808) * (-0.1444) = 0 := by
   ring

@@ -48,6 +48,7 @@
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
 \usepackage{pdflscape}
+\usepackage{float}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,fit,calc,backgrounds}
 \input{figures/ledger_styles}
@@ -59,6 +60,12 @@
 \DeclareUnicodeCharacter{2264}{\ensuremath{\le}}
 \DeclareUnicodeCharacter{2212}{\ensuremath{-}}
 \DeclareUnicodeCharacter{2206}{\ensuremath{\Delta}}
+\DeclareUnicodeCharacter{00B5}{\ensuremath{\mu}}
+\DeclareUnicodeCharacter{03C1}{\ensuremath{\rho}}
+\DeclareUnicodeCharacter{03B3}{\ensuremath{\gamma}}
+\DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
+\DeclareUnicodeCharacter{03BA}{\ensuremath{\kappa}}
+\DeclareUnicodeCharacter{2032}{\ensuremath{'}}
 
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
@@ -217,9 +224,9 @@ ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 \midrule
 \endhead
-\arow{A1}{The state is $x\in(1,\infty)$, with diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio, the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M9, M10, M11, M12}{The balance sheet of \citet{bayraktar2026} in ratio form. Appendix~\ref{app:scope}, the balance sheet.}
-\arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation sets a regulatory cap on the risky exposure at each assets-to-liabilities ratio, the smaller of a solvency branch, whose slope is the solvency floor and which binds near distress, and a liquidity branch, set by the run-off rate and the liquidity haircut and binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
-\arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the assets-to-liabilities ratio, at the risky exposure the bank takes and the asset volatility it bears.}{$\zeta$, $z$, $x$, $\pi$, $\sigma$}{M10, M11, M12}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
+\arow{A1}{The state is $x\in(1,\infty)$, with diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio, the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M9, M10, M11, M12, M13, M14}{The balance sheet of \citet{bayraktar2026} in ratio form. Appendix~\ref{app:scope}, the balance sheet.}
+\arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation sets a regulatory cap on the risky exposure at each assets-to-liabilities ratio, the smaller of a solvency branch, whose slope is the solvency floor and which binds near distress, and a liquidity branch, set by the run-off rate and the liquidity haircut and binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12, M13}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
+\arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the assets-to-liabilities ratio, at the risky exposure the bank takes and the asset volatility it bears.}{$\zeta$, $z$, $x$, $\pi$, $\sigma$}{M10, M11, M12, M13, M14}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
 \arow{A4}{The objective is dividends net of issuance costs minus the running shortfall penalty $\Lambda(x)=(\lambda_S-1)(R-x)^+$ with $\lambda_S\ge1$ and reference $R=1+q$, discounted at $\rho_L$.}{Shareholders value dividends net of what they pay for issues, less a shortfall penalty for each moment the assets-to-liabilities ratio sits below the reference, the state at which equity equals required capital, weighted by the asymmetry parameter and discounted at the liability-net discount rate.}{$\Lambda$, $\lambda_S$, $R$, $q$, $\rho_L$, $x$}{M1, M2, M3, M4, M8}{The asymmetric penalty is the paper's question. Appendix~\ref{app:scope}, the shortfall penalty.}
 \arow{A5}{Each issue costs $K$ per unit of liabilities plus $\kappa$ per unit raised.}{Every recapitalisation pays a fixed issuance cost that does not scale with its size and a proportional issuance cost.}{$K$, $\kappa$}{M2, M5, M6, M7}{The cost structure of \citet{peura2006} and \citet{bolton2011}. Appendix~\ref{app:scope}, the fixed issuance cost.}
 \arow{A6}{$V$ is the value function, solves the quasi-variational inequality with impulse operator $\mathcal MV$, is twice continuously differentiable on the inaction region, and the optimal policy is a dividend barrier $y^*$, a trigger $x_L$ and a target $y_{\text{post}}$, with $\partial_{\lambda_S}V=-W$ and $\partial_KV=-N$.}{The value function is the value of the bank under its best policy, which pays dividends at the dividend barrier and recapitalises from the recapitalisation trigger to the injection target, the impulse operator being the value of issuing at once, and the value responds to the asymmetry parameter and the fixed issuance cost through the expected discounted shortfall and the discounted injection count.}{$V$, $\mathcal MV$, $y^*$, $x_L$, $y_{\text{post}}$, $W$, $N$, $\lambda_S$, $K$}{M1, M2, M3, M4, M5}{The verification theorem and the envelope identities, not proved in Lean. Appendix~\ref{app:evidence}.}
@@ -253,6 +260,8 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M10}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there buffer variance is the constant deficit limit $\nu_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\nu_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
 \mrow{M11}{For any exposure policy that binds the cap near an end of the state space, buffer variance tends to the deficit limit $\nu_1^2$ at the distress boundary and to the surplus limit $\nu_3^2$ deep in surplus.}{$q>0$, $0<a_1<a_3$, $a_2<1$. If $\pi(x)\,x=u(x)$ for all $x$ near $1^+$ then $\zeta(x)\to\nu_1^2$ as $x\to1^+$. If $\pi(x)\,x=u(x)$ for all large $x$ then $\zeta(x)\to\nu_3^2$ as $x\to\infty$. Both fail without $a_1<a_3$ or without binding.}{CapGeometry.deficit_limit, CapGeometry.surplus_limit, CapGeometry.variance_ratio_is_cap_geometry, CapGeometry.control_surplus_limit_needs_a1_lt_a3, CapGeometry.control_constancy_needs_binding}
 \mrow{M12}{For every exposure policy that complies with the cap, binding or not, buffer variance is at most the larger of $\sigma_L^2$ and the deficit limit $\nu_1^2$ everywhere, and deep in surplus at most the larger of $\sigma_L^2$ and the surplus limit $\nu_3^2$ up to any margin.}{$q>0$, $a_1>0$, $x>1$, $0\le\pi(x)$, $\pi(x)\,x\le u(x)$ $\Rightarrow$ $\zeta(x)\le\max\{\sigma_L^2,\nu_1^2\}$. If $a_3>0$, $a_2<1$ and compliance holds for all large $x$, then for every $\varepsilon>0$, $\zeta(x)\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ for all large $x$. Both fail with $\pi<0$ or with $\pi x>u(x)$.}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
+\mrow{M13}{At the baseline of Bayraktar et al.\ the deficit limit is about $3.140$ and the surplus limit about $0.0688$, a ratio of about $45.6$.}{$(\sigma,\sigma_L,c,a_1,a_3)=(0.08,0.03,0.20,0.045,0.30)$ $\Rightarrow$ $\nu_1^2=2543449/810000$, $\nu_3^2=6193/90000$, $\nu_1^2/\nu_3^2=2543449/55737$.}{Comparison.nu1_baseline, Comparison.nu3_baseline, Comparison.ratio_baseline}
+\mrow{M14}{With no liability shock the limits of buffer variance are the log-cushion variances of capped portfolio insurance with multiples $1/a_1$ and $1/a_3$, and a liability shock moves them.}{$\nu_i^2\big|_{\sigma_L=0}=(1/a_i)^2\sigma^2$, the log-cushion variance $(E/C)^2\sigma^2$ on the multiplier branch with multiple $1/a_i$. At the baseline of M13 these are $256/81$ and $16/225$. At $(\sigma,\sigma_L,c,a)=(1,1,0,1)$, $\nu^2=2\ne1=\nu^2\big|_{\sigma_L=0}$.}{Comparison.nu2_hedged, Comparison.hedged_is_cushion_vol, Comparison.hedged_baseline, Comparison.control_liability_shock_moves_nu}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -408,6 +417,96 @@ which a binding cap closes (M11), and not in thresholds.}
 \end{figure}
 \end{landscape}
 
+\subsection{The three approaches in one formulation}
+\label{sec:common}
+
+The paper's model, A1 to A6, holds the three approaches as restrictions of its
+parameters, the asymmetry parameter $\lambda_S$, the fixed issuance cost $K$,
+the proportional issuance cost $\kappa$, the regulatory cap $u$, and the
+liability volatility $\sigma_L$ with the return-liability correlation $c$.
+Table~\ref{tab:common} gives the restriction for each paper read, and
+Table~\ref{tab:common-values} evaluates two quantities on each. One is the
+determinant of the two thresholds in the two frictions $\theta_1,\theta_2$ that
+an approach has,
+\[
+J=\det\frac{\partial(y^*,x_L)}{\partial(\theta_1,\theta_2)} ,
+\]
+read in the issuance-cost models with their dividend barrier and issue barrier
+in place of the dividend barrier and the recapitalisation trigger. The other is
+the pair of limits of buffer variance, $\nu_1^2$ and $\nu_3^2$, where the risky
+exposure binds the cap. Each value is at the paper's own parameters, so the
+comparison is of signs and of which quantity exists, rather than of sizes
+across papers. The last column of Table~\ref{tab:common} names what the
+formulation does not hold.
+
+The determinant separates the paper from the issuance-cost models. In the
+table of \citet{peura2006} the delay and the fixed cost give $J=-29/100$ at
+small costs and $J=+1/25$ at the highest cost (L8, L41, L42, L43), so the two
+frictions are separated at each point of the table by the size of their
+responses and not by a sign that holds throughout it. In
+\citet{daihuangkeppo2019} the delay and the fixed cost move the issue barrier the
+same way and
+$J\approx-0.0041$ (L9, L44), non-zero by magnitude. \citet{milnewhalley2001}
+report like signs for the audit and the fixed cost and print no values (L40),
+so $J$ cannot be formed. In the paper $J<0$ under the hypotheses of M1 to M3
+by the signs of the responses alone (M3), so the separation does not rest on a
+calibration.
+
+The limits separate the paper from regulatory-cap control and from the
+preference approach. At the baseline of \citet{bayraktar2026}, which they do
+not evaluate, the deficit limit is about $3.140$ and the surplus limit about
+$0.0688$, a ratio of about $45.6$ (M13, L45, L46), and without borrowing, their
+main banking case, the surplus limit is not reached (C3). With no liability
+shock the same limits are $256/81\approx3.160$ and $16/225\approx0.0711$, the
+log-cushion variances of capped portfolio insurance with multiples $1/a_1$ and
+$1/a_3$ (M14, L5), so at that baseline the unhedged liability shock lowers the
+deficit limit by about $0.6$ percent and the surplus limit by about $3.2$
+percent. The bank of \citet{daihuangkeppo2019} has no liability shock (L47),
+and in the rule of \citet{blackperold1992} the safe asset can hedge it (L32)
+and the multiples are set by preferences (L6). In the unconstrained control of
+\citet{li2023} the large-wealth limits depend on the reference
+parameter (L14), while in the paper neither limit depends on the asymmetry
+parameter (M11). In \citet{barberis2001} constant loss aversion leaves the
+volatility of returns at that of dividend growth, $12$ percent at every level
+(L12), free of the asymmetry because the price-dividend ratio is constant
+rather than because a cap binds.
+
+\begin{table}[H]
+\footnotesize
+\caption{The three approaches as restrictions of the paper's model.}\label{tab:common}
+\begin{tabular}{@{}P{2.8cm}P{2.9cm}P{2.4cm}P{1.9cm}P{2.1cm}P{2.7cm}@{}}
+\toprule
+Paper & Shortfall side & Issuance side & Regulatory cap & Recapitalisation trigger & Outside the formulation \\
+\midrule
+\citet{peura2006} & $\lambda_S=1$, liquidation at the minimum (L24) & $K>0$ (L7) & none & endogenous & the delay on issues (L23) \\ \addlinespace
+\citet{daihuangkeppo2019} & $\lambda_S=1$, the regulator's asymmetry in liquidation (L25) & $K>0$ (L9) & none & endogenous & the delay, partial information \\ \addlinespace
+\citet{milnewhalley2001} & $\lambda_S=1$, an audit at random below the minimum (L38) & $K>0$ (L39) & none & endogenous (L38) & the random audit \\ \addlinespace
+\citet{bayraktar2026} & $\lambda_S=1$ & $K=0$, $\kappa>0$ (L3, L46) & $u$ (L26) & exogenous (L28) & none \\ \addlinespace
+\citet{blackperold1992} & no asymmetry & no issuance & $u$ with $a_2=0$, slopes from preferences (L5, L6) & none & preferences over consumption \\ \addlinespace
+\citet{barberis2001}, \citet{li2023} & loss aversion over gains and losses (L36, L14) & no issuance & none & none & not a bank \\ \addlinespace
+This paper & $\lambda_S\ge1$, $R=1+q$ (A4) & $K>0$, $\kappa\ge0$ (A5) & $u$ (A2) & endogenous (A6) & none \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\footnotesize
+\caption{The two quantities of the common formulation, each at the paper's own parameters.}\label{tab:common-values}
+\begin{tabular}{@{}P{3.0cm}P{2.4cm}P{4.0cm}P{3.6cm}P{2.6cm}@{}}
+\toprule
+Paper & Two frictions & Determinant $J$ of the two thresholds & Limits of buffer variance & The asymmetry enters \\
+\midrule
+\citet{peura2006} & delay, fixed cost & $-29/100$ at small costs, $+1/25$ at the highest (L8, L41) & not evaluated & nowhere \\ \addlinespace
+\citet{daihuangkeppo2019} & delay, fixed cost & about $-0.0041$, like signs (L44) & not evaluated & the liquidation barrier (L25) \\ \addlinespace
+\citet{milnewhalley2001} & audit, fixed cost & like signs, no values (L40) & not evaluated & nowhere \\ \addlinespace
+\citet{bayraktar2026} & one cost & none, the trigger is exogenous (L28) & about $3.140$ and $0.0688$ at their baseline (M13), the second not reached without borrowing (C3) & nowhere \\ \addlinespace
+\citet{blackperold1992} & none & no trigger & $256/81$ and $16/225$ at the same slopes, with no liability shock (M14) & the slopes, by preferences (L6) \\ \addlinespace
+\citet{barberis2001}, \citet{li2023} & none & no trigger & return volatility $12$ percent at every level (L12); limits that depend on the reference (L14) & the limits, without a cap (L14) \\ \addlinespace
+This paper & $\lambda_S$, $K$ & $J<0$ by sign (M3) & free of $\lambda_S$ (M11) & the thresholds (M1 to M3) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Papers read}
 
 \footnotesize
@@ -461,6 +560,13 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L38}{milnewhalley2001}{Both frictions in one bank give an issue point and a target, the counterparts of the recapitalisation trigger and the injection target of M2 and M7.}{The bank capital decision is then akin to an (s, S) inventory problem.}{9}{M2, M7}
 \lrow{L39}{milnewhalley2001}{Result 12. A higher fixed cost of issue or more frequent audit raises desired capital.}{always results in an increase in desired capital}{23}{M2, M3}
 \lrow{L40}{milnewhalley2001}{Result 12. More frequent audit moves the policy the same way as a higher fixed cost of issue, so the two frictions have like responses, the case in which the control of M3 shows the Jacobian can be singular.}{A shift in the same direction would be produced by an increase of q.}{23}{M3}
+\lrow{L41}{peura2006}{At $(\Delta,K)=(0.5,1.00)$ the printed values, with L42 and L43, give a determinant of the dividend and issue barriers in the delay and the fixed cost of $+1/25$ (\lean{PeuraKeppo.table2_det_high_K}), against $-29/100$ at small costs (\lean{PeuraKeppo.table2_det_value}). The values are printed to one decimal.}{.5 1.00 .9 3.7 2.8 27 122}{2184}{M3}
+\lrow{L42}{peura2006}{At the highest cost a longer delay lowers the issue barrier, so the delay and the fixed cost move it the same way there.}{1 1.00 .6 3.8 3.2 24 291}{2184}{M3}
+\lrow{L43}{peura2006}{The cost step of the determinant at the highest cost.}{.5 .50 1.1 3.5 2.4 17 57}{2184}{M3}
+\lrow{L44}{daihuangkeppo2019}{With L9, the elasticity determinant of the two barriers in the delay and the fixed cost is $-103549/25000000$, about $-0.0041$ (\lean{DaiHuangKeppo.table21_det_value}), non-zero by magnitude while the two move the issue barrier the same way.}{∆ 0.0808 −0.1444 0 −0.0146}{76}{M3}
+\lrow{L45}{bayraktar2026}{The cap geometry of the baseline at which M13 evaluates the limits of buffer variance.}{The baseline regulatory parameters are (a1 , a2 , a3 ) = (0.045, 0.05, 0.30)}{13}{M13}
+\lrow{L46}{bayraktar2026}{The asset volatility, the liability volatility and the return-liability correlation of the baseline of M13.}{r = 0.02, µ = 0.04, µL = 0.03, ρ = 0.12, γ = 0.02, together with σ = 0.08, σL = 0.03, c = 0.20, κ = 0.01, κ′ = 0.02}{13}{M13}
+\lrow{L47}{daihuangkeppo2019}{Their bank has no liability shock, which in M10 to M12 enters the limits of buffer variance.}{We ignore debt volatility and debt financing}{26}{M10, M11}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -696,6 +802,19 @@ Controls, at $\sigma=1$, $\sigma_L=c=0$, $q=1$.
 \[ 0\le\pi,\ \ \pi x\le u(x)\le\frac{x-1}{a_1}\ \Rightarrow\ 0\le\omega\le\frac1{a_1}\ \Rightarrow\ \zeta(x)\le\max\{\sigma_L^2,\nu_1^2\} . \]
 \[ \pi x\le\frac{x-a_2}{a_3}\ \Rightarrow\ \omega\le w(x)=\frac1{a_3}+\frac{1-a_2}{a_3(x-1)}\to\frac1{a_3},\qquad Q(w(x))\to\nu_3^2 . \]
 Controls, $(\sigma,\sigma_L,c)=(1,1,1)$, $\omega=-1$ $\Rightarrow$ $Q=4>1=\max\{Q(0),Q(1)\}$; $(\sigma,\sigma_L,c)=(1,0,0)$, $\omega=2>1$ $\Rightarrow$ $Q=4>1$.
+\end{mproof}
+
+\begin{mproof}{M13}{Comparison.nu1_baseline, Comparison.nu3_baseline, Comparison.ratio_baseline}
+\[ \nu_1^2=\frac{0.08^2}{0.045^2}-\frac{2(0.20)(0.08)(0.03)}{0.045}+0.03^2=\frac{256}{81}-\frac{16}{750}+\frac{9}{10000}=\frac{2543449}{810000} . \]
+\[ \nu_3^2=\frac{0.08^2}{0.30^2}-\frac{2(0.20)(0.08)(0.03)}{0.30}+0.03^2=\frac{16}{225}-\frac{4}{1250}+\frac{9}{10000}=\frac{6193}{90000} . \]
+\[ \frac{\nu_1^2}{\nu_3^2}=\frac{2543449}{810000}\cdot\frac{90000}{6193}=\frac{2543449}{55737} . \]
+\end{mproof}
+
+\begin{mproof}{M14}{Comparison.nu2_hedged, Comparison.hedged_is_cushion_vol, Comparison.hedged_baseline, Comparison.control_liability_shock_moves_nu}
+\[ \sigma_L=0\ \Rightarrow\ \nu^2=\frac{\sigma^2}{a^2}=\Big(\frac1a\Big)^2\sigma^2 . \]
+\[ \frac1a(W-F)\le bW,\ W-F>0\ \Rightarrow\ \frac{E}{C}=\frac1a,\quad \Big(\frac{E}{C}\Big)^2\sigma^2=\Big(\frac1a\Big)^2\sigma^2=\nu^2\big|_{\sigma_L=0} . \]
+\[ \Big(\frac{0.08}{0.045}\Big)^2=\frac{256}{81},\qquad \Big(\frac{0.08}{0.30}\Big)^2=\frac{16}{225} . \]
+Control, $(\sigma,\sigma_L,c,a)=(1,1,0,1)$ $\Rightarrow$ $\nu^2=1-0+1=2\ne1$.
 \end{mproof}
 
 \section{Evidence and verification}

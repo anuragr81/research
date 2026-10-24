@@ -31,6 +31,7 @@ Bib key `daihuangkeppo2019`. Version read: chapter 2 and appendix of Huang's the
 | `DaiHuangKeppo.table21_delay_signs` | $0<0.0808$ and $-0.1444<0$: $\Delta$ raises $u_2$ and lowers $u_1$. |
 | `DaiHuangKeppo.table21_det_neg` | The printed $(\Delta,K)$ block has determinant $0.0808\cdot(-0.0543)-0.0017\cdot(-0.1444)<0$. |
 | `DaiHuangKeppo.control_proportional_columns_singular` | Columns proportional to each other give a zero determinant. |
+| `DaiHuangKeppo.table21_det_value` | The elasticity determinant of Table 2.1 in $(\Delta,K)$ is $-103549/25000000$. |
 
 ## Readings recorded
 

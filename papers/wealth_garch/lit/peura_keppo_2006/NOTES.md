@@ -55,3 +55,11 @@
   is called for (PK-Q18), the specification is left to future research
   (PK-Q29), the parameters beyond the return moments are imposed by
   intuition (PK-Q28), and which constituency binds is the issue (PK-Q31).
+
+## Added 24 October 2026, for the theory paper's common formulation
+
+- PK-Q32 to PK-Q34, three rows of Table 2 at high cost. At the base point
+  $(\Delta,K)=(0.5,1.00)$ the printed finite differences give a determinant
+  of the dividend and issue barriers in $(\Delta,K)$ of $+0.04$, against
+  $-0.29$ at $(0.08,0.10)$ (`PeuraKeppo.table2_det_value`,
+  `PeuraKeppo.table2_det_high_K`). Read at one printed decimal (PK-D7).

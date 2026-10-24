@@ -37,6 +37,9 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-Q29 | 2192 | It is the task of future research | The sentence continues "to test alternative model specifications", across a line-end hyphen in the text layer. The authors leave the specification open. |
 | PK-Q30 | 2192 | the penalty from regulatory capital violation is extreme | Liquidation at the minimum (PK-Q6) is, by their account, too severe a penalty. The sentence opens "In light of the FDICIA stipulations, our assumption concerning", across a line-end hyphen in the text layer. |
 | PK-Q31 | 2192 | Whether these omissions matter reduces to the issue of which constituency provides the binding constraint on bank capitalization. | The question they leave: whose cost binds the bank's capital, the regulator's or the market's. The theory paper identifies the weight of the shortfall penalty and not its constituency (Appendix D of the theory paper). |
+| PK-Q32 | 2184 | .5 1.00 .9 3.7 2.8 27 122 | Table 2 row $(\Delta,K)=(0.5,1.00)$: $u_1=0.9$, $u_2=3.7$, the base of the high-cost finite differences. |
+| PK-Q33 | 2184 | 1 1.00 .6 3.8 3.2 24 291 | Row $(1,1.00)$: $u_1=0.6$, $u_2=3.8$. The delay lowers the issue barrier at high $K$. |
+| PK-Q34 | 2184 | .5 .50 1.1 3.5 2.4 17 57 | Row $(0.5,0.50)$: $u_1=1.1$, $u_2=3.5$. |
 
 ## Lean results
 
@@ -54,6 +57,8 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | `PeuraKeppo.table2_signs` | From the printed Table 2 at $(\Delta,K)=(0.08,0.10)$: the dividend barrier rises in $\Delta$ and in $K$, the issue barrier rises in $\Delta$ and falls in $K$. |
 | `PeuraKeppo.table2_det_neg` | The finite-difference Jacobian of $(u_2,u_1)$ in $(\Delta,K)$ there is negative, by `Identification.det_neg_of_opposite`, the sign pattern of M6. |
 | `PeuraKeppo.control_delay_lowers_trigger_at_high_K` | At $K=1.00$ a longer delay lowers $u_1$ (0.9 to 0.6), so the pattern is local. |
+| `PeuraKeppo.table2_det_value` | The determinant of $(u_2,u_1)$ in $(\Delta,K)$ from Table 2's printed differences at $(0.08,0.10)$ is $-29/100$. |
+| `PeuraKeppo.table2_det_high_K` | The same determinant at $(0.5,1.00)$ is $+1/25$; the sign changes across the table. |
 
 ## Readings recorded
 

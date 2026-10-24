@@ -9,7 +9,7 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 | 1 | Skeleton, the empty tables, ID scheme, appendix stubs, checker with controls, `verify.sh` | Done 2026-10-23. MS-1 to MS-9 pass on the skeleton and on their good samples, and fail on their bad ones. The PDF builds with no warning. |
 | 2 | Lean project, toolchain and Mathlib pinned, build roots, audit | Done 2026-10-23. `lean/` holds the twelve files the parent manuscript's rows M1 to M16 and R1, R2 cite, and the eight Lean companions of the literature records the theory rows cite. 169 theorems audited. |
 | 3 | Analytic steps into Lean | Done 2026-10-23. No new step; the rows reuse the parent's audited theorems. `BCVW.ceiling_tighter_than_lcr` added for C3. |
-| 4 | Model rows, their proofs and assumptions, the measurement map | Done 2026-10-23. M1 to M12, A1 to A6 (map below), and the measurement map as Appendix C with its checker. |
+| 4 | Model rows, their proofs and assumptions, the measurement map | Done 2026-10-23, M13 and M14 added 2026-10-24. M1 to M14, A1 to A6 (map below), and the measurement map as Appendix C with its checker. |
 | 5 | Appendices B to G filled | Done 2026-10-23. B, C, D and E filled; F and G not applicable. |
 | 6 | Retire a predecessor | Not applicable unless the parent manuscript's theory rows are moved here rather than copied. |
 | 7 | Novelty reading | Passes 0 to 6 done; four papers remain (`notes/novelty_check_20261023.md`, section 5). C4 and C5 pending. |
@@ -154,6 +154,22 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 - 2026-10-24. "Thresholds", the dividend barrier and the recapitalisation
   trigger together, is Agreed (author) and so marked in the parent
   terminology table.
+
+- 2026-10-24. Section 3.3, the three approaches in one formulation (author,
+  "a common mathematical treatment ... to compare the three approaches ...
+  more quantitatively"). The paper's model A1 to A6 holds each paper read as
+  a restriction of its parameters (Table `tab:common`), and two quantities
+  are evaluated on each at its own parameters (Table `tab:common-values`).
+  The determinant of the two thresholds in the two frictions is $-29/100$
+  and $+1/25$ in Peura and Keppo's Table 2 (small and highest cost; one
+  printed decimal), about $-0.0041$ in Dai, Huang and Keppo, not formable
+  for Milne and Whalley (figures only), and negative by sign in the paper
+  (M3). The limits of buffer variance at Bayraktar et al.'s baseline are
+  about 3.140 and 0.0688 (new M13), and with no liability shock they are
+  Black and Perold's log-cushion variances (new M14). Lean in the new
+  `Comparison.lean` and in the Peura and Keppo and Dai, Huang and Keppo
+  companions; quotations PK-Q32 to Q34 added; L41 to L47. The comparison is
+  of signs and of which quantity exists, not of sizes across papers.
 
 ### Row map, parent to theory
 

@@ -96,6 +96,9 @@ ANNOTATIONS = [
     {"id": "T9", "on": ("A5",), "kind": PROVEN, "rests_on": ("C3", "M11", "M12", "L2"),
      "says": "the surplus limit needs borrowing to hold the risky asset; with no borrowing the liquidity branch never "
              "binds and the deficit limit and the bound are what apply"},
+    {"id": "T12", "on": ("A5", "equity"), "kind": PROVEN, "rests_on": ("M13", "M14"),
+     "says": "at the baseline of Bayraktar et al. the limits of buffer variance are about 3.140 and 0.0688, and with no "
+             "liability shock they are the log-cushion variances of capped portfolio insurance"},
     {"id": "T10", "on": ("A6",), "kind": READING, "rests_on": ("A2",),
      "says": "the supervisor holds the bank to the regulatory cap, a rule the model takes as given"},
     {"id": "T11", "on": ("A9",), "kind": READING, "rests_on": ("M8",),

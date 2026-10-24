@@ -122,6 +122,17 @@ theorem table2_signs :
 theorem table2_det_neg : ((3.2 : ℝ) - 2.4) * (0.8 - 0.9) - (2.7 - 2.4) * (1.6 - 0.9) < 0 :=
   Identification.det_neg_of_opposite (by norm_num) (by norm_num) (by norm_num) (by norm_num)
 
+/-- The determinant of the dividend and issue barriers in $(\Delta,K)$ from the
+printed finite differences of Table 2 at the base $(0.08,0.10)$. -/
+theorem table2_det_value : ((3.2 : ℝ) - 2.4) * (0.8 - 0.9) - (2.7 - 2.4) * (1.6 - 0.9) = -29 / 100 := by
+  norm_num
+
+/-- At the base $(0.5,1.00)$, with the delay step to $(1,1.00)$ and the cost step
+from $(0.5,0.50)$, the same determinant is positive: the delay lowers the issue
+barrier there, and the sign of the determinant changes across the table. -/
+theorem table2_det_high_K : ((3.8 : ℝ) - 3.7) * (0.9 - 1.1) - (3.7 - 3.5) * (0.6 - 0.9) = 1 / 25 := by
+  norm_num
+
 theorem control_delay_lowers_trigger_at_high_K : (0.6 : ℝ) - 0.9 < 0 := by
   norm_num
 
