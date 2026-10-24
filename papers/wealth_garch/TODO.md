@@ -794,3 +794,16 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   buffers. Not covered: ASB (history from 2014 only), UMBF and VLY (not
   downloaded; report only if they arrive). Next: author to decide whether
   to pursue the remaining 26 banks or turn to why (B) overshoots F2.
+- 2026-10-24. Why (B) overshoots F2 (PREREG_comparison_15.md,
+  results_diag_f2.md; diagnostic, decides nothing): the barrier u0 under
+  sigma_B is 6.6 to 7.8 times the observed median buffer; observed
+  buffers move 1.8 sigma_i a year, 0.15 to 0.21 sigma_B, so book capital
+  moves at about a fifth of market equity; the F2 gap sits in the
+  high-sigma_i tercile (16 of 25 points), since for low-sigma_i banks 4
+  sigma_i is under 2 points and almost any buffer counts; the scale k_i
+  matching each bank's training buffer has median 1.5 (caveat on the
+  base in the file); two banks (Zions 20626, Huntington) have u0 below R
+  because mu_i is small. (B) has the right sign and the wrong size, by
+  five to seven times. Next: author to choose a mechanism that places the
+  buffers; its pre-registration must state that the 35 banks' test-window
+  facts have been seen.
