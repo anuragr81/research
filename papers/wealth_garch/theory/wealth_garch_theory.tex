@@ -289,6 +289,7 @@ under a regulatory cap no paper read evaluates the limits. K2 does (M10 to
 M12, C2), and C3 says where the surplus limit applies (L2).
 
 \subsection{The three approaches as ledgers}
+\label{sec:approaches}
 
 The papers read address the question in three ways, and each is drawn as a
 ledger of the same form as the paper's own (Figure~\ref{fig:ledger}), with the
@@ -331,16 +332,7 @@ adds comes from loss aversion that varies with prior outcomes (L33), and
 without a cap the large-wealth limits of the controls carry the reference
 parameter (L14). \citet{engle2018} assign volatility asymmetry to market
 exposure rather than to leverage (L13, L34). Under a binding regulatory cap
-the paper's limits carry no mark of the asymmetry parameter (M11), and the
-thresholds do (M1 to M3), so the variance route is closed by the cap and the
-threshold route is the one K1 opens.
-
-Set against Figure~\ref{fig:ledger}, each drawing lacks part of the paper's
-ledger. The first has the thresholds and the fixed cost, and no graduated
-penalty and no cap. The second has the cap and the thresholds, and no fixed
-cost and no asymmetry parameter. The third has the asymmetry, and no bank. The
-paper puts the three on one bank, and the arrow none of them has runs from the
-two thresholds to the two parameters (M3).
+the paper's limits carry no mark of the asymmetry parameter (M11).
 
 \begin{table}[t]
 \footnotesize
@@ -443,12 +435,87 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L32}{blackperold1992}{Their safe asset can track the liability, so the liability is hedged. In M10 to M12 the liability shock enters buffer variance unhedged.}{'safe' may mean that it closely tracks a liability stream}{404}{M10, M11}
 \lrow{L33}{barberis2001}{Volatility from loss aversion needs loss aversion to vary over time. In M11 a constant asymmetry parameter leaves no mark on the variance limits, for a different reason, the binding cap.}{The investor's risk aversion is then constant over time, and stock prices lose an important source of volatility.}{4}{M11}
 \lrow{L34}{engle2018}{Equity variance is the squared leverage multiplier times asset variance, the structural relation behind the change of variable of M10.}{which is the exact relationship implied by structural models of credit}{459}{M10}
+\lrow{L35}{bayraktar2026}{Without borrowing the liquidity branch does not bind in the range of parameters they solve. C3 gives the condition under which it does not bind at any state.}{the LCR constraint is nonbinding within the parameter range considered}{20}{M11, M12}
+\lrow{L36}{barberis2001}{Their loss-averse preference is kinked-linear at the reference, the form of the shortfall penalty of M8. It values gains and losses on an asset, not a shortfall of a bank's capital below its requirement.}{This is a piecewise linear function, shown as the solid line in Figure I. It is kinked at the origin, where the gain equals zero.}{10}{M8}
 \bottomrule
 \end{longtable}
 \normalsize
 
 Every paper the tables name has been read in full and has a record with Lean
 under \path{lit/}.
+
+\section{What the paper adds to the three approaches}
+\label{sec:novelty}
+
+This section sets each theoretical result of the paper against the three
+approaches of Section~\ref{sec:approaches}, and says what the result adds that
+none of them has and what it shares with them. The comparison is with the
+papers read in full, rather than with the literature at large. Whether an
+addition is new beyond those papers waits on the papers that
+Table~\ref{tab:pending} names (C4, C5).
+
+The identification of K1 adds a second friction to the issuance-cost models
+and a theorem to their tables. The responses of the dividend barrier and the
+recapitalisation trigger to the fixed issuance cost are tabulated there (L9,
+L22), and in the table of \citet{peura2006} the issue delay and the fixed
+issuance cost move the trigger in opposite directions at small costs, with
+both set by calibration to issue cost and frequency (L8). The paper's second
+parameter is the asymmetry parameter of the graduated shortfall penalty that
+Section~\ref{sec:literature} traces (L18, L24), rather than a delay. The responses of the two thresholds
+to the asymmetry parameter and to the fixed issuance cost are derived under the
+hypotheses of Appendix~\ref{app:evidence} (M1, M2) rather than read off a
+solved case, and the opposite effect of the two parameters on the trigger gives
+their local identification from the two thresholds (M3), where the papers read
+set their parameters (L8, L20, L21). Regulatory-cap control has an exogenous trigger and no asymmetry
+parameter (L28), and the preference approach has no trigger. K1 would be in
+print if a paper read derived the threshold responses to the weight of a
+shortfall penalty in a bank's objective, and none of the three approaches has
+that weight in a bank's objective (L12, L24, L28).
+
+The variance limits of K2 add what regulatory-cap control leaves out. The
+regulatory cap with its two branches is that of \citet{bayraktar2026} (L1,
+L26), and the constant buffer variance on the solvency branch is the constant
+log-cushion volatility of capped portfolio insurance (L5), so neither is
+claimed new. The deficit limit and the surplus limit where the exposure binds
+the cap, and the bound for every exposure within it (M11, M12), are not
+evaluated by \citet{bayraktar2026} (L1). That the limits do not carry the
+asymmetry parameter (M11) sets them apart from the two papers read in which
+limits of a volatility carry a preference (L6, L14), as
+Section~\ref{sec:literature} sets out, and the liability shock enters them
+unhedged, where the safe asset of \citet{blackperold1992} can hedge it (L32). K2 would be in
+print if a paper read evaluated the variance limits under a regulatory cap
+with an unhedged liability shock, and none of the three approaches does. That the optimal
+exposure binds the cap near both ends is a hypothesis of M11, and it is part of
+what C5 waits on.
+
+K1 and K2 together place the asymmetry parameter in the thresholds and not in
+the variance limits, on one bank. The preference approach looks for the mark of
+an asymmetry in the variance of returns, and finds none when the asymmetry is
+constant (L12), while the issuance-cost models have thresholds and no
+asymmetry parameter in the bank's objective (L24). Under the paper's regulatory
+cap the variance limits carry nothing about the asymmetry parameter (M11) and
+the two thresholds identify it (M3), so the paper reads the asymmetry
+parameter off the thresholds, where the preference approach reads an asymmetry
+off the variance of returns.
+
+C3 replaces a range of parameters by a condition. \citet{bayraktar2026} find
+that without borrowing the liquidity branch does not bind in the range they
+solve (L2, L35), and C3 states that it does not bind at any state where
+$a_2\le(1-a_3)x$, so that the surplus limit of M11 belongs to the leveraged
+case.
+
+The rest of the rows are shared with the issuance-cost models or are steps of
+the argument, and the paper does not claim them new. The pair of a dividend
+barrier and a recapitalisation trigger is an established double barrier (L10),
+each issue returns
+to one target as in \citet{peura2006} and \citet{bolton2011} (L7, L10), which
+is M7, and a proportional cost alone gives no target (L11). The kinked-linear
+form of the shortfall penalty is that of the loss-averse preference of
+\citet{barberis2001} (L36), there over gains and losses on an asset and here
+over a shortfall of capital below the requirement (M8). The absence of a kink at
+the recapitalisation trigger and the convexity just above it (M5, M4), the
+finite number of issues (M6) and the capital buffer as a coordinate (M9) are
+steps that the derivations of M1 to M3 and M10 to M12 use.
 
 \section{Conclusions}
 \label{sec:conclusions}

@@ -3,8 +3,8 @@
 The theory paper of `papers/wealth_garch`. `wealth_garch_theory.tex` is built
 under `papers/MANUSCRIPT_SKELETON.md` and carries the paper's theoretical
 rows only: headlines K1 (identification) and K2 (partition), model rows M1
-to M12, literature rows L1 to L34, conclusions C1 to C3 and C6, and C4, C5
-pending. Section 3.1 traces the question the literature leaves open, and Section 3.2 draws the three approaches as ledgers against the paper's own (Figures 1 to 4). `TODO.md` holds the plan and the open
+to M12, literature rows L1 to L36, conclusions C1 to C3 and C6, and C4, C5
+pending. Section 3.1 traces the question the literature leaves open, and Section 3.2 draws the three approaches as ledgers against the paper's own (Figures 1 to 4), and Section 4 says what each theoretical result adds to them. `TODO.md` holds the plan and the open
 decisions. `./verify.sh` runs the four suites and writes `VERIFICATION.md`.
 
 | Path | Role |

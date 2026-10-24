@@ -114,6 +114,23 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 - 2026-10-23. The manuscript is `wealth_garch_theory.tex`, renamed from
   `MANUSCRIPT.tex` (author). Every checker and note follows the new name.
 
+- 2026-10-24. Section 4, "What the paper adds to the three approaches" (author,
+  "write the literature novelty ... what the paper's theoretical claims
+  address that's not in the three chains"). One paragraph per result. K1
+  adds a graduated shortfall penalty to the issuance-cost models and turns
+  their tabulated responses into a derived local identification; K2 adds
+  the variance limits under the regulatory cap that regulatory-cap control
+  does not evaluate, free of the asymmetry parameter; K1 and K2 together
+  read the asymmetry parameter off the thresholds rather than the variance;
+  C3 replaces a solved range by a condition. A last paragraph lists what is
+  shared and not claimed (M4 to M7, M9, the kinked form of M8). Each
+  paragraph names its falsifier, and the section compares only with the
+  papers read; novelty beyond them stays in C4 and C5. Two rows added,
+  L35 (BCVW-Q17) and L36 (QJE-Q4). Written under
+  `notes/writing_discipline.md` (author); the closing paragraph of 3.2 and
+  a closing clause of its third paragraph moved here rather than staying
+  in both places.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |
@@ -124,6 +141,11 @@ Parent C4 is theory C4 (pending, under K1); parent C2 is theory C5 (pending,
 under K2). Refuted conjecture R1 is kept, R2 is not.
 
 ## Open, for the author
+
+- C6 and Section 4. C6 says what K1 supplies to the specification Peura and
+  Keppo call for, which the K1 paragraph of Section 4 now says with its
+  evidence. Under rule 5 of the writing discipline one should go.
+  Recommended: drop C6 from Table 7 and keep Section 4.
 
 - The ledger (`notes/ledger.md`, section 5). Six entities and eight
   actions of the bundle's ledger are proposed, with the insurer left out.
