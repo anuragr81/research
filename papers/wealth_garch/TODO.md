@@ -807,3 +807,11 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   five to seven times. Next: author to choose a mechanism that places the
   buffers; its pre-registration must state that the 35 banks' test-window
   facts have been seen.
+- 2026-10-24. Measure (C), the bank's own worst nine-quarter loss
+  (PREREG_comparison_16.md, results_own_loss.md): fails stage 1 (F2 0.6%
+  against 48.0%); median D_i 0.90 points of risk-weighted assets, 50 of
+  61 banks at the floor sigma_i; 48 of 61 banks held a median buffer
+  above their own worst loss. Loss-based measures (A, C) give about 1x
+  sigma_i, the market (B) about 8x, the buffers about 3x. Next: the
+  fallback, (B) scaled by how much book capital moves with market equity,
+  in its own pre-registration.
