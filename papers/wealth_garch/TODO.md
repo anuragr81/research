@@ -815,3 +815,17 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   sigma_i, the market (B) about 8x, the buffers about 3x. Next: the
   fallback, (B) scaled by how much book capital moves with market equity,
   in its own pre-registration.
+- 2026-10-24. Measure (D) and the directions of BDF-Q21
+  (PREREG_comparison_17.md, results_book_vol.md). Level: the barrier
+  model with the yearly volatility of book capital (median 2.08 sigma_i)
+  and the well-capitalised 10% floor (OCC-Q3) passes the training gate
+  (F2 54.0% against 48.0%, F1 7.6% against 17.1%) and beats the baseline
+  on the 26 unscored banks of sample B (15.2 against 149.2 points; F1
+  agrees, F2 73.1% against 58.5%); on all 61 banks it agrees on both
+  facts. The floor was chosen after a minimum near R was seen to work;
+  stated in the file. Directions: in sample A the buffer falls with size
+  (Spearman -0.34 training, -0.39 test) and rises with risk (+0.23,
+  +0.26), as BDF-Q21 says; both models reproduce the risk direction and
+  neither the size direction. Next: a mechanism for the size gradient
+  (candidate: size-dependent issue cost, MW Result 12), source needed
+  before any pre-registration.
