@@ -22,6 +22,10 @@ MM-9  every symbol in the manuscript's table of assumptions is a symbol of
 MM-10 every assumption's plain-English reading has no mathematics beyond the
       Lean theorems it cites, names the map entry of every symbol the
       assumption lists, and cites only declared theorems
+MM-12 the manuscript's text and figures use no retired name of the parent
+      terminology table outside literature rows and sentences citing a paper
+      (by \\cite or by a literature row), and no alternative name of
+      ALTERNATIVES anywhere
 MM-11 every name of the map is an Agreed or In use name of the parent
       MEASUREMENT_MAP.tex (PROPOSED holds any name offered and not yet taken)
 """
@@ -38,6 +42,16 @@ STATUS = ("Recorded", "Elicited", "Computed", "Assumed", "Never observed", "A de
 # 2026, when the parent map took the solvency floor, the run-off rate, the
 # liquidity haircut and the value function as Agreed.
 PROPOSED = set()
+# Alternative names found in the manuscript on 24 October 2026 and replaced by
+# the map's names. None is another paper's term, so none is exempt.
+ALTERNATIVES = {
+    r"\bweight of (?:the|that) (?:shortfall )?penalty\b": "asymmetry parameter",
+    r"\bpenalty weight\b": "asymmetry parameter",
+    r"\bissuance-cost model\b(?!s)": "the model with issuance costs alone",
+    r"\bvariance limits\b": "limits of buffer variance",
+    r"\basset and liability shocks\b": "asset volatility, liability volatility, return-liability correlation",
+    r"\bthe requirement\b": "required capital",
+}
 results = []
 
 
@@ -101,6 +115,37 @@ def lean_declarations():
             if m:
                 names.add(".".join(ns + [m.group(1)]))
     return names
+
+
+def parent_retired():
+    """Retired names of the parent table (its Replaces column) and the parent
+    checker's banned list."""
+    tex = strip_comments(open(os.path.join(PARENT, "MEASUREMENT_MAP.tex")).read())
+    out = {"loss aversion", "payout barrier", "injection trigger", "recapitalisation boundary", "volatility ratio"}
+    for r in macro_calls(tex, "nrow", 5):
+        out |= {x.strip().lower() for x in r[4].split(",") if x.strip() and x.strip() != "none"}
+    return sorted(out)
+
+
+def term_problems(manuscript, retired):
+    """Retired names outside literature rows and citing sentences; alternative names anywhere."""
+    body = strip_comments(expand_inputs(manuscript, ROOT))
+    body = body.split(r"\begin{document}", 1)[-1]
+    lines = [ln for ln in body.splitlines() if not ln.lstrip().startswith("\\lrow{")]
+    sents = re.split(r"(?<=[.;])\s+", " ".join(lines))
+    found = []
+    # The "what we rely on" field of a literature row is the paper's own text,
+    # held to the alternative names; its quote is the source's and is not.
+    for r in macro_calls(body, "lrow", 6):
+        low = " ".join(r[2].replace("$", "").lower().split())
+        found += [("alternative in " + r[0], pat) for pat in ALTERNATIVES if re.search(pat, low)]
+    for snt in sents:
+        low = " ".join(snt.replace("$", "").lower().split())
+        cites = "\\cite" in snt or re.search(r"\bL[0-9]+\b", snt)
+        if not cites:
+            found += [("retired", n) for n in retired if n in low]
+        found += [("alternative", pat) for pat in ALTERNATIVES if re.search(pat, low)]
+    return found
 
 
 def parent_terms():
@@ -291,6 +336,10 @@ for k in sorted(real, key=lambda s: int(s.split('-')[1])):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
 check("MM-0 the manuscript's Appendix C includes map_tables.tex, so manuscript and map cannot differ", included)
+retired = parent_retired()
+bad12 = term_problems(mtex, retired)
+check("MM-12 no retired name outside literature rows and citing sentences, and no alternative name, in the manuscript or its figures",
+      not bad12, f"{bad12[:6]}")
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
@@ -299,6 +348,13 @@ bad, _ = analyse(BAD, FIX_TERMS_BAD, FIX_LEAN, FIX_A_BAD, FIX_AGREED)
 for k in sorted(good, key=lambda s: int(s.split('-')[1])):
     check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])
+
+check("MM-12-control a paper's own retired term in a sentence citing its literature row passes",
+      term_problems("\\begin{document} With constant loss aversion the volatility is constant (L12).", retired) == [])
+check("MM-12-control a retired name in the paper's own sentence is caught",
+      term_problems("\\begin{document} Dividends are paid at the payout barrier.", retired) != [])
+check("MM-12-control an alternative name is caught even in a citing sentence",
+      term_problems("\\begin{document} The weight of the penalty is set by hand (L20).", retired) != [])
 
 nf = sum(1 for _, ok in results if not ok)
 print("=" * 72)

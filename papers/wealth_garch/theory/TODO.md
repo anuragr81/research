@@ -131,6 +131,26 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   a closing clause of its third paragraph moved here rather than staying
   in both places.
 
+- 2026-10-24. Terminology audit (author, "has it been made sure that
+  alternative names for concepts are not used"). No retired name of the
+  parent table was in the paper's own prose; the seven uses of "loss
+  aversion" are Barberis et al.'s and Li et al.'s own object in sentences
+  citing their literature rows, which the writing discipline allows. Six
+  alternative names were replaced by the map's names wherever they named the
+  paper's own object, in the text, the figures, the map and the commentary of
+  literature rows L11, L18, L19, L23 and L25: the weight of the penalty
+  (asymmetry parameter), fixed cost (fixed issuance cost), the asset and
+  liability shocks (asset volatility, liability volatility, return-liability
+  correlation), the requirement (required capital), variance limits (limits
+  of buffer variance), the issuance-cost model (the model with issuance costs
+  alone). Short forms of an agreed name (the trigger, the cap, the state,
+  exposure) are kept, as in the parent manuscript. MM-12 of
+  `checks/verify_measurement_map.py`, with three controls, now holds the text,
+  the figures and the literature-row commentary to this.
+- 2026-10-24. "Thresholds", the dividend barrier and the recapitalisation
+  trigger together, is defined at first use in the Answer and entered as
+  Proposed in the parent terminology table.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |
@@ -141,6 +161,9 @@ Parent C4 is theory C4 (pending, under K1); parent C2 is theory C5 (pending,
 under K2). Refuted conjecture R1 is kept, R2 is not.
 
 ## Open, for the author
+
+- "Thresholds" (Proposed, parent terminology table). Agree it, or name the
+  pair otherwise; it is the paper's most used collective (37 uses).
 
 - C6 and Section 4. C6 says what K1 supplies to the specification Peura and
   Keppo call for, which the K1 paragraph of Section 4 now says with its

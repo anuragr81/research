@@ -100,37 +100,40 @@
 
 % The question is the literature's, as Section~\ref{sec:literature} traces it,
 % reassessed against the measurement map of Appendix~\ref{app:terms}.
-When a bank's capital buffer is explained by a fixed cost of issuing equity
-together with a penalty that grows as capital falls below the requirement, does
-the bank's policy carry the weight of that penalty as a parameter of its own,
-separate from the issuance cost, and if so where, in the dividend barrier and
-the recapitalisation trigger or in the variance of the buffer? The weight is
+When a bank's capital buffer is explained by a fixed issuance cost together
+with a shortfall penalty that grows as equity falls below required capital,
+does the bank's policy carry the asymmetry parameter of that penalty separately
+from the fixed issuance cost, and if so where, in the dividend barrier and the
+recapitalisation trigger or in buffer variance? The asymmetry parameter is
 never observed (Appendix~\ref{app:terms}), so it can be read only off what the
-policy shows, and at one it switches the penalty off and returns the
-issuance-cost model (M8), so whether it is identified decides whether the
+policy shows, and at one it switches the shortfall penalty off and leaves the
+model with issuance costs alone (M8), so whether it is identified decides whether the
 specification \citet{peura2006} call for (L18) can be tested against theirs
 rather than imposed (L20). The bank recapitalises by impulse control at a fixed
 issuance cost and takes risky exposure under a regulatory cap.
 
 \subsection{Answer}
 
-The penalty moves the thresholds. The asymmetry parameter $\lambda_S$ and the
+The shortfall penalty moves the thresholds, the dividend barrier and the
+recapitalisation trigger. The asymmetry parameter $\lambda_S$ and the
 fixed issuance cost $K$ both raise the dividend barrier (M1). The
 recapitalisation trigger rises in $\lambda_S$ and falls in $K$ (M2). Because the
 two parameters move the trigger in opposite directions, the Jacobian of the
 barrier and the trigger in $(\lambda_S,K)$ is non-singular, so the pair is
 locally identified from the two thresholds (M3), under the hypotheses that M4
 and Appendix~\ref{app:evidence} list. This is K1 and C1. The thresholds
-identify the weight of the penalty and not whose cost it is (Appendix~\ref{app:scope}).
+identify the asymmetry parameter and not whose cost the shortfall penalty is
+(Appendix~\ref{app:scope}).
 The identification is within the model. The two thresholds are recorded as the
 state at a dividend and at an issue, and on the panel the parent bundle read
 dividends are paid at every state and issues land at no single target, so
 neither is measured there as a threshold (Appendix~\ref{app:terms}).
 
-The penalty does not move the limits of buffer variance. Where the optimal
+The shortfall penalty does not move the limits of buffer variance. Where the optimal
 exposure binds the cap near the distress boundary and deep in surplus, buffer
 variance tends to the deficit limit and the surplus limit, which involve only
-the asset and liability shocks and the cap (M10, M11). For every exposure that
+the asset volatility, the liability volatility, the return-liability
+correlation and the regulatory cap (M10, M11). For every exposure that
 complies with the cap, binding or not, buffer variance is bounded by the same
 quantities (M12). The asymmetry parameter enters the thresholds and not the
 limits of buffer variance. This is K2 and C2, with its scope in C3. The
@@ -149,8 +152,8 @@ ID & Headline & Model rows & Scope note \\
 ID & Headline & Model rows & Scope note \\
 \midrule
 \endhead
-\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the weight of the penalty, not whose cost it is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the panel the parent bundle read neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. The fixed cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
-\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset and liability shocks and the cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis, supported only by the numerical solve of the parent bundle (Appendix~\ref{app:evidence}); the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the panel the parent bundle read the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
+\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the asymmetry parameter, not whose cost the shortfall penalty is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the panel the parent bundle read neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. The fixed issuance cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed issuance cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed issuance cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
+\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset volatility, the liability volatility, the return-liability correlation and the regulatory cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis, supported only by the numerical solve of the parent bundle (Appendix~\ref{app:evidence}); the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the panel the parent bundle read the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -172,7 +175,7 @@ ID & Player & Choice faced & How the model settles it & In the literature & Rows
 \midrule
 \endhead
 \prow{P1}{Bank}{Its risky exposure, the dividend barrier, the recapitalisation trigger and the injection target.}{The thresholds are derived, in their responses to $\lambda_S$ and $K$ (M1 to M4) and in the target's independence of the starting state (M7). The exposure is not derived. M11 takes it at the cap as a hypothesis, and M12 bounds every compliant exposure.}{The bank of \citet{peura2006} and of \citet{daihuangkeppo2019}, with a fixed issuance cost, and of \citet{bayraktar2026}, with the cap.}{M1, M2, M3, M4, M7, M11, M12, L1, L7, L9}
-\prow{P2}{Shareholders}{None in the model. They receive dividends and supply each issue at the fixed and the proportional issuance cost.}{A rule taken as given. The objective is their value net of the shortfall penalty, and the bank chooses for them (M8). Finite issuance follows from the fixed cost (M6).}{In \citet{peura2006} the owners choose the issue.}{M6, M8, L7}
+\prow{P2}{Shareholders}{None in the model. They receive dividends and supply each issue at the fixed and the proportional issuance cost.}{A rule taken as given. The objective is their value net of the shortfall penalty, and the bank chooses for them (M8). Finite issuance follows from the fixed issuance cost (M6).}{In \citet{peura2006} the owners choose the issue.}{M6, M8, L7}
 \prow{P3}{Creditors}{None. The liabilities carry their own shock.}{State. The liability volatility and the return-liability correlation enter the limits and bounds of buffer variance (M10 to M12).}{No paper read has a liability shock unhedged by the safe asset; in \citet{blackperold1992} the reserve asset tracks the liability.}{M10, M11, M12, L5}
 \prow{P4}{Supervisor}{None in the model. It sets required capital and the regulatory cap.}{A rule taken as given (A2). The shortfall penalty below the reference stands for its restrictions, a reading no row derives (Appendix~\ref{app:scope}).}{The cap of \citet{bayraktar2026}. The intervention of \citet{milnewhalley2001}, which the buffer guards against (L16).}{M8, M10, L1, L16}
 \bottomrule
@@ -244,7 +247,7 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M4}{The value function is convex just above the recapitalisation trigger, strictly so exactly when waiting is strictly suboptimal just below it.}{$\Psi=\rho_LV+\Lambda-(1+\kappa)\mu$. If $\sigma^2(x_L)>0$, $\tfrac12\sigma^2V''+\mu V'-\rho_LV-\Lambda=0$ at $x_L^+$, $V'(x_L)=1+\kappa$ and $\mu(1+\kappa)-\rho_LV-\Lambda\le0$ at $x_L$, then $\tfrac12\sigma^2V''(x_L^+)=\Psi(x_L)\ge0$, and $V''(x_L^+)>0\iff\Psi(x_L)>0$. With $\Psi(x_L)=0$, $V''(x_L^+)=0$.}{SecondOrder.psi_identity, SecondOrder.psi_nonneg_of_qvi, SecondOrder.trigger_convex, SecondOrder.trigger_strict_iff, SecondOrder.control_trigger_flat_when_psi_zero}
 \mrow{M5}{The value function has no kink at the recapitalisation trigger.}{If $V\ge\mathcal MV$, $V(x_L)=\mathcal MV(x_L)$, $\mathcal MV$ is affine with slope $1+\kappa$, $V$ has right derivative $V'(x_L^+)$, $\sigma^2(x_L)>0$, and $V'(x_L^+)>1+\kappa$ would make $\tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0$ hold at $x_L$ for every $q$, then $V'(x_L^+)=1+\kappa$. If $\tfrac12\sigma^2q+(1+\kappa)\mu-\rho_LV-\Lambda\le0$ is needed only for $q\le0$, it holds when $(1+\kappa)\mu\le\rho_LV+\Lambda$. Without $V\ge\mathcal MV$ a downward kink is possible.}{SmoothFit.hasDeriv_Mv, SmoothFit.kink_is_convex, SmoothFit.no_convex_kink, SmoothFit.smooth_fit, SmoothFit.control_kink_needs_obstacle, Envelope.smf_permits}
 \mrow{M6}{With a positive fixed issuance cost and a finite value, the discounted number of recapitalisations is finite, so the impulse terms of the verification argument converge absolutely.}{$K>0$, $e_i\ge0$, $K\sum_{i<n}e_i\le B$ for all $n$ $\Rightarrow$ $\sum_{i<n}e_i\le B/K$, $N=\sum_ie_i$ converges and $N\le B/K$. If also $|c_i|\le Ce_i$, $\sum_ic_i$ converges absolutely. With $K=0$, $e_i=1$ the cost bound holds and $N$ diverges.}{ImpulseCount.partial_sums_bounded, ImpulseCount.count_summable, ImpulseCount.count_le, ImpulseCount.impulse_sum_summable, ImpulseCount.control_count_needs_fixed_cost}
-\mrow{M7}{With a fixed issuance cost and a linear proportional cost, the injection target does not depend on the state from which the bank injects.}{$\forall z\ \big(V(z)-(1+\kappa)z\le V(y)-(1+\kappa)y\big)\iff\forall z\ \big(V(z)-(1+\kappa)(z-x)-K\le V(y)-(1+\kappa)(y-x)-K\big)$, for every $x$. A target optimal from one $x$ is optimal from every $x'$. With the convex cost $(z-x)^2$ and $V(z)=2z$, the optimal target moves with $x$.}{Targeting.target_free_of_start, Targeting.target_same_for_all_starts, Targeting.control_target_moves_with_convex_cost}
+\mrow{M7}{With a fixed issuance cost and a linear proportional issuance cost, the injection target does not depend on the state from which the bank injects.}{$\forall z\ \big(V(z)-(1+\kappa)z\le V(y)-(1+\kappa)y\big)\iff\forall z\ \big(V(z)-(1+\kappa)(z-x)-K\le V(y)-(1+\kappa)(y-x)-K\big)$, for every $x$. A target optimal from one $x$ is optimal from every $x'$. With the convex cost $(z-x)^2$ and $V(z)=2z$, the optimal target moves with $x$.}{Targeting.target_free_of_start, Targeting.target_same_for_all_starts, Targeting.control_target_moves_with_convex_cost}
 \mrow{M8}{At $\lambda_S=1$ the shortfall penalty vanishes identically, and for every $\lambda_S\ge1$ the running payoff is concave.}{$\Lambda(x)=(\lambda_S-1)(R-x)^+$ $\Rightarrow$ $\Lambda\equiv0$ at $\lambda_S=1$, and $-\Lambda$ is concave on $\mathbb R$ for $\lambda_S\ge1$. At $\lambda_S=0$, $R=0$ it is not concave.}{QVI_Part1.lambda_asymmetry_vanishes_at_one, QVI_Part1.neg_Lambda_concave, QVI_Part1.control_concavity_needs_lambda_ge_one}
 \mrow{M9}{The capital buffer maps the state space onto the real line, with required capital at zero and the distress boundary at minus infinity.}{$q>0$ $\Rightarrow$ $z$ is strictly increasing on $(1,\infty)$, $1+qe^{z(x)}=x$ for $x>1$, $z(1+qe^{w})=w$, $z(1+q)=0$, $z(x)\to-\infty$ as $x\to1^+$ and $z(x)\to\infty$ as $x\to\infty$.}{CapGeometry.zmap_inverse, CapGeometry.zmap_of_inverse, Coordinate.zmap_strictMonoOn, Coordinate.zmap_at_requirement, Coordinate.zmap_tendsto_atBot, Coordinate.zmap_tendsto_atTop}
 \mrow{M10}{The solvency branch of the cap binds exactly up to the crossing point $\bar x$, and there buffer variance is the constant deficit limit $\nu_1^2$.}{$0<a_1<a_3$, $a_2<1$ $\Rightarrow$ $\bar x-1=a_1(1-a_2)/(a_3-a_1)>0$, $u(x)=(x-1)/a_1$ for $x\le\bar x$, $u(x)=(x-a_2)/a_3$ for $x\ge\bar x$. If also $q>0$, $1<x\le\bar x$ and $\pi(x)\,x=u(x)$, then $\zeta(x)=\nu_1^2$.}{CapGeometry.hasDerivAt_zmap, CapGeometry.zvol2_eq, CapGeometry.xbar_sub_one, CapGeometry.one_lt_xbar, CapGeometry.solvency_binds, CapGeometry.liquidity_binds, CapGeometry.zvol2_solvency}
@@ -260,26 +263,27 @@ ID & Claim & Statement & Lean & Proof \\
 \subsection{How the papers read leave the question open}
 
 The papers read settle the premises of the question and leave the question
-itself. Banks hold capital well above the requirement (L15), and what the
-buffer guards against is a costly intervention by the supervisor or a response
+itself. Banks hold capital well above the regulatory minimum (L15), and what a
+buffer above the minimum guards against is a costly intervention by the supervisor or a response
 of the market once capital falls below the minimum (L16). An optimising bank
 with a fixed issuance cost and liquidation at the minimum underpredicts the
 level (L17). \citet{peura2006} call that penalty extreme and ask for one that
 grows as the capital ratio deteriorates (L18); the shortfall penalty of A4 is
-that specification, with $\lambda_S$ its weight. The weight must then be set,
+that specification, with the asymmetry parameter $\lambda_S$ as the weight it
+puts on a shortfall. The asymmetry parameter must then be set,
 and the two papers that calibrate this class set their frictions by hand or
 from values. \citet{peura2006} impose common values by intuition and pin the
 delay and the fixed cost from issue cost and frequency (L20, L8), and
 \citet{daihuangkeppo2019} fit their parameters to equity values (L21). Neither
-asks whether the weight of the penalty and the fixed cost can be told apart by
-the bank's policy, where both raise the buffer. The weight matters because at
-one the penalty is off and the model is theirs (M8), so an identified weight is
-what would let the specification be tested rather than imposed. K1 answers
+asks whether the asymmetry parameter and the fixed issuance cost can be told
+apart by the bank's policy, where both raise the dividend barrier (M1). The
+asymmetry parameter matters because at one the shortfall penalty is off and the
+model is theirs (M8), so an identified asymmetry parameter is what would let the specification be tested rather than imposed. K1 answers
 that part (M1 to M3, C1, C6). Whose cost the penalty is, which \citet{peura2006} name as the
 issue their omissions reduce to (L19), is not settled by the thresholds and
 stays outside the paper (Appendix~\ref{app:scope}).
 
-On the variance of the buffer the papers read point both ways. In an
+On buffer variance the papers read point both ways. In an
 unconstrained loss-averse control the large-wealth limits of the controls
 depend on the preference parameter (L14); in an endowment economy with
 constant loss aversion the volatility of returns equals that of dividends
@@ -302,7 +306,7 @@ paper's ledger against the three.
 The first approach is the issuance-cost barrier models
 (Figure~\ref{fig:ledger-issuance}). The bank pays dividends at a barrier and
 issues in lumps because issues carry a fixed cost (L7, L22), and these
-thresholds and the fixed cost per unit of size are the paper's (M1, M2, M7,
+thresholds and a fixed issuance cost per unit of size are the paper's (M1, M2, M7,
 A5). The shortfall is liquidation at the minimum (L24), which
 \citet{peura2006} would replace with a penalty that grows as the ratio falls
 (L18), and in \citet{daihuangkeppo2019} the asymmetry is the regulator's and
@@ -342,11 +346,11 @@ the paper's limits carry no mark of the asymmetry parameter (M11).
 Element of Figure~\ref{fig:ledger} & Issuance-cost models & Regulatory-cap control & Preference in volatility & This paper \\
 \midrule
 A fixed issuance cost that makes issues lumpy (A5, M6) & present (L7, L22) & absent (L3) & absent & present \\ \addlinespace
-A penalty growing below the requirement (A4, M8) & liquidation instead, a graded penalty called for (L24, L18) & an exogenous threshold (L28) & a preference over losses, no bank (L12) & present, with $R=1+q$ \\ \addlinespace
+A shortfall penalty growing below required capital (A4, M8) & liquidation instead, a graded penalty called for (L24, L18) & an exogenous threshold (L28) & a preference over losses, no bank (L12) & present, with $R=1+q$ \\ \addlinespace
 A regulatory cap on exposure (A2, M10) & absent & present (L26) & absent & present \\ \addlinespace
-A trigger moved against the fixed cost (M2, M3) & the regulator's asymmetry, through the liquidation barrier (L25) & the trigger is the distress boundary (L28) & no trigger & the asymmetry parameter (M2, M3) \\ \addlinespace
+A recapitalisation trigger moved against the fixed issuance cost (M2, M3) & the regulator's asymmetry, through the liquidation barrier (L25) & the trigger is the distress boundary (L28) & no trigger & the asymmetry parameter (M2, M3) \\ \addlinespace
 Parameters read off the thresholds (M3) & set by calibration or fit (L8, L20, L21) & illustrative (L31) & read off variance (L12, L14) & local identification (M3) \\ \addlinespace
-Variance limits set by the cap, free of the asymmetry (M11) & not evaluated & not evaluated, and preference-set slopes in the rule of Black and Perold (L6) & the reference parameter in the limits, with no cap (L14) & present (M11) \\
+Limits of buffer variance set by the regulatory cap, free of the asymmetry parameter (M11) & not evaluated & not evaluated, and preference-set slopes in the rule of Black and Perold (L6) & the reference parameter in the limits, with no cap (L14) & present (M11) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -411,21 +415,21 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L8}{peura2006}{They pin the issue delay and the fixed cost by calibration from issue cost and frequency, moments of the thresholds, and their Table 2 has the sign pattern of M3 in the delay and the fixed cost at small costs (\lean{PeuraKeppo.table2_det_neg}). The parallel ends at the parameter, a delay rather than a preference, and at the method, a calibration rather than a local identification theorem.}{For D and K, we identify common estimates across banks such that their implied capital raising cost and frequency are of plausible magnitude.}{2184}{M3}
 \lrow{L9}{daihuangkeppo2019}{Their Table 2.1 gives the responses of the dividend and recapitalisation barriers to seven parameters, the fixed cost with the signs of M1 and M2 (\lean{DaiHuangKeppo.table21_K_signs}). They state no identification and have no shareholder asymmetry parameter, and their delay and fixed cost move the trigger the same way.}{K 0.0017 −0.0543 0 −0.0004}{76}{M1, M2, M3}
 \lrow{L10}{bolton2011}{Its authors state that the double barrier of payout and external financing is an established structure. Its fixed issuance cost is proportional to capital to keep the model homogeneous, as in M1 to M3, and each issue returns to one target, as in M7.}{While this double-barrier policy is not new (it goes back to the inventory model of Miller and Orr 1966 in corporate finance), our model provides substantial new insight}{3}{M1, M7}
-\lrow{L11}{lokka2008}{With proportional issuance costs only, issuance is a minimal reflection at zero, neither a lump nor a target. The fixed cost is what produces the single target of M7.}{In this problem, it is optimal to issue minimal new equity so as to reflect the reserves process at 0 and make minimal dividend payments so as to reflect the reserves process at a certain level x∗ (see Section 4).}{2}{M7}
+\lrow{L11}{lokka2008}{With proportional issuance costs only, issuance is a minimal reflection at zero, neither a lump nor a target. The fixed issuance cost is what produces the single target of M7.}{In this problem, it is optimal to issue minimal new equity so as to reflect the reserves process at 0 and make minimal dividend payments so as to reflect the reserves process at a certain level x∗ (see Section 4).}{2}{M7}
 \lrow{L12}{barberis2001}{With a constant level of loss aversion, the volatility of log returns equals that of dividend growth for every level, the parallel to the absence of $\lambda_S$ from the limits of M11. The parallel ends at the mechanism, a constant price-dividend ratio in an endowment economy rather than a binding regulatory cap.}{the volatility of log returns in this model is equal to the volatility of log dividend growth, namely 12 percent.}{47}{M11}
 \lrow{L13}{engle2018}{They split observed equity volatility asymmetry into a mechanical-leverage share and a market-exposure share. The parallel ends at the object, a response of variance to the sign of news rather than limits of variance across regions of a state variable.}{Volatility asymmetry is mostly explained by exposure to the aggregate market, not a mechanical leverage effect.}{449}{M11}
 \lrow{L14}{li2023}{In an unconstrained loss-averse control the large-wealth limits of the optimal controls depend on the preference parameters, the contrast to M11, where a binding regulatory cap fixes them.}{our asymptotic limits differ significantly from the ones in the Merton's problem, which now sensitively depends on the reference degree parameter}{13}{M11}
 \lrow{L15}{berger2008}{Buffers well above the minimum are the fact the shortfall penalty of A4 and M8 is to explain. The parallel ends at the method, a partial-adjustment regression without a model of the thresholds.}{Since the early 1990s, however, the largest U.S. banking organizations have maintained ratios well in excess of regulatory minimums.}{1}{M8}
 \lrow{L16}{milnewhalley2001}{The buffer guards against the supervisor's intervention or the market's response below the minimum, the reading of the penalty in Appendix~\ref{app:scope}. Their cost is an audit at random times, not a graduated running penalty.}{What matters instead is the possibility of future capitalisation falling below minimum required levels and inducing a costly regulatory intervention or market response.}{3}{M8}
 \lrow{L17}{peura2006}{The optimising bank with a fixed issuance cost (M6) and liquidation at the minimum underpredicts the capital level, on their own calibration. The shortfall penalty of A4, whose form M8 carries, is the friction added.}{The model falls somewhat short of explaining the level of capital held by banks.}{2188}{M6, M8}
-\lrow{L18}{peura2006}{The graduated penalty they call for is $\Lambda$ of A4 and M8, with $\lambda_S$ its weight. The parallel ends at the call, since they do not add it.}{A model in which the penalty gradually increases as the capital ratio deteriorates would therefore be more realistic.}{2192}{M8}
-\lrow{L19}{peura2006}{The question they leave, whose cost binds the bank's capital. The thresholds identify the weight of the penalty under any reading and do not choose among them.}{Whether these omissions matter reduces to the issue of which constituency provides the binding constraint on bank capitalization.}{2192}{M3, M8}
+\lrow{L18}{peura2006}{The graduated penalty they call for is $\Lambda$ of A4 and M8, with the asymmetry parameter $\lambda_S$ setting how much it charges. The parallel ends at the call, since they do not add it.}{A model in which the penalty gradually increases as the capital ratio deteriorates would therefore be more realistic.}{2192}{M8}
+\lrow{L19}{peura2006}{The question they leave, whose cost binds the bank's capital. The thresholds identify the asymmetry parameter under any reading and do not choose among them.}{Whether these omissions matter reduces to the issue of which constituency provides the binding constraint on bank capitalization.}{2192}{M3, M8}
 \lrow{L20}{peura2006}{Their parameters beyond the return moments are imposed, not identified from the bank's policy. M3 identifies two of them from the thresholds.}{imposed common values for other parameters (mainly guided by high level economic intuition)}{2192}{M3}
 \lrow{L21}{daihuangkeppo2019}{Their parameters are fitted to equity values, not identified from the thresholds.}{are calibrated by fitting the partially observed value function}{84}{M3}
 \lrow{L22}{peura2006}{Issues are larger and rarer when the fixed cost is high, the widening trigger-to-target gap of M2 and the finite count of M6.}{The owners optimally issue new equity in larger quantities but less frequently when the cost of issuance is high}{2179}{M2, M6}
-\lrow{L23}{peura2006}{In their model the fixed cost alone puts the issue barrier at the minimum, and the delay moves it up. In M2 the trigger is an interior threshold whose responses to the fixed cost and to the asymmetry parameter are derived.}{The sole presence of the fixed cost does not generate a positive capital issue barrier and will not result in a positive probability of liquidation.}{2177}{M2}
+\lrow{L23}{peura2006}{In their model the fixed cost alone puts the issue barrier at the minimum, and the delay moves it up. In M2 the trigger is an interior threshold whose responses to the fixed issuance cost and to the asymmetry parameter are derived.}{The sole presence of the fixed cost does not generate a positive capital issue barrier and will not result in a positive probability of liquidation.}{2177}{M2}
 \lrow{L24}{peura2006}{The penalty at the minimum is liquidation. The shortfall penalty of M8 grades it below the reference.}{We assume that the corrective action from violation of the minimum capital requirement will be liquidation}{2168}{M8}
-\lrow{L25}{daihuangkeppo2019}{The asymmetry in their model is the regulator's, between the costs of liquidating and of not liquidating, and it acts through the liquidation barrier. The asymmetry parameter of M2 and M3 is in the bank's objective and moves the trigger against the fixed cost.}{when the liquidation parameter a rises, then the liquidation barrier I falls}{71}{M2, M3}
+\lrow{L25}{daihuangkeppo2019}{The asymmetry in their model is the regulator's, between the costs of liquidating and of not liquidating, and it acts through the liquidation barrier. The asymmetry parameter of M2 and M3 is in the bank's objective and moves the trigger against the fixed issuance cost.}{when the liquidation parameter a rises, then the liquidation barrier I falls}{71}{M2, M3}
 \lrow{L26}{bayraktar2026}{The minimum of two branches with a switching point, the cap and the crossing point of M10.}{The key structure is the minimum operator in the regulatory constraint, with a switching point}{15}{M10}
 \lrow{L27}{bayraktar2026}{At zero equity the cap forces zero exposure and the diffusion vanishes, the boundary that M9 sends to minus infinity and near which M11 takes its deficit limit.}{At the hypothetical zero-equity level y = 1, the solvency constraint forces π = 0 and the diffusion coefficient of the ratio process vanishes.}{11}{M9, M11}
 \lrow{L28}{bayraktar2026}{Their dividend barrier and post-issue target are the paper's. Their trigger is the exogenous distress boundary, where the trigger of M2 is interior and responds to the two parameters.}{dividends are paid at an upper barrier, while recapitalization, when optimal, is triggered at the distress boundary and jumps to a post-issuance target}{12}{M1, M2, M7}
@@ -433,7 +437,7 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L30}{bayraktar2026}{The liability shock is correlated with the risky return, as in A1, and enters the variance of M10 to M12.}{c is their shock correlation}{13}{M10, M11, M12}
 \lrow{L31}{bayraktar2026}{Their parameters are illustrative and none is read off the policy, where M3 reads two off the thresholds.}{These values constitute an illustrative parameterization rather than an empirical calibration}{13}{M3}
 \lrow{L32}{blackperold1992}{Their safe asset can track the liability, so the liability is hedged. In M10 to M12 the liability shock enters buffer variance unhedged.}{'safe' may mean that it closely tracks a liability stream}{404}{M10, M11}
-\lrow{L33}{barberis2001}{Volatility from loss aversion needs loss aversion to vary over time. In M11 a constant asymmetry parameter leaves no mark on the variance limits, for a different reason, the binding cap.}{The investor's risk aversion is then constant over time, and stock prices lose an important source of volatility.}{4}{M11}
+\lrow{L33}{barberis2001}{Volatility from loss aversion needs loss aversion to vary over time. In M11 a constant asymmetry parameter leaves no mark on the limits of buffer variance, for a different reason, the binding cap.}{The investor's risk aversion is then constant over time, and stock prices lose an important source of volatility.}{4}{M11}
 \lrow{L34}{engle2018}{Equity variance is the squared leverage multiplier times asset variance, the structural relation behind the change of variable of M10.}{which is the exact relationship implied by structural models of credit}{459}{M10}
 \lrow{L35}{bayraktar2026}{Without borrowing the liquidity branch does not bind in the range of parameters they solve. C3 gives the condition under which it does not bind at any state.}{the LCR constraint is nonbinding within the parameter range considered}{20}{M11, M12}
 \lrow{L36}{barberis2001}{Their loss-averse preference is kinked-linear at the reference, the form of the shortfall penalty of M8. It values gains and losses on an asset, not a shortfall of a bank's capital below its requirement.}{This is a piecewise linear function, shown as the solid line in Figure I. It is kinked at the origin, where the gain equals zero.}{10}{M8}
@@ -468,11 +472,11 @@ solved case, and the opposite effect of the two parameters on the trigger gives
 their local identification from the two thresholds (M3), where the papers read
 set their parameters (L8, L20, L21). Regulatory-cap control has an exogenous trigger and no asymmetry
 parameter (L28), and the preference approach has no trigger. K1 would be in
-print if a paper read derived the threshold responses to the weight of a
+print if a paper read derived the responses of the thresholds to the asymmetry parameter of a
 shortfall penalty in a bank's objective, and none of the three approaches has
-that weight in a bank's objective (L12, L24, L28).
+such a parameter in a bank's objective (L12, L24, L28).
 
-The variance limits of K2 add what regulatory-cap control leaves out. The
+The limits of buffer variance in K2 add what regulatory-cap control leaves out. The
 regulatory cap with its two branches is that of \citet{bayraktar2026} (L1,
 L26), and the constant buffer variance on the solvency branch is the constant
 log-cushion volatility of capped portfolio insurance (L5), so neither is
@@ -483,17 +487,17 @@ asymmetry parameter (M11) sets them apart from the two papers read in which
 limits of a volatility carry a preference (L6, L14), as
 Section~\ref{sec:literature} sets out, and the liability shock enters them
 unhedged, where the safe asset of \citet{blackperold1992} can hedge it (L32). K2 would be in
-print if a paper read evaluated the variance limits under a regulatory cap
+print if a paper read evaluated the limits of buffer variance under a regulatory cap
 with an unhedged liability shock, and none of the three approaches does. That the optimal
 exposure binds the cap near both ends is a hypothesis of M11, and it is part of
 what C5 waits on.
 
 K1 and K2 together place the asymmetry parameter in the thresholds and not in
-the variance limits, on one bank. The preference approach looks for the mark of
+the limits of buffer variance, on one bank. The preference approach looks for the mark of
 an asymmetry in the variance of returns, and finds none when the asymmetry is
 constant (L12), while the issuance-cost models have thresholds and no
 asymmetry parameter in the bank's objective (L24). Under the paper's regulatory
-cap the variance limits carry nothing about the asymmetry parameter (M11) and
+cap the limits of buffer variance carry nothing about the asymmetry parameter (M11) and
 the two thresholds identify it (M3), so the paper reads the asymmetry
 parameter off the thresholds, where the preference approach reads an asymmetry
 off the variance of returns.
@@ -512,7 +516,7 @@ to one target as in \citet{peura2006} and \citet{bolton2011} (L7, L10), which
 is M7, and a proportional cost alone gives no target (L11). The kinked-linear
 form of the shortfall penalty is that of the loss-averse preference of
 \citet{barberis2001} (L36), there over gains and losses on an asset and here
-over a shortfall of capital below the requirement (M8). The absence of a kink at
+over a shortfall of equity below required capital (M8). The absence of a kink at
 the recapitalisation trigger and the convexity just above it (M5, M4), the
 finite number of issues (M6) and the capital buffer as a coordinate (M9) are
 steps that the derivations of M1 to M3 and M10 to M12 use.
@@ -540,7 +544,7 @@ ID & Statement & Rows \\
 \crow{C1}{Under the hypotheses of Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M1, M2, M3, M4}
 \crow{C2}{Wherever the optimal exposure binds the cap near both ends, the limits of buffer variance are $\nu_1^2$ and $\nu_3^2$, functions of $(\sigma,\sigma_L,c,a_1,a_3)$ only, and for every compliant exposure buffer variance is bounded by $\max\{\sigma_L^2,\nu_1^2\}$. The asymmetry parameter moves the thresholds (C1) and is absent from these limits and bounds. In capped portfolio insurance, whose geometry the cap shares, the slopes come from preferences, so the same limits would carry them.}{M3, M10, M11, M12, L5, L6}
 \crow{C3}{The surplus limit $\nu_3^2$ requires the liquidity branch to bind deep in surplus, which requires borrowing to hold the risky asset. With no borrowing, the main banking case of \citet{bayraktar2026}, the liquidity branch never binds once $a_2\le(1-a_3)x$, so the deficit limit and the bound of M12 are the results that apply there.}{M11, M12, L2}
-\crow{C6}{C1 supplies what the specification \citet{peura2006} call for (L18) lacks in their calibration. The weight of the penalty and the fixed cost are set by the two thresholds (M3) rather than imposed (L20) or fitted to equity values (L21). Which constituency the penalty stands for (L19) is not settled by the thresholds (Appendix~\ref{app:scope}).}{M3, L18, L19, L20, L21}
+\crow{C6}{C1 supplies what the specification \citet{peura2006} call for (L18) lacks in their calibration. The asymmetry parameter and the fixed issuance cost are set by the two thresholds (M3) rather than imposed (L20) or fitted to equity values (L21). Which constituency the shortfall penalty stands for (L19) is not settled by the thresholds (Appendix~\ref{app:scope}).}{M3, L18, L19, L20, L21}
 \bottomrule
 \end{longtable}
 
@@ -784,25 +788,25 @@ M11, M12, K2, C2 and C3 depend on it.
 
 \paragraph{The fixed issuance cost.} $K$ is charged per unit of liabilities,
 so the dollar cost of an issue is $K$ times liabilities (A5). This keeps the
-reduction of the bank's problem to the single state $x$, which a fixed cost in
+reduction of the bank's problem to the single state $x$, which a fixed issuance cost in
 dollars would break (L4). M1 to M3, K1 and C1 depend on it.
 
 \paragraph{The shortfall penalty.} The objective charges
 $\Lambda(x)=(\lambda_S-1)(R-x)^+$ below the reference $R$ (A4). The reference
 is $R=1+q$, the state at which equity equals required capital and the capital
 buffer is zero (\lean{Coordinate.zmap_at_requirement}), so the penalty is
-charged exactly in deficit, zero at or above the requirement
+charged exactly in deficit, zero at or above required capital
 (\lean{QVI_Part1.shortfall_zero_at_or_above_reference}) and positive below it
 once $\lambda_S>1$ (\lean{QVI_Part1.shortfall_pos_below_reference}). This is
 the author's choice of 23 October 2026, and it makes the hypothesis
 $\Lambda'(y^*)=0$ of M1 the statement that the dividend barrier lies above the
-requirement. The model does not say whose cost the penalty is. The reading adopted is that it stands for
+reference. The model does not say whose cost the penalty is. The reading adopted is that it stands for
 the supervisor's restrictions below a capital threshold, which no row derives.
-What $\lambda_S$ identifies in K1 is the weight of that penalty, under this
+What K1 identifies is the asymmetry parameter of that penalty, under this
 reading. \citet{peura2006} name which constituency binds the bank's capital
 as the issue their omissions reduce to (L19), and \citet{milnewhalley2001}
 name the supervisor's intervention and the market's response together (L16).
-The thresholds identify the weight under any of these readings and do not
+The thresholds identify the asymmetry parameter under any of these readings and do not
 choose among them. K1, C1 and C6 depend on this paragraph.
 
 \paragraph{The policy.} That the optimal policy is a dividend barrier, a
