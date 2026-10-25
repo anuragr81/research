@@ -873,3 +873,12 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   result of the enhanced model is not theirs. The floor now has a source:
   10% before 2010, 10.5% (R) after. Still to read: Lang and Menno (2026),
   Gropp and Heider (2010), Craine and Martin (2017).
+- 2026-10-25. Novelty check completed (comparison/NOVELTY_20261025.md):
+  Lang and Menno (2026), Gropp and Heider (2009) and Craine and Martin
+  (2017) read in full and recorded with Lean; OR-Q14 added. The enhanced
+  model's level result and the scale measurements are not in any paper
+  read; the binding floor is Orozco and Rubio's (evidence) and Lang and
+  Menno's (theory). The paper must answer Gropp and Heider (wrong line,
+  OR-Q3) and Craine and Martin (risk scales vs mean shortfalls, CM-Q6).
+  Next: author to decide on the period-dependent floor and the 2025
+  hold-out.
