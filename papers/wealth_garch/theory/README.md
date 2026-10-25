@@ -11,6 +11,7 @@ decisions. `./verify.sh` runs the four suites and writes `VERIFICATION.md`.
 |---|---|
 | `wealth_garch_theory.tex` | The manuscript, its tables and appendices A to G (renamed from `MANUSCRIPT.tex` on 23 October 2026). |
 | `checks/verify_manuscript.py` | The skeleton checker, rules MS-1 to MS-9 with controls. |
+| `solve/` | The numerical solve of the model by policy iteration, an illustration that the hypotheses of M1 to M4 hold (Appendix B); `results_solve.md` is generated and pinned (TH-6). |
 | `figures/` | The four ledger figures of the manuscript (TikZ) and their shared styles. |
 | `MEASUREMENT_MAP.tex`, `map_tables.tex` | The measurement map, its three tables shared with Appendix C of the manuscript. |
 | `checks/verify_measurement_map.py` | The map's checker, rules MM-1 to MM-11 with controls. |
@@ -64,6 +65,7 @@ of `lean/mathlib/` (Lean v4.32.0-rc1, Mathlib v4.32.0-rc1).
   Lean file (its `LEAN`) is in `theory/lean/`.
 - TH-5 every Lean name `theory/wealth_garch_theory.tex` cites (model rows and inline
   `\lean{}`) is declared here: 72 names.
+- TH-6 the solve's results file is pinned to the scripts as they now are.
 - TH-3 runs `checks/verify_mathlib.py` on `theory/lean/`: `lake build`, no
   `sorry`, and every theorem's axioms within propext, Classical.choice
   and Quot.sound.

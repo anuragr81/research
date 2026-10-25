@@ -159,8 +159,8 @@ ID & Headline & Model rows & Scope note \\
 ID & Headline & Model rows & Scope note \\
 \midrule
 \endhead
-\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the asymmetry parameter, not whose cost the shortfall penalty is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the panel the parent bundle read neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. The fixed issuance cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed issuance cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed issuance cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
-\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset volatility, the liability volatility, the return-liability correlation and the regulatory cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis, supported only by the numerical solve of the parent bundle (Appendix~\ref{app:evidence}); the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the panel the parent bundle read the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
+\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the asymmetry parameter, not whose cost the shortfall penalty is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the panel the parent bundle read neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. It needs the recapitalisation trigger above the distress boundary. In the solve of Appendix~\ref{app:evidence} the trigger is interior at 42 of 56 parameter points, and where the fixed issuance cost is large against the asymmetry parameter the bank issues only at the distress boundary, where the trigger cannot move. The fixed issuance cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed issuance cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed issuance cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
+\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset volatility, the liability volatility, the return-liability correlation and the regulatory cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis. In the solve of Appendix~\ref{app:evidence} the exposure is at the cap at both thresholds and on 85 percent of the inaction region; the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the panel the parent bundle read the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -850,8 +850,8 @@ row cites.
 $z'(x)^2\sigma^2(x,\pi(x))$, and that this is the diffusion coefficient of
 $z(X_t)$ is Itô's formula, which is not proved (A3). That the optimal policy
 binds the cap near both ends of the state space is a hypothesis of M11, which
-K2 and C2 state as their condition, supported only by the numerical solve of
-the parent bundle.
+K2 and C2 state as their condition, which the solve of the Illustrations
+paragraph supports at one parameter point.
 
 M1 to M3 take as hypotheses, in raw form, the inputs of A6. That $V$ is the
 value function is the verification theorem, not proved. Differentiability of
@@ -875,7 +875,28 @@ discounted impulse times and $c_i$ the impulse terms of the verification
 argument. Interior regularity of $V$, $C^2$ on the inaction region and $C^3$
 away from $R$ and $\bar x$, is assumed wherever a row differentiates $V$.
 
-\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling.
+\paragraph{Illustrations.} No row rests on SymPy or on numerical sampling. That
+the hypotheses of M1 to M4 hold at some parameter point is shown by a numerical
+solve, \path{theory/solve/solve_qvi.py}, whose output is
+\path{theory/solve/results_solve.md}. The solve takes the parameters of the
+parent bundle with $\lambda_S=1.2$ and $K=0.05$, and solves the discrete
+quasi-variational inequality by policy iteration on grids of 601 and 1201
+nodes, to a residual below $10^{-12}$. On the finer grid the dividend barrier is
+$y^*=1.741$, the recapitalisation trigger $x_L=1.026$ and the injection target
+$y_{\text{post}}=1.553$, each within $0.002$ of its value on the coarser grid.
+Every hypothesis of M1, M2 and M4 holds there, among them $W(y^*)=0.079>0$,
+$W'(x_L)=1.84>0$, $N'<0$ on the inaction region, $\Psi(x_L)=0.027>0$,
+$V''(y_{\text{post}})<0$ and $\mu'(y^*)=0.045<\rho_L=0.09$. The envelope
+identities hold to within $0.7$ percent, and the responses of the thresholds
+by finite differences have the signs of M1 and M2, with a determinant of
+$-0.30$ against $-0.33$ from the formula of M3. The risky exposure is at the cap
+at both thresholds and on 85 percent of the inaction region, and below it on an
+interval around the crossing point. Over 56 values of $(\lambda_S,K)$, with
+$\lambda_S$ from $1.02$ to $2$ and $K$ from $0.01$ to $0.2$, the trigger is
+interior at 42 and every hypothesis holds there. At the other 14, where the
+fixed issuance cost is large against the asymmetry parameter, the bank issues
+only at the distress boundary, so the trigger cannot move and the
+identification of K1 does not apply.
 
 \section{Terminology and measurement map}
 \label{app:terms}

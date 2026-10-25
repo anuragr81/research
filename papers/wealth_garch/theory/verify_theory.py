@@ -1,4 +1,5 @@
 import glob
+import hashlib
 import os
 import re
 import subprocess
@@ -108,8 +109,31 @@ check("TH-C1 a fabricated citation is detected as missing",
 check("TH-C2 a row's last brace group is read as its Lean names",
       cited(r"\mrow{M0}{a {b} c}{$x^{2}$}{A.one, B.two}") == ["A.one", "B.two"])
 
+SOLVE = os.path.join(HERE, "solve")
+
+
+def pin_problems(results_text, folder):
+    """Every `name` sha256 <hex> pin of a results file must match the file now."""
+    bad = []
+    pins = re.findall(r"`([^`]+)` sha256 ([0-9a-f]{64})", results_text)
+    for name, digest in pins:
+        f = os.path.join(folder, name)
+        now = hashlib.sha256(open(f, "rb").read()).hexdigest() if os.path.exists(f) else None
+        if now != digest:
+            bad.append(name)
+    return pins, bad
+
+
+res_md = os.path.join(SOLVE, "results_solve.md")
+pins, badpins = pin_problems(open(res_md).read(), SOLVE) if os.path.exists(res_md) else ([], ["results_solve.md"])
+check("TH-6 the solve's results file is pinned to the scripts as they now are (theory/solve/)",
+      pins and not badpins, f"stale or missing: {badpins}")
+
 check("TH-C3 a cited paper without a lit record is a gap",
       not lmap.get("nosuchpaper1999") and cited_keys("\\citet{a1999, b2000}\\citep{c2001}\n\\lrow{L1}{d2002}{x}") == ["a1999", "b2000", "c2001", "d2002"])
+
+check("TH-C4 a pin that does not match its file is caught",
+      pin_problems("`solve_qvi.py` sha256 " + "0" * 64, SOLVE)[1] == ["solve_qvi.py"])
 
 print("-" * 72)
 p = subprocess.run([sys.executable, os.path.join(ROOT, "checks", "verify_mathlib.py"), PROJ])

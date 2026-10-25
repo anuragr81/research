@@ -171,6 +171,28 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   companions; quotations PK-Q32 to Q34 added; L41 to L47. The comparison is
   of signs and of which quantity exists, not of sizes across papers.
 
+- 2026-10-25. The solve (author, "can you proceed with the solve?").
+  `solve/solve_qvi.py` solves the discrete QVI by policy iteration;
+  `solve/run_illustration.py` writes `solve/results_solve.md`, pinned, and
+  TH-6 checks the pins. At $(\lambda_S,K)=(1.2,0.05)$ every hypothesis of M1,
+  M2 and M4 holds on 601 and 1201 nodes, the envelope identities hold to
+  0.7 percent, and the threshold responses have the signs of M1 and M2
+  (determinant $-0.30$ numerically, $-0.33$ by formula). Over 56 points the
+  trigger is interior at 42, where every hypothesis holds, and at the
+  distress boundary at 14 (large $K$ against $\lambda_S$), where the trigger
+  cannot move; K1's scope note now says so. Appendix B carries it as an
+  illustration; no row rests on it.
+- 2026-10-25. Two things learned about the numerics, recorded for the
+  parent bundle. The time-stepping scheme of `02_numerical/` gives the
+  thresholds within one grid step of policy iteration (Octave run at 301
+  nodes, $(1.2, 0.05)$: $y^*=1.750$, $x_L=1.030$, $y_{\text{post}}=1.550$
+  against $1.745$, $1.025$, $1.555$), but its value differs from the value
+  of its own policy by about $10^{-3}$, too coarse for finite differences in
+  $\lambda_S$, and at the parent's settings it stops at 1500 iterations
+  without reaching its tolerance. A trigger at the reference that the
+  numpy port of the scheme produced at $(1.5, 0.02)$ is an artefact of the
+  port; policy iteration gives an interior trigger there.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |
