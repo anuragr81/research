@@ -865,3 +865,11 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   Holod-Peek's own claims, Bayraktar and Hirtle still to score. Next:
   novelty check on the testing thread's findings, then the author's
   choice of next step.
+- 2026-10-25. Novelty check (comparison/NOVELTY_20261025.md): Orozco and
+  Rubio (2025, JMCB) read in full and recorded (lit/orozco_rubio_2025,
+  OR-Q1 to Q13, Lean OrozcoRubio). Banks guard the well-capitalised 10%
+  line in 1996-2009 (their finding); after 2009 the conservation buffer
+  makes 10.5% the floor. Their design is local (8% to 12%), so the level
+  result of the enhanced model is not theirs. The floor now has a source:
+  10% before 2010, 10.5% (R) after. Still to read: Lang and Menno (2026),
+  Gropp and Heider (2010), Craine and Martin (2017).
