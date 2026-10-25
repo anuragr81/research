@@ -851,3 +851,17 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   economies in risk management, support for the largest, or an unnamed
   cause. Next: author to decide whether to pursue the gradient further or
   write up the level result.
+- 2026-10-25. Do-nothing volatility and the level bank by bank
+  (PREREG_comparison_19.md, results_do_nothing.md): the volatility of
+  Berger et al.'s do-nothing change is 1.19 times that of book capital in
+  sample B, so banks' own capital actions damp their ratios; with it the
+  model overshoots (training F2 71.2% against 48.0%) and fails the gate,
+  so (D) stays, its circularity stated. Bank by bank, (D) orders banks
+  better than the baseline (sample A test Spearman 0.25 against 0.19) but
+  not significantly among the 61 largest in the test window (p 0.057);
+  in sample A it misses a near-constant 4 points. Enhancement thread:
+  the pre-fixed rule is met three times on unseen banks ((B) on 17 and
+  18, (D) on 26); limits as above. Testing thread: Berger's level,
+  Holod-Peek's own claims, Bayraktar and Hirtle still to score. Next:
+  novelty check on the testing thread's findings, then the author's
+  choice of next step.
