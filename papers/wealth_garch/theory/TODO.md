@@ -210,6 +210,11 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   adjustments rather than thresholds and need a second moment where two
   parameters move one moment the same way. C4 stays pending on the author's
   decision to narrow it and on the Banque de France version.
+- 2026-10-25. C5 stays in the table of pending claims, awaiting verification,
+  and no prose is expanded on it (author). K2 is argued from M10 to M12 and
+  C2, C3 only. The three existing pointers to C5 (the opening of Section 4,
+  the K2 paragraph of Section 4, the opening of the Conclusions) stay as
+  pointers; none argues from C5.
 
 ### Row map, parent to theory
 
@@ -236,10 +241,7 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 - The question. The skeleton's question is drafted from the headlines;
   the author may reword it.
 - C5. Choulli, Taksar and Zhou (2003), to be read in full with a record, and
-  a proof that the optimal exposure binds the cap near both ends. Asked on
-  25 October whether the paper can go without C5; answer given (yes, K2
-  stays as a conditional result without a novelty claim), edits awaiting the
-  author.
+  a proof that the optimal exposure binds the cap near both ends.
 - Constantinides and Richard (1978) as a precedent for K1. In their
   approximation the four thresholds pin the penalty and the fixed cost once
   the holding cost is known, a step they do not take. C4 names it; decide
