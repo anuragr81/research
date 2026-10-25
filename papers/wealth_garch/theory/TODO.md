@@ -215,6 +215,17 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   C2, C3 only. The three existing pointers to C5 (the opening of Section 4,
   the K2 paragraph of Section 4, the opening of the Conclusions) stay as
   pointers; none argues from C5.
+- 2026-10-25. C4 narrowed and concluded (author). It now reads: in a bank's
+  objective, identification of the asymmetry parameter and the fixed
+  issuance cost from the dividend barrier and the recapitalisation trigger
+  by opposite signs on the trigger is new against the papers read in full,
+  with Constantinides and Richard (L52) and Alvarez, Le Bihan and Lippi
+  (L58) as the nearest precedents outside banking. It moved to Table 6 with
+  its ID kept. The NBER version of Alvarez et al. is the one read and cited,
+  so the Banque de France version is no longer needed. Section 5 of
+  `notes/novelty_check_20261023.md` is now read in full for C4. Bonaparte and
+  Cooper (2009) and Bonaparte, Cooper and Zhu (2011) appear only in that
+  note's pass-0 list (section 4) and were never read.
 
 ### Row map, parent to theory
 
@@ -242,12 +253,6 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
   the author may reword it.
 - C5. Choulli, Taksar and Zhou (2003), to be read in full with a record, and
   a proof that the optimal exposure binds the cap near both ends.
-- Constantinides and Richard (1978) as a precedent for K1. In their
-  approximation the four thresholds pin the penalty and the fixed cost once
-  the holding cost is known, a step they do not take. C4 names it; decide
-  whether Section 4 should also say it, and whether the claim of C4 needs
-  narrowing to a bank's objective and two thresholds. Alvarez, Le Bihan and
-  Lippi (L58) bear on the same decision.
 - The title. The skeleton carries the parent's, Asymmetric Capital Buffer
   Control, as a working title.
 - Literature records. The checker reads the parent's `lit/` records, shared
