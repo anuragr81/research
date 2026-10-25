@@ -29,6 +29,13 @@ Bib key `berger2008`. Version read: Federal Reserve Bank of Kansas City Research
 | BDF-Q21 | 0 | these targets increase with BHC risk but decrease with BHC size | The buffer scales with risk (mechanism 1, and the scale of the gap in results_mechanisms.md). |
 | BDF-Q22 | 0 | based on their risk exposures and their counterparties' sensitivities to default risk | Counterparties price default risk (ledger A7). |
 | BDF-Q23 | 0 | slower (ceteris paribus) for BHCs under severe regulatory pressure | The supervisor's pressure slows adjustment (ledger A9). |
+| BDF-Q24 | 7 | Finally, bank capital ratios tend to be inversely related to asset size. This might reflect greater diversification, scale economies in risk management, and/or lower expected cost of raising new equity on short notice. | The size gradient and the explanations they offer, among them a lower cost of raising equity for larger banks; offered, not measured. |
+| BDF-Q25 | 16 | Larger banking organizations are likely to hold relatively less capital due to greater diversification, scale economies in risk management, greater ability to raise equity on short notice | The same list as the hypothesis behind their size variables. |
+| BDF-Q26 | 23 | As expected, larger BHCs hold significantly lower capital ratios. | The size gradient in their Step 3 targets. |
+| BDF-Q27 | 23 | Because the effects of BHC size are like to be incompletely captured by our explanatory variables, this finding could also indicate the existence of economies of scale at the very largest BHCs | They do not separate the explanations (n. 27). |
+| BDF-Q28 | 23 | we interpret this either as weak evidence that BHCs with access to inexpensive external capital can afford to hold less capital | Cheap external capital lowers the target: the issue-cost channel, weakly supported (MKTBOOK). |
+| BDF-Q29 | 21 | Banks with poor capital market access (MISSING = 1) might be unable to adjust quickly to their target capital levels. | Market access proxied by having no bond rating; it enters the speed of adjustment, not the target. |
+| BDF-Q30 | 15 | DNK equals capital lagged one year plus current-year net income minus lagged dividends, all divided by current | The do-nothing ratio: (capital at t-1 + net income at t - dividends at t-1) / assets at t, risk-weighted for the total ratio; its change from the ratio at t-1 is the movement of capital before any new capital action. |
 
 ## Lean results
 

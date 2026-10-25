@@ -815,3 +815,53 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   sigma_i, the market (B) about 8x, the buffers about 3x. Next: the
   fallback, (B) scaled by how much book capital moves with market equity,
   in its own pre-registration.
+- 2026-10-24. Measure (D) and the directions of BDF-Q21
+  (PREREG_comparison_17.md, results_book_vol.md). Level: the barrier
+  model with the yearly volatility of book capital (median 2.08 sigma_i)
+  and the well-capitalised 10% floor (OCC-Q3) passes the training gate
+  (F2 54.0% against 48.0%, F1 7.6% against 17.1%) and beats the baseline
+  on the 26 unscored banks of sample B (15.2 against 149.2 points; F1
+  agrees, F2 73.1% against 58.5%); on all 61 banks it agrees on both
+  facts. The floor was chosen after a minimum near R was seen to work;
+  stated in the file. Directions: in sample A the buffer falls with size
+  (Spearman -0.34 training, -0.39 test) and rises with risk (+0.23,
+  +0.26), as BDF-Q21 says; both models reproduce the risk direction and
+  neither the size direction. Next: a mechanism for the size gradient
+  (candidate: size-dependent issue cost, MW Result 12), source needed
+  before any pre-registration.
+- 2026-10-24. Sources for the size gradient: Berger et al. read again for
+  size (BDF-Q24 to Q29) and Holod and Peek for access to capital (HP-Q14
+  to Q17), page-verified. Berger et al. offer four explanations without
+  separating them and measure no issue cost; Holod and Peek give
+  qualitative support that stand-alone and non-public banks face dearer
+  external capital, with no cost figure. No source in hand gives an
+  issue-cost gradient by size, so a size-dependent issue cost cannot be
+  calibrated without fitting. Testable instead, with a sourced sign: do
+  stand-alone banks and banks without a listed parent hold more capital
+  than affiliated or listed ones of the same size? Author to decide.
+- 2026-10-24. Access to capital and the size gradient
+  (PREREG_comparison_18.md, results_access.md): in sample A, stand-alone
+  banks do not hold more capital than affiliated ones of the same size
+  (test window: 1.7 points less, p 0.033), nor do banks without a listed
+  parent (p 0.50); adding these terms steepens the size coefficient; the
+  gradient holds within each group. Only the rank version shows a weak
+  listing effect. Foreign-parent banks (8 and 11) hold much more,
+  unpredicted. Access, as measurable here, does not explain the gradient;
+  diversification via volatility was ruled out earlier. Remaining: scale
+  economies in risk management, support for the largest, or an unnamed
+  cause. Next: author to decide whether to pursue the gradient further or
+  write up the level result.
+- 2026-10-25. Do-nothing volatility and the level bank by bank
+  (PREREG_comparison_19.md, results_do_nothing.md): the volatility of
+  Berger et al.'s do-nothing change is 1.19 times that of book capital in
+  sample B, so banks' own capital actions damp their ratios; with it the
+  model overshoots (training F2 71.2% against 48.0%) and fails the gate,
+  so (D) stays, its circularity stated. Bank by bank, (D) orders banks
+  better than the baseline (sample A test Spearman 0.25 against 0.19) but
+  not significantly among the 61 largest in the test window (p 0.057);
+  in sample A it misses a near-constant 4 points. Enhancement thread:
+  the pre-fixed rule is met three times on unseen banks ((B) on 17 and
+  18, (D) on 26); limits as above. Testing thread: Berger's level,
+  Holod-Peek's own claims, Bayraktar and Hirtle still to score. Next:
+  novelty check on the testing thread's findings, then the author's
+  choice of next step.
