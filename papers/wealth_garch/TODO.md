@@ -882,3 +882,10 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   OR-Q3) and Craine and Martin (risk scales vs mean shortfalls, CM-Q6).
   Next: author to decide on the period-dependent floor and the 2025
   hold-out.
+- 2026-10-25. Frozen enhanced model (PREREG_comparison_20.md,
+  results_frozen.md): book-capital volatility with the sourced floor (10%
+  to 2009Q4, 10.5% from 2010Q1). Reported, decides nothing: training
+  sample B misses F1 + F2 by 27.4 (baseline 121.1), sample A 12.8; test
+  sample B 12.9, agreeing on both facts (baseline 146.8), sample A 11.3.
+  Its own test is the 2025 hold-out, rule fixed; opening it (fetching the
+  2025 FDIC file) waits for the author.
