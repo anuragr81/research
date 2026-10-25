@@ -273,21 +273,45 @@ ID & Claim & Statement & Lean & Proof \\
 
 The asymmetry parameter and the fixed issuance cost stand for the two frictions
 that the papers read use to explain a buffer above the minimum, a cost of
-falling below the minimum and a cost of raising capital back. The buffer is a
-joint function of the two (L37), and \citet{milnewhalley2001} put both in one
-bank, a regulator who audits at random and intervenes below the minimum and a
-fixed cost of each issue, so that the capital decision is an inventory problem
-with an issue point and a target (L38). In their model more frequent audit and
-a higher fixed cost of issue move the bank's policy in the same direction,
-raising desired capital and the state below which an audited bank liquidates
-rather than recapitalises (L39, L40). With like responses the signs of the two
-thresholds do not separate the two frictions, since the Jacobian can then be
-singular (M3). \citet{peura2006} pair the fixed issuance cost with a delay on
-issues rather than with a cost of falling below the minimum (L7, L23). In the
-papers read the two frictions are joint determinants of the buffer, and none
-asks whether the bank's policy separates them. The paper asks that question,
-with the cost of falling below the minimum written as a shortfall penalty that
-grows below required capital (A4).
+falling below the minimum and a cost of raising capital back. The bank papers
+read write the cost of falling below in five forms, and none of the five is a
+running cost charged only below the reference that grows with the shortfall,
+as the shortfall penalty of A4 is. Below the minimum the bank is liquidated in
+\citet{peura2006} (L24), audited at random in \citet{milnewhalley2001} (L16),
+and made to issue at once at the proportional issuance cost in
+\citet{glover2023}, so that one parameter prices both the shortfall and the
+issue (L55). Below a buffer requirement \citet{behn2019} and \citet{langmenno2026}
+charge an amount that is the same at every shortfall (L53, L51), and with that
+charge the bank of \citet{langmenno2026} holds capital exactly at the
+buffer requirement and no buffer above it (L51). \citet{lambertini2014} write the
+capital requirement as a smooth penalty on net worth that charges a shortfall and
+rewards a surplus, with no kink at required capital (L56). The cost of raising
+capital is fixed per issue in \citet{milnewhalley2001}, \citet{peura2006} and
+\citet{decamps2011}, where the fixed part is what makes issues lumpy (L57),
+and has no fixed part in \citet{behn2019} and \citet{glover2023} (L54, L55).
+
+Where the papers read put a cost of falling below and a cost of raising
+capital in one objective, none asks whether the policy separates the two.
+Outside banking the pairing is
+the cash-management model of \citet{constantinides1978}, a running penalty
+that grows linearly below a level together with a fixed and a proportional
+cost of each transfer (L48). In their approximation with no drift and
+vanishing discounting the upper trigger rises in both the penalty and the
+fixed cost of raising cash, the signs M1 gives for the dividend barrier, and
+they state no direction for the lower trigger (L49, L50). In a bank
+\citet{milnewhalley2001} pair an audit at random below the minimum with a fixed
+cost of each issue, so that the capital decision is an inventory problem with
+an issue point and a target (L37, L38), and more frequent audit and a higher
+fixed cost of issue move the policy in the same direction (L39, L40). With
+like responses the signs of the two thresholds do not separate the two
+frictions, since the Jacobian can then be singular (M3). \citet{behn2019}
+estimate a charge for breaching the capital requirement and an issuance cost with no
+fixed part in one bank, and separate the two by assigning a different moment
+to each rather than by the policy (L54). \citet{peura2006} pair the fixed
+issuance cost with a delay on issues rather than with a cost of falling below
+the minimum (L7, L23). The paper asks whether the policy separates the two
+frictions, with the cost of falling below the minimum written as a shortfall
+penalty that grows below required capital (A4).
 
 The papers read settle the premises of the question and leave the question
 itself. Banks hold capital well above the regulatory minimum (L15), and what a
@@ -567,6 +591,16 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L45}{bayraktar2026}{The cap geometry of the baseline at which M13 evaluates the limits of buffer variance.}{The baseline regulatory parameters are (a1 , a2 , a3 ) = (0.045, 0.05, 0.30)}{13}{M13}
 \lrow{L46}{bayraktar2026}{The asset volatility, the liability volatility and the return-liability correlation of the baseline of M13.}{r = 0.02, µ = 0.04, µL = 0.03, ρ = 0.12, γ = 0.02, together with σ = 0.08, σL = 0.03, c = 0.20, κ = 0.01, κ′ = 0.02}{13}{M13}
 \lrow{L47}{daihuangkeppo2019}{Their bank has no liability shock, which in M10 to M12 enters the limits of buffer variance.}{We ignore debt volatility and debt financing}{26}{M10, M11}
+\lrow{L48}{constantinides1978}{A running penalty that grows linearly below a level and a fixed and a proportional cost of each transfer in one objective, the pairing of A4 and A5 in cash management rather than in a bank. Their trigger and target below the level are the recapitalisation trigger and the injection target of M2 and M7.}{model with both fixed and proportional transactions costs and with linear holding and penalty costs}{620}{M2, M7, M8}
+\lrow{L49}{constantinides1978}{Their comparative statics are confined to special cases, an approximation with no drift and vanishing discounting, where M1 and M2 hold under the hypotheses of Appendix~\ref{app:evidence}.}{In this section and under additional assumptions we explicitly solve for the policy parameters and perform a comparative statics analysis.}{630}{M1, M2}
+\lrow{L50}{constantinides1978}{In that approximation the upper trigger rises in the penalty and in the fixed cost of raising cash, the signs of M1 for the dividend barrier. They state no direction for the lower trigger or the lower target.}{the policy parameter u is an increasing function}{631}{M1}
+\lrow{L51}{langmenno2026}{Their cost of breaching the buffer requirement is a charge per unit of loans that is the same at every shortfall (\lean{LangMenno.stigma_flat_below}), and with it the bank holds capital exactly at the buffer requirement. The shortfall penalty of M8 grows with the shortfall (\lean{LangMenno.graduated_grows_below}).}{Banks do not maintain voluntary capital buffers above the CBR}{18}{M8}
+\lrow{L52}{constantinides1978}{In their approximation the four thresholds pin the penalty and the fixed cost of raising cash once the holding cost is known (\lean{Constantinides.thresholds_pin_pK}), an identification the authors do not state. M3 identifies the asymmetry parameter and the fixed issuance cost from two thresholds without a holding cost.}{We next consider the case where costs are not symmetric and there are fixed as well as proportional transactions costs.}{631}{M3}
+\lrow{L53}{behn2019}{Their cost of breaching the capital requirement is a charge that does not grow with the shortfall (\lean{BehnEtAl.breach_flat_below}), the step the shortfall penalty of M8 grades.}{These costs are reminiscent of the bankruptcy cost in classical trade-off theory models}{10}{M8}
+\lrow{L54}{behn2019}{They estimate the breach charge and an issuance cost with no fixed part (\lean{BehnEtAl.issueCost_no_fixed_part}) in one bank, and separate the two by the moments each is matched to rather than by the thresholds of the policy, as M3 does.}{The costs of breaching the minimum capital and liquidity requirements are mainly identified by the extent of the observed voluntary buffers}{23}{M3}
+\lrow{L55}{glover2023}{A breach forces an issue priced at the proportional issuance cost, so one parameter charges both the shortfall and the issue (\lean{GloverEtAl.breach_slope_is_issuance_cost}) and no policy can separate them. M3 has two parameters, the asymmetry parameter and the fixed issuance cost.}{whenever the bank decides (or is forced) to raise new equity it will incur a cost}{10}{M3, M8}
+\lrow{L56}{lambertini2014}{The capital requirement is a smooth log penalty on net worth, negative below required capital and a reward above it (\lean{LambertiniUysal.logTerm_pos_above}), with no kink. The shortfall penalty of M8 is zero at and above the reference and kinked there.}{Due to the log term, the bank is penalized when its capital goes below the required 8 percent of total assets}{23}{M8}
+\lrow{L57}{decamps2011}{A fixed cost of each issue makes issues lumpy (\lean{DecampsEtAl.unitCost_falls}), the single target of M7.}{Because issuing shares involves a fixed cost, equity adjustments take place in lumpy and infrequent issues}{1503}{M7}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -684,7 +718,7 @@ ID & Statement & Rows \\
 ID & Statement & Rows \\
 \midrule
 \endhead
-\crow{C4}{The joint local identification of C1, of a shareholder asymmetry parameter and a fixed issuance cost from the two thresholds by the signs of their responses, is new. Its numerical precedents in other parameters are \citet{peura2006} and \citet{daihuangkeppo2019} (L8, L9). \pend{the identification section of Alvarez, Le Bihan and Lippi (2014), Banque de France WP 492; Glover, Johnson, Evatt and Cheng (2023); Lambertini and Uysal (2013, 2014); each read in full with a record (\path{notes/novelty_check_20261023.md}, section 5).}}{M3, L8, L9}
+\crow{C4}{The joint local identification of C1, of a shareholder asymmetry parameter and a fixed issuance cost from the two thresholds by the signs of their responses, is new. Its numerical precedents in other parameters are \citet{peura2006} and \citet{daihuangkeppo2019} (L8, L9). Outside banking, in the approximation of \citet{constantinides1978}, four thresholds pin a linear penalty and a fixed cost once a holding cost is known, a step the authors do not take (L52). \pend{the identification section of Alvarez, Le Bihan and Lippi (2014), Banque de France WP 492, read in full with a record (\path{notes/novelty_check_20261023.md}, section 5).}}{M3, L8, L9, L52}
 \crow{C5}{That under a regulatory two-branch cap with an unhedged liability shock the limits of buffer variance carry no information about the asymmetry parameter, while the thresholds do (C2), is new. \pend{Choulli, Taksar and Zhou (2003), SIAM J. Control Optim. 41(6), read in full with a record; and a proof that the optimal exposure binds the cap near both ends, the hypothesis of M11.}}{M11, L5, L6}
 \bottomrule
 \end{longtable}

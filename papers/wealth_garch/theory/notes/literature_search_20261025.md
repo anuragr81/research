@@ -58,3 +58,38 @@ Menno, Behn et al.). No abstract seen states that a shortfall-penalty
 parameter and a fixed issuance cost move the recapitalisation trigger in
 opposite directions, or that the two are told apart by the thresholds. The
 five papers of the first table decide that.
+
+## What the full readings show, 25 October 2026
+
+Read in full from the author's Drive uploads, each with a record under
+`lit/` (quotations verified by page, Lean companion): Constantinides and
+Richard (1978), Vo (2009), Behn, Daminato and Salleo (2019), Lang and Menno
+(2026), Glover, Johnson, Evatt and Cheng (2023, the December 2022 preprint),
+Décamps, Mariotti, Rochet and Villeneuve (2011), Lambertini and Uysal (2013,
+2014). Still to read: Milne (2004), Choulli, Taksar and Zhou (2003), Alvarez,
+Le Bihan and Lippi (2014).
+
+- The cost of falling below takes five forms in the bank papers:
+  liquidation (Peura and Keppo), random audit (Milne and Whalley), a forced
+  issue at the proportional issuance cost (Glover et al.), a charge that is the
+  same at every shortfall (Behn et al., Lang and Menno), and a smooth log
+  penalty that rewards a surplus (Lambertini and Uysal). None is a running
+  cost charged only below the reference that grows with the shortfall. Vo's
+  graduated intervention comes from an optimal contract, not from a cost.
+- A fixed issuance cost is in Milne and Whalley, Peura and Keppo and Décamps
+  et al. Behn et al., Glover et al., Vo and Lambertini and Uysal have none; Lang
+  and Menno have issuance free or ruled out.
+- The pairing of a linear running penalty below a level with a fixed and a
+  proportional transfer cost is Constantinides and Richard's cash-management
+  model. In their no-drift, vanishing-discount approximation the upper
+  trigger rises in both the penalty and the fixed cost of raising cash; no
+  direction is stated for the lower trigger. From their printed solution the
+  lower trigger falls in the fixed cost (my algebra, CR-D4), and given the
+  holding cost the four thresholds pin the penalty and the fixed cost
+  (`Constantinides.thresholds_pin_pK`, CR-D6). They never state
+  this. It is the nearest precedent to K1 and is cited in C4 (L52).
+- Their printed equation for the upper gap, (h/2σ²)(u−U)³ = K⁻, disagrees by
+  a factor of 3 with their printed solution; the area computation
+  (`Constantinides.gap_area`) supports the solution.
+- No paper read asks whether the policy separates the two frictions. Behn et
+  al. separate a breach charge and an issuance cost by assigning moments.

@@ -192,6 +192,17 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   without reaching its tolerance. A trigger at the reference that the
   numpy port of the scheme produced at $(1.5, 0.02)$ is an artefact of the
   port; policy iteration gives an interior trigger there.
+- 2026-10-25. Eight papers uploaded to Drive read in full, each with a
+  record under `lit/` and a Lean companion: Constantinides and Richard
+  (1978), Vo (2009), Behn, Daminato and Salleo (2019), Lang and Menno (2026),
+  Glover, Johnson, Evatt and Cheng (2023), Décamps, Mariotti, Rochet and
+  Villeneuve (2011), Lambertini and Uysal (2013, 2014). The first paragraph
+  of Section 3.1 is replaced by two, the forms the cost of falling below
+  takes in the bank papers, and where the two frictions are paired (L48 to
+  L57). Glover et al. and Lambertini and Uysal are struck from C4's pending
+  list. Constantinides and Richard is the nearest precedent to K1 and C4 now
+  names it (L52). Vo (2009) and Lambertini and Uysal (2013) have records and
+  are not cited.
 
 ### Row map, parent to theory
 
@@ -217,9 +228,15 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 
 - The question. The skeleton's question is drafted from the headlines;
   the author may reword it.
-- C4 and C5. The four papers of section 5 of the novelty note, each to be
-  read in full with a record, and for C5 a proof that the optimal exposure
-  binds the cap near both ends.
+- C4 and C5. Alvarez, Le Bihan and Lippi (2014) for C4, and Choulli, Taksar
+  and Zhou (2003) for C5, each to be read in full with a record, and for C5
+  a proof that the optimal exposure binds the cap near both ends. Milne
+  (2004) is still wanted for Section 3.1.
+- Constantinides and Richard (1978) as a precedent for K1. In their
+  approximation the four thresholds pin the penalty and the fixed cost once
+  the holding cost is known, a step they do not take. C4 names it; decide
+  whether Section 4 should also say it, and whether the claim of C4 needs
+  narrowing to a bank's objective and two thresholds.
 - The title. The skeleton carries the parent's, Asymmetric Capital Buffer
   Control, as a working title.
 - Literature records. The checker reads the parent's `lit/` records, shared
