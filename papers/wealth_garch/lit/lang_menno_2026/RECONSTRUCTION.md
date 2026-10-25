@@ -1,10 +1,18 @@
 # Reconstruction: Lang and Menno (2026)
 
-From the author's Google Drive, downloaded on 25 October 2026 and pinned as
-`~/.cache/wealth_garch/lang_menno_2026.pdf`, sha256 `3299cc271b038351336ddb3d40b1eb85ca6902f6fe7cb14d3417f1644ed816cd`.
-The sections below are the reading notes made for the theory paper's Section 3.1.
+## Source read
 
-## 1. Source
+- ECB Working Paper 3188, fetched from ecb.europa.eu on 25 October 2026
+  (ecb.wp3188~28f203e31a.en.pdf) and pinned as
+  `~/.cache/wealth_garch/lang_menno_2026.pdf`, sha256
+  `3299cc271b038351336ddb3d40b1eb85ca6902f6fe7cb14d3417f1644ed816cd`.
+- Read in full, all 51 PDF pages.
+
+## Reading notes for the theory paper's Section 3.1
+
+The quotation IDs below are those of `CLAIMS.md` after the merge.
+
+### 1. Source
 
 - **Citation as printed:** Jan Hannes Lang, Dominik Menno, "A structural model of capital buffer usability", European Central Bank, Working Paper Series, No 3188. The imprint page says "© European Central Bank, 2026". ISBN 978-92-899-7640-4, ISSN 1725-2806, doi:10.2866/1442210, QB-01-26-028-EN-N (PDF p. 51). The cover and imprint print no month.
 - **PDF file:** /root/.cache/wealth_garch/lang_menno_2026.pdf
@@ -12,7 +20,7 @@ The sections below are the reading notes made for the theory paper's Section 3.1
 - **Page mapping:** printed page = PDF page − 1. PDF p. 1 is the unnumbered cover. PDF p. 2 is printed p. 1 (Abstract). PDF p. 50 is printed p. 49 (Appendix B). PDF p. 51 is the unnumbered acknowledgements and imprint page. Page numbers below are printed numbers unless marked "PDF".
 - **Coverage:** read in full (PDF pp. 1–51), including the non-technical summary, Sections 1–8, the references, Appendix A (A1–A7, proofs) and Appendix B (Figure B1). The figures are images, so their plotted values could not be read from the text layer; only their captions and the text describing them were used.
 
-## 2. Reconstruction
+### 2. Reconstruction
 
 **Setting.** This is a two-period banking-sector model (p. 8) that cuts the dynamic model of Lang and Menno (2025) down to two periods "for tractability", which makes it like an overlapping-generations model (pp. 5, 8). It has a representative risk-neutral bank under monopolistic competition, with elasticity of substitution μ between banks' loans and an aggregate loan demand shifter λ with semi-elasticity ϵ (eq. 2, p. 10). The only shock is aggregate credit risk θ, which follows a log AR(1): ln θ′ = α0 + α1 ln θ + α2 ε′ (eq. 7, p. 12). There are no idiosyncratic shocks. The paper studies symmetric pure-strategy equilibria with L′ = L^A′ (p. 12).
 
@@ -36,7 +44,7 @@ The sections below are the reading notes made for the theory paper's Section 3.1
 - *Prop. 6* (p. 28): in the usability-constrained equilibrium, CR = R^cbr. Loans are L^Ñ′ = s^Ñ L^N′ with s^Ñ = CR_L^N′/R^cbr < 1, so deleveraging is proportional to the capital-ratio shock. The loan rate is i^Ñ = i^N − log(s^Ñ)/ϵ, and PD is lower than under use.
 - Figure 10 (p. 27) lists the cases of a unique equilibrium, two equilibria, or none, depending on which of the two stigma conditions holds.
 
-## 3. Answers to (a), (b), (c)
+### 3. Answers to (a), (b), (c)
 
 **(a) Cost of being below a requirement.** There are two, at different thresholds.
 - *Below R^min:* the bank is liquidated, with a proportional cost ΔL′ borne by shareholders (p. 9). This is closure. It scales with the loan book, not with the shortfall, and it is charged only when the bank is below R^min.
@@ -55,6 +63,6 @@ The sections below are the reading notes made for the theory paper's Section 3.1
 
 **Stated limitations and future research.** The model is restricted to two periods for analytical tractability (p. 5). Bank heterogeneity and mixed-strategy equilibria are left for future research (p. 12). Limited liability is not modelled, because the calibration keeps net worth positive (footnote 10, p. 13). The paper offers only conjectures on releasable buffers (p. 29). Its own words on policy are that "further analysis regarding this question would be needed" (p. 7) and "further analysis of this would be needed to draw firm conclusions" (p. 29). The optimal composition of the capital stack is named as future research (p. 31).
 
-## 6. Verdict for the theory paper
+### 6. Verdict for the theory paper
 
 Lang and Menno pair an asymmetric cost of being below a buffer requirement with an equity-raising friction. But their stigma cost is a fixed charge per unit of loans, ξL′, triggered by an indicator, not one that grows with the shortfall (eq. 1, p. 10; p. 9). Their issuance friction is a hard non-negativity constraint on dividends with no fixed or proportional cost (footnote 4, p. 8). The paper does NOT have a graduated shortfall penalty like (λ_S − 1)(R − x)^+, and it does NOT have a fixed issuance cost K. So it reports no comparative statics of a dividend barrier, recapitalisation trigger or target in either friction (pp. 18–28). It does NOT ask whether stigma and issuance frictions can be told apart from the policy, and it estimates neither: ξ is set ad hoc, and the paper says its specific values do not affect the results (pp. 12–13). What carries over is the qualitative point that a buffer-breach cost acts as a threshold. With this step-function form, even 0.5–3 bps makes the bank sit exactly at the CBR with no buffer above it (Props. 3 and 6, pp. 18, 28). That contrasts with the interior buffer that a graduated cost produces, which can be cited as a reason for the graduated form. Its voluntary buffers above the minimum come only from a proportional liquidation cost and are 1–2 pp (pp. 16–18). The two-period design rules out any statement about the variance of capital (pp. 5, 8).

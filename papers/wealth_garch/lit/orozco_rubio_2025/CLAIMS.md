@@ -19,6 +19,7 @@ Bib key `orozcorubio2025`. Version read: Journal of Money, Credit and Banking 57
 | OR-Q11 | 1427 | Banks with regulatory capital ratios over 12% might have different business models, characteristics, and incentives. | They leave the far-above-threshold banks, our F2, outside their design. |
 | OR-Q12 | 1450 | Equity is singularly employed in 55% of the cases. | Banks reach the line mostly with equity, including parent transfers. |
 | OR-Q13 | 1455 | This discontinuity disappears with the new capital requirements introduced by Basel III. | Their conclusion on the post-2009 period. |
+| OR-Q14 | 1431 | requiring banks to hold at least 6% in the former and 5% in the latter to be considered well capitalized | The well-capitalised Tier 1 (6%) and leverage (5%) lines of the period; Gropp and Heider's 6% cutoff is the first (GH09-Q6). |
 
 ## Lean results
 
