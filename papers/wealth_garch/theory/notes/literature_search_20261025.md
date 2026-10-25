@@ -66,8 +66,8 @@ Read in full from the author's Drive uploads, each with a record under
 Richard (1978), Vo (2009), Behn, Daminato and Salleo (2019), Lang and Menno
 (2026), Glover, Johnson, Evatt and Cheng (2023, the December 2022 preprint),
 Décamps, Mariotti, Rochet and Villeneuve (2011), Lambertini and Uysal (2013,
-2014). Still to read: Milne (2004), Choulli, Taksar and Zhou (2003), Alvarez,
-Le Bihan and Lippi (2014).
+2014). Milne (2004) and Alvarez, Le Bihan and Lippi (2014, NBER WP 20155) were read
+later the same day; see below. Still to read: Choulli, Taksar and Zhou (2003).
 
 - The cost of falling below takes five forms in the bank papers:
   liquidation (Peura and Keppo), random audit (Milne and Whalley), a forced
@@ -93,3 +93,20 @@ Le Bihan and Lippi (2014).
   (`Constantinides.gap_area`) supports the solution.
 - No paper read asks whether the policy separates the two frictions. Behn et
   al. separate a breach charge and an issuance cost by assigning moments.
+
+## Milne (2004) and Alvarez, Le Bihan and Lippi (2014), 25 October 2026
+
+- Milne (2004), SSRN 576062. Under continuous monitoring the minimum is a
+  hard barrier, recapitalise at a fixed cost or be liquidated; under random
+  audit the only deadweight loss on audit is the fixed cost, the top-up being
+  paid at par, so no part of the cost grows with the shortfall
+  (`Milne2004.audit_loss_is_fixed`). No threshold is shown to move in the audit
+  intensity alone, and no two frictions move the trigger in opposite
+  directions. By its own account the random-audit part summarises Milne and
+  Whalley, so the theory paper does not cite it.
+- Alvarez, Le Bihan and Lippi, NBER WP 20155 (May 2014), not the Banque de
+  France WP 492 the notes named. Identification is global and analytic, from
+  moments of the distribution of adjustments (frequency, variance,
+  kurtosis) and outside cost data, never from the threshold. Two parameters
+  that both raise kurtosis are separated only by adding the observed cost of
+  adjustment; no rank or opposite-sign condition is stated. Cited in C4 (L58).

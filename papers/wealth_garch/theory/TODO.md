@@ -203,6 +203,13 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   list. Constantinides and Richard is the nearest precedent to K1 and C4 now
   names it (L52). Vo (2009) and Lambertini and Uysal (2013) have records and
   are not cited.
+- 2026-10-25. Milne (2004) and Alvarez, Le Bihan and Lippi (2014, NBER WP
+  20155) read in full with records. Milne (2004) is not cited: on the pairing
+  of audit and fixed cost it summarises Milne and Whalley. C4 now cites
+  Alvarez et al. (L58), who identify from moments of the distribution of
+  adjustments rather than thresholds and need a second moment where two
+  parameters move one moment the same way. C4 stays pending on the author's
+  decision to narrow it and on the Banque de France version.
 
 ### Row map, parent to theory
 
@@ -228,15 +235,17 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 
 - The question. The skeleton's question is drafted from the headlines;
   the author may reword it.
-- C4 and C5. Alvarez, Le Bihan and Lippi (2014) for C4, and Choulli, Taksar
-  and Zhou (2003) for C5, each to be read in full with a record, and for C5
-  a proof that the optimal exposure binds the cap near both ends. Milne
-  (2004) is still wanted for Section 3.1.
+- C5. Choulli, Taksar and Zhou (2003), to be read in full with a record, and
+  a proof that the optimal exposure binds the cap near both ends. Asked on
+  25 October whether the paper can go without C5; answer given (yes, K2
+  stays as a conditional result without a novelty claim), edits awaiting the
+  author.
 - Constantinides and Richard (1978) as a precedent for K1. In their
   approximation the four thresholds pin the penalty and the fixed cost once
   the holding cost is known, a step they do not take. C4 names it; decide
   whether Section 4 should also say it, and whether the claim of C4 needs
-  narrowing to a bank's objective and two thresholds.
+  narrowing to a bank's objective and two thresholds. Alvarez, Le Bihan and
+  Lippi (L58) bear on the same decision.
 - The title. The skeleton carries the parent's, Asymmetric Capital Buffer
   Control, as a working title.
 - Literature records. The checker reads the parent's `lit/` records, shared
