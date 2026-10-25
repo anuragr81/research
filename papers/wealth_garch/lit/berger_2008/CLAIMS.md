@@ -35,6 +35,7 @@ Bib key `berger2008`. Version read: Federal Reserve Bank of Kansas City Research
 | BDF-Q27 | 23 | Because the effects of BHC size are like to be incompletely captured by our explanatory variables, this finding could also indicate the existence of economies of scale at the very largest BHCs | They do not separate the explanations (n. 27). |
 | BDF-Q28 | 23 | we interpret this either as weak evidence that BHCs with access to inexpensive external capital can afford to hold less capital | Cheap external capital lowers the target: the issue-cost channel, weakly supported (MKTBOOK). |
 | BDF-Q29 | 21 | Banks with poor capital market access (MISSING = 1) might be unable to adjust quickly to their target capital levels. | Market access proxied by having no bond rating; it enters the speed of adjustment, not the target. |
+| BDF-Q30 | 15 | DNK equals capital lagged one year plus current-year net income minus lagged dividends, all divided by current | The do-nothing ratio: (capital at t-1 + net income at t - dividends at t-1) / assets at t, risk-weighted for the total ratio; its change from the ratio at t-1 is the movement of capital before any new capital action. |
 
 ## Lean results
 
