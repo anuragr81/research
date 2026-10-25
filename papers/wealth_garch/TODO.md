@@ -889,3 +889,10 @@ Bib entries in `00_document/references.bib` not yet tied to a candidate:
   sample B 12.9, agreeing on both facts (baseline 146.8), sample A 11.3.
   Its own test is the 2025 hold-out, rule fixed; opening it (fetching the
   2025 FDIC file) waits for the author.
+- 2026-10-25. The 2025 hold-out opened and run (PREREG_holdout_2025.md,
+  results_holdout_fetch.md, results_holdout.md): 42 banks of sample B,
+  parameters from 2015-2024. The frozen model beats the baseline, 23.3
+  points against 182.4; agrees on F1 (0.2% against 1.6%), misses F2 (67.1%
+  against 89.1%, 22 points low, the sign reversed from 2015-2024). The
+  enhancement thread's comparison is confirmed on unseen data; the level
+  fit is not. 2025 is now spent as a hold-out. Next: the write-up.
