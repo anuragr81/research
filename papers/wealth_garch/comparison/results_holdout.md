@@ -2,8 +2,8 @@
 
 Run 25 October 2026,
 under PREREG_comparison_20.md (commit 6aecfb5e),
-with the 2025 file fetched under PREREG_holdout_2025.md (commits f348b46e
-and 8f723a9a) and the test script committed before the fetch (ffe74ea8)
+with the 2025 file fetched as fixed in
+common_data/holdout/PREREG_holdout_2025.md (commits f348b46e and 8f723a9a) and the test script committed before the fetch (ffe74ea8)
 and run unchanged. The first and only look at 2025.
 
 ## Findings
