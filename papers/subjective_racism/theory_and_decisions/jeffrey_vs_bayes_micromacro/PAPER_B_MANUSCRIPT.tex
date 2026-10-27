@@ -575,9 +575,7 @@ sequence effect on the believed association is $\bigO(c^{2})$ exactly. Across an
 open set of priors, a smooth statistic has a second-order sequence effect if and
 only if it is protected (Definition~\ref{def:protection}); both conditions hold
 exactly when the differential of the statistic at independence annihilates
-$\mathrm{span}\{R_1,R_2\}$ (Proposition~\ref{prop:PRO} below). Nothing in the
-display involves $\PB$ or $\lambda$. The classification is decided by the two
-reading sequences, and every mixture $\Pbar_\lambda$ inherits it.
+$\mathrm{span}\{R_1,R_2\}$ (Proposition~\ref{prop:PRO} below).
 \end{proposition}
 \par
 \begin{proof}
@@ -909,20 +907,22 @@ Membership in that band is forced by a comparison of two lengths. An evaluator's
 the threshold is $|u|$, and the reading sequence moves their score by $c\delta_\sigma$; a flip
 requires the second to be at least the first, so $|u|>|c\delta_\sigma|$ leaves the action
 unchanged whichever sequence the cues may be in. As $\delta_\sigma$ is bounded across the population,
-only evaluators within $\bigO(c)$ of the threshold can be affected at all. The condition is
-necessary but not sufficient---the perturbation must also point towards the threshold rather
+only evaluators within $\bigO(c)$ of the threshold can be affected at all. The perturbation must also point towards the threshold rather
 than away from it---so the affected form a subset of the band, and it is the band's mass,
 $f(0)\cdot\bigO(c)$, that sets the first-order rate. The following proposition formalises this.
 
 \renewcommand{\theproposition}{SHR}%
 \begin{proposition}[sequence-affected share]\label{prop:SHR}
-Suppose the $u$-marginal is bounded and continuous at $u=0$ with $f(0)>0$ (the same density
-hypothesis as Theorem~\ref{thm:LOS}). Then under the $0$--$1$ criterion---weight $1$ for each
-individual whose Jeffrey and benchmark actions differ, $0$ for everyone else, so that the
-aggregate is the \emph{incidence} of sequence-affected individuals, their share of the
-population---the aggregate is genuinely $\bigO(c)$, not merely $o(1)$, since the band mass
-itself scales as $f(0)\cdot\bigO(c)$. \anchor{Prop.~SHR}
+Under the density hypothesis of Theorem~\ref{thm:LOS}, with the $u$-marginal bounded and
+continuous at $u=0$ and $f(0)>0$, the \emph{incidence} of sequence-affected individuals
+satisfies
+\[
+  \Pr\{\sgn(u)\neq\sgn(u+c\delta_\sigma)\}=f(0)\cdot\bigO(c),
+\]
+so it is of order $c$ and not merely $o(1)$. \anchor{Prop.~SHR}
 \end{proposition}
+
+
 \begin{proof}
 Both criteria integrate over the same set, differing only in the weight attached to a member.
 
@@ -1145,7 +1145,11 @@ order under the sequence dependence studied here, while the share of decisions t
 and~\ref{prop:SHR}). Such a belief audit therefore cannot rule out a role for the reading sequence, since a population of coherent evaluators would pass it while its
 hiring decisions record the sequence.
 
-The results discussed above locate the objection raised in the literature on sequence dependence of Jeffrey conditioning -- in the levels rather than in the believed link between the traits -- rather than removing the objection. While the normative question remains where \citet{Doring1999} and \citet{Hawthorne2004} leave it, above results bear on both objections --  whether sequence dependence is pronounced or not, as \citet{Doring1999} argues, depends on the measure, since under \emph{full adoption} the reading sequence does affect the statistics. When \emph{full adoption} is relaxed, as Hawthorne's objection suggests, the dependence in fact enlarges the difference, since the marginals differ at order zero and believed link at first order under \emph{partial adoption} (Proposition~\ref{prop:LAD}).
+The result that sequence dependence shows in the marginals rather than in the believed link between the traits addresses two objections raised to sequence dependence in the literature. The normative objection from \citet{Doring1999} is that rational belief change should not depend on the sequence of experiences when nothing essential turns on it. The
+paper shows that how much the dependence matters depends on the statistic read. The paper also argues that the objection
+from \citet{Hawthorne2004} that \emph{full adoption} is implausible does not make sequence dependence irrelevant. This is because relaxing \emph{full adoption} enlarges the dependence
+rather than removing it, since under \emph{partial adoption} the marginals differ between the sequences at order zero and the believed association at first order
+(Proposition~\ref{prop:LAD}). Which of these statistics an audit can measure is an empirical question the paper leaves open.
 
 
 \appendix
