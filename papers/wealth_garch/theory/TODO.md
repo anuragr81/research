@@ -226,6 +226,12 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   `notes/novelty_check_20261023.md` is now read in full for C4. Bonaparte and
   Cooper (2009) and Bonaparte, Cooper and Zhu (2011) appear only in that
   note's pass-0 list (section 4) and were never read.
+- 2026-10-28. Target journal: Annals of Finance (Springer, ABDC 2025 B), chosen
+  by the author on median decision time. The 34-day median from submission to
+  first decision was read from a search snippet of a mirror of its Springer
+  page and is not verified on link.springer.com, which this environment
+  cannot reach. The journal's author guidelines (length, format, appendices)
+  are not yet read, for the same reason.
 
 ### Row map, parent to theory
 
