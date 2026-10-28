@@ -18,7 +18,9 @@ decisions. `./verify.sh` runs the four suites and writes `VERIFICATION.md`.
 | `checks/ledger_theory.py` | The ledger of the paper under the bundle's spec (`00_reader/ledger_model.py`), proposed in `notes/ledger.md`. |
 | `verify_theory.py` | The Lean suite (below). |
 | `verify.sh` | Runs the four suites, writes `VERIFICATION.md` (generated). |
-| `refs.bib` | Bibliography, the nine papers the L rows cite. |
+| `refs.bib` | Bibliography of the papers the L rows cite. |
+| `citations.json`, `checks/fetch_citations.py` | Citation counts (OpenAlex), print dates (Crossref) and ABDC 2025 ratings (`papers/journal_rankings/`) of every cited paper, for the table of citations; MS-10 checks the table against them. |
+| `solve/run_noborrow.py` | The same solve with no borrowing, pi <= 1 (Appendix B); `results_noborrow.md` is generated and pinned (TH-6). |
 | `notes/writing_discipline.md` | The writing rules, copied from the parent. |
 | `TODO.md` | Plan, decisions, open items. |
 

@@ -249,6 +249,21 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   cited. C4 stands. Left unread from the first-pass list: Grossman and Vila
   (1992) and Hilscher, Raviv and Wiener (2024), for K2's positioning only.
 
+- 2026-10-28. The skeleton carries a table of citations (author): every cited
+  paper, the version read, where it is published, its citation count and its
+  journal's ABDC 2025 rating; cited papers only and no impact factor (author).
+  The ABDC list the author supplied is `papers/journal_rankings/`. Counts are
+  OpenAlex's, retrieved 28 October 2026 by `checks/fetch_citations.py`, dates
+  Crossref's; MS-10 checks the table. Four papers read as working papers or
+  preprints are now published: Li, Yu and Zhang (SIAM J. Financial Math.
+  2024), Glover et al. (European J. Finance 2023), Federico, Modena and Regis
+  (Mathematical Finance, online 30 September 2026), Bonaparte, Cooper and Zhu
+  (J. Monetary Econ. 2012). Alvarez, Le Bihan and Lippi have an AER 2016 paper
+  under another title, not checked to be the same paper.
+- 2026-10-28. K2 kept as written; a solve with no borrowing added (author).
+  `solve/run_noborrow.py`, Appendix B "Without borrowing". The audit of
+  28 October is `notes/audit_20261028.md`.
+
 ### Row map, parent to theory
 
 | Theory | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 |

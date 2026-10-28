@@ -11,6 +11,7 @@
 %   through the mproof environment. IDs are K1, K2, ... (introduction),
 %   P1, ... (players), A1, ... (assumptions), M1, ... (model), L1, ... (literature)
 %   and C1, ... (conclusions).
+%     \cirow{bib key}{version read}{published as}{date}{citations}{ABDC 2025}
 %     \krow{ID}{headline}{model rows}{scope note}
 %     \prow{ID}{player}{choice faced}{how the model settles it}{in the literature}{rows}
 %     \arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}
@@ -85,6 +86,7 @@
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+\newcommand{\cirow}[6]{\citet{#1} & #2 & #3 & #4 & #5 & #6 \\ \addlinespace}
 
 \newenvironment{mproof}[2]
   {\subsection*{Proof of #1}\label{proof:#1}%
@@ -616,6 +618,58 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 
 Every paper the tables name has been read in full and has a record with Lean
 under \path{lit/}.
+
+\subsection{Papers cited}
+
+% Skeleton only; the submitted version drops this subsection. Counts and
+% ratings are checked by MS-10 against theory/citations.json, which
+% theory/checks/fetch_citations.py writes, and against the ABDC list in
+% papers/journal_rankings/.
+Table~\ref{tab:citations} lists every paper the manuscript cites, with the
+version read, where it is published, the number of citations and the
+rating of the journal in the 2025 ABDC Journal Quality List. Citations are the
+count of the OpenAlex record of the version in the third column, retrieved on
+28 October 2026, with the counts of OpenAlex's records of other versions of the
+same paper in brackets. OpenAlex counts are usually lower than those of Google
+Scholar. The date is that of the printed issue registered with Crossref, or of
+the working paper. Where the published version differs from the version read,
+the published version was not read.
+
+\footnotesize
+\begin{longtable}{@{}P{3.0cm}P{2.8cm}P{4.1cm}P{1.3cm}P{1.6cm}P{2.2cm}@{}}
+\caption{Papers cited, with the version read, the published version and its
+journal's rating.}\label{tab:citations}\\
+\toprule
+Paper & Version read & Published as & Date & Citations & ABDC 2025 \\
+\midrule
+\endfirsthead
+\toprule
+Paper & Version read & Published as & Date & Citations & ABDC 2025 \\
+\midrule
+\endhead
+\cirow{bayraktar2026}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{--}
+\cirow{barberis2001}{the article}{QJE 116(1), 1--53}{2001-02}{1876 (+244)}{A*}
+\cirow{engle2018}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{A*}
+\cirow{li2023}{arXiv 2108.02648v4}{SIAM J.\ Financial Math.\ 15(1), 121--160}{2024-03}{12}{B}
+\cirow{peura2006}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{187}{not listed (A* in 2016, discontinued)}
+\cirow{bolton2011}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{662 (+266)}{A*}
+\cirow{lokka2008}{preprint of July 2005}{Insurance Math.\ Econ.\ 42(3), 954--961}{2008-06}{117}{A*}
+\cirow{blackperold1992}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{A*}
+\cirow{daihuangkeppo2019}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{A*}
+\cirow{milnewhalley2001}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{--}
+\cirow{berger2008}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{531 (+11)}{A}
+\cirow{constantinides1978}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{A*}
+\cirow{decamps2011}{the article}{J.\ Finance 66(5), 1501--1544}{2011-10}{165 (+12)}{A*}
+\cirow{behn2019}{ECB WP 2233}{working paper}{2019-01}{14}{--}
+\cirow{langmenno2026}{ECB WP 3188}{working paper}{2026}{0}{--}
+\cirow{glover2023}{preprint of 1 December 2022}{European J.\ Finance 29(18), 2075--2106}{2023-12}{0}{A}
+\cirow{lambertini2014}{EPFL working paper}{working paper}{2014-02}{5}{--}
+\cirow{alvarez2014}{NBER WP 20155}{working paper; a later paper by the same authors, AER 106(10), 2016, under another title, not read}{2014-05}{36 (+18)}{--}
+\cirow{federico2026}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{A}
+\cirow{bonaparte2011}{NBER WP 16957}{J.\ Monetary Econ.\ 59(8), 751--768}{2012-12}{29}{A*}
+\bottomrule
+\end{longtable}
+\normalsize
 
 \section{What the paper adds to the three approaches}
 \label{sec:novelty}

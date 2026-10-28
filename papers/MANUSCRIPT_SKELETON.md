@@ -162,6 +162,17 @@ Lists are comma-separated. A Lean name is fully qualified,
    - It holds only papers that were read.
    - Below the table, one sentence names every paper that is cited elsewhere
      but not read, and says that every claim made about them is unverified.
+   - **Papers cited.** A table of citations (label `tab:citations`), one
+     `\cirow{bib key}{version read}{published as}{date}{citations}{ABDC 2025}`
+     per paper the manuscript cites and no other. Citations are the count of the
+     OpenAlex record of the published (or working-paper) version, with the
+     counts of the records of other versions in brackets, `662 (+266)`, and
+     the retrieval date stated above the table; the date is the printed issue
+     registered with Crossref. The ABDC column is the journal's rating in the
+     2025 ABDC list in `papers/journal_rankings/`, matched by ISSN, `--` for a
+     working paper, or `not listed (...)`. No impact factor (author,
+     28 October 2026). A fetch script writes the counts to a JSON file the
+     checker reads. Skeleton only; the submitted version drops it.
 4. **Conclusions.** A short paragraph explains the two tables that follow.
    - **Table 6** holds the conclusions that rest on model rows and on papers
      read in full.
@@ -200,7 +211,7 @@ The appendices follow the conclusions.
 
 ### 4.3 What the checker enforces
 
-`checks/verify_manuscript.py` applies eight rules.
+`checks/verify_manuscript.py` applies ten rules.
 
 | Rule | Requirement |
 |---|---|
@@ -212,6 +223,8 @@ The appendices follow the conclusions.
 | MS-6 | Plain English is at most 30% of every proof, counted as prose words over prose words plus mathematical tokens. |
 | MS-7 | Assumption rows point to model rows only, and every model row rests on at least one assumption. |
 | MS-8 | Player rows point to model or literature rows only. |
+| MS-9 | Every section and table of the skeleton is present, found by its label. |
+| MS-10 | The table of citations has exactly one row per cited bib key; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. |
 
 Each rule also runs on a well-formed sample, which it must accept, and on a
 faulty sample, which it must reject. A rule that cannot fail measures nothing.

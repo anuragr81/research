@@ -8,10 +8,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIT = os.path.join(os.path.dirname(ROOT), "lit")
 # Every section and table of the skeleton, by label.
 REQUIRED = ["sec:intro", "tab:headlines", "sec:model", "tab:players", "tab:assumptions",
-            "tab:results", "sec:literature", "tab:literature", "sec:conclusions",
+            "tab:results", "sec:literature", "tab:literature", "tab:citations", "sec:conclusions",
             "tab:concl", "tab:pending", "app:proofs", "app:evidence", "app:terms",
             "tab:terms", "app:scope", "app:refuted"]
 PROSE_LIMIT = 0.30
+# The table of citations (MS-10): counts fetched by checks/fetch_citations.py,
+# ratings read from the ABDC list the author supplied.
+CITATIONS = os.path.join(ROOT, "citations.json")
+ABDC = os.path.join(ROOT, "..", "..", "journal_rankings", "ABDC-JQL-2025-v3-210926.xlsx")
 results = []
 
 
@@ -142,7 +146,61 @@ def prose_ratio(body):
     return (ptok / total if total else 0.0), ptok, mtok
 
 
-def analyse(tex, lean, bibs, lit):
+def abdc_index(path):
+    """ISSN -> 2025 rating, from the 2025 sheet of the ABDC list (cells carry trailing whitespace)."""
+    import openpyxl
+    ws = openpyxl.load_workbook(path, read_only=True)["2025 JQL"]
+    idx = {}
+    for r in ws.iter_rows(min_row=9, values_only=True):
+        if r[1]:
+            for i in (3, 4):
+                if r[i]:
+                    idx[str(r[i]).strip()] = str(r[7]).strip()
+    return idx
+
+
+def cited_keys(tex):
+    keys = set()
+    for m in re.finditer(r"\\cite(?:t|p|alt|author|year)?\*?(?:\[[^\]]*\])*\{([^{}]*)\}", tex):
+        keys |= {k.strip() for k in m.group(1).split(",") if k.strip() and not k.strip().startswith("#")}
+    return keys
+
+
+def citation_problems(tex, cit, abdc):
+    """MS-10. Every cited key has exactly one row in the table of citations and no other key has one; each
+    row's count is the OpenAlex count of the record it names, with the other versions' counts in brackets
+    when there are any; each row's ABDC rating is the 2025 rating of the journal's ISSN, or -- or
+    'not listed ...' when the ISSN is not in the 2025 list."""
+    rows = macro_calls(tex, "cirow", 6)
+    cited = cited_keys(tex) | {r[1].strip() for r in macro_calls(tex, "lrow", 6)}
+    keys = [r[0].strip() for r in rows]
+    prob = []
+    if not rows:
+        prob.append("no table of citations")
+    prob += [f"{k} cited, no row" for k in sorted(cited - set(keys))]
+    prob += [f"{k} has a row, not cited" for k in sorted(set(keys) - cited)]
+    prob += [f"{k} has {keys.count(k)} rows" for k in sorted(set(keys)) if keys.count(k) > 1]
+    for r in rows:
+        key, count, rating = r[0].strip(), r[4].strip(), r[5].strip()
+        d = cit.get("papers", {}).get(key)
+        if d is None:
+            prob.append(f"{key} not in citations.json")
+            continue
+        main, others = d["main"]["cites"], d["others_cites"]
+        want = f"{main} (+{others})" if others else f"{main}"
+        if count != want:
+            prob.append(f"{key} count {count!r}, citations.json gives {want!r}")
+        hit = next((abdc[i] for i in d["main"].get("issn") or [] if i in abdc), None)
+        if hit is not None and rating != hit:
+            prob.append(f"{key} ABDC {rating!r}, the 2025 list gives {hit!r}")
+        if hit is None and not (rating == "--" or rating.startswith("not listed")):
+            prob.append(f"{key} ABDC {rating!r}, but its ISSN is not in the 2025 list")
+        if (d.get("abdc_2025") or None) != hit:
+            prob.append(f"{key} citations.json rating {d.get('abdc_2025')!r} against the list {hit!r}")
+    return prob
+
+
+def analyse(tex, lean, bibs, lit, cit=None, abdc=None):
     tex = strip_comments(tex)
     krows = macro_calls(tex, "krow", 4)
     prows = macro_calls(tex, "prow", 6)
@@ -222,6 +280,9 @@ def analyse(tex, lean, bibs, lit):
             over.append((pid, round(ratio, 3), p, m))
     out["MS-6"] = (not over, f"proofs above {PROSE_LIMIT:.0%} prose {over}")
 
+    cprob = citation_problems(tex, cit or {}, abdc or {})
+    out["MS-10"] = (not cprob, f"{cprob}")
+
     labels = set(re.findall(r"\\label\{([^{}]*)\}", tex))
     absent = [l for l in REQUIRED if l not in labels]
     out["MS-9"] = (not absent, f"sections or tables missing {absent}")
@@ -237,6 +298,8 @@ def analyse(tex, lean, bibs, lit):
 FIX_LEAN = {"Fixture.flat_posterior"}
 FIX_BIBS = {"Fixture2000"}
 FIX_LIT = {"Fixture2000": "The marker carries no information about class within a group."}
+FIX_CIT = {"papers": {"Fixture2000": {"main": {"cites": 7, "issn": ["0000-0001"]}, "others_cites": 2, "abdc_2025": "A"}}}
+FIX_ABDC = {"0000-0001": "A"}
 
 GOOD = r"""
 \krow{K1}{h}{M1}{s}
@@ -245,6 +308,7 @@ GOOD = r"""
 \mrow{M1}{c}{$x$}{Fixture.flat_posterior}
 \lrow{L1}{Fixture2000}{w}{The marker carries no information about class within a group.}{12}{M1}
 \crow{C1}{s}{M1, L1}
+\cirow{Fixture2000}{r}{p}{2000}{7 (+2)}{A}
 \begin{mproof}{M1}{Fixture.flat_posterior}
 Then \[ \frac{\ell(c)\pi(c)}{\sum_{c'} \ell(c')\pi(c')} = \pi(c) \] for every $c \in \mathcal{C}$.
 \end{mproof}
@@ -258,6 +322,8 @@ BAD = r"""
 \mrow{M1}{c}{$x$}{Fixture.no_such_theorem}
 \lrow{L1}{Fixture2000}{w}{A sentence the paper never printed.}{12}{M1}
 \crow{C1}{s}{X5}
+\cirow{Fixture2000}{r}{p}{2000}{9}{B}
+\cirow{Fixture1999}{r}{p}{1999}{0}{--}
 \begin{mproof}{M1}{Fixture.no_such_theorem}
 This proof talks through every step in words and uses almost no symbols at all, so
 a reader learns the argument from sentences rather than from expressions, which is
@@ -280,7 +346,11 @@ tex = re.sub(r"\\input\{([^{}]*)\}",
              lambda m: open(os.path.join(ROOT, m.group(1) + ("" if m.group(1).endswith(".tex") else ".tex"))).read()
              if os.path.exists(os.path.join(ROOT, m.group(1) + ("" if m.group(1).endswith(".tex") else ".tex"))) else "",
              tex)
-real, counts = analyse(tex, lean, bibs, lit)
+import json  # noqa: E402
+cit = json.load(open(CITATIONS)) if os.path.exists(CITATIONS) else {}
+abdc = abdc_index(ABDC) if os.path.exists(ABDC) else {}
+print(f"      citations.json: {len(cit.get('papers', {}))} papers, retrieved {cit.get('retrieved')}; ABDC 2025 ISSNs: {len(abdc)}")
+real, counts = analyse(tex, lean, bibs, lit, cit, abdc)
 print(f"      rows in wealth_garch_theory.tex: {counts}")
 names = {"MS-1": "row IDs well formed and unique",
          "MS-2": "introduction rows point to model rows only",
@@ -290,15 +360,16 @@ names = {"MS-1": "row IDs well formed and unique",
          "MS-6": f"plain English at most {PROSE_LIMIT:.0%} of every proof",
          "MS-7": "assumption rows point to model rows, and every model row rests on one",
          "MS-8": "player rows point to model or literature rows only",
-         "MS-9": "every section and table of the skeleton is present"}
+         "MS-9": "every section and table of the skeleton is present",
+         "MS-10": "the table of citations covers every cited paper, with counts and ABDC ratings from their sources"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
-good, _ = analyse(GOOD, FIX_LEAN, FIX_BIBS, FIX_LIT)
-bad, _ = analyse(BAD, FIX_LEAN, FIX_BIBS, FIX_LIT)
+good, _ = analyse(GOOD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC)
+bad, _ = analyse(BAD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC)
 for k in sorted(good):
     check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])
