@@ -1,0 +1,50 @@
+% MEASUREMENT_MAP.tex of the enhancement paper (enhancement/ENHANCEMENT.tex).
+% Created 25 October 2026. One row per object, written only through \grow:
+%   \grow{ID}{symbol}{name}{represents}{directly observed}{obtained how}
+% "Obtained how" begins with Recorded, Computed, Assumed, Never observed or
+% A device. Directly observed is Yes exactly when it begins with Recorded.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\fl}{\underline{k}}
+\newcommand{\grow}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\ \addlinespace}
+
+\title{Measurement Map of the Enhancement Paper}
+\date{25 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.6cm}P{1.4cm}P{2.4cm}P{4.2cm}P{1.0cm}P{5.0cm}}
+\toprule ID & Symbol & Name & Represents & Directly observed & Obtained how \\ \midrule \endhead
+\grow{G1}{$k$}{capital ratio}{Total capital, tier 1 plus tier 2, over risk-weighted assets.}{Yes}{Recorded in the Call Report as \path{(RBCT1J+RBCT2)/RWAJT}, the FDIC fields defined in lit/fdic\_2026.}
+\grow{G2}{$\fl$}{floor}{The capital ratio at which the bank is closed in the model.}{No}{Assumed by A5 from the regulatory lines the sources find binding.}
+\grow{G3}{$R$}{reference ratio}{10.5\%, the ratio the facts are measured from.}{No}{Assumed, fixed in comparison/PREREG\_comparison.md.}
+\grow{G4}{$x$}{buffer}{The capital ratio less the floor.}{No}{Computed as $k-\fl$.}
+\grow{G5}{$\mu_i$}{mean earnings}{The mean of the bank's yearly earnings over risk-weighted assets, net of the riskless return on capital.}{No}{Computed over ten years of December reports, as replication/peura\_keppo\_2006.}
+\grow{G6}{$\sigma_i$}{earnings volatility}{The standard deviation of the same yearly earnings.}{No}{Computed over the same ten years.}
+\grow{G7}{$s_i$}{judged risk}{The volatility the buffer moves with in the model.}{No}{Assumed by A6, one of $\sigma_i$, $\sigma_{D,i}$ or the measures of E3.}
+\grow{G8}{$\rho$}{discount rate}{The bank's cost of equity.}{No}{Assumed at 4\% (A4).}
+\grow{G9}{$u_0$}{dividend barrier}{The buffer at which dividends are paid.}{No}{Computed by M2 from $\mu_i$, $s_i$ and $\rho$.}
+\grow{G10}{F1}{thin-buffer dividend share}{The share of quarters with dividends paid from a buffer over $R$ below $\sigma_i$.}{No}{Computed from the Call Report by comparison/facts.py and window.py.}
+\grow{G11}{F2}{far-above share}{The share of bank-quarters more than $4\sigma_i$ above $R$.}{No}{Computed by the same scripts.}
+\grow{G12}{$\sigma_{D,i}$}{book-capital volatility}{The standard deviation of yearly changes in the capital ratio.}{No}{Computed over ten years of December reports, comparison/book\_vol.py.}
+\grow{G13}{$\sigma_{B,i}$}{market judged risk}{Equity volatility times the mean capital ratio.}{No}{Computed from pinned daily prices, comparison/judged\_risk.py.}
+\grow{G14}{$\sigma_{A,i}$}{stress-test judged risk}{The stress-test decline converted by M4.}{No}{Computed from the Federal Reserve's published declines, lit/dfast\_2013 and lit/dfast\_2014.}
+\grow{G15}{$\sigma_{C,i}$}{own-loss judged risk}{The bank's worst nine-quarter decline converted by M4.}{No}{Computed from the Call Report, comparison/own\_loss.py.}
+\grow{G16}{$\sigma_{N,i}$}{do-nothing volatility}{The standard deviation of the change in Berger et al.'s do-nothing ratio.}{No}{Computed from the Call Report, comparison/do\_nothing.py.}
+\grow{G17}{size}{bank size}{The log of the bank's mean total assets.}{No}{Computed from the Call Report field \path{ASSET}.}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\end{document}

@@ -1,0 +1,359 @@
+% ENHANCEMENT.tex, the manuscript skeleton of the enhancement paper of
+% papers/wealth_garch. Created 25 October 2026 as pass 1 of the plan in
+% enhancement/TODO.md, following papers/MANUSCRIPT_SKELETON.md, with the parent
+% MANUSCRIPT.tex as the reference for the empirical rows. The author asked
+% for the write-up on 25 October 2026, after the 2025 hold-out.
+%
+% STRUCTURE THE CHECKER RELIES ON (enhancement/checks/verify_enhancement.py)
+%   Rows are written only through the seven row macros below, and proofs only
+%   through the mproof environment. IDs are K1, ... (introduction), P1, ...
+%   (players), A1, ... (assumptions), M1, ... (model), E1, ... (empirical),
+%   L1, ... (literature) and C1, ... (conclusions).
+%     \krow{ID}{headline}{model or empirical rows}{scope note}
+%     \prow{ID}{player}{choice faced}{how the model settles it}{in the literature}{rows}
+%     \arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}
+%     \mrow{ID}{claim in words}{statement in symbols}{Lean theorems}
+%     \erow{ID}{claim}{verdict}{model rows}{map rows}{evidence files}
+%     \lrow{ID}{bib key}{what we rely on}{verbatim quote}{page}{rows}
+%     \crow{ID}{statement}{model, literature or empirical rows}
+%     \begin{mproof}{model row}{Lean theorems} ... \end{mproof}
+%   Lean names are fully qualified names declared under lean/mathlib/. Map rows
+%   are the G rows of enhancement/MEASUREMENT_MAP.tex. Evidence paths are
+%   relative to papers/wealth_garch.
+%
+% RULES THE CHECKER ENFORCES
+%   The parent rules MS-1 to MS-7 (checks/verify_manuscript.py) with this
+%   file's map, and MS-8 (assumption rows point to model rows, and every model
+%   row rests on an assumption) and MS-9 (player rows point to model,
+%   empirical or literature rows). Every empirical row's results files are
+%   re-run on their pinned data and must reproduce exactly, each committed
+%   after the pre-registrations it names.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+
+\emergencystretch=1.5em
+\DeclareUnicodeCharacter{2019}{'}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,\do\/}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
+\newcommand{\rowref}[1]{#1}
+\newcommand{\unv}[1]{\textit{Unverified:} #1}
+\newcommand{\pend}[1]{\textit{Pending:} #1}
+
+\newcommand{\krow}[4]{#1 & #2 & \rowref{#3} & #4 \\ \addlinespace}
+\newcommand{\prow}[6]{#1 & #2 & #3 & #4 & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\arow}[6]{#1 & #2 & #3 & #4 & \rowref{#5} & #6 \\ \addlinespace}
+\newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
+\newcommand{\erow}[6]{#1 & #2 & #3 & \rowref{#4} & \rowref{#5} & \path{#6} \\ \addlinespace}
+\newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
+
+\newenvironment{mproof}[2]
+  {\subsection*{Proof of #1}\label{proof:#1}%
+   {\raggedright\noindent\textit{Lean:} \lean{#2}.\par}\smallskip}
+  {\par\hfill$\square$\par\medskip}
+
+\newcommand{\fl}{\underline{k}}
+
+\title{Bank Capital Buffers and the Floor They Guard}
+\date{Skeleton of 25 October 2026}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+\subsection{Question}
+
+Why does the standard dynamic model of bank capital put the buffers that US
+banks hold far below what they hold, and does a model that guards the floor
+regulation makes binding, with the risk that book capital carries, place them
+better?
+
+\subsection{Answer}
+
+The standard model, the dividend barrier of a bank whose capital moves with
+its own earnings and which fails at the legal minimum, predicts that banks pay
+dividends from thin buffers and almost never hold capital far above the
+reference ratio, and observed banks do the opposite in every window scored
+(E1). The buffers banks hold match that model only when the risk they guard
+against is about three times their earnings volatility (E2). Measures built
+from losses, the supervisor's stress-test decline and the bank's own worst
+decline, put that risk at about one times earnings volatility, and the
+market's equity volatility at about eight times (E3).
+
+A barrier model whose floor is the line the supervisor's restrictions start
+at, the well-capitalised ratio before 2010 and the minimum plus the
+conservation buffer after, and whose risk is the observed movement of book
+capital, beats the standard model on banks it had not been scored on (E4,
+E5), and on 2025, a year kept back from every choice (E6). It does not place
+the level of buffers on 2025, where it puts too few bank-quarters far above
+the reference ratio (E7). The floor enters the barrier model only as a shift
+of the buffer (M3), so the floor changes where the barrier sits in the ratio
+and not the barrier itself (M2).
+
+Two facts about buffers stay outside both models. Banks damp the movement of
+their own capital ratios by about a sixth through their capital actions (E8).
+Smaller banks hold larger buffers at the same risk, and neither access to a
+parent nor a listing accounts for it (E9).
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{6.0cm}P{1.6cm}P{7.6cm}}
+\caption{Headlines.}\label{tab:headlines}\\
+\toprule ID & Headline & Rows & Scope note \\ \midrule \endfirsthead
+\toprule ID & Headline & Rows & Scope note \\ \midrule \endhead
+\krow{K1}{The standard dividend-barrier model of bank capital fails both facts in every window, on US commercial banks 2005 to 2025.}{E1, E6, M2}{Scored on the two pre-registered facts only (the share of dividend quarters paid from a buffer below one earnings volatility over the reference ratio, and the share of bank-quarters more than four above it). Peura and Keppo report a shortfall in level themselves (L1).}
+\krow{K2}{Buffers imply a risk about three times earnings volatility, between the one times of loss-based measures and the eight times of the market.}{E2, E3}{Training window only, in the non-issuer barrier model. Risk scales, not mean capital shortfalls under a fixed scenario (L13).}
+\krow{K3}{A barrier model guarding the regulatory floor with book-capital risk beats the standard model out of sample and on a hold-out year.}{E4, E5, E6, M3}{Beats means a smaller sum of the two misses. The floor was set from sources after a floor near the reference ratio had been seen to work (E5, E6). It does not place the level of buffers on the hold-out (E7).}
+\krow{K4}{Banks' own capital actions damp the movement of their capital ratios, and smaller banks hold more capital at the same risk.}{E8, E9}{Description of observed data. The book-capital risk of K3 contains the damping, and removing it makes the model overshoot (E8).}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Model}\label{sec:model}
+
+\subsection{Players}
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{1.8cm}P{2.6cm}P{3.6cm}P{4.7cm}P{1.4cm}}
+\caption{Players.}\label{tab:players}\\
+\toprule ID & Player & Choice faced & How the model settles it & In the literature & Rows \\ \midrule \endfirsthead
+\toprule ID & Player & Choice faced & How the model settles it & In the literature & Rows \\ \midrule \endhead
+\prow{P1}{Bank}{When to pay dividends.}{Derived. The bank pays at the dividend barrier, the point of smooth fit (M2).}{Peura and Keppo's non-issuer bank, the case Milne and Whalley's buffer reduces to (L1, L3).}{M2, L1, L3}
+\prow{P2}{Supervisor}{Where to set the floor and when to restrict a bank.}{Taken as given. The floor is a rule (A5), with its post-2009 value from the conservation buffer (M5).}{Orozco and Rubio's well-capitalised threshold and its replacement after 2009 (L7, L8).}{M5, L7, L8}
+\prow{P3}{Deposit insurer}{How to price deposit insurance.}{Not modelled. The insurer is state, entering only through the floor banks guard.}{The lower assessment above the well-capitalised line is one reason banks guard it (L7).}{L7}
+\prow{P4}{Market}{How to value bank equity.}{Not modelled. The market enters only as one measure of the risk the bank guards against (E3).}{Craine and Martin find market capital moves far more than book capital (L12).}{E3, L12}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Assumptions}
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{3.6cm}P{4.2cm}P{1.8cm}P{1.0cm}P{3.6cm}}
+\caption{Assumptions.}\label{tab:assumptions}\\
+\toprule ID & Assumption & In plain English & Symbols & Model rows & Reason \\ \midrule \endfirsthead
+\toprule ID & Assumption & In plain English & Symbols & Model rows & Reason \\ \midrule \endhead
+\arow{A1}{Between dividend payments $dx_t=\mu_i\,dt+s_i\,dW_t$.}{The buffer over the floor drifts up with the bank's mean earnings and moves with the judged risk.}{$x$, $\mu_i$, $s_i$}{M1, M2}{Peura and Keppo's capital process (Appendix D, process).}
+\arow{A2}{Dividends are paid only at the barrier $u_0$, and no equity is issued.}{The bank pays out at the dividend barrier and never raises capital.}{$u_0$}{M2}{The non-issuer case, an upper bound on the buffer when issuance is costly (L3; Appendix D, issuance).}
+\arow{A3}{The bank is closed when $x_t=0$.}{The bank fails when the buffer over the floor is used up.}{$x$}{M1, M2, M3}{Closure at the floor (Appendix D, closure).}
+\arow{A4}{Dividends are discounted at $\rho=0.04$.}{The bank values dividends at the cost of equity of four percent a year.}{$\rho$}{M1}{Peura and Keppo's value (Appendix D, discounting).}
+\arow{A5}{$\fl=0.08$ in the baseline, and $\fl=0.10$ to 2009Q4 and $\fl=0.105$ from 2010Q1 in the enhanced model.}{The floor is the legal minimum in the baseline, and the well-capitalised line and then the minimum plus the conservation buffer in the enhanced model.}{$\fl$}{M3, M5}{The lines the sources find binding (L7, L8, L9; Appendix D, floor).}
+\arow{A6}{$s_i=\sigma_i$ in the baseline and $s_i=\sigma_{D,i}$ in the enhanced model.}{The judged risk is the earnings volatility in the baseline and the book-capital volatility in the enhanced model.}{$s_i$, $\sigma_i$, $\sigma_{D,i}$}{M1, M2, M4}{Appendix D, judged risk.}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Results}
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{4.2cm}P{5.0cm}P{4.2cm}P{0.9cm}}
+\caption{Model results.}\label{tab:model}\\
+\toprule ID & Claim & Statement & Lean & Proof \\ \midrule \endfirsthead
+\toprule ID & Claim & Statement & Lean & Proof \\ \midrule \endhead
+\mrow{M1}{The value equation has one positive and one negative root.}{$s\neq0$, $\rho>0$ $\Rightarrow$ $p=d_+(\mu,s,\rho)>0>m=d_-(\mu,s,\rho)$, both roots of $\tfrac12 s^2d^2+\mu d-\rho=0$.}{PeuraKeppo.char_eq, PeuraKeppo.dplus_pos, PeuraKeppo.dminus_neg}
+\mrow{M2}{The dividend barrier satisfies smooth fit and equals Milne and Whalley's buffer.}{$p>0>m$ $\Rightarrow$ $a_1e^{-pu_0}+a_2e^{-mu_0}=0$ at $u_0=\frac{2}{p-m}\log\frac{-m}{p}$, with $a_1>0>a_2$, and $\frac{1}{p-m}\log\frac{m^2}{p^2}=u_0$.}{PeuraKeppo.no_issue_barrier, PeuraKeppo.coeff_signs, MilneWhalley.buffer_eq_u0}
+\mrow{M3}{Raising the floor shifts the buffer and leaves its movements unchanged.}{$(C_t+d)-(C_0+d)=C_t-C_0$ for every $d$.}{MilneWhalley.buffer_shift_invariant}
+\mrow{M4}{A stress-test decline over nine quarters converts to a judged risk.}{$D/(z\sqrt{9/4})=D/(\tfrac32 z)$, and $m\le a\Rightarrow a-m\ge0$.}{StressTests.judged_sigma, StressTests.sqrt_horizon, StressTests.decline_of_rows}
+\mrow{M5}{After 2009 the floor is the reference ratio and lies above the well-capitalised line.}{$0.08+0.025=0.105$ and $0.10<0.105$.}{OrozcoRubio.basel3_floor_eq_R, OrozcoRubio.basel3_floor_above_pca}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Empirical analysis}\label{sec:empirical}
+
+Every row below is a results file that the checker re-runs on its pinned
+data, committed after the pre-registrations it names. F1 is the share of
+dividend quarters paid from a buffer below $\sigma_i$ over $R$, and F2 the
+share of bank-quarters more than $4\sigma_i$ above $R$ (G10, G11). The
+miss of a model is the sum of its two distances to the observed shares, in
+percentage points.
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{6.0cm}P{1.0cm}P{0.9cm}P{1.2cm}P{5.2cm}}
+\caption{Empirical rows.}\label{tab:empirical}\\
+\toprule ID & Claim & Verdict & Model rows & Map rows & Evidence \\ \midrule \endfirsthead
+\toprule ID & Claim & Verdict & Model rows & Map rows & Evidence \\ \midrule \endhead
+\erow{E1}{The baseline misses both facts in both windows. On 2015 to 2024 for the 61 largest banks it predicts F1 90.0\% against 4.8\% and F2 0.0\% against 61.6\%.}{holds}{M2}{G10, G11}{comparison/PREREG_comparison.md, comparison/PREREG_comparison_2.md, comparison/results_pk.md}
+\erow{E2}{In the non-issuer barrier model the training-window F2 of the 61 largest banks (48.0\%) is reached when the judged risk is about three times earnings volatility (42.8\% at three times, minimum 8\%).}{holds}{M2}{G6, G7, G11}{comparison/PREREG_comparison_6.md, comparison/PREREG_comparison_2.md, comparison/results_scale.md}
+\erow{E3}{Stress-test declines give a judged risk with median 0.99 times earnings volatility and the bank's own worst decline 1.00 times, equity volatility scaled by the capital ratio 7.75 times.}{holds}{M4}{G7, G13, G14, G15}{comparison/PREREG_comparison_7.md, comparison/PREREG_comparison_8.md, comparison/PREREG_comparison_9.md, comparison/PREREG_comparison_2.md, comparison/results_judged.md, comparison/PREREG_comparison_16.md, comparison/results_own_loss.md}
+\erow{E4}{With equity volatility as the judged risk the barrier model beats the baseline on 2015 to 2024 on the 17 stress-tested banks (miss 30.0 against 139.8) and on 18 further banks scored blind (32.8 against 149.3).}{holds}{M2}{G13, G10, G11}{comparison/PREREG_comparison_10.md, comparison/PREREG_comparison_7.md, comparison/PREREG_comparison_8.md, comparison/PREREG_comparison_9.md, comparison/results_test_judged.md, comparison/PREREG_comparison_12.md, comparison/PREREG_comparison_13.md, comparison/PREREG_comparison_14.md, comparison/results_extend.md}
+\erow{E5}{With book-capital volatility and a 10\% floor the barrier model beats the baseline on 26 banks scored blind on 2015 to 2024 (miss 15.2 against 149.2).}{holds}{M2, M3}{G2, G12, G10, G11}{comparison/PREREG_comparison_17.md, comparison/results_book_vol.md}
+\erow{E6}{The frozen model, with book-capital volatility and the floor of A5, beats the baseline on the 2025 hold-out for 42 banks (miss 23.3 against 182.4) and agrees on F1 (0.2\% against 1.6\%).}{holds}{M2, M3, M5}{G2, G12, G10, G11}{comparison/PREREG_comparison_20.md, comparison/results_holdout.md, comparison/results_frozen.md}
+\erow{E7}{The frozen model matches the level of buffers on the 2025 hold-out. It predicts F2 67.1\% against 89.1\% observed, 22.0 points low.}{fails}{M2, M3, M5}{G11}{comparison/PREREG_comparison_20.md, comparison/results_holdout.md}
+\erow{E8}{The capital ratio before the bank's own capital actions moves 1.19 times as much as the ratio after them (median, the 61 largest banks), and with that risk the model overshoots F2 (71.2\% against 48.0\%).}{holds}{M2}{G12, G16}{comparison/PREREG_comparison_19.md, comparison/results_do_nothing.md}
+\erow{E9}{Across banks of all sizes the median buffer falls with bank size (Spearman $-0.34$ and $-0.39$) and rises with risk ($+0.23$, $+0.26$). Neither model reproduces the size gradient, and stand-alone banks and banks without a listed parent hold no more than others of the same size.}{holds}{M2}{G4, G6, G17}{comparison/PREREG_comparison_17.md, comparison/results_book_vol.md, comparison/PREREG_comparison_18.md, comparison/results_access.md}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Literature}\label{sec:literature}
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{1.8cm}P{4.2cm}P{6.0cm}P{0.8cm}P{1.4cm}}
+\caption{Literature read.}\label{tab:literature}\\
+\toprule ID & Paper & What we rely on & Quote & Page & Rows \\ \midrule \endfirsthead
+\toprule ID & Paper & What we rely on & Quote & Page & Rows \\ \midrule \endhead
+\lrow{L1}{peura2006}{The baseline's own authors report it under-explains the level of capital (E1). Their fit used their own barriers, not common facts.}{The model falls somewhat short of explaining the level of capital held by banks.}{2188}{M2, C1}
+\lrow{L2}{peura2006}{Their best fit, on a subsample (E1 scores all banks).}{the model explains some 40\% of the variation in capital ratios across banks and 70\% of the average level of the capital buffer.}{2191}{C1}
+\lrow{L3}{milnewhalley2001}{The barrier without issuance is an upper bound on the buffer when issuance is costly (A2, M2).}{so the closed form solution represents an upper bound on the capital buffer.}{42}{M2}
+\lrow{L4}{berger2008}{Targets far above the regulatory line (E1, E2).}{choose target capital levels substantially above well-capitalized regulatory minima}{0}{C1}
+\lrow{L5}{berger2008}{Targets rise with risk and fall with size (E9).}{these targets increase with BHC risk but decrease with BHC size}{0}{C7}
+\lrow{L6}{berger2008}{Their explanations of the size gradient, offered and not separated (E9 tests one).}{Finally, bank capital ratios tend to be inversely related to asset size. This might reflect greater diversification, scale economies in risk management, and/or lower expected cost of raising new equity on short notice.}{7}{C7}
+\lrow{L7}{orozcorubio2025}{Banks guard the well-capitalised line before 2010 (A5). Their evidence, not ours.}{a significant discontinuity at the 10\% regulatory capital threshold, where banks receive benefits for exceeding it.}{1421}{M5, C3, C4}
+\lrow{L8}{orozcorubio2025}{The post-2009 floor (A5, M5).}{That is, this new buffer increases the minimum reg-ulatory capital to at least 10.5\%.}{1430}{M5}
+\lrow{L9}{orozcorubio2025}{The line that binds is 10\%, not 8\%, their reading of Gropp and Heider (L11).}{Our results align with the notion that capital is costly but suggest that the 10\% ratio is the relevant minimum, elucidat-ing why previous studies find weak evidence of binding capital requirements at the 8\% regulatory minimum}{1425}{M5}
+\lrow{L10}{orozcorubio2025}{Their design is local to the line, so the level of buffers far above it (F2) is not theirs.}{Our main sample is restricted to banks that reported regulatory capital between 8\% and 12\%.}{1427}{C3}
+\lrow{L11}{groppheider2009}{Regulation second order for large listed banks, tested at the Basel Tier 1 minimum (L9 answers).}{The paper shows that mispriced deposit insurance and capital regulation were of second order importance in determining the capital structure of large U.S. and European banks during 1991 to 2004.}{4}{C4}
+\lrow{L12}{crainemartin2017}{Book capital moves little, market capital much (E3). Theirs is dispersion across banks at one date (E8 is over time).}{Book value capital ratios hardly move in response to severe economic distress.}{1}{C2}
+\lrow{L13}{crainemartin2017}{The stress test and the market call for similar average changes in capital (K2 is a risk scale).}{is close to the average deviation for the market value measures (columns 5 and 6).}{14}{C2}
+\lrow{L14}{langmenno2026}{A buffer requirement above the minimum binds in theory (A5). A two-period model with no buffers far above it.}{Banks do not maintain voluntary capital buffers above the CBR}{18}{M5}
+\bottomrule
+\end{longtable}
+\end{center}
+
+Papers cited and not read are not used.
+
+\section{Conclusions}\label{sec:conclusions}
+
+Table~\ref{tab:conclusions} holds the conclusions that rest on model rows,
+empirical rows and papers read in full. Table~\ref{tab:pending} holds every
+claim that something is new and what each still waits on.
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{13.0cm}P{2.6cm}}
+\caption{Conclusions.}\label{tab:conclusions}\\
+\toprule ID & Statement & Rows \\ \midrule \endfirsthead
+\toprule ID & Statement & Rows \\ \midrule \endhead
+\crow{C1}{The standard dividend-barrier model of bank capital fails on US commercial banks because it guards the legal minimum with the bank's earnings volatility, and observed buffers sit where a risk three times larger would put them.}{E1, E2, L1}
+\crow{C2}{Neither loss-based measure, the stress test or the bank's own worst decline, supplies that risk, and the market's equity volatility overshoots it.}{E3, M4}
+\crow{C3}{Guarding the floor that regulation makes binding, with the movement of book capital as the risk, beats the standard model on banks and on a year it had not seen, without placing the level of buffers on that year.}{E4, E5, E6, E7, M3, L7, L8}
+\crow{C4}{The floor the enhanced model guards rests on sources rather than on fit, the well-capitalised line before 2010 and the minimum plus the conservation buffer after.}{M5, L7, L8, L9, L14}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\begin{center}\footnotesize
+\begin{longtable}{P{0.5cm}P{13.0cm}P{2.6cm}}
+\caption{Pending.}\label{tab:pending}\\
+\toprule ID & Statement & Rows \\ \midrule \endfirsthead
+\toprule ID & Statement & Rows \\ \midrule \endhead
+\crow{C5}{No paper read scores the dynamic models of bank capital against each other on common data with pre-registered facts. \pend{a citation search of Peura and Keppo and of Orozco and Rubio, beyond the web triage of comparison/NOVELTY\_20261025.md.}}{L1, L10}
+\crow{C6}{No paper read measures the risk scale observed buffers imply against loss-based and market measures. \pend{the same citation search.}}{E2, E3, L13}
+\crow{C7}{The size gradient of buffers survives controls for access to capital. \pend{a search of the bank capital structure literature on bank size since Gropp and Heider.}}{E9, L6}
+\bottomrule
+\end{longtable}
+\end{center}
+
+\bibliographystyle{plainnat}
+\bibliography{../refs}
+
+\appendix
+
+\section{Proofs}\label{app:proofs}
+
+\paragraph{Notation.} $x$ is the buffer over the floor, $\fl$ the floor,
+$R=0.105$ the reference ratio, $\mu_i$ and $\sigma_i$ the mean and the
+volatility of bank $i$'s yearly earnings, $s_i$ the judged risk, $\rho$ the
+discount rate, $p=d_+(\mu,s,\rho)$ and $m=d_-(\mu,s,\rho)$ the roots,
+$a_1=m/(pm-p^2)$, $a_2=p/(pm-m^2)$, $u_0$ the dividend barrier, $D$ a
+decline in the capital ratio and $z$ a normal quantile.
+
+\begin{mproof}{M1}{PeuraKeppo.char_eq, PeuraKeppo.dplus_pos, PeuraKeppo.dminus_neg}
+\[ d_\pm=\frac{-\mu\pm\sqrt{\mu^2+2\rho s^2}}{s^2},\qquad \tfrac12 s^2d_\pm^2+\mu d_\pm-\rho=0. \]
+With $\rho>0$, $\sqrt{\mu^2+2\rho s^2}>|\mu|$, so $d_+>0$ and $d_-<0$.
+\end{mproof}
+
+\begin{mproof}{M2}{PeuraKeppo.no_issue_barrier, PeuraKeppo.coeff_signs, MilneWhalley.buffer_eq_u0}
+\[ e^{(p-m)u_0}=\Big(\frac{-m}{p}\Big)^{2},\quad a_1e^{-pu_0}+a_2e^{-mu_0}=e^{-pu_0}\Big(a_1+a_2\frac{m^2}{p^2}\Big)=0, \]
+\[ a_1=\frac{m}{p(m-p)}>0>a_2=\frac{p}{m(p-m)},\qquad \frac{1}{p-m}\log\frac{m^2}{p^2}=\frac{2}{p-m}\log\frac{-m}{p}. \]
+\end{mproof}
+
+\begin{mproof}{M3}{MilneWhalley.buffer_shift_invariant}
+\[ (C_t+d)-(C_0+d)=C_t-C_0, \]
+so with $k_t=\fl+x_t$ a change $\fl\mapsto\fl+d$ moves $k_t$ by $d$ and leaves $x_t-x_0$, $u_0$ and the closure time $\inf\{t:x_t=0\}$ unchanged.
+\end{mproof}
+
+\begin{mproof}{M4}{StressTests.judged_sigma, StressTests.sqrt_horizon, StressTests.decline_of_rows}
+\[ \sqrt{9/4}=\tfrac32,\qquad \frac{D}{z\sqrt{9/4}}=\frac{D}{\tfrac32 z},\qquad m\le a\ \Rightarrow\ D=a-m\ge0. \]
+\end{mproof}
+
+\begin{mproof}{M5}{OrozcoRubio.basel3_floor_eq_R, OrozcoRubio.basel3_floor_above_pca}
+\[ 0.08+0.025=0.105=R,\qquad 0.10<0.08+0.025. \]
+\end{mproof}
+
+\section{Evidence and verification}\label{app:evidence}
+
+The Lean theorems are those of \path{lean/mathlib/}, built and audited by the
+parent bundle (\path{verify.sh}). The checker
+\path{enhancement/checks/verify_enhancement.py} applies MS-1 to MS-9 and
+re-runs every results file an empirical row cites.
+
+\paragraph{What Lean does not carry.} The Brownian motion of A1, the
+optimality of paying at $u_0$ (A2), and the simulation of the facts. The
+facts are computed on pinned data and reproduced exactly by the checker,
+which is the third class of evidence of this bundle.
+
+\paragraph{Illustrations.} No row rests on SymPy or sampling outside a
+pinned, reproduced results file.
+
+\section{Terminology}\label{app:terms}
+
+\begin{center}\footnotesize
+\begin{longtable}{P{4.0cm}P{2.0cm}P{9.6cm}}
+\toprule Term & Symbol & Meaning \\ \midrule
+capital ratio & $k$ & Total capital over risk-weighted assets (G1). \\
+floor & $\fl$ & The ratio at which the bank is closed in the model (G2). \\
+reference ratio & $R$ & 10.5\%, from which the facts are measured (G3). \\
+buffer & $x$ & The capital ratio less the floor (G4). \\
+earnings volatility & $\sigma_i$ & The volatility of the bank's yearly earnings over risk-weighted assets (G6). \\
+judged risk & $s_i$ & The volatility the buffer moves with in the model (G7). \\
+dividend barrier & $u_0$ & The buffer at which dividends are paid (G9). \\
+book-capital volatility & $\sigma_{D,i}$ & The standard deviation of yearly changes in the capital ratio (G12). \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Primitives and scope}\label{app:scope}
+
+\paragraph{Process.} A1 is Peura and Keppo's process for capital over the
+minimum, with the bank's own mean and volatility. M1 and M2 depend on it.
+
+\paragraph{Issuance.} A2 drops issuance. Milne and Whalley show the barrier
+without issuance bounds the buffer with costly issuance from above (L3), so
+the enhanced model's buffer is the largest the family gives. M2 depends on it.
+
+\paragraph{Closure.} A3 closes the bank at the floor. The facts are measured
+from $R$, not from the floor, so the floor moves the barrier in the ratio
+(M3) without changing the facts' yardstick.
+
+\paragraph{Discounting.} A4 takes Peura and Keppo's cost of equity of four
+percent. The training-window scale check (E2) reports lower values.
+
+\paragraph{Floor.} A5 is the author's choice of 25 October 2026, taken from
+Orozco and Rubio (L7, L8, L9) and Lang and Menno (L14). It was made after a
+floor near $R$ had been seen to work on 2015 to 2024, which is why the 2025
+hold-out (E6, E7) decides the frozen model.
+
+\paragraph{Judged risk.} A6 replaces the earnings volatility by the
+book-capital volatility, which includes the bank's own capital actions (E8).
+The alternatives scored and rejected, the stress-test decline, the own worst
+decline and the equity volatility, are E3.
+
+\end{document}
