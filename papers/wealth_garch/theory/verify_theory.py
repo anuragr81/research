@@ -124,9 +124,13 @@ def pin_problems(results_text, folder):
     return pins, bad
 
 
-res_md = os.path.join(SOLVE, "results_solve.md")
-pins, badpins = pin_problems(open(res_md).read(), SOLVE) if os.path.exists(res_md) else ([], ["results_solve.md"])
-check("TH-6 the solve's results file is pinned to the scripts as they now are (theory/solve/)",
+pins, badpins = [], []
+for res in ("results_solve.md", "results_noborrow.md"):
+    res_md = os.path.join(SOLVE, res)
+    p_, b_ = pin_problems(open(res_md).read(), SOLVE) if os.path.exists(res_md) else ([], [res])
+    pins += p_
+    badpins += b_ if p_ or b_ else [res]
+check("TH-6 the solve's results files are pinned to the scripts as they now are (theory/solve/)",
       pins and not badpins, f"stale or missing: {badpins}")
 
 check("TH-C3 a cited paper without a lit record is a gap",
