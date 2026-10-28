@@ -20,6 +20,12 @@ Bib key `daihuangkeppo2019`. Version read: chapter 2 and appendix of Huang's the
 | DHK-Q12 | 77 | These correspond to our model's cost parameter K = 0.20% | $K$ is set from the literature. |
 | DHK-Q13 | 30 | take the minimum equity-to-debt ratio κ as a constraint | The shareholders choose the barriers given the regulator's ratio. |
 | DHK-Q14 | 40 | Thus we skip it | Theorem 2.2.1(i) is not proved in the text. |
+| DHK-Q15 | 16 | We calibrate the two structural models to a sample of U.S. banks during 1993–2015. | US banks, a fully and a partially observed model. |
+| DHK-Q16 | 85 | The out-of-sample period is 2004–2015 | They test two versions of their model out of sample, year by year. |
+| DHK-Q17 | 86 | the partially observed model explains the out-of-sample variations substantially better than the fully observed model. | An out-of-sample comparison of two dynamic models on US banks, scored on equity value, dividends and recapitalisations, not on buffer facts. |
+| DHK-Q18 | 84 | the volatility of asset value in the partially observed model is 5.21%, which is significantly greater than the volatility in the fully observed model (3.11%). | The volatility behind reported accounts is larger than reported (`DaiHuangKeppo.hidden_share`). |
+| DHK-Q19 | 84 | they are able to hide about one-third of the true underlying asset volatility. | Their reading of DHK-Q18. |
+| DHK-Q20 | 84 | the fully observed model gives an average dividend barrier of 11.22%, and the corresponding number for the partially observed model is 12.58%, which is closer to the sample average equity to debt ratio of 13.51%. | The larger volatility brings the barrier closer to the observed level, the direction of the enhancement paper's E2. |
 
 ## Lean results
 
@@ -32,6 +38,8 @@ Bib key `daihuangkeppo2019`. Version read: chapter 2 and appendix of Huang's the
 | `DaiHuangKeppo.table21_det_neg` | The printed $(\Delta,K)$ block has determinant $0.0808\cdot(-0.0543)-0.0017\cdot(-0.1444)<0$. |
 | `DaiHuangKeppo.control_proportional_columns_singular` | Columns proportional to each other give a zero determinant. |
 | `DaiHuangKeppo.table21_det_value` | The elasticity determinant of Table 2.1 in $(\Delta,K)$ is $-103549/25000000$. |
+| `DaiHuangKeppo.hidden_share` | $1/3<(5.21-3.11)/5.21$ and $5.21/3.11<1.7$. |
+| `DaiHuangKeppo.control_hidden_not_half` | $(5.21-3.11)/5.21<1/2$. |
 
 ## Readings recorded
 

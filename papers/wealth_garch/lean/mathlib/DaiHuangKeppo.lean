@@ -51,4 +51,9 @@ theorem control_proportional_columns_singular :
     (0.0808 : ℝ) * (2 * -0.1444) - (2 * 0.0808) * (-0.1444) = 0 := by
   ring
 
+theorem hidden_share : (1 : ℝ) / 3 < (5.21 - 3.11) / 5.21 ∧ (5.21 : ℝ) / 3.11 < 1.7 := by
+  constructor <;> norm_num
+
+theorem control_hidden_not_half : ((5.21 : ℝ) - 3.11) / 5.21 < 1 / 2 := by norm_num
+
 end DaiHuangKeppo

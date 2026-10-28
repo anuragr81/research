@@ -40,6 +40,10 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-Q32 | 2184 | .5 1.00 .9 3.7 2.8 27 122 | Table 2 row $(\Delta,K)=(0.5,1.00)$: $u_1=0.9$, $u_2=3.7$, the base of the high-cost finite differences. |
 | PK-Q33 | 2184 | 1 1.00 .6 3.8 3.2 24 291 | Row $(1,1.00)$: $u_1=0.6$, $u_2=3.8$. The delay lowers the issue barrier at high $K$. |
 | PK-Q34 | 2184 | .5 .50 1.1 3.5 2.4 17 57 | Row $(0.5,0.50)$: $u_1=1.1$, $u_2=3.5$. |
+| PK-Q35 | 2190 | For large banks (average assets over 40 billion US$), the average capital buffer of 3.8% implies a volatility of 1.06%. | Their implied volatility for large banks, against an estimate of 0.82% (p. 2191): a multiple of about 1.3 (`PeuraKeppo.implied_multiple_large`). The idea of an implied volatility is theirs; the enhancement paper's E2 measures it again on common data. |
+| PK-Q36 | 2190 | For small banks, the average capital buffer of 5.3% implies a volatility of 1.19%. | Against an estimate of 1.06%, a multiple of about 1.1 (`PeuraKeppo.implied_multiple_small`). |
+| PK-Q37 | 2190 | suggesting that larger banks hold less capital than small banks, even after controlling for possible differences in their | The size gradient beyond volatility; they assign it to capital-market imperfections, letting only large banks recapitalise. |
+| PK-Q38 | 2190 | implying that the required volatility adjustment is, in fact, higher for large banks | Once only large banks may recapitalise. |
 
 ## Lean results
 
@@ -59,6 +63,9 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | `PeuraKeppo.control_delay_lowers_trigger_at_high_K` | At $K=1.00$ a longer delay lowers $u_1$ (0.9 to 0.6), so the pattern is local. |
 | `PeuraKeppo.table2_det_value` | The determinant of $(u_2,u_1)$ in $(\Delta,K)$ from Table 2's printed differences at $(0.08,0.10)$ is $-29/100$. |
 | `PeuraKeppo.table2_det_high_K` | The same determinant at $(0.5,1.00)$ is $+1/25$; the sign changes across the table. |
+| `PeuraKeppo.implied_multiple_large` | $1.29<1.06/0.82<1.30$. |
+| `PeuraKeppo.implied_multiple_small` | $1.12<1.19/1.06<1.13$. |
+| `PeuraKeppo.control_implied_not_three` | $1.06/0.82<3$: their multiple is far below the enhancement paper's three. |
 
 ## Readings recorded
 
