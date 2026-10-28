@@ -2,8 +2,8 @@
 whose tables (map_tables.tex) Appendix C of enhancement/ENHANCEMENT.tex includes. The rules
 are those of the theory paper's checker (theory/checks/verify_measurement_map.py), MM-1 to
 MM-12, with the Lean declarations read from lean/mathlib and with MM-11 holding every name
-either to the parent terminology table (Agreed or In use) or to PROPOSED, the names offered
-to the author and not yet agreed.
+either to the parent terminology table (Agreed or In use), to AGREED_HERE, the names the author
+agreed for this paper on 28 October 2026, or to PROPOSED, names offered and not yet agreed.
 """
 import glob
 import os
@@ -15,11 +15,12 @@ ROOT = os.path.dirname(HERE)
 PARENT = os.path.dirname(ROOT)
 LEAN_DIR = os.path.join(PARENT, "lean", "mathlib")
 STATUS = ("Recorded", "Elicited", "Computed", "Assumed", "Never observed", "A device")
-PROPOSED = {"capital ratio", "regulatory floor", "mean earnings", "earnings volatility", "judged risk",
+AGREED_HERE = {"capital ratio", "regulatory floor", "mean earnings", "earnings volatility", "judged risk",
             "book-capital volatility", "equity volatility", "mean capital ratio", "market judged risk",
             "stress-test decline", "normal quantile", "stress-test judged risk", "own-loss judged risk",
             "do-nothing volatility", "bank size", "buffer over the floor", "brownian motion", "positive root",
             "negative root", "barrier coefficients", "thin-buffer dividend share", "far-above share"}
+PROPOSED = set()
 ALTERNATIVES = {
     r"\breference ratio\b": "reference",
     r"\bdeposit insurer\b": "insurer",
@@ -246,7 +247,7 @@ def analyse(tex, terms, lean, arows, agreed):
     out["MM-10"] = (bool(arows) and not maths and not unnamed and not undeclared,
                     f"readings with mathematics {maths}; map names missing {unnamed}; "
                     f"Lean names not declared {undeclared}")
-    foreign = sorted(n for n in names if n.lower() not in agreed and n.lower() not in PROPOSED)
+    foreign = sorted(n for n in names if n.lower() not in agreed | AGREED_HERE and n.lower() not in PROPOSED)
     out["MM-11"] = (bool(rows) and not foreign, f"names neither agreed in the parent map nor proposed {foreign}")
     return out, len(rows)
 
@@ -304,7 +305,7 @@ names = {"MM-1": "every row has six non-empty fields and a plain-English name",
          "MM-8": "no symbol names two rows",
          "MM-9": "every symbol of every assumption is a symbol of the map",
          "MM-10": "every plain-English reading is free of mathematics, uses the map's names and cites declared theorems",
-         "MM-11": "every name is agreed in the parent map or proposed to the author"}
+         "MM-11": "every name is agreed in the parent map or for this paper, or proposed to the author"}
 for k in sorted(real, key=lambda s: int(s.split('-')[1])):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)

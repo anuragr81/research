@@ -19,6 +19,10 @@ Lean under lean/mathlib, records under lit/, results files under comparison/.
   near R had been seen to work, and the 2025 hold-out decides the frozen
   model (comparison/results_holdout.md).
 - 2026-10-25. Scored facts are F1 and F2 only (comparison/PREREG_comparison_11.md).
+- 2026-10-28. The author agreed the 22 names of the map not taken from the
+  parent terminology table (AGREED_HERE in checks/verify_measurement_map.py),
+  among them buffer over the floor, regulatory floor and judged risk, chosen
+  so as not to collide with the parent's capital buffer and solvency floor.
 
 ## PLAN
 
@@ -43,10 +47,6 @@ Lean under lean/mathlib, records under lit/, results files under comparison/.
   names its recovery formula as a Lean theorem (lean/mathlib/EnhancementMap.lean
   and earlier files); checks/verify_measurement_map.py applies MM-1 to MM-12,
   adapted from the theory paper's. Empirical rows cite map entries by name.
-- Names awaiting the author's agreement: the 22 in PROPOSED of
-  checks/verify_measurement_map.py. The seven others (bank, supervisor,
-  insurer, investors, discount rate, dividend barrier, reference) are agreed
-  names of the parent terminology table.
 - The measure of risk in A6 contains banks' own smoothing (E8); a model that
   separates the shock from the bank's response is the natural next model.
 - The constant margin smaller banks hold (comparison/results_do_nothing.md)
