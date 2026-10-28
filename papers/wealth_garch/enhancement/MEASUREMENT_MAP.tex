@@ -1,50 +1,57 @@
-% MEASUREMENT_MAP.tex of the enhancement paper (enhancement/ENHANCEMENT.tex).
-% Created 25 October 2026. One row per object, written only through \grow:
-%   \grow{ID}{symbol}{name}{represents}{directly observed}{obtained how}
-% "Obtained how" begins with Recorded, Computed, Assumed, Never observed or
-% A device. Directly observed is Yes exactly when it begins with Recorded.
+% MEASUREMENT_MAP.tex, the measurement map of the enhancement paper, built
+% under papers/MANUSCRIPT_SKELETON.md, section 4.5. The three tables live in
+% map_tables.tex, which this document and Appendix C of ENHANCEMENT.tex both
+% include, so the manuscript and the map cannot differ. Rows are written only
+% through \mm{symbol}{name}{type}{represents}{directly observed}{obtained how},
+% and checks/verify_measurement_map.py applies rules MM-1 to MM-12 to them.
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{mathptmx}
+\usepackage{microtype}
 \usepackage[a4paper,margin=1.8cm]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\emergencystretch=1.5em
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\urlstyle{tt}
+\makeatletter
+\g@addto@macro\UrlBreaks{\do\.\do\_\do\,\do\-}
+\makeatother
+\newcommand{\lean}[1]{\path{#1}}
 \newcommand{\fl}{\underline{k}}
-\newcommand{\grow}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\ \addlinespace}
+\newcommand{\mm}[6]{#1 & \textbf{#2} & #3 & #4 & #5 & #6 \\ \addlinespace}
 
 \title{Measurement Map of the Enhancement Paper}
-\date{25 October 2026}
+\author{}
+\date{Companion to \path{enhancement/ENHANCEMENT.tex}, 28 October 2026}
 
 \begin{document}
 \maketitle
 
-\begin{center}\footnotesize
-\begin{longtable}{P{0.6cm}P{1.4cm}P{2.4cm}P{4.2cm}P{1.0cm}P{5.0cm}}
-\toprule ID & Symbol & Name & Represents & Directly observed & Obtained how \\ \midrule \endhead
-\grow{G1}{$k$}{capital ratio}{Total capital, tier 1 plus tier 2, over risk-weighted assets.}{Yes}{Recorded in the Call Report as \path{(RBCT1J+RBCT2)/RWAJT}, the FDIC fields defined in lit/fdic\_2026.}
-\grow{G2}{$\fl$}{floor}{The capital ratio at which the bank is closed in the model.}{No}{Assumed by A5 from the regulatory lines the sources find binding.}
-\grow{G3}{$R$}{reference ratio}{10.5\%, the ratio the facts are measured from.}{No}{Assumed, fixed in comparison/PREREG\_comparison.md.}
-\grow{G4}{$x$}{buffer}{The capital ratio less the floor.}{No}{Computed as $k-\fl$.}
-\grow{G5}{$\mu_i$}{mean earnings}{The mean of the bank's yearly earnings over risk-weighted assets, net of the riskless return on capital.}{No}{Computed over ten years of December reports, as replication/peura\_keppo\_2006.}
-\grow{G6}{$\sigma_i$}{earnings volatility}{The standard deviation of the same yearly earnings.}{No}{Computed over the same ten years.}
-\grow{G7}{$s_i$}{judged risk}{The volatility the buffer moves with in the model.}{No}{Assumed by A6, one of $\sigma_i$, $\sigma_{D,i}$ or the measures of E3.}
-\grow{G8}{$\rho$}{discount rate}{The bank's cost of equity.}{No}{Assumed at 4\% (A4).}
-\grow{G9}{$u_0$}{dividend barrier}{The buffer at which dividends are paid.}{No}{Computed by M2 from $\mu_i$, $s_i$ and $\rho$.}
-\grow{G10}{F1}{thin-buffer dividend share}{The share of quarters with dividends paid from a buffer over $R$ below $\sigma_i$.}{No}{Computed from the Call Report by comparison/facts.py and window.py.}
-\grow{G11}{F2}{far-above share}{The share of bank-quarters more than $4\sigma_i$ above $R$.}{No}{Computed by the same scripts.}
-\grow{G12}{$\sigma_{D,i}$}{book-capital volatility}{The standard deviation of yearly changes in the capital ratio.}{No}{Computed over ten years of December reports, comparison/book\_vol.py.}
-\grow{G13}{$\sigma_{B,i}$}{market judged risk}{Equity volatility times the mean capital ratio.}{No}{Computed from pinned daily prices, comparison/judged\_risk.py.}
-\grow{G14}{$\sigma_{A,i}$}{stress-test judged risk}{The stress-test decline converted by M4.}{No}{Computed from the Federal Reserve's published declines, lit/dfast\_2013 and lit/dfast\_2014.}
-\grow{G15}{$\sigma_{C,i}$}{own-loss judged risk}{The bank's worst nine-quarter decline converted by M4.}{No}{Computed from the Call Report, comparison/own\_loss.py.}
-\grow{G16}{$\sigma_{N,i}$}{do-nothing volatility}{The standard deviation of the change in Berger et al.'s do-nothing ratio.}{No}{Computed from the Call Report, comparison/do\_nothing.py.}
-\grow{G17}{size}{bank size}{The log of the bank's mean total assets.}{No}{Computed from the Call Report field \path{ASSET}.}
-\bottomrule
-\end{longtable}
-\end{center}
+\section{Scope}
+
+The map names every object of the model of the enhancement paper once, and the
+manuscript uses these names and no others. Seven names are those of the parent
+bundle's terminology table, bank, supervisor, insurer, investors, discount
+rate, dividend barrier and reference. The others are proposed to the author and
+not yet agreed. Inputs are what the model takes as given, internal objects are
+built from the inputs inside the model, and outputs are what the rows predict.
+Directly observed is Yes when a record of the world gives the object without
+any computation, which is when the last column begins with Recorded, and No
+otherwise. The other status words are Elicited, Computed, Assumed, Never
+observed and A device. Every computed object names its recovery formula and
+the Lean theorem that carries it, in \path{lean/mathlib/}. The data are the
+FDIC Call Report files of \path{common_data/}, and the facts are those fixed in
+\path{comparison/PREREG_comparison.md}. In the assumptions, the letter $d$ is
+the differential, $t$ is time and $i$ indexes banks, and none of them is an
+object of the model.
+
+\input{map_tables}
 
 \end{document}

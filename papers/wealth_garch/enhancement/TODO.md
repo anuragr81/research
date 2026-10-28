@@ -36,9 +36,17 @@ Lean under lean/mathlib, records under lit/, results files under comparison/.
 
 ## Open
 
-- MM rules of the skeleton specification beyond MAP-1 and MAP-2 (every
-  Terminology term a map name, colons in the map's prose) are not yet
-  checked.
+- 28 October 2026: the measurement map rebuilt under section 4.5 of
+  papers/MANUSCRIPT_SKELETON.md (it had followed the parent map's \grow
+  layout and checked only part of the rules): three tables in map_tables.tex,
+  included by Appendix C and by MEASUREMENT_MAP.tex; every computed object
+  names its recovery formula as a Lean theorem (lean/mathlib/EnhancementMap.lean
+  and earlier files); checks/verify_measurement_map.py applies MM-1 to MM-12,
+  adapted from the theory paper's. Empirical rows cite map entries by name.
+- Names awaiting the author's agreement: the 22 in PROPOSED of
+  checks/verify_measurement_map.py. The seven others (bank, supervisor,
+  insurer, investors, discount rate, dividend barrier, reference) are agreed
+  names of the parent terminology table.
 - The measure of risk in A6 contains banks' own smoothing (E8); a model that
   separates the shock from the bank's response is the natural next model.
 - The constant margin smaller banks hold (comparison/results_do_nothing.md)

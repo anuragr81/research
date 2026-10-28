@@ -1,0 +1,76 @@
+\subsection{Inputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.4cm}P{2.3cm}P{2.2cm}P{3.6cm}P{1.2cm}P{4.5cm}@{}}
+\caption{Inputs of the model.}\label{tab:inputs}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$k$}{capital ratio}{A real number above zero.}{Total capital, tier 1 plus tier 2, over risk-weighted assets, for each bank and quarter.}{No}{Computed as \path{(RBCT1J+RBCT2)/RWAJT} from the Call Report, fields defined in the record lit/fdic\_2026. The ratio is free of the unit of account (\lean{EnhancementMap.capital_ratio_units}).}
+\mm{$\fl$}{regulatory floor}{A real number between zero and one.}{The capital ratio at which the bank is closed in the model (A3, A5).}{No}{Assumed by A5 at the lines the sources find binding, 8\% for the baseline, and 10\% to 2009Q4 and 10.5\% from 2010Q1 for the enhanced model (M5).}
+\mm{$R$}{reference}{A real number, 0.105.}{The ratio the facts are measured from.}{No}{Assumed, fixed in comparison/PREREG\_comparison.md before any fact was computed.}
+\mm{$\mu_i$}{mean earnings}{A real number.}{The mean of the bank's yearly net income over the previous year's risk-weighted assets, less the riskless return on its capital ratio (A1).}{No}{Computed over ten years of December reports by the code of replication/peura\_keppo\_2006, each year as net income over risk-weighted assets less the riskless rate times the capital ratio (\lean{EnhancementMap.net_earnings}).}
+\mm{$\sigma_i$}{earnings volatility}{A positive real number.}{The standard deviation of the same yearly earnings (A6).}{No}{Computed over the same ten years from the same yearly terms (\lean{EnhancementMap.net_earnings}).}
+\mm{$\rho$}{discount rate}{A positive real number, 0.04.}{The rate at which the bank discounts dividends, its cost of equity (A4).}{No}{Assumed at Peura and Keppo's value.}
+\mm{$s_i$}{judged risk}{A positive real number.}{The volatility the buffer over the floor moves with in the model (A1, A6).}{No}{Assumed by A6 to be the earnings volatility or the book-capital volatility, or one of the measures of E3.}
+\mm{$\sigma_{D,i}$}{book-capital volatility}{A positive real number.}{The standard deviation of the yearly change in the capital ratio over ten years (A6).}{No}{Computed by comparison/book\_vol.py. The change is the same for the capital ratio and for the buffer over the floor (\lean{EnhancementMap.change_free_of_floor}).}
+\mm{$\sigma_{E,i}$}{equity volatility}{A positive real number.}{The annualised standard deviation of daily log changes of the parent's share price.}{No}{Computed from pinned daily prices by comparison/judged\_risk.py as $\sqrt{252}$ times the daily standard deviation (\lean{EnhancementMap.annualise}).}
+\mm{$X_i$}{mean capital ratio}{A real number above zero.}{The mean of the bank's capital ratio over ten December reports.}{No}{Computed by comparison/judged\_risk.py; a mean lies between the least and the largest ratio (\lean{EnhancementMap.mean_between}).}
+\mm{$\sigma_{B,i}$}{market judged risk}{A positive real number.}{The volatility of the capital ratio if book capital moved with the market value of equity (E3).}{No}{Computed as $\sigma_{E,i}X_i$, the standard deviation of $X_i$ times a return (\lean{EnhancementMap.market_scale}).}
+\mm{$D$}{stress-test decline}{A real number at least zero.}{The fall in a holding company's tier 1 common ratio from its actual value to its projected minimum under the severely adverse scenario.}{No}{Computed from the published rows of lit/dfast\_2013 and lit/dfast\_2014 as the actual less the minimum (\lean{StressTests.decline_of_rows}).}
+\mm{$z$}{normal quantile}{A positive real number.}{The quantile of a normal loss that a decline is read as (M4).}{No}{Assumed on the grid 1.645, 2.326, 3.090, with 2.326 central.}
+\mm{$\sigma_{A,i}$}{stress-test judged risk}{A positive real number.}{The volatility under which a nine-quarter decline $D$ is the $z$-quantile (E3).}{No}{Computed as $D/(\tfrac32 z)$ (\lean{StressTests.judged_sigma}).}
+\mm{$\sigma_{C,i}$}{own-loss judged risk}{A positive real number.}{The same conversion applied to the bank's own worst nine-quarter decline (E3).}{No}{Computed by comparison/own\_loss.py as $D/(\tfrac32 z)$ with the bank's decline (\lean{StressTests.judged_sigma}).}
+\mm{$\sigma_{N,i}$}{do-nothing volatility}{A positive real number.}{The standard deviation of the yearly change in Berger et al.'s do-nothing ratio (E8).}{No}{Computed by comparison/do\_nothing.py; each change is an earnings part plus an asset part (\lean{EnhancementMap.do_nothing_split}).}
+\mm{$S_i$}{bank size}{A real number.}{The log of the bank's mean total assets (E9).}{No}{Computed from the Call Report field \path{ASSET}; the log preserves the order of sizes (\lean{EnhancementMap.size_monotone}).}
+\end{longtable}
+
+\subsection{Internal objects}
+
+\footnotesize
+\begin{longtable}{@{}P{1.4cm}P{2.3cm}P{2.2cm}P{3.6cm}P{1.2cm}P{4.5cm}@{}}
+\caption{Internal objects of the model.}\label{tab:internal}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$x$}{buffer over the floor}{A real number, the state.}{The capital ratio less the regulatory floor (A1, A3).}{No}{Computed as $k-\fl$ (\lean{EnhancementMap.buffer_of_ratio}).}
+\mm{$W_t$}{Brownian motion}{A standard Brownian motion.}{The source of the buffer's random movement (A1).}{No}{Never observed.}
+\mm{$p$}{positive root}{A positive real number.}{The positive root of the value equation (M1).}{No}{Computed from $\mu_i$, $s_i$ and $\rho$ (\lean{PeuraKeppo.dplus_pos}).}
+\mm{$m$}{negative root}{A negative real number.}{The negative root of the value equation (M1).}{No}{Computed from $\mu_i$, $s_i$ and $\rho$ (\lean{PeuraKeppo.dminus_neg}).}
+\mm{$a_1$, $a_2$}{barrier coefficients}{Two real numbers of opposite sign.}{The weights of the two exponentials in the smooth-fit condition (M2).}{No}{A device of the proof of M2 (\lean{PeuraKeppo.coeff_signs}).}
+\mm{$u_0$}{dividend barrier}{A positive real number.}{The buffer over the floor at which dividends are paid (A2, M2).}{No}{Computed as $\frac{2}{p-m}\log\frac{-m}{p}$ (\lean{PeuraKeppo.no_issue_barrier}).}
+\end{longtable}
+
+\subsection{Outputs}
+
+\footnotesize
+\begin{longtable}{@{}P{1.4cm}P{2.3cm}P{2.2cm}P{3.6cm}P{1.2cm}P{4.5cm}@{}}
+\caption{Outputs of the model.}\label{tab:outputs}\\
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Symbol} & \textbf{Name} & \textbf{Type} & \textbf{Represents} & \textbf{Directly observed} & \textbf{Obtained how} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\mm{$F_1$}{thin-buffer dividend share}{A share between zero and one.}{The share of quarters with dividends paid from a buffer over the reference below $\sigma_i$, observed or predicted.}{No}{Computed by comparison/facts.py and window.py on the data, and by the simulations on the model (\lean{EnhancementMap.share_unit}).}
+\mm{$F_2$}{far-above share}{A share between zero and one.}{The share of bank-quarters more than $4\sigma_i$ above the reference, observed or predicted.}{No}{Computed by the same scripts (\lean{EnhancementMap.share_unit}).}
+\end{longtable}
+\normalsize
