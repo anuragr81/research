@@ -225,13 +225,29 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   so the Banque de France version is no longer needed. Section 5 of
   `notes/novelty_check_20261023.md` is now read in full for C4. Bonaparte and
   Cooper (2009) and Bonaparte, Cooper and Zhu (2011) appear only in that
-  note's pass-0 list (section 4) and were never read.
+  note's pass-0 list (section 4) and were not read when C4 was concluded;
+  both were read on 28 October (see the entry below).
 - 2026-10-28. Target journal: Annals of Finance (Springer, ABDC 2025 B), chosen
   by the author on median decision time. The 34-day median from submission to
   first decision was read from a search snippet of a mirror of its Springer
   page and is not verified on link.springer.com, which this environment
   cannot reach. The journal's author guidelines (length, format, appendices)
   are not yet read, for the same reason.
+- 2026-10-28. Four more papers read in full with records and Lean:
+  Federico, Modena and Regis (SAFE WP 487, 2026), Egami and Oryu (version of
+  8 November 2014), Bonaparte and Cooper (NBER 15227, August 2009 version),
+  Bonaparte, Cooper and Zhu (NBER 16957, 2011). None holds C4's result.
+  Federico et al. is the closest bank architecture (dividend barrier,
+  impulse issue at a fixed cost to an endogenous target) but its trigger is
+  fixed at required capital, its dividend restriction is a macro-state tax,
+  and every threshold response is numerical at one calibration; it is cited
+  in Section 3.1 (L59, L60). Bonaparte, Cooper and Zhu jointly estimate
+  preference parameters and a fixed adjustment cost with an explicit inaction
+  band, but identify from moments and a table of elasticities, not from the
+  thresholds; it is cited in C4 (L61). Egami and Oryu (regulator's problem,
+  passive bank) and Bonaparte and Cooper (2009) have records and are not
+  cited. C4 stands. Left unread from the first-pass list: Grossman and Vila
+  (1992) and Hilscher, Raviv and Wiener (2024), for K2's positioning only.
 
 ### Row map, parent to theory
 

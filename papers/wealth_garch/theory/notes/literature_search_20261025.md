@@ -110,3 +110,22 @@ later the same day; see below. Still to read: Choulli, Taksar and Zhou (2003).
   kurtosis) and outside cost data, never from the threshold. Two parameters
   that both raise kurtosis are separated only by adding the observed cost of
   adjustment; no rank or opposite-sign condition is stated. Cited in C4 (L58).
+
+## Four more readings, 28 October 2026
+
+- Federico, Modena and Regis (SAFE WP 487, July 2026). Dividend barrier and
+  impulse issue at a fixed cost κ to an endogenous target. The capital
+  requirement is a hard floor, liquidate or issue; the issue trigger is the
+  floor. The dividend restriction is a payout tax that depends on the macro
+  state, a ban in the limit. All threshold responses are numerical at one
+  calibration; the baseline κ is never varied. Nothing estimated or
+  identified. Cited in Section 3.1 (L59, L60).
+- Bonaparte, Cooper and Zhu (NBER 16957). Preference parameters and a fixed
+  income-scaled adjustment cost estimated together by simulated method of
+  moments; an inaction band shown qualitatively; the only identification
+  device is a table of elasticities of moments. Cited in C4 (L61).
+- Bonaparte and Cooper (NBER 15227, August 2009 version). Weaker precedent,
+  two moments and two parameters, just identified, no thresholds. Record only.
+- Egami and Oryu (8 November 2014 version). The regulator's problem with a
+  passive bank, a running cost per unit time of intervention, no fixed cost,
+  trigger found numerically, never varied in a cost. Record only.

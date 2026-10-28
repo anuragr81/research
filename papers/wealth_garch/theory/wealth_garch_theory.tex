@@ -274,10 +274,11 @@ ID & Claim & Statement & Lean & Proof \\
 The asymmetry parameter and the fixed issuance cost stand for the two frictions
 that the papers read use to explain a buffer above the minimum, a cost of
 falling below the minimum and a cost of raising capital back. The bank papers
-read write the cost of falling below in five forms, and none of the five is a
+read write the cost of falling below in six forms, and none of the six is a
 running cost charged only below the reference that grows with the shortfall,
 as the shortfall penalty of A4 is. Below the minimum the bank is liquidated in
-\citet{peura2006} (L24), audited at random in \citet{milnewhalley2001} (L16),
+\citet{peura2006} (L24), liquidated or made to issue at a fixed cost in
+\citet{federico2026} (L59), audited at random in \citet{milnewhalley2001} (L16),
 and made to issue at once at the proportional issuance cost in
 \citet{glover2023}, so that one parameter prices both the shortfall and the
 issue (L55). Below a buffer requirement \citet{behn2019} and \citet{langmenno2026}
@@ -307,7 +308,11 @@ like responses the signs of the two thresholds do not separate the two
 frictions, since the Jacobian can then be singular (M3). \citet{behn2019}
 estimate a charge for breaching the capital requirement and an issuance cost with no
 fixed part in one bank, and separate the two by assigning a different moment
-to each rather than by the policy (L54). \citet{peura2006} pair the fixed
+to each rather than by the policy (L54). \citet{federico2026} pair the fixed
+issuance cost with a payout tax that depends on the macro state rather than on
+the shortfall, and issue at required capital, which is not a choice, so that
+every response of their thresholds is numerical at one calibration (L60).
+\citet{peura2006} pair the fixed
 issuance cost with a delay on issues rather than with a cost of falling below
 the minimum (L7, L23). The paper asks whether the policy separates the two
 frictions, with the cost of falling below the minimum written as a shortfall
@@ -602,6 +607,9 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L56}{lambertini2014}{The capital requirement is a smooth log penalty on net worth, negative below required capital and a reward above it (\lean{LambertiniUysal.logTerm_pos_above}), with no kink. The shortfall penalty of M8 is zero at and above the reference and kinked there.}{Due to the log term, the bank is penalized when its capital goes below the required 8 percent of total assets}{23}{M8}
 \lrow{L57}{decamps2011}{A fixed cost of each issue makes issues lumpy (\lean{DecampsEtAl.unitCost_falls}), the single target of M7.}{Because issuing shares involves a fixed cost, equity adjustments take place in lumpy and infrequent issues}{1503}{M7}
 \lrow{L58}{alvarez2014}{In a fixed-cost inaction model the parameters are identified globally from moments of the distribution of adjustments rather than from thresholds, and two parameters that both raise kurtosis are separated only by adding the observed cost of adjustment (\lean{AlvarezLeBihanLippi.control_same_direction_not_identified}). M3 identifies two parameters from two thresholds by the opposite signs of their effects on one of them.}{the kurtosis of the price changes would not change. Moreover, kurtosis is increasing in both n and}{24}{M3}
+\lrow{L59}{federico2026}{At required capital the bank issues at a fixed cost or is liquidated, and reserves never go below it (\lean{FedericoEtAl.liquidationPayoff_nonneg}), so no cost grows with a shortfall. The shortfall penalty of M8 grades the cost below the reference.}{When this occurs, the manager must either liquidate the bank or recapitalize it by issuing new equity at a cost.}{10}{M8}
+\lrow{L60}{federico2026}{The issue trigger is required capital itself, where the trigger of M2 is interior and responds to the asymmetry parameter and the fixed issuance cost. Their dividend restriction is a payout tax that depends on the macro state, not on the shortfall, and the responses of their thresholds are numerical at one calibration.}{the bank decides whether to default or, at a cost, to issue equity (and in what amount) when capital requirements become binding}{3}{M2}
+\lrow{L61}{bonaparte2011}{Preference parameters and a fixed adjustment cost are estimated together, and the table of elasticities of the moments to the parameters is their only device for identification. The thresholds of their inaction band are not used, where M3 identifies from two thresholds.}{This table is also informative about identification as it indicates which moments are particularly sensitive to variations in each of the parameters.}{8}{M3}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -705,7 +713,7 @@ ID & Statement & Rows \\
 \crow{C1}{Under the hypotheses of Appendix~\ref{app:evidence}, the asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger. Both parameters raise the barrier, and they move the trigger in opposite directions, so the Jacobian of the two thresholds is non-singular.}{M1, M2, M3, M4}
 \crow{C2}{Wherever the optimal exposure binds the cap near both ends, the limits of buffer variance are $\nu_1^2$ and $\nu_3^2$, functions of $(\sigma,\sigma_L,c,a_1,a_3)$ only, and for every compliant exposure buffer variance is bounded by $\max\{\sigma_L^2,\nu_1^2\}$. The asymmetry parameter moves the thresholds (C1) and is absent from these limits and bounds. In capped portfolio insurance, whose geometry the cap shares, the slopes come from preferences, so the same limits would carry them.}{M3, M10, M11, M12, L5, L6}
 \crow{C3}{The surplus limit $\nu_3^2$ requires the liquidity branch to bind deep in surplus, which requires borrowing to hold the risky asset. With no borrowing, the main banking case of \citet{bayraktar2026}, the liquidity branch never binds once $a_2\le(1-a_3)x$, so the deficit limit and the bound of M12 are the results that apply there.}{M11, M12, L2}
-\crow{C4}{In a bank's objective, the joint local identification of C1, of a shareholder asymmetry parameter of a shortfall penalty and a fixed issuance cost from the dividend barrier and the recapitalisation trigger by the opposite signs of their effects on the trigger, is new against the papers read in full. Its numerical precedents in other parameters are \citet{peura2006} and \citet{daihuangkeppo2019} (L8, L9). Outside banking, in the approximation of \citet{constantinides1978}, four thresholds pin a linear penalty and a fixed cost once a holding cost is known, a step the authors do not take (L52), and \citet{alvarez2014} identify a fixed-cost inaction model from moments of the distribution of adjustments rather than from thresholds, where two parameters that move one moment the same way need a second moment (L58).}{M3, L8, L9, L52, L58}
+\crow{C4}{In a bank's objective, the joint local identification of C1, of a shareholder asymmetry parameter of a shortfall penalty and a fixed issuance cost from the dividend barrier and the recapitalisation trigger by the opposite signs of their effects on the trigger, is new against the papers read in full. Its numerical precedents in other parameters are \citet{peura2006} and \citet{daihuangkeppo2019} (L8, L9). Outside banking, in the approximation of \citet{constantinides1978}, four thresholds pin a linear penalty and a fixed cost once a holding cost is known, a step the authors do not take (L52), and \citet{alvarez2014} identify a fixed-cost inaction model from moments of the distribution of adjustments rather than from thresholds, where two parameters that move one moment the same way need a second moment (L58). \citet{bonaparte2011} estimate preference parameters and a fixed adjustment cost together, and their only device for identification is a table of the elasticities of their moments, with the thresholds of their inaction band not used (L61).}{M3, L8, L9, L52, L58, L61}
 \crow{C6}{C1 supplies what the specification \citet{peura2006} call for (L18) lacks in their calibration. The asymmetry parameter and the fixed issuance cost are set by the two thresholds (M3) rather than imposed (L20) or fitted to equity values (L21). Which constituency the shortfall penalty stands for (L19) is not settled by the thresholds (Appendix~\ref{app:scope}).}{M3, L18, L19, L20, L21}
 \bottomrule
 \end{longtable}
