@@ -53,8 +53,8 @@ MEASUREMENT MAP SUMMARY: 38 checks, 0 failures
 ========================================================================
 ENHANCEMENT SKELETON (enhancement/ENHANCEMENT.tex)
 ========================================================================
-      Lean declarations found: 351; bib keys: 33; lit keys: 46; map names: 25
-      rows: K4 M5 L18 C7 E9, proofs 5
+      Lean declarations found: 364; bib keys: 36; lit keys: 49; map names: 25
+      rows: K4 M5 L22 C7 E9, proofs 5
 [PASS] MS-1 row IDs well formed and unique
 [PASS] MS-2 introduction rows point to model or empirical rows only
 [PASS] MS-3 conclusion rows point to model, literature or empirical rows only
