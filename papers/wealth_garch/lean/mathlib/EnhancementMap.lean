@@ -50,4 +50,33 @@ theorem control_share_needs_bound : ¬ ((2 : ℝ) / 1 ≤ 1) := by norm_num
 theorem control_do_nothing_needs_same_assets : (1 + 1 - 0 : ℝ) / 2 - 1 / 1 ≠ (1 - 0) / 2 := by
   norm_num
 
+theorem continuation_solves {μ s ρ p m b1 b2 : ℝ} (hp : s ^ 2 / 2 * p ^ 2 + μ * p - ρ = 0)
+    (hm : s ^ 2 / 2 * m ^ 2 + μ * m - ρ = 0) (x : ℝ) :
+    HasDerivAt (fun y => b1 * exp (p * y) + b2 * exp (m * y)) (b1 * p * exp (p * x) + b2 * m * exp (m * x)) x ∧
+    HasDerivAt (fun y => b1 * p * exp (p * y) + b2 * m * exp (m * y))
+      (b1 * p ^ 2 * exp (p * x) + b2 * m ^ 2 * exp (m * x)) x ∧
+    s ^ 2 / 2 * (b1 * p ^ 2 * exp (p * x) + b2 * m ^ 2 * exp (m * x))
+      + μ * (b1 * p * exp (p * x) + b2 * m * exp (m * x))
+      - ρ * (b1 * exp (p * x) + b2 * exp (m * x)) = 0 := by
+  have ep : HasDerivAt (fun y => exp (p * y)) (exp (p * x) * p) x := by
+    have := ((hasDerivAt_id x).const_mul p).exp
+    simpa using this
+  have em : HasDerivAt (fun y => exp (m * y)) (exp (m * x) * m) x := by
+    have := ((hasDerivAt_id x).const_mul m).exp
+    simpa using this
+  refine ⟨?_, ?_, ?_⟩
+  · exact ((ep.const_mul b1).add (em.const_mul b2)).congr_deriv (by ring)
+  · exact ((ep.const_mul (b1 * p)).add (em.const_mul (b2 * m))).congr_deriv (by ring)
+  · linear_combination (b1 * exp (p * x)) * hp + (b2 * exp (m * x)) * hm
+
+theorem control_continuation_needs_root :
+    (1 : ℝ) ^ 2 / 2 * (1 * 1 ^ 2 * exp (1 * 0)) + 0 * (1 * 1 * exp (1 * 0)) - 1 * (1 * exp (1 * 0)) ≠ 0 := by
+  norm_num
+
+theorem payout_region {μ ρ u x : ℝ} (hρ : 0 < ρ) (h : u ≤ x) : μ * 1 - ρ * (μ / ρ + x - u) ≤ 0 := by
+  have : ρ * (μ / ρ + x - u) = μ + ρ * (x - u) := by field_simp; ring
+  rw [this]; nlinarith
+
+theorem control_payout_needs_positive_rho : ¬ ((1 : ℝ) * 1 - (-1) * (1 / (-1) + 2 - 0) ≤ 0) := by norm_num
+
 end EnhancementMap

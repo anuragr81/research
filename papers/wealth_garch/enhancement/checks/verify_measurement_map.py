@@ -20,7 +20,7 @@ AGREED_HERE = {"capital ratio", "regulatory floor", "mean earnings", "earnings v
             "stress-test decline", "normal quantile", "stress-test judged risk", "own-loss judged risk",
             "do-nothing volatility", "bank size", "buffer over the floor", "brownian motion", "positive root",
             "negative root", "barrier coefficients", "thin-buffer dividend share", "far-above share"}
-PROPOSED = set()
+PROPOSED = {"closure time"}
 ALTERNATIVES = {
     r"\breference ratio\b": "reference",
     r"\bdeposit insurer\b": "insurer",

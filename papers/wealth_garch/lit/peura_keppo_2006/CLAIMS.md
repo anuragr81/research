@@ -44,6 +44,9 @@ Bib key `peura2006`. Version read: the published article, *Journal of Business* 
 | PK-Q36 | 2190 | For small banks, the average capital buffer of 5.3% implies a volatility of 1.19%. | Against an estimate of 1.06%, a multiple of about 1.1 (`PeuraKeppo.implied_multiple_small`). |
 | PK-Q37 | 2190 | suggesting that larger banks hold less capital than small banks, even after controlling for possible differences in their | The size gradient beyond volatility; they assign it to capital-market imperfections, letting only large banks recapitalise. |
 | PK-Q38 | 2190 | implying that the required volatility adjustment is, in fact, higher for large banks | Once only large banks may recapitalise. |
+| PK-Q39 | 2170 | Now the following characterization of optimum can be established using standard arguments | Proposition 2: the value function satisfies the variational inequalities (13i) to (13v), the master equation the enhancement paper states (its M6). |
+| PK-Q40 | 2175 | the optimal policy and the value function reduce to those of the Milne and Robertson (1996) model without the capital issue option. | Case 1, no issuance: the value function is their (20) with the barrier $u_0$ of (17), the enhanced model's case. |
+| PK-Q41 | 2195 | coincides with the value function (8iv). This completes the proof of proposition 3. | Their verification that the constructed function is the value function; the enhancement paper cites it for optimality rather than proving it. |
 
 ## Lean results
 

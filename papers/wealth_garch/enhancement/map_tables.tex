@@ -24,10 +24,10 @@
 \mm{$\sigma_{E,i}$}{equity volatility}{A positive real number.}{The annualised standard deviation of daily log changes of the parent's share price.}{No}{Computed from pinned daily prices by comparison/judged\_risk.py as $\sqrt{252}$ times the daily standard deviation (\lean{EnhancementMap.annualise}).}
 \mm{$X_i$}{mean capital ratio}{A real number above zero.}{The mean of the bank's capital ratio over ten December reports.}{No}{Computed by comparison/judged\_risk.py; a mean lies between the least and the largest ratio (\lean{EnhancementMap.mean_between}).}
 \mm{$\sigma_{B,i}$}{market judged risk}{A positive real number.}{The volatility of the capital ratio if book capital moved with the market value of equity (E3).}{No}{Computed as $\sigma_{E,i}X_i$, the standard deviation of $X_i$ times a return (\lean{EnhancementMap.market_scale}).}
-\mm{$D$}{stress-test decline}{A real number at least zero.}{The fall in a holding company's tier 1 common ratio from its actual value to its projected minimum under the severely adverse scenario.}{No}{Computed from the published rows of lit/dfast\_2013 and lit/dfast\_2014 as the actual less the minimum (\lean{StressTests.decline_of_rows}).}
+\mm{$\Delta$}{stress-test decline}{A real number at least zero.}{The fall in a holding company's tier 1 common ratio from its actual value to its projected minimum under the severely adverse scenario.}{No}{Computed from the published rows of lit/dfast\_2013 and lit/dfast\_2014 as the actual less the minimum (\lean{StressTests.decline_of_rows}).}
 \mm{$z$}{normal quantile}{A positive real number.}{The quantile of a normal loss that a decline is read as (M4).}{No}{Assumed on the grid 1.645, 2.326, 3.090, with 2.326 central.}
-\mm{$\sigma_{A,i}$}{stress-test judged risk}{A positive real number.}{The volatility under which a nine-quarter decline $D$ is the $z$-quantile (E3).}{No}{Computed as $D/(\tfrac32 z)$ (\lean{StressTests.judged_sigma}).}
-\mm{$\sigma_{C,i}$}{own-loss judged risk}{A positive real number.}{The same conversion applied to the bank's own worst nine-quarter decline (E3).}{No}{Computed by comparison/own\_loss.py as $D/(\tfrac32 z)$ with the bank's decline (\lean{StressTests.judged_sigma}).}
+\mm{$\sigma_{A,i}$}{stress-test judged risk}{A positive real number.}{The volatility under which a nine-quarter decline $\Delta$ is the $z$-quantile (E3).}{No}{Computed as $\Delta/(\tfrac32 z)$ (\lean{StressTests.judged_sigma}).}
+\mm{$\sigma_{C,i}$}{own-loss judged risk}{A positive real number.}{The same conversion applied to the bank's own worst nine-quarter decline (E3).}{No}{Computed by comparison/own\_loss.py as $\Delta/(\tfrac32 z)$ with the bank's decline (\lean{StressTests.judged_sigma}).}
 \mm{$\sigma_{N,i}$}{do-nothing volatility}{A positive real number.}{The standard deviation of the yearly change in Berger et al.'s do-nothing ratio (E8).}{No}{Computed by comparison/do\_nothing.py; each change is an earnings part plus an asset part (\lean{EnhancementMap.do_nothing_split}).}
 \mm{$S_i$}{bank size}{A real number.}{The log of the bank's mean total assets (E9).}{No}{Computed from the Call Report field \path{ASSET}; the log preserves the order of sizes (\lean{EnhancementMap.size_monotone}).}
 \end{longtable}
@@ -53,6 +53,8 @@
 \mm{$m$}{negative root}{A negative real number.}{The negative root of the value equation (M1).}{No}{Computed from $\mu_i$, $s_i$ and $\rho$ (\lean{PeuraKeppo.dminus_neg}).}
 \mm{$a_1$, $a_2$}{barrier coefficients}{Two real numbers of opposite sign.}{The weights of the two exponentials in the smooth-fit condition (M2).}{No}{A device of the proof of M2 (\lean{PeuraKeppo.coeff_signs}).}
 \mm{$u_0$}{dividend barrier}{A positive real number.}{The buffer over the floor at which dividends are paid (A2, M2).}{No}{Computed as $\frac{2}{p-m}\log\frac{-m}{p}$ (\lean{PeuraKeppo.no_issue_barrier}).}
+\mm{$V$}{value function}{A function of the buffer over the floor.}{The value of the bank's discounted dividends under the best dividend policy (A4, M6).}{No}{Computed in closed form by M6, below the barrier as a solution of the continuation equation (\lean{EnhancementMap.continuation_solves}).}
+\mm{$\tau$}{closure time}{A stopping time.}{The first time the buffer over the floor reaches zero (A3, A4).}{No}{Never observed for the banks scored, which survive the windows.}
 \end{longtable}
 
 \subsection{Outputs}
@@ -72,5 +74,6 @@
 \endfoot
 \mm{$F_1$}{thin-buffer dividend share}{A share between zero and one.}{The share of quarters with dividends paid from a buffer over the reference below $\sigma_i$, observed or predicted.}{No}{Computed by comparison/facts.py and window.py on the data, and by the simulations on the model (\lean{EnhancementMap.share_unit}).}
 \mm{$F_2$}{far-above share}{A share between zero and one.}{The share of bank-quarters more than $4\sigma_i$ above the reference, observed or predicted.}{No}{Computed by the same scripts (\lean{EnhancementMap.share_unit}).}
+\mm{$D_t$}{dividends}{A nondecreasing process.}{Cumulative dividends, the bank's control (A1, A4, M6).}{Yes}{Recorded in the Call Report as dividends declared, \path{EQCDIV}.}
 \end{longtable}
 \normalsize

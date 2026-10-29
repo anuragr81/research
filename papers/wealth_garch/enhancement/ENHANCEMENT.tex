@@ -151,10 +151,10 @@ parent nor a listing accounts for it (E9).
 \caption{Assumptions.}\label{tab:assumptions}\\
 \toprule ID & Assumption & In plain English & Symbols & Model rows & Reason \\ \midrule \endfirsthead
 \toprule ID & Assumption & In plain English & Symbols & Model rows & Reason \\ \midrule \endhead
-\arow{A1}{Between dividend payments $dx_t=\mu_i\,dt+s_i\,dW_t$.}{The buffer over the floor drifts up with the bank's mean earnings and moves with the judged risk through a Brownian motion.}{$x$, $\mu_i$, $s_i$, $W_t$}{M1, M2}{Peura and Keppo's capital process (Appendix D, process).}
-\arow{A2}{Dividends are paid only at the barrier $u_0$, and no equity is issued.}{The bank pays out at the dividend barrier and never raises capital.}{$u_0$}{M2}{The non-issuer case, an upper bound on the buffer when issuance is costly (L3; Appendix D, issuance).}
-\arow{A3}{The bank is closed when $x_t=0$.}{The bank fails when the buffer over the floor is used up.}{$x$}{M1, M2, M3}{Closure at the floor (Appendix D, closure).}
-\arow{A4}{Dividends are discounted at $\rho=0.04$.}{The bank values dividends at a discount rate of four percent a year, its cost of equity.}{$\rho$}{M1}{Peura and Keppo's value (Appendix D, discounting).}
+\arow{A1}{$dx_t=\mu_i\,dt+s_i\,dW_t-dD_t$.}{The buffer over the floor drifts up with the bank's mean earnings, moves with the judged risk through a Brownian motion, and falls by the dividends paid.}{$x$, $\mu_i$, $s_i$, $W_t$, $D_t$}{M1, M2, M6}{Peura and Keppo's capital process (Appendix D, process).}
+\arow{A2}{Dividends are paid only at the barrier $u_0$, and no equity is issued.}{The bank pays out at the dividend barrier and never raises capital.}{$u_0$}{M2, M6}{The non-issuer case, an upper bound on the buffer when issuance is costly (L3; Appendix D, issuance).}
+\arow{A3}{The bank is closed when $x_t=0$.}{The bank fails when the buffer over the floor is used up.}{$x$}{M1, M2, M3, M6}{Closure at the floor (Appendix D, closure).}
+\arow{A4}{The bank maximises its expected dividends $D_t$ discounted at $\rho=0.04$ up to $\tau$.}{The bank maximises its expected dividends, discounted at the discount rate of four percent a year, its cost of equity, up to the closure time.}{$\rho$, $D_t$, $\tau$}{M1, M6}{Peura and Keppo's value (Appendix D, discounting).}
 \arow{A5}{$\fl=0.08$ in the baseline, and $\fl=0.10$ to 2009Q4 and $\fl=0.105$ from 2010Q1 in the enhanced model.}{The regulatory floor is the legal minimum in the baseline, and the well-capitalised line and then the minimum plus the conservation buffer in the enhanced model.}{$\fl$}{M3, M5}{The lines the sources find binding (L7, L8, L9; Appendix D, floor).}
 \arow{A6}{$s_i=\sigma_i$ in the baseline and $s_i=\sigma_{D,i}$ in the enhanced model.}{The judged risk is the earnings volatility in the baseline and the book-capital volatility in the enhanced model.}{$s_i$, $\sigma_i$, $\sigma_{D,i}$}{M1, M2, M4}{Appendix D, judged risk.}
 \bottomrule
@@ -171,8 +171,9 @@ parent nor a listing accounts for it (E9).
 \mrow{M1}{The value equation has one positive and one negative root.}{$s\neq0$, $\rho>0$ $\Rightarrow$ $p=d_+(\mu,s,\rho)>0>m=d_-(\mu,s,\rho)$, both roots of $\tfrac12 s^2d^2+\mu d-\rho=0$.}{PeuraKeppo.char_eq, PeuraKeppo.dplus_pos, PeuraKeppo.dminus_neg}
 \mrow{M2}{The dividend barrier satisfies smooth fit and equals Milne and Whalley's buffer.}{$p>0>m$ $\Rightarrow$ $a_1e^{-pu_0}+a_2e^{-mu_0}=0$ at $u_0=\frac{2}{p-m}\log\frac{-m}{p}$, with $a_1>0>a_2$, and $\frac{1}{p-m}\log\frac{m^2}{p^2}=u_0$.}{PeuraKeppo.no_issue_barrier, PeuraKeppo.coeff_signs, MilneWhalley.buffer_eq_u0}
 \mrow{M3}{Raising the floor shifts the buffer and leaves its movements unchanged.}{$(C_t+d)-(C_0+d)=C_t-C_0$ for every $d$.}{MilneWhalley.buffer_shift_invariant}
-\mrow{M4}{A stress-test decline over nine quarters converts to a judged risk.}{$D/(z\sqrt{9/4})=D/(\tfrac32 z)$, and $m\le a\Rightarrow a-m\ge0$.}{StressTests.judged_sigma, StressTests.sqrt_horizon, StressTests.decline_of_rows}
+\mrow{M4}{A stress-test decline over nine quarters converts to a judged risk.}{$\Delta/(z\sqrt{9/4})=\Delta/(\tfrac32 z)$, and $k^{\min}\le k^{\mathrm{act}}\Rightarrow \Delta=k^{\mathrm{act}}-k^{\min}\ge0$.}{StressTests.judged_sigma, StressTests.sqrt_horizon, StressTests.decline_of_rows}
 \mrow{M5}{After 2009 the floor is the reference and lies above the well-capitalised line.}{$0.08+0.025=0.105$ and $0.10<0.105$.}{OrozcoRubio.basel3_floor_eq_R, OrozcoRubio.basel3_floor_above_pca}
+\mrow{M6}{The value function of the non-issuer bank solves the master equation, a variational inequality in dividends, with Peura and Keppo's closed form and the barrier $u_0$.}{$\max\{\tfrac12 s^2V''+\mu V'-\rho V,\,1-V'\}=0$, $V(0)=0$. For $x<u_0$, $V(x)=a_1e^{-p(u_0-x)}+a_2e^{-m(u_0-x)}$ solves $\tfrac12 s^2V''+\mu V'-\rho V=0$, with $V(0)=0$, $V'(u_0)=1$, $V''(u_0)=0$ and $V(u_0)=\mu/\rho$. For $x\ge u_0$, $V(x)=\mu/\rho+x-u_0$ and $\tfrac12 s^2V''+\mu V'-\rho V\le0$.}{EnhancementMap.continuation_solves, PeuraKeppo.no_issue_barrier, PeuraKeppo.smooth_paste, PeuraKeppo.value_at_barrier, EnhancementMap.payout_region}
 \bottomrule
 \end{longtable}
 \end{center}
@@ -235,6 +236,8 @@ percentage points.
 \lrow{L22}{senguptahogue2014}{Banks with no holding company hold more Tier 1 capital within banks, community banks 1996 to 2006. E9 pools one-bank holding companies with them and compares across banks of a size.}{Non-BHC banks are associated with a 1.06-percentage-point higher Tier 1 leverage ratio and a 2.19-percentage-point higher Tier 1 risk-based capital ratio, after controlling for other determinants of capital ratios.}{16}{C7}
 \lrow{L23}{peurajokivuolle2003}{They invert a buffer model on the median US capital ratio for a confidence level, with the risk model fixed (C6 inverts for a risk scale with the decision rule fixed).}{Given a bank’s portfolio and its capital ratio, there is an implied value of a which makes the capital ratio solved from the model equal to the observed capital ratio.}{20}{C6}
 \lrow{L24}{peurajokivuolle2003}{A deterministic stress scenario carries no probability, so the quantile $z$ of M4 is assumed.}{The obvious shortcoming of such an analysis is the absence of any likelihoods attached to the chosen rating transition scenario itself.}{36}{M4}
+\lrow{L25}{peura2006}{Their Proposition 2, the variational inequalities of M6 for their bank with issuance, by standard arguments.}{Now the following characterization of optimum can be established using standard arguments}{2170}{M6}
+\lrow{L26}{peura2006}{Without issuance their value function and policy are those of M6, and their proof shows the function is the value function (A2).}{the optimal policy and the value function reduce to those of the Milne and Robertson (1996) model without the capital issue option.}{2175}{M6}
 \bottomrule
 \end{longtable}
 \end{center}
@@ -283,8 +286,9 @@ claim that something is new and still waits on something, and what.
 $R=0.105$ the reference, $\mu_i$ and $\sigma_i$ the mean and the
 volatility of bank $i$'s yearly earnings, $s_i$ the judged risk, $\rho$ the
 discount rate, $p=d_+(\mu,s,\rho)$ and $m=d_-(\mu,s,\rho)$ the roots,
-$a_1=m/(pm-p^2)$, $a_2=p/(pm-m^2)$, $u_0$ the dividend barrier, $D$ a
-decline in the capital ratio and $z$ a normal quantile.
+$a_1=m/(pm-p^2)$, $a_2=p/(pm-m^2)$, $u_0$ the dividend barrier, $V$ the
+value function, $D_t$ cumulative dividends, $\tau$ the closure time, $\Delta$
+a stress-test decline in the capital ratio and $z$ a normal quantile.
 
 \begin{mproof}{M1}{PeuraKeppo.char_eq, PeuraKeppo.dplus_pos, PeuraKeppo.dminus_neg}
 \[ d_\pm=\frac{-\mu\pm\sqrt{\mu^2+2\rho s^2}}{s^2},\qquad \tfrac12 s^2d_\pm^2+\mu d_\pm-\rho=0. \]
@@ -302,11 +306,19 @@ so with $k_t=\fl+x_t$ a change $\fl\mapsto\fl+d$ moves $k_t$ by $d$ and leaves $
 \end{mproof}
 
 \begin{mproof}{M4}{StressTests.judged_sigma, StressTests.sqrt_horizon, StressTests.decline_of_rows}
-\[ \sqrt{9/4}=\tfrac32,\qquad \frac{D}{z\sqrt{9/4}}=\frac{D}{\tfrac32 z},\qquad m\le a\ \Rightarrow\ D=a-m\ge0. \]
+\[ \sqrt{9/4}=\tfrac32,\qquad \frac{\Delta}{z\sqrt{9/4}}=\frac{\Delta}{\tfrac32 z},\qquad k^{\min}\le k^{\mathrm{act}}\ \Rightarrow\ \Delta=k^{\mathrm{act}}-k^{\min}\ge0. \]
 \end{mproof}
 
 \begin{mproof}{M5}{OrozcoRubio.basel3_floor_eq_R, OrozcoRubio.basel3_floor_above_pca}
 \[ 0.08+0.025=0.105=R,\qquad 0.10<0.08+0.025. \]
+\end{mproof}
+
+\begin{mproof}{M6}{EnhancementMap.continuation_solves, PeuraKeppo.no_issue_barrier, PeuraKeppo.smooth_paste, PeuraKeppo.value_at_barrier, EnhancementMap.payout_region}
+With $b_1=a_1e^{-pu_0}$, $b_2=a_2e^{-mu_0}$ and $V=b_1e^{px}+b_2e^{mx}$,
+\[ V'=b_1pe^{px}+b_2me^{mx},\quad V''=b_1p^2e^{px}+b_2m^2e^{mx},\quad \tfrac12 s^2V''+\mu V'-\rho V=\sum_j b_je^{d_jx}\big(\tfrac12 s^2d_j^2+\mu d_j-\rho\big)=0. \]
+\[ V(0)=a_1e^{-pu_0}+a_2e^{-mu_0}=0,\qquad V'(u_0)=a_1p+a_2m=1, \]
+\[ V''(u_0)=a_1p^2+a_2m^2=0,\qquad V(u_0)=a_1+a_2=\mu/\rho. \]
+\[ x\ge u_0\ \Rightarrow\ \tfrac12 s^2\cdot0+\mu\cdot1-\rho\Big(\frac{\mu}{\rho}+x-u_0\Big)=-\rho(x-u_0)\le0. \]
 \end{mproof}
 
 \section{Evidence and verification}\label{app:evidence}
@@ -316,8 +328,9 @@ parent bundle (\path{verify.sh}). The checker
 \path{enhancement/checks/verify_enhancement.py} applies MS-1 to MS-9 and
 re-runs every results file an empirical row cites.
 
-\paragraph{What Lean does not carry.} The Brownian motion of A1, the
-optimality of paying at $u_0$ (A2), and the simulation of the facts. The
+\paragraph{What Lean does not carry.} The Brownian motion of A1, that the
+function of M6 is the value function and that paying at $u_0$ is optimal,
+which is Peura and Keppo's result (L25, L26), and the simulation of the facts. The
 facts are computed on pinned data and reproduced exactly by the checker,
 which is the third class of evidence of this bundle.
 
