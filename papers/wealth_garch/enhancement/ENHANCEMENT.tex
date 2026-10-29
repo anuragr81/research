@@ -233,6 +233,8 @@ percentage points.
 \lrow{L20}{corbaederasmo2021}{A dynamic model of US banks estimated to buffer levels by size in sample, 1984 to 2007 (C5 predicts without fitting, out of sample).}{After estimating parameters to match observed levels of buffers in both the imperfect and perfect competition economies}{31}{C5}
 \lrow{L21}{corbaederasmo2021}{Funding volatility as the size channel, calibrated and not tested (C7 has not tested it).}{big banks have less volatile funding inflows, which is one important factor explaining why they hold a smaller capital buffer in our model.}{24}{C7}
 \lrow{L22}{senguptahogue2014}{Banks with no holding company hold more Tier 1 capital within banks, community banks 1996 to 2006. E9 pools one-bank holding companies with them and compares across banks of a size.}{Non-BHC banks are associated with a 1.06-percentage-point higher Tier 1 leverage ratio and a 2.19-percentage-point higher Tier 1 risk-based capital ratio, after controlling for other determinants of capital ratios.}{16}{C7}
+\lrow{L23}{peurajokivuolle2003}{They invert a buffer model on the median US capital ratio for a confidence level, with the risk model fixed (C6 inverts for a risk scale with the decision rule fixed).}{Given a bank’s portfolio and its capital ratio, there is an implied value of a which makes the capital ratio solved from the model equal to the observed capital ratio.}{20}{C6}
+\lrow{L24}{peurajokivuolle2003}{A deterministic stress scenario carries no probability, so the quantile $z$ of M4 is assumed.}{The obvious shortcoming of such an analysis is the absence of any likelihoods attached to the chosen rating transition scenario itself.}{36}{M4}
 \bottomrule
 \end{longtable}
 \end{center}
@@ -243,7 +245,7 @@ Papers cited and not read are not used.
 
 Table~\ref{tab:conclusions} holds the conclusions that rest on model rows,
 empirical rows and papers read in full. Table~\ref{tab:pending} holds every
-claim that something is new and what each still waits on.
+claim that something is new and still waits on something, and what.
 
 \begin{center}\footnotesize
 \begin{longtable}{P{0.5cm}P{13.0cm}P{2.6cm}}
@@ -254,6 +256,7 @@ claim that something is new and what each still waits on.
 \crow{C2}{Neither loss-based measure, the stress test or the bank's own worst decline, supplies that risk, and the market's equity volatility overshoots it.}{E3, M4}
 \crow{C3}{Guarding the floor that regulation makes binding, with the movement of book capital as the risk, beats the standard model on banks and on a year it had not seen, without placing the level of buffers on that year.}{E4, E5, E6, E7, M3, L7, L8}
 \crow{C4}{The floor the enhanced model guards rests on sources rather than on fit, the well-capitalised line before 2010 and the minimum plus the conservation buffer after.}{M5, L7, L8, L9, L14}
+\crow{C6}{Observed buffers imply a risk about three times earnings volatility on 2005 to 2014, against Peura and Keppo's 1.1 to 1.3 times on their 1983 to 2002 subsample (L15), with loss-based measures at about one and the market at about eight. Juselius, Ponte Marques and Tarashev's buffer of about four standard deviations of buffer shocks has a different denominator (L19), and Peura and Jokivuolle invert buffers for a confidence level rather than a risk scale (L23). No paper read measures this risk scale against loss-based and market measures.}{E2, E3, L13, L15, L18, L19, L23}
 \bottomrule
 \end{longtable}
 \end{center}
@@ -264,7 +267,6 @@ claim that something is new and what each still waits on.
 \toprule ID & Statement & Rows \\ \midrule \endfirsthead
 \toprule ID & Statement & Rows \\ \midrule \endhead
 \crow{C5}{Earlier work fits a single model to the data it then explains, Peura and Keppo by calibration and Corbae and D'Erasmo by estimation to buffer levels in sample (L1, L20), and Dai, Huang and Keppo compare two versions of one model out of sample on other targets (L17). No paper read scores the published dynamic models of different authors against each other on pre-registered buffer facts out of sample, with no parameter fitted to those facts. \pend{Migueis (2017), a recalibration of Peura and Keppo, seen in abstract only.}}{L1, L17, L20}
-\crow{C6}{Observed buffers imply a risk about three times earnings volatility on 2005 to 2014, against Peura and Keppo's 1.1 to 1.3 times on their 1983 to 2002 subsample (L15), with loss-based measures at about one and the market at about eight. Juselius, Ponte Marques and Tarashev's buffer of about four standard deviations of buffer shocks has a different denominator (L19). \pend{Peura and Jokivuolle (2004), who calibrate the probability of breaching requirements to capital ratios, cited by Juselius et al. and not read.}}{E2, E3, L13, L15, L18, L19}
 \crow{C7}{The size gradient of buffers survives controls for access to capital by affiliation and listing, the explanation Peura and Keppo give for it (L16). Sengupta and Hogue find banks without a holding company hold more within banks on another definition and period (L22), and Corbae and D'Erasmo assign the gradient to funding volatility and issuance costs without testing either (L21). \pend{a test of funding volatility, and a split of stand-alone banks into those with no holding company and those of one-bank holding companies, each under its own pre-registration.}}{E9, L6, L16, L21, L22}
 \bottomrule
 \end{longtable}
@@ -359,6 +361,10 @@ hold-out (E6, E7) decides the frozen model.
 \paragraph{Judged risk.} A6 replaces the earnings volatility by the
 book-capital volatility, which includes the bank's own capital actions (E8).
 The alternatives scored and rejected, the stress-test decline, the own worst
-decline and the equity volatility, are E3.
+decline and the equity volatility, are E3. Converting a decline to a volatility
+assumes a normal quantile $z$, and a stress scenario has no probability of
+its own (L24). Credit losses are long-tailed, so a normal quantile if anything
+overstates the volatility a decline implies, and the stress-test judged risk
+of E3 is an upper value.
 
 \end{document}
