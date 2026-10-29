@@ -16,6 +16,11 @@ replaced here) and asks of it what the manuscript asks of the leveraged case.
    nu_1^2, the surplus limit nu_3^2 and the bound of M12, for the leveraged
    cap and for pi <= 1.
 3. The trigger regimes over the 56 values of (lambda_S, K), on 401 nodes.
+4. Buffer variance at lambda_S = 1.2 and 1.6 with K = 0.05, pi <= 1, on 601
+   nodes. Where the exposure is below the cap and below the ceiling pi = 1
+   it is the interior maximiser, which depends on V'/V'' and so on lambda_S,
+   and zeta differs between the two; where it is at the ceiling for both,
+   zeta is the same (Section 3.4 of the manuscript, the term separation).
 
 No row of the manuscript rests on these numbers.
 
@@ -134,6 +139,18 @@ def main():
     held = sum(1 for r in rows if r["all_hypotheses"])
     lines += ["", f"Of {len(rows)} points, {counts['interior']} have an interior trigger, {counts['at the reference']} a trigger at the reference "
               f"and {counts['distress boundary']} a trigger at the distress boundary; all hypotheses hold at {held}.", ""]
+
+    lines += ["## 4. Buffer variance off the cap moves with lambda_S, pi <= 1, 601 nodes", "",
+              "K = 0.05, lambda_S = 1.2 and 1.6, zeta at common nodes of the inaction region. Where the exposure is at the "
+              "ceiling pi = 1 for both, zeta is the same; where it is below the cap and below the ceiling, zeta differs.", "",
+              "| x | pi at 1.2 | zeta at 1.2 | pi at 1.6 | zeta at 1.6 |", "|---|---|---|---|---|"]
+    prof2 = {lam: zeta_profile(dict(s.BASE, lam=lam, K=0.05), 601, pi_bar_noborrow) for lam in (1.2, 1.6)}
+    a, b = prof2[1.2], prof2[1.6]
+    for xv in np.arange(1.05, min(a["y_star"], b["y_star"]), 0.02):
+        ia, ib = np.abs(a["x"] - xv).argmin(), np.abs(b["x"] - xv).argmin()
+        lines.append(f"| {xv:.3f} | {a['pi'][ia]:.3f} | {a['zeta'][ia]:.4f} | {b['pi'][ib]:.3f} | {b['zeta'][ib]:.4f} |")
+    lines.append("")
+    print("lambda_S comparison done", flush=True)
     open(os.path.join(HERE, "results_noborrow.md"), "w").write("\n".join(lines))
     json.dump({"limits": L, "regimes": rows}, open(os.path.join(HERE, "results_noborrow.json"), "w"), indent=1, default=float)
     print("written results_noborrow.md")
