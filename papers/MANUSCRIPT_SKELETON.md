@@ -163,12 +163,17 @@ Lists are comma-separated. A Lean name is fully qualified,
    - Below the table, one sentence names every paper that is cited elsewhere
      but not read, and says that every claim made about them is unverified.
    - **Papers cited.** A table of citations (label `tab:citations`), one
-     `\cirow{bib key}{version read}{published as}{date}{citations}{ABDC 2025}`
-     per paper the manuscript cites and no other. Citations are the count of the
-     OpenAlex record of the published (or working-paper) version, with the
-     counts of the records of other versions in brackets, `662 (+266)`, and
-     the retrieval date stated above the table; the date is the printed issue
-     registered with Crossref. The ABDC column is the journal's rating in the
+     `\cirow{bib key}{title}{version read}{published as}{date}{citations}{ABDC 2025}{links}`
+     per paper the manuscript cites and no other, in descending order of
+     citations counting the other versions, and by bib key where they are
+     equal (author, 29 October 2026). The title is that of the bib entry.
+     Citations are the count of the OpenAlex record of the published version,
+     or of the working paper where none is found (author, 29 October 2026),
+     with the counts of the records of other versions in brackets,
+     `663 (+266)`, and the retrieval date stated above the table; the date is
+     the printed issue registered with Crossref. The last column links to each
+     record counted, `\citedby{W...}{main}, \citedby{W...}{other 1}`, the
+     record counted first. The table is a landscape page. The ABDC column is the journal's rating in the
      2025 ABDC list in `papers/journal_rankings/`, matched by ISSN, `--` for a
      working paper, or `not listed (...)`. No impact factor (author,
      28 October 2026). A fetch script writes the counts to a JSON file the
@@ -224,7 +229,7 @@ The appendices follow the conclusions.
 | MS-7 | Assumption rows point to model rows only, and every model row rests on at least one assumption. |
 | MS-8 | Player rows point to model or literature rows only. |
 | MS-9 | Every section and table of the skeleton is present, found by its label. |
-| MS-10 | The table of citations has exactly one row per cited bib key; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. |
+| MS-10 | The table of citations has exactly one row per cited bib key, in descending order of citations with the other versions; each title equals the bib entry's title; each row links to the OpenAlex records it counts, the main one first; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. |
 
 Each rule also runs on a well-formed sample, which it must accept, and on a
 faulty sample, which it must reject. A rule that cannot fail measures nothing.

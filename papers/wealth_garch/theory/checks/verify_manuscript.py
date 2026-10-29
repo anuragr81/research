@@ -166,12 +166,24 @@ def cited_keys(tex):
     return keys
 
 
-def citation_problems(tex, cit, abdc):
+def bib_titles():
+    """bib key -> title, without the braces that protect capitals."""
+    out = {}
+    for m in re.finditer(r"^@\w+\{([^,]+),(.*?)\n\}", open(os.path.join(ROOT, "refs.bib")).read(), re.M | re.S):
+        t = re.search(r"\btitle\s*=\s*\{(.*?)\},?\s*\n", m.group(2), re.S)
+        if t:
+            out[m.group(1).strip()] = re.sub(r"\s+", " ", t.group(1).replace("{", "").replace("}", "")).strip()
+    return out
+
+
+def citation_problems(tex, cit, abdc, titles):
     """MS-10. Every cited key has exactly one row in the table of citations and no other key has one; each
-    row's count is the OpenAlex count of the record it names, with the other versions' counts in brackets
-    when there are any; each row's ABDC rating is the 2025 rating of the journal's ISSN, or -- or
-    'not listed ...' when the ISSN is not in the 2025 list."""
-    rows = macro_calls(tex, "cirow", 6)
+    row's title is the title of its bib entry; each row's count is the OpenAlex count of the record it names,
+    with the other versions' counts in brackets when there are any; each row's ABDC rating is the 2025 rating
+    of the journal's ISSN, or -- or 'not listed ...' when the ISSN is not in the 2025 list; each row links to
+    the OpenAlex records of its count, the record counted first; the rows are in descending order of the
+    count with the other versions, and in order of bib key where counts are equal."""
+    rows = macro_calls(tex, "cirow", 8)
     cited = cited_keys(tex) | {r[1].strip() for r in macro_calls(tex, "lrow", 6)}
     keys = [r[0].strip() for r in rows]
     prob = []
@@ -180,16 +192,23 @@ def citation_problems(tex, cit, abdc):
     prob += [f"{k} cited, no row" for k in sorted(cited - set(keys))]
     prob += [f"{k} has a row, not cited" for k in sorted(set(keys) - cited)]
     prob += [f"{k} has {keys.count(k)} rows" for k in sorted(set(keys)) if keys.count(k) > 1]
+    order = []
     for r in rows:
-        key, count, rating = r[0].strip(), r[4].strip(), r[5].strip()
+        key, title, count, rating, link = r[0].strip(), normalise(r[1]), r[5].strip(), r[6].strip(), r[7]
+        if title != titles.get(key):
+            prob.append(f"{key} title {title!r}, refs.bib gives {titles.get(key)!r}")
         d = cit.get("papers", {}).get(key)
         if d is None:
             prob.append(f"{key} not in citations.json")
             continue
         main, others = d["main"]["cites"], d["others_cites"]
+        order.append((-(main + others), key))
         want = f"{main} (+{others})" if others else f"{main}"
         if count != want:
             prob.append(f"{key} count {count!r}, citations.json gives {want!r}")
+        ids = [d["main"]["id"]] + [o["id"] for o in d.get("others", [])]
+        if re.findall(r"\\citedby\{([^{}]*)\}", link) != ids:
+            prob.append(f"{key} links {re.findall(r'citedby\{([^{}]*)\}', link)}, citations.json gives {ids}")
         hit = next((abdc[i] for i in d["main"].get("issn") or [] if i in abdc), None)
         if hit is not None and rating != hit:
             prob.append(f"{key} ABDC {rating!r}, the 2025 list gives {hit!r}")
@@ -197,10 +216,12 @@ def citation_problems(tex, cit, abdc):
             prob.append(f"{key} ABDC {rating!r}, but its ISSN is not in the 2025 list")
         if (d.get("abdc_2025") or None) != hit:
             prob.append(f"{key} citations.json rating {d.get('abdc_2025')!r} against the list {hit!r}")
+    if order != sorted(order):
+        prob.append("rows not in descending order of citations")
     return prob
 
 
-def analyse(tex, lean, bibs, lit, cit=None, abdc=None):
+def analyse(tex, lean, bibs, lit, cit=None, abdc=None, titles=None):
     tex = strip_comments(tex)
     krows = macro_calls(tex, "krow", 4)
     prows = macro_calls(tex, "prow", 6)
@@ -280,7 +301,7 @@ def analyse(tex, lean, bibs, lit, cit=None, abdc=None):
             over.append((pid, round(ratio, 3), p, m))
     out["MS-6"] = (not over, f"proofs above {PROSE_LIMIT:.0%} prose {over}")
 
-    cprob = citation_problems(tex, cit or {}, abdc or {})
+    cprob = citation_problems(tex, cit or {}, abdc or {}, titles or {})
     out["MS-10"] = (not cprob, f"{cprob}")
 
     labels = set(re.findall(r"\\label\{([^{}]*)\}", tex))
@@ -298,8 +319,11 @@ def analyse(tex, lean, bibs, lit, cit=None, abdc=None):
 FIX_LEAN = {"Fixture.flat_posterior"}
 FIX_BIBS = {"Fixture2000"}
 FIX_LIT = {"Fixture2000": "The marker carries no information about class within a group."}
-FIX_CIT = {"papers": {"Fixture2000": {"main": {"cites": 7, "issn": ["0000-0001"]}, "others_cites": 2, "abdc_2025": "A"}}}
+FIX_CIT = {"papers": {"Fixture2000": {"main": {"id": "W1", "cites": 7, "issn": ["0000-0001"]}, "others": [{"id": "W2", "cites": 2}],
+                                      "others_cites": 2, "abdc_2025": "A"},
+                      "Fixture2001": {"main": {"id": "W3", "cites": 0, "issn": []}, "others": [], "others_cites": 0}}}
 FIX_ABDC = {"0000-0001": "A"}
+FIX_TITLES = {"Fixture2000": "A Fixture", "Fixture2001": "Another Fixture"}
 
 GOOD = r"""
 \krow{K1}{h}{M1}{s}
@@ -308,7 +332,9 @@ GOOD = r"""
 \mrow{M1}{c}{$x$}{Fixture.flat_posterior}
 \lrow{L1}{Fixture2000}{w}{The marker carries no information about class within a group.}{12}{M1}
 \crow{C1}{s}{M1, L1}
-\cirow{Fixture2000}{r}{p}{2000}{7 (+2)}{A}
+\cirow{Fixture2000}{A Fixture}{r}{p}{2000}{7 (+2)}{A}{\citedby{W1}{main}, \citedby{W2}{other 1}}
+\cirow{Fixture2001}{Another Fixture}{r}{p}{2001}{0}{--}{\citedby{W3}{main}}
+\citet{Fixture2001}
 \begin{mproof}{M1}{Fixture.flat_posterior}
 Then \[ \frac{\ell(c)\pi(c)}{\sum_{c'} \ell(c')\pi(c')} = \pi(c) \] for every $c \in \mathcal{C}$.
 \end{mproof}
@@ -322,8 +348,8 @@ BAD = r"""
 \mrow{M1}{c}{$x$}{Fixture.no_such_theorem}
 \lrow{L1}{Fixture2000}{w}{A sentence the paper never printed.}{12}{M1}
 \crow{C1}{s}{X5}
-\cirow{Fixture2000}{r}{p}{2000}{9}{B}
-\cirow{Fixture1999}{r}{p}{1999}{0}{--}
+\cirow{Fixture1999}{t}{r}{p}{1999}{0}{--}{}
+\cirow{Fixture2000}{A Fixture}{r}{p}{2000}{9}{B}{\citedby{W1}{main}}
 \begin{mproof}{M1}{Fixture.no_such_theorem}
 This proof talks through every step in words and uses almost no symbols at all, so
 a reader learns the argument from sentences rather than from expressions, which is
@@ -350,7 +376,7 @@ import json  # noqa: E402
 cit = json.load(open(CITATIONS)) if os.path.exists(CITATIONS) else {}
 abdc = abdc_index(ABDC) if os.path.exists(ABDC) else {}
 print(f"      citations.json: {len(cit.get('papers', {}))} papers, retrieved {cit.get('retrieved')}; ABDC 2025 ISSNs: {len(abdc)}")
-real, counts = analyse(tex, lean, bibs, lit, cit, abdc)
+real, counts = analyse(tex, lean, bibs, lit, cit, abdc, bib_titles())
 print(f"      rows in wealth_garch_theory.tex: {counts}")
 names = {"MS-1": "row IDs well formed and unique",
          "MS-2": "introduction rows point to model rows only",
@@ -361,15 +387,15 @@ names = {"MS-1": "row IDs well formed and unique",
          "MS-7": "assumption rows point to model rows, and every model row rests on one",
          "MS-8": "player rows point to model or literature rows only",
          "MS-9": "every section and table of the skeleton is present",
-         "MS-10": "the table of citations covers every cited paper, with counts and ABDC ratings from their sources"}
+         "MS-10": "the table of citations covers every cited paper in order of citations, with titles, counts, links and ABDC ratings from their sources"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
 
 print("-" * 72)
 print("CONTROLS  a well-formed sample must pass every rule; a faulty one must fail every rule")
-good, _ = analyse(GOOD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC)
-bad, _ = analyse(BAD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC)
+good, _ = analyse(GOOD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC, FIX_TITLES)
+bad, _ = analyse(BAD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC, FIX_TITLES)
 for k in sorted(good):
     check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])

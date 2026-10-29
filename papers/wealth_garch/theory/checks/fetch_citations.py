@@ -4,7 +4,7 @@ Source: OpenAlex (api.openalex.org), no API key, for the records and counts;
 Crossref (api.crossref.org) for the print date, volume, issue and pages of
 journal versions, since OpenAlex dates are sometimes the online or a wrong
 date. For each cited bib key the
-record of the version the table names is `main`; `others` are OpenAlex records
+record of the published version, where there is one, is `main`; `others` are OpenAlex records
 of earlier or parallel versions of the same paper (working papers, SSRN,
 RePEc), which OpenAlex counts separately; `later` is a record the table names
 as a later version that was not read. Each record id was chosen by hand from
@@ -48,7 +48,9 @@ RECORDS = {
     "langmenno2026": dict(main="W7128914369", others=["W7131171981"]),
     "glover2023": dict(main="W4322721965", others=[]),
     "lambertini2014": dict(main="W2185057928", others=[]),
-    "alvarez2014": dict(main="W1511179063", others=["W3121838129", "W3150502032"], later="doi:10.1257/aer.20140500"),
+    # NBER WP 20155 was published in the AER under another title; the abstracts state the same
+    # result (kurtosis over frequency as a sufficient statistic, over the same class of models).
+    "alvarez2014": dict(main="W2343185847", others=["W1511179063", "W3121838129", "W3150502032", "W3125896809"]),
     "federico2026": dict(main="W7214928914", others=["W4412630239", "W7214492509"]),
     "bonaparte2011": dict(main="W2123714743", others=[]),
 }

@@ -11,7 +11,7 @@
 %   through the mproof environment. IDs are K1, K2, ... (introduction),
 %   P1, ... (players), A1, ... (assumptions), M1, ... (model), L1, ... (literature)
 %   and C1, ... (conclusions).
-%     \cirow{bib key}{version read}{published as}{date}{citations}{ABDC 2025}
+%     \cirow{bib key}{title}{version read}{published as}{date}{citations}{ABDC 2025}{links}
 %     \krow{ID}{headline}{model rows}{scope note}
 %     \prow{ID}{player}{choice faced}{how the model settles it}{in the literature}{rows}
 %     \arow{ID}{assumption}{in plain English}{symbols}{model rows}{reason}
@@ -86,7 +86,9 @@
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
 \newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
-\newcommand{\cirow}[6]{\citet{#1} & #2 & #3 & #4 & #5 & #6 \\ \addlinespace}
+\newcommand{\cirow}[8]{\citet{#1} & #2 & #3 & #4 & #5 & #6 & #7 & #8 \\ \addlinespace}
+% The OpenAlex record of a work, which shows its count of citations and lists them.
+\newcommand{\citedby}[2]{\href{https://openalex.org/works/#1}{#2}}
 
 \newenvironment{mproof}[2]
   {\subsection*{Proof of #1}\label{proof:#1}%
@@ -625,51 +627,57 @@ under \path{lit/}.
 % ratings are checked by MS-10 against theory/citations.json, which
 % theory/checks/fetch_citations.py writes, and against the ABDC list in
 % papers/journal_rankings/.
-Table~\ref{tab:citations} lists every paper the manuscript cites, with the
-version read, where it is published, the number of citations and the
-rating of the journal in the 2025 ABDC Journal Quality List. Citations are the
-count of the OpenAlex record of the version in the third column, retrieved on
-28 October 2026, with the counts of OpenAlex's records of other versions of the
-same paper in brackets. OpenAlex counts are usually lower than those of Google
+Table~\ref{tab:citations} lists every paper the manuscript cites, with its
+title, the version read, where it is published, the number of citations and the
+rating of the journal in the 2025 ABDC Journal Quality List. The papers are in
+order of their citations, counting the other versions, and papers with the same
+count are in alphabetical order. Citations are the count of the OpenAlex record
+of the published version, or of the working paper where none was found,
+retrieved on 29 October 2026, with the counts of OpenAlex's records of other
+versions of the same paper in brackets. The last column links to each of these
+records, the one counted first. OpenAlex counts are usually lower than those of Google
 Scholar. The date is that of the printed issue registered with Crossref, or of
 the working paper. Where the published version differs from the version read,
 the published version was not read.
 
+\begin{landscape}
 \footnotesize
-\begin{longtable}{@{}P{3.0cm}P{2.8cm}P{4.1cm}P{1.3cm}P{1.6cm}P{2.2cm}@{}}
-\caption{Papers cited, with the version read, the published version and its
-journal's rating.}\label{tab:citations}\\
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}P{2.9cm}P{5.6cm}P{3.0cm}P{4.4cm}P{1.3cm}P{1.6cm}P{2.3cm}P{2.0cm}@{}}
+\caption{Papers cited, in order of citations, with the title, the version read,
+the published version, its journal's rating and the records counted.}\label{tab:citations}\\
 \toprule
-Paper & Version read & Published as & Date & Citations & ABDC 2025 \\
+Paper & Title & Version read & Published as & Date & Citations & ABDC 2025 & OpenAlex \\
 \midrule
 \endfirsthead
 \toprule
-Paper & Version read & Published as & Date & Citations & ABDC 2025 \\
+Paper & Title & Version read & Published as & Date & Citations & ABDC 2025 & OpenAlex \\
 \midrule
 \endhead
-\cirow{bayraktar2026}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{--}
-\cirow{barberis2001}{the article}{QJE 116(1), 1--53}{2001-02}{1876 (+244)}{A*}
-\cirow{engle2018}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{A*}
-\cirow{li2023}{arXiv 2108.02648v4}{SIAM J.\ Financial Math.\ 15(1), 121--160}{2024-03}{12}{B}
-\cirow{peura2006}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{187}{not listed (A* in 2016, discontinued)}
-\cirow{bolton2011}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{662 (+266)}{A*}
-\cirow{lokka2008}{preprint of July 2005}{Insurance Math.\ Econ.\ 42(3), 954--961}{2008-06}{117}{A*}
-\cirow{blackperold1992}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{A*}
-\cirow{daihuangkeppo2019}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{A*}
-\cirow{milnewhalley2001}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{--}
-\cirow{berger2008}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{531 (+11)}{A}
-\cirow{constantinides1978}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{A*}
-\cirow{decamps2011}{the article}{J.\ Finance 66(5), 1501--1544}{2011-10}{165 (+12)}{A*}
-\cirow{behn2019}{ECB WP 2233}{working paper}{2019-01}{14}{--}
-\cirow{langmenno2026}{ECB WP 3188}{working paper}{2026}{0}{--}
-\cirow{glover2023}{preprint of 1 December 2022}{European J.\ Finance 29(18), 2075--2106}{2023-12}{0}{A}
-\cirow{lambertini2014}{EPFL working paper}{working paper}{2014-02}{5}{--}
-\cirow{alvarez2014}{NBER WP 20155}{working paper; a later paper by the same authors, AER 106(10), 2016, under another title, not read}{2014-05}{36 (+18)}{--}
-\cirow{federico2026}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{A}
-\cirow{bonaparte2011}{NBER WP 16957}{J.\ Monetary Econ.\ 59(8), 751--768}{2012-12}{29}{A*}
+\cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}
+\cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}
+\cirow{berger2008}{How Do Large Banking Organizations Manage Their Capital Ratios?}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{532 (+11)}{A}{\citedby{W2170777567}{main}, \citedby{W3125767733}{other 1}}
+\cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{A*}{\citedby{W2068841402}{main}}
+\cirow{alvarez2014}{Small and Large Price Changes and the Propagation of Monetary Shocks}{NBER WP 20155}{Amer.\ Econ.\ Rev.\ 106(10), 2817--2851, as ``The Real Effects of Monetary Shocks in Sticky Price Models''}{2016-10}{169 (+56)}{A*}{\citedby{W2343185847}{main}, \citedby{W1511179063}{other 1}, \citedby{W3121838129}{other 2}, \citedby{W3150502032}{other 3}, \citedby{W3125896809}{other 4}}
+\cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}
+\cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{A*}{\citedby{W2147736135}{main}}
+\cirow{decamps2011}{Free Cash Flow, Issuance Costs, and Stock Prices}{the article}{J.\ Finance 66(5), 1501--1544}{2011-10}{166 (+12)}{A*}{\citedby{W2052461731}{main}, \citedby{W1549697278}{other 1}}
+\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{--}{\citedby{W1788034067}{main}}
+\cirow{lokka2008}{Optimal Dividend and Issuance of Equity Policies in the Presence of Proportional Costs}{preprint of July 2005}{Insurance Math.\ Econ.\ 42(3), 954--961}{2008-06}{117}{A*}{\citedby{W2078270141}{main}}
+\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}
+\cirow{bonaparte2011}{Consumption Smoothing and Portfolio Rebalancing: The Effects of Adjustment Costs}{NBER WP 16957}{J.\ Monetary Econ.\ 59(8), 751--768}{2012-12}{29}{A*}{\citedby{W2123714743}{main}}
+\cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{--}{\citedby{W2919604362}{main}}
+\cirow{li2023}{Optimal Consumption with Loss Aversion and Reference to Past Spending Maximum}{arXiv 2108.02648v4}{SIAM J.\ Financial Math.\ 15(1), 121--160}{2024-03}{12}{B}{\citedby{W3190992390}{main}}
+\cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{A*}{\citedby{W3123188656}{main}}
+\cirow{lambertini2014}{Macroeconomic Implications of Bank Capital Requirements}{EPFL working paper}{working paper}{2014-02}{5}{--}{\citedby{W2185057928}{main}}
+\cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}
+\cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}
+\cirow{glover2023}{Capital Ideas: Optimal Capital Accumulation Strategies for a Bank and its Regulator}{preprint of 1 December 2022}{European J.\ Finance 29(18), 2075--2106}{2023-12}{0}{A}{\citedby{W4322721965}{main}}
+\cirow{langmenno2026}{A Structural Model of Capital Buffer Usability}{ECB WP 3188}{working paper}{2026}{0}{--}{\citedby{W7128914369}{main}, \citedby{W7131171981}{other 1}}
 \bottomrule
 \end{longtable}
 \normalsize
+\end{landscape}
 
 \section{What the paper adds to the three approaches}
 \label{sec:novelty}

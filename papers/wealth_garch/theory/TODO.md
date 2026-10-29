@@ -260,6 +260,12 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   (Mathematical Finance, online 30 September 2026), Bonaparte, Cooper and Zhu
   (J. Monetary Econ. 2012). Alvarez, Le Bihan and Lippi have an AER 2016 paper
   under another title, not checked to be the same paper.
+- 2026-10-29. The table of citations carries each paper's title and a link to
+  each OpenAlex record it counts, and is sorted by citations (author). Counts
+  are of the published version wherever one is found (author); Alvarez, Le
+  Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
+  abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
+  refetched 29 October 2026.
 - 2026-10-28. K2 kept as written; a solve with no borrowing added (author).
   `solve/run_noborrow.py`, Appendix B "Without borrowing". The audit of
   28 October is `notes/audit_20261028.md`.
