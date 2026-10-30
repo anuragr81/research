@@ -21,3 +21,12 @@
   liquidation-or-recapitalisation boundary in the same direction. The theory
   paper uses them to motivate its question; the same-direction response is
   the case the control of M3 shows can leave the Jacobian singular.
+
+## Added 30 October 2026, for the theory paper's Section 3.4
+
+- MW-Q13, MW-Q14 (p. 18) and MW-D3. Results 5 and 6, their control of
+  variance. The theory paper's exposure rule under the cap term reduces to
+  their bang-bang rule when the risk premium is zero, and M4's convexity
+  above the trigger is their risk-loving region with the cap in place of
+  their assumed upper volatility. The theory paper had cited them for the
+  fixed cost and the random audit only (L16, L37 to L40).

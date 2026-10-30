@@ -231,7 +231,7 @@ ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 \midrule
 \endhead
-\arow{A1}{The state is $x\in(1,\infty)$, with diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio, the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M9, M10, M11, M12, M13, M14}{The balance sheet of \citet{bayraktar2026} in ratio form. Appendix~\ref{app:scope}, the balance sheet.}
+\arow{A1}{The state is $x\in(1,\infty)$, with drift $\mu(x,\pi)=x((1-\pi)r+\pi\mu_s-\mu_L)+\gamma$ and diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio. The riskless rate, the expected asset return, the liability drift and the net income on liabilities set the drift of the state, and the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\mu$, $r$, $\mu_s$, $\mu_L$, $\gamma$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M1, M4, M9, M10, M11, M12, M13, M14}{The balance sheet of \citet{bayraktar2026} in ratio form, their Proposition 2.1. Appendix~\ref{app:scope}, the balance sheet.}
 \arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation sets a regulatory cap on the risky exposure at each assets-to-liabilities ratio, the smaller of a solvency branch, whose slope is the solvency floor and which binds near distress, and a liquidity branch, set by the run-off rate and the liquidity haircut and binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12, M13}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
 \arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the assets-to-liabilities ratio, at the risky exposure the bank takes and the asset volatility it bears.}{$\zeta$, $z$, $x$, $\pi$, $\sigma$}{M10, M11, M12, M13, M14}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
 \arow{A4}{The objective is dividends net of issuance costs minus the running shortfall penalty $\Lambda(x)=(\lambda_S-1)(R-x)^+$ with $\lambda_S\ge1$ and reference $R=1+q$, discounted at $\rho_L$.}{Shareholders value dividends net of what they pay for issues, less a shortfall penalty for each moment the assets-to-liabilities ratio sits below the reference, the state at which equity equals required capital, weighted by the asymmetry parameter and discounted at the liability-net discount rate.}{$\Lambda$, $\lambda_S$, $R$, $q$, $\rho_L$, $x$}{M1, M2, M3, M4, M8}{The asymmetric penalty is the paper's question. Appendix~\ref{app:scope}, the shortfall penalty.}
@@ -240,6 +240,82 @@ ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 \bottomrule
 \end{longtable}
 \normalsize
+
+\subsection{The bank's problem}
+\label{sec:problem}
+
+One player optimises. The bank chooses its risky exposure $\pi$, its dividends
+$D$ and the times $\tau_n$ and sizes $I_n$ of its recapitalisations, and it
+chooses them for its shareholders, who receive the dividends and pay for each
+issue (P1, P2). The supervisor sets required capital and the regulatory cap
+before the problem starts and does not act within it (P4, A2), and the
+creditors choose nothing (P3). The bank also chooses when to recapitalise,
+where in \citet{bayraktar2026} the supervisor fixes the state at which it must
+(L28).
+
+Between issues the assets-to-liabilities ratio follows
+\[
+dx_t=\mu(x_t,\pi_t)\,dt+\pi_tx_t\sigma\,dB_t+\sigma_L(1-x_t)\,dW_t-dD_t,\qquad
+\mu(x,\pi)=x\big((1-\pi)r+\pi\mu_s-\mu_L\big)+\gamma,
+\]
+with $d[B,W]_t=c\,dt$, and the issue at $\tau_n$ moves it from $x_{\tau_n-}$
+to $x_{\tau_n-}+I_n$. The quadratic variation of $x$ per unit of time is the
+diffusion $\sigma^2(x,\pi)$ of A1, and $\mu(x,\pi)$ is the drift of the state,
+which along the cap is the drift $\mu$ of Appendix~\ref{app:proofs}. This is
+the reduction of \citet{bayraktar2026} to one state, their Proposition 2.1, in
+which values are per unit of liabilities and expectations are under the
+measure that weights each path by its liabilities. Their dilution cost is
+replaced by the fixed and the proportional issuance costs of A5, and the fixed
+issuance cost is charged per unit of liabilities so that the reduction survives
+it (L4, Appendix~\ref{app:scope}).
+
+A policy is admissible when the exposure complies with the regulatory cap at
+every date, $0\le\pi_tx_t\le u(x_t)$ (A2), the dividends are non-decreasing
+and right-continuous with $D_{0-}=0$, the issue times are increasing stopping
+times and each issue size is known at its issue time. The bank maximises
+\[
+V(x)=\sup\ \mathbb E_x\Big[\int_0^\infty e^{-\rho_Lt}\big(dD_t-\Lambda(x_t)\,dt\big)-\sum_{n\ge1}e^{-\rho_L\tau_n}\big(K+(1+\kappa)I_n\big)\Big]
+\]
+over admissible policies. The integral is the dividends less the shortfall
+penalty of A4, and the sum is what the shareholders pay for each issue (A5).
+The liability-net discount rate is $\rho_L=\rho-\mu_L$, the shareholders'
+discount rate net of the liability drift, since values are per unit of
+liabilities.
+
+The shortfall penalty is part of what the bank maximises and not a payment
+anyone receives. At $\lambda_S=1$ it vanishes and the objective is the
+shareholders' value alone (M8). Above one it charges each moment the state
+spends below the reference, and the model does not say whose cost that charge
+stands for, the supervisor's restrictions below required capital or the
+market's response. Appendix~\ref{app:scope} adopts the first reading without
+deriving it, and K1 identifies the asymmetry parameter under any of them.
+
+At the distress boundary the regulatory cap is zero, so the exposure is zero,
+the diffusion vanishes and the drift is $r-\mu_L+\gamma$. When that drift is
+positive, as at every parameter point of Appendix~\ref{app:evidence}, the
+boundary repels the state locally \citep[Remark 3.1]{bayraktar2026}. The
+problem has no liquidation, where \citet{peura2006} liquidate at the minimum
+(L24).
+
+The dynamic programming equation of the problem is the quasi-variational
+inequality
+\begin{equation}\label{eq:qvi}
+\max\Big\{\sup_{0\le\pi x\le u(x)}\big[\tfrac12\sigma^2(x,\pi)V''+\mu(x,\pi)V'\big]-\rho_LV-\Lambda(x),\ \ \mathcal MV-V,\ \ 1-V'\Big\}=0,
+\end{equation}
+with $\mathcal MV(x)=\sup_{\xi>0}V(x+\xi)-K-(1+\kappa)\xi$ the impulse
+operator, the value of issuing at once. Its first term is waiting with the
+best compliant exposure, its second is issuing at once and its third is paying
+a dividend. A6 takes as given that $V$ solves it and that the optimal policy is
+a dividend barrier $y^*$, a recapitalisation trigger $x_L$ and an injection
+target $y_{\text{post}}$. Under that policy the state stays in $[x_L,y^*]$, a
+dividend is paid whenever the state reaches $y^*$, and when it falls to $x_L$
+the bank issues $y_{\text{post}}-x_L$. The exposure is the maximiser in the
+first term, which no row derives (P1).
+
+Rows M1 to M7 are statements about the thresholds of this policy, and M10 to
+M12 about buffer variance under the exposure. Appendix~\ref{app:evidence}
+solves equation~\eqref{eq:qvi} numerically, and its comparative statics vary
+the asymmetry parameter, the fixed issuance cost and the cap geometry in it.
 
 \subsection{Results}
 
@@ -456,16 +532,9 @@ which a binding cap closes (M11), and not in thresholds.}
 \subsection{The three approaches in one formulation}
 \label{sec:common}
 
-The paper's model, A1 to A6, is one quasi-variational inequality, and the
-three approaches are the three places in it where a friction can sit. The
-value function solves
-\[
-\max\Big\{\sup_{0\le\pi x\le u(x)}\big[\tfrac12\sigma^2(x,\pi)V''+b(x,\pi)V'\big]-\rho_LV-\Lambda(x),\ \ \mathcal MV-V,\ \ 1-V'\Big\}=0,
-\]
-with $\mathcal MV(x)=\sup_{\xi>0}V(x+\xi)-K-(1+\kappa)\xi$ the impulse
-operator of A6, $\Lambda(x)=(\lambda_S-1)(R-x)^+$ the shortfall penalty of A4,
-$\sigma^2(x,\pi)$ the diffusion of A1 and $b(x,\pi)$ the drift of the state,
-which is $\mu$ of Appendix~\ref{app:proofs} along the cap. The regulatory cap
+The paper's model is the problem of Section~\ref{sec:problem}, whose
+equation~\eqref{eq:qvi} is one quasi-variational inequality, and the three
+approaches are the three places in it where a friction can sit. The regulatory cap
 of A2 is the set over which the supremum is taken, the cap term. The fixed and
 proportional issuance costs of A5 sit in the impulse operator, the impulse
 term. The asymmetry parameter sits in the running payoff, the payoff term.
@@ -549,7 +618,7 @@ Where the cap binds, the exposure is $u(x)/x$ whatever $V$ is, so buffer
 variance is a function of $(\sigma,\sigma_L,c,a_1,a_3,x)$ and carries nothing
 of $\lambda_S$, which is M10 and M11. Where the cap does not bind, the exposure
 is the interior maximiser, which solves
-$\tfrac12\,\partial_\pi\sigma^2(x,\pi)\,V''+\partial_\pi b(x,\pi)\,V'=0$ and so
+$\tfrac12\,\partial_\pi\sigma^2(x,\pi)\,V''+\partial_\pi\mu(x,\pi)\,V'=0$ and so
 depends on $V'/V''$ and through it on $\lambda_S$. The solve with no borrowing
 has such an interval, where the exposure is below the cap and below the
 ceiling of one, and there buffer variance at $\lambda_S=1.6$ differs from its
