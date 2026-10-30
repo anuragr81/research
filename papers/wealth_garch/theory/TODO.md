@@ -266,10 +266,10 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
-- 2026-10-30. Citation table order weights claims twice (author). The order
-  is the rank by citations plus twice the rank by claims (`CLAIMS_WEIGHT` in
-  the checker). Peura and Keppo first, Barberis et al. second, Bayraktar et
-  al. sixth.
+- 2026-10-30. Citation table in lexicographic order (author), descending in
+  claims, then in citations, then by bib key; it replaces the rank sums of
+  earlier the same day. Bayraktar et al. (13 claims) first, Peura and Keppo
+  (12) second.
 - 2026-10-30. The table of citations gains Claims, the number of literature
   rows on each paper linked to the first, and If not relied on, one sentence
   in the map's names on what the manuscript loses without the paper (author).

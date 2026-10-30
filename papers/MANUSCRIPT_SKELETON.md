@@ -177,11 +177,9 @@ Lists are comma-separated. A Lean name is fully qualified,
      each record counted, `\citedby{W...}{main}, \citedby{W...}{other 1}`, the
      record counted first. The last column says in one sentence, in the names
      of the measurement map, what the manuscript loses if the paper is not
-     relied on (author, 30 October 2026). The rows are in increasing order of
-     the paper's rank by citations, counting the other versions, plus twice
-     its rank by claims, tied ranks sharing their mean, then by citations and
-     by bib key, so that claims weigh more than citations (author,
-     30 October 2026). The table is a landscape page. The ABDC column is the journal's rating in the
+     relied on (author, 30 October 2026). The rows are in descending order of
+     claims, then of citations counting the other versions, then by bib key
+     (author, 30 October 2026). The table is a landscape page. The ABDC column is the journal's rating in the
      2025 ABDC list in `papers/journal_rankings/`, matched by ISSN, `--` for a
      working paper, or `not listed (...)`. No impact factor (author,
      28 October 2026). A fetch script writes the counts to a JSON file the
@@ -237,7 +235,7 @@ The appendices follow the conclusions.
 | MS-7 | Assumption rows point to model rows only, and every model row rests on at least one assumption. |
 | MS-8 | Player rows point to model or literature rows only. |
 | MS-9 | Every section and table of the skeleton is present, found by its label. |
-| MS-10 | The table of citations has exactly one row per cited bib key, in increasing order of the rank by citations (with the other versions) plus twice the rank by claims, then by citations and bib key; each title equals the bib entry's title; each row's claims equal the number of literature rows on the paper, linked to the first; each row says what is lost without the paper; each row links to the OpenAlex records it counts, the main one first; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. A control swaps two rows and must fail. |
+| MS-10 | The table of citations has exactly one row per cited bib key, in descending order of claims, then of citations (with the other versions), then by bib key; each title equals the bib entry's title; each row's claims equal the number of literature rows on the paper, linked to the first; each row says what is lost without the paper; each row links to the OpenAlex records it counts, the main one first; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. A control swaps two rows and must fail. |
 
 Each rule also runs on a well-formed sample, which it must accept, and on a
 faulty sample, which it must reject. A rule that cannot fail measures nothing.

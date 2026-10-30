@@ -12,8 +12,6 @@ REQUIRED = ["sec:intro", "tab:headlines", "sec:model", "tab:players", "tab:assum
             "tab:concl", "tab:pending", "app:proofs", "app:evidence", "app:terms",
             "tab:terms", "app:scope", "app:refuted"]
 PROSE_LIMIT = 0.30
-# MS-10 order: the rank by claims counts this many times the rank by citations (author, 30 October 2026).
-CLAIMS_WEIGHT = 2
 # The table of citations (MS-10): counts fetched by checks/fetch_citations.py,
 # ratings read from the ABDC list the author supplied.
 CITATIONS = os.path.join(ROOT, "citations.json")
@@ -201,20 +199,6 @@ def citation_rows(tex):
     return rows
 
 
-def mean_ranks(values):
-    """Rank 1 for the largest value; tied values share the mean of their ranks."""
-    order = sorted(values, key=lambda kv: -kv[1])
-    out, i = {}, 0
-    while i < len(order):
-        j = i
-        while j + 1 < len(order) and order[j + 1][1] == order[i][1]:
-            j += 1
-        for k in range(i, j + 1):
-            out[order[k][0]] = (i + j) / 2 + 1
-        i = j + 1
-    return out
-
-
 def citation_problems(tex, cit, abdc, titles):
     """MS-10. Every cited key has exactly one row in the table of citations and no other key has one; each
     row's title is the title of its bib entry; each row's count is the OpenAlex count of the record it names,
@@ -222,9 +206,8 @@ def citation_problems(tex, cit, abdc, titles):
     literature rows that rest on the paper, linked to the first of them; each row says what the manuscript
     loses without the paper; each row's ABDC rating is the 2025 rating of the journal's ISSN, or -- or
     'not listed ...' when the ISSN is not in the 2025 list; each row links to the OpenAlex records of its
-    count, the record counted first; the rows are in increasing order of the paper's rank by citations (with
-    the other versions) plus CLAIMS_WEIGHT times its rank by claims, tied ranks sharing their mean, and then
-    in order of citations and of bib key (author, 30 October 2026)."""
+    count, the record counted first; the rows are in descending order of claims, then of citations with
+    the other versions, then in order of bib key (author, 30 October 2026)."""
     rows = citation_rows(tex)
     lrows = macro_calls(tex, "lrow", 6)
     cited = cited_keys(tex) | {r[1].strip() for r in lrows}
@@ -271,12 +254,10 @@ def citation_problems(tex, cit, abdc, titles):
             prob.append(f"{key} ABDC {rating!r}, but its ISSN is not in the 2025 list")
         if (d.get("abdc_2025") or None) != hit:
             prob.append(f"{key} citations.json rating {d.get('abdc_2025')!r} against the list {hit!r}")
-    rc = mean_ranks(list(total.items()))
-    rk = mean_ranks([(k, nclaims.get(k, 0)) for k in total])
     present = [k for k in keys if k in total]
-    want_order = sorted(present, key=lambda k: (rc[k] + CLAIMS_WEIGHT * rk[k], -total[k], k))
+    want_order = sorted(present, key=lambda k: (-nclaims.get(k, 0), -total[k], k))
     if present != want_order:
-        prob.append(f"rows not in the combined order of citations and claims; expected {want_order}")
+        prob.append(f"rows not in order of claims and then citations; expected {want_order}")
     return prob
 
 
@@ -446,7 +427,7 @@ names = {"MS-1": "row IDs well formed and unique",
          "MS-7": "assumption rows point to model rows, and every model row rests on one",
          "MS-8": "player rows point to model or literature rows only",
          "MS-9": "every section and table of the skeleton is present",
-         "MS-10": "the table of citations covers every cited paper in the combined order of citations and claims, with titles, counts, claims, links, ABDC ratings and what is lost without each"}
+         "MS-10": "the table of citations covers every cited paper in order of claims and then citations, with titles, counts, claims, links, ABDC ratings and what is lost without each"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
@@ -461,7 +442,7 @@ for k in sorted(good):
 _rows = [l for l in GOOD.split("\n") if l.startswith("\\cirow{")]
 _swapped = GOOD.replace(_rows[0], "@@").replace(_rows[1], _rows[0]).replace("@@", _rows[1])
 _sw = citation_problems(strip_comments(_swapped), FIX_CIT, FIX_ABDC, FIX_TITLES)
-check("MS-10-control rows out of the combined order fail", any("combined order" in x for x in _sw))
+check("MS-10-control rows out of order fail", any("not in order" in x for x in _sw))
 r_good = prose_ratio(proof_blocks(GOOD)[0][2])
 r_bad = prose_ratio(proof_blocks(BAD)[0][2])
 print(f"      prose share, well-formed sample {r_good[0]:.2f}; faulty sample {r_bad[0]:.2f}")
