@@ -176,15 +176,61 @@ def bib_titles():
     return out
 
 
+def citation_rows(tex):
+    """Each \\cirow{9 arguments} with the argument of the \\cinot{} that closes its row ('' when absent)."""
+    rows = []
+    for m in re.finditer(r"\\cirow(?![A-Za-z])", tex):
+        i, args = m.end(), []
+        for _ in range(9):
+            g, i = brace_group(tex, i)
+            if g is None:
+                break
+            args.append(g)
+        if len(args) < 9:
+            continue
+        j = i
+        while j < len(tex) and tex[j].isspace():
+            j += 1
+        note = ""
+        if tex.startswith("\\cinot", j):
+            g, _ = brace_group(tex, j + len("\\cinot"))
+            note = g or ""
+        rows.append(args + [note])
+    return rows
+
+
+def mean_ranks(values):
+    """Rank 1 for the largest value; tied values share the mean of their ranks."""
+    order = sorted(values, key=lambda kv: -kv[1])
+    out, i = {}, 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and order[j + 1][1] == order[i][1]:
+            j += 1
+        for k in range(i, j + 1):
+            out[order[k][0]] = (i + j) / 2 + 1
+        i = j + 1
+    return out
+
+
 def citation_problems(tex, cit, abdc, titles):
     """MS-10. Every cited key has exactly one row in the table of citations and no other key has one; each
     row's title is the title of its bib entry; each row's count is the OpenAlex count of the record it names,
-    with the other versions' counts in brackets when there are any; each row's ABDC rating is the 2025 rating
-    of the journal's ISSN, or -- or 'not listed ...' when the ISSN is not in the 2025 list; each row links to
-    the OpenAlex records of its count, the record counted first; the rows are in descending order of the
-    count with the other versions, and in order of bib key where counts are equal."""
-    rows = macro_calls(tex, "cirow", 8)
-    cited = cited_keys(tex) | {r[1].strip() for r in macro_calls(tex, "lrow", 6)}
+    with the other versions' counts in brackets when there are any; each row's claims are the number of
+    literature rows that rest on the paper, linked to the first of them; each row says what the manuscript
+    loses without the paper; each row's ABDC rating is the 2025 rating of the journal's ISSN, or -- or
+    'not listed ...' when the ISSN is not in the 2025 list; each row links to the OpenAlex records of its
+    count, the record counted first; the rows are in increasing order of the sum of the paper's rank by
+    citations (with the other versions) and its rank by claims, tied ranks sharing their mean, and then in
+    order of citations and of bib key (author, 30 October 2026)."""
+    rows = citation_rows(tex)
+    lrows = macro_calls(tex, "lrow", 6)
+    cited = cited_keys(tex) | {r[1].strip() for r in lrows}
+    nclaims, first = {}, {}
+    for r in lrows:
+        k = r[1].strip()
+        nclaims[k] = nclaims.get(k, 0) + 1
+        first.setdefault(k, r[0].strip())
     keys = [r[0].strip() for r in rows]
     prob = []
     if not rows:
@@ -192,17 +238,24 @@ def citation_problems(tex, cit, abdc, titles):
     prob += [f"{k} cited, no row" for k in sorted(cited - set(keys))]
     prob += [f"{k} has a row, not cited" for k in sorted(set(keys) - cited)]
     prob += [f"{k} has {keys.count(k)} rows" for k in sorted(set(keys)) if keys.count(k) > 1]
-    order = []
+    total = {}
     for r in rows:
-        key, title, count, rating, link = r[0].strip(), normalise(r[1]), r[5].strip(), r[6].strip(), r[7]
+        key, title, count, claims = r[0].strip(), normalise(r[1]), r[5].strip(), r[6].strip()
+        rating, link, note = r[7].strip(), r[8], r[9].strip()
         if title != titles.get(key):
             prob.append(f"{key} title {title!r}, refs.bib gives {titles.get(key)!r}")
+        n = nclaims.get(key, 0)
+        want_claims = f"\\claims{{{first[key]}}}{{{n}}}" if n else "0"
+        if claims != want_claims:
+            prob.append(f"{key} claims {claims!r}, the literature rows give {want_claims!r}")
+        if not note:
+            prob.append(f"{key} says nothing of what is lost without it")
         d = cit.get("papers", {}).get(key)
         if d is None:
             prob.append(f"{key} not in citations.json")
             continue
         main, others = d["main"]["cites"], d["others_cites"]
-        order.append((-(main + others), key))
+        total[key] = main + others
         want = f"{main} (+{others})" if others else f"{main}"
         if count != want:
             prob.append(f"{key} count {count!r}, citations.json gives {want!r}")
@@ -216,8 +269,12 @@ def citation_problems(tex, cit, abdc, titles):
             prob.append(f"{key} ABDC {rating!r}, but its ISSN is not in the 2025 list")
         if (d.get("abdc_2025") or None) != hit:
             prob.append(f"{key} citations.json rating {d.get('abdc_2025')!r} against the list {hit!r}")
-    if order != sorted(order):
-        prob.append("rows not in descending order of citations")
+    rc = mean_ranks(list(total.items()))
+    rk = mean_ranks([(k, nclaims.get(k, 0)) for k in total])
+    present = [k for k in keys if k in total]
+    want_order = sorted(present, key=lambda k: (rc[k] + rk[k], -total[k], k))
+    if present != want_order:
+        prob.append(f"rows not in the combined order of citations and claims; expected {want_order}")
     return prob
 
 
@@ -332,8 +389,8 @@ GOOD = r"""
 \mrow{M1}{c}{$x$}{Fixture.flat_posterior}
 \lrow{L1}{Fixture2000}{w}{The marker carries no information about class within a group.}{12}{M1}
 \crow{C1}{s}{M1, L1}
-\cirow{Fixture2000}{A Fixture}{r}{p}{2000}{7 (+2)}{A}{\citedby{W1}{main}, \citedby{W2}{other 1}}
-\cirow{Fixture2001}{Another Fixture}{r}{p}{2001}{0}{--}{\citedby{W3}{main}}
+\cirow{Fixture2000}{A Fixture}{r}{p}{2000}{7 (+2)}{\claims{L1}{1}}{A}{\citedby{W1}{main}, \citedby{W2}{other 1}}\cinot{M1 loses its source.}
+\cirow{Fixture2001}{Another Fixture}{r}{p}{2001}{0}{0}{--}{\citedby{W3}{main}}\cinot{Nothing rests on it.}
 \citet{Fixture2001}
 \begin{mproof}{M1}{Fixture.flat_posterior}
 Then \[ \frac{\ell(c)\pi(c)}{\sum_{c'} \ell(c')\pi(c')} = \pi(c) \] for every $c \in \mathcal{C}$.
@@ -348,8 +405,8 @@ BAD = r"""
 \mrow{M1}{c}{$x$}{Fixture.no_such_theorem}
 \lrow{L1}{Fixture2000}{w}{A sentence the paper never printed.}{12}{M1}
 \crow{C1}{s}{X5}
-\cirow{Fixture1999}{t}{r}{p}{1999}{0}{--}{}
-\cirow{Fixture2000}{A Fixture}{r}{p}{2000}{9}{B}{\citedby{W1}{main}}
+\cirow{Fixture1999}{t}{r}{p}{1999}{0}{0}{--}{}\cinot{}
+\cirow{Fixture2000}{A Fixture}{r}{p}{2000}{9}{\claims{L1}{3}}{B}{\citedby{W1}{main}}\cinot{}
 \begin{mproof}{M1}{Fixture.no_such_theorem}
 This proof talks through every step in words and uses almost no symbols at all, so
 a reader learns the argument from sentences rather than from expressions, which is
@@ -387,7 +444,7 @@ names = {"MS-1": "row IDs well formed and unique",
          "MS-7": "assumption rows point to model rows, and every model row rests on one",
          "MS-8": "player rows point to model or literature rows only",
          "MS-9": "every section and table of the skeleton is present",
-         "MS-10": "the table of citations covers every cited paper in order of citations, with titles, counts, links and ABDC ratings from their sources"}
+         "MS-10": "the table of citations covers every cited paper in the combined order of citations and claims, with titles, counts, claims, links, ABDC ratings and what is lost without each"}
 for k in sorted(real):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
@@ -399,6 +456,10 @@ bad, _ = analyse(BAD, FIX_LEAN, FIX_BIBS, FIX_LIT, FIX_CIT, FIX_ABDC, FIX_TITLES
 for k in sorted(good):
     check(f"{k}-control passes on the well-formed sample", good[k][0], "" if good[k][0] else good[k][1])
     check(f"{k}-control fails on the faulty sample", not bad[k][0])
+_rows = [l for l in GOOD.split("\n") if l.startswith("\\cirow{")]
+_swapped = GOOD.replace(_rows[0], "@@").replace(_rows[1], _rows[0]).replace("@@", _rows[1])
+_sw = citation_problems(strip_comments(_swapped), FIX_CIT, FIX_ABDC, FIX_TITLES)
+check("MS-10-control rows out of the combined order fail", any("combined order" in x for x in _sw))
 r_good = prose_ratio(proof_blocks(GOOD)[0][2])
 r_bad = prose_ratio(proof_blocks(BAD)[0][2])
 print(f"      prose share, well-formed sample {r_good[0]:.2f}; faulty sample {r_bad[0]:.2f}")

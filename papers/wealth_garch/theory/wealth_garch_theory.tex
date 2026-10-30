@@ -86,9 +86,11 @@
 \newcommand{\prow}[6]{#1 & #2 & #3 & #4 & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\arow}[6]{#1 & #2 & #3 & #4 & \rowref{#5} & #6 \\ \addlinespace}
 \newcommand{\mrow}[4]{#1 & #2 & #3 & \lean{#4} & p.~\pageref{proof:#1} \\ \addlinespace}
-\newcommand{\lrow}[6]{#1 & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
+\newcommand{\lrow}[6]{\hypertarget{lrow:#1}{#1} & \citet{#2} & #3 & ``#4'' & #5 & \rowref{#6} \\ \addlinespace}
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
-\newcommand{\cirow}[8]{\citet{#1} & #2 & #3 & #4 & #5 & #6 & #7 & #8 \\ \addlinespace}
+\newcommand{\cirow}[9]{\citet{#1} & #2 & #3 & #4 & #5 & #6 & #7 & #8 & #9 &}
+\newcommand{\cinot}[1]{#1 \\ \addlinespace}
+\newcommand{\claims}[2]{\hyperlink{lrow:#1}{#2}}
 % The OpenAlex record of a work, which shows its count of citations and lists them.
 \newcommand{\citedby}[2]{\href{https://openalex.org/works/#1}{#2}}
 
@@ -685,9 +687,14 @@ under \path{theory/lit/}.
 % papers/journal_rankings/.
 Table~\ref{tab:citations} lists every paper the manuscript cites, with its
 title, the version read, where it is published, the number of citations and the
-rating of the journal in the 2025 ABDC Journal Quality List. The papers are in
-order of their citations, counting the other versions, and papers with the same
-count are in alphabetical order. Citations are the count of the OpenAlex record
+rating of the journal in the 2025 ABDC Journal Quality List. The column Claims
+counts the rows of Table~\ref{tab:literature} that rest on the paper and links to
+the first of them, and the last column says in the names of the measurement map
+what the manuscript loses if the paper is not relied on. The papers are ranked once
+by citations, counting the other versions, and once by claims, and are in
+increasing order of the sum of the two ranks, so that a paper high on both comes
+first. Tied ranks share their mean, and papers with the same sum are in order of
+citations and then of bib key. Citations are the count of the OpenAlex record
 of the published version, or of the working paper where none was found,
 retrieved on 29 October 2026, with the counts of OpenAlex's records of other
 versions of the same paper in brackets. The last column links to each of these
@@ -698,38 +705,38 @@ the published version was not read.
 
 \begin{landscape}
 \footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{longtable}{@{}P{2.9cm}P{5.6cm}P{3.0cm}P{4.4cm}P{1.3cm}P{1.6cm}P{2.3cm}P{2.0cm}@{}}
-\caption{Papers cited, in order of citations, with the title, the version read,
-the published version, its journal's rating and the records counted.}\label{tab:citations}\\
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}P{2.2cm}P{3.6cm}P{2.2cm}P{3.0cm}P{1.1cm}P{1.4cm}P{1.0cm}P{1.5cm}P{1.7cm}P{5.2cm}@{}}
+\caption{Papers cited, in the combined order of citations and claims, with the title, the version read,
+the published version, its journal's rating, the records counted, the rows of Table~\ref{tab:literature} that rest on it, and what the manuscript loses without it.}\label{tab:citations}\\
 \toprule
-Paper & Title & Version read & Published as & Date & Citations & ABDC 2025 & OpenAlex \\
+Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2025 & OpenAlex & If not relied on \\
 \midrule
 \endfirsthead
 \toprule
-Paper & Title & Version read & Published as & Date & Citations & ABDC 2025 & OpenAlex \\
+Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2025 & OpenAlex & If not relied on \\
 \midrule
 \endhead
-\cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}
-\cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}
-\cirow{berger2008}{How Do Large Banking Organizations Manage Their Capital Ratios?}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{532 (+11)}{A}{\citedby{W2170777567}{main}, \citedby{W3125767733}{other 1}}
-\cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{A*}{\citedby{W2068841402}{main}}
-\cirow{alvarez2014}{Small and Large Price Changes and the Propagation of Monetary Shocks}{NBER WP 20155}{Amer.\ Econ.\ Rev.\ 106(10), 2817--2851, as ``The Real Effects of Monetary Shocks in Sticky Price Models''}{2016-10}{169 (+56)}{A*}{\citedby{W2343185847}{main}, \citedby{W1511179063}{other 1}, \citedby{W3121838129}{other 2}, \citedby{W3150502032}{other 3}, \citedby{W3125896809}{other 4}}
-\cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}
-\cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{A*}{\citedby{W2147736135}{main}}
-\cirow{decamps2011}{Free Cash Flow, Issuance Costs, and Stock Prices}{the article}{J.\ Finance 66(5), 1501--1544}{2011-10}{166 (+12)}{A*}{\citedby{W2052461731}{main}, \citedby{W1549697278}{other 1}}
-\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{--}{\citedby{W1788034067}{main}}
-\cirow{lokka2008}{Optimal Dividend and Issuance of Equity Policies in the Presence of Proportional Costs}{preprint of July 2005}{Insurance Math.\ Econ.\ 42(3), 954--961}{2008-06}{117}{A*}{\citedby{W2078270141}{main}}
-\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}
-\cirow{bonaparte2011}{Consumption Smoothing and Portfolio Rebalancing: The Effects of Adjustment Costs}{NBER WP 16957}{J.\ Monetary Econ.\ 59(8), 751--768}{2012-12}{29}{A*}{\citedby{W2123714743}{main}}
-\cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{--}{\citedby{W2919604362}{main}}
-\cirow{li2023}{Optimal Consumption with Loss Aversion and Reference to Past Spending Maximum}{arXiv 2108.02648v4}{SIAM J.\ Financial Math.\ 15(1), 121--160}{2024-03}{12}{B}{\citedby{W3190992390}{main}}
-\cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{A*}{\citedby{W3123188656}{main}}
-\cirow{lambertini2014}{Macroeconomic Implications of Bank Capital Requirements}{EPFL working paper}{working paper}{2014-02}{5}{--}{\citedby{W2185057928}{main}}
-\cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}
-\cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}
-\cirow{glover2023}{Capital Ideas: Optimal Capital Accumulation Strategies for a Bank and its Regulator}{preprint of 1 December 2022}{European J.\ Finance 29(18), 2075--2106}{2023-12}{0}{A}{\citedby{W4322721965}{main}}
-\cirow{langmenno2026}{A Structural Model of Capital Buffer Usability}{ECB WP 3188}{working paper}{2026}{0}{--}{\citedby{W7128914369}{main}, \citedby{W7131171981}{other 1}}
+\cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
+\cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{\claims{L7}{12}}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}\cinot{The fixed issuance cost and the single injection target lose their bank precedent, the shortfall penalty is no longer a call in print, and C4 and C6 lose their main comparison.}
+\cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{\claims{L5}{3}}{A*}{\citedby{W2068841402}{main}}\cinot{The constant buffer variance on the solvency branch is no longer tied to capped portfolio insurance, and C2 loses the case where the same limits carry preferences.}
+\cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{\claims{L48}{4}}{A*}{\citedby{W2147736135}{main}}\cinot{The closest precedent outside banking for a linear shortfall penalty with a fixed issuance cost goes, and C4 no longer notes thresholds that pin both parameters there.}
+\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{5}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
+\cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{\claims{L10}{1}}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}\cinot{The double barrier of dividends and issuance is no longer shown to be established, and a fixed issuance cost scaled to keep one dimension loses a precedent.}
+\cirow{berger2008}{How Do Large Banking Organizations Manage Their Capital Ratios?}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{532 (+11)}{\claims{L15}{1}}{A}{\citedby{W2170777567}{main}, \citedby{W3125767733}{other 1}}\cinot{The fact that banks hold buffers well above required capital, which the shortfall penalty is to explain, loses its empirical source.}
+\cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{\claims{L9}{5}}{A*}{\citedby{W3123188656}{main}}\cinot{C4 loses one of its two numerical precedents, and the claim that issuance-cost models fit rather than identify their parameters rests on \citet{peura2006} alone.}
+\cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{\claims{L1}{13}}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}\cinot{The regulatory cap, its crossing point and the baseline of M13 lose their source, and C3 and the contrast with an exogenous recapitalisation trigger go.}
+\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{\claims{L13}{2}}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}\cinot{The change of variable from asset volatility to buffer variance loses its empirical counterpart, and the contrast with the sign asymmetry of equity volatility goes.}
+\cirow{alvarez2014}{Small and Large Price Changes and the Propagation of Monetary Shocks}{NBER WP 20155}{Amer.\ Econ.\ Rev.\ 106(10), 2817--2851, as ``The Real Effects of Monetary Shocks in Sticky Price Models''}{2016-10}{169 (+56)}{\claims{L58}{1}}{A*}{\citedby{W2343185847}{main}, \citedby{W1511179063}{other 1}, \citedby{W3121838129}{other 2}, \citedby{W3150502032}{other 3}, \citedby{W3125896809}{other 4}}\cinot{C4 loses its comparison with identification from moments of adjustments rather than from thresholds.}
+\cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{\claims{L53}{2}}{--}{\citedby{W2919604362}{main}}\cinot{The flat charge for breaching required capital, which the shortfall penalty grades, rests on \citet{langmenno2026} alone, and separating two costs by moments rather than thresholds loses its bank example.}
+\cirow{decamps2011}{Free Cash Flow, Issuance Costs, and Stock Prices}{the article}{J.\ Finance 66(5), 1501--1544}{2011-10}{166 (+12)}{\claims{L57}{1}}{A*}{\citedby{W2052461731}{main}, \citedby{W1549697278}{other 1}}\cinot{The lumpy issues of M7 lose one precedent and keep \citet{peura2006} and \citet{bolton2011}.}
+\cirow{lokka2008}{Optimal Dividend and Issuance of Equity Policies in the Presence of Proportional Costs}{preprint of July 2005}{Insurance Math.\ Econ.\ 42(3), 954--961}{2008-06}{117}{\claims{L11}{1}}{A*}{\citedby{W2078270141}{main}}\cinot{Nothing read shows that proportional issuance costs alone give no injection target, so M7 loses its contrast.}
+\cirow{bonaparte2011}{Consumption Smoothing and Portfolio Rebalancing: The Effects of Adjustment Costs}{NBER WP 16957}{J.\ Monetary Econ.\ 59(8), 751--768}{2012-12}{29}{\claims{L61}{1}}{A*}{\citedby{W2123714743}{main}}\cinot{C4 loses its comparison with joint estimation of a preference and a fixed cost that leaves the inaction thresholds unused.}
+\cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{\claims{L59}{2}}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}\cinot{A recapitalisation trigger fixed at required capital loses its recent model, and the contrast with the interior trigger of M2 rests on \citet{peura2006}.}
+\cirow{li2023}{Optimal Consumption with Loss Aversion and Reference to Past Spending Maximum}{arXiv 2108.02648v4}{SIAM J.\ Financial Math.\ 15(1), 121--160}{2024-03}{12}{\claims{L14}{1}}{B}{\citedby{W3190992390}{main}}\cinot{K2 loses its contrast with limits of controls that carry a preference parameter when no cap binds.}
+\cirow{lambertini2014}{Macroeconomic Implications of Bank Capital Requirements}{EPFL working paper}{working paper}{2014-02}{5}{\claims{L56}{1}}{--}{\citedby{W2185057928}{main}}\cinot{The smooth penalty on net worth, the alternative to the kinked shortfall penalty, loses its source.}
+\cirow{glover2023}{Capital Ideas: Optimal Capital Accumulation Strategies for a Bank and its Regulator}{preprint of 1 December 2022}{European J.\ Finance 29(18), 2075--2106}{2023-12}{0}{\claims{L55}{1}}{A}{\citedby{W4322721965}{main}}\cinot{M3 loses its contrast with a single parameter that prices both the shortfall and the issue, which no policy can separate.}
+\cirow{langmenno2026}{A Structural Model of Capital Buffer Usability}{ECB WP 3188}{working paper}{2026}{0}{\claims{L51}{1}}{--}{\citedby{W7128914369}{main}, \citedby{W7131171981}{other 1}}\cinot{The flat charge for breaching required capital, which the shortfall penalty grades, rests on \citet{behn2019} alone.}
 \bottomrule
 \end{longtable}
 \normalsize

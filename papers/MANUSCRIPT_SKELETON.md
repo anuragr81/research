@@ -163,17 +163,25 @@ Lists are comma-separated. A Lean name is fully qualified,
    - Below the table, one sentence names every paper that is cited elsewhere
      but not read, and says that every claim made about them is unverified.
    - **Papers cited.** A table of citations (label `tab:citations`), one
-     `\cirow{bib key}{title}{version read}{published as}{date}{citations}{ABDC 2025}{links}`
-     per paper the manuscript cites and no other, in descending order of
-     citations counting the other versions, and by bib key where they are
-     equal (author, 29 October 2026). The title is that of the bib entry.
+     `\cirow{bib key}{title}{version read}{published as}{date}{citations}{claims}{ABDC 2025}{links}\cinot{if not relied on}`
+     per paper the manuscript cites and no other (LaTeX allows nine
+     arguments, so `\cinot` carries the tenth column and closes the row).
+     The title is that of the bib entry.
      Citations are the count of the OpenAlex record of the published version,
      or of the working paper where none is found (author, 29 October 2026),
      with the counts of the records of other versions in brackets,
      `663 (+266)`, and the retrieval date stated above the table; the date is
-     the printed issue registered with Crossref. The last column links to each
-     record counted, `\citedby{W...}{main}, \citedby{W...}{other 1}`, the
-     record counted first. The table is a landscape page. The ABDC column is the journal's rating in the
+     the printed issue registered with Crossref. Claims are the number of
+     literature rows that rest on the paper, `\claims{L7}{12}`, linked to the
+     first of them, or `0` (author, 30 October 2026). The links column links to
+     each record counted, `\citedby{W...}{main}, \citedby{W...}{other 1}`, the
+     record counted first. The last column says in one sentence, in the names
+     of the measurement map, what the manuscript loses if the paper is not
+     relied on (author, 30 October 2026). The rows are in increasing order of
+     the sum of the paper's rank by citations, counting the other versions,
+     and its rank by claims, tied ranks sharing their mean, then by citations
+     and by bib key, so that a paper high on both comes first (author,
+     30 October 2026). The table is a landscape page. The ABDC column is the journal's rating in the
      2025 ABDC list in `papers/journal_rankings/`, matched by ISSN, `--` for a
      working paper, or `not listed (...)`. No impact factor (author,
      28 October 2026). A fetch script writes the counts to a JSON file the
@@ -229,7 +237,7 @@ The appendices follow the conclusions.
 | MS-7 | Assumption rows point to model rows only, and every model row rests on at least one assumption. |
 | MS-8 | Player rows point to model or literature rows only. |
 | MS-9 | Every section and table of the skeleton is present, found by its label. |
-| MS-10 | The table of citations has exactly one row per cited bib key, in descending order of citations with the other versions; each title equals the bib entry's title; each row links to the OpenAlex records it counts, the main one first; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. |
+| MS-10 | The table of citations has exactly one row per cited bib key, in increasing order of the sum of the ranks by citations (with the other versions) and by claims, then by citations and bib key; each title equals the bib entry's title; each row's claims equal the number of literature rows on the paper, linked to the first; each row says what is lost without the paper; each row links to the OpenAlex records it counts, the main one first; each count equals the fetched OpenAlex count (with the other versions in brackets when there are any); each ABDC rating equals the 2025 rating of the journal's ISSN, or is `--` or `not listed` when the ISSN is not in the list. A control swaps two rows and must fail. |
 
 Each rule also runs on a well-formed sample, which it must accept, and on a
 faulty sample, which it must reject. A rule that cannot fail measures nothing.
