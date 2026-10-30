@@ -12,6 +12,8 @@ REQUIRED = ["sec:intro", "tab:headlines", "sec:model", "tab:players", "tab:assum
             "tab:concl", "tab:pending", "app:proofs", "app:evidence", "app:terms",
             "tab:terms", "app:scope", "app:refuted"]
 PROSE_LIMIT = 0.30
+# MS-10 order: the rank by claims counts this many times the rank by citations (author, 30 October 2026).
+CLAIMS_WEIGHT = 2
 # The table of citations (MS-10): counts fetched by checks/fetch_citations.py,
 # ratings read from the ABDC list the author supplied.
 CITATIONS = os.path.join(ROOT, "citations.json")
@@ -220,9 +222,9 @@ def citation_problems(tex, cit, abdc, titles):
     literature rows that rest on the paper, linked to the first of them; each row says what the manuscript
     loses without the paper; each row's ABDC rating is the 2025 rating of the journal's ISSN, or -- or
     'not listed ...' when the ISSN is not in the 2025 list; each row links to the OpenAlex records of its
-    count, the record counted first; the rows are in increasing order of the sum of the paper's rank by
-    citations (with the other versions) and its rank by claims, tied ranks sharing their mean, and then in
-    order of citations and of bib key (author, 30 October 2026)."""
+    count, the record counted first; the rows are in increasing order of the paper's rank by citations (with
+    the other versions) plus CLAIMS_WEIGHT times its rank by claims, tied ranks sharing their mean, and then
+    in order of citations and of bib key (author, 30 October 2026)."""
     rows = citation_rows(tex)
     lrows = macro_calls(tex, "lrow", 6)
     cited = cited_keys(tex) | {r[1].strip() for r in lrows}
@@ -272,7 +274,7 @@ def citation_problems(tex, cit, abdc, titles):
     rc = mean_ranks(list(total.items()))
     rk = mean_ranks([(k, nclaims.get(k, 0)) for k in total])
     present = [k for k in keys if k in total]
-    want_order = sorted(present, key=lambda k: (rc[k] + rk[k], -total[k], k))
+    want_order = sorted(present, key=lambda k: (rc[k] + CLAIMS_WEIGHT * rk[k], -total[k], k))
     if present != want_order:
         prob.append(f"rows not in the combined order of citations and claims; expected {want_order}")
     return prob
