@@ -136,12 +136,4 @@ theorem table2_det_high_K : ((3.8 : ℝ) - 3.7) * (0.9 - 1.1) - (3.7 - 3.5) * (0
 theorem control_delay_lowers_trigger_at_high_K : (0.6 : ℝ) - 0.9 < 0 := by
   norm_num
 
-theorem implied_multiple_large : (1.29 : ℝ) < 1.06 / 0.82 ∧ (1.06 : ℝ) / 0.82 < 1.30 := by
-  constructor <;> norm_num
-
-theorem implied_multiple_small : (1.12 : ℝ) < 1.19 / 1.06 ∧ (1.19 : ℝ) / 1.06 < 1.13 := by
-  constructor <;> norm_num
-
-theorem control_implied_not_three : (1.06 : ℝ) / 0.82 < 3 := by norm_num
-
 end PeuraKeppo

@@ -266,6 +266,16 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. The theory paper is self-contained (author). It uses the Lean
+  artifacts of the author's earlier work and nothing from the enhancement
+  paper, and its text refers to no other manuscript. `lean/` is pinned by
+  sha256 to the copies taken from `lean/mathlib/` at commit `740823e4`
+  (`lean/ORIGIN.md`, TH-1); TH-2, which read the earlier `MANUSCRIPT.tex`,
+  is dropped. The 20 literature records it cites are copied to `lit/` at the
+  same commit with `litcheck.py` and `ocr_pages.py`, and the checkers read
+  them there. The agreed names are the Names table of `MEASUREMENT_MAP.tex`,
+  and MM-11 and MM-12 read it there. The ledger spec is `checks/ledger_model.py`.
+  The earlier manuscript is not retired (author).
 - 2026-10-28. K2 kept as written; a solve with no borrowing added (author).
   `solve/run_noborrow.py`, Appendix B "Without borrowing". The audit of
   28 October is `notes/audit_20261028.md`.

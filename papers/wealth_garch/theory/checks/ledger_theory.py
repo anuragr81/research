@@ -1,19 +1,19 @@
 """Ledger of the theory paper (theory/wealth_garch_theory.tex): entities, actions, annotations.
 
-The ledger follows the bundle's spec, 00_reader/ledger_model.py and the Entities
-and Actions tables of MEASUREMENT_MAP.tex. Its nodes are entities, the agents and
-the objects they act on, each a row of the map's Entities table with status Report
-or Rule and named by a term of the map's Terminology table, Agreed or In use. Its
-edges are actions, rows of the map's Actions table. A rule is not a node; it enters
+The ledger follows the spec checks/ledger_model.py, a copy of the author's earlier
+ledger spec, whose NODES and EDGES are the agreed entities and actions. Its nodes
+are entities, the agents and the objects they act on, each a node of the spec and
+named by a name of the map's Names table (theory/MEASUREMENT_MAP.tex), Agreed or
+In use. Its edges are actions, edges of the spec. A rule is not a node; it enters
 through the agent who enforces it. Constructs (the shortfall penalty, the asymmetry
 parameter, the value function) and the model's outputs (the dividend barrier, the
 recapitalisation trigger, the injection target) are not nodes. A result of the
 theory paper is an annotation on the edge or node it concerns, resting on rows of
 theory/wealth_garch_theory.tex.
 
-The theory ledger is a subgraph of the bundle's: every node and edge here is one of
-00_reader/ledger_model.py with the same row, kind, agent and target, and every map
-row left out is listed in EXCLUDED with its reason. Edge status follows Paper A
+The theory ledger is a subgraph of the spec's: every node and edge here is one of
+checks/ledger_model.py with the same row, kind, agent and target, and every node or
+edge of the spec left out is listed in EXCLUDED with its reason. Edge status follows Paper A
 (papers/subjective_racism/paper_a/notes/ledger_diagram.md): settled when a theory
 row proves the action, given when the model takes it as a rule or an input, open
 when no row, assumption or map object carries it.
@@ -31,10 +31,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 THEORY = HERE.parent
-BUNDLE = THEORY.parent
 MANUSCRIPT = THEORY / "wealth_garch_theory.tex"
 
-spec = importlib.util.spec_from_file_location("ledger_model", BUNDLE / "00_reader" / "ledger_model.py")
+spec = importlib.util.spec_from_file_location("ledger_model", HERE / "ledger_model.py")
 LM = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(LM)
 
@@ -127,23 +126,23 @@ def verify(nodes, edges, annotations, excluded, tex, maptex):
         if not ok:
             failures.append(name)
 
-    ents, acts, terms = LM.entity_rows(maptex), LM.action_rows(maptex), LM.terminology(maptex)
+    terms = LM.terminology(maptex)
+    spec_rows = {v["row"]: k for k, v in LM.NODES.items()}
     rows, plays = theory_rows(tex), players(tex)
     for node, s in nodes.items():
-        row = ents.get(s["row"])
-        check(f"LT-1 {node}: row {s['row']} is in the map's Entities table, names it, status Report or Rule",
-              row is not None and row[1] == node and row[4] in LM.OBSERVED, row and (row[1], row[4]))
-        check(f"LT-2 {node}: a term of the map's Terminology table, Agreed or In use",
+        check(f"LT-1 {node}: row {s['row']} is a node of the spec and names it",
+              spec_rows.get(s["row"]) == node, spec_rows.get(s["row"]))
+        check(f"LT-2 {node}: a name of the map's Names table, Agreed or In use",
               terms.get(node) in ("Agreed", "In use"), terms.get(node))
         b = LM.NODES.get(node, {})
-        check(f"LT-3 {node}: the bundle ledger has it with the same row and kind",
+        check(f"LT-3 {node}: the spec has it with the same row and kind",
               b.get("row") == s["row"] and b.get("kind") == s["kind"], b)
         check(f"LT-4 {node}: its players are rows of the theory Players table",
               all(p in plays for p in s["players"]), s["players"])
     for eid, e in edges.items():
         b = LM.EDGES.get(eid, {})
-        check(f"LT-5 {eid}: a row of the map's Actions table and an edge of the bundle ledger, same agent and target",
-              eid in acts and b.get("agent") == e["agent"] and b.get("target") == e["target"], (e["agent"], e["target"]))
+        check(f"LT-5 {eid}: an edge of the spec, same agent and target",
+              eid in LM.EDGES and b.get("agent") == e["agent"] and b.get("target") == e["target"], (e["agent"], e["target"]))
         check(f"LT-6 {eid}: agent an agent node, target a node, status settled, given or open, rows exist",
               nodes.get(e["agent"], {}).get("kind") == AGENT and e["target"] in nodes
               and e["status"] in (SETTLED, GIVEN, OPEN) and all(r in rows for r in e["rests_on"])
@@ -163,9 +162,9 @@ def verify(nodes, edges, annotations, excluded, tex, maptex):
           plays and all(any(p in s["players"] for s in nodes.values()) for p in plays),
           [p for p in plays if not any(p in s["players"] for s in nodes.values())])
     covered = {s["row"] for s in nodes.values()} | set(edges) | set(excluded)
-    check("LT-11 every row of the map's Entities and Actions tables is in the theory ledger or excluded with a reason",
-          not (set(ents) | set(acts)) - covered and all(excluded.values()),
-          sorted((set(ents) | set(acts)) - covered))
+    spec_all = set(spec_rows) | set(LM.EDGES)
+    check("LT-11 every node and edge of the spec is in the theory ledger or excluded with a reason",
+          not spec_all - covered and all(excluded.values()), sorted(spec_all - covered))
     check("LT-12 no row is both in the ledger and excluded",
           not ({s["row"] for s in nodes.values()} | set(edges)) & set(excluded))
     return failures, plays, checks

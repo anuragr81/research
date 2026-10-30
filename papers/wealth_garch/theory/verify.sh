@@ -31,6 +31,7 @@ suite "Suite 1 - Lean 4 with Mathlib (verify_theory.py)" python3 "$HERE/verify_t
 suite "Suite 2 - manuscript skeleton (checks/verify_manuscript.py)" python3 "$HERE/checks/verify_manuscript.py"
 suite "Suite 3 - ledger of the theory paper (checks/ledger_theory.py)" python3 "$HERE/checks/ledger_theory.py"
 suite "Suite 4 - measurement map (checks/verify_measurement_map.py)" python3 "$HERE/checks/verify_measurement_map.py"
+suite "Suite 5 - literature records (lit/verify_lit.sh)" bash "$HERE/lit/verify_lit.sh"
 
 if [ "$FAILED" -eq 0 ]; then
   echo "ALL SUITES COMPLETED"

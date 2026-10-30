@@ -4,8 +4,8 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# The literature records of papers/wealth_garch, shared by its papers.
-LIT = os.path.join(os.path.dirname(ROOT), "lit")
+# The theory paper's own literature records (theory/lit/).
+LIT = os.path.join(ROOT, "lit")
 # Every section and table of the skeleton, by label.
 REQUIRED = ["sec:intro", "tab:headlines", "sec:model", "tab:players", "tab:assumptions",
             "tab:results", "sec:literature", "tab:literature", "tab:citations", "sec:conclusions",

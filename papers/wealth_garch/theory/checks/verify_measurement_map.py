@@ -4,8 +4,8 @@ names every object of the theory paper's model and is its terminology.
 Rules MM-1 to MM-11, each run on the map and on a well-formed and a faulty
 sample. MM-1 to MM-10 are Paper A's (papers/subjective_racism/paper_a/checks/
 verify_measurement_map.py), with the Lean declarations read from theory/lean.
-MM-11 is this bundle's, since the three papers share the parent's terminology
-(MEASUREMENT_MAP.tex, the Terminology table).
+MM-11 holds every name to the Names table of the theory paper's own map
+(theory/MEASUREMENT_MAP.tex), the names agreed with the author.
 
 MM-1  every \\mm row has six non-empty fields and a plain-English name
 MM-2  names are unique, one name per object
@@ -22,12 +22,12 @@ MM-9  every symbol in the manuscript's table of assumptions is a symbol of
 MM-10 every assumption's plain-English reading has no mathematics beyond the
       Lean theorems it cites, names the map entry of every symbol the
       assumption lists, and cites only declared theorems
-MM-12 the manuscript's text and figures use no retired name of the parent
-      terminology table outside literature rows and sentences citing a paper
+MM-12 the manuscript's text and figures use no retired name of the map's
+      Names table outside literature rows and sentences citing a paper
       (by \\cite or by a literature row), and no alternative name of
       ALTERNATIVES anywhere
-MM-11 every name of the map is an Agreed or In use name of the parent
-      MEASUREMENT_MAP.tex (PROPOSED holds any name offered and not yet taken)
+MM-11 every name of the map is an Agreed or In use name of the map's own
+      Names table (PROPOSED holds any name offered and not yet taken)
 """
 import glob
 import os
@@ -36,11 +36,10 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-PARENT = os.path.dirname(ROOT)
 STATUS = ("Recorded", "Elicited", "Computed", "Assumed", "Never observed", "A device")
-# Names the parent's terminology table does not carry. Empty since 23 October
-# 2026, when the parent map took the solvency floor, the run-off rate, the
-# liquidity haircut and the value function as Agreed.
+# Names the map's Names table does not carry. Empty since 23 October 2026,
+# when the solvency floor, the run-off rate, the liquidity haircut and the
+# value function were agreed.
 PROPOSED = set()
 # Alternative names found in the manuscript on 24 October 2026 and replaced by
 # the map's names. None is another paper's term, so none is exempt.
@@ -117,12 +116,16 @@ def lean_declarations():
     return names
 
 
-def parent_retired():
-    """Retired names of the parent table (its Replaces column) and the parent
-    checker's banned list."""
-    tex = strip_comments(open(os.path.join(PARENT, "MEASUREMENT_MAP.tex")).read())
+def names_table():
+    """The Names table of theory/MEASUREMENT_MAP.tex, one \\nrow{name}{symbol}{meaning}{status}{replaces} per name."""
+    tex = strip_comments(open(os.path.join(ROOT, "MEASUREMENT_MAP.tex")).read())
+    return macro_calls(tex, "nrow", 5)
+
+
+def retired_names():
+    """Retired names, the Replaces column of the Names table and five names retired before it."""
     out = {"loss aversion", "payout barrier", "injection trigger", "recapitalisation boundary", "volatility ratio"}
-    for r in macro_calls(tex, "nrow", 5):
+    for r in names_table():
         out |= {x.strip().lower() for x in r[4].split(",") if x.strip() and x.strip() != "none"}
     return sorted(out)
 
@@ -148,10 +151,9 @@ def term_problems(manuscript, retired):
     return found
 
 
-def parent_terms():
-    """The Agreed and In use names of the parent map's Terminology table."""
-    tex = strip_comments(open(os.path.join(PARENT, "MEASUREMENT_MAP.tex")).read())
-    return {r[0].strip().lower() for r in macro_calls(tex, "nrow", 5) if r[3].strip() in ("Agreed", "In use")}
+def agreed_names():
+    """The Agreed and In use names of the map's Names table."""
+    return {r[0].strip().lower() for r in names_table() if r[3].strip() in ("Agreed", "In use")}
 
 
 MAP_HEAD = r"\section{Terminology and measurement map}"
@@ -274,7 +276,7 @@ def analyse(tex, terms, lean, arows, agreed):
                     f"readings with mathematics {maths}; map names missing {unnamed}; "
                     f"Lean names not declared {undeclared}")
     foreign = sorted(n for n in names if n.lower() not in agreed and n not in PROPOSED)
-    out["MM-11"] = (bool(rows) and not foreign, f"names neither agreed in the parent map nor proposed {foreign}")
+    out["MM-11"] = (bool(rows) and not foreign, f"names neither agreed in the Names table nor proposed {foreign}")
     return out, len(rows)
 
 
@@ -309,7 +311,7 @@ FIX_A_BAD = [["A1", r"The prior $\pi_g(c)$ is scaled by $\delta$.",
               r"$\pi_g(c)$, $\theta$", "M1", "r"]]
 
 lean = lean_declarations()
-agreed = parent_terms()
+agreed = agreed_names()
 print("=" * 72)
 print("MEASUREMENT MAP (theory/MEASUREMENT_MAP.tex, included by Appendix app:terms of wealth_garch_theory.tex)")
 print("=" * 72)
@@ -320,7 +322,7 @@ terms = other_glossaries(mtex)
 arows = assumption_rows(mtex)
 real, nrows = analyse(tex, terms, lean, arows, agreed)
 print(f"      rows in the map: {nrows}; tables of terms outside the map: {len(terms)}; "
-      f"assumptions: {len(arows)}; agreed parent names: {len(agreed)}; proposed: {sorted(PROPOSED)}")
+      f"assumptions: {len(arows)}; agreed names: {len(agreed)}; proposed: {sorted(PROPOSED)}")
 names = {"MM-1": "every row has six non-empty fields and a plain-English name",
          "MM-2": "one name per object",
          "MM-3": "the map is the only terminology",
@@ -331,12 +333,12 @@ names = {"MM-1": "every row has six non-empty fields and a plain-English name",
          "MM-8": "no symbol names two rows",
          "MM-9": "every symbol of every assumption is a symbol of the map",
          "MM-10": "every plain-English reading is free of mathematics, uses the map's names and cites declared theorems",
-         "MM-11": "every name is agreed in the parent map or proposed to the author"}
+         "MM-11": "every name is agreed in the map's Names table or proposed to the author"}
 for k in sorted(real, key=lambda s: int(s.split('-')[1])):
     ok, detail = real[k]
     check(f"{k} {names[k]}", ok, "" if ok else detail)
 check("MM-0 the manuscript's Appendix C includes map_tables.tex, so manuscript and map cannot differ", included)
-retired = parent_retired()
+retired = retired_names()
 bad12 = term_problems(mtex, retired)
 check("MM-12 no retired name outside literature rows and citing sentences, and no alternative name, in the manuscript or its figures",
       not bad12, f"{bad12[:6]}")

@@ -27,6 +27,8 @@
 \makeatother
 \newcommand{\lean}[1]{\path{#1}}
 \newcommand{\mm}[6]{#1 & \textbf{#2} & #3 & #4 & #5 & #6 \\ \addlinespace}
+% A name of the Names table. \nrow{name}{symbol}{meaning}{status}{names it replaces, or none}
+\newcommand{\nrow}[5]{#1 & #2 & #3 & #4 & #5 \\ \addlinespace}
 
 \title{Measurement Map of the Theory Paper}
 \author{}
@@ -38,8 +40,8 @@
 \section{Scope}
 
 The map names every object of the model of the theory paper once, and the
-manuscript uses these names and no others. The names are those of the parent
-bundle's \path{MEASUREMENT_MAP.tex}, agreed with the author on 10, 13 and 19
+manuscript uses these names and no others. The names are those of the Names
+table at the end of this document, agreed with the author on 10, 13 and 19
 October 2026, and four names the author accepted on 23 October 2026, the
 solvency floor, the run-off rate, the liquidity haircut and the value function.
 Inputs are what the model takes as given, internal objects are built from the
@@ -49,8 +51,8 @@ any computation, which is when its last column begins with Recorded, and No
 otherwise. The other status words are Elicited, Computed, Assumed, Never
 observed and A device. Every symbol in the manuscript's table of assumptions
 has exactly one row here. Where a row names the panel, it is the FDIC panel of
-US banks that the parent bundle read, 2015 to 2024, and the figures and the
-row numbers G1 to G22 are those of the parent map. Lean names are theorems of
+US banks, 2015 to 2024, that the author's earlier empirical work read, and the
+figures are from that reading. Lean names are theorems of
 \path{theory/lean/}, audited by \path{verify_theory.py}.
 
 The theory paper is a theory of what a bank's policy would reveal if the bank
@@ -63,6 +65,91 @@ and apply where the cap binds, and on that panel it does not. What reaches the
 data is the bound of M12 and the two recorded thresholds as events.
 
 \input{map_tables}
+
+\section{Names}
+
+Every name the manuscript may use for an object of the model, with its
+symbol, its meaning, its status and the names it replaces. Agreed names were
+agreed with the author on the dates given in the Scope. In use names are in
+use and not yet put to the author. A name in the last column is retired and
+appears in the manuscript only inside a literature row or a sentence that
+cites the paper using it (MM-11 and MM-12 of
+\path{checks/verify_measurement_map.py}). The ledger of the paper
+(\path{checks/ledger_theory.py}) names its nodes from this table.
+
+\footnotesize
+\begin{longtable}{@{}P{3.3cm}P{1.5cm}P{6.0cm}P{1.3cm}P{2.6cm}@{}}
+\caption{Names of the map.}\label{tab:names}\\
+\toprule
+Name & Symbol & Meaning & Status & Replaces \\
+\midrule
+\endfirsthead
+\toprule
+Name & Symbol & Meaning & Status & Replaces \\
+\midrule
+\endhead
+\nrow{bank}{none}{The institution that files the report, the agent whose policy the model solves.}{Agreed}{none}
+\nrow{investors}{none}{Those who buy the bank's stock or receive its dividends, its parent holding company among them.}{Agreed}{none}
+\nrow{insured creditors}{none}{Those whose claims on the bank deposit insurance covers, so that they lose nothing if it fails.}{Agreed}{none}
+\nrow{uninsured creditors}{none}{Those whose claims on the bank no insurance covers, the lenders of wholesale funds and the holders of deposits above the insurance limit.}{Agreed}{none}
+\nrow{supervisor}{none}{The bank's primary federal regulator, which supervises it and receives its reports.}{Agreed}{none}
+\nrow{insurer}{none}{The deposit insurer, which insures the insured creditors' deposits.}{Agreed}{none}
+\nrow{assets-to-liabilities ratio}{$x$}{Total assets over total liabilities, the state of the model.}{Agreed}{none}
+\nrow{equity}{$X-L$}{Assets less liabilities.}{In use}{none}
+\nrow{required capital}{$Q$, $q$}{The capital regulation requires, in dollars or as a ratio to liabilities.}{Agreed}{none}
+\nrow{capital buffer}{$z$, $z_t$}{The log of equity over required capital. Zero when equity equals required capital, falling without limit towards the distress boundary.}{Agreed}{log coordinate}
+\nrow{distress boundary}{$x=1$}{The state at which equity is zero.}{In use}{deep in deficit}
+\nrow{deficit}{$z<0$}{Equity below required capital.}{In use}{none}
+\nrow{surplus}{$z>0$}{Equity above required capital.}{In use}{none}
+\nrow{risky exposure}{$\pi$}{The share of assets held in the risky asset.}{Agreed}{none}
+\nrow{regulatory cap}{$u(x)$}{The largest risky exposure regulation allows at each state, the smaller of its two branches.}{In use}{none}
+\nrow{solvency branch}{$(x-1)/a_1$}{The branch of the regulatory cap set by capital. It binds near the distress boundary.}{In use}{none}
+\nrow{liquidity branch}{$(x-a_2)/a_3$}{The branch of the regulatory cap set by liquidity. It binds deep in surplus.}{In use}{none}
+\nrow{crossing point}{$\bar x$}{The state at which the two branches are equal.}{In use}{none}
+\nrow{cap geometry}{$a_1,a_2,a_3$}{The three parameters of the regulatory cap, taken together. Never a preference.}{Agreed}{none}
+\nrow{solvency floor}{$a_1$}{The floor on equity over risky assets, the slope of the solvency branch.}{Agreed}{none}
+\nrow{run-off rate}{$a_2$}{Net 30-day outflows as a share of liabilities, the intercept of the liquidity branch.}{Agreed}{none}
+\nrow{liquidity haircut}{$a_3$}{The haircut on the risky asset in high-quality liquid assets, the slope of the liquidity branch.}{Agreed}{none}
+\nrow{value function}{$V$}{The value of the bank under its best policy, per unit of liabilities.}{Agreed}{none}
+\nrow{asset volatility}{$\sigma$}{The volatility of the risky asset.}{Agreed}{none}
+\nrow{expected asset return}{$\mu_s$}{The drift of the risky asset.}{Agreed}{none}
+\nrow{riskless rate}{$r$}{The return on the riskless asset.}{In use}{none}
+\nrow{liability volatility}{$\sigma_L$}{The volatility of the shock to liabilities.}{Agreed}{none}
+\nrow{return-liability correlation}{$c$}{The correlation between the risky return and the liability shock.}{Agreed}{none}
+\nrow{net income on liabilities}{$\gamma$}{Income earned on liabilities, net of their cost.}{In use}{none}
+\nrow{liability drift}{$\mu_L$}{The drift of liabilities, $\gamma+r_L$.}{In use}{none}
+\nrow{deposit rate}{$r_L$}{The rate paid on liabilities.}{In use}{none}
+\nrow{discount rate}{$\rho$}{The shareholders' discount rate.}{Agreed}{none}
+\nrow{liability-net discount rate}{$\rho_L$}{The discount rate of the problem written per unit of liabilities.}{Agreed}{none}
+\nrow{return on equity}{$r_E$}{Net income over equity.}{Agreed}{none}
+\nrow{dividends}{$D$}{Payments to shareholders, the singular control.}{Agreed}{none}
+\nrow{dividend barrier}{$y^*$}{The state at which dividends are paid.}{Agreed}{payout barrier}
+\nrow{recapitalisation}{$I$}{Capital raised in one issue, the impulse control.}{Agreed}{none}
+\nrow{recapitalisation trigger}{$x_L$}{The state at which capital is raised.}{Agreed}{injection trigger, recapitalisation boundary}
+\nrow{injection target}{$y_{\text{post}}$}{The state an issue reaches.}{Agreed}{none}
+\nrow{thresholds}{none}{The dividend barrier and the recapitalisation trigger, taken together.}{Agreed}{none}
+\nrow{fixed issuance cost}{$K$}{The cost of an issue that does not scale with its size, per unit of liabilities.}{Agreed}{none}
+\nrow{proportional issuance cost}{$\kappa$}{The cost of an issue per unit raised.}{Agreed}{none}
+\nrow{asymmetry parameter}{$\lambda_S$}{How much more the objective weighs a shortfall below the reference than a surplus above it.}{Agreed}{loss aversion}
+\nrow{shortfall penalty}{$\Lambda$}{The term of the objective that charges a shortfall below the reference. Zero when the asymmetry parameter is one.}{In use}{none}
+\nrow{reference}{$R$}{The level below which the shortfall penalty applies.}{In use}{none}
+\nrow{expected discounted shortfall}{$W$}{The expected discounted shortfall below the reference under the optimal policy.}{In use}{none}
+\nrow{discounted injection count}{$N$}{The expected discounted number of issues under the optimal policy.}{In use}{none}
+\nrow{impulse operator}{$\mathcal MV$}{The value of issuing at once to the best target, net of both issuance costs.}{In use}{none}
+\nrow{buffer variance}{$\zeta$}{The variance per unit of time of the capital buffer.}{Agreed}{z-volatility, capital buffer's volatility}
+\nrow{deficit limit}{$\nu_1^2$}{The limit of buffer variance at the distress boundary.}{Agreed}{saturation limits}
+\nrow{surplus limit}{$\nu_3^2$}{The limit of buffer variance deep in surplus.}{Agreed}{saturation limits}
+\nrow{variance ratio}{$\lambda_V^4$, $\nu_1^2/\nu_3^2$}{The deficit limit over the surplus limit.}{Agreed}{volatility ratio}
+\nrow{induced variance asymmetry}{$\lambda_V$}{The asymmetry read off the variance ratio, distinct from the asymmetry parameter.}{Agreed}{none}
+\nrow{saturation scale}{$\theta$}{How sharply the variance of the discrete-time recursion moves between its deficit and surplus levels.}{In use}{none}
+\nrow{growth rate of required capital}{$g$}{The growth rate of required capital.}{In use}{none}
+\nrow{retention ratio}{$b$}{The share of net income retained.}{In use}{none}
+\nrow{surplus payout rate}{$\delta_p$}{The share of surplus paid out in a period.}{In use}{none}
+\nrow{deficit persistence}{$\phi^-$}{How much of a deficit remains after one period.}{In use}{none}
+\nrow{surplus persistence}{$\phi^+$}{How much of a surplus remains after one period.}{In use}{none}
+\bottomrule
+\end{longtable}
+\normalsize
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
