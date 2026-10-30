@@ -6,6 +6,9 @@ the last commit before work for another paper changed any of them. TH-1 of
 `verify_theory.py` holds each file to the sha256 below. A file is changed only by
 editing it here and updating its pin in the same commit, with the reason in `TODO.md`.
 
+`ChoulliTaksarZhou.lean` is not a copy. It was written for this paper on 30 October
+2026, with the record `theory/lit/choulli_taksar_zhou_2004/`, and is pinned the same way.
+
 | File | sha256 |
 |---|---|
 | `AlvarezLeBihanLippi.lean` | `95d90fde159261f2b3ecf764cbd094e6a82930a99bbda5416099c51a409416c7` |
@@ -18,6 +21,7 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 | `BonaparteCooper.lean` | `364ce20d77354e7aa6b58c686546d9496d10d730aec4667a99f0315c151d192a` |
 | `Bounds.lean` | `b393b4d4bd53cc5838dcda86478e53eb838710911ab73b308cd0282fb60d171a` |
 | `CapGeometry.lean` | `72b241911572466fc65ec10002e4199ec2ccc17253e07075981cd42b8532d533` |
+| `ChoulliTaksarZhou.lean` | `d664e3f5ba1ed883f59d6114bed24526d02a4909d2597fd7ff1105dcbd42487d` |
 | `Comparison.lean` | `037d9b6a173375de6861ec8a6ef945c6e8d48317424623379907048a4a4e6344` |
 | `Constantinides.lean` | `8a0170b14b3197072a389c9a4934ddeb23874c3acad61e7e9813f7a11fffb96a` |
 | `Coordinate.lean` | `5c69f1b4bfa216f55c3fe1997ca3df9b85d19742cf83d5556453d370eca65847` |

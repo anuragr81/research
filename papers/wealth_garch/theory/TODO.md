@@ -266,6 +266,16 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Choulli, Taksar and Zhou (2004), Ann. Appl. Probab. 14(4),
+  read in full from the author's upload, with the record
+  `lit/choulli_taksar_zhou_2004/` and `lean/ChoulliTaksarZhou.lean` (10
+  theorems, two controls; 49 checks pass). It does not pre-empt K2: constant
+  exposure bounds, a deterministic liability, no asymmetry parameter
+  (CTZ-D3 to D5). It is a precedent for the hypothesis of M11, since the
+  minimum exposure binds near ruin and, with barrier dividends, the maximum
+  binds before the dividend barrier (CTZ-Q11, CTZ-Q15), and its Proposition
+  3.3 is a proof template. C5 still names the SIAM paper of 2003, reference
+  [4] there, which is not read. Not yet cited in the manuscript.
 - 2026-10-30. The theory paper is self-contained (author). It uses the Lean
   artifacts of the author's earlier work and nothing from the enhancement
   paper, and its text refers to no other manuscript. `lean/` is pinned by
@@ -305,7 +315,8 @@ under K2). Refuted conjecture R1 is kept, R2 is not.
 - The question. The skeleton's question is drafted from the headlines;
   the author may reword it.
 - C5. Choulli, Taksar and Zhou (2003), to be read in full with a record, and
-  a proof that the optimal exposure binds the cap near both ends.
+  a proof that the optimal exposure binds the cap near both ends. The 2004
+  companion is read (`lit/choulli_taksar_zhou_2004/`); the 2003 paper is not.
 - The title. The skeleton carries the parent's, Asymmetric Capital Buffer
   Control, as a working title.
 - Literature records. The checker reads the parent's `lit/` records, shared
