@@ -1113,28 +1113,52 @@ is proved, and the step of their proof that fails is not located. Their own
 remark that a fixed issuance cost could induce earlier issuance (p.~7) points
 the same way.
 
-The same sweeps in the paper's model, with $K=0.05$, an endogenous trigger and
-$\lambda_S$ of $1$, $1.2$ and $1.5$, move the dividend barrier, the injection
-target and the value function in the directions of their table, and the
-recapitalisation trigger rises with the solvency floor and falls with the
-liquidity haircut. Table~\ref{tab:q3-spread} gives the spread of each across
-the three values of $\lambda_S$. Raising the solvency floor from $0.045$ to
-$0.12$ narrows the spread of the dividend barrier from $0.050$ to zero, while
-raising the liquidity haircut to $0.48$ widens that spread to $0.080$.
+The paper's model reaches their numbers as the fixed issuance cost vanishes,
+\path{theory/solve/run_q3_pass2.py}. With $\lambda_S=1$ and $K=0.001$ the
+dividend barrier is $1.400$ and the value function at $1.2$ is $0.867$,
+against $1.389$ and $0.870$ in their model converged, so the fixed issuance
+cost accounts for most of the gap between the two models' levels. The
+injection target still differs, $1.227$ against $1.158$, with the form of the
+proportional cost. At
+$(\lambda_S,K)=(1.2,0.05)$ the dividend barrier, the injection target and the
+value function move with the cap geometry in the directions of their table,
+and every hypothesis of M1, M2 and M4 holds at each of the 17 points. The
+determinant of M3 does not hold its size. By the formula of M3 evaluated on
+the solve it shrinks from $-0.269$ to $-0.037$ as the solvency floor rises
+from $0.045$ to $0.12$ (Table~\ref{tab:q3-det}), because the response of the
+dividend barrier to $\lambda_S$ falls from $0.106$ to $0.002$ while the
+responses to $K$ stay of order one. The sign that M3 proves is kept, and the
+identification of K1 is weaker under a high solvency floor than under a low
+one. Finite differences on 601 nodes resolve the responses to $\lambda_S$
+only in steps of $0.06$, and give zero at $a_1=0.12$.
 
 \begin{table}[H]
 \footnotesize
-\caption{Spread across $\lambda_S\in\{1,1.2,1.5\}$ of the thresholds and of the value function at $x=1.2$, in the paper's model at the parameters of \citet{bayraktar2026} with $K=0.05$.}\label{tab:q3-spread}
-\begin{tabular}{@{}lllll@{}}
+\caption{Responses of the thresholds and the determinant of M3 along the cap geometry, by the formulas of M1 to M3 evaluated on the solve, in the paper's model at the parameters of \citet{bayraktar2026} with $(\lambda_S,K)=(1.2,0.05)$.}\label{tab:q3-det}
+\begin{tabular}{@{}llllll@{}}
 \toprule
-Cap geometry & Recapitalisation trigger & Dividend barrier & Injection target & Value function at $1.2$ \\
+Cap geometry & $\partial y^*/\partial\lambda_S$ & $\partial x_L/\partial\lambda_S$ & $\partial y^*/\partial K$ & $\partial x_L/\partial K$ & Determinant of M3 \\
 \midrule
-$a_1=0.045$ (baseline) & $0.028$ & $0.050$ & $0.044$ & $0.0245$ \\
-$a_1=0.12$ & $0.009$ & $0.000$ & $0.001$ & $0.0007$ \\
-$a_3=0.48$ & $0.033$ & $0.080$ & $0.075$ & $0.0591$ \\
+$a_1=0.045$ (baseline) & $0.106$ & $0.053$ & $4.25$ & $-0.42$ & $-0.269$ \\
+$a_1=0.08$ & $0.041$ & $0.051$ & $3.48$ & $-0.81$ & $-0.210$ \\
+$a_1=0.12$ & $0.002$ & $0.016$ & $2.15$ & $-1.49$ & $-0.037$ \\
+$a_3=0.48$ & $0.150$ & $0.053$ & $1.95$ & $-0.25$ & $-0.141$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The first question has had one pass, \path{theory/solve/run_q1_frictions.py},
+whose output is \path{theory/solve/results_q1.md}, moving one friction at a
+time around $(\lambda_S,K,\kappa)=(1.2,0.05,0.01)$. With the cap of A2 alone
+the trigger is interior at all 21 points, and at every one the dividend
+barrier rises with $\lambda_S$ and with $K$ while the recapitalisation trigger
+rises with $\lambda_S$ and falls with $K$, the signs of M1 and M2. The
+proportional issuance cost $\kappa$ lowers the trigger as $K$ does and lowers
+the injection target where $K$ raises it, so of the three frictions only
+$\lambda_S$ raises the trigger. Issues grow larger with $K$, as in
+\citet{peura2006} (L22), and smaller with $\kappa$. With no borrowing the
+trigger reaches the distress boundary at $\lambda_S\le1.1$ and at $K\ge0.1$,
+and at the 16 interior points the signs of M1 and M2 hold.
 
 \section{Terminology and measurement map}
 \label{app:terms}
