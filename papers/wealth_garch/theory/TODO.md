@@ -266,6 +266,15 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Peura and Keppo's two distinctive predictions, issuance at a
+  positive buffer and default risk despite the option, are tested nowhere in
+  their paper (author's observation, for later). Summary from the records of
+  the papers read, not a search: later models put the trigger at the floor
+  or at zero (Decamps et al., Lokka and Zervos, Bolton et al., Federico et
+  al., Bayraktar et al.), a positive trigger returns only where a cost grows
+  below the requirement, and no paper read tests issue timing or default
+  against data. To do: a search beyond the papers read, and a decision on
+  whether the manuscript says this.
 - 2026-10-30. Citation table in lexicographic order (author), descending in
   claims, then in citations, then by bib key; it replaces the rank sums of
   earlier the same day. Bayraktar et al. (13 claims) first, Peura and Keppo
