@@ -275,6 +275,13 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   below the requirement, and no paper read tests issue timing or default
   against data. To do: a search beyond the papers read, and a decision on
   whether the manuscript says this.
+- 2026-10-30. Q3 regimes (`solve/run_q3_regimes.py`, `results_q3_regimes.md`), in
+  Appendix B (author asked for the idea, not Bayraktar et al.'s design): the
+  solvency branch carries K1 (interior trigger, determinant -0.33 and -0.29)
+  and K2's deficit limit; without it the trigger is at the distress boundary
+  and the hypotheses fail. The surplus limit is not reached in the solves.
+  Liquidity alone gives 0.209 of the 0.244 value loss against the ceiling
+  alone, but the attribution depends on ordering and is not in the text.
 - 2026-10-30. Citation table in lexicographic order (author), descending in
   claims, then in citations, then by bib key; it replaces the rank sums of
   earlier the same day. Bayraktar et al. (13 claims) first, Peura and Keppo
@@ -291,17 +298,19 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   holding at all 17 points; K -> 0.001 brings the paper's model to within
   0.011 of Bayraktar et al.'s converged barrier; every interior point of Q1
   has the signs of M1 and M2. Open:
-  - Finite differences on 601 nodes resolve the lambda_S responses only in
-    steps of 0.06; `solve/run_q3_pass3.py` reruns them on 1201 and 2401 nodes.
-  - Inferred, not checked: the shrinkage runs through W(y*), the expected
-    discounted shortfall, falling as the solvency floor raises the buffer.
+  - Done: `solve/run_q3_pass3.py` reruns the determinant on 1201 and 2401 nodes;
+    it shrinks from -0.289 to -0.041, finite differences agree within 15 percent,
+    and W(y*) falls from 0.0385 to 0.0007, the numerator of dy*/dlambda_S in M1.
   - Inferred, not checked: kappa lowers the injection target where K raises
     it, so the three thresholds might identify (lambda_S, K, kappa) together.
     Needs the 3x3 determinant and a row in Lean before any text.
-  - Peura and Keppo's angles not yet covered: the frequency and proportional
-    cost of issues (their Table 2, their route to pinning the frictions), the
-    value of the option to issue across the buffer (their Fig. 4), and the
-    barrier against asset volatility and expected asset return (their Fig. 6).
+  - Peura and Keppo's three angles are covered by `solve/run_q1_pk.py` and
+    in Appendix B: issue moments, value of the option to issue, and the
+    barrier against asset volatility and expected return. Checked: moments'
+    determinant is non-zero by size, thresholds' by sign. Open: the time
+    between issues is good to ten percent only; a finer grid and more paths
+    would tighten it. No hump in the option value, as the model has no delay
+    or liquidation.
   - Q7, safety against value, needs a path simulator.
 - 2026-10-30. The comparative-statics exercise is in Appendix B, paragraph
   "Comparative statics, in progress" (author). The illustrations paragraph

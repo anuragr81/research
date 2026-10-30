@@ -1130,31 +1130,63 @@ proportional cost. At
 $(\lambda_S,K)=(1.2,0.05)$ the dividend barrier, the injection target and the
 value function move with the cap geometry in the directions of their table,
 and every hypothesis of M1, M2 and M4 holds at each of the 17 points. The
-determinant of M3 does not hold its size. By the formula of M3 evaluated on
-the solve it shrinks from $-0.269$ to $-0.037$ as the solvency floor rises
-from $0.045$ to $0.12$ (Table~\ref{tab:q3-det}), because the response of the
-dividend barrier to $\lambda_S$ falls from $0.106$ to $0.002$ while the
-responses to $K$ stay of order one. The sign that M3 proves is kept, and the
-identification of K1 is weaker under a high solvency floor than under a low
-one. Finite differences on 601 nodes resolve the responses to $\lambda_S$
-only in steps of $0.06$, and give zero at $a_1=0.12$.
+determinant of M3 does not hold its size, and
+\path{theory/solve/run_q3_pass3.py} confirms this on grids of 1201 and 2401
+nodes. On the finer grid the formula of M3 evaluated on the solve gives a
+determinant that shrinks from $-0.289$ to $-0.041$ as the solvency floor rises
+from $0.045$ to $0.12$ (Table~\ref{tab:q3-det}), and finite differences agree
+with it to within $15$ percent at every point. The response of the dividend
+barrier to $\lambda_S$ is $\rho_LW(y^*)/(\rho_L-\mu'(y^*))$ by M1, and the
+expected discounted shortfall $W(y^*)$ falls from $0.039$ to $0.0007$ over the
+same range, while the responses to $K$ stay of order one. The sign that M3
+proves is kept, and the identification of K1 is weaker under a high solvency
+floor than under a low one.
 
 \begin{table}[H]
 \footnotesize
-\caption{Responses of the thresholds and the determinant of M3 along the cap geometry, by the formulas of M1 to M3 evaluated on the solve, in the paper's model at the parameters of \citet{bayraktar2026} with $(\lambda_S,K)=(1.2,0.05)$.}\label{tab:q3-det}
-\begin{tabular}{@{}llllll@{}}
+\caption{Responses of the thresholds and the determinant of M3 along the cap geometry, by the formulas of M1 to M3 evaluated on the solve, on 2401 nodes, in the paper's model at the parameters of \citet{bayraktar2026} with $(\lambda_S,K)=(1.2,0.05)$.}\label{tab:q3-det}
+\begin{tabular}{@{}lllllll@{}}
 \toprule
-Cap geometry & $\partial y^*/\partial\lambda_S$ & $\partial x_L/\partial\lambda_S$ & $\partial y^*/\partial K$ & $\partial x_L/\partial K$ & Determinant of M3 \\
+Cap geometry & $\partial y^*/\partial\lambda_S$ & $\partial x_L/\partial\lambda_S$ & $\partial y^*/\partial K$ & $\partial x_L/\partial K$ & Determinant of M3 & $W(y^*)$ \\
 \midrule
-$a_1=0.045$ (baseline) & $0.106$ & $0.053$ & $4.25$ & $-0.42$ & $-0.269$ \\
-$a_1=0.08$ & $0.041$ & $0.051$ & $3.48$ & $-0.81$ & $-0.210$ \\
-$a_1=0.12$ & $0.002$ & $0.016$ & $2.15$ & $-1.49$ & $-0.037$ \\
-$a_3=0.48$ & $0.150$ & $0.053$ & $1.95$ & $-0.25$ & $-0.141$ \\
+$a_1=0.045$ (baseline) & $0.104$ & $0.057$ & $4.27$ & $-0.44$ & $-0.289$ & $0.0385$ \\
+$a_1=0.08$ & $0.041$ & $0.054$ & $3.47$ & $-0.82$ & $-0.221$ & $0.0152$ \\
+$a_1=0.12$ & $0.002$ & $0.018$ & $2.15$ & $-1.51$ & $-0.041$ & $0.0007$ \\
+$a_3=0.48$ & $0.144$ & $0.063$ & $1.98$ & $-0.30$ & $-0.168$ & $0.0933$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The first question has had one pass, \path{theory/solve/run_q1_frictions.py},
+Which branch of the cap carries each result is a separate question from how
+the value loss divides, which is the question of \citet{bayraktar2026}.
+\path{theory/solve/run_q3_regimes.py}, whose output is
+\path{theory/solve/results_q3_regimes.md}, solves the model under the ceiling
+$\pi\le4$ alone, with the solvency branch beside it, with the liquidity branch
+beside it, and with both, which is A2. The ceiling lies below the bound of $5$
+on the long-run exposure that keeps the value finite, so the four sets of
+admissible exposures are nested and every value is finite. The liquidity
+branch alone and the ceiling alone leave the exposure positive at the distress
+boundary, so they are devices for the decomposition and not regulations in
+force.
+
+K1 needs the solvency branch. With it, whether or not the liquidity branch is
+present, the exposure is zero at the distress boundary, the recapitalisation
+trigger is interior at $\lambda_S$ of $1$, $1.2$ and $1.5$, and it moves with
+$\lambda_S$ by $0.022$ across that range under the solvency branch alone and
+by $0.029$ under both. The determinant of M3 is $-0.33$ under the solvency
+branch alone and $-0.29$ under both. Without it the trigger is at the distress
+boundary at every $\lambda_S$ and the hypotheses of M1 to M4 fail, so the
+two thresholds do not identify $\lambda_S$ and $K$ there. The deficit limit
+of K2 needs the solvency branch as well. Buffer variance at the trigger is the
+deficit limit $\nu_1^2=3.14$ with it and is unbounded at the distress boundary
+without it. The surplus limit is not reached in these solves, since the
+dividend barrier lies between $1.7$ and $2.3$ in the four regimes, where
+buffer variance is between $0.31$ and $0.36$ against a surplus limit of
+$0.069$, so its assignment to the liquidity branch rests on M11 and not on the
+solve. With no borrowing the solution is the same with and without the
+liquidity branch, to numerical precision, as C3 states.
+
+The first pass at the first question is \path{theory/solve/run_q1_frictions.py},
 whose output is \path{theory/solve/results_q1.md}, moving one friction at a
 time around $(\lambda_S,K,\kappa)=(1.2,0.05,0.01)$. With the cap of A2 alone
 the trigger is interior at all 21 points, and at every one the dividend
@@ -1166,6 +1198,48 @@ $\lambda_S$ raises the trigger. Issues grow larger with $K$, as in
 \citet{peura2006} (L22), and smaller with $\kappa$. With no borrowing the
 trigger reaches the distress boundary at $\lambda_S\le1.1$ and at $K\ge0.1$,
 and at the 16 interior points the signs of M1 and M2 hold.
+
+A second pass, \path{theory/solve/run_q1_pk.py}, whose output is
+\path{theory/solve/results_q1_pk.md}, takes up three results of
+\citet{peura2006} that the first pass left out. They pin their two frictions by
+the expected time between issues and the proportional cost of an issue (their
+Table 2). In the paper's model the time between issues rises with $K$ from
+$2.5$ years at $K=0.01$ to $9.8$ years at $K=0.1$ at $\lambda_S=1.2$, and the
+cost per issue rises from $0.042$ to $0.146$, while $\lambda_S$ from $1$ to $2$
+moves them from $6.8$ to $6.0$ years and from $0.099$ to $0.096$ at $K=0.05$.
+The determinant of the two moments in $(\lambda_S,K)$ is non-zero at four
+centres, from $-0.48$ to $-0.86$, so the moments also separate the two
+frictions locally. Both moments fall in $\lambda_S$ and rise in $K$, so their
+determinant is the difference of two terms of the same sign and is set by the
+sizes of the responses. The determinant of the two thresholds is the difference
+of two terms of opposite sign, and is negative by the signs of M1 and M2 alone
+(M3), where the table of \citet{peura2006} changes sign with the size of the
+costs (L41 to L43). The time between issues is read to about ten percent, which
+the header of the output explains.
+
+The value of the option to issue is hump-shaped in the capital buffer in their
+Figure 4 and goes to zero as the buffer does, since a bank near the minimum
+rarely survives the delay. In the paper's model the value function with the
+option less the value function without it falls throughout the buffer at each
+of twelve combinations of $\lambda_S$ and $K$, and is largest at the distress
+boundary. At $(\lambda_S,K)=(1.2,0.05)$ it is $0.40$ there, $88$ percent of the
+value function, against $15$ percent at the injection target and $12$ percent
+at the dividend barrier. It rises with $\lambda_S$, from $0.20$ to $0.98$ at
+$\lambda_S$ of $1$ and $2$, and falls with $K$. The hump needs the delay and
+liquidation, which the paper's model does not hold (Table~\ref{tab:common}),
+and here the option buys relief from the shortfall penalty and not survival.
+
+Their Figure 6 and Table 3 find that the dividend barrier is driven by return
+volatility, with a correlation of $0.99$ across banks. In the paper's model the
+dividend barrier rises with the asset volatility, from $1.44$ to $2.16$ as it
+goes from $0.04$ to $0.12$ at $\lambda_S=1$, the recapitalisation trigger falls
+from $1.043$ to $1.010$, and the determinant of M3 grows in size from $-0.10$
+to $-0.43$ with every hypothesis holding. At an asset volatility of $0.16$ the
+barrier reaches the top of the grid, and that point is not used. The dividend
+barrier also rises with the expected asset return, from $1.19$ to $2.04$ as it
+goes from $0.025$ to $0.045$ at $\lambda_S=1$, where theirs has a correlation
+of $-0.48$ with it across banks. A correlation across banks is not a
+comparative static, and the two are not set against each other.
 
 \section{Terminology and measurement map}
 \label{app:terms}

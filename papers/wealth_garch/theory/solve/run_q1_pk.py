@@ -124,7 +124,10 @@ def sigma_job(args):
 
 
 def det_sigma_job(sig):
-    o = s.check_point(dict(BASEP, lam=1.2, K=0.05, sigma=sig), N, 0.02, 0.005)
+    try:
+        o = s.check_point(dict(BASEP, lam=1.2, K=0.05, sigma=sig), N, 0.02, 0.005)
+    except IndexError:
+        return sig, None            # the dividend barrier is at the top of the grid
     return sig, dict(det=o["det_formula"], f=o["formula"], failed=[k for k, v in o["hypotheses"].items() if not v])
 
 
@@ -185,11 +188,15 @@ def main():
             for l in (1.0, 1.2, 1.5):
                 o = g[(what, v, l)]
                 L.append(f"| {v} | {l} | {o['x_L']:.4f} | {o['y_star']:.4f} | {o['y_post']:.4f} | {o['v12']:.4f} | "
-                         f"{o['cap_share']:.2f} | {'interior' if o['interior'] else 'distress boundary'} |")
+                         f"{o['cap_share']:.2f} | {'interior' if o['interior'] else 'distress boundary'}"
+                         + (" (barrier at the top of the grid)" if o["y_star"] >= 2.49 else "") + " |")
         L.append("")
     L += ["### Determinant of M3 by its formula along sigma, (lambda_S, K) = (1.2, 0.05)", "",
           "| sigma | dy*/dlam | dx_L/dlam | dy*/dK | dx_L/dK | determinant | hypotheses failing |", "|---|---|---|---|---|---|---|"]
     for sig, o in ds:
+        if o is None:
+            L.append(f"| {sig} | the dividend barrier is at the top of the grid, 2.5 | | | | | |")
+            continue
         f = o["f"]
         L.append(f"| {sig} | {f['dystar_dlam']:.4f} | {f['dxL_dlam']:.4f} | {f['dystar_dK']:.3f} | {f['dxL_dK']:.3f} | "
                  f"{o['det']:.4f} | {', '.join(o['failed']) if o['failed'] else 'none'} |")
