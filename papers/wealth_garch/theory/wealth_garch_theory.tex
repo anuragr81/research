@@ -580,8 +580,8 @@ whose identification assumes no delay, on C6, since the friction of
 \citet{peura2006} is one the thresholds cannot tell from the shortfall penalty,
 and on L8, where they pin the delay and the fixed issuance cost from issue cost
 and frequency. Whether those issue moments separate the delay from the
-asymmetry parameter is not checked. No row rests on this pass. K1's scope note says that it assumes no delay, and
-C6 is unchanged until the author decides.
+asymmetry parameter is not checked. No row rests on this pass. K1's scope note and C6 say that the identification
+assumes no delay.
 
 \subsection{Regulation}
 \label{sec:cs-regulation}
@@ -1111,6 +1111,21 @@ penalty, with $\lambda_S-1$ equal to the rate times the fine (L65). So is the pr
 without its reason (L5, L6), and so are the equilibrium of
 \citet{barberis2001} and the running maximum of \citet{li2023} (L12, L14).
 
+The structural GARCH model of \citet{engle2018} is not a fourth approach, since
+no one in it chooses a policy. Their leverage multiplier turns asset volatility
+into equity volatility, is a function of observed leverage and rises in it
+(L79, L80), and their asset volatility is a GARCH process whose response to
+news they estimate (L13). In the paper's model the same multiplier is the risky
+exposure over equity, which the bank chooses and the cap fixes where it binds,
+at $1/a_1$ near the distress boundary and towards $1/a_3$ deep in surplus. With
+no liability shock buffer volatility is then asset volatility times the
+regulatory multiple (M14), at each date when the asset volatility moves (M15),
+so within each branch of the cap the leverage effect they measure is absent.
+The difference between the deficit limit and the surplus limit is a switch of
+the multiplier between the branches, which the asymmetry parameter does not
+enter (K2). The model implies their identity with the multiplier set by
+regulation, and says nothing of their estimation.
+
 Table~\ref{tab:common-values} evaluates two quantities of the equation on
 each paper read. One is the determinant of the two thresholds in the two
 frictions $\theta_1,\theta_2$ that an approach has,
@@ -1302,6 +1317,8 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L76}{fries1997}{Their injections are continuous, a payout to shareholders that turns negative, with no fixed cost. With the fixed issuance cost of A5 injections are lumpy and finite in number (M6) and land on one target (M7).}{we allow cash disbursements to shareholders to become negative in some states of the world}{446}{M6, M7}
 \lrow{L77}{fries1997}{Limited liability makes equity convex near a late closure, and they call a value that would rise with volatility moral hazard. The value function of M4 is convex just above the recapitalisation trigger because of the option to issue rather than limited liability, and there the regulatory cap bounds the exposure.}{Late closure creates an option value for equity-holders which makes their claims convex in the state-variable.}{460}{M4}
 \lrow{L78}{fries1997}{Values per unit of deposits, by the homogeneity of the equation and its boundary conditions, the reduction the paper keeps by charging the fixed issuance cost per unit of liabilities (L4).}{one may exploit the homogeneity of the differential equation and the boundary conditions}{448}{M1, M2, M3}
+\lrow{L79}{engle2018}{Their leverage multiplier is a function of observed leverage. In M14 and M15 the multiplier is the risky exposure over equity, which the bank chooses and the regulatory cap fixes where it binds.}{the leverage multiplier becomes a simple function of observable leverage}{450}{M14, M15}
+\lrow{L80}{engle2018}{Their multiplier rises in leverage, so equity volatility rises as equity falls for a given asset volatility. Where the cap binds the paper's multiplier is constant on each branch, so within a branch buffer variance has no such effect (M10, M11).}{A second common feature is that the leverage multiplier is monotonically increasing in leverage.}{456}{M10, M11}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -1349,13 +1366,13 @@ Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2
 \cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{13}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
 \cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{\claims{L1}{13}}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}\cinot{The regulatory cap, its crossing point and the baseline of M13 lose their source, and C3 and the contrast with an exogenous recapitalisation trigger go.}
 \cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{\claims{L7}{12}}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}\cinot{The fixed issuance cost and the single injection target lose their bank precedent, the shortfall penalty is no longer a call in print, and C4 and C6 lose their main comparison.}
+\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{\claims{L13}{5}}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}\cinot{The change of variable from asset volatility to buffer variance loses its empirical counterpart, and the contrast with the sign asymmetry of equity volatility goes.}
 \cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{\claims{L9}{5}}{A*}{\citedby{W3123188656}{main}}\cinot{C4 loses one of its two numerical precedents, and the claim that issuance-cost models fit rather than identify their parameters rests on \citet{peura2006} alone.}
 \cirow{calem1999}{The Impact of Capital-Based Regulation on Bank Risk-Taking}{FEDS 96-12 (1996)}{J.\ Financ.\ Intermed.\ 8(4), 317--352}{1999-10}{410 (+74)}{\claims{L71}{4}}{A*}{\citedby{W1974244766}{main}, \citedby{W1541486432}{other 1}, \citedby{W2187999494}{other 2}}\cinot{The contrast of a bank that gambles near insolvency because it cannot issue, and of a requirement that raises risk, with a bank that issues at the trigger under a cap goes, and Section~\ref{sec:cs-risk} loses its dynamic precedent.}
 \cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{\claims{L48}{4}}{A*}{\citedby{W2147736135}{main}}\cinot{The closest precedent outside banking for a linear shortfall penalty with a fixed issuance cost goes, and C4 no longer notes thresholds that pin both parameters there.}
 \cirow{fries1997}{Optimal Bank Reorganization and the Fair Pricing of Deposit Guarantees}{the article}{J.\ Bank.\ Financ.\ 21(4), 441--468}{1997-04}{62}{\claims{L75}{4}}{A*}{\citedby{W2018818305}{main}}\cinot{Closure chosen by shareholders who stop injecting capital, the alternative to a bank that always recapitalises, loses its source, and continuous injections lose their contrast with M6 and M7.}
 \cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
 \cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{\claims{L5}{3}}{A*}{\citedby{W2068841402}{main}}\cinot{The constant buffer variance on the solvency branch is no longer tied to capped portfolio insurance, and C2 loses the case where the same limits carry preferences.}
-\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{\claims{L13}{3}}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}\cinot{The change of variable from asset volatility to buffer variance loses its empirical counterpart, and the contrast with the sign asymmetry of equity volatility goes.}
 \cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{\claims{L53}{2}}{--}{\citedby{W2919604362}{main}}\cinot{The flat charge for breaching required capital, which the shortfall penalty grades, rests on \citet{langmenno2026} alone, and separating two costs by moments rather than thresholds loses its bank example.}
 \cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{\claims{L59}{2}}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}\cinot{A recapitalisation trigger fixed at required capital loses its recent model, and the contrast with the interior trigger of M2 rests on \citet{peura2006}.}
 \cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{\claims{L10}{1}}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}\cinot{The double barrier of dividends and issuance is no longer shown to be established, and a fixed issuance cost scaled to keep one dimension loses a precedent.}
@@ -1470,7 +1487,7 @@ ID & Statement & Rows \\
 \crow{C2}{Wherever the optimal exposure binds the cap near both ends, the limits of buffer variance are $\nu_1^2$ and $\nu_3^2$, functions of $(\sigma,\sigma_L,c,a_1,a_3)$ only, and for every compliant exposure buffer variance is bounded by $\max\{\sigma_L^2,\nu_1^2\}$. The asymmetry parameter moves the thresholds (C1) and is absent from these limits and bounds. In capped portfolio insurance, whose geometry the cap shares, the slopes come from preferences, so the same limits would carry them.}{M3, M10, M11, M12, L5, L6}
 \crow{C3}{The surplus limit $\nu_3^2$ requires the liquidity branch to bind deep in surplus, which requires borrowing to hold the risky asset. With no borrowing, the main banking case of \citet{bayraktar2026}, the liquidity branch never binds once $a_2\le(1-a_3)x$, so the deficit limit and the bound of M12 are the results that apply there.}{M11, M12, L2}
 \crow{C4}{In a bank's objective, the joint local identification of C1, of a shareholder asymmetry parameter of a shortfall penalty and a fixed issuance cost from the dividend barrier and the recapitalisation trigger by the opposite signs of their effects on the trigger, is new against the papers read in full. Its numerical precedents in other parameters are \citet{peura2006} and \citet{daihuangkeppo2019} (L8, L9). Outside banking, in the approximation of \citet{constantinides1978}, four thresholds pin a linear penalty and a fixed cost once a holding cost is known, a step the authors do not take (L52), and \citet{alvarez2014} identify a fixed-cost inaction model from moments of the distribution of adjustments rather than from thresholds, where two parameters that move one moment the same way need a second moment (L58). \citet{bonaparte2011} estimate preference parameters and a fixed adjustment cost together, and their only device for identification is a table of the elasticities of their moments, with the thresholds of their inaction band not used (L61).}{M3, L8, L9, L52, L58, L61}
-\crow{C6}{C1 supplies what the specification \citet{peura2006} call for (L18) lacks in their calibration. The asymmetry parameter and the fixed issuance cost are set by the two thresholds (M3) rather than imposed (L20) or fitted to equity values (L21). Which constituency the shortfall penalty stands for (L19) is not settled by the thresholds (Appendix~\ref{app:scope}).}{M3, L18, L19, L20, L21}
+\crow{C6}{C1 supplies what the specification \citet{peura2006} call for (L18) lacks in their calibration. The asymmetry parameter and the fixed issuance cost are set by the two thresholds (M3) rather than imposed (L20) or fitted to equity values (L21). The thresholds set them in a model without the delay on issues of \citet{peura2006}, which the thresholds would read as a higher asymmetry parameter (L23, Section~\ref{sec:cs-frictions}). Which constituency the shortfall penalty stands for (L19) is not settled by the thresholds (Appendix~\ref{app:scope}).}{M3, L18, L19, L20, L21, L23}
 \bottomrule
 \end{longtable}
 

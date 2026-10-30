@@ -14,6 +14,8 @@ Bib key `engle2018`. Version read: the published RFS article. Evidence [F].
 | ES-Q6 | 476 | This finding supports the risk premium explanation of French, Schwert, and Stambaugh (1987) for volatility asymmetry. | The residual is assigned to risk premia, not to preference. |
 | ES-Q7 | 459 | which is the exact relationship implied by structural models of credit | Equity variance is the squared multiplier times asset variance, eq. (8). |
 | ES-Q8 | 460 | we intentionally avoid taking a stance on a specific asset pricing model, and why we will only use our model to back out asset returns, not asset levels | They use the structural relation for returns and not for levels, so it bears on the variance of the capital buffer (K2) and not on the thresholds, which are levels (K1). |
+| ES-Q10 | 450 | the leverage multiplier becomes a simple function of observable leverage | Their multiplier is set by observed leverage, not chosen. |
+| ES-Q11 | 456 | A second common feature is that the leverage multiplier is monotonically increasing in leverage. | Equity volatility rises as equity falls for given asset volatility, the mechanical leverage effect. |
 | ES-Q9 | 460 | The reasons we focus on financial firms are twofold | Their sample is financial firms, so their split of volatility asymmetry is a statement about banks' equity. |
 
 ## Lean results
