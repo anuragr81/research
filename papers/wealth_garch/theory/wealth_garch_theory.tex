@@ -303,7 +303,8 @@ the diffusion vanishes and the drift is $r-\mu_L+\gamma$. When that drift is
 positive, as at every parameter point of Appendix~\ref{app:evidence}, the
 boundary repels the state locally \citep[Remark 3.1]{bayraktar2026}. The
 problem has no liquidation, where \citet{peura2006} liquidate at the minimum
-(L24).
+(L24) and in \citet{fries1997} the shareholders stop injecting capital and
+close the bank at a point they choose (L75).
 
 The dynamic programming equation of the problem is the quasi-variational
 inequality
@@ -721,8 +722,14 @@ asset makes the interior maximiser exceed the cap. The attitude to risk
 therefore sets no exposure here, and the cap does. Their bang-bang choice of
 volatility by the sign of $V''$ (L62, L63) has no counterpart at this
 baseline, and nor has the shift towards riskier assets under a higher
-requirement that they report for concave utilities (L67), since a higher floor
-lowers the exposure through the cap.
+requirement that they report for concave utilities (L67), which
+\citet{calem1999} find in a dynamic bank that cannot issue (L72), since here a
+higher floor lowers the exposure through the cap. Their severely
+undercapitalized bank takes the most risk it can (L71), and a charge below
+required capital makes it take more, since it slows recapitalisation from earnings
+(L73). The paper's bank issues at the trigger instead, the shortfall penalty
+raises the trigger (M2), and the cap bounds the exposure where $V$ is convex,
+which is also where \citet{fries1997} locate moral hazard (L77).
 
 \begin{figure}[H]
 \centering
@@ -859,7 +866,11 @@ barrier, the injection target and the risky exposure under a regulatory cap
 endogenous, and fix the state at which the bank must recapitalise (L1, L28).
 \citet{federico2026} put the issue trigger at required capital, where it is
 not a choice (L60), and \citet{glover2023} force an issue at a breach (L55).
-For firms with no regulator, \citet{bolton2011} make the payout and financing
+\citet{calem1999} make the risky share endogenous in a bank that cannot issue
+and rebuilds capital from its earnings (L71), and \citet{fries1997} make
+closure endogenous, chosen by shareholders who inject capital continuously
+until it no longer pays (L75, L76). For firms with no regulator,
+\citet{bolton2011} make the payout and financing
 barriers endogenous with a fixed issuance cost (L10), and \citet{decamps2011}
 find that the same cost makes issues lumpy (L57). No model read makes the
 recapitalisation trigger and the risky exposure under a regulatory cap
@@ -1283,6 +1294,14 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L68}{milnewhalley2001}{With a linear objective the frictions induce the bank's attitude to risk. In the paper's model the value function is concave at the injection target, a hypothesis of M2, and convex just above the recapitalisation trigger (M4), so the bank is averse to risk at the first and not at the second.}{we do find induced risk-aversion when capital is less than the desired level}{11}{M2, M4}
 \lrow{L69}{milnewhalley2001}{Result 13. A higher minimum raises their desired capital one for one and leaves the buffer above the minimum unchanged, by the homogeneity of their equation in capital less the minimum. In the paper's model required capital enters the shortfall penalty and not the cap, so the homogeneity fails, and in the solve the dividend barrier rises by about three-eighths of a rise in required capital and the recapitalisation trigger by about a seventh (Section~\ref{sec:cs}).}{an alteration of the minimum capital requirement has no long run impact on either the buffer of free capital}{23}{M8}
 \lrow{L70}{engle2018}{Their sample is financial firms, and they use the structural relation to back out asset returns and not asset levels. It bears on buffer variance, the object of M10 and M15, and not on the thresholds, which are levels of the state.}{we intentionally avoid taking a stance on a specific asset pricing model, and why we will only use our model to back out asset returns, not asset levels}{460}{M10, M15}
+\lrow{L71}{calem1999}{In a dynamic bank that rebuilds capital only from its earnings and cannot issue, a severely undercapitalized bank takes the most risk it can. The paper's bank issues at the recapitalisation trigger, and there the regulatory cap bounds its exposure, so the convexity of M4 does not become maximal risk.}{In general, a severely undercapitalized bank takes maximal risk in an effort to improve its capital position.}{18}{M4}
+\lrow{L72}{calem1999}{A higher flat requirement raises the risk a well-capitalized bank takes, the dynamic counterpart of the portfolio result of L67. At the paper's baseline a higher solvency floor lowers the exposure through the cap (Section~\ref{sec:cs-risk}).}{the bank generally takes on more portfolio risk}{23}{M12}
+\lrow{L73}{calem1999}{A premium charged below required capital, the same at every shortfall, raises the risk undercapitalized banks take because it slows recapitalisation from earnings. In the paper's model the shortfall penalty grows with the shortfall and the bank can issue, so the asymmetry parameter raises the recapitalisation trigger (M2) rather than the risk taken.}{The underlying intuition is that the premium surcharge cuts into bank earnings, hampering the effort to recapitalize.}{25}{M2, M8}
+\lrow{L74}{calem1999}{Their risk-based standard bounds the risky share linearly in capital (\lean{CalemRob.riskbased_is_linear_bound}), the form of the solvency branch of the regulatory cap with an intercept, and it moderates risk only when stringent enough.}{be sufficiently stringent for it to be effective}{34}{M10}
+\lrow{L75}{fries1997}{Equity holders inject capital to keep the bank open and stop when injecting no longer pays, so the bank closes at a point they choose, below zero net assets (\lean{FriesEtAl.closure_factor_in_unit}). The paper's bank always recapitalises at the trigger and has no option to abandon, a choice of scope (Section~\ref{sec:problem}).}{the willingness of equity-holders to inject capital constrains banking policy}{444}{M2}
+\lrow{L76}{fries1997}{Their injections are continuous, a payout to shareholders that turns negative, with no fixed cost. With the fixed issuance cost of A5 injections are lumpy and finite in number (M6) and land on one target (M7).}{we allow cash disbursements to shareholders to become negative in some states of the world}{446}{M6, M7}
+\lrow{L77}{fries1997}{Limited liability makes equity convex near a late closure, and they call a value that would rise with volatility moral hazard. The value function of M4 is convex just above the recapitalisation trigger because of the option to issue rather than limited liability, and there the regulatory cap bounds the exposure.}{Late closure creates an option value for equity-holders which makes their claims convex in the state-variable.}{460}{M4}
+\lrow{L78}{fries1997}{Values per unit of deposits, by the homogeneity of the equation and its boundary conditions, the reduction the paper keeps by charging the fixed issuance cost per unit of liabilities (L4).}{one may exploit the homogeneity of the differential equation and the boundary conditions}{448}{M1, M2, M3}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -1306,7 +1325,7 @@ descending order of claims, papers with as many claims are in descending order o
 citations, counting the other versions, and papers equal on both are in order of
 bib key. Citations are the count of the OpenAlex record
 of the published version, or of the working paper where none was found,
-retrieved on 29 October 2026, with the counts of OpenAlex's records of other
+retrieved on 30 October 2026, with the counts of OpenAlex's records of other
 versions of the same paper in brackets. The last column links to each of these
 records, the one counted first. OpenAlex counts are usually lower than those of Google
 Scholar. The date is that of the printed issue registered with Crossref, or of
@@ -1331,14 +1350,16 @@ Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2
 \cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{\claims{L1}{13}}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}\cinot{The regulatory cap, its crossing point and the baseline of M13 lose their source, and C3 and the contrast with an exogenous recapitalisation trigger go.}
 \cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{\claims{L7}{12}}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}\cinot{The fixed issuance cost and the single injection target lose their bank precedent, the shortfall penalty is no longer a call in print, and C4 and C6 lose their main comparison.}
 \cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{\claims{L9}{5}}{A*}{\citedby{W3123188656}{main}}\cinot{C4 loses one of its two numerical precedents, and the claim that issuance-cost models fit rather than identify their parameters rests on \citet{peura2006} alone.}
+\cirow{calem1999}{The Impact of Capital-Based Regulation on Bank Risk-Taking}{FEDS 96-12 (1996)}{J.\ Financ.\ Intermed.\ 8(4), 317--352}{1999-10}{410 (+74)}{\claims{L71}{4}}{A*}{\citedby{W1974244766}{main}, \citedby{W1541486432}{other 1}, \citedby{W2187999494}{other 2}}\cinot{The contrast of a bank that gambles near insolvency because it cannot issue, and of a requirement that raises risk, with a bank that issues at the trigger under a cap goes, and Section~\ref{sec:cs-risk} loses its dynamic precedent.}
 \cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{\claims{L48}{4}}{A*}{\citedby{W2147736135}{main}}\cinot{The closest precedent outside banking for a linear shortfall penalty with a fixed issuance cost goes, and C4 no longer notes thresholds that pin both parameters there.}
+\cirow{fries1997}{Optimal Bank Reorganization and the Fair Pricing of Deposit Guarantees}{the article}{J.\ Bank.\ Financ.\ 21(4), 441--468}{1997-04}{62}{\claims{L75}{4}}{A*}{\citedby{W2018818305}{main}}\cinot{Closure chosen by shareholders who stop injecting capital, the alternative to a bank that always recapitalises, loses its source, and continuous injections lose their contrast with M6 and M7.}
 \cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
 \cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{\claims{L5}{3}}{A*}{\citedby{W2068841402}{main}}\cinot{The constant buffer variance on the solvency branch is no longer tied to capped portfolio insurance, and C2 loses the case where the same limits carry preferences.}
 \cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{\claims{L13}{3}}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}\cinot{The change of variable from asset volatility to buffer variance loses its empirical counterpart, and the contrast with the sign asymmetry of equity volatility goes.}
 \cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{\claims{L53}{2}}{--}{\citedby{W2919604362}{main}}\cinot{The flat charge for breaching required capital, which the shortfall penalty grades, rests on \citet{langmenno2026} alone, and separating two costs by moments rather than thresholds loses its bank example.}
 \cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{\claims{L59}{2}}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}\cinot{A recapitalisation trigger fixed at required capital loses its recent model, and the contrast with the interior trigger of M2 rests on \citet{peura2006}.}
 \cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{\claims{L10}{1}}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}\cinot{The double barrier of dividends and issuance is no longer shown to be established, and a fixed issuance cost scaled to keep one dimension loses a precedent.}
-\cirow{berger2008}{How Do Large Banking Organizations Manage Their Capital Ratios?}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{532 (+11)}{\claims{L15}{1}}{A}{\citedby{W2170777567}{main}, \citedby{W3125767733}{other 1}}\cinot{The fact that banks hold buffers well above required capital, which the shortfall penalty is to explain, loses its empirical source.}
+\cirow{berger2008}{How Do Large Banking Organizations Manage Their Capital Ratios?}{the article}{J.\ Financial Serv.\ Res.\ 34(2--3), 123--149}{2008-12}{531 (+11)}{\claims{L15}{1}}{A}{\citedby{W2170777567}{main}, \citedby{W3125767733}{other 1}}\cinot{The fact that banks hold buffers well above required capital, which the shortfall penalty is to explain, loses its empirical source.}
 \cirow{alvarez2014}{Small and Large Price Changes and the Propagation of Monetary Shocks}{NBER WP 20155}{Amer.\ Econ.\ Rev.\ 106(10), 2817--2851, as ``The Real Effects of Monetary Shocks in Sticky Price Models''}{2016-10}{169 (+56)}{\claims{L58}{1}}{A*}{\citedby{W2343185847}{main}, \citedby{W1511179063}{other 1}, \citedby{W3121838129}{other 2}, \citedby{W3150502032}{other 3}, \citedby{W3125896809}{other 4}}\cinot{C4 loses its comparison with identification from moments of adjustments rather than from thresholds.}
 \cirow{decamps2011}{Free Cash Flow, Issuance Costs, and Stock Prices}{the article}{J.\ Finance 66(5), 1501--1544}{2011-10}{166 (+12)}{\claims{L57}{1}}{A*}{\citedby{W2052461731}{main}, \citedby{W1549697278}{other 1}}\cinot{The lumpy issues of M7 lose one precedent and keep \citet{peura2006} and \citet{bolton2011}.}
 \cirow{lokka2008}{Optimal Dividend and Issuance of Equity Policies in the Presence of Proportional Costs}{preprint of July 2005}{Insurance Math.\ Econ.\ 42(3), 954--961}{2008-06}{117}{\claims{L11}{1}}{A*}{\citedby{W2078270141}{main}}\cinot{Nothing read shows that proportional issuance costs alone give no injection target, so M7 loses its contrast.}

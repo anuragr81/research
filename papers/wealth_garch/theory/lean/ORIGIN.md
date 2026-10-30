@@ -9,12 +9,15 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 `ChoulliTaksarZhou.lean` is not a copy. It was written for this paper on 30 October
 2026, with the record `theory/lit/choulli_taksar_zhou_2004/`, and is pinned the same way.
 `TimeVarying.lean` is not a copy either. It was written for row M15 on 30 October 2026.
+`CalemRob.lean` was written on 30 October 2026 with the record `theory/lit/calem_rob_1999/`, and
+`FriesEtAl.lean` with `theory/lit/fries_mellabarral_perraudin_1997/`.
 
 | File | sha256 |
 |---|---|
 | `AlvarezLeBihanLippi.lean` | `95d90fde159261f2b3ecf764cbd094e6a82930a99bbda5416099c51a409416c7` |
 | `BarberisHuangSantos.lean` | `b9f6777a68d948a72b4ebee055b61779e73bab83fc7dc4ee0083796f07d4174a` |
 | `BCVW.lean` | `5b9b55b0bf24f4e9798a2f8eb0ca92f3fefd5403e9cf6bd9ea7930e74649c42b` |
+| `CalemRob.lean` | `1693e68c48bacc1205b7222248517d9c5a394738ddf6a2bd4dc6ff43cfdf80f2` |
 | `BehnEtAl.lean` | `9d8c2e99e6d5ed64c372fdd7fba98fe95d3fdd12b38e85fcb55560c1ac38625f` |
 | `BergerEtAl.lean` | `a5586b41f25a4b93cb1cecae533571cd4743d19d4809b1a03af147533694c331` |
 | `BlackPerold.lean` | `e955c31e3af2384c109872e11fabdb65b48a5212702306778b1c5bebd9e3e714` |
@@ -32,6 +35,7 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 | `EngleSiriwardane.lean` | `f80a488edd4b82c7bafdcd1f43dd352ab673bcc8f84ed4a1e40478da1a2931fe` |
 | `Envelope.lean` | `1c55abd7dde76c00be3bb9436df48cc0348342913c5f7684f344b39f5d067467` |
 | `FedericoEtAl.lean` | `3cf75a9320fae5b08b289e7bf69dc08475134541a972a5a62ae38237ff46eca6` |
+| `FriesEtAl.lean` | `eb5e82003c94bd3256d1d45a20f85c2a2870794f3d31b8caf8bc8fbfeaa489e8` |
 | `GloverEtAl.lean` | `50898e9163a282964a2c6e511ba2d8327872630050d433fb6fa33d75f5e1b6e3` |
 | `Identification.lean` | `2578829ed11faf51f36103e6d5587375d14ef42d264f4470e3845d1ee139ca71` |
 | `ImpulseCount.lean` | `ab1aaa52ca9f4ab3ec9468d013e7c77e4b4bb8fab18b11fe1084e7ae486de66e` |

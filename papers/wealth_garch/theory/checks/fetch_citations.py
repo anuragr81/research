@@ -53,6 +53,9 @@ RECORDS = {
     "alvarez2014": dict(main="W2343185847", others=["W1511179063", "W3121838129", "W3150502032", "W3125896809"]),
     "federico2026": dict(main="W7214928914", others=["W4412630239", "W7214492509"]),
     "bonaparte2011": dict(main="W2123714743", others=[]),
+    # Read as FEDS 96-12 (1996); published in the JFI (1999) under a shorter title, not read.
+    "calem1999": dict(main="W1974244766", others=["W1541486432", "W2187999494"]),
+    "fries1997": dict(main="W2018818305", others=[]),
 }
 
 FIELDS = "id,display_name,publication_date,cited_by_count,doi,type,primary_location,authorships,biblio"

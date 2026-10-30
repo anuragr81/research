@@ -266,6 +266,22 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Calem and Rob, and Fries, Mella-Barral and Perraudin, read in
+  full and cited (author: added to the Drive folder). Records
+  lit/calem_rob_1999/ (read as FEDS 96-12, 1996; published in the JFI 8(4)
+  1999, not read; cited as calem1999) and
+  lit/fries_mellabarral_perraudin_1997/ (the JBF article), Lean files
+  CalemRob.lean and FriesEtAl.lean, rows L71 to L78, sentences in Sections
+  2.3, 3.5 and 4.1, and two citation rows; citations.json refetched on 30
+  October 2026. Quotations are internal notes, not for publication (author).
+  Open:
+  - Milne and Robertson (1996): the Drive file is the February 1994 draft
+    marked "Not for quotation"; the skeleton is internal, so its record may
+    rest on the draft (author), and the submitted paper cites the JEDC
+    article, whose results should be checked against the draft.
+  - Engle and Siriwardane: not a fourth approach and not in the equation
+    (author and Claude agree); a contrast paragraph for Section 4.3 is
+    drafted and waits for the author.
 - 2026-10-30. Baglioni and Cherubini (1994, RISEC 41, 893-904) dropped from the
   reading list (author). Not cited. C4 claims novelty against the papers read
   in full, which stays accurate; theirs is the (S, s) bank model with fixed
