@@ -288,7 +288,8 @@ shareholders' value alone (M8). Above one it charges each moment the state
 spends below the reference, and the model does not say whose cost that charge
 stands for, the supervisor's restrictions below required capital or the
 market's response. Appendix~\ref{app:scope} adopts the first reading without
-deriving it, and K1 identifies the asymmetry parameter under any of them.
+deriving it, and K1 identifies the asymmetry parameter under any of them. Appendix~\ref{app:scope} also says why the objective
+takes this form.
 
 At the distress boundary the regulatory cap is zero, so the exposure is zero,
 the diffusion vanishes and the drift is $r-\mu_L+\gamma$. When that drift is
@@ -354,6 +355,27 @@ ID & Claim & Statement & Lean & Proof \\
 
 \subsection{How the papers read leave the question open}
 
+Among the dynamic models of bank capital read, each makes part of the bank's
+policy endogenous and fixes the rest. In \citet{milnewhalley2001} the dividend
+barrier, which is also the target of each issue, and the volatility the bank
+bears are endogenous, and the bank issues only when a random audit finds it
+below the minimum (L38, L62, L64). \citet{peura2006} make the dividend barrier
+and the issue barrier endogenous, with a single target, under a delay on issues
+and liquidation at the minimum, and the bank's risk is given (L7, L23, L24).
+\citet{daihuangkeppo2019} keep that structure and add partial information
+about the bank's assets (L9, L25). \citet{bayraktar2026} make the dividend
+barrier, the injection target and the risky exposure under a regulatory cap
+endogenous, and fix the state at which the bank must recapitalise (L1, L28).
+\citet{federico2026} put the issue trigger at required capital, where it is
+not a choice (L60), and \citet{glover2023} force an issue at a breach (L55).
+For firms with no regulator, \citet{bolton2011} make the payout and financing
+barriers endogenous with a fixed issuance cost (L10), and \citet{decamps2011}
+find that the same cost makes issues lumpy (L57). No model read makes the
+recapitalisation trigger and the risky exposure under a regulatory cap
+endogenous together. The paper's bank chooses its dividend barrier, its
+recapitalisation trigger, its injection target and its risky exposure under the
+cap (P1). K1 is a statement about the first three, and K2 about the fourth.
+
 The asymmetry parameter and the fixed issuance cost stand for the two frictions
 that the papers read use to explain a buffer above the minimum, a cost of
 falling below the minimum and a cost of raising capital back. The bank papers
@@ -385,8 +407,9 @@ fixed cost of raising cash, the signs M1 gives for the dividend barrier, and
 they state no direction for the lower trigger (L49, L50). In a bank
 \citet{milnewhalley2001} pair an audit at random below the minimum with a fixed
 cost of each issue, so that the capital decision is an inventory problem with
-an issue point and a target (L37, L38), and more frequent audit and a higher
-fixed cost of issue move the policy in the same direction (L39, L40). With
+a target (L37, L38), in which the bank issues only when an audit finds it
+below the minimum (L64). More frequent audit and a higher fixed cost of issue
+move the policy in the same direction (L39, L40). With
 like responses the signs of the two thresholds do not separate the two
 frictions, since the Jacobian can then be singular (M3). \citet{behn2019}
 estimate a charge for breaching the capital requirement and an issuance cost with no
@@ -566,9 +589,13 @@ Liquidation at the minimum in \citet{peura2006} and \citet{federico2026} (L24,
 L59) and the forced issue of \citet{glover2023} (L55) are not choices of
 $\Lambda$ but rules at the distress boundary, which the equation holds as a
 boundary condition there in place of the impulse operator. The delay on issues
-of \citet{peura2006} (L23), the partial information of
-\citet{daihuangkeppo2019} and the random audit of \citet{milnewhalley2001}
-(L38) are outside the equation. So is the preference of
+of \citet{peura2006} (L23) and the partial information of
+\citet{daihuangkeppo2019} are outside the equation. The random audit of
+\citet{milnewhalley2001} is a payoff term of another kind. Below the minimum
+it charges, at the audit's rate, the value lost by being forced to issue or
+close, which depends on $V$ and so is not a choice of $\Lambda$. With a fine
+in proportion to the shortfall in place of forced action it is the shortfall
+penalty, with $\lambda_S-1$ equal to the rate times the fine (L65). So is the preference of
 \citet{blackperold1992}, whose rule the cap term reproduces as a policy
 without its reason (L5, L6), and so are the equilibrium of
 \citet{barberis2001} and the running maximum of \citet{li2023} (L12, L14).
@@ -646,7 +673,7 @@ Paper & Payoff term & Impulse term & Cap term & Rule at the distress boundary & 
 \midrule
 \citet{peura2006} & $\lambda_S=1$ & $K>0$ (L7) & none & liquidation at the minimum (L24) & the delay on issues (L23) \\ \addlinespace
 \citet{daihuangkeppo2019} & $\lambda_S=1$ & $K>0$ (L9) & none & liquidation, with the regulator's asymmetry (L25) & the delay, partial information \\ \addlinespace
-\citet{milnewhalley2001} & $\lambda_S=1$ & $K>0$ (L39) & $\sigma_1$ or $\sigma_2$, assumed (L62) & an audit at random below the minimum (L38) & the random audit \\ \addlinespace
+\citet{milnewhalley2001} & $\lambda_S=1$ & $K>0$ (L39) & $\sigma_1$ or $\sigma_2$, assumed (L62) & an audit at random below the minimum, the only time the bank issues (L64) & none, the audit is a payoff term that depends on $V$ (L65) \\ \addlinespace
 \citet{bayraktar2026} & $\lambda_S=1$ & $K=0$, $\kappa>0$ (L3, L46) & $u$ (L26) & issue or liquidate at an exogenous trigger (L28) & none \\ \addlinespace
 \citet{blackperold1992} & no asymmetry & no issuance & $u$ with $a_2=0$, slopes from preferences (L5, L6) & none & preferences over consumption \\ \addlinespace
 \citet{barberis2001}, \citet{li2023} & loss aversion over gains and losses (L36, L14) & no issuance & none & none & not a bank \\ \addlinespace
@@ -723,7 +750,7 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L35}{bayraktar2026}{Without borrowing the liquidity branch does not bind in the range of parameters they solve. C3 gives the condition under which it does not bind at any state.}{the LCR constraint is nonbinding within the parameter range considered}{20}{M11, M12}
 \lrow{L36}{barberis2001}{Their loss-averse preference is kinked-linear at the reference, the form of the shortfall penalty of M8. It values gains and losses on an asset, not a shortfall of a bank's capital below its requirement.}{This is a piecewise linear function, shown as the solid line in Figure I. It is kinked at the origin, where the gain equals zero.}{10}{M8}
 \lrow{L37}{milnewhalley2001}{The cost of falling below the minimum, through the audit, and the fixed cost of issue are joint determinants of the buffer, the two frictions that the asymmetry parameter and the fixed issuance cost stand for in A4 and A5.}{desired bank capital holdings are a function of cash-flow uncertainty, franchise value, audit frequency, recapitalisation costs, and cost of equity relative to deposits}{9}{M2, M3}
-\lrow{L38}{milnewhalley2001}{Both frictions in one bank give an issue point and a target, the counterparts of the recapitalisation trigger and the injection target of M2 and M7.}{The bank capital decision is then akin to an (s, S) inventory problem.}{9}{M2, M7}
+\lrow{L38}{milnewhalley2001}{Both frictions in one bank make the capital decision an inventory problem with a target, the counterpart of the injection target of M7. Its issue point is not a choice, since the bank issues only when an audit finds it below the minimum (L64), where the recapitalisation trigger of M2 is chosen.}{The bank capital decision is then akin to an (s, S) inventory problem.}{9}{M2, M7}
 \lrow{L39}{milnewhalley2001}{Result 12. A higher fixed cost of issue or more frequent audit raises desired capital.}{always results in an increase in desired capital}{23}{M2, M3}
 \lrow{L40}{milnewhalley2001}{Result 12. More frequent audit moves the policy the same way as a higher fixed cost of issue, so the two frictions have like responses, the case in which the control of M3 shows the Jacobian can be singular.}{A shift in the same direction would be produced by an increase of q.}{23}{M3}
 \lrow{L41}{peura2006}{At $(\Delta,K)=(0.5,1.00)$ the printed values, with L42 and L43, give a determinant of the dividend and issue barriers in the delay and the fixed cost of $+1/25$ (\lean{PeuraKeppo.table2_det_high_K}), against $-29/100$ at small costs (\lean{PeuraKeppo.table2_det_value}). The values are printed to one decimal.}{.5 1.00 .9 3.7 2.8 27 122}{2184}{M3}
@@ -749,6 +776,11 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L61}{bonaparte2011}{Preference parameters and a fixed adjustment cost are estimated together, and the table of elasticities of the moments to the parameters is their only device for identification. The thresholds of their inaction band are not used, where M3 identifies from two thresholds.}{This table is also informative about identification as it indicates which moments are particularly sensitive to variations in each of the parameters.}{8}{M3}
 \lrow{L62}{milnewhalley2001}{Result 6. With no return to bearing risk the bank takes the smaller of two assumed volatilities where its value is concave and the larger where it is convex. The exposure rule of the cap term reduces to theirs when the risk premium is zero, with no exposure for the smaller and the regulatory cap for the larger, so the bound on risk is set by regulation here and assumed there.}{optimal policy is always to extremise the degree of cash flow uncertainty}{18}{M11, M12}
 \lrow{L63}{milnewhalley2001}{Result 5. Below the minimum, which the bank can reach because the audit is random, its value is convex and it takes the most risk. The value function of M4 is convex just above the recapitalisation trigger instead, where the bank issues rather than waits for an audit.}{a bank with less than the minimum required capital and hence under immediate threat of regulatory intervention is risk loving}{18}{M4}
+\lrow{L64}{milnewhalley2001}{Result 8. The bank issues or liquidates only after an audit finds it below the minimum and never by choice, so their model has no recapitalisation trigger in the sense of M2.}{A bank never chooses voluntary recapitalisation or voluntary liquidation.}{19}{M2}
+\lrow{L65}{milnewhalley2001}{The audit arrives at a constant rate, so below the minimum their equation charges at that rate the value lost by being forced to issue or close, which depends on the value function. With a fine in proportion to the shortfall in place of forced action, the same rate gives the shortfall penalty of A4, with the asymmetry parameter less one equal to the rate times the fine (Section~\ref{sec:common}).}{The audit itself is random, as in Merton (1978), with a parameter q}{14}{M8}
+\lrow{L66}{milnewhalley2001}{The bank literature writes the objective as linear in the bank's cash flows or as a utility concave in them, the second justified by a divergence of interest between managers and shareholders. They take the first, as does the paper with the shortfall penalty added (Appendix~\ref{app:scope}).}{The alternative to assuming a linear bank objective is a risk-averse bank utility function}{11}{M8}
+\lrow{L67}{milnewhalley2001}{By their account of two papers the paper has not read, in portfolio models with a concave utility a capital requirement can shift the bank towards riskier assets. Whether a higher solvency floor raises the exposure the bank chooses below the cap is a question of the comparative statics (Appendix~\ref{app:evidence}).}{that the introduction of regulatory capital requirements may induce banks to shift their portfolio composition towards riskier assets}{11}{M12}
+\lrow{L68}{milnewhalley2001}{With a linear objective the frictions induce the bank's attitude to risk. In the paper's model the value function is concave at the injection target, a hypothesis of M2, and convex just above the recapitalisation trigger (M4), so the bank is averse to risk at the first and not at the second.}{we do find induced risk-aversion when capital is less than the desired level}{11}{M2, M4}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -795,7 +827,7 @@ Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2
 \endhead
 \cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{\claims{L1}{13}}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}\cinot{The regulatory cap, its crossing point and the baseline of M13 lose their source, and C3 and the contrast with an exogenous recapitalisation trigger go.}
 \cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{\claims{L7}{12}}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}\cinot{The fixed issuance cost and the single injection target lose their bank precedent, the shortfall penalty is no longer a call in print, and C4 and C6 lose their main comparison.}
-\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{7}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
+\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{12}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
 \cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{\claims{L9}{5}}{A*}{\citedby{W3123188656}{main}}\cinot{C4 loses one of its two numerical precedents, and the claim that issuance-cost models fit rather than identify their parameters rests on \citet{peura2006} alone.}
 \cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{\claims{L48}{4}}{A*}{\citedby{W2147736135}{main}}\cinot{The closest precedent outside banking for a linear shortfall penalty with a fixed issuance cost goes, and C4 no longer notes thresholds that pin both parameters there.}
 \cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
@@ -1437,6 +1469,40 @@ as the issue their omissions reduce to (L19), and \citet{milnewhalley2001}
 name the supervisor's intervention and the market's response together (L16).
 The thresholds identify the asymmetry parameter under any of these readings and do not
 choose among them. K1, C1 and C6 depend on this paragraph.
+
+\paragraph{The objective.} The papers read write a bank's objective in three
+ways. \citet{peura2006}, \citet{milnewhalley2001} and \citet{bayraktar2026}
+maximise the shareholders' value, linear in dividends and in what the
+shareholders pay for issues, so that any aversion to risk is induced by the
+frictions (L68). \citet{milnewhalley2001} name the alternative, a utility
+concave in the bank's cash flows that is justified by a divergence of interest
+between managers and shareholders, and report that in portfolio models with
+such a utility a capital requirement can shift the bank towards riskier assets
+(L66, L67). The preference models put the curvature at a reference point
+instead, loss aversion over gains and losses in \citet{barberis2001} and
+\citet{li2023}, and a floor under the portfolio in \citet{blackperold1992}
+(L36, L14, L5). The bank papers that charge a shortfall write the charge as an
+amount that is the same at every shortfall below a buffer requirement, or as a
+smooth function of net worth that also rewards a surplus (L53, L51, L56).
+
+The paper keeps the shareholders' value and adds one kink. Its objective is
+linear in dividends and in issue costs, as in the models with issuance costs,
+and charges $(\lambda_S-1)(R-x)^+$ per unit of time below required capital
+(A4). Linearity in dividends keeps the dividend barrier a barrier, since it
+gives the term $1-V'$ of equation~\eqref{eq:qvi}, where a utility concave in
+the dividend rate would pay at every state the rate whose marginal utility
+equals $V'$. At $\lambda_S=1$ the objective is that of the models with
+issuance costs, so the paper's model nests them and the asymmetry parameter
+measures the departure from them, and for every $\lambda_S\ge1$ the running
+payoff is concave (M8). Charged per unit of liabilities, the penalty keeps the
+problem to one state (L4). The kink puts the asymmetry parameter in the payoff
+term alone, away from the cap term, which K2 uses (Section~\ref{sec:common}),
+and the penalty is zero above the reference, which M1 uses at the dividend
+barrier. A utility concave in cash flows would add a curvature parameter that
+moves the dividend barrier as the asymmetry parameter does, and the thresholds
+would then have to separate the two. The paper does not take that route, and
+whether the aversion to risk of a concave utility and that induced by the kink
+lead the bank to different policies is not asked.
 
 \paragraph{The policy.} That the optimal policy is a dividend barrier, a
 recapitalisation trigger and an injection target, and that $V$ is the value

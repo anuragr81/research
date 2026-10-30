@@ -266,6 +266,34 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Milne and Whalley corrections and the objective (author).
+  Their Result 8 (MW-Q15, row L64) says the bank never issues by choice, so
+  L38 and the Section 3.1 sentence no longer read their (s, S) phrase as an
+  issue point and a target; the issue point is the audit. Their equation (3)
+  (MW-Q16, MW-D4, row L65) is in the payoff term but depends on V, so not a
+  choice of Lambda; with a fine f per unit of shortfall it is Lambda with
+  lambda_S - 1 = q f, and the thresholds identify q f only. Section 3.4 and
+  Table 5 no longer call the audit outside the equation. Section 3.1 opens
+  with a paragraph positioning the dynamic models by what each makes
+  endogenous, on the lines of their pp. 9 to 10. Appendix D, "The
+  objective": the objectives of the papers read and why the paper's is
+  linear in dividends with one kink (MW-Q17 to MW-Q20, rows L66 to L68).
+  To do:
+  - Read, PDFs to be found by the author: Baglioni and Cherubini (1994,
+    RISEC 41, 893-904), the (S, s) bank model with fixed recapitalisation
+    costs and a capital requirement, a risk to C4's novelty; Milne and
+    Robertson (1996, JEDC 20, 1427-1449), the base of Peura and Keppo and
+    of Milne and Whalley; Calem and Rob (1996 FEDS 96-12, published version
+    if any), dynamic capital and risk-taking; Fries, Mella-Barral and
+    Perraudin (1997, JBF 21, 441-468), optimal closure. Not Merton (1978)
+    (author).
+  - Milne (2004) has a record in the parent's lit/ (milne_2004) and takes
+    up the portfolio question of L67; a theory record needs only a copy.
+  - Q7 to report the average risky exposure and its ratio to the cap along
+    paths as the solvency floor rises, the Koehn and Santomero question of
+    L67 in the paper's model.
+  - O'Hara (1983), managers' cost of losing their jobs, is a further reading
+    of whose cost the penalty is (Appendix D), if read.
 - 2026-10-30. The bank's problem stated before the results (author): new
   Section 2.3 (who optimises, state equation with drift, admissible policies,
   objective, whose penalty, no liquidation, the QVI as eq:qvi). Section 3.4
