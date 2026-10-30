@@ -1040,7 +1040,8 @@ away from $R$ and $\bar x$, is assumed wherever a row differentiates $V$.
 the hypotheses of M1 to M4 hold at some parameter point is shown by a numerical
 solve, \path{theory/solve/solve_qvi.py}, whose output is
 \path{theory/solve/results_solve.md}. The solve takes the baseline parameters
-of \citet{bayraktar2026} with $\lambda_S=1.2$ and $K=0.05$, and solves the discrete
+of \citet{bayraktar2026} with the riskless rate $r=0.025$ in place of their
+$0.02$, $\lambda_S=1.2$ and $K=0.05$, and solves the discrete
 quasi-variational inequality by policy iteration on grids of 601 and 1201
 nodes, to a residual below $10^{-12}$. On the finer grid the dividend barrier is
 $y^*=1.741$, the recapitalisation trigger $x_L=1.026$ and the injection target
@@ -1078,6 +1079,62 @@ $\nu_1^2=3.14$ on $[x_L,1.047]$ and stays within the bound of M12 on the whole
 inaction region. At the dividend barrier it is $0.155$ without borrowing and
 $0.364$ with it, against a surplus limit of $0.0688$, since the state does not
 rise above the dividend barrier.
+
+\paragraph{Comparative statics, in progress.} The author chose three
+questions on 30 October 2026, each one that a paper read asks of its own
+model. The first is how the dividend barrier, the recapitalisation trigger and
+the injection target move with each friction, which the issuance-cost models
+tabulate for their frictions and not for an asymmetry parameter. The second is
+how the thresholds and the value function move with the solvency floor, the
+run-off rate and the liquidity haircut, which is Table 1 of
+\citet{bayraktar2026} with an exogenous trigger and no asymmetry parameter.
+The third is how the value function trades off against safety as the
+asymmetry parameter rises, where their frontier moves the cap geometry
+instead. Recovering the asymmetry parameter from data is left to empirical
+work rather than asked here. No row rests on this exercise.
+
+The second question has had one pass, \path{theory/solve/run_q3_regulatory.py},
+whose output is \path{theory/solve/results_q3.md}. A port of the authors'
+solver, \path{theory/solve/bcvw_port.py}, reproduces all 27 rows of their
+Table 1 to within $5\times10^{-5}$, and every row stops at the solver's limit
+of 1500 steps rather than at its tolerance. Solved by policy iteration in
+\path{theory/solve/bcvw_model.py}, the baseline dividend barrier is $1.389$
+against $1.428$ printed and the value function at $y=1.2$ is $0.870$ against
+$0.855$, while every direction in their table is unchanged. Their solver lets
+the bank issue at every state, and when converged the solver issues below $1.126$ rather
+than at their distress threshold of $1.02$. With issuance allowed only at
+$1.02$, as their model is stated, the bank below $1.079$ pays a dividend down
+to $1.02$ and issues at once, and the slope of the value function rises from
+$1$ to $1.038$ below the injection target, so the value function is not
+concave at their baseline, against their Proposition 3.3. The early issuance
+and the rising slope hold on grids of 601, 1201 and 2401 nodes, and the early
+issuance appears under their scheme and under policy iteration alike. Neither
+is proved, and the step of their proof that fails is not located. Their own
+remark that a fixed issuance cost could induce earlier issuance (p.~7) points
+the same way.
+
+The same sweeps in the paper's model, with $K=0.05$, an endogenous trigger and
+$\lambda_S$ of $1$, $1.2$ and $1.5$, move the dividend barrier, the injection
+target and the value function in the directions of their table, and the
+recapitalisation trigger rises with the solvency floor and falls with the
+liquidity haircut. Table~\ref{tab:q3-spread} gives the spread of each across
+the three values of $\lambda_S$. Raising the solvency floor from $0.045$ to
+$0.12$ narrows the spread of the dividend barrier from $0.050$ to zero, while
+raising the liquidity haircut to $0.48$ widens that spread to $0.080$.
+
+\begin{table}[H]
+\footnotesize
+\caption{Spread across $\lambda_S\in\{1,1.2,1.5\}$ of the thresholds and of the value function at $x=1.2$, in the paper's model at the parameters of \citet{bayraktar2026} with $K=0.05$.}\label{tab:q3-spread}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Cap geometry & Recapitalisation trigger & Dividend barrier & Injection target & Value function at $1.2$ \\
+\midrule
+$a_1=0.045$ (baseline) & $0.028$ & $0.050$ & $0.044$ & $0.0245$ \\
+$a_1=0.12$ & $0.009$ & $0.000$ & $0.001$ & $0.0007$ \\
+$a_3=0.48$ & $0.033$ & $0.080$ & $0.075$ & $0.0591$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Terminology and measurement map}
 \label{app:terms}
