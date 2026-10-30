@@ -8,7 +8,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIT = os.path.join(ROOT, "lit")
 # Every section and table of the skeleton, by label.
 REQUIRED = ["sec:intro", "tab:headlines", "sec:model", "tab:players", "tab:assumptions",
-            "tab:results", "sec:literature", "tab:literature", "tab:citations", "sec:conclusions",
+            "sec:problem", "tab:results", "sec:cs", "tab:provenance", "sec:literature", "tab:literature", "tab:citations", "sec:conclusions",
             "tab:concl", "tab:pending", "app:proofs", "app:evidence", "app:terms",
             "tab:terms", "app:scope", "app:refuted"]
 PROSE_LIMIT = 0.30
@@ -261,6 +261,49 @@ def citation_problems(tex, cit, abdc, titles):
     return prob
 
 
+def provenance_problems(tex, base, redraw=None):
+    r"""MS-11. Every row of the provenance table (\provrow) names a script and inputs that exist and a
+    file whose sha256 begins with the sixteen digits given; every figure under figures/cs_ that the
+    manuscript includes has a row; and the files written by the redraw script (the figures, from saved
+    outputs) are written again into a temporary folder and match their digests (author, 30 October 2026)."""
+    import hashlib
+    import subprocess
+    import tempfile
+    sha = lambda f: hashlib.sha256(open(f, "rb").read()).hexdigest()
+    rows = macro_calls(tex, "provrow", 5)
+    prob = [] if rows else ["no provenance table"]
+    files = {}
+    for item, script, inp, f, h in rows:
+        script, f, h = script.strip(), f.strip(), h.strip()
+        if not os.path.exists(os.path.join(base, script)):
+            prob.append(f"{f}: script {script} missing")
+        for ip in re.findall(r"\\path\{([^{}]*)\}", inp):
+            if not os.path.exists(os.path.join(base, ip)):
+                prob.append(f"{f}: input {ip} missing")
+        if len(h) < 16:
+            prob.append(f"{f}: digest {h!r} shorter than 16 digits")
+        elif not os.path.exists(os.path.join(base, f)):
+            prob.append(f"{f} missing")
+        elif not sha(os.path.join(base, f)).startswith(h):
+            prob.append(f"{f} does not match its digest")
+        files[f] = (script, h)
+    for g in re.findall(r"\\includegraphics(?:\[[^\]]*\])?\{([^{}]*)\}", tex):
+        if os.path.basename(g).startswith("cs_") and "theory/" + g not in files:
+            prob.append(f"{g} included with no provenance row")
+    if redraw:
+        with tempfile.TemporaryDirectory() as td:
+            r = subprocess.run([sys.executable, os.path.join(base, redraw)], env=dict(os.environ, CS_OUT=td),
+                               capture_output=True, text=True)
+            if r.returncode:
+                prob.append(f"{redraw} failed: {r.stderr[-300:]}")
+            for f, (script, h) in files.items():
+                if script == redraw:
+                    g = os.path.join(td, os.path.basename(f))
+                    if not os.path.exists(g) or not sha(g).startswith(h):
+                        prob.append(f"{f} not reproduced by {redraw}")
+    return prob
+
+
 def analyse(tex, lean, bibs, lit, cit=None, abdc=None, titles=None):
     tex = strip_comments(tex)
     krows = macro_calls(tex, "krow", 4)
@@ -443,6 +486,22 @@ _rows = [l for l in GOOD.split("\n") if l.startswith("\\cirow{")]
 _swapped = GOOD.replace(_rows[0], "@@").replace(_rows[1], _rows[0]).replace("@@", _rows[1])
 _sw = citation_problems(strip_comments(_swapped), FIX_CIT, FIX_ABDC, FIX_TITLES)
 check("MS-10-control rows out of order fail", any("not in order" in x for x in _sw))
+BASE = os.path.dirname(ROOT)
+_pp = provenance_problems(strip_comments(tex), BASE, redraw="theory/solve/make_cs_figures.py")
+check("MS-11 every figure and table of the comparative statics has a provenance row whose file matches "
+      "its digest, and the figures redraw to the same bytes", not _pp, "; ".join(_pp))
+import tempfile as _tf  # noqa: E402
+import hashlib as _hl  # noqa: E402
+with _tf.TemporaryDirectory() as _td:
+    os.makedirs(os.path.join(_td, "theory", "figures"))
+    open(os.path.join(_td, "theory", "make.py"), "w").write("pass\n")
+    open(os.path.join(_td, "theory", "figures", "cs_x.pdf"), "w").write("fixture\n")
+    _h = _hl.sha256(b"fixture\n").hexdigest()[:16]
+    _row = "\\provrow{{Figure}}{{theory/make.py}}{{\\path{{theory/make.py}}}}{{theory/figures/cs_x.pdf}}{{{}}}"
+    _inc = "\\includegraphics{figures/cs_x.pdf}\n"
+    check("MS-11-control a matching row passes", not provenance_problems(_inc + _row.format(_h), _td))
+    check("MS-11-control a wrong digest fails", bool(provenance_problems(_inc + _row.format("0" * 16), _td)))
+    check("MS-11-control a figure with no row fails", bool(provenance_problems(_inc + "\\includegraphics{figures/cs_y.pdf}\n" + _row.format(_h), _td)))
 r_good = prose_ratio(proof_blocks(GOOD)[0][2])
 r_bad = prose_ratio(proof_blocks(BAD)[0][2])
 print(f"      prose share, well-formed sample {r_good[0]:.2f}; faulty sample {r_bad[0]:.2f}")

@@ -8,6 +8,7 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 
 `ChoulliTaksarZhou.lean` is not a copy. It was written for this paper on 30 October
 2026, with the record `theory/lit/choulli_taksar_zhou_2004/`, and is pinned the same way.
+`TimeVarying.lean` is not a copy either. It was written for row M15 on 30 October 2026.
 
 | File | sha256 |
 |---|---|
@@ -45,3 +46,4 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 | `SecondOrder.lean` | `054c0c198727680fbb715b8af938a32a143cb3936d04681184fd2708576c85ab` |
 | `SmoothFit.lean` | `e5b8e1c9d3b32c52cfc1b91eabf05ee94e5d73940ccedc369bf735488ff399fc` |
 | `Targeting.lean` | `b03443644a619d279612f0d630ccd2d89a1201c6ad0672c23170a5cb340fbf95` |
+| `TimeVarying.lean` | `a7ed38f4f793a81ef1713b779f4d09d654e639757beac2914288cf88b966fa96` |

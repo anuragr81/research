@@ -266,6 +266,43 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Comparative statics as Section 3 (author: main text, after the
+  model; baseline of Bayraktar et al., argued for). On the lines of Milne and
+  Whalley's section 4: what the rows prove, the baseline with rho as the
+  parameter the results depend on most, five figures (thresholds against
+  lambda_S, against K, against the solvency floor with the determinant; the
+  attitude to risk; the safety-value frontier of Q7), the delay, Bayraktar et
+  al.'s Table 1 and the branches of the cap, and what is not checked.
+  Appendix B's in-progress log moved into it. Provenance table
+  (tab:provenance) and MS-11, which redraws the figures from the saved outputs
+  and checks every digest (author: be explicit where the data come from).
+  Scripts: solve/run_cs.py, solve/run_q7_safety.py, solve/q7_paths.py,
+  solve/make_cs_figures.py. Findings new in the text: required capital moves
+  the dividend barrier by about three-eighths of its rise and the trigger by a
+  seventh, against Milne and Whalley's one for one (row L69); lambda_S buys
+  safety at 4 percent of cash value where the floor costs 20 percent, and at
+  equal safety (floor 0.10) lambda_S leaves the cash value 0.082 higher; a
+  floor of 0.06 gives more time in deficit than 0.045; the exposure is at the
+  cap on the whole inaction region, so Koehn and Santomero's shift has no room.
+- 2026-10-30. M15, buffer variance under time-varying asset volatility
+  (author: do it), lean/TimeVarying.lean, pinned in lean/ORIGIN.md. K2 cites
+  it; K1's scope note says the identification is given the asset volatility,
+  which moves the thresholds as K does, and given no delay (author). Engle and
+  Siriwardane positioned for K2 only, in Section 3.1 and the Question
+  (author), with ES-Q8, ES-Q9 and row L70: they use the structural relation
+  for returns and not levels, on financial firms. Open:
+  - The model with time-varying asset volatility, state (x, h), thresholds as
+    curves: deferred to scoping the enhancement paper (author).
+  - That the optimal exposure binds the cap once asset volatility moves is
+    not shown.
+- 2026-10-30. The six missing sources restored from the author's Drive folder
+  wealth_garch, each matching its pinned sha256: Black and Perold
+  (28665427.pdf), Constantinides and Richard
+  (Existence_of_Optimal_Simple_Policies_for_Discounte.pdf, OCR regenerated
+  with rapidocr_onnxruntime installed for the user), Decamps et al. (JF.pdf),
+  Federico et al. (1978961634.pdf), Glover et al. (Capital ideas ... .pdf),
+  Lambertini and Uysal (bank_011014_2.pdf). New records note the original
+  file name.
 - 2026-10-30. Milne and Whalley corrections and the objective (author).
   Their Result 8 (MW-Q15, row L64) says the bank never issues by choice, so
   L38 and the Section 3.1 sentence no longer read their (s, S) phrase as an

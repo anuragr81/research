@@ -1,0 +1,153 @@
+"""Writes results_cs.json and results_cs.md, the numbers behind the comparative-statics
+section of wealth_garch_theory.tex (Section sec:cs) and its figures
+(make_cs_figures.py). The model of solve_qvi.py at the parameters of Bayraktar et al.
+(2026), r = 0.02, kappa = 0.01, R = 1.15, the cap of A2 (leveraged), with the paper's
+baseline (lambda_S, K) = (1.2, 0.05).
+
+A. The thresholds against lambda_S for K = 0.02, 0.05, 0.1, and the determinant of M3
+   by its formula along lambda_S at K = 0.05.
+B. The thresholds against K for lambda_S = 1, 1.2, 1.5.
+C. The thresholds and the determinant of M3 against the solvency floor a1 for
+   lambda_S = 1.2 and 1.5, K = 0.05.
+D. Required capital q, the reference R = 1 + q, at the baseline: the thresholds and
+   their distance above the reference. The question of Milne and Whalley's Result 13,
+   where a higher minimum moves desired capital one for one and leaves the buffer
+   unchanged because their equation is homogeneous in capital less the minimum. Here
+   q enters the shortfall penalty and not the cap.
+E. The discount rate rho at the baseline, rho above r + (mu - r)/max(a1, a3) = 0.0867
+   for a finite value: the thresholds, the determinant and the hypotheses that fail.
+F. The attitude to risk across the state, -V''/V', and the exposure over the cap, for
+   lambda_S = 1, 1.2, 1.5, 2 at K = 0.05.
+
+Thresholds on 601 nodes (accuracy about 1e-3); determinants by solve_qvi.check_point on
+1201 nodes (C) and 601 (A, E). No row of the manuscript rests on these numbers.
+
+    python3 run_cs.py
+"""
+import hashlib
+import json
+import os
+import sys
+from multiprocessing import Pool
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import numpy as np  # noqa: E402
+import solve_qvi as s  # noqa: E402
+
+BASEP = dict(s.BASE, r=0.02, kappa=0.01, lam=1.2, K=0.05)
+LAMS = [1.0, 1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.75, 2.0, 2.5, 3.0]
+KS_A = [0.02, 0.05, 0.1]
+KS = [0.005, 0.01, 0.02, 0.035, 0.05, 0.075, 0.1, 0.15]
+LAMS_B = [1.0, 1.2, 1.5]
+A1S = [0.045, 0.06, 0.08, 0.10, 0.12]
+QS = [0.05, 0.10, 0.15, 0.20, 0.25]
+RHOS = [0.09, 0.10, 0.12, 0.15, 0.20]
+LAMS_F = [1.0, 1.2, 1.5, 2.0]
+
+
+def sha(path):
+    return hashlib.sha256(open(path, "rb").read()).hexdigest()
+
+
+def thresholds(args):
+    tag, kw = args
+    p = dict(BASEP, **kw)
+    x, v, it, resid = s.solve_howard(p, dict(s.GRID, n=601))
+    th = s.thresholds(x, v, p)
+    q = th["q"]
+    mv, _ = s.impulse(x, v, p)
+    issues = bool(np.any(np.abs(v - mv) < 1e-9))
+    return tag, kw, dict(y_star=float(th["y_star"]), x_L=float(th["x_L"]), y_post=float(th["y_post"]),
+                         interior=bool(issues and q["iL"] > 1), issues=issues, v12=float(np.interp(1.2, x, v)),
+                         resid=float(resid))
+
+
+def determinant(args):
+    tag, kw, n = args
+    p = dict(BASEP, **kw)
+    try:
+        o = s.check_point(p, n, 0.02 if p["lam"] > 1.02 else 0.0, 0.005)
+    except Exception as e:                 # a threshold at an end of the grid
+        return tag, kw, dict(error=type(e).__name__)
+    return tag, kw, dict(det=float(o["det_formula"]), det_fd=float(o["det_numeric"]), W_y_star=float(o["W_y_star"]),
+                         failed=[k for k, ok in o["hypotheses"].items() if not ok])
+
+
+def profile(lam):
+    p = dict(BASEP, lam=lam)
+    x, v, it, resid = s.solve_howard(p, dict(s.GRID, n=1201))
+    th = s.thresholds(x, v, p)
+    q = th["q"]
+    v1, v2 = s.derivs(v, x[1] - x[0])
+    cap = s.pi_bar(x, p)
+    keep = (x >= x[q["iL"]]) & (x <= th["y_star"])
+    return lam, dict(x=x[keep].tolist(), risk=(-v2[keep] / v1[keep]).tolist(),
+                     pi_over_cap=np.where(cap[keep] > 0, q["pi"][keep] / np.maximum(cap[keep], 1e-12), 1.0).tolist(),
+                     x_L=float(th["x_L"]), y_post=float(th["y_post"]), y_star=float(th["y_star"]))
+
+
+def main():
+    tj = ([("A", dict(lam=l, K=k)) for k in KS_A for l in LAMS]
+          + [("B", dict(lam=l, K=k)) for l in LAMS_B for k in KS]
+          + [("C", dict(lam=l, a1=a)) for l in (1.2, 1.5) for a in A1S]
+          + [("D", dict(R=1 + qq)) for qq in QS]
+          + [("E", dict(rho=r)) for r in RHOS])
+    dj = ([("A", dict(lam=l), 601) for l in LAMS if l > 1.0]
+          + [("C", dict(lam=l, a1=a), 1201) for l in (1.2, 1.5) for a in A1S]
+          + [("E", dict(rho=r), 601) for r in RHOS])
+    with Pool(6) as pool:
+        th = pool.map(thresholds, tj)
+        print("thresholds done", flush=True)
+        det = pool.map(determinant, dj)
+        print("determinants done", flush=True)
+        prof = dict(pool.map(profile, LAMS_F))
+        print("profiles done", flush=True)
+    out = dict(base=BASEP, thresholds=th, determinants=det, profiles={str(k): v for k, v in prof.items()})
+    json.dump(out, open(os.path.join(HERE, "results_cs.json"), "w"), indent=1, default=float)
+
+    pins = ", ".join(f"`{f}` sha256 {sha(os.path.join(HERE, f))}" for f in ("solve_qvi.py", "run_cs.py"))
+    L = ["# Results: comparative statics (generated)", "", f"Generated by `run_cs.py`. Pinned: {pins}.", "",
+         "Parameters of Bayraktar et al. (2026) with r = 0.02, kappa = 0.01, R = 1.15, the cap of A2, [1, 2.5]; "
+         "baseline (lambda_S, K) = (1.2, 0.05). Thresholds on 601 nodes. An asterisk on x_L marks a trigger at the "
+         "distress boundary. The figures of make_cs_figures.py are drawn from results_cs.json.", ""]
+    names = dict(A="A. The thresholds against lambda_S", B="B. The thresholds against K",
+                 C="C. The solvency floor", D="D. Required capital", E="E. The discount rate")
+    for tag in "ABCDE":
+        L += [f"## {names[tag]}", "", "| parameters | y* | x_L | y_post | y* - R | x_L - R | y_post - R | v(1.2) |",
+              "|---|---|---|---|---|---|---|---|"]
+        for t, kw, o in th:
+            if t != tag:
+                continue
+            R = BASEP["R"] if "R" not in kw else kw["R"]
+            L.append(f"| {', '.join(f'{k} = {v:g}' for k, v in kw.items())} | {o['y_star']:.4f} | "
+                     f"{o['x_L']:.4f}{'' if o['interior'] else '*'} | {o['y_post']:.4f} | {o['y_star'] - R:.4f} | "
+                     f"{o['x_L'] - R:.4f} | {o['y_post'] - R:.4f} | {o['v12']:.4f} |")
+        dets = [(kw, o, n) for t, kw, o in [(d[0], d[1], d[2]) for d in det] for n in [None] if t == tag]
+        if dets:
+            L += ["", "| parameters | det by M3's formula | det by finite differences | W(y*) | hypotheses failing |",
+                  "|---|---|---|---|---|"]
+            for kw, o, _ in dets:
+                if "error" in o:
+                    L.append(f"| {', '.join(f'{k} = {v:g}' for k, v in kw.items())} | {o['error']} | | | |")
+                else:
+                    L.append(f"| {', '.join(f'{k} = {v:g}' for k, v in kw.items())} | {o['det']:.4f} | {o['det_fd']:.4f} | "
+                             f"{o['W_y_star']:.5f} | {', '.join(o['failed']) if o['failed'] else 'none'} |")
+        L.append("")
+    L += ["## F. Attitude to risk across the state", "",
+          "| lambda_S | x_L | y_post | y* | largest -V''/V' and where | smallest -V''/V' and where | share of [x_L, y*] at the cap |",
+          "|---|---|---|---|---|---|---|"]
+    for lam in LAMS_F:
+        o = prof[lam]
+        r = np.array(o["risk"])
+        xx = np.array(o["x"])
+        pc = np.array(o["pi_over_cap"])
+        L.append(f"| {lam} | {o['x_L']:.4f} | {o['y_post']:.4f} | {o['y_star']:.4f} | {r.max():.2f} at {xx[r.argmax()]:.3f} | "
+                 f"{r.min():.2f} at {xx[r.argmin()]:.3f} | {np.mean(pc > 1 - 1e-6):.2f} |")
+    L.append("")
+    open(os.path.join(HERE, "results_cs.md"), "w").write("\n".join(L))
+    print("written results_cs.md")
+
+
+if __name__ == "__main__":
+    main()

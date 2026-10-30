@@ -90,6 +90,8 @@
 \newcommand{\crow}[3]{#1 & #2 & \rowref{#3} \\ \addlinespace}
 \newcommand{\cirow}[9]{\citet{#1} & #2 & #3 & #4 & #5 & #6 & #7 & #8 & #9 &}
 \newcommand{\cinot}[1]{#1 \\ \addlinespace}
+% A row of the provenance table: item, script, input, file, first 16 hex digits of its sha256.
+\newcommand{\provrow}[5]{#1 & \path{#2} & #3 & \path{#4} & \texttt{#5} \\ \addlinespace}
 \newcommand{\claims}[2]{\hyperlink{lrow:#1}{#2}}
 % The OpenAlex record of a work, which shows its count of citations and lists them.
 \newcommand{\citedby}[2]{\href{https://openalex.org/works/#1}{#2}}
@@ -124,7 +126,10 @@ policy shows, and at one it switches the shortfall penalty off and leaves the
 model with issuance costs alone (M8), so whether it is identified decides whether the
 specification \citet{peura2006} call for (L18) can be tested against theirs
 rather than imposed (L20). The bank recapitalises by impulse control at a fixed
-issuance cost and takes risky exposure under a regulatory cap.
+issuance cost and takes risky exposure under a regulatory cap, and the cap sets
+the multiple of asset volatility that its equity bears, the mechanical leverage
+that \citet{engle2018} separate from exposure to the market in the asymmetry
+of equity volatility (L13, L34).
 
 \subsection{Answer}
 
@@ -149,8 +154,10 @@ variance tends to the deficit limit and the surplus limit, which involve only
 the asset volatility, the liability volatility, the return-liability
 correlation and the regulatory cap (M10, M11). For every exposure that
 complies with the cap, binding or not, buffer variance is bounded by the same
-quantities (M12). The asymmetry parameter enters the thresholds and not the
-limits of buffer variance. This is K2 and C2, with its scope in C3. The
+quantities (M12). The identities hold at each date, so with an asset
+volatility that varies over time buffer variance is the limit at that date's
+asset volatility wherever the cap binds (M15). The asymmetry parameter enters
+the thresholds and not the limits of buffer variance. This is K2 and C2, with its scope in C3. The
 limits need the cap to bind, and on that panel the recorded exposure sits far
 below the cap, so the bound of M12, which needs no binding, is the result that
 reaches the data (Appendix~\ref{app:terms}).
@@ -166,8 +173,8 @@ ID & Headline & Model rows & Scope note \\
 ID & Headline & Model rows & Scope note \\
 \midrule
 \endhead
-\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies the asymmetry parameter, not whose cost the shortfall penalty is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the FDIC panel of US banks of 2015 to 2024 neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. It needs the recapitalisation trigger above the distress boundary. In the solve of Appendix~\ref{app:evidence} the trigger is interior at 42 of 56 parameter points, and where the fixed issuance cost is large against the asymmetry parameter the bank issues only at the distress boundary, where the trigger cannot move. The fixed issuance cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed issuance cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed issuance cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
-\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset volatility, the liability volatility, the return-liability correlation and the regulatory cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12}{That the optimum binds the cap near both ends is a hypothesis. In the solve of Appendix~\ref{app:evidence} the exposure is at the cap at both thresholds and on 85 percent of the inaction region; the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the FDIC panel of US banks of 2015 to 2024 the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
+\krow{K1}{The asymmetry parameter $\lambda_S$ and the fixed issuance cost $K$ are locally identified from the dividend barrier and the recapitalisation trigger, because both raise the barrier and they move the trigger in opposite directions.}{M1, M2, M3, M4}{Local identification from the thresholds, not an estimator. Rests on the hypotheses of Appendix~\ref{app:evidence}, among them the verification theorem, the envelope identities, the signs of $W'(x_L)$ and $N'$, $\Psi(x_L)>0$ and $\rho_L>\mu'(y^*)$. Fails if the two parameters moved the trigger in the same direction (M3). It identifies them given the asset volatility, which moves the two thresholds as the fixed issuance cost does, and given no delay on issues, which the thresholds read as a higher asymmetry parameter (Section~\ref{sec:cs}). It identifies the asymmetry parameter, not whose cost the shortfall penalty is (L19, Appendix~\ref{app:scope}). The thresholds are recorded as the state at a dividend and at an issue, and on the FDIC panel of US banks of 2015 to 2024 neither behaves as a threshold (Appendix~\ref{app:terms}), so the identification is within the model. It needs the recapitalisation trigger above the distress boundary. In the solve of Appendix~\ref{app:evidence} the trigger is interior at 42 of 56 parameter points, and where the fixed issuance cost is large against the asymmetry parameter the bank issues only at the distress boundary, where the trigger cannot move. The fixed issuance cost is charged per unit of liabilities (Appendix~\ref{app:scope}). The responses of the thresholds to the fixed issuance cost alone are not claimed new, since \citet{peura2006} and \citet{daihuangkeppo2019} tabulate them, nor is pinning the fixed issuance cost and a second parameter from moments of the thresholds, which \citet{peura2006} do by calibration (L7, L8, L9).}
+\krow{K2}{The asymmetry parameter enters the thresholds and not the limits of buffer variance. Where the optimal exposure binds the regulatory cap near both ends, those limits depend only on the asset volatility, the liability volatility, the return-liability correlation and the regulatory cap, and for every compliant exposure buffer variance is bounded by them.}{M3, M10, M11, M12, M15}{That the optimum binds the cap near both ends is a hypothesis. The limits are instantaneous, so with an asset volatility that varies over time they hold at each date at that date's asset volatility wherever the cap binds (M15); that the optimum binds the cap when the asset volatility moves is not shown. In the solve of Appendix~\ref{app:evidence} the exposure is at the cap at both thresholds and on 85 percent of the inaction region; the bound M12 needs no binding. The surplus limit needs the liquidity branch to bind deep in surplus, which needs borrowing; \citet{bayraktar2026} take no borrowing as the main banking case, under which it never binds (L2, Appendix~\ref{app:scope}). The constant buffer variance on the solvency branch is not claimed new, since it is the constant log-cushion volatility of capped portfolio insurance \citep{blackperold1992}, L5. The contrast is with that rule, whose slopes are set by preferences (L6), while here they are set by regulation and the liability shock is not hedged. On the FDIC panel of US banks of 2015 to 2024 the cap does not bind, so only the bound of M12 reaches the data (Appendix~\ref{app:terms}).}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -231,9 +238,9 @@ ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 ID & Assumption & In plain English & Symbols & Model rows & Reason \\
 \midrule
 \endhead
-\arow{A1}{The state is $x\in(1,\infty)$, with drift $\mu(x,\pi)=x((1-\pi)r+\pi\mu_s-\mu_L)+\gamma$ and diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio. The riskless rate, the expected asset return, the liability drift and the net income on liabilities set the drift of the state, and the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\mu$, $r$, $\mu_s$, $\mu_L$, $\gamma$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M1, M4, M9, M10, M11, M12, M13, M14}{The balance sheet of \citet{bayraktar2026} in ratio form, their Proposition 2.1. Appendix~\ref{app:scope}, the balance sheet.}
-\arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation sets a regulatory cap on the risky exposure at each assets-to-liabilities ratio, the smaller of a solvency branch, whose slope is the solvency floor and which binds near distress, and a liquidity branch, set by the run-off rate and the liquidity haircut and binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12, M13}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
-\arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the assets-to-liabilities ratio, at the risky exposure the bank takes and the asset volatility it bears.}{$\zeta$, $z$, $x$, $\pi$, $\sigma$}{M10, M11, M12, M13, M14}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
+\arow{A1}{The state is $x\in(1,\infty)$, with drift $\mu(x,\pi)=x((1-\pi)r+\pi\mu_s-\mu_L)+\gamma$ and diffusion $\sigma^2(x,\pi)=\pi^2\sigma^2x^2+2\pi c\sigma\sigma_Lx(1-x)+\sigma_L^2(1-x)^2$ under risky exposure $\pi$, and the capital buffer is $z=\log((x-1)/q)$ with $q>0$.}{The bank holds a risky and a riskless asset and owes liabilities that carry their own shock. The state is the assets-to-liabilities ratio. The riskless rate, the expected asset return, the liability drift and the net income on liabilities set the drift of the state, and the risky exposure sets how much of the asset volatility the bank bears beside the liability volatility and the return-liability correlation, and the capital buffer measures equity against required capital on a log scale.}{$x$, $\pi$, $\mu$, $r$, $\mu_s$, $\mu_L$, $\gamma$, $\sigma$, $\sigma_L$, $c$, $q$, $z$}{M1, M4, M9, M10, M11, M12, M13, M14, M15}{The balance sheet of \citet{bayraktar2026} in ratio form, their Proposition 2.1. Appendix~\ref{app:scope}, the balance sheet.}
+\arow{A2}{The regulatory cap is $u(x)=\min\{(x-1)/a_1,(x-a_2)/a_3\}$ with $0<a_1<a_3$ and $a_2<1$, and the exposure complies, $0\le\pi(x)\,x\le u(x)$.}{Regulation sets a regulatory cap on the risky exposure at each assets-to-liabilities ratio, the smaller of a solvency branch, whose slope is the solvency floor and which binds near distress, and a liquidity branch, set by the run-off rate and the liquidity haircut and binding deep in surplus.}{$u$, $a_1$, $a_2$, $a_3$, $\pi$, $x$}{M10, M11, M12, M13, M15}{The cap of \citet{bayraktar2026}. Appendix~\ref{app:scope}, the regulatory cap.}
+\arow{A3}{Buffer variance is $\zeta(x)=z'(x)^2\,\sigma^2(x,\pi(x))$.}{Buffer variance is the variance rate of the capital buffer, by the change of variable from the assets-to-liabilities ratio, at the risky exposure the bank takes and the asset volatility it bears.}{$\zeta$, $z$, $x$, $\pi$, $\sigma$}{M10, M11, M12, M13, M14, M15}{Itô's formula, not proved in Lean. Appendix~\ref{app:evidence}.}
 \arow{A4}{The objective is dividends net of issuance costs minus the running shortfall penalty $\Lambda(x)=(\lambda_S-1)(R-x)^+$ with $\lambda_S\ge1$ and reference $R=1+q$, discounted at $\rho_L$.}{Shareholders value dividends net of what they pay for issues, less a shortfall penalty for each moment the assets-to-liabilities ratio sits below the reference, the state at which equity equals required capital, weighted by the asymmetry parameter and discounted at the liability-net discount rate.}{$\Lambda$, $\lambda_S$, $R$, $q$, $\rho_L$, $x$}{M1, M2, M3, M4, M8}{The asymmetric penalty is the paper's question. Appendix~\ref{app:scope}, the shortfall penalty.}
 \arow{A5}{Each issue costs $K$ per unit of liabilities plus $\kappa$ per unit raised.}{Every recapitalisation pays a fixed issuance cost that does not scale with its size and a proportional issuance cost.}{$K$, $\kappa$}{M2, M5, M6, M7}{The cost structure of \citet{peura2006} and \citet{bolton2011}. Appendix~\ref{app:scope}, the fixed issuance cost.}
 \arow{A6}{$V$ is the value function, solves the quasi-variational inequality with impulse operator $\mathcal MV$, is twice continuously differentiable on the inaction region, and the optimal policy is a dividend barrier $y^*$, a trigger $x_L$ and a target $y_{\text{post}}$, with $\partial_{\lambda_S}V=-W$ and $\partial_KV=-N$.}{The value function is the value of the bank under its best policy, which pays dividends at the dividend barrier and recapitalises from the recapitalisation trigger to the injection target, the impulse operator being the value of issuing at once, and the value responds to the asymmetry parameter and the fixed issuance cost through the expected discounted shortfall and the discounted injection count.}{$V$, $\mathcal MV$, $y^*$, $x_L$, $y_{\text{post}}$, $W$, $N$, $\lambda_S$, $K$}{M1, M2, M3, M4, M5}{The verification theorem and the envelope identities, not proved in Lean. Appendix~\ref{app:evidence}.}
@@ -314,9 +321,9 @@ the bank issues $y_{\text{post}}-x_L$. The exposure is the maximiser in the
 first term, which no row derives (P1).
 
 Rows M1 to M7 are statements about the thresholds of this policy, and M10 to
-M12 about buffer variance under the exposure. Appendix~\ref{app:evidence}
-solves equation~\eqref{eq:qvi} numerically, and its comparative statics vary
-the asymmetry parameter, the fixed issuance cost and the cap geometry in it.
+M12 and M15 about buffer variance under the exposure. Section~\ref{sec:cs}
+solves equation~\eqref{eq:qvi} numerically and varies the asymmetry parameter,
+the fixed issuance cost, the cap geometry and required capital in it.
 
 \subsection{Results}
 
@@ -346,8 +353,492 @@ ID & Claim & Statement & Lean & Proof \\
 \mrow{M12}{For every exposure policy that complies with the cap, binding or not, buffer variance is at most the larger of $\sigma_L^2$ and the deficit limit $\nu_1^2$ everywhere, and deep in surplus at most the larger of $\sigma_L^2$ and the surplus limit $\nu_3^2$ up to any margin.}{$q>0$, $a_1>0$, $x>1$, $0\le\pi(x)$, $\pi(x)\,x\le u(x)$ $\Rightarrow$ $\zeta(x)\le\max\{\sigma_L^2,\nu_1^2\}$. If $a_3>0$, $a_2<1$ and compliance holds for all large $x$, then for every $\varepsilon>0$, $\zeta(x)\le\max\{\sigma_L^2,\nu_3^2\}+\varepsilon$ for all large $x$. Both fail with $\pi<0$ or with $\pi x>u(x)$.}{Bounds.qv_le_max, Bounds.zvol2_eq_qv, Bounds.nu2_eq_qv, Bounds.qv_zero, Bounds.deficit_bound, Bounds.surplus_bound, Bounds.control_bound_needs_long_exposure, Bounds.control_bound_needs_compliance}
 \mrow{M13}{At the baseline of Bayraktar et al.\ the deficit limit is about $3.140$ and the surplus limit about $0.0688$, a ratio of about $45.6$.}{$(\sigma,\sigma_L,c,a_1,a_3)=(0.08,0.03,0.20,0.045,0.30)$ $\Rightarrow$ $\nu_1^2=2543449/810000$, $\nu_3^2=6193/90000$, $\nu_1^2/\nu_3^2=2543449/55737$.}{Comparison.nu1_baseline, Comparison.nu3_baseline, Comparison.ratio_baseline}
 \mrow{M14}{With no liability shock the limits of buffer variance are the log-cushion variances of capped portfolio insurance with multiples $1/a_1$ and $1/a_3$, and a liability shock moves them.}{$\nu_i^2\big|_{\sigma_L=0}=(1/a_i)^2\sigma^2$, the log-cushion variance $(E/C)^2\sigma^2$ on the multiplier branch with multiple $1/a_i$. At the baseline of M13 these are $256/81$ and $16/225$. At $(\sigma,\sigma_L,c,a)=(1,1,0,1)$, $\nu^2=2\ne1=\nu^2\big|_{\sigma_L=0}$.}{Comparison.nu2_hedged, Comparison.hedged_is_cushion_vol, Comparison.hedged_baseline, Comparison.control_liability_shock_moves_nu}
+\mrow{M15}{Where the exposure binds the cap, buffer variance at each date is the limit at that date's asset volatility, whatever path the asset volatility follows and whatever policy binds.}{$q>0$, $0<a_1<a_3$. For any path $t\mapsto\sigma_t$ and exposures $\pi_t$, if $1<x_t\le\bar x$ and $\pi_t(x_t)\,x_t=u(x_t)$ then $\zeta_t(x_t)=\nu_1^2$ evaluated at $\sigma_t$, the same for any two exposures that bind there, and if $\pi_t(x)\,x=u(x)$ for all large $x$ then $\zeta_t(x)\to\nu_3^2$ evaluated at $\sigma_t$. In the asset variance $\sigma_t^2$, $\nu_1^2=\sigma_t^2/a_1^2-2c\sigma_t\sigma_L/a_1+\sigma_L^2$. With $\pi\equiv0$ at $(\sigma,\sigma_L,c,q,a_1,x)=(1,1,0,1,\tfrac12,2)$, $\zeta=1\ne5=\nu_1^2$.}{TimeVarying.deficit_limit_at_date, TimeVarying.same_variance_any_binding_policy, TimeVarying.surplus_limit_at_date, TimeVarying.nu2_of_variance, TimeVarying.control_date_identity_needs_binding}
 \bottomrule
 \end{longtable}
+\normalsize
+
+\section{Comparative statics}
+\label{sec:cs}
+
+The section asks three questions of the model that the papers read ask of
+their own. The first is how the dividend barrier, the recapitalisation trigger
+and the injection target move with each friction, which the models with
+issuance costs tabulate for their frictions and not for an asymmetry
+parameter. The second is how the thresholds and the value function move with
+the cap geometry and with required capital, which is Table~1 of
+\citet{bayraktar2026} with an exogenous trigger and no asymmetry parameter.
+The third is how the value function trades against safety as the asymmetry
+parameter rises, where their frontier moves the cap geometry instead. It
+answers first with what the rows prove and then with the model solved at one
+baseline. Every number comes from a script in \path{theory/solve/}, and
+Table~\ref{tab:provenance} lists the script and the saved output behind each
+figure and table. No row rests on these numbers.
+
+\subsection{What the rows prove}
+
+The signs come from the rows and hold wherever their hypotheses do. The
+dividend barrier rises in the asymmetry parameter and in the fixed issuance
+cost (M1). The recapitalisation trigger rises in the asymmetry parameter and
+falls in the fixed issuance cost, and the injection target and the gap from
+trigger to target rise in the fixed issuance cost (M2). The determinant of the
+two thresholds in the two parameters is negative by these signs alone (M3).
+The injection target does not depend on where an issue starts (M7), at
+$\lambda_S=1$ the model is the model with issuance costs alone (M8), and where
+the exposure binds the cap buffer variance is the limit at each date's asset
+volatility (M15). The hypotheses are listed in Appendix~\ref{app:evidence}.
+
+Two further results come from the solve and are not rows. Above the reference
+the shortfall penalty is zero, so between the injection target and the
+dividend barrier the equation holds neither the asymmetry parameter nor the
+fixed issuance cost. There $V$ is fixed by the dividend barrier through
+$V'(y^*)=1$, $V''(y^*)=0$ and the equation at $y^*$, so wherever the injection
+target lies above the reference it is a function of the dividend barrier and
+the proportional issuance cost and carries no information of its own about the
+two parameters. Required capital enters the shortfall penalty, through
+$R=1+q$, and not the regulatory cap, so the homogeneity behind Result~13 of
+\citet{milnewhalley2001}, by which a higher minimum raises desired capital one
+for one, fails here (L69, Section~\ref{sec:cs-regulation}).
+
+\subsection{The baseline}
+\label{sec:cs-baseline}
+
+The baseline is the parameter set of \citet{bayraktar2026}, so that every
+comparison with their Table~1 and their frontier is made at their numbers. They
+call it an illustrative parameterisation rather than a calibration (L31), and
+the paper takes it the same way. The riskless rate is $r=0.02$, the expected
+asset return $\mu_s=0.04$, the liability drift $\mu_L=0.03$, the net income on
+liabilities $\gamma=0.02$, the discount rate $\rho=0.12$, the asset volatility
+$\sigma=0.08$, the liability volatility $\sigma_L=0.03$ and the
+return-liability correlation $c=0.20$. The solvency floor $a_1=0.045$ is the
+CET1 minimum of $4.5$ percent of risk-weighted assets, the run-off rate
+$a_2=0.05$ is the standard's factor for stable retail deposits, and the
+liquidity haircut $a_3=0.30$ is theirs and none of the standard's
+(Appendix~\ref{app:terms}). The proportional issuance cost is $\kappa=0.01$.
+The reference $R=1.15$, required capital of $15$ percent of liabilities, is the
+solver's choice rather than a regulatory number, and the sweep of required capital in
+Section~\ref{sec:cs-regulation} varies it from $1.05$ to $1.25$. The two
+parameters of K1 are set at $(\lambda_S,K)=(1.2,0.05)$, a point at which the
+trigger is interior and every hypothesis of M1 to M4 holds.
+
+The discount rate is the parameter the results depend on most, as it is for
+\citet{milnewhalley2001}, since it sets both the shareholders' impatience and,
+through $\rho_L=\rho-\mu_L$, the cost of holding a buffer. The value is finite
+only above $r+(\mu_s-r)/\max(a_1,a_3)=0.087$. From $\rho=0.10$ to $0.20$ the
+dividend barrier falls from $2.18$ to $1.51$ and the trigger from $1.050$ to
+$1.015$, while the determinant of M3 stays between $-0.35$ and $-0.18$ and
+every hypothesis holds. At $\rho=0.09$ the barrier reaches the top of the grid
+and the point is not used. The levels move with the discount rate and the
+signs do not.
+
+\subsection{The frictions}
+\label{sec:cs-frictions}
+
+Figure~\ref{fig:cs-lambda} plots the three thresholds against the asymmetry
+parameter for three fixed issuance costs. At $K=0.05$ a rise of $\lambda_S$
+from $1$ to $3$ moves the dividend barrier from $1.810$ to $1.900$, the
+recapitalisation trigger from $1.025$ to $1.083$ and the injection target from
+$1.586$ to $1.665$, and the trigger is interior at all 33 points. The penalty
+charges each moment the state spends below the reference, so the bank shortens
+that time by issuing earlier and holds more before it pays out. The responses
+flatten as $\lambda_S$ rises. By M1 the response of the barrier is
+$\rho_LW(y^*)/(\rho_L-\mu'(y^*))$, and the expected discounted shortfall at the
+barrier falls from $0.062$ at $\lambda_S=1.05$ to $0.005$ at $\lambda_S=3$,
+since the bank that weighs the shortfall more spends less time in it. The
+determinant of M3 falls in size with it, from $-0.36$ to $-0.05$, with every
+hypothesis holding, so the identification of K1 is weaker at a large
+asymmetry parameter than at a small one. Finite differences on 601 nodes
+scatter around the formula, since the thresholds move by a node or two, and
+the formula is the reading used.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/cs_lambda.pdf}
+\caption{The dividend barrier, the recapitalisation trigger and the injection
+target against the asymmetry parameter, for $K=0.02$, $0.05$ and $0.1$, at the
+baseline of Section~\ref{sec:cs-baseline}. Filled markers have an interior
+trigger and open markers a trigger at the distress boundary. Source in
+Table~\ref{tab:provenance}.}
+\label{fig:cs-lambda}
+\end{figure}
+
+Figure~\ref{fig:cs-K} plots the same thresholds against the fixed issuance
+cost. At $\lambda_S=1.2$ a rise of $K$ from $0.005$ to $0.15$ moves the
+dividend barrier from $1.508$ to $2.113$ and the trigger from $1.086$ to
+$1.015$, so the gap from trigger to target widens from $0.24$ to $0.84$. A
+fixed cost per issue makes issues larger and rarer, as in \citet{peura2006}
+(L22). At $\lambda_S=1$ and $K=0.15$ the trigger reaches the distress
+boundary, which is where K1 stops applying, since a trigger at the boundary
+cannot move.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/cs_K.pdf}
+\caption{The three thresholds against the fixed issuance cost, on a log scale,
+for $\lambda_S=1$, $1.2$ and $1.5$. Markers as in
+Figure~\ref{fig:cs-lambda}. Source in Table~\ref{tab:provenance}.}
+\label{fig:cs-K}
+\end{figure}
+
+The script \path{theory/solve/run_q1_frictions.py}, whose output is
+\path{theory/solve/results_q1.md}, moves one friction at a time around $(\lambda_S,K,\kappa)=(1.2,0.05,0.01)$. With the cap of A2 alone
+the trigger is interior at all 21 points, and at every one the dividend
+barrier rises with $\lambda_S$ and with $K$ while the recapitalisation trigger
+rises with $\lambda_S$ and falls with $K$, the signs of M1 and M2. The
+proportional issuance cost $\kappa$ lowers the trigger as $K$ does and lowers
+the injection target where $K$ raises it, so of the three frictions only
+$\lambda_S$ raises the trigger. Issues grow larger with $K$, as in
+\citet{peura2006} (L22), and smaller with $\kappa$. With no borrowing the
+trigger reaches the distress boundary at $\lambda_S\le1.1$ and at $K\ge0.1$,
+and at the 16 interior points the signs of M1 and M2 hold.
+
+The script \path{theory/solve/run_q1_pk.py}, whose output is
+\path{theory/solve/results_q1_pk.md}, takes up three results of
+\citet{peura2006} that the figures leave out. They pin their two frictions by
+the expected time between issues and the proportional cost of an issue (their
+Table 2). In the paper's model the time between issues rises with $K$ from
+$2.5$ years at $K=0.01$ to $9.8$ years at $K=0.1$ at $\lambda_S=1.2$, and the
+cost per issue rises from $0.042$ to $0.146$, while $\lambda_S$ from $1$ to $2$
+moves them from $6.8$ to $6.0$ years and from $0.099$ to $0.096$ at $K=0.05$.
+The determinant of the two moments in $(\lambda_S,K)$ is non-zero at four
+centres, from $-0.48$ to $-0.86$, so the moments also separate the two
+frictions locally. Both moments fall in $\lambda_S$ and rise in $K$, so their
+determinant is the difference of two terms of the same sign and is set by the
+sizes of the responses. The determinant of the two thresholds is the difference
+of two terms of opposite sign, and is negative by the signs of M1 and M2 alone
+(M3), where the table of \citet{peura2006} changes sign with the size of the
+costs (L41 to L43). The time between issues is read to about ten percent, which
+the header of the output explains.
+
+The value of the option to issue is hump-shaped in the capital buffer in their
+Figure 4 and goes to zero as the buffer does, since a bank near the minimum
+rarely survives the delay. In the paper's model the value function with the
+option less the value function without it falls throughout the buffer at each
+of twelve combinations of $\lambda_S$ and $K$, and is largest at the distress
+boundary. At $(\lambda_S,K)=(1.2,0.05)$ it is $0.40$ there, $88$ percent of the
+value function, against $15$ percent at the injection target and $12$ percent
+at the dividend barrier. It rises with $\lambda_S$, from $0.20$ to $0.98$ at
+$\lambda_S$ of $1$ and $2$, and falls with $K$. The hump needs the delay and
+liquidation, which the paper's model does not hold (Table~\ref{tab:common}),
+and here the option buys relief from the shortfall penalty and not survival.
+
+Their Figure 6 and Table 3 find that the dividend barrier is driven by return
+volatility, with a correlation of $0.99$ across banks. In the paper's model the
+dividend barrier rises with the asset volatility, from $1.44$ to $2.16$ as it
+goes from $0.04$ to $0.12$ at $\lambda_S=1$, the recapitalisation trigger falls
+from $1.043$ to $1.010$, and the determinant of M3 grows in size from $-0.10$
+to $-0.43$ with every hypothesis holding. At an asset volatility of $0.16$ the
+barrier reaches the top of the grid, and that point is not used. The dividend
+barrier also rises with the expected asset return, from $1.19$ to $2.04$ as it
+goes from $0.025$ to $0.045$ at $\lambda_S=1$, where theirs has a correlation
+of $-0.48$ with it across banks. A correlation across banks is not a
+comparative static, and the two are not set against each other.
+
+The script
+\path{theory/solve/run_q1_delay.py}, whose output is
+\path{theory/solve/results_q1_delay.md}, asks whether the delay on issues of
+\citet{peura2006} (L23) is a rival to K1. It adds the delay to the model in
+\path{theory/solve/delay_model.py}. The bank decides to issue at the
+recapitalisation trigger and the capital arrives a fixed time later, and while
+it waits it pays no dividend and bears the shortfall penalty. The state cannot
+fall below the distress boundary, so here the delay costs the penalty and the
+discounting over the wait, where in their model it also carries a risk of
+failure. On 1201 nodes, with thresholds accurate to about $3\times10^{-4}$
+against 2401, a delay raises the dividend barrier, the recapitalisation
+trigger and the injection target at each of the four centres of
+\path{theory/solve/run_q1_pk.py}, as it raises both barriers in their Table 2
+(\lean{PeuraKeppo.table2_signs}).
+
+The delay moves the dividend barrier and the recapitalisation trigger the way
+the asymmetry parameter does. The model without the delay, fitted to the two
+thresholds of the model with a delay of a tenth of a year, overstates
+$\lambda_S-1$ by 9 to 78 percent across the four centres and the fixed
+issuance cost by 3 to 10 percent. A delay of a quarter of a year overstates
+$\lambda_S-1$ by 27 to 260 percent. The fit is exact to within
+$4\times10^{-4}$ in both thresholds, so nothing in the two thresholds shows
+that a friction is missing.
+
+The injection target does not show it either. In all twelve fits the fitted
+model's injection target is within $10^{-4}$ of the injection target of the
+model with the delay, below the accuracy of the solve. The injection target
+lies above the reference at every centre, where the shortfall penalty is
+zero, so from the injection target to the dividend barrier the equation holds
+none of the asymmetry parameter, the fixed issuance cost and the delay. There
+$V$ is fixed by the dividend barrier through $V'(y^*)=1$, $V''(y^*)=0$ and the
+equation at $y^*$, and the injection target, where $V'=1+\kappa$, is a
+function of the dividend barrier and the proportional issuance cost. It
+carries information about $\kappa$ and none about the three frictions. This
+argument is not a row, and it needs the injection target above the reference.
+
+So the thresholds identify the asymmetry parameter and the fixed issuance cost
+within the model of A1 to A6 (M3), and with a delay on issues added they
+identify the asymmetry parameter only jointly with the delay. The two
+thresholds and the injection target are three numbers for four frictions, and
+the injection target goes to the proportional issuance cost. This bears on K1,
+whose identification assumes no delay, on C6, since the friction of
+\citet{peura2006} is one the thresholds cannot tell from the shortfall penalty,
+and on L8, where they pin the delay and the fixed issuance cost from issue cost
+and frequency. Whether those issue moments separate the delay from the
+asymmetry parameter is not checked. No row rests on this pass. K1's scope note says that it assumes no delay, and
+C6 is unchanged until the author decides.
+
+\subsection{Regulation}
+\label{sec:cs-regulation}
+
+Figure~\ref{fig:cs-floor} plots the dividend barrier, the trigger and the
+determinant of M3 against the solvency floor. At $\lambda_S=1.2$ a rise of the
+floor from $0.045$ to $0.12$ moves the dividend barrier from $1.838$ to $2.113$
+and the trigger from $1.038$ to $1.123$, and the determinant shrinks from
+$-0.29$ to $-0.04$ on 1201 nodes, with every hypothesis holding. A higher floor
+cuts the exposure the bank may take near distress, so the bank spends less
+time in deficit, the expected discounted shortfall at the barrier falls from
+$0.037$ to $0.0007$, and the asymmetry parameter has little left to act on. The
+sign of the determinant that M3 proves is kept, and the identification of K1 is
+weaker under a high floor than under a low one.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/cs_floor.pdf}
+\caption{The dividend barrier, the recapitalisation trigger and the
+determinant of M3 by its formula against the solvency floor, for
+$\lambda_S=1.2$ and $1.5$ at $K=0.05$. Source in Table~\ref{tab:provenance}.}
+\label{fig:cs-floor}
+\end{figure}
+
+Required capital moves the thresholds by less than itself. A rise of the
+reference from $1.05$ to $1.25$ raises the dividend barrier from $1.810$ to
+$1.885$, about three-eighths of the rise, and the trigger from $1.025$ to
+$1.054$, about a seventh, so the distance of the barrier above the reference
+falls from $0.76$ to $0.64$. In \citet{milnewhalley2001} the same rise would
+move desired capital one for one and leave the buffer above the minimum as it
+was, since their equation is homogeneous in capital less the minimum (L69).
+Here required capital sets where the penalty starts and does not move the cap,
+whose branches start at the distress boundary, so a higher requirement narrows
+the buffer the bank holds above it.
+
+The comparison with Table~1 of \citet{bayraktar2026} rests on
+\path{theory/solve/run_q3_regulatory.py}, whose output is \path{theory/solve/results_q3.md}. A port of the authors'
+solver, \path{theory/solve/bcvw_port.py}, reproduces all 27 rows of their
+Table 1 to within $5\times10^{-5}$, and every row stops at the solver's limit
+of 1500 steps rather than at its tolerance. Solved by policy iteration in
+\path{theory/solve/bcvw_model.py}, the baseline dividend barrier is $1.389$
+against $1.428$ printed and the value function at $y=1.2$ is $0.870$ against
+$0.855$, while every direction in their table is unchanged. Their solver lets
+the bank issue at every state, and when converged the solver issues below $1.126$ rather
+than at their distress threshold of $1.02$. With issuance allowed only at
+$1.02$, as their model is stated, the bank below $1.079$ pays a dividend down
+to $1.02$ and issues at once, and the slope of the value function rises from
+$1$ to $1.038$ below the injection target, so the value function is not
+concave at their baseline, against their Proposition 3.3. The early issuance
+and the rising slope hold on grids of 601, 1201 and 2401 nodes
+(\path{theory/solve/run_q3_concavity.py}), and the early
+issuance appears under their scheme and under policy iteration alike. Neither
+is proved, and the step of their proof that fails is not located. Their own
+remark that a fixed issuance cost could induce earlier issuance (p.~7) points
+the same way.
+
+The paper's model reaches their numbers as the fixed issuance cost vanishes,
+\path{theory/solve/run_q3_pass2.py}. With $\lambda_S=1$ and $K=0.001$ the
+dividend barrier is $1.400$ and the value function at $1.2$ is $0.867$,
+against $1.389$ and $0.870$ in their model converged, so the fixed issuance
+cost accounts for most of the gap between the two models' levels. The
+injection target still differs, $1.227$ against $1.158$, with the form of the
+proportional cost. At
+$(\lambda_S,K)=(1.2,0.05)$ the dividend barrier, the injection target and the
+value function move with the cap geometry in the directions of their table,
+and every hypothesis of M1, M2 and M4 holds at each of the 17 points. The
+determinant of M3 does not hold its size, and
+\path{theory/solve/run_q3_pass3.py} confirms this on grids of 1201 and 2401
+nodes. On the finer grid the formula of M3 evaluated on the solve gives a
+determinant that shrinks from $-0.289$ to $-0.041$ as the solvency floor rises
+from $0.045$ to $0.12$ (Table~\ref{tab:q3-det}), and finite differences agree
+with it to within $15$ percent at every point. The response of the dividend
+barrier to $\lambda_S$ is $\rho_LW(y^*)/(\rho_L-\mu'(y^*))$ by M1, and the
+expected discounted shortfall $W(y^*)$ falls from $0.039$ to $0.0007$ over the
+same range, while the responses to $K$ stay of order one. The sign that M3
+proves is kept, and the identification of K1 is weaker under a high solvency
+floor than under a low one.
+
+\begin{table}[H]
+\footnotesize
+\caption{Responses of the thresholds and the determinant of M3 along the cap geometry, by the formulas of M1 to M3 evaluated on the solve, on 2401 nodes, in the paper's model at the parameters of \citet{bayraktar2026} with $(\lambda_S,K)=(1.2,0.05)$.}\label{tab:q3-det}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+Cap geometry & $\partial y^*/\partial\lambda_S$ & $\partial x_L/\partial\lambda_S$ & $\partial y^*/\partial K$ & $\partial x_L/\partial K$ & Determinant of M3 & $W(y^*)$ \\
+\midrule
+$a_1=0.045$ (baseline) & $0.104$ & $0.057$ & $4.27$ & $-0.44$ & $-0.289$ & $0.0385$ \\
+$a_1=0.08$ & $0.041$ & $0.054$ & $3.47$ & $-0.82$ & $-0.221$ & $0.0152$ \\
+$a_1=0.12$ & $0.002$ & $0.018$ & $2.15$ & $-1.51$ & $-0.041$ & $0.0007$ \\
+$a_3=0.48$ & $0.144$ & $0.063$ & $1.98$ & $-0.30$ & $-0.168$ & $0.0933$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Which branch of the cap carries each result is a separate question from how
+the value loss divides, which is the question of \citet{bayraktar2026}.
+\path{theory/solve/run_q3_regimes.py}, whose output is
+\path{theory/solve/results_q3_regimes.md}, solves the model under the ceiling
+$\pi\le4$ alone, with the solvency branch beside it, with the liquidity branch
+beside it, and with both, which is A2. The ceiling lies below the bound of $5$
+on the long-run exposure that keeps the value finite, so the four sets of
+admissible exposures are nested and every value is finite. The liquidity
+branch alone and the ceiling alone leave the exposure positive at the distress
+boundary, so they are devices for the decomposition and not regulations in
+force.
+
+K1 needs the solvency branch. With it, whether or not the liquidity branch is
+present, the exposure is zero at the distress boundary, the recapitalisation
+trigger is interior at $\lambda_S$ of $1$, $1.2$ and $1.5$, and it moves with
+$\lambda_S$ by $0.022$ across that range under the solvency branch alone and
+by $0.029$ under both. The determinant of M3 is $-0.33$ under the solvency
+branch alone and $-0.29$ under both. Without it the trigger is at the distress
+boundary at every $\lambda_S$ and the hypotheses of M1 to M4 fail, so the
+two thresholds do not identify $\lambda_S$ and $K$ there. The deficit limit
+of K2 needs the solvency branch as well. Buffer variance at the trigger is the
+deficit limit $\nu_1^2=3.14$ with it and is unbounded at the distress boundary
+without it. The surplus limit is not reached in these solves, since the
+dividend barrier lies between $1.7$ and $2.3$ in the four regimes, where
+buffer variance is between $0.31$ and $0.36$ against a surplus limit of
+$0.069$, so its assignment to the liquidity branch rests on M11 and not on the
+solve. With no borrowing the solution is the same with and without the
+liquidity branch, to numerical precision, as C3 states.
+
+\subsection{Attitude to risk}
+\label{sec:cs-risk}
+
+Figure~\ref{fig:cs-risk} plots the attitude to risk $-V''/V'$ across the
+inaction region, the measure \citet{milnewhalley2001} plot in their Figure~4,
+near the trigger at full scale and over the whole region at a scale that shows
+the reference. The bank is averse to risk around the reference,
+where $-V''/V'$ is largest, between $0.77$ and $0.88$, and seeks risk just above
+the trigger, where $V$ is convex (M4) and $-V''/V'$ is between $-21$ and $-12$.
+A larger asymmetry parameter raises the aversion at the reference and damps the
+convexity at the trigger, from $-21$ at $\lambda_S=1$ to $-12$ at
+$\lambda_S=2$. At this baseline the exposure is at the cap over the whole
+inaction region at each of the four values, whatever the sign of $V''$
+(\path{theory/solve/results_cs.md}), since the premium on the risky
+asset makes the interior maximiser exceed the cap. The attitude to risk
+therefore sets no exposure here, and the cap does. Their bang-bang choice of
+volatility by the sign of $V''$ (L62, L63) has no counterpart at this
+baseline, and nor has the shift towards riskier assets under a higher
+requirement that they report for concave utilities (L67), since a higher floor
+lowers the exposure through the cap.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/cs_risk.pdf}
+\caption{The attitude to risk $-V''/V'$ near the recapitalisation trigger and
+over the inaction region, for $\lambda_S=1$, $1.2$, $1.5$ and $2$ at
+$K=0.05$. The dashed line is the reference and the markers are the triggers.
+Source in Table~\ref{tab:provenance}.}
+\label{fig:cs-risk}
+\end{figure}
+
+\subsection{Safety and value}
+\label{sec:cs-safety}
+
+The frontier of \citet{bayraktar2026} sets the value function against the
+probability of not reaching their distress threshold of $1.02$ within five
+years from $y=1.2$. In the paper's model the trigger lies above $1.02$ at every
+point solved, so that probability is one throughout, and the safety measure
+used is the expected time in deficit over the same five years, with the
+expected shortfall, the probability of no deficit and the issues beside it.
+\path{theory/solve/q7_paths.py} simulates the optimal policy, under the
+physical measure for safety and under the measure of the value equation for
+values. Under the second it reproduces $V(1.2)$, $W(1.2)$ and $N(1.2)$ of the
+value equation to within about two percent, the size of the value equation's
+own grid error. Value is read two ways, as the value function and as the cash
+value $C=V+(\lambda_S-1)W$, the dividends less issue costs with the penalty
+added back, since the value function holds the penalty and falls in
+$\lambda_S$ by construction.
+
+Figure~\ref{fig:cs-frontier} sets the two levers side by side. A rise of the
+asymmetry parameter from $1$ to $3$ at $K=0.05$ cuts the expected time in
+deficit from $0.79$ to $0.14$ years and the expected shortfall by $92$ percent,
+at a cost of $4$ percent of the cash value, and the bank gets there by issuing
+earlier and more often, $1.0$ to $1.4$ issues in five years. A rise of the
+solvency floor from $0.045$ to $0.12$ cuts the time in deficit to $0.12$ years
+at a cost of $20$ percent of the cash value. At the floor of $0.10$, with $0.37$
+years in deficit, the same safety reached through the asymmetry parameter, at
+about $\lambda_S=1.45$, leaves the cash value $0.082$ higher and the value
+function $0.069$ higher. Between floors of $0.045$ and $0.06$ the time in
+deficit rises, from $0.79$ to $0.81$ years, so a small rise of the floor buys
+no safety at all. Under the reading of Appendix~\ref{app:scope}, in which the
+shortfall penalty stands for the supervisor's restrictions below required
+capital, a graded penalty buys safety more cheaply than a higher floor at this
+baseline. The comparison is of two levers at one baseline and is not a
+welfare statement.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/cs_frontier.pdf}
+\caption{Cash value and value function at $x=1.2$ against the expected years in
+deficit over five years from $x=1.2$, along the asymmetry parameter from $1$ to
+$3$ at a solvency floor of $0.045$ and along the solvency floor from $0.045$ to
+$0.12$ at $\lambda_S=1$, both at $K=0.05$. Source in
+Table~\ref{tab:provenance}.}
+\label{fig:cs-frontier}
+\end{figure}
+
+\subsection{Accuracy and what is not checked}
+\label{sec:cs-accuracy}
+
+The thresholds of the figures are on 601 nodes and accurate to about
+$10^{-3}$, the determinants on 601 and 1201 nodes, and the determinants of
+Table~\ref{tab:q3-det} on 2401. The simulated statistics have a standard error
+of at most $0.0035$ for a probability. Three questions stay open. A model with
+time-varying asset volatility, whose thresholds would be curves in it, is not
+solved, and M15 covers only buffer variance where the cap binds. A delay on
+issues with liquidation while the issue is pending, the channel of
+\citet{peura2006}, is not solved. Whether the issue moments separate the delay
+from the asymmetry parameter is not checked.
+
+\subsection{Provenance}
+\label{sec:cs-provenance}
+
+Table~\ref{tab:provenance} gives, for each figure, table and group of numbers
+of the section, the script that writes it, the input it reads and the file it
+writes, with the first sixteen hexadecimal digits of that file's sha256. The
+figures are drawn from the saved outputs, so they are redrawn in seconds, and
+MS-11 of \path{theory/checks/verify_manuscript.py} redraws them into a
+temporary folder and checks that every file matches its digest. The outputs
+of the solves are not rerun by the check. Each states the sha256 of the
+scripts that wrote it in its header, and the commands that rerun them are in
+the scripts' docstrings.
+
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}P{3.3cm}P{3.5cm}P{3.3cm}P{3.5cm}P{2.7cm}@{}}
+\caption{Provenance of the figures, tables and numbers of Section~\ref{sec:cs}.}\label{tab:provenance}\\
+\toprule
+Item & Written by & Reads & File & sha256 \\
+\midrule
+\endfirsthead
+\toprule
+Item & Written by & Reads & File & sha256 \\
+\midrule
+\endhead
+\provrow{Figure~\ref{fig:cs-lambda}}{theory/solve/make_cs_figures.py}{\path{theory/solve/results_cs.json}}{theory/figures/cs_lambda.pdf}{c2b32a8b2919e74b}
+\provrow{Figure~\ref{fig:cs-K}}{theory/solve/make_cs_figures.py}{\path{theory/solve/results_cs.json}}{theory/figures/cs_K.pdf}{07d0b19ad757f742}
+\provrow{Figure~\ref{fig:cs-floor}}{theory/solve/make_cs_figures.py}{\path{theory/solve/results_cs.json}}{theory/figures/cs_floor.pdf}{ea4a6b4e8dcfd1b5}
+\provrow{Figure~\ref{fig:cs-risk}}{theory/solve/make_cs_figures.py}{\path{theory/solve/results_cs.json}}{theory/figures/cs_risk.pdf}{e6039824c2f11ac1}
+\provrow{Figure~\ref{fig:cs-frontier}}{theory/solve/make_cs_figures.py}{\path{theory/solve/results_q7.json}}{theory/figures/cs_frontier.pdf}{54ca5cf436f01ba5}
+\provrow{Levers at equal safety, Section~\ref{sec:cs-safety}}{theory/solve/make_cs_figures.py}{\path{theory/solve/results_q7.json}}{theory/solve/results_cs_frontier.md}{dbc2defc54f9c4b1}
+\provrow{Data of Figures~\ref{fig:cs-lambda} to \ref{fig:cs-risk}}{theory/solve/run_cs.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_cs.json}{f40b4d5b23f82bee}
+\provrow{Numbers of Sections~\ref{sec:cs-baseline} to \ref{sec:cs-risk}}{theory/solve/run_cs.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_cs.md}{9ca61dab60e89348}
+\provrow{Data of Figure~\ref{fig:cs-frontier}}{theory/solve/run_q7_safety.py}{\path{theory/solve/q7_paths.py}}{theory/solve/results_q7.json}{eb8ef952e5cdbc7d}
+\provrow{Numbers of Section~\ref{sec:cs-safety}}{theory/solve/run_q7_safety.py}{\path{theory/solve/q7_paths.py}}{theory/solve/results_q7.md}{8403f3559d48f0b2}
+\provrow{Table~\ref{tab:q3-det}}{theory/solve/run_q3_pass3.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_q3_pass3.md}{fbd271b583198235}
+\provrow{Table~1 of \citet{bayraktar2026}}{theory/solve/run_q3_regulatory.py}{\path{theory/solve/bcvw_port.py}, \path{theory/solve/bcvw_model.py}}{theory/solve/results_q3.md}{65cb3a8912c79726}
+\provrow{Their value function's concavity}{theory/solve/run_q3_concavity.py}{\path{theory/solve/bcvw_model.py}}{theory/solve/results_q3_concavity.md}{33e0cf745c380e13}
+\provrow{The bridge as the fixed issuance cost vanishes}{theory/solve/run_q3_pass2.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_q3_pass2.md}{42e68d39b7b905fb}
+\provrow{The branches of the cap}{theory/solve/run_q3_regimes.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_q3_regimes.md}{c6fc9c71d863fb21}
+\provrow{One friction at a time}{theory/solve/run_q1_frictions.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_q1.md}{4251f98f1161e71e}
+\provrow{Issue moments, option value, return moments}{theory/solve/run_q1_pk.py}{\path{theory/solve/solve_qvi.py}}{theory/solve/results_q1_pk.md}{8f566e271a8ceef0}
+\provrow{A delay on issues}{theory/solve/run_q1_delay.py}{\path{theory/solve/delay_model.py}}{theory/solve/results_q1_delay.md}{3dce10e25314d214}
+\bottomrule
+\end{longtable}
+\setlength{\tabcolsep}{6pt}
 \normalsize
 
 \section{Literature}
@@ -448,9 +939,18 @@ unconstrained loss-averse control the large-wealth limits of the controls
 depend on the preference parameter (L14); in an endowment economy with
 constant loss aversion the volatility of returns equals that of dividends
 (L12); in capped portfolio insurance the two volatility levels are set by the
-multiple and the leverage limit, which preferences choose (L5, L6). For a bank
-under a regulatory cap no paper read evaluates the limits. K2 does (M10 to
-M12, C2), and C3 says where the surplus limit applies (L2).
+multiple and the leverage limit, which preferences choose (L5, L6). In equity
+returns of financial firms \citet{engle2018} write variance as the squared
+leverage multiplier times asset variance, using the relation for returns and
+not for levels (L34, L70), and find that mechanical leverage explains little of
+the asymmetry of equity volatility, most of which is exposure to the market
+(L13). In K2 the multiplier is the risky exposure over equity, which the cap
+fixes at the reciprocal of the solvency floor near the distress boundary and
+of the liquidity haircut deep in surplus, so the gap between the deficit limit
+and the surplus limit is leverage set by regulation, with the liability shock
+added, and the asymmetry parameter does not enter it. For a bank under a
+regulatory cap no paper read evaluates the limits. K2 does (M10 to M12, C2),
+and C3 says where the surplus limit applies (L2).
 
 \subsection{The three approaches as ledgers}
 \label{sec:approaches}
@@ -777,10 +1277,12 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L62}{milnewhalley2001}{Result 6. With no return to bearing risk the bank takes the smaller of two assumed volatilities where its value is concave and the larger where it is convex. The exposure rule of the cap term reduces to theirs when the risk premium is zero, with no exposure for the smaller and the regulatory cap for the larger, so the bound on risk is set by regulation here and assumed there.}{optimal policy is always to extremise the degree of cash flow uncertainty}{18}{M11, M12}
 \lrow{L63}{milnewhalley2001}{Result 5. Below the minimum, which the bank can reach because the audit is random, its value is convex and it takes the most risk. The value function of M4 is convex just above the recapitalisation trigger instead, where the bank issues rather than waits for an audit.}{a bank with less than the minimum required capital and hence under immediate threat of regulatory intervention is risk loving}{18}{M4}
 \lrow{L64}{milnewhalley2001}{Result 8. The bank issues or liquidates only after an audit finds it below the minimum and never by choice, so their model has no recapitalisation trigger in the sense of M2.}{A bank never chooses voluntary recapitalisation or voluntary liquidation.}{19}{M2}
-\lrow{L65}{milnewhalley2001}{The audit arrives at a constant rate, so below the minimum their equation charges at that rate the value lost by being forced to issue or close, which depends on the value function. With a fine in proportion to the shortfall in place of forced action, the same rate gives the shortfall penalty of A4, with the asymmetry parameter less one equal to the rate times the fine (Section~\ref{sec:common}).}{The audit itself is random, as in Merton (1978), with a parameter q}{14}{M8}
+\lrow{L65}{milnewhalley2001}{The audit arrives at a constant rate, so below the minimum their equation charges at that rate the value lost by being forced to issue or close, which depends on the value function. With a fine in proportion to the shortfall in place of forced action, the same rate gives the shortfall penalty of A4, with the asymmetry parameter less one equal to the rate times the fine (Section~\ref{sec:common}).}{that regulators engage in a Poisson audit}{9}{M8}
 \lrow{L66}{milnewhalley2001}{The bank literature writes the objective as linear in the bank's cash flows or as a utility concave in them, the second justified by a divergence of interest between managers and shareholders. They take the first, as does the paper with the shortfall penalty added (Appendix~\ref{app:scope}).}{The alternative to assuming a linear bank objective is a risk-averse bank utility function}{11}{M8}
-\lrow{L67}{milnewhalley2001}{By their account of two papers the paper has not read, in portfolio models with a concave utility a capital requirement can shift the bank towards riskier assets. Whether a higher solvency floor raises the exposure the bank chooses below the cap is a question of the comparative statics (Appendix~\ref{app:evidence}).}{that the introduction of regulatory capital requirements may induce banks to shift their portfolio composition towards riskier assets}{11}{M12}
+\lrow{L67}{milnewhalley2001}{By their account of two papers the paper has not read, in portfolio models with a concave utility a capital requirement can shift the bank towards riskier assets. Whether a higher solvency floor raises the exposure the bank chooses below the cap is a question of the comparative statics (Section~\ref{sec:cs}).}{that the introduction of regulatory capital requirements may induce banks to shift their portfolio composition towards riskier assets}{11}{M12}
 \lrow{L68}{milnewhalley2001}{With a linear objective the frictions induce the bank's attitude to risk. In the paper's model the value function is concave at the injection target, a hypothesis of M2, and convex just above the recapitalisation trigger (M4), so the bank is averse to risk at the first and not at the second.}{we do find induced risk-aversion when capital is less than the desired level}{11}{M2, M4}
+\lrow{L69}{milnewhalley2001}{Result 13. A higher minimum raises their desired capital one for one and leaves the buffer above the minimum unchanged, by the homogeneity of their equation in capital less the minimum. In the paper's model required capital enters the shortfall penalty and not the cap, so the homogeneity fails, and in the solve the dividend barrier rises by about three-eighths of a rise in required capital and the recapitalisation trigger by about a seventh (Section~\ref{sec:cs}).}{an alteration of the minimum capital requirement has no long run impact on either the buffer of free capital}{23}{M8}
+\lrow{L70}{engle2018}{Their sample is financial firms, and they use the structural relation to back out asset returns and not asset levels. It bears on buffer variance, the object of M10 and M15, and not on the thresholds, which are levels of the state.}{we intentionally avoid taking a stance on a specific asset pricing model, and why we will only use our model to back out asset returns, not asset levels}{460}{M10, M15}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -825,14 +1327,14 @@ Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2
 Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2025 & OpenAlex & If not relied on \\
 \midrule
 \endhead
+\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{13}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
 \cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{\claims{L1}{13}}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}\cinot{The regulatory cap, its crossing point and the baseline of M13 lose their source, and C3 and the contrast with an exogenous recapitalisation trigger go.}
 \cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{\claims{L7}{12}}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}\cinot{The fixed issuance cost and the single injection target lose their bank precedent, the shortfall penalty is no longer a call in print, and C4 and C6 lose their main comparison.}
-\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{12}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
 \cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{\claims{L9}{5}}{A*}{\citedby{W3123188656}{main}}\cinot{C4 loses one of its two numerical precedents, and the claim that issuance-cost models fit rather than identify their parameters rests on \citet{peura2006} alone.}
 \cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{\claims{L48}{4}}{A*}{\citedby{W2147736135}{main}}\cinot{The closest precedent outside banking for a linear shortfall penalty with a fixed issuance cost goes, and C4 no longer notes thresholds that pin both parameters there.}
 \cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
 \cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{\claims{L5}{3}}{A*}{\citedby{W2068841402}{main}}\cinot{The constant buffer variance on the solvency branch is no longer tied to capped portfolio insurance, and C2 loses the case where the same limits carry preferences.}
-\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{\claims{L13}{2}}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}\cinot{The change of variable from asset volatility to buffer variance loses its empirical counterpart, and the contrast with the sign asymmetry of equity volatility goes.}
+\cirow{engle2018}{Structural GARCH: The Volatility-Leverage Connection}{the article}{RFS 31(2), 449--492}{2018-02}{30 (+18)}{\claims{L13}{3}}{A*}{\citedby{W3125940130}{main}, \citedby{W2168426853}{other 1}, \citedby{W3125943825}{other 2}}\cinot{The change of variable from asset volatility to buffer variance loses its empirical counterpart, and the contrast with the sign asymmetry of equity volatility goes.}
 \cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{\claims{L53}{2}}{--}{\citedby{W2919604362}{main}}\cinot{The flat charge for breaching required capital, which the shortfall penalty grades, rests on \citet{langmenno2026} alone, and separating two costs by moments rather than thresholds loses its bank example.}
 \cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{\claims{L59}{2}}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}\cinot{A recapitalisation trigger fixed at required capital loses its recent model, and the contrast with the interior trigger of M2 rests on \citet{peura2006}.}
 \cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{\claims{L10}{1}}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}\cinot{The double barrier of dividends and issuance is no longer shown to be established, and a fixed issuance cost scaled to keep one dimension loses a precedent.}
@@ -1093,6 +1595,17 @@ Controls, $(\sigma,\sigma_L,c)=(1,1,1)$, $\omega=-1$ $\Rightarrow$ $Q=4>1=\max\{
 Control, $(\sigma,\sigma_L,c,a)=(1,1,0,1)$ $\Rightarrow$ $\nu^2=1-0+1=2\ne1$.
 \end{mproof}
 
+\begin{mproof}{M15}{TimeVarying.deficit_limit_at_date, TimeVarying.same_variance_any_binding_policy, TimeVarying.surplus_limit_at_date, TimeVarying.nu2_of_variance, TimeVarying.control_date_identity_needs_binding}
+M10 and M11 are statements at one value of the asset volatility, so at each date
+$t$ they hold with $\sigma=\sigma_t$,
+\[ \zeta_t(x)=\omega_t(x)^2\sigma_t^2-2\,\omega_t(x)\,c\,\sigma_t\sigma_L+\sigma_L^2,\qquad \omega_t(x)=\frac{\pi_t(x)\,x}{x-1} . \]
+Binding on the solvency branch gives $\omega_t=1/a_1$, so $\zeta_t=\nu_1^2$ at
+$\sigma_t$, and two exposures that bind there have the same $\omega_t$ and so the
+same $\zeta_t$. Deep in surplus $\omega_t\to1/a_3$ as in M11. Writing $\sigma_t^2$
+for the asset variance gives the form in it. Control. With $\pi\equiv0$,
+$\omega=0$ and $\zeta=\sigma_L^2=1$, against $\nu_1^2=1/(1/2)^2+1=5$.
+\end{mproof}
+
 \section{Evidence and verification}
 \label{app:evidence}
 
@@ -1195,208 +1708,9 @@ inaction region. At the dividend barrier it is $0.155$ without borrowing and
 $0.364$ with it, against a surplus limit of $0.0688$, since the state does not
 rise above the dividend barrier.
 
-\paragraph{Comparative statics, in progress.} The author chose three
-questions on 30 October 2026, each one that a paper read asks of its own
-model. The first is how the dividend barrier, the recapitalisation trigger and
-the injection target move with each friction, which the issuance-cost models
-tabulate for their frictions and not for an asymmetry parameter. The second is
-how the thresholds and the value function move with the solvency floor, the
-run-off rate and the liquidity haircut, which is Table 1 of
-\citet{bayraktar2026} with an exogenous trigger and no asymmetry parameter.
-The third is how the value function trades off against safety as the
-asymmetry parameter rises, where their frontier moves the cap geometry
-instead. Recovering the asymmetry parameter from data is left to empirical
-work rather than asked here. No row rests on this exercise.
-
-The second question has had one pass, \path{theory/solve/run_q3_regulatory.py},
-whose output is \path{theory/solve/results_q3.md}. A port of the authors'
-solver, \path{theory/solve/bcvw_port.py}, reproduces all 27 rows of their
-Table 1 to within $5\times10^{-5}$, and every row stops at the solver's limit
-of 1500 steps rather than at its tolerance. Solved by policy iteration in
-\path{theory/solve/bcvw_model.py}, the baseline dividend barrier is $1.389$
-against $1.428$ printed and the value function at $y=1.2$ is $0.870$ against
-$0.855$, while every direction in their table is unchanged. Their solver lets
-the bank issue at every state, and when converged the solver issues below $1.126$ rather
-than at their distress threshold of $1.02$. With issuance allowed only at
-$1.02$, as their model is stated, the bank below $1.079$ pays a dividend down
-to $1.02$ and issues at once, and the slope of the value function rises from
-$1$ to $1.038$ below the injection target, so the value function is not
-concave at their baseline, against their Proposition 3.3. The early issuance
-and the rising slope hold on grids of 601, 1201 and 2401 nodes
-(\path{theory/solve/run_q3_concavity.py}), and the early
-issuance appears under their scheme and under policy iteration alike. Neither
-is proved, and the step of their proof that fails is not located. Their own
-remark that a fixed issuance cost could induce earlier issuance (p.~7) points
-the same way.
-
-The paper's model reaches their numbers as the fixed issuance cost vanishes,
-\path{theory/solve/run_q3_pass2.py}. With $\lambda_S=1$ and $K=0.001$ the
-dividend barrier is $1.400$ and the value function at $1.2$ is $0.867$,
-against $1.389$ and $0.870$ in their model converged, so the fixed issuance
-cost accounts for most of the gap between the two models' levels. The
-injection target still differs, $1.227$ against $1.158$, with the form of the
-proportional cost. At
-$(\lambda_S,K)=(1.2,0.05)$ the dividend barrier, the injection target and the
-value function move with the cap geometry in the directions of their table,
-and every hypothesis of M1, M2 and M4 holds at each of the 17 points. The
-determinant of M3 does not hold its size, and
-\path{theory/solve/run_q3_pass3.py} confirms this on grids of 1201 and 2401
-nodes. On the finer grid the formula of M3 evaluated on the solve gives a
-determinant that shrinks from $-0.289$ to $-0.041$ as the solvency floor rises
-from $0.045$ to $0.12$ (Table~\ref{tab:q3-det}), and finite differences agree
-with it to within $15$ percent at every point. The response of the dividend
-barrier to $\lambda_S$ is $\rho_LW(y^*)/(\rho_L-\mu'(y^*))$ by M1, and the
-expected discounted shortfall $W(y^*)$ falls from $0.039$ to $0.0007$ over the
-same range, while the responses to $K$ stay of order one. The sign that M3
-proves is kept, and the identification of K1 is weaker under a high solvency
-floor than under a low one.
-
-\begin{table}[H]
-\footnotesize
-\caption{Responses of the thresholds and the determinant of M3 along the cap geometry, by the formulas of M1 to M3 evaluated on the solve, on 2401 nodes, in the paper's model at the parameters of \citet{bayraktar2026} with $(\lambda_S,K)=(1.2,0.05)$.}\label{tab:q3-det}
-\begin{tabular}{@{}lllllll@{}}
-\toprule
-Cap geometry & $\partial y^*/\partial\lambda_S$ & $\partial x_L/\partial\lambda_S$ & $\partial y^*/\partial K$ & $\partial x_L/\partial K$ & Determinant of M3 & $W(y^*)$ \\
-\midrule
-$a_1=0.045$ (baseline) & $0.104$ & $0.057$ & $4.27$ & $-0.44$ & $-0.289$ & $0.0385$ \\
-$a_1=0.08$ & $0.041$ & $0.054$ & $3.47$ & $-0.82$ & $-0.221$ & $0.0152$ \\
-$a_1=0.12$ & $0.002$ & $0.018$ & $2.15$ & $-1.51$ & $-0.041$ & $0.0007$ \\
-$a_3=0.48$ & $0.144$ & $0.063$ & $1.98$ & $-0.30$ & $-0.168$ & $0.0933$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Which branch of the cap carries each result is a separate question from how
-the value loss divides, which is the question of \citet{bayraktar2026}.
-\path{theory/solve/run_q3_regimes.py}, whose output is
-\path{theory/solve/results_q3_regimes.md}, solves the model under the ceiling
-$\pi\le4$ alone, with the solvency branch beside it, with the liquidity branch
-beside it, and with both, which is A2. The ceiling lies below the bound of $5$
-on the long-run exposure that keeps the value finite, so the four sets of
-admissible exposures are nested and every value is finite. The liquidity
-branch alone and the ceiling alone leave the exposure positive at the distress
-boundary, so they are devices for the decomposition and not regulations in
-force.
-
-K1 needs the solvency branch. With it, whether or not the liquidity branch is
-present, the exposure is zero at the distress boundary, the recapitalisation
-trigger is interior at $\lambda_S$ of $1$, $1.2$ and $1.5$, and it moves with
-$\lambda_S$ by $0.022$ across that range under the solvency branch alone and
-by $0.029$ under both. The determinant of M3 is $-0.33$ under the solvency
-branch alone and $-0.29$ under both. Without it the trigger is at the distress
-boundary at every $\lambda_S$ and the hypotheses of M1 to M4 fail, so the
-two thresholds do not identify $\lambda_S$ and $K$ there. The deficit limit
-of K2 needs the solvency branch as well. Buffer variance at the trigger is the
-deficit limit $\nu_1^2=3.14$ with it and is unbounded at the distress boundary
-without it. The surplus limit is not reached in these solves, since the
-dividend barrier lies between $1.7$ and $2.3$ in the four regimes, where
-buffer variance is between $0.31$ and $0.36$ against a surplus limit of
-$0.069$, so its assignment to the liquidity branch rests on M11 and not on the
-solve. With no borrowing the solution is the same with and without the
-liquidity branch, to numerical precision, as C3 states.
-
-The first pass at the first question is \path{theory/solve/run_q1_frictions.py},
-whose output is \path{theory/solve/results_q1.md}, moving one friction at a
-time around $(\lambda_S,K,\kappa)=(1.2,0.05,0.01)$. With the cap of A2 alone
-the trigger is interior at all 21 points, and at every one the dividend
-barrier rises with $\lambda_S$ and with $K$ while the recapitalisation trigger
-rises with $\lambda_S$ and falls with $K$, the signs of M1 and M2. The
-proportional issuance cost $\kappa$ lowers the trigger as $K$ does and lowers
-the injection target where $K$ raises it, so of the three frictions only
-$\lambda_S$ raises the trigger. Issues grow larger with $K$, as in
-\citet{peura2006} (L22), and smaller with $\kappa$. With no borrowing the
-trigger reaches the distress boundary at $\lambda_S\le1.1$ and at $K\ge0.1$,
-and at the 16 interior points the signs of M1 and M2 hold.
-
-A second pass, \path{theory/solve/run_q1_pk.py}, whose output is
-\path{theory/solve/results_q1_pk.md}, takes up three results of
-\citet{peura2006} that the first pass left out. They pin their two frictions by
-the expected time between issues and the proportional cost of an issue (their
-Table 2). In the paper's model the time between issues rises with $K$ from
-$2.5$ years at $K=0.01$ to $9.8$ years at $K=0.1$ at $\lambda_S=1.2$, and the
-cost per issue rises from $0.042$ to $0.146$, while $\lambda_S$ from $1$ to $2$
-moves them from $6.8$ to $6.0$ years and from $0.099$ to $0.096$ at $K=0.05$.
-The determinant of the two moments in $(\lambda_S,K)$ is non-zero at four
-centres, from $-0.48$ to $-0.86$, so the moments also separate the two
-frictions locally. Both moments fall in $\lambda_S$ and rise in $K$, so their
-determinant is the difference of two terms of the same sign and is set by the
-sizes of the responses. The determinant of the two thresholds is the difference
-of two terms of opposite sign, and is negative by the signs of M1 and M2 alone
-(M3), where the table of \citet{peura2006} changes sign with the size of the
-costs (L41 to L43). The time between issues is read to about ten percent, which
-the header of the output explains.
-
-The value of the option to issue is hump-shaped in the capital buffer in their
-Figure 4 and goes to zero as the buffer does, since a bank near the minimum
-rarely survives the delay. In the paper's model the value function with the
-option less the value function without it falls throughout the buffer at each
-of twelve combinations of $\lambda_S$ and $K$, and is largest at the distress
-boundary. At $(\lambda_S,K)=(1.2,0.05)$ it is $0.40$ there, $88$ percent of the
-value function, against $15$ percent at the injection target and $12$ percent
-at the dividend barrier. It rises with $\lambda_S$, from $0.20$ to $0.98$ at
-$\lambda_S$ of $1$ and $2$, and falls with $K$. The hump needs the delay and
-liquidation, which the paper's model does not hold (Table~\ref{tab:common}),
-and here the option buys relief from the shortfall penalty and not survival.
-
-Their Figure 6 and Table 3 find that the dividend barrier is driven by return
-volatility, with a correlation of $0.99$ across banks. In the paper's model the
-dividend barrier rises with the asset volatility, from $1.44$ to $2.16$ as it
-goes from $0.04$ to $0.12$ at $\lambda_S=1$, the recapitalisation trigger falls
-from $1.043$ to $1.010$, and the determinant of M3 grows in size from $-0.10$
-to $-0.43$ with every hypothesis holding. At an asset volatility of $0.16$ the
-barrier reaches the top of the grid, and that point is not used. The dividend
-barrier also rises with the expected asset return, from $1.19$ to $2.04$ as it
-goes from $0.025$ to $0.045$ at $\lambda_S=1$, where theirs has a correlation
-of $-0.48$ with it across banks. A correlation across banks is not a
-comparative static, and the two are not set against each other.
-
-\paragraph{A delay on issues.} A third pass,
-\path{theory/solve/run_q1_delay.py}, whose output is
-\path{theory/solve/results_q1_delay.md}, asks whether the delay on issues of
-\citet{peura2006} (L23) is a rival to K1. It adds the delay to the model in
-\path{theory/solve/delay_model.py}. The bank decides to issue at the
-recapitalisation trigger and the capital arrives a fixed time later, and while
-it waits it pays no dividend and bears the shortfall penalty. The state cannot
-fall below the distress boundary, so here the delay costs the penalty and the
-discounting over the wait, where in their model it also carries a risk of
-failure. On 1201 nodes, with thresholds accurate to about $3\times10^{-4}$
-against 2401, a delay raises the dividend barrier, the recapitalisation
-trigger and the injection target at each of the four centres of the second
-pass, as it raises both barriers in their Table 2
-(\lean{PeuraKeppo.table2_signs}).
-
-The delay moves the dividend barrier and the recapitalisation trigger the way
-the asymmetry parameter does. The model without the delay, fitted to the two
-thresholds of the model with a delay of a tenth of a year, overstates
-$\lambda_S-1$ by 9 to 78 percent across the four centres and the fixed
-issuance cost by 3 to 10 percent. A delay of a quarter of a year overstates
-$\lambda_S-1$ by 27 to 260 percent. The fit is exact to within
-$4\times10^{-4}$ in both thresholds, so nothing in the two thresholds shows
-that a friction is missing.
-
-The injection target does not show it either. In all twelve fits the fitted
-model's injection target is within $10^{-4}$ of the injection target of the
-model with the delay, below the accuracy of the solve. The injection target
-lies above the reference at every centre, where the shortfall penalty is
-zero, so from the injection target to the dividend barrier the equation holds
-none of the asymmetry parameter, the fixed issuance cost and the delay. There
-$V$ is fixed by the dividend barrier through $V'(y^*)=1$, $V''(y^*)=0$ and the
-equation at $y^*$, and the injection target, where $V'=1+\kappa$, is a
-function of the dividend barrier and the proportional issuance cost. It
-carries information about $\kappa$ and none about the three frictions. This
-argument is not a row, and it needs the injection target above the reference.
-
-So the thresholds identify the asymmetry parameter and the fixed issuance cost
-within the model of A1 to A6 (M3), and with a delay on issues added they
-identify the asymmetry parameter only jointly with the delay. The two
-thresholds and the injection target are three numbers for four frictions, and
-the injection target goes to the proportional issuance cost. This bears on K1,
-whose identification assumes no delay, on C6, since the friction of
-\citet{peura2006} is one the thresholds cannot tell from the shortfall penalty,
-and on L8, where they pin the delay and the fixed issuance cost from issue cost
-and frequency. Whether those issue moments separate the delay from the
-asymmetry parameter is not checked. No row rests on this pass, and K1 and C6
-are unchanged until the author decides.
+\paragraph{Comparative statics.} The comparative statics are in
+Section~\ref{sec:cs}, and Table~\ref{tab:provenance} lists the script and the
+saved output behind each of its figures, tables and numbers.
 
 \section{Terminology and measurement map}
 \label{app:terms}

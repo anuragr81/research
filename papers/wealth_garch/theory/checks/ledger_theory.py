@@ -95,6 +95,9 @@ ANNOTATIONS = [
     {"id": "T9", "on": ("A5",), "kind": PROVEN, "rests_on": ("C3", "M11", "M12", "L2"),
      "says": "the surplus limit needs borrowing to hold the risky asset; with no borrowing the liquidity branch never "
              "binds and the deficit limit and the bound are what apply"},
+    {"id": "T13", "on": ("A5", "equity"), "kind": PROVEN, "rests_on": ("M15", "K2"),
+     "says": "the limits hold date by date, so with an asset volatility that varies over time buffer variance is the "
+             "limit at each date's asset volatility wherever the exposure binds the cap"},
     {"id": "T12", "on": ("A5", "equity"), "kind": PROVEN, "rests_on": ("M13", "M14"),
      "says": "at the baseline of Bayraktar et al. the limits of buffer variance are about 3.140 and 0.0688, and with no "
              "liability shock they are the log-cushion variances of capped portfolio insurance"},
