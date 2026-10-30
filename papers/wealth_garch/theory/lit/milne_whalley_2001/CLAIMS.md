@@ -19,7 +19,7 @@ Bib key `milnewhalley2001`. Version read: "Bank Capital Regulation and Incentive
 | MW-Q11 | 9 | desired bank capital holdings are a function of cash-flow uncertainty, franchise value, audit frequency, recapitalisation costs, and cost of equity relative to deposits | The cost of falling below the minimum (audit frequency) and the fixed cost of issue are joint determinants of the buffer. |
 | MW-Q12 | 23 | A shift in the same direction would be produced by an increase of q. | Result 12: more frequent audit moves the policy the same way as a higher fixed cost of issue, raising desired capital and the state below which an audited bank liquidates rather than recapitalises. |
 | MW-Q13 | 18 | optimal policy is always to extremise the degree of cash flow uncertainty | Result 6: the bank picks the smaller of two assumed volatilities where $V_{CC}<0$ and the larger where $V_{CC}>0$, since bearing risk earns it nothing. The exposure rule of the theory paper's cap term reduces to this when the risk premium is zero (MW-D3). |
-| MW-Q14 | 18 | is risk loving, with incentives to 'gamble for resurrection' | Result 5: below the minimum, which the bank reaches only because the audit is random, $V_{CC}>0$. The theory paper's $V''(x_L^+)>0$ of M4 is the same convexity, just above the trigger rather than below the minimum (MW-D3). |
+| MW-Q14 | 18 | a bank with less than the minimum required capital and hence under immediate threat of regulatory intervention is risk loving | Result 5: below the minimum, which the bank reaches only because the audit is random, $V_{CC}>0$. The theory paper's $V''(x_L^+)>0$ of M4 is the same convexity, just above the trigger rather than below the minimum (MW-D3). |
 
 ## Lean results
 

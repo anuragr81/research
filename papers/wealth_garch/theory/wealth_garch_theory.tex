@@ -543,6 +543,12 @@ This is the equation that \path{theory/solve/solve_qvi.py} solves.
 Each approach fills one of the three terms and leaves the other two at a
 restriction. Regulatory-cap control is the cap term, with $\lambda_S=1$, $K=0$
 and the impulse operator evaluated at the distress boundary alone (L3, L28).
+The cap term also holds the control of variance of \citet{milnewhalley2001},
+whose bank takes the smaller of two assumed volatilities where its value is
+concave and the larger where it is convex (L62, L63). The rule of the cap
+term reduces to theirs when the risk premium is zero, with no exposure and the
+regulatory cap in place of their two volatilities, so their bound on risk is
+assumed where that of \citet{bayraktar2026} is set by regulation.
 The issuance-cost models are the impulse term, with no cap and $\lambda_S=1$
 (L7, L22). The preference approach is the kink of the payoff term, the
 loss-averse form of \citet{barberis2001} written over a shortfall of capital
@@ -640,7 +646,7 @@ Paper & Payoff term & Impulse term & Cap term & Rule at the distress boundary & 
 \midrule
 \citet{peura2006} & $\lambda_S=1$ & $K>0$ (L7) & none & liquidation at the minimum (L24) & the delay on issues (L23) \\ \addlinespace
 \citet{daihuangkeppo2019} & $\lambda_S=1$ & $K>0$ (L9) & none & liquidation, with the regulator's asymmetry (L25) & the delay, partial information \\ \addlinespace
-\citet{milnewhalley2001} & $\lambda_S=1$ & $K>0$ (L39) & none & an audit at random below the minimum (L38) & the random audit \\ \addlinespace
+\citet{milnewhalley2001} & $\lambda_S=1$ & $K>0$ (L39) & $\sigma_1$ or $\sigma_2$, assumed (L62) & an audit at random below the minimum (L38) & the random audit \\ \addlinespace
 \citet{bayraktar2026} & $\lambda_S=1$ & $K=0$, $\kappa>0$ (L3, L46) & $u$ (L26) & issue or liquidate at an exogenous trigger (L28) & none \\ \addlinespace
 \citet{blackperold1992} & no asymmetry & no issuance & $u$ with $a_2=0$, slopes from preferences (L5, L6) & none & preferences over consumption \\ \addlinespace
 \citet{barberis2001}, \citet{li2023} & loss aversion over gains and losses (L36, L14) & no issuance & none & none & not a bank \\ \addlinespace
@@ -741,6 +747,8 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L59}{federico2026}{At required capital the bank issues at a fixed cost or is liquidated, and reserves never go below it (\lean{FedericoEtAl.liquidationPayoff_nonneg}), so no cost grows with a shortfall. The shortfall penalty of M8 grades the cost below the reference.}{When this occurs, the manager must either liquidate the bank or recapitalize it by issuing new equity at a cost.}{10}{M8}
 \lrow{L60}{federico2026}{The issue trigger is required capital itself, where the trigger of M2 is interior and responds to the asymmetry parameter and the fixed issuance cost. Their dividend restriction is a payout tax that depends on the macro state, not on the shortfall, and the responses of their thresholds are numerical at one calibration.}{the bank decides whether to default or, at a cost, to issue equity (and in what amount) when capital requirements become binding}{3}{M2}
 \lrow{L61}{bonaparte2011}{Preference parameters and a fixed adjustment cost are estimated together, and the table of elasticities of the moments to the parameters is their only device for identification. The thresholds of their inaction band are not used, where M3 identifies from two thresholds.}{This table is also informative about identification as it indicates which moments are particularly sensitive to variations in each of the parameters.}{8}{M3}
+\lrow{L62}{milnewhalley2001}{Result 6. With no return to bearing risk the bank takes the smaller of two assumed volatilities where its value is concave and the larger where it is convex. The exposure rule of the cap term reduces to theirs when the risk premium is zero, with no exposure for the smaller and the regulatory cap for the larger, so the bound on risk is set by regulation here and assumed there.}{optimal policy is always to extremise the degree of cash flow uncertainty}{18}{M11, M12}
+\lrow{L63}{milnewhalley2001}{Result 5. Below the minimum, which the bank can reach because the audit is random, its value is convex and it takes the most risk. The value function of M4 is convex just above the recapitalisation trigger instead, where the bank issues rather than waits for an audit.}{a bank with less than the minimum required capital and hence under immediate threat of regulatory intervention is risk loving}{18}{M4}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -787,7 +795,7 @@ Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2
 \endhead
 \cirow{bayraktar2026}{Tractable Bank Capital Structure: Optimal Control under Basel III Constraints}{arXiv 2603.14557v2}{working paper (arXiv, SSRN)}{2026-03}{0}{\claims{L1}{13}}{--}{\citedby{W7138464927}{main}, \citedby{W7139144187}{other 1}, \citedby{W7171674439}{other 2}}\cinot{The regulatory cap, its crossing point and the baseline of M13 lose their source, and C3 and the contrast with an exogenous recapitalisation trigger go.}
 \cirow{peura2006}{Optimal Bank Capital with Costly Recapitalization}{the article}{J.\ Business 79(4), 2163--2201}{2006-07}{188}{\claims{L7}{12}}{not listed (A* in 2016, discontinued)}{\citedby{W3125331046}{main}}\cinot{The fixed issuance cost and the single injection target lose their bank precedent, the shortfall penalty is no longer a call in print, and C4 and C6 lose their main comparison.}
-\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{5}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
+\cirow{milnewhalley2001}{Bank Capital Regulation and Incentives for Risk-Taking}{City University working paper}{working paper (SSRN 299319)}{2001-12}{147}{\claims{L16}{7}}{--}{\citedby{W1788034067}{main}}\cinot{A cost below required capital paired with a fixed issuance cost in one bank loses its earliest statement, and the case of like signs, where the determinant of M3 can vanish, loses its printed example.}
 \cirow{daihuangkeppo2019}{Opaque Bank Assets and Optimal Equity Capital}{Huang's thesis, ch.~2, arXiv 2107.02242v1}{JEDC 100, 369--394}{2019-03}{11}{\claims{L9}{5}}{A*}{\citedby{W3123188656}{main}}\cinot{C4 loses one of its two numerical precedents, and the claim that issuance-cost models fit rather than identify their parameters rests on \citet{peura2006} alone.}
 \cirow{constantinides1978}{Existence of Optimal Simple Policies for Discounted-Cost Inventory and Cash Management in Continuous Time}{the article}{Oper.\ Res.\ 26(4), 620--636}{1978-08}{186}{\claims{L48}{4}}{A*}{\citedby{W2147736135}{main}}\cinot{The closest precedent outside banking for a linear shortfall penalty with a fixed issuance cost goes, and C4 no longer notes thresholds that pin both parameters there.}
 \cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
@@ -1309,6 +1317,54 @@ barrier also rises with the expected asset return, from $1.19$ to $2.04$ as it
 goes from $0.025$ to $0.045$ at $\lambda_S=1$, where theirs has a correlation
 of $-0.48$ with it across banks. A correlation across banks is not a
 comparative static, and the two are not set against each other.
+
+\paragraph{A delay on issues.} A third pass,
+\path{theory/solve/run_q1_delay.py}, whose output is
+\path{theory/solve/results_q1_delay.md}, asks whether the delay on issues of
+\citet{peura2006} (L23) is a rival to K1. It adds the delay to the model in
+\path{theory/solve/delay_model.py}. The bank decides to issue at the
+recapitalisation trigger and the capital arrives a fixed time later, and while
+it waits it pays no dividend and bears the shortfall penalty. The state cannot
+fall below the distress boundary, so here the delay costs the penalty and the
+discounting over the wait, where in their model it also carries a risk of
+failure. On 1201 nodes, with thresholds accurate to about $3\times10^{-4}$
+against 2401, a delay raises the dividend barrier, the recapitalisation
+trigger and the injection target at each of the four centres of the second
+pass, as it raises both barriers in their Table 2
+(\lean{PeuraKeppo.table2_signs}).
+
+The delay moves the dividend barrier and the recapitalisation trigger the way
+the asymmetry parameter does. The model without the delay, fitted to the two
+thresholds of the model with a delay of a tenth of a year, overstates
+$\lambda_S-1$ by 9 to 78 percent across the four centres and the fixed
+issuance cost by 3 to 10 percent. A delay of a quarter of a year overstates
+$\lambda_S-1$ by 27 to 260 percent. The fit is exact to within
+$4\times10^{-4}$ in both thresholds, so nothing in the two thresholds shows
+that a friction is missing.
+
+The injection target does not show it either. In all twelve fits the fitted
+model's injection target is within $10^{-4}$ of the injection target of the
+model with the delay, below the accuracy of the solve. The injection target
+lies above the reference at every centre, where the shortfall penalty is
+zero, so from the injection target to the dividend barrier the equation holds
+none of the asymmetry parameter, the fixed issuance cost and the delay. There
+$V$ is fixed by the dividend barrier through $V'(y^*)=1$, $V''(y^*)=0$ and the
+equation at $y^*$, and the injection target, where $V'=1+\kappa$, is a
+function of the dividend barrier and the proportional issuance cost. It
+carries information about $\kappa$ and none about the three frictions. This
+argument is not a row, and it needs the injection target above the reference.
+
+So the thresholds identify the asymmetry parameter and the fixed issuance cost
+within the model of A1 to A6 (M3), and with a delay on issues added they
+identify the asymmetry parameter only jointly with the delay. The two
+thresholds and the injection target are three numbers for four frictions, and
+the injection target goes to the proportional issuance cost. This bears on K1,
+whose identification assumes no delay, on C6, since the friction of
+\citet{peura2006} is one the thresholds cannot tell from the shortfall penalty,
+and on L8, where they pin the delay and the fixed issuance cost from issue cost
+and frequency. Whether those issue moments separate the delay from the
+asymmetry parameter is not checked. No row rests on this pass, and K1 and C6
+are unchanged until the author decides.
 
 \section{Terminology and measurement map}
 \label{app:terms}

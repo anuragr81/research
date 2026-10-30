@@ -266,6 +266,36 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. The bank's problem stated before the results (author): new
+  Section 2.3 (who optimises, state equation with drift, admissible policies,
+  objective, whose penalty, no liquidation, the QVI as eq:qvi). Section 3.4
+  refers to it. A1 states the drift; the map gains D, I_n, r, mu_s, mu_L,
+  gamma and mu. Open:
+  - "drift of the state" is an In use name, not yet put to the author.
+  - The symbol b is the retention ratio in the Names table; the drift is now
+    mu(x, pi) everywhere, as in the proofs.
+- 2026-10-30. Milne and Whalley's control of variance (author: exposition
+  only, no change to the model). MW-Q13, MW-Q14, MW-D3; rows L62 (Result 6)
+  and L63 (Result 5); a sentence in Section 3.4 that the cap term holds their
+  rule; their cap-term cell now "sigma_1 or sigma_2, assumed".
+- 2026-10-30. Q1 pass 3, a delay on issues (`solve/delay_model.py`,
+  `solve/run_q1_delay.py`, `results_q1_delay.md`), remark in Appendix B,
+  "A delay on issues". Checked: the delay raises all three thresholds (as
+  PeuraKeppo.table2_signs); the model without delay fitted to (y*, x_L)
+  overstates lambda_S - 1 by 9 to 78 percent at a delay of 0.1 years and K by
+  3 to 10 percent; the fitted y_post matches to 1e-4 in all twelve fits. For
+  the author:
+  - K1's scope note and C6 assume no delay. Whether to say so in K1 and C6
+    is the author's decision; the remark does not change them.
+  - Candidate row: when y_post > R, y_post is a function of y* and kappa
+    alone (the penalty is zero on [y_post, y*], V is fixed there by
+    V'(y*) = 1, V''(y*) = 0 and the equation at y*). Needs a hypothesis-form
+    Lean statement before it is a row. It also answers the open item of the
+    Q3 pass 2 entry: y_post can identify kappa and nothing else.
+  - Not checked: whether Peura and Keppo's issue moments (time between
+    issues, cost per issue) separate the delay from lambda_S.
+  - Not checked: a delay with liquidation during the wait, which is
+    Peura and Keppo's channel; the paper's model has no liquidation.
 - 2026-10-30. Peura and Keppo's two distinctive predictions, issuance at a
   positive buffer and default risk despite the option, are tested nowhere in
   their paper (author's observation, for later). Summary from the records of
