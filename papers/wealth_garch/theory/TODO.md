@@ -266,6 +266,11 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Baglioni and Cherubini (1994, RISEC 41, 893-904) dropped from the
+  reading list (author). Not cited. C4 claims novelty against the papers read
+  in full, which stays accurate; theirs is the (S, s) bank model with fixed
+  recapitalisation costs and a capital requirement that a referee is most
+  likely to raise against it.
 - 2026-10-30. Comparative statics as Section 3 (author: main text, after the
   model; baseline of Bayraktar et al., argued for). On the lines of Milne and
   Whalley's section 4: what the rows prove, the baseline with rho as the
@@ -316,9 +321,7 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   objective": the objectives of the papers read and why the paper's is
   linear in dividends with one kink (MW-Q17 to MW-Q20, rows L66 to L68).
   To do:
-  - Read, PDFs to be found by the author: Baglioni and Cherubini (1994,
-    RISEC 41, 893-904), the (S, s) bank model with fixed recapitalisation
-    costs and a capital requirement, a risk to C4's novelty; Milne and
+  - Read, PDFs to be found by the author: Milne and
     Robertson (1996, JEDC 20, 1427-1449), the base of Peura and Keppo and
     of Milne and Whalley; Calem and Rob (1996 FEDS 96-12, published version
     if any), dynamic capital and risk-taking; Fries, Mella-Barral and
