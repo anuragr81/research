@@ -24,6 +24,8 @@
   poses a problem with issuance at every state; converged, the bank issues
   before the threshold and v is not concave at the baseline. The directions
   of Table 1 survive.
+- BCVW-D12. The constraint decomposition of Figure 4(a) holds in direction
+  but its size rests on a ceiling at the edge of a finite value.
 
 - BCVW-D2 and BCVW-D6. p. 17 states the limit of the cap as $1/a_3$ without
   the condition $a_3\ge a_1$. The general limit on p. 10 is $1/\max(a_1,a_3)$.
