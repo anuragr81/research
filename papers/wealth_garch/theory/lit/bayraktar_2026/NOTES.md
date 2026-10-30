@@ -12,11 +12,18 @@
 
 ## Not verified
 
-- The numerical results of Section 4. The solver was not rerun.
+- The numerical results of Section 4 other than Table 1. Table 1 was rerun
+  by a port of their solver and by policy iteration (BCVW-D9 to D11).
 - The scale-function step of Lemma 5.2 and the uniqueness constants of
   Prop. 3.2 (see `RECONSTRUCTION.md`).
 
 ## Discrepancies
+
+- BCVW-D9 to D11, added 30 October 2026 from the solve of Question 3. The
+  published Table 1 carries a time-step error of a few percent and the solver
+  poses a problem with issuance at every state; converged, the bank issues
+  before the threshold and v is not concave at the baseline. The directions
+  of Table 1 survive.
 
 - BCVW-D2 and BCVW-D6. p. 17 states the limit of the cap as $1/a_3$ without
   the condition $a_3\ge a_1$. The general limit on p. 10 is $1/\max(a_1,a_3)$.

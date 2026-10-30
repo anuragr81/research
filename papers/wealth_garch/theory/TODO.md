@@ -266,6 +266,13 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Comparative statics narrowed to Q1, Q3 and Q7 (author): the
+  thresholds against each friction, the regulatory parameters, and safety
+  against value. Q10, recovering the asymmetry from data, belongs to the
+  enhancement paper. Q3 pass 1 is `solve/run_q3_regulatory.py` and
+  `solve/results_q3.md`, with a port of Bayraktar et al.'s solver
+  (`solve/bcvw_port.py`, MIT) and policy iteration on their model
+  (`solve/bcvw_model.py`). Findings in BCVW-D9 to D11. Not in the manuscript.
 - 2026-10-30. Section 3.4 rewritten around the one equation (author). The
   three approaches are the three terms of the quasi-variational inequality,
   the cap term, the impulse term and the payoff term, with a rule at the

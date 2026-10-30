@@ -28,6 +28,13 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | BCVW-Q20 | 13 | These values constitute an illustrative parameterization rather than an empirical calibration | No parameter is set from data or read off the policy. |
 | BCVW-Q21 | 13 | c is their shock correlation | The liability shock is correlated with the risky return, as in the theory paper's A1. |
 | BCVW-Q22 | 13 | The regulatory constraints do not create the threshold structure from scratch | The cap moves the thresholds and does not make them; the thresholds come from the costs. |
+| BCVW-Q23 | 11 | Proposition 3.3 (Concavity of the value function). | The concavity on which their no-interior-issuance argument rests (BCVW-D10). |
+| BCVW-Q24 | 36 | We first show that issuance cannot occur in the interior | The step of Theorem 3.1 that BCVW-D10 tests numerically. |
+| BCVW-Q25 | 14 | a pseudo-time step of 0.05, and a convergence tolerance of 10−6 | The settings of their solver, reproduced by `theory/solve/bcvw_port.py` (BCVW-D9). |
+| BCVW-Q26 | 14 | each time the state hits the distress boundary | Their reading of the policy, recapitalisation at the threshold 1.02. |
+| BCVW-Q27 | 7 | Fixed issuance costs, endogenous access to equity markets, or adverse-selection costs that increase near distress could instead make liquidation optimal or induce earlier issuance. | They name the fixed cost as what would move recapitalisation away from the threshold, the friction of A5. |
+| BCVW-Q28 | 16 | First, increasing the solvency parameter a1 raises the dividend threshold substantially, from 1.4282 to 1.8927. | The first comparative static of Table 1, which survives convergence (BCVW-D9). |
+| BCVW-Q29 | 23 | Thus, the solvency requirement a1 remains the primary effective regulatory instrument. | Their policy conclusion. |
 
 ## Lean results
 
@@ -60,3 +67,6 @@ Bib key `bayraktar2026`. Version read: arXiv:2603.14557v2. Evidence [F].
 | BCVW-D6 | p. 17 | $\lim\bar\pi=1/a_3$ holds when $a_3\ge a_1$. | p. 17 states it without the condition. It holds at the baseline. The general limit is BCVW-D2. |
 | BCVW-D7 | p. 34 | $u(y)=\min\{(y-1)/a_1,(y-a_2)/a_3\}$ is concave in $y$. | The formula is garbled in the text layer. The reading is $\bar\pi(y)\,y$ (`BCVW.piBar_mul_y`, `BCVW.u_concave`). |
 | BCVW-D8 | pp. 17, 19-20 | With no borrowing ($\pi\le1$) the liquidity branch never binds once $a_2\le(1-a_3)y$, which holds on $y\ge1$ for every $a_2\le1-a_3$, so for all Basel-like parameters. | BCVW-Q15 to BCVW-Q18 state it for their grid; `BCVW.ceiling_tighter_than_lcr` proves it in general. |
+| BCVW-D9 | pp. 14, 16 | Table 1 is that of their solver at 301 nodes and pseudo-time step 0.05. | Our port reproduces all 27 rows to within 5e-5, and every row stops at the 1500-step limit, not at the tolerance. The obstacles are applied after each implicit step, which leaves an error of the order of the step. Converged by exact policy iteration (1201 nodes) the baseline is v(1.2) = 0.870 and y* = 1.389, against 0.8552 and 1.4282 printed. The direction of every column of Table 1 is unchanged (`theory/solve/results_q3.md`). |
+| BCVW-D10 | pp. 11, 14, 36 | Recapitalisation occurs at the distress threshold, and v is concave (Prop. 3.3). | Not borne out at their baseline numerically. Their solver allows issuance at every state, and converged it issues on [1.02, 1.126] to a target of 1.158. With issuance only at 1.02, the optimal policy on (1.02, 1.079] is a dividend down to 1.02 followed by an issue, and the slope of v rises from 1 to 1.038 below the target, so v is not concave. Both are stable from 601 to 2401 nodes. Not a proof; the failing step of Prop. 3.3 is not located. |
+| BCVW-D11 | p. 16 | y* is read from rho_L v(y) = gamma - (mu_L - mu*(y)) y. | At their step this formula gives 1.426 and the point where the slope of v falls to one gives 1.370. The two agree only as the step shrinks, at 1.389 under policy iteration. |
