@@ -454,14 +454,51 @@ which a binding cap closes (M11), and not in thresholds.}
 \subsection{The three approaches in one formulation}
 \label{sec:common}
 
-The paper's model, A1 to A6, holds the three approaches as restrictions of its
-parameters, the asymmetry parameter $\lambda_S$, the fixed issuance cost $K$,
-the proportional issuance cost $\kappa$, the regulatory cap $u$, and the
-liability volatility $\sigma_L$ with the return-liability correlation $c$.
-Table~\ref{tab:common} gives the restriction for each paper read, and
-Table~\ref{tab:common-values} evaluates two quantities on each. One is the
-determinant of the two thresholds in the two frictions $\theta_1,\theta_2$ that
-an approach has,
+The paper's model, A1 to A6, is one quasi-variational inequality, and the
+three approaches are the three places in it where a friction can sit. The
+value function solves
+\[
+\max\Big\{\sup_{0\le\pi x\le u(x)}\big[\tfrac12\sigma^2(x,\pi)V''+b(x,\pi)V'\big]-\rho_LV-\Lambda(x),\ \ \mathcal MV-V,\ \ 1-V'\Big\}=0,
+\]
+with $\mathcal MV(x)=\sup_{\xi>0}V(x+\xi)-K-(1+\kappa)\xi$ the impulse
+operator of A6, $\Lambda(x)=(\lambda_S-1)(R-x)^+$ the shortfall penalty of A4,
+$\sigma^2(x,\pi)$ the diffusion of A1 and $b(x,\pi)$ the drift of the state,
+which is $\mu$ of Appendix~\ref{app:proofs} along the cap. The regulatory cap
+of A2 is the set over which the supremum is taken, the cap term. The fixed and
+proportional issuance costs of A5 sit in the impulse operator, the impulse
+term. The asymmetry parameter sits in the running payoff, the payoff term.
+This is the equation that \path{theory/solve/solve_qvi.py} solves.
+
+Each approach fills one of the three terms and leaves the other two at a
+restriction. Regulatory-cap control is the cap term, with $\lambda_S=1$, $K=0$
+and the impulse operator evaluated at the distress boundary alone (L3, L28).
+The issuance-cost models are the impulse term, with no cap and $\lambda_S=1$
+(L7, L22). The preference approach is the kink of the payoff term, the
+loss-averse form of \citet{barberis2001} written over a shortfall of capital
+rather than over gains and losses (L36). Table~\ref{tab:common} gives the
+restriction for each paper read. Its four columns are the payoff term, the
+impulse term, the cap term and the rule at the distress boundary, and its last
+column names what the equation does not hold.
+
+The payoff term holds more of the papers read than the kink alone. The charge
+that is the same at every shortfall in \citet{behn2019} and
+\citet{langmenno2026} (L53, L51), the smooth penalty of \citet{lambertini2014}
+(L56) and the linear penalty of \citet{constantinides1978} (L48) are each a
+choice of $\Lambda$, and the kink of A4 is one member of that family (M8).
+Liquidation at the minimum in \citet{peura2006} and \citet{federico2026} (L24,
+L59) and the forced issue of \citet{glover2023} (L55) are not choices of
+$\Lambda$ but rules at the distress boundary, which the equation holds as a
+boundary condition there in place of the impulse operator. The delay on issues
+of \citet{peura2006} (L23), the partial information of
+\citet{daihuangkeppo2019} and the random audit of \citet{milnewhalley2001}
+(L38) are outside the equation. So is the preference of
+\citet{blackperold1992}, whose rule the cap term reproduces as a policy
+without its reason (L5, L6), and so are the equilibrium of
+\citet{barberis2001} and the running maximum of \citet{li2023} (L12, L14).
+
+Table~\ref{tab:common-values} evaluates two quantities of the equation on
+each paper read. One is the determinant of the two thresholds in the two
+frictions $\theta_1,\theta_2$ that an approach has,
 \[
 J=\det\frac{\partial(y^*,x_L)}{\partial(\theta_1,\theta_2)} ,
 \]
@@ -470,8 +507,7 @@ in place of the dividend barrier and the recapitalisation trigger. The other is
 the pair of limits of buffer variance, $\nu_1^2$ and $\nu_3^2$, where the risky
 exposure binds the cap. Each value is at the paper's own parameters, so the
 comparison is of signs and of which quantity exists, rather than of sizes
-across papers. The last column of Table~\ref{tab:common} names what the
-formulation does not hold.
+across papers.
 
 The determinant separates the paper from the issuance-cost models. In the
 table of \citet{peura2006} the delay and the fixed cost give $J=-29/100$ at
@@ -505,27 +541,46 @@ volatility of returns at that of dividend growth, $12$ percent at every level
 (L12), free of the asymmetry because the price-dividend ratio is constant
 rather than because a cap binds.
 
+The equation says where each result of the paper lives. The asymmetry
+parameter enters the payoff term alone and the cap enters the cap term alone.
+Where the cap binds, the exposure is $u(x)/x$ whatever $V$ is, so buffer
+variance is a function of $(\sigma,\sigma_L,c,a_1,a_3,x)$ and carries nothing
+of $\lambda_S$, which is M10 and M11. Where the cap does not bind, the exposure
+is the interior maximiser, which solves
+$\tfrac12\,\partial_\pi\sigma^2(x,\pi)\,V''+\partial_\pi b(x,\pi)\,V'=0$ and so
+depends on $V'/V''$ and through it on $\lambda_S$. The solve with no borrowing
+has such an interval, where the exposure is below the cap and below the
+ceiling of one, and there buffer variance at $\lambda_S=1.6$ differs from its
+value at $\lambda_S=1.2$, while where the exposure is at the ceiling for both
+it is the same (\path{theory/solve/results_noborrow.md}, section 4). The two thresholds are set by the
+other two branches of the maximum, $V'=1$ at the dividend barrier and
+$V=\mathcal MV$ at the recapitalisation trigger, and each branch involves the
+whole equation, so the thresholds carry $\lambda_S$ and $K$ together (M1 to
+M3). K1 is a statement about those two branches and K2 about the cap term, and
+the paper reads the asymmetry parameter off the thresholds rather than off
+buffer variance because the equation keeps it out of the term the cap pins.
+
 \begin{table}[H]
 \footnotesize
-\caption{The three approaches as restrictions of the paper's model.}\label{tab:common}
+\caption{The three approaches as restrictions of the paper's equation.}\label{tab:common}
 \begin{tabular}{@{}P{2.8cm}P{2.9cm}P{2.4cm}P{1.9cm}P{2.1cm}P{2.7cm}@{}}
 \toprule
-Paper & Shortfall side & Issuance side & Regulatory cap & Recapitalisation trigger & Outside the formulation \\
+Paper & Payoff term & Impulse term & Cap term & Rule at the distress boundary & Outside the equation \\
 \midrule
-\citet{peura2006} & $\lambda_S=1$, liquidation at the minimum (L24) & $K>0$ (L7) & none & endogenous & the delay on issues (L23) \\ \addlinespace
-\citet{daihuangkeppo2019} & $\lambda_S=1$, the regulator's asymmetry in liquidation (L25) & $K>0$ (L9) & none & endogenous & the delay, partial information \\ \addlinespace
-\citet{milnewhalley2001} & $\lambda_S=1$, an audit at random below the minimum (L38) & $K>0$ (L39) & none & endogenous (L38) & the random audit \\ \addlinespace
-\citet{bayraktar2026} & $\lambda_S=1$ & $K=0$, $\kappa>0$ (L3, L46) & $u$ (L26) & exogenous (L28) & none \\ \addlinespace
+\citet{peura2006} & $\lambda_S=1$ & $K>0$ (L7) & none & liquidation at the minimum (L24) & the delay on issues (L23) \\ \addlinespace
+\citet{daihuangkeppo2019} & $\lambda_S=1$ & $K>0$ (L9) & none & liquidation, with the regulator's asymmetry (L25) & the delay, partial information \\ \addlinespace
+\citet{milnewhalley2001} & $\lambda_S=1$ & $K>0$ (L39) & none & an audit at random below the minimum (L38) & the random audit \\ \addlinespace
+\citet{bayraktar2026} & $\lambda_S=1$ & $K=0$, $\kappa>0$ (L3, L46) & $u$ (L26) & issue or liquidate at an exogenous trigger (L28) & none \\ \addlinespace
 \citet{blackperold1992} & no asymmetry & no issuance & $u$ with $a_2=0$, slopes from preferences (L5, L6) & none & preferences over consumption \\ \addlinespace
 \citet{barberis2001}, \citet{li2023} & loss aversion over gains and losses (L36, L14) & no issuance & none & none & not a bank \\ \addlinespace
-This paper & $\lambda_S\ge1$, $R=1+q$ (A4) & $K>0$, $\kappa\ge0$ (A5) & $u$ (A2) & endogenous (A6) & none \\
+This paper & $\lambda_S\ge1$, $R=1+q$ (A4) & $K>0$, $\kappa\ge0$ (A5) & $u$ (A2) & the impulse operator, trigger endogenous (A6) & none \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[H]
 \footnotesize
-\caption{The two quantities of the common formulation, each at the paper's own parameters.}\label{tab:common-values}
+\caption{The two quantities of the equation, each at the paper's own parameters.}\label{tab:common-values}
 \begin{tabular}{@{}P{3.0cm}P{2.4cm}P{4.0cm}P{3.6cm}P{2.6cm}@{}}
 \toprule
 Paper & Two frictions & Determinant $J$ of the two thresholds & Limits of buffer variance & The asymmetry enters \\

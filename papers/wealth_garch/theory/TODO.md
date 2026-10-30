@@ -266,6 +266,14 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Section 3.4 rewritten around the one equation (author). The
+  three approaches are the three terms of the quasi-variational inequality,
+  the cap term, the impulse term and the payoff term, with a rule at the
+  distress boundary in place of the impulse operator where a paper
+  liquidates or forces an issue. Table tab:common's columns are renamed to
+  those terms. A closing paragraph places K1 in the two free-boundary
+  branches and K2 in the cap term, with the term separation of
+  `solve/results_noborrow.md` section 4 as the illustration.
 - 2026-10-30. Choulli, Taksar and Zhou (2004), Ann. Appl. Probab. 14(4),
   read in full from the author's upload, with the record
   `lit/choulli_taksar_zhou_2004/` and `lean/ChoulliTaksarZhou.lean` (10
