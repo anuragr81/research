@@ -8,7 +8,8 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 
 `ChoulliTaksarZhou.lean` is not a copy. It was written for this paper on 30 October
 2026, with the record `theory/lit/choulli_taksar_zhou_2004/`, and is pinned the same way.
-`TimeVarying.lean` is not a copy either. It was written for row M15 on 30 October 2026.
+`TimeVarying.lean` is not a copy either. It was written for row M15 on 30 October 2026, and
+`CapBinding.lean` for row M16 on 31 October 2026.
 `CalemRob.lean` was written on 30 October 2026 with the record `theory/lit/calem_rob_1999/`, and
 `FriesEtAl.lean` with `theory/lit/fries_mellabarral_perraudin_1997/`, and `MilneRobertson.lean`
 with `theory/lit/milne_robertson_1996/`.
@@ -25,6 +26,7 @@ with `theory/lit/milne_robertson_1996/`.
 | `BoltonChenWang.lean` | `60254c8d9cff9ead2a2aacbb8503d5d3f6c727c4dd800b808c249c8d1b9fa312` |
 | `BonaparteCooper.lean` | `364ce20d77354e7aa6b58c686546d9496d10d730aec4667a99f0315c151d192a` |
 | `Bounds.lean` | `b393b4d4bd53cc5838dcda86478e53eb838710911ab73b308cd0282fb60d171a` |
+| `CapBinding.lean` | `72ff89ef34c6b86078f3b950917c2122a55041690828234f27cce1ca15a78c42` |
 | `CapGeometry.lean` | `72b241911572466fc65ec10002e4199ec2ccc17253e07075981cd42b8532d533` |
 | `ChoulliTaksarZhou.lean` | `d664e3f5ba1ed883f59d6114bed24526d02a4909d2597fd7ff1105dcbd42487d` |
 | `Comparison.lean` | `037d9b6a173375de6861ec8a6ef945c6e8d48317424623379907048a4a4e6344` |

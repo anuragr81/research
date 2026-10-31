@@ -266,6 +266,26 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-31. M16, the optimal exposure binds the cap (author: work on the
+  proof). lean/CapBinding.lean: the first term of the equation is quadratic
+  in U = pi x, h(U) - h(u) factors, and the cap is optimal wherever V'' >= 0
+  (given sigma >= 2 max(a1, a3) c sigma_L) and, where V'' < 0, exactly when
+  G = V''(u sigma^2 - D) + V'(mu_s - r) >= 0. Applied with A6 and M4: binds
+  below x_L and above y* (V affine there), and near both thresholds. This
+  proves the hypothesis of M11 for the maximiser; those ends are states the
+  bank leaves at once. solve/run_binding_check.py: the condition predicts the
+  solver's exposure at every interior node of both baselines; binds
+  everywhere at r = 0.02 (smallest slack 9 percent of the premium term), below
+  the cap on [1.124, 1.231] at r = 0.025. K2's scope note updated.
+- 2026-10-31. Submission-related concerns are queued here and not raised in
+  the work (author: nowhere near submission). Queued: check the JEDC article
+  of Milne and Robertson against the draft; read Baglioni and Cherubini if
+  C4's novelty is challenged; text issues F4, F6, F8; the Annals of Finance
+  assessment.
+- 2026-10-31. Behn, Daminato and Salleo are not one of the three approaches:
+  payoff term (a step charge, L53) and impulse term (no fixed part, L54), no
+  cap term, estimation outside the equation. Offered: rows for them and Lang
+  and Menno in Table 5; waits for the author.
 - 2026-10-30. Milne and Robertson read in full from the February 1994 draft
   (author: quotations are internal), record lit/milne_robertson_1996/,
   MilneRobertson.lean, rows L81 to L83, sentences in Sections 3.5 and 4.1,

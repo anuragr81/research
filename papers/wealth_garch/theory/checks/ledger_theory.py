@@ -95,6 +95,10 @@ ANNOTATIONS = [
     {"id": "T9", "on": ("A5",), "kind": PROVEN, "rests_on": ("C3", "M11", "M12", "L2"),
      "says": "the surplus limit needs borrowing to hold the risky asset; with no borrowing the liquidity branch never "
              "binds and the deficit limit and the bound are what apply"},
+    {"id": "T14", "on": ("A5",), "kind": PROVEN, "rests_on": ("M16", "K2"),
+     "says": "the exposure binds the cap wherever the value is not concave, below the trigger, above the barrier "
+             "and near both thresholds; where the value is concave it binds when risk aversion is small "
+             "against the premium"},
     {"id": "T13", "on": ("A5", "equity"), "kind": PROVEN, "rests_on": ("M15", "K2"),
      "says": "the limits hold date by date, so with an asset volatility that varies over time buffer variance is the "
              "limit at each date's asset volatility wherever the exposure binds the cap"},
