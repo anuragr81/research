@@ -282,10 +282,12 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   of Milne and Robertson against the draft; read Baglioni and Cherubini if
   C4's novelty is challenged; text issues F4, F6, F8; the Annals of Finance
   assessment.
-- 2026-10-31. Behn, Daminato and Salleo are not one of the three approaches:
+- 2026-10-31. Behn, Daminato and Salleo combine two of the three threads:
   payoff term (a step charge, L53) and impulse term (no fixed part, L54), no
-  cap term, estimation outside the equation. Offered: rows for them and Lang
-  and Menno in Table 5; waits for the author.
+  cap term, estimation outside the equation. No row in Table 5 (author). Later:
+  a paragraph in the literature survey naming the papers that combine threads
+  (Behn et al., and the paper itself, which combines all three), once the
+  name for such combinations is chosen (author).
 - 2026-10-30. Milne and Robertson read in full from the February 1994 draft
   (author: quotations are internal), record lit/milne_robertson_1996/,
   MilneRobertson.lean, rows L81 to L83, sentences in Sections 3.5 and 4.1,
