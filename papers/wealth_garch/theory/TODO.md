@@ -513,6 +513,30 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
 Parent C4 is theory C4 (pending, under K1); parent C2 is theory C5 (pending,
 under K2). Refuted conjecture R1 is kept, R2 is not.
 
+## Scheduled, later passes
+
+- Audit of the papers read in full (author, 31 October 2026; not started).
+  For each of the 24 records in `lit/`, check that the record holds enough of
+  the paper to arrive at the paper's own conclusions, not only the passages
+  our rows quote: its model, assumptions, main results with the steps that
+  give them, and the conclusions it draws. Run over several passes:
+  1. Per record, list the paper's stated conclusions (abstract, introduction,
+     conclusion) and mark each as reached by the record, partly reached, or
+     absent.
+  2. Where a conclusion is absent or partly reached, enhance the artifacts:
+     RECONSTRUCTION.md (the chain from model to result), CLAIMS.md and
+     NOTES.md (definitions, results, page anchors), and Lean or a numerical
+     check where a result is a derivation we lean on.
+  3. Recheck every literature row (L-rows) and every manuscript sentence that
+     cites the paper against the enhanced record, and correct or drop what
+     the paper does not support.
+  4. Rerun `lit/verify_lit.sh` and `verify.sh`; record the outcome per paper
+     in a dated note under `notes/`.
+  Order: the papers the headlines rest on first (Peura–Keppo, Bayraktar et
+  al., Milne–Whalley, Dai–Huang–Keppo, Black–Perold, Engle–Siriwardane), then
+  the rest. Milne–Robertson is read as the 1994 draft, so the JEDC check
+  queued above belongs to its pass.
+
 ## Open, for the author
 
 
