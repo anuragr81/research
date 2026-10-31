@@ -10,7 +10,8 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 2026, with the record `theory/lit/choulli_taksar_zhou_2004/`, and is pinned the same way.
 `TimeVarying.lean` is not a copy either. It was written for row M15 on 30 October 2026.
 `CalemRob.lean` was written on 30 October 2026 with the record `theory/lit/calem_rob_1999/`, and
-`FriesEtAl.lean` with `theory/lit/fries_mellabarral_perraudin_1997/`.
+`FriesEtAl.lean` with `theory/lit/fries_mellabarral_perraudin_1997/`, and `MilneRobertson.lean`
+with `theory/lit/milne_robertson_1996/`.
 
 | File | sha256 |
 |---|---|
@@ -43,6 +44,7 @@ editing it here and updating its pin in the same commit, with the reason in `TOD
 | `LangMenno.lean` | `11290e8fd36027df6da8bdd96fcccf4944d664476d36cafe9bc3b7f723bef250` |
 | `LiYuZhang.lean` | `1038c7814fc4f4266e6ff49178af88beca4d43dc2cc5160a8fd171f4f986e1f7` |
 | `LokkaZervos.lean` | `9a4d86bc2b74321167c1ce66180c7f72b4ec937c409c42d501a98bea8e83a7ed` |
+| `MilneRobertson.lean` | `7ac2858722e1bd4bef1acdd3e452056eb93fb54886183208c7f8f0e1e59595af` |
 | `MilneWhalley.lean` | `0f7b01c10798cf4492cee75e10871bf91ea6abf79db7714cba34506c059594dd` |
 | `PeuraKeppo.lean` | `9807e3de496fcda436496f7c32fff3811fb81c3227c383f94997201db0b87bc9` |
 | `QVI_Part1.lean` | `5d2d9424c0b79a42abcb67ad8db76f75f4fbeae5449eadd240468b10863ff475` |

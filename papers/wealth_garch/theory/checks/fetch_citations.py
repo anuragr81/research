@@ -56,6 +56,8 @@ RECORDS = {
     # Read as FEDS 96-12 (1996); published in the JFI (1999) under a shorter title, not read.
     "calem1999": dict(main="W1974244766", others=["W1541486432", "W2187999494"]),
     "fries1997": dict(main="W2018818305", others=[]),
+    # Read as the authors' draft of February 1994; the JEDC article was not read.
+    "milnerobertson1996": dict(main="W1991168850", others=["W1489728989"]),
 }
 
 FIELDS = "id,display_name,publication_date,cited_by_count,doi,type,primary_location,authorships,biblio"

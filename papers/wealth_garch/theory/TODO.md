@@ -266,6 +266,18 @@ The passes of `papers/MANUSCRIPT_SKELETON.md`, section 7.
   Bihan and Lippi's NBER WP 20155 is the AER 2016 paper (same result in the
   abstract), so its row counts the AER record, 169 (+56), rated A*. Counts
   refetched 29 October 2026.
+- 2026-10-30. Milne and Robertson read in full from the February 1994 draft
+  (author: quotations are internal), record lit/milne_robertson_1996/,
+  MilneRobertson.lean, rows L81 to L83, sentences in Sections 3.5 and 4.1,
+  cited as the JEDC article. Their footnote 5 offers a penalty rate on a
+  shortfall in place of liquidation (L82). Their printed barrier 0.17872
+  checks against the closed form. Theorem 2's proof misstates a sign (MR-D3).
+  Open: check the JEDC article against the draft before submission.
+- 2026-10-30. Engle and Siriwardane contrasted in Section 4.3 (author: yes),
+  C6 conditions on no delay (author: yes), drift of the state agreed (author).
+  Offered: the identity that the paper's multiplier is the reciprocal of the
+  risk-weighted capital ratio, for Section 4.3 with a Lean fact; waits for the
+  author.
 - 2026-10-30. Calem and Rob, and Fries, Mella-Barral and Perraudin, read in
   full and cited (author: added to the Drive folder). Records
   lit/calem_rob_1999/ (read as FEDS 96-12, 1996; published in the JFI 8(4)

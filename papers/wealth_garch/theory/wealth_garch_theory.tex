@@ -729,7 +729,10 @@ undercapitalized bank takes the most risk it can (L71), and a charge below
 required capital makes it take more, since it slows recapitalisation from earnings
 (L73). The paper's bank issues at the trigger instead, the shortfall penalty
 raises the trigger (M2), and the cap bounds the exposure where $V$ is convex,
-which is also where \citet{fries1997} locate moral hazard (L77).
+which is also where \citet{fries1997} locate moral hazard (L77). Without an
+option to issue the value function of \citet{milnerobertson1996} is concave all
+the way down to liquidation and aversion to risk rises as cash falls (L83), so
+the convexity just above the trigger comes from the option to issue.
 
 \begin{figure}[H]
 \centering
@@ -854,7 +857,9 @@ Item & Written by & Reads & File & sha256 \\
 \subsection{How the papers read leave the question open}
 
 Among the dynamic models of bank capital read, each makes part of the bank's
-policy endogenous and fixes the rest. In \citet{milnewhalley2001} the dividend
+policy endogenous and fixes the rest. \citet{milnerobertson1996}, the base of
+the bank papers, make the dividend barrier endogenous for a firm that cannot
+issue and is liquidated at a threshold (L81). In \citet{milnewhalley2001} the dividend
 barrier, which is also the target of each issue, and the volatility the bank
 bears are endogenous, and the bank issues only when a random audit finds it
 below the minimum (L38, L62, L64). \citet{peura2006} make the dividend barrier
@@ -883,7 +888,10 @@ that the papers read use to explain a buffer above the minimum, a cost of
 falling below the minimum and a cost of raising capital back. The bank papers
 read write the cost of falling below in six forms, and none of the six is a
 running cost charged only below the reference that grows with the shortfall,
-as the shortfall penalty of A4 is. Below the minimum the bank is liquidated in
+as the shortfall penalty of A4 is. \citet{milnerobertson1996}, whose firm the
+bank papers build on, name such a charge, a penalty rate on debt below their
+liquidation threshold, as an alternative to liquidation and do not solve it
+(L82). Below the minimum the bank is liquidated in
 \citet{peura2006} (L24), liquidated or made to issue at a fixed cost in
 \citet{federico2026} (L59), audited at random in \citet{milnewhalley2001} (L16),
 and made to issue at once at the proportional issuance cost in
@@ -1319,6 +1327,9 @@ ID & Paper & What we rely on & Quote & Page & Rows \\
 \lrow{L78}{fries1997}{Values per unit of deposits, by the homogeneity of the equation and its boundary conditions, the reduction the paper keeps by charging the fixed issuance cost per unit of liabilities (L4).}{one may exploit the homogeneity of the differential equation and the boundary conditions}{448}{M1, M2, M3}
 \lrow{L79}{engle2018}{Their leverage multiplier is a function of observed leverage. In M14 and M15 the multiplier is the risky exposure over equity, which the bank chooses and the regulatory cap fixes where it binds.}{the leverage multiplier becomes a simple function of observable leverage}{450}{M14, M15}
 \lrow{L80}{engle2018}{Their multiplier rises in leverage, so equity volatility rises as equity falls for a given asset volatility. Where the cap binds the paper's multiplier is constant on each branch, so within a branch buffer variance has no such effect (M10, M11).}{A second common feature is that the leverage multiplier is monotonically increasing in leverage.}{456}{M10, M11}
+\lrow{L81}{milnerobertson1996}{A firm that cannot issue pays dividends at a barrier where $V'=1$ and $V''=0$, the conditions M1 uses at the dividend barrier, and is liquidated at a threshold. It is the base model of \citet{peura2006} and \citet{milnewhalley2001} (L7, L37).}{This implies that the firm cannot raise new equity finance.}{6}{M1}
+\lrow{L82}{milnerobertson1996}{They offer a penalty rate on debt below the threshold in place of liquidation, and do not solve that model. The shortfall penalty of A4 is a running charge of that kind, graded below required capital (M8).}{This penalty interest rate would induce a similar aversion to indebtedness as appears in our model.}{7}{M8}
+\lrow{L83}{milnerobertson1996}{With liquidation and no option to issue the value function is concave below the barrier and aversion to risk rises as cash falls, so convexity appears only past the liquidation threshold. The value function of M4 is convex just above the recapitalisation trigger because the bank issues there.}{the degree of local risk aversion increases as the firm moves closer to liquidation}{15}{M4}
 \bottomrule
 \end{longtable}
 \normalsize
@@ -1373,6 +1384,7 @@ Paper & Title & Version read & Published as & Date & Citations & Claims & ABDC 2
 \cirow{fries1997}{Optimal Bank Reorganization and the Fair Pricing of Deposit Guarantees}{the article}{J.\ Bank.\ Financ.\ 21(4), 441--468}{1997-04}{62}{\claims{L75}{4}}{A*}{\citedby{W2018818305}{main}}\cinot{Closure chosen by shareholders who stop injecting capital, the alternative to a bank that always recapitalises, loses its source, and continuous injections lose their contrast with M6 and M7.}
 \cirow{barberis2001}{Prospect Theory and Asset Prices}{the article}{QJE 116(1), 1--53}{2001-02}{1877 (+244)}{\claims{L12}{3}}{A*}{\citedby{W3121252329}{main}, \citedby{W2109848583}{other 1}, \citedby{W3023532572}{other 2}}\cinot{The kinked form of the shortfall penalty loses its source, and the contrast of K2 with an asymmetry read off the volatility of returns loses its main case.}
 \cirow{blackperold1992}{Theory of Constant Proportion Portfolio Insurance}{the article}{JEDC 16(3--4), 403--426}{1992-07}{403}{\claims{L5}{3}}{A*}{\citedby{W2068841402}{main}}\cinot{The constant buffer variance on the solvency branch is no longer tied to capped portfolio insurance, and C2 loses the case where the same limits carry preferences.}
+\cirow{milnerobertson1996}{Firm Behaviour under the Threat of Liquidation}{draft of February 1994}{JEDC 20(8), 1427--1449}{1996-08}{73 (+1)}{\claims{L81}{3}}{A*}{\citedby{W1991168850}{main}, \citedby{W1489728989}{other 1}}\cinot{The bank papers lose their no-issuance base, the penalty rate offered in place of liquidation loses its source, and the contrast of concavity without an option to issue with the convexity of M4 goes.}
 \cirow{behn2019}{A Dynamic Model of Bank Behaviour under Multiple Regulatory Constraints}{ECB WP 2233}{working paper}{2019-01}{14}{\claims{L53}{2}}{--}{\citedby{W2919604362}{main}}\cinot{The flat charge for breaching required capital, which the shortfall penalty grades, rests on \citet{langmenno2026} alone, and separating two costs by moments rather than thresholds loses its bank example.}
 \cirow{federico2026}{Coordinating Bank Dividend and Capital Regulation}{SAFE WP 487}{Math.\ Finance, online, no issue yet}{2026-09}{0}{\claims{L59}{2}}{A}{\citedby{W7214928914}{main}, \citedby{W4412630239}{other 1}, \citedby{W7214492509}{other 2}}\cinot{A recapitalisation trigger fixed at required capital loses its recent model, and the contrast with the interior trigger of M2 rests on \citet{peura2006}.}
 \cirow{bolton2011}{A Unified Theory of Tobin's q, Corporate Investment, Financing, and Risk Management}{accepted manuscript}{J.\ Finance 66(5), 1545--1578}{2011-10}{663 (+266)}{\claims{L10}{1}}{A*}{\citedby{W3021945653}{main}, \citedby{W2099323025}{other 1}, \citedby{W3121553494}{other 2}}\cinot{The double barrier of dividends and issuance is no longer shown to be established, and a fixed issuance cost scaled to keep one dimension loses a precedent.}
